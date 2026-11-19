@@ -1589,6 +1589,8 @@ pub(crate) struct Resolver<'a> {
     /// How many aliases the workspace declares: no chain of aliases that
     /// does not repeat one is longer.
     aliases: usize,
+    /// Immutable package visibility, reused across every imported identity.
+    sysroot_visibility: Vec<bool>,
 }
 
 fn parent(module: &str) -> Option<String> {
@@ -1724,6 +1726,7 @@ impl<'a> Resolver<'a> {
             registry: BTreeSet::new(),
             configs: Vec::new(),
             aliases: 0,
+            sysroot_visibility: Vec::new(),
         };
         let names = &syntax.names;
         for (pkg, package) in ws.packages.iter().enumerate() {
@@ -1810,6 +1813,9 @@ impl<'a> Resolver<'a> {
                 }
             }
         }
+        resolver.sysroot_visibility = (0..ws.packages.len())
+            .map(|pkg| resolver.calculate_sysroot_visibility(pkg))
+            .collect();
         resolver
     }
 
@@ -3267,6 +3273,104 @@ pub(crate) enum TypeReading {
     Open,
 }
 
+/// Closed Rust type identity, before any value-carrier erasure.
+#[derive(Clone, Debug)]
+pub(crate) struct TypeIdentity {
+    ty: Ty,
+    sysroot: bool,
+}
+
+impl TypeIdentity {
+    pub(crate) fn matches(&self, other: &Self) -> bool {
+        fn equal(a: &Ty, b: &Ty, sysroot: bool) -> bool {
+            match (a, b) {
+                (Ty::Named(a, aa), Ty::Named(b, ba)) => {
+                    let root = |path: &[String]| {
+                        matches!(
+                            path.first().map(String::as_str),
+                            Some("std" | "core" | "alloc")
+                        )
+                    };
+                    let same = a == b
+                        || sysroot
+                            && match (a, b) {
+                                (TypeId::Prelude(name), TypeId::Extern(path)) => {
+                                    root(path) && path.last() == Some(name)
+                                }
+                                (TypeId::Extern(a), TypeId::Extern(b)) => {
+                                    root(a) && root(b) && a[1..] == b[1..]
+                                }
+                                _ => false,
+                            };
+                    same && aa.len() == ba.len()
+                        && aa.iter().zip(ba).all(|(a, b)| equal(a, b, sysroot))
+                }
+                (Ty::Ref(am, a), Ty::Ref(bm, b)) => am == bm && equal(a, b, sysroot),
+                (Ty::Tuple(a), Ty::Tuple(b)) => {
+                    a.len() == b.len() && a.iter().zip(b).all(|(a, b)| equal(a, b, sysroot))
+                }
+                (Ty::Slice(a), Ty::Slice(b)) => equal(a, b, sysroot),
+                (Ty::Array(a, an), Ty::Array(b, bn)) => an == bn && equal(a, b, sysroot),
+                _ => false,
+            }
+        }
+        equal(&self.ty, &other.ty, self.sysroot && other.sysroot)
+    }
+}
+
+impl Resolver<'_> {
+    fn sysroot_unshadowed(&self, pkg: usize) -> bool {
+        self.sysroot_visibility[pkg]
+    }
+
+    fn calculate_sysroot_visibility(&self, pkg: usize) -> bool {
+        let names = ["std", "core", "alloc"];
+        if self.ws.packages[pkg]
+            .deps
+            .iter()
+            .any(|d| names.contains(&d.rename.as_ref().unwrap_or(&d.name).as_str()))
+        {
+            return false;
+        }
+        self.modules
+            .keys()
+            .filter(|module| module.0 == pkg && module.2.is_empty())
+            .all(|module| {
+                names.iter().all(|name| {
+                    matches!(self.path(module,&[name.to_string()],false,&mut Vec::new()),
+                Found::Extern(path) if path==[*name])
+                })
+            })
+    }
+
+    fn identity_type(&self, reading: Reading<'_>, text: &str) -> Option<TypeIdentity> {
+        fn closed(ty: &Ty) -> bool {
+            match ty {
+                Ty::Named(TypeId::Param(_), _) | Ty::Open | Ty::Integer | Ty::Float => false,
+                Ty::Named(TypeId::Prelude(name), args) => {
+                    PRELUDE_TYPES.contains(&name.as_str()) && args.iter().all(closed)
+                }
+                Ty::Named(_, args) | Ty::Tuple(args) => args.iter().all(closed),
+                Ty::Ref(_, t) | Ty::Slice(t) | Ty::Array(t, _) => closed(t),
+            }
+        }
+        let parsed = syn::parse_str::<syn::Type>(text).ok()?;
+        let sysroot = self.sysroot_unshadowed(reading.module.0);
+        let ty = self.ty(&reading, &crate::convert::ty(&parsed), self.aliases);
+        closed(&ty).then_some(TypeIdentity { ty, sysroot })
+    }
+
+    pub(crate) fn source_type_identity(&self, f: FnId, text: &str) -> Option<TypeIdentity> {
+        self.identity_type(self.reading(f), text)
+    }
+
+    pub(crate) fn compiler_type_identity(&self, f: FnId, text: &str) -> Option<TypeIdentity> {
+        let mut reading = self.reading(f);
+        reading.module.2.clear();
+        self.identity_type(reading, text)
+    }
+}
+
 impl Resolver<'_> {
     /// What the type name `name` (bare, or a path such as `super::T`)
     /// names in the inline module `inline` (`""` for the file's own) of
@@ -3704,6 +3808,65 @@ mod tests {
             .map(Call::text)
             .collect();
         assert_eq!(local, ["run", "inner"]);
+    }
+
+    #[test]
+    fn compiler_type_identities_preserve_rust_shapes_ue_79() {
+        let byte = Ty::Named(TypeId::Prelude("u8".into()), Vec::new());
+        let identity = |ty| TypeIdentity { ty, sysroot: true };
+        let array = identity(Ty::Array(Box::new(byte.clone()), "3".into()));
+        assert!(array.matches(&array));
+        assert!(!array.matches(&identity(Ty::Array(Box::new(byte.clone()), "4".into()))));
+        assert!(!array.matches(&identity(Ty::Named(
+            TypeId::Prelude("Vec".into()),
+            vec![byte.clone()]
+        ))));
+        assert!(!identity(Ty::Ref(false, Box::new(byte.clone())))
+            .matches(&identity(Ty::Ref(true, Box::new(byte)))));
+    }
+
+    #[test]
+    fn value_names_do_not_hide_sysroot_type_identities_ue_79() {
+        let dir =
+            std::env::temp_dir().join(format!("uorust-identity-namespace-{}", std::process::id()));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname=\"w\"\nversion=\"0.1.0\"\nedition=\"2021\"\n",
+        )
+        .unwrap();
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "pub struct Mark; pub fn f(){let core=0;let std=0;let alloc=0;} type Byte=u8; pub struct T; pub fn generic<T>(){}",
+        )
+        .unwrap();
+        let (ws, syntax) = crate::ingest::workspace(&dir, None).unwrap();
+        let syntax = read(&dir, &ws, syntax).unwrap();
+        let resolver = Resolver::new(&ws, &syntax);
+        let source = resolver
+            .source_type_identity((0, 0, 0), "From<Byte>")
+            .unwrap();
+        let target = resolver
+            .compiler_type_identity((0, 0, 0), "std::convert::From<u8>")
+            .unwrap();
+        assert!(source.matches(&target));
+        assert!(resolver
+            .source_type_identity((0, 0, 0), "From<T>")
+            .is_some());
+        assert!(resolver
+            .compiler_type_identity((0, 0, 1), "From<T>")
+            .is_none());
+        assert!(resolver
+            .source_type_identity((0, 0, 0), "From<Unknown>")
+            .is_none());
+        let array = resolver
+            .source_type_identity((0, 0, 0), "From<[u8;3]>")
+            .unwrap();
+        let vector = resolver
+            .compiler_type_identity((0, 0, 0), "std::convert::From<std::vec::Vec<u8>>")
+            .unwrap();
+        assert!(!array.matches(&vector));
+        std::fs::remove_dir_all(dir).unwrap();
     }
 
     // Name resolution: a call resolved as the language resolves it.

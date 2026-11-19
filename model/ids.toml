@@ -525,3 +525,9 @@ id = "UE-78"
 level = "build"
 suite = "engine"
 statement = "Compiler bodies retain authoritative implementation source sites when erased owner/method paths collide, allowing registered trait and inherent methods to bind to their own unique MIR body without guessing from a shared method name; duplicate compiler source identities remain ambiguous"
+
+[[id]]
+id = "UE-79"
+level = "build"
+suite = "engine"
+statement = "Compiler-qualified trait calls bind registered source definitions by resolved owner, trait identity and closed type arguments through a common identity index; overloaded traits, aliases, inherent methods and same-named unrelated traits remain distinct, and ambiguous identities are refused"

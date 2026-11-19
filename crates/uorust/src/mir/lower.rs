@@ -41,8 +41,7 @@ use crate::lift::{self, Lift, Residue, Ty, Types};
 #[derive(Clone, Debug)]
 pub(crate) struct Callee {
     pub(crate) name: String,
-    /// Only a registered trait implementation may satisfy trait fallback.
-    pub(crate) trait_method: bool,
+    pub(crate) method: Option<super::identity::Method>,
     pub(crate) params: Vec<Ty>,
     pub(crate) generic: Option<lift::Generic>,
     /// The forward result: the type of the body's `_0`.
@@ -75,6 +74,10 @@ pub(crate) struct Cx<'a> {
     pub(crate) widths: &'a [(u32, Vec<String>)],
     /// Functions by the path MIR prints for them, with the crate prefixed.
     pub(crate) callees: &'a BTreeMap<String, Callee>,
+    /// Compiler imports are bound to a registered function question.
+    pub(crate) compiler_scope: String,
+    pub(crate) compiler_bindings: &'a super::identity::Bindings,
+    pub(crate) closure_scopes: &'a BTreeMap<String, String>,
     /// Actual source constant declarations, never inferred from zero-arity functions.
     pub(crate) constants: &'a BTreeMap<String, Constant>,
     /// The crate's identifier, which MIR leaves off its own paths.
@@ -105,6 +108,28 @@ pub(crate) struct Cx<'a> {
 }
 
 impl<'a> Cx<'a> {
+    fn callee(&self, path: &str) -> Option<&Callee> {
+        if super::identity::qualified(path) {
+            return self.compiler_bindings.get(&self.compiler_scope)?.get(path);
+        }
+        let key = format!("{}::{path}", self.krate);
+        let erased = erase(path);
+        let generic = format!("{}::{erased}", self.krate);
+        self.callees
+            .get(&key)
+            .or_else(|| self.callees.get(path))
+            .or_else(|| self.callees.get(&generic).filter(|c| c.generic.is_some()))
+            .or_else(|| self.callees.get(&erased).filter(|c| c.generic.is_some()))
+    }
+
+    fn closure_scope(&mut self, closure: &str) {
+        self.compiler_scope = self
+            .closure_scopes
+            .get(closure)
+            .cloned()
+            .unwrap_or_default();
+    }
+
     /// The same context, with `active` the instances being translated.
     fn within<'b>(&'b self, active: &'b [String]) -> Cx<'b>
     where
@@ -115,6 +140,9 @@ impl<'a> Cx<'a> {
             source_sigs: self.source_sigs,
             widths: self.widths,
             callees: self.callees,
+            compiler_scope: self.compiler_scope.clone(),
+            compiler_bindings: self.compiler_bindings,
+            closure_scopes: self.closure_scopes,
             constants: self.constants,
             krate: self.krate.clone(),
             taken: self.taken,
@@ -3853,14 +3881,7 @@ impl Fun<'_, '_> {
     /// A function item carries its admitted signature, including dependencies.
     /// Mutable functions need an environment/backward function, not a pure value.
     fn function_item(&mut self, path: &str) -> Option<(String, Ty)> {
-        let key = format!("{}::{path}", self.cx.krate);
-        if let Some(c) = self
-            .cx
-            .callees
-            .get(&key)
-            .or_else(|| self.cx.callees.get(path))
-            .cloned()
-        {
+        if let Some(c) = self.cx.callee(path).cloned() {
             if c.generic.is_some()
                 || c.threads.is_some()
                 || c.name == self.name
@@ -5883,7 +5904,8 @@ impl Fun<'_, '_> {
         if !self.aux.contains_key(&name) {
             let mut active = self.cx.active.to_vec();
             active.push(name.clone());
-            let cx = self.cx.within(&active);
+            let mut cx = self.cx.within(&active);
+            cx.closure_scope(closure);
             let lowered = lower(&cx, body, &name)
                 .map_err(|r| kind(k, &format!("{}: {}", body.path, r.detail())))?;
             for d in lowered.decls {
@@ -6132,6 +6154,7 @@ impl Fun<'_, '_> {
                     let mut active = self.cx.active.to_vec();
                     active.push(back.clone());
                     let mut cx = self.cx.within(&active);
+                    cx.closure_scope(&closure);
                     cx.backward = true;
                     if let Ok(lowered) = lower(&cx, &cb, &back) {
                         for d in lowered.decls {
@@ -6188,33 +6211,7 @@ impl Fun<'_, '_> {
                 ));
             }
         }
-        let key = format!("{}::{callee}", self.cx.krate);
-        let generic_key = format!("{}::{erased}", self.cx.krate);
-        // A trait method of one of the crate's types is its impl's method.
-        let own = callee
-            .strip_prefix('<')
-            .and_then(|r| r.split_once(" as "))
-            .and_then(|(t, rest)| Some((t, rest.rsplit_once(">::")?.1)))
-            .map(|(t, m)| format!("{}::{}::{m}", self.cx.krate, erase(t)));
-        if let Some(c) = self
-            .cx
-            .callees
-            .get(&key)
-            .or_else(|| self.cx.callees.get(callee))
-            .or_else(|| {
-                self.cx
-                    .callees
-                    .get(&generic_key)
-                    .filter(|c| c.generic.is_some())
-            })
-            .or_else(|| self.cx.callees.get(&erased).filter(|c| c.generic.is_some()))
-            .or_else(|| {
-                own.as_ref()
-                    .and_then(|o| self.cx.callees.get(o))
-                    .filter(|c| c.trait_method)
-            })
-            .cloned()
-        {
+        if let Some(c) = self.cx.callee(callee).cloned() {
             if c.name == self.name {
                 return Err(kind(
                     k,
@@ -9712,6 +9709,9 @@ mod tests {
             source_sigs: &BTreeMap::new(),
             widths: &[(64, vec!["test".into()])],
             callees: &BTreeMap::new(),
+            compiler_scope: String::new(),
+            compiler_bindings: &BTreeMap::new(),
+            closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
             krate: "test".into(),
             taken: &BTreeSet::new(),

@@ -4952,7 +4952,7 @@ fn behavior(
                     ctx.path(r),
                     crate::mir::lower::Callee {
                         name: c.name.clone(),
-                        trait_method: ctx.func(r).implements.is_some(),
+                        method: compiler_method(ctx, resolver, r),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         generic: c.generic.clone(),
                         // A definition that threads its `&mut` parameters
@@ -5095,6 +5095,7 @@ fn behavior(
         taken.extend(types.datas.keys().cloned());
         let out = mir_lift(
             ctx,
+            resolver,
             notes,
             dumps,
             options,
@@ -5286,9 +5287,23 @@ struct Translation {
 /// when it has no verdict yet) and every translation it calls is admitted;
 /// every other function's residue row names the MIR kind or the obligation
 /// that stopped it.
+/// Bind the implementation's identity through the same source resolver that
+/// reads its types and traits; method spelling alone supplies no provider.
+fn compiler_method(
+    ctx: &Model,
+    resolver: &crate::names::Resolver<'_>,
+    r: FnRef,
+) -> Option<crate::mir::identity::Method> {
+    let f = ctx.func(r);
+    crate::mir::identity::Method::new(f.owner.as_ref()?, f.trait_ref.as_ref()?, &f.name, |text| {
+        resolver.source_type_identity((r.pkg, r.file, r.idx), text)
+    })
+}
+
 #[allow(clippy::too_many_arguments, clippy::too_many_lines)]
 fn mir_lift(
     ctx: &Model,
+    resolver: &crate::names::Resolver<'_>,
     notes: &mut Notes,
     dumps: &crate::mir::Dumps,
     options: &crate::mir::MirOptions,
@@ -5495,7 +5510,7 @@ fn mir_lift(
                     path.clone(),
                     lower::Callee {
                         name: name.clone(),
-                        trait_method: f.implements.is_some(),
+                        method: compiler_method(ctx, resolver, r),
                         params,
                         generic: (!generic.types.is_empty() || !generic.dictionary.is_empty())
                             .then_some(generic),
@@ -5510,6 +5525,55 @@ fn mir_lift(
                 notes.residue.insert(path, (span, mir_residue(reason)));
             }
         }
+    }
+    // The source question owns its Rust generic scope. Compiler spellings
+    // from another function must never supply that scope implicitly.
+    let frame = |r: FnRef| crate::register::kappa(&ctx.path(r), &ctx.func(r).tokens);
+    let mut requests: BTreeMap<String, (FnRef, BTreeSet<String>)> = todo
+        .iter()
+        .map(|(r, _, body)| (frame(*r), (*r, crate::mir::identity::references(body))))
+        .collect();
+    let mut owners: BTreeMap<crate::embedding::Key, Option<FnRef>> = BTreeMap::new();
+    for r in ctx.all_fns().into_iter().filter(|r| ctx.product(*r)) {
+        if let Some(mut key) = definition_keys.get(&ctx.path(r)).cloned() {
+            if let Some((file, _, _)) = &mut key.impl_at {
+                file.clone_from(&ctx.file(r).rel);
+            }
+            owners
+                .entry(key)
+                .and_modify(|held| *held = None)
+                .or_insert(Some(r));
+        }
+    }
+    let mut closure_scopes = BTreeMap::new();
+    for (krate, closures) in &dumps.closures {
+        for (closure, body) in closures {
+            let parent = body.path.split("::{closure").next().unwrap_or(&body.path);
+            let owner = crate::embedding::body_key(krate, parent)
+                .and_then(|key| owners.get(&key).copied().flatten());
+            if let Some(r) = owner {
+                let key = frame(r);
+                requests
+                    .entry(key.clone())
+                    .or_insert_with(|| (r, BTreeSet::new()))
+                    .1
+                    .extend(crate::mir::identity::references(body));
+                closure_scopes.insert(closure.clone(), key);
+            }
+        }
+    }
+    let index = crate::mir::identity::Index::new(&callees);
+    let mut compiler_bindings = crate::mir::identity::Bindings::new();
+    for (scope, (r, requests)) in requests {
+        let mut imports = BTreeMap::new();
+        for request in requests {
+            if let Some(callee) = index.resolve(&request, |text| {
+                resolver.compiler_type_identity((r.pkg, r.file, r.idx), text)
+            }) {
+                imports.insert(request, callee.clone());
+            }
+        }
+        compiler_bindings.insert(scope, imports);
     }
     // The functions the MIR path translates, by LexLean name.
     let translations: BTreeMap<String, String> = todo
@@ -5526,6 +5590,9 @@ fn mir_lift(
             source_sigs: &source_sigs[r.pkg],
             widths: &widths,
             callees: &callees,
+            compiler_scope: frame(r),
+            compiler_bindings: &compiler_bindings,
+            closure_scopes: &closure_scopes,
             constants,
             krate: ctx.crate_ident(r),
             taken: &names,

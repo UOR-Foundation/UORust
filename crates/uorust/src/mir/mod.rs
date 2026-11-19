@@ -33,6 +33,7 @@ pub(crate) mod trips;
 
 #[cfg(test)]
 mod generate;
+pub(crate) mod identity;
 pub(crate) mod int;
 mod intrinsic;
 pub(crate) mod ir;

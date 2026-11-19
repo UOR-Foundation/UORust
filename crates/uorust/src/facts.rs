@@ -292,7 +292,8 @@ pub(crate) struct FnFact {
     /// For a method of `impl Trait for Type`: the trait's last segment.
     pub(crate) implements: Option<String>,
     /// For a method of `impl Trait for Type`: the trait as the impl names
-    /// it, its last segment with its arguments (`From<u8>`).
+    /// it, its last segment with its arguments (`From<u8>`), qualified when
+    /// distinct trait paths would otherwise share a function identity.
     pub(crate) trait_ref: Option<String>,
     /// Whether the method's type has another method of its name in the same
     /// build: an inherent one beside a trait's, two traits', or one generic

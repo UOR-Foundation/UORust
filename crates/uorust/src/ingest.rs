@@ -800,6 +800,42 @@ pub(crate) fn normal(path: &Path) -> PathBuf {
 /// name with another method of the file, in the same build (with tests or
 /// without), is marked as named apart.
 fn name_apart(fns: &mut [FnFact]) {
+    // Keep an unqualified display stable unless different trait paths would
+    // otherwise acquire the same function identity in this source scope.
+    let mut traits: BTreeMap<_, BTreeSet<String>> = BTreeMap::new();
+    for f in fns.iter() {
+        if let (Some(owner), Some(reference), Some(path)) = (&f.owner, &f.trait_ref, &f.trait_path)
+        {
+            traits
+                .entry((
+                    f.scope,
+                    owner.clone(),
+                    f.name.clone(),
+                    reference.clone(),
+                    f.in_test_module,
+                ))
+                .or_default()
+                .insert(path.clone());
+        }
+    }
+    for f in fns.iter_mut() {
+        if let (Some(owner), Some(reference), Some(path)) =
+            (&f.owner, &mut f.trait_ref, &f.trait_path)
+        {
+            let key = (
+                f.scope,
+                owner.clone(),
+                f.name.clone(),
+                reference.clone(),
+                f.in_test_module,
+            );
+            if traits.get(&key).is_some_and(|paths| paths.len() > 1) {
+                if let Some((prefix, _)) = path.rsplit_once("::") {
+                    *reference = format!("{prefix}::{reference}");
+                }
+            }
+        }
+    }
     let mut sharing: BTreeMap<(String, String, bool), usize> = BTreeMap::new();
     for f in fns.iter().filter(|f| !f.in_trait) {
         if let Some(owner) = &f.owner {

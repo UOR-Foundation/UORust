@@ -99,6 +99,7 @@ model does not sanction.
 | `UE-76` | `build` | Admitted integer representation boundaries compose through products, lists, options, results and collection entries, preserving container shape, entry order and source state through shared structural helpers; incompatible element types and collection identities remain typed residue |
 | `UE-77` | `build` | Compiler calls materialize explicit SDK applications at every source signature arity, including parameterless dependencies in returned values, constructors and mutable state; original dependency bindings remain mandatory and changed source meanings require new SDK decisions |
 | `UE-78` | `build` | Compiler bodies retain authoritative implementation source sites when erased owner/method paths collide, allowing registered trait and inherent methods to bind to their own unique MIR body without guessing from a shared method name; duplicate compiler source identities remain ambiguous |
+| `UE-79` | `build` | Compiler-qualified trait calls bind registered source definitions by resolved owner, trait identity and closed type arguments through a common identity index; overloaded traits, aliases, inherent methods and same-named unrelated traits remain distinct, and ambiguous identities are refused |
 
 ## factory
 

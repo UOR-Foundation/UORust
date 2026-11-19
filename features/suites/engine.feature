@@ -550,3 +550,10 @@ Feature: engine
     When their compiler bodies are joined to registered source definitions
     Then each unique implementation source site receives its own SDK-verified behavior
     But duplicate compiler identities cannot be resolved by choosing the first body
+
+  @UE-79 @build
+  Scenario: Compiler calls retain coherent trait definition identities
+    Given registered overloaded trait and inherent definitions
+    When compiler callers use resolved qualified trait paths
+    Then every caller selects its own registered semantic definition
+    And unrelated same-named traits cannot substitute for that definition

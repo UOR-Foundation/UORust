@@ -1207,3 +1207,40 @@ Focused dependency checks passed: the duplicate-identity loader control, all
 Clippy, generated model validation, immutable template/SDK-lock checks and the
 generated self-model check. Complete `just vv` and UE-18 certification remain
 the release boundary; no release completion is inferred from focused checks.
+
+## UE-79: coherent compiler/source call identities
+
+The registered regression failed before implementation on a compiler-qualified
+trait call whose registered provider existed under source spelling. A shared
+identity import now binds compiler references through the existing Rust name
+resolver before value-carrier erasure. It preserves nominal ownership, trait
+identity, closed arguments, array lengths, tuple shape and reference mutability.
+Direct calls, function-valued operands and captured closure bodies share the
+same dependency binding. Repeated or unresolved identities are refused rather
+than resolved by a same-named inherent method.
+
+The regression also exposed two distinct traits sharing one unqualified trait
+reference in the source register. The common ingestion pass now qualifies only
+those colliding references with their declared paths; existing unambiguous
+function identities remain stable. This adds no operation-specific behavior or
+standard-library semantic entry. Package visibility is computed once per
+immutable resolver and reused across identity imports.
+Compiler imports are indexed by their registered function question, and captured
+closures inherit their original source scope. Generic parameters cannot acquire
+the meaning of a concrete type with the same name in another scope.
+
+The SDK regression passed seven native caller decisions and 21 executable Rust
+comparisons across overloaded local and standard traits, an unrelated trait
+also named `From`, and an inherent method. The SDK rejected a planted incorrect
+result with LLV7002. The full regression took 216.19 seconds. Separate controls
+preserve array lengths and reference mutability, distinguish arrays from vector
+storage, and retain function-valued compiler references. Consumer progress,
+complete `just vv`, UE-18 certification and adoption remain separately measured.
+
+The final scoped SDK regression passed again in 52.18 seconds with the original
+native decision register retained. All 20 name-resolution controls, nine source
+ingestion controls, 13 lowering tests, the compiler-reference control, 16 CLI
+tests, repo-conformance and strict workspace/all-target Clippy passed. Generated
+model, immutable template/SDK-lock and self-model checks passed; the self-model
+writer regenerated the moved source citation. Generic-parameter, nominal-alias,
+value/type namespace and unknown-type controls are included in that boundary.
