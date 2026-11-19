@@ -1394,6 +1394,31 @@ impl Types {
             .unwrap_or_else(|| bare.to_string())
     }
 
+    /// Resolve model dependencies against declarations, never a rendered name
+    /// or a namespace prefix. Fixed prelude bytes are already content-bound in
+    /// the projection's semantic context and remain subject to SDK acceptance.
+    pub(crate) fn model_declared(&self, ty: &Ty) -> bool {
+        static PRELUDE_TYPES: std::sync::OnceLock<Option<BTreeSet<String>>> =
+            std::sync::OnceLock::new();
+        let prelude = PRELUDE_TYPES.get_or_init(|| {
+            crate::lex::type_names(PRELUDE_SOURCE).ok().map(|names| {
+                names
+                    .into_iter()
+                    .map(|name| format!("{PRELUDE}::{name}"))
+                    .collect()
+            })
+        });
+        ty.mentions().iter().all(|mentioned| match mentioned {
+            Ty::Named(name) => {
+                self.structs.contains_key(name)
+                    || self.enums.contains_key(name)
+                    || self.datas.contains_key(name)
+                    || prelude.as_ref().is_some_and(|names| names.contains(name))
+            }
+            _ => true,
+        })
+    }
+
     /// Whether the workspace declares a type of this Rust name, inside the
     /// lift or outside it: a name of the standard library that is not in
     /// the prelude (`Rc`, `Range`) is the library's only where it does not.

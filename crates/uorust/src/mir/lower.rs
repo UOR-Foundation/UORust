@@ -8332,12 +8332,13 @@ fn inhabited_variant(text: &str) -> Option<Inhabited> {
 
 /// A std type as std's own bodies print it, without its crate
 /// (`slice::iter::Iter<'_, T>` inside core): the table's model of it.
-fn std_printed(segs: &[&str], name: &str, args: &[Ty]) -> Option<Ty> {
+fn std_printed(segs: &[&str], name: &str, args: &[Ty], types: &Types) -> Option<Ty> {
     if segs.len() < 2 {
         return None;
     }
     let head: Vec<&str> = segs[..segs.len() - 1].to_vec();
     stdlib::model_type(&format!("{}::{name}", head.join("::")), args)
+        .filter(|m| types.model_declared(m))
 }
 
 /// A type as MIR prints it, as the lift names it.
@@ -8662,14 +8663,7 @@ fn native_type(text: &str, types: &Types) -> Lift<Ty> {
             // A model that names a struct of the crate's needs the scope
             // to declare it.
             return stdlib::model_type(&path, &args)
-                .filter(|m| {
-                    m.mentions().iter().all(|n| match n {
-                        Ty::Named(n) => {
-                            types.structs.contains_key(n) || types.enums.contains_key(n)
-                        }
-                        _ => true,
-                    })
-                })
+                .filter(|m| types.model_declared(m))
                 .ok_or_else(|| Residue::Type(t.to_string()));
         }
         (n, []) => {
@@ -8707,21 +8701,20 @@ fn native_type(text: &str, types: &Types) -> Lift<Ty> {
                 // In core's scope, a type the std table models, printed by
                 // its name alone.
                 if types.core {
-                    if let Some(m) = stdlib::model_type(n, &args).filter(|m| {
-                        m.mentions().iter().all(|x| match x {
-                            Ty::Named(x) => {
-                                types.structs.contains_key(x) || types.enums.contains_key(x)
-                            }
-                            _ => true,
-                        })
-                    }) {
+                    if let Some(m) =
+                        stdlib::model_type(n, &args).filter(|m| types.model_declared(m))
+                    {
                         return Ok(m);
                     }
                 }
-                return std_printed(&segs, name, &args).ok_or_else(|| Residue::Type(t.to_string()));
+                return std_printed(&segs, name, &args, types)
+                    .ok_or_else(|| Residue::Type(t.to_string()));
             }
         }
-        _ => return std_printed(&segs, name, &args).ok_or_else(|| Residue::Type(t.to_string())),
+        _ => {
+            return std_printed(&segs, name, &args, types)
+                .ok_or_else(|| Residue::Type(t.to_string()))
+        }
     })
 }
 
@@ -9953,6 +9946,44 @@ mod tests {
             ),
             Ok(Ty::Ratio)
         );
+    }
+
+    #[test]
+    fn imported_model_dependencies_resolve_type_declarations_ue_82() {
+        let mut types = Types::default();
+        types.datas.insert(
+            "Payload".into(),
+            vec![("Wrapped".into(), vec![(None, Ty::Bool)])],
+        );
+        for (element, expected) in [
+            ("Payload", Ty::Named("Payload".into())),
+            (
+                "std::rc::Rc<std::cell::RefCell<u8>>",
+                Ty::Named("Prelude::RcCellRef".into()),
+            ),
+        ] {
+            let text = format!("std::slice::Iter<'_, {element}>");
+            assert_eq!(
+                ty(&text, &types),
+                Ok(stdlib::model_type("std::slice::Iter", &[expected]).unwrap()),
+                "{text}"
+            );
+        }
+        for name in [
+            "Prelude::wordToInteger",
+            "Prelude::Missing",
+            "Other::RcCellRef",
+        ] {
+            assert!(!types.model_declared(&Ty::Named(name.into())), "{name}");
+        }
+        assert!(types.model_declared(&Ty::Named("Prelude::RcCellRef".into())));
+        for text in [
+            "std::slice::Iter<'_, Missing>",
+            "std::slice::Iter<'_, Prelude::wordToInteger>",
+            "std::slice::Iter<'_, Other::RcCellRef>",
+        ] {
+            assert!(ty(text, &types).is_err(), "{text}");
+        }
     }
 
     #[test]

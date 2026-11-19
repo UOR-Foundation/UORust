@@ -4358,7 +4358,7 @@ fn main(){assert!(std::panic::catch_unwind(||overflow(2,Some(255))).is_err());le
 
 /// UE-64: one model bridge, exercised across unrelated standard receiver types.
 #[test]
-fn native_calls_import_source_semantic_models_ue_64_ue_81() {
+fn native_calls_import_source_semantic_models_ue_64_ue_81_ue_82() {
     let dir=scratch("source-model-import",&[("Cargo.toml","[package]\nname=\"source_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
 pub fn fallback(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap_or_default()}
 pub fn error(mut n:u8,x:Result<bool,u8>)->Option<u8> {while n>0 {n-=1;} x.err()}
@@ -4368,6 +4368,10 @@ pub fn panic_default(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap()}
 pub fn unicode(mut n:u8,x:&str)->String {while n>0 {n-=1;} x.to_lowercase()}
 pub fn capacity(mut n:u8,x:usize)->Vec<u8> {while n>0 {n-=1;} Vec::with_capacity(x)}
 pub fn empty_map(mut n:u8)->std::collections::BTreeMap<u8,u8> {while n>0 {n-=1;} std::collections::BTreeMap::new()}
+pub enum Payload { Wrapped(u8) }
+pub fn payload_len(mut n:u8,x:&[Payload])->usize {while n>0 {n-=1;} x.iter().len()}
+pub fn reference_len(mut n:u8,x:&[std::rc::Rc<std::cell::RefCell<u8>>])->usize {while n>0 {n-=1;} x.iter().len()}
+
 "#),("src/bin/vectors.rs",r#"
 use source_models::*;
 fn option(x:Option<u8>)->String {match x {None=>"(ctor Option.none [Nat])".into(),Some(v)=>format!("(ctor Option.some [Nat] {v})")}}
@@ -4378,6 +4382,19 @@ fn main() {
  for x in ["","PRISM","XyZ","PRIΣM"] {println!("ascii|2 {x:?}|{:?}",ascii(2,x));}
  for x in [0,1,64] {assert!(capacity(2,x).is_empty());println!("capacity|2 {x}|(nil Nat)");}
  assert!(empty_map(2).is_empty());println!("empty_map|2|(nil TupleNatNat)");
+ for count in [0,1,3] {
+  let payloads:Vec<_>=(0..count).map(|i|Payload::Wrapped(i as u8)).collect();
+  let references:Vec<_>=(0..count).map(|i|std::rc::Rc::new(std::cell::RefCell::new(i as u8))).collect();
+  let mut ps="(nil Payload)".to_string();
+  let mut rs="(nil Prelude::RcCellRef)".to_string();
+  for i in (0..count).rev() {
+   ps=format!("(cons (ctor Payload.Wrapped {i}) {ps})");
+   rs=format!("(cons (ctor Prelude::RcCellRef.Allocation {i}) {rs})");
+  }
+  println!("payload_len|2 {ps}|{}",payload_len(2,&payloads));
+  println!("reference_len|2 {rs}|{}",reference_len(2,&references));
+ }
+
 }
 "#)]);
     let rust = std::process::Command::new("cargo")
@@ -4391,7 +4408,7 @@ fn main() {
         String::from_utf8_lossy(&rust.stderr)
     );
     let reference = String::from_utf8(rust.stdout).unwrap();
-    assert_eq!(reference.lines().count(), 19);
+    assert_eq!(reference.lines().count(), 25);
     let dumps = dumped(&dir, "source-model-import");
     let mut opts = options("source_models");
     opts.mir = Some(mir_options(
@@ -4407,6 +4424,8 @@ fn main() {
         "ascii",
         "capacity",
         "empty_map",
+        "payload_len",
+        "reference_len",
     ] {
         let path = format!("source_models::{f}");
         assert!(

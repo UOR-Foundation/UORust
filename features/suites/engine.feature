@@ -571,3 +571,10 @@ Feature: engine
     When compiler references use either a receiver or an associated call
     Then the common importer materializes the existing source meaning
     But unrelated namespaces and incompatible state interfaces remain refused
+
+  @UE-82 @build
+  Scenario: Imported model dependency closures include every declared type form
+    Given an imported model over algebraic and qualified prelude values
+    When native type resolution checks the model dependency closure
+    Then the existing declared types remain available through one lookup
+    But a term declaration or undeclared nominal type is not a type authority

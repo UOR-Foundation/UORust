@@ -1297,3 +1297,29 @@ The four source-import controls, all 16 CLI tests, repo-conformance, strict
 workspace/all-target Clippy, generated model, immutable template/SDK lock and
 self-model checks passed with one consistent test optimization override. The
 production executable is built only after these checks and frozen immediately.
+
+## UE-82: content-bound model type declarations
+
+The registered regression reproduced a model dependency failure for an
+algebraic payload: native model guards checked only local structs and enums.
+They also rejected qualified allocation-reference types already declared in
+the fixed Prelude. The shared lookup now recognizes actual local algebraic
+declarations and type declarations in the unchanged, content-bound Prelude.
+All native model-type boundaries use that lookup, including printed aliases.
+No model operation, type-name whitelist or Prelude declaration was added.
+
+The type index reuses the proof slicer's declaration boundaries. Terms,
+constructor names and quoted declaration text do not become type authority;
+missing names and unrelated namespaces remain refused. Duplicate and
+unsupported declarations fail the index. Fourteen lowering controls and the
+existing seven syntax/proof-slicing controls passed after implementation.
+The consumer count remains the previous SDK-verified checkpoint until the
+mandatory guarded campaign accepts this producer's projection.
+
+The actual SDK regression passed 25 Rust comparisons in 103.58 seconds,
+including iterator state over algebraic payloads and opaque shared allocation
+identities. The planted incorrect result was rejected with LLV7002. All eight
+syntax/proof-slicing tests, four source-import tests, 16 CLI tests,
+repo-conformance, strict workspace/all-target Clippy, generated model,
+immutable template/SDK-lock and self-model checks passed. Full `just vv`,
+translator certification and consumer adoption remain separate open gates.

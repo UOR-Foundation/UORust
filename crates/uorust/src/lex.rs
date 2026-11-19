@@ -9,11 +9,18 @@
 /// The formatter's line width.
 const WIDTH: usize = 100;
 
-/// Keep complete emitted declarations reachable from every proof obligation.
-/// Strings are opaque and mutual groups are indivisible. The retained bytes
-/// are unchanged; this only scopes native trials, never full-project output.
-pub(crate) fn proof_closure(text: &str, roots: &[String]) -> Result<String, crate::UorustError> {
-    use std::collections::{BTreeMap, BTreeSet};
+/// The same declaration boundaries serve proof slicing and nominal imports.
+struct ModuleSyntax<'a> {
+    start: usize,
+    finish: usize,
+    tokens: Vec<(usize, usize, &'a str)>,
+    blocks: Vec<(usize, usize, Option<&'a str>)>,
+    names: std::collections::BTreeMap<&'a str, usize>,
+    groups: std::collections::BTreeMap<&'a str, Vec<usize>>,
+}
+
+fn module_syntax(text: &str) -> Result<ModuleSyntax<'_>, crate::UorustError> {
+    use std::collections::BTreeMap;
     let bad = |reason: &str| crate::UorustError::Tool(format!("proof closure: {reason}"));
     let begin = "\\begin{semanticmodule}";
     let end = "\\end{semanticmodule}";
@@ -131,6 +138,48 @@ pub(crate) fn proof_closure(text: &str, roots: &[String]) -> Result<String, crat
         }
         blocks.push((first, pos, group));
     }
+    Ok(ModuleSyntax {
+        start,
+        finish,
+        tokens,
+        blocks,
+        names,
+        groups,
+    })
+}
+
+/// Names of actual type declarations, excluding terms and nested constructors.
+pub(crate) fn type_names(
+    text: &str,
+) -> Result<std::collections::BTreeSet<String>, crate::UorustError> {
+    let module = module_syntax(text)?;
+    Ok(module
+        .names
+        .iter()
+        .filter(|(_, index)| {
+            matches!(
+                module.tokens[module.blocks[**index].0].2,
+                "structure" | "inductive"
+            )
+        })
+        .map(|(name, _)| (*name).to_string())
+        .collect())
+}
+
+/// Keep complete emitted declarations reachable from every proof obligation.
+/// Strings are opaque and mutual groups are indivisible. The retained bytes
+/// are unchanged; this only scopes native trials, never full-project output.
+pub(crate) fn proof_closure(text: &str, roots: &[String]) -> Result<String, crate::UorustError> {
+    use std::collections::BTreeSet;
+    let bad = |reason: &str| crate::UorustError::Tool(format!("proof closure: {reason}"));
+    let ModuleSyntax {
+        start,
+        finish,
+        tokens,
+        blocks,
+        names,
+        groups,
+    } = module_syntax(text)?;
     let mut pending = Vec::new();
     for root in roots {
         pending.push(
@@ -1134,6 +1183,22 @@ mod tests {
             panic!("independent")
         };
         assert!(type_parameters.is_empty());
+    }
+
+    #[test]
+    fn type_authority_excludes_terms_nested_names_and_literals_ue_82() {
+        let text = r#"\begin{semanticmodule}
+inductive{name: Payload, constructors: [{name: Nested, fields: []}]}
+structure{name: Frame, fields: [value : Payload]}
+definition{name: Term, parameters: [], result: String, body: "inductive{name: Forged}"}
+theorem{name: Claim, parameters: [], statement: true, proof: decide{}}
+\end{semanticmodule}"#;
+        assert_eq!(
+            type_names(text).unwrap(),
+            ["Frame".into(), "Payload".into()].into_iter().collect()
+        );
+        assert!(type_names(&text.replace("name: Term,", "name: Payload,")).is_err());
+        assert!(type_names(&text.replace("structure{", "opaque{")).is_err());
     }
 
     #[test]
