@@ -78,6 +78,14 @@ pub(crate) fn numeric_observation(ty: &Ty, method: &str, value: &str) -> Option<
         }
     };
     Some(match method {
+        "neg" => (
+            if *ty == Ty::Ratio {
+                format!("({}, {denom})", neg(&numer))
+            } else {
+                neg(&numer)
+            },
+            ty.clone(),
+        ),
         "zero" => (literal(zero), ty.clone()),
         "one" => (literal(one), ty.clone()),
         "is_zero" => (equal(&numer, zero), Ty::Bool),

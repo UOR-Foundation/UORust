@@ -583,6 +583,23 @@ remain typed residue. Type tests reject unrelated same-named owners and RefCell
 contents, and require both lock-admitted numeric readings before accepting an
 expanded Arc<Ratio<BigInt>>. Complete `just vv` remains the release gate.
 
+## Native unary numeric models (UE-58)
+
+The regression initially refuses the compiler's i128 checked_neg call. One
+width-derived rule now handles primitive checked negation, wrapping negation,
+unsigned magnitude and signum. Guarded Option results materialize through the
+existing read operation when returned. Exact BigInt and raw Ratio negation
+reuse the lock-admitted numeric carriers; only the stored numerator is negated.
+
+Six functions pass actual SDK proof trials. Twenty-two closed SDK vectors
+cover primitive minima, maxima, zero and minus one, plus exact integer and raw
+rational cases with a negative denominator. Executable Rust confirms the
+stored rational representation. An unsupported unwrap stays typed residue.
+A planted unsigned owner in the signed checked-negation MIR is rejected,
+and type checks reject mismatched owners, result types, unrelated paths and
+pointer widths that differ across declared targets. Complete `just vv`
+remains the release gate.
+
 ## Mathematical integer ABI codecs (UE-56)
 
 The previous frozen producer refuses all six compiler-derived i128 and isize

@@ -399,3 +399,9 @@ id = "UE-57"
 level = "build"
 suite = "engine"
 statement = "Native standard Rc and Arc transport, construction, cloning and readonly access reuse the source content representation, while reference counts, pointer identity, shared mutable cells and unrelated same-named types remain outside that content model"
+
+[[id]]
+id = "UE-58"
+level = "build"
+suite = "engine"
+statement = "Native primitive checked negation, wrapping negation, unsigned magnitude and signum derive from width and signedness, and lock-admitted exact integer and rational negation reuse their source carriers; Rust extrema and stored rational denominators are preserved while an unchecked unwrap at the signed minimum is refused"

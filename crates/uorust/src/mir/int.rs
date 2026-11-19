@@ -62,6 +62,48 @@ impl Int {
     }
 }
 
+/// Primitive unary methods on their exact compiler-resolved integer type.
+/// The optional guard describes the `Some` case of a checked result.
+pub(crate) fn unary_method(
+    path: &str,
+    value: &str,
+    from: &Ty,
+    result: &Ty,
+    widths: &[(u32, Vec<String>)],
+) -> Option<(String, Option<String>)> {
+    let (owner, method) = path
+        .strip_prefix("core::num::<impl ")
+        .or_else(|| path.strip_prefix("std::num::<impl "))?
+        .split_once(">::")?;
+    let primitive = match from {
+        Ty::Signed(Some(bits)) => format!("i{bits}"),
+        Ty::Signed(None) => "isize".into(),
+        Ty::Nat(Some(bits)) => format!("u{bits}"),
+        Ty::Nat(None) => "usize".into(),
+        _ => return None,
+    };
+    if owner != primitive {
+        return None;
+    }
+    let int = Int::of(from, widths)?;
+    let bits = int.width?;
+    let (modulus, sign) = (pow2(bits), pow2(bits - 1));
+    let negated =
+        format!("(prim remainder (prim subtract {modulus} {value} : Nat) {modulus} 0 : Nat)");
+    match method {
+        "checked_neg" if *result == Ty::Option(Box::new(from.clone())) => {
+            let guard = if int.signed {format!("(not ({value} =? {sign}))")} else {format!("({value} =? 0)")};
+            Some((negated,Some(guard)))
+        }
+        "wrapping_neg" if result == from => Some((negated,None)),
+        "unsigned_abs" if int.signed && *result == match from {Ty::Signed(width)=>Ty::Nat(*width),_=>return None} => {
+            Some((format!("(if ({sign} <=? {value}) then {negated} else {value})"),None))
+        }
+        "signum" if int.signed && result == from => Some((format!("(if ({value} =? 0) then 0 else (if ({sign} <=? {value}) then (prim subtract {modulus} 1 : Nat) else 1))"),None)),
+        _ => None,
+    }
+}
+
 /// `2^e` in decimal, for any `e`.
 pub(crate) fn pow2(e: u32) -> String {
     if e < 128 {
@@ -496,6 +538,44 @@ pub(crate) fn intrinsic(name: &str, a: &[&str], int: Int) -> Option<Applied> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn unary_methods_require_matching_owner_result_and_target_width_ue_58() {
+        let widths = [(64, Vec::new())];
+        for bits in [8, 16, 32, 64, 128] {
+            let input = Ty::Signed(Some(bits));
+            let option = Ty::Option(Box::new(input.clone()));
+            let path = format!("core::num::<impl i{bits}>::checked_neg");
+            assert!(unary_method(&path, "x", &input, &option, &widths).is_some());
+            assert!(unary_method(&path, "x", &Ty::Nat(Some(bits)), &option, &widths).is_none());
+            assert!(unary_method(&path, "x", &input, &Ty::Bool, &widths).is_none());
+            assert!(unary_method(
+                &path.replace("core::num", "other::num"),
+                "x",
+                &input,
+                &option,
+                &widths
+            )
+            .is_none());
+        }
+        let input = Ty::Signed(None);
+        assert!(unary_method(
+            "core::num::<impl isize>::unsigned_abs",
+            "x",
+            &input,
+            &Ty::Nat(None),
+            &[(32, Vec::new()), (64, Vec::new())]
+        )
+        .is_none());
+        assert!(unary_method(
+            "core::num::<impl isize>::unsigned_abs",
+            "x",
+            &input,
+            &Ty::Nat(None),
+            &widths
+        )
+        .is_some());
+    }
 
     /// The integer intrinsics whose rule is `intrinsic`'s, by name.
     const INTRINSICS: &[&str] = &[

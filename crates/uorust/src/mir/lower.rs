@@ -1908,7 +1908,9 @@ impl Fun<'_, '_> {
                 }
                 let v = match st.env.get(&0) {
                     // A returned borrow is the value of the place it borrows.
-                    Some(Val::V(..) | Val::Mut(_)) => self.read(&whole, &st)?.0,
+                    Some(Val::V(..) | Val::Mut(_) | Val::Guarded { .. }) => {
+                        self.read(&whole, &st)?.0
+                    }
                     _ if self.ret == Ty::Unit => "()".into(),
                     _ => {
                         return Err(kind(
@@ -5598,6 +5600,7 @@ impl Fun<'_, '_> {
                     "num_traits::Signed" | "num_traits::sign::Signed" => {
                         matches!(method, "abs" | "signum" | "is_positive" | "is_negative")
                     }
+                    "std::ops::Neg" | "core::ops::Neg" | "core::ops::arith::Neg" => method == "neg",
                     _ => false,
                 };
                 allowed.then_some((on, method))
@@ -5609,6 +5612,7 @@ impl Fun<'_, '_> {
                     .map(|m| ("num_rational::Ratio", m))
             });
         if let Some((owner, method)) = numeric {
+            let owner = owner.strip_prefix('&').map(str::trim).unwrap_or(owner);
             let carrier = match owner {
                 "num_bigint::BigInt" => self.cx.types.registered(owner),
                 "num_rational::Ratio" => self.cx.types.registered("num_rational::BigRational"),
@@ -5724,6 +5728,16 @@ impl Fun<'_, '_> {
                     return Ok(Called::value(args[0].0.clone()))
                 }
                 _ => {}
+            }
+        }
+        if let [(value, input)] = args.as_slice() {
+            if let Some((term, guard)) =
+                super::int::unary_method(&erased, value, input, dt, self.cx.widths)
+            {
+                return Ok(Called {
+                    guard,
+                    ..Called::value(term)
+                });
             }
         }
         if let Some(v) = std_call(callee, &args, dt, self, st) {

@@ -386,3 +386,11 @@ Feature: engine
     When native functions construct, clone and read those records
     Then executable Rust and actual SDK boundary vectors agree on their contents
     But reference counts, pointer identity, shared mutable cells and unrelated owners retain typed refusals
+
+  @UE-58 @build
+  Scenario: Native unary numeric operations reuse width rules and admitted numeric carriers
+    Given primitive signed extrema and checksum-admitted exact integers and raw rational pairs
+    When native functions negate, extract magnitude and compute signum
+    Then actual SDK vectors agree with Rust including minimum-value wrapping and checked refusal
+    And exact rational negation preserves its stored denominator
+    But unwrapping a checked negation at the signed minimum cannot be proved

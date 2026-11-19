@@ -2876,6 +2876,170 @@ pub fn fixed(mut n:u8,value:&Fixed)->i32 {while n>0 {n-=1;} value.value}
     std::fs::remove_dir_all(dir).unwrap();
 }
 
+/// UE-58: unary numeric models cover extrema and preserve exact stored values.
+#[test]
+fn native_unary_numbers_share_width_and_registry_models_ue_58() {
+    let dir=scratch("native-unary-numbers",&[("Cargo.toml","[package]\nname=\"unary_numbers\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[dependencies]\nnum-bigint=\"=0.4.8\"\nnum-rational=\"=0.4.2\"\n[workspace]\n"),("src/lib.rs",r#"
+use num_bigint::BigInt;
+use num_rational::BigRational;
+pub fn checked(mut n:u8,value:i128)->Option<i128> {while n>0 {n-=1;} value.checked_neg()}
+pub fn magnitude(mut n:u8,value:i128)->u128 {while n>0 {n-=1;} value.unsigned_abs()}
+pub fn wrapping(mut n:u8,value:i128)->i128 {while n>0 {n-=1;} value.wrapping_neg()}
+pub fn sign(mut n:u8,value:i128)->i128 {while n>0 {n-=1;} value.signum()}
+pub fn big_neg(mut n:u8,value:&BigInt)->BigInt {while n>0 {n-=1;} -value}
+pub fn ratio_neg(mut n:u8,value:&BigRational)->BigRational {while n>0 {n-=1;} -value}
+pub fn bad(mut n:u8,value:i128)->i128 {while n>0 {n-=1;} value.checked_neg().unwrap()}
+#[test] fn reference() {for n in [-3,0,3] {let x=BigInt::from(n);assert_eq!(big_neg(2,&x),BigInt::from(-n));let r=BigRational::new_raw(x,BigInt::from(-6));let y=ratio_neg(2,&r);assert_eq!(y.numer(),&BigInt::from(-n));assert_eq!(y.denom(),&BigInt::from(-6));}}
+"#)]);
+    let reference = std::process::Command::new("cargo")
+        .args(["test", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("Rust exact unary vectors");
+    assert!(
+        reference.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reference.stderr)
+    );
+    let dumps = dumped(&dir, "native-unary-numbers");
+    let mut opts = options("unary_numbers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).expect("unary candidates");
+    let functions = [
+        "checked",
+        "magnitude",
+        "wrapping",
+        "sign",
+        "big_neg",
+        "ratio_neg",
+    ];
+    for f in functions {
+        let function = format!("unary_numbers::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{function}\"")),
+            "{function}: {:?}",
+            residue_detail(&proposed, &function)
+        );
+    }
+    let register = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("unary-number-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("unary_numbers"),
+        &dumps,
+        &register,
+        &dir.join("trial"),
+        8,
+    )
+    .expect("actual unary SDK decisions");
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&register);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("proved unary projection");
+    assert!(residue_detail(&files, "unary_numbers::bad").is_some());
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for f in functions {
+        let function = format!("unary_numbers::{f}");
+        let definition = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(function.as_str()))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == function)
+            .and_then(|r| r.axioms.get(definition))
+            .cloned()
+            .unwrap_or_default();
+        if matches!(f, "big_neg" | "ratio_neg") {
+            for (j, n) in [-3i32, 0, 3].iter().enumerate() {
+                let (argument, expected) = if f == "big_neg" {
+                    (format!("({n} : Int)"), format!("({} : Int)", -n))
+                } else {
+                    (
+                        format!("(({n} : Int), (-6 : Int))"),
+                        format!("(({} : Int), (-6 : Int))", -n),
+                    )
+                };
+                vectors.push_str(&format!("theorem{{name: vector{f}{j}, parameters: [], statement: (({definition} 2 {argument}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+            }
+        } else {
+            for (j, value) in [i128::MIN, -1, 0, i128::MAX].iter().enumerate() {
+                let expected = match f {
+                    "checked" => value.checked_neg().map_or_else(
+                        || "(ctor Option.none [Nat])".into(),
+                        |v| format!("(ctor Option.some [Nat] {})", v as u128),
+                    ),
+                    "magnitude" => value.unsigned_abs().to_string(),
+                    "wrapping" => (value.wrapping_neg() as u128).to_string(),
+                    _ => (value.signum() as u128).to_string(),
+                };
+                vectors.push_str(&format!("theorem{{name: vector{f}{j}, parameters: [], statement: (({definition} 2 {}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",*value as u128,policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).expect("write unary vectors");
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), body).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("SDK unary vectors");
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let raw = std::fs::read_dir(dumps.join("lib-unary_numbers"))
+        .unwrap()
+        .map(|p| p.unwrap().path())
+        .find(|p| std::fs::read_to_string(p).is_ok_and(|s| s.contains("fn checked(")))
+        .expect("compiler-derived checked-negation body");
+    let original = std::fs::read_to_string(&raw).unwrap();
+    assert!(original.contains("core::num::<impl i128>::checked_neg"));
+    std::fs::write(
+        &raw,
+        original.replace(
+            "core::num::<impl i128>::checked_neg",
+            "core::num::<impl u128>::checked_neg",
+        ),
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let bad = uorust::project_workspace(&dir, &opts).expect("typed mismatched primitive owner");
+    assert!(
+        residue_detail(&bad, "unary_numbers::checked").is_some_and(|s| s.contains("checked_neg"))
+    );
+    std::fs::write(raw, original).unwrap();
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-57: readonly owners share the source's content semantics, not identity semantics.
 #[test]
 fn native_readonly_owners_use_content_models_ue_57() {
