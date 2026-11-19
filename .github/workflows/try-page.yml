@@ -28,12 +28,19 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22
-      - name: Install the test runner
-        run: npm install
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install the test runner from the checked-in lockfile
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Reject invalid browser acceptance results
         run: node --test bootstrap/acceptance-result.test.mjs
+      - name: Reject failed refreshed census attempts
+        shell: bash
+        run: bash scripts/ci/test-land-register.sh
+      - name: Check bounded model source citations and planted overdepth
+        run: python3 -I -m unittest discover -s scripts/self-model -p "test_bounded_sources.py"
       - name: Verify, answer add 20 22 and replay 22/22
         run: npm run test:try
       - name: Prism accounts - every signature check refuses, and the passkey flow signs in

@@ -1,0 +1,54 @@
+# The unindent register (written by `uorust crate unindent@0.2.4`; do not edit): every body of
+# unindent's MIR at unindent 0.2.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 11
+translated = 1
+residue = 10
+
+[module.unindent]
+bodies = 11
+translated = 1
+residue = 10
+
+[embedding]
+bodies = 11
+embedded = 11
+evaluable = 11
+blocked = 0
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unindent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Unindent"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unindent::do_unindent: unindent's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unindent::do_unindent_bytes: unindent's MIR stops at type outside the lift: for<'a> fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unindent::unindent_bytes: unindent's MIR stops at mir::TerminatorKind::Call: unindent::do_unindent_bytes: unindent's MIR stops at type outside the lift: for<'a> fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1

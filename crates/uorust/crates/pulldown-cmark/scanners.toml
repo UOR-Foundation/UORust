@@ -1,0 +1,476 @@
+[[fn]]
+path = "pulldown-cmark::HTML_TAGS"
+kappa = "08a92858adfecfd94f167b9acfebae85862766a170b6c954a2a10b524b8d094c"
+embedded = "a07371da759b83c5d735b6acb1569655bb9a51b79303bfd34bafff6d064ec70f"
+status = "translated"
+digest = "c74eda8539d8329cdbd2911663a80a5a8f611c11e9976ab5fef101e9c8f9949c"
+
+[[fn]]
+path = "pulldown-cmark::char_from_codepoint"
+kappa = "9a43637ca9e449be1dad8f7e0997a95262aef8f75f08e281b81e16ed6bb36d79"
+embedded = "2bb6419567bdd131a73b2a48ed7ace92d0a3cfa1385361f339c4fa183b3a330c"
+status = "residue"
+cause = "mir::Ty: std::num::TryFromIntError"
+
+[[fn]]
+path = "pulldown-cmark::is_ascii_alpha"
+kappa = "8686bfb3d11d03dee376928ef25e07a3368eaabd84fb59617c13e4332a651845"
+differential = 7
+embedded = "2cd8a07de9c4f6838f55a30a7dd7d15e98d3174734359222a89429d87dcc70dc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::is_ascii_alphabetic"
+
+[[fn]]
+path = "pulldown-cmark::is_ascii_alphanumeric"
+kappa = "3a66a13132462af7b6f362dae68289c5cf1015167a5028044205d65bc0945494"
+differential = 7
+embedded = "624da717533f4e0748cc1dee5712e97609cf9d78c07e7210b00dcc2d7e2c8568"
+status = "translated"
+digest = "4cd7004ea3871a5168dc13cf403ac0452b26b95053a7d5bb2a0bfed3b36df90e"
+
+[[fn]]
+path = "pulldown-cmark::is_ascii_letterdigitdash"
+kappa = "818815c17216ee222a564598e80931a81f3fc232b4f4297535cc2febddd6f41b"
+differential = 7
+embedded = "d1947f542a7a8c8e50111a36df1f7b5f943ee7ed6b8ed7bb42dc3a8931cd9e06"
+status = "translated"
+digest = "c7da0073e8c20a5e6507e4aa4d9fc781cafa4c263095f91419db576fbaaa6351"
+
+[[fn]]
+path = "pulldown-cmark::is_digit"
+kappa = "69e033719ffc675b8656596fd7345d420e6c37c9544faf8c8fc79e5a5eb80c55"
+differential = 7
+embedded = "6b435381c3a5f5b2316e7373d00c82aa65dad56392b1fbaeb057f74431468ecc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::is_ascii_digit"
+
+[[fn]]
+path = "pulldown-cmark::is_html_tag"
+kappa = "f7e64406da49bae5d52245ef0201fb5c6f6e67443faf7d2658de293afc2ec2d1"
+embedded = "456df3dea2beb5aa0370279bd2620368681667f486eb0e1de8277e2a11435de0"
+status = "residue"
+cause = "mir::AggregateKind::Closure: is_html_tag::{closure#0}: mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "pulldown-cmark::is_valid_unquoted_attr_value_char"
+kappa = "3a73efc3599b94a5617550be1614ccad626f54a29194baa9c94c28080dc1163c"
+differential = 7
+embedded = "067063ddef61db6cf90db71a6b6b64720e9472c46a130cdc5f7323172e54d8e5"
+status = "translated"
+digest = "6bbaa9a450a4d594e00ebaae1fc9c130439d820ac7731871efa438783b6cd20e"
+
+[[fn]]
+path = "pulldown-cmark::parse_decimal"
+kappa = "b66778eb29c996faa419b510919c4603980a5211358122e8bb40793ce5b315e6"
+embedded = "1e4eba35c503b2d523bf3ab24eed68a7cedf48d26ec8e37e4a6d091c8b74a69a"
+status = "residue"
+cause = "mir::Ty: std::iter::Take<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "pulldown-cmark::scan_attr_value_chars"
+kappa = "6c12a0f2931acf073fdbe83b8d49a4ca4203f5b9cfc004095bf50ea9416787d8"
+embedded = "7256f36b8eb61946849b2a09c0824653628b7c17b8ac4535ff8963233554aadf"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item is_valid_unquoted_attr_value_char"
+
+[[fn]]
+path = "pulldown-cmark::scan_attribute"
+kappa = "b1275f81c43a28f1092ebd799fb83415439530928a9f2eb25e35637bd2fde85e"
+embedded = "361c703d2fa5f6348fdf6f22172856e6effdc0668b87f4022eed06f9e77fce5a"
+status = "residue"
+cause = "mir::Ty: dyn for<'a> Fn(&'a [u8]) -> usize"
+
+[[fn]]
+path = "pulldown-cmark::scan_attribute_name"
+kappa = "65d859b137b08543ce86e40495801a03d17bbbf322513689865b1a9563e1f777"
+embedded = "b0606ef7dfa637e89f95febedc848331fe4b3adde1e369fdc5b3ea16c4486a76"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::split_first"
+
+[[fn]]
+path = "pulldown-cmark::scan_attribute_value"
+kappa = "e4911371735b43acb95afb58354ad851a9f79960fe752dd6c49b683d856eca74"
+embedded = "147ef33b39c1f66938f03412eadf5c9935dbcc95bb38f89f8bde5ade1b0e56f1"
+status = "residue"
+cause = "mir::Ty: dyn for<'a> Fn(&'a [u8]) -> usize"
+
+[[fn]]
+path = "pulldown-cmark::scan_email"
+kappa = "25a2f282521d81af9ec3edd760a18f355748ab546fd1ce2504c5f7e0fb0cd0d8"
+embedded = "f4a810d8d43e6c9a6ff42c08265c71de31c564cf0d0abc02395710c5d53520df"
+status = "residue"
+cause = "mir::Ty: strings::CowStr<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scan_uri"
+kappa = "be03238a215ac732595b57940d8d448acd85aff4b6dfb3518b65fe3f9dc71778"
+embedded = "a03ef27264f5dc5dd0ecf98c18ed991ea8c7328cd67ee3fb2b6a23d4c79c743a"
+status = "residue"
+cause = "mir::Ty: strings::CowStr<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scan_whitespace_with_newline_handler"
+kappa = "15897669797d3cc343c2ab4a9c576345c454a3c57e40b46fc307945232d5f200"
+embedded = "6beec0400fa12ba8f4cc778ce8d78f23e0e3abe656d73528956a72c2b81472df"
+status = "residue"
+cause = "mir::Ty: dyn for<'a> Fn(&'a [u8]) -> usize"
+
+[[fn]]
+path = "pulldown-cmark::scan_whitespace_with_newline_handler_without_buffer"
+kappa = "16fa386b1ab29fb5bf073e4a0bffe1e12feceb4640b1d6d99404025d8500f881"
+embedded = "e54f6f0bb516b480463c18ea4f951f129fee5861e7197add3c131a39ca298173"
+status = "residue"
+cause = "mir::Ty: dyn for<'a> Fn(&'a [u8]) -> usize"
+
+[[fn]]
+path = "pulldown-cmark::scanners::<impl at src/scanners.rs:101:10: 101:15>::clone"
+kappa = "26a8c567b62431155da098f6790da9ac2a36161ceb7cf6a497da2de3f42b64b9"
+embedded = "d221780aea30301081a95d766f3ddb7ed3fc8c6163727395d01b989371dbbebe"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::bytes_scanned"
+kappa = "dfd990f995975c4a64ec3b06cd1fd98e87dfc35e965af07d154d37d51d431c17"
+embedded = "e021873c7c0dd0bd8ed2b28d0e840c5b9dce15302abc777b39a303f51b7ebe1c"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::finish_list_marker"
+kappa = "54f54819c804e593c4047383d8c09574524e63cb76090a1d93b4ae5ce898ae47"
+embedded = "095822040a384c61db8ba82cddc30972b3d568471dfc55e707d7b3fa17c49f08"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::is_at_eol"
+kappa = "3585bef681ebd21ff3d2e5524c3770d54d3c6877c264fcd3fb50036a92d0577c"
+embedded = "c32db822836a9a11f157db377c5dac244d832aaa912d238d258e4a70aacacee7"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::new"
+kappa = "c1508bb7a42836e02449513c1b0c7b1e6ab7b6284c9d2b5db4a46589ed17bd3f"
+embedded = "e555979a01fbd33534397af538f112f64a7787c3b64aa2e0599c2383970d1012"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::remaining_space"
+kappa = "abc3baaa4adf89f21be09855ee03fbff121f5f35e293fd794930494f90c5d9ba"
+embedded = "76ee2f2dd38b9a14e75cd8563f2b6d7db8a11c78d5a787024d15f11790187a10"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_all_space"
+kappa = "e33a154427d5884aff5326615eb968cb2f68bb7961a3fc060ce6cf704a7e1e5b"
+embedded = "8ce99425853cf49403e56ff22d0a837aaad4a2cbabe97ad00b646ba3fb2db877"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_blockquote_marker"
+kappa = "bd79a9050df000452ca4727273184417114c55f04e1a202d2904f8f25fd90ef6"
+embedded = "0bf384c04349dd7e347c379079fd8e03bff1aa084c4aead6277e5b893b11f5b0"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_blockquote_tag"
+kappa = "4d6d95fe6651afa7df2fb0eef387020072862f799c9aee2c95c9c6ad2fef0a93"
+at = "BlockQuoteKind=u32"
+embedded = "128fdfc6baa45393cc82c6a80a97d5980840635230c907c2be7060b809c75e3f"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_case_insensitive"
+kappa = "064def3b1b359fa9c5473e0103b1f8d570907a0389f2040eb2fcd105d213c6f0"
+embedded = "c8873e53bd97547f5ab7342d5cb50b2744f22c9a24f0ebd9809e6ba668e2aae9"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_ch"
+kappa = "7110f721e3d89c557874b3f2463c619d04918243bd5c56805793818abe48365e"
+embedded = "42aa0a66d9cb9eef179201b772ec3fdc290e14e946c36320e4e5d8e1e7e6c7a0"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_definition_list_definition_marker_with_indent"
+kappa = "e69756e5ad1670a295f966553c508e90f9fb0e8bc065afc96eaab98c9a43764b"
+embedded = "2b7107783fcdd3bc5c83595d465851693b8586c147d764d319d9ac6afad1f3f1"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_list_marker_with_indent"
+kappa = "aa469755bbe56bbbed1319ae9ce1e8aacf609a6f3e6bd00781ddd1c499b50ce3"
+embedded = "f5ff0e4d7845b4a78f83ef0d032e8cdd85de0fe0632392efa0fb799cd9fc49e8"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_space"
+kappa = "e10f4e9dcfb5050aadff18da2cdcd4e73ad78507eaa36dc4eb6df951b8abf4aa"
+embedded = "bb3c0d24f206f7bf2bacf605ca03642159bccaf8aff6666dd84e4691afd02a5a"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_space_inner"
+kappa = "6e57620573f6d6d2a6d512ae1242a87e7fd1404882bf2a80bb47c158d40fdbb8"
+embedded = "79fb1f0e13831e96e49a5195a82c6e7cb29617419ba20e3dca8642411e217668"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_space_upto"
+kappa = "6c11448dbfb051f9a07fc22e6a2b196b1ede0153f357f2d39c2bb4ef407d07c3"
+embedded = "c55ac10d23856a06d0de2e950305942a562c012bfc64789fd5fcd4fa3b1cc749"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::LineStart::scan_task_list_marker"
+kappa = "ddb5dae3ae61bc5bd19eaf1c4d040214aa7618fae2613866ccaf7ff7d88e05a0"
+embedded = "20896d07f2f51a9f32446e7588a9c322264e60431dccc0d4e8be90c82c2b9352"
+status = "residue"
+cause = "mir::Ty: scanners::LineStart<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::calc_indent"
+kappa = "514ad906c2e030390799f392fa0f48c474a4061716168c0f55b42bf83d0a3258"
+embedded = "120b31b6dcded2025f238b34900d0bdd5acaf05439d03a5c356d91b7290aac85"
+status = "residue"
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::is_ascii_whitespace"
+kappa = "d5b1b7bb60e56a456b9ffe543bab857ba30f69fec1e66e1a6867a87e47587244"
+embedded = "d875ec0b483f028e8c3e203c1135622df8e80b93c146ba24a04d104a6118b815"
+status = "residue"
+cause = "mir::Operand::Constant: scanners::is_ascii_whitespace::promoted[0]: type outside the lift: std::ops::RangeInclusive<u8>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::is_ascii_whitespace_no_nl"
+kappa = "859d907c1fd570bb7abc137fd92e5f377889b3e8588f6e8a8118962534a89f22"
+differential = 7
+embedded = "21eaa4ebd999d578838dcfcb1e95bb24e221e726838f76d0c7184297aefb5f91"
+status = "translated"
+digest = "63b70e04a386310fffc8f5878fb5ab5cfd015af7fe57d1cf9bbce17ca44ab58f"
+
+[[fn]]
+path = "pulldown-cmark::scanners::parse_hex"
+kappa = "ea782fc3d35799c9a59466c6c8723d94390bb8841a4e0fe258e9bcede4148a6b"
+embedded = "4814bb52de1e274b179b545ba58c4643e6d44a80fe5d71aa1880d719ec3b235b"
+status = "residue"
+cause = "mir::Ty: std::iter::Take<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_atx_heading"
+kappa = "06e890b266976d211df13fa28744ed01f1039d5458d910b8e0e59d2353bab696"
+at = "HeadingLevel=u32, InvalidHeadingLevel=u32"
+embedded = "cf17cff6914cc3b5887890ae6aee239d12871bcdfa5fc53c949d59e7e3992572"
+status = "residue"
+cause = "mir::TerminatorKind::Call: scanners::scan_ch_repeat: pulldown-cmark's MIR stops at mir::TerminatorKind::Call: scanners::scan_while: pulldown-cmark's MIR stops at mir::AggregateKind::Closure: scanners::scan_while::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_autolink"
+kappa = "dab348d7d47ab0a679af40d180760461d7ff8c311902f11890e40d240e7edbbb"
+at = "LinkType=u32"
+embedded = "673a64beaa9298e23b870844c58d200878476f99cb0f0a047bb9972666e906dd"
+status = "residue"
+cause = "mir::Ty: strings::CowStr<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_blank_line"
+kappa = "d27d2035591249b7df7c93151531041ac60c62dd89361e692e7b19410efb067e"
+embedded = "83d2bf8bdd5f6e2e928174b43e396db15c6346b52485e977956cf079ed75f204"
+status = "residue"
+cause = "mir::TerminatorKind::Call: scanners::scan_whitespace_no_nl: pulldown-cmark's MIR stops at mir::Operand::Constant: the constant item scanners::is_ascii_whitespace_no_nl"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_blockquote_start"
+kappa = "5a7b499ec120594d04506388a1c74a42e981db5ed9b38d785fd6556be288d651"
+embedded = "7d8dbe3b0cd0880fc3327fb36f435d9df757ffb986bdc20b47b5d758d9794c3c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Option as PartialEq>::eq"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_ch"
+kappa = "a384b14b23493f93073228a2b697b4f13e4814b9a3c06e82beab3331055ca76a"
+embedded = "927799fad55be3a72a3caf280e6395f7c5d4576f63ba3a6e303dbc4440355bb6"
+status = "translated"
+digest = "6a4347b006f3c7341680160f01b3a21634fe1114b7ebb9ee1ae9fe357d5c0479"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_ch_repeat"
+kappa = "8f2bb0cf97be4cdb88d2be2a70202bf8fd1dfbe0b7da020aacbb81347ddddbc9"
+embedded = "b0413c8f76c43f94e8d72f6142f7f88a27db0f5dc239af5f0f8a5e34b4af1d03"
+status = "residue"
+cause = "mir::TerminatorKind::Call: scanners::scan_while: pulldown-cmark's MIR stops at mir::AggregateKind::Closure: scanners::scan_while::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_closing_code_fence"
+kappa = "b971f62c4ac14229098ef37303c6f6e63c68720206f8f7b9a58c14320e12c883"
+embedded = "1f739536e116727b2787ce2dc92423b151b3f975b117345d78208c8e223ec43b"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_closing_metadata_block"
+kappa = "b79ea8fb9973e949c221d81f107e40d4c09ddf83b7ffc4b9e0ee1573cb485023"
+embedded = "425661f1369906f62709f2e797f5ea047c7b139455fd5e1fd1846788e84249ff"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_code_fence"
+kappa = "ea22dacab20712723a4aba2cbb4743381b3b5c79ed294cc0829f2c13fe291423"
+embedded = "d86a3366b42bd8866f83907612e52193af0ec3f80d057978a71eac411b6760c4"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_entity"
+kappa = "00eb839961f25a469f609733253cdfd010dc25f639bfcc07fa2de666bf0e5329"
+embedded = "45de7f98896a0375b7d9c23a00c9466e0513ee0f1fadaade411b19400255184a"
+status = "residue"
+cause = "mir::Ty: strings::CowStr<'_>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_eol"
+kappa = "adf6816f4469d66fce40e12411b37e126a84a6d28c430d17493c54495c927658"
+embedded = "cbfba486d5c94ec48b4acea9d818858dbb7caf3ef3b61df345ddcfbdc5b50fdc"
+status = "translated"
+digest = "52337e03b2ac9591420d744e9db52896449e789ec98dfbd20a9a77b666c9ac51"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_hrule"
+kappa = "4158f7e938157dd6d81e42441caf6fa780c2b6fa86ea1c60757513e5dafad50b"
+embedded = "a87141d321cf7c2ef5b3335ac12b52d9fddb902f8f9301c6e5af0666c751922f"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_html_block_inner"
+kappa = "da50b38d1b1c899fba1fdd7a17f49208a48e164fc8c4825e000f90ddf14b39a3"
+embedded = "16ceb81f8eae6904a55ec48ccac583ba8199445fdf8e26be53f993ed6edefee2"
+status = "residue"
+cause = "mir::Ty: dyn for<'a> Fn(&'a [u8]) -> usize"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_html_type_7"
+kappa = "ff8a03c76fa201393f58c699bf2b1e854fa0abb7a0e373027f05294bb01dd29e"
+embedded = "bbb4ad957097c64f93ddb299a37ea69496f82efbfb71444bbc1ef4e8952885ea"
+status = "residue"
+cause = "mir::Rvalue::Use"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_inline_html_comment"
+kappa = "fea1c5ba438f8a4cb9dbf15c2134bbdafffc2fd0c1b17aec223050a20827c3cf"
+embedded = "b2fb332309525d3931bafe841d76009eb0e7bacb3c2e7c37faa58152bd796ebc"
+status = "residue"
+cause = "mir::Ty: HtmlScanGuard"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_inline_html_processing"
+kappa = "c935c2398aa1af8c338cd520b9a0a904ea87deffac6ef564c58bf70269116cfa"
+embedded = "c1e7a57c1f3a843a53f60dad22af3cf89ed9f27bc0173bbf1b50113e27d8100c"
+status = "residue"
+cause = "mir::Ty: HtmlScanGuard"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_link_dest"
+kappa = "7c69a92b15dad6e98083942b18ec82c8a39546f6168ea1580d71baac659ed098"
+embedded = "0bee25e473b568457d9e6e12f41f25115aae7b33ca14aeb5a4cc8c0b3278d813"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_listitem"
+kappa = "ba90c5ddf99938cb02d0175b9790f89f9ce25d3abecc513c14727632e487c5cc"
+embedded = "580e46fb8aca101e826af25f9cb88396e9ca6a1354bf24ab352749e3aae7528e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: scanners::parse_decimal: pulldown-cmark's MIR stops at type outside the lift: std::iter::Take<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_metadata_block"
+kappa = "8ef753c22f8fa50dd10c22927060f07d7be2803ee9c59a0ad5602dc7f58bfa97"
+embedded = "afdc0ef72567e2a4f4971271f6210ec8dc1869895f3f20b64c91c6a17af1b168"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_nextline"
+kappa = "bdd8e3e06e2a1a75a650ab95675001003ee3aba56325561acaf125dd569c77f2"
+embedded = "5a164c9d102b36fa6e741c66141c33b294264175e8db52cad0d65f4ff00c6785"
+status = "residue"
+cause = "mir::TerminatorKind::Call: memchr"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_rev_while"
+kappa = "b97425a6967bfb792324326ce13f153e3b202f7a29791a49018e3647cd95c463"
+at = "F=u32"
+embedded = "0568f473c10b0ddc056aa760e789b756050739603d82cfff386a9f6a2e29d18a"
+status = "residue"
+cause = "mir::Ty: std::iter::Rev<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_setext_heading"
+kappa = "c9b039ea30591a4b86622840df3cc50ef658b90551605f081519a402633be7c5"
+at = "HeadingLevel=u32"
+embedded = "d9a58f61f09fbad977aebf2bba8310d126d1cb8f0b178fab4381aac3ffafa286"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_table_head"
+kappa = "0bdf0f7c97470956fd58e5c2ec23841e0175a184fa6facb706bf8486e3377417"
+at = "Alignment=u32"
+embedded = "26c85a102f9cd730092074c35febd1568b1ac59bcfe988b448fe968e340d4fa7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: scanners::calc_indent: pulldown-cmark's MIR stops at type outside the lift: std::iter::Enumerate<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_while"
+kappa = "10538962034a1e4b55b66ec49965a45a9ee78839e95d44cccae64851cd002bff"
+at = "F=u32"
+embedded = "4990a3c6b868f796d81e36f3003ea27ee4476fe961c3e7ae15560efdde8ed682"
+status = "residue"
+cause = "mir::AggregateKind::Closure: scanners::scan_while::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_whitespace_no_nl"
+kappa = "76b705206a3afa5e4351cbfeda18ffc8dc561a3fd9a853dbae51e4b37559e252"
+embedded = "5d8d875a20acc933148deebb7ea4cc4207df55fe5598ea9f31c3ab242e5d1395"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item scanners::is_ascii_whitespace_no_nl"
+
+[[fn]]
+path = "pulldown-cmark::scanners::scan_wikilink_pipe"
+kappa = "e09ff342ee883996d57fc3d66e10ccb3e51ff59cea350cd0a288285710824ac2"
+embedded = "c03ed3e37fce4ace3ef92d5845916631f6a1c4142d5959c4fd6a8e1ec5627aeb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "pulldown-cmark::scanners::starts_html_block_type_6"
+kappa = "5a38eab55f21662eff7d31ff09ba9d7750897e5d312e5fb1af5cda82ff51d8ab"
+embedded = "4224c874a997577f03c4a180be6f07e30885d5158493744005c149c04de30aaa"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "pulldown-cmark::scanners::unescape"
+kappa = "879fe986ebde43be8c86f467410c8c847987da1eac1ed777362e3e9c8d1f127c"
+at = "I=u32"
+embedded = "6f4a0a21f87bf7640a85f397a442f7a8e5beb44ee90f5e166cf2a02573f217f4"
+status = "residue"
+cause = "mir::Ty: strings::CowStr<'_>"
+

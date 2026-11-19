@@ -1,0 +1,124 @@
+[[fn]]
+path = "zune-jpeg::UN_ZIGZAG"
+kappa = "765efc99679772817a42fb7e35d54b55761ef9fe149d1c4e14ef0d18693bbbac"
+embedded = "5ded8090c203d6ce5884f835ca74e3cfabd6c03facccc12abe2b6e9c934255ad"
+status = "translated"
+digest = "820e34daed5973e46ed9f15d20d9362271db0d0f3c19bbb59a536a34c9a037d9"
+
+[[fn]]
+path = "zune-jpeg::calculate_padded_width"
+kappa = "f53f0c68bce217bbfd123a8dff76104bff4de3af549443491c4bbcdaf114ff9d"
+embedded = "3aa99e53d89433807f0e3abf4a2921344d2b07e1433ccca4bd6502a20ab2c133"
+status = "residue"
+cause = "mir::Ty: SampleRatios"
+
+[[fn]]
+path = "zune-jpeg::fill_default_mjpeg_tables"
+kappa = "35b60ee2661d9aaf68e2e9f9ca90b7ab73d50a3fe0b23327eb9ef288381cda04"
+embedded = "6eb92c61c8b3cd81de098ef814e79be6ce435c060333e4e01947c17aaa99d657"
+status = "residue"
+cause = "mir::Ty: HuffmanTable"
+
+[[fn]]
+path = "zune-jpeg::misc::<impl at src/misc.rs:104:10: 104:12>::assert_fields_are_eq"
+kappa = "35020b29b731c5f2130fe27a084d8f75735e7c21332335f9cefad05c7ae4d334"
+embedded = "2d7c29af8f9b24bb6ebe5166913a13e14d733e2ccc09d49331f5b91d52421a82"
+status = "residue"
+cause = "mir::Ty: SOFMarkers"
+
+[[fn]]
+path = "zune-jpeg::misc::<impl at src/misc.rs:104:14: 104:23>::eq"
+kappa = "fed9ad2623e49a3871f2f16cb2ac8b6fb862bc5debabf9f329fe8211d7bcab7e"
+embedded = "2783f935b1cbe2e3aa17de2e4c4aaf45da746a894a13cd690e93f7d6c6e1b54e"
+status = "residue"
+cause = "mir::Ty: SOFMarkers"
+
+[[fn]]
+path = "zune-jpeg::misc::<impl at src/misc.rs:104:31: 104:36>::clone"
+kappa = "1410ab2d5c5331bc68af46d43f37a79a717804685f1d2b15472040e2a454f2f6"
+embedded = "efa164626fa06aaadd5a26e3c2b5aacb243c3d767584289f07fe1acb78ac25a5"
+status = "residue"
+cause = "mir::Ty: misc::SOFMarkers"
+
+[[fn]]
+path = "zune-jpeg::misc::<impl at src/misc.rs:74:10: 74:15>::clone"
+kappa = "fde8604f88766fb35dc04b5df808d16f3fe4ebf7919f9fd83191886a16a3fe1d"
+at = "T=u32"
+embedded = "214539ebe483e4facffafc9d193dc1db591b70782b1b271aab7dc750ac025a7b"
+status = "residue"
+cause = "mir::Ty: misc::Aligned16<u32>"
+
+[[fn]]
+path = "zune-jpeg::misc::<impl at src/misc.rs:89:10: 89:15>::clone"
+kappa = "8ed0b4cbc0af68d092b3683ed2a5b60bf39823550e095cd01b6e9c389764d5f1"
+at = "T=u32"
+embedded = "d5a02c96657e81cd24220d87a655056c6e88edca2be86a92cd1532eae76c1a64"
+status = "residue"
+cause = "mir::Ty: misc::Aligned32<u32>"
+
+[[fn]]
+path = "zune-jpeg::misc::Aligned16::default"
+kappa = "64b12e8c8f98857e67eb316983dd91a363e0867d73070f73ee62e955e19fcce1"
+at = "T=u32"
+embedded = "fabfb917cc288c5b19a9dd8b19fe369e224392cc2417f9371bb452b02ae8edd6"
+status = "residue"
+cause = "mir::Ty: misc::Aligned16<u32>"
+
+[[fn]]
+path = "zune-jpeg::misc::Aligned32::default"
+kappa = "30f5041fd765c97ee45942d8739fe5dad6270b13763348b7cad4b2aa008fb51f"
+at = "T=u32"
+embedded = "f8ac0a82946366ee788e6702dd4d3240e4a6c9a19a07be17698a60e55fbf675c"
+status = "residue"
+cause = "mir::Ty: misc::Aligned32<u32>"
+
+[[fn]]
+path = "zune-jpeg::misc::SOFMarkers::default"
+kappa = "bce13198833e637c556c17e4d3fe35ecf90a09a22537d17e2b39733b90f8da83"
+embedded = "b3b67083e3cd6206153add7c3087d55518a9910b78c3892bf5c2b3031a5abdfe"
+status = "residue"
+cause = "mir::Ty: misc::SOFMarkers"
+
+[[fn]]
+path = "zune-jpeg::misc::SOFMarkers::fmt"
+kappa = "0c86f751c1a305d4198b08dc843f42544b6c710c5122b887776d495c1d9494a5"
+embedded = "550fd1dd3d631235b71712b7adb4e9ba4a9cd5ed0e43284cb1fc7b7b9c232730"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zune-jpeg::misc::SOFMarkers::from_int"
+kappa = "2ccbf3916e4a51b0223d3924fcdce3c9f9953ca557ebd76b03301fce3b05530d"
+embedded = "22acd05940cf4155c1c26c6cdafcc9ddad341c70e8411f0e2fc44d967d8d8d93"
+status = "residue"
+cause = "mir::Ty: misc::SOFMarkers"
+
+[[fn]]
+path = "zune-jpeg::misc::SOFMarkers::is_lossless"
+kappa = "1316c9297e91dd5609a9dcc87d80dd585d3bb5da40c99243b7f1f528fb3d3aad"
+embedded = "ec4506d50bf4329d437ab37831c48c18af8b1d62c49eb1e54a615dc3c4d01318"
+status = "residue"
+cause = "mir::Ty: SOFMarkers"
+
+[[fn]]
+path = "zune-jpeg::misc::SOFMarkers::is_progressive"
+kappa = "c1391caa3210f678d9e7ba997655c792f9fa4b0da7c9d2d13c0f9a3f87f6ac68"
+embedded = "067beba90766bacd86f20d857ea2d079acfbfc94e703b17114dc4546a460ae0d"
+status = "residue"
+cause = "mir::Ty: SOFMarkers"
+
+[[fn]]
+path = "zune-jpeg::misc::SOFMarkers::is_sequential_dct"
+kappa = "5f4b8184e9e2e8d23dc44a46324c364a915977988858b0bee20de1d26e8f32b9"
+embedded = "2051b91ff67d6101485d5aef449d06ec1fdda0224f4302a723b39dc4824abff6"
+status = "residue"
+cause = "mir::Ty: SOFMarkers"
+
+[[fn]]
+path = "zune-jpeg::setup_component_params"
+kappa = "9008dc1c565f4bcd389fd12324fd0916dd9096f5b6ea34cae1a1726b140f5ee1"
+at = "T=u32"
+embedded = "166440dba26a5a4cb1ea2ebc2fe4cb39cdd7cf759316fce1e128887022a07719"
+status = "residue"
+cause = "mir::Ty: errors::DecodeErrors"
+

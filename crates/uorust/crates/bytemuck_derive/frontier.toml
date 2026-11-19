@@ -1,0 +1,108 @@
+# The bytemuck_derive register (written by `uorust crate bytemuck_derive@1.12.1`; do not edit): every body of
+# bytemuck_derive's MIR at bytemuck_derive 1.12.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 85
+translated = 4
+residue = 81
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.traits]
+bodies = 72
+translated = 4
+residue = 68
+
+[embedding]
+bodies = 85
+embedded = 85
+evaluable = 85
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: syn::Fields"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: traits::Representation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IntegerRepr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Representation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Variant"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: traits::IntegerRepr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Repr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Generics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Iterator<Item = &'a u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Field"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::VariantDiscriminantIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::WrappedType"
+bodies = 1

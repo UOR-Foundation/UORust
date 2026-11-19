@@ -1,0 +1,100 @@
+[[fn]]
+path = "sqlx-core::begin_ansi_transaction_sql"
+kappa = "fc36fb71adbb4e9084e5ae9795a0db0fb21a14d5e9d986c920139433191e2051"
+embedded = "eeac254aca44cc7b65ac53cc5ad35901320fc7b1ba21c34a73216641f5d0a87f"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::commit_ansi_transaction_sql"
+kappa = "83c46bb09533a40d10ee9591e6cfc9a8513b341b8829ed32a231c20a00298074"
+embedded = "c343ef4f7257551ca03962bcc7f0ea20fbac5662825180f3d65d131984cf85e1"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::rollback_ansi_transaction_sql"
+kappa = "cc8cfba6be38bafc45ef4505abb669254c03d8363b79cdda168b89c4772dfb12"
+embedded = "ae3afebffd1dabe8440c05470de6409af62a839f81c3d655f97b632d1809bde0"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::transaction::<impl at src/transaction.rs:249:1: 249:83>::acquire"
+kappa = "26700fe4c78da3a2342fb348b9d3557f2e551b8f437671143e8fd06a9a727dc9"
+at = "DB=u32"
+embedded = "1566b655198c310ec90768fa52adee3ba2a6812d7b10995a4052fac02754a423"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::transaction::<impl at src/transaction.rs:249:1: 249:83>::begin"
+kappa = "53907d66a4d9b6bf7b9911c98c1f7b795750b40013246dceed4548b3376c5eb7"
+at = "DB=u32"
+embedded = "becd8feb6a8f94fbd2348f03d6731cdb9d85b3c02e584a9f1e385b893764c636"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<transaction::Transaction<'_, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::transaction::Transaction::as_mut"
+kappa = "2a87caabe788dfb206ebcc3db0ff73d328b865161acccced890410aafd0dc877"
+at = "DB=u32"
+embedded = "7b26fc9667ff11f19a986724e043a61ad822abd20b163b49ff35274edb358e4f"
+status = "residue"
+cause = "mir::Ty: Transaction<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::transaction::Transaction::begin"
+kappa = "53fba3d8cf1bfdaa0f9cac652430e86526aaf4cac36a5a00e9afbf282dbdcebc"
+at = "DB=u32"
+embedded = "b7cdb6650193be611cf78cd0e56af08bf69b161441c9f83ec83dcb373c9cdb30"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<transaction::Transaction<'_, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::transaction::Transaction::commit"
+kappa = "737d8608c71a0b1bf2cc7764e6f3d82d8a1379473df3dcfe6bfadfae8735319c"
+at = "DB=u32"
+embedded = "aa037a134217a04e1bb062e904c44e147c046341f2cfa7c5637c26c5a3bb4039"
+status = "residue"
+cause = "mir::Ty: {async fn body of transaction::Transaction<'_, u32>::commit()}"
+
+[[fn]]
+path = "sqlx-core::transaction::Transaction::deref"
+kappa = "a31bd27b08c2b8891708a9bc7e6766b5f04643f220c014fe133f63362e4e6d54"
+at = "DB=u32"
+embedded = "7eddb2ed65f41a516a3038ab63208d0d8a7ba8e7e681ec59d48c4610e2477915"
+status = "residue"
+cause = "mir::Ty: Transaction<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::transaction::Transaction::deref_mut"
+kappa = "641855b0d931d615949e36f84d80b531282def178d9c9716be853aa525203d48"
+at = "DB=u32"
+embedded = "2e713639c508107d64044cc4ef2e599c907cdf549f37dc97318455082989ebaf"
+status = "residue"
+cause = "mir::Ty: Transaction<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::transaction::Transaction::drop"
+kappa = "f492b87fbb077a92b3a5fda9a588b793f837072a45c5c3061c0cc7e544fead53"
+at = "DB=u32"
+embedded = "1531e97cdb8dc1fa6ea87a2114ddd2e99bd3a0152a9dc77639753b5049e7f821"
+status = "residue"
+cause = "mir::Ty: Transaction<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::transaction::Transaction::fmt"
+kappa = "4d8dff047b3d3ef8f338d9b0a248b26af564b40cf1f3fba0289d8b01ff8fc890"
+embedded = "0f7aec75c4706a13815ee842e6f0a2744cfbc864b65754539e2a2b267289881b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::transaction::Transaction::rollback"
+kappa = "3c568c9c66712ce9d02820a04a65080205e80feaf96d18c24a9bbd5a6c6a4bb6"
+at = "DB=u32"
+embedded = "baaeceafdfce3c8437b5a3206559269bd75c65b25a9d9cfb96be76b6c929d695"
+status = "residue"
+cause = "mir::Ty: {async fn body of transaction::Transaction<'_, u32>::rollback()}"
+

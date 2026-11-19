@@ -1,0 +1,152 @@
+[[fn]]
+path = "float-cmp::ApproxEq::approx_ne"
+kappa = "3db31509fa601802e6f5942ed7d3c9ac1a19c209f416778c202934d49bf8a65d"
+at = "M=u32, Self=u32"
+embedded = "277844e35ded03552c44864e488d9c51eb5f4985795531a4ac59566c38971d51"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ApproxEq, which u32 does not implement in core"
+
+[[fn]]
+path = "float-cmp::eq::<impl at src/eq.rs:194:10: 194:15>::fmt"
+kappa = "2d87babc9b1badaf3692146a98ea2a522f59f2cc5b91c2dbc3aae514ad6ac6cc"
+embedded = "57bb53e89a53033e68ce4fe82df7f04cfecf216eef3767c9e81e5ddf12f98ded"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "float-cmp::eq::<impl at src/eq.rs:194:17: 194:22>::clone"
+kappa = "818375461c48f62fe755284323dd894b993f4e5c8fad17b0c9a96c8202ecf534"
+embedded = "9ad86e58dc07a71f10f5287111594c603b696b72096b139771b6e73f3d347f54"
+status = "residue"
+cause = "mir::Ty: eq::F64Margin"
+
+[[fn]]
+path = "float-cmp::eq::<impl at src/eq.rs:311:1: 313:24>::approx_eq"
+kappa = "109a7846af5a88e75c6356446752fa734752051c1d35b4f3568e98827b267aea"
+at = "M=u32, T=u32"
+embedded = "418cf370868c5a36dc9959750ab48ca4a203ee6ee591f4743f20cf7ac10c904b"
+status = "residue"
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_, u32>, core::slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "float-cmp::eq::<impl at src/eq.rs:64:10: 64:15>::fmt"
+kappa = "a764dee86c39522339f6fdba599632048b79e0cc5d6cfdcb1f6bbfdf102dc765"
+embedded = "755013f4c02bb48fb020f8753be11953954c3aa986953cb32f8530de7a4aea63"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "float-cmp::eq::<impl at src/eq.rs:64:17: 64:22>::clone"
+kappa = "603cc912550231a9c130d52c1e58c1d6aa11e72a79ac61de3599d2dc84a0368e"
+embedded = "b4e736447ac58cbd34997cb13564f3a836bd2aaa25701eb89762420b02601286"
+status = "residue"
+cause = "mir::Ty: eq::F32Margin"
+
+[[fn]]
+path = "float-cmp::eq::F32Margin::default"
+kappa = "c2b666e43f021dbb4121de2c8decdc0aeb14ff56a93b21926e5e3963e400c052"
+embedded = "e84c57f93ca9bb70ef2e5e6fa180e86dd9af239dd0d736d2a85b462e3a618ccd"
+status = "residue"
+cause = "mir::Ty: eq::F32Margin"
+
+[[fn]]
+path = "float-cmp::eq::F32Margin::epsilon"
+kappa = "cbbfa9a0647840f3263731d90e2b73fb64a91f3b50a417abc2eaffb75a6c6671"
+embedded = "f85f95d9ee77b29b27dae77d64d2bc75977019fa8df713264a84689c3415fd12"
+status = "residue"
+cause = "mir::Ty: eq::F32Margin"
+
+[[fn]]
+path = "float-cmp::eq::F32Margin::from"
+kappa = "2064b3f07bca1b3aec7e0a6e285ac4f2cb55f118a93e1484d11ad84f88951d92"
+embedded = "5846f81a0c05d949a16f9bc90d58e75b2822780ef2fa060fd89e7f5c158f373c"
+status = "residue"
+cause = "mir::Ty: eq::F32Margin"
+
+[[fn]]
+path = "float-cmp::eq::F32Margin::ulps"
+kappa = "9136861d185c6e44b6322adc571f425fd72ac57e959e1ef44c7e568025fc5274"
+embedded = "39ddc891f9e6973128a8c7bb569a72df879577cf2c0adc52bda6d111e3e79379"
+status = "residue"
+cause = "mir::Ty: eq::F32Margin"
+
+[[fn]]
+path = "float-cmp::eq::F32Margin::zero"
+kappa = "bc25a42105e4a66cb6b3ad72cf93908a69ddc0eda392c3d898ece3ce1ed6432e"
+embedded = "0707391bafac885be0ab1394dba6de56db0048d45660548bbc883acc1a746d3e"
+status = "residue"
+cause = "mir::Ty: eq::F32Margin"
+
+[[fn]]
+path = "float-cmp::eq::F64Margin::default"
+kappa = "c4c40ee5a2fce4f1496c9d9c91840fef5b73401cfe883e0f9da4d42695014545"
+embedded = "67b01ce534572747108fcf46e48fbfcf801a09cd917d0d49571686fac129c74c"
+status = "residue"
+cause = "mir::Ty: eq::F64Margin"
+
+[[fn]]
+path = "float-cmp::eq::F64Margin::epsilon"
+kappa = "cbec56192635306a6ae27ffcbe7ec0ecddd705f9857825d9ae5bf7ca8779f50c"
+embedded = "3edde36c5b659dbb299fce4ada4c0d23313bd5345901f7f1ed042d4f50b39cc4"
+status = "residue"
+cause = "mir::Ty: eq::F64Margin"
+
+[[fn]]
+path = "float-cmp::eq::F64Margin::from"
+kappa = "680379fda574bf5007824eaf4f639cd06a23f1b420c8df6b0ba4012f47c2d212"
+embedded = "cdbf92cd93c089ba260c1d80415441c1f2cc2ec36789865209dba7edf8cbb48b"
+status = "residue"
+cause = "mir::Ty: eq::F64Margin"
+
+[[fn]]
+path = "float-cmp::eq::F64Margin::ulps"
+kappa = "b402f92d7987b2da8b0ddb1a0eb40a3942f227ed38179944c5df6d62075d136a"
+embedded = "2df129bc51945f60ebad7c562684d01ad21a71b3842133f8a8491917ab90aaf6"
+status = "residue"
+cause = "mir::Ty: eq::F64Margin"
+
+[[fn]]
+path = "float-cmp::eq::F64Margin::zero"
+kappa = "8e2192173ce62137970228f75ba96cc434135c6e0cae6b88371de2e45aee4d0f"
+embedded = "6f921490f2c275fa395eb60ead29800027923c9be7cfc819a43e20980470dc72"
+status = "residue"
+cause = "mir::Ty: eq::F64Margin"
+
+[[fn]]
+path = "float-cmp::eq::Option::approx_eq"
+kappa = "99da57143a7aa4c775169e7b6c5360753f3819a681a01400b2f0c5f92304b548"
+at = "M=u32, T=u32"
+embedded = "0f938b0776f64ef32285a683a2ec2fe593e863a0dea3d39a472bd89c0c6e9c79"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ApproxEq, which u32 does not implement in core"
+
+[[fn]]
+path = "float-cmp::eq::f32::approx_eq"
+kappa = "e535e5dda612f0f13a2517410ace6085a4bbb8491691bf1dd41a7e90be2d0d74"
+at = "M=u32"
+embedded = "692e334dde5095151943e143164901eba2b86a7df4fad7977cccc2479dcb8c38"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "float-cmp::eq::f64::approx_eq"
+kappa = "1505c9f0b0a2cec8431bf9a6e210bbd5949ecc9f22a14f9f7931e1d2809f6c9b"
+at = "M=u32"
+embedded = "80e17b26eb106aebb41502fd9460e68a1c14f814d2ef54566321d449d4e3774d"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "float-cmp::f32abs"
+kappa = "6ced2324b80070a62f8ef9a725772baf0769607956f9040ce9ebef13f69c91a9"
+embedded = "519c79e1ebfc2303ae4b917a4bf73d2f6c6f98fe7611b830d05f4502a1d4e116"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "float-cmp::f64abs"
+kappa = "8e6bbc97ddf7ce008b26bdb351fdfe26fa6b2a37fd1884cfa19c73ec27631add"
+embedded = "961384d633057aa5ad4977cd5d09b23e41cd5df1ec2035f9b09a8668f1a241ac"
+status = "residue"
+cause = "mir::Ty: f64"
+

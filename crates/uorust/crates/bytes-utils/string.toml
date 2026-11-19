@@ -1,0 +1,817 @@
+[[fn]]
+path = "bytes-utils::empty_sep"
+kappa = "7bac90173a1f77ceaa76a312c67838be647f22a99f4bd3045aad5ab13b3197d0"
+embedded = "aa87a33d4be0d396029fbb4eb81c52739159fce60315d9089af4190cb5482eee"
+status = "residue"
+cause = "mir::Ty: std::str::CharIndices<'_>"
+
+[[fn]]
+path = "bytes-utils::rempty_sep"
+kappa = "ec2631eabd652744bec39735f3752537d1ea3f433a6435c345ac4f6c6c6b1968"
+embedded = "4faeadbd52d15faa6e616807f2142b40daa2f01b593a511ee63b783590e88336"
+status = "residue"
+cause = "mir::Ty: std::str::CharIndices<'_>"
+
+[[fn]]
+path = "bytes-utils::sep_find"
+kappa = "0b1bcd7974b3294236dff83c1b64743868b61ce3199e7ba5ca37579ad6f531cc"
+at = "F=u32"
+embedded = "acc23d4db7c2f6fe36359ca7e002a98b4a34099b99c1e1fb3159e1c33ffd85cd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::find"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:126:16: 126:21>::clone"
+kappa = "ee9d4667739f3aa505d5a09161d36e6721f5eb2a1a722088f0af593b362d8b3c"
+embedded = "f4428257bf4aaf232705759059a1c969a6caacfae8d4a520267af8bc02addab3"
+status = "residue"
+cause = "mir::Ty: string::Direction"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:126:23: 126:28>::fmt"
+kappa = "e959b0771ad86c25c2bad42e6baa22a1ee9f0f401b94f24cc77339b543861bf4"
+embedded = "1eaf74ffa2f92c0822a820cd562e8e528204ebfd1c95dc687789b559dd0b9b69"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:126:30: 126:32>::assert_fields_are_eq"
+kappa = "aaa7976873e4b4f3cc45c0f0c9e1ae6c0ff48a3097c392ca9d002ba9cb124ea9"
+embedded = "882c3738609615e8820722c59f6614fd2738ac1ff19ce2f0dd0e9b893e2a7db8"
+status = "residue"
+cause = "mir::Ty: Direction"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:126:34: 126:43>::eq"
+kappa = "8d9fe1905d8f730e642ffbb40af3388f1ac269e264104e3e1983d19b3b3f8cbd"
+embedded = "b6b4fe1cc7d9501799ae124b3ffaa255af34500b9b206b50cf33f9f12674da7d"
+status = "residue"
+cause = "mir::Ty: Direction"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:139:10: 139:15>::clone"
+kappa = "5784c523337a373746d15f350f02775fe54e59cb08e691d63367280ad7129e21"
+at = "F=u32, S=u32"
+embedded = "fcba6a295787dcc47d638bec5df8aa8c68b966d241e2e2943b2a6552fa711151"
+status = "residue"
+cause = "mir::Ty: string::BytesIter<u32, u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:139:17: 139:22>::fmt"
+kappa = "d2fcf429a1f6848f0203517480d98fc60bb1eda5db462c0373a9919dc1e0d0e5"
+at = "F=u32, S=u32"
+embedded = "2abaa0ddc102bb64bf175d3f36079e533992c5b493ad6e41bc5f59da2451fbcd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:272:1: 272:30>::from_creator"
+kappa = "329353ae860fa6eebc92e6e7c40d175a5449b4a90d1c636916ddb377677ddd1f"
+embedded = "c06f13a813f32f0de4ff6ba1470337f7728ac01efc5578e3b1fbe65c022d7855"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:272:1: 272:30>::split_at"
+kappa = "3b3b8ce6257a9f30ba35060d859f32a4fad1b01df4052b1b910bd5beaa65bcc8"
+embedded = "d382206ae5378dcc94ccdf09112bfd09b640e10e667cb44088831f2a031c4ee5"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:283:1: 283:33>::from_creator"
+kappa = "2921368ee2daefac50101e46d6a7da2e667e69458bc66a291bbc1290617ed9a2"
+embedded = "8b91cb3c0a1549bc7f9a7e1ae78517b1605aebedfcc6f19267c1941e7c63037e"
+status = "residue"
+cause = "mir::Ty: bytes::BytesMut"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:283:1: 283:33>::split_at"
+kappa = "aa98a75c0091642db5d0a9af70713b6f31be67e0d96eacc9e4d8791c7fb57316"
+embedded = "5ee647b82f6d84ad6e718194c349921b6d595b25465574f73688c762624dd892"
+status = "residue"
+cause = "mir::Ty: bytes::BytesMut"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:310:1: 310:36>::push_slice"
+kappa = "253adcee2e2528eeacce1c1d5ac12575fb453f10183702a98d0e3d107c40fc01"
+embedded = "2a00599f4519be46e2f0c39fb6a067a01903209cf0f6ccca2f41c8d64749859b"
+status = "residue"
+cause = "mir::Ty: BytesMut"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:322:10: 322:15>::clone"
+kappa = "e3467084f1b5b441c112f8d4891e0989c003005004e5f69e6532db82668042ac"
+at = "S=u32"
+embedded = "217583e399f9eba4fbce91456e62059652399af2da9a407da1798a5ed6e7696f"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:322:17: 322:24>::default"
+kappa = "515839828dfb14eb7b4f5b467e92bf5c20b46117ee45d586683a52b9003dbff2"
+at = "S=u32"
+embedded = "cd82c85a4d11e402ddb58525d0a4162c7e01516a25e879e63831d5485290fc6b"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:722:9: 722:41>::from"
+kappa = "c16dd358dc7ecc86bf38df0d9caf0e088f683c11265bdbd5e52324b6aa5f3cc0"
+embedded = "f24060f24d795e0f84319601a01986a2224bdc1e271b29b868973ce48b44f93b"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:722:9: 722:41>::from#2"
+kappa = "8f0ef9dd79a3cb04be8dd17afb9ef368e5f1f67c23617a9bf77d6680935eb181"
+embedded = "1ce824bbfd4f804d7f652f30ebe34301851390cd8c5a3c2ab37ed861a2cc778e"
+status = "residue"
+cause = "mir::Ty: bytes::BytesMut"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:775:9: 775:73>::eq"
+kappa = "cb7383d8fcd8787180d16b4966124a0e914afac81c6ce8660855ffdbf4e7704e"
+at = "S=u32"
+embedded = "2bec49e223996a53857fc7bb3a8e57c4dc44357cfcf211ce4a74c8d1dc1eef66"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:775:9: 775:73>::eq#2"
+kappa = "da57157f9f5df2fc828ebecd32e407ffe5f12c3d143570c86c7aa4cb64e15eff"
+at = "S=u32"
+embedded = "0d0447f7fc1173c6541e69bc52995cc7460d08e4c7719500f908d6b15342da82"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:775:9: 775:73>::eq#3"
+kappa = "5f050b96217d4f43fd387d6635e1597ca0989c49b46562a384250f3946fec8e3"
+at = "S=u32"
+embedded = "e79a385932234830702307c30cd486df47c47f5e991faf0801dde840a7d8a341"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:775:9: 775:73>::eq#4"
+kappa = "982467db32d068392f38f0b54ffcc24b640855e60e880a740f0b0ad757a9a855"
+at = "S=u32"
+embedded = "58d970e755b28dc2f200d5197fa9bd9a2ef1f35fd7a5fe283fb7ed676ba1980d"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:775:9: 775:73>::eq#5"
+kappa = "862692f217572514610d9817a18d378bfdcf89ebaed7387b00fff44a70e429a0"
+at = "S=u32"
+embedded = "6072378d27d57a17ba889eef3583ad99a29943b5cfc804964ca14c60101b9972"
+status = "residue"
+cause = "mir::Ty: Cow<'_, str>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:787:9: 787:74>::partial_cmp"
+kappa = "60cb83def861ca44e4497ebc1bfdfc2ee6f1789016d847ff9a92d9c9a2b51e34"
+at = "S=u32"
+embedded = "392cf34586e3d56098148f05ec376b381b400cbefc915dcfb9cc6e9524ec5c58"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:787:9: 787:74>::partial_cmp#2"
+kappa = "e264abd46dc3758d2278faabcca3ce231944ed8697699c839907549cb634c1df"
+at = "S=u32"
+embedded = "c6e923a348d0619abbb657ad1c24124b8ac87db9d7c7dfaa8c237889f575c525"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:787:9: 787:74>::partial_cmp#3"
+kappa = "b0a9463d741cca3874713227339396aa7a744f0186e92c147c9583d4e67eb009"
+at = "S=u32"
+embedded = "384cc794f43680cf59750402cfa06afd5a1310a1f76d0e19659f87ec0a42b51d"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:787:9: 787:74>::partial_cmp#4"
+kappa = "7e94c64da8a0629f18ccbbffd251e78f38b84201a57bfacd4806b1d6e3232ffb"
+at = "S=u32"
+embedded = "a11a38cec44d346b3689b2b77c7682d5414a773d53b85c7a67ea06c91a565042"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:787:9: 787:74>::partial_cmp#5"
+kappa = "22c39c2ca76d2ae8e2266352e75832dd6f9eea2d11fdc4fc023bd87cb8cf8465"
+at = "S=u32"
+embedded = "2a3cba214a0b6ba93439bf22bb4dc485467bf85b5780bb26f86322b91bd45667"
+status = "residue"
+cause = "mir::Ty: Cow<'_, str>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:96:16: 96:21>::clone"
+kappa = "b0be1ad6622ca01fdb94c15d39d24cd215efd5aa74b876acf7a74b06a5555d42"
+at = "S=u32"
+embedded = "5a8885fe347608d5a361b2589c2ccf502bdf7beae67d6a381920ea33201e5df6"
+status = "residue"
+cause = "mir::Ty: string::Utf8Error<u32>"
+
+[[fn]]
+path = "bytes-utils::string::<impl at src/string/mod.rs:96:23: 96:28>::fmt"
+kappa = "dbf02473358a4ee7d8929510b63becd76ecd8da1cd4fb87bd723fdc8944d63c2"
+at = "S=u32"
+embedded = "7cb064de54493d87af50c66daa474654683fc42051546de1f7e80407cee05c8c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bytes-utils::string::BytesIter::new"
+kappa = "ab6e435740f991fc0e30abf38f8cfee5dce4c50e16deb6d41b567cea8f6b4c10"
+at = "F=u32, S=u32"
+embedded = "bc84bd3d18d5e00ce412222f70a462b0c86bd1f1ca0ec537a66b205d48542da7"
+status = "residue"
+cause = "mir::Ty: string::BytesIter<u32, u32>"
+
+[[fn]]
+path = "bytes-utils::string::BytesIter::next"
+kappa = "8fb03b251ae5ae11d0669d7feca9eadecd1d09ebd3d8e617b952b5547ab87c7c"
+at = "F=u32, S=u32"
+embedded = "9ce1cfada413e6867738cfe723265be7462f43fc354762794704c5030d780319"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::BytesIter::next::split"
+kappa = "19844c000063b92f66a4c7025adf744abbe3f535b52a0b47edd63c30447539fe"
+at = "S=u32"
+embedded = "00a7d00984bc05f568dc86be0f4ed42d871943ce4bbf022d9d2bff00ced6b599"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bytes-utils::string::Str::from"
+kappa = "6f16e4ac58e7a41b8ce4428d904c910ba64d304431e3344c8c4d4173c79c6370"
+embedded = "6f813bf9a0a0492e3a1983e1d6f56bb1925c3ccf5aff3361bc8cdf86a63c9ca8"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::Str::from#2"
+kappa = "9fbb0b5d434a17472fe580e938eb4764e86bf930fa7b03dd5a4508b8d5413811"
+embedded = "54dd0d3d1430bda45357096c26eecfaa84cc87fb80e16c03b2a7eb1d36960e93"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::Str::from#3"
+kappa = "f7a935a0ec1b297a5ace8d306eb7cca8a26e105da3a853988da03013ba479cee"
+embedded = "c80fcce50cd5ac444e6afb91741de90192c45be7422f3fbce96f4d0e0e1091a4"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::Str::from_static"
+kappa = "f8962746bf4dc0011f2ee9e6c205717c36b6e7a8de86b91b63878387adfcdf9e"
+embedded = "aba70629c743a0d23d9c9d5f94f7a63779da03837d8a94076de47f31b4ee7cba"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::Str::slice"
+kappa = "1a367f589e324cb54f5c79db50ad6f05ac6ca863693c69b346dd748c1823a41e"
+at = "R=u32"
+embedded = "d44f76248930dbce7e978f89a98a7696811a0d745d9a5a0406e8344428544cb6"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::Str::slice_ref"
+kappa = "ea7352f6d597fb38b60095760e379f2f3b23253415e4b9af5eb091a9ab5ac08c"
+embedded = "3e1cb55562c511de7cc7ad98f96281958c1a32b5072047221aa3577994bf329e"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::add"
+kappa = "8e8d7fb95c7110e7d99499a109f51fc123d5d7c8854a391f89c99000636a3e4a"
+at = "S=u32"
+embedded = "d1cb14fb9a8d1a48fdc0b81d7779a4d4dbd20f282ec0f714865272550dfc0052"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::add_assign"
+kappa = "14fbe2853bf68ae075f9506fcc0f2ac43fcab1b37d93045fd2d44ca54379a0e0"
+at = "S=u32"
+embedded = "b8a5497ede8334a08ed99a2b05e28ad6a78f236ff7c12d56b00daf0d2a696b66"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::as_mut"
+kappa = "c575933c9c688781ba9b2ea74c88a84ce90197c83249358c8f0c3d0ac00c21de"
+at = "S=u32"
+embedded = "2f67bd8d92921fd2688d86584b3aaaddfefdc0b3edf512ad595048cd2d918cc0"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::as_ref"
+kappa = "242df8903319d28202934c036430e3663017f81ef9699d40d59e0d10521866d7"
+at = "S=u32, T=u32"
+embedded = "77f70f6b471afd914fb9559727889192f40bb796f829ee8abd710df54629677e"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::borrow"
+kappa = "e1f4a13978f8488b62bf1e32670e3ac02021f23fd056aa709cb0ca707f358a00"
+at = "S=u32"
+embedded = "91a866bf9f2f18a75d2cec4326a4e726a01e96b99a1615ae248690f28c227192"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::borrow_mut"
+kappa = "001ef008e9f0d515025c9e84fdaba4e9ec859d2c7f9639864293348fe625203d"
+at = "S=u32"
+embedded = "46076af18feed0d57c10190ee7f05bec267c605add19e26f66127590d6a0a2ee"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::cmp"
+kappa = "22d87d11952a3ccfce0a82d3c4db372abfee1de14188d77221100dd763c3274d"
+at = "S=u32"
+embedded = "1d05c970269b17d77d23d1657030b0882d0239e018879ff8432ab0014933160f"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::deref"
+kappa = "db3f118a0f7c047dd87626266dbc8f61cec16f3ecd9ecbf04c788df28a2c9569"
+at = "S=u32"
+embedded = "f255288523eaaa34b4c550adff047bb98f3a85bf8c21ba18b3b580d6ee6429df"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::deref_mut"
+kappa = "a8712923324b011500b7873abdaa5a687db8381dfc80ee9e84ac3a2d80175585"
+at = "S=u32"
+embedded = "8ca584f54f2ecb9fdf4d0b7a3dc6933fc48a6392e1e09ae728a3fdb8a8cdc49b"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::eq"
+kappa = "84ea4cb8c6a57d476cd1b07ff45be715f8d326d066d08a0b29ccd3f27f45c545"
+at = "S=u32"
+embedded = "6dc28654d06ab1ce95131706002f5b9bf9d5b34c0460bb7521669f5e861427d3"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::eq#2"
+kappa = "845d48cd03e3d38b0427e232d0eb9a1413e6b37b4e23b0e2b148864ffdfed2eb"
+at = "S=u32"
+embedded = "6ee97b26244054415591ee2159490d8552609b544c372c2c0c0bd69e4227e594"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::eq#3"
+kappa = "3d268b2a3a340926b2a885ae0b9705a96ae35e220672cbd62860919e0914dd89"
+at = "S=u32"
+embedded = "d2f5a46f7a4545d5d75c055b2ff67440e6d82bdd00cca77ad166502e937aed71"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::eq#4"
+kappa = "4e752420fb2132dd4332034c22684153bdde6797b38b96328cf939e0dbc693dc"
+at = "S=u32"
+embedded = "492b5984707b3e03d1d32e6f46ce53c401d61a4e9be9b0eb8fed54c8cf49d2c3"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::eq#5"
+kappa = "84e9245511182f4c0fd548af2242333ea2166dba711c7d6a44209298adba825f"
+at = "S=u32"
+embedded = "bae5cfa39138ce834c2c0b7f613e6f768d849ee323194bd4d41fceb6ddf4592a"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::eq#6"
+kappa = "7182913c19163be79333983fe2136f78e7c9c4f332c60d28de9000b2976e9927"
+at = "S=u32"
+embedded = "94966f552a2923f0e2c2faa6baf249a36ccc8f517a8a579931b0389ec483cd29"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::extend"
+kappa = "f3c5487da7686ff1f1bde7804992a4965f1dcd41ae18e108b6b997c08a021b1c"
+at = "S=u32, T=u32"
+embedded = "978f1a8a19ae610b5e7575faba8f599faf62961159c0f85b814c04c2965b5b51"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::extend#2"
+kappa = "80c1cc5d533224f8f9614e9891f79278f59f059fa111c5f49fa97b5ff137de7d"
+at = "S=u32, T=u32"
+embedded = "c812a1289789d7a9610b7e2b7226b470d34a885df52ec2a200007dac7181e6cc"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::extend#3"
+kappa = "d13d5847155c5b231d184b629dfa130f72736e262a8e70021f44d5b0adcdfcbc"
+at = "S=u32, T=u32"
+embedded = "55b069645ba0ff0f46c9ed7c3313f23920c084ef6170fde8c0ebfe0b3487612e"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::extend#4"
+kappa = "04ccb083cf012ff13f4f905f643581f98cc407c03ccbc3da50f603ad248f9d4d"
+at = "S=u32, T=u32"
+embedded = "73123c1d9cc2fb53fd226f8c8758b36c8c843152855a2b9b54a1b9b8c188593d"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::extend#5"
+kappa = "a304be3492ff1834cf86e8a7a199ca899c434628ed22488be2bd58c5299d4a62"
+at = "S=u32, T=u32"
+embedded = "5dc9f16fa80f76e1d8ce7cda3342bf770c2a3fdf451c6e6690597b970191931f"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::extend#6"
+kappa = "a7ce5e56926de5ffc81c172d26da22af9c66f170bce156b8844ddede0031a922"
+at = "S=u32, T=u32"
+embedded = "187b480a2183c24115c974a8247e96b1980e511f27788fdff9164bbc96ed7d27"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::extend#7"
+kappa = "5bd7f6f182bae6229133b5af7085907e3725044561a582478fe922bcb9068930"
+at = "S=u32, T=u32"
+embedded = "de89124faea9b7933e3d06ed0c460155d5615eb535ad09e1ecb46e71c965e021"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::fmt"
+kappa = "9e0a8f7532307e60b41aa475981140001d1a2080b5971e6af74da9bd94ff37aa"
+at = "S=u32"
+embedded = "d1612cc03364cf1384ed08e52f1fb171b11634262dce47c157de16360843088f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::fmt#2"
+kappa = "d2d20fc265fa430777ffea5f25eb1b043456da0ffcead0b927901f5d38e4b109"
+at = "S=u32"
+embedded = "99190bd36fd0d61cc3f15cb9eeaa2d6a4fcbdd8d817ff347d72ea592ea692fa1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::freeze"
+kappa = "5dd23233d63997d392344f8156c60934c4eba4cb2d99cbe3b6e128ba64d5c27b"
+at = "S=u32"
+embedded = "6d958fb6a53b4c9c53439233bb6b08f6d2bfd4a624a3072e200e03f6bf943b5a"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from"
+kappa = "85fa5e17fa72374dfabcb8f2b6057974ac426186cbf8d289acfa1494a4ac7394"
+at = "S=u32"
+embedded = "103776256a8a44e3139e8fdc556af13c2651f4bf947ed0b924172ad479192b49"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from#2"
+kappa = "1c3c5b6e79156ce466946b544accacc04bceed17fd623aeffafe8e8f4271fa09"
+at = "S=u32"
+embedded = "98feccaa812d77aeac03bc4b5347364a39c795b0d29f9cd259c46e5f808bccab"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from#3"
+kappa = "3c13664679a61c5691a40f404a5d010df1db49c1b8aadcd150a793b460a7f30c"
+at = "S=u32"
+embedded = "daa43c72f9e85946571c0fbc77a9c2abaeaf55c169bc65fc47ef1dc428467fd7"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from_inner"
+kappa = "e7f4d2bc8651054597a13746d5803d2e702fc28ebdff163944f5b1c8000f6f47"
+at = "S=u32"
+embedded = "7c7f6197375568a69e04eb1d309a5013cedaeb1340abbe5065b9ef453e83c0e1"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from_inner_unchecked"
+kappa = "a2fbe1ed12dfd62a8145ef278f719dec52188cee5c67946705b185d1096bd3a6"
+at = "S=u32"
+embedded = "6ba90c5dee8ac1f363f8fc04873b09e4b721c83d21f39da3db4bbfea8973a5b9"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from_iter"
+kappa = "a6ad581fd83a99982c60122fa0069da63796952ae4c353fa1e9d7055ccf6ffa9"
+at = "S=u32, T=u32"
+embedded = "8998cb79979e1412e1bdb19a4b75393627090bcade9b23d45343eef75f6dd27b"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from_iter#2"
+kappa = "7ac5c7c67affa7bf76bc63323074d9f3e2e654db5871e7b207412193ae96d52e"
+at = "S=u32, T=u32"
+embedded = "fe37d31897c58222e8876e24922ed2197918ee7c1cb1b59fc3775749c48b60ee"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from_iter#3"
+kappa = "c8c026bcfe53d721766cef0ee0046f446eea7e0062643e9257a5e165daf0a35f"
+at = "S=u32, T=u32"
+embedded = "637900fe7e2da664a79e07b600570a018cd7466fe54f219e8a21f9d496c78708"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from_iter#4"
+kappa = "0b2e9f81c99626594bf5c9c3b4d47569dcf739d40273b8fc85c51f6df07d0923"
+at = "S=u32, T=u32"
+embedded = "d9b4f2febc3f034ad6f8c7756c7de7451a5ca2410b29f76bc513069685ba59d3"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from_iter#5"
+kappa = "ec0303061ad9ec2d1ebcda7d39c1c46e0f6d646b79ff8ab96e25936e23469647"
+at = "S=u32, T=u32"
+embedded = "4e66927c06f3172a23f5a7a15d09fb806774e246ef3b406f83a8969a8373dc78"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::from_str"
+kappa = "53ed3cab1968895c90cae4f12f8e47bc8ab5d8553adeb1530cf8dca9115c1529"
+at = "S=u32"
+embedded = "e02a6b8dc5c844e78e9772be2b612148c81424cd8a4bdbf65ad51b75b8104a1f"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::hash"
+kappa = "4d7d6a0ebcaacbf1775927121ae501434e20e6a5d648fc315def8733e2be7be7"
+at = "H=u32, S=u32"
+embedded = "0260827bf688ec960b3b50ab6bf55437f97eee937fb9084af3172cfdb4fd1bc1"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::index"
+kappa = "a914bd7e12958de7dc3ee54ca6b39275629058e99230169581e9a20fa0efbc00"
+at = "I=u32, S=u32"
+embedded = "46bc41ebd5b62f3c7329f6cd9232d5ad4345cb1b158718e4e29052ab74e6dc7e"
+status = "residue"
+cause = "mir::Ty: <str as std::ops::Index<u32>>::Output"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::index_mut"
+kappa = "f4cf75fe6ae4e73b3d1d0b6316d04773102c4cd7134827d066a729a7410627dd"
+at = "I=u32, S=u32"
+embedded = "a2befdd9aaca9248a95fa542d71a74df295ec00606be7145a80496822a2d3917"
+status = "residue"
+cause = "mir::Ty: <str as std::ops::Index<u32>>::Output"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::inner"
+kappa = "383a3cdaa0965d77ae609d1642a92238c789098dcfc8141a338f7918232d6877"
+at = "S=u32"
+embedded = "88f03b7f3e6194ea31480157cd4b66764d8291b9e9ce74b11938b4f3428582a7"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::inner_mut"
+kappa = "396fa8647f1cad8fd5c319a79185e64c89626c7b940ea0d1f345d7cb819431f1"
+at = "S=u32"
+embedded = "1bc31083b8ff3f9b7fb93f4e522b29ca655fbb624fa61754c00b8558bf250330"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::into_inner"
+kappa = "7c082b68b3c911ae8cc071ec99b6788183d34317422ea2a0cb47dc7925b05155"
+at = "S=u32"
+embedded = "acc4c0a691d9d4c6e1503baa9d644287b29e8636529a38c3b02594d8b3060ea7"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::lines_bytes"
+kappa = "c845a90e0a4ca1e2b9ce7554dd56bd633d84c9bbb118f4597c01a8877da2bf2c"
+at = "S=u32"
+embedded = "5afb53362a76cb87c0e006ea156913891f13372568cfe106083449214d36f3e9"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::new"
+kappa = "643a93527d0515b06a46312734f921f71744c686cccbb4c3b7de8b06b4ff14b8"
+at = "S=u32"
+embedded = "03be5b0199655e8b7a44f383df8a0de6f9ae37a46998bc6f91cfeb28e2adcab0"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::partial_cmp"
+kappa = "1d852f16751e4213a94760dc3d1adfd155d4d8e9852282b57ea4d9f9a0748c6f"
+at = "S=u32"
+embedded = "d438c978b64138561b08ef6fe33acb6e20d975e8bb9cdccb4f8aaed12cfdd72b"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::partial_cmp#2"
+kappa = "0f65aae9d4c53a7abfbeff75c8080639b73f1d8111f51e3308a3f52ccfee5f0d"
+at = "S=u32"
+embedded = "b3be8fc13bd4072b4744e404d08e289d3a71b325f526d4ee7a66d0212eb611e4"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::partial_cmp#3"
+kappa = "7a0a821a67a2fff4f30c222a6152a9d52e1b207d5958ede501a17ef009fddfa9"
+at = "S=u32"
+embedded = "690aa1149dbba02d3ba25411d0a19919239ae6c0af7294db56e481d619baf851"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::partial_cmp#4"
+kappa = "2c7b6a2a8e3dec5a9a884090b1e643d8492214a7157c2a727a82d153f80e692a"
+at = "S=u32"
+embedded = "00d2e50be8a0b2cc81fb8baad5bee5af970c2f5c368c188ca81b5d432409f20e"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::partial_cmp#5"
+kappa = "dfd11f7bd2bcff8441f748f72cf9d50daf3ddefbb7daf3a125e919de0140a7cd"
+at = "S=u32"
+embedded = "9fbbcf948ba65d90662f595122ae92bbeb31923a3d4d65df3b1a6ea710d9681f"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::partial_cmp#6"
+kappa = "12fc4617c03e762b3acaa5775df394ee3addf692f31f01ad6dcd02d362665f39"
+at = "S=u32"
+embedded = "80813c5038c71d1a61696a34a9f6db2013b5a24a99ea0c0a3264478cbabce236"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::push"
+kappa = "7460711f2bb8fd5c9236fc68160fb39119a15bf94f84c6e405d5bbfc510d3362"
+at = "S=u32"
+embedded = "2133d6800fc8b03003b039f7682efde87b4a6fb66199251b8ff0cd2515b6f0c0"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::push_str"
+kappa = "a90fef3e2abaf71e0094b6f294f3b91a67bcdd81a1a8058feaae39d6175a7113"
+at = "S=u32"
+embedded = "c717844b74a421ebdf30d219bbf3cc90d032b5730cc418b863435ab25e207308"
+status = "residue"
+cause = "mir::Ty: StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::rsplit_bytes"
+kappa = "dcc1a8aaca4001fce980799aca249882b4222575b736c5e8642b6432bbae8081"
+at = "S=u32"
+embedded = "f2e27d969603872508e3e1a47e9172021ec3f863d01963b61b761c66ce84d190"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::rsplitn_bytes"
+kappa = "73fe685b5a9475fc08ad55b52a74443a0ad8463bce641c5cee3a5f9557130f24"
+at = "S=u32"
+embedded = "dc458ae0c0d6061e2e83eeb3d62cd99b34c31b5e9047d6778f6772da84747139"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::split_ascii_whitespace_bytes"
+kappa = "fde479be9012e34aba003414d4396bc19d97a9b1c17348dcf1a0c4101a6263e1"
+at = "S=u32"
+embedded = "5f9a8ef9f0ac71bac79e771828832c05fbbb01be28f86e68a33a7831865d872e"
+status = "residue"
+cause = "mir::Ty: string::BytesIter<u32, {closure@src/string/mod.rs:389:50: 389:53}>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::split_at_bytes"
+kappa = "e9a03aa6ed3b7e1a55c3d9097e37900752ddbfdfd33544d27a44c2b396ab49d6"
+at = "S=u32"
+embedded = "b470c86dea05ba3e361746e6ae6d998c74a62453cd5222b0c1d3fa2565cc6522"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::split_bytes"
+kappa = "2b0e2b944d630e5842181807667f232cce56f617a36b892b6ccf76dd84f47d87"
+at = "S=u32"
+embedded = "c7eb91d5fea97f5a711ac421d504958950a4c8b41a90d53d34499ab0565030d7"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::split_whitespace_bytes"
+kappa = "48c9796e93742de75bea66e9ff2b057edba5288d9ead47d1dad74e6611859a7e"
+at = "S=u32"
+embedded = "cd591c775b33b84feea0cd1320d2236ca5814e6e3101770d984930ef22c45e07"
+status = "residue"
+cause = "mir::Ty: string::BytesIter<u32, {closure@src/string/mod.rs:378:50: 378:53}>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::splitn_bytes"
+kappa = "2cf6ff392a08445c5b2957f669ce949f7039b740a3ec8f720c6841cfdb8ab623"
+at = "S=u32"
+embedded = "98febd49b0d23f8902ccdb63804fce5df38297f4ad1065a32a2dad8024b9cf17"
+status = "residue"
+cause = "mir::Ty: string::StrInner<u32>"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::try_from"
+kappa = "9a13878144bb7264ebf0927fe2143e32f68c0b4c5f4db9b0c5f89b3d262d67b6"
+embedded = "8042db2cea43f16e13081e43e9e3d6cb4e4fb7705eba3f96ba4f20aff6d708c1"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::try_from#2"
+kappa = "d554a265fe9e73a05b8ac536c083c44a5dd03a341df91ebfcd9b4dc2aec29f2b"
+embedded = "3adca7adcebbbc8211fc130c6522086ee3e5840aead11ba89962a1cf79bb4436"
+status = "residue"
+cause = "mir::Ty: bytes::BytesMut"
+
+[[fn]]
+path = "bytes-utils::string::StrInner::write_str"
+kappa = "40ac98600513b39016d55b6d4cd6b79b6c5d06db2ee0d348bfbf58d5fd755e07"
+at = "S=u32"
+embedded = "a9b55dbb31ece26ffe92c457e3335c461b4f0160a552580cf095766ee8079764"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bytes-utils::string::StrMut::split_built"
+kappa = "ac5931d96530b22e7393d209f1db1ac1422a4a0f4c869651d3a89674bbdb4a29"
+embedded = "a9a427d84e051b113bf1f79c498ae7b3a497356cd0a9b32e33a4ec8ed299b13a"
+status = "residue"
+cause = "mir::Ty: bytes::BytesMut"
+
+[[fn]]
+path = "bytes-utils::string::Utf8Error::fmt"
+kappa = "b082630f0d05dcecba7438da0f59d4295cbd5d5c5b91b4ea03f43fd7e767461f"
+embedded = "614631712dc2a52beae36aa4231e638dea7004b566ead018641308d470db6d69"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "bytes-utils::string::Utf8Error::into_inner"
+kappa = "0172e604f5f9a61da4af03d991b0bae9d281aca96d652d106e64d6af23e675d0"
+at = "S=u32"
+embedded = "16663f975a3de602c37f0a94a4ddb6887f041a8a419ada9cd488b968482ddb73"
+status = "residue"
+cause = "mir::Ty: string::Utf8Error<u32>"
+
+[[fn]]
+path = "bytes-utils::string::Utf8Error::utf8_error"
+kappa = "b5788b89a19378ff507cb1f73dae77a9acf458d03dd91ba9ab3a4d328fa402a6"
+embedded = "9654bbc48df3625cd1fb2379005d3d7fe8ec55de63d8928b1657844b1184e4f1"
+status = "residue"
+cause = "mir::Ty: std::str::Utf8Error"
+

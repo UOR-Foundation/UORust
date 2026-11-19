@@ -1,0 +1,66 @@
+[[fn]]
+path = "lexical-parse-float::RawFloat::INFINITE_POWER"
+kappa = "d5bb2a1ad148382be1008529fb647a3840190f4b3ea9157e960087daac82b09e"
+embedded = "7094964be1c6b77bedc391502f3cb3ccb9ae8196d67258d3847681696cac1d30"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Self as lexical_util::num::Float>::MAX_EXPONENT"
+
+[[fn]]
+path = "lexical-parse-float::RawFloat::MAX_MANTISSA_FAST_PATH"
+kappa = "f9a4bb6860867c6536a388139804baf3b774eb901bd3eb98be52c34ca8ebd23a"
+embedded = "f578848166979302a644e5ec472b2ce725f147fcb278c5f8744b9b4c24c4c6b8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Self as lexical_util::num::Float>::MANTISSA_SIZE"
+
+[[fn]]
+path = "lexical-parse-float::RawFloat::int_pow_fast_path"
+kappa = "c3f0bff519978bf64c382782826fc1269a89ec59fe7e7cd8a2facd288af548e6"
+embedded = "52f7fccb0c4ad39f2bb971448bb1eb625ada99cd42d53e2756cb0a1612d15a18"
+status = "translated"
+digest = "727ad7478d01febdbb4e5c38cb1b52cf1f868769b6537beca1dba0a625fe2cd1"
+
+[[fn]]
+path = "lexical-parse-float::RawFloat::max_exponent_disguised_fast_path"
+kappa = "bfa0312664df7e8596591e548eff3f326022ea1bb247e8fb542068305e45283e"
+embedded = "1f774341824e9452110e269fc336c5040d37af73283faac8efe16f582fc25c73"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Self as RawFloat>::max_exponent_fast_path"
+
+[[fn]]
+path = "lexical-parse-float::RawFloat::max_exponent_fast_path"
+kappa = "1ad4f3bef6c31cd404fa9aa022c94b2aa7d3daeab48339de7715e6ac32f1faaa"
+embedded = "9dae82cbaaa2deaccf3703d3460f5247ecd3a42f2f2c4cc1ca8504a8704320ff"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Self as ExactFloat>::exponent_limit"
+
+[[fn]]
+path = "lexical-parse-float::RawFloat::min_exponent_fast_path"
+kappa = "3a9bc5e471e4cd16ae6eea8982afc16e73c55f3d84350f31bb41635cddf3b361"
+embedded = "5f12628de68d1f1d92fd845d7d47f4cce29cb67b0a242fcdfe0e5e39afcd3979"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Self as ExactFloat>::exponent_limit"
+
+[[fn]]
+path = "lexical-parse-float::extended_to_float"
+kappa = "cc79d8b46e240844881dd28824c7d866aae45bebf2de50554d4ee9c441615e77"
+at = "F=u32"
+embedded = "12bad9722af884c9f4a2dc01aba3d62457cbecc3b9ee571d57305dca182f441d"
+status = "residue"
+cause = "mir::Ty: ExtendedFloat<u64>"
+
+[[fn]]
+path = "lexical-parse-float::float::f32::pow_fast_path"
+kappa = "c53ee528498759662a3381e4f28ac93c1d089906836f1feae5b07010cec3daac"
+differential = 3
+embedded = "3fed86e30b1e45d40f0e56dd90261df1869e88f7b69c8e6f166fcb0a15f6ec4d"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-parse-float::float::f64::pow_fast_path"
+kappa = "a138a9d9b69849fb1959dcc3a87c2b59dc23b11918569b492728d6a982c7caeb"
+differential = 3
+embedded = "ea4df57443c3d5688263243f92251e292e6e983ff462127d673cc1884d62ce83"
+status = "residue"
+cause = "mir::Ty: f64"
+

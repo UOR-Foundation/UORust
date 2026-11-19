@@ -1,0 +1,123 @@
+[[fn]]
+path = "prometheus::make_label_pairs"
+kappa = "e271e1c17d1d2fca0eb58f23c780ad4c3e61e5a3482a44f63ce71bd8124ec5e8"
+at = "V=u32"
+embedded = "e0e1f081223e806fa190cc4228f8a451c77d795f1a92e8fabd01c6d0067566fd"
+status = "residue"
+cause = "mir::Ty: proto::LabelPair"
+
+[[fn]]
+path = "prometheus::value::<impl at src/value.rs:11:10: 11:15>::fmt"
+kappa = "fa9bb3ee3fa6e737f81a10903ac35dee2e378778b511023d84cee26a73c3944d"
+embedded = "6f07dc6dc8ae833f41a6bac1331ec5200b6c78caf917775b57dacbdc684252cf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "prometheus::value::<impl at src/value.rs:11:23: 11:28>::clone"
+kappa = "4711f17b83393ece4acb5b12b7a5fa14cc797da9810af0ce7e144386328661c4"
+embedded = "889d5a710558014ab20cdd8e5b4883ba527934008cf900bcd782e04b45be7e7d"
+status = "residue"
+cause = "mir::Ty: value::ValueType"
+
+[[fn]]
+path = "prometheus::value::<impl at src/value.rs:11:30: 11:32>::assert_fields_are_eq"
+kappa = "fbc6070beefd2a9407856153c1fee49fe01d7e5672629fb5ffd824ca8e824cb5"
+embedded = "483c6cd9b8def438698ade5cc0bd8d8b06bc03d1aff4621ffc96996adb8c8a7b"
+status = "residue"
+cause = "mir::Ty: ValueType"
+
+[[fn]]
+path = "prometheus::value::<impl at src/value.rs:11:34: 11:43>::eq"
+kappa = "4b67fab3ef3450bde49503ebebb99d85691e77c165da566c361f841601481226"
+embedded = "4483b55598303008b57ab7776f25f8a5065681f118d791644afea038c6002150"
+status = "residue"
+cause = "mir::Ty: ValueType"
+
+[[fn]]
+path = "prometheus::value::<impl at src/value.rs:31:10: 31:15>::fmt"
+kappa = "6047a288423fd997a255e75ee2d606ef29a63d0a6153a136fcf4379fc4657465"
+at = "P=u32"
+embedded = "bbd61352ea4148a4e61954c14d417f8b354e999c049f9f5799c56d256e9da2b9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "prometheus::value::Value::collect"
+kappa = "c66c25f5524ce4e2aee36bc7eb6f6bb939a660df7343b0b7f763bdc250a056e8"
+at = "P=u32"
+embedded = "f323bff414fe098817dc11baf4578929037a81a06879976de009a92e6dc7483c"
+status = "residue"
+cause = "mir::Ty: proto::MetricFamily"
+
+[[fn]]
+path = "prometheus::value::Value::dec"
+kappa = "2452face79e1421d3f91aa8ecf3d9fee4cbb291a8df56e0c805c284d23dfba3a"
+at = "P=u32"
+embedded = "01e4e2ee2a52007dcea4f07bbafe2af3e19b4a10fa4f3cc74a25185cfdb691ff"
+status = "residue"
+cause = "mir::Ty: value::Value<u32>"
+
+[[fn]]
+path = "prometheus::value::Value::dec_by"
+kappa = "5fbb4a86cc0ddb4454535f815858fe7f480e9d31290f5d82f2c9c8a2c312a1f1"
+at = "P=u32"
+embedded = "aa4d43f95bea52aeb407b1f7af28ba3d90b09be8d6b0ee02e101ef5cf36577ef"
+status = "residue"
+cause = "mir::Ty: value::Value<u32>"
+
+[[fn]]
+path = "prometheus::value::Value::get"
+kappa = "39f0be4fcce770338be39d95e0695f5e7e47e451a77ea302bf4dbad8a50a4017"
+at = "P=u32"
+embedded = "18cf48291d419b8d20999d21cfa7563e0dfa6941ba6f2423751dc6ec0e415606"
+status = "residue"
+cause = "mir::Ty: <u32 as atomic64::Atomic>::T"
+
+[[fn]]
+path = "prometheus::value::Value::inc"
+kappa = "c229316576322782b556e3b143f489d35548f800d64852befa85158154da0e8f"
+at = "P=u32"
+embedded = "026b542b51c07aa7d7a6f03df888d93d4e1d7c7141f4efde79e48745b1cd2216"
+status = "residue"
+cause = "mir::Ty: value::Value<u32>"
+
+[[fn]]
+path = "prometheus::value::Value::inc_by"
+kappa = "33240741b02891aac41d281c0bd10b828b19bd02c45e9748c1d0ab0365427916"
+at = "P=u32"
+embedded = "7e24681ad236c801e3fb4838302b97356447a1dba58c6049c3bf86332674e2e3"
+status = "residue"
+cause = "mir::Ty: value::Value<u32>"
+
+[[fn]]
+path = "prometheus::value::Value::metric"
+kappa = "150d1c74dc0c480194ff18ac715f9f67314ad65ca09dcb03095d941603c16a07"
+at = "P=u32"
+embedded = "26de037d38b345711e035def6cfa7b59771fcb04165214b89e7dd85d9d3a1ab4"
+status = "residue"
+cause = "mir::Ty: proto::Metric"
+
+[[fn]]
+path = "prometheus::value::Value::new"
+kappa = "68510e532631cfc5e0f7f46d6447ef4c8f401aa4d401cd292b2c25fca7544e66"
+at = "D=u32, P=u32, V=u32"
+embedded = "dc05d10ac4fca45431baa9f4aec155a56dfcd44cb08d1310603b79384347e3d6"
+status = "residue"
+cause = "mir::Ty: value::Value<u32>"
+
+[[fn]]
+path = "prometheus::value::Value::set"
+kappa = "b1f9612a4686c3243f9080c3ce60bcaaa6a1c89e87e39292680da1372bed1b80"
+at = "P=u32"
+embedded = "2414e4dd08878bf1c3f0598f9917811a679835dda2de0437c772af9768c89fbd"
+status = "residue"
+cause = "mir::Ty: value::Value<u32>"
+
+[[fn]]
+path = "prometheus::value::ValueType::metric_type"
+kappa = "f3c5f28afa338fbf3b874784c4e96493109f07c2fa76824101b9e74866105f11"
+embedded = "3c5a413561d7a477a1aa3f8da29e747a19e8303c67d464aab0e40b8a35526c82"
+status = "residue"
+cause = "mir::Ty: proto::MetricType"
+

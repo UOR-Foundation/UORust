@@ -1,0 +1,106 @@
+[[fn]]
+path = "zune-jpeg::B_AVX_COEF"
+kappa = "a98a59abc1dec5e0d58aff14a5c03b7334ea1e047d2e4cb3974170224dcf85f6"
+embedded = "118d1865783d5913f74bb4ba368ded7da67972c0ee66092a6688ef2be2050eaa"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item color_convert::scalar::CB_CF"
+
+[[fn]]
+path = "zune-jpeg::G_COEF_AVX_COEF"
+kappa = "0aa30f48ddd19dd37744b449097827742edacc0c0f647856f2b0a151c0de2e9a"
+embedded = "6de93435f1225e0a6d085c66f6a1eea0852f778ee16e40f5870fdedd3980ce03"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item color_convert::scalar::C_G_CR_COEF_1"
+
+[[fn]]
+path = "zune-jpeg::R_AVX_COEF"
+kappa = "5461a6bf72ecd57a602b41169ff26c500f4e3d919199e448a949229c393ad946"
+embedded = "449e634e3af162d8bb64e0e38fb3c12ae8f190b73eea9dd0945f61b289681f12"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item color_convert::scalar::CR_CF"
+
+[[fn]]
+path = "zune-jpeg::YUV_RND"
+kappa = "6c614aa8bda93b90fafae2dbf9f45ae11bf231b25ca5b4ee2686b53249f8a0f1"
+embedded = "1266ee7080a81ee16647b04d300e4c440d9b5cc2d648035470ccb061c6da3b8f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item color_convert::scalar::YUV_PREC"
+
+[[fn]]
+path = "zune-jpeg::avx::shuffle"
+kappa = "412ca03cfe07db794f34711a942f5627bf79d026b3f9dd352452629690f0cad8"
+differential = 6
+embedded = "1d0704aaf9fd91bece4fca546beebb3df9bf9e668e7885b527c541bf652d8783"
+status = "translated"
+digest = "31d4ec4037d74e539c2fd9ceaf6ea069ea9bd7dbc927ad52a7d751a3b29b2708"
+
+[[fn]]
+path = "zune-jpeg::choose_ycbcr_to_rgb_convert_func"
+kappa = "431180bf17e10f8975e97f2d7c25ad280d451b2c2cdff7c9cddd5c2ab584384f"
+embedded = "75bc14461f5d507441b74039e07c07038c4218afefbb72506480221af0120be3"
+status = "residue"
+cause = "mir::Ty: for<'a, 'b, 'c, 'd, 'e> fn(&'a [i16; 16], &'b [i16; 16], &'c [i16; 16], &'d mut [u8], &'e mut usize)"
+
+[[fn]]
+path = "zune-jpeg::color_convert::scalar::clamp"
+kappa = "4bff0c39bcc48d09fb62e1b01530e41f989d71aaa61e417cd1469ccca4864bfb"
+embedded = "f6b56dd30bb0c717929b4c8e506f8b4277861fdf93ca85891b52b18215dcc530"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <i32 as Ord>::clamp"
+
+[[fn]]
+path = "zune-jpeg::ycbcr_to_grayscale"
+kappa = "43eead1c510b5cfb55c441431e8d43fb8dcde202c9899bfbd966c3bf217ea969"
+embedded = "db27daa9e20e280049c5f7a6b78a2a73ce83a81a7e71bdf43b27440b7e519e44"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zune-jpeg::ycbcr_to_rgb_avx2"
+kappa = "127033fae552ced8493e2259ab2a829bfff6fa8ea1c57cac794e421bbf90c835"
+embedded = "88dd433ea425502477d11e9d3b9bd542f800d47e91cbecdef77b0428c380573a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: color_convert::avx::ycbcr_to_rgb_avx2_1: zune-jpeg's MIR stops at type outside the lift: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zune-jpeg::ycbcr_to_rgb_avx2_1"
+kappa = "f6e4a5a52f2dcd1162ffff3bc0aa026a2a1f7c5c1c2823b475d4ba03b376ebd8"
+embedded = "8c468ddf060dfe649c42da2b5109db980e50a6b33990471f0f804803b1e8c919"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zune-jpeg::ycbcr_to_rgb_baseline_no_clamp"
+kappa = "26a54b08cd70142331246f1f94c8921073bb2d3666999caebbb1924ec9807c89"
+embedded = "8578831238378ada9647cbe715e5e281f6097feee8a8d5f4e2da7fe96a7df4d6"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zune-jpeg::ycbcr_to_rgb_inner_16_scalar"
+kappa = "80bb0bf5473dd353e92e1b891fa3445644a5256b2f3d11d938af09aa39ae8c2b"
+embedded = "477cf1752e9fcc6776c5c354ad13f0257080d8a22162f9dbf9eb4b0b33c56853"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::split_at_mut"
+
+[[fn]]
+path = "zune-jpeg::ycbcr_to_rgba_avx2"
+kappa = "2f294ce4ddfbe52413b927717fddd3047e97d7d3d7b931bfae35b66e110670fe"
+embedded = "4ae2e120406c84b6c7ab7fa26a6f968e3198476d42dbd563f3cdd6c76c0ba928"
+status = "residue"
+cause = "mir::TerminatorKind::Call: color_convert::avx::ycbcr_to_rgba_unsafe: zune-jpeg's MIR stops at type outside the lift: std::ops::Range<usize>"
+
+[[fn]]
+path = "zune-jpeg::ycbcr_to_rgba_inner_16_scalar"
+kappa = "5e94e02d0665b13ac88f31041d052a58bde582f48439374876b8ac1fabba9c4d"
+embedded = "ab582fbea3c0a75c4fd8948f206bc5660e31caa16ef69065472f3c24aec8310d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::split_at_mut"
+
+[[fn]]
+path = "zune-jpeg::ycbcr_to_rgba_unsafe"
+kappa = "f9f752b0f420a8da47423358ecda2e907a54a9425b3a52afbecf92ca1086adc8"
+embedded = "cea1ef71ab6d2995745e7cc87b98cd3b3fbf56bd3bb29692e52fbe7119fcce40"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+

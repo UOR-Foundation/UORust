@@ -1,0 +1,52 @@
+[[fn]]
+path = "sha-1::<impl at src/lib.rs:76:10: 76:15>::clone"
+kappa = "5264df1c115c933462e5e382ed24071649a492cf03e329f1ff6ade4538fa40dd"
+at = "Sha1Core=u32"
+embedded = "37048003138ecfbe14ac83004f3d72ef8c15bc60615d266ca97276d6fd54e736"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "sha-1::Sha1Core::default"
+kappa = "4c558ce0b56fbcbaae8e2c32a1c82f6ac635706f0300a92ddb3dff2a343c086a"
+at = "Sha1Core=u32"
+embedded = "b8a0312c7c7082c8343ea7a22fb2f2faf7f76d7230822d1955830e888d9f836a"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "sha-1::Sha1Core::finalize_fixed_core"
+kappa = "75e7eac9616a5076d36b7f54b58cdede02676eda7c07805a1a0c8a7cb4ccab0a"
+embedded = "bb10afa4b52682f68ead85215a259dcf042cf9020a9aa166eb828e661d84b6a9"
+status = "residue"
+cause = "mir::Ty: Sha1Core"
+
+[[fn]]
+path = "sha-1::Sha1Core::fmt"
+kappa = "f504c13253f491f99bb69d2ab9e152b10e84cd01259c68e45886533814dc380d"
+embedded = "fb2d9a2cd65d088c3a75bcc9119727d9dbc792203de41902c3d06486a4b0e240"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "sha-1::Sha1Core::reset"
+kappa = "0cd2a14544d7439009d7a239318c7c10d3c2c5ffe7dac5fc688bd3fcf277b024"
+at = "Sha1Core=u32"
+embedded = "b96b3c54618862bb653e0b6082b90df3c81a48229df219d6aa143a44e005d950"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "sha-1::Sha1Core::update_blocks"
+kappa = "f5c2f5f01a8184ba9af705e80e50bacb5f421cf64732d76d3d2665e4a5a311e0"
+embedded = "1b46912d9a65e2417cdb62c52ca44279dc216b4ccf233b6c174a749d448ea934"
+status = "residue"
+cause = "mir::Ty: Sha1Core"
+
+[[fn]]
+path = "sha-1::Sha1Core::write_alg_name"
+kappa = "ab1e2cf693f074fd6ef09360dea48d98891597244af29762e837a5882b985d69"
+embedded = "9a341e72c4e0b18e18e77c9bf5f544ac1d7a36b83a30e2fa672f7ff162a3091f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+

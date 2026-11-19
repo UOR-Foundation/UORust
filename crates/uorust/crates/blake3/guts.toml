@@ -1,0 +1,56 @@
+[[fn]]
+path = "blake3::guts::<impl at src/guts.rs:5:10: 5:15>::clone"
+kappa = "7e3ac5b50439d474f01ade63912d21bbd5016f5b45a09851fc8d08858964f7ee"
+at = "ChunkState=u32"
+embedded = "a6fca333da2c0643487d991ef397e13659451b236682e852a76d5598b304bd77"
+status = "residue"
+cause = "mir::Ty: guts::ChunkState"
+
+[[fn]]
+path = "blake3::guts::<impl at src/guts.rs:5:17: 5:22>::fmt"
+kappa = "abca9d8d5321461461269c34ed55cb674d4897ec59617f103cc8b8984c5fa602"
+at = "ChunkState=u32"
+embedded = "67a61a03fa5f368e01f72d9ecae7e743649680ae11b9d740aac975bd6d1a3057"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blake3::guts::ChunkState::finalize"
+kappa = "0607da0f35dc7867b60cc6e5b0a903e86dd7d5d62a456a7d24dbf505e4761d20"
+at = "ChunkState=u32, Hash=u32, Output=u32"
+embedded = "751b58b1a8f0ace4170ee659cf7599fa057dd7e6a6544a580c99c8451aa27779"
+status = "residue"
+cause = "mir::Ty: guts::ChunkState"
+
+[[fn]]
+path = "blake3::guts::ChunkState::len"
+kappa = "977eeaf19ab89ca6f53b913aa93864cc0f6e4ff3d3a73bf51d581478cfe2a1fc"
+at = "ChunkState=u32"
+embedded = "8a1a07ff4d572dddc404ccb66b52d327dfdd4ca8c4d1ed972ec57b88007dcd18"
+status = "residue"
+cause = "mir::Ty: guts::ChunkState"
+
+[[fn]]
+path = "blake3::guts::ChunkState::new"
+kappa = "9da12ea18e50970403eadbaf26da89d10c64e20bed88d066b70958ebfde16e47"
+at = "ChunkState=u32"
+embedded = "1f86f461a83346ac7d304caf3d42cf231799860a9baaced76601f84e43733e23"
+status = "residue"
+cause = "mir::Ty: guts::ChunkState"
+
+[[fn]]
+path = "blake3::guts::ChunkState::update"
+kappa = "bd84b66c4114f1fdbeae46be8d78d4f68b67c01fb80338c1a55ffdea18e3bede"
+at = "ChunkState=u32"
+embedded = "88e03dfb2ca5e203d58bd43716d0a1dff662f8c6cb6582308f965edef7adccd5"
+status = "residue"
+cause = "mir::Ty: guts::ChunkState"
+
+[[fn]]
+path = "blake3::parent_cv"
+kappa = "b1530860d461094f2bbcde2943442e79570b2dc2169dea84e75d65daca3a4e89"
+at = "Hash=u32, Output=u32"
+embedded = "6468bad5866bfe7b371f86868c8067a533dc8c5418c38e8cc8a747635235a6aa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hash::as_bytes: blake3's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+

@@ -1,0 +1,72 @@
+[[fn]]
+path = "base64-simd::TABLE"
+kappa = "52aa6bda6cfebb1fb20d8ebbb5275d919a82d9155eb87ba166663fb7a6dc3f60"
+embedded = "76873f4144383e3fd46ac790e4ea257af1f94f4f8c036d546cf90bf2520c201a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::is_ascii_whitespace"
+
+[[fn]]
+path = "base64-simd::ascii::find_non_ascii_whitespace"
+kappa = "cc0e328cdfbb702189deb3969f19f5db2bbaed98fccbad68e7a47b898ec72668"
+embedded = "5d572052a519c6511b978a57765a39130b951b393e166b386702d2c9cf5041f7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice_parts"
+
+[[fn]]
+path = "base64-simd::ascii::remove_ascii_whitespace_fallback"
+kappa = "318ffa8d175233b14f9a16ef42616af74e4ad38fbb6e2bd7c251fe2944e362c3"
+embedded = "7522925cf7c1d7638988a95249b0062ff21192efd930f5ffe10031d9ea3be3eb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const u8>::add"
+
+[[fn]]
+path = "base64-simd::ascii::remove_ascii_whitespace_inplace"
+kappa = "2a7850d4b6aa87b7849c4d9c5f0481c6f0e0797d99f5205a7197dc534b57610b"
+embedded = "acd3b90b7b38a918b2953f05932250e68eee6339223d1256622bdc52be5f1b33"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ascii::find_non_ascii_whitespace: base64-simd's MIR stops at mir::TerminatorKind::Call: slice_parts"
+
+[[fn]]
+path = "base64-simd::find_non_ascii_whitespace_fallback"
+kappa = "8c58309de0b2a1098ee31183e46603113b14b39da03874722c8d498400d4ba22"
+embedded = "b674a3e994a76ec543b74f425ac7b9e9d6451b6c570fd580f838e3e34c25b614"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ascii::find_non_ascii_whitespace_short: base64-simd's MIR stops at mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const u8>::add"
+
+[[fn]]
+path = "base64-simd::find_non_ascii_whitespace_short"
+kappa = "ee357fe42ae2b210c6d4c2db0b5a0203694c2e982558ac78a4f03254b8fdb502"
+embedded = "e0d0fab0e4391d0dc0de202ecc8ab5960b5090d56c1334bc2249d14d2158fec4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const u8>::add"
+
+[[fn]]
+path = "base64-simd::find_non_ascii_whitespace_simd"
+kappa = "bbc63a0e7bac8b29ee77ec6754e7b1a1336085e856727dcf423efe0221f84e58"
+at = "S=u32"
+embedded = "796b7046b554134446aae3044e7dcf0d150004b238dcc5d6f0266ece58fd0a4f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item ascii::find_non_ascii_whitespace_simd::MatchesISA::<u32>::VALUE"
+
+[[fn]]
+path = "base64-simd::find_non_ascii_whitespace_simd::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/vsimd-0.8.0/src/isa.rs:70:9: 70:46>::VALUE"
+kappa = "4c854ae5450876d59cbe0108882432a1effcbe0f6e646e1fcb6c770c4123d92b"
+embedded = "a49e737510edd5850287d8dcc8180c99b9f216ff4a6f7ca2e2f8fb140db8d67f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::isa::matches_isa_impl"
+
+[[fn]]
+path = "base64-simd::has_ascii_whitespace"
+kappa = "c8e123470c2a636beb878e8facc40010df5aad6d054accf1341d4c6c1585d5c8"
+at = "S=u32, V=u32"
+embedded = "e338cdbcc002e0199e1b4840019b4913e55d45780d620e1b79569fcd39ff684d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Scalable, which u32 does not implement in core"
+
+[[fn]]
+path = "base64-simd::lookup_ascii_whitespace"
+kappa = "845a28dffe266ba92c7f2a63d73cb94f9a4ef7163b5b0b14193600bb9c20078c"
+embedded = "204dbbfb8d528e59c174043c42c7ae4a84b348248f9fe411d64b70e91634bb24"
+status = "residue"
+cause = "mir::Operand::Constant: ascii::lookup_ascii_whitespace::TABLE: mir::TerminatorKind::Call: core::num::<impl u8>::is_ascii_whitespace"
+

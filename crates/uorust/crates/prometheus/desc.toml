@@ -1,0 +1,57 @@
+[[fn]]
+path = "prometheus::desc::<impl at src/desc.rs:60:10: 60:15>::clone"
+kappa = "ffc58b1f9a34c4a37ec7b33b8ca3ccac257c6a68c42fa9538c44a5e59d1ea82b"
+embedded = "22d6ee18d9e4a34cf14d9912e37298f1531c8090f979c75079493243f8011fb0"
+status = "residue"
+cause = "mir::Ty: desc::Desc"
+
+[[fn]]
+path = "prometheus::desc::<impl at src/desc.rs:60:17: 60:22>::fmt"
+kappa = "d07c1d11832b158c09fd2ee73196f3e15e7efa0620ff6e7f3edc19ae9dd3ed1d"
+embedded = "969bdcbd6fcfe3ad312c7c77b1b29357a9a2ea1d4e7c3559efb619e0a4f7ad50"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "prometheus::desc::Desc::new"
+kappa = "af473fce5d4b7bc796ecf1fb76d6ed8a55aa4910d03c868c830058f4842ded68"
+embedded = "00fade4602e22717e1eeca18eb6ba25f2ad7797039f5b57c93542e7b14d3ebc9"
+status = "residue"
+cause = "mir::Ty: desc::Desc"
+
+[[fn]]
+path = "prometheus::is_valid_ident"
+kappa = "33029f48ed5451688f67f41785493ea8c721832e6c3f6ddee276cfc597cdeba2"
+at = "F=u32"
+embedded = "0e50ccd1333097e68a33e6e4a6e3fa1f10283fac1911fe3831db57213d67291a"
+status = "residue"
+cause = "mir::Ty: std::str::Chars<'_>"
+
+[[fn]]
+path = "prometheus::is_valid_label_name"
+kappa = "46ca4325451e587fe887f2227d74b9a37e98a5bc0663ad8db838aa84a4d37d47"
+embedded = "7b8d5c63177508b7971cb2fa1d670d21be3bd34c3b5f68c1d5c5a7b24a51f765"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item matches_charset_without_colon"
+
+[[fn]]
+path = "prometheus::is_valid_metric_name"
+kappa = "5317231ef0a50ad51ed52a9813de68f03df97474c7007def2140b50ca7fd872e"
+embedded = "61a98496d70c163d75a67e3c4b39bf3a8ffc7304d0d45a215144f6a30dfaca41"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item matches_charset_with_colon"
+
+[[fn]]
+path = "prometheus::matches_charset_with_colon"
+kappa = "1bf6c7c9be64584f3dde78dda99b0fb72d4a1b6bba19224393d25733a7ffb23c"
+embedded = "3e9fbdf9e0a004ad42157c2b7be28304edd5cd88aa9283a09995816af36f15bc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: desc::matches_charset_without_colon: prometheus's MIR stops at mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii_alphabetic"
+
+[[fn]]
+path = "prometheus::matches_charset_without_colon"
+kappa = "ef1d0f62ac123516008e38523dbbcefecdedad813f9be179fdbc56f3715fedca"
+embedded = "08efad64552ffa6d1c3c3287c81f782a40485b8d111d9700449c94af2a100c55"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii_alphabetic"
+

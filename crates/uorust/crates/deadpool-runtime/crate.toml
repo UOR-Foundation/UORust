@@ -1,0 +1,67 @@
+[[fn]]
+path = "deadpool-runtime::<impl at src/lib.rs:145:10: 145:15>::fmt"
+kappa = "f074897d7576d38789835df3f1cf1391592c0bbdeb3e72168130142a38f812eb"
+embedded = "fa5df411bc12623289040ee7f60397da6d25250d6ea57d0e41c6b153ed6822fa"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool-runtime::<impl at src/lib.rs:27:10: 27:15>::clone"
+kappa = "696df1b4414dcae053e81b865673477179cf1ce6f8abdf59a3c6371aa04c3861"
+at = "Runtime=u32"
+embedded = "9372456183932ec2d731a4e8341015a8b5bae14bad5fc35af7b38131f6096c73"
+status = "translated"
+digest = "2c00e2e9beddb95b872ce2c9667fabf06edbb2b534e34b83428f84f7c8710e14"
+
+[[fn]]
+path = "deadpool-runtime::<impl at src/lib.rs:27:23: 27:28>::fmt"
+kappa = "8130bdbde36e43bfc768ddfcc52e124790a0145018b46f6850ee5f90b1ae1b5b"
+embedded = "59fc0ad1f22da9672cf1e5a00a87bdd3f356441a8e02eb337e23eeb9a52dcc00"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool-runtime::<impl at src/lib.rs:27:30: 27:32>::assert_fields_are_eq"
+kappa = "b6037c85f82b6a15febe3544f601614301c291b43650b28162761e59899206e6"
+embedded = "d1d6b29abee095811f094377e7ce5e5a831a01055998765f15a85f5502c5d0b2"
+status = "residue"
+cause = "mir::Ty: Runtime"
+
+[[fn]]
+path = "deadpool-runtime::<impl at src/lib.rs:27:34: 27:43>::eq"
+kappa = "0c12c99a1ce6b9e3ac073b1663bd38800dd368e9579d96ec07d9cc87333ec0a9"
+embedded = "3eb69d60419bbd72fed7df6659f27b2b729e9f5ef6742c864e090ae0406ce3bc"
+status = "residue"
+cause = "mir::Ty: Runtime"
+
+[[fn]]
+path = "deadpool-runtime::SpawnBlockingError::fmt"
+kappa = "5f48bd972146fa4e21f457e804a643de932020a7e0d83f20cb000209f059bf66"
+embedded = "2b891aabd379cf0acb20690f3f3ad618e4165717226b8e791255677608a7bd4c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "deadpool-runtime::spawn_blocking"
+kappa = "0869e56882fcb08d8299a401c4e0709ac39f25d11e9fd047e1b60b1a72094ea8"
+at = "F=u32, R=u32"
+embedded = "120ce0eae06bf8ecc91eae63d4325f6f3569c6f92f81b353f0174b915e430308"
+status = "residue"
+cause = "mir::Ty: {async fn body of spawn_blocking<u32, u32>()}"
+
+[[fn]]
+path = "deadpool-runtime::spawn_blocking_background"
+kappa = "4da346b77164169c5ee74f8b81bb0a90e413717f080c4d479ec95ec4a97ba5a4"
+at = "SpawnBlockingError=u32"
+embedded = "f72a90906071877e17c8874364493c8345afbe8f817fe76a243c2088dc2cb9cd"
+status = "residue"
+cause = "mir::Ty: Runtime"
+
+[[fn]]
+path = "deadpool-runtime::timeout"
+kappa = "d5b216ce7d7d94784ff5a45b35f72ab0b839ec2ca686970fe7bca47088a1dc16"
+at = "F=u32"
+embedded = "5d28a06fe366f18f2f363ba06caa1367628b740f0abc0c5a92d9d1698959c937"
+status = "residue"
+cause = "mir::Ty: {async fn body of timeout<u32>()}"
+

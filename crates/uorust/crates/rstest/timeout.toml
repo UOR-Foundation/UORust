@@ -1,0 +1,16 @@
+[[fn]]
+path = "rstest::execute_with_timeout_async"
+kappa = "629273b7ffeee1e89fb30a2db58244d601d7f385a9d7bc06c538b23f74987197"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "6aee50fec3a179ee2f4b3ab113c9260881c8cadd9ce806106bcbcb909973f92e"
+status = "residue"
+cause = "mir::Ty: {async fn body of timeout::execute_with_timeout_async<u32, u32, u32>()}"
+
+[[fn]]
+path = "rstest::execute_with_timeout_sync"
+kappa = "5938ea965f75b7de02686b369264f43af3a48ad38249e5075c3b65367181295c"
+at = "T=u32"
+embedded = "2396773b180f828c84fe140480af96059606eed0cc34ce8bc709c02b52fa1ee9"
+status = "residue"
+cause = "mir::Ty: F"
+

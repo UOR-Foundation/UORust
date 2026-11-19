@@ -1,0 +1,88 @@
+[[fn]]
+path = "atoi::ascii_to_hexdigit"
+kappa = "7ee4c927b29de07df486532a235180b3b9522a7b36e676cdb24bfa17aabe310b"
+at = "I=u32"
+embedded = "a82464ee92f62a159fdc6084e635e5316665392e3965b42aec2956131a63bc52"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::to_ascii_uppercase"
+
+[[fn]]
+path = "atoi::integer::Integer::from_digit"
+kappa = "ab87aed1d78f9bca715ac0ba6c57f4e0107dc44c635e1a479a9a3eaa4271023d"
+at = "I=u32"
+embedded = "c3704b15201d23960ca4d4e03047b95e434309be3ac8f4840b4c78fa340eca99"
+status = "residue"
+cause = "mir::Ty: integer::Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::Integer::from_radix_10"
+kappa = "82f3a9d1e7cec90c21e392a030be0941fb06c1e2983b29360c1202695ee1540e"
+at = "I=u32"
+embedded = "27072c656407bb7e7b58cecf1cb3916dc13046d86ccd8852f528731ba4c858cf"
+status = "residue"
+cause = "mir::Ty: integer::Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::Integer::from_radix_10_checked"
+kappa = "bb5dc04085d6de869a00813656a3f5f120c2c8857074df79e64cb2343c27856a"
+at = "I=u32"
+embedded = "788564e8dbf1a4012b6c13048c123ea47d9ee00c6db5e2c3d717e400e50b88dc"
+status = "residue"
+cause = "mir::Ty: integer::Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::Integer::from_radix_10_signed"
+kappa = "e3587fa20fd027c2d16ae7599c3442efea341539b70ba8dd640590fa86c63df5"
+at = "I=u32, Sign=u32"
+embedded = "2cdd8180e37b84f100a602ab558faadb3bc588c6dd59a0cc228614fa3ef7ea2d"
+status = "residue"
+cause = "mir::Ty: integer::Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::Integer::from_radix_10_signed_checked"
+kappa = "9be66d6eaa1c0d53f535e24cab4ae4e4b30ed8bb17eea8ad867da6c8883ba5b9"
+at = "I=u32, Sign=u32"
+embedded = "491514c1caf86ea24b750b1aeeb1bc2a8af53b13af08f03af7826c94aa0c8a0f"
+status = "residue"
+cause = "mir::Ty: integer::Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::Integer::from_radix_16"
+kappa = "1cdd6cb28d5bec18b8346591fc8ad9d746f81c1676b6bf559dab7bd44458586d"
+at = "I=u32"
+embedded = "a2cf6d01978c375c30f5c43acc85f7c1d1add3a1a5056f154051d00472ec63c4"
+status = "residue"
+cause = "mir::Ty: integer::Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::Integer::from_radix_16_checked"
+kappa = "6aaad70172d1d2f49acfe0d2830032618a4e4b4887f0a011fc6a5e707dd1d9ec"
+at = "I=u32"
+embedded = "547d08ae831c5d345cb71d2967df652d9643f53d7985284679931d313c79d804"
+status = "residue"
+cause = "mir::Ty: integer::Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::Integer::max_num_digits"
+kappa = "84a30b2d84e6080aee9b305007da5e132a2bcfad15d072a0e14d6994f13ac229"
+at = "I=u32"
+embedded = "db306f97166cbedbf65259179381026cb0560d433ca69b69d8b7cfa397291492"
+status = "residue"
+cause = "mir::Ty: Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::Integer::max_num_digits_negative"
+kappa = "612a664b0325b3cbe7a354b8870de7102dc1b3374523c53fcfc019d49b524143"
+at = "I=u32"
+embedded = "396d1baaa9100f49d9a0c37e2a3e7c6ccca0f2defee2a89e96485578d75e4e05"
+status = "residue"
+cause = "mir::Ty: Integer<u32>"
+
+[[fn]]
+path = "atoi::integer::nth"
+kappa = "b07c005de64f9955b4708fe1cbaae6726b5fbc226d55b86bd4c74f73df5db7eb"
+at = "I=u32"
+embedded = "61752deccfd8f356ee6f5b99169052737b712a3bdd525c1dc3a7e9ee2d1b891a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Zero, which u32 does not implement in core"
+

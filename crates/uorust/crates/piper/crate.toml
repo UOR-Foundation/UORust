@@ -1,0 +1,367 @@
+[[fn]]
+path = "piper::Pipe::drop"
+kappa = "7c4bf58486632343d67136a8b92ab4d4145f59597ba68ded47be5dafd329a9d7"
+embedded = "066eb3defc705bd0651c2f97e45de3ab3dc43a112dbfab47c0df796be26b88a5"
+status = "residue"
+cause = "mir::Ty: Pipe"
+
+[[fn]]
+path = "piper::Pipe::len"
+kappa = "13f139027789845b9ed2286b5aab11e456c690c7205491a319114d0a5f40a56a"
+embedded = "1f94383219ea044d9a80d41af0e80b1bae2f586482822364126844f9ab210d81"
+status = "residue"
+cause = "mir::Ty: Pipe"
+
+[[fn]]
+path = "piper::Pipe::real_index"
+kappa = "a8f9e532e8eb8f58179d7ba175ac8e6d041a574de90a30e08bbd509c361fb07c"
+embedded = "a870fdd9541c689c1995c5e79543bd3bfbbfa2ef6c817496b1e0702586ef127a"
+status = "residue"
+cause = "mir::Ty: Pipe"
+
+[[fn]]
+path = "piper::R::read"
+kappa = "17f426ef7e1b18fb4137e3ce9726652a78edb629ffd37d573c0b99fac0c0e2e4"
+at = "R=u32"
+embedded = "b7d811b662e6c2f6551ec2c94ca57daf5633ea2bf7c72c1fee5529d198cd1fa6"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::ReadBytes::read"
+kappa = "d5a864edc4c7c4dd457d033f7046a8c31c8374773037bc803f9ac7fdabefe8fb"
+embedded = "258013508f7f41a7b1afeaa330e6de7931cdb15e9a4f0f40f269fd27a1bba24d"
+status = "residue"
+cause = "mir::Ty: ReadBytes<'_>"
+
+[[fn]]
+path = "piper::Reader::available_data"
+kappa = "71e6c381c666a85fbec4f5658139922d3d39a20d542d5eee8ef17c9bc91b6059"
+at = "Pipe=u32"
+embedded = "4f76612c55176de1830c8b6c310b4a4e706dc36068421f5ebf04422457e3b012"
+status = "residue"
+cause = "mir::Ty: Reader"
+
+[[fn]]
+path = "piper::Reader::capacity"
+kappa = "51903477c22dbb607c0f379590282f991a2b6e9e4bc5bca117f2e5251c954a63"
+at = "Pipe=u32"
+embedded = "f08e957ecb986952cad4fb9abccb08fcdd6faa6004c02fdcd9a13e5fe0b4613a"
+status = "residue"
+cause = "mir::Ty: Reader"
+
+[[fn]]
+path = "piper::Reader::consume"
+kappa = "87ada01a83a36c68612917b141d972b1a7761e5997ddc190d3a27bf0f490433a"
+at = "Pipe=u32, Reader=u32"
+embedded = "488b76b449e07e3f2658675f5337d2f837357d1372b4f288c51879fde093daa1"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "piper::Reader::consume#2"
+kappa = "5f514927326a749cffa262fd03d651407fcc34b6efa4d61a8d5512904441bf86"
+at = "Reader=u32"
+embedded = "d587ba79a19d2d3b731fdc00ec6655f7d2aee5564b08f2b16c2ab050b3b3ab3e"
+status = "residue"
+cause = "mir::Ty: Pin<&mut u32>"
+
+[[fn]]
+path = "piper::Reader::drain_inner"
+kappa = "fb29d98151a238e42a9498a34e93f5d38bc5cc117d952848e9537b24223a3690"
+at = "Reader=u32, W=u32"
+embedded = "0e9db997888f982b2d8ab0d5132c7bb6a6fae347e557e26331655bc585395e7b"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::result::Result<usize, u32>>"
+
+[[fn]]
+path = "piper::Reader::drop"
+kappa = "714a9a1a80cb5544db07088a5e87ebf68ec43d4106aac7ebb588d55d57498a5d"
+at = "Pipe=u32"
+embedded = "61b5fd3615c73f132ce910ba390d37e2267bf76593a6aaafc7fc3ba5cfb18c40"
+status = "residue"
+cause = "mir::Ty: Reader"
+
+[[fn]]
+path = "piper::Reader::is_closed"
+kappa = "641bb84420371dcc274c95e64101844fd80f92acc6a7fa0cebadb04237a889dd"
+at = "Pipe=u32"
+embedded = "2a1f62f7c2ae96874b72a02b18d0bce83ea938c805ff42abb1f9b298db8d32fa"
+status = "residue"
+cause = "mir::Ty: Reader"
+
+[[fn]]
+path = "piper::Reader::is_empty"
+kappa = "397bd3422a3b7e87e90fc8dd85bcef4e8b4b3bb9645b2046e2250898b1f7e4ba"
+at = "Pipe=u32"
+embedded = "be4ae36edc10d844f7ae819a9b260218df7d4774e2b61bf4bdb19287da81dd73"
+status = "residue"
+cause = "mir::Ty: Reader"
+
+[[fn]]
+path = "piper::Reader::is_full"
+kappa = "7dfda72af345e51a69368643b19fd5d2e18cb76c706415dc45052dd756c9680d"
+at = "Pipe=u32"
+embedded = "01333d7b613aa494ea0591e40809b9189ece5a11f0ea072e81a11686c1eb4454"
+status = "residue"
+cause = "mir::Ty: Reader"
+
+[[fn]]
+path = "piper::Reader::len"
+kappa = "7ed4f734f845df885ddbfe613cadc73a872439391b52b3a326450e43e6b83aae"
+at = "Pipe=u32"
+embedded = "7071d7d7dd99c96985c48ff1dae61946d9be1542f7a15ead84b475607348cca1"
+status = "residue"
+cause = "mir::Ty: Reader"
+
+[[fn]]
+path = "piper::Reader::peek_buf"
+kappa = "6cc19cd5c08cbb4f65d3c2c032710a440dfa24af7eb25ed4143f532292abf6dc"
+at = "Pipe=u32, Reader=u32"
+embedded = "ec6b38237d44d8941d0cad3f29fc73bf69e99eb6c13c6cd4660b5732f6771542"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Reader::available_data: piper's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "piper::Reader::poll"
+kappa = "0866e9e98b0447a0560788bc42c6024cb66ecdd03675bf9a490c852bb546b1bd"
+at = "Reader=u32"
+embedded = "871423373ce4bfacdf93bd41abd337fecfb2b2922871bdd89a52075a825f1347"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<bool>"
+
+[[fn]]
+path = "piper::Reader::poll_available"
+kappa = "ae7b3c2e686a3ced82e022d01cf710f0acc6519a6c8e16d1ab4f2513bfc19441"
+at = "Pipe=u32, Reader=u32"
+embedded = "bf692dde1ee2eafaf726bec06861e881691b180855ba2bbcb8e19ead62e43d3c"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<bool>"
+
+[[fn]]
+path = "piper::Reader::poll_drain"
+kappa = "1e7e575206bfc91891bb53e7aefd62edd2e213eb26d3d6d12f8e95ccbc2778c2"
+at = "Reader=u32"
+embedded = "657bcad64d0281d8dd3495450ab28ec83f550b165d42cf29dfd100316398c372"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::Reader::poll_drain_bytes"
+kappa = "229e20e43f7bbc1083f7856ea2e085e73d9946e8b9479059ce242183199e26a9"
+at = "Reader=u32"
+embedded = "52f448a8d47d1a47a6a25183c4c09f8ba424f98042ff2c795439bc8ac3668ae8"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<usize>"
+
+[[fn]]
+path = "piper::Reader::poll_fill_buf"
+kappa = "d71ae4d615584e67c5d1474080cb70aaac5817a2d0c53bede946dddef01e2643"
+at = "Reader=u32"
+embedded = "5a5f049ab7b9724115e3bcb9ba033be6443cae6d984e8d5aca8bbb478d15e1c7"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::Reader::poll_read"
+kappa = "ba29390c090084cde052331f7d5ed57fff39862147183e9f16993cd995167ab3"
+at = "Reader=u32"
+embedded = "50c847732bcf892a84e83c2dd9b88c8d1b4ccdf4cf4c11946516b3e1ce64ad2a"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::Reader::try_drain"
+kappa = "7af0d3f5fb4ee8e2ad9e4d5fc1754bb7eb239f37497e7f881abcace5d4127fde"
+at = "Reader=u32"
+embedded = "f2ace9cdb6703b1cec759007cd078878c55e3f60c23ff1da04fe7542d87f4856"
+status = "residue"
+cause = "mir::Ty: std::task::Context<'_>"
+
+[[fn]]
+path = "piper::W::write"
+kappa = "8eea133a59e87556e97b282626302c4b586153b04a5e9c7471242de26c64ee3c"
+at = "W=u32"
+embedded = "79dcb8fe1b21bfa831a9ef0a1eef5579d6eab01b308eb99d0b832412ec839e20"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::WriteBytes::write"
+kappa = "46992ec0cc44f33290b5679dbaf1b223e6b597d803dc720dfb91bc8b25511a87"
+embedded = "1ddd7ae279f07201736d6302724c178e4755c7981841875acd8386dad80da95c"
+status = "residue"
+cause = "mir::Ty: WriteBytes<'_>"
+
+[[fn]]
+path = "piper::Writer::available_space"
+kappa = "0c7ad4456e8028a9e9e48449e1270af86c631c154dbe938cb415a0995e90d45d"
+at = "Pipe=u32"
+embedded = "e8a1979b384e5fd987016453105b1adbc6e04f986c58133e0a2d88cbe164bba4"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "piper::Writer::capacity"
+kappa = "2d39f2fbdf47e3f09bc724695b32c8eb541b2e96b2bd835a75c6006120cc58d9"
+at = "Pipe=u32"
+embedded = "7e00e4d12472015ac2c78a173fe0022114608d8d72f1475b7fa3171637b72eb9"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "piper::Writer::drop"
+kappa = "eb3d8f93389048704dd2b2da002d2015a4ad85f09d3ed9bf2e805a917da00d53"
+at = "Pipe=u32"
+embedded = "50476b279a030f97c120d59485cb629743248976f216f1838c4a526166e456d1"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "piper::Writer::fill_inner"
+kappa = "5d33edf4f5bba9baaf5c3b480fbc7705fbbfc57eaa955745297fce807e6916e5"
+at = "Pipe=u32, R=u32, Writer=u32"
+embedded = "a8a6e3138df8262be0530414c7c46a0d3d339121743c555773fd191bd6969774"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::result::Result<usize, u32>>"
+
+[[fn]]
+path = "piper::Writer::is_closed"
+kappa = "676598540897a2acaf6fa352e6bedd033177f1b77cda1b207b81cdfdb5d80f2a"
+at = "Pipe=u32"
+embedded = "5d20796bd4bbb425f0912042ee05b2564ce69a8339c8a69902aad4d0e45ab0dd"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "piper::Writer::is_empty"
+kappa = "54da9b9666919c7274c78ae3c731f7bb7a9c824d524dd1f1d856e49bd099760d"
+at = "Pipe=u32"
+embedded = "e060ea83aefb1370439fa25b32419c160a01b35659e87eeb6a08b5a153264839"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "piper::Writer::is_full"
+kappa = "060eca009bd9f48362fdc04609d9252517071606e470061f6159704a218d0062"
+at = "Pipe=u32"
+embedded = "ac427e7d0747c81b44cd722e40ebadbbb566b08ef4d0513c985e877dbc135ed4"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "piper::Writer::len"
+kappa = "12ac3efefb5d582a2157437cbc08b30e32ecde62de8eb13bbc203758d53662a0"
+at = "Pipe=u32"
+embedded = "6ff15785cf579e0a9d9d32af648c8abd509c216dfd26b02dc6938c419b199e39"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "piper::Writer::poll"
+kappa = "d840a8a8eb02278ae86a0fb7193dda09b76395dc7609f4621e42f064e40e8243"
+at = "Writer=u32"
+embedded = "7d215bc1f1c97bb2e0396113a1acf6e447471db8c6c4f4168aeb26365938596c"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<bool>"
+
+[[fn]]
+path = "piper::Writer::poll_close"
+kappa = "1909d81ed91b1f41a2a9e147ec0235d600409411e0a55d28e2b5af063822f0b3"
+at = "Pipe=u32, Writer=u32"
+embedded = "1c4946b14cbce6dfc26e985ccc5a7af388f35ae876e007ca91b97de501f70dad"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::Writer::poll_fill"
+kappa = "d9edea5abd02c20e84d8f763bdcb29b2ed363203b48accd51d85aea334e97f19"
+at = "Writer=u32"
+embedded = "6bff3d7b9b9f333105c18842b55175eeadd5c5b4638d01c9b0899d1cce546722"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::Writer::poll_fill_bytes"
+kappa = "b3e88cd3f7c5f468cc2c11318aff21d8e817c9135acf35bba91adcdaabe953c2"
+at = "Writer=u32"
+embedded = "25fb503359bc35c519887b162160351225a28f54b13fec4dab1c6945104d3b9e"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<usize>"
+
+[[fn]]
+path = "piper::Writer::poll_flush"
+kappa = "2e1bb473cc68f3a0b9057795f18906b6aade00fe2f40fe0f425b8c862b78178b"
+embedded = "5e682b4a87518e4d04b20c2959d552636312d3847f2db1ee89a26752daf3c826"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::Writer::poll_inner"
+kappa = "56887fa8c3a816d7f1a7e530f3da69933f3499c11da9c1cb42e2aecb471697c4"
+at = "Pipe=u32, Writer=u32"
+embedded = "e247537158e0659391b2cb7cd60a603f4c08bd9adeeaf257749ee1794f106b95"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<bool>"
+
+[[fn]]
+path = "piper::Writer::poll_write"
+kappa = "f7aa2ef2ce99843d786f66ce3905b349e1148d563b685c9b0956a1a87d00ef6b"
+at = "Writer=u32"
+embedded = "7dcdf6a80e943572eea05871b647fcda5c869dd23783c52287e48d3184c1ae6a"
+status = "residue"
+cause = "mir::Ty: futures_io::Error"
+
+[[fn]]
+path = "piper::Writer::produced"
+kappa = "a63027edfb20078f46c6deaf5ca1388eeb5a380c08c0b8c56b61e0c366b77cb5"
+at = "Pipe=u32, Writer=u32"
+embedded = "eedfec913cdf9937bafa6b0e553ea4e0a2c338175ae78342927c0191193c2bab"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Writer::available_space: piper's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "piper::Writer::try_fill"
+kappa = "1885ff33a4f8fea4973fb8a665b7108faf4cd80eac3a70352f231f4d7d6c19d5"
+at = "Writer=u32"
+embedded = "a919df4dba61f117ea3943246c14bcb0ac43ca3e4bb2436487cba585d156db5f"
+status = "residue"
+cause = "mir::Ty: std::task::Context<'_>"
+
+[[fn]]
+path = "piper::Writer::write_buf"
+kappa = "789cc30977affe96208660265c496e818de7f7069304b52b3d9ee09badfdf03a"
+at = "Pipe=u32, Writer=u32"
+embedded = "7b6a8af723b7f9c16c563d17c8e9958e74646fb08d63bab4ad1614a54842762e"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "piper::_assert_send_sync"
+kappa = "4449bd8da782525a157efa4013d681d1cd90aa6616a97c3ced73bb6ca603a9ef"
+embedded = "f946d403da93a8b9c59b9c81a81116985421e855b5752d92de517d2446969cf3"
+status = "translated"
+digest = "09708c70445990de04609996350c68aa783b2233a30953343358b1940620a1e4"
+
+[[fn]]
+path = "piper::maybe_yield"
+kappa = "200ae3ffc0be14df6d1285dc320500ef4035cfc66cd656fd23e3270385082c80"
+embedded = "74873cbe3adbfa90927e01f5a5b99be57045f624eb78e074c5bfa5947fbb6e91"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+
+[[fn]]
+path = "piper::pipe"
+kappa = "1ab42e4287e6f7ea25d04d19f6c762732204b181c064faf3a993db081c86f6f8"
+at = "Pipe=u32, Reader=u32, Writer=u32"
+embedded = "0c0a450fbce67ede4e4c1b955ed818a398d7a0884ce35fe6f74432f70da0b9d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_mul"
+
+[[fn]]
+path = "piper::rng"
+kappa = "5515015c5da36cfd93185306c8a6187e482294a5b5bb2a5ba554950652afa820"
+embedded = "e256b87ce185370f68396f9769143c466d8e34df4700d9ff412078214cc4f0c8"
+status = "residue"
+cause = "mir::Ty: fastrand::Rng"
+

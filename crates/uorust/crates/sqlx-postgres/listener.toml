@@ -1,0 +1,203 @@
+[[fn]]
+path = "sqlx-postgres::build_listen_all_query"
+kappa = "54eab1c3937ecc5f1e345dfc8aa86c23f3d7a70df3a0720c2ab9a3ba5321aa9a"
+embedded = "b3cc3acbca1ebb9f81f9e520bddc832d1e93f4092128381ad6993d017971d7a1"
+status = "residue"
+cause = "mir::Ty: impl IntoIterator<Item = impl AsRef<str>>"
+
+[[fn]]
+path = "sqlx-postgres::ident"
+kappa = "fbab70e8af2c9443c8bfb96b75a7c7b135cd17fb64e9943cb6dc54f5e8220917"
+embedded = "023a7cf246824c27a04bf916e577d31ecb07ea544bce73813a7b3a468ec17985"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::str::<impl str>::replace"
+
+[[fn]]
+path = "sqlx-postgres::listener::<impl at src/listener.rs:379:1: 379:44>::acquire"
+kappa = "a8e28deea99676969c9bf1a220fbf2348e05f0d2eedabf308b497f09f9d889e5"
+embedded = "46361c1da513d1c2e93a3a83974308172f8d20771e313901669ed747367c4777"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut connection::PgConnection, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::listener::<impl at src/listener.rs:379:1: 379:44>::begin"
+kappa = "8e7d913679913efc1fdd44a2277b20408446a48e9bb461e5672720f91487ab54"
+embedded = "dfd5877063d9144d0620d29dd349bf6b23be1244f4aba41db70f82444ae7aced"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::Postgres>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::listener::<impl at src/listener.rs:38:10: 38:15>::clone"
+kappa = "d475938bbaecd04b896e6be6d53eadf507af09c8038df66b5e26d0e0d12cff7f"
+embedded = "7ea13bad6f849ba06e1ef19bea149dd50a551d33a1bc51ef61f2a84566830863"
+status = "residue"
+cause = "mir::Ty: listener::PgNotification"
+
+[[fn]]
+path = "sqlx-postgres::listener::<impl at src/listener.rs:392:1: 392:45>::fetch_many"
+kappa = "9de06b032b0345ee7a27773197060fdc86cf7773a7840ea5eccd8bfd87f02355"
+embedded = "cadfb19c8c72c13b89cec8fc8201e5079ea1aa4fb0661e377a31264eaeb6b930"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<sqlx_core::Either<query_result::PgQueryResult, row::PgRow>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::listener::<impl at src/listener.rs:392:1: 392:45>::fetch_optional"
+kappa = "fe2c9ae0abbc066ee5ace11741f69064f3cb40e10056e44bf65afb2c47cba0b5"
+embedded = "a64ea1270a67f82a4c5a4425b092f5fcec87e1a16f083d66ebda4b991cde7fe8"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<row::PgRow>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::listener::<impl at src/listener.rs:392:1: 392:45>::prepare_with"
+kappa = "37192e9f0bd0cbe53559afdd630e527264dfd69440aa9fef9a4c77963ffb0cef"
+embedded = "6f77407a91a6707dde324541e31ce73035457c76a12c8ce7c56150b0088f6a92"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<statement::PgStatement, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::connect"
+kappa = "a028286983add9d265f17bdc968dbb07950b71bfee1abfe84c5465b292b612c5"
+embedded = "d70bab34271ec6cdac470543900539590d6d87cfc67c578d5d01e6964ba54b93"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::connect()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::connect_if_needed"
+kappa = "cc3dafc3ccf54bebed065a5a9355a51bf0d03b86ad76334e24c0c31ee289003e"
+embedded = "b5ae9ead499f88c6107b3173d2cbf0dcb4900e6ad87a2ef176a4978c26c0265e"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::connect_if_needed()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::connect_with"
+kappa = "4e2c9c03b066ffbfde4fe9d9e7c30c0086ce670ba5e7ac15914bdfce98621124"
+embedded = "cf2dc9834f85b83104769a519fb435dae62dfee24fb079797312ab38c115e3d1"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::connect_with()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::connection"
+kappa = "b6b8db6043e6122c469a0b1b4eb617a8de140a43fa524f7a4e346b8091c1ed4b"
+embedded = "4768ee7ff70759ea4d5e1b9df84a1325bc7c9e33949bf82134ef1fe9fa22c183"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::connection()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::drop"
+kappa = "d91e153fe2591800f47d09dd8211a001a427b5bb9cbb7dc727bbd0eeee9e6e39"
+embedded = "9dd03bbaff8b2939c7492d5d7e1ba7d9e3319e67f1bf129bab7fd51bc7a882d1"
+status = "residue"
+cause = "mir::Ty: PgListener"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::eager_reconnect"
+kappa = "bc538e1f5909c2ecb3026d79db1a0f2d3090b01498ad7e9eb96b9f225171149f"
+embedded = "1625106fa59e48fdffe81aa9a55209d6d7bf5c36304bfc91d5818e12fbd57a0c"
+status = "residue"
+cause = "mir::Ty: PgListener"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::fmt"
+kappa = "73714f199995970eb2db5f1aad0b15de9edbc9b4db6ce75f67f774444585967b"
+embedded = "821526a7570b60df1847bace33b2f75f6d9ae870153a5579238e4b8204e5f700"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::ignore_pool_close_event"
+kappa = "4f8e784c30218afef666b1bc83ad97f0332ae0dcaea3f32b7dbef35278c7aeef"
+embedded = "ef465c7ef61f95c6097ac8e119dce0c3a20beec5cb8d14fb55a5d2b0f344fd77"
+status = "residue"
+cause = "mir::Ty: PgListener"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::into_stream"
+kappa = "07917783fc5bde1f305705e32c895e210234ad9a3cf4ee5b804dd463b2c21129"
+embedded = "adf9b2b51c14ba38faf367d81c2586ae106a60eb3c409198dfffeda3d765293a"
+status = "residue"
+cause = "mir::Ty: listener::PgNotification"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::listen"
+kappa = "928d43c2e2776d3740b8a9157f02923d893e7a5aefadb257af7c92a3c0a196e3"
+embedded = "1375a27e1929f7ea2e65320be2e1930685324556b3821d1e3cc7defebe091765"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::listen()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::listen_all"
+kappa = "ccbcb1c9a030684edcf22365884eb21da5e48c3a6907ddcc588d2c89a6bc0508"
+embedded = "254848e325bea0c11c728b1ffc34139dcfe3c330629654139dbf1d5af1af26c7"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::listen_all<'_, impl IntoIterator<Item = &str>>()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::next_buffered"
+kappa = "5f6889271a58f7b53e2906273252ec0539fce983db238691b877188b003695a4"
+embedded = "546892e4bc88d8809495510d5b13438159decca8d8033aebb8173f641176b556"
+status = "residue"
+cause = "mir::Ty: listener::PgNotification"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::recv"
+kappa = "caca89e64d7bfe7e6b64af86a891ea31535c60237d251292748a120d50ba689d"
+embedded = "12e9a7d2014c682527045f0395d66d181b47b7ca3b636b0373a26ce6246b65ab"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::recv()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::recv_without_recovery"
+kappa = "8388a38aaaaa59fc737a1353327b2ac92a848fdc7fd5ca086b5785089c5aa6b6"
+embedded = "dc400c76ac283636ac8ec9285f9fc3bb2d5a51f5745a220367e07e9b676902da"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::recv_without_recovery()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::try_recv"
+kappa = "c1b0f3f372e790d06d64122cfd9c257f491e0ec61dd88cb0b684c4cc1f3c4b81"
+embedded = "088a4c73cd1e1dc5efd5dc65af2a2a29ad2bcfc443934d3a9d7b6bdc887624e2"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::try_recv()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::unlisten"
+kappa = "bb0aafa2d595b4f41e0a5d8cb92eb5db551a857b63b156bf03cc9c9633b03dfc"
+embedded = "6dfd6c77d70087be62e8eefddc8c0059551e2f739df0998193c67a2ffa3b1570"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::unlisten()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgListener::unlisten_all"
+kappa = "497b666235762aff91cffa8550821f1d8982caccd64cf47155fd795699db637f"
+embedded = "5c5fec0b95336914bceb15f784cccb7c87d3e9a04ec4350a0b42316059c018f4"
+status = "residue"
+cause = "mir::Ty: {async fn body of listener::PgListener::unlisten_all()}"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgNotification::channel"
+kappa = "500efffd89ad53f1dec42f1826af008976d6f87ac99b0700e58f4ebf77e035c9"
+embedded = "de021a37758b7229e12d1ff7c82f08ed97853880ecc6ea0a819ab30b2aa7c88e"
+status = "residue"
+cause = "mir::Ty: PgNotification"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgNotification::fmt"
+kappa = "57775ac0f4d9e22f30fd754d13243564650907fd81d950b1fb715416482b994f"
+embedded = "efb1ab6a17db9e56340064d6396cc003c5c3929c274b0884b6f26e802bc70357"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgNotification::payload"
+kappa = "a84099ee6221825606adb9923091803f4f3a2dc2b623dcc7133fa6780d210aa5"
+embedded = "5756e7df88798bb18a3b5bf9856f13c65185a681ca885e49cbeb2bc97d84243e"
+status = "residue"
+cause = "mir::Ty: PgNotification"
+
+[[fn]]
+path = "sqlx-postgres::listener::PgNotification::process_id"
+kappa = "b556bfd2c33ed4708bde857b3873d54caeb5faea20d9eb6350e88f47a6d10e8d"
+embedded = "62fce9eab794ebf9e24107f376ee7c535af681bb17b4ea7f43e5ef876847121e"
+status = "residue"
+cause = "mir::Ty: PgNotification"
+

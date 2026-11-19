@@ -1,0 +1,88 @@
+[[fn]]
+path = "wit-parser::serde_::Type::serialize"
+kappa = "c21937dd9aed98a67f09f9b749403bb2f4b809b8b0a708b7e40c610ac4599439"
+at = "S=u32, TypeDef=u32"
+embedded = "376f6c5e60551ab47caddb79465ac0c5adc802fe020a1845c4e964aee8a1abb9"
+status = "residue"
+cause = "mir::Ty: Type"
+
+[[fn]]
+path = "wit-parser::serde_::deserialize_optional_version"
+kappa = "a7c5e1f577a921166922c38ec1824b38c235d91a1164e3534d64688c43a73e69"
+at = "D=u32"
+embedded = "fe839ed4d72e07fd9c71ec776fcf7b2794b1b4d609dcb2cddb0696296dd20fa7"
+status = "residue"
+cause = "mir::Ty: semver::Version"
+
+[[fn]]
+path = "wit-parser::serde_::deserialize_version"
+kappa = "211a3d61176c09fec5ba1248ed4e39c38b1353e876e82344b89faf9525524525"
+at = "D=u32"
+embedded = "0cc3f67b0306b90a9830ae0e7de857a85457c81194358f02796e5c51a80328cd"
+status = "residue"
+cause = "mir::Ty: semver::Version"
+
+[[fn]]
+path = "wit-parser::serde_::serialize_id"
+kappa = "5de0d046b1aecfb53bce55c7ff05c2a4ddc3b786c9e1f0455eee4b3f818ca59b"
+at = "S=u32, T=u32"
+embedded = "7477094dfb33b7675dde3bce7b035ab0c52693e935542c03d101ca2bda19fa07"
+status = "residue"
+cause = "mir::Ty: id_arena::Id<u32>"
+
+[[fn]]
+path = "wit-parser::serde_::serialize_id_ignore_span"
+kappa = "69370d2662dad1a53acb8377c2a0273474962b8c6f05a7a70034e0726b8ebc32"
+at = "S=u32, T=u32"
+embedded = "0faef9a3e541f5edd478a964a43e5efbb7548e43eebfa36e275c74f92c366c5a"
+status = "residue"
+cause = "mir::Ty: id_arena::Id<u32>"
+
+[[fn]]
+path = "wit-parser::serde_::serialize_id_map"
+kappa = "2b66c0aa82088485e85d4044d6cbbc7b1b5d0a9b2bf23ed457282e125acebdf7"
+at = "K=u32, S=u32, T=u32"
+embedded = "dae7b7d4180a637d9db728306f8d09a7232bb5855d767a2dd148027f31242561"
+status = "residue"
+cause = "mir::Ty: id_arena::Id<u32>"
+
+[[fn]]
+path = "wit-parser::serde_::serialize_none"
+kappa = "fcbdd0f47f3b186a81e9df4a8d6f609349993aa3d4b0d774da4c8bf092ee86a3"
+at = "S=u32"
+embedded = "f3b3ebf3a9a268d17da3fb7c9c81c4bd5acd18844c47f5034c014119dc072964"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer, which u32 does not implement in core"
+
+[[fn]]
+path = "wit-parser::serde_::serialize_optional_id"
+kappa = "0c219f23e19fd24f902eb50c7fcaee81a6fd97e000348d3a86b8fb003c80ef66"
+at = "S=u32, T=u32"
+embedded = "1106bf4d5ca3eaa28e7169a6fa676da39c12899e6f16a066985f6b24f6be4c2d"
+status = "residue"
+cause = "mir::Ty: id_arena::Id<u32>"
+
+[[fn]]
+path = "wit-parser::serde_::serialize_optional_version"
+kappa = "25bf37d0157136a620ab91cf0ca25ad6ba3c49e068bc7c68933e6b36293db28d"
+at = "S=u32"
+embedded = "118172aa4a4471f18ffb4dc2bb5ed5ceb94de3e643596b0ad8b58ac321c14d64"
+status = "residue"
+cause = "mir::Ty: semver::Version"
+
+[[fn]]
+path = "wit-parser::serde_::serialize_version"
+kappa = "7b99b9dfc458ac5aecc7d492f03ad8daa1e14f3063b81c8018c858730b43a0ba"
+at = "S=u32"
+embedded = "2b514bf956323a9461d30920698f23e58f014b7842703550806d9653e2411731"
+status = "residue"
+cause = "mir::Ty: semver::Version"
+
+[[fn]]
+path = "wit-parser::serialize_arena"
+kappa = "eb39dd9214d8a9d4929e7cb1067a4bfc406df0aa99e04982970acc2e04204519"
+at = "S=u32, T=u32"
+embedded = "786bebedcacb6ff2048fed7fa843488d9163888cb9c3d829f2f16bfd6ad17195"
+status = "residue"
+cause = "mir::Ty: id_arena::Arena<u32>"
+

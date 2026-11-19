@@ -1,0 +1,21 @@
+[[fn]]
+path = "bytecount::naive::naive_count"
+kappa = "4b18edfa8d5483fd9f43137f9dae1fa7950bd14d933a729bd2de7412025bff4b"
+embedded = "4cec858e922f0a7e60565af90c9932280dbd991bb111758aedc25a612302e40d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <core::slice::Iter as Iterator>::fold"
+
+[[fn]]
+path = "bytecount::naive::naive_num_chars"
+kappa = "3eb986223481fce6077ded4b0773da574b0c7b948de8916df3261833c0d8dadf"
+embedded = "d24cff239c74c8859255e7c6c2b086afbd72962303d6c427b4a9e631eee2ad22"
+status = "residue"
+cause = "mir::Ty: core::iter::Filter<core::slice::Iter<'_, u8>, {closure@src/naive.rs:45:17: 45:25}>"
+
+[[fn]]
+path = "bytecount::naive_count_32"
+kappa = "53da9579d032a650db600b6390d9f38adfa9e4cd9a6b97946a8b27105bb72d34"
+embedded = "40c772d2753a793f05236450f4de65994c28149c3611ca393b17f3faddf71098"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <core::slice::Iter as Iterator>::fold"
+

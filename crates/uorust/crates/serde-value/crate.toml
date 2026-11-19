@@ -1,0 +1,70 @@
+[[fn]]
+path = "serde-value::<impl at src/lib.rs:15:10: 15:15>::clone"
+kappa = "6f32fba9dbdcc918cfd8345b5e04186d639bc750abae249f0dde519161bba3cc"
+at = "Value=u32"
+embedded = "778e88ad3c65a17a441815d4af887727ee525c64ecd304146792725be15fc404"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "serde-value::<impl at src/lib.rs:15:17: 15:22>::fmt"
+kappa = "6330eff52085236fdd2bbf0e8da8a01994f4b1b385990d7f45f91ae5194da31e"
+at = "Value=u32"
+embedded = "42147317cca1b17d7547417c1d99ee0ef74885e9090279e3b31211a9b853c171"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "serde-value::Value::cmp"
+kappa = "f10caed40101869b57451e10b66ac8c8aafa6ec9e7855200b4c70dc8b3053ba2"
+at = "Value=u32"
+embedded = "f0cebc6303c2c05a473cac7cc64485527559bf69b19ea83d2107444f6766e0cc"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "serde-value::Value::deserialize_into"
+kappa = "b6c4026ad4f6571de985f2bd049946265adfb0b072ff03f8b755c6104aaa651a"
+at = "T=u32, Value=u32"
+embedded = "ffebcd98266f6cbf5c9fed9a00c61a4678731826827ddc1020f6e962f9992ddc"
+status = "residue"
+cause = "mir::Ty: de::DeserializerError"
+
+[[fn]]
+path = "serde-value::Value::discriminant"
+kappa = "d1116d0bd800e027a20c97e10497c393c5ddf1fb4db768bfd3b7a7250634b4a5"
+embedded = "f84d349e2355006ab35df8e856c6d7f5779f736a7babe229caf52fc1b2e54aa8"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "serde-value::Value::eq"
+kappa = "d54317e80abe1f32f2c5622def48ad8db4abff6dcabdc88ea68e0bcfc230868e"
+at = "Value=u32"
+embedded = "eb59394ccf422e166c45151c778941680807c069556ecc2e91b10e8c00e685aa"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "serde-value::Value::hash"
+kappa = "70bab1eb4fa7c36a88aad4b15922366d91bf3fd1ab715c32fdd4dad0fa2b1810"
+at = "H=u32, Value=u32"
+embedded = "df0302c5a188a8689f6cb1db250f611c325501b23053fa25155681637f42ce5f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Value::discriminant: serde-value's MIR stops at mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "serde-value::Value::partial_cmp"
+kappa = "6098e703d76bf69ba8d51b7fe8293daac49e54b4cdfcb50459a500812a9c28c8"
+at = "Value=u32"
+embedded = "b870fb31613aff30ec68f3a99c1b9d6addfa16583b1e25c6d8a473920585c566"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord, which u32 does not implement in core"
+
+[[fn]]
+path = "serde-value::Value::unexpected"
+kappa = "4a2c018ea5bbbe76fbfbee529a9ad3b2df2e7536cc92fb23223ed460d2b3dee7"
+embedded = "b07b39cf5052e2f6a37caab99a6fc5e02d9b431a43cc95023a96c8a4780c6626"
+status = "residue"
+cause = "mir::Ty: serde::de::Unexpected<'_>"
+

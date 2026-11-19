@@ -1,0 +1,42 @@
+[[fn]]
+path = "sqlx-core::sync::AsyncSemaphore::acquire"
+kappa = "d2a33830db5533f98a6698da9ef0138e874efa95ebf594d2a9cd7037f3ce48c8"
+embedded = "d1f1e79c9d581af61ca049a71e529b46db5fe6a2b93afb8066078545a357d671"
+status = "residue"
+cause = "mir::Ty: {async fn body of sync::AsyncSemaphore::acquire()}"
+
+[[fn]]
+path = "sqlx-core::sync::AsyncSemaphore::new"
+kappa = "c806e790df8a5d6711e2518eb1595f5221f5dc084e78dfb803cf20a7f44ac7d9"
+embedded = "4e0e955a8d1a77b462d660acfec31ca301b8007bce39f673fe308af2d682c297"
+status = "residue"
+cause = "mir::Ty: sync::AsyncSemaphore"
+
+[[fn]]
+path = "sqlx-core::sync::AsyncSemaphore::permits"
+kappa = "11a1a9181bc38fa004292921f7a0d34884216bcd949d40e772fc0dbf9ae3c3d0"
+embedded = "a0449af6b09f50c37d056d752afcd854e5a5979440ab893a2da531b2d7a7ea1b"
+status = "residue"
+cause = "mir::Ty: AsyncSemaphore"
+
+[[fn]]
+path = "sqlx-core::sync::AsyncSemaphore::release"
+kappa = "657af321a6032e94fa652ae53bcb30a15ae4322eb4ad6bcc1887846e120b0fe4"
+embedded = "321d92365d4941dce5b3be947157f8d0957f81fa449ff0a7c3291a8d4308b09d"
+status = "residue"
+cause = "mir::Ty: AsyncSemaphore"
+
+[[fn]]
+path = "sqlx-core::sync::AsyncSemaphore::try_acquire"
+kappa = "25bc06ccb07446ad1403f4617ff1b84b7e626fa9fddbf57434ca37602aa41f2c"
+embedded = "337418bb0cd38ab74c561c562b23015567631f9399c56ad7fb494255b750ea0c"
+status = "residue"
+cause = "mir::Ty: sync::AsyncSemaphoreReleaser<'_>"
+
+[[fn]]
+path = "sqlx-core::sync::AsyncSemaphoreReleaser::disarm"
+kappa = "edf619b71b802552dd7d2895b4838982cd89cc3d6eecf7cb1bcd39dfbaf81281"
+embedded = "12ee97a8f8671da1e8f0807cf8816af928f1419a3abbc856d0b7e4504412b307"
+status = "residue"
+cause = "mir::Ty: AsyncSemaphoreReleaser<'_>"
+

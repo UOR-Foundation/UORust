@@ -1,0 +1,698 @@
+[[fn]]
+path = "headers::IterExt::just_one"
+kappa = "cf836f4f22c7b8306e366fe0b975423b75c4dcdaa14a1253efe0d2a952ac6b8f"
+at = "Self=u32"
+embedded = "fd27e951ab058e6a09709f8a2dcbe84b20a84d85f336c9201d286141c4518e7f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "headers::check_slice_validity"
+kappa = "4c519bafe19c9c053a01c1e20223790e22676a22323c3d863543c3727e3e8810"
+embedded = "74d5d63747ae8d779bc9e536b2000e742091b5590ed6eb6e1bab9938b88a3b8a"
+status = "translated"
+digest = "49b2bd5e746e3d6d958dc5ce2d0ff86ff29b64269154616cda9da53669385fe9"
+
+[[fn]]
+path = "headers::entity::<impl at src/util/entity.rs:38:10: 38:15>::clone"
+kappa = "49db9ec18b5a5e1b813ff32fd98729caed19194a768a2905e800a8f389b2e228"
+at = "T=u32"
+embedded = "4e090264e8a5747777489d92e78669e4666269ad767ceaa8edb36ac19dd59a68"
+status = "residue"
+cause = "mir::Ty: util::entity::EntityTag<u32>"
+
+[[fn]]
+path = "headers::entity::<impl at src/util/entity.rs:38:17: 38:19>::assert_fields_are_eq"
+kappa = "d0e848ea3ec0f033ed5e72e5d6ef04b9e54043c6d7c8fb506f6c0f0f8d4bd1c0"
+embedded = "464bd41536b1383997cc70a42960d99c248d45c4c22ed00efb1548de809d1ff0"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "headers::entity::<impl at src/util/entity.rs:38:21: 38:30>::eq"
+kappa = "226edef91ea2a5dd889ddfbc0b64a97d37ea6b801686da9428a7502567a35b88"
+at = "T=u32"
+embedded = "81fdb43cf13c7fda0ccd6caf0168312d4f3abff38162c2b1e198b925e4b45d22"
+status = "residue"
+cause = "mir::Ty: EntityTag<u32>"
+
+[[fn]]
+path = "headers::entity::<impl at src/util/entity.rs:41:10: 41:15>::clone"
+kappa = "3ea8437deae9d9e86857bd916146ac4ebec99a6d6095ad90992fef28f1f75778"
+embedded = "5cc1f03b07618f901dc5b0c84b1a0dc7c5f7b44371d0734ca03aef946c1671a7"
+status = "residue"
+cause = "mir::Ty: util::entity::EntityTagRange"
+
+[[fn]]
+path = "headers::entity::<impl at src/util/entity.rs:41:17: 41:22>::fmt"
+kappa = "fdadc8cf93b2982342a6dea025764ffc25697621ddde6432463f64c8e6916ace"
+embedded = "3e169ec414c5952e8b8b92cbc9c8b5e507e229cd5bf325f0e636fc1d7deac2f0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::entity::<impl at src/util/entity.rs:41:24: 41:33>::eq"
+kappa = "27c4f41348a85d5b058fafaba33f341d49aaebb49e9d83f12466a21296375b79"
+embedded = "93c5c6644abc25a7ce81b61dac5803c91e55a2b29031d9386226f9c42e02fc40"
+status = "residue"
+cause = "mir::Ty: EntityTagRange"
+
+[[fn]]
+path = "headers::entity::EntityTag::fmt"
+kappa = "afc3a81817931d644c650b5eccac395acfbd30a509308afbbadd0a36598a5e72"
+at = "T=u32"
+embedded = "2e66d28798a9cef9e56ef1e001b04c3f10533d01bff768d53917e5d0786f2633"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::entity::EntityTag::from_owned"
+kappa = "5c7a4d5a7267d329bad3883fe5d4e8f00aad06abfed8880765ac865a0b8d0d7f"
+embedded = "a8d06562757f8fb3a39b418502717755102789330a8d16538145e54e04787fa5"
+status = "residue"
+cause = "mir::Ty: util::entity::EntityTag"
+
+[[fn]]
+path = "headers::entity::EntityTag::from_val"
+kappa = "f57f2139b159e46de9c33032a92b993019f6657c580e894a0cae49560bb1aff3"
+embedded = "374b74a8104f47fe553e53de830650e521992e413ae404922834a1a9d983e11f"
+status = "residue"
+cause = "mir::Ty: util::entity::EntityTag"
+
+[[fn]]
+path = "headers::entity::EntityTag::is_weak"
+kappa = "774af620e5ad9ed16ab62ca0cea2e1aec1ea1b49ea885dc0330c67b70fe7f9df"
+at = "T=u32"
+embedded = "885f9f6378a66dbb262e6f01c9b58b00c502256bea83da8ce2023b3bfd77c9c3"
+status = "residue"
+cause = "mir::Ty: EntityTag<u32>"
+
+[[fn]]
+path = "headers::entity::EntityTag::parse"
+kappa = "7d0076cbc331be4995c99bdffe5224dd93d25ebbad7fc70ef38212f87e8a39b2"
+at = "T=u32"
+embedded = "37b956790895141270cb51d6735c1674d55b11ded39a4305dfb7fd88d7e87506"
+status = "residue"
+cause = "mir::Ty: util::entity::EntityTag<u32>"
+
+[[fn]]
+path = "headers::entity::EntityTag::strong_eq"
+kappa = "b875546e1d85c31ebbef95a5d27245c6b3c3e0a4212d586462ddfe0cca667a70"
+at = "R=u32, T=u32"
+embedded = "f89e45ff8da7a6f97a2ad8511b4ab503281282b18851d7938277a9f394149118"
+status = "residue"
+cause = "mir::Ty: EntityTag<u32>"
+
+[[fn]]
+path = "headers::entity::EntityTag::tag"
+kappa = "64ae33c72978d319a856c53d59d8cbb654217a523ca8eb76011772987c1d5cd8"
+at = "T=u32"
+embedded = "59023db022e1d32da6236d5ec3e355fd31d2489aacbcb87adab1129f47affade"
+status = "residue"
+cause = "mir::Ty: EntityTag<u32>"
+
+[[fn]]
+path = "headers::entity::EntityTag::try_from_values"
+kappa = "7e29bd972122d95bbd30e63ce098cc26b8b9da13b31a7c328e4f79a735c0adeb"
+at = "I=u32"
+embedded = "1abaaaf183c20a06cb58bf055bdfb06d43e0818f218b83524f9810999b9b276b"
+status = "residue"
+cause = "mir::Ty: util::entity::EntityTag"
+
+[[fn]]
+path = "headers::entity::EntityTag::weak_eq"
+kappa = "d569d418955279630adcc500f49fbc49d3465178d61871481fd0942b2825429d"
+at = "R=u32, T=u32"
+embedded = "73c3dfb4c84e423ae11b8b902edbb336a999034849249f0cfed0d3a84002fede"
+status = "residue"
+cause = "mir::Ty: EntityTag<u32>"
+
+[[fn]]
+path = "headers::entity::EntityTagRange::matches_if"
+kappa = "64780ffcdfdd39e08a7e177d9e4de77e75dd9db3dc3ae7949aa0aa454da2e81b"
+at = "F=u32"
+embedded = "6d795ffca888b89918675811277018c7ea9833a3560123440381870cf1bc8adf"
+status = "residue"
+cause = "mir::Ty: EntityTagRange"
+
+[[fn]]
+path = "headers::entity::EntityTagRange::matches_strong"
+kappa = "965981a8a35c1f9d233de4d8f52e684ec11dea09c9a3270356d381db35202cd2"
+embedded = "549c13a89f0976062f218867c2b4e15da60e1bf3e52e1743ef075de0a0253817"
+status = "residue"
+cause = "mir::Ty: EntityTagRange"
+
+[[fn]]
+path = "headers::entity::EntityTagRange::matches_weak"
+kappa = "e7a7120cec56a0a72f496488847192c0339b6c849895006c32c7956ccbb7c9b9"
+embedded = "9dfd64eb3fc28e9056a551d1cd0f17f7abb923edfab5ecd74a04a0eb47178a86"
+status = "residue"
+cause = "mir::Ty: EntityTagRange"
+
+[[fn]]
+path = "headers::entity::EntityTagRange::try_from_values"
+kappa = "0092374b6b98826b1f27a00e533a8a8dfd369b06a2c83c0a43ab070d96155bb3"
+at = "I=u32"
+embedded = "418e2caac59b0ce103a21755588d20478a09a15eeb541db36e6d813283d55f3b"
+status = "residue"
+cause = "mir::Ty: util::entity::EntityTagRange"
+
+[[fn]]
+path = "headers::entity::HeaderValue::from"
+kappa = "3eceb1aece232b634ff2f08dacc8c3f902140dff3ca28bc0d7904c6144e6460a"
+embedded = "08ab7f0b429a9e01e22dcd7c3bec775616bcf2f9d7be3765d8746d906383620c"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::entity::HeaderValue::from#2"
+kappa = "b04b6e143dc95ecbb4dcaf719bd8523e540b320293d490748db301560a0d3e54"
+embedded = "4f13e516d6da8c94d05fb4b73645ab070b3985af8567d410d26895ada8d16550"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::entity::HeaderValue::from#3"
+kappa = "d661b592f45e57f6ce89ea5b7a2464941a3be08c97dd50d983dc8eaeb1b0aa14"
+embedded = "c381ce3197e715797aa97e6fcbc39c97f1490f0beecac12c655a675ef104675e"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:12:10: 12:15>::clone"
+kappa = "a1a6500944788456414e7f91d04e765245e512f85429b0c1a7e63e8993957555"
+at = "Sep=u32"
+embedded = "fbb8612cbbb8c4e1cda69250970740da00844487e64ed9aca89f9f74b9fdbf17"
+status = "residue"
+cause = "mir::Ty: util::flat_csv::FlatCsv<u32>"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:12:17: 12:26>::eq"
+kappa = "b38687bd94b7e8f9dfa1dc70d77b2bbc96b1dcd5451f695c20b425194d4d1f7d"
+at = "Sep=u32"
+embedded = "2a4d8a75c99355184c74d7c790d320b04599c36906b85bacf13e26e9368b5dde"
+status = "residue"
+cause = "mir::Ty: FlatCsv<u32>"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:12:28: 12:30>::assert_fields_are_eq"
+kappa = "fd8e6bad72c5bea3c29097a8016c6a9a5bc228ed1a01ff6f727c449d68cf469d"
+embedded = "83d79def695895cef1b96ac9af819e9d6ab83b4fa5606e7cf6c1996bf9fc6570"
+status = "residue"
+cause = "mir::Ty: Sep"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:12:32: 12:36>::hash"
+kappa = "76e4ef659279c0403c4c755ede398a93f8235f1ec938d21159b867af5f4a25d1"
+at = "Sep=u32"
+embedded = "61bcb5352165907d19ad7cfccf45a980be14d9b1f6433adb518540e4c25aa421"
+status = "residue"
+cause = "mir::Ty: FlatCsv<u32>"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:23:10: 23:15>::clone"
+kappa = "c3892cc466bbb17f08d5b30cd0c2063fbc7e8f3e87764aba7884310b79f8d24e"
+embedded = "a78cdfb55b15f89c065e036e7a4fee246ef1296e5bd90a7e43270ee0d6accb94"
+status = "residue"
+cause = "mir::Ty: util::flat_csv::Comma"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:23:17: 23:22>::fmt"
+kappa = "ee3924ed9e37564c2f05ace440b087c49c9c4640f39045264efd965dbec237dc"
+embedded = "82ceaa67c5bf96a0b8e7ee601c041548b3cfcb0ec72c1b1a978c6921df6bd9a7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:23:24: 23:33>::eq"
+kappa = "1ce94f86bdbfe65f97dfe6ee90d0daae7ecb896f03a23ee1e016def81e5b2bc7"
+embedded = "c2c316cdeb619bfef7e044d636f56fabd3b9eeff3f4946db5a62a974d3c89882"
+status = "residue"
+cause = "mir::Ty: flat_csv::Comma"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:23:35: 23:37>::assert_fields_are_eq"
+kappa = "315620cd8396dd46841171a1d0bba423b504d1f45f5adced65b666e78981ddc1"
+embedded = "f66cbe418443c89d03a7c208dd50bd73bb4982413540553859b6036f8f5a125e"
+status = "residue"
+cause = "mir::Ty: flat_csv::Comma"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:23:39: 23:43>::hash"
+kappa = "a8e5a6148fd71235c99f6d4a2bd0ac8bee493801ab94d1d082d72dce485f2d0f"
+embedded = "98e9c7e7b55ba06b185d00fa5943899d6ed249b7b55e0714ab9ba2cbf59d0e54"
+status = "residue"
+cause = "mir::Ty: flat_csv::Comma"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:31:10: 31:15>::clone"
+kappa = "e54a6b82b4b906c1983837d2f7d68a1c5db668011deff334c1c7cf5d6897c2f3"
+embedded = "d7354aefb9b53c4a9e37aeb49ff29093cf099162a3fc8413b915dda63fa833c2"
+status = "residue"
+cause = "mir::Ty: util::flat_csv::SemiColon"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:31:17: 31:22>::fmt"
+kappa = "df4d9e7a00bb91f22ef25d4e063271786c51d41a01acd5d7bb08929cd69a932b"
+embedded = "ee1ee643a3161d6477c8fdcd6d330b6993331eb755966a8fcde99f37f9b52616"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:31:24: 31:33>::eq"
+kappa = "3bd1018964b306e453d96d0f5467c12be035b81732770d34405c65efb4863c0b"
+embedded = "01f82330e15cbc0797ffd160c60da0cbfdcfb1b32de075978c26d70d30c07872"
+status = "residue"
+cause = "mir::Ty: SemiColon"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:31:35: 31:37>::assert_fields_are_eq"
+kappa = "a057d259b79d763e7ab6ca1c6a1b978016643e8fb41aeb186e8df7985ea4340d"
+embedded = "3d68d97f0e85c0f0b35c492270b3307c8f44c49ffa57be501f73fba1ebe2fcb0"
+status = "residue"
+cause = "mir::Ty: SemiColon"
+
+[[fn]]
+path = "headers::flat_csv::<impl at src/util/flat_csv.rs:31:39: 31:43>::hash"
+kappa = "3ed9494eb75c688217a8e5b07eec87108a48693dff30a4852ce4155cc55cf9ed"
+embedded = "7ca41b7468360d4ce2e2af807d7bcc8b09d592defc6c89ad4e2173b3955df25a"
+status = "residue"
+cause = "mir::Ty: SemiColon"
+
+[[fn]]
+path = "headers::flat_csv::FlatCsv::fmt"
+kappa = "cab4e796d03ca2611427abc5980afd134be31bfcfee59f3b45ee248cda117cf2"
+embedded = "c9534a3f5f0ea2210034f3c28aaa49d63a7f5536753136afba943509277b9836"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::flat_csv::FlatCsv::from"
+kappa = "eb44094b54ff58d13ca59b9be90e92366f71d7b2eed744abab7d3f3dc91b3113"
+at = "Sep=u32"
+embedded = "292ef4e9f13b58f4fd57e67eb233284341ead4fe1a55448fe7cc0cc3128700ed"
+status = "residue"
+cause = "mir::Ty: util::flat_csv::FlatCsv<u32>"
+
+[[fn]]
+path = "headers::flat_csv::FlatCsv::from_iter"
+kappa = "2f5e651868b43cc1f113d4ba57ebdd7a338ea22d3ce7c45f85d6d0141a1aa06e"
+at = "I=u32, Sep=u32"
+embedded = "2b56169681f5df8fddb862d7164f00bc6e32e6d030ef975ca09e8164d57c9eee"
+status = "residue"
+cause = "mir::Ty: util::flat_csv::FlatCsv<u32>"
+
+[[fn]]
+path = "headers::flat_csv::FlatCsv::from_iter#2"
+kappa = "d2b3910b77124ec61337139c2f7a6da9a19ba7126d0922538038d8173570595f"
+at = "I=u32, Sep=u32"
+embedded = "d4c0cd93cb457603888178a4306e89b4b271ad8db43337776d03899395122971"
+status = "residue"
+cause = "mir::Ty: util::flat_csv::FlatCsv<u32>"
+
+[[fn]]
+path = "headers::flat_csv::FlatCsv::iter"
+kappa = "f1ceeecc5f471bc82ad362bdb5031d58088da066aae2d8c210e9e1ed70a12e53"
+embedded = "e14e3ada849f2f3348735aa3b772cfbabafbdec7b8fef0f987c9c8ebaf96b499"
+status = "residue"
+cause = "mir::Ty: std::option::IntoIter<&str>"
+
+[[fn]]
+path = "headers::flat_csv::FlatCsv::try_from_values"
+kappa = "aa7a70b171f9f08973a5377648733ad92c3e2ac374cb2983d3a46efcd79746c5"
+at = "I=u32, Sep=u32"
+embedded = "5325bb4d61804396aa49526c7534a264467b12818b156731dd7907c0eac25470"
+status = "residue"
+cause = "mir::Ty: util::flat_csv::FlatCsv<u32>"
+
+[[fn]]
+path = "headers::flat_csv::HeaderValue::from"
+kappa = "8f44145cfa33e69fc2691270e2e7e3cce0d72a3fa0d19006dcd01810223990ea"
+embedded = "900e34abf62e620de2716896bb53169058b66bef352d63f2b5727dcdbb6cbce6"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::fmt_comma_delimited"
+kappa = "e1965b0a3a59db135f7186bb28df634e61aded8cbb80c16ee440bbbcffc1f105"
+at = "T=u32"
+embedded = "d8c11f47c31c8cddd77d9d25450b42b81ad860045dc62ae4d00ae1da8d553ed5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::from_comma_delimited"
+kappa = "671720d07f23341aaff31779b21c1a25705da7044b6aff961766aefa006d96e7"
+at = "E=u32, I=u32"
+embedded = "99de9b3b70ba6425b3e4e3cdc19f668c9cc41e4b87b8e858cbf375e5e8ac75a1"
+status = "residue"
+cause = "mir::Ty: headers_core::Error"
+
+[[fn]]
+path = "headers::http_date::<impl at src/util/http_date.rs:33:10: 33:15>::clone"
+kappa = "831dcb51c7b9bef8810a2a521a0078d3ecd40b4a1b48d8e4a7699c626edc454f"
+embedded = "ae6524a415106c28dfab347b40a2d0de4d8fed126879f54d6db2fed68d5f9518"
+status = "residue"
+cause = "mir::Ty: util::http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::<impl at src/util/http_date.rs:33:23: 33:32>::eq"
+kappa = "07716a9087525cbfcdb070103167155c9372ff407436f5bde05ebe75e6031ccd"
+embedded = "44e64f27636bd9a75609f83471f8d9ff379a981b022a152d87c074ef3adfbaaa"
+status = "residue"
+cause = "mir::Ty: http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::<impl at src/util/http_date.rs:33:34: 33:36>::assert_fields_are_eq"
+kappa = "4caf8ef30993d1e7d22ea6569fffc2068d67eb644e5f40b5eb5a22a4e8eb6920"
+embedded = "4d0ba848e20ba7e7b102a1ceda250816975c82bbbe24e1947a85d97ef72f317d"
+status = "residue"
+cause = "mir::Ty: http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::<impl at src/util/http_date.rs:33:38: 33:48>::partial_cmp"
+kappa = "85ad70841d8edb74350b56555e923002805bd2b4504cd942cc7d5a94fb664ac6"
+embedded = "aac72ea6238a4125b1ec8401b4e7733d8cafade4e1ef2eda1467d13809fa840f"
+status = "residue"
+cause = "mir::Ty: http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::<impl at src/util/http_date.rs:33:50: 33:53>::cmp"
+kappa = "b6a22cfcae74aeb94eaed78b6e6166ddeeaed341a03faa8433d28272dc779527"
+embedded = "41b8389f9af81afde36afd2711059f3077ae7fa7b8ae75ff39396891d0386cc1"
+status = "residue"
+cause = "mir::Ty: http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::<impl at src/util/http_date.rs:33:55: 33:59>::hash"
+kappa = "478a799265e69c485581fe4d589ee97416238321c0d5605d1679a423bc7057ce"
+embedded = "504b60ce98213897de8df2857a8962ac8e229e0e33725d91796397ecbe11f4a9"
+status = "residue"
+cause = "mir::Ty: http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::<impl at src/util/http_date.rs:43:10: 43:15>::fmt"
+kappa = "69d0043cfcb2fd8423cae6538de99382c27e125142583739dde0e4cca521a379"
+embedded = "1b8d688b67210bba3907e7020394da1d912389e096c36445e165bb853c0725ab"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::http_date::HeaderValue::from"
+kappa = "42f5863480da8c19d14087b15baaf692d8fcf64709e8a07793802f76dde5114b"
+embedded = "eda6bdf04b20693214869a76b3fbda3822d00bed6d714941ecda6bd911d3fe8e"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::http_date::HeaderValue::from#2"
+kappa = "82d42cd1f11771085b300400d5976ab36051617f12aacfb0874f4b0747481cd0"
+embedded = "c6c851d3ef33291c83b9a868df89459cdc90ef90c72613c4504f09f367267e20"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::http_date::HttpDate::fmt"
+kappa = "46567b9bfd5912fcbf8f925e9c5811bdd0f6bcf0d4ccf818e33fc70014352442"
+embedded = "0d5e698649a66f6d2a370797ce7e683168e0f90d2d3cf6c44693345479062daf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::http_date::HttpDate::fmt#2"
+kappa = "514cb0da1e1fba2599d566430ac21ec70dde8b71c62b4d5ed6373993bf9b955f"
+embedded = "0037fde51aa627777e957c3b0fc3a642e4db50165edd38636d439fcc1b621d11"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::http_date::HttpDate::from"
+kappa = "51c738d478b70c8265036f90e88a953ee830f6bce24306009902e6625b1e2cad"
+embedded = "eaff06212bdda8d9dc4368edd96d9d5e85c92692f2c6fc241300c003bf56ce7b"
+status = "residue"
+cause = "mir::Ty: util::http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::HttpDate::from_str"
+kappa = "15d09767593409019fc48d6bd3586070f41ecc9e22e3d048cfe2b1dec14ea4e8"
+embedded = "eb575264940d6b3e30266067a1c68de8fe62292e767efcfa41abd7fbdafb02d5"
+status = "residue"
+cause = "mir::Ty: util::http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::HttpDate::from_val"
+kappa = "8fe0f8173eafc14b844f5aec34a38744f4a33ea8828008689a4a33142404c2a0"
+embedded = "46e29946de427940106b04f9331242d85818f0a64f251466fbdaa0856caeee79"
+status = "residue"
+cause = "mir::Ty: util::http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::HttpDate::try_from_values"
+kappa = "a00cc750593003a3695c76e45a15e298355d27035e0edbd386fe8369e69fbf74"
+at = "I=u32"
+embedded = "458354bbf669157501e8e5e08e0fbc0993b9cae8a1233b78fe1e71a45523e82d"
+status = "residue"
+cause = "mir::Ty: util::http_date::HttpDate"
+
+[[fn]]
+path = "headers::http_date::SystemTime::from"
+kappa = "5aa98d8ab38bb213e2a71f63ae89919cb1b416594c04c58595f02dcbc5fb8a26"
+embedded = "779977210e949fa71cf36093c285aacd8c7dcfe2025434cacdd8e5bd62888a95"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "headers::seconds::<impl at src/util/seconds.rs:9:10: 9:15>::clone"
+kappa = "daa4e657455ee1bec54d8c3b01ebe7c36d654e0878d206bf17b3c245f3f61b14"
+embedded = "b84fc1f05b6d031d565cbc85937924dc67f13293139b41f47e73e6ed811d05f0"
+status = "residue"
+cause = "mir::Ty: util::seconds::Seconds"
+
+[[fn]]
+path = "headers::seconds::<impl at src/util/seconds.rs:9:23: 9:32>::eq"
+kappa = "1b4517b6d33ea4f7794d7604140db3f5a7c5d0d66997a6f7c108ca16f6df5fb6"
+embedded = "48e65a2d37998362a7884ba8e7ca5554490181d0df0a784ac7d386ce2d571537"
+status = "residue"
+cause = "mir::Ty: Seconds"
+
+[[fn]]
+path = "headers::seconds::<impl at src/util/seconds.rs:9:34: 9:36>::assert_fields_are_eq"
+kappa = "a98cebbe0d9b83e833227f943ccdc0577a6acc9e443ae5b2d713ee3fb777386e"
+embedded = "b98896a4c591c8b6544c190dbd7a372f3388872aadc921a8db694cd9564436df"
+status = "residue"
+cause = "mir::Ty: Seconds"
+
+[[fn]]
+path = "headers::seconds::<impl at src/util/seconds.rs:9:38: 9:48>::partial_cmp"
+kappa = "446ad78a24981fc6aef1288f0ceb138d89d8d4c1f7b626912a527fc53753c6b3"
+embedded = "577bb0deaf3d530fcd17b069e427ba3269b878ffde11e90f15f336069a747217"
+status = "residue"
+cause = "mir::Ty: Seconds"
+
+[[fn]]
+path = "headers::seconds::<impl at src/util/seconds.rs:9:50: 9:53>::cmp"
+kappa = "2309ddb01020db2f0e6b7ef8a4455f0c7409778c32668cfe9ca7f2d91cc9f76e"
+embedded = "6c4698d6c845f91f3ea2bc0ff04d018e86041b50d87b55080f9ececd471dc807"
+status = "residue"
+cause = "mir::Ty: Seconds"
+
+[[fn]]
+path = "headers::seconds::<impl at src/util/seconds.rs:9:55: 9:59>::hash"
+kappa = "1c6c2939201452fabf85561bcde7c331c423bb05e21b9bb1897cf9e591849f03"
+embedded = "8d063956db13ae4ea5581f48adda87e32c88272e00bf4d2fb91dc0c8e3f52179"
+status = "residue"
+cause = "mir::Ty: Seconds"
+
+[[fn]]
+path = "headers::seconds::Duration::from"
+kappa = "158b79d71691c04d4e6a63ac5a615c24ecb6520730d37c0bea2426e12fc3f6cb"
+embedded = "dac57100bbe747df7e662439c36bcd414dc072697109841c63687e5f6ea398e7"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "headers::seconds::HeaderValue::from"
+kappa = "e8a8eae74a84190bed509c280c806d585074d1cb524f4daf37954cd14a968f3b"
+embedded = "698aa182f1dd86137544e8e0af847ab5cfff19e7808e3b80bbd2d82c95b93ff1"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::seconds::Seconds::as_u64"
+kappa = "dd55e4f9d3c4c6480d09bd24fcca17c457fe4358106b4a65768894fe6b960a53"
+embedded = "a3d690dc06dab788d4823e7e6527f0720ebb97f7566dfb1a4124c2abb541e19b"
+status = "residue"
+cause = "mir::Ty: Seconds"
+
+[[fn]]
+path = "headers::seconds::Seconds::fmt"
+kappa = "ab038325c05a32502513cb27ddfe5f7b271c0e65d6247ba9dd27dafe6f1bb244"
+embedded = "1de5b3e0a066af6320826eca0d6f2a7c9d4aa34fe0240b1a31ac03289f80503d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::seconds::Seconds::fmt#2"
+kappa = "385d7facc4cb8be889f44706d7193c9d6b203c6152f71c74b03a928a1255a73e"
+embedded = "7ff97fedd953ef8daf4b833868be35577d80231dc97b2e7a24e880e644fd9f59"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::seconds::Seconds::from"
+kappa = "0496c2880c037e0f5c4d98dae5faf178dba33e8da866aab8024f0a9345886a26"
+embedded = "812b9606cff7171a1b9f513b4b1a0c1d7c104e832ec90dd7d32bca22b81b4467"
+status = "residue"
+cause = "mir::Ty: util::seconds::Seconds"
+
+[[fn]]
+path = "headers::seconds::Seconds::from_secs"
+kappa = "034a60815f23a4185a570e31e4e35e68bab52b744a3321540d3b326c84e84449"
+embedded = "101ed6ccd52beec06398280b8a08f44dd6cf2c28883ba12eafe1be4df1bb2724"
+status = "residue"
+cause = "mir::Ty: util::seconds::Seconds"
+
+[[fn]]
+path = "headers::seconds::Seconds::from_val"
+kappa = "5c69d81ee5914feaf1ea6d66b9607319c357acd285b0cdce09e7f1f65c8d4b41"
+embedded = "5261c974736d3dc77debdcd5158d0767802b532993c7ec00b076b3b01cea1191"
+status = "residue"
+cause = "mir::Ty: util::seconds::Seconds"
+
+[[fn]]
+path = "headers::seconds::Seconds::try_from_values"
+kappa = "3897e23f3e733d2553a95f5d99eccb81313800b7760099d0a02812c7ab322ebc"
+at = "I=u32"
+embedded = "3972f7c21c1c7b27db45ddf0f044f735909b0dca627730d160c289612b4913de"
+status = "residue"
+cause = "mir::Ty: util::seconds::Seconds"
+
+[[fn]]
+path = "headers::util::HeaderValue::try_from_values"
+kappa = "5982aacc6bd51c0aeb087fbde335042154118db9be233aa3fe75517a695d0e32"
+at = "I=u32"
+embedded = "73f8ef0c8e70e352e817c06b1185c2ceba899e61270989634bcc77de557d6901"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::util::fmt::fmt"
+kappa = "bef191d6e231ec37394ca76fe8dabfdb956bb643c6035c5d2039ce40c0367c30"
+at = "T=u32"
+embedded = "d60239a475e888e31f414d7024f99653e223a473b1b927b20dad58801b17533e"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::value_string::<impl at src/util/value_string.rs:13:10: 13:15>::clone"
+kappa = "c5449c45bd10bf95a4a99086535e76c8835d83da28e65dc7817d77b9dceaa523"
+embedded = "6d3683361b497e47d2da629a0694e79ed5a9441da24281e3d987277efd666be5"
+status = "residue"
+cause = "mir::Ty: util::value_string::HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::<impl at src/util/value_string.rs:13:17: 13:26>::eq"
+kappa = "9affabd6300c71e101c85c94de5c1c15a221ce7cd000cc6c8151cca33b608ca9"
+embedded = "8fadeaf945cadfebb2c5dbff17f7460bc26f795925b9d26e1aed32ffa9e89de6"
+status = "residue"
+cause = "mir::Ty: HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::<impl at src/util/value_string.rs:13:28: 13:30>::assert_fields_are_eq"
+kappa = "4925089fe7680304ebe1b084d03702eb82b56dc6194bea78da5acc5ffb937643"
+embedded = "c17055ea5fd241eda2692b4766eda9858e2e00edf70716d39432060192519273"
+status = "residue"
+cause = "mir::Ty: HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::<impl at src/util/value_string.rs:13:32: 13:42>::partial_cmp"
+kappa = "f477acadbf2297a7ecee4d69a3a9f2020361d08c939384427f44b3b3ef945012"
+embedded = "f1d930405b0115fe349bd3b33c8ac98453c318dc40ece6f3cf1b0c22d74bbcf8"
+status = "residue"
+cause = "mir::Ty: HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::<impl at src/util/value_string.rs:13:44: 13:47>::cmp"
+kappa = "6af412b9eafd4967e3759c1cc211398304584afae909b306d02449ea9b06954f"
+embedded = "48aff056e375ed2a429353da284ef46ba8de97aa1e9c8d3160aabfaf5807fe4b"
+status = "residue"
+cause = "mir::Ty: HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::<impl at src/util/value_string.rs:13:49: 13:53>::hash"
+kappa = "1a95f505022220ddb1e707481ef7f47f83791913bc7eff318e1a1224ae036b78"
+embedded = "43c6b665648bbd317ef00d55d9a973980b05d72bd23279fd897f6d6f8d430658"
+status = "residue"
+cause = "mir::Ty: HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::<impl at src/util/value_string.rs:82:10: 82:15>::fmt"
+kappa = "ee9b8775c7da81576eac8b9c53efd81c8f55fd03932599018894998ddd058231"
+embedded = "2814822bebc020a51e0ef85698c3b165d07a6665bc83c1cbf8d1cef0605b3b92"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::value_string::HeaderValue::from"
+kappa = "6356f1c842b80fd8e1f70129c6274ddfce358e8cc3c37c7215a22e5907d3cfb0"
+embedded = "1995ee4d2939081d651b9b4ea905386b2e342d7c399bd80d7c985088068a3bc7"
+status = "residue"
+cause = "mir::Ty: headers_core::HeaderValue"
+
+[[fn]]
+path = "headers::value_string::HeaderValueString::as_str"
+kappa = "f27ec4ffa67792a42a8a41057f4c12c36b31220adb9b8925872ce46f2b059cfd"
+embedded = "f200ec73b66b0780900dc6eb548d76d6d3bc78923aecd2450eaf28385db22f34"
+status = "residue"
+cause = "mir::Ty: HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::HeaderValueString::fmt"
+kappa = "2bd1c840898f85cec0cba89ee12a8f7a7fa13da5fe31d22834aef0caa7f04943"
+embedded = "617914154fc900ebc1fb658e5425580b6829e81b33641ab8a6bfcf78f85c9e99"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::value_string::HeaderValueString::fmt#2"
+kappa = "a468d85c8ef1807ed57af16bd4b008fd522377a7fb071d59c454a06267d95b8d"
+embedded = "7667c31d1dbc8f3bfb14a96196398dd165aa46f8cf2bdb830ce3d2c0139be317"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "headers::value_string::HeaderValueString::from_static"
+kappa = "f7625e7964c1235a5818bae0ee836c86860cb2c5c4a807b0da016a4da6930e06"
+embedded = "905d54ff9c51f398ccedacc0c712f196e5ce7ae17910a85d5162f7f65e2952fa"
+status = "residue"
+cause = "mir::Ty: util::value_string::HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::HeaderValueString::from_str"
+kappa = "05ae192d5325330a6ce83d5e98d8752e83f68430c40be9659c3d967cf5b0bd24"
+embedded = "86d222e0a750f4db4d223ae1197a46d1270e20d5d670079bf87e2088d8bac602"
+status = "residue"
+cause = "mir::Ty: util::value_string::HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::HeaderValueString::from_string"
+kappa = "e65cb91fb5440d63b089c20df18215a17355fa02d59e29edf63ee5da40da9153"
+embedded = "d675bb2b72f4e4fe2b6ddebff96b2d2ff813e1f9d6272cff02221797bdda16d0"
+status = "residue"
+cause = "mir::Ty: util::value_string::HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::HeaderValueString::from_val"
+kappa = "eee082280f8b752668afc55e8c153296c3a3f46bf14ca728048bccc802654ee3"
+embedded = "d6ca5ca781ddabc4abd37d4a6b318af81ece76f81cd26fdd788633b64a065105"
+status = "residue"
+cause = "mir::Ty: util::value_string::HeaderValueString"
+
+[[fn]]
+path = "headers::value_string::HeaderValueString::try_from_values"
+kappa = "4ca0c468818a16ac1b866c5d18fd3910c7f72d5f61675f7bc677e6024b7ac5f3"
+at = "I=u32"
+embedded = "aadb5ca58752f93cdba9133253e1bba9ba72ffb77225d9123ef60b8e93fd3371"
+status = "residue"
+cause = "mir::Ty: util::value_string::HeaderValueString"
+

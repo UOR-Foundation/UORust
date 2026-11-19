@@ -1,0 +1,115 @@
+[[fn]]
+path = "notify::<impl at src/lib.rs:282:10: 282:15>::fmt"
+kappa = "cb33fc80e2b3325a40deaf012d8f6ea181236fe375e58613fa2e16adda8fd6a4"
+embedded = "5628716880dff4a44ec9d5209b5f8c2e08e582c2d6356f2abbf2bc878b503039"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "notify::<impl at src/lib.rs:282:17: 282:22>::clone"
+kappa = "23d052503d22b69e509f31d29a8ebdee783b4793a8e001184adc9b126f0d4326"
+at = "WatcherKind=u32"
+embedded = "93ad400eecf9c3620354c6350f57a16f0f0a7dfa94a8c455ba669f4ce0a9fc1d"
+status = "translated"
+digest = "08f796dcb2192c01e94171574787590b95f971b47a5be154d673d3dc1c1ec0db"
+
+[[fn]]
+path = "notify::<impl at src/lib.rs:282:30: 282:39>::eq"
+kappa = "56056004418dc5ed8d984f96c33a79f9f713b92b887c1c962b6c76dd531c7949"
+at = "WatcherKind=u32"
+embedded = "a6fca8dbc3a80d3073a9373efb78a1dd40ea458803a9e52f20612ea6f61b0b25"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "notify::<impl at src/lib.rs:282:41: 282:43>::assert_fields_are_eq"
+kappa = "498feecfcdc2656e9f22bc38e9ce5803b491cecb2cf8644ce4ceaf239f39a3e5"
+embedded = "bb2690758b36c635dfefe3b5cfce77b3510e2dc636ad6215fbc7c4a174701b99"
+status = "residue"
+cause = "mir::Ty: WatcherKind"
+
+[[fn]]
+path = "notify::<impl at src/lib.rs:282:45: 282:49>::hash"
+kappa = "11630c67b04bff06d096f898333dc5707424074c98d92a38c375c69a2ed84efc"
+at = "WatcherKind=u32"
+embedded = "fa1a04a34721a9752ed1d4af41ceb56394eb127c58acbb587fb89549ab5c8bcd"
+status = "residue"
+cause = "mir::Ty: __H"
+
+[[fn]]
+path = "notify::F::handle_event"
+kappa = "cb7a579c5499b50b3b5349624fdaa6a8495e0c503239f56a0153d3fbdc5c59d1"
+at = "F=u32"
+embedded = "16db7396d3965c25f08b43c6d82316410e5dee0f41c5d72131dc3141e7dba74e"
+status = "residue"
+cause = "mir::Ty: notify_types::event::Event"
+
+[[fn]]
+path = "notify::Sender::handle_event"
+kappa = "b706b0d6ae2a4a6d1f1bdeed1fe1ca04f3a620e8f46c819ff8394d2fef37e623"
+embedded = "bdde00efd1d55ce01aa64cc4c22557ffe555483257c554e188f89e036f7f2a99"
+status = "residue"
+cause = "mir::Ty: notify_types::event::Event"
+
+[[fn]]
+path = "notify::Watcher::configure"
+kappa = "572f7ef1dfc4ffdd5fd63d0f5acb053462d525368a78df717c48d70f3b5a1a90"
+embedded = "1737601b24746bf6215b5273b4859e41d7b06d0d688e432cc32d0af77758210e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "notify::Watcher::paths_mut"
+kappa = "04328f9034f423ac07e72d601614f8d5c2197374ca519f2c37c19d2233a69fdd"
+at = "Self=u32"
+embedded = "5c1f5a4c41b17cfe4171170bb5ddee06becc694bb6ea8e3f2aa104a92526d369"
+status = "residue"
+cause = "mir::Ty: dyn PathsMut"
+
+[[fn]]
+path = "notify::Watcher::paths_mut::DefaultPathsMut::add"
+kappa = "d11921013567f59306a920c31dc19d9ad9e13b1e3f5625d5c647739d329206c4"
+at = "T=u32"
+embedded = "d35be59664ed13b180813bd5f5c654afeb8a804ebd4fb4bc106cf7146f06b1dc"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "notify::Watcher::paths_mut::DefaultPathsMut::commit"
+kappa = "ab7d1db8c9c558cf7053ae4ded2d240ce7160b3a759e1c1fa036aa0855015b4b"
+embedded = "7d1f684ff039ab2becdd7d7f1cd2eedb192073f2b7990a67c02057441149db17"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "notify::Watcher::paths_mut::DefaultPathsMut::remove"
+kappa = "37c3662c241d8af66bc4773cd3a3495e6cf90f1f07d81c96c14ce4cb309660a0"
+at = "T=u32"
+embedded = "6d60bcf6def263c0461b7da17b1cf856fb09001b9897a0871c28a284ec708b30"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "notify::bounded"
+kappa = "9e1c72b66ead227f9937b12cbb08084403e09ec1787558d03dc8e992ae67d40a"
+at = "T=u32"
+embedded = "2edfdd8d983f85b42efe4eeb4c8a74973c37285e987b346f37c9584ac9b2f938"
+status = "residue"
+cause = "mir::Ty: std::sync::mpsc::SyncSender<u32>"
+
+[[fn]]
+path = "notify::recommended_watcher"
+kappa = "8135cbd8175dd695db6c0ec191176cebb02165d972bb574c3b0b8d74a7c2c4fc"
+at = "F=u32"
+embedded = "510191bd219c4ee7e854c396d5846cda4b3f392aff1e3cda3a7a216a792e4ef2"
+status = "residue"
+cause = "mir::Ty: inotify::INotifyWatcher"
+
+[[fn]]
+path = "notify::unbounded"
+kappa = "a9f38a76b65f1b6252413fe539b723a52b740a525b14c049e4c4c111fd17d1fc"
+at = "T=u32"
+embedded = "8f5d386ce08bad40f51d18741b52c844e67328e4b496b616b68b59e85daba1e4"
+status = "residue"
+cause = "mir::Ty: std::sync::mpsc::Sender<u32>"
+

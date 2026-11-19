@@ -1,0 +1,3465 @@
+[[fn]]
+path = "lexical-util::Integer::bit_length"
+kappa = "d518e66cc871fa7ca49bc924e943dc36a2af4445f13230ae770b51081611fb70"
+at = "Self=u32"
+embedded = "9689419c96d43e81a4c0f55642d168544c8e4d4b9717d4e9607c81528002bbe1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as num::Integer>::BITS"
+
+[[fn]]
+path = "lexical-util::Integer::ceil_div"
+kappa = "b5a9d76c1c13e758e2ab73019f2f6cfc4a930d40a2b82db818502fc09274d52c"
+at = "Self=u32"
+embedded = "0fd8d876e98ffc0ec9bcaa7dfafff53b657c48c915426c4cf748522f11e0dc99"
+status = "residue"
+cause = "mir::TerminatorKind::Call: num::Integer::ceil_divmod: lexical-util's MIR stops at mir::Instantiation: u32 for a parameter bounded by Div, which u32 does not implement in core"
+
+[[fn]]
+path = "lexical-util::Integer::ceil_divmod"
+kappa = "0eb20f1d0b3a05c57343c7e5aa50b0ab0f81502ac0118407100b5e62d0103682"
+at = "Self=u32"
+embedded = "91722c3a757c26609c6c0da0602527e1d45a0b117a7a0da98392689fc1e43616"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Div, which u32 does not implement in core"
+
+[[fn]]
+path = "lexical-util::Integer::ceil_mod"
+kappa = "9642cc58b7774c8fc6ebe914718253a6be54aafa3cb5a3d0e93e555c2c3cd6c4"
+at = "Self=u32"
+embedded = "87efc9d2afb0e9635ecac32a451172914ee51fef994a2696871c7b61511b7f62"
+status = "residue"
+cause = "mir::TerminatorKind::Call: num::Integer::ceil_divmod: lexical-util's MIR stops at mir::Instantiation: u32 for a parameter bounded by Div, which u32 does not implement in core"
+
+[[fn]]
+path = "lexical-util::Integer::is_even"
+kappa = "aaae34f58fbcadc5733844538241fa61a92ca732c101b5a75c80e9cdd02c8215"
+at = "Self=u32"
+embedded = "89a181f4a42f7aafecd345530b3771d744f4e294bdaf48df987d543e330d57b5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: num::Integer::is_odd: lexical-util's MIR stops at mir::Operand::Constant: the constant item <u32 as num::Integer>::ONE"
+
+[[fn]]
+path = "lexical-util::Integer::is_odd"
+kappa = "4ddb483981d627fb62e9610f41453546fbad05dd0846c1a2acad2c93d9a026d2"
+at = "Self=u32"
+embedded = "04b213e73f19c983d610a9f321040dd872a2b32021b21c0bb7922d92aafe4c31"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as num::Integer>::ONE"
+
+[[fn]]
+path = "lexical-util::Integer::overflow_digits"
+kappa = "62abaa810491635a520de491f3a3bdbed1b122ecd42e3496ab0f4f5af947ac79"
+embedded = "1eb20f2b520a100e1d332ff5677ff621d01424177e5d0f4f84e64c4b5d94341f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "lexical-util::as_cast"
+kappa = "a690158800bcc921dd2fd7c32a588645e748df5b487a744ad09114503ec25d1b"
+at = "T=u32, U=u32"
+embedded = "f32966c3f9a3fd76dab99c692c08f645567190ede60c8715c259037d5c95e923"
+status = "translated"
+digest = "65a2fdf0917263aac577b78eab8c62e10f220af61d5112389b78d6c7b419d49e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast"
+kappa = "b758872e8083f8c3d489720fa81a5e6d506b19ddac0f16ff0dd6f91854eb06a0"
+at = "N=u32"
+embedded = "5e2718954acc9e2a71bdc453ca1ae755d6d388f720de7ef83deab7556eda6da5"
+status = "translated"
+digest = "90fb4093e08c9cbb7a631dd148fde901c2cb61f66328110e43fd59ad9fdb8d17"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#10"
+kappa = "a822420a90639070e2595f1517d2624819c54f68ebf784811d4f020dd8128313"
+at = "N=u32"
+embedded = "612477a6c6f3b1904c2de5121ca5e571e1ca832579bf760abdcb0a87b779dac8"
+status = "translated"
+digest = "77761b7ba6e7a53f3e8693b21181e500ef1740a42a646304d3061bc494f4f159"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#11"
+kappa = "ace9f4d90f4556cbe29eee019b9a4565d4904d794dbbc778acf261b7376edda7"
+at = "N=u32"
+embedded = "413776c7e945e39c7f5af96398c63e589d222eddeed88f9bb46cd3fdc6380274"
+status = "translated"
+digest = "c8a0ad31155ca4602bfd875592386637c2913f9483fa74fc2aeb1d28ac25f0b1"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#12"
+kappa = "521b3469a09da6d9daeeb2c69f804fd1434b180bac95dae22cb77445372642e7"
+at = "N=u32"
+embedded = "334c4ec74ef0593a91410836bcbadae1282fddd2faa923544057ba7d9d713198"
+status = "translated"
+digest = "fe79380e3de3d41674693d13109ca850a56a4cd63b19169d0cd479a04187a246"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#13"
+kappa = "0eb9c7c775d0711900aa55083c137559eaaa702d9844c2c209fc99c5ce017340"
+at = "N=u32"
+embedded = "0dbcabcc0da47fe813023edca890e90d6c42e6af2e9ef60aae4327158e24669f"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#14"
+kappa = "9a2c3434591e67773bab78e23cee7376fb612e5638b3cff72cd5f3d75213e783"
+at = "N=u32"
+embedded = "f8b65bc3a788291faecd96f608eadf787f3b369cc65e7c00fdc7293388df9291"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#2"
+kappa = "d05176c0de0e7bee2435c8a6936f30a0fd22a1f8fc30b138798fccd8670029fa"
+at = "N=u32"
+embedded = "b7bb9a4e2bc4efd9f6d4a7ba37fb3ce718abebf80a5ddcf071d6022745eeece1"
+status = "translated"
+digest = "4420d27ebcb1883057ada1d7148e0aa43e46b8424c498ac6ec8ec44e04ce6ca4"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#3"
+kappa = "ae1147a2e751aa75b9b488cafb8565617083017b6da649002c7847525e6cee5c"
+at = "N=u32"
+embedded = "08433e12d16fc5a077cf84bfc4563c5f677ee55c7993ed5646a432d9e23e12fb"
+status = "translated"
+digest = "09a667bcd9446e10cdccf96b3f4910582793388d2ce7d08a14aa07b2d5e774a4"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#4"
+kappa = "156cab60ac5e49a4f3c29be79bc0f68c33dee59f6fdce9c58f5a39c273422775"
+at = "N=u32"
+embedded = "92fa13dd44556f8b2021593ef8fd21c9658437a291602f8026eca3ca7730283f"
+status = "translated"
+digest = "beeece4cca40dd86a91ec101c12504aec7ec8fc430c4b8e3c2fb6a5cfb9a27c0"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#5"
+kappa = "a78fc6420b477a451cbbca7740568420fcd9df70789e395699f133b2dbb5c159"
+at = "N=u32"
+embedded = "46dcf3f8e0e430a76f27ecd2aec2e1e050238ad468438137d58bc10c5295587c"
+status = "translated"
+digest = "e3e33d3be584c8f9bc4939646cd7f6aa57dd8b060b36a63089363061518de449"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#6"
+kappa = "afed404bca95ee11a837366ab5ea4595344c2995fcdec1fbbab621f2c75c5857"
+at = "N=u32"
+embedded = "cbab17b9bc855eb989f11360fb4b33b3a31144d0b7dd31a47c6c3dd88fa09d46"
+status = "translated"
+digest = "4ba12780d1500bad3a7de3ecb5d0fa9289608edaaec9b9f945c07305cf434c72"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#7"
+kappa = "fada4dbb2aa2e0880539e7cbca876ccc1bbf7f5fd0fe23b478e3b5260b45ffe0"
+at = "N=u32"
+embedded = "abadc9a874a25cbd4fd38a1d82bbc9171427b72746035f8cc5140146e60e1472"
+status = "translated"
+digest = "9888b1f0a3d3b65cbe8a465e449dad4473eb4684d9429066aa4e4c8dc1ebbce8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#8"
+kappa = "f9466689e390ed675df78c53108444a696fdf685d4c54339bfc4bab3fd7d8207"
+at = "N=u32"
+embedded = "a26d8d247798f836cbed84f3ecbc0ebd6b7d7f52a39e56584861a81b6f814742"
+status = "translated"
+digest = "0bfd5d0ed0b5e47fb764237333dd64e23e9e8b13e7bc35eeb9f5c084816174e2"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:322:9: 322:27>::as_cast#9"
+kappa = "32ed618872c4f82174c1131b59f6541afbe86facfa6ce8d8d47b89838670d02d"
+at = "N=u32"
+embedded = "b3203dd90e6f80c3974131042abd76f82176222118db9e9e54f405a81bd8e533"
+status = "translated"
+digest = "0af10e95aa012e66a7f5d6b27a4d2e9997e698a2822651ab49edae86b0481f45"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS"
+kappa = "8c10d12123fbd486e1451786542ed9dceb043abcddbdd3c798030b1f42a32cee"
+embedded = "667f8b3150bacad958348bad01f597816297deab1ca77f3cc1954eac27081da0"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u8>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#10"
+kappa = "50afcf463115b5077ae041a9f04c9c6035899d9910b653cf081c63ecb79c47ca"
+embedded = "82ca2a92a0199a3427c7b23a37c51cbd0ecfbd5c586c435f98677fa1bba1b0f8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i128>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#11"
+kappa = "099922ef20407509cb8ae8724cf2c14f952ef2f35b451ff8e6c2dc6febe5b3e6"
+embedded = "bd609ef742fd3af2497cb38a56e300c862d7fdce294414627845a8315cc287f4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#12"
+kappa = "fce978e885feafcffafb5341f65a34c5fb8df29567ffff3817bc1f3b7f1a17d7"
+embedded = "8f46bb1713e39352016cb28056a97e7e8482174f52ccb5865c29cccba0b0bec8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#2"
+kappa = "12b2a920bb4f5691e8adf41662bfc424ce60f578271395685535e557145dd608"
+embedded = "bce4362646ead5e483267f7fc99028f02830f5b4ac89e4649ae45555b9843411"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#3"
+kappa = "79b8806f978d3a321ede988f8049fb08729387e6e17589ad06fa6d6351d41189"
+embedded = "6621481090ff0506a44798f271dd5cca1f00d50a7211f9eb7af4dc9ff966984b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#4"
+kappa = "2a4a6ef4c55d2b5760350b004c46fc65aff59f81d9a7330924e125fc9fb6538b"
+embedded = "f7ade65476c5000c35e129ca9ecf45f751e175a144a895d387e90be44eadaf8d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#5"
+kappa = "7dc5a43696383d54b4f656413312acb7da6a5e79d59344cfa733b0f966a038f3"
+embedded = "48b1fc546934709c74ad78f3183314a44ee84e915b5bf841962d1070a66bb2c9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u128>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#6"
+kappa = "2a2acce6ac2be6f9415c669dafe1424172f91b783a182b0569bb77fe49e8204f"
+embedded = "a29a3a65b274b1e9f8162a4c1d48079123ef07fac39a39b272fba6a0c4c017ad"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i8>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#7"
+kappa = "15d97c58ddaf3a2c1b658d71a9202fc460a8e1642dabb2f6307349fd3b963c3c"
+embedded = "3c6df8539baee67877b8ea4178fc8cdbaaf4a0ae9ea89cef139d7d37fc3ac90e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i16>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#8"
+kappa = "51f68a78e7b2dc2b7e6aa8d5e262fe2689e11a17365843033da08616e3deffea"
+embedded = "c4aa02bc784dc3cd17ae1ad1bdc4cecec77ff1549dcb65cec7180c4745a2c915"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::BITS#9"
+kappa = "87f3e98846aac7b5f0e89c6c2f3336681a189c8306cffd05499caa2d57be6db5"
+embedded = "a6a010aa1b33a1fd41b79544a20431db8219f3a197d111dc43944eabce039546"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i64>::BITS"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX"
+kappa = "767f5e5bcaf2e9c6734ad5cd23fd851dcf55f591cfabbe641fde7438f52f1ada"
+embedded = "23389154b908f3b298fa783fb6552d0741d02d335915d26f7f339ea2433f8a7d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u8>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#10"
+kappa = "44a6e7802c793070e5f98f471fb3a49450b74fc82f8c697dc7b20ca04fdaabfb"
+embedded = "851830b6b50b82fc9957fafeda3ff923889eb95e914081da30bb49f288ddd5ee"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i128>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#11"
+kappa = "e838396e025076f822d4d04df030fea69b49d4b35e0125e28c8636b564443178"
+embedded = "b369c1104e0b30daeba5c596ef3201554f50e80f2b6c72a6d8de11de1ad8379e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#12"
+kappa = "c149ec926d89dd1da30b514733bfba0e931819aa3b03fcdea8b89a0110a43e9b"
+embedded = "ce5f7247b77f633c642ffe5fd6184577a8ac020ff8e8b67f94defbf4ada2aa51"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#2"
+kappa = "7725ce66686f27dc417785006896f911c58623e9f7d6f69d209125c4b0732665"
+embedded = "2deb2fa5c53377f85a62f668bd4c5a672189d5eb47ccfcb94d1cb102292e85ba"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#3"
+kappa = "c1d3a6f9fcade468448f14d8484c6e74a526614e009d0b5bff9fae61a4b10df2"
+embedded = "66292182e7c1a89c2d0ab83a92bb3ce2158cc19ffc37a3a870edd92a5ea278e4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#4"
+kappa = "e6433220cc694b0f93c52c221f1fe755b68f9c8d2fb8c42948cbf226bfc38a65"
+embedded = "152de30ea9b1d24123603c77901805d49544703fbabe25d5d41214982b5cd425"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#5"
+kappa = "e69ab9b16f2c5cb43ddd2c0781c1251e16eab4761b6ebaa558bd8e08350578fa"
+embedded = "6636201afe87ad82fd59ba9862616c7adb99d64af7d137916944dceec465e030"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u128>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#6"
+kappa = "bfc599938f28b2cb5aec9c15e630f0533a2db35a37edde6092f3bc0dc49aa41e"
+embedded = "363442a9b95df29407b02c29f58fd3b2a518955fa66ba0f2365b7fc508f7a622"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i8>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#7"
+kappa = "295157c0065c0d21a0217e0236ca5cf7637f91d3976fba8159331635ab7cf77e"
+embedded = "dc4987cfed8956f1ebf9b6c5989add03f6e385368dc53d6b14ce5a7cf938dd02"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i16>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#8"
+kappa = "c276c8047d634c6245d160bb85b8513e0b7f27fb1ab8d042f1fe5f6b6a1ae575"
+embedded = "d56d155638953ec10aa99e8ba48aca1109094d0e9d31990d9878dbf978408b2d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MAX#9"
+kappa = "8eef290066c3dfe7097805dd8e503b545b724c0b16bad82a73ff0980207a5953"
+embedded = "d84186f1cca09dbf5c2c7ae464ae2f97b54a7ecd05246c195f3d96921cf1e376"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i64>::MAX"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MIN"
+kappa = "ddf43fa7c5ce91106e2ec1fb8c16576f342426e7041a0d1fd975de34eccc81d7"
+embedded = "13fc2cbbd3efe18235d5bc7889bbc5c58f4556e5bd11a4483cf237e81766635e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i8>::MIN"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MIN#2"
+kappa = "6f0e0342b521caf6ac6d413f3b4bc01707d535b1ed3a145a68f8e59dd9c54724"
+embedded = "3b0c1b7ba32578c75d707b8c79819d6ca058fad5c49b6a995d6a89f061e85efe"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i16>::MIN"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MIN#3"
+kappa = "b31c402b88f474a5c463c24d89658797da503cdd42328092afe8e21227f7bf51"
+embedded = "4498ab128fca7a60f2e4e1ed8b5f84a00eb7f3749703342751463f8b52513090"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::MIN"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MIN#4"
+kappa = "5276e138c676c366cd6e77ad39fc5de919600d33a1c45fc313c89927c44358ed"
+embedded = "a951926d22d5aa6613311801a1ffbe4ac374bd80d1577e2662e5d3234b4b9791"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i64>::MIN"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MIN#5"
+kappa = "12180560361d36468f4b2c91125c76b166a7a94ffa4f632b004e7d0c12b1cfce"
+embedded = "c549e2c6683d0d5788c0f09c34042beeed96f4ebc904acda87c1cb742604c468"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i128>::MIN"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::MIN#6"
+kappa = "ae395106fc23722eeec654edd86113fdafdc91eca851590a3377cb3018d3878e"
+embedded = "06dc738df7ab842f10626fec2c69e23d6172225d6af43d2c170137abeb867a33"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::MIN"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add"
+kappa = "05ba96ef40d48cd059e202c593c72eb6d6cbac7334510a5232a6321ce6dfae3c"
+embedded = "81fbe2ebc4c68bbed6867e0c7810cf47b6ce53ab0ce5a407d5475a4596510e49"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#10"
+kappa = "d330e3e63b57efaeeccc8f4074151198bce133705814dba8cafd7e620efa1d33"
+embedded = "d1fe4f01f20a902e104d19245bc070aa75778de6e4cbc33d439f46c65951f1af"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#11"
+kappa = "2d2e269ffcaa752f0d043f41fdc1b9beee8a267c52deb8735dc052c3fce7a1b8"
+embedded = "47432d496512db1c8bfcd0a54cd1b4643aefa853643f7ca89dc7aad79dd97a83"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#12"
+kappa = "286ced0a3bd2b5eb3677773201b0afde025811d813b44bc76406fae86ccb5524"
+embedded = "977a3bf54fbc209ac579c824b71269862fd0f8193e625372f3c55bb356a58d6a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#2"
+kappa = "0632387dfd83f81906e6c6aef4790a757e81b53e8272964641095c49e020fcce"
+embedded = "b4ee832393d30826bf35e85c471a1404b3b6f7fe272a5626bc423677b07b5740"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#3"
+kappa = "f412ab66343dc71aecae5410a8c1219c5ef433fca97d99a32e38b5407b42a748"
+embedded = "8934afba6051a809a994f65363f9a57c8b42c61aca1fee58f45712d14e1ac8c8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#4"
+kappa = "97c2f3b4131f23d961e82ab617de48e797b88ca6634a4fcf4889b0842241ead1"
+embedded = "0d9290400219b14b3108c25e3de7ed719a0d88b513c2f366c1f7c7744bdd490a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#5"
+kappa = "24c14c65502c7ea73da8affd685f8c0dfd9f6af8ad1aadaeb5c92c4306c26e65"
+embedded = "fcd3b2215f4820b2e3ff290843e9ba13b9f3eb85a79eae378a5713d66c65c968"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#6"
+kappa = "9a3747f327f5c2ef38fb7ca6e988cf37baea5bfda479bb30fa6dfd236b3ca158"
+embedded = "169760263e2b60acf396bc964a40630603daa45a272a68183d668c990485396d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#7"
+kappa = "9a51d8978860d3c6a5de7f08d2193d6bc838d224184be7ec90bba16c5b52949d"
+embedded = "7a954d73d0d82a3287fef9a681af142287d3518c21147204429efefbddf70973"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#8"
+kappa = "98a2bef7bd3e92c10c89a7041592b8ad327cf4c928951dc394427a87392b2c18"
+embedded = "3d4bd8aa0c18ca36ac679ab9f31b18951845627ab36b7e98280d193868fee050"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_add#9"
+kappa = "c5dc83553a3b5384c2fe30bd91541b8f962bb3d1752c86433cd026dad9a15ce4"
+embedded = "489e6864e4d86ebedfad75619631b7be14c1a480ef76aeaa497cb1b4ec1abe84"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::checked_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul"
+kappa = "61397b1a0d7f1210e14a87174bc861c2ffb00af2464aa1fb6e38d15c4d07a97b"
+embedded = "c60fe91947e8b8b9d231a7d76ef87f7c024afdbef1625bd71d1da54b1179472c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#10"
+kappa = "e98ba864328996eb84f5db9f08bb903336bf31c80291a94c3223a1feef8dcdb8"
+embedded = "b4fc28a2e7ac5a9983335725bb486fc9994cbece79b0a027f527e7a2eb2215b3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#11"
+kappa = "a7b40aa692e98f39fc51a357e367c1baa7d199c9a8d84c07412953d5db6447bf"
+embedded = "d87cabc16607778212e3626fff5a4fa01430736d69b59b5ff6d2d9a8e93e08d0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#12"
+kappa = "9d383574af4cb6eb5dc288b3b1e57f455242da27cef97ef63dc7c8165c597af8"
+embedded = "11e509e86662881715522fda4e192940798234bd4d3498b97c6e99255e160db3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#2"
+kappa = "de534390d4522a07885d0ef96e0994187320df2d889f16a3fb34cd99e3a8be0d"
+embedded = "782a498aed474dd313636008fdc262aa8549042b54d326460da1d16bfb40c413"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#3"
+kappa = "197a829eb1182ac114aa1c2c77c95a850fe52ebc8191ce94ac941cc4f546afe3"
+embedded = "f62299bc6e4158c10b98ccbfd36eac299f852a4bbf5a0a10ee62fcb7d4562692"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#4"
+kappa = "1cb791142d37cb6efec9962e6dc07588a15b20409cb8a19ad55383c09195c41e"
+embedded = "873710f2182225409c6ef191f843f9c5117738e54ae75be739ff1f382020ceb8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#5"
+kappa = "8f9a44e11691403b30f82f3be12bdfef3fa4ee1b2cf9a537a3759127ba0513d0"
+embedded = "674ca2375ddb7f41b0225cccb2005f4829c12a8f54147d7a9a9ccfd67338e0aa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#6"
+kappa = "05fa99dde66af8639d2c646451cde7094468c8c89cd4f1808375970239176f35"
+embedded = "ef1c1279e44c4504f7ab39d8ee10e92643f6633f8beafd123ed3db2ef6fe7f2c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#7"
+kappa = "2c3f0fb9eed3ebeb6e418ea59e92556f4f6c51c78f71e71986c01d15984be1e8"
+embedded = "487f56b5f49f4820043dae09375deb1027465634dd7498b5ccf4f50ac2ff368d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#8"
+kappa = "896c61f97681612a02f9918f88d906fe061e640a726db2e7832fbce2c1a438b1"
+embedded = "232fc99cc28ea561b2e55e51d4c1677ef3344b5d99cf67981431c5e5171d95ba"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_mul#9"
+kappa = "bebc0b415143880ce63cdb6a6576fcc74194802996156bea31eb2532653962de"
+embedded = "c00e5b7a3c9585289477321ee02b2c396e60acd414e934f514e05df535c1116f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::checked_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow"
+kappa = "9be27e9f03b05e0434d17dae63cf5d5e6825b54595edd65863b08a14d9ebe40b"
+embedded = "1b07387979f33a0b4aca4b49d796dbada31cb2e64fdc9215dea66e4a85bf61af"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#10"
+kappa = "3f4642651c24e44b7ff388ba98c26de5847306bc66486c1ff33cffd8abafb087"
+embedded = "ee8bc659346134dee80aba2e289740cf5901bc32261f52b8bee28982bd247106"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#11"
+kappa = "c2742c5aa504ec348e5568a695f7ee3a3e0d152e5823e3bd9eea32a1b653cd47"
+embedded = "2220488d76f67ddc4aaccbac51e7588cc621b00304dbf918b987ac41c77e10d7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#12"
+kappa = "d656d65dce58726d07608efa00284bd05a9ee9d4103a2ba4d665a11add773b22"
+embedded = "8a0d1a917766c4f592a5e7052a915fe6de57a2134db0db97e2b404841877134a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#2"
+kappa = "09c56da0625981119146c8df33ad8aac1d3e7d978c720b83690463bce9d2eb6c"
+embedded = "aca6347f833a971247e9491e8ba1a7da0b4e01574a9a408cb8f20dd4e387edad"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#3"
+kappa = "ba07ddd9ece9e200933f44df3643e9eb5f6d941edb95ad2e38b3f4046d0c0228"
+embedded = "babae88808f029b223d1f348661345b3cce6fd4d6b74ba911b4c1e74eccac434"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#4"
+kappa = "edcf83af0d570ba720b49e42f77749c2415759996cf1943460884e8d274210e6"
+embedded = "23f7e84ef312a0333e85904decaee4864a6b742a75ecf401d5fda8491d996e63"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#5"
+kappa = "2482084dbe86d1e6524c0f0fbd5e4bfe6b9297c63d4411a5b69bd2b39c4abeb0"
+embedded = "1d5b398d0d587ecac4a402e78eaabbe0ed9540306f8f617bbbd92dfd5d5487ce"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#6"
+kappa = "cde5650b017bb8c8fed3cfb55a8536ab49bb7677348fdb35fd84541953ae028a"
+embedded = "565b5db73337a13dbdfdcc30ef3e4344b1c04a0f97474082b95455d72843587b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#7"
+kappa = "7bf0876adfcc3a57f27109f27aff12def8b66f81af80c174fc9f8f0b93e46605"
+embedded = "1a7a67658273ce96ca7aac39d04465999cf76d8c4c128adf60133402fa2df98b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#8"
+kappa = "e975fd8ec785c580e06d0a353055408e8c95a22146dd665492bbf27999a2d8e1"
+embedded = "5f7a74c0f3bce3670584b234be44f31388c83b9cbab42d5ff5732b3cc9b37af9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_pow#9"
+kappa = "12cca9113f96d7296d00955bc814e17a1f22046be09626e905a157c719b003f9"
+embedded = "c257e9b9ac78de74677cac2808b8b5feb52c10fcb429601650cdf4976972943d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::checked_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub"
+kappa = "c5c7422daf1733224552adbb2c5da5161f0c21f11d80bc54c86461b0f6f41802"
+embedded = "5cba96c51d729b427a85ed11d3967d8037cb8e537a9716e1b154193fc241be83"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#10"
+kappa = "0383b3be12c8a1aae5c7660562e02d6dc8fa2fdcb9da512fcd3b91df74a06125"
+embedded = "84155983a46da9c8cffe9b2b098091971d753615714cdad9a2a6748ad594777e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#11"
+kappa = "e3c582729f0f107f91197325d0121586184cfae83daf75577cb3ef5494c7a904"
+embedded = "4a4e25f25c6978694d323fe781746f1902af1588950f96612e798ba7152234fb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#12"
+kappa = "f31428d623c41827e912beeda03bc9ee863297a463c16905a54a02a3a5b0c501"
+embedded = "bec8ee5275b33b1e58227da1955e358b6af6cca6e107e47a9aa7f2f0df80a097"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#2"
+kappa = "ddc398310733398a07accb82cc5362e957c538fa986f8a98d5bb13ac178d36bb"
+embedded = "bbc74c8183c73faa982e9973706abaa69fa11de0f6ca1aefb8675109de922b0f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#3"
+kappa = "e302324d17aedb85d27f2079509bf7de543f4dfd029a97863b5ebb657e518912"
+embedded = "8b058657283f20f4332b7c1f70feacf9bf7b9a32d3472ea975596ecc5b738aef"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#4"
+kappa = "20a9cd192cba9efb827d9c7d0eee944f169f93f69ed7f4c89beb92834846031b"
+embedded = "116e3bd85a39e7742ed06af364d49d4fd4bb781e2125112a117aee31dc8a31a8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#5"
+kappa = "2571189e0435b9c23e8aafa74e6be9c9fa9e83af8766d4ec332781af649459f9"
+embedded = "2a60ed3d1425730f5905dd77952f15044652871bb6580713574e7249940a4640"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#6"
+kappa = "05708c7b837c248ffba9746a8eabce9e339b35be7e9075e10ade89267b5c47d1"
+embedded = "d8a13bd693a319336a7d96863624fd6998c3c7fae45003696411fa8a76633b4e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#7"
+kappa = "70b0f4d9806e5d8dd8163d2441e123a36583ea3fce0185a5aa84e4ef023c40ec"
+embedded = "21be988dcb55c082d0f44d4fac655c6257b6e48f2529b254293cd95cdbd92dff"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#8"
+kappa = "5c77dfa69c489acf51c1d661a35343bc4fa8c89241fae13398a8299fa63c66c6"
+embedded = "105584014f2c8d6e8c6fbafbd443829497312c023191097a3c67f7878b1b7db8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::checked_sub#9"
+kappa = "f46941b04a3bd88758a674b345a737a31f71f3dd6440245b50d362c41e4755dd"
+embedded = "892fdf8d9284cb36a658e3d5419395bf1ebf0a216e63ac4f81b5e0f2cb807903"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::checked_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros"
+kappa = "896361fc45903d7fbe26c4b6ecd938c70b817a16748fda8fdd6af11c803f6757"
+embedded = "9834a399814a25af4b8a3e968b4937fb440b101b10b4a9442407b53c3008183d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#10"
+kappa = "e3b007e37d4c441562ed6dc664e224f7f40193979d87c179c694e14a0732d8aa"
+embedded = "43dce7536fe5084634c2f419ac455dcd7b1b1b1232f5ee3118f10523d489d65a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#11"
+kappa = "5a0d3576642cd69ba79a59542a219dc84af174932b5fb7375e1a20e895ea9f59"
+embedded = "e12c8ab0f12301bb2c6fe4e983e4ef8536f2fb7a37782c9443e0dc274884e28f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#12"
+kappa = "67a5ba2f56aa6f30bcb67410a4db5e8a7f77c7c01cf0655b3e092f4ca7d4a167"
+embedded = "5b16788a7a4636b1649226acfa34efc67547fb5ec264922d76a937269371bd82"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#2"
+kappa = "c6387ba60a1641491eebe0d750a92019d30095e009815e9a4f1fc25a8c93acd1"
+embedded = "67709e7848ab7c59d3ee624462534fbdb4303342e5764438cf147221d774e66c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#3"
+kappa = "cfdf4aabea5fcef7a4bd16a0498dcb1ab1d8da31cbeca670fce2de23996507bf"
+embedded = "6fab26033d184e9606f268f717a71e5152dcff26929d7060e1558b29cc185374"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#4"
+kappa = "54d8a33563a3ab6e8cfccf93d5796aebf2e2b1e465a28d29e6daf8061798fe0b"
+embedded = "61ed8f20e5591a2d4ea656f4a5cc363a8bde0db9d2b5430004e42c12ce2b9407"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#5"
+kappa = "64cab5296aaddb254fdc1c3a4ba30eab19aef805b82f0064dc2b4efec49b75b8"
+embedded = "eb29c495efcf10c7458b49da8890d6f144724c220c69cf7a131811455b7aa2ef"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#6"
+kappa = "d2d5d8788dc5577e1caddfff15857f6d04ecbee216230f6d0f5fff855b51767e"
+embedded = "799638c349aca20d6ed6e2c16e4a1bb70cc7a40493569ed03bfacbb556e32f90"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#7"
+kappa = "7c3af90b21f7d45674b6da4fca9ae199e0ad5abbf2eb203a667751713b84d733"
+embedded = "6d7b9fb76986c8eae5a41fddf4ada498d37863c7ab7f9dcf472e03572ce4f4d8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#8"
+kappa = "60de891dff89366d6d054cf4fb32b9c53d208e813af5f3b2b017dd1a3372230c"
+embedded = "684f724095795974bc1d9851c44494455f43e73cd724bfc8a2e64ec1a1a6ea4a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::leading_zeros#9"
+kappa = "d5f33d01078f2ebdb746c3a30c4b9f7a56034cf94f3454ec50d10d7b3de8336f"
+embedded = "3295413d587683e5df024b400f1bb3452f000c64b119f10ef090db550c9cc1a5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::leading_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add"
+kappa = "52196cb410d8293a97f351a2a12e94a74d7caace34ce20687fff483a85b48c78"
+embedded = "df2555f0a5975895c71c0f6f091e171080e27c77bad1a1beff208ba7e048f299"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#10"
+kappa = "8ea998f479c16449daba302dba7399b8ae69ae52522f1088fb16004799f7e4f5"
+embedded = "de40f82808e01722f6c04ab25a7d2686d5a43e951171c99edd20d13f016c7c37"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#11"
+kappa = "08f8e557e3d9bf2e51029a93aa266d22934a9b09c5540814356289f604802928"
+embedded = "f1eb9d6c8a3cfcccac86d4dbe256d7c279535032b4bcd016db11b65ed95297a6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#12"
+kappa = "1ef62d698a4674be4c1f68459e638b9b9a531827d30d523baca79dc53c34a294"
+embedded = "e0c54f7e5d9863b1920700c56e5038b97db595c829af889ed930574cd5e1a6b2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#2"
+kappa = "d28ae54cbe87cf5f436a1e67d7a3d6b9bd4d5b5a373a96f04ef6654d18a5b321"
+embedded = "eea7912d4500c9a2f304b0cc18321d18a6dcf7fe7b98246e4a787d3b16b973df"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#3"
+kappa = "d693164f0c41536c368fe97a203ebf764a0c4dbd7699287468efc12a79cdecf7"
+embedded = "e85bea77bb1d8783c89753cc940f614af7539d705413864248f5077196fad772"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#4"
+kappa = "e5306a358a06c2a8895a346c26fbad272582b4c8cb40b60afea95d03db5bf3e7"
+embedded = "25681aacd08b7ef902df216303ae1f63718e27c0b0a7eb6a461a311d215a5603"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#5"
+kappa = "54098eb282e123a8312e527b072abc7fa5c8e3326c4aea843b9d230ce6bd0597"
+embedded = "c238af5927075d956a0834608a6d05b67bc8d10fa0e5e8bd5515d1778836f891"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#6"
+kappa = "9a2fbc00c1c6af359b116031186935d3689613ab94486f1fb6cd13db6a15b1a9"
+embedded = "45848bf379626a743c4b4f6b282a8a7e6afb84f2f12f59edf932dea65c8236de"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#7"
+kappa = "8cbeed058aa8b7f838554622a2b3a0820df600ef5570e2161f3ad924e05f77a5"
+embedded = "148c4cadde3c727b9b01f819a436a7d1bae6baf99fe9e00665bef44982a69324"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#8"
+kappa = "21fb6b45f3b85e2ae6b3c07c584f0100b3762f48029f950f195383b5b6a02317"
+embedded = "452ba56baa5f86bfd66c6ce33f1e5f381087d8d59e565d7729b5084155550244"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_add#9"
+kappa = "3c72565fce0e4fd1c1444f32461c293877e46735e4bfae906b7fa67bcdf54889"
+embedded = "793a3b4b7f8bef790ea645d93c858c77eaed44a8c339a4193fb4a731a581c4b6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::overflowing_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul"
+kappa = "38150557682325cd212c63fa0471bc27f6dbfe6f5807ad1ce65a87cd2791fbd7"
+embedded = "db441771f1fe169fec1bb4c18582bf484b102ca0204e954a716e71c37531b15c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#10"
+kappa = "9df9f69cd36108f83c5fa1db7dacb1a4b73079096fad2cb1658fcc430131174e"
+embedded = "af773f630a73e6dd7fcb9b2ebb62221c87eed3bd815c7de135116cf90f365f43"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#11"
+kappa = "7a9c70b8bb81cedae543e6425e7dae92c0999de017f7c6233a2d86535b99b5f0"
+embedded = "0ab7ce24d125a800908372b531b034ea2d94ab1d05f4db4adab22680d1023af1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#12"
+kappa = "a1da7f38f4574f12971fe6ffaa02bd5697357135c0cd534fb5734617b08d05b9"
+embedded = "3efcc69feec95200227679c73308c7bf1062bb90fc827f9f41744bbdae7b39ad"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#2"
+kappa = "d45f3239103760382b174b01d1fdc8141174f18fe5757be126238041c3e0159e"
+embedded = "7b0d44458c215686d983b6cebfbe149997f00f462b74390f9183d300dc770092"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#3"
+kappa = "f8f76a183395b7afc1b5303c68ba5e9e15121703556077e7fff0e653b799c82b"
+embedded = "ec77e0bc3e56326c5e40c7978f872b1ad3e632c3181f0ce915fe2785e91a9a56"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#4"
+kappa = "d6b021758b4932828a484a5ea8f018f9ae1c1c4dc7e1d5790c20b5c847a5c5b0"
+embedded = "aba290cca999d031d9ab9354696538b7ae69c1678c21ef36f1807febf3fbefb3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#5"
+kappa = "b14ba190d913a9a2b3430633ff4b7def60bbcc571990b4744840be22414080fd"
+embedded = "1a3b678ffa6d822b440e8b6afacf6b9c3f0948708d1f36099ada455053101617"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#6"
+kappa = "8a4e27c1842daf32159de341cad7589c095365b5b4d930600e292b0f591d1f72"
+embedded = "d980dac2f5deeff6522505083b2bf7ef86e7923c0e6294423f813dc99194806c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#7"
+kappa = "ce475d1ff2b66f889adf340ad8119a2e7e77f949e9773a42e726e8c95e0475b3"
+embedded = "2d31ce1041699c2cb731505fb6b9f3fdea61e8bea24e98e49946ec0390544d1e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#8"
+kappa = "1939fefc81b766a979ef72821e6a8b482436e57217bf22d3a026bd59cedfbd08"
+embedded = "5ccd41f6b4231a92b341a4c42148ffceaf0b0d01aee10d42b91f4609e3952aa2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_mul#9"
+kappa = "3244fcf3f4988ad39946bf7403acf318ec8801d3543b8c2bd3d76ce87a2743b8"
+embedded = "4f3edd98da312559bc4f85cc76ab79cfb1313d9847f975948faadb2d737e0ed5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::overflowing_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow"
+kappa = "b87a090ab9d11084d931a49604def307da49d7187b488a2ef418af30d2f09cfa"
+embedded = "7d2cc33eb318eeb6617e2dca665dd773af83feb078b24ab1a40db2bd45240443"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#10"
+kappa = "745898983ac212ad376c6c477c70e45f8a06f263409957c455726171f0c1c9dc"
+embedded = "1ab5a7d863b47822d535eac40f4c35932ce337d11674a5533c191825dbd7e669"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#11"
+kappa = "7a340f31cc7e406cde1b0fd62cbb08b5eaaf4699539fd8778e7c2f5fb56f4a07"
+embedded = "a8e997ccc07ff7542beea475a9cffbaf3e1cb944bad3afd0e12ae3fe35d99f5f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#12"
+kappa = "a18f13f4fb3952a6f78126bbe279635325e0f4ee012bf86b738c3c39f61f1b51"
+embedded = "ef3b2e462dd37790c89c531ad115dc1491bacf2e1a95e6a8dcb0c166228d3964"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#2"
+kappa = "790c3c49f9ce912b4eea2ee5d5297ae8a3183229713de51ee307977b400530bf"
+embedded = "77210d873ec3551c9bba3401a8a10d6d077acac72923f43d8f585cc8e3ef6ad6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#3"
+kappa = "ef187b75d20e4ad404f2231ebbaba26619e27523dba23f34ff7dad4b4f5b416b"
+embedded = "483dc68c6941932a4bbd0c8c31bef7c39507a1c15461a1a04f80ec475e6346ea"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#4"
+kappa = "b671cda9687a8f872097b9b40b842ef2a4792f19a15e5c2802ee07ce0cb1263b"
+embedded = "72eb46096475e892885e40161041f0166b3e3dbd4d18ec9e255f8b2c4e46b0c4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#5"
+kappa = "729c77fc24388ee290e936a5d7a4dea44a45c85fddd0ebd1ceae6269d616ace8"
+embedded = "f4889c4e991e379798f4aa74cd50a7ded26eeb791d289b74bbbd55d177112475"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#6"
+kappa = "7aff01823b48a497f1d88f05b5c035db017c9e6391a0084093d8956b85a5e917"
+embedded = "3df5ca5bdebe4900da30ce624b1902e22defaf90e11db970841058539d630260"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#7"
+kappa = "464da98cef2f1b825023338d73bb9d8de037957a43e17da56b97da0184ce963a"
+embedded = "9caedbeb4583223ddbc7e24d4621c81ce083220b766a077902c54b3d460ce572"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#8"
+kappa = "b6b76640a0e8faba95012a193418358b56eda69430e04120968656e10f5e9431"
+embedded = "f5b9742955b53c2801729cfbc425530be66ffb5ea3fcdf7b059531ca7238a89b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_pow#9"
+kappa = "70e5795b4af5fac7db86fb7ccfc3c6bd169d80b11d96a966d8ffa178f00a7b44"
+embedded = "eff337794aa9c1029397a0773b2453771c9489dee7a77d2f2df1670b172abcb0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::overflowing_pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub"
+kappa = "e6306bf051687ecf73a87ed87e64d97fd2a95ed0d3fcf58c5b5b71d65596fd7c"
+embedded = "136dbd568b0b845d9eafe8d9ded0ec1a176ae903b3638c8a73715f7718d3c30f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#10"
+kappa = "17c7c4151d017c6bc868b4e134a9a905302182ca63662da90a211e5b4e618dc9"
+embedded = "dad1eb673c8ef683969e94d681b1c989bc2a4df36f7bbd90f1c4e151f18cde5b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#11"
+kappa = "fa55922e6b5e4077fe3e011e363e2a0a052d94022ec51c6f65b496ee35a48520"
+embedded = "47695d96a3426c0b906f18cbdd08e609c3ab80453cad9fb14ec8cfcd6179e1e8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#12"
+kappa = "0ebdcc39820d07f8d8bc04a8fbc4d41d36d92452a40887fa717349419608c642"
+embedded = "1949d20e79a53c28b3f5321d2b1f734280cc25fb79b20fb96cf85ef8a34a5614"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#2"
+kappa = "9062680ee4efb0d087b97138a9a7d30a4a9dde631045beb288424284042e7847"
+embedded = "8814d65bc093659a23bd692d3c7836225813b0ed3cbd0370859b79050d275735"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#3"
+kappa = "cb7d8b3906b5a001738ccf3d132e3880b52a0a5144b1188fb400a47cfe289b35"
+embedded = "694dab72582a512dc82f013e3c8bd24ba318bc80c777a06e8961764c30eb0f5a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#4"
+kappa = "4b9732023fdb157ac44aa4668333fe43f8ded9d3206e992cb3e7916eac3d8e5b"
+embedded = "cb1044c27091993862271152eee714861323c8b3e0f007c229474eb3cda69f99"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#5"
+kappa = "6e82258dd520bbaa908fe135c1860150a4655a88772abf32a29c2fc90b427bf5"
+embedded = "5f2252d05e9aab839b149a4f0a0ea532417acaf6e8837ef981d0c845d2cb276a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#6"
+kappa = "112581a159c0a7aae09bbd374cd6733fb2bd84b995f3a715c22aa30c127ee4c1"
+embedded = "00208ca9c17c527d58493308da30f3ee8a836f4479cd2d3df22900ba854dd548"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#7"
+kappa = "895a24f4274c4176c6c3278dbb60c8a0bc20beb9136c145de6d9c241bfae6715"
+embedded = "0ff0e27380dadf4fdf716d6e4595273831d07af27f6acd5014d16b62f1396129"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#8"
+kappa = "0e3a7af31d78fcf9a67694de7c22c1adf92aa366748cd69a9ec8a4897fcb35d7"
+embedded = "ddc2ec1e06a34a3cfee49518416667ce381ffe75ab18d9602120f9a90339edc0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::overflowing_sub#9"
+kappa = "08410b84ab2524dcfa6f361d3ca44321abe36d9ec5b5bcc853ce438fb5b6c614"
+embedded = "da35ed152eee79a14274873623bcbd65d2e6c261daf5dd99a57baff1a5a33f84"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::overflowing_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow"
+kappa = "af034da9c4166700efa6d5c92e64d229961a4d6d10836826289cabf6894b2239"
+embedded = "d32391d9dd21903576ccc7f611986cbe2e78746762ea325736bb7e58911869eb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#10"
+kappa = "dd2c2481d813e28a885961064f3d38a450c17b9d2e5661f9e22659d3437736ea"
+embedded = "734934d1346f077084b27c31d2e66c6a9847d210e20cb3be6575639df052cdaa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#11"
+kappa = "e7a7bd5c0e7910e21bb6cf2621fa6a95e772fe3b261ebcfc3f08bee9f89fc313"
+embedded = "96829f5cbb5f7b9bc35209713881d1cadefe86d6540a3ff75718e6ece5c6395d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#12"
+kappa = "d2c7ab8c54bf7bdc771fa3abfcef46622b545594834fdfb3444e8fc8f01a8d56"
+embedded = "0f7bbb460ac4f6ca1b6e1b3a6aa14ccd999905ef23613875c8e33b08539d1412"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#2"
+kappa = "e81519f75dfaa5bbdfad1fc898836089f595749f516d465bbf1c95bf104e1052"
+embedded = "e45f1bae9562cdfcb531412690cd5ef4a0fc07c146401fd26c4838e2f526a563"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#3"
+kappa = "396c3383277565acfba06540bafe8e8a6bd2fa6b3b4f9c594f7313384846df3e"
+embedded = "2a5785101f0a40396aa702a6cd245a63c755ec48d3dfcd12d238f0f298c39dab"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#4"
+kappa = "958a88bd937270b812a6e330722e79086cdd8b17d45f23f77d99973795925c00"
+embedded = "bbf8d9aa8ec0faa1c900313c106169068c47680593caa6b0e75c75b7bf8d0817"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#5"
+kappa = "03af9173473c8ad7c2ca14922caf2863a4b68173554bdc806cf63114edc39862"
+embedded = "c247d21dbb52f25e00c50335a36a93037fce318a74199b167e63e33acd71adcf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#6"
+kappa = "f0339f191970b8f5b66ed5d99cf9eae4aff53892bc703909917b6e6199f0d97a"
+embedded = "673d3e1426359e3cb747b2378443601852c12817efa5ce634b96f9f151bc5ed5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#7"
+kappa = "e9aac2d44f6fbfb8ce999eb16088a294f665463d309c704dccfea4eef2eb2a9a"
+embedded = "04c4d25bbd355c85c6a1e6c18aae0aa395079234f2e317d750065d923d1110bc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#8"
+kappa = "7c0d479915adca46700e3ba08d090cdedf557d2247617ab12b0f793a23c067fb"
+embedded = "cc36375fbd0492e224f8a27b46af4b1973eab2b206aae56bafb169396a0d7392"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::pow#9"
+kappa = "3a7cbadb91b18722f636cb78f354e7668ded1bb0858977db3c3f5a4a1dc38792"
+embedded = "8c1d4125256bf84f488a543b2b3c7fcf4f244717a32787c5be64823863470c36"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::pow"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add"
+kappa = "c4e0aa0db22d57376859c95231d41de392db5b72a472f4255f96a81a0d85c49d"
+embedded = "c225fe5f7371f82f7cce56e9cc3ded2fcbaab0aa5aa5fe6eeb0f4956213aead6"
+status = "translated"
+digest = "d7a3662beebb51bf0995c05da4a32a48058a08e632e7ddb0247c7cee4973030d"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#10"
+kappa = "2b54d0a0503842356adbaaf02381f3268c7a47413bbd9b3fce380d7c6849223b"
+embedded = "99572d2089a97c763a49d32e03304cbaafc61e7b4dc059dc7f78305cef9dc8bc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::saturating_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#11"
+kappa = "9a70e13343a76a4cc0704b69bc0838975fcade67d1098f7eaf3788b332c4127c"
+embedded = "1b809d6bbf2650f3dff004842c8859bbacb401806159dacd88a11ffbde0afe69"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::saturating_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#12"
+kappa = "77a94ae0bee27e60a122a1f51a6b7691cf0b568a8af9bf83061334e8799fdc4f"
+embedded = "aba55c8ba860ec239d77a45e27f31447866adbb372d97daaf21e902261860093"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::saturating_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#2"
+kappa = "1791d454246cd251a371a5da3d983b7936b7b2107759d59ef93b535f1358e7d7"
+embedded = "c486b016035ab0fecff48fbcc83c2129388ea40a6679db70690ae47423d6ea9c"
+status = "translated"
+digest = "8015968f86fab27a40b947504bb24c404f5845e102d44f4ab0fec018b7e8330e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#3"
+kappa = "c7cad49a3132455abcac3acd001f160cb64964864b82e8ecd982fe958c7bee6e"
+embedded = "a202426ed55c36bca3b4857e1e4779d7530987d671f79995bfaf0de8b14db8ea"
+status = "translated"
+digest = "f9859e16d1156376c59ad6d39709425fd9e7f63b066d6d768b41b59d2f14658b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#4"
+kappa = "24c84bcdc70ae36fe13520fec195cf6cf0d5e02effddd0c1d41e4a4f4ed8e44c"
+embedded = "a36081b899f733b98f2d2db25a3c033934fc5f9149ece581b4ffacbcb47a0f90"
+status = "translated"
+digest = "cb2ecedc1744596d471b79138b9ee81bf10580ee8e5e4c61755d83acf5844c20"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#5"
+kappa = "35bfd35975b51626af8419b344dee2a7b0d21fd2fea42c933c079b3e1723f40d"
+embedded = "3b0aa95577be3f8fb50747289d4b0fa891e4df8f3f8e87e99435dacccdabdbab"
+status = "translated"
+digest = "2509a7bcc0bf001bbebf71d6d4c415a7ac8bd99f5d358acf8ecded820f2c6f9b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#6"
+kappa = "c4ed0db1c0662b01764568a1d627a579bce5d357005c48fa7c855a87b1e05aea"
+embedded = "086f9189acffd381ec5e28cac975bb5d79d2b23683baba922a928d7b2f48830b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::saturating_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#7"
+kappa = "3bc63827c41d0ff23b78319071e5371a698b3bd562029002fbf4e89fc1144f89"
+embedded = "925817f90346249a5d4845576d875d341f4927176363e262c5df41ce5f1263c5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::saturating_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#8"
+kappa = "0a42c9342929416ffbcaed9b6ce67e0cb375641323e371d0cf11b4216c9eb435"
+embedded = "98f4204a959d08bd7c11ee240d1b85626401b72bd0ccf58569ed3657f8668ec8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::saturating_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_add#9"
+kappa = "980ac58e82b49a6af2ac2a428ce4a0f639e8f721bd32e04faae9329170a6575e"
+embedded = "df83384778178e0f20f045425e1ce2bc8ddf39d7932e19b102060fc83aa9b033"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::saturating_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul"
+kappa = "4549098775bee13f980e744a5c8a57cc313d294841aa0e8d37bf452741551e06"
+embedded = "35a27074e106351ac34c909773966e51c6e825a4ea9a091fe8e47a4ddab7af3a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#10"
+kappa = "46f2076645094c98b17e3b92bec3fae64c7c8a7ca750428e68f04ce3a56bb25c"
+embedded = "e6ad5d957ea81d63da735321bd36ee1ef5755b8fc9c1d3c883dc68a73e8a7e46"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#11"
+kappa = "bb467a85c19bd804a7043502905b3cce65e4a81283173e9d9790915958bae2cb"
+embedded = "9dd122b69b12d45a3939c3748f1bf6d7353c53a9f09c89f7673dab3230727221"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#12"
+kappa = "25e3905f2b8c42f06d2645ef0b6e6e5ca7eb523fccb893506c30c065af7744ee"
+embedded = "066034f44b844c3c8687c06075d5ea6ff251b28615806b8e90f2cef4b32bb514"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#2"
+kappa = "e4889fbbf22f5d12f0617bd9f20a6559debde0586c9aa8ab4272fc8ba9ffeba7"
+embedded = "17aa373a6cb3d83204fb8af8fa609ab6ef2bea26976493e17d4e9c6df7112502"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#3"
+kappa = "b6358ecc8446b56ad83f2704f6044dec61aeb8982c6cda0fa10d0704b0189ff4"
+embedded = "05da8a1565ffbcf13633d46a0ed913ad6d0c984d39498f8bb84dac6ea31eb0f1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#4"
+kappa = "0dc1586b73550e1124f7e04cba7ae56996e387c59f073d86edcf24321330faa0"
+embedded = "85038f7ed2790d14b99abe453c271501f8b5adfd14adc754a9598f6aaab21d1c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#5"
+kappa = "f445f8fbb121bad81971a80bf6cf90c56df0b443469c028bcd54881c34900e25"
+embedded = "984242183f8d4877a5ff05832f91c6e1a102d2516ed6993dd5c657f2cecc265c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#6"
+kappa = "383646c69c4bb99d0ee78d29b7583ef4b578ae1d11330b1d07bd06a077b6d511"
+embedded = "3b324523be2d4672f4b1e23b0d7d6f682983ce952daa84951fa76b1fa0d01d9c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#7"
+kappa = "4a67de1b660c26bce3c5010925b6297d75b6f95778f91d47ec3d8165d56fe466"
+embedded = "956b1c473db3ee58e6b964b9362b80481d46bd9e2b4b7bc9a83362a67135e1de"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#8"
+kappa = "53c2ca2906df3f2bf27ef9d7d4a403dc080d211c131b30afdb5c3712e479f388"
+embedded = "b9aae5f892a80856edb0f0b6299644481f4145915af9c8f5b2aabf18a0c31b90"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_mul#9"
+kappa = "f553a831c800aa34527c607fc4a1f2f370e4b6eabd349663160adf69cf174832"
+embedded = "94d41f98a0411f9684503b70b6355b394537691c0dbdd3120da21f4f96a1654b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::saturating_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub"
+kappa = "8d5cbcaf0b96a6f80a8e2f121141d42d4479297aaa8664e4bfcd476858c92ac1"
+embedded = "dad230d057af32d42b8f09260ca259ffc787c171dc66fd17de4e0d3134d48b80"
+status = "translated"
+digest = "b3c0da75b00823e3a7c2daa394e97243b5d7aa54127e67c7fdcc045f9b176505"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#10"
+kappa = "e90acc8ec07b281241168813d1355409e3cae4073fa585e59fbb09947e9dd664"
+embedded = "7d0a745fd7f87b14f37fddbf653e42d4724f82474fa22dee0b568f5270001c7f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::saturating_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#11"
+kappa = "2cc6074afac38613ee5b37c2a9b03dafbb648e888c7273909bfe3438c603f620"
+embedded = "cba7aae496766d17103014e978f1fef0068779e55f4a5cbdd8a786a68c998178"
+status = "translated"
+digest = "b3c0da75b00823e3a7c2daa394e97243b5d7aa54127e67c7fdcc045f9b176505"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#12"
+kappa = "6f2ecb50aa8dca16c0ab1942cf5f0370f32d1046e09f9f089daf5fd32996549a"
+embedded = "4c43e7c3aa7f833a61c0d5478f37bd4e256f071ee263b403302064b94d8fb8c7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::saturating_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#2"
+kappa = "99753f0eaea686583a543ff01dfa7ee1e1fc35472c07cc792aadf9ab9036618f"
+embedded = "227d053c47402beb2fc943b6a1869f250b7eb7c7b2de2f5ba93907e2295f2fa4"
+status = "translated"
+digest = "b3c0da75b00823e3a7c2daa394e97243b5d7aa54127e67c7fdcc045f9b176505"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#3"
+kappa = "02b5668baf5dee02819880a045f236b50696b4dfd1eb8c6f71d0de5c60710b32"
+embedded = "ed19e3d8b5b31d9fa6033c6847a00580d3874c1711bd3dbf1f50cc835fe9d188"
+status = "translated"
+digest = "b3c0da75b00823e3a7c2daa394e97243b5d7aa54127e67c7fdcc045f9b176505"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#4"
+kappa = "b475acce7e228b69ac35a786af713f0cc77ccb4eb3f38cdfcea8c7fd46ad14dd"
+embedded = "61efeae2bcbbf0ef840f1a7eeb3c158aaf5ffc478b6e8ab559c3c12ca152d1c9"
+status = "translated"
+digest = "b3c0da75b00823e3a7c2daa394e97243b5d7aa54127e67c7fdcc045f9b176505"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#5"
+kappa = "08984c9145051aa2582f4e6e64da1f28bc08bf29fd4f9a1699c6efe022ab9646"
+embedded = "4f81c06173692bf5cf570876959aff9359fbdd001d1cd3836d55f737922f8c98"
+status = "translated"
+digest = "b3c0da75b00823e3a7c2daa394e97243b5d7aa54127e67c7fdcc045f9b176505"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#6"
+kappa = "54e6cd41945f87335be3e8b43fe77403c272eb9b13626fe1b99325ad728de053"
+embedded = "a5393479aa18dcc23f8b236f16b573230848ed56de56adf37baf6341b015cffb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::saturating_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#7"
+kappa = "16032e46ae89cde82b96afb55cc750c1fdb897c0f5adf5607f0691c978ab109f"
+embedded = "f63442c43cb4a971ce7b234480dd2a6041616cca259f600fc98e9e7990b100cf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::saturating_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#8"
+kappa = "b7a4155ada6903a7f1ca0d38f609cbba4d94bdf4a06546727261acf926d1dfeb"
+embedded = "b7f91289c6d5802a2a796137c6b463137267e1a6465c9d7e3fad40b61c4cceba"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::saturating_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::saturating_sub#9"
+kappa = "291d182d37539b0ab2b8d17beb99376c0f1b8f2c9d2e6a2f6d4f3607c7d01e0a"
+embedded = "df502529112a905d89df9e384f742b29e4d8be7067895a73b94911489862ae36"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::saturating_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros"
+kappa = "ee5c1fb96f3e1ab720f12fce1bfb938428de58bb34ee8b4747d934d4b86c516d"
+embedded = "4c4c065ccc15c5c0d5c9900f0f95d6a85f44a7bd53926ab5d54a20e63bbd7180"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#10"
+kappa = "6e643d01b904f6e2d4797b107762cde15969ce27aad398c69ecdaee16bec7ccf"
+embedded = "c9b86cae7649eff5fb011350973f5330697984b6c7a2bf7ce967570852b983f9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#11"
+kappa = "42cfcc94198fc179ec34f47502ebce1e7ea11e851f5fd091dc60b4ee53f19ff5"
+embedded = "ee2dd2b42dd999f4ca8bc1a0906ed7f37b7b3c4dcbf529b1cc133d61c72db01c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#12"
+kappa = "d03f1a922382a9a444857e35eef69e25f6b2b70e11426fc5bfa9fc935f9ae831"
+embedded = "e3a328e68db288c392380eae51d6eb0ceba78a188832c01e95bd6198ec25b89d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#2"
+kappa = "3851d9ae7927afec6fda3d267971de486cfad45b25d42c3235f299692eab4d48"
+embedded = "9dc190a31c4f0ab96707e739446c74b92c784952f49d57157d4981c0a7c102aa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#3"
+kappa = "85e20d03f9d0bf549bd763d11c8c7fd722f785ddaca2de17ccab328758938300"
+embedded = "8f9fb89eac21e2d2cc673528bec250d9ced17c4182a72f83edd4f38536cc7524"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#4"
+kappa = "cb66dda8493d0dbbbc354119a0e348dcfb5ca307489fb37483938f2614bd10ee"
+embedded = "e0b02f4806a5179d2a74ab6f4b967aebc86d2d043e4d9b5dd6a027ac81ee4b43"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#5"
+kappa = "889e9d75406dd893281ade10a4445cf8918c85212d08e648aa607505f5b2f699"
+embedded = "7b627c9b20d4d613ccfa96507ea1f164828aa94294e653c7c323853ae89214cc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#6"
+kappa = "e1338958da92155194d6cbc0dd95ba43f274f57cef17c0b3312142b5ed6c7e19"
+embedded = "ed4c9643169babb8626bb6c6ebd1feebf56140c5dfe671a54e2dac05cb2a7694"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#7"
+kappa = "a29f12a9b368126a246164527527298242bf1644c0f9a86e666b39e258a9e61a"
+embedded = "4bb032a8740bcfd094fbc7e5c3ce851da5cb8ba10112cb295fb5cb3b8d9548fa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#8"
+kappa = "461775b6bbfafd644cd33b22a2766a3362fed8144eb7c8c8d9f7596e965dd9dd"
+embedded = "6ee4ce8e4bbaeff1c0a7f2392c77d16bc7482a50f0c5bbca9a339fcd4e17334f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::trailing_zeros#9"
+kappa = "5319de7b46095f8a18aa7a7f4cdf9e753e377f00ddefc84babcd3d34237f5c6e"
+embedded = "4d0293302199e92635fbb8d5d5252373b7bed0a296c3809e7749eaeba01867c8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::trailing_zeros"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add"
+kappa = "e492cea7381c04d2b7dd4fbfa5c5f5857bf7b239888d0b8a4af3fe1e5c994b35"
+embedded = "910aee2b11e76ab23a5c042f8cd9f1ec3601224c7a2a9d87c5048d1e198197d5"
+status = "translated"
+digest = "98532a17342186c78fb308fc316ef7e20efc644eea56854aa0662a4824fdf058"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#10"
+kappa = "d3449809f1741b482322cd7299ca86ca22a8195cd6ecf232988562925ec5349a"
+embedded = "52ec00a5c8de8766d16f3b89e1a09e6b442037d451c492da2ca2e94d5910be13"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::wrapping_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#11"
+kappa = "6f04366e4f3620734884d5edfd5bcd5934e5d8adf805af9422d29583b9e2a6bd"
+embedded = "a696162e3d1e4c73a9a9ba72b9699729f54115e558da4e3cf616d47e3cdaf014"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#12"
+kappa = "533b2c2e8eec89d17b0569a35adeb633643dec69696cbbb18e6d32b6efbbe67c"
+embedded = "6001147831f8cd8fd5f70e23d5c24b271c2607e671d36b2b07e0fc4f2e41958a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#2"
+kappa = "dec59d3444b6aa7531054ba0af2d88a65cd96222f369af22a12aeb7482640088"
+embedded = "0c6b965f4f7d074f38e2c3598eb83c3d55c30d1d3455d1fcb5f50103ed379bc9"
+status = "translated"
+digest = "9eaf0bfe87e4ec1903c68ca28baab38c94593db1262eb146d406bfbdfe34e2df"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#3"
+kappa = "d3a9b1b9a2977ebbbd587eba31f7ade7150bdf0539f3e29b60f495b8981d949c"
+embedded = "ac078e6c790ed155373ffdab6a76ca2a4e7a80f1528f2b0c4a29b0c44375e3ec"
+status = "translated"
+digest = "546563f415f90a94ece1cd9aaaa4b880983020e9b75ed0475ce5978f61795c20"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#4"
+kappa = "3c8fdd926cf10a338883725935062d06480da48b45ab0bcf1d826763a5b14ac6"
+embedded = "c549ee556fcbbc8194471b3a5ffd65dd8e368d4afed67ce78c4512da942195a8"
+status = "translated"
+digest = "27036194fdd80a7b479e0e4c3b650c554d5da4e1f896e2e8e7c9d3447ed01903"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#5"
+kappa = "d1da021fab53e8dd477be5b619cef1c328d371415fbc6ae113754f47943a7e38"
+embedded = "be085de4a38e896c60f6b6f73aef7b4d597aebefb6014096601eae5c781ed43a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::wrapping_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#6"
+kappa = "cef3ad6cfff4a9f07522125070456d7bb30b211ec4faf074e474d2131d0181e4"
+embedded = "716470831944fe6da0efec10a3164fd7fcb7d8ede11b3ad52c7a2c0b35fe0230"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::wrapping_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#7"
+kappa = "ac06d715da1989b3f4702679dd547d89046beb223189dbbdb09132bcc75f2b50"
+embedded = "669b5f7b675b77facf0bb8c08c30a22cd1c9631fc61e7e6a8d2dcb085d410501"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::wrapping_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#8"
+kappa = "b5adcc4cf9be2ba2cd6a7744b243fb1589cb371396a3058c85f278a844fbb94e"
+embedded = "2167516c3613dac2bb334faa1ea57958eb6530c77706153471c40c01199fbaee"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::wrapping_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_add#9"
+kappa = "a748d654fe55a1fe3a6752369b12b05e6872ece5fea3040ae8575fdd88238b6f"
+embedded = "dca90b6a3f0ed6b5189922658ca16c079611ee5e9aa29fce307ef2a114c15822"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::wrapping_add"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul"
+kappa = "d605ccbd2a6dc92d20e4482ba8d1e0251fe9857cd959a5155f2f6cf0b5065a04"
+embedded = "918f6ced163cdceb7c39c74773c392e615937d4cdd6ae05108fe50603dcb546f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#10"
+kappa = "609b62a5dae0ff434a6b946143bc31f4ddb2914174e7c3294dbdfd979a62805f"
+embedded = "f9f4a912cf8722f03df9a914b436c7daa87b5b1a20e449a69d87375307ebc74f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#11"
+kappa = "9668ebc8bd65b0ee16112ad83114413d30400bdd064f96760b95642e26a64666"
+embedded = "0177448c2b9aeb65d7bb059d0fef580c82124f2b9732f3f5a990151369845e19"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#12"
+kappa = "bd783319f302fd2863124e20adf2403861aeae865da1e8a7d12fe0775f9bf678"
+embedded = "44b5a97848cf41c9d9ea4056c9faac7970f339eb64e9407b78a6477bed30e37f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#2"
+kappa = "1d42d39724195156070aca5e380b3bef3b24b420a110f1c8b023cecfb8fdfb29"
+embedded = "98aeddc5d4c12dc1f5ba6b09d6d7081d739bd121149a07be8b7f70b26fea2f94"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#3"
+kappa = "66e907100c5c4cc97abf49f626902b2388951968785e332a82492b7a151fe973"
+embedded = "bbf78572140f91f3f39aa0581dc57373be1bfbee442b99f5811177299ecaa362"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#4"
+kappa = "61778dc91d0d099d0540070b43026d3c3f130bb4718dec867884e368784393c2"
+embedded = "5a2d9db7da7eeb686340692d99b18293743e33eb2c5a6e2fc8d6ae89576b9d14"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#5"
+kappa = "90421bcee3954150b5c4ea10d77d69fa2eb7489d8ca16dc82a57ee1eae2b1902"
+embedded = "246910dc7f888b21687c1ccfa1092a848ffd67871b967f799927a480d1f0ef98"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#6"
+kappa = "9c912853ee62e25a18c534771c3ac1fd852e1656cf0c00342f9134dc3a734b53"
+embedded = "a91331d42854d64f9c874192b8c13dbd3ad7d41601a8d2a91ee86f7d0f7b7c80"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#7"
+kappa = "b9cb59b59e9150f3573ed091c73cd051984d9eb9c4dfc1baa5c199a045bb1378"
+embedded = "0dee5768652749afe1b9c1575b6616d8e710197550c1800bf28de5e20060801e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#8"
+kappa = "351a6516c3513c1e17024ecb679576383a08188dedf77aaf082836f3ee34b64d"
+embedded = "3fcf205ac115c3e91cdd398116b013cd38da71200ea80245d8de5fa0f519f3d7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_mul#9"
+kappa = "3c2696466cdeea4c54a3c894d0ce8a93032a5e39771cdc6860fa0dd5df9cd693"
+embedded = "5d6b3c25b2524c070dd75cd75009f8a8daf55de62751e1e289a17ecda8070c07"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::wrapping_mul"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg"
+kappa = "01c0f04d8044af80c1860738acba4bc7008911723d112aaa662b559503285117"
+embedded = "479c7113d308f2fc3f2d3d4285714a819c664c7a9b2abe1863fc9746deaf23b1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#10"
+kappa = "b453a8947b7ebb7540879be8eaed11233796ab8ac4784de33c412aa10327c996"
+embedded = "9af748cceee3059f5f47d0a6290d0cbe9ea50061747227056d6bf3bdac351e19"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#11"
+kappa = "9a4a23e89d09205d6d96f4f1b9a89166257b028e10ef2c6460012e1a51957125"
+embedded = "77fc8115a23fbfcae3dfc9ce68b245b681934d9a2af66d380c09e9b0be67b9e9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#12"
+kappa = "64ce86f5c6c14649180ab1091878e1c28d7938926a6c7861d3cc2053759afb50"
+embedded = "bde6cff50ef41e5bd01e584ede2c814bb60ae36980844ded119c13437b824176"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#2"
+kappa = "93f6122e0c3a9f5140acb895706bde74ce917c1c63045e6a844b3f0cc11b0e33"
+embedded = "ef44e703bdaf2572a8a536046a5f8e3541b0c1a269e47f5d5979cf2f39703ee6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#3"
+kappa = "6148069de410732e5a7529aa161b72b808a5610f90aed67fd10bafb138958915"
+embedded = "347ff1cd29f6c6606b4be3afc1adb0d2b05853c12b4e602492f08cb9521edcdb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#4"
+kappa = "9142f2548bd0c0cbeff0e46660768a9d72407928715224f43756a9b5a1cde585"
+embedded = "ae2602d8cef465b5cee16baef4587064779dbced192026ac75f3c2d9834be90b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#5"
+kappa = "d347ec09b3deaefb9ab9dbd97c820150e2cd3b1e1138ba574ab13849ca5cba38"
+embedded = "9622dfd6076bce7bc8ed1fd6e8acbad1f9295183f89c5379cf4de0f4263d43ff"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#6"
+kappa = "3c774360a3dd52b255b229e0d545e661e49b266e21c2f15b090bf73e5bc3fd30"
+embedded = "1ee8a534e02a08755072739f92b291d7e950732ddaaf7819d5ce6bf0ca54cda2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#7"
+kappa = "ce2922942328a3284fe179565641dbb416e0aac03d22239a1a0a18b942d64df3"
+embedded = "91b8ebadc3379feea3a44bebf570a9701ae9ef140b412ce05fabff2c9593537a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#8"
+kappa = "2c84b921bd349c4d9d3c7082c2cc481cf9116cf9a29ec735565b05e32cf938a1"
+embedded = "3485b7887b6816f6707cd121ccfb2245ec2f004f3ba72607bb7147a62fac26c8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_neg#9"
+kappa = "b896f3983e36f9520f3d9ea0f49108a6433bef2c281b1dd302ee378848cd8968"
+embedded = "019e0637860c7e2f94369ead8bfe54f01d654556aa90ca2ed9bc7733373bbb65"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::wrapping_neg"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub"
+kappa = "70bb4e825a60881c02be12db1cd623ef85985f42ed9ad3ca6e6c9c1613c94573"
+embedded = "3fe7b6b05cbfa3ed518d03d411993211154f77cd59e536f7b090d31358619e78"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#10"
+kappa = "5d210f103873af7f729b887bdb7617183da10c6b8aed313ff68a4c4bb6c94e26"
+embedded = "1000614d46405cd24567d4253476b88966cbdd2b6ffb5a4040caef82c87a96f7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#11"
+kappa = "02112bc9890f0c2e2e8c2eed1bc2e71328dd26eab3113ec1fc84d2c5198ba546"
+embedded = "0586b2b09f60713c6fed72b59de190aac5e4ae78c0ecd8f72193cbc02290dbb7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#12"
+kappa = "399842df359fd5e4d09de8725c7145e668c7d51d492d1a5ed6ea10b2401f2f34"
+embedded = "9d12300291d3c117ef6a46e290c7b48fdf4fa896d6a5ec61345b8dab537529ec"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#2"
+kappa = "d6b4a09d7f305dae42af206ddba026856224534dceccfe3ef2cd43f4e138ed0f"
+embedded = "74faac5a588e7dc881c64fea8058b561514c861934b4f8d70a1748c347b44e13"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#3"
+kappa = "9863ed8cb81e4312c3419661857f5b054de95c49130070db29e6afdbf6b672eb"
+embedded = "a6073af8b314ec75e3c5d3e213ee5d5c477ca52a73f8ef2edd9292979d8f9bb4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#4"
+kappa = "d91144796b124a9ae873c974398a94a30bc6bfaff91429f0836d0c4ffb9090fc"
+embedded = "5cb933928f544737004dd86936a7e0b6ef6f1a0e57f40e798601becbf8e3fab2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#5"
+kappa = "f20a934ef6e14ad9cae2d72489378f2fc86c68363cef7585397025cf3ae34fce"
+embedded = "3c0e3c9751b6630925e9d1e12327448c0583d37d6271d18b59ca44b72da23592"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#6"
+kappa = "2e2cb4e00f34f3e53febcbaedf36ce33c31ba902be0720153046922e1e28be07"
+embedded = "5a668ddebd4095bbced4ec28ee74dbf7ebb11b5a2d9a68aeb5a97c376b767f20"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#7"
+kappa = "e7cd45b57ced603bf22a27c3c1a4ebe2840d324e923af970a2e33bcab46df8db"
+embedded = "108b260eef2363562233ee467d93d6c9be3f34a174b6b4128d7f566218b6204d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#8"
+kappa = "5ec640db1ab9ffccd114698eb2098ea5182c0bf1be1a28d9900758b22d65020e"
+embedded = "d61e044996489031b3611df9885c20034ea9f4043a35d0fe6ef6ecda541bcfae"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:708:5: 805:6>::wrapping_sub#9"
+kappa = "d8953c3a09d009d792b7b37c51dabca91923b2777cf6d637bb1bcbd441785cbc"
+embedded = "8d68cd07e8b0606d736641640f1666921de0c0e490e14053d46a1ad59de587b7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32"
+kappa = "2ff0a070cdf5b747099fd33b3c58b2b42d70076ed20112602c5a405f6389f0aa"
+embedded = "7fd02533cdb4bbc8ddfb5c165480557bc180cc4c77ab046db0a91f959c096cce"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#10"
+kappa = "6857ecfde17258d4c334420e46a92d71b1bc13ff9751b04550aa5a28c0b5904c"
+embedded = "bb6d4382c8324dde3057e57c9dedee860d4e0e10695f41a9013269e66fa3eb6c"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#11"
+kappa = "45a5198cb509dd957b043c51612cc28aff9150ed4a75d47db086d14600162381"
+embedded = "f57cee9dbd7e754a9f755f7a77c94a4374f72631f421b660e51f7b96c44826ba"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#12"
+kappa = "40f2e2cde0244e770c95a91431e366f634109601d1a3c6e0a420dd527b6cc778"
+embedded = "51ac596aa7bde2c0ddf53db4d1c2dde7cdb892525e2f8f6e8d15e4a4e3b56520"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#13"
+kappa = "be46be4da7abe426e595881c536e7696ed9824cf9166f18cb5ded56001765827"
+embedded = "7b9f3c139c39ef31d69606055df3122a6e6671a431ccdc1670b5edf7320cae4b"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#14"
+kappa = "a12e85c71d967eb14bb1d4a07521d366d02675145dfb493c05f6f1845ff0a511"
+embedded = "177a8c88e7f615acfaf982da19dfcc199db13ef1254f850c934b5e9b9799ebd9"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#2"
+kappa = "e5b906d350af179e3e0e9feb7e531ce5870197a9b0c0ea4b62f2dc7b42d1b5c8"
+embedded = "e318980d776697674c8486d1200119102a0dd8746d1109837daf7c96ba1b647a"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#3"
+kappa = "24299c5fd5cb95a5468c7b14aca5978732bfee82449c7c95e6bc9cdd16cbdaf6"
+embedded = "cc6134944731e7e9dbe0bdd1f9dc3d2fc2311618de51150d1221bc2e93b3d715"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#4"
+kappa = "0cbded83688ac7047382a2f08847d987b33029b21ed567f35d3999fc9a415c82"
+embedded = "015c0005dc1817d517b1e101442987d221666852b56a51c59864254afd5641fd"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#5"
+kappa = "1d40a7a745456e25b79f4e006c85c3f1e170984432129493474032db93fa3df6"
+embedded = "b896e8a4fac3e67d6d49eda6352e61c7b77998c4b307ad7a625b6a5c3c0f3dbd"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#6"
+kappa = "dc478e29c75b2cf5ce300de2b5810b2fdd3e2d711d0afdcbb95b2ddc2b8868e6"
+embedded = "240a6941d89f5672e0cb7d49e88d82a8021ee41c0dc979453c08d293536c657d"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#7"
+kappa = "1a45939dcf386459f9540ddca0a3035daacb88139e7e508d148b42d5a678effe"
+embedded = "0d7c52a4b4cac656bea559ab6f48104f8e4c0c5a283070bb6624659696838ee4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#8"
+kappa = "a3f34aef7be78928a628c5065f4044c10ccbd1638911d36e48066db16735ff0b"
+embedded = "ec3f9401bd031bb963b4be73d32527293b2b3e4f3e944c24ae456b7fb985d183"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f32#9"
+kappa = "971cd8bc1099ef5116b4429f085eec4714ce056f27c0250833dcf69d03ff52fa"
+embedded = "2e9bf5c518254ab967e559bb993d4166d0dcf11a25ab0a63f1273f4c392c8b06"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64"
+kappa = "ee045ccee1d56e1935408dca65bcf0b1e7d82951dc0cb07d807024dc19765416"
+embedded = "ef8f06f1dae4ac3d05a4bef7c95c5097185205a5434f9eeb569bd3006e0c7b36"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#10"
+kappa = "d6170f23921ab77f2cd048182c4d305ba8ca5bfd0f39edcf4137cf482ad8c65f"
+embedded = "ef0312219d5082ac70313f8b98e65df9eb6d80800cce294e65c01c80b0a505d7"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#11"
+kappa = "96bc804024356a6efef18b6ed9efcc2edffa1c87514d163d434750e1640af207"
+embedded = "8f2cebdd282953a0eb31a65aa0e1577ecec20ba60751da8d33972da888421150"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#12"
+kappa = "bbea7ea944f6fe3001c0ba088b8ecec0e9272788e3e2f6f8dc236a288fc354f3"
+embedded = "d387d30da6a80c752f55d44631883060a8a6f9a606a3c9709d4469883a51ba1c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#13"
+kappa = "29ce34baf09c63a620a3eb936090a575252fd0b2fd0f2bd80b807c1b89511d61"
+embedded = "f5dec2aff40496fdea849fe91012f23799ef423f322cd20f3a1a98505dfc2917"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#14"
+kappa = "01e14d7d4bb49db7253259b2318dc2d87c26c230dc91edf21d4f096728c56fd9"
+embedded = "3c0cfffb9add32c2efa0f058c50ced5bc99f2b3936e62fab3ed5fe26692e5174"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#2"
+kappa = "25da1be5c5ae5d4ba35ace8754f4b1bb0533033f105790cabe976cb0c088c61f"
+embedded = "0d58ab96b5e310602f3c97812d29371bd70141c705619ab9a13f83be8608685a"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#3"
+kappa = "3e1af57204ddad69c9e6360db42f6a5be0a982c82fc86f8e81c0136361b11709"
+embedded = "16ee5fae2e18c510f34c16e098693fc6fbf6c68a651d2cb20185a39f87d92ea3"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#4"
+kappa = "e5dacb3571286cf789160f1c5c7d7e243e2d85cfae7645d5f971f4bba506a0d5"
+embedded = "cda89df0e959f92892476479167c9eb5a88a271b3ffb175cf0e95c84ec2f2075"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#5"
+kappa = "a710aeeac79dac908a918afe618d2ebdcebf5358d48ea826e8aad73a5c97776c"
+embedded = "f6b1101bf9c859a5dfa72215704c5f23ab1790f129d433af7d4f5513eb22495b"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#6"
+kappa = "d1c51f2274132440b3b1b38b046ce9dc2f839eeb5b06d5bf7bfca5266ad3ccbb"
+embedded = "417749cc81db7341a896ca13c38ca1eab289c3cec5aed0ad91ab470afa06a195"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#7"
+kappa = "23043eee56198d6264a9cb53cdf1b45665df565f87ad74ae0ec0965a1d29c310"
+embedded = "9328ca944fe815b0109d40ed8b041f4c946b81e1f475b4795c2f7cd7cfafeb04"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#8"
+kappa = "c299ed5bac9abae593418da2bdd2c8980b309961a13f98db50fa7362ffb3ea8b"
+embedded = "5ee67a0122b44e4e66a673d105aeb9e47ff634a0bf430be731cfc2f4ea3e47af"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_f64#9"
+kappa = "052dc707bb91ca1e84ccc36156c1c93bb83883b06a4b73840252e6888508d900"
+embedded = "33d7d7925a072e09d52e5b0925e63bbdb3d5e65d751fc5ab8d9dc93f751a8f7b"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128"
+kappa = "aa6076b73c795b4ac14b9635512195b24c1deb14063c94c2162aec0e07e6114d"
+embedded = "0615dc8eeeeeb9faf5325781e5d1aef8938e7f42a984595211624a3be33c4591"
+status = "translated"
+digest = "6151df9d6a4aa89e6dce295c509d1a24d84d749e71f6b10422171ab74557fa0f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#10"
+kappa = "8868258ec1e7a648ee9361c10c94566f60806b14630109a9ef40182489b70423"
+embedded = "9b35b47cd72b4345147a9ec232bf2f720f78e8497c8f6c12a5dedd69e81b2378"
+status = "translated"
+digest = "6151df9d6a4aa89e6dce295c509d1a24d84d749e71f6b10422171ab74557fa0f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#11"
+kappa = "1ec9c69ac79a3b133a5eeb0c13e50ffce4c595b786a7b6d4f09a8410dac791b9"
+embedded = "82053b28907aa1900393eb21c12362e92ce7c1eb98246f3e7c2eee72d90d1f75"
+status = "translated"
+digest = "6500f69119eac86a13438fb5bcbdd5186e72283a4150428bb90cad61b1d503db"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#12"
+kappa = "2a6b5eba5c4897823a0d47eca1080f5e2732ce6aa560c87acf7c9858f9c6ea17"
+embedded = "aa9cd2289be34e2f7d50c0a9f4e00938222da500b65d5e0049f5039abb2179ac"
+status = "translated"
+digest = "01b167f41efb37fa3b8decf451173dda42b33f96f5e8c905ac8fffc7bed0c902"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#13"
+kappa = "c728ddd5f91979bbab7cc384408b92df690f27dd1bbf346be14157003f718925"
+embedded = "a0de2552c5cc8c985daf7c78b004ca7149a2aa343517197bed7308b1641fb693"
+status = "translated"
+digest = "989f2f7cac46fdb9017d8db1a231e71682f5a73f79e97fa68e6efe48a52b1c12"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#14"
+kappa = "47bce26c3ea1e0ae6cba707525a7a12a02996bdc58772ef7a3929abb0ea4c4a0"
+embedded = "7b36e91a778c18896e1e9dea62b0fa7901d234984985d22f550ef45e74e961d1"
+status = "translated"
+digest = "40fd7fcf04e005aa09dc45daa9f74e60a0735aef06ac927d04f1f440dbb2244a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#2"
+kappa = "5b85725239d54406357f698608928f707f9d79f320cbf69e9b8b800f36511455"
+embedded = "60f5784dcbc8a9f994ac6e84fb9cd0c93288b3a96843cd6b444cb10a22209d43"
+status = "translated"
+digest = "6151df9d6a4aa89e6dce295c509d1a24d84d749e71f6b10422171ab74557fa0f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#3"
+kappa = "61325d6c8cc9c6a4f9508f451b1eeaabb084993d0db3e9c6f3f30c81e46ae11e"
+embedded = "46081c3f8ef77a5c392b9ff736074da0ca982cd71334044f47344c03a35a3c2d"
+status = "translated"
+digest = "40fd7fcf04e005aa09dc45daa9f74e60a0735aef06ac927d04f1f440dbb2244a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#4"
+kappa = "8447d953596be6804448469bc50063953d78f2d2abfafbce7b80512b48650db4"
+embedded = "fb6e68bb25c1d9bb30e405cf2579fef3b7dc44550368e00491f0efdcb981ba11"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#5"
+kappa = "a1da134318c9caf8ba0bd81bf8cc3cc5ec247c3f12f786047d69c18f46bcc4ec"
+embedded = "cc02869d2c7ab1534bb786ffcd1e35ff68def1f41bcf7271c063000264c9c620"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#6"
+kappa = "9f77538b142e33b74b1c102332c52163da89aea71aff7270599f85b55699b851"
+embedded = "67dfe8715db7144bee3e6af93f65376beb40df289e41e2797e182a6084e81b39"
+status = "translated"
+digest = "6151df9d6a4aa89e6dce295c509d1a24d84d749e71f6b10422171ab74557fa0f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#7"
+kappa = "d51f42e7ce9bb157fb52757b78805e78758d9649548fe651cec87f9692ee8bf3"
+embedded = "9dedd045bbe3dd2f6daeb4b5d44683261d2a931c26633b86f54d1976fa0b54e8"
+status = "translated"
+digest = "6151df9d6a4aa89e6dce295c509d1a24d84d749e71f6b10422171ab74557fa0f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#8"
+kappa = "2e67169fbce1bdcdf82b2447380cffd52ef367c35cc679558243027037034140"
+embedded = "a785e6bb7996caa52ca035700ece32a500d1d21b6b22f4b885dd5abd793d59fa"
+status = "translated"
+digest = "6151df9d6a4aa89e6dce295c509d1a24d84d749e71f6b10422171ab74557fa0f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i128#9"
+kappa = "0ac891a1e751aab32c6035d74131e66fd945149226a68c337dcfbaf84740017f"
+embedded = "87024ba80a36613d77a383b5361d791d893b9e48a827292920f6b1d76f3246ee"
+status = "translated"
+digest = "6151df9d6a4aa89e6dce295c509d1a24d84d749e71f6b10422171ab74557fa0f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16"
+kappa = "9112e7fa8bb2f9a248b498dad9a4f6409e758862af5e1e3e185092862ae4eed2"
+embedded = "ae48712098a5b0266112ab4773900d6c0be26b1ee1ca44772a04fc9d0de30452"
+status = "translated"
+digest = "376c46b0120530040868479984052df1f861585f18fe71b0f1f3981a9d85dd07"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#10"
+kappa = "ded98347396bcec543c4a8201f5aca2a4b75d89743d5796f369bcda3dcb3f399"
+embedded = "67093cf0165e75a41962064b41f9b8ef2aeea385df1a8d2a07d49661663404a3"
+status = "translated"
+digest = "048560b908026db71568918ea4f951099e6462f4dc14cb5576276cd2e43a265e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#11"
+kappa = "e1d83639cb1bd6d04fd68a648e4fc4e0e11b4305ad4ad89a98904f83808482cc"
+embedded = "d896713e5a25af92fed5024bfaa515c696b1b296eaf0c91804b44fdaa6452ea5"
+status = "translated"
+digest = "4eaa12796115bbd8ee21f2142ca654c9e373e1acb53c6285e677bbc166930bcb"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#12"
+kappa = "77bdfa4030239d8b7e1e28ad3f52e1d33eabd68d4c62b4cc36c72cb20bac919c"
+embedded = "ad33825d93bd857a94790919d8996d894d593ae3491f8610ff52fbd141df49ab"
+status = "translated"
+digest = "376c46b0120530040868479984052df1f861585f18fe71b0f1f3981a9d85dd07"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#13"
+kappa = "0337cd3d881835642289523db03680061928683e093d533285ed101bc6300eea"
+embedded = "646e67255df6fa0aa4d93d8e8f6d80b97deb5862c27911e854b9e82aacb7a45b"
+status = "translated"
+digest = "048560b908026db71568918ea4f951099e6462f4dc14cb5576276cd2e43a265e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#14"
+kappa = "b5967df7a15edc29beebaf9920ffa470664584666be17729179fabef36a10990"
+embedded = "3087841df4e791e490756242a492f65a823d4283888708e8cc32c48f9afa1873"
+status = "translated"
+digest = "048560b908026db71568918ea4f951099e6462f4dc14cb5576276cd2e43a265e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#2"
+kappa = "b69f0d4e97c93f9398d86527a990a47091d1dcfdd25ac6f096532754ca4210dd"
+embedded = "f6d5fcf324b2e8e255c8c5a0684cbc909146bcb11e2e7a74f5a36b1275bb4468"
+status = "translated"
+digest = "048560b908026db71568918ea4f951099e6462f4dc14cb5576276cd2e43a265e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#3"
+kappa = "4b7029ca23b2fd5d774debe246edcabf6fecac6631699b7bada77e2196f9cc63"
+embedded = "1241ba90150fec40c8abb6ce62b420e90baac94408196f400b1dedd214ad4008"
+status = "translated"
+digest = "048560b908026db71568918ea4f951099e6462f4dc14cb5576276cd2e43a265e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#4"
+kappa = "723e0944e2cb6f84a08989858af502a01d90c2387719c84bd3202d58a50f117a"
+embedded = "3a84ccdb74211ed4c430344ad38497e45e285f17ad2f8a18aa46b2bb07b089ab"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#5"
+kappa = "0093bc0f23a942fc2ef75aa3665c20b225f8c378d7482ae81e08c59cf1ebb843"
+embedded = "c8975a298770f96b614e33b572be55e1c3a3a6d5ab9bb3e73502bd6401315ce9"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#6"
+kappa = "e16be4ba4aaf480249c7fa1eea329d360b3453fa0269127e0abebdabd176c32e"
+embedded = "42254625b7f3cf0bfb54cca20155fc829f70b2b4edd31162c499864fef0cb596"
+status = "translated"
+digest = "376c46b0120530040868479984052df1f861585f18fe71b0f1f3981a9d85dd07"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#7"
+kappa = "eb6b678e1929a025d281cd46d45b1fd0093b1f2f6ffb58185ae06919beede455"
+embedded = "d426c23574c2dab6a2b84f817f3e7836fe227c8ad00ceea325e617e543a79bab"
+status = "translated"
+digest = "048560b908026db71568918ea4f951099e6462f4dc14cb5576276cd2e43a265e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#8"
+kappa = "af9e61020080afd8dbcccc9032f6d2bceb4d0a839dc11fd94b02270134437444"
+embedded = "e9c5a3d97f4d3e17c502a6d453af4770e5612c84109ca8aa4bddc51b0744c7b8"
+status = "translated"
+digest = "048560b908026db71568918ea4f951099e6462f4dc14cb5576276cd2e43a265e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i16#9"
+kappa = "bf7e9363e3d92b6173d2987f1be2950b0ef26a20d0285dcf730d19ce23222eb5"
+embedded = "9ab6efda679755dc1ba42865be044d7285893991084bc5ceef8120b6b8f3ee40"
+status = "translated"
+digest = "048560b908026db71568918ea4f951099e6462f4dc14cb5576276cd2e43a265e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32"
+kappa = "56198e679b579b0945fa1e50d79d8c5bb31ee0417381b6b8b4fb4555677b0b3b"
+embedded = "4f2e4ae558bb2a921d614aa539fb43c21f1564c8b3f09ba63f354efa8d4009eb"
+status = "translated"
+digest = "8334b2869baa9dc0bb4de80dc0b77330edfd6f62dfee4c9ab16685b46d6e7fda"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#10"
+kappa = "b8c78842d6a84d4932e1078b285cfb1451b22d351c1ccce675f5b0374fa83fa6"
+embedded = "ba07622171cac917098a7e59681181b438429ada1591f96e670941169a472896"
+status = "translated"
+digest = "320c29aab4876bad65a443cdbf1b5fe907ba0f08c8e6666474904230a13b694b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#11"
+kappa = "c6f0d183be88fa73b8e929f468e63842f491dc293f92c395ff3270a26d805c16"
+embedded = "604f21bc6c28e240f3829aa600c8638039aca86e7b64832e4db2bcf00165dacd"
+status = "translated"
+digest = "3370473ce396f59f99337e5ab6ca089f065b7d0528ed7cdfbd97e7197cb111e7"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#12"
+kappa = "eb90bcb402471de4d318f6e5643e2804d91a760487b9e6737e633c458ccddaf4"
+embedded = "43e6d073bc038acf70589412b11ff6fd082ec8308e502801161975ef10f7a0f5"
+status = "translated"
+digest = "b5a6321f4bf84e9766b726459dbf9b34c1d843f9e2825e09a4784bd09186cde0"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#13"
+kappa = "fac7badf7748ada7d0c2c4f59113a7a4152279b1957180e9f10bd40a271b347e"
+embedded = "ad7c81ef542ec49f7618a0d996a3280fc7b59ae4291c07e3326036653f16f0d4"
+status = "translated"
+digest = "8334b2869baa9dc0bb4de80dc0b77330edfd6f62dfee4c9ab16685b46d6e7fda"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#14"
+kappa = "233d9c36346253f5644a453cddd4f411074c65dc3675b678edc4c19924ec34c2"
+embedded = "19760fabfd951923de279ba89f404ccbdb0ab826b5ee160dc82b65bd53c8f60b"
+status = "translated"
+digest = "320c29aab4876bad65a443cdbf1b5fe907ba0f08c8e6666474904230a13b694b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#2"
+kappa = "c372c44938dd9e7df6ed414fa2fdeda95ce12806169cc52a7c72c5b96b66fb6a"
+embedded = "8dab74006cd6a39ff725b1d86b62830e02fb8d15c8d7906869710efbf1d76338"
+status = "translated"
+digest = "320c29aab4876bad65a443cdbf1b5fe907ba0f08c8e6666474904230a13b694b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#3"
+kappa = "c17ab0e9cb6ea1e0e4926bb3bd88e99b7a12f0c1398be1cf693b46c96b14b583"
+embedded = "6a8dbc46a4b6acaa71102532b7aa54f7eb6d7649a4217e9a1688c22c8bb8b686"
+status = "translated"
+digest = "320c29aab4876bad65a443cdbf1b5fe907ba0f08c8e6666474904230a13b694b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#4"
+kappa = "4645033924aaafb77a16f163b0cfaa62fe37a87f16efb568b8206719c89e28b1"
+embedded = "6ba3339c97a99c3769f523a34327ca0d6a90b94db4553dabce372030411ce360"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#5"
+kappa = "f48074ed7fc0b8a5764bec1b8568689852f3643aedbc045a31216bc38727aaf3"
+embedded = "bc944f2c4f1861fc7daa6e1fbab030d80e8c976c51243b65c0db09edbb843c65"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#6"
+kappa = "b27a00f24d087579cac60651bcc8d55c85391666f0e14a62a24e345d988b1d98"
+embedded = "f7bfd75b6b8dc05d1a45d9a902d0cad37864a9727d1d519259cebe807aa3947f"
+status = "translated"
+digest = "8334b2869baa9dc0bb4de80dc0b77330edfd6f62dfee4c9ab16685b46d6e7fda"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#7"
+kappa = "a1e4edf913d8e2184d9b2fb97b6f59d047f9c09831450fdcf2d437fe19a6e2bf"
+embedded = "f93f3d2522e6d6a892bfcc32d1680fe345704ef0ba5ca88182a0d1614af5268d"
+status = "translated"
+digest = "8334b2869baa9dc0bb4de80dc0b77330edfd6f62dfee4c9ab16685b46d6e7fda"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#8"
+kappa = "2b9e552c75a5d0a8ed6d764afe12536f5994e316e5278d105bad69b96ac9bbad"
+embedded = "0feb1aed13262a48082983abee3885fcfe27b0fbae9872b6c113046fa3339a91"
+status = "translated"
+digest = "320c29aab4876bad65a443cdbf1b5fe907ba0f08c8e6666474904230a13b694b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i32#9"
+kappa = "798b877df44e81cd47b9ec316c1fc719440af26987ac182e92228528c482ff9f"
+embedded = "72e6cb46d452bd750c68220795ec2eb8860c5e6259a02823f904ec0e90c65f41"
+status = "translated"
+digest = "320c29aab4876bad65a443cdbf1b5fe907ba0f08c8e6666474904230a13b694b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64"
+kappa = "5d02f8f3f7238db225479be1606e791962feac319b66d38e4b5985a43e6e9a38"
+embedded = "d7a70f4524ed11e65de21c446914a589812ac10da41753d0335c277ae9f00209"
+status = "translated"
+digest = "9b8002e66afb05a83a73aa4b9f82cf4a1ed639534220040686ec909ed31b11f8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#10"
+kappa = "e6d2b714cff7756cff4a0dc34329d075db2ff5ad4b60c4974b711dcbb1e5fea1"
+embedded = "27fb96fb148c9e1bf07fab04022209b7d975b7a005ea963194c90f37d83cdfff"
+status = "translated"
+digest = "9b8002e66afb05a83a73aa4b9f82cf4a1ed639534220040686ec909ed31b11f8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#11"
+kappa = "e9e2ac3f6c0f8ef5d81c354651f2710c6a24e83e765f80fec7c3bc9d74f270cd"
+embedded = "18dc8db96f5f514a59b6139249e74c9c8a526336761e2a2a80190881b8d83ba0"
+status = "translated"
+digest = "ae27c1c710a8ece6d4689b00947c2d46f5c57446f33e5cdb56afb7a0520abe18"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#12"
+kappa = "aaa57c5b9cab90ac3038d4281bcd8b99e0261ec46f159b5166c06f27c2f38b1e"
+embedded = "3d57b06516659ffc21d40e631528c4086d3628d092226fae3ba750bc4bbe97f1"
+status = "translated"
+digest = "812796e24402ea5fc474c6def482af224b0a72d105df9e5ca73b99ce027562e8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#13"
+kappa = "482f008ec3b53e7b09be71ea24f8d6c9812812b7280017332e2a7e5177d1416d"
+embedded = "c3c02fa05cb93de6837e474f7d9b45e9146cd4b84b9acc6a3b718db800d40f74"
+status = "translated"
+digest = "dbc6d822ebaefe6819ce2c0b5a468527a3430208abc3d3c86221b4d3a7a3494e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#14"
+kappa = "3cac18f00e8d1b6ba2b68ac752a6f802c5110b53859aa7212c8ecde3c9f1c0b3"
+embedded = "ad6072abce7288b81376b7feca10625d7b60fea29ca32e36aadfc8c1a246906a"
+status = "translated"
+digest = "9b8002e66afb05a83a73aa4b9f82cf4a1ed639534220040686ec909ed31b11f8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#2"
+kappa = "89118a145b0f30fdac0875bf86597f00f2484acfc6925cb514ba46ad62acf6d5"
+embedded = "ce1c7297e4f583015100c78aed5eb9e0a51affee628d198704d3f507fd95dd75"
+status = "translated"
+digest = "e6c7a9414127551c3fbe4f06a180fe5b886f82837b15102dbad71e1eecc35dc5"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#3"
+kappa = "9d9c125fcd7d6198a6184698a8b6ded5ba3b2f2053de7ef3121e5661a3edcc3d"
+embedded = "60e0898b9d0e736361398798df1a9953b087b13c7bc3d1ae5a8c7dd284a8bb07"
+status = "translated"
+digest = "9b8002e66afb05a83a73aa4b9f82cf4a1ed639534220040686ec909ed31b11f8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#4"
+kappa = "ca4746a618988caaa3d72beda4bb87dfe2782d52bb61eb054a3f19f3028dc941"
+embedded = "2c9e4090125fc7e2d4f1af27f7a48e72701d233adedba3093a98af7b50d77193"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#5"
+kappa = "41aa27fdf9dd21f85d7a0425769bc0f6e73212110273aea837aac6896212a9b7"
+embedded = "7f6e2bc6c0322bfaca29c49b46e1962a8f76d1b3df7380e91e3301ca0805832b"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#6"
+kappa = "ba2dcec81033c29f3e1d53cbf4c2576fc14f53b8c28c78a40c49e1d19a55386f"
+embedded = "818b70644f3d97079dc528d22b23014fa9a805d35c30df485bdf1250b1534499"
+status = "translated"
+digest = "9b8002e66afb05a83a73aa4b9f82cf4a1ed639534220040686ec909ed31b11f8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#7"
+kappa = "030a4fd9ec16ac7f81ade5e128c4892ba4fa7ff430151e2c3feb22f8e4df9e07"
+embedded = "345cbc185fc626d961c0ba14255a4d3f5d9f9eec75a8967ae1a2597de5c5d101"
+status = "translated"
+digest = "9b8002e66afb05a83a73aa4b9f82cf4a1ed639534220040686ec909ed31b11f8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#8"
+kappa = "c0d5ef5485ad16326fc9026e199b021bb8c9bc7b58ca043cd65d35c2abaeaf94"
+embedded = "a5d7202c1dd403b71f3c643e8723d10f11ea42fe69c93d88bf718ddd9189a22a"
+status = "translated"
+digest = "9b8002e66afb05a83a73aa4b9f82cf4a1ed639534220040686ec909ed31b11f8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i64#9"
+kappa = "bcaad4e913d554cdf78f013e9e09c802b68b81ffba97718bfd9dd5cb3c546f0e"
+embedded = "2269498f764d25f53a7992692b2d9e18a533e43b6e340eafd4cb4dc16a0e3890"
+status = "translated"
+digest = "e6c7a9414127551c3fbe4f06a180fe5b886f82837b15102dbad71e1eecc35dc5"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8"
+kappa = "ba24180c33d2483133d207f392573a4eb39343b94012a2447696bf46642a9efb"
+embedded = "bc5c7b9d95dbed16d6a8447ab711b73e8683af9c848232fc4a56c6fe09cf25ba"
+status = "translated"
+digest = "26d263f3d73b231e9ce2c2b169e048889c38b4130c728277465526076eb05361"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#10"
+kappa = "1c4d833a23701a52df6e3ff77549ca7d1eaa2fee5a6506d8b95144dfdca3fdcf"
+embedded = "3b9d40ee91826fe6a82b26edb106ac494cfde8ca7bcf22821a858b4ad959240e"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#11"
+kappa = "d2522020a6153aa0b593382c261f1a495583fb7acd5f18c1677e4c4eedd1b31b"
+embedded = "3e3c5bc84fe40750ff5898a0584f7785aad22f560be5f420236a4af70e9c4bc6"
+status = "translated"
+digest = "26d263f3d73b231e9ce2c2b169e048889c38b4130c728277465526076eb05361"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#12"
+kappa = "159f7596a22250410a27fed1af51c175a6ea55218ef7a3866c76a5c501fad74f"
+embedded = "a7d0116c92df3e6cbdff0513fb404b431fded7be8e215eb200974a3173c57f6f"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#13"
+kappa = "4088889a6b1bf892f8da881ad52906573dcd04e5c0e40dc066e2aaa5b254a391"
+embedded = "358ff897660f2800227c7757c4a4946e2e2fa4ef0053b2d32f2d92ebb4d9cd20"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#14"
+kappa = "0dea06a586cdc574ae9b277e0025d291cebaef9645404da9c39aecac233c9295"
+embedded = "411685430dedc180bcb7c00c3717d13484044c771d0f213650400170b81c5237"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#2"
+kappa = "ae0f75f3cc37153262d3be78607a3f3932fc309502c4bd5d3dbd43d17760dfab"
+embedded = "782eacb8a9e96c91531186d0a9469e12d29f66fce420aebabc5735551005f2db"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#3"
+kappa = "4d1dfae5688596bf09c60510b09d4d586d2de5180c15197a3a717b3cf8b6b536"
+embedded = "894353288c96182aed672046d0af7dfa870008ca1ac7fb6b31e414437428aef8"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#4"
+kappa = "86f1c2b770ee4b0ac72fa62f41e8e8866d8113bb9c3afa3c3498adad9468724b"
+embedded = "f314dfaba2a91c2b10327c0a2ee04eed0f2c67bf94d0d95a24d103ddb1656cf4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#5"
+kappa = "92d84382108a5b63ebfe438fcda1564d045b5bb8c3cbdb8036958f72cf1ab335"
+embedded = "6038651b499e22e612c3038e6835870799f52e91e47fd8113c7008d75e11cc14"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#6"
+kappa = "ca3bbf6a1928dbee54899d04e9c967e46b372bb6f109eb5f51102a88d90dde31"
+embedded = "7c830fb0ac006f4f782784f6a1b89b85e3e71d742c094fd67ce831ca7d4688ad"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#7"
+kappa = "3c4c910c4d6198a859f561a6289f6411be930d6127f80ba365aaa903afd42d7c"
+embedded = "4bf7e9c2af4c44d7c4f51f7262af9e27e37b75882b1c19316fcd77a95fa97360"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#8"
+kappa = "e024242896e0e030adb2bac3819876068b5f4e6c20b480c0de2cb12f294fa126"
+embedded = "c02809612703eda610029440e37c50e9a5df0ba10f7875508225e1aab28f9463"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_i8#9"
+kappa = "27b99e81c93b9777363a55f25f70e7bfe021c7b054248782b09de020d9140679"
+embedded = "00bc5b928117fda75e9b036599abaa019d0f6329fb1aec92906b9c3f083becfa"
+status = "translated"
+digest = "d11a7e5c025c5c33a0232585a00a9ecc0bbc92b6e322058f4347e79938e1f24c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize"
+kappa = "24a8d3ccf24254e25e6293f1fc5dca7e04584d51942eab19eb5f827860830b75"
+embedded = "0a54fc38591f171cbedeaf42fa00c9f4c24c1f150778dfc7864498499d341660"
+status = "translated"
+digest = "f8cec45cd4632a6030e6667a19c1c7f232178d88d05fc28011f3da8c6c2f36ce"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#10"
+kappa = "f20d0157ea587dbd9f40d4953538e764bb14d74a7be9b2ecbda61becad8a5a0c"
+embedded = "c5dd469d41bb5c48e7f14ca05557cc4ec9123c98945a10b51c9df39b99dc71f4"
+status = "translated"
+digest = "84516104d90953b9069866e6eb8b8069bd3bb544a6365e1267d7641bd8a4785e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#11"
+kappa = "2af9be4bcff2d28f30bd25900016b0d8d691e969b7ee07bf321c0e4f4e0e8697"
+embedded = "3fc5304e28fa4a74cc1fb2f4990fc27927d393e30da172c3d78709d34f11a5b1"
+status = "translated"
+digest = "1901f90a2672628551e0ff47cf98d01d2b1dd3672306c0d2334b7728fd410ae3"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#12"
+kappa = "df181167ce0b938ab30c57855d2b43fc319b865a59914a5b5bbd3f6897cfce41"
+embedded = "e9fa01758008a3e373dce08f7fd3161e27b5c4fc13d979371d15af258edcb195"
+status = "translated"
+digest = "9f2361f332a3eee8df7e5d01878046815e9d7401003dc82f7d8b9e5ce2ad99e4"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#13"
+kappa = "df8812c230c4e2da1200ef454af07a2258e29d800729965a9e6c0cdb8580765c"
+embedded = "5f3a65a74a864ae1b10d92453c4a4c4be04fee6cfda7d326ed6148bd0424f3fc"
+status = "translated"
+digest = "797ddc83ffd645203484f7c47259e3be9ad611fe1590314fc455dc3a453886c2"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#14"
+kappa = "0868329715b0e18a988daa56702d5179d0d3922b071bde5fd436aae06b24577a"
+embedded = "6bdb354f8379da2a5ef2d010ec8146238f7295c98546705b276f5998e8e541c1"
+status = "translated"
+digest = "098b36a66b5e2e2eb7517c2942de3a3d2d54bc03187075bd21aed38ee9bf203c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#2"
+kappa = "61dc28cf0c996a1d49b4dd382f2e512180662d84b4ec59230efdf30c88d9350a"
+embedded = "fedf16007ca9d0c79dff98e6870cf62e44b8a14b2b1bfceb31b9927bbd3e5264"
+status = "translated"
+digest = "165d22eb24f853e52367e257daf3ccaf90eec4d5cfe7ec6d4c83361b39961f29"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#3"
+kappa = "da894a5261bdc6b954e8d1544136c779bf57c50481f42bbf61c264ffb79880ce"
+embedded = "57532e865613f94b328850aa43b72729132342a697f52f6c4429c9f28cf73147"
+status = "translated"
+digest = "f8cec45cd4632a6030e6667a19c1c7f232178d88d05fc28011f3da8c6c2f36ce"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#4"
+kappa = "6bc5839602c8614dc9761b2ac8fa050f62ecbe077faa9d277bbbaf8da170c488"
+embedded = "a2da572861296fccef526da3acc656a34f3eaec5efbe4b9a89aa94d494ae2c22"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#5"
+kappa = "9bbe9d540afccebee6523623033e9d809c2eda4e44c17cc4d27c856cf551d828"
+embedded = "b88b559a54fd32a2118d99705e8747e424cf675c065cb81a4672de547b99aacc"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#6"
+kappa = "de678085c59e8c4da6b8da1326e46807a8e947f5abb6bd65440b85b03f6ed4eb"
+embedded = "f1d61db43d782017ccd80f8279efc0a614d5a4e2ef16df920eed82935c173b55"
+status = "translated"
+digest = "7f724f3e11bb6e30d244115b154ecfdc7f110fe52fd311cb98bf1ce210ba5487"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#7"
+kappa = "b7e959522c74e18d0636f2b079d7c6edad3a2e8364ab0e601e5745b5b612019c"
+embedded = "798bc1546a78edf75ab77125eacfd6b442adc8b726c736468d380a326e210264"
+status = "translated"
+digest = "eb7b88d5764629bd13d7e10f6c75fc5e2cfe6a4c652d9eb79c247d56d57958a6"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#8"
+kappa = "4c93bf6b33958507e25b82e142ae28ce99df20f8d2c3a87e118cfe97039c5df4"
+embedded = "758991563de8a94c0c9c1cc63da0172bc41584b6da36b943a0b005a2663aac71"
+status = "translated"
+digest = "19dc67099e006405acb8f6bc410ba7218a7effc4f4333fdbbb5e72ffddd15f1c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_isize#9"
+kappa = "53bdd2a5f0019f5eab52b866e6b3f864e07d5973d4ec81b19e610111cb293d2b"
+embedded = "78a529f4891efa6da42b947475d0818593401225221c5d6f382c23297d7f695f"
+status = "translated"
+digest = "df25703cbee05f9367a97bf5cb2239582f0fab1f72481247575fc4e6ceb8d31d"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128"
+kappa = "4f8582aaeec65f27660a8b4ba243b14d043175a80630fdb518fbbeb994207060"
+embedded = "627336d05ecb1963a21c44c49bd75405743c3312ecb39de645b926ffebc84d12"
+status = "translated"
+digest = "f576c45db8dec489aa3a01185802775fc70c8344d1d1b185b9f435998b4d767c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#10"
+kappa = "f0f4b78a61ab4018924d8d752fe216730e6c4a955cdc95982181ebd005704ad7"
+embedded = "b1dfb6010c37c3de96641cfec87710dff287f70801bc0a646160860fcca494db"
+status = "translated"
+digest = "f576c45db8dec489aa3a01185802775fc70c8344d1d1b185b9f435998b4d767c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#11"
+kappa = "621d34d338201eb2478eb9e5232b122bfb4e344d6daa15e2e82420bce6f52990"
+embedded = "3804f60c58cc1e119d3cf8ac7a375d41130f663a7d76d3bfc2432fea94830f92"
+status = "translated"
+digest = "35e1eac041983808c356b907446f0bb330c2c2b8e936d2845834029e203f8a76"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#12"
+kappa = "1cff5c7260f6a4fb2e8fd1c41ba81c447b6a266a42fc113af7c21f1fe11ba0c4"
+embedded = "9ddb9ea3b424bd4162f781057dfc89fe133ae11cf0f39bcfb4bda3495afe088e"
+status = "translated"
+digest = "080be3625689fe5fecc9a37db425cbb5f2dd1bc88112cc52bcb75cb060cda5da"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#13"
+kappa = "eea2f52e257c87a19e34c4f14dfe80a6e07c46ac17efce2d6b8875ac68b312b5"
+embedded = "0167be0a7c6e6e30917bf33a8c18ba8f2d2b33c1684a80aa4808b1c4438d8d23"
+status = "translated"
+digest = "a19ac56eca80f877ac7d538efc35a28a45146791b72ac63f8d792c5a0823c265"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#14"
+kappa = "3db2e265f5f8f2c6dbe3af6da3143e19f22e700302ea13609ec3faf951bcacee"
+embedded = "ca6109fc35540c639c2ca6c182e33ca7cdb73ffc45ef8dc3044c7f1898c187c9"
+status = "translated"
+digest = "e0abe513d86a5aec886565069be1ee0c1cb130b44c2f4399cd3d22388bd125ce"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#2"
+kappa = "a97bd6f43aea678fd47742ca3f8977ed3dfcea37afbe66b126a34be84166c024"
+embedded = "92780f4aec561d9412b3b0d761b3d6849fda541ed7c7f18e92d79d8fe7a0678e"
+status = "translated"
+digest = "f576c45db8dec489aa3a01185802775fc70c8344d1d1b185b9f435998b4d767c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#3"
+kappa = "3c1a480efc3a82baefcc5b86b0de225be9d1c4453b0d79ce50943ef991d68f79"
+embedded = "cc22bc4882f09a058b366f2cb610e01f628803c8dfbf17134c30330fb381ef2d"
+status = "translated"
+digest = "e0abe513d86a5aec886565069be1ee0c1cb130b44c2f4399cd3d22388bd125ce"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#4"
+kappa = "3700f9aaf44128dacf106981c42145c076dcbef99a0b9f7aae32293ba2d872cb"
+embedded = "9420b9e18e633be6e5b1c6a944ecc78f1208f826c25c0db05fe07c01865329ab"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#5"
+kappa = "b6c19f65f63dc341939edfbd2e706a497ced9762219b59a1adb2e3d7248f0ac3"
+embedded = "67760251f773366f893e4489af8f59420eddbc2ee4604512e7c2bbc24c95bdd5"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#6"
+kappa = "9b9721be84da090472ccf4e43bac75af120c60e501536d83e4e70275221118d5"
+embedded = "ff9fc94a33445a31c33c57184d4c00acfb0cd6638339d4959d88d2ebc22f19c9"
+status = "translated"
+digest = "f576c45db8dec489aa3a01185802775fc70c8344d1d1b185b9f435998b4d767c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#7"
+kappa = "c54a3510d0454bffb82cba3fe9d1c174f40573fadd923fff2d0e6a7dc627d342"
+embedded = "5e0c127c8ae8b344f1c5672689cb32063357ef6997b5d662817aad17e36e1b19"
+status = "translated"
+digest = "f576c45db8dec489aa3a01185802775fc70c8344d1d1b185b9f435998b4d767c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#8"
+kappa = "71524b83309bd0027c36826278937314eff6c8386e5b949d542b9b5e88c957e3"
+embedded = "6418c54648d216c260b1d25b24066c913e1149d10c67c5e3f3f7ca51cc3432f8"
+status = "translated"
+digest = "f576c45db8dec489aa3a01185802775fc70c8344d1d1b185b9f435998b4d767c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u128#9"
+kappa = "1d24d4030bb237d167ae82933b9bf6ecf47e60dd36efa4e3bd81486671e33fcc"
+embedded = "67c4cb6bdef34b6a4b8a63b314b7fc972a0730f7b87018c210ff6f184a0c147e"
+status = "translated"
+digest = "f576c45db8dec489aa3a01185802775fc70c8344d1d1b185b9f435998b4d767c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16"
+kappa = "b93af9cde7d06d7e3a707c3be678580dcd044d6e86c11a802c88816d1aab1550"
+embedded = "223c23b95f73b349f12a34b9c964cce07c67a66c062ac544504ae4dac96d6aaf"
+status = "translated"
+digest = "b907653af427b13f5550b66d61c8ffb3a0540fc154f2baf6c7f1da219de3b240"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#10"
+kappa = "ea1df7838d17ed6b700885f1138bab4fe8862dd918217a02bad2d3f69e0478f5"
+embedded = "b081fcb06b4d752ffd6c1a9f9c460aef0c8b0f04131eea94451d7bcb40d5f10c"
+status = "translated"
+digest = "9507d7a4546690c274350f9683527366cc5c95f1aa7d4c1b61453c62dc7276c8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#11"
+kappa = "e8390bf6bcb28260194623999ec6e408d0ffc0b6a470c36850180686b8a3eb14"
+embedded = "e172d0b3aacc6dad2c99e0c712354b0ad6f17f705f8b75b47b2600bb7647e01c"
+status = "translated"
+digest = "40d516bcd7513b5761081405be593a093bf72babb4d9f873863cf35ce566958c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#12"
+kappa = "6c393f0c876ad5a0421adeb153c0102b13a5bff1b7f9d0d39b2c73ae7d0ee5e8"
+embedded = "5c45d31626f7b1e1823d3f06e5806a9b8726c503fcef2083f8cf9709a336d3a0"
+status = "translated"
+digest = "b907653af427b13f5550b66d61c8ffb3a0540fc154f2baf6c7f1da219de3b240"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#13"
+kappa = "f7bfc43171a92f48eb7d167e07bed8397e51a917e3c781bf641324b852893e21"
+embedded = "df003707146f7a8c6e22569aa6a74b49e02227e7bf60027cd247becbab280c98"
+status = "translated"
+digest = "9507d7a4546690c274350f9683527366cc5c95f1aa7d4c1b61453c62dc7276c8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#14"
+kappa = "86ca10f9c901cbb05ed7cd5fa3fc9ba3b8e22b2983a867d75671c5f060bd0b94"
+embedded = "f70afed19ba9df60a973d2115f34d81158e75cd45f946d29aa8f35de9f1b4227"
+status = "translated"
+digest = "9507d7a4546690c274350f9683527366cc5c95f1aa7d4c1b61453c62dc7276c8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#2"
+kappa = "f9ae56d0eef01e0c1a6fd32127bca7b47adae83de8168697c9283372bb433057"
+embedded = "f8720699bdaa252c88a7b7ae0738a91aea5a59c2b43f75b6146df5e05c3e5c94"
+status = "translated"
+digest = "9507d7a4546690c274350f9683527366cc5c95f1aa7d4c1b61453c62dc7276c8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#3"
+kappa = "c157a58cdd4861a4c6d39a70c7d36391eca0292551df976ac51e6e98b5ba3e42"
+embedded = "58a8574b1795fd891017cdc13c22dd5231943a65673552a077c66765fd6c8a2e"
+status = "translated"
+digest = "9507d7a4546690c274350f9683527366cc5c95f1aa7d4c1b61453c62dc7276c8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#4"
+kappa = "34d927fb4df98046e04b2234b1dd38c4bc2cd523f5ea5b066e022c639c5d2ddd"
+embedded = "b4341bcbd7b7066a3de314a2f06d630b8c5b0c90a7cf8d0fbcbc8a41bbd91798"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#5"
+kappa = "19ac0f0b06a9b6bc632d017cd88faa8206e0da906609659a50ca6064be14bae4"
+embedded = "38c4757aa9dac8b61b22d506501aa9fda2908c3e3a959e67ad95f004a944bd23"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#6"
+kappa = "94a5c394a2cbd33330528f425e2ca5920808f9e3e5fd38bf4b1209065ea40c86"
+embedded = "10efac67f75286f3f20c1cefb54244f11217837fce076b4de9afc3feebd9de4c"
+status = "translated"
+digest = "b907653af427b13f5550b66d61c8ffb3a0540fc154f2baf6c7f1da219de3b240"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#7"
+kappa = "4603d9c36d93b51078a0af08db2389d63b81c30eb64ed44728f1b6890c7d92fa"
+embedded = "b5c9f65850da4ddf926207ddafe9105badf325a7f1be5a8428b41ab21cd5e041"
+status = "translated"
+digest = "9507d7a4546690c274350f9683527366cc5c95f1aa7d4c1b61453c62dc7276c8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#8"
+kappa = "ef7102673b8452844827a8063d039063579a6e73b2ec7a864b5a954670a9d413"
+embedded = "ede1aefa02c8b156863b6b5009db091cd72ba7be2968e7fb8104b178b9e63d16"
+status = "translated"
+digest = "9507d7a4546690c274350f9683527366cc5c95f1aa7d4c1b61453c62dc7276c8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u16#9"
+kappa = "9a54e21177ffea7f7512b7d66bda1d1351f4cd6af4e251d45b718640f8b36f6c"
+embedded = "db7aca0b5c507cb53f0aa53faea08237b97f439b5fe6cbbd3d1b63b14f38cddd"
+status = "translated"
+digest = "9507d7a4546690c274350f9683527366cc5c95f1aa7d4c1b61453c62dc7276c8"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32"
+kappa = "5eeecf720a1bf4fa67e799ad45040fca939319d86e561c689b7792f631f3dfa8"
+embedded = "a7dc351a77a5ec2ebec4c32c70c8b4e5e073ae30138ceb1b26ef573270220785"
+status = "translated"
+digest = "7801428c9adc4ab828fc614d9bb13cb891ffd08b097daa87940f65f14a842786"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#10"
+kappa = "672b799b430b46087dc060b948d87c219698a2f903940d2a8d2e29332de4981c"
+embedded = "6ae2c7a905fa4ae10a93ed4d5ba642e4a12690b17a4a13dd8b9892dd5edcc47a"
+status = "translated"
+digest = "5f26e11a5fee75b93d931a1e124e2270a5ae2fbb667033fd09c813d04cd6713b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#11"
+kappa = "ce7cac6582d76d1ed948c654052ae54077356623ee1e86c6a3dce2b293398eb7"
+embedded = "3aed48eb18ac5f582247021b79eab769140480aa748880366f5716de174bd773"
+status = "translated"
+digest = "bcc404c1e990e07cf59eedf910758dbabfa8185036f8dee77d216bdb2d7a45db"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#12"
+kappa = "7ceb32e2901e7be27e27881946a6a178ebcb537cdd2c7be47854ac554f5cbbde"
+embedded = "79f19c27645433611f6680583e78285fa321f1feca28da1ad56f8568c03e00a9"
+status = "translated"
+digest = "fcac77887c865d086e2835ea7790d8822b8da6d0be6f590292d8b45d05d7d949"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#13"
+kappa = "1377d3a29dc14a50dad82efc686121b98e0239ee9a23c089cf90bf1cf75fb546"
+embedded = "66c471eb1fc7f46d61696ccc7fa649f365809364e9d13200359b21eaf012847c"
+status = "translated"
+digest = "7801428c9adc4ab828fc614d9bb13cb891ffd08b097daa87940f65f14a842786"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#14"
+kappa = "afa249f48c99b0b0baf5009aee5d97fe4d332559bfdeea6745045fa035db1c16"
+embedded = "88f2f0196d60940615cb409933446bf4ebbcdb9e4485de0f33e2b791f3960272"
+status = "translated"
+digest = "5f26e11a5fee75b93d931a1e124e2270a5ae2fbb667033fd09c813d04cd6713b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#2"
+kappa = "db05dba6208e6a65e3d1848afdde9056ad23a8708ec77a6d505337e4b54bbd5b"
+embedded = "7d46d0bc33b38c65454b3bd85a37f6b625591c463054833c626474968f6738c3"
+status = "translated"
+digest = "5f26e11a5fee75b93d931a1e124e2270a5ae2fbb667033fd09c813d04cd6713b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#3"
+kappa = "e3b1fe8fa26e64f35e5c2cc8091106d2212962a3ea012d84031b990366fda56d"
+embedded = "49e57731bc99fa9402aeebfeb7e7b2d969326fd848c0af8778e8a6caa53ff06b"
+status = "translated"
+digest = "5f26e11a5fee75b93d931a1e124e2270a5ae2fbb667033fd09c813d04cd6713b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#4"
+kappa = "9a2e8af9ea166ea46e9c21fa546b48cb96349b23370a05d552d849aa896dd737"
+embedded = "0a41a97e4c8e1246c0b4ce5260dcaaf10f6bfd0e14571a998ca40ecf856c9656"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#5"
+kappa = "1d04b6194b3bf4e40d6931014cc7beeb62a937adbefded698d8a7fd4af8b0d1b"
+embedded = "23be73484a79c21187b551d82e226e20c9772c5ef8cd59a4775beed677a0ca0c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#6"
+kappa = "4f50662236a66d7578c94471b9505f87ebcc2300fd8f69b593d23a4ac9ffc628"
+embedded = "732bad254aff4f1bac60c85618c083d39c882983270c47e4c36af71e0a61c0c3"
+status = "translated"
+digest = "7801428c9adc4ab828fc614d9bb13cb891ffd08b097daa87940f65f14a842786"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#7"
+kappa = "872d10d7b85c39b6288046df4536ee0bfc2bfe26b0a454b47206d3275db5fd49"
+embedded = "ed6450528968e71a62b797d2826484c92285fd27dd645a2478675967390cb05a"
+status = "translated"
+digest = "7801428c9adc4ab828fc614d9bb13cb891ffd08b097daa87940f65f14a842786"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#8"
+kappa = "0e658e0e1049a55e155b5f5c3ef1a3b4e4a822b7b4cbf3896af36ac7ca26f87f"
+embedded = "763278d9716a8ca40cc090a40b7156b38b9dab2b2120ca527e5dc1068ea1d13d"
+status = "translated"
+digest = "5f26e11a5fee75b93d931a1e124e2270a5ae2fbb667033fd09c813d04cd6713b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u32#9"
+kappa = "1d7f40c029be018e9ae23f6955c7ed0c0d078ba35da86c0a3ebd24b57348e05d"
+embedded = "a76621da15c53d9f94f777a0a6f401f5589e450b144a16aa3ec5d20a16899274"
+status = "translated"
+digest = "5f26e11a5fee75b93d931a1e124e2270a5ae2fbb667033fd09c813d04cd6713b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64"
+kappa = "445f01922936f15c46c41a163ad31510a8810962fa8e45148a98a5456cdab1db"
+embedded = "823a9651be0495c66e9ba18de9c53a1f6a4db639f2ee0de0ece43eb891346a0f"
+status = "translated"
+digest = "0afd4858e72edef44f6884d7715b48d298c2af1f13bf3bb67d2dc24a8264f90a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#10"
+kappa = "85b2df0cdf8dc93124d07ea89932fbdf6c39d833406dacc51cab9bc9f43dc399"
+embedded = "8d0cfd3105213ca1bc655dccfe3ac09d2a6e8b3300397257d2a9cfb1d5ca12b5"
+status = "translated"
+digest = "0afd4858e72edef44f6884d7715b48d298c2af1f13bf3bb67d2dc24a8264f90a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#11"
+kappa = "ad6f8641bfbd4518c179e2ce50d3bd6a894b7ab9a09dd9b2f1b86cf4852c1eae"
+embedded = "3aa4c0fdb6f80ee2e18a6bdd1fe7465f39fa79bc063898a68b1a72ce51b188f5"
+status = "translated"
+digest = "066e3d36d2663c28819e052399711eac5fde0096046c3cb5c09bd8cc497bb59e"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#12"
+kappa = "16d8b0b7d9425d29bd1dd7564935cfd07375ed46c42c82e85c580f571d528975"
+embedded = "df5266a98565ce9d0249b35238ab64a8d07a68922dde55f8de015e30352103ff"
+status = "translated"
+digest = "679f98c52813848c554e52eb443075b37d6d6c473858bc3b152309ec0361db4d"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#13"
+kappa = "c1ba593bc063694e4adac6cc3e6a1133829b0bf6fed05e1b5a9ef344192c07e0"
+embedded = "9d8f9d89d8f467524a88a194d7828fdf287cab12d810028341c377d5f7c07865"
+status = "translated"
+digest = "abf12d8bc3e7581df4ffd5abad40ac6d1cae54c15c81e40782d00f29eb7dd9a4"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#14"
+kappa = "9bd7ab109f63dde40cad0982dc058d25b55d117c56bd46e8ffaeda18d8002a2e"
+embedded = "e561b5741e95438d708df4da6b713560cf52e07d3e796a2c0a0b8af2f9583d4f"
+status = "translated"
+digest = "0afd4858e72edef44f6884d7715b48d298c2af1f13bf3bb67d2dc24a8264f90a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#2"
+kappa = "9adc201db5914de0f5430a7c3347bd8b4438a1180dd9fdb2a320aff6d29c076a"
+embedded = "b4d4144ff8ccf31cf69774359c5e01d384adc019c983bf10906c8e8a75b15778"
+status = "translated"
+digest = "961ee5a1e418e805525469dd2d7e511448c762b01c34cd4f3321631d4d945b20"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#3"
+kappa = "2b490b896d420498477766aa30122a3293f087a2524b645b8ed8a1cca438e470"
+embedded = "9739a5d82ffb243f56de3dd4e92541cb00e0702f4763ba5ac1be130d7521f3f8"
+status = "translated"
+digest = "0afd4858e72edef44f6884d7715b48d298c2af1f13bf3bb67d2dc24a8264f90a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#4"
+kappa = "6226a9018a2076f1696d30c92f3a7a0f9067a7031dbaf026dec68fad8ded7fa0"
+embedded = "187ec0471d349ed31ff6d8aa2693f9e366ac478fc3660bfd66b4a33cf757aaae"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#5"
+kappa = "ba5a2d8719c4d7bd1c368237f44c6263bc5dc2ebe16f9c1d7065ed2572969069"
+embedded = "3ce7c00ad365263ad0f59fc3ef0fa8270c97e6f1ce127bc371156086ce587ae4"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#6"
+kappa = "ecf0ab9a7fa6f2f4df444472902d7a6894c176e6ef4e4f0e6035c11c47d3ad82"
+embedded = "a21abd0edfeef3452054ea25581ef22affe50b20d58b9de6003879608dff3129"
+status = "translated"
+digest = "0afd4858e72edef44f6884d7715b48d298c2af1f13bf3bb67d2dc24a8264f90a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#7"
+kappa = "fcce97e8ef53cad52f9d03e92e43f6af7714c3b964df4a5a0f21b1bd77ff080a"
+embedded = "91ca0b72eabe8ddd33c035163b497b000fbdabe62978e0799a85430e16b206d4"
+status = "translated"
+digest = "0afd4858e72edef44f6884d7715b48d298c2af1f13bf3bb67d2dc24a8264f90a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#8"
+kappa = "6bd49485b191c3e55b0d50fa3b03cb388ab4a2aa33b08fef4cea20e44f9da438"
+embedded = "b43a0c37615bbea5fe9e9f17fbd35a0f9a60b2c4df5b19492e5df90e7fa254d6"
+status = "translated"
+digest = "0afd4858e72edef44f6884d7715b48d298c2af1f13bf3bb67d2dc24a8264f90a"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u64#9"
+kappa = "4c3b71e7da712a040045de3a5b8869fbd0d9ba03063a596fea60fa603e48b613"
+embedded = "a35c9b1ad4f083b9325300f7393c1b208081d4c697e4a42597b2462ef4d5cda6"
+status = "translated"
+digest = "961ee5a1e418e805525469dd2d7e511448c762b01c34cd4f3321631d4d945b20"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8"
+kappa = "3bf1369d7cf3ca6fee363fee4ec8e4a0243fe1f9090ebd8888f4e2ae851cae8b"
+embedded = "2b4a79997b375c151e19cf6858f5140783a9eb23667ccfc9bdd3efa788652325"
+status = "translated"
+digest = "8576463a2acfa88351da03dc80cc4e448b677731942b3a101bfeb4063bf1c3fa"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#10"
+kappa = "dd82b96d82b1088d7c6dcaec55ed8935a573ee659fa90916fe566a98177cad21"
+embedded = "f81164d7a43d933b6b8aceb6d2c065ef0ca9ead12df3fb567b61152fc45a9ac9"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#11"
+kappa = "a2a75b4367a7ed444fc93d577da0ef182f5003f360ac88066e1f25ca64cc389e"
+embedded = "e3dbb1508d9c0914acb14fe2e213fd5aae8ffec2f12fd2f1958c348ff3706b94"
+status = "translated"
+digest = "8576463a2acfa88351da03dc80cc4e448b677731942b3a101bfeb4063bf1c3fa"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#12"
+kappa = "e55fe564ca3f7534da54916c396f8505364aab51c7ac89c0ea3d5011ca39b504"
+embedded = "94fee228efebfa3d28935a5fd168267e0b9a3f1e637ce9d493e0893d79667d01"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#13"
+kappa = "082b68cf8b0167afdbf0615853103e1105b0e3d98e53df3ebda1bf6f38509693"
+embedded = "652d2c73e7276ee97170442e706a16f96095b482ccd293a213513823186f9e07"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#14"
+kappa = "fd99a497e83a28216aeffade7de2481e7d9614e2e82cce50d53caac7e40539ca"
+embedded = "7c54c19672f94dbd8b90791678c755ecce57e38f7c2c2e3df45c2b5b6a8744bc"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#2"
+kappa = "b21e65b760ca7bb5dba6a9613eb44e1b61c175d0143a1ed991299b30a3f12c57"
+embedded = "7244e6473b3fa9603b5920b32f37277489912bb4622cc3dc8952f3cb4481cc81"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#3"
+kappa = "39309b2d96820509cb348b9a8fd798ee99ecb769ce0be7b190a28523ffaf4b5d"
+embedded = "efc9ab6102f2a72ec6c11c1b7cf8eea65a07896596163520c5d928114921f1bf"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#4"
+kappa = "b4ceeb84715175712dfb77309caedc4964fb290009d4e6e51e73f26796b7408f"
+embedded = "af35237935bc31b9d90d26062d307366b94806d7d772447535fa4a55b81e2c2f"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#5"
+kappa = "c4054fa13bfc5f35652bae1932d8b1671327a20cb6113c2f3908968d0d64ed53"
+embedded = "bbdc6b682777e43df185993a70149c79c06b7a25296b32adac36911671e08340"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#6"
+kappa = "d1640811485b603b625cacd2d6a8ef58294fa0b61ab743681aa34c0667dce7b7"
+embedded = "5999d1f843dd82917e53d9f230e0e743fc592397184d6e6b81ff7e21a681429e"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#7"
+kappa = "7180b77b31d2b82e982ce68718ef85910930be8297a7a7496469690affbd905d"
+embedded = "960e6368b043706512c153a0d7d643b9b3179b23a0e732ea88b6d4659be9c801"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#8"
+kappa = "e8a244b57e7aaace96b9698f5d0c31b5b359267365e39582369f49c55f81c695"
+embedded = "7f8d28e98f175644ccf77820b58ab1405da69760b06deb1f7af3f9243bf16bf3"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_u8#9"
+kappa = "aa02835495e7f93a15d31528852f3302a2ff3c581ad556b67f7718d7bbf41965"
+embedded = "a8a9921d8ad79048727fbf04f89cc069464a90b5aaa1fa220a63c80c500bbe73"
+status = "translated"
+digest = "f284a19e916abb0df1ea699cd562f3091ece08512ec5d7a1bd3ae14ebbbae12c"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize"
+kappa = "b32ce5b997272d847536d7d3d1f8b62a250fb063432f7217a5906ae6dcb8fa8f"
+embedded = "62a1eb8477123ee68ff8a4f6c2cef9387464e3503b03148abfe74ac416bfd799"
+status = "translated"
+digest = "91bd3d799ad931994c2f9aee7e5767c7e920a384ce0fb02354af446f79949124"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#10"
+kappa = "2af1ce2ce99d4021c1a3a0816eebaa1e983974792881bbcaaea15418121fed0c"
+embedded = "0a25d1c01ee685f8a6b35dd096184467b10cdde436d90b9f05dd05f24c0384df"
+status = "translated"
+digest = "91bd3d799ad931994c2f9aee7e5767c7e920a384ce0fb02354af446f79949124"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#11"
+kappa = "23da07fe1da0753bf8f0469153272f25c6a080f7054141c394627f8e68ada847"
+embedded = "60598369d777a751a6893a32aeb3dc5d82c1dfc7f381e034bbe237727b4717bb"
+status = "translated"
+digest = "1c5b2d1d1941fe37fedd3d03e96eeec656578093ad8d2d4c89ca71384a0a1181"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#12"
+kappa = "fa6f90087326a75bd4cdb97728d04bc4ca4af2221319bde2fcac5eeac7211082"
+embedded = "119754b66c0e1e9d9caebc808fb6396a8bcfcb2a3af4bb227efa63caa1a2ccf0"
+status = "translated"
+digest = "c914f856b1348788beaf7eee42c19551ccd22fd5c685ab4e19089b040dfb1f37"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#13"
+kappa = "c8c4090b4dda773f81c44dce52fb9a89ebc157e694fe8705ce0bc8a82d4a5dd2"
+embedded = "2b68d6e87f898eaab2a5484057b96e89a98ae09ad08d713eee492f2ae9b5a91c"
+status = "translated"
+digest = "629ef1d6e76de359609caee094544d4a0acac3ecedef1f18200f7cd54621725f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#14"
+kappa = "f954d3e8f6939dae76fb8706581439899a0f7a31faf3d04a9b40089893dfdeae"
+embedded = "69f4ff5d26e88394815c88640463d434a13ff53e8636271f03a3dafcaffb4087"
+status = "translated"
+digest = "d51859ec17c63b0b82514fa50cc3331268d1272e8f3c12ae91e90ff3dafcf0fc"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#2"
+kappa = "42d210c59aefb8eb0275be83bbada71a8d85702b158cc14bd8fbece76b27d154"
+embedded = "815e4392ea115562db2aa7e006f00659a4c3915f1c1470b292a692f30412d489"
+status = "translated"
+digest = "a114e5acc1dcc3b965e9d23fa043b72f1e884237dffbbe981c9c6d7ea1121187"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#3"
+kappa = "2d1feb27d7f73098da55a6cd4b2f87dac5df153222f1535332ef4be36a995fb4"
+embedded = "2727436f2ebd8d31516fc46bc81dd6febad0d2f5198b87191afbdb0194087b51"
+status = "translated"
+digest = "469e9ebba0791731ab858cb08c1cc853d3db8abb98677148fbb9f89e5bb8d1d4"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#4"
+kappa = "2cfaf22ecdbc3ec8692a4e9948a10bc9aab1f26da2c5999ced86fbce2a409ce4"
+embedded = "81e62fe14182639c5e27744aad79820821521562ba3006e7042f6e4968d918fd"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#5"
+kappa = "efd634ef9a25ccc23fa0a8e7b66098de2dec99ffaf92cb890c045447e98e1736"
+embedded = "98b8620073acb4e9a872b219cba7d9dea36d1a8f38d480ee2ac1a9be2265791d"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#6"
+kappa = "e73d153765eddc25e19a0520edb92a8e0e8c9f0ff55e498261fb93a4de9598d3"
+embedded = "dac4b1fa6d273745f26cea6e58c303374e6a0cee615f9faf75ae1a41f533c5b3"
+status = "translated"
+digest = "91bd3d799ad931994c2f9aee7e5767c7e920a384ce0fb02354af446f79949124"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#7"
+kappa = "ba21fbc4f539e93ec8e70914b6520c8b76f0decce52cfa8c8cbd25989898ccdc"
+embedded = "3499ea0bd4566e1d68b4b3aea5b53b26fea66a498acd53814c1c120c883a7277"
+status = "translated"
+digest = "33989f9a622042122657f459735360533ec3be45a6c89dac53db96d3c5f4a0bd"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#8"
+kappa = "2742e2b0f9b50ee8346cbbec1af4bb7b2426c1887c43617eb65ad54c2141d411"
+embedded = "1e8c77dea6a3d91ac4d68c0870bf7da1fb69db401a1e7df691d219f674b20ca6"
+status = "translated"
+digest = "d51859ec17c63b0b82514fa50cc3331268d1272e8f3c12ae91e90ff3dafcf0fc"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::as_usize#9"
+kappa = "1d9cb464b6d9a1d6c5af4da51865f30ff71d35e32f5d533fd3abc0d14cddfb41"
+embedded = "fbe4f34c6f8a932be2669e071cc4ddcdfd2bbee7d4d0b9147e8afb2de02aaf65"
+status = "translated"
+digest = "a114e5acc1dcc3b965e9d23fa043b72f1e884237dffbbe981c9c6d7ea1121187"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32"
+kappa = "2608804e8fd1dc80d08bc3f1882729216acc62f334f7080a5fdbd81deb80ad1f"
+embedded = "3579cc019335eb5e4df089c4c44bc72269011adc980669bfd3515ad5488bd64c"
+status = "translated"
+digest = "663dd1050d71d9f38193cc3697338a89d0e87bdcd9e16e3a7144bd195f5a5d91"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#10"
+kappa = "82ff41dbcc2308d3490254db520026d8d5094a1c3c8ebb8e7fba883afa74a956"
+embedded = "8ffb1dc453eca8871509fa4a0c061b1c4ffedcd118148b7ebb55d2c89836d42a"
+status = "translated"
+digest = "a4720d74d38dec18a861cf147f6e86337107c5e31306074ba9344d8dbb967f9f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#11"
+kappa = "d047ac8a75aa19bc5843a4e867fc2d6f93756f5290119af2a0fd9680b840e1a5"
+embedded = "e3c2c98f17652f6c72c0f102dd2c244adc2a2ab5735f663af03358ad2845b644"
+status = "translated"
+digest = "663dd1050d71d9f38193cc3697338a89d0e87bdcd9e16e3a7144bd195f5a5d91"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#12"
+kappa = "cf4b148453f37e540feb496773eabfa1cb9eefd16177fcaa170e0ba9cc01cfa3"
+embedded = "ed80459fc7e14bf3e8cc4bd257ef8c700209effe47b6165f8b4da2e59e69c591"
+status = "translated"
+digest = "62ef91a9c904f79479bd5e08a0c4b7d423f43b7e884fa445d49e4f450084cc4b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#13"
+kappa = "0bce11d68ff6e064bd9eaa9ab68d2a6c0bbf3fb66e7d1d93d6d24777ebb6a551"
+embedded = "0dbfe4fe18adec3869e72f6da0b594c08266581984b543505e2e51c9f38c1136"
+status = "translated"
+digest = "7c34de4c83ed8e4d9de13720720b955ddc09c7c168f8a9fed58d75865fb6187f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#14"
+kappa = "e30ebc1834ce72bbdb26bbfe77689f785fc2d26bc8616bd45614cf8b4324b23b"
+embedded = "ac0c08fb415511ad2408886474b4d9be5dbb5a3233003e4ec80455cec4d44a9f"
+status = "translated"
+digest = "7c34de4c83ed8e4d9de13720720b955ddc09c7c168f8a9fed58d75865fb6187f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#2"
+kappa = "8b937188f322b644fdbcdb8b87990d3e4941a59b5feb0c3f01c21e5076203969"
+embedded = "9effeea09d6dbf2d6b37b8c1f132478663793adb5e7f0bde2f615d134efec99a"
+status = "translated"
+digest = "7c34de4c83ed8e4d9de13720720b955ddc09c7c168f8a9fed58d75865fb6187f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#3"
+kappa = "d3d26c1b097868dc9db166ee9fc1b656919fe2fa6b9d271ca562248779c12feb"
+embedded = "f1d6a3c44a690f2f48439204281c415743fd6717956ad6ce4615c12495394e62"
+status = "translated"
+digest = "c90cc78d979b91f3ebd421ce877b00086e998e5201c9ff6cb56408af481b82a9"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#4"
+kappa = "00969f05a3438386194e9963b60470ceba3ceab6c1dbf9a44689675cb633be07"
+embedded = "0448749e1f2e59da47e41f76c83377de1a95d634ce1bff7d989c00be54b724bb"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#5"
+kappa = "97e8cb786b7102078f0288ab8b8f4a21118983dd8ef94ff0b5c0362025c24aa5"
+embedded = "b9b9037c2f129b33f2f30d7cee6745482432c18701c4ca9dddd2dd3646589028"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#6"
+kappa = "11d814f7feb2a75a0f01e1803997d80e4a5de72106b7c4ebba471cc7832307e2"
+embedded = "eaf2aa144085b1908e7ecb8b67bcaba8dce79042c6b2af61f4538bfd7cca7a11"
+status = "translated"
+digest = "62ef91a9c904f79479bd5e08a0c4b7d423f43b7e884fa445d49e4f450084cc4b"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#7"
+kappa = "ec87956e8217e464299863ffddbb7435506d70404d819efd1924b28c4d2b5c10"
+embedded = "922d8d9918c5b7b3bb11627de3304425d74e650ad25f05c467f1e00130b5872a"
+status = "translated"
+digest = "7c34de4c83ed8e4d9de13720720b955ddc09c7c168f8a9fed58d75865fb6187f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#8"
+kappa = "f154bf809f514b7a79deef2660b6ed541171b4d1a559d40f98f8e6d272681218"
+embedded = "2950f0fca53d4a820daca22839761dad39e5eb496e1bacbb96da341d7f39de49"
+status = "translated"
+digest = "7c34de4c83ed8e4d9de13720720b955ddc09c7c168f8a9fed58d75865fb6187f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u32#9"
+kappa = "073f5d863c050ed3a4e3eca943ac185a0ee9b586b1fa46678ed5f98822171789"
+embedded = "c5806f48977026580af853d2dc873ca20e22f262d85470d986b3bb3cda2ee9f7"
+status = "translated"
+digest = "7c34de4c83ed8e4d9de13720720b955ddc09c7c168f8a9fed58d75865fb6187f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64"
+kappa = "ad98c3fbc45456f874ef63711fc3c60470b7ec34db1f04f41e4122bbc5a6d67a"
+embedded = "3816a79c77009ef88c72250979f0c68387dcd4cfb7e02ab8f64de78b00600923"
+status = "translated"
+digest = "cb4c3ec6425e172ab52d1b1062feaecf355e928dba6e244d02fbbc3ff01a7169"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#10"
+kappa = "03c8d3aa91b917dcf730bf1d1a8f2c968d6bcb70d63da07ea24a88f82ce85dfc"
+embedded = "694cb74034cd37a6ba014fef164c7cb596551022d50c5276b85b4d1940df69a3"
+status = "translated"
+digest = "1dc01ea2ca200ef302a00e867ec978a7e6db407c7c1b68754b946e1076ce9190"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#11"
+kappa = "7c5e8167d8614047a8775712bdd3e90d0f0247382bcc27732bb6811bb3e01f79"
+embedded = "cb2dbf9fd175be3d26abd3d4fab7ab7ce650b874a1fdd624298cfe669b5785de"
+status = "translated"
+digest = "cb4c3ec6425e172ab52d1b1062feaecf355e928dba6e244d02fbbc3ff01a7169"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#12"
+kappa = "891e9366890892c1efc38848c06efe5b1ae7db25f5842ebf602d7b9b9636fb1e"
+embedded = "7889c32f4b12cdbe5c0ad8acd749f98a72e03ddc4f0033ad85e4072adf6b3b7a"
+status = "translated"
+digest = "c4e857c1693a4b48a5f02b9e79b7d1adb9c11b451f56f492babfc0a1da279968"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#13"
+kappa = "ee4c45bb69fb67e4657e80ba6cae375752cd98acfe7bf0474c42d09be362a968"
+embedded = "b6ed63c9c9802dd4d1ef9eacf2d730e8e0329c9cbe5257821907e4a5e9003f56"
+status = "translated"
+digest = "9ef5a70b3f31ec3588174029dfdcba0bdb3af9a3925ca9d2a013242111bf3f4f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#14"
+kappa = "903852b3645a3c54075e78c651ce5e1c2cde5fb61f8f429a1748ed31f9cf6974"
+embedded = "f75ef5d61c1a3c4c239fedd1dbf2660ce09f2d77f9f335351a5c18958bf9dbc4"
+status = "translated"
+digest = "429425b57d1fe781cf92fb41765c73ba383225c128219068c77996a1f56654e3"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#2"
+kappa = "327f2b2873a67c4225ff4e87b8bbf98186419c04b7c539e4c9f42ba3e75fa349"
+embedded = "4ee902b96554e8ea330f018197741e36b357c1606c058f31d9c6072cc1b7858a"
+status = "translated"
+digest = "429425b57d1fe781cf92fb41765c73ba383225c128219068c77996a1f56654e3"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#3"
+kappa = "face74609a28d84dc4bf08d0970b005e0a6d0f344e07d4a9f04c1e9a64df3251"
+embedded = "5614fec2206cc3de9583db40973fd06771092110631af004f12d163af7a846d3"
+status = "translated"
+digest = "75be04df96b8e9508935606e0173ac472d7c5da2610590d5c90534a942eeac00"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#4"
+kappa = "e495a9c9e0d2a676cc481a46b509eb371d1876c5efd12b94431ed2bf38df459a"
+embedded = "76c2cee06ba7a4038b0dfb5c6fdaed3375fd350f80c7e96b8dd14d79a7e259ea"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#5"
+kappa = "2e7e73d1a5f2ce263b6f99d59f640d30d0dd8cfb906b37e84266f8ee7c41abf1"
+embedded = "4e0c7ad45f92da8be29a041dc2b0d0dcbdf2774a3344420626dc4186b974d661"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#6"
+kappa = "208a50b02dcb4772ccee5c68f192355c24a4fe73bfeab0e81308e7243b2c03d6"
+embedded = "e64e89ce9659cf4b3d91721208349e165dedcd0eb669b914d0015d97bb1488ad"
+status = "translated"
+digest = "c4e857c1693a4b48a5f02b9e79b7d1adb9c11b451f56f492babfc0a1da279968"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#7"
+kappa = "01a76af742723ed80593e28c4f08e840920318d554ac1a8128e553fccf318ad9"
+embedded = "00e95a7d5dcec53e787c135a87e13e78b1039d47bcc7d5a4c2295255ef3f9f5a"
+status = "translated"
+digest = "9ef5a70b3f31ec3588174029dfdcba0bdb3af9a3925ca9d2a013242111bf3f4f"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#8"
+kappa = "409e0125ecb30dcdcac53706f0da91f5167c53afa9f743e597e5bc520fbb24b2"
+embedded = "bdfeebefb58ed83c40b4fe154b0b2b5a370c439e32cf3f96e9b8d0c1d05685cd"
+status = "translated"
+digest = "429425b57d1fe781cf92fb41765c73ba383225c128219068c77996a1f56654e3"
+
+[[fn]]
+path = "lexical-util::num::<impl at src/num.rs:84:9: 84:32>::from_u64#9"
+kappa = "70bdda588050cc7c302fa57744534a74f47d22858ca9e944a1b270522acd4118"
+embedded = "c795ec3ed7780624ede3b8f742a9358d2092376fbb96738e5eab967527902cc1"
+status = "translated"
+digest = "429425b57d1fe781cf92fb41765c73ba383225c128219068c77996a1f56654e3"
+

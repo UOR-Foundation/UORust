@@ -1,0 +1,111 @@
+[[fn]]
+path = "approx::UlpsEq::ulps_ne"
+kappa = "0fe062372652d7aedb078aed2f7ef34439ea14be63e54df8215ebf49289025ad"
+at = "Rhs=u32, Self=u32"
+embedded = "1bfbfc62e69e530a5795ac6d3276c0bc4183c9fab6504516db8a61a7007929cf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as UlpsEq>::ulps_eq"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:125:1: 128:23>::default_max_ulps"
+kappa = "d5e5304df4390651b01d0561bf45b5f3ba9c27631ba2192ad87a0787e86d0f94"
+embedded = "0947028105a9c9e6040fecf151ab484f5fc6986f08c0b075822d530d42bf6726"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <A as UlpsEq>::default_max_ulps"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:125:1: 128:23>::ulps_eq"
+kappa = "af95e3ae40ac4a69a99654f0354d93f55418ed1f345f041eb3cac2541622c030"
+at = "A=u32, B=u32"
+embedded = "71719657f32c380b8f7c0d3111525dfa738d0b7ec2085abd1c08edfb69d55337"
+status = "residue"
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_, u32>, core::slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:36:9: 36:27>::default_max_ulps"
+kappa = "cde846e79047210c9b680ce19133af30d312cd06b8c67d2cecfe4a53a5e25732"
+embedded = "55a3b4276780df10c08ce814b039ac28e1f393eb023415fe1082a2a6871fff3d"
+status = "translated"
+digest = "57c91fc568ba1adbe6518f08b4b2f7df0be2d6478e641d75fd1fe622dd1bcbdd"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:36:9: 36:27>::default_max_ulps#2"
+kappa = "cde846e79047210c9b680ce19133af30d312cd06b8c67d2cecfe4a53a5e25732"
+embedded = "55a3b4276780df10c08ce814b039ac28e1f393eb023415fe1082a2a6871fff3d"
+status = "translated"
+digest = "57c91fc568ba1adbe6518f08b4b2f7df0be2d6478e641d75fd1fe622dd1bcbdd"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:36:9: 36:27>::ulps_eq"
+kappa = "43ff88d492a7164611ec47862327ff6fd12959ecafa51deab1214c8756c13b2b"
+embedded = "2044b8f3b4c614c082fbc01c0b652212fcc0bcb017f1552f4e3b7d632f965806"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:36:9: 36:27>::ulps_eq#2"
+kappa = "a96dfca94196f886c0cf1082e0abc7f52d6d778bcaa7d3d1eeedd72333a09986"
+embedded = "e6931a0a9c587e893921265e9d04374fc46fa5b3ef7ba2398e0ef8516721cddf"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:77:1: 77:46>::default_max_ulps"
+kappa = "37ec937dc9b6a01bfe6dcd3cfecb7acce646dcee37d3c54dc8f3731c4ca6c27e"
+embedded = "3be064797a55f6e1e31ec95a4798e1aaeae57fa41415ebd6ef6832df7853429f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <T as UlpsEq>::default_max_ulps"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:77:1: 77:46>::ulps_eq"
+kappa = "5ae71c5c8a0095d521f1f9d87017add829cadea1892ea86d22257164928fd452"
+at = "T=u32"
+embedded = "d395caaf0b45b44e0df073cd3d6704b5291af784705da26b3b0bfede808c9443"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as UlpsEq>::ulps_eq"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:89:1: 89:50>::default_max_ulps"
+kappa = "e1add644c561c8742a16ae21283002cad8b432d75aa94381884e7d18a900409f"
+embedded = "abffd87a6b07cc962cc191cf64db6cfebc2f939739df3649057f98955f357afc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <T as UlpsEq>::default_max_ulps"
+
+[[fn]]
+path = "approx::ulps_eq::<impl at src/ulps_eq.rs:89:1: 89:50>::ulps_eq"
+kappa = "b213550de6b9fcdb97a9a47a3327b4e45a16097e354a834eea0c98010b08dcfa"
+at = "T=u32"
+embedded = "48f0daff405cdd4eb8437567b5b80a791945ec976883714f63c105c4ce658908"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as UlpsEq>::ulps_eq"
+
+[[fn]]
+path = "approx::ulps_eq::Cell::default_max_ulps"
+kappa = "e2badaf45ab890d8e4458a077ab79c2deb2942fd2ecd46ae94d6e82b9e754f9d"
+embedded = "b53ac1195e1dd9b811e0c5c7bc5e021350c7f9b528defb239f930bb9b8f50d0b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <T as UlpsEq>::default_max_ulps"
+
+[[fn]]
+path = "approx::ulps_eq::Cell::ulps_eq"
+kappa = "fd953e9080c12564d1e9fee817e9bca10bf9dce7377519980c2276376816cf16"
+at = "T=u32"
+embedded = "cd799c9f1cca9674029f47957b9997d294481be84e735bf5c00e3bb59b4ad898"
+status = "residue"
+cause = "mir::Ty: Cell<u32>"
+
+[[fn]]
+path = "approx::ulps_eq::RefCell::default_max_ulps"
+kappa = "070ca6dcfe15b3f8dfd7731455a4e8482745777b7f802271887f34cc9f6447b7"
+embedded = "b221ab32426482789da73eb5d083b2c0a17f572bd6c74246669bd99f4a966b5f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <T as UlpsEq>::default_max_ulps"
+
+[[fn]]
+path = "approx::ulps_eq::RefCell::ulps_eq"
+kappa = "ed66c47de30dbf2b6bdc277fe7b33e8df1d0a0eab8d4268cc8202b03dfc5cbd5"
+at = "T=u32"
+embedded = "da8b066375bed8345094612608a40a9eb2d5963a68645bd521f8567c14b469d7"
+status = "residue"
+cause = "mir::Ty: RefCell<u32>"
+

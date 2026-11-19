@@ -1,0 +1,573 @@
+[[fn]]
+path = "heapless::deque::<impl at src/deque.rs:1253:10: 1253:15>::clone"
+kappa = "892284c732e9de80c34c525e55d6b5a9eb7c26c6fcba0dcafd41d495199e0d68"
+at = "N=#_N, T=u32"
+embedded = "a09765ae5ea7a32deda4475cc522087c95a3f13e06df35b95154fecbd251a516"
+status = "residue"
+cause = "mir::Ty: deque::IntoIter<u32, #_N>"
+
+[[fn]]
+path = "heapless::deque::<impl at src/deque.rs:1289:1: 1289:77>::into_iter"
+kappa = "00726323d59710df3574c6e5bf4de33dda3884bb75c2fc7459c65d2764cb6d9a"
+at = "S=u32, T=u32"
+embedded = "27a2ab7af427c313b546163a4dea3bcdf06bce76ef28b05c2d77b6e262f138ca"
+status = "residue"
+cause = "mir::Ty: deque::Iter<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::<impl at src/deque.rs:1298:1: 1298:81>::into_iter"
+kappa = "80651b9128d4d0a87b9d5c15ee898490390f4abbc58ac9bfd03aaca324be1c90"
+at = "S=u32, T=u32"
+embedded = "8517817aa77d2c97271599a146880f3601f1616f2bb9558f83684f7b3ed76163"
+status = "residue"
+cause = "mir::Ty: deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::Deque::INIT"
+kappa = "1cca5d6a2a1cad92b59fd38d75250c8a5434ece07c114c1561abb0ba0b59be68"
+at = "T=u32"
+embedded = "09ec1b2db4f69be59fb1640bd323328870ae6217223dc8b7c3ebf10916690131"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "heapless::deque::Deque::capacity"
+kappa = "81893e973eebc238a08ce51e80941a60952175100cc8fb7bd89624e93fb58d90"
+embedded = "b1679d3c7a3057e6f55303b905c8b230cee48a32ebd7961a5823b80f34983487"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::deque::Deque::clone"
+kappa = "e71cad252cdb264967cc2dd8fcc30abd0cd3db5eaef266f8202819ad87f6a0d4"
+at = "N=#usize_N, T=u32"
+embedded = "6711fc0605a652c31776ee4469bf6b64c094391303900cdb3d19cb2bf7e3b3da"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::deque::Deque::default"
+kappa = "377f25f29e9405a8d3211a27f0778be3c8e6468f66fd1ab22452be693113b8fc"
+at = "N=#usize_N, T=u32"
+embedded = "640575758a3ac14b4eadd33cdec0b1e0ed6e03a53178a4bd2e278c7bab2577a9"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::deque::Deque::into_iter"
+kappa = "583c583cb4cc468e09387cc4fcf3b1f8299d11a55f20d1eda556e99893b6c647"
+at = "N=#usize_N, T=u32"
+embedded = "e55564873b88ffcd6519fa2a092a5a4a4a11b28516522fdf82aca8dd45cd2763"
+status = "residue"
+cause = "mir::Ty: deque::IntoIter<u32, #usize_N>"
+
+[[fn]]
+path = "heapless::deque::Deque::len"
+kappa = "2b107591defe397f6fd568cb4176adaccfae2f8e48ad7c3cbe42b0a7f45bc6b4"
+embedded = "7f52d779b8c20bbea740055920798cfed561c1253386a1a9a6dc99a14243f1b6"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::deque::Deque::new"
+kappa = "d2755886b73274090a04f4709fbf622d6139ab40c99d070749cf32ae8e8eba0b"
+at = "N=#usize_N, T=u32"
+embedded = "e30099059087e2f8a5a7ebc9ee1acc8d0990c763096c3a51b0e7de3095a81e60"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::deque::Deque::try_from"
+kappa = "f4dc1eefbbcd4ab7395aa90831f5751a0545fa4a1f3791cfecf355d3ef8b7ef1"
+at = "CapacityError=u32, ND=#usize_ND, NS=#usize_NS, T=u32"
+embedded = "3b9b34d2f6fa34b7016ca1e63e596f60a992b08e9c45fd1fc63d29f83b897415"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_ND]>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::as_mut_slices"
+kappa = "dd4c8fb37285d03d2d0525290dca7c3a664b80406c45ddb4a53d39750d849b0a"
+at = "S=u32, T=u32"
+embedded = "18105d7a53854dda4c5ef0fbe7e2478689199e963a4e86e66845aec3a17acc75"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::as_mut_view"
+kappa = "324522e9a341d6f6b199526e642201aaac5de3ae0cfd788dff43967edea91aac"
+at = "S=u32, T=u32"
+embedded = "174c85252ff2bcf7f18d44bf5c14b6a178ebda134c6d0eb9a195534c3e17661a"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::as_slices"
+kappa = "89842d2df5d02f459f1f98cca365a91117ee90a8b81091f5495a2d6a743ad8c3"
+at = "S=u32, T=u32"
+embedded = "092bfba5f08768b2ef729efaa7f9be46e03d2de3d83b3ef0eff81545e4fb1b0e"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::as_view"
+kappa = "d8bff7de2cae0181e6601c4d79ef48b754c3adf32eb4f0cec81004d5fd6dc846"
+at = "S=u32, T=u32"
+embedded = "534d5048353b9c8c70d3809fb2a0b652b473072dced50a1c55eaa66757965360"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::back"
+kappa = "e5127a4c23aef6fa4cdf24bb5edc3f2713960f5a58c3bc2ee7b4e547aa98fe00"
+at = "S=u32, T=u32"
+embedded = "44b63333402a0f67f3d139ba654f41c8ed22fc2725a94dada7339d94535a47b9"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::back_mut"
+kappa = "1801519032fb2ffa4055528e25afa90196cd8daa366cff413b96b41ce1464b7b"
+at = "S=u32, T=u32"
+embedded = "e90f496aff4d20d73ef7c24cf285742fe267a48dd2e6fd0393be2336f1dd1a19"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::clear"
+kappa = "8d80e7e87c363edb8ed2581c7734f19ff7f5f0bfb17cb6f48b61caa7528d6a1b"
+at = "S=u32, T=u32"
+embedded = "a6efa051b348c974a99d416bc8904203e91c78f82700407249df242606d69296"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::clear::Guard::drop"
+kappa = "951679671fc54a71b6c91094a37815b8a34d760650c7637d6153e55fcd04ca19"
+at = "S=u32, T=u32"
+embedded = "61476c5ed69d4d5c18ce9efdb1717c339c0972a9128320e00b041bc3fd32b8b9"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>::clear::Guard<'_, u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::decrement"
+kappa = "99cb52eb43ae3333865b8d4c897d84ec78d1a245302c0966aebe0985b2e6927b"
+at = "S=u32, T=u32"
+embedded = "7fd637a10e57f9bc50d2dd2776a17f71d513ca39c2d332c9abec3e782630c16d"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::drop"
+kappa = "5312d4264c15a8d7406663a84513c233e934843c2c91d49915b9e90925800eb5"
+at = "S=u32, T=u32"
+embedded = "cdca8f95d3027c7be2723ac576f575365aac397a1465a06000b96f3e9b42c4e9"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::drop_contents"
+kappa = "f79e0db006f09edd87cd0ecd229bc73aa82864ef4f061ce9451d87de74c1e886"
+at = "S=u32, T=u32"
+embedded = "641d1ae0cc1ae29d02f0ae1c1cf77f1c4663c03df77c63c9867bd99fa283ab50"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::eq"
+kappa = "33a83473173c237761244440ede20a9521cc7b2fe73fef08eacf31d2337e89f3"
+at = "S1=u32, S2=u32, T=u32"
+embedded = "cec4011294111b8e0b8a85a180a7a54b3dd6f04c990cec7dee6676cbc764c332"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::extend"
+kappa = "cc9becfa87a5b914b9d733a4d04fb062ce0913ee07e3741806dc56358c840e33"
+at = "I=u32, S=u32, T=u32"
+embedded = "de4c9c67b5fe5e2100aa4dd9aae5053f5f4850d682cc7196b31d70a0a73fed8e"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::extend#2"
+kappa = "bc4db05593e572d1e3e6abbe5341538234fd155475362405e444bed04166a8d0"
+at = "I=u32, S=u32, T=u32"
+embedded = "9e5324b8bad8b87a0d27e9bcfd1d3f118b89bcdd2f51fca5c2ab73a84a6e3a3b"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::fmt"
+kappa = "da9c882ff616197843d2a1bee9cb9de53aceb2e93052830d00f7698f5a9c82d4"
+at = "S=u32, T=u32"
+embedded = "b6412e0901bde0c9e80d1578b8844edc4189a44299bd82a0be8dffb0b8ac02eb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "heapless::deque::DequeInner::front"
+kappa = "340f8374139a7a89546b82fa18dbc739268ce34272384dd3f353915b497f5c93"
+at = "S=u32, T=u32"
+embedded = "dbccf63f22a49ad9560219fbf756899efd184109fe7b3d2d256e07b62729a60c"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::front_mut"
+kappa = "46a004720b7beea171c3f71f85d3c4a7c472d485f4141b62467b1d789e819512"
+at = "S=u32, T=u32"
+embedded = "100e716b00f279ab90d7d5511196961e91ee2b1f541d1b1a24f3dfa42b99f94c"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::get"
+kappa = "1e4645bbec968a7185666ea7083e76809f3b28558d5aadf244e08c42ed2dda1a"
+at = "S=u32, T=u32"
+embedded = "30fb8dfdf7d8f543e37100a03da2b9a93562ae032c09792a3475e60acc874695"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::get_mut"
+kappa = "d2910d21b318688eedc38f2ec1921b16e2aecb50e5f703b20a26b9783d69778f"
+at = "S=u32, T=u32"
+embedded = "d0332fe67618d2003353f6b5e666ecb5e2228ebfc1254e08cc9229f8edae106a"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::get_unchecked"
+kappa = "cb9f3508936654cd7663147fa0dffb12058eeb2cf894ce7436331a1b9669181c"
+at = "S=u32, T=u32"
+embedded = "fc659714ca2bf421746ae6c0f8c62766c53a19c1e484dbe30706bf42663c8a18"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::get_unchecked_mut"
+kappa = "5fee46eca8febf956cce334b6b84c2049692f59a5ac56f909e9860521994ab5f"
+at = "S=u32, T=u32"
+embedded = "5ada1973e0451ef4372291be527c700cf01234567508ab9f902fa03716949255"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::increment"
+kappa = "39c85a89a513aa7804718637932606d2f0e4c6d3d53d4397181dfc6c04f43e64"
+at = "S=u32, T=u32"
+embedded = "c77e8753b8b9fd8252831ff21877990443b51dba53daf9b3a0b707a8622cdee5"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::is_contiguous"
+kappa = "8ea292255e6f3bbc55f80e2e01ebb05ea2b91e295542e9d6f806f383d1f10622"
+at = "S=u32, T=u32"
+embedded = "5eaf4e509175b0930d5ff8112801e14c13dfe520edd7860520ee73d3ac2da93d"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::is_empty"
+kappa = "6c145dcff48c0e946cec39cb3d8e0fc0381262805a0cf81c515aba50ba0edf71"
+embedded = "4430df08186b89b09bb31d937d71c69615bcdb703c3ff55f99103527a89de946"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::deque::DequeInner::is_full"
+kappa = "faf1eaacb933ccc5b93c11938c79553a7d3ed221ca136fd996e8c84af72953d3"
+embedded = "ed6fa6326d29b75ae4674b6b944557f72c603c571e10f45b9e64e681431a2323"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::deque::DequeInner::iter"
+kappa = "0443171ee56c4ba599dd4dade54519dbfdfce6313ec834ceaf5bd6160abf5f98"
+at = "S=u32, T=u32"
+embedded = "c2e72ca6645ae985fa91e1ea2822e7791dbae547db8a9057f2e1500abb89d7fc"
+status = "residue"
+cause = "mir::Ty: deque::Iter<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::iter_mut"
+kappa = "a54c8670aa7de4a49ba34e4000d9c882c49d5d8284da12c164a9317c850b4def"
+at = "S=u32, T=u32"
+embedded = "5e31d1de515b338d344a81b1b59bc82ab88077c0a096e50d518fa709197f749b"
+status = "residue"
+cause = "mir::Ty: deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::make_contiguous"
+kappa = "008e080c77fe7d67963007ca5938a02e965539e1bc3d75451e6108476719b328"
+at = "S=u32, T=u32"
+embedded = "b120082876ffa443fc7ec4de4bb1dcabf779a6aa61d5d8f708b3b21b62e28472"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::pop_back"
+kappa = "b892cecbfe3f7ec0008d9b90aa4bc1bcd3036bff0d81e9a36da4c921033ab7ed"
+at = "S=u32, T=u32"
+embedded = "68fdcc180b3d1e74c960bb718b1231cc63cdc9c55c150ca6131c64438e006451"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::pop_back_if"
+kappa = "d57aafa42af3b5adfa552496636af65b99f095604a10aea894ede28a8a591780"
+at = "S=u32, T=u32"
+embedded = "37f34556f6fe0f996d6d2ebe1c3dce79a471e0ef8074ea573dec2955298ec601"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::pop_back_unchecked"
+kappa = "6ca7c77a77e92fb52d47a718f5c16d6807a7be1e07aea39c8f4ee9ff372ecda0"
+at = "S=u32, T=u32"
+embedded = "fe839061d41c4ce5c0ddf606efb8c2ea15a7eb226b3651f76fd166bc2862d0fd"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::pop_front"
+kappa = "1a80ba66e97e20d7e11733085cf1cdb9b40b21e083c1b32f20fe08969cb8cd52"
+at = "S=u32, T=u32"
+embedded = "89def1125e460e1af6e313a4a74b1b327b30a60c08662a31af0c83a79a528213"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::pop_front_if"
+kappa = "7dc7e03a138c933ae8e623f34bf7b30f95b2fc0da308f75ada1f8d49945b36ed"
+at = "S=u32, T=u32"
+embedded = "0efe53abdd3fe5796363d467c4175810d19238c756b2fe16d5cb888f02a5fa7f"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::pop_front_unchecked"
+kappa = "0f21988f3a0bffeadffcfdfcee41804447246754c299a6d2d41f75efc069e684"
+at = "S=u32, T=u32"
+embedded = "1c146ca24f1927edc002507d013135a2a3cb0e9aab69ce32018f1097176e5a2e"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::push_back"
+kappa = "327ac3dd175a1cd33b5b43aea169cf8ba2fab7ac232bde748a5b7ea3368587db"
+at = "S=u32, T=u32"
+embedded = "bb466e85bf178c2e00e6e6eb536ebcbdad7c3608c053d59c7b8c5361a2710731"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::push_back_unchecked"
+kappa = "a494c767d7486c3a07ddc61aef76adf94a8f12b085eddc6ae555745656c076c4"
+at = "S=u32, T=u32"
+embedded = "f7e148d1f0629b07670513ae6db9f534814d62cdd32ce3a5bb0032d9d0913d7d"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::push_front"
+kappa = "2d83f5e21dd04eb9b13c8d0488ecd2501269e62f70faf2fc6cb1b46addb6817d"
+at = "S=u32, T=u32"
+embedded = "bf52dac3d10e694af004d9ffda0b0ab224e5801d8af5f4ea6cd27c572b4984aa"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::push_front_unchecked"
+kappa = "1ef760654645e691ebfd66adcf67c93f100225649ed3f771cea0e46de2a4b229"
+at = "S=u32, T=u32"
+embedded = "262efe6e5bc0cdddaf3f45dad4422ce76ff52bda1c617068616aaf9de884835a"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::retain"
+kappa = "585c791a2169bb4b3f2362a8ba15f036f2bb424bd02a53640d809c9d4246fb78"
+at = "F=u32, S=u32, T=u32"
+embedded = "8fb1a504c20caa51594760f28e0fbf20d5461642382d5e2a5b4d58e0082e29cb"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::retain_back"
+kappa = "35829e351902dda5aa4ddb7febc419ddafdefd175ccb6fe8c4d0d5e7cfcd2e59"
+at = "S=u32, T=u32"
+embedded = "17de2bfff4b5fe6fe3767c4c8172bafc99998df7b52d7107bac5961297108835"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::retain_back::Dropper::drop"
+kappa = "3e6593dc810ee36c42903a679ed071b545932225b88c51a90991bd5363fcc6c2"
+at = "T=u32"
+embedded = "31f2175f558d1553e61bc018a3665e80ce0c7bb89bace9823b93934b8bb41873"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, S>::retain_back::Dropper<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::retain_mut"
+kappa = "9668b35b52bb54d1b8d264431ffcec45fd5ce7235e62897e8477ea470c3d010c"
+at = "F=u32, S=u32, T=u32"
+embedded = "471f7504a51f0e80754f17a0cfcbabdfe84916bd156995dd65c2443ab82d0539"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::storage_capacity"
+kappa = "86740af004c76d9827f342a6a4c79cec181a399e215a9562c160d674402f2fd5"
+at = "S=u32, T=u32"
+embedded = "2d0914388632f9320f274ecba6a86273cb2a4c9fcf7203591d149b1af5355ddd"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::storage_len"
+kappa = "8ecd9cf87a2a4635f87b505de85721942c1a764f2747408f5ce85542f379564a"
+at = "S=u32, T=u32"
+embedded = "2a2ec43494e9fe64c981bbe64a69493fe6e28a71d9548320a89ce9d6abba947b"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::swap"
+kappa = "43a190f83ed3fc5f16d5eaabce4eaf649673dbf45aa991d940a39202ee3d0a9f"
+at = "S=u32, T=u32"
+embedded = "14384c7ce99016f478099f3cd580fbf198b87b20a7bfb0422969de298c5b2fee"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::swap_remove_back"
+kappa = "9234fac8ccaa15fe0e4a501714f3143f057b420af05ca8d62e01eb2b987f6586"
+at = "S=u32, T=u32"
+embedded = "085b670690b0fe1007425dfe124b84b1cee1bf26354163bb9c008eb0f2c8f58a"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::swap_remove_front"
+kappa = "2f5513e5c45feaa0ddde2cd409df28a521ec970d78e2e9f44b45fa6083df9bd8"
+at = "S=u32, T=u32"
+embedded = "cab2b2ca68615a60190cafd9cfaf73715c8d91d2d478cf5b931e853eeeaa97b1"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::swap_unchecked"
+kappa = "ca76fdf9bbdf636abafcd72744ca0b48402a9fb69af4e1a0de89726461df245d"
+at = "S=u32, T=u32"
+embedded = "f83bd5620cbe8f5badd6157bdfff58e2ca62efb8b6db83d44bd73d07d5f6ff77"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::to_physical_index"
+kappa = "e73a2b49659e3a288f050173f2abebe4ff417fa658cd88e37726ee38026fdae0"
+at = "S=u32, T=u32"
+embedded = "8918bd936ce38695f9d64a8169615a03b83dd6617735434b52882886ab73d97a"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::truncate"
+kappa = "2383b335859343c6124393c7b5fcc995df7346a3dd67d017455c748a3d37bead"
+at = "S=u32, T=u32"
+embedded = "7bebef30ee464c6dbb4dd8c2dea074bc2572692af3fbcf90a33f7534633e66be"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::DequeInner::truncate::Dropper::drop"
+kappa = "0cf8183222336f854b409187a57ef52ff6363035908725eacaa5420ce0525829"
+at = "T=u32"
+embedded = "de1f2e6813ac959dae9aed45a227c4ec6443caa15aea70a247b8a6476089a45a"
+status = "residue"
+cause = "mir::Ty: DequeInner<u32, S>::truncate::Dropper<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::IntoIter::len"
+kappa = "04381ad4b918f5785e11ba98cf8ab8a397d59d82b6e630b30abab4cbe0e81865"
+at = "N=#usize_N, T=u32"
+embedded = "0266d6c55ca596da588bbd1d0be4125e04ba724b0ddbaee9f749adcb371908b9"
+status = "residue"
+cause = "mir::Ty: deque::IntoIter<u32, #usize_N>"
+
+[[fn]]
+path = "heapless::deque::IntoIter::next"
+kappa = "5dbe349bc3fc5a8906ca51702db5c003a62ed2e323abefe23da10567da06cc63"
+at = "N=#usize_N, T=u32"
+embedded = "869671bcda1fb2aa8ef18311c1b73267630e0fa34aa8a6a976e3bf35e7ac7fa1"
+status = "residue"
+cause = "mir::Ty: deque::IntoIter<u32, #usize_N>"
+
+[[fn]]
+path = "heapless::deque::IntoIter::next_back"
+kappa = "fbdc55f022a3086bd2baf54388f02022a4bbec36ff2bff012598004809e8487a"
+at = "N=#usize_N, T=u32"
+embedded = "9e796df17a4ce43242dbe7efc6b3cb341451dab951d6dcffa40b7ea63b6b6668"
+status = "residue"
+cause = "mir::Ty: deque::IntoIter<u32, #usize_N>"
+
+[[fn]]
+path = "heapless::deque::IntoIter::size_hint"
+kappa = "09d999a80f4ad95408f87aa149ca1c5dd3b83319ac3015571c24a3bde9922b4e"
+at = "N=u32, T=u32"
+embedded = "fc2f754338487e97caf1caa8d4d5db1bdf585904ccfe6ce643b720de7beab08a"
+status = "residue"
+cause = "mir::Ty: deque::IntoIter<u32, u32>"
+
+[[fn]]
+path = "heapless::deque::Iter::next"
+kappa = "38aaceb05a9fced4c9f8c11f70e0b27a2d20f7062b26ae2721973f404955f7c3"
+at = "T=u32"
+embedded = "11db45fcbbca12ad65ce9ebf8191c358eb990f7821720d5f01c246b4bf2ad93b"
+status = "residue"
+cause = "mir::Ty: deque::Iter<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::Iter::next_back"
+kappa = "afa88f97b96d0aaecfcf3e566f93bc92a2fb1f45ee2b9f3b5e6c0ba0a1645e0b"
+at = "T=u32"
+embedded = "015f059f1e659921c10493346ffa4b8a0eb5e20bf9837eeab53ccb9111f3c34f"
+status = "residue"
+cause = "mir::Ty: deque::Iter<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::Iter::size_hint"
+kappa = "a5329cee3f9e19fb5bfcd3ffbc1125ec4845e05723e8d8c0ee9eb2b3dbf2ad5c"
+at = "T=u32"
+embedded = "86b01e4034d998cd6179d1647a60ecf709958b2b829db79572abe86b2e833264"
+status = "residue"
+cause = "mir::Ty: deque::Iter<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::IterMut::next"
+kappa = "32c7522910cedfa49f5d64eeb6ad4d47ac5280141747c80bd95a7d16e9a8d5af"
+at = "T=u32"
+embedded = "05cef5882745ed41909167c3efad2943817b08cd6ac2411a8d3d71798830b57e"
+status = "residue"
+cause = "mir::Ty: deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::IterMut::next_back"
+kappa = "4a0dc450e0352dafdda0c632bfb80f226747b3090f1a18a8f02c5670263c4a49"
+at = "T=u32"
+embedded = "e388f9d34c85f874d9478bee372051bcf03667af8db8f362d3df0c71c81996aa"
+status = "residue"
+cause = "mir::Ty: deque::IterMut<'_, u32>"
+
+[[fn]]
+path = "heapless::deque::IterMut::size_hint"
+kappa = "4db87023fe5b87168fc19f964046d75dcb1614f780aad1178a1332605ecf18a1"
+at = "T=u32"
+embedded = "98699b8339fc814314bf3e7077c2e54e12b6f291ba46bab83b059027b49ed733"
+status = "residue"
+cause = "mir::Ty: deque::IterMut<'_, u32>"
+

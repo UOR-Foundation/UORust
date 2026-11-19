@@ -1,0 +1,141 @@
+# The yaml-rust register (written by `uorust crate yaml-rust@0.4.5`; do not edit): every body of
+# yaml-rust's MIR at yaml-rust 0.4.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 199
+translated = 11
+residue = 188
+
+[module.emitter]
+bodies = 17
+translated = 1
+residue = 16
+
+[module.parser]
+bodies = 46
+translated = 0
+residue = 46
+
+[module.scanner]
+bodies = 105
+translated = 10
+residue = 95
+
+[module.yaml]
+bodies = 31
+translated = 0
+residue = 31
+
+[embedding]
+bodies = 199
+embedded = 199
+evaluable = 199
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: scanner::ScanError"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: parser::Event"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: scanner::Token"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Yaml"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: yaml::Yaml"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: scanner::Marker"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: emitter::EmitError"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: scanner::Scanner<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: scanner::TScalarStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: scanner::TokenType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SimpleKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TEncoding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: YamlEmitter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: YamlLoader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: scanner::SimpleKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::starts_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: emitter::YamlEmitter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::Parser<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: scanner::TEncoding"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::YamlIter"
+bodies = 1

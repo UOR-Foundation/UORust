@@ -1,0 +1,411 @@
+# The vsimd register (written by `uorust crate vsimd@0.8.0`; do not edit): every body of
+# vsimd's MIR at vsimd 0.8.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 686
+translated = 19
+residue = 667
+
+[module.algorithm]
+bodies = 2
+translated = 2
+residue = 0
+
+[module.alsw]
+bodies = 8
+translated = 2
+residue = 6
+
+[module.ascii]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.bswap]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.hex]
+bodies = 42
+translated = 8
+residue = 34
+
+[module.isa]
+bodies = 41
+translated = 7
+residue = 34
+
+[module.mask]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.native]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.pod]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.scalable]
+bodies = 43
+translated = 0
+residue = 43
+
+[module.simd128]
+bodies = 133
+translated = 0
+residue = 133
+
+[module.simd256]
+bodies = 144
+translated = 0
+residue = 144
+
+[module.simd64]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.simulation]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.table]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.tools]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.unified]
+bodies = 156
+translated = 0
+residue = 156
+
+[module.vector]
+bodies = 26
+translated = 0
+residue = 26
+
+[embedding]
+bodies = 644
+embedded = 644
+evaluable = 562
+blocked = 82
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 82
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+bodies = 150
+
+[[cause]]
+cause = "mir::Ty: vector::V256"
+bodies = 117
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as pod::POD>::ID"
+bodies = 115
+
+[[cause]]
+cause = "mir::Ty: vector::V128"
+bodies = 108
+
+[[cause]]
+cause = "mir::Ty: pod::PodTypeId"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: V256"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: V128"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: isa::InstructionSetTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: vector::V64"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: vector::V512"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::swap_bytes"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unified::splat: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::splat::IsPodType::VALUE"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ascii::convert_ascii_case: vsimd's MIR stops at mir::Operand::Constant: the constant item C"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::add"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unified::add_sat: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::add_sat::IsPodType::VALUE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unified::lt: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::lt::IsPodType::VALUE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unified::sub: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::sub::IsPodType::VALUE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AlswLut<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AsciiCase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InstructionSetTypeId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: V64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: isa::AVX2"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: isa::Fallback"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: isa::NEON"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: isa::SSE2"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: isa::SSE41"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: isa::SSSE3"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: isa::WASM128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: native::Native"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by InstructionSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as bswap::BSwap>::LANES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item C"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item table::u8x16xn_lookup::MatchesISA::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::add::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::add_sat::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::and::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::andnot::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::eq::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::lt::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::max::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::min::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::or::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::splat::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::sub::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::sub_sat::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item unified::xor::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as Scalable>::u16xn_shl"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: and"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: andnot"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::from_raw_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::from_raw_parts_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: or"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: scalable::Scalable::u8xn_splat: vsimd's MIR stops at mir::TerminatorKind::Call: unified::splat: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::splat::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::align_to"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unified::add: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::add::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unified::eq: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::eq::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unified::max: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::max::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unified::sub_sat: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::sub_sat::IsPodType::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: xor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Native"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: V512"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alsw::AlswLut<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ascii::AsciiCase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::any::TypeId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: native::Arch"
+bodies = 1

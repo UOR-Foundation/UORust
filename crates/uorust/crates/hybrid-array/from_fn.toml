@@ -1,0 +1,40 @@
+[[fn]]
+path = "hybrid-array::from_fn::Array::from_fn"
+kappa = "ac93419d04161137e879a84f0b2c2d7cbde4d222b44a25c946384d9e8e117150"
+at = "T=u32, U=u32"
+embedded = "f87316db298e5e57b361f51a53b2f63a05d4639d80f2b76f3b01fea4eb9ae18d"
+status = "residue"
+cause = "mir::Ty: Array<u32, u32>"
+
+[[fn]]
+path = "hybrid-array::from_fn::Array::try_from_fn"
+kappa = "0e2510ecb923bfec5d8c08d24c7bca7afa0564cdf5ffd68536bca076993621fa"
+at = "E=u32, T=u32, U=u32"
+embedded = "2c043b38fb74f0b358080a4a7969f7035098a56f3b86480bf69de725ecbff24e"
+status = "residue"
+cause = "mir::Ty: Array<u32, u32>"
+
+[[fn]]
+path = "hybrid-array::from_fn::Guard::drop"
+kappa = "5b27e94e1267ee126e3247d1185b3d87c34edcd9131facd832076978eb8608ad"
+at = "T=u32"
+embedded = "af925f37d8f4d50fdb14eb5b3ade93b55c4f579fb5eef063785df474421e6b1e"
+status = "residue"
+cause = "mir::Ty: Guard<'_, u32>"
+
+[[fn]]
+path = "hybrid-array::from_fn::Guard::push_unchecked"
+kappa = "9d1494a3209f11d9491ff3c5fe0018db31959e0090efde09290a00c06a9adad2"
+at = "T=u32"
+embedded = "e2ef837ef75dedc894c69ee8f70c17d3e03155c71da5c3f95bd0e28e5ca244fc"
+status = "residue"
+cause = "mir::Ty: Guard<'_, u32>"
+
+[[fn]]
+path = "hybrid-array::try_from_fn_erased"
+kappa = "e3e5612ed1755a024b9b7073fd4324ffae0a9fbc5e43d786b37515e2b15659d7"
+at = "E=u32, F=u32, T=u32"
+embedded = "8dc294d06c61ba5be41380017b57becabaa770e8fe44db1d3bf5b82a7c3ff0d9"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+

@@ -1,0 +1,1237 @@
+[[fn]]
+path = "sqlx-sqlite::affinity_to_type"
+kappa = "b49d7a9372592b157951ae65745bb13128956bfadfcba52f6c08b61f004ff75a"
+embedded = "e7a3dd5b67c42cea39fb12c1a922c0e8f3afd82c113e6cde180bbb053d3d487a"
+status = "residue"
+cause = "mir::Ty: type_info::DataType"
+
+[[fn]]
+path = "sqlx-sqlite::bind"
+kappa = "f3fe350333b23d5a23053bc412ae1275810db9ad9454bb8cefc449483f9314f1"
+embedded = "428f8e5c4a48d65e6824cedfa35136b7c69d2717a8c1775be676cc8f7b3381c6"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::call_boxed_closure"
+kappa = "9e889efd87aa44651b5082199c0a9a85d598b85133d7b472ba8a33902056751a"
+at = "C=u32"
+embedded = "8389e580f1ae9cbc6779a8aadebfc2d3925c16508093f98bcd149ae6b6955ae0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut u32>::is_null"
+
+[[fn]]
+path = "sqlx-sqlite::collation::<impl at src/connection/collation.rs:13:10: 13:15>::clone"
+kappa = "3ea1ab7ecfe49c32feac5680c674e0a3835254da0b19259d4944da5d786e833c"
+at = "C=u32"
+embedded = "04e1800189267d1f6bbe4bff38d88afb5b199f7a0bb40277c09c4d2415386080"
+status = "residue"
+cause = "mir::Ty: connection::collation::Collation"
+
+[[fn]]
+path = "sqlx-sqlite::collation::Collation::create"
+kappa = "e67fadc6932e22737ace62c9aef5ab563e46e05b4b8641e202af5311ee77ae1d"
+at = "C=u32"
+embedded = "8fdcac862e856c456935233b534a3d384de60f58351ecf90ad36c9f24298f1d8"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::collation::Collation::fmt"
+kappa = "92fdbe68e23f569fe68c5dbde1a8987596a96f283958dcc6763ba200e494c991"
+embedded = "15b01bc2adff7b99e326c3a4c580b6a1fbcc7254d3268ab0b24bbdcea8b139bf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::collation::Collation::new"
+kappa = "69265136bafe9c5dd4827ebf6b00731c5bd865127ad3d95d7973f96981dde2a4"
+at = "C=u32, F=u32, N=u32"
+embedded = "5ccd79c794178d1233f5ef6e73702875f799b719fe51daf39dbcc96dd9f0e3b7"
+status = "residue"
+cause = "mir::Ty: connection::collation::Collation"
+
+[[fn]]
+path = "sqlx-sqlite::commit_hook"
+kappa = "87d6af2050f346c0c608bbbe11af33e04c03d0018cce54d7cda7bf759104614b"
+embedded = "5b66913c2eb7df9c48c9c89deec46343d2afd386faaabd9a5eb54785e9728a11"
+status = "residue"
+cause = "mir::AggregateKind::Closure: commit_hook::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut c_void>::cast"
+
+[[fn]]
+path = "sqlx-sqlite::connection::<impl at src/connection/mod.rs:77:10: 77:15>::fmt"
+kappa = "e5c01b98d9ccfdd98c7c55eb84f04f2ff4ae351e58c7b071dfa3d801e16ec7a3"
+embedded = "af633b5a311562f090677a9b2986c6b10db3cd54cace217f59f5254f67f8a851"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::connection::<impl at src/connection/mod.rs:77:17: 77:26>::eq"
+kappa = "8624aa98b5efb35bd044f691b17c860c6634e8e897c0f9e1fc8fcf4a4157763d"
+embedded = "3d18f2ffe5a48c080c77dbaf1b25a84385de1af9d16647e08d97c11ea798c64c"
+status = "residue"
+cause = "mir::Ty: SqliteOperation"
+
+[[fn]]
+path = "sqlx-sqlite::connection::<impl at src/connection/mod.rs:77:28: 77:30>::assert_fields_are_eq"
+kappa = "deeff1f3c04f34d80f72eae9d8b636d65a62a28036b0077f2778cb0995c0bb25"
+embedded = "58e48943dac8900014be265d5a9f1a0dad8a7d7c8c10c96d5f95a27e56a8773a"
+status = "residue"
+cause = "mir::Ty: SqliteOperation"
+
+[[fn]]
+path = "sqlx-sqlite::connection::<impl at src/connection/mod.rs:77:32: 77:37>::clone"
+kappa = "9c07cf1bd14d8b9708e17bbe98f9e946a30f87236565ef63492c63a143a9d969"
+embedded = "6f0b5ca0671e294097fb4bed2ad9cf8e620782816eb6c30d2785b76d7820de93"
+status = "residue"
+cause = "mir::Ty: connection::SqliteOperation"
+
+[[fn]]
+path = "sqlx-sqlite::connection::ConnectionState::drop"
+kappa = "3fb3fd81ce368526964183243e2e40e9c6319deb92746e3b64616e563fd7f3f4"
+embedded = "1a45d50e8a593311bb3e31a14dd01c5efed7ceca7a3b6a47e1f8811e8dc19a1c"
+status = "residue"
+cause = "mir::Ty: ConnectionState"
+
+[[fn]]
+path = "sqlx-sqlite::connection::ConnectionState::remove_commit_hook"
+kappa = "22b8b2de1fb513c29f7288f2da7494ed8a718f4708616bc8f9ee1a5d6864f315"
+at = "C=u32"
+embedded = "e4b5c83e8b608f591687bfcac82317842bd6b5c07464bdbb53bf5bb8b098aebe"
+status = "residue"
+cause = "mir::Ty: ConnectionState"
+
+[[fn]]
+path = "sqlx-sqlite::connection::ConnectionState::remove_progress_handler"
+kappa = "f1333df28015a13692d5248fe8654729928de10120b92dc63cef478a049e6f81"
+at = "C=u32"
+embedded = "5c345590d6d1233aadc722f67d56586371a33a7c2b4fb7dbf4b65689e674c436"
+status = "residue"
+cause = "mir::Ty: ConnectionState"
+
+[[fn]]
+path = "sqlx-sqlite::connection::ConnectionState::remove_rollback_hook"
+kappa = "5c9b42a84de80dca1b83b72f4d85ff3c5c97c5f1ae4c146fc73be9e1024bbdc0"
+at = "C=u32"
+embedded = "9d5ce88dc27d0ad759111a2773f34e1b54aca6a02d3e404fe56c4a6eb6a0c196"
+status = "residue"
+cause = "mir::Ty: ConnectionState"
+
+[[fn]]
+path = "sqlx-sqlite::connection::ConnectionState::remove_update_hook"
+kappa = "1de2009f4fe13eb1b8c1ea3b8cc451dfbd00bcdfc69b7941deeff34bc8c93a2d"
+at = "C=u32"
+embedded = "3a37923ecfb827d9b9386c8fefc64259fed289dde60c03efb467ee9c9b54700e"
+status = "residue"
+cause = "mir::Ty: ConnectionState"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::as_raw_handle"
+kappa = "b2369dd3ef02b13a227b71f3d7a3fd506be3bf5bfb913962c2fd5d11415dbc9e"
+embedded = "523907deec0be454691acb017fdba2fe36f808f501b9d6cf326b6b183d7647b5"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::create_collation"
+kappa = "652d2a2e991a42884a78189a0db8ec0b31570106e4b839dcaab89d8089d51162"
+at = "Ordering=u32, Send=u32, Sync=u32"
+embedded = "d9bbf39e0eed1ef37adf8868ecaa64e14735224c2291aa46e1cb3f2071f0b0b8"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::last_error"
+kappa = "5d7956a2d58519b6d59c9d2e0c7b6a45367380670c52571d312868ec5c14fcee"
+embedded = "e7bce68160f5780da804e5a51550b35b527f73634813f0c7d8613fe3d6ab4e09"
+status = "residue"
+cause = "mir::Ty: error::SqliteError"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::remove_commit_hook"
+kappa = "fe36978ba48063b1913a7d6aa984e51e26fe9c91324ec59574af357663436f73"
+embedded = "ef7cb317e38dd04cf01cde270bd55cfd2a3f5e32b59328082aa87d7c2c5bdcfd"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::remove_progress_handler"
+kappa = "4b74eeaa5ae25799c3787fca8ae8148a4ee960567f2ca37b80ec09240e272f27"
+embedded = "ca1d249647479e74d699d254662c2d0ffa0106ea9e91a5599651b88aa921fcd3"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::remove_rollback_hook"
+kappa = "42a11a081ab57b7b9a772a10b76080c79cfba59d6b4296f85c172b13826a7b3d"
+embedded = "d42b4bf0802f6386d75290df9adb35a800bb00377a96afc3c1871269ce4bf11b"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::remove_update_hook"
+kappa = "163908670217020627d9daecb5f663c0e348d2cf67f372bc695a31f07409824f"
+embedded = "b3779604a57aecaae1d56aed790234f532b4b5103c4f355cec6d046bc0be19e2"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::set_commit_hook"
+kappa = "771dac9c1fff615ccdb453480676041fafcdca1d3104f80c241ecea317062a10"
+at = "C=u32, F=u32"
+embedded = "5e2ed8cb349448fedfcb55561f841a2a448769c580a22eb681dbf572310fc797"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::set_progress_handler"
+kappa = "b7332dfb6c75c4934e7cf6f19ba5b299948b0f447b17022c8a6b02128a1d7631"
+at = "C=u32, F=u32"
+embedded = "af300fbd8135b6866de260bc188e507a93a2ccad10d8b99e7c1b9d4d561cf190"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::set_rollback_hook"
+kappa = "069c649dca66bbc540b10e191c721cef374db9186ca16c3956b8087475bcced8"
+at = "C=u32, F=u32"
+embedded = "50e5b5ba3758a91822014760a5a75b165227ecbd13aebfd289bb16edfa130455"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::LockedSqliteHandle::set_update_hook"
+kappa = "4cce64e6df56409320cc7c3fa755b2f69e30efc605ea64760bd97e307408a9f1"
+at = "C=u32, F=u32"
+embedded = "5fa5666f3493aac61d33fdac8d30aaa678396268066a86b3f92655ca602b3a3a"
+status = "residue"
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::begin"
+kappa = "686a431f180a37846b4a31bd2b49108e7c523ceda92c746857f396250dba1481"
+embedded = "d5bb0620148bd02a8c8b02016a7e950766eb5fcc045664146ee1b1f5e4ddc8b5"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::Sqlite>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::begin_with"
+kappa = "cba428a30f6ba1c8f7a5d0956fe83b87e6516acd597248cf47ce401fcdc3aa4a"
+embedded = "f527076e41bcc15ccc37fc7af72bc9731512ea69020f584b0d4b730bad531d40"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::Sqlite>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::cached_statements_size"
+kappa = "b12da3ab7c540f6ce067864f34508cb57db9ce75a182058cbda1a9d5f9f3b3e6"
+embedded = "0c5966a31afea7685045b1636381c0a376ba230b9e84ac811138b15e5de99bc6"
+status = "residue"
+cause = "mir::Ty: SqliteConnection"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::clear_cached_statements"
+kappa = "4ef37751a018dbf278d8bdd2c302d1d699039fd01638cb39153f5118458bc310"
+embedded = "f275c0cdbb1e14f083e5b244e1f75da5be524e81268b4bec57b7e6501970d903"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::clear_cache()}"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::close"
+kappa = "5ebe18de3a9aa7d8fe2630d56aeadde8707fa902e7f95c55bdd8ca142d88688d"
+embedded = "4fb0d7fe20b6601a5f36e202cfae889eff4a38d4875a41c801ad2db9a91b044a"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::SqliteConnection as sqlx_core::connection::Connection>::close()}"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::close_hard"
+kappa = "17250a021be2e23b95c4de8ea77841d4e168e89d14ddd5c7694cabb1c1455b30"
+embedded = "a1846310d2a694e3942a95ce7de8a3aa6b582531a7cdd82c2f40cfb307b7eddc"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::SqliteConnection as sqlx_core::connection::Connection>::close_hard()}"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::establish"
+kappa = "37a587b352e457cd99fa60bff4fc564773914aed43688a7f8800511e0abcc033"
+embedded = "edd3f63761dc9093d6c2296457db021b56ab6275cf5d404c7c4d82bce7bd5111"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::SqliteConnection::establish()}"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::flush"
+kappa = "3c7872cbbc9c95c73f643a58416356a0137749a9108cf7181f2a83b12e0b4c8c"
+embedded = "f4735f9632c3d2d8f6157889410b48718f9032d1b91a53fb41bf226a072fb085"
+status = "residue"
+cause = "mir::Ty: {async fn body of <connection::SqliteConnection as sqlx_core::connection::Connection>::flush()}"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::fmt"
+kappa = "0dd5e93354dcc3dc45658922e7ae8b9b12e6020e5f141903157f9e6db63382d1"
+embedded = "a247f3ed1cd4674bca5da736191fb2c2fa1472c0e57892977e453329e5bd1517"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::lock_handle"
+kappa = "d3c0473630b5fa94d4e80ebbda986c9f2eb3675d50f03c12ed455bd1daeb363c"
+embedded = "a6996caefe7f81ac849f443fed5d0e70a88a1a9c7e05080aea18e57f349e3bd2"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::SqliteConnection::lock_handle()}"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::ping"
+kappa = "9b5ac8770246fd50d215ad912dc252926ffdfbdea1682a400677e3fea9e6261e"
+embedded = "7eecfef563e912403cb21b62af565fdef76e12a04006ee993e6922b39c61a401"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::ping()}"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::should_flush"
+kappa = "65f87830f34b3a895800978c0a0d756a3c721689e79c38c27dd221dd9d0d567b"
+embedded = "89c38b0691fd61dea51a28c264782168bf135a83554480c3a67095ce341197ce"
+status = "residue"
+cause = "mir::Ty: SqliteConnection"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteConnection::shrink_buffers"
+kappa = "0a11c2407562c6cfac3c9fc629a46ad539f0b6a621bb16b3b9da8c4fe01dca03"
+embedded = "729cbc2b26826a9d0d6cea07a26750ab65a3dfb44edf3fb8207d656acd21500d"
+status = "residue"
+cause = "mir::Ty: SqliteConnection"
+
+[[fn]]
+path = "sqlx-sqlite::connection::SqliteOperation::from"
+kappa = "0d5b9efb5b29f3a6fce4da65742dfc92f298bdefe319d386547a20078c90d9bc"
+embedded = "1efd3cc2a8dafe91040659675aa70da54790e0c98b50834a81f95fe4f1fbf360"
+status = "residue"
+cause = "mir::Ty: connection::SqliteOperation"
+
+[[fn]]
+path = "sqlx-sqlite::connection::Statements::clear"
+kappa = "daf0227beeabb075ee1fa9a0fbcd396322af246dab592156208bf69fc1ba07fe"
+embedded = "75a8f01bc29ee42e4aa8564f3de7d1bbd6281dd4bb9c35d0e6bea9a73ca17075"
+status = "residue"
+cause = "mir::Ty: Statements"
+
+[[fn]]
+path = "sqlx-sqlite::connection::Statements::get"
+kappa = "8661f942caaafa5a11ee0924e7a2c86bbf6f27913be0435eeca3334ea0fc31fd"
+embedded = "d4dd90092827c713456a3e7cb47e24753b60359939dcb381f133901fbcd14d55"
+status = "residue"
+cause = "mir::Ty: statement::r#virtual::VirtualStatement"
+
+[[fn]]
+path = "sqlx-sqlite::connection::Statements::len"
+kappa = "b998faf5c2f17aac8a0ce190c9901383f387cee394d49e42e5919f3f4f0dd853"
+embedded = "3f059a8f3aaae929538d1e0708841b86a9ea211c0dcab93c60abc21f8a8c3b24"
+status = "residue"
+cause = "mir::Ty: Statements"
+
+[[fn]]
+path = "sqlx-sqlite::connection::Statements::new"
+kappa = "1ac421ded37027f2894ebb8fa65e0353cc94ecebf4aeb0938d239fcae0877145"
+embedded = "963309cb56b2ca750ad190075160617bba65a16c37b82604db1d9a4a37c0e440"
+status = "residue"
+cause = "mir::Ty: connection::Statements"
+
+[[fn]]
+path = "sqlx-sqlite::connection::describe::describe"
+kappa = "6d5902abf3938f8921000bbda70ed43323bd7c463240dfac31530423318aec40"
+embedded = "3ea9cfaca3445558f3a83b15c1b0abedb90e952cf169845128defb448f0ebaa7"
+status = "residue"
+cause = "mir::Ty: database::Sqlite"
+
+[[fn]]
+path = "sqlx-sqlite::connection::describe::describe::__CALLSITE::META::NAME"
+kappa = "dd54565164dd432071cf5882d16fad848cfd84e0332434ddff334b067818981c"
+embedded = "c3506ac126fc2644e5f8fd1c5fff76c6114df2ab611e0540ab3692f96c149c9b"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "sqlx-sqlite::connection::executor::<impl at src/connection/executor.rs:13:1: 13:51>::fetch_many"
+kappa = "1257c3563e2213a8d6b7476ed278d234359196746e394d33260de7dcb73ed092"
+at = "E=u32"
+embedded = "6947c2dd7bc5a1dfb9f88d0da127250943b7f0da32b40c3c66b450288ab1b7c9"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<sqlx_core::Either<query_result::SqliteQueryResult, row::SqliteRow>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-sqlite::connection::executor::<impl at src/connection/executor.rs:13:1: 13:51>::fetch_optional"
+kappa = "411e2b004dea192cd255ed76fb06754cdcdb8d781f256f0c3d12f446363df455"
+at = "E=u32"
+embedded = "52dfacc8fd6c569146b44b253c75ebb03f4f2488ec998caf683e90dd607fa9d6"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<row::SqliteRow>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-sqlite::connection::executor::<impl at src/connection/executor.rs:13:1: 13:51>::prepare_with"
+kappa = "4ef9a8b1c5906a7982ee4af7088a698c054338fb04c7b1ae7c594df404fd4d1e"
+embedded = "79307182852851c5b400b4aed0245083980e83d4f273d1d81a9038efca69f0e5"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<statement::SqliteStatement, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::<impl at src/connection/handle.rs:15:10: 15:15>::fmt"
+kappa = "4bddea4fb444859c2b6e9acea32dbb53171e26b6a8a85b186e2d5185fb3ebd54"
+embedded = "7d04a176384dfe36085b784a6b9c6a3ac5b27c1556a0eefd4c2bd6be7c7aef03"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::as_non_null_ptr"
+kappa = "eae5aa1c1719985653faa0182fc6b4a61b7de3936e713f0bd2f9325da0c9d568"
+embedded = "36ff598aa87a3e05a174d98b129f9091f9acd40b0ddd3d2f6901d0c5ed1e1d3e"
+status = "residue"
+cause = "mir::Ty: ConnectionHandle"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::as_ptr"
+kappa = "7b2e601a80b67b5985eeecc66469cc87fbc9db20aa2561c4dcc0f2f9715e42ea"
+embedded = "0d6dd1a8826f2d39507b1e9aedc988fc4fb012f3bae7f85912ae9e6c2804b4c0"
+status = "residue"
+cause = "mir::Ty: ConnectionHandle"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::call_with_result"
+kappa = "2b0668fa5c3aadcd12aeab70bdfbec86c3571a398aa2a180da22d74f38e134d4"
+embedded = "dff36d49266da7a0e4a5f367c2363e1335cde6f10f901ed3af7462b147191261"
+status = "residue"
+cause = "mir::Ty: error::SqliteError"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::drop"
+kappa = "4d90f2cb5891c49f71905f191fd79ff988bc8f96be875a22fef3cb5efc25479c"
+embedded = "d70340711e9fb7097faef26434e799510acb0f53728802a6ada71610179e6b69"
+status = "residue"
+cause = "mir::Ty: ConnectionHandle"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::exec"
+kappa = "3803dd1dabc3da49c8b02d587015892043701f83f2871271cceb1ac1f667fe07"
+at = "C=u32, String=u32"
+embedded = "88c51ee38176a68b1f22855ae3651a2df9660eb390734ff0fcc33379ea67dbea"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::expect_error"
+kappa = "e424fa9ea4f116f18b2405e64d5b63e952422643c711716d2669b1bed079aca1"
+embedded = "8994004b73c32062d5bfccdd5d97abea25a74388a1acca1a110b54014d477cfe"
+status = "residue"
+cause = "mir::Ty: error::SqliteError"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::in_transaction"
+kappa = "37143a492058884ec43804dea43dc9c4ea3e6aedee7a04e8ea82f85c41e0ac3c"
+embedded = "f6fd3203ec1303a7c8436b32f0c64759cadd4a5be1e68951f9b892d608876e78"
+status = "residue"
+cause = "mir::Ty: ConnectionHandle"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::last_error"
+kappa = "48b94c9f89ff13b2739f1ec5f8ae0f0b14c6416f91dec455078ac165b6d46904"
+embedded = "b0adb7e1b5a8b0eaf887e750c81224015c4fd976cce4f9d755cbeea776ef1261"
+status = "residue"
+cause = "mir::Ty: error::SqliteError"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::last_insert_rowid"
+kappa = "f568eb1adc7b5c375905838b48139a2203a8e7ee4aaea2459d4b201757f27bdb"
+embedded = "aeaf12ddbf294b4d0e9a68a859799404e208d0b4f0b07e4072be28f0ae72cea2"
+status = "residue"
+cause = "mir::Ty: ConnectionHandle"
+
+[[fn]]
+path = "sqlx-sqlite::connection::handle::ConnectionHandle::open"
+kappa = "4b6cd786b67353b2b429bb8d7e29f52b7a56c20e98521ab7025c3e2a45d549d7"
+embedded = "57a10f1b0e4c0954062aaa8ee8aa06292b8d700a179e3742bbf1468f71b78e13"
+status = "residue"
+cause = "mir::Ty: connection::handle::ConnectionHandle"
+
+[[fn]]
+path = "sqlx-sqlite::connection::update_hook"
+kappa = "ff41d8832513dfc94ce4921bcf86598b5dc60160117455ff192beae052c1dbb5"
+embedded = "75e46a014b3b0fff8ec869b4e2cfa57c43d91432ca14c7f03273c0792745cd6a"
+status = "residue"
+cause = "mir::AggregateKind::Closure: connection::update_hook::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut c_void>::cast"
+
+[[fn]]
+path = "sqlx-sqlite::create_collation"
+kappa = "4c702312cfabb140f588ed882f1f36c1cff1f523303338b4aa09391665811100"
+at = "C=u32, F=u32"
+embedded = "75cb2e7bf216d7475abfac0adfcf612d0918c8ff9eec7db3852597d28c881ca2"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::drop_arc_value"
+kappa = "b9239b219aa0a76bb507555f3b82ce43ead674ebe5d2434aa7d29d7726053197"
+at = "T=u32"
+embedded = "7acbee827aacb841b7dd9f0d2b3e4fc538c7836d9ae1f29e8d6bd25dfa94b438"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::establish::EstablishParams::establish"
+kappa = "009e6ee1ed2f7a3951cc5c496b00d65b45371537bb03b57f2e88555b38e607de"
+embedded = "6441e5aeebf9721b83c89dbbfeb2bd186ae342c344d1ed3501e90ed29bf64afa"
+status = "residue"
+cause = "mir::Ty: connection::ConnectionState"
+
+[[fn]]
+path = "sqlx-sqlite::establish::EstablishParams::from_options"
+kappa = "79453f66937508b236effb21f9233470b2fa574ec37339f0a2e10b47ff537f6c"
+embedded = "a030c2790c3c5dfece30d5247cf727fcd6495ae4f526f82fe555fb870d4895b1"
+status = "residue"
+cause = "mir::Ty: connection::establish::EstablishParams"
+
+[[fn]]
+path = "sqlx-sqlite::execute::ExecuteIter::drop"
+kappa = "7e5f33ec5207afc52dce8edd2dd0f94b8c8f2e5782fe21a285dbaddc83ed1e9c"
+embedded = "dfa234fe910d20527036ad8a0a6229b8e567916ed70280ce9bbf02947c3f4add"
+status = "residue"
+cause = "mir::Ty: ExecuteIter<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::execute::ExecuteIter::finish"
+kappa = "93718fdf1fc8ef6756792b1a558b62380a36b8abfc6b9b3e51efea9b8fb6ccc9"
+embedded = "8c73e3cd44d7c93d1954b6af37d50555a68d4aad186e5dd25096ba5272b67b47"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::execute::ExecuteIter::next"
+kappa = "14f5a70644827cf19a5ef4654065639a00a0dd58e2df0442e0ea0f635d9c6930"
+embedded = "2540fc9d034f1326874c9cf56b4b3fd90814a66946ea888b00e573784b1a1aca"
+status = "residue"
+cause = "mir::Ty: query_result::SqliteQueryResult"
+
+[[fn]]
+path = "sqlx-sqlite::execute::iter"
+kappa = "e3ad6703d1ff7d0c0ec19989d5bab86f89d11638345400b0f14a8e9ae879af74"
+embedded = "a5d74ef6579e196c61c0f583c8b26982864b734b49fd20e71674ce1579ba5aca"
+status = "residue"
+cause = "mir::Ty: connection::execute::ExecuteIter<'_>"
+
+[[fn]]
+path = "sqlx-sqlite::explain"
+kappa = "8b0f2744797a723fc982cbdf6d0cd47a1c5edd96331a4640a23e56da7128c471"
+embedded = "b8be35023dccfdfaeb6d1a8bfbc4ff3fdfb2cd84635ab3de94ad5c368b5e9143"
+status = "residue"
+cause = "mir::Ty: type_info::SqliteTypeInfo"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:145:10: 145:15>::clone"
+kappa = "4efc996dd1d4e8cfcffdb5074f5c12d535f08a35a8fdf5eddd41a041c9e8cf3c"
+embedded = "2039838d4a414ec800985246462c79318da5bf248411622f445939952f4ac357"
+status = "residue"
+cause = "mir::Ty: connection::explain::ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:145:17: 145:19>::assert_fields_are_eq"
+kappa = "57d9c1899b44614a4b1b6b8998a604c5b2b96deb50a8fa98f9c28cddbfe60657"
+embedded = "be2bed1005014ebb223e9b6a28e0e0f172020ba4dbdcd7d53cac14f9067b9f42"
+status = "residue"
+cause = "mir::Ty: ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:145:21: 145:30>::eq"
+kappa = "c26b36828edee9c95b589036365f05253efe36bdcf156542869a40baff64e318"
+embedded = "2988bb25afe0a76c075e142ef7dfc6a183dc59126db7ac1cf7db7455a7d9b63d"
+status = "residue"
+cause = "mir::Ty: ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:145:32: 145:36>::hash"
+kappa = "42bef2920b79d5dbf4745681e9ac75599f01a019d0f744ae3319ed7da5837320"
+embedded = "6257cadb8a3b98cf7c00f85c14a90ab10e45e557127e8d325a86b9090fb30a92"
+status = "residue"
+cause = "mir::Ty: ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:210:10: 210:15>::fmt"
+kappa = "17bd750ca6605c99f88585f5cd8ce0ff8892741b75427c125aa205448a0956e5"
+embedded = "57abb78e8d480c1a39f3c91ad0a0965b7c4b1c6f85ac82dc00e7b01efce36e33"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:210:17: 210:22>::clone"
+kappa = "daa1c3227485930f2f940baa456dba80033ed7beb8d5a1362e0ccec4d289ea7d"
+embedded = "6e0d938920d862decfc5eb8fc4f8200cf06adb48a78e898c4207ec52ecc47bc4"
+status = "residue"
+cause = "mir::Ty: connection::explain::RegDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:210:24: 210:26>::assert_fields_are_eq"
+kappa = "d460e3a41f41730792df239410c1eb5a7e437dc812b47a74244f0de8f87bb689"
+embedded = "97469837a7c10b94170627898f9be72952dbb8d8d499c1406f5bbef2e1e35d05"
+status = "residue"
+cause = "mir::Ty: RegDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:210:28: 210:37>::eq"
+kappa = "178c0eb9f43c6669eafeb9bc09400ac9002649c2afb63fe02958383ba08a2b42"
+embedded = "1d9104ea729068b8cbb17348d579b4230652b3d0093245eb901ee811d3aa35dd"
+status = "residue"
+cause = "mir::Ty: RegDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:210:39: 210:43>::hash"
+kappa = "80391fdd2d03915ea74af290c037457e51d6cc67e00137f1902744f49973599d"
+embedded = "dc74e368f0f864199605cacb65c44b5bc4d78116b13633ffc06c57703932af11"
+status = "residue"
+cause = "mir::Ty: RegDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:246:10: 246:15>::fmt"
+kappa = "ab078ca771f6ed957b9f103d9ce00621f64b6aa69595488d7dc07a54bde4e327"
+embedded = "5e03fedcad80672e76178e619b1d3adec161eaec9c6710e47c49eaf23212d00b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:246:17: 246:22>::clone"
+kappa = "4e0a7b3f0781238c1c508c565c24f751d65056bd0f5ed11f0e9364220f0a4f28"
+embedded = "7fe9fb0ca44c401e68eb296bcce3e2053d56987f14b33c13f8bc8c8cc8c32331"
+status = "residue"
+cause = "mir::Ty: connection::explain::TableDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:246:24: 246:26>::assert_fields_are_eq"
+kappa = "cfa686e2b099b59add6b39c93d37f9d51991dc94ce3c3ca176cf5e58e5ec6fa1"
+embedded = "dba63579b9f3dbc3e340882eac3debb94666354c237919122ce5e993ae5bbe3c"
+status = "residue"
+cause = "mir::Ty: TableDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:246:28: 246:37>::eq"
+kappa = "8aeb53bcaeb5df239977c5ace094303b14adc77da25abfa57bda715b891ec35a"
+embedded = "18fc88886121dbf98358802cf552de1eac8a4112e5dd222291e9b52c5c0e9551"
+status = "residue"
+cause = "mir::Ty: TableDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:246:39: 246:43>::hash"
+kappa = "d8e3e449b726f4d63b916c08026f2d91dd43952288e5b7f7d2998c56e604c51e"
+embedded = "87ee25ca413246acb9d7547542f4e56469e2b20edd09632620ff80edbe2379ee"
+status = "residue"
+cause = "mir::Ty: TableDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:252:10: 252:15>::fmt"
+kappa = "813e6b1c4fc71411c1a4ef8bed4b44c5120a531f957468662d4bee1d459c7a20"
+embedded = "5f82c4f5ee5e4b9e713f28bd52e31d5ea4c4542d311f619afd8ac2dccf4447e8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:252:17: 252:22>::clone"
+kappa = "34550078443602f28e2187fde67f2aaf05274d9788510a7563b2545f42ec7fb3"
+embedded = "f3c1e39506294e31a61fc70aec43c1b25485f2c46069927b73b993f3be1e1252"
+status = "residue"
+cause = "mir::Ty: connection::explain::CursorDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:252:24: 252:26>::assert_fields_are_eq"
+kappa = "11ef1882e4a3ce339b5a31f8887b09e77faa2fcc14425ed63fb01d9c70fc98f8"
+embedded = "4cd75debf0e5cd248a55c26f42b1a86587a9f04374e19f8324dc3c4ac78628b7"
+status = "residue"
+cause = "mir::Ty: CursorDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:252:28: 252:37>::eq"
+kappa = "7ed260a0b4a3d1b463de14b93b97d5382164a1011bed2c0c274564de0d055750"
+embedded = "573b79d2f75d4fbd5cce5d8583c1aaaaa6911d4c5c711d60b3e4900b4892d567"
+status = "residue"
+cause = "mir::Ty: CursorDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:252:39: 252:43>::hash"
+kappa = "a28e5f8e7c3ee51ef87502cbfb1dac26cc39502abdc9d7a09c35fa102c7b3fee"
+embedded = "11f69bfe2a156c97d28983b6e6c478ec552cb338267f2d562e5cb8e95d23feba"
+status = "residue"
+cause = "mir::Ty: CursorDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:430:10: 430:15>::fmt"
+kappa = "a8dccc66a1b81b985fd408889aec87c8f468076d8ff432f95dd98b5d54676514"
+embedded = "24fde433a376cbed30cc4be10bc0dbad23c55213b28444458fbd85ca5d1d3314"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:489:10: 489:15>::fmt"
+kappa = "089a5181940d5e49429c22b03d33d60cb5be35329292a6c02a3607c90d84758c"
+embedded = "8931707b81503973a9a2000a8ac57e87fab34e0c581a1a3fa344c7d77141ab9c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:489:17: 489:22>::clone"
+kappa = "861cba6aeea0d1f0fed1759e1aa46ab9985521ebd73fe173f09e6afaa9b86b51"
+embedded = "f82b3b5c4c2d13db398cd7cdbbfa3a67c4f8db2b5024e54528a95a8116f1bcff"
+status = "residue"
+cause = "mir::Ty: connection::explain::MemoryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:489:24: 489:33>::eq"
+kappa = "769d75b366094b4e9f3f036bc59520fff65f81cf0250a3a4d9cb42da32a00c32"
+embedded = "c279bf21e661a8d0f51eed3aee704e55ca89970289e1b262d79e8af104e99547"
+status = "residue"
+cause = "mir::Ty: MemoryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:489:35: 489:37>::assert_fields_are_eq"
+kappa = "6f571e2fa69bb560a9210259c2231b3db6cd55a8bd1718c40cbf08ee26ff048f"
+embedded = "72c390d33abc558cc0d3ed6439e4357132414550088e3588d11d1d2234196294"
+status = "residue"
+cause = "mir::Ty: MemoryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::<impl at src/connection/explain.rs:489:39: 489:43>::hash"
+kappa = "09aabccd2402a6246aca89b2ffa1d7438b635502ea9b9b2bef905c2249fa6b01"
+embedded = "69a15a4fc0a7eb37d34bd95dd05956e20b2725347da04f0e634899ab6fc4625c"
+status = "residue"
+cause = "mir::Ty: MemoryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::BranchList::new"
+kappa = "f9ee90c6915e4e85678c499b68ef58408e744bb62730af7cbccc392b8ce974bd"
+embedded = "a81417e41538ea1161d1558550716ff0bbf15221a5b9e2a3fec207777508fa91"
+status = "residue"
+cause = "mir::Ty: connection::explain::BranchList"
+
+[[fn]]
+path = "sqlx-sqlite::explain::BranchList::pop"
+kappa = "5d3f54434749e3b391b57e8c3877d3e4a334f2fb78c99629ae218083b9d59f37"
+embedded = "db72260002177e69f9448d384b5427060ba592a56f8e1ec91ecb105c85b226db"
+status = "residue"
+cause = "mir::Ty: connection::explain::QueryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::BranchList::push"
+kappa = "d0fecd7e39387139b14601c79aa9bf17fd387bfcf9acf48fbf4129c3b7e1eb90"
+at = "P=u32, R=u32"
+embedded = "e59568b5cf1b7581a2757ca7f7f81e0763e6bc43dfe756799b690a9cb302379d"
+status = "residue"
+cause = "mir::Ty: BranchList"
+
+[[fn]]
+path = "sqlx-sqlite::explain::BranchParent::from"
+kappa = "02339e6df547e98eaafd10cd32e18fde83744445627196951658ae3bb490a11c"
+embedded = "9a4f7a0b30518b072624292ac7b3e732a8975dc2b3c15ed611b61f002c15f3ad"
+status = "residue"
+cause = "mir::Ty: logger::BranchParent"
+
+[[fn]]
+path = "sqlx-sqlite::explain::ColumnType::default"
+kappa = "00d0b4bd8fbb442a12e535928e99df2505e7928aa508590155d1bf96bdc1875c"
+embedded = "b54f6810b4e6aa036860cea0c6f57a59315132a17e34dd9685c039119943a9fb"
+status = "residue"
+cause = "mir::Ty: connection::explain::ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::ColumnType::fmt"
+kappa = "8169e50bb420cc1dfa4dbc1f62410d5e19906e8c9f3278c6a0a2f06621ada5fa"
+embedded = "6eb58f2122a4bff7f1f5b86aaef9b76408e52ddab2c68ccafc51a31f2c1e644d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::explain::ColumnType::map_to_datatype"
+kappa = "d68f188a05a89fbc7e16ff71def82ba49752f84d58bb62d36d321014f8ce6c71"
+embedded = "9fdf4581dce84c2f2b0fe9c135ea9d14c9a9fd1a75c5c126b4460e4b1d787204"
+status = "residue"
+cause = "mir::Ty: type_info::DataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::ColumnType::map_to_nullable"
+kappa = "8c0569bdd2bda7ae16f685ca12a0f989a800167f8d5274c14d7ecb3b8617d779"
+embedded = "fc07b8097dd6d7a458c1c0d2a41289d1347c331f44d82d0bf3fe9330a6dd9ef7"
+status = "residue"
+cause = "mir::Ty: ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::ColumnType::null"
+kappa = "1f3cc6769e16b062561c8a61857a528146c0a6d27f76daab2a6f7e1e361e2134"
+embedded = "80b4c4878c5def95a98ade8db31a680ad421cdc3fbd6e493cf220b4158c72b5e"
+status = "residue"
+cause = "mir::Ty: connection::explain::ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::CursorDataType::columns"
+kappa = "020b45ac40bfd49fa64818d5a52b6976ec1af8a6ba2f76d842abcfec53bed114"
+embedded = "b30db90b68dc5b53e38f3608fd1e50100f7840ac42661bcf4f61015fe674f186"
+status = "residue"
+cause = "mir::Ty: connection::explain::ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::CursorDataType::columns_mut"
+kappa = "1675ef495b8018583c0612d3beb048f5461c0b25f2c95eebdd66281cb268fe9b"
+embedded = "cbec2a4a0f95992dd0a04f812bf18be31ef37634e7aeef91f2e69a1a09ab4f11"
+status = "residue"
+cause = "mir::Ty: connection::explain::ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::CursorDataType::columns_ref"
+kappa = "72351f6bdab629cafe3768bca34004f64cd452d9de9e9a792f863cfa083e312a"
+embedded = "231c40b0ddf3cb7ceb98a6e46deec183700f71cee51fe2e704ebd76124881e23"
+status = "residue"
+cause = "mir::Ty: connection::explain::ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::CursorDataType::is_empty"
+kappa = "494ab11ddc7600ac8416053e5a25cb6fc77a5ad64f23e31e2d715ed0caaebf67"
+embedded = "d565049d75371981226fe488555af8f7560a1c91ced7171a2641e3389cfb6e53"
+status = "residue"
+cause = "mir::Ty: CursorDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::CursorDataType::table_mut"
+kappa = "929f2be12448070f1ef09db0b275d01a07377bf28ba3263bd89069fb0e7b9203"
+embedded = "40418c350d4b69d1ddb0023c2f1758fe685bc125c0b50787b778790b375037c6"
+status = "residue"
+cause = "mir::Ty: connection::explain::TableDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::MemoryState::diff"
+kappa = "07d1b712d7fcc9ff1e5dda083a3e72865576fba953cb3a14d12760bc5438b999"
+embedded = "f661172512140639cdd90a68d54e737a9a9327ff668720145ce53283dcab5cd9"
+status = "residue"
+cause = "mir::Ty: MemoryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::MemoryState::from"
+kappa = "25cda6a03a3620d192e2c20dcb98e7af9b88d19fd4feec5a7634c8fbcaf90ed2"
+embedded = "549a60c82b3fc5b84746977c65321e3f3524c0e4acef746a4ffc093b9e407b23"
+status = "residue"
+cause = "mir::Ty: connection::explain::MemoryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::MemoryState::from#2"
+kappa = "e1988129325f6cf5f0d22719ec14768cc2210a714f84177b571621a00d720054"
+embedded = "a4b5f7eb678a42d5f69a66e68c7246b986ccc60e504ed944b11c8825ea1876f2"
+status = "residue"
+cause = "mir::Ty: connection::explain::MemoryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::QueryState::get_reference"
+kappa = "6117c3e2142678557f10d56ea64b52dac709818e361b737e152f35931a22ac08"
+embedded = "7514df915e1b1564e1b95108fd7b06e3fdf87b4643edc0e935bba9e9271fa3f5"
+status = "residue"
+cause = "mir::Ty: logger::BranchParent"
+
+[[fn]]
+path = "sqlx-sqlite::explain::QueryState::new_branch"
+kappa = "b55688a51f5472c5c4c04c46da841ca4a91f0709dc41f675df79e88740235cbf"
+embedded = "572191149b8e8751e9be6c2d9795f3d79d8ec2f5692cccc49135f54ce2277206"
+status = "residue"
+cause = "mir::Ty: connection::explain::QueryState"
+
+[[fn]]
+path = "sqlx-sqlite::explain::RegDataType::default"
+kappa = "6317948ea3abaa41e896a3cf1bd34618382005d701d6d86e012e8fcc24e58154"
+embedded = "08e0e093bb98a045f02f94d6b8d3e4b761235345f90b87bcc2a407bda1525c46"
+status = "residue"
+cause = "mir::Ty: connection::explain::RegDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::RegDataType::map_to_columntype"
+kappa = "459c17feeac87ca7ff0e7a2c2af965f31926e11522999067d33e80caf578a003"
+embedded = "517cd9870c3d1a180db5703fe8522dd564a327f50ac1006b695d662f9c2dc07d"
+status = "residue"
+cause = "mir::Ty: connection::explain::ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::RegDataType::map_to_datatype"
+kappa = "98d9be1eec3b970320436f7335f127f0450f945f5ed85e21f90899a831aa65fe"
+embedded = "dfdfcdd18cac78b03f67a215e49d7787f76bd96188bd336bde4b1897dc1f3eb3"
+status = "residue"
+cause = "mir::Ty: type_info::DataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::RegDataType::map_to_nullable"
+kappa = "323ddc0db9e49d50ed24c3e130f8b50b594cac28fef5eae7f4816d6b103c8bc8"
+embedded = "4fd218ba08d12720024acaefa9defdca9d5cf12908788d4e330a5114a4c49b20"
+status = "residue"
+cause = "mir::Ty: RegDataType"
+
+[[fn]]
+path = "sqlx-sqlite::explain::Sequence::new"
+kappa = "1424eac5d5bcd97a99b432551b72e4cc1821fb0482d998db2ea98743a2854bfe"
+embedded = "55651d237445bec4c118b8e023bed8acad9eac0b170adabe8f0d08cf3576ebe2"
+status = "residue"
+cause = "mir::Ty: connection::explain::Sequence"
+
+[[fn]]
+path = "sqlx-sqlite::explain::Sequence::next"
+kappa = "d3f68175b8b64c589e44642d2d98197a37b4a5a173bdb79d5fb1960c011db874"
+embedded = "935df13bb06d80c075cf380c3655292abc3d80bed2cb1a12536190b6d4c0dd09"
+status = "residue"
+cause = "mir::Ty: Sequence"
+
+[[fn]]
+path = "sqlx-sqlite::free_boxed_value"
+kappa = "8ae3cb1a566f766572d88a03fa01d2e5c552bcd02361c22346100ce1afa899ce"
+at = "T=u32"
+embedded = "cc5ee33637ac085fcb169e46fbc619bbc60f8ccf9719c9d8fbbe1c42f293a4ba"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Box::from_raw"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::<impl at src/connection/intmap.rs:12:10: 12:15>::fmt"
+kappa = "20e369f7f194799459ce64fdbce0fa1ef830bd945f7b47749c9d04a217cb7f15"
+at = "V=u32"
+embedded = "8722a63164e655fd11232d90f9ba5e87fddce5da08859dcd265330621d8d848d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::<impl at src/connection/intmap.rs:12:17: 12:22>::clone"
+kappa = "2139cf0078a0eb310c6508999b94064043bb907954eb347ddf21eec43c0f4742"
+at = "V=u32"
+embedded = "41ef6819ef501ff5eafc6dd94e0962407a93420e456de295f6242d3e398de42f"
+status = "residue"
+cause = "mir::Ty: connection::intmap::IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::<impl at src/connection/intmap.rs:12:24: 12:26>::assert_fields_are_eq"
+kappa = "293429beed11ac519b55beace8508fed528aa57244de8038251db4c8fe47583e"
+embedded = "a9b41ec6ff65f9322fdb03eabd12dad86d85d342674e4f709cec575b127a731b"
+status = "residue"
+cause = "mir::Ty: V"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::default"
+kappa = "e67f1686157dc2f1202fea27b46bbb907cc7050b39928b37fdffcc81825fc4d2"
+at = "V=u32"
+embedded = "e0dac9e5ee2d0e36025136092194c31ffb91d44f8415751d4f7dccbeaa496f1f"
+status = "residue"
+cause = "mir::Ty: connection::intmap::IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::diff"
+kappa = "9c7813038dc367c440239a3914ff0efcb7ecd1eeaa5bf423e8a4cf8600e883f1"
+at = "V=u32"
+embedded = "2507b668ec04a1bd0948e8a31e2d5fee935b4b9f9074dd58e81ceb57283d53e7"
+status = "residue"
+cause = "mir::Ty: u32>>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::eq"
+kappa = "e72d26c278ffe9610aa29871ab6bd722b5831e82fb3d5a2a707d1b3a8aa46ae1"
+at = "V=u32"
+embedded = "201550b42390077d8575120e6633b873395e807f45aefed18c715ab7109dd5a1"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::expand"
+kappa = "a38b697f8bde79c43f2c701c16adbcc66a1f7329b7a7c42cfa3300b2936eb300"
+at = "V=u32"
+embedded = "28a6c17ac919c740a90ca787dfd0a39f1b65b1959b18ef2285483dd48d50c958"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::from_dense_record"
+kappa = "5908c51d81aab9190925b281225eec14e2774780cb9575940369b59c701b1046"
+at = "V=u32"
+embedded = "995e7de57edc516c7954121e0f4dea19aa72ed76078fafd749458ca59d4a7a4b"
+status = "residue"
+cause = "mir::Ty: connection::intmap::IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::from_elem"
+kappa = "ebffa31491c2ca9ebcb2c2085c2f07d69e212fa4dd1d8edfeeaf6b3d0838a559"
+at = "V=u32"
+embedded = "77481147a69b9f25116384594a959df4f3447f423a166e47b4cf190a6f414973"
+status = "residue"
+cause = "mir::Ty: connection::intmap::IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::from_iter"
+kappa = "bd96125da7c9241c1ab3b31d82f900be48fd4573a8c6907e541c6567e34ee54c"
+at = "I=u32, V=u32"
+embedded = "cea5f3f85789ffa19cbb6359d89f162395086c6532e991715dea5d13fae7533b"
+status = "residue"
+cause = "mir::Ty: connection::intmap::IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::get"
+kappa = "39c763917a801906ae8862cfc197fe144bc1502c7b0de5bbbf0bb536a79bae28"
+at = "V=u32"
+embedded = "ffaf3b147d212f8acdc7c12f43a4613915ffb254b3dbb1ae250f46878958510e"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::get_mut"
+kappa = "0ecd8685794f8313c90673af87bccedf04cdf8e8d9372214e3b540ac4bfdea6f"
+at = "V=u32"
+embedded = "dd3b33f058c99b9f2e4268f4d500bc39b6d91fba64060ea50b35929afe6051c9"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::get_mut_or_default"
+kappa = "df710536b4954633ee769d7670a033b66c409079b62316088d551c8fdd76fc8d"
+at = "V=u32"
+embedded = "f1a9818d34e49432f7ffc92a37dd5c221446007c1cd8c782d9dec7fa728f818d"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::hash"
+kappa = "e3d28913e2f61b6f08486d8ce0e4d800f671cae5a45b9710841ad29acb10e126"
+at = "H=u32, V=u32"
+embedded = "d26575037522b2fd6585ec94318242498add679452530bc86be44440bcd90175"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::insert"
+kappa = "aaaf069b55ee7f074250a7fb0f8bd26ffee751e648eab4ed9cec5b1dcd6194b0"
+at = "V=u32"
+embedded = "19bec57fabc574997e7c330bfc0233e98e55fbb6c7ec272d5a2fcec0201f09c8"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::iter"
+kappa = "f1be9d451cb9755560f4ed5c0b5ef6fc88343100cefe6519ed3becd9a2d96434"
+at = "V=u32"
+embedded = "e596fe7513aecd7feaea8f75ae99bb0e5c7eb1ffeb720df216009d0ccf9a0a90"
+status = "residue"
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_, std::option::Option<u32>>, for<'a> fn(&'a std::option::Option<u32>) -> std::option::Option<&'a u32> {std::option::Option::<u32>::as_ref}>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::iter_entries"
+kappa = "5bec28c2fc120eab3ee39b8524971ebc2cb921c7e33b980399493480d0643fa8"
+at = "V=u32"
+embedded = "3cc00574dd7198e7beaedec40ee9464ebcd6da2f7875d323179a31ffe5d1d728"
+status = "residue"
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_, std::option::Option<u32>>>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::last_index"
+kappa = "59c930dba569afb0820b03da1cb0579f82856a60a7c6d1b7244353f6dee37ee9"
+at = "V=u32"
+embedded = "967bc20502f888f893ec35da4ff864136e93c070e4483f8572341bfe10587894"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::new"
+kappa = "c6e07df778586aefdd901ef2cb0e4858edeaf5c724878d09958bf7ae4207ce24"
+at = "V=u32"
+embedded = "d76aef2798d0765c60880a33b860f0a8172d7322ba0b3babb5465493d3b948dd"
+status = "residue"
+cause = "mir::Ty: connection::intmap::IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::remove"
+kappa = "1539f44466753fd1148beef0201ea1f51fa21ba5fd66c755908be95d6ee5b42a"
+at = "V=u32"
+embedded = "70ae5f817ed9b1742cb609d960230c2d26a25c43f467c3f1dd8ee6f47bc2ab18"
+status = "residue"
+cause = "mir::Ty: IntMap<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::values"
+kappa = "e95890940dde9e3bd8d5aa0122acaa34f70db6d5f56b6aed608073f7c329a976"
+at = "V=u32"
+embedded = "57ea316a0a6236496325b3f93315f4b86e2383cd229d4c88d0524a8ea3216fe4"
+status = "residue"
+cause = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, std::option::Option<u32>>, for<'a> fn(&'a std::option::Option<u32>) -> std::option::Option<&'a u32> {std::option::Option::<u32>::as_ref}>"
+
+[[fn]]
+path = "sqlx-sqlite::intmap::IntMap::values_mut"
+kappa = "f618ea666522139882f78220e60622765443c69caa5c3e7edbade46813e100eb"
+at = "V=u32"
+embedded = "456fe709e6dcc1882c2eb325a018300022eea43fd0f1a378d8fd5dce9020bf3e"
+status = "residue"
+cause = "mir::Ty: std::iter::FilterMap<std::slice::IterMut<'_, std::option::Option<u32>>, for<'a> fn(&'a mut std::option::Option<u32>) -> std::option::Option<&'a mut u32> {std::option::Option::<u32>::as_mut}>"
+
+[[fn]]
+path = "sqlx-sqlite::opcode_to_type"
+kappa = "d798d24a45fa55f04dd50af5e9b58d53ee4fccd1ae61c46305ef054ef0a5f144"
+embedded = "d9af1bdbae68db1308807f98a7fcfd419d79dc856e10e286efaab41c60af69db"
+status = "residue"
+cause = "mir::Ty: type_info::DataType"
+
+[[fn]]
+path = "sqlx-sqlite::progress_callback"
+kappa = "904e37958fc72d72a9a2cd88e72a5dc4423372813b5533b5a9b89a519e372f85"
+embedded = "29b67d7665f934d7c0df544d5d3ff4049c7c59be40ce3f64703a0a14c25cdbf6"
+status = "residue"
+cause = "mir::AggregateKind::Closure: progress_callback::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut c_void>::cast"
+
+[[fn]]
+path = "sqlx-sqlite::rendezvous_oneshot::Receiver::recv"
+kappa = "91cd49b91da0fb8df6feb09ad1adba4187a6e932edfad94bc7cb954b2205218f"
+at = "T=u32"
+embedded = "7df475258a52a6d5640f1b90184ebd4c740a48c28a0597c6a2c887ff6c7358b9"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::rendezvous_oneshot::Receiver<u32>::recv()}"
+
+[[fn]]
+path = "sqlx-sqlite::rendezvous_oneshot::Sender::blocking_send"
+kappa = "d589771d148537c2674d038bf5a8f4090d969e8139582e7aefa0118567b9a25f"
+at = "T=u32"
+embedded = "769b7b631741b107b84f1c4aa5c0d8df64acdf9fe31f3652b55455b7b2de6ef8"
+status = "residue"
+cause = "mir::Ty: futures_channel::oneshot::Canceled"
+
+[[fn]]
+path = "sqlx-sqlite::rendezvous_oneshot::Sender::send"
+kappa = "5a6ec37146823196f761e1eb3aff9d86fc94f3ec9c06bdee9acedcf4b200ed0c"
+at = "T=u32"
+embedded = "c00afc56efec703a29e03165dc2268a06738499a00c6dfa72e109aa4d8aaed9b"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::rendezvous_oneshot::Sender<u32>::send()}"
+
+[[fn]]
+path = "sqlx-sqlite::rendezvous_oneshot::channel"
+kappa = "991916bf250a5f9134effcea33ce7a63b1f4aeef2433940a3d25f9e90b0cc72e"
+at = "T=u32"
+embedded = "b637f1e74dc50b99784a9591edb9ea6f5d30f7498c7d10881b11fceee5217efb"
+status = "residue"
+cause = "mir::Ty: connection::worker::rendezvous_oneshot::Sender<u32>"
+
+[[fn]]
+path = "sqlx-sqlite::rollback_hook"
+kappa = "f416f3c3dd6cf74e9b70c75e5ca8d0f53d76588407ecc179f6c2ad281840cb48"
+embedded = "af52a8f23c42310ca7297047c08384384acba0b02deb47f526557cd144770345"
+status = "residue"
+cause = "mir::AggregateKind::Closure: rollback_hook::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut c_void>::cast"
+
+[[fn]]
+path = "sqlx-sqlite::root_block_columns"
+kappa = "eb131b8b614a8fb2f70a54eff4195f24f128781ddc60b5a6b059c02e8b68d59c"
+embedded = "27639bd12cb87ac2f60472273e5cde7b21cdfad8510509b970239c4d48e7fc7d"
+status = "residue"
+cause = "mir::Ty: connection::explain::ColumnType"
+
+[[fn]]
+path = "sqlx-sqlite::update_cached_statements_size"
+kappa = "f56ec5354de29f309ec2217f81a54afd09c15b22babf9610527cdb33cb5d1fa3"
+embedded = "26bc89783139f292f15274ea72b76472c86d75b3a25cff572c85d8934d065da7"
+status = "residue"
+cause = "mir::Ty: ConnectionState"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::begin"
+kappa = "d4c742b35a6e044b7910d39e60b8835118c502a0416edd16895d5eea0ceb260b"
+embedded = "13cc4276dfa356ab89f2c3e88ca0060013357499b6cd07a05e8e4ddda7b25770"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::begin()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::clear_cache"
+kappa = "c48626a67c4b62247deee1395cfec99319480ed8be2de1e3d5396a2f8c47377c"
+embedded = "96d47d8b67e1b235db1011f697a01ec0fc3fa747c68de1698dd3bc70dba7dbe3"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::clear_cache()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::commit"
+kappa = "b7b8d92a274f1c94e648aacc83ece09528e082309d5e54ffe16cde99f8e93dc9"
+embedded = "328c700e63e488f123fdef64c36be069dbea3720436572d0f9367c5ef9671076"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::commit()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::establish"
+kappa = "79f217a33d537fc5a28c407b1ab651839cf10bf2361a73d4d18c0474c5e94bc9"
+embedded = "8f0dfcd767d9ef2131d128f0a5d0d0bf0bc8d3323cc3087d25e19272eea9f864"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::establish()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::execute"
+kappa = "670fcf115f4a6583e37ed91439cf68aba23e4c82762483a62bd4bbc91df71eb8"
+embedded = "a6286e19d769271d64f03d9138b3713332b0e8ab23c2eb5176834fb79c5c03a6"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::execute()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::oneshot_cmd"
+kappa = "10fe6610d0ff9231a422d0584b78bf8d4f94d283af17793b97a37bd93df37385"
+at = "F=u32, T=u32"
+embedded = "3e59886fe3b7bf0590aedac20ffc58f210e57bb99602b6ee0d12f419a1599895"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::oneshot_cmd<u32, u32>()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::oneshot_cmd_with_ack"
+kappa = "af3feb54e2c81cfe8518b00a2a31ef90a1eb7af943bdf602372711a963c94cd3"
+at = "F=u32, T=u32"
+embedded = "289bd4a2edc96eba67b06f36fc26b44cf4c15b012c52bb14232c15d404243bfa"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::oneshot_cmd_with_ack<u32, u32>()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::ping"
+kappa = "61f9f021ecb2c9666f14531a0b77770d9af975fcde9a6fb63f6af53a9def743c"
+embedded = "aa7ea83b921202ab20f8d71d3f3d46fdafb5fcad71667cc06a850ee809bed99e"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::ping()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::prepare"
+kappa = "0d58688baeedb7fe50ce7b8715851e4a7551cf6bbeecb3f618b00a0d7dcf1db2"
+embedded = "62125c5c7608051dfa1f0b4796194b05dba91cc57f8f55a4cea6be7a2099717e"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::prepare()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::rollback"
+kappa = "c70959fa88066de306458b906de006dc1b18ca5c1b20a52aa2668a145b2b38dd"
+embedded = "f61c053dc4b5a4e109bc6c3fe53fd704163d295a2ddc81be12985a98c58803c3"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::rollback()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::shutdown"
+kappa = "5f4c8787f8c24bcedb6ba1f68a511a571cff03840e0c5548222a411728da1fae"
+embedded = "69156ef422b22751a0de609984c090ffb49994d291e27092b656dc06da5504e1"
+status = "residue"
+cause = "mir::Ty: {async block@src/connection/worker.rs:533:9: 533:19}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::start_rollback"
+kappa = "88491e4fc3a88d9088fa18af4e4bffecdf4e1274fc6d09a699351e7762f469ea"
+embedded = "09d3fa36b4cbb6953837d3d704ad78924310b8e1303cc9da36edf6b98f7c2c72"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::worker::ConnectionWorker::unlock_db"
+kappa = "1364149f842ed8c07fd5ac914b2f00b316c5181c33d5c5d94df2ac267b2cfee1"
+embedded = "781d86827cb46c13b355ba070bd7d07863c1ae8e566f04e7a428bc809f1a1b18"
+status = "residue"
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::unlock_db()}"
+
+[[fn]]
+path = "sqlx-sqlite::worker::WorkerSharedState::get_cached_statements_size"
+kappa = "06d862b9aca69f4e57d65527dac2d306cbfc1e9dc253d94d1f45fb7b4563a88b"
+embedded = "a08f318352f93c2855c8ab3e440dff00472d648896c0426ea5ebeacbf28f2b30"
+status = "residue"
+cause = "mir::Ty: WorkerSharedState"
+
+[[fn]]
+path = "sqlx-sqlite::worker::WorkerSharedState::get_transaction_depth"
+kappa = "da74bc8e32830a6f9466b7c40e1c0a361c4df82b6aa320614ea949986838a8b4"
+embedded = "9cb2670225d630340345f57dd760272f05427bedf33cdcf0a96f69dc0d95de0b"
+status = "residue"
+cause = "mir::Ty: WorkerSharedState"
+
+[[fn]]
+path = "sqlx-sqlite::worker::prepare"
+kappa = "45d5484f73a38211355a9ff12725e217395a2fe43710b0d1c4643959aa9d9394"
+embedded = "58223cbafd424b1abb04abb95f83b39524c038b672c659b9303704d0be71e4b7"
+status = "residue"
+cause = "mir::Ty: statement::SqliteStatement"
+

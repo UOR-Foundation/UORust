@@ -1,0 +1,61 @@
+[[fn]]
+path = "owo-colors::styled_list::<impl at src/styled_list.rs:22:1: 22:34>::inner"
+kappa = "14549c573117c85fac2f7354e12d6b3b3438ca870b2934569c2df79257daa838"
+at = "T=u32"
+embedded = "b9d2e40f6489e4d1e1d1354f5ce9eaf4fc97070fc92e1126b6eaf5427c3cea32"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by IsStyled, which u32 does not implement in core"
+
+[[fn]]
+path = "owo-colors::styled_list::<impl at src/styled_list.rs:22:1: 22:34>::style"
+kappa = "6aaeaec7bc890e7588cc88c97f3929ca08ace4f358b0bba5263a6585c4f45a74"
+at = "T=u32"
+embedded = "76dc2962a1155ac421e67bc0ad7105d4577928d039264390149ee62fc3df1d05"
+status = "residue"
+cause = "mir::Ty: dyn_styles::Style"
+
+[[fn]]
+path = "owo-colors::styled_list::Style::transition_from"
+kappa = "5874057d4d086d403d97e8e42d2bc90022b98f2747fc867156b3a1f9ef3dd356"
+embedded = "8ac4acc2935c267ce622710cb2a68659f2a7840617a78ca13cb0119807ec79cc"
+status = "residue"
+cause = "mir::Ty: styled_list::Transition<'_>"
+
+[[fn]]
+path = "owo-colors::styled_list::Styled::inner"
+kappa = "d6da1eb8804fd46b01753871886d85d9924476dfdf8eff6933a8eaf3eb84d4f7"
+at = "T=u32"
+embedded = "03898d4c9f73a28a474ad9be79ad94e1300b2a7868a23a942df1318e01d43b31"
+status = "residue"
+cause = "mir::Ty: dyn_styles::Styled<u32>"
+
+[[fn]]
+path = "owo-colors::styled_list::Styled::style"
+kappa = "ea0578d203a79e8d5d561d9c3168c2296d9518df010f1fa822abf5f9197f92a7"
+embedded = "52cf61ac646b261515f576625a512404c95865979abc67efd4a31aff6938959c"
+status = "residue"
+cause = "mir::Ty: dyn_styles::Style"
+
+[[fn]]
+path = "owo-colors::styled_list::StyledList::fmt"
+kappa = "2e1e5da504bfe3410c0a1066a5cf1edb6363eda0774d14a8f690586ee64e02ef"
+at = "T=u32, U=u32"
+embedded = "b223c56f42cfd79c8ea893936180196687db8b52d377f54ae8d47ea0f94008d0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "owo-colors::styled_list::StyledList::from"
+kappa = "665631a3a4ceb0264a5e85dd3673b362c92e21391d07f56b9594f85796225d61"
+at = "T=u32, U=u32"
+embedded = "df83a6baec34bc3a5aee915bd5345caa357c4198e4a7028860594a3d29fe4e10"
+status = "residue"
+cause = "mir::Ty: styled_list::StyledList<u32, u32>"
+
+[[fn]]
+path = "owo-colors::styled_list::Transition::fmt"
+kappa = "0e5f599b783815046e49e031eb78cecbb5ccc26f94787ffdf014957a0fa58f24"
+embedded = "fb8dd26ad8abaef77c20e697605377ba3fa66beca73a62a3582fd72af3487c34"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+

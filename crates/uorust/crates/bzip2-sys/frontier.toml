@@ -1,0 +1,26 @@
+# The bzip2-sys register (written by `uorust crate bzip2-sys@0.1.13+1.0.8`; do not edit): every body of
+# bzip2-sys's MIR at bzip2-sys 0.1.13+1.0.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1
+translated = 0
+residue = 1
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 1
+embedded = 1
+evaluable = 1
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1

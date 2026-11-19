@@ -1,0 +1,73 @@
+[[fn]]
+path = "opentelemetry-http::<impl at src/lib.rs:156:10: 156:15>::fmt"
+kappa = "25994cc5344da90ef279d407b55cab640b204107903c64cf1c844cfcf1793f9b"
+embedded = "c8b42377792fd55aef44a1e12a6077fc0d94d3ee17ea9190c2e96ff85dd5b7c2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry-http::<impl at src/lib.rs:156:17: 156:24>::default"
+kappa = "0ae146cd39b1e33b70cfd174a8ea3c464b22f3ad09dd36813838cd3d987ee191"
+at = "ResponseBodyTooLarge=u32"
+embedded = "8cdbd13103b9b0cfe9a0afdf74383a752a5dbfd956fc8b1791218331db2216dd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <() as Default>::default"
+
+[[fn]]
+path = "opentelemetry-http::HeaderExtractor::get"
+kappa = "cbfb34c3b79ff2da21fc4f6a67ddca6bedb2332523aef03f3c2cc75b1684fe23"
+embedded = "06b52de49f1b982dc45f5923ea9f57c23eb37482149a9ed19977f4c925cb77dc"
+status = "residue"
+cause = "mir::Ty: HeaderExtractor<'_>"
+
+[[fn]]
+path = "opentelemetry-http::HeaderExtractor::get_all"
+kappa = "db06c4bd6b82101fdb2e979a21cc533b7a270542c70c9c27017a5b710136a322"
+embedded = "2cdcf60b489d25594a82079f31327d679c61d2745ad1fd19af810cfbeb777b85"
+status = "residue"
+cause = "mir::Ty: HeaderExtractor<'_>"
+
+[[fn]]
+path = "opentelemetry-http::HeaderExtractor::keys"
+kappa = "b751786db84248cfc518ffa9fb7610fbfabccccb25e0b49944bcfb1b7b658965"
+embedded = "eef68aa74f0c788cfc0ed12598d9469b5c7791d655226a868ac84879b0b4c790"
+status = "residue"
+cause = "mir::Ty: HeaderExtractor<'_>"
+
+[[fn]]
+path = "opentelemetry-http::HeaderInjector::reserve"
+kappa = "713dad99ab86ff2a7e944f3243bc96eeb27923381246dd0113cae884fd7141ae"
+embedded = "0f2f955b27b6e4a35e17f3f617df6a63d809c0d23c4997443f4646ce1b465693"
+status = "residue"
+cause = "mir::Ty: HeaderInjector<'_>"
+
+[[fn]]
+path = "opentelemetry-http::HeaderInjector::set"
+kappa = "537433ba0c080497c70a3861acd16df364b0b2b49b9c501f1978b04e1b358518"
+embedded = "9c8e9e10bc8ef385621f438337bd983f89388bad745a35994a7103f5e0c6008b"
+status = "residue"
+cause = "mir::Ty: HeaderInjector<'_>"
+
+[[fn]]
+path = "opentelemetry-http::Response::error_for_status"
+kappa = "580c3c342e2d11e63dc86732277dc88e30917b04f875ec5177179fb64467446e"
+at = "T=u32"
+embedded = "0bcee210c4673672adbe412346fe238da0847434074473e1c6e352748bab334b"
+status = "residue"
+cause = "mir::Ty: http::Response<u32>"
+
+[[fn]]
+path = "opentelemetry-http::ResponseBodyTooLarge::fmt"
+kappa = "c7f719a7d303861faf4b336041a57ec2bc661ba61d0e62f78cadbfe7ea72156e"
+embedded = "4bbdd97c98283cb330cb8cc81a7000a2b59e6102daced48bff1ec507f89e620f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry-http::ResponseBodyTooLarge::new"
+kappa = "d56eb56234bc5826baa95f98c5180adcfc4eacb663d85985186287e5722e07f7"
+at = "ResponseBodyTooLarge=u32"
+embedded = "85ae2fb1abb0ec7725f0a7b3c73ef72dca50efcdbb3c0aba7d06a09b77e405b3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+

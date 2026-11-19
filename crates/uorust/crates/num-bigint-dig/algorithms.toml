@@ -1,0 +1,241 @@
+[[fn]]
+path = "num-bigint-dig::add::__add2"
+kappa = "87f18ede8e59502753210131a526563bb4904058900696302bb26cdcb2c98fbf"
+embedded = "b517408b59a554e190fcac9af2cc589a553ebc5ee703f21bbe423164bc0cc8c8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u64]>::split_at_mut"
+
+[[fn]]
+path = "num-bigint-dig::add::adc"
+kappa = "5e0d96580f6f0335e55bcae9ee98987e48b0013ed1b865d0b87c6973f2fc660c"
+embedded = "8e6366e6f5c30241f9c4767e4aa9cd83e4ad65a059aae8f0f2c606a14e02c081"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::add::add2"
+kappa = "c3f139a33517bfa404985745f171c900c11946bf0a044cf10a04c6690e8ca53c"
+embedded = "6db5c46ab53b350c43603a15d659abf946c357cd9c0fb5d0b8ccab0612d40af2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: algorithms::add::__add2: num-bigint-dig's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [u64]>::split_at_mut"
+
+[[fn]]
+path = "num-bigint-dig::algorithms::cmp::cmp_slice"
+kappa = "87c2f607e0f7144669ff76d94cf3c978422267740be7c7cda581546665cb972e"
+embedded = "4530ed46fbe6910189c82673580432de9f986aca17e0a2b569b23f65325739fc"
+status = "residue"
+cause = "mir::Ty: core::iter::Rev<core::slice::Iter<'_, u64>>"
+
+[[fn]]
+path = "num-bigint-dig::algorithms::mod_inverse::mod_inverse"
+kappa = "fa2b5647de06073e7abf415eb0ab274bc662941e0eb081d8bc2ec1e38035b4af"
+embedded = "d2a84dcdc74a3cd69dd282bce8542bb2f88161f5271834aba94f65d0f3b1fed9"
+status = "residue"
+cause = "mir::Ty: bigint::BigInt"
+
+[[fn]]
+path = "num-bigint-dig::bits::fls"
+kappa = "0b922761402d2b201a78336d3ae4c391b39f808e77622f363507d4ced4ee1d42"
+at = "T=u32"
+embedded = "f5cbd7b0049ba49048dfbab03323f1cffdca95ac7457bade26567f093a138f96"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "num-bigint-dig::bits::idiv_ceil"
+kappa = "d2060c88de2f57fb2776228a7949ae853d081c9499261848d12943aed00e0abf"
+at = "T=u32"
+embedded = "b8fd5dbab9b57c336897f7b8cf9a18d5c0971693554b104c18681aad01dc823e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as Rem>::rem"
+
+[[fn]]
+path = "num-bigint-dig::bits::ilog2"
+kappa = "6675235f6b767fa1efad391b1ca6598f904b1d5843f96a71ca00089ca4ad2c97"
+at = "T=u32"
+embedded = "4211421bd7e6f984eaa5c72f0534f4ea8d9cfe23ef048d1bf5148a3b061159da"
+status = "residue"
+cause = "mir::TerminatorKind::Call: algorithms::bits::fls: num-bigint-dig's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "num-bigint-dig::div::div_rem"
+kappa = "91bf0beeeac0a1046ffecba61076d2454be48649561c4d48ede7f2afe2126bcd"
+embedded = "c62c90bf0b56cc3f10c901d65fa11ca7bed4795623f9038f35e812cb5bb8fd9c"
+status = "residue"
+cause = "mir::Ty: biguint::BigUint"
+
+[[fn]]
+path = "num-bigint-dig::div::div_rem_digit"
+kappa = "327058145d090d84290caac1426dfb8352b133c94731b6d7fbf9c3bcb3aa0d9d"
+embedded = "edadc88739a360cad9fc70ed8c26a7d2328670936ac2c0f8f852af8061df6ba9"
+status = "residue"
+cause = "mir::Ty: biguint::BigUint"
+
+[[fn]]
+path = "num-bigint-dig::div_wide"
+kappa = "ba2fd355a0c880826386c1f4011cd28ef345144b250b567725a46a6e8679a74d"
+embedded = "02272ee28471350ed47c630d548b9961c456f29f69c6635e42e524c6ca5de77b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: big_digit::to_doublebigdigit: num-bigint-dig's MIR stops at mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::euclid_udpate"
+kappa = "c18ebbba3364522ef94a6fed6bf83a3c0ef2bc1646713a15bb5ed0038e2c7ce2"
+embedded = "c414b5dcd28c272099345ca35fd88bcf4f47f15cd57994b9c1548a6ebf9e10f1"
+status = "residue"
+cause = "mir::Ty: BigInt"
+
+[[fn]]
+path = "num-bigint-dig::gcd::extended_gcd"
+kappa = "570ccdeb30d5e6ec45c84aba254478c1b744f15bc31fdceb7a615079308ca9ff"
+embedded = "4aceda1763d7a3ebf3bb9663acc309d4d65da6aa59bb5785876fc3436f6253d7"
+status = "residue"
+cause = "mir::Ty: bigint::BigInt"
+
+[[fn]]
+path = "num-bigint-dig::jacobi"
+kappa = "6ee55b14060b8d78117381ffb475e339407cc7754e35eb66806b7dd411c92cba"
+embedded = "2195c99ca7cfac30d288cb2aec892408c089e237086f9e93ecd9dbde88a6158b"
+status = "residue"
+cause = "mir::Ty: BigInt"
+
+[[fn]]
+path = "num-bigint-dig::karatsuba"
+kappa = "39bb66f569769ca735d8fb31e1732da5de6cb8cbdfd8cea782d0d2b7140e5a93"
+embedded = "c858ee6a4ba399b34ac52374c9695405cf7adaa8c75da71adf24c25927287955"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u64]>::split_at"
+
+[[fn]]
+path = "num-bigint-dig::lehmer_gcd"
+kappa = "9383ed58e59cc353db3276bc910690bb149ac889b934ef3030635b58aa3aa2f1"
+embedded = "1984a416af0d8cf59eb34431f12ba4ddcea8ae52a1f1f204beff7a92ef090ad3"
+status = "residue"
+cause = "mir::Ty: bigint::BigInt"
+
+[[fn]]
+path = "num-bigint-dig::lehmer_simulate"
+kappa = "907a23e1a246fae5fd8e2d2b5afde43632dd54186aea2d0764c9b9e7e351a55d"
+embedded = "6cc666fa7254b0acd7624d20e8d03dacbf0dbb9d1a47d98b97cf9de8928ac14c"
+status = "residue"
+cause = "mir::Ty: BigInt"
+
+[[fn]]
+path = "num-bigint-dig::lehmer_update"
+kappa = "43a77346fe1c9a03d9b2d71c874a0feff70d32b31f00300f2ec448424cee3feb"
+embedded = "0faea375bb349ec17afffa9b71c1d5068b200a32e6a467ffaea2b41b2dca77ce"
+status = "residue"
+cause = "mir::Ty: BigInt"
+
+[[fn]]
+path = "num-bigint-dig::long"
+kappa = "c54b356271904172d2d0298f8bf21cf0487d6eebfaeeed6caf57d1cb34c0860f"
+embedded = "2ced43650a0e7c9144942fcf7ebcfa8898eaa9f8df43ce3b9e0a2c4dfbccae7a"
+status = "residue"
+cause = "mir::Ty: core::iter::Enumerate<core::slice::Iter<'_, u64>>"
+
+[[fn]]
+path = "num-bigint-dig::mac::mac3"
+kappa = "2b642e85216790a2714a1a6ffa96931e0bac0ea77b9e1236a2f9f1386998e977"
+embedded = "3adfd5ff7dac5ae128f71170ab693d28ac6e5fdd1515b486abda5c5f98b210c3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: algorithms::mac::long: num-bigint-dig's MIR stops at type outside the lift: core::iter::Enumerate<core::slice::Iter<'_, u64>>"
+
+[[fn]]
+path = "num-bigint-dig::mac::mac_with_carry"
+kappa = "af5f6a5e489b0004dcee531bf908c524ebd8258c6140b4038dd73626f4af31f0"
+embedded = "176aa0fa5ce7e6f890e1de77406f0b37ee7c6c46d5b14499f5f326869cdfe34c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::mac_digit"
+kappa = "4fcb55f223c52e9c9f8e1556b79721a94457d5438c3ce95244466017023e6baa"
+embedded = "9c25f13604d405c62a956f3115d07c5de2d7d3a6b6e8b8c0c35dd0257c81a251"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u64]>::split_at_mut"
+
+[[fn]]
+path = "num-bigint-dig::mul::mul3"
+kappa = "098a1475c746fcd00b6475209692d237d1b04318ff48165a1778de8e319c2217"
+embedded = "4dc6d1549ae2c72f76bc46794cd25d0813a610343c1fd10c032b7609599d78bf"
+status = "residue"
+cause = "mir::Ty: biguint::BigUint"
+
+[[fn]]
+path = "num-bigint-dig::mul::scalar_mul"
+kappa = "641522c59ad7583c47b1dba8dacf6c3ac9209ad8d912ac1dc03984e278586ce0"
+embedded = "c1d5597293ac21c2bf51f07df5b420b56d9394dfa48e8ad17089ba45d028bfaa"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u64>"
+
+[[fn]]
+path = "num-bigint-dig::mul_with_carry"
+kappa = "c03e08dde424ff3ff5032a443df41cb7fe0c5854d462a48466b551ffcca80570"
+embedded = "5886a2d9e78847bc598e6a9ec4ed3e5044833554fe1e553ebeca23f7cc730651"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::sbb"
+kappa = "95af7f1d2b2a07bf471e6526eda031e09f6f354d3267da4929e279e843bfc1a8"
+embedded = "2cb8b1706b9c0bdf6acb8bbf98b15e5f8d24a435e80d2f201721b5faa6dc6eb4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::shl::biguint_shl"
+kappa = "f08af624537f3a54a7cc4d1091e06b31255ffda603b7ac8a4f6d3a2c769b1bd8"
+embedded = "ba2ecede142907d1ec8dfac7f353a9fab64b6a90d742a9339d1aa3f2fc40b6e5"
+status = "residue"
+cause = "mir::Ty: biguint::BigUint"
+
+[[fn]]
+path = "num-bigint-dig::shr::biguint_shr"
+kappa = "69a515334f7dde2fb4ffa51b2a8256ac10e18feb5b76317c59231b7862485578"
+embedded = "a32285ad9c63509c4725d48f43ce12638bcbc7d88de603fee73aa1ff900b7c20"
+status = "residue"
+cause = "mir::Ty: biguint::BigUint"
+
+[[fn]]
+path = "num-bigint-dig::sub::__sub2rev"
+kappa = "7a902521c70a390834b3d6e5b7dc4bfd918c8f625dbdc6449a3632627e366659"
+embedded = "348854fbc7baf4560f75658d26c030cc19d41661cd6cd92d7470789eb6377f23"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u64>"
+
+[[fn]]
+path = "num-bigint-dig::sub::sub2"
+kappa = "c7e552f1c0acdcf2c08a80a361a9cffc734c993ae123932720dffc67de272d34"
+embedded = "2667ad45cb3c8b8af2766ea85d166106d0e9a8a796edf96662f33ae95dde01c8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u64]>::split_at_mut"
+
+[[fn]]
+path = "num-bigint-dig::sub::sub2rev"
+kappa = "3ec87a2967b982332a6c840f2453e6f6cac36dc298f0b4b22202f1966b87162d"
+embedded = "166efb8e0a60c9fb2e28d4068c6ec1a0e5dac38a83cd9c827e92212514a2ad02"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u64]>::split_at"
+
+[[fn]]
+path = "num-bigint-dig::sub::sub_sign"
+kappa = "3a3400f95df63afda2257c609eea66d116dfdf6b95911f9117ee606049afadbf"
+embedded = "f6d399028bef0ed831cdb387331d5e1dcab65e840ce9cc48bb0b21c92f0ffb00"
+status = "residue"
+cause = "mir::Ty: bigint::Sign"
+
+[[fn]]
+path = "num-bigint-dig::toom3"
+kappa = "b43198e6183f5c337fbdef412676977d93f4cfd2c9c1ea3774fbf81fe8472e13"
+embedded = "989c237698bdfa607944f6545151bac68e5a580850b7e7c1f059667cc0d98207"
+status = "residue"
+cause = "mir::Ty: bigint::Sign"
+
+[[fn]]
+path = "num-bigint-dig::xgcd"
+kappa = "04bd64c1260ab10cc2d09931e647365e3c6bf704945b8ea7d942e60aabf12a07"
+embedded = "ac47187cc7645c99770dde00a9bc23e4ba312ec9bfe28dee863cf4471ee0d987"
+status = "residue"
+cause = "mir::Ty: bigint::BigInt"
+

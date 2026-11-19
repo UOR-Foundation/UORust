@@ -1,0 +1,44 @@
+[[fn]]
+path = "protobuf::decode_zig_zag_32"
+kappa = "f5d1aec83b1146ffd2a1d0851873af3e6849beb302e60bda0886fa7480ed705b"
+embedded = "8dc91414eb816a09f5a6cb216b7005d14516cc903d03fe0eab6766658ed049b6"
+status = "translated"
+digest = "52115dd7c70540dea1c7defcdb78ae2825628bd4f58980212b93b0615214c24c"
+
+[[fn]]
+path = "protobuf::decode_zig_zag_64"
+kappa = "760d4ac3629c21dd7dd40ea4b8bf810bc43c2fd7833e003901bcc0402bc85f30"
+embedded = "a4207416633113fba8cc004b1d7051b791bda30473cb9b1672c15c587802e3fe"
+status = "translated"
+digest = "9173a967675cbf56cd843b4967fabb35c94012dd36db861e2d1b93278ba9f7df"
+
+[[fn]]
+path = "protobuf::encode_zig_zag_32"
+kappa = "75863569f91e3e261f3a31c3f7e3eed47bdc165c0cf410d43e658ed0148cda1e"
+differential = 6
+embedded = "30066ad85383140d03c62b2c0dbb6ed49c52b297278d89b3e74ecd0ffb837936"
+status = "translated"
+digest = "2bd93ece39c443448cd7bc1328175c0b7eea2d9c99aab673fe448fecfed8e4c5"
+
+[[fn]]
+path = "protobuf::encode_zig_zag_64"
+kappa = "d6396a6c131f9248548f06f6d5513ff23ec0e030aeda76a511d0e56101d87eca"
+differential = 6
+embedded = "eb62d42c087dce65842e58f3227cc3f774923b50ec50e7679aee6f821d28c050"
+status = "translated"
+digest = "7e207d86b701c341c8b77e55e1a66fa0bafeed361a5042e37f31e8281fac9d74"
+
+[[fn]]
+path = "protobuf::zigzag::i32::len_varint_zigzag"
+kappa = "cbb6d8416a3d00d04670c56bc9a744b864b13438ea0fb7045a383cb67cf4b582"
+embedded = "c4d8afc12aa1795efa352574493dbe16ea0a6d7e54a9779a430d7146f647782e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::compute_raw_varint32_size: protobuf's MIR stops at mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "protobuf::zigzag::i64::len_varint_zigzag"
+kappa = "7507025f8e09de393ba62790e57d3696890ffc1f5f245afa975342e7fbc8aceb"
+embedded = "6c391629c83a6200ddbe8ab63a6d0b29a3d2329a1829a24425d72db2c641bf49"
+status = "residue"
+cause = "mir::TerminatorKind::Call: rt::compute_raw_varint64_size: protobuf's MIR stops at mir::TerminatorKind::Call: varint::encode::encoded_varint64_len: protobuf's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+

@@ -1,0 +1,31 @@
+[[fn]]
+path = "vsimd::i16x8_packus"
+kappa = "2902e3a3353d81d348e36b94d37068d9e8e938fb20a6aaedc8c64821cc66a007"
+embedded = "ecd559791096da42cf759369f9457b232007eb6511389b7ca8ab47265afe5f63"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::u16x8_shl"
+kappa = "45618f08156956743314dbf5f986c9a2bdc2e4069c5e99ea8f36074f0bcf374a"
+embedded = "ffc53e5a79767c32b23657a1d461ba70e616f1d8bf52f5902a8f94e22a12faa6"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::u16x8_shr"
+kappa = "1880551e3eef50a2024f3ca0ed6a67c85bf12945fb4dc7535751f1e2054c673d"
+embedded = "e6f82b408744ef7d9dba8ce389fb4969240255408f9750a366cd5965732a0285"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::u8x16_bitmask"
+kappa = "45d5bc77cc61f066ee6b95f49a01fba984d7e8e6b767cc67e710c64f14730be4"
+embedded = "e2d66608a778e0b483322d3970af9a1894d6eb9ee458a092a6af2237c89d6b98"
+status = "residue"
+cause = "mir::Ty: V128"
+

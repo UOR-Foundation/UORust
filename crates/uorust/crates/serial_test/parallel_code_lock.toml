@@ -1,0 +1,37 @@
+[[fn]]
+path = "serial_test::get_locks"
+kappa = "862fac5e4dc1e24af696d9a0b57f9f03e7ca3fe67a310769c62b8f4fcee44609"
+embedded = "32e7ced65ec614b42b3060618ded9e38e9961540720d47cd96eaff76d59d93f6"
+status = "residue"
+cause = "mir::Ty: code_lock::UniqueReentrantMutex"
+
+[[fn]]
+path = "serial_test::local_async_parallel_core"
+kappa = "c1234549c0ca4d3b5f6de9313e1e280b9b047fcc37b929c154445ec6780e1bcc"
+embedded = "26a40c5129e921a824b481e2fbda6e5549b94cf648f90357a5f104d9aa3821de"
+status = "residue"
+cause = "mir::Ty: {async fn body of parallel_code_lock::local_async_parallel_core<impl std::future::Future<Output = ()> + panic::UnwindSafe>()}"
+
+[[fn]]
+path = "serial_test::local_async_parallel_core_with_return"
+kappa = "f84003f426b112c783dd47a1384814e69e4a32e83fc476c1f26ac15748333bef"
+at = "E=u32"
+embedded = "ac7cf9944adae7f198f179391d1ba008fcf1bbf57dd8c15877d3b52671820437"
+status = "residue"
+cause = "mir::Ty: {async fn body of parallel_code_lock::local_async_parallel_core_with_return<u32, impl std::future::Future<Output = Result<(), u32>> + panic::UnwindSafe>()}"
+
+[[fn]]
+path = "serial_test::local_parallel_core"
+kappa = "74add9ae44bd64aa06c3fad36a7d3cc2453fab5cb85f25b3129cb8394eeda0f8"
+embedded = "df5677114cffb9124768831ebabb6007d68249e5b1fb97865b37abae7ad46d50"
+status = "residue"
+cause = "mir::Ty: fn()"
+
+[[fn]]
+path = "serial_test::local_parallel_core_with_return"
+kappa = "6e8da00fe0fe0546ce3e93c7b3464abd98e67286802cbc2cc7f69856ea499783"
+at = "E=u32"
+embedded = "25dffed223b2b547e7d7a08ca1c4fe3bcac3a12b38b9834f41903cb04d22b5a3"
+status = "residue"
+cause = "mir::Ty: fn() -> Result<(), u32>"
+

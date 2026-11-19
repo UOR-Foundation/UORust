@@ -1,0 +1,98 @@
+[[fn]]
+path = "iri-string::internal::IriSpec::is_nonascii_char_private"
+kappa = "07fd742c7ca4e54eb75dbd10bafb541064bcde5eaa9f80038f54e1bb5a278ef2"
+embedded = "37533eb709de88e3ec2795f88ed5bc3b37b7d37a145146bdad8a7420ae6183ce"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "iri-string::internal::IriSpec::is_nonascii_char_unreserved"
+kappa = "8f61b2631dcd8b423a56f4623598fc54f9362898992d8eeaed0c59861a1b51fc"
+embedded = "038e4726a8cde06277b0d1f63c1b7c519a00661707a5b9e20b204957723b6fa5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: parser::char::is_ucschar: iri-string's MIR stops at mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "iri-string::internal::UriSpec::is_nonascii_char_private"
+kappa = "6f22b5a9947e166a3ca2c877c689210988fca2842ee6a8cde1a62d4e8cdaefbb"
+embedded = "ee214d89cdae8a18462ffca5bd903374faf7664cad8d2476ec44285d1d7e87a2"
+status = "translated"
+digest = "62e7308a828e0583e1e400ea84f8866c647e03495ea5694b0b9db3abec70f6d5"
+
+[[fn]]
+path = "iri-string::internal::UriSpec::is_nonascii_char_unreserved"
+kappa = "ba4d375f376c2e16ccc3ef3e635fd831d28a964bdde9c958b20cb53ca27e614b"
+embedded = "90e48ffeef9fd657dc4b14f1a4df3347576b0baf362aea1b1e00496c6730728e"
+status = "translated"
+digest = "ccd837af7f8a2b85a02deea08037e346f2fcad6cbd6fecda321a14496a0fb130"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:21:10: 21:15>::fmt"
+kappa = "803c715d0b95c9fb5dfa83f3773de148b3b5b86a05dd9afca528d1aeaf13d094"
+embedded = "0669b869013e327412d41a016e31df653df19f9cf44ccd59e645e516d43ba7a2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:21:17: 21:22>::clone"
+kappa = "3d57af7d3fe41fa2de8c1dc7a493a5704638fd043696527216022a6bac94ed6e"
+embedded = "a43ba9743e032c1147c878268a97ab7a769714fc5c10dd471e4c651ae2f2a570"
+status = "residue"
+cause = "mir::Ty: spec::IriSpec"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:21:30: 21:39>::eq"
+kappa = "a2089bb61791ab10427927127083055f083f417595fb73919a0206602d37c2d5"
+embedded = "3b912c9c147c199900ccdbf2156d9e5a1486c970d8c5b57b58a10f6331c5d805"
+status = "residue"
+cause = "mir::Ty: IriSpec"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:21:41: 21:43>::assert_fields_are_eq"
+kappa = "29d0c77157a91d16ffbe88692f1837c429d36cb69b836a7c3356c7ab3e01ab5c"
+embedded = "c2db354c5b66a1498d2067f322740ae97027fd0ead515f75b914218f20623ba8"
+status = "residue"
+cause = "mir::Ty: IriSpec"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:21:45: 21:49>::hash"
+kappa = "5d4fe9c8398e1168c321df1113c68813330c226f177f4e30574e964424302217"
+embedded = "0f34217d916c959998e1ceb147dba3e3dc9dd2250c46bee053b1356692afe206"
+status = "residue"
+cause = "mir::Ty: IriSpec"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:31:10: 31:15>::fmt"
+kappa = "70949eb6312c9ad9b5970a39fa416398a51fab4eee1ca1c815906c40fbfe7064"
+embedded = "0963899bb9cda010848f0945e2c57f30d95701fa097a7cb080e96608a9cd8179"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:31:17: 31:22>::clone"
+kappa = "7705bbba701bddf34a95e3a2c9d9e6efed017b021fd1d3e27eea017ece702e0a"
+embedded = "f7a4448083c92b35a88ec4559710cfc419c643fb7eb2fe384b466401c09ec863"
+status = "residue"
+cause = "mir::Ty: spec::UriSpec"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:31:30: 31:39>::eq"
+kappa = "cc78f648415966bc5a112ab9d69b8204149b935bffa3cc26380c24483b12a761"
+embedded = "874fdcd00aff97287abf6b1b813c344317b3d31b7d2217aa20a49ea37b9ae2cd"
+status = "residue"
+cause = "mir::Ty: UriSpec"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:31:41: 31:43>::assert_fields_are_eq"
+kappa = "a0f12a05b7bcd8b3708accd21bf69bc37483aac1ec5698ef8176be3c7502d2c0"
+embedded = "744e2d8b14e7088aa4e72eb20b77fa2ca922d656775ce85ea7366fe85c100c04"
+status = "residue"
+cause = "mir::Ty: UriSpec"
+
+[[fn]]
+path = "iri-string::spec::<impl at src/spec.rs:31:45: 31:49>::hash"
+kappa = "e2323e5e23aecb17c9b6f0fa1c2821b41bc5e099c9884ae4e45b57d9d14c02a6"
+embedded = "fe7cd92c51b730af4a00043023bde4798c6f734c2b600182844a32c3ce508cc0"
+status = "residue"
+cause = "mir::Ty: UriSpec"
+

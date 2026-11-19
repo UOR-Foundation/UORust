@@ -1,0 +1,671 @@
+# The zlib-rs register (written by `uorust crate zlib-rs@0.6.8`; do not edit): every body of
+# zlib-rs's MIR at zlib-rs 0.6.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 562
+translated = 31
+residue = 531
+
+[module.adler32]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.allocate]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.c_api]
+bodies = 9
+translated = 1
+residue = 8
+
+[module.cpu_features]
+bodies = 9
+translated = 5
+residue = 4
+
+[module.crate]
+bodies = 27
+translated = 4
+residue = 23
+
+[module.crc32]
+bodies = 46
+translated = 1
+residue = 45
+
+[module.deflate]
+bodies = 237
+translated = 12
+residue = 225
+
+[module.inflate]
+bodies = 146
+translated = 8
+residue = 138
+
+[module.stable]
+bodies = 37
+translated = 0
+residue = 37
+
+[module.weak_slice]
+bodies = 15
+translated = 0
+residue = 15
+
+[embedding]
+bodies = 562
+embedded = 562
+evaluable = 562
+blocked = 0
+
+[differential]
+bodies = 3
+theorems = 18
+
+[[cause]]
+cause = "mir::Ty: deflate::State<'_>"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: DeflateStream<'_>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: BitReader<'_>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: BitWriter<'_>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: Writer<'_>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: InflateStream<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: inflate::State<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: inflate::window::Window<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: stable::Status"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: allocate::Allocator<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: deflate::BlockState"
+bodies = 8
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: pending::Pending<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DeflateConfig"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: InflateConfig"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u8>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SymBuf<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: WeakSliceMut<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: c_api::z_stream"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: deflate::Value"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: deflate::window::Window<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Accumulator"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Deflate"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Inflate"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Strategy"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: deflate::DeflateConfig"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: inflate::Flags"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cpu_features::is_enabled_avx2_and_bmi2: zlib-rs's MIR stops at mir::Operand::Constant: {alloc3490: &Atomic<u32>}"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: null_mut"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DeflateError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Heap"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: InflateError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: crc32::Crc32Fold"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: deflate::StaticTreeDesc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item adler32::BASE"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Crc32Fold"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Method"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: WeakArrayMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: __m256i"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: deflate::DeflateStream<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: deflate::Method"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: deflate::Status"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: deflate::Strategy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: inflate::InflateStream<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: inflate::writer::Writer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: z_stream"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item adler32::generic::UNROLL_MORE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item allocate::ALIGN"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ReturnCode::error_message_str_with_null: zlib-rs's MIR stops at mir::Rvalue::Discriminant: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: code"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: crc32::combine::multmodp: zlib-rs's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: deflate::slide_hash::generic_slide_hash_chain: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Code"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DataType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Flags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InflateTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReturnCode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crc32::pclmulqdq::Accumulator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deflate::Heap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deflate::hash_calc::HashCalcVariant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deflate::pending::Pending<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deflate::sym_buf::SymBuf<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: inflate::Codes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: inflate::InflateConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: inflate::Table"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: inflate::bitreader::BitReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stable::Deflate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stable::DeflateError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stable::InflateError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::slice::ChunksExact<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: weak_slice::WeakSliceMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: crc32_naive_inner::{closure#0}: mir::TerminatorKind::Call: core::num::to_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: adler32::adler32_combine::BASE: mir::Operand::Constant: the constant item adler32::BASE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: adler32::generic::adler32_len_64::N: mir::Operand::Constant: the constant item adler32::generic::UNROLL_MORE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: deflate::L_CODES: mir::Operand::Constant: the constant item deflate::LITERALS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: deflate::State::d_code::_VERIFY::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ENOUGH_LENS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::BitWriter::BIT_BUF_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::DEFLATE_HEADER_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::DEFLATE_QUICK_LIT_MAX_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::HASH_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::LITERALS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::MAX_MEM_LEVEL"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::STD_MAX_MATCH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::STD_MIN_MATCH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::ZLIB_WRAPLEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item deflate::hash_calc::RollHashCalc::hash_calc::HASH_SLIDE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc3490: &Atomic<u32>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc62: &[[u32; 256]; 1]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ReturnCode::try_from_c_int: zlib-rs's MIR stops at mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: crc32::braid::build_crc32_table: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: crc32::braid::crc32_braid: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: crc32::braid::get_crc_table: zlib-rs's MIR stops at mir::Operand::Constant: {alloc62: &[[u32; 256]; 1]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: crc32::combine::crc32_combine_gen: zlib-rs's MIR stops at mir::TerminatorKind::Call: crc32::combine::x2nmodp: zlib-rs's MIR stops at mir::TerminatorKind::Call: crc32::combine::multmodp: zlib-rs's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: crc32::combine::x2nmodp: zlib-rs's MIR stops at mir::TerminatorKind::Call: crc32::combine::multmodp: zlib-rs's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: crc32::crc32_braid: zlib-rs's MIR stops at mir::TerminatorKind::Call: crc32::braid::crc32_braid: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: deflate::compare256::first_chunk: zlib-rs's MIR stops at mir::Operand::Constant: the constant item 256"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: deflate::compare256::rust::compare256_rle: zlib-rs's MIR stops at mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: deflate::hash_calc::RollHashCalc::hash_calc: zlib-rs's MIR stops at mir::Operand::Constant: the constant item deflate::hash_calc::RollHashCalc::hash_calc::HASH_SLIDE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: deflate::hash_calc::StandardHashCalc::hash_calc: zlib-rs's MIR stops at mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::wrapping_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::is_null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::read"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::avx512f"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::pclmulqdq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std_detect::detect::arch::x86::__is_feature_detected::sse4_2"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: zfree_c::free"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeflateFlush"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InflateFlush"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TreeDesc<39>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: c_api::gz_header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deflate::BitWriter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deflate::DataType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deflate::DeflateAllocOffsets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deflate::TreeDesc<#_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deflate::TreeDesc<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deflate::algorithm::Config"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deflate::algorithm::medium::Match"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: gz_header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inflate::InflateAllocOffsets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inflate::Mode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inflate::inftrees::InflateTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: medium::Match"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stable::Inflate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Zip<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: weak_slice::WeakArrayMut<'_"
+bodies = 1

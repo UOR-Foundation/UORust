@@ -1,0 +1,107 @@
+[[fn]]
+path = "blake3::hash_derive_key_context"
+kappa = "d8d3a198099e827fe37b52731966c6ecc59f8153ac587bedea0c359803458ffe"
+at = "Hash=u32, Output=u32"
+embedded = "6e37a9503073b7dc89db05fdaa578bde2c2e7e22b25ab11057646da05f43ab34"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "blake3::hazmat::<impl at src/hazmat.rs:398:16: 398:21>::clone"
+kappa = "1bffdacfb0f0660e64abc45a25d64b9b14fc773e785bb1855bdcabb0bedc0fa8"
+embedded = "6dc4547a1aa4d7458069d13b1c91592c9edb0f692f76e4fb547f04c7509a951f"
+status = "residue"
+cause = "mir::Ty: hazmat::Mode<'_>"
+
+[[fn]]
+path = "blake3::hazmat::<impl at src/hazmat.rs:398:23: 398:28>::fmt"
+kappa = "a8c063b67800d08457d045bcb35d47373223f46517484afa492b1189aad492b3"
+embedded = "067829f01dc5c2a22b721cfda561bfcdc398c4b1ec6fc66a894fc7f81396a72c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "blake3::hazmat::Hasher::finalize_non_root"
+kappa = "fb226186758b4771a16811c2619b25d4150087b924884654afabc1d1b3616b9b"
+at = "Hasher=u32, Output=u32"
+embedded = "34d5f7a65312e0ab2186719740c794e12195ebe4ae3418dbe6aff40a31291de5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hasher::count: blake3's MIR stops at type outside the lift: ChunkState"
+
+[[fn]]
+path = "blake3::hazmat::Hasher::new_from_context_key"
+kappa = "61bc5a8e3927084f26aa762b7b47306d8f68678a7cc7ad215ed34f4cd9e42f77"
+at = "Hasher=u32"
+embedded = "e1aa897897ac5fb3190e774d38d0502662599ac36837d70f806dad1dfcec3224"
+status = "residue"
+cause = "mir::TerminatorKind::Call: platform::words_from_le_bytes_32: blake3's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "blake3::hazmat::Hasher::set_input_offset"
+kappa = "08be111124cb906507a157240289dc8a38b8f8f22600e1872978c3ba26fbdb5e"
+at = "Hasher=u32"
+embedded = "22cceb922e360e1d7da498c098a9bea33a8e51a355408af7a1f0265b190b2b7a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hasher::count: blake3's MIR stops at type outside the lift: ChunkState"
+
+[[fn]]
+path = "blake3::hazmat::Mode::flags_byte"
+kappa = "a847456573fd77f7dc4ea84c7d45096def60f6e23667b33a0acc7976997c1800"
+embedded = "eb02f1977cb510b1ed37eb262961b763743599aec91eee880bc18304ea02d87c"
+status = "residue"
+cause = "mir::Ty: Mode<'_>"
+
+[[fn]]
+path = "blake3::hazmat::Mode::key_words"
+kappa = "050ea53ae3824cba4c5209bf8714fc2794edd5b3370d0fbbee51a96910686de8"
+embedded = "5f5c83d1c6f715209f83337e303b905cb22ece4b91f58beaea4dbaa944e8e755"
+status = "residue"
+cause = "mir::Ty: Mode<'_>"
+
+[[fn]]
+path = "blake3::left_subtree_len"
+kappa = "440c521032e7322c0f919c86376591d4b7f8d971c257e7abd15bd6284e9861b9"
+differential = 6
+embedded = "5dc7d5071c8ccabaf65fe6cc4d8b9d449aa1f7b868bea04dc0db998ddeb626bf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::next_power_of_two"
+
+[[fn]]
+path = "blake3::max_subtree_len"
+kappa = "2a5c59748fce299daa95ac994e82d85e7b1489dff34dd3415378814252122878"
+embedded = "25132b7812b74738ccf81cc995f7e7677b7d1c7e81549b3a1008d218c7fb2a61"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item CHUNK_LEN"
+
+[[fn]]
+path = "blake3::merge_subtrees_inner"
+kappa = "b4e2fa0772849d929a26729daaa92c157d26c9214bff98acb0196d17265e1600"
+at = "Output=u32"
+embedded = "08be57515a06d8c72437f0d3809929d11ca1a40c5d38571b95ed66632a616315"
+status = "residue"
+cause = "mir::Ty: Mode<'_>"
+
+[[fn]]
+path = "blake3::merge_subtrees_non_root"
+kappa = "d050dee313ccfecdaf6c188152954915395eabfaf8e97b1a4f3fabeefac1c303"
+at = "Output=u32"
+embedded = "27367920da59211a8ac380ecefde73e2b19e250b0492420cbc61a3d24df35681"
+status = "residue"
+cause = "mir::Ty: Mode<'_>"
+
+[[fn]]
+path = "blake3::merge_subtrees_root"
+kappa = "c43bd32c6ff4d7629b3c22af15a2d0a15447f3ef307f657ca74910c78b689551"
+at = "Hash=u32, Output=u32"
+embedded = "13a177f48dbd44f52056526a328e91c7f65770395907fbf54fdeedb5475a4948"
+status = "residue"
+cause = "mir::Ty: Mode<'_>"
+
+[[fn]]
+path = "blake3::merge_subtrees_root_xof"
+kappa = "5df66664923a9de190c0e1517d7cd9ce54ce39a5f6073e1b7e55016ec0fcba30"
+at = "Output=u32, OutputReader=u32"
+embedded = "97ff117aab14f992ada3d100e095cb32ad31fc93b8e4b19f235446685867815d"
+status = "residue"
+cause = "mir::Ty: Mode<'_>"
+

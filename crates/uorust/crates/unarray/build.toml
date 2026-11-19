@@ -1,0 +1,24 @@
+[[fn]]
+path = "unarray::build_array"
+kappa = "486b29a63b356e8d5dc76fe2e3dba034962ae4684562fb1c44cb8766e4d2bde3"
+at = "F=u32, N=#_N, T=u32"
+embedded = "9895d02c4c6ad4f27f369a28a45be7a91cc5ba73e0f9398be917bcb26f6a7905"
+status = "residue"
+cause = "mir::TerminatorKind::Call: uninit_buf: unarray's MIR stops at mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "unarray::build_array_option"
+kappa = "fea61cf33f7050e1fa7151ea4d4eeebbb10f05f3847f5994b88c0b3aeb701551"
+at = "F=u32, N=#_N, T=u32"
+embedded = "60fc29f89cbd5f0382cfdc1e34cf6ea3d16f70c9b0b60732a8b03a9a6ddf5d29"
+status = "residue"
+cause = "mir::AggregateKind::Closure: build_array_option::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "unarray::build_array_result"
+kappa = "e39d2b6df136cc34605a4f3ffaa4d5ff16a92f0bab05fc143f3c4992b68a5330"
+at = "E=u32, F=u32, N=#_N, T=u32"
+embedded = "1c7ca90495f46f83e1153c3d2428c6d1878bc92be92a8a081e37335e7b01081e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: uninit_buf: unarray's MIR stops at mir::TerminatorKind::Call: MaybeUninit::uninit"
+

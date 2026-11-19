@@ -1,0 +1,59 @@
+# The document-features register (written by `uorust crate document-features@0.2.12`; do not edit): every body of
+# document-features's MIR at document-features 0.2.12, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 11
+translated = 0
+residue = 11
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 11
+translated = 0
+residue = 11
+
+[embedding]
+bodies = 11
+embedded = 11
+evaluable = 10
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Option as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Args"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 1

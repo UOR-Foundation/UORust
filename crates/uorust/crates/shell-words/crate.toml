@@ -1,0 +1,68 @@
+[[fn]]
+path = "shell-words::<impl at src/lib.rs:35:10: 35:15>::clone"
+kappa = "83c1d8572ba1609585f1d0a6b408efaee7f1c0f59d8a44cbac5c6aa47bd995f7"
+at = "ParseError=u32"
+embedded = "4d275f9ac099ab404e1ca0ed3c3735e8b42de7e6fdb1027d20c686e2988fdf07"
+status = "translated"
+digest = "53531168eb77a734338e2c107a5b5883bd61b9d65789eb7be45755307592df6b"
+
+[[fn]]
+path = "shell-words::<impl at src/lib.rs:35:23: 35:28>::fmt"
+kappa = "afd2f00ad844b5aebb4ffcc6a94dcb5e17c18db81893ddcd4f55fb2fcfe8d4c8"
+embedded = "96b49ff0184460a04d5ca3ceb99607b0aeb97a943879cad7f1b458a4e9456020"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "shell-words::<impl at src/lib.rs:35:30: 35:39>::eq"
+kappa = "7c37eea042694475a964a8db0a47823539d1ef468946f870bbc81c6dec5b067b"
+embedded = "2a161d4ba01e003e2a92e81b26581d0a7a185348cad71d42bea2dda3a38dd07f"
+status = "residue"
+cause = "mir::Ty: ParseError"
+
+[[fn]]
+path = "shell-words::<impl at src/lib.rs:35:41: 35:43>::assert_fields_are_eq"
+kappa = "2b97eca3bc7a82f8e10ddaa6e32ccb86d1b905b4c1be4ef0e6732cf28f065af2"
+embedded = "cef723261c1f47c13c2e5b92e6c8a0b4064f07f06464021d8d85dbd2fff55ce2"
+status = "residue"
+cause = "mir::Ty: ParseError"
+
+[[fn]]
+path = "shell-words::ParseError::fmt"
+kappa = "f55f2ef3ec96eb3eb1bf7df20632b41dcdcc69d27c114b1f70f3befb986684a2"
+embedded = "147f2402c6ee578c133fcf747605e6627dcba6425c52a458953f813129c09a8f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "shell-words::escape_style"
+kappa = "a6a7b7238519cda5a5735556a789713b27f11d854bac97fb0a358380fcdaa219"
+at = "EscapeStyle=u32"
+embedded = "0ca1d97c68358953f63b0e2a79a3cc70a4363dd1ce7595907947d132ec1aaca8"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "shell-words::join"
+kappa = "c3b9c98047a767651ed3e0e4fb9c49ce04deb7c7a9078bb7451fe5b466cc1ad1"
+at = "I=u32"
+embedded = "7f9ff8041562de9ab1f4bdd5102b4d61eb6407258ee24c405044eab4fead2758"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::new"
+
+[[fn]]
+path = "shell-words::quote"
+kappa = "dabeea5c93650b4b5a1a8ef1f4e643e3475e7fbe910b518e9ef0c21b0744f306"
+at = "EscapeStyle=u32"
+embedded = "9187319ebeb5a7241cf090a40894caaa8ad3add74014628c2fff55bf550a8ba7"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "shell-words::split"
+kappa = "c30a14bb8b991fd957776f9267ff8d933d7e006dc42a74cf542514bed091e688"
+at = "ParseError=u32, State=u32"
+embedded = "69bdaa71dc3130b3102b3a129e774b04a4a27f00c400e8bdb76c5548344a65da"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+

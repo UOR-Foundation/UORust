@@ -1,0 +1,36 @@
+[[fn]]
+path = "inotify::INOTIFY_EVENT_SIZE"
+kappa = "97f6e5b1015439cb6d3420b75bb4c64c87fca193af8d5a667a4d1835e8489ed2"
+embedded = "368599ee0e35096e174d219ab3f41a9e04ac9a5ce4312dc3e7620cee910376bc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "inotify::get_absolute_path_buffer_size"
+kappa = "11051c573ba323a4f67b698e9f3991113d4360feb9d23bfddebec57335ddd91e"
+embedded = "bf2f658cc1f7c163c47156122e15b28bda4c346962c00d038eca0c96dfaaf8c1"
+status = "residue"
+cause = "mir::Ty: Path"
+
+[[fn]]
+path = "inotify::get_buffer_size"
+kappa = "03db16cc6b5665f532ec2fe4ffe41676f5ead1cb97d02241b7a34d86e971c4d6"
+embedded = "6f1683fdaeddf2118737301e2f81a06aff1e26e47a9f13d49965a6fe5f996cbf"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "inotify::libc_convert"
+kappa = "ef0255eeebc41c24e1cc362f18a43adb46fbc15dc169a24b47d1361d10d7b6b9"
+at = "T=u32"
+embedded = "b0b633a1347c8a36e5db6352ee27d2747afb82189db2368f01bf60df1f986d4b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "inotify::read_into_buffer"
+kappa = "3ad451d7640a752f0c7b85622c8c15709e2c88584a5d4fd9a370d4be4f96863f"
+embedded = "027375fb459d3bfa5c9afa168648fff3d6be3d11c89236cfc20da4578ccd414f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bitflags::__private::core::slice::<impl [u8]>::as_mut_ptr"
+

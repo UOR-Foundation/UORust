@@ -1,0 +1,1693 @@
+[[fn]]
+path = "zlib-rs::BASE_DIST"
+kappa = "4067a29fa6777b8b88774cfbdbd10a8a4c19750d192591caf3af4afa3e10eb63"
+embedded = "14c714fb3e2166fe47c88dc5a60020421a1b04105c4891ae6082d5878d091070"
+status = "translated"
+digest = "ad330591a25fdf91e2aec5fcf4a4e30a97533991c832da4f63ed5b44a3228fef"
+
+[[fn]]
+path = "zlib-rs::BASE_LENGTH"
+kappa = "93a0e85c42f505f5a030692b9fece08fb424e2810c07ae76804dc4fc09ecbc26"
+embedded = "d574ed75c84b617b4f100a57ffb9cedb83c58860b271526300cda5da167885f7"
+status = "translated"
+digest = "8b4eea5f40df54707926cd1705a22208cdc7cfec99171b2422f752159d558512"
+
+[[fn]]
+path = "zlib-rs::DEFLATE_BLOCK_OVERHEAD"
+kappa = "16f1d16c904b3089cc2cf062fd59517d7e3be2920f447609b92d82e12c2f1f55"
+embedded = "77a6a06fbfd41ce9631d6f97cc6196e8ffe9ac880499b4379b4e2c57e8f3e214"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::DEFLATE_HEADER_BITS"
+
+[[fn]]
+path = "zlib-rs::DEF_MEM_LEVEL"
+kappa = "f6d38c9e803b64b91e6afcebab2f4e9d52e43c5aa51d1b2eada6d5bb1d86f3bb"
+embedded = "89b0921b1261a9fb19d5a1d2a4dca90c916a55029541e2f970a12c04b42174da"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::MAX_MEM_LEVEL"
+
+[[fn]]
+path = "zlib-rs::DIST_CODE"
+kappa = "4b6c9a2329b100142ede51152b79ac8c114a837ffa297672ad782875ac2e735c"
+embedded = "bf5cce498cfeb922e3c0d2b625c0f2c36c8ac91f900af5a6d2d7e29ca9697762"
+status = "translated"
+digest = "0e421960568139c180551fd8e8c68495a3b7be8985460e9eb8b54f422ad0a786"
+
+[[fn]]
+path = "zlib-rs::HEAP_SIZE"
+kappa = "7f28c4e37eaf26b9fd5d452309493c4993e3e4bd496f0720b7219526657b8989"
+embedded = "945a6e9b12c5936418471f5c37e68944b8aec1181663936bf55f2206043e5c72"
+status = "residue"
+cause = "mir::Operand::Constant: deflate::L_CODES: mir::Operand::Constant: the constant item deflate::LITERALS"
+
+[[fn]]
+path = "zlib-rs::LENGTH_CODE"
+kappa = "a1906364b817d811afd3f54ebbb17ba2da080aca0370d0d516275c80d96eb95e"
+embedded = "8781f27e456134c5e476c69fea5b179ca28c25bf00e1377291598fe679016d32"
+status = "translated"
+digest = "80729cc62499acc0ed0f81d43b7ede5e1981234f40deefc7a64bc2407604ce9c"
+
+[[fn]]
+path = "zlib-rs::L_CODES"
+kappa = "223b2d5281a573b89a61da6598e8bdc2dd0fdedc706b5824c0801bc43c50e206"
+embedded = "72cfedb57bc86ecf0a1d07f6819f64ee86c4d1ee959fc516d68b6bed0ead8c45"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::LITERALS"
+
+[[fn]]
+path = "zlib-rs::MIN_LOOKAHEAD"
+kappa = "262e50b672f3f9a3af49b2b58beae7e08e1ee63a5c6fc2654c8439c99e3af064"
+embedded = "aa3d87624664d53ed6913fe64a0451b9fd8db3d453356973b16651e155300f53"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::STD_MAX_MATCH"
+
+[[fn]]
+path = "zlib-rs::STATIC_DTREE"
+kappa = "eae1defa2ea487bac535991b277f24e8d0e310f76a436a60b0a9fcd032231a1b"
+embedded = "f0a343389129ac3fabe53aa3da94ed3da9ffaca2224cd67e0c2865fa5603265a"
+status = "residue"
+cause = "mir::Ty: deflate::Value"
+
+[[fn]]
+path = "zlib-rs::STATIC_LTREE"
+kappa = "b3fabafd1d2e287c0b7819d09ef5008128277d280d0e2e286cb8dc2868f74330"
+embedded = "2c860f558af2834ee1a5fdf0ab25e9fd886dc918c95c48b784fcfeb006c5ea4e"
+status = "residue"
+cause = "mir::Ty: deflate::Value"
+
+[[fn]]
+path = "zlib-rs::STATIC_LTREE_ENCODINGS"
+kappa = "3123f2d2913d2c6739d235d4c4e55280789fb6ecc6a7e130ec8421211584204c"
+embedded = "834bd368044ba23f12859c9323c78de1c6ad154cf6bc16b85e6ff093dcc02064"
+status = "residue"
+cause = "mir::Ty: deflate::Value"
+
+[[fn]]
+path = "zlib-rs::algorithm::Config::new"
+kappa = "d52a2d90a39df89f42ba7a1edb3c35f28624d291e41b055e972ba1a15f473dc7"
+at = "DeflateFlush=u32"
+embedded = "df6cd766535771bd730e5e56eb9758b9804168a318d4656abe2e5ee8e9f2b2c0"
+status = "residue"
+cause = "mir::Ty: deflate::algorithm::Config"
+
+[[fn]]
+path = "zlib-rs::break_matching"
+kappa = "fbc47c0e9c35ab6999925b25e22f4a7ff8a1f81faf0ff7925b6cc8a26cb51537"
+embedded = "17b7ca17b1eee4488df4413be706b9ed0d5a204c275396329522431e890fd569"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::build_bl_tree"
+kappa = "b6c50049d142d4db7ea6e4ffed5dc0e79cacf787ed4e9a190095dddf1d89bd73"
+embedded = "1262dc7c93406c22b5580931b29a114638a9bb99e825122fe862162b8cb79ae4"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::build_tree"
+kappa = "c2c5bb1e5a262fcceb18ceb7f67a6738a66013598dff5c4c9644979d99cc3307"
+at = "N=#_N"
+embedded = "5745b6cb9adee39d815e8fda0abff054c47d1603f36003ce0d3e24eae4005f1e"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zlib-rs::compare256::avx2::compare256"
+kappa = "2cb673731685e7416259260a9e7e419187299db4ad6fec1ee834e7adbf1cafa4"
+embedded = "568eb2d575abb7c33b7a3ee229817feca3121b6cf032b1008c6b413b1a0c4c23"
+status = "residue"
+cause = "mir::Ty: std::slice::ChunksExact<'_, u8>"
+
+[[fn]]
+path = "zlib-rs::compare256::compare256"
+kappa = "e140c6deec0ff586d165a000e5184b5c0fb3cf8d8aaf47047e0b29bb0b66396b"
+embedded = "02f91fc89d55a671797eefc316a44549e05da95f12c04a1f7ae49864a18640eb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: cpu_features::is_enabled_avx2_and_bmi2: zlib-rs's MIR stops at mir::Operand::Constant: {alloc3490: &Atomic<u32>}"
+
+[[fn]]
+path = "zlib-rs::compare256::rust::compare256"
+kappa = "c7863f7556372f8ddb5a555870e585f791403614ee3956ca922975ef32325fe9"
+embedded = "90c1f1c9080244608d312666e378bdd944eac288c2564e6f517d6256f8ddb6a1"
+status = "residue"
+cause = "mir::Ty: std::iter::Zip<std::slice::Iter<'_, u8>, std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "zlib-rs::compare256_rle"
+kappa = "ce8d21951743ef6974e95f72e034cd5e1ebcbf9905c1db3b2a6654d165ebf611"
+embedded = "eaeb6552e9309140fc62678597e1c2dd4812c44aae501e7dffd4e5879001c16f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::from_ne_bytes"
+
+[[fn]]
+path = "zlib-rs::compare256_rle_slice"
+kappa = "a464147edfb4fe769fa38028b71b4bcf68c09b05f92190d09cf0e6d59e211945"
+embedded = "23752729471db1c6d42ebc5ad40aeb69e2476a8202fee9c8ccf814e57c928d21"
+status = "residue"
+cause = "mir::TerminatorKind::Call: deflate::compare256::rust::compare256_rle: zlib-rs's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::from_ne_bytes"
+
+[[fn]]
+path = "zlib-rs::compare256_slice"
+kappa = "b4384c658d63b6de6f718363f28b856f786e13565ade5566c7fb695e13b57a48"
+embedded = "95a683934bf9b39f9ddbcac52277fcffb59d738fa0f39e695c97e23b883a2232"
+status = "residue"
+cause = "mir::TerminatorKind::Call: deflate::compare256::first_chunk: zlib-rs's MIR stops at mir::Operand::Constant: the constant item 256"
+
+[[fn]]
+path = "zlib-rs::compress"
+kappa = "5e22e220245ec4977e5d3a75ff8593b95b259a9c4763c48c3b48b3b272441fe2"
+at = "DeflateFlush=u32, ReturnCode=u32"
+embedded = "bc2cbd3fe7ba70de16aee7f886fdf31c72e69fdb10b197e791742874e259f265"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "zlib-rs::compress_bound"
+kappa = "acdfaa9f0727ebf72c2cbcc09e075d7c998330191de510be556c76f2fd8d0ba1"
+embedded = "8a04ee0263ed57e6dad0aa4428db104ed24eca7495ae77764023b889c43b85ae"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::ZLIB_WRAPLEN"
+
+[[fn]]
+path = "zlib-rs::compress_bound_help"
+kappa = "d66a5ea27680b8dd22908549cac996c8f044a53f94f7d5785545f804275f29bb"
+embedded = "6e74ba7d740cbe2c7c30b4ed735c77aea2bc88acaecea1b1d9098fc1fa17300c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_add"
+
+[[fn]]
+path = "zlib-rs::compress_slice"
+kappa = "1bc6ffb88a955f193303d3079d8d8a785b1cb2f45c4dfca007067673627091ce"
+at = "ReturnCode=u32"
+embedded = "1c870cee057b3d5cbce4464d10d6ea37c30bcaee4f6a8464db0c401483ab47ad"
+status = "residue"
+cause = "mir::Ty: DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::compress_slice_with_flush"
+kappa = "82e6e0b1f77f7b986dff6044245113de85727a5a8bfe2b7f890ca0ed111b29b3"
+at = "DeflateFlush=u32, ReturnCode=u32"
+embedded = "fd41ea152adae83d5acc191607b44b790b18bfa3d7b406400384633375bcf7c8"
+status = "residue"
+cause = "mir::Ty: DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::compress_with_flush"
+kappa = "a536564eda1a3e7f7e7ae4f811992b74f41627a0cf9d7e9559550f62963c8088"
+at = "C=u32, DeflateFlush=u32, ReturnCode=u32"
+embedded = "da9e53bd07bcc587fa989598a59a628bbc99f6d8b37499bd18fd70abe9d23751"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "zlib-rs::deflate"
+kappa = "39185e8451863dbc3fe8e8e2dcf0c806f98fbc9e2f3c96bf8c5266d95149c835"
+at = "DeflateFlush=u32, ReturnCode=u32"
+embedded = "007f4a3d660f1dece6c95ce65d552e3eb8c679f627ca9c0147c478dcd9893544"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1378:10: 1378:15>::fmt"
+kappa = "020a9a46a555c7e8a242f17b06e6efecabd83a6340a38126f77a74aa2f88281d"
+embedded = "38ed7f7d90b5212d337bb5228971470b41cfd4c6cd6f6e137f585f70c2bb16fb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1378:17: 1378:22>::clone"
+kappa = "50a2725d8e43ff3bb3edea07ef8b8f4b1a9dac5456b5c0623821188198e1536e"
+embedded = "d400ed0ed70c24ae7d13911ec14737c7c66b4de95cdb0989180fbeee48a8c8c6"
+status = "residue"
+cause = "mir::Ty: deflate::Strategy"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1378:30: 1378:39>::eq"
+kappa = "26e0ccac726b7de3d3a5834c74df5a56eb952078d896ae0863bfac77af7b3beb"
+embedded = "478f5667958f91cf2a61e1c9414f18357164651b0960cc6c07d5765324dae8bf"
+status = "residue"
+cause = "mir::Ty: Strategy"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1378:41: 1378:43>::assert_fields_are_eq"
+kappa = "36629073570b6b8be6843ed4ae47b1d8328aec5c61d1b6f41b0e9bf2f989b49b"
+embedded = "d26ba22c5b8f8124c6f1e7648c69563d3748c0ccbc4ac99aed614481112bedbc"
+status = "residue"
+cause = "mir::Ty: Strategy"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1378:45: 1378:49>::hash"
+kappa = "358ce7672e244a2c9e100e925d857089cfbbf2c99a240f3c14359e6ab96cbc7f"
+embedded = "11a45a1d2aa981cd02912c59140cfff0409bc1bf0629008fc342564b5e472957"
+status = "residue"
+cause = "mir::Ty: Strategy"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1378:51: 1378:61>::partial_cmp"
+kappa = "41d64e8a1b26514a59eefa8b70325bb9636d69365e8d7d32e4ee933d12147e70"
+embedded = "0e326d66b31e24c7b91ae9bd155a7e90221f3a434aba828783b08dd739ac8048"
+status = "residue"
+cause = "mir::Ty: Strategy"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1378:63: 1378:66>::cmp"
+kappa = "dcdeb762ca3f4ae1d86b63b6585d092b9c26a3b55504b47401639037a10e6943"
+embedded = "7b605153bdd3cfaf57535e682417cc47193805925af536bbacc997ece70df251"
+status = "residue"
+cause = "mir::Ty: Strategy"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1378:68: 1378:75>::default"
+kappa = "d0f30cce20bee3e2a423c22d3b170f41a932044bdf66a7560bfca5af2ea888fa"
+embedded = "ee4aed7e9899c3dea1ab4b83b8273ae4323745a0027cb77c5720b355a422deda"
+status = "residue"
+cause = "mir::Ty: deflate::Strategy"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1404:10: 1404:15>::fmt"
+kappa = "7f5956c74ea91a5f9d17ed0e73bd55750d1143340a98b2d7d3c37f038d6c32a6"
+embedded = "0ba1fecc4c4b15104277d677e9dc58ac5a9d2bcf7790f02ce993b7ff8ad9b179"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1404:17: 1404:26>::eq"
+kappa = "d353446e33dabac51b6684b530616ebbd3c83eca60957c77b3007b744a570ff1"
+embedded = "47978ae7fd5d1fd8cf1c83b48bcd29fdd052d410f031fce6242d6ed5d347a4bc"
+status = "residue"
+cause = "mir::Ty: DataType"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1404:28: 1404:30>::assert_fields_are_eq"
+kappa = "d502ab29b1c7519e8db3461e32ad3f9daa009d12c0c2cb318aeee688490eb42c"
+embedded = "026669eccc7b11a038306e51bb5881b9780ef6a8d509fdf7de420d0fa4cc4802"
+status = "residue"
+cause = "mir::Ty: DataType"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:153:10: 153:15>::fmt"
+kappa = "a59a26f71d951ec4f7e7b594d873e6da970abe09b2045692613841dce215eb23"
+embedded = "11c5742f03943bd0070c543abb80f02beb4b7bcc8f6859eb6cdf80bca4b40507"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:153:17: 153:22>::clone"
+kappa = "c9db04bece7874677347f26bddd4693b27f887d3b0afa72372e418a0bc4cdc70"
+embedded = "6ca53f895db236813ddd94e7d73d0e0271cf39fbc05de9bc95237e097805e01b"
+status = "residue"
+cause = "mir::Ty: deflate::Method"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:153:30: 153:39>::eq"
+kappa = "8c4755e52aa1b00cef3994e6cbfc2e7b20156bd986a42e5c90d79af4525cb735"
+embedded = "d0e2ff2388c93daffe33d48c2efd544155c8f3feb7fdfca87a0769c1ae796544"
+status = "residue"
+cause = "mir::Ty: Method"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:153:41: 153:43>::assert_fields_are_eq"
+kappa = "7ad3c52a2d06bf7021550a5b4c18590c729b28f4c435b8a8b55d5fe8d372b428"
+embedded = "db3367da5d7dbb3b1783c9989e5415bd7a7050d2d5b23f42fde88dbfed25a90c"
+status = "residue"
+cause = "mir::Ty: Method"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:153:45: 153:49>::hash"
+kappa = "c1ae2d0f6d7359f4b438049954ffef4e03e375a2905bd9c551c11586a96ff821"
+embedded = "d54d4a283800d9764464edba9924f363d6b914b45b5aeded861aa75323833c3c"
+status = "residue"
+cause = "mir::Ty: Method"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:153:51: 153:58>::default"
+kappa = "ab8eeea1bece70dd47364292a9ebfb935dfff540659cdf4518ed9b95a9ad9b15"
+embedded = "0c43f19c1007a60c091bea6e7839d080712114b294956cd5856410c366bef7b9"
+status = "residue"
+cause = "mir::Ty: deflate::Method"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1653:10: 1653:15>::fmt"
+kappa = "34687a4f3a5c9051178164ed1197cfb85921a25dc067304808734868aa0a4b7f"
+embedded = "3b3527a54368664706350f4b91b424e4f16602aa89ddb579265ae2c53e04b428"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1653:17: 1653:22>::clone"
+kappa = "855fa987cbde3d76c036b8b170882140ed7e567e28f534c3f16ac83af7518c47"
+embedded = "5e2a7409c7dcf0bea90f013282cc2a6fb486c51027fec0feb004db9a2ef8d377"
+status = "residue"
+cause = "mir::Ty: deflate::Status"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1653:30: 1653:39>::eq"
+kappa = "7ed7e1f0a10e435cdbb60308807377bb2b3bfedcc9658b3162ec14968864e2f1"
+embedded = "95606ff39c9e6ba19758c59fdea89ae4e1595b6bfb61c7cda00724ad83c73644"
+status = "residue"
+cause = "mir::Ty: deflate::Status"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1653:41: 1653:43>::assert_fields_are_eq"
+kappa = "1fc69b29e1320b133356ecfc85b8be8fb08d97a6be34a218fbb3045ef55bd41c"
+embedded = "a4aa63bd3cf72fe760185a21dd5b9ec42da8fb425484d402e522864ac778abbf"
+status = "residue"
+cause = "mir::Ty: deflate::Status"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1672:10: 1672:15>::fmt"
+kappa = "ea65a387b03a15a53e724d2544511cb46c214a5a997e0f4489ff9a0a1f5b450d"
+embedded = "ff2165b9581d209a96a065d30e28b70739600ae0f3d4a744ab9c7d06093674cc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:182:10: 182:15>::fmt"
+kappa = "79cd2bc83d2d81f2b99980b85196b72da62e1c6ba19b3d3c06fe0662de335121"
+embedded = "9fbe059f9a518c1bf5b2d5b301db507cd3afb8dc5b7c1619fa7e034ecbde1352"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:182:17: 182:22>::clone"
+kappa = "f2995a0a4a3daff0e7e8d5ce728e19400f1c9bc0969d79a2cdf93b6b5dbff3d8"
+embedded = "68ca69b44e62a1fa7b7a415cb9e918a768bbf06083910742fe96e1e2bfbd7632"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:182:30: 182:39>::eq"
+kappa = "761792638fc0a7cc74ba48c3171e7a95bc0937906e881deeae95be05c53dbfa5"
+embedded = "c46ba86cd1c11d32fd6a93873861a4e2bb1d9e89a1ceb29542567a2cdcbaec40"
+status = "residue"
+cause = "mir::Ty: DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:182:41: 182:43>::assert_fields_are_eq"
+kappa = "a3c046bcb24cb34443c45c50b8e74a2aed4fb0600e45330404c5f5951391f633"
+embedded = "45c6a51c069d78b9b96785aac8cea7cc6e45a5a1b1469c8d2d13524e29816fec"
+status = "residue"
+cause = "mir::Ty: DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:182:45: 182:49>::hash"
+kappa = "5fdc318755f0d55d4a4fedd798f51d6e2678dcac77acc441bf2ef8bd81559d8f"
+embedded = "ebfd64a65ef6bc8320942dbe777f0456840e1b56725b3565ccee7f1c6f3ca6a3"
+status = "residue"
+cause = "mir::Ty: DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:1930:10: 1930:15>::clone"
+kappa = "8c386b44736ba38a6302af51ea2cf8f3d7d9f752627a22ede8d220917faaacdf"
+at = "N=#_N"
+embedded = "93e24a6f10cb94ed3fe65b882837ea95857c7bd6de38adc8ea1f58e404a3a60e"
+status = "residue"
+cause = "mir::Ty: deflate::TreeDesc<#_N>"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:2997:10: 2997:15>::clone"
+kappa = "d52d9d6d39965297f684b4ab9f238b58e93b9b4dcd7646adbfaf27a39c81a523"
+embedded = "9293a56f0938204e9d75152e439d2a007f176b3c5f3ca944f4bf0bd7ac318f4b"
+status = "residue"
+cause = "mir::Ty: deflate::Heap"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:833:10: 833:15>::fmt"
+kappa = "54ed00b38890666faad454f09c8761712595150d43d73737cfd4da9ae786de37"
+embedded = "2551d8219fa7c95eae0608adb70cdcc4d536a98b7c4606c845a815f7bdbdd8c2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:833:17: 833:22>::clone"
+kappa = "c99910a13d7bb2ffd808f670894004c7ec85c18642a3f7afc272cc422c0d5965"
+embedded = "8534f44390eb4c1221db4ea178a15d5bfe5ee88982a993433874ea2c3c2b1acd"
+status = "residue"
+cause = "mir::Ty: deflate::Value"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:833:30: 833:39>::eq"
+kappa = "40a5016e120606d5f1fbf2d957dc5c659bbcbca0917ad223fa6f261bf618ea25"
+embedded = "2292b819966a1522ea1aaddbcc1ac22f6f1d9247c29d74a2400eec450d6c4770"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::<impl at src/deflate.rs:833:41: 833:43>::assert_fields_are_eq"
+kappa = "351f658ec09804150913865c32adcb14afbb7b154a5eff2282502f6ad75516be"
+embedded = "1816aee12639e1040fd2d071863e0fe674f9c67c4193e36d190f670e9be27d65"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::align"
+kappa = "a1afd8e79be379d493ce93e41bc029d6918d9fa2eb81f56aaf5316e88f24e712"
+embedded = "572dd51423f299e2724facbadaf35cdb168fbeb007bb698d50674d56a0e45438"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::cmpr_bits_add"
+kappa = "3507c4f586c4eb37ec65d92e784d75da65cfb1df6fa159d54589b6a8c20772fc"
+embedded = "fb6a8b98c5fab67b9ec379327bc74c2a1236f91da4e9a09e3319dc33ecafbfb4"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::cmpr_bits_align"
+kappa = "936dfbc9efde66869f05d35aa1dc88a2ea5fc75fa337b53e9b3b9dff7a7abcf8"
+embedded = "bae0d11bcaff4064bc832062ca88ef2fc94e50135f6880645181eaa4aa8fe395"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::compress_block_help"
+kappa = "2d51ba5998a0a03525fb4b3af2faa7eb9243c45bde78f89f913f8743955f7ef9"
+embedded = "63452bc5a6299b7c9bf85461cd94a6372c6fbf6072a44752236fdbf5a596431c"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::emit_align"
+kappa = "148ab58fd7fbd288e87a2ecb8cd037ab8732261516714de4ce0fc865396d21bf"
+embedded = "b0902a53a4c1423de800d20a061c0ed7b035836b25b0d8e8ada9f293e69c8602"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::emit_dist"
+kappa = "4c8826c0a96b5706062bde1a00c4165a3be57321cc28231e8cb75f5bfc055efd"
+embedded = "8d7d63436e09efed00cf385111df41c6108c00bc6f6ecfe0171126ab4ca59bd6"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::emit_dist_static"
+kappa = "d35ea5f2e3cc41b88b404ecccf0f88ca1631f46becb1b6384200fbd3788ea3e1"
+embedded = "fab7c56e90ecc3b92663a1d5a4de440cf47bc1c95e34531311dd76b0776c948b"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::emit_end_block"
+kappa = "303122b7f999f2cba593a3754905e4930a7b250ff2cc2b079fb88f8da0bac6a9"
+embedded = "de7b7c1639a3687318d24611e3d7fcbd9845472cc9e38471803eceb41fdac617"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::emit_end_block_and_align"
+kappa = "e74940bf5ca399d6f4e498d0a77b5ef4e201a4eca8c7cae6cd6a3f7aba27c062"
+embedded = "64d341aa15b293587ffa08eb69a5d455f8aaea33e858b560ead9b66ca9ee49e6"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::emit_lit"
+kappa = "6839264021bd3728133e7f7bfb2859c87e35ccc41da1f820f14b92747391dad5"
+embedded = "e9b91ba486511b28b91220c1d59faf12b6045966c94bc5656a6e6c188e8401ae"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::emit_tree"
+kappa = "cf294c396e1be575fa6ce2212ef9fef37152b3c4966c51bb00df64e1a55b9626"
+embedded = "485a4e1570904543f03112472a7a400184e83c32b26ca28de481799fd7acd121"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::flush_bits"
+kappa = "e5646e6d12a372c7d3a8bab3848845572025714c3a95ed00108842a6c996baf4"
+embedded = "1afcc00337b85aa11d27fcbb15d4a1bfd39ac494946a79c9cea116ce502b143e"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::from_pending"
+kappa = "ac51ef28b7546457e51dc1994bfcee8fe2173a6c4b7204bd9d5f71943eecea28"
+embedded = "71cb67badcde6dadc66084f3e4401942c81106fda1d39ebdba67f14f6ce41672"
+status = "residue"
+cause = "mir::Ty: deflate::BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::send_bits"
+kappa = "9500bf7bf5938a099cfe3c4b81d52e317cf491758947103a1f7b8f5b5a9cbe12"
+embedded = "ec9ffd60582d4948346c8d3e149e81cde6164f9c3d0cc1d9380fb98505b18e01"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::send_bits_overflow"
+kappa = "8df53bc9f82b2e339a827cb75e3b0507e5a384b3ee50df1acf41124a4740ceb5"
+embedded = "1d701dcab03dbc47629f49d930b1a47ac35a3d6a3b2d10529c66340bb7744972"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::send_bits_trace"
+kappa = "07801e6af2ef4bc5a675f006a6611d6d8e7d57229579b34d728d0134d5001ecb"
+embedded = "011de5ea18a5b838fd13a21f24200010b8726e7d4cbeaa651955f22d9949671d"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::send_code"
+kappa = "d0f9b621fc9e62371e7a6395f95ede5b2e9a3256beeae0671937babee7f54273"
+embedded = "916282ba22fe5a77d60bd9bd2e64fc42ec71fccc00a9ffcd4b4f265ea28ba154"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::send_tree"
+kappa = "c01178a3f61ec10fd7a644140c109d270c45addcb3e203f07fd7516bca1ea6ee"
+embedded = "b487c5971259dfb022522c825408f602d79c8d2a880c4e704959886df8c0d592"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::sent_bits_add"
+kappa = "0f8efdeee227973e1ede07a8808905406ab6ea41908e151ab456f5860a06e265"
+embedded = "7a8879befbdf784e671e423f998c5e80c0a0ca619a14f49716aaa56d0389bc3c"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::BitWriter::sent_bits_align"
+kappa = "4beb49c465288b44d70aace033ea1ee79c49a2d325a793deaae42be7961a6015"
+embedded = "9628dd48a37029aa0efd28e3d6000d2cdabbf6619decd2cba471d11ed4434bb5"
+status = "residue"
+cause = "mir::Ty: BitWriter<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateAllocOffsets::new"
+kappa = "2c3158e0d6dd0bfce9487279a554d28407f4c8386acc8d17d0dedb317cc0e584"
+embedded = "21579b2489e38d8a3ba24844f503484ab7e77fb570066cefac4d7029f5a701a5"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateAllocOffsets"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateConfig::best_compression"
+kappa = "3e88e2a89117a2dc8a1cb70749ef337f0123bed45a15c07a458da5b6ce75c341"
+embedded = "3885cef2eb8cff099e4fce34ffefa26de16a4af2f43b5938c13e3af1da300378"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateConfig::best_speed"
+kappa = "23780cf8f29c562daaac7a6a41ec2145bc1d35ad40d5b04099a217bbc44f65a4"
+embedded = "06ed19257d86ef7c078be5d1d515b22b9f1da4c18e1f4732c7247fc93ba0a939"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateConfig::default"
+kappa = "ef4ed29b5b2388e1e13981b2b84e21e25782e59e204bf2db79bec83007e3b427"
+embedded = "f5f932d644f9e5fb9c0fa6f1aa2f4690c66bad0b2d3d3f910db8c213b0eb2023"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateConfig::new"
+kappa = "0bd2a1ab299f509dc513f45000e0f022726aa40b1e047fb09c2856b78262c48c"
+embedded = "affd070761d7404a1db4291e9ac102d06df7aa9e826d12e4c13405d29a66e6f4"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateStream::_A"
+kappa = "ad8284b95f7573f99df8ed11dd117284e331689a1e67e7c3ad2f949e2cf3ff22"
+embedded = "b46e59b58bd0af08d8ec8addfccbf173c486e6712e0bc8896748bfbc5a16168d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateStream::_S"
+kappa = "ab3c4c47b2c33867af5df56a959d6928a370110a98c2b15f8a367296b8bcda59"
+embedded = "bbc630b756cae2c860f8fc1776251aa0cdf15771a17132e39d9085532c3c4588"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateStream::as_z_stream_mut"
+kappa = "5099e2d58f3ccf0a68e4bf5afcd8b324abf1f631466179114dabe2fa65f97331"
+embedded = "d09b51099548321264940b5173289bd0f867f85a87a59c695c8d50744764bdeb"
+status = "residue"
+cause = "mir::Ty: c_api::z_stream"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateStream::bits_used"
+kappa = "12ebe806aa4e382bc3c61c624081524e0ee5254236c212cabd36ab927780424f"
+embedded = "fa0335320ebc56abfba88c414c8802c401356507d0d56a8e78a0eb1b6b061fd7"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateStream::from_stream_mut"
+kappa = "3a87bb4385a7414709936d4f5aa2c6fe93aeb0f20e2c5f0c62a08907ba5d445a"
+at = "C=u32"
+embedded = "148b612d2fbe2a23117157ff94833475338641f2ca47613b930390179dc7fcdc"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateStream::from_stream_ref"
+kappa = "adf313bcd047ab044c8e9ed6735ac145b77cd61d74b6c68c885523244d2efa61"
+at = "C=u32"
+embedded = "0aedaa67fd27fa343760f9b495680451fae3193a990a9780fe2cf337d7883b65"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateStream::new"
+kappa = "6cbe9e35571a458a2821c9a25bf3bdfa818796240a5d75426f2a3325f69c644d"
+at = "ReturnCode=u32"
+embedded = "34b55436ea66be0b5cd86d84cec0df7a6c29e89e2bf8d4ce6051b50a2d28f5cd"
+status = "residue"
+cause = "mir::Ty: deflate::DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::DeflateStream::pending"
+kappa = "13652c9270415faa13edd5774059ea4a2e81de75edcb021c5f56c583e64613a0"
+embedded = "ddce94cd018cb7ff43ab8caffe673af3e46235f373555588c083c96f21e2ea17"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::Heap::construct_huffman_tree"
+kappa = "dd1baa9aa75cce7599447cd8f54497a8ebafe7046ef39a691a74c3291f92d8c7"
+embedded = "d282174f249f00b0619362a3fc20c59ab88796117e0e4e9d925be748b1975d5b"
+status = "residue"
+cause = "mir::Ty: Heap"
+
+[[fn]]
+path = "zlib-rs::deflate::Heap::initialize"
+kappa = "b0e388291ba7ecc5b417e32558a09ae46ac72e9e9201895ea64bd49a16916e21"
+embedded = "a39309bc43500bad8861481c8b1384e0b88795e7fa0c910349734fe01184abfd"
+status = "residue"
+cause = "mir::Ty: Heap"
+
+[[fn]]
+path = "zlib-rs::deflate::Heap::new"
+kappa = "2c08250e7969c882b226af11b9c792b207852b34b5a16584d58e8606a1a67bd9"
+embedded = "d0527d3c7d952a8e453dc6aa46f43eea80cf0174aea7e6b292ce233a1b691014"
+status = "residue"
+cause = "mir::Ty: deflate::Heap"
+
+[[fn]]
+path = "zlib-rs::deflate::Heap::pqdownheap"
+kappa = "e6012a61fd85c1a6935856eee5bccf532a1c29d15d1cad4eb48b9f738310c40a"
+embedded = "c9bfa75c7d53c8b81ca6f835c7f40383dbe957552ecd2592d29549c51a9eed5c"
+status = "residue"
+cause = "mir::Ty: Heap"
+
+[[fn]]
+path = "zlib-rs::deflate::Heap::pqremove"
+kappa = "9f6dbb715d9597dccf4bafe7ec5e4bfbd1d66d70633ea2523ec0d483b505ba4f"
+embedded = "dc170403e45229f19fbedc98a795831b51e3636d5d190c0be84e249f69ce4eb3"
+status = "residue"
+cause = "mir::Ty: Heap"
+
+[[fn]]
+path = "zlib-rs::deflate::Method::try_from"
+kappa = "716a39d50b77c08e9cfadd3051ce4eb84b0ce76ec4f0ed7080baef96e8146081"
+embedded = "3009e49007e677e4fd3bb93f92f13bf1c38295e9e1ea21cd29db3ec5528693b5"
+status = "residue"
+cause = "mir::Ty: deflate::Method"
+
+[[fn]]
+path = "zlib-rs::deflate::State::BIT_BUF_SIZE"
+kappa = "643a41ebef67567d3824a2fffc57b5b548518dc7b17c3291a5c0a4fdfd3fd19d"
+embedded = "ea8e64a095dd6e60deb17ed64c91178ac5bcdc3d1d3f1cbee7414f80be256abf"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::BitWriter::<'_>::BIT_BUF_SIZE"
+
+[[fn]]
+path = "zlib-rs::deflate::State::compress_block_dynamic_trees"
+kappa = "56090dd2a04c7f0c3af219ff379c2f5607a23c9dc3b624d96f897449ac462329"
+embedded = "5c7372d8c75beca7ff2092314c98211817501392fde54c99cdfb630e838acb05"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::compress_block_static_trees"
+kappa = "4072d590d5e6c84842378a20f6943b2a8e0e8302cc5a2a6b3b56b3c8e9c10477"
+embedded = "ceb2d5b34511d2a728acda401f95ab17b29a6706e416b138675e40539f7b4000"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::d_code"
+kappa = "c792f24f009614ad87a8a147933134e141bc6603bfa8b1e5139f70e25eabfc3a"
+embedded = "4ff4603c5ce5a6543a1c68b3874ba0de469dd342e5654dfee9e865e214d8846e"
+status = "translated"
+digest = "d3e682dce05bbd071e7bb17c7aa5aff8589ff0076a1b1a00634704a888341a37"
+
+[[fn]]
+path = "zlib-rs::deflate::State::d_code::_VERIFY"
+kappa = "bb0c4bc004a61526a2d34d2fea240916915ce6eb14a816782f357593b7d85464"
+embedded = "811efa034b777ff154c9dbcdd0317652878c538768d9d53a49f660e7dda5b56f"
+status = "residue"
+cause = "mir::Operand::Constant: deflate::State::<'a>::d_code::_VERIFY::promoted[0]"
+
+[[fn]]
+path = "zlib-rs::deflate::State::detect_data_type"
+kappa = "5bca335bdaf9d2a3f4d507f755f5176609ad15aeaab2db332b0d01d5bcff463d"
+embedded = "f64a02caa0472432efbeeeb8a4c57b3ec671b943829c726a089a8d2d198ee6f9"
+status = "residue"
+cause = "mir::Ty: deflate::DataType"
+
+[[fn]]
+path = "zlib-rs::deflate::State::header"
+kappa = "7614fd0c80e697e0f547b733ced35de66ce0d06247847ab54fc011b66aed86d3"
+embedded = "fb7023e03e6c29aaa28e20a35b3897bda0b5f7eca698b2f81dd491732f283049"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::init_block"
+kappa = "004b784ca01dbe34195313fc66cf5cbf6c89749a8cfcb13d2408ec0b1eaa2967"
+embedded = "f8ccad95db9c8ef0824d2eb7bfa6ad51fc9f79c75bd7d22484e5e2fe66f5ffd4"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::insert_string"
+kappa = "e10310168c320d3856d9420b058726255fab3b160bcfae0ed9a7a9f58a604e0c"
+embedded = "1ba8d80f3c46d55d0e012b9a26ba2158f025b7600acdc37a78a33de0adcc4814"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::level_flags"
+kappa = "82dc7aed6cbb8996060cdf6abfb425930d1809b9a7db17ed896088f69ba98b39"
+embedded = "da8d1a0eff7eb440c3347d678ba2e6b704aea8a64523317846d889eb212eaa60"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::max_dist"
+kappa = "5e794fdbfc1ea012be6eabb3c8912e65ddaad9b9036986f6cee20c2deca1af34"
+embedded = "7724e47f773a940e45a6dd7d13896c0bfe21a52cb9c763755b086005fae9f318"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::max_insert_length"
+kappa = "ba5f0c085c89c7d416a9674a72ff0524af9a341c86f1cfd0bae9cc255fdf7347"
+embedded = "4110fd163fab1b20bafa134e4351f386e2045ef29f0705bc026c1c648b58c05c"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::pending_buf_size"
+kappa = "eb86c367b6dfd165c309c9a0e27804a3f50d5929f582b64cde5dce4a1a4c1911"
+embedded = "e40b8c27cf986c8f819578a803cf3563d950cf32b7fdc7fd4be9f32b0eacbe1b"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::quick_insert_string"
+kappa = "fdd2b2419214434ac36e2fc71da222ea8de1db711285abb2556b27843aecbaff"
+embedded = "a65a72e73f23fd0a2b84795111cddd6ea418d69c1c797ee2afe722ac59430217"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::tally_dist"
+kappa = "fbbaf5e3f592122ae21044fdfd288f7ab8003fdcd1f9c7563fcf33c7fc106dc1"
+embedded = "e9b2c1aec2114297532240e9ea9336bcb315274c80b7ebcf3a7d007bdf3f618d"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::tally_lit"
+kappa = "6a85cc59d996022472f52b78173e8b3bca454d74cce924b338e7233d669ba5e6"
+embedded = "288b65ca3a90a459e94ef07177e79c7547f5ac025723a09775acfa6e676262f9"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::tally_lit_help"
+kappa = "6105b48e095d7b6142fccba06e680cd3b743206a6bbbfe6d54c5666ae500ff64"
+embedded = "6e8503a086e55e8ec247c3755deb872d44fade4af9a3cda0b6843beb658ec30f"
+status = "residue"
+cause = "mir::Ty: SymBuf<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::tally_lit_help::_VERIFY"
+kappa = "b78e1f2ea82e7cff8d1a96bec5a2ac8c4e8094a0fab3971413c180c91a637217"
+embedded = "64243ef4e859f825b1cb9e7885b68335af28b0c2c8fa7951630c482f65788015"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u8>::MAX"
+
+[[fn]]
+path = "zlib-rs::deflate::State::update_hash"
+kappa = "da20c0c4998a7c7d7bd85cd78599d63e3215807e4e76a10d6c4e99a27ebb6ccd"
+embedded = "f490746f24148d9dcc1f67cbf24e2fe3a35f6db0ba9199e5c9ed1220590cc933"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::w_bits"
+kappa = "6da763d2100c651f4271bedb88d9c6b0058ed073d77005b55ac8d56a95ab5344"
+embedded = "a91ab27790d996ef58ec04785ddfc2b4d3348aaf03e012b07307b4815cf14664"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::w_mask"
+kappa = "0c3b94f9eb75d576ed9db9c394332da068207a8de9a3baa384dc70646b55c565"
+embedded = "c2938b67488164ebbbe1e9d01eba6f81a8f03e6f9730a474fd2634274972872c"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::State::zng_tr_init"
+kappa = "b78d112c7d6366754d1573d1d85e32604a43ecef9592e796deda1824a38e3843"
+embedded = "7e69ca939a1bf157e109595432b52afc15d6fa9723976d53d2a65dd97dbeef2c"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::StaticTreeDesc::BL"
+kappa = "930a7cbaf627b9cdf47dd4c56ac7685ce296b77fc157b397984546142a634833"
+embedded = "444183f59425699c5e82dc705b77c37aa855a12df9187005550eb7dc56f9ad92"
+status = "residue"
+cause = "mir::Ty: deflate::StaticTreeDesc"
+
+[[fn]]
+path = "zlib-rs::deflate::StaticTreeDesc::BL_ORDER"
+kappa = "42e5348c37770960ae15537b67b96a88339cb5b63a22ded2a380620c8293cc96"
+embedded = "75aec00d892bc931e2184582ae7d43332dc4030cc30202eae951dad5506e3b0d"
+status = "translated"
+digest = "20a429417db01204436be05038b46aae10179900729f0408a2de504a4cd4de90"
+
+[[fn]]
+path = "zlib-rs::deflate::StaticTreeDesc::D"
+kappa = "ea020a5310acbcaa98431873188726259f350e9de9aa2d2ce0ec9af2eee08930"
+embedded = "f9bef1e2f1651f1918c3bece72f7978e8a07478a532f519042ca902bc76679d7"
+status = "residue"
+cause = "mir::Ty: deflate::StaticTreeDesc"
+
+[[fn]]
+path = "zlib-rs::deflate::StaticTreeDesc::EMPTY"
+kappa = "99ddad36f783466d767718cd55fdd8287fe25c515221a573a41b7986d2f29c43"
+embedded = "bc65f741e5d629d37a294f75b56b5982b7741c62c94819f00e16dafa99ceb639"
+status = "residue"
+cause = "mir::Ty: deflate::StaticTreeDesc"
+
+[[fn]]
+path = "zlib-rs::deflate::StaticTreeDesc::EXTRA_BLBITS"
+kappa = "dbe594aa4351ed47253f05ac3b06091287716408de5371c917461513b045fc1f"
+embedded = "07a9f8ff606e6c3c3ccc839627acde3e753fd968aa9a7cb8e1171fd83ddbb358"
+status = "translated"
+digest = "907bd105aa34d76b6d62cc44474cb3a90d524b091b86cc75134fa161e9642c1c"
+
+[[fn]]
+path = "zlib-rs::deflate::StaticTreeDesc::EXTRA_DBITS"
+kappa = "aad617f208f5a5636606fc1c97ad7bdf535403d68bdbed25cd15fd5a3cb73769"
+embedded = "f493ba13d3973f79a6448bd8cf43b6b92b7af7b4554e1d39e7bcd4ca4949eace"
+status = "translated"
+digest = "363f48e96a2ae213f521f18c51517f65392f02fccc85ad5d7d9f688d2b4ef894"
+
+[[fn]]
+path = "zlib-rs::deflate::StaticTreeDesc::EXTRA_LBITS"
+kappa = "6cf859f940f857c020b996c3b0eb8c49784a3f611e3d34802bff4ea2fb798fdd"
+embedded = "b91982481ff153869a9b432bb4f3d768cb912085e2b7472d39f7f28a3bcc53d3"
+status = "translated"
+digest = "340d61c55a278f11fbec1666743f60e9d93a1167f5acb2bd03eb0370cbd74ae8"
+
+[[fn]]
+path = "zlib-rs::deflate::StaticTreeDesc::L"
+kappa = "21cbb7507bffec56f2f02220c135bbe3d786aeb8731ed25c017ea8940a948609"
+embedded = "233d179d01fc136646223137c4cef7428c2bc461c56a612cc01388d00c9154dd"
+status = "residue"
+cause = "mir::Ty: deflate::StaticTreeDesc"
+
+[[fn]]
+path = "zlib-rs::deflate::Strategy::try_from"
+kappa = "9186e0285041c318bdb10515a95950a55c7840d1f74c02e7c6d6820f097d51f4"
+embedded = "c84dee8adb8901422da2133fd4210bff653e73d4b468f82a85f7e3e95ee682f2"
+status = "residue"
+cause = "mir::Ty: deflate::Strategy"
+
+[[fn]]
+path = "zlib-rs::deflate::TreeDesc::EMPTY"
+kappa = "a7f16975860caff322f22ae7fbf06fe057ac9e74cfa698807532399fb51b9686"
+at = "N=#usize_N"
+embedded = "08c8a0718c333a7c6532344116b140171d9a11685f2beb4e27d6fa564d54b819"
+status = "residue"
+cause = "mir::Ty: deflate::TreeDesc<#usize_N>"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::code"
+kappa = "878b6dfb0f8b3459db7e78450adf9313ce804efc2d6affa09b38cd9c16cf9ed1"
+embedded = "ec456258d1492b770b8e6f9f0904ec40ba92d517c13a3c4176c70e1eb99aaa3b"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::code_mut"
+kappa = "b27e9266eddb29a80acb99629cd121ce41b621a722cd78c18c8e37f818065b6b"
+embedded = "8ef09a7f49065935502ccb923d61a2f71a6e15d86b4d62b862953a24a0098278"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::dad"
+kappa = "458751e1592672a42723de4dd197a0f9e937dfc16cafaf366c198be96f12678e"
+embedded = "4351b87ccdf8f173d98399d16e2c4428111c3f83c391268bc8ee1123d7c4d09e"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::dad_mut"
+kappa = "c1982c78f6b0782e3a179db119e2e26b8d689b5b44a179d5ff135f4629d02860"
+embedded = "ee268e8aca6c18df0945d27961b3a509cc4d52696bf410b4ee5d50a8f97c1794"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::freq"
+kappa = "07c86329c1d0b8f9bf53f1ae9561b5bc5249756a47a0f41416818936eb9e6066"
+embedded = "439dff1c50bb1f035f7b6cdec86b47c5475ff925ff0e9f7763fbf2f968dc69a5"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::freq_mut"
+kappa = "7bd2748284e5bc872a45d783f62b8c94bc2664eb89482826b2e01e08cef716f0"
+embedded = "0218360c14402b95520e63b41de56e884e95272c7d133d92fb1021bf3aac7bf5"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::len"
+kappa = "ba41628bd366e51506ffb6b1a79ecb2bc188a6fc177feb845c9a2267652b494c"
+embedded = "f228655dbcb413910926cbfccf5d02a50bf05562c4490c2aa42f59b3d12e4779"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::len_mut"
+kappa = "1cd96384fe53f1b8695c4ed162cd96cdbc294e5ea855f2fc79ee9b88840352db"
+embedded = "b30d26bc92582f124e808b38326ae999b0bd111f2699cdac6634d4ce2875a2b1"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::deflate::Value::new"
+kappa = "f37d75e21e454e251c9abb4ec6d5269a45a9b5274436ae7a7c41b782d450c0cd"
+embedded = "97d22695489aceab755a0e95b2a7ceeab0b04385d441400772d34b3af881ab07"
+status = "residue"
+cause = "mir::Ty: deflate::Value"
+
+[[fn]]
+path = "zlib-rs::deflate::bound"
+kappa = "176ec731edff3db1ea4f2eb27e1e2316c9f66b5b6b9a6a541fdb0624debc41c0"
+embedded = "b199850e0088d9c3b7974d3666b3273e03993c362fa69a9ceabe39e2d172eadd"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::copy"
+kappa = "f00d6d0148ba06cf61aaad5564606696eed2b62cda28226dd99a310db50f80d7"
+at = "ReturnCode=u32"
+embedded = "b40e2be269aa13b7234373194aacf07ea3c7c9f05896b76d16904269c2da56e0"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::end"
+kappa = "06136814098a11dda7717db79f3be2f13621c10db08adc6bee935ac4232f0b98"
+embedded = "48f50b7ff4c65f7c07a9b83f4e21889629badea4a4d784870a1a4edaa43a8230"
+status = "residue"
+cause = "mir::Ty: c_api::z_stream"
+
+[[fn]]
+path = "zlib-rs::deflate::get_dictionary"
+kappa = "02eef004d389deb95997141c84bf0a48fbe2af841cc0a6b46c7fd701dedc688e"
+embedded = "661c2654301fa432073298f017d7200eb7cb917095aa67dfcf8c5bc31bfd7db2"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::init"
+kappa = "caba1b48b26b9ab75436988308e1b43018254a6edea0ff0b9caf4da08683e0b5"
+at = "C=u32, ReturnCode=u32"
+embedded = "6bb28765d8d2cac55ba746fad1c742dcaffb242e79f11a033ed70e845197e3a4"
+status = "residue"
+cause = "mir::Ty: DeflateConfig"
+
+[[fn]]
+path = "zlib-rs::deflate::prime"
+kappa = "efdc2c682cc5b2b95673f0f60700ac24d803390cf2eead9a21af60cd58227d1b"
+at = "ReturnCode=u32"
+embedded = "68f834e504525d9033a6c669cd4e0afc03551aad4815a0b200fe8be30afe279b"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::reset"
+kappa = "2eb3fff6a50b6fd70fd98276959da89614770c90d66dd797f11994eb9961dd59"
+at = "ReturnCode=u32"
+embedded = "705ac3b685bb6c8e0aee54b73eb891c67407805c1acb2456c7230232533cb4b6"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::reset_keep"
+kappa = "7c8e851c3f2f51a0c0d42b1f3974915cac109266d30517fdb869510f7ea09933"
+at = "ReturnCode=u32"
+embedded = "358fb093ff36bbc0414e3bd0db6ca65db49ab6113c81f4110a7c47016305563a"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::set_dictionary"
+kappa = "87322fec54b5adb0ad1f190b7b8bcc97f5f66da50127daea4efe3f8d3f9ca989"
+at = "ReturnCode=u32"
+embedded = "f302de837bba3972ba180922f0fa5cbe163d61c6f2f77e742266d5890a20b027"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::window::<impl at src/deflate/window.rs:3:10: 3:15>::fmt"
+kappa = "249cdb4d1009df059868b52a112f5f01eeb560e26a24d0cf171186cef0189181"
+embedded = "05eeb5f608ba0ac3380b8fa11cab02a228b99e4447457a5ca8c8a0a1140e520e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::deflate::window::Window::as_ptr"
+kappa = "f72671f7783a171269b3bb354618f52a23e01c86f1a2c97a1e4006206b4e54a7"
+embedded = "95099ed21d3e67ec4762c52178e7c29370c6e44fe2d8dbb627e394ffcfbee1be"
+status = "residue"
+cause = "mir::Ty: deflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::window::Window::capacity"
+kappa = "5f625c223ebc106777d1f0cadde997ac41b2e806bc7041bd925a8ca62b4d7842"
+embedded = "db8f3f8e89d8fe2f8119e4a7816e301c93064b16c6527f42c1ef57f05eb4437d"
+status = "residue"
+cause = "mir::Ty: deflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::window::Window::copy_and_initialize"
+kappa = "4d9d29916ee5a290189340d6daf9c35f1e16b9d186e56a79124186cbee56a458"
+embedded = "53bf6068140cc1e32676219ef1df4891f15c0d8300fdcca25213dd0210ae7ff9"
+status = "residue"
+cause = "mir::Ty: deflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::window::Window::filled"
+kappa = "58d8f68e6d979d967d923fa81bf1dc285909d00823b9c332bc0109da8669df37"
+embedded = "f5687acdfe51a69b85a1ba820199e83293e9b93c1700153f24ca3e599064c3ee"
+status = "residue"
+cause = "mir::Ty: deflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::window::Window::filled_mut"
+kappa = "5a2d95e437fddb0dc9574e780f5dfe07fa1b24e406e26a8840f51e1fabf781f1"
+embedded = "6c0412d33a2f36ebc289f31ff03b945efcf7fbb696ea4f2299e18312c170852b"
+status = "residue"
+cause = "mir::Ty: deflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate::window::Window::from_raw_parts"
+kappa = "7686155ce83f69528ad35abaa1bff593f913713edacfb649be5190aa3952a75b"
+embedded = "6575d4303f648e0a7eec07ec94bbadff99246a961dcf2b63f4c4960ca9ce5e4e"
+status = "residue"
+cause = "mir::Ty: deflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::deflate_fast"
+kappa = "02b389afdfe1cda103920cfe0f0ac7d4379331c3e4bf14dc15360a820df9999c"
+at = "DeflateFlush=u32"
+embedded = "f5ecc60e123584959c37518dc8c5e73b5362b8abb05e1c7d1a9965482dfc7671"
+status = "residue"
+cause = "mir::Ty: deflate::BlockState"
+
+[[fn]]
+path = "zlib-rs::deflate_huff"
+kappa = "7c7bf6182e3f4c811384945c63fe20590e9ab43068a257bed7465c6a83c4ebf9"
+at = "DeflateFlush=u32"
+embedded = "ab5058bab5b273e82a4cfafd247b1a165beb8e4be642ec5350c3b4d6181b6136"
+status = "residue"
+cause = "mir::Ty: deflate::BlockState"
+
+[[fn]]
+path = "zlib-rs::deflate_medium"
+kappa = "e69efa0f1e7f62e0b8176d5340bd733bab9fe3070947dca01acb05d64c842ce0"
+at = "DeflateFlush=u32"
+embedded = "e73329076c181d786ebf56430db03c8a56a4ccac54eb4c9cc8134b541f4e0c9e"
+status = "residue"
+cause = "mir::Ty: deflate::BlockState"
+
+[[fn]]
+path = "zlib-rs::deflate_quick"
+kappa = "5c3b78949882e4d92fbe089f8f3b8766cc33976e42f547eefdea4a08e2492995"
+embedded = "dcfb4250e5c443e8be25e2ebf6cc05df9c51845a30f9edfcb97d02d2597c9a0e"
+status = "residue"
+cause = "mir::Ty: deflate::BlockState"
+
+[[fn]]
+path = "zlib-rs::deflate_quick_overhead"
+kappa = "a5d187d5f66ad56a250524c5baaba3f9267de08d778b02fea270038dc1436741"
+embedded = "3d5aeabd8472e6e886d8e22d879b98107ee6b96d47df397f4655921e14074c89"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::DEFLATE_QUICK_LIT_MAX_BITS"
+
+[[fn]]
+path = "zlib-rs::deflate_rle"
+kappa = "edcfe0f1c7f3501079fb59431e48be62879f6eff51be479cdfa3d8dc5836d7de"
+at = "DeflateFlush=u32"
+embedded = "69f8988286f690fe2f08ca1f4ba8436b429aab19344d9d9e4bd347c359c49e1c"
+status = "residue"
+cause = "mir::Ty: deflate::BlockState"
+
+[[fn]]
+path = "zlib-rs::deflate_slow"
+kappa = "04b2aae390687f1a89b4f9870c8e3232e88cebc7ff14dc9faa1bfb698b43d3cb"
+at = "DeflateFlush=u32"
+embedded = "0defd6be907afd0c07490d58324b87442c791ae8bb9fe45cc577800604344262"
+status = "residue"
+cause = "mir::Ty: deflate::BlockState"
+
+[[fn]]
+path = "zlib-rs::deflate_stored"
+kappa = "f800801ac393058b3b719f7064b2baa6742703d1009e354e55c9cf5f267d3e2a"
+at = "DeflateFlush=u32"
+embedded = "d5158f0a709d3d627f71852565ae661f146a48f1bb8436cece1d59e8326b0ea6"
+status = "residue"
+cause = "mir::Ty: deflate::BlockState"
+
+[[fn]]
+path = "zlib-rs::emit_match"
+kappa = "96d5dc0865cc83ad477cff9138b2a2614b26763fb6d9ee5dfcd77a746840fdaa"
+embedded = "8c7ff0cc72442a8780d2d60b8f230f38212065720e2d2d525c49e1dc4e29375d"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::encode_dist"
+kappa = "3eadd36b1f35c3bf6b2a5cfec703c30b6bf2d918197c303553b41afc2f8875fa"
+embedded = "032a2628a38e4d06af63888dcf085e5468e14bf15ad0ec45b51bef12c9e66cc5"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::encode_len"
+kappa = "54175c1a8f8a65142df60d1d9ee32348be34db1dd75658177687a0a452636091"
+embedded = "7795600484fd789ff1428e05870804e6153edf7319fc93395b1c1a049030450f"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::fill_window"
+kappa = "c2f4f59381589d615b3247cbdd6280a8d0ff151b0b57ada64fb4ba9b33ad168e"
+embedded = "1763846f38172cb09b40ab2df6aeaf72df59acd402394ddd56c4a9e171b1e99d"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::first_chunk"
+kappa = "b6824179b2cdcc2e92c367c497c70e753b5983b845101e2f90eed3905a28470f"
+at = "N=#_N, T=u32"
+embedded = "816abb6d86a8f08a17434cfbaaf6e3b5723e600b09de0e6f63846d057e289827"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zlib-rs::fizzle_matches"
+kappa = "58546fd26609c07c4e3715a441491fd5424ced67f14f03f7554c7bdc0e3e4352"
+embedded = "3fcb820e9358387974fe027f483dd5b8d24ae305673e3829b99d92dcfdfef8d4"
+status = "residue"
+cause = "mir::Ty: medium::Match"
+
+[[fn]]
+path = "zlib-rs::flush_block_only"
+kappa = "ac764eb17d8b116afb1158668ff57b6a30215dabb13d7a480a56b2aeb611365c"
+embedded = "adc8cb47a03f0ad5c27ca0ba36e8a3f1f38454123a40cffe5c21bffad4290eb1"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::flush_bytes"
+kappa = "b58e28a6294d1c6f7b24af8f0424046513dd771cd50c74685328c7ed3fd5db16"
+at = "ReturnCode=u32"
+embedded = "3b83130a6e70d30a80618aabe5e6047e0db1e3c5108c7b02fc066e13d3b21dac"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::flush_pending"
+kappa = "a7b6750d7239938b54a2a314ca07e2cd6a96c7d72ba059c995bf0be89eefc451"
+embedded = "db1866c8c29fc381a68509d2ceb4d11a8453c29d5cc3218eaf58a6be6fa35196"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::gen_bitlen"
+kappa = "b5d640eed4673b084aac7d07256336c8bd94a2e711d842d10c1ddd2fcb934717"
+at = "N=#_N"
+embedded = "100bcfae424322a417ca82db5e9ef75b7563fc8df255ce32676b9e94f84d897a"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zlib-rs::gen_codes"
+kappa = "ca731eb79215fe24122b4728f5f79bcbd8464a00835fc8f1bfb52c6ef2187758"
+embedded = "271026620b71ea717f711a23e3b2cafd88f9caca228d6c7441b844e855c33616"
+status = "residue"
+cause = "mir::Ty: Value"
+
+[[fn]]
+path = "zlib-rs::generic_slide_hash_chain"
+kappa = "28be994d6234856f0cc60c7aa5b73124c2ce9f3b5e8376afa7d06da397d09b05"
+embedded = "bfaf0acf24fe7e85f23b9b8cafaea29aebfecbd4078a408870e69881431718cf"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zlib-rs::h"
+kappa = "454300a18c5bc5cbcdceb7a044ecf18ddacfa7f8fa5a7ab1320b190d581131e0"
+embedded = "af3a139d963ab4f591e405b00eb38b90c8198b89282839abf2da27ae4b6f9875"
+status = "residue"
+cause = "mir::Ty: deflate::Value"
+
+[[fn]]
+path = "zlib-rs::hash_calc::<impl at src/deflate/hash_calc.rs:5:10: 5:15>::fmt"
+kappa = "fca2ee4ed34fc8a72e9c99dae809a70f0bbafafcf86d6c287044bebd6136e97f"
+embedded = "7bfe90a21ac9e4b82f01f0d39aee130303311bec9beeb4dd9ebed17b6d43fbc2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::hash_calc::<impl at src/deflate/hash_calc.rs:5:17: 5:22>::clone"
+kappa = "f55ec96e4e23ebacc574712950b9c796d2b7f1a274e31b59969105103782074b"
+embedded = "0f25ca1c9fc494de001efe335cbc83aaa4f2dbc6fd922260bc247fb03dab3a24"
+status = "residue"
+cause = "mir::Ty: deflate::hash_calc::HashCalcVariant"
+
+[[fn]]
+path = "zlib-rs::hash_calc::HashCalcVariant::for_max_chain_length"
+kappa = "cd4c3e48e98efaef052bdf131cd42d3855ebb63f13b423de7bc601b8bb8e0375"
+embedded = "7c422d4a2d971999aa1f81ff311b8579cdffd3b0a41f1c3fa16c3eb36a00c56f"
+status = "residue"
+cause = "mir::Ty: deflate::hash_calc::HashCalcVariant"
+
+[[fn]]
+path = "zlib-rs::hash_calc::RollHashCalc::HASH_CALC_MASK"
+kappa = "48d31051b4a08df393d470d57200160e001a332940965f582e66897bedc0c98c"
+embedded = "3a72c6967d4b20c00ce9f41c32b6db1e908a2078b2ad6267b40d8836f8f20815"
+status = "translated"
+digest = "858ef1f38367610be449a7c8372eaa3dc2c8127eb87831ca6e3f1026fa82b6bf"
+
+[[fn]]
+path = "zlib-rs::hash_calc::RollHashCalc::HASH_CALC_OFFSET"
+kappa = "432089f5a918c967fe8bb388cf8b08afb9f7c49afbff9c1f353aaa8f332b2163"
+embedded = "4db4ac193df1bccf2e049d33115f922f50771c4134e63044c8955ef8dbe4e620"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::STD_MIN_MATCH"
+
+[[fn]]
+path = "zlib-rs::hash_calc::RollHashCalc::hash_calc"
+kappa = "b2622a187360a3e1ba18a9dea2a69031b42747f2d8b4c272d9c25864ce55acee"
+embedded = "49631c97c85f21cb4d5d8bf5e230f8b962a8a31b880ac82d88ae96ce1a0e2127"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::hash_calc::RollHashCalc::hash_calc::HASH_SLIDE"
+
+[[fn]]
+path = "zlib-rs::hash_calc::RollHashCalc::insert_string"
+kappa = "e7dce216bed43053e256ed8ce72a5895e5cde33ae858b4593dbe36497765cbb9"
+embedded = "11cdf40fb6029aa0c4110d6daf39c3ea8724fe2b19fa140d3eef432c1458978b"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::hash_calc::RollHashCalc::quick_insert_string"
+kappa = "cfb18a2bc3b50a0c806b4c813e4be7d705d26b5cfd59b364faa1c078f393bef5"
+embedded = "7ef7bdaccd38bfd736bdcc1e396a952453efc770c38e82d39c769e36cc8283c0"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::hash_calc::RollHashCalc::update_hash"
+kappa = "b0c62ea85ae1ed7570d2491815e1a80c79882ceb801855ea36a43f22c45e7a2f"
+embedded = "77d4cf9e99d65c53a991348f806808cd51976b03ed23b5b84ef6e28d48b1f26a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: deflate::hash_calc::RollHashCalc::hash_calc: zlib-rs's MIR stops at mir::Operand::Constant: the constant item deflate::hash_calc::RollHashCalc::hash_calc::HASH_SLIDE"
+
+[[fn]]
+path = "zlib-rs::hash_calc::StandardHashCalc::HASH_CALC_MASK"
+kappa = "a250e0f894b17ab80014c09648a2501fd87e91a47932470c2ca3a6635d626bd6"
+embedded = "c5618a8d4c551b3d8b6c3d2cecfd58c78a4bc3c8d470a475bf55f7094f009e5f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item deflate::HASH_SIZE"
+
+[[fn]]
+path = "zlib-rs::hash_calc::StandardHashCalc::hash_calc"
+kappa = "38aa8bb7bcc20f07963238efbeb941a95a556d714b4c1c50b072e0dff52f034d"
+embedded = "14ad8e9bd56cd11da39a6cc2385426f1ee72bcbef8cbdb5d82bad9aacef58895"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_mul"
+
+[[fn]]
+path = "zlib-rs::hash_calc::StandardHashCalc::insert_string"
+kappa = "99e5a3a996ccb7caaaaae5cd2ca9468beb2062ec74861830de00824a8bddf57d"
+embedded = "3f24331a421b99742a35f52eef79005c85b7ebdaf230666b93f24ecb0970f988"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::hash_calc::StandardHashCalc::quick_insert_string"
+kappa = "98d3a5d70fe8e246331cc11ec98bf462e0f755c16474e3087bf131bdc31b5853"
+embedded = "90dadd186271895a9594ad66b5253130e2306947678bf4e38e68cc2eac361a56"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::hash_calc::StandardHashCalc::quick_insert_value"
+kappa = "8c18e64b521a1ace8ce0ef1fa5221d8cab5f84cef5263cbf0236713bccb4d75c"
+embedded = "d29690b1e33108fa0c1721b57d086e311b3d1caef5aace19bfeddc77947c15ed"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::hash_calc::StandardHashCalc::update_hash"
+kappa = "2d23305b95ffe53b68c3d096e74169eb6e37fd51e70d5145a5d81b4fde0df7d6"
+embedded = "e3a8f4d8b82e364fe3f4a590ec7f271158fe83ca658f99051cfbc1c414b18559"
+status = "residue"
+cause = "mir::TerminatorKind::Call: deflate::hash_calc::StandardHashCalc::hash_calc: zlib-rs's MIR stops at mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_mul"
+
+[[fn]]
+path = "zlib-rs::insert_match"
+kappa = "9a3aec9266bc1dcae1b0e1f76561a92281485a993eaab5c8d398087085774db7"
+embedded = "4cc0aeb13347345b833c271df85a4d38cabcbb63297eaa1a82a9624d6e8d6a6f"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::is_match"
+kappa = "f50d9f7a535610aa434ad836939baa9efa697d17e0b96ffe3648a4169101a0ca"
+embedded = "bc6cf840772dbe93ed5f8f762fc3a04489395a9198cf4e3a147464c6e67ab07f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const u8>::wrapping_add"
+
+[[fn]]
+path = "zlib-rs::isgraph"
+kappa = "7905d3591cec1ab67ac4e86aec9cc83031c5ab1f228e9c4977d17d4603054a46"
+differential = 7
+embedded = "e418636c4c6ebc863159fc295edac28ae4e289ec9ddea769815eb527bc5a5936"
+status = "translated"
+digest = "7643626e150b37d2a74cdecad933bad42c09cf60f83b08150e80e978927e6a83"
+
+[[fn]]
+path = "zlib-rs::lm_init"
+kappa = "ce48db878e922b695926162106a0df6478d62dad468b05ea98810f21c6ebc228"
+embedded = "c6e0a960db735f66086a4aa2a812d4581e5bb17a35601b68049a90e090a4939b"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::lm_set_level"
+kappa = "c80568d53b4e65f9d490e08db1d23503858a01a10d08f4b9369e997948ccd55a"
+embedded = "db76611fe116e12d7e6418b845a89f4fbd8c4cac43fd979431465c783bda1dee"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::longest_match"
+kappa = "17ad4ba8e30cf99c335e42c0f55e17870ad8585e7b674fd9f0e632fef6985fbb"
+embedded = "18c4249f6185a09f74d88857a727e48d50022adf7f7158930064b8595e058875"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::longest_match_help"
+kappa = "f645d83afb68062aa6dfbf02c7904c3e556740ca02fb4993188127c0b386e3b5"
+embedded = "eae2671bdf86497abb64a1fe1f1061b0ea5b46926ab6048a6b92e06569ff7f5f"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::longest_match_slow"
+kappa = "e091bb4abf8867cf3c191d40e714ba1424a388e021ff3aeaab2b9496746bb167"
+embedded = "8b99f5524e0fbcfea926766d3b77233597295f2fbfcf5d1c7e25c25bd19f586a"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::medium::<impl at src/deflate/algorithm/medium.rs:181:10: 181:15>::fmt"
+kappa = "961bb342036b468742e5b07b213f856af426ddf0257dd51d4bfee75de75d6fe7"
+embedded = "940894cb73ef9bf0c90a5dc5836da3bdea6a6ce30a39196669cfcdd133070f6a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::medium::<impl at src/deflate/algorithm/medium.rs:181:17: 181:22>::clone"
+kappa = "57c40b52eb36e75b56ec850b3daee7705d587fcaace364d12718257786e360a9"
+embedded = "00a14479e28c45b828755787bf31c74c942f1165ac728c58fa8e3a01cff2ce10"
+status = "residue"
+cause = "mir::Ty: deflate::algorithm::medium::Match"
+
+[[fn]]
+path = "zlib-rs::memcmp_n_ptr"
+kappa = "88f121373f56171c3287791df6b433a8d4975e35a65d6e625926500e841ab2f7"
+at = "N=#_N"
+embedded = "211e32b01d67f58a706c502c7c90ec27698a090781e376170612ae64973a9097"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::read"
+
+[[fn]]
+path = "zlib-rs::params"
+kappa = "5e70fb82679f120c431b53e9bfc26a1b01ef96adbf689548e2815d60f1a162fc"
+at = "DeflateFlush=u32, ReturnCode=u32"
+embedded = "5ec4afb759e89960e325bf692aced97ee6c927522eea53abcdf78213f6b401a9"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::advance"
+kappa = "a6a6d25a6554e6a19f6c19077e318f6dc4d3bb76c58150ce6edd87325b69efc4"
+embedded = "1041258c05bb5eb3b95ea093d163019055e2e7d4cd0004cbc2c7cdfa8d251bcd"
+status = "residue"
+cause = "mir::Ty: pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::capacity"
+kappa = "1341481877c72acd1a72ee2d8f9a0bb1f9bd7da722e99d47312b7c2094011b62"
+embedded = "f2356ad16b9bbcd9f92e48d4ea96e32fb58e04397145ccc7c36c5a59824107c9"
+status = "residue"
+cause = "mir::Ty: pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::clone_to"
+kappa = "03efcbf0dd04d4ba225a2775578378c52b976e8ebad52f7cc1792db5a140af4b"
+embedded = "af2cb7912c3dc45a3d92bd9bc0eaae8aac859e03c5fcb74616596215346a34d4"
+status = "residue"
+cause = "mir::Ty: deflate::pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::extend"
+kappa = "f4af8a0b00f203214386f2bc53bd2254270a311e240c45e6bed4241051aeeba5"
+embedded = "26560de376d6ea78568d7db503f31e6efe524ca09d738e5594633e7ddc59d8b1"
+status = "residue"
+cause = "mir::Ty: pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::from_raw_parts"
+kappa = "065ef1d24deeefddfc2b916989c73294d5eecac81fcdf5c71f8deceb3f73a30e"
+embedded = "fc70e7e360ae280cc80bb39f1237f0ef16eb7bf1743c887656d9d313c19bce0d"
+status = "residue"
+cause = "mir::Ty: deflate::pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::pending"
+kappa = "7d1fdbf2aff501eb77781f8180d45524fb00ea47caccdd90577ab40d454c8197"
+embedded = "9e57e593983a7b5582cde2f408f0690035755946bfe69d84e816474013cc903d"
+status = "residue"
+cause = "mir::Ty: pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::remaining"
+kappa = "f6df6739260a107f66f0cd132e23e71d2256d4ff0b1bdf3aa87c8ddea30b621a"
+embedded = "c816a24c5d9160a38444b61f43c4a034dc116d487e343c38c41d97c36e0821dd"
+status = "residue"
+cause = "mir::Ty: pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::reset_keep"
+kappa = "9da64121c1e1d2429a8110d7bd2845ce37a4ce21f22b37687ca528131028d852"
+embedded = "7539d66e8a186fcd8ea46a0fac493728b8533c073cbbd9beeace087f44775e1b"
+status = "residue"
+cause = "mir::Ty: pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::pending::Pending::rewind"
+kappa = "d04017a7a26b4aaa2b12813aa4ea8e11051daca703800f1e706de32484c17c4e"
+embedded = "60a601e4a684fe78b6ba82bd9d250abeac9ea726644e4f7bd58fea6f4fa4bb89"
+status = "residue"
+cause = "mir::Ty: pending::Pending<'_>"
+
+[[fn]]
+path = "zlib-rs::rank_flush"
+kappa = "1bb866107a624b9d3ded1ca2cbb6d2551b51250e68e8a04700f3a341f73ce09d"
+differential = 4
+embedded = "35b6ecedb572bfeb6cbb7f0e3f847feaee6dcf1b64f8638669631ef5619f7b3e"
+status = "translated"
+digest = "49e5631aa0a2a280649fedc272f5819410c09b9eb31aef83b31871bbbacc1159"
+
+[[fn]]
+path = "zlib-rs::read_buf_direct_copy"
+kappa = "e533ad20a3c582d38683224e2add315aaf7e939ab27229b061a77ba6156879ce"
+embedded = "098e4e82a3bad7ebf99a0a00b9ed994a0a2476f7ee873dcb8c48ea3cd0be22ef"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::read_buf_window"
+kappa = "c616d8a5276a5eb323167860d86974dfdba39707da605aaddfa80784c39569a0"
+embedded = "9f202149cd18fe5f3cc8b2809238ea39e15d5128971ba5a227b603b51f0f4212"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::run"
+kappa = "f5a43d225f875c6a0b6ce9858593c0f94d31614752dd1d82fce9c5eb5baeb5ff"
+at = "DeflateFlush=u32"
+embedded = "b4698788e2449a79021875c01c2568da417eb1d87789a1125174644f61de3f1a"
+status = "residue"
+cause = "mir::Ty: deflate::BlockState"
+
+[[fn]]
+path = "zlib-rs::scan_tree"
+kappa = "3989197e4873a4110fdb89785db9a250c7a5c8fa2eb41ef50abed79db17d5068"
+embedded = "043dffd34fc06f1a1fcf51aecb3aee2449a803bce7284bff0681e70871da8766"
+status = "residue"
+cause = "mir::Ty: TreeDesc<39>"
+
+[[fn]]
+path = "zlib-rs::send_all_trees"
+kappa = "83e96b637435834bfd4b15439597c80c6822cede2abe3de3b8976577c6d1a8d2"
+embedded = "a502043e1ffc3a298927bd3e2475cd861d0865432a7cba88ea69509f67f7590a"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::set_header"
+kappa = "a8f340ad6d72e38d0b22151d87f0442c44d593b8f47363205b609b0e7868cb4c"
+at = "ReturnCode=u32"
+embedded = "a88448806a883955fef2ea3b112dc4d38098e2f90297790e2be948ddd47e0311"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::slide_hash"
+kappa = "71392fb6ea4c651bbcd01dad7313e9e95ef72063dcbb3eb9afff325fd6f6cd4c"
+embedded = "1e2c77e92f63cd916e1fc68dfd9e164d7775db2e92e0cb416f15512da27b20d7"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::slide_hash::avx2::slide_hash_chain"
+kappa = "94dc7bf54303303a8c37e2f3595c3de4905a41e4dba714e7237f1c0c54328880"
+embedded = "dae0f4e3618d7c7a7f47423c392b02f0446fe7d94887e426a4800abbe7e1fda3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: deflate::slide_hash::generic_slide_hash_chain: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zlib-rs::slide_hash::rust::slide_hash_chain"
+kappa = "450d1a4736650924cd811f170c80e41b66294d5f32d725b6ee5f65097954a539"
+embedded = "cd5926ef4c0e0aded3d366db3a2c05306ea52d1ee804d3f3b86d47c02f12cc5a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: deflate::slide_hash::generic_slide_hash_chain: zlib-rs's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zlib-rs::slide_hash::slide_hash_chain"
+kappa = "ab18f9e430f70bbfe5df4f1dffecc2a12ee41f77c45b4e7432fb3fc3c5781980"
+embedded = "116906307222139a42aafd96786ce2704fd612a5ec131a39fe1d7267feb5b8ea"
+status = "residue"
+cause = "mir::TerminatorKind::Call: cpu_features::is_enabled_avx2_and_bmi2: zlib-rs's MIR stops at mir::Operand::Constant: {alloc3490: &Atomic<u32>}"
+
+[[fn]]
+path = "zlib-rs::sym_buf::SymBuf::clear"
+kappa = "049778db7c3a77c24c45fb8173441162fe47c46f017a954b5a3d0e72d8c6cc2c"
+embedded = "984c201be789fcc91ba65f3f7d89737ab12cb77ece57569121de326916143ee6"
+status = "residue"
+cause = "mir::Ty: SymBuf<'_>"
+
+[[fn]]
+path = "zlib-rs::sym_buf::SymBuf::clone_to"
+kappa = "f4931894516d965bd318a32deb9dcb001db4210479eac9dcbbc868ea56fb4985"
+embedded = "f4d5718779e7d0ab906e113170d175b816d8e99fa6e293b4ad492e960b135faa"
+status = "residue"
+cause = "mir::Ty: deflate::sym_buf::SymBuf<'_>"
+
+[[fn]]
+path = "zlib-rs::sym_buf::SymBuf::from_raw_parts"
+kappa = "7d138dfc1f7ce8568f98ba5e57616f9f795c3bb5f9356a59425775e416238128"
+embedded = "194b0e23cc72a72a8550a9a7aaed72d57f51f7ebba6b823a908f2b82c3f9f01e"
+status = "residue"
+cause = "mir::Ty: deflate::sym_buf::SymBuf<'_>"
+
+[[fn]]
+path = "zlib-rs::sym_buf::SymBuf::is_empty"
+kappa = "3c1b6c445da19e2b46ce9a47f5a8f6e9aff801f1c6d592b452fc9e3a277abc0f"
+embedded = "3086879fed79a6eb6945d921cd84a14997572f966c1a14c9556055cf8e250418"
+status = "residue"
+cause = "mir::Ty: SymBuf<'_>"
+
+[[fn]]
+path = "zlib-rs::sym_buf::SymBuf::iter"
+kappa = "6ef7630d27df44b2ace31630e37e1976bf8486c2ed27ac911824bbd98b6b44c1"
+embedded = "31910da2ddb9cb4dc01aa15d278d76fce542181ad211419ef9e504b0894b8278"
+status = "residue"
+cause = "mir::Ty: std::slice::ChunksExact<'_, u8>"
+
+[[fn]]
+path = "zlib-rs::sym_buf::SymBuf::push_dist"
+kappa = "792b2178a838690e08f744763758e5d6771b5bd981f4486be22512c1fd5c2256"
+embedded = "ec227b28e0c6577f877fadd7e91117e35ff4b574bdd56cd4fa011be188a28e99"
+status = "residue"
+cause = "mir::Ty: SymBuf<'_>"
+
+[[fn]]
+path = "zlib-rs::sym_buf::SymBuf::push_lit"
+kappa = "11fa8edc54e90fbe3550817bbb7dba1f1ba3ec9c3f1d2bd0474ae25978eb553b"
+embedded = "af904d8cff96bb2165a71885948b89faae1e63ef91a8e19a2ca40583c94e918f"
+status = "residue"
+cause = "mir::Ty: SymBuf<'_>"
+
+[[fn]]
+path = "zlib-rs::sym_buf::SymBuf::should_flush_block"
+kappa = "8b0c694ab6a75f325ae9e4372b293b10de2d198f73a9fece5c2ebaba35794ac9"
+embedded = "f14ed5a818eabcec86b476c2279ef0ca4b9a4d1ba357f123a26eb7adfecd9b71"
+status = "residue"
+cause = "mir::Ty: SymBuf<'_>"
+
+[[fn]]
+path = "zlib-rs::tune"
+kappa = "3937072f6b0b01e96496832a8d016e3398f5e5f6b7e15844f8f999e179fc2ec9"
+at = "ReturnCode=u32"
+embedded = "417290f94a09b5ccb71f2636136b958447ce43d531368fb6ccac9d2d8b456c79"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::zng_tr_flush_block"
+kappa = "bdec2fe2315cd7fd228307887f61f20ced275826eacc620af753f400db93fe6f"
+embedded = "7c25408011628252f3e9d30c1b0c8622b5e5a9b3688c620cbfadb1b14df8eedc"
+status = "residue"
+cause = "mir::Ty: DeflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::zng_tr_stored_block"
+kappa = "6f0d945a096d8563615285846b546377eae4e64b5790bdd15b2e4aa4899887d4"
+embedded = "e5dbfc5a71f7828c80fc439dd6c0d6a1ab0a5423b119d8327246c4b521b7dc1a"
+status = "residue"
+cause = "mir::Ty: deflate::State<'_>"
+

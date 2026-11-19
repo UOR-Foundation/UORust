@@ -1,0 +1,112 @@
+[[fn]]
+path = "sqlx-postgres::PG_COPY_MAX_DATA_LEN"
+kappa = "f183be36782d99ab5df14f78a6d866178281dd37f336bc40914284827b65a42c"
+embedded = "9492e667831de8a179c16b6aff41d54434d9c2db09fe0a2f3c8f749baf81aa50"
+status = "residue"
+cause = "mir::Operand::Constant: a usize literal"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgConnection::copy_in_raw"
+kappa = "b0e193caf73b9ee20d28c46eb903d3f45b6150169246f28ee87849ef252c2637"
+embedded = "626b052b534a2d773cd80682cc38465fdec7046c550ee43991044980fd006d5d"
+status = "residue"
+cause = "mir::Ty: {async fn body of copy::<impl connection::PgConnection>::copy_in_raw()}"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgConnection::copy_out_raw"
+kappa = "8e6faf2b3b31d85017826610596894bae10ff2545c08a6eeaf01e3fc1582010d"
+embedded = "b9b4825dce377dfc15924e5e587c94f66a1eaa5cf2c7fb6ad75cff9a242e48ce"
+status = "residue"
+cause = "mir::Ty: {async fn body of copy::<impl connection::PgConnection>::copy_out_raw()}"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::abort"
+kappa = "3553857e7e9f116784fa1080e8de911c515c34e96e493bdaf4d930d0990ce315"
+at = "C=u32, String=u32"
+embedded = "14e93b996491a47c40fa1c436f7a8c9908afa79c27980be6d026e387807b4638"
+status = "residue"
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::abort<impl Into<u32>>()}"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::begin"
+kappa = "b15421430b956acf0d4faa6944fc71470e2ec1c94d997760a2b475ad5b1fd3ad"
+at = "C=u32"
+embedded = "f74e53625730e40264b4553e49588bcb8c62c59b6635210df35f6817da44b378"
+status = "residue"
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::begin()}"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::column_is_textual"
+kappa = "5095cfd19762be3a35e674067264eb07ca2b9ba8770446110a3d8ba44c02792d"
+embedded = "c36e8b4160b3faf41db7a832e1acaeaea964540fa75e43cef7a550d45c566fc8"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::drop"
+kappa = "c5cc93530590cd0c637ea374e4e229913307e86f09361f06d6241554ae0061a3"
+at = "C=u32"
+embedded = "49edcc43ee9e848dc0515d47ba8ad39d01c3d96b65fd5f2aee1eed5006dd343f"
+status = "residue"
+cause = "mir::Ty: PgCopyIn<u32>"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::finish"
+kappa = "3c0739e78ab77c2b09896b2ff617e0ee52e2ad0ffbeddc26dd974ba5aab8521a"
+at = "C=u32"
+embedded = "d8845062cce2b601e820315ccbda8e615608868967af37e9dcd8bb3b15b2f973"
+status = "residue"
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::finish()}"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::is_textual"
+kappa = "abe7dd23f31d0b86754b130d11b9cfeb54916782cad08c595ebb897401b9b97c"
+embedded = "063d9a03a5835d90a201b736e713e77a58bc7a10058f08a9dd6290a06191a755"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::num_columns"
+kappa = "fa86f7393de8942f954280726334bae819626a150c8a55f9ee5a49ca7604eeac"
+embedded = "e3b06a9423ab8f64f970587c8c9a7ebd467fdbcf7d9391ce9a6335f3670f4a58"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::read_from"
+kappa = "74483207b57fec8804170bc00034d90029f21162d4df060b6db38ebaf421da69"
+at = "C=u32, Unpin=u32"
+embedded = "5243069e17d21764a7127754cdbe30f77d85fb00f8904cf4422f07fd09a08059"
+status = "residue"
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::read_from<impl AsyncRead + u32>()}"
+
+[[fn]]
+path = "sqlx-postgres::copy::PgCopyIn::send"
+kappa = "806432275d2d2ceb887f7fb18b357b006b2084603846193d6c3653e1b9faf6a2"
+at = "C=u32"
+embedded = "c2f540e33ed59490ef4929d4415cf5ed381946e6f867af4fb26e5e1c8c0a5e53"
+status = "residue"
+cause = "mir::Ty: {async fn body of copy::PgCopyIn<u32>::send<impl Deref<Target = [u8]>>()}"
+
+[[fn]]
+path = "sqlx-postgres::copy::Pool::copy_in_raw"
+kappa = "3ce0bcc64558bd69b3b59df57471d3fa753073dd53776486d03779e6384e74b9"
+embedded = "90d91c075530927cd4a40a66be28e1f237141311f81ea5da8f5f61a114787712"
+status = "residue"
+cause = "mir::Ty: {async fn body of <sqlx_core::pool::Pool<database::Postgres> as copy::PgPoolCopyExt>::copy_in_raw()}"
+
+[[fn]]
+path = "sqlx-postgres::copy::Pool::copy_out_raw"
+kappa = "128a70709adbc89c5a64dbbc832776e80eef600215bc3645ce80cb50ede397ff"
+embedded = "bbe2c9d7c2faf37f9c33fb7a6b5b884f58da5ff80ac9657252076e0bda9709e2"
+status = "residue"
+cause = "mir::Ty: {async fn body of <sqlx_core::pool::Pool<database::Postgres> as copy::PgPoolCopyExt>::copy_out_raw()}"
+
+[[fn]]
+path = "sqlx-postgres::pg_begin_copy_out"
+kappa = "94e76d9a4f9461ead0b2672023350bcdafce1c31d8e7ad0747a9f4edc53147d4"
+at = "C=u32"
+embedded = "0b8492ef5742aafed8d961c03e3e8b2cba867ea5da3c0227863384908b398b39"
+status = "residue"
+cause = "mir::Ty: {async fn body of copy::pg_begin_copy_out<'_, u32>()}"
+

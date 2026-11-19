@@ -1,0 +1,303 @@
+[[fn]]
+path = "vsimd::DECODE_UZP1"
+kappa = "597a3bac5f569b999a8c6b498a24d01d4597e913554d4309bdc38d08035e5bc3"
+embedded = "e7360d134dfb1f72f396fb336b3ab85a1d4238f50dee908b4cc235edc6b64946"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::DECODE_UZP2"
+kappa = "6a882bdeaf6b30f4cbf3a739a7344639eda0fe03da91412a46378f72b6a68272"
+embedded = "9ca744ec91e2cd9f5bc982ee2b2193554dcb4a4d7e85065eaadda9dbc146d910"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::ENCODE_LOWER_LUT"
+kappa = "3c2c29fd6b5b2ba8f9e034a048f6bad904ab29bf176ddaece31fecd253ac7fd6"
+embedded = "2345572e65111b4a646e1c0021f1f5913ee2341715b039f6e76564e13bc481ac"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::ENCODE_UPPER_LUT"
+kappa = "f33aee747178f55753a5051b76e81d5c72855745bfc98da297f27748b313a0a4"
+embedded = "6a30f4e65991558db9798bb34771c493264fd6cd57aff64308b6858ede5cf6ac"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::HEX_ALSW_CHECK"
+kappa = "556ba75e7285817e4a9f7a31d71af25dc0566247e40538f4d764008c1ae32d57"
+embedded = "d19a642e41b662774fba0e1231d571e208700ffc1ac8a6865d8a46ff1ebfe599"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::HEX_ALSW_CHECK_X2"
+kappa = "510f71f3ae4468070a51a760e48de02663408c6ade4d7d2ff92520274c6f3885"
+embedded = "1919e57df1e684944976030c3cea122c1c5c3f7b49aba95fb6d6b84624dc16fa"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::HEX_ALSW_DECODE"
+kappa = "f5e888485492785871c5fb7d2455475cb14ae786e3baf71e7b0c844e596ac22f"
+embedded = "6b44d72c010ad60f85c2bb1e519aedc9fdeb6cec5136fb8b516cd98aa4ea5a8c"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::HEX_ALSW_DECODE_X2"
+kappa = "b494beef46768509f62dc844133cdf23411d955eeecc62b3d21b40cd6a42bf2b"
+embedded = "b59d3d973efb64b7d35fb4b7797e16bacab2108db78d9b8b3b7d30c98da29233"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::LOWER_OFFSET"
+kappa = "8cbc03c71c0a998e652c9c757cfa91489b26ed2af23d2c115cebcaa33690ba62"
+embedded = "f5647536af5a536e33b2907bf9bbebc94bae0bbf9742606ecbbfe59fbfc051a3"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::UNHEX_TABLE"
+kappa = "2e24cc4b2a3b366491a045e3c405f280376fa372a108f6163ea7abfab6b4cb93"
+embedded = "4d8a43e8e0835d6fc13f80ee500d6c874d15ba628f4c9dfb5b9b6438e0768385"
+status = "translated"
+digest = "44eda27b760b5a4a2228629a08f8fa8fd59461d774b759d2e25bb322577bab61"
+
+[[fn]]
+path = "vsimd::UPPER_OFFSET"
+kappa = "1bb7a36e490aab719948d7dd909659418f33b1c426ac20d2e05b54f4642c3dbd"
+embedded = "bb1f01f643bfe4616b81850b59d36027fcc67a7114075007a1a2a7f828e4935f"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::UZP1"
+kappa = "bcaaa02157a02df506066fab025289d1168b707b39599bbd8e513d2fba84a91c"
+embedded = "496060951da1d75afffb71eb7de9b1d1e7ada2eb6a78365de15a894dde24a1d7"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::check_xn"
+kappa = "b6194dac7ab5a439711d97941efaca45936e79b678e729a9e5f2a2f86138700e"
+at = "S=u32, V=u32"
+embedded = "7a3f656329a9acf5ecd8ada58ad6d7a32e2d3e7f45bfaf663dc5479d176b2121"
+status = "residue"
+cause = "mir::TerminatorKind::Call: scalable::Scalable::u8xn_splat: vsimd's MIR stops at mir::TerminatorKind::Call: unified::splat: vsimd's MIR stops at mir::Operand::Constant: the constant item unified::splat::IsPodType::<u32>::VALUE"
+
+[[fn]]
+path = "vsimd::decode16"
+kappa = "120c747053a64b9711d3a21561f8be9f3375a920ae638134f4e6bbb315ba562d"
+at = "S=u32"
+embedded = "043cb01373e7890625bf663043a054e053297e5d25afc5f5f5258d234c7eeffc"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::decode32"
+kappa = "7887743932de51e7d09871255a0e4c6385be5da445ef60114b71772a9ece1a60"
+at = "S=u32"
+embedded = "e5f80b5e746384f3ee4e78232899cbe52e724598cf497b093a4f1d1785a4bdd4"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::decode_ascii16"
+kappa = "c7fa54da01089fdf658ef0a6ea6cddd197e8813e4a97c5222bb3aeca43b1179d"
+at = "S=u32"
+embedded = "49b2338629b1f2712f880b1b8d661d4ec90e0d2a554f1c8a49ad6e3b262eb16e"
+status = "residue"
+cause = "mir::Ty: vector::V64"
+
+[[fn]]
+path = "vsimd::decode_ascii16::MatchesISA::VALUE"
+kappa = "08c8575615ff16d9dfa2bc3b28f7e0bedfa61294bcaf52f4da9d9a492997ffd5"
+embedded = "685df5d593440948f70f49b245dadf07bd57ab0e41183b66a5588a23742bb222"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+
+[[fn]]
+path = "vsimd::decode_ascii16::MatchesISA::VALUE#2"
+kappa = "4839431de09ee4d5401b91d6c8bc6cf1e2ee75f7424211cb8e4ee8444aeb0668"
+embedded = "c674ed1907769067afed53fa23d5cc6beaa752a13c4221e5ee7634ee1b802ec8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+
+[[fn]]
+path = "vsimd::decode_ascii32"
+kappa = "b5012132887933354ebe1363b5c1cf23be3f02737534ae7d167ce08df5bad994"
+at = "S=u32"
+embedded = "4941af825900e174931c4654e1508fd9dba912852f2a78048f1d8ba1fcb9dcca"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::decode_ascii32::MatchesISA::VALUE"
+kappa = "e1df6d69fa902a8cde53fd9f6d23221dfe93f71a337c2fee5fc2689c6c63848e"
+embedded = "6cd50c68980afe0bec707b9ee267d5b8209b4f760debc728b9e2a1ef42dc13fd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+
+[[fn]]
+path = "vsimd::decode_ascii32::MatchesISA::VALUE#2"
+kappa = "e59a7651ebe70acd4422e47417efe3b4fda27dc4e45500f4c12c8595ff8a58ae"
+embedded = "657742d17d70be083c30866de28b28e4fe8c81a105072173bc3fe35fc1b905ca"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+
+[[fn]]
+path = "vsimd::decode_ascii32x2"
+kappa = "86986e881054761b10583598bcbf65cb6892fb4e7f5e525921470778c051ca48"
+at = "S=u32"
+embedded = "27f5d828c0586862a807f5534a5026d3a727c3b9e29770d0101df86b9a6909bb"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::decode_ascii32x2::MatchesISA::VALUE"
+kappa = "0a1dcebbe56f7957a1ec80867907b65e360da72347d4d84a5966b37f570cbf17"
+embedded = "192366827cba84cb49d1272d17b7d85960e1a4782f0d51e3db573ffceed632e7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+
+[[fn]]
+path = "vsimd::decode_ascii32x2::MatchesISA::VALUE#2"
+kappa = "ab12d563240f104238be57b940ef3cc8b4c89a4d01b18928b6796864b117af39"
+embedded = "412f68dfd7c567b4a95f1dedbb7b9c003542b9d83bf24d8f3dcdec63e5575b41"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+
+[[fn]]
+path = "vsimd::decode_ascii32x2::MatchesISA::VALUE#3"
+kappa = "afc8b5970bdd9ac8d1c0482fcf0710baba25d284dd9bfe60072de044b252750c"
+embedded = "6abffe3b273b3f52506974c87eaa05fdf2a9bde66e0b1acd568ed7f926daa363"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isa::matches_isa_impl: vsimd's MIR stops at type outside the lift: isa::InstructionSetTypeId"
+
+[[fn]]
+path = "vsimd::decode_nibbles"
+kappa = "e113939a9cf9ff4e8bd84195fffc5cb6e588b819169335ceb61be25018ee4c20"
+embedded = "bc28e9f676c9a7d9a580798afb3b4006dbdb786a28b16a5ec98e6398d33a88b5"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::encode16"
+kappa = "74827ef4ddbe123884501d6bd7b2d2add563fae779282ee9dda339c39f444fd4"
+embedded = "32261bdcb36181499e5505b6ba79181f49421d87bbf1554ec820de60d4856abc"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::encode_bytes16"
+kappa = "1649fb23b6e5d6753802117ce60dfd63558389c5d7a3a249d742219e08a71ff9"
+at = "S=u32"
+embedded = "57f333a29d9c903de487997320290101562cf4b1b161e5047d3ca6b60270ba68"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::encode_bytes32"
+kappa = "1f11b4c003f11cd266b73e07ac345995d5f7f44b0b386c566c1ee679016aa8e2"
+at = "S=u32"
+embedded = "e605bf407ed39d0c4b56b9d142ce6ac6a28706efa7205524cf0fe8654ad9e598"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::hex::<impl at src/alsw.rs:80:9: 80:19>::CHECK_HASH"
+kappa = "9ed615db2138da7fb7594903464cda42c51531c83e9a45a19023fd5f1051c412"
+embedded = "1bdf222de27815e14ff37967b0d08808ecf2a361185aec2fea7c4cb10cdb5b1f"
+status = "translated"
+digest = "6a4fdfdb751ef8fae9a4b0f38f0e5ab8d645e705667b0f368fc3df17957c7df6"
+
+[[fn]]
+path = "vsimd::hex::<impl at src/alsw.rs:80:9: 80:19>::CHECK_OFFSET"
+kappa = "1a3c620fa2254ad5ab964c630874160b93fe97fa52cb38cb467bdffab04e5bfc"
+embedded = "30ce327432dba9ed4de276cfe6fe8cc1b70467836036baeb3f8129bf6da1866e"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "vsimd::hex::<impl at src/alsw.rs:80:9: 80:19>::DECODE_HASH"
+kappa = "09f925eefbc8110c962c8d27b326c40e5d0c1a98971b06f42b4dc0cf5959da60"
+embedded = "b5a8d95c539b90979e0f55a06e38f7a552802f158b0e1ad74455d7d3d2410262"
+status = "translated"
+digest = "c0de9f668c1fbc927c80e67d0bf9fd80c32b1951e9802fd2c87c8b9079d71aff"
+
+[[fn]]
+path = "vsimd::hex::<impl at src/alsw.rs:80:9: 80:19>::DECODE_OFFSET"
+kappa = "6f41c98de97a56a33755de6d266ccb535ff1b8f5fc1ae6f0be0052a8f799e3ae"
+embedded = "921d5fd561a7c60054c194365e1fad90bbf1ad3884790c1621d99db6a93bd283"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "vsimd::hex::<impl at src/alsw.rs:80:9: 80:19>::check_lut"
+kappa = "3a8d22e777b3a127e6e8abc0c8f0bf2ca245c3784704d0791a59e16e6a86d619"
+embedded = "6ec2350248407a33203e8c93502f2705e906a42aa034458760f9364c6f75d240"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::hex::<impl at src/alsw.rs:80:9: 80:19>::decode_lut"
+kappa = "d8a4c53343312c307b4e187f843ea7da308bf7f4ab82b496c677754bca576906"
+embedded = "262eb70ba855e23e54a3032484602e02cc7bc7ccb106713ff84a34aa7e9f9f14"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::hex::HexAlsw::check_hash"
+kappa = "c9480603eaf7c923a469f64f68bffc898ab44fa5c9e5a530e16d6bd63cebef06"
+embedded = "407ed4ed8c2b21ba964edccd062d4844a7cd531cfe733f22f72b7fcaf9ace651"
+status = "translated"
+digest = "ffe845cbd92d7ca5d7593641e08b9c94ea4959fd67797e0b26a8954152c2ccac"
+
+[[fn]]
+path = "vsimd::hex::HexAlsw::decode"
+kappa = "dc5a8ceeb520f17690931cc9e18e88446a88edd3ec5fab774e99048dc016a167"
+embedded = "267436de29daf495fc2b37c882cdb582836c552be6726575d4feca6dace9f4c4"
+status = "translated"
+digest = "96736a478d048b3f33ede218c74ae9bdf7f78118e86009bfaea0677f9cbcac53"
+
+[[fn]]
+path = "vsimd::hex::HexAlsw::decode_hash"
+kappa = "79e86998b9155a63a626ef47e248dd1345cd014b03196677213bfe153acc7c9d"
+embedded = "f5aedf081920ecd30bfbb227f9ed48e554017e780e41fc371c4503636994f446"
+status = "translated"
+digest = "14ccf217091f98b479a0167c28baad76e3c91a9c0cb4784e984512c090889218"
+
+[[fn]]
+path = "vsimd::hex::merge_bits"
+kappa = "8c33b285b6330c44e60b77b080f0ef69aa7fbd751b888669da457d68e30d4de5"
+at = "S=u32, V=u32"
+embedded = "879148dbb999b63697bfdb53c62a8eec6a29e3945d1b3360f085ee5a732db06a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as Scalable>::u16xn_shl"
+
+[[fn]]
+path = "vsimd::parse_hex"
+kappa = "654f21d6f1dd2fef77a4fadedcafd47c12d737e07de7907b8c87c292e6a8d037"
+embedded = "f34f689b0a471862eeb835ab6cb5122a0b3191fc1bc38a4071e24d9a45eec7ff"
+status = "translated"
+digest = "2c1008799edc6d7fc265684c119b270662d58a004c456539c04ca9bab8215497"
+
+[[fn]]
+path = "vsimd::sse2::merge_bits"
+kappa = "b76d0b4145024892d49211eca0c1058f7b743315b8372cfb48e477bd58ee2a03"
+embedded = "bb358b3b32ab08071724eaecbec7be217cd2f3297cf5110d757c085640a48be9"
+status = "residue"
+cause = "mir::Ty: vector::V64"
+
+[[fn]]
+path = "vsimd::unhex"
+kappa = "967ad731a9762c48877b44e39c19b81f71556ffcbf5da81b9ffe953399f81ba9"
+embedded = "d93fad111494aa40be55a0afdfaa8cdc68c19a86a16aa486cebd750d2758e683"
+status = "translated"
+digest = "5865eb35ee9a012789ff4ccbf9a6173368efd12aae2b514d664b5823eaf78e27"
+

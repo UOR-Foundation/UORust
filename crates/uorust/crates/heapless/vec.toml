@@ -1,0 +1,890 @@
+[[fn]]
+path = "heapless::extend_from_slice_inner"
+kappa = "f698e02daaa6c3027dadcac8fe3758c9a9e8cffa9c5f2a10e2006852bf3a5201"
+at = "CapacityError=u32, LenT=u32, T=u32"
+embedded = "cf401a4d58b7cb8183fe4a09906b83afa7fb3c82d3521210d963388d11a1c9bc"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "heapless::process_loop"
+kappa = "c8902a1f92ee3243fd18dd31cd78e36ee8acc4552d475b4aae6f1443e6761f6b"
+at = "F=u32, LenT=u32, S=u32, T=u32"
+embedded = "637c87c2cfe696db910b65774dd10b764289b75d0fb0d7bb9ba0e2ce383f477b"
+status = "residue"
+cause = "mir::Ty: BackshiftOnDrop<'_, u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::<impl at src/vec/mod.rs:1496:1: 1496:96>::into_iter"
+kappa = "9b65f1431fe83628b07272b7f27ad81b4ae22e4f28814bc9166a85fdd9b29f73"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "45c072eda2f5f5f1177789a41b492e29be0fa755d4b1794d8cb6bca03ca3fb11"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::<impl at src/vec/mod.rs:1505:1: 1506:37>::into_iter"
+kappa = "7f4d4a5956ee710b4b36f2282c7b27ba843975de812a76fe05baa5c6a1c4aef3"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "abc13e2569f9673b36c57634a1c976c355d16308b4e7da36859efbf8afdf79f7"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u32>"
+
+[[fn]]
+path = "heapless::vec::<impl at src/vec/mod.rs:1682:1: 1686:32>::eq"
+kappa = "432e26211b0ab5f00350dd11d7aebf178ff48d423a4ece16bb7fda742f514224"
+at = "A=u32, B=u32, LenTB=u32, M=#usize_M, SB=u32"
+embedded = "b1de727ef622e4b16e3b0eae08a3840e513ce548176bf7c1f85b6bb5c796bcb1"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::<impl at src/vec/mod.rs:1693:1: 1697:32>::eq"
+kappa = "771472bdfaa398d5d511161d22d4adaf4528789287d8ddeb910112f69654c4bc"
+at = "A=u32, B=u32, LenTB=u32, M=#usize_M, SB=u32"
+embedded = "174d73e44f9d8a63d2a4dba52973be658047fa54646285467a318d46f9facc5b"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::<impl at src/vec/mod.rs:1704:1: 1708:32>::eq"
+kappa = "a1302de18c919c62fb088d3fdfd4cfb6fad629d079b67cd3086b4840a88fc8fe"
+at = "A=u32, B=u32, LenTB=u32, SB=u32"
+embedded = "e00677ecf2d9b78bb2a0c9f3d314d2988a67412412c485a4b04519ff9862be5c"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::<impl at src/vec/mod.rs:1715:1: 1719:32>::eq"
+kappa = "dffd4b1274be40f5b4f438587126d80904d5e61e5c8618b5d3a4f3785b343ef0"
+at = "A=u32, B=u32, LenTB=u32, SB=u32"
+embedded = "edd50453b005946fc64f3783ef85bbce9b88825ede808576c9f2df5bf4b09ee2"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::<impl at src/vec/mod.rs:1726:1: 1728:21>::eq"
+kappa = "f6addf566b482c00a00253d5bbce49a0948d7b41740ca199f3d0aafc2b891383"
+at = "A=u32, B=u32, LenTB=u32, SB=u32"
+embedded = "69b95bfa04c21346c8c85e33844df20e3fe2f95fd031c3baaac32fedd7197ded"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::IntoIter::clone"
+kappa = "28013997d0f8480354136c014b7ad580333aa7cff4a60173c475c598577722be"
+at = "CapacityError=u32, LenT=u32, N=#usize_N, T=u32"
+embedded = "d95cb2ac27c1d891c109ccfe738dd021b77363c0cc779051a16146f960b3fc0e"
+status = "residue"
+cause = "mir::Ty: vec::IntoIter<u32, #usize_N, u32>"
+
+[[fn]]
+path = "heapless::vec::IntoIter::drop"
+kappa = "66cb05f02b816a739fe1e16d92f1cd95fb5a3ee5396bf67fc2b9a93d910ccc63"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "8e79281e5ea0ccdc6b48726f471809d9e9d9ec2ebf2c7d883dd96fb2cdb97848"
+status = "residue"
+cause = "mir::Ty: vec::IntoIter<u32, #usize_N, u32>"
+
+[[fn]]
+path = "heapless::vec::IntoIter::fmt"
+kappa = "8cd50765dc4d910a8f1922a8744ae22e79ee7f695a95f3bac9f2b182eff0602e"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "f0b30b36d1b7a605177db3067d3d051ec285573fab7c89e226ca8f48b9b35ea0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "heapless::vec::IntoIter::len"
+kappa = "9f8cf34b14101abb93a39c2c7e1e8f1d3654c1c1ffb339b5d3d6fdda73921ac7"
+at = "LenT=u32"
+embedded = "53f82f7cc4990654c9401d05ec1e5cc2044d7cfcb874db167d8a3b89a8a45034"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::vec::IntoIter::next"
+kappa = "b0b7fbd2e9e0d96e2627b1ef01162fe7b77f1aad797812c7e6a426d4c20a7a3a"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "8383ff2e541517593870a555ddc7337ba9e0df0524cc1bb84190bde475848122"
+status = "residue"
+cause = "mir::Ty: vec::IntoIter<u32, #usize_N, u32>"
+
+[[fn]]
+path = "heapless::vec::IntoIter::next_back"
+kappa = "6c97b9bc335725c422c5173e1357306f786ee17533d98d33edbc75441b1e412c"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "3aa56f9d9c5408fb5606ef14e0b949234489f6422082394f31c13f43473b94f8"
+status = "residue"
+cause = "mir::Ty: vec::IntoIter<u32, #usize_N, u32>"
+
+[[fn]]
+path = "heapless::vec::IntoIter::size_hint"
+kappa = "cbfbb6445af9a93d68b3ca3a51bbb289219ab4d6455064eeb202a823df9882eb"
+at = "LenT=u32, N=u32, T=u32"
+embedded = "30045d41ece45d66068ef947787b9eaba600a50853ecf4fbb33df6755c8572dd"
+status = "residue"
+cause = "mir::Ty: vec::IntoIter<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::Vec::ELEM"
+kappa = "2fc2980f08590bd287a62278cb8c17e2bb86fc0e3755c6981f6dc9ecf94524f4"
+at = "T=u32"
+embedded = "bef01bc8e4c16d13b8e5da4d9a121e17fd736cc730dd5dffce02eff44bc58bec"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "heapless::vec::Vec::INIT"
+kappa = "758f6f65091db6866a1b33144d2c641b5e5bde8f1ae88f60ed4e25bf69e9d427"
+at = "N=#usize_N, T=u32"
+embedded = "8225408bded22d81a5a11c239b5556157d3a8075e83d6970b846dfc97a98cfad"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Operand::Constant: vec::VecInner::<u32, LenT, vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>>::ELEM"
+
+[[fn]]
+path = "heapless::vec::Vec::cast_len_type"
+kappa = "126c74b809e8930dd0d46692ec207d1f617417472b5652cd38e441d5e68ebfd2"
+at = "LenT=u32, N=#usize_N, NewLenT=u32, T=u32"
+embedded = "7c5dd88ab1ddaef0c52ab44ef3ee2c68fa79291d07c70be37c6808a3354f0132"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::clone"
+kappa = "a8f3646948e016a089c62d8a2fa78331b1633327bc6249631b7d3165937531e9"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "256c7d735bce1dc07e3a9e9774027fd84fd302089d982b4060c8d26f47587dff"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::clone#2"
+kappa = "aa263b60b4e41815ed12b9e1b4c9cad5aa004d78da90493497f1a7bc0c57012f"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "29af13c6d0a92b219e1956e622e1078f9be08dd7c8e2a293b1ea2574d9e75535"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::default"
+kappa = "0424f3731f95558e9467ada51128ba7deb4297b7838a66735ed99c1bd58fd321"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "34d498361494f759dcf7ed0f9aa540cd1899ff0834c3ddaa6fd3bc6aacb7a860"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::from"
+kappa = "7c653213cd4a6d956bbda63aff8e53b954c5a9a50a85f2028ea0a713877d573a"
+at = "LenT=u32, M=#usize_M, N=#usize_N, T=u32"
+embedded = "c0628ee298feacac56db44818f9b2ffe9cbff507e22ae82a68ecf23bdb7f85c3"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::from_array"
+kappa = "44a094fe8b2a5ebaca62eed164c400cd4ab00555113c8b2f5f1ab0912f7aeb86"
+at = "LenT=u32, M=#_M, N=#usize_N, T=u32"
+embedded = "c8427f1a3a5e16f3d32012504710f7a54a74057270acc4149e4a45162443c28a"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::from_iter"
+kappa = "75977fa83d8ade34cb45cf93d0f95e1bffd1422dcbb301aab115f8a0d10aadb3"
+at = "I=u32, LenT=u32, N=#usize_N, T=u32"
+embedded = "a27614063aac8b51abb47bc1d1a06eb1ffabcb5f0d0048ba46a2efc16dbc8116"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::from_slice"
+kappa = "852f5b055f797a926b42566cbcf5567cac76d88895811862be74782139b9962f"
+at = "CapacityError=u32, LenT=u32, N=#usize_N, T=u32"
+embedded = "dd8503cfd360c5053d0196a5a14861a00b582601d6b84828bdb38cf6cfebb65c"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::into_array"
+kappa = "a9eef024b4ae1df471d8d1136a7234cdb394287db0507605890cc57985b2824c"
+at = "LenT=u32, M=#_M, N=#usize_N, T=u32"
+embedded = "53229623a900ec7fa2cd383d5b099824e6a0d4b7cab992e78b55e5a0bb840ef0"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::into_iter"
+kappa = "04aa15abce003e5ddd303319ff7e4304a439084dddbdf072f6eed2fc30a8fa9c"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "0bd783b610978c587d3a2d7f77b8c8317258b2ef2d5a9405dc2b8f82734cc20c"
+status = "residue"
+cause = "mir::Ty: vec::IntoIter<u32, #usize_N, u32>"
+
+[[fn]]
+path = "heapless::vec::Vec::new"
+kappa = "00cca6cb75c3d2ac47fe08c46fe41559ccbf03879f13b85d27bee68f7f1ce08a"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "31f17ebc69797feef9b2d8ce42b04ecda544fc06d51c8300e0ae0723f90c797b"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::Vec::try_from"
+kappa = "2c59f781a63b9fac656b4b2191bf97e5d9091e2b45241cf0cd7e3b2deb9ceec3"
+at = "CapacityError=u32, LenT=u32, N=#usize_N, T=u32"
+embedded = "87d35ab84f400b0484f45b1db60919c7cee8b038f88b63f23a3d75a10401f77e"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_mut"
+kappa = "8185f05787bf24fc1fd85bb4b6128209efea6cb0b39d32df58999f848da9b6de"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "613145917a4b440e0d0214464aade82a5daf2e0afdf81f81887d3b30634bef81"
+status = "residue"
+cause = "mir::Ty: vec::VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_mut#2"
+kappa = "1b4f73f880390360583f7c3e9923133964962fc6f3df46653c9c88e6138a8067"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "38fdc831e349b3db108d98badf9cba64bbf3686c0e966a7836af95b0fbc4df54"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_mut_ptr"
+kappa = "7579f42ea9d0f51bc66fd0a90e263373e720390455290ac5f7c63cce53db1553"
+at = "S=u32, T=u32"
+embedded = "97a506f4bba8c71cb68e0321626e4b1a9ae46f7cb1519530488564d919ce94be"
+status = "residue"
+cause = "mir::Ty: LenT"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_mut_slice"
+kappa = "7eae340a47068329411f1d400302ac027fc968657df89ac698168da228dda9b3"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "7d7808439144ce4124b0bb10fc1dc2898ff19d7407f096be07261fb0bb1a60ff"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_mut_view"
+kappa = "0680ef2478888cd0c75e86be0d0556637a27610e80c78376e2f182002b112650"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "2da45b7864d1d917be37c41cb2f9cd64186b6376ebf0d7098da3e8f86a40fb72"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_ptr"
+kappa = "c618aa886c38ae0e4b6ba26f79aacc3f36e586ff1471729132adc8d7404e5a59"
+at = "S=u32, T=u32"
+embedded = "7888229e43b7feda6624c7d71f06053e5a58c0d0a926ec3075dbc6bd35b4b841"
+status = "residue"
+cause = "mir::Ty: LenT"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_ref"
+kappa = "1ef72e005bdd5d8c1d91a5425109153d0e45959b6f01c32ae1a9363f50139ed6"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "da49a44549d7b0a183e75ceab62afde6d3b42e744e4f011d4001dc889a586ce0"
+status = "residue"
+cause = "mir::Ty: vec::VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_ref#2"
+kappa = "ac0e9ea1193892245001dc93ce0fabdbb5364374a915c3d9a49ce4fcbff406de"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "2f9149c5810c331c0b11d584aed00598838759f2d098fa5b781ceba8ab67a1a6"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_slice"
+kappa = "7b70b25b5482aec760a65bea364f16cab8920a04d08eb1123dfd0ae4ffb31912"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "fd51c6dd6a6d2b058562da4caf1bf259bcc477b21d07c369807ebcd51a0a60fd"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::as_view"
+kappa = "24c273dc620edb511d404b0c339113e5bc58ddcf4beccd9fab0314f726b07c35"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "ec79f0bd0c04a33b1a6ed4e4a4ba6eb291917ca62938fb144e9f8fe77fac9d3b"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::VecInner::borrow"
+kappa = "7b3d9e07d175f764b0475a446407e575806335e959628b3af339e01974f124bc"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "c421d75c9fe823084aa4adfdc9893956d724aee7a2704118a9c8504efd521825"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::borrow_mut"
+kappa = "7b9f3e4d0e28d9e32ee34785607c7e86fc4fc53c79a9542a5e73ed391774e54b"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "a2bce00cf0cf57f08764fb06078fc339e0ed19e387d25aae4e3e7694756222e4"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::capacity"
+kappa = "8463e2e275929c387b1d466042824116e90938f85e9483e01dc20e2a6e5cc9b1"
+at = "S=u32, T=u32"
+embedded = "52a31542cd757ffc5963aa918ec5024b6ad381df2cdbe9af7d86ece0b23d8647"
+status = "residue"
+cause = "mir::Ty: LenT"
+
+[[fn]]
+path = "heapless::vec::VecInner::clear"
+kappa = "ad34c75274cdc87c64ed1f70daea647680059b2823dfb95d50573958af0b7741"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "1d426644de88b9697c2e4b0e7d65c7ced3545524fed2cb5610549e990904c660"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::cmp"
+kappa = "39415756d6f6f6cc6739e9de37d4da5bdccdeb5ccbb3590d1426c5f1d6ef5b48"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "7e5464f2b22259a4d9bd4edd19fc40be531b13146e23b91ce12d5c8f00df51f8"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::deref"
+kappa = "6f785bacd7f8115716195a8636959fe3b43a7e7f0ac8536431e6c7537a68fbd7"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "1d9088a352d4a9beb3be0ba8f20a2339711e5ae4d87b61b4605cb7efe2091f0d"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::deref_mut"
+kappa = "99b656c60b51b91ed043e2d78653c21dfb4810bd122f62207708d15161963435"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "878278892c9eabef22f39413d0027925df70a4c8646f21e6eeac1a2f4ad5c403"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::drain"
+kappa = "8995714d001b158e8c6f2b0d2c0dc400165a0f74eebf49b896636b2174d2b6ae"
+at = "LenT=u32, R=u32, S=u32, T=u32"
+embedded = "2486a45047a30b0ff5f86c7d94f0097873f91723b9df5e659712eec7a805bc9c"
+status = "residue"
+cause = "mir::Ty: vec::drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::drop"
+kappa = "7bd6fb9c3404f3c445f47c52bbb79f1783e80d3167f75ab22849ed63cad59332"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "6a52e7e4cdbc2c27be13bad597339202b1421c6eaac0341a6cd2dc45383e099d"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::ends_with"
+kappa = "0b34c353dc0aa5fee1cca707266ca0072aa0def69ae72ec61d050a8a544345da"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "c4b6995f010927ea4c67a227da493b24d5db7bd7a984f4341133c7700597429b"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::eq"
+kappa = "966269ec1d345e524d5bc109aafa1a45156447b426095b05eb01603356bc284b"
+at = "A=u32, B=u32, LenTA=u32, LenTB=u32, SA=u32, SB=u32"
+embedded = "a964b7168f372ae26f49325cfa5e356fb4e56908760bc4eaca699b09f5c29702"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::eq#2"
+kappa = "70fc15ff2ff6a36fb8d17976a1304d4acb2f07b739aac1f091c3bca0b5006c35"
+at = "A=u32, B=u32, LenTA=u32, N=#usize_N, SA=u32"
+embedded = "51874deee8594d841efcc2d00c7210d7c069b9a484513961be2292753d2f0001"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::eq#3"
+kappa = "1817a21fa641c6d11eaf1e565eb6223824bab6aa8c7e4c4854c1e784db8d1237"
+at = "A=u32, B=u32, LenTA=u32, N=#usize_N, SA=u32"
+embedded = "84544bf72be00060d84837d442c327b17988640db0e7428d933dd6f0931a62e5"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::eq#4"
+kappa = "06b0d2960b9637a7500b8ec966f6ea313bb8fdcee5e2f06a9a2bae33b74c3dc3"
+at = "A=u32, B=u32, LenTA=u32, SA=u32"
+embedded = "f5c47319edbe89f91bdefc239c90a55766217de1c25447d16925168a3a1971ab"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::eq#5"
+kappa = "58acc03c74ed86607a8f0e44f432f5e58aec82f1ece31c42b7b5d5a9699d8a68"
+at = "A=u32, B=u32, LenTA=u32, SA=u32"
+embedded = "a16f884a27ad71ab4fa0ea404a1079041960ca76774dc4df556d5b4834002ac8"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::eq#6"
+kappa = "79030a199ca009340c2c0584387aeaeb90d426c63dd631cd6e42295cc9e1cc28"
+at = "A=u32, B=u32, LenTA=u32, SA=u32"
+embedded = "3ba1c5ad922ef0e172f25e9bd9a19d2110ddfd1493c6f45f669a766b3cd022a0"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::extend"
+kappa = "66a57532f2ff4d5c098fa5c73f3e48a98037dfb079ada17aaac3fed28f20094d"
+at = "I=u32, LenT=u32, S=u32, T=u32"
+embedded = "39895e8dea4fe9eb1cf6c19bbb7d245a9cdf887e9c24ab96c6d752b1d8dac043"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::extend#2"
+kappa = "77d73cd8d529dc89bcdcf2ea8751e6b43dc4b58b5202e8dba2f90eb6d7dab4d5"
+at = "I=u32, LenT=u32, S=u32, T=u32"
+embedded = "ff5e2b2f3946ebd2c2ad2d52f947131759b897f49efde435adef3ff46afb2348"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::extend#3"
+kappa = "0e0f0c9c3b4e8c89a3cdf618e5dbe43ad04dd431727607cb107369f02c4debff"
+at = "I=u32, LenT=u32, S=u32, T=u32"
+embedded = "9b6b839271b9d16aa82f112dd36f7d0fc24fc6772bcbc88fba91ee8fd6be2f85"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::extend_from_slice"
+kappa = "15b5788f32a5bd85e1546bba7394eea0b15793faaa5303edce3221be18b5dd3a"
+at = "CapacityError=u32, LenT=u32, S=u32, T=u32"
+embedded = "ac5dc0b63ebce3e72f93c868856e46254c6d1ae0c9c1651b59b14f57bc9e403d"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::fmt"
+kappa = "b25796b9bd534563c0bf04317068a6dccda423755cf51b2be9639ef3a8ed2cb1"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "53ac859122bbc39a71c3cfb67f3b4627dc4547a691f53a4c1e6639b9f8177b09"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "heapless::vec::VecInner::hash"
+kappa = "74dac46d46f49f158070fb61c833e2c85832ab03e416bf54ac0152ae5a7ac024"
+at = "H=u32, LenT=u32, S=u32, T=u32"
+embedded = "060dd3cdf1f4428a1ee35dcf108189c741db6ba6d30e2e2262e09c86eba5f7ee"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::index"
+kappa = "402e1bd3d4ed52a56969d266e4d7756b35ecd5389b0cd3b28cd33a07ff70e857"
+at = "I=u32, LenT=u32, S=u32, T=u32"
+embedded = "fecfca06ec63c420d0ad4c5a597402f841549e0de59391c88592bd7c5518b53a"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::index_mut"
+kappa = "93bf530e258e66591a29618d58bb80f5988ba18a64987921818b73b2f45ce69f"
+at = "I=u32, LenT=u32, S=u32, T=u32"
+embedded = "839ee54f0203da6c2273997a326cf09fed0dd71063182293b1bd36294b400d45"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::insert"
+kappa = "bd910449f00f8b41703ccc4609ac46cdb5e3963b4ed3a4d22fa9b1a6c266cff3"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "88205e6864a9fbef147ab3af9c626e4b70bb4bbafcfaf4ccac62150ae750bd17"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::is_empty"
+kappa = "80b1f51284aa2831364b77ed82cd2263bdf97ab5076af79017a2e6137b8e2f7d"
+at = "LenT=u32"
+embedded = "2ce550d998c1c49e55c107aac56be85688d6113d6c4906d3432aa07e6f3f44d3"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::vec::VecInner::is_full"
+kappa = "32eaee9df78e392babc9aa30db081c267647c49929149e813e9a1046b4a07dc2"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "bf8b79da37175b81b89ceec7089e26eea2260278d106941444c64339c0c3163c"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::partial_cmp"
+kappa = "2e20ba79709fbefe87bc86ad5dda402775edc9a280470189da88d22c34a4385c"
+at = "LenTA=u32, LenTB=u32, SA=u32, SB=u32, T=u32"
+embedded = "89774af492c99babeee56d8b09cc69d56bb181ed9daeb28b20a8cb01c92960d1"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::pop"
+kappa = "86bddb4e76b078b93c518ed25b6feee5e33c08500499d6efe96dd2550cd5d66c"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "55f5b7d17784a574fe5267731e3f597079bf0da752adfa17f45e4c41c089fa8e"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::pop_unchecked"
+kappa = "1694135c096e9900bc06f1703d3ba66cfaef8f28998c5a74fa6d824f7ebd9d11"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "938f2c198a0e7c0b73791a6d6a826373852644e7e3ac8d47a2c940e2186c1ffc"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::push"
+kappa = "97769752d8f73d66f79ce50bbac260cbbed0253f63854f1710f600c5bc7f6ebc"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "cdfbc058572113560ec54f87e2eb13a1b82fb1bc91a8e60e6010e6e61e0d5a8c"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::push_mut"
+kappa = "9758812d86ef1327d4fb1fa851de20b0a56ecc4cea7513b3707b7b8d863caac2"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "86904116547590d526f24f88bc8ec564bb725b5c195dacd059173999a60d1a63"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::push_unchecked"
+kappa = "535479652c56be6dae88524564de552b5ac5659ab953be0632dbe91317317b1c"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "bb76ce606faad9c6a891dc601f3408514b57b9dbb73261f698a342170c017b5c"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::remove"
+kappa = "2f446cf31c23fcc549848ef1716bacd1a1669064b9dfb1c5a8d6bd051b1bbc01"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "667021ed8341dccd4a05eb0f5752e35492730db7be5f20590e0322ee0a2a4d98"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::resize"
+kappa = "9163a7fb406ebd4e599499a57e2a5569311f81808b1cf94f3bf357aa64026fe7"
+at = "CapacityError=u32, LenT=u32, S=u32, T=u32"
+embedded = "89a3c7bb64c151ee0ae1b70fb13216cfb49fd01dfeda8ec9063e36fa8e179844"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::resize_default"
+kappa = "b56a753b7f47faa8045f241c69a46dfb8d4e4fb660e76b88df45910ec7430646"
+at = "CapacityError=u32, LenT=u32, S=u32, T=u32"
+embedded = "358638c4ba73dfb8e8dc1638ce087ef1a1d78b9feb53d7245d02a9ee0ffa955f"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::resize_with"
+kappa = "4e68509a60a5253964b834e6867119aef2a98b87dc06127869d8950ec21822d0"
+at = "CapacityError=u32, F=u32, LenT=u32, S=u32, T=u32"
+embedded = "4a8530f8f89728d47b23a35c92efae66915fdc82ec8581459452d49a44b9bc51"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::retain"
+kappa = "8a170d30a09ea49c0fb3271d5391f69b074968bda023a3fdc712deff24213995"
+at = "F=u32, LenT=u32, S=u32, T=u32"
+embedded = "53e7986ae139e27a1ff7122a70372ac97ecbfc77f4d6840a5e69c5efd2558092"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::retain_mut"
+kappa = "e55a460366ea14ba9daa6199ca6416258398c2dc6e8ac51b3e7599428a85f2a8"
+at = "F=u32, LenT=u32, S=u32, T=u32"
+embedded = "0960dfb22e2d04c9b9dbeae0c85eb2af61afb9c44b979c4780104890a01b034c"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::retain_mut::BackshiftOnDrop::drop"
+kappa = "52643b70fdf942d6dc78d457f7252a41c0822b281f727b28affcba23f1cc28f0"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "f9a8703c4663ef52803318245607951e3bae970a5909224bb3253de5099f0cfc"
+status = "residue"
+cause = "mir::Ty: BackshiftOnDrop<'_, u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::set_len"
+kappa = "98abe1aa16b15b4796609c355d2401809b74e24f963072cfdaec7b6246a2ea11"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "3c07cbd00a4090df50a0907040389086a070f7e62dce0f6cd11293391453f256"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::spare_capacity_mut"
+kappa = "cb3bf1df70db064f7a29524a748f11b0ce1b81f2e41a7036ca013dc7fe16820d"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "8470aba9a649feb5111d9602512d17977d89ae79ce3f79615347e37a280a5bc6"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::starts_with"
+kappa = "be930d2866985483c77484d097b3dc47c9878238d57504d83d804f4836831670"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "95a3d29775fb251f082a1c7c13f1a5fb36f972c199e3494133fa544f1e42d680"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::swap_remove"
+kappa = "a1f92d10140e733e461adf24674ba832abe6f7a70c3a6a9a1cb249c39b6706c4"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "f4eb5b12e8ca7f009658378cd00781d4e4fbf88d714b4217d9aef00be4d1d449"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::swap_remove_unchecked"
+kappa = "78bbc1b66c77f357d15027217a37c285a6b15753a6f00aecc493f42152ee02d8"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "73b9f5423a442de010fce5c11872fbb99189e05a94c719b29b049785de262ba4"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::truncate"
+kappa = "5ffae2a8593846c0c9617e299c1ee0e6dd89f20c9e279c070df61c258ba19b77"
+at = "LenT=u32, S=u32, T=u32"
+embedded = "b0de9514d37c418f9007772ceeaa72dfbc12805a460951b6f6b39d4d2f043d76"
+status = "residue"
+cause = "mir::Ty: VecInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::VecInner::write_str"
+kappa = "a6a5885e6e4ca52a240d98176964b7a399761715d1fb9becdba573cc4cb69b08"
+at = "CapacityError=u32, LenT=u32, S=u32"
+embedded = "ef6e467c1db43a9be6c669fefcaf7e2aa29dc14d5ef9ba11bb0f939f1ff9ccaa"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "heapless::vec::drain::Drain::as_ref"
+kappa = "89a33eec6961e06665d394665b7f3de96c6468e2691a4c857e693a5d46dc431f"
+at = "LenT=u32, T=u32"
+embedded = "a698b17a5e727dba8830ac920a7400d6344f410743f4875ec6a88b70df539715"
+status = "residue"
+cause = "mir::Ty: vec::drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::drain::Drain::as_slice"
+kappa = "bb5fe4bb5c9e0af36a96c72ffe5c00d909e20ed55a28dba3d74ac5562aa0327e"
+at = "T=u32"
+embedded = "993cc1f3183aa20fda367732a8b9840275771afb77e23217890763e1021fe685"
+status = "residue"
+cause = "mir::Ty: LenT"
+
+[[fn]]
+path = "heapless::vec::drain::Drain::drop"
+kappa = "e5a7db9fa8ade1f9223e322797106e31f5e28ceaff4a82818b4e817429a71ba7"
+at = "LenT=u32, T=u32"
+embedded = "9a709fe7218edbb704ac67817834a73a7e5542416c5937a8319df294b08615eb"
+status = "residue"
+cause = "mir::Ty: vec::drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::drain::Drain::drop::DropGuard::drop"
+kappa = "93e829864bc69135a08892fe144370de1c42e89ee28daed8e13599841fd79429"
+at = "LenT=u32, T=u32"
+embedded = "b95b65be6076a6676f3adb34e8aaa79a4315ec467e9d833ecff9b71e13b6c41f"
+status = "residue"
+cause = "mir::Ty: <vec::drain::Drain<'_, u32, u32> as Drop>::drop::DropGuard<'_, '_, u32, u32>"
+
+[[fn]]
+path = "heapless::vec::drain::Drain::fmt"
+kappa = "6a0cf21ea88d343fa2ba6886683632dec436dac4af440d6775c221444932f4cf"
+at = "T=u32"
+embedded = "e494802360c66bd5945d7f90f6fdfc3129a77593583befde9d80e284c9e1f67b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "heapless::vec::drain::Drain::next"
+kappa = "07b18d571fda353d1254b208c2c3b5715c3603933f3485b320411b9ec487dcd8"
+at = "T=u32"
+embedded = "4219de9a9e3aba3d45490ae842087c6d71db70858568c2ef5e71bd8d17effc39"
+status = "residue"
+cause = "mir::Ty: LenT"
+
+[[fn]]
+path = "heapless::vec::drain::Drain::next_back"
+kappa = "698cbe990a6a993fa5267c066c165688681978355f0f42e69c0c597d27f7cc9b"
+at = "T=u32"
+embedded = "dcefcbefe0a1792c2e8fdd440deaaf5edc0e1f62b84f190ea70a6c5d438b4cff"
+status = "residue"
+cause = "mir::Ty: LenT"
+
+[[fn]]
+path = "heapless::vec::drain::Drain::size_hint"
+kappa = "7c5465e4149e8456f5bdea2e9329e79ab7aa0e8f86e2eb3fac846b0f8fbc9d85"
+at = "T=u32"
+embedded = "47e00ec195dba5b29a9ca3ee68beefc7d42b527e9211c4382446a7e2afa68008"
+status = "residue"
+cause = "mir::Ty: LenT"
+
+[[fn]]
+path = "heapless::vec::storage::OwnedVecStorage::as_binary_heap_view"
+kappa = "bec75714d04e8e328e9476193c004d307a1a8e756494d0effc5a4036791b4d2a"
+at = "K=u32, N=#usize_N, T=u32"
+embedded = "48d2282ce9ddf491402b081283802daf3205ac4721b0b0b0c1331cdf3a48b776"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::OwnedVecStorage::as_binary_heap_view_mut"
+kappa = "30f4f2c23e9c4622b604cf1b1584e0f5266055aa528880bdb1a08871edee4a24"
+at = "K=u32, N=#usize_N, T=u32"
+embedded = "6110c543f812d98caf688cd58f6486259614144570c12754163cb3bb527b38ca"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::OwnedVecStorage::as_deque_view"
+kappa = "995e7ea0d0305fafb083c3001c737b643f4ff27c2f1d0a09afdc8708c9172325"
+at = "N=#usize_N, T=u32"
+embedded = "1ebf404987527a16a87a4fbf3ced89f93cb9e592af40096e83ed8daa0ee2100e"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::OwnedVecStorage::as_deque_view_mut"
+kappa = "f1fa1089dcb597f569cfe73b6a1ea94d69c5ecf2eb2c9248738d92636d94e571"
+at = "N=#usize_N, T=u32"
+embedded = "f1756b7a7e54a060c13f69bd4c8f060c9f6413b263c5621a1bffc4bb5ae0ba3e"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::OwnedVecStorage::as_vec_view"
+kappa = "eeeb1dba04def7ce4d2b1d0cce9249e1ae17829feaf537e05239b80eccd2bf93"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "5c9eb78c8a3be7d7f15a9ed113fd21ed2699ad35eea99ab5b0781c11e8127dca"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::OwnedVecStorage::as_vec_view_mut"
+kappa = "4b12b2a7b34a3fe45a833a4d132e3c9cb788a47d500265da89b9cc781fa4a155"
+at = "LenT=u32, N=#usize_N, T=u32"
+embedded = "887d1a71214bfd630f1823a1809b5d7f4af96c2a42ea9eb6aaa76b1d1dda30a9"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::OwnedVecStorage::borrow"
+kappa = "913409c1648ef32bfa909a4130362ec735d93ae65d13e99a7bd806cb366b95d9"
+at = "N=#usize_N, T=u32"
+embedded = "058f1265bbd0e7069dab9bbcba11c154db2842843a49ee41d5dcdaae6c3f60d9"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "heapless::vec::storage::OwnedVecStorage::borrow_mut"
+kappa = "913aed5dd1df625335841ee054e37817b8dae50213b28552d2a6c2d4ef2806b0"
+at = "N=#usize_N, T=u32"
+embedded = "d23b542c02fa4848194ab0dffb752a138e91b6c302a9964c91d88250a84f2fd6"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "heapless::vec::storage::ViewVecStorage::as_binary_heap_view"
+kappa = "6ec3f2ef3dda1e7bdb79f3cde5b2e7db5abeea968ed8363d29f327f78154e538"
+at = "K=u32, T=u32"
+embedded = "f71a4d6d55ee8e2a35712513a40252dbc25cdeea71030514eac566105d56c0f5"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::ViewVecStorage::as_binary_heap_view_mut"
+kappa = "e2e20ccfa3908e6c0483c3e92fa7e7321c79ddb99819ba3b99ffc34d20f77a4e"
+at = "K=u32, T=u32"
+embedded = "d6996c80a2dae9ca3408b2bb9cae3df9a8ec665043771a30eaaea0deca95c892"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::ViewVecStorage::as_deque_view"
+kappa = "7ae43f1fd003650ae99d06815b53736e71ffbaa265e98e1babc71ec689c051d3"
+at = "T=u32"
+embedded = "5e6edbc52076cb5e13258df8cbbc0b2b1b1919a498ee281f4515c6f8c53669bc"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::ViewVecStorage::as_deque_view_mut"
+kappa = "a0d1a08c2c5d5fad040082a7b0b532cc91df5c136627f01aad05d6ffa1e02a9e"
+at = "T=u32"
+embedded = "0b8239555eeac1e8d17de0afef8200161ab2f29eb6fb1f2d2d24c0488b252ca1"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::ViewVecStorage::as_vec_view"
+kappa = "55d9252988c2fa508ff62fc52364d4306da5ff397cd918db1e99500c78834977"
+at = "LenT=u32, T=u32"
+embedded = "d794e67adc77f4b7f6fe4d4e6a87fad93ac831339d6a7c5d90f05ffe9458b9ce"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::ViewVecStorage::as_vec_view_mut"
+kappa = "52f61c56b77d8d82f84667fa636df015e464884166cfaa6b2617cdaeac306b5f"
+at = "LenT=u32, T=u32"
+embedded = "8fb0d70b0caf77edc522038c23b1c7ae47a2a2fb938fcc18c1ece491ff9737ca"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::vec::storage::ViewVecStorage::borrow"
+kappa = "e66d66bbe134fa5978979148eb3d103e6d6215bf1e20a5ec7e89e69112bfb62b"
+at = "T=u32"
+embedded = "05d2a6be58f6a066cb3457f54bab47baa54703a51a773d4ca488ae23de3d85d9"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "heapless::vec::storage::ViewVecStorage::borrow_mut"
+kappa = "3f252b5934757182443ee9a770effd82e675f4607c16272962b2021ba76f7c25"
+at = "T=u32"
+embedded = "aa0bc3295ea5ad52d182f0cfdbd6bb78348620a5ead5f1aeeb9d1e0b7cc03a5e"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+

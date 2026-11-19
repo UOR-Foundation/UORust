@@ -1,0 +1,108 @@
+# The aws-smithy-query register (written by `uorust crate aws-smithy-query@0.64.0`; do not edit): every body of
+# aws-smithy-query's MIR at aws-smithy-query 0.64.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 63
+translated = 0
+residue = 63
+
+[module.codec]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.crate]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.protocol]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 63
+embedded = 63
+evaluable = 63
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_schema::serde::SerdeError"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: QueryValueWriter<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: QueryShapeSerializer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codec::serializer::Name"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: QueryListWriter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: QueryMapWriter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: protocol::AwsQueryProtocol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: QueryWriter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codec::serializer::Segment<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Segment<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::http::Request"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_schema::ShapeId<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::date_time::DateTimeFormatError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::serializer::ElementName"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::serializer::QueryShapeSerializer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn aws_smithy_schema::serde::ShapeDeserializer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serializer::Name"
+bodies = 1

@@ -1,0 +1,657 @@
+# The sqlx-sqlite register (written by `uorust crate sqlx-sqlite@0.9.1`; do not edit): every body of
+# sqlx-sqlite's MIR at sqlx-sqlite 0.9.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 516
+translated = 0
+residue = 516
+
+[module.arguments]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.column]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.connection]
+bodies = 170
+translated = 0
+residue = 170
+
+[module.crate]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.database]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.error]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.logger]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.options]
+bodies = 71
+translated = 0
+residue = 71
+
+[module.query_result]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.row]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.statement]
+bodies = 55
+translated = 0
+residue = 55
+
+[module.transaction]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.type_checking]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.type_info]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.types]
+bodies = 78
+translated = 0
+residue = 78
+
+[module.value]
+bodies = 40
+translated = 0
+residue = 40
+
+[embedding]
+bodies = 516
+embedded = 516
+evaluable = 514
+blocked = 2
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: options::SqliteConnectOptions"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: type_info::SqliteTypeInfo"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: StatementHandle"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: SqliteTypeInfo"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: error::SqliteError"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: IntMap<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: LockedSqliteHandle<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: database::Sqlite"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: connection::explain::ColumnType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: type_info::DataType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ConnectionState"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: QueryPlanLogger<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: connection::intmap::IntMap<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BranchParent"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ConnectionHandle"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SqliteConnection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ValueHandle"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: value::SqliteValue"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ColumnType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CursorDataType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MemoryState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RegDataType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SqliteValueRef<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: value::SqliteValueRef<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: value::ValueHandle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DataType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SqliteAutoVacuum"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SqliteJournalMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SqliteLockingMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SqliteQueryResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SqliteSynchronous"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TableDataType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arguments::SqliteArguments"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arguments::SqliteArgumentsBuffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: column::SqliteColumn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connection::explain::MemoryState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: logger::BranchParent"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::auto_vacuum::SqliteAutoVacuum"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::journal_mode::SqliteJournalMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::locking_mode::SqliteLockingMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::synchronous::SqliteSynchronous"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: value::BorrowedBlobError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SqliteArguments"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SqliteColumn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SqliteConnectOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SqliteOperation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SqliteValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Statements"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WorkerSharedState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::SqliteOperation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::collation::Collation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::explain::QueryState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::explain::RegDataType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: connection::explain::TableDataType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: query_result::SqliteQueryResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::Url"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::column::ColumnOrigin"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::sql_str::SqlStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::type_checking::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: statement::SqliteStatement"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: statement::handle::StatementHandle"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: statement::r#virtual::PreparedStatement<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: statement::r#virtual::VirtualStatement"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::Blob"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::clear_cache"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::commit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::ping"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::rollback"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: commit_hook::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: connection::update_hook::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: progress_callback::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: rollback_hook::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <database::Sqlite as sqlx_core::database::Database>::URL_SCHEMES::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as sqlx_core::encode::Encode<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Box::from_raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::is_null"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BranchList"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExecuteIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Sequence"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SqliteArgumentsBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SqliteError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arguments::SqliteArgumentValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::ConnectionState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::Statements"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::establish::EstablishParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::execute::ExecuteIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::explain::BranchList"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::explain::CursorDataType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::explain::Sequence"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::handle::ConnectionHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::worker::rendezvous_oneshot::Sender<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut connection::SqliteConnection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<statement::SqliteStatement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<row::SqliteRow>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<sqlx_core::Either<query_result::SqliteQueryResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: futures_channel::oneshot::Canceled"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: logger::QueryPlanLogger<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::OptimizeOnClose"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: row::SqliteRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::error::ErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::type_checking::ParamChecking"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::types::Text<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::FilterMap<std::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/connection/worker.rs:533:9: 533:19}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::SqliteConnection as sqlx_core::connection::Connection>::close"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::SqliteConnection as sqlx_core::connection::Connection>::close_hard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::SqliteConnection as sqlx_core::connection::Connection>::flush"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <transaction::SqliteTransactionManager as sqlx_core::transaction::TransactionManager>::begin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::SqliteConnection::establish"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::SqliteConnection::lock_handle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::begin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::establish"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::execute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::oneshot_cmd<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::oneshot_cmd_with_ack<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::prepare"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::ConnectionWorker::unlock_db"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::rendezvous_oneshot::Receiver<u32>::recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::worker::rendezvous_oneshot::Sender<u32>::send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of options::connect::connect"
+bodies = 1

@@ -1,0 +1,52 @@
+# The rstest register (written by `uorust crate rstest@0.28.0`; do not edit): every body of
+# rstest's MIR at rstest 0.28.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 6
+translated = 0
+residue = 6
+
+[module.context]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.magic_conversion]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.timeout]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 6
+embedded = 6
+evaluable = 6
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Magic<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Magic<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: context::Context"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of timeout::execute_with_timeout_async<u32"
+bodies = 1

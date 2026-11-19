@@ -1,0 +1,46 @@
+# The termtree register (written by `uorust crate termtree@1.0.0`; do not edit): every body of
+# termtree's MIR at termtree 1.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 26
+translated = 2
+residue = 24
+
+[module.crate]
+bodies = 26
+translated = 2
+residue = 24
+
+[embedding]
+bodies = 26
+embedded = 26
+evaluable = 26
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Tree<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: GlyphPalette"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SpacePalette"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: GlyphPalette::new: termtree's MIR stops at mir::Rvalue::Aggregate: of Nat"
+bodies = 1
