@@ -1274,6 +1274,7 @@ mod tests {
     #[test]
     fn library_termination_evidence_with_axioms_refuses_its_root() {
         let evidence = |name: &str, axioms: Vec<String>| Decl::Theorem {
+            type_parameters: Vec::new(),
             name: name.into(),
             parameters: Vec::new(),
             statement: "True".into(),
@@ -1326,11 +1327,13 @@ mod tests {
     #[test]
     fn library_a_type_of_a_mutual_block_is_refused_and_unreached_types_stay_out() {
         let data = |name: &str, field: &str| Decl::Data {
+            type_parameters: Vec::new(),
             name: name.into(),
             constructors: vec![("leaf".into(), vec![field.into()])],
             mutual: Some("TreeGroup".into()),
         };
         let plain = |name: &str, field: &str| Decl::Structure {
+            type_parameters: Vec::new(),
             name: name.into(),
             fields: vec![("value".into(), field.into())],
         };
@@ -1365,6 +1368,7 @@ mod tests {
     #[test]
     fn library_a_recursive_type_or_an_unbounded_int_is_refused() {
         let zone = Decl::Data {
+            type_parameters: Vec::new(),
             name: "Zone".into(),
             constructors: vec![
                 ("Room".into(), vec!["String".into()]),
@@ -1481,10 +1485,12 @@ mod tests {
             d
         };
         let point = Decl::Structure {
+            type_parameters: Vec::new(),
             name: "Point".into(),
             fields: vec![("x".into(), "Nat".into()), ("on".into(), "Bool".into())],
         };
         let named = Decl::Structure {
+            type_parameters: Vec::new(),
             name: "Named".into(),
             fields: vec![("label".into(), "String".into())],
         };

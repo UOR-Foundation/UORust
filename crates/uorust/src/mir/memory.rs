@@ -97,6 +97,7 @@ fn theorem(name: String, parameters: &[(&str, &str)], statement: String, uses: &
     uses.sort_unstable();
     uses.dedup();
     Decl::Theorem {
+        type_parameters: Vec::new(),
         name,
         parameters: parameters
             .iter()
@@ -608,6 +609,7 @@ pub(crate) fn declarations(strides: &BTreeSet<u64>) -> Vec<Decl> {
     // sound stand-in for its bytes; these laws, one for each constructor,
     // are that injectivity. Each holds by reduction.
     out.push(Decl::Theorem {
+        type_parameters: Vec::new(),
         name: "mirOptionCodeRoundTripNone".into(),
         parameters: Vec::new(),
         statement: "((mirDecodeOption (mirEncodeOption (ctor Option.none [Nat]))) = (ctor Option.none [Nat]))"
@@ -616,6 +618,7 @@ pub(crate) fn declarations(strides: &BTreeSet<u64>) -> Vec<Decl> {
         axioms: Vec::new(),
     });
     out.push(Decl::Theorem {
+        type_parameters: Vec::new(),
         name: "mirOptionCodeRoundTripSome".into(),
         parameters: vec![("held".into(), "Nat".into())],
         statement: "((mirDecodeOption (mirEncodeOption (ctor Option.some [Nat] held))) = (ctor Option.some [Nat] held))"

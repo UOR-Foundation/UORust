@@ -453,3 +453,9 @@ id = "UE-66"
 level = "build"
 suite = "engine"
 statement = "Compiler calls compose source-lifted generic dependencies through the existing source generic-call binder, retaining exact type-parameter identities, coherent trait dictionary methods and dependency evidence; missing implementations, incompatible dictionary signatures, mutable interfaces and native ABI mismatches remain typed refusals"
+
+[[id]]
+id = "UE-67"
+level = "build"
+suite = "engine"
+statement = "Compiler bodies reuse declared source type-parameter readings and preserve them through SDK-owned products and generated control-flow declarations with explicit generic dependency bindings; generic drop effects, unresolved dictionary dispatch and unsupported state remain typed residue rather than receiving invented meanings"

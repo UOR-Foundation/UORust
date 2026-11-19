@@ -192,13 +192,7 @@ impl Ty {
             Self::Outcome(t, e) => format!("(Result {} {})", t.render(), e.render()),
             Self::List(t) | Self::Set(t, _) => format!("(List {})", t.render()),
             Self::Tuple(ts) => format!("Tuple{}", ts.iter().map(|t| t.tag()).collect::<String>()),
-            Self::Pair(ts) => format!(
-                "({})",
-                ts.iter()
-                    .map(|t| t.render())
-                    .collect::<Vec<String>>()
-                    .join(" * ")
-            ),
+            Self::Pair(ts) => product_types(ts),
             // The list of its entries, each the tuple of a key and a value.
             Self::Map(k, v, _) => format!("(List Tuple{}{})", k.tag(), v.tag()),
             Self::Fn(ins, out) => format!(
@@ -327,6 +321,32 @@ impl Ty {
             _ => BTreeSet::new(),
         }
     }
+
+    /// Free type parameters, including those inside containers and callbacks.
+    pub(crate) fn parameters(&self) -> BTreeSet<String> {
+        match self {
+            Self::Param(n) => BTreeSet::from([n.clone()]),
+            Self::Option(t) | Self::List(t) | Self::Set(t, _) => t.parameters(),
+            Self::Outcome(a, b) | Self::Map(a, b, _) => {
+                a.parameters().union(&b.parameters()).cloned().collect()
+            }
+            Self::Tuple(ts) | Self::Pair(ts) => ts.iter().flat_map(Self::parameters).collect(),
+            Self::Fn(ins, out) => ins
+                .iter()
+                .chain(std::iter::once(out.as_ref()))
+                .flat_map(Self::parameters)
+                .collect(),
+            _ => BTreeSet::new(),
+        }
+    }
+}
+
+fn product_types(ts: &[Ty]) -> String {
+    match ts {
+        [] => "Unit".into(),
+        [t] => t.render(),
+        [first, rest @ ..] => format!("({} * {})", first.render(), product_types(rest)),
+    }
 }
 
 /// The names of the enums and structs among the types a type mentions.
@@ -358,8 +378,14 @@ pub(crate) fn struct_value(name: &str, fields: &[(&String, String)], types: &Typ
 /// The `i`-th item of a tuple value `whole` of type `ty`.
 pub(crate) fn tuple_item(ty: &Ty, whole: &str, i: usize) -> String {
     match ty {
-        Ty::Pair(_) if i == 0 => format!("(first {whole})"),
-        Ty::Pair(_) => format!("(second {whole})"),
+        Ty::Pair(ts) => {
+            let rest = (0..i).fold(whole.to_string(), |v, _| format!("(second {v})"));
+            if i + 1 == ts.len() {
+                rest
+            } else {
+                format!("(first {rest})")
+            }
+        }
         _ => format!("(project {whole} item{i})"),
     }
 }
@@ -367,7 +393,12 @@ pub(crate) fn tuple_item(ty: &Ty, whole: &str, i: usize) -> String {
 /// A tuple value of type `ty` from its items.
 pub(crate) fn tuple_value(ty: &Ty, items: &[String]) -> String {
     match ty {
-        Ty::Pair(_) => format!("({}, {})", items[0], items[1]),
+        Ty::Pair(_) => items
+            .iter()
+            .rev()
+            .cloned()
+            .reduce(|rest, first| format!("({first}, {rest})"))
+            .unwrap_or_else(|| "()".into()),
         _ => {
             let parts: Vec<String> = items
                 .iter()
@@ -1255,7 +1286,7 @@ impl Types {
             inner.extend(t.mentions());
         }
         let data = named_in(&inner).iter().any(|n| self.datas.contains_key(n));
-        if ts.len() == 2 && data {
+        if (ts.len() == 2 && data) || ts.iter().any(|t| !t.parameters().is_empty()) {
             Ty::Pair(ts)
         } else {
             Ty::Tuple(ts)
@@ -4865,6 +4896,9 @@ fn instantiate(pattern: &Ty, actual: &Ty, bind: &mut BTreeMap<String, Ty>) -> bo
                 && xs.iter().zip(ys).all(|(x, y)| instantiate(x, y, bind))
                 && instantiate(r, s, bind)
         }
+        (Ty::Tuple(xs), Ty::Tuple(ys)) | (Ty::Pair(xs), Ty::Pair(ys)) => {
+            xs.len() == ys.len() && xs.iter().zip(ys).all(|(a, b)| instantiate(a, b, bind))
+        }
         _ => pattern.same(actual) && !pattern.render().contains('\''),
     }
 }
@@ -4880,6 +4914,8 @@ fn instantiated(pattern: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
         Ty::Outcome(t, e) => Ty::Outcome(go(t), go(e)),
         Ty::Map(k, v, o) => Ty::Map(go(k), go(v), *o),
         Ty::Fn(ins, out) => Ty::Fn(ins.iter().map(|t| instantiated(t, bind)).collect(), go(out)),
+        Ty::Tuple(ts) => Ty::Tuple(ts.iter().map(|t| instantiated(t, bind)).collect()),
+        Ty::Pair(ts) => Ty::Pair(ts.iter().map(|t| instantiated(t, bind)).collect()),
         other => other.clone(),
     }
 }
@@ -10538,6 +10574,7 @@ fn while_loop(
     let evidence = format!("decreases_{name}_0");
     let axioms: Vec<String> = ["Quot.sound", "propext"].map(String::from).to_vec();
     let theorem = Decl::Theorem {
+        type_parameters: Vec::new(),
         name: evidence,
         parameters: params.clone(),
         statement: format!(
@@ -13823,6 +13860,7 @@ fn well_founded(
         let name = format!("decreases_{}_{i}", c.name);
         evidence.push(name.clone());
         theorems.push(Decl::Theorem {
+            type_parameters: Vec::new(),
             name,
             parameters,
             statement,
@@ -14060,6 +14098,7 @@ fn mutual_group(
                 (
                     format!("#{name}"),
                     Decl::Theorem {
+                        type_parameters: Vec::new(),
                         name,
                         parameters,
                         statement,

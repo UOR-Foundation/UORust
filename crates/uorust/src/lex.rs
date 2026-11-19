@@ -393,16 +393,19 @@ impl Expr {
 pub(crate) enum Decl {
     Structure {
         name: String,
+        type_parameters: Vec<String>,
         fields: Vec<(String, String)>,
     },
     Inductive {
         name: String,
+        type_parameters: Vec<String>,
         constructors: Vec<String>,
     },
     /// An inductive whose constructors carry fields: `(constructor, field
     /// types)`.
     Data {
         name: String,
+        type_parameters: Vec<String>,
         constructors: Vec<(String, Vec<String>)>,
         /// The label of the mutual group the inductive is declared in.
         mutual: Option<String>,
@@ -426,6 +429,7 @@ pub(crate) enum Decl {
     },
     Theorem {
         name: String,
+        type_parameters: Vec<String>,
         parameters: Vec<(String, String)>,
         statement: String,
         proof: String,
@@ -456,6 +460,242 @@ impl Decl {
             recursive: None,
             termination: None,
             mutual: None,
+        }
+    }
+}
+
+/// Tokens of the emitter's own notation. Quoted content is not a reference or
+/// a type variable; offsets permit binding without touching literal bytes.
+fn binding_words(text: &str) -> Vec<(usize, usize, &str)> {
+    let bytes = text.as_bytes();
+    let mut i = 0;
+    let mut out = Vec::new();
+    while i < bytes.len() {
+        if bytes[i] == b'"' {
+            i += 1;
+            while i < bytes.len() {
+                match bytes[i] {
+                    b'\\' => i += 2,
+                    b'"' => {
+                        i += 1;
+                        break;
+                    }
+                    _ => i += 1,
+                }
+            }
+        } else if bytes[i].is_ascii_alphanumeric() || matches!(bytes[i], b'_' | b'\'') {
+            let start = i;
+            i += 1;
+            while i < bytes.len()
+                && (bytes[i].is_ascii_alphanumeric() || matches!(bytes[i], b'_' | b'.' | b':'))
+            {
+                i += 1;
+            }
+            out.push((start, i, &text[start..i]));
+        } else {
+            i += 1;
+        }
+    }
+    out
+}
+
+/// Bind generated compiler declarations by the type variables they and their
+/// dependencies actually use. The SDK still checks every resulting type,
+/// recursive call and proof; this pass introduces no Rust operation model.
+pub(crate) fn bind_parameters(
+    decls: &mut [Decl],
+    aux: &mut std::collections::BTreeMap<String, Decl>,
+    outer: &[String],
+    main: &str,
+) {
+    use std::collections::{BTreeMap, BTreeSet};
+    if outer.is_empty() {
+        return;
+    }
+    let all: Vec<&Decl> = aux.values().chain(decls.iter()).collect();
+    let allowed: BTreeSet<_> = outer.iter().cloned().collect();
+    let texts: BTreeMap<_, _> = all
+        .iter()
+        .map(|d| (d.name().to_string(), render_decl(d)))
+        .collect();
+    let mut used: BTreeMap<String, BTreeSet<String>> = texts
+        .iter()
+        .map(|(n, text)| {
+            let mut vars: BTreeSet<_> = binding_words(text)
+                .iter()
+                .filter_map(|(_, _, word)| {
+                    word.strip_prefix('\'')
+                        .filter(|v| allowed.contains(*v))
+                        .map(str::to_string)
+                })
+                .collect();
+            if n == main {
+                vars.extend(outer.iter().cloned());
+            }
+            (n.clone(), vars)
+        })
+        .collect();
+    let groups: BTreeMap<_, _> = all
+        .iter()
+        .filter_map(|d| match d {
+            Decl::Data {
+                name,
+                mutual: Some(g),
+                ..
+            }
+            | Decl::Definition {
+                name,
+                mutual: Some(g),
+                ..
+            } => Some((name.clone(), g.clone())),
+            _ => None,
+        })
+        .collect();
+    loop {
+        let old = used.clone();
+        for (n, text) in &texts {
+            for (_, _, word) in binding_words(text) {
+                let owner = word.split_once('.').map_or(word, |(n, _)| n);
+                if let Some(vars) = old.get(owner) {
+                    used.get_mut(n)
+                        .expect("emitted declaration")
+                        .extend(vars.iter().cloned());
+                }
+            }
+            if let Some(group) = groups.get(n) {
+                for (member, other) in &groups {
+                    if other == group {
+                        used.get_mut(n)
+                            .expect("emitted declaration")
+                            .extend(old[member].iter().cloned());
+                    }
+                }
+            }
+        }
+        if used == old {
+            break;
+        }
+    }
+    let bindings: BTreeMap<String, Vec<String>> = used
+        .into_iter()
+        .map(|(n, vars)| {
+            (
+                n,
+                outer
+                    .iter()
+                    .filter(|p| vars.contains(*p))
+                    .cloned()
+                    .collect(),
+            )
+        })
+        .collect();
+    let data: BTreeSet<_> = all
+        .iter()
+        .filter(|d| {
+            matches!(
+                d,
+                Decl::Structure { .. } | Decl::Inductive { .. } | Decl::Data { .. }
+            )
+        })
+        .map(|d| d.name().to_string())
+        .collect();
+    let rewrite = |text: &str, ty: bool| {
+        let words = binding_words(text);
+        let mut out = String::new();
+        let mut at = 0;
+        for (index, (start, end, word)) in words.iter().enumerate() {
+            out.push_str(&text[at..*start]);
+            let owner = word.split_once('.').map_or(*word, |(n, _)| n);
+            let params = bindings.get(owner).filter(|p| !p.is_empty());
+            let previous = index.checked_sub(1).map(|i| words[i].2);
+            let after = text[*end..].trim_start();
+            let head = text[..*start].trim_end().ends_with('(');
+            let field = after.starts_with(":=");
+            if let Some(params) = params.filter(|_| !field && !after.starts_with('[')) {
+                let arguments = params.iter().map(|p| format!("'{p}")).collect::<Vec<_>>();
+                if data.contains(owner)
+                    && owner == *word
+                    && (ty || !matches!(previous, Some("record")))
+                {
+                    out.push_str(&format!("({word} {})", arguments.join(" ")));
+                } else if !ty
+                    && (matches!(previous, Some("ctor" | "record" | "ref"))
+                        || (head && !data.contains(owner)))
+                {
+                    out.push_str(&format!("{word} [{}]", arguments.join(", ")));
+                } else {
+                    out.push_str(word);
+                }
+            } else {
+                out.push_str(word);
+            }
+            at = *end;
+        }
+        out.push_str(&text[at..]);
+        out
+    };
+    for decl in aux.values_mut().chain(decls.iter_mut()) {
+        let name = decl.name().to_string();
+        let (parameters, type_parameters) = match decl {
+            Decl::Structure {
+                type_parameters,
+                fields,
+                ..
+            } => {
+                for (_, ty) in fields {
+                    *ty = rewrite(ty, true);
+                }
+                (None, type_parameters)
+            }
+            Decl::Inductive {
+                type_parameters, ..
+            } => (None, type_parameters),
+            Decl::Data {
+                type_parameters,
+                constructors,
+                ..
+            } => {
+                for (_, fields) in constructors {
+                    for ty in fields {
+                        *ty = rewrite(ty, true);
+                    }
+                }
+                (None, type_parameters)
+            }
+            Decl::Definition {
+                type_parameters,
+                parameters,
+                result,
+                body,
+                termination,
+                ..
+            } => {
+                *result = rewrite(result, true);
+                *body = Expr::read(&rewrite(&body.flat(), false));
+                if let Some((measure, _)) = termination {
+                    *measure = rewrite(measure, false);
+                }
+                (Some(parameters), type_parameters)
+            }
+            Decl::Theorem {
+                type_parameters,
+                parameters,
+                statement,
+                ..
+            } => {
+                *statement = rewrite(statement, false);
+                (Some(parameters), type_parameters)
+            }
+        };
+        if let Some(parameters) = parameters {
+            for (_, ty) in parameters {
+                *ty = rewrite(ty, true);
+            }
+        }
+        for param in &bindings[&name] {
+            if !type_parameters.contains(param) {
+                type_parameters.push(param.clone());
+            }
         }
     }
 }
@@ -504,7 +744,11 @@ fn params(parameters: &[(String, String)]) -> Vec<String> {
 
 pub(crate) fn render_decl(decl: &Decl) -> String {
     match decl {
-        Decl::Structure { name, fields } => {
+        Decl::Structure {
+            name,
+            type_parameters,
+            fields,
+        } => {
             let items: Vec<String> = fields
                 .iter()
                 .map(|(field, ty)| format!("{{name: {field}, type: {ty}}}"))
@@ -523,7 +767,7 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
                 .collect();
             let head = [
                 format!("name: {name}"),
-                "type_parameters: []".to_string(),
+                format!("type_parameters: [{}]", type_parameters.join(", ")),
                 "parameters: []".to_string(),
             ];
             let mut flat = head.to_vec();
@@ -532,14 +776,18 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
             broken.push(list("fields", &lines, 2, false));
             members("structure", &flat, &broken, true)
         }
-        Decl::Inductive { name, constructors } => {
+        Decl::Inductive {
+            name,
+            type_parameters,
+            constructors,
+        } => {
             let items: Vec<String> = constructors
                 .iter()
                 .map(|ctor| format!("{{name: {ctor}, fields: []}}"))
                 .collect();
             let head = [
                 format!("name: {name}"),
-                "type_parameters: []".to_string(),
+                format!("type_parameters: [{}]", type_parameters.join(", ")),
                 "parameters: []".to_string(),
             ];
             let mut flat = head.to_vec();
@@ -550,6 +798,7 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
         }
         Decl::Data {
             name,
+            type_parameters,
             constructors,
             mutual,
         } => {
@@ -577,7 +826,7 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
                 .collect();
             let head = [
                 format!("name: {name}"),
-                "type_parameters: []".to_string(),
+                format!("type_parameters: [{}]", type_parameters.join(", ")),
                 "parameters: []".to_string(),
             ];
             let mut flat = head.to_vec();
@@ -663,6 +912,7 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
         }
         Decl::Theorem {
             name,
+            type_parameters,
             parameters,
             statement,
             proof,
@@ -695,6 +945,16 @@ pub(crate) fn render_decl(decl: &Decl) -> String {
                 format!("  statement: {statement}"),
                 broken_proof,
             ];
+            if !type_parameters.is_empty() {
+                flat.insert(
+                    1,
+                    format!("type_parameters: [{}]", type_parameters.join(", ")),
+                );
+                broken.insert(
+                    1,
+                    format!("  type_parameters: [{}]", type_parameters.join(", ")),
+                );
+            }
             if !axioms.is_empty() {
                 flat.push(format!("axioms: [{}]", axioms.join(", ")));
                 broken.push(list("axioms", axioms, 2, false));
@@ -812,6 +1072,69 @@ pub(crate) fn pascal(parts: &[&str]) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn generic_binding_follows_dependencies_and_ignores_literals_ue_67() {
+        use std::collections::BTreeMap;
+        let helper = Decl::Definition {
+            name: "helper".into(),
+            type_parameters: Vec::new(),
+            parameters: vec![("x".into(), "'T".into())],
+            result: "'T".into(),
+            body: Expr::Flat("x".into()),
+            axioms: Vec::new(),
+            recursive: None,
+            termination: None,
+            mutual: None,
+        };
+        let mut aux = BTreeMap::from([("helper".into(), helper)]);
+        let literal = string("'T (helper x)");
+        let mut main = aux["helper"].clone();
+        if let Decl::Definition { name, body, .. } = &mut main {
+            *name = "main".into();
+            *body = Expr::Flat("(helper x)".into());
+        }
+        let mut decls = vec![
+            main,
+            Decl::value("literal", "String", literal.clone()),
+            Decl::value("independent", "Bool", "true".into()),
+        ];
+        bind_parameters(&mut decls, &mut aux, &["T".into()], "main");
+        let Decl::Definition {
+            type_parameters, ..
+        } = &aux["helper"]
+        else {
+            panic!("helper")
+        };
+        assert_eq!(type_parameters, &["T"]);
+        let Decl::Definition {
+            type_parameters,
+            body,
+            ..
+        } = &decls[0]
+        else {
+            panic!("main")
+        };
+        assert_eq!(type_parameters, &["T"]);
+        assert_eq!(body.flat(), "(helper ['T] x)");
+        let Decl::Definition {
+            type_parameters,
+            body,
+            ..
+        } = &decls[1]
+        else {
+            panic!("literal")
+        };
+        assert!(type_parameters.is_empty());
+        assert_eq!(body.flat(), literal);
+        let Decl::Definition {
+            type_parameters, ..
+        } = &decls[2]
+        else {
+            panic!("independent")
+        };
+        assert!(type_parameters.is_empty());
+    }
 
     #[test]
     fn proof_closure_keeps_transitive_types_and_mutual_groups_ue_53() {

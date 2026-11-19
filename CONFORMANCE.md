@@ -87,6 +87,7 @@ model does not sanction.
 | `UE-64` | `build` | Native standard inherent calls import the existing source translator's semantic models through compiler-owned paths and exact source/native type bindings, retaining their declaration dependencies and SDK obligations, including immutable compiler closure environments reified through the same callable interface; mutable inputs, incompatible carriers, partial panic models, divergent readings and custom owners remain refused |
 | `UE-65` | `build` | Native type lowering imports closed source semantic type readings when its own reading is absent, preserving native primitive ABI priority and admitted SDK identities without inventing shared-cell contents, locks, reference counts or pointer equality; incompatible scalar, callable, generic and unregistered nominal readings remain typed refusals |
 | `UE-66` | `build` | Compiler calls compose source-lifted generic dependencies through the existing source generic-call binder, retaining exact type-parameter identities, coherent trait dictionary methods and dependency evidence; missing implementations, incompatible dictionary signatures, mutable interfaces and native ABI mismatches remain typed refusals |
+| `UE-67` | `build` | Compiler bodies reuse declared source type-parameter readings and preserve them through SDK-owned products and generated control-flow declarations with explicit generic dependency bindings; generic drop effects, unresolved dictionary dispatch and unsupported state remain typed residue rather than receiving invented meanings |
 
 ## factory
 

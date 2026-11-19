@@ -4276,6 +4276,7 @@ fn behavior(
                     continue;
                 }
                 decls.push(Decl::Inductive {
+                    type_parameters: Vec::new(),
                     name,
                     constructors: e.variants.iter().map(|v| v.name.clone()).collect(),
                 });
@@ -4964,6 +4965,52 @@ fn behavior(
         model_sigs.push(exact);
         results.push((sigs, out.axioms));
     }
+    let mut native_generics: BTreeMap<FnRef, lift::Generic> = scoped
+        .iter()
+        .flat_map(|(candidates, names)| {
+            candidates
+                .iter()
+                .filter_map(|c| Some((*names.get(&c.rust)?, c.generic.clone()?)))
+        })
+        .collect();
+    // A trait bound need not be interpreted to transport its parameter.
+    // Unresolved parametric dispatch remains refused in native lowering.
+    for r in ctx.all_fns() {
+        if native_generics.contains_key(&r) {
+            continue;
+        }
+        let sig = &syntax.function(&ctx.file(r).rel, r.idx).signature;
+        if sig
+            .generics
+            .iter()
+            .any(|p| matches!(p, crate::ast::GenericParam::Const(_)))
+        {
+            continue;
+        }
+        let names = generic_type_names(sig, types_of(r));
+        if names.is_empty() {
+            continue;
+        }
+        let parameters = sig
+            .generics
+            .iter()
+            .filter_map(|p| match p {
+                crate::ast::GenericParam::Type(n) => Some(names[n].clone()),
+                _ => None,
+            })
+            .collect();
+        native_generics.insert(
+            r,
+            lift::Generic {
+                types: parameters,
+                reads: names
+                    .into_iter()
+                    .map(|(rust, lex)| (rust, Ty::Param(lex)))
+                    .collect(),
+                dictionary: Vec::new(),
+            },
+        );
+    }
     // The MIR path, for every function the surface lift left as residue.
     let mut listing = None;
     let mut translated = Vec::new();
@@ -5000,6 +5047,7 @@ fn behavior(
             options,
             &mir_scopes,
             &model_sigs,
+            &native_generics,
             &callees,
             &taken,
             &homonyms,
@@ -5126,6 +5174,7 @@ fn behavior(
                         mutual: None,
                     });
                     decls.push(Decl::Theorem {
+                        type_parameters: Vec::new(),
                         name: format!("{root}Holds"),
                         parameters: Vec::new(),
                         statement: format!("(({root}) = true)"),
@@ -5133,6 +5182,7 @@ fn behavior(
                         axioms: axioms.clone(),
                     });
                     decls.push(Decl::Theorem {
+                        type_parameters: Vec::new(),
                         name,
                         parameters: Vec::new(),
                         statement: accepted.statement,
@@ -5187,6 +5237,7 @@ fn mir_lift(
     options: &crate::mir::MirOptions,
     scopes: &BTreeMap<(usize, usize), Types>,
     source_sigs: &[Sigs],
+    generics: &BTreeMap<FnRef, lift::Generic>,
     lifted: &BTreeMap<String, crate::mir::lower::Callee>,
     taken: &BTreeSet<String>,
     homonyms: &BTreeMap<FnSite, (String, String)>,
@@ -5249,7 +5300,19 @@ fn mir_lift(
             (at, scope)
         })
         .collect();
-    let scope = |r: FnRef| &scopes[&(r.pkg, ctx.file(r).target)];
+    let generic_scopes: BTreeMap<FnRef, Types> = generics
+        .iter()
+        .map(|(&r, g)| {
+            let mut scope = scopes[&(r.pkg, ctx.file(r).target)].clone();
+            scope.generic = g.reads.clone();
+            (r, scope)
+        })
+        .collect();
+    let scope = |r: FnRef| {
+        generic_scopes
+            .get(&r)
+            .unwrap_or(&scopes[&(r.pkg, ctx.file(r).target)])
+    };
     let widths = lift::pointer_widths(&ctx.ws.targets);
     // Enums whose variants set their discriminants, by LexLean name.
     let mut explicit: BTreeSet<String> = BTreeSet::new();
@@ -5347,7 +5410,7 @@ fn mir_lift(
                     lower::Callee {
                         name: name.clone(),
                         params,
-                        generic: None,
+                        generic: generics.get(&r).cloned(),
                         result,
                         threads: (!positions.is_empty()).then_some((full, positions)),
                     },
@@ -5387,7 +5450,15 @@ fn mir_lift(
             backward: false,
         };
         match lower::lower(&cx, body, &name) {
-            Ok(lowered) => {
+            Ok(mut lowered) => {
+                if let Some(generic) = generics.get(&r) {
+                    crate::lex::bind_parameters(
+                        &mut lowered.decls,
+                        &mut lowered.aux,
+                        &generic.types,
+                        &name,
+                    );
+                }
                 let text: String = lowered
                     .aux
                     .values()
@@ -5771,6 +5842,7 @@ fn with_axioms(decl: Decl, learned: &BTreeMap<String, Vec<String>>) -> Decl {
     match decl {
         Decl::Definition {
             name,
+            type_parameters,
             parameters,
             result,
             body,
@@ -5779,7 +5851,7 @@ fn with_axioms(decl: Decl, learned: &BTreeMap<String, Vec<String>>) -> Decl {
             mutual,
             ..
         } => Decl::Definition {
-            type_parameters: Vec::new(),
+            type_parameters,
             name,
             parameters,
             result,
@@ -5791,11 +5863,13 @@ fn with_axioms(decl: Decl, learned: &BTreeMap<String, Vec<String>>) -> Decl {
         },
         Decl::Theorem {
             name,
+            type_parameters,
             parameters,
             statement,
             proof,
             ..
         } => Decl::Theorem {
+            type_parameters,
             name,
             parameters,
             statement,
@@ -5913,6 +5987,7 @@ fn family_decls(
     };
     for m in family {
         decls.push(Decl::Data {
+            type_parameters: Vec::new(),
             name: m.clone(),
             constructors: ctors(m)
                 .into_iter()
@@ -6051,6 +6126,7 @@ pub(crate) fn type_decls(
                 }
             }
             decls.push(Decl::Data {
+                type_parameters: Vec::new(),
                 name: n.clone(),
                 constructors: variants
                     .iter()
@@ -6067,6 +6143,7 @@ pub(crate) fn type_decls(
         Ty::Named(n) => match (types.enums.get(n), types.structs.get(n)) {
             (Some(variants), _) => {
                 decls.push(Decl::Inductive {
+                    type_parameters: Vec::new(),
                     name: n.clone(),
                     constructors: variants.clone(),
                 });
@@ -6096,6 +6173,7 @@ pub(crate) fn type_decls(
         return;
     }
     decls.push(Decl::Structure {
+        type_parameters: Vec::new(),
         name: ty.render(),
         fields: fields
             .iter()
@@ -6106,6 +6184,7 @@ pub(crate) fn type_decls(
 
 fn supply(ctx: &Model) -> Module {
     let mut decls = vec![Decl::Structure {
+        type_parameters: Vec::new(),
         name: "LockedPackage".into(),
         fields: vec![
             ("name".into(), "String".into()),
@@ -6406,6 +6485,41 @@ const BLANKET_METHODS: [&str; 2] = ["into", "try_into"];
 /// Any other bound stops the function with a row that names it: a
 /// registry crate's trait a foreign row of that crate, any other a
 /// signature row.
+fn generic_value_names(sig: &crate::ast::Signature) -> BTreeSet<String> {
+    sig.inputs
+        .iter()
+        .filter_map(|i| match i {
+            crate::ast::FnArg::Typed(p) => match &*p.pat {
+                crate::ast::Pat::Ident(id) => Some(lift::local_name(&id.ident)),
+                _ => None,
+            },
+            crate::ast::FnArg::Receiver { .. } => Some(lift::local_name("self")),
+        })
+        .collect()
+}
+
+fn generic_type_names(sig: &crate::ast::Signature, types: &Types) -> BTreeMap<String, String> {
+    let value_names = generic_value_names(sig);
+    let mut used = value_names;
+    used.extend(types.structs.keys().cloned());
+    used.extend(types.enums.keys().cloned());
+    used.extend(types.datas.keys().cloned());
+    used.extend(lift::BARE_TYPES.iter().map(|s| s.to_string()));
+    used.extend([lift::PRELUDE.to_string(), BEHAVIOR.to_string()]);
+    let mut names = BTreeMap::new();
+    for parameter in &sig.generics {
+        if let crate::ast::GenericParam::Type(name) = parameter {
+            let mut lex = name.clone();
+            while used.contains(&lex) {
+                lex.push_str("Param");
+            }
+            used.insert(lex.clone());
+            names.insert(name.clone(), lex);
+        }
+    }
+    names
+}
+
 fn generic_reading(
     ctx: &Model,
     syntax: &Syntax,
@@ -6448,33 +6562,9 @@ fn generic_reading(
         .flat_map(|(fi, file)| file.trait_decls.iter().map(move |t| (fi, t)))
         .collect();
     let declared = |name: &str| crate_traits.iter().filter(|(_, t)| t.name == name).count();
-    let value_names: BTreeSet<String> = sig
-        .inputs
-        .iter()
-        .filter_map(|i| match i {
-            crate::ast::FnArg::Typed(p) => match &*p.pat {
-                crate::ast::Pat::Ident(id) => Some(lift::local_name(&id.ident)),
-                _ => None,
-            },
-            crate::ast::FnArg::Receiver { .. } => Some(lift::local_name("self")),
-        })
-        .collect();
-    // Each type parameter's LexLean name: its own, unless a type, a word
-    // the notation reserves or a parameter is spelled so.
-    let lex_name = |n: &str| {
-        let taken = types.structs.contains_key(n)
-            || types.enums.contains_key(n)
-            || types.datas.contains_key(n)
-            || lift::BARE_TYPES.contains(&n)
-            || value_names.contains(n)
-            || n == lift::PRELUDE
-            || n == BEHAVIOR;
-        if taken {
-            format!("{n}Param")
-        } else {
-            n.to_string()
-        }
-    };
+    let value_names = generic_value_names(sig);
+    let type_names = generic_type_names(sig, types);
+    let lex_name = |n: &str| type_names[n].clone();
     let mut reads: BTreeMap<String, Ty> = BTreeMap::new();
     let mut functions: Vec<(&String, &crate::ast::RustType)> = Vec::new();
     let mut traits: Vec<(&String, String)> = Vec::new();

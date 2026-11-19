@@ -5744,3 +5744,177 @@ fn main(){for n in [0,2] {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-67: generic bodies use the same compiler pipeline and SDK products.
+#[test]
+fn compiler_generic_bodies_preserve_product_state_ue_67() {
+    let dir = scratch("generic-compiler-bodies", &[
+        ("Cargo.toml", "[package]\nname=\"generic_bodies\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn transport<T>(mut n:u8,x:T)->T {while n>0 {n-=1;}x}
+pub fn product<T>(mut n:u8,x:T)->(T,bool,u8) {while n>0 {n-=1;}(x,true,n)}
+pub fn tuple<T>(x:T,n:u8,b:bool)->(T,u8,bool) {(x,n,b)}
+pub fn nested<T>(mut n:u8,x:T)->T {while n>0 {let mut m=n;while m>0 {m-=1;}n-=1;}x}
+pub fn discard<T>(mut n:u8,x:T)->bool {while n>0 {n-=1;}true}
+pub trait Read {fn read(&self)->bool;}
+pub fn dispatch<T:Read>(mut n:u8,x:&T)->bool {while n>0 {n-=1;}x.read()}
+pub trait Mimic {fn clone(&self)->Self;}
+pub fn mimic<T:Mimic>(mut n:u8,x:&T)->T {while n>0 {n-=1;}x.clone()}
+pub fn bounded<T:Clone>(mut n:u8,x:T)->T {while n>0 {n-=1;}x}
+pub fn cloned<T:Clone>(mut n:u8,x:&T)->T {while n>0 {n-=1;}x.clone()}
+"#),
+        ("src/bin/vectors.rs", r#"
+use generic_bodies::*;
+fn main(){for n in [0,2] {for x in [false,true] {
+ println!("transport|Bool|{n}|{x}|{}",transport(n,x));println!("nested|Bool|{n}|{x}|{}",nested(n,x));
+ let (a,b,c)=product(n,x);println!("product|Bool|{n}|{x}|({a}, ({b}, {c}))");
+ let (a,b,c)=tuple(x,n,true);println!("tuple|Bool|{n}|{x}|({a}, ({b}, {c}))");
+}for x in [0u8,19,255] {
+ println!("transport|Nat|{n}|{x}|{}",transport(n,x));println!("nested|Nat|{n}|{x}|{}",nested(n,x));
+ let (a,b,c)=product(n,x);println!("product|Nat|{n}|{x}|({a}, ({b}, {c}))");
+ let (a,b,c)=tuple(x,n,false);println!("tuple|Nat|{n}|{x}|({a}, ({b}, {c}))");
+}}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "generic-compiler-bodies");
+    let mut opts = options("generic_bodies");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["mimic", "cloned"] {
+        assert!(
+            residue_detail(&files, &format!("generic_bodies::{f}")).is_some(),
+            "{f}: generic dispatch has no admitted dictionary"
+        );
+    }
+    for f in ["transport", "product", "nested", "bounded"] {
+        let path = format!("generic_bodies::{f}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+    assert!(
+        frontier_rows(&files, "lifted")
+            .iter()
+            .any(|r| r["function"].as_str() == Some("generic_bodies::tuple")),
+        "generic source product"
+    );
+    for f in ["discard", "dispatch"] {
+        assert!(
+            residue_detail(&files, &format!("generic_bodies::{f}")).is_some(),
+            "{f}"
+        );
+    }
+
+    assert!(residue_detail(&files, "generic_bodies::discard")
+        .unwrap()
+        .contains("drop glue"));
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("generic-body-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("generic_bodies"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let output = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(output.lines().count(), 40);
+    let mut vectors = String::new();
+    for (i, line) in output.lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("generic_bodies::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let args = if p[0] == "tuple" {
+            format!(
+                "{} {} {}",
+                p[3],
+                p[2],
+                if p[1] == "Bool" { "true" } else { "false" }
+            )
+        } else {
+            format!("{} {}", p[2], p[3])
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: genericBodyVector{i}, parameters: [], statement: (({name} [{}] {args}) = {}), proof: decide{{}}, axioms: [{}]}}\n",p[1],p[4],policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= 255)", "= 254)", 1);
+    assert_ne!(wrong, vectors);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

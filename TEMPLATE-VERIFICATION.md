@@ -849,3 +849,39 @@ review evidence, not a claim that the complete `just vv` release gate passed.
 Unused trait implementation entries are kept out of the global native proof
 context: the chosen method and its source meaning are already bound by the
 translated term and dependency identities.
+
+## UE-67: parametric compiler bodies and product state
+
+Native scopes now import the function's declared type parameters, including
+parameters whose bounds its body does not use. Reading that parameter does not
+supply a method implementation. Parametric trait dispatch without an admitted
+dictionary and reachable generic drop glue stay typed residue.
+
+Generic product values use the SDK's built-in, right-nested products. The common
+emitter binds generated definitions, theorems and region-exit types by the type
+variables they and their dependencies use. It supplies explicit function and
+constructor type arguments, preserves literals, and retains generic binders when
+applying the SDK's learned axiom policy. Type-parameter names share the source
+binder's collision rule. This also admits generic source product returns through
+the existing source translator.
+
+The initial compiler regression failed on `mir::Ty: T`. Four compiler-generated
+generic bodies now have actual SDK proved verdicts: transport, product return,
+nested natural loops with an exit-state type, and transport with an unused Clone
+bound. Forty computed-Rust comparison vectors cover the first three and generic
+source products at Boolean and unsigned-word instantiations. A planted expected
+255-to-254 result is rejected by LLV7002 (`is false`). The final focused SDK run
+passed in 125.90 seconds.
+
+A trait method deliberately named `clone` exposed an inadmissible fallback to a
+same-named value adapter: the `mimic` negative failed before the general
+parametric-dispatch guard. The restored run keeps both custom and standard
+unresolved trait calls unlifted, and confirms that implicit generic drop glue is
+reported as a drop-effect gap. No standard-operation registry row was added.
+The binder unit additionally checks that quoted type-variable/function names do
+not add generic dependencies to literal or unrelated declarations.
+
+436 library tests and all 16 CLI tests passed, with conformance meta-tests,
+strict all-target Clippy, model, template, SDK lock and generated self-model
+checks. This remains focused review evidence; complete release acceptance and
+translator certification are separate open gates.

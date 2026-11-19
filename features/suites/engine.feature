@@ -466,3 +466,10 @@ Feature: engine
     When compiler callers pass values through those definitions after native control flow
     Then actual SDK results agree with Rust across parametric transport, containers and trait dictionary calls
     But an incompatible ABI or an unavailable implementation cannot acquire a proved verdict
+
+  @UE-67 @build
+  Scenario: Parametric compiler bodies preserve generic product state
+    Given declared Rust type parameters and compiler bodies with natural loops and product returns
+    When the shared lowering binds the generated definitions and their dependencies
+    Then actual SDK results agree with Rust at multiple instantiations and nested control-flow regions
+    But generic drop effects and unresolved trait dictionary bodies remain typed residue

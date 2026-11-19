@@ -621,6 +621,7 @@ fn laws(ty: &Ty, variants: &[String]) -> Vec<Decl> {
     let less = is("Less");
     vec![
         Decl::Theorem {
+            type_parameters: Vec::new(),
             name: format!("{compare}_reflexive"),
             parameters: vec![("a".into(), t.clone())],
             statement: format!("(({compare} a a) = {})", ordering_value("Equal")),
@@ -628,6 +629,7 @@ fn laws(ty: &Ty, variants: &[String]) -> Vec<Decl> {
             axioms: Vec::new(),
         },
         Decl::Theorem {
+            type_parameters: Vec::new(),
             name: format!("{compare}_antisymmetric"),
             parameters: vec![("a".into(), t.clone()), ("b".into(), t.clone())],
             statement: format!("(({compare} a b) = ({REVERSE} ({compare} b a)))"),
@@ -635,6 +637,7 @@ fn laws(ty: &Ty, variants: &[String]) -> Vec<Decl> {
             axioms: Vec::new(),
         },
         Decl::Theorem {
+            type_parameters: Vec::new(),
             name: format!("{compare}_transitive"),
             parameters: vec![
                 ("a".into(), t.clone()),

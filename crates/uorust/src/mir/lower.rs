@@ -813,6 +813,25 @@ fn through_pointer(what: &str) -> Residue {
 
 /// Translate one body to the definition `name`.
 pub(crate) fn lower(cx: &Cx<'_>, body: &IrBody, name: &str) -> Lift<Lowered> {
+    if !cx.types.generic.is_empty() {
+        let mut pending = vec![0];
+        let mut visited = BTreeSet::new();
+        while let Some(block) = pending.pop() {
+            if !visited.insert(block) {
+                continue;
+            }
+            let Some(block) = body.blocks.get(block) else {
+                continue;
+            };
+            if matches!(block.terminator, IrTerminator::Drop(_)) {
+                return Err(kind(
+                    "TerminatorKind::Drop",
+                    "a generic body's drop glue needs an admitted effect model",
+                ));
+            }
+            pending.extend(block.terminator.successors());
+        }
+    }
     // A body reaches memory where it takes an address or reads through a
     // pointer, or where a callee does: then the memory is threaded through
     // it.
@@ -1560,6 +1579,7 @@ impl Fun<'_, '_> {
             )
         }));
         self.decls.push(Decl::Data {
+            type_parameters: Vec::new(),
             name: name.clone(),
             constructors,
             mutual: None,
@@ -1772,7 +1792,10 @@ impl Fun<'_, '_> {
             && invariants.is_empty()
             && measure.1.is_empty()
         {
-            let ty = Ty::Tuple(params.iter().map(|(_, _, t)| t.clone()).collect());
+            let ty = self
+                .cx
+                .types
+                .tuple(params.iter().map(|(_, _, t)| t.clone()).collect());
             let state = self.fresh(Some("loopState"), 0);
             for (i, (local, old, t)) in params.iter().enumerate() {
                 let value = lift::tuple_item(&ty, &state, i);
@@ -1983,6 +2006,7 @@ impl Fun<'_, '_> {
                 .collect();
             parameters.extend(st.binders.iter().map(|(n, t)| (n.clone(), t.render())));
             self.evidence.push(Decl::Theorem {
+                type_parameters: Vec::new(),
                 name: format!("decreases_{}_{}", lp.name, self.evidence.len()),
                 parameters,
                 statement: implication(&hypotheses(&st.path), &format!("({after} < {measure})")),
@@ -2013,6 +2037,7 @@ impl Fun<'_, '_> {
                 .collect();
             parameters.extend(st.binders.iter().map(|(n, t)| (n.clone(), t.render())));
             self.evidence.push(Decl::Theorem {
+                type_parameters: Vec::new(),
                 name,
                 parameters,
                 statement,
@@ -2056,6 +2081,7 @@ impl Fun<'_, '_> {
             .collect();
         parameters.extend(st.binders.iter().map(|(n, t)| (n.clone(), t.render())));
         self.evidence.push(Decl::Theorem {
+            type_parameters: Vec::new(),
             name,
             parameters,
             statement,
@@ -2112,6 +2138,7 @@ impl Fun<'_, '_> {
             proof
         };
         self.decls.push(Decl::Theorem {
+            type_parameters: Vec::new(),
             name,
             parameters,
             statement,
@@ -4291,6 +4318,7 @@ impl Fun<'_, '_> {
             self.aux.insert(
                 length.clone(),
                 Decl::Theorem {
+                    type_parameters: Vec::new(),
                     name: length,
                     parameters,
                     statement: format!("((prim length ({name} count value) : Nat) = count)"),
@@ -4952,6 +4980,7 @@ impl Fun<'_, '_> {
         self.aux.insert(
             evidence.clone(),
             Decl::Theorem {
+                type_parameters: Vec::new(),
                 name: evidence.clone(),
                 parameters: parameters.clone(),
                 statement: implication(
@@ -5877,6 +5906,21 @@ impl Fun<'_, '_> {
                 memory: false,
                 backward: None,
             });
+        }
+        // A bound permits Rust to dispatch here; it does not supply a value
+        // model for the method. In particular, a same-named standard adapter
+        // must never stand in for an arbitrary trait implementation.
+        if let Some((owner, _)) = callee
+            .strip_prefix('<')
+            .and_then(|q| q.rsplit_once(">::").map(|(q, _)| q))
+            .and_then(|q| q.split_once(" as "))
+        {
+            if ty(owner, self.cx.types).is_ok_and(|t| !t.parameters().is_empty()) {
+                return Err(kind(
+                    k,
+                    "parametric trait dispatch needs an admitted dictionary",
+                ));
+            }
         }
         let key = format!("{}::{callee}", self.cx.krate);
         let generic_key = format!("{}::{erased}", self.cx.krate);
@@ -8033,6 +8077,9 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
 
 fn native_type(text: &str, types: &Types) -> Lift<Ty> {
     let t = text.trim();
+    if let Some(reading) = types.generic.get(t) {
+        return Ok(reading.clone());
+    }
     let bad = || Err(Residue::Type(t.to_string()));
     if let Some(reading) = types.registered(t) {
         return Ok(reading);
@@ -8165,7 +8212,7 @@ fn native_type(text: &str, types: &Types) -> Lift<Ty> {
         return Ok(match ts.len() {
             0 => Ty::Unit,
             1 => ts.remove(0),
-            _ => Ty::Tuple(ts),
+            _ => types.tuple(ts),
         });
     }
     if let Some(inner) = t.strip_prefix('(').and_then(|r| r.strip_suffix(')')) {
