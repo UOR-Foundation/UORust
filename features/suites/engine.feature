@@ -452,3 +452,10 @@ Feature: engine
     When source and native standard models consume the callback values
     Then actual SDK results agree with executable Rust for captured predicates, mapped values, lazy defaults and function items
     But mutable captured state and a callback overflow cannot acquire a proved verdict
+
+  @UE-65 @build
+  Scenario: Native transport reuses admitted source type models
+    Given source-admitted semantic types nested in compiler parameters and containers
+    When native lowering imports their closed readings after its primitive ABI rules
+    Then actual SDK transport properties agree with Rust even while a shared cell is mutably borrowed
+    But contents, synchronization, owner counts and pointer comparisons require their own admitted semantics

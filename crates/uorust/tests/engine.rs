@@ -4039,6 +4039,175 @@ fn native_workspace_floats_share_source_readings_ue_47() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-65: import semantic type readings; never freeze a shared cell.
+#[test]
+fn native_type_models_import_source_readings_ue_65() {
+    let dir=scratch("source-type-readings",&[("Cargo.toml","[package]\nname=\"type_readings\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::rc::Rc;use std::sync::{Arc,Mutex};use std::cell::{RefCell,Cell};
+pub fn rc(mut n:u8,x:Rc<RefCell<u32>>)->Rc<RefCell<u32>> {while n>0 {n-=1;} x}
+pub fn arc(mut n:u8,x:Arc<Cell<u32>>)->Arc<Cell<u32>> {while n>0 {n-=1;} x.clone()}
+pub fn some(mut n:u8,x:Option<Rc<RefCell<u32>>>)->bool {while n>0 {n-=1;} x.is_some()}
+pub fn length(mut n:u8,x:&[Rc<RefCell<u32>>])->usize {while n>0 {n-=1;} x.len()}
+pub fn read(mut n:u8,x:Rc<RefCell<u32>>)->u32 {while n>0 {n-=1;} *x.borrow()}
+pub fn write(mut n:u8,x:Rc<RefCell<u32>>,v:u32) {while n>0 {n-=1;} *x.borrow_mut()=v;}
+pub fn locked(mut n:u8,x:Arc<Mutex<u32>>)->u32 {while n>0 {n-=1;} *x.lock().unwrap()}
+pub fn counts(mut n:u8,x:Rc<RefCell<u32>>)->usize {while n>0 {n-=1;} Rc::strong_count(&x)}
+pub fn pointer_equal(mut n:u8,x:Rc<RefCell<u32>>,y:Rc<RefCell<u32>>)->bool {while n>0 {n-=1;} Rc::ptr_eq(&x,&y)}
+"#),("src/bin/vectors.rs",r#"
+use type_readings::*;use std::rc::Rc;use std::sync::Arc;use std::cell::{RefCell,Cell};
+fn main(){let cell=Rc::new(RefCell::new(19));let _borrow=cell.borrow_mut();let atomic=Arc::new(Cell::new(23));for n in [0,2] {assert!(Rc::ptr_eq(&rc(n,cell.clone()),&cell));assert!(Arc::ptr_eq(&arc(n,atomic.clone()),&atomic));assert!(!some(n,None));assert!(some(n,Some(cell.clone())));assert_eq!(length(n,&[]),0);assert_eq!(length(n,&[cell.clone(),cell.clone()]),2);}}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "source-type-readings");
+    let mut opts = options("type_readings");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["rc", "arc", "some", "length"] {
+        let path = format!("type_readings::{f}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+    for f in ["read", "write", "locked", "counts", "pointer_equal"] {
+        assert!(
+            residue_detail(&files, &format!("type_readings::{f}")).is_some(),
+            "{f}"
+        );
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("source-type-reading-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("type_readings"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for f in ["rc", "arc", "some", "length"] {
+        let path = format!("type_readings::{f}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let allocation = if f == "arc" {
+            "(ctor Prelude::ArcCellRef.Allocation 9)"
+        } else {
+            "(ctor Prelude::RcCellRef.Allocation 9)"
+        };
+        let examples = match f {
+            "rc" | "arc" => vec![(allocation.to_string(), allocation.to_string())],
+            "some" => vec![
+                (
+                    "(ctor Option.none [Prelude::RcCellRef])".into(),
+                    "false".into(),
+                ),
+                (
+                    format!("(ctor Option.some [Prelude::RcCellRef] {allocation})"),
+                    "true".into(),
+                ),
+            ],
+            _ => vec![
+                ("(nil Prelude::RcCellRef)".into(), "0".into()),
+                (
+                    format!("(cons {allocation} (cons {allocation} (nil Prelude::RcCellRef)))"),
+                    "2".into(),
+                ),
+            ],
+        };
+        for n in [0, 2] {
+            for (i, (input, expected)) in examples.iter().enumerate() {
+                // Opaque allocation references deliberately expose no decidable
+                // equality. Transport is definitional identity, so use rfl.
+                let proof = if matches!(f, "rc" | "arc") {
+                    "reflexivity"
+                } else {
+                    "decide"
+                };
+                vectors.push_str(&format!("theorem{{name: typeModel{f}{n}Vector{i}, parameters: [], statement: (({name} {n} {input}) = {expected}), proof: {proof}{{}}, axioms: [{}]}}\n",policy.join(", ")));
+            }
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= true)", "= false)", 1);
+    assert_ne!(vectors, wrong, "planted wrong container observation");
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-64: callable values come from compiler bodies, with no operation recipes.
 #[test]
 fn immutable_compiler_closures_share_model_callables_ue_64() {

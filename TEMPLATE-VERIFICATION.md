@@ -791,3 +791,30 @@ Evidence: `uorust-model-callables-red.log`,
 `uorust-model-callables-acceptance.log`. Library, CLI, conformance, strict Clippy,
 model/template and lock checks passed. Consumer lifting gain remains subject to
 the complete guarded campaign. Full release acceptance remains open.
+
+## UE-65: shared source type readings
+
+The model, scenario and failing compiler test were registered first. Native
+lowering now tries its original ABI reading, then imports a compatible closed
+source reading. The fallback accepts admitted SDK identities and their
+containers; ABI-sensitive integers/characters, callables, type variables and
+unregistered nominal schemas stay out. Shared-cell allocation references retain
+identity rather than exposing their contents. No executable std registry row or
+new standard-operation semantics was added.
+
+The actual SDK proved four fixture functions and twelve transport/container
+properties. Rust checks the same properties while a RefCell's mutable borrow is
+live, demonstrating that transport never reads a snapshot of its contents.
+Identity properties use reflexivity: the opaque SDK reference types deliberately
+provide no decidable equality. Shared contents, writes, locks, counts and pointer
+comparisons remain typed refusals. The SDK rejects a planted wrong container
+observation with LLV7002 / `is false`. The primitive ABI/state-boundary unit test
+passes; the older readonly-owner test now distinguishes opaque allocation
+identity from the still-refused plain RefCell contents.
+
+Evidence: `uorust-type-import-red.log`, `uorust-type-import-final-sdk.log`,
+`uorust-type-import-acceptance.log`, and `uorust-type-import-final-checks.log`.
+The complete library pass checked 433 unaffected tests, and its one changed
+expectation passed on replay (434 total); all 16 CLI tests, conformance tests,
+strict Clippy and model/template/lock gates passed. Consumer gain is measured
+only by the complete guarded campaign; release acceptance remains open.

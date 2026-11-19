@@ -7971,6 +7971,10 @@ fn std_printed(segs: &[&str], name: &str, args: &[Ty]) -> Option<Ty> {
 
 /// A type as MIR prints it, as the lift names it.
 pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
+    native_type(text, types).or_else(|cause| super::source::type_model(text, types).ok_or(cause))
+}
+
+fn native_type(text: &str, types: &Types) -> Lift<Ty> {
     let t = text.trim();
     let bad = || Err(Residue::Type(t.to_string()));
     if let Some(reading) = types.registered(t) {
@@ -9506,11 +9510,17 @@ mod tests {
             "other::Rc<u32>",
             "std::other::Arc<u32>",
             "std::sync::Arc<std::sync::Mutex<u32>>",
-            "std::rc::Rc<std::cell::RefCell<u32>>",
+            "std::cell::RefCell<u32>",
             "std::sync::Arc<num_rational::Ratio<num_bigint::BigInt>>",
         ] {
             assert!(ty(path, &types).is_err(), "{path}");
         }
+        // UE-65 imports the source's allocation identity, never the u32
+        // contents that the readonly owner model would otherwise expose.
+        assert_eq!(
+            ty("std::rc::Rc<std::cell::RefCell<u32>>", &types),
+            Ok(Ty::Named("Prelude::RcCellRef".into()))
+        );
         for path in ["num_rational::BigRational", "num_bigint::BigInt"] {
             types.aliases.insert(path.into(), path.into());
         }

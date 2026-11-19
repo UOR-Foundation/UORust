@@ -20,6 +20,31 @@ fn source_type(text: &str, types: &Types) -> Option<Ty> {
     types.ty(&crate::convert::ty(&ty)).ok()
 }
 
+/// Reuse closed source readings only after the native ABI has declined them.
+/// Imported SDK identities are not snapshots of the allocation they identify.
+pub(super) fn type_model(text: &str, types: &Types) -> Option<Ty> {
+    fn compatible(ty: &Ty) -> bool {
+        match ty {
+            // These carriers differ from native words/scalars, or require
+            // the separately signature-bound callable interface.
+            Ty::Int(_)
+            | Ty::Integer(_)
+            | Ty::Char
+            | Ty::Signed(_)
+            | Ty::Scalar
+            | Ty::Fn(..)
+            | Ty::Param(_) => false,
+            Ty::Named(name) => name.starts_with("Prelude::"),
+            Ty::Option(t) | Ty::List(t) | Ty::Set(t, _) => compatible(t),
+            Ty::Map(a, b, _) | Ty::Outcome(a, b) => compatible(a) && compatible(b),
+            Ty::Pair(ts) | Ty::Tuple(ts) => ts.iter().all(compatible),
+            _ => true,
+        }
+    }
+    let reading = source_type(text, types)?;
+    compatible(&reading).then_some(reading)
+}
+
 /// A standard inherent owner, never a workspace trait or lookalike type.
 fn inherent(callee: &str) -> Option<(String, String)> {
     let parts = super::parse::split_path(callee);
@@ -59,6 +84,11 @@ fn value_interface(ty: &Ty, types: &Types, seen: &mut BTreeSet<String>) -> bool 
                 .is_some_and(|fields| !fields.is_empty())
             {
                 return false;
+            }
+            if name.starts_with("Prelude::") {
+                // The source reader admits SDK-owned value schemas; allocation
+                // references carry identity rather than mutable contents.
+                return true;
             }
             if let Some(fields) = types.structs.get(name) {
                 fields.iter().all(|(_, t)| value_interface(t, types, seen))
@@ -189,6 +219,43 @@ pub(super) fn apply(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn source_type_readings_keep_native_abi_and_state_boundaries_ue_65() {
+        let mut types = Types::default();
+        let rc = "std::rc::Rc<std::cell::RefCell<u32>>";
+        assert_eq!(
+            type_model(rc, &types),
+            Some(Ty::Named("Prelude::RcCellRef".into()))
+        );
+        assert_eq!(
+            super::super::lower::ty(rc, &types).unwrap(),
+            Ty::Named("Prelude::RcCellRef".into())
+        );
+        assert_eq!(
+            super::super::lower::ty("i8", &types).unwrap(),
+            Ty::Signed(Some(8))
+        );
+        assert_eq!(super::super::lower::ty("char", &types).unwrap(), Ty::Scalar);
+        for text in [
+            "i8",
+            "i128",
+            "char",
+            "std::cell::RefCell<u32>",
+            "&std::cell::RefCell<u32>",
+            "std::sync::Arc<std::sync::Mutex<u32>>",
+            "dyn Fn(bool) -> bool",
+            "custom::Rc<std::cell::RefCell<u32>>",
+        ] {
+            assert!(type_model(text, &types).is_none(), "{text}");
+        }
+        types.generic.insert("T".into(), Ty::Param("T".into()));
+        assert!(type_model("T", &types).is_none());
+        types
+            .structs
+            .insert("Local".into(), vec![("flag".into(), Ty::Bool)]);
+        assert!(type_model("Local", &types).is_none());
+    }
 
     #[test]
     fn source_model_import_checks_recursive_schema_closure_ue_64() {
