@@ -2510,7 +2510,7 @@ impl Manifest {
             path: path.to_path_buf(),
             reason,
         };
-        let doc: toml::Value = toml::from_str(&text).map_err(|e| bad(format!("{e}")))?;
+        let doc: toml::Value = toml::from_str(text).map_err(|e| bad(format!("{e}")))?;
         if doc.get("schema").and_then(toml::Value::as_str) != Some(SCHEMA) {
             return Err(bad(format!("not a {SCHEMA} manifest")));
         }
