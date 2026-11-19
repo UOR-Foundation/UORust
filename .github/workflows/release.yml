@@ -30,7 +30,33 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  qualify:
+    name: prove the exact tagged source passed native acceptance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout the immutable release tag
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+      - name: Refuse publication without exact source and full native receipt
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          python3 -I -m unittest discover -s scripts/release -p 'test_qualify_tag.py'
+          python3 -I scripts/release/qualify_tag.py --repo "$REPOSITORY" --tag "$TAG"
+
   build:
+    needs: qualify
     name: build uorust for ${{ matrix.target }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 45
