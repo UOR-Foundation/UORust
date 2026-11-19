@@ -27,6 +27,10 @@ python3 -I scripts/self-model/cadence.py "$root" >/dev/null
 python3 -I scripts/experience/authority.py "$root" --check >/dev/null
 python3 -I scripts/experience/experience.py "$root" "$root"
 (cd app && lexlean lock >/dev/null && lexlean fmt >/dev/null)
+# Embed only the SDK compiler identity in the standalone crates.io package.
+compiler_semantics=$(sed -n 's/^compiler_semantics = "\([0-9a-f]\{64\}\)"$/\1/p' app/lexlean.lock)
+[[ ${#compiler_semantics} -eq 64 ]] || { echo "self-model: compiler semantics missing" >&2; exit 1; }
+printf '%s\n' "$compiler_semantics" > crates/uorust/assets/compiler-semantics.txt
 python3 -I scripts/self-model/engine.py "$root"
 if ! out=$(prismpm --project app check 2>&1); then
   old=$(sed -n 's/.*binds application model "\(sha256:[0-9a-f]*\)".*/\1/p' <<<"$out")

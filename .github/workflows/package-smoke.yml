@@ -1,0 +1,41 @@
+name: Verify crates.io package portability
+
+on:
+  pull_request:
+    paths:
+      - 'crates/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'app/lexlean.lock'
+      - 'scripts/release/crates.py'
+      - 'scripts/self-model/**'
+      - '.github/workflows/package-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: package-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    name: crates.io dry-run from the standalone package
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out the exact PR revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Validate the package and its isolated build
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup show active-toolchain || rustup toolchain install
+          cargo metadata --locked --no-deps --format-version 1 | python3 -I scripts/release/crates.py >"$RUNNER_TEMP/order"
+          mapfile -t crates <"$RUNNER_TEMP/order"
+          test "${#crates[@]}" -gt 0
+          cargo publish --dry-run --locked "${crates[@]/#/-p=}"

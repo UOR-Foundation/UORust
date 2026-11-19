@@ -21,6 +21,11 @@ python3 -I "$root/scripts/self-model/cadence.py" "$root" --check
 python3 -I "$work/scripts/self-model/cadence.py" "$work" >/dev/null
 python3 -I "$root/scripts/experience/experience.py" "$work" "$root" >/dev/null
 (cd "$work/app" && lexlean fmt >/dev/null)
+# Verify the independently packaged compiler identity against the canonical lock.
+compiler_semantics=$(sed -n 's/^compiler_semantics = "\([0-9a-f]\{64\}\)"$/\1/p' "$root/app/lexlean.lock")
+[[ ${#compiler_semantics} -eq 64 ]] || { echo "self-model: compiler semantics missing" >&2; exit 1; }
+mkdir -p "$work/crates/uorust/assets"
+printf '%s\n' "$compiler_semantics" > "$work/crates/uorust/assets/compiler-semantics.txt"
 status=0
 for file in model/routes.toml app/src/Routes.lex.tex app/src/Guide.lex.tex app/src/Architecture.lex.tex \
   app/src/Design.lex.tex app/src/Features.lex.tex app/src/Cadence.lex.tex app/src/Security.lex.tex app/src/Quality.lex.tex \
@@ -28,7 +33,7 @@ for file in model/routes.toml app/src/Routes.lex.tex app/src/Guide.lex.tex app/s
   app/src/Brand.lex.tex app/src/Users.lex.tex app/src/Foundation/Experience/V1/Model.lex.tex \
   app/language/prism.arch/entries/brand-design-and-context-of-use.toml \
   app/language/prism.arch/entries/uorust-brand-identity.toml app/language/prism.arch/entries/uorust-context-of-use.toml \
-  brand/tokens.json brand/foundation.css; do
+  brand/tokens.json brand/foundation.css crates/uorust/assets/compiler-semantics.txt; do
   if ! cmp -s "$root/$file" "$work/$file"; then
     echo "self-model: $file is not what scripts/self-model writes; run just self-model-write" >&2
     diff -u "$root/$file" "$work/$file" | head -20 >&2 || true
