@@ -18,6 +18,32 @@ use crate::facts::{
     Workspace,
 };
 
+/// `Foreign::foreignModel` of the model (`app/src/Foreign.lex.tex`), as
+/// `lexlean production` exported it.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../spec/foreign_model.rs"]
+mod foreign_model;
+
+/// The name a model file of a dependency carries after its package's
+/// directory: `<model of solana_pubkey>.rs`, which no Rust module path spells.
+const MODEL_OF: &str = "<model of ";
+
+/// Whether `rel` is a dependency's model file rather than its crate's own.
+pub(crate) fn is_model(rel: &str) -> bool {
+    rel.contains(MODEL_OF)
+}
+
+/// The text of the model file at `rel`: what `Foreign::foreignModel` of the
+/// model declares for the dependency it names, `None` for any other file or
+/// a dependency the model does not declare.
+pub(crate) fn model_source(rel: &str) -> Option<String> {
+    let (_, tail) = rel.rsplit_once(MODEL_OF)?;
+    let dep = tail.strip_suffix(">.rs")?;
+    let model = foreign_model::run(foreign_model::Str::lit(dep));
+    Some(model.text().to_string()).filter(|t| !t.is_empty())
+}
+
 /// Read a workspace from its root directory: its facts, and the syntax the
 /// lift reads.
 pub(crate) fn workspace(
@@ -36,9 +62,43 @@ pub(crate) fn workspace(
     let mut packages = Vec::new();
     let mut syntax = Syntax::default();
     for member in members {
-        let (package, files) = package(&root, member, &workspace_lints)?;
-        packages.push(package);
+        let (mut package, files) = package(&root, member, &workspace_lints)?;
         syntax.files.extend(files);
+        // The types of a registry dependency the model declares
+        // (`Foreign::foreignModel`), read as a source file of the crate's
+        // library: the lift reads them as it reads the crate's own.
+        if let Some(lib) = package
+            .targets
+            .iter()
+            .position(|t| t.kind == TargetKind::Lib)
+        {
+            let deps: BTreeSet<String> = package
+                .deps
+                .iter()
+                .filter(|d| d.path.is_none() && d.kind == "normal")
+                .map(|d| d.name.replace('-', "_"))
+                .collect();
+            for dep in deps {
+                let rel = format!("{}/{MODEL_OF}{dep}>.rs", package.dir);
+                let Some(text) = model_source(&rel) else {
+                    continue;
+                };
+                let parsed = syn::parse_file(&text).map_err(|e| {
+                    UorustError::Tool(format!("the model of {dep} does not parse: {e}"))
+                })?;
+                let (file, file_syntax) = source(
+                    &parsed,
+                    rel.clone(),
+                    lib,
+                    String::new(),
+                    &TargetKind::Lib,
+                    false,
+                );
+                package.files.push(file);
+                syntax.files.insert(rel, file_syntax);
+            }
+        }
+        packages.push(package);
     }
     packages.sort_by(|a, b| a.name.cmp(&b.name));
     let name = root
@@ -1030,6 +1090,55 @@ pub(crate) fn tidy(text: &str) -> String {
     out.trim().to_string()
 }
 
+/// The discriminants of an enum whose source sets one and writes each as
+/// an integer literal (`A = 5`, `B` then 6), or none.
+fn written_discriminants(e: &syn::ItemEnum) -> Option<Vec<i64>> {
+    if e.variants.iter().all(|v| v.discriminant.is_none()) {
+        return None;
+    }
+    let mut next = 0i64;
+    let mut out = Vec::new();
+    for v in &e.variants {
+        let value = match &v.discriminant {
+            None => next,
+            Some((
+                _,
+                syn::Expr::Lit(syn::ExprLit {
+                    lit: syn::Lit::Int(i),
+                    ..
+                }),
+            )) => i.base10_parse::<i64>().ok()?,
+            Some(_) => return None,
+        };
+        out.push(value);
+        next = value.checked_add(1)?;
+    }
+    Some(out)
+}
+
+/// An impl's associated types by name: `Self::Error` in one of its
+/// signatures is the type the impl binds to `Error`.
+struct SelfAssoc(Vec<(String, syn::Type)>);
+
+impl syn::visit_mut::VisitMut for SelfAssoc {
+    fn visit_type_mut(&mut self, t: &mut syn::Type) {
+        let named = match &*t {
+            syn::Type::Path(p) if p.qself.is_none() && p.path.segments.len() == 2 => {
+                let (first, second) = (&p.path.segments[0], &p.path.segments[1]);
+                (first.ident == "Self" && second.arguments.is_none())
+                    .then(|| self.0.iter().find(|(n, _)| second.ident == n))
+                    .flatten()
+                    .map(|(_, to)| to.clone())
+            }
+            _ => None,
+        };
+        match named {
+            Some(to) => *t = to,
+            None => syn::visit_mut::visit_type_mut(self, t),
+        }
+    }
+}
+
 #[allow(clippy::too_many_arguments)]
 fn function(
     sig: &syn::Signature,
@@ -1206,10 +1315,21 @@ fn items(
                         syn::GenericParam::Lifetime(_) => None,
                     })
                     .collect();
+                // `Self::Error` in a signature is the type the impl binds
+                // to it (`type Error = ProgramError;`).
+                let mut bound = SelfAssoc(
+                    imp.items
+                        .iter()
+                        .filter_map(|m| match m {
+                            syn::ImplItem::Type(t) => Some((t.ident.to_string(), t.ty.clone())),
+                            _ => None,
+                        })
+                        .collect(),
+                );
                 for member in &imp.items {
                     if let syn::ImplItem::Fn(f) = member {
                         let public = matches!(f.vis, syn::Visibility::Public(_));
-                        let (mut fact, fn_syntax) = function(
+                        let (mut fact, mut fn_syntax) = function(
                             &f.sig,
                             Some(&f.block),
                             &attrs(&f.attrs),
@@ -1224,6 +1344,11 @@ fn items(
                         fact.trait_path.clone_from(&trait_path);
                         fact.impl_params.clone_from(&impl_params);
                         fact.scope = scope;
+                        if !bound.0.is_empty() {
+                            let mut sig = f.sig.clone();
+                            syn::visit_mut::VisitMut::visit_signature_mut(&mut bound, &mut sig);
+                            fn_syntax.signature = crate::convert::signature(&sig);
+                        }
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);
                     }
@@ -1279,6 +1404,7 @@ fn items(
                     },
                     derives: derives(&attrs(&e.attrs)),
                     explicit: e.variants.iter().any(|v| v.discriminant.is_some()),
+                    discriminants: written_discriminants(e),
                     variants: e
                         .variants
                         .iter()

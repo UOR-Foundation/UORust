@@ -120,3 +120,51 @@ Feature: engine
     Given core's MIR dumps, rust-src at the pinned toolchain and the MIR semantics module
     When the suite exercises UE-19
     Then every body is a value of the MIR datatype whose kinds are rustc's, a long list nests no deeper than its root, the constructs the evaluator does not define are read from its source, each register row records its embedding and what blocks it, and each sampled case is a theorem that the evaluator returns what rustc's build returned
+
+  @UE-21 @build
+  Scenario: A method that writes its own struct threads it
+    Given a planted crate whose struct has setters taking &mut self and one taking &mut self that returns a value
+    When the suite exercises UE-21
+    Then each setter lifts as the function from the struct to its new value, a field write binds the record the model's threadedRecord gives with every other field projected from the value before it, the last write to a field wins, and the method that returns a value is a residue row naming its &mut self receiver
+
+  @UE-22 @build
+  Scenario: A write through a nested place threads it
+    Given a planted crate whose struct holds a tuple of a fixed array and a key, with setters writing an item of the tuple and a literal index of the array, and one writing an index it computes
+    When the suite exercises UE-22
+    Then each setter lifts, its index write rebuilds the array with the written element and every other kept, its item write is the model's record write of the tuple, and the setter with a computed index is a residue row naming the place
+
+  @UE-23 @build
+  Scenario: Bytes, flags and unit enums convert by the prelude's definitions
+    Given a planted crate whose struct holds an amount as eight little-endian bytes, a flag and a state byte, with a getter and setters converting them, and an enum whose source sets a discriminant as an expression
+    When the suite exercises UE-23
+    Then the getter and the setters lift to the prelude's fromLeBytes, leBytes and bitOf and to the match from each variant to its index, and the cast of the enum whose discriminant is an expression is a residue row naming them
+
+  @UE-24 @build
+  Scenario: A crate reads the types of the workspace crates it depends on
+    Given a planted workspace whose second crate imports the first crate's error enum through a nested use group and names it by its full path, and whose third crate does not depend on the first
+    When the suite exercises UE-24
+    Then the second crate's functions that return or build the enum lift, and the third crate's function that names it is a residue row naming the type
+
+  @UE-25 @build
+  Scenario: An error converts by its From implementation
+    Given a planted crate whose function returning a program error applies `?` to a result of a token error, whose other function returns a token error `into` a program error, an implementation of From of the token error for the program error, and a function applying `?` where no conversion exists
+    When the suite exercises UE-25
+    Then the first two functions lift, each error path applying the lifted from, and the third is a residue row naming the `?` of another type
+
+  @UE-26 @build
+  Scenario: Self and its associated types name the impl
+    Given a planted crate whose enum implements TryFrom of a byte returning Result of Self and Self::Error, a struct method calling that try_from on its byte field, and another calling it on a flag
+    When the suite exercises UE-26
+    Then the try_from and the method calling it on the byte lift, and the method calling it on a flag is a residue row naming try_from
+
+  @UE-27 @build
+  Scenario: An integer read as a fieldless enum is its variant
+    Given a planted crate whose enum sets discriminants 5 and 9 and leaves the next unset, a function transmuting a byte matched by 5 or 9..=10 into it, another transmuting a byte matched by 5..=6, and a cast of the enum to a byte
+    When the suite exercises UE-27
+    Then the first transmuting function and the cast lift, the cast giving each variant its discriminant, and the second transmuting function is a residue row naming the unsafe block
+
+  @UE-28 @build
+  Scenario: Account metas and branch hints lift by their models
+    Given a planted crate depending on solana-instruction, solana-pubkey and pinocchio, with a function pushing AccountMeta::new and AccountMeta::new_readonly onto a vector and another testing likely and unlikely
+    When the suite exercises UE-28
+    Then both functions lift, the metas writable and read-only as their constructors set them
