@@ -53,8 +53,7 @@ deny:
 # `prismpm build` would repeat it.
 app:
     cd app && lexlean fmt --check && lexlean lock --check
-    prismpm --project app verify
-
+    bash -euo pipefail -c 'case "${PRISM_PROOF_EVENT:-}" in pull_request:*|merge_group:*|push:refs/heads/main) if cargo run -q --locked -p xtask -- proof-reuse; then exit 0; fi ;; esac; rm -rf .prism-proof; prismpm --project app verify | tee .prism-proof.log; attestation=$(sed -n "s/^verified attestation: \([0-9a-f]\{64\}\)$/\1/p" .prism-proof.log); rm -f .prism-proof.log; cargo run -q --locked -p xtask -- proof-keep "$attestation"'
 # UE-01, UE-07, UE-11, UE-12: the engine's projections, checked by the SDK.
 # The committed fixture projection must be current and accepted; fresh
 # projections of this workspace and of the advised fixture, whose locked
