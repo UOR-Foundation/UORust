@@ -179,9 +179,9 @@ name = "app"
 kind = "fetch"
 recipe = "app"
 sdk = true
-sets = ["sdk"]
-inputs = ["app/"]
-untouched = "everything outside app/ and the SDK lock"
+sets = ["sdk", "manifests", "rust"]
+inputs = ["app/", "Justfile"]
+untouched = "the site, registers, non-workspace scripts and documents; app, Rust and recipe inputs invalidate this proof"
 
 [[obligation]]
 name = "uorust"
