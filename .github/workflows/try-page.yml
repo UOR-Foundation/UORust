@@ -28,10 +28,10 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22
-      - name: Check release-platform manifest and negative controls
-        run: python3 -I -m unittest discover -s scripts/release -p 'test_platforms.py'
           cache: npm
           cache-dependency-path: package-lock.json
+      - name: Check release-platform manifest and negative controls
+        run: python3 -I -m unittest discover -s scripts/release -p 'test_platforms.py'
       - name: Install the test runner from the checked-in lockfile
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Install Chromium
