@@ -651,8 +651,8 @@ fn run_harness(
 /// The name of the library of the package at `dir`: its manifest's
 /// `[lib] name`, else its package's name with each `-` a `_`.
 fn lib_name(dir: &Path) -> Result<String, UorustError> {
-    let manifest: toml::Table = crate::embed::read_text(&dir.join("Cargo.toml"))?
-        .parse()
+    let manifest_text = crate::embed::read_text(&dir.join("Cargo.toml"))?;
+    let manifest: toml::Table = toml::from_str(&manifest_text)
         .map_err(|e| tool("Cargo.toml", e))?;
     let named = manifest
         .get("lib")
