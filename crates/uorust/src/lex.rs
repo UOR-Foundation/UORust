@@ -166,6 +166,88 @@ pub(crate) fn type_names(
         .collect())
 }
 
+/// Change only observed policy values in an existing projected package.
+/// Declaration boundaries and quoted content use the same lexer as slicing.
+pub(crate) fn with_axiom_policies(
+    text: &str,
+    policies: &std::collections::BTreeMap<String, Vec<String>>,
+) -> Result<String, crate::UorustError> {
+    let bad = |why: &str| crate::UorustError::Tool(format!("proof policy: {why}"));
+    let module = module_syntax(text)?;
+    let mut edits = Vec::new();
+    for (name, axioms) in policies {
+        let index = module
+            .names
+            .get(name.as_str())
+            .ok_or_else(|| bad("missing declaration"))?;
+        let (first, last, _) = module.blocks[*index];
+        if !matches!(module.tokens[first].2, "definition" | "theorem") {
+            return Err(bad("a policy observation does not name a term declaration"));
+        }
+        if axioms.iter().any(|axiom| {
+            axiom.split('.').any(|part| {
+                let mut chars = part.chars();
+                !chars
+                    .next()
+                    .is_some_and(|c| c.is_ascii_alphabetic() || c == '_')
+                    || !chars.all(|c| c.is_ascii_alphanumeric() || c == '_')
+            })
+        }) {
+            return Err(bad("invalid observed axiom identity"));
+        }
+        let policy = format!("[{}]", axioms.join(", "));
+        let mut depth = 0;
+        let mut found = None;
+        for position in first + 1..last {
+            let token = module.tokens[position].2;
+            if depth == 1
+                && token == "axioms"
+                && module.tokens.get(position + 1).map(|t| t.2) == Some(":")
+            {
+                if found.is_some() {
+                    return Err(bad("duplicate policy field"));
+                }
+                let start = position + 2;
+                if module.tokens.get(start).map(|t| t.2) != Some("[") {
+                    return Err(bad("policy field is not a list"));
+                }
+                let end = (start + 1..last)
+                    .find(|i| module.tokens[*i].2 == "]")
+                    .ok_or_else(|| bad("unclosed policy field"))?;
+                if module.tokens[start + 1..end]
+                    .iter()
+                    .any(|t| matches!(t.2, "[" | "{" | "("))
+                {
+                    return Err(bad("nested policy value"));
+                }
+                found = Some((module.tokens[start].0, module.tokens[end].1));
+            }
+            match token {
+                "{" | "[" | "(" => depth += 1,
+                "}" | "]" | ")" => depth -= 1,
+                _ => {}
+            }
+        }
+        if let Some((start, end)) = found {
+            edits.push((start, end, policy));
+        } else {
+            let at = module.tokens[last - 1].0;
+            let comma = if module.tokens[last - 2].2 == "," {
+                ""
+            } else {
+                ","
+            };
+            edits.push((at, at, format!("{comma} axioms: {policy}")));
+        }
+    }
+    edits.sort_by_key(|edit| edit.0);
+    let mut result = text.to_string();
+    for (start, end, replacement) in edits.into_iter().rev() {
+        result.replace_range(start..end, &replacement);
+    }
+    Ok(result)
+}
+
 /// Keep complete emitted declarations reachable from every proof obligation.
 /// Strings are opaque and mutual groups are indivisible. The retained bytes
 /// are unchanged; this only scopes native trials, never full-project output.
@@ -1183,6 +1265,50 @@ mod tests {
             panic!("independent")
         };
         assert!(type_parameters.is_empty());
+    }
+
+    #[test]
+    fn observed_policy_edits_preserve_statements_proofs_and_literals_ue_84() {
+        let text = r#"\begin{semanticmodule}
+inductive{name: Payload, constructors: [{name: Item, fields: []}]}
+definition{name: textValue, parameters: [], result: String, body: "axioms: [Quoted]", axioms: [Old]}
+definition{name: flag, parameters: [], result: Bool, body: true}
+theorem{name: valid, parameters: [], statement: (true = true), proof: reflexivity{}, axioms: []}
+\end{semanticmodule}"#;
+        let policies = std::collections::BTreeMap::from([
+            (
+                "textValue".into(),
+                vec!["Quot.sound".into(), "propext".into()],
+            ),
+            ("flag".into(), vec![]),
+            ("valid".into(), vec!["Classical.choice".into()]),
+        ]);
+        let expected = text
+            .replace("axioms: [Old]", "axioms: [Quot.sound, propext]")
+            .replace("body: true}", "body: true, axioms: []}")
+            .replace(
+                "reflexivity{}, axioms: []",
+                "reflexivity{}, axioms: [Classical.choice]",
+            );
+        let patched = with_axiom_policies(text, &policies).unwrap();
+        assert_eq!(patched, expected);
+        assert_eq!(with_axiom_policies(&patched, &policies).unwrap(), patched);
+        for (name, axiom) in [
+            ("missing", "propext"),
+            ("Payload", "propext"),
+            ("flag", "x], body: false"),
+        ] {
+            assert!(with_axiom_policies(
+                text,
+                &std::collections::BTreeMap::from([(name.into(), vec![axiom.into()])])
+            )
+            .is_err());
+        }
+        assert!(with_axiom_policies(
+            &text.replace("axioms: [Old]", "axioms: [], axioms: [Old]"),
+            &policies
+        )
+        .is_err());
     }
 
     #[test]

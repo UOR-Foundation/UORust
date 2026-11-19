@@ -4450,8 +4450,11 @@ fn main() {
             "{f}"
         );
     }
-    let cache =
-        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("source-model-import-verdicts.toml");
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR"))
+        .join("source-model-import-policy-retry-verdicts.toml");
+    if cache.exists() {
+        std::fs::remove_file(&cache).unwrap();
+    }
     let proof = uorust::mir::prove_bounded(
         &dir,
         &options("source_models"),
@@ -4462,6 +4465,10 @@ fn main() {
     )
     .unwrap();
     assert_eq!(proof.refused, 0, "{proof:?}");
+    assert!(
+        proof.projection_reuses > 0,
+        "SDK policy correction repeated whole-workspace analysis: {proof:?}"
+    );
     let decisions = verdicts(&cache);
     opts.mir = Some(mir_options(
         dumps,

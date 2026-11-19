@@ -827,7 +827,7 @@ fn campaign_report(
         "status":if closed {"translation-closed"} else {"frontier-open"},
         "translation_closed":closed,
         "full_project_sdk_verified":false,
-        "proof":{"new_proved":proof.proved,"new_refused":proof.refused,"verifier_runs":proof.runs},
+        "proof":{"new_proved":proof.proved,"new_refused":proof.refused,"verifier_runs":proof.runs,"projection_runs":proof.projections,"projection_reuses":proof.projection_reuses},
         "census":census,"remaining":totals.functions-totals.lifted,
         "blockers":blockers,
         "bindings":{

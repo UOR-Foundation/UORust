@@ -104,6 +104,7 @@ model does not sanction.
 | `UE-81` | `build` | The compiler imports existing source semantics for immutable ABI-compatible receiver and associated call forms, including parameterless standard factories, through a common binder; workspace lookalikes and mutable or incompatible interfaces remain typed residue |
 | `UE-82` | `build` | Imported model type dependencies resolve through actual local algebraic declarations and content-bound qualified prelude type declarations; term declarations, missing names and unrelated namespaces cannot stand for a type |
 | `UE-83` | `build` | Compiler-generated call results inside recursive regions are evaluated once and transported through a shared typed constructor binding; recursive evidence quantifies exactly the enclosing match binders and path hypotheses required by the pinned SDK |
+| `UE-84` | `build` | Proof campaigns reuse the same dependency-scoped projected package for SDK-observed axiom-policy-only retries, preserving every statement and proof byte; semantic decisions reproject, and the report measures actual projections and package reuses |
 
 ## factory
 

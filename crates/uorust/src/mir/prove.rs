@@ -33,6 +33,13 @@ struct Trialled {
     dependencies: BTreeSet<String>,
 }
 
+/// An immutable dependency slice awaiting only observed policy corrections.
+struct PolicyRetry {
+    trial: Trial,
+    files: BTreeMap<String, Vec<u8>>,
+    candidates: Vec<Trialled>,
+}
+
 /// What a run decided.
 #[derive(Clone, Debug, Default)]
 pub struct Summary {
@@ -42,6 +49,10 @@ pub struct Summary {
     pub refused: usize,
     /// Verifier runs.
     pub runs: usize,
+    /// Actual whole-workspace projections, including the initial catalogue.
+    pub projections: usize,
+    /// Exact projected packages reused for observed policy-only retries.
+    pub projection_reuses: usize,
 }
 
 fn candidates(files: &BTreeMap<String, Vec<u8>>) -> Result<Vec<Trialled>, UorustError> {
@@ -372,6 +383,7 @@ pub fn prove_bounded(
         .filter(|(_, row)| matches!(row.status, Decision::Proved))
         .map(|(key, row)| (key.clone(), row.axioms.clone()))
         .collect();
+    summary.projections += 1;
     let catalogue = crate::project_workspace(
         root,
         &Options {
@@ -407,6 +419,7 @@ pub fn prove_bounded(
         .into_iter()
         .map(Trial::Only)
         .collect();
+    let mut policy_retry: Option<PolicyRetry> = None;
     while let Some(trial) = groups.pop_front() {
         let current = register.clone();
         let opts = Options {
@@ -419,8 +432,27 @@ pub fn prove_bounded(
             }),
             ..options.clone()
         };
-        let mut files = crate::project_workspace(root, &opts)?;
-        let all = candidates(&files)?;
+        let (mut files, all, reused) = match policy_retry.take() {
+            Some(PolicyRetry {
+                trial: original_trial,
+                files,
+                candidates,
+            }) => {
+                if original_trial != trial {
+                    return Err(UorustError::Tool(
+                        "proof policy: retry changed its dependency trial".into(),
+                    ));
+                }
+                summary.projection_reuses += 1;
+                (files, candidates, true)
+            }
+            None => {
+                summary.projections += 1;
+                let files = crate::project_workspace(root, &opts)?;
+                let all = candidates(&files)?;
+                (files, all, false)
+            }
+        };
         // Only a currently verifiable translation can replace a decision.
         // A blocked caller has an incomplete dependency closure; its digest
         // cannot invalidate a proof obtained from the complete inputs.
@@ -437,13 +469,15 @@ pub fn prove_bounded(
         if on_trial.is_empty() {
             continue;
         }
-        files.remove(CANDIDATES);
-        let roots: Vec<String> = on_trial.iter().flat_map(|c| c.decls.clone()).collect();
-        let behavior = files
-            .get_mut("src/Behavior.lex.tex")
-            .ok_or_else(|| UorustError::Tool("proof closure: missing Behavior module".into()))?;
-        *behavior =
-            crate::lex::proof_closure(&String::from_utf8_lossy(behavior), &roots)?.into_bytes();
+        if !reused {
+            files.remove(CANDIDATES);
+            let roots: Vec<String> = on_trial.iter().flat_map(|c| c.decls.clone()).collect();
+            let behavior = files.get_mut("src/Behavior.lex.tex").ok_or_else(|| {
+                UorustError::Tool("proof closure: missing Behavior module".into())
+            })?;
+            *behavior =
+                crate::lex::proof_closure(&String::from_utf8_lossy(behavior), &roots)?.into_bytes();
+        }
         write_scratch(scratch, &files)?;
         summary.runs += 1;
         let behavior = trial_behavior(&files);
@@ -472,16 +506,20 @@ pub fn prove_bounded(
                 .collect()
         };
         let mut progress = false;
+        let mut only_policy = true;
+        let mut policies = BTreeMap::new();
         for d in &diagnostics {
             for decl in named(d, &behavior) {
                 for c in owner(&decl) {
                     if let Some(axioms) = observed(d) {
                         let entry = learned.entry(c.kappa.clone()).or_default();
                         if entry.get(&decl) != Some(&axioms) {
-                            entry.insert(decl.clone(), axioms);
+                            entry.insert(decl.clone(), axioms.clone());
+                            policies.insert(decl.clone(), axioms);
                             progress = true;
                         }
                     } else if !register.rows.contains_key(&c.kappa) {
+                        only_policy = false;
                         let first = d.message.lines().next().unwrap_or_default();
                         register.rows.insert(
                             c.kappa.clone(),
@@ -501,6 +539,18 @@ pub fn prove_bounded(
         }
         if progress {
             std::fs::write(verdicts, register.to_text()).map_err(|e| io(verdicts, e))?;
+            if only_policy && !policies.is_empty() {
+                let body = files.get_mut("src/Behavior.lex.tex").ok_or_else(|| {
+                    UorustError::Tool("proof policy: missing Behavior module".into())
+                })?;
+                *body = crate::lex::with_axiom_policies(&String::from_utf8_lossy(body), &policies)?
+                    .into_bytes();
+                policy_retry = Some(PolicyRetry {
+                    trial: trial.clone(),
+                    files,
+                    candidates: all.clone(),
+                });
+            }
             groups.push_front(trial);
             continue;
         }

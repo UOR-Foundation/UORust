@@ -585,3 +585,10 @@ Feature: engine
     When its updated state flows into the next recursive region invocation
     Then one evaluated call result is bound in the recursive evidence scope
     And SDK value checks and termination evidence accept the whole loop
+
+  @UE-84 @build
+  Scenario: Observed policy retries reuse the same projected dependency closure
+    Given a fresh native proof campaign with an SDK-observed policy correction
+    When no semantic decision or dependency changes between verifier attempts
+    Then the existing projected package supplies the next SDK attempt
+    And unchanged statement and proof bytes remain bound to the same candidates

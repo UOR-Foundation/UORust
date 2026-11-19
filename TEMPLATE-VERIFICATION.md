@@ -1350,3 +1350,39 @@ runs. The original pre-change fixture is retained in delivery evidence. All 16
 CLI tests then passed, including byte-identical rooted replay with zero verifier
 runs. Repo-conformance, strict all-target Clippy, generated model, immutable
 template/SDK lock and self-model checks passed. No replay assertion was weakened.
+
+## UE-84: reuse projected packages for observed policy retries
+
+The registered fresh-campaign regression proved nine native fixture functions
+but failed its reuse requirement: four SDK attempts performed five whole-source
+projections, including the initial dependency catalogue, and reused no package.
+The baseline ended at that assertion before the later value comparisons.
+
+The solver now retains the same exact dependency slice and candidate identities
+when the only new information is an SDK axiom-policy observation. The shared
+projection lexer edits only those observed policy values. Statements, proofs,
+strings and other declaration bytes are preserved. Each retry still invokes
+the pinned SDK. A semantic refusal or a different dependency trial requires a
+fresh projection. The proof report measures actual projections and package
+reuses separately from SDK attempts and formally lifted counts.
+
+The actual SDK regression passed all 29 Rust comparisons and the wrong-result
+LLV7002 control in 161.24 seconds. It requires a real package reuse. This duration
+includes the later value and negative checks that the failing baseline did not
+reach, so the two durations do not establish a speedup percentage. The policy
+writer's controls cover unchanged statements, proofs and quoted text, explicit
+empty policies, idempotence, missing declarations, type declarations, duplicate
+fields and malformed identities. No SDK/template policy or native semantic
+registry was changed.
+
+All nine syntax/policy controls, 14 lowering tests, four source-import controls
+and 16 CLI tests passed. A fresh public CLI qualification measured ten proofs,
+one semantic refusal, five SDK attempts, four whole-source projections within
+the native proof stage, and two package reuses. This deliberately exercises
+reprojection after a semantic decision as well as policy-only reuse. Final CLI
+projection and Factory stages are outside those native proof counters. Exact
+rooted replay still used zero verifier calls. Repo-conformance caught a moved
+test-name suffix; retaining the original capability's name restored the complete
+claim mapping. Repo-conformance, strict all-target Clippy, generated model,
+immutable template/SDK-lock and self-model checks then passed. No gate was
+weakened and no elapsed-time speedup is inferred from unequal fixture stages.

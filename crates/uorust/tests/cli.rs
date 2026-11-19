@@ -420,6 +420,8 @@ fn proof_campaign_reports_the_actual_frontier_ue_50() {
     let data: serde_json::Value = serde_json::from_slice(&result.stdout).expect("JSON");
     assert_eq!(data["spec"], "uorust/proof-campaign/1");
     assert_eq!(data["proof"]["verifier_runs"], 0);
+    assert_eq!(data["proof"]["projection_runs"], 1);
+    assert_eq!(data["proof"]["projection_reuses"], 0);
     let text = std::fs::read_to_string(out.join("frontier.toml")).expect("final projection");
     let frontier = uorust::register::Register::read(&out.join("frontier.toml"), &text)
         .expect("actual frontier");
@@ -450,6 +452,19 @@ fn proof_campaign_reports_the_actual_frontier_ue_50() {
         std::fs::read_to_string(blocked.join("keep")).expect("unowned preserved"),
         "unowned"
     );
+    // UE-84: measure a fresh campaign separately from exact rooted replay.
+    std::fs::rename(&verdicts, tmp.join("original-verdicts.toml")).unwrap();
+    let measured = invoke(&tmp.join("fresh-projection"));
+    assert!(
+        measured.status.success(),
+        "{}",
+        String::from_utf8_lossy(&measured.stderr)
+    );
+    let measured: serde_json::Value = serde_json::from_slice(&measured.stdout).unwrap();
+    let work = &measured["proof"];
+    assert!(work["projection_runs"].as_u64().unwrap() > 0);
+    assert!(work["projection_reuses"].as_u64().unwrap() <= work["verifier_runs"].as_u64().unwrap());
+    eprintln!("UE-84 measured CLI work: {work}");
     std::fs::remove_dir_all(tmp).expect("cleanup");
 }
 
