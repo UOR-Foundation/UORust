@@ -91,6 +91,7 @@ model does not sanction.
 | `UE-68` | `build` | Native proof reuse binds the emitted dependency closure and pinned SDK assets, preserving intact original decisions across unrelated source-context changes while invalidating reached body or schema changes; legacy decision metadata is learned only under its exact original binding, and no proof status is fabricated |
 | `UE-69` | `build` | Compiler struct views preserve every declared field through SDK products, retaining unavailable field meanings as parametric values while compiling known field access and update; incomplete shapes, recursive unfolding, opaque operations, unresolved dispatch and unmodeled drop effects remain typed residue |
 | `UE-70` | `build` | Compiler mutations retain the incoming value carrier throughout place-update recursion and reuse the existing representation codec at storage boundaries; nested fields and containers preserve their declared schemas, and an incompatible opaque field is refused before SDK proof scheduling |
+| `UE-71` | `build` | Parametric map entries use the canonical SDK product carrier across type rendering, schema dependencies, source collection operations and existing standard semantic templates, preserving the closed-type ABI and refusing key operations without admitted comparison evidence |
 
 ## factory
 

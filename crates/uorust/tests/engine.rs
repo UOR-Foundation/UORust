@@ -6396,3 +6396,263 @@ fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-71: generic entries cannot create unbound global tuple schemas.
+#[test]
+fn parametric_map_carriers_share_sdk_products_ue_71() {
+    let dir=scratch("parametric-map-carriers",&[("Cargo.toml","[package]\nname=\"map_carriers\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+use std::collections::{HashMap,BTreeMap};
+pub fn keep<K,V>(mut n:u8,m:HashMap<K,V>)->HashMap<K,V> {while n>0 {n-=1;}m}
+pub fn length<K,V>(mut n:u8,m:&HashMap<K,V>)->usize {while n>0 {n-=1;}m.len()}
+pub fn source_length<K,V>(m:&HashMap<K,V>)->usize {m.len()}
+pub fn concrete_keep(m:HashMap<u8,bool>)->HashMap<u8,bool> {keep(0,m)}
+pub fn concrete_natural_keep(m:HashMap<u8,u8>)->HashMap<u8,u8> {keep(0,m)}
+pub fn get<V>(mut n:u8,m:&HashMap<u8,V>,k:u8)->Option<&V> {while n>0 {n-=1;}m.get(&k)}
+pub fn source_get<V>(m:&HashMap<u8,V>,k:u8)->Option<&V> {m.get(&k)}
+pub fn tree_get<V>(m:&BTreeMap<u8,V>,k:u8)->Option<&V> {m.get(&k)}
+pub fn concrete_length(m:&HashMap<u8,bool>)->usize {source_length(m)}
+pub fn native_source_length(mut n:u8,m:&HashMap<u8,bool>)->usize {while n>0 {n-=1;}source_length(m)}
+pub fn unavailable<'a,K:std::cmp::Eq+std::hash::Hash,V>(mut n:u8,m:&'a HashMap<K,V>,k:&K)->Option<&'a V> {while n>0 {n-=1;}m.get(k)}
+pub fn discard<K,V>(mut n:u8,m:HashMap<K,V>)->usize {while n>0 {n-=1;}m.len()}
+"#),("src/bin/vectors.rs",r#"
+use map_carriers::*;use std::collections::{HashMap,BTreeMap};use std::fmt::{Display,Debug};
+fn emit<V:Copy+PartialEq+Display+Debug>(tag:&str,m:HashMap<u8,V>) {
+ for n in [0,2] {
+  let kept=keep(n,m.clone());assert_eq!(kept,m);println!("keep|{tag}|{n}|{}|{}",kept[&1],kept[&3]);
+  println!("length|{tag}|{n}|{}",length(n,&m));
+  for k in [0,1,3] {println!("get|{tag}|{n}|{k}|{}",get(n,&m,k).map(|v|v.to_string()).unwrap_or("none".into()));}
+ }
+ println!("source_length|{tag}|0|{}",source_length(&m));
+ let tree:BTreeMap<u8,V>=m.iter().map(|(&k,&v)|(k,v)).collect();
+ for k in [0,1,3] {
+  println!("source_get|{tag}|0|{k}|{}",source_get(&m,k).map(|v|v.to_string()).unwrap_or("none".into()));
+  println!("tree_get|{tag}|0|{k}|{}",tree_get(&tree,k).map(|v|v.to_string()).unwrap_or("none".into()));
+ }
+}
+fn main(){
+ let b=HashMap::from([(1u8,false),(3,true)]);let n=HashMap::from([(1u8,8u8),(3,23)]);
+ emit("Bool",b.clone());emit("Nat",n.clone());
+ let kept=concrete_keep(b.clone());println!("concrete_keep|Bool|0|{}|{}",kept[&1],kept[&3]);
+ let kept=concrete_natural_keep(n);println!("concrete_natural_keep|Nat|0|{}|{}",kept[&1],kept[&3]);
+ println!("concrete_length|Bool|0|{}",concrete_length(&b));
+ for n in [0,2] {println!("native_source_length|Bool|{n}|{}",native_source_length(n,&b));}
+}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "parametric-map-carriers");
+    let mut opts = options("map_carriers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    for function in ["unavailable", "discard"] {
+        assert!(
+            residue_detail(&files, &format!("map_carriers::{function}")).is_some(),
+            "{function} acquired unavailable semantics"
+        );
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("parametric-map-carrier-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("map_carriers"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    assert!(
+        !decisions
+            .rows
+            .values()
+            .any(|v| v.function == "map_carriers::concrete_length"),
+        "the source generic-call bridge did not compose"
+    );
+    let output = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(output.lines().count(), 39);
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in output.lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("map_carriers::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let (first, last) = if p[1] == "Bool" {
+            ("false", "true")
+        } else {
+            ("8", "23")
+        };
+        let closed = p[0].starts_with("concrete_") || p[0] == "native_source_length";
+        let entry = |key: &str, value: &str| {
+            if closed {
+                format!(
+                    "(record TupleNat{} {{item0 := {key}, item1 := {value}}})",
+                    p[1]
+                )
+            } else {
+                format!("({key}, {value})")
+            }
+        };
+        let entry_type = if closed {
+            format!("TupleNat{}", p[1])
+        } else {
+            format!("(Nat * {})", p[1])
+        };
+        let list = |a: &str, b: &str| {
+            format!(
+                "(cons {} (cons {} (nil {entry_type})))",
+                entry("1", a),
+                entry("3", b)
+            )
+        };
+        let input = list(first, last);
+        let generic = if closed {
+            String::new()
+        } else if ["get", "source_get", "tree_get"].contains(&p[0]) {
+            format!("[{}] ", p[1])
+        } else {
+            format!("[Nat, {}] ", p[1])
+        };
+        let prefix = if ["keep", "length", "get", "native_source_length"].contains(&p[0]) {
+            format!("{} ", p[2])
+        } else {
+            String::new()
+        };
+        let (args, expected) = if ["keep", "concrete_keep", "concrete_natural_keep"].contains(&p[0])
+        {
+            (String::new(), list(p[3], p[4]))
+        } else if ["get", "source_get", "tree_get"].contains(&p[0]) {
+            (
+                format!(" {}", p[3]),
+                if p[4] == "none" {
+                    format!("(ctor Option.none [{}])", p[1])
+                } else {
+                    format!("(ctor Option.some [{}] {})", p[1], p[4])
+                },
+            )
+        } else {
+            (String::new(), p[3].to_string())
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let call = format!("({name} {generic}{prefix}{input}{args})");
+        let statement = if closed && ["concrete_keep", "concrete_natural_keep"].contains(&p[0]) {
+            let eq_value = |item: &str, value: &str| {
+                if p[1] == "Bool" {
+                    format!("(prim equal (project {item} item1) {value} : Bool)")
+                } else {
+                    format!("((project {item} item1) =? {value})")
+                }
+            };
+            let tests = [
+                "((project carrierFirst item0) =? 1)".to_string(),
+                eq_value("carrierFirst", p[3]),
+                "((project carrierSecond item0) =? 3)".to_string(),
+                eq_value("carrierSecond", p[4]),
+                "((prim length carrierTail : Nat) =? 0)".to_string(),
+            ];
+            let test = tests
+                .into_iter()
+                .reduce(|a, b| format!("({a} && {b})"))
+                .unwrap();
+            format!("((match {call} | List.nil => false | List.cons carrierFirst carrierRest => (match carrierRest | List.nil => false | List.cons carrierSecond carrierTail => {test})) = true)")
+        } else {
+            format!("({call} = {expected})")
+        };
+        let theorem = format!("theorem{{name: mapCarrierVector{i}, parameters: [], statement: {statement}, proof: decide{{}}, axioms: [{}]}}\n",policy.join(", "));
+        if p[0] == "length" && wrong.is_none() {
+            wrong = Some((theorem.clone(), theorem.replacen("= 2)", "= 3)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

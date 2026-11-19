@@ -194,7 +194,7 @@ impl Ty {
             Self::Tuple(ts) => format!("Tuple{}", ts.iter().map(|t| t.tag()).collect::<String>()),
             Self::Pair(ts) => product_types(ts),
             // The list of its entries, each the tuple of a key and a value.
-            Self::Map(k, v, _) => format!("(List Tuple{}{})", k.tag(), v.tag()),
+            Self::Map(..) => format!("(List {})", self.entry().render()),
             Self::Fn(ins, out) => format!(
                 "(Fn ({}) {})",
                 ins.iter()
@@ -208,9 +208,16 @@ impl Ty {
     }
 
     /// A map's entry: the tuple of its key and value.
-    fn entry(&self) -> Ty {
+    pub(crate) fn entry(&self) -> Ty {
         match self {
-            Self::Map(k, v, _) => Ty::Tuple(vec![(**k).clone(), (**v).clone()]),
+            Self::Map(k, v, _) => {
+                let fields = vec![(**k).clone(), (**v).clone()];
+                if fields.iter().any(|t| !t.parameters().is_empty()) {
+                    Ty::Pair(fields)
+                } else {
+                    Ty::Tuple(fields)
+                }
+            }
             other => other.clone(),
         }
     }
@@ -242,7 +249,7 @@ impl Ty {
             Self::List(t) | Self::Set(t, _) => format!("List{}", t.tag()),
             Self::Tuple(ts) => format!("Tuple{}", ts.iter().map(|t| t.tag()).collect::<String>()),
             Self::Pair(ts) => format!("Pair{}", ts.iter().map(|t| t.tag()).collect::<String>()),
-            Self::Map(k, v, _) => format!("ListTuple{}{}", k.tag(), v.tag()),
+            Self::Map(..) => format!("List{}", self.entry().tag()),
             Self::Fn(ins, out) => format!(
                 "Fn{}To{}",
                 ins.iter().map(Ty::tag).collect::<String>(),
@@ -300,12 +307,7 @@ impl Ty {
             }
             Self::Option(t) | Self::List(t) | Self::Set(t, _) => t.mentions(),
             // Its entry: the tuple of a key and a value.
-            Self::Map(k, v, _) => {
-                let mut out = BTreeSet::from([Ty::Tuple(vec![(**k).clone(), (**v).clone()])]);
-                out.extend(k.mentions());
-                out.extend(v.mentions());
-                out
-            }
+            Self::Map(..) => self.entry().mentions(),
             Self::Outcome(t, e) => {
                 let mut out = t.mentions();
                 out.extend(e.mentions());
@@ -4923,6 +4925,178 @@ fn instantiated(pattern: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
     }
 }
 
+/// The declared generic carrier after substitution, retaining its product
+/// choices. A bound opaque parameter keeps its own admitted representation.
+fn model_carrier(ty: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
+    match ty {
+        Ty::Map(..) => Ty::List(Box::new(model_carrier(&ty.entry(), bind))),
+        Ty::List(t) => Ty::List(Box::new(model_carrier(t, bind))),
+        Ty::Option(t) => Ty::Option(Box::new(model_carrier(t, bind))),
+        Ty::Outcome(t, e) => Ty::Outcome(
+            Box::new(model_carrier(t, bind)),
+            Box::new(model_carrier(e, bind)),
+        ),
+        Ty::Tuple(ts) => Ty::Tuple(ts.iter().map(|t| model_carrier(t, bind)).collect()),
+        Ty::Pair(ts) => Ty::Pair(ts.iter().map(|t| model_carrier(t, bind)).collect()),
+        Ty::Fn(ts, r) => Ty::Fn(
+            ts.iter().map(|t| model_carrier(t, bind)).collect(),
+            Box::new(model_carrier(r, bind)),
+        ),
+        _ => instantiated(ty, bind),
+    }
+}
+
+/// A structural transport between admitted carriers. It changes no key, value
+/// or ordering; unsupported callable/state conversions remain residue.
+fn carrier_transport(
+    value: &str,
+    from: &Ty,
+    to: &Ty,
+    env: &Env,
+    ctx: &Ctx,
+    acc: Acc,
+) -> Lift<(String, Acc)> {
+    if from.same(to) {
+        return Ok((value.into(), acc));
+    }
+    let from = match from {
+        Ty::Map(..) => Ty::List(Box::new(from.entry())),
+        _ => from.clone(),
+    };
+    let to = match to {
+        Ty::Map(..) => Ty::List(Box::new(to.entry())),
+        _ => to.clone(),
+    };
+    let mut acc = acc.saw(&from).saw(&to);
+    let (input, next) = ctx.fresh(env, acc, "carrierValue");
+    acc = next;
+    let before = acc.helpers.len();
+    let mut recursive = false;
+    let mut list_tail = None;
+    let body = match (&from, &to) {
+        (Ty::Tuple(fs) | Ty::Pair(fs), Ty::Tuple(ts) | Ty::Pair(ts)) if fs.len() == ts.len() => {
+            let mut values = Vec::new();
+            for (i, (f, t)) in fs.iter().zip(ts).enumerate() {
+                let (v, next) =
+                    carrier_transport(&tuple_item(&from, &input, i), f, t, env, ctx, acc)?;
+                acc = next;
+                values.push(v);
+            }
+            Expr::Flat(tuple_value(&to, &values))
+        }
+        (Ty::List(f), Ty::List(t)) => {
+            let (head, next) = ctx.fresh(env, acc, "carrierHead");
+            acc = next;
+            let (tail, next) = ctx.fresh(env, acc, "carrierTail");
+            acc = next;
+            let (converted, next) = carrier_transport(&head, f, t, env, ctx, acc)?;
+            acc = next;
+            recursive = true;
+            list_tail = Some(tail.clone());
+            Expr::Match {
+                scrutinee: input.clone(),
+                arms: vec![
+                    Arm {
+                        pattern: "List.nil".into(),
+                        body: Expr::Flat(format!("(nil {})", t.render())),
+                    },
+                    Arm {
+                        pattern: format!("List.cons {head} {tail}"),
+                        body: Expr::Flat(converted),
+                    },
+                ],
+            }
+        }
+        (Ty::Option(f), Ty::Option(t)) => {
+            let (head, next) = ctx.fresh(env, acc, "carrierSome");
+            acc = next;
+            let (converted, next) = carrier_transport(&head, f, t, env, ctx, acc)?;
+            acc = next;
+            Expr::Match {
+                scrutinee: input.clone(),
+                arms: vec![
+                    Arm {
+                        pattern: "Option.none".into(),
+                        body: Expr::Flat(format!("(ctor Option.none [{}])", t.render())),
+                    },
+                    Arm {
+                        pattern: format!("Option.some {head}"),
+                        body: Expr::Flat(format!(
+                            "(ctor Option.some [{}] {converted})",
+                            t.render()
+                        )),
+                    },
+                ],
+            }
+        }
+        (Ty::Outcome(f, fe), Ty::Outcome(t, te)) => {
+            let (head, next) = ctx.fresh(env, acc, "carrierResult");
+            acc = next;
+            let (ok, next) = carrier_transport(&head, f, t, env, ctx, acc)?;
+            acc = next;
+            let (err, next) = carrier_transport(&head, fe, te, env, ctx, acc)?;
+            acc = next;
+            let params = format!("[{}, {}]", t.render(), te.render());
+            Expr::Match {
+                scrutinee: input.clone(),
+                arms: vec![
+                    Arm {
+                        pattern: format!("Result.ok {head}"),
+                        body: Expr::Flat(format!("(ctor Result.ok {params} {ok})")),
+                    },
+                    Arm {
+                        pattern: format!("Result.error {head}"),
+                        body: Expr::Flat(format!("(ctor Result.error {params} {err})")),
+                    },
+                ],
+            }
+        }
+        _ => {
+            return Err(Residue::Form(format!(
+                "no structural carrier transport from {} to {}",
+                from.render(),
+                to.render()
+            )))
+        }
+    };
+    let identity = crate::project::sha(format!("{from:?}\0{to:?}").as_bytes());
+    let name = ctx.helper_name(env, &acc, &format!("Carrier{identity}"));
+    let body = match (body, list_tail) {
+        (
+            Expr::Match {
+                scrutinee,
+                mut arms,
+            },
+            Some(tail),
+        ) => {
+            let Expr::Flat(head) = &arms[1].body else {
+                return Err(Residue::Form("a non-value carrier element".into()));
+            };
+            arms[1].body = Expr::Flat(format!("(cons {head} ({name} {tail}))"));
+            Expr::Match { scrutinee, arms }
+        }
+        (body, _) => body,
+    };
+    let calls = acc.helpers[before..]
+        .iter()
+        .map(|h| format!("#{}", h.name))
+        .collect();
+    let acc = acc
+        .helper(Helper {
+            name: name.clone(),
+            params: vec![(input, from.render())],
+            result: to.render(),
+            body,
+            calls,
+            axioms: BTreeSet::new(),
+            recursive,
+            entwined: false,
+            termination: None,
+        })
+        .called(format!("#{name}"));
+    Ok((format!("({name} {value})"), acc))
+}
+
 /// A call of a generic function: the type arguments its arguments fix, in
 /// the order of its type parameters, then for each method of its
 /// dictionary the one the instantiating type supplies, then its own
@@ -4948,7 +5122,7 @@ fn generic_call(
     acc: Acc,
 ) -> Lift<((Expr, Ty), Acc)> {
     let mut bind: BTreeMap<String, Ty> = BTreeMap::new();
-    let mut lifted: Vec<Option<String>> = vec![None; c.args.len().min(sig.params.len())];
+    let mut lifted: Vec<Option<(String, Ty)>> = vec![None; c.args.len().min(sig.params.len())];
     let mut descends = None;
     let mut acc = acc;
     let pairs: Vec<(usize, (&rs::RustExpr, &Ty))> =
@@ -4973,9 +5147,15 @@ fn generic_call(
         if name == ctx.current && ctx.tails.get(&v) == ctx.params.get(i) && descends.is_none() {
             descends = Some(i);
         }
-        lifted[i] = Some(v);
+        lifted[i] = Some((v, vt));
     }
-    let args: Vec<String> = lifted.into_iter().flatten().collect();
+    let mut args = Vec::new();
+    for ((value, actual), formal) in lifted.into_iter().flatten().zip(&sig.params) {
+        let target = model_carrier(formal, &bind);
+        let (value, next) = carrier_transport(&value, &actual, &target, env, ctx, acc)?;
+        acc = next;
+        args.push(value);
+    }
     let mut types = Vec::new();
     for p in &generic.types {
         let Some(t) = bind.get(p) else {
@@ -5057,12 +5237,21 @@ fn generic_call(
     }
     parts.extend(dictionary);
     parts.extend(args);
-    flat_lift(
-        format!("({})", parts.join(" ")),
-        instantiated(&sig.result, &bind),
+    let result = instantiated(&sig.result, &bind);
+    let modeled = model_carrier(&sig.result, &bind);
+    let (term, acc) = carrier_transport(
+        &format!("({})", parts.join(" ")),
+        &modeled,
+        &result,
+        env,
+        ctx,
         acc,
-    )
+    )?;
+    flat_lift(term, result, acc)
 }
+
+/// A generic model term, result, external dependencies and structural declarations.
+pub(crate) type ModelBinding = (String, Ty, BTreeSet<String>, Vec<Decl>);
 
 /// Bind compiler values with the same generic argument and coherent dictionary
 /// mechanism used by source calls. This imports an existing definition; it
@@ -5074,7 +5263,7 @@ pub(crate) fn bind_model_call(
     fns: &BTreeMap<String, Sig>,
     widths: &[(u32, Vec<String>)],
     names: &BTreeSet<String>,
-) -> Lift<(String, Ty, BTreeSet<String>)> {
+) -> Lift<ModelBinding> {
     let generic = sig
         .generic
         .as_ref()
@@ -5143,7 +5332,14 @@ pub(crate) fn bind_model_call(
         &ctx,
         Acc::default(),
     )?;
-    if !acc.helpers.is_empty() || !acc.axioms.is_empty() {
+    if !acc.axioms.is_empty()
+        || acc.helpers.iter().any(|h| {
+            !h.axioms.is_empty()
+                || h.entwined
+                || h.termination.is_some()
+                || h.calls.iter().any(|c| !c.starts_with('#'))
+        })
+    {
         return Err(Residue::Form(
             "a compiler generic binding needing additional declarations".into(),
         ));
@@ -5151,6 +5347,7 @@ pub(crate) fn bind_model_call(
     let calls = acc
         .calls
         .iter()
+        .filter(|key| !key.starts_with('#'))
         .map(|key| {
             if key == "compilerDependency" {
                 Ok(sig.name.clone())
@@ -5161,7 +5358,22 @@ pub(crate) fn bind_model_call(
             }
         })
         .collect::<Lift<BTreeSet<_>>>()?;
-    Ok((flat_text(term)?, result, calls))
+    let declarations = acc
+        .helpers
+        .into_iter()
+        .map(|h| Decl::Definition {
+            type_parameters: Vec::new(),
+            recursive: h.recursive.then(|| h.params[0].0.clone()),
+            name: h.name,
+            parameters: h.params,
+            result: h.result,
+            body: h.body,
+            axioms: Vec::new(),
+            termination: None,
+            mutual: None,
+        })
+        .collect();
+    Ok((flat_text(term)?, result, calls, declarations))
 }
 
 /// The module of the byte-level text prelude every projection carries.
@@ -7704,7 +7916,7 @@ fn lookup(
     needle: &rs::RustExpr,
 ) -> Lift<((Expr, Ty), Acc)> {
     let key_ty = match (elem, value) {
-        (Ty::Tuple(kv), Some(_)) => kv[0].clone(),
+        (Ty::Tuple(kv) | Ty::Pair(kv), Some(_)) => kv[0].clone(),
         _ => elem.clone(),
     };
     let ((v, vt), acc) = flat_of(needle, env, ctx, acc, Some(&key_ty))?;
@@ -7714,7 +7926,7 @@ fn lookup(
     let (head, acc) = ctx.fresh(env, acc, "item");
     let (probe, acc) = ctx.fresh(env, acc, "needle");
     let subject = if value.is_some() {
-        format!("(project {head} item0)")
+        tuple_item(elem, &head, 0)
     } else {
         head.clone()
     };
@@ -7740,8 +7952,9 @@ fn lookup(
             Ty::Option(Box::new(vt.clone())),
             format!("(ctor Option.none [{}])", vt.render()),
             format!(
-                "(ctor Option.some [{}] (project {head} item1))",
-                vt.render()
+                "(ctor Option.some [{}] {})",
+                vt.render(),
+                tuple_item(elem, &head, 1)
             ),
         ),
         _ => (Ty::Bool, "false".to_string(), "true".to_string()),
@@ -7881,13 +8094,9 @@ fn collection(
             if !*sorted {
                 return unordered();
             }
-            let (field, ty) = if name == "keys" {
-                ("item0", k)
-            } else {
-                ("item1", v)
-            };
+            let (field, ty) = if name == "keys" { (0, k) } else { (1, v) };
             let (head, acc) = ctx.fresh(env, acc, "entry");
-            let core = format!("(project {head} {field})");
+            let core = tuple_item(&rt.entry(), &head, field);
             let lam = Lambda {
                 binders: vec![head.clone()],
                 lets: Vec::new(),
@@ -14466,6 +14675,53 @@ fn unread_signature(sig: &rs::Signature) -> Option<String> {
 
 #[cfg(test)]
 mod tests {
+
+    #[test]
+    fn map_carriers_keep_closed_abi_and_transport_generic_instances_ue_71() {
+        let k = Ty::Param("K".into());
+        let v = Ty::Param("V".into());
+        let generic = Ty::Map(Box::new(k), Box::new(v), false);
+        let closed = Ty::Map(Box::new(Ty::Nat(Some(8))), Box::new(Ty::Bool), false);
+        assert_eq!(closed.render(), "(List TupleNatBool)");
+        assert_eq!(closed.tag(), "ListTupleNatBool");
+        assert_eq!(generic.render(), "(List ('K * 'V))");
+        assert!(!generic.mentions().iter().any(|t| matches!(t, Ty::Tuple(_))));
+        let bindings = BTreeMap::from([("K".into(), Ty::Nat(Some(8))), ("V".into(), Ty::Bool)]);
+        assert_eq!(
+            model_carrier(&generic, &bindings).render(),
+            "(List (Nat * Bool))"
+        );
+        let sig = Sig {
+            name: "keep".into(),
+            params: vec![generic.clone()],
+            result: generic,
+            threads: Vec::new(),
+            generic: Some(Generic {
+                types: vec!["K".into(), "V".into()],
+                reads: BTreeMap::new(),
+                dictionary: Vec::new(),
+            }),
+        };
+        let (_, result, calls, decls) = bind_model_call(
+            &sig,
+            &[("m".into(), closed.clone())],
+            &Types::default(),
+            &BTreeMap::new(),
+            &[],
+            &BTreeSet::new(),
+        )
+        .unwrap();
+        assert_eq!(result, closed);
+        assert_eq!(calls, BTreeSet::from(["keep".into()]));
+        assert_eq!(
+            decls.len(),
+            4,
+            "entry and list transports in both directions"
+        );
+        assert!(decls
+            .iter()
+            .all(|d| matches!(d,Decl::Definition {axioms,..} if axioms.is_empty())));
+    }
     use super::*;
 
     #[test]
@@ -14490,7 +14746,9 @@ mod tests {
             ("a".into(), Ty::Nat(Some(8))),
             ("b".into(), Ty::Nat(Some(8))),
         ];
-        let (term, result, calls) = call(&sig, &args, &Types::default(), &BTreeMap::new()).unwrap();
+        let (term, result, calls, declarations) =
+            call(&sig, &args, &Types::default(), &BTreeMap::new()).unwrap();
+        assert!(declarations.is_empty());
         assert_eq!(term, "(transport [Nat] a b)");
         assert_eq!(result, Ty::Nat(Some(8)));
         assert_eq!(calls, BTreeSet::from(["transport".into()]));
@@ -14521,7 +14779,7 @@ mod tests {
             threads: Vec::new(),
         };
         let fns = BTreeMap::from([("FlagObserve".into(), method.clone())]);
-        let (_, _, calls) = call(&sig, &args, &types, &fns).unwrap();
+        let (_, _, calls, _) = call(&sig, &args, &types, &fns).unwrap();
         assert!(calls.contains("flagObserve"));
         method.result = Ty::Nat(Some(8));
         assert!(call(

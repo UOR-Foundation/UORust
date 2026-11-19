@@ -978,3 +978,35 @@ Final focused dependency checks passed: all 439 library tests, all 16 CLI tests,
 conformance meta-tests, both product-view regressions, strict all-target Clippy,
 model/template/SDK-lock and generated self-model checks. The product-view
 regressions replayed with retained native decisions and passed in 47.35 seconds.
+
+## UE-71: parametric map carriers and explicit ABI transport
+
+The real SDK regression first failed at an unbound `K`: generic map entries
+created global tuple schemas without type binders. Entry rendering, dependencies
+and the existing source/standard semantic bindings now share SDK products when
+parameters are present. Closed entries retain their original tuple ABI.
+
+A second actual SDK check rejected a concrete caller passing that closed tuple
+ABI to a generic product ABI. The common generic-call binder now transports
+admitted list, product, option and result carriers through explicit structural
+helpers in both directions. Opaque type arguments retain their own carrier;
+unsupported callable conversions remain typed residue. Compiler bindings import
+those same helper declarations. The transport changes no key, value or ordering
+and supplies no comparison implementation or operation semantics.
+
+Eight actual native SDK decisions and 39 executable-Rust comparisons passed
+across Boolean and natural-valued maps, source and compiler reads, ordered and
+unordered maps, concrete calls of generic functions and both directions of
+transport. Unavailable generic key comparison and generic drop glue stay residue.
+The first comparison used equality of a nominal tuple list, for which the SDK
+provides no decidable-equality instance. Closed outputs are instead checked by
+matching both entries, their primitive fields and the empty tail. No instance,
+axiom or model ABI was added to make the test pass. A planted incorrect length
+is rejected by the actual SDK. The final comparison run passed in 48.14 seconds.
+
+The unit regression checks the exact retained closed rendering/tag, absence of
+unbound nominal generic entries, both transport directions and their explicit
+pure declarations. All 440 library tests, 16 CLI tests, conformance meta-tests,
+strict all-target Clippy, model/template/SDK-lock and generated self-model checks
+passed. Full release acceptance, translator certification and adoption remain
+open; these are supporting checks rather than a completed consumer contract.

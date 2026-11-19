@@ -6010,7 +6010,7 @@ impl Fun<'_, '_> {
                     generic: c.generic.clone(),
                     threads: Vec::new(),
                 };
-                let (term, result, calls) = lift::bind_model_call(
+                let (term, result, calls, declarations) = lift::bind_model_call(
                     &sig,
                     &modeled,
                     self.cx.types,
@@ -6021,6 +6021,9 @@ impl Fun<'_, '_> {
                 .map_err(|r| kind(k, &format!("{callee}: {}", r.detail())))?;
                 if !result.same(dt) {
                     return Err(bad_types());
+                }
+                for declaration in declarations {
+                    self.aux.insert(declaration.name().to_string(), declaration);
                 }
                 self.calls.extend(calls);
                 return Ok(Called::value(term));

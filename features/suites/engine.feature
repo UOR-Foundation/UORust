@@ -494,3 +494,10 @@ Feature: engine
     When lowering transports the incoming type through nested place updates
     Then admitted representation codecs preserve executable Rust results and stored values
     But an incompatible opaque slot is refused before an ill-typed model reaches the SDK
+
+  @UE-71 @build
+  Scenario: Parametric container dependencies share canonical product entries
+    Given generic maps transported and read by source and compiler bodies
+    When lowering binds their entry representation and dependency declarations
+    Then actual SDK models elaborate and agree with executable Rust at distinct instantiations
+    But unavailable key comparison evidence remains a typed refusal

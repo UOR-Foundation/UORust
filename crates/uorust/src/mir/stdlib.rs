@@ -638,7 +638,8 @@ fn apply_in(
         }
     }
     if let (Some(k), Some(v)) = (binds.get("k"), binds.get("v")) {
-        out.mentions.push(Ty::Tuple(vec![k.clone(), v.clone()]));
+        out.mentions
+            .push(Ty::Map(Box::new(k.clone()), Box::new(v.clone()), false).entry());
     }
     if out.aux.iter().any(|d| d.name().starts_with("compare_")) {
         out.mentions.push(Ty::Named(crate::order::ORDERING.into()));
@@ -710,10 +711,14 @@ impl Renderer<'_> {
             let w = words(&inner);
             let ty = |v: &str| binds.get(v.strip_prefix('$')?);
             let entry = || {
-                Some(Ty::Tuple(vec![
-                    binds.get("k")?.clone(),
-                    binds.get("v")?.clone(),
-                ]))
+                Some(
+                    Ty::Map(
+                        Box::new(binds.get("k")?.clone()),
+                        Box::new(binds.get("v")?.clone()),
+                        false,
+                    )
+                    .entry(),
+                )
             };
             let value = match w.iter().map(String::as_str).collect::<Vec<_>>().as_slice() {
                 [n] if n.chars().all(|c| c.is_ascii_digit()) => {
