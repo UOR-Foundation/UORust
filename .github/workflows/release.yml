@@ -154,7 +154,7 @@ jobs:
   publish:
     name: attach the archives to the release
     needs: build
-    if: ${{ !cancelled() }}
+    if: ${{ success() }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
