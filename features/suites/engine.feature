@@ -431,3 +431,10 @@ Feature: engine
     Then actual SDK results agree with executable Rust across nested and triple loops, early returns and distinct exits
     And overflow obligations still refuse an unsafe candidate
     But irreducible regions or untransportable borrows remain typed refusals
+
+  @UE-64 @build
+  Scenario: Compiler calls import shared source semantic models
+    Given compiler-owned standard calls with exact immutable source and native type bindings
+    When native lowering imports the source translator's existing semantic declarations
+    Then actual SDK results agree with executable Rust across unrelated standard receiver families
+    But partial panic models, divergent readings, mutable inputs and custom owners remain refused

@@ -435,3 +435,9 @@ id = "UE-63"
 level = "build"
 suite = "engine"
 statement = "Compiler-derived natural control-flow regions compose through explicit exit-state packets and retained immutable frames, supporting nested loops, distinct exits and early returns without cyclic continuations; actual SDK termination and overflow obligations remain mandatory, and irreducible or unsupported borrow states remain typed refusals"
+
+[[id]]
+id = "UE-64"
+level = "build"
+suite = "engine"
+statement = "Native standard inherent calls import the existing source translator's semantic models through compiler-owned paths and exact source/native type bindings, retaining their declaration dependencies and SDK obligations; mutable inputs, incompatible carriers, partial panic models, divergent readings and custom owners remain refused"

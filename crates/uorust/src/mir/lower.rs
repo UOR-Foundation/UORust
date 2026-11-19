@@ -6069,6 +6069,29 @@ impl Fun<'_, '_> {
                 backward: None,
             });
         }
+        // Reuse the source translator's semantics after compiler ownership and
+        // exact immutable carrier bindings have been established. No operation
+        // name acquires a second, handwritten model here.
+        let import_name = self.fresh(Some(&format!("{}SourceModel", self.name)), usize::MAX);
+        if let Some(imported) = super::source::apply(
+            callee,
+            &args,
+            texts,
+            dt,
+            self.cx.types,
+            self.cx.widths,
+            self.cx.taken,
+            &import_name,
+        ) {
+            self.types.extend(imported.types);
+            for declaration in imported.decls {
+                self.calls.insert(declaration.name().to_string());
+                self.aux
+                    .entry(declaration.name().to_string())
+                    .or_insert(declaration);
+            }
+            return Ok(Called::value(imported.term));
+        }
         // `Arguments::new(template, args)` of `format_args!`, where the
         // table models Arguments as its pieces: the template is the
         // constant `format_args!` writes, read here in core's own encoding

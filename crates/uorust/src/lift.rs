@@ -2046,6 +2046,8 @@ pub(crate) struct Entry {
 /// What the lift reads and does not change while it lifts a crate: the
 /// types it names and the candidate functions' signatures.
 pub(crate) struct Env {
+    /// Imported compiler models may not replace a Rust panic with a default value.
+    total: bool,
     pub(crate) types: Types,
     /// Candidate functions: Rust name -> signature.
     pub(crate) fns: BTreeMap<String, Sig>,
@@ -7032,6 +7034,11 @@ fn wrapped_method(
         }
         ("unwrap_or_default" | "unwrap" | "expect", _) => {
             let rust_default = name == "unwrap_or_default";
+            if env.total && !rust_default {
+                return Err(Residue::Form(
+                    "a partial source model cannot discharge a native panic obligation".into(),
+                ));
+            }
             if rust_default && matches!(value, Ty::Named(_)) {
                 return Err(Residue::Form("unwrap_or_default of a named type".into()));
             }
@@ -13141,6 +13148,26 @@ pub(crate) fn lift_all(
     widths: &[(u32, Vec<String>)],
     names: &BTreeSet<String>,
 ) -> Lifted {
+    lift_candidates(candidates, types, widths, names, false)
+}
+
+/// Import existing source models with totality required by compiler lowering.
+pub(crate) fn lift_models(
+    candidates: &[Candidate<'_>],
+    types: &Types,
+    widths: &[(u32, Vec<String>)],
+    names: &BTreeSet<String>,
+) -> Lifted {
+    lift_candidates(candidates, types, widths, names, true)
+}
+
+fn lift_candidates(
+    candidates: &[Candidate<'_>],
+    types: &Types,
+    widths: &[(u32, Vec<String>)],
+    names: &BTreeSet<String>,
+    total: bool,
+) -> Lifted {
     let mut failed: BTreeMap<String, Residue> = BTreeMap::new();
     loop {
         let fns: BTreeMap<String, Sig> = candidates
@@ -13160,6 +13187,7 @@ pub(crate) fn lift_all(
             })
             .collect();
         let mut env = Env {
+            total,
             types: types.clone(),
             fns: fns.clone(),
             widths: widths.to_vec(),
@@ -14342,6 +14370,7 @@ mod tests {
     #[test]
     fn recursive_descent_must_name_a_callers_parameter_ue_24() {
         let mut env = Env {
+            total: false,
             types: Types::default(),
             fns: BTreeMap::from([(
                 "again".into(),

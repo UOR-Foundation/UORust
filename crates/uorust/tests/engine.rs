@@ -4039,6 +4039,153 @@ fn native_workspace_floats_share_source_readings_ue_47() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-64: one model bridge, exercised across unrelated standard receiver types.
+#[test]
+fn native_calls_import_source_semantic_models_ue_64() {
+    let dir=scratch("source-model-import",&[("Cargo.toml","[package]\nname=\"source_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub fn fallback(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap_or_default()}
+pub fn error(mut n:u8,x:Result<bool,u8>)->Option<u8> {while n>0 {n-=1;} x.err()}
+pub fn conditional(mut n:u8,x:bool,y:u8)->Option<u8> {while n>0 {n-=1;} x.then_some(y)}
+pub fn ascii(mut n:u8,x:&str)->String {while n>0 {n-=1;} x.to_ascii_lowercase()}
+pub fn panic_default(mut n:u8,x:Option<u8>)->u8 {while n>0 {n-=1;} x.unwrap()}
+pub fn unicode(mut n:u8,x:&str)->String {while n>0 {n-=1;} x.to_lowercase()}
+"#),("src/bin/vectors.rs",r#"
+use source_models::*;
+fn option(x:Option<u8>)->String {match x {None=>"(ctor Option.none [Nat])".into(),Some(v)=>format!("(ctor Option.some [Nat] {v})")}}
+fn main() {
+ for x in [None,Some(0),Some(255)] {println!("fallback|2 {}|{}",option(x),fallback(2,x));}
+ for x in [Ok(false),Ok(true),Err(0),Err(255)] {let term=match x {Ok(v)=>format!("(ctor Result.ok [Bool, Nat] {v})"),Err(e)=>format!("(ctor Result.error [Bool, Nat] {e})")};println!("error|2 {term}|{}",option(error(2,x)));}
+ for x in [false,true] {for y in [0,255] {println!("conditional|2 {x} {y}|{}",option(conditional(2,x,y)));}}
+ for x in ["","PRISM","XyZ","PRIΣM"] {println!("ascii|2 {x:?}|{:?}",ascii(2,x));}
+}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 15);
+    let dumps = dumped(&dir, "source-model-import");
+    let mut opts = options("source_models");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["fallback", "error", "conditional", "ascii"] {
+        let path = format!("source_models::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    for f in ["panic_default", "unicode"] {
+        assert!(
+            residue_detail(&proposed, &format!("source_models::{f}")).is_some(),
+            "{f}"
+        );
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("source-model-import-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("source_models"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, input, expected] = parts.as_slice() else {
+            panic!("vector {line}")
+        };
+        let path = format!("source_models::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        if *function == "ascii" {
+            // UTF-8 encoding is opaque to the kernel. Prove the bridge's
+            // definitional equality to the existing source model instead of
+            // pretending `decide` can evaluate that runtime primitive.
+            let text = input.strip_prefix("2 ").unwrap();
+            vectors.push_str(&format!("theorem{{name: importedVector{i}, parameters: [], statement: (({name} {input}) = (Prelude::textAsciiLower {text})), proof: reflexivity{{}}, axioms: [{}]}}\n",policy.join(", ")));
+        } else {
+            vectors.push_str(&format!("theorem{{name: importedVector{i}, parameters: [], statement: (({name} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let incorrect_vectors = vectors.replacen("= 255)", "= 254)", 1);
+    assert_ne!(vectors, incorrect_vectors, "planted false oracle vector");
+    let defect = body.replacen(&vectors, &incorrect_vectors, 1);
+    assert_ne!(body, defect, "incorrect imported-model output planted");
+    std::fs::write(out.join("src/Behavior.lex.tex"), defect).unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-63: region composition is derived from compiler edges, not function names.
 #[test]
 fn compiler_regions_compose_nested_continuations_ue_63() {

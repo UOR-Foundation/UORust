@@ -716,3 +716,31 @@ LLV7002 because an oracle proposition is false. Exact match-path evidence is
 retained in every recursive decrease obligation; no termination gate is weakened.
 These are development checks; full `just vv`, translator certification and
 consumer adoption remain separate acceptance requirements.
+
+## UE-64: shared source model import
+
+The model, scenario and regression were registered first. The red compiler
+fixture stopped at `Option::unwrap_or_default`; the native path had no access to
+the source translator's existing model. Native calls now bind compiler-owned
+standard inherent paths and exact immutable source/native carrier types before
+importing the source declarations and their dependencies. Recursive nominal
+schemas are checked for mutable cells. Panic-default and divergent readings
+cannot pass this interface. No executable row of `mir/std.toml` changed.
+
+`native_calls_import_source_semantic_models_ue_64` passed in the pinned SDK:
+four native proofs; eleven executable-Rust differential vectors across Option,
+Result and Boolean receivers; four definitional equalities to the existing opaque
+string model. UTF-8 runtime primitives do not reduce under kernel `decide`, so
+those four equalities establish model transport rather than claiming a computed
+Rust differential. An incorrect oracle result (255 changed to 254 in the vector
+itself) was rejected with LLV7002 / `is false`. Partial unwraps, Unicode-divergent
+readings, mutable inputs, incompatible carriers and custom owners are refused.
+Two unit regressions check exact bindings and recursive schema closure.
+
+The complete library suite detected missing codec/source entries in the tool's
+source-code digest. Both are now included; the source inventory gate remains
+intact. Evidence: `uorust-source-model-import-red.log`,
+`uorust-source-model-import-final-checks.log`, and
+`uorust-source-model-import-acceptance.log` in the delivery runtime. Focused
+acceptance does not replace `just vv`, translator certification or consumer
+adoption. No contract completion is claimed from this capability.
