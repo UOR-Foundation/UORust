@@ -1,0 +1,484 @@
+# The asn1-rs register (written by `uorust crate asn1-rs@0.7.2`; do not edit): every body of
+# asn1-rs's MIR at asn1-rs 0.7.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1069
+translated = 24
+residue = 1045
+
+[module.asn1_types]
+bodies = 872
+translated = 8
+residue = 864
+
+[module.ber]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.class]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.datetime]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.debug]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.error]
+bodies = 33
+translated = 2
+residue = 31
+
+[module.header]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.length]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.tag]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.tostatic]
+bodies = 20
+translated = 14
+residue = 6
+
+[module.traits]
+bodies = 15
+translated = 0
+residue = 15
+
+[embedding]
+bodies = 1053
+embedded = 1053
+evaluable = 1048
+blocked = 5
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 242
+
+[[cause]]
+cause = "mir::Ty: error::SerializeError"
+bodies = 129
+
+[[cause]]
+cause = "mir::Ty: tag::Tag"
+bodies = 100
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: asn1_types::integer::Integer<'_>"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: nom::Err<u32>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: header::Header<'_>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: asn1_types::sequence::Sequence<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: asn1_types::any::Any<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: asn1_types::oid::Oid<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: asn1_types::real::Real"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: asn1_types::tagged::Explicit"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: asn1_types::tagged::Implicit"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: length::Length"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: SequenceOf<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SetOf<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: asn1_types::set::Set<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: asn1_types::boolean::Boolean"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::object_descriptor::ObjectDescriptor<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::bmpstring::BmpString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::generalstring::GeneralString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::graphicstring::GraphicString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::ia5string::Ia5String<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::numericstring::NumericString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::printablestring::PrintableString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::teletexstring::TeletexString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::universalstring::UniversalString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::utf8string::Utf8String<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::videotexstring::VideotexString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::strings::visiblestring::VisibleString<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::tagged::builder::TaggedParserBuilder<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::tagged::optional::OptTaggedParser"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: class::Class"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: oid::Oid<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: asn1_types::bitstring::BitString<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: asn1_types::generalizedtime::GeneralizedTime"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: asn1_types::null::Null"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: asn1_types::octetstring::OctetString<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: asn1_types::utctime::UtcTime"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: datetime::ASN1DateTime"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: set::Set<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::path::Display<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: asn1_types::end_of_content::EndOfContent"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1_types::enumerated::Enumerated"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: datetime::ASN1TimeZone"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: asn1_types::embedded_pdv::EmbeddedPdv<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: asn1_types::sequence::sequence_of::SequenceOf<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: asn1_types::set::set_of::SetOf<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: bitstring::BitString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: bmpstring::BmpString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: generalizedtime::GeneralizedTime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: generalstring::GeneralString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: graphicstring::GraphicString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ia5string::Ia5String<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: numericstring::NumericString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: object_descriptor::ObjectDescriptor<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: printablestring::PrintableString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: teletexstring::TeletexString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: universalstring::UniversalString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: utctime::UtcTime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: utf8string::Utf8String<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: videotexstring::VideotexString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: visiblestring::VisibleString<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: asn1_types::tagged::parser::TaggedParser<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: boolean::Boolean"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::DerConstraint"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: integer::Integer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: octetstring::OctetString<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: traits::BerParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: traits::DerParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as tostatic::ToStatic>::to_static"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BerClassFromIntError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OidParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PdvIdentification<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TagKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: embedded_pdv::EmbeddedPdv<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enumerated::Enumerated"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: null::Null"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tagged::Explicit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tagged::Implicit"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: asn1_types::sequence::to_static::{closure#0}: mir::TerminatorKind::Call: <u32 as tostatic::ToStatic>::to_static"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: is_highest_bit_set::{closure#0}: mir::TerminatorKind::Call: <&u8 as BitAnd>::bitand"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: class::Class::ContextSpecific::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as tostatic::ToStatic>::to_static"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: tostatic::_::to_static::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CLASS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SubIdentifierIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1_types::oid::OidParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1_types::oid::SubIdentifierIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: asn1_types::sequence::iterator::SequenceIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: class::BerClassFromIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tagged::parser::TaggedParser<'_"
+bodies = 1

@@ -1,0 +1,66 @@
+[[fn]]
+path = "image::multiply_accumulate"
+kappa = "d9ee6f6549b73a10a89d4803ce9b09361eb18d3f7b272c3a14b0f3447a80d8d9"
+at = "T=u32"
+embedded = "77a53877e2b9980cbfda25271478fb8241530a130fcb7ae4d6c6880583e4f611"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Mul, which u32 does not implement in core"
+
+[[fn]]
+path = "image::rect::<impl at src/math/rect.rs:4:16: 4:21>::clone"
+kappa = "05b63ee4058a37fe4533f1c904c63acbf90a2a88fefc04222b82e10fcd0b7bd3"
+embedded = "740c3d2f8fae6a92d9ed8de4bdd5b271acbf46af45efc6f75d746ad0ca3a11ca"
+status = "residue"
+cause = "mir::Ty: math::rect::Rect"
+
+[[fn]]
+path = "image::rect::<impl at src/math/rect.rs:4:23: 4:28>::fmt"
+kappa = "b5cbcf355501942fa3e4a0f80bd92e2e3bcbf94cf1bf22d22c66bcfb63377935"
+embedded = "82f2645274a9874b7bf9997aedcc3e6c2dfeba37d99ba4e6363bd21d19fe3728"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "image::rect::<impl at src/math/rect.rs:4:30: 4:39>::eq"
+kappa = "233e63d14fdf408a03931a880e12d949994440e84cb5595ea3dfa324acfdcb80"
+embedded = "9af922a1ff36e730c30e5b106c4b9934a2760e784120eee8785b3e17cbab8acf"
+status = "residue"
+cause = "mir::Ty: Rect"
+
+[[fn]]
+path = "image::rect::<impl at src/math/rect.rs:4:41: 4:43>::assert_fields_are_eq"
+kappa = "c1c3e6d3ca9f129d0474614518dd095f2a26b8349cb21c9e62d4dee7a562f023"
+embedded = "c38f417e32e614456b17609839b4c56d53a4876ad90fadb18e4962d913f99daf"
+status = "residue"
+cause = "mir::Ty: Rect"
+
+[[fn]]
+path = "image::rect::<impl at src/math/rect.rs:4:45: 4:49>::hash"
+kappa = "8418b83d29a1dbec829e47eb62664b3a0c6762eedd1a57053271d53ccdc8341b"
+embedded = "7b3495bd1525c83f7f482e061119674dd9dab882a2719426bd4f9b91a1a65aee"
+status = "residue"
+cause = "mir::Ty: Rect"
+
+[[fn]]
+path = "image::rect::Rect::from_image_at"
+kappa = "a4bfb809fa4a2f7c6365aabc16bc3674208d6b23963fcd7241a4322a0c8ea626"
+at = "Sized=u32"
+embedded = "a3c8ed71f7717a9f2877fc7b0c681968a7c761020a28b6f44409ecdd80b4a873"
+status = "residue"
+cause = "mir::Ty: math::rect::Rect"
+
+[[fn]]
+path = "image::rect::Rect::test_in_bounds"
+kappa = "248a023bb5c43fbb7143081fbb9e948ddb08828a3f815acccc1c5a084af51676"
+at = "Sized=u32"
+embedded = "2c0ccb30d80004b2bd417c44bfec298c4157f1ef22dba419a0eae03cab7bd5f8"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::resize_dimensions"
+kappa = "f10804324f19be485cfc384510aa4b7a7bdb4b19575c35875eb5ed86afb1649d"
+embedded = "c2562c761f29fbff26100b43b2a5d33e6fab72ddfdfe758f24da48f0940fa5fe"
+status = "residue"
+cause = "mir::Ty: f64"
+

@@ -1,0 +1,76 @@
+[[fn]]
+path = "lexical-parse-integer::algorithm_complete"
+kappa = "6b5b6eee8dc414e3441fea0773f37622a3dc50f535298e16e5951276bc78934a"
+at = "FORMAT=u32, T=u32"
+embedded = "e552bbef907e1ffe721f7f7636a42aa8b2e84c4c0b962ad7032ec5f2e7e75e75"
+status = "residue"
+cause = "mir::Ty: lexical_util::Error"
+
+[[fn]]
+path = "lexical-parse-integer::algorithm_partial"
+kappa = "e83abfcd1d5ca1240f4b57ff82b3e05913fc5c224db89c3c1a3db683a8f5befa"
+at = "FORMAT=u32, T=u32"
+embedded = "a2202e25afe81333c73f81ae9b62d18761e792e9cde864ae448aa6ef5e49dcd3"
+status = "residue"
+cause = "mir::Ty: lexical_util::Error"
+
+[[fn]]
+path = "lexical-parse-integer::can_try_parse_multidigits"
+kappa = "cfe23a743420c2c11dd964bd86e593f2545e37e6f1adbfacb1deaffa29ea4fc6"
+at = "FORMAT=u32"
+embedded = "bdb4a327f22a25e760b360de14f3c333aa81df1fae8f4cca4bc7322b6ee8a48f"
+status = "residue"
+cause = "mir::Ty: Iter"
+
+[[fn]]
+path = "lexical-parse-integer::is_4digits"
+kappa = "ff629d5c6924fb91023c29a318a50bc7f6e63bc4ca6e0048477470c267911d5f"
+embedded = "b167dcef08eee40876ab4bb1a3adeced43b28c1c41a6888751d8b6ff60ca20d3"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item lexical_util::NumberFormat::<FORMAT>::MANTISSA_RADIX"
+
+[[fn]]
+path = "lexical-parse-integer::is_8digits"
+kappa = "d1b26ab3ae2f668923cde113c2a9f8fd9ae34754a1e66a155ae5d849c763e8c9"
+embedded = "815868620a583926d24f629d57e8758197ddd65a3c7781d5c29a23ecb74e25fa"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item lexical_util::NumberFormat::<FORMAT>::MANTISSA_RADIX"
+
+[[fn]]
+path = "lexical-parse-integer::parse_4digits"
+kappa = "4d71075afc9ec451bc99180cde826c4109d2cb33c3eace0c5ecfeb73706ee07d"
+embedded = "b1be382187fb81399a68485d12fe45de26f6edf0261592d54f66489f4eef9bf4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item lexical_util::NumberFormat::<FORMAT>::MANTISSA_RADIX"
+
+[[fn]]
+path = "lexical-parse-integer::parse_8digits"
+kappa = "6f1423f635441375c52c37f0e8086d7ef0a08ac857da57b381b783a6ec31540b"
+embedded = "8b04029827387fbb8ef857cf596dbdfa11a7ca9679a74df473b5899dcc05b10e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item lexical_util::NumberFormat::<FORMAT>::MANTISSA_RADIX"
+
+[[fn]]
+path = "lexical-parse-integer::parse_sign"
+kappa = "9b14ec22893cac6c9fea51418355dedfb15098203be0da3c112dd70b7ca4aa9a"
+at = "FORMAT=u32"
+embedded = "1bc728a1dcde0599aa6419b6eb76bfc1a4e79f7e6b18058bc060baa8616111da"
+status = "residue"
+cause = "mir::Ty: lexical_util::Error"
+
+[[fn]]
+path = "lexical-parse-integer::try_parse_4digits"
+kappa = "9884f58d533aa2fe2bb9153d5c4e9575901c213f4feb81e68a7c00d67d916810"
+at = "Iter=u32, T=u32"
+embedded = "7d56257b667d31904ed890043718564d924d419d5b2fc51d50bcada2f6a048d7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iter, which u32 does not implement in core"
+
+[[fn]]
+path = "lexical-parse-integer::try_parse_8digits"
+kappa = "b787701fc8e74e8b543eca18303000b6fcc7783a18b4fe4dac11a63d8ce49781"
+at = "Iter=u32, T=u32"
+embedded = "79584139209e2e85096ca70db3228f1233e0b0d448b6919b6f7c3975955f32f0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iter, which u32 does not implement in core"
+

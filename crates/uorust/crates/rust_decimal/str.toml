@@ -1,0 +1,135 @@
+[[fn]]
+path = "rust_decimal::byte_dispatch_u64"
+kappa = "64cdcebff298ab2bdbf12f7544bdbbc97091682b689db11a84961381e477cd41"
+embedded = "6c2129b34dbfe96ea1278198a536129537a9b7791bb35a3faddad24df9c1da5f"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::dispatch_next"
+kappa = "f05b8b68beefe04cb523c86546aa9290e5a7beff483b063f526df215ecfb5c59"
+embedded = "ced95909853513438067ee0bb429b1aba4860095b6f4a2fb7bc5991d91c54e78"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::fmt_scientific_notation"
+kappa = "63b41732693d96e74e3c112fa2395ed67e3afa8e546a5effc27a84312d57f416"
+embedded = "0302bb3e7f86c1b03abc6695b1536d97463343eba0b07e11c0bd6315035bf5f4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rust_decimal::handle_data"
+kappa = "5403615470cb53da873ab051471e9d8f2a7bc9fca0b20df19c500c7f8d7d19d5"
+embedded = "cbda9b013df6edfb7a5143a8f9feafdb852ab49c8581740d6201c2046b028fce"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::handle_digit_64"
+kappa = "4d8ced82e1e5d4b2c14a59698fd13a3d3cf72803869d3c17f52d5883bd4fb76d"
+embedded = "d0e5187e0055d1c349f9737e6191afc958dc3e356c2be98262ed038173a23c3b"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::handle_full_128"
+kappa = "2d7f41cf4d998638555ccb650b42e1fce0523b2609809968f74f9bb34e8ce8a7"
+embedded = "768c0bdc7848be152cb14616b5bb4627c6671bdd735dd96c382762c063a40e47"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::handle_point"
+kappa = "d38dafd75c5fc727045af7399889dc620d0e4658fcd3b3f7c656e27b6f234f5b"
+embedded = "346103ec9a235b199f25334016104ab4f2479541afa3a34c6c8d245fa41bd430"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::handle_separator"
+kappa = "be1599d94a8990dc9f909aee26b212d1ac320d819c6c578b1661fe4a659a210d"
+embedded = "b8b50d04e907fa9db7c2c32560eaa963602402fd185feda04dfcf69afa949a9d"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::maybe_round"
+kappa = "c59625dab6aba8261c147312d80216492f98aa3f44b276a749dc4f2a4fe9461f"
+embedded = "95a1199158c0048a9b8ae6e20c3e8f83efa31d16db882d8d5bbdf66faae76603"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::non_digit_dispatch_u64"
+kappa = "c9361ce058ef7a3bba31471ecb541bfb0a94dec4fe1047e7035620a06ee476e4"
+embedded = "6a1adf15283fbbb4a1b0d2105dd825e2f9432454eb692fb0808fff7d8f38ab99"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::overflow_128"
+kappa = "21bf090c08751c22a62db7366d4e3fd62b257fbdf48baade3df1a5607dab5dc0"
+differential = 7
+embedded = "2f80a97f5cb36d05bb90ca6c421e4cb6fdb839141f1882461e3fc05cf3ce6583"
+status = "translated"
+digest = "271c221da59484e5135419c59caff41c151c5a13457631ab33ae35e3caa28de4"
+
+[[fn]]
+path = "rust_decimal::overflow_64"
+kappa = "cafed62f412262ec9d4c049327eaf91e7df3de59b921335b021ba46680292d07"
+differential = 7
+embedded = "03e41a03fe13744e7608ff4b42a872f32a556deb274139fba555a544b61bb968"
+status = "residue"
+cause = "mir::Operand::Constant: constants::WILL_OVERFLOW_U64: mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "rust_decimal::parse_str_radix_10"
+kappa = "17aeccc24fe60210d34e195fc5e00bfa731d54aa599e134a0b0d662258ff0c03"
+embedded = "f5353e46aa720bf8511e8af827f6d489b3735e4f5e8d5cccd3af934529afd374"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::parse_str_radix_10_dispatch"
+kappa = "30190057e70521040e2a075584f35032d4007da4d851abdc0f22c8160c9f89b0"
+embedded = "239157d0ebd63579b239334cf80de77f66141ba87815ae874961efd124f532d3"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::parse_str_radix_10_exact"
+kappa = "0b693a1b0a504e9420b688f2b9e1bc5e38265fdfae64faf01e05c241b54383ba"
+embedded = "cd5fe2185a56201ab2f6a20137db3b6b10af84ac74b3232801886ffe83957ae2"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::parse_str_radix_n"
+kappa = "8e2f57cd4964f24019429a2cec36929dc616c213609d8d678ab36538648f3b01"
+embedded = "46c838de66ebfd1feff02089bc80b7d534bd4cddac1b25431348cb608c98324a"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::tail_invalid_digit"
+kappa = "3aef80ff9ee0cfb0906f2a427dbd8e511693cccaa87303f048df7f8a3dc63dc1"
+embedded = "16cc1f75601d98eac479f7cd3d3a67354d79565c1c40db435b569b11f363550b"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::tail_no_has"
+kappa = "188ca92ffc19d4c16cf9207724c2b8cc57644305c5924ab800b0ebdfdb59ea90"
+embedded = "82c206d120286c689986667d05eb0775812c0c4cec3df8e51e690fd8f5889583"
+status = "residue"
+cause = "mir::Ty: decimal::Decimal"
+
+[[fn]]
+path = "rust_decimal::to_str_internal"
+kappa = "e5558e91adf1451ca0163d8db4f75dcf41140cc1f2e8cfffa33b8a98947890a4"
+embedded = "344c4961afae906195436ef4e21da51518a0c2c31dd2d1c19116bed3298dbac8"
+status = "residue"
+cause = "mir::Ty: arrayvec::ArrayString<32>"
+

@@ -1,0 +1,93 @@
+[[fn]]
+path = "sqlx-core::raw_sql"
+kappa = "da1c047becd26ad6d9aac6b3ecfec831fa5ce2467ab08fd9dae685a303ff84a4"
+embedded = "85cc33c9ed583c34bb2480c924374605cfb8d06c749a54aad189f17bb0dce6db"
+status = "residue"
+cause = "mir::Ty: raw_sql::RawSql"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::execute"
+kappa = "a146bad9ee13a52cc59cfdcb364d99b3d68c508e20d9d7d1e6bff59bec402a65"
+at = "DB=u32, E=u32"
+embedded = "79ff13e46fcc43dd3dde181727e3df246398c0083880c1158b3a0c5282e11880"
+status = "residue"
+cause = "mir::Ty: {async fn body of raw_sql::RawSql::execute<'_, u32, u32>()}"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::execute_many"
+kappa = "0e5fc832f35fa96903e0c5c00a93e2d9faaed4e0b573c65bcd8771125689b950"
+at = "DB=u32, E=u32"
+embedded = "3cdc7492ad7ed29b13ab44f8bbf970f9d828223dc9a37a9cac6b687abd8f62cc"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::fetch"
+kappa = "b24d90ee822a67e118c0c3d709d2b3b8af511ebe6ddb5ba4514967fb59c1b21d"
+at = "DB=u32, E=u32"
+embedded = "86ca4b597828bd0233ed261b2aa4f69c7a24ee9477b82cdc98b0a13f74924fae"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::fetch_all"
+kappa = "b207718da73939f5cb8e7ba1706e222041a65180517388bf6a24b55a5e31d779"
+at = "DB=u32, E=u32"
+embedded = "ea1384a46b3fa02ee7186c1baae1d1cafea610eddb1dd730433df962f3be052f"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::vec::Vec<u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::fetch_many"
+kappa = "b5e8b5c6d2f9f181595fc20494f16cbd21057853a3a19409dea81917153c8fce"
+at = "DB=u32, E=u32"
+embedded = "113d6bafa62b66800518653944d1e99455ab6fb8302c510978a1e8d9a3a530e6"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<either::Either<u32, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::fetch_one"
+kappa = "27f65b63e9091cbd1c617bcd1b0d628e5d078ed0736268bd997ece018f0383e0"
+at = "DB=u32, E=u32"
+embedded = "06edf91f42eb0676339f583d874830d4e2aebd38fa4cde0f1f756756f810d146"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::fetch_optional"
+kappa = "55ef32d17bf607b5ee57f0295d893e35880e55f0c36c6c0a78513b8cdc9cc076"
+at = "DB=u32, E=u32"
+embedded = "6197b586497da1700aee265646a03fb82a05260193e364a1fb6f63308970ac33"
+status = "residue"
+cause = "mir::Ty: {async fn body of raw_sql::RawSql::fetch_optional<'_, u32, u32>()}"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::persistent"
+kappa = "1f6332b5d73fc25bf095dd276a3b89d09344f2d910310bf847608ab2e77646d4"
+embedded = "b58f2a42ea6fe185223241c54dfe087414ca473ac1c26a47ecce6f6d2d803960"
+status = "residue"
+cause = "mir::Ty: RawSql"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::sql"
+kappa = "f51f6c612bae9d96abad2fea6c609d5858a2ad20b79a4e5cfba13d763f82b161"
+embedded = "96847bc25e577de5d47009729c1ea26129ac1ab38bba16aa357256e06f2ec2c6"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::statement"
+kappa = "880571978460adfee2c540666b063d3b71c38633cc0f11764168d048c57f67b7"
+at = "DB=u32"
+embedded = "f653f30d424eee074fef5587f5cd9dabe34e866a5ce2a0b4b0bb6d86c531a92d"
+status = "residue"
+cause = "mir::Ty: RawSql"
+
+[[fn]]
+path = "sqlx-core::raw_sql::RawSql::take_arguments"
+kappa = "b3b08a96b66ce5882a828d61998495a41db5e42b3387e89c5f3ed400107d1bb0"
+at = "DB=u32"
+embedded = "c95dc81b49205bc616d2c888527ac8ba7bbd44028efe46a77da970fda83fbf71"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+

@@ -1,0 +1,87 @@
+[[fn]]
+path = "aws-smithy-async::default_async_sleep"
+kappa = "f7cb5427440ba5a07854302f84e6cabe57b2ffc2325ea615f08a93d4c70e629f"
+embedded = "18dd8b2415a0cda561ff5d46d189b633a654df388309dd6adf254b27b5a95bf7"
+status = "residue"
+cause = "mir::Ty: rt::sleep::SharedAsyncSleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::<impl at src/rt/sleep.rs:43:10: 43:15>::clone"
+kappa = "e102886de6d3e79fb47e482678d52d6474e6be72717db84018067423d182c807"
+embedded = "9e6f05cd1c8613d81229d15b02590c681c23df923640f04cc46c820233166fc6"
+status = "residue"
+cause = "mir::Ty: rt::sleep::SharedAsyncSleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::<impl at src/rt/sleep.rs:43:17: 43:22>::fmt"
+kappa = "2e8b8a110464bf35fccfa7033c73bc7bd2bb03593f235f8ad874567b4e3068b9"
+embedded = "ba1b81048cc5dac3d0ab22d2f388162e450a8af429226efcba26f14f919422c5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::sleep::Arc::sleep"
+kappa = "1a5f0c7b8806a03de0d8d3e64b10498ee4a7e720ae599c3a93f7d2bdf1b54a37"
+at = "T=u32"
+embedded = "68016cdf5cb46d3001b85e0e295cd942321b0fa3fc17c265a0d20f4fc51eb8ac"
+status = "residue"
+cause = "mir::Ty: rt::sleep::Sleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::Box::sleep"
+kappa = "1e704bf48c0ff916fc33db19501594192fcaba9840e04745f1003eb324d682a2"
+at = "T=u32"
+embedded = "f3e41b50b8b043979bea9ceca96b7a474eccd56ca6681908e98c539ad311d6a9"
+status = "residue"
+cause = "mir::Ty: rt::sleep::Sleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::SharedAsyncSleep::as_ref"
+kappa = "43ea06e5427ff37b092f927fc36cfaf1560b65a49a6aa3aabe5b3c925b893d95"
+embedded = "1b858d113ab5fc354c566d0d7025fe8caa783be5cc4962da63744004cfc1b054"
+status = "residue"
+cause = "mir::Ty: dyn rt::sleep::AsyncSleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::SharedAsyncSleep::from"
+kappa = "3fa5afd143aa142d83bb4a924104142d5272b5b38dcb7427f27681f38b9fc106"
+embedded = "048b2f885f7baedd4849db50a6dcd93e282c537a8136118fc34c6c70b6ab2a67"
+status = "residue"
+cause = "mir::Ty: rt::sleep::SharedAsyncSleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::SharedAsyncSleep::new"
+kappa = "c850f57b4141b67524b22a4cd613c49637a954048495b5d677bdaa5d1f039740"
+embedded = "fba0d80735992fcb335eac622df40ab3689807c98ef56314fa95cfb988b134e0"
+status = "residue"
+cause = "mir::Ty: rt::sleep::SharedAsyncSleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::SharedAsyncSleep::sleep"
+kappa = "8a62e39875edac514ed0da65a8fbbd065e4679b2a030e1cff386861ca1caf0c8"
+embedded = "3ebaa8e4dec03f789473ceebfa73531e0550c1c43004cb39814601036f7fcd63"
+status = "residue"
+cause = "mir::Ty: rt::sleep::Sleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::Sleep::fmt"
+kappa = "498d67527c07b9a43860bcf8f88d0e75512ee938dcdc9da8cb07af8bbf82d73f"
+embedded = "774bdc33e1aa7d0cf596c77c0077ca82fa201a70ae561948a8624ab3e6b51bb8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::sleep::Sleep::new"
+kappa = "385b540c08d3fe51525b7c873aced5f9919f585b5d6222f1de19317dc18d499e"
+at = "Send=u32, Sync=u32"
+embedded = "b0c2f355d11f9b3b91647cdb5049fcd03a0d69d3880a655ddcef26d9583868c8"
+status = "residue"
+cause = "mir::Ty: rt::sleep::Sleep"
+
+[[fn]]
+path = "aws-smithy-async::sleep::Sleep::poll"
+kappa = "35e27045ad9fdcf84c5bf0dd7e00117b7924a888704738dced08a9681e02ec9e"
+embedded = "45d53160f0a41e7131cd45d3d805356e6e8209a0a654dc80c4763acd441eb9cc"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+

@@ -1,0 +1,983 @@
+[[fn]]
+path = "sqlx-core::CLOSE_ON_DROP_TIMEOUT"
+kappa = "27b185732097f4cb4d44da4c2cf0c9ad72c945505e93ba164aae8baba72ba9f3"
+embedded = "e4ade8182c81d80a0929e217b56fe3663932df2a738c72ba34ce3c596e6bab1b"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "sqlx-core::check_idle_conn"
+kappa = "8ccfbc7ac9b024a505779f428a42730fcf354776c0ded149ca7466732745d42f"
+at = "DB=u32"
+embedded = "6b4c101b6238634919282003924bcc61e7c9a41c8b53b7c5c07e862b89b075f3"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::inner::check_idle_conn<u32>()}"
+
+[[fn]]
+path = "sqlx-core::deadline_as_timeout"
+kappa = "a763de99ecff6e82e20d752b6d82a5611f1ef1e6c85ef79a55fd1f37579081de"
+embedded = "e700d2e7de7db02d3c9c69dc305c2f4c94dd17a11dcc04b565f7c701fc9db04f"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "sqlx-core::inner::DecrementSizeGuard::cancel"
+kappa = "957f6945c1d15df2b040d1ac6af193eb03a424980500d98419730602fe0a3aa4"
+embedded = "043887b4bf7b70fb51f4ac9f50b36499f46fc352831dfadeabcfb388313ef9da"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::inner::DecrementSizeGuard::drop"
+kappa = "a0f915ca44f6e34a21da7344e19de243839352179d819c64322b91d49787aebb"
+at = "DB=u32"
+embedded = "7ed6e75d775ef0f22401ffe3ad2a53d97f9ef624511e9f74ebec222b7785e58a"
+status = "residue"
+cause = "mir::Ty: DecrementSizeGuard<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::DecrementSizeGuard::from_permit"
+kappa = "a1117064492e4da745bb8f00a711d24bbd6f689c6462df69b2e3ccaa4ee6419e"
+at = "DB=u32"
+embedded = "a8a2b07eaabfadbaa10226ee3efabd1ddc94ee08c82f6fab076f0871f076504c"
+status = "residue"
+cause = "mir::Ty: pool::inner::DecrementSizeGuard<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::DecrementSizeGuard::new_permit"
+kappa = "b03246d2de07a90ac54acc88bd320779eb0722e2ced9307cfd45058dc37fb897"
+at = "DB=u32"
+embedded = "e961f651fc895f7ae44879a0d6295adf9b740a19278a00695f5f2d02f856809e"
+status = "residue"
+cause = "mir::Ty: pool::inner::DecrementSizeGuard<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::DecrementSizeGuard::release_permit"
+kappa = "25894b40291dbadd7af3cecbeed76dba614382ce9e9ffbbb38a8405c05317bac"
+at = "DB=u32"
+embedded = "28fb3169ee884c2c9f21e9089e800958bd851894523e77989ef5db1599d4981e"
+status = "residue"
+cause = "mir::Ty: DecrementSizeGuard<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::acquire"
+kappa = "b82f3da41bd9061c84e82a5d6dc7b4a8fafa474028e6d6853d95dc2982a42811"
+at = "DB=u32"
+embedded = "f0c38d004f55a92d350468dbd907a3d41c2bc9e1f97b91dad695310f59c635cf"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::acquire()}"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::acquire_permit"
+kappa = "bc17fae34f7e37ff37492dbd053e4ad2622f2ef7b574bb83dee7b08daa763676"
+at = "DB=u32"
+embedded = "a8965021f0f25698d138023a94cd86895dd135084b5bf6cf30f2b0bbf8c74400"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::acquire_permit()}"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::close"
+kappa = "18e35ef0b2c8a649a9e1d6aa0c6df116d6f8881a82b2ea258cffc1dcda15bd7d"
+at = "DB=u32"
+embedded = "e78987a087d08a715d7a3fe77740787e67370a400e44c6137cde2e565fd2e19d"
+status = "residue"
+cause = "mir::Ty: {async block@src/pool/inner.rs:99:9: 99:19}"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::close_event"
+kappa = "10ca784a3a6cef28d0bf55f5b126d4c3da22563ba3c8ad1f20a72ce0bb991749"
+at = "DB=u32"
+embedded = "6f592c7c1a393c6eeb66e7972126d859ec68dbcc4b236b1dc7ed4690fc4ea28c"
+status = "residue"
+cause = "mir::Ty: pool::CloseEvent"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::connect"
+kappa = "66fe089327dbbea786e708bf87458253dc982537b705c11c87bcd61123d26f68"
+at = "DB=u32"
+embedded = "50150d491b4bfc006d2d4f837e2501def617bb27fb1c1ceedbd9c24ed6154a32"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::connect()}"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::drop"
+kappa = "667cd527f2ff20b06303804f9f76c273261ba84118dfd3d477eaa9b3ed457233"
+at = "DB=u32"
+embedded = "31072e38b519afbd2e30ce4b03c2e5206e1088f7cdf23d39baa339a7cd32b032"
+status = "residue"
+cause = "mir::Ty: PoolInner<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::is_closed"
+kappa = "f67eb729ed8c1f24dfa63284132cca5f070a654950cf45c1f0eed28c97098a97"
+embedded = "77279ac24da97caaad9b73f7dfdb484627ae602af562e14575907fec0075f3c8"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::mark_closed"
+kappa = "334053c7766c75290feab6953db93823e331f9563f63c62fe9cf3b856c25aba8"
+embedded = "baae7c4d99acabc814072094ee62c3abf9a8c1e34eb256b4e17ee8adc4311f7f"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::min_connections_maintenance"
+kappa = "846474b99ec0eee1ba8bf02f4c742a9071a80e9fe4c2f3433e046fbeb4b3dff1"
+at = "DB=u32"
+embedded = "826e3251e8eaced64fe4daf5001593eda7830f0acea451c1e57ac44bdff0b5dc"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::min_connections_maintenance()}"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::new_arc"
+kappa = "9acddf0c1f012a7ef034964bf168ca89b9e9ff706736c9162418f4e935b294a1"
+at = "DB=u32"
+embedded = "c848b118e1ff7458807f24028d2cd144ee01447896f4065b4e7fa753d0003bcb"
+status = "residue"
+cause = "mir::Ty: pool::inner::PoolInner<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::num_idle"
+kappa = "5a1b82cb46d93e47938bf04904d673210684d8a4c84bb2f0ddb03275c149eea1"
+embedded = "442d299f1c2f49fac0e4b2986c5705f6242759b53d0dd26311d03b2648f70805"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::parent"
+kappa = "a1d645a6bdf8aaaefa9ec26c32b700a2e590fb8cb8607471e67f7c9ad7619c64"
+at = "DB=u32"
+embedded = "ff2a64a10f2fb8fcc3cc3a99fb89ab9a5108cd7a67e8336002cdeb07e4bf2f03"
+status = "residue"
+cause = "mir::Ty: pool::Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::pop_idle"
+kappa = "0fa5dab7447651587113bf67dfdecb92ba4114dc20d4f3ae913011b6f5ea2dca"
+at = "DB=u32"
+embedded = "11e084f6451199f3beca5c3781bb7058b86769bbb580f3933d38729186a8f812"
+status = "residue"
+cause = "mir::Ty: pool::connection::Idle<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::release"
+kappa = "d86cac7a84aeb5cba17731e5701be582253506a598dcd8c7461939336deae996"
+at = "DB=u32"
+embedded = "f3bc834b9bd3bdd35288b1ef7d779ed2f5d729b0fa2a5aa43edd3c56afa34ef1"
+status = "residue"
+cause = "mir::Ty: PoolInner<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::size"
+kappa = "fcafd3a4c2f05d27fbdbed4bd0ccdc3f633552c59ad6134d0e9fa7763d86dc1e"
+embedded = "ac22251cd530909b26ca0008cc5f9def078b1813902fd2595e7c18bbf3007f0a"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::try_acquire"
+kappa = "9cb9f4e7673373e3b2993a192ad82e8dc65ea181960b3ca259d4b738dccfae8b"
+at = "DB=u32"
+embedded = "3ea6cc92c04aa6aa3f9b3a1a73e1d6aebe1debf0f0cace740d2e156332dd6874"
+status = "residue"
+cause = "mir::Ty: pool::connection::Idle<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::try_increment_size"
+kappa = "5b15decd93fd87eb36ee572d5f7136cc145cfc6072f1f44df97a4d38bfec4457"
+at = "DB=u32"
+embedded = "cba5dac54f3e154fcd54f45fe3b79822df227562f8793f30da92d280be9fcbbb"
+status = "residue"
+cause = "mir::Ty: pool::inner::DecrementSizeGuard<u32>"
+
+[[fn]]
+path = "sqlx-core::inner::PoolInner::try_min_connections"
+kappa = "0caf6467056bc05de9ddd9de5426932a8ada86ced5390b3b087ea5c445d6d9ad"
+at = "DB=u32"
+embedded = "228fe272faabf7bfc634f0310f610034d964afed21ed718074b7cf358ddcad33"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::inner::PoolInner<u32>::try_min_connections()}"
+
+[[fn]]
+path = "sqlx-core::is_beyond_idle_timeout"
+kappa = "2f33ccf0fdc801cb0d7eeb337951c2f4cbe97eeba8567e78129835ba9b707ad8"
+at = "DB=u32"
+embedded = "e49219f57b5fdc4e68c6dca513622515400674235af60093e982a5ca74aa9745"
+status = "residue"
+cause = "mir::Ty: Idle<u32>"
+
+[[fn]]
+path = "sqlx-core::is_beyond_max_lifetime"
+kappa = "4c50eec3aa704d513cde9bacb1769caac42cee485294d28c4f0568c89f5bb35d"
+at = "DB=u32"
+embedded = "4f9d8883e7157d0ce03040f721b1d981d7062cce56c0f322245f424760564e46"
+status = "residue"
+cause = "mir::Ty: Live<u32>"
+
+[[fn]]
+path = "sqlx-core::maybe::MaybePoolConnection::deref"
+kappa = "eae403f634e4c18fb1ac5b29a6c24e50a475db6afa546c5fdf8ee4e019c85cb2"
+at = "DB=u32"
+embedded = "5c5e68f7c8ea0e3406694b9f522cc2402541e6a32b2a6613c31bfae48e585ed3"
+status = "residue"
+cause = "mir::Ty: MaybePoolConnection<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::maybe::MaybePoolConnection::deref_mut"
+kappa = "b73d5c5b10e3dca4d54202391452bdb640212b52b1add1e836e4a61d57cccea8"
+at = "DB=u32"
+embedded = "614cd714db686521e33cca5303a1dd5549a918cf1bb1261958bf61de583c5346"
+status = "residue"
+cause = "mir::Ty: MaybePoolConnection<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::maybe::MaybePoolConnection::from"
+kappa = "d33d468ea6197eeb05dd77bc2d7a2d4e1c621c2dec5aaf9cb04b9ea06adaf9a2"
+at = "DB=u32"
+embedded = "5fd43417e7bc73f2e9ed961f78f02f7373acb39833492e8a9af0342b8370ffe6"
+status = "residue"
+cause = "mir::Ty: pool::maybe::MaybePoolConnection<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::maybe::MaybePoolConnection::from#2"
+kappa = "59673d957de8daeda727ea3a97599c9eb29f7b52712df5ec108501ef49361637"
+at = "DB=u32"
+embedded = "0301486c399abbe72317917b884df9d441e1c0cae6475f662144b9b384195c61"
+status = "residue"
+cause = "mir::Ty: pool::maybe::MaybePoolConnection<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::options::<impl at src/pool/options.rs:115:10: 115:15>::fmt"
+kappa = "6dead7f5562dd1c0984de7fec537ecafbe042a5978f5d511eeb45921b65ca06f"
+embedded = "e82b7d3a8da6d71b407cc797c5f46dbef893127806308c9165b21a4003d89955"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::__fair"
+kappa = "55fff148b25f0403e2558db9b9e12f2ed01ff142bdd5de8d65f2708d5bae2122"
+at = "DB=u32"
+embedded = "ac85879eab56c8fbc0d52879bba6eb1b3ae54553385c6c3fe459e5178ba7fff1"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::acquire_slow_level"
+kappa = "4249cfdced328c4e23b0262ecbfdd4810ca803b91a331154057ee78c7aa287cb"
+at = "DB=u32"
+embedded = "e508023d904694e4a6df1b7cabdc18ceb9204fc9463a859b3c56b17dfb1eb80c"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::acquire_slow_threshold"
+kappa = "bf13c586844a7c85043acc01d9f19d2aaec37d4ce14b7b5450d0eae3ab1a0a5a"
+at = "DB=u32"
+embedded = "b50312a143da07810180996dd8192934a6c49be190c311c213565e08bd6cbfd1"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::acquire_time_level"
+kappa = "ca5044aa17a6104be6e5ee01a3b8ebbf6d33cf28c01b286262ca8c1e627118bd"
+at = "DB=u32"
+embedded = "08d5a7b388f7542b44baef28079f61f7c89528acd31c0c3298ac9ad9816860d5"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::acquire_timeout"
+kappa = "3f789936beeb78b0ff6257b536be55bfc7e6200f4926c95317ea4fdca221ff9c"
+at = "DB=u32"
+embedded = "fd02f99fff942fa4a7a6b3b47109d60ba6675d0b2d109d3d2024e3335ad5e05f"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::after_connect"
+kappa = "8bb2bc7932d9a5b3d0ecff730a4f83617780750002e2d8089ed9d9436bf50153"
+at = "DB=u32, F=u32"
+embedded = "7faf03b10704c804af3482d2784114703fec9c0be85f01ca67431c3b4262790d"
+blocked = ["StatementKind::Assign"]
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::after_release"
+kappa = "21ccd262304c22e0f53055891f85c9e049a7ef8f0b3a3d4acb98ef16fe7586ac"
+at = "DB=u32, F=u32"
+embedded = "72a3b909f004223935564770410b0a1b5e89071a2d1616e8660b3987374941a9"
+blocked = ["StatementKind::Assign"]
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::before_acquire"
+kappa = "e4c2e248f887aa9cced0e93dce0b04397bae8e8fca3f65dac6381387c9b17550"
+at = "DB=u32, F=u32"
+embedded = "d9144cda2aa61754038f7151321a7f81970082cb90d5c866d33b552cdfd8e0d2"
+blocked = ["StatementKind::Assign"]
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::clone"
+kappa = "6c8cc325c96b4e3d83668c816bce70b1bc7a9dbca9494f6f4e2380bbfa1e430e"
+at = "DB=u32"
+embedded = "7407093f0cf7a9a27d915cfcf480908f0fe875738b7f6ca20cd854678cbcfff5"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::connect"
+kappa = "f989226c9506a34f2eb71494b2b85ead9423958cc03f3d109d07462ce5ea61ed"
+at = "DB=u32"
+embedded = "f09c6347b5a7c95046ef4d06523eb2a3ccd889d68f757976bac9e41b5b371669"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::options::PoolOptions<u32>::connect()}"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::connect_lazy"
+kappa = "ae27d0260495a6cf11308e6e964ff19f8df6bdc45e21ee0336ae1f4248a1540c"
+at = "DB=u32"
+embedded = "10a521fd7e436ffd7a4b4a5059998703f5ff6d4e1bed72add4af98062ecf5325"
+status = "residue"
+cause = "mir::Ty: pool::Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::connect_lazy_with"
+kappa = "94055b2c71d83e69a1fddcf3f63a1328356570c27390333f30e78c2b270ac3b6"
+at = "DB=u32"
+embedded = "2d3992139c21b0b2ad53681f22fa71141bd3627789d0c25fad630ec0ded5f4a7"
+status = "residue"
+cause = "mir::Ty: pool::Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::connect_with"
+kappa = "1e780c83df059e3f71672bb89b38ba59e9db92732b9b051145bd5783ebe16efc"
+at = "DB=u32"
+embedded = "439905a987340f6a24980d2122fe1978c337d4a8edd469ea1f5fe79c74d81557"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::options::PoolOptions<u32>::connect_with()}"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::default"
+kappa = "2aa3f52d58b1703b39b6bb41f5759f77d7bf077f2f1f76a2f08a928f9c8d5418"
+at = "DB=u32"
+embedded = "2a88cc6347821121fd25f899fcc574390e0be52a2f9c4b5c3cd45aa0ceb27cdd"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::fmt"
+kappa = "3e5f2a08a951be2c0d7e9674e318320af5a00225cadf064929bca0af34fb814c"
+embedded = "fbfcefcd2f8bce8875d3f98e80c2cef596b36c622d10811c1fcd285e1a188d95"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::get_acquire_slow_threshold"
+kappa = "efc06a9a59af84a0e5686a65f53538e4632874efef574c0119c3fdac80c115cb"
+embedded = "91ff23d768d4cbb8e49b39aadd64c2d36a1fc5c2ff91d60f8d9a25b045844b9e"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::get_acquire_timeout"
+kappa = "a0975399e20bf457ed8866aaf3749011520d4fd27ab2a42836ed6c8f3dbfcec3"
+embedded = "d9e5df9f14f411dcf833a723b91527272b8f81ea919c4f1b61f832a4b588c8bb"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::get_idle_timeout"
+kappa = "0f32f7af027fad41c9c5d14a7ce2fa23a154f80f0ddeac097bfa65ecc87a84fb"
+embedded = "348501f1a4114d99bc3372672e93fabe2bc5d2ea5d173dfb246ca40c4b1a5faa"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::get_max_connections"
+kappa = "6edc8641507267880f21dbd188de030c3180f6feb2c3a50d06555926957c0173"
+embedded = "a0bde0bba649f6c285c2a58678db12a9147c5cbfd70b01ca5282049a55ffe27e"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::get_max_lifetime"
+kappa = "abadeddcf4334a42079a8ac3e9a678882752ed4cbdc37617a04da5bb4503f473"
+embedded = "3086175e6ba1e3595b92dedb7cb64e96aa747bd342c3d1c8952b5d8b44e74c8f"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::get_min_connections"
+kappa = "438c7a22fa2bbce9fe7207d756ebfceed5f9f12162c46e0023f7d0e0b06ea0c6"
+embedded = "eea13e88cf7cdbd59b836e379a7174f188c2f1f1d8ae816648de7b7f6e73aa0c"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::get_test_before_acquire"
+kappa = "6123ad5b4d3254e4ba1cdb84ff90f679036802b1b6d6f9301454e765c85b073a"
+embedded = "b1b46928793b9a9a71884bb65e516e296f91aed2870e2484af48a8a251c21949"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::idle_timeout"
+kappa = "604511022162881a859e80fa77a51a2be21f489054bdfaa817cd9d9555414347"
+at = "DB=u32, Duration=u32"
+embedded = "7103ff86d6f779fa7cfbac1f7b5973812a7a2223fd8c1e082db1b631066d4fd4"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::max_connections"
+kappa = "845447923bf58671f64d45e71e9cc30c39adc9bb4adda3ad1524d0d3e67f5633"
+at = "DB=u32"
+embedded = "54ef8266ac8eae5e01e21661c60cc9345f1d04a777c08ae87a7d7b79da752c29"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::max_lifetime"
+kappa = "ab4ba016d9a2115b49127cc9c8973113613a30e3329ef129d3f1357271a49a1f"
+at = "DB=u32, Duration=u32"
+embedded = "9cc4c8837b5d2f3eef3ad4f60fd46114cc9121a19faaf4faca82fd0b183ddcb8"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::min_connections"
+kappa = "c7ec323a0abce68d3f2f48070ebb044198c5d508ce9d15c56f03c6ccc8473a71"
+at = "DB=u32"
+embedded = "c036b074db42d6e482344cbb51d37f55ad8ce5cd112bc5369a1f4dfc72e3f3d4"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::new"
+kappa = "9c248a421e69c8857756196fdb276b7dda75fa9e24b7ff17ae0acb453970dcbe"
+at = "DB=u32"
+embedded = "b746a3440785bdc03a4c0a17a57c7bbe0b2c2dd1f94edef12243c68c2724386b"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::parent"
+kappa = "d0819896a3380be6ac5de7abdc7ab08bb2b3d8b1855141fbecef8fff05abc828"
+at = "DB=u32"
+embedded = "0c39c7d150c39c48d7868e2bfd2249aa0cc8f7d617650125f0d0370145ba19e5"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::options::PoolOptions::test_before_acquire"
+kappa = "28f46ba8a26a609ee66e3d2cfc8ac6ba3765d9442366408abc0d34204ef8a4c1"
+at = "DB=u32"
+embedded = "b4057bd95e16100e7204b5dc8c9363dab391772167cb9ea17e589d62006a7fb4"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::CloseEvent::do_until"
+kappa = "a189565fd24e0fc15f09d2a13a8a043e0e78b20529819a42565addfffe6f8b1e"
+at = "Fut=u32"
+embedded = "f8976041b6d2093f96a5b6b5310c47ec63c6446c59459f9bdb6e5ace5dc8d8b0"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::CloseEvent::do_until<u32>()}"
+
+[[fn]]
+path = "sqlx-core::pool::CloseEvent::is_terminated"
+kappa = "1bac69740f66ea0b1023b493f7f632829007d7f87881d7e7b5d2a65b2772a6de"
+embedded = "0f8a78d7ffeb92e9fc894855b25f2b4f8882e54377f243ecb4f60044b196c5cb"
+status = "residue"
+cause = "mir::Ty: CloseEvent"
+
+[[fn]]
+path = "sqlx-core::pool::CloseEvent::poll"
+kappa = "efdc135c7892037b22b82900947e16d3bc1f01e7130b641f463f0710d9a5f75d"
+embedded = "aa998f01d18f325f4d66acf58bf5ea218f8b758aacf4d58fdf311b1ed78b7534"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::acquire"
+kappa = "f32a98b8a16738e9b8fc4f46cae62c3e909dcf173aa5f0636ea405ef7a1987c0"
+at = "DB=u32"
+embedded = "d4730e2fee3604b6bc1dcd6096a48cb693a0273cd2b9cb03d6288cdd3402e088"
+status = "residue"
+cause = "mir::Ty: {async block@src/pool/mod.rs:359:9: 359:19}"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::begin"
+kappa = "c1a2f173357e9cf030ff0e4ab45295621c421bb67e2e7674ff80c5bce4853867"
+at = "DB=u32"
+embedded = "d51dae4586e8d19df2b077d7a0d392f678709cdb0ba81fdd772e0739d03e1360"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::begin()}"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::begin_with"
+kappa = "97da5c911999c4a09f7a31e4e3a922bf0c84561ffda25ebf75f833fcd30784db"
+at = "DB=u32"
+embedded = "ffc199223afb28727d260908e5a87774e6d54c00ccdb1232dfb4d66a1bd4aa76"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::begin_with<impl SqlSafeStr>()}"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::clone"
+kappa = "5631706755389c11e3f141f1d8b6f7c7a55e55fcab94b935d83093556e4e3951"
+at = "DB=u32"
+embedded = "d50084bfbf8e0dc06980c5b2aec9fc6a5d9b2462b76619b18483100c55ab064f"
+status = "residue"
+cause = "mir::Ty: pool::Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::close"
+kappa = "8eaf4e91d0775162f78bfc610c60cbfdab8765bdc85d2b063d61d467edad5088"
+at = "DB=u32"
+embedded = "da87ee6184ee031423c410ae03781f882f31ba5f45fafe6742c8c622b37dc4ee"
+status = "residue"
+cause = "mir::Ty: {async block@src/pool/inner.rs:99:9: 99:19}"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::close_event"
+kappa = "731bffab0ac95eed9c769310a5e761e4abe107eb897eff6895b0169c4e31c3d8"
+at = "DB=u32"
+embedded = "b0d9644f5f4cd946fe49cc4973908826aaddd6ceb4b07dbcf24b4a26cde282c7"
+status = "residue"
+cause = "mir::Ty: pool::CloseEvent"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::connect"
+kappa = "eb9f6e0ed599c6fd50ddaa4ec684da7b300371542a2f5492d2b96d4082726517"
+at = "DB=u32"
+embedded = "62e7c78456c224a101d6ba3df18402b963abec0d8995597886aa03182fd4f5dd"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::connect()}"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::connect_lazy"
+kappa = "98cbfa117570ae5ac2c692e9ee1f7da14941317211ed1c04e011aa536b3a3a91"
+at = "DB=u32"
+embedded = "292f3874aca5bc1a7b8290a7a4b4a3710c8cdd92911fa9b536de08888892d603"
+status = "residue"
+cause = "mir::Ty: pool::Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::connect_lazy_with"
+kappa = "db853bdf13f8d73949cb835855918aa58f0dd25970c80956f315e1e380717cf2"
+at = "DB=u32"
+embedded = "f8af86a82832940a29a61d8765121abbe2a4a910d58995ea03cee065d9533558"
+status = "residue"
+cause = "mir::Ty: pool::Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::connect_options"
+kappa = "dfa52bebbf4af6dbcdb98415640263112a97c8803ae2aae9b013ef99454df3d9"
+at = "DB=u32"
+embedded = "d3eab553ef6c69d7fe566e4aa01aca09a580974d09d7f36187e3aff58d3cd839"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::connect_with"
+kappa = "f57f1d77b0d9738ed810ed10b3b03dd9d5d1b0086352de91b041e4c6afc124af"
+at = "DB=u32"
+embedded = "19a9077f96c021412cb7418a7104b3618296b82472eef38c1ca90c9758668ccd"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::connect_with()}"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::fmt"
+kappa = "0b7164cd19ebbabd574499a0b6a705432f28b2955427e904340a8912da6a8d6d"
+at = "DB=u32"
+embedded = "97d601785e518de0c6e56a6a380184a33b6109508ca53a84f4ca6de5e14fa17e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::is_closed"
+kappa = "7c7e54e9c8c032fa885ca2b5d10f761f08523c59fa982cc0009e6d0ab4f5aa87"
+at = "DB=u32"
+embedded = "b34b2259e31a58196666f0cc621b69aa2dd286b80a46fd17e951a06f4b2393e8"
+status = "residue"
+cause = "mir::Ty: Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::num_idle"
+kappa = "cfbd3ae09b9ad517f9ee5fe3dead4cde295ebed3996382044b779a16a722f532"
+at = "DB=u32"
+embedded = "8b2c7b4f6e0898b41a3a47e75504cdd4ec8f7efc9352d554a859fde679aca986"
+status = "residue"
+cause = "mir::Ty: Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::options"
+kappa = "7c476d71f5e661ae92c065dc3a0b7fa2be38315dd4ac8268efac8ab27dbaa62b"
+at = "DB=u32"
+embedded = "99709abb39cccfb5fff4df95f1d71875d300817935ecef2737625c038c28e19b"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolOptions<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::set_connect_options"
+kappa = "2895e78bbc50b23f79e1af470b3b1d8b751b22713d2697aee9083bd46b21c196"
+at = "DB=u32"
+embedded = "8356362d1cbb2a9974538b539b7f3027460c5491dd45577b8f2c66383528f038"
+status = "residue"
+cause = "mir::Ty: Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::size"
+kappa = "d3b1733c83d9a6c763b845398fefa9472b69019ccb0e7c5897ebe80920ad5b2a"
+at = "DB=u32"
+embedded = "f5cfd145f533013e2e2cbeb7ee940c6d76f2434c881a620061907e058baa9d45"
+status = "residue"
+cause = "mir::Ty: Pool<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::try_acquire"
+kappa = "cb44ef7e8c339100de70f897fc3b3eb477dd41a7e8130393bb99f75aef9e916a"
+at = "DB=u32"
+embedded = "8ccc91b5558e1f1b61bc724ba724db814384ed323108fe3e39dbf89b7019ee18"
+status = "residue"
+cause = "mir::Ty: pool::connection::PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::try_begin"
+kappa = "ea1ff3357e4621a720ea825769443237e2ab0979229d57597305496f51746f59"
+at = "DB=u32"
+embedded = "058362397c0d97ccec418b6ca173168c4f0f3dd328cc4c0105abef95557ea2a1"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::try_begin()}"
+
+[[fn]]
+path = "sqlx-core::pool::Pool::try_begin_with"
+kappa = "8555a4df9adfef22a9ff20f062e15d310d2747a23e7990484bc90972209d6fcd"
+at = "DB=u32"
+embedded = "9de2d39fb84ff693ab635d21a246a1c13c1816de9564cf181385a69e216dcedf"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::Pool<u32>::try_begin_with<impl SqlSafeStr>()}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::<impl at src/pool/connection.rs:179:1: 179:82>::acquire"
+kappa = "f2045978c187298ef8a8d5c8dc32f3014830fd43815a3907563a7d2d99ae18b2"
+at = "DB=u32"
+embedded = "42dec536a264741d7758fe5c6fac49bd3f33eee13ddfeca6a7e40beb2017315d"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::pool::connection::<impl at src/pool/connection.rs:179:1: 179:82>::begin"
+kappa = "6d90dcdcddbaeb2a77ae27ba8de04bc024f35491983a8dd275a378d2083fe4e3"
+at = "DB=u32"
+embedded = "8c2672f59c878a8708f7c930470f599dfb585ff7580280c33fa7901f8395d512"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<transaction::Transaction<'_, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::close"
+kappa = "095787e6fd5076fa58a8e8ab091d4a03feedf714b358c75209b4be3819faea18"
+at = "DB=u32"
+embedded = "fb5d81c57fdcd9fdd45f36a2bd1ddcd3ab53ac844a6e01c2d655ea8f38332e5a"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::connection::Floating<u32, pool::connection::Live<u32>>::close()}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::close#2"
+kappa = "1982246b1efb28c853eac64292f0e8d4792d9774ab0ebd5b8bdd00c1881e4d0f"
+at = "DB=u32"
+embedded = "699bf8faba418319e65e946e01468eae2c5dab487c8d240bf404e59b32d65fee"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::connection::Floating<u32, pool::connection::Idle<u32>>::close()}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::close_hard"
+kappa = "f2f29731e4a31e38f59665c8313fcf820ede8aec32475fe76bc8cb1f50705d1e"
+at = "DB=u32"
+embedded = "9423bb8039180e647f2b019d3d9d9ae17529d174fcf9f3701c0952e8e26bc2f7"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::connection::Floating<u32, pool::connection::Live<u32>>::close_hard()}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::close_hard#2"
+kappa = "1412007226acbc31dfae44219506d048b0b13d2a9320cdc5fa02087c36b77ddd"
+at = "DB=u32"
+embedded = "180471d477b41502cb9dae77370a917e0eaaa8bf2ccf399e6b3c7d00a1000250"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::connection::Floating<u32, pool::connection::Idle<u32>>::close_hard()}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::deref"
+kappa = "68c006759b0fd2fbb0849e185c6513d17b9677f2a8d277af1e148acb0e646125"
+at = "C=u32"
+embedded = "9ecce57537217721a85c38dcfddbcfbaaefdf6c8fa354e5354feb0c7e5594ada"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::deref_mut"
+kappa = "a360e489b2e24325be2772f2c877f021906e77e0dfacdebdf87a1d80fe4577fd"
+at = "C=u32"
+embedded = "70fcc5a43e03de54525b274048c53ca79fe119c0ec2957541da92ed9c205547e"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::detach"
+kappa = "857d5c86e0154615610abf2c629ee31aef12b389a211b6654d2d53b6b4629380"
+at = "DB=u32"
+embedded = "d730936660881b929acf9b3a548ec7780f7d53051687d45a62cd302f7e5d02f6"
+status = "residue"
+cause = "mir::Ty: Live<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::from_idle"
+kappa = "ea9906e510d84caf85fc8bb90061d685a57c1c0605bdf0cf876c0579e3ea2a33"
+at = "DB=u32"
+embedded = "37718925d11e7994a233b85a8c3db905d2457311f74a05450dda6e845fb0659b"
+status = "residue"
+cause = "mir::Ty: pool::connection::Idle<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::into_idle"
+kappa = "b09779ec1dec9a32e28d8708e6e6980a0e825850c18cc5acdca26efdb37accad"
+at = "DB=u32"
+embedded = "c6c2eb9423b6f59050c7f85c3f2332c60fce698c0dca0f4ce2dca56fe44c7e07"
+status = "residue"
+cause = "mir::Ty: pool::connection::Idle<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::into_live"
+kappa = "d0e5ba698155fdf95f289379f2596400b494b6f0d2f1e0295ba457c0da8e7140"
+at = "DB=u32"
+embedded = "91920c03f7440e2b6cafb467476afcc1234f17c1392e118d859deff6b456b863"
+status = "residue"
+cause = "mir::Ty: pool::connection::Live<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::metadata"
+kappa = "11d5880eed5c780cf3b82aadfd3c61add851ea31b5ba7500fe62d1e173bf97e2"
+at = "DB=u32"
+embedded = "4cad7dbf37a8f59090e4f1ac0503e0f79248f2c97a3f9f8cfd8f2b212bc6b444"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolConnectionMetadata"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::metadata#2"
+kappa = "98c62661fa35e624e1288e5a33a7d9b1d292ace8a642e4348de520efe80bd707"
+at = "DB=u32"
+embedded = "02dba492b83526a5edf8033acaf2c0bebf03c830ac45252fcb86300022d1a988"
+status = "residue"
+cause = "mir::Ty: pool::options::PoolConnectionMetadata"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::new_live"
+kappa = "5a095fed8c4fcec32b9c0e3af1e2a6ba4176ed38a8fc09897e2d32ee880a6ba2"
+at = "DB=u32"
+embedded = "7eb0fa18ca4060fa2332297d55d5044895c14926691b9e27214dafb6c05d698d"
+status = "residue"
+cause = "mir::Ty: pool::connection::Live<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::ping"
+kappa = "0c7f6e9bf31b2d5b2855f56d8d18f8e1335fb533777a014d9ab61fd5abab25c9"
+at = "DB=u32"
+embedded = "a4a70817da17c0c0a98ae61f26bff3fab218c55787d6a257a3bcbd211228ce52"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::connection::Floating<u32, pool::connection::Idle<u32>>::ping()}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::reattach"
+kappa = "afcdf57f8bafd12a6b4a409b75332f1b0aa3c57ce11d33ac305664e5e52e99f4"
+at = "DB=u32"
+embedded = "37c522a27e98a2f133e071f123db275afb657c6666aa1d9ece133f8add51b33f"
+status = "residue"
+cause = "mir::Ty: pool::connection::PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::release"
+kappa = "5985fb4ec5db8674378df63ab9f7bb3b5947322d99a3752963905d6df82076af"
+at = "DB=u32"
+embedded = "628bc2013446b5524ab223d5fb1d4b1e14f05b8cd922f04b201f5f2c5837904b"
+status = "residue"
+cause = "mir::Ty: Live<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Floating::return_to_pool"
+kappa = "16e19aea719dd6648e7247b329080856af7d2e1c0ffccdf827e8871814616560"
+at = "DB=u32"
+embedded = "2a95e12e5985a3692acd46ce716d3d785296a4641f4acd459ba2fdc9d5a93978"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::connection::Floating<u32, pool::connection::Live<u32>>::return_to_pool()}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Idle::deref"
+kappa = "ce2c7ed062d204bf0c4ec533d3554e1bf9e3fd355debcf10f171bfe3bb65b322"
+at = "DB=u32"
+embedded = "035cabd231643e640552e89bf6469e55632939882cd8bdcff73090d5ba994e45"
+status = "residue"
+cause = "mir::Ty: pool::connection::Live<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Idle::deref_mut"
+kappa = "822ec2351d0ac8b1ad09ffc77e42b96c0ee6ee9292908bffd1016389cac103ac"
+at = "DB=u32"
+embedded = "b7d55ec0561d81fe0d02a2f95ab67a59c6550f1ea63e8404dc3b438291f235bd"
+status = "residue"
+cause = "mir::Ty: pool::connection::Live<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Live::float"
+kappa = "de95c24c3b421d052cefd2a4af7e4591808a36e1c30829b7948a37679fc017ec"
+at = "DB=u32"
+embedded = "107ecce58ebf28f035d1916e112e9564097468828490d06825979451b84fb93a"
+status = "residue"
+cause = "mir::Ty: pool::connection::Live<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::Live::into_idle"
+kappa = "1e31d7a04b91457dc9254710009f9f4ef249c45563a19d6acba43b671e6c69c0"
+at = "DB=u32"
+embedded = "a9911828d460ca428c267608c6d14f4a13bf2d29d32bbc9a37e0a0ff29356a3c"
+status = "residue"
+cause = "mir::Ty: pool::connection::Idle<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::as_mut"
+kappa = "771c593e3075218afe1ba8233c7e1aad772b2c1810c0fabc006b198590e1dfc5"
+at = "DB=u32"
+embedded = "e64db6c583f04a323465aa33d9c6bb9bd8481fe73caf88a9cdc71345e5a5fc93"
+status = "residue"
+cause = "mir::Ty: PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::as_ref"
+kappa = "a3a2145b1909348f722790c5f2d297abf14edbcb1f7168d4efa62d0859be35dc"
+at = "DB=u32"
+embedded = "36cd03b35e26a396bbff0149e7f58c12be52d9e6648594c321303ea104de84b6"
+status = "residue"
+cause = "mir::Ty: PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::close"
+kappa = "568fb18ed58da7a25bc10a306b70491f932a5daaef5152815a5f2ed0bfb9e459"
+at = "DB=u32"
+embedded = "5d0d26c4f78a024371cddf11284bc7b1e908fae42834f7cbff75ab1704c24e00"
+status = "residue"
+cause = "mir::Ty: {async fn body of pool::connection::PoolConnection<u32>::close()}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::close_on_drop"
+kappa = "85093f4c80cdafb46ab29328962ae6d3d7e584e97c7096df2348e1c8f01af0b4"
+embedded = "ca8c15e21c3df6125b37ac8e747013e5786a49df60ec199e1a12912d5103fa92"
+status = "residue"
+cause = "mir::Ty: DB"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::deref"
+kappa = "49207cbec6f742a960d631ea9721046b3600c8b45223b8b9fc66b65c0a1129c1"
+at = "DB=u32"
+embedded = "27a8f7474c738ce94e81060b30c8a4adf6811915bfab9cb88e40e92b500a8ccb"
+status = "residue"
+cause = "mir::Ty: PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::deref_mut"
+kappa = "0549f52a719d5b5b79cbda25a9f44fec683923d55b776b90e8a8d5d72cfd9e68"
+at = "DB=u32"
+embedded = "af7b94ff8405d2b1ea19c17d8ef0def247cb3822977601f4fe0ba5f0bcd2a9a4"
+status = "residue"
+cause = "mir::Ty: PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::detach"
+kappa = "18fb477dd0d45fd1169742fee4d648321341623d080370911d8d94e481633787"
+at = "DB=u32"
+embedded = "de34442a37a795dcb5176b8c48db9e392f36b954e0d5ff741e54373416af5726"
+status = "residue"
+cause = "mir::Ty: PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::drop"
+kappa = "fc927c6374d5ea52105147e9b3c2ea9f2c54d949423d52ceb58df14c503dfafd"
+at = "DB=u32"
+embedded = "2f8aa59ef219704b71781bd25159f2cfde9e2b4bef2847e92f8f62fe423dfc32"
+status = "residue"
+cause = "mir::Ty: PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::fmt"
+kappa = "2e43e33953cf9d3a6c0d7faadb72ada5bc03884fe35b68be73fe1082bfcaec4e"
+embedded = "e0553bde3b3b27e41e3b133a3fb3f50f3995e4aa710e5e0dc2ac21c267d83d30"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::leak"
+kappa = "156eb9d1b6927022a2d85b5f0d015b3120de0f31db4c233cf5eff34be060dd57"
+at = "DB=u32"
+embedded = "0f87ce953de28b369b2f9cfb8a43f320ac9f44ff2572059c3676ecedf42b4551"
+status = "residue"
+cause = "mir::Ty: PoolConnection<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::return_to_pool"
+kappa = "6dc27292d0581bc1158a8c05a23c24dcbcb5dbfd2a22a8230253744db569de7b"
+at = "DB=u32"
+embedded = "12b109fdc584848293c9d90c33e23922902266b8f45123f8f2c134a83900d53a"
+status = "residue"
+cause = "mir::Ty: {async block@src/pool/connection.rs:144:9: 144:19}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::take_and_close"
+kappa = "1a82ad323ee96a04c7a3f9b99f5e8dc81bbcb1155a3e4a2dea4ce8416ee41484"
+at = "DB=u32"
+embedded = "0a58d83f23a01067623f93180206919b59ce63d4f9a48e5d17119d225dc2f0da"
+status = "residue"
+cause = "mir::Ty: {async block@src/pool/connection.rs:166:9: 166:19}"
+
+[[fn]]
+path = "sqlx-core::pool::connection::PoolConnection::take_live"
+kappa = "cee166e913b3304c5cc77679245bbd71b8c0b13bbb8a1cefda04ce74e656d05a"
+at = "DB=u32"
+embedded = "acd4ade2143e519c9f2ab2292a0e9a89c905c2ca18c76d85fe22a293e12469fe"
+status = "residue"
+cause = "mir::Ty: pool::connection::Live<u32>"
+
+[[fn]]
+path = "sqlx-core::pool::executor::<impl at src/pool/executor.rs:12:1: 14:65>::fetch_many"
+kappa = "ccace09e197482147b069d74a51c8287a466041108d9cd5e150a737951048e41"
+at = "DB=u32"
+embedded = "51e4d6eeeb8221e81d22f24ba45b915e40a62f4eda971fc4a6a4f79bbacc3693"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<either::Either<u32, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::pool::executor::<impl at src/pool/executor.rs:12:1: 14:65>::fetch_optional"
+kappa = "fb1784456c4923a0fed0bed86863d762c42951f38ac5c35a32724939fcc5735f"
+at = "DB=u32"
+embedded = "b6e67b6f099cc12b4665bd41bfa87e2db01e359b73bf21c3931e12d1136ade72"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::pool::executor::<impl at src/pool/executor.rs:12:1: 14:65>::prepare_with"
+kappa = "74544558308ef5c2a968448efcfd0958b250df23ba6e994db97c4652834636bd"
+at = "DB=u32"
+embedded = "87cea31e603f26e59a3d405fad896bcff817e5a27dcfc327ffa16b9f98c5f0ce"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::spawn_maintenance_tasks"
+kappa = "cec9783f8aa5cb9e321b2983b7f8c743a52beebdbe83c67a5d02bd302bc07054"
+at = "DB=u32"
+embedded = "5d9c770a5fdb084d743edcee7d551f755a71c8d207ac0e6897e5ee8ce8aa2bf6"
+status = "residue"
+cause = "mir::Ty: PoolInner<u32>"
+

@@ -1,0 +1,86 @@
+# The simple_asn1 register (written by `uorust crate simple_asn1@0.6.4`; do not edit): every body of
+# simple_asn1's MIR at simple_asn1 0.6.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 40
+translated = 1
+residue = 39
+
+[module.crate]
+bodies = 40
+translated = 1
+residue = 39
+
+[embedding]
+bodies = 40
+embedded = 40
+evaluable = 40
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: OID"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: num_bigint::BigUint"
+bodies = 4
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BigUint"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ASN1Block"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FromASN1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToASN1"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Box::new_uninit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_der: simple_asn1's MIR stops at mir::TerminatorKind::Call: from_der_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_der_: simple_asn1's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ASN1Class"
+bodies = 1

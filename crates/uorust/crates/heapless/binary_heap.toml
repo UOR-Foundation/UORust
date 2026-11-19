@@ -1,0 +1,301 @@
+[[fn]]
+path = "heapless::binary_heap::<impl at src/binary_heap.rs:805:1: 809:31>::into_iter"
+kappa = "72e493b686592f70c694dcac21aa8aa93f7bbbe4d9ec48826892a6ec26a0a263"
+at = "K=u32, S=u32, T=u32"
+embedded = "4c8fe029a741b76fe895924d2720ac350d542bd4affc273b5cd84ae42811f8a3"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeap::clone"
+kappa = "21a84e40b207221f4b5f4fc8d8c7f968a89b30adeca2cfb43697ce7c362d56f1"
+at = "K=u32, N=#usize_N, T=u32"
+embedded = "8e796240309a8d43981e85b46285c7d4ec73b3002fb11b3f4f05300a81bd7177"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeap::default"
+kappa = "f1e4d63404ee6bda9332f3301feff9536a77f70c4dd7336ce02267ef90033513"
+at = "K=u32, N=#usize_N, T=u32"
+embedded = "6a57d4ad5c3c52fb22c738fc1391e17650653b3efe507e7f7fdeb525b4d70243"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeap::into_vec"
+kappa = "43660369fe752184461a08f8afa0a4c5338225d86e80a80fc02ca2d3ee5cbe10"
+at = "N=#usize_N, T=u32"
+embedded = "c5fb44e083424a65e46fedd7318b324ee7b31d73829b649fc4a7de6664857096"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeap::new"
+kappa = "4d6e33aa98b93ebf6fad52a046012972204018f5fe5074fd3f623ea8c16a8648"
+at = "K=u32, N=#usize_N, T=u32"
+embedded = "4a345f51aae73666d48097357afa8861f607624554ecad151a7a855dc877e4e2"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::as_mut_view"
+kappa = "9a0cf5db14b90c4570a3387a802da4b3b2a52758b93ccd141102b603881d8b4c"
+at = "K=u32, S=u32, T=u32"
+embedded = "e05626383197e798e5fbf46c23577f277121f1b6704b73ee02faa2babdad25ba"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::as_view"
+kappa = "830edce9ceafe1b218ee0f1f0eccdf4d461e40c64e81d7370466a64f6fc9b58a"
+at = "K=u32, S=u32, T=u32"
+embedded = "06a6afe19326082737b30402a42a7fdd4925a4dc8f7f77672fad79b941a056d1"
+status = "residue"
+cause = "mir::Ty: vec::storage::VecStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::capacity"
+kappa = "ffba17ee76265e0aa1b53d042d4ca690ec2a6672735d6587749afb01c0a5249f"
+at = "S=u32, T=u32"
+embedded = "fea4918e4c6584a100bbd1f4f83cdf55312f494563a1eed6bb180c98039eab7c"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::clear"
+kappa = "e61260492871e758988aaaed6c423cd5e98a2bd6d0e51fcffeaf67ed42c8e41f"
+at = "S=u32, T=u32"
+embedded = "e27feca1297b8449d6ce056b561aeef5d7a74eddf158a1de3f3e45ad633d0418"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::fmt"
+kappa = "3be5b79946a8de752817ec318cf04478e6934b62459735c8d8bd900b717d5804"
+at = "K=u32, S=u32, T=u32"
+embedded = "1990316d07d16ebd9817b58da5fdb89a69fac6c3353ed5de4170ae40eed48cb1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::is_empty"
+kappa = "38a36a85ae12613d4a5c94962e293c4933c200f6c9c19528067df567bcb81591"
+at = "K=u32, S=u32, T=u32"
+embedded = "c9f4f5beb2924fbfceb56cab501a9b81636d88d3dfee37998d95692af86631a9"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::is_full"
+kappa = "0af93addc33714bbbc71284bfd96b1d24f7339dec4ca21e8555aeb9f3e1fc973"
+at = "K=u32, S=u32, T=u32"
+embedded = "b31c1b4528f639495b697c31992a40cb3cfd7c251c688d035825eaf65ac9c61f"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::iter"
+kappa = "a36aa2bcefdfa4802a9dcd9b4e301967ac4241366c4b0bc03ddbeca31da95e10"
+at = "S=u32, T=u32"
+embedded = "8e595df3750be3f9dcff93fe026f3c3876d16f50d672d4789174bf95d83a12c2"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::iter_mut"
+kappa = "69684238bf6fb6d23c61a9384bf8be20ef3690ff2651df7b1991291b18c524dd"
+at = "S=u32, T=u32"
+embedded = "67243fc0c0c18e533aa69e70f9705c71cc5893242549dd863e0cd4a1cab7b804"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::len"
+kappa = "91414118e82492141ead539790225c805725833f7cca2adf39bedb752c5298be"
+at = "S=u32, T=u32"
+embedded = "e4e7111f2330c7cd513430fa10bf1fb39c4e30cce4f2ca000458e684188c0815"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::peek"
+kappa = "b5b83a2ef6b031c2b4a664662c9266d15ad40b83f5337e8da3682c5abbfb540a"
+at = "S=u32, T=u32"
+embedded = "916ad3cad2aab9f376bc73ccee0cf33078221a49f5fff77e55f0c85b27a1a869"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::peek_mut"
+kappa = "cdbbfeb8d45ec14a13fbaa8db782efaf88c996d2955a521e6de3329c20706b83"
+at = "K=u32, S=u32, T=u32"
+embedded = "d80c246ea0dc38cd2a865d1e60ac0d2b2199817890e12896ba5ba1d8cae06179"
+status = "residue"
+cause = "mir::Ty: binary_heap::PeekMutInner<'_, u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::pop"
+kappa = "7635774769ce786b4b47a7a07b67accab6b37ecc194fe06c9027a32d00aa70b4"
+at = "K=u32, S=u32, T=u32"
+embedded = "31e5f393bf9f4b1c55069716daf18004ad6d1695c0bdc7684c6ef83fdf24b7a5"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::pop_unchecked"
+kappa = "e93d148a987835e35c6cfb3122ece79f7da61bb3cf27116adbcbaa7964be3a27"
+at = "K=u32, S=u32, T=u32"
+embedded = "9b2af711c368f90803c55bbb031e3508ac04799717ef300382f58e80ba63745c"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::push"
+kappa = "411f556b4c8fec26d7b99499ee1a307ee2be2260d4534521dcf80c3dfa0542c4"
+at = "K=u32, S=u32, T=u32"
+embedded = "59dca31e687491790629cb86a39afcd15331b9591ac77eae238dd8c1a580785e"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::push_unchecked"
+kappa = "5189d67436c7b3edf52a64e56aeaa99502e1e149574fb03a48f771856af2e45b"
+at = "K=u32, S=u32, T=u32"
+embedded = "4cfe663c43786c13a0f1be94cbe84b1db524ef7fad81b73eacf021c93e7eaafd"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::remove_unchecked"
+kappa = "b876cc5e2d066c514512f4f30b5c6a26592cf18288fb5431654d1d9e2471599d"
+at = "K=u32, S=u32, T=u32"
+embedded = "c28433c7e5d3f4996d7d65489be53d19a03a5f4f93c7c0783ff756aabe66dae4"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::retain"
+kappa = "b9e48cc07b258c520deff62b7ab702642e6152929a8b65fc12083c4174f751ff"
+at = "F=u32, K=u32, S=u32, T=u32"
+embedded = "37a7166137395d443fa7806b3898721efeb84e5488972872c987f49c93dfa269"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::sift_down_to_bottom"
+kappa = "d63338862a8eae7e366ff3f7da9a18076cb077ca64298fb1deca46a1030fb3ad"
+at = "K=u32, S=u32, T=u32"
+embedded = "423811c0520363d3d781e98ecc4a4f6953e74801df54c1e907987e6e48e7797d"
+status = "residue"
+cause = "mir::Ty: BinaryHeapInner<u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::BinaryHeapInner::sift_up"
+kappa = "e344591c0f86b8ea1698178317589c138c0b2cd631ac3c099cc76b296c259f44"
+at = "S=u32, T=u32"
+embedded = "5e520bc4221260badc57284270f922145f5596f2ad3229b8a9b559a20f58d978"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "heapless::binary_heap::Hole::drop"
+kappa = "025837fc88008ad0e2fd2a52073ed3f5c98d76562485d8bed38a9a6334cc166b"
+at = "T=u32"
+embedded = "605badffa8c25785db215a4064e5a2400cf4fd22f95605c51bc8055cbcecb400"
+status = "residue"
+cause = "mir::Ty: Hole<'_, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::Hole::element"
+kappa = "d5cc67f951cde0fefea7fad1bdc2dc610355eff7e7b1f43e0158efc6f96fa435"
+at = "T=u32"
+embedded = "d26b1a81a193c68e7e5a8ae2c7b730552a2eb9219ce9042fe8d1fcf3c7b6b947"
+status = "residue"
+cause = "mir::Ty: Hole<'_, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::Hole::get"
+kappa = "1168a1ad3b10cd80fe88c4a8bd58eab71be2d4a5ac23cc1ff435a070c9989ddf"
+at = "T=u32"
+embedded = "f5aab433ab2e0531671040ea2f238d1c15ad4a8a72179fa48286af636be1e6f6"
+status = "residue"
+cause = "mir::Ty: Hole<'_, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::Hole::move_to"
+kappa = "2ea979f9c3c036e8b5f153afcdb30bc6464258cf95d7991f6dae3accb94444a4"
+at = "T=u32"
+embedded = "3d88530b3b643b0a4f94b428a61aa5f8d6589913e17f7649419bd33ad4b2bc8a"
+status = "residue"
+cause = "mir::Ty: Hole<'_, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::Hole::new"
+kappa = "a8110c1ff8415970a8244753d1da7543241abacd33e7ec828d33e79d9a982bcf"
+at = "T=u32"
+embedded = "d868a2788b9a5d4f8ac2026210ecde917e2595b1cf70c05526366c9353b99028"
+status = "residue"
+cause = "mir::Ty: binary_heap::Hole<'_, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::Hole::pos"
+kappa = "c2a28ae4550c4bf31866bf56e93e416103fc2d6bc342a8e6ba96dff4083cc9ca"
+embedded = "f9e8f783683c737161c835cef79331be5a028b03db8c389aa4a62bb120820594"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::binary_heap::Max::ordering"
+kappa = "e6fe860c867011cd38345f9a0a36e8f3893929a167d470dc572096bd9df2f0da"
+embedded = "1c7771ee8dffccda4152a833b72de66bec7f6cc0a478626d1ad3a24dff8b9bbc"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: CmpOrdering, which is not a struct"
+
+[[fn]]
+path = "heapless::binary_heap::Min::ordering"
+kappa = "9c03fd4b744e4565864dd8751ad325b839aa879794dfd8463363b0d431228e16"
+embedded = "6bafaab5009c0027ccb6f8225e89601f18ddbf98767174da3c5d359d2b853a43"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: CmpOrdering, which is not a struct"
+
+[[fn]]
+path = "heapless::binary_heap::PeekMutInner::deref"
+kappa = "144e7ad80f8f803d7e1167344d8dc50a7797babf7157b8eb5786912e176ffdba"
+at = "K=u32, S=u32, T=u32"
+embedded = "0eca368faf9b11162aaae48c896964271a74a1fac124007a5b09e3ce7658a8a5"
+status = "residue"
+cause = "mir::Ty: PeekMutInner<'_, u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::PeekMutInner::deref_mut"
+kappa = "b405e096e37dddf7539290401799ed5f6ecd65d03f7c18d19152e870b6a8d1ad"
+at = "K=u32, S=u32, T=u32"
+embedded = "a5faa1d52d1725737d67b4f056d194bcac9bd5f7a7c58587a709f646c7bbbb98"
+status = "residue"
+cause = "mir::Ty: PeekMutInner<'_, u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::PeekMutInner::drop"
+kappa = "949bb708c5f6dad945f86c0771774d3aa5338ef5108b8c862dfe8383bf7689ef"
+at = "K=u32, S=u32, T=u32"
+embedded = "8955747f7f76aa49f2ef0169296908d409c627151a2135111cc5f7a559dbcffe"
+status = "residue"
+cause = "mir::Ty: PeekMutInner<'_, u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::PeekMutInner::new"
+kappa = "040926279d128079ecfab7340eca54463bafa5a9c1249c90a9f8c3b2a98b51c6"
+at = "K=u32, S=u32, T=u32"
+embedded = "d3b07d916d5228f2ea264e354997adf5c9505d50d7fb55032e452da5ed4fd7cb"
+status = "residue"
+cause = "mir::Ty: binary_heap::PeekMutInner<'_, u32, u32, u32>"
+
+[[fn]]
+path = "heapless::binary_heap::PeekMutInner::pop"
+kappa = "98ea159191f61f09256fef8929c3694c5a18560639ca8a38634b203476395006"
+at = "K=u32, S=u32, T=u32"
+embedded = "0075cb063fbc04aad0a283e96722966814f2d9a1f4e766c055d20a4c05e99f02"
+status = "residue"
+cause = "mir::Ty: PeekMutInner<'_, u32, u32, u32>"
+

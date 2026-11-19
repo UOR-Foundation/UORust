@@ -1,0 +1,50 @@
+# The block-padding register (written by `uorust crate block-padding@0.4.2`; do not edit): every body of
+# block-padding's MIR at block-padding 0.4.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 38
+translated = 8
+residue = 30
+
+[module.crate]
+bodies = 38
+translated = 8
+residue = 30
+
+[embedding]
+bodies = 38
+embedded = 38
+evaluable = 38
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: hybrid_array::Array<u8"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PaddedData<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Pkcs7::unpad: block-padding's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:184:1: 184:23>::raw_pad: block-padding's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+bodies = 1

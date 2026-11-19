@@ -1,0 +1,50 @@
+# The ghash register (written by `uorust crate ghash@0.6.0`; do not edit): every body of
+# ghash's MIR at ghash 0.6.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 9
+translated = 0
+residue = 9
+
+[module.crate]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 9
+embedded = 9
+evaluable = 9
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: GHashBackend<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GHashClosure<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl UhfClosure<BlockSize = Self::BlockSize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: polyval::Polyval"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: polyval::universal_hash::typenum::UTerm"
+bodies = 1

@@ -1,0 +1,115 @@
+[[fn]]
+path = "proc-macro-hack::call_site_macro_name"
+kappa = "1910e799cd725c81ae737b4e178f40ae4495e1c94c13a38f9026392d06335834"
+embedded = "0ea60e8f7de71709d64faef4675e933a714abadca33a15afaa71d19a11972413"
+status = "residue"
+cause = "mir::Ty: proc_macro::Ident"
+
+[[fn]]
+path = "proc-macro-hack::dispatch_macro_name"
+kappa = "b3f2b47a8f7d9da7466e60da6f2a84c2e50d87bce23c2e2d28965c87b2e56486"
+embedded = "6252b53b75bfb86791272b36c52cdce8ce9e93126a1cf9a6c172b2a561e342ac"
+status = "residue"
+cause = "mir::Ty: proc_macro::Ident"
+
+[[fn]]
+path = "proc-macro-hack::dummy_name_for_export"
+kappa = "8b01fbee575f8d31f84f2a34156082564444292647fb2e490ca46ff0ccfde2b8"
+at = "Macro=u32"
+embedded = "14f25d861fc7fdfc1247c0b329ec3f487edad7c4755c0d288ef5b8f927d4b371"
+status = "residue"
+cause = "mir::Ty: Export"
+
+[[fn]]
+path = "proc-macro-hack::enum_hack"
+kappa = "ed8b4bf0af569aa8edaf15db0a623f3447f0329115f12be15c46863ed7101dd8"
+embedded = "e78c7cd361154a0a92ab2800bba8abb9ebba492e7ebac66df4f8535dece49bf3"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::expand_define"
+kappa = "8f7431ffca833ea6bc4fca0db6d55675fcd6b0ee6622304f96a174f5f23baa73"
+embedded = "6051488e10687b77f9b9c68b32ae2e4dc56d6066d30b8e5ff4df0e9bc539f685"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::expand_export"
+kappa = "9564aed19380462fc517c56710ff062fe984167d337cf305b8967c0614dc3aa2"
+at = "Export=u32, Macro=u32"
+embedded = "b30ba8d06497330e4cea4464e34fa674bbecd16b8fa6f3c4a1996422f9db273b"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::expand_export_nohack"
+kappa = "6d9d6ad5389861d9067dcb7965e4451a1a8b96f34a4565b075becca2e4a044ac"
+at = "Macro=u32"
+embedded = "0f05d76ca21ab39376238d6a1228e24168b27e5fc6e604b9bb9a1c91676e83f8"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::expand_fake_call_site"
+kappa = "e68733d2d47eda09d3854d26ca81e6ba5a3a27e9192a79a7b60eca8f5c14129b"
+at = "FakeCallSite=u32"
+embedded = "5ccd460b60b50a94f7470ea58470e8d024c5fbd04be929dd078653a11457595e"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::expand_proc_macro_hack"
+kappa = "a0bc1d4950ab5c6e66d8cc49f14c951a943e59903e9cd2f8f6cfced5dd1aaebb"
+at = "Define=u32, Export=u32, ExportArgs=u32, Input=u32"
+embedded = "2d0289447e51859592d70eaf24bb724ecbdbd843088c2b36bdce8cbf1b620b6c"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::fake_call_site"
+kappa = "25daf58fba50f9818c647f27c0b1c081989834c2c0ffb9940733784bb43eef62"
+embedded = "32e88b2d0bc350c5aaf37aab958179b6243976b304c34a9ea3b3e0a1f2b4e42c"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::hacked_proc_macro_name"
+kappa = "ff09d4c071aafe520e2a814b901ee54c68146af9f7121c5b1dcb7f3272e4b95f"
+embedded = "d769ed1118cefc43e9c79712918c0ccf3edbf05564eeee523ee527dead23aa39"
+status = "residue"
+cause = "mir::Ty: proc_macro::Ident"
+
+[[fn]]
+path = "proc-macro-hack::proc_macro_hack"
+kappa = "ef335a3e66098a9f5f0dc89307e07716a45db9b97e0519d47174b952840b5c42"
+embedded = "d535f554c06927aa35aea2bcd14ace31d00b0a0ef4e42ab53f6d35227902df69"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "proc-macro-hack::pub_proc_macro_name"
+kappa = "85f64906cafcb041240fd6b2ad6f63c87cb0f8a7c94132a2ea87a1878d9af92b"
+embedded = "8c395b8c9959f04e76cfe7d671566f19032bf18cda5749912363e1e21ee8e383"
+status = "residue"
+cause = "mir::Ty: proc_macro::Ident"
+
+[[fn]]
+path = "proc-macro-hack::unraw"
+kappa = "c11f9e3fc1b4f732ad27411d7757c426f44a1bae9693bf1f40741ad4c36b223e"
+embedded = "46da64962f013a77376ac9a9b2b78ae0d32ade59a7e4bced689499483b44f332"
+status = "residue"
+cause = "mir::Ty: proc_macro::Ident"
+
+[[fn]]
+path = "proc-macro-hack::wrap_in_enum_hack"
+kappa = "61449125eb6a303434683bba56e08cb609f27ea91680a2c692bf871de8977ffa"
+embedded = "07e9c67c2d2cf5f5b9cee5fbf8f628307cc085cb99b0a42310230718add6b7e1"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+

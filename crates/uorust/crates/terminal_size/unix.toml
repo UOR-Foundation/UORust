@@ -1,0 +1,24 @@
+[[fn]]
+path = "terminal_size::terminal_size"
+kappa = "e4a2298b792aaf480f4821627c0e26ab29d4fd2ba98566520ee54db2e3c8276c"
+at = "Height=u32, Width=u32"
+embedded = "5500dd7f5d728a58fbfdf5662c25f2caa94a953858f5b51e22c3e1d8d9a8bcc9"
+status = "residue"
+cause = "mir::Ty: std::io::Stdout"
+
+[[fn]]
+path = "terminal_size::terminal_size_of"
+kappa = "7e34a7401d840e85256661e9da19ddca85e7cd69f40a986f85eec9a5de6bd3c7"
+at = "Fd=u32, Height=u32, Width=u32"
+embedded = "261d4200021d013c0a237be99e5f67927e079343f79cc80ea03e072c1bf5b300"
+status = "residue"
+cause = "mir::TerminatorKind::Call: isatty"
+
+[[fn]]
+path = "terminal_size::terminal_size_using_fd"
+kappa = "870fc3a03e43bf67b6852a0082c1115d5bf3afef74b5ab3f9f134e23649f5a4b"
+at = "Height=u32, Width=u32"
+embedded = "f25766b0e31ec955ddc55892ee214b9002b7baf7f1aa8f2896c2d726096598b2"
+status = "residue"
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+

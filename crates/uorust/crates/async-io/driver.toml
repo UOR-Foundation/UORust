@@ -1,0 +1,93 @@
+[[fn]]
+path = "async-io::CACHE"
+kappa = "ac0e662dba4895970531dca46cd2b3cfd54d05bb95ee320787b521e66d4f2aab"
+embedded = "a359ba41edd5e8ee5d83cbc71bea83481b56a5d01f71852bd6d7d64355386734"
+status = "residue"
+cause = "mir::Ty: parking::Parker"
+
+[[fn]]
+path = "async-io::IO_POLLING"
+kappa = "7e16937aa9093c3f7ecae7085112ca0b3a291b181a1744ad360210896250545c"
+embedded = "635ba02937f0981e9829d6d480ae3b0afdc75b9f1f4fbb2e151308367842ea07"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<bool>"
+
+[[fn]]
+path = "async-io::__RUST_STD_INTERNAL_INIT"
+kappa = "795de64a7d0b57b8115e024f2605c69666915e5d0db44068c4d36bdd70dcf763"
+embedded = "27454804b97f2967141e153447a6943f6344dc8a35e05a90515002e58ee6fdfb"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<bool>"
+
+[[fn]]
+path = "async-io::__rust_std_internal_init_fn"
+kappa = "1dee6db64a05931e900e297b835fc473affbff56a71c86e518ef0f5f7bee1927"
+embedded = "f6a715f238baf55c64ec9758ef04d65d1bca9532494edfa77ef6cd3271efb1e0"
+status = "residue"
+cause = "mir::Ty: parking::Parker"
+
+[[fn]]
+path = "async-io::block_on"
+kappa = "f570ac39f4747669ef1c7823aff4ac2c375f878e38c225968ba09c83cd518ef2"
+at = "T=u32"
+embedded = "18ef6165cf34e0faca4c153db6be041b7bbe589017853e5d279fbe60a16a8b4f"
+status = "residue"
+cause = "mir::Ty: impl Future<Output = u32>"
+
+[[fn]]
+path = "async-io::block_on::BlockOnWaker::create"
+kappa = "422d0ea1cb4a5e4daa4358d8d699eb8a855eb427057700a71bde074f5e8be717"
+embedded = "b6f98bc37f5fcb3025a2fea314f121de13f471020726f638314ec6736929a609"
+status = "residue"
+cause = "mir::Ty: std::task::Waker"
+
+[[fn]]
+path = "async-io::block_on::BlockOnWaker::wake"
+kappa = "1dbfc6953ab178a72a8f01c670a16c4929905dd5ac9be829bf2e85c7de8ca79b"
+embedded = "a34ba64e55c9f8660f8fb5da164ad8ecca4bdd878b493661a6b52efd991cce98"
+status = "residue"
+cause = "mir::Ty: BlockOnWaker"
+
+[[fn]]
+path = "async-io::block_on::BlockOnWaker::wake_by_ref"
+kappa = "3a75943f615ddc246eaecb2c0ba64bbe91379893f70b6f61888dae6593f2a127"
+embedded = "c4f7524239850b7abd3f6d9a873c10b21a731d0b0f5f0c083662d204aaccd1ed"
+status = "residue"
+cause = "mir::Ty: BlockOnWaker"
+
+[[fn]]
+path = "async-io::driver::CallOnDrop::drop"
+kappa = "6acf040cc5da95662cc35cb7108ba8fec5454a11f45a81152aab3ffba48b22de"
+at = "F=u32"
+embedded = "74b9e886813a8d962d83205a01acf9f0d9d075d34a0529acf0fca409acf317ea"
+status = "residue"
+cause = "mir::Ty: CallOnDrop<u32>"
+
+[[fn]]
+path = "async-io::driver::init"
+kappa = "74f213fce57df43552c022254ac6a5d943bbf7641fb4c25761c6617cf1908f5e"
+embedded = "2305cbdddf92296ffdc9d5afb08dd6d16b62117992c64b5f8aa89a218c5e104d"
+status = "residue"
+cause = "mir::Ty: parking::Unparker"
+
+[[fn]]
+path = "async-io::main_loop"
+kappa = "f890f88a9d1b5481157563255628f8f0bad5fbc0d0446fd2b5f7de81b2a7621d"
+embedded = "8f82cd12314f34c162e4db4f73a6dccab5eed573bfb6dc529e9de79b380838e5"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "async-io::parker_and_waker"
+kappa = "1f9f4195966ec42eced19f0ec61f56e6a9d32999eb8c185595ff9ab99dcf878d"
+embedded = "0ca7780336ffd033b8e6eecc536a6110891182a5b95ee2fa46190b5163a426b4"
+status = "residue"
+cause = "mir::Ty: parking::Parker"
+
+[[fn]]
+path = "async-io::unparker"
+kappa = "6f0f53ea313a96c57b54a5a47bf1b58c042255978bfc93ebc9714d6f8c6724d8"
+embedded = "76844713b433e4655ac63d5a5a74481cf6782658246c942b67fe091477842f4e"
+status = "residue"
+cause = "mir::Ty: parking::Unparker"
+

@@ -1,0 +1,870 @@
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::from"
+kappa = "c498877f0937fb9145284f16d1c62872e5d3e37874a022cc421a3fc5b93b6627"
+at = "T=u32"
+embedded = "702cb3c8571fcf5ff29ed9cb0617fcd664a9e891950a72a2b735a663861e568e"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::no_std_readers::ZCursor<u32>"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::is_eof_impl"
+kappa = "00002c6d3a98b12a61d23197028664e88fd99e0a5dd4e943d4250092adde2f0a"
+at = "T=u32"
+embedded = "93423f2d9348122134241216f3d87df44cd32b8e5bbc4b215c4c779728daebd2"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::new"
+kappa = "32f36de82172eff5dbf86e53379f049248e60e9978cd4cc341f000115d0af4a3"
+at = "T=u32"
+embedded = "5650625334432530a0e8a7078156ca251c8c02ea4a7287cf1674b2917bd37617"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::no_std_readers::ZCursor<u32>"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::peek_bytes_impl"
+kappa = "1c5c24d13da1f1b63452efe24a2097136b0814d87d6a92feb0daa0e9cb9096c8"
+at = "T=u32"
+embedded = "baeea658c020cd01d1ffe702e43b67d9ed92dec69a033c6b4d0ce49da84b3a59"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::peek_exact_bytes_impl"
+kappa = "0d110928d11334c84fa83d679aceb82e151ab23c81aa1a8c0f48aea4e21ce170"
+at = "T=u32"
+embedded = "da9d53f9aaa2bbe91e01935b773c8de11f28d0c70c845aee311d93d56a861ac1"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::read_byte_no_error_impl"
+kappa = "08070e27c429880b76eec9db0da9c9d1a68f95ecffe8c6d00f51015c9ad28159"
+at = "T=u32"
+embedded = "0107f40c76bbd832ade2ec8e876fc4cae869ed47d2840c8893e0a8be275ba4af"
+status = "residue"
+cause = "mir::Ty: no_std_readers::ZCursor<u32>"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::read_bytes_impl"
+kappa = "7cfff32c6ce8ac8eb447f2dbcebbc18a8676c45a3dbcabdb5402699775d49caa"
+at = "T=u32"
+embedded = "57e6a06ae4f2e8a3f0f44da87f84aeb96241034068b50996cf8c8375c2d930b3"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::read_const_bytes_impl"
+kappa = "907650140e7191adcad3f40ddf7597f53261bc919138d892cfac401765adf68d"
+at = "N=#_N, T=u32"
+embedded = "b9e50186d5712c54b388f9830ff88f7feec0ce2005c1c2bca6e35fe0162936be"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::read_const_bytes_no_error_impl"
+kappa = "6a36e569c0f6ee6ead6749dcdce8bf1b48ac941dc09f0d1887ea64ea296f3bd9"
+at = "N=#_N, T=u32"
+embedded = "947eb51dbc7c8865a3ce26f8227ece7fdce30e2cab1f9b7b5342541d068fd8c2"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::read_exact_bytes_impl"
+kappa = "dd7e2ae8073d0aed9a74a48a0d68c3432f179f7ab48dcda1b858b9221d4ae721"
+at = "T=u32"
+embedded = "d68c27e0b2d1da8505bbeb919b67e3f800b3ceb808c123b14bf3ad7c385ec0c9"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::read_remaining_impl"
+kappa = "34eb535bf4cc97287c8a8c3ddbb68096659ee3c276971fd8ec5269df6c07aa14"
+at = "T=u32"
+embedded = "169b43d5b14cd5622062c7e7a98a1a6f0882879b54f2bf4bc987dc33ffe0da25"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::rewind"
+kappa = "83a4d22aa1bdeaaf68d319711f71bb8ec3e47fa24e6c0f484b77e68f52743650"
+embedded = "45a2b968323689378b5cc83600d3c9716b909ba3494fcf3f0e9ba1753bcb6983"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::skip"
+kappa = "453d0a8028bb5993f195ed9e17c6103bbca534cc57814c880f3c271eebfb00c8"
+embedded = "458ce13a7e37557ab2dd728ed50d2ddd0197103451771b7b997ff584b034688a"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::split"
+kappa = "b9f0362d02694c384b5d498d81a80a290e35c8085dc5a30e117cc75228f11a67"
+at = "T=u32"
+embedded = "aa9dda4afd3642435316b72c1ba5bc5f0dc063f4a872e0a9a68eaf21404423c7"
+status = "residue"
+cause = "mir::Ty: no_std_readers::ZCursor<u32>"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::z_position_impl"
+kappa = "5f61b6b572c99a94ad491d715d823fdd6f2f7ba64a186b485dd77245ef620b0c"
+embedded = "ee9278a866d0436f0effce0fb41e46a2bd7db9b59b19b2d02fa6e25a67f5051e"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_readers::ZCursor::z_seek_impl"
+kappa = "3ea3e96787923c2e0a8e49c11406fbd20ac49e0587d727e9bf77d481ba9df318"
+at = "T=u32"
+embedded = "9375de6128481bd95906b9898724a72f3f3f38865cc22fe5f7dbc36c4d20b20f"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::<impl at src/bytestream/writer/no_std_writer.rs:6:1: 6:36>::flush_bytes"
+kappa = "8ebcfa17695d8d9d362e29a8b3dd2993d9ec4cc5e7aa1f27d77273b7e617c509"
+embedded = "e8c54f194075996c7016faf10b31f975190273f449dc2561af580d8c1f85e6a5"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::<impl at src/bytestream/writer/no_std_writer.rs:6:1: 6:36>::reserve_capacity"
+kappa = "f190aa3be2066772fde2712638e28f19d7abf2c59cd3087ba2f4faa7bea97865"
+embedded = "667a52822c6748ac950daa2e0ff2f7160cc49fd5d99b2782228a693cf647cb3c"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::<impl at src/bytestream/writer/no_std_writer.rs:6:1: 6:36>::write_all_bytes"
+kappa = "a985617a9d827ef0a35640eecee63884d85c98f790d89e2d2f2459a75656ed2c"
+embedded = "239b9a67cb8a90376d06fa0887451bd3b0ba5987eafd0a40991701d9a2fdaafd"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::<impl at src/bytestream/writer/no_std_writer.rs:6:1: 6:36>::write_bytes"
+kappa = "260756fd1ff08e6c9d5e24250fb2b651623bd71b2c4892d1310457f46daa8a0a"
+embedded = "3b09a805788c75f80d5016884a28ccef184ecff04e0a549f9211311e7f919a2c"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::<impl at src/bytestream/writer/no_std_writer.rs:6:1: 6:36>::write_const_bytes"
+kappa = "44ffc9f7fabdbb2f3df50b5b01e6fd6d0d6813ef0509669ce62e5a5936a8c396"
+at = "N=#_N"
+embedded = "200e400098c96821b69ca1e64a4f138df2318bc51ca742fdfc91d2adb2f3e482"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::Vec::flush_bytes"
+kappa = "619262c891cde7023e3a4513199e53e85ec099f44d87a88fb2166b5402d6e03f"
+embedded = "aafe74c08c1a022fdb7afa20f50a827e33faa64ac8e3162e1ca580fd580c9f55"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::Vec::reserve_capacity"
+kappa = "b3239ded30dc6808df2f387034dc5f6dc37db840b67b2f00587f4df973cc8245"
+embedded = "3591c1f44ce402d427a0229d3e2aafc9da9956e959190f095cfab4db795e4bcc"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::Vec::write_all_bytes"
+kappa = "cd672defdd3a8a12ca76c34bdaea42521e4e9c7735b8facf15896333fb120ea0"
+embedded = "335043bca93b26e9f788b7f90c0e354d6454c1cd2daca6af2444871eef57076c"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::Vec::write_bytes"
+kappa = "d76be49d7106e62857d86c834138da21a3c19120ef88802177b42197d53f0052"
+embedded = "1607ff7601b8696ec173ac2c9dcdf769b62b1759c3edfdff1649877a0499472b"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::no_std_writer::Vec::write_const_bytes"
+kappa = "9bf228aeafd584666b54edb3a875ffd26fc6e1d776bf58e6d0d6d73fc32561e5"
+at = "N=#_N"
+embedded = "2adf826c35529a6af13373f33de2c8bc184cd18ed023555fb3c7b9e24dc7315d"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::<impl at src/bytestream/reader.rs:16:16: 16:25>::eq"
+kappa = "fcfff8e3d09508c465ad341828808fbedb0c2c47900c48c5568dc16bba43a660"
+embedded = "871e2da846a3666bc3545c10cfe7fbfab7fbe98a54e60d5391b7673561f3eddf"
+status = "residue"
+cause = "mir::Ty: ZSeekFrom"
+
+[[fn]]
+path = "zune-core::reader::<impl at src/bytestream/reader.rs:16:27: 16:29>::assert_fields_are_eq"
+kappa = "632ad9c2d22839ed89c339713183b29997af2ee8e6051adb417ea72fdc1b7bb2"
+embedded = "04d5fc925d0764edc9906f26c109140696619750b24e1bd5cbda486ca07f02b3"
+status = "residue"
+cause = "mir::Ty: ZSeekFrom"
+
+[[fn]]
+path = "zune-core::reader::<impl at src/bytestream/reader.rs:16:31: 16:36>::clone"
+kappa = "28a0722affdcd75bca5f6ca583f77c05e0ff7f904ca00e51ca23288902792696"
+embedded = "e8a282f331e3d72705e019abda7ae56d1d1c24588148e38a1918c3d7b5cc99f4"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZSeekFrom"
+
+[[fn]]
+path = "zune-core::reader::<impl at src/bytestream/reader.rs:16:38: 16:43>::fmt"
+kappa = "5f2472dfa8cad61f2cb6ab5685edd8f9e958c1f846fa0d3ae3f32827da8401b7"
+embedded = "a065294efd25f030909bf56c48c6b516d9e41d117f31b89ac90fb78835350caf"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "zune-core::reader::ZByteIoError::fmt"
+kappa = "939d3d24867c033977c5c3e86111022a3f33f956fb5b6018b1cf7703f8e177c8"
+embedded = "98cfb13ec6cb9ece58bba58599d6e6d1c2b16e995f4844ac455e60cc8b10b8c1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "zune-core::reader::ZByteIoError::from"
+kappa = "dd31b93b6bb7d28bf935a41b316d116ce9c4e98a464ffc94946a73e07ba4eb3a"
+embedded = "bcd61164ff30a5b97bf1a5562e2ab3815f13e1a540f334e3dca2d9921b6266e2"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZByteIoError::from#2"
+kappa = "f9c0cf23529556c96926ca511a82604d22454af23dc008e228e9003857305cec"
+embedded = "662b02f593cbff5193a9169b9c468fc0fc6248047fe9734ff830a48bd64e3aa8"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZByteIoError::is_recoverable_eof"
+kappa = "8b7ece7a89cb6788f3eb2ac18633c30d35be37581861c9dc0d3834822bd46f7f"
+embedded = "4d4bab2fc9b94fd01c47c2c00b99d75641e9b64bcfc74850916c163580b7f382"
+status = "residue"
+cause = "mir::Ty: ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::consume"
+kappa = "08b358d0c3982038be5ce70ed9ff1efc0f7f83039f99ab069831e880a2151967"
+at = "T=u32"
+embedded = "44e1ceb2acbfe8c6508192f32bd059070951aae99ff71d8f0470041dfcd06406"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::eof"
+kappa = "a0edc55ddfcee4d55288ca00b24d5a5a8f913d1d8c7b1b3b87089a53b1353d38"
+at = "T=u32"
+embedded = "68057c474a7180b7747434a9abb11e0d25e1310487401d05e489c230ebc9801d"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u16_be"
+kappa = "58e00a9d9e53214675a234d6b3111326ac21a6ad3e37200bd16dd72e0e764c17"
+at = "T=u32"
+embedded = "159deeb3b1150dcb54973521f85d6dd94a46d4a9f2e9368dfae2d0733a4d06a3"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u16_be_err"
+kappa = "54550d5ba2cac5b5e3589232052d1c428e97910cb104744bb59e5c8e99379817"
+at = "T=u32"
+embedded = "8790b80ab91f3ec4d32142bc832141929e1dda18b5881889fc95095a23ca9a24"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u16_inner_or_default"
+kappa = "8ea1c4d619fd51e8cc6fe07de095bd00b3dcb45e9f69a20bcb2da1925ce40aa2"
+at = "T=u32"
+embedded = "051267ec0b46b0542db8c521ee337d1799924513a121e4370207847cb31cf6e4"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u16_inner_or_default::SIZE_OF_VAL"
+kappa = "7e1298f355287036650484756fecc610e07b8dd5db0037203397c6a098d280df"
+embedded = "bcf7a26f3121f73e811a95764c2c27d4c5fc7051c612dbf9affe36d97088e696"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u16_inner_or_die"
+kappa = "13cb48e3d0ba86a82bfaa36f6e4d7dda899c275538b99a1c30bf64cff32d31ce"
+at = "T=u32"
+embedded = "6297c169ca9fc95d952f6596c31b9e5c83b0b538b7473fa2af717a69efcceee4"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u16_inner_or_die::SIZE_OF_VAL"
+kappa = "5aefc20b39f036388ec5201b012db9ae7c9273819f6d8577170f2162d484adcf"
+embedded = "c78718dc2758d72b90d8902283ab6ced24bc47d77786ef90f31c5f9ece371641"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u16_le"
+kappa = "c8a58f80fe2d10618f033397701bbcf6fed2c5a97bf6500fcb116f2a57ddc052"
+at = "T=u32"
+embedded = "1ef72ccc7e191ba0dcb0ae705638a227990765e2aa50f079ae9f94657b002a1a"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u16_le_err"
+kappa = "a00d75ade1bbf05f324ce984be65b3a9211b3fd0286337b46f66361d0a132478"
+at = "T=u32"
+embedded = "4034cadbbe8ba91f14a7c8c047e5662464faf656d8ad227e72a9dcbcce19c965"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u32_be"
+kappa = "40c38e1cde5dd3e9264d3d5ac7d086784cbf4d792d3be1c08a84886cb12f10ca"
+at = "T=u32"
+embedded = "57b91e816fd840ec25d78be90e2a5add0d6c90a1be922e49d118d5ec9be963cf"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u32_be_err"
+kappa = "34749c87a9d686b37cc2d84e89dbc7c9beba523da66bf9af8bda394938f72ab8"
+at = "T=u32"
+embedded = "ee87c919332612f6e428814222ffe640bac3487b2572c74a862a29bb4b5614e5"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u32_inner_or_default"
+kappa = "c1b6c3131dd1bc3d2766c3178e265275f1d915b1a265018e0779aa328c624b7e"
+at = "T=u32"
+embedded = "a9453c98eec9fe160756ecc70128f599b0a235c396a44860b8d7ecc23784dbd5"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u32_inner_or_default::SIZE_OF_VAL"
+kappa = "04e6d113067aed6c55408b5d7f8b7e0b795e152efe67426baa51fd082f1e0330"
+embedded = "655855bb5861a45c956d2622eebae7e902b94046e29bd4730aef6a07a7a772d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u32_inner_or_die"
+kappa = "f743240963c8f01af57e2939fc932bf1d37732caa95a22f65943a3500788f939"
+at = "T=u32"
+embedded = "cbeab084fe90ea77d281a8e8645409b0838fb67bc07e17eb98d2e60e08f5af08"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u32_inner_or_die::SIZE_OF_VAL"
+kappa = "5402ae8fbe83ae2d6d26a7586d32b01194a6832817818876f4f15de37a278963"
+embedded = "5b90d9bb4f9c5bea9102fec8b10f4fb79102b57629995d542cb75599099faa09"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u32_le"
+kappa = "78fee75a746bab3d730b3a14e235f6216ff295fcb99783422366dd2f8475aa1e"
+at = "T=u32"
+embedded = "71e6a6311b683bcb41cb61d52053cfd1b208f2e99ae2115e7662f2d78f473db9"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u32_le_err"
+kappa = "fe79352b1fb8651494111753813e1f38ef2e17377d0c32a843105d3b8e282f44"
+at = "T=u32"
+embedded = "4fca1fe802ba17ca3b1c03c6f888940aef19c010673171fa14035e4147a8d2d2"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u64_be"
+kappa = "dddd00fc692c8fedebe0693e3a842e5426e46d3a2c022c5cdcbcc393a9410c30"
+at = "T=u32"
+embedded = "a2bb94dd517f14cd2effb2632e64f0f142b36a54c79a9cda70bc2b0031cdd668"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u64_be_err"
+kappa = "b9227e77a2d1f82b43b58b21f8bb508135ea639356b3e09053adcf3fa300ca9e"
+at = "T=u32"
+embedded = "3d196fffd2ae1ff0589fa70cb74dc88cc4226f6eb477f21e048480b66ef5831f"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u64_inner_or_default"
+kappa = "fa51a6ac4735941e89aac90441acb596c8fb4d3b2711596b4a6435e6c908ccdd"
+at = "T=u32"
+embedded = "331c40b992c6b9de7425b53e14909e09fefb55631f050156ce6148abd9c2b746"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u64_inner_or_default::SIZE_OF_VAL"
+kappa = "c8da361cb8312eeb57ac798c344cd349d1b541b8db2b52a7304fc7d014a1870f"
+embedded = "ff2400b9863dd6c43b902f29b8ec2d520b6ea9113941e677b76ba01393da3982"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u64_inner_or_die"
+kappa = "478ccc511d98f4604badd5f5c491974592e1f55543c1469716906a3372c477f9"
+at = "T=u32"
+embedded = "9b21be42b588357dfd3c06477611a44edccb1cbe2b60be00910571882313b523"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u64_inner_or_die::SIZE_OF_VAL"
+kappa = "1ddcc14b207aa5440f07270dc4346f04e48a2e0d3f1cdc0e6fff699a475b0dcf"
+embedded = "fec96a50217032e7ca6274eec85bd36091c3b5f2667f80252a4f478bb9d37e4d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u64_le"
+kappa = "166f9085bfb7e33005c0603c34058fe001f761f8e7b64b5fbe8144b3f924a2fd"
+at = "T=u32"
+embedded = "61a5f52036c8cb2c0577eb22c23b55ca2befb74627b72c8a358bb60797ba4ac5"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::get_u64_le_err"
+kappa = "528a4bb07a3d293975a4cb700495d940bf35e5f902a7de0224c830c906244676"
+at = "T=u32"
+embedded = "49d4d3791997581107d64a1532f470f6a88b42db7b1848d51e0ea9790e799511"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::new"
+kappa = "47420626d644b79761537969f8093a8c706b0407891552f9e152b741912a9d0f"
+at = "T=u32"
+embedded = "2441a5e3e3b3b3aab19cbfad4ce66a6aa6e25d590074cea24747d214cc008818"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::peek_at"
+kappa = "dc4f48f548ecdc34528cb0b787c193bb78ee5b334085187f1e7dfeeef029f755"
+at = "T=u32"
+embedded = "de49c7e43930152d9c59f3ce53001751b24877c358ee9c1dfd2191d55db3ad4d"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::position"
+kappa = "95a95d7203912dd9a31955b805d3d7055ae46ffb9adc25d834cfe12a33ff9e0c"
+at = "T=u32"
+embedded = "307514a03171482603076f5605c7b46220e3bce22e9bb582ef6071fb5e879371"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::read_all"
+kappa = "eafb2d6d85ec762bd6fa4f8c6e960db748e201d1fff2ad8eb2a1f5b09f52cb5a"
+at = "T=u32"
+embedded = "90ead03a6c21bd41bece25210725fc1ed57c3178b3c2ea476713424910811053"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::read_bytes"
+kappa = "61cf238647d1e978dcee527dddfc4caed5f306b88e8692f792d546dee5500ca1"
+at = "T=u32"
+embedded = "f606a0db4425b84242883f02f0915abd66e38ca102cdc0f1261f1a94b2e1378a"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::read_exact_bytes"
+kappa = "7c0ceca0930fbdffa166150a3032618a9985b97a100b960f5b821e04a167bcee"
+at = "T=u32"
+embedded = "f5bf03084eb6cfbe2d6cb81f10159e69f50fb569056429dd461c84d1f07dbf93"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::read_fixed_bytes_or_error"
+kappa = "02e61d6692b7afb58e8f41e3b1756ec77ff21af66899e0a5aa754eaf01c7162a"
+at = "N=#_N, T=u32"
+embedded = "87099f1f33c4098b65137a6e4ed2b30383fbec2fae1a84d217c4bf56dc255e92"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::read_fixed_bytes_or_zero"
+kappa = "426e9a80ffd173164f2ab9f2686aa7c19e2a8e7b884f7d4d34b815e8e4a7a8ed"
+at = "N=#_N, T=u32"
+embedded = "7d9f15d02bb04c8859298c7b3b844cd2eec18d8dd6abbf1ad946a3dee0498269"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zune-core::reader::ZReader::read_u8"
+kappa = "8d4b027b9d08ad151c89e3f6b8cfa6231addac43d5507fdd300fd1b592e67fad"
+at = "T=u32"
+embedded = "cfc42b1c02ede5cb23a0c77cf1bfe56a7d331df431d8246a2efdfa86cd74a1ca"
+status = "residue"
+cause = "mir::Ty: ZReader<u32>"
+
+[[fn]]
+path = "zune-core::reader::ZReader::read_u8_err"
+kappa = "14d29ccb1dc4ff61dc33dc85e2ae880f2c140115eedce37a53d7b15aabb21007"
+at = "T=u32"
+embedded = "305df479b42233907c74be9d948f10d3d6bbdec065020b3ba8c80d9c2757ef6f"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::rewind"
+kappa = "eb42ff4e7ba4bc099151744e47f6a73eddaa4c15781d4f2c06f00bd6b1f76f41"
+at = "T=u32"
+embedded = "46d1c7aea4e1e35b73c4ab77b2602db10a98a593d69dec57963f42387ea94ac9"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::seek"
+kappa = "3e6301bb7c5e4d905e8acc55f150bb977aa742600d0ba8c3d73defd86f598d59"
+at = "T=u32"
+embedded = "527f1fd2691b9b1d855b07379c9a3f3b0b250b6f0118e493a5b19542787136c0"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::set_position"
+kappa = "e7678e38ec3a0bb6ee4f6a60751d1a638aea9eb4d1b18f7741778d353107c7fd"
+at = "T=u32"
+embedded = "716145162768150799775cdcda40061e0cf2cb64d152c7b8be21154d1c76bfda"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::reader::ZReader::skip"
+kappa = "19e134126a465155e44896109ff923c5fd23c429c7920badb44e8fa90535c0aa"
+at = "T=u32"
+embedded = "2f6d1680b16a2f083f0b548f112b0987e6ba118ba94fba983dcafa3cb5b06e7f"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::bytes_written"
+kappa = "b491dffa7fefd6c9cbf4fa0fb2f912636e29cbe20f5b82a8c85d46d5bb9810d9"
+embedded = "e9f4fb4cd55c2a929c334b529d46646c57dd2b95b87b53986d0c55642636bc80"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::inner"
+kappa = "3cb4b630d9d8d831cf09147163103800bd74e918197fe07a4e158ec1f6beca8c"
+at = "T=u32"
+embedded = "40454651abdc941be059074ea0fbe29390765e3623283fde198b701cc8c097a6"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::inner_mut"
+kappa = "740a605d012247195490d3eef4023ad1a1fc78a0efc6b6ead1e5f879b0ff34a8"
+at = "T=u32"
+embedded = "55fd8dca8887c7a7b56b6b4d5e2f7c951afbb661e9bf35610ea3f41aa1b9e7a2"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::inner_ref"
+kappa = "71e20ed6a7ad267487b35acfff850ad3da251947d23dc6bd2789eb26fdb2d20d"
+at = "T=u32"
+embedded = "57c917c738977285c3004d31736f383304234b910193701ab637ba06b68eb19f"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::new"
+kappa = "975616acdc386d6296a5d3777c55e2762d7fcbda7bff7d302761f6d7b6c2bc18"
+at = "T=u32"
+embedded = "36072f1779a7b44ab7254b0169d41e20d13c76cb2ad40726be0cb09e995aa104"
+status = "residue"
+cause = "mir::Ty: bytestream::writer::ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::reserve"
+kappa = "8fd36a255130eb0766af8e8d85ea3ed6cef9cad16b964e403ebac5190b976127"
+at = "T=u32"
+embedded = "7e3c602000e6a06597d6d216085c655e8d50eaaaecde1b1e96d1728bb19efc4e"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write"
+kappa = "91444be7f638375b6d0d8d36cdf7d5d40988e784c0132ae5bae365faf435da5e"
+at = "T=u32"
+embedded = "e1a34e689e1d8ff7d4bd5781c357820a8dbdd48461c15f0f7bf9f8781171b333"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_all"
+kappa = "61b2fbc41355826008ee2cca790c16b3b584d887de7bdd1f08debee33f49bebd"
+at = "T=u32"
+embedded = "a30c6a274029def9766a92dd874efcbb7ad2a4329d35a7ec2470ac9e2a73302b"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_const_bytes"
+kappa = "60b66c0243a9a407f440cff7bb982b570168118f399981e306d6b02962585bfd"
+at = "N=#_N, T=u32"
+embedded = "3474ef34eba50b585508fd51300d24ce43f9128ce2c89d344f11e0add9f01fe9"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u16_be"
+kappa = "4ed76dc1fac7a086dd27d592edf40734a55da716a4d37dccbf3d45fd25fe9bdd"
+at = "T=u32"
+embedded = "7dfa9cc542843ec9745aa25546106b331a41f29e5b0aa9b5c24f9d45bbe8511b"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u16_be_err"
+kappa = "820c3f8abbe2d8e38225b5551491a637411d97495ecfa8c5badef7b27b0c9165"
+at = "T=u32"
+embedded = "36c826de973c8d70df337b70d3cce7dcc7e930d816ebb8eb5cfe8dcec4ec239d"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u16_inner_or_die"
+kappa = "40431a7208c55c63a5f8875ee847d572583cdf189302a8995ee0a1c365eb1d92"
+at = "T=u32"
+embedded = "3af9662840e7a5c71d20ce004f3f1e7e4f02024399e4adc92c673e22bca21310"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u16_inner_or_none"
+kappa = "f6bdbce74d6087f53a069f5cd1fe538b1cad4fbb44d4eef67c1c05a5c18b7b86"
+at = "T=u32"
+embedded = "b0b6446cae9bdb97dbdaf6f59038018a69d781308a7c0b767edcc587d863f59f"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u16_le"
+kappa = "bdd9a5e3ac1d75a8cd4ea79161aff197ee31185831f70a7b52242bd47df5159e"
+at = "T=u32"
+embedded = "d145782e9c1c693de2075ee1a609bec1ca46c41350a6f8ef77574b450e7f9c71"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u16_le_err"
+kappa = "6692261827e7edab28521488348a3364ef18e890c4a279c48288ecdb617e9512"
+at = "T=u32"
+embedded = "6dbd303cb10cb18bc63efbe779877cb20039b58f190d1a05d627ab085f5f1131"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u32_be"
+kappa = "464ef0ad80f18ee1106f68437c5e4247da77e4c96ecc056143fc92c9650228c5"
+at = "T=u32"
+embedded = "952da595b00d8a897fd568e05a6bcd465b7983691ab65fdc34a0cc94b005ebc3"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u32_be_err"
+kappa = "3ddd8341d062245f9267515dd83041d56b9afd19ce9058be550d2bd88fc2a74e"
+at = "T=u32"
+embedded = "b9995d9cb0afcc2b2804a6e89c73139608887734f668e09886bb1218b2ca9156"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u32_inner_or_die"
+kappa = "af52f3c0c69e54787ea58541ba05a7faab71c4956e5a06ed5a6904b75462fee0"
+at = "T=u32"
+embedded = "d29e4fd32ec937394d979940c7142f79177283175f7c46b7936ee48f16a3aac5"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u32_inner_or_none"
+kappa = "be7e9119b30bdde0dd8221036b94f8b021fcf5f335c297f7463a74f2bccdf173"
+at = "T=u32"
+embedded = "13d35f8fabba57caa8c8a7a52231a23072fca3f989e027a60bd61629a7ad025a"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u32_le"
+kappa = "bf489f38e90bbdf8fcc856aa9a7ba16621e0c123fab00911982813df81fbe81c"
+at = "T=u32"
+embedded = "6e4f72f2b4118c9f416e75faadbe0109c29d940ceb011e772fdb1ac990bb18e8"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u32_le_err"
+kappa = "30282d9fbb4c1d137800cc40d40e1c697a6488d8c1928a78e353b41fce953ba5"
+at = "T=u32"
+embedded = "34f77f28349db7565d8a14845b8a84ad0cf9be71f897057946216c6fe7f454c1"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u64_be"
+kappa = "91fe13056d6c1335d8b01fc7311829dcbb7f2f0f1b6366238564b276e23e0d24"
+at = "T=u32"
+embedded = "9dd4859a927515e3829c3bd962e1704128e1e160856fe336421003a781bf6ed0"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u64_be_err"
+kappa = "ec847800e51cfaffc2020f50a98c5a53d32780d350deac444e91b2df4950e8ff"
+at = "T=u32"
+embedded = "445c283b987d14993d72223af1549d362d36a745cff8a3fa0cd0635f8402df73"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u64_inner_or_die"
+kappa = "8f060b4be7f4675d3098c67131b5e8824b272bfed229ef2f4cc89dfcc235d5df"
+at = "T=u32"
+embedded = "5c077d51c45ffd7cf2cd651ee310d51f53f2b3cce4b32e16fbb44893ba0b977b"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u64_inner_or_none"
+kappa = "27aa0929c6fc96e280070d8a1636fc1665618ab2ccb019956dbec840823439c3"
+at = "T=u32"
+embedded = "b8c1b207e6b90bb0b90287803632955d11f88bb2f3a6cdaef85af549c364daae"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u64_le"
+kappa = "9e1c432c86ad84957aad56f0cb9d11376910782a5caf27ed30b5d49b7487ce59"
+at = "T=u32"
+embedded = "e7117dac04c7823d92553e5b578843f8404b3a6a2e9445c631445a3373efe61c"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u64_le_err"
+kappa = "a31dec5c4b8734399672bcb2f3e575aae5a68092aa83e9729471cb64c57ff387"
+at = "T=u32"
+embedded = "d091317d11d478c156dfe553f3c84353c480a119ccfbc3f94d00aed13ae781d3"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u8"
+kappa = "4869f1fc69469246743fbba1f965bdfdf23eb6840abbaf7f6f3a5a2c456e2752"
+at = "T=u32"
+embedded = "f7473c4d8fcb0a1f4cb1c0343c4bda8d01aca2dc8946755d451db19eedd9806e"
+status = "residue"
+cause = "mir::Ty: ZWriter<u32>"
+
+[[fn]]
+path = "zune-core::writer::ZWriter::write_u8_err"
+kappa = "41b2c7f93df1fb89c3f6fa62656b24bd30b9dbf13b96785effaec1f81f010338"
+at = "T=u32"
+embedded = "849038fa23229b032215649dc580337d2b6b683e9a70c0162f471e9edb46ad34"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::is_eof"
+kappa = "3c81b28305f62d52be3513add176ee529bdf5c6e7fa55839991b227d5ed8e9a0"
+at = "T=u32"
+embedded = "1bb5ed0e56fdb9abf52d5a33c3af83b6e0cb25d30ad7336ccf0d550f11f75017"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::peek_bytes"
+kappa = "293ed628e0d1af5ffbb46d3251eee2fa995ec10df753830e0de9d63d5623128d"
+at = "T=u32"
+embedded = "b8684156767823b7830e31e439877e7a92453cd0c8cd2379dcfcc837b67fdaae"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::peek_exact_bytes"
+kappa = "675f973e5bd9b6490834fee8354edc7823b24aeaf5c36273df57a46a34d5b4f4"
+at = "T=u32"
+embedded = "c1305a7704fbfb4c68f74a765badcaa78d1957661f53bde37f36274af9e98279"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::read_byte_no_error"
+kappa = "e7cc90cd0724b07ee530e7a3f4742bf7aeaed77b8bc28ce2b0118b6e679b9b90"
+at = "T=u32"
+embedded = "50e23e0072b4f6f5b76e8d8a00b4dc999060509a69ee701e35e7574be793f0ed"
+status = "residue"
+cause = "mir::Ty: no_std_readers::ZCursor<u32>"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::read_bytes"
+kappa = "299e2fd9df7c121f7749d65df7355e9ba1407b041452c589d1bbf5ef2d474c91"
+at = "T=u32"
+embedded = "907c34be9390f7e39610171581d8ae0332d6e094ae44a8e62a904557919216b6"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::read_exact_bytes"
+kappa = "ae078a11a54536ffa703cfffb9428bb5350d6dd3addf6f87f1272bb5269422ee"
+at = "T=u32"
+embedded = "a065224c053b6a7c9bc97cb6dab72dfb942d2cbc0291aac6e694cd28b7ed693e"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::read_remaining"
+kappa = "2eb63933bb07a7079568fd836876a64147910e4435184c68abf8654541f5dff5"
+at = "T=u32"
+embedded = "1828a567f4c77c8a50b231eae2f7f0e02c3a9698264af4da44b092d7cca2f529"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::z_position"
+kappa = "ce6a7be1370e13774383f687eb13804e6f6e27575691f57ef1f88202ff734aac"
+at = "T=u32"
+embedded = "1312508b341712b35a496c998d1d91f2595bb7e0610f3be802590c371e14829f"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+
+[[fn]]
+path = "zune-core::zcursor_no_std::ZCursor::z_seek"
+kappa = "160803fe7cb21a09b0b121cff1520d6e4a01c6c96e46f9e5429344d44a684c89"
+at = "T=u32"
+embedded = "8e80a24c166178c9d462ba5a0feeec2043f3bfa1be7df060f004cbdadfb223ec"
+status = "residue"
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+

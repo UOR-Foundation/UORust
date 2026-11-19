@@ -1,0 +1,128 @@
+[[fn]]
+path = "sqlx-core::query_scalar"
+kappa = "e7a5fdad32c8055a855c64543b9b5f798744e1f119f216a9b65daca1ed0988f3"
+at = "DB=u32, O=u32"
+embedded = "c5b2cb9c4f34f70eec9f08d44b0d452dd616fc5ca35dfc6d9789b69637307bf0"
+status = "residue"
+cause = "mir::Ty: query_scalar::QueryScalar<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::bind"
+kappa = "be2dca4e894aabe88dbf940ad4714fd246a552607cd8e45d1f299c0db4a1db07"
+at = "DB=u32, O=u32, T=u32"
+embedded = "12946a2f3848a5e245e9bee9b1b6c129a54d190f7a7eaaed95cc0f00774f9ec8"
+status = "residue"
+cause = "mir::Ty: query_scalar::QueryScalar<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::fetch"
+kappa = "4603c9e5343aa9ad310828278eda58b2b1e85f644a0dd01fe0b6ccb1cb9285f1"
+at = "A=u32, DB=u32, E=u32, O=u32"
+embedded = "f4eff6d589a3b9132692664c9a290b03bb78f837fccf5059b8dea876952d42c4"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<u32, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::fetch_all"
+kappa = "46ec691ad77262943db973183900abed36b6b764678b6b544553289071d7a860"
+at = "A=u32, DB=u32, E=u32, O=u32"
+embedded = "ad056b6849c8d3ec3ef2632a9f7a8c4654eccd8d135170207e497df354cd7623"
+status = "residue"
+cause = "mir::Ty: {async fn body of query_scalar::QueryScalar<'_, u32, u32, u32>::fetch_all<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::fetch_many"
+kappa = "9f46e255d7166c99432e9a2ea25d59d41c420363f701d3566eb15daef16bde9f"
+at = "A=u32, DB=u32, E=u32, O=u32"
+embedded = "6e682c2dcf73fd351fe927b2f60f4b5e24b1d7245856dd3baa0fab5787d685b7"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<either::Either<u32, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::fetch_one"
+kappa = "dabb0320f9c8261b6ad3821293bb1acc3cee6ad5e7c7671e9bbbd81562101b8e"
+at = "A=u32, DB=u32, E=u32, O=u32"
+embedded = "71bbf9cc7554b69da5d7502bf5573403cd835f96b25831bbee396b39993f2f91"
+status = "residue"
+cause = "mir::Ty: {async fn body of query_scalar::QueryScalar<'_, u32, u32, u32>::fetch_one<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::fetch_optional"
+kappa = "f12b5568c8f006002b278cc8bf775228705b78a8043c2b7a9bbd178e9f3eb022"
+at = "A=u32, DB=u32, E=u32, O=u32"
+embedded = "16801a18d028bce32f4f57a161c84c39355578619bafaaddd11b9871ef03194f"
+status = "residue"
+cause = "mir::Ty: {async fn body of query_scalar::QueryScalar<'_, u32, u32, u32>::fetch_optional<'_, '_, u32>()}"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::persistent"
+kappa = "c25249a5b6cff1366124811c872d2db2cc6ad4bb3404ca6760ff72d44cc9cdf7"
+at = "A=u32, DB=u32, O=u32"
+embedded = "a571ed1c3bb67b6c94227481db5e71ed5c533b48181e6fac4217d6a1d39a6ab3"
+status = "residue"
+cause = "mir::Ty: QueryScalar<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::persistent#2"
+kappa = "8d9e752f3da4f6d7ba0e9ff0a22b85c173cb9f5722d6315752439860f819ffb3"
+at = "A=u32, DB=u32, O=u32"
+embedded = "387d74882ee41197fc51b6d3dce76f0801f0046e274375a136accd4b83fe320c"
+status = "residue"
+cause = "mir::Ty: query_scalar::QueryScalar<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::sql"
+kappa = "9d8b608ad2ad98bc33a7725e8b5a34ff1495fe52e2102dba314af74de2a4e274"
+at = "A=u32, DB=u32, O=u32"
+embedded = "2be628ec45c761af1604a3465a181171ad41f5ce4feb90339e5f42a6cc5bf4b9"
+status = "residue"
+cause = "mir::Ty: sql_str::SqlStr"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::statement"
+kappa = "bfc02b6cd1f6b18226c99f9db120e98116f80cd7413c3bb3a0d2c5ba3e258665"
+at = "A=u32, DB=u32, O=u32"
+embedded = "8e36b74ba36b65cb04a0ab292b7373217eee1d550c914be87a4dcdf580c80098"
+status = "residue"
+cause = "mir::Ty: QueryScalar<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_scalar::QueryScalar::take_arguments"
+kappa = "c7d57c0f18d2e1d1294da4a3ac0c943c41c456a71c71cc5cd6cfcbe64b7191ba"
+at = "A=u32, DB=u32, O=u32"
+embedded = "ba5f3d85593acd4add33ad521d9f895699687bc1f66ac416afe5f4da77889621"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "sqlx-core::query_scalar_with"
+kappa = "f0482da2324916de5e96a85771db882a64cd79cd2830fd2bb1fc69e49b9e8277"
+at = "A=u32, DB=u32, O=u32"
+embedded = "00560347b70e3e2992360e72c84810e4c37e0a1444c558abeb322a8741fea828"
+status = "residue"
+cause = "mir::Ty: query_scalar::QueryScalar<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_scalar_with_result"
+kappa = "72d359962658d127bea890c333280e3c3f172535b60e8ca9574db3307c47f311"
+at = "A=u32, DB=u32, O=u32"
+embedded = "ed64221860aaffb82e3fec1644756e0968d78d2f87d6cec9b8655fc62f41f508"
+status = "residue"
+cause = "mir::Ty: query_scalar::QueryScalar<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_statement_scalar"
+kappa = "1ef756ff5ab896483353f0ddb8cc69fbde78daeffb7cfbc20a08bba4de382d22"
+at = "DB=u32, O=u32"
+embedded = "d19763cf72e92fb923a79b739166799deacd67ec969fe60ef8f33032723b9a98"
+status = "residue"
+cause = "mir::Ty: query_scalar::QueryScalar<'_, u32, u32, u32>"
+
+[[fn]]
+path = "sqlx-core::query_statement_scalar_with"
+kappa = "5347b21a7f827aaf5c7d5ec3fe407dd7d85fd13003d29c93668cebcd55ee4f71"
+at = "A=u32, DB=u32, O=u32"
+embedded = "4b8c7a5ce086b8118d7e77c8b6773d86edf311ddaae4c479b05f8b60957c0b0e"
+status = "residue"
+cause = "mir::Ty: query_scalar::QueryScalar<'_, u32, u32, u32>"
+

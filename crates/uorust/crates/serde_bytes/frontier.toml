@@ -1,0 +1,127 @@
+# The serde_bytes register (written by `uorust crate serde_bytes@0.11.19`; do not edit): every body of
+# serde_bytes's MIR at serde_bytes 0.11.19, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 125
+translated = 0
+residue = 125
+
+[module.bytearray]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.bytebuf]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.bytes]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.de]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.ser]
+bodies = 12
+translated = 0
+residue = 12
+
+[embedding]
+bodies = 125
+embedded = 125
+evaluable = 125
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: ByteBuf"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: bytebuf::ByteBuf"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: ByteArray<#usize_N>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: bytearray::ByteArray<#usize_N>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: bytearray::ByteArray<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BytesVisitor<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: de::deserialize: serde_bytes's MIR stops at type outside the lift: <u32 as serde::Deserializer<'_>>::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Deserialize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AsBytes<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ByteArray<#_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::array::IntoIter<u8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomData<u32>"
+bodies = 1

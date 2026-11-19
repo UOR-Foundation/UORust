@@ -1,0 +1,463 @@
+[[fn]]
+path = "aws-smithy-async::collect::Result::extend"
+kappa = "2b5540fa5a19f211b2eeae403481d84c6cd74eea4515462061bba0a600960665"
+at = "E=u32, T=u32, U=u32"
+embedded = "69ed01815a901b9bc36829867d04685e1fc9475d95af2a979a435c466c2d8e3d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Result::as_mut"
+
+[[fn]]
+path = "aws-smithy-async::collect::Result::finalize"
+kappa = "12b213fd6bcdd2db288dbeae4d1edc77acae243363b7580b00c29e9781f87c67"
+at = "E=u32, T=u32, U=u32"
+embedded = "c141a3b2005d39feb1005ecb0a77521c65870bc75329f050efb8b151db952194"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Collectable, which u32 does not implement in core"
+
+[[fn]]
+path = "aws-smithy-async::collect::Result::initialize"
+kappa = "f3f12b5a03dc79e63a175eb0fac5728592d86b57bf3df4af70e4745088e19db9"
+at = "E=u32, T=u32, U=u32"
+embedded = "9aa1169099b88ac6b0b7f3d7762d3c6bc620e3281a5d11ff8d873b728d490861"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Collectable, which u32 does not implement in core"
+
+[[fn]]
+path = "aws-smithy-async::collect::Vec::extend"
+kappa = "da5c79c55640f8ce46596a6ce32450cad6ff290c87d8740d983c102f679294e4"
+at = "T=u32"
+embedded = "94810da52d3cdc94924634312df672373b4cc888ccd6d8e5fdc424b5ec2552fa"
+status = "translated"
+digest = "dd270ee28009e6f99ffbcbe9c756fb4ed8a329e302d4bc3b1b6e88f3a2b64a9b"
+
+[[fn]]
+path = "aws-smithy-async::collect::Vec::finalize"
+kappa = "888a0f2bf1495a129bb70161773f63962d54cc182b8cc50514fc676741dd5781"
+at = "T=u32"
+embedded = "a071173644e345ac14f73a0cd00fda47f36ea57375b61a369ed67edeb6407948"
+status = "translated"
+digest = "4c07dc6914e722bd76161c746afef83d17636e102fa98a13b47e5540ece086a6"
+
+[[fn]]
+path = "aws-smithy-async::collect::Vec::initialize"
+kappa = "d769fb21a94ff502d48814165fafc6931ec6b8b442603696b1be1c01f4524e91"
+at = "T=u32"
+embedded = "811d8548e74c26c68c4011bce13461c8edba2ea131044605c3ac2d7a0e8d484c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Vec as Default>::default"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::FnStream::collect"
+kappa = "ab22a1dca3101e60b6b9a8ebc28fb837704b45b6a05030e88319b1427dd7761e"
+at = "Item=u32, T=u32"
+embedded = "dcabbda09182e286a0a0fd0dc9afc65863a552b5ad8ed9aa3d34589144eca897"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::pagination_stream::fn_stream::FnStream<u32>::collect<u32>()}"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::FnStream::fmt"
+kappa = "867c4852644fcea420f9441264c3691f1979f81e76cb11f414d72e29842633d7"
+embedded = "2bb920fc1ff7c3abb40995e3998f8cb342b4a97d4e64f069466a4d0078db1807"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::FnStream::new"
+kappa = "ea1b91086393a0591f1a43933739f3964c0adce5a8c51ef4ac810abfa52eeea2"
+at = "Item=u32, T=u32"
+embedded = "4e6efdab67e6e22d94bdefb39ef222a64660588cc06e963696b960daede479e0"
+status = "residue"
+cause = "mir::Ty: future::pagination_stream::fn_stream::FnStream<u32>"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::FnStream::next"
+kappa = "47fefbd612d626d4a0ab02bab17ef95e59f683873d0285f485a0a2b95a13efad"
+at = "Item=u32"
+embedded = "2b8c3880d42dfc59691659f2869f74ad2e75469ea097d35b01f4abadb2fca9a0"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::pagination_stream::fn_stream::FnStream<u32>::next()}"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::FnStream::poll_next"
+kappa = "c36df36262f582d29a43b71c52011754c9fe2a5a0c581dc05566ea851bbfc796"
+at = "Item=u32"
+embedded = "5c1d4c0fbf9dd943eef02d6b02dd33c71b2f0759d951b0909a0c74f51f23e3b8"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::FnStream::try_collect"
+kappa = "3795da903be78ed1cce0473affd053e97ece91d5e79f7e89badbe069ecf7437b"
+at = "E=u32, T=u32"
+embedded = "aa7ed4c43c866f74b75df137506ebdf40effd49daa07827964f3fb7ae1e93f3c"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::pagination_stream::fn_stream::FnStream<std::result::Result<u32, u32>>::try_collect()}"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::FnStream::try_next"
+kappa = "709b5a993a114f6946a8328f9348f5117d3131e1d8053acb7d8419e51c27b988"
+at = "E=u32, T=u32"
+embedded = "10d7ca7733f8b825b99ec496af098bc79e0f862aa3f3a305746572d231450d4d"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::pagination_stream::fn_stream::FnStream<std::result::Result<u32, u32>>::try_next()}"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project"
+kappa = "58b5ac4f746756ff0202c76d01e14890acf030a503c8842a657dde12d713a6c0"
+at = "Item=u32"
+embedded = "ee3eb078f74637af75200d8a35b2a91e165741f7dcf7e703b1879a13985059c4"
+status = "residue"
+cause = "mir::Ty: future::pagination_stream::fn_stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project_ref"
+kappa = "2bfe4f5f887abe30d2d81d4e3cb01764db5908a66e1753b8a1a2a3e99037538d"
+at = "Item=u32"
+embedded = "ec88746ed50f63a42e5b861a7d0ff78b2710b0ff61c197ed35579c0a22a293b6"
+status = "residue"
+cause = "mir::Ty: future::pagination_stream::fn_stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "aws-smithy-async::fn_stream::_::__assert_not_repr_packed"
+kappa = "9ca3c41a206511929979c50a43713f7653dee14ae4585e7135000ce29b0d3519"
+at = "Item=u32"
+embedded = "ca88528a4b8b67acaad6b4dccc78295e05e779dd4de814fa6e4ee0d4fddc36ac"
+status = "residue"
+cause = "mir::Ty: FnStream<u32>"
+
+[[fn]]
+path = "aws-smithy-async::future::never::<impl at src/future/never.rs:14:10: 14:17>::default"
+kappa = "b06332af43d5cc3adad09bf4282b636fc2af657484b308baf2d976c629a40c3d"
+embedded = "359277d8a35fd393ac69f2d3395ed59d839bed1c1a73600c4ea90778da138104"
+status = "residue"
+cause = "mir::Ty: future::never::Never"
+
+[[fn]]
+path = "aws-smithy-async::future::never::<impl at src/future/never.rs:14:19: 14:24>::fmt"
+kappa = "37ad51ef66a284115fec669460eb567bdbb8aae02e85e491ef6201f6e7002797"
+embedded = "a37d5323e8e8a82d072e05187b0da39a388f71ad9ec1e0df3dd061d0ce8d3f90"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::future::never::Never::new"
+kappa = "eff1c4c5c515f132dd4b56992c28bdfda987fce29d559e85484be11c9e210648"
+embedded = "1036830e44422957a613243ac274990c7a3b1025d0cc7351293b08a22881a047"
+status = "residue"
+cause = "mir::Ty: future::never::Never"
+
+[[fn]]
+path = "aws-smithy-async::future::never::Never::poll"
+kappa = "82b81c6b58a74fcb6c6f72cdd949927b20b358519726ccaf2d76edc84b8a86a9"
+embedded = "36b8b656281f0ce4a1cb6595cc55d0e930f707c2a00299be43c8663c8f38c8aa"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<()>"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::<impl at src/future/now_or_later.rs:61:10: 61:15>::fmt"
+kappa = "bbf2a2e9cac0f555755d057f21481405dc1a28e27578b4dbb5a04a55f08e81e9"
+embedded = "bb74919d026c6de85783858dec034451a3d4878bffc4ce33fa617bdfddb11d6f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::Inner::fmt"
+kappa = "a422aaabc6518f8f83560f346415782dd0f150bb6183c5b4612be2fd9cd18a91"
+at = "T=u32"
+embedded = "16b99cfc0fb7e45cd409ca3553caf2c2b1db4997a70cdba4685e3ebd2ee50856"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::NowOrLater::fmt"
+kappa = "869139c50b9a4d8c9caefcf63e00a22ae35100ddab035eed79754cfdf87310ab"
+at = "F=u32, T=u32"
+embedded = "d2143b2fd10a7e44ad27562c95cea05c2eea868145c4faff44b50bc6c9ac60f4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::NowOrLater::new"
+kappa = "ba5ba312585e0547063e219e8b34938aabccd2886101f2d444f63c545aa0a4ec"
+at = "F=u32, T=u32"
+embedded = "7aba3809d1a29c27c8be85b16266f18ace7ab7ddd4c48bd22445cd95c865ba11"
+status = "residue"
+cause = "mir::Ty: future::now_or_later::NowOrLater<u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::NowOrLater::poll"
+kappa = "27a97a99ba2a434432b5781000b1791b4a196ff4fdd476597986e5e878f68a56"
+at = "F=u32, T=u32"
+embedded = "687b87ad90582b1d5b62ef1d9d537fdff924840995f3bdee44d3e9d4e30a5e97"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::NowOrLater::poll#2"
+kappa = "1f74d2e631334493305438d850fe91eed5b5faedf9492a29ed403e6137fdc8d5"
+at = "T=u32"
+embedded = "eb910002d43e01f83c8d9e9b919cd8ebd32454d816084e0ae486a923d0edae80"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::NowOrLater::ready"
+kappa = "c44e03a0999bb0a57e2be8c7b65713b79e7f57138ac0b398b210d05bc9b70194"
+at = "F=u32, T=u32"
+embedded = "a58258627eaa2d277ae06a873b25144c16a45d2057a683bb2aeb5614a110ac8f"
+status = "residue"
+cause = "mir::Ty: future::now_or_later::NowOrLater<u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project"
+kappa = "c8b2609ff4551e0c92a6521d7cf33cf329136291cf3521743d8bdf13be244c9b"
+at = "F=u32, T=u32"
+embedded = "d6757a8d8b481fe1b6430196778b65115b98c26e7b371b5f3585381b24b04c23"
+status = "residue"
+cause = "mir::Ty: future::now_or_later::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project_ref"
+kappa = "1930ecd1d00ae3b01457b81286640d9f03c8019fb0ef8e9e6dd393e001654fed"
+at = "F=u32, T=u32"
+embedded = "9c1dd042b06fb2a21c8578b0bbbe9bfd0e5d96d328208664545a90f91d85b2f0"
+status = "residue"
+cause = "mir::Ty: future::now_or_later::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:650:13: 650:63>::project"
+kappa = "424418c17b80a7ab7b3709632068dccb57dbdaf4babf62060ccea329f605e6b6"
+at = "F=u32, T=u32"
+embedded = "c8a4c40f5540fe95b52cc10780ba1f3106d5e1546310ba63efe2e6c2e0208e17"
+status = "residue"
+cause = "mir::Ty: future::now_or_later::NowOrLaterProj<'_, u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::now_or_later::_::__assert_not_repr_packed"
+kappa = "2bcfd81918a34432b16d98c6b96de47d391c09816f871d1d2cd35679e5695a77"
+at = "F=u32, T=u32"
+embedded = "7e4fc9a7fd6572da7ea0663ffec823bda972f03b90e7d0f1a03cfdfdd55416c7"
+status = "residue"
+cause = "mir::Ty: NowOrLater<u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::<impl at src/future/pagination_stream.rs:102:10: 102:15>::fmt"
+kappa = "c6da457b654621e2a984f1033c329697e7ec33567ae9b79712a83545e3ca37d7"
+at = "Err=u32, Page=u32"
+embedded = "7e26be0bdf513d8d886e860510a150d1d3da59038bc259170058e5245f9b8eda"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::<impl at src/future/pagination_stream.rs:60:10: 60:15>::fmt"
+kappa = "1838f463b25fad5510eebea1ff969080010f6fdb75070f031096820660847d74"
+at = "Item=u32"
+embedded = "d7b58b22f4c349fca46f8e3c189a15ba9c1325b6bd034f44adc0f613211d0e65"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::PaginationStream::collect"
+kappa = "b9a56ac38396046f5d6afd877e65ffbeda6fe43f5452938a0e02eb811d938dab"
+at = "Item=u32, T=u32"
+embedded = "3231afeefb0732466ab59ba231f1d8f90b802bb25adb887db3f33d8211aae0ab"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::pagination_stream::PaginationStream<u32>::collect<u32>()}"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::PaginationStream::new"
+kappa = "f4bf49844d64b4b9b199f98de3f7a7fa87c90544faf71df876e94c64b8f1dae4"
+at = "Item=u32"
+embedded = "49faaa2720e9a19e4971cd0160fc3443529e7b3a5d0d928b777a3ef4481bb549"
+status = "residue"
+cause = "mir::Ty: future::pagination_stream::PaginationStream<u32>"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::PaginationStream::next"
+kappa = "29016b8dc950cb7d9b35f6c4fbf4697c6e0fa33b6679e70492c6ae0c1f5e2a08"
+at = "Item=u32"
+embedded = "945bca744cf4d7786c0ed1354431e0b7ef4a4942546843cfc92e672cea032653"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::pagination_stream::PaginationStream<u32>::next()}"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::PaginationStream::poll_next"
+kappa = "ac60ef9e42e1db6b215ab3b511dd46f6684dda122642aca7930371014a2bc16e"
+at = "Item=u32"
+embedded = "b8b7fd3aa46688ac7cfba03eaff5e41d0ef0c0ff2724df28a29b993149b089c6"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::PaginationStream::try_collect"
+kappa = "b599b8b825f7deb47fec8b5c806aaabb74a4891464c40b9dceb766d5a7c74495"
+at = "E=u32, T=u32"
+embedded = "0c2e95eb17ce1510521fef9553f3af204f38f46e4183320664d73cee564365e4"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::pagination_stream::PaginationStream<std::result::Result<u32, u32>>::try_collect()}"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::PaginationStream::try_next"
+kappa = "d38ebd52b5c2f28651999769c9c3ccd2e198aa0fcfc7afefec88461d07a833e1"
+at = "E=u32, T=u32"
+embedded = "80827b5d13011172621bfe356cfa497ec01c16ebed6d38578b276840491f533f"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::pagination_stream::PaginationStream<std::result::Result<u32, u32>>::try_next()}"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::TryFlatMap::flat_map"
+kappa = "c6e8d67bba2cb55c0a3c058081d9d1c9291c53553863fb327d699901d85e18d1"
+at = "Err=u32, Item=u32"
+embedded = "0076ca9785718f9667151bb63ff113c0a8b358690fe006103c8ea4ecf4893f4c"
+status = "residue"
+cause = "mir::Ty: future::pagination_stream::PaginationStream<std::result::Result<u32, u32>>"
+
+[[fn]]
+path = "aws-smithy-async::pagination_stream::TryFlatMap::new"
+kappa = "6f23b72c30302091cbac2a323911afba087b6f1564b7b682ee5acb2e1ff0fbee"
+at = "Err=u32, Page=u32"
+embedded = "0581d3b5a2efb089acc409af7b86efc1b4c72136be36593b69c701928db151b9"
+status = "residue"
+cause = "mir::Ty: future::pagination_stream::TryFlatMap<u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::<impl at src/future/rendezvous.rs:71:10: 71:15>::fmt"
+kappa = "0f1e0736b721d45bffbee32bdeb5b5f454e047f4701eec051103b61c355a3789"
+at = "T=u32"
+embedded = "c2809bab932103663495aaf7d48dc3aaa81e06963ba1dd3716e8bfcbe48dd405"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::<impl at src/future/rendezvous.rs:98:10: 98:15>::fmt"
+kappa = "58fd3f631f407dcd3bbd2ff4020cf0ab36e7ddcb9fd9f18b40984f2ccf9e3fcf"
+at = "T=u32"
+embedded = "04dc4c3b3fddbd14743080eb60e8eafc7b3d53e513cfe1d69ed54de900b70c23"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::Receiver::poll_recv"
+kappa = "8053ce7236ebf76f346a21ecc57a5adeecbeabf0d9aa412a27a3e9ccbdaaaf9a"
+at = "T=u32"
+embedded = "db9354beed0f71fe853af639e4a00891a4150c50691f0696defaeb07e869da7a"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::Receiver::recv"
+kappa = "2ecaeb9c0f8b47fba43f13d664127913ee8056e5744ca430ba084ab3c452fa1f"
+at = "T=u32"
+embedded = "d41a5af81c0ea64597bc2727d86d8f8082a26afbf4404552ccda3f3c1d38aba1"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::rendezvous::Receiver<u32>::recv()}"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::Sender::send"
+kappa = "dee745b222e8a0f89e85e7dae79c7abc23eda8090ed04a2f4f238b836ba173a2"
+at = "T=u32"
+embedded = "19a55fa51650c273c76c7ab480d0d1820e601729bff51c35ca155d1a42368160"
+status = "residue"
+cause = "mir::Ty: {async fn body of future::rendezvous::Sender<u32>::send()}"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::channel"
+kappa = "f507c752423e81600d91fe21957d27d537cd881d46ae8e3584cd647798c718e4"
+at = "T=u32"
+embedded = "9e582b459dcbbf8e6b3229850eb832164aed8dcbe4b4046379da32aa110933d0"
+status = "residue"
+cause = "mir::Ty: future::rendezvous::Sender<u32>"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::error::<impl at src/future/rendezvous.rs:47:14: 47:19>::fmt"
+kappa = "43304254ae41ce1cabfd6bbdc2c019815f986615af342e6a675567dd75d14887"
+at = "T=u32"
+embedded = "066428d160fa8c57a1cf94879eec2a730aed2ddf84164511dbbcc9fa37209f28"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::error::SendError::fmt"
+kappa = "b078ec6dbc3032c3a3feefbc4ba78c1db4134edbf02b2b3ba74f7ac755f8d3b6"
+embedded = "498f9aca0adf69a34e8bea68d674f5e1d17ab6930e01933c87d0651bcc6f685d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::error::SendError::source"
+kappa = "46fb751244f7becd60334d2e54f514416764418ae95d78cef3a8b8faef567222"
+at = "T=u32"
+embedded = "d8bdb2bf0abceb938402dc75641e98852c8b426c5f57bfbc6ce9b6dddfead4c3"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "aws-smithy-async::rendezvous::error::SendError::tokio_send_error"
+kappa = "854ae94e185083cedd11a825492df95191fdc15800c3ad6245f6a98fdb71ea92"
+at = "T=u32"
+embedded = "bb77fe66fbc5e1789acd590f45e2a50c5394dede56823b99b1d52d98e26c92c8"
+status = "residue"
+cause = "mir::Ty: future::rendezvous::error::SendError<u32>"
+
+[[fn]]
+path = "aws-smithy-async::timeout::<impl at src/future/timeout.rs:46:10: 46:15>::fmt"
+kappa = "06da2a6dd6298fca83cf5c30b889ed9ffdcd21afbd5e80dce8d16814a4846931"
+embedded = "6b94037994261906c4881fa791985b2fe3febdf190d35f65b0bcd8f1b055307d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::timeout::<impl at src/future/timeout.rs:61:14: 61:19>::fmt"
+kappa = "d73c080ca77906d76a589a63045495e1656a259592943d0fa9838eb484b82eec"
+at = "S=u32, T=u32"
+embedded = "649dd11347763d3ebab3df23ae29c562eb60012cf6851a01bdc9ec8ac564e98c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::timeout::TimedOutError::fmt"
+kappa = "d4090f4ef95b64947d8557a853f4b88423dfb67c48e8beffc4b38e3a1dbdc097"
+embedded = "529c70ffe9c9f33794e7ea6c1bf6843625b09f38549189f4a5c7ed874b13027f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-async::timeout::Timeout::new"
+kappa = "3d06c3f087c12dc8d2c62cb69fd7be70331d6bbd21d7f468454d3dc5a1c4a90d"
+at = "S=u32, T=u32"
+embedded = "ace03531b9f78b2f8becc8eea71306d3688a7d5f823e862a465dfb1498856906"
+status = "residue"
+cause = "mir::Ty: future::timeout::Timeout<u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::timeout::Timeout::poll"
+kappa = "c7c73599040222600100fb471546be1132f1b85cbd00f5c9ab41f335409c23b2"
+at = "S=u32, T=u32"
+embedded = "ac5374e1ce1046f678a203f7812be7ced77406b826211d00f5a47ad7fd592bd6"
+status = "residue"
+cause = "mir::Ty: future::timeout::TimedOutError"
+
+[[fn]]
+path = "aws-smithy-async::timeout::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project"
+kappa = "5c1b5b040d4cc42513e1e8b20cc040b83cc0bf36dc0c450539a1c922abd5de07"
+at = "S=u32, T=u32"
+embedded = "b855408620f8d4fa7dc751f96356f771a74efb84ea8bcdeecab1ef82d61e8155"
+status = "residue"
+cause = "mir::Ty: future::timeout::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::timeout::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:529:13: 529:63>::project_ref"
+kappa = "7f0cda2cb0ef96087bfa9c1b0b14245237d2997212073c865b74fe2a26f2d7d6"
+at = "S=u32, T=u32"
+embedded = "ed5c6c71db1c88523847ff3e727d20172646e511b8e319930f35d7f89f88e4e2"
+status = "residue"
+cause = "mir::Ty: future::timeout::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "aws-smithy-async::timeout::_::__assert_not_repr_packed"
+kappa = "4035cb5593d9d3de4b25d5c072ca187dbe7d91bc8316222138be06350ccecc2c"
+at = "S=u32, T=u32"
+embedded = "a60e24256eb78003f004963750f7a402633280f938e259481364b5cacb3fbbfc"
+status = "residue"
+cause = "mir::Ty: timeout::Timeout<u32, u32>"
+

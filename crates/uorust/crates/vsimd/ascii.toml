@@ -1,0 +1,52 @@
+[[fn]]
+path = "vsimd::ascii::<impl at src/ascii.rs:5:10: 5:15>::fmt"
+kappa = "61a218b6d4812d0fecb09e5a15ce77f3573129e04be7e1da0f7e791a53e1ceb0"
+embedded = "0777d0be718faebd9d612ca849e001786d6560b970f6f40cdf0cb0f6b85511b6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "vsimd::ascii::<impl at src/ascii.rs:5:17: 5:22>::clone"
+kappa = "fcb9cbb592b22830ff5a273ab79837a31040dbb1fb6373f04b8bb6b75b728fa5"
+embedded = "c7f5afc461505df120a6b4b91a23761db0e61fcf30c29ea44c716c08c5e6a8ab"
+status = "residue"
+cause = "mir::Ty: ascii::AsciiCase"
+
+[[fn]]
+path = "vsimd::ascii::<impl at src/ascii.rs:5:30: 5:39>::eq"
+kappa = "b61324736c44c3ee5082b610e94d977e9a7954ca3b0100ee7c61a63fd1786edd"
+embedded = "62c9d4935ff9424585eb305a0cd4d60aa470effb9782738975da3d0a22978df2"
+status = "residue"
+cause = "mir::Ty: AsciiCase"
+
+[[fn]]
+path = "vsimd::ascii::<impl at src/ascii.rs:5:41: 5:43>::assert_fields_are_eq"
+kappa = "9bd99ab430bc67ab0429504dcec32c3025996e63210f64074cacaf10a28567ae"
+embedded = "0d557a8f30d4fe79e63490706ac52fc5fbc043b309f6f31b99f66b84b557fc58"
+status = "residue"
+cause = "mir::Ty: AsciiCase"
+
+[[fn]]
+path = "vsimd::convert_ascii_case"
+kappa = "5eff63bedfa5e3491e3e295edda6a953088c9f6ec46b77e3a548f18044472cc0"
+at = "S=u32, V=u32"
+embedded = "adb31080217c01496fee26c033ae06492314e67e87485ccc525843d11e7e51c1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item C"
+
+[[fn]]
+path = "vsimd::to_ascii_lowercase"
+kappa = "4411ac54d6337032192a5f481b4e1152c96c08cf10036052facd79f5cda45b2e"
+at = "S=u32, V=u32"
+embedded = "260c24388880f67243a7ea5e773d41253982dcc66c66f2dea0ba19721032028a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ascii::convert_ascii_case: vsimd's MIR stops at mir::Operand::Constant: the constant item C"
+
+[[fn]]
+path = "vsimd::to_ascii_uppercase"
+kappa = "e66303ccc849f10475246a280190a271e185986f9d7a555356bc2be5e026e822"
+at = "S=u32, V=u32"
+embedded = "e7636c30c1a3f9d33b2c79b116b60db42e8f5108c3e2a704a27c2fa097042955"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ascii::convert_ascii_case: vsimd's MIR stops at mir::Operand::Constant: the constant item C"
+

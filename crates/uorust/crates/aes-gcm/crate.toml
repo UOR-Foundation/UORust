@@ -1,0 +1,83 @@
+[[fn]]
+path = "aes-gcm::<impl at src/lib.rs:186:10: 186:15>::clone"
+kappa = "1c4a0f8254da086e69796b64548c5e799b10cac7b4f0f631756b429edb3200ca"
+at = "Aes=u32, NonceSize=u32, TagSize=u32"
+embedded = "af2182ef8b150ea8675862cad602bea18ecec6cea406c3ac98c8794b44cb0ae8"
+status = "residue"
+cause = "mir::Ty: AesGcm<u32, u32, u32>"
+
+[[fn]]
+path = "aes-gcm::A_MAX"
+kappa = "a9f6405cb95846ff00aef56e7afdfb78443b229fd4e4e449b04042b4f1365f08"
+embedded = "fa0db9a94c2877c9e1ab284090dafabfb8b302702641a287928c39c32c38a84b"
+status = "translated"
+digest = "281984a29edfb12cb5458411ee6f233b0d1f287b8329bb14117828f9d93d390b"
+
+[[fn]]
+path = "aes-gcm::AesGcm::TAG_POSITION"
+kappa = "b653d912fedec776fd5f9025f5c14573e8c148e59be7f262279f6b7a312fe3ee"
+embedded = "f280a9e2605cf3ee0474172e7cccc428e0ebfe0d217d88761b0e21db036d224d"
+status = "residue"
+cause = "mir::Ty: aead::TagPosition"
+
+[[fn]]
+path = "aes-gcm::AesGcm::compute_tag"
+kappa = "3062ab89180747d7d30516881109843038a6050304e0ecf5b89d26ff6287ad03"
+embedded = "5198a17a6c1fbb80fda32520863900f1139915e390ad377ca3fe5f25dc88cc89"
+status = "residue"
+cause = "mir::Ty: cipher::typenum::UTerm"
+
+[[fn]]
+path = "aes-gcm::AesGcm::decrypt_inout_detached"
+kappa = "fb0a5edef446de2696474cb3c7c65f0d48b26ad9182baae9d8f49eb7f1b6539c"
+at = "Aes=u32, NonceSize=u32, TagSize=u32"
+embedded = "b16d251e91e0d9eafa4c3ea5480502e310bb0584f2f5d5b8c6cc2304bc63462c"
+status = "residue"
+cause = "mir::Ty: aead::Error"
+
+[[fn]]
+path = "aes-gcm::AesGcm::encrypt_inout_detached"
+kappa = "98433c9490d7dc06df367e773146412e0325a5daaca00c64322d59a793f64cb4"
+at = "Aes=u32, NonceSize=u32, TagSize=u32"
+embedded = "a47910142c2afcfbdff22399fca9838a152062244a90928807d435b0a336ee28"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "aes-gcm::AesGcm::fmt"
+kappa = "fd90d29eebd986cc5e1428f65c98dccc2c1bb1ff02d9cc2b9ae96aad2f24e87f"
+embedded = "136a0998b846acd2b49cc4cd3c33a8b6017c9fe9a65c14b436096159c0c92842"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "aes-gcm::AesGcm::from"
+kappa = "d9f4b55901883542287a0693b8bd27d76171b4fac8acba5930dc3c42c5b2842a"
+at = "Aes=u32, NonceSize=u32, TagSize=u32"
+embedded = "80616390d72c61fe8f750dc1e2b6342893d4f6423720fe081416b189d2abfa59"
+status = "residue"
+cause = "mir::Ty: AesGcm<u32, u32, u32>"
+
+[[fn]]
+path = "aes-gcm::AesGcm::init_ctr"
+kappa = "36951fa66e9607926a2781aa3581149751a0e9f7fce63bf9cf14f019597dba61"
+at = "Aes=u32, NonceSize=u32"
+embedded = "2f17eab4e72eda7076b0064563c00ef5135a6cdd201a470bf0cc446b34f410fd"
+status = "residue"
+cause = "mir::Ty: ctr::flavors::Ctr32BE"
+
+[[fn]]
+path = "aes-gcm::AesGcm::new"
+kappa = "37150c8a08bbd79ccc153529f28e2b373b46cedfb241c829a7e17e2367ee5731"
+at = "Aes=u32, NonceSize=u32, TagSize=u32"
+embedded = "dbd0ce9b694571cc99f3f2b7567fc112fa1dc417052797f9efb92c483dc1a29c"
+status = "residue"
+cause = "mir::Ty: AesGcm<u32, u32, u32>"
+
+[[fn]]
+path = "aes-gcm::P_MAX"
+kappa = "b07d650f208dc23a8e9df82470e239b6ed7ae34dbdf6beed95618735bdb6045d"
+embedded = "97bb84d68c897f7b05b5896103b4d40be5a0a7a711ec2274802d8f2cbd6a2fe7"
+status = "translated"
+digest = "93d34f4356fba526382b43b34ddea4a3494cae1e59450401160bcaa3c64725d2"
+

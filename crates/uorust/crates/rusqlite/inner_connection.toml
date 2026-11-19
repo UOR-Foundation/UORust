@@ -1,0 +1,177 @@
+[[fn]]
+path = "rusqlite::db_filename"
+kappa = "8e4cd288f83f4aac63e79b40b093464a2523710eade91ef53fead511a9a3f18c"
+at = "N=u32"
+embedded = "3692baed57e638dc5ce22c685af8add4ce005d796519bfe9a6dd375b6353f68a"
+status = "residue"
+cause = "mir::Ty: PhantomData<&()>"
+
+[[fn]]
+path = "rusqlite::ensure_safe_sqlite_threading_mode"
+kappa = "d85673dd18e157c5d0e99d17154e5bfd94d6307fae881ca6d1f9a3f8db78670e"
+embedded = "9a397ed221ecaaed4bad969f142f85f78c40b91a615debc20e1e8aca31577fa3"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::get_autocommit"
+kappa = "9c0c74da1d770879a43345ab0274e9f04de381d8035a6ca86f6a7af508dc7fda"
+embedded = "4308dcecaf664a8a896531799f6bbed4ae816aed88643b910468ab8d4f9bfcfa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: sqlite3_get_autocommit"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::cache_flush"
+kappa = "c9fdab6a07848d41593b209ed31efb52163fecde7e4e3250f614d50f92859357"
+embedded = "2aa2aaf09b7d6d028ed22f7c442e52746652d4a6393f9634d15b159dfd92b02f"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::changes"
+kappa = "d938ed8d9024637d2268762399b61c00658abdb0623c6a642fb6550676a80e58"
+embedded = "837db93321ca4a8298116b4f09b8614b5168df0d89a99ce37d41c49e371a1e2a"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::close"
+kappa = "2dbe2bd946bd994ba936a2bcfc9959271b817a4672e74881e16dcbe779b2c281"
+embedded = "6858e5b22406b638ee347133f37df84f514849b0a95112c19ffd597076ae741e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::db"
+kappa = "d1ef650118dfb003dbf8bd7449beda60e264d258970a46ad471fbe9e39600b2d"
+embedded = "ff2a500ea1317dc341be1fa863e91661cd9e5d3a69353c46394cae964ef861ea"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::db_readonly"
+kappa = "4c0f635fc981745400f6d3b70ff32b5c6a58b3f011796d8346e602a57dbb7cad"
+at = "N=u32"
+embedded = "8099d6458d01e43e36170412ef89f7cff51ef127c46e219c5aa1902276b1ece7"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::decode_result"
+kappa = "e351cc2acdc58933d4224c6b373f8b55423c96252d756893b3eaf5b834d26c0c"
+embedded = "372a301af80882e7d73a23ce5c3f48160cd5680e726ad7abdb764c12609f6af0"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::drop"
+kappa = "488ebed9b126f7c2847c70f426fdbbf77a26f839e90cab5cd85978cb36fe6a05"
+embedded = "6f332e0c3b757304ef27ca1cff5e2dbe317027b9329997d89d1bbc9d57671ff9"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::file_control"
+kappa = "d52d111e2135c21c6500ad6a6039cbc03bfd290ffbdcbcd0e7ece3f5496adf2a"
+at = "N=u32"
+embedded = "2093a17b924e60204448d5e6a82c670f9513449d18af07acff67ccd9bd1a07be"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::get_clientdata"
+kappa = "94863a130e5f05e1a6dd3075ec1ab3f3bafb26be898f8af0ad655a7cc77d31d8"
+at = "N=u32, T=u32"
+embedded = "f2a30f55ae171ab030f0ecfa2d565c06fee892d9ff94232b87a4d244b106be09"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::get_interrupt_handle"
+kappa = "12b425238bc7e2d7f8cd4d5e7bd41d243dd8dcdf89631bd32820e1fba97ab692"
+at = "InterruptHandle=u32"
+embedded = "6b3e21d342c259abbfd6758f17b0cadf4dcfb7a30c1657a12659fd4f28816260"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::is_autocommit"
+kappa = "9e8ced4a81288c6f053adb70cf5f4f4618e8698e222effde13ba90415cadc252"
+embedded = "b7aa62b1f0d6583c97723df4dccf5a734de9b400286a7551200956babb731de5"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::is_busy"
+kappa = "1ae3eee280f31511e5e0ccbddfbc708c3539d2fd000c48d23b99f7c5476a6128"
+embedded = "d7436ccb5ef673070072213e04bcc802b068ef458544421f8dbc054ff6fb83e8"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::is_interrupted"
+kappa = "c178e77d68cccae1dbe27d2e60124b1048230e2911c654ca5c4d9f0d905a77a2"
+embedded = "bbc20f7b6ef5160d45d63481cb9974e8feabe0625d99504e83c0ce625c5f1ead"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::last_insert_rowid"
+kappa = "a76db3064e5d39fd2fb0a217c0b03f2075587458f8c98c639c186261bfcfd70a"
+embedded = "56993ca6b7c882d7c1f8aea8553f6067777486c88ddeff649b2e6cfd080867f7"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::new"
+kappa = "56e6e6b64ba749b639eda0d2a7f4421603e37f96f082b30a066c484b0223520d"
+embedded = "920737e11f7e913f0e4ce7500154172a91ded4c2e480fc80c05e1bee3d877fe6"
+status = "residue"
+cause = "mir::Ty: inner_connection::InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::open_with_flags"
+kappa = "4013cf980cd110b320718c9621c947d89c90ab3c5f438713c06669ac3fc35c8c"
+at = "OpenFlags=u32"
+embedded = "a9da6632894aae464ad5b9dd3c64bb805d9e27e01acac01eb7075ed67271d2af"
+status = "residue"
+cause = "mir::Ty: inner_connection::InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::prepare"
+kappa = "4c9824d78ac6869e0031a62ad48d24940e04860254e90c01a8a981c83268deb8"
+at = "Connection=u32, PrepFlags=u32"
+embedded = "16bdb14db389b0ff1c892b5aea1b6c9b57b2d5d56a239de4a073fcb4606f8d5d"
+status = "residue"
+cause = "mir::Ty: statement::Statement<'_>"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::release_memory"
+kappa = "c30b630e455d1698513d77fedc00bc8bd532925b675846332d67b4a24ac9b028"
+embedded = "95495bac5fe5e2695bf6208ac58d78af660d3c7f3dd2db4eddcb87b3ff82f02b"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::set_clientdata"
+kappa = "00e0ede934ace659c4d0f433d64733ff8b423ff43e2fcbe95692d4971ef96590"
+at = "C=u32, F=u32, N=u32, T=u32"
+embedded = "2322894ac90ad16817e01ccc685eedb441b6e73f6c88d1d0a029a7ea1c95c1c5"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::total_changes"
+kappa = "0fc104973f9329039dde210e988ed41b8455e6bc2a90d871af56887cc4e2910f"
+embedded = "6ab88d22fce1ad349bf5ec13f1e4ee1c240e580aa94c505b2596bb0009502551"
+status = "residue"
+cause = "mir::Ty: InnerConnection"
+
+[[fn]]
+path = "rusqlite::inner_connection::InnerConnection::txn_state"
+kappa = "1875778d83da43158ac9944d3a2e47fc6a43ccf5165c3539efb35d18afa41e58"
+at = "N=u32"
+embedded = "363a440db652b6303d83dc91c2ea89748b70e8120108440b0a5032546d543b02"
+status = "residue"
+cause = "mir::Ty: transaction::TransactionState"
+

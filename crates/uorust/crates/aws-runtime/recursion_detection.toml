@@ -1,0 +1,49 @@
+[[fn]]
+path = "aws-runtime::encode_header"
+kappa = "07bdc147fe327e36cd2aa08e2713691806c1fadce3006bc2e650846a47161dc7"
+embedded = "50d6435538d2f85b289ae5b71510d2fbf82635c5b9d4a527780233c6ec0caffc"
+status = "residue"
+cause = "mir::Ty: http::HeaderValue"
+
+[[fn]]
+path = "aws-runtime::recursion_detection::<impl at src/recursion_detection.rs:30:10: 30:15>::fmt"
+kappa = "2c3e700287306e5d7212f18140928047b97b2d8daa796a93e6c0da473a34ad4f"
+embedded = "b48429ddb35510f27df4923d40ed94462acfbc7d159fe21f8feb383c2b16252a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-runtime::recursion_detection::<impl at src/recursion_detection.rs:30:17: 30:24>::default"
+kappa = "6400ce7fbc26064c0f9dea7deab190d9c7de683687750c3c74d97d20fec9c255"
+embedded = "2d4614eee3aab45bdb084770903aa198c9ddcd90540a7df178e61dd44881d7bb"
+status = "residue"
+cause = "mir::Ty: recursion_detection::RecursionDetectionInterceptor"
+
+[[fn]]
+path = "aws-runtime::recursion_detection::RecursionDetectionInterceptor::modify_before_signing"
+kappa = "843142ae2748242044fb846d6c3cff9591264e44027c14454c3251be37e5909e"
+embedded = "0d309c8bdd4fb1b98a3247cad96e0748bee8e754a5741d1ff6cd7456b6f633ab"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "aws-runtime::recursion_detection::RecursionDetectionInterceptor::name"
+kappa = "62d3cd0f15bf52dd30602c045ab6fcb0524c6809107ec34236df987ae04ef983"
+embedded = "c0f099988930e4b82ee6adb970cdec76d61e80013389d5498475e971497230e6"
+status = "residue"
+cause = "mir::Ty: RecursionDetectionInterceptor"
+
+[[fn]]
+path = "aws-runtime::recursion_detection::RecursionDetectionInterceptor::new"
+kappa = "44e4185e48a0ba74700a2927a337d131e50f4bf274ee43c16e644bf15d1add9e"
+embedded = "f9fd56e1280269e9aeaa7e68d02d039cf0d3b53728f6abe31d7ec53c051709bc"
+status = "residue"
+cause = "mir::Ty: recursion_detection::RecursionDetectionInterceptor"
+
+[[fn]]
+path = "aws-runtime::recursion_detection::RecursionDetectionInterceptor::overridden_hooks"
+kappa = "6672ddf19a38e8035c865062320e98e11af0395d3d4d7da4a2dee74530f4eacf"
+embedded = "7c3931704daaac455a2738b7f3349632f68424a8ce1519f4c8b94bbdd8278dc5"
+status = "residue"
+cause = "mir::Ty: aws_smithy_runtime_api::client::interceptors::OverriddenHooks"
+

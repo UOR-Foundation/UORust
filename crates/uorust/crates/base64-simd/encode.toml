@@ -1,0 +1,162 @@
+[[fn]]
+path = "base64-simd::SPLIT_SHUFFLE"
+kappa = "b86294ae5c043420b30d24373f36e8abf3c7dce9f2f482cede7e8948ca72801b"
+embedded = "5d2fa43b05034d7ff7432aef02e87c1b8947d7df9f334c76130ba0d22e5b4fd7"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V256"
+
+[[fn]]
+path = "base64-simd::STANDARD_ENCODING_SHIFT"
+kappa = "de4b19cfb200f3f087570c8f7f2524a23dbdcedd4359f1b2008398b7f438b07f"
+embedded = "6e9341dceb279be15f29262ad220a3cb26ce2d0785ec944d064d938a0c8e028d"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V128"
+
+[[fn]]
+path = "base64-simd::STANDARD_ENCODING_SHIFT_X2"
+kappa = "59fac592888654094c96e671217dc7adf2f8f4c65ae2beb918f0cb9ac73cf4b2"
+embedded = "2f24b84a752a0c5ac7d03bb98f4ec74930164e81f68692e418c95ecbc32e015a"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V256"
+
+[[fn]]
+path = "base64-simd::URL_SAFE_ENCODING_SHIFT"
+kappa = "c1cd3b6303739ea2073deea82866d3212d8bfda49b029e85055f35679d235d3d"
+embedded = "b6d7c8f2090807a4b6b9c35b2d9a2435e8b50fe6aee38b1e34e257dd309a737b"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V128"
+
+[[fn]]
+path = "base64-simd::URL_SAFE_ENCODING_SHIFT_X2"
+kappa = "d2b7264fe9a57c7acb8b96906fb06149e89c61d1b5a2f499728efb778737e031"
+embedded = "778216139df0a038be0dfbeac16d77cf43c823db0c5a01512a39482570ed9bb5"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V256"
+
+[[fn]]
+path = "base64-simd::encode_bits24"
+kappa = "beed64e7d91ede86934a6bad31cee9bfeebca195d7adef6bdbfb463c804d0caa"
+embedded = "fe11919a6f9beac798c64bf8e721ba00cc402b9c6bb68860d61731e56e02d7fc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::tools::read"
+
+[[fn]]
+path = "base64-simd::encode_bits48"
+kappa = "94814a905b18245aca2380bbeafd8d9946ccffac6a78492dfe4a7303108239a7"
+embedded = "cb9659f0ad46dc075f9176f67fe8cc28048eaf6c29744683b66779c94d7a5e7f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const u8>::cast"
+
+[[fn]]
+path = "base64-simd::encode_bytes12"
+kappa = "d76731856e50f5a70bc2cf98196b98de5161ff6566080bce3745341a4a9f15d7"
+at = "S=u32"
+embedded = "9e8435c5317a07716bf672ead40c0e5a2b06e7be37a1cab8375700dd57f161c1"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V128"
+
+[[fn]]
+path = "base64-simd::encode_bytes24"
+kappa = "e9ff29da03ffe716fd881fbc3ecc2d7261f03ab5573672363b3b20ab20f1efe2"
+at = "S=u32"
+embedded = "856f9dd8ad18f41f9ee3276ce89100dbe7a18feec26142fda51846d0912d8f3d"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V256"
+
+[[fn]]
+path = "base64-simd::encode_extra"
+kappa = "58ae22fce5e74cb5d3e717bc070eb1c78aedecaad9451f7700fd4f8f64f47536"
+embedded = "20db0a35db39ef9cd9451de65eebba2522f192aa1731f168787651589137bb53"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::tools::read"
+
+[[fn]]
+path = "base64-simd::encode_fallback"
+kappa = "fe17e756be3475ba22edd3ad441cc452963800c0aa7c5866363a67aacc3ebbae"
+at = "Extra=u32, Kind=u32"
+embedded = "2f142b1bda24ac215aaf7622c93d5c6f48db391aa4f87ea3b210382962aab935"
+status = "residue"
+cause = "mir::Ty: Config"
+
+[[fn]]
+path = "base64-simd::encode_simd"
+kappa = "848f16a2a3f515bf116d4684c38c2fee2182d4b3f9379006e7c2a168182de57f"
+at = "Config=u32, Kind=u32, S=u32"
+embedded = "340be7545c4d8e17088144037674b5d23481af05e33480b11bc447dc65a3f45d"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "base64-simd::encode_values"
+kappa = "b609502725185ce8bd1b9c24e015b4eb0012740fb59185bf7678277f83e468e6"
+at = "S=u32, V=u32"
+embedded = "c81c3152e5e00d99355ad81cd5b96fc3b263242019b32fdcbc86f60edfd2471e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Scalable, which u32 does not implement in core"
+
+[[fn]]
+path = "base64-simd::encoded_length_unchecked"
+kappa = "6a28f0eb561e84b6bb0bac27b1a338cc92b7821243bb3ef77cfb1f63b2b3eded"
+at = "Extra=u32"
+embedded = "c360e1804e1b9cdc407f80249b85c312784410dbc0fb686e82b7b13fd8dc880e"
+status = "residue"
+cause = "mir::Ty: Config"
+
+[[fn]]
+path = "base64-simd::encoding_shift"
+kappa = "273bc8e95d3c64125604664c2c28a5b79a78ef404ffd97f7e0f1b7a493f3f378"
+embedded = "76d4b1d309630285259a3336f8f41c22da9dd16c2882db9221bbccd1a1b9c4fb"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V128"
+
+[[fn]]
+path = "base64-simd::split_bits_x1"
+kappa = "c4311211af5a3d422229dbe4e267a5b0dac231a3bd8ba6bd83847d83d6c70017"
+at = "S=u32"
+embedded = "63d881c88ee031a243676386115a6c7d4ce21f5bed17a10953bd1d9ec79ff0a6"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V128"
+
+[[fn]]
+path = "base64-simd::split_bits_x1::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/vsimd-0.8.0/src/isa.rs:70:9: 70:46>::VALUE"
+kappa = "f41d0b1f0c1a81ad072a0cb900b824d55e0385558dce4235bcc8e8b413bbb3f8"
+embedded = "f1a9e4170d9b502b85c729dd8fa9342f7e7f8dd5e03c375d028b68b5d3ba9b7e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::isa::matches_isa_impl"
+
+[[fn]]
+path = "base64-simd::split_bits_x1::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/vsimd-0.8.0/src/isa.rs:70:9: 70:46>::VALUE#2"
+kappa = "3da87b88dbbdbd0f1fa8aab2ca49471d896ea7d3a3b8f954c6b6ec5c7153e4b8"
+embedded = "2547e394ae6277a04bf633e458b88bda6e2ccad513c3de6bdc0629d05d782760"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::isa::matches_isa_impl"
+
+[[fn]]
+path = "base64-simd::split_bits_x1::SHUFFLE"
+kappa = "88b4f5133b15d0f577af7bf79b7ff86e0972afc4a1db1f5e28a4e6ab8aab5fd6"
+embedded = "1a1ab0b34c43432fda8d8f9836807aa6d31cc54921ee7bff8f44f3c3927d4df8"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V128"
+
+[[fn]]
+path = "base64-simd::split_bits_x2"
+kappa = "4877ae183affe4e199d5d28647db99ffa6e57a73e362e394c109d3b57377d2cd"
+at = "S=u32"
+embedded = "c3cd515ecd56f82dd923d756a95be3fd3265d5eaa94751030fcccd8059cfdaee"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V256"
+
+[[fn]]
+path = "base64-simd::split_bits_x2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/vsimd-0.8.0/src/isa.rs:70:9: 70:46>::VALUE"
+kappa = "7db9ebebb9669189fa2de0f8432050010eac9fbc3c20392a841018229324a2d5"
+embedded = "fbfa2813a663e8dfba94cede1f9d50c5ac53d83cebc1514335fb2871d2be6298"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::isa::matches_isa_impl"
+
+[[fn]]
+path = "base64-simd::split_bits_x2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/vsimd-0.8.0/src/isa.rs:70:9: 70:46>::VALUE#2"
+kappa = "f7b892ad0584a5d4cc08ac53ae6ed53bbe1c4a2bb344a5a242c0b41a221ff09a"
+embedded = "c54f01b801c49c799b9b1b74b80d86b152d86a514cb8d1dcb1f0bd54786df79d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::isa::matches_isa_impl"
+

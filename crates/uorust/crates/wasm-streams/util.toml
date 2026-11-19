@@ -1,0 +1,53 @@
+[[fn]]
+path = "wasm-streams::checked_cast_to_u32"
+kappa = "b9924f6756847b055cefd5caa590f34102a43c3f1fe1b3a796bfb86757ed97d7"
+differential = 7
+embedded = "eb25142e4e43f54eb267396f46359be626639fd22af5d7adbd3dfbda7ceb59e4"
+status = "translated"
+digest = "a1e0515ac8c1a7b817a070b6474b9cd3938d21a0f15e4dea3a8fe6219824e6a9"
+
+[[fn]]
+path = "wasm-streams::checked_cast_to_usize"
+kappa = "e5860524c19b4d186fda4a023d0ac892df03c87325da66a5ce64d78dc0fba791"
+differential = 7
+embedded = "4a60a5b3c7428be8240fbb272aca60dfd1120d63362fc42e5d8002a7f5c06437"
+status = "translated"
+digest = "9e7729513135944eb1bb302663f7792d732e524fef5fbb3a39345ad1d39bc2e5"
+
+[[fn]]
+path = "wasm-streams::clamp_to_u32"
+kappa = "3241d0cfb9b627277b3331024ea2bd123111dc0a7e7fadf5bb8df6486460db2d"
+differential = 7
+embedded = "19a957d5e29a532092195f896de68c532c8396ef878702e69edd780e10a2cc88"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "wasm-streams::clamp_to_usize"
+kappa = "20a1efe12ad39f141b9ce408cb2835e6eb916056ac816c06caa144ee80964e21"
+differential = 7
+embedded = "357b81478db3dbd958e784c4b0db16b88f2b8719ba447769a5d282bb1f3bf95f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "wasm-streams::js_to_io_error"
+kappa = "3542153a60576bc7c06723f19b066b9360acdeaad1d14c395627a1f37af61a06"
+embedded = "e7c82b8c7ba1567dc20b64861961d8505644076fcb0d4f135baff4c4ef20604c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "wasm-streams::js_to_string"
+kappa = "b726d675cbdf40b12387e0d6118b147159fe54dad0e766dbdc2b54ccf6924f3f"
+embedded = "0abaa110756837c86bdb17baa4dcfdd317509cabf4ada892466e9ea272902ddf"
+status = "residue"
+cause = "mir::Ty: wasm_bindgen::JsValue"
+
+[[fn]]
+path = "wasm-streams::promise_to_void_future"
+kappa = "911697d5a56e863bf025a88183d22e6d5f68e21967d9144b5d4847f43280e90a"
+embedded = "41e92e347ce809c2214425ffab16f5a28c93f49120cd7b4221443a58de334ac0"
+status = "residue"
+cause = "mir::Ty: {async fn body of util::promise_to_void_future()}"
+

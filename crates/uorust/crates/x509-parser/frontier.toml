@@ -1,0 +1,569 @@
+# The x509-parser register (written by `uorust crate x509-parser@0.18.1`; do not edit): every body of
+# x509-parser's MIR at x509-parser 0.18.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 675
+translated = 3
+residue = 672
+
+[module.certificate]
+bodies = 65
+translated = 0
+residue = 65
+
+[module.certification_request]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.cri_attributes]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.error]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.extensions]
+bodies = 258
+translated = 3
+residue = 255
+
+[module.objects]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.pem]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.public_key]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.revocation_list]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.signature_algorithm]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.signature_value]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.time]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.utils]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.visitor]
+bodies = 63
+translated = 0
+residue = 63
+
+[module.x509]
+bodies = 86
+translated = 0
+residue = 86
+
+[embedding]
+bodies = 675
+embedded = 675
+evaluable = 671
+blocked = 4
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 2
+
+[[construct]]
+construct = "Rvalue::Aggregate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 80
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: extensions::ParsedExtension<'_>"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: time::ASN1Time"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: extensions::X509Extension<'_>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: signature_value::_::asn1_rs::Oid<'_>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: x509::RelativeDistinguishedName<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: error::X509Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: x509::ReasonCode"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: extensions::NSCertType"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: extensions::ReasonFlags"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: certificate::X509Certificate<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: keyusage::KeyUsage"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: x509::AlgorithmIdentifier<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: certificate::TbsCertificate<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: x509::X509Version"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: signature_value::_::asn1_rs::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: x509::X509Name<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: revocation_list::CertificateRevocationList<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: certificate::Validity"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: cri_attributes::X509CriAttribute<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: extensions::AccessDescription<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: revocation_list::RevokedCertificate<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: certificate::UniqueIdentifier<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: cri_attributes::ParsedCriAttribute<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extensions::BasicConstraints"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extensions::PolicyConstraints"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extensions::generalname::GeneralName<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extensions::AuthorityKeyIdentifier<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: extensions::InhibitAnyPolicy"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: extensions::KeyIdentifier<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: extensions::PolicyInformation<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: pem::Pem"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: public_key::ECPoint<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: public_key::RSAPublicKey<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: revocation_list::TbsCertList<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: certificate::TbsCertificateParser"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: certificate::X509CertificateParser"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cri_attributes::ChallengePassword"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cri_attributes::ExtensionRequest<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::AuthorityInfoAccess<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::CRLDistributionPoint<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::CRLDistributionPoints<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::PolicyQualifierInfo<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::SubjectAlternativeName<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::SubjectInfoAccess<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::X509ExtensionParser"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::keyusage::ExtendedKeyUsage<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::keyusage::KeyUsage"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::nameconstraints::NameConstraints<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::policymappings::PolicyMapping<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::policymappings::PolicyMappings<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::sct::SignedCertificateTimestamp<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: oid_registry::OidRegistry<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: public_key::PublicKey<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: signature_value::_::asn1_rs::Any<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: x509::AttributeTypeAndValue<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: x509::SubjectPublicKeyInfo<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AttributeTypeAndValue<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RsaSsaPssParams<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: X509CertificationRequest<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cri_attributes::ParsedCriAttribute<'a>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: der_parser::num_bigint::BigUint"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::NidError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extensions::DistributionPointName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extensions::IssuerAlternativeName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extensions::IssuingDistributionPoint<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extensions::ParsedExtension<'a>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extensions::nameconstraints::GeneralSubtree<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: signature_algorithm::MaskGenAlgorithm<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: signature_value::_::asn1_rs::Tag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CtExtensions<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CtLogID<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CtVersion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DigitallySigned<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EcdsaSigValue<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaskGenAlgorithm<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NidError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pem"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PolicyMapping<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extensions::sct::CtExtensions<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extensions::sct::CtLogID<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extensions::sct::CtVersion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extensions::sct::DigitallySigned<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: keyusage::ExtendedKeyUsage<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: policymappings::PolicyMappings<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sct::SignedCertificateTimestamp<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: signature_algorithm::RsaAesOaepParams<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: signature_algorithm::RsaSsaPssParams<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: signature_value::EcdsaSigValue<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: time::Duration"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: parse_implicit_tagged_reasons::{closure#0}: type outside the lift: extensions::ReasonFlags"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ABBREV_MAP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ATTRIBUTE_PARSERS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BasicExtension<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EXTENSION_PARSERS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GeneralSubtree<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OID_REGISTRY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RsaAesOaepParams<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SignatureAlgorithm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: X509CertificationRequestInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: certificate::BasicExtension<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: certification_request::X509CertificationRequest<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: certification_request::X509CertificationRequestInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::PEMError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generalname::GeneralName<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: nameconstraints::NameConstraints<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pem::PemIterator<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: signature_algorithm::SignatureAlgorithm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: signature_value::_::asn1_rs::BitString<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Cursor<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time::OffsetDateTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time::format_description::BorrowedFormatItem<'_>"
+bodies = 1

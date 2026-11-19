@@ -1,0 +1,90 @@
+# The hybrid-array register (written by `uorust crate hybrid-array@0.4.15`; do not edit): every body of
+# hybrid-array's MIR at hybrid-array 0.4.15, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 89
+translated = 0
+residue = 89
+
+[module.crate]
+bodies = 65
+translated = 0
+residue = 65
+
+[module.flatten]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.from_fn]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.iter]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.traits]
+bodies = 8
+translated = 0
+residue = 8
+
+[embedding]
+bodies = 89
+embedded = 89
+evaluable = 89
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Array<u32"
+bodies = 66
+
+[[cause]]
+cause = "mir::Ty: U"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: <[u32] as core::ops::Index<u32>>::Output"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Guard<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: typenum::UTerm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <u32<u32> as core::iter::IntoIterator>::IntoIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Array<core::mem::MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::array::TryFromSliceError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::TryFromIteratorError"
+bodies = 1

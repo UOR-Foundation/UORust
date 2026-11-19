@@ -1,0 +1,21 @@
+[[fn]]
+path = "lexical-util::char_is_digit_const"
+kappa = "e40f5f3de4cb38382624cf2c24ebf419b7e48515b80f979fb1dd68712ad9adb2"
+embedded = "671ccdcfba6782a7fe9a3f05da4ddf87a2a737c66739145159700c20e2502cc7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: digit::char_to_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: digit::char_to_valid_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: core::num::<impl u8>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::char_to_digit_const"
+kappa = "a858729e5201f057b02ab0c5ee1fc0de07c00d22fa3432c0d723c48b7fdbbc6c"
+embedded = "6de216e5a925909f7a9ceb5f70cce9aaf9beec168790ecedae35609a8ca50dff"
+status = "residue"
+cause = "mir::TerminatorKind::Call: digit::char_to_valid_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: core::num::<impl u8>::wrapping_sub"
+
+[[fn]]
+path = "lexical-util::char_to_valid_digit_const"
+kappa = "319e05a413b66b816d92248feb0f926cfdb1dd8c9c30c10bf8664e1a1c8563cf"
+embedded = "6014e9faa9be6c8005d555152622e7fc7f35ce8b49e6e7f98c9939fb5493d66e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::wrapping_sub"
+

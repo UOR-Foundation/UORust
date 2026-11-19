@@ -1,0 +1,21 @@
+[[fn]]
+path = "iri-string::remove_fragment"
+kappa = "2d0b073bfde76dba2ba9b60cb75890acd4b56c7d80a9675b99beb0562c9c00d4"
+embedded = "176c438b83018465635b9288e8ee6203f26127e56f230950dbb775d528d36647"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::truncate"
+
+[[fn]]
+path = "iri-string::set_fragment"
+kappa = "ca77214fa954024242e1038472d4d3e16fb938b37a43e43e060f62de9379a0b0"
+embedded = "6645483b19a7edfb6a34b56a0715eeaa3737d73c4969c7e0c89f93268ab1374a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: raw::remove_fragment: iri-string's MIR stops at mir::TerminatorKind::Call: String::truncate"
+
+[[fn]]
+path = "iri-string::split_fragment_owned"
+kappa = "1303e0f44da9d07706f4aebe3c5bfed09ce0f3b7c8f6be9d428c9e4bd0fe7309"
+embedded = "c42e16767a5187d1711cea54ecfd467511fed1db2504ae896d0462d7185e1963"
+status = "residue"
+cause = "mir::TerminatorKind::Call: parser::trusted::split_fragment: iri-string's MIR stops at mir::TerminatorKind::Call: parser::str::find_split_hole: iri-string's MIR stops at mir::TerminatorKind::Call: <str as AsRef>::as_ref"
+

@@ -1,0 +1,319 @@
+# The zopfli register (written by `uorust crate zopfli@0.8.4`; do not edit): every body of
+# zopfli's MIR at zopfli 0.8.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 179
+translated = 16
+residue = 163
+
+[module.blocksplitter]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.cache]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.crate]
+bodies = 12
+translated = 3
+residue = 9
+
+[module.deflate]
+bodies = 46
+translated = 0
+residue = 46
+
+[module.gzip]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.hash]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.iter]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.katajainen]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.lz77]
+bodies = 21
+translated = 2
+residue = 19
+
+[module.squeeze]
+bodies = 21
+translated = 1
+residue = 20
+
+[module.symbols]
+bodies = 13
+translated = 10
+residue = 3
+
+[module.tree]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.util]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.zlib]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 179
+embedded = 179
+evaluable = 179
+blocked = 0
+
+[differential]
+bodies = 5
+theorems = 21
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: Lz77Store"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ZopfliHash"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ZopfliLongestMatchCache"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Options"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SymbolStats"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lz77::LongestMatch"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lz77::Lz77Store"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DeflateEncoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GzipEncoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Leaf"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Thing<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ZlibEncoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: squeeze::SymbolStats"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::ilog2"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BlockType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RanState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Which"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deflate::BlockType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deflate::DeflateEncoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: gzip::GzipEncoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hash::ZopfliHash"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: squeeze::RanState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zlib::ZlibEncoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: lz77::get_match::CHUNK_SIZE: mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::ZOPFLI_NUM_LL"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::ZOPFLI_WINDOW_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc13: &["
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::vec::from_elem"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlagLastIterator<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashThing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LitLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cache::ZopfliLongestMatchCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deflate::BitwiseWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hash::HashThing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hash::SmallerHashThing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hash::Which"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::FlagLastIterator<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: katajainen::List<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lz77::LitLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::alloc::Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Take<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1

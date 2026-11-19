@@ -1,0 +1,151 @@
+[[fn]]
+path = "zopfli::CHUNK_SIZE"
+kappa = "47d4035026bd4c04832bbc469c9a98652f8b093cdb51273399268b92fa573dd3"
+embedded = "586186c6977d62b15da1b7f8a0eb06d56696a14715c3d26047ffd1d34c079508"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "zopfli::find_longest_match"
+kappa = "4a3e8c7e6ac7ec2da523435a36f02eb5d2aae051745597914aaf1228f16b5e4b"
+at = "C=u32"
+embedded = "db8cb8bb262bd78d6922fc3777b46d13a3965d233a64ce573c88cbaf99fa8e12"
+status = "residue"
+cause = "mir::Ty: lz77::LongestMatch"
+
+[[fn]]
+path = "zopfli::find_longest_match_loop"
+kappa = "2406a493c69b272e5159d86755a2c878cbddc69642ec406cccf8247c0122fd1e"
+embedded = "97730bcf4c4c8e1de74b20647421a95ab75de599ca82ce4c74aa4cbdc0613906"
+status = "residue"
+cause = "mir::Ty: ZopfliHash"
+
+[[fn]]
+path = "zopfli::get_length_score"
+kappa = "596324e88fc9cd3898dfe8d9d897806cde083433ac1adfc6bb8210a6e0594b13"
+differential = 6
+embedded = "620923c8929b328167098f06a8f55ebf00b57e44ebc17654d26b976bd1c88d00"
+status = "translated"
+digest = "7eb0dec2297e78132046891b028a14cab45ea18cf03ef8cd930d9373e0b77b11"
+
+[[fn]]
+path = "zopfli::get_match"
+kappa = "86c4059b30b48e64d92292cea95c02d6777cb702d313c4899bdf55ef7c6b368b"
+embedded = "6e51f9fe6279af749c24f417a486991d3b62fe953c5445e5cfbb3dbc66058b34"
+status = "residue"
+cause = "mir::Operand::Constant: lz77::get_match::CHUNK_SIZE: mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "zopfli::lz77::<impl at src/lz77.rs:14:10: 14:15>::clone"
+kappa = "efbd1be15d966f270d6ad94251ce4770afa50d9877e271bd6f578720e9c8ac8d"
+embedded = "8258c830e595f83dbd216fdbd2d30d3f34b0216e2b7a037d06bc1610eab1548e"
+status = "residue"
+cause = "mir::Ty: lz77::LitLen"
+
+[[fn]]
+path = "zopfli::lz77::<impl at src/lz77.rs:34:10: 34:15>::clone"
+kappa = "4eac94748650bbd9b9a589f379dfc4ebf1ec95ebb98ae97a023eb3ef00bed49e"
+embedded = "101ea70cf880b5c5ae18b2ee6d63efe5d2d29584564c92b6b7df813fe3ef7a62"
+status = "residue"
+cause = "mir::Ty: lz77::Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::<impl at src/lz77.rs:34:17: 34:24>::default"
+kappa = "c931eb7c384c238e1cc811429d5946f4b674aab4d416e46582477411d7c31bfd"
+embedded = "876e878c805c878ec73eaf7cf08aaa4a3c8f0040001bdd6948f3414b3a00b502"
+status = "residue"
+cause = "mir::Ty: lz77::Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::LitLen::size"
+kappa = "b468569c4f248b2872736e71610ab563a90e3121c5c4d23eafea3176f57bb859"
+embedded = "4ebc2e38f3212f6b98c03c217e2a04c053c4f5edf9d631deb1c3abef922e93c8"
+status = "residue"
+cause = "mir::Ty: LitLen"
+
+[[fn]]
+path = "zopfli::lz77::LongestMatch::new"
+kappa = "6bab5dad1034888c113b0b62a657b358eca179b67a345774938014f35a6cefd9"
+embedded = "3fb974e4f8c773ab16dcfbd0b4f9b0d2bed13f25a41175d60218d1d87fd4aa42"
+status = "residue"
+cause = "mir::Ty: lz77::LongestMatch"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::append_store_item"
+kappa = "6f8765c9b4eae50fbb61d9a7975059e308be63a0e24d1a96d4f546982d3f4e6c"
+embedded = "f9b4514f5bf39bbe51d392b7777748ab971536767fd4caf2e5569582dbe1b4b0"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::follow_path"
+kappa = "738d336b2c6a2b806baf31adb2f0075066b578a8b82749aaefb9807fe5ed868e"
+at = "C=u32"
+embedded = "c7a65eee73470580075cb9bc92032d4003563931af547799b73f3110ef9d1a54"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::get_byte_range"
+kappa = "6b692af0e89428de343b31e4be2ff09009eae7777545d0ce9ed5d0a0c5a0cba9"
+embedded = "9999b90efee509af059f327dd70438cd83c1771bd92303fd88066baaba255f79"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::get_histogram"
+kappa = "e8467b7a0942d5b34e6c0a3e234330539115ae75b3b1d5f86e4d94ce46144d31"
+embedded = "2ccaa2a77db5b124f7e9598a2a81f79e02e101ed348452b820183ed7ca4ccae6"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::get_histogram_at"
+kappa = "25ac76e9ff89292ffbfcab16671dc5b67521068e55effc2b54ceaea875fa8f2d"
+embedded = "e61303a82b521b294302fb1a47b4f8fc5776971de7895f022200145dd09fbabf"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::greedy"
+kappa = "b18e9ccb16d298fd4c68ca5ad3f2781757eafb537c7b6679377f3949820c5449"
+at = "C=u32"
+embedded = "00497c7b16d417b8459a99bb968ff574da05b94937a85886babeb6020a45e1a5"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::lit_len_dist"
+kappa = "e70b2d3786e33dce4e45b09949445b1bf559c315d9195164c997bca1751348b4"
+embedded = "98bed4ffecf49be6c613b8e16f968ae8193466b54cb505998fdb8dc4dad54166"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::new"
+kappa = "1f406f11e5a92ad55f37297ed52694a14462bf93417aaf93f795fd57ac9718e1"
+embedded = "09706d85f369975bec6ed59f06b5e81ebbb098c2674ee5972959d46892afbe75"
+status = "residue"
+cause = "mir::Ty: lz77::Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::reset"
+kappa = "acf1e342804cf2f6c30f7f2db1adbb0ae806a87d305642f8b55ab6e28cee0630"
+embedded = "0622e385e836f839e2ed81ce225a4673d2c22f522a0b75e9fcb39113ac997a64"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::lz77::Lz77Store::size"
+kappa = "84cfd97516aa2966165d8610274b3bb661774243c0bcfef52ca02d6271ef1f3d"
+embedded = "19c2d4fbbe3d09af2d2d51868b7bbdde8ab3aba7225027d8356a8ce105894c59"
+status = "residue"
+cause = "mir::Ty: Lz77Store"
+
+[[fn]]
+path = "zopfli::verify_len_dist"
+kappa = "a8fb8e219c6a6b8b314d36a91d11cd07dc6f497db0ee3a22af2e6f46056f8f6f"
+embedded = "458836c04918c53deeaaab6607b034c5c86c1b912925876d373a9dad19c11f8a"
+status = "translated"
+digest = "e2850a7fe25feeb2d36fbe333756c2f8c2280ea263f9265fbed249b78646e0d1"
+

@@ -1,0 +1,1063 @@
+[[fn]]
+path = "zlib-rs::DBASE"
+kappa = "6d01c06d463e43d3db05dded0cc0c185ff4450c0b66655b9ccb4113c0f91281b"
+embedded = "266c3e2f76b8cfc610bae2065a6492088652bf21ca0f77a18a8068eac6b1d539"
+status = "translated"
+digest = "0f55c13dcc5d61d685fd3ee1a67dd5d23ef6d53f63448e01bc4afaa9353068cf"
+
+[[fn]]
+path = "zlib-rs::DEXT"
+kappa = "df3c6d11623bfbd9e3e2749512a330ab69c94a007bf55b2137341902c1224ae1"
+embedded = "352630e199428c8623fd2ce5b39ac3617b2f0ccb3b55bf5dfce72d285b89a409"
+status = "translated"
+digest = "80971352321b8fc5b6afa924bab85b79a688febbace0a4d59e64c2715d778318"
+
+[[fn]]
+path = "zlib-rs::DISTFIX"
+kappa = "aeb39ca2cf0341b0cdb3aa2fca8776028c8effbad6c2621ac8c7761e39f0e21f"
+at = "Code=u32"
+embedded = "8da8f404a8183efeaea42e0d8e4c5fe23f6d1e65212ce80df910d20ec2ad68a1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: code"
+
+[[fn]]
+path = "zlib-rs::LBASE"
+kappa = "16e23856cccb3dd2919a9c95128159d4decbc2425eaf0c732fc27fb5fbc64df6"
+embedded = "10cf7217f3950797e819cacd4777b0acec2f2eaddc64f6be5c370b11ac3f4a8d"
+status = "translated"
+digest = "6afcbf660c3b954f4674667491517b898055d61bf1c4330d7a63cf133929b2df"
+
+[[fn]]
+path = "zlib-rs::LENFIX"
+kappa = "5a0decb8d73b03bed6beb230b9f50509ba6bebd0ef4d9b8a4641573b16078eb6"
+at = "Code=u32"
+embedded = "94929d28a56985a6fc9cd9ff83932d93c00f9bd40df9397717a9b5f696ff06d5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: code"
+
+[[fn]]
+path = "zlib-rs::LEXT"
+kappa = "d7289364e780bbf96f7a4f1cdc6279aa5d23f9cbc3ae62e9c0bfd3aebce9b13f"
+embedded = "95401c3115c62b6849a0eb841cded03617c250be981dacdf55281137ac28208e"
+status = "translated"
+digest = "2d4808ca8733983a377b55fc6e41e90996af44d96fdc3c3475ffa5d9e4ccbe93"
+
+[[fn]]
+path = "zlib-rs::back"
+kappa = "738dbd8277d5fdcc128fdda9a56ea11842885df9935e7a104543041c269fb238"
+at = "C=u32, Code=u32, ReturnCode=u32"
+embedded = "19a34633553d9ee4a583b0f505ba8a74f7f8a659e1da19c266a1d267a38786c2"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::back::ORDER"
+kappa = "a7264896bb739c5495e8292eb295c42b36b61cea65388dd4123334b6c49c5deb"
+embedded = "73f451c96f24a586bf4624cc23b8f130b994e04aa4b3f1f1ebbdcddb12db07ce"
+status = "translated"
+digest = "96d262b57b0725dfd7d3b280f2a0973b9651ef6e61c5f6548e8a5022c4eb8092"
+
+[[fn]]
+path = "zlib-rs::back_end"
+kappa = "be5e1ba1e55f882293c21f8b62a121b431bf529aa845bca4b80254702128ce80"
+embedded = "94312459f3ebca9d3976f55ed7b3643999165d4cc67dd525cbe2204f78e773d2"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::back_init"
+kappa = "5cab7e792ec90b1d2a9b0d68a113462b7f8cf3afef1c97016d7aafc1565cc3d8"
+at = "C=u32, ReturnCode=u32"
+embedded = "1e9039061b9f234a66965f487fb8e39a6da4e175657af7bdd7d6d050bb70127d"
+status = "residue"
+cause = "mir::Ty: InflateConfig"
+
+[[fn]]
+path = "zlib-rs::bitreader::<impl at src/inflate/bitreader.rs:5:10: 5:15>::fmt"
+kappa = "0d39953278f66215a13960c51a6a375328fee802804e65544a5b0fb2e35ea7e6"
+embedded = "be1e7d33e17f0a47001bf20f09bf0c78f3c508cc2d62da1150b33023bfada5e3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::bitreader::<impl at src/inflate/bitreader.rs:5:17: 5:22>::clone"
+kappa = "2c1efe87b9ea4d349a6843fdb0a44d3f0fd23993dfd1d9818371bdee55c2a079"
+embedded = "057462f9b587dcd5f02ff273592a5db822d2285e0fafe17e7991fb6b7e2690e7"
+status = "residue"
+cause = "mir::Ty: inflate::bitreader::BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::advance"
+kappa = "543ce8acd3a98b60daba68d579a424d47a007b37f373dfa50ca48cbaea52c33e"
+embedded = "a22a1430d954bceecaaad3199edcb695abec828b94ece4a8ed21e33bf4148e06"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::as_mut_ptr"
+kappa = "c924bfbb57b437e8f892dd5da147ad1c069b7b8f03a0a65d88e2bb3d608568ff"
+embedded = "619478e0d97c511eaaf82240f4996eeb56557e169202a24ded70c517db5e8ae3"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::as_ptr"
+kappa = "a13149062feb58e0ffc2b8974b5da04774d3ae4523a7df3ffc6e63c3b6ddc6d1"
+embedded = "6c57f0367d61700086e12ddda98b6775adb98600b53a28707839aeedf7b4ba6b"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::as_slice"
+kappa = "fbadd0f0e1f5b8663307a0cfe56c364042c89f68f2ea5f525d1ea13db115a627"
+embedded = "dcf12a92db32258b25cc4a8f06ce9463ce28095572d482a81d95fa488eff8c84"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::bits"
+kappa = "eadbc70c22e58738985a0da4e748ccac7ce2e634903535b728bbaac8988eca77"
+embedded = "c7eb16ed4ee5057758bf574adb669af29dd5559decc8add0ce5a0e7ab1b62b41"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::bits_in_buffer"
+kappa = "1ada33d899d0d08dc0420ea5067fd7f59453b281c22dd1f0a8b5e19e294dc91d"
+embedded = "ab48740d34064d7d15fe17103c55eddb116a5c6fd6400d5608ad20cb588a56cc"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::bytes_remaining"
+kappa = "a45ebe995d099eea598110e4dc410ab903950918a7d8a577611262bc423fe26e"
+embedded = "f3904cd6e3f07d0e97d8707ae5fc9879fd2a36df8a0f4fba370948e505536728"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::bytes_remaining_including_buffer"
+kappa = "fa944164022fd8a5ddfab9e5293410669f0a417dc9bd4cf3c960d507ef2b8ba7"
+embedded = "b307f64a5ab6642d1c81c30358b3f273238ad426bc5e9fd7f96e6808935fe889"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::drop_bits"
+kappa = "e94174791935ad5832aedbbba183cd0f23d26d8d3b4563b48025a8ce3ff816e8"
+embedded = "d96d31badfeb3b57d0560c9893cf2b787b1a108657eb034c6613f4a001387d79"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::hold"
+kappa = "a02e5e69d961ed2fc30090009dc39721e64a7aa20252d1fe9cb57dbbcb790ccf"
+embedded = "ac441a8efb44738a0721413a24bd94b8eab7f6fe4474fd087d9c943147259d5c"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::init_bits"
+kappa = "a8ef33cddad6f66d42539b773a44f83bc09ca75a921c08e3599e120c65a552f0"
+embedded = "9e143a7877eef6f7a9856466b5aa211dee0a07b9543bd458f24330b92b80bee2"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::need_bits"
+kappa = "1bdd059b703a49567e5bd7357a254d64c5b828e8a0cbc4ea66b72c09e22c1412"
+at = "ReturnCode=u32"
+embedded = "809081a1d1a59d9ea7fe97e05fcf839d18606f7caf9ab6d31e8bc4badcc8d295"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::new"
+kappa = "a2b9f2d4ddcc66466305816dc01f705f24efb7634640fb8cbee1ef9346c5aa33"
+embedded = "6609d6524543476e8e29736f0e4421af271081212852e41b6a34611ac9fe9bef"
+status = "residue"
+cause = "mir::Ty: inflate::bitreader::BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::next_byte_boundary"
+kappa = "8c114d926fd22ed5ef189556efc288547bd4179dd2111e4717aebea877b48576"
+embedded = "bd26dbe909ce25c2a48418cc4c49b923a6de074c56774e660e319df5119b0341"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::prime"
+kappa = "8a45612534e27d19c5f1b14925afd01775cbef603b1b17424df7637ebf941ba9"
+embedded = "2600086326bfe0661fdefd807e90077adc0a7d630d1daa610378639817f02533"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::pull_byte"
+kappa = "ab2881f41840a4f93eb8fa9024265de3deaf553079a0bf302962d0aee0dee2bc"
+at = "ReturnCode=u32"
+embedded = "c981479774a6ec54a793e27a0d2aa149dae9df2d28c00bb275a34efab780e185"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::read"
+kappa = "bc79f61c1db1bdf82869cf60de7ca2fb9f97eb28214ae42244011fc67b3f18dc"
+embedded = "2e03f68bf0f12b13c46640b89a2995943adb64dd17ed242344f4ea632ebee35f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::refill"
+kappa = "a5460b9ee9f65fb69e3a0b5a84486185ed2021699b6df5d4e24a79dce1187535"
+embedded = "14993028e14e2bf689afce0bde4b96620ab4ad5baa6b21fbcf0a2ef6e8fa8d69"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::return_unused_bytes"
+kappa = "95acbae1c88d915b7769ff065bb32f0ce8d274f9c3a049e74959340268f89dc9"
+embedded = "773300f9ba5202219403fce9942176fe7297c13adff7a8ea749a9b17d66baad2"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::start_sync_search"
+kappa = "fa7a82d1ad319190782055d9214e341633147e15f087417e99b76451f07a63e2"
+embedded = "c16c55b572c2f56b8b7765724d1be48a9ba3c22b0819f2d3f1ac00b8d092994b"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::bitreader::BitReader::update_slice"
+kappa = "b0914f500424c6bd23c7fb940f50e28bd00ac485a66b567f683013809996711a"
+embedded = "7e1c727c37603b57f991ea0de2c7f1c1eaf52ef35b3b299506f53fc8161ba4f9"
+status = "residue"
+cause = "mir::Ty: BitReader<'_>"
+
+[[fn]]
+path = "zlib-rs::code"
+kappa = "129e991ebfd9cc63af53d2cb8b03e11dee32d9cbb905dcc1f1c55809e4f3e1f6"
+at = "Code=u32"
+embedded = "1a0c7e538dfc9689f3876fc9ccceea589f5eddbee12a5e5c0942a612d35a3d4c"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "zlib-rs::codes_used"
+kappa = "dcf1b4b44c51387da2d02ef1d99971d6b187b10bdee7112c2b28784e15870b8b"
+embedded = "d1741c0e296ae8b942c9dfdeb24b80d94b6dfb03f28d6feeae826c1203c21012"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::decompress_slice"
+kappa = "46915e291d4fc8c08ced5845f172842451fb2fb683649465f13ae8760c2fff1b"
+at = "ReturnCode=u32"
+embedded = "d557d5724fa925fd58d421f31556122dc356042eadc31528677af4225d2dea60"
+status = "residue"
+cause = "mir::Ty: InflateConfig"
+
+[[fn]]
+path = "zlib-rs::get_header"
+kappa = "78ded555418b00ff01f33c7f02e77dd0474f1dde98e9956779bd20e651b211f9"
+at = "ReturnCode=u32"
+embedded = "a61361774f43dc1dd79b3c60fd86da04f1f6a45991dad2ca54fbf0f7edc1f6c4"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate"
+kappa = "25935d552a48f4b48232399a9b49d7111a973be803cfcdd3b44b49832835e96a"
+at = "InflateFlush=u32, ReturnCode=u32"
+embedded = "585a20cbdeaec93b32e437e9431f97476605d12935392549d4a8ad86dfb65692"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:2219:10: 2219:15>::fmt"
+kappa = "1fe2b2c6ea0c8d5bbeff97d8ee0f7291a9f04e6046609706befa6f4a9d006fbf"
+embedded = "a4862826db433ba7d458f88f2baf42cb744b8d098ad0ee94274f7b8ef3a110da"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:2219:17: 2219:22>::clone"
+kappa = "0e9f714ae82611d5b91809bdbf1cdfb6580a53efcf6e2d7c4231ce057b6d39c0"
+embedded = "a6f843071396d2d734c0bbaa8f7fe540f1d625ae6f5416c93f5470aa451cfc80"
+status = "residue"
+cause = "mir::Ty: inflate::InflateConfig"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:2219:30: 2219:34>::hash"
+kappa = "a87cec211826159fd01785aa2d20a6e3af73771c528928702e5069b079cfb3a3"
+embedded = "7b411616b3309903cab97c9b02130495691c6cbe6c385a80320625e634e63131"
+status = "residue"
+cause = "mir::Ty: InflateConfig"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:2219:36: 2219:45>::eq"
+kappa = "e87c3980995be74f66c89255ee4f91b5cd27845342c9b64e71b3461b65a609cb"
+embedded = "5f76d6047b2052896bb81c19c5001bc4a60786ac76a84f1f03f3a81b4724c8ab"
+status = "residue"
+cause = "mir::Ty: InflateConfig"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:2219:47: 2219:49>::assert_fields_are_eq"
+kappa = "a075ae1de8f4bffd35b00bbeed4d13ff45bca6c70d64200e8abf1bf42c606cd7"
+embedded = "dfba6c8cf5c45fb6ded4eb933dd973149e082af96688e812124bc9df03de812a"
+status = "residue"
+cause = "mir::Ty: InflateConfig"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:286:10: 286:15>::fmt"
+kappa = "57629d4ed2ebd5d68692573272165bf8bacc1d26dc1d14a03fea9adb1d125e7d"
+embedded = "12212355d98d45fb0ac6f046c40f63704ddd127287648137b962c2b591b12635"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:286:17: 286:22>::clone"
+kappa = "1015b3873d0eb78727056b45d4921727cf3ffb738bb3dd761bb1fbd6d6d8d614"
+embedded = "4e43250d649c22ef8ef14a607ae07558a5dd6036e3e4b5aa63fe7dce232e75e9"
+status = "residue"
+cause = "mir::Ty: inflate::Mode"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:322:10: 322:17>::default"
+kappa = "fa782265a70c3f89fe516eab456312e95d09fa38659d6a34cb032f3ae5ed67a4"
+embedded = "9eb11f621e16f0085f34f82592226f2296867c67bc86a6e2360f520c520a68f1"
+status = "residue"
+cause = "mir::Ty: inflate::Codes"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:322:19: 322:24>::clone"
+kappa = "7edd737aabead50e080ea20228d3f050baee0727bbcb63de42aa68864a571901"
+embedded = "0b995dfb3047bde9374c2ebf46fd987b28705fa7e83dff5d97fdc43a7bb1353b"
+status = "residue"
+cause = "mir::Ty: inflate::Codes"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:332:10: 332:17>::default"
+kappa = "7ef97713d3e616fd25b49c2c1cd85636f437c8b6864ff75da8d3d18d2a2a8c66"
+embedded = "db9e1c34c5c89bbeed392c41040147822e5d65fe461f5f9ca8353966f9757156"
+status = "residue"
+cause = "mir::Ty: inflate::Table"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:332:19: 332:24>::clone"
+kappa = "82fb27b71c0cbc06afdddab8fcec6384006a95e13fc291c9c2f2380c2d2f8023"
+embedded = "ee9ef9e155dd63b47a9bfdff7395b0b2fe5a29d4505f1efefe6fe94a48d4d97e"
+status = "residue"
+cause = "mir::Ty: inflate::Table"
+
+[[fn]]
+path = "zlib-rs::inflate::<impl at src/inflate.rs:338:10: 338:15>::clone"
+kappa = "26cf7ced95d6c242a157e56cb5e7ded0802ba7bf75a90437ac9ef29ac0c3bcab"
+embedded = "430ce38fb8ea8c664b6f1d986fadd2f4516f909d0da03fec8a4c32939fdee5d1"
+status = "residue"
+cause = "mir::Ty: inflate::Flags"
+
+[[fn]]
+path = "zlib-rs::inflate::Flags::HAVE_DICT"
+kappa = "0e7710bcd652bfe866e03d1f0353760e4d0eb763d45754da36a070deed0e8a0d"
+embedded = "a809c2ba14bea33d7f27a0e3a934cea44fa127cbc344b8e0bc37ad3449bcec12"
+status = "residue"
+cause = "mir::Ty: inflate::Flags"
+
+[[fn]]
+path = "zlib-rs::inflate::Flags::IS_LAST_BLOCK"
+kappa = "fd145e6a25e71d4118635b245efd8283b66cc01525e62e8ec1531bd0db4f9d7f"
+embedded = "7332e90fb3010e04c709dab3e1a5d63db6966eac0c42b63db13366341567252a"
+status = "residue"
+cause = "mir::Ty: inflate::Flags"
+
+[[fn]]
+path = "zlib-rs::inflate::Flags::SANE"
+kappa = "b03798c51453769cc3d1d1437714a89742c1afc615f3aa2dd501c5fe2b110e58"
+embedded = "7ce24b8387a08878f7ec9a1094fe3b91157fd1003303fae414ab0d31bf8750af"
+status = "residue"
+cause = "mir::Ty: inflate::Flags"
+
+[[fn]]
+path = "zlib-rs::inflate::Flags::contains"
+kappa = "930ec1a379529d75680731e06226c53d888a44b440984a2903c5a8c27b75c3a8"
+embedded = "c3d7436d2cef933d6859fe075563b79e016dfe4b288ea0cff2bbbcf533fe12d6"
+status = "residue"
+cause = "mir::Ty: Flags"
+
+[[fn]]
+path = "zlib-rs::inflate::Flags::default"
+kappa = "15ecadcc7ad27a642727f8b918c98c506671b0135b19926bbe58873061b99f10"
+embedded = "188e25663f3d7b2005e9e280c40d69cc8c3dd49050a6da62b265a800961ce8ee"
+status = "residue"
+cause = "mir::Ty: inflate::Flags"
+
+[[fn]]
+path = "zlib-rs::inflate::Flags::update"
+kappa = "6625492b8d79e20b05b9ea4b4c593e23b8b32eb410a274c0b5fd05bc03b6dd8a"
+embedded = "9423f0000b8626fc6279f6d2c016cc22ee24065746dcc9dc5db21c580905b4f9"
+status = "residue"
+cause = "mir::Ty: Flags"
+
+[[fn]]
+path = "zlib-rs::inflate::InflateAllocOffsets::new"
+kappa = "06743f0c34281d2d70459190634bc8ab71a01ceac86f2de0cdb228a54ef4ca7a"
+embedded = "89ad9b5efb7c1ccbb6372c60732a02fc8987bce5d9d5683a19413336c55f20e2"
+status = "residue"
+cause = "mir::Ty: inflate::InflateAllocOffsets"
+
+[[fn]]
+path = "zlib-rs::inflate::InflateConfig::default"
+kappa = "01ba88ebefa70dcd7df1cf2a7a0f893aca0c916d0ce67e3fc5fe714f02fbf9a8"
+embedded = "f78e7f892e5b335d5bb316f6fcdc907f7fa794c6a19ca970711e0bc10984f2b0"
+status = "residue"
+cause = "mir::Ty: inflate::InflateConfig"
+
+[[fn]]
+path = "zlib-rs::inflate::InflateStream::_A"
+kappa = "bde68fba511c955b84cae1135759e261355dfa86b7c1fd7eabc109bc37e54dbc"
+embedded = "7a5e4e461d0fe11e0c7fb928a2f623a853f88cec676192ab771c7b563ab0678f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "zlib-rs::inflate::InflateStream::_S"
+kappa = "bec1e0e8e0987b4bce1200734311225190a7e22297831bd154b5ec7b3c3cc8d0"
+embedded = "48775fa8e4a5c2a6333020a8becd0c61c5f4e5249d5d8d5fe4d10b8271385504"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "zlib-rs::inflate::InflateStream::as_z_stream_mut"
+kappa = "728388b9313cc55b6a4af2e150f0e24ac958170c5b43aa54baa0de575b486764"
+embedded = "2a5c7e55214f57fc1bb3a85745ce912a26108c859c9241e7128f7d06916df260"
+status = "residue"
+cause = "mir::Ty: c_api::z_stream"
+
+[[fn]]
+path = "zlib-rs::inflate::InflateStream::from_stream_mut"
+kappa = "6373ac7f2c43398faaec701bff6f48d7739d5c1b0e3cdfb878c0b2528e9f23de"
+at = "C=u32"
+embedded = "d6b1d6e12caf3655db08f81df85d62e2cc98d017950e8e2a61fff67ff2bd4c14"
+status = "residue"
+cause = "mir::Ty: inflate::InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::InflateStream::from_stream_ref"
+kappa = "b224ab133dc96c9c302cb3d795c722a97901d9e5fa69e5dd1aad5ac78656b783"
+at = "C=u32"
+embedded = "1990738848dee376557577a6ac2e1ca18f49188dd445869cbbdaaf76ceb66c0c"
+status = "residue"
+cause = "mir::Ty: inflate::InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::InflateStream::new"
+kappa = "245c48a5f2a9489f3fe7912eff97eeb876140592142cacd12864a26826cf78ab"
+at = "ReturnCode=u32"
+embedded = "aca05ad89169da0f8c499f5b936bdff0287520e35d08adb395150f426adf9b84"
+status = "residue"
+cause = "mir::Ty: inflate::InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::bad"
+kappa = "2b9b960b9e535469da82b79e12afe9cff62241bbb3fba1e561ff33df8737df1f"
+at = "ReturnCode=u32"
+embedded = "55b7043c221611ad244e1c791e26d625dde565cf1e4e34ab127447ac51a56857"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::decoding_state"
+kappa = "6f5d77e6b5ce552b93af944502f9b25eccf81989b289f8da9240bd25dfb08d0d"
+embedded = "704e9eb8a99730762b4fa0e7bd86bce3e3e2f544f8dd4d5a19091e5dc0fae6a3"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::dispatch"
+kappa = "1d9877dae100fdf6af470ea139b1b6a223cbf0e06f04ac62b0b5f1c5f2b0b647"
+at = "Code=u32, ReturnCode=u32"
+embedded = "bf5f7bb6158834c8eb44049af89b9ccd637f1b4a923ccefd5c239e6bba3515b9"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::dispatch::ORDER"
+kappa = "038e75d58edaae4911100ba029d617203e62900ffcebdbbb16450b78be08769f"
+embedded = "73858834b31cacbb29d5cd2b3aba11bf757824162f61edbfccdf193b823f6d11"
+status = "translated"
+digest = "991b27b2cdf5a11f1c0a3110ac2bdb889f801d0bf516192daba5528219ddd077"
+
+[[fn]]
+path = "zlib-rs::inflate::State::dist_table_get"
+kappa = "b6cdf1be4f86ab2705c2a90c95190e4f57ebb715d915ff8b5a9fc9ec84eb9ecd"
+at = "Code=u32"
+embedded = "6b81b4f2dad3c43fd0574cad7928cfef401d1d8e9c70a336454c0fe9837dfa57"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::dist_table_ref"
+kappa = "23df461e565e4acfe1661e1d3a2deb09a17828928cef9de525ed130a87236c7e"
+at = "Code=u32"
+embedded = "0e8aab5f09a6ed29294a5a3bc4690733cce17b3b6bc4f0f4d9db1074cad92936"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::inflate_leave"
+kappa = "736a3292403684009938f45979d7345397e9bf1f58f74ba94b320675685446dc"
+at = "ReturnCode=u32"
+embedded = "68788c2aaaa99f5f1f346e37016301bb16b8ab63f1be221e6eaafdbc31f5f658"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::len_and_friends"
+kappa = "cf918f0a9a8b2df0afc58c000c2b85c479e136eaf119cc67da5a755d0217555d"
+at = "Code=u32, ReturnCode=u32"
+embedded = "bcdb2a1d1a11fbf91d8485bb0b9f2789c1110bee2ff61db6fcc8cffcf2e74712"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::len_table_get"
+kappa = "d10cb846a9ab76267aa4e6cfd6db50ab48df12dcd680ef965b001e5810693578"
+at = "Code=u32"
+embedded = "8e257c1ef28f9afa0884d2e9ea5051a971123c5e9075b3f690e03da44370fd6d"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::len_table_ref"
+kappa = "e350c8dc0b3702709aa4aaf941898ef50b8e3206501ffee85d121fad4a3711ec"
+at = "Code=u32"
+embedded = "977ecf83be62d98e9527815b380a6066655dfa77ec2c875618988c9d41253cba"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::State::new"
+kappa = "8ff0b6c01503d83a67964d9e57196d4b1348affb04033164025c85f6168a1278"
+at = "Code=u32, InflateFlush=u32"
+embedded = "18f7e67166a9bbed8987c9a2655849531b73aefab3273dc4fc10f5c4153f6345"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::copy"
+kappa = "6e9b8be7629ee15422f9a04835a8bcfb11da525790894cd2b5f2a669fd1911cf"
+at = "ReturnCode=u32"
+embedded = "ec9fdf8b344058c424d8df347270a0a4a853c1e40c65b8db2e1b3596090eb4b3"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::end"
+kappa = "797f9714f3fe776e94d9fff8237cde7c2bfaa22c1331f4781a74ef15b6532952"
+embedded = "879d53509bafd8698916f4476e262e9d069dc24e8dda268ab55e8970f2791ad5"
+status = "residue"
+cause = "mir::Ty: c_api::z_stream"
+
+[[fn]]
+path = "zlib-rs::inflate::get_dictionary"
+kappa = "e5bde6f2f12019b2dbd9436cf0b46a9a2b4f3cf8e0290c046c599c2d793b6d1c"
+embedded = "2c12c91f56e07ed5d657faa0bb81d5bdcb00f23d46d0e1606d48d14dd807610d"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::init"
+kappa = "c7847d2756bf37efff63936a8607620f1c3d592f11e8d790ab86bb9f3f6b8ca9"
+at = "C=u32, ReturnCode=u32"
+embedded = "fc8cd8e32138c1f3c752c8ad14e8574e6a423dfb9ef0ee779b00a26ad08e6c27"
+status = "residue"
+cause = "mir::Ty: InflateConfig"
+
+[[fn]]
+path = "zlib-rs::inflate::prime"
+kappa = "491b115a3ef1858a22e1df0c3b00a9c91bea391dd387ca8240edc52df06cfec8"
+at = "ReturnCode=u32"
+embedded = "c44d5d7b22d875329002d12a78b699ed1d7be2e0e77d1aac64325e723cbb446f"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::reset"
+kappa = "63fa00399a4a45892c15acac40286a1b34bb0cba460ace131d26759091075349"
+at = "ReturnCode=u32"
+embedded = "0c909e33e42adb0825dbfccaaf7a37daf3e5e5680ca501a49ddc6efaf0833b9e"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::reset_keep"
+kappa = "3a020d52901f306e6c189f9621baf798bdf9afd6a9cbed0064ba7b0dc9494e17"
+at = "ReturnCode=u32"
+embedded = "492af2352fe2c9e62c561897ed77c982c830ee8ab65f2bde218a4af3c651b7a0"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::set_dictionary"
+kappa = "321ce06c694ed20e99a6abff641fc3b16e6dae9eca726a783f115d520e622dbe"
+at = "ReturnCode=u32"
+embedded = "4493d497acfccd72a15b8fdf29e0eff455c262456d7b7ddd17b1616871e86115"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::<impl at src/inflate/window.rs:12:10: 12:15>::fmt"
+kappa = "107ef5f58f26eec9649198ff84be97f8e3811196d14916ba07c38b705ea58f47"
+embedded = "7eb685c5b08b5032f4ba0b376a7656029b20a342658d5ffb8387b9f1191efa3c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::as_mut_ptr"
+kappa = "db5db18fabc22bb446746893a348b3a72c2186fa10eb01f97f59836b14c72a35"
+embedded = "5e5536f2f8b969846a4c63c052bf9ed771e07ed54c4d731c8750aa92521611ec"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::as_ptr"
+kappa = "c1b38f2e19dd6ba4a90fce4b5925d069146b63ac3dc712442773ac05b68565a7"
+embedded = "10251f9c0641bb5e736bba15bd80821a7d2e5a63c736601faaa0ca03c19aa231"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::as_slice"
+kappa = "5ac37211313def5bdd52686cbb65be7b21efc92484c1130a9833db4ead6b2c62"
+embedded = "3b7648549cecc6e770a5e333908734c37474f0baeddb5633fd3ff260a3f38542"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::buffer_size"
+kappa = "17527e89c43d13046740b7bde95a3550cb6e98bb2483c0e3deb077c5851da693"
+embedded = "3ba75f4fd527b6d0e82ac99c5259a6953e9c743a8d0db9090fda60808a6f9c8d"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::clear"
+kappa = "282eb9a62722ddea8f24b1a1b9e1e3887f91e24ba0345473cab18049b37e66c1"
+embedded = "801ebc573b9d249775f6401ae9f60ca620d7ff08470e797492e48cd1489a8845"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::clone_to"
+kappa = "97f6ec576025ceab88f8a819d0f481331af662f28a6aaceb5cfca8950f2d8bd0"
+embedded = "2cd6202adb24b94f5bf8b3bcde8df1cf7ce5b0ed52686b6d0e29f5570615d480"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::empty"
+kappa = "7f0a5190bd41b68458953ebe85af0ecc2bfdf608eae5f19a5d4e7bf9563575c8"
+embedded = "e4d244816c8d498e4c4103763dd79f440b2e272c1b7ffd2d959fb727a687c75b"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::extend"
+kappa = "99af84d402f79c9cf3652f6661575d2727baa60b260610013953fd1bceca1ec0"
+embedded = "f30f3cf4306526585994bb5eb5537bfb3e9a9e6ac50420a9babdd8acb6102c2b"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::from_raw_parts"
+kappa = "6e68c12efd5bc659d0d410eef73d2643b2ee715dd20ed94d643805fa033216bc"
+embedded = "fc91020c41bfccbc33ecfbd9a33a4e14c3a9c6dd006f1e1c529879993413ad11"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::have"
+kappa = "173d075e27de31ee9da15f4dcb823e6c0595050b892fa6e9e187edbe0eb4b493"
+embedded = "511e3b5aa6ed34393981659629ea1f3e44369f35caf2ba4f80a007d35f289a94"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::into_raw_parts"
+kappa = "f9b24a74152b62bbaf59ceeb58f58f2c98284a6412f08165e68a9655308cb97c"
+embedded = "3f70139d2ba530438df4f54acc65dddb13d49f5465cdcd8e918f055acba9237a"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::is_empty"
+kappa = "15dda48b9cec291bb88e0b2aad3f100292e8661cf1ee6d409a81eb1e1dfb21d9"
+embedded = "169f50d879f250d61275c7d92b082a748db546f8f74ce08bd5e812e35b99c775"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::next"
+kappa = "174b21ab0a676a687aa7b29f3398b0c9d6f227fd5c3261605b460017e5783fe1"
+embedded = "d171752f149bfb3b4b5517bae3a0cfaf4e1c193db8c1a148f1cffbb7b92a5733"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::padding"
+kappa = "fab8c2cf53dc44a9acac277e7e9041be248822de0e78f4eafe0d0d19272b3645"
+embedded = "9bc5f79abd9963b7f290049e213ce9d45154fbc70a3291ccdf33802557a2b17b"
+status = "translated"
+digest = "61b716e0aa644715f80aecb104cf78c844970b27cd721b9b8e3b6bdeebad43be"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::set_have"
+kappa = "3686994549e88c776ccda0e7d9b9efe7652f6e3b47767f1c171ee328c2ad5af3"
+embedded = "321af185ec6061d2277399d3f29a72439880fd7ba36c0455ea8f6a40a9257733"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate::window::Window::size"
+kappa = "78c18477a27b89b3ada758209567d90bc1ddb33d6d8056d15356a1b9453ed56c"
+embedded = "fe217c4aeb9ff9f4c93584a9cec4c16415626617918eaec5e5993974593de728"
+status = "residue"
+cause = "mir::Ty: inflate::window::Window<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate_fast_back"
+kappa = "4ce9cb8f0083b599f7a747797b87409d626d7a8565113ae01da6a626f6aa664f"
+at = "Code=u32, ReturnCode=u32"
+embedded = "7bafcc38f49a50e001af464327216454e7accdb5b5c46af8ef15163e8540ce2a"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate_fast_help"
+kappa = "4ee5cf208fa269ed7ce68928a7227c515810e6d06c3c133a4be99adf2f7e2bb5"
+embedded = "4f3b9b40479d586bf5f280d7fbe0dee74aac6f0b6c7242ab6ee97b084e46879f"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate_fast_help_avx2"
+kappa = "38e9ba51963873b02c75782b2bd63248f2c04fb1dfbe1d560fcf5c6be9112433"
+embedded = "dd326dbe1a0df9e59a85a4ad713bf7ccdecffa6f723c894b4830f1f575970b33"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate_fast_help_impl"
+kappa = "73a95697d710468387a16aec1c94600ad258a92ba570af95b8902207f9bbf6ad"
+at = "Code=u32, ReturnCode=u32"
+embedded = "cbdfd7c29213c711134fb44dadbaba01886a0ed9f5aa5d0d09532d00edfff3f0"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate_fast_help_vanilla"
+kappa = "e9462ef8959ea5ac13cf9f364179e519f4beb91d9004f9e58e510a695bbde891"
+embedded = "0c67998787963e02bf143e9939fb77b5d3160c181b2a53a590ad5b4d3636b27a"
+status = "residue"
+cause = "mir::Ty: inflate::State<'_>"
+
+[[fn]]
+path = "zlib-rs::inflate_table"
+kappa = "c4e0d682aac307fbdd1d26922d58ff7598bda2346a9258d53412d5fb8f0c5d6a"
+at = "Code=u32"
+embedded = "779d2e81d2a1453bc61e9690528c5d5ca895554b690cf6de1e2c9c0a55292abe"
+status = "residue"
+cause = "mir::Ty: inflate::inftrees::InflateTable"
+
+[[fn]]
+path = "zlib-rs::inftrees::<impl at src/inflate/inftrees.rs:35:10: 35:15>::fmt"
+kappa = "7be6d931d943cb810221cd0ed195398162875271ea5909ae9badf1feb3396588"
+embedded = "d458123f96c025c6f6efbca13529ca626d45c5c7255e03cec4faf80b756f80a7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::inftrees::<impl at src/inflate/inftrees.rs:35:17: 35:26>::eq"
+kappa = "a352980a0215c189c1a510197b68a4627692290b2554d70aba0cb2d88773298c"
+embedded = "0ea0d5df81749d0b1f063e31284abde2ddeb3520dca918d5f7969fa22336d375"
+status = "residue"
+cause = "mir::Ty: InflateTable"
+
+[[fn]]
+path = "zlib-rs::inftrees::<impl at src/inflate/inftrees.rs:35:28: 35:30>::assert_fields_are_eq"
+kappa = "c52f722bf5f0b2560cfd14778a48f220f65d06bca562dec12444cf267a2ab7b0"
+embedded = "d1e8b412d81d5873c1ff27e6f7a944d282db8c31889511ec07d46bc8cfeb129a"
+status = "residue"
+cause = "mir::Ty: InflateTable"
+
+[[fn]]
+path = "zlib-rs::load_chunk"
+kappa = "75d42d6aa8e77fe2806ec9e90e82d299d4496a3a3b40c77789d9890fd2e0ddb9"
+at = "N=#_N"
+embedded = "c4061da809ab4a835c2e8d47c410ecca3ccc05dd25ab8e3cd2d36218f6dacf5a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const MaybeUninit>::cast"
+
+[[fn]]
+path = "zlib-rs::mark"
+kappa = "ee0f28113614dab5f661f6238365be5d16ae0ff020c811223c544e992c5269d1"
+embedded = "d57cb4fcb54bfec64b5d9ad8dd9a7e410fea912088cb15b75c0f484db33a3c1e"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::reset_with_config"
+kappa = "8cb95bf1e713db85b7aee60cc6a484f3d18e259ed798d226b1f293e719e444a2"
+at = "ReturnCode=u32"
+embedded = "200d62356ec9dea1808eaae3feb67ec196734ac5591552c1e956f6bfd40bf19b"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::slice_to_uninit"
+kappa = "1a0d570a9babfe6ee879035ae751258f712350a0aaccd4df73c57284ae50d8ec"
+embedded = "299428ccdaccb7f805cedacad1d706b22cf5dc14d8df689e1c3f7f42f67ea9ce"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "zlib-rs::store_chunk"
+kappa = "823bb84449cd4a1cb7e3ef653d0bac813f88d6f689b4b97d920394dc6278e985"
+at = "N=#_N"
+embedded = "f8c20d170b834e71deb6d468232706b9e0d1365e9659e7302a2a6ef8e15f9c6d"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "zlib-rs::sync"
+kappa = "ca1369fa90ca5f12edf1e6a2f725b36b476a6cc14caaf17e610fe62f35f3980d"
+at = "ReturnCode=u32"
+embedded = "69232ee63218db674bfbd18849bc64b075dad641df23f57c3d2c6f00da2ad2c6"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::sync_point"
+kappa = "c63b4d5d4f708595ecdacd246552b81d8e61f8d8e1e5c16fd805576df78a1637"
+embedded = "3f13053a5f27d196a8e247299fff0862a2843009aed7b3107b4d1c399eb44936"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::syncsearch"
+kappa = "fb14b75a369cea40c677b8ac466816948a4cb79472f3ad108e30240b55d44ea0"
+embedded = "b35c4d34e7a10235a8980436038e8f4e88fb1b8906f9dd4889e259ca0faefd7d"
+status = "translated"
+digest = "67d8d45ab3a915b6afcefce888b919da828c6e7f45faf642b7bf661ddf3e54fc"
+
+[[fn]]
+path = "zlib-rs::uncompress"
+kappa = "a65d50b70ff13324584cc1922dee4c9ff1de05f05faab146d7a086a876bd070e"
+at = "ReturnCode=u32"
+embedded = "d83217a2002c9103206a4cfa6d5f935857174760313a9e4623a0b6353213cca2"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "zlib-rs::uncompress2"
+kappa = "6f00c3a1c0560d749f47a731658867b33cd2fcd788b5738c027b2b0989ffb614"
+at = "C=u32, InflateFlush=u32, ReturnCode=u32"
+embedded = "e6537538a5e1750f0cd79b85f5b72d0c49bc62874ae79ded3b1de642e8d42b41"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "zlib-rs::undermine"
+kappa = "f24ead204a036b3eccea8e17d053747be25a69e3e1fcd3783762b8fc2bdd2802"
+at = "ReturnCode=u32"
+embedded = "836cee39de3570972b5792337606596559d19a923e56a3791653e577f44b0960"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::validate"
+kappa = "542cde1f17fb4e93977133809628c0f1dd4566787a3f04c7acd86093e41c24ed"
+at = "ReturnCode=u32"
+embedded = "66f009b06d5df25a4d0fe417704ff50d8a2325d2e8fae65bc3b3b60e23971525"
+status = "residue"
+cause = "mir::Ty: InflateStream<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::capacity"
+kappa = "cb091f8a3b3b771bd4a23fa08f655da72b3dad5ad2dfc6616c986d871709ef3a"
+embedded = "2fa927eb22e490051ce9c83ef8289cb7b5230dbcacf65d8d0117c069dad58d24"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::copy_chunk_unchecked"
+kappa = "49883d6defdf6d1044d90b9fafbffaee74639072ac336e35233a209e8992a4ce"
+at = "N=#_N"
+embedded = "5e42d33e3919c456c2ae575c582ae4b1e5392d6196ae21e74f09fb0b98d7f70d"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::copy_chunked_within"
+kappa = "fdb3e55ec1aecdb53e0e60cebe0a8a82dcdbe7893d028dc73b0f8262b668d383"
+embedded = "1aaeac2aba3bf181ecd0ec4be1015977c6f805cbf4a0d402d0afc8fd4b067415"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u8>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::copy_match"
+kappa = "7f68fec656c8ce512e8281d7c8adfaf0be730c0fae282f4db76a863776cecae1"
+embedded = "8edc5cbbc6d8ed3495845f236e83d3d931293de0733020279b2840189442b1f1"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::copy_match_back"
+kappa = "5d7ea6b3d90d94804d322d3cb3f1a8adf7694f32c416841915f8bb262068f8a6"
+embedded = "b3bac1144d3eba48492daaf78dea9586ece1c639999d4e9c534f698f76adf7f8"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::copy_match_help"
+kappa = "f22c757664ec52e43cfd18b6b0ba0b8f2d0d74c6b5b308c2c523176b2006ff35"
+embedded = "72f14e10258ff0b54e8b624f34f5c4d3f562821d712195d5bf66015c6e80868f"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::copy_match_runtime_dispatch"
+kappa = "d708550a30aa793f2b56be20afdb459a4de61649611ccc476a2b1f03599a597a"
+embedded = "93cf861a76ec588b2f2d1d9b460951ae321e6614258e053df58186d7a05bf667"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::copy_match_with_features"
+kappa = "905fa4849fbba12c487aaa9a7dcb631605f601a6f8d96adea319860c83a0e420"
+embedded = "1ac299c49054318086661e246f1f8e867a13230d11e50549e1f5426a79ed6025"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::extend"
+kappa = "cc5f6d96b4a99d45d8d52bf145910456297b306ffe93417df4ff7bd1231a82d7"
+embedded = "ba9c67b05519cb5da08a2d099cba5587b58ba97f4fb502b2f84b5f99787747a5"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::extend_from_window"
+kappa = "a4f5aab206789d3da7a92c0320b2227208bb5e85806555b2372316fbda271642"
+embedded = "6ab3a595d3611134f670caf8f4d5e4dd4c1af332390f72416b377e064ba55455"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::extend_from_window_back"
+kappa = "f1deab9a930314737a52075716be3f6aef3dbd2e13c840c5b478babd61fa73ea"
+embedded = "e439b702a686e3ed409b23d73f3158509a206ceb3f9f6ff23d48bd0ffbc73f87"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::extend_from_window_help"
+kappa = "fff900f45e6d9fa97422cff42929daed27a08e8c5e98b20ce7e116aeea11f414"
+embedded = "c41c8e3306687547e1f552913e9cb777d5e7bfde9bcaccb35f5d67bceb3b1747"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::extend_from_window_runtime_dispatch"
+kappa = "98b55d745d21f5ef5a91fdfa76cd8dfb30c016e556c4c2ba65cda3b5b7ae9eb1"
+embedded = "15aeb415712acde8990b9a8cab393ca32a4509207590906bca91608a9b245340"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::extend_from_window_with_features"
+kappa = "29517b47779ce7ae4a59fbcee9b8e1c4657c81c7b68b2623787f38ecee258436"
+embedded = "449ef2a16838b12f03989475baee456b710b89e40b7d6ffd7f5ec5ee4045f0b8"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::filled"
+kappa = "926755669ddeb52fb02f41c6c2a8574d009f2fff5e3260023eb6f78d8b5df229"
+embedded = "bc9e29c728e02cfe382f252a94b924b33a73b785c0decd140caaa90aeb4e4c3f"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::fmt"
+kappa = "0ee2d7a60a0b69ddf032d13fa1e19c9e0b571e8bd46d892e6a8ae7a6e15e5259"
+embedded = "513f19a911a132ad53efdc6adeadb2dbeceac7681ea651dbfe42979d013fa79c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::is_full"
+kappa = "ce7a2a3955431409755aab341a2daf9e301192dfab73d946bbd8ec0e7fee335c"
+embedded = "35a9da3a6f92e17e077709c1f80d7fd8f7b8983d3d9949a5f59dae2aa9419f3a"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::len"
+kappa = "5614fc1127a66c7ee4514dcf9605ffd1d0cc5fbe4c9429f20bc84a96d08389e4"
+embedded = "c2dfdf147f9698060c46764fafb1aa192243b6531c98811df4cdbf208e2ce77c"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::new"
+kappa = "a5f819f2962f5b7aca31eb3a3d098da228a360640b817a8513416ec905aabc62"
+embedded = "4da3059bbceddad65a0a23cf7ab50ef09ecffae7654d7c56332bccab52fe637e"
+status = "residue"
+cause = "mir::Ty: inflate::writer::Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::new_uninit"
+kappa = "876b374954ca1253f738a8251f61264ee070e70b61774d3d1e95ffed25c5c685"
+embedded = "d4cc5c4cd764424f17c9a61b4d2c39febc46d683d87177fd3097908898bd484d"
+status = "residue"
+cause = "mir::Ty: inflate::writer::Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::new_uninit_raw"
+kappa = "5775d55f67d3a9cd8b10eefe70bc62582c8ea90af3c2822fc393da27d344e785"
+embedded = "d9da9cb0f6deef1a5e0474f38dc2ca4e4409ca7bc3acedc738cbf9501b430b1d"
+status = "residue"
+cause = "mir::Ty: inflate::writer::Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::next_out"
+kappa = "4c9b7ef922d1477938f1c307d105873c2223c7a09e35195104304f3800103de9"
+embedded = "a408f8dfc87d874832fd7f42d2b179233b04c6b1474f678fe4cc9039c348dd73"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::push"
+kappa = "29f268deadf7b053103d7c7117524816ae238032c36180bf98455e95a5c29b3d"
+embedded = "21b0380b6c2fb7f0fba6e2421d5f8bcc80537c1e99c7588530bf2cff925a6840"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::writer::Writer::remaining"
+kappa = "45720d3a84da16954eb2b7ffe3cfe47ddd699cea1010abef24c253acaced75f3"
+embedded = "57e9751d895a50fc9e5d3f52ef4e288eaea797f943618adf329273397a8c1ad0"
+status = "residue"
+cause = "mir::Ty: Writer<'_>"
+
+[[fn]]
+path = "zlib-rs::zswap32"
+kappa = "89905717b548928f7b39c27eac271158a85e256ddce49127132650ceec49476e"
+differential = 7
+embedded = "ca212b1cf026371a9070756561d83e89d7be2bb44ab93257b891fbaab3b6f7d3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::to_le"
+

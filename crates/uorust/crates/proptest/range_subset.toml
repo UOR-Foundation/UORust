@@ -1,0 +1,63 @@
+[[fn]]
+path = "proptest::range_subset"
+kappa = "5ea3d531c36450b373e5c94269fb3cfbbc5f47ed0c28677a74247383cb6c4bd2"
+at = "SizeRange=u32, T=u32"
+embedded = "ec9820a1490303b74fb55b34429e0ae8d6db2324477eb5b49d90b57c40558883"
+status = "residue"
+cause = "mir::Ty: range_subset::RangeSubset<u32>"
+
+[[fn]]
+path = "proptest::range_subset::<impl at src/range_subset.rs:129:10: 129:15>::fmt"
+kappa = "d37958c0f004c52ad7f2c3dda4dbe17597dbaf2eca992983774a82687e741086"
+at = "T=u32"
+embedded = "fc85cb026281b5d6d73f616338136b92628bf4ddd73f7b08a3b4a763a0958064"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "proptest::range_subset::<impl at src/range_subset.rs:129:17: 129:22>::clone"
+kappa = "d4d5ca5f8fb58d5c301f714023c34f8720a8ff4566a56d8ec9df958c89ee856c"
+at = "T=u32"
+embedded = "48dc03ebd4e50c0fd034adb00adef186b6852d797ef921f7769842d1d4dd7f78"
+status = "residue"
+cause = "mir::Ty: range_subset::RangeSubsetValueTree<u32>"
+
+[[fn]]
+path = "proptest::range_subset::<impl at src/range_subset.rs:64:10: 64:15>::fmt"
+kappa = "060a11991a70a81abdc37c8d7a899856392a989e869da9a74cfd52a90536847e"
+at = "T=u32"
+embedded = "92128a6b3e883777c9352c65b8f9fa64fd2387779d4898d2aa0049573f5bb0e2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "proptest::range_subset::RangeSubset::new_tree"
+kappa = "d6a6300c75eb9264d42d658022a76ba82019c117326a3666af4285c074c262ed"
+at = "T=u32"
+embedded = "05562c835b9d310da2ef704b2b61e61b0df36c04d08890f5d9b1062fc79d07a7"
+status = "residue"
+cause = "mir::Ty: range_subset::RangeSubsetValueTree<u32>"
+
+[[fn]]
+path = "proptest::range_subset::RangeSubsetValueTree::complicate"
+kappa = "ab6eedbcd25e4d2437908878f8378146ec57965d3167498c376b07166a498351"
+embedded = "08b4ff12bc4ecb97362e0715d473410a01d5a5a20acb5f77ebc4b6a374b3946a"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "proptest::range_subset::RangeSubsetValueTree::current"
+kappa = "e887b472178ca1dd7bd45c2af83e6098ddce55014847326240d6c986ac671bc9"
+at = "T=u32"
+embedded = "84a565d8549f1a5d001f60b830054b9470f972237726471594f4c0aa26c5fc14"
+status = "residue"
+cause = "mir::Ty: RangeSubsetValueTree<u32>"
+
+[[fn]]
+path = "proptest::range_subset::RangeSubsetValueTree::simplify"
+kappa = "90c3a6b39e50e81554d61360071763108bf0623016a8bc557fc2591497700665"
+at = "T=u32"
+embedded = "ba73aafce5d41e8ec3b047cea68bf4984bc6c8dbbaf77ad3667a9734d69a5a9a"
+status = "residue"
+cause = "mir::Ty: RangeSubsetValueTree<u32>"
+

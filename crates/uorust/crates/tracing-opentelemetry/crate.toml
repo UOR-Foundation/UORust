@@ -1,0 +1,71 @@
+[[fn]]
+path = "tracing-opentelemetry::<impl at src/lib.rs:137:10: 137:15>::fmt"
+kappa = "cce119f41f005e27f17948684e70cfa2d93981f26f8ec856b18d17ebdd28008d"
+at = "OtelData=u32"
+embedded = "8ffd74f2782ac2decaed1cda5f7f471b9c6c85b2dd5c1edd09bd9e1e6294e4f4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tracing-opentelemetry::<impl at src/lib.rs:137:17: 137:22>::clone"
+kappa = "3816eb38e32cd1977a989e47076e2eb068b1cbdae2f94d2a25bd69b07a584be5"
+at = "OtelData=u32, OtelDataLock=u32"
+embedded = "a49a8cc02210719645498c1c041701e3a6c5393462febe36a4bbf508b2ee6842"
+status = "residue"
+cause = "mir::Ty: std::sync::Mutex<u32>"
+
+[[fn]]
+path = "tracing-opentelemetry::<impl at src/lib.rs:155:10: 155:15>::fmt"
+kappa = "e301330eb69e986783069216fa63d3d27cc84869295285b22b4b8e1f84af8e82"
+at = "OtelDataState=u32"
+embedded = "f50d2c70eba46244cda64bf30389d79a933cf6023aec4cbbbe7c183c0250b8bb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tracing-opentelemetry::<impl at src/lib.rs:155:17: 155:22>::clone"
+kappa = "a3b7c2a87bf5116ff0a6918ee1dfeed62e1ae0016ed380e221f2048c4fad674e"
+at = "OtelData=u32, OtelDataState=u32"
+embedded = "2f4869e422b0f1bbc4898bc0c3ec6e0471dfa43bc0a303cadd07722c83546a8d"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "tracing-opentelemetry::<impl at src/lib.rs:164:10: 164:15>::fmt"
+kappa = "76583090d55a59211f98a5e2143e44701c40a3e7073b71e82ed70170bcd970a0"
+embedded = "d3ba1991904850253d80f571577791c55f5b9cf22794fca21b6f9ebd5216007b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tracing-opentelemetry::<impl at src/lib.rs:164:17: 164:22>::clone"
+kappa = "41f1bf5f211eaa85eb00e962e5f93902defddb6b03ff08aeaf656d75cbee5014"
+at = "OtelDataState=u32"
+embedded = "03014240cb3894ec6d3ce50e6f3dd6dd0872c3cb01eaab9c3c5d9cbbdccebb00"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "tracing-opentelemetry::OtelDataLock::lock"
+kappa = "1c31eabfe7303ee8cccf71ef33e9beb7dcf2ea8c31c7b7421701957ea88f2ef2"
+at = "OtelData=u32"
+embedded = "2e67569a1f54553ae5cd000ed15de8febc3bf1efa33ef1a1fe5858ba5e529dbd"
+status = "residue"
+cause = "mir::Ty: std::sync::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "tracing-opentelemetry::OtelDataLock::new"
+kappa = "efccc3a7f027eab03982373b2ee1a9acbea8c66baaeb184e92c63377f5ef4aaa"
+at = "OtelData=u32, OtelDataLock=u32"
+embedded = "6a338084834a2eb68667bbc574e3efa08aa43282bb5a0b82aff1cc5865647986"
+status = "residue"
+cause = "mir::Ty: std::sync::Mutex<u32>"
+
+[[fn]]
+path = "tracing-opentelemetry::OtelDataState::default"
+kappa = "1914dc5e11c6e957fce5aca71a36e7eb749b7b3809916bb400a2fe8311b9cc82"
+at = "OtelDataState=u32"
+embedded = "209a09a652d0deac348d19952d9869d4c812a799de38a1a85ff22058dfa5eb83"
+status = "residue"
+cause = "mir::Ty: opentelemetry::Context"
+

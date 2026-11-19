@@ -1,0 +1,86 @@
+# The vec_map register (written by `uorust crate vec_map@0.8.2`; do not edit): every body of
+# vec_map's MIR at vec_map 0.8.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 81
+translated = 1
+residue = 80
+
+[module.crate]
+bodies = 81
+translated = 1
+residue = 80
+
+[embedding]
+bodies = 81
+embedded = 81
+evaluable = 81
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: VecMap<u32>"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: Iter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Keys<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Values<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: OccupiedEntry<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Drain<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IterMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ValuesMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Entry<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IntoIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::map"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IntoIter<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VacantEntry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VecMap<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1

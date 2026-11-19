@@ -1,0 +1,84 @@
+[[fn]]
+path = "zune-jpeg::choose_horizontal_samp_function"
+kappa = "fdd69c64606b82c4f3c11e6817675d9b9287b76a33b65a6fd6fd904e0bacc819"
+embedded = "037f1e1011d638ae1a2426aaa2ccaa701e7f375e4a8b62820db13586085774af"
+status = "residue"
+cause = "mir::Ty: for<'a, 'b, 'c, 'd, 'e> fn(&'a [i16], &'b [i16], &'c [i16], &'d mut [i16], &'e mut [i16])"
+
+[[fn]]
+path = "zune-jpeg::choose_hv_samp_function"
+kappa = "5f12f84ba525b180a817588b02538fd4d2cae8dddd51fb3f8543301567c33cc1"
+embedded = "0ff1ececa3cc18468005ff6a37d373fa75d9fe34cfcea80350f26becc4957e73"
+status = "residue"
+cause = "mir::Ty: for<'a, 'b, 'c, 'd, 'e> fn(&'a [i16], &'b [i16], &'c [i16], &'d mut [i16], &'e mut [i16])"
+
+[[fn]]
+path = "zune-jpeg::choose_v_samp_function"
+kappa = "18af0977cfe7f50b4042ea8575a9ae1c524566e14f32f3e9904497977b764b73"
+embedded = "7e9e8574bada08a3850a352910921b4a77a2924b5d54f9ad91035fb7a263d5b1"
+status = "residue"
+cause = "mir::Ty: for<'a, 'b, 'c, 'd, 'e> fn(&'a [i16], &'b [i16], &'c [i16], &'d mut [i16], &'e mut [i16])"
+
+[[fn]]
+path = "zune-jpeg::generic_sampler"
+kappa = "afa142fee1bef7fe6647e0737fe7efc85d055383837872de13471cd660107885"
+embedded = "6dc4df3025bb79b3f4bb53a03e88283be039bbbbaa9bad9844348efde915bcea"
+status = "residue"
+cause = "mir::Ty: for<'a, 'b, 'c, 'd, 'e> fn(&'a [i16], &'b [i16], &'c [i16], &'d mut [i16], &'e mut [i16])"
+
+[[fn]]
+path = "zune-jpeg::upsample_generic"
+kappa = "65b5e429671763d7c501e420a90af7f9a9ff50fbb27674de1d1270bc77cde1db"
+embedded = "c1a433293e91d030dea687c2be549897184336ba5d8d5e3e48f05245c377beea"
+status = "residue"
+cause = "mir::Ty: std::slice::ChunksExactMut<'_, i16>"
+
+[[fn]]
+path = "zune-jpeg::upsample_horizontal"
+kappa = "ab8ed019ca10e61ad89cd886f0100e6aa008ca51d824c308543f63e7933f4ce9"
+embedded = "039c9b90f95a4e47c52ace616086574d7fb9232e0567110b5b2f3fe9b20c4e3d"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "zune-jpeg::upsample_horizontal_avx2"
+kappa = "79e4b34f0c0fa8e91b1ef3e14c549ec471e0d71842581521d6a4022d186fe630"
+embedded = "5a220fe2a7bc25f54c375d63bca7922676a4779f8cd99ebef5694aee6805c420"
+status = "residue"
+cause = "mir::TerminatorKind::Call: upsampler::scalar::upsample_horizontal: zune-jpeg's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "zune-jpeg::upsample_hv"
+kappa = "0446f6b07c9b5696e00a81eb0d86f4fb68424dfdfa8715977222510a2a336b92"
+embedded = "25dec58c55df24c985adb43096eba42f3757e181f62a7c477cbf1a8ef0a7461a"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "zune-jpeg::upsample_hv_avx2"
+kappa = "10aef232b5fcc4148ece9bfb394a89ec543ce8da4a81671a054374224952fb35"
+embedded = "f59f9cb8953ba07e49a6cd31163abc551baa8169ba8669eb0fe8cb6d553df6a5"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "zune-jpeg::upsample_no_op"
+kappa = "5daad104d3359a40e6c4b4171ddcf576ddabc9743a74a3c6e1e2edb95bca1aa0"
+embedded = "3a2de5444f2ac44439e9d6c5c87339abfacef61786bada680c88983f83e1c762"
+status = "translated"
+digest = "ccd4bdea7ad220bc652d171a0c41f02d59f0f79a8610ad3df95abfdf53501772"
+
+[[fn]]
+path = "zune-jpeg::upsample_vertical"
+kappa = "592f67ef55a3f8d96433a3140f479cd9ed9eeb9784f735f164f81e7a61de1dd6"
+embedded = "df9a96145b160a14cf86c0c55801d7be4db10a2d0f75f5ec7d227914d4a016a0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [i16]>::split_at_mut"
+
+[[fn]]
+path = "zune-jpeg::upsample_vertical_avx2"
+kappa = "bd2bbf40c317ccfb0e855cbf4d3f8a0228cd638b58dc73f9a94bfc258e056375"
+embedded = "1f62b914e9acd64b105246049a2732390ac13b20f1d0757c28c7af043169e8cf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: upsampler::scalar::upsample_vertical: zune-jpeg's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [i16]>::split_at_mut"
+

@@ -1,0 +1,61 @@
+[[fn]]
+path = "aws-smithy-runtime::META::NAME"
+kappa = "c0877801d55ce8e738e94b8b9d17d93d97629c449691716d6a3891879044781f"
+embedded = "9523608b38e101a28e76ce2df3eaa86d8dc992eda8a3797423801947ab8a7c20"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "aws-smithy-runtime::META::NAME#2"
+kappa = "ef80b9122e3d403e8e2bfc8c6660ddd8f92059568062c33bd7f4fe54d011e521"
+embedded = "3561c108c87071c5e5452a4f817093b4f6dfa3f4c97adbc5ddf56e62a80bb6d6"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "aws-smithy-runtime::expired"
+kappa = "3c01a1394139a8a0a7be36b423385d05478cca24045aaae1df4922ef7e0dc5a2"
+embedded = "db6dbf974cba37b9726ed124f743772d231e454224d21dee62d25748a72208ff"
+status = "residue"
+cause = "mir::Ty: SystemTime"
+
+[[fn]]
+path = "aws-smithy-runtime::expiring_cache::<impl at src/expiring_cache.rs:17:10: 17:15>::fmt"
+kappa = "cef73546219780e11e1b926a3fbc9e9bf3981b53d408dbea4e1b868a9691d270"
+at = "E=u32, T=u32"
+embedded = "72160850ffeb9480e074f1c5e321ba2e1e3e646b1c768a3f49ca375c588fa736"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-smithy-runtime::expiring_cache::ExpiringCache::clone"
+kappa = "6218c22fb0335431c05776542e90d813e437cc7cc21da38750fb8c5f459d5a3c"
+at = "E=u32, T=u32"
+embedded = "d3c5b763634511de36de680359b0905bba283693746a661319d0efa45cc7151c"
+status = "residue"
+cause = "mir::Ty: expiring_cache::ExpiringCache<u32, u32>"
+
+[[fn]]
+path = "aws-smithy-runtime::expiring_cache::ExpiringCache::get_or_load"
+kappa = "a66b15ef36fcb002f0dd8c175bca8dd03a57ef173141a555783f77c875a33ed0"
+at = "E=u32, F=u32, Fut=u32, T=u32"
+embedded = "944fe5498891575d0d6e24f60e400314d1da07cbdb23eb405b5eac3d1759fed3"
+status = "residue"
+cause = "mir::Ty: {async fn body of expiring_cache::ExpiringCache<u32, u32>::get_or_load<u32, u32>()}"
+
+[[fn]]
+path = "aws-smithy-runtime::expiring_cache::ExpiringCache::new"
+kappa = "88d9a09654e65933354b546bbf0df0a5f82a191d5b088aeb417f01c625664bc3"
+at = "E=u32, T=u32"
+embedded = "7c6bef39b34285b42322f3ce838209f1ad5cee14db20d9b9477da1dd8a2e1546"
+status = "residue"
+cause = "mir::Ty: expiring_cache::ExpiringCache<u32, u32>"
+
+[[fn]]
+path = "aws-smithy-runtime::expiring_cache::ExpiringCache::yield_or_clear_if_expired"
+kappa = "b5222c58b891a854e492b758eb7d0542b15f09040a0a22151917a7acdf4cac1b"
+at = "E=u32, T=u32"
+embedded = "579c4f09cc2d0d4164224841b06007e9af12fc63e91078957a340c0229487a5f"
+status = "residue"
+cause = "mir::Ty: {async fn body of expiring_cache::ExpiringCache<u32, u32>::yield_or_clear_if_expired()}"
+

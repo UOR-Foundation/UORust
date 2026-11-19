@@ -1,0 +1,102 @@
+[[fn]]
+path = "base64-simd::STANDARD_DECODE_TABLE"
+kappa = "ff9df165884379023e3a7b2c81c136040792d661649bb6d05a83f8fd8d042d5d"
+embedded = "214b6d29210a9a7e9b2619adbe333695b325d83797be2a36b56947f44289ac6d"
+status = "residue"
+cause = "mir::Operand::Constant: decode::STANDARD_DECODE_TABLE::promoted[0]: mir::Operand::Constant: the constant item STANDARD_CHARSET"
+
+[[fn]]
+path = "base64-simd::URL_SAFE_DECODE_TABLE"
+kappa = "587986abe7af0092c89f02e448229ac7b85c89d88d7363bdc24ee3eb1a2649ea"
+embedded = "d5b2176496153e5a5119c38b4f7c6c835cea38d3019f377170b7a1d3ebfa14cc"
+status = "residue"
+cause = "mir::Operand::Constant: decode::URL_SAFE_DECODE_TABLE::promoted[0]: mir::Operand::Constant: the constant item URL_SAFE_CHARSET"
+
+[[fn]]
+path = "base64-simd::decode::decode_ascii32"
+kappa = "c3e44b1faf8a3d498d81464442e3020aae07186dd32ca4ea021c6b6b3d2df298"
+at = "S=u32"
+embedded = "bd8a2e4275674fa4e138cc03b8061f7b0596127e62423f18ee8baba5002cc2bc"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V256"
+
+[[fn]]
+path = "base64-simd::decode_ascii4"
+kappa = "0201d803e9743bd8dd77b18444f260dc05e26e09991788ec079e33e7acf40b5e"
+embedded = "6ceef7f0e89c174be99f2428816b3352098ffe8084b6dbb636a747a43938959e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::decode_ascii8"
+kappa = "10e1abeeed25cb981acc4f78d7aee1a100ef4c84b979ff60f966d26994a7bd3c"
+embedded = "6728b0d690426a15e6fb2d322222c745acd9306c112c8cc6df429051248c9b60"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::decode_extra"
+kappa = "c8e9dd56955ec68827c1ef4198dc42b8a1c67a3c34cc7278889618dbec77008f"
+embedded = "08da5dc1d967d65689af7f6f9a4bee6e0b5774163bde6c3a766f4216cca9a00e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::decode_fallback"
+kappa = "5f9c3669e122a6831b1c4c6af805da16c78af1b5b7c0548ef36cba9d2bc4e9d8"
+at = "Extra=u32, Kind=u32"
+embedded = "29370b61308aca05a7f3d9b8854e28f8588bc52874d9b53021408a332df4208b"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::decode_simd"
+kappa = "f64fd2eede5cc962e80840815481d112bbd8b837d62fc19fa4b1821a1fec67a7"
+at = "Config=u32, Kind=u32, S=u32"
+embedded = "b30162dd398b58e0ff24c6df121e8397b752704baeda2d22d59e0862a9f0dc64"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::decode_table"
+kappa = "b24caba5374143da4e2cad1378f13aeaee5594a15d5c8beec65ee3f9a8d44687"
+embedded = "01b14c413cdd462cfd16e4d787104fdddab6d63d596501680a31eb1e3ee02a15"
+status = "translated"
+digest = "b93dc94137c70e365a9fb122ad8c4d50285a2f7b23ab0158a3c54bb769c06ce8"
+
+[[fn]]
+path = "base64-simd::decoded_length"
+kappa = "5a76a4dc4f2050029ffb84f42d946dac10b203dff244f88c03b522025f890ad8"
+embedded = "a50f719d01480206b65b4be62292a7c10f924ae384ddedb82ea8099ed99523bc"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "base64-simd::merge_bits_x2"
+kappa = "ef816a684fae82fd91fba48e113d85eaef0bd4804a08ce82ea62cb15e93b6f10"
+at = "S=u32"
+embedded = "8901f0ede17f90658c160b5a6f2949dace1846556b785caa45f629d8d41b90df"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V256"
+
+[[fn]]
+path = "base64-simd::merge_bits_x2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/vsimd-0.8.0/src/isa.rs:70:9: 70:46>::VALUE"
+kappa = "b8be6e25e92fcbc385d7c82cc36eee85980512903228377e276e473634340e3a"
+embedded = "c0f0893e87f3f41d33a6433b54f85bdb60fe91ac28f6662bf0b1b64eb4d5c36f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::isa::matches_isa_impl"
+
+[[fn]]
+path = "base64-simd::merge_bits_x2::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/vsimd-0.8.0/src/isa.rs:70:9: 70:46>::VALUE#2"
+kappa = "21245a979fea4a82e26a36a7b5c2e3833acb278f878e10e19f580cf220a0e02c"
+embedded = "8988ab6fb5efcc6642053d4200c6097de5016d26295d4d37a108ec7d312b67a3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vsimd::isa::matches_isa_impl"
+
+[[fn]]
+path = "base64-simd::merge_bits_x2::SHUFFLE"
+kappa = "5ccdf2e571c36bed5eba233298adc1f67545017af569bdc58495c3518a3c009d"
+embedded = "f4859e3adcd50837e2da1234a04dab87c5cc035227fc5e5dcf9712e85ae3a1b2"
+status = "residue"
+cause = "mir::Ty: vsimd::vector::V256"
+

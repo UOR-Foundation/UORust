@@ -1,0 +1,337 @@
+# The lexical-util register (written by `uorust crate lexical-util@1.0.7`; do not edit): every body of
+# lexical-util's MIR at lexical-util 1.0.7, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 875
+translated = 327
+residue = 548
+
+[module.algorithm]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.ascii]
+bodies = 4
+translated = 4
+residue = 0
+
+[module.assert]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.digit]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.error]
+bodies = 58
+translated = 0
+residue = 58
+
+[module.format]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.format_builder]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.format_flags]
+bodies = 112
+translated = 77
+residue = 35
+
+[module.mul]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.not_feature_format]
+bodies = 70
+translated = 0
+residue = 70
+
+[module.num]
+bodies = 492
+translated = 196
+residue = 296
+
+[module.options]
+bodies = 84
+translated = 49
+residue = 35
+
+[embedding]
+bodies = 874
+embedded = 874
+evaluable = 874
+blocked = 0
+
+[differential]
+bodies = 4
+theorems = 28
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 61
+
+[[cause]]
+cause = "mir::Ty: FORMAT"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: format_builder::NumberFormatBuilder"
+bodies = 41
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 29
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 13
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 12
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_pow"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_pow"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::pow"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::trailing_zeros"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_neg"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_add"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: not_feature_format::NumberFormat<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_add"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MIN"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_sub"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: format_flags::MANTISSA_RADIX: mir::Operand::Constant: the constant item format_flags::MANTISSA_RADIX_SHIFT"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: format_flags::DIGIT_SEPARATOR: mir::Operand::Constant: the constant item format_flags::DIGIT_SEPARATOR_SHIFT"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item FORMAT"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: format_flags::BASE_PREFIX: mir::Operand::Constant: the constant item format_flags::BASE_PREFIX_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: format_flags::BASE_SUFFIX: mir::Operand::Constant: the constant item format_flags::BASE_SUFFIX_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: format_flags::EXPONENT_BASE: mir::Operand::Constant: the constant item format_flags::EXPONENT_BASE_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <Half as num::Integer>::BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format_flags::BASE_PREFIX_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format_flags::BASE_SUFFIX_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format_flags::DIGIT_SEPARATOR_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format_flags::EXPONENT_BASE_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format_flags::EXPONENT_RADIX_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item format_flags::MANTISSA_RADIX_SHIFT"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: digit_separator"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: mantissa_radix"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: num::Integer::ceil_divmod: lexical-util's MIR stops at mir::Instantiation: u32 for a parameter bounded by Div"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Div"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: format::STANDARD::promoted[0]: type outside the lift: format_builder::NumberFormatBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: format::format_is_valid::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: format_flags::EXPONENT_RADIX: mir::Operand::Constant: the constant item format_flags::EXPONENT_RADIX_SHIFT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as num::Integer>::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as num::Integer>::ONE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item not_feature_format::NumberFormat::MANTISSA_RADIX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as Integer>::overflow_digits"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: base_prefix"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: base_suffix"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: digit::char_is_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: digit::char_to_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: digit::char_to_valid_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: digit::char_to_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: digit::char_to_valid_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: digit::char_to_valid_digit_const: lexical-util's MIR stops at mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: format_flags::is_valid_control: lexical-util's MIR stops at mir::TerminatorKind::Call: format_flags::is_valid_optional_control: lexical-util's MIR stops at mir::TerminatorKind::Call: mantissa_radix"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: format_flags::is_valid_optional_control: lexical-util's MIR stops at mir::TerminatorKind::Call: mantissa_radix"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: num::Integer::is_odd: lexical-util's MIR stops at mir::Operand::Constant: the constant item <u32 as num::Integer>::ONE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 1

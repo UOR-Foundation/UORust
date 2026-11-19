@@ -1,0 +1,139 @@
+# The term register (written by `uorust crate term@1.2.1`; do not edit): every body of
+# term's MIR at term 1.2.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 76
+translated = 2
+residue = 74
+
+[module.crate]
+bodies = 15
+translated = 1
+residue = 14
+
+[module.terminfo]
+bodies = 61
+translated = 1
+residue = 60
+
+[embedding]
+bodies = 76
+embedded = 76
+evaluable = 76
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: TerminfoTerminal<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: terminfo::TermInfo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: terminfo::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parm::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: terminfo::TerminfoTerminal<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Attr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TermInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: terminfo::parm::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: terminfo::parm::Flags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: terminfo::parm::FormatOp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: terminfo::parm::Param"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: terminfo::parm::Variables"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc13: &&[&str]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Flags"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FormatState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: States"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Terminal<Output = std::io::Stderr> + std::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Terminal<Output = std::io::Stdout> + std::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminfo::parm::FormatState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: terminfo::parm::States"
+bodies = 1

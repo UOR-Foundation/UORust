@@ -1,0 +1,369 @@
+[[fn]]
+path = "rkyv::INLINE_CAPACITY"
+kappa = "e77d82be6f298a5021176de46de3161ad1541173fd9535ccbdfe825e2b0828a8"
+embedded = "431c9928012965cdda688feedffb2a3209e3ea0f60e7fe529022e0a8587de857"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "rkyv::OUT_OF_LINE_CAPACITY"
+kappa = "4884e12b0659d1be3b6bf1fb4e8eb158ce48f0a8eca82029e86b95ec26e2e3a8"
+embedded = "ed2a828ad26571db92186555050c34eb5a52357c97f723abc6bbaf68872b4dcd"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::BITS"
+
+[[fn]]
+path = "rkyv::repr::<impl at src/string/repr.rs:19:10: 19:15>::clone"
+kappa = "9e889c345b0e3dc187d28b6f70c5220ba580bc75c185e8aaf15fadc71db47b13"
+embedded = "6e0481ef4dc789a4582b05ec28458fcf48506a576a1c212db1d3762890c18ce3"
+status = "residue"
+cause = "mir::Ty: string::repr::OutOfLineRepr"
+
+[[fn]]
+path = "rkyv::repr::<impl at src/string/repr.rs:33:10: 33:15>::clone"
+kappa = "e013036ca20d499e5157e8e6c7b7f5bea68ba906f6fc0e13e5d14e51c06ed969"
+embedded = "e364f599fde17650b59e5f30ff6bd438e725bf3d290f8861d9fda0e1abc984d2"
+status = "residue"
+cause = "mir::Ty: string::repr::InlineRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::as_bytes"
+kappa = "a2a52ead4896a6b60b96948d50be7740e6e34ba26b195098e3d53b6e643d8e05"
+embedded = "94af799954c15d879cf8c1cb05f70b9373e30f97bf8156bb946d480aa186fb3c"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::as_bytes_seal"
+kappa = "29d16be80d8709e021ccb687c565981899d89bb811bf402dcccfc0d83bf02eee"
+embedded = "80018702fb515d03ef880493daae5f753e9a9a44fd5e2321310bdd51dab3a57e"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, [u8]>"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::as_mut_ptr"
+kappa = "f39b933b3d52af995db8e43ea6c0bdd228ba4c32913c3935b58555f1de732a06"
+embedded = "41e343b1e0bb817f6be067e7ac39501df7e1729087055dadd1cfe2ec4ff5cbfb"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::as_ptr"
+kappa = "ff303ecc79db6e4ad7916177aa11d3130ea2dabcde85078c27007aac4622d3b3"
+embedded = "52baa5cd55965ba808ed34b7912cd46950e77047fd6292d1575a2410bd0df987"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::as_str"
+kappa = "58b4bf82ef123710924ecb189c110e099990a49a3fc3a883af23e5eca2f82790"
+embedded = "c5a40d5cbe2d881c644b80cbf8603cae72e52acb7de11fa12bf32bd124202320"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::as_str_ptr"
+kappa = "b62b736b88caed2900b299d714fd8a522f477b0c1466587b51344daa396cc3ce"
+embedded = "c60bd2805d1fc1108cadec8b13a76ab730d35990a0434f53261f1a18c24375e1"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::as_str_seal"
+kappa = "491bfdd97476fdb855b1a71644398492db63194b3d0e74aacb72f8811747bcd5"
+embedded = "af95ec24b3a9a25ede65e438997b4192bc6eba1dcfb7c4e486869d7255f2d688"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, str>"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::emplace_inline"
+kappa = "3d55e7452efe92261a156e9aeefb6b9e2e1faaa2f84e44f7c3b199522b989a8f"
+embedded = "ec406d198379014df6c0489602a86e4aea79ecb29b515d26bbb12e998d25e37a"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::emplace_out_of_line"
+kappa = "12d36bb592603678efa6592cc9343c85f7d1dd9f8c93e9d858461abb73a95948"
+embedded = "67c9a3746b91d87623ca2c8bca2486c638cc97a4b65ef0469de5696ff827fee8"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::is_empty"
+kappa = "cd0082a5e442669a983a04e25b709371d15c4272e52880d68536e9ec8df7d8c9"
+embedded = "5368cd445bff115de3b428fe8a5014faddf4633907a156ee2889066f4ec7f750"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::is_inline"
+kappa = "b03e8a355042abddb21dbc2dce3ce6bd2b73378a41207781707a14d07c9c0c51"
+embedded = "35bb3bc899833f287d047a980f11c144f7bcdb521a062745ca896dbfa8c7436f"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::len"
+kappa = "ae10103228e122af0b134a8f45bd680c5e2f3e9bf17156a3b76aac007aa49f0d"
+embedded = "d19f5f8535976df7c2b65ba475cf8ac5644334cb98e8f5519be9811df01531cf"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::out_of_line_offset"
+kappa = "7ee7f867f93727b2b51095b494c2d3c039914d7555fa38744b8a0a9b7c623cbc"
+embedded = "7404295daa5a51553b10ce38931b6bd043500918b8f56687b3c1a5b56c4094a2"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::ArchivedStringRepr::try_emplace_out_of_line"
+kappa = "5bbdcc8ae4d22f31c563166a9b7155e77d73eafd64a507247fc3062951c4259b"
+at = "E=u32"
+embedded = "2b25cd91de08fc3783392ee35fe78f5600deffb71725d317df13799f99a9aa74"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::_::<impl at src/string/repr.rs:266:14: 266:19>::fmt"
+kappa = "fb715eb6d135a1ac9cedd69e94a809736b1ce7b996c25ccebd1d72fcffc38e43"
+embedded = "0b9926196e51ee9d1a9013a8cf281a2bf9d15852be28a48a7fb1360a3b7a13cd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::repr::_::<impl at src/string/repr.rs:281:5: 284:26>::check_bytes"
+kappa = "b77113ecfeaab82e8325f2e65cdf752a9a25ce7bb02bf94eb07f70f265260286"
+at = "C=u32"
+embedded = "60a5904cc3ec8dbcfd2da857353102ee7bcf242d1d3dce190a7edd490281410d"
+status = "residue"
+cause = "mir::Ty: ArchivedStringRepr"
+
+[[fn]]
+path = "rkyv::repr::_::CheckStringReprError::fmt"
+kappa = "a4650e33cbd81816a2c27d10d43aae0064d1f11020337e8e38e9eb0a65c07df0"
+embedded = "670fdf0adf484b6a16197e204567be4c64ae27cad31406767a6f6c1ed7866852"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::string::<impl at src/string/mod.rs:215:1: 215:40>::eq"
+kappa = "975d1bfdd352b4fcd8019a868dd0d0111204cec82a6e8020801c055ce65b73be"
+embedded = "6af2b386cc71be21ed3832f5ee1594ad3928283bfacfc794524ea4b8fb11d7a2"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::<impl at src/string/mod.rs:243:1: 243:41>::partial_cmp"
+kappa = "99488238cbb7903705ce2994766373ef7a69d8e4fe70d39b719ab29ba8257794"
+embedded = "c372c301a0829853d0c4158171b0fe82ec3360211907faa89fa40d836a58218c"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::<impl at src/string/mod.rs:33:12: 33:33>::check_bytes"
+kappa = "8310c4880345f1d7720a3778521d83166eb7dcfc466f7209ca238cc67e21657a"
+embedded = "3635bee061b5732827d8b9e328769c2f61f4cc886203334b932b9c45559f49b7"
+status = "residue"
+cause = "mir::Ty: <__C as rancor::Fallible>::Error"
+
+[[fn]]
+path = "rkyv::string::<impl at src/string/mod.rs:42:1: 42:20>::serialize_from_str::<impl at src/string/mod.rs:92:22: 92:27>::fmt"
+kappa = "635cd1e9f80ed4d430ce7374fe31d772e956d33893439d080fb61522a208ec0e"
+embedded = "af0174f54a7d48af9c9474798da03158ff0266f8cf16e3a6411d00ceb4dc57c4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::as_ref"
+kappa = "99df0e09eec2233abb2c8b61a5d762e82a84db56b11fbd2540ca1b27f940d866"
+embedded = "540491340af36fe15ec6a63e376dd619b0d2d7f198e66b99c016daeb50f053a3"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::as_str"
+kappa = "9a67b83ea978ca2246f25f9c56d3e63d277d0ee13398a3f7f9063b606e9ad4ca"
+embedded = "a86a34571de910b4af77606af6b5eaeaee5066381688bf190e59b50bb5a064e0"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::as_str_seal"
+kappa = "eb2e9576350084ce99b1b26115ff48d8b95a5c62eb079b8e4bcee6c938e51cf6"
+embedded = "9f8a2d66b2cbe350f960e297d8adf2c1ae8bbe09e6fc2186effe000a6379ed53"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, str>"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::borrow"
+kappa = "6c6aa3303e4d8a2848026361f3b083bc0a325f690396d31397e74f2ba7ede9ba"
+embedded = "7b30c43fec637f5c0e4629b11de6fb78cf5294533cc8d917f0711923e266a337"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::cmp"
+kappa = "c0c6ff7bad3c83ceb8a26bb88efeffda509081d7413e7bbe5ea0c4b80d5b544e"
+embedded = "385d7099977e14b034180a292076b1770b36bf38163ddf38c45d605625c67c8b"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::deref"
+kappa = "ab303f6b648e51ef4179d453c7b7027e6ae33b6de2b2f4933dac5cdd5476faa6"
+embedded = "ac0b3bb8f19b79cf3b9dead52558cee7bcbfce7bf31a631c27a9aae9b1633192"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::eq"
+kappa = "46eb625fa188682de2c411a2001388da4b6057cea133c494f71a6ee3c65da03e"
+embedded = "cc0956633a5a1b7da72138dbb8e2dd59f9409ae5d8ce4b91709b33bd595b4328"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::eq#2"
+kappa = "ae3c370f4258d70b31cd90d1fce6cb18a70560d0f3eb5345870c86c234fe4377"
+embedded = "76fb5f0a2246e4532a5ac852b4651ea00847b1cb2b7f8624eae8bc5d8887b377"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::eq#3"
+kappa = "a078738543ef52a224f6d3479c6eb0368458b4efcb59cf0c3ed2bdb2b308060e"
+embedded = "faa222c623f29190caef5afc1407a2518f0a1faa5c40ba0dfc45c2f8d39282f9"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::fmt"
+kappa = "d5005c119d487b3d40cc1b244d43df90e8a63f5598b236c27471832be79c2210"
+embedded = "003a85a478ff3b8016ee7052e2ef01947b86747a440a3d3b65738241f5f0a9c0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::fmt#2"
+kappa = "94e3c549b741ea4f06176c2d3d4f621ac6ecbe56ab67eabe0576aca557e304e7"
+embedded = "6e352f24e58deae058322ff19433a18876238d6f857ed4d837a6fc1c3a77b141"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::hash"
+kappa = "3aa0bc29fd6887abe747656fd6b55adf9ef8f0dfbdd3fca8e8adbdc88445e7ed"
+at = "H=u32"
+embedded = "16d4a428a9d062aec008daca709cc68042a0f9422f247795c596fa4fcb370f05"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::index"
+kappa = "13c4b45f290bde4857969c4cf4e2c21609393aa77db38b495e08eeb4ab38255e"
+embedded = "18763f743460d57d4754935c26bd2281a710dca333309ffc29fbbc16f3c6db0c"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::index#2"
+kappa = "367e5fa46d2568e5cd954cf9e6db9d317214bca5af949fc18f514eaf83458d2d"
+embedded = "b8a0b980a3a1c286b5f0479aa8d1f7ed284eb5deaa2f652f1f9f049b5d38a42d"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::index#3"
+kappa = "9c63a52156e2b91083aee69ef62740dafc8aebce7a17ed77dae54d5cd9450b39"
+embedded = "719aa42e24ac2c5c040127b0398c83d4cd7022f645df1054ecf5dbb48dcaff87"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::index#4"
+kappa = "4d9ec660a0c8c21b0ed46c37f2f43dfab18c23eac35ac2e9a9f6066daf947e90"
+embedded = "e8bb521ddcd44ec2cc47cf5b09b30aefc9e3f281cf12446fb7687cbe05d95bd3"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::index#5"
+kappa = "373152288e45e3b09e1f9d2e2a1d53f8f288acd594eae163f7944a08ae31f816"
+embedded = "0660fab6d4ba1a2fa62db36211581c9894ef5a60e1bbff3fd1bc16a13447333e"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::index#6"
+kappa = "07c68ca6c6b01e99917e0ba02e00d59a465e5d725d6480d3329952b015b4d0ee"
+embedded = "883ef071bd36cd10058cf4d5eaaea519177612fb101cb5a6f5c3eda763b341ca"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::partial_cmp"
+kappa = "26414b14404e84ad1af6752e1711387ce992f6044cd1a794efff4fc0e4056df2"
+embedded = "40f16ef1f333194bf9a9393963468d8f3d9b57a4b11efc43052c39237509322e"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::partial_cmp#2"
+kappa = "bdd138487b1d1c46f1d59fcb24a92907023c18db043dab24e167b5c731ef681b"
+embedded = "603e8a3a14dd391a69714de74b898ab738ca8b79458a2644cc247cd2d384051a"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::partial_cmp#3"
+kappa = "9fa8d833da5ec6db763e171cba528b942eace3bf7bc076a9feae11cb58ae5259"
+embedded = "24bda6350f06733101942ec816b66d9c364f8842a4ef2bfe6edb15c522b0b13a"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::resolve_from_str"
+kappa = "0764d5bde52185827480134edaecbb9af26acf947a3590bd93db92a2250fdedd"
+embedded = "8427c8b6bbb0834f240979fb23fbcde24967c2b864013d87d79f063c4ae12392"
+status = "residue"
+cause = "mir::Ty: StringResolver"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::serialize_from_str"
+kappa = "55ebbba8946bf3e35571d786ab72c5c4ceb6fb8603a661ca8efb1fd9f7395f33"
+at = "S=u32"
+embedded = "2c635a6ea4bf3af75546589efaabf55ef27b60740861bca89285009b05e539ae"
+status = "residue"
+cause = "mir::Ty: string::StringResolver"
+
+[[fn]]
+path = "rkyv::string::ArchivedString::serialize_from_str::StringTooLongError::fmt"
+kappa = "dfb9468b7e733ab16c8a3c27278c28e458519b35777aedc188b86d8f65ed918e"
+embedded = "e58002add182271fcf95c44628f1f958581cbb13bc190474de0b3e003618d4eb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::string::str::eq"
+kappa = "71323686535d2b05ce097b5cf96ba2cf5aa747c4efd6f402225a0b82b80da8ab"
+embedded = "6a524f9b897771d41faaaf8c2906a4ada6f11ef1135efb247838767dc3fed289"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::str::partial_cmp"
+kappa = "cb89917e42c0049e91173fe59cfaf3e18a15ab505d61a0db5e5c332fe4fa7f8f"
+embedded = "519f61110d9f1dba41fce33e06d06acef2596e88f1b7a70637c72da520c7297d"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+
+[[fn]]
+path = "rkyv::string::verify::<impl at src/string/mod.rs:274:5: 277:26>::verify"
+kappa = "2e3af54b7f2631c78b471785f2b8949de8b1f70a594614e3c6305ea716306156"
+at = "C=u32"
+embedded = "8e7c72d8666eb3b6314851d9e7ccaf7c5aa527d695de69fcf733d1d80f01598a"
+status = "residue"
+cause = "mir::Ty: ArchivedString"
+

@@ -1,0 +1,56 @@
+# The pretty_assertions register (written by `uorust crate pretty_assertions@1.4.1`; do not edit): every body of
+# pretty_assertions's MIR at pretty_assertions 1.4.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 16
+translated = 0
+residue = 16
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.printer]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.private]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 16
+embedded = 16
+evaluable = 16
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Comparison<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LatentDeletion<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StrComparison<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: printer::InlineWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: printer::LatentDeletion<'_>"
+bodies = 1

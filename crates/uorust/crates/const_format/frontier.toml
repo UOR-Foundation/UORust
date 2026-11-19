@@ -1,0 +1,325 @@
+# The const_format register (written by `uorust crate const_format@0.2.37`; do not edit): every body of
+# const_format's MIR at const_format 0.2.37, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 246
+translated = 6
+residue = 240
+
+[module.__ascii_case_conv]
+bodies = 27
+translated = 3
+residue = 24
+
+[module.__hidden_utils]
+bodies = 3
+translated = 2
+residue = 1
+
+[module.__str_methods]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.char_encoding]
+bodies = 7
+translated = 1
+residue = 6
+
+[module.const_generic_concatcp]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.formatting]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.pargument]
+bodies = 47
+translated = 0
+residue = 47
+
+[module.wrapper_types]
+bodies = 71
+translated = 0
+residue = 71
+
+[embedding]
+bodies = 246
+embedded = 246
+evaluable = 246
+blocked = 0
+
+[differential]
+bodies = 4
+theorems = 28
+
+[[cause]]
+cause = "mir::Ty: pargument::PArgument"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: formatting::FormattingFlags"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: pargument::Integer"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: __ascii_case_conv::word_iterator::ByteKind"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_indexing::StrIndexArgs"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_splice::StrSpliceArgs"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PWrapper<i128>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<i16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<i32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<i64>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<i8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<isize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<u128>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<u16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<u64>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<u8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PWrapper<usize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: __str_methods::pattern::Pattern"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_split::SplitInput"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ByteKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: __ascii_case_conv::word_iterator::WordIterator<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FmtChar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Formatting"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HexFormatting"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SplitInput"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_replace::ReplaceInput"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: char_encoding::FmtChar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Case"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IndexValidity"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NumberFormatting"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PWrapper<&[u8]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PWrapper<&str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReplaceInput"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SplicedStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: __str_methods::ascii_byte::AsciiByte"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: formatting::HexFormatting"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: formatting::NumberFormatting"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: formatting::StartAndArray<[u8; 40]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: formatting::FOR_ESCAPING: type outside the lift: formatting::ForEscaping"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Subslice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AsciiByte"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FormattingFlags"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Integer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PArgument"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StrRepeatArgs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __ascii_case_conv::Case"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __ascii_case_conv::WordCountAndLength"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __str_methods::pattern::PatternNorm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_indexing::IndexValidity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_indexing::StrIndexArgsConv<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_repeat::StrRepeatArgs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_splice::SplicedStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __str_methods::str_splice::StrSplceArgsConv<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: formatting::ForEscaping"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: formatting::Formatting"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: formatting::LenAndArray<[u8; #_LEN]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: formatting::StartAndArray<[u8; 130]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: formatting::StartAndArray<[u8; 34]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wrapper_types::pwrapper::PWrapper<&[u32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wrapper_types::pwrapper::PWrapper<u32>"
+bodies = 1

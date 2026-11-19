@@ -1,0 +1,185 @@
+# The ctutils register (written by `uorust crate ctutils@0.4.8`; do not edit): every body of
+# ctutils's MIR at ctutils 0.4.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 297
+translated = 0
+residue = 297
+
+[module.choice]
+bodies = 63
+translated = 0
+residue = 63
+
+[module.ct_option]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.primitives]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.traits]
+bodies = 168
+translated = 0
+residue = 168
+
+[embedding]
+bodies = 297
+embedded = 297
+evaluable = 297
+blocked = 0
+
+[differential]
+bodies = 4
+theorems = 28
+
+[[cause]]
+cause = "mir::Ty: choice::Choice"
+bodies = 122
+
+[[cause]]
+cause = "mir::Ty: Choice"
+bodies = 78
+
+[[cause]]
+cause = "mir::Ty: ct_option::CtOption<u32>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: CtOption<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NonZero<isize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::trailing_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ct_option::CtOption<&mut u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ct_option::CtOption<&u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ct_option::CtOption<"
+bodies = 1

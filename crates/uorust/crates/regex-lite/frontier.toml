@@ -1,0 +1,414 @@
+# The regex-lite register (written by `uorust crate regex-lite@0.1.9`; do not edit): every body of
+# regex-lite's MIR at regex-lite 0.1.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 369
+translated = 9
+residue = 360
+
+[module.error]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.hir]
+bodies = 117
+translated = 2
+residue = 115
+
+[module.int]
+bodies = 10
+translated = 1
+residue = 9
+
+[module.interpolate]
+bodies = 14
+translated = 1
+residue = 13
+
+[module.nfa]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.pikevm]
+bodies = 47
+translated = 0
+residue = 47
+
+[module.pool]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.string]
+bodies = 111
+translated = 0
+residue = 111
+
+[module.utf8]
+bodies = 8
+translated = 5
+residue = 3
+
+[embedding]
+bodies = 369
+embedded = 369
+evaluable = 369
+blocked = 0
+
+[differential]
+bodies = 3
+theorems = 21
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: hir::Hir"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: string::Match<'_>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: nfa::ThompsonRef"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Parser<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: string::RegexBuilder"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Captures<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: NFA"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Regex"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SparseSet"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Class"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ClassRange"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Hir"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NonMaxUsize"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: string::Regex"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PikeVM"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: int::NonMaxUsize"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: interpolate::Ref<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: string::CaptureNames<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hir::ClassRange"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hir::Flags"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: nfa::NFA"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Look"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hir::Class"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: interpolate::CaptureRef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: nfa::CaptureNames<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: string::Captures<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: string::SplitN<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ActiveStates"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Capture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CaptureLocations"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CaptureRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FindMatches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HirKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Repetition"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SlotTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SubCaptureMatches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::HirKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hir::parse::Parser<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nfa::Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nfa::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pikevm::ActiveStates"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pikevm::Cache"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pikevm::PikeVM"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pikevm::SlotTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pikevm::SparseSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: string::CaptureLocations"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: string::Matches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: string::Split<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: string::SubCaptureMatches<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item utf8::ACCEPT"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_alphabetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: utf8::decode: regex-lite's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CaptureMatches<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoExpand<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PoolGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReplacerRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SparseSetIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::FromFn<{closure@src/nfa.rs:199:29: 199:36}>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<core::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::Capture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::Look"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hir::Repetition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: nfa::Compiler"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pikevm::CapturesMatches<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pikevm::FindMatches<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pikevm::FollowEpsilon"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pikevm::SparseSetIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pool::Pool<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pool::PoolGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: string::CaptureMatches<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: string::NoExpand<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: string::ReplacerRef<'_"
+bodies = 1

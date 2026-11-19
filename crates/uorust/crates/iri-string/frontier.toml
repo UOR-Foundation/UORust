@@ -1,0 +1,855 @@
+# The iri-string register (written by `uorust crate iri-string@0.7.14`; do not edit): every body of
+# iri-string's MIR at iri-string 0.7.14, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1870
+translated = 33
+residue = 1837
+
+[module.build]
+bodies = 83
+translated = 0
+residue = 83
+
+[module.components]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.convert]
+bodies = 32
+translated = 1
+residue = 31
+
+[module.format]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.mask_password]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.normalize]
+bodies = 104
+translated = 1
+residue = 103
+
+[module.parser]
+bodies = 117
+translated = 22
+residue = 95
+
+[module.percent_encode]
+bodies = 44
+translated = 0
+residue = 44
+
+[module.raw]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.resolve]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.spec]
+bodies = 14
+translated = 2
+residue = 12
+
+[module.template]
+bodies = 301
+translated = 7
+residue = 294
+
+[module.types]
+bodies = 1051
+translated = 0
+residue = 1051
+
+[module.validate]
+bodies = 25
+translated = 0
+residue = 25
+
+[embedding]
+bodies = 1870
+embedded = 1870
+evaluable = 1869
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[differential]
+bodies = 12
+theorems = 62
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 164
+
+[[cause]]
+cause = "mir::Ty: RiReferenceStr<u32>"
+bodies = 100
+
+[[cause]]
+cause = "mir::Ty: RiStr<u32>"
+bodies = 83
+
+[[cause]]
+cause = "mir::Ty: RiAbsoluteStr<u32>"
+bodies = 82
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 79
+
+[[cause]]
+cause = "mir::Ty: RiRelativeStr<u32>"
+bodies = 59
+
+[[cause]]
+cause = "mir::Ty: validate::Error"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: RiReferenceString<u32>"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: RiString<u32>"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: RiAbsoluteString<u32>"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: RiFragmentStr<u32>"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: RiQueryStr<u32>"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: RiRelativeString<u32>"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: types::generic::normal::RiStr<u32>"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: types::generic::reference::RiReferenceStr<u32>"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: spec::UriSpec"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: types::generic::absolute::RiAbsoluteStr<u32>"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: build::Builder<'_>"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: UriTemplateStr"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: UriTemplateString"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: spec::IriSpec"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: types::generic::query::RiQueryStr<u32>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: types::generic::relative::RiRelativeStr<u32>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: types::generic::fragment::RiFragmentStr<u32>"
+bodies = 23
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Visitor"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: std::collections::TryReserveError"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: types::generic::absolute::RiAbsoluteString<u32>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: RiFragmentString<u32>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: RiQueryString<u32>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: types::generic::normal::RiString<u32>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: template::error::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: types::generic::reference::RiReferenceString<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: types::generic::relative::RiRelativeString<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: template::string::UriTemplateStr"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: template::ValueType"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: normalize::error::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: template::components::VarName<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Splitter"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: percent_encode::PercentEncoded<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: template::string::owned::UriTemplateString"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: types::generic::fragment::RiFragmentString<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: types::generic::query::RiQueryString<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: IriSpec"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::str::Bytes<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: PercentDecodedWhatwgBytes<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: components::authority::AuthorityComponents<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AuthorityComponents<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PathToNormalize<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: normalize::NormalizationInput<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: template::expand::VisitDoneToken<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: build::PortBuilder<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: build::UserinfoBuilder<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RefToplevel"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RiReferenceComponents<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: UriReferenceRule"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: template::simple_context::Value"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <S as SpecInternal>::is_nonascii_char_unreserved"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::trusted::scheme_colon_opt: iri-string's MIR stops at mir::TerminatorKind::Call: parser::str::find_split4_hole: iri-string's MIR stops at type outside the lift: std::str::Bytes<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FixedBaseResolver<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Operator"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: percent_encode::Context"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: template::error::ErrorKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validate::ErrorKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::str::find_split_hole: iri-string's MIR stops at mir::TerminatorKind::Call: <str as AsRef>::as_ref"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::trusted::scheme_colon: iri-string's MIR stops at mir::TerminatorKind::Call: parser::str::find_split_hole: iri-string's MIR stops at mir::TerminatorKind::Call: <str as AsRef>::as_ref"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DecodedFragment<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExprBody<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MaybeOperator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Modifier"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NormalizationMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NormalizednessCheckMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OperatorReservedForFuture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UriSpec"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: VarSpec<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: build::AuthorityBuilder<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: components::RiReferenceComponents<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: components::Splitter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: normalize::Normalized<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: normalize::path::PathToNormalize<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: normalize::path::SegmentKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: normalize::pct_case::PctCaseNormalized<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: percent_encode::decode::PercentDecodedWhatwgBytes<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: template::components::Operator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: template::components::VarSpec<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: template::context::VisitPurpose"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: template::error::CreationError<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: template::expand::Expanded<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: template::expand::OpProps"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: template::simple_context::SimpleContext"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: template::string::UriTemplateVariables<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as VisitValueNaive>::visit_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::trusted::slash_slash_authority_opt: iri-string's MIR stops at mir::TerminatorKind::Call: parser::str::find_split3: iri-string's MIR stops at type outside the lift: std::str::Bytes<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::trusted::split_fragment: iri-string's MIR stops at mir::TerminatorKind::Call: parser::str::find_split_hole: iri-string's MIR stops at mir::TerminatorKind::Call: <str as AsRef>::as_ref"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::trusted::until_query: iri-string's MIR stops at mir::TerminatorKind::Call: parser::str::find_split2: iri-string's MIR stops at type outside the lift: std::str::Bytes<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Chunk<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecoderBuffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NormalizationOp"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PctEncodedFragments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SegmentKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SimpleContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VarListStr<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VisitPurpose"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: build::Built<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: build::HostRepr<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format::CapacityOverflowError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mask_password::PasswordMasked<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: normalize::path::PathCharacteristic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: normalize::path::PathCharacteristic::from_path_to_display::Writer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: normalize::path::PathSegment"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: normalize::pct_case::NormalizedAsciiOnlyHost<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::str::maybe_pct_encoded::DecoderBuffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::str::maybe_pct_encoded::PushResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::validate::authority::V6AddrPart"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: percent_encode::decode::DecodedFragment<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: percent_encode::decode::PercentDecodedBytesFragments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: resolve::FixedBaseResolver<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: template::components::ExprBody<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: template::components::MaybeOperator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: template::components::Modifier"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: template::components::VarListIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: template::components::VarListStr<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: template::expand::Chunk<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: template::expand::Chunks<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: template::expand::PrefixOnceWriter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::generic::error::CreationError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: AssocVisitor::visit_entries_and_finish::{closure#0}: mir::Instantiation: u32 for a parameter bounded by AssocVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: ListVisitor::visit_items_and_finish::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ListVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: is_ascii_only_host::{closure#0}: mir::TerminatorKind::Call: std::char::methods::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Context"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: parser::trusted::authority::is_host_reg_name::promoted[0]: type outside the lift: std::ops::RangeInclusive<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::slice::Iter as Iterator>::rposition"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::truncate"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_ascii_hexdigit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::char::is_ucschar: iri-string's MIR stops at mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::str::find_split2: iri-string's MIR stops at type outside the lift: std::str::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::str::find_split3: iri-string's MIR stops at type outside the lift: std::str::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::str::find_split4_hole: iri-string's MIR stops at type outside the lift: std::str::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: raw::remove_fragment: iri-string's MIR stops at mir::TerminatorKind::Call: String::truncate"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::char::methods::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeSet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashSet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Infallible"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathCharacteristic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathSegment"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PercentDecodedBytesFragments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PrefixRetriever"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UserinfoBuilder<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VisitDoneToken<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: build::PortBuilderRepr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: build::UserinfoRepr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: convert::MappedToUri<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::Censored"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: format::eq_str_display::CmpWriter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generic::error::CreationError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mask_password::PasswordReplaced<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normalize::NormalizationInput<'a>::create_normalization_input::RefToplevel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normalize::NormalizationMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normalize::NormalizationOp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normalize::NormalizedInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normalize::NormalizednessCheckMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normalize::path::Path<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normalize::path::PathSegmentsIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normalize::path::PathToNormalize<'_>::ensure_rfc3986_normalizable_with_authority_absent::PrefixRetriever"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::str::maybe_pct_encoded::PctEncodedFragments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::validate::UriReferenceRule"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Copied<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::string::FromUtf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: template::components::OperatorReservedForFuture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: template::expand::AssocTypeVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: template::expand::AssocValueVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: template::expand::ListTypeVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: template::expand::ListValueVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: template::expand::TypeVisitor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: template::expand::ValueVisitor<'_"
+bodies = 1

@@ -1,0 +1,68 @@
+# The keccak register (written by `uorust crate keccak@0.2.2`; do not edit): every body of
+# keccak's MIR at keccak 0.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 28
+translated = 8
+residue = 20
+
+[module.backends]
+bodies = 11
+translated = 4
+residue = 7
+
+[module.consts]
+bodies = 3
+translated = 3
+residue = 0
+
+[module.crate]
+bodies = 14
+translated = 1
+residue = 13
+
+[embedding]
+bodies = 28
+embedded = 28
+evaluable = 28
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: impl FnOnce"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Keccak"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ROUNDS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1

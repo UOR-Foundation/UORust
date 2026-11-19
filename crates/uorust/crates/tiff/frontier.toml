@@ -1,0 +1,736 @@
+# The tiff register (written by `uorust crate tiff@0.11.3`; do not edit): every body of
+# tiff's MIR at tiff 0.11.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 833
+translated = 23
+residue = 810
+
+[module.bytecast]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.crate]
+bodies = 7
+translated = 1
+residue = 6
+
+[module.decoder]
+bodies = 253
+translated = 0
+residue = 253
+
+[module.directory]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.encoder]
+bodies = 399
+translated = 22
+residue = 377
+
+[module.error]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.tags]
+bodies = 114
+translated = 0
+residue = 114
+
+[embedding]
+bodies = 833
+embedded = 833
+evaluable = 756
+blocked = 77
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 71
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: error::TiffError"
+bodies = 129
+
+[[cause]]
+cause = "mir::Ty: tags::Type"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: tags::SampleFormat"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: tags::PhotometricInterpretation"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: decoder::DecodingResult"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: tags::CompressionMethod"
+bodies = 15
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: decoder::ifd::Entry"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: directory::Directory"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: decoder::ifd::Value"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: tags::Predictor"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ValueBuffer"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: encoder::DirectoryEncoder<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u16 as encoder::tiff_value::TiffValue>::BYTE_LEN"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ByteOrder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExtraSamples"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PhotometricInterpretation"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PlanarConfiguration"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ResolutionUnit"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SampleFormat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: decoder::BufferLayoutPreference"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: encoder::compression::Compressor"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Tag"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TileAttributes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: decoder::Decoder<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encoder::DirectoryOffset<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tags::IfdPointer"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tags::Tag"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: deflate::DeflateLevel"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tags::ByteOrder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ColorType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ComponentId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DecodingBuffer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DecodingSampleType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IfdPointer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Image"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TiffCodingUnit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TiffUnsupportedError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decoder::DecodingExtent"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decoder::DecodingSampleType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decoder::Limits"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decoder::image::ReadoutLayout"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encoder::Compression"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encoder::TiffEncoder<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encoder::compression::deflate::Deflate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tags::ExtraSamples"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tags::PlanarConfiguration"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tags::ResolutionUnit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item N"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DirectoryOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Ifd"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Ifd8"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Lzw"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Packbits"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SRational"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Uncompressed"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoder::ChunkType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoder::IfdDecoder<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoder::cycles::ComponentId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoder::cycles::IfdCycles"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoder::image::Image"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::ImageEncoder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::compression::deflate::DeflateLevel"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::compression::lzw::Lzw"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::compression::packbits::Packbits"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoder::compression::uncompressed::Uncompressed"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: half::f16"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ifd::Entry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tags::EndianBytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tags::ValueBuffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tiff_value::Rational"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <[T] as encoder::tiff_value::TiffValue>::BYTE_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::CMYK16 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::CMYK32 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::CMYK32Float as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::CMYK64 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::CMYK64Float as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::CMYK8 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::CMYKA8 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::Gray16 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::Gray32 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::Gray32Float as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::Gray64 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::Gray64Float as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::Gray8 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::GrayI16 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::GrayI32 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::GrayI64 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::GrayI8 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGB16 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGB32 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGB32Float as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGB64 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGB64Float as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGB8 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGBA16 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGBA32 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGBA32Float as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGBA64 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGBA64Float as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::RGBA8 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <encoder::colortype::YCbCr8 as encoder::colortype::ColorType>::BITS_PER_SAMPLE::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as encoder::tiff_value::TiffValue>::BYTE_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::CMYK16 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::CMYK32 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::CMYK64 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::CMYK8 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::CMYKA8 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::Gray16 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::Gray32 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::Gray64 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::Gray8 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::GrayI16 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::GrayI32 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::GrayI64 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::GrayI8 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::RGB16 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::RGB32 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::RGB64 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::RGB8 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::RGBA16 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::RGBA32 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::RGBA64 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::RGBA8 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <encoder::colortype::YCbCr8 as encoder::colortype::ColorType>::SAMPLE_FORMAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as encoder::tiff_value::TiffValue>::BYTE_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <[u32] as tiff_value::TiffValue>::count"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChunkType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DirectoryEncoder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EndianReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IfdCycles"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImageEncoder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadoutLayout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TiffFormatError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoder::DecodingBuffer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoder::TiffCodingUnit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoder::image::PlaneLayout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoder::stream::EndianReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoder::stream::Group4Reader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoder::stream::LZWReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decoder::stream::PackBitsReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::TiffEncoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::TiffKindBig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::tiff_value::Ifd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::tiff_value::Ifd8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::tiff_value::Rational"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::tiff_value::SRational"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoder::writer::TiffWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::TiffFormatError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::TiffUnsupportedError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::alloc::Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Cursor<std::vec::Vec<u8>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: writer::TiffWriter<u32>"
+bodies = 1

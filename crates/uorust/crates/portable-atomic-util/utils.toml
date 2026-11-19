@@ -1,0 +1,24 @@
+[[fn]]
+path = "portable-atomic-util::byte_add"
+kappa = "5795e02f30ec0d44af486f304464e7d1a22ec225e99ae3d3dc0a3f34c01691cb"
+at = "T=u32"
+embedded = "da0739ea3443540fde978216487f975c97bbf0b2d6bae2c6397a19f34f37ae97"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut u8>::add"
+
+[[fn]]
+path = "portable-atomic-util::byte_sub"
+kappa = "886d178888686d88b137b067b618f2f172543c5b496f9a30a6a0e73c2e5968b1"
+at = "T=u32"
+embedded = "0456df047328997d1a549b18ce2eb1c4613fce184a0b8b1c5a7e9b8ad1041578"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut u8>::sub"
+
+[[fn]]
+path = "portable-atomic-util::with_metadata_of"
+kappa = "f28deb2e6914b2ccb72ace5672763d19ea410d00ca3d6c0f407354fc59bbda5d"
+at = "T=u32, U=u32"
+embedded = "62942c265b42223e74b5b8de01ea1ff36cae52eb2601b1c0d662c1c26e93f84b"
+status = "residue"
+cause = "mir::Memory: a value of RawPointer, which the memory holds no cells of"
+

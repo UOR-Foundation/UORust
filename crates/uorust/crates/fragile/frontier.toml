@@ -1,0 +1,112 @@
+# The fragile register (written by `uorust crate fragile@3.0.0`; do not edit): every body of
+# fragile's MIR at fragile 3.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 103
+translated = 2
+residue = 101
+
+[module.errors]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.fragile]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.futures]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.registry]
+bodies = 8
+translated = 1
+residue = 7
+
+[module.semisticky]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.sticky]
+bodies = 29
+translated = 1
+residue = 28
+
+[module.thread_id]
+bodies = 8
+translated = 0
+residue = 8
+
+[embedding]
+bodies = 103
+embedded = 103
+evaluable = 103
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: sticky::Sticky<u32>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: fragile::Fragile<u32>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: semisticky::SemiSticky<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: errors::InvalidThreadAccess"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: thread_id::ThreadId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: registry::map_impl::Registry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map_impl::Registry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::Entry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::pin::Pin<&mut u32>"
+bodies = 1

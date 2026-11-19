@@ -1,0 +1,63 @@
+[[fn]]
+path = "vsimd::is_same_type"
+kappa = "bd556d1f3614a44ead5125fe0b12a6646edcd596d485922593791052a38c0f0c"
+embedded = "b818ed3ecc97dd5034063de2fe09e5cd4b2c0e932ba84bea1c9ae95f8a8e9842"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "vsimd::slice"
+kappa = "e1df20ac4f8e9635bfd1e5cc4af3282dcf64c982a7164ed08fce16101d080e69"
+at = "T=u32"
+embedded = "b8aa66f1d3a2f45076a86ef8e981d747007aac1bbc41b3247a8af773c751e88c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::from_raw_parts"
+
+[[fn]]
+path = "vsimd::slice_mut"
+kappa = "24188a0dd0ae605a2903085da0cb1ba1da58ddf4fcbf6126d9e0d775bc6a8fc8"
+at = "T=u32"
+embedded = "d58145eae6e726e6676276204acbfc6e971154b3da6d0ee2c5576c6191a7cedd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::from_raw_parts_mut"
+
+[[fn]]
+path = "vsimd::slice_parts"
+kappa = "4e9c7e5aa286ffba6ffc7ea23574f930f435a394fca5e3d426b575bf9197aa5b"
+at = "T=u32"
+embedded = "e2fce9cb53b4ddc43a40166e17dcf2294617a6139cf7d807c160cb493c62a914"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u32]>::as_ptr"
+
+[[fn]]
+path = "vsimd::tools::read"
+kappa = "54fff9034b121fab0f45963812b17a4526c61e4a499eb131eeac3c275ce4b722"
+at = "T=u32"
+embedded = "8e69064993ce4c523ec6bf2e88815bcd266cd1eee5e1f42564f2cc888fbcdad8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u32>::add"
+
+[[fn]]
+path = "vsimd::tools::transmute_copy"
+kappa = "ef09e9d4ece883d310e72350eafb84351368f794280024d21db1a90064328881"
+at = "A=u32, B=u32"
+embedded = "3b37401e61eb4337a648f5099bee4d04f56890bd1ac88ab2d89f8596cae7c047"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "vsimd::tools::write"
+kappa = "0894e33be764eda9884cd0e6ed8f72f9cae0b27e023e87d430be28b72be502de"
+at = "T=u32"
+embedded = "3bd7ba18ba1529ba59a71a9813f718e12a66b6eada63a71647be429b89334e26"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut u32>::add"
+
+[[fn]]
+path = "vsimd::unroll"
+kappa = "5b019098c88b36b21824a5b55a68c3a5ce6ae18866cee18eb3ead6d108f13d64"
+at = "T=u32"
+embedded = "f73cab9c46eb639a39f20948a34c1d9ad47da12499c9701f363c4f7f2adb4753"
+status = "residue"
+cause = "mir::Ty: impl FnMut(&u32)"
+

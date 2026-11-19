@@ -1,0 +1,31 @@
+[[fn]]
+path = "aws-credential-types::provide_token_fn"
+kappa = "2d9e8e8f48e02af4d5690f3b0c3de1bf6d6c6b41dfdda6f24f130fd19b3c4429"
+at = "T=u32"
+embedded = "edc6d46837e105d4f0b31252c0e4cef31e76227ffb41ab50e75fdecb0594ca48"
+status = "residue"
+cause = "mir::Ty: token_fn::ProvideTokenFn<'_, u32>"
+
+[[fn]]
+path = "aws-credential-types::token_fn::<impl at src/token_fn.rs:16:16: 16:21>::clone"
+kappa = "fec20c570ae7b1d44480a61635cdd32f55572d483ffe773806a57f56d6c8ef5a"
+at = "T=u32"
+embedded = "32c60af8251c22cbbd8b49a9594dd6af0802fbf6eb46c72c00c779e4858376ec"
+status = "residue"
+cause = "mir::Ty: token_fn::ProvideTokenFn<'_, u32>"
+
+[[fn]]
+path = "aws-credential-types::token_fn::ProvideTokenFn::fmt"
+kappa = "f3dd6c31eb97dde0bebbf9e5d07429199124be0426eac41724b02dc28e01f235"
+embedded = "dbdfc639284f27e3787fc9d08049bc2ee9f46203416cb65bdd8f98e2c08048a4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-credential-types::token_fn::ProvideTokenFn::provide_token"
+kappa = "59562e18cc51c3b7b1f343e086cefea77c8a3d2b90e3f93f4231ba577b4f41b6"
+at = "F=u32, T=u32"
+embedded = "54d4a87a80d4398b2f7ee4f46138ef861c7dae99a8a882745e6b4194c809f2bb"
+status = "residue"
+cause = "mir::Ty: provider::future::ProvideToken<'_>"
+

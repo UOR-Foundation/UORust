@@ -1,0 +1,35 @@
+[[fn]]
+path = "num-bigint-dig::LO_MASK"
+kappa = "77e566a27628a551fb62c7b3498638ce72fff4207ea57310f5796bb3801afb75"
+embedded = "2195bf24157414b1f5b456d2eb7041435ddb7afe0502d77a01318754eb46c9e0"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::from_doublebigdigit"
+kappa = "acedb371fc9346dcbd67d65d94179c9bbd42f8c98155fd99fec0be8835f58dc1"
+embedded = "d2622e8b153fc58c17a8c1b1124f119105a3e12f9a67ef1559819da86544827d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: big_digit::get_hi: num-bigint-dig's MIR stops at mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::get_hi"
+kappa = "a3652d4f2efb41e7704e47000f8448ba13608e9458ef0d72b97aca1c5eed8c89"
+embedded = "cfa64e308f7a7110491ea2001748313c363e8cd1b62753fe23ee053c1d07f26d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::get_lo"
+kappa = "215ef7957a4b6b930b976445aa586c0c9c30b2578a209ea6ac69a2529ad96d76"
+embedded = "1d513a7230aa890244c76b236a9e217d7ec0907e52af479d71f856824d33af53"
+status = "residue"
+cause = "mir::Operand::Constant: big_digit::LO_MASK: mir::Operand::Constant: the constant item big_digit::BITS"
+
+[[fn]]
+path = "num-bigint-dig::to_doublebigdigit"
+kappa = "57657c0fea40eade608e5d2b2eccb0043f5322d0916296ae0a02b225fb596103"
+embedded = "b8331a595b44c91a0540937a5477e58084560fa0b43d4fede5f3178a0986539f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item big_digit::BITS"
+

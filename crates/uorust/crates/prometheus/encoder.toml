@@ -1,0 +1,143 @@
+[[fn]]
+path = "prometheus::check_metric_family"
+kappa = "593f3430422d5ce2f9ee0af153fcb18aa0f82cd5d228851125540d9e3bc8b6fb"
+embedded = "05410879c97eca30cedbfdecc4197184b382e919e7ccac18b073128ad767df96"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "prometheus::escape_string"
+kappa = "7bb8ec9563d713b05e4fb8c8e0f836696b3b97dcd2d9ef215634b67d19d94bb9"
+embedded = "efaf9ea191426ab4e66cf88862680264cc8854a09d05fb408f6ac3542f268206"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "prometheus::find_first_occurence"
+kappa = "eab83e7a3e1db2e36e93c251802a08c48831eec1ed28c9f54ff2521b4aed9045"
+embedded = "952d30ec0dd3c332c1a1d0d7d09f2b711145beb4cf0c8747ef346d42fb421ed4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "prometheus::label_pairs_to_text"
+kappa = "903f030ed9eae303a23a86936455414f3c41f5344495a8a3326b07121aaf5dcf"
+embedded = "f61d3998733acdc7dc995e72f48cd500bb677f0b240d115b1a414745d53199a6"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "prometheus::pb::<impl at src/encoder/pb.rs:19:10: 19:15>::fmt"
+kappa = "b18a4f6bed09f912cea2f65a502bdca7c35c339b23de91fdfaf3641d0da59966"
+embedded = "83105a3e35989a7e0ebf1ee129e877a3e8a02485f24761f398e06364b4290a99"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "prometheus::pb::<impl at src/encoder/pb.rs:19:17: 19:24>::default"
+kappa = "af68e77f69e03a61b21c8c62b133d4a4fdd3c18bdab8f47cf76e2692ddfd6843"
+embedded = "29b6f629d435fea0473dbcaa7f88008fb1d6624f64c20ec5823ccc6879bda753"
+status = "residue"
+cause = "mir::Ty: encoder::pb::ProtobufEncoder"
+
+[[fn]]
+path = "prometheus::pb::ProtobufEncoder::encode"
+kappa = "c27acca26d7edce5a65e2ee8e1f7e5fe25f50c7706367fdd1f373678dc673c57"
+at = "W=u32"
+embedded = "296dbf4178a182980476cd1c0440d1268d20f68dc429baa18c67f9cf9cbea526"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "prometheus::pb::ProtobufEncoder::format_type"
+kappa = "4bcd728a5d3ff9f86a4eaae53e2a7ba24307b1b1cf70ddae268e9c3a45c49b69"
+embedded = "885bc6f4543447e43f54e9c91f0b7702d6e0b276f6db9d873a4facc6b631dc73"
+status = "residue"
+cause = "mir::Ty: ProtobufEncoder"
+
+[[fn]]
+path = "prometheus::pb::ProtobufEncoder::new"
+kappa = "1df9403797e539c9b0139ee6911c7f46f96817857281cb28ce0e8afd2c038e63"
+embedded = "557369c18b5d19707bbf45b9847e56657733bdf798f8c9bde84d169f890ba266"
+status = "residue"
+cause = "mir::Ty: encoder::pb::ProtobufEncoder"
+
+[[fn]]
+path = "prometheus::text::<impl at src/encoder/text.rs:22:10: 22:15>::fmt"
+kappa = "200397cf6711a4dd1f9cf18f453857d56d0179bdcff2486433cb5bfe78704753"
+embedded = "7ad738b74a6d7f3c11ce735c2af09f3cb7ee34fea5f70b06cb2c5be4289c6b3b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "prometheus::text::<impl at src/encoder/text.rs:22:17: 22:24>::default"
+kappa = "b18b94961f7389293ef779580367cd1715d232663dcd311d708a064a51623218"
+embedded = "c0e28241ba8522859d632f7cfb750718814f318a80b84b7edff04a63463017de"
+status = "residue"
+cause = "mir::Ty: encoder::text::TextEncoder"
+
+[[fn]]
+path = "prometheus::text::StringBuf::write_all"
+kappa = "cdc47f8a32e843047eb4384b4c31dfc9904842eefc484b5bb3eb2ee5119bdf63"
+embedded = "80d216f793875ceb9f251dabac6319b6891298b0d7cb9ca6ea26ea5ce39b7fed"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "prometheus::text::TextEncoder::encode"
+kappa = "9d5fc7e9e2e8510ed9cda5b60337b368b0f78615c3f78e53d5909dc46087b790"
+at = "W=u32"
+embedded = "224287d651cbec1cd6c8097c5e36e621106ea31f5aa5bb6da57f738daf6ebddb"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "prometheus::text::TextEncoder::encode_impl"
+kappa = "ae32b193c1cb1fd710faad387faa924e378916771ead0d03d2bca8a5ef3f76de"
+embedded = "6babe1bd702e7934883405de413bde433c293b9f341743e4e126397bd07e3f40"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "prometheus::text::TextEncoder::encode_to_string"
+kappa = "b386804551ff206ad502215d2388f8c8642a88b96a43eb54ffa517d3cb9a4daa"
+embedded = "a1b45cc2d9f58f04a84927917e1b4fbffa987b030250fa101be9ce85ddf7af55"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "prometheus::text::TextEncoder::encode_utf8"
+kappa = "c33a3a7c317b7afa1a6d6c293d7397bd1e3f00c252152e725015a1752bd7cfc7"
+embedded = "e055c900bca5dbd7241e8e0399655207255d9ae4258e8e508b827df94adbea26"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "prometheus::text::TextEncoder::format_type"
+kappa = "a6f780df35b2502dcf5efebf47ab610b214a71160c8e94371f617550315f624a"
+embedded = "2f4d2ceb1a1d3d1904ed425e50ab060700c68ac2e1799b3a4014c34961c67342"
+status = "residue"
+cause = "mir::Ty: TextEncoder"
+
+[[fn]]
+path = "prometheus::text::TextEncoder::new"
+kappa = "26fbb10e03498976c1dde418176180f679653d7fda2e80b05adc71f50f377e56"
+embedded = "6faefb8ce22a4a4b0041ae15ea61ec135e3f47e027e77c6cf706e553b1b393c6"
+status = "residue"
+cause = "mir::Ty: encoder::text::TextEncoder"
+
+[[fn]]
+path = "prometheus::text::W::write_all"
+kappa = "ae1f899f519dc18e900a423e94860601e07706c02496aa336c4e420e206b871c"
+at = "W=u32"
+embedded = "dd47d294a708488f28aedd45f6da1199b04c0ea6336020a1fb43bff523c0994d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "prometheus::write_sample"
+kappa = "3d9ee4be21da4ad739685e963a1c95b27e4b1868d236ca7b0da9d23f661b1db5"
+embedded = "feb9e85f9c557d8c91abe3aae605e95aeb51f274c83f1628aa0263783d83b952"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+

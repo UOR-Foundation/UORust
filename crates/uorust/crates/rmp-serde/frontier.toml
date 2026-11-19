@@ -1,0 +1,250 @@
+# The rmp-serde register (written by `uorust crate rmp-serde@1.3.1`; do not edit): every body of
+# rmp-serde's MIR at rmp-serde 1.3.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 423
+translated = 0
+residue = 423
+
+[module.bytes]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.config]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.crate]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.decode]
+bodies = 163
+translated = 0
+residue = 163
+
+[module.encode]
+bodies = 151
+translated = 0
+residue = 151
+
+[embedding]
+bodies = 423
+embedded = 423
+evaluable = 423
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: decode::Error"
+bodies = 120
+
+[[cause]]
+cause = "mir::Ty: encode::Error"
+bodies = 109
+
+[[cause]]
+cause = "mir::Ty: bytes::Nope"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: RawRef<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Raw"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: config::BytesMode"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: decode::Reference<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: encode::Compound<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RawVisitor"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: config::BinaryConfig<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: config::HumanReadableConfig<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ReadReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: config::StructMapConfig<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: config::StructTupleConfig<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encode::MaybeUnknownLengthCompound<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BytesMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DefaultConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RuntimeConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: config::RuntimeConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decode::ReadReader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decode::ReadRefReader<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decode::UnitVariantAccess<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decode::VariantAccess<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ExtSerializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Serializer<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rmp::Marker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BinaryConfig<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HumanReadableConfig<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadRefReader<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StructMapConfig<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StructTupleConfig<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::DefaultConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decode::Deserializer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decode::ExtDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decode::MapAccess<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decode::SeqAccess<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::ExtFieldSerializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::Serializer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::Tuple<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::UnknownLengthCompound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Cursor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::string::FromUtf8Error"
+bodies = 1

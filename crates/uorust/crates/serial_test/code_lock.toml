@@ -1,0 +1,92 @@
+[[fn]]
+path = "serial_test::check_new_key"
+kappa = "93c56a9f706ed0ee9b49eb28e2974cdaa6b17f1faefc4f6dda429242a4998cb8"
+embedded = "9ab198f9578b7556928823394647893484866a338ca7eec7aca0225bfac2b423"
+status = "residue"
+cause = "mir::Ty: code_lock::LockMap"
+
+[[fn]]
+path = "serial_test::code_lock::<impl at src/code_lock.rs:41:10: 41:15>::clone"
+kappa = "d85c27c874b561c6060950ca223b3000129220817493fd2ca3849942072c2ff3"
+embedded = "a3beb9e10efe85ded18c6490ffb3c1bc0f745d9e9e5347878ce510e6996e3f5b"
+status = "residue"
+cause = "mir::Ty: code_lock::UniqueReentrantMutex"
+
+[[fn]]
+path = "serial_test::code_lock::LockMap::get"
+kappa = "6bb7dcd21f855f50a3ceecf0713544cb38959043582c31ae0a68016214c67051"
+embedded = "ac79752e49124115bb2deb154d864a916dc6e12a48748edfe5c4faac96f12c82"
+status = "residue"
+cause = "mir::Ty: code_lock::ValueRef"
+
+[[fn]]
+path = "serial_test::code_lock::LockMap::get_or_insert"
+kappa = "cfbac885ba9c1a3fda5cdc7859f7dc310913a08e0218e02d9fce49c2309f677c"
+at = "UniqueReentrantMutex=u32"
+embedded = "c39820770ad121289e007d52ec8d3c6e87057c17fda5c14cb9b04301bed6d280"
+status = "residue"
+cause = "mir::Ty: code_lock::UniqueReentrantMutex"
+
+[[fn]]
+path = "serial_test::code_lock::LockMap::new"
+kappa = "0feb1b7d809318f50a21415a21b86b70418df2807e3a163f22813d036bdd2af2"
+embedded = "ea9d94b1a99cffdf077e5326b86d6155d21aba48d78cfd6edc7affcbd7eea3c3"
+status = "residue"
+cause = "mir::Ty: code_lock::LockMap"
+
+[[fn]]
+path = "serial_test::code_lock::UniqueReentrantMutex::end_parallel"
+kappa = "78b1baf544bcacf55ae50c643e3c7019d8ffef48deccd344b8e1b00c179ba1c7"
+embedded = "86d9463ae053fca1be15fef287ec85f19918df1e2aaf7e846348c2a66de1c4db"
+status = "residue"
+cause = "mir::Ty: UniqueReentrantMutex"
+
+[[fn]]
+path = "serial_test::code_lock::UniqueReentrantMutex::is_locked_by_current_thread"
+kappa = "23b0957571b779abc0bf8376a40408d97588f80b93f40dc6ff339167025b9043"
+embedded = "de0fdc5121cb7200397dd74ca05c25d13178fb66a61ad8eaf9d8190a9f843a09"
+status = "residue"
+cause = "mir::Ty: UniqueReentrantMutex"
+
+[[fn]]
+path = "serial_test::code_lock::UniqueReentrantMutex::lock"
+kappa = "db73dad602f890bb394089f0b76513f18e7fdbd3e2dae5a21af6eeb157e26836"
+embedded = "48e70c370bc4363b5e8f842f74754793295f88a40958bd284f350ef244060de3"
+status = "residue"
+cause = "mir::Ty: rwlock::MutexGuardWrapper<'_>"
+
+[[fn]]
+path = "serial_test::code_lock::UniqueReentrantMutex::new_mutex"
+kappa = "d93d6004dbf0eba5cd3dea2f58b7b6482784f476ddbd3f317bc7a9678ce3f319"
+embedded = "26ba6e413ab1319fc06873b12ea0edbbb780a255be8969429b0caf59d425a3f1"
+status = "residue"
+cause = "mir::Ty: code_lock::UniqueReentrantMutex"
+
+[[fn]]
+path = "serial_test::code_lock::UniqueReentrantMutex::start_parallel"
+kappa = "ff3d73b81380a8f6b171f7525e442de0eb01ce87de7efdacf09ddf0a2a39c1aa"
+embedded = "aa7be569fc9174e6aa12509ca68175acebdd5adc3f3ef70bbafe403e448bd00e"
+status = "residue"
+cause = "mir::Ty: UniqueReentrantMutex"
+
+[[fn]]
+path = "serial_test::code_lock::ValueRef::get"
+kappa = "96232777eb99732b9c5b4e95a21f4e0ace4ef7fca6ce7c4cb3a92335828b7248"
+embedded = "870fdfd5468ad8af18ad3f7fbf506a31cdc02d382ae040d3a386100b620271fb"
+status = "residue"
+cause = "mir::Ty: code_lock::UniqueReentrantMutex"
+
+[[fn]]
+path = "serial_test::global_locks"
+kappa = "bff30859e1e701f4815abc8a920ebc7647b7fa2223ea02b285d89bb5bdf1518a"
+embedded = "ec2d6402519f96fa047bd52705ca637353e8b686f2c33f076f25b598a256bd8d"
+status = "residue"
+cause = "mir::Ty: code_lock::LockMap"
+
+[[fn]]
+path = "serial_test::is_locked_serially"
+kappa = "b7093d971d27adfdd815aa830cfdaee3c1824434738d30047d53cd4d18ea133d"
+embedded = "5f4c41f62190262bb45814a54e19d555118d1eb9e3a20808e20c6269cc19cbda"
+status = "residue"
+cause = "mir::Ty: code_lock::LockMap"
+

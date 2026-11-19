@@ -1,0 +1,239 @@
+[[fn]]
+path = "encode_unicode::combine_surrogates"
+kappa = "240c0a3545939694d48f7625543f4430005f2e71d968df16b6f7834e729a2845"
+embedded = "73f61f25b302e7709a3171f17f6ad4a0e619d29af85cf4b766e0134642ceaa56"
+status = "residue"
+cause = "mir::TerminatorKind::Call: from_u32_unchecked"
+
+[[fn]]
+path = "encode_unicode::merge_nonascii_unchecked_utf8"
+kappa = "18302e094c526efc6589fd4aa9c36d2209f34eedd77f2155b2a0c2821ea531a8"
+embedded = "0ff1af1d8a8d132353d5e1207af85e26fccfe42699f7c560172b4cff744f3b3c"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "encode_unicode::overlong"
+kappa = "b7a5336bfb4a089bb71cdf115f726d260ebaa517e1fd9e2f1fd9c145f7e2263e"
+differential = 7
+embedded = "e0d76b7122c7c8ad15abc9c996922762d34cdff101647071fd750fbd84403e06"
+status = "translated"
+digest = "41780b6f361fa668db34d07149a7e7d39b76b65d231643552378bcaded59dcdc"
+
+[[fn]]
+path = "encode_unicode::traits::I::to_bytes"
+kappa = "364cf4b2e29b1efb0d91a997100c20dd34aebec0514217b8a89e01aa6e2363c7"
+at = "I=u32"
+embedded = "338ef551594abcaa96f2259cb5dc3769ca23905e01a1c8e1c0ecbf47ac7e647c"
+status = "residue"
+cause = "mir::Ty: utf8_iterators::Utf8CharSplitter<u32, u32>"
+
+[[fn]]
+path = "encode_unicode::traits::I::to_units"
+kappa = "6dc1eef3c0228a351da6a649624de8a777552e6875fd4c1297b8a3b7b3d771b7"
+at = "I=u32"
+embedded = "090b81d03da6f371768a9bd4d67901c9293db2ffb8e507e5ea04f2d78fd48545"
+status = "residue"
+cause = "mir::Ty: utf16_iterators::Utf16CharSplitter<u32, u32>"
+
+[[fn]]
+path = "encode_unicode::traits::I::to_utf16chars"
+kappa = "4cf883488fc78b21faa9a6cf7cfb9930599e5e042596c29c11f5c83947b8afba"
+at = "I=u32"
+embedded = "5fb24f1caebe04661c133173f07e8d30e8e392a5126b68b7ec32ac9068972ad4"
+status = "residue"
+cause = "mir::Ty: decoding_iterators::Utf16CharMerger<u32, u32>"
+
+[[fn]]
+path = "encode_unicode::traits::I::to_utf8chars"
+kappa = "bd2a81d2a428c88d22c78218f3ab486500928877a90e35fc8166810f88726a67"
+at = "I=u32"
+embedded = "23d37785deed372d391675728b33113301380eeaddc1a77697d15eb93972b048"
+status = "residue"
+cause = "mir::Ty: decoding_iterators::Utf8CharMerger<u32, u32>"
+
+[[fn]]
+path = "encode_unicode::traits::S::utf16char_indices"
+kappa = "8ede7bbef25008ba195eb598d01e88257b0bea2c5a0c85949ba6a9ca9a859655"
+at = "S=u32"
+embedded = "f09ba5ee844f373384d6d13f6997c823b764307fd77f27390e82c058af12492c"
+status = "residue"
+cause = "mir::Ty: decoding_iterators::Utf16CharDecoder<'_>"
+
+[[fn]]
+path = "encode_unicode::traits::S::utf8char_indices"
+kappa = "391640c2a9ee5b418fd0633ca5c63938bfd26f9f5f37bd75d959f2ddf6d7f381"
+at = "S=u32"
+embedded = "879394dd8bf1d6fab8731e9e635851495c313773b963a22d84e9e21729cf0904"
+status = "residue"
+cause = "mir::Ty: decoding_iterators::Utf8CharDecoder<'_>"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_u32_detailed"
+kappa = "c4f457b9bce2282075d1adcd559ab56933c29577fe6b32cd3064e274aadf555e"
+embedded = "17123b9177f34fae2305a12de77780f60a6772d784da3ec63ac704f2fd1c747e"
+status = "residue"
+cause = "mir::Ty: errors::CodepointError"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_utf16_array"
+kappa = "4e0348aca7d8f27a78d5c8ad5c8d45e96858d4437b471e1cb32bfcd01ce67e62"
+embedded = "b9fca3a3ba99cdfaabd08f39c79adfca8c883e9905a4cf6eb7d8ed380a17d175"
+status = "residue"
+cause = "mir::Ty: errors::Utf16ArrayError"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_utf16_array_unchecked"
+kappa = "4d256ab93219b7179aab283e219fc0ea69ec3c2bb0a4ea419d34ab4f15de6695"
+embedded = "23392499cc8fb3caa255bf9aea0498c5517325fc42c1b8bd6d6bd5c5015b5b82"
+status = "residue"
+cause = "mir::TerminatorKind::Call: from_u32"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_utf16_slice_start"
+kappa = "1732240259f21cc99faf9040e653e76ef3ea584304a4ebc42b6c64646c791d2b"
+embedded = "ffc1843a37a5a65b1b2743a9e5c7914c7c990153dc6d2f1c3611f26d7d88c7e9"
+status = "residue"
+cause = "mir::Ty: errors::Utf16SliceError"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_utf16_tuple"
+kappa = "02ec94781f97aabf4deae84c323834df7e5f6699e58785266e52ede848645e3c"
+embedded = "edb411a49c98dbb73caab70ca62b960deb699ca20a4d0d97fc644c30c99ab1af"
+status = "residue"
+cause = "mir::Ty: errors::Utf16TupleError"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_utf16_tuple_unchecked"
+kappa = "c9f42d0de7d67e22c42abcd6a9358cca97abbc3d8d8d4ff329fe4a74ba1495c1"
+embedded = "af7383936150d9df6f15af8ac3c44fdeeb611beba9a5f93e1ff123c7aeb327fb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: from_u32_unchecked"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_utf8_array"
+kappa = "91bbebb7c9cd4deaef32f07104643dec9a6370aeffc0ac30775ecdeeadd81a75"
+embedded = "40c8f86fb778eb9507290d709ceaa181b269131787a3dcb381083af8581eb683"
+status = "residue"
+cause = "mir::Ty: errors::Utf8Error"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_utf8_exact_slice_unchecked"
+kappa = "0dbb37eebb6c29fd2a5b976199888d09d204c541a6997124146a480f5874dc78"
+embedded = "0e98806a31175c7f7bbf5e935467caf1255c84f1a085013780a6d7bc259fb4f7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: traits::merge_nonascii_unchecked_utf8: encode_unicode's MIR stops at type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "encode_unicode::traits::char::from_utf8_slice_start"
+kappa = "ab2be3509331c8cacf74e02ddb14ab18ba175e7c6838ce4d06b54658a919ffc5"
+embedded = "ee52bec6e46265e02497f747c2d35ca074f0bea07e1631d324d70e5469c031d3"
+status = "residue"
+cause = "mir::Ty: errors::Utf8Error"
+
+[[fn]]
+path = "encode_unicode::traits::char::iter_utf16_units"
+kappa = "91f8f57ec49c622e3212a19a7be0d79d08aa0f041160d82dd0109b1c61e4f5e3"
+embedded = "e73903bacfa9f396dd583a47db027c1d99f7e719e1000673cdb90f1cb7550777"
+status = "residue"
+cause = "mir::Ty: utf16_iterators::Utf16Iterator"
+
+[[fn]]
+path = "encode_unicode::traits::char::iter_utf8_bytes"
+kappa = "cad9c623528464bc00a158a156c6f9640b35e6a31c8fc12be7ec9e5e980a804a"
+embedded = "b820f0416dc732abf9e39984463a1cc35995906fb6bae438ec97c994569def01"
+status = "residue"
+cause = "mir::Ty: utf8_iterators::Utf8Iterator"
+
+[[fn]]
+path = "encode_unicode::traits::char::to_utf16"
+kappa = "24581e3a5326596561475b79a534499dfca98d5d3d209335f22d3c4e799f36d5"
+embedded = "7c22495c24f5de87283cff731347554587f4b07ba75b4e435ad3f22b9cc34013"
+status = "residue"
+cause = "mir::Ty: utf16_char::Utf16Char"
+
+[[fn]]
+path = "encode_unicode::traits::char::to_utf16_array"
+kappa = "f46e0df3c6588e7766142f8a2ece1f8ea11932fa7140628cd585b5611bbe47bd"
+embedded = "f987e6fed776f8e84fde00e71a70e71e17fbff430d2318d91faa62f2d44c0daa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Option::unwrap_or"
+
+[[fn]]
+path = "encode_unicode::traits::char::to_utf16_tuple"
+kappa = "0d16d7f7da59a19d039fd8108b8ad2052e6ceb4c2a708f0016f5b806cf9a2716"
+embedded = "daf20b0f26f392dafaa8f89f79f1a1ff86dd1c636f5551956a063e877034382a"
+status = "translated"
+digest = "a25d87769e00d312be6d96d75630b2944ef14c7b46fb173f9ea50722d1b49db1"
+
+[[fn]]
+path = "encode_unicode::traits::char::to_utf8"
+kappa = "0cfca39054a6a3d72553364dd423beb8b12833d027a780897113a7d67fc038ab"
+embedded = "16a18c22e2503584531c7b24937008d3b66cf96b8bdb3d3b33296df9540b0694"
+status = "residue"
+cause = "mir::Ty: utf8_char::Utf8Char"
+
+[[fn]]
+path = "encode_unicode::traits::char::to_utf8_array"
+kappa = "312096c2c47d63adaad33e0ba85c579b5ef4666a0cc7aff21fa6a0f057236e14"
+embedded = "1eeb7a6224e8eca93ecbae39fa7884fcd44dde2a34a9da4da48753b92c782b27"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::len_utf8"
+
+[[fn]]
+path = "encode_unicode::traits::str::utf16char_indices"
+kappa = "12ccc219be776d4b78724202e356e7ad096af63cd11024b32116be8b01c730b1"
+embedded = "def27e7d2b451a8394e9bb26100e2fcd4e531e856d574d595d84cb55bd68663f"
+status = "residue"
+cause = "mir::Ty: utf16_iterators::Utf16CharIndices<'_>"
+
+[[fn]]
+path = "encode_unicode::traits::str::utf16chars"
+kappa = "979dccf51279c139714bf47354036fbb7c5c3add55d6688d5bc6f163c1e5e6a8"
+embedded = "aaf1b1fb38eb77fb5d5a6a4e93adbb97883ae3220acf08342ee6f0986992aaaa"
+status = "residue"
+cause = "mir::Ty: utf16_iterators::Utf16Chars<'_>"
+
+[[fn]]
+path = "encode_unicode::traits::str::utf8char_indices"
+kappa = "ec7e5648737348b2f13fa50845303356d876d2959e8358cad675232a51e0c72f"
+embedded = "63841ad6b84ff49614514a4e7fa67e0a2310bc16f2e923202e5fc175d7e0d586"
+status = "residue"
+cause = "mir::Ty: utf8_iterators::Utf8CharIndices<'_>"
+
+[[fn]]
+path = "encode_unicode::traits::str::utf8chars"
+kappa = "a95f5c5431496468306d29d7dacb8dc5125437101012717ae24b602930ad551a"
+embedded = "58e90e3a3343d14a11691a0248044ef14090827296f9d5490df1ef836b802249"
+status = "residue"
+cause = "mir::Ty: utf8_iterators::Utf8Chars<'_>"
+
+[[fn]]
+path = "encode_unicode::traits::u16::is_utf16_leading_surrogate"
+kappa = "d93f37e0ac71eaaab5720eeb9d1c4586fb5544446558b8517d05d3b77a8bb0a3"
+differential = 7
+embedded = "233e48fc742675508f450d0cef8d3daf5c9798763b24cd67326d4fde47512ac5"
+status = "translated"
+digest = "62a8f51ea0d0a89b2575d0a103b598da9ba41ea525d688b0ef15dd314de460b8"
+
+[[fn]]
+path = "encode_unicode::traits::u16::utf16_needs_extra_unit"
+kappa = "1bdaf996efe1c8af165961e09b75e62b4944ddcdd8036ab5502e8a19db37e784"
+embedded = "eee5c893180cbafdcf4388239f76d6d09cecb28eb8152d5ae47523e50b8321b6"
+status = "residue"
+cause = "mir::Ty: errors::Utf16FirstUnitError"
+
+[[fn]]
+path = "encode_unicode::traits::u8::extra_utf8_bytes"
+kappa = "e5fe0eafddc5d71d92cf675b1a49ca2fe07cebd042a8d512c41539f54ef70d04"
+embedded = "aae053fc83ea8c9bca5315e266c6e81f6b2fdc6256d35ab2f8f4d907f18e3bf9"
+status = "residue"
+cause = "mir::Ty: errors::Utf8Error"
+
+[[fn]]
+path = "encode_unicode::traits::u8::extra_utf8_bytes_unchecked"
+kappa = "abc07038f6095e0c37e1c1b9f7d9da66efe9c727fb904f1f215fcdb2fc602cb8"
+embedded = "18228fa97e607afb3b012d0240330e7fbf65cb0044592c1a5b8ca72d032a2450"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Not, which u32 does not implement in core"
+

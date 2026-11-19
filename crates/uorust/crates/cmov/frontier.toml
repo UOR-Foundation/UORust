@@ -1,0 +1,213 @@
+# The cmov register (written by `uorust crate cmov@0.5.4`; do not edit): every body of
+# cmov's MIR at cmov 0.5.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 125
+translated = 1
+residue = 124
+
+[module.array]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.backends]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 61
+translated = 0
+residue = 61
+
+[module.slice]
+bodies = 62
+translated = 1
+residue = 61
+
+[embedding]
+bodies = 125
+embedded = 125
+evaluable = 125
+blocked = 0
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::x86::cmovne"
+bodies = 8
+
+[[cause]]
+cause = "mir::Operand::Constant: slice::cmovne::{constant#0}"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: slice::cmovnz::{constant#0}"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::x86::cmovnz"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::x86::cmoveq"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: backends::x86::cmovz"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<isize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::slice_to_word: cmov's MIR stops at type outside the lift: core::iter::Rev<core::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: slice::cast_slice::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: slice::cast_slice_mut::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <[u32] as CmovEq>::cmovne"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:116:1: 116:19>::cmoveq: cmov's MIR stops at mir::TerminatorKind::Call: backends::x86::cmoveq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:116:1: 116:19>::cmovne: cmov's MIR stops at mir::TerminatorKind::Call: backends::x86::cmovne"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:128:1: 128:21>::cmoveq: cmov's MIR stops at mir::TerminatorKind::Call: backends::x86::cmovne"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:128:1: 128:21>::cmovne: cmov's MIR stops at mir::TerminatorKind::Call: backends::x86::cmovne"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:74:1: 74:17>::cmovnz: cmov's MIR stops at mir::TerminatorKind::Call: backends::x86::cmovnz"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:74:1: 74:17>::cmovz: cmov's MIR stops at mir::TerminatorKind::Call: backends::x86::cmovz"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:92:1: 92:19>::cmovnz: cmov's MIR stops at mir::TerminatorKind::Call: backends::x86::cmovnz"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:92:1: 92:19>::cmovz: cmov's MIR stops at mir::TerminatorKind::Call: backends::x86::cmovz"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::array::as_mut_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_neg"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::slice_as_chunks: cmov's MIR stops at mir::Operand::Constant: the constant item 8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::slice_as_chunks_mut: cmov's MIR stops at mir::Operand::Constant: the constant item 4"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::slice_as_chunks_mut: cmov's MIR stops at mir::Operand::Constant: the constant item 8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Rev<core::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mut i64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mut u8"
+bodies = 1

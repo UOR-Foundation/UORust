@@ -1,0 +1,160 @@
+# The quanta register (written by `uorust crate quanta@0.13.0`; do not edit): every body of
+# quanta's MIR at quanta 0.13.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 81
+translated = 4
+residue = 77
+
+[module.clocks]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.crate]
+bodies = 29
+translated = 3
+residue = 26
+
+[module.detection]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.instant]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.mock]
+bodies = 8
+translated = 1
+residue = 7
+
+[module.stats]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.upkeep]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 81
+embedded = 81
+evaluable = 80
+blocked = 1
+
+[[construct]]
+construct = "CastKind::IntToFloat"
+bodies = 1
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: instant::Instant"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: stats::Variance"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Calibration"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Mock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: clocks::monotonic::unix::Monotonic"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mock::Mock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Clock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Monotonic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clocks::counter::Counter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cell::RefCell<std::option::Option<u32>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: upkeep::Upkeep"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: with_clock u32>::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Calibration::new: quanta's MIR stops at mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Clock::new: quanta's MIR stops at type outside the lift: clocks::monotonic::unix::Monotonic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Counter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Handle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: raw_cpuid::CpuIdReaderNative"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: upkeep::Handle"
+bodies = 1

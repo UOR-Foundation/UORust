@@ -1,0 +1,146 @@
+[[fn]]
+path = "ansi_term::ANSIByteStrings"
+kappa = "57a79116b9390c222a17b4365a37cbe0c5a47c95b59ea8a7fbeb725474e2f0cd"
+embedded = "8bafe1a328d9b959629442111f8911b96b8ff78792e98fbe1ea2e5f7ea58216f"
+status = "residue"
+cause = "mir::Ty: display::ANSIGenericStrings<'_, [u8]>"
+
+[[fn]]
+path = "ansi_term::display::<impl at src/display.rs:132:10: 132:15>::fmt"
+kappa = "d39c43e52252afa7865616a97b58e23234cc59cfe8d5b4b72c65dc1b7a2f93c8"
+at = "S=u32"
+embedded = "3f1a76da82dc3583fca6c2187a70add57aacce0ba6fa5db86ea926371c212483"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ansi_term::display::<impl at src/display.rs:132:17: 132:26>::eq"
+kappa = "f8f2235b5417a839c6cc7e8ebb9c04e5f34c16a0d4c52ccee01dbfe2f5bd3ac3"
+at = "S=u32"
+embedded = "e00eec96a5cf78d78b67480bbca46f2da72dd774b2d2fb50c58f74cd41c674f9"
+status = "residue"
+cause = "mir::Ty: ANSIGenericStrings<'_, u32>"
+
+[[fn]]
+path = "ansi_term::display::<impl at src/display.rs:15:10: 15:19>::eq"
+kappa = "bd928a71680319d36cfb66fb055555ff2063d21fe20fe7a5b0a7a0a720ba4de3"
+at = "S=u32"
+embedded = "8bef6cba1d732bd051ad69ad9d118b9e9fd75b98701afe4dd7af9ac6ccc8df61"
+status = "residue"
+cause = "mir::Ty: ANSIGenericString<'_, u32>"
+
+[[fn]]
+path = "ansi_term::display::<impl at src/display.rs:15:21: 15:26>::fmt"
+kappa = "d0d9216fa48a581c71b0fb1f4aa6bdbc1b1498f6a4278089ec3200b406db8627"
+at = "S=u32"
+embedded = "4fb19b96133e2b2daf58347c8e42a8c669ac5c5556d5dc75f6b3af18061d94b9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ansi_term::display::ANSIByteString::write_to"
+kappa = "7ca93d7aed2ab8b8a554b234bdab8503ce8119e953984aaaa494c1d0e208f7c5"
+at = "W=u32"
+embedded = "ee2be09f962e85c5578984c3a32c6f8c3ef186344ca241100b589a725abaf1cc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ansi_term::display::ANSIByteStrings::write_to"
+kappa = "e7b7bad44b42d572211f994795477e04988358e50292ee1e36e9d436d29e222a"
+at = "W=u32"
+embedded = "52248c98c18e64530cf570851fd61f36c09c68d1f4a469822ab3e05778f122dd"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ansi_term::display::ANSIGenericString::clone"
+kappa = "3496375ce1ea5d26f1a4368070faf69cb47de7c7f82e783ce1bbc354407781dc"
+at = "S=u32"
+embedded = "e2518cf2306664856449184edaba024c56123ea41a777521e6d1922960ed9107"
+status = "residue"
+cause = "mir::Ty: display::ANSIGenericString<'_, u32>"
+
+[[fn]]
+path = "ansi_term::display::ANSIGenericString::deref"
+kappa = "17eec496779aab62d3ac62c58846c7d80a15a44fae0e300be45184a3e1d6fae5"
+at = "S=u32"
+embedded = "aad7ed9b8cb00bff31c364773ff35c20bfbcdb4db9b1a80e08fb229198c27d13"
+status = "residue"
+cause = "mir::Ty: ANSIGenericString<'_, u32>"
+
+[[fn]]
+path = "ansi_term::display::ANSIGenericString::from"
+kappa = "8f20d2e127146253145f1717d7fd3d65d7db21039b7022de2e42a7dcc766f12f"
+at = "I=u32, S=u32"
+embedded = "5c49c9ae59b81a03799038ed05d13c274eea2c0a60ad1cf5cc1d8e5135ce1f94"
+status = "residue"
+cause = "mir::Ty: display::ANSIGenericString<'_, u32>"
+
+[[fn]]
+path = "ansi_term::display::ANSIGenericString::style_ref"
+kappa = "f264ba35382af2f5367303bbb077697d27223efbc6ca2cd635ec8859f9143169"
+embedded = "95bc977d196e302dc7266a0630d43265ad9cd7239ee534b213d6208fbfd90f9f"
+status = "residue"
+cause = "mir::Ty: style::Style"
+
+[[fn]]
+path = "ansi_term::display::ANSIGenericString::style_ref_mut"
+kappa = "7b51d0685d1d93d4d2969a98c5b2554a51f68a4646a6b13f2a946a2901676fae"
+embedded = "ff3ea8f6d0a0a82c21d596d0dcaf38f910b1149f30ef7ca3ae1484d16e166aa1"
+status = "residue"
+cause = "mir::Ty: style::Style"
+
+[[fn]]
+path = "ansi_term::display::ANSIGenericString::write_to_any"
+kappa = "10aac3613eb9df12acc2e6c3645d6c2b9a015fa779d06577f7dd9e733a48f875"
+at = "S=u32, W=u32"
+embedded = "27aca930cb75a1ba0b2f93f60cf5756b1d034a55ba23a02eafd686928fa2830f"
+status = "residue"
+cause = "mir::Ty: ANSIGenericString<'_, u32>"
+
+[[fn]]
+path = "ansi_term::display::ANSIGenericStrings::write_to_any"
+kappa = "12da52ce7013f6f29de0956836c0a0cf151abb632e72cc4a45d8c895533c64ff"
+at = "S=u32, W=u32"
+embedded = "4aebc694913717303d4827dd4769fa8404d89dfad80dc3d7ca06ba16df123a95"
+status = "residue"
+cause = "mir::Ty: ANSIGenericStrings<'_, u32>"
+
+[[fn]]
+path = "ansi_term::display::ANSIString::fmt"
+kappa = "920d27077b4a46bdf6770a8e291ebfd167d7891c93788507bf877ca73d833456"
+embedded = "cd26cae5e22d248b4005001396ed2f586cc89d5af9855b9f0ebc9f4280485569"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ansi_term::display::ANSIStrings"
+kappa = "6a5937a8766a49a961d80421fe96aa75871fd3afe2d856903f7eb23519ebf125"
+embedded = "e4110ba1daa3f6703d35dbab05edaf231439204f4c9deca33966c30169035670"
+status = "residue"
+cause = "mir::Ty: display::ANSIGenericStrings<'_, str>"
+
+[[fn]]
+path = "ansi_term::display::ANSIStrings::fmt"
+kappa = "3c31498ed3d72340161fc2dfc71c5cdb8ec5dc1a777872d891c9f6721000855d"
+embedded = "5a23771242f63f8f2ee7eceda2d245f48af467a132770274d98c8145353eac9b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ansi_term::display::Colour::paint"
+kappa = "a17e30b4c10f2d548e09d3d4133e18c2ca0b4a61cf9a34ebd2a217b9a7170a28"
+at = "I=u32, S=u32"
+embedded = "84fd6001a5eaaf0700183f9b4853c50d2d1fbc89d98072865b98d6282cd13338"
+status = "residue"
+cause = "mir::Ty: display::ANSIGenericString<'_, u32>"
+
+[[fn]]
+path = "ansi_term::display::Style::paint"
+kappa = "668db2e6f4bffb5ff51e0950bab3662173e9a88df1adc7950784769cac42841d"
+at = "I=u32, S=u32"
+embedded = "e0d3636f13cd6e208974703daa00be0670b93a47b7dcfa28069322593ce287a8"
+status = "residue"
+cause = "mir::Ty: display::ANSIGenericString<'_, u32>"
+

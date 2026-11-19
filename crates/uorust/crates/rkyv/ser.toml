@@ -1,0 +1,735 @@
+[[fn]]
+path = "rkyv::SharingExt::serialize_shared"
+kappa = "26ff413595ce0e31d8eb404463c26f460d45c65bbf859a6c4f488485c4161607"
+at = "E=u32, Self=u32, T=u32"
+embedded = "cab18d56f54d785a83666651bd7622a752802d62ca3be34d1b65bee4ac3cc3cb"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "rkyv::WriterExt::align"
+kappa = "3dc8db2ba92d585da5d383ce3eefd65729d3918524f89560c7c95a5698e84382"
+at = "E=u32, Self=u32"
+embedded = "af97a263ddebcf0f6033c5ddde0cf146b2c1c9e6bd95e9f8ca0ef3079f3f5557"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ser::writer::<impl at src/ser/writer/mod.rs:32:1: 34:28>::pos: rkyv's MIR stops at mir::Instantiation: u32 for a parameter bounded by Positional, which u32 does not implement in core"
+
+[[fn]]
+path = "rkyv::WriterExt::align_for"
+kappa = "13cfc9e6ef0ac10881c757878385208a7a27afde5a6371aaf30e701a1eafc425"
+at = "E=u32, Self=u32"
+embedded = "d2c83dddfdf06ea91f5e8cb81f44814210dbfa988107d03ed9894e0c3cdd3f8c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "rkyv::WriterExt::pad"
+kappa = "407d087ddc7e6dd0fea8402cbc04cbe0d26959f20c3cb9c602aa233d93a94a53"
+at = "E=u32, Self=u32"
+embedded = "eaed3481ef393d13ec2ba0178cae35b0e694b03c99f870469b9b6d69ee4c8cd5"
+status = "residue"
+cause = "mir::Operand::Constant: <u32 as ser::writer::WriterExt<u32>>::pad::promoted[0]"
+
+[[fn]]
+path = "rkyv::WriterExt::resolve_aligned"
+kappa = "db2610c87bd2cad9f935df1758a89987fac6498eac77099c92d2888ceae16678"
+at = "E=u32, Self=u32, T=u32"
+embedded = "e248143fd16274180d70f3de0c0142abc2bb311f62f2ee27e46690535e90bcdd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ser::writer::<impl at src/ser/writer/mod.rs:32:1: 34:28>::pos: rkyv's MIR stops at mir::Instantiation: u32 for a parameter bounded by Positional, which u32 does not implement in core"
+
+[[fn]]
+path = "rkyv::WriterExt::resolve_unsized_aligned"
+kappa = "303de7ab83341b82d1c9f5b0bf3087a1fba14c75ed85690ddc74c9e025f7e041"
+at = "E=u32, Self=u32, T=u32"
+embedded = "c8b93599c7254339174a003040678eb4b18bdef5704d1aecb0d3f3af8d358d97"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ser::writer::<impl at src/ser/writer/mod.rs:32:1: 34:28>::pos: rkyv's MIR stops at mir::Instantiation: u32 for a parameter bounded by Positional, which u32 does not implement in core"
+
+[[fn]]
+path = "rkyv::ZEROS"
+kappa = "f40fc7e00d299e3b83ffb233414fa91eccdf8fe85f4a54fa699d20af28b29d83"
+embedded = "3777f74c545911383e5d4cff9fc20d36d0ad20a1c0a44b99bb4fba84d03a7004"
+status = "translated"
+digest = "751dec7935ce96218f297b465831ff134d1f6bbe196bcf43b3799df7d776607b"
+
+[[fn]]
+path = "rkyv::allocator::<impl at src/ser/allocator/mod.rs:144:1: 144:70>::pop_alloc"
+kappa = "839fdd0715684879bcb07c9875bb2ad89f2637b81d8dfe447a8b98d624ee743e"
+at = "E=u32, T=u32"
+embedded = "1fcbdd1d37516fd4f4a79fd52897b09fa2695095f1b9877cf76c21e6bebe50e2"
+status = "residue"
+cause = "mir::Ty: AllocationTracker<u32>"
+
+[[fn]]
+path = "rkyv::allocator::<impl at src/ser/allocator/mod.rs:144:1: 144:70>::push_alloc"
+kappa = "c779f45fad7f61b9f71664da74d31f0d22d9c56a7da0859cfac006ec950a0bf9"
+at = "E=u32, T=u32"
+embedded = "2868bcc7f82e124cce987accb753858ff12836940a3ef5e56aaac6237b12210e"
+status = "residue"
+cause = "mir::Ty: AllocationTracker<u32>"
+
+[[fn]]
+path = "rkyv::allocator::<impl at src/ser/allocator/mod.rs:44:1: 44:64>::pop_alloc"
+kappa = "5025b98d2349087310ef68b8696c14fe4bb1e15c46d90ec3c6cf37bffae180c2"
+at = "E=u32, T=u32"
+embedded = "57c1899fbce64c800fb8666c0abd48fd2b9da1eafc878537bfa15c3361883113"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::allocator::<impl at src/ser/allocator/mod.rs:44:1: 44:64>::push_alloc"
+kappa = "5a5476285271300e40bd7e204233ff24e1a366f593727eb4062f9c14feb0ba7a"
+at = "E=u32, T=u32"
+embedded = "fe28d4d5558dbcb080de503347ed2a1a762d61960f11a8a699ad15d0b807c1c2"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::allocator::<impl at src/ser/allocator/mod.rs:66:10: 66:15>::fmt"
+kappa = "f73521ff3ea29a1bfbce1380d4a189b28e471a4ca540eb3cc040b2881ce5c43d"
+embedded = "58386cb6ab48fcb121f6f75fd7b5b742537c02fa1d5a3df1c5488f1d5bd6d98f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::allocator::AllocationStats::min_arena_capacity"
+kappa = "f4fd947a9fff7bc4d943f13d4b9c27bd01b12ead6815f44bd46d4fb45f272774"
+embedded = "cba5011c84ec7e681aa71bdd85229d3e157ec3b01157905266183f8a54e0f5f6"
+status = "residue"
+cause = "mir::Ty: AllocationStats"
+
+[[fn]]
+path = "rkyv::allocator::AllocationStats::min_arena_capacity_max_error"
+kappa = "54345718ba82e083eb5f83b347d66a290850fdce38c55cbf534d1940318d4328"
+embedded = "3e07674f066937f3ef4ff1ef1b0748d1d29ff2ce854cca44e2bcf58b99b38572"
+status = "residue"
+cause = "mir::Ty: AllocationStats"
+
+[[fn]]
+path = "rkyv::allocator::AllocationStats::pop"
+kappa = "8eac58adfb1c0f2c64bc42f1ce70e59f2f1b2cb7ebd6c2483dcf9413bdffc220"
+embedded = "cc35ebafe17bf05a16eb23597089749438d54916952334d6cfe1b57227ec666f"
+status = "residue"
+cause = "mir::Ty: AllocationStats"
+
+[[fn]]
+path = "rkyv::allocator::AllocationStats::push"
+kappa = "4e7c60810ef0e01f09df11e19d7adb153476161bae7d4b41897ff8042dccc80e"
+embedded = "357bf68b57a50c2ca6e34e62c8e03ad2c343bd68230d8e68a4554906c566b1ce"
+status = "residue"
+cause = "mir::Ty: AllocationStats"
+
+[[fn]]
+path = "rkyv::allocator::AllocationTracker::from"
+kappa = "670bb18dfb274d3fb9c548e3d0739662201b57b92f96833135b42f86855536cf"
+at = "T=u32"
+embedded = "a788274a205e59be95a902e9cc1dc26ff9d10cae41d8d20e98555ffd4e70aa5c"
+status = "residue"
+cause = "mir::Ty: ser::allocator::AllocationTracker<u32>"
+
+[[fn]]
+path = "rkyv::allocator::AllocationTracker::into_stats"
+kappa = "809268aaf895a62c87e36295adf5ec8592389ddc831d147098b005276e62ffc7"
+embedded = "ae478c198189e8069f0bc72fda765a9c413da5f6b89dcf4eb6bc4948144139df"
+status = "residue"
+cause = "mir::Ty: ser::allocator::AllocationStats"
+
+[[fn]]
+path = "rkyv::allocator::AllocationTracker::new"
+kappa = "bf34ab3cebebd40aa3320b821b84aac9b33172dd901358e8c8685b7685ea52ff"
+at = "T=u32"
+embedded = "0d32005c919088f439390acab07b7e9affd77881ff089002aec96fee0acbc33c"
+status = "residue"
+cause = "mir::Ty: ser::allocator::AllocationTracker<u32>"
+
+[[fn]]
+path = "rkyv::allocator::alloc::<impl at src/ser/allocator/alloc.rs:216:1: 216:48>::pop_alloc"
+kappa = "19302414e6f1653aee300226d6d3df1ac037f390a88b030bc4a455e98972a55f"
+at = "E=u32"
+embedded = "ab8b42ebc4feb20c581ee13651393ceff41762294f705a6f10f367ea315bb371"
+status = "residue"
+cause = "mir::Ty: allocator::alloc::ArenaHandle<'_>"
+
+[[fn]]
+path = "rkyv::allocator::alloc::<impl at src/ser/allocator/alloc.rs:216:1: 216:48>::push_alloc"
+kappa = "bcabf0b4c5c7d8f70b90301093fd146809540baedc13b19d07a4b3ad3b928d46"
+at = "E=u32"
+embedded = "9f4288c8f34aa903b4813e4565d02be4a15acf431db77d5cc3feb19f81069ad5"
+status = "residue"
+cause = "mir::Ty: allocator::alloc::ArenaHandle<'_>"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::acquire"
+kappa = "8ad7a15718b2571d7f4cc7a873dbeefba86f0e3a96a1f4d6a1b9d4809f19b7e9"
+embedded = "43a1564b8f4ec3a378f2a11d785d8b832926b1ac28112261ae6ff08aba39700d"
+status = "residue"
+cause = "mir::Ty: ser::allocator::alloc::ArenaHandle<'_>"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::capacity"
+kappa = "37ce98fdd413a9d4de33bd34c0ac7793d4a5db1f7d523ca6c7aa250640985100"
+embedded = "ab1ac46408b3376ab9a1b72ba10c5cfa32a0bfdc5c28c70852db60cf78aaa039"
+status = "residue"
+cause = "mir::Ty: allocator::alloc::Arena"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::default"
+kappa = "850b7e30db4cda345912222fa2aaa2133f9291a0bb33060c3aa18bf44f3407f9"
+embedded = "82d3bcc33377534f13cb07e18411a834dcf5bd382ef5f3c008b178d1b877f685"
+status = "residue"
+cause = "mir::Ty: ser::allocator::alloc::Arena"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::drop"
+kappa = "d5b9a8ce323c9b282c3711bef7394c62a75f3f018cb85b0bfefcb9b2ad641d7f"
+embedded = "abae7b2ebdd983c11219a39fd6985a4efb0f00309bcedd71d981e94ea2dd5941"
+status = "residue"
+cause = "mir::Ty: allocator::alloc::Arena"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::from_raw"
+kappa = "d5888ff900cfc86a9df42e5b08ec149bb3ffd814577d6f9e8bd127bedec11e15"
+embedded = "1426e8be93c984f3422f9ca3e666a46e307168b4cc802d5e4361d13bc9621784"
+status = "residue"
+cause = "mir::Ty: ser::allocator::alloc::Arena"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::into_raw"
+kappa = "cdafecb5c166161b99e1a3d6ae146b20fea85cb73fd5fb8e4e0cffe9c3e2a595"
+embedded = "84356b86a102385ce6adfd4ae860379825b16790100c18064a0908669b2e689e"
+status = "residue"
+cause = "mir::Ty: allocator::alloc::Arena"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::new"
+kappa = "f08fa0628ceb3767a93abcba58770e905875fd10c151595fef8e3312a3a26654"
+embedded = "cfccfa32b7a23d96b2ad2c3fe8bedba0f27cdd0a6047ec43caf32b7dcf2d5245"
+status = "residue"
+cause = "mir::Ty: ser::allocator::alloc::Arena"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::shrink"
+kappa = "57bfe2993092024c3eb72fb8ea46191547c3c9a7f5bb1dbaf77fcacb0c8ecc82"
+embedded = "14916bf28e48bd1512f018e4b0e1544184e38248e024bcf834df8e04ad09a467"
+status = "residue"
+cause = "mir::Ty: allocator::alloc::Arena"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Arena::with_capacity"
+kappa = "e508e4989ad97071ea9613a2f83030d86a1ad9a07a0c77c01a08a6f69720b83d"
+embedded = "b42db1befb30e791e34fb04cdd713f26314ec7057de28602b12bb285bf4b17c9"
+status = "residue"
+cause = "mir::Ty: ser::allocator::alloc::Arena"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Block::alloc"
+kappa = "78fc60bcc6228fc7303b791732bb912b6f34eef0309c1a2125c13ff41f26e1d1"
+embedded = "8abad4d2b7276c2d0762dd9c9d81a21d8e54e954068c5207130ddeda1f0aa007"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Block::dealloc"
+kappa = "784fc974d7970c712bd896300fffbc1835b66bb7b0d231295c80d25367680faa"
+embedded = "cabac7decd36799da9f1967593fc5716d5a5f59d4ec1c52b8ce6f0c47c3c369a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "rkyv::allocator::alloc::Block::push_next"
+kappa = "fa5eb15475007b00b54fe12f9c1707a7b41c566908f6c82ec93a8aaafda9d73f"
+embedded = "4df252b512ab1e22ce36e7a4e6727a1c54be8b43abb11fd71a676c170de45e63"
+status = "residue"
+cause = "mir::Ty: ser::allocator::alloc::Block"
+
+[[fn]]
+path = "rkyv::allocator::core::<impl at src/ser/allocator/core.rs:14:10: 14:15>::fmt"
+kappa = "624a246ef6435da0ca63fafc6cb0beb96b96e37c5462b1197a1e299a6cc04f57"
+embedded = "e362eeffa81d4e40eab8890245a332830aac6e4d257fba91855bdc2cc2c475a2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::allocator::core::<impl at src/ser/allocator/core.rs:33:10: 33:15>::fmt"
+kappa = "d13f6c609484d902f35398bcf55626275e09ba9c09bfb1363f021f0bad387b4b"
+embedded = "f8b0f11422a3cb00b950d30f6ab6288bfc49be089391a9ee54b71b48129e027f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::allocator::core::<impl at src/ser/allocator/core.rs:63:1: 65:15>::pop_alloc"
+kappa = "ad1c57567d313051fb80f0487b6885ca88280c92a09eab095de23a6f77122c1d"
+at = "E=u32"
+embedded = "cae125031848866c2106bb2dab5a813eede296e20c5fdf03a0eb42dd66a5adc0"
+status = "residue"
+cause = "mir::Ty: SubAllocator<'_>"
+
+[[fn]]
+path = "rkyv::allocator::core::<impl at src/ser/allocator/core.rs:63:1: 65:15>::push_alloc"
+kappa = "9effe355b2610511736cddb021dd2d93c38470bd205abc6a39e995c142cde15b"
+at = "E=u32"
+embedded = "a3fe4966004386e8f054ed5a425915689232831e4e9a15c1c388f6eb3fb42290"
+status = "residue"
+cause = "mir::Ty: SubAllocator<'_>"
+
+[[fn]]
+path = "rkyv::allocator::core::OutOfSpaceError::fmt"
+kappa = "ce866f9397a93da3090a1e95488424d8e20100e91306a60cf652aab4bb533123"
+embedded = "43bf3e64268952136cb99e0cb5a545b1526a93656e8c0c2b617bc378be1fe1e0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::allocator::core::SubAllocator::empty"
+kappa = "74a69ff0480a7ff7642b7e006e5ce0e405e5a76175e5c7f347a87237e50adcd5"
+embedded = "5b634d9ff7863a21a67268140c274cc375519443c54b7232773731753399cba8"
+status = "residue"
+cause = "mir::Ty: ser::allocator::core::SubAllocator<'_>"
+
+[[fn]]
+path = "rkyv::allocator::core::SubAllocator::new"
+kappa = "c445d252bc72fd31ee5d8c8c0c5da2fef5bcd09e275eb81444aa918339a0c87c"
+embedded = "934615e0cbdcfc688709271679749a5635e549f17e267d39d8d603eea9f00e38"
+status = "residue"
+cause = "mir::Ty: ser::allocator::core::SubAllocator<'_>"
+
+[[fn]]
+path = "rkyv::ser::<impl at src/ser/mod.rs:17:10: 17:15>::fmt"
+kappa = "29780d73a7e589029af61125db1776a4f9bd2bfc7646a3a1cb478c353537c122"
+at = "A=u32, S=u32, W=u32"
+embedded = "6a823fb87e6b4ab0b1edf8d649475864aac431c7eeb870acdd06626ebf09d453"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::ser::<impl at src/ser/mod.rs:17:17: 17:24>::default"
+kappa = "79633008b4ccf56e661f593abfb04bff6e90cbeb2671baa2f088398460e302e9"
+at = "A=u32, S=u32, W=u32"
+embedded = "c27b88e4f6cfe48b05a7e3d6f628f77405dc340dc62773fa3567db519718b342"
+status = "residue"
+cause = "mir::Ty: ser::Serializer<u32, u32, u32>"
+
+[[fn]]
+path = "rkyv::ser::<impl at src/ser/mod.rs:62:1: 62:75>::pop_alloc"
+kappa = "d3251f1cf04cfe9c4e034fc8892bf22fd7a78df3e2962f2cd65b94e77e214c72"
+at = "A=u32, E=u32"
+embedded = "21902fc4f62499dc6f1add36c6eb250b6158805773678d0b14c077a5db8fc27c"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "rkyv::ser::<impl at src/ser/mod.rs:62:1: 62:75>::push_alloc"
+kappa = "5d4da09431d8f00566ecaeb4d9fef9f77cb0a8c6caf71c52d6eb75ed62c683f3"
+at = "A=u32, E=u32"
+embedded = "41d3f0445f63dbf6bcf15c829107b421066de525c2e77d30982a0d9f498171b6"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "rkyv::ser::Serializer::finish_sharing"
+kappa = "9f16fd4c88f576d52b16ea0bf71758d31b9e0cf044582d4a08d16277b34ed528"
+at = "E=u32, S=u32"
+embedded = "301650691836144976c67a71320164b395c6c26f37cb192985be229ba25193cb"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "rkyv::ser::Serializer::into_raw_parts"
+kappa = "4b71af6ec158b1bfdd3cef442379f14ddfb82baff0d8932cef3d0f9dce275c38"
+at = "A=u32, S=u32, W=u32"
+embedded = "5fed3e00c889634a73b5afc5f5ddba4a5bf3df1091b598969d0249dda0ad98c9"
+status = "residue"
+cause = "mir::Ty: Serializer<u32, u32, u32>"
+
+[[fn]]
+path = "rkyv::ser::Serializer::into_writer"
+kappa = "adc41449c21b0b0b47e7a0aa66cf97b9a34524c5ec070d4c113ad16efc000c7f"
+at = "W=u32"
+embedded = "9611fe8ad4bbc3ee930ab472f6b6493bd7c49eba3d15c95ead3f696d73f70ac6"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "rkyv::ser::Serializer::new"
+kappa = "8577b5c8e0cca2a8df046bb10a133894ee63d507a0a781cc9cd32cd621a4f0dc"
+at = "A=u32, S=u32, W=u32"
+embedded = "e034c1c0d964e37f34032751d8e807387d602616e9638a6fa97422d49f0af20f"
+status = "residue"
+cause = "mir::Ty: ser::Serializer<u32, u32, u32>"
+
+[[fn]]
+path = "rkyv::ser::Serializer::pos"
+kappa = "1fc773517d59b070dda9615c28af7b90e9e5a0e71f290395bdb76e192515c5d5"
+at = "W=u32"
+embedded = "2967eaea42b5a107437cc3fc6d524621ac8e5f83f62708b190215cefd496adcf"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "rkyv::ser::Serializer::start_sharing"
+kappa = "9c0e80413455b380c451e1f5527e34246c4e7f0b69bf448b1d2946a3d4015b86"
+at = "S=u32"
+embedded = "f3c5aa5fca9c7f13f4353d9f02c34ffbb9b9b4ef933d1629bc3403a74e99295e"
+status = "residue"
+cause = "mir::Ty: ser::sharing::SharingState"
+
+[[fn]]
+path = "rkyv::ser::Serializer::write"
+kappa = "f4309ca6b68e1438d3422ff8c1d3ffe8f4293fb425ddf241dd66813b0f1a50e3"
+at = "E=u32, W=u32"
+embedded = "8445ad352505989a19b2040f7f994350d163ca6c1f6c72afd7eb8095e0ccf47c"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "rkyv::sharing::<impl at src/ser/sharing/mod.rs:42:1: 44:28>::finish_sharing"
+kappa = "4aef62fcf85966c7883611895f74dd71873c65eabe84f7143bc3c271184842ed"
+at = "E=u32, T=u32"
+embedded = "139fbfbd81bc6ebd5d93b5015d7066f74ec2e4a92520a20f45260e9d18f0985b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Sharing, which u32 does not implement in core"
+
+[[fn]]
+path = "rkyv::sharing::<impl at src/ser/sharing/mod.rs:42:1: 44:28>::start_sharing"
+kappa = "0d039c75dc5abebe0fab9d54d66c05bf5b52931cba224be0d75f7d324ed16bad"
+at = "T=u32"
+embedded = "8a6a24c4020f4035364f9b44375ab19343f1fdbabef7636b7f2fa907a0746dc3"
+status = "residue"
+cause = "mir::Ty: ser::sharing::SharingState"
+
+[[fn]]
+path = "rkyv::sharing::<impl at src/ser/sharing/mod.rs:68:10: 68:15>::fmt"
+kappa = "7638f95412bc6b8b2c239b379c544f1c228de197cec06b98a8a16623a78f9370"
+embedded = "1a0f57858630223abd78170a820855aab5aae01033ccf0550ed85dc96d023c28"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::sharing::CyclicSharedPointerError::fmt"
+kappa = "2c2e50affe7e4060de1577ae144a39411e892d57a43e4b2c20dcce70ba8606da"
+embedded = "56dcf655659c10ebb67487b76d4a7d4821466dd7c1c2f4c99e2b59b3cf62ae73"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::sharing::Strategy::finish_sharing"
+kappa = "752f358fb56be6387d8b145ef94634cc898e5d51f2dd980e15e769807d48b60e"
+at = "E=u32, T=u32"
+embedded = "9017d282ee17248f329be812623137b51b3d12c3e12dc05c2607ac710eed096c"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::sharing::Strategy::start_sharing"
+kappa = "ed7a92efa014b58905bb738771879fb28771f1eab27fc89e75d34f0dbcd18b90"
+at = "E=u32, T=u32"
+embedded = "afa4000180a6574bd76ae5644c32a456ead48c3eb4c8e920d8ff9965c128d082"
+status = "residue"
+cause = "mir::Ty: ser::sharing::SharingState"
+
+[[fn]]
+path = "rkyv::sharing::alloc::<impl at src/ser/sharing/alloc.rs:13:10: 13:15>::fmt"
+kappa = "f953d6b2bc28586e1ed97247b94f0e9ebfc3db52ba585ce1ba767d27a7190212"
+embedded = "274492df0d97d8674107e694ab89af00d18e24e78a42b97639ed07ba2096d272"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::sharing::alloc::<impl at src/ser/sharing/alloc.rs:13:17: 13:24>::default"
+kappa = "d7ff3ab0e60819c309e7c310293c1a2c5e1288bcd276d84c58be342d149e502f"
+embedded = "98705073999701807d7bab36b55916564c4834d8388408a87f60d1ec4b09bbe6"
+status = "residue"
+cause = "mir::Ty: ser::sharing::alloc::Share"
+
+[[fn]]
+path = "rkyv::sharing::alloc::<impl at src/ser/sharing/alloc.rs:43:10: 43:15>::fmt"
+kappa = "d98f0a8882b585c15cd198fee50e71e3998540838604ce87c0347b034621d1d9"
+embedded = "a440b8196ff69bce65eafcebcc8106b385d09d607682a6d787d566a91fa466f1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::sharing::alloc::<impl at src/ser/sharing/alloc.rs:54:10: 54:15>::fmt"
+kappa = "da33b488fd28c0fd562ba9332f49260a1825f4777ae4e613aab9e5fb3344a81a"
+embedded = "8e6b7907fd9377323830e91694c94a8c0f60580b22709c44bff7977e3b086d13"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::sharing::alloc::AlreadyFinished::fmt"
+kappa = "2b25980e6b3ec813b1fc7e43ecf6e3a539e750acd4fa53bb56c8d7d5cf604c60"
+embedded = "513f51bd27b2d103b414d12adcdaefe1cc143c82dbadc456af6709a88441f214"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::sharing::alloc::NotStarted::fmt"
+kappa = "2ea7f2b860ab924a3a30d2bce377432a9c5576308a34369c6102483117109588"
+embedded = "d1cb4146e278a91d39cb02d8cd496dd73dba24f9b79493ad09c3d4f5a66fcb43"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::sharing::alloc::Share::clear"
+kappa = "a7840613a86f556c1d4e232c57d9bdf6e3183fce8be05d3c7ef9380cfa7e56bb"
+embedded = "fefbc03d8b08ee2584349ab80d7f64a737effa47f7d6eeae1e42e048347b7c21"
+status = "residue"
+cause = "mir::Ty: sharing::alloc::Share"
+
+[[fn]]
+path = "rkyv::sharing::alloc::Share::finish_sharing"
+kappa = "3f04714d93fda27b6e6089cd23d46c859044e943d4334e6b64df9a60e92c9e79"
+at = "E=u32"
+embedded = "0a13e7f64ff9f1e57bd92a731b705d9de43d78e9cf91d87ee6144e37b50c6e25"
+status = "residue"
+cause = "mir::Ty: sharing::alloc::Share"
+
+[[fn]]
+path = "rkyv::sharing::alloc::Share::new"
+kappa = "a8e0c11d5ccf9e9bc171410da527d96a576122ce8824176738251a1d4e7e58f4"
+embedded = "bbfb3e225445cc21071902cdfea4579203d8d9cc814bbdf0fbd99a58d04f06aa"
+status = "residue"
+cause = "mir::Ty: ser::sharing::alloc::Share"
+
+[[fn]]
+path = "rkyv::sharing::alloc::Share::start_sharing"
+kappa = "8007fe7e0bd9aba3702f17e21cc57c10f836881c9edda8030afa44fe0a514460"
+embedded = "590e8d01e0e9134200ca88c4be00bb9e0beaf565582a58c2e2ac3047098b1da6"
+status = "residue"
+cause = "mir::Ty: ser::sharing::SharingState"
+
+[[fn]]
+path = "rkyv::sharing::alloc::Share::with_capacity"
+kappa = "eb270f27c3c4339973d5d0e0cc54b8a21d6a036d4469e3e6f5c19addf76ff13a"
+embedded = "24c5263a12e4b6a85ecd5d7689cde4b2ce174be72e2501ea39d20194c9d7b1b4"
+status = "residue"
+cause = "mir::Ty: ser::sharing::alloc::Share"
+
+[[fn]]
+path = "rkyv::sharing::core::<impl at src/ser/sharing/core.rs:5:10: 5:15>::fmt"
+kappa = "04825ed864855f01d6aab5cb93ee38631da2c12e37ce21376f4da050dfc25e09"
+embedded = "5a83e48a8b6987dbda29351d00c74ee283921cd73c1e71bdaaa2df86fb1a0a00"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::sharing::core::<impl at src/ser/sharing/core.rs:5:17: 5:24>::default"
+kappa = "bcea4466df6b88bbdf8ca1de7a7bb5d3470fb3796b40b5f1bdbecc40530f4aae"
+embedded = "7f0d1a6d1d069720c96bcb400cd5971948a393dcb5969d7930c4e1b09315a796"
+status = "residue"
+cause = "mir::Ty: ser::sharing::core::Unshare"
+
+[[fn]]
+path = "rkyv::sharing::core::Unshare::finish_sharing"
+kappa = "c505d65c8416a9b50eef75c7161c02a6cb0b5f6c3aabef051d9b94b06fa6a98c"
+at = "E=u32"
+embedded = "52a2837fb35ae94d647bf7b2014c1d95060fc802e9283cbed650e5e7b1e6b0b3"
+status = "residue"
+cause = "mir::Ty: sharing::core::Unshare"
+
+[[fn]]
+path = "rkyv::sharing::core::Unshare::start_sharing"
+kappa = "5f14a957aa7cad13029889036a4880007cd2ec503b3dac87e1f54f1368d8e1cb"
+embedded = "b35e870ae3cebbe4f9bbc9f9b84090d62d641a7bd590e7ec3adb459d8462a873"
+status = "residue"
+cause = "mir::Ty: ser::sharing::SharingState"
+
+[[fn]]
+path = "rkyv::writer::<impl at src/ser/writer/mod.rs:23:1: 25:28>::pos"
+kappa = "d8ce07d05e2279f294d0a35e7c05e1f981f2fdc8cfccdf69b2e0af7503605611"
+at = "T=u32"
+embedded = "a1e6d103d3d1fca39efbc77346f2408442518444795662f0e4d63d7143d590d3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Positional, which u32 does not implement in core"
+
+[[fn]]
+path = "rkyv::writer::<impl at src/ser/writer/mod.rs:32:1: 34:28>::pos"
+kappa = "e3c58671eb83ca52cdf0b25d1cac5b3c9d6b0d660115f54b50f9a3d3ee7e6ef3"
+at = "T=u32"
+embedded = "820868ef62ae0a8894d8e93b6f443ff95f218a05b0c65703795effa8987be941"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Positional, which u32 does not implement in core"
+
+[[fn]]
+path = "rkyv::writer::<impl at src/ser/writer/mod.rs:64:1: 66:27>::write"
+kappa = "6f50b837a23481449fa81297c984f6a86317c6704dccc3d0d4c5e9bf565e6953"
+at = "E=u32, T=u32"
+embedded = "508b45c1677c4a86ca88f4e6fe8203634be7ddeda79b1b453b949e0ba04fa200"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Writer, which u32 does not implement in core"
+
+[[fn]]
+path = "rkyv::writer::Strategy::pos"
+kappa = "7cdc46e852c5734ebb3a691f178b68ef923a3c55cb1228a2592548c93b553410"
+at = "E=u32, T=u32"
+embedded = "22b9e5f453c7d4adb8430435a3787127c2a1341d68551ed3091c29a9bcbea24f"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::writer::Strategy::write"
+kappa = "3495d1170162bdb234bf48a0ab18b734d721e578a0f0c7fa3bffc8825f1fa545"
+at = "E=u32, T=u32"
+embedded = "f672d76a53062b990e27517f41ddc46960de5cbdd746de53c024befad17616d2"
+status = "residue"
+cause = "mir::Ty: Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::writer::alloc::AlignedVec::pos"
+kappa = "2f570677b2c6fd82611a0627656c8cf66d93a54a246d52033ac5df778542aea8"
+at = "A=u32"
+embedded = "041b4ea3f3b9639827da102bf001f8f8680da77daa8b912c3dfcfd6501e1adee"
+status = "residue"
+cause = "mir::Ty: aligned_vec::AlignedVec<u32>"
+
+[[fn]]
+path = "rkyv::writer::alloc::AlignedVec::write"
+kappa = "e033ceea3e3309570d663bcb7149227666dc9e04b721d61a3d63f6057f1cf5a8"
+at = "A=u32, E=u32"
+embedded = "a14ede3b6cefa2db8fb3874a1633016eb74a6a58a583f6a4b7968772a696e007"
+status = "residue"
+cause = "mir::Ty: aligned_vec::AlignedVec<u32>"
+
+[[fn]]
+path = "rkyv::writer::alloc::Vec::pos"
+kappa = "74b664b3d7157f4d175cb7b92f7c06d7fdfe14cc60a7db0c20a00830866d5f6f"
+embedded = "8e2762314e84b0845b985157ba3b3ee5743f5fc5ec11a0dcdd458883588418de"
+status = "translated"
+digest = "5d7fbaab27d25321a30796d9c8c2f0b320a21afb0d25296c63a345ddeedaf4ba"
+
+[[fn]]
+path = "rkyv::writer::alloc::Vec::write"
+kappa = "54f0b7d3bdeef65f4acd4854ee9d515dcef2190f1f992fbd6d919f4d34c71d2d"
+at = "E=u32"
+embedded = "2fc3599cb06b7bfb2411948ef80ce4459b5fccaec5cf0a17598d6b0c5bcf186c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::extend_from_slice"
+
+[[fn]]
+path = "rkyv::writer::core::<impl at src/ser/writer/core.rs:15:10: 15:15>::fmt"
+kappa = "b4685f25475125895f01284fa51b4fb609702460d42a97ab7f5e9d476e37cad0"
+embedded = "ce17e039c69b34634804a7ffd1899dba6824b1c20d3bdcd0f7eb6314a9748148"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::writer::core::<impl at src/ser/writer/core.rs:72:10: 72:15>::fmt"
+kappa = "5f6faa7c2bb3bd53b04a057aa5ef1e51122c6b57dbab7255586eb6698fcf2917"
+embedded = "cf51e834bba51d60a6a289ef02f94ae171e9c12363cfcedacf0d450f1aecf795"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::writer::core::Buffer::deref"
+kappa = "4252eade76f90280a1d7cf1fc5ce7ef155dd1678d1417f68a21973d0b1b565d4"
+embedded = "234a51b305b5a534eb718198458b6d090f7efa1a78eca85908b5330d00b86fcb"
+status = "residue"
+cause = "mir::Ty: Buffer<'_>"
+
+[[fn]]
+path = "rkyv::writer::core::Buffer::deref_mut"
+kappa = "d7a14939eff7caf197826fbc6c96db20488f18a584eeaaac945c78b187c18691"
+embedded = "e15b4d4050a3557047889faa77bcb09b220b16381ddcea9c044bc4a9fcac5772"
+status = "residue"
+cause = "mir::Ty: Buffer<'_>"
+
+[[fn]]
+path = "rkyv::writer::core::Buffer::from"
+kappa = "fb864917edd6ca89a3e487e330ecc6963791927a397513094e8573da6fea39d7"
+at = "N=#usize_N"
+embedded = "cbb1f495e3f3b37a2d5404cb9d51940ba3d4d9d00b08b13c7f31af01cd061add"
+status = "residue"
+cause = "mir::Ty: ser::writer::core::Buffer<'_>"
+
+[[fn]]
+path = "rkyv::writer::core::Buffer::from#2"
+kappa = "84321c2e00bc8205866794cb9aa03040e71a62b8712151b2c0393d249a2b2412"
+embedded = "ec89df053ee26fd3a63a6a784e8341a1362a7aad994e847b9554e53762e12e18"
+status = "residue"
+cause = "mir::Ty: ser::writer::core::Buffer<'_>"
+
+[[fn]]
+path = "rkyv::writer::core::Buffer::from#3"
+kappa = "9c9dc364f98556ccbf46747e9c23bf26ecee9e569f0b9ef8cd0fbe31bcce4b47"
+at = "N=#usize_N"
+embedded = "edfc864a5cd6e64433a1f2198a23fcc760e25c1a23f31aec020a04db2fc01129"
+status = "residue"
+cause = "mir::Ty: ser::writer::core::Buffer<'_>"
+
+[[fn]]
+path = "rkyv::writer::core::Buffer::from#4"
+kappa = "7797db8b0ee2400e0cfc804f9ea51f26497f5afebfa0fb39529c11389e193bef"
+embedded = "0f2bfdee8dba185a8167f32ba11f243d9af1c890f00e1e0d6f192aefe9319d1d"
+status = "residue"
+cause = "mir::Ty: ser::writer::core::Buffer<'_>"
+
+[[fn]]
+path = "rkyv::writer::core::Buffer::pos"
+kappa = "76b3008626e523a582233416d8a321e7d31e5b755fe5d0faf21d4a70af2c8b4c"
+embedded = "de7046f9118e1b384767d5213c9b302ea7ea032b0a70d6d0f24821fea041a8c4"
+status = "residue"
+cause = "mir::Ty: Buffer<'_>"
+
+[[fn]]
+path = "rkyv::writer::core::Buffer::write"
+kappa = "c4e6dee30cebaad6fd52cb386206786402cccf7ee937fac110aac3685c15dc2f"
+at = "E=u32"
+embedded = "ed2f9968d141d1f8a792f9a52e89b1f674b4a0eef52ca63a151e57f16f5041c2"
+status = "residue"
+cause = "mir::Ty: Buffer<'_>"
+
+[[fn]]
+path = "rkyv::writer::core::BufferOverflow::fmt"
+kappa = "1555ffe3a600e729a333dc510a3874161535bb0136938d58a22837d16b34e1d6"
+embedded = "6653d4afb1745b6406709a93e04a2c07122a3c34e5739326b6e0399ee2386291"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::writer::std::<impl at src/ser/writer/std.rs:25:10: 25:15>::fmt"
+kappa = "28b58deb9073810b9949715401fdd79aa6c91e337bbba425aec4fab281be3f52"
+at = "W=u32"
+embedded = "925097b1f792dbbf1b4c6037269910702b37bb55a0aa2d3e11eaf1b186cad3d3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rkyv::writer::std::IoWriter::into_inner"
+kappa = "c1535e0b9a5059c6892a9d7bb470225a19bbc77f76470c9de573647a99d76b27"
+at = "W=u32"
+embedded = "0277c3ccec73d98f9031609793a45c74cab427f8370ca8623e73da51a86d4847"
+status = "residue"
+cause = "mir::Ty: IoWriter<u32>"
+
+[[fn]]
+path = "rkyv::writer::std::IoWriter::new"
+kappa = "c668850680ccd16fe5ba81568f2dd58631bf962d84266d13b21f6805d30bc4f9"
+at = "W=u32"
+embedded = "ca544c7c5a2cbe202bf320c85aa8a725007f7945c57c4743b1c08e7d26a1676a"
+status = "residue"
+cause = "mir::Ty: ser::writer::std::IoWriter<u32>"
+
+[[fn]]
+path = "rkyv::writer::std::IoWriter::pos"
+kappa = "3679312170116da8dee3268210be23da587ae45cf1d7c8ab2b34445a59be84bd"
+embedded = "6861eaab53be7d87fdc220255e21b9dd89e4db36c979d0fe0b9ed7efdb795f91"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "rkyv::writer::std::IoWriter::with_pos"
+kappa = "aa8605fc5ca3ed992cf4ebcd5c62cfae96eeaadfd0c11b5fc8ceb975bfd1a24b"
+at = "W=u32"
+embedded = "b2db6ecdf19c9cac33f6fb2a707a9de66ebd25cbc8986a65045c344cfcfb60b7"
+status = "residue"
+cause = "mir::Ty: ser::writer::std::IoWriter<u32>"
+
+[[fn]]
+path = "rkyv::writer::std::IoWriter::write"
+kappa = "aa8fc310454d3bd903699dcd4051bd9ffbbc777ac207f30c443870c19e302353"
+at = "E=u32, W=u32"
+embedded = "8e6d9a1260797a1a922ad08d7f24efd2b96930295adb9841c423f36a6e5d032c"
+status = "residue"
+cause = "mir::Ty: IoWriter<u32>"
+

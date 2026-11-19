@@ -1,0 +1,16 @@
+[[fn]]
+path = "unarray::mark_initialized"
+kappa = "373abfb6843f1775e39b7993570cafd64eb3075481a710729bcc8af68fd78b6f"
+at = "N=#_N, T=u32"
+embedded = "e040851bc602c741c18cd06a79e6cc33a032ae40e54bb6ee9ba0a3da62a48dbe"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "unarray::uninit_buf"
+kappa = "7922f39af4b45e56759c9e257a74c498ed9d1c87e1413949b2265afe0be1e84a"
+at = "N=#_N, T=u32"
+embedded = "eaf99779c7f32e8888f119483be875690d4043508ef54918815d3b3fd278cf5e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+

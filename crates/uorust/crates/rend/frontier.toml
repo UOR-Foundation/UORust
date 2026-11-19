@@ -1,0 +1,835 @@
+# The rend register (written by `uorust crate rend@0.5.4`; do not edit): every body of
+# rend's MIR at rend 0.5.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 8197
+translated = 16
+residue = 8181
+
+[module.crate]
+bodies = 4219
+translated = 16
+residue = 4203
+
+[module.unaligned]
+bodies = 3978
+translated = 0
+residue = 3978
+
+[embedding]
+bodies = 8197
+embedded = 8197
+evaluable = 8197
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 500
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 260
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 260
+
+[[cause]]
+cause = "mir::Ty: i16_be"
+bodies = 181
+
+[[cause]]
+cause = "mir::Ty: i16_le"
+bodies = 181
+
+[[cause]]
+cause = "mir::Ty: i128_be"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: i128_le"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: i32_be"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: i32_le"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: i64_be"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: i64_le"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: u16_be"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: u16_le"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: u128_be"
+bodies = 179
+
+[[cause]]
+cause = "mir::Ty: u128_le"
+bodies = 179
+
+[[cause]]
+cause = "mir::Ty: u32_be"
+bodies = 179
+
+[[cause]]
+cause = "mir::Ty: u32_le"
+bodies = 179
+
+[[cause]]
+cause = "mir::Ty: u64_be"
+bodies = 179
+
+[[cause]]
+cause = "mir::Ty: u64_le"
+bodies = 179
+
+[[cause]]
+cause = "mir::Ty: i16_ube"
+bodies = 173
+
+[[cause]]
+cause = "mir::Ty: i16_ule"
+bodies = 173
+
+[[cause]]
+cause = "mir::Ty: i128_ube"
+bodies = 172
+
+[[cause]]
+cause = "mir::Ty: i128_ule"
+bodies = 172
+
+[[cause]]
+cause = "mir::Ty: i32_ube"
+bodies = 172
+
+[[cause]]
+cause = "mir::Ty: i32_ule"
+bodies = 172
+
+[[cause]]
+cause = "mir::Ty: i64_ube"
+bodies = 172
+
+[[cause]]
+cause = "mir::Ty: i64_ule"
+bodies = 172
+
+[[cause]]
+cause = "mir::Ty: u16_ube"
+bodies = 172
+
+[[cause]]
+cause = "mir::Ty: u16_ule"
+bodies = 172
+
+[[cause]]
+cause = "mir::Ty: u128_ube"
+bodies = 171
+
+[[cause]]
+cause = "mir::Ty: u128_ule"
+bodies = 171
+
+[[cause]]
+cause = "mir::Ty: u32_ube"
+bodies = 171
+
+[[cause]]
+cause = "mir::Ty: u32_ule"
+bodies = 171
+
+[[cause]]
+cause = "mir::Ty: u64_ube"
+bodies = 171
+
+[[cause]]
+cause = "mir::Ty: u64_ule"
+bodies = 171
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i128>"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i16>"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i32>"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i64>"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u128>"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u16>"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u32>"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: f32_be"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: f32_le"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: f64_be"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: f64_le"
+bodies = 31
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: fetch_ordering: rend's MIR stops at mir::Rvalue::Aggregate: the variant CmpOrdering::Relaxed"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: core::num::TryFromIntError"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: f32_ube"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: f32_ule"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: f64_ube"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: f64_ule"
+bodies = 24
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: AtomicI16_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: AtomicI32_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: AtomicI64_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: AtomicU16_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: AtomicU32_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: AtomicU64_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: char_be"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: char_le"
+bodies = 15
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::swap_bytes"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: AtomicI16_be"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AtomicI32_be"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AtomicI64_be"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AtomicU16_be"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AtomicU32_be"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AtomicU64_be"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: char_ube"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: char_ule"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: NonZeroI128_ube"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroI128_ule"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroI16_ube"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroI16_ule"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroI32_ube"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroI32_ule"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroI64_ube"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroI64_ule"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroU128_ube"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroU128_ule"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroU16_ube"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroU16_ule"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroU32_ube"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroU32_ule"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroU64_ube"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NonZeroU64_ule"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: unaligned::i128_ube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::i128_ule"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::i16_ube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::i16_ule"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::i32_ube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::i32_ule"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::i64_ube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::i64_ule"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::u128_ube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::u128_ule"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::u16_ube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::u16_ule"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::u32_ube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::u32_ule"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::u64_ube"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::u64_ule"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: unaligned::f32_ube"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: unaligned::f32_ule"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: unaligned::f64_ube"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: unaligned::f64_ule"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroI128_ube"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroI128_ule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroI16_ube"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroI16_ule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroI32_ube"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroI32_ule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroI64_ube"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroI64_ule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroU128_ube"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroU128_ule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroU16_ube"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroU16_ule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroU32_ube"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroU32_ule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroU64_ube"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::NonZeroU64_ule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unaligned::char_ube"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: unaligned::char_ule"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i16 as Default>::default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as Default>::default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as Default>::default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as Default>::default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as Default>::default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroI128_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroI128_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroI16_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroI16_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroI32_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroI32_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroI64_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroI64_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroU128_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroU128_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroU16_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroU16_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroU32_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroU32_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroU64_be"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonZeroU64_le"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Relaxed"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI16_be::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI16_be::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI16_le::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI16_le::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI32_be::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI32_be::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI32_le::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI32_le::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI64_be::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI64_be::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI64_le::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicI64_le::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU16_be::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU16_be::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU16_le::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU16_le::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU32_be::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU32_be::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU32_le::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU32_le::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU64_be::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU64_be::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU64_le::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicU64_le::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroI128_be::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroI128_le::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroI16_be::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroI16_le::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroI32_be::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroI32_le::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroI64_be::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroI64_le::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroU128_be::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroU128_le::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroU16_be::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroU16_le::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroU32_be::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroU32_le::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroU64_be::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonZeroU64_le::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::sync::atomic::Atomic<u64>"
+bodies = 1

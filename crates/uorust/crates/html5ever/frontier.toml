@@ -1,0 +1,303 @@
+# The html5ever register (written by `uorust crate html5ever@0.40.1`; do not edit): every body of
+# html5ever's MIR at html5ever 0.40.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 277
+translated = 5
+residue = 272
+
+[module.driver]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.encoding]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.serialize]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.tokenizer]
+bodies = 121
+translated = 1
+residue = 120
+
+[module.tree_builder]
+bodies = 129
+translated = 3
+residue = 126
+
+[module.util]
+bodies = 2
+translated = 1
+residue = 1
+
+[embedding]
+bodies = 277
+embedded = 277
+evaluable = 262
+blocked = 15
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 11
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TreeBuilder<u32"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: markup5ever::ExpandedName<'_>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: Tokenizer<u32>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: tree_builder::types::ProcessResult<u32>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Sink"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: tokenizer::char_ref::Status"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AttrValueKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DoctypeIdKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Handle"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RawKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ScriptEscapeKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: markup5ever::tendril::fmt::UTF8"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: states::State"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Parser<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: driver::Parser<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::cell::Ref<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tokenizer::ProcessResult<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tokenizer::interface::Doctype"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Tag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TagKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UTF8"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tokenizer::interface::TokenSinkResult<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CharRefTokenizer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: driver::ParseOpts"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: markup5ever::TokenizerResult<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: markup5ever::buffer_queue::SetResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: serialize::ElemInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: serialize::SerializeOpts"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tokenizer::TokenizerOpts"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tokenizer::char_ref::CharRef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tokenizer::interface::Tag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tokenizer::interface::Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tokenizer::states::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tree_builder::TreeBuilder<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tree_builder::TreeBuilderOpts"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tree_builder::types::InsertionMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::InsertionMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::SplitStatus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: opt_to_ascii_lower::{closure#0}: mir::TerminatorKind::Call: std::str::to_ascii_lowercase"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::expect"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokenSinkResult<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: markup5ever::LocalNameStaticSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: markup5ever::interface::QuirksMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serialize::HtmlSerializer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokenizer::Tokenizer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokenizer::char_ref::CharRefTokenizer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokenizer::interface::TagKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokenizer::states::AttrValueKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokenizer::states::DoctypeIdKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokenizer::states::RawKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokenizer::states::ScriptEscapeKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tree_builder::ActiveFormattingIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tree_builder::ActiveFormattingView<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tree_builder::types::InsertionPoint<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tree_builder::types::SplitStatus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tree_builder::types::Token"
+bodies = 1

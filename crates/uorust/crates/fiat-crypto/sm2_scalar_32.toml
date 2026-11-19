@@ -1,0 +1,219 @@
+[[fn]]
+path = "fiat-crypto::fiat_sm2_scalar_addcarryx_u32"
+kappa = "04ab664046a2e212c73916f3988f1098c0d600c806b9903a0d9b58936750ef19"
+embedded = "29acd527de558ff902f6e685f0ca2b48d3a4dc299c00006d1e9c60969ba4b29f"
+status = "translated"
+digest = "27eebddb36e6befd494770bafdac9b76d851f2f346bb2ad452cfa8f9644c03d0"
+
+[[fn]]
+path = "fiat-crypto::fiat_sm2_scalar_cmovznz_u32"
+kappa = "a468f8b64b95d9ef479921a60ccb4d655a3fbcb907bf3a774173febce3574a10"
+embedded = "7a03a858df4f8e041dacea01c682910c3d173ed8ce7e37f4f7316bbd7a9a5855"
+status = "translated"
+digest = "d1d9d6245eb805a8bfd2b6744d2b9e703769c5c8a1438c97198f508bc8ad5df6"
+
+[[fn]]
+path = "fiat-crypto::fiat_sm2_scalar_mulx_u32"
+kappa = "34ae41440b695742843220d72fc6258f463af6f1bb78ff169900916c32e01033"
+embedded = "b45d43f3203e76d451c294bb0a1d3485506f00452641c497664f0629bdd732e8"
+status = "translated"
+digest = "ab08209c21f8bee57bec55bc9b52896f3c9acd1d9720fcf8c54cdfc9c4faa117"
+
+[[fn]]
+path = "fiat-crypto::fiat_sm2_scalar_subborrowx_u32"
+kappa = "6ceb4fbaaefbee5637745c1cd83a2e1812c5325972e7237ae7873d0dedc229be"
+embedded = "dc513f77c3fc1d3d619b11fe4cb08f0dc4dbc1546ead2482ebf917095288439e"
+status = "translated"
+digest = "b40db494c793a9b9a90a5def46ea06369f7de924c64b5c46be2f77020349b135"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::<impl at src/sm2_scalar_32.rs:54:10: 54:15>::clone"
+kappa = "af36ca649dec12ac27d98b22bbaa60778b4837abadc27e09dfd5a72789a7ca83"
+embedded = "5c9c10143683f47c3b4a0d371460f19550b84ff590fd1c39e090d6933756ca86"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::<impl at src/sm2_scalar_32.rs:90:10: 90:15>::clone"
+kappa = "6a2acf96c5bfca334e545eabcfc376f2d821317e255df3832dc7f9c70b42958e"
+embedded = "d9c4cbd4433c18018747c5edd373f157d364636b01deeff24b784424a3e065e4"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::IndexConst::index"
+kappa = "70b4d68b170c31bad458c2894626fbf717f2e34abdb0139f7194a0ac31014b1d"
+at = "N=#usize_N, T=u32"
+embedded = "3ca1ca8865b112e390180525c4f8096805675b2227e67aadf40a6f1f9abb6b9e"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::IndexConst::index#2"
+kappa = "478ef44504238d6db56c6abe92c2d468b624e34b3d304f6cf6dc3451061628f7"
+embedded = "fcb658997c893e66e818c770d2a349cb826a50f8c436bc6f381afd48d52e42cc"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::IndexConst::index#3"
+kappa = "9a3b2da2d9dfce0131fdcc2253ef0cfe3464ef8860fd33635edbfc724771678e"
+embedded = "0e3e8e0b3438e849237fb7da5b7caf4ab33c1bae99c03c11f15c73c02782e0a9"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::IndexConst::index_mut"
+kappa = "1c3d78bf510510c6cab90f0f087136f368d423d6d50859f4207ea7186fcea76f"
+at = "N=#usize_N, T=u32"
+embedded = "4f1bb07aada4ef40e0909a1dee0fc36fea8be952c17d8b0578ac232b83242e28"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&mut &mut [u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::IndexConst::index_mut#2"
+kappa = "44311868c670e3a0f7b10a85c8e1d87bd09f46616293628fbc1dc36868031983"
+embedded = "55eee86b3e62930638d928498bfd458bbad54195e3ae06d4f0303cac57fb3d46"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::IndexConst::index_mut#3"
+kappa = "2d4bbb080fe110e14ee1889e9848acaac699601cf6d4914101158f609e6b8770"
+embedded = "d38733db2a6e491a3636a174a05f96b1f04d1cde24282946877be50ad292fa35"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_add"
+kappa = "e963ce9754168987bebab539b1a1a62b5aafa6112ef6dbaf5560a0181ae0fa3c"
+embedded = "5aa8f609a1078215de2bab381d3ed57d6b00a5efffd082926b442c2f356a1266"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_divstep"
+kappa = "711a3ee2712f0157e0479bf54a19fa9d44ef0429a77ff0fa79c14c13f7665e3b"
+embedded = "d9b7fb8d74e8afedee4659eab304446fe876fbd2065728a83d49114cb3f46ad9"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u32; 9]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_divstep_precomp"
+kappa = "f7add8cb0a73aa325aa5e64c4f3d91b1757bcd533be8a773c94ab5452f36cc62"
+embedded = "aaeaf09e528ff4c076733bb7cf56d1e4d88355bc7f4d10e144a744a015483cca"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&mut &mut [u32; 8]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_from_bytes"
+kappa = "a3e6a794a5920d1d060d184327cb7c243cfcba3b895045b6910c935c908d8d36"
+embedded = "6620da826f2c019a19523ab9bc7bc7460122faf802533b67868ef293c2e65a6e"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u8; 32]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_from_montgomery"
+kappa = "d47bb53caa9fb1334ba9846455fb906f15020d570520b60ecf65e63c03ae4874"
+embedded = "0db8aa6962422bd5425c0b7478f59f6cce4ff0bf5757ebb06fbc56398ae6cf33"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element::index"
+kappa = "6557e6c7a174eecf7420aa6d6bfd6ebe02d22a4b9d032fe72f5392099e6bacf1"
+embedded = "b7ab579d21e55bcc500dd37da6eed9be9d1f48799f498c52dd00af2a7e91b64a"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element::index_mut"
+kappa = "3d89935fab8a4c744862215b90e4fff6a172ba09ba08a8c611ef6dd70183a137"
+embedded = "46c076b0a3bc149a9928ba5bc055fc6396f5cd985ea0b56fb382be0acc511bb1"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_msat"
+kappa = "7d3c38d063c111227a839cf8833b2208ee358ef1e64ee0e75437288ee49d6bbf"
+embedded = "8777b1523fabb1adaa6ee6a774cdb4fcf79f2d0d0c80e3f11c1033ed9dc2ec7b"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&mut &mut [u32; 9]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_mul"
+kappa = "b3ea5483340854327b0d33480c89a059acb5ecaff1822aa83ae883ae560736e6"
+embedded = "9305fdbbf43f0777747c909f8720ffb7a826b65431e9e5c52e873f1fb4004204"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element::index"
+kappa = "47b56de13eac1a971e586f85ce95c99825f8096ce7d53bcd95e465841ba1eca5"
+embedded = "79e75c22b50ad11cbcad67d8d996f48d6aa547a2aba1f99bdd9e2549ae63edbf"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element::index_mut"
+kappa = "2f469e521cbf4c2fdafd555fbd146de10226fcb1bb486a5d4f7b149d5079504b"
+embedded = "c5cfcdde400c8ca2316d88b3ed41402db60260463254a35d710d2d5337550292"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_nonzero"
+kappa = "187fa62da8a150712d4f0d8ef75315efa6350cfe5ba25fff4ff7e067636114c4"
+embedded = "5c06ef8f6d9e446c006bc7715c81019a4a329c76334a41fac8bcb22c7c42dc52"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u32; 8]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_opp"
+kappa = "1b1092f092e625c7db8b1d84e3f98cbb9e664e5a7aac3c73efc8a9417cf1f97c"
+embedded = "6ae6f2ae94f2a599fe753eba99953c962028196f7a0659e26bbe118897d70eb3"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_selectznz"
+kappa = "2934a73630edcfb94f61988107abedb70d3d8029268d5ecdbd9769995f08bb4e"
+embedded = "dcda2d931e0fc35545ba4f7cc6ce93c1c108ad66725e42be8ef2fd5746ef64a1"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u32; 8]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_set_one"
+kappa = "02ac40f15aada0597a5f797f7146a10bd5a0ae17b30069f46e66db0e2784e9ca"
+embedded = "46d2771d59a422584048ec95443f4845573a999016237cef39ecab217cd3cb51"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_square"
+kappa = "9d99cac65df5f33f2061e127cae2bfafbe69059936af59769f32ff669efc81bb"
+embedded = "f17bb06dc0399917c3f712aabbce9f450125b2921e9778f58baf225216ff212f"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_sub"
+kappa = "f828f0227500319452b57f2b23010c5ba23b41d57247feed7566097227b47f7c"
+embedded = "d143b3f5657639a523604d2e17bd306f88afde6e900558d11f1b3657c48ad718"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_to_bytes"
+kappa = "1a5e0eb5863d451420f8cb3d97e3ade6a0521e8d217c6515c7360350344f31a9"
+embedded = "387169e4145a58e84601ba24e97d096b9006530bf3652cef9f8526fbedf1874e"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::IndexConst<&[u32; 8]>"
+
+[[fn]]
+path = "fiat-crypto::sm2_scalar_32::fiat_sm2_scalar_to_montgomery"
+kappa = "8905c6e21768aaaaa870e486552786b420f1ebf94d3f3175a713b7edaf57baec"
+embedded = "9db6e2dc472e65a8f4ababfb5a99ffa1afd49f504331d1fdd1e730c9fd26c7de"
+status = "residue"
+cause = "mir::Ty: sm2_scalar_32::fiat_sm2_scalar_montgomery_domain_field_element"
+

@@ -1,0 +1,793 @@
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:200:1: 200:33>::eq"
+kappa = "2b9f61aee7b7b7d9325e97589c56f052e38b638dfbf8b228e7b11dbd3d6a3479"
+at = "SmolStr=u32"
+embedded = "e5af278baf8981bc4745086866ea8e8ce32744f1d81ad0b8e27b70ad5a7ef237"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&str as PartialEq>::eq"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:228:1: 228:36>::eq"
+kappa = "4edee260528db1319f68b404b4c3c5c64bcede9516a3bd76652217308b19a5ac"
+at = "SmolStr=u32"
+embedded = "d6ec3c8ab4d2136560cedc91fefc03b81599b10a5ba84e6950c998a683a5435c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq: smol_str's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq, which smol_str defines through itself"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:260:1: 260:34>::partial_cmp"
+kappa = "afc02d13eeca3905cfa05f3d53e87a2936a1b6393a451f1e709cf7fe07ab34b2"
+at = "SmolStr=u32"
+embedded = "6e1992f2ffaf2931486599cc59193bb62e54b62a6f890caa93f500efcfe7e887"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:284:1: 284:37>::partial_cmp"
+kappa = "c79b704a7aacd63900d46e8d5c5023e3670cbaff432af150e50f135bc2cde876"
+at = "SmolStr=u32"
+embedded = "f2288aab9420aad8f26f3f2c49884fed5809ae37f5f3c36eec11f59f6d4e4bd4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:542:10: 542:15>::clone"
+kappa = "719a3a466c403521617c4a1f483a36ccc7536dc4883a7b4585e3026a521c7bbd"
+at = "InlineSize=u32"
+embedded = "415909233e0c607bcecfadab5abf342837e8a8e04d60f11647298cdebfc7d9a0"
+status = "translated"
+digest = "e633a6b720fb6e752ef3c3c0dd1e2472006276dcb4bd96f626d30a5c8409b3aa"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:542:23: 542:28>::fmt"
+kappa = "70a09bf33c02a45eb82591fc038070849feeb911826182f95cada4574290eb86"
+embedded = "abfe26faad72bcf32c79471d3f97fed6d177f2334157f315565d875fdb87ae12"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:542:30: 542:39>::eq"
+kappa = "74662311f50f11335c120582b4fa01480551c269249e7f3e1416ee78aa9ffcf6"
+at = "InlineSize=u32"
+embedded = "4444b0df5873a2c1832315448dcdc5c34bdd3edf672b9d344a6ccfb750e494dc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:585:10: 585:15>::clone"
+kappa = "fe9c748b9edeeb2b11cdecfbda68b43c5c212dcb754ed540d7d610fb6d3a5ab8"
+at = "InlineSize=u32, Repr=u32"
+embedded = "a287a41ee7963c545b2045d1316f4128d233d1692924cc2841f7e14e21571501"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:585:17: 585:22>::fmt"
+kappa = "7d26fd6b7a1fb883cb28c68dc6d8a514eb2f0d8acef09a803bdf95a0d6049963"
+at = "InlineSize=u32"
+embedded = "d88f0448279f628401c6259ff49268fe0bb9a684c9de666288df29c2fbec13a2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:958:10: 958:15>::clone"
+kappa = "fd4e31ba65638f6f46ecd8b61fd5fa2cef49da8cd30c796307dc06604a243de3"
+at = "SmolStrBuilder=u32, SmolStrBuilderRepr=u32"
+embedded = "f53fbb405096339c40492fd6ddc14c5bf78e4409ad4e215bd7b7a596c1c98177"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:958:17: 958:24>::default"
+kappa = "63a804ad5e9a0ad737d380490e9655257b5ec502462d218c5a8d18e939592248"
+at = "SmolStrBuilder=u32, SmolStrBuilderRepr=u32"
+embedded = "6ebd482faba09d5a61e9902fe0cd877c1693571cb2a1d0c087dac50a3a2af5e9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:958:26: 958:31>::fmt"
+kappa = "59aec199d273b213b49175f0b9b6af49a7fdbce57cb226398aabb26710a09717"
+at = "SmolStrBuilderRepr=u32"
+embedded = "32ced3ddb6b71ee37c21a9f9059d3b2cfdae2622e0df5503374cd99118590784"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:969:10: 969:15>::clone"
+kappa = "de7bfee5e6adea15e040d1545dbd2187d160534e9b1c6f11f00e79934b16bf39"
+at = "SmolStrBuilderRepr=u32"
+embedded = "0e77bdb0a3f628dc8e3cfd4f3e87fdcead2f5175cb5614c907a54f0397e8eb79"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "smol_str::<impl at src/lib.rs:969:17: 969:22>::fmt"
+kappa = "7882a7108f70722edb08ca310ae2d71fb18bc480dca8b7ce8303578285c179db"
+embedded = "dc35515cf283366404c0dcebcc820c60db28f22d4e1899d4108ec84ff5a965d5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "smol_str::Arc::from"
+kappa = "c6861b4ecf9a90b2bb8693c76fbed1f1617f6134a03c323c8d29e7d05fedb4b1"
+at = "SmolStr=u32"
+embedded = "2ba9aa7642f122edba331c96e9f67da888bf8be7b73ff63a364a767a60529d40"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<str>"
+
+[[fn]]
+path = "smol_str::INLINE_CAP"
+kappa = "a70ab0ee1900c4e81e7dcc480514dd9bccae67af294c2384f5bba21f2981dde0"
+embedded = "ffab4e40b41c92f0aab6a51fe77ac56b9019e10a2a187c1176c0632542a8e8af"
+status = "residue"
+cause = "mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+
+[[fn]]
+path = "smol_str::InlineSize::transmute_from_u8"
+kappa = "6f20f3bd2c57f2b064859285d5afbe1779528708ba5d82d1f65573ccaf363fa1"
+at = "InlineSize=u32"
+embedded = "7eb735a709bf41e3772fde00b713735685d41aac5dcbd27210649205261827c2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::intrinsics::transmute"
+
+[[fn]]
+path = "smol_str::Repr::as_str"
+kappa = "d100e2e081e85d9674b53326892efc9f21dc3960b9abca7708295e327b9cd4be"
+at = "InlineSize=u32"
+embedded = "5d64cf645e0cb07c4f0c1180d8246e258f29acea8a37463673b4e0c2a1790896"
+status = "residue"
+cause = "mir::Ty: Repr"
+
+[[fn]]
+path = "smol_str::Repr::is_empty"
+kappa = "e1224f63398aea8800795b37d70af8bf0f65f8e8e233f6afc286919d7088a2ac"
+at = "InlineSize=u32"
+embedded = "abab35c73c31e9333bb84d4c9befd76adba336334a106a8f6b4adb153f625bef"
+status = "residue"
+cause = "mir::Ty: Repr"
+
+[[fn]]
+path = "smol_str::Repr::len"
+kappa = "08583448240b5d2148cfed163f9267dea3dd00245b088573c62e15e09efda9d1"
+at = "InlineSize=u32"
+embedded = "6fe1eaaf6a5a63d88e53c887928c90d42e70ea2c33e4e9dec59a3529063bbe03"
+status = "residue"
+cause = "mir::Ty: Repr"
+
+[[fn]]
+path = "smol_str::Repr::new"
+kappa = "e374a86c77f03fea1ad7bdf5c96449a68f776fdebbc4ebfd813ae9333507032d"
+at = "Repr=u32"
+embedded = "5f18482a97770cdfac9110439300c95a008224dd7d1d261c6623f241f7b81ab8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Repr::new_on_stack: smol_str's MIR stops at mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+
+[[fn]]
+path = "smol_str::Repr::new_on_stack"
+kappa = "a55fdba1a80028913977cef3bb7045854a4489acccb8ab88ef3957658f32de12"
+at = "InlineSize=u32, Repr=u32, T=u32"
+embedded = "c0cdef70fb463e06a3a91deb6aaa00e4771b2540be5da785fe23da3ed0b3db7f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "smol_str::SmolStr::INLINE_CAP"
+kappa = "0c96b6065eb3703c25a87d91e3920600681c88e5be06d459f56377367a470176"
+embedded = "b267c219b7ebf914c5deaf22979a0985e8b3f84ed4b7f3ce0b7ecedb51f91a55"
+status = "residue"
+cause = "mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+
+[[fn]]
+path = "smol_str::SmolStr::as_ref"
+kappa = "d441989f57762a7d7c6aed18dd417c5a336a843066900a72ccc7153f9afcadf8"
+at = "SmolStr=u32"
+embedded = "48eebb6cbf1f4639f266d56ba649170bc9738d3d38098299eea6ed899ad9474f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::as_ref#2"
+kappa = "37c26d7df3be8e9059af0f313a0d72d821cdcf45a1b2591553271f1511d17a79"
+at = "SmolStr=u32"
+embedded = "45aebe4c58209192596c84ca64f735d4177e1494aaab16558b86675a6fd0a8c8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::as_ref#3"
+kappa = "68899ff349dc49625a8b86a9438f1fa70b59040d96a90273f7579388392b74c3"
+at = "SmolStr=u32"
+embedded = "4402560b2245a3f8e4a87b1c3fd8a1f7f64be38db3567754ed419688eab92cb3"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsStr"
+
+[[fn]]
+path = "smol_str::SmolStr::as_ref#4"
+kappa = "bf9a47d28b566b3b74d12a4697ef4220dfbce8e4c07d4136695bb5b6fac79e50"
+at = "SmolStr=u32"
+embedded = "16b5b373f81f74573200143b92cce9f83c97574ced8a595aa573ff8a016fc1bc"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "smol_str::SmolStr::as_str"
+kappa = "6ca86cc45cc78445b6be834fbcb23b25abfea53854dc7f625449a1566e394310"
+at = "Repr=u32"
+embedded = "7ba33d7a6ce5c5999e35d9f99e864b570e669b07004afbd7e05a1ffb2784491f"
+status = "residue"
+cause = "mir::Ty: SmolStr"
+
+[[fn]]
+path = "smol_str::SmolStr::borrow"
+kappa = "c222d534fee2922aebc6093ab1e0768ea8c27822b4986a165c6fe05eceaa4c6e"
+at = "SmolStr=u32"
+embedded = "ca65eff5894338c5f6ed6e8916b3360e7b04ede03f4a7afb732a4a0e595c37d8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::clone"
+kappa = "815e2fb30c61183d0f87c8adb28dcab1f49b9fc1380ea92bf92d552a8b3e1bbb"
+at = "SmolStr=u32"
+embedded = "e55cb7aad77727701a0b351c07595f88a080e007af019463cbab061d5cff4d80"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "smol_str::SmolStr::cmp"
+kappa = "ec13e9852a00d69205844130ad30aa6b14efdb0f6b66ddac5cabb0eb7cd0678b"
+at = "SmolStr=u32"
+embedded = "456fd0818543e67fa865f97276fb0e05d5ab8450829eace09b786e66aea47bd1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::default"
+kappa = "fafbd8728662d5b073405990dc941db41e36866a05f233c7d5c32eb47f0aed84"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "2c2f4c195c8710b8226f61a3ada7edbab894157f122bc40d6f82e1f1df7e2b7f"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "smol_str::SmolStr::deref"
+kappa = "13cb8beb305c719f7c39bf6d1475b873dd76e03b6827c65d08d920ddb3f8ea0a"
+at = "SmolStr=u32"
+embedded = "f209bbc4b7cf5cae325cec8b8e10c1fae6a1f14a5603158edff8db0549de8b0a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::eq"
+kappa = "ebf5a601ac678afa94a548e2f84382976a7cd7724fdc03f5d77edeef0416193f"
+at = "SmolStr=u32"
+embedded = "da2919b4356d78a0b7b8e4bd4bf7ce9e54c15e0daebeaf52354c7c77d14797c9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::eq#2"
+kappa = "c9cf7ca9764a165981bd7df7da41ab9ee783a9e67df342669c3713037669e644"
+at = "SmolStr=u32"
+embedded = "18e41b2c533898b632b71f62f2de9111c79f298632eede89dcaa90ba606cfafa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq: smol_str's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq, at other types than the call's"
+
+[[fn]]
+path = "smol_str::SmolStr::eq#3"
+kappa = "0703018c8c9d0f7140d0eced6e421ab577f4edd857ba8509da1a5c980c91636d"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "f1dfe75110c91508943860b62afedc04e140b62cc5c2eae58379cfaa8d4d1eae"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "smol_str::SmolStr::eq#4"
+kappa = "e9ef3df7ef534a0c059451786b21d9d8fdca729d39bc5a53ea51caf31771ef5e"
+at = "SmolStr=u32"
+embedded = "21dce88167ed96273638a8214ce14832bd983f400a0da0d079c2873d58a351b8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::eq#5"
+kappa = "044c6f05e7106e20841ed397ed8b3a90e9f90e8039ae6ebbe5cb733a267c0b1b"
+at = "SmolStr=u32"
+embedded = "ccb375fef85b9a2d05f28a35687311df8c3f999bb6f1fc768cb8192e66649964"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq: smol_str's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq, at other types than the call's"
+
+[[fn]]
+path = "smol_str::SmolStr::fmt"
+kappa = "d31f07e57443369f448d8e084a61a62ef87a3300121a970de4ce11c9112c342a"
+at = "SmolStr=u32"
+embedded = "97a06d1a66915047caf8a98f126e9ed3feec9b954e2664f11f8bb0c5b6285737"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "smol_str::SmolStr::fmt#2"
+kappa = "7beb6c7e1d59460a8686a9174621569e923aa8ccf0975d4eb3dc82c4813c232e"
+at = "SmolStr=u32"
+embedded = "ff310f8b06f4e7c56f5cd36767629a470e2b10b9fd66c5cebff15679feb757f1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "smol_str::SmolStr::from"
+kappa = "8f6a15242a5d2373a5a050aa60f088f2dd62ed70a4b49f09ec103a3b137a460d"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "dcc14d90f0eabf358d3a324180a10430559e4a7a3c93fcdf405a1333ab9a123f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::len_utf8"
+
+[[fn]]
+path = "smol_str::SmolStr::from#2"
+kappa = "bdf2b258935d8411cf698eac3755a4166ced3743e48e255d5253377b15274f3d"
+at = "SmolStr=u32"
+embedded = "070a69160c43fcebad01a1a9cecbce172c27cb8134307b2f2e70b570c1e1b71d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::new: smol_str's MIR stops at type outside the lift: impl AsRef<str>"
+
+[[fn]]
+path = "smol_str::SmolStr::from#3"
+kappa = "8557dae9108ae7d1c7404cda9ae4019de655f8b0de0a8042c7fae4ef66d7ae11"
+at = "SmolStr=u32"
+embedded = "315438d0af670597fba770159acbd23e06d722613b0a6ade898a0f779b8fe827"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::new: smol_str's MIR stops at type outside the lift: impl AsRef<str>"
+
+[[fn]]
+path = "smol_str::SmolStr::from#4"
+kappa = "4331128a456bcb9b1d461f1ecce0d12dc7927298f153b1e211a7f6b7bebbbf75"
+at = "SmolStr=u32"
+embedded = "f2f9c52926d76f3b7904b0668a67198d43db3763f2fcac68e760c1bc8b4cfbf2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::new: smol_str's MIR stops at type outside the lift: impl AsRef<str>"
+
+[[fn]]
+path = "smol_str::SmolStr::from#5"
+kappa = "3ba9a247f5b951ea30bb813fe7eb83824effae0bb93d3c2430f9f0d1880a33b9"
+at = "SmolStr=u32"
+embedded = "82c9cae51dd9356b47c8b299dc50065f84f273377fbb0f516614acb7202089cf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::new: smol_str's MIR stops at type outside the lift: impl AsRef<str>"
+
+[[fn]]
+path = "smol_str::SmolStr::from#6"
+kappa = "8c69c834d745040e80cf510cf6de9d41f7c47ae5f2148de48fda81f3eac38114"
+at = "SmolStr=u32"
+embedded = "54da78df8250f71701700cecaabcbf8b6cee32a252aac8779dc0b0a7d5ab520e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::new: smol_str's MIR stops at type outside the lift: impl AsRef<str>"
+
+[[fn]]
+path = "smol_str::SmolStr::from#7"
+kappa = "3db6646a5694e03f46eadbe430534adb7a5760a781d99d9a94555344ce88d7a0"
+at = "Repr=u32, SmolStr=u32"
+embedded = "d35b1cb557c7f8ef76e8f75841782f44c709e2afec56feaef85a5e45acbcf1e4"
+status = "residue"
+cause = "mir::Ty: Arc<str>"
+
+[[fn]]
+path = "smol_str::SmolStr::from#8"
+kappa = "9adeb223d3ba110f35745aaba47725553b36f5ea5612bdbf1007afbffe842e38"
+at = "SmolStr=u32"
+embedded = "8f194115dbcb98b3e7b9931250d21cf86107a96236656f8b7c9a959ea5fd4a0c"
+status = "residue"
+cause = "mir::Ty: Cow<'_, str>"
+
+[[fn]]
+path = "smol_str::SmolStr::from#9"
+kappa = "a0789a36bb3aaf68aa563fd5be4d941f27c27b166ca062bff67ec65cfc05d673"
+at = "SmolStr=u32, SmolStrBuilder=u32"
+embedded = "ef330c64283be6cce28c02a01b7252195b7d2259130d71f7bffc6156b273f643"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStrBuilder::finish: smol_str's MIR stops at type outside the lift: SmolStrBuilderRepr"
+
+[[fn]]
+path = "smol_str::SmolStr::from_iter"
+kappa = "93da3aa266c6d678131590692f986d66041d2b02ac15397224d573b677d34c68"
+at = "I=u32, SmolStr=u32"
+embedded = "811f3d78f1b72320264ff85f65260207b04e2ef68a2bd722619d3e829ca67422"
+status = "residue"
+cause = "mir::TerminatorKind::Call: from_char_iter: smol_str's MIR stops at type outside the lift: impl Iterator<Item = char>"
+
+[[fn]]
+path = "smol_str::SmolStr::from_iter#2"
+kappa = "b69b088ac4095fc5b476a4589854a5ac60f37080d6afe2670dd981fb3b462997"
+at = "I=u32, SmolStr=u32"
+embedded = "05a230618a086d51953c9330eb37c7dde2b3ec03c1918f982996ff9c8363925c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: build_from_str_iter: smol_str's MIR stops at type outside the lift: impl Iterator<Item = T>"
+
+[[fn]]
+path = "smol_str::SmolStr::from_iter#3"
+kappa = "aaffb00646505453297402e3d8d554812da1c7031dcb1669eb8e9430e8301a1e"
+at = "I=u32, SmolStr=u32"
+embedded = "27715f062d826d808a0e807383d1551ab9d428ebdf63915e30e59cc21a1c261b"
+status = "residue"
+cause = "mir::Ty: std::iter::Map<u32, {closure@src/lib.rs:392:49: 392:52}>"
+
+[[fn]]
+path = "smol_str::SmolStr::from_iter#4"
+kappa = "faf581281de6367c9e99489db5156a5ce2a651a61ac4b95f2fe8a02e1f7887ac"
+at = "I=u32, SmolStr=u32"
+embedded = "bac9e9c8b7561d059a8f9406034ec9d1d5914dcdaa856e1cdc94b4627924f9cd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: build_from_str_iter: smol_str's MIR stops at type outside the lift: impl Iterator<Item = T>"
+
+[[fn]]
+path = "smol_str::SmolStr::from_str"
+kappa = "2bbe0e11f1627d8277b3cf93670b264521342d1be664188fa2f9f18a2b0b5fad"
+at = "SmolStr=u32"
+embedded = "a811ceba6241cd0bb103ed08d305d8743e552e3a300e93e259feda8a327cf07a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "smol_str::SmolStr::from_utf8"
+kappa = "8f3f610f9bb1a85e25a2c4cfb5ed90d375e0d7e6bf013b6dcf718356331f2daf"
+at = "SmolStr=u32"
+embedded = "c8364d6c65f93c532a329de66a2eee6ed8bd25bd062bac823095927f9099391b"
+status = "residue"
+cause = "mir::Ty: std::str::Utf8Error"
+
+[[fn]]
+path = "smol_str::SmolStr::from_utf8_unchecked"
+kappa = "d1294038c0149633f22a356a21db1cec3cd05b597da3d10ba7a0762e03fb783d"
+at = "SmolStr=u32"
+embedded = "ab3ee42e2232805e23d6ab40f82f71e844dce16a010889ff887ca4950d4f72cd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:36:1: 36:13>::from_utf8_unchecked: smol_str's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:36:1: 36:13>::from_utf8_unchecked, which smol_str defines through itself"
+
+[[fn]]
+path = "smol_str::SmolStr::hash"
+kappa = "c2edc5d1eea350979bbb928c6ff8fdc9e1aed0932d67262a2695b8a830ed3948"
+at = "H=u32, SmolStr=u32"
+embedded = "b9be4c597ef632b12d3753e2d27826418d462624ad7bf87f94a28a7c678096eb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::is_empty"
+kappa = "611ea347af25c212f9d70d5f69bcbffdd4f2da3ff6ee084e6415067f3930f1bc"
+at = "Repr=u32"
+embedded = "81ee98f3c144ce64d985fa2260b6499fb50a4f785c2e6c02606922a13e0fd915"
+status = "residue"
+cause = "mir::Ty: SmolStr"
+
+[[fn]]
+path = "smol_str::SmolStr::is_heap_allocated"
+kappa = "ee6110eed728eb6f141cdad66b490864f6487f5daba6a53038d9c6036e2466d5"
+embedded = "37b87c0ba94c6840b07db3e79928aa5a08b79e04c6c157848870aa1703851b1c"
+status = "residue"
+cause = "mir::Ty: SmolStr"
+
+[[fn]]
+path = "smol_str::SmolStr::len"
+kappa = "bac27e0b482bbe52af83a1a4607fb5c3ab133e8597b8e04090f0241318a46dd3"
+at = "Repr=u32"
+embedded = "004f7eec29196b1703ea2da56b48b50b3d66242296e1a407ed29dd2b708cd1f7"
+status = "residue"
+cause = "mir::Ty: SmolStr"
+
+[[fn]]
+path = "smol_str::SmolStr::new"
+kappa = "5cf7310120616b2506d7eb3a4ab46a2d22c90bb44410a50d148af5e85e9a1dac"
+at = "Repr=u32, SmolStr=u32"
+embedded = "4f0d2e12d687266f34ff62e06fc0a6050758967b225fbcc9cdc5100890f5ae7c"
+status = "residue"
+cause = "mir::Ty: impl AsRef<str>"
+
+[[fn]]
+path = "smol_str::SmolStr::new_inline"
+kappa = "85adb575556a4f2dbe2b7510ecc851268ada67800b2cbfa0f07a23642a5d668e"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "7de3517470b95cf9c3523d3455e48b9d1bb08ee8fd1f5db92318362137df2e08"
+status = "residue"
+cause = "mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+
+[[fn]]
+path = "smol_str::SmolStr::new_static"
+kappa = "77346ca6728ec96807a9a6c42858643eb0065328e8d45056a7f2f7bc259bed28"
+at = "Repr=u32, SmolStr=u32"
+embedded = "670f4ccdbe58f2a56bae829b755d620d77d7310f4cacb65e643116431bec4396"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "smol_str::SmolStr::partial_cmp"
+kappa = "5a09d427d9930078b770e2ad3a44afd9b413cd7f8c73d711deefb477afeed809"
+at = "SmolStr=u32"
+embedded = "ff1abc48fd7fe1f5ea217f329720c8c1d0274af80fca1c79d0dce7fac1e22c7e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord, which u32 does not implement in core"
+
+[[fn]]
+path = "smol_str::SmolStr::partial_cmp#2"
+kappa = "a226e8181199c3fc267ce82a4bf7e392bf356c6b3bb95231b98712d72eefb129"
+at = "SmolStr=u32"
+embedded = "abc627444f33f3061e48710dff6404f5c9953bc10300f4150edcab44421111ab"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::partial_cmp#3"
+kappa = "ae419b13b5f4e153bb7ed71d4f3fd86b994920fec85a271c16c9ffed96f15668"
+at = "SmolStr=u32"
+embedded = "f6c7901291fc7be3ea8bb6ce407c47efff84e68fae3d25d901acb6b5ac3a1af9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::partial_cmp#4"
+kappa = "dabd745c6686a457c703e4d1f4ed80b18e2c2b9ad7bbcb34e453f3289b7a07b8"
+at = "SmolStr=u32"
+embedded = "45170b4f146e7d210a06121be84a235c6273407370f10e0fae058854ff62193e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStr::partial_cmp#5"
+kappa = "6b5de922bab370e64fede2abb282cb0f39a713517bb136ecb378477b39ad1b51"
+at = "SmolStr=u32"
+embedded = "a6eca87c51fc9bb6d5073b778c205d8c71f852d37781248a83c1ff6b0de6475b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::as_str"
+kappa = "6775aede8c39992ed251363b1100bde4bbf5911dec881e7e403c8f99255df388"
+at = "SmolStrBuilderRepr=u32"
+embedded = "c42ea8a96c66e1e7e8d46965512ad43e511e981f7a441921f5e20db177d75d7f"
+status = "residue"
+cause = "mir::Ty: SmolStrBuilder"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::eq"
+kappa = "6a46ebff1bdcad61090a631f5de150fbbc79598103d9069efabd7ef127f11022"
+at = "SmolStrBuilder=u32"
+embedded = "e547256f1efd4f2fa206183c21c7328b66c46e6bc1641324851c3b66abed8c60"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStrBuilder::as_str: smol_str's MIR stops at type outside the lift: SmolStrBuilderRepr"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::extend"
+kappa = "5a97315fc5d9a3d8616d18ee72926c171666bfebcb3b4093e3da46d80fb37eb9"
+at = "I=u32, SmolStrBuilder=u32"
+embedded = "aba3c2118333d4a96768c9e2e634f568c41667d07c08156df204a90e1983b115"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::extend#2"
+kappa = "0f78aa391fc55b451a630b5bdbd2295cd9535e38153f801156490228b28e403b"
+at = "I=u32, SmolStrBuilder=u32"
+embedded = "0b39da5c0dbfa6b54d4efd1f1ba40e1e2665836f06bcd8dfa904b96275b4d4c4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::extend#3"
+kappa = "228d19b4fa4009a919033bb1bf6eb4d43ceacea8969c8833f04985635ce152d2"
+at = "I=u32, SmolStrBuilder=u32"
+embedded = "45d56892e1544467b14e30f6df03c80418e17f096d792aa3ae6cb9c70cc30b31"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::finish"
+kappa = "fbab61c7fd8997d56b7cfeaa2017a4e0d82eb2f2e7fac154858f702c7ec8e772"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "2eb740c8880b00fa4423b96f0d27d48e3c857dc6893606573ed1b55f13062280"
+status = "residue"
+cause = "mir::Ty: SmolStrBuilder"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::is_empty"
+kappa = "03d4e5698a05fb37d43f09478f7c77bdf6b5b51c967fb48c4a701a36a6c29468"
+at = "SmolStrBuilderRepr=u32"
+embedded = "4e64081b8c0ba674a01721f0423d90990225fe5992e4c59b19ff749addb28e3a"
+status = "residue"
+cause = "mir::Ty: SmolStrBuilder"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::len"
+kappa = "c65b74ceb95d69e06e182b0d530fd78991c46b85b71191617e3dffba0cb3cc9e"
+at = "SmolStrBuilderRepr=u32"
+embedded = "de25deb03f98bf352a4fab76544308d91edb2bbaec9a17fef49d48752baa3622"
+status = "residue"
+cause = "mir::Ty: SmolStrBuilder"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::new"
+kappa = "7598f60fcba5710a32a8155c6362e37e89f0fffe59daebf67e65a53e0dd1f9ab"
+at = "SmolStrBuilder=u32, SmolStrBuilderRepr=u32"
+embedded = "ef50d282bc929a69da55aec86a54e0ef990a6809c76b4fd7a5a7cbc147471592"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::push"
+kappa = "e30b05db0be9894a0e1d50989c9ef1cec90f695e047b329273e18533a3dbba6c"
+at = "SmolStrBuilderRepr=u32"
+embedded = "c1b7462bdfc5849badf3501b3b1a966a7e14c640efce855c0f37146fe45f0a63"
+status = "residue"
+cause = "mir::Ty: SmolStrBuilder"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::push_str"
+kappa = "a10484c4ea2628156de88a200577a7d53d810a4476b4e6b09ebb109dfd72d624"
+at = "SmolStrBuilderRepr=u32"
+embedded = "16c8ca79d739bdaf9e3e65adf61a14280cf9b0d5f17d15426fbd4f5de9550711"
+status = "residue"
+cause = "mir::Ty: SmolStrBuilder"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::with_capacity"
+kappa = "f4521720cb528f8598d80b9f0f868a05240ab36e9ee570887636acca1e7b5ca0"
+at = "SmolStrBuilder=u32, SmolStrBuilderRepr=u32"
+embedded = "4cad5ee9ebf3020456df8e981b5b1a874b82165ee0dc780b64558c7f910339a1"
+status = "residue"
+cause = "mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+
+[[fn]]
+path = "smol_str::SmolStrBuilder::write_str"
+kappa = "84771a68c6063d9ad505ce921d7b13252a9582c9c6abc67b1c35168951b23ac6"
+at = "SmolStrBuilder=u32"
+embedded = "34dbf30ecfe1175167478be75060627fc8d7fadf9f83a0d64208b88afb6673d5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "smol_str::SmolStrBuilderRepr::default"
+kappa = "5af6cce5e201dd684b3f3fbd0902c40e03f5286b51f46a03e1cdbe89937185f9"
+at = "SmolStrBuilderRepr=u32"
+embedded = "1a5310139f56dd840f35dbedd3c047d0051f843334cf9d428237d8777c8e713c"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "smol_str::String::eq"
+kappa = "0ddbedd5354abe171c4723cda7cfa4e95e9aa3228ed1e89389ec27a93c53b537"
+at = "SmolStr=u32"
+embedded = "51d8fc9df1358851d1a6a09367e5a65df49f210532f4c0e7c7099f63a4a7bf39"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq: smol_str's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq, at other types than the call's"
+
+[[fn]]
+path = "smol_str::String::from"
+kappa = "ca0db78ca1b4192b9d370453748503bfab6ec3a74cbb5ca0d7e0706959a51230"
+at = "SmolStr=u32"
+embedded = "af829684c8cb4a75a6451084cd1e5e48b1ba41ec4b28af37e4fe7abbb21ff0d2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::String::partial_cmp"
+kappa = "7976e4d5cb8c7b428d8e0498d26247357b5545c2df6a2d0d9203cc8aa67f3a8b"
+at = "SmolStr=u32"
+embedded = "560fae7b5cd0f5008b5d96cbeaaaf46847f361d5f61f510f21cdd81a96a6faf0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStr::as_str: smol_str's MIR stops at type outside the lift: Repr"
+
+[[fn]]
+path = "smol_str::T::to_smolstr"
+kappa = "4e8d7cc8b5898b127a3080b4b7fa9c5b8422a56aae1ada094acae1df7a36057f"
+at = "SmolStr=u32, SmolStrBuilder=u32, T=u32"
+embedded = "f4aee456e8583826e950779f16e7850c0ca540a9e42e5e98203fb622787b5f08"
+status = "residue"
+cause = "mir::TerminatorKind::Call: SmolStrBuilder::new: smol_str's MIR stops at type outside the lift: SmolStrBuilderRepr"
+
+[[fn]]
+path = "smol_str::_"
+kappa = "807e37b3a0184b658337facec8f325bb2a4c181e9227eb4c4640f3313908fc0f"
+embedded = "e0eaf527d799771e7fc17b0a06dfe15145d966ed767a8e9d04da6b55f4aeaa9c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item WS"
+
+[[fn]]
+path = "smol_str::build_from_str_iter"
+kappa = "f655f81c89ec3766f3a89d8bd5f9ebf44dce7534216e13e804fd485595472aa2"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32, T=u32"
+embedded = "ac75472f63be764cf7ff7b33d5aebf0512174b303ba622e49202a158f12ede8e"
+status = "residue"
+cause = "mir::Ty: impl Iterator<Item = u32>"
+
+[[fn]]
+path = "smol_str::cold_clone"
+kappa = "7e326d94c854692756734530a64c74e9c76c0704e51667b2832c8146764135e0"
+at = "Repr=u32, SmolStr=u32"
+embedded = "f3ddf2b56c70dd6e29b57438636ec31f990761d7c59551d183c29c9e8e56100f"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "smol_str::from_buf_and_chars"
+kappa = "242ed9a55445286d426f84f683bb346f65f2a02095b4e8868064eb8c543ee7ba"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "e01e6ea00e87f6848d2ddd1503478e2e7690b1b6ecf9ce4367cbb79794ed3831"
+status = "residue"
+cause = "mir::Ty: impl Iterator<Item = char>"
+
+[[fn]]
+path = "smol_str::from_char_iter"
+kappa = "719dba61f6f5bed771ae29d91ee89cb0865b52258c84924d09c7f9881e3dcda4"
+at = "SmolStr=u32"
+embedded = "664a5172f9a635a5f91300b7c5444a63aeebe72c7f54b29d53fb908d9b9be76d"
+status = "residue"
+cause = "mir::Ty: impl Iterator<Item = char>"
+
+[[fn]]
+path = "smol_str::inline_convert_while_ascii"
+kappa = "f270b1dad9f5b161fd44a243eb5bb49abfd7edd71b6ebf2aae2e03a5274ab105"
+embedded = "9e2ce7a993d471a5ff58d1c3a7d755374b80248729aae312429c089e9268569b"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(&'a u8) -> u8"
+
+[[fn]]
+path = "smol_str::replacen_1_ascii"
+kappa = "7a1b2bc433d4f7fb9ef7c8448f1e1fa37a8a14cd8f8f1e1a31f6fa381b7991fd"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "0cc7790e5227846ba25ac8bdbe71a20e9bc8d7435785ecc31b00aa56f647a919"
+status = "residue"
+cause = "mir::Ty: impl FnMut(&u8) -> u8"
+
+[[fn]]
+path = "smol_str::str::eq"
+kappa = "4dfbf7f3b5c8a36f2d33e3697a70dfcf75f015838e88ab41e09750bcd0801b0a"
+at = "SmolStr=u32"
+embedded = "8fdb96ea0930a84db821fdc4a7fc8f0d7f0c6610f0273dbd7a6640b71beb7c7d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq: smol_str's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:228:1: 228:36>::eq, at other types than the call's"
+
+[[fn]]
+path = "smol_str::str::replace_smolstr"
+kappa = "958faab7d66376e299fc78a4132dbcdb002ab184a20ee4240729c723963c4f40"
+at = "SmolStr=u32"
+embedded = "973260143513736dfc73c23db1d7bcbabbe4cee1e9b479d34e7231d064ddbcc3"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "smol_str::str::replacen_smolstr"
+kappa = "d6fe38dfd157a11dc37187612a0a227dbcf88d4ae870c19d14c0226ff2c6d3b4"
+at = "SmolStr=u32, SmolStrBuilder=u32"
+embedded = "dff825a895b27df6f284df7df08d3c1c20c96d3498ce1befc2d9b85065be42a7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "smol_str::str::to_ascii_lowercase_smolstr"
+kappa = "41f6e8ed3b89565bb751d25d0a08e1de46f1003514c76515546e94b424edf53a"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "d4481c40e2b36c518005eaf02edb8f42e1568a00e20af1d9de719f210a62a750"
+status = "residue"
+cause = "mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+
+[[fn]]
+path = "smol_str::str::to_ascii_uppercase_smolstr"
+kappa = "eb3eb7a280b23109c1aa50847ecb69258d0cecdd1121951a5b7e6434e492071e"
+at = "InlineSize=u32, Repr=u32, SmolStr=u32"
+embedded = "b473c1a54817388094708ce5126f46a535a3db04171186ab2ad882580bbb4a5b"
+status = "residue"
+cause = "mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+
+[[fn]]
+path = "smol_str::str::to_lowercase_smolstr"
+kappa = "5c7bab6a8ee53fc067926957a9e5e893658f643af873317fe69c8287467a79e2"
+at = "SmolStr=u32"
+embedded = "ca00ec97ab5eaf6281139af0acedd3d69e50650751191d08bbd502e1245e3fe1"
+status = "residue"
+cause = "mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+
+[[fn]]
+path = "smol_str::str::to_uppercase_smolstr"
+kappa = "eae119564cefb75b5244f547ce61f453a83b4ad6ec78502f1c39b63075129c01"
+at = "SmolStr=u32"
+embedded = "61ead6c9372db7b77e42d556bad4e00a9abfcb7d1ecbdf15d179f32131631170"
+status = "residue"
+cause = "mir::Operand::Constant: INLINE_CAP: mir::Operand::Constant: InlineSize::_V0::{constant#0}"
+

@@ -1,0 +1,136 @@
+[[fn]]
+path = "async-task::task::FallibleTask::cancel"
+kappa = "d2327a0c838b46ce2179f67cedc597e71adfa3f5096002cf7baf3f3821b9cca1"
+at = "M=u32, T=u32"
+embedded = "960a8a95a268c2253705f220e059dfc83282822707787414420fdd1820b60ea4"
+status = "residue"
+cause = "mir::Ty: {async fn body of task::FallibleTask<u32, u32>::cancel()}"
+
+[[fn]]
+path = "async-task::task::FallibleTask::detach"
+kappa = "318503927d5a640878e336c4b621533108c56c19322dd0f5c490a1b36741bf00"
+at = "M=u32, T=u32"
+embedded = "3a08cfe6703e314f9c1d501400e0f2bbec3b15408f0eccb6a46f02877fe67261"
+status = "residue"
+cause = "mir::Ty: FallibleTask<u32, u32>"
+
+[[fn]]
+path = "async-task::task::FallibleTask::fmt"
+kappa = "0d54bf3aa6faa1ff2cf93d7ac2e361490c246754d6c5cc1edc08e48e68419d30"
+at = "M=u32, T=u32"
+embedded = "d5e41cc3d2512965ead47a28e615d43aea181d945ced52677b8d78ecf2909a6e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "async-task::task::FallibleTask::is_finished"
+kappa = "b038d7e3bdc945ade00273b0c6edc9816fb1cadeca7084ba912e1faf90d2cb0c"
+at = "M=u32, T=u32"
+embedded = "91a832be8f50c5146253373d244c8ed93b4b63b0b67345567b3c4b1ce529857d"
+status = "residue"
+cause = "mir::Ty: FallibleTask<u32, u32>"
+
+[[fn]]
+path = "async-task::task::FallibleTask::poll"
+kappa = "648381adb07275da3821ff07b699feff74733b830b44e0fb81c858bad781ab8e"
+at = "M=u32, T=u32"
+embedded = "f67de12f85551e22b87b95b0d15401dbc8523e96a98d82f6436841641ef4ac19"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "async-task::task::Task::cancel"
+kappa = "b02d7e781f4b1c36fd66e1b685d89e2069094bcd3cac548ed9cb42d0e3b7900b"
+at = "M=u32, T=u32"
+embedded = "e425e87dbd39ea0717cea402fad99f2ffae194b63fd1759fd37bade3f924074a"
+status = "residue"
+cause = "mir::Ty: {async fn body of task::Task<u32, u32>::cancel()}"
+
+[[fn]]
+path = "async-task::task::Task::detach"
+kappa = "78d138bc2364e232a7406cf7b4f26b1e1060992d874b6ff7a2d41a90d7c69789"
+at = "M=u32, T=u32"
+embedded = "d2ac67449b4e49ad99d5393abeeabb6931339ff2ccc21069ad87e5be68c07019"
+status = "residue"
+cause = "mir::Ty: Task<u32, u32>"
+
+[[fn]]
+path = "async-task::task::Task::drop"
+kappa = "98a274f5017356a88e0aa74bcabded8c99068a0f1d2b8802470ca32d14af2870"
+at = "M=u32, T=u32"
+embedded = "201b1d3a82b64f56dd75fdeb6481e90bd63391a6481fe091dd7275823831042a"
+status = "residue"
+cause = "mir::Ty: Task<u32, u32>"
+
+[[fn]]
+path = "async-task::task::Task::fallible"
+kappa = "92a1057c953457c1c8ca392af91ee052b1fa040821acf6f331172e550ccd3ef1"
+at = "M=u32, T=u32"
+embedded = "ce93dbfb4f9220b6fc93e3e63a0df58ab857fb922049f681a7d385215aeae7a9"
+status = "residue"
+cause = "mir::Ty: task::FallibleTask<u32, u32>"
+
+[[fn]]
+path = "async-task::task::Task::fmt"
+kappa = "836187d5974cef99c85828b784c7c188e1d1df65faa62f65564f4680f086fc63"
+at = "M=u32, T=u32"
+embedded = "fe2e4fde103d74ae857dabf661ed3fbe822219c37066469d88b79845678b69de"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "async-task::task::Task::header"
+kappa = "4c969c76398282bfee5d07a5e44ea063217ce2d99474d1b1742723a105e707da"
+at = "M=u32"
+embedded = "e4d5bd3b9c96c5a0f3f8a4a57297b06eb14655a36897a1afd33cdd76a55884e2"
+status = "residue"
+cause = "mir::Ty: header::Header<u32>"
+
+[[fn]]
+path = "async-task::task::Task::is_finished"
+kappa = "7dbafccdd88b7eab318af87b21d946cef98baecaeedf0c76f14db8aac63557d5"
+at = "M=u32"
+embedded = "721491373d39c919bcebec864ee147f2edda96b0a67b115603c90340d12231d3"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "async-task::task::Task::metadata"
+kappa = "0761254366c0cc8855f0e39246c6311fdd3dbc1dda701dd4fb0d8dbbe73644a3"
+at = "M=u32, T=u32"
+embedded = "c96901a775d59107e6d63ac126f92d36bcba31f3c8596674ff3ef4958756f463"
+status = "residue"
+cause = "mir::Ty: Task<u32, u32>"
+
+[[fn]]
+path = "async-task::task::Task::poll"
+kappa = "42d00f9f1aed8ec72c1cef04d153c868d3aab6c72d9379187a103d0d6ca792be"
+at = "M=u32, T=u32"
+embedded = "86c639bd81595291012927d1c15dfad88265dfcc5ef5ad6690ffa75962be52ee"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<u32>"
+
+[[fn]]
+path = "async-task::task::Task::poll_task"
+kappa = "8af8ce4a06a3b6e5c0923edc6888f6526380eb29e679a9600a385623860e32d2"
+at = "M=u32, T=u32"
+embedded = "098000af6c1a1341f1be9e18b030c8b6234e552c336d05ce85841cac58175d03"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "async-task::task::Task::set_canceled"
+kappa = "e2be2a8700dda40420470028cd66d8abb6a329bde0d21393f990656eda662149"
+at = "M=u32"
+embedded = "8768bf34dda0d68c3d96659d6cdb0754c437ebd8e000b4ffbb64e4492f3f479e"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "async-task::task::Task::set_detached"
+kappa = "b9cfefe8532b688443b864c7858c2e0bedfe8226ff5db15838c6f44b43e6cafb"
+at = "M=u32, T=u32"
+embedded = "697cc415704d34857ebf1eb858451f100f1bd1a77e2a5456cdae5b040c549866"
+status = "residue"
+cause = "mir::Ty: dyn core::any::Any + core::marker::Send"
+

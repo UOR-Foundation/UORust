@@ -1,0 +1,760 @@
+# The rand_distr register (written by `uorust crate rand_distr@0.6.0`; do not edit): every body of
+# rand_distr's MIR at rand_distr 0.6.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 423
+translated = 0
+residue = 423
+
+[module.beta]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.binomial]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.cauchy]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.chi_squared]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.exponential]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.fisher_f]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.frechet]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.gamma]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.geometric]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.gumbel]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.hypergeometric]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.inverse_gaussian]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.multi]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.normal]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.normal_inverse_gaussian]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.pareto]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.pert]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.poisson]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.skew_normal]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.student_t]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.triangular]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.unit_ball]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.unit_circle]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.unit_disc]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.unit_sphere]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.utils]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.weibull]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.weighted]
+bodies = 56
+translated = 0
+residue = 56
+
+[module.zeta]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.ziggurat_tables]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.zipf]
+bodies = 11
+translated = 0
+residue = 11
+
+[embedding]
+bodies = 423
+embedded = 423
+evaluable = 423
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 100
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 16
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: WeightedTreeIndex<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: normal::Normal<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Aliases"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SkewNormal<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Dirichlet<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DirichletFromBeta<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DirichletFromGamma<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GammaLargeShape<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LogNormal<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Zipf<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: beta::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: binomial::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cauchy::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: chi_squared::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: exponential::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fisher_f::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frechet::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: gamma::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: geometric::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: gumbel::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hypergeometric::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: inverse_gaussian::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: normal::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: normal::LogNormal<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: normal_inverse_gaussian::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pareto::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pert::Pert<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: poisson::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rand::seq::WeightError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: skew_normal::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: weibull::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: weighted::weighted_tree::WeightedTreeIndex<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: zeta::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: zipf::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Beta<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Binomial"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Binv"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Btpe"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cauchy<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ChiSquared<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DirichletFromBetaError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DirichletFromGammaError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Exp<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FisherF<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Frechet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Gamma<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GammaSmallShape<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Geometric"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Gumbel<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Hypergeometric"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InverseGaussian<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KnuthMethod<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NormalInverseGaussian<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pareto<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pert<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PertError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Poisson<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RejectionMethod<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StudentT<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Triangular<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TriangularError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Weibull<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WeightedAliasIndex<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Zeta<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: beta::Beta<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: binomial::Binomial"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: binomial::Method"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cauchy::Cauchy<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: chi_squared::ChiSquared<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::iter::Copied<core::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dirichlet::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: exponential::Exp<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fisher_f::FisherF<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frechet::Frechet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: gamma::Gamma<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: gamma::GammaLargeShape<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: gamma::GammaSmallShape<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: geometric::Geometric"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: gumbel::Gumbel<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hypergeometric::Hypergeometric"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: inverse_gaussian::InverseGaussian<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: multi::dirichlet::Dirichlet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: multi::dirichlet::DirichletFromBeta<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: multi::dirichlet::DirichletFromGamma<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: normal_inverse_gaussian::NormalInverseGaussian<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pareto::Pareto<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pert::PertBuilder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: poisson::KnuthMethod<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: poisson::Method<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: poisson::Poisson<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: poisson::RejectionMethod<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: skew_normal::SkewNormal<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: student_t::StudentT<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: triangular::Triangular<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: weibull::Weibull<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: weighted::weighted_alias::WeightedAliasIndex<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zeta::Zeta<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zipf::Zipf<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <i128 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <i16 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <i32 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <i64 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <i8 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u128 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u16 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u64 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u8 as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <usize as weighted::weighted_alias::AliasableWeight>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BB<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BC<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BetaAlgorithm<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChiSquaredRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DirichletRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GammaRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SamplingMethod"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StandardGeometric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnitBall"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnitCircle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnitDisc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnitSphere"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: beta::BB<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: beta::BC<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: beta::BetaAlgorithm<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: binomial::Binv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: binomial::Btpe"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chi_squared::ChiSquaredRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exponential::Exp1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: gamma::GammaRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: geometric::StandardGeometric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hypergeometric::SamplingMethod"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::dirichlet::DirichletFromBetaError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::dirichlet::DirichletFromGammaError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::dirichlet::DirichletRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: multi::dirichlet::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: normal::StandardNormal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pert::PertError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: triangular::TriangularError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit_ball::UnitBall"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit_circle::UnitCircle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit_disc::UnitDisc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit_sphere::UnitSphere"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: weighted::weighted_alias::WeightedAliasIndex<u32>::new::Aliases"
+bodies = 1

@@ -1,0 +1,103 @@
+[[fn]]
+path = "vsimd::SHUFFLE_U16X16"
+kappa = "09757493c9f34571df1f8733a5ecf832e0e1b9413e2e1a0669308c804651fb87"
+embedded = "44d95a0c2a1bbec6824274546d7447985ed9678bdabf0de68debb35d7b2da138"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::SHUFFLE_U16X8"
+kappa = "a0bf1e236b6b58e4447a62f3f4d9f2c045cbb32d569298d1035f5f99b9acd1c3"
+embedded = "195af8c3e041c108585162850d7a1398ee03cf85966560a1df582f79a477ed19"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::SHUFFLE_U32X4"
+kappa = "d13fc737d5da77fa79359cc25a86d59390c2402c9ef9a6e67ed468135a1607fb"
+embedded = "b567588481ae00e201939c2d0144aad66aed44a71e28dbe1cbd4a5c9d00c7389"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::SHUFFLE_U32X8"
+kappa = "6ca6113e69b980a0f4323eae7d08f129375d70f1695c064417804173782f1161"
+embedded = "c5a800d1811d4e3b950802bc79fa719efcaa1b2effae568b1b39fdac38a3cd22"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::SHUFFLE_U64X2"
+kappa = "c3aba1d3b0bfe36f13dc983acd0c884e5b00ff21d12113b24f9b33d00358d395"
+embedded = "571870406c746dc97f654adab9b2d4bf9c0f49911e7d8ee07deae6cbebf38938"
+status = "residue"
+cause = "mir::Ty: vector::V128"
+
+[[fn]]
+path = "vsimd::SHUFFLE_U64X4"
+kappa = "26eca7402ed069115fd76e85d242ba9cf7b0b0c8c25e0f2108117ef15f60a172"
+embedded = "f50acf29b4c43753e4e5bf9df560f49371246b1f377f062d8b586f3ea692810b"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::bswap::<impl at src/bswap.rs:32:1: 32:26>::swap_simd"
+kappa = "5f51cdbed2362cd1d02f6f2ea0022dcd09c46b0a7f6a3839259a23a756ec44eb"
+at = "S=u32"
+embedded = "58c6b3f886e9728089b8585b73276266064bac1cd9ebee8b1f8dbb27aa7e33e0"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::bswap::<impl at src/bswap.rs:32:1: 32:26>::swap_single"
+kappa = "18414a9300b9c6d9fd268bbc579cb8339cfe2da50dc848a9ab6f6e5ce586463d"
+embedded = "060445e7f64138278a422208eb0a9173a8f137bf881d891530209907c2abddc5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::swap_bytes"
+
+[[fn]]
+path = "vsimd::bswap::<impl at src/bswap.rs:46:1: 46:26>::swap_simd"
+kappa = "33f113d8d5410c1dee7c0c5336ac287ae6eeec27dda97f39efee8d7724f9bb3f"
+at = "S=u32"
+embedded = "6e5acea41f86bde91f525a04b81e4967b8790ad526fb29d9aa42c23e1f70e3a1"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::bswap::<impl at src/bswap.rs:46:1: 46:26>::swap_single"
+kappa = "00e39230505f0481ffe3e44fdb5cd344469d3db2a837e1b98ce1941a9fddb322"
+embedded = "bc960ef4f34d5c388c73a94611e6d1d2326136796c230ce30c1b7e62cde2f45b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::swap_bytes"
+
+[[fn]]
+path = "vsimd::bswap::<impl at src/bswap.rs:60:1: 60:26>::swap_simd"
+kappa = "dd2a18352e9920ccaa247f08bd1d803574d818cc3625d60f52543916d274958f"
+at = "S=u32"
+embedded = "458752b2d140f92ce7a65a6997880fa17b352364db60fe4942c0e41b8ab318d9"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::bswap::<impl at src/bswap.rs:60:1: 60:26>::swap_single"
+kappa = "16fcfa81c26e405f7627f3cbc17aa3191dc00bf1b17b99bf25df4019fbb044c3"
+embedded = "9c101be56bfcfe00386f1d58c2ef449fc6f3e2b922831b9d3c22ee2a8c4e766a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::swap_bytes"
+
+[[fn]]
+path = "vsimd::bswap_fallback"
+kappa = "2fe2b50453fa6535f9026c5dde9bd37dd61ada6aa9e9e6b9ee1714315199812d"
+at = "T=u32"
+embedded = "35e047c4d9d209f8bfeded4628b094f4735937250f4040eedbd444c53c041300"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u32>::add"
+
+[[fn]]
+path = "vsimd::bswap_simd"
+kappa = "3fe674e29870417a1dc45c5cc94576a801c14c5214ede38f8f29864521239a46"
+at = "S=u32, T=u32"
+embedded = "1f7edf7d3afb17cd4a570225970f10a33dc07af1ed37cd4e907c577a1698e65c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as bswap::BSwap>::LANES"
+

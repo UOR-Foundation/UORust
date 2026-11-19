@@ -1,0 +1,77 @@
+[[fn]]
+path = "inotify::fd_guard::<impl at src/fd_guard.rs:12:10: 12:15>::fmt"
+kappa = "cea223b36ccbe267683cc2a35aa634c50e8b9ec4a46e7de224de8fb7794901da"
+embedded = "be63323dab306b88d5520ab962412da2c6d34f988ba8c95e42a76abeffc1b7ca"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "inotify::fd_guard::FdGuard::as_fd"
+kappa = "af2759a292d2bb8193bb9d52f8e18696715b8784ec38a1b3821c27460238c4d2"
+embedded = "9951c24fada39b41caf18754f9b26de97ab55647a796e4026beb761f7194eaca"
+status = "residue"
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "inotify::fd_guard::FdGuard::as_raw_fd"
+kappa = "fe811466cbcdf2c0619fb66fbe672e13d8ae804d7030bc0edff5d0e7dcfffb55"
+embedded = "697fa0b95f8a18518890141e09c3e5ecc80bcf8345d9838590368d39cf147c51"
+status = "residue"
+cause = "mir::Ty: FdGuard"
+
+[[fn]]
+path = "inotify::fd_guard::FdGuard::deref"
+kappa = "4c838829801059d453b5401f6fa514137fbe2221076098a08520c99466e30b5c"
+embedded = "19648ef50f208f56de3e474bc6aaaea36e2ad5cae7f1d7b47e5c2fbc4738c9ff"
+status = "residue"
+cause = "mir::Ty: FdGuard"
+
+[[fn]]
+path = "inotify::fd_guard::FdGuard::drop"
+kappa = "136c3e34497852e278e32fbdd37b830350287df540c0ec173ae517a8829529a2"
+embedded = "94e4eb7cb329b72f1a476f44d3649ed442514cfc666dc88bde584ed5dc61469a"
+status = "residue"
+cause = "mir::Ty: FdGuard"
+
+[[fn]]
+path = "inotify::fd_guard::FdGuard::eq"
+kappa = "424184eaf054bf1a7e8023ba77f6233ce432b106089e1922a84408a5cd68ea1a"
+embedded = "9c054a504d7624e788cecdcce844e05a0f704b2e3ea14474a1da89e889360471"
+status = "residue"
+cause = "mir::Ty: FdGuard"
+
+[[fn]]
+path = "inotify::fd_guard::FdGuard::from_raw_fd"
+kappa = "b4d2b5497450dd7294901762752ec02c6ce261872bba368f2e89ec508078ad2d"
+embedded = "da527df243b36815328352c0570a23d35d434b6b0b4c1d0254180fe5dff61aa5"
+status = "residue"
+cause = "mir::Ty: fd_guard::FdGuard"
+
+[[fn]]
+path = "inotify::fd_guard::FdGuard::into_raw_fd"
+kappa = "25dd28c98653a1f6f67c497a9d7c36b57b82fe379ff71444b066c533364b3963"
+embedded = "81144ce07ae25cad6f1605c652530f89412ad7cd5b6106cef55d6db3b7bf38cd"
+status = "residue"
+cause = "mir::Ty: FdGuard"
+
+[[fn]]
+path = "inotify::fd_guard::FdGuard::should_not_close"
+kappa = "351fd646397c2f6025cc0dc2c288dc7c053e74794c1c04233eecc84a9a0efaff"
+embedded = "b6a39602d2b156f4b50164f2ab9431902bc84d1d8aacbc13c3f609585483a1d9"
+status = "residue"
+cause = "mir::Ty: FdGuard"
+
+[[fn]]
+path = "inotify::kcmp_file"
+kappa = "1b4723d6d7d0967e93a0ead8c11df86d9906b1bd874d181cf234442ebccedbf1"
+embedded = "e562bfc4ffc2e92d11bb7f47d28fd99c57b3e8a42d0a2e636bc662641b57c3ce"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item libc::SYS_kcmp"
+
+[[fn]]
+path = "inotify::kcmp_file_descriptors"
+kappa = "b9d1134790c240a416b9a0f44d33b194cfb0b2187448720ad5d40e21db0eb653"
+embedded = "169c0cdb986a8699716c34ae7418ab364a4db78ad7722080930d63dcc1849ac3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: fd_guard::kcmp_file: inotify's MIR stops at mir::Operand::Constant: the constant item libc::SYS_kcmp"
+
