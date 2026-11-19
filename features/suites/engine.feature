@@ -529,3 +529,10 @@ Feature: engine
     When the common codec composes the SDK bit operations through balanced shared kernels
     Then actual SDK results and final state agree with executable Rust at every fixed width
     But incompatible widths and unrelated stored types remain typed refusals
+
+  @UE-76 @build
+  Scenario: Integer carriers compose through nested structures
+    Given compiler calls and state crossing nested source and native collection carriers
+    When UORust composes admitted element codecs through the complete structural type
+    Then the SDK agrees with Rust while preserving nested values and entry order
+    But incompatible element models and collection identities remain refused

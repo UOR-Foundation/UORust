@@ -5428,6 +5428,130 @@ impl Fun<'_, '_> {
         }
     }
 
+    /// Compose admitted element representations without inspecting or changing
+    /// collection contents. Structural recursion preserves list entry order.
+    fn structural_representation(
+        &mut self,
+        value: &str,
+        from: &Ty,
+        to: &Ty,
+        st: &State,
+    ) -> Option<String> {
+        let (from, to) = match (from, to) {
+            (Ty::Map(_, _, a), Ty::Map(_, _, b)) if a == b => (
+                Ty::List(Box::new(from.entry())),
+                Ty::List(Box::new(to.entry())),
+            ),
+            (Ty::Set(f, a), Ty::Set(t, b)) if a == b => (Ty::List(f.clone()), Ty::List(t.clone())),
+            (Ty::List(_), Ty::List(_))
+            | (Ty::Option(_), Ty::Option(_))
+            | (Ty::Outcome(..), Ty::Outcome(..))
+            | (Ty::Tuple(_) | Ty::Pair(_), Ty::Tuple(_) | Ty::Pair(_)) => {
+                (from.clone(), to.clone())
+            }
+            _ => return None,
+        };
+        let input = super::codec::binding("carrierValue", self.cx.taken);
+        let head = super::codec::binding("carrierHead", self.cx.taken);
+        let tail = super::codec::binding("carrierTail", self.cx.taken);
+        let identity = crate::project::sha(
+            format!("structural-carrier/1\0{from:?}\0{to:?}\0{input}\0{head}\0{tail}").as_bytes(),
+        );
+        let name = format!("mirStructuralCarrier{identity}");
+        if !self.aux.contains_key(&name) {
+            let mut recursive = None;
+            let body = match (&from, &to) {
+                (Ty::Tuple(fs) | Ty::Pair(fs), Ty::Tuple(ts) | Ty::Pair(ts))
+                    if fs.len() == ts.len() =>
+                {
+                    let mut items = Vec::new();
+                    for (i, (f, t)) in fs.iter().zip(ts).enumerate() {
+                        items.push(self.scalar_representation(
+                            &lift::tuple_item(&from, &input, i),
+                            f,
+                            t,
+                            st,
+                        )?);
+                    }
+                    Expr::Flat(lift::tuple_value(&to, &items))
+                }
+                (Ty::List(f), Ty::List(t)) => {
+                    let item = self.scalar_representation(&head, f, t, st)?;
+                    recursive = Some(input.clone());
+                    Expr::Match {
+                        scrutinee: input.clone(),
+                        arms: vec![
+                            Arm {
+                                pattern: "List.nil".into(),
+                                body: Expr::Flat(format!("(nil {})", t.render())),
+                            },
+                            Arm {
+                                pattern: format!("List.cons {head} {tail}"),
+                                body: Expr::Flat(format!("(cons {item} ({name} {tail}))")),
+                            },
+                        ],
+                    }
+                }
+                (Ty::Option(f), Ty::Option(t)) => {
+                    let item = self.scalar_representation(&head, f, t, st)?;
+                    Expr::Match {
+                        scrutinee: input.clone(),
+                        arms: vec![
+                            Arm {
+                                pattern: "Option.none".into(),
+                                body: Expr::Flat(format!("(ctor Option.none [{}])", t.render())),
+                            },
+                            Arm {
+                                pattern: format!("Option.some {head}"),
+                                body: Expr::Flat(format!(
+                                    "(ctor Option.some [{}] {item})",
+                                    t.render()
+                                )),
+                            },
+                        ],
+                    }
+                }
+                (Ty::Outcome(f, fe), Ty::Outcome(t, te)) => {
+                    let ok = self.scalar_representation(&head, f, t, st)?;
+                    let err = self.scalar_representation(&head, fe, te, st)?;
+                    let params = format!("[{}, {}]", t.render(), te.render());
+                    Expr::Match {
+                        scrutinee: input.clone(),
+                        arms: vec![
+                            Arm {
+                                pattern: format!("Result.ok {head}"),
+                                body: Expr::Flat(format!("(ctor Result.ok {params} {ok})")),
+                            },
+                            Arm {
+                                pattern: format!("Result.error {head}"),
+                                body: Expr::Flat(format!("(ctor Result.error {params} {err})")),
+                            },
+                        ],
+                    }
+                }
+                _ => return None,
+            };
+            self.mention(&from);
+            self.mention(&to);
+            self.aux.insert(
+                name.clone(),
+                Decl::Definition {
+                    name: name.clone(),
+                    type_parameters: Vec::new(),
+                    parameters: vec![(input, from.render())],
+                    result: to.render(),
+                    body,
+                    axioms: vec!["Quot.sound".into(), "propext".into()],
+                    recursive,
+                    termination: None,
+                    mutual: None,
+                },
+            );
+        }
+        self.calls.insert(name.clone());
+        Some(format!("({name} {value})"))
+    }
+
     /// Source fields and native locals may use distinct representations of
     /// the same Rust integer. Construction cannot silently convert them.
     fn scalar_representation(
@@ -5437,13 +5561,35 @@ impl Fun<'_, '_> {
         to: &Ty,
         st: &State,
     ) -> Option<String> {
-        if let (Ty::Int(bits), Ty::Signed(_)) = (from, to) {
+        if matches!((from,to),(Ty::Map(_,_,a),Ty::Map(_,_,b))|(Ty::Set(_,a),Ty::Set(_,b)) if a!=b) {
+            return None;
+        }
+        if from.same(to) {
+            return Some(value.into());
+        }
+        if matches!(
+            from,
+            Ty::List(_)
+                | Ty::Map(..)
+                | Ty::Set(..)
+                | Ty::Option(_)
+                | Ty::Outcome(..)
+                | Ty::Tuple(_)
+                | Ty::Pair(_)
+        ) {
+            return self.structural_representation(value, from, to, st);
+        }
+        if matches!(from, Ty::Int(_) | Ty::Integer(_)) && matches!(to, Ty::Signed(_)) {
             // Keep the SDK's Int64 conversion out of generic arithmetic
             // obligations. One mathematical kernel is certified per width;
             // every native read merely supplies its converted value.
-            let source = Ty::Integer(Some(*bits));
-            let parameter = "codecInteger";
-            let converted = super::codec::scalar(parameter, &source, to, self.cx.widths)?;
+            let source = match from {
+                Ty::Int(bits) => Ty::Integer(Some(*bits)),
+                _ => from.clone(),
+            };
+            let parameter = super::codec::binding("codecInteger", self.cx.taken);
+            let converted =
+                super::codec::scalar(&parameter, &source, to, self.cx.widths, self.cx.taken)?;
             let identity = crate::project::sha(
                 format!(
                     "{source:?}\0{to:?}\0{}\0{:?}",
@@ -5487,9 +5633,14 @@ impl Fun<'_, '_> {
             self.mention(&source);
             self.mention(to);
             self.calls.insert(name.clone());
-            return Some(format!("({name} (prim to_int {value} : Int))"));
+            let actual = if matches!(from, Ty::Int(_)) {
+                format!("(prim to_int {value} : Int)")
+            } else {
+                value.into()
+            };
+            return Some(format!("({name} {actual})"));
         }
-        let converted = super::codec::scalar(value, from, to, self.cx.widths)?;
+        let converted = super::codec::scalar(value, from, to, self.cx.widths, self.cx.taken)?;
         for declaration in converted.declarations {
             self.calls.insert(declaration.name().to_string());
             self.aux.insert(declaration.name().to_string(), declaration);

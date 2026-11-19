@@ -91,9 +91,9 @@ repin = "frame"
 [[gap]]
 id = "lexlean-nat-to-signed"
 repository = "UOR-Foundation/LexLean"
-what = "LexLean 0.4.0 converts no Nat to another integer family: checked_convert takes Int and the fixed-width families but not Nat, to_int takes only the fixed widths, and Int64 has no arithmetic beyond the checked_* primitives (src/ir/semantic.rs, infer_primitive). So the MIR path holds every Rust integer as Nat, with signed ones as their two's-complement bit patterns (crates/uorust/src/mir/int.rs). An AST-lifted Int64 value can flow into Nat (to_int, then emod, then UInt64 limbs, then to_nat), but a Nat can never flow back: a MIR-path call to an AST-lifted function with an Int64 parameter, or a struct with an Int64 field, stays residue."
+what = "LexLean 0.4.0 does not accept Nat in checked_convert or to_int. UORust now composes pinned SDK integer and bit operations into shared codecs in both directions for i8/i16/i32/i64 (UE-73 and UE-75), including nested structural carriers (UE-76). The absent direct primitive remains an SDK API gap, but it no longer makes those compatible source-call and field boundaries residue. The actual SDK validates the compositions; no SDK semantics or limits are replaced."
 plan = "Admit Nat as checked_convert's input (Option of any fixed width, none outside its range) and as to_int's (exact), with both elaborating in linking as to_nat does. Then the AST path's Int64 and the MIR path's bit patterns meet in a cast, and the boundary residue closes."
-residue = "mir::TerminatorKind::Call and mir::Rvalue::Aggregate rows that pass a signed value to an AST-lifted Int64 parameter or field: the workspace's own register, since core, std and crates have no AST-lifted callee"
+residue = "Direct Nat conversion remains unavailable. Compatible fixed-width source boundaries use the composed codecs; incompatible widths and unrelated element models remain residue."
 causes = []
 
 [[gap]]

@@ -96,6 +96,7 @@ model does not sanction.
 | `UE-73` | `build` | Compiler representation boundaries normalize fixed-width signed source values through the pinned SDK integer conversion and the shared width-derived word codec, preserving Rust values for every supported width; incompatible widths and reverse conversions without an admitted codec remain typed residue |
 | `UE-74` | `build` | Native verification retains intact prior decisions when dependency contexts alternate, admitting a stored decision only at its exact original digest or rooted model binding and retaining its original status and observed axiom policy; changed dependencies and unverified contexts still require actual SDK decisions |
 | `UE-75` | `build` | Native signed word values cross source integer boundaries through balanced, content-bound compositions of pinned SDK bit operations, preserving fixed-width Rust values in source calls, constructors and mutable state; mismatched widths and unrelated carriers remain typed refusals |
+| `UE-76` | `build` | Admitted integer representation boundaries compose through products, lists, options, results and collection entries, preserving container shape, entry order and source state through shared structural helpers; incompatible element types and collection identities remain typed residue |
 
 ## factory
 

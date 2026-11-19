@@ -1,4 +1,6 @@
 //! Width-derived boundaries between mathematical source integers and native words.
+use std::collections::BTreeSet;
+
 use crate::lex::{Decl, Expr};
 use crate::lift::Ty;
 
@@ -10,13 +12,29 @@ pub(super) struct Converted {
     pub(super) declarations: Vec<Decl>,
 }
 
+/// A stable generated binding outside the declaration namespace.
+pub(super) fn binding(base: &str, reserved: &BTreeSet<String>) -> String {
+    (0..)
+        .map(|i| {
+            if i == 0 {
+                base.into()
+            } else {
+                format!("{base}{i}")
+            }
+        })
+        .find(|name| !reserved.contains(name))
+        .expect("a finite namespace")
+}
+
 /// Decode a native bit pattern into SDK Int64 using only total fixed-width
 /// bit operations. Balanced composition keeps the semantic JSON depth bounded.
-fn signed_source(value: &str, bits: u32) -> Converted {
+fn signed_source(value: &str, bits: u32, reserved: &BTreeSet<String>) -> Converted {
+    let raw = binding("raw", reserved);
+    let word = binding("codecWord", reserved);
     let modulus = super::int::pow2(bits);
     let half = super::int::pow2(bits - 1);
     let mut parts = vec![if bits < 64 {
-        format!("(if (codecWord <? {half}) then (0 : Int64) else (-{modulus} : Int64))")
+        format!("(if ({word} <? {half}) then (0 : Int64) else (-{modulus} : Int64))")
     } else {
         "(0 : Int64)".into()
     }];
@@ -27,7 +45,7 @@ fn signed_source(value: &str, bits: u32) -> Converted {
         } else {
             (1u64 << bit).to_string()
         };
-        parts.push(format!("(if ((prim remainder (prim quotient codecWord {divisor} 0 : Nat) 2 0 : Nat) =? 0) then (0 : Int64) else ({mask} : Int64))"));
+        parts.push(format!("(if ((prim remainder (prim quotient {word} {divisor} 0 : Nat) 2 0 : Nat) =? 0) then (0 : Int64) else ({mask} : Int64))"));
     }
     while parts.len() > 1 {
         parts = parts
@@ -40,7 +58,7 @@ fn signed_source(value: &str, bits: u32) -> Converted {
             .collect();
     }
     let body = format!(
-        "(let codecWord : Nat := (prim remainder raw {modulus} 0 : Nat); {})",
+        "(let {word} : Nat := (prim remainder {raw} {modulus} 0 : Nat); {})",
         parts[0]
     );
     let name = format!(
@@ -53,7 +71,7 @@ fn signed_source(value: &str, bits: u32) -> Converted {
         declarations: vec![Decl::Definition {
             name,
             type_parameters: Vec::new(),
-            parameters: vec![("raw".into(), "Nat".into())],
+            parameters: vec![(raw, "Nat".into())],
             result: "Int64".into(),
             body: Expr::Flat(body),
             axioms: vec!["Quot.sound".into(), "propext".into()],
@@ -92,6 +110,7 @@ pub(super) fn scalar(
     from: &Ty,
     to: &Ty,
     widths: &[(u32, Vec<String>)],
+    reserved: &BTreeSet<String>,
 ) -> Option<Converted> {
     if from.same(to) {
         return Some(Converted {
@@ -102,18 +121,19 @@ pub(super) fn scalar(
     }
     if let (Ty::Signed(Some(bits)), Ty::Int(target)) = (from, to) {
         return (bits == target && [8, 16, 32, 64].contains(bits))
-            .then(|| signed_source(value, *bits));
+            .then(|| signed_source(value, *bits, reserved));
     }
     // Source fixed-width signed values share Int64 storage. Normalize
     // through the SDK's exact conversion, then reuse the same word codec
     // as mathematical source integers. The declared Rust width still binds
-    // the conversion; this does not admit the reverse Int64 boundary.
+    // the conversion; reverse conversion uses the separate SDK bit kernel.
     if let Ty::Int(bits) = from {
         return scalar(
             &format!("(prim to_int {value} : Int)"),
             &Ty::Integer(Some(*bits)),
             to,
             widths,
+            reserved,
         );
     }
     if let Ty::Signed(_) = from {
@@ -180,7 +200,7 @@ mod tests {
             (Ty::Signed(Some(64)), Ty::Integer(Some(128))),
             (Ty::Integer(Some(128)), Ty::Signed(Some(64))),
         ] {
-            assert!(scalar("value", &from, &to, &widths).is_none());
+            assert!(scalar("value", &from, &to, &widths, &BTreeSet::new()).is_none());
         }
     }
 }

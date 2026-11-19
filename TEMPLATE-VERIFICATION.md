@@ -1126,3 +1126,36 @@ Focused codec, all 16 CLI, conformance, strict Clippy, model/template/SDK-lock a
 self-model checks passed. These fixture decisions do not establish additional
 consumer coverage; the guarded consumer campaign measures that separately.
 Full release acceptance, translator certification and consumer adoption are open.
+
+## UE-76: hygienic structural carrier composition
+
+The registered red fixture stopped at a nested signed collection field. The
+common boundary now composes admitted scalar codecs through products, lists,
+options, results and collection entries. Each helper preserves constructors,
+list length and entry order by structural recursion. Its identity binds the
+complete carrier types and the selected generated bindings, so an unrelated
+namespace addition does not rename an unaffected helper. Integer obligations
+remain in shared mathematical kernels rather than repeated element expressions.
+
+The preceding consumer attempt exposed a distinct structural hygiene failure:
+the SDK's LLT4001 refused a generated `raw` parameter colliding with a source
+declaration, before recording any function verdict. Shared codec and structural
+bindings now allocate against the existing declaration namespace. The SDK
+regression includes declarations named after the generated bindings, so this
+class of capture is exercised along with the complete transport.
+
+All eight native fixture functions and 48 executable Rust comparisons passed
+in 93.34 seconds, including empty collections, None, both Result constructors,
+signed extrema, entry order, constructors, calls and mutable final state. The
+SDK rejected a planted changed value with LLV7002. Changing the authoritative
+element to bool or the collection identity to HashMap leaves the old MIR
+refused. The comparison checks every element and constructor explicitly because
+the SDK does not promise synthesized DecidableEq instances for generated records.
+
+The coupled aggregate, signed-slot, fixed-field and reverse-carrier regressions
+passed, including the existing i128/pointer-width cases. Focused codec tests,
+all 16 CLI tests, conformance checks, strict Clippy and model/template/SDK-lock
+checks passed. Generated self-model consistency is checked by the existing gate.
+Consumer coverage is measured separately by the guarded production campaign;
+these fixture results do not add to its lifted count. Full release acceptance,
+translator certification and consumer adoption remain open.

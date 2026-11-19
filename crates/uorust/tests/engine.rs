@@ -6419,6 +6419,288 @@ fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
     std::fs::remove_dir_all(dir).unwrap();
 }
 
+/// UE-76: one structural boundary composes element codecs throughout containers.
+#[test]
+fn integer_carriers_compose_through_structures_ue_76() {
+    let mut code=String::from("use std::collections::BTreeMap;\npub fn raw(x:u8)->u8{x}\npub fn codec_word(x:u8)->u8{x}\npub fn codec_integer(x:u8)->u8{x}\npub fn carrier_value(x:u8)->u8{x}\npub fn carrier_head(x:u8)->u8{x}\npub fn carrier_tail(x:u8)->u8{x}\npub fn carrier_some(x:u8)->u8{x}\npub fn carrier_result(x:u8)->u8{x}\n");
+    for (name, ty) in [
+        ("Nested", "Vec<Option<(i8,Result<i16,i32>)>>"),
+        ("Entries", "BTreeMap<i16,i8>"),
+    ] {
+        let tag = name.to_ascii_lowercase();
+        code.push_str(&format!("pub struct {name}{{pub values:{ty}}}\npub fn identity_{tag}(values:{ty})->{ty}{{values}}\npub fn take_{tag}(mut n:u8,x:{name})->{ty}{{while n>0{{n-=1;}}x.values}}\npub fn make_{tag}(mut n:u8,values:{ty})->{name}{{while n>0{{n-=1;}}{name}{{values}}}}\npub fn pass_{tag}(mut n:u8,values:{ty})->{ty}{{while n>0{{n-=1;}}identity_{tag}(values)}}\npub fn update_{tag}(mut n:u8,x:&mut {name},values:{ty}){{while n>0{{n-=1;}}x.values=values;}}\n"));
+    }
+    let oracle = r#"use carriers::*;
+use std::collections::BTreeMap;
+fn nested(x:&[Option<(i8,Result<i16,i32>)>],word:bool)->String {
+ let t=if word {"TupleNatResultNatNat"}else{"TupleIntResultIntInt"};
+ let r=if word {"Nat"}else{"Int64"};
+ let number=|n:i64,raw:u64| if word {raw.to_string()}else{format!("({n} : Int64)")};
+ x.iter().rev().fold(format!("(nil (Option {t}))"),|tail,v|{
+  let head=match v {None=>format!("(ctor Option.none [{t}])"),Some((a,b))=>{
+   let b=match b {Ok(b)=>format!("(ctor Result.ok [{r}, {r}] {})",number(*b as i64,*b as u16 as u64)),Err(c)=>format!("(ctor Result.error [{r}, {r}] {})",number(*c as i64,*c as u32 as u64))};
+   format!("(ctor Option.some [{t}] (record {t} {{item0 := {}, item1 := {b}}}))",number(*a as i64,*a as u8 as u64))
+  }};format!("(cons {head} {tail})")})
+}
+fn entries(x:&BTreeMap<i16,i8>,word:bool)->String {
+ let t=if word {"TupleNatNat"}else{"TupleIntInt"};
+ x.iter().rev().fold(format!("(nil {t})"),|tail,(a,b)|{
+ let a=if word {(*a as u16).to_string()}else{format!("({a} : Int64)")};
+ let b=if word {(*b as u8).to_string()}else{format!("({b} : Int64)")};
+ format!("(cons (record {t} {{item0 := {a}, item1 := {b}}}) {tail})")})
+}
+fn main(){for n in [0,2]{for sample in 0..3 {
+ let x=match sample {0=>vec![],1=>vec![None],_=>vec![Some((i8::MIN,Ok(i16::MIN))),None,Some((i8::MAX,Err(i32::MIN))),Some((-1,Err(i32::MAX)))]};
+ let source=nested(&x,false);let word=nested(&x,true);
+ let out=take_nested(n,Nested{values:x.clone()});println!("nested|take|{n}|{source}|{}",nested(&out,true));
+ let out=make_nested(n,x.clone());println!("nested|make|{n}|{word}|{}",nested(&out.values,false));
+ let out=pass_nested(n,x.clone());println!("nested|pass|{n}|{word}|{}",nested(&out,true));
+ let mut out=Nested{values:vec![Some((1,Ok(2)))]};update_nested(n,&mut out,x);println!("nested|update|{n}|{word}|{}",nested(&out.values,false));
+ let x=match sample {0=>BTreeMap::new(),1=>BTreeMap::from([(0,0)]),_=>BTreeMap::from([(i16::MIN,i8::MAX),(-1,-1),(i16::MAX,i8::MIN)])};
+ let source=entries(&x,false);let word=entries(&x,true);
+ let out=take_entries(n,Entries{values:x.clone()});println!("entries|take|{n}|{source}|{}",entries(&out,true));
+ let out=make_entries(n,x.clone());println!("entries|make|{n}|{word}|{}",entries(&out.values,false));
+ let out=pass_entries(n,x.clone());println!("entries|pass|{n}|{word}|{}",entries(&out,true));
+ let mut out=Entries{values:BTreeMap::new()};update_entries(n,&mut out,x);println!("entries|update|{n}|{word}|{}",entries(&out.values,false));
+}}}
+"#;
+    let dir = scratch(
+        "structural-carriers",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname=\"carriers\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n",
+            ),
+            ("src/lib.rs", &code),
+            ("src/bin/vectors.rs", oracle),
+        ],
+    );
+    let dumps = dumped(&dir, "structural-carriers");
+    let mut opts = options("carriers");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposals = uorust::project_workspace(&dir, &opts).unwrap();
+    uorust::write(&dir.join("proposal"), &proposals).unwrap();
+    let mut candidates = frontier_rows(&proposals, "candidate");
+    candidates.extend(frontier_rows(&proposals, "lifted"));
+    for shape in ["nested", "entries"] {
+        for mode in ["take", "make", "pass", "update"] {
+            let path = format!("carriers::{mode}_{shape}");
+            assert!(
+                candidates
+                    .iter()
+                    .any(|r| r["function"].as_str() == Some(&path)),
+                "{path}: {:?}",
+                residue_detail(&proposals, &path)
+            );
+        }
+    }
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("structural-carriers-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("carriers"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--quiet", "--locked", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let mut vectors = String::new();
+    let mut wrong = None;
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("carriers::{}_{}", p[1], p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let record = if p[0] == "nested" {
+            "Nested"
+        } else {
+            "Entries"
+        };
+        let call = match p[1] {
+            "take" => format!("({name} {} (record {record} {{values := {}}}))", p[2], p[3]),
+            "update" => {
+                let empty = if p[0] == "nested" {
+                    "(nil (Option TupleIntResultIntInt))"
+                } else {
+                    "(nil TupleIntInt)"
+                };
+                format!("(project (project ({name} {} (record {record} {{values := {empty}}}) {}) item1) values)",p[2],p[3])
+            }
+            "make" => format!("(project ({name} {} {}) values)", p[2], p[3]),
+            _ => format!("({name} {} {})", p[2], p[3]),
+        };
+        let word = matches!(p[1], "take" | "pass");
+        let comparator = format!(
+            "vector{}{}",
+            if p[0] == "nested" {
+                "Nested"
+            } else {
+                "Entries"
+            },
+            if word { "Word" } else { "Source" }
+        );
+        let theorem=format!("theorem{{name: structuralVector{i}, parameters: [], statement: (({comparator} {call} {}) = true), proof: decide{{}}, axioms: [{}]}}\n",p[4],policy.join(", "));
+        if p[0] == "nested" && p[1] == "take" && p[4].contains("128") && wrong.is_none() {
+            wrong = Some((
+                theorem.clone(),
+                theorem.replacen("item0 := 128", "item0 := 129", 1),
+            ));
+        }
+        vectors.push_str(&theorem);
+    }
+    assert_eq!(vectors.lines().count(), 48);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    // SDK records do not promise a synthesized DecidableEq instance. Compare
+    // every element and constructor explicitly, independently of the codec.
+    let mut comparisons = String::new();
+    for word in [false, true] {
+        let kind = if word { "Word" } else { "Source" };
+        let scalar = if word { "Nat" } else { "Int64" };
+        let eq = |a: &str, b: &str| {
+            if word {
+                format!("({a} =? {b})")
+            } else {
+                format!("(prim equal {a} {b} : Bool)")
+            }
+        };
+        for nested in [false, true] {
+            let (label, elem) = if nested {
+                (
+                    "Nested",
+                    format!("(Option Tuple{scalar}Result{scalar}{scalar})").replace("Int64", "Int"),
+                )
+            } else {
+                (
+                    "Entries",
+                    format!("Tuple{scalar}{scalar}").replace("Int64", "Int"),
+                )
+            };
+            let name = format!("vector{label}{kind}");
+            let item = if nested {
+                let first = eq(
+                    "(project vectorLeftTuple item0)",
+                    "(project vectorRightTuple item0)",
+                );
+                let ok = eq("vectorLeftResult", "vectorRightResult");
+                format!("(match vectorLeftItem | Option.none => (match vectorRightItem | Option.none => true | Option.some vectorRightTuple => false) | Option.some vectorLeftTuple => (match vectorRightItem | Option.none => false | Option.some vectorRightTuple => ({first} && (match (project vectorLeftTuple item1) | Result.ok vectorLeftResult => (match (project vectorRightTuple item1) | Result.ok vectorRightResult => {ok} | Result.error vectorRightResult => false) | Result.error vectorLeftResult => (match (project vectorRightTuple item1) | Result.ok vectorRightResult => false | Result.error vectorRightResult => {ok})))) )")
+            } else {
+                format!(
+                    "({} && {})",
+                    eq(
+                        "(project vectorLeftItem item0)",
+                        "(project vectorRightItem item0)"
+                    ),
+                    eq(
+                        "(project vectorLeftItem item1)",
+                        "(project vectorRightItem item1)"
+                    )
+                )
+            };
+            comparisons.push_str(&format!("definition{{name:{name},parameters:[vectorLeftList:(List {elem}),vectorRightList:(List {elem})],result:Bool,body:(match vectorLeftList | List.nil => (match vectorRightList | List.nil => true | List.cons vectorRightItem vectorRightTail => false) | List.cons vectorLeftItem vectorLeftTail => (match vectorRightList | List.nil => false | List.cons vectorRightItem vectorRightTail => ({item} && ({name} vectorLeftTail vectorRightTail)))), recursive_argument:vectorLeftList}}\n"));
+        }
+    }
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{comparisons}{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    for (old, new, path) in [
+        (
+            "pub values:Vec<Option<(i8,Result<i16,i32>)>>",
+            "pub values:Vec<Option<(bool,Result<i16,i32>)>>",
+            "carriers::take_nested",
+        ),
+        (
+            "pub values:BTreeMap<i16,i8>",
+            "pub values:std::collections::HashMap<i16,i8>",
+            "carriers::take_entries",
+        ),
+    ] {
+        let changed = code.replacen(old, new, 1);
+        assert_ne!(changed, code);
+        std::fs::write(dir.join("src/lib.rs"), changed).unwrap();
+        opts.mir = Some(mir_options(
+            dumps.clone(),
+            Default::default(),
+            uorust::mir::Trial::All,
+        ));
+        let drift = uorust::project_workspace(&dir, &opts).unwrap();
+        assert!(
+            residue_detail(&drift, path).is_some_and(|s| s.contains("field representation")),
+            "{path}: {:?}",
+            residue_detail(&drift, path)
+        );
+    }
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-75: constructors, source arguments and state share signed word kernels.
 #[test]
 fn native_words_reuse_signed_source_carriers_ue_75() {
