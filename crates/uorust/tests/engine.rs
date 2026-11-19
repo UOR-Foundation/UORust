@@ -4039,6 +4039,167 @@ fn native_workspace_floats_share_source_readings_ue_47() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-63: region composition is derived from compiler edges, not function names.
+#[test]
+fn compiler_regions_compose_nested_continuations_ue_63() {
+    let dir=scratch("compiler-regions",&[("Cargo.toml","[package]\nname=\"compiler_regions\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub fn nested(mut n:u8,m:u8,mut v:bool)->bool {while n>0 {n-=1;let mut j=m;while j>0 {j-=1;v=!v;}}v}
+pub fn triple(mut n:u8,m:u8,mut v:bool)->bool {while n>0 {n-=1;let mut j=m;while j>0 {j-=1;let mut k=m;while k>0 {k-=1;v=!v;}}}v}
+pub fn early(mut n:u8,m:u8,mut v:bool)->bool {while n>0 {n-=1;let mut j=m;while j>0 {j-=1;if j==2 && v {return false;}v=!v;}}v}
+pub fn exits(mut n:u8,m:u8,mut v:bool)->bool {'outer:while n>0 {n-=1;let mut j=m;while j>0 {j-=1;if j==1 {continue 'outer;}if j==2 {break;}v=!v;}}v}
+pub fn overflow(mut n:u8,m:u8,mut value:u8)->u8 {while n>0 {n-=1;let mut j=m;while j>0 {j-=1;value+=1;}}value}
+pub fn borrowed(mut n:u8,m:u8,value:&mut bool)->bool {while n>0 {n-=1;let reference=&mut *value;let mut j=m;while j>0 {j-=1;*reference=!*reference;}}*value}
+"#),("src/bin/vectors.rs",r#"
+use compiler_regions::*;
+fn main(){for n in 0..=3 {for m in 0..=3 {for v in [false,true] {for (name,out) in [("nested",nested(n,m,v)),("triple",triple(n,m,v)),("early",early(n,m,v)),("exits",exits(n,m,v))] {println!("{name},{n},{m},{v},{out}");}}}}}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 128);
+    let dumps = dumped(&dir, "compiler-regions");
+    let mut opts = options("compiler_regions");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["nested", "triple", "early", "exits"] {
+        let path = format!("compiler_regions::{f}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    assert!(
+        residue_detail(&proposed, "compiler_regions::borrowed").is_some(),
+        "borrow state must not be snapshotted"
+    );
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("compiler-region-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("compiler_regions"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert!(proof.refused <= 1, "{proof:?}");
+    let decisions = verdicts(&cache);
+    assert!(decisions
+        .rows
+        .values()
+        .any(|row| row.function == "compiler_regions::overflow"
+            && matches!(row.status, uorust::mir::verdict::Decision::Refused(_))));
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(residue_detail(&files, "compiler_regions::overflow").is_some());
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split(',').collect();
+        let [function, n, m, input, expected] = parts.as_slice() else {
+            panic!("oracle vector {line}")
+        };
+        let path = format!("compiler_regions::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: regionVector{i}, parameters: [], statement: (({name} {n} {m} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let sdk = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(
+        sdk.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&sdk.stdout),
+        String::from_utf8_lossy(&sdk.stderr)
+    );
+    let nested = rows
+        .iter()
+        .find(|row| row["function"].as_str() == Some("compiler_regions::nested"))
+        .unwrap()["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let mut prefix = nested.to_string();
+    prefix.replace_range(..1, &nested[..1].to_uppercase());
+    let ctor = body
+        .find(&format!("(ctor {prefix}Loop"))
+        .expect("generated nested exit");
+    let path_start = ctor + "(ctor ".len();
+    let value_start = path_start + body[path_start..].find(' ').unwrap() + 1;
+    assert!(
+        body[value_start..].starts_with("(project "),
+        "exit transports the Boolean state"
+    );
+    let value_end = value_start + body[value_start..].find(')').unwrap() + 1;
+    let mut broken = body.clone();
+    broken.replace_range(value_start..value_end, "false");
+    assert_ne!(broken, body, "planted lost Boolean exit state");
+    std::fs::write(out.join("src/Behavior.lex.tex"), broken).unwrap();
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-62: the delivery policy rejects regressions in the actual automation gate.
 #[test]
 fn factory_delivery_guard_enforces_structural_automation_ue_62() {

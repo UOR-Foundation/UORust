@@ -246,6 +246,112 @@ struct Loop {
     new: Option<String>,
     /// Multiple live values share one changing recursion argument.
     packet: Option<Ty>,
+    boundary: Option<RegionBoundary>,
+}
+
+/// A nested region returns only state it changes; its caller owns continuation.
+#[derive(Clone, Debug)]
+struct RegionBoundary {
+    name: String,
+    blocks: BTreeSet<IrBlockId>,
+    exits: BTreeMap<IrBlockId, Vec<(IrLocal, Ty)>>,
+}
+
+/// Natural-loop structure derived solely from the compiler control-flow graph.
+fn natural_regions(body: &IrBody) -> Lift<BTreeMap<IrBlockId, BTreeSet<IrBlockId>>> {
+    let mut regions: BTreeMap<IrBlockId, BTreeSet<IrBlockId>> = BTreeMap::new();
+    let n = body.blocks.len();
+    if n == 0 {
+        return Err(kind("IrBody", "a control-flow graph without an entry"));
+    }
+    let succ: Vec<Vec<IrBlockId>> = body
+        .blocks
+        .iter()
+        .map(|b| b.terminator.successors())
+        .collect();
+    if succ.iter().flatten().any(|s| *s >= n) {
+        return Err(kind("TerminatorKind::Goto", "an edge to a missing block"));
+    }
+    // Depth-first, iteratively: an edge to a block on the stack is a back
+    // edge.
+    let mut state = vec![0u8; n];
+    let mut back: Vec<(IrBlockId, IrBlockId)> = Vec::new();
+    let mut stack: Vec<(IrBlockId, usize)> = vec![(0, 0)];
+    state[0] = 1;
+    while let Some((b, i)) = stack.pop() {
+        if let Some(&s) = succ[b].get(i) {
+            stack.push((b, i + 1));
+            if s >= n {
+                return Err(kind("TerminatorKind::Goto", "an edge to a missing block"));
+            }
+            match state[s] {
+                0 => {
+                    state[s] = 1;
+                    stack.push((s, 0));
+                }
+                1 => back.push((b, s)),
+                _ => {}
+            }
+        } else {
+            state[b] = 2;
+        }
+    }
+    let mut pred: Vec<Vec<IrBlockId>> = vec![Vec::new(); n];
+    for (b, ss) in succ.iter().enumerate() {
+        for &s in ss {
+            pred[s].push(b);
+        }
+    }
+    if back.is_empty() {
+        return Ok(regions);
+    }
+    let mut by_header: BTreeMap<IrBlockId, Vec<IrBlockId>> = BTreeMap::new();
+    for (tail, head) in back {
+        by_header.entry(head).or_default().push(tail);
+    }
+    for (head, tails) in by_header {
+        // A header dominates its latches iff deleting it disconnects every
+        // latch from entry. Keep only one linear-size reachability set.
+        let mut bypass = vec![false; n];
+        let mut work = if head == 0 { Vec::new() } else { vec![0] };
+        while let Some(b) = work.pop() {
+            if b == head || bypass[b] {
+                continue;
+            }
+            bypass[b] = true;
+            work.extend(succ[b].iter().copied());
+        }
+        if tails.iter().any(|tail| bypass[*tail]) {
+            return Err(kind(
+                "TerminatorKind::Goto",
+                "an irreducible region with multiple entries",
+            ));
+        }
+        let region = regions.entry(head).or_default();
+        region.insert(head);
+        let mut work = tails;
+        while let Some(b) = work.pop() {
+            if region.insert(b) {
+                work.extend(pred[b].iter().copied().filter(|p| state[*p] != 0));
+            }
+        }
+    }
+    let heads: Vec<IrBlockId> = regions.keys().copied().collect();
+    for &h in &heads {
+        for &g in &heads {
+            if h != g
+                && !regions[&h].is_disjoint(&regions[&g])
+                && !regions[&h].is_subset(&regions[&g])
+                && !regions[&g].is_subset(&regions[&h])
+            {
+                return Err(kind(
+                    "TerminatorKind::Goto",
+                    "overlapping regions without a natural nesting hierarchy",
+                ));
+            }
+        }
+    }
+    Ok(regions)
 }
 
 struct Fun<'a, 'c> {
@@ -265,6 +371,7 @@ struct Fun<'a, 'c> {
     diverges: bool,
     loops: BTreeMap<IrBlockId, Option<Loop>>,
     regions: BTreeMap<IrBlockId, BTreeSet<IrBlockId>>,
+    boundary: Option<RegionBoundary>,
     decls: Vec<Decl>,
     calls: BTreeSet<String>,
     types: BTreeSet<Ty>,
@@ -727,6 +834,7 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool) -> Lift<Lowere
         diverges: body.locals.first().is_some_and(|t| t.trim() == "!"),
         loops: BTreeMap::new(),
         regions: BTreeMap::new(),
+        boundary: None,
         decls: Vec::new(),
         calls: BTreeSet::new(),
         types: BTreeSet::new(),
@@ -1065,68 +1173,9 @@ impl Fun<'_, '_> {
         }
     }
 
-    /// Back edges, loop headers and their regions. A loop inside another
-    /// would make two helpers call each other: that is residue.
     fn find_loops(&mut self) -> Lift<()> {
-        let n = self.body.blocks.len();
-        let succ: Vec<Vec<IrBlockId>> = self
-            .body
-            .blocks
-            .iter()
-            .map(|b| b.terminator.successors())
-            .collect();
-        // Depth-first, iteratively: an edge to a block on the stack is a back
-        // edge.
-        let mut state = vec![0u8; n];
-        let mut back: Vec<(IrBlockId, IrBlockId)> = Vec::new();
-        let mut stack: Vec<(IrBlockId, usize)> = vec![(0, 0)];
-        state[0] = 1;
-        while let Some((b, i)) = stack.pop() {
-            if let Some(&s) = succ[b].get(i) {
-                stack.push((b, i + 1));
-                if s >= n {
-                    return Err(kind("TerminatorKind::Goto", "an edge to a missing block"));
-                }
-                match state[s] {
-                    0 => {
-                        state[s] = 1;
-                        stack.push((s, 0));
-                    }
-                    1 => back.push((b, s)),
-                    _ => {}
-                }
-            } else {
-                state[b] = 2;
-            }
-        }
-        let mut pred: Vec<Vec<IrBlockId>> = vec![Vec::new(); n];
-        for (b, ss) in succ.iter().enumerate() {
-            for &s in ss {
-                pred[s].push(b);
-            }
-        }
-        for (tail, head) in back {
-            let region = self.regions.entry(head).or_default();
-            region.insert(head);
-            let mut work = vec![tail];
-            while let Some(b) = work.pop() {
-                if region.insert(b) {
-                    work.extend(pred[b].iter().copied());
-                }
-            }
-        }
-        let heads: Vec<IrBlockId> = self.regions.keys().copied().collect();
-        for &h in &heads {
-            for &g in &heads {
-                if h != g && self.regions[&h].contains(&g) {
-                    return Err(kind(
-                        "TerminatorKind::Goto",
-                        "a loop nested in a loop, whose helpers would call each other",
-                    ));
-                }
-            }
-            self.loops.insert(h, None);
-        }
+        self.regions = natural_regions(self.body)?;
+        self.loops = self.regions.keys().map(|h| (*h, None)).collect();
         Ok(())
     }
 
@@ -1231,6 +1280,37 @@ impl Fun<'_, '_> {
 
     /// Control reaching `b`: a loop header becomes a call of its helper.
     fn goto(&mut self, b: IrBlockId, st: State) -> Lift<Expr> {
+        if let Some(boundary) = self.boundary.clone().filter(|r| !r.blocks.contains(&b)) {
+            if !st.lends.is_empty() {
+                return Err(kind(
+                    "TerminatorKind::Goto",
+                    "a region exit holding mutable borrows",
+                ));
+            }
+            let locals = boundary
+                .exits
+                .get(&b)
+                .ok_or_else(|| kind("TerminatorKind::Goto", "an undeclared region exit"))?;
+            let mut values = Vec::new();
+            for (local, ty) in locals {
+                match st.env.get(local) {
+                    Some(Val::V(value, actual)) if ty.same(actual) => values.push(value.clone()),
+                    _ => {
+                        return Err(kind(
+                            "TerminatorKind::Goto",
+                            "a region exit with an untransportable live value",
+                        ))
+                    }
+                }
+            }
+            let value = format!(
+                "(ctor {}.Exit{b}{})",
+                boundary.name,
+                values.iter().map(|v| format!(" {v}")).collect::<String>()
+            );
+            self.grow(&value)?;
+            return Ok(Expr::Flat(value));
+        }
         if !self.loops.contains_key(&b) {
             return self.block(b, st);
         }
@@ -1308,7 +1388,183 @@ impl Fun<'_, '_> {
             self.calls.insert(lp.name.clone());
         }
         self.grow(&call)?;
+        if let Some(boundary) = &lp.boundary {
+            if st.inside != Some(b) {
+                return self.continue_region(boundary, call, st);
+            }
+        }
         Ok(Expr::Flat(call))
+    }
+
+    fn returned(&self, value: String) -> String {
+        match &self.boundary {
+            Some(region) => format!("(ctor {}.Return {value})", region.name),
+            None => value,
+        }
+    }
+
+    fn continue_region(
+        &mut self,
+        region: &RegionBoundary,
+        call: String,
+        entry: State,
+    ) -> Lift<Expr> {
+        let mut arms = Vec::new();
+        let returned = self.fresh(Some("returned"), 0);
+        arms.push(Arm {
+            pattern: format!("{}.Return {returned}", region.name),
+            body: Expr::Flat(self.returned(returned)),
+        });
+        for (&target, locals) in &region.exits {
+            let mut state = entry.clone();
+            let mut names = Vec::new();
+            for (local, ty) in locals {
+                let name = self.fresh(
+                    self.body.names.get(*local).cloned().flatten().as_deref(),
+                    *local,
+                );
+                state.env.insert(*local, Val::V(name.clone(), ty.clone()));
+                state.binders.push((name.clone(), ty.clone()));
+                names.push(name);
+            }
+            let suffix = names.iter().map(|n| format!(" {n}")).collect::<String>();
+            state.path.push(MirStep::Match(
+                call.clone(),
+                format!("(ctor {}.Exit{target}{suffix})", region.name),
+            ));
+            arms.push(Arm {
+                pattern: format!("{}.Exit{target}{suffix}", region.name),
+                body: self.goto(target, state)?,
+            });
+        }
+        Ok(Expr::Match {
+            scrutinee: call,
+            arms,
+        })
+    }
+
+    fn region_boundary(
+        &mut self,
+        header: IrBlockId,
+        name: &str,
+        entry: &State,
+    ) -> Lift<Option<RegionBoundary>> {
+        if !self
+            .regions
+            .iter()
+            .any(|(parent, blocks)| *parent != header && blocks.contains(&header))
+        {
+            return Ok(None);
+        }
+        if entry.memory.is_some() || !entry.placed.is_empty() || !entry.lends.is_empty() {
+            return Err(kind(
+                "TerminatorKind::Goto",
+                "a nested region with untransportable memory or borrow state",
+            ));
+        }
+        let blocks = self.regions[&header].clone();
+        let mut written = BTreeSet::new();
+        let mut aliases = Vec::new();
+        for block in &self.body.blocks {
+            for statement in &block.statements {
+                if let IrStatement::Assign(destination, value) = statement {
+                    let reference = self
+                        .body
+                        .locals
+                        .get(destination.local)
+                        .is_some_and(|t| t.starts_with('&') || t.starts_with('*'));
+                    match value {
+                        IrRvalue::Ref(spec::MirBorrowKind::Mut, place) => {
+                            aliases.push((destination.local, place.local))
+                        }
+                        IrRvalue::Use(IrOperand::Copy(place) | IrOperand::Move(place))
+                            if reference =>
+                        {
+                            aliases.push((destination.local, place.local))
+                        }
+                        _ => {}
+                    }
+                }
+            }
+        }
+        for &b in &blocks {
+            let block = &self.body.blocks[b];
+            for statement in &block.statements {
+                if let IrStatement::Assign(destination, value) = statement {
+                    written.insert(destination.local);
+                    if let IrRvalue::Ref(spec::MirBorrowKind::Mut, place) = value {
+                        written.insert(place.local);
+                    }
+                }
+            }
+            if let IrTerminator::Call {
+                destination, args, ..
+            } = &block.terminator
+            {
+                written.insert(destination.local);
+                for arg in args {
+                    if let IrOperand::Copy(place) | IrOperand::Move(place) = arg {
+                        if self
+                            .body
+                            .locals
+                            .get(place.local)
+                            .is_some_and(|t| t.starts_with("&mut "))
+                        {
+                            written.insert(place.local);
+                        }
+                    }
+                }
+            }
+        }
+        loop {
+            let old = written.len();
+            for (alias, origin) in &aliases {
+                if written.contains(alias) {
+                    written.insert(*origin);
+                }
+            }
+            if old == written.len() {
+                break;
+            }
+        }
+        let targets: BTreeSet<_> = blocks
+            .iter()
+            .flat_map(|b| self.body.blocks[*b].terminator.successors())
+            .filter(|b| !blocks.contains(b))
+            .collect();
+        let mut exits = BTreeMap::new();
+        for target in targets {
+            let mut locals = Vec::new();
+            for local in self.live_at(target) {
+                if written.contains(&local) || !entry.env.contains_key(&local) {
+                    let ty = self.local_ty(local, &[])?;
+                    self.mention(&ty);
+                    locals.push((local, ty));
+                }
+            }
+            exits.insert(target, locals);
+        }
+        let mut name = crate::lex::pascal(&[name, "Exit"]);
+        while !self.used.insert(name.clone()) {
+            name.push('_');
+        }
+        let mut constructors = vec![("Return".into(), vec![self.result.render()])];
+        constructors.extend(exits.iter().map(|(target, locals)| {
+            (
+                format!("Exit{target}"),
+                locals.iter().map(|(_, t)| t.render()).collect(),
+            )
+        }));
+        self.decls.push(Decl::Data {
+            name: name.clone(),
+            constructors,
+            mutual: None,
+        });
+        Ok(Some(RegionBoundary {
+            name,
+            blocks,
+            exits,
+        }))
     }
 
     /// The helper of the loop at `h`, built on first use.
@@ -1528,6 +1784,9 @@ impl Fun<'_, '_> {
         } else {
             None
         };
+        let boundary = self.region_boundary(h, &name, entry)?;
+        let parent_boundary = self.boundary.clone();
+        self.boundary = boundary.clone();
         let lp = Loop {
             name: name.clone(),
             live: params.clone(),
@@ -1536,6 +1795,7 @@ impl Fun<'_, '_> {
             invariants: invariants.clone(),
             new: new.as_ref().map(|(n, _)| n.clone()),
             packet,
+            boundary: boundary.clone(),
         };
         self.loops.insert(h, Some(lp.clone()));
         self.measure = Some(measure.clone());
@@ -1553,9 +1813,9 @@ impl Fun<'_, '_> {
         if let Some(d) = lift::default_of(&self.result, self.cx.types) {
             for (c, holds) in invariants.iter().rev() {
                 let (then, otherwise) = if *holds {
-                    (body, Expr::Flat(d.clone()))
+                    (body, Expr::Flat(self.returned(d.clone())))
                 } else {
-                    (Expr::Flat(d.clone()), body)
+                    (Expr::Flat(self.returned(d.clone())), body)
                 };
                 body = Expr::If {
                     condition: Box::new(Expr::Flat(c.clone())),
@@ -1586,7 +1846,9 @@ impl Fun<'_, '_> {
             type_parameters: Vec::new(),
             name: name.clone(),
             parameters,
-            result: result.render(),
+            result: boundary
+                .as_ref()
+                .map_or_else(|| result.render(), |r| r.name.clone()),
             body,
             axioms: vec!["Quot.sound".into(), "propext".into()],
             recursive: None,
@@ -1594,6 +1856,7 @@ impl Fun<'_, '_> {
             mutual: None,
         });
         (self.scope, self.evidence, self.measure) = saved;
+        self.boundary = parent_boundary;
         Ok(lp)
     }
 
@@ -1903,6 +2166,7 @@ impl Fun<'_, '_> {
                         [one] => one.clone(),
                         _ => lift::tuple_value(&self.result, &items),
                     };
+                    let v = self.returned(v);
                     self.grow(&v)?;
                     return Ok(Expr::Flat(v));
                 }
@@ -1938,6 +2202,7 @@ impl Fun<'_, '_> {
                     }
                     lift::tuple_value(&self.result, &items)
                 };
+                let v = self.returned(v);
                 self.grow(&v)?;
                 Ok(Expr::Flat(v))
             }
@@ -1986,7 +2251,7 @@ impl Fun<'_, '_> {
                                 "a diverging body whose result has no value to stand for `!`",
                             )
                         })?;
-                        return Ok(Expr::Flat(d));
+                        return Ok(Expr::Flat(self.returned(d)));
                     }
                     return self.unreachable(&st, callee);
                 };
@@ -2688,7 +2953,7 @@ impl Fun<'_, '_> {
                 "a result type with no value to stand for a path proved unreachable",
             )
         })?;
-        Ok(Expr::Flat(d))
+        Ok(Expr::Flat(self.returned(d)))
     }
 
     fn switch(
@@ -8978,6 +9243,42 @@ mod tests {
             Some((1 << 127, u128::MAX))
         );
         assert_eq!(niche(1, u128::MAX, u128::MAX), Some(0));
+    }
+
+    #[test]
+    fn natural_regions_refuse_irreducible_or_malformed_graphs_ue_63() {
+        let block = |terminator| super::super::ir::IrBlock {
+            statements: Vec::new(),
+            terminator,
+            span: None,
+        };
+        let condition = IrOperand::Copy(IrPlace {
+            local: 1,
+            projection: Vec::new(),
+        });
+        let body = IrBody {
+            blocks: vec![
+                block(IrTerminator::Switch(condition.clone(), vec![(0, 1)], 2)),
+                block(IrTerminator::Goto(2)),
+                block(IrTerminator::Switch(condition, vec![(0, 1)], 3)),
+                block(IrTerminator::Return),
+            ],
+            ..IrBody::default()
+        };
+        assert!(natural_regions(&body)
+            .unwrap_err()
+            .detail()
+            .contains("irreducible"));
+        let mut broken = body.clone();
+        broken.blocks[3].terminator = IrTerminator::Goto(99);
+        assert!(natural_regions(&broken)
+            .unwrap_err()
+            .detail()
+            .contains("missing block"));
+        assert!(natural_regions(&IrBody::default())
+            .unwrap_err()
+            .detail()
+            .contains("without an entry"));
     }
 
     #[test]

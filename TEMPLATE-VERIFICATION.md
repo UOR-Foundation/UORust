@@ -692,3 +692,27 @@ checks their manifests before reuse. Workspace instructions persist the user's
 structural delivery requirement without modifying immutable repository policy.
 This guard enforces campaign discipline; it does not create missing Rust
 semantics or change the all-functions finish line. Full `just vv` remains open.
+
+## Compositional compiler control-flow regions (UE-63)
+
+The compiler-derived regression initially refuses nested control flow because
+function-sized loop continuations create cyclic helper calls. Natural regions
+now derive from compiler edges and dominating headers. Inner regions return
+explicit exit packets; their callers own continuations. Conservative MIR write
+analysis keeps unchanged frame values in their caller and transports changed
+live state. Region outcomes also preserve early returns and distinct exits.
+
+The structural analysis uses one linear-size reachability set per loop header,
+with an acyclic fast path, rather than a quadratic dominator matrix. Existing
+non-nested lowering retains its emitted representation and proof identities.
+No standard-operation model row changes.
+
+Four nested, triple, early-return and multi-exit functions pass actual SDK
+proofs. All 128 closed SDK results agree with an executable Rust oracle. An
+overflowing fifth function remains refused, and live mutable-borrow transport
+remains typed residue. Independent CFG cases reject irreducible entries, missing
+blocks and an absent entry. A planted lost Boolean exit state is rejected by
+LLV7002 because an oracle proposition is false. Exact match-path evidence is
+retained in every recursive decrease obligation; no termination gate is weakened.
+These are development checks; full `just vv`, translator certification and
+consumer adoption remain separate acceptance requirements.

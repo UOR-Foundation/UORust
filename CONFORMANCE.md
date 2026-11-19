@@ -83,6 +83,7 @@ model does not sanction.
 | `UE-60` | `build` | Native HashMap get, contains_key, len and is_empty read the existing unordered logical carrier through shared standard-library models, using primitive or already-admitted derived equality without inventing iteration order; custom key equality, hasher observations and unordered iteration remain typed refusals |
 | `UE-61` | `build` | Native first-class calls reuse admitted immutable workspace signatures and exact standard Rc/Arc AsRef, Borrow and Deref content adapters; mutable signatures, custom owners and mismatched targets remain typed residue |
 | `UE-62` | `build` | Delivery automation rejects leaf-fix plans, partial registry scopes, unbound model authorities, unchanged failed work, and unsupported completion claims; exact verified receipts are reused only while their bound artifacts remain intact |
+| `UE-63` | `build` | Compiler-derived natural control-flow regions compose through explicit exit-state packets and retained immutable frames, supporting nested loops, distinct exits and early returns without cyclic continuations; actual SDK termination and overflow obligations remain mandatory, and irreducible or unsupported borrow states remain typed refusals |
 
 ## factory
 

@@ -423,3 +423,11 @@ Feature: engine
     Then leaf plans, partial scopes and unchanged failures are rejected before work
     And verified identical work reuses its intact receipt
     But a changed artifact or unsupported completion claim is rejected
+
+  @UE-63 @build
+  Scenario: Compiler control-flow regions compose without cyclic continuations
+    Given nested compiler loops with immutable frames and changing value state
+    When UORust derives region boundaries and composes their exit continuations
+    Then actual SDK results agree with executable Rust across nested and triple loops, early returns and distinct exits
+    And overflow obligations still refuse an unsafe candidate
+    But irreducible regions or untransportable borrows remain typed refusals
