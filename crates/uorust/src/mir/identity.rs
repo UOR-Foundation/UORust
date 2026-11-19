@@ -25,6 +25,28 @@ impl Method {
 }
 pub(crate) type Bindings = BTreeMap<String, BTreeMap<String, super::lower::Callee>>;
 
+pub(crate) fn parts(callee: &str) -> Option<(String, String, String)> {
+    let expr = syn::parse_str::<syn::ExprPath>(callee).ok()?;
+    let qualified = expr.qself?;
+    if qualified.position == 0 || qualified.position + 1 != expr.path.segments.len() {
+        return None;
+    }
+    let mut path = expr.path;
+    let name = path.segments.pop()?;
+    if !matches!(name.arguments, syn::PathArguments::None) {
+        return None;
+    }
+    Some((
+        name.ident.to_string(),
+        qualified.ty.to_token_stream().to_string(),
+        path.segments
+            .iter()
+            .map(|s| s.to_token_stream().to_string())
+            .collect::<Vec<_>>()
+            .join("::"),
+    ))
+}
+
 pub(crate) fn qualified(path: &str) -> bool {
     path.starts_with('<') && path.contains(" as ")
 }
@@ -48,24 +70,9 @@ impl<'a> Index<'a> {
         callee: &str,
         read: impl Fn(&str) -> Option<TypeIdentity>,
     ) -> Option<&'a super::lower::Callee> {
-        let expr = syn::parse_str::<syn::ExprPath>(callee).ok()?;
-        let qualified = expr.qself?;
-        if qualified.position == 0 || qualified.position + 1 != expr.path.segments.len() {
-            return None;
-        }
-        let mut path = expr.path;
-        let name = path.segments.pop()?;
-        if !matches!(name.arguments, syn::PathArguments::None) {
-            return None;
-        }
-        let candidates = self.methods.get(&name.ident.to_string())?;
-        let owner = read(&qualified.ty.to_token_stream().to_string())?;
-        let reference = path
-            .segments
-            .iter()
-            .map(|s| s.to_token_stream().to_string())
-            .collect::<Vec<_>>()
-            .join("::");
+        let (name, owner, reference) = parts(callee)?;
+        let candidates = self.methods.get(&name)?;
+        let owner = read(&owner)?;
         let trait_identity = read(&reference)?;
         let mut matching = candidates.iter().copied().filter(|callee| {
             let method = callee.method.as_ref().expect("indexed method");

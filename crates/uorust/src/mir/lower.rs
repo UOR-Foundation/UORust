@@ -51,6 +51,15 @@ pub(crate) struct Callee {
     pub(crate) threads: Option<(Ty, Vec<usize>)>,
 }
 
+/// Actual compiler body and its definition's own type environment.
+pub(crate) struct CompilerDefinition<'a> {
+    pub(crate) body: &'a IrBody,
+    pub(crate) types: &'a Types,
+    pub(crate) source_sigs: &'a BTreeMap<String, lift::Sig>,
+    pub(crate) consts: &'a BTreeMap<String, IrBody>,
+    pub(crate) krate: String,
+}
+
 /// A source constant's exact admitted value model, distinct from a function item.
 #[derive(Clone, Debug)]
 pub(crate) struct Constant {
@@ -76,6 +85,7 @@ pub(crate) struct Cx<'a> {
     pub(crate) callees: &'a BTreeMap<String, Callee>,
     /// Compiler imports are bound to a registered function question.
     pub(crate) compiler_scope: String,
+    pub(crate) compiler_definitions: &'a BTreeMap<String, CompilerDefinition<'a>>,
     pub(crate) compiler_bindings: &'a super::identity::Bindings,
     pub(crate) closure_scopes: &'a BTreeMap<String, String>,
     /// Actual source constant declarations, never inferred from zero-arity functions.
@@ -141,6 +151,7 @@ impl<'a> Cx<'a> {
             widths: self.widths,
             callees: self.callees,
             compiler_scope: self.compiler_scope.clone(),
+            compiler_definitions: self.compiler_definitions,
             compiler_bindings: self.compiler_bindings,
             closure_scopes: self.closure_scopes,
             constants: self.constants,
@@ -3935,6 +3946,7 @@ impl Fun<'_, '_> {
             {
                 return None;
             }
+            self.import_compiler_definition(&c).ok()?;
             self.calls.insert(c.name.clone());
             let arguments: Vec<String> = (0..c.params.len())
                 .map(|i| self.fresh(Some("argument"), i))
@@ -6347,6 +6359,7 @@ impl Fun<'_, '_> {
                 }
                 term
             };
+            self.import_compiler_definition(&c)?;
             self.calls.insert(c.name.clone());
             return Ok(Called {
                 binding,
@@ -7560,6 +7573,57 @@ impl Fun<'_, '_> {
             }
             _ => None,
         }
+    }
+
+    /// Import a content-bound compiler dependency through the ordinary lowering.
+    fn import_compiler_definition(&mut self, callee: &Callee) -> Lift<()> {
+        let Some(definition) = self.cx.compiler_definitions.get(&callee.name) else {
+            return Ok(());
+        };
+        let k = spec::MirTerminatorKind::Call.path();
+        if self.cx.active.contains(&callee.name) || self.name == callee.name {
+            return Err(kind(
+                k,
+                "a compiler dependency cycle whose measure is not derived",
+            ));
+        }
+        if self.aux.contains_key(&callee.name) {
+            return Ok(());
+        }
+        let mut active = self.cx.active.to_vec();
+        active.push(callee.name.clone());
+        let mut cx = self.cx.within(&active);
+        cx.types = definition.types;
+        cx.source_sigs = definition.source_sigs;
+        cx.consts = definition.consts;
+        cx.krate.clone_from(&definition.krate);
+        cx.compiler_scope.clone_from(&callee.name);
+        let lowered = lower(&cx, definition.body, &callee.name)?;
+        let expected_result = callee
+            .threads
+            .as_ref()
+            .map_or(&callee.result, |(t, _)| t)
+            .render();
+        let expected_parameters: Vec<_> = callee.params.iter().map(Ty::render).collect();
+        if !lowered.decls.iter().any(|d| {
+            matches!(d, Decl::Definition { name, parameters, result, .. }
+            if name == &callee.name && result == &expected_result
+                && parameters.iter().map(|(_, t)| t).eq(expected_parameters.iter()))
+        }) {
+            return Err(kind(
+                k,
+                "compiler dependency ABI differs from its lowered body",
+            ));
+        }
+        self.calls.extend(lowered.calls);
+        self.types.extend(lowered.types);
+        for declaration in lowered.decls {
+            self.aux.insert(declaration.name().to_string(), declaration);
+        }
+        for (name, declaration) in lowered.aux {
+            self.aux.entry(name).or_insert(declaration);
+        }
+        Ok(())
     }
 
     /// The definition an instance of a library body is lowered to, shared
@@ -9749,6 +9813,7 @@ mod tests {
             widths: &[(64, vec!["test".into()])],
             callees: &BTreeMap::new(),
             compiler_scope: String::new(),
+            compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),

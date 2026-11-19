@@ -5526,6 +5526,118 @@ fn mir_lift(
             }
         }
     }
+    // Compiler-generated bodies have their own closed crate/target frame.
+    // Registered source functions keep their existing provider and identity.
+    let registered: BTreeSet<_> = ctx
+        .all_fns()
+        .into_iter()
+        .filter_map(|r| {
+            let mut key = definition_keys.get(&ctx.path(r))?.clone();
+            if let Some((file, _, _)) = &mut key.impl_at {
+                file.clone_from(&ctx.file(r).rel);
+            }
+            Some(key)
+        })
+        .collect();
+    let no_consts = BTreeMap::new();
+    let mut compiler_definitions = BTreeMap::new();
+    let mut definition_frames = BTreeMap::new();
+    for (key, definition) in &dumps.compiler_identities {
+        if definition.parametric || registered.contains(key) {
+            continue;
+        }
+        let Some(body) = dumps.definitions.get(key) else {
+            continue;
+        };
+        let targets: Vec<_> = ctx
+            .ws
+            .packages
+            .iter()
+            .enumerate()
+            .flat_map(|(pkg, p)| {
+                p.targets.iter().enumerate().filter_map(move |(target, t)| {
+                    (t.name.replace('-', "_") == key.krate).then_some((pkg, target))
+                })
+            })
+            .collect();
+        let [at @ (pkg, _)] = targets.as_slice() else {
+            continue;
+        };
+        let Some(types) = scopes.get(at) else {
+            continue;
+        };
+        let Some((method_name, owner, reference)) =
+            crate::mir::identity::parts(&definition.identity)
+        else {
+            continue;
+        };
+        let Some(method) =
+            crate::mir::identity::Method::new(&owner, &reference, &method_name, |text| {
+                resolver.compiler_definition_type_identity(at.0, at.1, text)
+            })
+        else {
+            continue;
+        };
+        let signature: Result<_, Residue> = (|| {
+            let params: Vec<_> = (1..=body.arity)
+                .map(|i| {
+                    let text = &body.locals[i];
+                    lower::ty(lower::mut_target(text).unwrap_or(text), types)
+                })
+                .collect::<Result<_, Residue>>()?;
+            let result = lower::ty(&body.locals[0], types)?;
+            if params
+                .iter()
+                .chain(std::iter::once(&result))
+                .any(|t| !t.parameters().is_empty())
+            {
+                return Err(Residue::Type("open compiler dependency interface".into()));
+            }
+            let positions: Vec<_> = lower::threaded(&body.locals, body.arity, false, types)
+                .into_iter()
+                .map(|i| i - 1)
+                .collect();
+            let rest = positions
+                .iter()
+                .map(|&i| params[i].clone())
+                .collect::<Vec<_>>();
+            let full = lower::threaded_result(&result, &rest, types);
+            Ok((params, result, positions, full))
+        })();
+        let Ok((params, result, positions, full)) = signature else {
+            continue;
+        };
+        let identity = format!(
+            "{}:{}:{}:{}",
+            key.krate, body.path, definition.identity, definition.body_sha256
+        );
+        let name = format!("compilerBody{}", sha(identity.as_bytes()));
+        if !names.insert(name.clone()) {
+            continue;
+        }
+        callees.insert(
+            name.clone(),
+            lower::Callee {
+                name: name.clone(),
+                method: Some(method),
+                params,
+                result,
+                generic: None,
+                threads: (!positions.is_empty()).then_some((full, positions)),
+            },
+        );
+        definition_frames.insert(name.clone(), (*at, crate::mir::identity::references(body)));
+        compiler_definitions.insert(
+            name,
+            lower::CompilerDefinition {
+                body,
+                types,
+                source_sigs: &source_sigs[*pkg],
+                consts: dumps.consts.get(&key.krate).unwrap_or(&no_consts),
+                krate: key.krate.clone(),
+            },
+        );
+    }
     // The source question owns its Rust generic scope. Compiler spellings
     // from another function must never supply that scope implicitly.
     let frame = |r: FnRef| crate::register::kappa(&ctx.path(r), &ctx.func(r).tokens);
@@ -5575,13 +5687,24 @@ fn mir_lift(
         }
         compiler_bindings.insert(scope, imports);
     }
+    for (scope, ((pkg, target), requests)) in definition_frames {
+        let imports = requests
+            .into_iter()
+            .filter_map(|request| {
+                let callee = index.resolve(&request, |text| {
+                    resolver.compiler_definition_type_identity(pkg, target, text)
+                })?;
+                Some((request, callee.clone()))
+            })
+            .collect();
+        compiler_bindings.insert(scope, imports);
+    }
     // The functions the MIR path translates, by LexLean name.
     let translations: BTreeMap<String, String> = todo
         .iter()
         .map(|(r, name, _)| (name.clone(), ctx.path(*r)))
         .collect();
     // Translate each.
-    let no_consts = BTreeMap::new();
     let mut done: BTreeMap<String, Translation> = BTreeMap::new();
     for (r, name, body) in todo {
         let path = ctx.path(r);
@@ -5591,6 +5714,7 @@ fn mir_lift(
             widths: &widths,
             callees: &callees,
             compiler_scope: frame(r),
+            compiler_definitions: &compiler_definitions,
             compiler_bindings: &compiler_bindings,
             closure_scopes: &closure_scopes,
             constants,

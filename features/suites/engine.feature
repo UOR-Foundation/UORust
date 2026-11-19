@@ -592,3 +592,10 @@ Feature: engine
     When no semantic decision or dependency changes between verifier attempts
     Then the existing projected package supplies the next SDK attempt
     And unchanged statement and proof bytes remain bound to the same candidates
+
+  @UE-85 @build
+  Scenario: Generated implementation dependencies import their actual compiler bodies
+    Given compiler-generated methods without handwritten impl headers
+    When the pinned compiler records qualified identities beside their MIR
+    Then the shared dependency importer binds and verifies their actual bodies
+    But stale input bindings and ambiguous definition origins are refused

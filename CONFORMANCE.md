@@ -105,6 +105,7 @@ model does not sanction.
 | `UE-82` | `build` | Imported model type dependencies resolve through actual local algebraic declarations and content-bound qualified prelude type declarations; term declarations, missing names and unrelated namespaces cannot stand for a type |
 | `UE-83` | `build` | Compiler-generated call results inside recursive regions are evaluated once and transported through a shared typed constructor binding; recursive evidence quantifies exactly the enclosing match binders and path hypotheses required by the pinned SDK |
 | `UE-84` | `build` | Proof campaigns reuse the same dependency-scoped projected package for SDK-observed axiom-policy-only retries, preserving every statement and proof byte; semantic decisions reproject, and the report measures actual projections and package reuses |
+| `UE-85` | `build` | Compiler-generated local implementation dependencies retain their exact source identities and import actual closed MIR bodies using same-compilation qualified owner and trait metadata; mismatched source/body bindings and ambiguous origins cannot supply a method model |
 
 ## factory
 

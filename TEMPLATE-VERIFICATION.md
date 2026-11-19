@@ -1386,3 +1386,40 @@ test-name suffix; retaining the original capability's name restored the complete
 claim mapping. Repo-conformance, strict all-target Clippy, generated model,
 immutable template/SDK-lock and self-model checks then passed. No gate was
 weakened and no elapsed-time speedup is inferred from unequal fixture stages.
+
+
+## UE-85: compiler-generated dependency body import
+
+The registered loader regression initially found zero definitions for an actual
+compiler-derived implementation whose source origin is a derive attribute. It
+expected one. Compiler definitions are now retained before handwritten impl
+header lookup. The compiler's graph output from the same invocation provides
+fully qualified owner and trait identities, alongside the exact MIR bytes.
+
+A companion catalogue binds these identities to the source, configuration,
+pinned compiler and individual body hashes. Capture-only augmentation compares
+every imported body with the saved MIR before writing the companion; saved MIR
+is never replaced. Closed dependency interfaces use the existing Rust identity
+resolver and ordinary body lowering in their own crate/target frame. Their
+shared declarations enter the caller's actual SDK package. A catalogue or model
+envelope alone is not evidence that a registered function lifted. Open generic
+interfaces and ambiguous definitions cannot supply an imported method.
+
+Focused controls cover changed source, configuration and body bytes, ambiguous
+origins, unsafe paths, fully qualified module identities, and generic markers.
+The SDK fixture compares generated clone, equality and enum-default behavior
+with actual Rust results and plants an incorrect result for rejection. Complete
+release acceptance remains the unchanged `just vv` boundary.
+
+The actual SDK fixture passed all nine Rust comparisons and rejected the planted
+wrong result with LLV7002 in 100.44 seconds. Capture-only replay reproduced the
+companion byte-for-byte. All 84 MIR controls, 20 name-resolution controls and 16
+CLI checks passed. Exact rooted CLI replay still required zero verifier calls;
+the fresh qualification measured ten proofs, one semantic refusal, five SDK
+attempts, four native-stage projections and two policy-package reuses. These
+fixture counts do not claim additional consumer functions.
+
+Repo-conformance and strict all-target Clippy passed. The unchanged model gate
+required an explicit `Residue` collector type; the self-model gate detected
+changed source spans, which the canonical writer regenerated. Model validation,
+template and SDK-lock checks, and generated self-model checks then passed.

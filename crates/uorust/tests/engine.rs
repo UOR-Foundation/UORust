@@ -4357,6 +4357,147 @@ fn main(){assert!(std::panic::catch_unwind(||overflow(2,Some(255))).is_err());le
 }
 
 /// UE-64: one model bridge, exercised across unrelated standard receiver types.
+/// Compiler-generated dependencies use actual closed bodies, not operation recipes.
+#[test]
+fn generated_dependencies_import_compiler_bodies_ue_85() {
+    let dir = scratch("compiler-dependencies", &[
+        ("Cargo.toml", "[package]\nname=\"compiler_dependencies\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+#[derive(Clone,PartialEq)] pub struct Value {pub flag:bool}
+#[derive(Default)] pub enum Choice {#[default] First, Second}
+pub mod nested {#[derive(Clone,PartialEq)] pub struct Value {pub flag:bool}}
+pub fn copied(mut n:u8,x:&Value)->bool {while n>0 {n-=1;} x.clone().flag}
+pub fn nested_copy(mut n:u8,x:&nested::Value)->bool {while n>0 {n-=1;} x.clone().flag}
+pub fn equal(mut n:u8,x:&Value,y:&Value)->bool {while n>0 {n-=1;} <Value as PartialEq>::eq(x,y)}
+pub fn first(mut n:u8)->bool {while n>0 {n-=1;} matches!(Choice::default(),Choice::First)}
+"#),
+        ("src/bin/vectors.rs", r#"
+use compiler_dependencies::*;
+fn main(){for x in [false,true] {
+println!("copied|2 (record CompilerDependenciesValue {{flag := {x}}})|{}",copied(2,&Value{flag:x}));
+println!("nested_copy|2 (record CompilerDependenciesNestedValue {{flag := {x}}})|{}",nested_copy(2,&nested::Value{flag:x}));
+for y in [false,true] {println!("equal|2 (record CompilerDependenciesValue {{flag := {x}}}) (record CompilerDependenciesValue {{flag := {y}}})|{}",equal(2,&Value{flag:x},&Value{flag:y}));}
+} println!("first|2|{}",first(2));}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    let dumps = dumped(&dir, "compiler-dependencies");
+    let companion = dumps.with_extension("compiler-definitions.toml");
+    let catalogue = std::fs::read(&companion).unwrap();
+    uorust::mir::definitions::augment(&dir, &dumps).unwrap();
+    assert_eq!(
+        std::fs::read(&companion).unwrap(),
+        catalogue,
+        "same-input companion changed on capture-only replay"
+    );
+    let mut opts = options("compiler_dependencies");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    for function in ["copied", "nested_copy", "equal", "first"] {
+        let path = format!("compiler_dependencies::{function}");
+        assert!(
+            text(&proposed, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    let cache = dir.join("verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("compiler_dependencies"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, input, expected] = parts.as_slice() else {
+            panic!("{line}")
+        };
+        let path = format!("compiler_dependencies::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: dependencyVector{i}, parameters: [], statement: (({name} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    assert_eq!(reference.lines().count(), 9);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let defect = body.replacen("= false)", "= true)", 1);
+    assert_ne!(body, defect);
+    std::fs::write(&file, defect).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::write(&file, &body).unwrap();
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 #[test]
 fn native_calls_import_source_semantic_models_ue_64_ue_81_ue_82_ue_83() {
     let dir=scratch("source-model-import",&[("Cargo.toml","[package]\nname=\"source_models\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"

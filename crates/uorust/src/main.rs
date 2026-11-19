@@ -355,6 +355,9 @@ struct MirArgs {
     /// Build for this target triple; the host's when absent.
     #[arg(long)]
     target: Option<String>,
+    /// Capture qualified compiler identities for these existing dumps without replacing them.
+    #[arg(long, conflicts_with_all = ["features", "no_default_features", "all_features", "target"])]
+    compiler_definitions_only: bool,
 }
 
 #[derive(clap::Args)]
@@ -865,6 +868,14 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Mir(args) => {
+            if args.compiler_definitions_only {
+                uorust::mir::definitions::augment(&args.workspace, &args.out)?;
+                println!(
+                    "captured compiler definition identities for {}",
+                    args.out.display()
+                );
+                return Ok(());
+            }
             let config = uorust::shard::Configuration {
                 features: args
                     .features

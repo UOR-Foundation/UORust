@@ -3364,6 +3364,22 @@ impl Resolver<'_> {
         self.identity_type(self.reading(f), text)
     }
 
+    pub(crate) fn compiler_definition_type_identity(
+        &self,
+        pkg: usize,
+        target: usize,
+        text: &str,
+    ) -> Option<TypeIdentity> {
+        self.identity_type(
+            Reading {
+                module: (pkg, target, String::new()),
+                generics: &[],
+                this: None,
+            },
+            text,
+        )
+    }
+
     pub(crate) fn compiler_type_identity(&self, f: FnId, text: &str) -> Option<TypeIdentity> {
         let mut reading = self.reading(f);
         reading.module.2.clear();

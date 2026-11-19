@@ -31,6 +31,7 @@ pub(crate) mod site;
 pub(crate) mod spec;
 pub(crate) mod trips;
 
+pub mod definitions;
 #[cfg(test)]
 mod generate;
 pub(crate) mod identity;
@@ -109,6 +110,7 @@ pub const FLAGS: &[&str] = &[
     "-Cdebug-assertions=off",
     "--emit=metadata",
     "-Zalways-encode-mir",
+    "-Zdump-mir-graphviz",
 ];
 
 /// The file a trial projection lists its translations on trial in.
@@ -129,7 +131,31 @@ pub fn dump(
     out: &Path,
     config: &crate::shard::Configuration,
 ) -> Result<(), UorustError> {
+    dump_inner(root, out, config, false)
+}
+
+fn dump_inner(
+    root: &Path,
+    out: &Path,
+    config: &crate::shard::Configuration,
+    capture_only: bool,
+) -> Result<(), UorustError> {
     let tool = |what: &str, reason: String| UorustError::Tool(format!("{what}: {reason}"));
+    let compiler = Command::new("rustc")
+        .arg("-vV")
+        .current_dir(root)
+        .output()
+        .map_err(|e| tool("rustc -vV", e.to_string()))?;
+    if !compiler.status.success()
+        || !String::from_utf8_lossy(&compiler.stdout)
+            .lines()
+            .any(|line| line == format!("release: {TOOLCHAIN}"))
+    {
+        return Err(tool(
+            "compiler definitions",
+            format!("requires pinned rustc {TOOLCHAIN}"),
+        ));
+    }
     let meta = Command::new("cargo")
         .args([
             "metadata",
@@ -166,6 +192,7 @@ pub fn dump(
     let sysroot = crate::shard::sysroot(root, None)?;
     let recorded = out.join(crate::shard::CONFIGURATION);
     std::fs::write(&recorded, config.render(&triple)).map_err(|e| io(&recorded, e))?;
+    let mut compiler_definitions = Vec::new();
     for package in packages {
         let name = package
             .get("name")
@@ -173,17 +200,19 @@ pub fn dump(
             .unwrap_or_default();
         // The package's own artifacts are cleaned, so that each of its
         // targets compiles again and dumps; its dependencies stay built.
-        let clean = Command::new("cargo")
-            .args(["clean", "--locked", "--offline", "-p", name])
-            .current_dir(root)
-            .env("CARGO_TARGET_DIR", &target_dir)
-            .output()
-            .map_err(|e| tool("cargo clean", e.to_string()))?;
-        if !clean.status.success() {
-            return Err(tool(
-                &format!("cargo clean -p {name}"),
-                String::from_utf8_lossy(&clean.stderr).into_owned(),
-            ));
+        if !capture_only {
+            let clean = Command::new("cargo")
+                .args(["clean", "--locked", "--offline", "-p", name])
+                .current_dir(root)
+                .env("CARGO_TARGET_DIR", &target_dir)
+                .output()
+                .map_err(|e| tool("cargo clean", e.to_string()))?;
+            if !clean.status.success() {
+                return Err(tool(
+                    &format!("cargo clean -p {name}"),
+                    String::from_utf8_lossy(&clean.stderr).into_owned(),
+                ));
+            }
         }
         // The configuration this package is built in: the features of
         // `config` it declares.
@@ -192,7 +221,12 @@ pub fn dump(
             .and_then(serde_json::Value::as_object)
             .map(|f| f.keys().cloned().collect())
             .unwrap_or_default();
-        let own_config = config.for_package(name, &declared);
+        let mut own_config = config.for_package(name, &declared);
+        if capture_only
+            && own_config.target.as_deref() == Some(crate::shard::host(root, None)?.as_str())
+        {
+            own_config.target = None;
+        }
         let targets = package
             .get("targets")
             .and_then(serde_json::Value::as_array)
@@ -247,6 +281,7 @@ pub fn dump(
                     String::from_utf8_lossy(&run.stderr).into_owned(),
                 ));
             }
+            definitions::collect(&dir, out, &mut compiler_definitions)?;
             // Only the bodies the translator reads are kept.
             for entry in std::fs::read_dir(&dir).map_err(|e| io(&dir, e))? {
                 let path = entry.map_err(|e| io(&dir, e))?.path();
@@ -258,7 +293,7 @@ pub fn dump(
                     std::fs::remove_file(&path).map_err(|e| io(&path, e))?;
                 }
             }
-            if kind == "lib" {
+            if kind == "lib" && !capture_only {
                 // The package's sources as the dump names them: relative to
                 // the workspace root, which cargo runs rustc in.
                 let own = package
@@ -288,6 +323,7 @@ pub fn dump(
             }
         }
     }
+    definitions::write(root, out, compiler_definitions)?;
     record_layouts(root, out)
 }
 
@@ -360,6 +396,7 @@ pub(crate) struct Dumps {
     /// Compiler source identities preserve overloaded implementation bodies.
     /// Repeated source identities are removed rather than guessed.
     pub(crate) definitions: BTreeMap<crate::embedding::Key, IrBody>,
+    pub(crate) compiler_identities: BTreeMap<crate::embedding::Key, definitions::Definition>,
     /// The constants' bodies (promoted constants and constant items), by
     /// crate and the path MIR prints for them where they are used.
     pub(crate) consts: BTreeMap<String, BTreeMap<String, IrBody>>,
@@ -464,10 +501,10 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
                         .or_default()
                         .insert(t, body.clone());
                 }
-                let Some(path) = resolve_impls(root, root, &body.path) else {
-                    continue;
-                };
-                body.path.clone_from(&path);
+                let resolved = resolve_impls(root, root, &body.path);
+                if let Some(path) = &resolved {
+                    body.path.clone_from(path);
+                }
                 if let Some(key) = definition_key.filter(|key| key.impl_at.is_some()) {
                     if dumps
                         .definitions
@@ -477,6 +514,9 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
                         ambiguous_definitions.insert(key);
                     }
                 }
+                let Some(path) = resolved else {
+                    continue;
+                };
                 if entry.insert(path.clone(), body).is_some() {
                     ambiguous.push((krate.clone(), path));
                 }
@@ -492,6 +532,7 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
     for key in ambiguous_definitions {
         dumps.definitions.remove(&key);
     }
+    dumps.compiler_identities = definitions::load(root, dir)?;
     Ok(dumps)
 }
 
@@ -589,6 +630,31 @@ pub(super) fn impl_header(root: &Path, span: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn generated_compiler_definitions_survive_source_header_lookup_ue_85() {
+        let dir = std::env::temp_dir().join(format!(
+            "uorust-generated-definition-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "#[derive(Default)]\npub struct Mark { pub flag: bool }\n",
+        )
+        .unwrap();
+        let target = dir.join("dumps/lib-generated");
+        std::fs::create_dir_all(&target).unwrap();
+        let body = "fn <impl at src/lib.rs:1:10: 1:17>::default() -> Mark {\n    let mut _0: Mark;\n    bb0: {\n        _0 = Mark { flag: const false };\n        return;\n    }\n}\n";
+        std::fs::write(target.join(format!("derived{DUMPED}")), body).unwrap();
+        let loaded = load(&dir, &dir.join("dumps")).unwrap();
+        assert_eq!(
+            loaded.definitions.len(),
+            1,
+            "compiler-generated body was discarded before identity import"
+        );
+        std::fs::remove_dir_all(dir).unwrap();
+    }
 
     #[test]
     fn repeated_compiler_source_identities_remain_ambiguous_ue_78() {
