@@ -284,11 +284,10 @@ fn metadata(root: &Path) -> Result<Value, UorustError> {
 
 fn read_toml(path: &Path) -> Result<toml::Value, UorustError> {
     let text = std::fs::read_to_string(path).map_err(|e| io(path, e))?;
-    toml::from_str::<toml::Value>(&text)
-        .map_err(|e| UorustError::Malformed {
-            path: path.to_path_buf(),
-            reason: e.to_string(),
-        })
+    toml::from_str::<toml::Value>(&text).map_err(|e| UorustError::Malformed {
+        path: path.to_path_buf(),
+        reason: e.to_string(),
+    })
 }
 
 fn lints_of(table: Option<&toml::Value>) -> BTreeMap<String, String> {

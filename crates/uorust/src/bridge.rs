@@ -465,11 +465,10 @@ pub(crate) fn project(
             continue;
         }
         let text = crate::embed::read_text(&file)?;
-        let doc: toml::Table = toml::from_str(&text)
-                .map_err(|e| UorustError::Malformed {
-                    path: file.clone(),
-                    reason: format!("{e}"),
-                })?;
+        let doc: toml::Table = toml::from_str(&text).map_err(|e| UorustError::Malformed {
+            path: file.clone(),
+            reason: format!("{e}"),
+        })?;
         let rows = doc
             .get("fn")
             .and_then(toml::Value::as_array)

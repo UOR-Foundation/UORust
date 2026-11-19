@@ -503,8 +503,8 @@ pub(crate) fn read(root: &Path, ws: &Workspace, mut syntax: Syntax) -> Result<Sy
 /// does not.
 fn default_features(manifest: &Path) -> Result<BTreeSet<String>, UorustError> {
     let text = std::fs::read_to_string(manifest).map_err(|e| io(manifest, e))?;
-    let value: toml::Value = toml::from_str(&text)
-        .map_err(|e: toml::de::Error| UorustError::Malformed {
+    let value: toml::Value =
+        toml::from_str(&text).map_err(|e: toml::de::Error| UorustError::Malformed {
             path: manifest.to_path_buf(),
             reason: e.to_string(),
         })?;

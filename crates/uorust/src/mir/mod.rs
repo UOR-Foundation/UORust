@@ -334,8 +334,8 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
             path: recorded.clone(),
             reason,
         };
-        let doc: toml::Table = toml::from_str(&text)
-            .map_err(|e: toml::de::Error| bad(e.to_string()))?;
+        let doc: toml::Table =
+            toml::from_str(&text).map_err(|e: toml::de::Error| bad(e.to_string()))?;
         for t in doc
             .get("target")
             .and_then(toml::Value::as_array)

@@ -6956,8 +6956,7 @@ mod tests {
     }
 
     fn toml_of(files: &BTreeMap<String, Vec<u8>>, path: &str) -> toml::Value {
-        toml::from_str(&String::from_utf8_lossy(&files[path]))
-            .expect("the file is TOML")
+        toml::from_str(&String::from_utf8_lossy(&files[path])).expect("the file is TOML")
     }
 
     fn count(value: &toml::Value) -> usize {
