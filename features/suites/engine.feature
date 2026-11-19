@@ -350,3 +350,11 @@ Feature: engine
     When that helper changes without changing the caller's own tokens
     Then UORust verifies the changed proof context and reuses its unchanged replay with zero verifier calls
     But a broken shared semantic context is a typed campaign failure rather than per-function refusal
+
+  @UE-53 @build
+  Scenario: Bounded native proof closures retain their complete obligations
+    Given valid and overflowing native functions beside an unrelated false source acceptance root
+    When UORust verifies each native declaration closure
+    Then the valid function proves and the actual native overflow remains refused
+    And full-project SDK verification still rejects its false source acceptance root
+    But an unattributed verifier failure is not cached as an individual counterexample

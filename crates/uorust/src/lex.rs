@@ -9,6 +9,165 @@
 /// The formatter's line width.
 const WIDTH: usize = 100;
 
+/// Keep complete emitted declarations reachable from every proof obligation.
+/// Strings are opaque and mutual groups are indivisible. The retained bytes
+/// are unchanged; this only scopes native trials, never full-project output.
+pub(crate) fn proof_closure(text: &str, roots: &[String]) -> Result<String, crate::UorustError> {
+    use std::collections::{BTreeMap, BTreeSet};
+    let bad = |reason: &str| crate::UorustError::Tool(format!("proof closure: {reason}"));
+    let begin = "\\begin{semanticmodule}";
+    let end = "\\end{semanticmodule}";
+    let start = text
+        .find(begin)
+        .ok_or_else(|| bad("missing semantic module"))?
+        + begin.len();
+    let finish = text[start..]
+        .find(end)
+        .ok_or_else(|| bad("missing module end"))?
+        + start;
+    // Token offsets refer to the original UTF-8 bytes. Quoted content cannot
+    // introduce declarations, references, braces or mutual-group fields.
+    let mut tokens = Vec::new();
+    let bytes = text.as_bytes();
+    let mut i = start;
+    while i < finish {
+        if bytes[i].is_ascii_whitespace() {
+            i += 1;
+            continue;
+        }
+        let at = i;
+        if bytes[i] == b'"' {
+            i += 1;
+            let mut closed = false;
+            while i < finish {
+                match bytes[i] {
+                    b'\\' => i += 2,
+                    b'"' => {
+                        i += 1;
+                        closed = true;
+                        break;
+                    }
+                    _ => i += 1,
+                }
+            }
+            if !closed {
+                return Err(bad("unterminated string"));
+            }
+            tokens.push((at, i, ""));
+        } else if bytes[i].is_ascii_alphanumeric() || bytes[i] == b'_' {
+            i += 1;
+            while i < finish && (bytes[i].is_ascii_alphanumeric() || bytes[i] == b'_') {
+                i += 1;
+            }
+            tokens.push((at, i, &text[at..i]));
+        } else {
+            let ch = text[i..]
+                .chars()
+                .next()
+                .ok_or_else(|| bad("invalid token"))?;
+            i += ch.len_utf8();
+            tokens.push((at, i, &text[at..i]));
+        }
+    }
+    let mut blocks = Vec::new();
+    let mut names = BTreeMap::new();
+    let mut groups: BTreeMap<&str, Vec<usize>> = BTreeMap::new();
+    let mut pos = 0;
+    while pos < tokens.len() {
+        let first = pos;
+        if !matches!(
+            tokens[pos].2,
+            "structure" | "inductive" | "definition" | "theorem"
+        ) || tokens.get(pos + 1).map(|t| t.2) != Some("{")
+        {
+            return Err(bad(&format!(
+                "unsupported trial declaration at byte {}",
+                tokens[pos].0
+            )));
+        }
+        pos += 1;
+        let mut depth = 0;
+        let mut name = None;
+        let mut group = None;
+        loop {
+            let token = tokens
+                .get(pos)
+                .ok_or_else(|| bad("unclosed declaration"))?
+                .2;
+            if depth == 1
+                && matches!(token, "name" | "mutual")
+                && tokens.get(pos + 1).map(|t| t.2) == Some(":")
+            {
+                let value = tokens
+                    .get(pos + 2)
+                    .ok_or_else(|| bad("missing field value"))?
+                    .2;
+                if value.is_empty() {
+                    return Err(bad("quoted declaration identity"));
+                }
+                if token == "name" {
+                    name = Some(value);
+                } else {
+                    group = Some(value);
+                }
+            }
+            match token {
+                "{" | "[" | "(" => depth += 1,
+                "}" | "]" | ")" => depth -= 1,
+                _ => {}
+            }
+            pos += 1;
+            if depth == 0 {
+                break;
+            }
+        }
+        let name = name.ok_or_else(|| bad("declaration has no name"))?;
+        let index = blocks.len();
+        if names.insert(name, index).is_some() {
+            return Err(bad(&format!("duplicate declaration {name}")));
+        }
+        if let Some(group) = group {
+            groups.entry(group).or_default().push(index);
+        }
+        blocks.push((first, pos, group));
+    }
+    let mut pending = Vec::new();
+    for root in roots {
+        pending.push(
+            *names
+                .get(root.as_str())
+                .ok_or_else(|| bad(&format!("missing proof obligation {root}")))?,
+        );
+    }
+    if pending.is_empty() {
+        return Err(bad("empty proof obligations"));
+    }
+    let mut kept = BTreeSet::new();
+    while let Some(index) = pending.pop() {
+        if !kept.insert(index) {
+            continue;
+        }
+        let (first, last, group) = blocks[index];
+        for (_, _, token) in &tokens[first..last] {
+            if let Some(dependency) = names.get(token) {
+                pending.push(*dependency);
+            }
+        }
+        if let Some(group) = group {
+            pending.extend(&groups[group]);
+        }
+    }
+    let mut out = text[..start].to_string();
+    out.push('\n');
+    for index in kept {
+        let (first, last, _) = blocks[index];
+        out.push_str(&text[tokens[first].0..tokens[last - 1].1]);
+        out.push_str("\n\n");
+    }
+    out.push_str(&text[finish..]);
+    Ok(out)
+}
+
 /// An expression: a flat term, or a form whose `match` may break its arms
 /// onto lines.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -653,6 +812,27 @@ pub(crate) fn pascal(parts: &[&str]) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn proof_closure_keeps_transitive_types_and_mutual_groups_ue_53() {
+        let text = r#"\begin{semanticmodule}
+inductive{name: Shape, constructors: [{name: Item, fields: []}]}
+definition{name: leaf, result: Shape, body: Shape.Item, mutual: pair}
+definition{name: sibling, result: Nat, body: 0, mutual: pair}
+definition{name: quoted, result: String, body: "} unrelated \" { mutual: fake"}
+definition{name: root, result: Shape, body: (let note := quoted; leaf)}
+definition{name: unrelated, result: Bool, body: false}
+theorem{name: obligation, statement: (root = root), proof: reflexivity}
+\end{semanticmodule}"#;
+        let kept = proof_closure(text, &["obligation".into()]).expect("closure");
+        for name in ["Shape", "leaf", "sibling", "quoted", "root", "obligation"] {
+            assert!(kept.contains(&format!("name: {name},")), "{name}");
+        }
+        assert!(!kept.contains("definition{name: unrelated,"));
+        assert!(proof_closure(text, &["missing".into()]).is_err());
+        assert!(proof_closure(&text.replace("inductive{", "opaque{"), &["root".into()]).is_err());
+        assert!(proof_closure(text, &[]).is_err());
+    }
 
     #[test]
     fn names_are_camel_cased_from_rust_and_cargo_names() {

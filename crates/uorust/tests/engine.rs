@@ -2708,6 +2708,56 @@ fn aliases_keep_their_declaring_scope_through_nested_types_ue_39() {
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
 
+/// UE-53: unrelated source assertions do not belong to a native trial's proof closure.
+#[test]
+fn native_trials_keep_only_reachable_obligations_ue_53() {
+    let dir=scratch("native-proof-closure",&[("Cargo.toml","[package]\nname=\"proof_closure\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs","pub fn pass(mut n:u8,x:bool)->bool {while n>0 {n-=1;} x}\npub fn overflow(mut n:u8,x:u8)->u8 {while n>0 {n-=1;} x+1}\npub fn unrelated()->bool {false}\n#[test] fn unrelated_claim() {assert!(unrelated());}\n")]);
+    let lock = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .expect("lock");
+    assert!(lock.status.success());
+    let dumps = dumped(&dir, "native-proof-closure");
+    let register = dir.join("verdicts.toml");
+    let trial = dir.join("trial");
+    let summary = uorust::mir::prove_bounded(
+        &dir,
+        &options("proof_closure"),
+        &dumps,
+        &register,
+        &trial,
+        2,
+    )
+    .expect("actual scoped decisions");
+    assert_eq!((summary.proved, summary.refused), (1, 1));
+    let scoped =
+        std::fs::read_to_string(trial.join("src/Behavior.lex.tex")).expect("actual proof input");
+    assert!(!scoped.contains("unrelated"));
+    let mut opts = options("proof_closure");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&register),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).expect("full projection");
+    assert!(text(&files, "src/Behavior.lex.tex").contains("unrelated"));
+    let out = dir.join("full");
+    uorust::write(&out, &files).expect("full project");
+    let full = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .expect("full acceptance remains required");
+    assert!(!full.status.success() && String::from_utf8_lossy(&full.stdout).contains("unrelated"));
+    std::fs::remove_dir_all(dir).expect("cleanup");
+}
+
 /// UE-52: native callers cannot reuse a proof of a different source callee.
 #[test]
 fn native_proof_cache_binds_source_dependencies_ue_52() {

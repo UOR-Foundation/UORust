@@ -105,6 +105,19 @@ struct Diagnostic {
     line: usize,
 }
 
+fn shared_context_error(d: &Diagnostic) -> bool {
+    let source = std::path::Path::new(&d.path);
+    // A module-wide Behavior failure may have no declaration location;
+    // it still belongs to the bounded trial and must be reduced by the
+    // existing component splitter, not attributed to the shared prelude.
+    (d.path.ends_with(".lex.tex")
+        && !d.path.ends_with("Behavior.lex.tex")
+        && named(d, "").is_empty())
+        || (source.file_name().is_some_and(|n| n == "lexlean.toml")
+            && !d.code.starts_with("LLV")
+            && !d.message.contains(".Behavior"))
+}
+
 /// Type-check before proving, using only the native behavior's dependency closure.
 fn verify(dir: &Path) -> Result<Option<Vec<Diagnostic>>, UorustError> {
     let mut doc = serde_json::Value::Null;
@@ -159,9 +172,7 @@ fn verify(dir: &Path) -> Result<Option<Vec<Diagnostic>>, UorustError> {
             diagnostic.code, diagnostic.path, diagnostic.line, diagnostic.message
         );
     }
-    if let Some(diagnostic) = out.iter().find(|d| {
-        !d.path.is_empty() && !d.path.ends_with("Behavior.lex.tex") && named(d, "").is_empty()
-    }) {
+    if let Some(diagnostic) = out.iter().find(|d| shared_context_error(d)) {
         return Err(UorustError::Tool(format!(
             "shared proof context {}:{}: {}: {}",
             diagnostic.path, diagnostic.line, diagnostic.code, diagnostic.message
@@ -401,6 +412,12 @@ pub fn prove_bounded(
             continue;
         }
         files.remove(CANDIDATES);
+        let roots: Vec<String> = on_trial.iter().flat_map(|c| c.decls.clone()).collect();
+        let behavior = files
+            .get_mut("src/Behavior.lex.tex")
+            .ok_or_else(|| UorustError::Tool("proof closure: missing Behavior module".into()))?;
+        *behavior =
+            crate::lex::proof_closure(&String::from_utf8_lossy(behavior), &roots)?.into_bytes();
         write_scratch(scratch, &files)?;
         summary.runs += 1;
         let behavior = String::from_utf8_lossy(
@@ -468,7 +485,7 @@ pub fn prove_bounded(
         // Only independent recursive components may be split. Splitting a
         // cycle would omit an undecided dependency and silently lose work.
         let components = crate::lift::strong_components(&trial_graph(&all));
-        if components.len() == 1 {
+        if components.len() <= 1 {
             let first = diagnostics
                 .first()
                 .map(|d| {
@@ -479,20 +496,10 @@ pub fn prove_bounded(
                     )
                 })
                 .unwrap_or_else(|| "the verifier failed without a diagnostic".to_string());
-            for c in on_trial {
-                register.rows.insert(
-                    c.kappa.clone(),
-                    Verdict {
-                        function: c.function.clone(),
-                        digest: c.digest.clone(),
-                        status: Decision::Refused(first.clone()),
-                        axioms: BTreeMap::new(),
-                    },
-                );
-                summary.refused += 1;
-            }
-            std::fs::write(verdicts, register.to_text()).map_err(|e| io(verdicts, e))?;
-            continue;
+            return Err(UorustError::Tool(format!(
+                "inconclusive native proof: {first}; no function verdict recorded; SDK receipt {}",
+                scratch.join("uorust-proof-result.json").display()
+            )));
         }
         let half = components.len() / 2;
         groups.push_front(Trial::Only(
@@ -609,5 +616,23 @@ mod tests {
         // The SDK's Lean diagnostic points at the opening declaration,
         // before its name. It must never blame the preceding definition.
         assert_eq!(named(&Diagnostic { line: 7, ..at }, behavior), ["b"]);
+    }
+
+    #[test]
+    fn module_behavior_failures_remain_batch_feedback_ue_52() {
+        let module = Diagnostic {
+            code: "LLV7002".into(),
+            message: "Lean rejected `Example.Behavior`: ".into(),
+            path: "lexlean.toml".into(),
+            line: 1,
+        };
+        assert!(!shared_context_error(&module));
+        let prelude = Diagnostic {
+            code: "LLT4001".into(),
+            message: "expected Nat, got Bool".into(),
+            path: "src/Prelude.lex.tex".into(),
+            line: 7,
+        };
+        assert!(shared_context_error(&prelude));
     }
 }

@@ -4962,6 +4962,7 @@ fn behavior(
         // type schemas and imported assets before consulting old verdicts.
         let proof_context = sha(serde_json::json!({
             "spec":"uorust/native-proof-context/2",
+            "proof_strategy":"reachable-declarations/1",
             "sdk":include_str!("../../../prismpm.lock"),
             "assets":crate::assets::FIXED,
             "source":lifted.iter().map(crate::lex::render_decl).collect::<Vec<_>>(),

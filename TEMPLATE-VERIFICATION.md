@@ -520,3 +520,25 @@ owned shared module is rejected by the SDK as a typed campaign failure. It is
 not misrecorded as a refusal of each unrelated native function. Existing legacy
 fixture decisions are refreshed through the actual prover under the new binding;
 no cached status or SDK object is edited to make it pass.
+
+
+## Reachable native proof obligations (UE-53)
+
+The planted regression supplied two native loops, one valid and one with an
+unchecked u8 increment, beside an unrelated false source assertion. Before
+the repair, both native functions were refused. The actual SDK now proves
+the valid function and refuses the overflow obligation. The separate full
+projection still contains the source assertion and fails SDK verification.
+
+Native trials retain all candidate declarations and their transitive declaration
+and type dependencies. Mutual groups remain whole; quoted text cannot introduce
+references or delimit declarations. Missing roots and unsupported declaration
+shapes are typed tool failures. This changes only trial inputs, and the proof
+strategy is bound into native cache identities. A module-wide failure is split
+by recursive components; an inconclusive final component returns a tool failure
+with its raw SDK receipt rather than inventing per-function counterexamples.
+
+The regression was red with zero proved and two refused, then passed with one
+proved and one refused. The lexer regression also covers quoted braces, escaped
+quotes, transitive type references and mutual siblings. These checks are focused
+development evidence; complete release acceptance remains `just vv`.
