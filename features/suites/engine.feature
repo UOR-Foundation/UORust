@@ -438,3 +438,10 @@ Feature: engine
     When native lowering imports the source translator's existing semantic declarations
     Then actual SDK results agree with executable Rust across unrelated standard receiver families
     But partial panic models, divergent readings, mutable inputs and custom owners remain refused
+
+  @UE-62 @build
+  Scenario: Unchanged SDK dependency closures retain their verified receipt
+    Given an intact prior actual SDK verification and a newly SDK-built projection
+    When producer bytes change but the SDK build, source, semantic, module and SDK-lock identities agree
+    Then the proof stage reuses the original verification with explicit provenance
+    But build-only output, changed SDK inputs, modified artifacts or missing proof bundles require actual verification

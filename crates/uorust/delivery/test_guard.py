@@ -4,6 +4,39 @@ sys.dont_write_bytecode=True
 spec=importlib.util.spec_from_file_location("delivery_guard",Path(__file__).with_name("guard.py"))
 guard=importlib.util.module_from_spec(spec);spec.loader.exec_module(guard)
 
+class SdkClosureTests(unittest.TestCase):
+ def setUp(self):
+  self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)
+  self.sdk=self.root/'sdk';self.sdk.mkdir();(self.sdk/'frontier.toml').write_text('registry');lock=self.sdk/'prismpm.lock';lock.write_text('locked SDK')
+  self.build={'spec':'lexlean/command-result/1','command':'build','success':True,'exit_code':0,'build_id':'b'*64,'source_id':'c'*64,'semantic_id':'d'*64,'modules':['A','B']}
+  receipt={**self.build,'command':'verify','attestation_id':'e'*64}
+  self.report=self.root/'report.json';self.report.write_text(json.dumps({'sdk_verified':True,'census':{'functions':10,'lifted':3},'lost_lifted':0,'artifact':str(self.sdk/'frontier.toml'),'sdk_receipt':receipt}))
+  self.lock=guard.digest(lock);self.binding={'sdk':self.lock,'tool':'prior-producer'};self.key=guard.identity(self.binding)
+  self.history={self.key:{'binding':self.binding,'status':'verified','report':str(self.report),'report_sha256':guard.digest(self.report),'artifacts':{str(lock):guard.digest(lock),str(self.sdk/'frontier.toml'):guard.digest(self.sdk/'frontier.toml')}}}
+  self.lock=guard.digest(lock)
+  self.bundle=self.sdk/'.lexlean/verified'/('e'*64);self.bundle.mkdir(parents=True)
+ def select(self):return guard.sdk_receipt(self.build,self.lock,self.history,self.sdk)
+ def test_sdk_emitted_identity_reuses_original_receipt(self):
+  selected=self.select();self.assertEqual(selected['receipt']['command'],'verify');self.assertEqual(selected['report'],str(self.report))
+ def test_each_sdk_identity_change_requires_verification(self):
+  for key in ['build_id','source_id','semantic_id','modules']:
+   original=self.build[key];self.build[key]=['different'] if key=='modules' else 'f'*64
+   self.assertIsNone(self.select(),key);self.build[key]=original
+ def test_sdk_lock_change_requires_verification(self):self.lock='f'*64;self.assertIsNone(self.select())
+ def test_build_only_is_not_a_verification(self):
+  report=json.loads(self.report.read_text());report['sdk_receipt']=self.build;self.report.write_text(json.dumps(report));self.history[self.key]['report_sha256']=guard.digest(self.report)
+  self.assertIsNone(self.select())
+ def test_changed_report_or_artifact_requires_verification(self):
+  (self.sdk/'frontier.toml').write_text('modified');self.assertIsNone(self.select())
+ def test_missing_cached_bundle_requires_verification(self):self.bundle.rmdir();self.assertIsNone(self.select())
+ def test_changed_report_requires_verification(self):self.report.write_text(self.report.read_text()+' ');self.assertIsNone(self.select())
+ def test_unverified_receipt_requires_verification(self):
+  report=json.loads(self.report.read_text());report['sdk_receipt']['success']=False;self.report.write_text(json.dumps(report));self.history[self.key]['report_sha256']=guard.digest(self.report);self.assertIsNone(self.select())
+ def test_modified_binding_cannot_select_old_identity(self):self.binding['sdk']='f'*64;self.assertIsNone(self.select())
+ def test_missing_binding_requires_verification(self):del self.history[self.key]['binding'];self.assertIsNone(self.select())
+ def test_failed_or_partial_new_build_cannot_reuse(self):
+  self.build['success']=False;self.assertIsNone(self.select())
+
 class DeliveryGuardTests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)

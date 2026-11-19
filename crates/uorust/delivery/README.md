@@ -23,3 +23,12 @@ This follows the existing certified Prism Factory identity/dependency runtime
 and Verdant's model provenance, dependency lightcones and exact-input transition
 reuse. The consumer campaign installs this preflight at its entry point; its
 workspace instructions also prohibit bypassing it or resuming a manual leaf queue.
+
+For proof-stage reuse, run the actual SDK build and pass its unmodified JSON to
+`sdk_receipt`, with the SDK pin digest, verified history and acceptance tree.
+The build, source, semantic and module identities must match an original real
+verification. The history's original binding must hash to its own key and bind
+the same SDK; its report and artifacts must remain intact. A cached proof bundle
+must be present. Otherwise run the actual verifier. Always retain the original
+receipt provenance and run the actual SDK project check. A successful build is
+never itself a proof. New history rows preserve their input binding explicitly.

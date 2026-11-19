@@ -97,6 +97,51 @@ def preflight(policy, plan, binding, history):
             return {'action': 'reuse', 'identity': key, 'report': old['report']}
     return {'action': 'execute', 'identity': key}
 
+def sdk_receipt(build, sdk_lock, history, acceptance):
+    """Reuse an actual verification only at SDK-emitted identical inputs.
+
+    This never calculates SDK identities or treats a build as a proof. The
+    caller runs the real SDK build first and its project check after selection;
+    a miss requires the real verifier. The original receipt remains explicit.
+    """
+    keys = ('build_id', 'source_id', 'semantic_id')
+    def result(value, command):
+        return (isinstance(value, dict) and value.get('spec') == 'lexlean/command-result/1'
+                and value.get('command') == command and value.get('success') is True
+                and value.get('exit_code') == 0
+                and bool(value.get('modules'))
+                and all(isinstance(value.get(k), str) and len(value[k]) == 64
+                        and all(c in '0123456789abcdef' for c in value[k]) for k in keys))
+    if not result(build, 'build'):
+        return None
+    for key, row in history.items():
+        try:
+            binding = row.get('binding', {})
+            if identity(binding) != key or binding.get('sdk') != sdk_lock:
+                continue
+            if row.get('status') != 'verified' or not row.get('artifacts'):
+                continue
+            if digest(row['report']) != row['report_sha256']:
+                continue
+            report = json.loads(Path(row['report']).read_text())
+            validate_report(report)
+            receipt = report.get('sdk_receipt', {})
+            if not result(receipt, 'verify') or any(receipt[k] != build[k] for k in keys + ('modules',)):
+                continue
+            attestation = receipt.get('attestation_id', '')
+            if (len(attestation) != 64 or any(c not in '0123456789abcdef' for c in attestation)
+                    or not (Path(acceptance)/'.lexlean/verified'/attestation).is_dir()):
+                continue
+            if not all(digest(path) == expected for path, expected in row['artifacts'].items()):
+                continue
+            return {'receipt': receipt, 'report': row['report'],
+                    'report_sha256': row['report_sha256'], 'sdk_lock_sha256': sdk_lock,
+                    'basis': 'Actual SDK build/source/semantic/module identities and intact prior verification'}
+        except (OSError, ValueError, KeyError, TypeError):
+            # A historical cache miss is not permission to manufacture evidence.
+            continue
+    return None
+
 def record(binding, history_path, report_path, artifacts):
     """Preserve the actual report and artifact hashes; never construct a proof."""
     report = json.loads(Path(report_path).read_text())
@@ -107,7 +152,7 @@ def record(binding, history_path, report_path, artifacts):
     snapshot.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(report_path, snapshot)
     history = json.loads(history_path.read_text()) if history_path.exists() else {}
-    history[key] = {'status': 'verified', 'report': str(snapshot),
+    history[key] = {'status': 'verified', 'binding': binding, 'report': str(snapshot),
                     'report_sha256': digest(snapshot),
                     'artifacts': {str(path): digest(path) for path in artifacts}}
     pending = history_path.with_suffix('.pending.json')

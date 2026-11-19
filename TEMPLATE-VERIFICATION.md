@@ -744,3 +744,28 @@ intact. Evidence: `uorust-source-model-import-red.log`,
 `uorust-source-model-import-acceptance.log` in the delivery runtime. Focused
 acceptance does not replace `just vv`, translator certification or consumer
 adoption. No contract completion is claimed from this capability.
+
+### UE-62: SDK proof dependency closure reuse
+
+The extended model/scenario and failing receipt-selection tests preceded the
+implementation. All 31 guard cases pass. The guard selects an original real
+verification only at equal actual SDK build/source/semantic/module identities,
+with a hash-bound original SDK pin, intact report/artifacts and a cached proof
+bundle. It never calculates SDK semantic identities or converts build success
+into verification. The mandatory complete-campaign preflight remains intact.
+
+The actual consumer SDK emitted unchanged identities after recompiling the
+producer. Its original 12-module verification was reused with explicit
+provenance; the real SDK project check and Factory refresh passed, with zero
+native and kernel verifier calls. An actual SDK build of a planted false
+assertion succeeded but changed all three content identities; it could not
+select the earlier verification. Its proof was not admitted. The SDK acceptance
+resume took 62.9 seconds; this excludes prior native projection and interrupted
+setup and is not a fresh-campaign throughput result. The consumer remains at
+634/2,704 and no additional lifts are claimed.
+
+The earlier complete library suite passed 433 tests. The actual SDK refreshed
+one fixture receipt whose declaration changed through source-model import;
+all 16 CLI tests then replayed successfully, and conformance meta-tests and
+strict all-target Clippy passed. The fixture verdict was copied from the actual
+tool-written SDK result. No verdict, digest or axiom policy was fabricated.
