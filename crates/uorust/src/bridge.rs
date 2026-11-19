@@ -464,9 +464,8 @@ pub(crate) fn project(
         if !file.exists() {
             continue;
         }
-        let doc: toml::Table =
-            crate::embed::read_text(&file)?
-                .parse()
+        let text = crate::embed::read_text(&file)?;
+        let doc: toml::Table = toml::from_str(&text)
                 .map_err(|e| UorustError::Malformed {
                     path: file.clone(),
                     reason: format!("{e}"),

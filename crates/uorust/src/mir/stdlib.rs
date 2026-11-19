@@ -169,7 +169,7 @@ pub(crate) fn table() -> &'static StdTable {
 /// The table, or `None` where a row lacks a field or a pattern does not
 /// read.
 fn parse_table(text: &str, bodies: &str) -> Option<StdTable> {
-    let doc: toml::Value = text.parse().ok()?;
+    let doc: toml::Value = toml::from_str(text).ok()?;
     let strs = |v: Option<&toml::Value>| -> Vec<String> {
         v.and_then(toml::Value::as_array)
             .into_iter()

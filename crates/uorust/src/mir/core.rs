@@ -155,7 +155,7 @@ pub fn census(
                 path: file.clone(),
                 reason,
             };
-            let doc: toml::Table = text.parse().map_err(|e| bad(format!("{e}")))?;
+            let doc: toml::Table = toml::from_str(&text).map_err(|e| bad(format!("{e}")))?;
             let triple = doc
                 .get("triple")
                 .and_then(toml::Value::as_str)
@@ -2254,8 +2254,8 @@ pub fn unembedded(dir: &Path) -> Result<Vec<String>, UorustError> {
         {
             continue;
         }
-        let doc: toml::Table = crate::embed::read_text(&file)?
-            .parse()
+        let text = crate::embed::read_text(&file)?;
+        let doc: toml::Table = toml::from_str(&text)
             .map_err(|e| UorustError::Tool(format!("{}: {e}", file.display())))?;
         for row in doc
             .get("fn")
@@ -2309,8 +2309,7 @@ pub fn summarize_register(scope: &Scope, dir: &Path) -> Result<(), UorustError> 
     let mut bridge: BTreeMap<String, Option<String>> = BTreeMap::new();
     for file in files {
         let text = crate::embed::read_text(&file)?;
-        let doc: toml::Table = text
-            .parse()
+        let doc: toml::Table = toml::from_str(&text)
             .map_err(|e| UorustError::Tool(format!("{}: {e}", file.display())))?;
         let rows = doc
             .get("fn")
@@ -2471,7 +2470,7 @@ pub fn core_regressions(dir: &Path, shards: &[CoreShard]) -> Vec<String> {
         let Ok(text) = crate::embed::read_text(&file) else {
             continue;
         };
-        let Ok(doc) = text.parse::<toml::Table>() else {
+        let Ok(doc) = toml::from_str::<toml::Table>(&text) else {
             continue;
         };
         let now: BTreeMap<&str, &CoreRow> = s.rows.iter().map(|r| (r.kappa.as_str(), r)).collect();
@@ -2634,10 +2633,8 @@ mod tests {
         std::fs::write(dir.join("num.toml"), num).unwrap();
         std::fs::write(dir.join("f32.toml"), f32).unwrap();
         summarize_core_register(&dir).unwrap();
-        let doc: toml::Table = std::fs::read_to_string(dir.join("frontier.toml"))
-            .unwrap()
-            .parse()
-            .unwrap();
+        let doc: toml::Table =
+            toml::from_str(&std::fs::read_to_string(dir.join("frontier.toml")).unwrap()).unwrap();
         let _ = std::fs::remove_dir_all(&dir);
         let embedding = doc["embedding"].as_table().unwrap();
         assert_eq!(embedding["bodies"].as_integer(), Some(5));
