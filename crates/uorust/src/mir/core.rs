@@ -487,6 +487,7 @@ pub(crate) fn shard(
         let active = [name.clone()];
         let cx = lower::Cx {
             types: &types,
+            source_sigs: &BTreeMap::new(),
             widths,
             callees: &callees,
             krate: krate.to_string(),

@@ -42,6 +42,7 @@ use crate::lift::{self, Lift, Residue, Ty, Types};
 pub(crate) struct Callee {
     pub(crate) name: String,
     pub(crate) params: Vec<Ty>,
+    pub(crate) generic: Option<lift::Generic>,
     /// The forward result: the type of the body's `_0`.
     pub(crate) result: Ty,
     /// Where the definition threads `&mut` parameters: its result type and
@@ -52,6 +53,8 @@ pub(crate) struct Callee {
 /// What every function of a crate is translated against.
 pub(crate) struct Cx<'a> {
     pub(crate) types: &'a Types,
+    /// Admitted source signatures in this crate's coherent impl scope.
+    pub(crate) source_sigs: &'a BTreeMap<String, lift::Sig>,
     /// `usize`'s widths on the declared targets, narrowest first.
     pub(crate) widths: &'a [(u32, Vec<String>)],
     /// Functions by the path MIR prints for them, with the crate prefixed.
@@ -91,6 +94,7 @@ impl<'a> Cx<'a> {
     {
         Cx {
             types: self.types,
+            source_sigs: self.source_sigs,
             widths: self.widths,
             callees: self.callees,
             krate: self.krate.clone(),
@@ -3773,7 +3777,11 @@ impl Fun<'_, '_> {
             .or_else(|| self.cx.callees.get(path))
             .cloned()
         {
-            if c.threads.is_some() || c.name == self.name || c.params.is_empty() {
+            if c.generic.is_some()
+                || c.threads.is_some()
+                || c.name == self.name
+                || c.params.is_empty()
+            {
                 return None;
             }
             self.calls.insert(c.name.clone());
@@ -5871,6 +5879,7 @@ impl Fun<'_, '_> {
             });
         }
         let key = format!("{}::{callee}", self.cx.krate);
+        let generic_key = format!("{}::{erased}", self.cx.krate);
         // A trait method of one of the crate's types is its impl's method.
         let own = callee
             .strip_prefix('<')
@@ -5882,6 +5891,13 @@ impl Fun<'_, '_> {
             .callees
             .get(&key)
             .or_else(|| self.cx.callees.get(callee))
+            .or_else(|| {
+                self.cx
+                    .callees
+                    .get(&generic_key)
+                    .filter(|c| c.generic.is_some())
+            })
+            .or_else(|| self.cx.callees.get(&erased).filter(|c| c.generic.is_some()))
             .or_else(|| own.as_ref().and_then(|o| self.cx.callees.get(o)))
             .cloned()
         {
@@ -5899,6 +5915,47 @@ impl Fun<'_, '_> {
             };
             if c.params.len() != args.len() {
                 return Err(bad_types());
+            }
+            if c.generic.is_some() {
+                if c.threads.is_some()
+                    || texts.iter().flatten().any(|t| t.contains("&mut "))
+                    || dest.contains("&mut ")
+                {
+                    return Err(bad_types());
+                }
+                let (modeled, _) = self.model_callables(&args, texts);
+                if modeled
+                    .iter()
+                    .map(|(_, t)| t)
+                    .chain(std::iter::once(dt))
+                    .any(|t| !super::source::generic_environment(t, self.cx.types))
+                {
+                    return Err(kind(
+                        k,
+                        "a generic dependency whose schema exposes mutable or unregistered state",
+                    ));
+                }
+                let sig = lift::Sig {
+                    name: c.name.clone(),
+                    params: c.params.clone(),
+                    result: c.result.clone(),
+                    generic: c.generic.clone(),
+                    threads: Vec::new(),
+                };
+                let (term, result, calls) = lift::bind_model_call(
+                    &sig,
+                    &modeled,
+                    self.cx.types,
+                    self.cx.source_sigs,
+                    self.cx.widths,
+                    self.cx.taken,
+                )
+                .map_err(|r| kind(k, &format!("{callee}: {}", r.detail())))?;
+                if !result.same(dt) {
+                    return Err(bad_types());
+                }
+                self.calls.extend(calls);
+                return Ok(Called::value(term));
             }
             let mut passed = Vec::new();
             for ((value, ty), expected) in args.iter().zip(&c.params) {

@@ -818,3 +818,34 @@ The complete library pass checked 433 unaffected tests, and its one changed
 expectation passed on replay (434 total); all 16 CLI tests, conformance tests,
 strict Clippy and model/template/lock gates passed. Consumer gain is measured
 only by the complete guarded campaign; release acceptance remains open.
+
+## UE-66: compiler composition with source generic dependencies
+
+The compiler path now imports complete source-lifted generic definitions through
+`lift::generic_call`, the source binder itself. Type arguments and coherent trait
+methods retain their existing signatures and dependency names. It does not add
+standard-operation models or supply an implementation for an unknown method.
+Native words may pass parametrically without acquiring source integer semantics.
+Source definitions with recorded divergences are excluded from this interface.
+
+The initial regression failed at `generic_dependencies::word` with
+`mir::TerminatorKind::Call: transport`. The restored regression has five actual
+native SDK proofs and 32 computed-Rust comparison vectors covering unsigned and
+signed transport, option payloads, coherent dictionaries and captured callbacks.
+The SDK rejects a planted expected result of 254 for Rust's actual 255 with
+LLV7002 (`is false`). The final focused SDK run passed in 78.72 seconds.
+
+A separate planted schema defect admitted a dictionary call on a struct holding
+`Cell<bool>`. Its negative assertion failed (`shared`) before the shared schema
+check was applied. The final run keeps it unlifted alongside unavailable method
+implementations, incompatible signed return carriers, partial panic conventions
+and mutable references. The common binder's unit test also refuses two different
+word widths bound to one type parameter, a missing coherent dictionary entry and
+a method with a different result type; it retains the accepted method dependency.
+
+435 library tests, all 16 CLI tests, conformance meta-tests, model/template/lock
+checks and strict all-target Clippy passed during focused acceptance. These are
+review evidence, not a claim that the complete `just vv` release gate passed.
+Unused trait implementation entries are kept out of the global native proof
+context: the chosen method and its source meaning are already bound by the
+translated term and dependency identities.

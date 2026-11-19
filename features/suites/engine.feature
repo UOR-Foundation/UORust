@@ -459,3 +459,10 @@ Feature: engine
     When native lowering imports their closed readings after its primitive ABI rules
     Then actual SDK transport properties agree with Rust even while a shared cell is mutably borrowed
     But contents, synchronization, owner counts and pointer comparisons require their own admitted semantics
+
+  @UE-66 @build
+  Scenario: Compiler dependencies reuse generic source definitions and dictionaries
+    Given source-lifted generic definitions and coherent trait implementation signatures
+    When compiler callers pass values through those definitions after native control flow
+    Then actual SDK results agree with Rust across parametric transport, containers and trait dictionary calls
+    But an incompatible ABI or an unavailable implementation cannot acquire a proved verdict

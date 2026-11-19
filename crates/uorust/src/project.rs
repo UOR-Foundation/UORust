@@ -4856,6 +4856,7 @@ fn behavior(
     let mut ordered: BTreeSet<Ty> = BTreeSet::new();
     // Per crate: the lifted functions' signatures and their axioms.
     let mut results: Vec<(Sigs, Axioms)> = Vec::new();
+    let mut model_sigs: Vec<Sigs> = Vec::new();
     // Every lifted function by its crate path, for the MIR path's calls.
     let mut callees: BTreeMap<String, crate::mir::lower::Callee> = BTreeMap::new();
     let every_name: BTreeSet<String> = scoped
@@ -4928,9 +4929,17 @@ fn behavior(
                 )
             })
             .collect();
-        // The MIR path calls no generic definition: it passes no type
-        // argument or dictionary.
-        for c in candidates.iter().filter(|c| c.generic.is_none()) {
+        // Compiler calls reuse the source binder for type arguments and
+        // coherent dictionaries rather than duplicating generic semantics.
+        let exact: Sigs = sigs
+            .iter()
+            .filter(|(key, _)| out.divergences.get(*key).is_none_or(Vec::is_empty))
+            .map(|(key, sig)| (key.clone(), sig.clone()))
+            .collect();
+        for c in candidates
+            .iter()
+            .filter(|c| c.generic.is_none() || exact.contains_key(&c.rust))
+        {
             if let (true, Some(&r)) = (
                 out.decls.iter().any(|d| d.name() == c.name),
                 names.get(&c.rust),
@@ -4940,6 +4949,7 @@ fn behavior(
                     crate::mir::lower::Callee {
                         name: c.name.clone(),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
+                        generic: c.generic.clone(),
                         // A definition that threads its `&mut` parameters
                         // returns its own result first, as a translated
                         // one does.
@@ -4951,6 +4961,7 @@ fn behavior(
             }
         }
         lifted.extend(out.decls);
+        model_sigs.push(exact);
         results.push((sigs, out.axioms));
     }
     // The MIR path, for every function the surface lift left as residue.
@@ -4971,6 +4982,12 @@ fn behavior(
         })
         .to_string()
         .as_bytes());
+        // The selected dictionary member appears in the translated term and
+        // its dependency identity. Unused impl entries do not invalidate an
+        // otherwise identical native proof context.
+        for ((pkg, _), scope) in &mut mir_scopes {
+            scope.impls = impl_index[*pkg].clone();
+        }
         let mut taken = every_name.clone();
         taken.extend(lifted.iter().map(|d| d.name().to_string()));
         taken.extend(types.enums.keys().cloned());
@@ -4982,6 +4999,7 @@ fn behavior(
             dumps,
             options,
             &mir_scopes,
+            &model_sigs,
             &callees,
             &taken,
             &homonyms,
@@ -5168,6 +5186,7 @@ fn mir_lift(
     dumps: &crate::mir::Dumps,
     options: &crate::mir::MirOptions,
     scopes: &BTreeMap<(usize, usize), Types>,
+    source_sigs: &[Sigs],
     lifted: &BTreeMap<String, crate::mir::lower::Callee>,
     taken: &BTreeSet<String>,
     homonyms: &BTreeMap<FnSite, (String, String)>,
@@ -5328,6 +5347,7 @@ fn mir_lift(
                     lower::Callee {
                         name: name.clone(),
                         params,
+                        generic: None,
                         result,
                         threads: (!positions.is_empty()).then_some((full, positions)),
                     },
@@ -5352,6 +5372,7 @@ fn mir_lift(
         let path = ctx.path(r);
         let cx = lower::Cx {
             types: scope(r),
+            source_sigs: &source_sigs[r.pkg],
             widths: &widths,
             callees: &callees,
             krate: ctx.crate_ident(r),

@@ -5025,6 +5025,106 @@ fn generic_call(
     )
 }
 
+/// Bind compiler values with the same generic argument and coherent dictionary
+/// mechanism used by source calls. This imports an existing definition; it
+/// neither supplies a missing body nor assumes a trait method's behavior.
+pub(crate) fn bind_model_call(
+    sig: &Sig,
+    args: &[(String, Ty)],
+    types: &Types,
+    fns: &BTreeMap<String, Sig>,
+    widths: &[(u32, Vec<String>)],
+    names: &BTreeSet<String>,
+) -> Lift<(String, Ty, BTreeSet<String>)> {
+    let generic = sig
+        .generic
+        .as_ref()
+        .ok_or_else(|| Residue::Form("a compiler generic call with no generic signature".into()))?;
+    if !sig.threads.is_empty() || sig.params.len() != args.len() {
+        return Err(Residue::Form(
+            "a compiler generic call of another interface".into(),
+        ));
+    }
+    let locals: BTreeMap<String, (String, Ty)> = args
+        .iter()
+        .enumerate()
+        .map(|(i, arg)| (format!("modelArg{i}"), arg.clone()))
+        .collect();
+    let call: syn::ExprCall = syn::parse_str(&format!(
+        "compilerDependency({})",
+        (0..args.len())
+            .map(|i| format!("modelArg{i}"))
+            .collect::<Vec<_>>()
+            .join(", ")
+    ))
+    .map_err(|_| Residue::Form("a compiler generic call whose arguments cannot be bound".into()))?;
+    let converted = crate::convert::expr(&syn::Expr::Call(call));
+    let rs::RustExpr::Call(call) = &converted else {
+        return Err(Residue::Form(
+            "a compiler generic call of no call expression".into(),
+        ));
+    };
+    let env = Env {
+        total: true,
+        types: types.clone(),
+        fns: fns.clone(),
+        widths: widths.to_vec(),
+        names: names.clone(),
+    };
+    let ctx = Ctx {
+        current: String::new(),
+        params: Vec::new(),
+        result: sig.result.clone(),
+        return_states: Vec::new(),
+        own: "compilerDependency".into(),
+        locals,
+        tails: BTreeMap::new(),
+        top: false,
+        looping: None,
+        hidden: Vec::new(),
+        imports: BTreeMap::new(),
+        seen: Seen::default(),
+        closures: BTreeMap::new(),
+        elements: None,
+        rebuilt: BTreeMap::new(),
+        bounds: BTreeMap::new(),
+        capped: BTreeMap::new(),
+        exits: None,
+        formatter: None,
+        dictionary: Vec::new(),
+        sealed: BTreeSet::new(),
+        borrowed: BTreeSet::new(),
+    };
+    let ((term, result), acc) = generic_call(
+        call,
+        "compilerDependency",
+        sig,
+        generic,
+        &env,
+        &ctx,
+        Acc::default(),
+    )?;
+    if !acc.helpers.is_empty() || !acc.axioms.is_empty() {
+        return Err(Residue::Form(
+            "a compiler generic binding needing additional declarations".into(),
+        ));
+    }
+    let calls = acc
+        .calls
+        .iter()
+        .map(|key| {
+            if key == "compilerDependency" {
+                Ok(sig.name.clone())
+            } else {
+                fns.get(key)
+                    .map(|s| s.name.clone())
+                    .ok_or_else(|| Residue::Call(key.clone()))
+            }
+        })
+        .collect::<Lift<BTreeSet<_>>>()?;
+    Ok((flat_text(term)?, result, calls))
+}
+
 /// The module of the byte-level text prelude every projection carries.
 pub(crate) const PRELUDE: &str = "Prelude";
 
@@ -14325,6 +14425,71 @@ fn unread_signature(sig: &rs::Signature) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn compiler_generic_bindings_keep_type_identity_and_dictionary_evidence_ue_66() {
+        let t = Ty::Param("T".into());
+        let mut sig = Sig {
+            name: "transport".into(),
+            params: vec![t.clone(), t.clone()],
+            result: t.clone(),
+            threads: Vec::new(),
+            generic: Some(Generic {
+                types: vec!["T".into()],
+                reads: BTreeMap::from([("T".into(), t.clone())]),
+                dictionary: Vec::new(),
+            }),
+        };
+        let call =
+            |sig: &Sig, args: &[(String, Ty)], types: &Types, fns: &BTreeMap<String, Sig>| {
+                bind_model_call(sig, args, types, fns, &[], &BTreeSet::new())
+            };
+        let args = [
+            ("a".into(), Ty::Nat(Some(8))),
+            ("b".into(), Ty::Nat(Some(8))),
+        ];
+        let (term, result, calls) = call(&sig, &args, &Types::default(), &BTreeMap::new()).unwrap();
+        assert_eq!(term, "(transport [Nat] a b)");
+        assert_eq!(result, Ty::Nat(Some(8)));
+        assert_eq!(calls, BTreeSet::from(["transport".into()]));
+        let mixed = [args[0].clone(), ("b".into(), Ty::Nat(Some(64)))];
+        assert!(call(&sig, &mixed, &Types::default(), &BTreeMap::new()).is_err());
+        sig.generic.as_mut().unwrap().dictionary.push(Entry {
+            param: "T".into(),
+            declarer: "Observe".into(),
+            method: "observe".into(),
+            name: "observe".into(),
+            ty: Ty::Fn(vec![t], Box::new(Ty::Bool)),
+        });
+        let args = [
+            ("a".into(), Ty::Named("Flag".into())),
+            ("b".into(), Ty::Named("Flag".into())),
+        ];
+        assert!(call(&sig, &args, &Types::default(), &BTreeMap::new()).is_err());
+        let mut types = Types::default();
+        types.impls.insert(
+            ("Observe".into(), "Flag".into(), "observe".into()),
+            "FlagObserve".into(),
+        );
+        let mut method = Sig {
+            name: "flagObserve".into(),
+            params: vec![Ty::Named("Flag".into())],
+            result: Ty::Bool,
+            generic: None,
+            threads: Vec::new(),
+        };
+        let fns = BTreeMap::from([("FlagObserve".into(), method.clone())]);
+        let (_, _, calls) = call(&sig, &args, &types, &fns).unwrap();
+        assert!(calls.contains("flagObserve"));
+        method.result = Ty::Nat(Some(8));
+        assert!(call(
+            &sig,
+            &args,
+            &types,
+            &BTreeMap::from([("FlagObserve".into(), method)])
+        )
+        .is_err());
+    }
 
     #[test]
     fn qualified_acceptance_retains_its_owner_ue_27() {

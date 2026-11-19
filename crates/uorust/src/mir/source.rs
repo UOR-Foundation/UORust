@@ -72,8 +72,12 @@ fn inherent(callee: &str) -> Option<(String, String)> {
 /// dependency closure so a recursive container neither hides a mutable cell
 /// nor loses coverage merely because its immutable payload has a name.
 fn value_interface(ty: &Ty, types: &Types, seen: &mut BTreeSet<String>) -> bool {
+    interface(ty, types, seen, false)
+}
+
+fn interface(ty: &Ty, types: &Types, seen: &mut BTreeSet<String>, parametric: bool) -> bool {
     match ty {
-        Ty::Signed(_) | Ty::Scalar | Ty::Param(_) => false,
+        Ty::Signed(_) | Ty::Scalar | Ty::Param(_) => parametric,
         Ty::Named(name) => {
             if !seen.insert(name.clone()) {
                 return true;
@@ -91,22 +95,27 @@ fn value_interface(ty: &Ty, types: &Types, seen: &mut BTreeSet<String>) -> bool 
                 return true;
             }
             if let Some(fields) = types.structs.get(name) {
-                fields.iter().all(|(_, t)| value_interface(t, types, seen))
-            } else if let Some(variants) = types.datas.get(name) {
-                variants
+                fields
                     .iter()
-                    .all(|(_, fields)| fields.iter().all(|(_, t)| value_interface(t, types, seen)))
+                    .all(|(_, t)| interface(t, types, seen, parametric))
+            } else if let Some(variants) = types.datas.get(name) {
+                variants.iter().all(|(_, fields)| {
+                    fields
+                        .iter()
+                        .all(|(_, t)| interface(t, types, seen, parametric))
+                })
             } else {
                 types.enums.contains_key(name)
             }
         }
-        Ty::Option(t) | Ty::List(t) | Ty::Set(t, _) => value_interface(t, types, seen),
+        Ty::Option(t) | Ty::List(t) | Ty::Set(t, _) => interface(t, types, seen, parametric),
         Ty::Outcome(a, b) | Ty::Map(a, b, _) => {
-            value_interface(a, types, seen) && value_interface(b, types, seen)
+            interface(a, types, seen, parametric) && interface(b, types, seen, parametric)
         }
-        Ty::Tuple(ts) | Ty::Pair(ts) => ts.iter().all(|t| value_interface(t, types, seen)),
+        Ty::Tuple(ts) | Ty::Pair(ts) => ts.iter().all(|t| interface(t, types, seen, parametric)),
         Ty::Fn(ins, out) => {
-            ins.iter().all(|t| value_interface(t, types, seen)) && value_interface(out, types, seen)
+            ins.iter().all(|t| interface(t, types, seen, parametric))
+                && interface(out, types, seen, parametric)
         }
         _ => true,
     }
@@ -115,6 +124,12 @@ fn value_interface(ty: &Ty, types: &Types, seen: &mut BTreeSet<String>) -> bool 
 /// Captured values must have an immutable schema in this shared interface.
 pub(super) fn callable_environment(ty: &Ty, types: &Types) -> bool {
     value_interface(ty, types, &mut BTreeSet::new())
+}
+
+/// A generic type parameter can transport a native word without interpreting
+/// it as a source integer. Its schema must still expose no mutable contents.
+pub(super) fn generic_environment(ty: &Ty, types: &Types) -> bool {
+    interface(ty, types, &mut BTreeSet::new(), true)
 }
 
 #[allow(clippy::too_many_arguments)]

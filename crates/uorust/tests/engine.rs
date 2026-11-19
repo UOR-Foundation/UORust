@@ -5564,3 +5564,183 @@ fn renamed_unique_types_preserve_imports_and_generic_shadowing_ue_40() {
     );
     std::fs::remove_dir_all(dir).expect("cleanup");
 }
+
+/// UE-66: import whole generic dependencies through the existing source binder.
+#[test]
+fn compiler_dependencies_reuse_generic_source_bindings_ue_66() {
+    let dir = scratch("generic-compiler-dependencies", &[
+        ("Cargo.toml", "[package]\nname=\"generic_dependencies\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn transport<T>(x:T)->T {x}
+pub fn wrapped<T>(x:Option<T>)->Option<T> {x}
+pub trait Observe {fn observe(&self)->bool;}
+pub struct Flag {pub enabled:bool}
+impl Observe for Flag {fn observe(&self)->bool {self.enabled}}
+pub fn observe<T:Observe>(x:&T)->bool {x.observe()}
+pub fn word(mut n:u8,x:u8)->u8 {while n>0 {n-=1;} transport(x)}
+pub fn signed(mut n:u8,x:i8)->i8 {while n>0 {n-=1;} transport(x)}
+pub fn option(mut n:u8,x:Option<u8>)->Option<u8> {while n>0 {n-=1;} wrapped(x)}
+pub fn dictionary(mut n:u8,x:&Flag)->bool {while n>0 {n-=1;} observe(x)}
+pub fn apply<F:Fn(bool)->bool>(f:F,x:bool)->bool {f(x)}
+pub fn callback(mut n:u8,x:bool,capture:bool)->bool {while n>0 {n-=1;} apply(|b| b!=capture,x)}
+pub struct Unavailable {pub enabled:bool}
+impl Observe for Unavailable {fn observe(&self)->bool {std::process::id()>0}}
+pub fn unavailable(mut n:u8,x:&Unavailable)->bool {while n>0 {n-=1;} observe(x)}
+pub trait SignedRead {fn read(&self)->i8;}
+pub struct SignedFlag {pub value:i8}
+impl SignedRead for SignedFlag {fn read(&self)->i8 {self.value}}
+pub fn signed_read<T:SignedRead>(x:&T)->i8 {x.read()}
+pub fn incompatible(mut n:u8,x:&SignedFlag)->i8 {while n>0 {n-=1;} signed_read(x)}
+pub fn partial<T>(_:T,v:Option<bool>)->bool {v.unwrap()}
+pub fn partial_native(mut n:u8,x:u8,v:Option<bool>)->bool {while n>0 {n-=1;} partial(x,v)}
+pub fn mutable(mut n:u8,x:&mut u8)->&mut u8 {while n>0 {n-=1;} transport(x)}
+pub struct SharedFlag {pub enabled:std::cell::Cell<bool>}
+impl Observe for SharedFlag {fn observe(&self)->bool {self.enabled.get()}}
+pub fn shared(mut n:u8,x:&SharedFlag)->bool {while n>0 {n-=1;} observe(x)}
+"#),
+        ("src/bin/vectors.rs", r#"
+use generic_dependencies::*;
+fn main(){for n in [0,2] {
+ for x in [0,19,255] {println!("word {n} {x} {}",word(n,x));}
+ for x in [-128i8,-1,0,127] {println!("signed {n} {} {}", x as u8,signed(n,x) as u8);}
+ for x in [None,Some(0),Some(255)] {let term=|v:Option<u8>|match v {None=>"(ctor Option.none [Nat])".to_string(),Some(x)=>format!("(ctor Option.some [Nat] {x})")};println!("option|{n}|{}|{}",term(x),term(option(n,x)));}
+ for x in [false,true] {println!("dictionary {n} {x} {}",dictionary(n,&Flag{enabled:x}));for capture in [false,true] {println!("callback {n} {x} {capture} {}",callback(n,x,capture));}}
+}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "generic-compiler-dependencies");
+    let mut opts = options("generic_dependencies");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["word", "signed", "option", "dictionary", "callback"] {
+        let path = format!("generic_dependencies::{f}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+
+    for f in [
+        "unavailable",
+        "incompatible",
+        "partial_native",
+        "mutable",
+        "shared",
+    ] {
+        let path = format!("generic_dependencies::{f}");
+        assert!(
+            !frontier_rows(&files, "lifted")
+                .iter()
+                .any(|r| r["function"].as_str() == Some(&path)),
+            "{f}"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("generic-dependency-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("generic_dependencies"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    let output = String::from_utf8(rust.stdout).unwrap();
+    for (i, line) in output.lines().enumerate() {
+        let parts: Vec<_> = if line.starts_with("option|") {
+            line.split('|').collect()
+        } else {
+            line.split_whitespace().collect()
+        };
+        let path = format!("generic_dependencies::{}", parts[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let input = if parts[0] == "dictionary" {
+            format!("{} (record Flag {{enabled := {}}})", parts[1], parts[2])
+        } else {
+            parts[1..parts.len() - 1].join(" ")
+        };
+        let expected = parts.last().unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: genericDependencyVector{i}, parameters: [], statement: (({name} {input}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    assert_eq!(output.lines().count(), 32);
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = vectors.replacen("= 255)", "= 254)", 1);
+    assert_ne!(wrong, vectors);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&vectors, &wrong, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
