@@ -471,3 +471,9 @@ id = "UE-69"
 level = "build"
 suite = "engine"
 statement = "Compiler struct views preserve every declared field through SDK products, retaining unavailable field meanings as parametric values while compiling known field access and update; incomplete shapes, recursive unfolding, opaque operations, unresolved dispatch and unmodeled drop effects remain typed residue"
+
+[[id]]
+id = "UE-70"
+level = "build"
+suite = "engine"
+statement = "Compiler mutations retain the incoming value carrier throughout place-update recursion and reuse the existing representation codec at storage boundaries; nested fields and containers preserve their declared schemas, and an incompatible opaque field is refused before SDK proof scheduling"

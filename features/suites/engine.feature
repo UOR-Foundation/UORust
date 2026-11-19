@@ -487,3 +487,10 @@ Feature: engine
     When native lowering composes their dependency views through SDK products
     Then known field access and update agree with executable Rust while retaining opaque payloads
     But opaque methods, incomplete shapes and unmodeled drop effects remain typed refusals
+
+  @UE-70 @build
+  Scenario: Compiler writes preserve declared storage carriers
+    Given compiler field and container writes with distinct source and native carriers
+    When lowering transports the incoming type through nested place updates
+    Then admitted representation codecs preserve executable Rust results and stored values
+    But an incompatible opaque slot is refused before an ill-typed model reaches the SDK

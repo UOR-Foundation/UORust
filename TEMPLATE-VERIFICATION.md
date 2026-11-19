@@ -951,3 +951,30 @@ refused status and recording rooted observations for all eleven decisions. The
 replay now takes zero verifier calls and keeps existing rooted evidence exactly;
 legacy migration remains covered independently by UE-68. Full `just vv`,
 translator certification and consumer adoption remain open release boundaries.
+
+## UE-70: typed storage boundaries for native mutations
+
+The full product-view campaign stopped at an SDK link-type mismatch: a field
+update replaced an abstract stored value with a concrete value. The prior
+636-function consumer checkpoint remains the latest accepted projection; the
+failed run claims no additional lift. Its log and SDK result are retained.
+
+A minimal MIR regression reproduced the cause: place-update recursion discarded
+the incoming value type and accepted overwriting an opaque slot with a Boolean.
+The shared recursion now retains that type through nested field, element and
+option updates. At the storage boundary it reuses the existing representation
+codec, including its actual range obligations, or returns a typed residue before
+SDK scheduling. No standard-operation semantics or SDK behavior was added.
+
+The negative regression now passes. Two actual native SDK proofs and 24
+executable-Rust comparisons passed for direct and nested signed 128-bit stores,
+including minimum, maximum and large positive values. Comparisons inspect the
+stored mathematical integer, rather than only a returned word. A planted wrong
+stored value was rejected by the SDK. The proof and comparison run passed in
+124.67 seconds. Library, CLI and dependency checks are recorded with this
+checkpoint; complete release acceptance and translator certification remain open.
+
+Final focused dependency checks passed: all 439 library tests, all 16 CLI tests,
+conformance meta-tests, both product-view regressions, strict all-target Clippy,
+model/template/SDK-lock and generated self-model checks. The product-view
+regressions replayed with retained native decisions and passed in 47.35 seconds.

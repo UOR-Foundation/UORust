@@ -2396,7 +2396,7 @@ impl Fun<'_, '_> {
         if steps.is_empty() {
             st.env.insert(p.local, v);
         } else {
-            let Val::V(new, _) = v else {
+            let Val::V(new, new_type) = v else {
                 return Err(kind(k, "a pair or a borrow written into a part of a value"));
             };
             let (whole, wt, env) = match st.env.get(&p.local).cloned() {
@@ -2416,7 +2416,7 @@ impl Fun<'_, '_> {
                     ))
                 }
             };
-            let updated = self.replace(&whole, &wt, &steps, &new, st)?;
+            let updated = self.replace(&whole, &wt, &steps, &new, &new_type, st)?;
             self.grow(&updated)?;
             st.env.insert(
                 p.local,
@@ -2489,11 +2489,23 @@ impl Fun<'_, '_> {
         t: &Ty,
         steps: &[IrProjection],
         new: &str,
+        new_type: &Ty,
         st: &State,
     ) -> Lift<String> {
         let k = spec::MirStatementKind::Assign.path();
         let Some((step, rest)) = steps.split_first() else {
-            return Ok(new.to_string());
+            return self
+                .scalar_representation(new, new_type, t, st)
+                .ok_or_else(|| {
+                    kind(
+                        k,
+                        &format!(
+                            "a write of {} into stored {} has no admitted representation codec",
+                            new_type.render(),
+                            t.render()
+                        ),
+                    )
+                });
         };
         // An item of a list: the list with that item replaced, which an
         // `assert` (or a slice pattern's length check) before the write
@@ -2517,7 +2529,7 @@ impl Fun<'_, '_> {
         if let (Some(i), Ty::List(elem)) = (at, t) {
             let read = self.index_aux(elem, false)?;
             let part = format!("({read} {whole} {i})");
-            let inner = self.replace(&part, elem, rest, new, st)?;
+            let inner = self.replace(&part, elem, rest, new, new_type, st)?;
             let update = self.index_aux(elem, true)?;
             return Ok(format!("({update} {whole} {i} {inner})"));
         }
@@ -2531,7 +2543,7 @@ impl Fun<'_, '_> {
         {
             if v == "Some" {
                 let held = self.fresh(Some("held"), 0);
-                let inner = self.replace(&held, item, after, new, st)?;
+                let inner = self.replace(&held, item, after, new, new_type, st)?;
                 let i = item.render();
                 return Ok(format!(
                     "(match {whole} | Option.none => (ctor Option.none [{i}]) | Option.some {held} => (ctor Option.some [{i}] {inner}))"
@@ -2552,7 +2564,7 @@ impl Fun<'_, '_> {
                     .ok_or_else(|| kind(MEMORY_KIND, "a MaybeUninit of a type with no value"))?;
                 let part =
                     format!("(match {whole} | Option.none => {d} | Option.some held => held)");
-                let inner_new = self.replace(&part, inner, rest, new, st)?;
+                let inner_new = self.replace(&part, inner, rest, new, new_type, st)?;
                 return Ok(format!(
                     "(ctor Option.some [{}] {inner_new})",
                     inner.render()
@@ -2563,7 +2575,7 @@ impl Fun<'_, '_> {
             if (is_pointer(t) || !matches!(t, Ty::Named(_) | Ty::Tuple(_) | Ty::Pair(_)))
                 && ty(fty, self.cx.types).ok().as_ref() == Some(t)
             {
-                return self.replace(whole, t, rest, new, st);
+                return self.replace(whole, t, rest, new, new_type, st);
             }
         }
         let IrProjection::Field(i, _) = step else {
@@ -2579,7 +2591,7 @@ impl Fun<'_, '_> {
         };
         let part = self.field(whole, t, *i)?;
         let pt = self.field_ty(t, *i)?;
-        let inner = self.replace(&part, &pt, rest, new, st)?;
+        let inner = self.replace(&part, &pt, rest, new, new_type, st)?;
         match t {
             Ty::Tuple(ts) | Ty::Pair(ts) => {
                 let items: Vec<String> = (0..ts.len())
@@ -9427,6 +9439,47 @@ impl Fun<'_, '_> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn writes_cannot_change_an_opaque_storage_carrier_ue_70() {
+        let mut types = Types::default();
+        types
+            .native_views
+            .insert("Holder".into(), Ty::Pair(vec![Ty::Param("Payload".into())]));
+        let body = super::super::parse::bodies(
+            r#"fn store(_1: &mut Holder, _2: bool) -> () {
+    let mut _0: ();
+    bb0: {
+        ((*_1).0: bool) = copy _2;
+        _0 = const ();
+        return;
+    }
+}
+"#,
+        )
+        .remove(0);
+        let cx = Cx {
+            types: &types,
+            source_sigs: &BTreeMap::new(),
+            widths: &[(64, vec!["test".into()])],
+            callees: &BTreeMap::new(),
+            krate: "test".into(),
+            taken: &BTreeSet::new(),
+            explicit: &BTreeSet::new(),
+            limit: 1_000_000,
+            consts: &BTreeMap::new(),
+            closures: &BTreeMap::new(),
+            active: &[],
+            core: None,
+            layouts: &[],
+            backward: false,
+        };
+        let result = lower(&cx, &body, "store");
+        assert!(
+            result.is_err(),
+            "an opaque storage field was overwritten by a concrete carrier"
+        );
+    }
 
     #[test]
     fn a_tuple_of_one_item_is_told_from_a_wider_one() {

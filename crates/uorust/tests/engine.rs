@@ -6261,3 +6261,138 @@ pub fn impostor(mut n:u8,x:&Holder)->Holder {while n>0 {n-=1;}x.to_owned()}
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-70: incoming native words retain their type until the storage boundary.
+#[test]
+fn compiler_storage_carriers_preserve_nested_state_ue_70() {
+    let dir=scratch("typed-storage-carriers",&[("Cargo.toml","[package]\nname=\"storage_carriers\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),("src/lib.rs",r#"
+pub struct WordPacket {pub value:i128}
+pub struct NestedPacket {pub inner:WordPacket}
+pub fn put(mut n:u8,x:&mut WordPacket,v:i128) {while n>0 {n-=1;}x.value=v;}
+pub fn nested(mut n:u8,x:&mut NestedPacket,v:i128) {while n>0 {n-=1;}x.inner.value=v;}
+"#),("src/bin/vectors.rs",r#"
+use storage_carriers::*;
+fn main(){for n in [0,2] {for v in [i128::MIN,-1,0,1,1i128<<100,i128::MAX] {
+ let mut x=WordPacket{value:0};put(n,&mut x,v);println!("put|{n}|{}|{}",v as u128,x.value);
+ let mut y=NestedPacket{inner:WordPacket{value:0}};nested(n,&mut y,v);println!("nested|{n}|{}|{}",v as u128,y.inner.value);
+}}}
+"#)]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "typed-storage-carriers");
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("typed-storage-carrier-verdicts.toml");
+    let proved = uorust::mir::prove_bounded(
+        &dir,
+        &options("storage_carriers"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proved.refused, 0, "{proved:?}");
+    let decisions = verdicts(&cache);
+    let mut opts = options("storage_carriers");
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let output = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(output.lines().count(), 24);
+    let mut vectors = String::new();
+    let mut first_wrong = None;
+    for (i, line) in output.lines().enumerate() {
+        let p: Vec<_> = line.split('|').collect();
+        let path = format!("storage_carriers::{}", p[0]);
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap_or_else(|| panic!("{path}: {:?}", residue_detail(&files, &path)))
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let word = "(record WordPacket {value := (0 : Int)})";
+        let input = if p[0] == "put" {
+            word.to_string()
+        } else {
+            format!("(record NestedPacket {{inner := {word}}})")
+        };
+        let state = format!("(project ({name} {} {input} {}) item1)", p[1], p[2]);
+        let word = if p[0] == "put" {
+            state
+        } else {
+            format!("(project {state} inner)")
+        };
+        let stored = format!("(project {word} value)");
+        let expected = match p[3].strip_prefix('-') {
+            Some(v) => format!("(prim negate ({v} : Int) : Int)"),
+            None => format!("({} : Int)", p[3]),
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let theorem=format!("theorem{{name: storageVector{i}, parameters: [], statement: ({stored} = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", "));
+        if i == 0 {
+            first_wrong = Some((theorem.clone(), theorem.replacen(&expected, "(0 : Int)", 1)));
+        }
+        vectors.push_str(&theorem);
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    std::fs::write(out.join("src/Behavior.lex.tex"), &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let (good, bad) = first_wrong.unwrap();
+    assert_ne!(good, bad);
+    std::fs::write(
+        out.join("src/Behavior.lex.tex"),
+        body.replacen(&good, &bad, 1),
+    )
+    .unwrap();
+    let rejected = verify();
+    let diagnostic = String::from_utf8_lossy(&rejected.stdout);
+    assert!(
+        !rejected.status.success()
+            && diagnostic.contains("LLV7002")
+            && diagnostic.contains("is false"),
+        "{diagnostic}"
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
