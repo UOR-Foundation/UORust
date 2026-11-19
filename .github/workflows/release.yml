@@ -30,7 +30,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  qualify:
+    name: prove the exact tagged source passed native acceptance
+    outputs:
+      source_sha: ${{ steps.receipt.outputs.source_sha }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout the immutable release tag
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+      - name: Refuse publication without exact source and full native receipt
+        id: receipt
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          python3 -I -m unittest discover -s scripts/release -p 'test_qualify_tag.py'
+          python3 -I scripts/release/qualify_tag.py --repo "$REPOSITORY" --tag "$TAG"
+          printf 'source_sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: qualify
     name: build uorust for ${{ matrix.target }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 45
@@ -64,7 +94,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+          ref: ${{ needs.qualify.outputs.source_sha }}
       - name: Install the pinned toolchain for the target
         shell: bash
         env:
@@ -127,8 +157,8 @@ jobs:
 
   publish:
     name: attach the archives to the release
-    needs: build
-    if: ${{ !cancelled() }}
+    needs: [qualify, build]
+    if: ${{ success() }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
@@ -139,7 +169,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+          ref: ${{ needs.qualify.outputs.source_sha }}
       - name: Download every archive that built
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
@@ -192,7 +222,7 @@ jobs:
   # missing. Without the CARGO_REGISTRY_TOKEN secret the job says so and skips.
   crates:
     name: publish the crates to crates.io
-    needs: publish
+    needs: [qualify, publish]
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
@@ -203,7 +233,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+          ref: ${{ needs.qualify.outputs.source_sha }}
       - name: Publish in dependency order
         shell: bash
         env:
