@@ -603,3 +603,9 @@ id = "UE-91"
 level = "build"
 suite = "engine"
 statement = "Source and native auxiliary definitions share one complete declaration dependency graph, including function values; providers precede consumers across the auxiliary/native boundary, quoted text creates no dependency, and mutual groups stay intact"
+
+[[id]]
+id = "UE-92"
+level = "build"
+suite = "engine"
+statement = "Compiler-qualified source semantic imports can use exact source ABI representations through shared native/source codec kernels; both input and result conversions are required, while mutable interfaces and unsupported representations remain refused"

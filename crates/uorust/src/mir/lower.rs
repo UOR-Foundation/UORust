@@ -5609,6 +5609,72 @@ impl Fun<'_, '_> {
         }
     }
 
+    /// The source translator owns the operation. This boundary contributes
+    /// only the already shared, typed native/source representation kernels.
+    #[allow(clippy::too_many_arguments)]
+    fn represented_source_call(
+        &mut self,
+        callee: &str,
+        args: &[(String, Ty)],
+        texts: &[Option<String>],
+        destination: &str,
+        result: &Ty,
+        st: &mut State,
+        name: &str,
+    ) -> Option<Called> {
+        let source_result = super::source::representation(destination, self.cx.types)?;
+        if args.len() != texts.len() {
+            return None;
+        }
+        let mut represented = Vec::new();
+        for ((_, native), text) in args.iter().zip(texts) {
+            let text = text.as_deref()?;
+            if ty(text, self.cx.types).ok()? != *native {
+                return None;
+            }
+            let source = super::source::representation(text, self.cx.types)?;
+            let binding = self.fresh(Some("sourceArgument"), usize::MAX);
+            represented.push((binding, source));
+        }
+        if source_result == *result && args.iter().zip(&represented).all(|(a, b)| a.1 == b.1) {
+            return None;
+        }
+        // Resolve and type-check the semantic model before adding consumer
+        // conversions, so unavailable operations cannot add proof obligations.
+        let imported = super::source::apply_represented(
+            callee,
+            &represented,
+            texts,
+            &source_result,
+            self.cx.types,
+            self.cx.widths,
+            self.cx.taken,
+            name,
+        )?;
+        let mut term = imported.term;
+        for ((value, native), (binding, source)) in args.iter().zip(&represented).rev() {
+            let value = self.scalar_representation(value, native, source, st)?;
+            term = format!("(let {binding} : {} := {value}; {term})", source.render());
+        }
+        self.types.extend(imported.types);
+        for declaration in imported.decls {
+            self.calls.insert(declaration.name().to_string());
+            self.aux
+                .entry(declaration.name().to_string())
+                .or_insert(declaration);
+        }
+        if source_result == *result {
+            return Some(Called::value(term));
+        }
+        let binding = self.fresh(Some("sourceResult"), usize::MAX);
+        let converted = self.scalar_representation(&binding, &source_result, result, st)?;
+        st.binders.push((binding.clone(), source_result.clone()));
+        Some(Called {
+            binding: Some((binding, source_result, term)),
+            ..Called::value(converted)
+        })
+    }
+
     /// Compose admitted element representations without inspecting or changing
     /// collection contents. Structural recursion preserves list entry order.
     fn structural_representation(
@@ -6750,6 +6816,17 @@ impl Fun<'_, '_> {
                     .or_insert(declaration);
             }
             return Ok(Called::value(imported.term));
+        }
+        if let Some(called) = self.represented_source_call(
+            callee,
+            &model_args,
+            &model_texts,
+            dest,
+            dt,
+            st,
+            &import_name,
+        ) {
+            return Ok(called);
         }
         // `Arguments::new(template, args)` of `format_args!`, where the
         // table models Arguments as its pieces: the template is the

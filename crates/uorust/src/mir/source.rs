@@ -20,6 +20,17 @@ fn source_type(text: &str, types: &Types) -> Option<Ty> {
     types.ty(&crate::convert::ty(&ty)).ok()
 }
 
+/// Select an immutable source ABI. The caller must still supply each exact
+/// input and result conversion through the shared representation kernels.
+pub(super) fn representation(text: &str, types: &Types) -> Option<Ty> {
+    let syntax = syn::parse_str::<syn::Type>(text).ok()?;
+    if super::views::borrows_mutably(&crate::convert::ty(&syntax)) {
+        return None;
+    }
+    let reading = source_type(text, types)?;
+    value_interface(&reading, types, &mut BTreeSet::new()).then_some(reading)
+}
+
 /// Reuse closed source readings only after the native ABI has declined them.
 /// Imported SDK identities are not snapshots of the allocation they identify.
 pub(super) fn type_model(text: &str, types: &Types) -> Option<Ty> {
@@ -171,8 +182,49 @@ pub(super) fn apply(
     taken: &BTreeSet<String>,
     name: &str,
 ) -> Option<Imported> {
+    apply_at(
+        callee, args, texts, result, types, widths, taken, name, false,
+    )
+}
+
+/// Import existing source semantics at a selected source representation.
+#[allow(clippy::too_many_arguments)]
+pub(super) fn apply_represented(
+    callee: &str,
+    args: &[(String, Ty)],
+    texts: &[Option<String>],
+    result: &Ty,
+    types: &Types,
+    widths: &[(u32, Vec<String>)],
+    taken: &BTreeSet<String>,
+    name: &str,
+) -> Option<Imported> {
+    apply_at(
+        callee, args, texts, result, types, widths, taken, name, true,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn apply_at(
+    callee: &str,
+    args: &[(String, Ty)],
+    texts: &[Option<String>],
+    result: &Ty,
+    types: &Types,
+    widths: &[(u32, Vec<String>)],
+    taken: &BTreeSet<String>,
+    name: &str,
+    represented: bool,
+) -> Option<Imported> {
+    let reading = |text: &str| {
+        if represented {
+            representation(text, types)
+        } else {
+            super::lower::ty(text, types).ok()
+        }
+    };
     let (owner, method) = inherent(callee)?;
-    let owner_type = super::lower::ty(&format!("&{owner}"), types).ok()?;
+    let owner_type = reading(&format!("&{owner}"))?;
     if args.len() != texts.len() {
         return None;
     }
@@ -183,9 +235,7 @@ pub(super) fn apply(
                 return None;
             }
         }
-        if !matches!(native, Ty::Fn(..))
-            && super::lower::ty(text.as_deref()?, types).ok()? != *native
-        {
+        if !matches!(native, Ty::Fn(..)) && reading(text.as_deref()?)? != *native {
             return None;
         }
     }
@@ -317,6 +367,54 @@ pub(super) fn apply(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn source_abi_import_retains_schema_and_mutability_guards_ue_92() {
+        let types = Types::default();
+        assert_eq!(representation("i128", &types), Some(Ty::Integer(Some(128))));
+        assert!(representation("&mut i128", &types).is_none());
+        assert!(representation("Option<&mut i128>", &types).is_none());
+        assert!(representation("UnknownPayload", &types).is_none());
+        let args = [
+            ("a".into(), Ty::Integer(Some(128))),
+            ("b".into(), Ty::Integer(Some(128))),
+        ];
+        let texts = [Some("i128".into()), Some("i128".into())];
+        let result = Ty::Option(Box::new(Ty::Integer(Some(128))));
+        assert!(apply_represented(
+            "core::num::<impl i128>::checked_add",
+            &args,
+            &texts,
+            &result,
+            &types,
+            &[],
+            &BTreeSet::new(),
+            "checkedModel"
+        )
+        .is_some());
+        assert!(apply_represented(
+            "workspace::i128::checked_add",
+            &args,
+            &texts,
+            &result,
+            &types,
+            &[],
+            &BTreeSet::new(),
+            "wrongOwner"
+        )
+        .is_none());
+        assert!(apply_represented(
+            "core::num::<impl i128>::checked_add",
+            &args,
+            &texts,
+            &Ty::Bool,
+            &types,
+            &[],
+            &BTreeSet::new(),
+            "wrongResult"
+        )
+        .is_none());
+    }
 
     #[test]
     fn source_models_transport_native_carriers_parametrically_ue_89() {

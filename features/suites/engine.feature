@@ -641,3 +641,10 @@ Feature: engine
     When source and native declarations are emitted and proof dependencies sliced
     Then function values and direct calls share one provider-before-consumer order
     And quoted content and indivisible mutual groups retain their existing behavior
+
+  @UE-92 @build
+  Scenario: Existing source numeric models cross the native representation boundary
+    Given compiler-qualified calls whose native words differ from source integer carriers
+    When both input and result representations have existing exact codec kernels
+    Then source semantics are imported through those shared kernels
+    But mutable interfaces and unavailable carrier conversions remain refused

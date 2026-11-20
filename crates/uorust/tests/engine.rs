@@ -8798,3 +8798,141 @@ pub fn filtered(mut n:u8,x:Option<Choice>)->Option<Choice> {while n>0 {n-=1;} x.
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-92: numeric source models use the same representation kernels as source dependencies.
+#[test]
+fn compiler_source_numeric_models_use_exact_abi_kernels_ue_92() {
+    let dir = scratch("source-numeric-abi", &[
+        ("Cargo.toml", "[package]\nname=\"source_numeric\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn added(mut n:u8,x:i128,y:i128)->Option<i128> {while n>0 {n-=1;} x.checked_add(y)}
+pub fn multiplied(mut n:u8,x:i128,y:i128)->Option<i128> {while n>0 {n-=1;} x.checked_mul(y)}
+"#),
+        ("src/bin/vectors.rs", r#"
+use source_numeric::*;
+fn main() {
+ for n in [0,2] {for (x,y) in [(i128::MIN,-1),(i128::MAX,1),(i128::MIN,1),(-1,-1),(0,0),(123,-5)] {
+  for (name,result) in [("added",added(n,x,y)),("multiplied",multiplied(n,x,y))] {
+   println!("{name}|{n}|{}|{}|{}",x as u128,y as u128,result.map(|v|(v as u128).to_string()).unwrap_or("none".into()));
+  }
+ }}
+}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 24);
+    let dumps = dumped(&dir, "source-numeric-abi");
+    let mut opts = options("source_numeric");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for name in ["added", "multiplied"] {
+        let key = format!("source_numeric::{name}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{key}\"")),
+            "{:?}",
+            residue_detail(&files, &key)
+        );
+    }
+    let cache = dir.join("numeric-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("source_numeric"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, n, x, y, result] = parts.as_slice() else {
+            panic!("{line}")
+        };
+        let key = format!("source_numeric::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&key))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == key)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let expected = if *result == "none" {
+            "(ctor Option.none [Nat])".into()
+        } else {
+            format!("(ctor Option.some [Nat] {result})")
+        };
+        vectors.push_str(&format!("theorem{{name:numericVector{i},parameters:[],statement:(({name} {n} {x} {y}) = {expected}),proof:decide{{}},axioms:[{}]}}\n", policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(
+        "= (ctor Option.some [Nat] 1))",
+        "= (ctor Option.some [Nat] 2))",
+        1,
+    );
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

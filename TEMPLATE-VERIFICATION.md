@@ -1528,3 +1528,19 @@ model validation, immutable template/SDK-lock checks and canonical generated
 self-model checks passed. Existing successful semantic receipts remain intact;
 the interrupted consumer campaign requires a newly frozen producer and guarded
 acceptance. No completed-consumer or release claim is made here.
+
+## UE-92: existing source semantics through shared native/source ABI kernels
+
+Before implementation, the compiler fixture's checked arithmetic calls remained
+`mir::TerminatorKind::Call` residue. The shared importer now also tries an
+immutable source representation, with both inputs and result converted by the
+existing exact codec kernels. The operation itself still comes from the source
+translator. Mutable interfaces, unknown schemas, wrong owners and incompatible
+results remain refused; no operation-specific model was added.
+
+The neutral SDK fixture passed 24 comparisons with actual Rust across signed
+boundaries, overflow and negative values, and rejected a deliberately wrong
+result with LLV7002 (134.74 seconds). Seven source import controls, 94 MIR tests,
+16 CLI tests, repository conformance, strict Clippy, model/template/SDK lock and
+generated self-model checks passed. Complete release acceptance remains the
+unchanged `just vv` boundary.
