@@ -111,6 +111,88 @@ fn transported(value: &IrRvalue) -> Option<&IrPlace> {
     }
 }
 
+/// Equal compiler types can specialize independently quantified source slots.
+/// Only existing opaque parameters participate; this creates no type or operation.
+pub(crate) fn aliases(body: &IrBody, types: &Types) -> BTreeMap<String, Ty> {
+    let mut anchors = BTreeMap::<String, BTreeSet<Ty>>::new();
+    let empty = BTreeMap::new();
+    for block in &body.blocks {
+        for statement in &block.statements {
+            let IrStatement::Assign(destination, value) = statement else {
+                continue;
+            };
+            let Some(source) = transported(value) else {
+                continue;
+            };
+            for at in [destination, source] {
+                let Some((text, Some(model))) = place(body, at, types, &empty) else {
+                    continue;
+                };
+                if let Some(key) = value_type(&text) {
+                    anchors.entry(key).or_default().insert(model);
+                }
+            }
+        }
+    }
+    let mut aliases = BTreeMap::new();
+    for models in anchors.values() {
+        let closed: Vec<_> = models
+            .iter()
+            .filter(|m| m.parameters().is_empty())
+            .collect();
+        if closed.len() > 1 {
+            continue;
+        }
+        let target = closed.first().copied().or_else(|| {
+            models
+                .iter()
+                .find(|m| matches!(m, Ty::Param(p) if p.starts_with("OpaqueField")))
+        });
+        let Some(target) = target else { continue };
+        for model in models {
+            let Ty::Param(parameter) = model else {
+                continue;
+            };
+            if !parameter.starts_with("OpaqueField") || model == target {
+                continue;
+            }
+            if let Some(old) = aliases.get(parameter) {
+                if old != target {
+                    continue;
+                }
+            }
+            aliases.insert(parameter.clone(), target.clone());
+        }
+    }
+    // Flatten substitutions so a shared slot used by several compiler type
+    // classes has the same reading everywhere, independent of discovery order.
+    for _ in 0..aliases.len() {
+        let next = aliases
+            .iter()
+            .map(|(p, t)| (p.clone(), crate::lift::instantiated(t, &aliases)))
+            .collect();
+        if next == aliases {
+            break;
+        }
+        aliases = next;
+    }
+    aliases
+}
+
+/// Specialize the whole source product frame through the existing substitution
+/// kernel, so a field and its transport never acquire different representations.
+pub(crate) fn specialize(types: &Types, aliases: &BTreeMap<String, Ty>) -> Types {
+    let mut frame = types.clone();
+    for ty in frame
+        .native_views
+        .values_mut()
+        .chain(frame.generic.values_mut())
+    {
+        *ty = crate::lift::instantiated(ty, aliases);
+    }
+    frame
+}
+
 /// Solve only transport constraints. An unknown operation supplies no equation
 /// and an unanchored type stays unread. No opaque sort or default is invented.
 pub(crate) fn infer(body: &IrBody, types: &Types) -> Lift<BTreeMap<String, Ty>> {
@@ -238,6 +320,48 @@ mod tests {
             inferred,
             "constraints are not deterministic"
         );
+    }
+
+    #[test]
+    fn compiler_equalities_specialize_opaque_carriers_ue_87() {
+        let mut types = scope();
+        types.native_views.insert(
+            "Holder".into(),
+            Ty::Pair(vec![
+                Ty::Bool,
+                Ty::Param("OpaqueFieldLeft".into()),
+                Ty::Param("OpaqueFieldRight".into()),
+            ]),
+        );
+        let ir = body("fn carried(_1: &Holder, _2: bool) -> &dyn Service {\n let mut _0: &dyn Service;\n bb0: {\n switchInt(copy _2) -> [0: bb1, otherwise: bb2];\n }\n bb1: {\n _0 = copy ((*_1).1: &dyn Service);\n return;\n }\n bb2: {\n _0 = copy ((*_1).2: &dyn Service);\n return;\n }\n}\n");
+        let frame = specialize(&types, &aliases(&ir, &types));
+        let inferred = infer(&ir, &frame).unwrap();
+        assert_eq!(inferred.len(), 1);
+        let Ty::Pair(fields) = &frame.native_views["Holder"] else {
+            panic!()
+        };
+        assert_eq!(fields[1], fields[2]);
+        assert_ne!(types.native_views["Holder"], frame.native_views["Holder"]);
+        let unrelated = body("fn carried(_1: &Holder) -> &dyn left::Service {\n let mut _0: &dyn left::Service;\n let mut _2: &dyn right::Service;\n bb0: {\n _0 = copy ((*_1).1: &dyn left::Service);\n _2 = copy ((*_1).2: &dyn right::Service);\n return;\n }\n}\n");
+        assert!(aliases(&unrelated, &types).is_empty());
+    }
+
+    #[test]
+    fn compiler_known_types_refine_existing_opaque_slots_ue_87() {
+        let mut types = Types::default();
+        types.native_views.insert(
+            "Holder".into(),
+            Ty::Pair(vec![Ty::Param("OpaqueFieldValue".into())]),
+        );
+        let ir = body("fn carried(_1: &Holder) -> u8 {\n let mut _0: u8;\n bb0: {\n _0 = copy ((*_1).0: u8);\n return;\n }\n}\n");
+        let bindings = aliases(&ir, &types);
+        assert_eq!(bindings["OpaqueFieldValue"], Ty::Nat(Some(8)));
+        let frame = specialize(&types, &bindings);
+        assert_eq!(
+            frame.native_views["Holder"],
+            Ty::Pair(vec![Ty::Nat(Some(8))])
+        );
+        assert!(infer(&ir, &frame).unwrap().is_empty());
     }
 
     #[test]

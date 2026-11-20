@@ -6321,6 +6321,8 @@ for new in [false,true] {
 let mut holder=Holder{ready,service:service(old)};
 let result=changed(n,&mut holder,service(new));
 println!("changed|{n}|{ready}|{old}|{new}|({result}, ({ready}, {}))",holder.service.run());
+let pair=Pair{left:service(old),right:service(new)};
+println!("conflict|{n}|{ready}|{old}|{new}|{}",conflict(n,&pair,ready).run());
 }}}}}
 "#,
             ),
@@ -6337,7 +6339,7 @@ println!("changed|{n}|{ready}|{old}|{new}|({result}, ({ready}, {}))",holder.serv
         String::from_utf8_lossy(&rust.stderr)
     );
     let reference = String::from_utf8(rust.stdout).unwrap();
-    assert_eq!(reference.lines().count(), 32);
+    assert_eq!(reference.lines().count(), 48);
     let dumps = dumped(&dir, "source-type-flow");
     let mut opts = options("type_flow");
     opts.mir = Some(mir_options(
@@ -6346,7 +6348,7 @@ println!("changed|{n}|{ready}|{old}|{new}|({result}, ({ready}, {}))",holder.serv
         uorust::mir::Trial::All,
     ));
     let files = uorust::project_workspace(&dir, &opts).unwrap();
-    for function in ["carried", "copied", "changed"] {
+    for function in ["carried", "copied", "changed", "conflict"] {
         let path = format!("type_flow::{function}");
         assert!(
             text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
@@ -6354,7 +6356,7 @@ println!("changed|{n}|{ready}|{old}|{new}|({result}, ({ready}, {}))",holder.serv
             residue_detail(&files, &path)
         );
     }
-    for function in ["operation", "conflict", "unanchored"] {
+    for function in ["operation", "unanchored"] {
         let path = format!("type_flow::{function}");
         assert!(
             residue_detail(&files, &path).is_some(),
@@ -6406,7 +6408,12 @@ println!("changed|{n}|{ready}|{old}|{new}|({result}, ({ready}, {}))",holder.serv
         } else {
             String::new()
         };
-        vectors.push_str(&format!("theorem{{name: typeFlowVector{i}, parameters: [], statement: (({name} [Bool] {n} ({ready}, {old}){extra}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+        let call = if *function == "conflict" {
+            format!("{name} [Bool] {n} ({old}, {new}) {ready}")
+        } else {
+            format!("{name} [Bool] {n} ({ready}, {old}){extra}")
+        };
+        vectors.push_str(&format!("theorem{{name: typeFlowVector{i}, parameters: [], statement: (({call}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
     }
     let out = dir.join("projection");
     uorust::write(&out, &files).unwrap();
@@ -8293,5 +8300,34 @@ fn main(){
             && diagnostic.contains("is false"),
         "{diagnostic}"
     );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-87: the public compiler path specializes equal opaque source slots.
+#[test]
+fn compiler_type_equalities_specialize_source_frames_ue_87() {
+    let dir = scratch("carrier-frames", &[
+        ("Cargo.toml", "[package]\nname=\"carrier_frames\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub trait Service {fn run(&self)->bool;}
+pub struct Pair {pub left:&'static dyn Service,pub right:&'static dyn Service}
+pub fn choose(mut n:u8,x:&Pair,right:bool)->&'static dyn Service {while n>0 {n-=1;} if right {x.right} else {x.left}}
+pub fn unknown(mut n:u8,x:&Pair)->bool {while n>0 {n-=1;} x.left.run()}
+"#),
+    ]);
+    let dumps = dumped(&dir, "carrier-frames");
+    let mut opts = options("carrier_frames");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        text(&files, uorust::mir::CANDIDATES).contains("carrier_frames::choose\""),
+        "{:?}",
+        residue_detail(&files, "carrier_frames::choose")
+    );
+    assert!(residue_detail(&files, "carrier_frames::unknown").is_some());
     std::fs::remove_dir_all(dir).unwrap();
 }

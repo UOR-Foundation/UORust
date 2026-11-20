@@ -1458,3 +1458,22 @@ controls, 16 CLI tests, repo-conformance, strict all-target Clippy, model valida
 immutable template/SDK-lock checks and generated self-model checks. Compiler
 observations remain pinned to their original producer independently of the new
 projector; unchanged consumer input capture is not repeated.
+
+## UE-87: compiler-equality specialization of source carriers
+
+The registered control failed before implementation with `conflicting
+source-bound compiler carrier identities`. Whole-registry diagnostics showed
+opaque source fields conflicting with already admitted closed compiler types.
+The solver groups actual compiler readings, specializes existing opaque slots
+through the shared type substitution kernel, and interns the complete coherent
+frame for signature and body readers. It supplies no new operation or effect.
+Unrelated identities, unanchored values and unsupported operations stay open.
+
+The public compiler-path regression passed. The extended SDK regression passed
+48 actual Rust/model comparisons, including selection between opaque fields,
+and rejected a planted wrong result with LLV7002 in 93.20 seconds. All 89 MIR
+controls, 16 CLI tests, repository conformance, strict all-target Clippy,
+model/template/SDK-lock checks and canonical generated self-model checks passed.
+The pre-production whole-registry analysis proposed eight new functions with no
+baseline losses; these proposals are not SDK proof or completed delivery.
+The production consumer result is recorded separately by its guarded campaign.

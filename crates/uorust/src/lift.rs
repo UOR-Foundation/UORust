@@ -4934,7 +4934,7 @@ fn instantiate(pattern: &Ty, actual: &Ty, bind: &mut BTreeMap<String, Ty>) -> bo
 }
 
 /// `pattern` with each type parameter `bind` fixes put in its place.
-fn instantiated(pattern: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
+pub(crate) fn instantiated(pattern: &Ty, bind: &BTreeMap<String, Ty>) -> Ty {
     let go = |t: &Ty| Box::new(instantiated(t, bind));
     match pattern {
         Ty::Param(p) => bind.get(p).cloned().unwrap_or_else(|| pattern.clone()),

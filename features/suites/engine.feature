@@ -606,3 +606,10 @@ Feature: engine
     When field projections and value transport constrain compiler locals and results
     Then signatures and lowering use the same source-bound type environment
     But conflicting identities and unknown operations or effects remain refused
+
+  @UE-87 @build
+  Scenario: Equal compiler types specialize existing source carrier frames
+    Given complete source views with independently bound opaque fields
+    When the compiler transports an identical resolved type between the fields
+    Then the native signature and body share one specialized carrier frame
+    But unrelated types and unsupported operations remain refused

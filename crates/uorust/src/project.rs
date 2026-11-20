@@ -5419,12 +5419,16 @@ fn mir_lift(
         let Some(body) = body_of(r) else {
             continue;
         };
-        let base = base_scope(r);
+        let original = base_scope(r);
+        let aliases = crate::mir::flow::aliases(body, original);
+        let specialized =
+            (!aliases.is_empty()).then(|| crate::mir::flow::specialize(original, &aliases));
+        let base = specialized.as_ref().unwrap_or(original);
         match crate::mir::flow::infer(body, base) {
-            Ok(inferred) if !inferred.is_empty() => {
+            Ok(inferred) if !inferred.is_empty() || !aliases.is_empty() => {
                 let bindings = crate::mir::flow::bindings(body, base, &inferred);
-                if bindings != base.generic {
-                    let key = (r.pkg, ctx.file(r).target, bindings);
+                if bindings != original.generic || !aliases.is_empty() {
+                    let key = (r.pkg, ctx.file(r).target, bindings, aliases);
                     flow_environments
                         .entry(key.clone())
                         .or_insert_with(|| Types {
