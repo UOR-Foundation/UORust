@@ -810,3 +810,10 @@ Feature: engine
     When the retained Factory capture source and target bindings are exact
     Then its body is imported through the same native ABI and proof kernels
     But changed captures foreign owners and incompatible interfaces remain refused
+
+  @UE-116 @build
+  Scenario: Empty constructor results contain no payload state
+    Given a zero-input source kernel whose container payload can hold mutable state
+    When its emitted result is the exact literal empty container of the native ABI
+    Then the empty result is admitted without reading or constructing a payload value
+    But mutable inputs and nonempty result kernels remain refused

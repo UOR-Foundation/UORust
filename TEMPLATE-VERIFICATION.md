@@ -2001,3 +2001,20 @@ source-interface, repository conformance, strict Clippy and model/template/SDK/
 self-model checks passed. Complete-registry proposal and actual SDK/Factory
 acceptance remain separate from these controls. Full release acceptance remains
 `just vv`.
+
+## UE-116: payload state absent from literal empty results
+
+The registered source-interface regression initially rejected a zero-input
+empty container solely because its payload schema contains a mutable cell.
+All input, ownership and carrier checks remain. A result exception is considered
+only with no value arguments and only after the existing source translator
+emits the exact typed literal empty-container definition. No payload value is
+read, constructed or transported. Nonempty bodies, wrong result carriers and
+kernels with inputs are rejected by the footprint check; mutable input calls
+retain their prior rejection.
+
+Twelve source-interface controls passed. A compiled Rust fixture with a Cell
+payload agrees with the actual SDK model's empty result; a changed expected
+length is rejected with LLV7002. Repository conformance, strict Clippy and
+model/template/SDK/self-model checks passed. Whole-project native proof and
+SDK/Factory acceptance remain separate. Full release acceptance remains `just vv`.

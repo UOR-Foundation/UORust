@@ -136,6 +136,7 @@ model does not sanction.
 | `UE-113` | `build` | Resolved workspace type identities survive later module-scoped registry rewrites, including qualified parent reexports inside modules with external globs, while genuine foreign unresolved and shadowed type identities remain distinct |
 | `UE-114` | `build` | Dependency-ordered bounded proof batches reuse one immutable model catalogue while applying observed axiom policies and exact verdict contexts, regenerating after semantic refusals before changed ABIs are retried; every accepted decision still requires the actual SDK verifier |
 | `UE-115` | `build` | Native dependency closure imports retained compiler-owned library captures beyond core through the existing resolver and ABI lowering, bound to capture record output digest source toolchain and target, preserving existing preferred models and refusing changed or incompatible inputs |
+| `UE-116` | `build` | Zero-input source kernels may return an empty container over stateful payload types only when the emitted result is the exact literal empty constructor and no payload value is materialized; mutable inputs nonempty results and incompatible native carriers remain refused |
 
 ## factory
 

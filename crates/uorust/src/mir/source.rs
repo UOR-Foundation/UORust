@@ -222,6 +222,21 @@ fn parameterize(ty: &Ty, bindings: &mut BTreeMap<Ty, String>) -> Ty {
     })
 }
 
+/// The SDK's empty list constructor has no payload values. Recognize the
+/// exact typed result of the existing translator, never an operation name.
+fn literal_empty_kernel(decls: &[Decl], name: &str, result: &Ty) -> bool {
+    let element = match result {
+        Ty::List(element) | Ty::Set(element, _) => element.render(),
+        Ty::Map(..) => result.entry().render(),
+        _ => return false,
+    };
+    let empty = format!("(nil {element})");
+    decls.iter().any(|decl| {
+        matches!(decl, Decl::Definition { name: actual, parameters, result: returned, body: crate::lex::Expr::Flat(body), .. }
+            if actual == name && parameters.is_empty() && returned == &result.render() && body == &empty)
+    })
+}
+
 /// Compose carrier bindings once, without inspecting payload values.
 fn map_carriers(ty: &Ty, leaf: &mut impl FnMut(&Ty) -> Option<Ty>) -> Ty {
     if let Some(mapped) = leaf(ty) {
@@ -343,12 +358,11 @@ fn apply_at(
             return None;
         }
     }
-    if args
-        .iter()
-        .map(|(_, t)| t)
-        .chain(std::iter::once(result))
-        .any(|t| !generic_environment(t, types))
-    {
+    if args.iter().any(|(_, t)| !generic_environment(t, types)) {
+        return None;
+    }
+    let ordinary_result = generic_environment(result, types);
+    if !ordinary_result && !args.is_empty() {
         return None;
     }
     let mut bindings = BTreeMap::new();
@@ -442,6 +456,9 @@ fn apply_at(
         if !lifted.failed.is_empty() || !lifted.divergences.is_empty() || lifted.decls.is_empty() {
             return None;
         }
+        if !ordinary_result && !literal_empty_kernel(&lifted.decls, name, &modeled_result) {
+            return None;
+        }
         let mut decls = crate::order::decls(&lifted.ordered, types);
         decls.extend(lifted.decls);
         let term = if generic.is_some() {
@@ -480,6 +497,79 @@ fn apply_at(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn empty_payload_exception_rejects_nonempty_and_input_kernels_ue_116() {
+        let output = Ty::List(Box::new(Ty::Named("Payload".into())));
+        let make = |body: &str| Decl::Definition {
+            name: "model".into(),
+            type_parameters: vec![],
+            parameters: vec![],
+            result: output.render(),
+            body: crate::lex::Expr::Flat(body.into()),
+            axioms: vec![],
+            recursive: None,
+            termination: None,
+            mutual: None,
+        };
+        assert!(literal_empty_kernel(
+            &[make("(nil Payload)")],
+            "model",
+            &output
+        ));
+        assert!(!literal_empty_kernel(
+            &[make("(cons (record Payload {value := 0}) (nil Payload))")],
+            "model",
+            &output
+        ));
+        let mut input = make("(nil Payload)");
+        if let Decl::Definition { parameters, .. } = &mut input {
+            parameters.push(("xs".into(), output.render()));
+        }
+        assert!(!literal_empty_kernel(&[input], "model", &output));
+        assert!(!literal_empty_kernel(
+            &[make("(nil Payload)")],
+            "model",
+            &Ty::Str
+        ));
+    }
+
+    #[test]
+    fn empty_results_do_not_materialize_payload_state_ue_116() {
+        let mut types = Types::default();
+        types
+            .structs
+            .insert("Payload".into(), vec![("value".into(), Ty::Nat(Some(8)))]);
+        types.aliases.insert("Payload".into(), "Payload".into());
+        types.cells.insert(
+            "Payload".into(),
+            BTreeMap::from([("value".into(), crate::lift::CellKind::Cell)]),
+        );
+        let result = Ty::List(Box::new(Ty::Named("Payload".into())));
+        assert!(!callable_environment(&result, &types));
+        assert!(apply(
+            "std::vec::Vec::<Payload>::new",
+            &[],
+            &[],
+            &result,
+            &types,
+            &[(64, vec![])],
+            &BTreeSet::new(),
+            "emptyPayloads"
+        )
+        .is_some());
+        assert!(apply(
+            "std::vec::Vec::<Payload>::clone",
+            &[("xs".into(), result.clone())],
+            &[Some("&std::vec::Vec<Payload>".into())],
+            &result,
+            &types,
+            &[(64, vec![])],
+            &BTreeSet::new(),
+            "badClone"
+        )
+        .is_none());
+    }
 
     #[test]
     fn registry_source_import_requires_locked_owner_and_language_trait_ue_99() {

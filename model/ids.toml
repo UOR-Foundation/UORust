@@ -747,3 +747,9 @@ id = "UE-115"
 level = "build"
 suite = "engine"
 statement = "Native dependency closure imports retained compiler-owned library captures beyond core through the existing resolver and ABI lowering, bound to capture record output digest source toolchain and target, preserving existing preferred models and refusing changed or incompatible inputs"
+
+[[id]]
+id = "UE-116"
+level = "build"
+suite = "engine"
+statement = "Zero-input source kernels may return an empty container over stateful payload types only when the emitted result is the exact literal empty constructor and no payload value is materialized; mutable inputs nonempty results and incompatible native carriers remain refused"
