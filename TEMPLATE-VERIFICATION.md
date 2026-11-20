@@ -1862,3 +1862,19 @@ function-value references, type dependencies, mutual groups, invalid declaration
 missing/empty roots and isolation between different source models. Conformance,
 strict Clippy and model/template/SDK/self-model checks passed. Full release
 acceptance remains the unchanged `just vv` boundary.
+
+## UE-110: native schemas before source-only carrier fallbacks
+
+The registered regression initially failed because a source tuple reading
+suppressed the pinned native record schema. Schema import now tests native ABI
+support separately from the source fallback. Existing native carriers retain
+priority; the existing strict compiler declaration instancer supplies complete
+closed record fields and the established constructor/field kernels consume them.
+No operation registry or SDK behavior changes.
+
+The schema controls preserve native Option, Vec and String readings, word-width
+bindings and declaration field order, while conditional, duplicate, ambiguous,
+unbound and foreign schemas retain their prior refusals. A neutral unsigned
+record fixture passed eight Rust/SDK boundary observations and rejected a changed
+expected result with LLV7002. Its signed counterpart remains a separate control.
+Full release acceptance remains the unchanged `just vv` boundary.

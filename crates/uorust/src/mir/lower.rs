@@ -9583,7 +9583,7 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
     native_type(text, types).or_else(|cause| super::source::type_model(text, types).ok_or(cause))
 }
 
-fn native_type(text: &str, types: &Types) -> Lift<Ty> {
+pub(super) fn native_type(text: &str, types: &Types) -> Lift<Ty> {
     let original = text.trim();
     let primitive = super::int::primitive_owner(original);
     let t = primitive.unwrap_or(original);

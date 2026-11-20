@@ -767,3 +767,10 @@ Feature: engine
     When native context identities select their dependency closures
     Then one lexical parse supplies byte-identical independent closures
     But malformed models and missing or empty root sets remain rejected
+
+  @UE-110 @build
+  Scenario: Native record schemas precede source-only carrier fallbacks
+    Given a closed compiler-owned record with a source carrier and no native constructor
+    When the pinned declaration importer binds its native interface
+    Then its constructor and field reads retain the authoritative declared field order
+    And native models retain priority while ambiguous unbound and foreign schemas are refused

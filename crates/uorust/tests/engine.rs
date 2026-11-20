@@ -10365,7 +10365,21 @@ pub fn unavailable<T:std::hash::Hasher>(x:&T)->u64 {let mut n=1u8;while n>0 {n-=
 
 #[test]
 fn native_library_schemas_reuse_compiler_declarations_ue_103() {
-    let dir=scratch("native-library-schemas", &[
+    check_native_library_schema_vectors(false);
+}
+
+#[test]
+fn native_record_schemas_precede_source_carriers_ue_110() {
+    check_native_library_schema_vectors(true);
+}
+
+fn check_native_library_schema_vectors(unsigned: bool) {
+    let label = if unsigned {
+        "native-source-carrier-schemas"
+    } else {
+        "native-library-schemas"
+    };
+    let dir=scratch(label, &[
       ("Cargo.toml", "[package]\nname=\"library_schemas\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
       ("src/lib.rs",r#"
 pub fn read(a:i32,b:i32,end:bool)->u32 {
@@ -10378,6 +10392,20 @@ pub fn read(a:i32,b:i32,end:bool)->u32 {
 fn main(){for (a,b) in [(i32::MIN,i32::MAX),(-7,3),(0,0),(12345,-67890)] {for end in [false,true] {println!("{} {} {end}|{}",a as u32,b as u32,library_schemas::read(a,b,end));}}}
 "#),
     ]);
+    if unsigned {
+        for file in ["src/lib.rs", "src/bin/vectors.rs"] {
+            let path = dir.join(file);
+            let source = std::fs::read_to_string(&path).unwrap();
+            std::fs::write(
+                path,
+                source
+                    .replace("i32", "u32")
+                    .replace("(-7,3)", "(7,3)")
+                    .replace("-67890", "67890"),
+            )
+            .unwrap();
+        }
+    }
     let rust = std::process::Command::new("cargo")
         .args(["run", "--offline", "--quiet", "--bin", "vectors"])
         .current_dir(&dir)
@@ -10388,7 +10416,7 @@ fn main(){for (a,b) in [(i32::MIN,i32::MAX),(-7,3),(0,0),(12345,-67890)] {for en
         "{}",
         String::from_utf8_lossy(&rust.stderr)
     );
-    let dumps = dumped(&dir, "native-library-schemas");
+    let dumps = dumped(&dir, label);
     let mut probe = options("library_schemas");
     probe.mir = Some(mir_options(
         dumps.clone(),
@@ -10476,7 +10504,11 @@ fn main(){for (a,b) in [(i32::MIN,i32::MAX),(-7,3),(0,0),(12345,-67890)] {for en
         .lines()
         .find(|line| line.contains("name:librarySchemaVector0,"))
         .unwrap();
-    let bad = good.replace(" = 2147483648)", " = 2147483649)");
+    let bad = if unsigned {
+        good.replace(" = 0)", " = 1)")
+    } else {
+        good.replace(" = 2147483648)", " = 2147483649)")
+    };
     assert_ne!(good, bad);
     let wrong = body.replacen(good, &bad, 1);
     assert_ne!(wrong, body);
@@ -10485,6 +10517,9 @@ fn main(){for (a,b) in [(i32::MIN,i32::MAX),(-7,3),(0,0),(12345,-67890)] {for en
     assert!(
         !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
     );
+    if let Some(export) = std::env::var_os("UORUST_TEST_OUTPUT_VERDICTS") {
+        std::fs::copy(&cache, export).unwrap();
+    }
     std::fs::remove_dir_all(dir).unwrap();
 }
 

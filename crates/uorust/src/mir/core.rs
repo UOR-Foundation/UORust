@@ -3072,7 +3072,10 @@ fn import_declaration_schemas(
         let mut parts = Vec::new();
         components(&text, &mut parts);
         for component in parts.into_iter().rev() {
-            if super::lower::ty(&component, &original).is_ok() {
+            // A source-only carrier is not evidence that the native IR can
+            // construct the value. Retain native models, but let the exact
+            // declaration graph bind records the native ABI declines.
+            if super::lower::native_type(&component, &original).is_ok() {
                 continue;
             }
             let Some(local) = component
@@ -3119,6 +3122,84 @@ fn import_declaration_schemas(
 mod standard_interface_tests {
     use super::*;
     use crate::lift::Ty;
+
+    #[test]
+    fn native_record_schemas_precede_source_fallbacks_ue_110() {
+        let mut types = Types::default();
+        let inputs = ["std::ops::Range<u32>", "std::ops::Range<usize>"];
+        for input in inputs {
+            assert!(matches!(
+                super::super::lower::ty(input, &types).unwrap(),
+                Ty::Tuple(_)
+            ));
+        }
+        let native = [
+            "std::option::Option<u32>",
+            "std::vec::Vec<u32>",
+            "std::string::String",
+        ];
+        let prior: Vec<_> = native
+            .iter()
+            .map(|input| super::super::lower::ty(input, &types).unwrap())
+            .collect();
+        let requested = inputs
+            .iter()
+            .chain(native.iter())
+            .map(|s| s.to_string())
+            .collect::<Vec<_>>();
+        import_standard_schemas(&mut types, &requested, &BTreeSet::new());
+        for (input, item) in inputs.into_iter().zip([Ty::Nat(Some(32)), Ty::Nat(None)]) {
+            let Ty::Named(name) = super::super::lower::ty(input, &types).unwrap() else {
+                panic!("source fallback suppressed native record schema: {input}")
+            };
+            assert_eq!(
+                types.structs[&name],
+                vec![("start".into(), item.clone()), ("endValue".into(), item)]
+            );
+        }
+        for (input, reading) in native.into_iter().zip(prior) {
+            assert_eq!(super::super::lower::ty(input, &types).unwrap(), reading);
+        }
+        assert!(!types.core);
+        let source = standard_declarations();
+        let range = source
+            .structs
+            .iter()
+            .find(|s| s.path == "ops::range::Range")
+            .unwrap();
+        for mode in 0..3 {
+            let mut changed = source.clone();
+            match mode {
+                0 => {
+                    changed.conditional.insert(range.path.clone());
+                }
+                1 => changed.structs.push(range.clone()),
+                _ => {
+                    changed
+                        .ambiguous_uses
+                        .insert(("ops".into(), "Range".into()));
+                }
+            }
+            let mut refused = Types::default();
+            import_declaration_schemas(&mut refused, &requested, &BTreeSet::new(), &changed);
+            for input in inputs {
+                assert!(
+                    matches!(
+                        super::super::lower::ty(input, &refused).unwrap(),
+                        Ty::Tuple(_)
+                    ),
+                    "ambiguous schema overrode the source carrier: {mode}"
+                );
+            }
+        }
+        let mut foreign = Types::default();
+        import_standard_schemas(
+            &mut foreign,
+            &["workspace::ops::Range<u32>".into()],
+            &BTreeSet::new(),
+        );
+        assert!(super::super::lower::ty("workspace::ops::Range<u32>", &foreign).is_err());
+    }
 
     #[test]
     fn library_schema_import_keeps_closed_owned_interfaces_ue_103() {

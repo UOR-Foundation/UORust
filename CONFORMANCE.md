@@ -130,6 +130,7 @@ model does not sanction.
 | `UE-107` | `build` | Compiler-owned fixed-width plain MIR integer arithmetic reuses the existing modular intrinsic kernels across compiler forms, retaining explicit overflow assertions and unchecked-operation preconditions; target-dependent widths and incompatible carriers remain refused |
 | `UE-108` | `build` | MIR reinterpret casts and compiler intrinsic calls share one typed native representation kernel, preserving pointer carriers, UTF-8 views and fixed-width array layouts while retaining scalar validity, UTF-8 validity, pointer-view validity and target-layout refusal boundaries |
 | `UE-109` | `build` | Rooted native proof contexts share one immutable lexical dependency index per combined model, retaining exact declaration bytes, UTF-8 boundaries and indivisible mutual groups while preserving malformed-model, missing-root and empty-root refusals without reparsing the whole model per query |
+| `UE-110` | `build` | Pinned closed compiler record schemas are imported when native ABI lowering declines a type even if a source-only carrier fallback exists; native model carriers retain priority and conditional, ambiguous, unbound and foreign schemas remain refused |
 
 ## factory
 
