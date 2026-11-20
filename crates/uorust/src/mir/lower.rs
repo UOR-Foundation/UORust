@@ -2746,6 +2746,31 @@ impl Fun<'_, '_> {
         }
     }
 
+    /// The compiler's written operand type, including field annotations and
+    /// literal suffixes. Unknown projections cannot borrow a root local's type.
+    fn operand_type(&self, operand: &IrOperand) -> Option<String> {
+        match operand {
+            IrOperand::Copy(place) | IrOperand::Move(place) => {
+                let mut written = self.body.locals.get(place.local)?.clone();
+                for projection in &place.projection {
+                    written = match projection {
+                        IrProjection::Deref => referent(&written)?,
+                        IrProjection::Field(_, ty) => ty.clone(),
+                        IrProjection::Downcast(_) => written,
+                        _ => return None,
+                    };
+                }
+                Some(written)
+            }
+            IrOperand::Constant(IrConstant::Int(_, suffix)) => Some(suffix.clone()),
+            IrOperand::Constant(IrConstant::Bool(_)) => Some("bool".into()),
+            IrOperand::Constant(IrConstant::Char(_)) => Some("char".into()),
+            IrOperand::Constant(IrConstant::Str(_)) => Some("&str".into()),
+            IrOperand::Constant(IrConstant::Unit) => Some("()".into()),
+            _ => None,
+        }
+    }
+
     /// A call that returns: its value into `destination`, and each mutably
     /// borrowed place's new value from the callee's backward function. A
     /// callee that threads its `&mut` parameters returns a tuple, which is
@@ -2775,7 +2800,7 @@ impl Fun<'_, '_> {
                 IrOperand::Copy(p) | IrOperand::Move(p) if p.projection.is_empty() => Some(p.local),
                 _ => None,
             };
-            texts.push(whole.and_then(|l| self.body.locals.get(l).cloned()));
+            texts.push(self.operand_type(a));
             lends_place.push(whole.and_then(|l| match st.env.get(&l) {
                 Some(Val::Mut(q)) => Some(q.clone()),
                 _ => st.shared.get(&l).cloned().or_else(|| {

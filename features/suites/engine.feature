@@ -648,3 +648,10 @@ Feature: engine
     When both input and result representations have existing exact codec kernels
     Then source semantics are imported through those shared kernels
     But mutable interfaces and unavailable carrier conversions remain refused
+
+  @UE-93 @build
+  Scenario: Closed primitive trait identities reach their source models
+    Given compiler-qualified standard trait calls on primitive owners
+    When a source semantic model and exact ABI kernels already exist
+    Then the existing semantics bind through the shared import mechanism
+    But workspace traits and owners with unbound payload implementations remain refused

@@ -609,3 +609,9 @@ id = "UE-92"
 level = "build"
 suite = "engine"
 statement = "Compiler-qualified source semantic imports can use exact source ABI representations through shared native/source codec kernels; both input and result conversions are required, while mutable interfaces and unsupported representations remain refused"
+
+[[id]]
+id = "UE-93"
+level = "build"
+suite = "engine"
+statement = "Compiler-qualified standard trait calls on closed primitive owners reuse existing source semantics and exact ABI kernels; workspace traits, workspace owners and composite owners with unbound payload implementations cannot enter this adapter"

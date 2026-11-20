@@ -8936,3 +8936,173 @@ fn main() {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-93: the compiler supplies the closed primitive implementation identity.
+#[test]
+fn compiler_primitive_trait_calls_reuse_semantic_abi_kernels_ue_93() {
+    let dir = scratch("primitive-trait-abi", &[
+        ("Cargo.toml", "[package]\nname=\"primitive_trait\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn greatest(mut n:u8,x:i32,y:i32)->i32 {while n>0 {n-=1;} x.max(y)}
+pub fn least(mut n:u8,x:i32,y:i32)->i32 {while n>0 {n-=1;} x.min(y)}
+"#),
+        ("src/bin/vectors.rs", r#"
+use primitive_trait::*;
+fn main() {for n in [0,2] {for (x,y) in [(i32::MIN,i32::MAX),(i32::MIN,i32::MIN),(-1,0),(i32::MAX,-1)] {
+ for (name,result) in [("greatest",greatest(n,x,y)),("least",least(n,x,y))] {
+  println!("{name}|{n}|{}|{}|{}",x as u32,y as u32,result as u32);
+ }
+}}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 16);
+    let dumps = dumped(&dir, "primitive-trait-abi");
+    let mut opts = options("primitive_trait");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for function in ["greatest", "least"] {
+        let key = format!("primitive_trait::{function}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{key}\"")),
+            "{:?}",
+            residue_detail(&files, &key)
+        );
+    }
+    let cache = dir.join("primitive-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("primitive_trait"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, n, x, y, expected] = parts.as_slice() else {
+            panic!("{line}")
+        };
+        let key = format!("primitive_trait::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&key))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == key)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name:primitiveVector{i},parameters:[],statement:(({name} {n} {x} {y}) = {expected}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(" = 2147483647)", " = 2147483646)", 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn compiler_primitive_arguments_keep_projected_and_literal_types_ue_93() {
+    let dir = scratch("primitive-operand-types", &[
+        ("Cargo.toml", "[package]\nname=\"primitive_operands\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub struct Bounds { pub value:i32 }
+pub fn capped(mut n:u8,b:Bounds)->i32 {while n>0 {n-=1;} b.value.max(0)}
+"#),
+    ]);
+    let dumps = dumped(&dir, "primitive-operand-types");
+    let mut opts = options("primitive_operands");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        text(&files, uorust::mir::CANDIDATES).contains("primitive_operands::capped\""),
+        "{:?}",
+        residue_detail(&files, "primitive_operands::capped")
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

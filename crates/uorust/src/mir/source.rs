@@ -56,12 +56,28 @@ pub(super) fn type_model(text: &str, types: &Types) -> Option<Ty> {
     compatible(&reading).then_some(reading)
 }
 
-/// A standard inherent owner, never a workspace trait or lookalike type.
-fn inherent(callee: &str) -> Option<(String, String)> {
+/// Standard inherent owners and closed primitive standard trait impls. A
+/// container's payload may supply an arbitrary trait impl, so composite and
+/// workspace owners cannot acquire a trait model through this adapter.
+fn operation(callee: &str) -> Option<(String, String)> {
     let parts = super::parse::split_path(callee);
     let method = super::lower::erase(parts.last()?);
     if parts.len() < 2 || syn::parse_str::<syn::Ident>(&method).is_err() {
         return None;
+    }
+    if let [qualified, _] = parts.as_slice() {
+        if let Some((owner, trait_path)) = qualified
+            .strip_prefix('<')
+            .and_then(|q| q.strip_suffix('>'))
+            .and_then(|q| q.split_once(" as "))
+        {
+            let path = syn::parse_str::<syn::Path>(trait_path).ok()?;
+            return (lift::PRIMITIVE_TYPES.contains(&owner)
+                && path.segments.first().is_some_and(|s| {
+                    matches!(s.ident.to_string().as_str(), "std" | "core" | "alloc")
+                }))
+            .then(|| (owner.to_string(), method));
+        }
     }
     if !matches!(parts[0], "std" | "core" | "alloc")
         && !(parts.len() == 2 && lift::PRIMITIVE_TYPES.contains(&parts[0]))
@@ -223,7 +239,7 @@ fn apply_at(
             super::lower::ty(text, types).ok()
         }
     };
-    let (owner, method) = inherent(callee)?;
+    let (owner, method) = operation(callee)?;
     let owner_type = reading(&format!("&{owner}"))?;
     if args.len() != texts.len() {
         return None;
@@ -367,6 +383,22 @@ fn apply_at(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn primitive_trait_import_keeps_compiler_owner_boundaries_ue_93() {
+        assert_eq!(
+            operation("<i32 as std::cmp::Ord>::max"),
+            Some(("i32".into(), "max".into()))
+        );
+        for path in [
+            "<i32 as workspace::Ord>::max",
+            "<workspace::Value as std::cmp::Ord>::max",
+            "<std::option::Option<Payload> as std::clone::Clone>::clone",
+            "<T as std::cmp::Ord>::max",
+        ] {
+            assert!(operation(path).is_none(), "{path}");
+        }
+    }
 
     #[test]
     fn source_abi_import_retains_schema_and_mutability_guards_ue_92() {

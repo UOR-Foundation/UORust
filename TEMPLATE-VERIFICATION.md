@@ -1544,3 +1544,20 @@ result with LLV7002 (134.74 seconds). Seven source import controls, 94 MIR tests
 16 CLI tests, repository conformance, strict Clippy, model/template/SDK lock and
 generated self-model checks passed. Complete release acceptance remains the
 unchanged `just vv` boundary.
+
+## UE-93: compiler-owned primitive trait identities and operand ABI witnesses
+
+The initial compiler fixture remained call residue for a qualified primitive
+standard trait method. The shared source bridge now accepts closed primitive
+owners with standard trait identities, while refusing workspace traits,
+workspace owners, generic owners and composite owners whose payload supplies
+an unbound implementation. No method-specific semantics were added.
+
+Sixteen actual Rust/SDK boundary comparisons passed and an incorrect result
+was rejected with LLV7002 (107.03 seconds). A second regression exposed lost
+argument type witnesses for literals and projected fields. The call binder now
+retains the compiler's literal suffix and projection annotation, following
+dereferences and refusing unavailable projection types. That regression failed
+before the metadata change and passed afterward. Eight source controls, 95 MIR
+tests, conformance, strict Clippy and model/template/SDK/self-model checks passed.
+Complete release acceptance remains the unchanged `just vv` boundary.

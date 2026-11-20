@@ -113,6 +113,7 @@ model does not sanction.
 | `UE-90` | `build` | Compiler aggregate constructor forms resolve through admitted source algebraic declarations and preserve declared field identity and order; record-shaped enum variants and capitalized module struct paths cannot be confused |
 | `UE-91` | `build` | Source and native auxiliary definitions share one complete declaration dependency graph, including function values; providers precede consumers across the auxiliary/native boundary, quoted text creates no dependency, and mutual groups stay intact |
 | `UE-92` | `build` | Compiler-qualified source semantic imports can use exact source ABI representations through shared native/source codec kernels; both input and result conversions are required, while mutable interfaces and unsupported representations remain refused |
+| `UE-93` | `build` | Compiler-qualified standard trait calls on closed primitive owners reuse existing source semantics and exact ABI kernels; workspace traits, workspace owners and composite owners with unbound payload implementations cannot enter this adapter |
 
 ## factory
 
