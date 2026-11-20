@@ -18,7 +18,7 @@ pub(crate) fn touches(text: &str, types: &Types) -> bool {
     })
 }
 
-fn borrows_mutably(t: &RustType) -> bool {
+pub(crate) fn borrows_mutably(t: &RustType) -> bool {
     use crate::ast::{GenericArgument, PathArguments, TypeKind};
     match &t.kind {
         TypeKind::Reference { mutable: true, .. } => true,

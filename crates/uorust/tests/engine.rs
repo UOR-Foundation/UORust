@@ -6282,6 +6282,172 @@ pub fn refused(a:u8)->u8 {a+1}
     std::fs::remove_dir_all(dir).unwrap();
 }
 
+#[test]
+fn source_bound_type_flow_preserves_abstract_field_values_ue_86() {
+    let dir = scratch(
+        "source-type-flow",
+        &[
+            (
+                "Cargo.toml",
+                "[package]\nname=\"type_flow\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n",
+            ),
+            (
+                "src/lib.rs",
+                r#"
+pub trait Service {fn run(&self)->bool;}
+pub struct Holder {pub ready:bool,pub service:&'static dyn Service}
+pub fn carried(mut n:u8,x:&Holder)->&'static dyn Service {while n>0 {n-=1;} x.service}
+pub fn copied(mut n:u8,x:&Holder)->&'static dyn Service {while n>0 {n-=1;} let first=x.service;let second=first;second}
+pub fn changed(mut n:u8,x:&mut Holder,new:&'static dyn Service)->bool {while n>0 {n-=1;} x.service=new;x.ready}
+pub fn operation(mut n:u8,x:&Holder)->bool {while n>0 {n-=1;} x.service.run()}
+pub struct Pair {pub left:&'static dyn Service,pub right:&'static dyn Service}
+pub fn conflict(mut n:u8,x:&Pair,choose:bool)->&'static dyn Service {while n>0 {n-=1;} if choose {x.left} else {x.right}}
+pub fn unanchored(mut n:u8,x:&'static dyn Service)->&'static dyn Service {while n>0 {n-=1;} x}
+"#,
+            ),
+            (
+                "src/bin/vectors.rs",
+                r#"
+use type_flow::*;
+struct False;impl Service for False {fn run(&self)->bool {false}}
+struct True;impl Service for True {fn run(&self)->bool {true}}
+static FALSE:False=False;static TRUE:True=True;
+fn service(value:bool)->&'static dyn Service {if value {&TRUE} else {&FALSE}}
+fn main(){for n in [0,2] {for ready in [false,true] {for old in [false,true] {
+let holder=Holder{ready,service:service(old)};
+println!("carried|{n}|{ready}|{old}|false|{}",carried(n,&holder).run());
+println!("copied|{n}|{ready}|{old}|false|{}",copied(n,&holder).run());
+for new in [false,true] {
+let mut holder=Holder{ready,service:service(old)};
+let result=changed(n,&mut holder,service(new));
+println!("changed|{n}|{ready}|{old}|{new}|({result}, ({ready}, {}))",holder.service.run());
+}}}}}
+"#,
+            ),
+        ],
+    );
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 32);
+    let dumps = dumped(&dir, "source-type-flow");
+    let mut opts = options("type_flow");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for function in ["carried", "copied", "changed"] {
+        let path = format!("type_flow::{function}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+    for function in ["operation", "conflict", "unanchored"] {
+        let path = format!("type_flow::{function}");
+        assert!(
+            residue_detail(&files, &path).is_some(),
+            "{path} acquired an unbound model"
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("source-type-flow-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("type_flow"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, n, ready, old, new, expected] = parts.as_slice() else {
+            panic!("{line}")
+        };
+        let path = format!("type_flow::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let extra = if *function == "changed" {
+            format!(" {new}")
+        } else {
+            String::new()
+        };
+        vectors.push_str(&format!("theorem{{name: typeFlowVector{i}, parameters: [], statement: (({name} [Bool] {n} ({ready}, {old}){extra}) = {expected}), proof: decide{{}}, axioms: [{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = body.replacen("= false)", "= true)", 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::write(&file, &body).unwrap();
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
 /// UE-69: field transport does not require invented service semantics.
 #[test]
 fn compiler_struct_views_preserve_opaque_fields_ue_69() {

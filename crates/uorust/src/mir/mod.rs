@@ -20,6 +20,7 @@ mod codec;
 pub mod core;
 pub mod coverage;
 pub(crate) mod float;
+pub(crate) mod flow;
 pub(crate) mod layout;
 pub(crate) mod link;
 pub(crate) mod lower;

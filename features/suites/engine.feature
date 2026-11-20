@@ -599,3 +599,10 @@ Feature: engine
     When the pinned compiler records qualified identities beside their MIR
     Then the shared dependency importer binds and verifies their actual bodies
     But stale input bindings and ambiguous definition origins are refused
+
+  @UE-86 @build
+  Scenario: Source field identities constrain compiler value transport
+    Given complete source views with abstract field carriers and actual compiler bodies
+    When field projections and value transport constrain compiler locals and results
+    Then signatures and lowering use the same source-bound type environment
+    But conflicting identities and unknown operations or effects remain refused

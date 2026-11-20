@@ -8392,7 +8392,7 @@ fn one_tuple(text: &str) -> bool {
 
 /// The type a reference or box MIR prints points to: `T` of `&T`,
 /// `&mut T` or `Box<T>`.
-fn referent(text: &str) -> Option<String> {
+pub(crate) fn referent(text: &str) -> Option<String> {
     let t = text.trim();
     if let Some(rest) = t.strip_prefix('&') {
         let rest = rest.trim_start();

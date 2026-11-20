@@ -5383,10 +5383,68 @@ fn mir_lift(
             (r, scope)
         })
         .collect();
-    let scope = |r: FnRef| {
+    let base_scope = |r: FnRef| {
         generic_scopes
             .get(&r)
             .unwrap_or(&scopes[&(r.pkg, ctx.file(r).target)])
+    };
+    let definition_keys = embedding_keys(ctx);
+    let body_of = |r: FnRef| {
+        let krate = ctx.crate_ident(r);
+        let path = ctx.path(r);
+        let prefix = format!("{krate}::");
+        let local = path.strip_prefix(&prefix).unwrap_or(&path);
+        dumps
+            .crates
+            .get(&krate)
+            .and_then(|c| c.get(local))
+            .or_else(|| {
+                let mut key = definition_keys.get(&path)?.clone();
+                if let Some((file, _, _)) = &mut key.impl_at {
+                    file.clone_from(&ctx.file(r).rel);
+                }
+                dumps.definitions.get(&key)
+            })
+    };
+    // Intern inferred source frames: equal constraints share one immutable type
+    // environment instead of cloning the complete workspace for every body.
+    let mut flow_environments = BTreeMap::new();
+    let mut flow_frames = BTreeMap::new();
+    let mut flow_errors = BTreeMap::new();
+    for r in ctx
+        .all_fns()
+        .into_iter()
+        .filter(|&r| ctx.product(r) && notes.residue.contains_key(&ctx.path(r)))
+    {
+        let Some(body) = body_of(r) else {
+            continue;
+        };
+        let base = base_scope(r);
+        match crate::mir::flow::infer(body, base) {
+            Ok(inferred) if !inferred.is_empty() => {
+                let bindings = crate::mir::flow::bindings(body, base, &inferred);
+                if bindings != base.generic {
+                    let key = (r.pkg, ctx.file(r).target, bindings);
+                    flow_environments
+                        .entry(key.clone())
+                        .or_insert_with(|| Types {
+                            generic: key.2.clone(),
+                            ..base.clone()
+                        });
+                    flow_frames.insert(r, key);
+                }
+            }
+            Err(reason) => {
+                flow_errors.insert(r, reason);
+            }
+            _ => {}
+        }
+    }
+    let scope = |r: FnRef| {
+        flow_frames
+            .get(&r)
+            .and_then(|key| flow_environments.get(key))
+            .unwrap_or_else(|| base_scope(r))
     };
     let widths = lift::pointer_widths(&ctx.ws.targets);
     // Enums whose variants set their discriminants, by LexLean name.
@@ -5432,28 +5490,18 @@ fn mir_lift(
     let mut callees = lifted.clone();
     let mut names: BTreeSet<String> = taken.clone();
     let residue: Vec<String> = notes.residue.keys().cloned().collect();
-    let definition_keys = embedding_keys(ctx);
     for path in residue {
         let Some(&r) = product.get(&path) else {
             continue;
         };
-        let krate = ctx.crate_ident(r);
-        let local = path
-            .strip_prefix(&format!("{krate}::"))
-            .unwrap_or(&path)
-            .to_string();
         let f = ctx.func(r);
-        let body = dumps
-            .crates
-            .get(&krate)
-            .and_then(|c| c.get(&local))
-            .or_else(|| {
-                let mut key = definition_keys.get(&path)?.clone();
-                if let Some((file, _, _)) = &mut key.impl_at {
-                    file.clone_from(&ctx.file(r).rel);
-                }
-                dumps.definitions.get(&key)
-            });
+        if let Some(reason) = flow_errors.get(&r) {
+            notes
+                .residue
+                .insert(path, (f.span.clone(), mir_residue(reason.clone())));
+            continue;
+        }
+        let body = body_of(r);
         let Some(body) = body else {
             continue;
         };

@@ -1432,3 +1432,29 @@ parsed MIR source-definition classifier; collection and loading share the same
 identity check. The three focused controls pass, including this compiler-backed
 negative control. Loader hash/source/configuration checks remain strict, and
 invalid body bindings name the offending MIR path.
+
+## UE-86: source-bound compiler type-flow constraints
+
+The registered regression initially rejected a borrowed source field as
+`mir::Ty: dyn Service`. Its existing source view already supplied an abstract
+carrier; independent local and return readers lost that identity.
+
+The solver collects rigid source anchors on compiler value transport. Resolved
+compiler types already identify the equality classes, so one pass supplies the
+constraints; no repeated whole-body scan or new opaque sort is needed. Equal
+frames share an interned environment, used by both native signature construction
+and body lowering. Existing operation, mutable-state, drop and ambiguity guards
+remain in force. Unknown operations and unanchored values supply no model.
+
+The actual SDK regression passed 32 Rust comparisons, including borrowed field
+returns, copies and mutable-container updates, and rejected a planted wrong
+result with LLV7002 in 93.97 seconds. Controls retain conflicts, unrelated trait
+identities, unanchored values, raw pointers and unread mutable borrows as open.
+This is evidence for the shared mechanism; the consumer count remains its last
+fully SDK-verified checkpoint until the guarded whole-registry run completes.
+
+The changed-dependency qualification passed all 87 MIR controls, 20 name-resolution
+controls, 16 CLI tests, repo-conformance, strict all-target Clippy, model validation,
+immutable template/SDK-lock checks and generated self-model checks. Compiler
+observations remain pinned to their original producer independently of the new
+projector; unchanged consumer input capture is not repeated.
