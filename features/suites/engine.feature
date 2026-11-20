@@ -718,3 +718,10 @@ Feature: engine
     When the existing generic binder supplies each concrete implementation
     Then native calls and loop helpers retain that exact typed dictionary
     But unrelated traits and unavailable dictionary interfaces cannot supply a method
+
+  @UE-103 @build
+  Scenario: Compiler-library type schemas reuse their source declaration graph
+    Given closed standard-library types in captured native MIR and the exact pinned Rust source archive
+    When the existing declaration instancer imports their reachable schemas
+    Then native construction and field reads retain the compiler-owned fields and carriers
+    But incompatible, conditional and unbound schemas cannot acquire a model

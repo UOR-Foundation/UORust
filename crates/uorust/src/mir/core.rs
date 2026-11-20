@@ -622,7 +622,7 @@ fn without_def_ids(text: &str) -> String {
 /// A struct core's source declares: its path from core's root, its type
 /// parameters and its fields (a tuple struct's by position), each with its
 /// type as written.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
 pub(crate) struct CoreStruct {
     pub(crate) path: String,
     pub(crate) params: Vec<String>,
@@ -672,9 +672,14 @@ impl CoreStruct {
 /// What core's source declares that names its types: its structs and enums
 /// of unit variants, and each module's `use` names, by module and name, to
 /// the path each names from core's root.
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, serde::Serialize, serde::Deserialize)]
+#[serde(from = "DeclarationSnapshot", into = "DeclarationSnapshot")]
 pub(crate) struct CoreDecls {
     pub(crate) structs: Vec<CoreStruct>,
+    /// Source schemas with conditional fields or variants need target selection.
+    conditional: BTreeSet<String>,
+    ambiguous_aliases: BTreeSet<String>,
+    ambiguous_uses: BTreeSet<(String, String)>,
     /// The structs and enums a function's body declares, by their paths
     /// through the function's (`try_statx::STATX_STATE`): kept apart from
     /// `structs`, which names are looked up in by their last segment.
@@ -1111,6 +1116,20 @@ pub(crate) fn library_decls(root: &Path, krates: &[&str]) -> CoreDecls {
             found
         };
         for item in list {
+            if let syn::Item::Enum(e) = item {
+                if e.variants.iter().any(|v| {
+                    v.attrs
+                        .iter()
+                        .any(|a| a.path().is_ident("cfg") || a.path().is_ident("cfg_attr"))
+                        || v.fields.iter().any(|f| {
+                            f.attrs
+                                .iter()
+                                .any(|a| a.path().is_ident("cfg") || a.path().is_ident("cfg_attr"))
+                        })
+                }) {
+                    out.conditional.insert(at(e.ident.to_string()));
+                }
+            }
             match item {
                 syn::Item::Const(c) => {
                     let e = &c.expr;
@@ -1120,6 +1139,13 @@ pub(crate) fn library_decls(root: &Path, krates: &[&str]) -> CoreDecls {
                     );
                 }
                 syn::Item::Struct(st) => {
+                    if st.fields.iter().any(|f| {
+                        f.attrs
+                            .iter()
+                            .any(|a| a.path().is_ident("cfg") || a.path().is_ident("cfg_attr"))
+                    }) {
+                        out.conditional.insert(at(st.ident.to_string()));
+                    }
                     let ds: Vec<Option<String>> = st
                         .generics
                         .type_params()
@@ -1229,10 +1255,12 @@ pub(crate) fn library_decls(root: &Path, krates: &[&str]) -> CoreDecls {
                     out.unions.insert(at(u.ident.to_string()));
                 }
                 syn::Item::Type(t) => {
-                    out.aliases.insert(
-                        at(t.ident.to_string()),
-                        (module.join("::"), generic_names(&t.generics), text(&t.ty)),
-                    );
+                    let key = at(t.ident.to_string());
+                    let value = (module.join("::"), generic_names(&t.generics), text(&t.ty));
+                    if out.aliases.get(&key).is_some_and(|old| old != &value) {
+                        out.ambiguous_aliases.insert(key.clone());
+                    }
+                    out.aliases.insert(key, value);
                 }
                 // An enum whose variants hold data, over its parameters.
                 syn::Item::Enum(e) => {
@@ -1400,7 +1428,11 @@ pub(crate) fn library_decls(root: &Path, krates: &[&str]) -> CoreDecls {
                     let mut names = Vec::new();
                     use_names(module, &[], &u.tree, &mut names);
                     for (name, target) in names {
-                        out.uses.insert((module.join("::"), name), target);
+                        let key = (module.join("::"), name);
+                        if out.uses.get(&key).is_some_and(|old| old != &target) {
+                            out.ambiguous_uses.insert(key.clone());
+                        }
+                        out.uses.insert(key, target);
                     }
                 }
                 syn::Item::Mod(m) => {
@@ -1570,6 +1602,8 @@ fn components(text: &str, out: &mut Vec<String>) {
 /// mention them.
 struct Instances<'a> {
     decls: &'a CoreDecls,
+    strict: bool,
+    reserved: BTreeSet<String>,
     /// Each declared path, where one declaration (or one enum declared once
     /// for each configuration) has it.
     by: BTreeMap<String, CoreStruct>,
@@ -1739,6 +1773,16 @@ impl Instances<'_> {
             return None;
         }
         let st = self.by.get(path)?.clone();
+        if self.strict
+            && (st.variants.is_some()
+                || st.data.is_some()
+                || args.iter().any(|arg| {
+                    super::lower::ty(arg, types).is_err()
+                        || super::lower::ty(arg, types).is_ok_and(|t| !t.parameters().is_empty())
+                }))
+        {
+            return None;
+        }
         // An enum the scope lifts as its own, of the same variants, keeps
         // its lift.
         let own = types.resolve(st.name());
@@ -1819,7 +1863,19 @@ impl Instances<'_> {
             super::lower::ty(&t, types).ok()
         };
         parts.extend(args.iter().copied());
-        let name = crate::lex::pascal(&parts);
+        let mut name = crate::lex::pascal(&parts);
+        if self.strict && !args.is_empty() {
+            let actual: Vec<_> = args
+                .iter()
+                .map(|arg| super::lower::ty(arg, types).ok())
+                .collect::<Option<_>>()?;
+            name.push_str(&crate::project::sha(
+                format!("library-record/1\0{path}\0{actual:?}").as_bytes(),
+            ));
+        }
+        if self.strict && self.reserved.contains(&name) {
+            return None;
+        }
         let text = if args.is_empty() {
             path.to_string()
         } else {
@@ -1863,6 +1919,12 @@ impl Instances<'_> {
                     .map_or_else(|| format!("item{i}"), lift::local_name),
                 ft,
             ));
+        }
+        if self.strict && fields.iter().any(|(_, t)| !t.parameters().is_empty()) {
+            return None;
+        }
+        if self.strict && fields.is_empty() {
+            types.enums.insert(name.clone(), vec!["mk".into()]);
         }
         // A struct of one pattern-typed field holds the values its pattern
         // admits.
@@ -1958,6 +2020,8 @@ fn instantiate_structs(
     }
     let mut cx = Instances {
         decls,
+        strict: false,
+        reserved: BTreeSet::new(),
         by,
         done: BTreeMap::new(),
         explicit: std::collections::BTreeSet::new(),
@@ -2746,5 +2810,356 @@ mod tests {
             cause_category("mir::TerminatorKind::Call: Option::<u32>::map(x)"),
             "mir::TerminatorKind::Call: Option::map"
         );
+    }
+}
+
+type AssociatedDeclaration = ((String, String, String), (String, String));
+
+/// Source snapshot uses ordered sequences for composite-key declaration maps.
+#[derive(serde::Serialize, serde::Deserialize)]
+struct DeclarationSnapshot {
+    structs: Vec<CoreStruct>,
+    conditional: BTreeSet<String>,
+    ambiguous_aliases: BTreeSet<String>,
+    ambiguous_uses: BTreeSet<(String, String)>,
+    locals: Vec<CoreStruct>,
+    uses: Vec<((String, String), String)>,
+    generics: BTreeMap<String, Vec<String>>,
+    intrinsics: std::collections::BTreeSet<String>,
+    traits: std::collections::BTreeSet<String>,
+    unions: std::collections::BTreeSet<String>,
+    aliases: BTreeMap<String, (String, Vec<String>, String)>,
+    methods: BTreeMap<String, std::collections::BTreeSet<String>>,
+    consts: BTreeMap<String, BTreeMap<String, String>>,
+    assoc: Vec<AssociatedDeclaration>,
+    items: BTreeMap<String, (String, String)>,
+    fn_bounds: BTreeMap<String, BTreeMap<String, String>>,
+    defaults: BTreeMap<String, Option<Vec<Option<String>>>>,
+    trait_params: BTreeMap<String, Vec<String>>,
+}
+impl From<CoreDecls> for DeclarationSnapshot {
+    fn from(value: CoreDecls) -> Self {
+        Self {
+            structs: value.structs,
+            conditional: value.conditional,
+            ambiguous_aliases: value.ambiguous_aliases,
+            ambiguous_uses: value.ambiguous_uses,
+            locals: value.locals,
+            uses: value.uses.into_iter().collect(),
+            generics: value.generics,
+            intrinsics: value.intrinsics,
+            traits: value.traits,
+            unions: value.unions,
+            aliases: value.aliases,
+            methods: value.methods,
+            consts: value.consts,
+            assoc: value.assoc.into_iter().collect(),
+            items: value.items,
+            fn_bounds: value.fn_bounds,
+            defaults: value.defaults,
+            trait_params: value.trait_params,
+        }
+    }
+}
+impl From<DeclarationSnapshot> for CoreDecls {
+    fn from(value: DeclarationSnapshot) -> Self {
+        Self {
+            structs: value.structs,
+            conditional: value.conditional,
+            ambiguous_aliases: value.ambiguous_aliases,
+            ambiguous_uses: value.ambiguous_uses,
+            locals: value.locals,
+            uses: value.uses.into_iter().collect(),
+            generics: value.generics,
+            intrinsics: value.intrinsics,
+            traits: value.traits,
+            unions: value.unions,
+            aliases: value.aliases,
+            methods: value.methods,
+            consts: value.consts,
+            assoc: value.assoc.into_iter().collect(),
+            items: value.items,
+            fn_bounds: value.fn_bounds,
+            defaults: value.defaults,
+            trait_params: value.trait_params,
+        }
+    }
+}
+
+#[derive(serde::Serialize, serde::Deserialize)]
+struct StandardDeclarations {
+    spec: String,
+    toolchain: String,
+    source_sha256: String,
+    declarations_sha256: String,
+    declarations: CoreDecls,
+}
+
+#[cfg(test)]
+mod standard_source_tests {
+    use super::*;
+
+    #[test]
+    fn core_declarations_reproduce_pinned_source_ue_103() {
+        let destination = Path::new(env!("CARGO_MANIFEST_DIR")).join("mir/std-declarations.json");
+        let registry: toml::Value = toml::from_str(include_str!("../../mir/std.toml")).unwrap();
+        let pin = registry["rust_src_xz_sha256"].as_str().unwrap();
+        if let Some(root) = std::env::var_os("UORUST_CORE_SOURCE_ROOT") {
+            let archive = std::env::var_os("UORUST_CORE_SOURCE_ARCHIVE")
+                .expect("source archive required for provenance");
+            assert_eq!(crate::project::sha(&std::fs::read(&archive).unwrap()), pin);
+            let checked=std::process::Command::new("python3").args(["-c",r#"
+import pathlib,sys,tarfile,hashlib
+root=pathlib.Path(sys.argv[1]); checked=0; expected=set()
+with tarfile.open(sys.argv[2], 'r:xz') as archive:
+ for entry in archive:
+  marker='/library/core/src/'
+  if entry.isfile() and marker in entry.name:
+   relative=entry.name.split(marker,1)[1]
+   expected.add(relative)
+   actual=root/'library/core/src'/relative
+   assert actual.is_file(),relative
+   assert hashlib.sha256(actual.read_bytes()).digest()==hashlib.sha256(archive.extractfile(entry).read()).digest(),relative
+   checked+=1
+assert checked>100
+actual={str(p.relative_to(root/'library/core/src')) for p in (root/'library/core/src').rglob('*.rs') if p.is_file()}
+assert actual=={p for p in expected if p.endswith('.rs')}, 'unregistered or missing Rust source'
+"#]).arg(&root).arg(&archive).status().unwrap();
+            assert!(
+                checked.success(),
+                "Rust source differs from its exact pinned archive"
+            );
+            let declarations = core_decls(Path::new(&root));
+            assert!(declarations.structs.len() > 100);
+            let declarations_sha256 =
+                crate::project::sha(&serde_json::to_vec(&declarations).unwrap());
+            let source = StandardDeclarations {
+                spec: "uorust/compiler-library-declarations/1".into(),
+                toolchain: super::super::spec::TOOLCHAIN.into(),
+                source_sha256: pin.into(),
+                declarations_sha256,
+                declarations,
+            };
+            let bytes = serde_json::to_vec_pretty(&source).unwrap();
+            if std::env::var_os("UORUST_WRITE_SPEC").is_some() {
+                std::fs::write(&destination, &bytes).unwrap();
+            }
+            assert_eq!(std::fs::read(&destination).unwrap(), bytes);
+        }
+        let source: StandardDeclarations =
+            serde_json::from_slice(&std::fs::read(destination).unwrap()).unwrap();
+        assert_eq!(source.spec, "uorust/compiler-library-declarations/1");
+        assert_eq!(source.toolchain, super::super::spec::TOOLCHAIN);
+        assert_eq!(source.source_sha256, pin);
+        assert_eq!(
+            source.declarations_sha256,
+            crate::project::sha(&serde_json::to_vec(&source.declarations).unwrap())
+        );
+        assert!(source.declarations.structs.len() > 100);
+    }
+}
+
+fn standard_declarations() -> &'static CoreDecls {
+    static SOURCE: std::sync::OnceLock<CoreDecls> = std::sync::OnceLock::new();
+    SOURCE.get_or_init(|| {
+        let source: StandardDeclarations =
+            serde_json::from_str(include_str!("../../mir/std-declarations.json"))
+                .expect("generated compiler library declarations");
+        let registry: toml::Value =
+            toml::from_str(include_str!("../../mir/std.toml")).expect("pinned registry");
+        assert_eq!(source.spec, "uorust/compiler-library-declarations/1");
+        assert_eq!(source.toolchain, super::spec::TOOLCHAIN);
+        assert_eq!(
+            source.source_sha256,
+            registry["rust_src_xz_sha256"].as_str().expect("source pin")
+        );
+        assert_eq!(
+            source.declarations_sha256,
+            crate::project::sha(
+                &serde_json::to_vec(&source.declarations).expect("declaration identity")
+            )
+        );
+        source.declarations
+    })
+}
+
+/// Import exact closed record schemas; operation semantics remain in the
+/// existing source/native translators and standard models.
+pub(crate) fn import_standard_schemas(
+    types: &mut Types,
+    requested: &[String],
+    reserved: &BTreeSet<String>,
+) {
+    import_declaration_schemas(types, requested, reserved, standard_declarations());
+}
+
+fn import_declaration_schemas(
+    types: &mut Types,
+    requested: &[String],
+    reserved: &BTreeSet<String>,
+    source: &CoreDecls,
+) {
+    let mut declarations = source.clone();
+    declarations
+        .uses
+        .retain(|key, _| !source.ambiguous_uses.contains(key));
+    declarations
+        .aliases
+        .retain(|name, _| !source.ambiguous_aliases.contains(name));
+    let mut groups: BTreeMap<String, Vec<CoreStruct>> = BTreeMap::new();
+    for schema in &source.structs {
+        groups
+            .entry(schema.path.clone())
+            .or_default()
+            .push(schema.clone());
+    }
+    let by = groups
+        .into_iter()
+        .filter_map(|(name, mut declarations)| {
+            (declarations.len() == 1 && !source.conditional.contains(&name))
+                .then(|| (name, declarations.remove(0)))
+        })
+        .collect();
+    let mut instances = Instances {
+        decls: &declarations,
+        strict: true,
+        reserved: reserved.clone(),
+        by,
+        done: BTreeMap::new(),
+        explicit: BTreeSet::new(),
+    };
+    let original = types.clone();
+    let mut imported = types.clone();
+    imported.core = true;
+    let old_names: BTreeSet<_> = types
+        .structs
+        .keys()
+        .chain(types.enums.keys())
+        .chain(types.datas.keys())
+        .cloned()
+        .collect();
+    let mut roots = requested.to_vec();
+    roots.extend(
+        super::stdlib::table()
+            .instantiate
+            .iter()
+            .map(|name| format!("core::{name}")),
+    );
+    for text in roots {
+        let mut parts = Vec::new();
+        components(&text, &mut parts);
+        for component in parts.into_iter().rev() {
+            if super::lower::ty(&component, &original).is_ok() {
+                continue;
+            }
+            let Some(local) = component
+                .strip_prefix("core::")
+                .or_else(|| component.strip_prefix("std::"))
+            else {
+                continue;
+            };
+            instances.mention(local, &mut imported);
+            let key = super::lower::without_lifetimes(local);
+            let name = imported
+                .aliases
+                .get(local)
+                .or_else(|| imported.aliases.get(&key))
+                .cloned();
+            if let Some(name) =
+                name.filter(|name| !old_names.contains(name) && imported.structs.contains_key(name))
+            {
+                imported.aliases.insert(component.clone(), name.clone());
+                imported
+                    .aliases
+                    .insert(super::lower::without_lifetimes(&component), name.clone());
+                imported
+                    .native_views
+                    .insert(name.clone(), lift::Ty::Named(name));
+            }
+        }
+    }
+    // Reached dependencies may be named from core's own module scope.
+    for name in imported
+        .structs
+        .keys()
+        .filter(|name| !old_names.contains(*name))
+    {
+        imported
+            .native_views
+            .insert(name.clone(), lift::Ty::Named(name.clone()));
+    }
+    imported.core = original.core;
+    *types = imported;
+}
+
+#[cfg(test)]
+mod standard_interface_tests {
+    use super::*;
+    use crate::lift::Ty;
+
+    #[test]
+    fn library_schema_import_keeps_closed_owned_interfaces_ue_103() {
+        let request = vec!["std::ops::Range<i32>".into()];
+        let mut types = Types::default();
+        import_standard_schemas(&mut types, &request, &BTreeSet::new());
+        let Ty::Named(name) = super::super::lower::ty(&request[0], &types).unwrap() else {
+            panic!("range schema missing")
+        };
+        assert_eq!(
+            types.structs[&name],
+            vec![
+                ("start".into(), Ty::Signed(Some(32))),
+                ("endValue".into(), Ty::Signed(Some(32)))
+            ]
+        );
+        let Ty::Named(error) = super::super::lower::ty("core::fmt::Error", &types).unwrap() else {
+            panic!("unit schema missing")
+        };
+        assert_eq!(
+            crate::lift::struct_value(&error, &[], &types),
+            format!("(ctor {error}.mk)")
+        );
+        assert!(!types.core);
+        let mut collision = Types::default();
+        collision.structs.insert(name.clone(), Vec::new());
+        import_standard_schemas(&mut collision, &request, &[name].into());
+        assert!(super::super::lower::ty(&request[0], &collision).is_err());
+        let mut generic = Types::default();
+        generic.generic.insert("T".into(), Ty::Param("t".into()));
+        import_standard_schemas(
+            &mut generic,
+            &[
+                "core::ops::Range<T>".into(),
+                "workspace::ops::Range<i32>".into(),
+            ],
+            &BTreeSet::new(),
+        );
+        assert!(super::super::lower::ty("core::ops::Range<T>", &generic).is_err());
+        assert!(super::super::lower::ty("workspace::ops::Range<i32>", &generic).is_err());
+        let source = standard_declarations();
+        let range = source
+            .structs
+            .iter()
+            .find(|s| s.path == "ops::range::Range")
+            .unwrap()
+            .clone();
+        for mode in 0..3 {
+            let mut source = source.clone();
+            match mode {
+                0 => {
+                    source.conditional.insert(range.path.clone());
+                }
+                1 => source.structs.push(range.clone()),
+                _ => {
+                    source.ambiguous_uses.insert(("ops".into(), "Range".into()));
+                }
+            }
+            let mut refused = Types::default();
+            import_declaration_schemas(&mut refused, &request, &BTreeSet::new(), &source);
+            assert!(
+                super::super::lower::ty(&request[0], &refused).is_err(),
+                "schema ambiguity mode {mode}"
+            );
+        }
     }
 }

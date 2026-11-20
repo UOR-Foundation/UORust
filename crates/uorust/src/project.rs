@@ -5388,6 +5388,13 @@ fn mir_lift(
     } else {
         Vec::new()
     };
+    let reserved: BTreeSet<_> = source_types
+        .structs
+        .keys()
+        .chain(source_types.enums.keys())
+        .chain(source_types.datas.keys())
+        .cloned()
+        .collect();
     let scopes: BTreeMap<(usize, usize), Types> = scopes
         .iter()
         .map(|(&at, s)| {
@@ -5407,9 +5414,35 @@ fn mir_lift(
                     .entry(crate::mir::memory::MEMORY.to_string())
                     .or_insert_with(crate::mir::memory::memory_fields);
             }
+            let krate = ctx.ws.packages[at.0].targets[at.1].name.replace('-', "_");
+            let mut requested: Vec<_> = dumps
+                .crates
+                .get(&krate)
+                .into_iter()
+                .flat_map(|bodies| bodies.values())
+                .flat_map(|body| body.locals.iter().cloned())
+                .collect();
+            requested.extend(
+                dumps
+                    .closures
+                    .get(&krate)
+                    .into_iter()
+                    .flat_map(|bodies| bodies.values())
+                    .flat_map(|body| body.locals.iter().cloned()),
+            );
+            crate::mir::core::import_standard_schemas(&mut scope, &requested, &reserved);
             (at, scope)
         })
         .collect();
+    let original_types = source_types;
+    let mut effective_types = source_types.clone();
+    for scope in scopes.values() {
+        effective_types.structs.extend(scope.structs.clone());
+        effective_types.enums.extend(scope.enums.clone());
+        effective_types.datas.extend(scope.datas.clone());
+        effective_types.borrowing.extend(scope.borrowing.clone());
+    }
+    let source_types = &effective_types;
     let generic_scopes: BTreeMap<FnRef, Types> = generics
         .iter()
         .map(|(&r, g)| {
@@ -6274,7 +6307,26 @@ fn mir_lift(
                 .insert(t.path.clone(), (span, Residue::Mir(cause.clone())));
         }
     }
-    let mut declarations = in_dependency_order(aux);
+    let mut schema_declarations = Vec::new();
+    let mut emitted_schemas = BTreeSet::new();
+    for ty in &out.types {
+        if let Ty::Named(name) = ty {
+            if !original_types.structs.contains_key(name)
+                && !original_types.enums.contains_key(name)
+                && !original_types.datas.contains_key(name)
+            {
+                type_decls(
+                    ty,
+                    source_types,
+                    &BTreeSet::new(),
+                    &mut emitted_schemas,
+                    &mut schema_declarations,
+                );
+            }
+        }
+    }
+    let mut declarations = schema_declarations;
+    declarations.extend(in_dependency_order(aux));
     declarations.extend(body_decls);
     out.decls.extend(surface_dependency_order(declarations));
     if options.trial != crate::mir::Trial::Off {

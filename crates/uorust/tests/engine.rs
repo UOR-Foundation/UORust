@@ -10362,3 +10362,128 @@ pub fn unavailable<T:std::hash::Hasher>(x:&T)->u64 {let mut n=1u8;while n>0 {n-=
     }
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn native_library_schemas_reuse_compiler_declarations_ue_103() {
+    let dir=scratch("native-library-schemas", &[
+      ("Cargo.toml", "[package]\nname=\"library_schemas\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+      ("src/lib.rs",r#"
+pub fn read(a:i32,b:i32,end:bool)->u32 {
+ let mut n=1u8;while n>0 {n-=1;}
+ let range=a..b;
+ if end {range.end as u32} else {range.start as u32}
+}
+"#),
+      ("src/bin/vectors.rs",r#"
+fn main(){for (a,b) in [(i32::MIN,i32::MAX),(-7,3),(0,0),(12345,-67890)] {for end in [false,true] {println!("{} {} {end}|{}",a as u32,b as u32,library_schemas::read(a,b,end));}}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "native-library-schemas");
+    let mut probe = options("library_schemas");
+    probe.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &probe).unwrap();
+    assert!(
+        residue_detail(&proposed, "library_schemas::read").is_none(),
+        "{:?}",
+        residue_detail(&proposed, "library_schemas::read")
+    );
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("library_schemas"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("library_schemas");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let row = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("library_schemas::read"));
+    assert!(
+        row.is_some(),
+        "{:?}",
+        residue_detail(&files, "library_schemas::read")
+    );
+    let name = row.unwrap()["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let decisions = verdicts(&cache);
+    let policy = decisions
+        .rows
+        .values()
+        .find(|v| v.function == "library_schemas::read")
+        .and_then(|v| v.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let mut vectors = String::new();
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let (arg, value) = line.split_once('|').unwrap();
+        vectors.push_str(&format!("theorem{{name:librarySchemaVector{i},parameters:[],statement:(({name} {arg}) = {value}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|line| line.contains("name:librarySchemaVector0,"))
+        .unwrap();
+    let bad = good.replace(" = 2147483648)", " = 2147483649)");
+    assert_ne!(good, bad);
+    let wrong = body.replacen(good, &bad, 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

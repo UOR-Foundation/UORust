@@ -365,6 +365,14 @@ fn named_in(types: &BTreeSet<Ty>) -> BTreeSet<String> {
 /// A struct value from its fields in declaration order: a record, or the
 /// constructor `mk` of a struct of a recursive family.
 pub(crate) fn struct_value(name: &str, fields: &[(&String, String)], types: &Types) -> String {
+    if fields.is_empty()
+        && types
+            .enums
+            .get(name)
+            .is_some_and(|variants| variants.as_slice() == ["mk"])
+    {
+        return format!("(ctor {name}.mk)");
+    }
     if types.boxed(name) {
         let args = fields
             .iter()

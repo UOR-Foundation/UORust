@@ -1719,3 +1719,22 @@ uncaptured dictionary interfaces refused (0.32 seconds). Twenty-two lowering
 controls, compiler-reference identity coverage, conformance, strict Clippy and
 model/template/SDK/self-model checks passed. Complete release acceptance remains
 the unchanged `just vv` boundary.
+
+## UE-103: compiler-library schemas reuse source declarations
+
+The initial native fixture refused `std::ops::Range<i32>` (0.67 seconds).
+Closed, unconditional library records now use the existing core declaration
+reader and instancer, with native field carriers and content-bound generic
+names. The generated snapshot reproduces the exact checksum-pinned rust-src
+archive and rejects missing, extra or modified Rust source. Operation behavior
+continues to use the existing translators; no operation model was added.
+
+Eight actual Rust/SDK comparisons passed for range construction and field
+selection, including signed boundaries; an incorrect result was rejected with
+LLV7002 (102.28 seconds). Source reproduction and schema controls passed
+(9.31 seconds), covering conditional or duplicate declarations, ambiguous
+reexports, unbound parameters, namespace and reserved-name collisions. The
+snapshot uses derived serialization; its bytes are unchanged by the wire
+representation. Twenty-two lowering controls, conformance, strict Clippy and
+model/template/SDK/self-model checks passed. Complete release acceptance
+remains the unchanged `just vv` boundary.
