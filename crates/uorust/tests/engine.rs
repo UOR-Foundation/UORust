@@ -3368,7 +3368,14 @@ fn native_trials_keep_only_reachable_obligations_ue_53() {
         2,
     )
     .expect("actual scoped decisions");
-    assert_eq!((summary.proved, summary.refused), (1, 1));
+    // The normal overflow model is refused; its explicit panic-outcome
+    // model is separately proved. The frozen pre-catalogue producer gives
+    // the same two positive decisions and one refusal.
+    assert_eq!((summary.proved, summary.refused), (2, 1));
+    assert_eq!(
+        summary.projections, 2,
+        "the refusal must refresh the catalogue once"
+    );
     let scoped =
         std::fs::read_to_string(trial.join("src/Behavior.lex.tex")).expect("actual proof input");
     assert!(!scoped.contains("unrelated"));
@@ -11427,6 +11434,113 @@ fn resolved_workspace_types_survive_external_globs_in_sdk_ue_113() {
     );
     assert_ne!(good, bad);
     std::fs::write(&file, body.replacen(good, &bad, 1)).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn bounded_proof_batches_reuse_the_catalogue_ue_114() {
+    let dir = scratch("catalogue-batches", &[
+        ("Cargo.toml", "[package]\nname=\"catalogue_batches\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn first(x:u8)->u8 {let mut n=1u8;while n>0 {n-=1;} x}
+pub fn second(x:u8)->u8 {let mut n=1u8;while n>0 {n-=1;} x}
+"#),
+        ("src/bin/vectors.rs", r#"fn main(){for x in [0u8,1,254,255] {println!("{x}|{}|{}",catalogue_batches::first(x),catalogue_batches::second(x));}}"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "catalogue-batches");
+    let cache = dir.join("verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("catalogue_batches"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        1,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    assert_eq!(proof.proved, 2, "{proof:?}");
+    assert_eq!(
+        proof.projections, 1,
+        "unchanged proof batches repeated whole-workspace projection: {proof:?}"
+    );
+    let mut opts = options("catalogue_batches");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let name = |function: &str| {
+        rows.iter()
+            .find(|r| r["function"].as_str() == Some(function))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap()
+    };
+    let first = name("catalogue_batches::first");
+    let second = name("catalogue_batches::second");
+    let decisions = verdicts(&cache);
+    let mut observations = String::new();
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let values = line.split('|').collect::<Vec<_>>();
+        assert_eq!(values.len(), 3);
+        for (which, model) in [first, second].into_iter().enumerate() {
+            let policy = decisions
+                .rows
+                .values()
+                .find_map(|row| row.axioms.get(model))
+                .cloned()
+                .unwrap_or_default();
+            observations.push_str(&format!("theorem{{name:catalogueVector{i}x{which},parameters:[],statement:(({model} {}) = {}),proof:decide{{}},axioms:[{}]}}\n",values[0],values[which+1],policy.join(", ")));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{observations}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let result = verify();
+    assert!(
+        result.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&result.stdout),
+        String::from_utf8_lossy(&result.stderr)
+    );
+    let wrong = body.replacen(" = 255)", " = 254)", 1);
+    assert_ne!(body, wrong);
+    std::fs::write(&file, wrong).unwrap();
     let rejected = verify();
     assert!(
         !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")

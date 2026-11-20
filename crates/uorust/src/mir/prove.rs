@@ -21,6 +21,8 @@ use super::{MirOptions, Trial, CANDIDATES};
 use crate::error::io;
 use crate::{Options, UorustError};
 
+type Projection = BTreeMap<String, Vec<u8>>;
+
 /// One translation a trial projection lists.
 #[derive(Clone, Debug)]
 struct Trialled {
@@ -36,8 +38,87 @@ struct Trialled {
 /// An immutable dependency slice awaiting only observed policy corrections.
 struct PolicyRetry {
     trial: Trial,
-    files: BTreeMap<String, Vec<u8>>,
+    files: Projection,
     candidates: Vec<Trialled>,
+}
+
+/// One immutable model graph, before SDK policy observations are rendered.
+/// Positive decisions change admission, not these model/context identities.
+/// A semantic refusal discards this catalogue before an outcome ABI is retried.
+struct Catalogue {
+    files: Projection,
+    candidates: Vec<Trialled>,
+}
+
+impl Catalogue {
+    fn trial(
+        &self,
+        trial: &Trial,
+        register: &Verdicts,
+        learned: &BTreeMap<String, BTreeMap<String, Vec<String>>>,
+    ) -> Result<(Projection, Vec<Trialled>), UorustError> {
+        let decision = |c: &Trialled| {
+            register.matching(&c.kappa, &c.digest, c.model_context_sha256.as_deref())
+        };
+        let proved: BTreeSet<_> = self
+            .candidates
+            .iter()
+            .filter(|c| decision(c).is_some_and(|v| matches!(v.status, Decision::Proved)))
+            .map(|c| c.kappa.clone())
+            .collect();
+        let mut selected: BTreeSet<_> = self
+            .candidates
+            .iter()
+            .filter(|c| c.trial && trial.admits(&c.kappa) && decision(c).is_none())
+            .map(|c| c.kappa.clone())
+            .collect();
+        loop {
+            let blocked: Vec<_> = self
+                .candidates
+                .iter()
+                .filter(|c| selected.contains(&c.kappa))
+                .filter(|c| {
+                    c.dependencies
+                        .iter()
+                        .any(|d| !selected.contains(d) && !proved.contains(d))
+                })
+                .map(|c| c.kappa.clone())
+                .collect();
+            if blocked.is_empty() {
+                break;
+            }
+            for key in blocked {
+                selected.remove(&key);
+            }
+        }
+        let mut candidates = self.candidates.clone();
+        for candidate in &mut candidates {
+            candidate.trial = selected.contains(&candidate.kappa);
+        }
+        let mut files = self.files.clone();
+        if selected.is_empty() {
+            return Ok((files, candidates));
+        }
+        let body = files
+            .get_mut("src/Behavior.lex.tex")
+            .ok_or_else(|| UorustError::Tool("proof closure: missing Behavior module".into()))?;
+        let text = String::from_utf8_lossy(body);
+        let graph = crate::lex::ProofClosureGraph::new(&text)?;
+        // Observations are metadata hints only. The SDK checks the exact
+        // resulting policy again; no observation manufactures admission.
+        let mut policies = BTreeMap::new();
+        for observations in learned.values() {
+            for (name, policy) in observations {
+                if graph.contains(name) {
+                    policies
+                        .entry(name.clone())
+                        .or_insert_with(|| policy.clone());
+                }
+            }
+        }
+        *body = crate::lex::with_axiom_policies(&text, &policies)?.into_bytes();
+        Ok((files, candidates))
+    }
 }
 
 /// What a run decided.
@@ -51,7 +132,7 @@ pub struct Summary {
     pub runs: usize,
     /// Actual whole-workspace projections, including the initial catalogue.
     pub projections: usize,
-    /// Exact projected packages reused for observed policy-only retries.
+    /// Exact catalogue slices and observed policy-only packages reused.
     pub projection_reuses: usize,
 }
 
@@ -419,6 +500,10 @@ pub fn prove_bounded(
         .into_iter()
         .map(Trial::Only)
         .collect();
+    let mut catalogue = Some(Catalogue {
+        files: catalogue,
+        candidates: all,
+    });
     let mut policy_retry: Option<PolicyRetry> = None;
     while let Some(trial) = groups.pop_front() {
         let current = register.clone();
@@ -447,9 +532,22 @@ pub fn prove_bounded(
                 (files, candidates, true)
             }
             None => {
-                summary.projections += 1;
-                let files = crate::project_workspace(root, &opts)?;
-                let all = candidates(&files)?;
+                if catalogue.is_none() {
+                    let mut opts = opts.clone();
+                    opts.mir.as_mut().expect("native trial options").trial = Trial::All;
+                    summary.projections += 1;
+                    let files = crate::project_workspace(root, &opts)?;
+                    let all = candidates(&files)?;
+                    catalogue = Some(Catalogue {
+                        files,
+                        candidates: all,
+                    });
+                }
+                let (files, all) = catalogue
+                    .as_ref()
+                    .expect("current model catalogue")
+                    .trial(&trial, &register, &learned)?;
+                summary.projection_reuses += 1;
                 (files, all, false)
             }
         };
@@ -532,6 +630,7 @@ pub fn prove_bounded(
                             },
                         );
                         summary.refused += 1;
+                        catalogue = None;
                         progress = true;
                     }
                 }
@@ -614,6 +713,107 @@ fn write_scratch(scratch: &Path, files: &BTreeMap<String, Vec<u8>>) -> Result<()
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn catalogue_fixture() -> Catalogue {
+        let body = "\\begin{semanticmodule}\ndefinition{name:leaf,parameters:[],result:Nat,body:1,axioms:[]}\ndefinition{name:root,parameters:[],result:Nat,body:leaf,axioms:[]}\ndefinition{name:other,parameters:[],result:Nat,body:2,axioms:[]}\n\\end{semanticmodule}";
+        Catalogue {
+            files: BTreeMap::from([("src/Behavior.lex.tex".into(), body.as_bytes().to_vec())]),
+            candidates: ["leaf", "root", "other"]
+                .into_iter()
+                .map(|name| Trialled {
+                    kappa: name.into(),
+                    function: format!("fixture::{name}"),
+                    digest: format!("{name}-digest"),
+                    model_context_sha256: Some(format!("{name}-context")),
+                    trial: true,
+                    decls: vec![name.into()],
+                    dependencies: if name == "root" {
+                        BTreeSet::from(["leaf".into()])
+                    } else {
+                        BTreeSet::new()
+                    },
+                })
+                .collect(),
+        }
+    }
+
+    #[test]
+    fn catalogue_trials_require_exact_dependency_decisions_ue_114() {
+        let catalogue = catalogue_fixture();
+        let trial = Trial::Only(BTreeSet::from(["root".into()]));
+        let mut register = Verdicts::default();
+        let selected = |register: &Verdicts| {
+            let (_, rows) = catalogue.trial(&trial, register, &BTreeMap::new()).unwrap();
+            rows.into_iter()
+                .filter(|r| r.trial)
+                .map(|r| r.kappa)
+                .collect::<BTreeSet<_>>()
+        };
+        assert!(selected(&register).is_empty());
+        let mut verdict = Verdict {
+            function: "fixture::leaf".into(),
+            digest: "leaf-digest".into(),
+            model_context_sha256: Some("changed-context".into()),
+            status: Decision::Proved,
+            axioms: BTreeMap::new(),
+        };
+        register.rows.insert("leaf".into(), verdict.clone());
+        assert!(
+            selected(&register).is_empty(),
+            "a stale context admitted a dependency"
+        );
+        verdict.model_context_sha256 = Some("leaf-context".into());
+        register.rows.insert("leaf".into(), verdict.clone());
+        assert_eq!(selected(&register), BTreeSet::from(["root".into()]));
+        verdict.status = Decision::Refused("actual SDK refusal".into());
+        register.rows.insert("leaf".into(), verdict);
+        assert!(selected(&register).is_empty());
+        let together = Trial::Only(BTreeSet::from(["leaf".into(), "root".into()]));
+        let (_, rows) = catalogue
+            .trial(&together, &Verdicts::default(), &BTreeMap::new())
+            .unwrap();
+        assert_eq!(rows.iter().filter(|r| r.trial).count(), 2);
+    }
+
+    #[test]
+    fn catalogue_policy_hints_preserve_model_and_root_selection_ue_114() {
+        let catalogue = catalogue_fixture();
+        let original = catalogue.files.clone();
+        let learned = BTreeMap::from([(
+            "root".into(),
+            BTreeMap::from([
+                ("root".into(), vec!["propext".into()]),
+                ("absentOldKernel".into(), vec!["Quot.sound".into()]),
+            ]),
+        )]);
+        let trial = Trial::Only(BTreeSet::from(["leaf".into(), "root".into()]));
+        let (files, rows) = catalogue
+            .trial(&trial, &Verdicts::default(), &learned)
+            .unwrap();
+        assert_eq!(
+            catalogue.files, original,
+            "a trial mutated its immutable catalogue"
+        );
+        let body = String::from_utf8_lossy(&files["src/Behavior.lex.tex"]);
+        assert!(body.contains("axioms:[propext]"));
+        assert!(!body.contains("absentOldKernel"));
+        let roots = rows
+            .iter()
+            .filter(|r| r.trial)
+            .flat_map(|r| r.decls.clone())
+            .collect::<Vec<_>>();
+        let closure = crate::lex::proof_closure(&body, &roots).unwrap();
+        assert!(closure.contains("name:leaf") && closure.contains("name:root"));
+        assert!(!closure.contains("name:other"));
+        let invalid = BTreeMap::from([(
+            "root".into(),
+            BTreeMap::from([("root".into(), vec!["invalid policy".into()])]),
+        )]);
+        assert!(matches!(
+            catalogue.trial(&trial, &Verdicts::default(), &invalid),
+            Err(UorustError::Tool(_))
+        ));
+    }
 
     #[test]
     fn native_feedback_uses_root_not_library_behavior_ue_54() {

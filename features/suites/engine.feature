@@ -795,3 +795,11 @@ Feature: engine
     When source field and signature types pass through scoped registry rewriting
     Then the resolved declaration retains its workspace identity
     But genuine foreign unresolved and shadowed types remain distinct
+
+  @UE-114 @build
+  Scenario: Bounded proof batches reuse their immutable model catalogue
+    Given independent native proof roots that exceed one proof batch
+    When the exact source compiler SDK and model inputs remain unchanged
+    Then the batches share one whole-workspace catalogue projection
+    And each selected dependency closure passes the actual SDK verifier
+    But semantic refusals invalidate the catalogue before changed models are retried

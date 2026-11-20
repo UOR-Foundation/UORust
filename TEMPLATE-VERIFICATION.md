@@ -1952,3 +1952,28 @@ The existing source-owned constant scenario also passed its native Rust/SDK
 observations and rejected a changed expected result with LLV7002 after this
 identity change. The initial no-axiom trial correctly rejected observed axioms;
 the existing explicitly recorded policy supplied the accepted proof boundary.
+
+## UE-114: immutable catalogues across bounded proof batches
+
+The registered two-root, one-root-budget regression initially proved both roots
+but performed three whole-workspace projections. The same assertions now pass
+with one projection. Each trial selects only requested undecided roots whose
+native dependencies are already proved at the exact model context or occur in
+the same batch. Observed axiom policies patch metadata, and the existing lexical
+closure slicer retains the reached model. Every positive decision still comes
+from the actual SDK. A semantic refusal discards the catalogue before any
+changed panic-outcome ABI is retried.
+
+Six prover controls and ten lexical controls passed, including stale-context,
+blocked-dependency, unrelated-root, immutable-model and invalid-policy negatives.
+The eight Rust/SDK observation assertions were resumed from their completed
+proof stage after correcting their empty policy from actual SDK observations;
+a wrong expected value was rejected with LLV7002. The complete observation test
+is not represented as a fresh uninterrupted passing command. Native state and
+panic observations passed. The refusal control also passed with two proofs and
+one refusal, identical to the frozen pre-catalogue producer; its older count
+expectation predated explicit panic outcomes. It now also requires exactly one
+catalogue regeneration after the refusal (two total projections, versus three
+in the frozen baseline). The unrelated false source assertion remains refused.
+Repository conformance, strict Clippy and model/template/SDK/self-model checks
+passed. Full release acceptance remains the unchanged `just vv` boundary.

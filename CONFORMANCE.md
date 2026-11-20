@@ -134,6 +134,7 @@ model does not sanction.
 | `UE-111` | `build` | Compiler-owned closed record dependencies retain their canonical and consumer type identities, including schemas introduced by imported body locals, and use the existing native type declaration kernel; foreign, ambiguous and unbound schemas remain refused |
 | `UE-112` | `build` | The immutable content-validated compiler graph reuses complete linkage queries including callee argument types and destination, preserving both exact body instances and typed absence without changing caller scopes, emitted models or SDK proof admission |
 | `UE-113` | `build` | Resolved workspace type identities survive later module-scoped registry rewrites, including qualified parent reexports inside modules with external globs, while genuine foreign unresolved and shadowed type identities remain distinct |
+| `UE-114` | `build` | Dependency-ordered bounded proof batches reuse one immutable model catalogue while applying observed axiom policies and exact verdict contexts, regenerating after semantic refusals before changed ABIs are retried; every accepted decision still requires the actual SDK verifier |
 
 ## factory
 

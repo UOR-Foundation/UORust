@@ -296,6 +296,10 @@ pub(crate) struct ProofClosureGraph<'a> {
 }
 
 impl<'a> ProofClosureGraph<'a> {
+    pub(crate) fn contains(&self, name: &str) -> bool {
+        self.names.contains_key(name)
+    }
+
     pub(crate) fn new(text: &'a str) -> Result<Self, crate::UorustError> {
         use std::collections::BTreeSet;
         let ModuleSyntax {
