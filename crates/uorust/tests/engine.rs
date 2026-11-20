@@ -10670,3 +10670,150 @@ pub fn relay(a:i32,b:i32)->u32 {
     }
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn native_optimized_library_bodies_preserve_borrowed_records_ue_105() {
+    let previous_verdicts = std::env::var_os("UORUST_TEST_VERDICTS")
+        .map(|path| std::fs::read(path).expect("prior verdict bytes"));
+
+    let dir=scratch("native-optimized-library", &[
+      ("Cargo.toml", "[package]\nname=\"optimized_library\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+      ("src/lib.rs",r#"
+pub struct Record {word:i32, flag:bool}
+pub fn read(a:i32,b:i32,end:bool)->u32 {
+ let mut n=1u8;while n>0 {n-=1;}
+ let mut current=Record{word:a,flag:end};
+ let previous=std::mem::replace(&mut current,Record{word:b,flag:!end});
+ if previous.flag==end && current.flag!=end {
+  if end {previous.word as u32} else {current.word as u32}
+ }else{0}
+}
+"#),
+      ("src/bin/vectors.rs",r#"
+fn main(){for (a,b) in [(i32::MIN,i32::MAX),(-7,3),(0,0),(12345,-67890)] {for end in [false,true] {println!("{} {} {end}|{}",a as u32,b as u32,optimized_library::read(a,b,end));}}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "native-optimized-library");
+    let mut probe = options("optimized_library");
+    probe.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &probe).unwrap();
+    assert!(
+        residue_detail(&proposed, "optimized_library::read").is_none(),
+        "{:?}",
+        residue_detail(&proposed, "optimized_library::read")
+    );
+    let cache = dir.join("verdicts.toml");
+    if let Some(previous) = previous_verdicts {
+        std::fs::write(&cache, previous).unwrap();
+    }
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("optimized_library"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("optimized_library");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let row = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("optimized_library::read"));
+    assert!(
+        row.is_some(),
+        "{:?}",
+        residue_detail(&files, "optimized_library::read")
+    );
+    let name = row.unwrap()["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let decisions = verdicts(&cache);
+    let policy = decisions
+        .rows
+        .values()
+        .find(|v| v.function == "optimized_library::read")
+        .and_then(|v| v.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let module = text(&files, "src/Behavior.lex.tex");
+    let definition = module
+        .split("definition{")
+        .find(|block| block.contains(&format!("name: {name},")))
+        .expect("lifted definition");
+    let outcomes = definition.contains("result: (Result Nat String)");
+    assert!(outcomes || definition.contains("result: Nat,"));
+    let mut vectors = String::new();
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let (arg, value) = line.split_once('|').unwrap();
+        let observed = if outcomes {
+            format!("(match ({name} {arg}) | Result.ok returned => returned | Result.error reason => 4294967296)")
+        } else {
+            format!("({name} {arg})")
+        };
+        vectors.push_str(&format!("theorem{{name:optimizedLibraryVector{i},parameters:[],statement:({observed} = {value}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|line| line.contains("name:optimizedLibraryVector0,"))
+        .unwrap();
+    let bad = good.replace(" = 2147483647)", " = 2147483646)");
+    assert_ne!(good, bad);
+    let wrong = body.replacen(good, &bad, 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

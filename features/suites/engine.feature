@@ -732,3 +732,10 @@ Feature: engine
     When the existing library resolver instantiates reachable compiler bodies
     Then shared native definitions agree with Rust across record and primitive interfaces
     But altered identities and unavailable or incompatible bodies cannot supply a definition
+
+  @UE-105 @build
+  Scenario: Compiler optimization preserves borrowed library state before lifting
+    Given compiler-library dependencies over closed native records
+    When the pinned compiler optimizes their source-bound MIR graph
+    Then native library calls preserve Rust return values and borrowed record updates
+    But incompatible producer or interface bindings cannot supply semantics

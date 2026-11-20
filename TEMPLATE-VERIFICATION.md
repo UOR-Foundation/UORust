@@ -1765,3 +1765,24 @@ any verdict exists (8.86 seconds). Read-only source reproduction passed
 (28.84 seconds), as did twenty-two lowering controls, closed-schema controls,
 conformance, strict Clippy and model/template/SDK/self-model checks. Complete
 release acceptance remains the unchanged `just vv` boundary.
+
+## UE-105: compiler optimization preserves typed borrowed state
+
+The initial fixture refused a library dependency (9.91 seconds); after generic
+namespace resolution it reached the underlying scalar-cell limitation for a
+borrowed record (10.38 seconds). The pinned compiler's complete optimized MIR
+capture removes the reference-to-pointer implementation details before the
+existing resolver and lowering consume the bodies. Source, compiler, target,
+flags and the `runtime-optimized.after` pass remain bound. No operation model
+or record-specific memory encoding was added.
+
+The 23,467 captured files reproduce a 45,709,733-byte normalized graph,
+compressed losslessly to 3,354,637 bytes. Source reproduction passed
+(35.54 seconds). Eight Rust/SDK comparisons of borrowed record state passed,
+with the incorrect result rejected by LLV7002 (120.62 seconds). The earlier
+eight primitive/record library comparisons also passed (116.78 seconds).
+Three authority/reexport controls now include optimization-pass and free
+function namespace negatives (16.45 seconds). Twenty-two lowering controls,
+pre-proof effect propagation, conformance, strict Clippy and
+model/template/SDK/self-model checks passed. Complete release acceptance
+remains the unchanged `just vv` boundary.

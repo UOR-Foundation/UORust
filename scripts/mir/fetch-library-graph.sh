@@ -11,10 +11,11 @@ channel=$(sed -n 's/^channel = "\(.*\)"/\1/p' "$repo/rust-toolchain.toml")
 mkdir -p "$work/raw"
 "$producer" library-mir core --modules --source-cache "$work/source" > "$work/modules.json"
 RUSTC_BOOTSTRAP=1 rustc +"$channel" --crate-name core --edition=2024 \
-  --crate-type=lib --emit=metadata --target=x86_64-unknown-linux-gnu \
+  --crate-type=lib --emit=mir --target=x86_64-unknown-linux-gnu \
   -Coverflow-checks=on -Cdebug-assertions=off -Zmir-include-spans=on \
-  -Zdump-mir=ElaborateBoxDerefs -Zdump-mir-dir="$work/raw" \
+  -Zmir-opt-level=4 -Zalways-encode-mir -Zdump-mir=runtime-optimized -Zdump-mir-dir="$work/raw" \
   --out-dir="$work" "$work/source/library/core/src/lib.rs"
+rm -f "$work/core.mir"
 cd "$repo"
 UORUST_CORE_SOURCE_ROOT="$work/source" \
 UORUST_CORE_SOURCE_ARCHIVE="$work/source/rust-src.tar.xz" \

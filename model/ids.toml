@@ -681,3 +681,9 @@ id = "UE-104"
 level = "build"
 suite = "engine"
 statement = "Native calls import compiler-library dependency closures from exact pinned compiler bodies through the existing library resolver and shared MIR lowering, propagating discovered library panic outcomes through the native dependency graph before proof work and preserving consumer carriers and producer identity; changed, ambiguous, unbound and incompatible library interfaces remain refused without operation-specific semantic models"
+
+[[id]]
+id = "UE-105"
+level = "build"
+suite = "engine"
+statement = "Compiler-library dependency bodies use the exact pinned compiler optimization stage through the existing resolver and native ABI, retaining typed borrowed record state without handwritten operation models; source, target, pass and producer mismatches remain refused"

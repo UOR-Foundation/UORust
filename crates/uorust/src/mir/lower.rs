@@ -7626,7 +7626,12 @@ impl Fun<'_, '_> {
                     .intrinsic(link, &path, callee, &args, dt, st)
                     .map(Called::value);
             }
-            if let Some(inst) = link.instance(callee, texts, dest) {
+            let imported = if self.cx.core.is_none() {
+                link.imported_instance(callee, texts, dest)
+            } else {
+                link.instance(callee, texts, dest)
+            };
+            if let Some(inst) = imported {
                 if self.cx.core.is_none() {
                     return self.compiler_shared(link, inst, callee, args, texts, dest, dt, st);
                 }
@@ -7705,12 +7710,7 @@ impl Fun<'_, '_> {
                         .flatten()
                 });
                 if let Some(link) = library {
-                    let library_texts: Vec<_> = texts
-                        .iter()
-                        .map(|t| t.as_deref().map(|t| link.decls.compiler_type(t)))
-                        .collect();
-                    let library_dest = link.decls.compiler_type(dest);
-                    if let Some(instance) = link.instance(callee, &library_texts, &library_dest) {
+                    if let Some(instance) = link.imported_instance(callee, texts, dest) {
                         return self
                             .compiler_shared(link, instance, callee, args, texts, dest, dt, st);
                     }

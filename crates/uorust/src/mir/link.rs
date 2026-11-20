@@ -749,6 +749,22 @@ impl CoreLink {
     /// destination; `None` when core has no body for it or a parameter its
     /// body names stays unbound.
     ///
+    /// Imported compiler namespaces and reexports resolve through declarations.
+    pub(crate) fn imported_instance(
+        &self,
+        callee: &str,
+        texts: &[Option<String>],
+        dest: &str,
+    ) -> Option<Instance> {
+        let callee = self.decls.compiler_type(callee);
+        let texts: Vec<_> = texts
+            .iter()
+            .map(|t| t.as_deref().map(|t| self.decls.compiler_type(t)))
+            .collect();
+        let dest = self.decls.compiler_type(dest);
+        self.instance(&callee, &texts, &dest)
+    }
+
     /// A method MIR names by its impl's type, `<X as Trait>::m` or
     /// `<impl X>::m`, is the one method `m` of an impl whose signature the
     /// call's types instantiate.
@@ -1352,7 +1368,8 @@ struct CompilerLibrary {
     graph: CoreLink,
 }
 
-const COMPILER_FLAGS: &str = "--edition=2024 --crate-type=lib --emit=metadata -Coverflow-checks=on -Cdebug-assertions=off -Zmir-include-spans=on";
+const COMPILER_PASS: &str = "runtime-optimized.after";
+const COMPILER_FLAGS: &str = "--edition=2024 --crate-type=lib --emit=mir -Coverflow-checks=on -Cdebug-assertions=off -Zmir-include-spans=on -Zmir-opt-level=4 -Zalways-encode-mir";
 
 fn compiler_library() -> &'static CompilerLibrary {
     static LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
@@ -1388,7 +1405,7 @@ impl CompilerLibrary {
                 .lines()
                 .any(|line| line == format!("release: {}", self.toolchain))
             && self.flags == COMPILER_FLAGS
-            && self.pass == "ElaborateBoxDerefs.before"
+            && self.pass == COMPILER_PASS
             && !self.target.is_empty()
             && !self.data_layout.is_empty()
             && self.graph.root.is_none()
@@ -1465,7 +1482,7 @@ assert actual==expected, 'unregistered or missing source'
             let mut texts = Vec::new();
             for path in crate::embed::dir_paths(Path::new(&raw)).unwrap() {
                 if path.file_name().and_then(|n| n.to_str()).is_some_and(|n| {
-                    n.starts_with("core.") && n.ends_with("ElaborateBoxDerefs.before.mir")
+                    n.starts_with("core.") && n.ends_with(&format!("{COMPILER_PASS}.mir"))
                 }) {
                     let text = crate::embed::read_plain_dump(&path)
                         .unwrap()
@@ -1545,7 +1562,7 @@ assert actual==expected, 'unregistered or missing source'
                 target: target.into(),
                 data_layout: layout["data-layout"].as_str().unwrap().into(),
                 flags: COMPILER_FLAGS.into(),
-                pass: "ElaborateBoxDerefs.before".into(),
+                pass: COMPILER_PASS.into(),
                 graph_sha256: crate::project::sha(&serde_json::to_vec(&graph).unwrap()),
                 graph,
             };
@@ -1572,6 +1589,20 @@ assert actual==expected, 'unregistered or missing source'
     #[test]
     fn compiler_library_reexports_bind_closed_interfaces_ue_104() {
         let graph = &compiler_library().graph;
+        assert!(graph
+            .imported_instance(
+                "std::mem::replace::<i32>",
+                &[Some("&mut i32".into()), Some("i32".into())],
+                "i32"
+            )
+            .is_some());
+        assert!(graph
+            .imported_instance(
+                "consumer::mem::replace::<i32>",
+                &[Some("&mut i32".into()), Some("i32".into())],
+                "i32"
+            )
+            .is_none());
         let text = graph.decls.compiler_type("&std::ops::Range<i32>");
         assert_eq!(text, "&ops::range::Range<i32>");
         assert!(graph
@@ -1603,6 +1634,10 @@ assert actual==expected, 'unregistered or missing source'
             flate2::read::GzDecoder::new(&include_bytes!("../../mir/std-library.json.gz")[..]);
         let mut source: CompilerLibrary = serde_json::from_reader(decoder).unwrap();
         assert!(source.valid());
+        let pass = source.pass.clone();
+        source.pass = "unknown.after".into();
+        assert!(!source.valid());
+        source.pass = pass;
         let commit = source.compiler_commit.clone();
         source.compiler_commit = "0".repeat(40);
         assert!(!source.valid());
