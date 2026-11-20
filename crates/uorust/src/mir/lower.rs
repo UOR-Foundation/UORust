@@ -354,6 +354,26 @@ pub(crate) struct NativeAbi {
     pub(crate) memory: bool,
 }
 
+fn imported_backward_abi(
+    abi: &NativeAbi,
+    parameters: &[Ty],
+    returned: &Ty,
+    states: &[Ty],
+    types: &Types,
+) -> bool {
+    let result = match states {
+        [] => return false,
+        [one] => one.clone(),
+        several => types.tuple(several.to_vec()),
+    };
+    !abi.memory
+        && abi
+            .parameters
+            .iter()
+            .eq(parameters.iter().chain([returned]))
+        && abi.result == result
+}
+
 /// A value in the environment.
 #[derive(Clone, Debug)]
 enum Val {
@@ -8562,11 +8582,11 @@ impl Fun<'_, '_> {
             .into_iter()
             .next()
             .ok_or_else(|| kind(k, "the compiler-library body does not read"))?;
-        if body
+        let returns_borrow = body
             .locals
             .first()
-            .is_some_and(|text| mut_target(text).is_some())
-        {
+            .is_some_and(|text| mut_target(text).is_some());
+        if returns_borrow && self.outcomes {
             return Err(kind(
                 k,
                 "a compiler-library returned borrow needs an admitted backward interface",
@@ -8601,6 +8621,15 @@ impl Fun<'_, '_> {
             .map(|i| i - 1)
             .collect();
         let rest: Vec<_> = positions.iter().map(|i| params[*i].clone()).collect();
+        if returns_borrow
+            && (rest.is_empty() || args.iter().map(|(_, t)| t).ne(params.iter()) || *dt != result)
+        {
+            return Err(kind(
+                k,
+                "a compiler-library returned borrow needs its exact caller state interface",
+            ));
+        }
+        let back = format!("{name}Back");
         let mut callable = Callee {
             name: name.clone(),
             outcomes: false,
@@ -8610,7 +8639,7 @@ impl Fun<'_, '_> {
             generic: None,
             result: result.clone(),
             threads: (!rest.is_empty())
-                .then(|| (threaded_result(&result, &rest, &scope), positions)),
+                .then(|| (threaded_result(&result, &rest, &scope), positions.clone())),
         };
         if !self.aux.contains_key(&name) {
             let mut active = self.cx.active.to_vec();
@@ -8625,7 +8654,7 @@ impl Fun<'_, '_> {
             cx.compiler_scope.clear();
             cx.callees = &empty_callees;
             cx.source_sigs = &empty_signatures;
-            let lowered = if self.outcomes {
+            let mut lowered = if self.outcomes {
                 lower_outcomes(&cx, &body, &name)
             } else {
                 lower(&cx, &body, &name)
@@ -8636,6 +8665,33 @@ impl Fun<'_, '_> {
                     &format!("compiler library {}: {}", instance.path, r.detail()),
                 )
             })?;
+            if returns_borrow {
+                if lowered.abi.memory {
+                    return Err(kind(k, "a compiler-library returned borrow needs an admitted memory backward interface"));
+                }
+                let mut backward_active = active.clone();
+                backward_active.push(back.clone());
+                let mut backward_cx = cx.within(&backward_active);
+                backward_cx.backward = true;
+                let backward = lower(&backward_cx, &body, &back).map_err(|r| {
+                    kind(
+                        k,
+                        &format!(
+                            "compiler library backward {}: {}",
+                            instance.path,
+                            r.detail()
+                        ),
+                    )
+                })?;
+                if !imported_backward_abi(&backward.abi, &callable.params, &result, &rest, &scope) {
+                    return Err(kind(k, "the compiler-library backward ABI is incompatible"));
+                }
+                lowered.decls.extend(backward.decls);
+                lowered.aux.extend(backward.aux);
+                lowered.types.extend(backward.types);
+                lowered.calls.extend(backward.calls);
+                lowered.library_outcomes |= backward.library_outcomes;
+            }
             if lowered.abi.memory {
                 let mut normal_abi = lowered.abi.clone();
                 let mut normal_state = rest.clone();
@@ -8745,9 +8801,9 @@ impl Fun<'_, '_> {
                 .map(|(full, _)| full.clone())
                 .unwrap_or_else(|| {
                     if self.outcomes {
-                        Ty::Outcome(Box::new(result), Box::new(Ty::Str))
+                        Ty::Outcome(Box::new(result.clone()), Box::new(Ty::Str))
                     } else {
-                        result
+                        result.clone()
                     }
                 });
             let mut expected_parameters: Vec<_> = callable.params.iter().map(Ty::render).collect();
@@ -8765,7 +8821,47 @@ impl Fun<'_, '_> {
                 return Err(kind(k, "the shared compiler-library result ABI differs"));
             }
         }
-        self.invoke(callable, callee, args, texts, dest, dt, st)
+        let backward = if returns_borrow {
+            let Some(Decl::Definition {
+                parameters,
+                result: returned,
+                ..
+            }) = self.aux.get(&back)
+            else {
+                return Err(kind(
+                    k,
+                    "the compiler-library backward definition is absent",
+                ));
+            };
+            let expected = match rest.as_slice() {
+                [one] => one.clone(),
+                several => scope.tuple(several.to_vec()),
+            };
+            if callable.memory
+                || parameters.iter().map(|(_, t)| t.clone()).ne(callable
+                    .params
+                    .iter()
+                    .chain([&result])
+                    .map(Ty::render))
+                || *returned != expected.render()
+            {
+                return Err(kind(k, "the shared compiler-library backward ABI differs"));
+            }
+            self.calls.insert(back.clone());
+            Some((
+                std::iter::once(back)
+                    .chain(args.iter().map(|(v, _)| v.clone()))
+                    .collect::<Vec<_>>()
+                    .join(" "),
+                positions,
+                (rest.len() > 1).then_some(expected),
+            ))
+        } else {
+            None
+        };
+        let mut called = self.invoke(callable, callee, args, texts, dest, dt, st)?;
+        called.backward = backward;
+        Ok(called)
     }
 
     /// The definition an instance of a library body is lowered to, shared
@@ -10966,6 +11062,37 @@ impl Fun<'_, '_> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn compiler_backward_abi_preserves_exact_carriers_ue_118() {
+        let types = Types::default();
+        let input = [Ty::Nat(Some(8))];
+        let mut abi = NativeAbi {
+            parameters: vec![input[0].clone(), input[0].clone()],
+            result: input[0].clone(),
+            memory: false,
+        };
+        assert!(imported_backward_abi(
+            &abi, &input, &input[0], &input, &types
+        ));
+        abi.memory = true;
+        assert!(!imported_backward_abi(
+            &abi, &input, &input[0], &input, &types
+        ));
+        abi.memory = false;
+        abi.parameters[1] = Ty::Nat(Some(16));
+        assert!(!imported_backward_abi(
+            &abi, &input, &input[0], &input, &types
+        ));
+        abi.parameters[1] = input[0].clone();
+        abi.result = Ty::Signed(Some(8));
+        assert_eq!(abi.result.render(), input[0].render());
+        assert!(!imported_backward_abi(
+            &abi, &input, &input[0], &input, &types
+        ));
+        abi.result = input[0].clone();
+        assert!(!imported_backward_abi(&abi, &input, &input[0], &[], &types));
+    }
 
     #[test]
     fn imported_bodies_carry_their_new_record_declarations_ue_111() {

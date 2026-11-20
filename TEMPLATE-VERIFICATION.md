@@ -2036,3 +2036,23 @@ capture checks, native lowering checks, repository conformance, strict Clippy,
 and model/template/SDK/self-model checks passed. Whole-registry proposal and
 SDK/Factory acceptance remain separate. Full release acceptance remains
 `just vv`.
+
+## UE-118: imported returned-borrow backward interfaces
+
+The native imported-borrow regression initially failed because every captured
+library result of `&mut T` was refused before backward lowering. Compatible
+imports now lower the exact compiler body through both existing native kernels
+in the same library and declaring-module scope. Their parameter, result and
+state ABIs must agree exactly, including carriers that render alike. Both
+content-bound definitions travel with the consuming proof and the existing
+caller lens applies writes to the original place. Memory-backed and panic
+borrowed interfaces retain their typed refusals.
+
+A compiled Rust fixture writes one field through an imported returned borrow.
+Six SDK observations agree with the changed and preserved tuple fields,
+including unsigned boundaries; a changed expected state is rejected with
+LLV7002. Memory, missing-state, width and same-rendered-carrier ABI negatives
+passed. Native lowering, compiler schema/capture, immutable source-interface,
+repository conformance, strict Clippy and model/template/SDK/self-model checks
+passed. Complete-registry measurement and SDK/Factory acceptance are separate.
+Full release acceptance remains `just vv`.

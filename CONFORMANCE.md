@@ -138,6 +138,7 @@ model does not sanction.
 | `UE-115` | `build` | Native dependency closure imports retained compiler-owned library captures beyond core through the existing resolver and ABI lowering, bound to capture record output digest source toolchain and target, preserving existing preferred models and refusing changed or incompatible inputs |
 | `UE-116` | `build` | Zero-input source kernels may return an empty container over stateful payload types only when the emitted result is the exact literal empty constructor and no payload value is materialized; mutable inputs nonempty results and incompatible native carriers remain refused |
 | `UE-117` | `build` | Imported compiler dependency queries retain admitted caller ABI readings through exact declaration namespace normalization, including nested type components, while unknown foreign types and conflicting readings remain refused and caller scopes remain unchanged |
+| `UE-118` | `build` | Compiler-owned returned mutable borrows reuse the existing forward and backward native lowering kernels in one exact imported scope, with both ABIs checked before caller state transport; unadmitted memory and panic borrowed interfaces remain refused |
 
 ## factory
 

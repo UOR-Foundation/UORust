@@ -11861,3 +11861,120 @@ fn compiler_normalization_preserves_caller_interfaces_ue_117() {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn imported_borrowed_results_preserve_caller_state_ue_118() {
+    let dir = scratch("compiler-borrow-backward", &[
+        ("Cargo.toml", "[package]\nname=\"compiler_borrow_backward\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub fn update(value:&mut (u8,u16),next:u16){let mut n=1u8;while n>0 {n-=1;} std::convert::identity(value).1=next;}\n"),
+        ("src/bin/vectors.rs", "fn main(){for (a,b,n) in [(3u8,5u16,11u16),(0,65535,0),(255,0,65535)] {let mut value=(a,b);compiler_borrow_backward::update(&mut value,n);println!(\"{a}|{b}|{n}|{}|{}\",value.0,value.1);}}"),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let expected = String::from_utf8(rust.stdout).unwrap();
+    let dumps = dumped(&dir, "compiler-borrow-backward");
+    let mut opts = options("compiler_borrow_backward");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        frontier_rows(&files, "lifted")
+            .iter()
+            .any(|r| r["function"].as_str() == Some("compiler_borrow_backward::update")),
+        "{:?}",
+        residue_detail(&files, "compiler_borrow_backward::update")
+    );
+    let cache = dir.join("verdicts.toml");
+    let proved = uorust::mir::prove_bounded(
+        &dir,
+        &options("compiler_borrow_backward"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proved.refused, 0, "{proved:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let model = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("compiler_borrow_backward::update"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let policy = decisions
+        .rows
+        .values()
+        .find_map(|r| r.axioms.get(model))
+        .cloned()
+        .unwrap_or_default();
+    let mut observations = String::new();
+    for (i, line) in expected.lines().enumerate() {
+        let values = line
+            .split('|')
+            .map(|v| v.parse::<u32>().unwrap())
+            .collect::<Vec<_>>();
+        assert_eq!(values.len(), 5);
+        let term = format!(
+            "(project ({model} (record TupleNatNat {{item0 := {}, item1 := {}}}) {}) item1)",
+            values[0], values[1], values[2]
+        );
+        for field in 0..2 {
+            observations.push_str(&format!("theorem{{name:borrowedState{i}Field{field},parameters:[],statement:((project {term} item{field}) = {}),proof:decide{{}},axioms:[{}]}}\n", values[field+3], policy.join(", ")));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{observations}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(" = 11)", " = 12)", 1);
+    assert_ne!(body, wrong);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

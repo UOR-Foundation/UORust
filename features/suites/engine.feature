@@ -824,3 +824,10 @@ Feature: engine
     When compiler declarations normalize that argument to a library-local path
     Then the imported body retains the same argument result and mutable state readings
     But unknown foreign types and conflicting readings remain refused
+
+  @UE-118 @build
+  Scenario: Imported returned borrows retain their backward interface
+    Given a compiler-owned dependency that returns a mutable borrow
+    When its exact body admits both native forward and backward kernels
+    Then a write through the returned borrow updates the caller's original state
+    But incompatible ABIs and unadmitted memory and panic borrowed interfaces remain refused

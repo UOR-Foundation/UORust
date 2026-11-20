@@ -759,3 +759,9 @@ id = "UE-117"
 level = "build"
 suite = "engine"
 statement = "Imported compiler dependency queries retain admitted caller ABI readings through exact declaration namespace normalization, including nested type components, while unknown foreign types and conflicting readings remain refused and caller scopes remain unchanged"
+
+[[id]]
+id = "UE-118"
+level = "build"
+suite = "engine"
+statement = "Compiler-owned returned mutable borrows reuse the existing forward and backward native lowering kernels in one exact imported scope, with both ABIs checked before caller state transport; unadmitted memory and panic borrowed interfaces remain refused"
