@@ -5901,6 +5901,7 @@ fn mir_lift(
         closures: &closures,
         active: &[],
         core: None,
+        library: None,
         layouts: &layouts,
         backward: false,
     };
@@ -6048,15 +6049,16 @@ fn mir_lift(
                 let Some(t) = done.get(name) else {
                     return false;
                 };
-                body.blocks.iter().any(|block| {
-                    matches!(
-                        block.terminator,
-                        crate::mir::ir::IrTerminator::Assert { .. }
-                    )
-                }) && options
-                    .verdicts
-                    .matching(&t.kappa, &t.digest, t.model_context_sha256.as_deref())
-                    .is_some_and(|v| matches!(v.status, Decision::Refused(_)))
+                t.lowered.library_outcomes
+                    || body.blocks.iter().any(|block| {
+                        matches!(
+                            block.terminator,
+                            crate::mir::ir::IrTerminator::Assert { .. }
+                        )
+                    }) && options
+                        .verdicts
+                        .matching(&t.kappa, &t.digest, t.model_context_sha256.as_deref())
+                        .is_some_and(|v| matches!(v.status, Decision::Refused(_)))
             })
             .map(|(_, name, _)| name.clone())
             .collect();

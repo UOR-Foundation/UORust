@@ -505,6 +505,7 @@ pub(crate) fn shard(
             closures: &closures,
             active: &active,
             core: Some(link),
+            library: None,
             layouts,
             backward: false,
         };
@@ -729,6 +730,19 @@ pub(crate) struct CoreDecls {
 }
 
 impl CoreDecls {
+    /// Normalize compiler-library type names through their declared reexports.
+    pub(crate) fn compiler_type(&self, text: &str) -> String {
+        let instances = Instances {
+            decls: self,
+            strict: true,
+            reserved: BTreeSet::new(),
+            by: BTreeMap::new(),
+            done: BTreeMap::new(),
+            explicit: BTreeSet::new(),
+        };
+        instances.rooted("", text, 0)
+    }
+
     /// Each name a `use` brings into a module, by (module, name), with the
     /// path from the crate's root it names.
     pub(crate) fn uses(&self) -> impl Iterator<Item = (&str, &str, &str)> {
@@ -1618,6 +1632,7 @@ impl Instances<'_> {
     /// names that re-export it.
     fn canonical(&self, path: &str, depth: usize) -> Option<String> {
         if self.by.contains_key(path)
+            || self.decls.structs.iter().any(|schema| schema.path == path)
             || self.decls.traits.contains(path)
             || self.decls.unions.contains(path)
             || self.decls.aliases.contains_key(path)
@@ -1710,6 +1725,14 @@ impl Instances<'_> {
                     i += if chars[i] == ':' { 2 } else { 1 };
                 }
                 let word: String = chars[start..i].iter().collect();
+                let word = if self.strict {
+                    word.strip_prefix("std::")
+                        .or_else(|| word.strip_prefix("core::"))
+                        .unwrap_or(&word)
+                        .to_string()
+                } else {
+                    word
+                };
                 let path = self.resolve(module, &word).unwrap_or(word);
                 let Some((at, params, target)) =
                     self.decls.aliases.get(&path).filter(|_| depth < 16)

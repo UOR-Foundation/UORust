@@ -1738,3 +1738,30 @@ snapshot uses derived serialization; its bytes are unchanged by the wire
 representation. Twenty-two lowering controls, conformance, strict Clippy and
 model/template/SDK/self-model checks passed. Complete release acceptance
 remains the unchanged `just vv` boundary.
+
+## UE-104: compiler-library closures share native ABI and effect kernels
+
+The initial native fixture refused a compiler-library call (0.61 seconds).
+The importer now consumes the complete pinned core MIR capture through the
+existing declaration graph, resolver and span-aware dump reader. The graph
+binds compiler facts, source archive, target layout, capture flags and payload.
+Its 18,300 captured files reproduce a 33,522,757-byte normalized snapshot,
+compressed losslessly to 1,937,054 bytes. A script reproduces the capture with
+an explicit preserved source-acquisition producer and the pinned compiler.
+No operation model was added.
+
+Library calls reuse the existing native call, memory and outcome ABI kernels.
+Semantic lookup is independent of the consumer ABI. Discovered library panic
+outcomes propagate across native dependencies before proof work, avoiding an
+initial totality proof. Unavailable backward-borrow and incompatible interfaces
+remain refused. Source reexports do not identify a consumer type of the same
+name; altered compiler/source bindings, flags and graph identities are rejected.
+
+Eight actual Rust/SDK comparisons passed for primitive and record interfaces,
+including signed boundaries. The incorrect result was rejected with LLV7002
+(51.34 seconds), reusing an intact native verdict only through UORust's exact
+identity matching. A two-body admission control selects the outcome ABI before
+any verdict exists (8.86 seconds). Read-only source reproduction passed
+(28.84 seconds), as did twenty-two lowering controls, closed-schema controls,
+conformance, strict Clippy and model/template/SDK/self-model checks. Complete
+release acceptance remains the unchanged `just vv` boundary.

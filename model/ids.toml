@@ -675,3 +675,9 @@ id = "UE-103"
 level = "build"
 suite = "engine"
 statement = "Native type interfaces import closed compiler-library declaration schemas from the exact pinned Rust source archive through the existing core declaration instancer; incompatible, conditional, ambiguous and unbound schemas remain refused without adding operation semantics"
+
+[[id]]
+id = "UE-104"
+level = "build"
+suite = "engine"
+statement = "Native calls import compiler-library dependency closures from exact pinned compiler bodies through the existing library resolver and shared MIR lowering, propagating discovered library panic outcomes through the native dependency graph before proof work and preserving consumer carriers and producer identity; changed, ambiguous, unbound and incompatible library interfaces remain refused without operation-specific semantic models"

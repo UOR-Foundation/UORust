@@ -725,3 +725,10 @@ Feature: engine
     When the existing declaration instancer imports their reachable schemas
     Then native construction and field reads retain the compiler-owned fields and carriers
     But incompatible, conditional and unbound schemas cannot acquire a model
+
+  @UE-104 @build
+  Scenario: Native calls reuse the pinned compiler-library body graph
+    Given native calls into the exact compiler-library dependency graph
+    When the existing library resolver instantiates reachable compiler bodies
+    Then shared native definitions agree with Rust across record and primitive interfaces
+    But altered identities and unavailable or incompatible bodies cannot supply a definition

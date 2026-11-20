@@ -261,6 +261,8 @@ pub(crate) struct Cx<'a> {
     pub(crate) active: &'a [String],
     /// In core's scope, core's own bodies, which its calls name.
     pub(crate) core: Option<&'a super::link::CoreLink>,
+    /// Imported library bodies keep the consumer ABI and their own name scope.
+    pub(crate) library: Option<&'a super::link::CoreLink>,
     /// The data layout of each target the translation answers for (see
     /// [`super::layout`]); none where the dumps record none.
     pub(crate) layouts: &'a [super::layout::DataLayout],
@@ -271,6 +273,11 @@ pub(crate) struct Cx<'a> {
 }
 
 impl<'a> Cx<'a> {
+    /// Semantic lookup is independent of the consumer's memory/type ABI.
+    fn semantics(&self) -> Option<&'a super::link::CoreLink> {
+        self.core.or(self.library)
+    }
+
     fn callee(&self, path: &str) -> Option<&Callee> {
         if super::identity::qualified(path) {
             return self.compiler_bindings.get(&self.compiler_scope)?.get(path);
@@ -318,6 +325,7 @@ impl<'a> Cx<'a> {
             closures: self.closures,
             active,
             core: self.core,
+            library: self.library,
             layouts: self.layouts,
             backward: false,
         }
@@ -329,6 +337,7 @@ impl<'a> Cx<'a> {
 /// needs.
 #[derive(Clone, Debug)]
 pub(crate) struct Lowered {
+    pub(crate) library_outcomes: bool,
     pub(crate) abi: NativeAbi,
     pub(crate) decls: Vec<Decl>,
     pub(crate) calls: BTreeSet<String>,
@@ -594,6 +603,7 @@ fn natural_regions(body: &IrBody) -> Lift<BTreeMap<IrBlockId, BTreeSet<IrBlockId
 }
 
 struct Fun<'a, 'c> {
+    library_outcomes: bool,
     cx: &'a Cx<'c>,
     body: &'a IrBody,
     name: String,
@@ -1128,6 +1138,7 @@ fn lower_mode(cx: &Cx<'_>, body: &IrBody, name: &str, outcomes: bool) -> Lift<Lo
 
 fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool, outcomes: bool) -> Lift<Lowered> {
     let mut f = Fun {
+        library_outcomes: false,
         cx,
         body,
         name: name.to_string(),
@@ -1381,6 +1392,7 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool, outcomes: bool
     };
     f.decls.push(main);
     Ok(Lowered {
+        library_outcomes: f.library_outcomes,
         abi: NativeAbi {
             parameters: f.params.iter().map(|(_, t)| t.clone()).collect(),
             result: f.result,
@@ -3451,7 +3463,7 @@ impl Fun<'_, '_> {
     /// `const_eval_select(arg, called_in_const, called_at_rt)` selects at
     /// run time: its third argument.
     fn selected(&self, callee: &str, args: &[IrOperand]) -> Option<String> {
-        let link = self.cx.core?;
+        let link = self.cx.semantics()?;
         let path = link
             .path(&erase(callee))
             .filter(|p| link.decls.intrinsics.contains(p))?;
@@ -4213,7 +4225,7 @@ impl Fun<'_, '_> {
                 // either does not.
                 Some(_)
                     if !p.contains("promoted[")
-                        && self.cx.core.is_some_and(|l| {
+                        && self.cx.semantics().is_some_and(|l| {
                             l.bodies
                                 .get(p)
                                 .is_some_and(|ts| ts.iter().any(|t| *t != ts[0]))
@@ -4242,8 +4254,12 @@ impl Fun<'_, '_> {
                     Ok((format!("({})", constant.name), constant.result.clone()))
                 }
                 // In core's scope, a constant a trait of core provides.
-                None if self.cx.core.and_then(|l| l.constant(p)).is_some() => {
-                    let inst = self.cx.core.and_then(|l| l.constant(p)).expect("checked");
+                None if self.cx.semantics().and_then(|l| l.constant(p)).is_some() => {
+                    let inst = self
+                        .cx
+                        .semantics()
+                        .and_then(|l| l.constant(p))
+                        .expect("checked");
                     let body = super::parse::bodies(&inst.text)
                         .into_iter()
                         .next()
@@ -4265,7 +4281,7 @@ impl Fun<'_, '_> {
                     .core
                     .is_some_and(|l| l.decls.items.contains_key(p.as_str())) =>
                 {
-                    let decls = &self.cx.core.expect("checked").decls;
+                    let decls = &self.cx.semantics().expect("checked").decls;
                     let (written, expr) = decls.items[p.as_str()].clone();
                     let t = ty(&written, self.cx.types)?;
                     let unfolded = || kind(k, &format!("the constant item {p}, of {expr}"));
@@ -6690,6 +6706,7 @@ impl Fun<'_, '_> {
             for (n, d) in lowered.aux {
                 self.aux.entry(n).or_insert(d);
             }
+            self.library_outcomes |= lowered.library_outcomes;
             self.calls.extend(lowered.calls);
             self.types.extend(lowered.types);
         }
@@ -6939,6 +6956,7 @@ impl Fun<'_, '_> {
                         for (n, d) in lowered.aux {
                             self.aux.entry(n).or_insert(d);
                         }
+                        self.library_outcomes |= lowered.library_outcomes;
                         self.calls.extend(lowered.calls);
                         self.types.extend(lowered.types);
                     }
@@ -7012,116 +7030,7 @@ impl Fun<'_, '_> {
             }
         }
         if let Some(c) = self.cx.callee(callee).cloned() {
-            if c.memory && !self.memory {
-                return Err(needs_memory());
-            }
-            if c.outcomes && (!self.outcomes || c.generic.is_some() || !c.result.same(dt)) {
-                return Err(kind(
-                    k,
-                    "a native panic outcome needs its exact admitted result and caller interface",
-                ));
-            }
-            if c.name == self.name {
-                return Err(kind(
-                    k,
-                    "a call of the function itself, whose measure is not derived",
-                ));
-            }
-            let bad_types = || {
-                kind(
-                    k,
-                    &format!("{callee}, at other types than the lift gives it"),
-                )
-            };
-            if c.params.len() != args.len() {
-                return Err(bad_types());
-            }
-            if c.generic.is_some() {
-                if c.threads.is_some()
-                    || texts.iter().flatten().any(|t| t.contains("&mut "))
-                    || dest.contains("&mut ")
-                {
-                    return Err(bad_types());
-                }
-                let (modeled, _) = self.model_callables(&args, texts);
-                if modeled
-                    .iter()
-                    .map(|(_, t)| t)
-                    .chain(std::iter::once(dt))
-                    .any(|t| !super::source::generic_environment(t, self.cx.types))
-                {
-                    return Err(kind(
-                        k,
-                        "a generic dependency whose schema exposes mutable or unregistered state",
-                    ));
-                }
-                let sig = lift::Sig {
-                    name: c.name.clone(),
-                    params: c.params.clone(),
-                    result: c.result.clone(),
-                    generic: c.generic.clone(),
-                    threads: Vec::new(),
-                };
-                let (term, result, calls, declarations) = lift::bind_model_call(
-                    &sig,
-                    &modeled,
-                    self.cx.types,
-                    self.cx.source_sigs,
-                    self.cx.widths,
-                    self.cx.taken,
-                )
-                .map_err(|r| kind(k, &format!("{callee}: {}", r.detail())))?;
-                if !result.same(dt) {
-                    return Err(bad_types());
-                }
-                for declaration in declarations {
-                    self.aux.insert(declaration.name().to_string(), declaration);
-                }
-                self.calls.extend(calls);
-                return Ok(Called::value(term));
-            }
-            let mut passed = Vec::new();
-            for ((value, ty), expected) in args.iter().zip(&c.params) {
-                if c.threads.is_some() && !ty.same(expected) {
-                    return Err(bad_types());
-                }
-                passed.push(
-                    self.scalar_representation(value, ty, expected, st)
-                        .ok_or_else(bad_types)?,
-                );
-            }
-            if c.memory {
-                passed.push(self.memory_at(st)?);
-            }
-            let term = if passed.is_empty() {
-                format!("({})", c.name)
-            } else {
-                format!("({} {})", c.name, passed.join(" "))
-            };
-            let mut binding = None;
-            let term = if c.threads.is_none() && !c.result.same(dt) {
-                let name = self.fresh(Some("sourceResult"), 0);
-                st.binders.push((name.clone(), c.result.clone()));
-                let represented = self
-                    .scalar_representation(&name, &c.result, dt, st)
-                    .ok_or_else(bad_types)?;
-                binding = Some((name, c.result.clone(), term));
-                represented
-            } else {
-                if !c.result.same(dt) {
-                    return Err(bad_types());
-                }
-                term
-            };
-            self.import_compiler_definition(&c)?;
-            self.calls.insert(c.name.clone());
-            return Ok(Called {
-                binding,
-                outcomes: c.outcomes,
-                memory: c.memory,
-                threads: c.threads.clone(),
-                ..Called::value(term)
-            });
+            return self.invoke(c, callee, args, texts, dest, dt, st);
         }
         let constructor = erased
             .strip_prefix('<')
@@ -7398,7 +7307,7 @@ impl Fun<'_, '_> {
         // options (core's `FormattingOptions::new()` where the template
         // gives none) and the index of the argument it formats.
         if let (Some(link), Ty::Tuple(parts), [(template, Ty::List(_)), (list, Ty::List(_))]) =
-            (self.cx.core, dt, args.as_slice())
+            (self.cx.semantics(), dt, args.as_slice())
         {
             let piece_ty = match parts.as_slice() {
                 [Ty::Option(lit), Ty::List(p), Ty::List(_)] if **lit == Ty::Str => {
@@ -7593,7 +7502,9 @@ impl Fun<'_, '_> {
         // erases. The lift's Argument is that method applied to the value,
         // a function of the options a placeholder gives and the text
         // written so far, to the method's result and the text after.
-        if let (Some(link), Ty::Fn(ins, out), [(x, xt)]) = (self.cx.core, dt, args.as_slice()) {
+        if let (Some(link), Ty::Fn(ins, out), [(x, xt)]) =
+            (self.cx.semantics(), dt, args.as_slice())
+        {
             // A formatting trait's method given the value alone (a
             // coercion to its trait object) is that method.
             let partial = erase(callee)
@@ -7678,7 +7589,7 @@ impl Fun<'_, '_> {
         // In a library's scope, an intrinsic's model or the library's own
         // body.
         let mut unimplemented: Option<String> = None;
-        if let Some(link) = self.cx.core {
+        if let Some(link) = self.cx.semantics() {
             if let Some(path) = link
                 .path(&erase(callee))
                 .filter(|p| link.decls.intrinsics.contains(p))
@@ -7716,6 +7627,9 @@ impl Fun<'_, '_> {
                     .map(Called::value);
             }
             if let Some(inst) = link.instance(callee, texts, dest) {
+                if self.cx.core.is_none() {
+                    return self.compiler_shared(link, inst, callee, args, texts, dest, dt, st);
+                }
                 let krate = self.cx.krate.clone();
                 let memory = st.memory.clone();
                 return self.shared(inst, &krate, &args, dt, memory.as_deref());
@@ -7779,11 +7693,159 @@ impl Fun<'_, '_> {
         let memory = st.memory.clone();
         match self.std_instance(callee, &args, texts, dest, dt, memory.as_deref())? {
             Some(called) => Ok(called),
-            None => Err(match unimplemented {
-                Some(why) => kind("Instantiation", &why),
-                None => kind(k, &erase(callee)),
-            }),
+            None => {
+                let qualified = [
+                    "std::", "core::", "alloc::", "<std::", "<core::", "<alloc::",
+                ]
+                .iter()
+                .any(|root| callee.starts_with(root));
+                let library = self.cx.library.or_else(|| {
+                    qualified
+                        .then(|| super::link::compiler_library_for(self.cx.layouts))
+                        .flatten()
+                });
+                if let Some(link) = library {
+                    let library_texts: Vec<_> = texts
+                        .iter()
+                        .map(|t| t.as_deref().map(|t| link.decls.compiler_type(t)))
+                        .collect();
+                    let library_dest = link.decls.compiler_type(dest);
+                    if let Some(instance) = link.instance(callee, &library_texts, &library_dest) {
+                        return self
+                            .compiler_shared(link, instance, callee, args, texts, dest, dt, st);
+                    }
+                }
+                Err(match unimplemented {
+                    Some(why) => kind("Instantiation", &why),
+                    None => kind(k, &erase(callee)),
+                })
+            }
         }
+    }
+
+    /// Apply an already admitted callable through the common native ABI.
+    #[allow(clippy::too_many_arguments)]
+    fn invoke(
+        &mut self,
+        c: Callee,
+        callee: &str,
+        args: Vec<(String, Ty)>,
+        texts: &[Option<String>],
+        dest: &str,
+        dt: &Ty,
+        st: &mut State,
+    ) -> Lift<Called> {
+        let k = spec::MirTerminatorKind::Call.path();
+        if c.memory && !self.memory {
+            return Err(needs_memory());
+        }
+        if c.outcomes && (!self.outcomes || c.generic.is_some() || !c.result.same(dt)) {
+            return Err(kind(
+                k,
+                "a native panic outcome needs its exact admitted result and caller interface",
+            ));
+        }
+        if c.name == self.name {
+            return Err(kind(
+                k,
+                "a call of the function itself, whose measure is not derived",
+            ));
+        }
+        let bad_types = || {
+            kind(
+                k,
+                &format!("{callee}, at other types than the lift gives it"),
+            )
+        };
+        if c.params.len() != args.len() {
+            return Err(bad_types());
+        }
+        if c.generic.is_some() {
+            if c.threads.is_some()
+                || texts.iter().flatten().any(|t| t.contains("&mut "))
+                || dest.contains("&mut ")
+            {
+                return Err(bad_types());
+            }
+            let (modeled, _) = self.model_callables(&args, texts);
+            if modeled
+                .iter()
+                .map(|(_, t)| t)
+                .chain(std::iter::once(dt))
+                .any(|t| !super::source::generic_environment(t, self.cx.types))
+            {
+                return Err(kind(
+                    k,
+                    "a generic dependency whose schema exposes mutable or unregistered state",
+                ));
+            }
+            let sig = lift::Sig {
+                name: c.name.clone(),
+                params: c.params.clone(),
+                result: c.result.clone(),
+                generic: c.generic.clone(),
+                threads: Vec::new(),
+            };
+            let (term, result, calls, declarations) = lift::bind_model_call(
+                &sig,
+                &modeled,
+                self.cx.types,
+                self.cx.source_sigs,
+                self.cx.widths,
+                self.cx.taken,
+            )
+            .map_err(|r| kind(k, &format!("{callee}: {}", r.detail())))?;
+            if !result.same(dt) {
+                return Err(bad_types());
+            }
+            for declaration in declarations {
+                self.aux.insert(declaration.name().to_string(), declaration);
+            }
+            self.calls.extend(calls);
+            return Ok(Called::value(term));
+        }
+        let mut passed = Vec::new();
+        for ((value, ty), expected) in args.iter().zip(&c.params) {
+            if c.threads.is_some() && !ty.same(expected) {
+                return Err(bad_types());
+            }
+            passed.push(
+                self.scalar_representation(value, ty, expected, st)
+                    .ok_or_else(bad_types)?,
+            );
+        }
+        if c.memory {
+            passed.push(self.memory_at(st)?);
+        }
+        let term = if passed.is_empty() {
+            format!("({})", c.name)
+        } else {
+            format!("({} {})", c.name, passed.join(" "))
+        };
+        let mut binding = None;
+        let term = if c.threads.is_none() && !c.result.same(dt) {
+            let name = self.fresh(Some("sourceResult"), 0);
+            st.binders.push((name.clone(), c.result.clone()));
+            let represented = self
+                .scalar_representation(&name, &c.result, dt, st)
+                .ok_or_else(bad_types)?;
+            binding = Some((name, c.result.clone(), term));
+            represented
+        } else {
+            if !c.result.same(dt) {
+                return Err(bad_types());
+            }
+            term
+        };
+        self.import_compiler_definition(&c)?;
+        self.calls.insert(c.name.clone());
+        Ok(Called {
+            binding,
+            outcomes: c.outcomes,
+            memory: c.memory,
+            threads: c.threads.clone(),
+            ..Called::value(term)
+        })
     }
 
     /// The model of a call of the intrinsic `path`, by the signature core
@@ -8259,7 +8321,7 @@ impl Fun<'_, '_> {
         let discriminants = |t: &Ty, signed: bool| -> Option<(String, Vec<(String, i128)>)> {
             let Ty::Named(n) = t else { return None };
             let variants = types.enums.get(n)?;
-            let decl = self.cx.core?.decls.structs.iter().find(|s| {
+            let decl = self.cx.semantics()?.decls.structs.iter().find(|s| {
                 let mut parts = vec!["core"];
                 parts.extend(s.path.split("::"));
                 s.explicit
@@ -8384,6 +8446,7 @@ impl Fun<'_, '_> {
                 "compiler dependency ABI differs from its lowered body",
             ));
         }
+        self.library_outcomes |= lowered.library_outcomes;
         self.calls.extend(lowered.calls);
         self.types.extend(lowered.types);
         for declaration in lowered.decls {
@@ -8393,6 +8456,210 @@ impl Fun<'_, '_> {
             self.aux.entry(name).or_insert(declaration);
         }
         Ok(())
+    }
+
+    /// Compiler-library definitions use the same outcome, memory and call kernels
+    /// as captured consumer bodies, with an isolated library name scope.
+    #[allow(clippy::too_many_arguments)]
+    fn compiler_shared(
+        &mut self,
+        link: &super::link::CoreLink,
+        instance: stdlib::Instance,
+        callee: &str,
+        args: Vec<(String, Ty)>,
+        texts: &[Option<String>],
+        dest: &str,
+        dt: &Ty,
+        st: &mut State,
+    ) -> Lift<Called> {
+        let k = spec::MirTerminatorKind::Call.path();
+        let input_types: Vec<_> = args.iter().map(|(_, ty)| ty).collect();
+        let identity = format!(
+            "compiler-library-instance/1\0{}\0{}\0{:?}\0{:?}\0{:?}\0{}",
+            instance.path, instance.text, instance.bound, input_types, dt, self.outcomes
+        );
+        let name = format!(
+            "compilerLibrary{}",
+            crate::project::sha(identity.as_bytes())
+        );
+        if self.cx.active.contains(&name) || name == self.name {
+            return Err(kind(
+                k,
+                "a compiler-library cycle without an admitted measure",
+            ));
+        }
+        let normalized = super::parse::unspanned(&super::parse::dumped(&instance.text));
+        let body = super::parse::bodies(&normalized)
+            .into_iter()
+            .next()
+            .ok_or_else(|| kind(k, "the compiler-library body does not read"))?;
+        if body
+            .locals
+            .first()
+            .is_some_and(|text| mut_target(text).is_some())
+        {
+            return Err(kind(
+                k,
+                "a compiler-library returned borrow needs an admitted backward interface",
+            ));
+        }
+        self.library_outcomes |= body
+            .blocks
+            .iter()
+            .any(|block| matches!(block.terminator, IrTerminator::Assert { .. }));
+        let result = ty(
+            body.locals.first().map(String::as_str).unwrap_or(""),
+            self.cx.types,
+        )?;
+        let params: Vec<_> = (1..=body.arity)
+            .map(|i| ty(&body.locals[i], self.cx.types))
+            .collect::<Lift<_>>()?;
+        let positions: Vec<_> = threaded(&body.locals, body.arity, false, self.cx.types)
+            .into_iter()
+            .map(|i| i - 1)
+            .collect();
+        let rest: Vec<_> = positions.iter().map(|i| params[*i].clone()).collect();
+        let mut callable = Callee {
+            name: name.clone(),
+            outcomes: false,
+            memory: false,
+            method: None,
+            params,
+            generic: None,
+            result: result.clone(),
+            threads: (!rest.is_empty())
+                .then(|| (threaded_result(&result, &rest, self.cx.types), positions)),
+        };
+        if !self.aux.contains_key(&name) {
+            let mut active = self.cx.active.to_vec();
+            active.push(name.clone());
+            let empty_callees = BTreeMap::new();
+            let empty_signatures = BTreeMap::new();
+            let mut cx = self.cx.within(&active);
+            cx.library = Some(link);
+            cx.krate = "core".into();
+            cx.compiler_scope.clear();
+            cx.callees = &empty_callees;
+            cx.source_sigs = &empty_signatures;
+            let lowered = if self.outcomes {
+                lower_outcomes(&cx, &body, &name)
+            } else {
+                lower(&cx, &body, &name)
+            }
+            .map_err(|r| {
+                kind(
+                    k,
+                    &format!("compiler library {}: {}", instance.path, r.detail()),
+                )
+            })?;
+            if lowered.abi.memory {
+                let mut normal_abi = lowered.abi.clone();
+                let mut normal_state = rest.clone();
+                normal_state.push(super::memory::memory_ty());
+                normal_abi.result = threaded_result(&result, &normal_state, self.cx.types);
+                if !callable.bind_memory(&normal_abi, self.cx.types) {
+                    return Err(kind(k, "the compiler-library memory ABI is incompatible"));
+                }
+            }
+            if self.outcomes {
+                callable.use_outcomes(&name, self.cx.types);
+            }
+            let expected = callable
+                .threads
+                .as_ref()
+                .map(|(full, _)| full.clone())
+                .unwrap_or_else(|| {
+                    if self.outcomes {
+                        Ty::Outcome(Box::new(result.clone()), Box::new(Ty::Str))
+                    } else {
+                        result.clone()
+                    }
+                });
+            let mut expected_parameters = callable.params.clone();
+            if callable.memory {
+                expected_parameters.push(super::memory::memory_ty());
+            }
+            if lowered.abi.parameters != expected_parameters || lowered.abi.result != expected {
+                return Err(kind(k, "the compiler-library lowered ABI is incompatible"));
+            }
+            for declaration in lowered.decls {
+                self.aux.insert(declaration.name().to_string(), declaration);
+            }
+            for (name, declaration) in lowered.aux {
+                self.aux.entry(name).or_insert(declaration);
+            }
+            self.library_outcomes |= lowered.library_outcomes;
+            self.calls.extend(lowered.calls);
+            self.types.extend(lowered.types);
+        } else {
+            // Recover only the already emitted exact interface; no semantic substitute.
+            let Some(Decl::Definition {
+                parameters,
+                result: returned,
+                ..
+            }) = self.aux.get(&name)
+            else {
+                return Err(kind(k, "the compiler-library definition is absent"));
+            };
+            let memory = parameters
+                .last()
+                .is_some_and(|(_, t)| t == super::memory::MEMORY);
+            if memory {
+                let mut state: Vec<_> = callable
+                    .threads
+                    .as_ref()
+                    .map(|(_, positions)| {
+                        positions
+                            .iter()
+                            .map(|i| callable.params[*i].clone())
+                            .collect()
+                    })
+                    .unwrap_or_default();
+                state.push(super::memory::memory_ty());
+                let abi = NativeAbi {
+                    parameters: callable
+                        .params
+                        .iter()
+                        .cloned()
+                        .chain(std::iter::once(super::memory::memory_ty()))
+                        .collect(),
+                    result: threaded_result(&result, &state, self.cx.types),
+                    memory: true,
+                };
+                if !callable.bind_memory(&abi, self.cx.types) {
+                    return Err(kind(k, "the shared compiler-library memory ABI differs"));
+                }
+            }
+            if self.outcomes {
+                callable.use_outcomes(&name, self.cx.types);
+            }
+            let expected = callable
+                .threads
+                .as_ref()
+                .map(|(full, _)| full.clone())
+                .unwrap_or_else(|| {
+                    if self.outcomes {
+                        Ty::Outcome(Box::new(result), Box::new(Ty::Str))
+                    } else {
+                        result
+                    }
+                });
+            let mut expected_parameters: Vec<_> = callable.params.iter().map(Ty::render).collect();
+            if callable.memory {
+                expected_parameters.push(super::memory::MEMORY.into());
+            }
+            if parameters
+                .iter()
+                .map(|(_, t)| t)
+                .ne(expected_parameters.iter())
+            {
+                return Err(kind(k, "the shared compiler-library parameter ABI differs"));
+            }
+            if *returned != expected.render() {
+                return Err(kind(k, "the shared compiler-library result ABI differs"));
+            }
+        }
+        self.invoke(callable, callee, args, texts, dest, dt, st)
     }
 
     /// The definition an instance of a library body is lowered to, shared
@@ -8444,6 +8711,7 @@ impl Fun<'_, '_> {
             for (n, d) in lowered.aux {
                 self.aux.entry(n).or_insert(d);
             }
+            self.library_outcomes |= lowered.library_outcomes;
             self.calls.extend(lowered.calls);
             self.types.extend(lowered.types);
         }
@@ -8577,6 +8845,7 @@ impl Fun<'_, '_> {
                         for (n, d) in lowered.aux {
                             self.aux.entry(n).or_insert(d);
                         }
+                        self.library_outcomes |= lowered.library_outcomes;
                         self.calls.extend(lowered.calls);
                         self.types.extend(lowered.types);
                     }
@@ -8656,6 +8925,7 @@ impl Fun<'_, '_> {
             for (n, d) in lowered.aux {
                 self.aux.entry(n).or_insert(d);
             }
+            self.library_outcomes |= lowered.library_outcomes;
             self.calls.extend(lowered.calls);
             self.types.extend(lowered.types);
         }
@@ -10756,6 +11026,7 @@ fn expose() -> impl Fn(u8) -> u8 {
             closures: &BTreeMap::new(),
             active: &[],
             core: None,
+            library: None,
             layouts: &[],
             backward: false,
         };
@@ -10813,6 +11084,7 @@ fn guarded(_1: u8) -> u8 {
             closures: &BTreeMap::new(),
             active: &[],
             core: None,
+            library: None,
             layouts: &[],
             backward: false,
         };
@@ -10862,6 +11134,7 @@ fn guarded(_1: u8) -> u8 {
             closures: &BTreeMap::new(),
             active: &[],
             core: None,
+            library: None,
             layouts: &[],
             backward: false,
         };
@@ -10931,6 +11204,7 @@ fn guarded(_1: u8) -> u8 {
             closures: &BTreeMap::new(),
             active: &[],
             core: None,
+            library: None,
             layouts: &[],
             backward: false,
         };

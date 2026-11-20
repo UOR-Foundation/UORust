@@ -124,6 +124,7 @@ model does not sanction.
 | `UE-101` | `build` | First-class tuple-variant constructors reuse admitted enum schemas and native aggregate kernels through shared typed callable bindings; unavailable schemas, named-field variants and incompatible scalar carriers remain refused |
 | `UE-102` | `build` | Native generic bodies reuse admitted source trait dictionaries through compiler-owned trait identities, exact carrier bindings and shared loop-state transport; unregistered, mismatched and unsupported mutable dictionaries remain refused |
 | `UE-103` | `build` | Native type interfaces import closed compiler-library declaration schemas from the exact pinned Rust source archive through the existing core declaration instancer; incompatible, conditional, ambiguous and unbound schemas remain refused without adding operation semantics |
+| `UE-104` | `build` | Native calls import compiler-library dependency closures from exact pinned compiler bodies through the existing library resolver and shared MIR lowering, propagating discovered library panic outcomes through the native dependency graph before proof work and preserving consumer carriers and producer identity; changed, ambiguous, unbound and incompatible library interfaces remain refused without operation-specific semantic models |
 
 ## factory
 

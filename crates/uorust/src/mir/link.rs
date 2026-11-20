@@ -14,6 +14,7 @@ use super::parse::{split_path, split_top};
 use super::stdlib::{substitute, unify, Instance};
 
 /// Core's bodies and declarations, for one census.
+#[derive(serde::Serialize, serde::Deserialize)]
 pub(crate) struct CoreLink {
     pub(crate) decls: CoreDecls,
     /// Each body's MIR text, by the path its dump names it by: a macro's
@@ -47,7 +48,8 @@ pub(crate) struct CoreLink {
     index: BTreeMap<String, Vec<Option<u64>>>,
     /// The root of core's sources (rust-src), whose `library/core/src`
     /// declares the constant items no dump holds.
-    root: std::path::PathBuf,
+    #[serde(skip)]
+    root: Option<std::path::PathBuf>,
     /// Every type a local of any of core's bodies has, as its dump prints
     /// it: the instances a call into another module's body needs in scope.
     pub(crate) locals: std::collections::BTreeSet<String>,
@@ -577,7 +579,7 @@ impl CoreLink {
             methods,
             traits,
             index,
-            root: root.to_path_buf(),
+            root: Some(root.to_path_buf()),
             locals,
         }
     }
@@ -1064,7 +1066,7 @@ impl CoreLink {
         let (trait_path, _) = crate::embed::generic_parts(trait_path.trim());
         let segs = split_path(trait_path);
         let (_, module) = segs.split_last()?;
-        let src = self.root.join("library/core/src");
+        let src = self.root.as_ref()?.join("library/core/src");
         let file = (1..=module.len()).rev().find_map(|k| {
             let dir = src.join(module[..k].join("/"));
             [dir.with_extension("rs"), dir.join("mod.rs")]
@@ -1109,7 +1111,7 @@ impl CoreLink {
                 // core's sources, or std's where core has no such module
                 // (`sys::path::unix::HAS_PREFIXES`).
                 let (k, file) = ["core", "std"].iter().find_map(|krate| {
-                    let src = self.root.join(format!("library/{krate}/src"));
+                    let src = self.root.as_ref()?.join(format!("library/{krate}/src"));
                     (1..=module.len()).rev().find_map(|k| {
                         let dir = src.join(module[..k].join("/"));
                         [dir.with_extension("rs"), dir.join("mod.rs")]
@@ -1331,5 +1333,291 @@ mod source_context_tests {
         );
         assert!(flat.path("item::Bad::get").is_some());
         std::fs::remove_dir_all(root).unwrap();
+    }
+}
+
+/// Compiler-owned library bodies with their complete source and target binding.
+#[derive(serde::Serialize, serde::Deserialize)]
+struct CompilerLibrary {
+    spec: String,
+    toolchain: String,
+    compiler_commit: String,
+    compiler_version: String,
+    source_sha256: String,
+    target: String,
+    data_layout: String,
+    flags: String,
+    pass: String,
+    graph_sha256: String,
+    graph: CoreLink,
+}
+
+const COMPILER_FLAGS: &str = "--edition=2024 --crate-type=lib --emit=metadata -Coverflow-checks=on -Cdebug-assertions=off -Zmir-include-spans=on";
+
+fn compiler_library() -> &'static CompilerLibrary {
+    static LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
+    LIBRARY.get_or_init(|| {
+        let decoder =
+            flate2::read::GzDecoder::new(&include_bytes!("../../mir/std-library.json.gz")[..]);
+        let source: CompilerLibrary =
+            serde_json::from_reader(decoder).expect("pinned compiler-library graph");
+        assert!(
+            source.valid(),
+            "compiler-library binding or payload differs"
+        );
+        source
+    })
+}
+
+impl CompilerLibrary {
+    fn valid(&self) -> bool {
+        let registry: toml::Value =
+            toml::from_str(include_str!("../../mir/std.toml")).expect("pinned source registry");
+        self.spec == "uorust/compiler-library-graph/1"
+            && self.toolchain == super::spec::TOOLCHAIN
+            && self.source_sha256 == registry["rust_src_xz_sha256"].as_str().expect("source pin")
+            && self.compiler_commit.len() == 40
+            && self.compiler_commit.bytes().all(|c| c.is_ascii_hexdigit())
+            && self
+                .compiler_version
+                .lines()
+                .find_map(|line| line.strip_prefix("commit-hash: "))
+                == Some(self.compiler_commit.as_str())
+            && self
+                .compiler_version
+                .lines()
+                .any(|line| line == format!("release: {}", self.toolchain))
+            && self.flags == COMPILER_FLAGS
+            && self.pass == "ElaborateBoxDerefs.before"
+            && !self.target.is_empty()
+            && !self.data_layout.is_empty()
+            && self.graph.root.is_none()
+            && self.graph.bodies.len() > 1000
+            && crate::project::sha(&serde_json::to_vec(&self.graph).expect("graph identity"))
+                == self.graph_sha256
+    }
+
+    fn matches(&self, layouts: &[super::layout::DataLayout]) -> bool {
+        let doc: toml::Table = toml::from_str(&format!(
+            "triple = {:?}\ndata_layout = {:?}\n",
+            self.target, self.data_layout
+        ))
+        .expect("target binding");
+        let expected = super::layout::from_target_toml(&doc).expect("compiler target layout");
+        !layouts.is_empty()
+            && layouts
+                .iter()
+                .all(|actual| expected.as_slice() == std::slice::from_ref(actual))
+    }
+}
+
+/// The complete source-owned graph only at its captured target layout.
+pub(crate) fn compiler_library_for(
+    layouts: &[super::layout::DataLayout],
+) -> Option<&'static CoreLink> {
+    let source = compiler_library();
+    source.matches(layouts).then_some(&source.graph)
+}
+
+#[cfg(test)]
+mod compiler_library_tests {
+    use super::*;
+    use std::path::Path;
+
+    #[test]
+    fn compiler_library_graph_reproduces_pinned_bodies_ue_104() {
+        if std::env::var_os("UORUST_CORE_SOURCE_ROOT").is_none() {
+            assert!(compiler_library().valid());
+        }
+        if let Some(root) = std::env::var_os("UORUST_CORE_SOURCE_ROOT") {
+            let raw = std::env::var_os("UORUST_COMPILER_LIBRARY_MIR")
+                .expect("captured compiler-library MIR required");
+            let archive = std::env::var_os("UORUST_CORE_SOURCE_ARCHIVE")
+                .expect("exact source archive required");
+            let registry: toml::Value = toml::from_str(include_str!("../../mir/std.toml")).unwrap();
+            let source_pin = registry["rust_src_xz_sha256"].as_str().unwrap();
+            assert_eq!(
+                crate::project::sha(&std::fs::read(&archive).unwrap()),
+                source_pin
+            );
+            let checked=std::process::Command::new("python3").args(["-c",r#"
+import pathlib,sys,tarfile,hashlib
+root=pathlib.Path(sys.argv[1]);expected=set()
+with tarfile.open(sys.argv[2], 'r:xz') as archive:
+ for entry in archive:
+  marker='/src/rust/library/'
+  if entry.isfile() and marker in entry.name:
+   relative=entry.name.split(marker,1)[1]
+   expected.add(relative)
+   actual=root/'library'/relative
+   assert actual.is_file(),relative
+   assert hashlib.sha256(actual.read_bytes()).digest()==hashlib.sha256(archive.extractfile(entry).read()).digest(),relative
+actual={str(p.relative_to(root/'library')) for p in (root/'library').rglob('*') if p.is_file()}
+assert actual==expected, 'unregistered or missing source'
+"#]).arg(&root).arg(&archive).status().unwrap();
+            assert!(
+                checked.success(),
+                "library source differs from its pinned archive"
+            );
+            let root = Path::new(&root);
+            let library = root.join("library");
+            let prefix = format!("{}/", library.display());
+            let mut texts = Vec::new();
+            for path in crate::embed::dir_paths(Path::new(&raw)).unwrap() {
+                if path.file_name().and_then(|n| n.to_str()).is_some_and(|n| {
+                    n.starts_with("core.") && n.ends_with("ElaborateBoxDerefs.before.mir")
+                }) {
+                    let text = crate::embed::read_plain_dump(&path)
+                        .unwrap()
+                        .replace(&prefix, "library/");
+                    assert!(!text.contains(&root.to_string_lossy().to_string()));
+                    texts.push((
+                        path.file_name().unwrap().to_string_lossy().to_string(),
+                        text,
+                    ));
+                }
+            }
+            assert!(texts.len() > 10000);
+            let graph = CoreLink::new(
+                super::super::core::core_decls(root),
+                root,
+                root,
+                texts.iter().map(|(n, t)| (n.as_str(), t)),
+            );
+            let version = std::process::Command::new("rustc")
+                .args([&format!("+{}", super::super::spec::TOOLCHAIN), "-vV"])
+                .output()
+                .unwrap();
+            assert!(version.status.success());
+            let version = String::from_utf8(version.stdout).unwrap();
+            let commit = version
+                .lines()
+                .find_map(|l| l.strip_prefix("commit-hash: "))
+                .unwrap();
+            let sysroot = std::process::Command::new("rustc")
+                .args([
+                    &format!("+{}", super::super::spec::TOOLCHAIN),
+                    "--print",
+                    "sysroot",
+                ])
+                .output()
+                .unwrap();
+            assert!(sysroot.status.success());
+            let sysroot = String::from_utf8(sysroot.stdout).unwrap();
+            let manifest =
+                Path::new(sysroot.trim()).join("lib/rustlib/multirust-channel-manifest.toml");
+            let manifest: toml::Value =
+                toml::from_str(&std::fs::read_to_string(manifest).unwrap()).unwrap();
+            assert!(manifest["pkg"]["rustc"]["version"]
+                .as_str()
+                .unwrap()
+                .contains(&commit[..9]));
+            assert_eq!(
+                manifest["pkg"]["rust-src"]["target"]["*"]["xz_hash"]
+                    .as_str()
+                    .unwrap(),
+                source_pin
+            );
+            assert!(version
+                .lines()
+                .any(|l| l == format!("release: {}", super::super::spec::TOOLCHAIN)));
+            let target = "x86_64-unknown-linux-gnu";
+            let layout = std::process::Command::new("rustc")
+                .args([
+                    &format!("+{}", super::super::spec::TOOLCHAIN),
+                    "-Zunstable-options",
+                    "--print",
+                    "target-spec-json",
+                    "--target",
+                    target,
+                ])
+                .env("RUSTC_BOOTSTRAP", "1")
+                .output()
+                .unwrap();
+            assert!(layout.status.success());
+            let layout: serde_json::Value = serde_json::from_slice(&layout.stdout).unwrap();
+            let source = CompilerLibrary {
+                spec: "uorust/compiler-library-graph/1".into(),
+                toolchain: super::super::spec::TOOLCHAIN.into(),
+                compiler_commit: commit.into(),
+                compiler_version: version.clone(),
+                source_sha256: source_pin.into(),
+                target: target.into(),
+                data_layout: layout["data-layout"].as_str().unwrap().into(),
+                flags: COMPILER_FLAGS.into(),
+                pass: "ElaborateBoxDerefs.before".into(),
+                graph_sha256: crate::project::sha(&serde_json::to_vec(&graph).unwrap()),
+                graph,
+            };
+            let bytes = serde_json::to_vec(&source).unwrap();
+            let destination = Path::new(env!("CARGO_MANIFEST_DIR")).join("mir/std-library.json.gz");
+            if std::env::var_os("UORUST_WRITE_SPEC").is_some() {
+                use std::io::Write;
+                let mut encoder = flate2::GzBuilder::new()
+                    .mtime(0)
+                    .write(Vec::new(), flate2::Compression::best());
+                encoder.write_all(&bytes).unwrap();
+                std::fs::write(&destination, encoder.finish().unwrap()).unwrap();
+            }
+            let decoder = flate2::read::GzDecoder::new(std::fs::File::open(destination).unwrap());
+            let actual: serde_json::Value = serde_json::from_reader(decoder).unwrap();
+            assert_eq!(
+                actual,
+                serde_json::from_slice::<serde_json::Value>(&bytes).unwrap()
+            );
+            println!("{} compiler bodies, {} bytes", texts.len(), bytes.len());
+        }
+    }
+
+    #[test]
+    fn compiler_library_reexports_bind_closed_interfaces_ue_104() {
+        let graph = &compiler_library().graph;
+        let text = graph.decls.compiler_type("&std::ops::Range<i32>");
+        assert_eq!(text, "&ops::range::Range<i32>");
+        assert!(graph
+            .instance("std::ops::Range::is_empty", &[Some(text)], "bool")
+            .is_some());
+        assert!(graph
+            .instance(
+                "core::num::<impl i32>::midpoint",
+                &[Some("i32".into()), Some("i32".into())],
+                "i32"
+            )
+            .is_some());
+        assert_eq!(
+            graph.decls.compiler_type("consumer::Range<i32>"),
+            "consumer::Range<i32>"
+        );
+        assert!(graph
+            .instance(
+                "std::ops::Range::is_empty",
+                &[Some("&consumer::Range<i32>".into())],
+                "bool"
+            )
+            .is_none());
+    }
+
+    #[test]
+    fn compiler_library_binding_rejects_changed_authority_ue_104() {
+        let decoder =
+            flate2::read::GzDecoder::new(&include_bytes!("../../mir/std-library.json.gz")[..]);
+        let mut source: CompilerLibrary = serde_json::from_reader(decoder).unwrap();
+        assert!(source.valid());
+        let commit = source.compiler_commit.clone();
+        source.compiler_commit = "0".repeat(40);
+        assert!(!source.valid());
+        source.compiler_commit = commit;
+        let hash = source.graph_sha256.clone();
+        source.graph_sha256 = "0".repeat(64);
+        assert!(!source.valid());
+        source.graph_sha256 = hash;
+        let pin = source.source_sha256.clone();
+        source.source_sha256 = "0".repeat(64);
+        assert!(!source.valid());
+        source.source_sha256 = pin;
+        source.flags.push_str(" -Cdebug-assertions=on");
+        assert!(!source.valid());
+        assert!(compiler_library_for(&[]).is_none());
+        assert!(compiler_library().graph.root.is_none());
     }
 }
