@@ -669,3 +669,10 @@ Feature: engine
     When the exact normal-only model was rejected and the value-state ABI is available
     Then the canonical function computes both return and panic outcomes with the updated state
     But cleanup and unavailable effect interfaces cannot be discarded to admit it
+
+  @UE-96 @build
+  Scenario: Native dependency closures preserve panic outcomes and mutable state
+    Given a chain of native calls whose leaf can fail a compiler assertion
+    When the shared value-state outcome ABI is selected for that dependency closure
+    Then every supported caller propagates the actual outcome and updated state
+    But a partial function cannot be erased into a pure function-value interface

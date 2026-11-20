@@ -1597,3 +1597,22 @@ semantics or semantic-registry entry was added. The regression passed in
 104.08 seconds; 98 MIR tests, conformance, strict Clippy and model/template/SDK/
 self-model checks passed. Complete release acceptance remains the unchanged
 `just vv` boundary.
+
+## UE-96: native dependency closures preserve the outcome interface
+
+The initial three-level native fixture failed because its callee's translation
+was not admitted (73.47 seconds). Outcome selection now follows the existing
+native dependency graph and updates both ordinary and compiler-qualified
+callee bindings through the same interface conversion. Calls preserve the
+callee's tracked mutable values before distinguishing return from panic. A
+partial function cannot be exposed through a pure function-value interface.
+
+Two neutral Rust/SDK regressions passed, each checking eight executions against
+24 assertions for outcomes, panic tags and state, including a call inside a
+loop. The second covers a compiler-qualified trait call and a callee without
+mutable arguments. Runs took 244.70 and 216.74 seconds; deliberately incorrect
+results were rejected with LLV7002. The function-value control also checks that
+normal signature identities remain byte-compatible with recorded receipts and
+the outcome identity remains distinct. Ninety-eight MIR checks and the added
+interface control, conformance, strict Clippy and model/template/SDK/self-model
+checks passed. Complete release acceptance remains `just vv`.

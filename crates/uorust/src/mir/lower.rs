@@ -38,9 +38,11 @@ use crate::lex::{Arm, Decl, Expr};
 use crate::lift::{self, Lift, Residue, Ty, Types};
 
 /// A function the translator may call: its LexLean name and signature.
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub(crate) struct Callee {
     pub(crate) name: String,
+    /// The definition returns SDK Result before its threaded state.
+    pub(crate) outcomes: bool,
     pub(crate) method: Option<super::identity::Method>,
     pub(crate) params: Vec<Ty>,
     pub(crate) generic: Option<lift::Generic>,
@@ -49,6 +51,37 @@ pub(crate) struct Callee {
     /// Where the definition threads `&mut` parameters: its result type and
     /// the positions of the parameters it gives back (see [`threaded`]).
     pub(crate) threads: Option<(Ty, Vec<usize>)>,
+}
+
+impl std::fmt::Debug for Callee {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // Rooted receipts bind this signature. The established normal ABI
+        // keeps its exact representation; only the new ABI adds metadata.
+        let mut value = f.debug_struct("Callee");
+        value.field("name", &self.name);
+        if self.outcomes {
+            value.field("outcomes", &true);
+        }
+        value
+            .field("method", &self.method)
+            .field("params", &self.params)
+            .field("generic", &self.generic)
+            .field("result", &self.result)
+            .field("threads", &self.threads)
+            .finish()
+    }
+}
+
+impl Callee {
+    pub(crate) fn use_outcomes(&mut self, name: &str, types: &Types) {
+        self.name = name.into();
+        self.outcomes = true;
+        if let Some((full, positions)) = &mut self.threads {
+            let forward = Ty::Outcome(Box::new(self.result.clone()), Box::new(Ty::Str));
+            let rest: Vec<_> = positions.iter().map(|&i| self.params[i].clone()).collect();
+            *full = threaded_result(&forward, &rest, types);
+        }
+    }
 }
 
 /// Actual compiler body and its definition's own type environment.
@@ -215,6 +248,7 @@ enum Val {
 /// argument (by position), and the guard of a guarded `Option`.
 struct Called {
     term: String,
+    outcomes: bool,
     /// A source result bound before converting it to the native carrier.
     binding: Option<(String, Ty, String)>,
     updates: BTreeMap<usize, String>,
@@ -236,6 +270,7 @@ impl Called {
     fn value(term: String) -> Self {
         Self {
             term,
+            outcomes: false,
             binding: None,
             updates: BTreeMap::new(),
             guard: None,
@@ -244,6 +279,15 @@ impl Called {
             backward: None,
         }
     }
+}
+
+enum CallFlow {
+    Binding(String, Ty, String),
+    Outcome {
+        binding: Option<(String, Ty, String)>,
+        value: String,
+        result: Ty,
+    },
 }
 
 /// A condition a branch establishes.
@@ -2452,7 +2496,16 @@ impl Fun<'_, '_> {
                     }
                     return self.unreachable(&st, callee);
                 };
-                let binding = self.call_into(destination, callee, args, *target, &mut st)?;
+                let (binding, outcome) =
+                    match self.call_into(destination, callee, args, *target, &mut st)? {
+                        Some(CallFlow::Binding(name, ty, value)) => (Some((name, ty, value)), None),
+                        Some(CallFlow::Outcome {
+                            binding,
+                            value,
+                            result,
+                        }) => (binding, Some((value, result))),
+                        None => (None, None),
+                    };
                 let frame =
                     binding
                         .as_ref()
@@ -2467,7 +2520,44 @@ impl Fun<'_, '_> {
                             ));
                             (scrutinee, format!("{schema}.Bound {name}"))
                         });
-                let rest = self.goto(*target, st)?;
+                let rest = if let Some((value, result)) = outcome {
+                    let returned = self.fresh(Some("returned"), destination.local);
+                    let reason = self.fresh(Some("panicReason"), destination.local);
+                    let mut success = st.clone();
+                    success.binders.push((returned.clone(), result.clone()));
+                    success.path.push(MirStep::Match(
+                        value.clone(),
+                        format!("(ctor Result.ok [{}, String] {returned})", result.render()),
+                    ));
+                    self.write(
+                        destination,
+                        Val::V(returned.clone(), result.clone()),
+                        &mut success,
+                    )?;
+                    let success = self.goto(*target, success)?;
+                    let mut failure = st;
+                    failure.binders.push((reason.clone(), Ty::Str));
+                    failure.path.push(MirStep::Match(
+                        value.clone(),
+                        format!("(ctor Result.error [{}, String] {reason})", result.render()),
+                    ));
+                    let failure = self.outcome_exit(&failure, &reason)?;
+                    Expr::Match {
+                        scrutinee: value,
+                        arms: vec![
+                            Arm {
+                                pattern: format!("Result.ok {returned}"),
+                                body: success,
+                            },
+                            Arm {
+                                pattern: format!("Result.error {reason}"),
+                                body: failure,
+                            },
+                        ],
+                    }
+                } else {
+                    self.goto(*target, st)?
+                };
                 Ok(match (frame, binding) {
                     (Some((scrutinee, pattern)), _) => Expr::Match {
                         scrutinee,
@@ -2492,10 +2582,16 @@ impl Fun<'_, '_> {
     /// The same value-state tuple as normal return, with a lossless compiler
     /// assertion-kind tag in the SDK Result. No failed proof becomes an axiom.
     fn panic_exit(&mut self, st: &State, assertion: spec::MirAssertKind) -> Lift<Expr> {
+        self.outcome_exit(
+            st,
+            &toml::Value::String(assertion.path().into()).to_string(),
+        )
+    }
+
+    fn outcome_exit(&mut self, st: &State, reason: &str) -> Lift<Expr> {
         let failure = format!(
-            "(ctor Result.error [{}, String] {})",
+            "(ctor Result.error [{}, String] {reason})",
             self.ret.render(),
-            toml::Value::String(assertion.path().into())
         );
         let mut items = vec![failure];
         for local in self.threads() {
@@ -2885,7 +2981,7 @@ impl Fun<'_, '_> {
         args: &[IrOperand],
         target: IrBlockId,
         st: &mut State,
-    ) -> Lift<Option<(String, Ty, String)>> {
+    ) -> Lift<Option<CallFlow>> {
         if let Some(g) = self
             .selected(callee, args)
             .filter(|_| destination.projection.is_empty())
@@ -2988,6 +3084,7 @@ impl Fun<'_, '_> {
         };
         let Called {
             term,
+            outcomes,
             binding: initial_binding,
             mut updates,
             guard,
@@ -3053,6 +3150,29 @@ impl Fun<'_, '_> {
             };
             self.grow(new)?;
             self.write(&place, Val::V(new.clone(), vals[i].1.clone()), st)?;
+        }
+        if outcomes {
+            if !self.outcomes || guard.is_some() || backward.is_some() || memory {
+                return Err(kind(
+                    spec::MirTerminatorKind::Call.path(),
+                    "a panic outcome needs its admitted value-state interface",
+                ));
+            }
+            let value = if binding.is_some() {
+                term
+            } else {
+                let name = self.fresh(Some("calledOutcome"), destination.local);
+                let ty = Ty::Outcome(Box::new(dt.clone()), Box::new(Ty::Str));
+                st.facts.insert(format!("({name} = {term})"));
+                st.binders.push((name.clone(), ty.clone()));
+                binding = Some((name.clone(), ty, term));
+                name
+            };
+            return Ok(Some(CallFlow::Outcome {
+                binding,
+                value,
+                result: dt,
+            }));
         }
         let v = term;
         let value = match (guard, &dt) {
@@ -3131,7 +3251,7 @@ impl Fun<'_, '_> {
         } else {
             self.write(destination, value, st)?;
         }
-        Ok(binding)
+        Ok(binding.map(|(name, ty, value)| CallFlow::Binding(name, ty, value)))
     }
 
     /// In core's scope, the function a call of the intrinsic
@@ -4067,7 +4187,8 @@ impl Fun<'_, '_> {
     /// Mutable functions need an environment/backward function, not a pure value.
     fn function_item(&mut self, path: &str) -> Option<(String, Ty)> {
         if let Some(c) = self.cx.callee(path).cloned() {
-            if c.generic.is_some()
+            if c.outcomes
+                || c.generic.is_some()
                 || c.threads.is_some()
                 || c.name == self.name
                 || c.params.is_empty()
@@ -6574,6 +6695,7 @@ impl Fun<'_, '_> {
             }
             return Ok(Called {
                 term,
+                outcomes: false,
                 updates: BTreeMap::from([(0, env.clone())]),
                 binding: None,
                 guard: None,
@@ -6600,6 +6722,12 @@ impl Fun<'_, '_> {
             }
         }
         if let Some(c) = self.cx.callee(callee).cloned() {
+            if c.outcomes && (!self.outcomes || c.generic.is_some() || !c.result.same(dt)) {
+                return Err(kind(
+                    k,
+                    "a native panic outcome needs its exact admitted result and caller interface",
+                ));
+            }
             if c.name == self.name {
                 return Err(kind(
                     k,
@@ -6693,6 +6821,7 @@ impl Fun<'_, '_> {
             self.calls.insert(c.name.clone());
             return Ok(Called {
                 binding,
+                outcomes: c.outcomes,
                 threads: c.threads.clone(),
                 ..Called::value(term)
             });
@@ -6869,6 +6998,7 @@ impl Fun<'_, '_> {
                 float::Kind::Assign if typed && *dt == Ty::Unit => {
                     return Ok(Called {
                         term: "()".into(),
+                        outcomes: false,
                         updates: BTreeMap::from([(0, f.term(op, &terms))]),
                         binding: None,
                         guard: None,
@@ -6916,6 +7046,7 @@ impl Fun<'_, '_> {
             }
             return Ok(Called {
                 term: applied.term,
+                outcomes: false,
                 binding: None,
                 updates: applied.updates,
                 guard: applied.guard,
@@ -10161,6 +10292,70 @@ impl Fun<'_, '_> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn partial_function_values_cannot_erase_the_outcome_abi_ue_96() {
+        let body = super::super::parse::bodies(
+            r#"
+fn expose() -> impl Fn(u8) -> u8 {
+    let mut _0: impl Fn(u8) -> u8;
+    bb0: {
+        _0 = const partial;
+        return;
+    }
+}
+"#,
+        )
+        .remove(0);
+        let callees = BTreeMap::from([(
+            "test::partial".into(),
+            Callee {
+                name: "partial".into(),
+                outcomes: true,
+                method: None,
+                params: vec![Ty::Nat(Some(8))],
+                generic: None,
+                result: Ty::Nat(Some(8)),
+                threads: None,
+            },
+        )]);
+        let types = Types::default();
+        let cx = Cx {
+            types: &types,
+            source_sigs: &BTreeMap::new(),
+            widths: &[(64, vec!["test".into()])],
+            source_width: None,
+            callees: &callees,
+            compiler_scope: String::new(),
+            compiler_definitions: &BTreeMap::new(),
+            compiler_bindings: &BTreeMap::new(),
+            closure_scopes: &BTreeMap::new(),
+            constants: &BTreeMap::new(),
+            krate: "test".into(),
+            taken: &BTreeSet::new(),
+            explicit: &BTreeSet::new(),
+            limit: 1_000_000,
+            consts: &BTreeMap::new(),
+            closures: &BTreeMap::new(),
+            active: &[],
+            core: None,
+            layouts: &[],
+            backward: false,
+        };
+        assert!(lower_outcomes(&cx, &body, "expose").is_err());
+        let mut pure_callees = callees.clone();
+        pure_callees.get_mut("test::partial").unwrap().outcomes = false;
+        assert_eq!(format!("{:?}", pure_callees["test::partial"]), "Callee { name: \"partial\", method: None, params: [Nat(Some(8))], generic: None, result: Nat(Some(8)), threads: None }");
+        assert_ne!(
+            format!("{:?}", pure_callees["test::partial"]),
+            format!("{:?}", callees["test::partial"])
+        );
+        let cx = Cx {
+            callees: &pure_callees,
+            ..cx
+        };
+        assert!(lower_outcomes(&cx, &body, "expose").is_ok());
+    }
 
     #[test]
     fn assertion_outcomes_cannot_discard_cleanup_ue_95() {

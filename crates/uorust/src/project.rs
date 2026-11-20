@@ -4952,6 +4952,7 @@ fn behavior(
                     ctx.path(r),
                     crate::mir::lower::Callee {
                         name: c.name.clone(),
+                        outcomes: false,
                         method: compiler_method(ctx, resolver, r),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         generic: c.generic.clone(),
@@ -5572,6 +5573,7 @@ fn mir_lift(
                     path.clone(),
                     lower::Callee {
                         name: name.clone(),
+                        outcomes: false,
                         method: compiler_method(ctx, resolver, r),
                         params,
                         generic: (!generic.types.is_empty() || !generic.dictionary.is_empty())
@@ -5681,6 +5683,7 @@ fn mir_lift(
             name.clone(),
             lower::Callee {
                 name: name.clone(),
+                outcomes: false,
                 method: Some(method),
                 params,
                 result,
@@ -5894,7 +5897,7 @@ fn mir_lift(
         if view_round == 1 {
             break;
         }
-        let selected: Vec<_> = todo
+        let mut selected: BTreeSet<_> = todo
             .iter()
             .filter(|(_, name, body)| {
                 let Some(t) = done.get(name) else {
@@ -5910,12 +5913,54 @@ fn mir_lift(
                     .matching(&t.kappa, &t.digest, t.model_context_sha256.as_deref())
                     .is_some_and(|v| matches!(v.status, Decision::Refused(_)))
             })
-            .cloned()
+            .map(|(_, name, _)| name.clone())
             .collect();
+        if selected.is_empty() {
+            break;
+        }
+        // The same native dependency graph owns the changed ABI at every
+        // consumer. A caller cannot observe a partial callee as a total one.
+        loop {
+            let consumers: Vec<_> = done
+                .iter()
+                .filter(|(name, t)| {
+                    !selected.contains(*name)
+                        && t.lowered
+                            .calls
+                            .iter()
+                            .any(|callee| selected.contains(callee))
+                })
+                .map(|(name, _)| name.clone())
+                .collect();
+            if consumers.is_empty() {
+                break;
+            }
+            selected.extend(consumers);
+        }
+        let mut outcome_callees = callees.clone();
+        let mut outcome_bindings = compiler_bindings.clone();
+        for (r, normal, _) in todo.iter().filter(|(_, name, _)| selected.contains(name)) {
+            for callee in outcome_callees.values_mut().chain(
+                outcome_bindings
+                    .values_mut()
+                    .flat_map(|bindings| bindings.values_mut()),
+            ) {
+                if callee.name == *normal {
+                    callee.use_outcomes(&outcome_names[normal], scope(*r));
+                }
+            }
+        }
         let mut changed = false;
-        for (r, normal, body) in selected {
+        for (r, normal, body) in todo
+            .iter()
+            .filter(|(_, name, _)| selected.contains(name))
+            .cloned()
+        {
             let name = &outcome_names[&normal];
-            let Ok(mut lowered) = lower::lower_outcomes(&context(r), body, name) else {
+            let mut cx = context(r);
+            cx.callees = &outcome_callees;
+            cx.compiler_bindings = &outcome_bindings;
+            let Ok(mut lowered) = lower::lower_outcomes(&cx, body, name) else {
                 continue;
             };
             if let Some(generic) = callees.get(&ctx.path(r)).and_then(|c| c.generic.as_ref()) {
