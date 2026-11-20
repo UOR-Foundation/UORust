@@ -1,6 +1,6 @@
 //! The `uorust` binary end to end: `project`, `check`, `routes`, `mir`,
-//! `prove`, `core`, `std`, `embed`, `merge`, `crate` and `certify`
-//! `production`, `sync` and `agree`.
+//! `prove`, `core`, `std`, `embed`, `merge`, `crate`, `certify`
+//! `production`, `sync` and `agree`, `admit`, `figures` and `library-mir`.
 
 use std::path::PathBuf;
 use std::process::Command;
@@ -539,4 +539,116 @@ fn the_hooks_retest_a_patch_unless_main_moved_disjointly() {
         .expect("python3");
     assert!(run.status.success(), "{run:?}");
     assert!(String::from_utf8_lossy(&run.stdout).contains("the disjointness rule holds"));
+}
+
+/// `admit` holds a candidate register against its parent's: the fixture's
+/// register against itself is admitted, and a candidate in which one of its
+/// lifted functions, unchanged, is residue is refused naming it.
+#[test]
+fn the_cli_admits_a_register_against_its_parent() {
+    use uorust::register::{Register, Status};
+    let register = "tests/fixtures/thermostat-prism/frontier.toml";
+    let admitted = uorust(&["admit", "--parent", register, register]);
+    assert!(admitted.status.success(), "{admitted:?}");
+    assert!(
+        String::from_utf8_lossy(&admitted.stdout).contains(" admitted against "),
+        "{admitted:?}"
+    );
+    let path = manifest_dir().join(register);
+    let text = std::fs::read_to_string(&path).expect("the register");
+    let mut candidate = Register::parse(&path, &text).expect("a register");
+    let row = candidate
+        .rows
+        .values_mut()
+        .find(|r| matches!(r.status, Status::Lifted(_)))
+        .expect("a lifted row");
+    row.status = Status::Residue("form".into(), "a loop".into());
+    let function = row.function.clone();
+    let tmp = std::env::temp_dir().join(format!("uorust-admit-cli-{}", std::process::id()));
+    std::fs::create_dir_all(&tmp).expect("scratch");
+    let file = tmp.join("register.toml");
+    std::fs::write(&file, candidate.to_text()).expect("the candidate");
+    let refused = uorust(&["admit", "--parent", register, &file.to_string_lossy()]);
+    let _ = std::fs::remove_dir_all(&tmp);
+    assert!(!refused.status.success(), "{refused:?}");
+    assert!(
+        String::from_utf8_lossy(&refused.stderr).contains(&function),
+        "{refused:?}"
+    );
+}
+
+/// `figures extract` writes the register of a synthetic workspace's
+/// numeric literals, and `figures rewrite` with no figure in it replaces
+/// nothing.
+#[test]
+fn the_cli_extracts_and_rewrites_the_figures_of_a_workspace() {
+    let tmp = std::env::temp_dir().join(format!("uorust-figures-cli-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&tmp);
+    let ws = tmp.join("ws");
+    std::fs::create_dir_all(ws.join("src")).expect("a workspace");
+    std::fs::write(
+        ws.join("Cargo.toml"),
+        "[package]\nname = \"p\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[workspace]\n",
+    )
+    .expect("a manifest");
+    let source = "/// Seven.\npub fn seven() -> u32 {\n    7\n}\n";
+    std::fs::write(ws.join("src/lib.rs"), source).expect("a source");
+    let rules = tmp.join("rules.toml");
+    std::fs::write(
+        &rules,
+        "spec = \"uorust/figure-rules/1\"\nexempt = [\"0\", \"1\"]\ncount_tests = false\n\
+         [package]\nname = \"figs\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\
+         [[stratum]]\nname = \"all\"\npaths = [\"\"]\n",
+    )
+    .expect("the rules");
+    let register = tmp.join("figures.toml");
+    let (ws, rules, register) = (
+        ws.to_string_lossy().to_string(),
+        rules.to_string_lossy().to_string(),
+        register.to_string_lossy().to_string(),
+    );
+    let extracted = uorust(&[
+        "figures",
+        "extract",
+        &ws,
+        "--rules",
+        &rules,
+        "--register",
+        &register,
+    ]);
+    assert!(extracted.status.success(), "{extracted:?}");
+    assert!(
+        String::from_utf8_lossy(&extracted.stdout).contains("figures: 1 counted sites"),
+        "{extracted:?}"
+    );
+    assert!(std::path::Path::new(&register).is_file());
+    let rewritten = uorust(&[
+        "figures",
+        "rewrite",
+        &ws,
+        "--rules",
+        &rules,
+        "--register",
+        &register,
+    ]);
+    assert!(rewritten.status.success(), "{rewritten:?}");
+    assert!(
+        String::from_utf8_lossy(&rewritten.stdout).contains("figures: 0 sites replaced"),
+        "{rewritten:?}"
+    );
+    let after = std::fs::read_to_string(tmp.join("ws/src/lib.rs")).expect("the source");
+    let _ = std::fs::remove_dir_all(&tmp);
+    assert_eq!(after, source);
+}
+
+/// `library-mir` dumps core, alloc or std only: any other crate is refused
+/// before anything is built.
+#[test]
+fn the_cli_refuses_a_library_dump_of_a_crate_that_is_no_standard_library() {
+    let refused = uorust(&["library-mir", "other", "--key"]);
+    assert!(!refused.status.success(), "{refused:?}");
+    assert!(
+        String::from_utf8_lossy(&refused.stderr).contains("is none of core, alloc, std"),
+        "{refused:?}"
+    );
 }

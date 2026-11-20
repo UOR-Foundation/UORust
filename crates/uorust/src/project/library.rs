@@ -865,7 +865,7 @@ const URI_BYTES: usize = 2048;
 /// A value holding a percent sign is refused whatever the slot: a LexLean
 /// source admits no raw percent character (LexLean SPEC 12.1), in a string
 /// literal too, so no project can state it.
-fn refused(slot: &str, value: &str) -> Option<String> {
+fn refused_slot(slot: &str, value: &str) -> Option<String> {
     if value.contains('%') {
         return Some("no percent sign in a LexLean source (LexLean SPEC 12.1)".to_string());
     }
@@ -1001,7 +1001,7 @@ fn project(
                     pascal(&[slot])
                 ),
             ));
-        } else if let Some(want) = refused(slot, value) {
+        } else if let Some(want) = refused_slot(slot, value) {
             undefined.push((
                 slot,
                 format!(
@@ -1016,7 +1016,7 @@ fn project(
         ("name", &package.name, "`package.name`"),
         ("version", &package.version, "`package.version`"),
     ] {
-        if let Some(want) = refused(slot, value) {
+        if let Some(want) = refused_slot(slot, value) {
             undefined.push((
                 slot,
                 format!(
@@ -1454,8 +1454,8 @@ mod tests {
             "https://127.0.0.1/",
             "https://example.org/a(b)!$*,;=~",
         ] {
-            assert_eq!(refused("repository", uri), None, "{uri}");
-            assert_eq!(refused("homepage", uri), None, "{uri}");
+            assert_eq!(refused_slot("repository", uri), None, "{uri}");
+            assert_eq!(refused_slot("homepage", uri), None, "{uri}");
         }
         for uri in [
             "http://example.org/zeta",
@@ -1474,27 +1474,30 @@ mod tests {
             "https://example.org/#a#b",
             "https://example.org/\u{7f}",
         ] {
-            assert!(refused("repository", uri).is_some(), "{uri}");
+            assert!(refused_slot("repository", uri).is_some(), "{uri}");
         }
         let long = format!("https://example.org/{}", "a".repeat(URI_BYTES));
-        assert!(refused("repository", &long).is_some());
-        assert_eq!(refused("repository", &long[..URI_BYTES]), None);
+        assert!(refused_slot("repository", &long).is_some());
+        assert_eq!(refused_slot("repository", &long[..URI_BYTES]), None);
         for name in ["zeta", "z", "zeta-core_2"] {
-            assert_eq!(refused("name", name), None, "{name}");
+            assert_eq!(refused_slot("name", name), None, "{name}");
         }
         for name in ["Zeta", "2zeta", "_zeta", "ze.ta", ""] {
-            assert!(refused("name", name).is_some(), "{name}");
+            assert!(refused_slot("name", name).is_some(), "{name}");
         }
-        assert!(refused("name", &"z".repeat(CARGO_NAME_BYTES + 1)).is_some());
-        assert_eq!(refused("name", &"z".repeat(CARGO_NAME_BYTES)), None);
-        assert_eq!(refused("version", "0.1.0"), None);
+        assert!(refused_slot("name", &"z".repeat(CARGO_NAME_BYTES + 1)).is_some());
+        assert_eq!(refused_slot("name", &"z".repeat(CARGO_NAME_BYTES)), None);
+        assert_eq!(refused_slot("version", "0.1.0"), None);
         for version in ["0.1.0-alpha.1", "1.0.0+build", "1.0", "01.0.0"] {
-            assert!(refused("version", version).is_some(), "{version}");
+            assert!(refused_slot("version", version).is_some(), "{version}");
         }
-        assert_eq!(refused("description", "The zeta part."), None);
-        assert!(refused("description", "Two\nlines").is_some());
-        assert!(refused("description", "The 100% part.").is_some());
-        assert!(refused("description", &"d".repeat(DESCRIPTION_BYTES + 1)).is_some());
-        assert_eq!(refused("description", &"d".repeat(DESCRIPTION_BYTES)), None);
+        assert_eq!(refused_slot("description", "The zeta part."), None);
+        assert!(refused_slot("description", "Two\nlines").is_some());
+        assert!(refused_slot("description", "The 100% part.").is_some());
+        assert!(refused_slot("description", &"d".repeat(DESCRIPTION_BYTES + 1)).is_some());
+        assert_eq!(
+            refused_slot("description", &"d".repeat(DESCRIPTION_BYTES)),
+            None
+        );
     }
 }

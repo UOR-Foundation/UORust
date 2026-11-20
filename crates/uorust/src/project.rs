@@ -6256,6 +6256,19 @@ impl Reads<'_> {
             };
             out.insert(name, one);
         }
+        // The lift takes a call written with a free function's own name as
+        // its recursion. Where the body's calls of that name mean another
+        // function of the crate (`crate::b::go` in `a::go`), the name is
+        // both to it, so it reads as none: those calls stay unlifted rather
+        // than read as the function itself.
+        if f.owner.is_none() {
+            let own = self.key(&(r.pkg, at.1, at.2.clone(), f.name.clone()));
+            if let Some(reading) = out.get_mut(&f.name) {
+                if reading.is_some() && *reading != own {
+                    *reading = None;
+                }
+            }
+        }
         out
     }
 
@@ -9405,6 +9418,32 @@ pub fn fb(n: &Node) -> u8 {
     // resolution binds it in the body's own module, whether or not another
     // module declares the name too (lane amb2's repair; the refuter's
     // counterexamples r06, r07, r08, r11, r14, r15, r23).
+
+    #[test]
+    fn amb2_a_call_of_a_homonym_by_its_path_is_not_the_callers_recursion() {
+        // `a::go` calls `b::go` by its path: two functions, of two arities.
+        // The call is not `a::go` calling itself.
+        let (frontier, behavior) = projected(
+            "twogo",
+            &[
+                ("src/lib.rs", "//! Two go.\npub mod a;\npub mod b;\n"),
+                (
+                    "src/a.rs",
+                    "//! A.\n/// Calls b's.\npub fn go(x: u8, y: u8) -> u8 {\n    \
+                     crate::b::go(x, y, x)\n}\n",
+                ),
+                (
+                    "src/b.rs",
+                    "//! B.\n/// The first.\npub fn go(x: u8, _y: u8, _z: u8) -> u8 {\n    x\n}\n",
+                ),
+            ],
+        );
+        let callee = row(&frontier, "twogo::b::go");
+        assert!(callee.starts_with("[[lifted]]"), "{callee}");
+        let caller = row(&frontier, "twogo::a::go");
+        assert!(!caller.starts_with("[[lifted]]"), "{caller}");
+        assert!(!behavior.contains("name: aGo,"), "{behavior}");
+    }
 
     #[test]
     fn amb2_a_constant_the_configuration_compiles_out_is_not_the_constant() {
