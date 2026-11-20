@@ -781,3 +781,10 @@ Feature: engine
     When an imported body introduces another closed compiler-owned record
     Then the strict schema importer retains exact identities and complete declarations
     But foreign ambiguous and unbound schemas remain refused
+
+  @UE-112 @build
+  Scenario: Immutable compiler graphs reuse exact linkage queries
+    Given repeated positive and negative linkage queries against one immutable compiler graph
+    When their callee argument types and destination are unchanged
+    Then name normalization and body inference run once for each complete query
+    But changed query fields and distinct graph owners retain independent results

@@ -132,6 +132,7 @@ model does not sanction.
 | `UE-109` | `build` | Rooted native proof contexts share one immutable lexical dependency index per combined model, retaining exact declaration bytes, UTF-8 boundaries and indivisible mutual groups while preserving malformed-model, missing-root and empty-root refusals without reparsing the whole model per query |
 | `UE-110` | `build` | Pinned closed compiler record schemas are imported when native ABI lowering declines a type even if a source-only carrier fallback exists; native model carriers retain priority and conditional, ambiguous, unbound and foreign schemas remain refused |
 | `UE-111` | `build` | Compiler-owned closed record dependencies retain their canonical and consumer type identities, including schemas introduced by imported body locals, and use the existing native type declaration kernel; foreign, ambiguous and unbound schemas remain refused |
+| `UE-112` | `build` | The immutable content-validated compiler graph reuses complete linkage queries including callee argument types and destination, preserving both exact body instances and typed absence without changing caller scopes, emitted models or SDK proof admission |
 
 ## factory
 

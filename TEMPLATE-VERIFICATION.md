@@ -1904,3 +1904,21 @@ with no new bindings is borrowed, avoiding a full caller-scope copy. The control
 check nested-module declaration transport, caller immutability, protected
 substitutions and the borrowed primitive scope. Prior actual neutral SDK
 decisions are reused only through the existing exact-context matcher.
+
+## UE-112: exact compiler linkage query reuse
+
+The registered work-count regression initially performed four inference runs
+for two repeated queries. The immutable, content-validated compiler graph now
+memoizes each complete callee/argument-type/destination query, including typed
+absence. Its separate cache has no authority in serialized graph bytes and is
+not used for mutable or caller-owned links. A cached instance retains its exact
+path, body and ordered parameter bindings; it carries no SDK proof status.
+
+The regression now performs two inference runs. Changed callee, argument type,
+missing argument type, destination and graph owner retain independent results.
+A real compiler-graph control compares cached and uncached instances, checks
+negative results, and confirms serialized authority bytes and validation remain
+unchanged. Six compiler-graph controls, three schema controls, twenty-five
+lowering controls, eighty-three project controls, repository conformance, strict
+Clippy and model/template/SDK/self-model checks passed. Full release acceptance
+remains the unchanged `just vv` boundary.

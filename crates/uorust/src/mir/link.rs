@@ -13,6 +13,29 @@ use super::core::CoreDecls;
 use super::parse::{split_path, split_top};
 use super::stdlib::{substitute, unify, Instance};
 
+type InstanceQuery = (String, Vec<Option<String>>, String);
+
+#[derive(Default)]
+struct InstanceQueries {
+    rows: std::sync::Mutex<BTreeMap<InstanceQuery, Option<Instance>>>,
+}
+
+impl InstanceQueries {
+    fn lookup(
+        &self,
+        key: InstanceQuery,
+        infer: impl FnOnce() -> Option<Instance>,
+    ) -> Option<Instance> {
+        let mut rows = self.rows.lock().expect("compiler query cache poisoned");
+        if let Some(value) = rows.get(&key) {
+            return value.clone();
+        }
+        let value = infer();
+        rows.insert(key, value.clone());
+        value
+    }
+}
+
 /// Core's bodies and declarations, for one census.
 #[derive(serde::Serialize, serde::Deserialize)]
 pub(crate) struct CoreLink {
@@ -767,6 +790,26 @@ impl CoreLink {
         texts: &[Option<String>],
         dest: &str,
     ) -> Option<Instance> {
+        // Only the immutable, content-validated graph owns this memo. Other
+        // links may have live source roots or be extended by their caller.
+        if let Some(library) = COMPILER_LIBRARY
+            .get()
+            .filter(|library| std::ptr::eq(self, &library.graph))
+        {
+            let key = (callee.to_string(), texts.to_vec(), dest.to_string());
+            return library
+                .queries
+                .lookup(key, || self.imported_instance_uncached(callee, texts, dest));
+        }
+        self.imported_instance_uncached(callee, texts, dest)
+    }
+
+    fn imported_instance_uncached(
+        &self,
+        callee: &str,
+        texts: &[Option<String>],
+        dest: &str,
+    ) -> Option<Instance> {
         let callee = self.decls.compiler_type(callee);
         let texts: Vec<_> = texts
             .iter()
@@ -1377,14 +1420,17 @@ struct CompilerLibrary {
     pass: String,
     graph_sha256: String,
     graph: CoreLink,
+    #[serde(skip)]
+    queries: InstanceQueries,
 }
+
+static COMPILER_LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
 
 const COMPILER_PASS: &str = "runtime-optimized.after";
 const COMPILER_FLAGS: &str = "--edition=2024 --crate-type=lib --emit=mir -Coverflow-checks=on -Cdebug-assertions=off -Zmir-include-spans=on -Zmir-opt-level=4 -Zalways-encode-mir";
 
 fn compiler_library() -> &'static CompilerLibrary {
-    static LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
-    LIBRARY.get_or_init(|| {
+    COMPILER_LIBRARY.get_or_init(|| {
         let decoder =
             flate2::read::GzDecoder::new(&include_bytes!("../../mir/std-library.json.gz")[..]);
         let source: CompilerLibrary =
@@ -1576,6 +1622,7 @@ assert actual==expected, 'unregistered or missing source'
                 pass: COMPILER_PASS.into(),
                 graph_sha256: crate::project::sha(&serde_json::to_vec(&graph).unwrap()),
                 graph,
+                queries: InstanceQueries::default(),
             };
             let bytes = serde_json::to_vec(&source).unwrap();
             let destination = Path::new(env!("CARGO_MANIFEST_DIR")).join("mir/std-library.json.gz");
@@ -1595,6 +1642,114 @@ assert actual==expected, 'unregistered or missing source'
             );
             println!("{} compiler bodies, {} bytes", texts.len(), bytes.len());
         }
+    }
+
+    #[test]
+    fn complete_compiler_queries_are_inferred_once_ue_112() {
+        let cache = InstanceQueries::default();
+        let calls = std::cell::Cell::new(0);
+        let positive = (
+            "core::example".into(),
+            vec![Some("u32".into())],
+            "u32".into(),
+        );
+        let negative = (
+            "core::absent".into(),
+            vec![Some("u32".into())],
+            "u32".into(),
+        );
+        for _ in 0..2 {
+            let value = cache
+                .lookup(positive.clone(), || {
+                    calls.set(calls.get() + 1);
+                    Some(Instance {
+                        path: "example".into(),
+                        text: "exact body".into(),
+                        bound: vec![("T".into(), "u32".into())],
+                    })
+                })
+                .unwrap();
+            assert_eq!(
+                (
+                    value.path.as_str(),
+                    value.text.as_str(),
+                    value.bound.as_slice()
+                ),
+                (
+                    "example",
+                    "exact body",
+                    [("T".into(), "u32".into())].as_slice()
+                )
+            );
+            assert!(cache
+                .lookup(negative.clone(), || {
+                    calls.set(calls.get() + 1);
+                    None
+                })
+                .is_none());
+        }
+        assert_eq!(
+            calls.get(),
+            2,
+            "identical immutable graph queries repeated inference"
+        );
+        for key in [
+            (
+                "core::changed".into(),
+                positive.1.clone(),
+                positive.2.clone(),
+            ),
+            (
+                positive.0.clone(),
+                vec![Some("u64".into())],
+                positive.2.clone(),
+            ),
+            (positive.0.clone(), vec![None], positive.2.clone()),
+            (positive.0.clone(), positive.1.clone(), "u64".into()),
+        ] {
+            assert!(cache
+                .lookup(key, || {
+                    calls.set(calls.get() + 1);
+                    None
+                })
+                .is_none());
+        }
+        assert_eq!(calls.get(), 6);
+        let other = InstanceQueries::default();
+        assert!(other
+            .lookup(positive, || {
+                calls.set(calls.get() + 1);
+                None
+            })
+            .is_none());
+        assert_eq!(calls.get(), 7, "another graph reused a foreign result");
+    }
+
+    #[test]
+    fn query_memo_is_outside_the_compiler_authority_bytes_ue_112() {
+        let source = compiler_library();
+        let before = serde_json::to_vec(source).unwrap();
+        let texts = [Some("&mut u64".into()), Some("u64".into())];
+        let callee = "std::mem::replace::<u64>";
+        let original = source
+            .graph
+            .imported_instance_uncached(callee, &texts, "u64")
+            .unwrap();
+        for _ in 0..2 {
+            let cached = source
+                .graph
+                .imported_instance(callee, &texts, "u64")
+                .unwrap();
+            assert_eq!(cached.path, original.path);
+            assert_eq!(cached.text, original.text);
+            assert_eq!(cached.bound, original.bound);
+            assert!(source
+                .graph
+                .imported_instance("consumer::absent", &texts, "u64")
+                .is_none());
+        }
+        assert_eq!(before, serde_json::to_vec(source).unwrap());
+        assert!(source.valid());
     }
 
     #[test]

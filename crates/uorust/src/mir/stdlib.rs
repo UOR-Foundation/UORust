@@ -828,6 +828,7 @@ impl Renderer<'_> {
 
 /// An instance of a std body: the item's [`key`], its MIR text at the
 /// call's types, and each generic parameter with the type it binds.
+#[derive(Clone)]
 pub(crate) struct Instance {
     pub(crate) path: String,
     pub(crate) text: String,

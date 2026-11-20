@@ -723,3 +723,9 @@ id = "UE-111"
 level = "build"
 suite = "engine"
 statement = "Compiler-owned closed record dependencies retain their canonical and consumer type identities, including schemas introduced by imported body locals, and use the existing native type declaration kernel; foreign, ambiguous and unbound schemas remain refused"
+
+[[id]]
+id = "UE-112"
+level = "build"
+suite = "engine"
+statement = "The immutable content-validated compiler graph reuses complete linkage queries including callee argument types and destination, preserving both exact body instances and typed absence without changing caller scopes, emitted models or SDK proof admission"
