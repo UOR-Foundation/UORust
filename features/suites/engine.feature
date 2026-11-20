@@ -817,3 +817,10 @@ Feature: engine
     When its emitted result is the exact literal empty container of the native ABI
     Then the empty result is admitted without reading or constructing a payload value
     But mutable inputs and nonempty result kernels remain refused
+
+  @UE-117 @build
+  Scenario: Compiler normalization preserves admitted caller interfaces
+    Given a native dependency whose generic argument contains an admitted caller type
+    When compiler declarations normalize that argument to a library-local path
+    Then the imported body retains the same argument result and mutable state readings
+    But unknown foreign types and conflicting readings remain refused

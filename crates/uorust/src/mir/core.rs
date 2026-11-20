@@ -3107,6 +3107,41 @@ pub(crate) fn compiler_body_module(source: &CoreDecls, path: &str) -> String {
     parts.join("::")
 }
 
+/// Carry the caller's admitted ABI across the same normalization used for
+/// linkage. These bindings belong to one query, never the shared graph.
+pub(crate) fn compiler_caller_scope<'a>(
+    types: &'a Types,
+    source: &CoreDecls,
+    requested: impl IntoIterator<Item = &'a str>,
+) -> Result<std::borrow::Cow<'a, Types>, lift::Residue> {
+    let mut scope = std::borrow::Cow::Borrowed(types);
+    for text in requested {
+        let mut reached = Vec::new();
+        components(text, &mut reached);
+        for component in reached.into_iter().rev() {
+            let canonical = source.compiler_type(&component);
+            if canonical == component {
+                continue;
+            }
+            let Ok(reading) = lower::ty(&component, types) else {
+                continue;
+            };
+            match lower::ty(&canonical, &scope) {
+                Ok(existing) if existing != reading => {
+                    return Err(lift::Residue::Mir(format!(
+                        "Ty: compiler caller binding conflicts for {canonical}"
+                    )));
+                }
+                Ok(_) => {}
+                Err(_) => {
+                    scope.to_mut().generic.insert(canonical, reading);
+                }
+            }
+        }
+    }
+    Ok(scope)
+}
+
 pub(crate) fn compiler_body_scope<'a>(
     types: &'a Types,
     requested: &[String],

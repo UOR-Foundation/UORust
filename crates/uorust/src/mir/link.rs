@@ -1956,6 +1956,40 @@ mod captured_library_tests {
     use super::*;
 
     #[test]
+    fn normalized_caller_readings_are_query_local_and_consistent_ue_117() {
+        use super::super::core::compiler_caller_scope;
+        use super::super::lower::ty;
+        use crate::lift::{Ty, Types};
+        let graph = &compiler_alloc_library().graph;
+        let types = Types::default();
+        let raw = "std::vec::Vec<std::string::String>";
+        let canonical = graph.decls.compiler_type(raw);
+        let scoped = compiler_caller_scope(&types, &graph.decls, [raw]).unwrap();
+        assert_eq!(ty(&canonical, &scoped), Ok(Ty::List(Box::new(Ty::Str))));
+        assert_eq!(ty("string::String", &scoped), Ok(Ty::Str));
+        assert!(ty("string::String", &types).is_err());
+        assert!(types.generic.is_empty());
+        let foreign = "foreign::Opaque";
+        let unknown = compiler_caller_scope(&types, &graph.decls, [foreign]).unwrap();
+        assert!(ty(foreign, &unknown).is_err());
+        assert!(matches!(unknown, std::borrow::Cow::Borrowed(_)));
+        let mut conflict = Types::default();
+        conflict.generic.insert("string::String".into(), Ty::Bool);
+        assert!(compiler_caller_scope(&conflict, &graph.decls, [raw]).is_err());
+        assert_eq!(ty("string::String", &conflict), Ok(Ty::Bool));
+        let mut caller = Types::default();
+        caller
+            .generic
+            .insert("std::string::String".into(), Ty::Nat(Some(8)));
+        let shadowed = compiler_caller_scope(&caller, &graph.decls, [raw]).unwrap();
+        assert_eq!(ty("string::String", &shadowed), Ok(Ty::Nat(Some(8))));
+        assert_eq!(
+            ty(&canonical, &shadowed),
+            Ok(Ty::List(Box::new(Ty::Nat(Some(8)))))
+        );
+    }
+
+    #[test]
     fn captured_call_owners_transport_source_bindings_ue_115() {
         let graph = &compiler_alloc_library().graph;
         let call = graph.source_callable("Vec::<u8>::new", "vec");

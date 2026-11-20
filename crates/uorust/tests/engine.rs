@@ -11742,3 +11742,122 @@ fn empty_stateful_payloads_match_rust_sdk_ue_116() {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn compiler_normalization_preserves_caller_interfaces_ue_117() {
+    let dir = scratch("compiler-caller-interface", &[
+        ("Cargo.toml", "[package]\nname=\"compiler_caller_interface\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub fn exchange(value:&mut Vec<String>,next:Vec<String>)->Vec<String>{let mut n=1u8;while n>0 {n-=1;} std::mem::replace(value,next)}\n"),
+        ("src/bin/vectors.rs", "fn main(){let mut value=vec![String::from(\"before\")];let old=compiler_caller_interface::exchange(&mut value,vec![String::from(\"after\"),String::from(\"more\")]);println!(\"{}|{}\",old.join(\",\"),value.join(\",\"));}"),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let expected = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(expected.trim(), "before|after,more");
+    let dumps = dumped(&dir, "compiler-caller-interface");
+    let mut opts = options("compiler_caller_interface");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        frontier_rows(&files, "lifted")
+            .iter()
+            .any(|r| r["function"].as_str() == Some("compiler_caller_interface::exchange")),
+        "{:?}",
+        residue_detail(&files, "compiler_caller_interface::exchange")
+    );
+    let cache = dir.join("verdicts.toml");
+    let proved = uorust::mir::prove_bounded(
+        &dir,
+        &options("compiler_caller_interface"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proved.refused, 0, "{proved:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let model = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("compiler_caller_interface::exchange"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let policy = decisions
+        .rows
+        .values()
+        .find_map(|r| r.axioms.get(model))
+        .cloned()
+        .unwrap_or_default();
+    let list = |text: &str| {
+        text.split(',')
+            .rev()
+            .fold("(nil String)".to_string(), |tail, value| {
+                format!("(cons {value:?} {tail})")
+            })
+    };
+    let result = format!("({model} {} {})", list("before"), list("after,more"));
+    let mut observations = String::new();
+    for (index, values) in expected.trim().split('|').enumerate() {
+        observations.push_str(&format!("theorem{{name:callerInterfaceObservation{index},parameters:[],statement:((project {result} item{index}) = {}),proof:decide{{}},axioms:[{}]}}\n",list(values),policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{observations}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(
+        &format!(" = {})", list("before")),
+        &format!(" = {})", list("wrong")),
+        1,
+    );
+    assert_ne!(body, wrong);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

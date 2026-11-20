@@ -8576,8 +8576,13 @@ impl Fun<'_, '_> {
             .blocks
             .iter()
             .any(|block| matches!(block.terminator, IrTerminator::Assert { .. }));
-        let scope = super::core::compiler_body_scope(
+        let caller_scope = super::core::compiler_caller_scope(
             self.cx.types,
+            &link.decls,
+            texts.iter().filter_map(Option::as_deref).chain([dest]),
+        )?;
+        let scope = super::core::compiler_body_scope(
+            &caller_scope,
             &body.locals,
             self.cx.taken,
             &link.decls,

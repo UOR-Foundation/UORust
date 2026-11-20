@@ -2018,3 +2018,21 @@ payload agrees with the actual SDK model's empty result; a changed expected
 length is rejected with LLV7002. Repository conformance, strict Clippy and
 model/template/SDK/self-model checks passed. Whole-project native proof and
 SDK/Factory acceptance remain separate. Full release acceptance remains `just vv`.
+
+## UE-117: caller ABI transport across compiler namespaces
+
+The registered native mutable exchange regression first failed with
+`mir::Ty: string::String`: linkage had normalized a generic caller type without
+retaining its admitted reading. The shared compiler interface now transports
+exact query components through the existing declaration normalizer into an
+isolated scope. The caller and immutable graph remain unchanged. An existing
+inconsistent reading is a typed MIR refusal; unknown foreign types acquire no
+reading. Composite and shadowed caller readings retain their exact native ABI.
+
+A compiled Rust exchange of string vectors agrees with the actual SDK on both
+the returned old vector and the changed mutable argument. A changed expected
+result is rejected with LLV7002. Type-isolation controls, compiler schema and
+capture checks, native lowering checks, repository conformance, strict Clippy,
+and model/template/SDK/self-model checks passed. Whole-registry proposal and
+SDK/Factory acceptance remain separate. Full release acceptance remains
+`just vv`.

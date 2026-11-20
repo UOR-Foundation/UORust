@@ -753,3 +753,9 @@ id = "UE-116"
 level = "build"
 suite = "engine"
 statement = "Zero-input source kernels may return an empty container over stateful payload types only when the emitted result is the exact literal empty constructor and no payload value is materialized; mutable inputs nonempty results and incompatible native carriers remain refused"
+
+[[id]]
+id = "UE-117"
+level = "build"
+suite = "engine"
+statement = "Imported compiler dependency queries retain admitted caller ABI readings through exact declaration namespace normalization, including nested type components, while unknown foreign types and conflicting readings remain refused and caller scopes remain unchanged"
