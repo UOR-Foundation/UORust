@@ -1477,3 +1477,35 @@ model/template/SDK-lock checks and canonical generated self-model checks passed.
 The pre-production whole-registry analysis proposed eight new functions with no
 baseline losses; these proposals are not SDK proof or completed delivery.
 The production consumer result is recorded separately by its guarded campaign.
+
+## UE-88–90: source semantic dependency kernels
+
+The single-constructor compiler regression first failed with the typed
+`ProjectionElem::Downcast` refusal. Native reads now reuse content-bound
+projection definitions and constructor identity proofs derived from the actual
+admitted algebraic declaration. A multi-constructor value without branch
+provenance still fails the native gate. The SDK passed 60 Rust/model comparisons,
+including multi-constructor controls, and rejected a planted wrong result with
+LLV7002 (109.60 seconds).
+
+The parametric source-import regression first failed to bind a native signed
+payload to the existing source combinator model. The importer now abstracts only
+transportable native carriers and instantiates the model through the existing
+coherent generic-call binder. It adds no payload-operation semantics. The SDK
+passed 12 Rust/model comparisons at signed boundaries and rejected a planted
+wrong result (134.93 seconds). Unavailable defaults and mutable interfaces remain
+refused; existing call-identity and recursive-schema controls pass.
+
+The aggregate compiler regression first treated a record-shaped enum variant as
+a struct. Constructor kind now resolves through the admitted nominal declaration,
+and one declaration-slot map drives field validation and construction. It rejects
+duplicate, missing, unknown and mixed fields. Qualified tuple structs in capitalized
+modules retain their actual kind. The SDK passed 48 Rust/model comparisons and
+rejected a planted wrong result (118.00 seconds), including named-field ordering,
+unit variants and qualified structs.
+
+Combined scoped checks passed 93 MIR controls, 16 CLI tests, repo-conformance,
+strict all-target Clippy and model/template/SDK-lock/generated-self-model gates.
+The entire-registry proposal analysis found nine possible additional functions
+and no previous-frontier losses. Proposals are not SDK proofs. Complete `just vv`,
+translator certification and the consumer release/adoption boundary remain open.

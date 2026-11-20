@@ -108,6 +108,9 @@ model does not sanction.
 | `UE-85` | `build` | Compiler-generated local implementation dependencies retain their exact source identities and import actual closed MIR bodies using same-compilation qualified owner and trait metadata; mismatched source/body bindings and ambiguous origins cannot supply a method model |
 | `UE-86` | `build` | Native signatures and bodies share rigid type-flow constraints anchored in complete source field views; compiler value transport preserves those existing abstract carriers without inventing operations, effects or unanchored type models |
 | `UE-87` | `build` | Exact compiler type equalities specialize existing opaque source carrier parameters throughout one coherent native frame; unrelated identities, incompatible representations and unknown operations remain refused |
+| `UE-88` | `build` | Compiler downcasts of admitted single-constructor data reuse content-bound SDK projection kernels and constructor identity proofs; multi-constructor data still requires branch evidence and incompatible field representations remain refused |
+| `UE-89` | `build` | Standard compiler calls reuse existing source semantic models through parametric native carrier interfaces and the coherent generic binder; payload operations without admitted semantics and mutable schemas remain refused |
+| `UE-90` | `build` | Compiler aggregate constructor forms resolve through admitted source algebraic declarations and preserve declared field identity and order; record-shaped enum variants and capitalized module struct paths cannot be confused |
 
 ## factory
 

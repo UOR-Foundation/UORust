@@ -8331,3 +8331,425 @@ pub fn unknown(mut n:u8,x:&Pair)->bool {while n>0 {n-=1;} x.left.run()}
     assert!(residue_detail(&files, "carrier_frames::unknown").is_some());
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-88: one actual constructor suffices without an artificial discriminant.
+#[test]
+fn compiler_single_constructor_fields_share_projection_kernels_ue_88() {
+    let dir=scratch("single-constructor-fields",&[
+        ("Cargo.toml","[package]\nname=\"single_constructor\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",r#"
+pub enum Envelope {Only(u8,bool)}
+pub enum Choice {A(u8),B(u8)}
+pub fn number(mut n:u8,x:&Envelope)->u8 {while n>0 {n-=1;} match x {Envelope::Only(a,_)=>*a}}
+pub fn flag(mut n:u8,x:&Envelope)->bool {while n>0 {n-=1;} match x {Envelope::Only(_,b)=>*b}}
+pub fn again(mut n:u8,x:&Envelope)->u8 {while n>0 {n-=1;} match x {Envelope::Only(a,_)=>*a}}
+pub fn select(mut n:u8,x:&Choice)->u8 {while n>0 {n-=1;} match x {Choice::A(a)=>*a,Choice::B(_)=>0}}
+"#),
+        ("src/bin/vectors.rs",r#"
+use single_constructor::*;
+fn main(){for n in [0,2] {for a in [0u8,7,255] {for b in [false,true] {
+ let x=Envelope::Only(a,b);
+ println!("number|{n}|{a}|{b}|{}",number(n,&x));
+ println!("flag|{n}|{a}|{b}|{}",flag(n,&x));
+ println!("again|{n}|{a}|{b}|{}",again(n,&x));
+ for (tag,x) in [("A",Choice::A(a)),("B",Choice::B(a))] {
+  println!("select{tag}|{n}|{a}|{b}|{}",select(n,&x));
+ }
+}}}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 60);
+    let dumps = dumped(&dir, "single-constructor-fields");
+    let mut opts = options("single_constructor");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for function in ["number", "flag", "again", "select"] {
+        let path = format!("single_constructor::{function}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+    let body = text(&files, "src/Behavior.lex.tex");
+    assert!(body.contains("mirSingletonProjection"));
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("single-constructor-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("single_constructor"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [tag, n, a, b, expected] = parts.as_slice() else {
+            panic!("{line}")
+        };
+        let function = if tag.starts_with("select") {
+            "select"
+        } else {
+            tag
+        };
+        let path = format!("single_constructor::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let value = if function == "select" {
+            format!("(ctor Choice.{} {a})", tag.strip_prefix("select").unwrap())
+        } else {
+            format!("(ctor Envelope.Only {a} {b})")
+        };
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name: singletonVector{i},parameters:[],statement:(({name} {n} {value}) = {expected}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = body.replacen(" = 0)", " = 1)", 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-89: a standard source combinator transports the native signed ABI.
+#[test]
+fn compiler_parametric_source_calls_preserve_native_words_ue_89() {
+    let dir=scratch("parametric-source-abi",&[
+        ("Cargo.toml","[package]\nname=\"parametric_source\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",r#"
+pub fn negative(x:i8)->bool {let mut n=1u8;while n>0 {n-=1;} x<0}
+pub fn mapped(mut n:u8,x:Option<i8>)->Option<bool> {while n>0 {n-=1;} x.map(negative)}
+"#),
+        ("src/bin/vectors.rs",r#"
+use parametric_source::*;
+fn main(){for n in [0,2] {for x in [None,Some(-128i8),Some(-1),Some(0),Some(1),Some(127)] {
+ let raw=x.map(|v|v as u8);let out=mapped(n,x);
+ println!("{n}|{}|{}",raw.map(|v|v.to_string()).unwrap_or("none".into()),out.map(|v|v.to_string()).unwrap_or("none".into()));
+}}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 12);
+    let dumps = dumped(&dir, "parametric-source-abi");
+    let mut opts = options("parametric_source");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        text(&files, uorust::mir::CANDIDATES).contains("parametric_source::mapped\""),
+        "{:?}",
+        residue_detail(&files, "parametric_source::mapped")
+    );
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("parametric-source-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("parametric_source"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let name = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("parametric_source::mapped"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let policy = decisions
+        .rows
+        .values()
+        .find(|r| r.function == "parametric_source::mapped")
+        .and_then(|r| r.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [n, input, expected] = parts.as_slice() else {
+            panic!("{line}")
+        };
+        let input = if *input == "none" {
+            "(ctor Option.none [Nat])".into()
+        } else {
+            format!("(ctor Option.some [Nat] {input})")
+        };
+        let expected = if *expected == "none" {
+            "(ctor Option.none [Bool])".into()
+        } else {
+            format!("(ctor Option.some [Bool] {expected})")
+        };
+        vectors.push_str(&format!("theorem{{name:parametricVector{i},parameters:[],statement:(({name} {n} {input}) = {expected}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = body.replacen(
+        "(ctor Option.some [Bool] true))",
+        "(ctor Option.some [Bool] false))",
+        1,
+    );
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+/// UE-90: the admitted declaration determines a constructor's kind.
+#[test]
+fn compiler_aggregate_forms_follow_admitted_shapes_ue_90() {
+    let dir=scratch("aggregate-source-shapes",&[
+        ("Cargo.toml","[package]\nname=\"aggregate_shapes\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",r#"
+pub enum Record {Named {flag:bool,number:u8},Empty}
+pub enum Status {Zero,One}
+#[allow(non_snake_case)] pub mod Capital {pub struct Plain {pub number:u8} pub struct Pair(pub u8,pub bool);}
+pub fn make(mut n:u8,number:u8,flag:bool)->Record {while n>0 {n-=1;} Record::Named{number,flag}}
+pub fn plain(mut n:u8,number:u8)->Capital::Plain {while n>0 {n-=1;} Capital::Plain{number}}
+pub fn pair(mut n:u8,number:u8,flag:bool)->Capital::Pair {while n>0 {n-=1;} Capital::Pair(number,flag)}
+pub fn status(mut n:u8,flag:bool)->Status {while n>0 {n-=1;} if flag {Status::One} else {Status::Zero}}
+"#),
+        ("src/bin/vectors.rs",r#"
+use aggregate_shapes::*;
+fn main(){for n in [0,2] {for number in [0u8,7,255] {for flag in [false,true] {
+ let Record::Named{number:a,flag:b}=make(n,number,flag) else {panic!()};println!("make|{n}|{number}|{flag}|{a}|{b}");
+ let p=plain(n,number);println!("plain|{n}|{number}|{flag}|{}|false",p.number);
+ let p=pair(n,number,flag);println!("pair|{n}|{number}|{flag}|{}|{}",p.0,p.1);
+ let b=matches!(status(n,flag),Status::One);println!("status|{n}|{number}|{flag}|0|{b}");
+}}}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 48);
+    let dumps = dumped(&dir, "aggregate-source-shapes");
+    let mut opts = options("aggregate_shapes");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for f in ["make", "plain", "pair", "status"] {
+        let path = format!("aggregate_shapes::{f}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{path}\"")),
+            "{path}: {:?}",
+            residue_detail(&files, &path)
+        );
+    }
+    let cache = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("aggregate-shapes-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("aggregate_shapes"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [tag, n, number, flag, a, b] = parts.as_slice() else {
+            panic!("{line}")
+        };
+        let path = format!("aggregate_shapes::{tag}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == path)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let check=match *tag {
+            "make"=>format!("(match ({name} {n} {number} {flag}) | Record.Named observedFlag observedNumber => ((prim equal observedFlag {b} : Bool) && (observedNumber =? {a})) | Record.Empty => false)"),
+            "plain"=>format!("((project ({name} {n} {number}) number) =? {a})"),
+            "pair"=>format!("(((project ({name} {n} {number} {flag}) item0) =? {a}) && (prim equal (project ({name} {n} {number} {flag}) item1) {b} : Bool))"),
+            _=>format!("(prim equal (match ({name} {n} {flag}) | Status.Zero => false | Status.One => true) {b} : Bool)"),
+        };
+        vectors.push_str(&format!("theorem{{name:aggregateVector{i},parameters:[],statement:({check} = true),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let accepted = verify();
+    assert!(
+        accepted.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&accepted.stdout),
+        String::from_utf8_lossy(&accepted.stderr)
+    );
+    let wrong = body.replacen(" =? 0)", " =? 1)", 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

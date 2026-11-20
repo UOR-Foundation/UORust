@@ -4019,6 +4019,83 @@ impl Fun<'_, '_> {
         Ok((name, t))
     }
 
+    /// A source declaration with one constructor supplies exhaustive field
+    /// projections without a preceding runtime branch. Definitions and their
+    /// constructor equations are shared by content, rather than expanded at reads.
+    fn singleton_fields(&mut self, value: &str, ty: &Ty, variant: &str) -> Option<Vec<String>> {
+        let Ty::Named(owner) = ty else { return None };
+        let variants = self.cx.types.datas.get(owner)?;
+        let [(declared, fields)] = variants.as_slice() else {
+            return None;
+        };
+        if declared != variant || fields.iter().any(|(_, t)| !t.parameters().is_empty()) {
+            return None;
+        }
+        let fields: Vec<Ty> = fields.iter().map(|(_, t)| t.clone()).collect();
+        let digest = crate::project::sha(
+            format!("singleton source projection v1\0{owner}\0{variant}\0{fields:?}").as_bytes(),
+        );
+        let input = super::codec::binding(&format!("singletonValue{digest}"), self.cx.taken);
+        let names: Vec<String> = fields
+            .iter()
+            .enumerate()
+            .map(|(j, _)| {
+                super::codec::binding(&format!("singletonField{digest}_{j}"), self.cx.taken)
+            })
+            .collect();
+        let constructor = format!("{owner}.{variant}");
+        let term = ctor_term(ty, &constructor, &names);
+        let pattern = std::iter::once(constructor)
+            .chain(names.iter().cloned())
+            .collect::<Vec<_>>()
+            .join(" ");
+        let mut projections = Vec::new();
+        for (j, field) in fields.iter().enumerate() {
+            let name = super::codec::binding(
+                &format!("mirSingletonProjection{digest}Field{j}"),
+                self.cx.taken,
+            );
+            self.aux
+                .entry(name.clone())
+                .or_insert_with(|| Decl::Definition {
+                    type_parameters: Vec::new(),
+                    name: name.clone(),
+                    parameters: vec![(input.clone(), ty.render())],
+                    result: field.render(),
+                    body: Expr::Match {
+                        scrutinee: input.clone(),
+                        arms: vec![Arm {
+                            pattern: pattern.clone(),
+                            body: Expr::Flat(names[j].clone()),
+                        }],
+                    },
+                    axioms: Vec::new(),
+                    recursive: None,
+                    termination: None,
+                    mutual: None,
+                });
+            let proof = format!("{name}Identity");
+            self.aux
+                .entry(proof.clone())
+                .or_insert_with(|| Decl::Theorem {
+                    type_parameters: Vec::new(),
+                    name: proof,
+                    parameters: names
+                        .iter()
+                        .cloned()
+                        .zip(fields.iter().map(Ty::render))
+                        .collect(),
+                    statement: format!("(({name} {term}) = {})", names[j]),
+                    proof: "reflexivity{}".into(),
+                    axioms: Vec::new(),
+                });
+            self.mention(field);
+            projections.push(format!("({name} {value})"));
+        }
+        self.mention(ty);
+        Some(projections)
+    }
+
     /// The value at a place.
     fn read(&mut self, p: &IrPlace, st: &State) -> Lift<(String, Ty)> {
         if let Some((view, steps)) = self.view_of(p, st)? {
@@ -4277,7 +4354,13 @@ impl Fun<'_, '_> {
                         .and_then(|text| inhabited_variant(text))
                         .filter(|o| o.variant == variant && o.field.is_some())
                         .map(|_| vec![v.clone()]);
-                    let Some(names) = st.bound.get(&key).cloned().or(only) else {
+                    let Some(names) = st
+                        .bound
+                        .get(&key)
+                        .cloned()
+                        .or(only)
+                        .or_else(|| self.singleton_fields(&v, &t, &variant))
+                    else {
                         return Err(kind(
                             spec::MirProjectionElem::Downcast.path(),
                             "a variant's field read outside a match on it",
@@ -4714,8 +4797,25 @@ impl Fun<'_, '_> {
                     vals.push(value);
                     operand_types.push(ty);
                 }
-                self.check_aggregate_fields(agg, &t, ops, &operand_types, &mut vals, st)?;
-                let v = self.aggregate(agg, &t, ops, vals)?;
+                let resolved = self.resolved_aggregate(agg, &t);
+                if resolved != *agg
+                    && ops.iter().any(|(_, o)| match o {
+                        IrOperand::Copy(p) | IrOperand::Move(p) => {
+                            self.body.locals.get(p.local).is_some_and(|text| {
+                                super::views::borrows_mutably(&crate::convert::ty(
+                                    &syn::parse_str::<syn::Type>(text).unwrap_or(
+                                        syn::Type::Verbatim(proc_macro2::TokenStream::new()),
+                                    ),
+                                ))
+                            })
+                        }
+                        _ => false,
+                    })
+                {
+                    return Err(kind(spec::MirRvalue::Aggregate.path(),"a constructor holding mutable borrows needs an admitted variant ownership model"));
+                }
+                self.check_aggregate_fields(&resolved, &t, ops, &operand_types, &mut vals, st)?;
+                let v = self.aggregate(&resolved, &t, ops, vals)?;
                 self.mention(&t);
                 Ok(Val::V(v, t))
             }
@@ -5732,6 +5832,35 @@ impl Fun<'_, '_> {
         Some(converted.value)
     }
 
+    /// Resolve textual constructor hints against the admitted nominal source
+    /// declaration. Capitalized modules do not determine an aggregate's kind.
+    fn resolved_aggregate(&self, aggregate: &IrAggregate, target: &Ty) -> IrAggregate {
+        let Ty::Named(name) = target else {
+            return aggregate.clone();
+        };
+        match aggregate {
+            IrAggregate::Adt(path, None) if self.cx.types.datas.contains_key(name) => {
+                let parts = split_path(path);
+                if let [owner @ .., variant] = parts.as_slice() {
+                    let owner = owner.join("::");
+                    if ty(&owner, self.cx.types).ok().as_ref() == Some(target)
+                        && self.cx.types.datas[name].iter().any(|(v, _)| v == variant)
+                    {
+                        return IrAggregate::Adt(owner, Some((*variant).into()));
+                    }
+                }
+            }
+            IrAggregate::Adt(path, Some(variant)) if self.cx.types.structs.contains_key(name) => {
+                let full = format!("{path}::{variant}");
+                if ty(&full, self.cx.types).ok().as_ref() == Some(target) {
+                    return IrAggregate::Adt(full, None);
+                }
+            }
+            _ => {}
+        }
+        aggregate.clone()
+    }
+
     fn check_aggregate_fields(
         &mut self,
         agg: &IrAggregate,
@@ -5777,7 +5906,11 @@ impl Fun<'_, '_> {
                     .and_then(|vs| vs.iter().find(|(name, _)| name == v))
                     .map(|(_, fields)| fields)
                 {
-                    fields.iter().map(|(_, t)| t).collect()
+                    let names: Vec<_> = fields.iter().map(|(n, _)| n.as_deref()).collect();
+                    aggregate_positions(&names, ops)?
+                        .into_iter()
+                        .map(|i| &fields[i].1)
+                        .collect()
                 } else {
                     return Ok(());
                 }
@@ -5786,18 +5919,11 @@ impl Fun<'_, '_> {
                 let Some(fields) = self.cx.types.structs.get(n) else {
                     return Ok(());
                 };
-                ops.iter()
-                    .enumerate()
-                    .map(|(i, (name, _))| {
-                        let field = match name {
-                            Some(name) => fields.iter().find(|(f, _)| *f == lift::local_name(name)),
-                            None => fields.get(i),
-                        };
-                        field
-                            .map(|(_, t)| t)
-                            .ok_or_else(|| kind(k, "an unknown aggregate field"))
-                    })
-                    .collect::<Lift<Vec<_>>>()?
+                let names: Vec<_> = fields.iter().map(|(n, _)| Some(n.as_str())).collect();
+                aggregate_positions(&names, ops)?
+                    .into_iter()
+                    .map(|i| &fields[i].1)
+                    .collect()
             }
             _ => return Ok(()),
         };
@@ -5882,17 +6008,38 @@ impl Fun<'_, '_> {
                 }
             }
             (IrAggregate::Adt(_, Some(variant)), Ty::Named(n)) => {
-                let types = self.cx.types;
-                if types.enums.get(n).is_some_and(|vs| vs.contains(variant)) && vals.is_empty() {
+                if self
+                    .cx
+                    .types
+                    .enums
+                    .get(n)
+                    .is_some_and(|vs| vs.contains(variant))
+                    && vals.is_empty()
+                {
                     return Ok(format!("(ctor {n}.{variant})"));
                 }
-                if types.datas.get(n).is_some_and(|vs| {
-                    vs.iter()
-                        .any(|(v, fs)| v == variant && fs.len() == vals.len())
-                }) {
-                    let mut parts = vec![format!("ctor {n}.{variant}")];
-                    parts.extend(vals);
-                    return Ok(format!("({})", parts.join(" ")));
+
+                if let Some(fields) = self
+                    .cx
+                    .types
+                    .datas
+                    .get(n)
+                    .and_then(|variants| variants.iter().find(|(v, _)| v == variant))
+                    .map(|(_, fields)| fields)
+                {
+                    let names: Vec<_> = fields.iter().map(|(n, _)| n.as_deref()).collect();
+                    let positions = aggregate_positions(&names, ops)?;
+                    let mut ordered = vec![String::new(); vals.len()];
+                    for (i, value) in positions.into_iter().zip(vals) {
+                        ordered[i] = value;
+                    }
+                    return Ok(format!(
+                        "({})",
+                        std::iter::once(format!("ctor {n}.{variant}"))
+                            .chain(ordered)
+                            .collect::<Vec<_>>()
+                            .join(" ")
+                    ));
                 }
                 Err(kind(k, &format!("the variant {n}::{variant}")))
             }
@@ -5903,26 +6050,13 @@ impl Fun<'_, '_> {
                     .structs
                     .get(n)
                     .ok_or_else(|| kind(k, &format!("{n}, which is not a struct")))?;
-                // Named fields in the order the struct declares them.
-                let mut by: BTreeMap<String, String> = BTreeMap::new();
-                for (i, ((f, _), v)) in ops.iter().zip(vals).enumerate() {
-                    // A tuple struct's fields by position.
-                    let f = match f {
-                        Some(f) => lift::local_name(f),
-                        None => fields
-                            .get(i)
-                            .map(|(f, _)| f.clone())
-                            .ok_or_else(|| kind(k, "a tuple struct's field past its own"))?,
-                    };
-                    by.insert(f, v);
+                let names: Vec<_> = fields.iter().map(|(n, _)| Some(n.as_str())).collect();
+                let positions = aggregate_positions(&names, ops)?;
+                let mut ordered = vec![String::new(); vals.len()];
+                for (i, value) in positions.into_iter().zip(vals) {
+                    ordered[i] = value;
                 }
-                let mut parts = Vec::new();
-                for (f, _) in fields {
-                    let v = by.get(f).ok_or_else(|| {
-                        kind(k, &format!("a struct literal without the field {f}"))
-                    })?;
-                    parts.push((f, v.clone()));
-                }
+                let parts: Vec<_> = fields.iter().map(|(n, _)| n).zip(ordered).collect();
                 Ok(lift::struct_value(n, &parts, self.cx.types))
             }
             (IrAggregate::Coroutine(_), _) => {
@@ -8254,6 +8388,38 @@ fn variant_key(value: &str, ty: &Ty) -> String {
     format!("{ty:?}:{value}")
 }
 
+/// Map each operand to its declaration slot once, preserving field identity
+/// for both validation and construction. A duplicate cannot replace a field.
+fn aggregate_positions(
+    names: &[Option<&str>],
+    operands: &[(Option<String>, IrOperand)],
+) -> Lift<Vec<usize>> {
+    let bad = |text| kind(spec::MirRvalue::Aggregate.path(), text);
+    if names.len() != operands.len() {
+        return Err(bad("aggregate field representation arity mismatch"));
+    }
+    let positional = operands.iter().all(|(n, _)| n.is_none());
+    let mut seen = BTreeSet::new();
+    let mut positions = Vec::new();
+    for (i, (name, _)) in operands.iter().enumerate() {
+        let at = match name {
+            None if positional => i,
+            Some(name) => names
+                .iter()
+                .position(|field| {
+                    field.is_some_and(|f| lift::local_name(f) == lift::local_name(name))
+                })
+                .ok_or_else(|| bad("an unknown aggregate field"))?,
+            _ => return Err(bad("mixed named and positional aggregate fields")),
+        };
+        if !seen.insert(at) {
+            return Err(bad("a duplicate aggregate field"));
+        }
+        positions.push(at);
+    }
+    Ok(positions)
+}
+
 /// The constructors of a type a discriminant switches over, in the order of
 /// their discriminants: each variant, its LexLean constructor pattern head
 /// and its fields' types.
@@ -9833,6 +9999,72 @@ mod tests {
             result.is_err(),
             "an opaque storage field was overwritten by a concrete carrier"
         );
+    }
+
+    #[test]
+    fn aggregate_field_identity_rejects_duplicates_missing_and_unknown_slots_ue_90() {
+        let op = IrOperand::Constant(IrConstant::Bool(false));
+        let operands = |names: &[Option<&str>]| {
+            names
+                .iter()
+                .map(|n| (n.map(str::to_string), op.clone()))
+                .collect::<Vec<_>>()
+        };
+        let fields = [Some("flag"), Some("number")];
+        assert_eq!(
+            aggregate_positions(&fields, &operands(&[Some("number"), Some("flag")])).unwrap(),
+            vec![1, 0]
+        );
+        for names in [
+            vec![Some("flag"), Some("flag")],
+            vec![Some("flag")],
+            vec![Some("flag"), Some("other")],
+            vec![None, Some("number")],
+        ] {
+            assert!(aggregate_positions(&fields, &operands(&names)).is_err());
+        }
+        assert_eq!(
+            aggregate_positions(&[None, None], &operands(&[None, None])).unwrap(),
+            vec![0, 1]
+        );
+    }
+
+    #[test]
+    fn multiple_constructors_require_branch_evidence_ue_88() {
+        let mut types = Types::default();
+        types.datas.insert(
+            "Choice".into(),
+            vec![
+                ("A".into(), vec![(None, Ty::Nat(Some(8)))]),
+                ("B".into(), vec![(None, Ty::Nat(Some(8)))]),
+            ],
+        );
+        let body=super::super::parse::bodies("fn unguarded(_1: &Choice) -> u8 {\n let mut _0: u8;\n bb0: {\n _0 = copy (((*_1) as A).0: u8);\n return;\n }\n}\n").remove(0);
+        let cx = Cx {
+            types: &types,
+            source_sigs: &BTreeMap::new(),
+            widths: &[(64, vec!["test".into()])],
+            callees: &BTreeMap::new(),
+            compiler_scope: String::new(),
+            compiler_definitions: &BTreeMap::new(),
+            compiler_bindings: &BTreeMap::new(),
+            closure_scopes: &BTreeMap::new(),
+            constants: &BTreeMap::new(),
+            krate: "test".into(),
+            taken: &BTreeSet::new(),
+            explicit: &BTreeSet::new(),
+            limit: 1_000_000,
+            consts: &BTreeMap::new(),
+            closures: &BTreeMap::new(),
+            active: &[],
+            core: None,
+            layouts: &[],
+            backward: false,
+        };
+        assert!(lower(&cx, &body, "unguarded")
+            .unwrap_err()
+            .detail()
+            .contains("outside a match"));
     }
 
     #[test]

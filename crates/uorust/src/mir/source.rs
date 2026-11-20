@@ -132,6 +132,34 @@ pub(super) fn generic_environment(ty: &Ty, types: &Types) -> bool {
     interface(ty, types, &mut BTreeSet::new(), true)
 }
 
+/// Source semantics may transport a native word or source-bound abstract value
+/// without interpreting it as a source integer. Equal native carriers share one
+/// parameter, and the existing generic binder supplies its actual type at use.
+fn parameterize(ty: &Ty, bindings: &mut BTreeMap<Ty, String>) -> Ty {
+    let mut boxed = |t: &Ty| Box::new(parameterize(t, bindings));
+    match ty {
+        Ty::Signed(_) | Ty::Scalar | Ty::Param(_) => {
+            let index = bindings.len();
+            let parameter = bindings
+                .entry(ty.clone())
+                .or_insert_with(|| format!("NativeCarrier{index}"));
+            Ty::Param(parameter.clone())
+        }
+        Ty::Option(t) => Ty::Option(boxed(t)),
+        Ty::List(t) => Ty::List(boxed(t)),
+        Ty::Set(t, order) => Ty::Set(boxed(t), *order),
+        Ty::Outcome(a, b) => Ty::Outcome(boxed(a), boxed(b)),
+        Ty::Map(a, b, order) => Ty::Map(boxed(a), boxed(b), *order),
+        Ty::Tuple(ts) => Ty::Tuple(ts.iter().map(|t| parameterize(t, bindings)).collect()),
+        Ty::Pair(ts) => Ty::Pair(ts.iter().map(|t| parameterize(t, bindings)).collect()),
+        Ty::Fn(ins, out) => Ty::Fn(
+            ins.iter().map(|t| parameterize(t, bindings)).collect(),
+            Box::new(parameterize(out, bindings)),
+        ),
+        _ => ty.clone(),
+    }
+}
+
 #[allow(clippy::too_many_arguments)]
 pub(super) fn apply(
     callee: &str,
@@ -144,12 +172,20 @@ pub(super) fn apply(
     name: &str,
 ) -> Option<Imported> {
     let (owner, method) = inherent(callee)?;
-    let owner_type = source_type(&format!("&{owner}"), types)?;
+    let owner_type = super::lower::ty(&format!("&{owner}"), types).ok()?;
     if args.len() != texts.len() {
         return None;
     }
     for ((_, native), text) in args.iter().zip(texts) {
-        if !matches!(native, Ty::Fn(..)) && source_type(text.as_deref()?, types)? != *native {
+        if let Some(text) = text {
+            let syntax = syn::parse_str::<syn::Type>(text).ok()?;
+            if super::views::borrows_mutably(&crate::convert::ty(&syntax)) {
+                return None;
+            }
+        }
+        if !matches!(native, Ty::Fn(..))
+            && super::lower::ty(text.as_deref()?, types).ok()? != *native
+        {
             return None;
         }
     }
@@ -157,16 +193,27 @@ pub(super) fn apply(
         .iter()
         .map(|(_, t)| t)
         .chain(std::iter::once(result))
-        .any(|t| !value_interface(t, types, &mut BTreeSet::new()))
+        .any(|t| !generic_environment(t, types))
     {
         return None;
     }
+    let mut bindings = BTreeMap::new();
+    let modeled: Vec<Ty> = args
+        .iter()
+        .map(|(_, t)| parameterize(t, &mut bindings))
+        .collect();
+    let modeled_result = parameterize(result, &mut bindings);
+    let generic = (!bindings.is_empty()).then(|| lift::Generic {
+        types: bindings.values().cloned().collect(),
+        reads: BTreeMap::new(),
+        dictionary: Vec::new(),
+    });
     let params: Vec<_> = args
         .iter()
         .enumerate()
-        .map(|(i, (_, t))| {
+        .map(|(i, _)| {
             let name = format!("modelArg{i}");
-            (name.clone(), name, t.clone())
+            (name.clone(), name, modeled[i].clone())
         })
         .collect();
     let arguments: Vec<_> = params
@@ -217,9 +264,9 @@ pub(super) fn apply(
             rust: name.into(),
             name: name.into(),
             called: name.into(),
-            generic: None,
+            generic: generic.clone(),
             params: params.clone(),
-            result: result.clone(),
+            result: modeled_result.clone(),
             block: &block,
             imports: BTreeMap::from([(owner_name.clone(), owner.clone())]),
             aliases: BTreeMap::new(),
@@ -234,14 +281,33 @@ pub(super) fn apply(
         }
         let mut decls = crate::order::decls(&lifted.ordered, types);
         decls.extend(lifted.decls);
-        Some(Imported {
-            term: format!(
+        let term = if generic.is_some() {
+            let signature = lift::Sig {
+                name: name.into(),
+                params: modeled.clone(),
+                result: modeled_result.clone(),
+                generic: generic.clone(),
+                threads: Vec::new(),
+            };
+            let (term, bound, _, extra) =
+                lift::bind_model_call(&signature, args, types, &BTreeMap::new(), widths, taken)
+                    .ok()?;
+            if bound != *result {
+                return None;
+            }
+            decls.extend(extra);
+            term
+        } else {
+            format!(
                 "({})",
                 std::iter::once(name)
                     .chain(args.iter().map(|(v, _)| v.as_str()))
                     .collect::<Vec<_>>()
                     .join(" ")
-            ),
+            )
+        };
+        Some(Imported {
+            term,
             decls,
             types: lifted.types,
         })
@@ -251,6 +317,56 @@ pub(super) fn apply(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn source_models_transport_native_carriers_parametrically_ue_89() {
+        let word = Ty::Signed(Some(8));
+        let imported = apply(
+            "std::option::Option::<i8>::map",
+            &[
+                ("input".into(), Ty::Option(Box::new(word.clone()))),
+                ("callback".into(), Ty::Fn(vec![word], Box::new(Ty::Bool))),
+            ],
+            &[Some("Option<i8>".into()), None],
+            &Ty::Option(Box::new(Ty::Bool)),
+            &Types::default(),
+            &[(64, vec!["test".into()])],
+            &BTreeSet::new(),
+            "transportedModel",
+        );
+        assert!(
+            imported.is_some(),
+            "a parametric source model lost the native word ABI"
+        );
+    }
+
+    #[test]
+    fn parametric_import_cannot_supply_defaults_or_discard_mutation_ue_89() {
+        let word = Ty::Signed(Some(8));
+        let option = Ty::Option(Box::new(word.clone()));
+        assert!(apply(
+            "std::option::Option::<i8>::unwrap_or_default",
+            &[("input".into(), option.clone())],
+            &[Some("Option<i8>".into())],
+            &word,
+            &Types::default(),
+            &[],
+            &BTreeSet::new(),
+            "unknownDefault"
+        )
+        .is_none());
+        assert!(apply(
+            "std::option::Option::<i8>::take",
+            &[("input".into(), option.clone())],
+            &[Some("&mut Option<i8>".into())],
+            &option,
+            &Types::default(),
+            &[],
+            &BTreeSet::new(),
+            "lostMutation"
+        )
+        .is_none());
+    }
 
     #[test]
     fn source_semantic_calls_include_associated_forms_ue_81() {

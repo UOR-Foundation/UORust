@@ -613,3 +613,24 @@ Feature: engine
     When the compiler transports an identical resolved type between the fields
     Then the native signature and body share one specialized carrier frame
     But unrelated types and unsupported operations remain refused
+
+  @UE-88 @build
+  Scenario: A single source constructor supplies shared field projections
+    Given admitted source data with exactly one constructor and compiler field reads
+    When rustc omits an unnecessary discriminant branch
+    Then native reads apply shared typed projection kernels verified by the SDK
+    But multiple constructors and incompatible field readings supply no projection
+
+  @UE-89 @build
+  Scenario: Parametric source calls preserve native payload representations
+    Given compiler-qualified standard calls over native words or abstract payloads
+    When an existing source model only transports those payloads through callbacks
+    Then a shared generic kernel imports that model through exact type bindings
+    But arithmetic without a payload model and mutable schemas remain refused
+
+  @UE-90 @build
+  Scenario: Source shapes resolve compiler aggregate constructor forms
+    Given admitted struct and enum declarations with named and positional fields
+    When compiler MIR constructs a record-shaped enum variant or qualified tuple struct
+    Then native construction preserves the actual constructor and declared field order
+    But missing, duplicate and incompatible field readings remain refused
