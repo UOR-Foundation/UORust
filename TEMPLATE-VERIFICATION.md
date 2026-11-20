@@ -1922,3 +1922,21 @@ unchanged. Six compiler-graph controls, three schema controls, twenty-five
 lowering controls, eighty-three project controls, repository conformance, strict
 Clippy and model/template/SDK/self-model checks passed. Full release acceptance
 remains the unchanged `just vv` boundary.
+
+## UE-113: resolved declaration identities survive scoped rewriting
+
+The registered regression initially classified a qualified parent reexport as
+an unrelated external-glob type. Resolved declarations now use the existing
+frozen type identity through subsequent registry rewriting. Receiver aliases
+resolve that internal identity at the value-type boundary; ordinary foreign
+aliases do not acquire transitive workspace readings. Alias definitions and
+source field/signature overlays share the same declaration identity binder.
+
+The controls retain real foreign and unresolved rows, parent reexports,
+lifetime-erased receiver identities and generic shadowing. Sixty-four lifting
+controls and eighty-four project controls passed with repository conformance,
+strict Clippy and model/template/SDK/self-model checks. A Rust-compiled fixture
+using the exactly locked serde dependency passed both enum field observations
+through the SDK. Definitional equality checks the enum values without requiring
+an unused decidable-equality instance; changing the expected constructor is
+rejected with LLV7002. Full release acceptance remains `just vv`.

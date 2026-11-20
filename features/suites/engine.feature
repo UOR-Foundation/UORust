@@ -788,3 +788,10 @@ Feature: engine
     When their callee argument types and destination are unchanged
     Then name normalization and body inference run once for each complete query
     But changed query fields and distinct graph owners retain independent results
+
+  @UE-113 @build
+  Scenario: Resolved workspace types survive external glob overlays
+    Given a qualified parent type reexport used beside an unrelated external glob
+    When source field and signature types pass through scoped registry rewriting
+    Then the resolved declaration retains its workspace identity
+    But genuine foreign unresolved and shadowed types remain distinct

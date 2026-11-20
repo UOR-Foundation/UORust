@@ -566,6 +566,9 @@ pub(crate) struct Seen {
     pub(crate) paths_open: bool,
 }
 
+/// An internal declaration identity cannot be a Rust identifier.
+pub(crate) const FROZEN_TYPE_PREFIX: &str = "@type_";
+
 /// The language's primitive types a path of one segment may name.
 pub(crate) const PRIMITIVE_TYPES: [&str; 17] = [
     "bool", "char", "str", "u8", "u16", "u32", "u64", "u128", "usize", "i8", "i16", "i32", "i64",
@@ -1396,10 +1399,15 @@ impl Types {
             },
             None => rust,
         };
-        self.aliases
-            .get(bare)
-            .cloned()
-            .unwrap_or_else(|| bare.to_string())
+        let resolved = self.aliases.get(bare).map(String::as_str).unwrap_or(bare);
+        if resolved.starts_with(FROZEN_TYPE_PREFIX) {
+            self.aliases
+                .get(resolved)
+                .cloned()
+                .unwrap_or_else(|| resolved.to_string())
+        } else {
+            resolved.to_string()
+        }
     }
 
     /// Resolve model dependencies against declarations, never a rendered name
@@ -14708,6 +14716,25 @@ fn unread_signature(sig: &rs::Signature) -> Option<String> {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn resolved_declaration_tags_survive_receiver_aliases_ue_113() {
+        let mut types = super::Types::default();
+        let tag = format!("{}identity", super::FROZEN_TYPE_PREFIX);
+        types.aliases.insert(tag.clone(), "PayloadKind".into());
+        types.aliases.insert("Self".into(), tag.clone());
+        types
+            .aliases
+            .insert("Foreign".into(), "serde::PayloadKind".into());
+        types
+            .aliases
+            .insert("serde::PayloadKind".into(), "Unrelated".into());
+        assert_eq!(types.resolve(&tag), "PayloadKind");
+        assert_eq!(types.resolve("Self"), "PayloadKind");
+        assert_eq!(types.resolve("Self<'a>"), "PayloadKind");
+        assert_eq!(types.resolve("Foreign"), "serde::PayloadKind");
+        let missing = format!("{}missing", super::FROZEN_TYPE_PREFIX);
+        assert_eq!(types.resolve(&missing), missing);
+    }
 
     #[test]
     fn map_carriers_keep_closed_abi_and_transport_generic_instances_ue_71() {

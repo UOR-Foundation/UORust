@@ -11349,3 +11349,87 @@ fn canonical_compiler_records_preserve_native_observations_ue_111() {
     }
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn resolved_workspace_types_survive_external_globs_in_sdk_ue_113() {
+    let dir = scratch("resolved-source-identities", &[
+        ("Cargo.toml", "[package]\nname=\"resolved_identity\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n[dependencies]\nserde=\"=1.0.229\"\n"),
+        ("src/lib.rs", "pub mod defs {pub enum PayloadKind {First,Second}}\npub mod parent {pub use crate::defs::PayloadKind; pub mod wire {#[allow(unused_imports)] use serde::*; pub struct Payload {pub kind:super::PayloadKind} pub fn keep(value:Payload)->Payload {value}}}\n"),
+        ("src/bin/vectors.rs", "use resolved_identity::{defs::PayloadKind,parent::wire::{Payload,keep}}; fn main(){for tag in [0u8,1] {let kind=if tag==0 {PayloadKind::First}else{PayloadKind::Second};let out=keep(Payload{kind});let label=match out.kind {PayloadKind::First=>\"First\",PayloadKind::Second=>\"Second\"};println!(\"{tag}|{label}\");}}\n"),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let files = uorust::project_workspace(&dir, &options("resolved_identity")).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let row = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("resolved_identity::parent::wire::keep"))
+        .unwrap_or_else(|| {
+            panic!(
+                "{:?}",
+                residue_detail(&files, "resolved_identity::parent::wire::keep")
+            )
+        });
+    let name = row["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let mut vectors = String::new();
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let (tag, expected) = line.split_once('|').unwrap();
+        assert!(matches!(expected, "First" | "Second"));
+        let input = if tag == "0" { "First" } else { "Second" };
+        vectors.push_str(&format!("theorem{{name:sourceIdentityVector{i},parameters:[],statement:((project ({name} (record Payload {{kind := (ctor PayloadKind.{input})}})) kind) = (ctor PayloadKind.{expected})),proof:reflexivity{{}},axioms:[]}}\n"));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|s| s.contains("name:sourceIdentityVector0,"))
+        .unwrap();
+    let bad = good.replace(
+        " = (ctor PayloadKind.First)",
+        " = (ctor PayloadKind.Second)",
+    );
+    assert_ne!(good, bad);
+    std::fs::write(&file, body.replacen(good, &bad, 1)).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

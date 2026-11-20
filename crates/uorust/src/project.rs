@@ -3872,7 +3872,7 @@ fn behavior(
     let alias_key = |pkg: usize, target: usize, module: &str, name: &str| {
         format!("@alias_{pkg}_{target}_{}_{}", hex(module), hex(name))
     };
-    let frozen = |lex: &str| format!("@type_{}", hex(lex));
+    let frozen = |lex: &str| format!("{}{}", lift::FROZEN_TYPE_PREFIX, hex(lex));
     let frozen_names: BTreeMap<String, String> = lexes
         .iter()
         .flat_map(|named| named.values().map(|lex| (frozen(lex), lex.clone())))
@@ -3906,6 +3906,18 @@ fn behavior(
             crate::names::TypeReading::Open => None,
         }
     };
+    // A resolved declaration is an identity, not a new bare identifier for
+    // a later registry/glob overlay to resolve in a different scope.
+    let frozen_declared_name = |reading: &crate::names::TypeReading| -> Option<String> {
+        match reading {
+            crate::names::TypeReading::Declared(p, t, m, n) => lexes
+                .get(*p)
+                .and_then(|named| named.get(&(*t, m.clone(), n.clone())))
+                .map(|lex| frozen(lex))
+                .or_else(|| declared_name(reading)),
+            _ => None,
+        }
+    };
     let resolved_aliases: BTreeMap<String, crate::ast::Alias> = alias_definitions
         .iter()
         .map(|(key, (pkg, fi, scope, name, alias))| {
@@ -3922,14 +3934,7 @@ fn behavior(
                 .flatten()
                 .filter(|(written, _)| !alias.params.contains(written))
                 .filter_map(|(written, reading)| {
-                    let to = match reading {
-                        crate::names::TypeReading::Declared(p, t, m, n) => lexes
-                            .get(*p)
-                            .and_then(|named| named.get(&(*t, m.clone(), n.clone())))
-                            .map(|lex| frozen(lex))
-                            .or_else(|| declared_name(reading)),
-                        _ => None,
-                    };
+                    let to = frozen_declared_name(reading);
                     to.map(|to| (written.clone(), to))
                 })
                 .collect();
@@ -4038,7 +4043,9 @@ fn behavior(
                     .iter()
                     .chain(paths)
                     .map(|n| {
-                        let read = readings.and_then(|r| r.get(n)).and_then(declared_name);
+                        let read = readings.and_then(|r| r.get(n)).and_then(|reading| {
+                            frozen_declared_name(reading).or_else(|| declared_name(reading))
+                        });
                         (n.clone(), read.unwrap_or_else(|| n.clone()))
                     })
                     .collect();
@@ -12865,6 +12872,36 @@ pub fn unresolved(x: &crate::missing::Declared) -> u8 { let _ = x; 0 }
         );
         let keys = type_names_row(&frontier, "w::keys");
         assert!(keys.contains("whose order is unspecified"), "{keys}");
+    }
+
+    #[test]
+    fn qualified_declaration_identity_survives_registry_globs_ue_113() {
+        let frontier = resolved_frontier(
+            "resolved-glob-identity",
+            "\n[dependencies]\nbits = \"1\"\n",
+            "pub mod defs {pub enum Policy { First, Second }}\n\
+             pub mod parent {pub use crate::defs::Policy;\n\
+              pub mod wire { use bits::prelude::*;\n\
+               pub struct Input {pub policy:super::Policy}\n\
+               pub fn keep(value:Input)->Input {value}\n\
+               pub struct Foreign {pub policy:Policy}\n\
+               pub fn foreign(value:Foreign)->Foreign {value}\n\
+               pub struct Missing {pub policy:super::missing::Policy}\n\
+               pub fn missing(value:Missing)->Missing {value}\n\
+              }\n}\n",
+        );
+        assert!(
+            type_names_row(&frontier, "w::parent::wire::keep").starts_with("[[lifted]]"),
+            "{frontier}"
+        );
+        assert!(
+            type_names_row(&frontier, "w::parent::wire::foreign").contains("bits::prelude::Policy"),
+            "{frontier}"
+        );
+        assert!(
+            !type_names_row(&frontier, "w::parent::wire::missing").starts_with("[[lifted]]"),
+            "{frontier}"
+        );
     }
 
     #[test]
