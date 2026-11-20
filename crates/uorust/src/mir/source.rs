@@ -102,6 +102,46 @@ fn operation(callee: &str) -> Option<(String, String)> {
     Some((owner, method))
 }
 
+/// Compiler-owned language syntax selects the existing source translator;
+/// this binding contributes no arithmetic semantics. A registry owner is
+/// available only after its package version and archive checksum were admitted.
+fn registry_operation(
+    callee: &str,
+    types: &Types,
+) -> Option<(String, String, Option<&'static str>)> {
+    let parts = super::parse::split_path(callee);
+    let method = parts.last()?.to_string();
+    let (owner, operator) = if let [qualified, _] = parts.as_slice() {
+        let qualified = qualified.strip_prefix('<')?.strip_suffix('>')?;
+        let (owner, trait_path) = qualified.split_once(" as ")?;
+        let (namespace, trait_name) = trait_path.rsplit_once("::")?;
+        if !matches!(namespace, "std::ops" | "core::ops" | "core::ops::arith") {
+            return None;
+        }
+        let operator = match (trait_name, method.as_str()) {
+            ("Add", "add") => "+",
+            ("Sub", "sub") => "-",
+            ("Mul", "mul") => "*",
+            ("Div", "div") => "/",
+            ("Rem", "rem") => "%",
+            _ => return None,
+        };
+        (owner.to_string(), Some(operator))
+    } else {
+        (parts[..parts.len().checked_sub(1)?].join("::"), None)
+    };
+    let mut syntax = syn::parse_str::<syn::Type>(&owner).ok()?;
+    while let syn::Type::Reference(reference) = syntax {
+        if reference.mutability.is_some() {
+            return None;
+        }
+        syntax = *reference.elem;
+    }
+    let owner = quote::quote!(#syntax).to_string().replace(' ', "");
+    types.registered(&owner)?;
+    Some((owner, method, operator))
+}
+
 /// Nominal values retain their source schema at the MIR boundary. Inspect the
 /// dependency closure so a recursive container neither hides a mutable cell
 /// nor loses coverage merely because its immutable payload has a name.
@@ -267,7 +307,27 @@ fn apply_at(
             super::lower::ty(text, types).ok()
         }
     };
-    let (owner, method) = operation(callee)?;
+    let registry = registry_operation(callee, types);
+    let ((owner, method), operator) = match operation(callee) {
+        Some(operation) => (operation, None),
+        None => {
+            let (owner, method, operator) = registry.as_ref()?;
+            ((owner.clone(), method.clone()), *operator)
+        }
+    };
+    // Equal registry call interfaces share one content-bound semantic kernel.
+    // Actual caller values never enter this identity.
+    let registry_name = registry.as_ref().map(|_| {
+        let identity = crate::project::sha(
+            format!(
+                "registry-source/1\0{callee}\0{:?}\0{result:?}\0{widths:?}",
+                args.iter().map(|(_, t)| t).collect::<Vec<_>>()
+            )
+            .as_bytes(),
+        );
+        super::codec::binding(&format!("mirRegistrySource{identity}"), taken)
+    });
+    let name = registry_name.as_deref().unwrap_or(name);
     let owner_type = reading(&format!("&{owner}"))?;
     if args.len() != texts.len() {
         return None;
@@ -342,15 +402,24 @@ fn apply_at(
     }
     let owner_name = owner_path.path.segments.last()?.ident.to_string();
     let mut calls = Vec::new();
-    if args
-        .first()
-        .is_some_and(|(_, receiver)| *receiver == owner_type)
+    if let Some(operator) = operator {
+        if args.len() != 2 || args[0].1 != owner_type {
+            return None;
+        }
+        calls.push(format!("{} {operator} {}", arguments[0], arguments[1]));
+    }
+    if operator.is_none()
+        && args
+            .first()
+            .is_some_and(|(_, receiver)| *receiver == owner_type)
     {
         calls.push(format!("modelArg0.{method}({})", arguments[1..].join(", ")));
     }
     // The source binder owns the constructor's meaning. This bridge changes
     // only the invocation form after checking the compiler's owner and ABI.
-    calls.push(format!("{owner_name}::{method}({})", arguments.join(", ")));
+    if operator.is_none() {
+        calls.push(format!("{owner_name}::{method}({})", arguments.join(", ")));
+    }
     calls.into_iter().find_map(|call| {
         let syntax: syn::Block = syn::parse_str(&format!("{{ {call} }}")).ok()?;
         let block = crate::convert::block(&syntax);
@@ -411,6 +480,53 @@ fn apply_at(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn registry_source_import_requires_locked_owner_and_language_trait_ue_99() {
+        let path = "num_bigint::BigInt".to_string();
+        let types = Types {
+            aliases: BTreeMap::from([(path.clone(), path)]),
+            ..Types::default()
+        };
+        let args = [("a".into(), Ty::Unbounded), ("b".into(), Ty::Unbounded)];
+        let texts = [
+            Some("&num_bigint::BigInt".into()),
+            Some("&num_bigint::BigInt".into()),
+        ];
+        let import = |callee, scope: &Types, args: &[(String, Ty)]| {
+            apply(
+                callee,
+                args,
+                &texts,
+                &Ty::Unbounded,
+                scope,
+                &[(64, Vec::new())],
+                &BTreeSet::new(),
+                "registeredProduct",
+            )
+        };
+        assert!(import("<&num_bigint::BigInt as std::ops::Mul>::mul", &types, &args).is_some());
+        for path in [
+            "<&num_bigint::BigInt as workspace::Mul>::mul",
+            "<&workspace::BigInt as std::ops::Mul>::mul",
+            "<&num_bigint::BigInt as std::ops::Mul>::add",
+            "<&num_bigint::BigInt as std::ops::Div>::div",
+        ] {
+            assert!(import(path, &types, &args).is_none(), "{path}");
+        }
+        assert!(import(
+            "<&num_bigint::BigInt as std::ops::Mul>::mul",
+            &Types::default(),
+            &args
+        )
+        .is_none());
+        assert!(import(
+            "<&num_bigint::BigInt as std::ops::Mul>::mul",
+            &types,
+            &[("a".into(), Ty::Nat(Some(64))), ("b".into(), Ty::Unbounded)]
+        )
+        .is_none());
+    }
 
     #[test]
     fn source_pointer_representations_require_explicit_compiler_width_ue_94() {

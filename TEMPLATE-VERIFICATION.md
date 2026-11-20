@@ -1654,3 +1654,19 @@ the resumed acceptance stage; that stage passed in 43.37 seconds. Twenty focused
 lowering controls, conformance, strict Clippy and model/template/SDK/self-model
 checks passed. No semantic-registry operation was added. Complete release
 acceptance remains the unchanged `just vv` boundary.
+
+## UE-99: exact registry owners import existing source semantics
+
+The initial typed adapter control rejected a lock-admitted registry product.
+Native imports now reuse source models of exact checksum-admitted registry
+owners. Compiler-resolved arithmetic language operators bind to source syntax;
+the source translator owns the resulting meaning and continues to reject
+unavailable semantics. Equal registry call interfaces share a content-bound
+kernel. Unrelated traits, missing registry admission, mismatched arguments and
+mutable interfaces cannot select it. No standard-operation model was added.
+
+Ten focused source-import controls passed. Eighteen actual Rust/SDK comparisons
+passed for signed and large integer values, including results beyond i64; an
+incorrect product was rejected with LLV7002 (107.86 seconds). Conformance,
+strict Clippy and model/template/SDK/self-model checks passed. Complete release
+acceptance remains the unchanged `just vv` boundary.

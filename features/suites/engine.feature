@@ -690,3 +690,10 @@ Feature: engine
     When their dependency closure requires memory and computed assertion outcomes
     Then each caller passes and returns that exact state and frame-local cells are released on either exit
     But unrelated allocations and unavailable cleanup or borrow interfaces cannot be discarded
+
+  @UE-99 @build
+  Scenario: Locked registry calls reuse their existing source semantics
+    Given compiler calls on a registry type admitted by its exact Cargo lock
+    When an inherent method or language operator has an existing source model
+    Then the native adapter imports that model through its exact typed interface
+    But unrelated traits and unavailable or mutable interfaces supply no meaning

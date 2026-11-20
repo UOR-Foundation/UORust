@@ -9843,3 +9843,113 @@ fn main() {for (initial,delta) in [(0u8,0u8),(0,255),(254,0),(254,1),(255,0),(25
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn native_registry_calls_reuse_source_semantics_ue_99() {
+    let dir=scratch("registry-source-import", &[
+      ("Cargo.toml", "[package]\nname=\"registry_calls\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n[dependencies]\nnum-bigint=\"=0.4.8\"\n"),
+      ("src/lib.rs",r#"
+use num_bigint::BigInt;
+pub fn product(a:&BigInt,b:&BigInt)->BigInt {let mut n=1u8;while n>0 {n-=1;} a*b}
+pub fn sum(a:&BigInt,b:&BigInt)->BigInt {let mut n=1u8;while n>0 {n-=1;} a+b}
+pub fn difference(a:&BigInt,b:&BigInt)->BigInt {let mut n=1u8;while n>0 {n-=1;} a-b}
+"#),
+      ("src/bin/vectors.rs", r#"
+use registry_calls::*;
+use num_bigint::BigInt;
+fn main(){for (a,b) in [(-7i64,3i64),(0,0),(9,-4),(i64::MAX,2),(i64::MIN,-1),(12345,67890)] {
+ let x=BigInt::from(a);let y=BigInt::from(b);
+ for (name,value) in [("product",product(&x,&y)),("sum",sum(&x,&y)),("difference",difference(&x,&y))] {
+ println!("{name}|({a} : Int) ({b} : Int)|({value} : Int)");
+ }
+}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "registry-source-import");
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("registry_calls"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("registry_calls");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let decisions = verdicts(&cache);
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 18);
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let fields: Vec<_> = line.split('|').collect();
+        let path = format!("registry_calls::{}", fields[0]);
+        let row = rows.iter().find(|r| r["function"].as_str() == Some(&path));
+        assert!(row.is_some(), "{path}: {:?}", residue_detail(&files, &path));
+        let name = row.unwrap()["definition"]
+            .as_str()
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name:registryVector{i},parameters:[],statement:(({name} {}) = {}),proof:decide{{}},axioms:[{}]}}\n",fields[1],fields[2],policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(" = (-21 : Int))", " = (-20 : Int))", 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
