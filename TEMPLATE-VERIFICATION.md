@@ -1786,3 +1786,19 @@ function namespace negatives (16.45 seconds). Twenty-two lowering controls,
 pre-proof effect propagation, conformance, strict Clippy and
 model/template/SDK/self-model checks passed. Complete release acceptance
 remains the unchanged `just vv` boundary.
+
+## UE-106: one dependency graph across declaration layers
+
+The neutral source aggregate regression reproduced LLT4001 for a field type
+emitted later by native lowering (1.24 seconds). Behavior emission now applies
+the existing lexical dependency sorter after merging source and imported
+native declarations. No schema or operation meaning changes. The regression
+uses a pure aggregate constructor to isolate ordering from unobserved trial
+axiom policies. SDK verification passed, and removing its imported field schema
+still failed with LLT4001 (19.66 seconds together). Eighty-three project controls
+passed, including mutual groups, lexical references, and byte-preserving
+retention of cycles, unavailable references and conflicting declarations.
+Complete release acceptance remains the unchanged `just vv` boundary.
+
+The regenerated fixture changes declaration order only. Fixture reproduction,
+repo-conformance, strict Clippy and model/template/SDK/self-model gates passed.

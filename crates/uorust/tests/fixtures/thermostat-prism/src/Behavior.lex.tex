@@ -163,47 +163,6 @@ definition{
   body: (match value | Floor.mk x0 => x0)
 }
 
-definition{
-  name: size_of_Floor,
-  parameters: [value : Floor],
-  result: Nat,
-  body: (match value | Floor.mk x0 => (1 + (size_of_list_Plan x0))),
-  mutual: SizeOfFloor,
-  recursive_argument: value
-}
-
-definition{
-  name: size_of_Plan,
-  parameters: [value : Plan],
-  result: Nat,
-  body: (match value
-    | Plan.Room x0 => 1
-    | Plan.Wing x0 => (1 + (size_of_option_Floor x0))
-    | Plan.Annex x0 => (1 + (size_of_Plan x0))),
-  mutual: SizeOfFloor,
-  recursive_argument: value
-}
-
-definition{
-  name: size_of_list_Plan,
-  parameters: [value : (List Plan)],
-  result: Nat,
-  body: (match value
-    | List.nil => 0
-    | List.cons x0 x1 => ((1 + (size_of_Plan x0)) + (size_of_list_Plan x1))),
-  mutual: SizeOfFloor,
-  recursive_argument: value
-}
-
-definition{
-  name: size_of_option_Floor,
-  parameters: [value : (Option Floor)],
-  result: Nat,
-  body: (match value | Option.none => 0 | Option.some x0 => (1 + (size_of_Floor x0))),
-  mutual: SizeOfFloor,
-  recursive_argument: value
-}
-
 inductive{
   name: Priority,
   type_parameters: [],
@@ -2318,26 +2277,6 @@ definition{
   axioms: [Quot.sound, propext]
 }
 
-theorem{
-  name: decreases_annexedRoom_0,
-  parameters: [plan : Plan, inner : Plan],
-  statement: ((plan = (ctor Plan.Annex inner)) -> ((size_of_Plan inner) < (size_of_Plan plan))),
-  proof: linear_arithmetic{definitions: [size_of_Plan]},
-  axioms: [Quot.sound, propext]
-}
-
-definition{
-  name: annexedRoom,
-  parameters: [plan : Plan],
-  result: (Option String),
-  body: (match plan
-    | Plan.Room name => (ctor Option.some [String] name)
-    | Plan.Wing value => (ctor Option.none [String])
-    | Plan.Annex inner => (annexedRoom inner)),
-  axioms: [Quot.sound, propext],
-  termination: {evidence: [decreases_annexedRoom_0], measure: (size_of_Plan plan)}
-}
-
 definition{
   name: renamedMap1,
   parameters: [items1 : (List String), name : (Fn (String) String)],
@@ -4012,6 +3951,67 @@ theorem{
   parameters: [],
   statement: ((isSequence (ctor Step.Hold 21)) = false),
   proof: decide{}
+}
+
+definition{
+  name: size_of_Floor,
+  parameters: [value : Floor],
+  result: Nat,
+  body: (match value | Floor.mk x0 => (1 + (size_of_list_Plan x0))),
+  mutual: SizeOfFloor,
+  recursive_argument: value
+}
+
+definition{
+  name: size_of_Plan,
+  parameters: [value : Plan],
+  result: Nat,
+  body: (match value
+    | Plan.Room x0 => 1
+    | Plan.Wing x0 => (1 + (size_of_option_Floor x0))
+    | Plan.Annex x0 => (1 + (size_of_Plan x0))),
+  mutual: SizeOfFloor,
+  recursive_argument: value
+}
+
+definition{
+  name: size_of_list_Plan,
+  parameters: [value : (List Plan)],
+  result: Nat,
+  body: (match value
+    | List.nil => 0
+    | List.cons x0 x1 => ((1 + (size_of_Plan x0)) + (size_of_list_Plan x1))),
+  mutual: SizeOfFloor,
+  recursive_argument: value
+}
+
+definition{
+  name: size_of_option_Floor,
+  parameters: [value : (Option Floor)],
+  result: Nat,
+  body: (match value | Option.none => 0 | Option.some x0 => (1 + (size_of_Floor x0))),
+  mutual: SizeOfFloor,
+  recursive_argument: value
+}
+
+theorem{
+  name: decreases_annexedRoom_0,
+  parameters: [plan : Plan, inner : Plan],
+  statement: ((plan = (ctor Plan.Annex inner)) -> ((size_of_Plan inner) < (size_of_Plan plan))),
+  proof: linear_arithmetic{definitions: [size_of_Plan]},
+  axioms: [Quot.sound, propext]
+}
+
+definition{
+  name: annexedRoom,
+  parameters: [plan : Plan],
+  result: (Option String),
+  body: (match plan
+    | Plan.Room name => (ctor Option.some [String] name)
+    | Plan.Wing value => (ctor Option.none [String])
+    | Plan.Annex inner => (annexedRoom inner)),
+  axioms: [Quot.sound, propext],
+  termination: {evidence: [decreases_annexedRoom_0], measure: (size_of_Plan plan)}
 }
 \end{semanticmodule}
 \end{lexlean}

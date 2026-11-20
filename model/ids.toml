@@ -687,3 +687,9 @@ id = "UE-105"
 level = "build"
 suite = "engine"
 statement = "Compiler-library dependency bodies use the exact pinned compiler optimization stage through the existing resolver and native ABI, retaining typed borrowed record state without handwritten operation models; source, target, pass and producer mismatches remain refused"
+
+[[id]]
+id = "UE-106"
+level = "build"
+suite = "engine"
+statement = "Source and imported native declarations share one lexical dependency order before emission, preserving mutual groups and retaining invalid cycles, missing dependencies and conflicting declarations for SDK rejection"

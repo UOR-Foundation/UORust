@@ -739,3 +739,10 @@ Feature: engine
     When the pinned compiler optimizes their source-bound MIR graph
     Then native library calls preserve Rust return values and borrowed record updates
     But incompatible producer or interface bindings cannot supply semantics
+
+  @UE-106 @build
+  Scenario: Source aggregates follow imported compiler schemas
+    Given a source aggregate containing a compiler-library field type
+    When source and native declarations are merged into one behavior module
+    Then its field types precede their consumers and SDK verification succeeds
+    But unavailable types, cycles and conflicting declarations remain rejected

@@ -5284,7 +5284,9 @@ fn behavior(
             glossaries: vec![BOOL, NAT, TITLES],
             imports: vec![lift::PRELUDE.into()],
             title: "Lifted Rust behavior",
-            decls,
+            // Source carriers may name types imported by native lowering.
+            // Order the merged graph, not just its independently built layers.
+            decls: surface_dependency_order(decls),
         },
         listing,
     )
@@ -6399,9 +6401,8 @@ fn native_model_contexts(
     }).collect()
 }
 
-/// The surface lift orders within one source file. Its declarations also
-/// depend on constants and functions from other files; order those groups
-/// globally before emitting them, keeping each mutual group together.
+/// Order the merged declaration dependency graph across source files and
+/// native compiler imports, keeping mutual type and definition groups intact.
 fn surface_dependency_order(decls: Vec<Decl>) -> Vec<Decl> {
     let model = format!(
         "\\begin{{semanticmodule}}\n{}\n\\end{{semanticmodule}}",
@@ -6422,6 +6423,10 @@ fn surface_dependency_order(decls: Vec<Decl>) -> Vec<Decl> {
     for decl in decls {
         let key = match &decl {
             Decl::Definition {
+                mutual: Some(group),
+                ..
+            }
+            | Decl::Data {
                 mutual: Some(group),
                 ..
             } => format!("mutual:{group}"),
@@ -9036,6 +9041,55 @@ mod tests {
             crate::lex::render_decl(&aux["sharedKernel"]),
             crate::lex::render_decl(&different)
         );
+    }
+
+    #[test]
+    fn merged_dependencies_keep_mutual_types_together_ue_106() {
+        let data = |name: &str, field: &str| Decl::Data {
+            name: name.into(),
+            type_parameters: Vec::new(),
+            constructors: vec![("mk".into(), vec![field.into()])],
+            mutual: Some("Nodes".into()),
+        };
+        let consumer = Decl::Structure {
+            name: "Packet".into(),
+            type_parameters: Vec::new(),
+            fields: vec![("item".into(), "Left".into())],
+        };
+        let sorted = super::surface_dependency_order(vec![
+            data("Left", "(Option Right)"),
+            consumer,
+            data("Right", "(List Left)"),
+        ]);
+        let names: Vec<_> = sorted.iter().map(Decl::name).collect();
+        assert_eq!(names, ["Left", "Right", "Packet"]);
+    }
+
+    #[test]
+    fn invalid_declaration_graphs_survive_ordering_ue_106() {
+        let def = |name: &str, body: &str| Decl::Definition {
+            type_parameters: Vec::new(),
+            name: name.into(),
+            parameters: Vec::new(),
+            result: "Bool".into(),
+            body: crate::lex::Expr::Flat(body.into()),
+            axioms: Vec::new(),
+            recursive: None,
+            termination: None,
+            mutual: None,
+        };
+        for input in [
+            vec![def("left", "(right)"), def("right", "(left)")],
+            vec![def("missing", "(absent)")],
+            vec![def("collision", "true"), def("collision", "false")],
+        ] {
+            let before: Vec<_> = input.iter().map(crate::lex::render_decl).collect();
+            let after: Vec<_> = super::surface_dependency_order(input)
+                .iter()
+                .map(crate::lex::render_decl)
+                .collect();
+            assert_eq!(before, after, "invalid graph must reach SDK unchanged");
+        }
     }
 
     #[test]

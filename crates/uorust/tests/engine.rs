@@ -10817,3 +10817,63 @@ fn main(){for (a,b) in [(i32::MIN,i32::MAX),(-7,3),(0,0),(12345,-67890)] {for en
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn mixed_source_native_schema_dependencies_ue_106() {
+    let dir = scratch("mixed-schema-order", &[
+        ("Cargo.toml", "[package]\nname=\"mixed_schema_order\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn packet(n:u8)->(Result<(),std::fmt::Error>,u8) {
+    (Ok(()),n)
+}
+"#),
+    ]);
+    let dumps = dumped(&dir, "mixed-schema-order");
+    let mut opts = options("mixed_schema_order");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        residue_detail(&files, "mixed_schema_order::packet").is_none(),
+        "{:?}",
+        residue_detail(&files, "mixed_schema_order::packet")
+    );
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let body = text(&files, "src/Behavior.lex.tex");
+    let changed = body.replacen("name: CoreFmtError,", "name: AbsentLibrarySchema,", 1);
+    assert_ne!(body, changed);
+    std::fs::write(out.join("src/Behavior.lex.tex"), changed).unwrap();
+    let rejected = std::process::Command::new("lexlean")
+        .args([
+            "verify",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(!rejected.status.success());
+    assert!(String::from_utf8_lossy(&rejected.stdout).contains("LLT4001"));
+    std::fs::remove_dir_all(dir).unwrap();
+}
