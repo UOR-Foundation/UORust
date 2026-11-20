@@ -676,3 +676,10 @@ Feature: engine
     When the shared value-state outcome ABI is selected for that dependency closure
     Then every supported caller propagates the actual outcome and updated state
     But a partial function cannot be erased into a pure function-value interface
+
+  @UE-97 @build
+  Scenario: Source-owned constant namespaces retain their declaring type
+    Given closed inherent constants on two types with the same item name
+    When native MIR refers to their source-owned values and an aggregate typed Self
+    Then the existing source initializer kernels supply each owner's exact value
+    But generic, trait and unresolved owner interfaces supply no model

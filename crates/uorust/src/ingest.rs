@@ -1406,7 +1406,27 @@ fn items(
                         scope,
                     });
                 }
+                let constant_owner = inherent_constant_owner(imp, list);
                 for member in &imp.items {
+                    if let (Some(owner), syn::ImplItem::Const(c)) = (&constant_owner, member) {
+                        if !in_test
+                            && product
+                            && !is_cfg_test(&attrs(&imp.attrs))
+                            && !is_cfg_test(&attrs(&c.attrs))
+                            && c.generics.params.is_empty()
+                        {
+                            let value = &c.expr;
+                            let value: syn::Block = syn::parse_quote!({ #value });
+                            syntax.consts.push((
+                                format!("{owner}::{}", c.ident),
+                                crate::convert::ty(&c.ty),
+                                crate::convert::block(&value),
+                                scope,
+                                c.to_token_stream().to_string(),
+                                c.ident.span().start().line,
+                            ));
+                        }
+                    }
                     if let syn::ImplItem::Fn(f) = member {
                         let public = matches!(f.vis, syn::Visibility::Public(_));
                         let (mut fact, fn_syntax) = function(
@@ -1617,6 +1637,32 @@ fn items(
             file.capabilities.extend(scan.found);
         }
     }
+}
+
+/// An inherent namespace whose type is declared in this exact source scope.
+/// Aliases, open parameters and trait dispatch need separate binding evidence.
+fn inherent_constant_owner(imp: &syn::ItemImpl, items: &[syn::Item]) -> Option<String> {
+    if imp.trait_.is_some() || !imp.generics.params.is_empty() {
+        return None;
+    }
+    let syn::Type::Path(path) = &*imp.self_ty else {
+        return None;
+    };
+    if path.qself.is_some() || path.path.leading_colon.is_some() || path.path.segments.len() != 1 {
+        return None;
+    }
+    let segment = path.path.segments.first()?;
+    if !matches!(segment.arguments, syn::PathArguments::None) {
+        return None;
+    }
+    items
+        .iter()
+        .any(|item| match item {
+            syn::Item::Struct(s) => s.ident == segment.ident && s.generics.params.is_empty(),
+            syn::Item::Enum(e) => e.ident == segment.ident && e.generics.params.is_empty(),
+            _ => false,
+        })
+        .then(|| segment.ident.to_string())
 }
 
 /// The name an item declares a type under: a struct, enum, union, trait,
@@ -1905,6 +1951,26 @@ fn trait_fact(t: &syn::ItemTrait, scope: usize) -> crate::facts::TraitFact {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn associated_constants_keep_closed_source_owner_boundaries_ue_97() {
+        let (_, syntax) = read_text(
+            r#"
+pub struct Owner {pub value:u8}
+impl Owner {pub const VALUE:u8=7;}
+pub trait Trait {const VALUE:u8;}
+impl Trait for Owner {const VALUE:u8=8;}
+pub struct Generic<T>(T);
+impl<T> Generic<T> {pub const VALUE:u8=9;}
+type Alias=Owner;
+impl Alias {pub const ALIAS:u8=10;}
+mod nested {impl super::Owner {pub const OUTSIDE:u8=11;}}
+#[cfg(test)] impl Owner {pub const TEST_ONLY:u8=12;}
+"#,
+        );
+        let names: Vec<_> = syntax.consts.iter().map(|c| c.0.as_str()).collect();
+        assert_eq!(names, ["Owner::VALUE"]);
+    }
 
     // Types outside the lift.
 

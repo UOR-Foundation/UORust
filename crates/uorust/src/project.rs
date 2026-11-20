@@ -4701,6 +4701,28 @@ fn behavior(
     // not decide between (`names::stated` has dropped every variant it
     // compiles out): neither is the constant, so neither lifts, and a
     // reader of the name binds none.
+    let mut constant_scopes = BTreeMap::new();
+    for (pkg, package) in ws.packages.iter().enumerate() {
+        for (fi, file) in package.files.iter().enumerate() {
+            for (rust, _, _, scope, _, _) in &syntax.files[&file.rel].consts {
+                if let Some((owner, _)) = rust.rsplit_once("::") {
+                    constant_scopes
+                        .entry((pkg, fi, *scope, owner.to_string()))
+                        .or_insert_with(|| {
+                            crate::mir::lower::constant_scope(
+                                &file_scopes[&(pkg, fi, *scope)],
+                                owner,
+                            )
+                        });
+                }
+            }
+        }
+    }
+    let constant_types = |pkg, fi, scope, rust: &str| {
+        rust.rsplit_once("::")
+            .and_then(|(owner, _)| constant_scopes.get(&(pkg, fi, scope, owner.to_string())))
+            .unwrap_or(&file_scopes[&(pkg, fi, scope)])
+    };
     let mut declared: BTreeMap<FnSite, usize> = BTreeMap::new();
     for (pkg, package) in ws.packages.iter().enumerate() {
         for file in &package.files {
@@ -4728,16 +4750,19 @@ fn behavior(
                     continue;
                 }
                 let blind = written_through_paths(tokens, &shared[pkg]);
-                let aliases = blinded(&overlays[&(pkg, fi, *scope)], Some(&blind));
+                let base = constant_types(pkg, fi, *scope, rust);
+                let mut aliases = blinded(&overlays[&(pkg, fi, *scope)], Some(&blind));
+                let owner = rust.rsplit_once("::").map(|(owner, _)| owner);
+                if owner.is_some() {
+                    aliases.insert("Self".into(), base.resolve("Self"));
+                }
                 let mut blinded_types = None;
                 if !blind.is_empty() {
-                    let mut scope = file_scopes[&(pkg, fi, *scope)].clone();
+                    let mut scope = base.clone();
                     scope.aliases.extend(aliases.clone());
                     blinded_types = Some(scope);
                 }
-                let types = blinded_types
-                    .as_ref()
-                    .unwrap_or(&file_scopes[&(pkg, fi, *scope)]);
+                let types = blinded_types.as_ref().unwrap_or(base);
                 let Ok(result) = types.ty(ty) else {
                     continue;
                 };
@@ -4764,6 +4789,10 @@ fn behavior(
                 {
                     continue;
                 }
+                let mut imports = file.imports.clone();
+                if let Some(owner) = owner {
+                    imports.insert("Self".into(), owner.into());
+                }
                 candidates.push(Candidate {
                     generic: None,
                     rust: key,
@@ -4771,7 +4800,7 @@ fn behavior(
                     params: Vec::new(),
                     result,
                     block,
-                    imports: file.imports.clone(),
+                    imports,
                     // A constant's scope is read as one that may see any
                     // trait: no method of its value is read as inherent.
                     seen: lift::Seen {
@@ -5042,11 +5071,8 @@ fn behavior(
                     let sig = model_sigs[pkg].get(key).filter(|sig| {
                         sig.params.is_empty() && sig.generic.is_none() && sig.threads.is_empty()
                     })?;
-                    if !crate::mir::lower::constant_interface(
-                        &written.text,
-                        &sig.result,
-                        &file_scopes[&(pkg, fi, *scope)],
-                    ) {
+                    let types = constant_types(pkg, fi, *scope, rust);
+                    if !crate::mir::lower::constant_interface(&written.text, &sig.result, types) {
                         return None;
                     }
                     Some(crate::mir::lower::Constant {

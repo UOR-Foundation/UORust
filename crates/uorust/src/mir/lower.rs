@@ -102,9 +102,20 @@ pub(crate) struct Constant {
 
 /// Both translators must read this immutable value through the same ABI.
 pub(crate) fn constant_interface(written: &str, result: &Ty, types: &Types) -> bool {
-    super::source::type_model(written, types).as_ref() == Some(result)
+    super::source::representation(written, types, None).as_ref() == Some(result)
         && ty(written, types).as_ref() == Ok(result)
         && super::source::callable_environment(result, types)
+}
+
+/// The source and native readings of Self share the declaring owner's frame.
+pub(crate) fn constant_scope(types: &Types, owner: &str) -> Types {
+    let mut scope = types.clone();
+    scope.aliases.insert("Self".into(), types.resolve(owner));
+    scope.native_views.remove("Self");
+    if let Ok(native) = ty(owner, types) {
+        scope.native_views.insert("Self".into(), native);
+    }
+    scope
 }
 
 /// What every function of a crate is translated against.
@@ -10292,6 +10303,36 @@ impl Fun<'_, '_> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn source_constant_abi_keeps_aggregate_and_mutability_guards_ue_97() {
+        let mut types = Types::default();
+        types
+            .structs
+            .insert("Packet".into(), vec![("value".into(), Ty::Nat(Some(8)))]);
+        let result = Ty::Named("Packet".into());
+        assert!(constant_interface("Packet", &result, &types));
+        assert!(!constant_interface(
+            "Packet",
+            &Ty::Named("Other".into()),
+            &types
+        ));
+        assert!(!constant_interface("&mut Packet", &result, &types));
+        assert!(!constant_interface("char", &Ty::Scalar, &types));
+        assert!(!constant_interface("i8", &Ty::Signed(Some(8)), &types));
+        types
+            .native_views
+            .insert("Packet".into(), Ty::Pair(vec![Ty::Nat(Some(8))]));
+        let own = constant_scope(&types, "Packet");
+        assert_eq!(ty("Self", &own), ty("Packet", &types));
+        assert!(!constant_interface("Self", &result, &own));
+        types.native_views.remove("Packet");
+        types.cells.insert(
+            "Packet".into(),
+            BTreeMap::from([("value".into(), crate::lift::CellKind::Cell)]),
+        );
+        assert!(!constant_interface("Packet", &result, &types));
+    }
 
     #[test]
     fn partial_function_values_cannot_erase_the_outcome_abi_ue_96() {

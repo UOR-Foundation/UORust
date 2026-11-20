@@ -805,6 +805,25 @@ impl FileNames {
                     });
                     let outer = under(&imp.attrs);
                     for member in &imp.items {
+                        if let syn::ImplItem::Const(c) = member {
+                            if let syn::Type::Path(owner) = &*imp.self_ty {
+                                if owner.qself.is_none() && owner.path.segments.len() == 1 {
+                                    let name =
+                                        format!("{}::{}", owner.path.segments[0].ident, c.ident);
+                                    self.consts.insert(
+                                        (c.ident.span().start().line, name),
+                                        Site {
+                                            module: module.to_string(),
+                                            cfg: outer
+                                                .iter()
+                                                .cloned()
+                                                .chain(Cfg::of(&c.attrs))
+                                                .collect(),
+                                        },
+                                    );
+                                }
+                            }
+                        }
                         if let syn::ImplItem::Fn(f) = member {
                             let cfg = outer.iter().cloned().chain(Cfg::of(&f.attrs)).collect();
                             self.function(

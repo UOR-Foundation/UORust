@@ -633,3 +633,9 @@ id = "UE-96"
 level = "build"
 suite = "engine"
 statement = "Computed native return/panic interfaces propagate through the existing dependency graph and direct callee ABI with tracked mutable state on both branches; unsupported generic, heap, returned-borrow and function-value interfaces remain refused"
+
+[[id]]
+id = "UE-97"
+level = "build"
+suite = "engine"
+statement = "Closed inherent constants of source-owned types import through the existing source initializer and native constant ABI, retaining owner/module identities and Self bindings; generic, trait, aliased and unresolved owners supply no constant model"

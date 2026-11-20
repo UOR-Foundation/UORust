@@ -1581,6 +1581,26 @@ mutable interfaces and malformed compiler configuration. Ninety-seven MIR
 tests, 16 CLI tests, conformance, strict Clippy and model/template/SDK/self-model
 checks passed. Complete release acceptance remains `just vv`.
 
+## UE-97: source-owned associated constants share the established initializer ABI
+
+The initial native fixture refused an associated constant (0.63 seconds).
+Closed inherent items now retain their source owner and module namespace and
+reuse the existing source initializer. Interned owner frames bind both source
+and native readings of Self; an immutable aggregate is imported only when both
+interfaces agree. Generic, trait, aliased and unresolved owners remain outside
+this binding. Existing schema, mutable-state and scalar-carrier guards remain.
+
+Three actual Rust/SDK comparisons passed for scalar and aggregate constants,
+including configuration selection and two owners sharing an item name. An
+incorrect result was rejected with LLV7002 (99.47 seconds). Two focused controls
+cover owner boundaries and ABI mismatches, including a native Self view that
+differs from its source carrier. The related source-constant regression passed
+12 comparisons and its incorrect-result control (46.02 seconds). After a
+deliberate source edit it now first requires the compiler-capture binding
+refusal, then recaptures before checking affected and unaffected decisions.
+Conformance, strict Clippy and model/template/SDK/self-model checks passed.
+Complete release acceptance remains the unchanged `just vv` boundary.
+
 ## UE-95: computed assertion outcomes retain tracked value-state
 
 The initial native fixture was refused because valid inputs can overflow. The

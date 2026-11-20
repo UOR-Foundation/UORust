@@ -8031,6 +8031,11 @@ println!("flag|{n}|{}",flag(n));
     let changed = original.replacen("VALUE:u32=7", "VALUE:u32=8", 1);
     assert_ne!(original, changed);
     std::fs::write(&source_path, changed).unwrap();
+    assert!(
+        matches!(uorust::project_workspace(&dir,&opts),Err(UorustError::Tool(message)) if message.contains("compiler definitions: source, configuration or pinned compiler binding mismatch")),
+        "changed source must reject the previous compiler capture"
+    );
+    opts.mir.as_mut().unwrap().dumps = dumped(&dir, "source-constant-dependencies-changed");
     let stale = uorust::project_workspace(&dir, &opts).unwrap();
     assert!(
         residue_detail(&stale, "constant_models::left_value").is_some(),
@@ -9541,6 +9546,122 @@ fn main() {for (initial,delta) in [(0u8,0u8),(0,255),(254,0),(254,1),(255,0),(25
         !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
         "{}",
         String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn source_owned_constant_namespaces_preserve_values_ue_97() {
+    let dir=scratch("source-owned-constants", &[
+      ("Cargo.toml", "[package]\nname=\"owned_constants\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+      ("src/lib.rs",r#"
+pub struct Token { pub value:u8 }
+impl Token {
+ pub const VALUE:u8=7;
+ pub const INSTANCE:Self=Self {value:7};
+}
+pub struct Other;
+impl Other {
+ #[cfg(any())]
+ pub const VALUE:u8=23;
+ #[cfg(all())]
+ pub const VALUE:u8=19;
+}
+pub fn read(x:u8)->u8 {
+ let mut n=1u8;while n>0 {n-=1;}
+ if x==0 {Token::INSTANCE.value} else {Other::VALUE}
+}
+"#),
+      ("src/bin/vectors.rs", r#"fn main(){for x in [0u8,1,255] {println!("{x}|{}",owned_constants::read(x));}}"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "source-owned-constants");
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("owned_constants"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("owned_constants");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let row = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("owned_constants::read"));
+    assert!(
+        row.is_some(),
+        "{:?}",
+        residue_detail(&files, "owned_constants::read")
+    );
+    let name = row.unwrap()["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let decisions = verdicts(&cache);
+    let policy = decisions
+        .rows
+        .values()
+        .find(|v| v.function == "owned_constants::read")
+        .and_then(|v| v.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let mut vectors = String::new();
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let (arg, value) = line.split_once('|').unwrap();
+        vectors.push_str(&format!("theorem{{name:ownedConstantVector{i},parameters:[],statement:(({name} {arg}) = {value}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(" = 19)", " = 18)", 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
