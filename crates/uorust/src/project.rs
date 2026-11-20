@@ -5911,6 +5911,7 @@ fn mir_lift(
         active: &[],
         core: None,
         library: None,
+        library_module: String::new(),
         layouts: &layouts,
         backward: false,
     };

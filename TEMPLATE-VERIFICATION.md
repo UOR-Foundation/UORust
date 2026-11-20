@@ -1977,3 +1977,27 @@ catalogue regeneration after the refusal (two total projections, versus three
 in the frozen baseline). The unrelated false source assertion remains refused.
 Repository conformance, strict Clippy and model/template/SDK/self-model checks
 passed. Full release acceptance remains the unchanged `just vv` boundary.
+
+## UE-115: retained compiler-owned library dependency closure
+
+The native regression initially stopped at the standard vector default call,
+which the preferred core graph does not own. The importer now consults the
+retained alloc graph only after that preferred binding is absent. The graph is
+reproduced from all 2,957 retained MIR bodies through the existing dump reader,
+declaration resolver and native lowering. The original Factory record, complete
+output digest and complete Rust source-tree digest are checked before graph
+construction; source archive, toolchain, target and data layout remain bound.
+The compressed graph is generated data, not an operation semantics table.
+
+Imported bodies retain their library and declaring module. Only source-declared
+inherent owners present in that capture qualify an unprefixed call for the
+existing source model adapter. Consumer scopes and already preferred core
+models retain their existing behavior. Captured instances have an independent
+immutable query cache and library-qualified generated identities. Modified
+capture records, graph bodies, target/pass metadata and foreign owners are
+rejected. A native Rust observation through the imported dependency agrees with
+the SDK, and a changed expected value is rejected with LLV7002. Link, lowering,
+source-interface, repository conformance, strict Clippy and model/template/SDK/
+self-model checks passed. Complete-registry proposal and actual SDK/Factory
+acceptance remain separate from these controls. Full release acceptance remains
+`just vv`.

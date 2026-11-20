@@ -135,6 +135,7 @@ model does not sanction.
 | `UE-112` | `build` | The immutable content-validated compiler graph reuses complete linkage queries including callee argument types and destination, preserving both exact body instances and typed absence without changing caller scopes, emitted models or SDK proof admission |
 | `UE-113` | `build` | Resolved workspace type identities survive later module-scoped registry rewrites, including qualified parent reexports inside modules with external globs, while genuine foreign unresolved and shadowed type identities remain distinct |
 | `UE-114` | `build` | Dependency-ordered bounded proof batches reuse one immutable model catalogue while applying observed axiom policies and exact verdict contexts, regenerating after semantic refusals before changed ABIs are retried; every accepted decision still requires the actual SDK verifier |
+| `UE-115` | `build` | Native dependency closure imports retained compiler-owned library captures beyond core through the existing resolver and ABI lowering, bound to capture record output digest source toolchain and target, preserving existing preferred models and refusing changed or incompatible inputs |
 
 ## factory
 

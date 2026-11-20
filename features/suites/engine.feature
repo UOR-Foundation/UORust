@@ -803,3 +803,10 @@ Feature: engine
     Then the batches share one whole-workspace catalogue projection
     And each selected dependency closure passes the actual SDK verifier
     But semantic refusals invalidate the catalogue before changed models are retried
+
+  @UE-115 @build
+  Scenario: Retained library captures supply native dependencies beyond core
+    Given a compiler-owned alloc call absent from the preferred core graph
+    When the retained Factory capture source and target bindings are exact
+    Then its body is imported through the same native ABI and proof kernels
+    But changed captures foreign owners and incompatible interfaces remain refused

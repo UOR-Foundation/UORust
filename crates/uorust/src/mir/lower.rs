@@ -263,6 +263,7 @@ pub(crate) struct Cx<'a> {
     pub(crate) core: Option<&'a super::link::CoreLink>,
     /// Imported library bodies keep the consumer ABI and their own name scope.
     pub(crate) library: Option<&'a super::link::CoreLink>,
+    pub(crate) library_module: String,
     /// The data layout of each target the translation answers for (see
     /// [`super::layout`]); none where the dumps record none.
     pub(crate) layouts: &'a [super::layout::DataLayout],
@@ -326,6 +327,7 @@ impl<'a> Cx<'a> {
             active,
             core: self.core,
             library: self.library,
+            library_module: self.library_module.clone(),
             layouts: self.layouts,
             backward: false,
         }
@@ -7273,8 +7275,12 @@ impl Fun<'_, '_> {
         // exact immutable carrier bindings have been established. No operation
         // name acquires a second, handwritten model here.
         let import_name = self.fresh(Some(&format!("{}SourceModel", self.name)), usize::MAX);
+        let owned_callee = self
+            .cx
+            .library
+            .and_then(|link| link.source_callable(callee, &self.cx.library_module));
         if let Some(imported) = super::source::apply(
-            callee,
+            owned_callee.as_deref().unwrap_or(callee),
             &model_args,
             &model_texts,
             dt,
@@ -7635,13 +7641,14 @@ impl Fun<'_, '_> {
                     .map(Called::value);
             }
             let imported = if self.cx.core.is_none() {
-                link.imported_instance(callee, texts, dest)
+                link.imported_library_instance(callee, texts, dest)
             } else {
                 link.instance(callee, texts, dest)
+                    .map(|instance| (link, instance))
             };
-            if let Some(inst) = imported {
+            if let Some((owner, inst)) = imported {
                 if self.cx.core.is_none() {
-                    return self.compiler_shared(link, inst, callee, args, texts, dest, dt, st);
+                    return self.compiler_shared(owner, inst, callee, args, texts, dest, dt, st);
                 }
                 let krate = self.cx.krate.clone();
                 let memory = st.memory.clone();
@@ -7723,9 +7730,11 @@ impl Fun<'_, '_> {
                             .intrinsic(link, &path, &normalized, &args, dt, st)
                             .map(Called::value);
                     }
-                    if let Some(instance) = link.imported_instance(callee, texts, dest) {
+                    if let Some((owner, instance)) =
+                        link.imported_library_instance(callee, texts, dest)
+                    {
                         return self
-                            .compiler_shared(link, instance, callee, args, texts, dest, dt, st);
+                            .compiler_shared(owner, instance, callee, args, texts, dest, dt, st);
                     }
                 }
                 Err(match unimplemented {
@@ -8534,6 +8543,10 @@ impl Fun<'_, '_> {
             "compiler-library-instance/1\0{}\0{}\0{:?}\0{:?}\0{:?}\0{}",
             instance.path, instance.text, instance.bound, input_types, dt, self.outcomes
         );
+        let identity = match link.library_origin() {
+            Some(origin) => format!("{identity}\0library:{origin}"),
+            None => identity,
+        };
         let name = format!(
             "compilerLibrary{}",
             crate::project::sha(identity.as_bytes())
@@ -8602,7 +8615,8 @@ impl Fun<'_, '_> {
             let mut cx = self.cx.within(&active);
             cx.types = &scope;
             cx.library = Some(link);
-            cx.krate = "core".into();
+            cx.library_module = super::core::compiler_body_module(&link.decls, &instance.path);
+            cx.krate = link.library_origin().unwrap_or("core").into();
             cx.compiler_scope.clear();
             cx.callees = &empty_callees;
             cx.source_sigs = &empty_signatures;
@@ -10983,6 +10997,7 @@ mod tests {
             active: &[],
             core: None,
             library: Some(&link),
+            library_module: String::new(),
             layouts: &[],
             backward: false,
         };
@@ -11145,6 +11160,7 @@ mod tests {
             active: &[],
             core: None,
             library: None,
+            library_module: String::new(),
             layouts: &layouts,
             backward: false,
         };
@@ -11207,6 +11223,7 @@ mod tests {
             active: &[],
             core: Some(&link),
             library: None,
+            library_module: String::new(),
             layouts: &[],
             backward: false,
         };
@@ -11281,6 +11298,7 @@ fn expose() -> impl Fn(u8) -> u8 {
             active: &[],
             core: None,
             library: None,
+            library_module: String::new(),
             layouts: &[],
             backward: false,
         };
@@ -11339,6 +11357,7 @@ fn guarded(_1: u8) -> u8 {
             active: &[],
             core: None,
             library: None,
+            library_module: String::new(),
             layouts: &[],
             backward: false,
         };
@@ -11389,6 +11408,7 @@ fn guarded(_1: u8) -> u8 {
             active: &[],
             core: None,
             library: None,
+            library_module: String::new(),
             layouts: &[],
             backward: false,
         };
@@ -11459,6 +11479,7 @@ fn guarded(_1: u8) -> u8 {
             active: &[],
             core: None,
             library: None,
+            library_module: String::new(),
             layouts: &[],
             backward: false,
         };

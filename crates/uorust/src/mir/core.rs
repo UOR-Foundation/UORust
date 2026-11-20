@@ -506,6 +506,7 @@ pub(crate) fn shard(
             active: &active,
             core: Some(link),
             library: None,
+            library_module: String::new(),
             layouts,
             backward: false,
         };
@@ -3090,14 +3091,7 @@ pub(crate) fn import_compiler_schemas(
 
 /// A local compiler scope borrows its caller until an authoritative type binding
 /// is needed. Substituted caller types retain their original namespace.
-pub(crate) fn compiler_body_scope<'a>(
-    types: &'a Types,
-    requested: &[String],
-    reserved: &BTreeSet<String>,
-    source: &CoreDecls,
-    path: &str,
-    bound: &[(String, String)],
-) -> std::borrow::Cow<'a, Types> {
+pub(crate) fn compiler_body_module(source: &CoreDecls, path: &str) -> String {
     let mut parts = parse::split_path(path);
     parts.pop();
     if parts.last().is_some_and(|part| part.starts_with("<impl")) {
@@ -3110,7 +3104,18 @@ pub(crate) fn compiler_body_scope<'a>(
             parts.pop();
         }
     }
-    let module = parts.join("::");
+    parts.join("::")
+}
+
+pub(crate) fn compiler_body_scope<'a>(
+    types: &'a Types,
+    requested: &[String],
+    reserved: &BTreeSet<String>,
+    source: &CoreDecls,
+    path: &str,
+    bound: &[(String, String)],
+) -> std::borrow::Cow<'a, Types> {
+    let module = compiler_body_module(source, path);
     let mut protected = BTreeSet::new();
     for (_, value) in bound {
         let mut components_of_value = Vec::new();

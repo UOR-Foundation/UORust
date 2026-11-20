@@ -11547,3 +11547,107 @@ pub fn second(x:u8)->u8 {let mut n=1u8;while n>0 {n-=1;} x}
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn retained_library_capture_supplies_native_dependencies_ue_115() {
+    let dir=scratch("captured-library",&[
+        ("Cargo.toml","[package]\nname=\"captured_library\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs","pub fn empty()->Vec<u8>{let mut n=1u8;while n>0 {n-=1;} Vec::default()}\npub fn length()->usize {let mut n=1u8;while n>0 {n-=1;} empty().len()}\n"),
+        ("src/bin/vectors.rs","fn main(){println!(\"{}\",captured_library::length());}"),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let expected = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(expected.trim(), "0");
+    let dumps = dumped(&dir, "captured-library");
+    let mut opts = options("captured_library");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        frontier_rows(&files, "lifted")
+            .iter()
+            .any(|r| r["function"].as_str() == Some("captured_library::empty")),
+        "{:?}",
+        residue_detail(&files, "captured_library::empty")
+    );
+    let cache = dir.join("verdicts.toml");
+    let proved = uorust::mir::prove_bounded(
+        &dir,
+        &options("captured_library"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proved.refused, 0, "{proved:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let model = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("captured_library::length"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let policy = decisions
+        .rows
+        .values()
+        .find_map(|r| r.axioms.get(model))
+        .cloned()
+        .unwrap_or_default();
+    let observation=format!("theorem{{name:capturedLibraryObservation,parameters:[],statement:(({model}) = {}),proof:decide{{}},axioms:[{}]}}\n",expected.trim(),policy.join(", "));
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{observation}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replace(" = 0)", " = 1)");
+    assert_ne!(body, wrong);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

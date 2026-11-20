@@ -73,12 +73,77 @@ pub(crate) struct CoreLink {
     /// declares the constant items no dump holds.
     #[serde(skip)]
     root: Option<std::path::PathBuf>,
+    /// Runtime-only ownership of an independently bound library capture.
+    #[serde(skip)]
+    origin: Option<String>,
     /// Every type a local of any of core's bodies has, as its dump prints
     /// it: the instances a call into another module's body needs in scope.
     pub(crate) locals: std::collections::BTreeSet<String>,
 }
 
 impl CoreLink {
+    pub(crate) fn library_origin(&self) -> Option<&str> {
+        self.origin.as_deref()
+    }
+
+    /// A library body prints its own owner without the crate. Transport only
+    /// a declaration owned by this capture into the existing source adapter.
+    pub(crate) fn source_callable(&self, callee: &str, module: &str) -> Option<String> {
+        let origin = self.library_origin()?;
+        let parts = split_path(callee);
+        if parts.len() < 2
+            || parts[0].starts_with('<')
+            || matches!(parts[0], "std" | "core" | "alloc")
+        {
+            return None;
+        }
+        let owner = self
+            .decls
+            .compiler_type_in(module, &parts[..parts.len() - 1].join("::"));
+        let owner = owner.strip_prefix("crate::").unwrap_or(&owner);
+        let path = owner.split('<').next()?.trim_end_matches("::");
+        if !self.decls.structs.iter().any(|schema| schema.path == path) {
+            return None;
+        }
+        if !self.methods.contains(&format!("{path}::{}", parts.last()?)) {
+            return None;
+        }
+        Some(format!("{origin}::{owner}::{}", parts.last()?))
+    }
+
+    /// Preserve the preferred graph. Only an absent binding consults the
+    /// other captured libraries, and only at a standard-library path.
+    pub(crate) fn imported_library_instance(
+        &self,
+        callee: &str,
+        texts: &[Option<String>],
+        dest: &str,
+    ) -> Option<(&CoreLink, Instance)> {
+        if let Some(instance) = self.imported_instance(callee, texts, dest) {
+            return Some((self, instance));
+        }
+        if ![
+            "std::", "core::", "alloc::", "<std::", "<core::", "<alloc::",
+        ]
+        .iter()
+        .any(|prefix| callee.starts_with(prefix))
+        {
+            return None;
+        }
+        let preferred = compiler_library();
+        for source in [preferred, compiler_alloc_library()] {
+            if source.target != preferred.target || source.data_layout != preferred.data_layout {
+                continue;
+            }
+            if !std::ptr::eq(self, &source.graph) {
+                if let Some(instance) = source.graph.imported_instance(callee, texts, dest) {
+                    return Some((&source.graph, instance));
+                }
+            }
+        }
+        None
+    }
+
     /// Library-qualified spans use `root`; crate-relative spans use only
     /// `own_root`, never another library's same-named source file.
     pub(crate) fn new<'t>(
@@ -603,6 +668,7 @@ impl CoreLink {
             traits,
             index,
             root: Some(root.to_path_buf()),
+            origin: None,
             locals,
         }
     }
@@ -792,9 +858,10 @@ impl CoreLink {
     ) -> Option<Instance> {
         // Only the immutable, content-validated graph owns this memo. Other
         // links may have live source roots or be extended by their caller.
-        if let Some(library) = COMPILER_LIBRARY
-            .get()
-            .filter(|library| std::ptr::eq(self, &library.graph))
+        if let Some(library) = [COMPILER_LIBRARY.get(), COMPILER_ALLOC_LIBRARY.get()]
+            .into_iter()
+            .flatten()
+            .find(|library| std::ptr::eq(self, &library.graph))
         {
             let key = (callee.to_string(), texts.to_vec(), dest.to_string());
             return library
@@ -1420,11 +1487,14 @@ struct CompilerLibrary {
     pass: String,
     graph_sha256: String,
     graph: CoreLink,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    capture: Option<String>,
     #[serde(skip)]
     queries: InstanceQueries,
 }
 
 static COMPILER_LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
+static COMPILER_ALLOC_LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
 
 const COMPILER_PASS: &str = "runtime-optimized.after";
 const COMPILER_FLAGS: &str = "--edition=2024 --crate-type=lib --emit=mir -Coverflow-checks=on -Cdebug-assertions=off -Zmir-include-spans=on -Zmir-opt-level=4 -Zalways-encode-mir";
@@ -1443,7 +1513,48 @@ fn compiler_library() -> &'static CompilerLibrary {
     })
 }
 
+fn compiler_alloc_library() -> &'static CompilerLibrary {
+    COMPILER_ALLOC_LIBRARY.get_or_init(|| {
+        let decoder = flate2::read::GzDecoder::new(
+            &include_bytes!("../../mir/std-alloc-library.json.gz")[..],
+        );
+        let mut source: CompilerLibrary =
+            serde_json::from_reader(decoder).expect("captured alloc graph");
+        assert!(
+            source.capture.is_some() && source.valid(),
+            "captured library binding or payload differs"
+        );
+        assert_eq!(source.compiler_commit, compiler_library().compiler_commit);
+        source.graph.origin = Some("alloc".into());
+        source
+    })
+}
+
 impl CompilerLibrary {
+    fn provenance_valid(&self) -> bool {
+        let Some(record) = &self.capture else {
+            return self.flags == COMPILER_FLAGS && self.pass == COMPILER_PASS;
+        };
+        if crate::project::sha(record.as_bytes())
+            != "ef74837fc93f97b02b3f53cf0fa3f30655d95557ba6ead6c1f8e3f04d6c933f7"
+        {
+            return false;
+        }
+        let Ok(record) = toml::from_str::<toml::Table>(record) else {
+            return false;
+        };
+        self.flags == "uorust/library-mir/2"
+            && self.pass == "ElaborateBoxDerefs.before"
+            && record.get("crate").and_then(toml::Value::as_str) == Some("alloc")
+            && record.get("toolchain").and_then(toml::Value::as_str)
+                == Some(self.toolchain.as_str())
+            && record.get("source_sha256").and_then(toml::Value::as_str)
+                == Some(self.source_sha256.as_str())
+            && record.get("triple").and_then(toml::Value::as_str) == Some(self.target.as_str())
+            && record.get("data_layout").and_then(toml::Value::as_str)
+                == Some(self.data_layout.as_str())
+    }
+
     fn valid(&self) -> bool {
         let registry: toml::Value =
             toml::from_str(include_str!("../../mir/std.toml")).expect("pinned source registry");
@@ -1461,8 +1572,7 @@ impl CompilerLibrary {
                 .compiler_version
                 .lines()
                 .any(|line| line == format!("release: {}", self.toolchain))
-            && self.flags == COMPILER_FLAGS
-            && self.pass == COMPILER_PASS
+            && self.provenance_valid()
             && !self.target.is_empty()
             && !self.data_layout.is_empty()
             && self.graph.root.is_none()
@@ -1622,6 +1732,7 @@ assert actual==expected, 'unregistered or missing source'
                 pass: COMPILER_PASS.into(),
                 graph_sha256: crate::project::sha(&serde_json::to_vec(&graph).unwrap()),
                 graph,
+                capture: None,
                 queries: InstanceQueries::default(),
             };
             let bytes = serde_json::to_vec(&source).unwrap();
@@ -1837,5 +1948,171 @@ assert actual==expected, 'unregistered or missing source'
         assert!(!source.valid());
         assert!(compiler_library_for(&[]).is_none());
         assert!(compiler_library().graph.root.is_none());
+    }
+}
+
+#[cfg(test)]
+mod captured_library_tests {
+    use super::*;
+
+    #[test]
+    fn captured_call_owners_transport_source_bindings_ue_115() {
+        let graph = &compiler_alloc_library().graph;
+        let call = graph.source_callable("Vec::<u8>::new", "vec");
+        eprintln!("captured source owner: {call:?}");
+        let call = call.expect("resolved library owner");
+        let types = crate::lift::Types::default();
+        let output = crate::lift::Ty::List(Box::new(crate::lift::Ty::Nat(Some(8))));
+        assert!(
+            super::super::source::apply(
+                &call,
+                &[],
+                &[],
+                &output,
+                &types,
+                &[(64, vec![])],
+                &std::collections::BTreeSet::new(),
+                "capturedEmpty"
+            )
+            .is_some(),
+            "{call}"
+        );
+        assert!(graph
+            .source_callable("foreign::Vec::<u8>::new", "vec")
+            .is_none());
+        assert!(graph
+            .source_callable("core::option::Option::<u8>::unwrap", "vec")
+            .is_none());
+    }
+
+    #[test]
+    fn retained_library_bindings_reject_changes_and_foreign_owners_ue_115() {
+        let load = || -> CompilerLibrary {
+            serde_json::from_reader(flate2::read::GzDecoder::new(
+                &include_bytes!("../../mir/std-alloc-library.json.gz")[..],
+            ))
+            .unwrap()
+        };
+        let source = load();
+        assert!(source.valid());
+        let callee = "<std::vec::Vec as std::default::Default>::default";
+        let (owner, instance) = compiler_library()
+            .graph
+            .imported_library_instance(callee, &[], "std::vec::Vec<u8>")
+            .expect("captured alloc dependency");
+        assert_eq!(owner.library_origin(), Some("alloc"));
+        assert!(!instance.text.is_empty());
+        assert!(compiler_library()
+            .graph
+            .imported_library_instance("foreign::vec::Vec::default", &[], "std::vec::Vec<u8>")
+            .is_none());
+        let mut changed = load();
+        changed.capture.as_mut().unwrap().push_str("\n# changed");
+        assert!(!changed.valid());
+        let mut changed = load();
+        changed.graph.bodies.values_mut().next().unwrap()[0].push_str("\n// changed");
+        assert!(!changed.valid());
+        let mut changed = load();
+        changed.target = "other-target".into();
+        assert!(!changed.valid());
+        let mut changed = load();
+        changed.pass = COMPILER_PASS.into();
+        assert!(!changed.valid());
+        let target =
+            super::super::layout::DataLayout::parse("other-target", &source.data_layout).unwrap();
+        assert!(!source.matches(&[target]));
+    }
+
+    #[test]
+    fn captured_library_graph_reproduces_factory_input_ue_115() {
+        let Some(dumps) = std::env::var_os("UORUST_CAPTURED_LIBRARY_MIR") else {
+            assert!(compiler_alloc_library().valid());
+            return;
+        };
+        let root = std::env::var_os("UORUST_CAPTURED_LIBRARY_SOURCE").expect("pinned source root");
+        let root = std::path::Path::new(&root);
+        let dumps = std::path::Path::new(&dumps);
+        let capture = std::fs::read_to_string(dumps.join(crate::library::RECORD)).unwrap();
+        assert_eq!(
+            crate::project::sha(capture.as_bytes()),
+            "ef74837fc93f97b02b3f53cf0fa3f30655d95557ba6ead6c1f8e3f04d6c933f7"
+        );
+        let record: toml::Table = toml::from_str(&capture).unwrap();
+        assert_eq!(
+            crate::library::digest(dumps).unwrap(),
+            record["digest"].as_str().unwrap()
+        );
+        assert_eq!(
+            crate::library::digest(&root.join("library")).unwrap(),
+            record["source_tree"].as_str().unwrap()
+        );
+        let base = compiler_library();
+        assert_eq!(
+            record["source_sha256"].as_str(),
+            Some(base.source_sha256.as_str())
+        );
+        assert_eq!(record["toolchain"].as_str(), Some(base.toolchain.as_str()));
+        let mut pending = vec![dumps.to_path_buf()];
+        let mut texts = Vec::new();
+        while let Some(dir) = pending.pop() {
+            for path in crate::embed::dir_paths(&dir).unwrap() {
+                if path.is_dir() {
+                    pending.push(path);
+                } else if path.extension().is_some_and(|s| s == "mir") {
+                    texts.push((
+                        path.file_name().unwrap().to_str().unwrap().to_string(),
+                        crate::embed::read_plain_dump(&path).unwrap(),
+                    ));
+                }
+            }
+        }
+        assert_eq!(texts.len() as i64, record["files"].as_integer().unwrap());
+        let mut graph = CoreLink::new(
+            super::super::core::library_decls(root, &["core", "alloc"]),
+            root,
+            &root.join("library/alloc/src"),
+            texts.iter().map(|(n, t)| (n.as_str(), t)),
+        );
+        graph.root = None;
+        let source = CompilerLibrary {
+            spec: base.spec.clone(),
+            toolchain: base.toolchain.clone(),
+            compiler_commit: base.compiler_commit.clone(),
+            compiler_version: base.compiler_version.clone(),
+            source_sha256: base.source_sha256.clone(),
+            target: record["triple"].as_str().unwrap().into(),
+            data_layout: record["data_layout"].as_str().unwrap().into(),
+            flags: "uorust/library-mir/2".into(),
+            pass: "ElaborateBoxDerefs.before".into(),
+            graph_sha256: crate::project::sha(&serde_json::to_vec(&graph).unwrap()),
+            graph,
+            capture: Some(capture),
+            queries: InstanceQueries::default(),
+        };
+        assert!(source.valid());
+        let bytes = serde_json::to_vec(&source).unwrap();
+        let destination =
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("mir/std-alloc-library.json.gz");
+        if std::env::var_os("UORUST_WRITE_SPEC").is_some() {
+            use std::io::Write;
+            let mut encoder = flate2::GzBuilder::new()
+                .mtime(0)
+                .write(Vec::new(), flate2::Compression::best());
+            encoder.write_all(&bytes).unwrap();
+            std::fs::write(&destination, encoder.finish().unwrap()).unwrap();
+        }
+        let actual: serde_json::Value = serde_json::from_reader(flate2::read::GzDecoder::new(
+            std::fs::File::open(destination).unwrap(),
+        ))
+        .unwrap();
+        assert_eq!(
+            actual,
+            serde_json::from_slice::<serde_json::Value>(&bytes).unwrap()
+        );
+        println!(
+            "{} retained library bodies, {} normalized graph bytes",
+            texts.len(),
+            bytes.len()
+        );
     }
 }
