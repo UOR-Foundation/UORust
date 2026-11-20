@@ -683,3 +683,10 @@ Feature: engine
     When native MIR refers to their source-owned values and an aggregate typed Self
     Then the existing source initializer kernels supply each owner's exact value
     But generic, trait and unresolved owner interfaces supply no model
+
+  @UE-98 @build
+  Scenario: Native dependency interfaces retain memory on return and panic
+    Given native calls using the existing allocation and pointer model
+    When their dependency closure requires memory and computed assertion outcomes
+    Then each caller passes and returns that exact state and frame-local cells are released on either exit
+    But unrelated allocations and unavailable cleanup or borrow interfaces cannot be discarded

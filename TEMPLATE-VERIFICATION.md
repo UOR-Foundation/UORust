@@ -1636,3 +1636,21 @@ normal signature identities remain byte-compatible with recorded receipts and
 the outcome identity remains distinct. Ninety-eight MIR checks and the added
 interface control, conformance, strict Clippy and model/template/SDK/self-model
 checks passed. Complete release acceptance remains `just vv`.
+
+## UE-98: native dependency interfaces retain modeled memory
+
+The initial native caller fixture was not admitted. Native signatures now bind
+the actual lowered memory interface through existing dependency edges, including
+qualified bindings. Computed assertion exits retain mutable state and the same
+modeled memory, releasing frame-local allocations through the existing kernel.
+Loops carry their memory and captured values in the established state packet so
+the SDK retains the exact parameters in termination evidence. Unavailable
+providers, cleanup and erased function-value effects remain refused.
+
+Eight actual Rust executions passed 48 SDK assertions covering outcomes, panic
+tags, mutable values, retained cells and frame release. An incorrect state
+assertion was rejected with LLV7002. Exact-input native verdicts were reused on
+the resumed acceptance stage; that stage passed in 43.37 seconds. Twenty focused
+lowering controls, conformance, strict Clippy and model/template/SDK/self-model
+checks passed. No semantic-registry operation was added. Complete release
+acceptance remains the unchanged `just vv` boundary.

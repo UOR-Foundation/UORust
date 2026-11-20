@@ -639,3 +639,9 @@ id = "UE-97"
 level = "build"
 suite = "engine"
 statement = "Closed inherent constants of source-owned types import through the existing source initializer and native constant ABI, retaining owner/module identities and Self bindings; generic, trait, aliased and unresolved owners supply no constant model"
+
+[[id]]
+id = "UE-98"
+level = "build"
+suite = "engine"
+statement = "Native callable interfaces propagate the existing modeled memory state through dependency closures, including computed panic outcomes, changing loop-state packets and frame-local release; unrelated allocations and unsupported cleanup, generic and borrowed-result interfaces remain protected"

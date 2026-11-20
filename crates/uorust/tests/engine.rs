@@ -9665,3 +9665,181 @@ pub fn read(x:u8)->u8 {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn native_memory_outcomes_preserve_frames_ue_98() {
+    let dir = scratch("native-memory-outcomes", &[
+        ("Cargo.toml", "[package]\nname=\"heap_outcomes\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn leaf(x:u8,delta:u8)->u8 {
+ let mut cell=x;
+ let p=&raw mut cell;
+ unsafe {*p=(*p).wrapping_add(1); let next=*p+delta; *p=next; next}
+}
+pub fn relay(x:&mut u8,delta:u8)->u8 {
+ let mut n=1u8;while n>0 {n-=1;}
+ *x=x.wrapping_add(1);
+ leaf(*x,delta)
+}
+pub fn root(x:&mut u8,delta:u8)->u8 {
+ let mut n=1u8;while n>0 {n-=1;}
+ let result=relay(x,delta);
+ *x=x.wrapping_add(1);
+ result
+}
+"#),
+        ("src/bin/vectors.rs", r#"
+use heap_outcomes::root;
+fn main() {for (initial,delta) in [(0u8,0u8),(0,255),(254,0),(254,1),(255,0),(255,255),(200,54),(200,55)] {
+ let mut state=initial;
+ let result=std::panic::catch_unwind(std::panic::AssertUnwindSafe(||root(&mut state,delta)));
+ match result {Ok(value)=>println!("{initial}|{delta}|ok|{value}|{state}"),Err(_)=>println!("{initial}|{delta}|panic|0|{state}")}
+}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 8);
+    let dumps = dumped(&dir, "native-memory-outcomes");
+    let cache =
+        PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("native-memory-outcome-verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("heap_outcomes"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        16,
+    )
+    .unwrap();
+    let mut opts = options("heap_outcomes");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    assert!(
+        rows.iter()
+            .any(|r| r["function"].as_str() == Some("heap_outcomes::root")),
+        "{:?}",
+        residue_detail(&files, "heap_outcomes::root")
+    );
+    assert!(text(&files, "src/Behavior.lex.tex").contains("Result.error"));
+    let name = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("heap_outcomes::root"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let decisions = verdicts(&cache);
+    let policy = decisions
+        .rows
+        .values()
+        .find(|r| r.function == "heap_outcomes::root")
+        .and_then(|r| r.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let memory="(record MirMemory {count := 1, top := 128, base := (fun (index : Nat) => 64), length := (fun (index : Nat) => 1), stride := (fun (index : Nat) => 1), live := (fun (index : Nat) => (if (index =? 1) then 1 else 0)), cells := (fun (allocation : Nat) (offset : Nat) => 42), defined := (fun (allocation : Nat) (offset : Nat) => 1)})";
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let fields: Vec<_> = line.split('|').collect();
+        let [initial, delta, kind, value, state] = fields.as_slice() else {
+            panic!("{line}")
+        };
+        let expected = if *kind == "ok" {
+            value.to_string()
+        } else {
+            "256".into()
+        };
+        let observed = format!("(match (project ({name} {initial} {delta} {memory}) item0) | Result.ok value => value | Result.error reason => 256)");
+        vectors.push_str(&format!("theorem{{name:outcomeVector{i},parameters:[],statement:({observed} = {expected}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+        let tag = if *kind == "ok" {
+            ""
+        } else {
+            "AssertKind::Overflow"
+        };
+        let observed = format!("(match (project ({name} {initial} {delta} {memory}) item0) | Result.ok value => \"\" | Result.error reason => reason)");
+        vectors.push_str(&format!("theorem{{name:panicTagVector{i},parameters:[],statement:({observed} = \"{tag}\"),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+        vectors.push_str(&format!("theorem{{name:stateVector{i},parameters:[],statement:((project ({name} {initial} {delta} {memory}) item1) = {state}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    for (i, line) in reference.lines().enumerate() {
+        let fields: Vec<_> = line.split('|').collect();
+        let initial = fields[0];
+        let delta = fields[1];
+        let heap = format!("(project ({name} {initial} {delta} {memory}) item2)");
+        for (label, expression, expected) in [
+            (
+                "retainedLive",
+                format!("(apply (project {heap} live) 1)"),
+                1,
+            ),
+            (
+                "releasedFrame",
+                format!("(apply (project {heap} live) 2)"),
+                0,
+            ),
+            (
+                "retainedCell",
+                format!("(apply (project {heap} cells) 1 0)"),
+                42,
+            ),
+        ] {
+            vectors.push_str(&format!("theorem{{name:{label}{i},parameters:[],statement:({expression} = {expected}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|line| line.contains("name:stateVector0,"))
+        .unwrap();
+    let bad = good.replace(" = 2)", " = 3)");
+    assert_ne!(good, bad);
+    let wrong = body.replacen(good, &bad, 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

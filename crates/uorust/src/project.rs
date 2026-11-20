@@ -4982,6 +4982,7 @@ fn behavior(
                     crate::mir::lower::Callee {
                         name: c.name.clone(),
                         outcomes: false,
+                        memory: false,
                         method: compiler_method(ctx, resolver, r),
                         params: c.params.iter().map(|(_, _, t)| t.clone()).collect(),
                         generic: c.generic.clone(),
@@ -5600,6 +5601,7 @@ fn mir_lift(
                     lower::Callee {
                         name: name.clone(),
                         outcomes: false,
+                        memory: false,
                         method: compiler_method(ctx, resolver, r),
                         params,
                         generic: (!generic.types.is_empty() || !generic.dictionary.is_empty())
@@ -5710,6 +5712,7 @@ fn mir_lift(
             lower::Callee {
                 name: name.clone(),
                 outcomes: false,
+                memory: false,
                 method: Some(method),
                 params,
                 result,
@@ -5796,11 +5799,12 @@ fn mir_lift(
         .map(|(r, name, _)| (name.clone(), ctx.path(*r)))
         .collect();
     let mut outcome_names = BTreeMap::new();
-    for (_, name, _) in &todo {
+    for (r, name, _) in &todo {
         let mut view = format!("nativeOutcome{}", sha(name.as_bytes()));
         while !names.insert(view.clone()) {
             view.push_str("Value");
         }
+        translations.insert(view.clone(), ctx.path(*r));
         outcome_names.insert(name.clone(), view);
     }
     let context = |r: FnRef| lower::Cx {
@@ -5825,45 +5829,85 @@ fn mir_lift(
         layouts: &layouts,
         backward: false,
     };
-    // Translate each.
-    let mut done: BTreeMap<String, Translation> = BTreeMap::new();
-    for (r, name, body) in todo.iter().cloned() {
+    // Lower each body once, then propagate actual memory interfaces through
+    // the same native dependency edges. Ordinary interfaces stay byte-identical.
+    let translate = |r: FnRef,
+                     name: &str,
+                     body: &crate::mir::ir::IrBody,
+                     cx: &lower::Cx<'_>|
+     -> Result<Translation, Residue> {
         let path = ctx.path(r);
-        let cx = context(r);
-        match lower::lower(&cx, body, &name) {
-            Ok(mut lowered) => {
-                if let Some(generic) = callees.get(&path).and_then(|c| c.generic.as_ref()) {
-                    crate::lex::bind_parameters(
-                        &mut lowered.decls,
-                        &mut lowered.aux,
-                        &generic.types,
-                        &name,
-                    );
-                }
-                let text: String = lowered
-                    .aux
-                    .values()
-                    .chain(&lowered.decls)
-                    .map(crate::lex::render_decl)
-                    .collect();
-                let digest = sha(text.as_bytes());
-                let kappa = crate::register::kappa(&path, &ctx.func(r).tokens);
-                done.insert(
-                    name.clone(),
-                    Translation {
-                        r,
-                        path,
-                        kappa,
-                        name,
-                        lowered,
-                        digest,
-                        model_context_sha256: None,
-                    },
-                );
+        let mut lowered = lower::lower(cx, body, name)?;
+        if let Some(generic) = callees.get(&path).and_then(|c| c.generic.as_ref()) {
+            crate::lex::bind_parameters(&mut lowered.decls, &mut lowered.aux, &generic.types, name);
+        }
+        Ok(Translation {
+            r,
+            path,
+            kappa: crate::register::kappa(&ctx.path(r), &ctx.func(r).tokens),
+            name: name.into(),
+            lowered,
+            digest: String::new(),
+            model_context_sha256: None,
+        })
+    };
+    let mut done: BTreeMap<String, Translation> = BTreeMap::new();
+    for (r, name, body) in &todo {
+        match translate(*r, name, body, &context(*r)) {
+            Ok(translation) => {
+                done.insert(name.clone(), translation);
             }
             Err(reason) => {
-                let span = ctx.func(r).span.clone();
-                notes.residue.insert(path, (span, mir_residue(reason)));
+                notes.residue.insert(
+                    ctx.path(*r),
+                    (ctx.func(*r).span.clone(), mir_residue(reason)),
+                );
+            }
+        }
+    }
+    let mut native_callees = callees.clone();
+    let mut native_bindings = compiler_bindings.clone();
+    loop {
+        let mut changed = BTreeSet::new();
+        for (name, translation) in &done {
+            if !translation.lowered.abi.memory {
+                continue;
+            }
+            for callee in native_callees.values_mut().chain(
+                native_bindings
+                    .values_mut()
+                    .flat_map(|bindings| bindings.values_mut()),
+            ) {
+                if callee.name == *name
+                    && callee.bind_memory(&translation.lowered.abi, scope(translation.r))
+                {
+                    changed.insert(name.clone());
+                }
+            }
+        }
+        if changed.is_empty() {
+            break;
+        }
+        let consumers: BTreeSet<_> = done
+            .iter()
+            .filter(|(_, t)| t.lowered.calls.iter().any(|c| changed.contains(c)))
+            .map(|(name, _)| name.clone())
+            .collect();
+        for (r, name, body) in todo.iter().filter(|(_, name, _)| consumers.contains(name)) {
+            let mut cx = context(*r);
+            cx.callees = &native_callees;
+            cx.compiler_bindings = &native_bindings;
+            match translate(*r, name, body, &cx) {
+                Ok(translation) => {
+                    done.insert(name.clone(), translation);
+                }
+                Err(reason) => {
+                    done.remove(name);
+                    notes.residue.insert(
+                        ctx.path(*r),
+                        (ctx.func(*r).span.clone(), mir_residue(reason)),
+                    );
+                }
             }
         }
     }
@@ -5963,8 +6007,8 @@ fn mir_lift(
             }
             selected.extend(consumers);
         }
-        let mut outcome_callees = callees.clone();
-        let mut outcome_bindings = compiler_bindings.clone();
+        let mut outcome_callees = native_callees.clone();
+        let mut outcome_bindings = native_bindings.clone();
         for (r, normal, _) in todo.iter().filter(|(_, name, _)| selected.contains(name)) {
             for callee in outcome_callees.values_mut().chain(
                 outcome_bindings

@@ -43,6 +43,7 @@ pub(crate) struct Callee {
     pub(crate) name: String,
     /// The definition returns SDK Result before its threaded state.
     pub(crate) outcomes: bool,
+    pub(crate) memory: bool,
     pub(crate) method: Option<super::identity::Method>,
     pub(crate) params: Vec<Ty>,
     pub(crate) generic: Option<lift::Generic>,
@@ -62,6 +63,9 @@ impl std::fmt::Debug for Callee {
         if self.outcomes {
             value.field("outcomes", &true);
         }
+        if self.memory {
+            value.field("memory", &true);
+        }
         value
             .field("method", &self.method)
             .field("params", &self.params)
@@ -73,12 +77,39 @@ impl std::fmt::Debug for Callee {
 }
 
 impl Callee {
+    /// Accept the actual lowered interface, retaining all Rust arguments and
+    /// mutable positions. An unbound address or generic ABI remains refused.
+    pub(crate) fn bind_memory(&mut self, abi: &NativeAbi, types: &Types) -> bool {
+        if self.memory || !abi.memory || self.generic.is_some() {
+            return false;
+        }
+        let mut parameters = self.params.clone();
+        parameters.push(super::memory::memory_ty());
+        let positions = self
+            .threads
+            .as_ref()
+            .map(|(_, p)| p.clone())
+            .unwrap_or_default();
+        let mut rest: Vec<_> = positions.iter().map(|&i| self.params[i].clone()).collect();
+        rest.push(super::memory::memory_ty());
+        if parameters != abi.parameters || threaded_result(&self.result, &rest, types) != abi.result
+        {
+            return false;
+        }
+        self.memory = true;
+        self.threads = Some((abi.result.clone(), positions));
+        true
+    }
+
     pub(crate) fn use_outcomes(&mut self, name: &str, types: &Types) {
         self.name = name.into();
         self.outcomes = true;
         if let Some((full, positions)) = &mut self.threads {
             let forward = Ty::Outcome(Box::new(self.result.clone()), Box::new(Ty::Str));
-            let rest: Vec<_> = positions.iter().map(|&i| self.params[i].clone()).collect();
+            let mut rest: Vec<_> = positions.iter().map(|&i| self.params[i].clone()).collect();
+            if self.memory {
+                rest.push(super::memory::memory_ty());
+            }
             *full = threaded_result(&forward, &rest, types);
         }
     }
@@ -221,10 +252,18 @@ impl<'a> Cx<'a> {
 /// needs.
 #[derive(Clone, Debug)]
 pub(crate) struct Lowered {
+    pub(crate) abi: NativeAbi,
     pub(crate) decls: Vec<Decl>,
     pub(crate) calls: BTreeSet<String>,
     pub(crate) types: BTreeSet<Ty>,
     pub(crate) aux: BTreeMap<String, Decl>,
+}
+
+#[derive(Clone, Debug)]
+pub(crate) struct NativeAbi {
+    pub(crate) parameters: Vec<Ty>,
+    pub(crate) result: Ty,
+    pub(crate) memory: bool,
 }
 
 /// A value in the environment.
@@ -1008,12 +1047,6 @@ fn lower_mode(cx: &Cx<'_>, body: &IrBody, name: &str, outcomes: bool) -> Lift<Lo
 }
 
 fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool, outcomes: bool) -> Lift<Lowered> {
-    if outcomes && memory {
-        return Err(kind(
-            MEMORY_KIND,
-            "panic outcomes need an admitted heap-state interface",
-        ));
-    }
     let mut f = Fun {
         cx,
         body,
@@ -1251,6 +1284,11 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool, outcomes: bool
     };
     f.decls.push(main);
     Ok(Lowered {
+        abi: NativeAbi {
+            parameters: f.params.iter().map(|(_, t)| t.clone()).collect(),
+            result: f.result,
+            memory: f.memory,
+        },
         decls: f.decls,
         calls: f.calls,
         types: f.types,
@@ -1958,32 +1996,46 @@ impl Fun<'_, '_> {
         };
         // A single changing state argument keeps invariant payloads in the
         // termination context. Separate fixed arguments may be erased by Lean.
-        let packet = if params.len() > 1
-            && carried.is_empty()
-            && memory.is_none()
-            && new.is_none()
-            && invariants.is_empty()
-            && measure.1.is_empty()
-        {
-            let ty = self
-                .cx
-                .types
-                .tuple(params.iter().map(|(_, _, t)| t.clone()).collect());
-            let state = self.fresh(Some("loopState"), 0);
-            for (i, (local, old, t)) in params.iter().enumerate() {
-                let value = lift::tuple_item(&ty, &state, i);
-                self.ranged.remove(old);
-                if let Some(bits) = fixed(t) {
-                    self.ranged.insert(value.clone(), bits);
+        let scalar_packet =
+            params.len() > 1 && carried.is_empty() && memory.is_none() && measure.1.is_empty();
+        let packet =
+            if new.is_none() && invariants.is_empty() && (scalar_packet || memory.is_some()) {
+                let values = self.scope.clone();
+                let ty = self
+                    .cx
+                    .types
+                    .tuple(values.iter().map(|(_, t)| t.clone()).collect());
+                let state = self.fresh(Some("loopState"), 0);
+                let substitutions: BTreeMap<_, _> = values
+                    .iter()
+                    .enumerate()
+                    .map(|(i, (name, _))| (name.clone(), lift::tuple_item(&ty, &state, i)))
+                    .collect();
+                for (local, old, t) in &params {
+                    let value = substitutions[old].clone();
+                    self.ranged.remove(old);
+                    if let Some(bits) = fixed(t) {
+                        self.ranged.insert(value.clone(), bits);
+                    }
+                    st.env.insert(*local, Val::V(value, t.clone()));
                 }
-                st.env.insert(*local, Val::V(value, t.clone()));
-            }
-            self.scope = vec![(state, ty.clone())];
-            measure = self.derive_measure(h, &st)?;
-            Some(ty)
-        } else {
-            None
-        };
+                for (local, old) in &carried {
+                    st.placed.get_mut(local).expect("carried place").pointer =
+                        substitutions[old].clone();
+                }
+                if let Some(old) = &memory {
+                    st.memory = Some(substitutions[old].clone());
+                }
+                self.scope = vec![(state, ty.clone())];
+                if memory.is_some() {
+                    measure.0 = stdlib::substitute(&measure.0, &substitutions);
+                } else {
+                    measure = self.derive_measure(h, &st)?;
+                }
+                Some(ty)
+            } else {
+                None
+            };
         let boundary = self.region_boundary(h, &name, entry)?;
         let parent_boundary = self.boundary.clone();
         self.boundary = boundary.clone();
@@ -2178,11 +2230,12 @@ impl Fun<'_, '_> {
                 .map(|(n, t)| (n.clone(), t.render()))
                 .collect();
             parameters.extend(st.binders.iter().map(|(n, t)| (n.clone(), t.render())));
+            let statement = implication(&hypotheses(&st.path), &format!("({after} < {measure})"));
             self.evidence.push(Decl::Theorem {
                 type_parameters: Vec::new(),
                 name: format!("decreases_{}_{}", lp.name, self.evidence.len()),
                 parameters,
-                statement: implication(&hypotheses(&st.path), &format!("({after} < {measure})")),
+                statement,
                 proof: "linear_arithmetic{}".into(),
                 axioms: vec!["Quot.sound".into(), "propext".into()],
             });
@@ -2616,6 +2669,9 @@ impl Fun<'_, '_> {
                 )?
                 .0,
             );
+        }
+        if self.memory {
+            items.push(self.returned_memory("", st)?);
         }
         let value = if items.len() == 1 {
             items.remove(0)
@@ -3163,7 +3219,7 @@ impl Fun<'_, '_> {
             self.write(&place, Val::V(new.clone(), vals[i].1.clone()), st)?;
         }
         if outcomes {
-            if !self.outcomes || guard.is_some() || backward.is_some() || memory {
+            if !self.outcomes || guard.is_some() || backward.is_some() {
                 return Err(kind(
                     spec::MirTerminatorKind::Call.path(),
                     "a panic outcome needs its admitted value-state interface",
@@ -4198,7 +4254,8 @@ impl Fun<'_, '_> {
     /// Mutable functions need an environment/backward function, not a pure value.
     fn function_item(&mut self, path: &str) -> Option<(String, Ty)> {
         if let Some(c) = self.cx.callee(path).cloned() {
-            if c.outcomes
+            if c.memory
+                || c.outcomes
                 || c.generic.is_some()
                 || c.threads.is_some()
                 || c.name == self.name
@@ -6733,6 +6790,9 @@ impl Fun<'_, '_> {
             }
         }
         if let Some(c) = self.cx.callee(callee).cloned() {
+            if c.memory && !self.memory {
+                return Err(needs_memory());
+            }
             if c.outcomes && (!self.outcomes || c.generic.is_some() || !c.result.same(dt)) {
                 return Err(kind(
                     k,
@@ -6808,6 +6868,9 @@ impl Fun<'_, '_> {
                         .ok_or_else(bad_types)?,
                 );
             }
+            if c.memory {
+                passed.push(self.memory_at(st)?);
+            }
             let term = if passed.is_empty() {
                 format!("({})", c.name)
             } else {
@@ -6833,6 +6896,7 @@ impl Fun<'_, '_> {
             return Ok(Called {
                 binding,
                 outcomes: c.outcomes,
+                memory: c.memory,
                 threads: c.threads.clone(),
                 ..Called::value(term)
             });
@@ -10305,6 +10369,37 @@ mod tests {
     use super::*;
 
     #[test]
+    fn native_memory_interfaces_bind_exact_parameters_ue_98() {
+        let types = Types::default();
+        let mut callee = Callee {
+            name: "callee".into(),
+            outcomes: false,
+            memory: false,
+            method: None,
+            params: vec![Ty::Nat(Some(8))],
+            generic: None,
+            result: Ty::Nat(Some(8)),
+            threads: None,
+        };
+        let mut abi = NativeAbi {
+            parameters: vec![Ty::Nat(Some(16)), super::super::memory::memory_ty()],
+            result: types.tuple(vec![Ty::Nat(Some(8)), super::super::memory::memory_ty()]),
+            memory: true,
+        };
+        assert!(!callee.bind_memory(&abi, &types));
+        abi.parameters[0] = Ty::Nat(Some(8));
+        assert!(callee.bind_memory(&abi, &types));
+        callee.use_outcomes("outcomeCallee", &types);
+        assert_eq!(
+            callee.threads.unwrap().0,
+            types.tuple(vec![
+                Ty::Outcome(Box::new(Ty::Nat(Some(8))), Box::new(Ty::Str)),
+                super::super::memory::memory_ty()
+            ])
+        );
+    }
+
+    #[test]
     fn source_constant_abi_keeps_aggregate_and_mutability_guards_ue_97() {
         let mut types = Types::default();
         types
@@ -10353,6 +10448,7 @@ fn expose() -> impl Fn(u8) -> u8 {
             Callee {
                 name: "partial".into(),
                 outcomes: true,
+                memory: false,
                 method: None,
                 params: vec![Ty::Nat(Some(8))],
                 generic: None,

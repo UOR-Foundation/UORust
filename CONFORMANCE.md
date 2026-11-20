@@ -118,6 +118,7 @@ model does not sanction.
 | `UE-95` | `build` | Native compiler assertions can produce computed return/panic outcomes together with tracked value-state using SDK Result values and compiler assertion identities; exact rejected normal models select this changed semantic view, while cleanup, heap and unavailable callee interfaces remain refused |
 | `UE-96` | `build` | Computed native return/panic interfaces propagate through the existing dependency graph and direct callee ABI with tracked mutable state on both branches; unsupported generic, heap, returned-borrow and function-value interfaces remain refused |
 | `UE-97` | `build` | Closed inherent constants of source-owned types import through the existing source initializer and native constant ABI, retaining owner/module identities and Self bindings; generic, trait, aliased and unresolved owners supply no constant model |
+| `UE-98` | `build` | Native callable interfaces propagate the existing modeled memory state through dependency closures, including computed panic outcomes, changing loop-state packets and frame-local release; unrelated allocations and unsupported cleanup, generic and borrowed-result interfaces remain protected |
 
 ## factory
 
