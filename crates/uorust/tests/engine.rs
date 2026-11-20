@@ -9953,3 +9953,121 @@ fn main(){for (a,b) in [(-7i64,3i64),(0,0),(9,-4),(i64::MAX,2),(i64::MIN,-1),(12
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn compiler_primitive_namespaces_reuse_kernels_ue_100() {
+    let dir=scratch("primitive-namespaces", &[
+      ("Cargo.toml", "[package]\nname=\"primitive_namespaces\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+      ("src/lib.rs",r#"
+pub fn read(x:u8)->u128 {
+ let mut n=1u8;while n>0 {n-=1;}
+ match x {
+ 0=>i8::MIN as u8 as u128,
+ 1=>i32::MIN as u32 as u128,
+ 2=>i64::MAX as u64 as u128,
+ 3=>u128::MAX,
+ 4=>f64::INFINITY.to_bits() as u128,
+ 5=>f32::NEG_INFINITY.to_bits() as u128,
+ _=>u16::BITS as u128,
+ }
+}
+"#),
+      ("src/bin/vectors.rs", r#"fn main(){for x in [0u8,1,2,3,4,5,6,255] {println!("{x}|{}",primitive_namespaces::read(x));}}"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "primitive-namespaces");
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("primitive_namespaces"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("primitive_namespaces");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let row = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("primitive_namespaces::read"));
+    assert!(
+        row.is_some(),
+        "{:?}",
+        residue_detail(&files, "primitive_namespaces::read")
+    );
+    let name = row.unwrap()["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let decisions = verdicts(&cache);
+    let policy = decisions
+        .rows
+        .values()
+        .find(|v| v.function == "primitive_namespaces::read")
+        .and_then(|v| v.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let mut vectors = String::new();
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let (arg, value) = line.split_once('|').unwrap();
+        vectors.push_str(&format!("theorem{{name:primitiveVector{i},parameters:[],statement:(({name} {arg}) = {value}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|line| line.contains("name:primitiveVector0,"))
+        .unwrap();
+    let bad = good.replace(" = 128)", " = 127)");
+    assert_ne!(good, bad);
+    let wrong = body.replacen(good, &bad, 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

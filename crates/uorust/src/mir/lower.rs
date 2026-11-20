@@ -4029,7 +4029,10 @@ impl Fun<'_, '_> {
                     let lit = p
                         .strip_suffix(t.as_str())
                         .map(|l| l.strip_suffix('_').unwrap_or(l));
-                    let named = p.strip_prefix(&format!("{t}::<impl {t}>::"));
+                    let named = p
+                        .rsplit_once("::")
+                        .filter(|(owner, _)| super::int::primitive_owner(owner) == Some(t.as_str()))
+                        .map(|(_, literal)| literal);
                     lit.or(named).and_then(|l| float::literal(*f, l)).is_some()
                 }) =>
             {
@@ -4040,7 +4043,12 @@ impl Fun<'_, '_> {
                         let lit = p
                             .strip_suffix(t.as_str())
                             .map(|l| l.strip_suffix('_').unwrap_or(l));
-                        let named = p.strip_prefix(&format!("{t}::<impl {t}>::"));
+                        let named = p
+                            .rsplit_once("::")
+                            .filter(|(owner, _)| {
+                                super::int::primitive_owner(owner) == Some(t.as_str())
+                            })
+                            .map(|(_, literal)| literal);
                         let term = lit.or(named).and_then(|l| float::literal(*f, l))?;
                         Some((term, Ty::Float(*f)))
                     })
@@ -9036,12 +9044,16 @@ pub(crate) fn ty(text: &str, types: &Types) -> Lift<Ty> {
 }
 
 fn native_type(text: &str, types: &Types) -> Lift<Ty> {
-    let t = text.trim();
-    if let Some(reading) = types.generic.get(t) {
-        return Ok(reading.clone());
-    }
-    if let Some(reading) = types.native_views.get(&types.resolve(t)) {
-        return Ok(reading.clone());
+    let original = text.trim();
+    let primitive = super::int::primitive_owner(original);
+    let t = primitive.unwrap_or(original);
+    if primitive.is_none() {
+        if let Some(reading) = types.generic.get(t) {
+            return Ok(reading.clone());
+        }
+        if let Some(reading) = types.native_views.get(&types.resolve(t)) {
+            return Ok(reading.clone());
+        }
     }
     let bad = || Err(Residue::Type(t.to_string()));
     if let Some(reading) = types.registered(t) {
@@ -10397,6 +10409,30 @@ mod tests {
                 super::super::memory::memory_ty()
             ])
         );
+    }
+
+    #[test]
+    fn compiler_primitive_paths_bind_builtin_owner_ue_100() {
+        let types = Types::default();
+        assert_eq!(
+            ty("core::num::<impl i32>", &types),
+            Ok(Ty::Signed(Some(32)))
+        );
+        assert_eq!(ty("std::num::<impl usize>", &types), Ok(Ty::Nat(None)));
+        for path in [
+            "workspace::num::<impl i32>",
+            "core::num::<impl Workspace>",
+            "core::f32::<impl f64>",
+        ] {
+            assert!(ty(path, &types).is_err(), "{path}");
+        }
+        let mut shadowed = types.clone();
+        shadowed.generic.insert("i32".into(), Ty::Bool);
+        assert_eq!(
+            ty("core::num::<impl i32>", &shadowed),
+            Ok(Ty::Signed(Some(32)))
+        );
+        assert_eq!(ty("i32", &shadowed), Ok(Ty::Bool));
     }
 
     #[test]

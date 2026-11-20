@@ -697,3 +697,10 @@ Feature: engine
     When an inherent method or language operator has an existing source model
     Then the native adapter imports that model through its exact typed interface
     But unrelated traits and unavailable or mutable interfaces supply no meaning
+
+  @UE-100 @build
+  Scenario: Compiler primitive namespaces retain their existing kernels
+    Given compiler-owned qualified primitive type and inherent owner paths
+    When native MIR reads their constants and existing unary operations
+    Then the same primitive kernels supply the captured types and values
+    But workspace lookalikes and target-dependent identities cannot select them

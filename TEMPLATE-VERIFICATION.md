@@ -1670,3 +1670,19 @@ passed for signed and large integer values, including results beyond i64; an
 incorrect product was rejected with LLV7002 (107.86 seconds). Conformance,
 strict Clippy and model/template/SDK/self-model checks passed. Complete release
 acceptance remains the unchanged `just vv` boundary.
+
+## UE-100: compiler primitive namespaces bind existing kernels
+
+The initial control refused rustc's qualified primitive owner. A shared owner
+binding now recognizes exact compiler-owned primitive namespaces before local
+name lookup. Native types, associated constants and unary methods reuse the
+existing kernels. The same binding selects existing IEEE constant models; no
+primitive value or standard-operation semantic model was added. Workspace
+lookalikes, mismatched owner modules and local shadowing cannot select it.
+
+Eight actual Rust/SDK comparisons passed for signed extrema, u128 bounds,
+integer widths and IEEE infinity bit patterns. An incorrect bound was rejected
+with LLV7002 (101.33 seconds). All 103 MIR checks passed, including explicit
+namespace and shadowing controls and the existing target-width controls.
+Conformance, strict Clippy and model/template/SDK/self-model checks passed.
+Complete release acceptance remains the unchanged `just vv` boundary.

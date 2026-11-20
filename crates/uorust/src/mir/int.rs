@@ -62,6 +62,21 @@ impl Int {
     }
 }
 
+/// The primitive an inherent owner printed by rustc names. Compiler-owned
+/// namespaces cannot be rebound by a workspace alias or similarly named module.
+pub(super) fn primitive_owner(owner: &str) -> Option<&str> {
+    let owner = owner
+        .strip_prefix("core::")
+        .or_else(|| owner.strip_prefix("std::"))
+        .unwrap_or(owner);
+    let (namespace, implementation) = owner.split_once("::")?;
+    let primitive = implementation.strip_prefix("<impl ")?.strip_suffix('>')?;
+    ((namespace == "num" || namespace == primitive)
+        && (crate::lift::PRIMITIVE_TYPES.contains(&primitive)
+            || matches!(primitive, "f16" | "f128")))
+    .then_some(primitive)
+}
+
 /// Primitive unary methods on their exact compiler-resolved integer type.
 /// The optional guard describes the `Some` case of a checked result.
 pub(crate) fn unary_method(
@@ -71,10 +86,8 @@ pub(crate) fn unary_method(
     result: &Ty,
     widths: &[(u32, Vec<String>)],
 ) -> Option<(String, Option<String>)> {
-    let (owner, method) = path
-        .strip_prefix("core::num::<impl ")
-        .or_else(|| path.strip_prefix("std::num::<impl "))?
-        .split_once(">::")?;
+    let (owner, method) = path.rsplit_once("::")?;
+    let owner = primitive_owner(owner)?;
     let primitive = match from {
         Ty::Signed(Some(bits)) => format!("i{bits}"),
         Ty::Signed(None) => "isize".into(),
