@@ -1846,3 +1846,19 @@ pointer views, incompatible sizes and inconsistent target endianness. The
 intrinsic ownership control rejects consumer lookalikes and undeclared items.
 Conformance, strict Clippy and model/template/SDK/self-model checks passed.
 Complete release acceptance remains the unchanged `just vv` boundary.
+
+## UE-109: one immutable dependency index per native context model
+
+The registered work-count regression exposed three full-model parses for two
+root queries. Rooted native contexts now build the existing lexical dependency
+graph once and reuse its byte spans and adjacency lists. The graph retains its
+own immutable source, preserving string opacity, UTF-8 offsets, declaration
+order and complete mutual groups. The single-root proof-slice API uses the same
+implementation. No semantic model or context identity format changes.
+
+The regression now performs one parse for both root queries. Ten lexical
+controls and eighty-three project controls passed, covering escaped strings,
+function-value references, type dependencies, mutual groups, invalid declarations,
+missing/empty roots and isolation between different source models. Conformance,
+strict Clippy and model/template/SDK/self-model checks passed. Full release
+acceptance remains the unchanged `just vv` boundary.

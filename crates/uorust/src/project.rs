@@ -6378,9 +6378,10 @@ fn native_model_contexts(
     );
     let static_context = serde_json::json!({"spec":"uorust/rooted-native-model/1",
         "sdk":include_str!("../../../prismpm.lock"),"assets":crate::assets::FIXED,"limits":format!("{limits:?}")});
+    let closure_graph = crate::lex::ProofClosureGraph::new(&model).ok();
     done.iter().map(|(name,t)| {
         let roots=t.lowered.aux.keys().cloned().chain(t.lowered.decls.iter().map(|d|d.name().to_string())).collect::<Vec<_>>();
-        let identity=crate::lex::proof_closure(&model,&roots).ok().and_then(|closure| {
+        let identity=closure_graph.as_ref().and_then(|graph|graph.closure(&roots).ok()).and_then(|closure| {
             let named=|n:&str|closure.contains(&format!("name: {n},"));
             if conflicts.iter().any(|n|named(n)) {return None;}
             let mut pending=vec![name.clone()];let mut native=BTreeSet::new();let mut readings=BTreeSet::new();

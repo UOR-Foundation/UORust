@@ -760,3 +760,10 @@ Feature: engine
     When both forms bind the same native representation kernel
     Then pointer carriers and UTF-8 and fixed-width views retain Rust observations
     But invalid scalar values, invalid UTF-8 and unavailable layouts remain refused
+
+  @UE-109 @build
+  Scenario: Native proof roots reuse one immutable dependency index
+    Given multiple proof roots in one combined declaration model
+    When native context identities select their dependency closures
+    Then one lexical parse supplies byte-identical independent closures
+    But malformed models and missing or empty root sets remain rejected

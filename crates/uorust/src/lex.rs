@@ -9,6 +9,9 @@
 /// The formatter's line width.
 const WIDTH: usize = 100;
 
+#[cfg(test)]
+thread_local! { static SYNTAX_PARSES: std::cell::Cell<usize> = const { std::cell::Cell::new(0) }; }
+
 /// The same declaration boundaries serve proof slicing and nominal imports.
 struct ModuleSyntax<'a> {
     start: usize,
@@ -20,6 +23,8 @@ struct ModuleSyntax<'a> {
 }
 
 fn module_syntax(text: &str) -> Result<ModuleSyntax<'_>, crate::UorustError> {
+    #[cfg(test)]
+    SYNTAX_PARSES.with(|count| count.set(count.get() + 1));
     use std::collections::BTreeMap;
     let bad = |reason: &str| crate::UorustError::Tool(format!("proof closure: {reason}"));
     let begin = "\\begin{semanticmodule}";
@@ -280,55 +285,92 @@ pub(crate) fn with_axiom_policies(
     Ok(result)
 }
 
+/// One immutable lexical graph for all proof roots of the same model.
+pub(crate) struct ProofClosureGraph<'a> {
+    text: &'a str,
+    start: usize,
+    finish: usize,
+    names: std::collections::BTreeMap<&'a str, usize>,
+    spans: Vec<(usize, usize)>,
+    dependencies: Vec<Vec<usize>>,
+}
+
+impl<'a> ProofClosureGraph<'a> {
+    pub(crate) fn new(text: &'a str) -> Result<Self, crate::UorustError> {
+        use std::collections::BTreeSet;
+        let ModuleSyntax {
+            start,
+            finish,
+            tokens,
+            blocks,
+            names,
+            groups,
+        } = module_syntax(text)?;
+        let dependencies = blocks
+            .iter()
+            .map(|(first, last, group)| {
+                let mut reached: BTreeSet<usize> = tokens[*first..*last]
+                    .iter()
+                    .filter_map(|(_, _, token)| names.get(token).copied())
+                    .collect();
+                if let Some(group) = group {
+                    reached.extend(&groups[group]);
+                }
+                reached.into_iter().collect()
+            })
+            .collect();
+        let spans = blocks
+            .iter()
+            .map(|(first, last, _)| (tokens[*first].0, tokens[*last - 1].1))
+            .collect();
+        Ok(Self {
+            text,
+            start,
+            finish,
+            names,
+            spans,
+            dependencies,
+        })
+    }
+
+    pub(crate) fn closure(&self, roots: &[String]) -> Result<String, crate::UorustError> {
+        use std::collections::BTreeSet;
+        let bad = |reason: &str| crate::UorustError::Tool(format!("proof closure: {reason}"));
+        let mut pending = Vec::new();
+        for root in roots {
+            pending.push(
+                *self
+                    .names
+                    .get(root.as_str())
+                    .ok_or_else(|| bad(&format!("missing proof obligation {root}")))?,
+            );
+        }
+        if pending.is_empty() {
+            return Err(bad("empty proof obligations"));
+        }
+        let mut kept = BTreeSet::new();
+        while let Some(index) = pending.pop() {
+            if kept.insert(index) {
+                pending.extend(&self.dependencies[index]);
+            }
+        }
+        let mut out = self.text[..self.start].to_string();
+        out.push('\n');
+        for index in kept {
+            let (first, last) = self.spans[index];
+            out.push_str(&self.text[first..last]);
+            out.push_str("\n\n");
+        }
+        out.push_str(&self.text[self.finish..]);
+        Ok(out)
+    }
+}
+
 /// Keep complete emitted declarations reachable from every proof obligation.
 /// Strings are opaque and mutual groups are indivisible. The retained bytes
 /// are unchanged; this only scopes native trials, never full-project output.
 pub(crate) fn proof_closure(text: &str, roots: &[String]) -> Result<String, crate::UorustError> {
-    use std::collections::BTreeSet;
-    let bad = |reason: &str| crate::UorustError::Tool(format!("proof closure: {reason}"));
-    let ModuleSyntax {
-        start,
-        finish,
-        tokens,
-        blocks,
-        names,
-        groups,
-    } = module_syntax(text)?;
-    let mut pending = Vec::new();
-    for root in roots {
-        pending.push(
-            *names
-                .get(root.as_str())
-                .ok_or_else(|| bad(&format!("missing proof obligation {root}")))?,
-        );
-    }
-    if pending.is_empty() {
-        return Err(bad("empty proof obligations"));
-    }
-    let mut kept = BTreeSet::new();
-    while let Some(index) = pending.pop() {
-        if !kept.insert(index) {
-            continue;
-        }
-        let (first, last, group) = blocks[index];
-        for (_, _, token) in &tokens[first..last] {
-            if let Some(dependency) = names.get(token) {
-                pending.push(*dependency);
-            }
-        }
-        if let Some(group) = group {
-            pending.extend(&groups[group]);
-        }
-    }
-    let mut out = text[..start].to_string();
-    out.push('\n');
-    for index in kept {
-        let (first, last, _) = blocks[index];
-        out.push_str(&text[tokens[first].0..tokens[last - 1].1]);
-        out.push_str("\n\n");
-    }
-    out.push_str(&text[finish..]);
-    Ok(out)
+    ProofClosureGraph::new(text)?.closure(roots)
 }
 
 /// An expression: a flat term, or a form whose `match` may break its arms
@@ -1359,17 +1401,47 @@ theorem{name: Claim, parameters: [], statement: true, proof: decide{}}
         assert!(type_names(&text.replace("structure{", "opaque{")).is_err());
     }
 
-    #[test]
-    fn proof_closure_keeps_transitive_types_and_mutual_groups_ue_53() {
-        let text = r#"\begin{semanticmodule}
+    const PROOF_MODEL: &str = r#"\begin{semanticmodule}
 inductive{name: Shape, constructors: [{name: Item, fields: []}]}
 definition{name: leaf, result: Shape, body: Shape.Item, mutual: pair}
 definition{name: sibling, result: Nat, body: 0, mutual: pair}
-definition{name: quoted, result: String, body: "} unrelated \" { mutual: fake"}
+definition{name: quoted, result: String, body: "é🦀 } unrelated \" { mutual: fake"}
 definition{name: root, result: Shape, body: (let note := quoted; leaf)}
 definition{name: unrelated, result: Bool, body: false}
 theorem{name: obligation, statement: (root = root), proof: reflexivity}
 \end{semanticmodule}"#;
+
+    #[test]
+    fn native_roots_share_one_immutable_dependency_index_ue_109() {
+        SYNTAX_PARSES.with(|count| count.set(0));
+        let graph = ProofClosureGraph::new(PROOF_MODEL).unwrap();
+        let first = graph.closure(&["obligation".into()]).unwrap();
+        let second = graph.closure(&["root".into()]).unwrap();
+        assert_eq!(
+            SYNTAX_PARSES.with(std::cell::Cell::get),
+            1,
+            "root queries reparse the complete model"
+        );
+        assert!(first.contains("name: obligation,"));
+        assert!(!second.contains("name: obligation,"));
+        for name in ["Shape", "leaf", "sibling", "quoted", "root"] {
+            assert!(first.contains(&format!("name: {name},")));
+            assert!(second.contains(&format!("name: {name},")));
+        }
+        assert!(graph.closure(&[]).is_err());
+        assert!(graph.closure(&["missing".into()]).is_err());
+        assert!(ProofClosureGraph::new(&PROOF_MODEL.replace("inductive{", "opaque{")).is_err());
+        let changed = PROOF_MODEL.replace("body: 0,", "body: 1,");
+        let other = ProofClosureGraph::new(&changed)
+            .unwrap()
+            .closure(&["root".into()])
+            .unwrap();
+        assert_ne!(second, other);
+    }
+
+    #[test]
+    fn proof_closure_keeps_transitive_types_and_mutual_groups_ue_53() {
+        let text = PROOF_MODEL;
         let kept = proof_closure(text, &["obligation".into()]).expect("closure");
         for name in ["Shape", "leaf", "sibling", "quoted", "root", "obligation"] {
             assert!(kept.contains(&format!("name: {name},")), "{name}");
