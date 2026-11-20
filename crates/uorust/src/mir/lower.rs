@@ -9651,12 +9651,12 @@ pub(super) fn native_type(text: &str, types: &Types) -> Lift<Ty> {
                 assoc.split('<').next().unwrap_or(assoc)
             ))
         });
-        if let Some(n) = key.and_then(|k| types.aliases.get(&k)).filter(|n| {
-            types.structs.contains_key(*n)
-                || types.datas.contains_key(*n)
-                || types.enums.contains_key(*n)
+        if let Some(n) = key.and_then(|k| types.resolved_alias(&k)).filter(|n| {
+            types.structs.contains_key(n)
+                || types.datas.contains_key(n)
+                || types.enums.contains_key(n)
         }) {
-            return Ok(Ty::Named(n.clone()));
+            return Ok(Ty::Named(n));
         }
         if let Some((pointee_text, assoc)) = rest.rsplit_once(" as ") {
             let assoc = assoc.trim_start_matches("core::");
@@ -9825,22 +9825,21 @@ pub(super) fn native_type(text: &str, types: &Types) -> Lift<Ty> {
                 .iter()
                 .filter(|(k, _)| !erased.contains("::") && k.ends_with(&tail));
             match (ends.next(), ends.next()) {
-                (Some((_, v)), None) => Some(v),
+                (Some((key, _)), None) => types.resolved_alias(key),
                 _ => None,
             }
         };
         if let Some(n) = types
-            .aliases
-            .get(t)
-            .or_else(|| types.aliases.get(&erased))
+            .resolved_alias(t)
+            .or_else(|| types.resolved_alias(&erased))
             .or_else(bare)
             .filter(|n| {
-                types.structs.contains_key(*n)
-                    || types.enums.contains_key(*n)
-                    || types.datas.contains_key(*n)
+                types.structs.contains_key(n)
+                    || types.enums.contains_key(n)
+                    || types.datas.contains_key(n)
             })
         {
-            return Ok(Ty::Named(n.clone()));
+            return Ok(Ty::Named(n));
         }
     }
     // A path of std's, or in core's own scope a path of core's: MIR prints
@@ -9950,7 +9949,7 @@ pub(super) fn native_type(text: &str, types: &Types) -> Lift<Ty> {
                 .iter()
                 .filter(|(k, _)| segs.len() == 1 && k.ends_with(&tail));
             let bare = match (ends.next(), ends.next()) {
-                (Some((_, v)), None) => Some(v.clone()),
+                (Some((key, _)), None) => types.resolved_alias(key),
                 _ => None,
             };
             let known = |r: &String| {
@@ -9961,9 +9960,7 @@ pub(super) fn native_type(text: &str, types: &Types) -> Lift<Ty> {
             // The scope's own type of that name first: the bare alias only
             // where the name resolves to no type of the scope's.
             let r = types
-                .aliases
-                .get(&printed.join("::"))
-                .cloned()
+                .resolved_alias(&printed.join("::"))
                 .or_else(|| Some(types.resolve(n)).filter(known))
                 .or(bare)
                 .unwrap_or_else(|| types.resolve(n));
@@ -11091,6 +11088,13 @@ mod tests {
             .insert("Packet".into(), vec![("value".into(), Ty::Nat(Some(8)))]);
         let result = Ty::Named("Packet".into());
         assert!(constant_interface("Packet", &result, &types));
+        let tag = format!("{}packet", crate::lift::FROZEN_TYPE_PREFIX);
+        types.aliases.insert("Packet".into(), tag.clone());
+        types.aliases.insert(tag, "Packet".into());
+        assert!(
+            constant_interface("Packet", &result, &types),
+            "a frozen declaration lost its native constant ABI"
+        );
         assert!(!constant_interface(
             "Packet",
             &Ty::Named("Other".into()),

@@ -1399,15 +1399,20 @@ impl Types {
             },
             None => rust,
         };
-        let resolved = self.aliases.get(bare).map(String::as_str).unwrap_or(bare);
-        if resolved.starts_with(FROZEN_TYPE_PREFIX) {
-            self.aliases
-                .get(resolved)
-                .cloned()
-                .unwrap_or_else(|| resolved.to_string())
-        } else {
-            resolved.to_string()
-        }
+        self.resolved_alias(bare)
+            .unwrap_or_else(|| bare.to_string())
+    }
+
+    /// One scoped alias, with an internal declaration identity decoded exactly
+    /// once. Ordinary foreign paths do not acquire a transitive reading.
+    pub(crate) fn resolved_alias(&self, rust: &str) -> Option<String> {
+        self.aliases.get(rust).map(|target| {
+            if target.starts_with(FROZEN_TYPE_PREFIX) {
+                self.aliases.get(target).unwrap_or(target).clone()
+            } else {
+                target.clone()
+            }
+        })
     }
 
     /// Resolve model dependencies against declarations, never a rendered name

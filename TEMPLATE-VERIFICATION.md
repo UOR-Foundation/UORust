@@ -1940,3 +1940,15 @@ using the exactly locked serde dependency passed both enum field observations
 through the SDK. Definitional equality checks the enum values without requiring
 an unused decidable-equality instance; changing the expected constructor is
 rejected with LLV7002. Full release acceptance remains `just vv`.
+
+The native type importer shares the same single-step internal identity decoder.
+A constant-ABI control first rejected an otherwise identical record represented
+by a frozen declaration tag. The common alias boundary now preserves it while
+retaining wrong aggregate, mutability, native-view and source-cell negatives.
+Twenty-five native lowering controls passed alongside all sixty-four lifting
+and eighty-four project controls, repository conformance and strict Clippy.
+
+The existing source-owned constant scenario also passed its native Rust/SDK
+observations and rejected a changed expected result with LLV7002 after this
+identity change. The initial no-axiom trial correctly rejected observed axioms;
+the existing explicitly recorded policy supplied the accepted proof boundary.
