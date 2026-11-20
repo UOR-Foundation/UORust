@@ -166,6 +166,38 @@ pub(crate) fn type_names(
         .collect())
 }
 
+/// Dependencies between actual emitted declarations, using the same token
+/// boundaries and opaque strings as proof slicing. Function values count too.
+pub(crate) fn declaration_dependencies(
+    text: &str,
+) -> Option<std::collections::BTreeMap<String, std::collections::BTreeSet<String>>> {
+    let module = module_syntax(text).ok()?;
+    Some(
+        module
+            .names
+            .iter()
+            .map(|(name, index)| {
+                let (first, last, _) = module.blocks[*index];
+                let mut dependencies = std::collections::BTreeSet::new();
+                for i in first..last {
+                    // Declaration and nested field/group labels do not use a value.
+                    if i >= first + 2
+                        && module.tokens[i - 1].2 == ":"
+                        && matches!(module.tokens[i - 2].2, "name" | "mutual")
+                    {
+                        continue;
+                    }
+                    let token = module.tokens[i].2;
+                    if token != *name && module.names.contains_key(token) {
+                        dependencies.insert(token.to_string());
+                    }
+                }
+                ((*name).to_string(), dependencies)
+            })
+            .collect(),
+    )
+}
+
 /// Change only observed policy values in an existing projected package.
 /// Declaration boundaries and quoted content use the same lexer as slicing.
 pub(crate) fn with_axiom_policies(

@@ -634,3 +634,10 @@ Feature: engine
     When compiler MIR constructs a record-shaped enum variant or qualified tuple struct
     Then native construction preserves the actual constructor and declared field order
     But missing, duplicate and incompatible field readings remain refused
+
+  @UE-91 @build
+  Scenario: Callbacks and native auxiliaries share complete declaration ordering
+    Given compiler callbacks whose auxiliary bodies reference native definitions
+    When source and native declarations are emitted and proof dependencies sliced
+    Then function values and direct calls share one provider-before-consumer order
+    And quoted content and indivisible mutual groups retain their existing behavior

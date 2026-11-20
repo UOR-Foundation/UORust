@@ -6037,8 +6037,9 @@ fn mir_lift(
                 .insert(t.path.clone(), (span, Residue::Mir(cause.clone())));
         }
     }
-    out.decls.extend(in_dependency_order(aux));
-    out.decls.extend(body_decls);
+    let mut declarations = in_dependency_order(aux);
+    declarations.extend(body_decls);
+    out.decls.extend(surface_dependency_order(declarations));
     if options.trial != crate::mir::Trial::Off {
         out.listing = Some(listing);
     }
@@ -6107,42 +6108,23 @@ fn native_model_contexts(
     }).collect()
 }
 
-/// Expression application heads, excluding strings and their escaped quotes.
-fn expression_calls(text: &str) -> BTreeSet<String> {
-    let mut chars = text.chars().peekable();
-    let mut calls = BTreeSet::new();
-    while let Some(c) = chars.next() {
-        if c == '"' {
-            while let Some(c) = chars.next() {
-                if c == '\\' {
-                    chars.next();
-                } else if c == '"' {
-                    break;
-                }
-            }
-        } else if c == '(' {
-            while chars.peek().is_some_and(|c| c.is_whitespace()) {
-                chars.next();
-            }
-            let mut name = String::new();
-            while chars
-                .peek()
-                .is_some_and(|c| c.is_alphanumeric() || *c == '_' || *c == ':')
-            {
-                name.push(chars.next().expect("peeked character"));
-            }
-            if !name.is_empty() {
-                calls.insert(name);
-            }
-        }
-    }
-    calls
-}
-
 /// The surface lift orders within one source file. Its declarations also
 /// depend on constants and functions from other files; order those groups
 /// globally before emitting them, keeping each mutual group together.
 fn surface_dependency_order(decls: Vec<Decl>) -> Vec<Decl> {
+    let model = format!(
+        "\\begin{{semanticmodule}}\n{}\n\\end{{semanticmodule}}",
+        decls
+            .iter()
+            .map(crate::lex::render_decl)
+            .collect::<Vec<_>>()
+            .join("\n\n")
+    );
+    let Some(references) = crate::lex::declaration_dependencies(&model) else {
+        // Preserve every byte of an invalid declaration set for the SDK's
+        // normal diagnostic; ordering cannot accept a malformed module.
+        return decls;
+    };
     let mut groups: BTreeMap<String, Vec<Decl>> = BTreeMap::new();
     let mut names = BTreeMap::new();
     let mut pending = Vec::new();
@@ -6165,7 +6147,7 @@ fn surface_dependency_order(decls: Vec<Decl>) -> Vec<Decl> {
         .map(|(key, decls)| {
             let calls = decls
                 .iter()
-                .flat_map(|d| expression_calls(&crate::lex::render_decl(d)))
+                .flat_map(|d| references[d.name()].iter().cloned())
                 .filter_map(|name| names.get(&name).filter(|group| *group != key).cloned())
                 .collect();
             (key.clone(), calls)
@@ -8766,6 +8748,30 @@ mod tests {
     }
 
     #[test]
+    fn declaration_dependencies_include_function_values_ue_91() {
+        use super::{surface_dependency_order, Decl};
+        let def = |name: &str, body: &str| Decl::Definition {
+            type_parameters: Vec::new(),
+            name: name.into(),
+            parameters: Vec::new(),
+            result: "Bool".into(),
+            body: crate::lex::Expr::Flat(body.into()),
+            axioms: Vec::new(),
+            recursive: None,
+            termination: None,
+            mutual: None,
+        };
+        let ordered = surface_dependency_order(vec![
+            def("early", "(ref late)"),
+            def("quoted", r#""(ref early)""#),
+            def("late", "true"),
+        ]);
+        let names: Vec<_> = ordered.iter().map(Decl::name).collect();
+        assert!(names.iter().position(|n| *n == "late") < names.iter().position(|n| *n == "early"));
+        assert_eq!(names[0], "quoted");
+    }
+
+    #[test]
     fn surface_dependencies_cross_files_without_splitting_mutual_groups_ue_25() {
         let def = |name: &str, body: &str, mutual: Option<&str>| crate::lex::Decl::Definition {
             type_parameters: Vec::new(),
@@ -8798,10 +8804,6 @@ mod tests {
         assert!(
             position("literal") < position("base"),
             "strings create no dependency"
-        );
-        assert_eq!(
-            super::expression_calls(r#""(fake) \" (alsoFake)" ((real)) (second arg)"#),
-            std::collections::BTreeSet::from(["real".into(), "second".into()])
         );
     }
     use super::sha;

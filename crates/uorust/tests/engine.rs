@@ -8753,3 +8753,48 @@ fn main(){for n in [0,2] {for number in [0u8,7,255] {for flag in [false,true] {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+/// UE-91: a closure's native callback must precede its auxiliary definition.
+#[test]
+fn compiler_callback_dependencies_precede_native_auxiliaries_ue_91() {
+    let dir=scratch("callback-declaration-order",&[
+        ("Cargo.toml","[package]\nname=\"callback_order\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",r#"
+pub enum Choice {Left(u8),Right(u8)}
+pub fn is_right(x:&Choice)->bool {let mut n=1u8;while n>0 {n-=1;} matches!(x,Choice::Right(_))}
+pub fn filtered(mut n:u8,x:Option<Choice>)->Option<Choice> {while n>0 {n-=1;} x.filter(|x|!is_right(x))}
+"#),
+    ]);
+    let dumps = dumped(&dir, "callback-declaration-order");
+    let mut opts = options("callback_order");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    assert!(
+        text(&files, uorust::mir::CANDIDATES).contains("callback_order::filtered\""),
+        "{:?}",
+        residue_detail(&files, "callback_order::filtered")
+    );
+    let checked = std::process::Command::new("lexlean")
+        .args([
+            "check",
+            "src/Behavior.lex.tex",
+            "--diagnostic-format",
+            "json",
+        ])
+        .current_dir(&out)
+        .output()
+        .unwrap();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

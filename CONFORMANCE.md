@@ -111,6 +111,7 @@ model does not sanction.
 | `UE-88` | `build` | Compiler downcasts of admitted single-constructor data reuse content-bound SDK projection kernels and constructor identity proofs; multi-constructor data still requires branch evidence and incompatible field representations remain refused |
 | `UE-89` | `build` | Standard compiler calls reuse existing source semantic models through parametric native carrier interfaces and the coherent generic binder; payload operations without admitted semantics and mutable schemas remain refused |
 | `UE-90` | `build` | Compiler aggregate constructor forms resolve through admitted source algebraic declarations and preserve declared field identity and order; record-shaped enum variants and capitalized module struct paths cannot be confused |
+| `UE-91` | `build` | Source and native auxiliary definitions share one complete declaration dependency graph, including function values; providers precede consumers across the auxiliary/native boundary, quoted text creates no dependency, and mutual groups stay intact |
 
 ## factory
 

@@ -1509,3 +1509,22 @@ strict all-target Clippy and model/template/SDK-lock/generated-self-model gates.
 The entire-registry proposal analysis found nine possible additional functions
 and no previous-frontier losses. Proposals are not SDK proofs. Complete `just vv`,
 translator certification and the consumer release/adoption boundary remain open.
+
+## UE-91: complete source/native declaration ordering
+
+The compiler-backed callback regression reproduced SDK LLT4001 before the fix:
+an auxiliary closure referenced a native provider emitted later in the same
+module. Separate auxiliary and body partitions could not represent that edge.
+Both partitions now use one complete provider-before-consumer ordering. The
+existing declaration lexer supplies references, including function values;
+quoted strings remain opaque and mutual groups stay indivisible. Invalid
+serialized declarations retain their complete bytes for the SDK's normal
+refusal rather than acquiring a second public failure interface.
+
+The real SDK regression passed in 0.63 seconds after failing with the intended
+link diagnostic. Function-value ordering, quoted content, mutual groups and all
+nine lexer controls pass. Repository conformance, strict all-target Clippy,
+model validation, immutable template/SDK-lock checks and canonical generated
+self-model checks passed. Existing successful semantic receipts remain intact;
+the interrupted consumer campaign requires a newly frozen producer and guarded
+acceptance. No completed-consumer or release claim is made here.

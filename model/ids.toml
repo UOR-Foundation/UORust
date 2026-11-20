@@ -597,3 +597,9 @@ id = "UE-90"
 level = "build"
 suite = "engine"
 statement = "Compiler aggregate constructor forms resolve through admitted source algebraic declarations and preserve declared field identity and order; record-shaped enum variants and capitalized module struct paths cannot be confused"
+
+[[id]]
+id = "UE-91"
+level = "build"
+suite = "engine"
+statement = "Source and native auxiliary definitions share one complete declaration dependency graph, including function values; providers precede consumers across the auxiliary/native boundary, quoted text creates no dependency, and mutual groups stay intact"
