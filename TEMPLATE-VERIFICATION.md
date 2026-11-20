@@ -1878,3 +1878,20 @@ unbound and foreign schemas retain their prior refusals. A neutral unsigned
 record fixture passed eight Rust/SDK boundary observations and rejected a changed
 expected result with LLV7002. Its signed counterpart remains a separate control.
 Full release acceptance remains the unchanged `just vv` boundary.
+
+## UE-111: canonical and transitive compiler schema dependencies
+
+The registered regression initially rejected the canonical form of a record
+that its consumer path already imported. Instance keys now follow the existing
+source namespace normalizer, while aliases retain the first admitted record
+identity. Compiler bodies import missing closed record dependencies through the
+same strict declaration instancer. Their new schemas travel with their consuming
+proof through the existing type-declaration kernel. Caller scopes remain intact.
+
+The canonical and transitive dependency checks cover imported body declarations,
+foreign and open types, conditional and duplicate records, and ambiguous
+reexports. Five native Rust observations of a reversed range's count agree with
+the SDK model, including empty, descending and upper-bound inputs. A changed
+expected result is rejected with LLV7002. The interrupted SDK check was resumed
+without changing its models; its actual proved decision is retained for exact
+reuse. Full release acceptance remains the unchanged `just vv` boundary.

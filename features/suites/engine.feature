@@ -774,3 +774,10 @@ Feature: engine
     When the pinned declaration importer binds its native interface
     Then its constructor and field reads retain the authoritative declared field order
     And native models retain priority while ambiguous unbound and foreign schemas are refused
+
+  @UE-111 @build
+  Scenario: Imported compiler bodies close their record dependencies
+    Given consumer and canonical paths for closed compiler record dependencies
+    When an imported body introduces another closed compiler-owned record
+    Then the strict schema importer retains exact identities and complete declarations
+    But foreign ambiguous and unbound schemas remain refused

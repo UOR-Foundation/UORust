@@ -131,6 +131,7 @@ model does not sanction.
 | `UE-108` | `build` | MIR reinterpret casts and compiler intrinsic calls share one typed native representation kernel, preserving pointer carriers, UTF-8 views and fixed-width array layouts while retaining scalar validity, UTF-8 validity, pointer-view validity and target-layout refusal boundaries |
 | `UE-109` | `build` | Rooted native proof contexts share one immutable lexical dependency index per combined model, retaining exact declaration bytes, UTF-8 boundaries and indivisible mutual groups while preserving malformed-model, missing-root and empty-root refusals without reparsing the whole model per query |
 | `UE-110` | `build` | Pinned closed compiler record schemas are imported when native ABI lowering declines a type even if a source-only carrier fallback exists; native model carriers retain priority and conditional, ambiguous, unbound and foreign schemas remain refused |
+| `UE-111` | `build` | Compiler-owned closed record dependencies retain their canonical and consumer type identities, including schemas introduced by imported body locals, and use the existing native type declaration kernel; foreign, ambiguous and unbound schemas remain refused |
 
 ## factory
 

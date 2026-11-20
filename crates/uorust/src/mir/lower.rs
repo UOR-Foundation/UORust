@@ -8563,14 +8563,16 @@ impl Fun<'_, '_> {
             .blocks
             .iter()
             .any(|block| matches!(block.terminator, IrTerminator::Assert { .. }));
+        let mut scope = self.cx.types.clone();
+        super::core::import_compiler_schemas(&mut scope, &body.locals, self.cx.taken, &link.decls);
         let result = ty(
             body.locals.first().map(String::as_str).unwrap_or(""),
-            self.cx.types,
+            &scope,
         )?;
         let params: Vec<_> = (1..=body.arity)
-            .map(|i| ty(&body.locals[i], self.cx.types))
+            .map(|i| ty(&body.locals[i], &scope))
             .collect::<Lift<_>>()?;
-        let positions: Vec<_> = threaded(&body.locals, body.arity, false, self.cx.types)
+        let positions: Vec<_> = threaded(&body.locals, body.arity, false, &scope)
             .into_iter()
             .map(|i| i - 1)
             .collect();
@@ -8584,7 +8586,7 @@ impl Fun<'_, '_> {
             generic: None,
             result: result.clone(),
             threads: (!rest.is_empty())
-                .then(|| (threaded_result(&result, &rest, self.cx.types), positions)),
+                .then(|| (threaded_result(&result, &rest, &scope), positions)),
         };
         if !self.aux.contains_key(&name) {
             let mut active = self.cx.active.to_vec();
@@ -8592,6 +8594,7 @@ impl Fun<'_, '_> {
             let empty_callees = BTreeMap::new();
             let empty_signatures = BTreeMap::new();
             let mut cx = self.cx.within(&active);
+            cx.types = &scope;
             cx.library = Some(link);
             cx.krate = "core".into();
             cx.compiler_scope.clear();
@@ -8638,7 +8641,29 @@ impl Fun<'_, '_> {
             if lowered.abi.parameters != expected_parameters || lowered.abi.result != expected {
                 return Err(kind(k, "the compiler-library lowered ABI is incompatible"));
             }
-            for declaration in lowered.decls {
+            // Reuse the same declaration kernel as the complete projection.
+            // The lazy scope's new types must travel with their consuming proof.
+            let compared = scope.enums.keys().cloned().collect();
+            let mut emitted = BTreeSet::new();
+            let mut schemas = Vec::new();
+            for ty in &lowered.types {
+                for reached in ty.mentions() {
+                    if let Ty::Named(ref name) = reached {
+                        if scope.structs.contains_key(name)
+                            && !self.cx.types.structs.contains_key(name)
+                        {
+                            crate::project::type_decls(
+                                &reached,
+                                &scope,
+                                &compared,
+                                &mut emitted,
+                                &mut schemas,
+                            );
+                        }
+                    }
+                }
+            }
+            for declaration in schemas.into_iter().chain(lowered.decls) {
                 self.aux.insert(declaration.name().to_string(), declaration);
             }
             for (name, declaration) in lowered.aux {
@@ -10919,6 +10944,54 @@ impl Fun<'_, '_> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn imported_bodies_carry_their_new_record_declarations_ue_111() {
+        let root =
+            std::env::temp_dir().join(format!("uorust-imported-record-{}", std::process::id()));
+        std::fs::create_dir_all(root.join("library/core/src")).unwrap();
+        std::fs::write(root.join("library/core/src/lib.rs"), "pub struct Hidden { pub value:u32 } pub fn helper(n:u32)->u32 { Hidden {value:n}.value }").unwrap();
+        let text = "// MIR for `helper` before runtime-optimized\nfn helper(_1: u32) -> u32 {\nlet mut _0: u32;\nlet mut _2: Hidden;\nbb0: {\n_2 = Hidden { value: copy _1 };\n_0 = copy (_2.0: u32);\nreturn;\n}\n}\n".to_string();
+        let link = super::super::link::CoreLink::new(
+            super::super::core::core_decls(&root),
+            &root,
+            &root,
+            [("core.helper.runtime-optimized.after.mir", &text)],
+        );
+        let types = Types::default();
+        let cx = Cx {
+            types: &types,
+            source_sigs: &BTreeMap::new(),
+            widths: &[(64, vec!["test".into()])],
+            source_width: None,
+            callees: &BTreeMap::new(),
+            compiler_scope: String::new(),
+            compiler_definitions: &BTreeMap::new(),
+            compiler_bindings: &BTreeMap::new(),
+            dictionary_frames: &BTreeMap::new(),
+            closure_scopes: &BTreeMap::new(),
+            constants: &BTreeMap::new(),
+            krate: "consumer".into(),
+            taken: &BTreeSet::new(),
+            explicit: &BTreeSet::new(),
+            limit: 1_000_000,
+            consts: &BTreeMap::new(),
+            closures: &BTreeMap::new(),
+            active: &[],
+            core: None,
+            library: Some(&link),
+            layouts: &[],
+            backward: false,
+        };
+        let body = super::super::parse::bodies("fn root(_1: u32) -> u32 {\nlet mut _0: u32;\nbb0: {\n_0 = core::helper(copy _1) -> [return: bb1, unwind continue];\n    }\nbb1: {\nreturn;\n}\n}\n").remove(0);
+        let lowered = lower(&cx, &body, "root").unwrap();
+        assert!(lowered.aux.values().any(|decl| matches!(decl, Decl::Structure {name,fields,..} if name == "CoreHidden" && fields.iter().any(|(field,ty)|field == "value" && ty == "Nat"))));
+        assert!(
+            types.structs.is_empty(),
+            "an imported body mutated its caller's source scope"
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
 
     #[test]
     fn native_memory_interfaces_bind_exact_parameters_ue_98() {

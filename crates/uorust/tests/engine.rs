@@ -11231,3 +11231,116 @@ pub unsafe fn invalid_pointer(p:*const u8)->std::ptr::NonNull<u8> {unsafe{std::m
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn canonical_compiler_records_preserve_native_observations_ue_111() {
+    let dir = scratch("canonical-compiler-records", &[
+        ("Cargo.toml", "[package]\nname=\"canonical_records\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "pub fn reverse(a:u32,b:u32)->std::iter::Rev<std::ops::Range<u32>> { let mut n=1u8; while n>0 {n-=1;} (a..b).rev() }\n"),
+        ("src/bin/vectors.rs", "fn main(){for (a,b) in [(0,0),(0,1),(5,9),(100,87),(u32::MAX-3,u32::MAX)] { println!(\"{a} {b}|{}\",canonical_records::reverse(a,b).count()); }}\n"),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "canonical-compiler-records");
+    let mut opts = options("canonical_records");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        residue_detail(&proposed, "canonical_records::reverse").is_none(),
+        "{:?}",
+        residue_detail(&proposed, "canonical_records::reverse")
+    );
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("canonical_records"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let row = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("canonical_records::reverse"))
+        .unwrap_or_else(|| panic!("{:?}", residue_detail(&files, "canonical_records::reverse")));
+    let name = row["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let decisions = verdicts(&cache);
+    let policy = decisions
+        .rows
+        .get(row["kappa"].as_str().unwrap())
+        .and_then(|r| r.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let mut vectors = String::new();
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let (args, value) = line.split_once('|').unwrap();
+        let range = format!("(project ({name} {args}) iter)");
+        vectors.push_str(&format!("theorem{{name:canonicalRecordVector{i},parameters:[],statement:((prim subtract (project {range} endValue) (project {range} start) : Nat) = {value}),proof:decide{{}},axioms:[{}]}}\n", policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|line| line.contains("name:canonicalRecordVector0,"))
+        .unwrap();
+    let bad = good.replace(" = 0)", " = 1)");
+    assert_ne!(good, bad);
+    std::fs::write(&file, body.replacen(good, &bad, 1)).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    if let Some(export) = std::env::var_os("UORUST_TEST_OUTPUT_VERDICTS") {
+        std::fs::copy(&cache, export).unwrap();
+    }
+    std::fs::remove_dir_all(dir).unwrap();
+}

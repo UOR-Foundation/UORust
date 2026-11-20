@@ -1631,6 +1631,9 @@ impl Instances<'_> {
     /// The declared path `path` names from core's root, through the `use`
     /// names that re-export it.
     fn canonical(&self, path: &str, depth: usize) -> Option<String> {
+        if self.strict && self.decls.ambiguous_aliases.contains(path) {
+            return None;
+        }
         if self.by.contains_key(path)
             || self.decls.structs.iter().any(|schema| schema.path == path)
             || self.decls.traits.contains(path)
@@ -1643,7 +1646,14 @@ impl Instances<'_> {
         let target = self
             .decls
             .uses
-            .get(&(module.to_string(), name.to_string()))?;
+            .get(&(module.to_string(), name.to_string()))
+            .filter(|_| {
+                !self.strict
+                    || !self
+                        .decls
+                        .ambiguous_uses
+                        .contains(&(module.to_string(), name.to_string()))
+            })?;
         (depth < 16 && target != path).then(|| self.canonical(target, depth + 1))?
     }
 
@@ -1675,7 +1685,18 @@ impl Instances<'_> {
         let (head, rest) = path
             .split_once("::")
             .map_or((path, None), |(h, r)| (h, Some(r)));
-        if let Some(t) = self.decls.uses.get(&(module.to_string(), head.to_string())) {
+        if let Some(t) = self
+            .decls
+            .uses
+            .get(&(module.to_string(), head.to_string()))
+            .filter(|_| {
+                !self.strict
+                    || !self
+                        .decls
+                        .ambiguous_uses
+                        .contains(&(module.to_string(), head.to_string()))
+            })
+        {
             let full = rest.map_or_else(|| t.clone(), |r| format!("{t}::{r}"));
             return self.canonical(&full, 0);
         }
@@ -1785,7 +1806,7 @@ impl Instances<'_> {
     /// The lifted name of the declared type `path` at `args`, each of its
     /// fields' types lifted first.
     fn instance(&mut self, path: &str, args: &[&str], types: &mut Types) -> Option<String> {
-        let key = format!("{path}<{}>", args.join(","));
+        let key = self.rooted("", &format!("{path}<{}>", args.join(",")), 0);
         if let Some(n) = self.done.get(&key) {
             return n.clone();
         }
@@ -1989,12 +2010,21 @@ impl Instances<'_> {
             let Some(declared) = self.printed(path) else {
                 continue;
             };
-            if let Some(n) = self.instance(&declared, &args, types) {
+            let canonical = self.rooted("", &c, 0);
+            let existing = types
+                .aliases
+                .get(&canonical)
+                .filter(|name| {
+                    types.native_views.get(*name) == Some(&lift::Ty::Named((*name).clone()))
+                })
+                .cloned();
+            if let Some(n) = existing.or_else(|| self.instance(&declared, &args, types)) {
                 types
                     .aliases
                     .entry(super::lower::without_lifetimes(&c))
                     .or_insert_with(|| n.clone());
-                types.aliases.entry(c.clone()).or_insert(n);
+                types.aliases.entry(c.clone()).or_insert_with(|| n.clone());
+                types.aliases.entry(canonical).or_insert(n);
             }
         }
     }
@@ -3016,6 +3046,43 @@ pub(crate) fn import_standard_schemas(
     import_declaration_schemas(types, requested, reserved, standard_declarations());
 }
 
+/// Close schemas introduced by a body from the verified compiler-owned graph.
+/// Consumer paths remain qualified; only this explicit owner scope admits the
+/// canonical library paths that imported MIR uses without its crate prefix.
+pub(crate) fn import_compiler_schemas(
+    types: &mut Types,
+    requested: &[String],
+    reserved: &BTreeSet<String>,
+    source: &CoreDecls,
+) {
+    let mut roots = BTreeSet::new();
+    for text in requested {
+        let mut parts = Vec::new();
+        components(&source.compiler_type(text), &mut parts);
+        for component in parts {
+            if super::lower::native_type(&component, types).is_ok() {
+                continue;
+            }
+            let path = component
+                .split('<')
+                .next()
+                .unwrap_or(&component)
+                .trim_end_matches("::");
+            if source.structs.iter().any(|schema| schema.path == path) {
+                roots.insert(format!("core::{component}"));
+            }
+        }
+    }
+    if !roots.is_empty() {
+        import_declaration_schemas(
+            types,
+            &roots.into_iter().collect::<Vec<_>>(),
+            reserved,
+            source,
+        );
+    }
+}
+
 fn import_declaration_schemas(
     types: &mut Types,
     requested: &[String],
@@ -3122,6 +3189,76 @@ fn import_declaration_schemas(
 mod standard_interface_tests {
     use super::*;
     use crate::lift::Ty;
+
+    #[test]
+    fn compiler_records_keep_canonical_dependency_identities_ue_111() {
+        let source = standard_declarations();
+        let consumer = "std::iter::Rev<std::ops::Range<u32>>";
+        let canonical = source.compiler_type(consumer);
+        assert_eq!(
+            canonical,
+            "iter::adapters::rev::Rev<ops::range::Range<u32>>"
+        );
+        let mut types = Types::default();
+        import_standard_schemas(&mut types, &[consumer.into()], &BTreeSet::new());
+        let external = super::super::lower::ty(consumer, &types);
+        let internal = super::super::lower::ty(&canonical, &types);
+        assert!(
+            external.is_ok() && internal.is_ok(),
+            "consumer/canonical schema mismatch: {external:?} / {internal:?}"
+        );
+        assert_eq!(external.unwrap(), internal.unwrap());
+        let mut dependency = Types::default();
+        import_compiler_schemas(
+            &mut dependency,
+            std::slice::from_ref(&canonical),
+            &BTreeSet::new(),
+            source,
+        );
+        assert!(
+            super::super::lower::ty(&canonical, &dependency).is_ok(),
+            "imported body dependency missing"
+        );
+        for input in [
+            "consumer::iter::Rev<std::ops::Range<u32>>",
+            "iter::adapters::rev::Rev<T>",
+        ] {
+            let mut refused = Types::default();
+            import_compiler_schemas(&mut refused, &[input.into()], &BTreeSet::new(), source);
+            assert!(
+                super::super::lower::ty(input, &refused).is_err(),
+                "unowned or open schema admitted: {input}"
+            );
+        }
+        for mode in 0..3 {
+            let mut changed = source.clone();
+            match mode {
+                0 => {
+                    changed
+                        .conditional
+                        .insert("iter::adapters::rev::Rev".into());
+                }
+                1 => {
+                    let schema = changed
+                        .structs
+                        .iter()
+                        .find(|s| s.path == "iter::adapters::rev::Rev")
+                        .unwrap()
+                        .clone();
+                    changed.structs.push(schema);
+                }
+                _ => {
+                    changed.ambiguous_uses.insert(("iter".into(), "Rev".into()));
+                }
+            }
+            let mut refused = Types::default();
+            import_compiler_schemas(&mut refused, &[consumer.into()], &BTreeSet::new(), &changed);
+            assert!(
+                super::super::lower::ty(consumer, &refused).is_err(),
+                "ambiguous compiler schema admitted: {mode}"
+            );
+        }
+    }
 
     #[test]
     fn native_record_schemas_precede_source_fallbacks_ue_110() {
