@@ -10071,3 +10071,140 @@ pub fn read(x:u8)->u128 {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn native_constructor_function_items_reuse_schema_kernels_ue_101() {
+    let dir=scratch("constructor-function-items", &[
+      ("Cargo.toml", "[package]\nname=\"constructor_calls\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+      ("src/lib.rs",r#"
+pub enum Packet { Value(u8) }
+pub fn packet(x:Option<u8>)->u8 {
+ let mut n=1u8;while n>0 {n-=1;}
+ match x.map(Packet::Value) {Some(Packet::Value(y))=>y,None=>0}
+}
+pub fn option(x:Option<u8>)->u8 {
+ let mut n=1u8;while n>0 {n-=1;}
+ match x.map(Some) {Some(Some(y))=>y,_=>0}
+}
+pub fn result(x:Option<u8>)->u8 {
+ let mut n=1u8;while n>0 {n-=1;}
+ match x.map(Result::<u8,bool>::Ok) {Some(Ok(y))=>y,_=>0}
+}
+"#),
+      ("src/bin/vectors.rs", r#"
+use constructor_calls::*;
+fn main(){for x in [None,Some(0u8),Some(7),Some(255)] {
+ let input=match x {None=>"(ctor Option.none [Nat])".into(),Some(y)=>format!("(ctor Option.some [Nat] {y})")};
+ for (name,value) in [("packet",packet(x)),("option",option(x)),("result",result(x))] {println!("{name}|{input}|{value}");}
+}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "constructor-function-items");
+    let mut probe = options("constructor_calls");
+    probe.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &probe).unwrap();
+    for function in ["packet", "option", "result"] {
+        let path = format!("constructor_calls::{function}");
+        assert!(
+            residue_detail(&proposed, &path).is_none(),
+            "{path}: {:?}",
+            residue_detail(&proposed, &path)
+        );
+    }
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("constructor_calls"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("constructor_calls");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let decisions = verdicts(&cache);
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 12);
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let fields: Vec<_> = line.split('|').collect();
+        let path = format!("constructor_calls::{}", fields[0]);
+        let row = rows.iter().find(|r| r["function"].as_str() == Some(&path));
+        assert!(row.is_some(), "{path}: {:?}", residue_detail(&files, &path));
+        let name = row.unwrap()["definition"]
+            .as_str()
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name:constructorVector{i},parameters:[],statement:(({name} {}) = {}),proof:decide{{}},axioms:[{}]}}\n",fields[1],fields[2],policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|line| line.contains("name:constructorVector6,"))
+        .unwrap();
+    let bad = good.replace(" = 7)", " = 8)");
+    assert_ne!(good, bad);
+    let wrong = body.replacen(good, &bad, 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

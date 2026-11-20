@@ -704,3 +704,10 @@ Feature: engine
     When native MIR reads their constants and existing unary operations
     Then the same primitive kernels supply the captured types and values
     But workspace lookalikes and target-dependent identities cannot select them
+
+  @UE-101 @build
+  Scenario: Constructor function values reuse admitted enum schemas
+    Given compiler function items naming tuple variants of admitted enums
+    When a native dependency passes them to an existing higher-order model
+    Then shared callable kernels construct those exact variants through the established aggregate lowering
+    But unavailable schemas and incompatible carriers cannot acquire a callable meaning

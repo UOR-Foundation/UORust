@@ -1686,3 +1686,19 @@ with LLV7002 (101.33 seconds). All 103 MIR checks passed, including explicit
 namespace and shadowing controls and the existing target-width controls.
 Conformance, strict Clippy and model/template/SDK/self-model checks passed.
 Complete release acceptance remains the unchanged `just vv` boundary.
+
+## UE-101: constructor function values share admitted aggregate kernels
+
+The initial native fixture refused a tuple-variant function item (0.87 seconds).
+A shared callable binding now reads the exact admitted variant schema and uses
+the existing native aggregate lowering once per content-bound constructor
+interface. Existing higher-order models consume that callable. Unavailable or
+named-field variants, unbound type parameters, mutable schemas and source-only
+scalar carriers cannot select it. No operation semantics were added.
+
+Twelve actual Rust/SDK comparisons passed for workspace enum, Option and Result
+constructors in higher-order calls. An incorrect result was rejected with
+LLV7002 (103.20 seconds). Twenty-two lowering controls, including schema and
+carrier negatives, conformance, strict Clippy and model/template/SDK/self-model
+checks passed. Complete release acceptance remains the unchanged `just vv`
+boundary.

@@ -121,6 +121,7 @@ model does not sanction.
 | `UE-98` | `build` | Native callable interfaces propagate the existing modeled memory state through dependency closures, including computed panic outcomes, changing loop-state packets and frame-local release; unrelated allocations and unsupported cleanup, generic and borrowed-result interfaces remain protected |
 | `UE-99` | `build` | Native calls import existing source semantics for exact lock-admitted registry owners and compiler-resolved language operators through shared typed bindings; unrelated traits, unregistered owners, mutable interfaces and unavailable source semantics remain refused |
 | `UE-100` | `build` | Compiler-owned primitive namespaces bind existing native type, constant and unary kernels without changing their semantics; workspace lookalikes, mismatched owner paths and target-dependent constants remain refused |
+| `UE-101` | `build` | First-class tuple-variant constructors reuse admitted enum schemas and native aggregate kernels through shared typed callable bindings; unavailable schemas, named-field variants and incompatible scalar carriers remain refused |
 
 ## factory
 

@@ -138,6 +138,74 @@ pub(crate) fn constant_interface(written: &str, result: &Ty, types: &Types) -> b
         && super::source::callable_environment(result, types)
 }
 
+/// A constructor function item has the exact fields of its admitted variant.
+/// Source-only scalar carriers cannot stand in for native callable parameters.
+fn constructor_schema(path: &str, types: &Types) -> Option<(String, String, Ty, Vec<Ty>)> {
+    fn native_parameter(t: &Ty) -> bool {
+        match t {
+            Ty::Int(_) | Ty::Integer(_) | Ty::Char | Ty::Param(_) => false,
+            Ty::Option(t) | Ty::List(t) | Ty::Set(t, _) => native_parameter(t),
+            Ty::Map(a, b, _) | Ty::Outcome(a, b) => native_parameter(a) && native_parameter(b),
+            Ty::Tuple(ts) | Ty::Pair(ts) => ts.iter().all(native_parameter),
+            Ty::Fn(ins, out) => ins.iter().all(native_parameter) && native_parameter(out),
+            _ => true,
+        }
+    }
+    let (owner, variant) = path.rsplit_once("::")?;
+    let target = ty(owner, types).ok()?;
+    if !target.parameters().is_empty() || !super::source::generic_environment(&target, types) {
+        return None;
+    }
+    let standard = erase(owner);
+    let fields = match (&target, variant) {
+        (Ty::Option(t), "Some")
+            if matches!(
+                standard.as_str(),
+                "std::option::Option" | "core::option::Option"
+            ) =>
+        {
+            vec![(None, (**t).clone())]
+        }
+        (Ty::Outcome(ok, _), "Ok")
+            if matches!(
+                standard.as_str(),
+                "std::result::Result" | "core::result::Result"
+            ) =>
+        {
+            vec![(None, (**ok).clone())]
+        }
+        (Ty::Outcome(_, error), "Err")
+            if matches!(
+                standard.as_str(),
+                "std::result::Result" | "core::result::Result"
+            ) =>
+        {
+            vec![(None, (**error).clone())]
+        }
+        (Ty::Named(name), _) => types
+            .datas
+            .get(name)?
+            .iter()
+            .find(|(name, _)| name == variant)?
+            .1
+            .clone(),
+        _ => return None,
+    };
+    if fields.is_empty()
+        || fields
+            .iter()
+            .any(|(name, t)| name.is_some() || !native_parameter(t))
+    {
+        return None;
+    }
+    Some((
+        owner.into(),
+        variant.into(),
+        target,
+        fields.into_iter().map(|(_, t)| t).collect(),
+    ))
+}
+
 /// The source and native readings of Self share the declaring owner's frame.
 pub(crate) fn constant_scope(types: &Types, owner: &str) -> Types {
     let mut scope = types.clone();
@@ -4287,12 +4355,77 @@ impl Fun<'_, '_> {
             self.mention(&t);
             return Some((term, t));
         }
+        if let Some(constructor) = self.constructor_item(path) {
+            return Some(constructor);
+        }
         let inner = shared_borrow_item(path, self.cx.types)?;
         let argument = self.fresh(Some("borrowed"), 0);
         let term = format!("(fun ({argument} : {}) => {argument})", inner.render());
         let t = Ty::Fn(vec![inner.clone()], Box::new(inner));
         self.mention(&t);
         Some((term, t))
+    }
+
+    /// Reuse aggregate lowering once per closed constructor interface.
+    fn constructor_item(&mut self, path: &str) -> Option<(String, Ty)> {
+        let (owner, variant, target, inputs) = constructor_schema(path, self.cx.types)?;
+        let identity = crate::project::sha(
+            format!("constructor/1\0{target:?}\0{variant}\0{inputs:?}").as_bytes(),
+        );
+        let name = super::codec::binding(&format!("mirConstructor{identity}"), self.cx.taken);
+        let parameters: Vec<_> = inputs
+            .iter()
+            .enumerate()
+            .map(|(i, t)| (format!("constructorArg{i}"), t.render()))
+            .collect();
+        let arguments: Vec<_> = parameters.iter().map(|(n, _)| n.clone()).collect();
+        if !self.aux.contains_key(&name) {
+            let operands: Vec<_> = inputs
+                .iter()
+                .enumerate()
+                .map(|(i, _)| {
+                    (
+                        None,
+                        IrOperand::Copy(IrPlace {
+                            local: i + 1,
+                            projection: Vec::new(),
+                        }),
+                    )
+                })
+                .collect();
+            let body = self
+                .aggregate(
+                    &IrAggregate::Adt(owner, Some(variant)),
+                    &target,
+                    &operands,
+                    arguments.clone(),
+                )
+                .ok()?;
+            self.aux.insert(
+                name.clone(),
+                Decl::Definition {
+                    name: name.clone(),
+                    type_parameters: Vec::new(),
+                    parameters: parameters.clone(),
+                    result: target.render(),
+                    body: Expr::Flat(body),
+                    axioms: Vec::new(),
+                    recursive: None,
+                    termination: None,
+                    mutual: None,
+                },
+            );
+        }
+        self.calls.insert(name.clone());
+        let binders = parameters
+            .iter()
+            .map(|(n, t)| format!("({n} : {t})"))
+            .collect::<Vec<_>>()
+            .join(" ");
+        let term = format!("(fun {binders} => ({name} {}))", arguments.join(" "));
+        let function = Ty::Fn(inputs, Box::new(target));
+        self.mention(&function);
+        Some((term, function))
     }
 
     /// A constant's own body (a promoted constant or a constant item),
@@ -10409,6 +10542,35 @@ mod tests {
                 super::super::memory::memory_ty()
             ])
         );
+    }
+
+    #[test]
+    fn constructor_items_require_exact_closed_variant_interfaces_ue_101() {
+        let mut types = Types::default();
+        types.datas.insert(
+            "Packet".into(),
+            vec![
+                ("Value".into(), vec![(None, Ty::Nat(Some(8)))]),
+                ("Character".into(), vec![(None, Ty::Char)]),
+                (
+                    "Named".into(),
+                    vec![(Some("value".into()), Ty::Nat(Some(8)))],
+                ),
+                ("Empty".into(), Vec::new()),
+            ],
+        );
+        assert!(constructor_schema("Packet::Value", &types).is_some());
+        assert!(constructor_schema("std::result::Result::<u8,bool>::Ok", &types).is_some());
+        for path in [
+            "Packet::Character",
+            "Packet::Named",
+            "Packet::Empty",
+            "Packet::Missing",
+            "Unknown::Value",
+            "workspace::Result::<u8,bool>::Ok",
+        ] {
+            assert!(constructor_schema(path, &types).is_none(), "{path}");
+        }
     }
 
     #[test]

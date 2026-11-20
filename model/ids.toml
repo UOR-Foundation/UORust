@@ -657,3 +657,9 @@ id = "UE-100"
 level = "build"
 suite = "engine"
 statement = "Compiler-owned primitive namespaces bind existing native type, constant and unary kernels without changing their semantics; workspace lookalikes, mismatched owner paths and target-dependent constants remain refused"
+
+[[id]]
+id = "UE-101"
+level = "build"
+suite = "engine"
+statement = "First-class tuple-variant constructors reuse admitted enum schemas and native aggregate kernels through shared typed callable bindings; unavailable schemas, named-field variants and incompatible scalar carriers remain refused"
