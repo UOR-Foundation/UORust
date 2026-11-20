@@ -217,6 +217,13 @@ pub(crate) fn constant_scope(types: &Types, owner: &str) -> Types {
     scope
 }
 
+/// Source-admitted dictionary parameters and exact compiler call bindings.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct DictionaryFrame {
+    pub(crate) entries: Vec<lift::Entry>,
+    pub(crate) calls: BTreeMap<String, usize>,
+}
+
 /// What every function of a crate is translated against.
 pub(crate) struct Cx<'a> {
     pub(crate) types: &'a Types,
@@ -232,6 +239,7 @@ pub(crate) struct Cx<'a> {
     pub(crate) compiler_scope: String,
     pub(crate) compiler_definitions: &'a BTreeMap<String, CompilerDefinition<'a>>,
     pub(crate) compiler_bindings: &'a super::identity::Bindings,
+    pub(crate) dictionary_frames: &'a BTreeMap<String, DictionaryFrame>,
     pub(crate) closure_scopes: &'a BTreeMap<String, String>,
     /// Actual source constant declarations, never inferred from zero-arity functions.
     pub(crate) constants: &'a BTreeMap<String, Constant>,
@@ -299,6 +307,7 @@ impl<'a> Cx<'a> {
             compiler_scope: self.compiler_scope.clone(),
             compiler_definitions: self.compiler_definitions,
             compiler_bindings: self.compiler_bindings,
+            dictionary_frames: self.dictionary_frames,
             closure_scopes: self.closure_scopes,
             constants: self.constants,
             krate: self.krate.clone(),
@@ -420,6 +429,8 @@ enum MirStep {
 #[derive(Clone, Debug, Default)]
 struct State {
     env: BTreeMap<IrLocal, Val>,
+    /// Source dictionary slot -> current immutable callable and its exact type.
+    dictionaries: BTreeMap<String, (String, Ty)>,
     path: Vec<MirStep>,
     /// Match binders in scope, with their types.
     binders: Vec<(String, Ty)>,
@@ -459,6 +470,7 @@ type Transform = (String, Option<(Ty, usize)>);
 struct Loop {
     name: String,
     live: Vec<(IrLocal, String, Ty)>,
+    dictionaries: Vec<String>,
     /// The locals whose values live in memory, by their pointers'
     /// parameters, and the memory's parameter, after the live locals.
     carried: Vec<(IrLocal, String)>,
@@ -1174,6 +1186,23 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool, outcomes: bool
     f.mut_params.extend(threads.iter().copied());
     f.ret = f.local_ty(0, &[])?;
     let mut st = State::default();
+    if super::closure_type(body).is_none() {
+        if let Some(frame) = cx.dictionary_frames.get(&cx.compiler_scope) {
+            if !frame.entries.is_empty() && (memory || cx.backward || !threads.is_empty()) {
+                return Err(kind(
+                    spec::MirTerminatorKind::Call.path(),
+                    "a source dictionary needs its immutable native interface",
+                ));
+            }
+            for entry in &frame.entries {
+                let name = f.fresh(Some(&entry.name), usize::MAX);
+                f.params.push((name.clone(), entry.ty.clone()));
+                st.dictionaries
+                    .insert(entry.name.clone(), (name, entry.ty.clone()));
+                f.mention(&entry.ty);
+            }
+        }
+    }
     // A closure's definition takes its environment first (the struct of its
     // captures), then its arguments.
     let closure = super::closure_type(body);
@@ -1676,6 +1705,15 @@ impl Fun<'_, '_> {
         if let (Some(_), Some((n, _))) = (&lp.new, &self.backward) {
             args.push(n.clone());
         }
+        for slot in &lp.dictionaries {
+            let (value, _) = st.dictionaries.get(slot).ok_or_else(|| {
+                kind(
+                    "TerminatorKind::Goto",
+                    "a loop dictionary slot is unavailable",
+                )
+            })?;
+            args.push(value.clone());
+        }
         let packet = lp.packet.as_ref().map(|ty| lift::tuple_value(ty, &args));
         let call = if let Some(packet) = &packet {
             format!("({} {packet})", lp.name)
@@ -1897,6 +1935,13 @@ impl Fun<'_, '_> {
             inside: Some(h),
             ..State::default()
         };
+        let mut dictionaries = Vec::new();
+        for (slot, (_, ty)) in &entry.dictionaries {
+            let name = self.fresh(Some(slot), usize::MAX);
+            st.dictionaries
+                .insert(slot.clone(), (name.clone(), ty.clone()));
+            dictionaries.push((slot.clone(), name, ty.clone()));
+        }
         for l in live {
             let t = self.local_ty(l, &[]).map_err(|_| {
                 kind(
@@ -1948,6 +1993,11 @@ impl Fun<'_, '_> {
                     .map(|m| (m.clone(), super::memory::memory_ty())),
             )
             .chain(new.iter().cloned())
+            .chain(
+                dictionaries
+                    .iter()
+                    .map(|(_, name, ty)| (name.clone(), ty.clone())),
+            )
             .collect();
         // A loop whose header does not exit on an order of naturals: its
         // measure a natural every write in the loop makes smaller (`x / c`,
@@ -2094,6 +2144,9 @@ impl Fun<'_, '_> {
                 if let Some(old) = &memory {
                     st.memory = Some(substitutions[old].clone());
                 }
+                for (value, _) in st.dictionaries.values_mut() {
+                    *value = stdlib::substitute(value, &substitutions);
+                }
                 self.scope = vec![(state, ty.clone())];
                 if memory.is_some() {
                     measure.0 = stdlib::substitute(&measure.0, &substitutions);
@@ -2110,6 +2163,10 @@ impl Fun<'_, '_> {
         let lp = Loop {
             name: name.clone(),
             live: params.clone(),
+            dictionaries: dictionaries
+                .iter()
+                .map(|(slot, _, _)| slot.clone())
+                .collect(),
             carried: carried.clone(),
             memory: memory.clone(),
             invariants: invariants.clone(),
@@ -2349,6 +2406,7 @@ impl Fun<'_, '_> {
                 next.env.insert(*l, v.clone());
             }
         }
+        next.dictionaries = st.dictionaries.clone();
         next.placed = st.placed.clone();
         next.memory = st.memory.clone();
         let after = self
@@ -6924,6 +6982,29 @@ impl Fun<'_, '_> {
             if super::views::touches(owner, self.cx.types)
                 || ty(owner, self.cx.types).is_ok_and(|t| !t.parameters().is_empty())
             {
+                if let Some(frame) = self.cx.dictionary_frames.get(&self.cx.compiler_scope) {
+                    if let Some(entry) = frame.calls.get(callee).and_then(|i| frame.entries.get(*i))
+                    {
+                        let (dictionary, _) = st.dictionaries.get(&entry.name).cloned().ok_or_else(|| kind(k, "the admitted dictionary is unavailable in this callable interface"))?;
+                        let Ty::Fn(inputs, output) = &entry.ty else {
+                            return Err(kind(k, "an admitted dictionary entry is not callable"));
+                        };
+                        if inputs.len() != args.len() || **output != *dt {
+                            return Err(kind(k, "native dictionary arity or result carrier differs from its admitted interface"));
+                        }
+                        let mut values = Vec::new();
+                        for ((value, actual), expected) in args.iter().zip(inputs) {
+                            if actual != expected {
+                                return Err(kind(k, "native dictionary argument carrier differs from its admitted interface"));
+                            }
+                            values.push(value.clone());
+                        }
+                        return Ok(Called::value(format!(
+                            "(apply {dictionary} {})",
+                            values.join(" ")
+                        )));
+                    }
+                }
                 return Err(kind(
                     k,
                     "parametric trait dispatch needs an admitted dictionary",
@@ -10664,6 +10745,7 @@ fn expose() -> impl Fn(u8) -> u8 {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
             krate: "test".into(),
@@ -10720,6 +10802,7 @@ fn guarded(_1: u8) -> u8 {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
             krate: "test".into(),
@@ -10768,6 +10851,7 @@ fn guarded(_1: u8) -> u8 {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
             krate: "test".into(),
@@ -10836,6 +10920,7 @@ fn guarded(_1: u8) -> u8 {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
             krate: "test".into(),

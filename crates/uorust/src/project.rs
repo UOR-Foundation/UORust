@@ -5770,8 +5770,49 @@ fn mir_lift(
     }
     let index = crate::mir::identity::Index::new(&callees);
     let mut compiler_bindings = crate::mir::identity::Bindings::new();
+    let mut dictionary_frames = BTreeMap::new();
     for (scope, (r, requests)) in requests {
         let mut imports = BTreeMap::new();
+        let mut dictionary = lower::DictionaryFrame {
+            entries: generics
+                .get(&r)
+                .map(|g| g.dictionary.clone())
+                .unwrap_or_default(),
+            calls: BTreeMap::new(),
+        };
+        for request in &requests {
+            let Some((method, owner, reference)) = crate::mir::identity::parts(request) else {
+                continue;
+            };
+            let Ok(Ty::Param(parameter)) = lower::ty(&owner, base_scope(r)) else {
+                continue;
+            };
+            let Some(trait_identity) =
+                resolver.compiler_type_identity((r.pkg, r.file, r.idx), &reference)
+            else {
+                continue;
+            };
+            let matching: Vec<_> = dictionary
+                .entries
+                .iter()
+                .enumerate()
+                .filter(|(_, entry)| {
+                    entry.param == parameter
+                        && entry.method == method
+                        && resolver
+                            .source_type_identity((r.pkg, r.file, r.idx), &entry.declarer)
+                            .is_some_and(|source| source.matches(&trait_identity))
+                })
+                .map(|(i, _)| i)
+                .collect();
+            if let [entry] = matching.as_slice() {
+                dictionary.calls.insert(request.clone(), *entry);
+            }
+        }
+        if !dictionary.entries.is_empty() {
+            dictionary_frames.insert(scope.clone(), dictionary);
+        }
+
         for request in requests {
             if let Some(callee) = index.resolve(&request, |text| {
                 resolver.compiler_type_identity((r.pkg, r.file, r.idx), text)
@@ -5816,6 +5857,7 @@ fn mir_lift(
         compiler_scope: frame(r),
         compiler_definitions: &compiler_definitions,
         compiler_bindings: &compiler_bindings,
+        dictionary_frames: &dictionary_frames,
         closure_scopes: &closure_scopes,
         constants,
         krate: ctx.crate_ident(r),

@@ -711,3 +711,10 @@ Feature: engine
     When a native dependency passes them to an existing higher-order model
     Then shared callable kernels construct those exact variants through the established aggregate lowering
     But unavailable schemas and incompatible carriers cannot acquire a callable meaning
+
+  @UE-102 @build
+  Scenario: Native generic bodies reuse source trait dictionaries
+    Given an admitted source trait dictionary and compiler-qualified dispatch in a native body
+    When the existing generic binder supplies each concrete implementation
+    Then native calls and loop helpers retain that exact typed dictionary
+    But unrelated traits and unavailable dictionary interfaces cannot supply a method

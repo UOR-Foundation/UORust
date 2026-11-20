@@ -494,6 +494,7 @@ pub(crate) fn shard(
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
             krate: krate.to_string(),

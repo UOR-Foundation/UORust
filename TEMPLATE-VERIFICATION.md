@@ -1702,3 +1702,20 @@ LLV7002 (103.20 seconds). Twenty-two lowering controls, including schema and
 carrier negatives, conformance, strict Clippy and model/template/SDK/self-model
 checks passed. Complete release acceptance remains the unchanged `just vv`
 boundary.
+
+## UE-102: native generic calls reuse admitted source dictionaries
+
+The initial native fixture refused parametric dispatch (0.68 seconds). The
+shared compiler/source identity resolver now binds calls to the existing
+source-admitted dictionary entries. Native definitions receive those exact
+callables through their established generic ABI; loop helpers transport them
+in the same state representation as other live values. Method and trait
+identity, arity and all carriers must agree. No trait semantics were added.
+
+Eight actual Rust/SDK comparisons passed for two coherent implementations,
+including wrapping boundaries. An incorrect result was rejected with LLV7002
+(159.19 seconds). A separate admission control keeps missing, mutable and
+uncaptured dictionary interfaces refused (0.32 seconds). Twenty-two lowering
+controls, compiler-reference identity coverage, conformance, strict Clippy and
+model/template/SDK/self-model checks passed. Complete release acceptance remains
+the unchanged `just vv` boundary.

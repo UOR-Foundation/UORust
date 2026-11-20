@@ -10208,3 +10208,157 @@ fn main(){for x in [None,Some(0u8),Some(7),Some(255)] {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn native_generic_bodies_reuse_source_dictionaries_ue_102() {
+    let dir=scratch("native-source-dictionaries", &[
+      ("Cargo.toml", "[package]\nname=\"dictionary_calls\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+      ("src/lib.rs",r#"
+pub trait Read {fn read(&self)->u8;}
+pub struct First {pub value:u8}
+pub struct Second {pub value:u8}
+impl Read for First {fn read(&self)->u8 {self.value}}
+impl Read for Second {fn read(&self)->u8 {self.value.wrapping_add(1)}}
+pub fn generic<T:Read>(x:&T)->u8 {let mut n=1u8;while n>0 {n-=1;}x.read()}
+pub fn first(x:u8)->u8 {generic(&First{value:x})}
+pub fn second(x:u8)->u8 {generic(&Second{value:x})}
+"#),
+      ("src/bin/vectors.rs",r#"
+use dictionary_calls::*;
+fn main(){for x in [0u8,7,254,255] {println!("first|{x}|{}",first(x));println!("second|{x}|{}",second(x));}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let dumps = dumped(&dir, "native-source-dictionaries");
+    let mut probe = options("dictionary_calls");
+    probe.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let proposed = uorust::project_workspace(&dir, &probe).unwrap();
+    assert!(
+        residue_detail(&proposed, "dictionary_calls::generic").is_none(),
+        "{:?}",
+        residue_detail(&proposed, "dictionary_calls::generic")
+    );
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("dictionary_calls"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("dictionary_calls");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let decisions = verdicts(&cache);
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 8);
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let fields: Vec<_> = line.split('|').collect();
+        let path = format!("dictionary_calls::{}", fields[0]);
+        let row = rows.iter().find(|r| r["function"].as_str() == Some(&path));
+        assert!(row.is_some(), "{path}: {:?}", residue_detail(&files, &path));
+        let name = row.unwrap()["definition"]
+            .as_str()
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|v| v.function == path)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        vectors.push_str(&format!("theorem{{name:dictionaryVector{i},parameters:[],statement:(({name} {}) = {}),proof:decide{{}},axioms:[{}]}}\n",fields[1],fields[2],policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|line| line.contains("name:dictionaryVector2,"))
+        .unwrap();
+    let bad = good.replace(" = 7)", " = 8)");
+    assert_ne!(good, bad);
+    let wrong = body.replacen(good, &bad, 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn native_dictionary_boundaries_fail_closed_ue_102() {
+    let dir=scratch("native-dictionary-boundaries", &[
+        ("Cargo.toml","[package]\nname=\"dictionary_boundaries\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",r#"
+pub trait Read {fn read(&self)->u8;}
+pub fn exclusive<T:Read>(x:&mut T)->u8 {let mut n=1u8;while n>0 {n-=1;}x.read()}
+pub fn uncaptured<T:Read>(x:&T)->u8 {let mut n=1u8;while n>0 {n-=1;}let f=||x.read();f()}
+pub fn unavailable<T:std::hash::Hasher>(x:&T)->u64 {let mut n=1u8;while n>0 {n-=1;}x.finish()}
+"#),
+    ]);
+    let dumps = dumped(&dir, "native-dictionary-boundaries");
+    let mut opts = options("dictionary_boundaries");
+    opts.mir = Some(mir_options(
+        dumps,
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for function in ["exclusive", "uncaptured", "unavailable"] {
+        let path = format!("dictionary_boundaries::{function}");
+        let detail = residue_detail(&files, &path)
+            .unwrap_or_else(|| panic!("{path} acquired an unavailable dictionary interface"));
+        assert!(detail.contains("dictionary"), "{path}: {detail}");
+    }
+    std::fs::remove_dir_all(dir).unwrap();
+}

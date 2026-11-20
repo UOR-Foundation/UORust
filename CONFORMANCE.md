@@ -122,6 +122,7 @@ model does not sanction.
 | `UE-99` | `build` | Native calls import existing source semantics for exact lock-admitted registry owners and compiler-resolved language operators through shared typed bindings; unrelated traits, unregistered owners, mutable interfaces and unavailable source semantics remain refused |
 | `UE-100` | `build` | Compiler-owned primitive namespaces bind existing native type, constant and unary kernels without changing their semantics; workspace lookalikes, mismatched owner paths and target-dependent constants remain refused |
 | `UE-101` | `build` | First-class tuple-variant constructors reuse admitted enum schemas and native aggregate kernels through shared typed callable bindings; unavailable schemas, named-field variants and incompatible scalar carriers remain refused |
+| `UE-102` | `build` | Native generic bodies reuse admitted source trait dictionaries through compiler-owned trait identities, exact carrier bindings and shared loop-state transport; unregistered, mismatched and unsupported mutable dictionaries remain refused |
 
 ## factory
 
