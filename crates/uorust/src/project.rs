@@ -5762,36 +5762,45 @@ fn mir_lift(
         compiler_bindings.insert(scope, imports);
     }
     // The functions the MIR path translates, by LexLean name.
-    let translations: BTreeMap<String, String> = todo
+    let mut translations: BTreeMap<String, String> = todo
         .iter()
         .map(|(r, name, _)| (name.clone(), ctx.path(*r)))
         .collect();
+    let mut outcome_names = BTreeMap::new();
+    for (_, name, _) in &todo {
+        let mut view = format!("nativeOutcome{}", sha(name.as_bytes()));
+        while !names.insert(view.clone()) {
+            view.push_str("Value");
+        }
+        outcome_names.insert(name.clone(), view);
+    }
+    let context = |r: FnRef| lower::Cx {
+        types: scope(r),
+        source_sigs: &source_sigs[r.pkg],
+        widths: &widths,
+        source_width: dumps.source_width(),
+        callees: &callees,
+        compiler_scope: frame(r),
+        compiler_definitions: &compiler_definitions,
+        compiler_bindings: &compiler_bindings,
+        closure_scopes: &closure_scopes,
+        constants,
+        krate: ctx.crate_ident(r),
+        taken: &names,
+        explicit: &explicit,
+        limit: ctx.limits.max_file_bytes(),
+        consts: dumps.consts.get(&ctx.crate_ident(r)).unwrap_or(&no_consts),
+        closures: &closures,
+        active: &[],
+        core: None,
+        layouts: &layouts,
+        backward: false,
+    };
     // Translate each.
     let mut done: BTreeMap<String, Translation> = BTreeMap::new();
-    for (r, name, body) in todo {
+    for (r, name, body) in todo.iter().cloned() {
         let path = ctx.path(r);
-        let cx = lower::Cx {
-            types: scope(r),
-            source_sigs: &source_sigs[r.pkg],
-            widths: &widths,
-            source_width: dumps.source_width(),
-            callees: &callees,
-            compiler_scope: frame(r),
-            compiler_definitions: &compiler_definitions,
-            compiler_bindings: &compiler_bindings,
-            closure_scopes: &closure_scopes,
-            constants,
-            krate: ctx.crate_ident(r),
-            taken: &names,
-            explicit: &explicit,
-            limit: ctx.limits.max_file_bytes(),
-            consts: dumps.consts.get(&ctx.crate_ident(r)).unwrap_or(&no_consts),
-            closures: &closures,
-            active: &[],
-            core: None,
-            layouts: &layouts,
-            backward: false,
-        };
+        let cx = context(r);
         match lower::lower(&cx, body, &name) {
             Ok(mut lowered) => {
                 if let Some(generic) = callees.get(&path).and_then(|c| c.generic.as_ref()) {
@@ -5832,42 +5841,102 @@ fn mir_lift(
     // Bind transitive native dependencies as well. A lowering change can
     // alter a callee while its stable Rust name and its caller's text stay
     // the same. Sorted closures also cover recursive components.
-    let digests: BTreeMap<String, String> = done
-        .keys()
-        .map(|name| {
-            let mut pending = vec![name.clone()];
-            let mut closure = BTreeSet::new();
-            while let Some(next) = pending.pop() {
-                if let Some(body) = done.get(&next) {
-                    if closure.insert(next) {
-                        pending.extend(
-                            body.lowered
-                                .calls
-                                .iter()
-                                .filter(|n| done.contains_key(*n))
-                                .cloned(),
-                        );
+    // Rebind after a changed semantic ABI, retaining exact normal receipts.
+    for view_round in 0..2 {
+        for translation in done.values_mut() {
+            let text: String = translation
+                .lowered
+                .aux
+                .values()
+                .chain(&translation.lowered.decls)
+                .map(crate::lex::render_decl)
+                .collect();
+            translation.digest = sha(text.as_bytes());
+            translation.model_context_sha256 = None;
+        }
+        let digests: BTreeMap<String, String> = done
+            .keys()
+            .map(|name| {
+                let mut pending = vec![name.clone()];
+                let mut closure = BTreeSet::new();
+                while let Some(next) = pending.pop() {
+                    if let Some(body) = done.get(&next) {
+                        if closure.insert(next) {
+                            pending.extend(
+                                body.lowered
+                                    .calls
+                                    .iter()
+                                    .filter(|n| done.contains_key(*n))
+                                    .cloned(),
+                            );
+                        }
                     }
                 }
+                let dependencies: BTreeMap<_, _> =
+                    closure.iter().map(|n| (n, &done[n].digest)).collect();
+                let digest = sha(
+                    serde_json::json!({"context":proof_context,"dependencies":dependencies})
+                        .to_string()
+                        .as_bytes(),
+                );
+                (name.clone(), digest)
+            })
+            .collect();
+        for (name, digest) in digests {
+            done.get_mut(&name).expect("translation key").digest = digest;
+        }
+        let rooted = native_model_contexts(&done, source_models, source_types, lifted, &ctx.limits);
+        for (name, model) in rooted {
+            done.get_mut(&name)
+                .expect("translation key")
+                .model_context_sha256 = model;
+        }
+        if view_round == 1 {
+            break;
+        }
+        let selected: Vec<_> = todo
+            .iter()
+            .filter(|(_, name, body)| {
+                let Some(t) = done.get(name) else {
+                    return false;
+                };
+                body.blocks.iter().any(|block| {
+                    matches!(
+                        block.terminator,
+                        crate::mir::ir::IrTerminator::Assert { .. }
+                    )
+                }) && options
+                    .verdicts
+                    .matching(&t.kappa, &t.digest, t.model_context_sha256.as_deref())
+                    .is_some_and(|v| matches!(v.status, Decision::Refused(_)))
+            })
+            .cloned()
+            .collect();
+        let mut changed = false;
+        for (r, normal, body) in selected {
+            let name = &outcome_names[&normal];
+            let Ok(mut lowered) = lower::lower_outcomes(&context(r), body, name) else {
+                continue;
+            };
+            if let Some(generic) = callees.get(&ctx.path(r)).and_then(|c| c.generic.as_ref()) {
+                crate::lex::bind_parameters(
+                    &mut lowered.decls,
+                    &mut lowered.aux,
+                    &generic.types,
+                    name,
+                );
             }
-            let dependencies: BTreeMap<_, _> =
-                closure.iter().map(|n| (n, &done[n].digest)).collect();
-            let digest = sha(
-                serde_json::json!({"context":proof_context,"dependencies":dependencies})
-                    .to_string()
-                    .as_bytes(),
-            );
-            (name.clone(), digest)
-        })
-        .collect();
-    for (name, digest) in digests {
-        done.get_mut(&name).expect("translation key").digest = digest;
-    }
-    let rooted = native_model_contexts(&done, source_models, source_types, lifted, &ctx.limits);
-    for (name, model) in rooted {
-        done.get_mut(&name)
-            .expect("translation key")
-            .model_context_sha256 = model;
+            let mut translation = done.remove(&normal).expect("selected normal model");
+            translation.name = name.clone();
+            translation.lowered = lowered;
+            translation.model_context_sha256 = None;
+            translations.insert(name.clone(), translation.path.clone());
+            done.insert(name.clone(), translation);
+            changed = true;
+        }
+        if !changed {
+            break;
+        }
     }
     // Admission: a verdict of the digest, or the trial; then every
     // translation a translation calls must be admitted too.

@@ -177,6 +177,7 @@ pub(crate) fn bodies(text: &str) -> Vec<IrBody> {
                     }
                 }
             } else if let Some(id) = t.strip_prefix("bb").and_then(|r| r.strip_suffix(": {")) {
+                body.has_cleanup |= id.contains("(cleanup)");
                 let id = id.split_whitespace().next().unwrap_or(id);
                 current = id.parse().ok().map(|id| (id, Vec::new()));
             } else if t == "}" {

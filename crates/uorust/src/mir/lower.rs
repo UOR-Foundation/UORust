@@ -430,6 +430,8 @@ struct Fun<'a, 'c> {
     /// The definition's result: `_0`'s type, followed by the new value of
     /// each `&mut` parameter where it has any (see [`threaded`]).
     result: Ty,
+    /// Preserve actual compiler assertion exits instead of proving them absent.
+    outcomes: bool,
     /// Whether the body returns `!`: it never returns, so a diverging call
     /// is its meaning, and the theorem that the call is unreachable is its
     /// callers' to prove.
@@ -874,6 +876,39 @@ fn through_pointer(what: &str) -> Residue {
 
 /// Translate one body to the definition `name`.
 pub(crate) fn lower(cx: &Cx<'_>, body: &IrBody, name: &str) -> Lift<Lowered> {
+    lower_mode(cx, body, name, false)
+}
+
+/// A changed, computed ABI for bodies whose normal-only view was refused.
+pub(crate) fn lower_outcomes(cx: &Cx<'_>, body: &IrBody, name: &str) -> Lift<Lowered> {
+    if body.has_cleanup
+        || body
+            .blocks
+            .iter()
+            .any(|b| matches!(b.terminator, IrTerminator::Drop(_)))
+    {
+        return Err(kind(
+            "TerminatorKind::Assert",
+            "panic cleanup needs an admitted effect interface",
+        ));
+    }
+    let returned = body.locals.first().map(String::as_str).unwrap_or("");
+    if cx.backward
+        || returned == "!"
+        || mut_target(returned).is_some()
+        || syn::parse_str::<syn::Type>(returned)
+            .ok()
+            .is_some_and(|t| super::views::borrows_mutably(&crate::convert::ty(&t)))
+    {
+        return Err(kind(
+            "TerminatorKind::Return",
+            "a panic outcome needs an admitted returned-borrow interface",
+        ));
+    }
+    lower_mode(cx, body, name, true)
+}
+
+fn lower_mode(cx: &Cx<'_>, body: &IrBody, name: &str, outcomes: bool) -> Lift<Lowered> {
     if !cx.types.generic.is_empty()
         || body
             .locals
@@ -907,8 +942,8 @@ pub(crate) fn lower(cx: &Cx<'_>, body: &IrBody, name: &str) -> Lift<Lowered> {
     // pointer, or where a callee does: then the memory is threaded through
     // it.
     let direct = reaches_memory(body);
-    match lower_in(cx, body, name, direct) {
-        Err(r) if !direct && is_needs_memory(&r) => lower_in(cx, body, name, true),
+    match lower_in(cx, body, name, direct, outcomes) {
+        Err(r) if !direct && is_needs_memory(&r) => lower_in(cx, body, name, true, outcomes),
         Err(r) if is_needs_memory(&r) => Err(kind(
             MEMORY_KIND,
             "a memory the body's translation cannot thread",
@@ -917,7 +952,13 @@ pub(crate) fn lower(cx: &Cx<'_>, body: &IrBody, name: &str) -> Lift<Lowered> {
     }
 }
 
-fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool) -> Lift<Lowered> {
+fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool, outcomes: bool) -> Lift<Lowered> {
+    if outcomes && memory {
+        return Err(kind(
+            MEMORY_KIND,
+            "panic outcomes need an admitted heap-state interface",
+        ));
+    }
     let mut f = Fun {
         cx,
         body,
@@ -925,6 +966,7 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool) -> Lift<Lowere
         params: Vec::new(),
         ret: Ty::Unit,
         result: Ty::Unit,
+        outcomes,
         diverges: body.locals.first().is_some_and(|t| t.trim() == "!"),
         loops: BTreeMap::new(),
         regions: BTreeMap::new(),
@@ -1066,7 +1108,12 @@ fn lower_in(cx: &Cx<'_>, body: &IrBody, name: &str, memory: bool) -> Lift<Lowere
         st.memory = Some(m);
         threads_ty.push(super::memory::memory_ty());
     }
-    f.result = threaded_result(&f.ret, &threads_ty, cx.types);
+    let forward = if outcomes {
+        Ty::Outcome(Box::new(f.ret.clone()), Box::new(Ty::Str))
+    } else {
+        f.ret.clone()
+    };
+    f.result = threaded_result(&forward, &threads_ty, cx.types);
     // The backward function takes the returned borrow's new value last, and
     // gives the last value of the one `&mut` parameter it threads.
     if cx.backward {
@@ -2311,12 +2358,17 @@ impl Fun<'_, '_> {
                     }
                 };
                 let threads = self.threads();
+                let returned = if self.outcomes {
+                    format!("(ctor Result.ok [{}, String] {v})", self.ret.render())
+                } else {
+                    v.clone()
+                };
                 let v = if threads.is_empty() && !self.memory {
-                    v
+                    returned
                 } else {
                     // `_0`, then the last value of each `&mut` parameter,
                     // then the memory.
-                    let mut items = vec![v];
+                    let mut items = vec![returned];
                     for l in threads {
                         let place = IrPlace {
                             local: l,
@@ -2325,7 +2377,7 @@ impl Fun<'_, '_> {
                         items.push(self.read(&place, &st)?.0);
                     }
                     if self.memory {
-                        items.push(self.returned_memory(&items[0], &st)?);
+                        items.push(self.returned_memory(&v, &st)?);
                     }
                     lift::tuple_value(&self.result, &items)
                 };
@@ -2348,6 +2400,24 @@ impl Fun<'_, '_> {
                     ));
                 }
                 let goal = format!("({c} = {expected})");
+                if self.outcomes {
+                    let mut success = st.clone();
+                    success.path.push(MirStep::If(c.clone(), *expected));
+                    let mut panic = st;
+                    panic.path.push(MirStep::If(c.clone(), !expected));
+                    let success = self.goto(*target, success)?;
+                    let panic = self.panic_exit(&panic, *k)?;
+                    let (then, otherwise) = if *expected {
+                        (success, panic)
+                    } else {
+                        (panic, success)
+                    };
+                    return Ok(Expr::If {
+                        condition: Box::new(Expr::Flat(c)),
+                        then: Box::new(then),
+                        otherwise: Box::new(otherwise),
+                    });
+                }
                 self.obligation(&st, &goal, k.path());
                 self.goto(*target, st)
             }
@@ -2417,6 +2487,36 @@ impl Fun<'_, '_> {
             }
             IrTerminator::Other(k, _) => Err(kind(k.path(), "")),
         }
+    }
+
+    /// The same value-state tuple as normal return, with a lossless compiler
+    /// assertion-kind tag in the SDK Result. No failed proof becomes an axiom.
+    fn panic_exit(&mut self, st: &State, assertion: spec::MirAssertKind) -> Lift<Expr> {
+        let failure = format!(
+            "(ctor Result.error [{}, String] {})",
+            self.ret.render(),
+            toml::Value::String(assertion.path().into())
+        );
+        let mut items = vec![failure];
+        for local in self.threads() {
+            items.push(
+                self.read(
+                    &IrPlace {
+                        local,
+                        projection: Vec::new(),
+                    },
+                    st,
+                )?
+                .0,
+            );
+        }
+        let value = if items.len() == 1 {
+            items.remove(0)
+        } else {
+            lift::tuple_value(&self.result, &items)
+        };
+        self.grow(&value)?;
+        Ok(Expr::Flat(self.returned(value)))
     }
 
     /// The place a mutable borrow of `p` borrows: through a borrow it
@@ -10061,6 +10161,55 @@ impl Fun<'_, '_> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn assertion_outcomes_cannot_discard_cleanup_ue_95() {
+        let mut body = super::super::parse::bodies(
+            r#"
+fn guarded(_1: u8) -> u8 {
+    let mut _0: u8;
+    bb0: {
+        _0 = copy _1;
+        return;
+    }
+    bb1 (cleanup): {
+        resume;
+    }
+}
+"#,
+        )
+        .remove(0);
+        assert!(body.has_cleanup);
+        let types = Types::default();
+        let cx = Cx {
+            types: &types,
+            source_sigs: &BTreeMap::new(),
+            widths: &[(64, vec!["test".into()])],
+            source_width: None,
+            callees: &BTreeMap::new(),
+            compiler_scope: String::new(),
+            compiler_definitions: &BTreeMap::new(),
+            compiler_bindings: &BTreeMap::new(),
+            closure_scopes: &BTreeMap::new(),
+            constants: &BTreeMap::new(),
+            krate: "test".into(),
+            taken: &BTreeSet::new(),
+            explicit: &BTreeSet::new(),
+            limit: 1_000_000,
+            consts: &BTreeMap::new(),
+            closures: &BTreeMap::new(),
+            active: &[],
+            core: None,
+            layouts: &[],
+            backward: false,
+        };
+        assert!(lower_outcomes(&cx, &body, "guarded")
+            .unwrap_err()
+            .detail()
+            .contains("cleanup"));
+        body.has_cleanup = false;
+        assert!(lower_outcomes(&cx, &body, "guarded").is_ok());
+    }
 
     #[test]
     fn writes_cannot_change_an_opaque_storage_carrier_ue_70() {

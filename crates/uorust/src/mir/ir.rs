@@ -30,6 +30,8 @@ pub(crate) struct IrBody {
     /// gives them.
     pub(crate) upvars: Vec<Option<(String, String)>>,
     pub(crate) blocks: Vec<IrBlock>,
+    /// Cleanup blocks need an unwinding/state interface before panic can exit.
+    pub(crate) has_cleanup: bool,
     /// Where the source declares the body's return place, as a dump under
     /// `-Zmir-include-spans` prints it: the signature's return type.
     pub(crate) span: Option<IrSpan>,

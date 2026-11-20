@@ -9262,3 +9262,139 @@ fn compiler_target_metadata_refuses_malformed_toml_ue_94() {
     ));
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn compiler_assertion_outcomes_preserve_value_state_ue_95() {
+    let dir = scratch("compiler-assertion-outcomes", &[
+        ("Cargo.toml", "[package]\nname=\"assertion_outcomes\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn step(x:&mut u8,delta:u8)->u8 {
+ let mut n=1u8; while n>0 {n-=1;}
+ *x=x.wrapping_add(1);
+ let next=*x+delta;
+ *x=next;
+ next
+}
+"#),
+        ("src/bin/vectors.rs", r#"
+use assertion_outcomes::step;
+fn main() {for (initial,delta) in [(0u8,0u8),(0,255),(254,0),(254,1),(255,0),(255,255),(200,54),(200,55)] {
+ let mut state=initial;
+ let result=std::panic::catch_unwind(std::panic::AssertUnwindSafe(||step(&mut state,delta)));
+ match result {Ok(value)=>println!("{initial}|{delta}|ok|{value}|{state}"),Err(_)=>println!("{initial}|{delta}|panic|0|{state}")}
+}}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 8);
+    let dumps = dumped(&dir, "compiler-assertion-outcomes");
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("assertion_outcomes"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("assertion_outcomes");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    assert!(
+        rows.iter()
+            .any(|r| r["function"].as_str() == Some("assertion_outcomes::step")),
+        "{:?}",
+        residue_detail(&files, "assertion_outcomes::step")
+    );
+    assert!(text(&files, "src/Behavior.lex.tex").contains("Result.error"));
+    let name = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("assertion_outcomes::step"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let decisions = verdicts(&cache);
+    let policy = decisions
+        .rows
+        .values()
+        .find(|r| r.function == "assertion_outcomes::step")
+        .and_then(|r| r.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let fields: Vec<_> = line.split('|').collect();
+        let [initial, delta, kind, value, state] = fields.as_slice() else {
+            panic!("{line}")
+        };
+        let expected = if *kind == "ok" {
+            value.to_string()
+        } else {
+            "256".into()
+        };
+        let observed = format!("(match (project ({name} {initial} {delta}) item0) | Result.ok value => value | Result.error reason => 256)");
+        vectors.push_str(&format!("theorem{{name:outcomeVector{i},parameters:[],statement:({observed} = {expected}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+        let tag = if *kind == "ok" {
+            ""
+        } else {
+            "AssertKind::Overflow"
+        };
+        let observed = format!("(match (project ({name} {initial} {delta}) item0) | Result.ok value => \"\" | Result.error reason => reason)");
+        vectors.push_str(&format!("theorem{{name:panicTagVector{i},parameters:[],statement:({observed} = \"{tag}\"),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+        vectors.push_str(&format!("theorem{{name:stateVector{i},parameters:[],statement:((project ({name} {initial} {delta}) item1) = {state}),proof:decide{{}},axioms:[{}]}}\n",policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(" = 255)", " = 254)", 1);
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

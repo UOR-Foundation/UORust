@@ -1580,3 +1580,20 @@ boundary products and overflow, and rejected an incorrect result with LLV7002
 mutable interfaces and malformed compiler configuration. Ninety-seven MIR
 tests, 16 CLI tests, conformance, strict Clippy and model/template/SDK/self-model
 checks passed. Complete release acceptance remains `just vv`.
+
+## UE-95: computed assertion outcomes retain tracked value-state
+
+The initial native fixture was refused because valid inputs can overflow. The
+shared lowering now preserves compiler assertions as computed SDK Result
+branches, including the tracked mutable argument values on both exits. Exact
+normal-model refusals select this distinct ABI; ordinary verified models keep
+their identities. Cleanup, heap and unavailable call interfaces remain refused.
+
+The neutral regression compares eight actual Rust executions against 24 SDK
+assertions covering return values, panic-kind tags and state. An incorrect
+result is rejected with LLV7002. A cleanup-control test demonstrates that
+unwinding metadata cannot be erased to admit this model. No standard-operation
+semantics or semantic-registry entry was added. The regression passed in
+104.08 seconds; 98 MIR tests, conformance, strict Clippy and model/template/SDK/
+self-model checks passed. Complete release acceptance remains the unchanged
+`just vv` boundary.

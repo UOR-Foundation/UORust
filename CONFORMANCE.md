@@ -115,6 +115,7 @@ model does not sanction.
 | `UE-92` | `build` | Compiler-qualified source semantic imports can use exact source ABI representations through shared native/source codec kernels; both input and result conversions are required, while mutable interfaces and unsupported representations remain refused |
 | `UE-93` | `build` | Compiler-qualified standard trait calls on closed primitive owners reuse existing source semantics and exact ABI kernels; workspace traits, workspace owners and composite owners with unbound payload implementations cannot enter this adapter |
 | `UE-94` | `build` | Pointer-sized source/native imports use the captured compilation target and its uniquely matching compiler layout, through existing fixed-width semantics and codecs; missing or conflicting ABI evidence supplies no specialization |
+| `UE-95` | `build` | Native compiler assertions can produce computed return/panic outcomes together with tracked value-state using SDK Result values and compiler assertion identities; exact rejected normal models select this changed semantic view, while cleanup, heap and unavailable callee interfaces remain refused |
 
 ## factory
 

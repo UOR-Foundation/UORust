@@ -662,3 +662,10 @@ Feature: engine
     When an existing source model needs the pointer width of that compilation
     Then fixed-width semantic and codec kernels use that recorded ABI
     But missing or conflicting target evidence supplies no specialization
+
+  @UE-95 @build
+  Scenario: Compiler panic paths preserve their computed outcomes and value-state
+    Given a native Rust body whose valid inputs may fail a compiler assertion
+    When the exact normal-only model was rejected and the value-state ABI is available
+    Then the canonical function computes both return and panic outcomes with the updated state
+    But cleanup and unavailable effect interfaces cannot be discarded to admit it
