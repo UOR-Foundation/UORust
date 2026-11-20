@@ -1802,3 +1802,20 @@ Complete release acceptance remains the unchanged `just vv` boundary.
 
 The regenerated fixture changes declaration order only. Fixture reproduction,
 repo-conformance, strict Clippy and model/template/SDK/self-model gates passed.
+
+## UE-107: compiler arithmetic forms share modular intrinsic kernels
+
+The neutral optimized-library wrapping body was refused by LLV7002 with an
+unsigned overflow counterexample (53.38 seconds). Compiler-owned plain integer
+MIR arithmetic now uses the existing fixed-width modular intrinsic kernels;
+consumer interfaces, explicit overflow assertions and unchecked-operation
+preconditions retain their admitted interpretation. No operation model or
+compiler-stage alternative was added.
+
+Six actual Rust/SDK boundary comparisons passed, including signed extrema and
+wraparound, and the incorrect result was rejected with LLV7002 (112.32 seconds).
+Twenty-three lowering controls preserve unsafe-operation preconditions,
+refuse mixed target widths and reject incompatible carriers. Eight integer
+kernel controls and the library effect-propagation regression (13.20 seconds)
+passed, as did conformance, strict Clippy and model/template/SDK/self-model
+checks. Complete release acceptance remains the unchanged `just vv` boundary.

@@ -10877,3 +10877,111 @@ pub fn packet(n:u8)->(Result<(),std::fmt::Error>,u8) {
     assert!(String::from_utf8_lossy(&rejected.stdout).contains("LLT4001"));
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn compiler_integer_forms_share_modular_kernels_ue_107() {
+    let dir = scratch("compiler-integer-forms", &[
+        ("Cargo.toml", "[package]\nname=\"compiler_integer_forms\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn read(a:u64,b:i64)->u64 {
+ let mut n=1u8;while n>0 {n-=1;}
+ a.wrapping_add_signed(b)
+}
+"#),
+    ]);
+    let dumps = dumped(&dir, "compiler-integer-forms");
+    let cache = dir.join("verdicts.toml");
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("compiler_integer_forms"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    let mut opts = options("compiler_integer_forms");
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    assert!(
+        rows.iter()
+            .any(|row| row["function"].as_str() == Some("compiler_integer_forms::read")),
+        "{:?}",
+        residue_detail(&files, "compiler_integer_forms::read")
+    );
+    let name = rows
+        .iter()
+        .find(|row| row["function"].as_str() == Some("compiler_integer_forms::read"))
+        .unwrap()["definition"]
+        .as_str()
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let decisions = verdicts(&cache);
+    let policy = decisions
+        .rows
+        .values()
+        .find(|v| v.function == "compiler_integer_forms::read")
+        .and_then(|v| v.axioms.get(name))
+        .cloned()
+        .unwrap_or_default();
+    let mut vectors = String::new();
+    for (i, (a, b, expected)) in [
+        (0u64, -1i64, u64::MAX),
+        (u64::MAX, 1, 0),
+        (0, i64::MIN, 1u64 << 63),
+        (u64::MAX, i64::MAX, (1u64 << 63) - 2),
+        (1, -1, 0),
+        (42, 7, 49),
+    ]
+    .into_iter()
+    .enumerate()
+    {
+        assert_eq!(a.wrapping_add_signed(b), expected);
+        vectors.push_str(&format!("theorem{{name:compilerIntegerVector{i},parameters:[],statement:(({name} {a} {}) = {expected}),proof:decide{{}},axioms:[{}]}}\n",b as u64,policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|l| l.contains("name:compilerIntegerVector0,"))
+        .unwrap();
+    let bad = good.replace(" = 18446744073709551615)", " = 0)");
+    assert_ne!(good, bad);
+    std::fs::write(&file, body.replacen(good, &bad, 1)).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

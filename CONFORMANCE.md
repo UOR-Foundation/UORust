@@ -127,6 +127,7 @@ model does not sanction.
 | `UE-104` | `build` | Native calls import compiler-library dependency closures from exact pinned compiler bodies through the existing library resolver and shared MIR lowering, propagating discovered library panic outcomes through the native dependency graph before proof work and preserving consumer carriers and producer identity; changed, ambiguous, unbound and incompatible library interfaces remain refused without operation-specific semantic models |
 | `UE-105` | `build` | Compiler-library dependency bodies use the exact pinned compiler optimization stage through the existing resolver and native ABI, retaining typed borrowed record state without handwritten operation models; source, target, pass and producer mismatches remain refused |
 | `UE-106` | `build` | Source and imported native declarations share one lexical dependency order before emission, preserving mutual groups and retaining invalid cycles, missing dependencies and conflicting declarations for SDK rejection |
+| `UE-107` | `build` | Compiler-owned fixed-width plain MIR integer arithmetic reuses the existing modular intrinsic kernels across compiler forms, retaining explicit overflow assertions and unchecked-operation preconditions; target-dependent widths and incompatible carriers remain refused |
 
 ## factory
 

@@ -5875,6 +5875,23 @@ impl Fun<'_, '_> {
             };
             return Ok(Val::V(f.term(name, &[&x, &y]), t));
         }
+        // Compiler library optimization exposes wrapping arithmetic as plain
+        // MIR operations. Use the same modular kernels as its intrinsic form;
+        // explicit overflow asserts and unchecked operations keep their gates.
+        if self.cx.semantics().is_some() && xt == yt && matches!(xt, Ty::Nat(_) | Ty::Signed(_)) {
+            let kernel = match op {
+                B::Add => Some("wrapping_add"),
+                B::Sub => Some("wrapping_sub"),
+                B::Mul => Some("wrapping_mul"),
+                _ => None,
+            };
+            if let Some(kernel) = kernel {
+                let args = [(x, xt.clone()), (y, yt)];
+                return self
+                    .int_intrinsic(op.path(), kernel, &args, st)
+                    .map(|term| Val::V(term, xt));
+            }
+        }
         let nat = matches!(xt, Ty::Nat(_)) && matches!(yt, Ty::Nat(_));
         let boolean = xt == Ty::Bool && yt == Ty::Bool;
         let v = |s: String, t: Ty| Ok(Val::V(s, t));
@@ -10976,6 +10993,61 @@ mod tests {
             BTreeMap::from([("value".into(), crate::lift::CellKind::Cell)]),
         );
         assert!(!constant_interface("Packet", &result, &types));
+    }
+
+    #[test]
+    fn compiler_integer_forms_keep_unsafe_and_width_guards_ue_107() {
+        let types = Types::default();
+        let link = super::super::link::CoreLink::new(
+            Default::default(),
+            std::path::Path::new("/library"),
+            std::path::Path::new("/library/core"),
+            std::iter::empty(),
+        );
+        let cx = Cx {
+            types: &types,
+            source_sigs: &BTreeMap::new(),
+            widths: &[(64, vec!["test".into()])],
+            source_width: None,
+            callees: &BTreeMap::new(),
+            compiler_scope: String::new(),
+            compiler_definitions: &BTreeMap::new(),
+            compiler_bindings: &BTreeMap::new(),
+            dictionary_frames: &BTreeMap::new(),
+            closure_scopes: &BTreeMap::new(),
+            constants: &BTreeMap::new(),
+            krate: "test".into(),
+            taken: &BTreeSet::new(),
+            explicit: &BTreeSet::new(),
+            limit: 1_000_000,
+            consts: &BTreeMap::new(),
+            closures: &BTreeMap::new(),
+            active: &[],
+            core: Some(&link),
+            library: None,
+            layouts: &[],
+            backward: false,
+        };
+        let body = |op: &str, ty: &str| {
+            super::super::parse::bodies(&format!(
+            "fn read(_1: {ty}, _2: {ty}) -> {ty} {{\nlet mut _0: {ty};\nbb0: {{\n_0 = {op}(copy _1, copy _2);\nreturn;\n}}\n}}\n"
+        )).remove(0)
+        };
+        let plain = lower(&cx, &body("Add", "u8"), "plain").unwrap();
+        assert!(!plain
+            .decls
+            .iter()
+            .any(|d| matches!(d, Decl::Theorem { .. })));
+        let unchecked = lower(&cx, &body("AddUnchecked", "u8"), "unchecked").unwrap();
+        assert!(unchecked.decls.iter().any(|d| matches!(d,
+            Decl::Theorem { statement, .. } if statement.contains("255"))));
+        let varying = Cx {
+            widths: &[(32, vec!["narrow".into()]), (64, vec!["wide".into()])],
+            ..cx
+        };
+        let rejected = lower(&varying, &body("Add", "usize"), "varying").unwrap_err();
+        assert!(rejected.detail().contains("width differs"));
+        assert!(lower(&varying, &body("Add", "bool"), "incompatible").is_err());
     }
 
     #[test]

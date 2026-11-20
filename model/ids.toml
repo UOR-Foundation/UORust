@@ -693,3 +693,9 @@ id = "UE-106"
 level = "build"
 suite = "engine"
 statement = "Source and imported native declarations share one lexical dependency order before emission, preserving mutual groups and retaining invalid cycles, missing dependencies and conflicting declarations for SDK rejection"
+
+[[id]]
+id = "UE-107"
+level = "build"
+suite = "engine"
+statement = "Compiler-owned fixed-width plain MIR integer arithmetic reuses the existing modular intrinsic kernels across compiler forms, retaining explicit overflow assertions and unchecked-operation preconditions; target-dependent widths and incompatible carriers remain refused"

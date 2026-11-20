@@ -746,3 +746,10 @@ Feature: engine
     When source and native declarations are merged into one behavior module
     Then its field types precede their consumers and SDK verification succeeds
     But unavailable types, cycles and conflicting declarations remain rejected
+
+  @UE-107 @build
+  Scenario: Optimized MIR arithmetic shares modular intrinsic kernels
+    Given plain wrapping integer operations exposed by pinned compiler optimization
+    When native lowering binds their existing fixed-width intrinsic kernels
+    Then Rust and SDK observations agree across unsigned and signed boundaries
+    But explicit overflow assertions and unchecked-operation preconditions remain enforced
