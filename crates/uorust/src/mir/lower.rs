@@ -8563,8 +8563,14 @@ impl Fun<'_, '_> {
             .blocks
             .iter()
             .any(|block| matches!(block.terminator, IrTerminator::Assert { .. }));
-        let mut scope = self.cx.types.clone();
-        super::core::import_compiler_schemas(&mut scope, &body.locals, self.cx.taken, &link.decls);
+        let scope = super::core::compiler_body_scope(
+            self.cx.types,
+            &body.locals,
+            self.cx.taken,
+            &link.decls,
+            &instance.path,
+            &instance.bound,
+        );
         let result = ty(
             body.locals.first().map(String::as_str).unwrap_or(""),
             &scope,
@@ -10950,13 +10956,13 @@ mod tests {
         let root =
             std::env::temp_dir().join(format!("uorust-imported-record-{}", std::process::id()));
         std::fs::create_dir_all(root.join("library/core/src")).unwrap();
-        std::fs::write(root.join("library/core/src/lib.rs"), "pub struct Hidden { pub value:u32 } pub fn helper(n:u32)->u32 { Hidden {value:n}.value }").unwrap();
-        let text = "// MIR for `helper` before runtime-optimized\nfn helper(_1: u32) -> u32 {\nlet mut _0: u32;\nlet mut _2: Hidden;\nbb0: {\n_2 = Hidden { value: copy _1 };\n_0 = copy (_2.0: u32);\nreturn;\n}\n}\n".to_string();
+        std::fs::write(root.join("library/core/src/lib.rs"), "pub mod inner {pub struct Hidden { pub value:u32 } pub fn helper(n:u32)->u32 { Hidden {value:n}.value }}").unwrap();
+        let text = "// MIR for `inner::helper` before runtime-optimized\nfn inner::helper(_1: u32) -> u32 {\nlet mut _0: u32;\nlet mut _2: Hidden;\nbb0: {\n_2 = Hidden { value: copy _1 };\n_0 = copy (_2.0: u32);\nreturn;\n}\n}\n".to_string();
         let link = super::super::link::CoreLink::new(
             super::super::core::core_decls(&root),
             &root,
             &root,
-            [("core.helper.runtime-optimized.after.mir", &text)],
+            [("core.inner-helper.runtime-optimized.after.mir", &text)],
         );
         let types = Types::default();
         let cx = Cx {
@@ -10983,9 +10989,9 @@ mod tests {
             layouts: &[],
             backward: false,
         };
-        let body = super::super::parse::bodies("fn root(_1: u32) -> u32 {\nlet mut _0: u32;\nbb0: {\n_0 = core::helper(copy _1) -> [return: bb1, unwind continue];\n    }\nbb1: {\nreturn;\n}\n}\n").remove(0);
+        let body = super::super::parse::bodies("fn root(_1: u32) -> u32 {\nlet mut _0: u32;\nbb0: {\n_0 = core::inner::helper(copy _1) -> [return: bb1, unwind continue];\n    }\nbb1: {\nreturn;\n}\n}\n").remove(0);
         let lowered = lower(&cx, &body, "root").unwrap();
-        assert!(lowered.aux.values().any(|decl| matches!(decl, Decl::Structure {name,fields,..} if name == "CoreHidden" && fields.iter().any(|(field,ty)|field == "value" && ty == "Nat"))));
+        assert!(lowered.aux.values().any(|decl| matches!(decl, Decl::Structure {name,fields,..} if name == "CoreInnerHidden" && fields.iter().any(|(field,ty)|field == "value" && ty == "Nat"))));
         assert!(
             types.structs.is_empty(),
             "an imported body mutated its caller's source scope"

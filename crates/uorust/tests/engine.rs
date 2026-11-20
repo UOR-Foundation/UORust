@@ -11234,6 +11234,8 @@ pub unsafe fn invalid_pointer(p:*const u8)->std::ptr::NonNull<u8> {unsafe{std::m
 
 #[test]
 fn canonical_compiler_records_preserve_native_observations_ue_111() {
+    let previous_verdicts = std::env::var_os("UORUST_TEST_VERDICTS")
+        .map(|path| std::fs::read(path).expect("prior actual verdict bytes"));
     let dir = scratch("canonical-compiler-records", &[
         ("Cargo.toml", "[package]\nname=\"canonical_records\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
         ("src/lib.rs", "pub fn reverse(a:u32,b:u32)->std::iter::Rev<std::ops::Range<u32>> { let mut n=1u8; while n>0 {n-=1;} (a..b).rev() }\n"),
@@ -11263,6 +11265,9 @@ fn canonical_compiler_records_preserve_native_observations_ue_111() {
         residue_detail(&proposed, "canonical_records::reverse")
     );
     let cache = dir.join("verdicts.toml");
+    if let Some(bytes) = previous_verdicts {
+        std::fs::write(&cache, bytes).unwrap();
+    }
     uorust::mir::prove_bounded(
         &dir,
         &options("canonical_records"),

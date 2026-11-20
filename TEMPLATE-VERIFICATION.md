@@ -1895,3 +1895,12 @@ the SDK model, including empty, descending and upper-bound inputs. A changed
 expected result is rejected with LLV7002. The interrupted SDK check was resumed
 without changing its models; its actual proved decision is retained for exact
 reuse. Full release acceptance remains the unchanged `just vv` boundary.
+
+The same UE-111 dependency boundary also retains each imported body's declaring
+module. A nested-module record regression initially failed on its bare type
+name; the local scope now resolves that owner through the existing source
+normalizer. Substituted caller types retain their original identities. A scope
+with no new bindings is borrowed, avoiding a full caller-scope copy. The controls
+check nested-module declaration transport, caller immutability, protected
+substitutions and the borrowed primitive scope. Prior actual neutral SDK
+decisions are reused only through the existing exact-context matcher.

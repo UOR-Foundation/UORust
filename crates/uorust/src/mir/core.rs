@@ -732,6 +732,11 @@ pub(crate) struct CoreDecls {
 impl CoreDecls {
     /// Normalize compiler-library type names through their declared reexports.
     pub(crate) fn compiler_type(&self, text: &str) -> String {
+        self.compiler_type_in("", text)
+    }
+
+    /// Compiler-owned names retain the module that declares their body.
+    pub(crate) fn compiler_type_in(&self, module: &str, text: &str) -> String {
         let instances = Instances {
             decls: self,
             strict: true,
@@ -740,7 +745,7 @@ impl CoreDecls {
             done: BTreeMap::new(),
             explicit: BTreeSet::new(),
         };
-        instances.rooted("", text, 0)
+        instances.rooted(module, text, 0)
     }
 
     /// Each name a `use` brings into a module, by (module, name), with the
@@ -3083,6 +3088,77 @@ pub(crate) fn import_compiler_schemas(
     }
 }
 
+/// A local compiler scope borrows its caller until an authoritative type binding
+/// is needed. Substituted caller types retain their original namespace.
+pub(crate) fn compiler_body_scope<'a>(
+    types: &'a Types,
+    requested: &[String],
+    reserved: &BTreeSet<String>,
+    source: &CoreDecls,
+    path: &str,
+    bound: &[(String, String)],
+) -> std::borrow::Cow<'a, Types> {
+    let mut parts = parse::split_path(path);
+    parts.pop();
+    if parts.last().is_some_and(|part| part.starts_with("<impl")) {
+        parts.pop();
+    } else {
+        let owner = parts.join("::");
+        if source.traits.contains(&owner)
+            || source.structs.iter().any(|schema| schema.path == owner)
+        {
+            parts.pop();
+        }
+    }
+    let module = parts.join("::");
+    let mut protected = BTreeSet::new();
+    for (_, value) in bound {
+        let mut components_of_value = Vec::new();
+        components(value, &mut components_of_value);
+        protected.extend(components_of_value);
+    }
+    let mut scope = std::borrow::Cow::Borrowed(types);
+    for text in requested {
+        let mut reached = Vec::new();
+        components(text, &mut reached);
+        for component in reached.into_iter().rev() {
+            if protected.contains(&component) {
+                continue;
+            }
+            let at = component.find('<').unwrap_or(component.len());
+            let head = source.compiler_type_in(&module, &component[..at]);
+            if !source.structs.iter().any(|schema| schema.path == head)
+                && !source.unions.contains(&head)
+            {
+                continue;
+            }
+            // Only the declaring owner is rebound. Generic arguments have
+            // already been instantiated and keep their caller identities.
+            let canonical = format!("{head}{}", &component[at..]);
+            let qualified = format!("core::{canonical}");
+            let read = |types: &Types| {
+                super::lower::native_type(&qualified, types)
+                    .or_else(|_| super::lower::native_type(&canonical, types))
+            };
+            let reading = read(&scope).or_else(|_| {
+                import_compiler_schemas(
+                    scope.to_mut(),
+                    std::slice::from_ref(&canonical),
+                    reserved,
+                    source,
+                );
+                read(&scope)
+            });
+            if let Ok(reading) = reading {
+                if super::lower::native_type(&component, &scope).ok().as_ref() != Some(&reading) {
+                    scope.to_mut().generic.insert(component, reading);
+                }
+            }
+        }
+    }
+    scope
+}
+
 fn import_declaration_schemas(
     types: &mut Types,
     requested: &[String],
@@ -3207,7 +3283,46 @@ mod standard_interface_tests {
             external.is_ok() && internal.is_ok(),
             "consumer/canonical schema mismatch: {external:?} / {internal:?}"
         );
-        assert_eq!(external.unwrap(), internal.unwrap());
+        let admitted = external.unwrap();
+        assert_eq!(admitted, internal.unwrap());
+        let bare = "Rev<ops::range::Range<u32>>";
+        let scoped = compiler_body_scope(
+            &types,
+            &[bare.into()],
+            &BTreeSet::new(),
+            source,
+            "iter::adapters::rev::<impl at rev.rs:1:1: 2:1>::new",
+            &[],
+        );
+        assert_eq!(super::super::lower::ty(bare, &scoped), Ok(admitted));
+        assert!(
+            super::super::lower::ty(bare, &types).is_err(),
+            "caller scope changed"
+        );
+        let primitive = Types::default();
+        assert!(matches!(
+            compiler_body_scope(
+                &primitive,
+                &["u32".into(), "bool".into()],
+                &BTreeSet::new(),
+                source,
+                "intrinsics::example",
+                &[]
+            ),
+            std::borrow::Cow::Borrowed(_)
+        ));
+        let mut caller = Types::default();
+        caller.generic.insert(bare.into(), Ty::Bool);
+        let protected = [("T".into(), bare.into())];
+        let kept = compiler_body_scope(
+            &caller,
+            &[bare.into()],
+            &BTreeSet::new(),
+            source,
+            "iter::adapters::rev::<impl at rev.rs:1:1: 2:1>::new",
+            &protected,
+        );
+        assert_eq!(super::super::lower::ty(bare, &kept), Ok(Ty::Bool));
         let mut dependency = Types::default();
         import_compiler_schemas(
             &mut dependency,
