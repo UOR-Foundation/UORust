@@ -325,7 +325,7 @@ fn dump_inner(
         }
     }
     definitions::write(root, out, compiler_definitions)?;
-    record_layouts(root, out)
+    record_layouts(root, out, &triple)
 }
 
 /// The file beside the dumps that records each declared target's data
@@ -336,10 +336,10 @@ pub(crate) const LAYOUTS: &str = "layouts.toml";
 /// workspace's `rust-toolchain.toml` declares (`rustc --print
 /// target-spec-json`, its `data-layout`). A workspace that declares none
 /// records none, and its memory is then refused.
-fn record_layouts(root: &Path, out: &Path) -> Result<(), UorustError> {
+fn record_layouts(root: &Path, out: &Path, active: &str) -> Result<(), UorustError> {
     let tool = |what: &str, reason: String| UorustError::Tool(format!("{what}: {reason}"));
     let toolchain = root.join("rust-toolchain.toml");
-    let targets: Vec<String> = match std::fs::read_to_string(&toolchain) {
+    let mut targets: Vec<String> = match std::fs::read_to_string(&toolchain) {
         Ok(text) => text
             .parse::<toml::Table>()
             .ok()
@@ -350,6 +350,9 @@ fn record_layouts(root: &Path, out: &Path) -> Result<(), UorustError> {
             .collect(),
         Err(_) => Vec::new(),
     };
+    if !targets.iter().any(|target| target == active) {
+        targets.push(active.to_string());
+    }
     let mut text =
         String::from("# Each declared target's data layout, from rustc's target specification.\n");
     for target in targets {
@@ -393,6 +396,8 @@ fn record_layouts(root: &Path, out: &Path) -> Result<(), UorustError> {
 /// path with the impl it sits in named by its type: `ast::Path::ident`.
 #[derive(Clone, Debug, Default)]
 pub(crate) struct Dumps {
+    /// The target of this compilation, distinct from installed toolchains.
+    pub(crate) target: Option<String>,
     pub(crate) crates: BTreeMap<String, BTreeMap<String, IrBody>>,
     /// Compiler source identities preserve overloaded implementation bodies.
     /// Repeated source identities are removed rather than guessed.
@@ -406,6 +411,15 @@ pub(crate) struct Dumps {
     pub(crate) closures: BTreeMap<String, BTreeMap<String, IrBody>>,
     /// The declared targets' data layouts, as [`LAYOUTS`] records them.
     pub(crate) layouts: Vec<layout::DataLayout>,
+}
+
+impl Dumps {
+    pub(crate) fn source_width(&self) -> Option<u32> {
+        let target = self.target.as_ref()?;
+        let mut matched = self.layouts.iter().filter(|l| &l.target == target);
+        let width = matched.next()?.pointer.0;
+        (matched.next().is_none() && [16, 32, 64].contains(&width)).then_some(width)
+    }
 }
 
 /// The type of the closure whose body this is: its environment `_1`'s type,
@@ -428,6 +442,21 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
     let mut ambiguous_definitions = std::collections::BTreeSet::new();
     if !dir.is_dir() {
         return Ok(dumps);
+    }
+    let configuration = dir.join(crate::shard::CONFIGURATION);
+    if configuration.is_file() {
+        let text = std::fs::read_to_string(&configuration).map_err(|e| io(&configuration, e))?;
+        let doc: toml::Table =
+            text.parse()
+                .map_err(|e: toml::de::Error| UorustError::Malformed {
+                    path: configuration.clone(),
+                    reason: e.to_string(),
+                })?;
+        dumps.target = doc
+            .get("target")
+            .and_then(toml::Value::as_str)
+            .filter(|t| !t.is_empty())
+            .map(str::to_string);
     }
     let recorded = dir.join(LAYOUTS);
     if recorded.is_file() {
@@ -631,6 +660,25 @@ pub(super) fn impl_header(root: &Path, span: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn captured_source_width_requires_one_matching_layout_ue_94() {
+        let a = layout::DataLayout::parse("captured", "e-p:64:64").unwrap();
+        let other = layout::DataLayout::parse("installed", "e-p:32:32").unwrap();
+        let mut dumps = Dumps {
+            target: Some("captured".into()),
+            layouts: vec![a.clone(), other],
+            ..Dumps::default()
+        };
+        assert_eq!(dumps.source_width(), Some(64));
+        dumps.target = None;
+        assert_eq!(dumps.source_width(), None);
+        dumps.target = Some("unknown".into());
+        assert_eq!(dumps.source_width(), None);
+        dumps.target = Some("captured".into());
+        dumps.layouts.push(a);
+        assert_eq!(dumps.source_width(), None);
+    }
 
     #[test]
     fn generated_compiler_definitions_survive_source_header_lookup_ue_85() {

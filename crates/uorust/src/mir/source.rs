@@ -22,13 +22,20 @@ fn source_type(text: &str, types: &Types) -> Option<Ty> {
 
 /// Select an immutable source ABI. The caller must still supply each exact
 /// input and result conversion through the shared representation kernels.
-pub(super) fn representation(text: &str, types: &Types) -> Option<Ty> {
+pub(super) fn representation(text: &str, types: &Types, width: Option<u32>) -> Option<Ty> {
     let syntax = syn::parse_str::<syn::Type>(text).ok()?;
     if super::views::borrows_mutably(&crate::convert::ty(&syntax)) {
         return None;
     }
     let reading = source_type(text, types)?;
-    value_interface(&reading, types, &mut BTreeSet::new()).then_some(reading)
+    if !value_interface(&reading, types, &mut BTreeSet::new()) {
+        return None;
+    }
+    Some(map_carriers(&reading, &mut |ty| match (ty, width) {
+        (Ty::Nat(None), Some(bits)) => Some(Ty::Nat(Some(bits))),
+        (Ty::Integer(None), Some(bits)) => Some(Ty::Integer(Some(bits))),
+        _ => None,
+    }))
 }
 
 /// Reuse closed source readings only after the native ABI has declined them.
@@ -163,25 +170,35 @@ pub(super) fn generic_environment(ty: &Ty, types: &Types) -> bool {
 /// without interpreting it as a source integer. Equal native carriers share one
 /// parameter, and the existing generic binder supplies its actual type at use.
 fn parameterize(ty: &Ty, bindings: &mut BTreeMap<Ty, String>) -> Ty {
-    let mut boxed = |t: &Ty| Box::new(parameterize(t, bindings));
-    match ty {
-        Ty::Signed(_) | Ty::Scalar | Ty::Param(_) => {
-            let index = bindings.len();
-            let parameter = bindings
-                .entry(ty.clone())
-                .or_insert_with(|| format!("NativeCarrier{index}"));
-            Ty::Param(parameter.clone())
+    map_carriers(ty, &mut |ty| {
+        if !matches!(ty, Ty::Signed(_) | Ty::Scalar | Ty::Param(_)) {
+            return None;
         }
+        let index = bindings.len();
+        let parameter = bindings
+            .entry(ty.clone())
+            .or_insert_with(|| format!("NativeCarrier{index}"));
+        Some(Ty::Param(parameter.clone()))
+    })
+}
+
+/// Compose carrier bindings once, without inspecting payload values.
+fn map_carriers(ty: &Ty, leaf: &mut impl FnMut(&Ty) -> Option<Ty>) -> Ty {
+    if let Some(mapped) = leaf(ty) {
+        return mapped;
+    }
+    let mut boxed = |t: &Ty| Box::new(map_carriers(t, leaf));
+    match ty {
         Ty::Option(t) => Ty::Option(boxed(t)),
         Ty::List(t) => Ty::List(boxed(t)),
         Ty::Set(t, order) => Ty::Set(boxed(t), *order),
         Ty::Outcome(a, b) => Ty::Outcome(boxed(a), boxed(b)),
         Ty::Map(a, b, order) => Ty::Map(boxed(a), boxed(b), *order),
-        Ty::Tuple(ts) => Ty::Tuple(ts.iter().map(|t| parameterize(t, bindings)).collect()),
-        Ty::Pair(ts) => Ty::Pair(ts.iter().map(|t| parameterize(t, bindings)).collect()),
+        Ty::Tuple(ts) => Ty::Tuple(ts.iter().map(|t| map_carriers(t, leaf)).collect()),
+        Ty::Pair(ts) => Ty::Pair(ts.iter().map(|t| map_carriers(t, leaf)).collect()),
         Ty::Fn(ins, out) => Ty::Fn(
-            ins.iter().map(|t| parameterize(t, bindings)).collect(),
-            Box::new(parameterize(out, bindings)),
+            ins.iter().map(|t| map_carriers(t, leaf)).collect(),
+            Box::new(map_carriers(out, leaf)),
         ),
         _ => ty.clone(),
     }
@@ -199,7 +216,7 @@ pub(super) fn apply(
     name: &str,
 ) -> Option<Imported> {
     apply_at(
-        callee, args, texts, result, types, widths, taken, name, false,
+        callee, args, texts, result, types, widths, taken, name, false, None,
     )
 }
 
@@ -211,12 +228,22 @@ pub(super) fn apply_represented(
     texts: &[Option<String>],
     result: &Ty,
     types: &Types,
+    source_width: Option<u32>,
     widths: &[(u32, Vec<String>)],
     taken: &BTreeSet<String>,
     name: &str,
 ) -> Option<Imported> {
     apply_at(
-        callee, args, texts, result, types, widths, taken, name, true,
+        callee,
+        args,
+        texts,
+        result,
+        types,
+        widths,
+        taken,
+        name,
+        true,
+        source_width,
     )
 }
 
@@ -231,10 +258,11 @@ fn apply_at(
     taken: &BTreeSet<String>,
     name: &str,
     represented: bool,
+    source_width: Option<u32>,
 ) -> Option<Imported> {
     let reading = |text: &str| {
         if represented {
-            representation(text, types)
+            representation(text, types, source_width)
         } else {
             super::lower::ty(text, types).ok()
         }
@@ -385,6 +413,24 @@ mod tests {
     use super::*;
 
     #[test]
+    fn source_pointer_representations_require_explicit_compiler_width_ue_94() {
+        let types = Types::default();
+        assert_eq!(
+            representation("Option<usize>", &types, None),
+            Some(Ty::Option(Box::new(Ty::Nat(None))))
+        );
+        assert_eq!(
+            representation("Option<usize>", &types, Some(32)),
+            Some(Ty::Option(Box::new(Ty::Nat(Some(32)))))
+        );
+        assert_eq!(
+            representation("isize", &types, Some(64)),
+            Some(Ty::Integer(Some(64)))
+        );
+        assert!(representation("&mut usize", &types, Some(64)).is_none());
+    }
+
+    #[test]
     fn primitive_trait_import_keeps_compiler_owner_boundaries_ue_93() {
         assert_eq!(
             operation("<i32 as std::cmp::Ord>::max"),
@@ -403,10 +449,13 @@ mod tests {
     #[test]
     fn source_abi_import_retains_schema_and_mutability_guards_ue_92() {
         let types = Types::default();
-        assert_eq!(representation("i128", &types), Some(Ty::Integer(Some(128))));
-        assert!(representation("&mut i128", &types).is_none());
-        assert!(representation("Option<&mut i128>", &types).is_none());
-        assert!(representation("UnknownPayload", &types).is_none());
+        assert_eq!(
+            representation("i128", &types, None),
+            Some(Ty::Integer(Some(128)))
+        );
+        assert!(representation("&mut i128", &types, None).is_none());
+        assert!(representation("Option<&mut i128>", &types, None).is_none());
+        assert!(representation("UnknownPayload", &types, None).is_none());
         let args = [
             ("a".into(), Ty::Integer(Some(128))),
             ("b".into(), Ty::Integer(Some(128))),
@@ -419,6 +468,7 @@ mod tests {
             &texts,
             &result,
             &types,
+            None,
             &[],
             &BTreeSet::new(),
             "checkedModel"
@@ -430,6 +480,7 @@ mod tests {
             &texts,
             &result,
             &types,
+            None,
             &[],
             &BTreeSet::new(),
             "wrongOwner"
@@ -441,6 +492,7 @@ mod tests {
             &texts,
             &Ty::Bool,
             &types,
+            None,
             &[],
             &BTreeSet::new(),
             "wrongResult"

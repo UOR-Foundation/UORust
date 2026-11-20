@@ -1561,3 +1561,22 @@ dereferences and refusing unavailable projection types. That regression failed
 before the metadata change and passed afterward. Eight source controls, 95 MIR
 tests, conformance, strict Clippy and model/template/SDK/self-model checks passed.
 Complete release acceptance remains the unchanged `just vv` boundary.
+
+## UE-94: captured compilation context owns native MIR ABI bindings
+
+The initial pointer-sized compiler call remained call residue. A native MIR
+frame now uses the compilation target recorded beside its bodies and a unique
+matching compiler data layout. Installed toolchain targets do not select that
+ABI. Source-only portability analysis retains its declared-target view. Missing
+or conflicting compiler evidence retains conservative behavior and supplies no
+fixed-width source import. Capture records the active layout even when no
+installation target list is present.
+
+Existing fixed-width source semantics and shared codecs are reused through one
+compositional carrier mapper. No standard operation model was added. The neutral
+SDK regression passed 12 actual Rust comparisons, including `usize::MAX`, exact
+boundary products and overflow, and rejected an incorrect result with LLV7002
+(101.15 seconds). Controls cover missing, mismatched and duplicate layouts,
+mutable interfaces and malformed compiler configuration. Ninety-seven MIR
+tests, 16 CLI tests, conformance, strict Clippy and model/template/SDK/self-model
+checks passed. Complete release acceptance remains `just vv`.

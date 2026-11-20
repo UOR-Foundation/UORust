@@ -5335,9 +5335,16 @@ fn mir_lift(
             (t.clone(), captures)
         })
         .collect();
-    // The data layouts memory is laid out by: only where one is recorded
-    // for every declared target, so that a layout used holds on each.
-    let layouts: Vec<crate::mir::layout::DataLayout> = if !ctx.ws.targets.is_empty()
+    // MIR is a compilation artifact: its recorded compiler target owns its
+    // ABI. Without that evidence, retain the conservative declared-target view.
+    let layouts: Vec<crate::mir::layout::DataLayout> = if dumps.source_width().is_some() {
+        dumps
+            .layouts
+            .iter()
+            .filter(|l| Some(&l.target) == dumps.target.as_ref())
+            .cloned()
+            .collect()
+    } else if !ctx.ws.targets.is_empty()
         && ctx
             .ws
             .targets
@@ -5450,7 +5457,10 @@ fn mir_lift(
             .and_then(|key| flow_environments.get(key))
             .unwrap_or_else(|| base_scope(r))
     };
-    let widths = lift::pointer_widths(&ctx.ws.targets);
+    let widths = match (dumps.source_width(), dumps.target.as_ref()) {
+        (Some(width), Some(target)) => vec![(width, vec![target.clone()])],
+        _ => lift::pointer_widths(&ctx.ws.targets),
+    };
     // Enums whose variants set their discriminants, by LexLean name.
     let mut explicit: BTreeSet<String> = BTreeSet::new();
     for (pkg, package) in ctx.ws.packages.iter().enumerate() {
@@ -5764,6 +5774,7 @@ fn mir_lift(
             types: scope(r),
             source_sigs: &source_sigs[r.pkg],
             widths: &widths,
+            source_width: dumps.source_width(),
             callees: &callees,
             compiler_scope: frame(r),
             compiler_definitions: &compiler_definitions,

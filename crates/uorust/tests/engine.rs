@@ -9106,3 +9106,159 @@ pub fn capped(mut n:u8,b:Bounds)->i32 {while n>0 {n-=1;} b.value.max(0)}
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn compiler_source_imports_bind_the_captured_pointer_abi_ue_94() {
+    let dir = scratch("captured-pointer-abi", &[
+        ("Cargo.toml", "[package]\nname=\"captured_pointer\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn scaled(mut n:u8,x:usize,y:usize)->Option<usize> {while n>0 {n-=1;} x.checked_mul(y)}
+"#),
+        ("src/bin/vectors.rs", r#"
+use captured_pointer::*;
+fn main() {
+ for n in [0,2] {for (x,y) in [(0,usize::MAX),(usize::MAX,1),(usize::MAX,2),(1,0),(usize::MAX/2,2),(usize::MAX/2+1,2)] {
+  println!("scaled|{n}|{x}|{y}|{}",scaled(n,x,y).map(|v|v.to_string()).unwrap_or("none".into()));
+ }}
+}
+"#),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let reference = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(reference.lines().count(), 12);
+    let dumps = dumped(&dir, "captured-pointer-abi");
+    let mut opts = options("captured_pointer");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    {
+        let name = "scaled";
+        let key = format!("captured_pointer::{name}");
+        assert!(
+            text(&files, uorust::mir::CANDIDATES).contains(&format!("{key}\"")),
+            "{:?}",
+            residue_detail(&files, &key)
+        );
+    }
+    let cache = dir.join("captured-pointer-verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("captured_pointer"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proof.refused, 0, "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut vectors = String::new();
+    for (i, line) in reference.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let [function, n, x, y, result] = parts.as_slice() else {
+            panic!("{line}")
+        };
+        let key = format!("captured_pointer::{function}");
+        let name = rows
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&key))
+            .and_then(|r| r["definition"].as_str())
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let policy = decisions
+            .rows
+            .values()
+            .find(|r| r.function == key)
+            .and_then(|r| r.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let expected = if *result == "none" {
+            "(ctor Option.none [Nat])".into()
+        } else {
+            format!("(ctor Option.some [Nat] {result})")
+        };
+        vectors.push_str(&format!("theorem{{name:pointerVector{i},parameters:[],statement:(({name} {n} {x} {y}) = {expected}),proof:decide{{}},axioms:[{}]}}\n", policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(
+        "= (ctor Option.some [Nat] 0))",
+        "= (ctor Option.some [Nat] 1))",
+        1,
+    );
+    assert_ne!(wrong, body);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002"),
+        "{}",
+        String::from_utf8_lossy(&rejected.stdout)
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn compiler_target_metadata_refuses_malformed_toml_ue_94() {
+    let dir = scratch("malformed-compiler-target", &[
+        ("Cargo.toml", "[package]\nname=\"bad_target\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("Cargo.lock", "version = 4\n[[package]]\nname = \"bad_target\"\nversion = \"0.1.0\"\n"),
+        ("src/lib.rs", "pub fn pending() { loop {} }"),
+        ("dumps/configuration.toml", "target = ["),
+    ]);
+    let mut opts = options("bad_target");
+    opts.mir = Some(mir_options(
+        dir.join("dumps"),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    assert!(matches!(
+        uorust::project_workspace(&dir, &opts),
+        Err(uorust::UorustError::Malformed { .. })
+    ));
+    std::fs::remove_dir_all(dir).unwrap();
+}

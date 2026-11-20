@@ -81,6 +81,8 @@ pub(crate) struct Cx<'a> {
     pub(crate) source_sigs: &'a BTreeMap<String, lift::Sig>,
     /// `usize`'s widths on the declared targets, narrowest first.
     pub(crate) widths: &'a [(u32, Vec<String>)],
+    /// Only a captured target with a unique matching compiler layout supplies this.
+    pub(crate) source_width: Option<u32>,
     /// Functions by the path MIR prints for them, with the crate prefixed.
     pub(crate) callees: &'a BTreeMap<String, Callee>,
     /// Compiler imports are bound to a registered function question.
@@ -149,6 +151,7 @@ impl<'a> Cx<'a> {
             types: self.types,
             source_sigs: self.source_sigs,
             widths: self.widths,
+            source_width: self.source_width,
             callees: self.callees,
             compiler_scope: self.compiler_scope.clone(),
             compiler_definitions: self.compiler_definitions,
@@ -5647,7 +5650,8 @@ impl Fun<'_, '_> {
         st: &mut State,
         name: &str,
     ) -> Option<Called> {
-        let source_result = super::source::representation(destination, self.cx.types)?;
+        let source_result =
+            super::source::representation(destination, self.cx.types, self.cx.source_width)?;
         if args.len() != texts.len() {
             return None;
         }
@@ -5657,7 +5661,7 @@ impl Fun<'_, '_> {
             if ty(text, self.cx.types).ok()? != *native {
                 return None;
             }
-            let source = super::source::representation(text, self.cx.types)?;
+            let source = super::source::representation(text, self.cx.types, self.cx.source_width)?;
             let binding = self.fresh(Some("sourceArgument"), usize::MAX);
             represented.push((binding, source));
         }
@@ -5672,6 +5676,7 @@ impl Fun<'_, '_> {
             texts,
             &source_result,
             self.cx.types,
+            self.cx.source_width,
             self.cx.widths,
             self.cx.taken,
             name,
@@ -10079,6 +10084,7 @@ mod tests {
             types: &types,
             source_sigs: &BTreeMap::new(),
             widths: &[(64, vec!["test".into()])],
+            source_width: None,
             callees: &BTreeMap::new(),
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
@@ -10146,6 +10152,7 @@ mod tests {
             types: &types,
             source_sigs: &BTreeMap::new(),
             widths: &[(64, vec!["test".into()])],
+            source_width: None,
             callees: &BTreeMap::new(),
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),

@@ -615,3 +615,9 @@ id = "UE-93"
 level = "build"
 suite = "engine"
 statement = "Compiler-qualified standard trait calls on closed primitive owners reuse existing source semantics and exact ABI kernels; workspace traits, workspace owners and composite owners with unbound payload implementations cannot enter this adapter"
+
+[[id]]
+id = "UE-94"
+level = "build"
+suite = "engine"
+statement = "Pointer-sized source/native imports use the captured compilation target and its uniquely matching compiler layout, through existing fixed-width semantics and codecs; missing or conflicting ABI evidence supplies no specialization"

@@ -489,6 +489,7 @@ pub(crate) fn shard(
             types: &types,
             source_sigs: &BTreeMap::new(),
             widths,
+            source_width: None,
             callees: &callees,
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),

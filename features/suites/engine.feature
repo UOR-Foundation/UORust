@@ -655,3 +655,10 @@ Feature: engine
     When a source semantic model and exact ABI kernels already exist
     Then the existing semantics bind through the shared import mechanism
     But workspace traits and owners with unbound payload implementations remain refused
+
+  @UE-94 @build
+  Scenario: Captured compiler context binds pointer-sized semantic imports
+    Given MIR with its exact compilation target and matching compiler layout
+    When an existing source model needs the pointer width of that compilation
+    Then fixed-width semantic and codec kernels use that recorded ABI
+    But missing or conflicting target evidence supplies no specialization
