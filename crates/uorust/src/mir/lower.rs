@@ -5354,6 +5354,12 @@ impl Fun<'_, '_> {
             IrRvalue::Cast(k, o, target) => {
                 let (v, from) = self.operand(o, st)?;
                 let to = self.local_ty(dest.local, &dest.projection)?;
+                if *k == spec::MirCastKind::Transmute {
+                    let source = self.operand_type(o).unwrap_or_default();
+                    return self
+                        .reinterpret(&v, &from, &to, (&source, target), k.path(), st)
+                        .map(|term| Val::V(term, to));
+                }
                 // A reference coerced to a trait object the table models as
                 // a function (`&dyn fmt::Debug`): the trait's method applied
                 // to the value, as an `rt::Argument` is.
@@ -5523,14 +5529,6 @@ impl Fun<'_, '_> {
                         let (e, m) = (f.exp.to_string(), f.frac.to_string());
                         Ok(Val::V(g.term("Convert", &[&e, &m, &v]), to))
                     }
-                    // A float is its bit pattern: `transmute` to or from the
-                    // unsigned integer of its width is the value itself.
-                    (spec::MirCastKind::Transmute, Ty::Float(f), Ty::Nat(Some(w)))
-                    | (spec::MirCastKind::Transmute, Ty::Nat(Some(w)), Ty::Float(f))
-                        if 1 + f.exp + f.frac == *w =>
-                    {
-                        Ok(Val::V(v, to))
-                    }
                     // `ptr as usize`, `expose_provenance`: the address. The
                     // provenance it exposes matters only to
                     // `with_exposed_provenance`, which is residue.
@@ -5545,13 +5543,6 @@ impl Fun<'_, '_> {
                     // type is unchanged. A raw pointer's metadata may change.
                     (spec::MirCastKind::PointerCoercion, f, t) if f == t && !is_pointer(f) => {
                         Ok(Val::V(v, to))
-                    }
-                    (spec::MirCastKind::Transmute, f, Ty::Nat(None)) if is_pointer(f) => {
-                        self.observes_address = true;
-                        Ok(Val::V(address(&v), to))
-                    }
-                    (spec::MirCastKind::Transmute, Ty::Nat(None), t) if is_pointer(t) => {
-                        Ok(Val::V(pointer_value("0", &v, "0"), to))
                     }
                     _ => Err(kind(
                         k.path(),
@@ -7727,6 +7718,11 @@ impl Fun<'_, '_> {
                         .flatten()
                 });
                 if let Some(link) = library {
+                    if let Some((path, normalized)) = link.imported_intrinsic(callee) {
+                        return self
+                            .intrinsic(link, &path, &normalized, &args, dt, st)
+                            .map(Called::value);
+                    }
                     if let Some(instance) = link.imported_instance(callee, texts, dest) {
                         return self
                             .compiler_shared(link, instance, callee, args, texts, dest, dt, st);
@@ -7963,8 +7959,6 @@ impl Fun<'_, '_> {
                     Err(kind(k, &format!("{path} of {}, which panics", t.render())))
                 }
             }
-            // `transmute` between two types the lift holds alike.
-            (Some(M::Transmute), [(v, t)], [_, _]) if t == dt => Ok(v.clone()),
             // `discriminant_value` of an enum whose variants set no
             // discriminant of their own: the index of `v`'s variant, read by
             // a match on it.
@@ -8048,107 +8042,7 @@ impl Fun<'_, '_> {
             // Into a `char`, the value is a scalar value, and into a `str`,
             // the bytes are UTF-8: core's preconditions, obligations.
             (Some(M::Transmute), [(v, src)], [ps, pd]) => {
-                if *dt == Ty::Scalar && *src != Ty::Scalar {
-                    self.obligation(st, &format!("({} = true)", scalar_value(v)), k);
-                }
-                // Into a `str`, the bytes are UTF-8: they decode.
-                if *dt == Ty::Str && matches!(src, Ty::List(b) if **b == Ty::Nat(Some(u8::BITS))) {
-                    self.obligation(
-                        st,
-                        &format!(
-                            "((prim equal (prim utf8_decode ({}::shaBytesOf {v}) : (Option String)) (ctor Option.none [String]) : Bool) = false)",
-                            lift::PRELUDE
-                        ),
-                        k,
-                    );
-                }
-                let st = src;
-                let unrelated = || {
-                    kind(
-                        k,
-                        &format!(
-                            "{path} from {} to {}, of layouts the lift does not relate",
-                            st.render(),
-                            dt.render()
-                        ),
-                    )
-                };
-                if let Some(t) = self.transmuted(v, st, dt) {
-                    return Ok(t);
-                }
-                // (total bits, the element width of an array side).
-                let shape = |t: &Ty, printed: &str| match t {
-                    Ty::List(e) => {
-                        let e = fixed(e)?;
-                        let n: u32 = printed
-                            .strip_prefix('[')?
-                            .strip_suffix(']')?
-                            .rsplit_once("; ")?
-                            .1
-                            .parse()
-                            .ok()?;
-                        Some((e.checked_mul(n)?, Some(e)))
-                    }
-                    // A scalar's width is its size in every target's layout.
-                    _ => {
-                        let size = super::layout::agreed(t, self.cx.layouts).ok()?.size;
-                        let w = u32::try_from(size.checked_mul(u64::from(u8::BITS))?).ok()?;
-                        (Int::of(t, self.cx.widths)?.held == w).then_some((w, None))
-                    }
-                };
-                let orders: BTreeSet<bool> = self.cx.layouts.iter().map(|l| l.big_endian).collect();
-                let orders: Vec<bool> = orders.into_iter().collect();
-                let (Some((sw, se)), Some((dw, de)), [big]) =
-                    (shape(st, ps), shape(dt, pd), orders.as_slice())
-                else {
-                    return Err(unrelated());
-                };
-                if sw != dw || (se.is_none() && de.is_none()) {
-                    return Err(unrelated());
-                }
-                // The shift of element `i` of the `n` of width `e`.
-                let big = *big;
-                let shift = |i: u32, n: u32, e: u32| if big { e * (n - 1 - i) } else { e * i };
-                let whole = match (se, st) {
-                    (Some(e), Ty::List(et)) => {
-                        let n = sw / e;
-                        let et = et.render();
-                        let held = self.fresh(Some("held"), usize::MAX);
-                        let mut sum = "0".to_string();
-                        for i in 0..n {
-                            sum = format!(
-                                "({sum} + ((match (prim index {v} {i} : (Option {et})) | Option.none => 0 | Option.some {held} => {held}) * {}))",
-                                super::int::pow2(shift(i, n, e))
-                            );
-                        }
-                        sum
-                    }
-                    _ => v.clone(),
-                };
-                match (de, dt) {
-                    (Some(e), Ty::List(et)) => {
-                        let n = dw / e;
-                        // An array source's sum, bound once.
-                        let bits = self.fresh(Some("bits"), usize::MAX);
-                        let (bound, whole) = match se {
-                            Some(_) => (Some(whole), bits.clone()),
-                            None => (None, whole),
-                        };
-                        let mut out = format!("(nil {})", et.render());
-                        for i in (0..n).rev() {
-                            out = format!(
-                                "(cons (prim remainder (prim quotient {whole} {} 0 : Nat) {} 0 : Nat) {out})",
-                                super::int::pow2(shift(i, n, e)),
-                                super::int::pow2(e)
-                            );
-                        }
-                        Ok(match bound {
-                            Some(sum) => format!("(let {bits} : Nat := {sum}; {out})"),
-                            None => out,
-                        })
-                    }
-                    _ => Ok(whole),
-                }
+                self.reinterpret(v, src, dt, (ps, pd), k, st)
             }
             // `three_way_compare` of two integers: `Less` where `a < b` by
             // the type's order, `Equal` where they are equal.
@@ -8269,6 +8163,151 @@ impl Fun<'_, '_> {
                 lift::tuple_value(&pair, &[applied.value, over])
             }
         })
+    }
+
+    /// One representation kernel for MIR casts and declared compiler intrinsics.
+    fn reinterpret(
+        &mut self,
+        v: &str,
+        src: &Ty,
+        dt: &Ty,
+        printed: (&str, &str),
+        k: &str,
+        st: &mut State,
+    ) -> Lift<String> {
+        let (ps, pd) = printed;
+        // Erasing a pointer view does not establish a stronger destination
+        // invariant or ownership view. Keep those constructions unadmitted.
+        if is_pointer(dt) && !pd.trim().starts_with("*const ") && !pd.trim().starts_with("*mut ") {
+            let source_view = wrapper(ps).map(|(name, _)| name);
+            let target_view = wrapper(pd).map(|(name, _)| name);
+            if target_view.is_none() || source_view != target_view {
+                return Err(kind(
+                    k,
+                    "a pointer view requires an admitted destination validity model",
+                ));
+            }
+        }
+        if src == dt {
+            return Ok(v.to_string());
+        }
+        match (src, dt) {
+            (Ty::Float(f), Ty::Nat(Some(w))) | (Ty::Nat(Some(w)), Ty::Float(f))
+                if 1 + f.exp + f.frac == *w =>
+            {
+                return Ok(v.to_string())
+            }
+            (source, Ty::Nat(None)) if is_pointer(source) => {
+                self.observes_address = true;
+                return Ok(address(v));
+            }
+            (Ty::Nat(None), target) if is_pointer(target) => return Ok(pointer_value("0", v, "0")),
+            _ => {}
+        }
+        if matches!(dt, Ty::Scalar | Ty::Char) && !matches!(src, Ty::Scalar | Ty::Char) {
+            let scalar = self
+                .transmuted(v, src, &Ty::Scalar)
+                .ok_or_else(|| kind(k, "a scalar validity check needs its native bit carrier"))?;
+            self.obligation(st, &format!("({} = true)", scalar_value(&scalar)), k);
+        }
+        // Into a `str`, the bytes are UTF-8: they decode.
+        if *dt == Ty::Str && matches!(src, Ty::List(b) if **b == Ty::Nat(Some(u8::BITS))) {
+            self.obligation(
+                st,
+                &format!(
+                    "((match (prim utf8_decode ({}::shaBytesOf {v}) : (Option String)) | Option.none => false | Option.some validText => true) = true)",
+                    lift::PRELUDE
+                ),
+                k,
+            );
+        }
+        let source = src;
+        let unrelated = || {
+            kind(
+                k,
+                &format!(
+                    "reinterpretation from {} to {}, of layouts the lift does not relate",
+                    source.render(),
+                    dt.render()
+                ),
+            )
+        };
+        if let Some(t) = self.transmuted(v, source, dt) {
+            return Ok(t);
+        }
+        // (total bits, the element width of an array side).
+        let shape = |t: &Ty, printed: &str| match t {
+            Ty::List(e) => {
+                let e = fixed(e)?;
+                let n: u32 = printed
+                    .strip_prefix('[')?
+                    .strip_suffix(']')?
+                    .rsplit_once("; ")?
+                    .1
+                    .parse()
+                    .ok()?;
+                Some((e.checked_mul(n)?, Some(e)))
+            }
+            // A scalar's width is its size in every target's layout.
+            _ => {
+                let size = super::layout::agreed(t, self.cx.layouts).ok()?.size;
+                let w = u32::try_from(size.checked_mul(u64::from(u8::BITS))?).ok()?;
+                (Int::of(t, self.cx.widths)?.held == w).then_some((w, None))
+            }
+        };
+        let orders: BTreeSet<bool> = self.cx.layouts.iter().map(|l| l.big_endian).collect();
+        let orders: Vec<bool> = orders.into_iter().collect();
+        let (Some((sw, se)), Some((dw, de)), [big]) =
+            (shape(source, ps), shape(dt, pd), orders.as_slice())
+        else {
+            return Err(unrelated());
+        };
+        if sw != dw || (se.is_none() && de.is_none()) {
+            return Err(unrelated());
+        }
+        // The shift of element `i` of the `n` of width `e`.
+        let big = *big;
+        let shift = |i: u32, n: u32, e: u32| if big { e * (n - 1 - i) } else { e * i };
+        let whole = match (se, source) {
+            (Some(e), Ty::List(et)) => {
+                let n = sw / e;
+                let et = et.render();
+                let held = self.fresh(Some("held"), usize::MAX);
+                let mut sum = "0".to_string();
+                for i in 0..n {
+                    sum = format!(
+                        "({sum} + ((match (prim index {v} {i} : (Option {et})) | Option.none => 0 | Option.some {held} => {held}) * {}))",
+                        super::int::pow2(shift(i, n, e))
+                    );
+                }
+                sum
+            }
+            _ => v.to_string(),
+        };
+        match (de, dt) {
+            (Some(e), Ty::List(et)) => {
+                let n = dw / e;
+                // An array source's sum, bound once.
+                let bits = self.fresh(Some("bits"), usize::MAX);
+                let (bound, whole) = match se {
+                    Some(_) => (Some(whole), bits.clone()),
+                    None => (None, whole),
+                };
+                let mut out = format!("(nil {})", et.render());
+                for i in (0..n).rev() {
+                    out = format!(
+                        "(cons (prim remainder (prim quotient {whole} {} 0 : Nat) {} 0 : Nat) {out})",
+                        super::int::pow2(shift(i, n, e)),
+                        super::int::pow2(e)
+                    );
+                }
+                Ok(match bound {
+                    Some(sum) => format!("(let {bits} : Nat := {sum}; {out})"),
+                    None => out,
+                })
+            }
+            _ => Ok(whole),
+        }
     }
 
     /// `v` of type `from` as a value of type `to` of the same layout.
@@ -10993,6 +11032,66 @@ mod tests {
             BTreeMap::from([("value".into(), crate::lift::CellKind::Cell)]),
         );
         assert!(!constant_interface("Packet", &result, &types));
+    }
+
+    #[test]
+    fn mir_reinterpretation_keeps_validity_and_layout_guards_ue_108() {
+        let types = Types::default();
+        let target: toml::Table =
+            toml::from_str("triple = \"x86_64-test\"\ndata_layout = \"e-p:64:64-i64:64\"\n")
+                .unwrap();
+        let layouts = super::super::layout::from_target_toml(&target).unwrap();
+        let cx = Cx {
+            types: &types,
+            source_sigs: &BTreeMap::new(),
+            widths: &[(64, vec!["test".into()])],
+            source_width: None,
+            callees: &BTreeMap::new(),
+            compiler_scope: String::new(),
+            compiler_definitions: &BTreeMap::new(),
+            compiler_bindings: &BTreeMap::new(),
+            dictionary_frames: &BTreeMap::new(),
+            closure_scopes: &BTreeMap::new(),
+            constants: &BTreeMap::new(),
+            krate: "test".into(),
+            taken: &BTreeSet::new(),
+            explicit: &BTreeSet::new(),
+            limit: 1_000_000,
+            consts: &BTreeMap::new(),
+            closures: &BTreeMap::new(),
+            active: &[],
+            core: None,
+            library: None,
+            layouts: &layouts,
+            backward: false,
+        };
+        let body = |from: &str, to: &str| {
+            super::super::parse::bodies(&format!(
+            "fn view(_1: {from}) -> {to} {{\nlet mut _0: {to};\nbb0: {{\n_0 = copy _1 as {to} (Transmute);\nreturn;\n}}\n}}\n"
+        )).remove(0)
+        };
+        assert!(lower(&cx, &body("u32", "[u8; 4]"), "word").is_ok());
+        assert!(lower(&cx, &body("*const u8", "std::ptr::NonNull<u8>"), "nonnull").is_err());
+
+        let scalar = lower(&cx, &body("u32", "char"), "scalar").unwrap();
+        assert!(scalar
+            .decls
+            .iter()
+            .any(|d| matches!(d,Decl::Theorem {statement,..} if statement.contains("55296"))));
+        let text = lower(&cx, &body("&[u8]", "&str"), "text").unwrap();
+        assert!(text.decls.iter().any(
+            |d| matches!(d,Decl::Theorem {statement,..} if statement.contains("utf8_decode"))
+        ));
+        let mut big = layouts[0].clone();
+        big.big_endian = true;
+        big.target = "big-test".into();
+        let mixed = [layouts[0].clone(), big];
+        let inconsistent = Cx {
+            layouts: &mixed,
+            ..cx
+        };
+        assert!(lower(&inconsistent, &body("u32", "[u8; 4]"), "mixed").is_err());
+        assert!(lower(&inconsistent, &body("u64", "[u8; 4]"), "wrong_size").is_err());
     }
 
     #[test]

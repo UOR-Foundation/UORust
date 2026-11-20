@@ -10985,3 +10985,214 @@ pub fn read(a:u64,b:i64)->u64 {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn native_reinterpret_forms_share_typed_kernels_ue_108() {
+    let previous_verdicts = std::env::var_os("UORUST_TEST_VERDICTS")
+        .map(|path| std::fs::read(path).expect("prior verdict bytes"));
+    let dir = scratch("reinterpret-forms", &[
+        ("Cargo.toml", "[package]\nname=\"reinterpret_forms\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"
+pub fn bytes(text:&str)->&[u8] {unsafe{std::mem::transmute(text)}}
+pub fn word(x:u32)->[u8;4] {unsafe{std::mem::transmute(x)}}
+pub fn pointer(p:*const u8)->*mut u8 {unsafe{std::mem::transmute(p)}}
+pub unsafe fn invalid_text(bytes:&[u8])->&str {unsafe{std::mem::transmute(bytes)}}
+pub unsafe fn invalid_scalar(bits:u32)->char {unsafe{std::mem::transmute(bits)}}
+pub unsafe fn invalid_pointer(p:*const u8)->std::ptr::NonNull<u8> {unsafe{std::mem::transmute(p)}}
+"#),
+    ]);
+    let dumps = dumped(&dir, "reinterpret-forms");
+    let mut opts = options("reinterpret_forms");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let lifted = frontier_rows(&files, "lifted");
+    for function in [
+        "reinterpret_forms::bytes",
+        "reinterpret_forms::word",
+        "reinterpret_forms::pointer",
+    ] {
+        assert!(
+            lifted
+                .iter()
+                .any(|row| row["function"].as_str() == Some(function)),
+            "{function}: {:?}",
+            residue_detail(&files, function)
+        );
+    }
+    let cache = dir.join("verdicts.toml");
+    if let Some(bytes) = previous_verdicts {
+        std::fs::write(&cache, bytes).unwrap();
+    }
+
+    uorust::mir::prove_bounded(
+        &dir,
+        &options("reinterpret_forms"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    opts.mir = Some(mir_options(
+        dumps,
+        verdicts(&cache),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let lifted = frontier_rows(&files, "lifted");
+    for function in [
+        "reinterpret_forms::bytes",
+        "reinterpret_forms::word",
+        "reinterpret_forms::pointer",
+    ] {
+        assert!(
+            lifted
+                .iter()
+                .any(|row| row["function"].as_str() == Some(function)),
+            "{function}: {:?}",
+            residue_detail(&files, function)
+        );
+    }
+    for function in [
+        "reinterpret_forms::invalid_text",
+        "reinterpret_forms::invalid_scalar",
+        "reinterpret_forms::invalid_pointer",
+    ] {
+        assert!(
+            !lifted
+                .iter()
+                .any(|row| row["function"].as_str() == Some(function)),
+            "{function}: validity was discarded"
+        );
+        assert!(residue_detail(&files, function).is_some());
+    }
+    let definitions: std::collections::BTreeMap<_, _> = lifted
+        .iter()
+        .filter_map(|row| {
+            Some((
+                row["function"].as_str()?.rsplit("::").next()?,
+                row["definition"].as_str()?.strip_prefix("Behavior::")?,
+            ))
+        })
+        .collect();
+    if let Some(output) = std::env::var_os("UORUST_TEST_OUTPUT_VERDICTS") {
+        std::fs::copy(&cache, output).unwrap();
+    }
+    let decisions = verdicts(&cache);
+    let mut vectors = String::new();
+    let mut add = |function: &str, index: usize, observation: String, expected: String| {
+        let name = definitions[function];
+        let path = format!("reinterpret_forms::{function}");
+        let kappa = lifted
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&path))
+            .unwrap()["kappa"]
+            .as_str()
+            .unwrap();
+        let policy = decisions
+            .rows
+            .get(kappa)
+            .and_then(|v| v.axioms.get(name))
+            .cloned()
+            .unwrap_or_default();
+        let proof = if function == "bytes" {
+            "reflexivity"
+        } else {
+            "decide"
+        };
+        vectors.push_str(&format!("theorem{{name:representationVector{function}{index},parameters:[],statement:({observation} = {expected}),proof:{proof}{{}},axioms:[{}]}}\n",policy.join(", ")));
+    };
+    for (i, value) in ["", "ascii", "é", "🦀"].into_iter().enumerate() {
+        // SDK UTF-8 is opaque: prove equality to the admitted byte-view model.
+        let literal = serde_json::to_string(value).unwrap();
+        let expected = format!("(Prelude::textBytes {literal})");
+        add(
+            "bytes",
+            i,
+            format!("({} {literal})", definitions["bytes"]),
+            expected,
+        );
+    }
+    for (i, value) in [0u32, 1, 0x1234abcd, u32::MAX].into_iter().enumerate() {
+        let expected = value.to_le_bytes();
+        let mut list = "(nil Nat)".to_string();
+        for byte in expected.into_iter().rev() {
+            list = format!("(cons {byte} {list})");
+        }
+        add(
+            "word",
+            i,
+            format!("({} {value})", definitions["word"]),
+            list,
+        );
+    }
+    for (i, address) in [0usize, 42, usize::MAX].into_iter().enumerate() {
+        let pointer = std::ptr::without_provenance::<u8>(address);
+        let returned = pointer.cast_mut();
+        assert_eq!(returned.addr(), address);
+        let call = format!(
+            "({} (record RawPointer {{allocation := 7, address := {address}, metadata := 0}}))",
+            definitions["pointer"]
+        );
+        for (field, expected) in [
+            ("allocation", "7".to_string()),
+            ("address", address.to_string()),
+            ("metadata", "0".to_string()),
+        ] {
+            add(
+                "pointer",
+                3 * i
+                    + match field {
+                        "allocation" => 0,
+                        "address" => 1,
+                        _ => 2,
+                    },
+                format!("(project {call} {field})"),
+                expected,
+            );
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{vectors}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let good = vectors
+        .lines()
+        .find(|l| l.contains("name:representationVectorword0,"))
+        .unwrap();
+    let bad = good.replacen("(cons 0", "(cons 1", 1);
+    assert_ne!(good, bad);
+    std::fs::write(&file, body.replacen(good, &bad, 1)).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

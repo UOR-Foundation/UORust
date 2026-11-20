@@ -1819,3 +1819,30 @@ refuse mixed target widths and reject incompatible carriers. Eight integer
 kernel controls and the library effect-propagation regression (13.20 seconds)
 passed, as did conformance, strict Clippy and model/template/SDK/self-model
 checks. Complete release acceptance remains the unchanged `just vv` boundary.
+
+## UE-108: compiler forms share one typed representation kernel
+
+The neutral mixed-representation fixture initially refused the compiler
+intrinsic identity (12.38 seconds). Qualified intrinsic calls now use the
+existing source declaration normalizer, and MIR reinterpret casts and intrinsic
+calls use one representation kernel. No standard-operation model was added.
+Pointer-view constructions with unimported destination validity remain refused.
+Scalar and UTF-8 conversions retain their validity obligations; UTF-8 validity
+uses the SDK-supported decoder-result match instead of aggregate primitive
+equality.
+
+Seven Rust/SDK numeric observations passed for fixed-width arrays and pointer
+addresses, with nine SDK pointer-field preservation checks. Four UTF-8 view
+checks prove definitional equality to the existing SDK byte model, whose encoding
+primitive is opaque to kernel reduction. Incorrect array output was rejected
+with LLV7002. Invalid scalar and UTF-8 functions retain actual SDK refusals;
+unadmitted pointer-view construction remains typed residue. The complete
+focused SDK scenario passed in 44.92 seconds using intact, exact-match native
+receipts. Test policy lookup uses the current frontier kappa, preserving the
+separation between historical signatures and the current function.
+
+Twenty-four lowering controls include direct MIR casts, scalar/UTF-8 validity,
+pointer views, incompatible sizes and inconsistent target endianness. The
+intrinsic ownership control rejects consumer lookalikes and undeclared items.
+Conformance, strict Clippy and model/template/SDK/self-model checks passed.
+Complete release acceptance remains the unchanged `just vv` boundary.

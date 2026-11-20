@@ -744,6 +744,17 @@ impl CoreLink {
         Some(generics)
     }
 
+    /// Imported intrinsic identities use the same source namespace normalization
+    /// as library bodies; the declaration graph must own the resolved item.
+    pub(crate) fn imported_intrinsic(&self, callee: &str) -> Option<(String, String)> {
+        let normalized = self.decls.compiler_type(callee);
+        let path = self.path(&super::lower::erase(&normalized))?;
+        self.decls
+            .intrinsics
+            .contains(&path)
+            .then_some((path, normalized))
+    }
+
     /// Core's own body of `callee`, its generic parameters bound by the
     /// call's type arguments and the types of its arguments and
     /// destination; `None` when core has no body for it or a parameter its
@@ -1626,6 +1637,23 @@ assert actual==expected, 'unregistered or missing source'
                 "bool"
             )
             .is_none());
+    }
+
+    #[test]
+    fn imported_intrinsics_require_compiler_declarations_ue_108() {
+        let graph = &compiler_library().graph;
+        let (path, call) = graph
+            .imported_intrinsic("std::intrinsics::transmute::<u32, [u8; 4]>")
+            .unwrap();
+        assert!(graph.decls.intrinsics.contains(&path));
+        assert!(graph.bind(&path, &call, None, &[], "").is_some());
+        for callee in [
+            "consumer::intrinsics::transmute::<u32,u32>",
+            "std::missing::transmute::<u32,u32>",
+            "std::intrinsics::missing::<u32>",
+        ] {
+            assert!(graph.imported_intrinsic(callee).is_none(), "{callee}");
+        }
     }
 
     #[test]

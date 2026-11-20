@@ -128,6 +128,7 @@ model does not sanction.
 | `UE-105` | `build` | Compiler-library dependency bodies use the exact pinned compiler optimization stage through the existing resolver and native ABI, retaining typed borrowed record state without handwritten operation models; source, target, pass and producer mismatches remain refused |
 | `UE-106` | `build` | Source and imported native declarations share one lexical dependency order before emission, preserving mutual groups and retaining invalid cycles, missing dependencies and conflicting declarations for SDK rejection |
 | `UE-107` | `build` | Compiler-owned fixed-width plain MIR integer arithmetic reuses the existing modular intrinsic kernels across compiler forms, retaining explicit overflow assertions and unchecked-operation preconditions; target-dependent widths and incompatible carriers remain refused |
+| `UE-108` | `build` | MIR reinterpret casts and compiler intrinsic calls share one typed native representation kernel, preserving pointer carriers, UTF-8 views and fixed-width array layouts while retaining scalar validity, UTF-8 validity, pointer-view validity and target-layout refusal boundaries |
 
 ## factory
 

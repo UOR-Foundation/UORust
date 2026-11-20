@@ -753,3 +753,10 @@ Feature: engine
     When native lowering binds their existing fixed-width intrinsic kernels
     Then Rust and SDK observations agree across unsigned and signed boundaries
     But explicit overflow assertions and unchecked-operation preconditions remain enforced
+
+  @UE-108 @build
+  Scenario: Compiler reinterpretation forms share admitted representation kernels
+    Given typed reinterpret casts and compiler intrinsic calls
+    When both forms bind the same native representation kernel
+    Then pointer carriers and UTF-8 and fixed-width views retain Rust observations
+    But invalid scalar values, invalid UTF-8 and unavailable layouts remain refused
