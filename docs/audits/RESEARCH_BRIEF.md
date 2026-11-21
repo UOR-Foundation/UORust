@@ -175,7 +175,13 @@ refactor admitted only 6 of 31 candidates (PR #43, merged as `28926f95`).
 - **GAP-TEST-06** MAJOR, L. CI scripts that write `main` have no hermetic test:
   push.sh, push-branch.sh, merge-main.sh, generate-loop.sh, land-certified.sh,
   release writers, mir scripts, installers, hooks; several tests run only in CI,
-  not `just vv`. CONFIRMED (R1).
+  not `just vv`. CONFIRMED (R1). **PARTLY RESOLVED** (Sprint 1, C1): every
+  Python and shell suite under `scripts/` now runs under `vv`
+  (`crates/conformance/tests/ci.rs` `script_suites_pass`), inside the factory's
+  `test` obligation (`prism-factory/graph.toml`); still open: the browser suites
+  `try/test.mjs` and `identity/test.mjs` (CI-only), and no hermetic test yet for
+  push.sh, push-branch.sh, merge-main.sh, generate-loop.sh, land-certified.sh,
+  release writers, mir scripts, installers and hooks.
 - **GAP-TEST-07** MINOR, S. UE-01's "nothing stale lingers" is a tautology; extra
   files in the fixture go unnoticed (`lib.rs:232-247`, engine.rs:165-167).
   CONFIRMED (R2).
@@ -319,7 +325,7 @@ refactor admitted only 6 of 31 candidates (PR #43, merged as `28926f95`).
 | GAP-TEST-02 | TEST | MAJOR | L | no | PARTIAL |
 | GAP-TEST-03 | TEST | MAJOR | L | no | PARTIAL |
 | GAP-TEST-04 | TEST | MAJOR | M | no | PARTIAL |
-| GAP-TEST-06 | TEST | MAJOR | L | no | CONFIRMED |
+| GAP-TEST-06 | TEST | MAJOR | L | no | PARTLY RESOLVED |
 | GAP-DEPS-01 | DEPS | MINOR | S | no | CONFIRMED |
 | GAP-DOCS-03 | DOCS | MINOR | S | no | PARTIAL |
 | GAP-GATE-05 | GATE | MINOR | M | no | PARTIAL |

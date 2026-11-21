@@ -352,3 +352,42 @@ transcript is rejected. This is an embedded negative-control check rather
 than a separate intentionally red PR workflow. The exact-head hosted
 bootstrap run is the execution receipt; until that run passes, these
 remain source-level expected results, **not verified hosted outcomes**.
+
+## Script suites inside the acceptance gate
+
+Every Python and shell test suite under `scripts/` now runs under `just vv`
+through `script_suites_pass` in `crates/conformance/tests/ci.rs`. Suites are
+discovered with `git ls-files` glob pathspecs, so a new suite runs without
+editing the test. A suite is refused when it exits non-zero, runs no test,
+skips one or reports an expected failure (`verdict`), and every discovered suite
+must lie inside the factory's `test` obligation, judged by the factory's own
+`graph.covers` (`uncovered`). `factory_closure_holds` runs
+`prism-factory/graph.py reads`, which refused on `28926f95` because SM-07 reads
+`bootstrap/acceptance-result.test.mjs` without the obligation declaring it; the
+obligation now declares that file, the three site modules it loads,
+`scripts/release/` and `scripts/self-model/`, and the factory's text and
+certified bundle were regenerated in the SDK image by `prism-factory/README.md`,
+"Changing the graph" (`just factory-model` passes).
+
+The node suites `try/test.mjs` and `identity/test.mjs` drive Chromium through
+Playwright, which the SDK image does not carry; they stay in `try-page.yml`.
+
+### Planted defects and restored controls
+
+Run in the pinned SDK image, each with
+`cargo test -q --locked -p repo-conformance --test ci <test>`:
+
+| Plant | Check | Result with the plant | Restored |
+| --- | --- | --- | --- |
+| First `assertEqual` in `scripts/release/test_platforms.py` inverted | `script_suites_pass` | refused: `scripts/release/test_platforms.py: the suite exited non-zero` (`FAILED (failures=1)`) | passes |
+| `prism-factory/graph.toml` as on `28926f95` | `factory_closure_holds` | refused: `test reads bootstrap/acceptance-result.test.mjs (crates/conformance/tests/browser_acceptance.rs:56) without declaring it` | passes |
+| `"!scripts/release/"` added to the `test` obligation's inputs | `script_suites_pass` (coverage step) | refused: `suites outside the factory test obligation` | passes |
+
+The planted-output unit tests `verdict_accepts_only_a_suite_that_ran_and_passed`,
+`stale_names_exclusions_that_no_longer_exist`,
+`judge_coverage_refuses_a_run_it_cannot_trust` and
+`uncovered_follows_the_factory_rule` cover each refusal without a live failure:
+a non-zero exit, no or zero `Ran` count, `OK (skipped=1)`,
+`OK (expected failures=1)`, a cross-kind summary, a stale exclusion, a coverage
+run that stops early (`checked 1` for 8) or over-counts (`checked 9` for 8), and
+an `!` exclusion.
