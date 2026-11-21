@@ -5,6 +5,8 @@ configuration, plus its actual Node body. A missing, skipped or ignored guard
 therefore cannot silently pass.
 No network access, Docker image or GitHub token is required.
 """
+import contextlib
+import io
 import json
 import os
 import re
@@ -12,7 +14,9 @@ from pathlib import Path
 import subprocess
 import tempfile
 import textwrap
+import tomllib
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOWS = (
@@ -141,6 +145,7 @@ REQUIRED_PREFLIGHT = (
 REQUIRED_RESULT_GATE = (
     "test_complete_success_is_accepted",
     "test_missing_failed_or_skipped_controls_are_refused",
+    "test_modeled_result_refusal_is_emitted_by_entrypoint",
     "test_workflows_run_strict_gate_before_identity_preflight",
 )
 REQUIRED_NAMES = REQUIRED_PREFLIGHT + REQUIRED_RESULT_GATE
@@ -179,6 +184,43 @@ class PagesIdentityResultGateTests(unittest.TestCase):
         clean.expectedFailures.append(("PagesIdentityPreflightTests", "seeded expected failure"))
         self.assertFalse(complete_result(clean, REQUIRED_NAMES))
 
+    def test_modeled_result_refusal_is_emitted_by_entrypoint(self):
+        model = tomllib.loads(
+            (ROOT / "model/pages-identity-diagnostics.toml").read_text(encoding="utf-8")
+        )
+        row = model["refusal"]
+        self.assertEqual(model["schema"], "uor/pages-identity-diagnostics/1")
+        self.assertEqual(len(row), 1)
+        self.assertEqual(row[0]["code"], "PAGES_IDENTITY_CONTROLS_INCOMPLETE")
+        ids = tomllib.loads((ROOT / "model/ids.toml").read_text(encoding="utf-8"))
+        claim = next(item for item in ids["id"] if item["id"] == "PG-01")
+        self.assertEqual(claim["level"], "build")
+        self.assertEqual(claim["suite"], "pages")
+        self.assertIn(row[0]["code"], claim["statement"])
+
+        for scenario in ("skipped", "failed", "missing"):
+            with self.subTest(scenario=scenario):
+                broken = unittest.TestResult()
+                broken.testsRun = len(REQUIRED_NAMES)
+                if scenario == "skipped":
+                    broken.skipped.append(("required control", "planted skip"))
+                elif scenario == "failed":
+                    broken.failures.append(("required control", "planted failure"))
+                else:
+                    broken.testsRun -= 1
+                emitted = io.StringIO()
+                with mock.patch.object(
+                    unittest.TextTestRunner, "run", return_value=broken
+                ), contextlib.redirect_stderr(emitted):
+                    self.assertEqual(main(), 1)
+                payload = json.loads(emitted.getvalue().strip())
+                self.assertEqual(payload["code"], row[0]["code"])
+                self.assertEqual(payload["kind"], row[0]["kind"])
+                self.assertEqual(payload["message"], row[0]["message"])
+                self.assertEqual(payload["required"], len(REQUIRED_NAMES))
+                self.assertEqual(payload["executed"], broken.testsRun)
+                self.assertEqual(payload["skipped"], len(broken.skipped))
+
     def test_workflows_run_strict_gate_before_identity_preflight(self):
         exact = (
             "      - name: Verify Pages identity gates against planted wrong metadata\n"
@@ -201,8 +243,26 @@ def main():
     result = unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(test_suites))
     if not complete_result(result, actual_names):
         import sys
+        model = tomllib.loads(
+            (ROOT / "model/pages-identity-diagnostics.toml").read_text(encoding="utf-8")
+        )
+        rows = model["refusal"]
+        if model["schema"] != "uor/pages-identity-diagnostics/1" or len(rows) != 1:
+            raise ValueError("Pages identity refusal model is missing or invalid")
+        refusal = rows[0]
+        if any(key not in refusal for key in ("code", "kind", "message")):
+            raise ValueError("Pages identity refusal model is incomplete")
         print(
-            "PAGES IDENTITY GATE REFUSED: expected nine named, passing, non-skipped tests",
+            json.dumps({
+                "code": refusal["code"],
+                "kind": refusal["kind"],
+                "message": refusal["message"],
+                "required": len(REQUIRED_NAMES),
+                "executed": result.testsRun,
+                "skipped": len(result.skipped),
+                "failed": len(result.failures),
+                "errors": len(result.errors),
+            }, sort_keys=True),
             file=sys.stderr,
         )
         return 1

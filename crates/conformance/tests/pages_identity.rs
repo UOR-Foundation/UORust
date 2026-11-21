@@ -1,4 +1,4 @@
-//! R5: planted defects prove both Pages identity preflights refuse stale origins.
+//! PG-01/R5: planted defects prove both Pages identity preflights refuse stale origins.
 //! The existing `test` obligation runs this via `cargo test --workspace` in
 //! full `just vv`, and both workflow jobs invoke the same Python controls.
 
@@ -14,7 +14,7 @@ fn root() -> PathBuf {
 }
 
 #[test]
-fn pages_identity_workflow_negative_controls() {
+fn pages_identity_workflow_negative_controls_pg_01() {
     let output = Command::new("python3")
         .args(["-I", "scripts/ci/test_pages_identity.py"])
         .current_dir(root())
