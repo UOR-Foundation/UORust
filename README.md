@@ -6,12 +6,14 @@
 
 <h1 align="center">UORust</h1>
 
-<p align="center"><strong>Turn a Cargo workspace into a reviewable Prism model, with source-linked evidence, explicit refusals, and reproducible verification.</strong></p>
+<p align="center"><strong>Source code changes. Architecture documentation and verification claims can drift.</strong></p>
+
+<p align="center">UORust turns a Cargo workspace into a source-linked, reviewable Prism model. It separates what is actually modeled or verified from what remains unsupported, so gaps stay visible instead of becoming accidental assurances.</p>
 
 <p align="center">
-  <a href="https://github.com/afflom/UORust/actions/workflows/bootstrap.yml"><img alt="Bootstrap acceptance" src="https://github.com/afflom/UORust/actions/workflows/bootstrap.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/afflom/UORust/actions/workflows/pages.yml"><img alt="Pages deployment" src="https://github.com/afflom/UORust/actions/workflows/pages.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/afflom/UORust/releases/latest"><img alt="Latest GitHub release" src="https://img.shields.io/github/v/release/afflom/UORust?label=release"></a>
+  <a href="https://github.com/UOR-Foundation/UORust/actions/workflows/bootstrap.yml"><img alt="Bootstrap acceptance" src="https://github.com/UOR-Foundation/UORust/actions/workflows/bootstrap.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/UOR-Foundation/UORust/actions/workflows/pages.yml"><img alt="Pages deployment" src="https://github.com/UOR-Foundation/UORust/actions/workflows/pages.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/UOR-Foundation/UORust/releases/latest"><img alt="Latest GitHub release" src="https://img.shields.io/github/v/release/UOR-Foundation/UORust?label=release"></a>
   <a href="Cargo.toml"><img alt="Minimum supported Rust version 1.89" src="https://img.shields.io/badge/MSRV-1.89-3776ab"></a>
   <a href="LICENSE-MIT"><img alt="MIT OR Apache-2.0" src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-667eea"></a>
 </p>
@@ -19,7 +21,7 @@
 <p align="center">
   <a href="https://afflom.github.io/UORust/"><strong>Try the live route table</strong></a> ·
   <a href="#quick-start"><strong>Quick start</strong></a> ·
-  <a href="https://github.com/afflom/UORust/releases/latest"><strong>Releases</strong></a> ·
+  <a href="https://github.com/UOR-Foundation/UORust/releases/latest"><strong>Releases</strong></a> ·
   <a href="#architecture"><strong>Architecture</strong></a> ·
   <a href="#documentation-and-repository-map"><strong>Documentation</strong></a> ·
   <a href="CONFORMANCE.md"><strong>Conformance evidence</strong></a>
@@ -29,6 +31,7 @@
 
 ## Contents
 
+- [Why UORust](#why-uorust)
 - [What UORust does](#what-uorust-does)
 - [Try the live demo](#try-the-live-demo)
 - [Quick start](#quick-start)
@@ -43,6 +46,12 @@
 - [Documentation and repository map](#documentation-and-repository-map)
 - [Contributing and governance](#contributing-and-governance)
 - [License](#license)
+
+## Why UORust
+
+A codebase can change while its diagrams, design notes, and proof claims stay frozen in time. That mismatch makes it harder to tell **what the repository actually contains**, **what its verification covers**, and **which assumptions still need work**. UORust aims to reduce that distance by deriving a model from the code and making its evidence and unsupported cases inspectable.
+
+This is particularly useful for developers reviewing unfamiliar Rust code, maintainers tracking architectural drift, and teams that need a reproducible handoff between implementation and formal modeling. **It is not a replacement for design decisions, independent audits, or tests.**
 
 ## What UORust does
 
@@ -91,11 +100,11 @@ The [route table](model/routes.toml) is shared by the [Rust router](crates/uorus
 The reproducible path from a tagged source release is:
 
 ```sh
-cargo install --locked --git https://github.com/afflom/UORust --tag v0.4.0 uorust
+cargo install --locked --git https://github.com/UOR-Foundation/UORust --tag v0.4.0 uorust
 uorust --version
 ```
 
-You can instead use a platform archive from the [latest release](https://github.com/afflom/UORust/releases/latest). The tagged example above intentionally pins a version; the release page is the source of truth for newer versions.
+You can instead use a platform archive from the [latest release](https://github.com/UOR-Foundation/UORust/releases/latest). The tagged example above intentionally pins a version; the release page is the source of truth for newer versions.
 
 ### 2. Generate a Prism project
 
@@ -121,7 +130,7 @@ A Prism project can contain open claims or unlifted behavior. Successful validat
 **Working from this repository instead of installing the CLI:**
 
 ```sh
-git clone https://github.com/afflom/UORust.git
+git clone https://github.com/UOR-Foundation/UORust.git
 cd UORust
 cargo run --locked -p uorust -- routes
 cargo run --locked -p uorust -- project path/to/workspace --out path/to/prism-project
@@ -133,14 +142,14 @@ The workspace declares **Rust 1.89** as its minimum version and pins **Rust 1.97
 
 | Route | When to use it | Availability / qualification |
 | --- | --- | --- |
-| [GitHub release archives](https://github.com/afflom/UORust/releases/latest) | Download a prebuilt binary and verify its digest and provenance | Check the exact assets on the release page |
-| [Tagged Cargo source](https://github.com/afflom/UORust/releases/tag/v0.4.0) | Reproduce a known source version | `cargo install --locked --git … --tag v0.4.0 uorust` |
+| [GitHub release archives](https://github.com/UOR-Foundation/UORust/releases/latest) | Download a prebuilt binary and verify its digest and provenance | Check the exact assets on the release page |
+| [Tagged Cargo source](https://github.com/UOR-Foundation/UORust/releases/tag/v0.4.0) | Reproduce a known source version | `cargo install --locked --git … --tag v0.4.0 uorust` |
 | [Install scripts](install.sh) / [Windows script](install.ps1) | Scripted installation | Read the scripts before executing; they use published release assets |
 | [Homebrew formula](Formula/uorust.rb) | macOS/Linux package management | Formula is generated from release checksums; verify it targets the desired release |
-| [Nix flake](flake.nix) | Build from the pinned Nix configuration | `nix run github:afflom/UORust -- --version` |
+| [Nix flake](flake.nix) | Build from the pinned Nix configuration | `nix run github:UOR-Foundation/UORust -- --version` |
 | [crates.io package](https://crates.io/crates/uorust) / [cargo-binstall](https://github.com/cargo-bins/cargo-binstall) | Registry-based installation | Only after the package/version is published in the registry |
 
-**Windows note:** Windows is included in the release build matrix, but it is a *non-blocking* target. The published [v0.4.0 assets](https://github.com/afflom/UORust/releases/tag/v0.4.0) include Linux and macOS archives, **not** a Windows archive. Do not assume a Windows binary is attached to every release.
+**Windows note:** Windows is included in the release build matrix, but it is a *non-blocking* target. The published [v0.4.0 assets](https://github.com/UOR-Foundation/UORust/releases/tag/v0.4.0) include Linux and macOS archives, **not** a Windows archive. Do not assume a Windows binary is attached to every release.
 
 For exact supported commands, conditional registry publication, and checks, see [`install.yml`](.github/workflows/install.yml) and [`release.yml`](.github/workflows/release.yml). Environment overrides for the install scripts include `UORUST_VERSION` and `UORUST_INSTALL_DIR`.
 
@@ -227,11 +236,11 @@ The repository's [self-model generators](scripts/self-model) bind model records 
 
 | Boundary | What can be claimed | Where to verify |
 | --- | --- | --- |
-| Released | Versioned binaries and checksums exist for the platforms attached to a published release | [GitHub releases](https://github.com/afflom/UORust/releases), [release workflow](.github/workflows/release.yml) |
+| Released | Versioned binaries and checksums exist for the platforms attached to a published release | [GitHub releases](https://github.com/UOR-Foundation/UORust/releases), [release workflow](.github/workflows/release.yml) |
 | Enforced on PRs | The repository's acceptance command runs inside a locked SDK on PR CI | [Bootstrap workflow](.github/workflows/bootstrap.yml), [`just vv`](Justfile) |
 | Modeled and checked | The registered routes, model facets, tests and specified proof claims have their corresponding verification paths | [CONFORMANCE.md](CONFORMANCE.md), [app/](app) |
 | Measured, not complete | Not all source functions lift; residual, foreign and effect cases remain accounted for | [frontier.toml](frontier.toml), [lift verdicts](lift-verdicts.toml) |
-| Under active development | More source constructs, foreign models, MIR semantics and certified translation are being integrated | [Open pull requests](https://github.com/afflom/UORust/pulls), [open issues](https://github.com/afflom/UORust/issues) |
+| Under active development | More source constructs, foreign models, MIR semantics and certified translation are being integrated | [Open pull requests](https://github.com/UOR-Foundation/UORust/pulls), [open issues](https://github.com/UOR-Foundation/UORust/issues) |
 
 A passing build or model check certifies **the checks it actually ran**, not an arbitrary Rust program's total correctness. There is no hidden fallback that upgrades a refusal into a verified claim.
 
@@ -249,13 +258,13 @@ The acceptance boundary is **`just vv`**, executed inside the exact SDK image se
 | `just register` | Refresh the [lift frontier](frontier.toml) while refusing previously lifted functions that are no longer lifted |
 | `just new-capability <ID> <level> <suite> "<statement>"` | Register a capability with its scenario and initial failing test |
 
-For CI evidence see [Actions](https://github.com/afflom/UORust/actions); for the precise contract, [VERIFICATION.md](VERIFICATION.md), [TEMPLATE-CONTRACT.md](TEMPLATE-CONTRACT.md), and [AGENTS.md](AGENTS.md).
+For CI evidence see [Actions](https://github.com/UOR-Foundation/UORust/actions); for the precise contract, [VERIFICATION.md](VERIFICATION.md), [TEMPLATE-CONTRACT.md](TEMPLATE-CONTRACT.md), and [AGENTS.md](AGENTS.md).
 
 **Do not** substitute a passing partial Rust test command for `just vv`. When an external SDK or platform dependency is unavailable, report that as a blocked verification leg, not as a successful full run.
 
 ## Releases and provenance
 
-The current published tagged example is **[v0.4.0](https://github.com/afflom/UORust/releases/tag/v0.4.0)**. Releases contain archives, individual archive hashes, and `SHA256SUMS`. Build-provenance attestations are attached to qualifying release builds.
+The most recent release verified for this README is **[v0.4.0](https://github.com/UOR-Foundation/UORust/releases/tag/v0.4.0)**. Releases contain archives, individual archive hashes, and `SHA256SUMS`. Build-provenance attestations are attached to qualifying release builds.
 
 ### Release targets
 
@@ -278,18 +287,25 @@ A target marked *no* is non-blocking: a release may be published without its art
 For a Linux x86-64 release, from a directory where you want to keep the downloaded artifacts:
 
 ```sh
-gh release download v0.4.0 --repo afflom/UORust \
+gh release download v0.4.0 --repo UOR-Foundation/UORust \
   --pattern 'uorust-x86_64-unknown-linux-gnu.tar.gz' \
   --pattern SHA256SUMS
 
 sha256sum --check --ignore-missing SHA256SUMS
 
+# Download the attestation bundle from the repository's current location.
+gh attestation download uorust-x86_64-unknown-linux-gnu.tar.gz \
+  --repo UOR-Foundation/UORust
+
+# The downloaded bundle is named sha256:<archive digest>.jsonl on Linux.
+archive_digest=$(sha256sum uorust-x86_64-unknown-linux-gnu.tar.gz | cut -d ' ' -f1)
 gh attestation verify uorust-x86_64-unknown-linux-gnu.tar.gz \
+  --bundle "sha256:${archive_digest}.jsonl" \
   --repo afflom/UORust \
   --signer-workflow afflom/UORust/.github/workflows/release.yml
 ```
 
-The hash check validates downloaded bytes against the release's checksum list; the GitHub attestation verifies the artifact's signed build provenance. Neither replaces validation of the model you generate from your own workspace.
+The hash check compares the release archive with the published checksum list. The bundle is fetched using the repository's **current** location, but `--repo afflom/UORust` and `--signer-workflow afflom/UORust/.github/workflows/release.yml` deliberately verify the **historical signer identity recorded in the v0.4.0 certificate**. GitHub CLI checks `--repo` against the signed source repository identity, not just the download location. If GitHub no longer serves the historical attestation bundle after the transfer, report provenance verification as unavailable instead of silently weakening that identity check. Neither check replaces validation of the model generated from your own workspace.
 
 ## Documentation and repository map
 
@@ -317,7 +333,7 @@ The hash check validates downloaded bytes against the release's checksum list; t
 
 ## Contributing and governance
 
-We welcome bug reports, reproduction cases, documentation improvements, and source-to-model coverage work. Start with [issues](https://github.com/afflom/UORust/issues) and [pull requests](https://github.com/afflom/UORust/pulls).
+We welcome bug reports, reproduction cases, documentation improvements, and source-to-model coverage work. Start with [issues](https://github.com/UOR-Foundation/UORust/issues) and [pull requests](https://github.com/UOR-Foundation/UORust/pulls).
 
 This repository follows [`uor/template-contract/1`](TEMPLATE-CONTRACT.md). Review [AGENTS.md](AGENTS.md) before changing behavior: new capabilities require registered IDs, acceptance scenarios and failing tests; generated evidence must be regenerated from its authoritative source; refusals must remain explicit. The full acceptance is `just vv` in the locked SDK. Do not modify the human-reviewed bootstrap trust root to make a proposed change pass.
 
