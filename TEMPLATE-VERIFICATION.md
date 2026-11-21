@@ -2134,3 +2134,14 @@ executable returned 0 and 1 for opposite input variants. Four native proofs and
 eight SDK observations passed for saved values, direct returns, branches and
 field writes after sharing the checked conversion and saving the scrutinee. Substituting the replacement's tag for the original
 failed the SDK observation with LLV7002.
+
+UE-123 binds direct calls into path modules to their reachable workspace
+declaration, generated source bytes, target-local compiler path and MIR body.
+Two modules each supply a different implementation of the same pair of function
+names. The original native projection refused the call into the generated
+module. After importing both dependency closures, the pinned SDK proved both
+callers and checked eight values against the compiled Rust executable. Reversing
+an expected result failed with LLV7002. The source ownership test checks
+unreachable files, external files, conditional declarations, generic functions
+and changed source identities. The ordinary compiler ABI and recursion checks
+also apply to these dependencies.

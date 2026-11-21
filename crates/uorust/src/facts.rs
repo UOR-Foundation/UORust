@@ -82,6 +82,9 @@ pub(crate) struct Package {
     pub(crate) deps: Vec<Dep>,
     /// Lint levels the package declares or inherits.
     pub(crate) lints: BTreeMap<String, String>,
+    /// Closed free functions in literal path modules, keyed by target and Rust module path.
+    /// They are compiler dependencies outside the source register.
+    pub(crate) path_functions: BTreeMap<(usize, String), String>,
     pub(crate) files: Vec<SourceFile>,
 }
 

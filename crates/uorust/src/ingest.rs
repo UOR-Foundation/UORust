@@ -500,6 +500,7 @@ fn package(
         .filter_map(|(path, _, _, _, parsed)| Some((path.as_path(), parsed.as_ref().ok()?)))
         .collect();
     let tests = test_files(&roots, &trees);
+    let path_functions = path_module_functions(root, &roots, &trees);
     for (path, rel_path, target, module, parsed) in &read {
         let (file, file_syntax) = match parsed {
             Ok(tree) => source(
@@ -539,9 +540,180 @@ fn package(
         targets,
         deps,
         lints,
+        path_functions: path_functions
+            .into_iter()
+            .filter_map(|(key, value)| Some((key, value?)))
+            .collect(),
         files,
     };
     Ok((package, syntax))
+}
+
+/// A direct path module has a source-owned namespace even when its file is
+/// outside Cargo's conventional source directories. Only closed, unconditional
+/// free functions can bind ordinary compiler calls through this index.
+fn path_module_functions(
+    root: &Path,
+    roots: &[PathBuf],
+    trees: &BTreeMap<&Path, &syn::File>,
+) -> BTreeMap<(usize, String), Option<String>> {
+    fn inert(attributes: &[syn::Attribute]) -> bool {
+        attributes.iter().all(|a| {
+            let path = a.path();
+            [
+                "allow", "forbid", "warn", "deny", "doc", "inline", "cold", "must_use",
+            ]
+            .iter()
+            .any(|name| path.is_ident(name))
+                || (path.segments.len() == 2
+                    && path.segments[0].ident == "rustfmt"
+                    && path.segments[1].ident == "skip")
+        })
+    }
+    // Two complementary cfg declarations can expose the same source module
+    // with different visibility. Its identity is independent of the build flag.
+    fn condition(module: &syn::ItemMod) -> Option<syn::Meta> {
+        let mut conditions = module.attrs.iter().filter(|a| a.path().is_ident("cfg"));
+        let term = conditions.next()?.parse_args().ok()?;
+        conditions.next().is_none().then_some(term)
+    }
+    fn negates(lhs: &syn::Meta, rhs: &syn::Meta) -> bool {
+        matches!(lhs, syn::Meta::List(list) if list.path.is_ident("not")
+            && list.parse_args::<syn::Meta>().ok().as_ref() == Some(rhs))
+    }
+    fn same_module(left: &syn::ItemMod, right: &syn::ItemMod) -> bool {
+        if left.content.is_some()
+            || right.content.is_some()
+            || path_attr(&left.attrs) != path_attr(&right.attrs)
+        {
+            return false;
+        }
+        let (Some(a), Some(b)) = (condition(left), condition(right)) else {
+            return false;
+        };
+        negates(&a, &b) || negates(&b, &a)
+    }
+    let mut out = BTreeMap::new();
+    let mut pending: Vec<_> = roots
+        .iter()
+        .enumerate()
+        .filter_map(|(target, path)| {
+            Some((
+                target,
+                String::new(),
+                ModFile {
+                    file: path.clone(),
+                    dir: path.parent()?.to_path_buf(),
+                    own: None,
+                    test: false,
+                },
+            ))
+        })
+        .collect();
+    while let Some((target, module, at)) = pending.pop() {
+        let Some(tree) = trees.get(at.file.as_path()).filter(|t| inert(&t.attrs)) else {
+            continue;
+        };
+        let mut modules: BTreeMap<String, Vec<(&syn::Item, &syn::ItemMod)>> = BTreeMap::new();
+        for item in &tree.items {
+            if let syn::Item::Mod(m) = item {
+                modules
+                    .entry(m.ident.unraw().to_string())
+                    .or_default()
+                    .push((item, m));
+            }
+        }
+        for declarations in modules.values() {
+            let valid_attributes = |m: &syn::ItemMod| {
+                m.attrs.iter().all(|a| {
+                    (a.path().is_ident("path") && path_attr(std::slice::from_ref(a)).is_some())
+                        || a.path().is_ident("cfg")
+                        || inert(std::slice::from_ref(a))
+                })
+            };
+            if declarations.iter().any(|(_, m)| !valid_attributes(m)) {
+                continue;
+            }
+            let (item, m) = match declarations.as_slice() {
+                [d] if d.1.content.is_none()
+                    && !d.1.attrs.iter().any(|a| a.path().is_ident("cfg")) =>
+                {
+                    *d
+                }
+                [left, right] if same_module(left.1, right.1) => *left,
+                _ => continue,
+            };
+            let prefix = if module.is_empty() {
+                m.ident.unraw().to_string()
+            } else {
+                format!("{module}::{}", m.ident.unraw())
+            };
+            let mut declared = Vec::new();
+            declared_files(
+                std::slice::from_ref(item),
+                &at.dir,
+                at.own.as_deref(),
+                false,
+                &mut declared,
+            );
+            if path_attr(&m.attrs).is_none() {
+                let mut found = declared
+                    .into_iter()
+                    .filter(|d| trees.contains_key(d.file.as_path()));
+                if let Some(child) = found.next() {
+                    if found.next().is_none() {
+                        pending.push((target, prefix, child));
+                    }
+                }
+                continue;
+            }
+            let [child] = declared.as_slice() else {
+                continue;
+            };
+            let Ok(path) = child.file.canonicalize() else {
+                continue;
+            };
+            let Ok(relative) = path.strip_prefix(root) else {
+                continue;
+            };
+            if !relative.components().all(|c| {
+                c.as_os_str()
+                    .to_str()
+                    .is_some_and(|x| !x.starts_with('.') && x != "target")
+            }) || path.extension().is_none_or(|e| e != "rs")
+            {
+                continue;
+            }
+            let Ok(module_source) = std::fs::read_to_string(&path) else {
+                continue;
+            };
+            let Ok(generated) = syn::parse_file(&module_source) else {
+                continue;
+            };
+            if !inert(&generated.attrs) {
+                continue;
+            }
+            let hash = crate::project::sha(module_source.as_bytes());
+            for i in generated.items {
+                let syn::Item::Fn(f) = i else { continue };
+                if !inert(&f.attrs)
+                    || !f.sig.generics.params.is_empty()
+                    || f.sig.generics.where_clause.is_some()
+                    || f.sig.asyncness.is_some()
+                    || matches!(f.sig.safety, syn::Safety::Unsafe(_))
+                    || f.sig.abi.is_some()
+                    || f.sig.variadic.is_some()
+                {
+                    continue;
+                }
+                let key = (target, format!("{prefix}::{}", f.sig.ident.unraw()));
+                out.entry(key)
+                    .and_modify(|v| *v = None)
+                    .or_insert_with(|| Some(hash.clone()));
+            }
+        }
+    }
+    out
 }
 
 /// Every `.rs` file under `dir`, not descending into a nested package or a
@@ -1950,6 +2122,49 @@ fn trait_fact(t: &syn::ItemTrait, scope: usize) -> crate::facts::TraitFact {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn path_modules_require_reachable_owned_closed_declarations_ue_123() {
+        let temp =
+            std::env::temp_dir().join(format!("uorust-module-owners-{}", std::process::id()));
+        let root = temp.join("workspace");
+        std::fs::create_dir_all(root.join("src")).unwrap();
+        let lib = root.join("src/lib.rs");
+        let child = root.join("src/child.rs");
+        let orphan = root.join("src/orphan.rs");
+        std::fs::write(root.join("model.rs"),"pub fn read(n:u8)->u8{n} pub fn generic<T>(n:T)->T{n} #[cfg(unix)] pub fn conditional(){}").unwrap();
+        std::fs::write(temp.join("outside.rs"), "pub fn read(){}").unwrap();
+        let main = syn::parse_file(
+            r#"
+                #[cfg(feature="visible")] pub mod child;
+                #[cfg(not(feature="visible"))] mod child;
+                #[cfg(feature="visible")] #[path="../model.rs"] mod other;
+                #[cfg(not(feature="visible"))] #[path="../different.rs"] mod other;
+                #[path="../../outside.rs"] mod foreign;
+                "#,
+        )
+        .unwrap();
+        let imported = syn::parse_file(r#"#[path="../model.rs"] mod generated;"#).unwrap();
+        let source = std::collections::BTreeMap::from([
+            (lib.as_path(), &main),
+            (child.as_path(), &imported),
+            (orphan.as_path(), &imported),
+        ]);
+        let index = super::path_module_functions(&root, std::slice::from_ref(&lib), &source);
+        assert_eq!(
+            index.keys().collect::<Vec<_>>(),
+            [&(0, "child::generated::read".to_string())]
+        );
+        let original = index.values().next().unwrap().as_ref().unwrap();
+        std::fs::write(
+            root.join("model.rs"),
+            "pub fn read(n:u8)->u8{n.wrapping_add(1)}",
+        )
+        .unwrap();
+        let changed = super::path_module_functions(&root, std::slice::from_ref(&lib), &source);
+        assert_ne!(changed.values().next().unwrap().as_ref().unwrap(), original);
+        std::fs::remove_dir_all(temp).unwrap();
+    }
+
     use super::*;
 
     #[test]

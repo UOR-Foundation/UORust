@@ -12491,3 +12491,142 @@ pub fn field(prior: Option<u8>, _replacement: Option<u8>) -> isize {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn path_module_dependencies_ue_123() {
+    let dir = scratch("path-module-dependencies", &[
+        ("Cargo.toml","[package]\nname=\"module_bindings\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs",r#"#[path="../generated/first.rs"] mod first;
+#[path="../generated/second.rs"] mod second;
+pub fn left(a: bool, b: bool) -> bool { first::run(a,b) }
+pub fn right(a: bool, b: bool) -> bool { second::run(a,b) }
+"#),
+        ("generated/first.rs","fn inner(a:bool,b:bool)->bool {a && b}\npub fn run(a:bool,b:bool)->bool { inner(a,b) }"),
+        ("generated/second.rs","fn inner(a:bool,b:bool)->bool {a || b}\npub fn run(a:bool,b:bool)->bool { inner(a,b) }"),
+        ("src/bin/oracle.rs","fn main(){for a in [false,true]{for b in [false,true]{println!(\"{a} {b} {} {}\",module_bindings::left(a,b),module_bindings::right(a,b));}}}"),
+    ]);
+    let oracle = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "oracle"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        oracle.status.success(),
+        "{}",
+        String::from_utf8_lossy(&oracle.stderr)
+    );
+    let dumps = dumped(&dir, "module-bindings");
+    let mut opts = options("module_bindings");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let paths = ["module_bindings::left", "module_bindings::right"];
+    for path in paths {
+        assert!(
+            frontier_rows(&files, "lifted")
+                .iter()
+                .any(|r| r["function"].as_str() == Some(path)),
+            "{path}: {:?}",
+            residue_detail(&files, path)
+        );
+    }
+    let source = dir.join("generated/first.rs");
+    let original = std::fs::read(&source).unwrap();
+    std::fs::write(
+        dir.join("generated/first.rs"),
+        "pub fn run(a:bool,b:bool)->bool {a || b}",
+    )
+    .unwrap();
+    assert!(
+        uorust::project_workspace(&dir, &opts).is_err(),
+        "changed path module reused a compiler catalogue from other source bytes"
+    );
+    std::fs::write(source, original).unwrap();
+    let cache = dir.join("verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("module_bindings"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!((proof.proved, proof.refused), (2, 0), "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut observations = String::new();
+    for (i, line) in String::from_utf8(oracle.stdout)
+        .unwrap()
+        .lines()
+        .enumerate()
+    {
+        let columns: Vec<_> = line.split_whitespace().collect();
+        for (j, path) in paths.iter().enumerate() {
+            let name = rows
+                .iter()
+                .find(|r| r["function"].as_str() == Some(path))
+                .unwrap()["definition"]
+                .as_str()
+                .unwrap()
+                .strip_prefix("Behavior::")
+                .unwrap();
+            let axioms = decisions
+                .rows
+                .values()
+                .find(|r| r.function == *path)
+                .and_then(|r| r.axioms.get(name))
+                .cloned()
+                .unwrap_or_default()
+                .join(", ");
+            observations.push_str(&format!("theorem{{name:moduleObservation{i}{j},parameters:[],statement:(({name} {} {}) = {}),proof:decide{{}},axioms:[{axioms}]}}\n",columns[0],columns[1],columns[j+2]));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let file = out.join("src/Behavior.lex.tex");
+    let template = text(&files, "src/Behavior.lex.tex");
+    let verify = |checks: &str| {
+        std::fs::write(
+            &file,
+            template.replace(
+                "\\end{semanticmodule}",
+                &format!("{checks}\\end{{semanticmodule}}"),
+            ),
+        )
+        .unwrap();
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let good = verify(&observations);
+    assert!(
+        good.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&good.stdout),
+        String::from_utf8_lossy(&good.stderr)
+    );
+    let wrong = observations.replacen(" = false)", " = true)", 1);
+    assert_ne!(wrong, observations);
+    let rejected = verify(&wrong);
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

@@ -859,3 +859,10 @@ Feature: engine
     When the saved tag is used as an integer
     Then the SDK observes the original variant under the compiler integer representation
     But an observation of the replacement tag as the original is rejected
+
+  @UE-123 @build
+  Scenario: Closed generated module calls import the captured compiler dependency closure
+    Given different path modules with identically named generated functions
+    When registered callers reach the functions and their private dependencies
+    Then SDK observations agree with the corresponding compiled Rust module
+    But an incompatible module identity cannot supply its sibling's result

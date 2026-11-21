@@ -5720,6 +5720,7 @@ fn mir_lift(
     let no_consts = BTreeMap::new();
     let mut compiler_definitions = BTreeMap::new();
     let mut definition_frames = BTreeMap::new();
+    let mut providers = Vec::new();
     for (key, definition) in &dumps.compiler_identities {
         if definition.parametric || registered.contains(key) {
             continue;
@@ -5738,10 +5739,7 @@ fn mir_lift(
                 })
             })
             .collect();
-        let [at @ (pkg, _)] = targets.as_slice() else {
-            continue;
-        };
-        let Some(types) = scopes.get(at) else {
+        let [at] = targets.as_slice() else {
             continue;
         };
         let Some((method_name, owner, reference)) =
@@ -5759,6 +5757,56 @@ fn mir_lift(
         let method = method.signature(&body.locals[1..=body.arity], &body.locals[0], |text| {
             resolver.compiler_definition_type_identity(at.0, at.1, text)
         });
+        let identity = format!(
+            "{}:{}:{}:{}",
+            key.krate, body.path, definition.identity, definition.body_sha256
+        );
+        providers.push((*at, key.krate.clone(), body, identity, Some(method)));
+    }
+    // An admitted module path names a free function only in the target that
+    // included it. Registered definitions retain their existing provider.
+    for (pkg, package) in ctx.ws.packages.iter().enumerate() {
+        for ((target, path), source_hash) in &package.path_functions {
+            let krate = package.targets[*target].name.replace('-', "_");
+            let target_count = ctx
+                .ws
+                .packages
+                .iter()
+                .flat_map(|p| &p.targets)
+                .filter(|t| t.name.replace('-', "_") == krate)
+                .count();
+            let head = path.split("::").next().unwrap_or_default();
+            if target_count != 1
+                || matches!(head, "std" | "core" | "alloc")
+                || package
+                    .deps
+                    .iter()
+                    .any(|d| d.rename.as_ref().unwrap_or(&d.name).replace('-', "_") == head)
+                || product.contains_key(&format!("{krate}::{path}"))
+            {
+                continue;
+            }
+            let Some(hash) = dumps.free_body_hashes.get(&(krate.clone(), path.clone())) else {
+                continue;
+            };
+            let Some(body) = dumps.crates.get(&krate).and_then(|rows| rows.get(path)) else {
+                continue;
+            };
+            if body.path != *path || !scopes.contains_key(&(pkg, *target)) {
+                continue;
+            }
+            providers.push((
+                (pkg, *target),
+                krate.clone(),
+                body,
+                format!("{krate}:{path}:{source_hash}:{hash}"),
+                None,
+            ));
+        }
+    }
+    let mut direct_paths = BTreeMap::new();
+    for (at, krate, body, identity, method) in providers {
+        let types = &scopes[&at];
         let signature: Result<_, Residue> = (|| {
             let params: Vec<_> = (1..=body.arity)
                 .map(|i| {
@@ -5788,13 +5836,12 @@ fn mir_lift(
         let Ok((params, result, positions, full)) = signature else {
             continue;
         };
-        let identity = format!(
-            "{}:{}:{}:{}",
-            key.krate, body.path, definition.identity, definition.body_sha256
-        );
         let name = format!("compilerBody{}", sha(identity.as_bytes()));
         if !names.insert(name.clone()) {
             continue;
+        }
+        if method.is_none() {
+            direct_paths.insert((at, body.path.as_str()), name.clone());
         }
         callees.insert(
             name.clone(),
@@ -5802,22 +5849,22 @@ fn mir_lift(
                 name: name.clone(),
                 outcomes: false,
                 memory: false,
-                method: Some(method),
+                method,
                 params,
                 result,
                 generic: None,
                 threads: (!positions.is_empty()).then_some((full, positions)),
             },
         );
-        definition_frames.insert(name.clone(), (*at, crate::mir::identity::references(body)));
+        definition_frames.insert(name.clone(), (at, crate::mir::identity::references(body)));
         compiler_definitions.insert(
             name,
             lower::CompilerDefinition {
                 body,
                 types,
-                source_sigs: &source_sigs[*pkg],
-                consts: dumps.consts.get(&key.krate).unwrap_or(&no_consts),
-                krate: key.krate.clone(),
+                source_sigs: &source_sigs[at.0],
+                consts: dumps.consts.get(&krate).unwrap_or(&no_consts),
+                krate,
             },
         );
     }
@@ -5903,9 +5950,15 @@ fn mir_lift(
         }
 
         for request in requests {
-            if let Some(callee) = index.resolve(&request, |text| {
-                resolver.compiler_type_identity((r.pkg, r.file, r.idx), text)
-            }) {
+            if let Some(callee) = direct_paths
+                .get(&((r.pkg, ctx.file(r).target), request.as_str()))
+                .and_then(|n| callees.get(n))
+                .or_else(|| {
+                    index.resolve(&request, |text| {
+                        resolver.compiler_type_identity((r.pkg, r.file, r.idx), text)
+                    })
+                })
+            {
                 imports.insert(request, callee.clone());
             }
         }
@@ -5915,9 +5968,14 @@ fn mir_lift(
         let imports = requests
             .into_iter()
             .filter_map(|request| {
-                let callee = index.resolve(&request, |text| {
-                    resolver.compiler_definition_type_identity(pkg, target, text)
-                })?;
+                let callee = direct_paths
+                    .get(&((pkg, target), request.as_str()))
+                    .and_then(|n| callees.get(n))
+                    .or_else(|| {
+                        index.resolve(&request, |text| {
+                            resolver.compiler_definition_type_identity(pkg, target, text)
+                        })
+                    })?;
                 Some((request, callee.clone()))
             })
             .collect();

@@ -789,3 +789,9 @@ id = "UE-122"
 level = "build"
 suite = "engine"
 statement = "Native MIR captures enum discriminants at the read and uses the compiler intrinsic's checked constructor and integer representation for value observations, preserving payloads and rejecting unknown discriminant assignments"
+
+[[id]]
+id = "UE-123"
+level = "build"
+suite = "engine"
+statement = "Native callers may import closed free functions from source-bound workspace path modules through their exact compiler bodies and dependency frames, preserving lexical owners and all ordinary ABI, recursion and SDK proof obligations"

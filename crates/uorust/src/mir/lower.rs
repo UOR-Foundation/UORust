@@ -286,8 +286,12 @@ impl<'a> Cx<'a> {
         if self.library.is_some() {
             return None;
         }
-        if super::identity::qualified(path) {
-            return self.compiler_bindings.get(&self.compiler_scope)?.get(path);
+        let bound = self
+            .compiler_bindings
+            .get(&self.compiler_scope)
+            .and_then(|frame| frame.get(path));
+        if bound.is_some() || super::identity::qualified(path) {
+            return bound;
         }
         let key = format!("{}::{path}", self.krate);
         let erased = erase(path);
@@ -8560,11 +8564,18 @@ impl Fun<'_, '_> {
         cx.consumer_dispatch = None;
         cx.compiler_scope.clone_from(&callee.name);
         let lowered = lower(&cx, definition.body, &callee.name)?;
-        let expected_result = callee
-            .threads
-            .as_ref()
-            .map_or(&callee.result, |(t, _)| t)
-            .render();
+        let result = callee.threads.as_ref().map_or(&callee.result, |(t, _)| t);
+        if callee.method.is_none()
+            && (lowered.abi.memory
+                || lowered.abi.parameters != callee.params
+                || &lowered.abi.result != result)
+        {
+            return Err(kind(
+                k,
+                "compiler free function differs from its closed native ABI",
+            ));
+        }
+        let expected_result = result.render();
         let expected_parameters: Vec<_> = callee.params.iter().map(Ty::render).collect();
         if !lowered.decls.iter().any(|d| {
             matches!(d, Decl::Definition { name, parameters, result, .. }

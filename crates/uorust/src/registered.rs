@@ -379,6 +379,7 @@ mod tests {
             targets: Vec::new(),
             deps,
             lints: BTreeMap::new(),
+            path_functions: BTreeMap::new(),
             files: vec![file],
         }
     }

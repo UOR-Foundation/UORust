@@ -402,6 +402,7 @@ pub(crate) struct Dumps {
     /// Compiler source identities preserve overloaded implementation bodies.
     /// Repeated source identities are removed rather than guessed.
     pub(crate) definitions: BTreeMap<crate::embedding::Key, IrBody>,
+    pub(crate) free_body_hashes: BTreeMap<(String, String), String>,
     pub(crate) compiler_identities: BTreeMap<crate::embedding::Key, definitions::Definition>,
     /// The constants' bodies (promoted constants and constant items), by
     /// crate and the path MIR prints for them where they are used.
@@ -515,6 +516,25 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
         for file in files {
             let text = std::fs::read_to_string(&file).map_err(|e| io(&file, e))?;
             for mut body in parse::bodies(&text) {
+                // rustc's file stem includes the complete path in the target. A
+                // shortened display name or an impl span cannot acquire ownership.
+                let stem = format!("{krate}.{}.", body.path.replace("::", "-"));
+                if body.path.contains("::")
+                    && file
+                        .file_name()
+                        .and_then(|n| n.to_str())
+                        .is_some_and(|n| n.starts_with(&stem))
+                    && text.lines().any(|line| {
+                        line.strip_prefix("fn ")
+                            .and_then(|f| f.split_once('('))
+                            .is_some_and(|(path, _)| path == body.path)
+                    })
+                {
+                    dumps.free_body_hashes.insert(
+                        (krate.clone(), body.path.clone()),
+                        crate::project::sha(text.as_bytes()),
+                    );
+                }
                 let definition_key = crate::embedding::body_key(&krate, &body.path);
                 if body.arity == 0 && (body.path.contains("promoted[") || !body.path.contains('{'))
                 {
@@ -561,6 +581,9 @@ pub(crate) fn load(root: &Path, dir: &Path) -> Result<Dumps, UorustError> {
     }
     for key in ambiguous_definitions {
         dumps.definitions.remove(&key);
+    }
+    if !dir.with_extension("compiler-definitions.toml").is_file() {
+        dumps.free_body_hashes.clear();
     }
     dumps.compiler_identities = definitions::load(root, dir)?;
     Ok(dumps)
