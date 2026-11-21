@@ -496,9 +496,12 @@ pub(crate) fn read(root: &Path, ws: &Workspace, mut syntax: Syntax) -> Result<Sy
             let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
             // Ingest parsed the same text: a file that does not parse is
             // already an `unparsable-source` refusal.
-            let Ok(parsed) = syn::parse_file(&text) else {
+            let Ok(mut parsed) = syn::parse_file(&text) else {
                 continue;
             };
+            if let Some(reached) = syntax.figures.get(&package.dir) {
+                reached.resolve(&mut parsed);
+            }
             names.files.insert(file.rel.clone(), FileNames::of(&parsed));
         }
     }

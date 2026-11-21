@@ -28,6 +28,13 @@
 //!
 //! Which literals are exempt and which paths are which stratum is an input,
 //! the rule file ([`Rules`]), never a table here.
+//!
+//! A rewrite is transparent to every other reader of the workspace: the
+//! tool's source reader reads each call of a generated package's macro as
+//! the literal that package expands it to (`Reached`), read back from the
+//! package the workspace depends on, so a function lifts after a rewrite
+//! to the definition, and under the κ, it had before; a call no literal is
+//! read for is refused with its cause.
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt::Write as _;
@@ -3991,6 +3998,444 @@ fn decimal(digits: &str) -> Option<(String, i64)> {
     Some((significand.to_string(), exp - places))
 }
 
+/// What one generated package states, read back from the library root
+/// [`generate`] writes: each exported macro and each typed constant, by
+/// name, with the literal it is, or why it is not one figure's literal.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct Stated {
+    /// Its library root, relative to the workspace root: what a cause names.
+    file: String,
+    /// Why no call of it can be read, when its library root does not parse.
+    unread: Option<String>,
+    macros: BTreeMap<String, Reading<String>>,
+    constants: BTreeMap<String, Reading<String>>,
+}
+
+/// What a name of a generated package is read as: its literal, or why it
+/// is not read as one.
+#[derive(Clone, Debug, PartialEq, Eq)]
+enum Reading<T> {
+    Read(T),
+    Refused(String),
+}
+
+/// The generated packages one package reaches, by the name it binds each
+/// under: what reads a figure's call as the literal it expands to. A call
+/// is `::name::figure!()` (what [`rewrite`] writes): a path that starts at
+/// the extern prelude, so no module of the workspace can shadow it.
+#[derive(Clone, Debug, Default)]
+pub(crate) struct Reached(BTreeMap<String, Stated>);
+
+/// Whether a library root is one [`generate`] wrote: its first line.
+fn generated_text(text: &str) -> bool {
+    text.starts_with(&format!("// {GENERATED} "))
+}
+
+/// The one literal a rule's transcriber holds, or why it holds none.
+fn transcribed(tokens: &TokenStream) -> Reading<String> {
+    use proc_macro2::Delimiter;
+    let trees: Vec<TokenTree> = tokens.clone().into_iter().collect();
+    let body = match trees.as_slice() {
+        [TokenTree::Group(m), TokenTree::Punct(eq), TokenTree::Punct(gt), TokenTree::Group(b), rest @ ..]
+            if m.delimiter() == Delimiter::Parenthesis
+                && m.stream().is_empty()
+                && eq.as_char() == '='
+                && gt.as_char() == '>'
+                && matches!(rest, [] | [TokenTree::Punct(_)])
+                && rest.iter().all(|t| t.to_string() == ";") =>
+        {
+            b.stream()
+        }
+        _ => return Reading::Refused("is not one rule of no arguments".to_string()),
+    };
+    match body.into_iter().collect::<Vec<_>>().as_slice() {
+        [TokenTree::Literal(l)] => numeric(&l.to_string()),
+        _ => Reading::Refused("does not expand to one literal token".to_string()),
+    }
+}
+
+/// A literal's text, when it is a numeric literal.
+fn numeric(text: &str) -> Reading<String> {
+    match syn::parse_str::<syn::Lit>(text) {
+        Ok(syn::Lit::Int(_) | syn::Lit::Float(_)) => Reading::Read(text.to_string()),
+        _ => Reading::Refused(format!("expands to {text}, which is not a numeric literal")),
+    }
+}
+
+impl Stated {
+    /// What a generated package's library root states, or `None` when the
+    /// text is not one [`generate`] wrote.
+    fn read(text: &str, file: String) -> Option<Stated> {
+        if !generated_text(text) {
+            return None;
+        }
+        let mut out = Stated {
+            file,
+            ..Stated::default()
+        };
+        let tree = match syn::parse_file(text) {
+            Ok(tree) => tree,
+            Err(e) => {
+                out.unread = Some(format!("its library root {} does not parse: {e}", out.file));
+                return Some(out);
+            }
+        };
+        let twice = |e: &mut Reading<String>| *e = Reading::Refused("is defined twice".to_string());
+        for item in &tree.items {
+            match item {
+                syn::Item::Macro(m)
+                    if m.mac.path.is_ident("macro_rules")
+                        && m.attrs.iter().any(|a| a.path().is_ident("macro_export")) =>
+                {
+                    let Some(name) = &m.ident else { continue };
+                    let read = transcribed(&m.mac.tokens);
+                    out.macros
+                        .entry(name.to_string())
+                        .and_modify(twice)
+                        .or_insert(read);
+                }
+                syn::Item::Const(c) if matches!(c.vis, syn::Visibility::Public(_)) => {
+                    let read = match &*c.expr {
+                        syn::Expr::Lit(l) => {
+                            numeric(&quote::ToTokens::to_token_stream(&l.lit).to_string())
+                        }
+                        _ => Reading::Refused("is not a literal".to_string()),
+                    };
+                    out.constants
+                        .entry(c.ident.to_string())
+                        .and_modify(twice)
+                        .or_insert(read);
+                }
+                _ => {}
+            }
+        }
+        Some(out)
+    }
+}
+
+impl Reached {
+    /// The generated packages the package `member` (a package of `cargo
+    /// metadata`) depends on by path, by the name its code binds each under:
+    /// the dependency's `rename`, or its name with `-` read as `_` (the
+    /// library name of a package with no `[lib]` table, as [`generate`]
+    /// writes it). A dependency whose library root [`generate`] did not
+    /// write is not one.
+    pub(crate) fn of(root: &Path, member: &serde_json::Value) -> Reached {
+        use serde_json::Value;
+        let mut out = BTreeMap::new();
+        for dep in member
+            .get("dependencies")
+            .and_then(Value::as_array)
+            .into_iter()
+            .flatten()
+        {
+            let (Some(name), Some(dir)) = (
+                dep.get("name").and_then(Value::as_str),
+                dep.get("path").and_then(Value::as_str),
+            ) else {
+                continue;
+            };
+            let lib = Path::new(dir).join("src").join("lib.rs");
+            let Ok(text) = std::fs::read_to_string(&lib) else {
+                continue;
+            };
+            let file = relative(root, &lib);
+            let Some(stated) = Stated::read(&text, file) else {
+                continue;
+            };
+            let bound = dep
+                .get("rename")
+                .and_then(Value::as_str)
+                .map_or_else(|| name.replace('-', "_"), str::to_string);
+            out.insert(bound, stated);
+        }
+        Reached(out)
+    }
+
+    pub(crate) fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
+
+    /// The generated package and figure a path names: `::name::figure`.
+    fn named<'p>(&self, path: &'p syn::Path) -> Option<(&Stated, &'p syn::Ident)> {
+        let [krate, figure] = path.segments.iter().collect::<Vec<_>>()[..] else {
+            return None;
+        };
+        if path.leading_colon.is_none() || !krate.arguments.is_none() || !figure.arguments.is_none()
+        {
+            return None;
+        }
+        let stated = self.0.get(&krate.ident.to_string())?;
+        Some((stated, &figure.ident))
+    }
+
+    /// What a macro call is, when it calls a generated package's macro: the
+    /// literal it expands to, or why it is not read as one.
+    fn call(&self, m: &syn::Macro) -> Option<Reading<syn::Lit>> {
+        let (stated, figure) = self.named(&m.path)?;
+        let name = figure.to_string();
+        let path = quote::ToTokens::to_token_stream(&m.path).to_string();
+        let written = format!("{}!()", path.replace(' ', ""));
+        let refused = |why: String| {
+            Some(Reading::Refused(format!(
+                "unresolved figure {written}: {why}"
+            )))
+        };
+        if let Some(why) = &stated.unread {
+            return refused(why.clone());
+        }
+        if !m.tokens.is_empty() {
+            return refused("a figure's macro takes no arguments".to_string());
+        }
+        match stated.macros.get(&name) {
+            None => refused(format!("{} exports no macro {name}", stated.file)),
+            Some(Reading::Refused(why)) => {
+                refused(format!("the macro {name} of {} {why}", stated.file))
+            }
+            Some(Reading::Read(text)) => match literal(text, figure.span()) {
+                Some(lit) => Some(Reading::Read(lit)),
+                None => refused(format!("{text} does not read as a literal")),
+            },
+        }
+    }
+
+    /// The literal a path names, when it names a generated package's typed
+    /// constant that states one.
+    fn constant(&self, path: &syn::Path) -> Option<syn::Lit> {
+        let (stated, name) = self.named(path)?;
+        match stated.constants.get(&name.to_string())? {
+            Reading::Read(text) => literal(text, name.span()),
+            Reading::Refused(_) => None,
+        }
+    }
+
+    /// The literal a call reads as, where it is one; `None` for any other
+    /// call and for one that is refused (it stays as written, and
+    /// [`Reached::unresolved`] names why).
+    fn resolved(&self, m: &syn::Macro) -> Option<syn::Lit> {
+        match self.call(m)? {
+            Reading::Read(lit) => Some(lit),
+            Reading::Refused(_) => None,
+        }
+    }
+
+    /// Read each call of a generated package's macro in `file` as the
+    /// literal it expands to, and each of its typed constants a pattern
+    /// names as its literal: an expression, a statement, a pattern, and
+    /// an argument of a standard macro whose arguments are expressions.
+    /// The macro expands to the token before type inference or constant
+    /// evaluation runs, so the literal is the program the compiler reads;
+    /// the same program rewritten or not is one program to every reader,
+    /// its κ included. A literal a macro's grammar reads as written (the
+    /// condition `assert!` prints, an unknown macro's tokens, an attribute,
+    /// a `macro_rules!` body) is left as written, as [`rewrite`] leaves it.
+    pub(crate) fn resolve(&self, file: &mut syn::File) {
+        if !self.is_empty() {
+            visit_mut::VisitMut::visit_file_mut(&mut Resolving(self), file);
+        }
+    }
+
+    /// Why a function or constant whose tokens are `tokens` cannot be read:
+    /// the first call of a generated package's macro that is not read as a
+    /// literal, with its cause.
+    pub(crate) fn unresolved(&self, tokens: &str) -> Option<String> {
+        if self.is_empty() || !self.0.keys().any(|k| tokens.contains(k.as_str())) {
+            return None;
+        }
+        let stream: TokenStream = tokens.parse().ok()?;
+        self.first_unresolved(stream)
+    }
+
+    fn first_unresolved(&self, stream: TokenStream) -> Option<String> {
+        let trees: Vec<TokenTree> = stream.into_iter().collect();
+        for (i, t) in trees.iter().enumerate() {
+            if let Some(Reading::Refused(why)) =
+                self.call_at(&trees, i).and_then(|(m, _)| self.call(&m))
+            {
+                return Some(why);
+            }
+            if let TokenTree::Group(g) = t {
+                if let Some(why) = self.first_unresolved(g.stream()) {
+                    return Some(why);
+                }
+            }
+        }
+        None
+    }
+
+    /// The call of a generated package's macro that starts at the `at`th
+    /// token, and how many tokens it takes: `:: name :: figure ! (..)`. A
+    /// path that an identifier before it continues (`a::name::figure`) is
+    /// none.
+    fn call_at(&self, trees: &[TokenTree], at: usize) -> Option<(syn::Macro, usize)> {
+        const CALL: usize = 8;
+        if at + CALL > trees.len()
+            || matches!(
+                at.checked_sub(1).map(|i| &trees[i]),
+                Some(TokenTree::Ident(_))
+            )
+        {
+            return None;
+        }
+        let head: TokenStream = trees[at..at + CALL].iter().cloned().collect();
+        let m: syn::Macro = syn::parse2(head).ok()?;
+        self.named(&m.path)?;
+        Some((m, CALL))
+    }
+
+    /// `tokens` with each call of a generated package's macro read as its
+    /// literal, inside groups too.
+    fn substituted(&self, tokens: TokenStream) -> TokenStream {
+        let trees: Vec<TokenTree> = tokens.into_iter().collect();
+        let mut out = Vec::with_capacity(trees.len());
+        let mut i = 0;
+        while i < trees.len() {
+            if let Some((lit, n)) = self
+                .call_at(&trees, i)
+                .and_then(|(m, n)| Some((self.resolved(&m)?, n)))
+            {
+                out.extend(quote::ToTokens::to_token_stream(&lit));
+                i += n;
+                continue;
+            }
+            match &trees[i] {
+                TokenTree::Group(g) => {
+                    let mut inner =
+                        proc_macro2::Group::new(g.delimiter(), self.substituted(g.stream()));
+                    inner.set_span(g.span());
+                    out.push(TokenTree::Group(inner));
+                }
+                other => out.push(other.clone()),
+            }
+            i += 1;
+        }
+        out.into_iter().collect()
+    }
+}
+
+/// A literal of the given text, spanned where the call it stands for is.
+fn literal(text: &str, span: proc_macro2::Span) -> Option<syn::Lit> {
+    let mut lit = syn::parse_str::<syn::Lit>(text).ok()?;
+    lit.set_span(span);
+    Some(lit)
+}
+
+/// The rewrite [`Reached::resolve`] makes.
+struct Resolving<'r>(&'r Reached);
+
+impl Resolving<'_> {
+    /// A pattern's constant bound, read as its literal.
+    fn bound(&self, e: &mut syn::Expr) {
+        if let syn::Expr::Path(p) = e {
+            if let (None, Some(lit)) = (&p.qself, self.0.constant(&p.path)) {
+                *e = syn::Expr::Lit(syn::ExprLit {
+                    attrs: p.attrs.clone(),
+                    lit,
+                });
+            }
+        }
+    }
+}
+
+impl visit_mut::VisitMut for Resolving<'_> {
+    // An attribute's tokens are the attribute's to read.
+    fn visit_attribute_mut(&mut self, _: &mut syn::Attribute) {}
+
+    fn visit_expr_mut(&mut self, e: &mut syn::Expr) {
+        if let syn::Expr::Macro(m) = e {
+            if let Some(lit) = self.0.resolved(&m.mac) {
+                *e = syn::Expr::Lit(syn::ExprLit {
+                    attrs: m.attrs.clone(),
+                    lit,
+                });
+                return;
+            }
+        }
+        visit_mut::visit_expr_mut(self, e);
+    }
+
+    fn visit_stmt_mut(&mut self, s: &mut syn::Stmt) {
+        if let syn::Stmt::Macro(m) = s {
+            if let Some(lit) = self.0.resolved(&m.mac) {
+                let lit = syn::Expr::Lit(syn::ExprLit {
+                    attrs: m.attrs.clone(),
+                    lit,
+                });
+                *s = syn::Stmt::Expr(lit, m.semi_token);
+                return;
+            }
+        }
+        visit_mut::visit_stmt_mut(self, s);
+    }
+
+    fn visit_pat_mut(&mut self, p: &mut syn::Pat) {
+        match p {
+            syn::Pat::Macro(m) => {
+                if let Some(lit) = self.0.resolved(&m.mac) {
+                    *p = syn::Pat::Lit(syn::ExprLit {
+                        attrs: m.attrs.clone(),
+                        lit,
+                    });
+                    return;
+                }
+            }
+            syn::Pat::Path(path) if path.qself.is_none() => {
+                if let Some(lit) = self.0.constant(&path.path) {
+                    *p = syn::Pat::Lit(syn::ExprLit {
+                        attrs: path.attrs.clone(),
+                        lit,
+                    });
+                    return;
+                }
+            }
+            syn::Pat::Range(r) => {
+                for bound in r.start.iter_mut().chain(r.end.iter_mut()) {
+                    self.bound(bound);
+                }
+            }
+            _ => {}
+        }
+        visit_mut::visit_pat_mut(self, p);
+    }
+
+    fn visit_macro_mut(&mut self, m: &mut syn::Macro) {
+        let Some(name) = m.path.segments.last().map(|s| s.ident.to_string()) else {
+            return;
+        };
+        let standard = m.path.segments.len() == 1
+            || m.path
+                .segments
+                .first()
+                .is_some_and(|s| ["std", "core", "alloc"].contains(&s.ident.to_string().as_str()));
+        if !standard
+            || !(EXPRESSION_MACROS.contains(&name.as_str())
+                || FORMAT_MACROS.contains(&name.as_str()))
+        {
+            return;
+        }
+        let tokens = std::mem::take(&mut m.tokens);
+        m.tokens = if STRINGIFYING.contains(&name.as_str()) {
+            // The condition is printed as written: only what follows it is
+            // read, and nothing where it does not parse as an expression.
+            let after = syn::parse::Parser::parse2(
+                |input: syn::parse::ParseStream<'_>| {
+                    input.parse::<syn::Expr>()?;
+                    input.parse::<TokenStream>()
+                },
+                tokens.clone(),
+            );
+            let trees: Vec<TokenTree> = tokens.into_iter().collect();
+            let end = after.map_or(trees.len(), |rest| trees.len() - rest.into_iter().count());
+            let (condition, rest) = trees.split_at(end);
+            let mut out: TokenStream = condition.iter().cloned().collect();
+            out.extend(self.0.substituted(rest.iter().cloned().collect()));
+            out
+        } else {
+            self.0.substituted(tokens)
+        };
+    }
+}
+
 /// What [`write`] found or did.
 #[derive(Clone, Debug, Default)]
 pub struct Written {
@@ -6208,5 +6653,264 @@ mod tests {
             .map(|s| (s.literal.clone(), s.place.name()))
             .collect();
         assert_eq!(found, figures_repair_pairs(&[("15", "format-spec")]));
+    }
+
+    // Class: figures-lift (a rewritten workspace lifts as it did).
+
+    /// A two-package workspace: `p`, whose library is `lib`, and the
+    /// package `figs` it depends on, whose library is `figs`.
+    fn figures_lift_workspace(tag: &str, lib: &str, figs: &str) -> PathBuf {
+        let dir = figures_workspace(&format!("lift-{tag}"), lib);
+        std::fs::write(dir.join("figs/src/lib.rs"), figs).expect("written");
+        dir
+    }
+
+    /// What the projection of the workspace at `dir` decides for each
+    /// function of `p`, by its path: its κ, and its definition in the
+    /// behaviour module flattened to a line, or the row that says why not;
+    /// and the behaviour module.
+    fn figures_lift_rows(dir: &Path) -> (BTreeMap<String, (String, String)>, String) {
+        let options = crate::Options {
+            name: "p".to_string(),
+            last_modified: "2026-11-21T00:00:00Z".to_string(),
+            advisories: None,
+            mir: None,
+            limits: None,
+            embedding: None,
+        };
+        let out = crate::project_workspace(dir, &options).expect("projects");
+        let text = |path: &str| {
+            String::from_utf8(out.get(path).cloned().unwrap_or_default()).expect("utf-8")
+        };
+        let behavior = text("src/Behavior.lex.tex");
+        let frontier = text("frontier.toml");
+        let register = crate::register::Register::parse(Path::new("frontier.toml"), &frontier)
+            .expect("a register");
+        let rows = register
+            .rows
+            .into_iter()
+            .map(|(kappa, row)| {
+                let decided = match &row.status {
+                    crate::register::Status::Lifted(name) => {
+                        let local = name.rsplit(['.', ':']).next().unwrap_or(name);
+                        format!("lifted {}", figures_lift_definition(&behavior, local))
+                    }
+                    other => format!("{other:?}"),
+                };
+                (row.function, (kappa, decided))
+            })
+            .collect();
+        (rows, behavior)
+    }
+
+    /// One definition of a behaviour module, flattened to a line.
+    fn figures_lift_definition(behavior: &str, name: &str) -> String {
+        let module = behavior
+            .split("\\end{semanticmodule}")
+            .next()
+            .unwrap_or_default();
+        let found = module
+            .split("definition{")
+            .find(|d| d.trim_start().starts_with(&format!("name: {name},")))
+            .unwrap_or_else(|| panic!("{name} is defined:\n{behavior}"));
+        found.split_whitespace().collect::<Vec<_>>().join(" ")
+    }
+
+    /// Generate `figs` from figure rows, then rewrite `p` by them.
+    fn figures_lift_rewrite(dir: &Path, rows: &[(&str, &str, &str)]) -> Rewritten {
+        let (rules, register) = (dir.join("rules.toml"), dir.join("figures.toml"));
+        std::fs::write(&register, figures_repair_figure_rows(rows)).expect("written");
+        write(&rules, &register, &dir.join("figs"), None, false).expect("written");
+        rewrite(dir, &rules, &register).expect("rewritten")
+    }
+
+    /// Where a figure's call is read as its literal and where it is left as
+    /// written: a standard macro's argument is read, the condition
+    /// `assert!` prints and an unknown macro's tokens are not, nor a path
+    /// that does not start at the extern prelude.
+    #[test]
+    fn figures_lift_a_call_is_read_where_the_compiler_reads_its_literal_ue_21() {
+        let register = Register {
+            figures: vec![figures_figure("twelve", "12u8", &[])],
+            ..Register::default()
+        };
+        let (files, _) = generate(&figures_rules(), &register);
+        let stated = Stated::read(&files["src/lib.rs"], "figs/src/lib.rs".to_string())
+            .expect("a generated package");
+        let reached = Reached([("figs".to_string(), stated)].into());
+        let read = |text: &str| {
+            let mut file = syn::parse_file(text).expect("parses");
+            reached.resolve(&mut file);
+            quote::ToTokens::to_token_stream(&file).to_string()
+        };
+        assert_eq!(
+            read("fn f() { let a = ::figs::twelve!(); ::figs::twelve!(); }"),
+            read("fn f() { let a = 12u8; 12u8; }")
+        );
+        assert_eq!(
+            read("fn f(x: u8) -> bool { matches!(x, ::figs::twelve!()) }"),
+            read("fn f(x: u8) -> bool { matches!(x, 12u8) }")
+        );
+        let kept = "fn f(x: u8) { assert!(x < ::figs::twelve!(), \"{}\", 12u8); \
+                    other!(::figs::twelve!()); let b = a::figs::twelve!(); }";
+        let after = "fn f(x: u8) { assert!(x < ::figs::twelve!(), \"{}\", ::figs::twelve!()); \
+                     other!(::figs::twelve!()); let b = a::figs::twelve!(); }";
+        assert_eq!(read(after), read(kept));
+        assert_eq!(
+            reached.unresolved("fn f () { :: figs :: twelve ! () }"),
+            None
+        );
+        assert_eq!(
+            reached.unresolved("fn f () { g (:: figs :: dozen ! ()) }"),
+            Some(
+                "unresolved figure ::figs::dozen!(): figs/src/lib.rs exports no macro dozen"
+                    .to_string()
+            )
+        );
+        assert!(Stated::read("#![no_std]\n", String::new()).is_none());
+    }
+
+    /// A function that lifted before `figures rewrite` lifts after it to the
+    /// same definition under the same κ: a figure's call, as an argument, an
+    /// operand, a pattern, a range bound's typed constant and a standard
+    /// macro's argument, is read as the literal it expands to.
+    #[test]
+    fn figures_lift_a_rewritten_function_lifts_to_the_body_it_had_ue_21() {
+        let lib = "pub fn scaled(x: u32) -> Option<u32> {\n    x.checked_mul(12)\n}\n\n\
+                   pub fn tenth(x: u32) -> Option<u32> {\n    x.checked_div(10)\n}\n\n\
+                   pub fn dozen(x: u32) -> bool {\n    match x {\n        12 => true,\n        _ => x == 10,\n    }\n}\n\n\
+                   pub fn digit(x: u32) -> bool {\n    match x {\n        3..=9 => true,\n        _ => false,\n    }\n}\n\n\
+                   pub fn listed(x: u32) -> usize {\n    vec![x, 12].len()\n}\n";
+        let dir = figures_lift_workspace("same", lib, "#![no_std]\n");
+        let (before, _) = figures_lift_rows(&dir);
+        assert_eq!(before.len(), 5, "{before:#?}");
+        for (function, (_, decided)) in &before {
+            assert!(decided.starts_with("lifted "), "{function}: {decided}");
+        }
+        let done = figures_lift_rewrite(
+            &dir,
+            &[
+                (
+                    "twelve",
+                    "12",
+                    "\"p/p::scaled:12:0\", \"p/p::dozen:12:0\", \"p/p::listed:12:0\"",
+                ),
+                ("ten", "10", "\"p/p::tenth:10:0\", \"p/p::dozen:10:0\""),
+            ],
+        );
+        assert_eq!((done.replaced, done.refused.len()), (5, 0), "{done:?}");
+        // The range bounds take typed constants.
+        let register = dir.join("figures.toml");
+        let mut text = std::fs::read_to_string(&register).expect("read");
+        text.push_str(
+            "\n[[figure]]\nname = \"three\"\nvalue = \"3\"\nhome = \"definition\"\n\
+             cites = \"a synthetic law\"\ncheck = \"T-1\"\ntype = \"u32\"\nsites = [\"p/p::digit:3:0\"]\n\
+             \n[[figure]]\nname = \"nine\"\nvalue = \"9\"\nhome = \"definition\"\n\
+             cites = \"a synthetic law\"\ncheck = \"T-1\"\ntype = \"u32\"\nsites = [\"p/p::digit:9:0\"]\n",
+        );
+        std::fs::write(&register, text).expect("written");
+        let rules = dir.join("rules.toml");
+        extract(&dir, &rules, &register).expect("extracted");
+        write(&rules, &register, &dir.join("figs"), None, false).expect("written");
+        let bounds = rewrite(&dir, &rules, &register).expect("rewritten");
+        assert_eq!(
+            (bounds.replaced, bounds.refused.len()),
+            (2, 0),
+            "{bounds:?}"
+        );
+        let rewritten = std::fs::read_to_string(dir.join("p/src/lib.rs")).expect("read");
+        for written in [
+            "x.checked_mul(::figs::twelve!())",
+            "x.checked_div(::figs::ten!())",
+            "::figs::twelve!() => true",
+            "_ => x == ::figs::ten!()",
+            "::figs::THREE..=::figs::NINE => true",
+            "vec![x, ::figs::twelve!()]",
+        ] {
+            assert!(rewritten.contains(written), "{written}:\n{rewritten}");
+        }
+        let (after, _) = figures_lift_rows(&dir);
+        assert_eq!(after, before);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A constant whose initializer is a figure's call is the name it was: a
+    /// function that reads it lifts as it did, and so does the constant.
+    #[test]
+    fn figures_lift_a_constant_of_a_figure_is_a_known_name_ue_21() {
+        let lib = "const LIMIT: u32 = 12;\n\n\
+                   pub fn within(x: u32) -> bool {\n    x < LIMIT\n}\n\n\
+                   pub fn widened(x: u32) -> Option<u32> {\n    x.checked_add(LIMIT)\n}\n";
+        let dir = figures_lift_workspace("constant", lib, "#![no_std]\n");
+        let (before, behavior) = figures_lift_rows(&dir);
+        let limit = figures_lift_definition(&behavior, "limit");
+        assert!(limit.contains("body: 12"), "{limit}");
+        let done = figures_lift_rewrite(&dir, &[("limit", "12", "\"p/p::LIMIT:12:0\"")]);
+        assert_eq!((done.replaced, done.refused.len()), (1, 0), "{done:?}");
+        let rewritten = std::fs::read_to_string(dir.join("p/src/lib.rs")).expect("read");
+        assert!(
+            rewritten.starts_with("const LIMIT: u32 = ::figs::limit!();\n"),
+            "{rewritten}"
+        );
+        let (after, behavior) = figures_lift_rows(&dir);
+        assert_eq!(after, before);
+        assert!(
+            after.values().all(|(_, d)| d.starts_with("lifted ")),
+            "{after:#?}"
+        );
+        assert_eq!(figures_lift_definition(&behavior, "limit"), limit);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A figure's call no literal is read for is refused with its cause: a
+    /// figure the generated package does not export, a call with arguments,
+    /// a macro that expands to no one literal. Never a default.
+    #[test]
+    fn figures_lift_an_unresolved_figure_is_refused_with_its_cause_ue_21() {
+        let lib = "pub fn present(x: u32) -> Option<u32> {\n    x.checked_mul(::figs::twelve!())\n}\n\n\
+                   pub fn missing(x: u32) -> Option<u32> {\n    x.checked_mul(::figs::absent!())\n}\n\n\
+                   pub fn argued(x: u32) -> Option<u32> {\n    x.checked_mul(::figs::twelve!(3))\n}\n\n\
+                   pub fn summed(x: u32) -> Option<u32> {\n    x.checked_mul(::figs::sum!())\n}\n\n\
+                   const GONE: u32 = ::figs::absent!();\n\n\
+                   pub fn gone(x: u32) -> bool {\n    x < GONE\n}\n";
+        let dir = figures_lift_workspace("unresolved", lib, "#![no_std]\n");
+        let (rules, register) = (dir.join("rules.toml"), dir.join("figures.toml"));
+        std::fs::write(
+            &register,
+            figures_repair_figure_rows(&[("twelve", "12", "")]),
+        )
+        .expect("written");
+        write(&rules, &register, &dir.join("figs"), None, false).expect("written");
+        let generated = dir.join("figs/src/lib.rs");
+        let mut figs = std::fs::read_to_string(&generated).expect("read");
+        figs.push_str(
+            "\n#[macro_export]\nmacro_rules! sum {\n    () => {\n        5 + 7\n    };\n}\n",
+        );
+        std::fs::write(&generated, figs).expect("written");
+        let (rows, _) = figures_lift_rows(&dir);
+        let decided = |f: &str| rows[&format!("p::{f}")].1.clone();
+        assert!(decided("present").starts_with("lifted "), "{rows:#?}");
+        for (f, cause) in [
+            (
+                "missing",
+                "unresolved figure ::figs::absent!(): figs/src/lib.rs exports no macro absent",
+            ),
+            (
+                "argued",
+                "unresolved figure ::figs::twelve!(): a figure's macro takes no arguments",
+            ),
+            (
+                "summed",
+                "unresolved figure ::figs::sum!(): the macro sum of figs/src/lib.rs does not \
+                 expand to one literal token",
+            ),
+        ] {
+            let row = decided(f);
+            assert!(row.starts_with("Residue(\"form\""), "{f}: {row}");
+            assert!(row.contains(cause), "{f}: {row}");
+        }
+        // The constant is no known name: what reads it does not lift.
+        assert!(!decided("gone").starts_with("lifted "), "{rows:#?}");
+        let _ = std::fs::remove_dir_all(&dir);
     }
 }

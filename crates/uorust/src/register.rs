@@ -5,7 +5,12 @@
 //! normalized token stream (signature and body as `syn` reads them, so
 //! comments, doc comments and layout do not move it). The κ names the
 //! question "does this function lift?", not the answer: a function whose
-//! source changes is a new question with a new κ.
+//! source changes is a new question with a new κ. A call of a generated
+//! figure's macro is read as the literal it expands to
+//! (`figures::Reached`), so `uorust figures rewrite` asks no new question:
+//! a rewritten function keeps its κ while its figure's value is the literal
+//! it replaced, and the law below holds it lifted; a changed value is a new
+//! κ.
 //!
 //! A lifted κ is a proved claim. The ratchet is monotone, not a count: a
 //! candidate register is admitted against the incumbent (the committed one)

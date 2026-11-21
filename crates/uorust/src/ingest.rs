@@ -36,7 +36,11 @@ pub(crate) fn workspace(
     let mut packages = Vec::new();
     let mut syntax = Syntax::default();
     for member in members {
-        let (package, files) = package(&root, member, &workspace_lints)?;
+        let reached = crate::figures::Reached::of(&root, member);
+        let (package, files) = package(&root, member, &workspace_lints, &reached)?;
+        if !reached.is_empty() {
+            syntax.figures.insert(package.dir.clone(), reached);
+        }
         packages.push(package);
         syntax.files.extend(files);
     }
@@ -360,6 +364,7 @@ fn package(
     root: &Path,
     meta: &Value,
     workspace_lints: &BTreeMap<String, String>,
+    reached: &crate::figures::Reached,
 ) -> Result<(Package, BTreeMap<String, FileSyntax>), UorustError> {
     // Paths as the facts hold them: text with `/` separators.
     let path_text = |path: &Path| path.to_string_lossy().replace('\\', "/");
@@ -453,7 +458,11 @@ fn package(
             continue;
         };
         let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
-        read.push((path, rel_path, target, module, syn::parse_file(&text)));
+        let parsed = syn::parse_file(&text).map(|mut tree| {
+            reached.resolve(&mut tree);
+            tree
+        });
+        read.push((path, rel_path, target, module, parsed));
     }
     let roots: Vec<PathBuf> = targets.iter().map(|t| under(root, &t.src)).collect();
     let trees: BTreeMap<&Path, &syn::File> = read
@@ -473,6 +482,7 @@ fn package(
             ),
             Err(error) => unparsed(rel_path.clone(), *target, module.clone(), error),
         };
+        let file_syntax = figures_refused(reached, &file, file_syntax);
         syntax.insert(file.rel.clone(), file_syntax);
         files.push(file);
     }
@@ -503,6 +513,41 @@ fn package(
         files,
     };
     Ok((package, syntax))
+}
+
+/// `syntax` with the body of each function and constant of `file` that
+/// calls a generated figure package's macro no literal is read for made one
+/// form outside the lift, named by why: what it computes is not known, and
+/// no default stands in for the literal (`figures::Reached::unresolved`).
+fn figures_refused(
+    reached: &crate::figures::Reached,
+    file: &SourceFile,
+    mut syntax: FileSyntax,
+) -> FileSyntax {
+    if reached.is_empty() {
+        return syntax;
+    }
+    let refused = |cause: String| crate::ast::Block {
+        stmts: vec![crate::ast::Stmt::Expr(
+            crate::ast::RustExpr::Other(crate::ast::ExprOther {
+                kind: cause,
+                exprs: Vec::new(),
+                blocks: Vec::new(),
+            }),
+            false,
+        )],
+    };
+    for (fact, fn_syntax) in file.fns.iter().zip(&mut syntax.fns) {
+        if let (Some(_), Some(cause)) = (&fn_syntax.block, reached.unresolved(&fact.tokens)) {
+            fn_syntax.block = Some(refused(cause));
+        }
+    }
+    for (_, _, block, _, tokens, _) in &mut syntax.consts {
+        if let Some(cause) = reached.unresolved(tokens) {
+            *block = refused(cause);
+        }
+    }
+    syntax
 }
 
 /// Every `.rs` file under `dir`, not descending into a nested package or a

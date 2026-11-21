@@ -283,6 +283,10 @@ pub(crate) struct Syntax {
     /// What name resolution reads of the workspace: each module's bindings
     /// and each body's calls.
     pub(crate) names: crate::names::Names,
+    /// The generated figure packages each package reaches, by the
+    /// package's directory: every reader of its files reads a figure's call
+    /// as the literal it expands to.
+    pub(crate) figures: BTreeMap<String, crate::figures::Reached>,
 }
 
 impl Syntax {

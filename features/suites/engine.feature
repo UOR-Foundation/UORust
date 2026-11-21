@@ -125,4 +125,4 @@ Feature: engine
   Scenario: Every numeric literal of a workspace gets a home by extraction and rewrite
     Given small synthetic workspaces and figure registers written for them
     When the suite exercises UE-21
-    Then every numeric literal is a site at its place with a key an unrelated edit keeps, the writer expands each figure to its own token, a rewrite names the figure and a second changes nothing, what cannot be placed is refused with its reason, and the gate holds the workspace to its register
+    Then every numeric literal is a site at its place with a key an unrelated edit keeps, the writer expands each figure to its own token, a rewrite names the figure and a second changes nothing, what cannot be placed is refused with its reason, the gate holds the workspace to its register, a rewritten function lifts to the definition and κ it had, and a figure's call no literal is read for is refused with its cause
