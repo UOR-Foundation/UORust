@@ -47,7 +47,6 @@ def classify(event, expected_repo):
             "head_sha": sha, "merge_qualified": False}
 
 
-
 def advisory_impact_from_trusted_base(repo_root, base_sha, head_sha, summary=None):
     """Run ONLY base-commit classifier code; PR head and files remain untrusted data.
 
@@ -104,7 +103,7 @@ def main():
     print("Advisory change impact (not a check skip): " + impact["route"])
     if args.summary and impact["route"] == "full-unknown":
         with args.summary.open("a", encoding="utf-8") as out:
-            out.write("\\nAdvisory impact: **FULL / UNVERIFIED**. No native gate was waived.\\n".replace("\\\\n","\\n"))
+            out.write("\nAdvisory impact: **FULL / UNVERIFIED**. No native gate was waived.\n")
     if args.output:
         with args.output.open("a", encoding="utf-8") as out:
             out.write(f"stage={stage}\nhead_sha={status['head_sha']}\n")
