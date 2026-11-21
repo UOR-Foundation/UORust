@@ -77,6 +77,12 @@ class StageTest(unittest.TestCase):
         last = [line for line in proc.stderr.splitlines() if line.strip()][-1]
         self.assertEqual(last.strip(), "OK", proc.stderr)
 
+    def test_obligation_plan_adversarial_suite(self):
+        proc = subprocess.run(
+            [sys.executable, "-I", str(SOURCE.parent / "test_obligation_plan.py")],
+            capture_output=True, text=True, timeout=35)
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
     def test_impact_policy_is_loaded_from_base_not_pr_head(self):
         def git(repo, *args):
             return subprocess.check_output(["git", "-C", str(repo), *args],

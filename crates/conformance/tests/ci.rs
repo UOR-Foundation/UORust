@@ -187,8 +187,9 @@ impl Kind {
 /// those runs refuses a failing, empty or skipping suite as [`verdict`] does:
 /// CI-01 above through [`verdict`], `test_change_impact.py` through
 /// `test_pr_stage.py`'s nested check, and `test_pages_identity.py` through
-/// its own `complete_result`, which PG-01 runs.
-const ELSEWHERE: [(&str, &str); 3] = [
+/// its own `complete_result`, which PG-01 runs, as `test_obligation_plan.py`
+/// does under CI-02.
+const ELSEWHERE: [(&str, &str); 4] = [
     ("scripts/ci/test_pr_stage.py", "run by CI-01 above"),
     (
         "scripts/ci/test_change_impact.py",
@@ -197,6 +198,10 @@ const ELSEWHERE: [(&str, &str); 3] = [
     (
         "scripts/ci/test_pages_identity.py",
         "run by PG-01 (pages_identity.rs); refuses an incomplete run itself",
+    ),
+    (
+        "scripts/ci/test_obligation_plan.py",
+        "run by CI-02 below; refuses an incomplete run itself",
     ),
 ];
 
@@ -419,6 +424,23 @@ fn factory_closure_holds() {
     assert!(
         output.status.success(),
         "an obligation reads a file it does not declare:\nstdout:\n{}\nstderr:\n{}",
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr),
+    );
+}
+
+/// CI-02 shares the strict Python suite invoked by CI-01, but its registered
+/// test name makes the new behavior independently visible to conformance.
+#[test]
+fn trusted_factory_obligation_plan_ci_02() {
+    let output = Command::new("python3")
+        .args(["-I", "scripts/ci/test_obligation_plan.py"])
+        .current_dir(root())
+        .output()
+        .expect("CI-02 fixture suite is executable");
+    assert!(
+        output.status.success(),
+        "CI-02 negative controls failed:\nstdout:\n{}\nstderr:\n{}",
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr),
     );

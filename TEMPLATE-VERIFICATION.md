@@ -399,7 +399,7 @@ another test were held only to their exit status. CI-01 now judges
 `test_pr_stage.py` through `verdict`, and that suite's nested run of
 `test_change_impact.py` checks the `Ran` count and an exact `OK` summary.
 `test_pages_identity.py` already refuses an incomplete run itself
-(`complete_result`). Second, the factory runs the `test` obligation in a
+(`complete_result`), as `test_obligation_plan.py` (CI-02, from `main`) does. Second, the factory runs the `test` obligation in a
 closure that holds only its inputs, where a suite outside them was absent
 rather than refused. `scripts/ci/suites.txt` lists every suite and lies in an
 input; `script_suites_pass` refuses the list when it and the tree disagree
