@@ -45,6 +45,20 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: package-lock.json
+      - name: Verify Pages identity gates against planted wrong metadata
+        run: python3 -I scripts/ci/test_pages_identity.py
+      - name: Refuse stale Pages repository identity before costly build work
+        shell: bash
+        run: |
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const actual = JSON.parse(readFileSync("site/app.json", "utf8")).repository;
+            const expected = `https://github.com/${process.env.GITHUB_REPOSITORY}`;
+            if (typeof actual !== "string" || actual.toLowerCase() !== expected.toLowerCase()) {
+              console.error(`site/app.json repository mismatch: ${actual} != ${expected}`);
+              process.exit(1);
+            }
+          '
       - name: Check release-platform manifest and negative controls
         run: python3 -I -m unittest discover -s scripts/release -p 'test_platforms.py'
       - name: Install the test runner from the checked-in lockfile

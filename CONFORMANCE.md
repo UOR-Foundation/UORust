@@ -54,6 +54,12 @@ model does not sanction.
 | --- | --- | --- |
 | `UE-20` | `build` | The gate, the writers and the certified export are obligations of the upstream Prism factory installed under prism-factory/: its engine, standard library and identity protocol are upstream's at the revision prism-factory/upstream.toml names and an installed file that differs from what that record states is refused, the graph's one source is prism-factory/graph.toml with the Justfile's recipe bodies and a model text or table that differs from what graph.py writes from them is refused, no obligation reads the whole tree, one run in the SDK declares the lock that pins the image and the launcher, the certified plan routes each obligation proved, observe, refuted or blocked from receipts of its identity, a test target that names or a compiled source that embeds a tracked file its obligation does not declare is refused before the plan, each obligation runs in a closure that is its own repository whose parent holds exactly the base entries it declares, under a work directory no cargo or rustup configuration sits above, a command stopped by a signal leaves no receipt, and one run at a time holds the receipt store |
 
+## pages
+
+| ID | Level | Statement |
+| --- | --- | --- |
+| `PG-01` | `build` | Pages identity preflights use exactly one mandatory unskippable guard in both workflows, refuse a stale or malformed repository, and require ten named and executed negative controls without failures, omissions or skips; an incomplete result exits nonzero with model-defined PAGES_IDENTITY_CONTROLS_INCOMPLETE |
+
 ## self-model
 
 | ID | Level | Statement |

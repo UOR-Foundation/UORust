@@ -49,6 +49,20 @@ jobs:
           node bootstrap/brand-sync.mjs --check
           python3 -I bootstrap/brand-fonts.py --check
           node bootstrap/frame-sync.mjs --check
+      - name: Verify Pages identity gates against planted wrong metadata
+        run: python3 -I scripts/ci/test_pages_identity.py
+      - name: Refuse stale Pages repository identity before costly build work
+        shell: bash
+        run: |
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const actual = JSON.parse(readFileSync("site/app.json", "utf8")).repository;
+            const expected = `https://github.com/${process.env.GITHUB_REPOSITORY}`;
+            if (typeof actual !== "string" || actual.toLowerCase() !== expected.toLowerCase()) {
+              console.error(`site/app.json repository mismatch: ${actual} != ${expected}`);
+              process.exit(1);
+            }
+          '
       - name: Build and verify the holo through the locked SDK
         shell: bash
         run: |

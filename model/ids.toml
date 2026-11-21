@@ -189,3 +189,9 @@ id = "CI-01"
 level = "build"
 suite = "ci"
 statement = "PR impact reporting evaluates exact base/head Git changes using a trusted-base classifier and factory input graph; passive documentation is distinguished from model inputs, while missing, renamed or nonregular evidence never authorizes skipping native acceptance"
+
+[[id]]
+id = "PG-01"
+level = "build"
+suite = "pages"
+statement = "Pages identity preflights use exactly one mandatory unskippable guard in both workflows, refuse a stale or malformed repository, and require ten named and executed negative controls without failures, omissions or skips; an incomplete result exits nonzero with model-defined PAGES_IDENTITY_CONTROLS_INCOMPLETE"
