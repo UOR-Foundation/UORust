@@ -4528,16 +4528,13 @@ fn method_typed(
     want: Option<&Ty>,
 ) -> Lift<((Expr, Ty), Acc)> {
     match (rt, name) {
-        // `a.checked_div(b)`, `a.checked_rem(b)`: none for a zero divisor.
-        (Ty::Nat(_), "checked_div" | "checked_rem") if args.len() == 1 => {
-            method_nat_checked_div(name, r, rt, args, env, ctx, acc)
-        }
         (Ty::Nat(w), "checked_add" | "checked_mul") => {
             method_nat_checked_add(w, name, r, rt, args, env, ctx, acc)
         }
         (Ty::Nat(_), "checked_sub") => {
             method_nat_checked_sub(name, r, rt, args, env, ctx, acc)
         }
+        // `a.checked_div(b)`, `a.checked_rem(b)`: none for a zero divisor.
         (Ty::Nat(_), "checked_div" | "checked_rem") => {
             method_nat_checked_div_args(name, r, rt, args, env, ctx, acc)
         }
@@ -4578,11 +4575,6 @@ fn method_typed(
         (Ty::List(_), "is_empty") if args.is_empty() => {
             method_list_is_empty(r, acc)
         }
-        (Ty::List(t), "first") if args.is_empty() => flat_lift(
-            format!("(prim index {r} 0 : (Option {}))", t.render()),
-            opt_of(t),
-            acc,
-        ),
         (Ty::List(t), "get") => {
             method_list_get(t, name, r, args, env, ctx, acc)
         }
@@ -4630,38 +4622,6 @@ fn method_typed(
         }
         _ => Err(Residue::Form(format!("method call .{name}"))),
     }
-}
-
-/// `.checked_div` on a receiver of type `Nat`.
-fn method_nat_checked_div(
-    name: &str,
-    r: &str,
-    rt: &Ty,
-    args: &[&rs::RustExpr],
-    env: &Env,
-    ctx: &Ctx,
-    acc: Acc,
-) -> Lift<((Expr, Ty), Acc)> {
-    let ((d, dt), acc) = flat_of(args[0], env, ctx, acc, Some(rt))?;
-    if !dt.same(rt) {
-        return Err(Residue::Form(format!(
-            "argument of another type to .{name}"
-        )));
-    }
-    let prim = if name == "checked_div" {
-        "quotient"
-    } else {
-        "remainder"
-    };
-    flat_lift(
-        format!(
-            "(if ({d} =? 0) then {} else {})",
-            none_of(rt),
-            some_of(rt, &format!("(prim {prim} {r} {d} 0 : Nat)"))
-        ),
-        opt_of(rt),
-        acc,
-    )
 }
 
 /// `.checked_add` on a receiver of type `Nat`.
@@ -10752,10 +10712,10 @@ pub(crate) fn lift_all(
             match outcome {
                 Ok((body, recursive, termination, theorems, acc)) => {
                     // A well-founded definition elaborates with its evidence.
-                    let mut evidence_axioms = BTreeSet::new();
+                    let mut theorem_axioms = BTreeSet::new();
                     for t in theorems {
                         if let Decl::Theorem { axioms, .. } = &t {
-                            evidence_axioms.extend(axioms.iter().cloned());
+                            theorem_axioms.extend(axioms.iter().cloned());
                         }
                         decls.push((format!("#{}", t.name()), t));
                     }
@@ -10776,7 +10736,7 @@ pub(crate) fn lift_all(
                     mentioned.insert(c.rust.clone(), seen);
                     compares.insert(c.rust.clone(), acc.ordered);
                     let mut axioms = acc.axioms;
-                    axioms.extend(evidence_axioms);
+                    axioms.extend(theorem_axioms);
                     own.insert(c.rust.clone(), axioms);
                     let group = acc
                         .helpers
