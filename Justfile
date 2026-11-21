@@ -8,7 +8,7 @@
 default: vv
 
 # The whole gate.
-vv: fmt-check model template-check self-model-check lint test deny app uorust
+vv: fmt-check model pages-identity-test template-check self-model-check lint test deny app uorust
     @echo "vv: the acceptance gate passed"
 
 fmt-check:
@@ -19,6 +19,10 @@ fmt-check:
 # `audit-dependency-updates`), in one `xtask` process.
 model:
     cargo run -q --locked -p xtask -- validate
+
+# Negative control for both workflow identity guards (R5, gate non-vacuity).
+pages-identity-test:
+    python3 -I -m unittest discover -s scripts/ci -p 'test_pages_identity.py'
 
 # The SDK's own checks of the contract and both locks. `template check` also
 # regenerates `CONFORMANCE.md` in an isolated copy through `model-write`.
