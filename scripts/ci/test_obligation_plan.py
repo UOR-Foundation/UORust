@@ -67,7 +67,7 @@ class ObligationPlanCi02Tests(unittest.TestCase):
             [], ["../docs/escape.md"], ["__NONREGULAR_FILE_OR_MODE__"],
             ["Justfile"], ["prismpm.lock"], ["Cargo.lock"],
             ["prism-factory/graph.toml"], [".github/workflows/bootstrap.yml"],
-            ["scripts/ci/change_impact.py"], ["model/random.unknown"],
+            ["scripts/ci/change_impact.py"], ["untracked/random.unknown"],
         ):
             with self.subTest(paths=changed):
                 p = self.plan(changed)
