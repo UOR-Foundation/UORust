@@ -101,11 +101,15 @@ def match_input(path: str, expression: str) -> bool:
 
 
 def consumers(path: str, dependency_map: dict[str, list[str]]) -> list[str]:
+    """Apply factory prefixes in model order; later re-inclusions override exclusions."""
     names = []
     for name, inputs in dependency_map.items():
-        positive = any(match_input(path, x) for x in inputs if not x.startswith("!"))
-        excluded = any(match_input(path, x[1:]) for x in inputs if x.startswith("!"))
-        if positive and not excluded:
+        selected = False
+        for expression in inputs:
+            exclude = expression.startswith("!")
+            if match_input(path, expression[1:] if exclude else expression):
+                selected = not exclude
+        if selected:
             names.append(name)
     return sorted(names)
 
