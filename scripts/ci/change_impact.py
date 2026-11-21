@@ -303,18 +303,84 @@ def report_obligation_plan(repo: Path, base: str, head: str) -> dict:
     planned["head_sha"] = head
     return planned
 
+
+def execute_obligation_plan(repo: Path, plan: dict) -> dict:
+    """Run exactly the selected, fixed Justfile commands on the checked head.
+
+    A trusted-base invocation may use this for scoped development feedback.
+    Do not equate this receipt with whole-PR merge qualification: independent
+    required checks and branch protection must separately validate evidence.
+    """
+    if (plan.get("schema") != "uor/ci-obligation-plan/1"
+            or plan.get("native_acceptance_required") is not True
+            or plan.get("merge_qualified") is not False
+            or plan.get("advisory_only") is not True):
+        raise UnverifiedDiff("untrusted or incomplete obligation plan")
+    head = git(repo, "rev-parse", "--verify", "HEAD^{commit}").strip().decode("ascii")
+    if head != plan.get("head_sha") or not SHA.fullmatch(head):
+        raise UnverifiedDiff("checked revision differs from obligation plan")
+    parts = plan.get("required_obligations")
+    if (not isinstance(parts, list) or len(parts) != len(set(parts))
+            or any(part not in VV_PARTS for part in parts)
+            or parts != [part for part in VV_PARTS if part in parts]
+            or plan.get("omitted_obligations") !=
+            [part for part in VV_PARTS if part not in parts]):
+        raise UnverifiedDiff("obligation plan is missing, duplicated or reordered")
+    mode = plan.get("mode")
+    if mode not in ("full", "selective") or (mode == "full") != (parts == list(VV_PARTS)):
+        raise UnverifiedDiff("plan mode and selected obligations disagree")
+
+    # Cheap whitespace fault must still be refused even for passive docs.
+    git(repo, "diff", "--check", plan["base_sha"], head)
+    commands = [["just", "vv"]] if mode == "full" else [["just", name] for name in parts]
+    observed = []
+    for command in commands:
+        proc = subprocess.run(command, cwd=repo, check=False)
+        observed.append({"command": command, "exit_code": proc.returncode})
+        if proc.returncode != 0:
+            break
+    passed = len(observed) == len(commands) and all(
+        row["exit_code"] == 0 for row in observed
+    )
+    return {
+        "schema": "uor/ci-component-receipt/1",
+        "base_sha": plan["base_sha"],
+        "head_sha": head,
+        "mode": mode,
+        "selected": parts,
+        "observed": observed,
+        "components_passed": passed,
+        "merge_qualified": False,
+    }
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=Path("."))
     parser.add_argument("--base", required=True)
     parser.add_argument("--head", required=True)
     parser.add_argument("--summary", type=Path)
+    parser.add_argument("--execute", action="store_true",
+                        help="execute verified selected checks; not merge qualification")
+    parser.add_argument("--receipt", type=Path)
     args = parser.parse_args()
     result = report(args.repo.resolve(), args.base, args.head)
     result["obligation_plan"] = report_obligation_plan(
         args.repo.resolve(), args.base, args.head
     )
     print(json.dumps(result, sort_keys=True))
+    if args.execute:
+        try:
+            receipt = execute_obligation_plan(
+                args.repo.resolve(), result["obligation_plan"]
+            )
+        except (UnverifiedDiff, OSError, ValueError, KeyError, TypeError) as exc:
+            print("CI_COMPONENT_REFUSED: " + str(exc), file=sys.stderr)
+            return 2
+        print(json.dumps(receipt, sort_keys=True))
+        if args.receipt:
+            args.receipt.write_text(json.dumps(receipt, sort_keys=True) + "\n",
+                                    encoding="utf-8")
+        return 0 if receipt["components_passed"] else 1
     if args.summary:
         with args.summary.open("a", encoding="utf-8") as output:
             output.write("\n### Advisory PR impact classification (not merge acceptance)\n\n"

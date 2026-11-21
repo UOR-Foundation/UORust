@@ -45,8 +45,15 @@ fn trusted_change_impact_classification_ci_01() {
 fn trusted_factory_obligation_plan_ci_02() {
     let output = Command::new("python3")
         .args([
-            "-I", "-m", "unittest", "discover", "-s", "scripts/ci",
-            "-p", "test_obligation_plan.py", "-v",
+            "-I",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "scripts/ci",
+            "-p",
+            "test_obligation_plan.py",
+            "-v",
         ])
         .current_dir(root())
         .output()

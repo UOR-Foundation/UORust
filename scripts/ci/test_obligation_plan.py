@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest import mock
 
 SOURCE = Path(__file__).with_name("change_impact.py")
 spec = importlib.util.spec_from_file_location("change_impact", SOURCE)
@@ -140,6 +141,54 @@ class ObligationPlanCi02Tests(unittest.TestCase):
                 impact.report_obligation_plan(repo, "main", head)["required_obligations"],
                 list(PARTS),
             )
+
+
+    def test_execution_receipt_runs_selected_checks_or_full_ci_02(self):
+        selected = self.plan(["README.md"])
+        full = self.plan(["scripts/ci/change_impact.py"])
+        for plan, expected in (
+            (selected, [["just", "model"], ["just", "self-model-check"], ["just", "app"]]),
+            (full, [["just", "vv"]]),
+        ):
+            plan = dict(plan, base_sha="a" * 40, head_sha="b" * 40)
+            invoked = []
+            def run(command, **kwargs):
+                invoked.append(command)
+                return subprocess.CompletedProcess(command, 0)
+            with mock.patch.object(impact, "git", return_value=(b"b" * 40 + b"\n")), \
+                 mock.patch.object(impact.subprocess, "run", side_effect=run):
+                receipt = impact.execute_obligation_plan(Path("."), plan)
+            self.assertEqual(invoked, expected)
+            self.assertTrue(receipt["components_passed"])
+            self.assertFalse(receipt["merge_qualified"])
+            self.assertEqual([x["command"] for x in receipt["observed"]], expected)
+
+    def test_failed_selected_component_never_yields_success_ci_02(self):
+        plan = dict(self.plan(["README.md"]), base_sha="a" * 40, head_sha="b" * 40)
+        with mock.patch.object(impact, "git", return_value=(b"b" * 40 + b"\n")), \
+             mock.patch.object(impact.subprocess, "run",
+                               side_effect=lambda command, **kwargs:
+                               subprocess.CompletedProcess(command, 7)):
+            receipt = impact.execute_obligation_plan(Path("."), plan)
+        self.assertFalse(receipt["components_passed"])
+        self.assertEqual(len(receipt["observed"]), 1)
+        self.assertEqual(receipt["observed"][0]["exit_code"], 7)
+
+    def test_stale_head_or_forged_receipt_is_refused_ci_02(self):
+        plan = dict(self.plan(["README.md"]), base_sha="a" * 40, head_sha="b" * 40)
+        malformed = [
+            dict(plan, required_obligations=["app", "model", "self-model-check"]),
+            dict(plan, required_obligations=["model", "model"]),
+            dict(plan, omitted_obligations=[]),
+            dict(plan, mode="full"),
+            dict(plan, merge_qualified=True),
+            dict(plan, head_sha="c" * 40),
+        ]
+        for candidate in malformed:
+            with self.subTest(candidate=candidate), \
+                 mock.patch.object(impact, "git", return_value=(b"b" * 40 + b"\n")), \
+                 self.assertRaises(impact.UnverifiedDiff):
+                impact.execute_obligation_plan(Path("."), candidate)
 
 
 if __name__ == "__main__":
