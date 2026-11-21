@@ -38,7 +38,6 @@ fn trusted_change_impact_classification_ci_01() {
     );
 }
 
-
 /// CI-02 shares the strict Python suite invoked by CI-01, but its registered
 /// test name makes the new behavior independently visible to conformance.
 #[test]

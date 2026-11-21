@@ -369,6 +369,30 @@ def execute_obligation_plan(repo: Path, plan: dict) -> dict:
         "merge_qualified": False,
     }
 
+
+def modeled_execution_diagnostic(code: str, **details) -> dict:
+    """Typed public CLI failure from the registered CI-02 refusal model."""
+    document = tomllib.loads(
+        (Path(__file__).resolve().parents[2] / "model/ci-obligation-diagnostics.toml")
+        .read_text(encoding="utf-8")
+    )
+    rows = document.get("refusal", [])
+    required = {
+        "CI_COMPONENT_CONTROLS_INCOMPLETE",
+        "CI_COMPONENT_REFUSED",
+        "CI_COMPONENT_FAILED",
+    }
+    if (document.get("schema") != "uor/ci-obligation-diagnostics/1"
+            or not isinstance(rows, list) or len(rows) != len(required)
+            or any(not isinstance(row, dict) for row in rows)
+            or {row.get("code") for row in rows} != required):
+        raise ValueError("CI-02 refusal model is missing or malformed")
+    row = next(row for row in rows if row["code"] == code)
+    if any(not isinstance(row.get(key), str) or not row[key]
+           for key in ("kind", "message")):
+        raise ValueError("CI-02 refusal model has incomplete fields")
+    return {"code": code, "kind": row["kind"], "message": row["message"], **details}
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=Path("."))
@@ -389,14 +413,23 @@ def main() -> int:
             receipt = execute_obligation_plan(
                 args.repo.resolve(), result["obligation_plan"]
             )
-        except (UnverifiedDiff, OSError, ValueError, KeyError, TypeError) as exc:
-            print("CI_COMPONENT_REFUSED: " + str(exc), file=sys.stderr)
+            if args.receipt:
+                args.receipt.write_text(
+                    json.dumps(receipt, sort_keys=True) + "\n", encoding="utf-8"
+                )
+        except (UnverifiedDiff, OSError, ValueError, KeyError, TypeError, UnicodeError) as exc:
+            print(json.dumps(modeled_execution_diagnostic(
+                "CI_COMPONENT_REFUSED", reason=str(exc)
+            ), sort_keys=True), file=sys.stderr)
             return 2
         print(json.dumps(receipt, sort_keys=True))
-        if args.receipt:
-            args.receipt.write_text(json.dumps(receipt, sort_keys=True) + "\n",
-                                    encoding="utf-8")
-        return 0 if receipt["components_passed"] else 1
+        if not receipt["components_passed"]:
+            print(json.dumps(modeled_execution_diagnostic(
+                "CI_COMPONENT_FAILED", base_sha=receipt["base_sha"],
+                head_sha=receipt["head_sha"], observed=receipt["observed"]
+            ), sort_keys=True), file=sys.stderr)
+            return 1
+        return 0
     if args.summary:
         with args.summary.open("a", encoding="utf-8") as output:
             output.write("\n### Advisory PR impact classification (not merge acceptance)\n\n"

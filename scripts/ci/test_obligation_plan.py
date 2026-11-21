@@ -49,6 +49,9 @@ REQUIRED_NAMES = (
     "test_actual_git_comparison_binds_exact_commits_ci_02",
     "test_actual_passive_documentation_avoids_sdk_ci_02",
     "test_browser_only_requires_existing_browser_acceptance_ci_02",
+    "test_cli_evidence_refusal_is_typed_and_modeled_ci_02",
+    "test_cli_failed_component_is_typed_and_modeled_ci_02",
+    "test_cli_receipt_write_failure_is_modeled_ci_02",
     "test_dirty_index_or_worktree_is_refused_ci_02",
     "test_dirty_tree_after_execution_refuses_receipt_ci_02",
     "test_empty_and_skipped_results_are_refused_ci_02",
@@ -252,6 +255,99 @@ class ObligationPlanCi02Tests(unittest.TestCase):
 
 
 
+
+    def test_cli_evidence_refusal_is_typed_and_modeled_ci_02(self):
+        model = tomllib.loads(
+            (SOURCE.parents[2] / "model/ci-obligation-diagnostics.toml").read_text()
+        )
+        refusal = next(row for row in model["refusal"]
+                       if row["code"] == "CI_COMPONENT_REFUSED")
+        base, head = "a" * 40, "b" * 40
+        plan = dict(self.plan(["README.md"]), base_sha=base, head_sha=head)
+        for defect in ("stale-head", "dirty-worktree", "missing-git-evidence"):
+            with self.subTest(defect=defect):
+                def git_state(repo, *args):
+                    if defect == "missing-git-evidence":
+                        raise impact.UnverifiedDiff("planted unreadable git evidence")
+                    if defect == "stale-head" and args[0] == "rev-parse":
+                        return b"c" * 40 + b"\n"
+                    if defect == "dirty-worktree" and args[0] == "status":
+                        return b"?? planted.txt\0"
+                    return clean_checkout_git(repo, *args)
+                output, error = io.StringIO(), io.StringIO()
+                with mock.patch.object(impact, "report", return_value={
+                         "route": "docs", "base_sha": base, "head_sha": head
+                     }), mock.patch.object(
+                         impact, "report_obligation_plan", return_value=plan
+                     ), mock.patch.object(
+                         impact, "git", side_effect=git_state
+                     ), mock.patch.object(
+                         impact.subprocess, "run"
+                     ) as dispatcher, mock.patch.object(
+                         sys, "argv", ["change_impact.py", "--base", base,
+                                      "--head", head, "--execute"]
+                     ), contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
+                    self.assertEqual(impact.main(), 2)
+                diagnostic = json.loads(error.getvalue().strip())
+                self.assertEqual(diagnostic["code"], refusal["code"])
+                self.assertEqual(diagnostic["kind"], refusal["kind"])
+                self.assertEqual(diagnostic["message"], refusal["message"])
+                self.assertTrue(diagnostic["reason"])
+                self.assertNotIn("CI_COMPONENT_REFUSED:", error.getvalue())
+                dispatcher.assert_not_called()
+
+    def test_cli_failed_component_is_typed_and_modeled_ci_02(self):
+        model = tomllib.loads(
+            (SOURCE.parents[2] / "model/ci-obligation-diagnostics.toml").read_text()
+        )
+        refusal = next(row for row in model["refusal"]
+                       if row["code"] == "CI_COMPONENT_FAILED")
+        base, head = "a" * 40, "b" * 40
+        plan = dict(self.plan(["README.md"]), base_sha=base, head_sha=head)
+        output, error = io.StringIO(), io.StringIO()
+        with mock.patch.object(impact, "report", return_value={
+                 "route": "docs", "base_sha": base, "head_sha": head
+             }), mock.patch.object(
+                 impact, "report_obligation_plan", return_value=plan
+             ), mock.patch.object(
+                 impact, "git", side_effect=clean_checkout_git
+             ), mock.patch.object(
+                 impact.subprocess, "run",
+                 return_value=subprocess.CompletedProcess(["just", "model"], 9)
+             ), mock.patch.object(
+                 sys, "argv", ["change_impact.py", "--base", base,
+                              "--head", head, "--execute"]
+             ), contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
+            self.assertEqual(impact.main(), 1)
+        diagnostic = json.loads(error.getvalue().strip())
+        self.assertEqual(diagnostic["code"], refusal["code"])
+        self.assertEqual(diagnostic["kind"], refusal["kind"])
+        self.assertEqual(diagnostic["message"], refusal["message"])
+        self.assertEqual(diagnostic["observed"][0]["exit_code"], 9)
+        self.assertFalse(json.loads(output.getvalue().splitlines()[-1])["components_passed"])
+
+    def test_cli_receipt_write_failure_is_modeled_ci_02(self):
+        base, head = "a" * 40, "b" * 40
+        plan = dict(self.plan(["README.md"]), base_sha=base, head_sha=head)
+        error = io.StringIO()
+        with mock.patch.object(impact, "report", return_value={
+                 "route": "docs", "base_sha": base, "head_sha": head
+             }), mock.patch.object(
+                 impact, "report_obligation_plan", return_value=plan
+             ), mock.patch.object(
+                 impact, "git", side_effect=clean_checkout_git
+             ), mock.patch.object(
+                 impact.subprocess, "run",
+                 return_value=subprocess.CompletedProcess(["just", "model"], 0)
+             ), mock.patch.object(
+                 Path, "write_text", side_effect=OSError("planted receipt failure")
+             ), mock.patch.object(
+                 sys, "argv", ["change_impact.py", "--base", base, "--head",
+                              head, "--execute", "--receipt", "receipt.json"]
+             ), contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(error):
+            self.assertEqual(impact.main(), 2)
+        self.assertEqual(json.loads(error.getvalue().strip())["code"], "CI_COMPONENT_REFUSED")
+
     def test_empty_and_skipped_results_are_refused_ci_02(self):
         clean = unittest.TestResult()
         clean.testsRun = len(REQUIRED_NAMES)
@@ -273,11 +369,17 @@ class ObligationPlanCi02Tests(unittest.TestCase):
         )
         self.assertEqual(model["schema"], "uor/ci-obligation-diagnostics/1")
         refusal = model["refusal"]
-        self.assertEqual(len(refusal), 1)
+        self.assertEqual(len(refusal), 3)
+        self.assertEqual({row["code"] for row in refusal}, {
+            "CI_COMPONENT_CONTROLS_INCOMPLETE",
+            "CI_COMPONENT_REFUSED",
+            "CI_COMPONENT_FAILED",
+        })
         self.assertEqual(refusal[0]["code"], "CI_COMPONENT_CONTROLS_INCOMPLETE")
         ids = tomllib.loads((SOURCE.parents[2] / "model/ids.toml").read_text())
         claim = next(row for row in ids["id"] if row["id"] == "CI-02")
-        self.assertIn(refusal[0]["code"], claim["statement"])
+        for row in refusal:
+            self.assertIn(row["code"], claim["statement"])
 
         for defect in ("missing", "skipped", "failed"):
             with self.subTest(defect=defect):
@@ -326,7 +428,7 @@ def main():
         (SOURCE.parents[2] / "model/ci-obligation-diagnostics.toml").read_text()
     )
     rows = model["refusal"]
-    if model["schema"] != "uor/ci-obligation-diagnostics/1" or len(rows) != 1:
+    if model["schema"] != "uor/ci-obligation-diagnostics/1" or len(rows) != 3:
         raise ValueError("CI-02 refusal model missing or malformed")
     row = rows[0]
     print(json.dumps({
