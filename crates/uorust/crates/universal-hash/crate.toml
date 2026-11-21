@@ -1,0 +1,99 @@
+[[fn]]
+path = "universal-hash::<impl at src/lib.rs:147:10: 147:17>::default"
+kappa = "fa1fff9d0032e0a3670eda704b8eaa2e0a633f98d61b1ab7e2413c1a36f88207"
+at = "Error=u32"
+embedded = "77b307dbb1a9c0f4233a9862f027680f3d70e803aa5cf43800f7a122e75446e8"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "universal-hash::<impl at src/lib.rs:147:19: 147:24>::fmt"
+kappa = "cbd05e44a702e0398e9cb69583050a86280e4a09c8687733f34b9c25e8dadfa7"
+embedded = "cff8b84f414eddbb9ae7c5edb13e2231911615a019eeae12081442c378a38c9b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "universal-hash::<impl at src/lib.rs:147:32: 147:37>::clone"
+kappa = "7418ccd057d7ee6a4c118c4cf6d8c1b60fcaf402bb37adeb1de4912532d51046"
+at = "Error=u32"
+embedded = "e2d5e4d44230af1653723e0e08df9c2f68c4eb2c164c0fca54264a82403d383c"
+status = "translated"
+digest = "75725479cc90087ee64b70735832d9e43ab09b4ac92b917bcfb0456a15307d99"
+
+[[fn]]
+path = "universal-hash::<impl at src/lib.rs:147:39: 147:41>::assert_fields_are_eq"
+kappa = "a2fc24e1d8c4ae2eab93a3da50d037e60698fa2287a81ea2c465d0365c117764"
+embedded = "7dc58b3384c46108888189a6c7e3d44947896886e30eebc76539d90ad910b3ad"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "universal-hash::<impl at src/lib.rs:147:43: 147:52>::eq"
+kappa = "54c7cb9e1daecbfa486caa1f56fa352a363d426282c9053acd2639ac9c62e740"
+embedded = "9231baf86c1a39f91ee3e440e0ddf1fd95070ea1f3c84aa90ce0ad20c11414d0"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "universal-hash::Error::fmt"
+kappa = "1e871079dd36f10731dc6f5d0228eab471bf560b89ae99d78263526b8cd4a3e4"
+embedded = "347b796b3eda77c9479414c816adb99314eef3520101b212a355a215c7489d8a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "universal-hash::UhfBackend::blocks_needed_to_align"
+kappa = "75587e75a24052224f15d9a896d817481aca38409b101bb45e43c1259c5bdd92"
+embedded = "7396e178d387083506ccad8f07d377d11309a45c0f05ba43931b5c16ebb2e7da"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "universal-hash::UhfBackend::proc_par_blocks"
+kappa = "f2d40e14f899b694ce0dfaea290cc920ad35c10de8d4c472c25ae930e4e3cfc0"
+at = "Self=u32"
+embedded = "20bfd0fc3b9bb0399eb1c5d59f2e197e261a3526dc886464febffdca1465550d"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "universal-hash::UniversalHash::finalize_reset"
+kappa = "3e0dbf70147d2b7b51fca423793903ffeaf72894d068c39561cf278089f761f2"
+at = "Self=u32"
+embedded = "f02dad0a5117ad3c4117cc3625fe215917c4bdc2b649090c976667146de1e6db"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "universal-hash::UniversalHash::update"
+kappa = "2275ed8afe1ba52c47b847acc5589a2b9b8f150a19419b3909c2f73a0804c26d"
+at = "Self=u32"
+embedded = "563c9d4c521ed394778b3555f4427c5f9e6f0811f379ca069e614231e053ed2f"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "universal-hash::UniversalHash::update::Ctx::call"
+kappa = "aff2cdf39819ec52b884e826b2542723a49e66d8212280165aca35812fa001b2"
+at = "B=u32, BS=u32"
+embedded = "72331e1c1d01f60099ddd061a35ece461c6b4e58d8b6cd207deaaa82eb5f36ad"
+status = "residue"
+cause = "mir::Ty: Ctx<'_, u32>"
+
+[[fn]]
+path = "universal-hash::UniversalHash::update_padded"
+kappa = "d06bc39457db4d824b32deda6ccc6cc71acc7a516dcfa78f6f59db10c3496407"
+at = "Self=u32"
+embedded = "399c1da830676428dae0d69fc78a58539c1d392c4aac0ad8421a98d6da29575f"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "universal-hash::UniversalHash::verify"
+kappa = "de2f48ef681c2a634077e7c6ce0eaabe9a7a03191c3db0b12b26538049710a47"
+at = "Error=u32, Self=u32"
+embedded = "71decd62a09e410363f8a6a32ccfbe07deaebfb2ac120d968d5adc054c9bd103"
+status = "residue"
+cause = "mir::Ty: crypto_common::hybrid_array::Array<u8, u32>"
+

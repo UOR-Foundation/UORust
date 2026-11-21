@@ -1,0 +1,181 @@
+# The idna register (written by `uorust crate idna@1.1.0`; do not edit): every body of
+# idna's MIR at idna 1.1.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 115
+translated = 18
+residue = 97
+
+[module.crate]
+bodies = 9
+translated = 1
+residue = 8
+
+[module.deprecated]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.punycode]
+bodies = 23
+translated = 8
+residue = 15
+
+[module.uts46]
+bodies = 67
+translated = 9
+residue = 58
+
+[embedding]
+bodies = 115
+embedded = 115
+evaluable = 115
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 6
+
+[[cause]]
+cause = "mir::Ty: uts46::Uts46"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: uts46::AsciiDenyList"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: deprecated::Config"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: uts46::ProcessingError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: uts46::Hyphens"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: uts46::ProcessingSuccess"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: punycode::Decoder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: uts46::ErrorPolicy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <char as From>::from"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DnsLength"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Idna"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PunycodeClassification"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RtlNumeralState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deprecated::Idna"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: punycode::PunycodeEncodeError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: uts46::PunycodeClassification"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: split_ascii_fast_path_prefix::{closure#0}: mir::TerminatorKind::Call: core::num::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item punycode::DAMP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_ascii_lowercase"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::first_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_first"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: punycode::Decode<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uts46::AlreadyAsciiLabel<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uts46::DnsLength"
+bodies = 1

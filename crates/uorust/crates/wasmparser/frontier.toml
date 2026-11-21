@@ -1,0 +1,1932 @@
+# The wasmparser register (written by `uorust crate wasmparser@0.263.0`; do not edit): every body of
+# wasmparser's MIR at wasmparser 0.263.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 8352
+translated = 40
+residue = 8312
+
+[module.arity]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.binary_reader]
+bodies = 121
+translated = 0
+residue = 121
+
+[module.collections]
+bodies = 393
+translated = 0
+residue = 393
+
+[module.error]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.features]
+bodies = 250
+translated = 0
+residue = 250
+
+[module.limits]
+bodies = 5
+translated = 3
+residue = 2
+
+[module.offsets]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.parser]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.readers]
+bodies = 4303
+translated = 29
+residue = 4274
+
+[module.resources]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.validator]
+bodies = 3138
+translated = 8
+residue = 3130
+
+[embedding]
+bodies = 8307
+embedded = 8307
+evaluable = 7927
+blocked = 380
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 380
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 2247
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::Operator<'_>"
+bodies = 641
+
+[[cause]]
+cause = "mir::Ty: IsEndOperatorVisitor"
+bodies = 628
+
+[[cause]]
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+bodies = 492
+
+[[cause]]
+cause = "mir::Ty: FrameStackAdapter<'_"
+bodies = 372
+
+[[cause]]
+cause = "mir::Ty: SingleFrameAdapter<'_"
+bodies = 372
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 286
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by VisitOperator"
+bodies = 259
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by VisitSimdOperator"
+bodies = 233
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::MemArg"
+bodies = 230
+
+[[cause]]
+cause = "mir::Ty: features::WasmFeatures"
+bodies = 154
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::RefType"
+bodies = 77
+
+[[cause]]
+cause = "mir::Ty: BinaryReader<'_>"
+bodies = 55
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::ValType"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::_::InternalBitFlags"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: features::_::InternalBitFlags"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: linking::_::InternalBitFlags"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::SymbolFlags"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: dyn arity::ModuleArity"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: validator::types::CoreTypeId"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::AbiInfo"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::SegmentFlags"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: collections::set::Set<u32>"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::FuncType"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::SubType"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::HeapType"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: TypeList"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: collections::map::Map<u32"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::IndexMap<u32"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: index_set::IndexSet<u32>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: index_map::IndexMap<u32"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: linking::SymbolFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: TypesRef<'_>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::PackedIndex"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: SegmentFlags"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::BlockType"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: validator::names::KebabStr<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: validator::types::TypeInfo"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: TypeAlloc"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: RandomStateHasher"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: binary_reader::BinaryReader<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::MemoryType"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::V128"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::GlobalType"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::TableType"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: validator::types::EntityType"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u64>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::ResumeTable"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::FieldType"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: validator::component::ComponentState"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::AnyTypeId"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentAnyTypeId"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentInstanceTypeId"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentTypeId"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: dyn readers::core::operators::VisitSimdOperator<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::FrameKind"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::ContType"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::RecGroup"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::StructType"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::UnpackedIndex"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: AbiInfo"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ComponentAnyTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ComponentDefinedTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ComponentFuncTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ComponentInstanceTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ComponentTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: KebabStr<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: KebabString"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: LocalInits"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::Ieee32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::Ieee64"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::OperatorsReader<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::ArrayType"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: validator::ValidatorId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: validator::component::CanonicalOptions"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentCoreModuleTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentDefinedType"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentDefinedTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentFuncTypeId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: validator::names::ComponentName"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ComponentCoreInstanceTypeId"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ComponentCoreModuleTypeId"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ComponentValueTypeId"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: OperatorValidator"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Types"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::IndexMap<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::BrTable<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::CompositeType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::StorageType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::AliasableResourceId"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentCoreTypeId"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AliasableResourceId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: OperatorValidatorResources<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PlainName<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: TypeInfo"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ValidatorResources"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: collections::map::Entry<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: collections::map::OccupiedEntry<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: parser::Parser"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: readers::component::exports::ComponentExternalKind"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::AbstractHeapType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentCoreInstanceTypeId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentValType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: validator::operators::MaybeType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CoreTypeId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: InterfaceName<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RecGroupId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RollbackLog"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Slot<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SnapshotList<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: collections::map::Iter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::ComponentValType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::PrimitiveValType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::TryTable"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::CompositeInnerType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: validator::component::Concurrency"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: validator::core::Module"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: validator::names::KebabString"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: validator::operators::OperatorValidator"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: validator::types::RecGroupId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by WasmModuleResources"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AnyTypeId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ComponentCoreTypeId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: InterfaceNameComponent<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: LoweredTypes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ResourceFunc<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ResourceId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SlotIndex"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SubtypeArena<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::IndexMap<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: collections::map::IterMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: collections::map::Keys<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: collections::map::Values<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::OccupiedEntry<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::Entry<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::IntoIter<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::Iter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::IterMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::Keys<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::Values<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::ValuesMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::ComponentType<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::ComponentTypeDeclaration<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::InstanceTypeDeclaration<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: readers::core::custom::CustomSectionReader<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: readers::core::exports::ExternalKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: readers::core::imports::Import<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::MemArgTarget"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentFuncType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentItem"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: validator::types::Types"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: validator::types::TypesRef<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ComponentNameKind<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ComponentNameParser<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MaybeOwned<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Order"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ParsedComponentNameKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RelocationType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Remapping"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SubtypeCx<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Transaction"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::index_set::IndexSet<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::map::IntoIter<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::map::IntoKeys<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::map::IntoValues<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::map::ValuesMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::set::Difference<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::set::Intersection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::set::SymmetricDifference<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collections::set::Union<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: component_types::ComponentValType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn ModuleImportKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hashbrown::hash_set::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::OccupiedEntry<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: index_set::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::exports::ComponentExport<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::imports::ComponentExternName<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::imports::ComponentImport<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::imports::ComponentTypeRef"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::imports::TypeBounds"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::ComponentDefinedType<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::CoreType<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::ModuleTypeDeclaration<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::VariantCase<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::exports::Export<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::imports::Imports<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::imports::TypeRef"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::Linking<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::names::Name<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::Catch"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::Handle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::MemArgOrdering"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::OperatorsReaderAllocations"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::TagType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::State"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::Validator"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::component::StringEncoding"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentInstanceType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ModuleType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ResourceId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::operators::Frame"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::operators::MemAddr<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::operators::WasmProposalValidator<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validator::types::TypeList"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ComdatSymbolKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ComponentEntityType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ControlStack"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Either<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EntityType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FuncValidator<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Locals"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RelocAddendKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RelocationEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: WasmProposalValidator<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: canonicals::CanonicalOption"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collections::map::VacantEntry<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: component_types::ComponentDefinedType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hashbrown::hash_set::IntoIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::IntoIter<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::IterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::Keys<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::VacantEntry<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::Values<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_map::ValuesMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index_set::IntoIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::Encoding"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::SectionLimited<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::component::canonicals::CanonicalOption"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::ComponentFuncType<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::component::types::OuterAliasKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::core::code::FunctionBody<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::core::init::ConstExpr<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::core::names::IndirectNaming<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::core::names::Naming<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::core::reloc::RelocationEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::core::reloc::RelocationType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::RecGroup::into_types_and_offsets::Iter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::TagKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validator::component::ComponentKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ArgOrField"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentEntityType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::InstanceType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validator::names::ParsedComponentNameKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validator::operators::transaction_disabled::RollbackLogAllocations"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as bitflags::Bits>::EMPTY"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item binary_reader::WASM_MAGIC_NUMBER"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::component_types::AbiInfo::ELEM_SIZE_BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::types::TypeInfo::DEPTH_BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::types::TypeInfo::SIZE_BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_power_of_two"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AccessorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ArgOrField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CanonicalizationMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ImportItemCompact<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LocalsReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MemArgKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OperatorValidatorTemp<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResourceFuncKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aliases::ComponentAlias<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aliases::ComponentOuterAliasKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: canonicals::CanonicalFunction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::hash::RandomState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::IntoIter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::Keys<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::Values<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::Entry<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::Keys<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::Slot<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::Values<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: component_types::Abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::ErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: features::WasmFeaturesInflated"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: index_map::Entry<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: instances::ComponentInstance<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: instances::ComponentInstantiationArg<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: instances::Instance<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: instances::InstantiationArg<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: instances::InstantiationArgKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linking::LinkingSectionReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: matches::WithRecGroup<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::Order"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::ParserCounts"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::Payload<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::SectionLimitedIntoIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::SectionLimitedIntoIterWithOffsets<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::Subsections<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::aliases::ComponentAlias<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::aliases::ComponentOuterAliasKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::canonicals::CanonicalFunction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::instances::ComponentInstance<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::instances::ComponentInstantiationArg<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::instances::Instance<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::instances::InstantiationArg<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::instances::InstantiationArgKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::names::ComponentName<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::component::start::ComponentStartFunction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::branch_hinting::BranchHint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::branch_hinting::BranchHintFunction<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::coredumps::CoreDumpValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::data::Data<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::elements::Element<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::globals::Global<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::imports::ImportItemCompact<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::Comdat<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::ComdatSymbol"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::ComdatSymbolKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::DefinedDataSymbol"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::InitFunc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::LinkingSectionReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::Segment<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::linking::SymbolInfo<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::names::IndirectNameMap<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::names::NameMap<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::names::NameSectionReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::ControlStack"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::producers::ProducersField<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::producers::ProducersFieldValue<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::reloc::RelocAddendKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::reloc::RelocSectionReader<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::tables::Table<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::matches::WithRecGroup<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::component::PtrSize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::Abi"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentTypeList"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentValueTypeId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::LoweredFuncType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::Remapping"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::SubtypeCx<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::core::ModuleState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::core::ValidatorResources"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::core::arc::MaybeOwned<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::custom::CustomSectionValidator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::custom::NameMax"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::func::FuncValidator<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::func::FuncValidatorAllocations"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::names::ComponentNameKind<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::names::PlainName<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::operators::LocalInits"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::operators::OperatorValidatorAllocations"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::operators::transaction_disabled::RollbackLog"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::operators::transaction_disabled::Transaction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validator::types::SnapshotList<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: split_canonical_version::{closure#0}: type outside the lift: core::str::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: parser::Parser::is_component::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: parser::Parser::is_core_wasm::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u64 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::component_types::AbiInfo::ALIGN_LOG2_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::component_types::AbiInfo::CONTAINS_BORROW_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::component_types::AbiInfo::CONTAINS_HANDLE_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::component_types::AbiInfo::ELEM_SIZE_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::component_types::MAX_FLAT_FUNC_PARAMS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item validator::types::TypeInfo::SIZE_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: validator::component_types::AbiInfo::ALIGN_LOG2_OFFSET: mir::Operand::Constant: the constant item validator::component_types::AbiInfo::ELEM_SIZE_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: validator::component_types::AbiInfo::CONTAINS_BORROW_OFFSET: mir::Operand::Constant: validator::component_types::AbiInfo::ALIGN_LOG2_OFFSET: mir::Operand::Constant: the constant item validator::component_types::AbiInfo::ELEM_SIZE_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: validator::types::TypeInfo::DEPTH_OFFSET: mir::Operand::Constant: the constant item validator::types::TypeInfo::SIZE_OFFSET"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: alloc::vec::Vec::clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::split_once"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BinaryReaderIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BrTableTargets<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ComponentNameContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CustomSectionValidator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExternKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Frame"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LocalsIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeType<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PtrSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RollbackLogAllocations"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeCanonicalizer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VisitConstOperator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alloc::sync::Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: append_only::IndexMapAppendOnly<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: binary_reader::BinaryReaderIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: binary_reader::MemArgKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code::FunctionBody<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::hash::RandomStateHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::Entry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::ValuesMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::IntoIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::SlotIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: collections::index_map::detail::ValuesMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::FromFn<{closure@src/validator/names.rs:740:29: 740:36}>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn validator::component_types::ModuleImportKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ErrorInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl ExactSizeIterator<Item = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Iterator<Item = &'a u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: index_map::detail::VacantEntry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: init::ConstExpr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::Chunk<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::component::imports::ComponentNameOpt<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::code::LocalsIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::code::LocalsReader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::coredumps::CoreDumpInstance"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::coredumps::CoreDumpInstancesSection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::coredumps::CoreDumpModulesSection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::coredumps::CoreDumpSection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::coredumps::CoreDumpStackFrame"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::coredumps::CoreDumpStackSection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::custom::KnownCustom<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::data::DataKind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::dylink0::Dylink0Subsection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::dylink0::MemInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::elements::ElementItems<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::elements::ElementKind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::imports::ImportsIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::BrTableTargets<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::OperatorsIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::operators::OperatorsIteratorWithOffsets<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::tables::TableInit<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: readers::core::types::RecGroupInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reloc::RelocSectionReader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: semver::Version"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::ValidPayload<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component::ComponentNameContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component::ExternKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component::append_only::IndexMapAppendOnly<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::ComponentTypeAlloc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::CoreInstanceTypeKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::LoweredSignature"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::LoweredTypes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::RecordType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::SubtypeArena<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::TupleType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::TypeListAliasSnapshot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::TypeListCheckpoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::VariantCase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::component_types::VariantType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::core::OperatorValidatorResources<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::core::canonical::CanonicalizationMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::core::canonical::TypeCanonicalizer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::custom::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::names::AccessorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::names::InterfaceName<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::names::ResourceFunc<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::names::ResourceFuncKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::operators::Either<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::operators::Locals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::operators::MaybeType<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::types::TypeAlloc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::types::TypesRefKind<'_>"
+bodies = 1

@@ -1,0 +1,1037 @@
+# The tonic register (written by `uorust crate tonic@0.14.9`; do not edit): every body of
+# tonic's MIR at tonic 0.14.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 883
+translated = 8
+residue = 875
+
+[module.body]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.client]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.codec]
+bodies = 94
+translated = 3
+residue = 91
+
+[module.extensions]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.metadata]
+bodies = 262
+translated = 4
+residue = 258
+
+[module.request]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.response]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.server]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.service]
+bodies = 90
+translated = 0
+residue = 90
+
+[module.status]
+bodies = 75
+translated = 0
+residue = 75
+
+[module.transport]
+bodies = 263
+translated = 1
+residue = 262
+
+[module.util]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 883
+embedded = 883
+evaluable = 875
+blocked = 8
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 4
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 3
+
+[[construct]]
+construct = "CastKind::Transmute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 103
+
+[[cause]]
+cause = "mir::Ty: status::Status"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: metadata::value::MetadataValue<u32>"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: VE"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: metadata::encoding::Ascii"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: transport::server::Server<u32>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: http::HeaderValue"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: request::Request<u32>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: MetadataMap"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: metadata::key::MetadataKey<u32>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: metadata::map::MetadataMap"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: body::Body"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: MetadataKey<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: MetadataValue<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: metadata::encoding::Binary"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: response::Response<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: transport::channel::Channel"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: client::grpc::Grpc<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: server::grpc::Grpc<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: service::router::Routes"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: status::Code"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: transport::error::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: transport::server::Router<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: transport::server::incoming::TcpIncoming"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Ascii"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EncodeBuf<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: codec::compression::CompressionEncoding"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: codec::decode::Streaming<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: http::HeaderMap"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: service::router::RoutesBuilder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Code"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: codec::BufferSettings"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: metadata::map::ValueIter<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: HeaderValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: encoding::Binary"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: http::Extensions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: http::HeaderName"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::ResponseBody<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: B"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CompressionEncoding"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DecodeBuf<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EnabledCompressionEncodings"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EndpointType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codec::compression::SingleMessageCompressionOverride"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codec::encode::EncodeBody<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http_body::SizeHint"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metadata::map::ValueIterMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: request::CancellationHandle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::InterceptedService<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::ResponseFuture<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: service::recover_error::RecoverError<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: service::recover_error::RecoverErrorLayer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: service::recover_error::ResponseBody<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::connection::Connection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::executor::SharedExec"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::reconnect::ResponseFuture<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transport::server::service::io::ConnectInfo<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transport::server::service::io::ServerIo<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CompressionSettings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Direction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Endpoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GrpcMethod<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IO"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SingleMessageCompressionOverride"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Status"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Streaming<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: axum::Router"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: base64::engine::GeneralPurpose"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codec::buffer::DecodeBuf<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codec::compression::EnabledCompressionEncodings"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<http::Response<body::Body>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extensions::GrpcMethod<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: h2::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http::Request<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http::Response<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http_body::Frame<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: interceptor::ResponseBody<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metadata::key::InvalidMetadataKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metadata::value::ToStrError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: recover_error::ResponseBody<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::InterceptorLayer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: service::layered::Layered<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: status::ConnectError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tokio::net::TcpStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::connector::Connector<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport::channel::uds_connector::UdsConnector"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport::server::Server"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport::server::conn::TcpConnectInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport::server::service::io::ConnectInfoLayer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport::server::service::io::ServerIoConnectInfo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport::server::unix::UdsConnectInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: transport::service::grpc_timeout::GrpcTimeout<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <S as server::NamedService>::NAME"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as server::NamedService>::NAME"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BoxedIo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CancellationHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DuplexStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncodeBody<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncodedBytes<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InvalidMetadataValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InvalidMetadataValueBytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ServerIo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SharedExec"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SvcFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UserAgent<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::buf::UninitSlice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::buffer::EncodeBuf<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::compression::CompressionSettings"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::decode::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::encode::EncodedBytes<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::encode::EncodedBytesProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::encode::_::__EncodeBodyProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::encode::_::__EncodeBodyProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codec::encode::_::__EncodedBytesProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::Connection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<transport::channel::service::connection::SendRequest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<transport::channel::service::io::BoxedIo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: grpc_timeout::ResponseFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Uri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hyper_util::client::legacy::connect::HttpConnector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: interceptor::ResponseFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::Iter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::IterMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::Keys<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::Values<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::ValuesMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::encoding::InvalidMetadataValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::encoding::InvalidMetadataValueBytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::Entry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::Iter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::IterMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::KeyAndMutValueRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::KeyAndValueRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::KeyRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::Keys<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::ValueDrain<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::ValueRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::ValueRefMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::Values<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::map::ValuesMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: percent_encoding::AsciiSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reconnect::ResponseFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: recover_error::ResponseFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: request::Request<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::KindProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::ResponseBodyKindProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::_::__ResponseBodyProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::_::__ResponseBodyProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::_::__ResponseFutureProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::interceptor::_::__ResponseFutureProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::recover_error::ResponseFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::recover_error::_::__ResponseBodyProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::recover_error::_::__ResponseBodyProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::recover_error::_::__ResponseFutureProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::recover_error::_::__ResponseFutureProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service::router::RoutesFuture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: socket2::TcpKeepalive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: status::StatusInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokio::net::UnixStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokio_util::sync::CancellationToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tower_layer::Stack<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<13>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::ResponseFuture"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::endpoint::EndpointType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::add_origin::AddOrigin<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::connection::MakeSendRequestService<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::connection::SendRequest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::discover::Change<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::discover::DynamicServiceStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::io::BoxedIo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::reconnect::InnerProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::reconnect::Reconnect<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::reconnect::_::__ResponseFutureProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::reconnect::_::__ResponseFutureProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::service::user_agent::UserAgent<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::channel::uds_connector::UdsConnecting"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::Fuse<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::MakeSvc<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::Svc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::SvcFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::_::__FuseProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::_::__FuseProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::_::__SvcFutureProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::_::__SvcFutureProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::io_stream::ServerIoStream<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::io_stream::_::__ServerIoStreamProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::server::io_stream::_::__ServerIoStreamProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::service::grpc_timeout::ResponseFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::service::grpc_timeout::_::__ResponseFutureProjection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transport::service::grpc_timeout::_::__ResponseFutureProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::grpc::Grpc<u32>::client_streaming<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::grpc::Grpc<u32>::ready"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::grpc::Grpc<u32>::server_streaming<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::grpc::Grpc<u32>::streaming<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of client::grpc::Grpc<u32>::unary<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of codec::decode::Streaming<u32>::message"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of codec::decode::Streaming<u32>::trailers"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::client_streaming<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::map_request_unary<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::server_streaming<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::streaming<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::unary<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of service::router::unimplemented"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::channel::Channel::connect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::channel::endpoint::Endpoint::connect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::channel::endpoint::Endpoint::connect_with_connector<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::channel::service::connection::Connection::connect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::channel::uds_connector::connect_uds"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Router<u32>::serve<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Router<u32>::serve_with_incoming<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Router<u32>::serve_with_incoming_shutdown<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Router<u32>::serve_with_shutdown<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve_internal<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve_with_incoming<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve_with_incoming_shutdown<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve_with_shutdown<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of transport::server::connection_timeout_future"
+bodies = 1

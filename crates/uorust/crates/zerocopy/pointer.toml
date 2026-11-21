@@ -1,0 +1,775 @@
+[[fn]]
+path = "zerocopy::_casts::<impl at src/pointer/ptr.rs:1238:5: 1241:45>::get_mut::<impl at src/util/macros.rs:726:9: 726:103>::project"
+kappa = "c44d77fe65b4f3226bfaa1af82a00da139c9326811bd966de3bbfe38a4f24b74"
+at = "T=u32"
+embedded = "5f9ec5ad4c58c9674c968a80e3e5f54bb359929ec554c56a0a04eba00aa876c3"
+status = "residue"
+cause = "mir::Ty: UnsafeCell<u32>"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::as_bytes"
+kappa = "3240c896b17f66551d269dcf7389ca72074e4d0cf2d9bb87a6a152597fc9205a"
+at = "I=u32, T=u32"
+embedded = "e643ccffe803087d6b5110439de12a7f90b486d5abd0dc4ea20bb1b65a2a0509"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Aligned"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::as_slice"
+kappa = "ff57da7bc9d9aae4ec27cc8a85d032c342561d2fa66946040b77ed3ff0cdc7da"
+at = "I=u32, N=#usize_N, T=u32"
+embedded = "0ff414a165188185a1ab4465c9d7d57991be23a263d25a77aa812f0311284ef0"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, [u32], u32>"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::cast"
+kappa = "4fde9e946a34e01bfffab4660e7ef49a6afd533386098f1c6746321edf1f69fb"
+at = "I=u32, T=u32, U=u32"
+embedded = "ef054e9dfbf969a04572c80f08be96e323e1185c2b938397113f9a8fa22a7345"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Unaligned"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::cast_unchecked"
+kappa = "9c8ed242ae515fef33985338df69acc84b75cec14837cbd5a2894213f2efa3d4"
+at = "I=u32, T=u32, U=u32"
+embedded = "32030c038786e87189e659aa5bd74e9fb359008a8a44d439d67d411c04aebc97"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Unaligned"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::get_mut"
+kappa = "45f250dd828b0d99aa50ada4d8b68a419eff74f37eff3154d9742e25829e6392"
+at = "I=u32, T=u32"
+embedded = "cae764073f822721dd24b73bfe72717ca0e21b0c958e6522dddcc57606560885"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::project"
+kappa = "79143f5b24f96f632169c9fde47ce64cf8365b77738514940d0df00c23d320d3"
+at = "Client=u32, F=u32, FIELD_ID=u32, I=u32, T=u32, VARIANT_ID=u32"
+embedded = "cc2565e73aa5e697701e95ebab5200ac391729cede903df000f30869a9225f91"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::project_tag"
+kappa = "b95edf164af4c52e94832392ab71217a0411f76d1ea803d45da5fbdd1669c0a5"
+at = "Client=u32, I=u32, T=u32"
+embedded = "b4747831ed0a18f1ba5172c392db6d66a822904377057921bf0b60fc8750cbeb"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Shared"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::try_cast_into"
+kappa = "8b23e386abcf6a45c9ee357f99c61f0a31116509c1c8577e8e8fdd28f430888c"
+at = "I=u32, U=u32"
+embedded = "e45ab4a3cffca59341da9c3515e6939ef23d2db6b1d11052cda2beb2e05c2dbb"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Aligned"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::try_cast_into_no_leftover"
+kappa = "bb8f0f0d29bdfecf91fe91975e307e941dd9e5fbe1a81bce5a98901943efaf51"
+at = "I=u32, U=u32"
+embedded = "2e6c48763e59de2ac72915fff6168a66f882e8ce134b7cb12261f591d91b3310"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Aligned"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::try_with"
+kappa = "e4cc8558cc335e3b284ada1127490eaad2bbd1dd54dbaa8adea123818add473f"
+at = "E=u32, F=u32, I=u32, J=u32, T=u32, U=u32"
+embedded = "af3b36306c834b38166d4c3cd488882042984ca385c949bd44392329914e5582"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_casts::Ptr::try_with_unchecked"
+kappa = "e2e224a8d73fb9f46885c94f8b2175e35534fa072a023b45b6132cfe0eb37cf3"
+at = "E=u32, F=u32, I=u32, J=u32, T=u32, U=u32"
+embedded = "305d51d0edf15a8af0e98e163a55d3f723af6bcb4bafee71fb19299f01b72b41"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::as_mut"
+kappa = "c2b51319c3ed28eaba412e374fbfe59068559317ebc96f08d2dab855a8ee109d"
+at = "T=u32"
+embedded = "14fd3fa3dea3dff6485d921489a3e3fed7ee7772b0de24ece5e8b162ad412dc8"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Exclusive"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::as_ref"
+kappa = "0e9d6fdb23ce988ebea2cefb5d10a518fbedd31957e0c02514c3bcf9d0323716"
+at = "I=u32, T=u32"
+embedded = "3a7cb1bc64351bfbd5203a5a4d95a2c11c82f2f7f2394a431160edd45db91063"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::from_mut"
+kappa = "9fd3c0cf45b6ad6c40e4b616bb434bd250d81eececc5d33fc1afc8f2843f6411"
+at = "T=u32"
+embedded = "e766fecfeece916359a7cf689c516858f5758a3b2d38c113bd1379f925e84fb9"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Exclusive"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::from_ref"
+kappa = "e7b010a8482f70db8ae828fdf1f176fbe0b8ed4ae4ff48057cf66f42275a487d"
+at = "T=u32"
+embedded = "725fde6888f0106df4d1e11fd2b32aabac1655e188890df31409f7b0b8dc29a0"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Shared"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::into_unalign"
+kappa = "bfe2d49b1590b6fec1fb22aceef49d33f50cbc09d5c3100922f56ca74a52c883"
+at = "I=u32, T=u32"
+embedded = "3851a0ba53201f29a1857a1483ad76568ada82e6d1eccdb79ea8d1f337ae1942"
+status = "residue"
+cause = "mir::Ty: wrappers::Unalign<u32>"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::project_transmute_unchecked"
+kappa = "48172d912d7dab7d3ad87a66c13d21d0b8262dfa2361ae656710a088860c2120"
+at = "I=u32, T=u32, U=u32, V=u32"
+embedded = "ccf510a748623a42523d62c33e609d2ca4f5f4cc9e5f2ab73c452eab05efa500"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Unaligned"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::read"
+kappa = "129b13b8b0cf12d5da4952fbcf3d28b72981fc97ef971b039eb11e49eaf2b7e0"
+at = "I=u32, T=u32"
+embedded = "2fb733abb8441f5aea60b34a2825599207ffdbe76aae5d5f665ea99662371995"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::reborrow"
+kappa = "0360b516bc9d3e24f8e0cd5d019f667dcbebf0f216430f64dcff550bfbc77bda"
+at = "I=u32, T=u32"
+embedded = "edaef022d6d611a6c442b22f2004c3c55a9166611de36bff26e6da4d06047486"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::reborrow_shared"
+kappa = "babe8582717cdc53dd40a3a6cb66cd4915bc025bebf2b8938eecaf11347236d9"
+at = "I=u32, T=u32"
+embedded = "7549222d994621e679aa506d98f9296a23f8aca4e2ad6cc1959556f03971f826"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Shared"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::recall_validity"
+kappa = "2e4d83ae28aae5c174c5a8f2cfe0101f00b8aeabd1826b0b940fc7a42dbdb008"
+at = "I=u32, T=u32, V=u32"
+embedded = "d910008d04758dd7bcfe30dc7f1c79276a9e52fc124e2616a2919b3b3bc689d8"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, (u32, u32, u32)>"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::transmute"
+kappa = "2222fe9f394b2f9ecb964a29558d94a505c980d99971efedfa43da21c494994f"
+at = "I=u32, T=u32, U=u32, V=u32"
+embedded = "a82da7e2a91ebfefaf719708620c359e8f88bf572023feddf3a7a87df0613111"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Unaligned"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::transmute_with"
+kappa = "182dfd4220922f5806427bc1957ce6e7b8af3cbaa8343926ad33f55f61cf25b5"
+at = "I=u32, T=u32, U=u32, V=u32"
+embedded = "eedd6bbe8cace3b931ae9b56924c48f9b20f3797855dbd305db991fe60b06715"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Unaligned"
+
+[[fn]]
+path = "zerocopy::_conversions::Ptr::unaligned_as_ref"
+kappa = "1e2812fda61bf8423d731cd89240d66d9ed58d00e3a09a90e562f21079c909ee"
+at = "I=u32, T=u32"
+embedded = "0c61781e2433fde2ccb30e2178aa36844693f2e71ffe9dec88f39b082746f54f"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_def::PtrInner::as_non_null"
+kappa = "e636d964e6f55630904df51eb0fb793f5d714034f2e67ca6d9ac7c50d3817e4e"
+at = "T=u32"
+embedded = "7c5d43b52cd35b6636b8e24f71690aa3ba4e619a8335672a54cbd8b2891d68da"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::_def::PtrInner::as_ptr"
+kappa = "4bdd8a19caef3e3d147729692ac0095d502f64a4db948fa6bbabc904f985a9bf"
+at = "T=u32"
+embedded = "e51cad393cccbc5e4039954576777bfe908573944b532448bb971e7486189e04"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::_def::PtrInner::clone"
+kappa = "1770754a85a845c09a4a7f67e8c440ef5840179c64afc4a0fadbd99e248ca7a9"
+at = "T=u32"
+embedded = "fadddbf77405f9e7d2dd541e0ca6e9cc6b397101904af3f180cc484db8b19d55"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::_def::PtrInner::new"
+kappa = "4db7583d3edb35d7e561c93c5a0d2c295a49d72b5fdb8a0fd56fd1874a5bb369"
+at = "T=u32"
+embedded = "1e607ed6e09ff2dcb83b0647e517a7d06573ff891d2c40d20c573643feb8af36"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::_external::Ptr::clone"
+kappa = "9bd4f3cdd81c1d75587f86be73b211d697025435cb0cd814129ced4f3a2640d3"
+at = "I=u32, T=u32"
+embedded = "5661c8b4800bd7e7593a34f17fdbec578a4c503c0da5525802cf262078857f19"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_external::Ptr::fmt"
+kappa = "2516787eac31a1b8d01d3bc6bacc8b718c5f89cd749f7184c99da97a8d396c75"
+at = "I=u32, T=u32"
+embedded = "dac77f45e71d8ab29bd0f6ae8461e788285a73f206be4f987243db0590d6a6bc"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "zerocopy::_project::Ptr::is_empty"
+kappa = "f5c651b8fa183a9164617be83cd60f84093451d78ecdcb2669094cb1499a024a"
+at = "I=u32, T=u32"
+embedded = "fb1caa4ba930c59116400444a79ae3d276694a073251c1560dd56e3c6e68eaf6"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_project::Ptr::iter"
+kappa = "685b26e0da60f9b801c4f8ac0dbb55207db80c63bf8634f9545efdc9750d7568"
+at = "I=u32, T=u32"
+embedded = "944d177a416961916c29bac42d9527a96f2a06df67866d9c33421bdedadcbe0e"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "zerocopy::_project::Ptr::len"
+kappa = "90d8b5ce842c0908f3702600ebe9092f7ec656948adf3dca0e33a2d1e3b3f20d"
+at = "I=u32, T=u32"
+embedded = "2555ef3bbab3a596c23b958379340bd988a41d7cb1b648220f96518b88edb6fb"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::assume_alignment"
+kappa = "3636203ca37befa05b16083a90d6aa4440bfb0d3c5703a08d7c3c0c6ccf7b811"
+at = "A=u32, I=u32, T=u32"
+embedded = "6e66c88c02dc64e7835aeca07f8c0ddc51e0a0ddd7ce1850273981daf021ceec"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, (u32, u32, u32)>"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::assume_initialized"
+kappa = "a39492e01bc851bed9189c7627608419cc56f9e8dc8cf3496810b0b6ab2f41e2"
+at = "I=u32, T=u32"
+embedded = "ed42dddbba96b5c3e1de8f6e715eba0cc234b092f4a39e83a06e7e8f2482395e"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Initialized"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::assume_invariants"
+kappa = "4b981782164a757dfefc67270f4e4d72bd268406a6a4a1e46fab3c6802520b81"
+at = "H=u32, I=u32, T=u32"
+embedded = "388aceed945462765e5430348f1ce71b05ab1f03da73a0904fa5c69c39890dbb"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::assume_safe"
+kappa = "2b4ed95ec168c91c6762d0cf4f47eaf5fb813dd9ef22e2a6e0502fc6b9085249"
+at = "I=u32, T=u32"
+embedded = "b8f8756c56c13bd69fc418fdb71a1b5c66ffae511eb3b0f032062ec5adda7c2e"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Safe"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::assume_validity"
+kappa = "71c579e06586601015ff704e0b331bfe6854a57962c183089de78a2b55221c15"
+at = "I=u32, T=u32, V=u32"
+embedded = "cd49d7069d3de6ddac89a79f0843621fb80b49dbc1f189beb16a6fa4253527c0"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, (u32, u32, u32)>"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::bikeshed_recall_aligned"
+kappa = "db39afdcf4ae7be899cc1e110c8ff5979d2855491d1ab2cafa4d9968cc914b18"
+at = "I=u32, T=u32"
+embedded = "9247648f577dbf32bc29c42529702946185b3b708ebc2e26efef06e23328c546"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Aligned"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::forget_aligned"
+kappa = "742a1cd629d1b6da29ef17824576c3f7b24079c25a154e2f9b5ff967c20c7c53"
+at = "I=u32, T=u32"
+embedded = "7fad594414f44ab1a4a38d5cc35fb5e7f5f747d4ef7e1e16e7a687dd7e407d60"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Unaligned"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::into_shared"
+kappa = "c234cbcbc50b75ca4bb621668358f346e770db2cecebf00f7856fb80d4cfb92d"
+at = "I=u32, T=u32"
+embedded = "791418b2d08ae49d88a5ad34f6792d0d0e78f0301dee52b52a64000212e42a55"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Shared"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::try_into_aligned"
+kappa = "74eb1ad8b6204d3fefc3c67094cab46078b80a7c0b613f79b83a147fc914856a"
+at = "I=u32, T=u32"
+embedded = "e132ae0698ba2ddf833e84d5891b3f5037b343b7fd85a970c8d72690c1fa2f3f"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Aligned"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::try_into_safe"
+kappa = "3ec277114f3c1c878420bd5ba7628166d34a3a01ecc6bfa6086883a16216fcba"
+at = "I=u32, T=u32"
+embedded = "b394348fe86d9e35ab74c76b64ba71f9a38ab41c5e73c5bea0f84b1a67f4ba3a"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Safe"
+
+[[fn]]
+path = "zerocopy::_transitions::Ptr::unify_invariants"
+kappa = "7c9d817ff6651c046ad6c698a1b27467e7a27d649f1033b2cf03b7856035a823"
+at = "H=u32, I=u32, T=u32"
+embedded = "f9bd1782f76783a0fa707ccbfb5a3a76e8b862de3e7d45f6d1f202c35670964c"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:125:5: 125:58>::project"
+kappa = "26a766efe8d3c13bb6a3a3408e8e9f021a46100e9c509faee3fd8815b9f52ce9"
+at = "Dst=u32, Src=u32"
+embedded = "abfd289a2b4db9b7b999b3c4e48b0a8710711f8b4cadbbda3d452cc213f53125"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:125:5: 125:58>::project::<impl at src/util/macros.rs:676:9: 676:121>::ASSERT"
+kappa = "bdebdf6d4bba97d08ca2cd96753396afa5f3921aa82736efd4866afbc400f27d"
+embedded = "df0f6792c1aa29012c1ff9d6922581309aed520d2e1d326311b20b8065a6ccdf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:152:5: 152:63>::project"
+kappa = "3766af2a0c1b5334dc3f7613548c04edb2a3dce30b610fc4a392d84d6aaa2600"
+at = "Dst=u32, Src=u32"
+embedded = "a395fd9f5c3c50cee5ec7dfc121a496af117c9df708c7b07ff59ef4bd8a2e4a8"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:152:5: 152:63>::project::<impl at src/util/macros.rs:676:9: 676:121>::ASSERT"
+kappa = "1c715b77574718284c80820c7fe6d9407c014eb187c56237391997555fcc6a39"
+embedded = "591c9665b4fc9ae65bcf27cf156ad63743d1f6579693b59823c959f2ebb1f840"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:185:5: 188:75>::project"
+kappa = "f5a3f29da2caf87ac062185499150ae606efdb8b2b79e7c42d7ae4fb26a1b417"
+at = "Dst=u32, Src=u32"
+embedded = "bac8afd169d747424f0947c18e4ad49b186e6c085a334762f6de89f88555a574"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:185:5: 188:75>::project::<impl at src/util/macros.rs:676:9: 676:121>::ASSERT"
+kappa = "5a555e7acfd3a48da090c47b27d6fe7a7fcd718c8d362be8659faac986d50a87"
+embedded = "c2699e92b2819892f3c6ca34674d7c3ec2e461aac3398546e4dddbf7b0dc715e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Src as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:249:5: 252:54>::project"
+kappa = "280717fe8156f9ab7443f5ab6cc6c104d0ca443f8389a62fa3dcda669be21ebe"
+at = "Client=u32, F=u32, FIELD_ID=u32, T=u32, VARIANT_ID=u32"
+embedded = "81c1f13ba0856c04b3f23f64fea61454a69461f0b07ec7b378050add37be785d"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:319:5: 325:27>::project"
+kappa = "decdfa1b9d1bf608f625354f9baa9400165337337a8d471d19e818621b3a35ef"
+at = "T=u32, U=u32, V=u32"
+embedded = "3292d11457d2ff46549f83b9ee61b3cd453317660de4ed53dcc942edf8ba0f6d"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:370:5: 370:74>::project"
+kappa = "3d8e8044ac7adbdf97afebd387f671284fec17e10c01fd3454e0e6522462b32e"
+at = "T=u32"
+embedded = "cb244d6b777001d8ff67aa701fe063da58e24a92b1687c5f51e59cdaea36292d"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:399:5: 399:57>::project"
+kappa = "32d0f1d3dcc62430ff98ff9122756ef102511ce175653bd99c454ba3c00d427f"
+at = "T=u32"
+embedded = "1472d77b61d1cffc07caed5dc104d6b4b0e2f799fac3f647def2bba6c32eb1d5"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:90:14: 90:21>::default"
+kappa = "ff7924c2a62f03ca254941b9b6b80b24670f21e6cce1c0b6191ad624264edb72"
+embedded = "223f24277a212047897b043c4168c946498efb264e2e32c71544dc87a1d994fe"
+status = "residue"
+cause = "mir::Ty: pointer::cast::IdCast"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:90:29: 90:34>::clone"
+kappa = "641f2c3bf1a95b220645e805bb401275b6ce4414445a4a2a937a0a067bd7661f"
+embedded = "40afb3fe6f8dc4b2f84cd95e7731d4bdad5698cb98558977d5d89b4adb3cda63"
+status = "residue"
+cause = "mir::Ty: pointer::cast::IdCast"
+
+[[fn]]
+path = "zerocopy::cast::<impl at src/pointer/mod.rs:97:5: 97:52>::project"
+kappa = "d379fe66defcd0ba6f513fbd1712ad5e1b4968cdd3ac4d7d5e7c928769073502"
+at = "T=u32"
+embedded = "f302057dd0d0a3f5790be91b273be85545f5be07f81a49f484bb7e836e626e0c"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::as_slice"
+kappa = "eed5b2c0f925a35ba5a1494e17a451958c379a0852821c9ad536da6f67d1da7a"
+at = "N=#usize_N, T=u32"
+embedded = "4b5d549560218e0f57c35c3b9d2ba27404655771172848c03d6d737412baed98"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, [u32]>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::from_mut"
+kappa = "92340f984068ed35a6a307a239c2a23ae1db4bc54f359ea0e3bd7b613ea10ff0"
+at = "T=u32"
+embedded = "4abd64b8a342ca621878737e8518249fd61e090027f0b79fd2daa39d08daeefa"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::from_ref"
+kappa = "32cdaae32485afd885edb17672350bc3245f230a57558a2e5a6256a16a7950d4"
+at = "T=u32"
+embedded = "f57e016c5aab24d95c8c9ad4012e6cac1bdeb579a6942f1446b59e44355b5be8"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::iter"
+kappa = "9f8ed02abe54c2a1341bfd91083bd3c7a40e9bb51cefab5f5855e4f5ca649068"
+at = "T=u32"
+embedded = "6c216ee578aa093224a4133fca04c7e87f505bd2cf14af0c22fc9a902d6900a9"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::meta"
+kappa = "bbd5cea01cfb30ba4fe5e09340d5253bd7ef6df7a24ec471fd1a6d0109901345"
+at = "T=u32"
+embedded = "d8b30a3ebb0dda2bc444e61116b652775ff3be15d67e321d8ec09adeb16211cb"
+status = "residue"
+cause = "mir::Ty: util::len_of::MetadataOf<u32>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::project"
+kappa = "ffbe0e9ebf90a46c388e09fa7e342cb95af449bea8f95c184b1eba101d578419"
+at = "T=u32, U=u32"
+embedded = "11fc300d0b077da72f47570775a05d0e194b6edf99ed5011f06d417adfb4a9cb"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::slice_unchecked"
+kappa = "71cb2008a26fa4a317ec57b11a3da4ffbdabce8a970cc8ded7268f3d2faa7a13"
+at = "T=u32"
+embedded = "936826b4351e348c8404ade1bf455e9c9f9fa53db8424ca33c7777df01b3ed0e"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, [u32]>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::split_at_unchecked"
+kappa = "c73314bf49794ebda262540a08521e5c88292ce4d672500350544cf7eee15bca"
+at = "T=u32"
+embedded = "154dff92953f2bf47b5223deec38e1e43e6cbef46680efb4a5a713ec27e83f28"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::trailing_slice"
+kappa = "ab7142416a370bc314ca5dc20ce4c74aa5de83224a04bfeebdac68a226c7ea3b"
+at = "T=u32"
+embedded = "f7571a39980a297ae6cb2415d88448fff318dea520ef4588563f0024459cb8cd"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, [u32]>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::try_cast_into"
+kappa = "80179847ed69ea214063e95cce3201c54b1f05be2c78f3b4ea29e81347bdc0aa"
+at = "U=u32"
+embedded = "e2fe45aa4a86b5f752fb52072d312054f9de35497d019e72ce17e6dc0099cd39"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::inner::PtrInner::with_meta"
+kappa = "37528553f1af5842f03f45e104e158ebd2304d9c552491da5f5eaee7bb14a1ab"
+at = "T=u32"
+embedded = "b5ed75fe2344a496faaa1d9c2513e15f7edae541bae8ae6067405ef3195ebc69"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::is_zeroed"
+kappa = "e3c95e48c1cf809733957c3a4f53c9cf1a9bae41daa9c5270f2e2cbe0ab24e3e"
+at = "I=u32, T=u32"
+embedded = "322c1bf3ceee650183d1b2309f2a369d1ca91d177470809f17d5d75a6655daf3"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::<impl at src/pointer/invariant.rs:183:1: 183:32>::KIND"
+kappa = "6b753665b8242ba8f4a519c9a0cb545fd1771f23e4ceb8a4fc5625d9141cf622"
+embedded = "fddd313a25988cd311bcc15bc8496d4f3098d4a310053ad4cffaafbb551367ca"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::ValidityKind"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::<impl at src/pointer/invariant.rs:217:1: 217:39>::KIND"
+kappa = "3635033dea94c2108e1d6e44c5d6e7e202374675eda1a4c01c065883ee8b7da3"
+embedded = "e5ac28e35a16e588bbc75889615f1ae763c2645bd44e3a8b519f9647cdf28f4b"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::ValidityKind"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::<impl at src/pointer/invariant.rs:228:1: 228:37>::KIND"
+kappa = "553a213c9f74588fb3cbf23f7070c300766d0a58e58647455c0d08269d04058a"
+embedded = "f4661d4a6acc9d51a46d41619bb1e2e186dd965c91792ceb334b9e379dfd1304"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::ValidityKind"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::<impl at src/pointer/invariant.rs:237:1: 237:30>::KIND"
+kappa = "febccab1c6485d3ace5cd930b741ee14f12b9496961b92e73a06b7429d20a7e1"
+embedded = "d0746e85a4351b15c153026513af9b5cff4eaca615fdc7204f9f31bb89dcaf03"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::ValidityKind"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::<impl at src/pointer/invariant.rs:280:16: 280:21>::clone"
+kappa = "74ef24445f97d7ea6510cd5adf00f97fb8521749da4593a73f6cce8834b6fac4"
+embedded = "a4acb8853437d24c30ab067243a960780e4aa108eded1047a92a96aafd7e505c"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::BecauseExclusive"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::<impl at src/pointer/invariant.rs:280:23: 280:28>::fmt"
+kappa = "f6ae1dda1fc2b4a5d97a87165e4bb5c04a788aad87349123381f5088d133c566"
+embedded = "a3fcac7cec4babb18512bdcb54d74d7782ab8dd94c4aaeefb306959489329f1d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::<impl at src/pointer/invariant.rs:285:16: 285:21>::clone"
+kappa = "b0b983b93725e8cf43e4af9efac9df1afe9e44ab94ab16995904351254fc39b5"
+embedded = "8fa2e73288b593c79362cbacdbf412683c0744d146c81e98822896bc10d774ce"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::BecauseImmutable"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::<impl at src/pointer/invariant.rs:285:23: 285:28>::fmt"
+kappa = "ea45f90c4b67ed23a026d59dcbeb30a5c933a4746ffc237e384bbc4f1f1b914a"
+embedded = "3645c7ebe5198a6e40d1aeaac1c2586a25d501bad50d4c5d5ff13a11e1449f6d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::Aligned::read"
+kappa = "760bce0ee657edae69cc72906ab2cdd4c594213dc27e21d5bd9e54a7ce07f17c"
+at = "I=u32, T=u32"
+embedded = "d41f0b0ebb041fe4a1d307d19a78305efef920a1d42c6ecd096c4b285a855852"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::invariant::Unaligned::read"
+kappa = "c690d04b47f296fbac78480b956b5ef6feabcb5b006d285ca214ee9ba52e5471"
+at = "I=u32, T=u32"
+embedded = "5ee8c65ec4fe7bef634257892b07317d0dd6200ba8302e751eaab17d2693fdf1"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::ptr::def::Ptr::as_inner"
+kappa = "ee717d8083e420b48933dacbb032cb13b717c4fdca20be1b4cf2bca69e4cac88"
+at = "T=u32"
+embedded = "7c87152fbf1a14d76fd90a1a41297071045c832b64943773d0bc5e7dc5a5866e"
+status = "residue"
+cause = "mir::Ty: pointer::inner::_def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::ptr::def::Ptr::from_inner"
+kappa = "05cd09a443afb3240ac50b4247bcfd93cb50957bc4aece8fed34cf03abaab5b8"
+at = "I=u32, T=u32"
+embedded = "b6514f90f8f909305359d34078f7b97d64eb17cae092f468756ef7e304c1a7d6"
+status = "residue"
+cause = "mir::Ty: pointer::ptr::def::Ptr<'_, u32, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_"
+kappa = "83fca5da1f1911e6e500c3e3f8f97acf6ffb0736006300344cb33bcf51eb3e28"
+embedded = "9859229fef56e3ef9e1f1436441a660f02ad3118a5095bc51357b762670ca24e"
+status = "translated"
+digest = "ae40100c4481bbef9be6454424e6f5c5821abef449d745ab00ff5d357020b7ae"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_#2"
+kappa = "83fca5da1f1911e6e500c3e3f8f97acf6ffb0736006300344cb33bcf51eb3e28"
+embedded = "9859229fef56e3ef9e1f1436441a660f02ad3118a5095bc51357b762670ca24e"
+status = "translated"
+digest = "ae40100c4481bbef9be6454424e6f5c5821abef449d745ab00ff5d357020b7ae"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_#3"
+kappa = "83fca5da1f1911e6e500c3e3f8f97acf6ffb0736006300344cb33bcf51eb3e28"
+embedded = "9859229fef56e3ef9e1f1436441a660f02ad3118a5095bc51357b762670ca24e"
+status = "translated"
+digest = "ae40100c4481bbef9be6454424e6f5c5821abef449d745ab00ff5d357020b7ae"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_#4"
+kappa = "83fca5da1f1911e6e500c3e3f8f97acf6ffb0736006300344cb33bcf51eb3e28"
+embedded = "9859229fef56e3ef9e1f1436441a660f02ad3118a5095bc51357b762670ca24e"
+status = "translated"
+digest = "ae40100c4481bbef9be6454424e6f5c5821abef449d745ab00ff5d357020b7ae"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_#5"
+kappa = "83fca5da1f1911e6e500c3e3f8f97acf6ffb0736006300344cb33bcf51eb3e28"
+embedded = "9859229fef56e3ef9e1f1436441a660f02ad3118a5095bc51357b762670ca24e"
+status = "translated"
+digest = "ae40100c4481bbef9be6454424e6f5c5821abef449d745ab00ff5d357020b7ae"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_#6"
+kappa = "83fca5da1f1911e6e500c3e3f8f97acf6ffb0736006300344cb33bcf51eb3e28"
+embedded = "9859229fef56e3ef9e1f1436441a660f02ad3118a5095bc51357b762670ca24e"
+status = "translated"
+digest = "ae40100c4481bbef9be6454424e6f5c5821abef449d745ab00ff5d357020b7ae"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_#7"
+kappa = "83fca5da1f1911e6e500c3e3f8f97acf6ffb0736006300344cb33bcf51eb3e28"
+embedded = "9859229fef56e3ef9e1f1436441a660f02ad3118a5095bc51357b762670ca24e"
+status = "translated"
+digest = "ae40100c4481bbef9be6454424e6f5c5821abef449d745ab00ff5d357020b7ae"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project"
+kappa = "8529b5b7f6a3c16a18033b86bf345f6ca638848ece5c9ec2eca41852bf284ff5"
+at = "T=u32"
+embedded = "c928fbc30f67fbd24cc7a7a7167b722b94731d19619360c6b26dc3890a43c8ea"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#10"
+kappa = "142bf75259c2a0d8657caf2077f2c057335c7bf5ef5f2380f9444650e562bb85"
+at = "T=u32"
+embedded = "5ae9fb992d5794612b678fd558b06675f0615dc702093cd6b83c6a0f85e2c0ff"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, core::mem::ManuallyDrop<u32>>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#2"
+kappa = "659e3335c358e0974f3c10e4142f4edddbf7401e6b05165e648dde897f42231d"
+at = "T=u32"
+embedded = "2b64b6f4741a76708538fd4dbd46470c8b2d02550affa17a26844e8be01120f3"
+status = "residue"
+cause = "mir::Ty: wrappers::Unalign<u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#3"
+kappa = "98d73567cafa767835ac9a717b10764c65f99cc5259e8f1e43d5417a22f2f146"
+at = "T=u32"
+embedded = "93777ae154406748ebd78e2945b89de491e2a3225526a529208e42fdf6478359"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#4"
+kappa = "444f0854e0bd6ba7db77fff0e5c66cc5b667a09c788403af5fe4bd0695c36adb"
+at = "T=u32"
+embedded = "725e6dc85d1535fe390edf46970e47db6c226f3af90fc48a78164224632ecb28"
+status = "residue"
+cause = "mir::Ty: core::num::Wrapping<u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#5"
+kappa = "3dfa0c61d8f0372ccbc0db91484c81e297ec7e5ba502b7e4969858fee2ac55e1"
+at = "T=u32"
+embedded = "6ec316fb9bd3426fbbc61490b639a8edc373a7f3136fefc7fd602398cc97dc01"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#6"
+kappa = "db0804a360009a91198991beb69476c261d1bb4414050900a4c5df3ac942d73f"
+at = "T=u32"
+embedded = "3bfe64a003c240dafe0294c508a9f8d35d96f3f12b8ab690fd44e523d54763fe"
+status = "residue"
+cause = "mir::Ty: UnsafeCell<u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#7"
+kappa = "9f7dd2e004e64eb2d9dbdd99c8a05dffa513cb5215f531e139f026d4e4b4f0d4"
+at = "T=u32"
+embedded = "6ef7cd488792c5ea345b66e143eedcad323f80fae85745d24e152a26967c7885"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#8"
+kappa = "a7cc9ff5dc203699e969ad75be2e824ec1b3f3bd058a067cf4a7a03999a74640"
+at = "T=u32"
+embedded = "f497d55b316ccc7dc8f92e48366b67dd1a590547835c4bf4e57bc98d430d4be1"
+status = "residue"
+cause = "mir::Ty: Cell<u32>"
+
+[[fn]]
+path = "zerocopy::pointer::transmute::_::<impl at src/util/macros.rs:726:9: 726:103>::project#9"
+kappa = "152f18a3b480dbf961088e31027a86495ca5f8c219325857e4d8092c2c691c9a"
+at = "T=u32"
+embedded = "c0f38b141f5d61590b4cf691a5efb6e784fc2502ad8b608b2f56a8ff14534566"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, u32>"
+

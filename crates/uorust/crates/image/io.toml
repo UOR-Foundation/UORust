@@ -1,0 +1,675 @@
+[[fn]]
+path = "image::AnimationDecoder::loop_count"
+kappa = "7a25bedae52ff80724b115da82dae592dd0403ded9d77a779fc0b4abb109d2ae"
+embedded = "acb717ff5726930caeb4d130c84b20a20547e6e1d6329ab22fad8bd889f15e64"
+status = "residue"
+cause = "mir::Ty: metadata::LoopCount"
+
+[[fn]]
+path = "image::ImageDecoder::exif_metadata"
+kappa = "b9acdadf3febaf8b60c6827406a9385bf11990f0c9aa82b272e5e7c77543bf18"
+embedded = "746435ac648a39a4caf93dd45dea8379b4718fe6bb0e77f264e08886f1f86554"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::ImageDecoder::icc_profile"
+kappa = "6d5d81c3ac46c84152a9410427a3e006c658cdda3b5fad89f9f84f8f50ca111f"
+embedded = "b170f7dabd47cb0176e7d20fa414159f50d9bcd4d133a961e735114ae13d3205"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::ImageDecoder::iptc_metadata"
+kappa = "cebf9f8055418eaf6ba3428e1a05e539c92eed63346ec10e30c324b8c8b0fc41"
+embedded = "09a08ea308060c81a792abdfad87343dee42cc191251e283fbc92f20197f3ad6"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::ImageDecoder::orientation"
+kappa = "75a68e1fab236c42d5e635dbdc4c0b6a1aae3d909a7a0eb65a97d51dcbefe013"
+at = "Self=u32"
+embedded = "7e1a3e7dcf7f73fe2eb666b42b6a0069867eb6242f78c9e0553e71ed1d3f9fde"
+status = "residue"
+cause = "mir::Ty: metadata::Orientation"
+
+[[fn]]
+path = "image::ImageDecoder::original_color_type"
+kappa = "57772ef6d48e2ecc170d7b0b2508d707ec8f50b498851912321996b25caf1be5"
+at = "Self=u32"
+embedded = "95f9d76e6a2e5b364868daea5a4684582301b8353f0f4568ed1c38a4387ad7e2"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::ImageDecoder::set_limits"
+kappa = "8e39bc8d9b9b422a35284a230b69e0f5f76bd31bbb7098c6a1b766c990c29beb"
+at = "Self=u32"
+embedded = "daf777df81d801610ef436b41d61a43a8b9b5cc8f68a64b4f5ed9fe67299b6b8"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::ImageDecoder::total_bytes"
+kappa = "cd6a7900bf2128786cf3abcc3fb053c479468864fc538da726f958cb3fdbf8ea"
+at = "Self=u32"
+embedded = "b21453f4717919d82730faa36858c76990244229e4f7e371c274895a0455156b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ImageDecoder, which u32 does not implement in core"
+
+[[fn]]
+path = "image::ImageDecoder::xmp_metadata"
+kappa = "c78b9a4f7797b5c3fc62dfb5b2c03a24e4a1fcf4289c81ccadf38ed1cd17d9e6"
+embedded = "21f8f5572bcdbc990697d6d6f518dfb6e3fb9b6ec00a4f9c70d3e490bdb85bc7"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::decoder_to_vec"
+kappa = "852e24a14df886678c356752c180a82bea73b904525d9ce99e9cf1856515fd4e"
+at = "T=u32"
+embedded = "4e3ab00a5e24b5e43166d1b04e8a995ac83c8d55156452d877a4e2952907beec"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::dynimage_conversion_8bit"
+kappa = "67e75b3d7cc1749c82257c8c34750f647c7ceeda5c62c7b38f4b7b64b73298e5"
+embedded = "ee04fd0b74b98b079d4a1caaf097f1c4ae232b003f9d86c65ca800612defafcc"
+status = "residue"
+cause = "mir::Ty: images::dynimage::DynamicImage"
+
+[[fn]]
+path = "image::encoder_for_format"
+kappa = "07cff7d2a618cad0226c758d519875956d9bc1465a32ce963c7c96d54ca625ed"
+at = "W=u32"
+embedded = "5df4d0aa0b6455baec7db05ae04057c2df36fd7a86c2cf982698f51a3de3413f"
+status = "residue"
+cause = "mir::Ty: dyn io::encoder::ImageEncoderBoxed"
+
+[[fn]]
+path = "image::format::<impl at src/io/format.rs:8:10: 8:15>::clone"
+kappa = "8594d399c22193d4829b4d1e05c9e83bd54992cc4a2b9a22fbfe8727bdef58a0"
+embedded = "19f9a930664c3cdd61af400e3643c0bdfc7668a21e984b9314fdfce35054b984"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::format::<impl at src/io/format.rs:8:23: 8:32>::eq"
+kappa = "58026c07b38866e19d72e37bfb9802235e0d2c64d41d4c7450fbac70d73e8dca"
+embedded = "4b1a59a910ce3ce2179119f616a017bbb58bbe19e3d1e952436aac0c438a2307"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::format::<impl at src/io/format.rs:8:34: 8:36>::assert_fields_are_eq"
+kappa = "7c96db2a4caf05efbc6fe6eb1018f3c37304c62c5bd003612c9d1c538a203186"
+embedded = "a24bc0fdc0af8f4f278bad80832e8ba7eb5974f6dd7cb3dfe6098d083decd4c2"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::format::<impl at src/io/format.rs:8:38: 8:43>::fmt"
+kappa = "51b8767dd3d3eaf53bd30e588df642534fcf9b7d35644e792044e8b843340ca9"
+embedded = "9f2461ccc2c675c5c69297ce7c348795ec95ce0266bc1c31c21cba73373923c1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "image::format::<impl at src/io/format.rs:8:45: 8:49>::hash"
+kappa = "564680bb082b75ae35959489579667b6d93e61f1c4f456d5f2abaddd7058cd1b"
+embedded = "e7bb09144fb77fa93978fcb3db8972dde7827885b61a0c4fa53f14904223449e"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::all"
+kappa = "6c56197ef363d60ceaa058bb2ff3589ae5065bee492d365615a0e352b7b4b8ae"
+embedded = "c26d044f16ab8eee2e85c6a7aba55e1bdbf0e5100d0b77cd3774b59fe4aef0c0"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::can_read"
+kappa = "db1278fb5c556f9cac6032b2aef11be81fa89a6898b1fc768c9849554cb6bc29"
+embedded = "8ce5353d2812712aea5b310878b0f79d9ca83881451a7ff2f7363991b7650039"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::can_write"
+kappa = "94e530c8eb5d38ec9fdc54ea7ce47aa3a6736ab00f7639d41618bcb4f7c8497b"
+embedded = "ebcb61eb3ce21bb90b565c89c832d11e9f84736050c7554e699fc0cf1c6ac131"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::extensions_str"
+kappa = "716a811fba3758d22352175338058ac6d3f7e0298da286c6f26cd75d2468f10a"
+embedded = "d26eccb1f34a7d6e5213855b3f1d5ebcee474c989d7dada6dcaa1ff0120cc77a"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::from_extension"
+kappa = "0a681481c19c8a3a4449f2764f0d308a4d0a5fae88bccf0c01b4911325e8c008"
+at = "S=u32"
+embedded = "2d976292421c876c8ca3a8d386d6c6931bac78be0c40645584c254a149299f1e"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::from_extension::inner"
+kappa = "5c3becf7180739f8253f41079ccef45a17bbf207efa86df0c2e247a1e80844ee"
+embedded = "603d5769f9f4f65d133749d3b284ff46c5247e54e88db60a913b5ac8acc7497e"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::from_mime_type"
+kappa = "55c1fa0062427e957f6d76ecc689a29d88c6471d15cc60847cf1c87381f2ef8d"
+at = "M=u32"
+embedded = "c1cf14e3d7b96d9a8860f9ed33ef34ecf11bfadf6e3f6f1df3185489d11fc40e"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::from_path"
+kappa = "7d27d64f918a3b275157dcec29236a182bb45e54ca7de23339bc9638e1c6c6e7"
+at = "P=u32"
+embedded = "fd885551904ea63bcbf0f738eb45a2a8cdb96125ae1685aa6cfeb846d5e60d2e"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::from_path::inner"
+kappa = "90db77940059cbfe0d855c70c8c908b116528667d0889a95f64604d83e1913eb"
+embedded = "3bcda5351cedd0786caeec67795817396d923db4cd0e956f5fdcae486e4f641c"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::reading_enabled"
+kappa = "ccd4417b92815bd07670d733f6bdf374da790dfb6ea7a722aa41ac064e5d3cb0"
+embedded = "9a2a25b80447f9fd9a90a8992d9865efc8fdc860996f282d22c2e7f274eb8814"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::to_mime_type"
+kappa = "20eaea75697d154082b72131f379b0216857bbbd5025a2da5388ce76f88aa000"
+embedded = "528f272f4a86a5d5cf7b89bfd358c9bdbf00a2188c9006f065dea75f8ffa31b2"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::format::ImageFormat::writing_enabled"
+kappa = "3779b8a69e05e17606ab979136b99f41e1b234a484e8d4d00cd7461a4cf55730"
+embedded = "c381ea3e4febc8a4c3eb01cf3e0fdcb4d992e3b51b4436a6d138e376d7fe6205"
+status = "residue"
+cause = "mir::Ty: ImageFormat"
+
+[[fn]]
+path = "image::guess_format"
+kappa = "922c47e27e947b5fbfea4f7649e9fbff3758519879b901130c64a035fb1d23c1"
+embedded = "5a7244e24d14f78c39d428e86f690970e7d662e04a570b85a507ce12adb44613"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::guess_format_impl"
+kappa = "07ba77ff271cb7f4934f2bffdd98ee60011dc56e38de0f701387c861fc057e57"
+embedded = "c5ecbc14de2de8fa62d0e14451654c17f5351e7cd953f93aaca6c89ba6efeedf"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::image_reader_type::<impl at src/io/image_reader_type.rs:14:10: 14:15>::clone"
+kappa = "513a723ea912d644cfed91d423b487ee33eecea651a051ffd0961c2e85a5cdfb"
+embedded = "c8b65a5a04407583cd720c6315de9b33366c46afde307b20d0f42aaa4340a807"
+status = "residue"
+cause = "mir::Ty: io::image_reader_type::Format"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::clear_format"
+kappa = "4e175ca95dedde4ec9c46aa43b6107f8c03674983650fb7a0b7f81cdb41f1a2b"
+embedded = "f13b81b3337dab3c364fa8d0352b89d7c04aaa5f94425f789c1ad656a4725018"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::decode"
+kappa = "ce26dc7c32c93f39f6f9431eb18ed0e2f21ddc673431f099783782ac1a2f2eda"
+at = "R=u32"
+embedded = "511a7482ec0e7bf72b429fe297338dc6e2438ced5d8a522f07a1a66f3fdcfb00"
+status = "residue"
+cause = "mir::Ty: images::dynimage::DynamicImage"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::format"
+kappa = "f4c2d0962ff2d834f11e00e17f89897ffd736916dbebfba8c558b0a4490c5c87"
+embedded = "16475406b0f662acd2e6a13d87b18e99666db02f59a973bbfaa38a7b002db1ad"
+status = "residue"
+cause = "mir::Ty: io::format::ImageFormat"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::guess_format"
+kappa = "df3d42ac2bfd9ae4b85f90f24fa9b7dd6e2757f2bed1405dfb314add257484ab"
+at = "R=u32"
+embedded = "6f4068025ed3059ff6d5470fcd28262afb11b2e29c0db7db5741970a3cf852f3"
+status = "residue"
+cause = "mir::Ty: io::image_reader_type::Format"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::into_decoder"
+kappa = "cf0c3d0e7a52ca09cbcd6d28048e0a7eb169864333e1726caf5bb0bbc069a8f6"
+at = "R=u32"
+embedded = "49196dd99e7909367a85c7799bfafdf19a6702da4e603df9c8d4deb8bbc6e0a2"
+status = "residue"
+cause = "mir::Ty: dyn io::decoder::ImageDecoder"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::into_dimensions"
+kappa = "ced052f682e3a83cf013e6478b78392004db599843b6e9f7bdd15d1cf0603c73"
+at = "R=u32"
+embedded = "a4a28b2d1e91474c5b06a972a1baa769cb0f7c4221fce701e3b80b71097b94ec"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::into_inner"
+kappa = "c972868fb4137398bfa37991195f1c77f3e62090de8b89fc7d48dc5ac293fd59"
+at = "R=u32"
+embedded = "c6fbdd38969d10c52397a10022671673357510c56f2c492e8fef9d571f308dd6"
+status = "residue"
+cause = "mir::Ty: ImageReader<u32>"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::limits"
+kappa = "6f4f71d72fc739740216e60b710d885c34db5fe2acf01a44a117a2547d1dacf4"
+embedded = "6313d4f1532af3716712a92c42b77c841153f61d254b67f793129de2ac564e92"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::make_decoder"
+kappa = "dec13e266ba80b84e3de6073a606278915f91c44fd8fcee8c1892faa66e907c3"
+at = "R=u32"
+embedded = "a0e879ff79e2da356fcc89e9dcfcaf7dddfc207733c6ae565cab9acd094d8ab2"
+status = "residue"
+cause = "mir::Ty: dyn io::decoder::ImageDecoder"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::new"
+kappa = "48d9fe4b5bf1daa99536b0578816ee1629728e661acbe1df13f26fa80b6fcbbc"
+at = "R=u32"
+embedded = "471ffb8803c56a0dc4ee68f2994ab405ad99f5f2c170b26cc086346ceb8bc4c9"
+status = "residue"
+cause = "mir::Ty: io::image_reader_type::ImageReader<u32>"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::no_limits"
+kappa = "061b302d1dc8fc33aaceaa820972c694c7aa43aa30950d01f5fd01870745c084"
+embedded = "0a4bb6bd0ad4709bf2a230c6003e4eba0d72af9a956b7335b8c579aac68e54ec"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::open"
+kappa = "711deb04bb2c7b9d9e8211cbccdf76542d2bb6418c47a5129cd49b5c43cd5806"
+at = "P=u32"
+embedded = "bf6ac848d2d507e02882bfde1ec3472e4869d99edd4fb12d6dfbd4ce72a4ec7e"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::open_impl"
+kappa = "2549149cdf5ca8d4864fae00d2f6510dbbd417aeedb1769e8c55accb18a2cc4b"
+embedded = "705f404a1ad934a4d026528d2f12d31887ca11377c67f5df90c3348f283cacee"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::require_format"
+kappa = "8638ceb629947f704ddbdc0da45a366687a90b036e9bf94a82938c6b51c7523b"
+embedded = "99227dcd70e07061f3029fcaad34bd747c924c272fa999353781d66efc1613c1"
+status = "residue"
+cause = "mir::Ty: io::image_reader_type::Format"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::set_format"
+kappa = "aed60f1677786ccc26c0f8c447ad3428db0a6486e75ee172045ac882c192ecbd"
+embedded = "5fb73674c14bd4cc39815d590c00073879fe8b892d82b4acea1f292db969c1b3"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::with_format"
+kappa = "5f071ecd2acda5958dff57184c4521c3dd52f39a73465cae0aaa27ec7cf7e9e8"
+at = "R=u32"
+embedded = "718a837271dd1c186420aad44548550a6a1cea75e33dcd18547b9f479654d39b"
+status = "residue"
+cause = "mir::Ty: io::image_reader_type::ImageReader<u32>"
+
+[[fn]]
+path = "image::image_reader_type::ImageReader::with_guessed_format"
+kappa = "f717a0c774bf203da4fe0a4d397aa66b3155e152da14d4433c367cb889a21092"
+at = "R=u32"
+embedded = "1ab8dc6374d61b782d142b66ecb8651d0e9409888a6bae3b7ec595875b27bebd"
+status = "residue"
+cause = "mir::Ty: io::image_reader_type::ImageReader<u32>"
+
+[[fn]]
+path = "image::io::R::read_exact_vec"
+kappa = "0af8eaf9967bfad5f5420494de05ca815a51545462c0331413c353ec957a99a4"
+at = "R=u32"
+embedded = "30f2682090c6f6a11cf5f1c00d4127b5376d566de6ab1354fa7fcbfc7788ba87"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "image::io::decoder::Box::color_type"
+kappa = "a85b1b2a96f4a68648e00153834a1f80b461e2f9bae18ecaf2cee757e83c56eb"
+at = "T=u32"
+embedded = "b6c98aee4490b13ff55c864ac53238f142c9a4b341b4cf96d7fc64394c75ea1f"
+status = "residue"
+cause = "mir::Ty: color::ColorType"
+
+[[fn]]
+path = "image::io::decoder::Box::dimensions"
+kappa = "d1a42ea9d377b8ff3f731c130f6e54f5daa1cc9c73226119acdc945c83fa7b32"
+at = "T=u32"
+embedded = "cdf69042ef20c3eeaaedc7221683b05504561c42af5b981b552834a8eadd9c6b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ImageDecoder, which u32 does not implement in core"
+
+[[fn]]
+path = "image::io::decoder::Box::exif_metadata"
+kappa = "2864d255e8af109120a41483281193b444ff81a01b40fbaef418abb1769d4654"
+at = "T=u32"
+embedded = "89f037a963592238e01ead398b1b58dfc902d50fc0c9fbc03550dec7cb774d79"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::io::decoder::Box::icc_profile"
+kappa = "64a9f7982d0ecbc736e9e7b4f4ae93370ca53a431d0bc42ac23ed4841afd79b6"
+at = "T=u32"
+embedded = "0939187717c29b9d03d14d25aad09f2d7070d624e651a7057c9b8f4a75033df9"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::io::decoder::Box::iptc_metadata"
+kappa = "8821fce20bce4d457e124d5ddc980850ba120b4759b34380ec9c4e65d5a62f53"
+at = "T=u32"
+embedded = "f6b9ce4b59205fcc1a5497205aef19d9f3994dc15f5f7e60254d409d6aa98dce"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::io::decoder::Box::orientation"
+kappa = "18111b33fdd0e9cab66ab33b31f5d7f30734c2639cc924ec3a029642fb87db49"
+at = "T=u32"
+embedded = "b3d97421db8190103115243a15e98b4bfdf3730abc26952d1c96bf9b5170d691"
+status = "residue"
+cause = "mir::Ty: metadata::Orientation"
+
+[[fn]]
+path = "image::io::decoder::Box::original_color_type"
+kappa = "a7e642e10db1bad553e0151cc1825942e443e7acb4e1366db9afe7ada750af58"
+at = "T=u32"
+embedded = "dda75c501a023063bd9e6a86c5911806bf0f1df4d0863e8725800d48202760e2"
+status = "residue"
+cause = "mir::Ty: color::ExtendedColorType"
+
+[[fn]]
+path = "image::io::decoder::Box::read_image"
+kappa = "ddcd0c1155f8b1934fed3f6f6fe2235043012a5dfba2f4436226500a9ca18b0e"
+at = "T=u32"
+embedded = "d50674d39c5f4dc4ed29f1af8b20541ce42dd125ef979fbb425aa7eafaed420e"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::io::decoder::Box::read_image_boxed"
+kappa = "91bac1ed1725e49f9664200118ddfef2e1b5745b8d5ae4bba65c6317c95d7aa6"
+at = "T=u32"
+embedded = "e98c89d2b163ec3e8fa37dfdc22ab46f1bcdd59c8ea3f4df88af2b4312a86828"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::io::decoder::Box::set_limits"
+kappa = "ba2660fe7ba7a48e577309019aaf080d9c227ba787a4bb1f98ad0bf07651f6e3"
+at = "T=u32"
+embedded = "c9efbceb6cdb02bd8dd526f3c5c9777a5015d5eb25c7a06d7fa53750d11dc892"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::io::decoder::Box::total_bytes"
+kappa = "32de463a42235df78f2afa9e33bdd38f13e81ab27823b517e570809f2de30be1"
+at = "T=u32"
+embedded = "bf123b81ab52e721c0f4d1a487839f60fdf1caa88418631e645908096b7a1d81"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ImageDecoder, which u32 does not implement in core"
+
+[[fn]]
+path = "image::io::decoder::Box::xmp_metadata"
+kappa = "dfd62eed16ee60e1607889408363c7b405bd1cbcfe848e9f530c666b85f96308"
+at = "T=u32"
+embedded = "1b9673b57a22df6c9a9e3dd080b22b03783ea587a76237dcdf31070c2ecf74a1"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::io::encoder::<impl at src/io/encoder.rs:21:10: 21:15>::clone"
+kappa = "3569a1823a0d2a54d1a86c3b8d754fbbbb73fbe089d344266f73caeb6a634e98"
+embedded = "895933f6d59295e68e172a742d9248162c15d7fafd2e5438d9b93572f60d84de"
+status = "residue"
+cause = "mir::Ty: io::encoder::MethodSealedToImage"
+
+[[fn]]
+path = "image::io::encoder::ImageEncoder::make_compatible_img"
+kappa = "b00bdcb632e37096d20863793169328370adda304d697b8a8357dfb6149ada28"
+embedded = "8ca7ba08028a75b0854ef329b966aa78185c6ab2a4c3d705d7751c86ff4815f6"
+status = "residue"
+cause = "mir::Ty: images::dynimage::DynamicImage"
+
+[[fn]]
+path = "image::io::encoder::ImageEncoder::set_exif_metadata"
+kappa = "4712826594b4510a56420948e7743188eaf1c5642518fd3e805ac0b714f89fba"
+embedded = "64306403f9c08d4b3d97dc226242bd841d5553ce1b4c4eafd7d527c4c9cb398e"
+status = "residue"
+cause = "mir::Ty: error::UnsupportedError"
+
+[[fn]]
+path = "image::io::encoder::ImageEncoder::set_icc_profile"
+kappa = "29a23a273a54b6fe7cc492355b0338e09f33a6eeff3e9e6e8ffe39c09fe867ba"
+embedded = "a308a006b2cd64e54c9f695ad141cb4e1f508c0daca5bf1697637ec33fb11c29"
+status = "residue"
+cause = "mir::Ty: error::UnsupportedError"
+
+[[fn]]
+path = "image::io::encoder::T::write_image"
+kappa = "96d413d29e5446da412a4810c396dabc3aeb4a9ceab25ac0243851a34ad420af"
+at = "T=u32"
+embedded = "6d244c442028a43aebe22fe72c554c956d907ce29d34fbaf696dfb337b8955d8"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:30:10: 30:15>::clone"
+kappa = "350a0494031388aaab6323935a833a59f4adc3ef26ec0f21a6d0befe1a606889"
+embedded = "77f0c2a87ce72b7015a0f547209d55cf3f3fba12ccefda38604f344e09c3bd07"
+status = "residue"
+cause = "mir::Ty: io::limits::Limits"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:30:17: 30:22>::fmt"
+kappa = "835aedded74828d741e1445359c5f73500517559baa4412d21ae296506ff7b0f"
+embedded = "61f16973896379f8ec51410731f0d00d366c6e07eaf03040816ef5ca9b587d42"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:30:24: 30:26>::assert_fields_are_eq"
+kappa = "a40fafb2f87057effcc947a96fa602861fd1962dd866ac0490fe7ffd3f9b48c0"
+embedded = "8a1a03e34180d41256a299dbef4174124e7bd32b9343c5154bd0380774c49122"
+status = "residue"
+cause = "mir::Ty: limits::Limits"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:30:28: 30:37>::eq"
+kappa = "23b823c8088faae324f6caa588e3123e505b1a8cff6d0612b3c86150223bb797"
+embedded = "79f51e60774949b705525454860892ce0a6ac65e8ddd08e0908917472878b166"
+status = "residue"
+cause = "mir::Ty: limits::Limits"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:30:39: 30:43>::hash"
+kappa = "e35c3562cacac3f1ed228bbd90d695b816ca5c568c8a98ad1373497203c365d6"
+embedded = "c761aa418abed1c8ea705279b77cc8868f93e7a9d79174b17cbf07c69864a086"
+status = "residue"
+cause = "mir::Ty: limits::Limits"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:4:10: 4:15>::clone"
+kappa = "c270f71eefe3dd96cf4c94bc72b8c6057b519f3ce28b17c5eff1087e7b9c2dd6"
+embedded = "46f0c396904e92df565d13f5906a8517af7818801ef08e42de3b794e330ada56"
+status = "residue"
+cause = "mir::Ty: io::limits::LimitSupport"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:4:17: 4:22>::fmt"
+kappa = "7ccd9144f0753aefca18a99c73ef821a609053e5ebd777662b86c55fc1e8ce64"
+embedded = "96727553b8307e7cf39ba2033a55ef8884730cb79e2651d84e37449286cfa56c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:4:24: 4:31>::default"
+kappa = "dd6933da9981d2f897643cdd6238dd1fa2be624d6915d955a118d08258ad8af9"
+embedded = "03e7b46586b89b666b67e8bce613bc3dcd0848d2c082d1d4db14741100ad4c8f"
+status = "residue"
+cause = "mir::Ty: io::limits::LimitSupport"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:4:33: 4:35>::assert_fields_are_eq"
+kappa = "59f45996a3c11905bb57d1cce3b94ffdd1454373f77b3c98d900219d19309913"
+embedded = "2ac8644028e7e0559bb10a925b408faed75ce0a74e0db7bb5985519bca55c0c9"
+status = "residue"
+cause = "mir::Ty: limits::LimitSupport"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:4:37: 4:46>::eq"
+kappa = "4006db1cc62a6dd6a1e36e413d76ad69b25251ab40aa7cbc024addc18e70d831"
+embedded = "48066a995b5d16361ea3d76b5904396d348d26e350e319c832c55c446048e96f"
+status = "residue"
+cause = "mir::Ty: limits::LimitSupport"
+
+[[fn]]
+path = "image::limits::<impl at src/io/limits.rs:4:48: 4:52>::hash"
+kappa = "18c59393fad9a65e1cacaabca7e94f4703714fa9d91e11424fd9bfa8ef040158"
+embedded = "610cbad4ca9b1ad784a11cdc9d7b444b34e304c0eb389342595541c68b2e3108"
+status = "residue"
+cause = "mir::Ty: limits::LimitSupport"
+
+[[fn]]
+path = "image::limits::Limits::check_dimensions"
+kappa = "fceb140b84f1d8e9a2c19ed61d7823dc7b05013608c35d6b8af7e96ebc29cacc"
+embedded = "640cfba266edb3e83b504ba25a59cc560446df61034cefd35080e2269e6896f2"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::limits::Limits::check_support"
+kappa = "e7ecb7d194dc2ea8db32f61479e9bc3317c6086155dd2375f3e5685cf92f9d3f"
+embedded = "87f0eda40345685d8bba003976520409456c78f51ffbbc025966c2af3bc39e4f"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::limits::Limits::default"
+kappa = "02bc3b10c8d365911141ab367851de0ef06a6fda013c4bf6710ede4bbdd0891a"
+embedded = "7e310ab030bd97d824b2b2706c56095e42fc358994e9c72791da347b7f2f50ee"
+status = "residue"
+cause = "mir::Ty: io::limits::Limits"
+
+[[fn]]
+path = "image::limits::Limits::free"
+kappa = "5271ae3d903237adc95976d0de20988ff1b41df78dc896507407b6fe855b5f23"
+embedded = "0cb3f05a155ddaf31ece157a041677a7d09b3941926bdc2a5326bfc4d8bce083"
+status = "residue"
+cause = "mir::Ty: limits::Limits"
+
+[[fn]]
+path = "image::limits::Limits::free_usize"
+kappa = "ace908b06ed32e6e342b95dbd6cd01d0dd40b671f86e26738387dc4404141cd6"
+embedded = "20fbb91e3ae6a0720c320a5abe1a9e32394033c12b0f94dbc9b15d10335a9803"
+status = "residue"
+cause = "mir::Ty: limits::Limits"
+
+[[fn]]
+path = "image::limits::Limits::no_limits"
+kappa = "d8397d3d551c6e9ba4e91bcfbcd170c9b2f3b32eb80725a398d754c15ba91c95"
+embedded = "2ee6273943fd3f3e68b18a182670e222f1a5a980c1ccf28a74d05461cbbe28bb"
+status = "residue"
+cause = "mir::Ty: io::limits::Limits"
+
+[[fn]]
+path = "image::limits::Limits::reserve"
+kappa = "e7ff6bf3c32b20a30a1ed71cee9763eb26339d9d7c3ffc3062ff07665d856ad3"
+embedded = "ceef79b9c66d23444e2af0853d4c7ff510c0ce364a2602f383a6847c44278880"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::limits::Limits::reserve_buffer"
+kappa = "67461d5c14686497490c485ec84d84c054cb4d44f177ba2682012b742af5154b"
+embedded = "d77cf924618b149dd5bb65b54246caf1b76195c98a8491e298e2dcc16bd31ca8"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::limits::Limits::reserve_usize"
+kappa = "0f05a611ba8559aa070c009c9b4105f7a8bd081f739a0605fb0c3e54e241b086"
+embedded = "675e9a1d363ab65a09a72a93a7b115e374eda5d47f149bfdea9354aeb642ba83"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::load"
+kappa = "4afd1765de6815f0c5369ee5c88cf581bf7227beb20c11a1accffd857e33e850"
+at = "R=u32"
+embedded = "3d2a310c665893cc76186b4387a81794f5b8d5f48bb7eafc048a65fd7b0ffd8f"
+status = "residue"
+cause = "mir::Ty: images::dynimage::DynamicImage"
+
+[[fn]]
+path = "image::load_rect"
+kappa = "c36293dc1e5e810cb3285e598e82306788ae71358b08058fcb222bbf166b1c25"
+at = "D=u32, F1=u32, F2=u32"
+embedded = "ed32776b6bfa73092812fde1b5a98cd70a9bb12c8acc3c258ee2fc5e188a1002"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::save_buffer"
+kappa = "b40e48f30f03044c9efc1961a8a8910b31be7232b7b2bfa75fde50a0fded4a60"
+at = "ExtendedColorType=u32, Path=u32"
+embedded = "c454931efcf3bca0950e6932a21254397ff8ec800f36b1c691bae1d3bf64674f"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+
+[[fn]]
+path = "image::save_buffer_with_format"
+kappa = "99ee86e55b7ae6f3ff4ddd3508288ad80e25c2dc273ba15fa12e55d9eeec6064"
+at = "ExtendedColorType=u32, Path=u32"
+embedded = "85122816de88e69fbc3186e178f4d41eb42ab705fba44a27825668051f272e93"
+status = "residue"
+cause = "mir::Ty: error::ImageError"
+

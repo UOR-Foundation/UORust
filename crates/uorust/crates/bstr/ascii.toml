@@ -1,0 +1,63 @@
+[[fn]]
+path = "bstr::VECTOR_ALIGN"
+kappa = "62d28e7f7c31e1990c982c412686a58f52983529f71605f68288e09117ad61a7"
+embedded = "2f604d33a43e162472b2aae341b9078ba09b0c7b48f74996f712bdfb9a338f94"
+status = "residue"
+cause = "mir::Operand::Constant: ascii::first_non_ascii_byte_sse2::VECTOR_SIZE: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bstr::VECTOR_LOOP_SIZE"
+kappa = "f5a8c893c950baa1865373fac839082a5338d81bce4b4726c2ab0c0b5d10824d"
+embedded = "04a4ce5ee318dd0c69d9c9919d49eee64fdd61d0ca8c88436f514e2c5e7a7c50"
+status = "residue"
+cause = "mir::Operand::Constant: ascii::first_non_ascii_byte_sse2::VECTOR_SIZE: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bstr::VECTOR_SIZE"
+kappa = "a90082d68c68126b5947c820fd34c7b187b8b20358d9bfa3b8a7108b092dbfd9"
+embedded = "3dd8981eb7fc4cd4107f450d62a538c672f562adea0f37ec8fe65ca85fc1c47b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bstr::ascii::sub"
+kappa = "fcd2d02f13932f5fde85d714def8d1b347913cc948e4a52080e5480c4da89545"
+embedded = "31cd80df8f804f3753fefdb89e6b34da67e398cf7a81970aaccb4e93637fd73e"
+status = "translated"
+digest = "c8a63639b559dae89545a041bfdeebd06dd75e18f9d6d6971353ebfd44fcd632"
+
+[[fn]]
+path = "bstr::first_non_ascii_byte"
+kappa = "4b396530670d4cdb1fd70c9a1ef87074a9394ae3c02260236a59cef9a8d62fa9"
+embedded = "26670f8becd7d28b1717a6a2f669f09706c8268d422804d0cb2c60a83e4aab0f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ascii::first_non_ascii_byte_sse2: bstr's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "bstr::first_non_ascii_byte_slow"
+kappa = "f79a9646db18549f816d8c4ab5c32ae398a26942de9f376e3ab00c700aeb39bb"
+embedded = "58ea0a1c10eff6e35bacc6ecfc4ebf7fa78bc1f75ea3b3197f3e3b68189691d4"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "bstr::first_non_ascii_byte_sse2"
+kappa = "fbdbfb2b46bcd46d504b27efa8b1596a59bb34443ef6cebd2f8ca7b5883cab4a"
+embedded = "800fb1aa5558724ec24fc81160a917b275ef96fbfe1b76fa484adf61d85b4eb9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "bstr::ptr_add"
+kappa = "8b4f14c722f217f6dba5905405b4e723812c5b57e60f65e9031330f1e0258a14"
+embedded = "4d4297f8d12ea54c23aa20bd164515c3fc30f64524f9958108521cf31a7de400"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u8>::add"
+
+[[fn]]
+path = "bstr::ptr_sub"
+kappa = "40ab0b6a25d996c504746a05dfcc1631f9333be77ee7cf97656de0c069ec1534"
+embedded = "d9e93d0be57f70dd79cbb9dd1592f0995f4f536d39a9b644d7ab8b22c9f44ed2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const u8>::sub"
+

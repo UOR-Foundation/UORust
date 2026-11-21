@@ -1,0 +1,1451 @@
+# The petgraph register (written by `uorust crate petgraph@0.8.3`; do not edit): every body of
+# petgraph's MIR at petgraph 0.8.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1611
+translated = 53
+residue = 1558
+
+[module.acyclic]
+bodies = 84
+translated = 0
+residue = 84
+
+[module.adj]
+bodies = 100
+translated = 1
+residue = 99
+
+[module.algo]
+bodies = 304
+translated = 10
+residue = 294
+
+[module.crate]
+bodies = 20
+translated = 8
+residue = 12
+
+[module.csr]
+bodies = 72
+translated = 0
+residue = 72
+
+[module.data]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.dot]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.graph6]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.graph_impl]
+bodies = 384
+translated = 10
+residue = 374
+
+[module.graphmap]
+bodies = 117
+translated = 1
+residue = 116
+
+[module.iter_format]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.iter_utils]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.matrix_graph]
+bodies = 149
+translated = 19
+residue = 130
+
+[module.operator]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.scored]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.traits_graph]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.unionfind]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.visit]
+bodies = 243
+translated = 4
+residue = 239
+
+[embedding]
+bodies = 1611
+embedded = 1611
+evaluable = 1611
+blocked = 0
+
+[differential]
+bodies = 6
+theorems = 55
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 142
+
+[[cause]]
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 48
+
+[[cause]]
+cause = "mir::Ty: graph_impl::EdgeIndex<u32>"
+bodies = 48
+
+[[cause]]
+cause = "mir::Ty: Ty"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Graph<u32"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: StableGraph<u32"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: Frozen<'_"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: Acyclic<u32>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 25
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: MatrixGraph<u32"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: reversed::Reversed<u32>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: UnionFind<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: List<u32"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Csr<u32"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: GraphMap<u32"
+bodies = 15
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Ix"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::StableGraph<u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MIN"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::overflowing_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: adj::EdgeIndex<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: graphmap::GraphMap<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: acyclic::order_map::TopologicalPosition"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: adj::NodeIndices<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: adj::EdgeReference<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: fixedbitset::FixedBitSet"
+bodies = 9
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeIndexable"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: G"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: UndirectedAdaptor<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: adj::Neighbors<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: algo::Cycle<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Neighbors<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::Neighbors<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Label<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Edges<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::Edges<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: hashbrown::HashSet<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::Edges<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::MatrixGraph<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: state::Vf2State<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeRef"
+bodies = 6
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeCount"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Nodes<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ReversedEdgeReference<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: graph_impl::EdgeReference<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::Neighbors<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMap"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FixedBitSet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Matching<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Ptr<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: acyclic::Acyclic<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: csr::Csr<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: data::Element<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dfsvisit::Time"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: feedback_arc_set::linked_list::LinkedList<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: graph_impl::EdgeReferences<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::EdgeReference<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hashbrown::HashSet<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: unionfind::UnionFind<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: visit::traversal::Dfs<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: visit::traversal::Topo<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MaybeReversedEdgeReference<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NotZero<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TopologicalPosition"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WSuc<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: acyclic::AcyclicEdgeError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: acyclic::order_map::OrderMap<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: adj::List<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: algo::NegativeCycle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: csr::Neighbors<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: csr::NodeReferences<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: graph_impl::NodeIndices<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: graph_impl::NodeReferences<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::NodeIndices<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: graphmap::Edges<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hashbrown::HashMap<"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hashbrown::HashMap<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::MatrixError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: visit::dfsvisit::Time"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: visit::filter::EdgeFilteredEdges<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: visit::filter::NodeFilteredNeighbors<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: visit::traversal::DfsPostOrder<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeIndexable"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Ty as EdgeType>::is_directed"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: alloc::vec::Vec::new"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CompactDirection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IdStorage<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OrderMap<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TarjanScc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Topo<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: VM"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: adj::EdgeReferences<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: adj::WSuc<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algo::DfsSpace<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algo::bellman_ford::Paths<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algo::dominators::DominatorsIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algo::feedback_arc_set::FasNode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algo::matching::Matching<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: csr::CsrError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: csr::EdgeReference<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: csr::Edges<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: csr::NodeIdentifiers<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dot::Dot<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Edge<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graph_impl::EdgesConnecting<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Node<core::option::Option<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Node<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::EdgeReferences<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::NodeReferences<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graphmap::AllEdges<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graphmap::CompactDirection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graphmap::EdgesDirected<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graphmap::Neighbors<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: graphmap::NeighborsDirected<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::EdgeReferences<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::NodeIdentifiers<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::NodeReferences<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: traversal::Dfs<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: traversal::DfsPostOrder<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: visit::dfsvisit::Control<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: visit::filter::NodeFilteredEdges<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: visit::reversed::ReversedEdgeReference<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: visit::reversed::ReversedEdges<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: visit::traversal::Bfs<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: visit::undirected_adaptor::MaybeReversedEdgeReference<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Create"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMapMut"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeCount"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by GetAdjacencyMatrix"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoNodeIdentifiers"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Visitable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::swap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: <graph_impl::Graph<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: B"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CsrError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DfsSpace<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DominatedByIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Dominators<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EdgeWeights<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EdgeWeightsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GraphError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Id"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MatrixError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaxScored<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MinScored<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NeighborIterDirection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NoSemanticMatch"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NodeWeights<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NodeWeightsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PathTracker<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RankDir"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: adj::EdgeIndices<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: adj::List<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: adj::OutgoingEdgeIndices<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: adj::OutgoingEdgeReferences<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algo::dominators::DominatedByIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algo::dominators::Dominators<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algo::isomorphism::matching::GraphMatcher<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algo::isomorphism::matching::OpenList"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algo::matching::Label<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algo::min_spanning_tree::MinSpanningTree<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algo::min_spanning_tree::MinSpanningTreePrim<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algo::scc::tarjan_scc::TarjanScc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::TryReserveError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: csr::EdgeReferences<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::FilterElements<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dot::Configs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::EdgeIndices<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::EdgeWeights<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::EdgeWeightsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Externals<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::NodeWeights<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::NodeWeightsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::WalkNeighbors<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::EdgeIndices<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::EdgesConnecting<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::Externals<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::WalkNeighbors<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graphmap::NodeIdentifiers<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graphmap::NodeReferences<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: graphmap::Nodes<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hashbrown::HashMap<usize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: indexmap::IndexSet<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter_format::Format<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::IdIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::IdStorage<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::NotZero<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: traversal::Bfs<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::filter::EdgeFiltered<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::filter::EdgeFilteredNeighbors<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::filter::EdgeFilteredNeighborsDirected<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::filter::NodeFiltered<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::filter::NodeFilteredEdgeReferences<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::filter::NodeFilteredNodes<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::reversed::ReversedEdgeReferences<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::traversal::WalkerIter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::undirected_adaptor::MaybeReversedEdgeReferences<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: visit::undirected_adaptor::MaybeReversedEdges<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: bytes_vector_to_bits_vector::{closure#0}: mir::TerminatorKind::Call: graph6::graph6_decoder::get_number_as_bits: petgraph's MIR stops at mir::TerminatorKind::Call: alloc::vec::Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: compute_shortest_path_length::{closure#0}: mir::Instantiation: u32 for a parameter bounded by EdgeRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: get_bits_as_decimal::{closure#0}: mir::TerminatorKind::Call: <u8 as ToString>::to_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Build"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ControlFlow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by DoubleEndedIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoEdgeReferences"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoEdges"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoEdgesDirected"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoNeighbors"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoNeighborsDirected"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoNodeReferences"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Nullable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by VisitMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Walker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item graph6::graph6_encoder::N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Ref: BorrowKind::Mut passed to <&mut u32 as IntoIterator>::into_iter"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i16 as PartialEq>::eq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i32 as PartialEq>::eq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i64 as PartialEq>::eq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i8 as PartialEq>::eq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&isize as PartialEq>::eq"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <alloc::vec::Vec as Index>::index"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <alloc::vec::Vec as IndexMut>::index_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as Ord>::cmp"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::as_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: algo::matching::dummy_idx: petgraph's MIR stops at mir::Instantiation: u32 for a parameter bounded by NodeIndexable"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: algo::scc::kosaraju_scc::kosaraju_scc: petgraph's MIR stops at type outside the lift: <u32 as visit::GraphBase>::NodeId"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::get_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::get_unchecked_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: graph6::graph6_decoder::get_order_bytes_and_adj_matrix_bytes: petgraph's MIR stops at type outside the lift: core::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: graph6::graph6_encoder::get_adj_matrix_upper_diagonal_as_bits: petgraph's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: matrix_graph::ensure_len: petgraph's MIR stops at mir::Operand::Constant: the constant item <u32 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <graph_impl::stable_graph::StableGraph<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AcyclicEdgeError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArticulationPointTracker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Buckets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Direction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DominatorsIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EdgeFilteredEdges<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EdgeFilteredNeighbors<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EdgeFilteredNeighborsDirected<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EdgesDirected<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FasNode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FasNodeIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Frame<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: G0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: G1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GraphMatcher<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IdIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchedEdges<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchedNodes<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeReversedEdgeReferences<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeReversedEdges<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NegativeCycle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NodeFiltered<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NodeFilteredEdgeReferences<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NodeFilteredEdges<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NodeFilteredNeighbors<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NodeFilteredNodes<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OpenList"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OutgoingEdgeIndices<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OutgoingEdgeReferences<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReversedEdgeReferences<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReversedEdges<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WalkerIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::articulation_points::ArticulationPointTracker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::astar::PathTracker<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::dijkstra::AlgoResult<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::feedback_arc_set::FasNodeIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::feedback_arc_set::linked_list::LinkedList<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::feedback_arc_set::linked_list::LinkedListEntry<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::feedback_arc_set::linked_list::LinkedListPosition<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::isomorphism::matching::Frame<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::isomorphism::state::Vf2State<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::matching::MatchedEdges<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::matching::MatchedNodes<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algo::scc::tarjan_scc::NodeData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Chain<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Filter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: csr::Csr<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: csr::EdgesNotSorted"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dfsvisit::Control<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dot::RankDir"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Edge<core::option::Option<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::EdgesWalkerMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Frozen<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Graph<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Graph<alloc::vec::Vec<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::GraphError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::NodeIndex<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::Pair<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::StableGraph<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::StableGraphEdge<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graph_impl::stable_graph::StableGraphNode<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graphmap::AllEdgesMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: graphmap::Ptr<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl VisitMap<G::NodeId>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::MatrixGraph<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: matrix_graph::NeighborIterDirection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: scored::MaxScored<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: scored::MinScored<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stable_graph::EdgeIndices<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stable_graph::EdgeReference<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stable_graph::EdgesConnecting<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stable_graph::NodeIndices<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stable_graph::NodeReferences<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: visit::dfsvisit::Control<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: visit::dfsvisit::DfsEvent<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: visit::reversed::Reversed<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: visit::undirected_adaptor::UndirectedAdaptor<u32>"
+bodies = 1

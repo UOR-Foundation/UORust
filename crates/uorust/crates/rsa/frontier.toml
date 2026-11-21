@@ -1,0 +1,221 @@
+# The rsa register (written by `uorust crate rsa@0.10.0`; do not edit): every body of
+# rsa's MIR at rsa 0.10.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 237
+translated = 2
+residue = 235
+
+[module.algorithms]
+bodies = 42
+translated = 1
+residue = 41
+
+[module.encoding]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.errors]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.oaep]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.private_key]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.pss]
+bodies = 76
+translated = 0
+residue = 76
+
+[module.public_key]
+bodies = 19
+translated = 1
+residue = 18
+
+[module.traits]
+bodies = 8
+translated = 0
+residue = 8
+
+[embedding]
+bodies = 237
+embedded = 237
+evaluable = 237
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: errors::Error"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: public_key::PublicKey"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: private_key::PrivateKey"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: pss::signature::Signature"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: pss::signing_key::SigningKey<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: pss::verifying_key::VerifyingKey<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: D"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: pss::Pss<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PrivateKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: signature::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: zeroize::Zeroizing<alloc::vec::Vec<u8>>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Signature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::modular::BoxedMontyForm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: oaep::Oaep<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: oaep::decrypting_key::DecryptingKey<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: oaep::encrypting_key::EncryptingKey<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pkcs8::SecretDocument"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: spki::Document"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: spki::der::Any"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CrtValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PrecomputedValues"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::Choice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::modular::BoxedMontyParams"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: oaep::Oaep<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: spki::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: spki::der::AnyRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: traits::keys::CrtValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item public_key::PublicKey::MAX_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::fill"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BoxedUint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::generate::RsaPrivateKeyComponents"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: const_oid::ObjectIdentifier<39>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto_bigint::CtOption<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pkcs8::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: private_key::PrecomputedValues"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: spki::der::asn1::BitString"
+bodies = 1

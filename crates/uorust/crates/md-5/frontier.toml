@@ -1,0 +1,90 @@
+# The md-5 register (written by `uorust crate md-5@0.11.0`; do not edit): every body of
+# md-5's MIR at md-5 0.11.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 32
+translated = 1
+residue = 31
+
+[module._]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.block_api]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.compress]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.consts]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.crate]
+bodies = 13
+translated = 0
+residue = 13
+
+[embedding]
+bodies = 32
+embedded = 32
+evaluable = 32
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Md5Core"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: block_api::Md5Core"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Md5"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: digest::typenum::UTerm"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: compress::soft::compress: md-5's MIR stops at mir::TerminatorKind::Call: compress::soft::compress_block: md-5's MIR stops at type outside the lift: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: compress::soft::compress_block: md-5's MIR stops at type outside the lift: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: digest::const_oid::ObjectIdentifier<39>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: digest::crypto_common::hazmat::DeserializeStateError"
+bodies = 1

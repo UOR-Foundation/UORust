@@ -1,0 +1,35 @@
+[[fn]]
+path = "sqlx-mysql::transaction::MySqlTransactionManager::begin"
+kappa = "74a91daf07175c4e1bc6d60bc8637e0d5d8eea6008c1af03f46ea5dd88dbd325"
+embedded = "65fd8bde9b5248d993025a2c7c07af36af9a0d0f75c65b41914be4b4fbd78c09"
+status = "residue"
+cause = "mir::Ty: {async fn body of <transaction::MySqlTransactionManager as sqlx_core::transaction::TransactionManager>::begin()}"
+
+[[fn]]
+path = "sqlx-mysql::transaction::MySqlTransactionManager::commit"
+kappa = "e8dc03c09c97f831b943797a6a1c279fb1f9647e48ea0885b0af7373d963b8e0"
+embedded = "6daac601439941a600492da5f6716eae8907689c4edd03caa9743cef07cdc20d"
+status = "residue"
+cause = "mir::Ty: {async fn body of <transaction::MySqlTransactionManager as sqlx_core::transaction::TransactionManager>::commit()}"
+
+[[fn]]
+path = "sqlx-mysql::transaction::MySqlTransactionManager::get_transaction_depth"
+kappa = "616149edccaa0d522e007118c28181328d26f221a1f9cafa578ad0ecc69e2589"
+embedded = "cfa0afeb2314228a8231d1668263e3808d6baab07c38592813454363d480e6f5"
+status = "residue"
+cause = "mir::Ty: MySqlConnection"
+
+[[fn]]
+path = "sqlx-mysql::transaction::MySqlTransactionManager::rollback"
+kappa = "aa0c13509b99622c2426bdd04e833716754d7ae3b0e5e76c4b06b879e4cf474a"
+embedded = "2583b3ffb4ffb37aaa19c99c866c19952e76765587b423abceb2387fb74ecc02"
+status = "residue"
+cause = "mir::Ty: {async fn body of <transaction::MySqlTransactionManager as sqlx_core::transaction::TransactionManager>::rollback()}"
+
+[[fn]]
+path = "sqlx-mysql::transaction::MySqlTransactionManager::start_rollback"
+kappa = "df98b78261c32a2695d53dec2d906427dc33cea9d338d87f8073b8472bb050cf"
+embedded = "1944f18695b61c8971fabdad4183c0fb731085ac99a34c4dd81d75442e25a219"
+status = "residue"
+cause = "mir::Ty: MySqlConnection"
+

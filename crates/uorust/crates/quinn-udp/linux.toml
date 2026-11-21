@@ -1,0 +1,100 @@
+[[fn]]
+path = "quinn-udp::SUPPORTED_SINCE"
+kappa = "afff8e35c54427ced0aa9d256287fa3adad81cbd69b3ac0a5e67f1986a1a969e"
+embedded = "24f12988c54cc28b28b6b26c1ff70b50c41409cd34a225b3e914b67a0d79ac20"
+status = "residue"
+cause = "mir::Ty: linux::gso::KernelVersion"
+
+[[fn]]
+path = "quinn-udp::gso::<impl at src/linux.rs:256:14: 256:16>::assert_fields_are_eq"
+kappa = "4c3bd7facaa508a021be1d58d1e8d27c98c29a1787f2f53524dae851d84d410c"
+embedded = "08798ccc67bfb15ee6fd46623182e16456118d5d8891cfa76cfe095f05f9aac5"
+status = "residue"
+cause = "mir::Ty: KernelVersion"
+
+[[fn]]
+path = "quinn-udp::gso::<impl at src/linux.rs:256:18: 256:27>::eq"
+kappa = "ac6c02ad320f72cdf484ee8b0a5a06c76ff99ac7980537db6525c107d37eb93e"
+embedded = "a095ad79f943acefc08f531a7bac7c1295a7a5b317dec42e2bdf44af6e8d1a29"
+status = "residue"
+cause = "mir::Ty: KernelVersion"
+
+[[fn]]
+path = "quinn-udp::gso::<impl at src/linux.rs:256:29: 256:32>::cmp"
+kappa = "cc2ad4c62722d5d7dc3e1c64741f19d79ed7c464d4551c4114541ca2553ef658"
+embedded = "34feae768680fd622723f8f9afbc9541076110a26b5644071dd1e013d68769b4"
+status = "residue"
+cause = "mir::Ty: KernelVersion"
+
+[[fn]]
+path = "quinn-udp::gso::<impl at src/linux.rs:256:34: 256:44>::partial_cmp"
+kappa = "18006c8aa5f2328f1862e9a004e3ce4623b2e7554005f46b6d5978956ef67124"
+embedded = "549c0d9a6145130f8db89cf86c3a460a1bd5393d32087dd769cd58eb737570e1"
+status = "residue"
+cause = "mir::Ty: KernelVersion"
+
+[[fn]]
+path = "quinn-udp::gso::<impl at src/linux.rs:256:46: 256:51>::fmt"
+kappa = "c1982701e1c070b02dd8e5f551531f74816cdc09419d27d3170ceaab845d5974"
+embedded = "288690fea4da7269fb20048bd777b199208f90f0e571310bd88043a541639d8a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-udp::gso::KernelVersion::from_str"
+kappa = "346d74f0f1b4ac6a3946f65f95ff574dc55c7e97051c8874c3340d4f935332af"
+embedded = "ef60aaf29a62c3ff4c3ff28a9644b67267b6d373ae57619191641ab4683d1ff3"
+status = "residue"
+cause = "mir::Ty: linux::gso::KernelVersion"
+
+[[fn]]
+path = "quinn-udp::kernel_version_string"
+kappa = "4b211f35644e331f1b58357a49522dcf3707a7bed89d7503a93a2b9df23ca22b"
+embedded = "9952e27223b2dcaaf79f4cc47b4af55dbc52b175646bf0ebac8c48d746b21385"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-udp::linux::LinuxError::decode"
+kappa = "80d30e826cb08e902b0e4d516bb1616bd02832ad1be1c6818a6527d1fed25e0a"
+embedded = "5245cbd950cc61ad094497dee3bd187c54f9f04a3f9b5fc0cfd60cc45aaa4a21"
+status = "residue"
+cause = "mir::Ty: linux::LinuxError"
+
+[[fn]]
+path = "quinn-udp::linux::LinuxError::recv"
+kappa = "56585a4fb8e0bfe1e495dfed56280c5820d2dc16472ffe376680c42974765e06"
+embedded = "db8c2d35b5238dd5b7793218a5783519645e2c059e9768f11729bf94f20d55eb"
+status = "residue"
+cause = "mir::Ty: linux::LinuxError"
+
+[[fn]]
+path = "quinn-udp::linux::TransportError::from"
+kappa = "6cc8e94bd21fc97c99ee8476af5dd3a0e088df4194b80dc5759dc67572761697"
+at = "TransportError=u32, TransportErrorPayload=u32"
+embedded = "57921bd78cbea75b6575fb9a41a13c68e4464ceb8c9f7e07fe9882e23d20ce9f"
+status = "residue"
+cause = "mir::Ty: LinuxError"
+
+[[fn]]
+path = "quinn-udp::max_gso_segments"
+kappa = "e53fa7f701ba08e6c9d8a33eb05fc7e038f9b273ea14c56da8030b9a41ba0d3c"
+embedded = "26c07774d05d23c57f7bbfbb9582dff5778df6d96d1e3a1ad0fc8c9f2778ac16"
+status = "residue"
+cause = "mir::Ty: impl AsRawFd"
+
+[[fn]]
+path = "quinn-udp::set_segment_size"
+kappa = "1167ffc049bc321621921c56336522428002544dd7149af70c45009b68c2c4fd"
+embedded = "a95986e13549f06017131982085906ea2b29648c6355fa781f14e063a3b5291c"
+status = "residue"
+cause = "mir::Ty: msghdr"
+
+[[fn]]
+path = "quinn-udp::supported_by_current_kernel"
+kappa = "51e392a5ebe2d2dab3a537e5b4ab07ed412c0417ff10aed9d6ac073e86013324"
+embedded = "abbb232bc88704201d2c6fd0ca58a1550e97d2c5d7aadadb0b4c779168f4e671"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

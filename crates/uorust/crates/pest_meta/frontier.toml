@@ -1,0 +1,162 @@
+# The pest_meta register (written by `uorust crate pest_meta@2.9.6`; do not edit): every body of
+# pest_meta's MIR at pest_meta 2.9.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 225
+translated = 1
+residue = 224
+
+[module.ast]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.optimizer]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.parser]
+bodies = 102
+translated = 0
+residue = 102
+
+[module.validator]
+bodies = 64
+translated = 1
+residue = 63
+
+[embedding]
+bodies = 225
+embedded = 225
+evaluable = 225
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 4
+
+[[cause]]
+cause = "mir::Ty: parser::grammar::Rule"
+bodies = 87
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: ast::Expr"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: optimizer::OptimizedExpr"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ast::Rule"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: validator::stack_loops::AbsStack"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: validator::stack_loops::Outcome"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AbsStack"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: optimizer::OptimizedRule"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: grammar::Rule"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ParserExpr<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ParserNode<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: parser::ParserNode<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StackAnalysis<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StackBase"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ast::RuleType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ByAddr<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Outcome"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParserRule<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ExprTopDownIterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: optimizer::OptimizedExprTopDownIterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::ParserRule<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: unwrap_or_report::{closure#0}: mir::AggregateKind::Closure: unwrap_or_report::{closure#0}::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExprTopDownIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptimizedExprTopDownIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::ParserExpr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::stack_loops::ByAddr<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validator::stack_loops::StackBase"
+bodies = 1

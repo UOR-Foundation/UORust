@@ -1,0 +1,2297 @@
+[[fn]]
+path = "petgraph::UNDEFINED"
+kappa = "62395f2df5751e0cfcebfb81a088ff7b3fdce692ac9f85a9afc537a61384f7cf"
+embedded = "3c3cb076411451d97676d1904dab049606f4b26ea3be7a82218cb7049e99fdf8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "petgraph::_dfs"
+kappa = "8a636918a6871c589de807f4e3f53d89366c4436e2d5c7db109ddf84d67c11bd"
+at = "G=u32"
+embedded = "2eb552bd4871a87869f071f611e3b232a3da2b34dd810b24c43c843cd73ffcf3"
+status = "residue"
+cause = "mir::Ty: ArticulationPointTracker"
+
+[[fn]]
+path = "petgraph::_floyd_warshall_path"
+kappa = "90c0a9cbe07b8d15917e02cb8c4f82dec0d90be24957c4e6e8b49e21ea3df31f"
+at = "F=u32, G=u32, K=u32"
+embedded = "34bb93376d656b9acc38badb97537b30ff11e96502b51ba96d135b8bbb753d21"
+status = "residue"
+cause = "mir::Ty: algo::NegativeCycle"
+
+[[fn]]
+path = "petgraph::adjust_residual_flow"
+kappa = "cb45af1ab73d42d55824f6965319545835b66cf029bf219f42e0d1767e095fb4"
+at = "G=u32"
+embedded = "f021b072662bbcf2d9ce19369cfaeada42f34eda86dff229d3d27e58c23635a5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeRef, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::adjusted_residual_flow"
+kappa = "905c15b4f408ff5e8987a75a9db7d47269f340b9b9b0f5c1a7ed8ae65f7d5757"
+at = "G=u32"
+embedded = "745e084314f3326a3cea1551c3ad04c37c3838fc2f8b632c9264503d1f34a4b7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeRef, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:300:10: 300:15>::clone"
+kappa = "f3599438d194d4e8cef0f218b13e05e9d82117f682e1ddcfd8c0334c672a0199"
+at = "N=u32, VM=u32"
+embedded = "30c95998169d23e86746455948c507393e39891be56435de4dfea42ae9440854"
+status = "residue"
+cause = "mir::Ty: algo::DfsSpace<u32, u32>"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:300:17: 300:22>::fmt"
+kappa = "e42565be2290858af39dfa507641c074e3362aaee35c00496bf82b45451a87b7"
+at = "N=u32, VM=u32"
+embedded = "2d2123bfae0dbe84b86612785b07d3c0f7d5912864b47fc0c0b909a2a4c0af81"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:517:10: 517:15>::clone"
+kappa = "f810c3dfe6724e3e81473c486bdae51d8b3f72b5e585488572c2c3d04aad3e10"
+at = "N=u32"
+embedded = "2a2bd5ec7fabaa715bb187a4b9a9b59e92d5c347aa6ea53e225ef04b507e2340"
+status = "residue"
+cause = "mir::Ty: algo::Cycle<u32>"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:517:17: 517:22>::fmt"
+kappa = "50ea1463674244fd96e0892729e791f22145ff2fbb5ff442e3dac9fe9e368dc2"
+at = "N=u32"
+embedded = "66d836d07246d871a4b79b1b1222a5d6029a54d8348966fa0b347cdcab2cb0ee"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:517:24: 517:33>::eq"
+kappa = "9d3e86da383403510eb3f71f89baa78c25049fcdc59e2d0ee984a518c7b991ef"
+at = "N=u32"
+embedded = "08b2d43858bdf121f31ebf4f5877296ea2efb158346609a1cf299fc88b0d15c9"
+status = "residue"
+cause = "mir::Ty: algo::Cycle<u32>"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:531:10: 531:15>::clone"
+kappa = "e900358833f634055cb44195389cdd2a858bf7a853c8bab65047e29439bf9fbf"
+embedded = "072d6f796bd14b45c5a0a74e9763c3fda70ff4b65dcc76651d9e9e9725b77db0"
+status = "residue"
+cause = "mir::Ty: algo::NegativeCycle"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:531:17: 531:22>::fmt"
+kappa = "d27689bf95bc74d285fda5e46bb42fde7f51f36cb41fe7608cd7a9506e04be15"
+embedded = "7563f591d787cbd060d509c5a68ae9fb8bbd7aa7f5f0914aa0a0fd05c8c54b54"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:531:24: 531:33>::eq"
+kappa = "c470e643f8027314e53e34f480e9919dc1d0420e22358e932a7b505d42ceaa25"
+embedded = "e4b1a366033c26ef9d6945f51a3b948e2f7a5770ff7ddabd4ce24573ef245833"
+status = "residue"
+cause = "mir::Ty: NegativeCycle"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32"
+kappa = "cb7769e654c50ee85faa48b8db2a1a43e6ca390afc700bfab84f50f47b0f2179"
+embedded = "b0c9c76722a1acc138b8c9ad0bb6e7d826526758f5e6ef332ea31024c3ede2f2"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#10"
+kappa = "e7370f1b7d37b22b50e3427918a402de0504c7eb606605f736d0f966819d588b"
+embedded = "1de7b46893d3cdf27d86d72c361e6f2c39bff0783b6e7182644e66ef0333b43b"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#11"
+kappa = "5b06db9ecdb65a1c58382bf1f0171f40c1e34ac1951cd17d212a8599bcc57fa8"
+embedded = "efbd089e58415c2a6d16177909c5d90da78af25fd6a908284118324002bf42b7"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#12"
+kappa = "050d46aff907948e3528415e2bf51f7247c89a2ec5b7c972b0ea6b251ae6f00e"
+embedded = "0a959fea608698f7d73077ba34f76f87e51add779d95d9ee019170010bd83320"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#2"
+kappa = "4aca75a54a54719b5637494c407947185011779bf92e97ef5b81f5ab5489f9b5"
+embedded = "9f772c165243341d3a356e2ef3cec05587964a9dd474fd99c68ae7fac7cc5a95"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#3"
+kappa = "e74da8eaf91c4a49b7fc899d8e5a5086eb80f5326ebea6091ab8f074687a7c9c"
+embedded = "ee335b0b95009ebe42a7abd56b83d386d8d1ff80f30883ad1eb956d4e685c8d6"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#4"
+kappa = "e1de5952b9b0fbbc7caa0fdb46c6a4c248833eed8c06bc33484d4486b1822e70"
+embedded = "c53c8e4f841b3a42f1715cbb094e3b674811cf13bdcdcf84afd206556b7b89ee"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#5"
+kappa = "e0d3c5f89ef52a0ab29abbd0e09880422dd44c2ea171e11e0d4467b8bd5ce2e0"
+embedded = "b5892744691fe9137c703e82a00a22511d94e79d8df2409bc46e2237c5db6d2d"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#6"
+kappa = "8ed9ae5bb25107e97342733761643931a0a8b5752ca53501404ee1ca6cdb2bab"
+embedded = "9e81f20dc487d72b803c2125e89f76683d9132e49a720f96de19fc4956e67ea5"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#7"
+kappa = "a5f68cbf0872dca0e4408693d41f1736294c4949ea60a28b95062d95ea322c84"
+embedded = "54ac71685d1b081d25a8122b8d5ee39a7a90e2d7f8bef2433b65a982bf85b566"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#8"
+kappa = "5e0ebbfa1cc3fbabf03e09f621d36fd2bd0670e60d384d423b4a3ba8fe3ee3ab"
+embedded = "32b7dd813edefd433d28d23ccdb1a32fc8a2d66d294daf1498789b42317d9cac"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f32#9"
+kappa = "66fd68208a6c0df3ff556674d799bd50d368a9842e4bfc465b2067974cd47aa9"
+embedded = "a22e6505181406ce61ddbe1bab1ad5e2fbf29ee5d786045a530475ade40ccd1d"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64"
+kappa = "4a14089d576d02aedc725da1c6c6c1c310f340d6aa9597f9569ecda067b49e3e"
+embedded = "b9b3581ee4db000b5dbc9817379b3ada63e49421fcf6e63b48cb249881f2b1bc"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#10"
+kappa = "d782b2cd395fb331aa2410cbab32ee5893b9dfc51f2a0e07828993e88bbddf6d"
+embedded = "704b0c5da2185852d083bb839d3c9663e8c11bf9861d6f0243ad5438d6478eab"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#11"
+kappa = "8d3acb6730bb66c8886261d846bf8d846e120168bfd334d6e0f4ffcc5ad51ef3"
+embedded = "6d7baad7648846e39b691a90037a932f33af7ccc572ab89a2dd668be309ed64c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#12"
+kappa = "cb230748b608097ad252e3470d3c295fe1dc8133fc95b0666bf2f8da70ad31a9"
+embedded = "b89aa32293f51c7229ff10809fb1bb54e3ae959b318e56578dc056f8bb4e7596"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#2"
+kappa = "8d7ad8e72b2d63da633073d7bc2769239316d9d2e918bb87575cbd7e67c1db40"
+embedded = "5f18ac68439c4f3308d72ac22f7705307956685f154f1406343cc282eb863a46"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#3"
+kappa = "66e58b0c33477936e971fdbf20bb53fed1dd8ec47ef4c63b91130111d5a1f443"
+embedded = "4922f60b4b067b510acf20c8879cc14c777c960c6cf16ed6328dca8adf63c272"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#4"
+kappa = "e83c0c05945b0754f42f38b53bc43ed300b6418a049b15cd4458570548ae5aee"
+embedded = "b4dff2d2fc0dc9499a315f3279bf7154c61a767bdf5d9fafd0bd37638b0ff94c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#5"
+kappa = "2bdc8b0540af9895394be41ab4d904248a1eb937e62d5f68af1412943803b85d"
+embedded = "bfd21f94cd48d8ff74cf3b19138b6e65cb99c526667185ddde4676ee0c56292c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#6"
+kappa = "31cd7ee6747a6522bc9d02b29b7731436323c1b724ca1172557107009c33e19c"
+embedded = "ff9ca2160fa53c5135330c390634300b18b2a960483fbb2c7c5683ecdb200a72"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#7"
+kappa = "2b57bb08a320427b9fd7be55bb7f63053f737cb3368dc2b3542bc65b1396827f"
+embedded = "0d0c273daa3945ace4f5a66ebe40aa886cde3b6d42eb3d8dbc145d7ddf8cf92b"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#8"
+kappa = "7326782de2231d12e0a5cdd53c21df7e1c5aacb31cb492a41ee289cec8c23f31"
+embedded = "cc5452d12da8890772b2a7cb5451b71aff4a7ef080b5d43aeff1162f3c80d41d"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::from_f64#9"
+kappa = "ecce94b634620781cc226b5be26301c1b9cc0b6b86486b62c7368509b7ddf0dd"
+embedded = "c0a50592ed610a26bc79bf2c27693634e5c75f0d6869316c74f63efde3c1d3f4"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max"
+kappa = "50a1d36de1fea5ea9fc5823a4e4ad54781df434d2254b42cd286637a119409e4"
+embedded = "a40a306eb428b3d4a62bf0fe52ae9c2e6c5e1e6494086ca509d301d88a3ed5f0"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u8>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#10"
+kappa = "97f9d98649e08b3617b62dd5369a9568f4036eaefc68d3e3c8f187967df9ef46"
+embedded = "14a9ac1c5dba72ba6bd0fcb24f152968a501f2848857c77f56d7d9454c55550c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i64>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#11"
+kappa = "a5527b15d58c8a4dbda4cb1366a1ec78f8531517b16004421849260f2cf83871"
+embedded = "9655c325ff2849bb796841f594a80e6ddb57a69f6c5d33979763acc5a62baa10"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i128>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#12"
+kappa = "ffe0c79acbf2914ca535c52311586bb7d5e77b259bf5345a80b76b20c55e6e47"
+embedded = "087806e3fa96d9a4bb366c04b9af347e7de95cc2b9a7596b0faa604de265b3c7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#2"
+kappa = "cd904dbfe894fefddfc6d9759a88de1aeae56a5671b16773cca76fd945432b43"
+embedded = "1bfbaff5e568a51de2f1484d042ff11f5365593742bef47afc789b03c8624398"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#3"
+kappa = "2dcc6b63a60b55963c931e4a67401b24977d72320232e86d3a005d3542cf05c6"
+embedded = "fd0821ffed07a813bce73188b81b2d2f6326f45d63d51ccd138adb118e334d51"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#4"
+kappa = "e63c88a2be0bf330582d3083de9fe6d4f3cc1d949048e553bac91296506e431d"
+embedded = "c71a0812348fe8c5c136d3a84b742a4d70bbf29909d11c6d09862f69022d5550"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#5"
+kappa = "cf7e149dd593c3ea705b67708425537ae5b7de307dbaaf7a0d084e17d4fc773e"
+embedded = "6c8f8c27b64d4be4d34059ecc7128ff07103418ec5f7822cb0de0ccbd4178c60"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u128>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#6"
+kappa = "94ffd939e7c17afe97d29ea894a0ec9ed42b044afdb4fe58e7a924f7268c9ecd"
+embedded = "2c094c4dcdaa46fd94d513ff999a5e448a9920630fbd6ca99327f63cf062b9f0"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#7"
+kappa = "25817c5784fb61919754483b94a6cf6d2650196db49042051de6a01c7d6e2466"
+embedded = "5819c848522cb54d2b626a08bdaa8b5a4d0119b552cec23ee9a511f0d9133e52"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i8>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#8"
+kappa = "069f727412663bb8b58d84724a3cec95e348e7277fb74a9a6b53c571e265536f"
+embedded = "f38556621cce93227676e74beef876b3d9069d91d08e39867ab0ba0ef997dc67"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i16>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::max#9"
+kappa = "e97a983897022619a8fa1fecc007c65259569f2236e19cfbe0b0673b30a9e0c1"
+embedded = "ffef302b6b07cee3d1d8ec4e0aefa57dbc8e8b25d3cf6c696a692dd79bad40ca"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min"
+kappa = "b9258348d061420b83241b168d15f9d9b54753f56d9936a51483d95d745ead61"
+embedded = "e24979a306dd865c2032676aa38284fe485dc193de6651b159627c86d40ccaec"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u8>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#10"
+kappa = "c1dfc8d44f54c8b2494bc6ba36670511dc7595c9a8befbbb505eb4f45fa0b097"
+embedded = "3b28b1ee276feb4994a5d0cbc7ae9381a99431090046333e1a75f54de394ca41"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i64>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#11"
+kappa = "e892df3d2581abb8cc8e9c9b004d9250f2584438d7dac57121a643d451f9a33d"
+embedded = "fde90f6fb5ebbdcec7363399378a9395c1f2554f613ee56940ee58294b24a15a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i128>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#12"
+kappa = "45e70a4b9b351c5b2ed110baaae5ff5ca7db34bd76a1412aa2fac6c9f0b6b415"
+embedded = "c546609e4171698582d8a1834b30423b7b2503ea5ed216d84ea567ae478016d9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl isize>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#2"
+kappa = "e35e587b86cc131ba77235f1e3ce5f24398d19cb1bd6d75c4f844c53771e1c1f"
+embedded = "0d6e2095aa860dfe54000d8282d6b5fac37a494a18f61933fd118299c11cf0b2"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#3"
+kappa = "7f69894801848ae344f4389d498ec67f7fe20ceb27ba2c01636ae35884fbd072"
+embedded = "2fd92707367dde4796f2e8f52e23a5bdc2823912abe2b3afb10bfc959ce507f8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#4"
+kappa = "f9dccabbbdcb07a3bffe590b11acdf95071232de43fe1eb600ce28e1c6c6abd3"
+embedded = "5b1082e4e2896d857e6d6da33873f532bb6b4411a1ffc38ccba1bd5afb459e56"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#5"
+kappa = "0072100f33ef06bd2a74623f9d300e2d287003c01a2c6dcb41a02a69b4364183"
+embedded = "b1cd6e78ef6b02f4fe0fffc35b0a0602fef7ea4fe1b612c7931516587f23e2ea"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u128>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#6"
+kappa = "f9a14ef70fd987547a4338936a8a5cf81c370eb8850c3cb177dbe7a3dac9c056"
+embedded = "8b73a08722bae81200dc01d5d578bcf8d0d5eccf043ec9ec813978b7e1f43a22"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#7"
+kappa = "af0fc83478e1ab3651cb81f3ddcd18fab571808ec6ec2e4fa6073d14af990609"
+embedded = "8e911288077ee84ad16d49d79f697e0fcb23f2e2a5e4390c2990916e1fd29c58"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i8>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#8"
+kappa = "b6e10add9cdb97085270296cdbc8e1409eb7171a5cd989170ddb99538863d0a4"
+embedded = "a408941513f4c4ebcea5f6fa6b7aba3022e919a3a865ecb8d8e6fdcb63ff3fd2"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i16>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::min#9"
+kappa = "9a1bf93d52e346371a1f433f565cab10b5fb4247189df36b182533206a99d248"
+embedded = "1ac04b4a6842c3c9dc9256c3bc546d471e3278ee2cc86a5604fcda2687544f9a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl i32>::MIN"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add"
+kappa = "35530452dc8a28f16482c26f8326be12a4a80832cffe26c8e4722a763cd5836f"
+embedded = "25b0e10d920e4844e869f855394e558b9ba67a36a5952cb12aae099fbd40b97a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#10"
+kappa = "7cfe8aa968ce516699122ab160c0c6cecdaeeb468f921a20586949d91933c9a2"
+embedded = "91ea2a47ddebfcc2d6c9b82d178d47028dcf592fdf3da5ab6889023cb9ad1be9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i64>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#11"
+kappa = "fe83dfa9f62915fd77025faecec75dff7d034e653dbf0941401db806c1aef3b6"
+embedded = "f1c162e57153e7a91dcfc35408087c6296543c87b7e63a5046c02430c368ed17"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i128>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#12"
+kappa = "3cdf72c1d809ef002fc2249d950c6e76e82d52341e1a8e4bfb15be7338fe9a62"
+embedded = "63794eaa590ff2fefcd3239e7e554f508006dd777fba75853d7bfaa87a5e89d3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#2"
+kappa = "9a1fdc6e1975ddc00a9ba255f5079bc3a8880525e0afec35fcb8e3a09e25b2da"
+embedded = "8c58a365c4c1c2f7fbbcb67640c2c35cd877aec20d0d691bfbc4d3c83b312687"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#3"
+kappa = "6e7be52441a927d1a1313f1ae3fcc2b1df1cd83d04b7502706ad7873f367c992"
+embedded = "00140096f256907e68d94193b7772386ad3e87030d8acc0ddd2dcbed2d78d494"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#4"
+kappa = "5396b69054d7aa0f3de2337d393b3002172c05744a20e8e2021f8d90472f500b"
+embedded = "104ade9f8749a281e52c21c269aa566dbece4ac990dc2268869fd3f9ebdaa631"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#5"
+kappa = "6a1e3a13970c30385ba2a126884c849cb649f060b216d13cf6f590185000b80d"
+embedded = "638ecc959b80c27b3a271362faff0d474b09a1daade4f91c7dec08dccf6d2699"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#6"
+kappa = "4e598b8f1f716a6241405c1cd6e12d3d908c9d7d9e348958df90b2719ab92a50"
+embedded = "733e2d7fff2fcab8a339c7593a1302f09337650f626a4b32dd662ad825fe5e43"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#7"
+kappa = "ae8ef52f301df5e1a9544d8e153b87763a9362fcab965d44f4b648889d7436df"
+embedded = "73d5e44356bb215c61b7a63262288f266e932991aa4a5105b82a6d1dd057cdaf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#8"
+kappa = "b514bb232538d5b6764f3a0ef0dbd9fe945c6f96475d79090e84b25b550a1c39"
+embedded = "d7d9d18cc0e3f45edfea62db03c14726d3a5788e828cfd2f66b7fca2eb068db7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i16>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:664:13: 664:39>::overflowing_add#9"
+kappa = "9c5680a047d5f6ee6ff044e6880dcf167ab2e90a8046a4c984d4d28cade48101"
+embedded = "c4110459b940bb05449a104ba6add93bd2b41248780e014db2a87f48439aed4b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::overflowing_add"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::from_f32"
+kappa = "1b96acf53126753563d606141b863b949e2579a0c2fad2a18d584f570aaca7e6"
+embedded = "b261c15be42a8695cc6add08afda419ed5708e820ee757c094acb5b80ac74d50"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::from_f32#2"
+kappa = "d76dbd93f2f6041705de12daca3451e64c55bb030f97ec99fad013affb2b4b6b"
+embedded = "85f3bfa557aee3adf3e20bd614ee727f5ced9300aa2305f2f10ae602ec50fbc0"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::from_f64"
+kappa = "61cc4720888203ff56872a7d48a63c5ba2380ea17f3af42cdeb60397d4e18846"
+embedded = "bdef656fdd89b4e7f8afc545e54ec41466790433c763f164e74ff12f791fa7d4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::from_f64#2"
+kappa = "3f6bbfd8e52173e8b86c490925fe5461d18489df752b0b3b8aa4c60a8ed61510"
+embedded = "334728da371ff374420231cd6adecca7a4e5a816feab72f72ca71628047ba94e"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::max"
+kappa = "dd1f9d62e0a8811afff4a58397017348f4d6441323fff9fe720d2e903c7346ee"
+embedded = "57ed34f9a53025546b6fa10d78adeacbaf52b69075d26e70860d9f081d9ca5a8"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::max#2"
+kappa = "e71babcfc3a1502d08d38d4af4105b801c79982dbb7cd040de6c93f7b2df23db"
+embedded = "5ff539d8d453191250699170da0e1db95b6651882b7d777aac97b55ca5d87398"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::min"
+kappa = "1c01623ca12111baeb0fe389200b568a106bb5880037e6f92b235f133b7b3a2d"
+embedded = "278a0d47d69a0557a6c63842eeb3e8ee7810df9c848c01d7b407b7e4920ab4ee"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::min#2"
+kappa = "a53a87306c863181bb0b8335b524629e1b9ae9ea33986d1ca2d63fb3663ed13d"
+embedded = "b01212ce59edc842838043d4708944122c56791d4bb965edf20391a5dad6598a"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::overflowing_add"
+kappa = "6ae5190333b9915476f02faea27bdb6e05860d73c90bca6f9afcbc5ec5006726"
+embedded = "333c17d4434a26fd8dc53a58d34899995654f5ebb6add9eccca330a1592cc139"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:694:13: 694:39>::overflowing_add#2"
+kappa = "c9f8439f612f1bc92c71739a76947dc928058e247904e38fe805a3466afaa9ca"
+embedded = "c49408b9bf39e600a99793d53e73ae524efdd36467160a32d20c19efa1fe0a70"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::default_tol"
+kappa = "59bdd50207b8452dbfab668e84a350a8394354ba727d3db2e44aadaf2fde62f0"
+embedded = "51ecb05ff95a61cc69280b030e4db7fb4a3a8116c1af57fa0961b644f51bfb19"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::default_tol#2"
+kappa = "84216d80b9e9ec396cc720e03bbabc6f3802af676cbfa6c9974c7677d83151c9"
+embedded = "1419d35a9ed401ee3f126c43f4f260ee91c44cd4968f3c6cedc5fa670f2866e5"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::from_f32"
+kappa = "df952464f45d642f8b74dd1fb15305cf3954c279348735426c53dff6210e0e86"
+embedded = "79fe7964f5cc4cc26811f4b28d4c6cf9092fc33cae9ee0015b30f0e20ec0afc4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::from_f32#2"
+kappa = "169482e3354001817c7ba3a218ffbb8c3e048cd06291b3af55dfa433359907b5"
+embedded = "024767117bd2032106d9d6c6316bdc1ee924014c7687c3fce8e295f120b34ae6"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::from_f64"
+kappa = "d0517dcbfff90cf8fd743fe380cd0431e47e26ce7d1196e1f23c93645e5f8954"
+embedded = "1e217c0b153256c67125497d1f9df6e967bf53dea2d638c0a3f0b1657cfc859c"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::from_f64#2"
+kappa = "df8caceb960f2ba1a29532087a3172aab9b133d3c61845d633ce8fa91b20c81c"
+embedded = "9deec0881cdce3413c13ea271a2509341cf1537d0d11cb51f0731eae388316a0"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::from_usize"
+kappa = "06d7d0fa37282de1685346159d036723c5ebfd0d047058239f682a9ef8cd8be1"
+embedded = "ed86a7bd0f4a3b8d395102f6a6db4724730d6eb4e40784633652b72ed9352d6d"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::from_usize#2"
+kappa = "71918ccd847d29a82f9c54653bd121a03169ffce74052f6ca7587e2948f0c063"
+embedded = "2020755a390cd7cb37828805c3d4aeb9a20268272f17737c55ebf9a17b98cccf"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::one"
+kappa = "99bb289bbdb06e7b0d18503f9c389f41c2f3fb3a43a4471633f40283f6c853a5"
+embedded = "62246b14e8fd0c93332984780ed99f377e121d126423b60a14fa26a52e152730"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::one#2"
+kappa = "ff52a251d080cfead69e233504873e21f6e5a78ea5f354065eaabed2720c436d"
+embedded = "1d68ece5e3b32d8272f5a8504b9ed4e1590f21cfd2e677d1091bba8fe20e9fa3"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::zero"
+kappa = "d3864af0447efbc7f3ed9d94cc3fe260c7728528ce02e0b89c649451ae8ea492"
+embedded = "6bb6d8a8a820eae372cb78878338ce40ca2fe99bead9db61dfe478b90c9c8aea"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:747:13: 747:36>::zero#2"
+kappa = "c2fcf756df26661b5af02cd3477a6608a2eddf103080583efe08fc0ceed8d150"
+embedded = "edd1f8621cb102a6c7bfa1095a1d0c4ba26ee5f467fd866e93c64d8b3a3243d4"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::max"
+kappa = "245964a82cbac420e692d6b790fcd537a6135cd214a53fd7ef7121a60ec4946b"
+embedded = "6c3bda96b1a5f61e1fa378e0ead3113a925911af591a48da1e97cb3a41ba8fd6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u8>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::max#2"
+kappa = "3e1346409feef0d6d9d60af9f5b7653502a89d134b25913bcf98012614cfc638"
+embedded = "d6408fe26e027c20452b3c9132d994bf2cbd93d4c979f259fc815abd0626fa38"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::max#3"
+kappa = "8cac73288a073431cbcdd710875e91b834378bd933a25172992f5e00b8d7f179"
+embedded = "640e1dd78708509e00feab0c504e0dcdd7193057272e581afe78de602c768c87"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::max#4"
+kappa = "a6c1b5ab460dff5a24356f2ee8b0addf1208ebae441cbb67e757e785d2579222"
+embedded = "11bbbc52e46495e35860dda2b67388d62b532e38b2d2c9aa4a0a2f6d7f04069b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::max#5"
+kappa = "0cababf8704eadfa97029a5b908ae159e66af1ce00c6fc2fc14ad0f187123f49"
+embedded = "4dc50d582a5d58165faedd8a05691e7eef731efff69a9755c18110475f18bf64"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u128>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::max#6"
+kappa = "56c9ec6992782ab15cd676bb3d761f4d92c7cd7358d8974ee5114fac3ea933f8"
+embedded = "37e7b41a395ac21d1b1a070635009be9f7e0a73377b8a76a82920b493e9d991d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::max#7"
+kappa = "3bee98197b5908672d750b24a233cdc5e83d41c13359065b18c1eab4799a271a"
+embedded = "59a95bb5397b2f20ae4eddd0ccf748e699804adf864124dc671571ba1c919e5f"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::max#8"
+kappa = "042c3bbca5d732b9b4b321e4f35276d6ba7b783ce9e08ec6363c1345f9b3ab09"
+embedded = "fe9fbed3c793ea0e86411bd685f843971f3adc7d036846614eb2542182821d6b"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::zero"
+kappa = "ab7384e103fedce75eb1d79c840096f112a8cec61b0500a8ea9082d38a40f2cb"
+embedded = "89362061b18a2750b232e760bbfd95305597787ae95c8d91c83d50ade6af5921"
+status = "translated"
+digest = "47f19546056afab4c4bd3e4046af08242a8d57eae231c5d6d5e929dbf85f95f8"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::zero#2"
+kappa = "83d70872b70af078e080d51724cfe2c8160d77152423e2a2ef0f8751bf44a573"
+embedded = "1c0a6ab9ee9c7dc94fb9f3580419b591d5cce33f9cef6acc68f96f58e1b6acb3"
+status = "translated"
+digest = "47f19546056afab4c4bd3e4046af08242a8d57eae231c5d6d5e929dbf85f95f8"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::zero#3"
+kappa = "3998462dc54cf9438c3c86ee6fe3b91bf44e61513db3ee0f35839d4f34024c7f"
+embedded = "a7c92ec073ddf7758dd1b2e33959e6f3e3061ebad23156536e6fbb36a3210538"
+status = "translated"
+digest = "47f19546056afab4c4bd3e4046af08242a8d57eae231c5d6d5e929dbf85f95f8"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::zero#4"
+kappa = "dff76121cba80b12fccf6307209fe99cde2d37ed9c4344013fff7d1db28c95cc"
+embedded = "bf0bce10a8c7f24f6638ae553b3418b12690cb5133ac9d11b37a04a7195af5be"
+status = "translated"
+digest = "47f19546056afab4c4bd3e4046af08242a8d57eae231c5d6d5e929dbf85f95f8"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::zero#5"
+kappa = "52f040b75bfe3ed81f28433cbe166f0a2c9a2741c0b3e371cde07544d442bc5f"
+embedded = "28171806f5542eaa7ef6623b01137949b2e57f3904fc100c1b5adbf297cea76f"
+status = "translated"
+digest = "47f19546056afab4c4bd3e4046af08242a8d57eae231c5d6d5e929dbf85f95f8"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::zero#6"
+kappa = "9364a1c0eff346790787171a2f29293acbc2b048d0e494eb20db7dd0aafb71c1"
+embedded = "2a593b6ed390f82c7dc7bd3d0c8e405a9ed16527225f81e8a06d95bc4edb3514"
+status = "translated"
+digest = "47f19546056afab4c4bd3e4046af08242a8d57eae231c5d6d5e929dbf85f95f8"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::zero#7"
+kappa = "03caffa858d0484fe9e004d9f085b7f237143eb8bb36a0246d59b53bb75087d6"
+embedded = "c4dd82f5dfca22fba7354f426c57a29dd32d9abdebf8f9cfdaeb224d782d484f"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::<impl at src/algo/mod.rs:787:13: 787:40>::zero#8"
+kappa = "dbf1245939b714373a93386b9878ec1ff990429cb2f614a54841c0264348b5f5"
+embedded = "614aaf7d1c9b6d321b7ac416e709d2bda813d0cae7c88d16dbf00cf7beab9fbd"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::Cycle::node_id"
+kappa = "fb4c4b295c7f5f7f52f7e23a30e2c1b22f8aeccb47928e3cff54a6a9ec4dbe71"
+at = "N=u32"
+embedded = "4330b750325c71e10ff0c43bf391d94a5f6abc967aadf5f54480af95ce41d768"
+status = "residue"
+cause = "mir::Ty: algo::Cycle<u32>"
+
+[[fn]]
+path = "petgraph::algo::DfsSpace::default"
+kappa = "6061aa55a860335647cedf8682b720e6d1f057d06d36d8fa1e512cda575c8135"
+at = "N=u32, VM=u32"
+embedded = "376979fb5a4828a3d84efb45e058c7d7c25fbdb642e2f10fdddb817897828f72"
+status = "residue"
+cause = "mir::Ty: algo::DfsSpace<u32, u32>"
+
+[[fn]]
+path = "petgraph::algo::DfsSpace::new"
+kappa = "11aca7b5677205a02ddad71a4779f0837bc3bc6b1ac3a3633a58a9a7c82d0040"
+at = "G=u32, N=u32, VM=u32"
+embedded = "85649f3a62056ac4c298724accdeea2894c07104e887e47487ac81c9606f6340"
+status = "residue"
+cause = "mir::Ty: algo::DfsSpace<u32, u32>"
+
+[[fn]]
+path = "petgraph::algo::f32::from_f32"
+kappa = "5065830e0b396e0464d19738aec4621309b9c2a3c688884430d484d7fee1bfa8"
+differential = 12
+embedded = "23e96b3891854c7c4ee4e02e78ffed367d829f7e1ee56ada9c8ba04a5bd1f352"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::f32::from_f64"
+kappa = "ace4bd3559aafb969ded2b96580dad68f189ddd655b9b87925b1dcbedf5d05ed"
+differential = 12
+embedded = "af647a8d529285e9daef73ee9e37f98f12b4f79cf83c8845f555c664f567dbaa"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::f32::infinite"
+kappa = "83189163133efbc7c6b03356feb00c1d326e0c4fd65f4536c067184ce078cd77"
+embedded = "06969633fef0d29d9206ef01bb431a923c0a5162322b19faadf7e1f8c05d5932"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::f32::zero"
+kappa = "3129d3de8ef93113c16dda52fa4b198e2416a92512a0e9587594b07f3afbe7fb"
+embedded = "d434924aa5f49baec2707ff99e45366bcce60abb2f26fc322e3d47644ec13311"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::algo::f64::from_f32"
+kappa = "99c333f713f646285eb47d6dc90c71b52fb8a0bd4907f16c6af230431a539824"
+differential = 12
+embedded = "a38baab744a7f73419893ae16d87b0d6d310a4fbf831b64f79ed4e3d5835931b"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::f64::from_f64"
+kappa = "3c28ec5caf928bee8a5c1b9cf37c8f64859cd6b1f04dc519622496c582fb0a62"
+differential = 12
+embedded = "ee97df937dea567fb8fed1b1f357ce194dc9a37b76f0b62307951d2fc514a140"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::f64::infinite"
+kappa = "042c1f449ad2c353cff06b322fc1a9585acdcef654943d4793700191fdb4b063"
+embedded = "4de9caf548184e42d875db9f9782baaed9a845ff6d4bc1f5de2dcf2c579fd10a"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::f64::zero"
+kappa = "3b3532db115f8cf637edd26e2c9b23aa5559bcc7c3aa8e7661cb62b206331425"
+embedded = "8b8f1d16d842c88f2955e4a3883f73cdb16dd19d4d398a3d341569469293cc0c"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::algo::matching::<impl at src/algo/matching.rs:269:10: 269:15>::clone"
+kappa = "5aaeb100cc18b946b24d519c16c755cd4dc266fbad042e3d545e08b89252bfac"
+at = "G=u32"
+embedded = "22ee4bd44b6a2b421f1ba1ef94b0de0a49ce9185e4f74c833c3f035ee161d9d2"
+status = "residue"
+cause = "mir::Ty: algo::matching::Label<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::<impl at src/algo/matching.rs:269:23: 269:30>::default"
+kappa = "c0d962a749b764729a8129a184284e1216056ae11d0a102b1539928c88723782"
+at = "G=u32"
+embedded = "fcbce2afca1ee781d5265eea64df90355fd7e41d694a660c97dc2e0858ade7f4"
+status = "residue"
+cause = "mir::Ty: algo::matching::Label<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::G::dummy_idx"
+kappa = "903f97225cdf2f96fff22ddacc807986d0fecdc1a5b070d50f0a860caa0ab0ef"
+at = "G=u32"
+embedded = "b48b2fe01ac291a0fba51b95754d91f65b069887e6ef49904fae028ade66f3ce"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeIndexable, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::algo::matching::G::try_from_index"
+kappa = "394d920f902b64142f48177b63cda0c3bb72f9abfc719724093edafbf51fad96"
+at = "G=u32"
+embedded = "041d2d950ba931cd427f02cf61766b84d888069be8ad5e0102ced9b4d3384151"
+status = "residue"
+cause = "mir::TerminatorKind::Call: algo::matching::<impl at src/algo/matching.rs:112:1: 112:39>::dummy_idx: petgraph's MIR stops at mir::Instantiation: u32 for a parameter bounded by NodeIndexable, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::algo::matching::Label::eq"
+kappa = "21a31001c20c052b67cabb650b7a652137e6f1f3f6f58efabdfdcc5338bbf206"
+at = "G=u32"
+embedded = "3a847909131771ce5a636fc98ea295a7ff7d3c9671467ea25286f0905bf6b385"
+status = "residue"
+cause = "mir::Ty: Label<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Label::is_flagged"
+kappa = "2728ed999abb098afe4ecf0943515bef137ea5cf38360c4e432b0380ec8787a6"
+at = "G=u32"
+embedded = "fb8ca262ecaf2387374b58463a84f38556632cc900e4ea13593e814bfe455e4e"
+status = "residue"
+cause = "mir::Ty: Label<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Label::is_inner"
+kappa = "859a325e19609f0239ea3e435601527530f49a9a61dea34de934075550e10120"
+at = "G=u32"
+embedded = "454740c0fd733f71008e0f22d01919edf492b80d12268ac400f468e54e1bd617"
+status = "residue"
+cause = "mir::Ty: Label<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Label::is_outer"
+kappa = "fd97572f5c0e51f2fda0cb8b36ab5a685b016f7370ffe0c7ba2262f88cf15f11"
+at = "G=u32"
+embedded = "746a7141a7573abd1850f35788cca643dda7fec7016ed68eda9572d095e87b11"
+status = "residue"
+cause = "mir::Ty: Label<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Label::to_vertex"
+kappa = "8976e9b393d121a57eac26fae75b0a45e390fa9e3e628cdac94bd946e60995a0"
+at = "G=u32"
+embedded = "09597efe4d25b33fbbd26d96f29caee2c812040d709adc608b291f57d52a001e"
+status = "residue"
+cause = "mir::Ty: Label<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::MatchedEdges::next"
+kappa = "e945fab170892a3c25ee149a2069432de0eba3941e23ae3a66a0c62acbe35b58"
+at = "G=u32"
+embedded = "bcf18ae9448d0dc63f329f6780e7b1628ccdd9cb89bb229a6fc287d0e7ea644b"
+status = "residue"
+cause = "mir::Ty: MatchedEdges<'_, u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::MatchedNodes::next"
+kappa = "466e9a2ced5b3374bd68d92cefdc0e16ca4bd5d32b2ff863a92b9202191a36e6"
+at = "G=u32"
+embedded = "51347d2c75e8dfac93e463ed3941497cf64b85c87114f0f3b3064ba8d8790d7f"
+status = "residue"
+cause = "mir::Ty: MatchedNodes<'_, u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::contains_edge"
+kappa = "36a30d30bb356e7a659623da78604a70b69376ef7a0b46cbe116b1340530ce50"
+at = "G=u32"
+embedded = "8d26212985597cd86d63ea440da8d87fc2c6bf986d0513a676c3cf9a8cbdd2c0"
+status = "residue"
+cause = "mir::Ty: Matching<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::contains_node"
+kappa = "e12ceba1dd6257b454cc301a9986907328e279e34f2453ac1a91c0ec102bd22f"
+at = "G=u32"
+embedded = "d6c896a14139a96f31a5958caa721a93b35f0483831df138b479cb9cfdf79560"
+status = "residue"
+cause = "mir::Ty: Matching<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::edges"
+kappa = "cfc51360a8ce3c9651b64bacb25e1d8a2ada37c0a4f24fc7a4dc0fbbfdacabfd"
+at = "G=u32"
+embedded = "ff30fbf5a38302101eb01be9e2dfe8f873a71ddaf7a9a43959e05b4e2458d647"
+status = "residue"
+cause = "mir::Ty: algo::matching::MatchedEdges<'_, u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::is_empty"
+kappa = "b496ea5cec07c79268428e4027fe8bf8ba04872d1d33a7e6e23acd9d9e7e0d2a"
+at = "G=u32"
+embedded = "c18f959b193585012dc57f845274f12c50f20182a56d7f4d26320bb5481028cd"
+status = "residue"
+cause = "mir::Ty: Matching<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::is_perfect"
+kappa = "914e0e4fc1657c6b436c163f09674d7718e8ec8f1ddfca9b4e89f27cf6f7af0b"
+at = "G=u32"
+embedded = "527316ee3c178688d7a03e1b65165f5fc1a6bb68e53abf3a289f8ae41c814b15"
+status = "residue"
+cause = "mir::Ty: Matching<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::len"
+kappa = "fc960c3e01240b97a5df12c7df24d33380c844843d84f45e383fc1fb98be2114"
+embedded = "55a78a783991c6756fc02858d89a63374c77530a9971c3b917e8e3755d97c8e6"
+status = "residue"
+cause = "mir::Ty: G"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::mate"
+kappa = "3db49dcd422f47499d08c226a7cf827c0a90aea5ac7755e739d936717fee765d"
+at = "G=u32"
+embedded = "d621e5732c091633f752afd70492e7fc13ab4cac0b03dceeae81b7aae1858819"
+status = "residue"
+cause = "mir::Ty: Matching<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::new"
+kappa = "73fd014b33bec579b2ac6788824f1964d314a6b7fac8c7a22881e8e549baf75e"
+at = "G=u32"
+embedded = "0e436f10fdd49990cb077a1835c077f2a1a5d4b6b383c7c975ce27a3ea1d5c3b"
+status = "residue"
+cause = "mir::Ty: algo::matching::Matching<u32>"
+
+[[fn]]
+path = "petgraph::algo::matching::Matching::nodes"
+kappa = "c6415f09f9ef3eb9f93ddc1a82d680c42d8b20d7c75b6c1a5d343371047b4441"
+at = "G=u32"
+embedded = "210d648cfb61b813643841b73fb4aa6ab759e9839e2c8790838954c498c2044e"
+status = "residue"
+cause = "mir::Ty: algo::matching::MatchedNodes<'_, u32>"
+
+[[fn]]
+path = "petgraph::all_simple_paths"
+kappa = "bfad8e74563256ecfce1d5d580d0591370e23b93c6bdc85bf2ddd573b4248b25"
+at = "Direction=u32, G=u32, S=u32"
+embedded = "6073c5283f8f55a0738412deaee5d7d561b81459b29a6066ecc1363f45fe01d1"
+status = "residue"
+cause = "mir::Ty: indexmap::IndexSet<u32, u32>"
+
+[[fn]]
+path = "petgraph::all_simple_paths_multi"
+kappa = "df9fad041f076cf9612249c135f8e5afd798b7b991bf718a17fcb053e6de36f8"
+at = "Direction=u32, G=u32, S=u32"
+embedded = "a81d5e1f90b6fa1bfa8a54bc7f5023c681df902f662eeedcea022a97667a8640"
+status = "residue"
+cause = "mir::Ty: indexmap::IndexSet<u32, u32>"
+
+[[fn]]
+path = "petgraph::articulation_points"
+kappa = "44deb2978e4f7ee1fab3dfbac77d95a015bede35b1b606bfa5f3b859a3b2360b"
+at = "G=u32"
+embedded = "d4acf9ba1f67d74f2a05988c11d42dd4f6eed65c6553fec6e4a4b90b5e260539"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashSet<u32>"
+
+[[fn]]
+path = "petgraph::articulation_points::ArticulationPointTracker::new"
+kappa = "8ce64e517cb35a528b6313d2aad35953c08fa58e7a6b033fc4cade819ae23638"
+embedded = "4aa60d018860fa1300234bde41cdddd5dddfe435ff1c0bdef830ced2a4462a26"
+status = "residue"
+cause = "mir::Ty: algo::articulation_points::ArticulationPointTracker"
+
+[[fn]]
+path = "petgraph::astar"
+kappa = "71c94589a0dd2aed874901b48cae05fbfab14980ee7733948f39287b3c6659ef"
+at = "F=u32, G=u32, H=u32, IsGoal=u32, K=u32"
+embedded = "ceaef7a565aad5ec70440e378f39886fb365939588d5e0a169d42ec688df1604"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::astar::PathTracker::new"
+kappa = "3c52d29b9fa639883cc39d8900f1561cc05055839a3a608ab40daa715f6486c8"
+at = "G=u32"
+embedded = "fc3404898f1b92eecb0ce976bf63c6617056453cdbfe841bd12ec28eb29edcee"
+status = "residue"
+cause = "mir::Ty: algo::astar::PathTracker<u32>"
+
+[[fn]]
+path = "petgraph::astar::PathTracker::reconstruct_path_to"
+kappa = "e968bd0cae2a5dbb9112c17e34a1b2a3e04ed3b066110d5ee34c6c92fb35eca8"
+at = "G=u32"
+embedded = "75c2d62f2544fe8e547720ecc7c92a9f68fd988fe78ed4629d699df44e9ef4a3"
+status = "residue"
+cause = "mir::Ty: PathTracker<u32>"
+
+[[fn]]
+path = "petgraph::astar::PathTracker::set_predecessor"
+kappa = "c1c7e1e4ce3f584d2139341c0cf2ea25c5918c9a93133cd84d7b4fa19fa31072"
+at = "G=u32"
+embedded = "f646edd159682c2fd1eadeffbf313736dc99ed111aa0022f5a3835260a29a0fc"
+status = "residue"
+cause = "mir::Ty: PathTracker<u32>"
+
+[[fn]]
+path = "petgraph::augment_path"
+kappa = "30636d9dd5ef81d77276ff2739d9a3107608b37ab26eddd357b9f0bba1c2f072"
+at = "G=u32"
+embedded = "7e8312187e7cec612d3c8f901894c8058ca92febfcb8d640a4533ac134f83483"
+status = "residue"
+cause = "mir::Ty: Label<u32>"
+
+[[fn]]
+path = "petgraph::bellman_ford"
+kappa = "d5bd3605e10cb8f07c8c25a7e247f767f2b260551fa3452173b244807d7722ac"
+at = "G=u32"
+embedded = "34082d2210b39b492f5cba2d0c6b9b8fdb1d64facc4479ec8e1362e438a50be2"
+status = "residue"
+cause = "mir::Ty: algo::bellman_ford::Paths<u32, u32>"
+
+[[fn]]
+path = "petgraph::bellman_ford::<impl at src/algo/bellman_ford.rs:11:10: 11:15>::fmt"
+kappa = "d2229bc7afa69ae40cfa5f391be02ccc87523db08491d633f531dc7f5145e2e3"
+at = "EdgeWeight=u32, NodeId=u32"
+embedded = "3b89f6bcc89e794b21243dd37731bc76ad57b5bdbd6d4bc1e43a8270e296d46b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::bellman_ford::<impl at src/algo/bellman_ford.rs:11:17: 11:22>::clone"
+kappa = "924e1b923ccece98a4a662d14dbd4c50bfebd63ef607820945fbaf5dfff6445f"
+at = "EdgeWeight=u32, NodeId=u32"
+embedded = "9b34542dd3ff974f2db96e557ea9633a5da6bd5b456a3e06ad9abb29fba33e51"
+status = "residue"
+cause = "mir::Ty: algo::bellman_ford::Paths<u32, u32>"
+
+[[fn]]
+path = "petgraph::bellman_ford_initialize_relax"
+kappa = "17750a0961614f36fbec6c0de4303b4efdfd4ded77b19c1d085fcbb09d83271a"
+at = "G=u32"
+embedded = "c20de3ffadb4e1c08988fa8c40d4fc609c4b93275abe67c1a9330463a1b98cc7"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::bidirectional_dijkstra"
+kappa = "c6d9c40c3840aae0a347f1476035900dca5a03bdaaed3c20e8b983faaec941b4"
+at = "Direction=u32, F=u32, G=u32, K=u32"
+embedded = "a0ea0e6021d6c0c2a5d7e2a6a7445e55eea79a9776a3b1d2fbbebe493baf34d5"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::bridges"
+kappa = "2409a3e4b624f94f60832175e05dbdb4754872bb489b3021470b059130de0c10"
+at = "G=u32"
+embedded = "d9622bb5e3ef9c126a42d64dc7e489c5afbda0be933379f1bdede47f00e83364"
+status = "residue"
+cause = "mir::Ty: core::iter::Filter<u32, {closure@src/algo/bridges.rs:107:36: 107:47}>"
+
+[[fn]]
+path = "petgraph::bron_kerbosch_pivot"
+kappa = "8cd821253898c0338b5202fc9a6c579c0dac9e9174120617000e66164dec6a02"
+at = "G=u32"
+embedded = "161a6e8b474411e940ecbab34fb2fd1d6008bb37aad30b35bd0e1a66ad0e3bf0"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashSet<u32>"
+
+[[fn]]
+path = "petgraph::build_level_graph"
+kappa = "5379755f450b6d0815f9b66c6039ceafba92982cd98d23cf6db987ebb0f8ff47"
+at = "Direction=u32, G=u32"
+embedded = "63f90d546c3fe0b988d8fde0cfad967075d46f06418a2455344015909565eb7c"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::compute_metric_closure"
+kappa = "ddcc4ac21c10d1133aa418c903d2cc5217627acaa210d5b85cfa7ccaeab3e7fb"
+at = "G=u32"
+embedded = "71c1f4e38383bf6c5ee973dbdfd814eae35ea69262b657d45cbad7fd04075444"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<(usize, usize), u32>"
+
+[[fn]]
+path = "petgraph::compute_shortest_path_length"
+kappa = "f5ec355e5400d3f58f9d580d96348d35b0865552d61d210d63c5562557227f0f"
+at = "G=u32"
+embedded = "f5ba86589dd10f03b8b543d5913dad765ed1000346445b8fcd05b6067a255724"
+status = "residue"
+cause = "mir::AggregateKind::Closure: compute_shortest_path_length::{closure#0}: mir::Instantiation: u32 for a parameter bounded by EdgeRef, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::condensation"
+kappa = "0b4cd40499b0bb02e2d7433be2c89816dbd493ed9a8fdf164d7dd920bfc6856c"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "e2ce93ad3992360649c23f185aa97bbc6984c3c8c6eef8fee6673ce580b5f0fe"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<alloc::vec::Vec<u32>, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::connected_components"
+kappa = "1a4b6eb237c8e109b264d0e0d0b2181e5ab5e142db5d564f052823df2245b587"
+at = "G=u32"
+embedded = "22dcb294b6c1021487d3765a8ba18c98d0b6e7238dce433e3746407cdcb091fb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeIndexable, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::dag_to_toposorted_adjacency_list"
+kappa = "457033b33b5f5f07aa8f6f0de43f512294c58cdb0205df3c3260c60c1675abce"
+at = "Direction=u32, G=u32, Ix=u32"
+embedded = "dfa0c57914f045904746a9e2163d012a3c8c95b6cfda88c8d8bd65aca586f9e2"
+status = "residue"
+cause = "mir::Ty: adj::List<(), u32>"
+
+[[fn]]
+path = "petgraph::dag_transitive_reduction_closure"
+kappa = "c7a614fce7229bc16adf9975f116a46c184b0bb0d9b9293519694943477743c4"
+at = "E=u32, Ix=u32"
+embedded = "6956d51a96fb4f4121c9984e115f94f8da18926101d46ed1eb01ccd2605b7a2d"
+status = "residue"
+cause = "mir::Ty: adj::List<(), u32>"
+
+[[fn]]
+path = "petgraph::dijkstra"
+kappa = "13a4abdb0af2e2cdc94dfa677789c3a80e0bcd4f5fc113538a066cd94df5e642"
+at = "F=u32, G=u32, K=u32"
+embedded = "aef1b32ad030e62938be21a100e13948fa40f3074ddc937606d13e5150eb8172"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<u32, u32>"
+
+[[fn]]
+path = "petgraph::dinics"
+kappa = "11bce7b3231ac870e38dcf9b5e0ff0e0cb9bcdc77efc1e789d84407f32627859"
+at = "G=u32"
+embedded = "c7f0002448da56e87d4438f4c987c67068f44221be8f6f1c292ad4704dfbe4b4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeCount, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::dinics::min"
+kappa = "0fa4cb123c6d2d79f4ace35d4755488e3ed6ce838bd3ecbe143154f4508e2ff4"
+at = "G=u32"
+embedded = "99d472a9f3468ec77faab56146ec770477734e00add4989e241a431a6e44be23"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::dinics::other_endpoint"
+kappa = "d2938154977c704688a5f8d6f26bbfc4fdfd4c4b7e13c33da2238d1c27c035bd"
+at = "G=u32"
+embedded = "db78abfb484550d447f1ac0020b21d5c0eb9b4722ae14c8dc8738fa2434989b0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeRef, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::dinics::residual_capacity"
+kappa = "94dcf2cdeef51d9e1fa83a987749ee61ce0618d699051afbd39bc167f6fb8b33"
+at = "G=u32"
+embedded = "52c6fc6958f9c0d3633019af785bd42e7064839396cddab8758ea5f1c17004ea"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeRef, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::dominators::<impl at src/algo/dominators.rs:120:10: 120:15>::fmt"
+kappa = "beed94ed87405b22139c745bb73841df8de1ab4f168bc2acdda6307d50346d5f"
+at = "N=u32"
+embedded = "eb83995b3d06bc9348ae927d92d24eac0ef3e6a8bd3a2bd0bcc31d0570b7d090"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::dominators::<impl at src/algo/dominators.rs:120:17: 120:22>::clone"
+kappa = "9064442f370d08358663470ea0f2f0017b689c4c3fbeb9582d9993b83cac3d79"
+at = "N=u32"
+embedded = "625aa5ae8b08fdea40b5c1c8b1a635a9083caa44f8723170f27230c4fc3e139d"
+status = "residue"
+cause = "mir::Ty: algo::dominators::DominatedByIter<'_, u32>"
+
+[[fn]]
+path = "petgraph::dominators::<impl at src/algo/dominators.rs:23:10: 23:15>::fmt"
+kappa = "07a33774a2110f785e44ce289bfac57fd9fb8bf4cc9d89899cb96ed1a1ad727c"
+at = "N=u32"
+embedded = "8ce969aa803b75a5770afe6c693904ba5b337936efa786aad470fa71f55f4940"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::dominators::<impl at src/algo/dominators.rs:23:17: 23:22>::clone"
+kappa = "11c6b98ea601048098866e09099bb4cf0942a770237a1d02fea795c5e8468488"
+at = "N=u32"
+embedded = "48ea06460f075acbbe7389a2201af966e9d47fd0a27002d7083187624445d8ec"
+status = "residue"
+cause = "mir::Ty: algo::dominators::Dominators<u32>"
+
+[[fn]]
+path = "petgraph::dominators::<impl at src/algo/dominators.rs:95:10: 95:15>::fmt"
+kappa = "9e218c07a9c149275c6d105fda58ada410e71056d51aea6422a4cbd8436668c1"
+at = "N=u32"
+embedded = "db5270bf171e2f672b73176ea685edd5307ebd675565c2fc73dd2cf75d39f13b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::dominators::<impl at src/algo/dominators.rs:95:17: 95:22>::clone"
+kappa = "7abb308a289a06f25835ba6c22b86e7175e2b3b09920be4fa62cb5445c4b332d"
+at = "N=u32"
+embedded = "cb640623e0023857b740aae6c7e55b4a513e4e6acb31b195d9309d0b20a6215d"
+status = "residue"
+cause = "mir::Ty: algo::dominators::DominatorsIter<'_, u32>"
+
+[[fn]]
+path = "petgraph::dominators::DominatedByIter::next"
+kappa = "94004d35b0b28da4e98bdc6d5ac8794ccfa63009e3f4ed5a2c08e1b16a02c6a3"
+at = "N=u32"
+embedded = "3b3e70c65afb8dd0ee9d6816d09783d5951fbf06aefb05bed43bebdf9150d7be"
+status = "residue"
+cause = "mir::Ty: DominatedByIter<'_, u32>"
+
+[[fn]]
+path = "petgraph::dominators::DominatedByIter::size_hint"
+kappa = "4c5a74cd5f3cf6f129b24427d9dfd6e35c4dad5030ea1e3b579c28c5c1efd91f"
+at = "N=u32"
+embedded = "adf9b3dbe514e399391e5c989e48c6b66a2f16220d9e33938daf6cab0cad5a90"
+status = "residue"
+cause = "mir::Ty: DominatedByIter<'_, u32>"
+
+[[fn]]
+path = "petgraph::dominators::Dominators::dominators"
+kappa = "76f461e116f36e9eac40ca3e0e0222bbc71c045b9341c23a804f122ed1e6f434"
+at = "N=u32"
+embedded = "560e91cc6e757bcae1633df9fa83b4e426456ad6ff2f47e58f767fade0638f5b"
+status = "residue"
+cause = "mir::Ty: algo::dominators::DominatorsIter<'_, u32>"
+
+[[fn]]
+path = "petgraph::dominators::Dominators::immediate_dominator"
+kappa = "c72b92d7dcb5b51b2dbb444d6bfd7a9ea3e96381614a9f0ae0093cd16c54a097"
+at = "N=u32"
+embedded = "99596795c3722e0b9bd0c1a17b259d3e8ee65c164abf100f5288cbe074cb7842"
+status = "residue"
+cause = "mir::Ty: Dominators<u32>"
+
+[[fn]]
+path = "petgraph::dominators::Dominators::immediately_dominated_by"
+kappa = "76ef22387218ad3efd66a12fa399d192ef50f5f5a5c9f313afecae7df9ffc28c"
+at = "N=u32"
+embedded = "a9cecd89adb29e5293e7c6ab3e439d433e8f8e3e9274c7c2aafbaa68aaaad67f"
+status = "residue"
+cause = "mir::Ty: algo::dominators::DominatedByIter<'_, u32>"
+
+[[fn]]
+path = "petgraph::dominators::Dominators::root"
+kappa = "6abeee8d9aae6a9f493cd7941e618bac2a2fffffabf2b094a944b16838ca62fa"
+at = "N=u32"
+embedded = "11e275c30dd8b78fe31c3b2387f92c1785f8ad752b6f92bc11d4ed61266d29f7"
+status = "residue"
+cause = "mir::Ty: Dominators<u32>"
+
+[[fn]]
+path = "petgraph::dominators::Dominators::strict_dominators"
+kappa = "6c48c6916943e9398f0b778f8486d943bd5be53227d905e5bf449023dc80d6f5"
+at = "N=u32"
+embedded = "c8c179973337d0204658291b9f9a938cbc0c4856b1d34854e346317c807a858c"
+status = "residue"
+cause = "mir::Ty: algo::dominators::DominatorsIter<'_, u32>"
+
+[[fn]]
+path = "petgraph::dominators::DominatorsIter::next"
+kappa = "679a0a5c5c2204ad9fd3ac28e443a1b0e205832c68338306fe19ee78ed93a9a9"
+at = "N=u32"
+embedded = "7447ac74e8819fda6222468a76fb079b6ad51a89fe47365c4c3018f80f89a8d0"
+status = "residue"
+cause = "mir::Ty: DominatorsIter<'_, u32>"
+
+[[fn]]
+path = "petgraph::dominators::intersect"
+kappa = "a5fbb14f59303dce828a80b8d95bf8b029b1fb6ea3f80429c83db714d042129a"
+embedded = "be0e9d1f41f7b2a69b066c32e06c56859138648352372c180ff9edc08333b7df"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <usize as Ord>::cmp"
+
+[[fn]]
+path = "petgraph::dsatur_coloring"
+kappa = "859c65149dc245966c305e8deb3441c5c1d3e893cb80b56dd3bbc834930f38f1"
+at = "G=u32"
+embedded = "907f08ecd58d54cbcb6a7695dbbdc65cd2a3c6c878c61711678e7cfcacabb871"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<u32, usize>"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::<impl at src/algo/feedback_arc_set.rs:196:10: 196:15>::fmt"
+kappa = "02fbf8c6ca584c2458d400cc26d98565906351141d3d30e58dd34979adde18dd"
+embedded = "9cff63c889ab74ad34fe893404fe997ec448f6a45932da0f997d3b3abfe23492"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::<impl at src/algo/feedback_arc_set.rs:215:10: 215:15>::fmt"
+kappa = "5188305045c1ae15206c662f67b94be414c9fd850d08907a3f799704e3ee3be9"
+embedded = "26a7759f837bc5ac55a9b207c9fa12be5c45c16dff37ecc94382dbc1847b1d82"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::<impl at src/algo/feedback_arc_set.rs:225:10: 225:15>::clone"
+kappa = "888d0e0ec5b966ec611f35c913a76865154f2d16c9085aa41051948235c5399c"
+embedded = "7e359bfaaf7e693e49668cafb457328f1b22a201fc31f137a93e2ac4f4f37359"
+status = "residue"
+cause = "mir::Ty: algo::feedback_arc_set::FasNodeIndex"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::<impl at src/algo/feedback_arc_set.rs:225:23: 225:32>::eq"
+kappa = "ac3e577b1ecc6311959b1f82331cba070146563f891c18f41b6188bc0516abb5"
+embedded = "527af57ee72f3b316f310dbd9ab2c955edc43425e4c273e8585e4d63a6c2dc6d"
+status = "residue"
+cause = "mir::Ty: FasNodeIndex"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::<impl at src/algo/feedback_arc_set.rs:225:34: 225:39>::fmt"
+kappa = "d55f927c93bc8eb06fdce0a7ce09e936041b254fae8b20300237cfeff3ff8587"
+embedded = "671e8ca01b35ef4ea7ae0f559101a7be87161a2b1e96c0a09bbefdcfc8b0a21b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::<impl at src/algo/feedback_arc_set.rs:229:10: 229:15>::fmt"
+kappa = "3717c11b6c7e426ca8b2e803a176784b70823fbde2faaff627c6d987007cc40e"
+embedded = "575297e6f05f74a744154a24671c245366ee01a686d79da22e6e5429a822ea49"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::Buckets::suitable_bucket"
+kappa = "4175bf40870bb56e753635e700702b63cd0ba9efb20ba14b6922ec382ac34be4"
+embedded = "e3d08365ec69c1c627608a1d7928d713dddc19cead08cb0fbc2aa440f453c901"
+status = "residue"
+cause = "mir::Ty: algo::feedback_arc_set::FasNode"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::Buckets::trim_bucket_list"
+kappa = "b5c0eb47bd20e16968226642ba27419103d4de596c54284ae8ec8e4f849e85a2"
+embedded = "1fe6c6614f24f7dd3274c6fe487fbc9810a4c3a4605f8b0bb2ce69db67c321f3"
+status = "residue"
+cause = "mir::Ty: FasNode"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::Buckets::update_neighbour_node_buckets"
+kappa = "8c73ca87807d02736a9ef2a04d34fa5485af6ff0aa3b81a69bedfd847a69346a"
+embedded = "6f7fafba94e5564b63271ed9f305e93f5c80ca852ab8e5944a1fe003b161e754"
+status = "residue"
+cause = "mir::Ty: Buckets"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::FasNodeContainer::index"
+kappa = "5153e01d5d91b708dc05c0361512350861c7e52869a99d52ad900d3354c9bdf9"
+embedded = "fa3063784cb05964090ec22e609c20f3e5a9bf89241b95dab380861d46cd2522"
+status = "residue"
+cause = "mir::Ty: algo::feedback_arc_set::FasNode"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::FasNodeContainer::index_mut"
+kappa = "14fb770ca7adf5fe16d0cd6bef8a1b663d929c1f005cfd28557e6babf1c86c82"
+embedded = "be1de38d7cc44208a28a8e7c9e829a1da6d216de1a1f58401d57309ec5c8b982"
+status = "residue"
+cause = "mir::Ty: algo::feedback_arc_set::FasNode"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::<impl at src/algo/feedback_arc_set.rs:346:14: 346:23>::eq"
+kappa = "ddb09fbcc69fc6b8df45263666d8d16226d7aa2aadeea196734f16b0b1d05d84"
+at = "Container=u32, Data=u32, Ix=u32"
+embedded = "c829a3b7a390af7c3df2a6b218821c731ad8cd5d1fd170d94c8636a021aa48f4"
+status = "residue"
+cause = "mir::Ty: feedback_arc_set::linked_list::LinkedList<u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::<impl at src/algo/feedback_arc_set.rs:346:25: 346:30>::fmt"
+kappa = "83b58d8186ebaa86fc82fdff03e286eac411fb9e24e292f0b3461346308e6b07"
+at = "Container=u32, Data=u32, Ix=u32"
+embedded = "d71635ae71599562ca99fdcea2af3c2bfdf816b3a7b3e71e88eb1db84de6c325"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::<impl at src/algo/feedback_arc_set.rs:352:14: 352:19>::fmt"
+kappa = "4c748a4a6df7a4845499967bf787f14472bdbb0cb35fe9735392ce2ebdd189b2"
+at = "Data=u32, Ix=u32"
+embedded = "3fee3dcb1c4e967827fbd8e9ae99b4bdf6a5785ae4f3e4da886da1233234dd02"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::<impl at src/algo/feedback_arc_set.rs:358:14: 358:19>::fmt"
+kappa = "611c38531956878b9109b0024c2622653286afaa5034afff2f760b6a770625a9"
+at = "Ix=u32"
+embedded = "e9849b0dfcb98b21492e385bc9c19e4bf632f6e80a8240fc36d565b2d2868f53"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedList::new"
+kappa = "dec22cc9ae878958e64b585fb758f9c1941585c4e5ed521167a8708239812632"
+at = "Container=u32, Data=u32, Ix=u32"
+embedded = "907043d58a8bae37748aa0fbcf07d0ac144d680d94adc48d7fb100709bcd83a9"
+status = "residue"
+cause = "mir::Ty: algo::feedback_arc_set::linked_list::LinkedList<u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedList::pop"
+kappa = "9f4a4450426d3aeab02b46f61777c2ae467ecaa33087fb426411a0649fb0fc5b"
+at = "Container=u32, Data=u32, Ix=u32"
+embedded = "60aa760c37626c1066422848f1b648dad7fe65eb9ee0dfed9766a1f941ae9e0e"
+status = "residue"
+cause = "mir::Ty: feedback_arc_set::linked_list::LinkedList<u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedList::push_front"
+kappa = "ab45239a6ce43dc401320b955a11e98875218b6d180db8cabdc16f891bb5aa46"
+at = "Container=u32, Data=u32, Ix=u32"
+embedded = "3725d141d9580cf89a22d71b08116fcb6a6746493787abcca615da00c54a9fca"
+status = "residue"
+cause = "mir::Ty: feedback_arc_set::linked_list::LinkedList<u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedList::remove"
+kappa = "2190c40ebd2a4349f71552409798231f4f91ddea0f69c0beb3e79490f442d0f6"
+at = "Container=u32, Data=u32, Ix=u32"
+embedded = "65acd19d2059378f45cbbbb64e9e1b720c4ff80c99898f5c85ee61f94552a7ec"
+status = "residue"
+cause = "mir::Ty: feedback_arc_set::linked_list::LinkedList<u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedList::to_vec"
+kappa = "e01967c8d5d588f3d6778c6b7e82513a06e0a6bf4e1abc9cf22c8d51f97da654"
+at = "Container=u32, Data=u32, Ix=u32"
+embedded = "45b4d39eb9a9cb6cf86528ba5d7acdd25149daaf368fa5897340ed5308c01abf"
+status = "residue"
+cause = "mir::Ty: feedback_arc_set::linked_list::LinkedList<u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedListEntry::data"
+kappa = "e8e8a5fa8dd1aba3794721cb59ad1bbe3cad313beef7a30844c9c7b428e9ce42"
+at = "Data=u32"
+embedded = "22df7f2ffc6563bf4060c02d3221fca0100427c0f33265025c6d72d737fb5c1f"
+status = "residue"
+cause = "mir::Ty: Ix"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedListEntry::is_in_list"
+kappa = "9511a2a57471390610c7bd642ae8c11be1a4c75a11d6f932bdf08687a7b130c9"
+at = "Ix=u32"
+embedded = "3c83cb76e1d45b0af0fa02bcc1819ad8d7918667db4b2b4bc29de83d1c838c1a"
+status = "residue"
+cause = "mir::Ty: Data"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedListEntry::new"
+kappa = "c23faec83f0c9a5e5c8e96a24225a30ab00acbac34bbf10ec417da792fde89f8"
+at = "Data=u32, Ix=u32"
+embedded = "91d15f84fe3323e2ba3a3273c6b822f840eb17c9f25da953d2d6b879ddda59c4"
+status = "residue"
+cause = "mir::Ty: algo::feedback_arc_set::linked_list::LinkedListEntry<u32, u32>"
+
+[[fn]]
+path = "petgraph::feedback_arc_set::linked_list::LinkedListEntry::pos_mut"
+kappa = "8ac969e5705662b23d733372768b34b78cc61ee5d14b3239a138bc58f3f2fff4"
+at = "Ix=u32"
+embedded = "148edefae7f2b4ad1815fc8b55397a57cff898f9ab00e3038346cd8271c02f29"
+status = "residue"
+cause = "mir::Ty: algo::feedback_arc_set::linked_list::LinkedListPosition<u32>"
+
+[[fn]]
+path = "petgraph::find_augmenting_path"
+kappa = "565585874ff0b2406379e59053e22d0782c471164302e8d2eb210ff2c3fcecc0"
+at = "G=u32"
+embedded = "403692f6fa91ae98649d1ce1383806f965add6a5728b3895a2fcd92c5b0c8dee"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::find_blocking_flow"
+kappa = "73055f0ede7a3ee74bfe3fecb951af63e3581301fff9b5b4919f461d55ba2c4c"
+at = "G=u32"
+embedded = "48e33c20881f92fe289f76c02522a25bede54013ca4f1a1289cf492c916fe06a"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::find_join"
+kappa = "884096fe04064e87b3292930c99842601674d090d0ebd0502e231bc8cdde15c2"
+at = "F=u32, G=u32"
+embedded = "b8ec145b5341578df2e749f808b3843972b15bf10c37ddc61a94d42748eac995"
+status = "residue"
+cause = "mir::Ty: Label<u32>"
+
+[[fn]]
+path = "petgraph::find_negative_cycle"
+kappa = "eaaf2920f38f5671e338752896f7f3f4186db1df744a1805d7febce39caea792"
+at = "G=u32"
+embedded = "b5c693a5a93a558b2c5395587dd4c4806e9cd2794c0c9160325c3111813ded9a"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::floyd_warshall"
+kappa = "28379fb707b4b914193d5e6474add9f7287d3e52dff38c1665e6aa33467b037c"
+at = "F=u32, G=u32, K=u32"
+embedded = "87062d63a720414a11aaeba758b7dc53ee4975f1febfd4b32bfbf78dba9e1505"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<(u32, u32), u32>"
+
+[[fn]]
+path = "petgraph::floyd_warshall_path"
+kappa = "0ccee4147bb4a0f0ce20114ac6c1b2ba08c7bd207718390c8aefa1b97a343406"
+at = "F=u32, G=u32, K=u32"
+embedded = "b5af8a1e771ca9d6a4f2a8f1005def9370cb04c92758b52abecb2a55d8d10e55"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<(u32, u32), u32>"
+
+[[fn]]
+path = "petgraph::ford_fulkerson"
+kappa = "d26c27b7644931c25d4c220a3af441c0f92791495e4d3bd1f32fd36eb6a09654"
+at = "G=u32"
+embedded = "3fb2c6b27ad7073dc0387dbb65f4f285069a6daacbc46d47565c3838ee92669a"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::good_node_sequence"
+kappa = "9a2fa70b344011b9b255bb3ed293642bf00495f7633dad1b1b8887670c4a4de3"
+embedded = "520911c4a58028e1e47afc7fc6225639d916d7a5a1a6cd20d82b3c1045198177"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<usize, usize>"
+
+[[fn]]
+path = "petgraph::greedy_feedback_arc_set"
+kappa = "0b0aca617b2becf7a9e2f4f6af5185f3c2ef0170fee281bb08f173eee970ef62"
+at = "G=u32"
+embedded = "a1daf72c331b65dbfdec15e990eec2d7f24d5a408712a1eda8f69ecb81eec80e"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<usize, usize>"
+
+[[fn]]
+path = "petgraph::greedy_matching"
+kappa = "1513c7129e81eecf8ddf9740978bcd3393ec2ac4b71fde7d3a04053f8b13a7d1"
+at = "G=u32"
+embedded = "ac97663fab2c40d9978abb0ee985110f9b190d457bce57b3075450c117d1b59b"
+status = "residue"
+cause = "mir::Ty: algo::matching::Matching<u32>"
+
+[[fn]]
+path = "petgraph::greedy_matching_inner"
+kappa = "160adc60eefb72ea54c608110dfd799111378f4feb7f18355e0324c06bdd9eb5"
+at = "G=u32"
+embedded = "039d0d476853d95215c51204ed6702c199c8f348877d10177bce2c62b8722958"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeIndexable, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::has_augmented_path"
+kappa = "bd372e02280dca81f5cdcb37860393cf1699e89a626d585f000f49f193bbd626"
+at = "Direction=u32, G=u32"
+embedded = "a882686b1beb101d1d3a5f616bd88e7e6842612421a8ec35241de5f873061919"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::has_path_connecting"
+kappa = "756a245a656ebddc9155f6798b75099b2cbbfcb18eaa0bc779a8a3e413d62518"
+at = "G=u32"
+embedded = "7156e86bb070d2ee49b3ba783e80472ab06d96db5bd785da18b1200a1354165b"
+status = "residue"
+cause = "mir::Ty: DfsSpace<u32, u32>"
+
+[[fn]]
+path = "petgraph::is_bipartite_undirected"
+kappa = "04a06c0cc638196a275a917bb974b87379663b77a70c8a42062ac9dc2387c848"
+at = "G=u32, N=u32, VM=u32"
+embedded = "64f5504b8c5a047189f68895b3eb8c905c9b30e061c88153554bbce9bd5c6cd8"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::is_cyclic_directed"
+kappa = "f394d1698feb7d994f20e9d0990844a3a69aafc56661dcccd67490b1b6a36641"
+at = "G=u32"
+embedded = "7b161bd1e6c47519b6f386edd8162b23f4652f1ffef335dccfef80045d11bcb5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoNodeIdentifiers, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::is_cyclic_undirected"
+kappa = "c2effcdf9cfc9fa1dccee87bace3ecf313a12cb35ff44c22c29d660ccb901bbd"
+at = "G=u32"
+embedded = "42170a2b2873b5c9e11ada1a45607afe42287671d77a9ea58ac51b837fedb55e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeIndexable, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::is_feasible"
+kappa = "450ec1919ceab38cb6ebc6a9e84fefdc75080d8bfc3b0326c05af89c2422adac"
+at = "Direction=u32, EM=u32, G0=u32, G1=u32, NM=u32"
+embedded = "16955ed993e35bcd9727a6f0dfa073d4de0a87350893916ef4eb381d34691394"
+status = "residue"
+cause = "mir::Ty: state::Vf2State<'_, u32>"
+
+[[fn]]
+path = "petgraph::is_greater"
+kappa = "3e46813a8f4406639a31201cfb3507d336f8727f2fbbb63f20cedab9035d8f72"
+at = "K=u32"
+embedded = "5561e6689cce0398c5a3ad425a06a439626bef22f4dd2477b0f028157d3fd247"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <alloc::vec::Vec as Index>::index"
+
+[[fn]]
+path = "petgraph::is_isomorphic"
+kappa = "0d5f481e0eca5573090cdadd1a9b99a53d220a78b9b0441351913ef052969c61"
+at = "G0=u32, G1=u32"
+embedded = "bf0ec5a420986563f7a5778389ed8d58e88c721b4cd6b447192e36f3bf6e8c46"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeCount, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::is_isomorphic_matching"
+kappa = "83970898c5fc09a0811448119cde1141bf04a415ff4cab2d56020cfa319a46e5"
+at = "EM=u32, G0=u32, G1=u32, NM=u32"
+embedded = "6de1520932c2387fe0633ec9e89aadbbdc52ee32090a85954699daec28565c9d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeCount, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::is_isomorphic_subgraph"
+kappa = "58a4feb8b1f07dae5ce058819c5e03a1548f4d94c64e522c051dd3e6630fc4ab"
+at = "G0=u32, G1=u32"
+embedded = "7987a1b5b9fb82468e6e173b17235d4afb8c6c31e0cc45d28c3a92696c979fac"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeCount, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::is_isomorphic_subgraph_matching"
+kappa = "4b0cf42feac23c3f046066286c5eaf3087cd3e91fc0020d1d0fd662fab171036"
+at = "EM=u32, G0=u32, G1=u32, NM=u32"
+embedded = "51b8b49c919262121363f6e4651495c6262984c6fb7763ad15e3b1fefbfb5feb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeCount, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::<impl at src/algo/isomorphism.rs:259:20: 259:25>::clone"
+kappa = "a9deb5766af3c637af81c9bfcc6e5209a851ec40833e94e2ae18ee0561ecf0d8"
+embedded = "aab482e9ab808b855d10588ee4a24a4ef75b1c8fce3a7c2a1b06d75928c15b88"
+status = "residue"
+cause = "mir::Ty: algo::isomorphism::matching::OpenList"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::<impl at src/algo/isomorphism.rs:259:27: 259:36>::eq"
+kappa = "88ae09aeea6fdefcad974d56e25b73e0028d29983c2e3757a3a930b32614b4fd"
+embedded = "784f85aa07d1a371bdb977d2b1b5a8b6087aba406eef6c0d7d7c3cb78f9f119b"
+status = "residue"
+cause = "mir::Ty: OpenList"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::<impl at src/algo/isomorphism.rs:259:38: 259:43>::fmt"
+kappa = "145853259342a1e9146bb2249dbc3233a97dd294a529f0e3582b754d91920b5f"
+embedded = "f0ce4fb97c180ce668c42af262110ed939ea41b1e25e10dd48ce64fc1c95c27c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::<impl at src/algo/isomorphism.rs:266:14: 266:19>::clone"
+kappa = "91859ed2fff24386866238c8ef5796d6cd093fa2103ab96dd402094a49c24b73"
+at = "G0=u32, G1=u32"
+embedded = "d13165b5299214c9075209d907a575b55ab9cb20f35e29a90308194db24ccc27"
+status = "residue"
+cause = "mir::Ty: algo::isomorphism::matching::Frame<u32, u32>"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::<impl at src/algo/isomorphism.rs:266:21: 266:30>::eq"
+kappa = "109965e48d27c67c2961212363ebdfc34a3fc6addca9de58ed371288d5c1e4fc"
+at = "G0=u32, G1=u32"
+embedded = "49e035606035cebfb9bca75bae3cba6b213435021cb1999e6dc36e02cd0dd8bf"
+status = "residue"
+cause = "mir::Ty: Frame<u32, u32>"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::<impl at src/algo/isomorphism.rs:266:32: 266:37>::fmt"
+kappa = "743cdd8c26853155e5f53f3e86c5b7253218ea0caeb222fb7dd58afea96ea742"
+at = "G0=u32, G1=u32"
+embedded = "b09fca7f7537f114597f0d5dc9c4da07acad3aeeaef7e68f21f0aa60dda4533e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::GraphMatcher::new"
+kappa = "f99586836483cc0b8d082b7314d713e260c2319e2b9eaa7821c8812c9567f9d0"
+at = "EM=u32, G0=u32, G1=u32, NM=u32"
+embedded = "036f2f9091e0f8344a438049bba2cadfaa5b147b847573ddaa5825c11b0f1c40"
+status = "residue"
+cause = "mir::Ty: algo::isomorphism::matching::GraphMatcher<'_, '_, '_, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::GraphMatcher::next"
+kappa = "5cc3c104af2aa3171aa7e72f436439e84b55d61d7687bbd387259d14309d5e0e"
+at = "EM=u32, G0=u32, G1=u32, NM=u32"
+embedded = "213523e63598a88e59406a52169a4f3696d5de0afdc546c173482fc10285e74c"
+status = "residue"
+cause = "mir::Ty: GraphMatcher<'_, '_, '_, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::isomorphism::matching::GraphMatcher::size_hint"
+kappa = "4a84e2823526c93c55bcff62c916854d40965bff4a79ab2a3cc1744aa981b21a"
+at = "G0=u32"
+embedded = "20aa3023c1709e69a6529d51cc9db4efedbd2e35c4c255281d6f14c75ca99ec0"
+status = "residue"
+cause = "mir::Ty: G1"
+
+[[fn]]
+path = "petgraph::isomorphisms"
+kappa = "95e3986f221ed70f63fe4a7c3e3969b64eaffab7bfde0378a7b276ec9238ea11"
+at = "EM=u32, G0=u32, G1=u32, NM=u32"
+embedded = "afdff8cf2a04f084c63e2080d1538ae16c2c4ede5964047165ccdbfdb8f888e0"
+status = "residue"
+cause = "mir::Ty: state::Vf2State<'_, u32>"
+
+[[fn]]
+path = "petgraph::johnson"
+kappa = "08a658a4412112e5c277dcab66270edadeef400815eee41c62075e0556275b89"
+at = "F=u32, G=u32, K=u32"
+embedded = "bc5d1c37a970bbd09540c5343899aa91cf3f906fbd9e5a7e6c64fe0c5b108f17"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<(u32, u32), u32>"
+
+[[fn]]
+path = "petgraph::johnson_reweight"
+kappa = "1ad3fd44324ca4ba9e101a1213da7bf228a47ef793659d2914e4109b0ee508f4"
+at = "F=u32, G=u32, K=u32"
+embedded = "d83afb152828698429ceccecd3e3d8ef77a8b45307154085743b0cc712f95519"
+status = "residue"
+cause = "mir::Ty: algo::NegativeCycle"
+
+[[fn]]
+path = "petgraph::k_shortest_path"
+kappa = "1306e8edc839ac782fae098131b3d2266302c0eb1b9a2c2bb6790ffa5876b267"
+at = "F=u32, G=u32, K=u32"
+embedded = "9fd45204f0d0d0f817b7fb37d534ab2eddb2673adaf6c68337be86dbd2317f29"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<u32, u32>"
+
+[[fn]]
+path = "petgraph::kosaraju_scc"
+kappa = "d29d62b438bdda86bd55c9c704bb04511d4fb99e3018fb3f616dfa68fa5ce879"
+at = "G=u32"
+embedded = "4984313cff427929912ccb90172280fed2fc67547b9580f8e577b67c6c106113"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::maximal_cliques"
+kappa = "bc93f882c1c8025dd45add264d0010a58f5d4de2171290188734618a439798c6"
+at = "G=u32"
+embedded = "802e0c196e029f819908763d671393524e4269383568136561c97ba94cf2dc6d"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashSet<u32>"
+
+[[fn]]
+path = "petgraph::maximum_flow::ford_fulkerson::other_endpoint"
+kappa = "f272cc623a5eeaea26f7ce1e1cc75c444a90c2ade65931f5b2dfc2a6dc7406c1"
+at = "G=u32"
+embedded = "3a97a8a24aaaf1f6566dcf5024c424f0cde2a8dd5cad53e15db22a2355a80751"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeRef, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::maximum_flow::ford_fulkerson::residual_capacity"
+kappa = "5bc5b31c2f5da5736891b866ea076c065f1fa48b0f6aa1554a0be7f6d1b102f8"
+at = "G=u32"
+embedded = "20b1ade955555a69d2e22a4c8712f08ad8d3ad8fd750f5068e66e996eb6f7b5c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by EdgeRef, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::maximum_matching"
+kappa = "016c042063554ce992c28ec1e9f7cabb09215fcf25bc519bcbb7f2f9015f8d38"
+at = "G=u32"
+embedded = "060c8ba6ee06cee93eacf16a84ab3830c3da49c576c9fff95a7e4be5ebb6c85a"
+status = "residue"
+cause = "mir::Ty: algo::matching::Matching<u32>"
+
+[[fn]]
+path = "petgraph::min_spanning_tree"
+kappa = "557d6872dda73a7e86613aa60c72c349cd2bfd8e5cc6a566864249cb2ffa4b77"
+at = "G=u32"
+embedded = "cdecdcc9e6b31ec6a7920a3da5dbeac2ef4cf347424fe265b7f87fb9d2371e5e"
+status = "residue"
+cause = "mir::Ty: algo::min_spanning_tree::MinSpanningTree<u32>"
+
+[[fn]]
+path = "petgraph::min_spanning_tree::<impl at src/algo/min_spanning_tree.rs:122:10: 122:15>::fmt"
+kappa = "ad245ed8e53f4afdf18d6acc28ffc4a78e58166b2b7c69671b8e7a8f9022aa57"
+at = "G=u32"
+embedded = "4088a9903a1b881ec7b2f29ce39966467004617acfd98bb48b4f750c0915d591"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::min_spanning_tree::<impl at src/algo/min_spanning_tree.rs:122:17: 122:22>::clone"
+kappa = "42ed1ab090403b12355e85f032f20f125339bd076a68c87bdb949dcf5eab8a21"
+at = "G=u32"
+embedded = "11e99b67c269e2f1c1cdd117e3ba6d68571241f71186dbd375fae5a3face99c4"
+status = "residue"
+cause = "mir::Ty: algo::min_spanning_tree::MinSpanningTree<u32>"
+
+[[fn]]
+path = "petgraph::min_spanning_tree::<impl at src/algo/min_spanning_tree.rs:285:10: 285:15>::fmt"
+kappa = "aed108b5fe0f163daff21755dc209237dcba1958893103caf85978263b644d59"
+at = "G=u32"
+embedded = "52d701ec06cbf0fb1b41c582d153fef003b3ae0dbe425bed926fc4bf4f5d1790"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::min_spanning_tree::<impl at src/algo/min_spanning_tree.rs:285:17: 285:22>::clone"
+kappa = "2ce6b5ef87a81f678fd1a836b388de46cd8b7eccfa19184f81adbf6cc25898b1"
+at = "G=u32"
+embedded = "485867def0bd2ac63f4610837921445604d60c51ac033d3ec066012abcbed930"
+status = "residue"
+cause = "mir::Ty: algo::min_spanning_tree::MinSpanningTreePrim<u32>"
+
+[[fn]]
+path = "petgraph::min_spanning_tree::MinSpanningTree::next"
+kappa = "1e80a1fd2697a0c70d0b35ae6793f18ee55527527ec64b3a3a06ded23ae5bfb9"
+at = "G=u32"
+embedded = "943cc3763f31cb051bc806a9a60a712bb1d067cac02c2e38a4598cae0efb4be6"
+status = "residue"
+cause = "mir::Ty: data::Element<u32, u32>"
+
+[[fn]]
+path = "petgraph::min_spanning_tree::MinSpanningTreePrim::next"
+kappa = "61344746b2ade6734273155b8aeb0c8398977cf96b821d6d0221aac66dc8889c"
+at = "G=u32"
+embedded = "52b5932bdaa3ca5eb263816b46f57862af714b253dc790d0909bc72c187dc126"
+status = "residue"
+cause = "mir::Ty: data::Element<u32, u32>"
+
+[[fn]]
+path = "petgraph::min_spanning_tree_prim"
+kappa = "0fa045f7064aca48e1ff3d7c21e2b2324c43aece3dc4766a438fcb5d056f2a96"
+at = "G=u32"
+embedded = "92c719aeb02a0212b58849d150862a49ea6bca97fb93a7794ab9a1ae03c74cf0"
+status = "residue"
+cause = "mir::Ty: algo::min_spanning_tree::MinSpanningTreePrim<u32>"
+
+[[fn]]
+path = "petgraph::next_candidate"
+kappa = "a095c910dcce7f5c198a742e8e023486c8f37b80285ab6d8c9b95b54ed6883ce"
+at = "G0=u32, G1=u32"
+embedded = "024813b33e0633679d753359270fcd4b95330764835c1fc01304285736815b8b"
+status = "residue"
+cause = "mir::Ty: algo::isomorphism::matching::OpenList"
+
+[[fn]]
+path = "petgraph::next_from_ix"
+kappa = "90aebdf3465e85331dde4bde1877ab17a7d7c5f3ce261be579cd4d63f10947c0"
+at = "G1=u32"
+embedded = "71719dac97297b81a14e457f52a2aad2944cd9cbd6dbf018d16cbcb67909ce49"
+status = "residue"
+cause = "mir::Ty: G0"
+
+[[fn]]
+path = "petgraph::non_backtracking_dfs"
+kappa = "f695dd0bd297b41443bb996c0726e3fa79a11f026002f0e4c880aa59b53a4566"
+at = "F=u32, G=u32"
+embedded = "6557470baf27bbfe57455cfc93836011fe666f92079b753bbe010009512fddcd"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by VisitMap, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::non_terminal_leaves"
+kappa = "77b915980246946ba76cce4eb86b54443ff5e46b8e8984e00a9f7d7e8bba91f4"
+at = "G=u32"
+embedded = "a6a21ad0dffb2813953b65321ee5a21919f57ea001a9891dc95a32d9f7c4252b"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashSet<u32>"
+
+[[fn]]
+path = "petgraph::out_edges_info"
+kappa = "da521f4b5a5f34b9f6cbf2c8e14a789c096209de1104f454eb3bc19b34627dd2"
+at = "D=u32, G=u32"
+embedded = "f8fc31a0b0fb466d1e22c3adaff3ce5991905127813b1a9428456bb0b1f7ddf1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeIndexable, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::page_rank"
+kappa = "f4f5d6675c2cfb34de120c4e830633855108d5eb861f851d83b29ee63570e3d8"
+at = "D=u32, G=u32"
+embedded = "15d1f91da7c8d3388b7ad30013e1edbf0b66b1841a25b30f4e209bca9dfdfc3f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by NodeCount, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::pop_state"
+kappa = "40d589951981969d25cbaf48a1d1e2f3b628d6f47160a3fb03ed0d99a44d519c"
+at = "G0=u32, G1=u32"
+embedded = "a72c059852185ed2f9cb65c8fbdbeb97f9e4f07babb8029547ec26b9def7ac0a"
+status = "residue"
+cause = "mir::Ty: state::Vf2State<'_, u32>"
+
+[[fn]]
+path = "petgraph::predecessor_sets_to_idx_vecs"
+kappa = "0140a8df44dae2cee8d1ccc191b71f17ac6d40d77ef8e5ea686e20627915279e"
+at = "N=u32"
+embedded = "4c6760322f0bb006795c04a4da859af3032c2636672c8a700c8c706cefb4647c"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashMap<u32, usize>"
+
+[[fn]]
+path = "petgraph::push_state"
+kappa = "aee8588d592be993a3c8b348c579b4a34923391f97de4d5190d8b79e2ec001f2"
+at = "G0=u32, G1=u32"
+embedded = "5901a55b97631e5aa884ea549d489b5d0c1f9f910c10170f377434e43ac305fd"
+status = "residue"
+cause = "mir::Ty: state::Vf2State<'_, u32>"
+
+[[fn]]
+path = "petgraph::scc"
+kappa = "2829b02af4ee0ff89129eca7a75cadaf8c7b942fde23600082a5646ccc4252bb"
+at = "G=u32"
+embedded = "07786b5298f66e4af3d5ee831a0d3c8926c3ef92f4b3929674f4c5052b40a7b7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: algo::scc::kosaraju_scc::kosaraju_scc: petgraph's MIR stops at type outside the lift: <u32 as visit::GraphBase>::NodeId"
+
+[[fn]]
+path = "petgraph::semantic::F::enabled"
+kappa = "c61723c1f916e98fc19c9c86ead0dac0314dab03adfe786fbea34bbde25a2f08"
+embedded = "4e5723159285f04bab3577c4f17c3fd9074c23744ffe9decafa3cc0e8c092501"
+status = "translated"
+digest = "2ad7ce44434ba88ccb3f77b17c06586c89e5ffc072223a948454aac0c579608f"
+
+[[fn]]
+path = "petgraph::semantic::F::enabled#2"
+kappa = "98f6a0f137f03375bbe14295c29445db5c532e59f1599b6c585fe0b68a7350a6"
+embedded = "73b9529ac7a5f65ac2763f4c28f3edc01e94978b5f80daf8ce0f0eb6d6f77675"
+status = "translated"
+digest = "2ad7ce44434ba88ccb3f77b17c06586c89e5ffc072223a948454aac0c579608f"
+
+[[fn]]
+path = "petgraph::semantic::F::eq"
+kappa = "69d8562aeff014334e738037633a876adfcfa5817f61198c802bf63c631c4d8f"
+at = "F=u32, G0=u32, G1=u32"
+embedded = "6acdf388a6988787cf80079be1860bae5623f47dc990cedd996f11d57dbd3e4b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMap, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::semantic::F::eq#2"
+kappa = "530519e70816dda57ee1590ca8545553625640b2eec7f19f77009a3c4fb3ce40"
+at = "Direction=u32, F=u32, G0=u32, G1=u32"
+embedded = "d2e70a8eb8047d6d0fa11fb8928926005b01f8d1ac438a5237634ab77a3541e9"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "petgraph::semantic::NoSemanticMatch::enabled"
+kappa = "edea3475b78ea415d3906b22b71c8f2f39f642def310db5c4fe4e674107c852b"
+embedded = "c5ec929f5c38e640eee9ae95343e97ede5d0a7a231789072dcf51bd07675b30f"
+status = "translated"
+digest = "bfa5c33b7a91a48c00ecb9a6b757d63cf1d6569dd147c26d697b23a366e723f8"
+
+[[fn]]
+path = "petgraph::semantic::NoSemanticMatch::enabled#2"
+kappa = "495610cc2f1a66cdd11ccc7ff46955cbb924454b23f02d45abc5ee15fbc344ac"
+embedded = "9f042d0774726328f0081ede1e5a5a0e64a4dd6a8da3382d8a28a5d5451c33a1"
+status = "translated"
+digest = "bfa5c33b7a91a48c00ecb9a6b757d63cf1d6569dd147c26d697b23a366e723f8"
+
+[[fn]]
+path = "petgraph::semantic::NoSemanticMatch::eq"
+kappa = "f79b8dc4855596acddca5d8fb8fb3b83657c9bd3d49723a29f2e11d478ccf091"
+embedded = "d339082e7c3ee9b0fdd99c894b7b42d4a8d2b87c0bea9e6ce65fb6066198ff82"
+status = "residue"
+cause = "mir::Ty: NoSemanticMatch"
+
+[[fn]]
+path = "petgraph::semantic::NoSemanticMatch::eq#2"
+kappa = "727a8d85ea68eaab2c5a21f50382165de026e8e9b944928b97c5f2bb31e39217"
+embedded = "5011f13526ba745abc0237612e6e96564a5856c9408622b719c597954af1b946"
+status = "residue"
+cause = "mir::Ty: NoSemanticMatch"
+
+[[fn]]
+path = "petgraph::set_object"
+kappa = "0347c42d5e771475dc9700398c07fcd0d958bf1428f765e525517905c670d0c3"
+at = "K=u32"
+embedded = "324a8156edcd15bceffae4739b1858c63e6573e2e8300c85f39f8477926d1c0b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <alloc::vec::Vec as IndexMut>::index_mut"
+
+[[fn]]
+path = "petgraph::simple_fast"
+kappa = "cc62b3f20d0c803510407d9c26121fb15c9de916b0e9b29a23983ecfe51cdc95"
+at = "G=u32"
+embedded = "0bae4f178bf9997bc724692543f9e67fb5071ed3224366cab3a59df9f8dc4909"
+status = "residue"
+cause = "mir::Ty: algo::dominators::Dominators<u32>"
+
+[[fn]]
+path = "petgraph::simple_fast_post_order"
+kappa = "594e2aaccb1e065a5c40cc03f678498760619c17a899e504c2cfc01a4068c3aa"
+at = "G=u32"
+embedded = "94bc0a3617d40b58538a3ce789db4dde07240bc54977553e08ecb7485c219ffd"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashSet<u32>"
+
+[[fn]]
+path = "petgraph::spfa"
+kappa = "ffa9554309a551648165d6c873e529ff15ba593755b0df4e01cde56582d4dec5"
+at = "F=u32, G=u32, K=u32"
+embedded = "b8ac4580508cbbf6462d65c86b5b1362a122870450162f54307a02962e00fe40"
+status = "residue"
+cause = "mir::Ty: algo::bellman_ford::Paths<u32, u32>"
+
+[[fn]]
+path = "petgraph::spfa_loop"
+kappa = "34e72057f1bd8826525be1699624ed977f598f8063d2be45436efed4a97832d8"
+at = "F=u32, G=u32, K=u32"
+embedded = "ff0e82f111903b9a18e500bb0672ee595ce3e1161b85dd863f4272ca008fbe72"
+status = "residue"
+cause = "mir::Ty: algo::NegativeCycle"
+
+[[fn]]
+path = "petgraph::state::<impl at src/algo/isomorphism.rs:23:14: 23:19>::fmt"
+kappa = "476f48d80df6c4a24f9bf86b2e2cffa4ad9ddcf7886c4264e543a62eb3d31abf"
+at = "G=u32"
+embedded = "1814174358bf8cdd347ebf8b22466fce9d65dfd2ca7798eca4ec0a675dc6fd78"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::state::Vf2State::is_complete"
+kappa = "a41de3a28a0eda3b57726ff4b20888696b4ee406e03b0330411eaf98f09505d8"
+embedded = "45de85a2c2b0e576cce9ff118025b591b2a6c55f0d1ecceea85196da891c0373"
+status = "residue"
+cause = "mir::Ty: G"
+
+[[fn]]
+path = "petgraph::state::Vf2State::new"
+kappa = "9ae83d94b88747829deff0211e3c19abd5b53e42460a2e8c5f645813f7dbba73"
+at = "G=u32"
+embedded = "d1c99ddefa5a61fc903d614bcc2f030f3ee2f384ddca7b2ad02f2b008d55e488"
+status = "residue"
+cause = "mir::Ty: algo::isomorphism::state::Vf2State<'_, u32>"
+
+[[fn]]
+path = "petgraph::state::Vf2State::next_in_index"
+kappa = "c5d296f9cb15d27f7fcff4872fca51f723a705a33c34f253b28b0ac6c6b15b89"
+at = "G=u32"
+embedded = "95cd5eaac772f90b1a19fc8f1df5de79d5e52b8beb4cf8a988d503c19a4ab067"
+status = "residue"
+cause = "mir::Ty: state::Vf2State<'_, u32>"
+
+[[fn]]
+path = "petgraph::state::Vf2State::next_out_index"
+kappa = "6ad02158499bbb3b4d32ee4d9f09b92f71dda6e114d1c99e04e1a9190d76ab46"
+embedded = "37da50938b8d1bd037ea4a81a2f7932f82d97e96f42bda93abf9a7e2e8848fe1"
+status = "residue"
+cause = "mir::Ty: G"
+
+[[fn]]
+path = "petgraph::state::Vf2State::next_rest_index"
+kappa = "af99397517b4e5024d969b40afceb639e887f1aeab37c0077ee8794eb11cfdc4"
+embedded = "508afbb327d8636db37e85a8137611fec880103352ac90de65a3b40dc9c4525c"
+status = "residue"
+cause = "mir::Ty: G"
+
+[[fn]]
+path = "petgraph::state::Vf2State::pop_mapping"
+kappa = "7c9f77014dfc53ce02e37effb1c209567c85754660bd96a21793f8cdaae7c98d"
+at = "Direction=u32, G=u32"
+embedded = "365ffada01bd0c25dcf3ae0a7252675d5ec5e0e39916e51cc60d1ecd30af8149"
+status = "residue"
+cause = "mir::Ty: state::Vf2State<'_, u32>"
+
+[[fn]]
+path = "petgraph::state::Vf2State::push_mapping"
+kappa = "99dca39a63316e1147f104eba1b857cdf93a61e08c526f849d775a638d6a336f"
+at = "Direction=u32, G=u32"
+embedded = "f205952652449400569fea4b889ed6e18dcdb2974778b64c0777788262794417"
+status = "residue"
+cause = "mir::Ty: state::Vf2State<'_, u32>"
+
+[[fn]]
+path = "petgraph::steiner_tree"
+kappa = "560ddbee013f589bf415879f8ea9cf012425049911444f569c87ee2555501a2e"
+at = "E=u32, Ix=u32, N=u32, Undirected=u32"
+embedded = "234333ea03bbb327b30c220b1a7b8ece9f13aa3a581cfce720a17d382f433406"
+status = "residue"
+cause = "mir::Ty: graph_impl::stable_graph::StableGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::subgraph_edges_from_metric_closure"
+kappa = "a2a24aa6e9b108b9aadc6a576cdfbcadf57ba11d34e548756d659043f9a705e7"
+at = "G=u32"
+embedded = "dd3772f5287e83dc5d195408bac21490a96aa3504a211c512084f9aaaf96bd8b"
+status = "residue"
+cause = "mir::Ty: hashbrown::HashSet<u32>"
+
+[[fn]]
+path = "petgraph::subgraph_isomorphisms_iter"
+kappa = "130148c1f210cf985c6fcb7c68462d12a6607ede2933698884a12fdbb8f82dad"
+at = "EM=u32, G0=u32, G1=u32, NM=u32"
+embedded = "e129ead204037f39d53612ba9c0516e4ea29936d1d629196f59c2e3a4e1c653f"
+status = "residue"
+cause = "mir::Ty: algo::isomorphism::matching::GraphMatcher<'_, '_, '_, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::tarjan_scc"
+kappa = "83d92f1fa9b737d192d12aa4e5d70a84dde1908c11ca176800b6f5e64f8c1a40"
+at = "G=u32"
+embedded = "2287d0fe87a5081f3a03716b0c7a8c581d773bbcd6cfba5e4c52631d4b762521"
+status = "residue"
+cause = "mir::TerminatorKind::Call: alloc::vec::Vec::new"
+
+[[fn]]
+path = "petgraph::tarjan_scc::<impl at src/algo/scc/tarjan_scc.rs:14:10: 14:15>::fmt"
+kappa = "1d6263679a9570246f2208716d6a83b492b6e725f8384238f8fcd0c9cb1e102c"
+at = "N=u32"
+embedded = "a26ba71d6b807ac6fd5e5e6d5536d64926652c8b3bd6c70f1d7d51c70d9c9be9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::tarjan_scc::<impl at src/algo/scc/tarjan_scc.rs:6:16: 6:21>::clone"
+kappa = "b38db4d28167f306f1c0bc8510399d82fb3869bd955d6702b2fd79caa995a0b4"
+embedded = "aad6a5cf76900ab30cea23d4a2e66cdd46207cbd973b5f0c4b160760af94bed2"
+status = "residue"
+cause = "mir::Ty: algo::scc::tarjan_scc::NodeData"
+
+[[fn]]
+path = "petgraph::tarjan_scc::<impl at src/algo/scc/tarjan_scc.rs:6:23: 6:28>::fmt"
+kappa = "ed8e15767b64b1abc9fb4b787b7bff79884052fadf7c1c2a9aba43bfcd4b0a4f"
+embedded = "75bc408c23e48a96a1961bc702f8bab4b0be3337d28209da38c14793e28efc6c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::tarjan_scc::TarjanScc::default"
+kappa = "72d6abb9c07011af9bfb2c02d5a86404310c45c7d3bc0da7b5c408be2de787d3"
+at = "N=u32"
+embedded = "fa3715317ee0615d6472fa4b0c6bd25e7884f25913fcc57e2c02bc7f04242dc7"
+status = "residue"
+cause = "mir::Ty: algo::scc::tarjan_scc::TarjanScc<u32>"
+
+[[fn]]
+path = "petgraph::tarjan_scc::TarjanScc::new"
+kappa = "3e4ea89661c5e9b803d28fcbf37a816af9c80c79f1cef9c4a93be823a05a3fec"
+at = "N=u32"
+embedded = "821e852d9102dc953c6b7abfb4775b496ee30dd6cd92698564dec4696765bfd1"
+status = "residue"
+cause = "mir::Ty: algo::scc::tarjan_scc::TarjanScc<u32>"
+
+[[fn]]
+path = "petgraph::tarjan_scc::TarjanScc::node_component_index"
+kappa = "c8427433ec2565e8680854f64029422d70dd1174812e95455b3d6951c748d3c9"
+at = "G=u32, N=u32"
+embedded = "b06882adf7f008929693f587e1c60577d81dfe86c396f8c346f1b14c0f4fb9bf"
+status = "residue"
+cause = "mir::Ty: TarjanScc<u32>"
+
+[[fn]]
+path = "petgraph::tarjan_scc::TarjanScc::run"
+kappa = "e97c57d4096cde1e34e892cd9a36e6931c2e3af06d446c00694e3bc421635eb1"
+at = "F=u32, G=u32, N=u32"
+embedded = "50fcc5cb520a4cf6f11cbdefdf9ad7b06beee7b72b31216fa6d02e1cb42a0951"
+status = "residue"
+cause = "mir::Ty: TarjanScc<u32>"
+
+[[fn]]
+path = "petgraph::tarjan_scc::TarjanScc::visit"
+kappa = "35188a05c1395dd239d879db6dbb67836988e1a5b8823dba8fc57817442b8a0a"
+at = "F=u32, G=u32, N=u32"
+embedded = "b6172f9a43f21a40bb93bcdb5c4fd41e452a8620d6b52e9e829a823804371011"
+status = "residue"
+cause = "mir::Ty: TarjanScc<u32>"
+
+[[fn]]
+path = "petgraph::toposort"
+kappa = "8cdd0ebea65eb7d334759bf540f14d2321628f9da386bc51f642e9c999a57174"
+at = "G=u32"
+embedded = "396e2e8955f181e21913b68fc8d13f5ca5a71aed21daac4c794ac05ecac3634a"
+status = "residue"
+cause = "mir::Ty: algo::Cycle<u32>"
+
+[[fn]]
+path = "petgraph::with_dfs"
+kappa = "e08588d47806ab2b835b3d85492f92042e8c681080caf84a2c364ad930868d7e"
+at = "F=u32, G=u32, R=u32"
+embedded = "f1bc0e458970dce92e9a984d7fd3dc312cf7aa245087e8d4a2d521c3fddc24ea"
+status = "residue"
+cause = "mir::Ty: DfsSpace<u32, u32>"
+
+[[fn]]
+path = "petgraph::with_dynamic_goal"
+kappa = "f8f54b5f301750a30376b01b495dee6a71a7a2ea3fc122b0f4153a5121856f8b"
+at = "CostFn=u32, G=u32, GoalFn=u32, K=u32"
+embedded = "c3dab1c57004af2da076d31951414cffb32247ee6cade5e7154fa5d27baf08a4"
+status = "residue"
+cause = "mir::Ty: algo::dijkstra::AlgoResult<u32, u32>"
+

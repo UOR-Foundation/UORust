@@ -1,0 +1,16 @@
+[[fn]]
+path = "tap::Conv::conv"
+kappa = "bb4082908af0f9d86b8e93c347da5e9e02c514cc2f495261030c54c88b2d75fd"
+at = "Self=u32, T=u32"
+embedded = "9063ada23a1bd70bc6bc03bccf4ee29adc4d70c284b1125f0e28d83c3d735176"
+status = "translated"
+digest = "89ea3738f5a1a8239ecd379124484047b0acef8b2ef3c4670ea2360b29155f6b"
+
+[[fn]]
+path = "tap::TryConv::try_conv"
+kappa = "51393285bdec658113a372092415d0c188d17f74f17f5377341e3ca01a5f5bba"
+at = "Self=u32, T=u32"
+embedded = "00ef957b020b1892c8c5215830b974ceb4a506b3fb0033e24d874116885f252d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TryInto, which u32 does not implement in core"
+

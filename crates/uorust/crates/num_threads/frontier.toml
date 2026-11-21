@@ -1,0 +1,31 @@
+# The num_threads register (written by `uorust crate num_threads@0.1.8`; do not edit): every body of
+# num_threads's MIR at num_threads 0.1.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 5
+translated = 0
+residue = 5
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.imp]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 5
+embedded = 5
+evaluable = 5
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 5

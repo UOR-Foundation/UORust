@@ -1,0 +1,57 @@
+[[fn]]
+path = "dirs-sys-next::option_contains"
+kappa = "a5b53b872119c602ce97fbd573e1e8aebdd0c1cb2232e98779adf2765365f71a"
+at = "T=u32"
+embedded = "21b34c8fc9dff2d330782dec7aae46bf7aab72edf849c2dafe12099506ac6f5f"
+status = "translated"
+digest = "8c1e8d8204659ace33452e3da18e785e7ff72508623225735b9fb52525d118ab"
+
+[[fn]]
+path = "dirs-sys-next::parse_user_dirs"
+kappa = "5cdb5c74bb1615b063658be1b96d7cfc5ffbe6b9752a53db0f56eb7ebfcb9e50"
+embedded = "7966d336f431840b4dc260b1c6d9485b37e4531d39a44343ea3caf68ede7dcbd"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "dirs-sys-next::read_all"
+kappa = "ee588280a2754e9c317ab2c9d59e4cfd95c9fce32f748a87cf7f78aa71e2f493"
+embedded = "b9c42dba87160144c2dc0f3a9d4a330ea162049ff08da63d050115a691fecfc2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "dirs-sys-next::shell_unescape"
+kappa = "8a102235f12f488c36c054d47101e5ed97f1793cc4af89ace5a812fb4b36e26b"
+embedded = "a8de748a378be389fb44cee69e4cb8091940bc80635084f2cc53726feea2c3e1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+
+[[fn]]
+path = "dirs-sys-next::single"
+kappa = "963964f670b00b9237056ca208ef886e503857db1278518b602c2f6794cc5a42"
+embedded = "d78da5cab73fef38b8c16004c2cbfb2a998614e110a080f1fc2feab756c41467"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "dirs-sys-next::split_once"
+kappa = "6711e52f47e5262518786fd63bd81910dd0b62864da8d0eceb598b39bb33738e"
+embedded = "a459d778f1ff0ebebe35c2ec1a8012d4085050c6f13b6ac370e205990c9fff92"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <std::slice::Iter as Iterator>::position"
+
+[[fn]]
+path = "dirs-sys-next::trim_blank"
+kappa = "2633f0db39ca811ad32a4220bdf1c8ac81ca75a36542b9d9b3ab8bc5ee394aae"
+embedded = "95149697be432bf3b2dd84e6ad0b550ed7bb24f48df04c4d213b01c93362a4d5"
+status = "residue"
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "dirs-sys-next::xdg_user_dirs::all"
+kappa = "fa2ece3f26d306c44914b279b40fe001610353f08dce954a2cfb68418c7943ae"
+embedded = "a4f56d985f3446cb5d90798b20af9b90db4cae5a2fe9450259528f5c29cd785f"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+

@@ -1,0 +1,118 @@
+[[fn]]
+path = "cookie::jar::<impl at src/jar.rs:85:10: 85:17>::default"
+kappa = "531e680a56d7d8819b5c6bc0368eff0b0d37f167565456e4f7739df37cf694c7"
+embedded = "3add26299b630d7b87c372e68083630b76b453811a88e988332336f913b987b9"
+status = "residue"
+cause = "mir::Ty: jar::CookieJar"
+
+[[fn]]
+path = "cookie::jar::<impl at src/jar.rs:85:19: 85:24>::fmt"
+kappa = "eb3fb22ea7c049db00b9f28351dc603974695dd415f1d330fed1d252ce0741e1"
+embedded = "dcc01d929828ced3b8ff944caf6edcbf450fefcdb7d2417760c61977869c5184"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "cookie::jar::<impl at src/jar.rs:85:26: 85:31>::clone"
+kappa = "af2966d137bda94b43acc42916b2f7afc17e7f09c36eb04ec7997f5e88593f85"
+embedded = "88a8c7c3615433fbecc8ce917bf2ecdc747043e857bb8ccb095fb5f542c07491"
+status = "residue"
+cause = "mir::Ty: jar::CookieJar"
+
+[[fn]]
+path = "cookie::jar::CookieJar::add"
+kappa = "36b4fc01f338b24a2d43cbb63febeb6482f77396eadf12d6ebea41b7fea09608"
+at = "C=u32"
+embedded = "9e07d8e0827708378e6aa622a2e7729df3839e3d277ad1a21d26cedad9ddd478"
+status = "residue"
+cause = "mir::Ty: CookieJar"
+
+[[fn]]
+path = "cookie::jar::CookieJar::add_original"
+kappa = "3aadd355e19ec31d1288f111b1ff1601c90bcf57eb8460f58655958a46f21070"
+at = "C=u32"
+embedded = "645d07dae480730767563d2d4b6d49c14d65043cd25185277e5f2bd94da8a73d"
+status = "residue"
+cause = "mir::Ty: CookieJar"
+
+[[fn]]
+path = "cookie::jar::CookieJar::delta"
+kappa = "f3757757f519e4b54393c54b903f96033667ce2715bfd1372c00c0d4d33607ae"
+embedded = "7979e4eaf8228047d0bf7407555f15b3428568146e3fa9bb61a140f9d738accb"
+status = "residue"
+cause = "mir::Ty: jar::Delta<'_>"
+
+[[fn]]
+path = "cookie::jar::CookieJar::force_remove"
+kappa = "f5aa1042b5c96f3609aacdd773089301184ee6ef466e7edad3fbd2da469dbe1e"
+at = "N=u32"
+embedded = "dd60920a5885e995d311e7214077bb1500d3e8c82a637dab459899bbd1620393"
+status = "residue"
+cause = "mir::Ty: CookieJar"
+
+[[fn]]
+path = "cookie::jar::CookieJar::get"
+kappa = "8e0e47d602c1c535d2c55a906e547268941345c71a5512c781cf52b672e6bdbd"
+embedded = "05021e811ca548f88cf9d30df1157f92b6d8df65e8999d19689cda957a907bba"
+status = "residue"
+cause = "mir::Ty: Cookie<'_>"
+
+[[fn]]
+path = "cookie::jar::CookieJar::iter"
+kappa = "6ef6a7684b6d06f99bb73d11bfded0bff25f4ff568629872ef139f63f5223568"
+embedded = "8de2b8c257a890783890bfc96a256827ab88a6de6224b390b91bf9ab31be7302"
+status = "residue"
+cause = "mir::Ty: jar::Iter<'_>"
+
+[[fn]]
+path = "cookie::jar::CookieJar::new"
+kappa = "ac86858e1d52f3414373f7ecb876657809b728414e3f759eb151b5c6ce74c4e8"
+embedded = "7580472a09d21d02cbcd956b4de9129ad7d81efb330526eaa9d644dfb73e087a"
+status = "residue"
+cause = "mir::Ty: jar::CookieJar"
+
+[[fn]]
+path = "cookie::jar::CookieJar::prefixed"
+kappa = "373a7f83faa46c3aff42b7263c78d1b292dd37d4699238a78f034b7395904e68"
+at = "P=u32"
+embedded = "54927ce817f7188b675ca855a6e451cb6263fa3cfa4acad847cdb19f3484e614"
+status = "residue"
+cause = "mir::Ty: jar::CookieJar"
+
+[[fn]]
+path = "cookie::jar::CookieJar::prefixed_mut"
+kappa = "70cd5b3f0e98e2bd83b1bf35d2f9a5a5ca436c18a3dd5a2667c5ab1ee1bc7015"
+at = "P=u32"
+embedded = "d34e98b3327ea6efd8a7cb242f41908dcc89638d6ce87abd74c36b4bcfca2fc9"
+status = "residue"
+cause = "mir::Ty: jar::CookieJar"
+
+[[fn]]
+path = "cookie::jar::CookieJar::remove"
+kappa = "783e5d3b6ababed116d6101f4a95d27ccdbb74e4c2ca7df99d591e38e74177bd"
+at = "C=u32"
+embedded = "4cdf869e7582b701734664f0eff56a992f2d10245839e31a16681c8579b17110"
+status = "residue"
+cause = "mir::Ty: CookieJar"
+
+[[fn]]
+path = "cookie::jar::CookieJar::reset_delta"
+kappa = "e765905a2e6d88b7100c405339199dcc39a8b338d749aab1eba1691e963c5363"
+embedded = "1c0e736b8a1a884fa485d35a006ee9bff1c5cba32f00126a2eaa88a478821444"
+status = "residue"
+cause = "mir::Ty: CookieJar"
+
+[[fn]]
+path = "cookie::jar::Delta::next"
+kappa = "7371b64797757a037a44f3ce0a4198071eedd06bb56d11555ee43c62dc3a87a8"
+embedded = "ce77487866101f35ec39d782919e55bfef252851a6dd56ee51a5b1b8c9af3659"
+status = "residue"
+cause = "mir::Ty: Cookie<'_>"
+
+[[fn]]
+path = "cookie::jar::Iter::next"
+kappa = "8f36f0c6d14e79cf822b117c325570de58f25b50ecfd94c6910fd246013c995b"
+embedded = "79c6134446e5261066ca60fe0cdfb6900d850c7f18f1f4236485e458c67b3be4"
+status = "residue"
+cause = "mir::Ty: Cookie<'_>"
+

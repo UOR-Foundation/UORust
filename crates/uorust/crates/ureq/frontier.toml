@@ -1,0 +1,769 @@
+# The ureq register (written by `uorust crate ureq@3.5.2`; do not edit): every body of
+# ureq's MIR at ureq 3.5.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 658
+translated = 2
+residue = 656
+
+[module.body]
+bodies = 52
+translated = 1
+residue = 51
+
+[module.config]
+bodies = 90
+translated = 0
+residue = 90
+
+[module.crate]
+bodies = 50
+translated = 0
+residue = 50
+
+[module.error]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.middleware]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.pool]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.proxy]
+bodies = 58
+translated = 0
+residue = 58
+
+[module.query]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.request]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.request_ext]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.response]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.send_body]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.timings]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.tls]
+bodies = 84
+translated = 0
+residue = 84
+
+[module.unversioned]
+bodies = 118
+translated = 1
+residue = 117
+
+[module.util]
+bodies = 33
+translated = 0
+residue = 33
+
+[embedding]
+bodies = 658
+embedded = 658
+evaluable = 657
+blocked = 1
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 64
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: config::ConfigBuilder<u32>"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: config::Config"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: send_body::SendBody<'_>"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: body::Body"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: request::WithoutBody"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::time::Duration"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Proxy"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: request::RequestBuilder<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: agent::Agent"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: pool::Connection"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: request::WithBody"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ConsumeBuf"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: HeaderMap"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: LazyBuffers"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: dyn unversioned::transport::Transport"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: timings::NextTimeout"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ProxyProtocol"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: dyn unversioned::transport::buf::Buffers"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proxy::ProxyBuilder"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: tls::TlsConfigBuilder"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: config::AutoHeaderValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proxy::Proxy"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::time::Instant"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::Uri"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TlsConfig"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TlsProvider"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: body::BodyReader<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: body::BodyWithConfig<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: body::build::BodyBuilder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: timings::Timeout"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tls::cert::Certificate<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: transport::time::Duration"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Authority"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NoProxy"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NoProxyEntry"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Pool"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: query::QueryParam<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: timings::CallTimings"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tls::RootCerts"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tls::TlsConfig"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tls::cert::PrivateKey<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: transport::time::Instant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Body"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IpFamily"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: KeyKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ProxyInner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: QueryParam<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResponseInfo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cert::PrivateKey<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: config::Timeouts"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pool::PoolKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proxy::NoProxy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proxy::ProxyProtocol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: request_ext::WithAgent<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tls::ClientCert"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tls::TlsProvider"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tls::cert::PemItem<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::chain::ChainedConnector<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CertDer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Either<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NextTimeout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PoolKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PoolKeyInner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RustlsTransport"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Scheme"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TransportAdapter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TunnelTransport"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: body::BodySourceRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: body::ContentEncoding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: body::ResponseInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cert::Certificate<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: config::IpFamily"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: config::RequestLevelConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: config::typestate::AgentScope"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: config::typestate::HttpCrateScope<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: middleware::MiddlewareChain"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proxy::NoProxyEntry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: request_ext::AgentRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rustls::client::danger::HandshakeSignatureValid"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rustls::crypto::CryptoProvider"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::TcpStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<dyn std::ops::Fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timings::CurrentTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tls::cert::KeyKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::DefaultConnector"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::tcp::TcpTransport"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::BodyMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::Extensions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::HeaderMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by HeaderMapExt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Transport"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proxy::NoProxy::try_from_env::TRY_ENV::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: proxy::Proxy::try_from_env::TRY_ENV::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Agent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AutoHeaderValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CallTimings"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ClientCert"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConnectionDetails<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConnectionPool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MiddlewareChain"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RootCerts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TcpStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TcpTransport"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Uri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: agent::AgentInstance"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: body::CharsetDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: body::gzip::GzipDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: body::limit::LimitReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: body::lossy::LossyUtf8Reader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cert::PrivateKeyDer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::typestate::RequestExtScope<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::typestate::RequestScope<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn unversioned::transport::Connector<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn unversioned::transport::ShutdownHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Iterator<Item = QueryParam<'a>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Iterator<Item = u32> + 'a"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: middleware::MiddlewareNext<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: percent_encoding::AsciiSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pool::ConnectionPool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pool::Pool"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: query::QueryParamIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: query::Source<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: request::ForceSendBody"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: response::RedirectHistory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: response::ResponseUri"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: run::BodyHandler"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: run::CallResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::ClientConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::SignatureScheme"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::client::danger::ServerCertVerified"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::pem::SectionKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: send_body::ReadAdapter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tls::cert::CertDer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tls::rustls::CachedRustlConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tls::rustls::RustlsConnector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tls::rustls::RustlsTransport"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unversioned::resolver::DefaultResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::buf::LazyBuffers"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::connect::ConnectProxyConnector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::io::TransportAdapter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unversioned::transport::tcp::TcpConnector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::client::Await100Result"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::client::RedirectAuthHeaders"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::client::SendRequestResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::client::state::Prepare"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::client::state::RecvResponse"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::client::state::Redirect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::HeaderName"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::HeaderValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::Method"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::Request<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::Request<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::Response<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ureq_proto::http::Version"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::ConsumeBuf"
+bodies = 1

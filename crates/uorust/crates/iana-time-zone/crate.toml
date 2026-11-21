@@ -1,0 +1,37 @@
+[[fn]]
+path = "iana-time-zone::<impl at src/lib.rs:74:10: 74:15>::fmt"
+kappa = "f22127cf89f83405984882e74c99bc9c0d4eaf07194744bafd315286fb539d46"
+embedded = "da8a0d39c78663db0ccadc754fcbc652884b557b7c379dca5a7135593ea584da"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "iana-time-zone::GetTimezoneError::fmt"
+kappa = "fc06266ecbaf76c4a80509012decda110d4a60ac4a31dac8a9636329dbe8edd7"
+embedded = "ce44f3b16ede2e726fa68dd84cd5400cc7fd612b0c4d47186547dfdd9bc74884"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "iana-time-zone::GetTimezoneError::from"
+kappa = "5db5ad9cfcb5919c94a9ac498abcf991255dbee7a2f3e3ddaab9a6894abdcb3e"
+at = "GetTimezoneError=u32"
+embedded = "80b3c77f6a8c5b10755c7bc900b2d412e866fe7831ef227aed65ba3e9024cef8"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "iana-time-zone::GetTimezoneError::source"
+kappa = "1e443df76ab18fe7c4db0fe21705698cb1f8a5df528ab6b9a99b3610dfc795a8"
+embedded = "c4705e3b957c66b45e69023f230ffc81d141ff53c312399629b82e0bb10f1b31"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "iana-time-zone::get_timezone"
+kappa = "d426f6e1c9663e4742a7850f6c113dfdfa8d5f4706523b4642972e79d7169160"
+at = "GetTimezoneError=u32"
+embedded = "9f56d599e717b256fc9118ce14aff399ccc3a6ada5013f8756c4f99b2bfcf9f8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: platform::get_timezone_inner: iana-time-zone's MIR stops at mir::TerminatorKind::Call: platform::etc_localtime: iana-time-zone's MIR stops at type outside the lift: std::path::PathBuf"
+

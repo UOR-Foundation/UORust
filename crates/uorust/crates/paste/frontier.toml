@@ -1,0 +1,74 @@
+# The paste register (written by `uorust crate paste@1.0.15`; do not edit): every body of
+# paste's MIR at paste 1.0.15, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 18
+translated = 0
+residue = 18
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.attr]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.crate]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.error]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.segment]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 18
+embedded = 18
+evaluable = 14
+blocked = 4
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: segment::Segment"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokenTree"
+bodies = 1

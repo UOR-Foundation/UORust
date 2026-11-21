@@ -1,0 +1,35 @@
+[[fn]]
+path = "wasmparser::component_limits::MAX_WASM_MODULE_SIZE"
+kappa = "11979a01088ad3efe8e6293f673746f26467579abadb0e6d488b0cefdd8fb7f9"
+embedded = "98b1e822786801e6043e28beb486f38fbcf3ff985b3b72551e393301f64fa32e"
+status = "translated"
+digest = "72a7ebb374597b39b9aec26fd40d7b5ccdc4fc9b4d15ba000c9d00e9a047554f"
+
+[[fn]]
+path = "wasmparser::component_limits::MAX_WASM_VALUE_TYPE_BYTE_SIZE"
+kappa = "bab5f252935915450d7a08a5ad27d9d2089da31e6ad080e829a9433318bc2ebf"
+embedded = "5b516c3e3ba6872e1b023838f7626db34ba329789de41d8cbe50282ce58bcef3"
+status = "translated"
+digest = "ac62b0064662608317739098c87a84b8897de51b78515c948977053300a5af75"
+
+[[fn]]
+path = "wasmparser::limits::DEFAULT_WASM_PAGE_SIZE"
+kappa = "5c92bcc11d67a38f28fdaed0a8c00ccfe224709c6ec8268543a99bda12ffe929"
+embedded = "5882b8076dec1c491542235cbff7b5d58bcad44486aee131a33dce651bf3f3ea"
+status = "translated"
+digest = "997dfd233e1ba921019c43b08b0d9016b0763369775bb4fa80656d9c7b504174"
+
+[[fn]]
+path = "wasmparser::limits::max_wasm_memory32_pages"
+kappa = "bf92fd4987f1d522708cb1f73c0537698c211761d607dcd145c444e5e622326a"
+embedded = "a072f88ba3be43d6430c728807528df6414662e505583d2cbe9d56b899f90259"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::is_power_of_two"
+
+[[fn]]
+path = "wasmparser::limits::max_wasm_memory64_pages"
+kappa = "c3a0ff9dfd169518b3f5596258ea333edf63c426756c449598457b14e304b895"
+embedded = "b8d7b860720e42eedcc75cdf6c7c5f6f333d77f29dccebf4894100de25446caa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::is_power_of_two"
+

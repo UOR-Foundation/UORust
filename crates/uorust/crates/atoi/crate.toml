@@ -1,0 +1,46 @@
+[[fn]]
+path = "atoi::<impl at src/lib.rs:281:10: 281:15>::clone"
+kappa = "10f1fa65349ec8ae8aafbec8a9eacc26ffecfa389b2eb77d1b9c0176bcf2a231"
+at = "Sign=u32"
+embedded = "ea22fa6c16333f4a56b0c7957b83a9eb503fe0265e20b072896e9b7df8ce7bdc"
+status = "translated"
+digest = "29c3713591d7979d621a33d9738a8342946a0e7f1e6cb5abb253e4b0264bc742"
+
+[[fn]]
+path = "atoi::<impl at src/lib.rs:281:23: 281:28>::fmt"
+kappa = "ce4a11c4c2521f08426bad87f5d2ec77e86f89df295337ae11454288670bd061"
+embedded = "aae0fa08a72c45899c5e92ecf82082a22c9366b4dbd913ba841d1c1eea835f2e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "atoi::<impl at src/lib.rs:281:30: 281:39>::eq"
+kappa = "64567e32de4f93399a1b003f17d2918ca721e0735fc6ff2e4c85e7ffb8e52abb"
+at = "Sign=u32"
+embedded = "9f9c568424c8795af4e8aa1722dce9de4b0d237a3c9100d5e21f1eda5f7425de"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "atoi::<impl at src/lib.rs:281:41: 281:43>::assert_fields_are_eq"
+kappa = "3f637b499b7b4d84b368b0253bd86231384b80700e5dcf7439dc03012b392473"
+embedded = "ac496a67871039bb8ade6faf28035d1f32f48b89508da6bb908ead50ed615412"
+status = "residue"
+cause = "mir::Ty: Sign"
+
+[[fn]]
+path = "atoi::Sign::try_from"
+kappa = "fd0443bb984db167eef81adeb6482abfdd74b05a0342cec4e4754e83d6d04654"
+at = "Sign=u32"
+embedded = "3059ba79be731c9bd17d3cf634de69672b483caf87f2e7caaa51242776203d5a"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "atoi::atoi"
+kappa = "79a68d617e6cdcac53994fe5102efa22ba49a7d8fe6e939a90cc3c7587d3c04d"
+at = "I=u32"
+embedded = "45d72b910d68fa2f02ed6d9c27bd7a979c87ff4c0f9fbf2be37965616c81ba11"
+status = "residue"
+cause = "mir::TerminatorKind::Call: builtin::<impl at src/builtin.rs:101:9: 101:45>::from_radix_10_signed_checked: atoi's MIR stops at mir::AggregateKind::Closure: a closure whose body the dump does not hold"
+

@@ -49,6 +49,20 @@ jobs:
           node bootstrap/brand-sync.mjs --check
           python3 -I bootstrap/brand-fonts.py --check
           node bootstrap/frame-sync.mjs --check
+      - name: Verify Pages identity gates against planted wrong metadata
+        run: python3 -I scripts/ci/test_pages_identity.py
+      - name: Refuse stale Pages repository identity before costly build work
+        shell: bash
+        run: |
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const actual = JSON.parse(readFileSync("site/app.json", "utf8")).repository;
+            const expected = `https://github.com/${process.env.GITHUB_REPOSITORY}`;
+            if (typeof actual !== "string" || actual.toLowerCase() !== expected.toLowerCase()) {
+              console.error(`site/app.json repository mismatch: ${actual} != ${expected}`);
+              process.exit(1);
+            }
+          '
       - name: Build and verify the holo through the locked SDK
         shell: bash
         run: |
@@ -161,15 +175,15 @@ jobs:
           node bootstrap/screens.mjs site screens
       - name: Keep the screens
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: screens
           path: screens
           if-no-files-found: ignore
       - name: Configure Pages
-        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
       - name: Upload the page
-        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         with:
           path: site
 
@@ -187,4 +201,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346

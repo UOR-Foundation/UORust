@@ -1,0 +1,121 @@
+# The whoami register (written by `uorust crate whoami@2.1.3`; do not edit): every body of
+# whoami's MIR at whoami 2.1.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 91
+translated = 3
+residue = 88
+
+[module.api]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.arch]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.conversions]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.desktop_env]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.error]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.langs]
+bodies = 27
+translated = 1
+residue = 26
+
+[module.os]
+bodies = 16
+translated = 2
+residue = 14
+
+[module.platform]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 91
+embedded = 91
+evaluable = 91
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: langs::Language"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Language"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: langs::LanguagePreferences"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DesktopEnvironment"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arch::CpuArchitecture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: desktop_env::DesktopEnvironment"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: platform::Platform"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CpuArchitecture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Platform"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Width"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::Width"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as os::stub::Terminators>::CHARS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1

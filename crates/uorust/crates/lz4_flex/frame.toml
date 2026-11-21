@@ -1,0 +1,513 @@
+[[fn]]
+path = "lz4_flex::BD_RESERVED_MASK"
+kappa = "2e84a40979376deee1fe597900a706c8ee2411b9a81d615095b9f60f81d6c8b0"
+embedded = "d3daeeb0ea4b0069f67f50acbce1f69102a35951ff489d29e488ac0000688984"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item frame::header::BD_BLOCK_SIZE_MASK"
+
+[[fn]]
+path = "lz4_flex::LZ4F_SKIPPABLE_MAGIC_RANGE"
+kappa = "1c42828a13d0ea3eaf0b65cd02611a02b1d7f647a5f8a69ebc3a5992ace65232"
+embedded = "8f248a5781ae559b36b32f91f201d9e06974bd32cf58f90320712dba829b74e3"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeInclusive<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::<impl at src/frame/mod.rs:32:10: 32:15>::fmt"
+kappa = "f1333daeaeb7845c69b4f9710e477abdb6095d547a642ab8ade1b0641213dd49"
+embedded = "a6f99bc4144860bc3c3f309d7cf7b8eaf6c00667a325b12b21a107f7d7e50357"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "lz4_flex::frame::Error::fmt"
+kappa = "4ac6191b83308d8cd05152e819950a5e5f9694101e5ef282adb020e088116995"
+embedded = "18e78898609ba4bf3138763ccbb5936aa7366cab46ebfd116d6ba76c4cad7ee6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "lz4_flex::frame::Error::from"
+kappa = "f05ba7ad142efa8ed407b41bdbceccc7ce90d494f8dcfe7cd83f4dcf04fd2b8a"
+embedded = "ea7549ecbb708ea2a53e33a31925dcb2997636149022288292a89ea20dc9ce8c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::Error::from#2"
+kappa = "9971ea9197be1c0d951563ec03817ee0cfa1a6eb7404924391f24a9cb36c0c22"
+embedded = "bcc6cec5935e7f3950715459fb7f76e36156864426ffe6d450a06ba30b8a8d30"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::AutoFinishEncoder::drop"
+kappa = "6c8856e792072fa1588726275128e9379cbd7189d360d5ef44b878f0893308dd"
+at = "W=u32"
+embedded = "375125d13e5d3bea3eed5d6549a5844644da537b2ad103a259a47a3d7988ca7b"
+status = "residue"
+cause = "mir::Ty: AutoFinishEncoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::compress::AutoFinishEncoder::flush"
+kappa = "b9b04da284ba91bfe8751ebb9fe76ab9560cf4b911e70bfdee925710d8a52b21"
+at = "W=u32"
+embedded = "43eccd3dbb2a88cf2a84a3173723ceb1837f786e20a96016544911e919b8e92f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::AutoFinishEncoder::write"
+kappa = "aa8e8ebebe30ed5f6a870b1ddfac48d2e34f5c7cbf12fd1178223194ff7fd097"
+at = "W=u32"
+embedded = "717c89ec965e7788bbb44eec7e7a1dbc589f7470e62d80cc313363943fa1f30d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::auto_finish"
+kappa = "d799bf65a545314d6890f7eb98350949aed71692c5c60a4667b64ef6d6925b76"
+at = "W=u32"
+embedded = "53c02bbc31fcc134e03fc03e535bc4b685e6ac621351d19fb517b216a9bc444d"
+status = "residue"
+cause = "mir::Ty: frame::compress::AutoFinishEncoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::begin_frame"
+kappa = "fe364fbc1f9cc08ce3af647c17997aa75abd6f780c8bf31168a1f8aa0c6c4b20"
+at = "W=u32"
+embedded = "ec7ddd89e4ab8a2f80227efd2ccd6bc82a00da88685341d3e9ac893d06640876"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::end_frame"
+kappa = "380efb38727b28174a1f395b4c15a5410df7fbc2af4a05c5a3683ff1a54d0554"
+at = "W=u32"
+embedded = "936355c9bb79dda2a0ddd5ca911b14b2fe28f335af76e09610b2ada27a1322aa"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::finish"
+kappa = "84350699f918fea59d13bf22fb6f4971e70fa8fb717e45ed56be083bedcf1b17"
+at = "W=u32"
+embedded = "bdb76976e500326a50dd1199bc5a1ba17e42639702073ead7689e760b3f6cee5"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::flush"
+kappa = "48270d658fcf101aaf8fd0c7a8242dad379414676c3820cbb4e504aaae413cf2"
+at = "W=u32"
+embedded = "4a729503ade38ae3a00ef9557e90b3f81dc9c1a940a532e58255054f3226e4b9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::fmt"
+kappa = "b28c2d8429be0326d7c24a7bbc3c53ac0e857e8ac2f29fa99725177cb3b3729d"
+at = "W=u32"
+embedded = "e32a97564a8864e6971d2c6a7702fcaea6c4ff9fa7977c3c8778eb48da80d98a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::frame_info"
+kappa = "fe3278be89587c9c23c71060ebac51f1c90672ae907026b6c48a252471187f5f"
+embedded = "d68e399db58cbb5227d9b93dfd8b2493d6a2531a1f08795fddf97fa885a907ae"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::get_mut"
+kappa = "a4eaf38bf168b873102791c6d82eedf63761cf10bccfa9dc10a008cfb3986ccf"
+at = "W=u32"
+embedded = "2899909e9e936a499ae40d6d9e879dd7377af891321e868b60e5d797c65d4f95"
+status = "residue"
+cause = "mir::Ty: FrameEncoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::get_ref"
+kappa = "74f80511d96db8485aeec7947fd22285f78cc0f8ea3567a035dffd1efd64c342"
+at = "W=u32"
+embedded = "dff9f46adc4c5159aa89d3cd2c71349531389142fbb2334c437fe9989ba00286"
+status = "residue"
+cause = "mir::Ty: FrameEncoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::init"
+kappa = "c69a15edccbf4b179c7e9534d63f6970d48d8688096cd560d00abea133e2e9a0"
+embedded = "6d6d8426e44c1b95cbfc3f5d4f68344e3b0a6174b21fe91345a87397335c4378"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::into_inner"
+kappa = "d41d8f98aff8baee225da97bd76b783a0e41763998d87149fa79a2ac9e142f0b"
+at = "W=u32"
+embedded = "f97e414835e3573813d129df2c5b3f1b5aa98043663d1e4a18580d01b153dcbe"
+status = "residue"
+cause = "mir::Ty: FrameEncoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::new"
+kappa = "57286e0479186ce366dd2ca27908f8853dce4525cae8266aa4947214679debcc"
+at = "W=u32"
+embedded = "96d474117727ecee871ff9ff035d4bac334f14ce702c8e045f3cef54e3f61cb8"
+status = "residue"
+cause = "mir::Ty: frame::compress::FrameEncoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::try_finish"
+kappa = "883a4f9c5b2ee74389728c09ed36888e3261c5e5f4962275a7c9854b5023c0a2"
+at = "W=u32"
+embedded = "b02c3954640742eedad45c02fe06abb1bfe26a54e27ffd68c6fd934de72713df"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::with_frame_info"
+kappa = "a5a8e745ff6ee68e1b9603da298b87e44ec6d8772459bb297bc3c0429ca9485a"
+at = "W=u32"
+embedded = "1606a8e8b1f0f7b03ec6ab1d5d0b2d8127f1ae9724787359135d9098bb36da99"
+status = "residue"
+cause = "mir::Ty: frame::compress::FrameEncoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::write"
+kappa = "cebe64b03ce2f0f66234bbe45153a9df0477ac317368aa4dd2aeaf4028cb35b9"
+at = "W=u32"
+embedded = "5e320bb66f97a27fdfae6e97eab42e76207432c032c9dacec9b286ec8a521496"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::compress::FrameEncoder::write_block"
+kappa = "8f794588cf8d873f81fa7cf586e4e15cc646af550b096b53045a7962654d6a29"
+at = "W=u32"
+embedded = "16265a6ada0cac9f711d9fcf151fba7fcac28e06ee2b62ef97500faef4bbc7de"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::check_block_checksum"
+kappa = "40bd92a33cab9171f5a496a93081b12685718dd1260bed43cf3c383ee57d756a"
+embedded = "48f3993322c3e959cd3e34bc1c178d9d30a949036b316648a75b382027181daa"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::consume"
+kappa = "257a20756ecc629feb0ee118050416922c6eab85f64bdc407a0ec5efece9c7e2"
+embedded = "eef0de874c2b7bebba62ffe95d561daa4434652c551386dc3e2ccbc7c7fb9490"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::fill_buf"
+kappa = "168b74fa8c27775299763248c22dede85ea8c3c584fb19e2718970b44b4ac6f3"
+at = "R=u32"
+embedded = "14aff2d56ecb50da39851cf687848b4f27b462b83fd56e2bb2332f3aeff3fc20"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::fmt"
+kappa = "d3cf08dc84680fcc329caa29621bdcc5e5888fc6cd6b0028bc2913ed867f17fe"
+at = "R=u32"
+embedded = "b85ab32fb115bdd1dda1ae28d55cc8973adc0ba222c7175da5d2bbb6d176086c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::get_mut"
+kappa = "d1565979eed7aa7074a0a7d781b88eff3a5386e77a443326c85338a02fe947be"
+at = "R=u32"
+embedded = "a0fa7674cc2d123c48f71dd8c6c13a9a80bf12701f44db3d1e0a08a15f4eb2a9"
+status = "residue"
+cause = "mir::Ty: FrameDecoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::get_ref"
+kappa = "30d6f7e64dcce6c794c03cdf0278319a223953c3a80613b09b3bd3a8f31852ab"
+at = "R=u32"
+embedded = "ec21d190d7a308cfb7556f639dc2b2fce1a72f834af74a8f81ce21a53d7f8b9c"
+status = "residue"
+cause = "mir::Ty: FrameDecoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::into_inner"
+kappa = "884502768b4e2d2883cae5f0d2ff170931c898ba40bd5a21cb3b256868af8570"
+at = "R=u32"
+embedded = "adc06d3bb56fe4bbafcc9667362d0f8000be5594b7bb44e94045001cd8e73398"
+status = "residue"
+cause = "mir::Ty: FrameDecoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::new"
+kappa = "d11d18e95670c6fe9a3def415f758981ba6282b1d79343baf80d8a2888a8e46c"
+at = "R=u32"
+embedded = "a0b35f348d236652526174bc4c0304790a40a09473e2db13d7c45b52393db0bc"
+status = "residue"
+cause = "mir::Ty: frame::decompress::FrameDecoder<u32>"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::read"
+kappa = "26e1b2a1accd6efebdb9c1993b0c6c4467d070e589bc71421f790fc669eaeb03"
+at = "R=u32"
+embedded = "83fbb43a7446e79a3c456dd08cbe163aaa0012a44590967501b13277108d68a0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::read_block"
+kappa = "f0e945e33fc5d8cc9b27f1b285e821d3b07b249a195a9bf22bb58cc29dc87fe5"
+at = "R=u32"
+embedded = "243d703add6aa69ac194a5f59ec2c3ee28e0828929cc369e1ac6c16eda62eae5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::read_checksum"
+kappa = "3b04b17b5a98119292be1eec284d986a4b61c3e933833e55bfacfc09a2180f5a"
+at = "R=u32"
+embedded = "aeea4ba934a6ee3a5e5bb69364d52cdfff26e81e0923aa8312ff3913d4021c40"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::read_frame_info"
+kappa = "befadecda2afd5f7adca3cf49a0db1b6a3862be416d466e82fb2d979eb630e2a"
+at = "R=u32"
+embedded = "b35f1a16baf8ef36a28bf4f127261407ccf0e9e86b28db085b417fcccc3a9e75"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::read_more"
+kappa = "2e2f860709553d3bb625863b7b5c201dff873058c02aeae2201927b57b915c1c"
+at = "R=u32"
+embedded = "eb384627b6ffdf1fab2fd7f03fed3dbf44e704005dbd1b14d837db71a3379a0c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::read_to_end"
+kappa = "85dab4291af59b7c91006b5b0abdb29db837291f3d37656d2b079992f5b86ee5"
+at = "R=u32"
+embedded = "4ac79066ba6a8471514ad09b2bc14b1b8a8292696a12629ee2624fea4bf47820"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::frame::decompress::FrameDecoder::read_to_string"
+kappa = "406660e70ec3ff3f5a99c51631f4b009b1e7fa745b4f1f5e60e68d7c3144015f"
+at = "R=u32"
+embedded = "0fef6768232f4c2e64322d90049202af19239c3e48df6fc933724ae58ccaf316"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:128:10: 128:15>::fmt"
+kappa = "50bfdd9eb22d00b3993a5fb26eb8762936ec0fb01251a4bf597c5bf532eaadb2"
+embedded = "ad4576d7ae8cf4f38fa285433b69388ef5891a23cb544c84c2c8075b7d8b7a36"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:128:17: 128:24>::default"
+kappa = "792e0119c7e3bab62c687a6c60d111a1ec8e5ac9a30aaa95b0f2af6bb6c27e64"
+embedded = "bd25ba1e060fe663a28d1574125b5a6f528f62409927529f6ca20c6d808de75e"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:128:26: 128:31>::clone"
+kappa = "22f44c6ae3ba51f20eb9338b499a1fb1119951b405adf6a0becedb171d0c7176"
+embedded = "1e155712b55484910e63f19a23bfac2107aad2b04b2ec6e233a5e6f5d244c721"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:36:10: 36:15>::clone"
+kappa = "029725ca8a843f3e7161a44eca906d45c7795b29a4f655238ebc91237f4c6472"
+embedded = "c3da692f75fd06e4080f93cd7d3bd4368ede1b9a4d6aa42a2db9692fe858bc3b"
+status = "residue"
+cause = "mir::Ty: frame::header::BlockSize"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:36:23: 36:32>::eq"
+kappa = "532d5737e4e5b35ef6b23bb088506003733c9bc341b2d6799aedceb77ef18036"
+embedded = "8d6ae76be744a9aacfa8c433df675a9490467bbf70658cf8ba34889cdf1d2ac4"
+status = "residue"
+cause = "mir::Ty: BlockSize"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:36:34: 36:39>::fmt"
+kappa = "c4a309599737a75ccd872beb602abf4374682d12b36b1ef99082cae2bf562f9f"
+embedded = "d2b43fe9485541010f0ea6f8f4c3da37ad17861b2aa237dd471380ef0c922dbc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:375:10: 375:15>::fmt"
+kappa = "11a3fe4217492e218031e46e8cefc899e6e5a477fe42604b2947c6e20c263497"
+embedded = "74d566f79f60ab314e5ba39268e56e3b5513a78bc968c224f14d7becb4142aae"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:38:10: 38:17>::default"
+kappa = "9a4b75ebecf1cc3b1a7cc9f9e35c1ea8de33a865608546f847ef7509ffd335e5"
+embedded = "5d1765333885a1c7569902369fd22bd4be5932ccdebdf1e4dcad715b4cf274ba"
+status = "residue"
+cause = "mir::Ty: frame::header::BlockSize"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:80:10: 80:15>::clone"
+kappa = "35d5e97912db5ecd99a01846e8b4263b6c9b1d0ed7ef84d3dd608ca944c12540"
+embedded = "6896dffa3c8240277aef63b319ceb79e94adccdfc52a6269c1d2aa2d46eefcd9"
+status = "residue"
+cause = "mir::Ty: frame::header::BlockMode"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:80:23: 80:32>::eq"
+kappa = "934b260bf802f7b86f24eb65990c8f1b9c89c38496f94e6e2ed4c3c2189341c9"
+embedded = "6e6ca7dd79bcd20fcb954c63bda815471fc68ed4e7b027fcbe98caa2d06353c3"
+status = "residue"
+cause = "mir::Ty: BlockMode"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:80:34: 80:39>::fmt"
+kappa = "e259d301ad7fd85cb64f38b8c9f8dce28f89cd9f6f54a3103c465cb7cc4c49d3"
+embedded = "417421c1e890a86d30e4dee8c30bb6c309d5006b4ec1558f82c27c37a71a8027"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "lz4_flex::header::<impl at src/frame/header.rs:82:10: 82:17>::default"
+kappa = "6d74b5774101a17696c72a49589dc754c83b5eacbf12a45b95d05867a2618309"
+embedded = "f23e19f3cd65f2ce96d499551af7fb4e00699d71b6ad9aea8af03a0cdb84c334"
+status = "residue"
+cause = "mir::Ty: frame::header::BlockMode"
+
+[[fn]]
+path = "lz4_flex::header::BlockInfo::read"
+kappa = "17e6364204568fe7bf6bf92ab15a40cb62603c78ee0739e112a4604c279590b1"
+embedded = "d071fc91882d468bbff499f4761287295a54626c3b8ea5fd7a1581fd806b6993"
+status = "residue"
+cause = "mir::Ty: frame::header::BlockInfo"
+
+[[fn]]
+path = "lz4_flex::header::BlockInfo::write"
+kappa = "f9b5a3f6945848e3702f5ef97a654ea95ed1a0ba295bee381ae09f308ca483e7"
+embedded = "7dfbd70280d8d3746e73e0972837fb2a92c1cd29859fbd0b2bb2537f965015af"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "lz4_flex::header::BlockSize::from_buf_length"
+kappa = "3654014b7fa159d78b85bc81cb79a8121b794c99e528377a50dde274d8e7f628"
+embedded = "0a784df80b9278daaf2e98d05e883e7fbe13cf2d4f0e37ff3bae653d04ef9f27"
+status = "residue"
+cause = "mir::Ty: frame::header::BlockSize"
+
+[[fn]]
+path = "lz4_flex::header::BlockSize::get_size"
+kappa = "69f0201e61451ef667b73c2c9ea2a8e85a029beeb7d4c8bcefcbf28cf5f42480"
+embedded = "2b73cf1a70d2f66426f0dc2a4532c9773948635b5a945d57184fb22bf71baa46"
+status = "residue"
+cause = "mir::Ty: BlockSize"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::block_checksums"
+kappa = "7210a3f202d6b6ee203b2890e1245b2e5eaa27786936c32ba7d9af5b7617cdb6"
+embedded = "e9313a82b0a5f7b11269a66f91f8d67db17b6d74f324a942f1441a31e393b421"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::block_mode"
+kappa = "efc23d64d06006818c30bafa30eca6750959b3fca329a23c5e2f375fcde9b5b6"
+embedded = "98cc9745ceedbaf07015e6eeba445f85cb5f2d8f1b775f24b6b91f8fdcbf9fd5"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::block_size"
+kappa = "6e927a09f9aa316b6250e346dc2e64ffe5eb090734ab46997295745efe77e2ec"
+embedded = "54f4e4c12b02e9697a219cfc5b922749664f775fe769df925a8fe62e547d0e0e"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::content_checksum"
+kappa = "dae81e8d38362c79ef0a33ab9114486449428f68d7b08436731a716a335686c0"
+embedded = "374e5671ea3aa6e89096f9a772e70f6dc7a78f318189ac1ac97d016a1e526db2"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::content_size"
+kappa = "744cf3febdc460a80419155a0b5fafc741d66d3a4fe2ee6f02aeb48e61a06795"
+embedded = "138d625f7d3a5bb510bb9dca2cf8344bc07ecb7fc2ac9f4a03818b0e2a31683a"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::legacy_frame"
+kappa = "ab1f028a12377824a493edcc800e1653e5905329a8dc8575493aa9905adefb42"
+embedded = "b4e7d972a40b7698103a64ade6845b07dc7d33b537bcfc9b0898937f29e56505"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::new"
+kappa = "48e6136d77fcde7fe39ce2f68265a49aa6b8ccb9a80a9abc63764e54bc1a520e"
+embedded = "f05dbcde779721c4cc314af9221f7301a217e1cb59785a0b78c8b89f1b3a7199"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::read"
+kappa = "7fa56a9fc5ecb9257e821bcf34414a8b3d60dbb67f7475a5a5c2a3d9feff7bf3"
+embedded = "25a2f31d6fecca9ddaf19e110f15fab5f33d4bc860c2caf5ce15b69f33b1a749"
+status = "residue"
+cause = "mir::Ty: frame::header::FrameInfo"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::read_size"
+kappa = "48c8c97b9c6edd3766a82d0f62e6336276a828904321682a82018377177aab14"
+embedded = "061616a5e0899223ba7a89449277c7fe01da00a4b7cba3e36a57cb55497332e5"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::write"
+kappa = "be4d70f43d209a07fcba438e752a1aa6ec19729c8f9a68528194aec82fc1a654"
+embedded = "c9db0ec798ef57fc4d4420290e13a8dc314e8673383a78e7aead323b738fb76d"
+status = "residue"
+cause = "mir::Ty: frame::Error"
+
+[[fn]]
+path = "lz4_flex::header::FrameInfo::write_size"
+kappa = "d65c2b232f52fc058324df808320d0a4e8cbc2386cb9ca25c250abe14b5611e2"
+embedded = "bb31d4e9a66837bff4e9f66ed9be42e45dc98da07bf96f394999414921166606"
+status = "residue"
+cause = "mir::Ty: FrameInfo"
+
+[[fn]]
+path = "lz4_flex::vec_copy_overwriting"
+kappa = "652cee6630a70f5a0c2a3aae727cd978e9a0a99ce7c2efb804ba05cc0d6d2465"
+embedded = "8e4093ee3b3742b5d6324fa1ab10717b9d28e66acc6246421279d4f488e97635"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "lz4_flex::vec_resize_and_get_mut"
+kappa = "96c7e19ca1ba0d34a481ad8494231a6ab81d74b6a25659f2e4f71dce000b04b8"
+embedded = "cf8937db91abfa70b163220ed45061b0ba4d33ca2d9c0978e43c24c0db06f770"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::resize"
+

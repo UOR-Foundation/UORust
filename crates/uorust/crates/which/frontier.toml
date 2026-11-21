@@ -1,0 +1,159 @@
+# The which register (written by `uorust crate which@8.0.6`; do not edit): every body of
+# which's MIR at which 8.0.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 107
+translated = 0
+residue = 107
+
+[module.checker]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.crate]
+bodies = 54
+translated = 0
+residue = 54
+
+[module.error]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.finder]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.helper]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.sys]
+bodies = 30
+translated = 0
+residue = 30
+
+[embedding]
+bodies = 107
+embedded = 107
+evaluable = 107
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: sys::RealSys"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: WhichConfig<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: finder::WhichFindIterator<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CanonicalPath"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: impl Sys"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Metadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fs::Metadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Sys"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Noop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RealSys"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WhichConfig<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = std::path::PathBuf>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = std::result::Result<std::fs::DirEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = std::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::NonFatalError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: finder::Finder<u32>"
+bodies = 1

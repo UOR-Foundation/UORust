@@ -1,0 +1,144 @@
+[[fn]]
+path = "proc-macro-crate::<impl at src/lib.rs:147:10: 147:15>::fmt"
+kappa = "0e8c8fc8d4ecb51340e6a6516e7c08aaec3e3e76d910c34a2b1e18371ca73cf5"
+embedded = "f403a560363a4e0165eb8b8b55cfc759cb12929ac9506e6722a091d5a22e2f93"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "proc-macro-crate::<impl at src/lib.rs:147:17: 147:26>::eq"
+kappa = "6ad4615ac97df9c34b19c23c2b0879c2de3aba75e0ed97dce14cac43180adabe"
+at = "FoundCrate=u32"
+embedded = "2c6c8ee3e2b988e47fd17ec3a483e05fa98145a535276f155d4642dac0fc39dd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "proc-macro-crate::<impl at src/lib.rs:147:28: 147:33>::clone"
+kappa = "a1d75c89fb25ab8acee02343040cdff484d4c2f0bf8c478e541641f71bdf0639"
+at = "FoundCrate=u32"
+embedded = "4fc1b33702a85f7459ecabbba16a5037342b752d2be751b87afd5ac4fbfa2293"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: of Nat"
+
+[[fn]]
+path = "proc-macro-crate::<impl at src/lib.rs:147:35: 147:37>::assert_fields_are_eq"
+kappa = "c0b5b5fd2821b9d7d4989afb744dc2b79367b7fe7c1bc36eae6850c5ce08b9db"
+embedded = "685cde49af7cd1dca553d80b088482c49e3b9170ce1f446bbd17768e43059b6c"
+status = "residue"
+cause = "mir::Ty: FoundCrate"
+
+[[fn]]
+path = "proc-macro-crate::Error::fmt"
+kappa = "f547a9a4fdfafb31b7cd0d53fff1a1efa4e1e8e504fc55f7660954a696d5b16f"
+at = "Error=u32"
+embedded = "0e453cf82e84852c6479044053b19dc41df0b9a9ace1889765f181219e13f581"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "proc-macro-crate::Error::fmt#2"
+kappa = "2148b47c7953f893ed346d2eb6fca381262afc415bf2a1efec23205759587d13"
+embedded = "7a91528f3dbd55624dc1ee2d34563aac8ada6fa2daf7e32848d45d34925a5dc7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "proc-macro-crate::Error::source"
+kappa = "40cce47813fc5f4d5df50912ebcf3c7092fb384f419e094414132cc3aa3efd46"
+embedded = "f946fd69863a8acd10609ce415b32d53dd700082263607248e0f3f19bffbf1f4"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "proc-macro-crate::cargo_toml_timestamp"
+kappa = "c0b685ab5dd8ff95a1afc013ce5786f60a6a2f54672027b54f90c33a039abaae"
+at = "Error=u32"
+embedded = "9e267f4d68511722a4f1f3aabac7e8b4705a270e0cb13fa58175c26c02b883d7"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "proc-macro-crate::crate_name"
+kappa = "b0038bedf4006505a89e6817803d352ffa6c29524bbcd2bc2eabddba45df5b74"
+at = "CacheEntry=u32, Error=u32, FoundCrate=u32"
+embedded = "99b1de85a47338207da490131347c09cd2f87af3dd0fd422a9ab79dfd4d45e95"
+status = "residue"
+cause = "mir::Ty: std::env::VarError"
+
+[[fn]]
+path = "proc-macro-crate::dep_tables"
+kappa = "40732c5bbec12f35365536bb372bbb336de8a4ff2ef8d487d4eeb6a941abb082"
+embedded = "5749c8f1dfa3b6b0b8780262d637531c30a9f9d5a4704b56bac9f6ef84d8e068"
+status = "residue"
+cause = "mir::Ty: std::iter::FilterMap<std::iter::Chain<std::option::IntoIter<&toml_edit::Item>, std::option::IntoIter<&toml_edit::Item>>, for<'a> fn(&'a toml_edit::Item) -> std::option::Option<&'a (dyn toml_edit::TableLike + 'a)> {toml_edit::Item::as_table_like}>"
+
+[[fn]]
+path = "proc-macro-crate::extract_crate_names"
+kappa = "e32089219f88e6cee651a9acd0ceebacaebea86998b9386de1b36a439b380c4d"
+at = "Error=u32, FoundCrate=u32"
+embedded = "73c99e1b62fcb37a89f5622da606fac18e11a9566fd6a0258c1b252e56575a31"
+status = "residue"
+cause = "mir::Ty: DocumentMut"
+
+[[fn]]
+path = "proc-macro-crate::extract_package_name"
+kappa = "c919dc08568d9e4a9bb1a0c5f9ae1e0a0951d9e03f5f06a1a7cfc267b94f36a7"
+embedded = "0c84ce7d61ea65e21d1c40d3939651057e6b2b7c2c180ae1a64501c720dd7234"
+status = "residue"
+cause = "mir::Ty: DocumentMut"
+
+[[fn]]
+path = "proc-macro-crate::extract_workspace_dependencies"
+kappa = "e06997c1191bd373d6480ba9b100f1ed8552472eab34ae360b6f4080903b33fc"
+at = "Error=u32"
+embedded = "fda3332ffbee7ff69a7323c3880f9895092daf35f293b253f3825cbfcfd964db"
+status = "residue"
+cause = "mir::Ty: DocumentMut"
+
+[[fn]]
+path = "proc-macro-crate::open_cargo_toml"
+kappa = "cb6f4edaeb6684f263e6948ebc2fe3e0203344fce818905096fe6460476393d4"
+at = "Error=u32"
+embedded = "e117bc53e498fe29b3fac6dac2d564a4abcccd1f2b13d7563d3fbd285994c13b"
+status = "residue"
+cause = "mir::Ty: toml_edit::DocumentMut"
+
+[[fn]]
+path = "proc-macro-crate::read_cargo_toml"
+kappa = "1c1965619d7315ecf0e81b30050d7a95181d998dee0b671e5a05cc037c0dccfd"
+at = "CacheEntry=u32, Error=u32, FoundCrate=u32"
+embedded = "b5a7399c66e2139c5fc9e755748e6c9483c19bfd15c2e4f3e4cfc9c795e9ca44"
+status = "residue"
+cause = "mir::Ty: Path"
+
+[[fn]]
+path = "proc-macro-crate::sanitize_crate_name"
+kappa = "73acc3f0962c69e282b38559faa8f5b45183a8abc872751fca35b748342e7979"
+at = "S=u32"
+embedded = "7fc5df687b851857840bc984b9e32c29f78487e9111b73ad5ee62399af9d9b48"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "proc-macro-crate::target_dep_tables"
+kappa = "f6da3343ae4c664702c0d9afc2a344e3cd7ce5f648fdae985f2a5ef72a20dcc8"
+embedded = "64134589d17f3348d994cb0622e58489fcbca4e878a48fa454608b462bc829b2"
+status = "residue"
+cause = "mir::Ty: std::iter::FlatMap<std::iter::FilterMap<std::option::IntoIter<&toml_edit::Item>, for<'a> fn(&'a toml_edit::Item) -> std::option::Option<&'a (dyn toml_edit::TableLike + 'a)> {toml_edit::Item::as_table_like}>, std::iter::FlatMap<std::iter::FilterMap<std::iter::Map<std::boxed::Box<dyn std::iter::Iterator<Item = (&str, &toml_edit::Item)>>, {closure@src/lib.rs:396:22: 396:34}>, for<'a> fn(&'a toml_edit::Item) -> std::option::Option<&'a (dyn toml_edit::TableLike + 'a)> {toml_edit::Item::as_table_like}>, std::iter::FilterMap<std::iter::Chain<std::option::IntoIter<&toml_edit::Item>, std::option::IntoIter<&toml_edit::Item>>, for<'a> fn(&'a toml_edit::Item) -> std::option::Option<&'a (dyn toml_edit::TableLike + 'a)> {toml_edit::Item::as_table_like}>, for<'a> fn(&'a (dyn toml_edit::TableLike + 'a)) -> impl std::iter::Iterator<Item = &'a (dyn toml_edit::TableLike + 'a)> {dep_tables}>, {closure@src/lib.rs:394:19: 394:22}>"
+
+[[fn]]
+path = "proc-macro-crate::workspace_dep_tables"
+kappa = "dba3364a2d2e492aa8e65904e4c287b50fcd9e88a981d8668a9a318e36bc7733"
+embedded = "119b68dc70354f33448b07b173deeb449d5f764c0d57a4c70a9c4b035389baf8"
+status = "residue"
+cause = "mir::Ty: dyn toml_edit::TableLike"
+
+[[fn]]
+path = "proc-macro-crate::workspace_manifest_path"
+kappa = "2e48c87c1fdef08a4835b64bcc7d9746a0b3c143a60fbb73844ec9ef1e02dd7e"
+at = "Error=u32"
+embedded = "b085c32afb085650c3900c853edcf23bd741ee76ba4be3f5c9fc21beae12da99"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+

@@ -1,0 +1,105 @@
+[[fn]]
+path = "rustls::compatible_sigscheme_for_suites"
+kappa = "b0c301872de5eb6d7ed10db585c7afceaafb03a8155281519266a233a54e4b67"
+embedded = "53e65a115e7a6d30970eaac441a1fa8fa732992e547a0669b6d647fb11ff483d"
+status = "residue"
+cause = "mir::Ty: SignatureScheme"
+
+[[fn]]
+path = "rustls::suites::<impl at src/suites.rs:66:10: 66:15>::clone"
+kappa = "176caa76663ab3d7210a592e57fda4ff938bf984b044e790dc902befaf601a53"
+embedded = "a391a9156d049bdb62b33b1921075393c3818aa485345dafc96e82b53de3760a"
+status = "residue"
+cause = "mir::Ty: suites::SupportedCipherSuite"
+
+[[fn]]
+path = "rustls::suites::<impl at src/suites.rs:66:23: 66:32>::eq"
+kappa = "ec20fdf6415a6155a5cf0e33be8a5ebcdb8f046627043309a1cfe6d0b1b4615e"
+embedded = "e23f583b4f8bc1546348297443327ae988b2051ff9affea1633d27f41005abde"
+status = "residue"
+cause = "mir::Ty: SupportedCipherSuite"
+
+[[fn]]
+path = "rustls::suites::CipherSuiteCommon::fips"
+kappa = "b80ca134a193ce7626a7252347b240f42304b1e86c24b8847d0ee2d4514b6efe"
+embedded = "bb47301a9c8c84c050c28cad77d4c44d0dc045963411d7716f44423cc18038e1"
+status = "residue"
+cause = "mir::Ty: CipherSuiteCommon"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::common"
+kappa = "5e6936e04a55bda554efc92100a9786c2f660907a087a21114f1512b24733558"
+embedded = "46cbfc1e7086f3de2519d5f3d5354023eff670fb5e756e1ebd02a88b64ebe79e"
+status = "residue"
+cause = "mir::Ty: suites::CipherSuiteCommon"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::fips"
+kappa = "1b2c0a343eb6f1cdbbf64333fd30a1fa2f3f98cde1954ecf2e08835ab27cc55d"
+embedded = "f14306514d0a9b2a1829e246be71cf6ddfc3fc7a804d62e310621f145d2584a4"
+status = "residue"
+cause = "mir::Ty: SupportedCipherSuite"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::fmt"
+kappa = "6f95d4aee08710678da61fcd5dad6f87ba8f12ddc34b87f282851789f1d8202c"
+embedded = "3a6b3a241e0485de21f55f2e8107919eb532b2fa0fce66c6ab19a9474976a2e8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::hash_provider"
+kappa = "f99ce4092727d16628439e5e655e3f000c44c30e787bba32e34bd34dde9d82e8"
+embedded = "4a147d711d08d9e518f9adc2bf60f1b5fb1025de923480e07cc544537454e4ba"
+status = "residue"
+cause = "mir::Ty: dyn crypto::hash::Hash"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::key_exchange_algorithms"
+kappa = "22178f0608fb86bef5d622cd1bb1c73a765040aee7e17bc1c6ca14058f578051"
+embedded = "70109ce4e090f20d067e0369152b3316bc9b524c8c3ed85dfaecf70d1c24356e"
+status = "residue"
+cause = "mir::Ty: msgs::handshake::KeyExchangeAlgorithm"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::suite"
+kappa = "273c50050a5a242ad5812021109f786b75e7ba3705428d4421d08605c46f6068"
+embedded = "2beac6077449b89864ce2117967674045d16e3b50e26fe78f881a38d5743114a"
+status = "residue"
+cause = "mir::Ty: enums::CipherSuite"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::tls13"
+kappa = "66c1a8a863941c38b0960fbe9beaddb5d41a64c85131a7a9d704b5e35a7a3eaf"
+embedded = "939a050c5b5716275c7a8a720ff9b6ff12b7ac9080fbec66cfe82bcd92ccd33c"
+status = "residue"
+cause = "mir::Ty: tls13::Tls13CipherSuite"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::usable_for_kx_algorithm"
+kappa = "81d622caa29f78c9dd10e136aed1d8ff533d18e2434cf4dc574d5f62caabfb95"
+embedded = "bb41546fd2bf0a5da55de9e947d8d5c66191cb7889d7c057d46f13cfc6dda07a"
+status = "residue"
+cause = "mir::Ty: SupportedCipherSuite"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::usable_for_protocol"
+kappa = "7bf4840f0fe3ad9a78dbc8e15ad3bb83f81d8270dd2da45031c8f6957ee1a9e3"
+embedded = "9cf37a76d8248084b3e880ce265656b92adc620a3ab75369ce0fb521d748b81d"
+status = "residue"
+cause = "mir::Ty: SupportedCipherSuite"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::usable_for_signature_algorithm"
+kappa = "fa06bb0245167923ac707c1caa7fb9de36706af2173069843563c9d42b3c8a9d"
+embedded = "435010a797b6559166aa7833f3a8e880c1b41e73378502468fc0588a3d032976"
+status = "residue"
+cause = "mir::Ty: SupportedCipherSuite"
+
+[[fn]]
+path = "rustls::suites::SupportedCipherSuite::version"
+kappa = "e0efd7579a81dbb1fcb2c5986eb7e8e9a860b618168c755102e7292518bda326"
+embedded = "5ead94742214530994f3f29cee0e387be4cecc7c45ecb59e4c265bfe74d6458a"
+status = "residue"
+cause = "mir::Ty: versions::SupportedProtocolVersion"
+

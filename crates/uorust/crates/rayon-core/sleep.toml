@@ -1,0 +1,337 @@
+[[fn]]
+path = "rayon-core::INACTIVE_SHIFT"
+kappa = "2280cf82ca4714bf44bf171c8c8a454ad05d3eae15d3e500d3fa9f67620132d8"
+embedded = "f7553be9676e7e4b304744d99bbee3f1bd00982ac5f4c341383d46e01a723da0"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+
+[[fn]]
+path = "rayon-core::JEC_SHIFT"
+kappa = "63ce65bfbb221ba96291bac785d3b44e93ae5f0e068f7380b63b7c29e34b7b18"
+embedded = "b6db579986b2d240a26b9fac23c1d6bd861fd4adebb4c7fc7f201da0d1b60c0d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+
+[[fn]]
+path = "rayon-core::ONE_INACTIVE"
+kappa = "ff3feefed30220632f1072e563610a9883a8311e1e8e55f73edf1719047e59ea"
+embedded = "d5be05b0d02a78689c3f2f4746eed428677c2a91263d630edc94fd207a5c64c5"
+status = "residue"
+cause = "mir::Operand::Constant: sleep::counters::INACTIVE_SHIFT: mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+
+[[fn]]
+path = "rayon-core::ONE_JEC"
+kappa = "7e301118b3dbc6448c17305b5f7076c8163dd9917f92f67e3e00793b8e3e6581"
+embedded = "82327c9dfefcf2d950e85c1f6775c3200bc26d3c8722033bd4f0577ee1c00d4b"
+status = "residue"
+cause = "mir::Operand::Constant: sleep::counters::JEC_SHIFT: mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+
+[[fn]]
+path = "rayon-core::ROUNDS_UNTIL_SLEEPING"
+kappa = "3556ca9a7c81ace872ba69549d925fcdb01585dfdf4023cc417d96d60c1e06e9"
+embedded = "8e0082d1b9f9ab7269bfccabcb9a6f2bc522714ee46185895ae7599d9fc1ac15"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sleep::ROUNDS_UNTIL_SLEEPY"
+
+[[fn]]
+path = "rayon-core::SLEEPING_SHIFT"
+kappa = "67753cef6480429c0f0a26e0fdf5c957e833a48c50515113645e512b61b79c5d"
+embedded = "297ee289d55b68a99f396f124c61a697741baeaeb9f1576c5d8603568b417f00"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+
+[[fn]]
+path = "rayon-core::THREADS_MAX"
+kappa = "67c16175e8100dffc4cb1b28ffb7d34fb48b76f39156d43036950e3479c71983"
+embedded = "10966152729a9bdc3195a2efbaaedbdcd6d110b5e16da5b8920086778adda3ce"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+
+[[fn]]
+path = "rayon-core::counters::<impl at src/sleep/counters.rs:18:16: 18:21>::clone"
+kappa = "9c23c9beb7781b352985cb7c47f198a22d18f9f6fad011bd9c7ecf573de4dabe"
+embedded = "a9ca326cd6dcc436aeb5969ecc103a524ee233068e6e8b2917b2e9f7cf447a5e"
+status = "residue"
+cause = "mir::Ty: sleep::counters::Counters"
+
+[[fn]]
+path = "rayon-core::counters::<impl at src/sleep/counters.rs:26:16: 26:21>::clone"
+kappa = "85e08bb864d5d88b864c464864566416b195d76436544fd5500f8e22935789da"
+embedded = "91e6c776f6d9f00fce91c725ef990a2573ed35f20c22826c756f03c33c8c05e2"
+status = "residue"
+cause = "mir::Ty: sleep::counters::JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::counters::<impl at src/sleep/counters.rs:26:23: 26:28>::fmt"
+kappa = "228c3bfaf0c75f98f2e83eb0069b1b9af5d83b5be5e8e06bb32141cf658e1a51"
+embedded = "0788ccd8dda446fc5eb4642a2bb83fc1fb2894c0a38e9bc8e8a1f91601bc47dc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::counters::<impl at src/sleep/counters.rs:26:30: 26:39>::eq"
+kappa = "7dda706393fbbf49d3c7fa82ef9b0dfdfd63575b35b725758b192a066853bd86"
+embedded = "2ffd4d7a5c30747ec44e004283475e3b3a9072cb6b453ee425d769b7766501e2"
+status = "residue"
+cause = "mir::Ty: JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::counters::<impl at src/sleep/counters.rs:26:41: 26:51>::partial_cmp"
+kappa = "61030bbe8d9739459aedc66dccc20cb978c8df57b3053f5a52266ae1b262e742"
+embedded = "2a2c1358f9c8d3d09e42fe48a42ea905b524c01e56bff8280aa27531b08c3c19"
+status = "residue"
+cause = "mir::Ty: JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::counters::AtomicCounters::add_inactive_thread"
+kappa = "4cc7d544a41fb5aaa951728e3d8ccede695a6d601e9533f3014ce3ad49946b9a"
+embedded = "642879815afb1b98baebb39838b1c31b4656f33dc78371037cfadfcf4cdae891"
+status = "residue"
+cause = "mir::Ty: AtomicCounters"
+
+[[fn]]
+path = "rayon-core::counters::AtomicCounters::increment_jobs_event_counter_if"
+kappa = "18cd7a8636f41e703e9b807a93a2fc25a012eae6d5dc850ae6cb96120e069ccd"
+at = "JobsEventCounter=u32"
+embedded = "f14a7553a73d71d39aa37773865f9ee23264ec0b1e4fb96c0406bd7001bfc6af"
+status = "residue"
+cause = "mir::Ty: sleep::counters::Counters"
+
+[[fn]]
+path = "rayon-core::counters::AtomicCounters::load"
+kappa = "859e174c7f8e7a70e558372d37989cc0968e80d24975c655bfb3498dcc89e704"
+embedded = "926ffb4faad81753b3a99be5c8b9d885805a7f4f4a2281c80586650801a9f819"
+status = "residue"
+cause = "mir::Ty: sleep::counters::Counters"
+
+[[fn]]
+path = "rayon-core::counters::AtomicCounters::new"
+kappa = "bf74e1e5f0a36b291f05a9ea5ca9097fd7d69ffa0a9eb25c0a0f179570fac492"
+embedded = "9a947f00cb62598442b5de960661f9228349f968927c08956f129588206549ad"
+status = "residue"
+cause = "mir::Ty: sleep::counters::AtomicCounters"
+
+[[fn]]
+path = "rayon-core::counters::AtomicCounters::sub_inactive_thread"
+kappa = "670a31a35c06a83788092398d78dad0031e8ded5e5f6c3bdbdb940c76e0a5263"
+embedded = "6621516ad139e04f9d1b3eb919646b9777c5327badffb578e7799dedf3fe0264"
+status = "residue"
+cause = "mir::Ty: AtomicCounters"
+
+[[fn]]
+path = "rayon-core::counters::AtomicCounters::sub_sleeping_thread"
+kappa = "c32d5a3c781361110eb0564bc4e51ee9f12a0d1c8fdede2fdb7b9cc82dc16c25"
+embedded = "e6c7b2a9af6beca58695363500c7cdc001946d472c9307fb3204f2174d8fed02"
+status = "residue"
+cause = "mir::Ty: AtomicCounters"
+
+[[fn]]
+path = "rayon-core::counters::AtomicCounters::try_add_sleeping_thread"
+kappa = "0dd687d55b677af631d9cc1b55cef1524869edfe031eb9156c15cd8bc7bb2f7d"
+embedded = "a5777d0488bfabdef1de78a4a832edb77927181027e31a93ee5e719d25f654c1"
+status = "residue"
+cause = "mir::Ty: AtomicCounters"
+
+[[fn]]
+path = "rayon-core::counters::AtomicCounters::try_exchange"
+kappa = "b207fd396882d0e8c2e3dd3c6200cacd9057fb260755408121485b68763ee27b"
+embedded = "200b61e98d53e75e9772a7c313b3f7792ce05031427426353985176396c6bc13"
+status = "residue"
+cause = "mir::Ty: AtomicCounters"
+
+[[fn]]
+path = "rayon-core::counters::Counters::awake_but_idle_threads"
+kappa = "c946a8d193e59b1a8a881666630b778359e1215d9c1789bd2967050af9f6b59c"
+embedded = "69fe7acac126b88d280cf98574d3d6a9faae22b3cf51787346c023fbfc047e8d"
+status = "residue"
+cause = "mir::Ty: Counters"
+
+[[fn]]
+path = "rayon-core::counters::Counters::fmt"
+kappa = "bcf57c32f04118b7f306ec691da87e642181e68fc677f32f84f479d8f050afe3"
+embedded = "5605e3505a02025e5da81c97fe3012164bd1b28618dfefefe9596e7d5778cfcf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::counters::Counters::inactive_threads"
+kappa = "8e671f61f37c92e5a0120be793bee2ba1c7fb38560ac6e3e163e606da574748e"
+embedded = "32f710bf61538a602a103e78f2d3fd3bd3bb8163544c11876d51ba13be19046c"
+status = "residue"
+cause = "mir::Ty: Counters"
+
+[[fn]]
+path = "rayon-core::counters::Counters::increment_jobs_counter"
+kappa = "cbc2034af4aa884b7ad27b5d415ea8245c8bee22c9c5c7ea0d1983fd50c13321"
+embedded = "d7cc5650acad8c3dc5a7e20bf59585fd8e91179fda738f2b8ee7ec537d4e528a"
+status = "residue"
+cause = "mir::Ty: sleep::counters::Counters"
+
+[[fn]]
+path = "rayon-core::counters::Counters::jobs_counter"
+kappa = "a5db38604a9a582287926535ae0f40eef953edd2d99d15c4acacc7ce7496aebe"
+embedded = "a7be9c126b107d54ac6f98d15c7c8c311cbd2d90a4ed2153ec4ce18310e61f14"
+status = "residue"
+cause = "mir::Ty: sleep::counters::JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::counters::Counters::new"
+kappa = "a197b3019710fbdd8a287143f3d5e7ad741fcb1ef75f304fd3aa57c17a5d2263"
+embedded = "c0c46c1abfcf359db065440b25b1e8c255c4259f8da179aaddf2a76616aba627"
+status = "residue"
+cause = "mir::Ty: sleep::counters::Counters"
+
+[[fn]]
+path = "rayon-core::counters::Counters::sleeping_threads"
+kappa = "f502a54d933a425f2f858fb707d26f4180a256bbc4d47abe9000300c7c81f607"
+embedded = "bb6cc4823fc740770edfb5bc09ca8ff23fd8fa50ae1bb2958f91f72836d30e63"
+status = "residue"
+cause = "mir::Ty: Counters"
+
+[[fn]]
+path = "rayon-core::counters::JobsEventCounter::DUMMY"
+kappa = "590c710dd7832395f88a53f068813c6b1bda5117fb2176be596533fe76611cd9"
+embedded = "f798d99e8836fcca8551247fe8111efd3da1a7914e5f439f1f4abea6dec6c001"
+status = "residue"
+cause = "mir::Ty: sleep::counters::JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::counters::JobsEventCounter::as_usize"
+kappa = "63a8a1c248e22418a5149805efd2744ca69f4de1461eb448f8717e1ec8cdc4c1"
+embedded = "66e36d44ba556f5b73375c3f3ded146fc87596f05793cd9c7118a627cc8f3927"
+status = "residue"
+cause = "mir::Ty: JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::counters::JobsEventCounter::is_active"
+kappa = "89cdce623db3a81a19f130c43a6b02ea2c56352ea03b5d5c897594112fe889e5"
+embedded = "5632676beca9ece5e44d29d51445b472b2cfa1c911faf36f1917b0efffc9e703"
+status = "residue"
+cause = "mir::Ty: JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::counters::JobsEventCounter::is_sleepy"
+kappa = "18733eeb90ecbe465c15ad86c918a86683c0b43ee794cb60089bb38324fea500"
+embedded = "2b2724410fe5d62fc4488d98124b360e208e91b86acd9832207f0d99f237a636"
+status = "residue"
+cause = "mir::Ty: JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::select_jec"
+kappa = "446b4e125e0da31a64a01915321accbbfd80fbc5fd865adfbc0b4122116f5e26"
+embedded = "32acc8fc703cc1107fc0889b9a975f26798cc81bdaf0b49c34c3f10272669999"
+status = "residue"
+cause = "mir::Operand::Constant: sleep::counters::JEC_SHIFT: mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+
+[[fn]]
+path = "rayon-core::select_thread"
+kappa = "e197d7c72b2092ffe36edffcc37d4e5fbafcb0771b14f30e42077c1c04da5d37"
+embedded = "1c654185d19f4c49893454cb8f7a228ff8299ed398e5ff09cdd52ecf9ad84a80"
+status = "residue"
+cause = "mir::Operand::Constant: sleep::counters::THREADS_MAX: mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+
+[[fn]]
+path = "rayon-core::sleep::<impl at src/sleep/mod.rs:47:10: 47:17>::default"
+kappa = "a6b94e53b6121789122340828001728890d1b9f5bdfed2b97c928b91e4bf45f4"
+embedded = "3d6759adb766c2ef497f0781f9f65c6913b1a6a78e61909da2d7fad7f6a5c9b5"
+status = "residue"
+cause = "mir::Ty: sleep::WorkerSleepState"
+
+[[fn]]
+path = "rayon-core::sleep::IdleState::wake_fully"
+kappa = "c8f8ac09cdbe780bcd9879aa866cebef41c68057ac2e73bd15a288f484913c17"
+embedded = "9a1bb1009df7e4082617e686c4f1f2cf404d0110493bdc2a714776e7df4472ee"
+status = "residue"
+cause = "mir::Ty: IdleState"
+
+[[fn]]
+path = "rayon-core::sleep::IdleState::wake_partly"
+kappa = "c0440d631b8c912de8b6ac01d005fd3f9ff8b9e0a2dfee262b74b6c38fcb9c8a"
+embedded = "2f09b0f8e229954f67e25068c4f78fae14a9bb1e72213d3be6500fc0fc406e77"
+status = "residue"
+cause = "mir::Ty: IdleState"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::announce_sleepy"
+kappa = "8221a2986e277b9373b2aaaac062ce490cbcf0569d7397f79a2512970c0a72d5"
+embedded = "6bc7df6707971600fc8e5cc79c3c0a46f5ef444b7bf5b354a3be0f54ee466055"
+status = "residue"
+cause = "mir::Ty: sleep::counters::JobsEventCounter"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::new"
+kappa = "1a215ecb41c15497694ed6d0ec0d2cda4a76d3cc6602cc41df47f85179c2d746"
+embedded = "3afd3c2e63e6b2cdf9b9ecf6eaafe1c0413bae3be781e0f3f50819e3068597ed"
+status = "residue"
+cause = "mir::Ty: sleep::Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::new_injected_jobs"
+kappa = "cd0a59fc9258c453a6ac6a7e0fcd04e3978759e251e371b58ad2aecf25c8196c"
+embedded = "aae0f310538c42a3c5e4e2219b07f166466ff18e98257d3b530f7704b4d5cddd"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::new_internal_jobs"
+kappa = "25f3d19dc79593a96effc684b11d849041cc7aff9a1278ee621252255dd2976c"
+embedded = "0f5aaa7944419ffa710fed87cc7dc5647c5d850df3e1c8c9b62fda94bf64beab"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::new_jobs"
+kappa = "bb5c0fa7d0caf47380e850bbab1198c031b2c68eefcf29737ece11cab4a95aae"
+embedded = "51b6bfa0c27fdf4e30a19492b7019ba73577289c43981fb91f92057271186317"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::no_work_found"
+kappa = "3474c28b2ca378aa46a91d33cac36749ad7d8dc63a354c1f00ecc8a14cd1d9ff"
+embedded = "e5a93d2ab75eaabc05b49455383a0f5a2f1f7ca2a96f4122f52a524fa1b9f6e8"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::notify_worker_latch_is_set"
+kappa = "6681aeedda9aed14a55a72e37ec2b7634470cf4f3fc25fde634448db3a9aa121"
+embedded = "6ab9b0fc4759548b868590606cb05d671f87591520d866d46ce09871c6dd95c8"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::sleep"
+kappa = "9c297948bc78462a2919c88f8c746750984309d8379afe1b9cc16713befe4930"
+embedded = "1f670373d49c7899ee140e1caebd8bd73e980ac3867cbdf4e1fe636f0a33ef5b"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::start_looking"
+kappa = "c47f80ffda94b617ad9a15baa56da3a01e3332ba3093417eca512ce744b02dd0"
+embedded = "dbf81be0fd48a07c1d8967e71de5c7832286d5d5750453e9f59995e1f9163f5d"
+status = "residue"
+cause = "mir::Ty: sleep::IdleState"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::wake_any_threads"
+kappa = "5d8cf27890820a66e9f448922654008baf792bf0b4a84b0053474afc6d67e8f4"
+embedded = "9dfd730a7f64e6b9d9e7bcc688cbc793fa0fcf49d16abfd2a17adf72406940b6"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::wake_specific_thread"
+kappa = "fc012e57221b23c67994a655d5c1790fb540eb1fb5d01c1de86f1028b4d9229f"
+embedded = "348df270986ab6e8eea1f2df9add945dabcddcc961c39a295ef77675823a5a4f"
+status = "residue"
+cause = "mir::Ty: Sleep"
+
+[[fn]]
+path = "rayon-core::sleep::Sleep::work_found"
+kappa = "cde6faae99d6651982571f3ec2e7282a5238fcf662b1c42bfe08073673297663"
+embedded = "c40881d20f261acd10fc730c60bc16b5148448c4144ec91a334c150a3b35f8dc"
+status = "residue"
+cause = "mir::Ty: Sleep"
+

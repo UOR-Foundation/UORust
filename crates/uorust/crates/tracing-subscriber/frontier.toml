@@ -1,0 +1,796 @@
+# The tracing-subscriber register (written by `uorust crate tracing-subscriber@0.3.23`; do not edit): every body of
+# tracing-subscriber's MIR at tracing-subscriber 0.3.23, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 929
+translated = 4
+residue = 925
+
+[module.crate]
+bodies = 89
+translated = 0
+residue = 89
+
+[module.field]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.filter]
+bodies = 231
+translated = 0
+residue = 231
+
+[module.fmt]
+bodies = 360
+translated = 4
+residue = 356
+
+[module.layer]
+bodies = 152
+translated = 0
+residue = 152
+
+[module.reload]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.util]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+bodies = 929
+embedded = 929
+evaluable = 929
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 117
+
+[[cause]]
+cause = "mir::Ty: tracing_core::LevelFilter"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: tracing_core::Interest"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: fmt::format::Format<u32"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: layered::Layered<u32"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: Id"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: reload::Layer<u32"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: dyn layer::Filter<u32> + Send + Sync"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: dyn layer::Layer<u32> + Send + Sync"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: registry::SpanRef<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: fmt::format::FmtSpan"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: layer_filters::Filtered<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tracing_core::Metadata<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tracing_core::span::Id"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: TypeId"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Registry"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: core::io::Sink"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: filter::layer_filters::FilterId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: fmt::Subscriber<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: fmt::fmt_layer::Layer<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Alt<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Event<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: FmtSpan"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: StaticDirective"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: display::Messages<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: filter::targets::Targets"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: And<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Or<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: VisitDelimited<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: combinator::Not<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: filter::filter_fn::DynFilterFn<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: fmt::SubscriberBuilder<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: fmt::format::pretty::Pretty"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::TestWriter"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: layer::context::Context<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: nu_ansi_term::Style"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: reload::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Attributes<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DefaultVisitor<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DirectiveSet<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ExtensionsInner"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PrettyVisitor<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Targets"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: context::Context<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: filter::directive::StaticDirective"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: filter::filter_fn::FilterFn<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::format::Compact"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::format::Writer<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::time::SystemTime"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::Tee<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt_layer::Layer<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: layer::layered::Layered<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: registry::Scope<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tracing_core::span::Current"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExtensionsMut<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FmtSpanConfig"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: field::debug::Alt<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: field::display::Messages<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: filter::layer_filters::FilterMap"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: fmt::time::Uptime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: layer_filters::FilterMap"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: layer_filters::FilterState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FilterFn<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IdHasher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: L"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: M"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::any::TypeId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error + core::marker::Send + core::marker::Sync"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: field::delimited::Delimited<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: filter::directive::DirectiveSet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: filter::directive::ParseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: filter::layer_filters::FilterState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: filter::layer_filters::Filtered<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: filter::layer_filters::combinator::And<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: filter::layer_filters::combinator::Not<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: filter::layer_filters::combinator::Or<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: filter::targets::Iter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::SubscriberBuilder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::fmt_layer::Layer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::format::FmtSpanConfig"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::format::pretty::PrettyFields"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::format::pretty::PrettyVisitor<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::EitherWriter<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::OrElse<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::WithFilter<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::WithMaxLevel<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::WithMinLevel<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: layer::Identity"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: registry::extensions::Extensions<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: registry::extensions::ExtensionsMut<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::TryInitError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CloseGuard<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Compact"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DateTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DynFilterFn<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpanRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpanStack"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Uptime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::cell::Cell<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::cell::RefCell<alloc::string::String>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn tracing_core::field::Visit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: field::delimited::VisitDelimited<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: filter::targets::IntoIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::Subscriber"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::fmt_layer::FormattedFields<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::format::DefaultFields"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::format::DefaultVisitor<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::format::FieldFn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::format::Format"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::format::Full"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::time::datetime::DateTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format::Full"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: format::Writer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pretty::Pretty"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: registry::extensions::ExtensionsInner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: registry::sharded::DataInner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: registry::sharded::Registry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: registry::stack::SpanStack"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reload::Handle<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Layer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: filter::layer_filters::FilterState::clear_enabled::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: filter::layer_filters::FilterState::event_enabled::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Box as DerefMut>::deref_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: field::make_visitor: tracing-subscriber's MIR stops at mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <layer::layered::Layered<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: D"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Data<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DataInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Dispatch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EitherWriter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Extensions<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FieldFnVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FmtContext<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Handle<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NullCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OrElse<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ScopeFromRoot<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SubscriberBuilder<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Tee<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WithFilter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WithMaxLevel<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WithMinLevel<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn layer::Filter<u32> + core::marker::Send + core::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn layer::Layer<u32> + core::marker::Send + core::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn tracing_core::Subscriber"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: filter::layer_filters::MagicPlfDowncastMarker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::fmt_layer::FmtContext<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::fmt_layer::Timings"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::format::ErrorSourceList<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::format::FieldFnVisitor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::format::FmtCtx<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::format::FmtLevel<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::format::FmtThreadName<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::format::escape::EscapeGuard<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::ArcWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::BoxMakeWriter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::writer::MutexGuardWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: layer::NoneLayerMarker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: layer_filters::FilterId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::ScopeFromRoot<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::extensions::IdHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::sharded::CloseGuard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::sharded::Data<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::stack::ContextId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: smallvec::IntoIter<[u32; 8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: targets::IntoIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: targets::Iter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::Dispatch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::dispatcher::DefaultGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::field::FieldSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::span::Record<'_>"
+bodies = 1

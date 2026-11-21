@@ -1,0 +1,49 @@
+[[fn]]
+path = "dirs-sys::parse_user_dirs"
+kappa = "1e3fa82d416248388b70e1260f3a5203c91c316cb94afd775a2190c31cc53bf0"
+embedded = "fa91ea1925b6b09646b506f0086dcc56fb09908718f598e14060d9db8a037bfc"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "dirs-sys::read_all"
+kappa = "6ec917210c9dfe9edaeca7e5a48224c566aa7ce10f13555d1088ee2469d0cc7e"
+embedded = "b9c42dba87160144c2dc0f3a9d4a330ea162049ff08da63d050115a691fecfc2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "dirs-sys::shell_unescape"
+kappa = "0e1c147ca4c240a8b6925febbba0a78d5f319f4f8e30fb49ab633d08ac8fa3d8"
+embedded = "a8de748a378be389fb44cee69e4cb8091940bc80635084f2cc53726feea2c3e1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+
+[[fn]]
+path = "dirs-sys::single"
+kappa = "08e19ba6788f885439b0718683860639ad7b2dc55c4f5b5956127b4f28ac3ee8"
+embedded = "f4f30e4ec63f00486ac235c95a26a234379b2e280ff0d7cdbbfe5a164fa11068"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "dirs-sys::split_once"
+kappa = "3b4e7382ebe1e7cebaaf565ae4f1e1c77debb74dd50712519b11054df18ba9cc"
+embedded = "67180b1471b3b379a13c7cc1ca71954253eab84037a0094ba46be179351bea31"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <std::slice::Iter as Iterator>::position"
+
+[[fn]]
+path = "dirs-sys::trim_blank"
+kappa = "987143062f4bea858d6dcab0bb728a22848669e93f4ea92eb1f74b9c1bab6683"
+embedded = "c4ef77df7f628dfa148f76a5a0b1bbdcd441c70503c7e72702b0fe7d27cec3b4"
+status = "residue"
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "dirs-sys::xdg_user_dirs::all"
+kappa = "f1e8b1fd10efc1f39d56cbc0367c4d5250682930f61b66cc7e4f5f08c4f671c7"
+embedded = "ad655e95a5bd8ae32665d4c1620dc640cb2103b71a627b6373edc27e21c5882d"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+

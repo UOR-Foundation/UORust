@@ -1,0 +1,26 @@
+# The write16 register (written by `uorust crate write16@1.0.0`; do not edit): every body of
+# write16's MIR at write16 1.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 2
+translated = 0
+residue = 2
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 2
+embedded = 2
+evaluable = 2
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 2

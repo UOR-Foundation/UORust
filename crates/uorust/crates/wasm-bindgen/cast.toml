@@ -1,0 +1,72 @@
+[[fn]]
+path = "wasm-bindgen::JsCast::dyn_into"
+kappa = "b9c1f86f49c0f79160a7e6a36f4715175f00c3e4c092a56ceec879828e72dd67"
+at = "Self=u32, T=u32"
+embedded = "5f706d57dd78b508c6d509ddc0e23c00bd03564b5a4230426e896f509842beec"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by JsCast, which u32 does not implement in core"
+
+[[fn]]
+path = "wasm-bindgen::JsCast::dyn_ref"
+kappa = "1c6a4039b875728f9cc9fcc54c7cf318b0d6a9277a61fa5ae6582ea0cce82a2f"
+at = "Self=u32, T=u32"
+embedded = "758a47f9bbf060887dc8dc434854e1bf134a9064b7c7a6e10ec4fa6c100080e1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by JsCast, which u32 does not implement in core"
+
+[[fn]]
+path = "wasm-bindgen::JsCast::has_type"
+kappa = "4364284989b7248cb419d1b5ac5ff19ed2b40a92e2263206e178053bbdeff2a2"
+at = "JsValue=u32, Self=u32"
+embedded = "e4057f926b0a6e4271ac31bec314f993150b87718e47b103d323b44d4d0c7809"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <T as JsCast>::is_type_of"
+
+[[fn]]
+path = "wasm-bindgen::JsCast::is_instance_of"
+kappa = "bb3ef4423d9bae630ba72de324531601b1fd7ca8750d65e24eef7102da65d388"
+at = "JsValue=u32, Self=u32"
+embedded = "7bc62ac3071d50cc95ca979da7df0b630fc6483f76b72d53e96d3746c5230c2d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <T as JsCast>::instanceof"
+
+[[fn]]
+path = "wasm-bindgen::JsCast::is_type_of"
+kappa = "bdadb02b1313972883596193396d4a556272c227684af2dd034eea7c57df14f4"
+at = "JsValue=u32"
+embedded = "672fe59e98d36f727871c0658c603c9dc2694c82978f22cb18673c1e97142d7a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Self as JsCast>::instanceof"
+
+[[fn]]
+path = "wasm-bindgen::JsCast::unchecked_into"
+kappa = "b45e10c5e99eeb312ec1e5a6b0c401bf9ad74a16c161bbf8762277629f9ec6c9"
+at = "JsValue=u32, Self=u32, T=u32"
+embedded = "05e086ffbbc2a3a264eae9a38519b922b94305f6065b0295e0613d7b3d9d9fe3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by JsCast, which u32 does not implement in core"
+
+[[fn]]
+path = "wasm-bindgen::JsCast::unchecked_ref"
+kappa = "7c6882e5a47c0fe82f3903043d74e6cd0daac5769c82dbfed4a58c447bafeaf7"
+at = "JsValue=u32, Self=u32, T=u32"
+embedded = "1b9c98efb28c536e7eba271a86447f9c6d33267266b94895d897d6edfe5a9244"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by JsCast, which u32 does not implement in core"
+
+[[fn]]
+path = "wasm-bindgen::cast::T::try_from_js_value"
+kappa = "eca6034ce282e679fb917b81b2209544f4e1b12f0170bb79af1854c26b18c685"
+at = "JsValue=u32, T=u32"
+embedded = "a437a84ae5cd28b857c38f690f4e3f54d4525e8ec464832b6ace266d07ea72a6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by JsCast, which u32 does not implement in core"
+
+[[fn]]
+path = "wasm-bindgen::cast::T::try_from_js_value_ref"
+kappa = "85fed6bd85f233bf070d7d6e7b81ac04a918999334ca88aa8224c01e5629e3c6"
+at = "JsValue=u32, T=u32"
+embedded = "cdb045aa108dac8c2319c408f482226228ac789bdd6622e6991eff452eb7c3a8"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by JsCast, which u32 does not implement in core"
+

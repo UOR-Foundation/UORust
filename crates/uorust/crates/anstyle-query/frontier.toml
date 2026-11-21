@@ -1,0 +1,39 @@
+# The anstyle-query register (written by `uorust crate anstyle-query@1.1.5`; do not edit): every body of
+# anstyle-query's MIR at anstyle-query 1.1.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 10
+translated = 2
+residue = 8
+
+[module.crate]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.windows]
+bodies = 2
+translated = 2
+residue = 0
+
+[embedding]
+bodies = 10
+embedded = 10
+evaluable = 10
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: term_supports_color: anstyle-query's MIR stops at type outside the lift: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OsStr"
+bodies = 1

@@ -1,0 +1,72 @@
+[[fn]]
+path = "semver::matches_caret"
+kappa = "1125d09964a99e5d0b3ab586b47c5caa0dcb146d65e4f761d84f9b857f702844"
+at = "Prerelease=u32"
+embedded = "2c23dd37789db15dc4e89bdeb7b0b6484b537ad1498991e5f53d428eb18f0036"
+status = "residue"
+cause = "mir::Ty: Comparator"
+
+[[fn]]
+path = "semver::matches_comparator"
+kappa = "bacd561bdbc088165a877f07b26c0404141153bcf1acad32586ffb42a4886009"
+at = "Comparator=u32, Prerelease=u32, Version=u32"
+embedded = "648463b5decf7e73b79c16540f3090c5d83ecc63b48996f47cbe2f3c7c89d65b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: eval::matches_impl: semver's MIR stops at type outside the lift: Op"
+
+[[fn]]
+path = "semver::matches_exact"
+kappa = "64b8c5e4969603eccca018f9256ee9874ed2526d3500bcd0ee8f296caaed6f57"
+at = "Prerelease=u32"
+embedded = "eb8bb8b535bdeb8137675e407c702f3575745b87e74e12ff4503258a8b5dd480"
+status = "residue"
+cause = "mir::Ty: Comparator"
+
+[[fn]]
+path = "semver::matches_greater"
+kappa = "0bf50675283ed59763df9f8c91aed4373515da572cc4157c9f6804ad57da229e"
+at = "Prerelease=u32"
+embedded = "7925c89e34b60a418982225e0686a258fa6dc2e0f0ab872ab81f9299159b521b"
+status = "residue"
+cause = "mir::Ty: Comparator"
+
+[[fn]]
+path = "semver::matches_impl"
+kappa = "78ca5d340241aa321001a50fb9ff93672989b31077d3c7e968750fe14bbdf948"
+at = "Comparator=u32, Version=u32"
+embedded = "23f18f6dae34a4551b28721735e59b9b6c664a73710547b1326469e0d43b6c54"
+status = "residue"
+cause = "mir::Ty: Op"
+
+[[fn]]
+path = "semver::matches_less"
+kappa = "87ffbfe058635fba3a86012f6c913e431746ba70e4d82d07985b33664c06a42a"
+at = "Prerelease=u32"
+embedded = "949df9a1bf1ad4f408f3a7d5c9e6da125a1d4bd1de5e09d2adb6a001b8ae2fc9"
+status = "residue"
+cause = "mir::Ty: Comparator"
+
+[[fn]]
+path = "semver::matches_req"
+kappa = "4e4204b7044398b48783064fff2e6c6bdce77719473831f149d553057f3d946b"
+at = "Comparator=u32, Prerelease=u32, Version=u32"
+embedded = "d3ed641295fd614d7cb5fef601489e9f763934d1e0b396767cbad3782a25edfa"
+status = "residue"
+cause = "mir::Ty: VersionReq"
+
+[[fn]]
+path = "semver::matches_tilde"
+kappa = "ac17cb6d7c48140dde526f03f2e5e10742cc8ccb0eb0cdbbbe8e2513d1f61782"
+at = "Prerelease=u32"
+embedded = "bcd4d3f0349f8a2b73211d989981576c22e55aba61b7ca7e83a762e13ba53f0f"
+status = "residue"
+cause = "mir::Ty: Comparator"
+
+[[fn]]
+path = "semver::pre_is_compatible"
+kappa = "cea8d135b6a4e9e0d9d1c7905183da386a066cea0f89f8571c97121c975d63dd"
+at = "Prerelease=u32"
+embedded = "6c9f0cd4fa0193db3865aa67573ab0dc05bcf937776d8e3185db616f8d46037f"
+status = "residue"
+cause = "mir::Ty: Comparator"
+

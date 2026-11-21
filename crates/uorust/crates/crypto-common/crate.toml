@@ -1,0 +1,172 @@
+[[fn]]
+path = "crypto-common::<impl at src/lib.rs:373:16: 373:21>::clone"
+kappa = "3072c0acaf774512a040f15aae58dddababcb00ac1d4a34dd51a409a15bd196e"
+at = "InvalidKey=u32"
+embedded = "335a35514271db9b159c2b7ccd411da68557f782016185406a13a29acb89f5f7"
+status = "translated"
+digest = "a961c8fab414b7824f12c9a9b360460ea6e720c19759a0a7a49224c3bb2d4de7"
+
+[[fn]]
+path = "crypto-common::<impl at src/lib.rs:373:23: 373:25>::assert_fields_are_eq"
+kappa = "1be6721823ba327a98044612f8c0579e97030073cef7ad63c1465b499174af41"
+embedded = "d392e8e1cb5731961a410e7243157b3e8f94469b884a1684e21ae975baddadbf"
+status = "residue"
+cause = "mir::Ty: InvalidKey"
+
+[[fn]]
+path = "crypto-common::<impl at src/lib.rs:373:27: 373:36>::eq"
+kappa = "54c1749323734c58b11740c3232cffe481749e25951b0f3028c865ee2a0057ba"
+embedded = "494390f09282072d458898cd54a54d2ab7dc260c49dd1a5ae0ebb2dd38c32a76"
+status = "residue"
+cause = "mir::Ty: InvalidKey"
+
+[[fn]]
+path = "crypto-common::<impl at src/lib.rs:373:38: 373:43>::fmt"
+kappa = "dbc19302801322dc00eb109e7b96897c1a684ecc3cb0b5f72ae9398c150a314f"
+embedded = "58aa535bc74c3e0219e396101dab57995014f80d0e0f073da634dd6a739db7e8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crypto-common::<impl at src/lib.rs:388:16: 388:21>::clone"
+kappa = "d2fc9610da2a0fa1f5709b89f49d552ce609cc3aa2129386f24e14aa5660003f"
+at = "InvalidLength=u32"
+embedded = "4d52aedb2925f3d8529fff02200a3bb58c2337240569cafcfa6245e554316c76"
+status = "translated"
+digest = "3bc96f190ffde63183fb2b6ecee376b82daab70afb503ce42f51c08d0ada9adb"
+
+[[fn]]
+path = "crypto-common::<impl at src/lib.rs:388:23: 388:25>::assert_fields_are_eq"
+kappa = "1b57a0d966348e1c06fd66ff1ae5bf6b2679e7cf0b36cd26bc475335341f58de"
+embedded = "63e437ab4a8c883bc0f95568739777cc6e1f1bc258b6dfd61e99cda4ba785239"
+status = "residue"
+cause = "mir::Ty: InvalidLength"
+
+[[fn]]
+path = "crypto-common::<impl at src/lib.rs:388:27: 388:36>::eq"
+kappa = "4ef5523b509389d50681f690da7b03b45e6d2c55100d01e6591ab0332668ac13"
+embedded = "cc80be4484e9539b7d947d26efb9b71b6886acb0e7131873804a8811ab521451"
+status = "residue"
+cause = "mir::Ty: InvalidLength"
+
+[[fn]]
+path = "crypto-common::<impl at src/lib.rs:388:38: 388:43>::fmt"
+kappa = "052ac785f573d291c37e16773994563227b64799150bbee843c0a8a0b07545f8"
+embedded = "c87cf64950192588ab0d4ee3ddf6c5383bd7eabcb5c43d5b43c65f9adae7443a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crypto-common::BlockSizeUser::block_size"
+kappa = "27beb04538063afd38ed4adafac9755b082f11747c5ed170af354f0b4864bd08"
+embedded = "e06ad0ca39f3a721d3bf0f103ea51c471b8b2ea1aafae3e9b36896397f91bf8f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <<Self as BlockSizeUser>::BlockSize as hybrid_array::typenum::Unsigned>::USIZE"
+
+[[fn]]
+path = "crypto-common::InnerIvInit::inner_iv_slice_init"
+kappa = "3ab1cae1833740b7bf62cb65614354dd0f6a1202e5900ed4b2efa90a9fb40a97"
+at = "InvalidLength=u32, Self=u32"
+embedded = "f0b191896fd5830da46f9a7e9c4aef98fd7189857d725e680d9bc0443c5e15bb"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "crypto-common::InvalidKey::fmt"
+kappa = "6d087dd4e0e2c190630e7a382f0eb22708e0924d599aeae10990bf6af510c3fb"
+embedded = "11ca87beae908542f7a797e3720a41a2c6dbda4e002914283aa0e6b56d537cf4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crypto-common::InvalidLength::fmt"
+kappa = "725e07e1bb7f03b0d08b3a03d99be1e1c1de1fce83b2ad112cab175a2e700844"
+embedded = "2a7b42ac2dd7a45060cc89a691dd517c0f337798c176ad3379df9494c4afe249"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crypto-common::IvSizeUser::iv_size"
+kappa = "72ff17e893d0b60ba496ab1873e58b306bff3ab3a73ac8a560d56f3e7ab22776"
+embedded = "f4deaa42dc40ec1b5603aa8f10bafec107f66f32bf5eb6db1914ab26d674fe84"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <<Self as IvSizeUser>::IvSize as hybrid_array::typenum::Unsigned>::USIZE"
+
+[[fn]]
+path = "crypto-common::KeyInit::new_from_slice"
+kappa = "034f1e293f625b597988b3f7f88670712e559e82461636c10ad4f75d47ac917e"
+at = "InvalidLength=u32, Self=u32"
+embedded = "4400b14043bbad9407c89ff39608b27ed9240cf4395f33d3726a13a99c7dd800"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "crypto-common::KeyIvInit::new_from_slices"
+kappa = "fecf9ddf59d912550b4782295a81e6a78d4a07a1d15e5f631c6c330658e01433"
+at = "InvalidLength=u32, Self=u32"
+embedded = "22d311ce0be8780fc667dd7f05c9023d5db18516479c36d23b874b329abab1e4"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "crypto-common::KeySizeUser::key_size"
+kappa = "d0e9696cf9855bb7dbf86cbcd2e1feb590f8414c9de3db538abd5984087d0ae1"
+embedded = "b0ea750c6098b96ecd557611e95676acf605bb12280932d8a9c7b4216d569971"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <<Self as KeySizeUser>::KeySize as hybrid_array::typenum::Unsigned>::USIZE"
+
+[[fn]]
+path = "crypto-common::OutputSizeUser::output_size"
+kappa = "1a0c7777f3847093e02582400cd483eddf451531844cce851636f4933a172b3c"
+embedded = "6e17cde54adbeaf0a70fe8d3860bb91f3ba533f83c56f56dd5ce8bdd53346c26"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <<Self as OutputSizeUser>::OutputSize as hybrid_array::typenum::Unsigned>::USIZE"
+
+[[fn]]
+path = "crypto-common::SetIvState::peek"
+kappa = "c29098928839343c25be0dcfee8e077b0c1e160ffbecc731036428c4327b0470"
+at = "Self=u32, T=u32"
+embedded = "f90ccdac2d37cc4dfccd8f8cd6af839fabb466cc8e06eabd2513a8da68a850fb"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "crypto-common::T::new"
+kappa = "4d29f9cb945827ddd90f7694d25808fea45268bfa2937a88443c7bd3f5a28599"
+at = "T=u32"
+embedded = "be911235f33eb9d864b4f1cad64eb31165e9f6273164c3bad5a213c3a84cf831"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "crypto-common::T::new#2"
+kappa = "7f8d92de2cb3a3e1a9982709e4ecfe007335ce4d2034abb5218f14a4c1822711"
+at = "T=u32"
+embedded = "ef3f241a2fcdf1bc6b6167ae5f39a06beff74d398d18a77f4bf6b068caacf155"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "crypto-common::T::new_from_slice"
+kappa = "4f204c4ffb1f8d53d82b9f4b99e9f56b83c5f0022b45535aad28c2a772d862f0"
+at = "InvalidLength=u32, T=u32"
+embedded = "98bbac33cdfe5031a375c0c205a3de890828061bc5022d2820f45a3ff339846b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:353:1: 356:23>::new_from_slice: crypto-common's MIR stops at type outside the lift: <u32 as InnerUser>::Inner"
+
+[[fn]]
+path = "crypto-common::T::new_from_slices"
+kappa = "e240f0c553e331f3c8486544d199922184a783764bab959f83c234ad5217f96e"
+at = "InvalidLength=u32, T=u32"
+embedded = "6026d637c0e4106cb2cecb590eb12260406b0e6eae29ae8b8c3ad7100976df1e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:353:1: 356:23>::new_from_slice: crypto-common's MIR stops at type outside the lift: <u32 as InnerUser>::Inner"
+
+[[fn]]
+path = "crypto-common::TryKeyInit::new_from_slice"
+kappa = "90fa17387b62cdbc58fbf05f7d94bcfb6e5b9dc3bab2a3afc67e1098a47675a1"
+at = "InvalidKey=u32, Self=u32"
+embedded = "f49c1b12e65d07a9e9bba3ff13aaf67fa42c397c3fb09c55faed46d268dd7c40"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+

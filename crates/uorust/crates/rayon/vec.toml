@@ -1,0 +1,239 @@
+[[fn]]
+path = "rayon::vec::<impl at src/vec.rs:110:10: 110:15>::fmt"
+kappa = "4053f4df9b2016a62aa4ee849a47676c2954ac33502450230f7fe3de1f8b3314"
+at = "T=u32"
+embedded = "a1bdb20ad2ccf52dc502de2f6c11d4ec5aa752e69d15d8d6661abb8b63dcead5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::vec::<impl at src/vec.rs:18:1: 18:68>::into_par_iter"
+kappa = "e8d3c6309bc72fba62e1e1043ec843cc9f4e63004316890107a83542170794d7"
+at = "T=u32"
+embedded = "ff054b8c1135ab4f86e904df54dbd61885cbf2f2aeca67680892d26c70466ec3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl at src/slice/mod.rs:776:1: 776:57>::into_par_iter: rayon's MIR stops at mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::vec::<impl at src/vec.rs:27:1: 27:72>::into_par_iter"
+kappa = "479e1b705b1670cb799511331c8742274a2e0509e7d6d38f257f1952c17112c8"
+at = "T=u32"
+embedded = "9ebbd02e58348c7acbeaa09ddabe59976dc0e4d3a4ddf1ef6a7a8bf69c293341"
+status = "residue"
+cause = "mir::Ty: slice::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::<impl at src/vec.rs:37:10: 37:15>::fmt"
+kappa = "cf2e037078dd1377c10c6737d7ff5acffc1cded956bf7cfaebdfe82654e51db0"
+at = "T=u32"
+embedded = "360afdaa1d3a56d22715a10704c9d9a755980b2da909dcb40bd13da1a064f99e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::vec::<impl at src/vec.rs:37:17: 37:22>::clone"
+kappa = "724662e03d68dd7651cd8b482d17ca927015c3202b7aba7977232c30de9b81fa"
+at = "T=u32"
+embedded = "1fc364288cc425840b60d3bc6d2aca876ff20e82bddbb7d05093dbe4bd94f8b5"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::vec::<impl at src/vec.rs:96:1: 96:69>::par_drain"
+kappa = "83ede3d73cde17f87c690355e686a57fbb43c77364cf56ef3430317626061b07"
+at = "R=u32, T=u32"
+embedded = "2eac1892fe0b08faa0709f504c21cc2e86e4ba60a5448cd07aa930be4e49ab74"
+status = "residue"
+cause = "mir::Ty: vec::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::Box::into_par_iter"
+kappa = "0765825564ae9be1a71aa5c0cc6a8e276f35b4480a6e39f5d5032addbb407446"
+at = "T=u32"
+embedded = "9c1f4d5352291c2f437325800f30023b5fd2bf90af593bd97a9b81bafc4a74f1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Box as Into>::into"
+
+[[fn]]
+path = "rayon::vec::Drain::drive"
+kappa = "bae3b7e6b80ca97b8d01d42bb8ebeacc5417d4e7452fe489728c2cd2d374693b"
+at = "C=u32, T=u32"
+embedded = "71ac1e30ec342bb96768c2fe657f14726425a0009796cb71c9817fa31a056db6"
+status = "residue"
+cause = "mir::Ty: vec::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::Drain::drive_unindexed"
+kappa = "bd633ad00f4ba106d354f810eb845e66ee00da86e1e7e77b49a2df6ec0046289"
+at = "C=u32, T=u32"
+embedded = "b0bf1f36435dc0a30c8873f43d3a29cd21b4d45177c63cef55b5f746738112cf"
+status = "residue"
+cause = "mir::Ty: vec::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::Drain::drop"
+kappa = "355d0d8f09a6cd38fbd63a9ff668d0cf8e437226bc143c1cc8df42c1c96d265b"
+at = "T=u32"
+embedded = "a48e8c081325e5659b783e8ea1efafce9a53d39d9da989201445ca3fec5d03f9"
+status = "residue"
+cause = "mir::Ty: vec::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::Drain::len"
+kappa = "aa0d532ff9d55b75221491f9705edbe8cfa12c78b49378a154e711217917fe5e"
+embedded = "88631bb49004117fcae19a4bf262a89d9842e2bfcd2cd6cf0849a0e0c8d3bda0"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "rayon::vec::Drain::opt_len"
+kappa = "ec24286f29768289e3459b12ad6ff704c1ddabc9300b0345a9a94ed1a3587ec0"
+at = "T=u32"
+embedded = "5908604fe1067e8df2d1f836aaf880d38926975d5a5af33e467c7b2bcba5ca6d"
+status = "residue"
+cause = "mir::Ty: vec::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::Drain::with_producer"
+kappa = "197d879392a90e6abc05390beb3b08c43d858ecee69efe21ace7dce66911d537"
+at = "CB=u32, T=u32"
+embedded = "7409fd61c12c846558f6f996519b167b499cf5eb7cc8740d34c33d77a7e466c4"
+status = "residue"
+cause = "mir::Ty: vec::Drain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::DrainProducer::drop"
+kappa = "41730cf3e28ea4aa42168fd6fc6393b27ac6f3e3d417d43fb0b42d4291b2a25c"
+at = "T=u32"
+embedded = "302eb78b89bb8da090c203915a8cf0ec7aae3ff6510bcaa5150752eadfdfd55a"
+status = "residue"
+cause = "mir::Ty: DrainProducer<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::DrainProducer::from_vec"
+kappa = "8b0305ab496dbcb9674f840ab64b6056828681f3841b1fd30deae15374ae3b27"
+at = "T=u32"
+embedded = "d7e9d5c53836b1d42339fd6abe6ab66d1e63b4c97d854a082e4bd70d15aab08f"
+status = "residue"
+cause = "mir::Ty: vec::DrainProducer<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::DrainProducer::into_iter"
+kappa = "178f1b6fce5dbcf72922ec66ef9aeea28b3ab4c0966d9fbe93f4cea026d8646c"
+at = "T=u32"
+embedded = "30ea297975e5d520904fe158d9fd5bd9ff051b64d00b8f43706f6431670e0c0a"
+status = "residue"
+cause = "mir::Ty: vec::SliceDrain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::DrainProducer::new"
+kappa = "ab7833d49d16f72b271b97e41e9ecc5310f56f5705dd239ff0bb5de06c11a982"
+at = "T=u32"
+embedded = "47ea1bd4078f7d9202e2b6e66fc323617183e56ec8f28a9d915394641a019fe1"
+status = "residue"
+cause = "mir::Ty: vec::DrainProducer<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::DrainProducer::split_at"
+kappa = "31bd33c70e0a3b1b65a1ce5ddd15e934a67be31ecb8bfc0abe9b5cf207590af9"
+at = "T=u32"
+embedded = "682c2b4d3afd4e883755b2af057134707b3506a5256bd36ca18cfb0ce13a3776"
+status = "residue"
+cause = "mir::Ty: vec::DrainProducer<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::IntoIter::drive"
+kappa = "bbd9395300d2e94ded8cbc05770ba444c99b8ac7bd3c40d05c40f822d9ba2586"
+at = "C=u32, T=u32"
+embedded = "0c95222720ee705dda617859badc78649083cc93660314ffc5e96b64bb418ece"
+status = "residue"
+cause = "mir::TerminatorKind::Call: iter::plumbing::bridge: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<<vec::IntoIter<u32> as iter::ParallelIterator>::Item>>::Result"
+
+[[fn]]
+path = "rayon::vec::IntoIter::drive_unindexed"
+kappa = "dd78585d14f79d3b949d5c0f82148e3b10f22794b617e66fbe100d4b39047e2c"
+at = "C=u32, T=u32"
+embedded = "43253176c4bed3745a0ab22c2107817fce9aea97dc93e0d258cb47ed306c7080"
+status = "residue"
+cause = "mir::TerminatorKind::Call: iter::plumbing::bridge: rayon's MIR stops at type outside the lift: <u32 as iter::plumbing::Consumer<<vec::IntoIter<u32> as iter::ParallelIterator>::Item>>::Result"
+
+[[fn]]
+path = "rayon::vec::IntoIter::len"
+kappa = "c561d9983e093924df8ab34614e116e838ab4fa06795d27feeaf8ea1279013aa"
+at = "T=u32"
+embedded = "d48c5c85607dc83368fdb7c3fa6e2dd0787cb78f523f3b9afd3306649c1444e1"
+status = "translated"
+digest = "b382ffd91b7930cc559f5c34056564f76b419b55cef197a43d9bafb41f823014"
+
+[[fn]]
+path = "rayon::vec::IntoIter::opt_len"
+kappa = "9963d2af3677a327cd3ccae843af6e64410b066f296c9ef4815b2e75dab76bc9"
+at = "T=u32"
+embedded = "a3820d2da7379cf61747ee6756b55ce177ceb45bee46bfb5e74cd3fa1215673e"
+status = "translated"
+digest = "f02604b34cb46da6a9ddd6f8f6016dcac83cba429fe9b4f2b65525de64ba6830"
+
+[[fn]]
+path = "rayon::vec::IntoIter::with_producer"
+kappa = "feec5a7e53512d618f806122047016bef2715e27fb97dde5ff63f20c1b1c1153"
+at = "CB=u32, T=u32"
+embedded = "73199fadcb16128bcacc0e16adb8681afd66e8735fcb7c98f8d113f960461b5e"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFull"
+
+[[fn]]
+path = "rayon::vec::SliceDrain::count"
+kappa = "56d57c8cdf1b3f7e2c038f670d4452209b36282097c2e0d7551a6bd01e3e8731"
+at = "T=u32"
+embedded = "5fe6f0a49843d800e8f9ae4b732b08cf442327558bdb96fb51ca3849d7536172"
+status = "residue"
+cause = "mir::Ty: SliceDrain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::SliceDrain::drop"
+kappa = "5544f47484fbff8f2e0eec8c28f05d7b837e74b4381c49823db1e2c62675598c"
+at = "T=u32"
+embedded = "6c5481fce5c5f524dfd47584df21787d56a9b9b3ef564f7513fe33ca2a1a3391"
+status = "residue"
+cause = "mir::Ty: SliceDrain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::SliceDrain::len"
+kappa = "25f243ddbac30f7f068dc90537d0d80216a984879e25c702df2c7a73aeb8706e"
+at = "T=u32"
+embedded = "42fb210fb30d9b6fabdd2b5413c026eb61680be8b72120b2e5ff8de69f301395"
+status = "residue"
+cause = "mir::Ty: SliceDrain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::SliceDrain::next"
+kappa = "8fe477b3f2311b1ced749e60fce4d755e06ebfb1a917920db297b7011499c59e"
+at = "T=u32"
+embedded = "a11b298c9eb109474629deeebaa5588d51ed84b97046df35397bd07822f61b9b"
+status = "residue"
+cause = "mir::Ty: SliceDrain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::SliceDrain::next_back"
+kappa = "dedd1eb4a3ef2cce17c6a32d4f77a6c76c4571cf58c2938621e90969091df64c"
+at = "T=u32"
+embedded = "70e00862da97c459eb71a264e38e822e66a3a87cfbd174671dcd7ed616e9ee8f"
+status = "residue"
+cause = "mir::Ty: SliceDrain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::SliceDrain::size_hint"
+kappa = "00c2a21ee94f2530a253265f181ae7841b2d23e99ca275906158202050e62363"
+at = "T=u32"
+embedded = "4bc20b85a96cf673523ed23d3f88f4e899482ef5a14a94fae236537ecb0bab89"
+status = "residue"
+cause = "mir::Ty: SliceDrain<'_, u32>"
+
+[[fn]]
+path = "rayon::vec::Vec::into_par_iter"
+kappa = "235c19af637b2a925e159d94efc07840f451b4ae76b859defc67b31ff28033e3"
+at = "T=u32"
+embedded = "fa9accefd4fd29dfcc59df623d80bd56d38043b342d59a95c3a8a3c937384f6d"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of TupleListNatNatNat"
+

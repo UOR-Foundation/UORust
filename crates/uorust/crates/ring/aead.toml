@@ -1,0 +1,1737 @@
+[[fn]]
+path = "ring::AES_128_KEY_LEN"
+kappa = "cb16d34a4ec6eac605abeaf467c4055840434cb6fc72393a9205bd240aec8632"
+embedded = "23314450ce04e8dda44f664aaa64bc780ffad11e265cdfe3b148dc406bd78bc4"
+status = "translated"
+digest = "3eb3c795be42bc4ef696c8c81657fb6d831a8af8a563c4f87e98bf5177aebb37"
+
+[[fn]]
+path = "ring::AES_256_KEY_LEN"
+kappa = "69ea2288cfb8002cd5a19ad4e14b1eb51c8e3fbba61c312a89871c415809c3ab"
+embedded = "252c22c15d4eb06187c67e4ea425bf42f961e53efcf83c7e148d0966b5ebbc1b"
+status = "translated"
+digest = "4b65dbee093995e49437fefc3ef4a2961e59ca0b2d6e423e03eb0c4b30c936a1"
+
+[[fn]]
+path = "ring::CHUNK_BLOCKS"
+kappa = "9a7aca01879bbe452e4817b6e553f34981bd24a405642b1aaa2ce2bb322eef47"
+embedded = "696bff047989d9ccffad7f9f635573a95f3158564f471d05c47a11080de51d3d"
+status = "translated"
+digest = "af07f72e3c2f54e5cfdd737f6a80cdf9efbd5aec18002b6609623a3aac5897bf"
+
+[[fn]]
+path = "ring::NONCE_LEN"
+kappa = "e5233c746796f007d30583dfe037ffd014229d4057dcd11d54fe97988a4ab9db"
+embedded = "a2661428a65615f162d71f2968cd301c4b7e4a87b686495659911d1eb67307ed"
+status = "translated"
+digest = "4abfc4f6baca9d145bb542ceee6e72eb4555a944aafd9667018322592ab7ef42"
+
+[[fn]]
+path = "ring::ONE"
+kappa = "8fb9d717a314ea88d902c47cbb312ca1e20e000881adfe16a54e279161649549"
+embedded = "593ede55c327d3e8fcc66b124b421b0566eb67c7d003701067a959ad9af28de2"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<u32>"
+
+[[fn]]
+path = "ring::SSE_MIN_LEN"
+kappa = "31e30e26dde0213c1557ade3e49dd759be0b80260d094b95f584642841899ff2"
+embedded = "a9360cc769697931ab684baa41853135a9bccf24a53ac67de5aebe919bff0ab1"
+status = "translated"
+digest = "bb01a3830a953ac0b934150dad0124d4861f5dafcaf57354483bd9e4034f4663"
+
+[[fn]]
+path = "ring::_MAX_INPUT_LEN_BOUNDED_BY_NIST"
+kappa = "527e71449f8e2d7d5c49281de432c7ad3ef8135056cb4425b4c80d2b57e46c06"
+embedded = "270c50b893651d93b1f6445d29802eed1ae283301c6cd4d97c205ea305a7490c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: polyfill::usize_from_u64_saturated: ring's MIR stops at mir::Operand::Constant: polyfill::usize_from_u64_saturated::USIZE_MAX: mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "ring::_MAX_IN_OUT_LEN_BOUNDED_BY_RFC"
+kappa = "c46f4453f1ebee593b1e94f320003be1e1597006b71d00c89871396fb41724f7"
+embedded = "088fef6ce82f62ec55da5556d5e44fc55a1843ae09973e3cd62b05809ca9ed61"
+status = "residue"
+cause = "mir::TerminatorKind::Call: polyfill::usize_from_u64_saturated: ring's MIR stops at mir::Operand::Constant: polyfill::usize_from_u64_saturated::USIZE_MAX: mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "ring::_USIZE_BOUNDED_BY_U64"
+kappa = "328820e15e2c4d88201071e9ecc53b67138f10558ecd4c2275584f7438280729"
+embedded = "6073f9d9f7ddb88d3364582942728e096576953a5bd3cef8647c3fa48a01e417"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "ring::aead::<impl at src/aead.rs:121:10: 121:15>::clone"
+kappa = "1c6fcb14afe4b739298739de552c547b38f40bad9f725d00e9013f3ac02362fd"
+embedded = "68ef09b0364a7933983baa816764ca767d51488b9c7634c77850a6215dfc2c4b"
+status = "residue"
+cause = "mir::Ty: aead::KeyInner"
+
+[[fn]]
+path = "ring::aead::<impl at src/aead.rs:138:10: 138:15>::clone"
+kappa = "25975f46dd0dc021afd41ca519f1a8a26486c9a39f9cc1b33c3a4a4345a1934b"
+embedded = "4297ac2962f844d71ae47d6c6297e81d84f2ef3725d05fba7d0c867656c499df"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aead::<impl at src/aead.rs:72:10: 72:15>::clone"
+kappa = "ccba47ff9a7cf1bcff99e65a01daaef62813e6e55cf2edf2336f87a79e05884d"
+at = "A=u32"
+embedded = "4810fb0420a370a0d86a63124579d16e76c0ecc083ab4f0fa63f50ded47c4475"
+status = "residue"
+cause = "mir::Ty: aead::Aad<u32>"
+
+[[fn]]
+path = "ring::aead::Aad::as_ref"
+kappa = "6aca1faf10bb885eccd47f8b8599b78c68d7badcb877c4aad52d871e354c3246"
+at = "A=u32"
+embedded = "a01a1337fc34cece03f6a774689b3cdf0dcc8ad57daba11970a1fbcea69b4948"
+status = "residue"
+cause = "mir::Ty: Aad<u32>"
+
+[[fn]]
+path = "ring::aead::Aad::empty"
+kappa = "c251424405ff3ecab577cec6456a65d53755f3866308323ec04e4953879b2080"
+embedded = "4c671fa6f09b69b573579082c94251eab0becd1219e67db62019980da220cc83"
+status = "residue"
+cause = "mir::Ty: aead::Aad<[u8; 0]>"
+
+[[fn]]
+path = "ring::aead::Aad::eq"
+kappa = "293f7071403d529adbc7df6a7ba12727be0d55b9360eb9970e4acce31d50f175"
+at = "A=u32"
+embedded = "6af3aa9bad9f14bd52dc8a20ce7b9ddc52dacc70a58ec9313e70b1377c7b1cd9"
+status = "residue"
+cause = "mir::Ty: Aad<u32>"
+
+[[fn]]
+path = "ring::aead::Aad::fmt"
+kappa = "ae737e03f72927d25b474f18d698624937af862135b05b8bb49c035a90616146"
+at = "A=u32"
+embedded = "a29dce219b82b3d281d3069e842a046c729efa479659720b747581487ed869d4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::aead::Aad::from"
+kappa = "7cac90c4a76795afcf6a37ce2b770140247358986be2294e810554eb28055132"
+at = "A=u32"
+embedded = "b3d468edf3aff6072ffcebfaf66af3ca56a95778a45ddca160dea4cab72b27f2"
+status = "residue"
+cause = "mir::Ty: aead::Aad<u32>"
+
+[[fn]]
+path = "ring::aead::Tag::as_ref"
+kappa = "d80cf7c1dca33b8cf08a85dac034f6e466726794fde8ae2d9ef8dbc4156b585e"
+embedded = "cbdd2faba1a9e45b890275cb6f97acc6d310e1ad28f57ee4c784b03e27d0dc4a"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aead::Tag::from"
+kappa = "63a4b751e239f2329ba09d01f6b531cf36300f4751a563e244388c08cd2b5b07"
+embedded = "13ec15b7e05d6e73fda401d01f1b6d03233b69e8fec03ad6dc06c2720b7dc713"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aead::Tag::try_from"
+kappa = "67b6f7bce52aac56d5eb012f10f6e714d8393673bb24a7139c39ed0ef7474426"
+embedded = "a8ac47afff657d38a81e3082c17d6e546b6b6ed6594e9683e44a28e563ac62c5"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aes::<impl at src/aead/aes.rs:46:10: 46:15>::clone"
+kappa = "5cb35db6bdf90b3f8281378dafd8362d3951edabdc8eca971f71d3737de2c2d0"
+embedded = "005684aff7dd4ede6eca8a5662313bab6ee466527c602528d2d7c4bd84fa4062"
+status = "residue"
+cause = "mir::Ty: aead::aes::Key"
+
+[[fn]]
+path = "ring::aes::Counter::increment"
+kappa = "7d28e890a400bfb0f3a8cf417f4a649a88d998b3a0bdaf329e50234b15e8d99c"
+embedded = "3f865492ede041138b01cd8b2794c2ff26a1e0a05be38f95d10aaeba0655c2bf"
+status = "residue"
+cause = "mir::Ty: aead::aes::Iv"
+
+[[fn]]
+path = "ring::aes::Counter::increment_by_less_safe"
+kappa = "9e421b89db1b94c0a7f86834e1ef3fc25ced58867b6fc6419668afb801f406dd"
+embedded = "e20b29828b8da1c2787ab5a458fbd2abdb0c4f89a74a4aff390e28ef27a4ef0d"
+status = "residue"
+cause = "mir::Ty: aes::ffi::Counter"
+
+[[fn]]
+path = "ring::aes::Counter::one"
+kappa = "91de6f63d1559a2ccc2a654aea69e98042f6e43911fa2efbc89bedb077f67b89"
+embedded = "dfcf86c3319238edc4250d6ae35248e6c08e65ae6fb76f054bb6503244d07d83"
+status = "residue"
+cause = "mir::Ty: aead::aes::ffi::Counter"
+
+[[fn]]
+path = "ring::aes::Iv::from"
+kappa = "dd10739482ec698b1dffa38da4e2a8b2fa7cd303576afd20651b84f2fca64c4e"
+embedded = "2966640b053b2ee7dc456e6c01ea02225c662f9896a026eefeac75e39a45ef63"
+status = "residue"
+cause = "mir::Ty: aead::aes::Iv"
+
+[[fn]]
+path = "ring::aes::Key::encrypt_block"
+kappa = "0b060479c900a19bebb79b266922167f56b827b96e6ec783999f8bf952943307"
+embedded = "cf89532b8bf061d46734fdef7786622345ead0b7ffbc1cb9d8ce61fa35a085b5"
+status = "residue"
+cause = "mir::Ty: aes::Key"
+
+[[fn]]
+path = "ring::aes::Key::new"
+kappa = "fa29e4ba6d203aa9e97a68b5430b4d3c560e544ab490e209dda3e194befdd222"
+embedded = "c623d88532e5787ef5038370051d81ac7fc46c73c89d5b9ebef0cd3874c6701c"
+status = "residue"
+cause = "mir::Ty: aead::aes::Key"
+
+[[fn]]
+path = "ring::aes::Key::new_mask"
+kappa = "11188f2263f0099d68544474a5732e7bd4c0bdd2c09b8aed0e0435a1d19261b0"
+embedded = "a847231210b85e6cd7e02303d2ef938de1e129fd0427df4cd0f388dd467360c1"
+status = "residue"
+cause = "mir::Ty: aes::Key"
+
+[[fn]]
+path = "ring::aes::ZERO_BLOCK"
+kappa = "2e9993e790974a5264399c3b4da942bcdd15ffef2fcaf76677acd704893e3d35"
+embedded = "11543f67e42eb4d9e07a8c218ca844eaa6c0166e4efa973522c1922fa27745a9"
+status = "translated"
+digest = "a35bc66c0c336faf50eca9e9b06342b6f55d0145ef2d654567b13345cca7aac3"
+
+[[fn]]
+path = "ring::aes::fallback::<impl at src/aead/aes/fallback.rs:18:10: 18:15>::clone"
+kappa = "9240bd1d7fabdbf26c04ae2ad196a3a8a8833ec3a0a2234a086ec5a51b98f37e"
+embedded = "7b40bd015256c82c9f233162ff4b290501649272c08fb5006d67e629c6a055c9"
+status = "residue"
+cause = "mir::Ty: aead::aes::fallback::Key"
+
+[[fn]]
+path = "ring::aes::fallback::Key::ctr32_encrypt_within"
+kappa = "2f8a651dfc60ebaa7d9af4b492dfb3c151916909d266f9950a349d4f5dd982c6"
+at = "C=u32"
+embedded = "8172d0505c4056fad140a784f12360da772760a4ab46377b4c6c2506dcc4ed2b"
+status = "residue"
+cause = "mir::Ty: aes::fallback::Key"
+
+[[fn]]
+path = "ring::aes::fallback::Key::encrypt_block"
+kappa = "4b3dfb6c24886f06f2459e0fde2855d1d1f0645a2537757522182ca4646dac83"
+at = "C=u32"
+embedded = "e0cc16bc58b51aeaab7356534473b21666ea99f73e8f4f3683e2e6cd616d2fcc"
+status = "residue"
+cause = "mir::Ty: aes::fallback::Key"
+
+[[fn]]
+path = "ring::aes::fallback::Key::encrypt_iv_xor_block"
+kappa = "a6c82c1ad410f8eb562af9625e24a98de87646f7ef6e0b55c0583a56d160ea11"
+embedded = "f43d6898cc1efdce3c91573b5eb8750bee0bbc168f4cd9340b435d48070d5979"
+status = "residue"
+cause = "mir::Ty: aes::fallback::Key"
+
+[[fn]]
+path = "ring::aes::fallback::Key::new"
+kappa = "6354df82a4d3846a94956c4b1bb56e4cb5b311199a86e5b507e810a894e8b1b0"
+at = "C=u32"
+embedded = "de7b7ccc06a6d4c60d72adb3b3df1f6c3644908648b0400ddeccdc24477c32f0"
+status = "residue"
+cause = "mir::Ty: aead::aes::fallback::Key"
+
+[[fn]]
+path = "ring::aes::ffi::<impl at src/aead/aes/ffi.rs:28:10: 28:15>::clone"
+kappa = "9d2e21193680166ba4a662ee8c5e0f4e25702d0ce26463e928e50adcd177f3d1"
+embedded = "845f31a5fca97eccae1065765145579118440a62f434cd30faa2b5e6b36cb74a"
+status = "residue"
+cause = "mir::Ty: aead::aes::ffi::AES_KEY"
+
+[[fn]]
+path = "ring::aes::ffi::AES_KEY::ctr32_encrypt_blocks"
+kappa = "4fc82f07260ea8e0945c5f85f450bc257aefd2e8f756b9a8fb75a0916c891d78"
+at = "C=u32"
+embedded = "da351fc3a773f7dc4b69dd86a2ac82e8ea40e8aa89038387a91b66a28d59ad39"
+status = "residue"
+cause = "mir::Ty: AES_KEY"
+
+[[fn]]
+path = "ring::aes::ffi::AES_KEY::encrypt_block"
+kappa = "eb85d888599aec074b9e8c2cb263646b27edcd00ed1e0ab3a0bc598dd7794b54"
+at = "C=u32"
+embedded = "4e313ded078a5fbc47e1ee413cc7a6a39db9d667a71521395adb54bfcf8419f1"
+status = "residue"
+cause = "mir::Ty: AES_KEY"
+
+[[fn]]
+path = "ring::aes::ffi::AES_KEY::new"
+kappa = "553590920185a3c01e6f67513a28233f6beaa5f71f0806b28f4a99eea02d0a32"
+at = "C=u32"
+embedded = "79c1c40b7a69dceb5de7c33bf251243aa9c9fa525ed47bfd5a7f71bca2d61dd3"
+status = "residue"
+cause = "mir::Ty: aead::aes::ffi::AES_KEY"
+
+[[fn]]
+path = "ring::aes_gcm::<impl at src/aead/aes_gcm.rs:40:10: 40:15>::clone"
+kappa = "dee89accab4d1f2a7d5cd1d733862dfa4a342d2cae53817919c6639a9eb3fbd8"
+embedded = "581c03eee629d608e48c04245e578b16af76dabe6d3c7217bb8d5988dc0c4a12"
+status = "residue"
+cause = "mir::Ty: aead::aes_gcm::Key"
+
+[[fn]]
+path = "ring::aes_gcm::<impl at src/aead/aes_gcm.rs:501:16: 501:21>::clone"
+kappa = "2c9b1cd808aaa91979b3531e1fa9d4eea5f79001fe6af49c59da8e94ddab8ecd"
+at = "Aes=u32, Gcm=u32"
+embedded = "e89abe6a8061b1b148684add66d06dc81df2a3433636d00c61d26c21534eee70"
+status = "residue"
+cause = "mir::Ty: aead::aes_gcm::Combo<u32, u32>"
+
+[[fn]]
+path = "ring::aes_gcm::<impl at src/aead/aes_gcm.rs:52:10: 52:15>::clone"
+kappa = "3cb60063987bcb522dbe281fcfe2597289f01843c039c2ddc585703703f17937"
+embedded = "d1af736effddecfafd34da126eabbcc90556dbf05410ccd6da471923fbaf3cf4"
+status = "residue"
+cause = "mir::Ty: aead::aes_gcm::DynKey"
+
+[[fn]]
+path = "ring::aes_gcm::DynKey::new"
+kappa = "a93b7ff2fad8c93c73a634a46169375075404ecfebd1baa1d08dd0e4812064b5"
+embedded = "e4b5e775ed360e037f7731774206982819d876f03efea4f81b7514bbe347c133"
+status = "residue"
+cause = "mir::Ty: aead::aes_gcm::DynKey"
+
+[[fn]]
+path = "ring::aes_gcm::DynKey::new_fallback"
+kappa = "bb34db103d261990af047c4045ad856ee96c193f4e0dcf2f27eff2c9333cf490"
+embedded = "2dc230a48127dcff91680603d4d073f97d1e0508cbac7990141a249674463b31"
+status = "residue"
+cause = "mir::Ty: aead::aes_gcm::DynKey"
+
+[[fn]]
+path = "ring::aes_gcm::DynKey::new_ssse3"
+kappa = "0150daa2f265a5e50a6081befa04d64bbaa68ff2093d4fb52ba274150293a39b"
+embedded = "f97eed263facccb13be5fe7c5b7848d6e071e5f98b10afcaf42f04ed21e362d6"
+status = "residue"
+cause = "mir::Ty: aead::aes_gcm::DynKey"
+
+[[fn]]
+path = "ring::aes_gcm::Key::new"
+kappa = "00e1eb745a7365a721a06abe60ee8c75987997df345ab84a55b557de647bafab"
+embedded = "a98a2c36351a64a5d2cc5bef8f9827a68961ff698b31226f5ba7f0fcc5f8d411"
+status = "residue"
+cause = "mir::Ty: aead::aes_gcm::Key"
+
+[[fn]]
+path = "ring::aes_gcm::MAX_IN_OUT_LEN"
+kappa = "db23a870ea38ef72362a27c23da0711107e5457fbad26798347038e4372ecb18"
+embedded = "2980f66adfc365b766ef18f5ff78be4ce257bc582989433d41dc0f868e41a085"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item aead::aes::BLOCK_LEN"
+
+[[fn]]
+path = "ring::aes_gcm::finish"
+kappa = "a77e8fe1c3351cb97a62dfa90dcee9b0eed34a27529ed67b6fcc0a62e96ee90a"
+at = "A=u32, G=u32"
+embedded = "bc6f76677f4e5272c95ae887b46094e9e643c932b581299a66eb79889009f559"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aes_gcm::open"
+kappa = "3691dcdd117095e4c16ee5f51e6edb7260b1bc5d96f0077e58ea47ab259f389a"
+embedded = "323fa336c7f1c20f758f1d100c46937032d9d3ade2803478465402845b991c51"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aes_gcm::seal"
+kappa = "2b918179e6325e7553098f681e2fd22ea719c231e281ca6fd83e4ffa3db3876e"
+embedded = "5830efd4bcbdca00461c1b5b147151fcb042983a6325035bf9081480a744d2cd"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aes_gcm_init_128"
+kappa = "03d683a57ce031d7f55363cbc4f04015a6662024ed638af8797ce14c92046ef6"
+embedded = "1fd0bf4e23c23b99c5b873ebe1fa8aa72eed59285760688db98269b61dc7cf8b"
+status = "residue"
+cause = "mir::Ty: aead::KeyInner"
+
+[[fn]]
+path = "ring::aes_gcm_init_256"
+kappa = "a7c503c223b7ee99ad116880582de2c2f7da480072d0c2c99cb12fdbdedcba3c"
+embedded = "c73e15156042405bd3827569dbf91072eb4f3bf33642684c281540ca704457cf"
+status = "residue"
+cause = "mir::Ty: aead::KeyInner"
+
+[[fn]]
+path = "ring::aes_gcm_open"
+kappa = "f369f0d4d9bfacf5782383383512619945636b153a9f9910b8c52e7f79ab3a8b"
+embedded = "1f10fe253abda1e70d4bddc145be52397bec22577d790cdffb726f0614f5c37b"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aes_gcm_seal"
+kappa = "c6589abb22fe26dd1a8841ff05ccd45020f82a1bfe1daa48b48d5b7e0583d9c5"
+embedded = "e3df5ee7e15709c414c273c6a35504bdda4cecd0f1110f4b592b6d9ee96d42d5"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aes_init_128"
+kappa = "bef181dcdbdbe03f4457b8fae84bb40dfb4276a946fffab5500e83b74a33365e"
+embedded = "8eca4a677dd6d18de2827682b0e6373d114ab2f15fc5463fd9c3d7b1990be7b1"
+status = "residue"
+cause = "mir::Ty: aead::quic::KeyInner"
+
+[[fn]]
+path = "ring::aes_init_256"
+kappa = "903cdeb403effc8330c19e147251f3c4d78ef8e1cae81fa7f1db1d01afc91b9c"
+embedded = "17c18cbf6c0b319fb34d169b3abf2c6d64cf1d18c637714cb75280f2fb492bf0"
+status = "residue"
+cause = "mir::Ty: aead::quic::KeyInner"
+
+[[fn]]
+path = "ring::aes_new_mask"
+kappa = "687812146f3472b79107663a1675b29778d8741018f66eab1de1c2def7208d42"
+embedded = "71e8d9fb9cceb223a3c0bfc843305a67b2b163c0d86b4713985fc82c01dd8d65"
+status = "residue"
+cause = "mir::Ty: quic::KeyInner"
+
+[[fn]]
+path = "ring::aeshwclmulmovbe::open"
+kappa = "038a88db1cdd8f00685223963ca11e3d3579f929f438041d2a59643bce604104"
+embedded = "fea47552efefe8cd0ffd23ec641baf77b8d1ebd8301ddc316c257236b5b0d114"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::aeshwclmulmovbe::seal"
+kappa = "d656f26b5bb5b41f4c01239a957eecf704530ccfede265a4cf5f84e6e6a90792"
+embedded = "27ae273fa95bcfe1ffe6e8beb05605206da3898fea957072466485852b78addb"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::algorithm::<impl at src/aead/algorithm.rs:133:10: 133:15>::fmt"
+kappa = "ec5912fd3e28bfa27522e8a80962da87fa6fd6180cfcbd9618e2e9b989271d21"
+embedded = "6d3c7c0af9709f42862dca61d035bf65e0c4bb2f3bbf2105d91d7def70e4d29a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::algorithm::<impl at src/aead/algorithm.rs:133:17: 133:19>::assert_fields_are_eq"
+kappa = "769175d9760a7050ef0ee7f676fbf68def08aa2ac4a823f9f53237579f0faf59"
+embedded = "45506f918c44916f4578e8835a7893ad144c840a603f77d215f86bda4118de7d"
+status = "residue"
+cause = "mir::Ty: algorithm::AlgorithmID"
+
+[[fn]]
+path = "ring::algorithm::<impl at src/aead/algorithm.rs:133:21: 133:30>::eq"
+kappa = "74510a2bab24121127402f995d9e59647bb67a4c54fb414575accab56abc36e4"
+embedded = "26bddd965ae347b1cb0d631d36e8e11a602cbe91502b90563c91e34fef945da4"
+status = "residue"
+cause = "mir::Ty: algorithm::AlgorithmID"
+
+[[fn]]
+path = "ring::algorithm::<impl at src/aead/algorithm.rs:29:1: 29:42>::len"
+kappa = "f9f007f3e048b3d026c1da272526d42856bfc87ff554ebd24433d9e1b1667151"
+embedded = "e58d29f4071aa39e9f2caf72014dbe800564684fdd289cbec9c5da69300866c6"
+status = "residue"
+cause = "mir::Ty: algorithm::Algorithm"
+
+[[fn]]
+path = "ring::algorithm::<impl at src/debug.rs:19:9: 19:46>::fmt"
+kappa = "428ba1a3c047d3990efb806e71fbd21b3410a1cdd2418271db1dfc3ed4de7402"
+embedded = "c2a7861f908004c0806a99ceb4d95c3c005f7580c0ec789540d071a3d23d5043"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::algorithm::Algorithm::eq"
+kappa = "89ef6900cb4bb70c759b952fc202330386c1b99fa08e5b8d447e1a69e0bfcf6b"
+embedded = "6f4649a7014674e97fd518e7a3f54c48cfbc2ef0e86a677a035f4d5d06292107"
+status = "residue"
+cause = "mir::Ty: algorithm::Algorithm"
+
+[[fn]]
+path = "ring::algorithm::Algorithm::key_len"
+kappa = "8855edbcfee289dd06a5c88fe728c0abe546b1d6532285b67c0a5e31dace3ee6"
+embedded = "d007ec5af441c0e5bd96b0981d3f8258f72badd47047ef5935e08a0ae525bddf"
+status = "residue"
+cause = "mir::Ty: algorithm::Algorithm"
+
+[[fn]]
+path = "ring::algorithm::Algorithm::new_key"
+kappa = "ea4545823b469077befd2f525247c983478ddd2e29700e74e91093bfaaf122fc"
+embedded = "3889effb2cbf95dc37298766a894ac408f37bfaa45965d1109c13aa661fb8f3b"
+status = "residue"
+cause = "mir::Ty: aead::KeyInner"
+
+[[fn]]
+path = "ring::algorithm::Algorithm::nonce_len"
+kappa = "6947661b504a3252d984fe9febba8711108d3dc2baa72483e4d0b6e470ea232f"
+embedded = "436e8be963577ffb70c01dadb50e6bcad2b5b9f48428a85d1f09e3dee79c9507"
+status = "residue"
+cause = "mir::Ty: algorithm::Algorithm"
+
+[[fn]]
+path = "ring::algorithm::Algorithm::open_within"
+kappa = "ff3f8a9995a64bb621ce18de3df5dd0ee1e6f774328d64d41f73982fe6ca06d9"
+embedded = "9c9aa735a1a79e364afc41ffe01f67fd8e03ff5d14eff2fc7e7827d6cd48b633"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::algorithm::Algorithm::seal"
+kappa = "d863d7e681123fbfed3e68de7bfc9e993f2f5f5c8edbdac3a586616d8e4a6e2c"
+embedded = "2a4aa600e339beb80bd7c609100e9ad528b5d4d35c32c3c43df8dbdece98e116"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::algorithm::Algorithm::tag_len"
+kappa = "d7be1c5f51b40f59a34fc0208ac652c17c66c2f852b96a2cd9e2d3ded33aaa60"
+embedded = "53bb050c8f6eea2e8b9e4873046a23e3dd6750a03cf97d7d72330d7b713b193e"
+status = "residue"
+cause = "mir::Ty: algorithm::Algorithm"
+
+[[fn]]
+path = "ring::base::Overlapping::from"
+kappa = "fa878f9060d4f53f96d16af6af538c0942654e33709d5cf477b199e4d642a450"
+at = "T=u32"
+embedded = "79e2c19a583cdffdb7ebf2bc1a2c2eadd3928bfec2867e353c69f618d97b26f5"
+status = "residue"
+cause = "mir::Ty: aead::overlapping::base::Overlapping<'_, u32>"
+
+[[fn]]
+path = "ring::base::Overlapping::input"
+kappa = "4255535557ecff5477cd7dc232a56e2fb892b7615f3a29f1b8929a36cf7e4346"
+at = "T=u32"
+embedded = "cb39ce0810b78906d30dd9289080f78c5ba8d47519473566163fa25243997042"
+status = "residue"
+cause = "mir::Ty: base::Overlapping<'_, u32>"
+
+[[fn]]
+path = "ring::base::Overlapping::into_unwritten_output"
+kappa = "159248fbd10c76c5405f68371ec446431b71c6e03b7c764cd1d2b80667d72e5e"
+at = "T=u32"
+embedded = "77431010f47c51a4817a85f85d11e06befdfeca5af3c60a998a506935cd080d5"
+status = "residue"
+cause = "mir::Ty: base::Overlapping<'_, u32>"
+
+[[fn]]
+path = "ring::base::Overlapping::len"
+kappa = "7d89e8d3a9f1965688a8549c026332b456054bf6eb7b1a9db51b3d615253e01b"
+at = "T=u32"
+embedded = "6f2d50774b190b048590a594dec2838a7d76eae3db09546bbbed1c00bcf5ffa0"
+status = "residue"
+cause = "mir::Ty: base::Overlapping<'_, u32>"
+
+[[fn]]
+path = "ring::base::Overlapping::new"
+kappa = "32f9b5bbf601f109b2abeed71236ac0d3bdcc8f6552d36e5690d55e3a1cd0c87"
+at = "T=u32"
+embedded = "3c62e56087e972fa54621dd22e1ed515bce324696532239ff4732eafde32aa20"
+status = "residue"
+cause = "mir::Ty: aead::overlapping::base::Overlapping<'_, u32>"
+
+[[fn]]
+path = "ring::base::Overlapping::split_first_chunk"
+kappa = "5ca810801195fbb22f39b40e51ffa1952a5d454acb0d7ae19e5edabeda4923a5"
+at = "N=#_N, T=u32"
+embedded = "28d1565aeede9a8485f0522897dc6f9be8213bce75f2f8970185af9be74d25f4"
+status = "residue"
+cause = "mir::Ty: aead::overlapping::base::Overlapping<'_, u32>"
+
+[[fn]]
+path = "ring::base::Overlapping::with_input_output_len"
+kappa = "82c8156d2fa470e6564f884ff9cb49097a212cac1c2a1ddd7122750ac952098e"
+at = "R=u32, T=u32"
+embedded = "8454a6b33b37d04d9021b2754e57589fd92cd8d1da29dfbafed8a727b7322f2c"
+status = "residue"
+cause = "mir::Ty: base::Overlapping<'_, u32>"
+
+[[fn]]
+path = "ring::begin"
+kappa = "e88a29172c84d780ef84f261263210acf3bdaa13d73d9e3d2563aef1fea014e6"
+embedded = "446837dd225fada523bef67930c886f9798db3123b3b53e8df7f960b58836882"
+status = "residue"
+cause = "mir::Ty: aead::chacha::Counter"
+
+[[fn]]
+path = "ring::chacha20_ctr32_ffi"
+kappa = "60ff138df3be048f96dc7228d825a79205fb3ef3c72bd7d3e42535ea6e52b808"
+at = "C=u32, InOut=u32"
+embedded = "c9071252629c735d30e1d290d073269abf1bbcaf5d7d5863f16b8faceeb813ba"
+status = "residue"
+cause = "mir::Ty: chacha::Key"
+
+[[fn]]
+path = "ring::chacha20_init"
+kappa = "c1b052d35d1ffefd67ab71699c40985c0a310d3c4e0d389522f6652dc92efe15"
+embedded = "a83eb56a1bd4807e1b47ccb861646204a8563320f4d640eafa2435bcb1a3f7ec"
+status = "residue"
+cause = "mir::Ty: aead::quic::KeyInner"
+
+[[fn]]
+path = "ring::chacha20_new_mask"
+kappa = "89ff98faa2904c0374e4a9fa5ab36df02a752418aa1cb7c2cf8f244634808c19"
+embedded = "8f18b0de7212b35431a00101240fe64edb04470465cf159b935e7ae04be5a370"
+status = "residue"
+cause = "mir::Ty: quic::KeyInner"
+
+[[fn]]
+path = "ring::chacha20_poly1305::<impl at src/aead/chacha20_poly1305/mod.rs:42:10: 42:15>::clone"
+kappa = "2d7bba9f20da26a6a9f9c6fbd166584745ce57797cba38fd8df67a9a0dd7c9b4"
+embedded = "5fa00e243eb24b4961e3e6a1301f03b6f8e280f79805cc59ce6bffb23c8d3da5"
+status = "residue"
+cause = "mir::Ty: aead::chacha20_poly1305::Key"
+
+[[fn]]
+path = "ring::chacha20_poly1305::Key::new"
+kappa = "e2b0219b9c75171640fb6fb5f2922002bfab7ed528e785a9d4f3ecd144b1d6d9"
+embedded = "8d95f6de16ce61066ec13f8e7f5a65e2497670ea0831cd464c3ac33ff4c43356"
+status = "residue"
+cause = "mir::Ty: aead::chacha20_poly1305::Key"
+
+[[fn]]
+path = "ring::chacha20_poly1305::MAX_IN_OUT_LEN"
+kappa = "070a60b0c0a43431e2603d738249a07a6b39ecfdd73e29b56d6d6df060e67d5c"
+embedded = "5a07725ac47e44c9854bf88a5828aaeb56a5e636b60e33018c1086226f5c7535"
+status = "residue"
+cause = "mir::TerminatorKind::Call: aead::max_input_len: ring's MIR stops at mir::TerminatorKind::Call: polyfill::usize_from_u64_saturated: ring's MIR stops at mir::Operand::Constant: polyfill::usize_from_u64_saturated::USIZE_MAX: mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "ring::chacha20_poly1305::finish"
+kappa = "04a3f18035ec166590f9c1ca5aee20556b3f282d93aca68fbf144bb5ea65e91f"
+embedded = "67b01069c2abac945c98047e8a65cd59a74636ab223d9ca36efdef93f362535d"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::chacha20_poly1305::open"
+kappa = "bfda5d7261f7400ce528eddb4f25baad4c19b9c4d76fb0d93c2d9016778238bc"
+embedded = "e9c5fc2fbe62ff17077b324b3e610423611f2f3d66af9a386a4cea90b090bf73"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::chacha20_poly1305::seal"
+kappa = "0774abc45bfa2ec27e97337a6aba52d662ee8f85824c874c577bd8dcf25ce174"
+embedded = "a2f2698dc27ec85551a668a2d003756609d248ace04db1c0e8cbda1a9f115bed"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::chacha20_poly1305_init"
+kappa = "4e9aac71a32a8a775aeaa59025b56403e711040dd3268fdb293c73abf68d77af"
+embedded = "864e47aa4a31284fbb1fc9b2c5b46bd9f0b4d9c731db1c812ba22e5537832f58"
+status = "residue"
+cause = "mir::Ty: aead::KeyInner"
+
+[[fn]]
+path = "ring::chacha20_poly1305_open"
+kappa = "844b2dfb35c1c2f8495c3a9dace28006e4e363149cd375ff913a793316990398"
+embedded = "a3327836a3c65cd56d76dda6491153b3ec8a2774c95f4af7ba1701cc60ed5ae4"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::chacha20_poly1305_openssh::KEY_LEN"
+kappa = "76494515e7e8a31495a2761199711df4f5ee4b8441ea790211e552213e57688c"
+embedded = "31e8089bc9b21e49d8f6f77de1d11fe5744ff44275b7fd4da85858a705e9d933"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item aead::chacha::KEY_LEN"
+
+[[fn]]
+path = "ring::chacha20_poly1305_openssh::Key::new"
+kappa = "c2504e342b1764f53ac73fa6695bbbb4ad816378300e8a0b15363f610545443b"
+embedded = "cdb80e2fa788f23b08f975be7cb11720f8b8e1991993a7aff0d1ad72fdb03e5f"
+status = "residue"
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::Key"
+
+[[fn]]
+path = "ring::chacha20_poly1305_openssh::OpeningKey::decrypt_packet_length"
+kappa = "3a495db8a6a48425d6ac7870ac0c8c1abb04406f03857169788b1ece26722848"
+embedded = "8a5de43dbe0d7c8a1061b70c9dc8205b4581f79721d375571e8002dc48d6b660"
+status = "residue"
+cause = "mir::Ty: chacha20_poly1305_openssh::OpeningKey"
+
+[[fn]]
+path = "ring::chacha20_poly1305_openssh::OpeningKey::new"
+kappa = "b3a21d2dd5114b74bfad627e9a42e7484f97e5895e694bc7af88901bec12c0f5"
+embedded = "b357ec02c986054d8e6767d436c2588b6ab42dcf87d85c9227642213ffdf0d8f"
+status = "residue"
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::OpeningKey"
+
+[[fn]]
+path = "ring::chacha20_poly1305_openssh::OpeningKey::open_in_place"
+kappa = "9abb793014c9764d5fadc9ad6d20b473c0b5528342e98e4bf712b026387f4037"
+embedded = "a84d966e02c59a3f4736a3f4d0c22fa3e899167fa47af0bc862f31487deac10f"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::chacha20_poly1305_openssh::SealingKey::new"
+kappa = "12be321ca3ca8edbe126d0179cc31db5425f6671da16c46478703fc0b5718aa0"
+embedded = "4dd46bfb388d43da8734f0b3b873d0f16ff554d30da43fa9ae7658f3c5ed2cba"
+status = "residue"
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::SealingKey"
+
+[[fn]]
+path = "ring::chacha20_poly1305_openssh::SealingKey::seal_in_place"
+kappa = "8f9bda66135b682119be16155df0e4fe9059f8216639b5649f6dcf9d6bd60929"
+embedded = "c9805e532f49a2a839b6433fed0b0e72ea5c021afa00249e22d6aeb689f0ef59"
+status = "residue"
+cause = "mir::Ty: chacha20_poly1305_openssh::SealingKey"
+
+[[fn]]
+path = "ring::chacha20_poly1305_seal"
+kappa = "69427f51645c8f3979d5c1541dcc2cb84e93e575070124dc45ae1f2555121663"
+embedded = "167cc0fe398e3704ed3f3ba4efa399ee20ee02c1be0876bcc8d5c5d06c996382"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::chacha::<impl at src/aead/chacha.rs:40:10: 40:15>::clone"
+kappa = "ded0f73408b4df6c2eec963150d6b4ec4c34af5d2a629bc1144f3cbe2e535291"
+embedded = "b99e7afa493267b63a55fc8708988190982b0cd3d2f991cc234da43f837716a7"
+status = "residue"
+cause = "mir::Ty: aead::chacha::Key"
+
+[[fn]]
+path = "ring::chacha::Counter::from_nonce_and_ctr"
+kappa = "ce5fd591040929e5eabd792cff887f2244fe9d2b82d512820b72ce512915c943"
+embedded = "bb2d8c62d10f88ebb9ade17f60341886ef836e0fd6bffa403289417f8fc520b3"
+status = "residue"
+cause = "mir::Ty: aead::chacha::Counter"
+
+[[fn]]
+path = "ring::chacha::Counter::zero_one_less_safe"
+kappa = "0899cdbe760541c7fc3f091b267c1af7d7ba1dc928b0dc869000b6d778074372"
+embedded = "af12de14052400a0bb14b8c832a7ead7767c4520181ab718afff524695e438a5"
+status = "residue"
+cause = "mir::Ty: aead::chacha::Counter"
+
+[[fn]]
+path = "ring::chacha::Key::encrypt"
+kappa = "2aa70ff38a5d247aa31cc115196009cd6529504ef7f9ebe20601b6b17d64c0f5"
+at = "C=u32"
+embedded = "cc3a927da944c44b163f9ae30d0744a0207b521329aa50475f1e654f37232858"
+status = "residue"
+cause = "mir::Ty: chacha::Key"
+
+[[fn]]
+path = "ring::chacha::Key::encrypt_single_block_with_ctr_0"
+kappa = "f555f1786a1b2df6ebee3ee5347e672f26e45101689584735d8653bf73e1374e"
+at = "N=#_N"
+embedded = "433def811433e71bf17b7968aaab1de86040cf0dfec77fa25edc1c67b80a9169"
+status = "residue"
+cause = "mir::Ty: aead::chacha::Counter"
+
+[[fn]]
+path = "ring::chacha::Key::new"
+kappa = "b561a96960c5f2bc596828e4c704c487a8b76b97cd4ee1df17b6d70b031fc561"
+embedded = "d197d0c1528f22f71b9a55c5b058666f791c30bf221e6705d5481ee6f2c37fb9"
+status = "residue"
+cause = "mir::Ty: aead::chacha::Key"
+
+[[fn]]
+path = "ring::chacha::Key::new_mask"
+kappa = "a669abddf26ab072f8ec9735738c4d0393bfcdf135b2cc7318ac893f2418b2ce"
+embedded = "d5385bf28b47a50c2a27ec8743b62e8b7a162b9c8e9fb72b3ead59ec8d970585"
+status = "residue"
+cause = "mir::Ty: chacha::Key"
+
+[[fn]]
+path = "ring::chacha::Key::words_less_safe"
+kappa = "5c5e2b462ee60af3a87c089a64e202659b95c576bb06b9ce3139243ffbc20229"
+embedded = "6e168cbf7695acb8b707da5f8149ab2bb79826d4042e909472b2b71b35a8e0dc"
+status = "residue"
+cause = "mir::Ty: chacha::Key"
+
+[[fn]]
+path = "ring::check_input_lengths"
+kappa = "733a7c29324652dd276deaea4df84f37fff2d9d88d8b7375ecc6a4b7d5c35895"
+embedded = "6ffb214894fb2662fe3fb75708467d1f2f567febe58056a1e445336b0c97cb06"
+status = "residue"
+cause = "mir::Ty: error::input_too_long::InputTooLongError"
+
+[[fn]]
+path = "ring::clmul::<impl at src/aead/gcm/clmul.rs:33:10: 33:15>::clone"
+kappa = "d2bf0896d239510e6204c18cecfe5a7671301424e6e208e5904c0d0b8d076d1f"
+embedded = "e13b4460e8f2fc9de757ae8e3609d2f371c3c9f4640db12afc5ff9d0c97c8258"
+status = "residue"
+cause = "mir::Ty: aead::gcm::clmul::Key"
+
+[[fn]]
+path = "ring::clmul::Key::new"
+kappa = "bea8ba70aef186f616c3eb07b10379982d1652559880d28ee08c20a89a615fef"
+at = "C=u32"
+embedded = "d2018a68a3b72b3ef01a7426682d19ecc1513a68f7edf9bcdf379aa964afb564"
+status = "residue"
+cause = "mir::Ty: aead::gcm::clmul::Key"
+
+[[fn]]
+path = "ring::clmul::Key::update_block"
+kappa = "9169871361832a7c31b1b9cac8728ec5f0666cd37610cbb17a08f7948a435f0a"
+embedded = "a57dd2e39ea7cd547ed1944a7ed33af8d5433497f625ecd0613099148b3dc078"
+status = "residue"
+cause = "mir::Ty: clmul::Key"
+
+[[fn]]
+path = "ring::clmul::Key::update_blocks"
+kappa = "5182593cb2edad88b03f1debb4246612d8ee97fb83b069b4e0efd1168852605f"
+at = "C=u32"
+embedded = "0fd385af88d93c2a47dfa7f5d8faf979cdb7478f12ab67b7fd482e6290777d9c"
+status = "residue"
+cause = "mir::Ty: clmul::Key"
+
+[[fn]]
+path = "ring::clmulavxmovbe::<impl at src/aead/gcm/clmulavxmovbe.rs:20:10: 20:15>::clone"
+kappa = "dfce05c8edfac3fde5d953246d4bd5110953164a32cfb964e876a5361749bb68"
+embedded = "5adc623b10cd2c01483f93c4e33dc320382b6facb92fe8aca2c24e44176e93f4"
+status = "residue"
+cause = "mir::Ty: aead::gcm::clmulavxmovbe::Key"
+
+[[fn]]
+path = "ring::clmulavxmovbe::Key::inner"
+kappa = "753f4d00a971dd20995e74146d9a7fd58e0fdbaae61d7729949bcb59c8eee89f"
+embedded = "8c2f515c0fb02b13626080cdb9ad808697ddc467b451aabd34a903ca9a2a1e55"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::HTable"
+
+[[fn]]
+path = "ring::clmulavxmovbe::Key::new"
+kappa = "7448bf62edd6b568a7e8ab054606ae1c023d90dabbeb56a9ff0de5a1737c3af2"
+at = "C=u32"
+embedded = "89e5331376b59cd6134d0a70b681ac820243c5424566e23be6979f0a9f68331b"
+status = "residue"
+cause = "mir::Ty: aead::gcm::clmulavxmovbe::Key"
+
+[[fn]]
+path = "ring::clmulavxmovbe::Key::update_block"
+kappa = "3d69fdcb6f354d011e2e670e072b32b1aa13d4004415b0043915520eeefb549a"
+embedded = "1c82baefcd85e0a5e88603e8be96982c7784c6270c54d7c6f818bf5a033599f0"
+status = "residue"
+cause = "mir::Ty: clmulavxmovbe::Key"
+
+[[fn]]
+path = "ring::clmulavxmovbe::Key::update_blocks"
+kappa = "6398f5f1e660b39d95b06023b9361e2bd3cb94950d01bd0feac8c4d2a8d52889"
+at = "C=u32"
+embedded = "4bbabcbd6c4ba51bfe862d65184976b336d052b549b2a5831ca4b664a1012f96"
+status = "residue"
+cause = "mir::Ty: clmulavxmovbe::Key"
+
+[[fn]]
+path = "ring::derive_gcm_key_value"
+kappa = "e382cd6d867f1bfe5769d562fadb9bd8c11d11606cfcb64729d4559acf62a51c"
+embedded = "4e8b5a2451cc5e5eab24c4abf8f2a7bf216119b570d4cf482f2b6b3a7e38458e"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::KeyValue"
+
+[[fn]]
+path = "ring::encrypt_block_using_encrypt_iv_xor_block"
+kappa = "38fae4e508f9574d83113e012b4e7289d51bfa3319cd8eb4de03151ce633c01a"
+embedded = "76e12e3eabdc641298857a3bb3f2c857ebabfcdcf4cdb669649e14fa40ddd972"
+status = "residue"
+cause = "mir::Ty: impl EncryptBlock"
+
+[[fn]]
+path = "ring::encrypt_iv_xor_block_using_ctr32"
+kappa = "a8fb2fd048fb3861e52aa7f58989ce4ad0056da09625ce483445f74fb4850f63"
+embedded = "51e5830133594ebf5b90d0d5637147444edfe96401fe20563e94a5d556549d41"
+status = "residue"
+cause = "mir::Ty: impl EncryptCtr32"
+
+[[fn]]
+path = "ring::encrypt_iv_xor_block_using_encrypt_block"
+kappa = "a2ea9b986d9d01a1039c263f7a57d41a4dc7b6cf3a04ca2f99f20d1824e55ae7"
+embedded = "e274488b5b392bb2b464bc7892a9a7017bfc9d2f8569bc83ce1ee9e94e876280"
+status = "residue"
+cause = "mir::Ty: impl EncryptBlock"
+
+[[fn]]
+path = "ring::ffi_fallback::State::finish"
+kappa = "e57b48bfb1812d99a9485427cbfd41ea8c13776330b9ed82abf770e84e69bdab"
+embedded = "e2e3f9a89372e0e2f515c047ce86ffe65f9961c2b8fca1409194ef1ffde44389"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::ffi_fallback::State::new_context"
+kappa = "a96ab68a802774cd13289560e74e5fba4c0937b2682c233cbdf768980411f860"
+embedded = "de43ba09347bc3dc06d8165afb70305040c20df2a5ae83212a3069b6348cd7e4"
+status = "residue"
+cause = "mir::Ty: aead::poly1305::Context"
+
+[[fn]]
+path = "ring::ffi_fallback::State::update_internal"
+kappa = "cd12dcc9417a184a6c1e3792d0fa9e8aaf7851cb4af728947b808c8b047ec627"
+embedded = "874481ccbb282ef66de1ab0bf945de4c2eeb88092e6694ad5f0ef77f996a8eaa"
+status = "residue"
+cause = "mir::Ty: ffi_fallback::State"
+
+[[fn]]
+path = "ring::gcm::Context::inner"
+kappa = "4de5d7033b628726ed692fb35d42a5730497b3366b57928cda6a3d6d36582ac1"
+embedded = "23fd8cca8e15c9a202a7166548cc6ccdf01b0dbabcf1fa50fb4f7d81323587f6"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::HTable"
+
+[[fn]]
+path = "ring::gcm::Context::inner#2"
+kappa = "7cf04a044e211d28a2f9de95c8a300cb7196523e8b4a9144c45ca70cf9cf523d"
+embedded = "9c9e595d48f82bc5b41148b9af8d8d338148ba411080ad2f82204bf64d8c9cdb"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::HTable"
+
+[[fn]]
+path = "ring::gcm::Context::new"
+kappa = "379b9e42a64349bc56a17b99c804178f819d8072cc07572ef6428a0fc204ece7"
+at = "K=u32"
+embedded = "1b0ba66f238caa3b434c62b80884a9f7a16376305774abc68bfd0c6e334b52e3"
+status = "residue"
+cause = "mir::Ty: aead::gcm::Context<'_, u32>"
+
+[[fn]]
+path = "ring::gcm::Context::pre_finish"
+kappa = "b53790af46fc5ec7be2532745dc04c511e08edca630d5939d97adbdbe38f4632"
+at = "F=u32, K=u32"
+embedded = "1f25c789d1bbd1181f706df28fe3c558aeb0dfbe25bad366667535c6e0056f0b"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::gcm::Context::update_block"
+kappa = "1c1dca0c61dee93ddf63146dc5a5c5e760a1f0cfea888e56addc47f76eb82fd0"
+at = "K=u32"
+embedded = "f5fe8c1a60722dafc3cd9b3d0946460a5144fcafe12337594d5032454156ddbd"
+status = "residue"
+cause = "mir::Ty: gcm::Context<'_, u32>"
+
+[[fn]]
+path = "ring::gcm::Context::update_blocks"
+kappa = "cd31e4ec49dbb4f5d43458a206c12f8e652e56d50b55fcbd89d11fa0de09fef9"
+at = "K=u32"
+embedded = "766ff1656afbc8d7f9def5cc44cfbf473ebb98d1718a815fb0e5afe63f643d4a"
+status = "residue"
+cause = "mir::Ty: gcm::Context<'_, u32>"
+
+[[fn]]
+path = "ring::gcm::fallback::<impl at src/aead/gcm/fallback.rs:28:10: 28:15>::clone"
+kappa = "9eeb5fe18738ab1e4ce4c3e4dca5b5c9b7424116f074dad6719030e1cd08c327"
+embedded = "50b85a0b9ba3396c3663bbd6f03060668fbf5cd7d5e7f8a0be5f4c0069596e7b"
+status = "residue"
+cause = "mir::Ty: aead::gcm::fallback::Key"
+
+[[fn]]
+path = "ring::gcm::fallback::Key::new"
+kappa = "9b6a18c3890b9fe76e320b85bcd770cbce50463892730178d49107ea9c39136d"
+embedded = "6d2bccd7101a3b0e4ba0f86a2dc27c9975fe6c554593b32018b75d62fe479137"
+status = "residue"
+cause = "mir::Ty: aead::gcm::fallback::Key"
+
+[[fn]]
+path = "ring::gcm::fallback::Key::update_block"
+kappa = "d314005c74c393e1ac98ccdd6037f28fe60d84ab3d398236557ab3987127af9d"
+embedded = "cd9b2c0e4aa32a498d095603ce92ed39e3ac7c09d23a0a649a6c40bff27c7186"
+status = "residue"
+cause = "mir::Ty: gcm::fallback::Key"
+
+[[fn]]
+path = "ring::gcm::fallback::Key::update_blocks"
+kappa = "e1a2f1ecd89f9b817d879f78d5e81ddd09d9ab6ce56811b8597bae183ad36738"
+embedded = "7f1a64d34fe3828f18dfd1463e9187052249b17eaad4170e8e897608cb240757"
+status = "residue"
+cause = "mir::Ty: gcm::fallback::Key"
+
+[[fn]]
+path = "ring::gcm::ffi::<impl at src/aead/gcm/ffi.rs:142:10: 142:15>::clone"
+kappa = "8a4b4c42615b467a16df52ea8bc1cdb7dbaa0f669572d9220f24ed04b6d45560"
+embedded = "4aaf3c999487a5f11c6a1c86c396f24951c70e1b13b9d548ceb83e26d2aee867"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::HTable"
+
+[[fn]]
+path = "ring::gcm::ffi::<impl at src/aead/gcm/ffi.rs:148:10: 148:15>::clone"
+kappa = "4e66dab4ad62c3077ea8696d5a0114eb6129c21545bbd21768ccae52a0fcfa48"
+embedded = "bbf0fd341ff439c25017ade742b56e5b3b819207d9d50ec417c39b70b331ce25"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::U128"
+
+[[fn]]
+path = "ring::gcm::ffi::HTable::ghash"
+kappa = "b3ce674c7dfaa0c672caa3f01eb998c4fa3660765042da91b847f717b7355837"
+at = "C=u32"
+embedded = "f84a380a22195fe416a63c4b719a14ec7a68459bde7491c8f30d296837683c0a"
+status = "residue"
+cause = "mir::Ty: HTable"
+
+[[fn]]
+path = "ring::gcm::ffi::HTable::new"
+kappa = "fea4da9fb804bba73e1bd556e08857fca76696f071a7a27e5dad038db99a574e"
+at = "C=u32"
+embedded = "45ef45fa45a3f50b4e8825d300b5ac98332c380534839cbbeb74da8602e9fbd9"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::HTable"
+
+[[fn]]
+path = "ring::gcm::ffi::KeyValue::into_inner"
+kappa = "a9d0432145888eb98a18c45a6b2bd0f75c5eb5e70d4019fe7a4859438f9d27e5"
+embedded = "1e73b592724640623faeac156afc429c30a7d568212ee1079f0d531ba4f0c23a"
+status = "residue"
+cause = "mir::Ty: KeyValue"
+
+[[fn]]
+path = "ring::gcm::ffi::KeyValue::new"
+kappa = "15e6c0a5491e530e71efee8faf63adadc8bed4329bfbf47984d8369506adf42d"
+embedded = "1b0b8a501ad634f172e92636e3033c0ddb600d39970c8f9254782e39ddbede36"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::KeyValue"
+
+[[fn]]
+path = "ring::gcm::ffi::Xi::bitxor_assign"
+kappa = "1a3a809d3d016d70019b0fc7d09366991d4ee76c6f4b6e2cf48e8dd31470f220"
+embedded = "6f37da266cfa340063f4745fa27e0430b2d073ca864339d1272d89ca6a70c065"
+status = "residue"
+cause = "mir::Ty: Xi"
+
+[[fn]]
+path = "ring::gcm::ffi::ZERO_BLOCK"
+kappa = "a648b967f56eddae9adb106eb7e7deb44bf59639ea060128347fbd4de0430cfe"
+embedded = "d64f7608526fdd90622d3b1e83a7b2aa4ef8f5a9de29372ea18d2f743b1415d1"
+status = "translated"
+digest = "ca54486675be65638d23f066f0a530525bb6e72d9c326c1b817a86bf0c2f35be"
+
+[[fn]]
+path = "ring::gcm_mul64_nohw"
+kappa = "229641ec6bf339ad15adeaa8ce880dd5cd9f1a0bf9a50107095e8e08b34d10da"
+embedded = "49d41ccd42f65b1800324a89ee9d34a57dda0dd776019be37b11dba7e5882c15"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_sub"
+
+[[fn]]
+path = "ring::gcm_mul64_nohw::mul"
+kappa = "bcbb247f8c2d1ea12f3a2baaf412612b70d5b1df48d80a44747f92cf1c46fb46"
+embedded = "dccb0b415878bf12f2e89df61af14d06dd2bd06b90696b154e643e1070389680"
+status = "translated"
+digest = "3ba87435b167a04acecf6f9df7f7a4124c15b90f2f6c907602d3e1766476cd45"
+
+[[fn]]
+path = "ring::gcm_polyval_nohw"
+kappa = "4acf21c0d68486ba404bd5ea500ec6fd35b60f600afc2d0e64af13a4e85118eb"
+embedded = "907a1eb9cd8c39f8c08c77d40a4bc988e73d51da1d4b2a5dc4a7aa3e1ddfb8ce"
+status = "residue"
+cause = "mir::Ty: U128"
+
+[[fn]]
+path = "ring::ghash"
+kappa = "4c9d066c9f47522b96d8d579e3f0ac47a05f1e3df388f2579e7c12c77262d75b"
+embedded = "8f5a62ba15eb14006fd0cdd1c7ab9f87fc667c058821828fa44c152abc2fc198"
+status = "residue"
+cause = "mir::Ty: Xi"
+
+[[fn]]
+path = "ring::gmult"
+kappa = "8c0fc13a998bc201c0550d37162f1bb885cecc2e1340cdd9544b54cb1557462a"
+embedded = "6037ee0d078e5100e899d2ddf0c53d558c3f53cfe13b80764c80b505576a2aae"
+status = "residue"
+cause = "mir::Ty: Xi"
+
+[[fn]]
+path = "ring::hi"
+kappa = "0da1d9a2a28e8380c719239f8cb836e426d0198080c0e25c1a3eee0c5980e1bf"
+embedded = "06a376c561d762d294a1e9228251896fffcdb5a009b4c7fc5f257fba42aa6adb"
+status = "translated"
+digest = "9f209a56f3a3f889eb1e1eafa8d56f72e1b80bbf1fe9ddbe22079e7f9ae280a2"
+
+[[fn]]
+path = "ring::hw::<impl at src/aead/aes/hw.rs:39:10: 39:15>::clone"
+kappa = "69855ffa08ecef0d6f458e9f4cc13acde65f73d0e8fdea2ba76812b2c0fda3cc"
+embedded = "a43b515c04124f467f4f21d13d597e9b9fc135f15931b8078e89d448e5c3d460"
+status = "residue"
+cause = "mir::Ty: aead::aes::hw::Key"
+
+[[fn]]
+path = "ring::hw::Key::ctr32_encrypt_within"
+kappa = "3f25c1a9264cd603394d670e5385e737370c0552618168ce04bd1059dc1f5e54"
+at = "C=u32"
+embedded = "961d6034b2418bff5925b4ca0b583c53c5a9788227505ef0bf1b0b2863399d72"
+status = "residue"
+cause = "mir::Ty: hw::Key"
+
+[[fn]]
+path = "ring::hw::Key::encrypt_block"
+kappa = "ef9d31b08bad02083e433e06b489fe5506560eee51843a1a29bb8d987625aeed"
+embedded = "6378c9bbbb8544c88755a6287816971d984d81204e147661588d02d431dee5bc"
+status = "residue"
+cause = "mir::Ty: hw::Key"
+
+[[fn]]
+path = "ring::hw::Key::encrypt_iv_xor_block"
+kappa = "a6ebb08a331400fc363195628da9e93415a2c9869b6036a40fd63021cd844e1a"
+embedded = "ba9061b093b3090e4df1697205f75b6b168be52cb54f2fec69c4efe1aa6b5b57"
+status = "residue"
+cause = "mir::Ty: hw::Key"
+
+[[fn]]
+path = "ring::hw::Key::inner_less_safe"
+kappa = "e56dae1f73ee75e3b3d5a74430a96d05bb94281c5a3ebf5986b87421d045705c"
+embedded = "1c3a5826a8c92a31be377b603aecb8ae429b647362ac1cb1107eb9c7cd1373dc"
+status = "residue"
+cause = "mir::Ty: aead::aes::ffi::AES_KEY"
+
+[[fn]]
+path = "ring::hw::Key::new"
+kappa = "83cc8133b85099a2b2a2887a159d2e44996c101bfc26e1282f6be32d0a649f06"
+at = "C=u32"
+embedded = "c85301a1c8124eb08e3ee750f8bc5c9a5e3cbcd80cb6ca3962e41e69076bbe4a"
+status = "residue"
+cause = "mir::Ty: aead::aes::hw::Key"
+
+[[fn]]
+path = "ring::index_error::<impl at src/polyfill/cold_error.rs:50:13: 50:24>::new"
+kappa = "e9a19ff0a53bce6fc8deede445b87a447817bddeb72249e3934feb5ac671f7c8"
+embedded = "3c49e207028facccbd0fc603c97bf3a358e31cbe313953d38a488ac3b7d06afe"
+status = "residue"
+cause = "mir::Ty: aead::overlapping::base::index_error::IndexError"
+
+[[fn]]
+path = "ring::init"
+kappa = "478836c43034838fef2ab8de0265659f7be352244b131fed69e426af23d06d59"
+embedded = "388d150c7bb8b55a6d46d1aa6d88eb59023841a00a0af16d71077384bcc0d6f4"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::U128"
+
+[[fn]]
+path = "ring::integrated::<impl at src/aead/chacha20_poly1305/integrated.rs:226:10: 226:15>::clone"
+kappa = "b2a3da4b423b6bc90f25332b72f3ee4b0ee5eeb79d65ed80adf531c18b3fa751"
+embedded = "c15bc800af43dfde3711a15d98b5cae0907958e5df22bc017d41577a557e247f"
+status = "residue"
+cause = "mir::Ty: aead::chacha20_poly1305::integrated::Out"
+
+[[fn]]
+path = "ring::integrated::open"
+kappa = "eaa6343aa5eb3de2f06a907680471bcb32a7883062e445560581d398a51c90c6"
+embedded = "c1ee009e157f83a3c28a51f7a08de224941b8d25d7644c5cccaf79d8fa134ae4"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::integrated::open::<impl at src/aead/chacha20_poly1305/integrated.rs:157:20: 157:25>::clone"
+kappa = "d4bccb9d5ee19e26e9da132332812af4606519f139727122a091779fba1f51ad"
+embedded = "c472d30ad086bd28090e9dec211b2d12cb829caa5e3241fdc3d9794c98f40368"
+status = "residue"
+cause = "mir::Ty: aead::chacha20_poly1305::integrated::open::open_data_in"
+
+[[fn]]
+path = "ring::integrated::seal"
+kappa = "4880b830112616afbd2df4d540a2ccca3230675d9e039fcb5ac927a96a4b0ef7"
+embedded = "ecdd206c5f22f98c034e3ad167c4444dba96de5e8c4b93f2f9dfb6d0117c3394"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::integrated::seal::<impl at src/aead/chacha20_poly1305/integrated.rs:81:14: 81:19>::clone"
+kappa = "acea733b9b18f14c792be551502bc53d886fa6ef96511a9d8bc363160a773056"
+embedded = "f6b3d54c8c5602313cec1f1cad838216c47854f7d2bc16bb3ba9d9b9a3aad928"
+status = "residue"
+cause = "mir::Ty: aead::chacha20_poly1305::integrated::seal::seal_data_in"
+
+[[fn]]
+path = "ring::less_safe_key::<impl at src/aead/less_safe_key.rs:23:10: 23:15>::clone"
+kappa = "38ce2fbf6acdf20498093108b90c83cc3b6d21d2ec9e08d326b3c9b453ef8c87"
+embedded = "4778be48f90ffb14eb71957a8a35f3625f0a9f624f2f54100df2392ad695c5b8"
+status = "residue"
+cause = "mir::Ty: aead::less_safe_key::LessSafeKey"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::algorithm"
+kappa = "d9700c9fbab09e45e180d1458a29b96c59897051109da443bd5568f4ec40919d"
+embedded = "27825a4f434bd71ffa3fe31a55c86809c547eb7b4a7668a8d4e92e3d69208d68"
+status = "residue"
+cause = "mir::Ty: aead::algorithm::Algorithm"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::fmt"
+kappa = "0c828536bf766752c3cfd5d798202a9c3aafb823af65df932b16171200833471"
+embedded = "2ea5f6accf5c10765966201f1342317f0e526391fc270bab3a3e5b1d10a36b4f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::fmt_debug"
+kappa = "77ce1a383e35b062f6014c1c1d924fdab53068148c207e1256293708ca3e3671"
+embedded = "33745c77c0898956068e3f7da5e8be78b6b5b82a9f3f5ae5a6e649f922821998"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::new"
+kappa = "e72696c4d4c6f270e3cbfbb5dd9214761eca5601907d89f60f1697d7cce0cd6e"
+embedded = "2763a907f8592ebaf3ae7a0f225959af4b71c0c8b2be0c31c9f8520272ba32b3"
+status = "residue"
+cause = "mir::Ty: aead::less_safe_key::LessSafeKey"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::new_"
+kappa = "01f40e09328c751d2d1a7de0c597d32a264acef3ed79162a41a68474701bdf6f"
+embedded = "7eeeddf3da70b20117ec433f0dfca953314b04b88c7afbf6323d46bb7469aefd"
+status = "residue"
+cause = "mir::Ty: aead::less_safe_key::LessSafeKey"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::open_in_place"
+kappa = "ccc3a4e6203d5f2914e78aa0cae605e47d359a608991967a3313b0f4560a39a4"
+at = "A=u32"
+embedded = "8134369049cc60021036b2af6149ec1234fa4db9d91de052198baf4dcb35c88a"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::open_in_place_separate_tag"
+kappa = "64d4beea1f4db50986eb2d06e6f4cd97e5b96bfb2750ba333625384e3688ee54"
+at = "A=u32"
+embedded = "d21ec98e42dc7fd33be8c1a8e8912238c3a9c6e197e400bdf3baa2a410426eee"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::open_within"
+kappa = "f8e114e4fc2436c6c85136932e7d798bd95a1c5b19822f82f4d99e0934cfe49d"
+at = "A=u32"
+embedded = "6d3bd88e4c836f7bcb7f317dd99c245dce6b22529e1180904b26eac9e22c3545"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::seal_in_place_append_tag"
+kappa = "d5d3fb52814b2af73f15d991ee21dff351b5ff2d5324156a46eeb261f891e3c9"
+at = "A=u32, InOut=u32"
+embedded = "502295bf1c492c8dc16a0ddb19527135272073403ed114b5f464e41b1722b76b"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::less_safe_key::LessSafeKey::seal_in_place_separate_tag"
+kappa = "f37df3cefd8500e1c462a651be06e51667478341a0f04028e9fde7ef688ba30a"
+at = "A=u32"
+embedded = "41f37f1768a64e362a08bbb4870c23a91e1fc752705dca35aab67d8cac314b0d"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::lo"
+kappa = "4588776f7b32cb7a64a2d24dc1bdd658074c094c6510a4235db3bfa084d9e17d"
+embedded = "3ac3b23a86235b500eae59ae0b4a057b7be24b85115fa9ea162389dbb5763a29"
+status = "translated"
+digest = "c384e50718252a1cf4e571fb6b4593a6f9c284523e17d2c41180916439c2f977"
+
+[[fn]]
+path = "ring::make_nonce"
+kappa = "d7aa65e0be9a93ca20f4ddaa1ea636e37c636c602e7d81f297e8e7ff18144907"
+embedded = "a4d7bf15d3906e71e862acc31fc2f8b11172b84028aad0b019f899986bf18d75"
+status = "residue"
+cause = "mir::Ty: aead::nonce::Nonce"
+
+[[fn]]
+path = "ring::max_input_len"
+kappa = "bfa532f8d8388182639f6f04abb2fd4515305fbf4dca2a37a64b6e38de8481f2"
+differential = 3
+embedded = "4c815c98d196aa39d17baea4ec5aca8d9fc6717ae63e004160ee789e96bf71cd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: polyfill::usize_from_u64_saturated: ring's MIR stops at mir::Operand::Constant: polyfill::usize_from_u64_saturated::USIZE_MAX: mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "ring::nonce::Nonce::as_ref"
+kappa = "dce38331de40b68b4500fd50287e8f030cd501c52672c0256346379759de75a0"
+embedded = "a8a6bc113b5a7023082d01fb1f96d586a33cc9e6763805b2dc93576de4aa48a3"
+status = "residue"
+cause = "mir::Ty: Nonce"
+
+[[fn]]
+path = "ring::nonce::Nonce::assume_unique_for_key"
+kappa = "1c5b649d680e49d429739dfd7f2c1bfdddfd20e71da0164502103709b5597921"
+embedded = "eb8f97826439b2fca0fb85293ce5338859c7dc189b45595446fe5226a5055140"
+status = "residue"
+cause = "mir::Ty: aead::nonce::Nonce"
+
+[[fn]]
+path = "ring::nonce::Nonce::try_assume_unique_for_key"
+kappa = "efce6d3da064ff5c44ab7c42036747add36a5bca68c889f26cc9aab077f7f595"
+embedded = "bdebc91c8455b70c0836eba19c88513496110bc8d013cf93f74062de5a5042d4"
+status = "residue"
+cause = "mir::Ty: aead::nonce::Nonce"
+
+[[fn]]
+path = "ring::open_fallback"
+kappa = "f7713b02dc672f64acdec315c5c7017522777bd58f5328550dab8c2656e6b7f6"
+embedded = "bf35e692c54eb8f86e1e7c012883de707da8dc2693f7349e9eb935dcc4f0a1f7"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::open_finish"
+kappa = "c9899dedd3fedecaec7d70685d47b7624453d6cc03977690663b29543f215766"
+at = "A=u32, G=u32"
+embedded = "1c21d33737c367f14a1a45f6f8e9e21fd71bb38490c3b1684d6454c87f1de672"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::open_strided"
+kappa = "daa26e46d3397cfde77143a774c9cb8517f6a38a2a6cd9a21798a6347ddf2cf2"
+at = "A=u32, G=u32"
+embedded = "01f4c753de4a2fd83767876aa904abfde2739a650e8b3530331c55a135aaf11f"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::open_whole_partial"
+kappa = "ae1fb7e116473f976548a6e6ab3e42224f4043e3762230523e7b0d48000ed3f5"
+at = "A=u32, Counter=u32, G=u32, Overlapping=u32"
+embedded = "b52f2e162fe9ac17982ed159277963becade7e90f72e5ef75af70265d71f3adb"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::open_whole_vaes_clmul_avx2"
+kappa = "ab343cdecc1a0977c2526d1ff3f7c8f55280bb7d70030ce897f80069766e4a26"
+embedded = "b7c2992f8810f24c0482fcf222547827e9b7109f539b97ed274e00a900205761"
+status = "residue"
+cause = "mir::Ty: hw::Key"
+
+[[fn]]
+path = "ring::opening_key::OpeningKey::algorithm"
+kappa = "279663ffbf95cf8cab92eeb70aa8be1b76c6051ebc13fc1bcf8c7cef7827fa59"
+embedded = "eab683d0dd281020fa6e5b42fd35951cb916095032330297c52b41e7370940fa"
+status = "residue"
+cause = "mir::Ty: aead::algorithm::Algorithm"
+
+[[fn]]
+path = "ring::opening_key::OpeningKey::fmt"
+kappa = "7bcacad56ba4d5e929ca268943f6e40f3af92b9bc8c661a29dd6ee1bc071cf56"
+embedded = "121b849b8e2bc35978a5a7e3f481d7df7b17d96162b9611b2f2c828936eaf9af"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::opening_key::OpeningKey::new"
+kappa = "8aab84fea1ce285712338dad8e78d999374a19242c1d375e0fa808d65f3ecfce"
+at = "N=u32"
+embedded = "db5d7587156a7207d9f8d89a5b34cdfba263213567933bfcd44a3d94056c71a7"
+status = "residue"
+cause = "mir::Ty: aead::opening_key::OpeningKey<u32>"
+
+[[fn]]
+path = "ring::opening_key::OpeningKey::open_in_place"
+kappa = "3427987cf8ca8a5f0c1ed43cbd85f4b7cfaf3f2e80f0987a36d048a7b67a4764"
+at = "A=u32, N=u32"
+embedded = "d91f27583f3b94e96e31566b725d5469ad93cd55e608f88870bb4d6373127e73"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::opening_key::OpeningKey::open_within"
+kappa = "52c8ea5d857cc8a36365660f55d4b24aa80e08f74d51ee54dc00f556dfcaeaf7"
+at = "A=u32, N=u32"
+embedded = "539ba29d30a0a3f27cd05d4a99a448f43e4a7d501a53d99cc4233dca44bed649"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::overlapping::array::Array::input"
+kappa = "ec9d128eace7669ae92364d677b86c8123051ce618ec8e3ec186146faffad30c"
+at = "N=#usize_N, T=u32"
+embedded = "0061e95c05f8521530769284d43dac8a4bd27a8c56d2319059063bc51950da23"
+status = "residue"
+cause = "mir::Ty: overlapping::array::Array<'_, u32, #usize_N>"
+
+[[fn]]
+path = "ring::overlapping::array::Array::into_unwritten_output"
+kappa = "fa37b12b179225f4af08e2c9c30c0fc73bd54a5356bfa6194faf306ab1d78374"
+at = "N=#usize_N, T=u32"
+embedded = "7b3b5ee5bbac7dddee11f47efe361a198bc10bcb1bb75211b739c186b738c8c9"
+status = "residue"
+cause = "mir::Ty: overlapping::array::Array<'_, u32, #usize_N>"
+
+[[fn]]
+path = "ring::overlapping::array::Array::new"
+kappa = "9e4fc4230452d83f485a7f85139987238dc89c77ba5a60b667da1e6f8a5806b8"
+at = "N=#usize_N, T=u32"
+embedded = "516167ab6237655f824b51d57d72f67c02c80f15879178d07ced116d8ef28617"
+status = "residue"
+cause = "mir::Ty: aead::overlapping::array::Array<'_, u32, #usize_N>"
+
+[[fn]]
+path = "ring::partial_block::PartialBlock::input"
+kappa = "e76ee2a9a7127a5b511b8ec69cae74246bf5ec512f79fddb1437840fbe98c468"
+at = "T=u32"
+embedded = "90b8ae2af73e07dc8549bab47ca43583429931c197332d8df9dd7d5690c8bb38"
+status = "residue"
+cause = "mir::Ty: BLOCK_LEN"
+
+[[fn]]
+path = "ring::partial_block::PartialBlock::len"
+kappa = "db937570c2b1364a2b16d0708f0b27385237ef52845f735737ac82eb2b7111cd"
+at = "BLOCK_LEN=u32, T=u32"
+embedded = "3e1aa8836b169ada92a1153ede037a1f3ffdfa67f63dbd5be3f06461d26c13fe"
+status = "residue"
+cause = "mir::Ty: PartialBlock<'_, u32, u32>"
+
+[[fn]]
+path = "ring::partial_block::PartialBlock::new"
+kappa = "bf1fb5805059bdd8525ae17732776e4d8058f84653c0fa65de56292ba843baf2"
+at = "BLOCK_LEN=#usize_BLOCK_LEN, T=u32"
+embedded = "4a4fd573ae504b7b2b267d65cd98d2f3eadcb7486c315cd3a3f92fc0e7937538"
+status = "residue"
+cause = "mir::Ty: aead::overlapping::partial_block::PartialBlock<'_, u32, #usize_BLOCK_LEN>"
+
+[[fn]]
+path = "ring::partial_block::PartialBlock::overwrite_at_start"
+kappa = "36d3c6d89d89523daf3f819a3281cc39a4d60041b7fc7a33cee284365b1c087d"
+at = "BLOCK_LEN=#usize_BLOCK_LEN, T=u32"
+embedded = "14b58a9f5d097f0dcf1ffe89e79eb81b4c6d20c59668dffee65d1b19fc05e146"
+status = "residue"
+cause = "mir::Ty: PartialBlock<'_, u32, #usize_BLOCK_LEN>"
+
+[[fn]]
+path = "ring::poly1305::Context::finish"
+kappa = "04d7f2b262aff783f5da253f60acaa7ca7a86ae4767ad4c74a8a2e65bfe0f7d6"
+embedded = "747b4660d0d1acf0a062148bfe3d9b72667d23726db877cc4ec522ad5a4155a9"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::poly1305::Context::from_key"
+kappa = "ec7a1d2841d60d28d37e4259cdaac199c4f90aa34933b5279dd0acb8800858bf"
+embedded = "e2f2edf1fc972321a935404db8563ad17aa18495140e31f54a929e3946c6d906"
+status = "residue"
+cause = "mir::Ty: aead::poly1305::Context"
+
+[[fn]]
+path = "ring::poly1305::Context::update"
+kappa = "caa5bd4dbcda328eab6b0ee7858656eb24a8cca94b90b91c33994b057cc0d2aa"
+embedded = "466c13a92a324f21c397b575b81df270786dc22cf9e9e992aed09476055f7e05"
+status = "residue"
+cause = "mir::Ty: poly1305::Context"
+
+[[fn]]
+path = "ring::poly1305::Context::update_block"
+kappa = "271a22bde8bd6d63f1acf33d5c0bc6799c28462d35c4d055113463f96042af4a"
+embedded = "d337edde23c677c5a94760a29fd7ffbc58c5320f2a5737188eb20094dc0bf8f6"
+status = "residue"
+cause = "mir::Ty: poly1305::Context"
+
+[[fn]]
+path = "ring::poly1305::Context::update_internal"
+kappa = "bfdba337ff23a2609c0b0a4919f0c60b07f9c1071ae6d08fc741ef22b1ee31c4"
+embedded = "0e82c7f1050bb6ae21ec1d0c1c5fa5e30e757742190280eb4e14cdc624317c1a"
+status = "residue"
+cause = "mir::Ty: poly1305::Context"
+
+[[fn]]
+path = "ring::poly1305::KEY_LEN"
+kappa = "31db13700b12307d1fcdebab7e8857f34ed2b993cadbdb879802381b95bedfd5"
+embedded = "01aba6bcfb6981af908927d6d3011a2ca788c9655b1063069fb247fbc50ab0ec"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item aead::poly1305::BLOCK_LEN"
+
+[[fn]]
+path = "ring::poly1305::Key::new"
+kappa = "7e4897f5acac6c3d81e04caa775681449683b01b0ab6afe9d1b4f514d3318825"
+embedded = "cdbc58431dff92f0e891a9ca6db3ab02f468e4548bce1be6e269b6d606bcc0a6"
+status = "residue"
+cause = "mir::Ty: aead::poly1305::Key"
+
+[[fn]]
+path = "ring::poly1305::sign"
+kappa = "c63a0c5e15bc01865922c3f1c98e83095a180c26d36cee61878255c92dc4edfc"
+embedded = "dc84b1a9798d711529b2d6df79f284ca67c0d7cf504416210237859be2a4ecb2"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::poly1305_update_padded_16"
+kappa = "4d37e7ceab31e3545c07adfe26894fa8b5fdc566389714e84af039dc60a754ec"
+embedded = "cf72b692d3eea2435e65efa0cff466ff535e9ea3345b041eb917f72c881c3bb9"
+status = "residue"
+cause = "mir::Ty: poly1305::Context"
+
+[[fn]]
+path = "ring::quic::<impl at src/aead/quic.rs:115:10: 115:15>::fmt"
+kappa = "6ef10b52cb1c2c0079482a02bb000f3a2b750248f3238f78621ff212db0a346e"
+embedded = "1d42719e6e6fe0b699b95aef3b9bb0e20930d716049734d970c4ce39e692fad2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::quic::<impl at src/aead/quic.rs:115:17: 115:19>::assert_fields_are_eq"
+kappa = "56217bfd094342940b79a2de488d6cf892970e85e8e815857afa1e4300e645d2"
+embedded = "1e6e4d0dc86c01c3ff26179388cc6f8c04a38afa821d2252a7ad29ed40368aaa"
+status = "residue"
+cause = "mir::Ty: quic::AlgorithmID"
+
+[[fn]]
+path = "ring::quic::<impl at src/aead/quic.rs:115:21: 115:30>::eq"
+kappa = "0c357d26197b542fbf473e9b6b6dfbc3092b2447cc1a15cef50fd22d40544832"
+embedded = "211d393ab35c4f53806e25ad4db946100223422df4e64c0f831b65b0672ad19c"
+status = "residue"
+cause = "mir::Ty: quic::AlgorithmID"
+
+[[fn]]
+path = "ring::quic::<impl at src/aead/quic.rs:92:1: 92:42>::len"
+kappa = "5c016d70f7e3ce9855de8bcbd466fe71a6ab70d251d76340ef2eb1eb5388e0ef"
+embedded = "f2f2b0dcefee84b99586f95cc5422eb4146ad2802767987b0bfffcb1e2ba4f7b"
+status = "residue"
+cause = "mir::Ty: quic::Algorithm"
+
+[[fn]]
+path = "ring::quic::<impl at src/debug.rs:19:9: 19:46>::fmt"
+kappa = "dc81b702e5a8b95bf6a7307f1ec452f3336c27988ed00e6ba6d94c20f5c9c4f5"
+embedded = "e5130407b7d647824c09e5aa0645fd41cca152eb55d17e7ecc53332c09e27c8c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::quic::Algorithm::eq"
+kappa = "26a33761914c8463cc7618b07d1c4a02b95a5d72645af7bf68c8b04140f24a95"
+embedded = "da61acb5a45363d78fc70bf21e3629c9705362bc560dff85ba1c68246af33bb0"
+status = "residue"
+cause = "mir::Ty: quic::Algorithm"
+
+[[fn]]
+path = "ring::quic::Algorithm::key_len"
+kappa = "8213814240deb938102d42d85430985cc34702dda73b2392f861b095e3c5dbd4"
+embedded = "09732c60eb28c9fce86221dbd1f39c5d87e68fca5c6b3e5eadb6c2f79853ddd7"
+status = "residue"
+cause = "mir::Ty: quic::Algorithm"
+
+[[fn]]
+path = "ring::quic::Algorithm::sample_len"
+kappa = "9c8cf4c9e4445c9c374ddc87ee4bac529475b8d47bc6978394a7edcb6bc48f4b"
+embedded = "045f50bf85f118a3700f6f48c52630f94465690ff0da97f6385320fea72c1d62"
+status = "residue"
+cause = "mir::Ty: quic::Algorithm"
+
+[[fn]]
+path = "ring::quic::HeaderProtectionKey::algorithm"
+kappa = "bc2336d4fa5fc0bf6101342da486c83eb585a353514cc6fdc86991c327c59c4b"
+embedded = "1d678a27c76947c523a0130df54ed03f61dba5c7a75e42f93626d8a7896102cd"
+status = "residue"
+cause = "mir::Ty: aead::quic::Algorithm"
+
+[[fn]]
+path = "ring::quic::HeaderProtectionKey::from"
+kappa = "553a1740ec39eb57a80091822feb360b314795aa5548532e94a8b650f8915328"
+embedded = "0f698e96c0b47826fa1027c0343bb36528f5228907fee11ed97cf4aca1a9086f"
+status = "residue"
+cause = "mir::Ty: aead::quic::HeaderProtectionKey"
+
+[[fn]]
+path = "ring::quic::HeaderProtectionKey::new"
+kappa = "e881f40692f662ce9bbe1dd6ec0c933f17fbdc7a98b24cb9bd5b0712090dad20"
+embedded = "27f6d3d7d9c643d786792f3d4f1ab5bb9f21b77fafa8d9b07d93fa205d016394"
+status = "residue"
+cause = "mir::Ty: aead::quic::HeaderProtectionKey"
+
+[[fn]]
+path = "ring::quic::HeaderProtectionKey::new_mask"
+kappa = "fdd877a062cff3fa7e67c96e12b5dd575a3db9f00856634814d10f68ebca839b"
+embedded = "8f53afe76c97fc0542171a9b5f4eb016f050f39a2357a97a86619664b9188fc8"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::seal_fallback"
+kappa = "1766adb68095e872939bf2d4a6d381043cf079c7ccda2ea6891fe87c33bfdf51"
+embedded = "abea9059c4cf5b2dac3e1bc1609863d97f51b16be5149f7d18c90a419d3d2032"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::seal_finish"
+kappa = "f64a49324b0e63dc90459dbe908380a3c13e62dd7d531320af075158d861b7db"
+at = "A=u32, G=u32"
+embedded = "2a75685800dfc6ca3744016979fbf39d8a3f9a20a72c650a5f1b5cad6f5a4868"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::seal_strided"
+kappa = "57ebd38f72fba047ad4900f54db8df6716e99f8b7c73d0b160278c9eb5e21d88"
+at = "A=u32, G=u32"
+embedded = "0a19abd72f4fce01e91ee2d0846c229549a1d1df5142c2a81eddfbd5f852d070"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::seal_whole_partial"
+kappa = "9688606bb9f24e53fc3bcad6f0bdc173592af740c218c59c82c19cf61ad9af7b"
+at = "A=u32, BLOCK_LEN=u32, Counter=u32, G=u32"
+embedded = "310fd93716e229cd12cd209830c1e51f1055870f03ca28bdbced5f9dc3d49f0d"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::seal_whole_vaes_clmul_avx2"
+kappa = "abb1931e3cbe7bfd155d695a7438efa6a2a676838a1fc4255b103adf106d1cc2"
+embedded = "8402a3eaab5798525c942a167eed44ffeba644849325e40a96e609fc9c0b2212"
+status = "residue"
+cause = "mir::Ty: hw::Key"
+
+[[fn]]
+path = "ring::sealing_key::SealingKey::algorithm"
+kappa = "cb49b24d010cc4415ccd66b3d7eb862e84dc420e6cfe62a2a160fc955029996f"
+embedded = "e81384033c25eaac77fec92cbaae7e64ea587b66fcfc0d3c41d312d445d5c51e"
+status = "residue"
+cause = "mir::Ty: aead::algorithm::Algorithm"
+
+[[fn]]
+path = "ring::sealing_key::SealingKey::fmt"
+kappa = "dcf653971edcb7eb9d7ef03bef15d9348a0d1cce5cfc7d85293292ee045238d3"
+embedded = "c6c67ba991238336f56445ede68090263391e236936a27c494873fd71453d8c7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::sealing_key::SealingKey::new"
+kappa = "a34380136a5a6697c5ab786b7d5ef7559a7994b6518484aa875ef8aa8f4820ef"
+at = "N=u32"
+embedded = "8947964839ad0627b4a5f9f060204d33c76fd36a2bd1f91acebc1063cd5e2c01"
+status = "residue"
+cause = "mir::Ty: aead::sealing_key::SealingKey<u32>"
+
+[[fn]]
+path = "ring::sealing_key::SealingKey::seal_in_place_append_tag"
+kappa = "55b859484b64a4ff00a94d1300e40192bb03cfefec54efa598458659544e32ea"
+at = "A=u32, InOut=u32, N=u32"
+embedded = "d745646fccf2e58a5d3cc70807d57bd00851a043e11c5c3b60f6b63314dcec21"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::sealing_key::SealingKey::seal_in_place_separate_tag"
+kappa = "8890454f8648c5a70aa216640e8a4ea9b73f179499d1184246e0cd9411a2702b"
+at = "A=u32, N=u32"
+embedded = "fcc5675802ab65fa49a3caae8b4862710b356d695fe9eb09c9f4162ee572b80f"
+status = "residue"
+cause = "mir::Ty: aead::Tag"
+
+[[fn]]
+path = "ring::unbound_key::UnboundKey::algorithm"
+kappa = "10636a5c2c03ae83d0ae22c59f5eb2164891d5ee503b69a48b124902b856bd6f"
+embedded = "eddb204875d74b2c1fad24f3234490c30e6f2ab358baf4ad3afe5fe16dc6f7a9"
+status = "residue"
+cause = "mir::Ty: aead::algorithm::Algorithm"
+
+[[fn]]
+path = "ring::unbound_key::UnboundKey::fmt"
+kappa = "612b0b39358248e6527e3ded740e33b6e1b12f6f5af9d7339909133a96f07fe2"
+embedded = "93def9c6eceeecdd4295ea257cefa841140aeb8adc2d34eab0827776bd4a1cc9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::unbound_key::UnboundKey::from"
+kappa = "6af7b642d2f26b637c46382b338e451e450b585bf0068b00bbfa3a71f1e078c0"
+embedded = "5110db9ce55df9eeb1ae02dc2ae8d51f32e9be75fe43173a732e1051a1108167"
+status = "residue"
+cause = "mir::Ty: aead::unbound_key::UnboundKey"
+
+[[fn]]
+path = "ring::unbound_key::UnboundKey::into_inner"
+kappa = "dd76aaa4f5f8c3c81e486d9f6e6c4796a60f5bc51363a6886bd9b3e08dd0e685"
+embedded = "f4de0cac03c0abb961fbb9b41f0ab04d15c58890804534e43ba5542b26084b8c"
+status = "residue"
+cause = "mir::Ty: aead::less_safe_key::LessSafeKey"
+
+[[fn]]
+path = "ring::unbound_key::UnboundKey::new"
+kappa = "1dcf9501e91a5afe9e215f2075de74f90359849fa13901f3761b4642cd8c4389"
+embedded = "170ec40d3c8a0cccdf80e7952cabc93acc203883ad99cb440dcd53e7ef6a37f0"
+status = "residue"
+cause = "mir::Ty: aead::unbound_key::UnboundKey"
+
+[[fn]]
+path = "ring::vclmulavx2::<impl at src/aead/gcm/vclmulavx2.rs:24:10: 24:15>::clone"
+kappa = "ae078c0df826dccc32c9c0ea7100e2cbbfef7c9042854185a96e664df44ef170"
+embedded = "fe557b6fb9afaa6fc53b8cf8d0b312a5ca845de56c77152df387b3e434c99141"
+status = "residue"
+cause = "mir::Ty: aead::gcm::vclmulavx2::Key"
+
+[[fn]]
+path = "ring::vclmulavx2::Key::inner"
+kappa = "eaef94da57bf4926ba1981c1c438ae39431becedd49f0c5a23eeb5545bc1d8f5"
+embedded = "8a46ab094d64fa022550e2e0446a63572f2e1cb0641dd1999e57547d7dd22c86"
+status = "residue"
+cause = "mir::Ty: aead::gcm::ffi::HTable"
+
+[[fn]]
+path = "ring::vclmulavx2::Key::new"
+kappa = "01fb3a486ad8370a432398073c1d03feed2764938b75347f0db30a690ffc0df4"
+at = "C=u32"
+embedded = "061a852623b6692624aacd39c719d3a79b95a3435c2f1e4b0c04e200819ff11c"
+status = "residue"
+cause = "mir::Ty: aead::gcm::vclmulavx2::Key"
+
+[[fn]]
+path = "ring::vclmulavx2::Key::update_block"
+kappa = "48ab0f18c9b31deffc104c38020b81143eb700e0267080a41ef088b2732b4c67"
+at = "C=u32"
+embedded = "5142fba4d8bc9709d9cbec0c3fc8faf57388440f3fae657322eb15e7cd27c738"
+status = "residue"
+cause = "mir::Ty: vclmulavx2::Key"
+
+[[fn]]
+path = "ring::vp::<impl at src/aead/aes/vp.rs:34:10: 34:15>::clone"
+kappa = "5b53fbd6bb6036c8574daff9fbd33bc57a4f18611ae59331e6f4e85781b0e460"
+embedded = "4ac2f289546ed80765118fae61e4538d5c8c6bcbe85f772bf1ead4694cb8f20d"
+status = "residue"
+cause = "mir::Ty: aead::aes::vp::Key"
+
+[[fn]]
+path = "ring::vp::Key::ctr32_encrypt_within"
+kappa = "ba90d06bd852d170cb46ba54e5f36c3f4b62e68843fc54f43ed8d21ceb651f72"
+at = "C=u32"
+embedded = "ea5629bd8d9a12ab37da7fd1195e0ffde22292dee3310c294cf6726da6e856c5"
+status = "residue"
+cause = "mir::Ty: vp::Key"
+
+[[fn]]
+path = "ring::vp::Key::encrypt_block"
+kappa = "e6ddd255f71a825dfd8d3afd246309e253da0a6f0d6f5573aa904faaabfca1f1"
+embedded = "f1ed6721c38de7c61092dae8f123d19323fc202c4ee7faba3a5679d450344cd6"
+status = "residue"
+cause = "mir::Ty: vp::Key"
+
+[[fn]]
+path = "ring::vp::Key::encrypt_iv_xor_block"
+kappa = "590d6971dab5c78215128762e1b2adb2a0b6d57b6b88cb92dd4da973417bb720"
+embedded = "b247d76b8dfde14b293bef45f6c9f4edf91e587ac83682b5c98c123fc823ea46"
+status = "residue"
+cause = "mir::Ty: vp::Key"
+
+[[fn]]
+path = "ring::vp::Key::new"
+kappa = "c10cf1ce432eb0e0edc56023ed5742a3dbd50baa4de0a2252d1e380e347c1f72"
+at = "C=u32"
+embedded = "a5584baf3e99cd4a8479add7421ab47b30ab4e3debe47d0157aedd6d5722daad"
+status = "residue"
+cause = "mir::Ty: aead::aes::vp::Key"
+
+[[fn]]
+path = "ring::with_swapped_xi"
+kappa = "6ec9075c07e931ec4280c6d69780d17aa42ca90bbe0cb40a221a3f0bedb4c16a"
+embedded = "3932c8f8950276a2917092f9b2a2c9cc4de6a1b10e2f6e040390433d054480d1"
+status = "residue"
+cause = "mir::Ty: Xi"
+

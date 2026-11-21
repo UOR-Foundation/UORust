@@ -1,0 +1,59 @@
+[[fn]]
+path = "pem-rfc7468::is_allowed_in_label"
+kappa = "3d492ae79cd6b2bcc75e21d7a5c957fe0c0343eae1b042ead70718f17dd2ddb3"
+differential = 7
+embedded = "632400adb553aef5ef350820162fe40f88d036db654f3aba46d2719fb3d9bfaa"
+status = "translated"
+digest = "e864b7317b8c68607e89ae567cb640b0b25c1ed0226a57a30272ca58c99f4fca"
+
+[[fn]]
+path = "pem-rfc7468::is_labelchar"
+kappa = "371b88a03542986b60c26bb91127d7154a16bb13032502b59881d22d662136b9"
+differential = 7
+embedded = "f72afbd2ab2b820f8b27cb384e7824dda71f7e1e76a2d33bbfd569ac3dce92f9"
+status = "translated"
+digest = "a55ee389b7f8902801fe068a540cad1611080818e235158fed014a650399213c"
+
+[[fn]]
+path = "pem-rfc7468::is_wsp"
+kappa = "48cd05e2eb453bf3bcc5d05c703a17cb742f24e1efb2b7552feecbc886756061"
+differential = 7
+embedded = "951f58a351dab65937af8c383448e4eac573bf5696c638d2af29a2a5a36a3e3d"
+status = "translated"
+digest = "0c08b026894cdc70313e55e1b60ce5aaff6739e9e75720394b21c38ac8b19a77"
+
+[[fn]]
+path = "pem-rfc7468::split_label"
+kappa = "7d2662b71a14913ff2b7bc263a0835c3602618c89fc13c4a8a1bcd48110d656e"
+embedded = "e8aa43d6844db12aeada36bd5d65e41203a97e181cad8b5ee99afc72c6fc5fc2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_add"
+
+[[fn]]
+path = "pem-rfc7468::strip_leading_eol"
+kappa = "6b8c9c463c8a0f0904a89cdeb0d4e2b1069c3f3adc3e8316d2ebb13060a4a2cd"
+embedded = "9d599919ace3ebb33463d85a517cf3e2b23b8fedbce945f4333d66dc8bc960c0"
+status = "residue"
+cause = "mir::Rvalue::Use"
+
+[[fn]]
+path = "pem-rfc7468::strip_preamble"
+kappa = "b1176dba2f1b907a9830402b92f5abd500a5a918b12ce1fc19fba191d644c51e"
+embedded = "97f6bea4d802292c0b08ab9ee996f4696429366be2b29582e94ecff81875943f"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "pem-rfc7468::strip_trailing_eol"
+kappa = "b59562db0fe427d78c4ba81ba3d7131cc616fece808df3abd847f42b912b05ec"
+embedded = "7597b1bc89fd94edc50c08386021ab128aa39ff7cdc3d78a6235292fe589649c"
+status = "residue"
+cause = "mir::Rvalue::Use"
+
+[[fn]]
+path = "pem-rfc7468::validate_label"
+kappa = "2c1f3e3cacee2b7446ed2f49cb422bd5f02d539ccf6a5a148c352b52349e5eaa"
+embedded = "00115a5d71fc3e8630277c7914dc4e4033abc58a663703a578407f6e501bad0f"
+status = "residue"
+cause = "mir::Ty: error::Error"
+

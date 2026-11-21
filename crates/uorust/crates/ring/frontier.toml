@@ -1,0 +1,1516 @@
+# The ring register (written by `uorust crate ring@0.17.14`; do not edit): every body of
+# ring's MIR at ring 0.17.14, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1101
+translated = 60
+residue = 1041
+
+[module.aead]
+bodies = 239
+translated = 10
+residue = 229
+
+[module.agreement]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.arithmetic]
+bodies = 103
+translated = 1
+residue = 102
+
+[module.bb]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.bits]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.bssl]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.cpu]
+bodies = 91
+translated = 21
+residue = 70
+
+[module.debug]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.deprecated_constant_time]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.digest]
+bodies = 93
+translated = 10
+residue = 83
+
+[module.ec]
+bodies = 204
+translated = 0
+residue = 204
+
+[module.error]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.hkdf]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.hmac]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.io]
+bodies = 33
+translated = 2
+residue = 31
+
+[module.limb]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.pbkdf2]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.pkcs8]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.polyfill]
+bodies = 53
+translated = 8
+residue = 45
+
+[module.rand]
+bodies = 9
+translated = 1
+residue = 8
+
+[module.rsa]
+bodies = 69
+translated = 2
+residue = 67
+
+[module.signature]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.testutil]
+bodies = 28
+translated = 5
+residue = 23
+
+[embedding]
+bodies = 1101
+embedded = 1101
+evaluable = 1099
+blocked = 2
+
+[[construct]]
+construct = "Rvalue::Repeat"
+bodies = 2
+
+[differential]
+bodies = 4
+theorems = 24
+
+[[cause]]
+cause = "mir::Ty: error::unspecified::Unspecified"
+bodies = 73
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: aead::Tag"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ops::Q"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ops::N"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: untrusted::Input<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: arithmetic::limb_slice_error::LimbSliceError"
+bodies = 14
+
+[[cause]]
+cause = "mir::Operand::Constant: cpu::CAPS_STATIC: mir::Operand::Constant: the constant item cpu::intel::featureflags::FORCE_DYNAMIC_DETECTION"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: error::key_rejected::KeyRejected"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: bits::BitLength"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: digest::Algorithm"
+bodies = 11
+
+[[cause]]
+cause = "mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ops::Point"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: io::writer::TooLongError"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::Elem<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: digest::Digest"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: cpu::features::Features"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: digest::OutputLen"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: polyfill::slice::as_chunks::AsChunks<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: M"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TestCase"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: aead::gcm::ffi::HTable"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: bb::boolmask::BoolMask"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: hmac::Algorithm"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: hmac::Key"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: hmac::Tag"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rsa::public_exponent::PublicExponent"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rsa::public_key::PublicKey"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: suite_b::ops::Q"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: aead::KeyInner"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: algorithm::Algorithm"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<usize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u64>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: digest::BlockLen"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ec::curve25519::ed25519::signing::Ed25519KeyPair"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ops::elem::Elem<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hkdf::Algorithm"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hw::Key"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: pbkdf2::verify_error::VerifyError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: polyfill::slice::as_chunks_mut::AsChunksMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rsa::N"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rsa::keypair::KeyPair"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: signature::Signature"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: suite_b::ops::CommonOps"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: suite_b::ops::ScalarOps"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: <"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AsChunks<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Xi"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aead::aes_gcm::DynKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aead::algorithm::Algorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aead::chacha::Counter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aead::less_safe_key::LessSafeKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: agreement::Algorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: agreement::UnparsedPublicKey<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::Elem<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: base::Overlapping<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: chacha::Key"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: der::Tag"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: digest::Context"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: features::Values"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hkdf::Prk"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: io::positive::Positive<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pbkdf2::Algorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pbkdf2::derive_error::DeriveError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: poly1305::Context"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: polyfill::array_flat_map::ArrayFlatMap<core::iter::Copied<core::iter::Rev<core::slice::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: quic::Algorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: arithmetic::bigint::TABLE_ENTRIES: mir::Operand::Constant: the constant item arithmetic::bigint::WINDOW_BITS"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: ec::ELEM_MAX_BYTES: mir::Operand::Constant: the constant item ec::ELEM_MAX_BITS"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: polyfill::usize_from_u64_saturated: ring's MIR stops at mir::Operand::Constant: polyfill::usize_from_u64_saturated::USIZE_MAX: mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BitLength<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DynState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Features"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aead::aes::ffi::AES_KEY"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aead::nonce::Nonce"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aead::overlapping::base::Overlapping<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aead::quic::KeyInner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aes::fallback::Key"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: agreement::PublicKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::boxed_limbs::BoxedLimbs<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arithmetic::montgomery::Unencoded"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arithmetic::n0::N0"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: bits::BitLength<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<u8>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: digest::Output"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: digest::dynstate::DynState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: digest::finish_error::FinishError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ec::curve25519::scalar::Scalar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ec::keys::KeyPair"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ec::keys::PublicKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ec::keys::Seed"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ecdsa::signing::EcdsaKeyPair"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hmac::Context"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pkcs8::Document"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rsa::public_key::Inner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rsa::public_modulus::PublicModulus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: signature::UnparsedPublicKey<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: suite_b::ops::N"
+bodies = 3
+
+[[cause]]
+cause = 'mir::Ty: unsafe extern "u32" fn'
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: vp::Key"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BitAnd"
+bodies = 2
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: digest::MAX_OUTPUT_LEN: mir::Operand::Constant: digest::OutputLen::MAX: type outside the lift: digest::OutputLen"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: ec::SCALAR_MAX_BYTES: mir::Operand::Constant: ec::ELEM_MAX_BYTES: mir::Operand::Constant: the constant item ec::ELEM_MAX_BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item arithmetic::MIN_LIMBS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AES_KEY"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Aad<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BlockContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BlockLen"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LeadingZerosStripped<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PartialBlock<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Template"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Wrapping<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::Aad<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::aes::Iv"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::aes::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::aes::fallback::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::aes::hw::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::aes::vp::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::aes_gcm::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::chacha::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::gcm::clmul::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::gcm::clmulavxmovbe::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::gcm::fallback::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::gcm::ffi::KeyValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::gcm::ffi::U128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::gcm::vclmulavx2::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::poly1305::Context"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::quic::HeaderProtectionKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aead::unbound_key::UnboundKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aes::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algorithm::AlgorithmID"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::Storage<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::modulus::OwnedModulus<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::modulusvalue::OwnedModulusValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arithmetic::montgomery::R"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arithmetic::montgomery::RInverse"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arithmetic::montgomery::RR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arithmetic::montgomery::RRR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bits::BitLength<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clmul::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: clmulavxmovbe::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Adx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Aes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Avx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Avx2"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Bmi1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Bmi2"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::ClMul"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::IntelCpu"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Movbe"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Sha"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Sse41"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Ssse3"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::VAesClmul"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: curve25519::ops::ExtPoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: digest::AlgorithmID"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: digest::BlockContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ec::curve25519::ed25519::signing::PublicKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ec::curve25519::ops::ExtPoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ecdsa::signing::PublicKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ops::elem::NumLimbs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ecdsa::signing::AlgorithmID"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: gcm::Context<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: gcm::fallback::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hkdf::Salt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl EncryptBlock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl IntoIterator<Item = &'a mut u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::der::Tag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: len_mismatch_error::LenMismatchError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: limb::AllowZero"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: overlapping::array::Array<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: polyfill::array_flat_map::ArrayFlatMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: polyfill::leading_zeros_skipped::LeadingZerosStripped<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: polyfill::notsend::NotSend"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: positive::Positive<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quic::AlgorithmID"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quic::KeyInner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rand::SystemRandom"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rsa::public_key_components::PublicKeyComponents<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: arithmetic::MAX_LIMBS: mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: arithmetic::limbs512::storage::LIMBS_PER_CHUNK: mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: bits::_TEST_AS_USIZE_BYTES_ROUNDED_UP_EVEN::promoted[0]: type outside the lift: bits::BitLength"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: bits::_TEST_AS_USIZE_BYTES_ROUNDED_UP_ONE_BIT_HIGH::promoted[0]: type outside the lift: bits::BitLength"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: bits::_TEST_AS_USIZE_BYTES_ROUNDED_UP_SEVEN_BITS_HIGH::promoted[0]: type outside the lift: bits::BitLength"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: digest::BlockLen::MAX: type outside the lift: digest::BlockLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: digest::OutputLen::MAX: type outside the lift: digest::OutputLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: digest::SHA512_OUTPUT_LEN: type outside the lift: digest::OutputLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: digest::sha1::OUTPUT_LEN: type outside the lift: digest::OutputLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: polyfill::usize_from_u64_saturated::USIZE_MAX: mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: rsa::PUBLIC_KEY_PUBLIC_MODULUS_MAX_LEN::promoted[0]: type outside the lift: bits::BitLength"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: testutil::from_hex_digit::promoted[0]: type outside the lift: core::ops::RangeInclusive<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as digest::sha2::fallback::Sha2>::BIG_SIGMA_0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as digest::sha2::fallback::Sha2>::BIG_SIGMA_1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as digest::sha2::fallback::Sha2>::SMALL_SIGMA_0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as digest::sha2::fallback::Sha2>::SMALL_SIGMA_1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item aead::aes::BLOCK_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item aead::chacha::KEY_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item aead::poly1305::BLOCK_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item arithmetic::bigint::One::newRR::B"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item arithmetic::bigint::WINDOW_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item cpu::intel::featureflags::FORCE_DYNAMIC_DETECTION"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ec::ELEM_MAX_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ec::curve25519::ops::ELEM_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ec::curve25519::scalar::SCALAR_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Adx::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Aes::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Avx2::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Avx::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Bmi1::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Bmi2::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ClMul::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Movbe::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Sha::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Sse41::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Ssse3::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: VAesClmul::mask"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: aead::max_input_len: ring's MIR stops at mir::TerminatorKind::Call: polyfill::usize_from_u64_saturated: ring's MIR stops at mir::Operand::Constant: polyfill::usize_from_u64_saturated::USIZE_MAX: mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: arithmetic::constant::limbs_from_hex: ring's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_ascii_lowercase"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_at"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: suite_b::ops::p384::p384_elem_mul_mont"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AF"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayFlatMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AsChunksIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AsChunksMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BLOCK_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BitLength"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BitLength<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BoolMask"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CurveID"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Digest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Document"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EcdsaSigningAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: File<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LimbSliceError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Nonce"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NumLimbs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Okm<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OutputLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OwnedModulusValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PKCS1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PrivateExponent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Random<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Reader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Shift"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Signature"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: U128"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Unspecified"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::Aad<[u8; 0]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::aes::ffi::Counter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::aes_gcm::Combo<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305::integrated::Out"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305::integrated::open::open_data_in"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305::integrated::seal::seal_data_in"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::Key"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::OpeningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::chacha20_poly1305_openssh::SealingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::gcm::Context<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::opening_key::OpeningKey<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::overlapping::array::Array<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::overlapping::base::index_error::IndexError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::overlapping::partial_block::PartialBlock<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::poly1305::Key"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::quic::Algorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aead::sealing_key::SealingKey<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aes::ffi::Counter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: agreement::EphemeralPrivateKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::One<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::modulus::Modulus<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arithmetic::bigint::private_exponent::PrivateExponent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arithmetic::limbs512::storage::AlignedStorage<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bigint::Elem<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chacha20_poly1305_openssh::OpeningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: chacha20_poly1305_openssh::SealingKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cpu::features::Values"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cpu::intel::Shift"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: curve25519::ops::Point"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: digest::LenLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ec::CurveID"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ec::curve25519::ops::Elem<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ec::curve25519::ops::Point"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ec::curve25519::scalar::MaskedScalar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ecdsa::signing::NonceRandomKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ec::suite_b::ops::elem::PublicElem<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ecdsa::signing::PublicKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ed25519::signing::PublicKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::input_too_long::InputTooLongError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::input_too_long::InputTooLongError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::input_too_long::InputTooLongError<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::too_much_output_requested::TooMuchOutputRequestedError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ffi_fallback::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hkdf::Okm<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hmac::VerifyError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl EncryptCtr32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::writer::LengthMeasurement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::writer::Writer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: keypair::KeyPair"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: keys::PublicKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: keys::Seed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: limb::fold_5_bit_windows::BitIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: modulus::Modulus<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: n0::N0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: polyfill::array_flat_map::ArrayFlatMap<core::iter::Once<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: polyfill::once_cell::race::OnceNonZeroUsize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: polyfill::slice::as_chunks::AsChunksIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: polyfill::slice::as_chunks_mut::AsChunksMutChunksMutIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rand::Random<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::keypair::PrivateCrtPrime<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::keypair::PrivatePrime<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::keypair_components::KeyPairComponents<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rsa::padding::pss::PSSMetrics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: scalar::MaskedScalar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: suite_b::ops::Modulus<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: suite_b::ops::PrivateKeyOps"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: testutil::TestCase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: testutil::rand::FixedSliceSequenceRandom<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vclmulavx2::Key"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: writer::LengthMeasurement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: writer::Writer"
+bodies = 1

@@ -1,0 +1,60 @@
+[[fn]]
+path = "ryu::div10"
+kappa = "032a359af1ac4546ec27bc5078337f9dccfc3b755a508d6fee5fdfcd761b6f73"
+differential = 7
+embedded = "66890f1ee0f96eac22fe3cec4abdbe59c390c4dbdfcc5f33f048119b752474b8"
+status = "translated"
+digest = "1ade3551d8396deaf5d52623d9ced93a81158a27b3fbfc8d0d09ee3375795cdc"
+
+[[fn]]
+path = "ryu::div100"
+kappa = "d76bfab2f8fb3f473be1f4b00e85d00c57cc2fbe2f5fc2f4eafc3b72e322b9d3"
+differential = 7
+embedded = "d179e5be9fda14719927184fc242eb345fab2671ddb8794eb6503993b46b19b7"
+status = "translated"
+digest = "7281b1617fceead99e8d33a8326967212f2a977c15542c880c7968bc4a61c1d1"
+
+[[fn]]
+path = "ryu::div5"
+kappa = "f5a4e918c6936bef1c25a86cd426fbc92116cd4bf801e89d08d4e6179ef2a496"
+differential = 7
+embedded = "be8971721ec590bfb1c1aafbf3e5683af4c3e1da3c8a59994b0d103e6bec0f37"
+status = "translated"
+digest = "6fdfdb6bdc775d96fb505ded4d8afd3bc53b8b01f3f96d266e1b54e064decf16"
+
+[[fn]]
+path = "ryu::mul_shift_64"
+kappa = "791e2b27592b072b4391bd7310a031246fbf168993e87a81acb51112589b9476"
+embedded = "57bc2ae4d1f4909cd4ed0e730e53a77cc0245e24d738068b57a140de61930a20"
+status = "translated"
+digest = "7779625eda65c4693d5cd5751ae728bc830755a26a92b942ca53f0fc48f75eeb"
+
+[[fn]]
+path = "ryu::mul_shift_all_64"
+kappa = "0427ffbe866177b173ba08025529b95039ba27f3b816e538452ae3e1c0d890ee"
+embedded = "4b1605c1f335463393fcdaef31af920af0dd799b6711136502b293ded7979a57"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::write"
+
+[[fn]]
+path = "ryu::multiple_of_power_of_2"
+kappa = "0b73f8141b6fd3c90ea7031ef4715d3417014063021855f0f34eeecde2ddfe1e"
+differential = 4
+embedded = "a8fba0fc510c4a1f741d722047162f5ce4617211b495e02821ecfeabfabf33e1"
+status = "translated"
+digest = "c082c5045392b8fd75c0eb161203f13891db62396cb8443c7c8118b332f55e6d"
+
+[[fn]]
+path = "ryu::multiple_of_power_of_5"
+kappa = "bc6dcd9c6986caf8efb4956734ba4c6c276dc545fc4ccd5877f89ad98af7ad6c"
+embedded = "92c97071c3d83b9fa165aae212d0cbd4bf121b3153a1a8e3d6649d4d6cbf45b6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: d2s_intrinsics::pow5_factor: ryu's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "ryu::pow5_factor"
+kappa = "a4aaac9a03b5f17877702fbe88bed26fa6e6b7ed0bfdcf2170228b796d540b0c"
+embedded = "eaaf7524d7ec2712c2ce9a079546dcd55520bbfd95ed2a1a7770af93026f5bc5"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+

@@ -1,0 +1,62 @@
+[[fn]]
+path = "ident_case::<impl at src/lib.rs:31:10: 31:15>::fmt"
+kappa = "a2442646d5bfca3edc889a7bb1f5a7232e45c00efbfe501bb23b54795b86adf8"
+embedded = "01a8d71afa77cf70bf39a763d4a3712305196c1f600ba008e9df21b69ef6ca36"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ident_case::<impl at src/lib.rs:31:17: 31:26>::eq"
+kappa = "6cfe148583c3f9a5e7957db4bbe9f52c67dfea9c6d232e143fd656e0eea6d950"
+at = "RenameRule=u32"
+embedded = "b8a13e0274af417bac04fda83cf6ce5ddcc6b54f0ca8e79542c1596a28cc4101"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "ident_case::<impl at src/lib.rs:31:28: 31:30>::assert_fields_are_eq"
+kappa = "76bdefff9d4ad2a659abd9a78833327b41f8a149ccc375aad169e3182cc4d9a3"
+embedded = "dfeb9bacc51df4351b8194e7e1a0c79d741069c7e15d6005aed49a228105c9fa"
+status = "residue"
+cause = "mir::Ty: RenameRule"
+
+[[fn]]
+path = "ident_case::<impl at src/lib.rs:31:32: 31:37>::clone"
+kappa = "e3997055ea02b5b9d919d1b9be7df21d1695c5a53f6345190d09cca2946e8da5"
+at = "RenameRule=u32"
+embedded = "c66c75ee091a07849a55ccfb173b8a759a9a3f03dbd0d612599d0885fb6ab205"
+status = "translated"
+digest = "1361301d17f18157559010ec95a7cf27858fc16b44ee8c298ebe0d62e193392b"
+
+[[fn]]
+path = "ident_case::RenameRule::apply_to_field"
+kappa = "462505a4e654aeacf4e5273633e6597e2abc59916cd39140d0ad4bba3e3626ba"
+at = "RenameRule=u32, S=u32"
+embedded = "265e7c91a8a0df4393a3622e98bd122dc9d3902e7e64fd108983e0b2f4862e7d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "ident_case::RenameRule::apply_to_variant"
+kappa = "f20dbafa24144a903d21743973edc15a5a49dd08e34d083868a560552f505755"
+at = "RenameRule=u32, S=u32"
+embedded = "d925dd82153b2001bea36bcbd020b2d832d9b7505b4048519160d5915de71bdd"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "ident_case::RenameRule::default"
+kappa = "72efe109a5affc4a6fba59172571c1894249ce03cdb8173691741f82236e62e8"
+at = "RenameRule=u32"
+embedded = "6b5bf72dc6ae989d650e3d2fa19473a399b77a8a45e8e06d0f55ab4f5536e477"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "ident_case::RenameRule::from_str"
+kappa = "796bce278ebd3a036af8d5ce603e2bb840c1841f08b31bfc7507af3625a72f02"
+at = "RenameRule=u32"
+embedded = "d6e86648ba5361c1942ac64061865ebd1231f73d94780f48893858098e12667e"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+

@@ -1,0 +1,166 @@
+# The matchit register (written by `uorust crate matchit@0.9.2`; do not edit): every body of
+# matchit's MIR at matchit 0.9.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 116
+translated = 0
+residue = 116
+
+[module.error]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.escape]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.params]
+bodies = 37
+translated = 0
+residue = 37
+
+[module.router]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.tree]
+bodies = 28
+translated = 0
+residue = 28
+
+[embedding]
+bodies = 116
+embedded = 116
+evaluable = 116
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Params<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Node<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Param<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: UnescapedRoute"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: error::InsertError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: tree::Node<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: InsertError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: escape::UnescapedRoute"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: NodeType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ParamsKind<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: escape::UnescapedRef<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UnescapedRef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: params::Param<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: params::Params<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: router::Router<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MatchError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MergeError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParamsIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::MergeError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: params::ParamsIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: router::Match<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Router<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::MatchError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: params::ParamsKind<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::UnsafeCell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::vec::Splice<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tree::InsertState<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tree::NodeType"
+bodies = 1

@@ -1,0 +1,83 @@
+# The num_cpus register (written by `uorust crate num_cpus@1.17.0`; do not edit): every body of
+# num_cpus's MIR at num_cpus 1.17.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 24
+translated = 0
+residue = 24
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.linux]
+bodies = 22
+translated = 0
+residue = 22
+
+[embedding]
+bodies = 24
+embedded = 24
+evaluable = 24
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Cgroup"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: linux::Subsys"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CgroupVersion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linux::Cgroup"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linux::MountInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc6: &std::sync::Once}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: linux::cgroups_num_cpus: num_cpus's MIR stops at mir::Operand::Constant: {alloc6: &std::sync::Once}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: linux::get_num_cpus: num_cpus's MIR stops at mir::TerminatorKind::Call: linux::cgroups_num_cpus: num_cpus's MIR stops at mir::Operand::Constant: {alloc6: &std::sync::Once}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: linux::get_num_physical_cpus: num_cpus's MIR stops at type outside the lift: std::fs::File"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: linux::load_cgroups: num_cpus's MIR stops at type outside the lift: P1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::cpu_set_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: linux::CgroupVersion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 1

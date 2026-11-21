@@ -1,0 +1,1218 @@
+[[fn]]
+path = "nom::number::<impl at src/number/mod.rs:22:10: 22:15>::fmt"
+kappa = "e0d243ac223192edf23ddd8e460b9819fd80958ebdcf51434e9f58f591465eaa"
+embedded = "048a5b437ceaa9cdc1f54e462a2a3e68cb3d56b45611a4cbfce1d9a8c061b56f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "nom::number::<impl at src/number/mod.rs:22:17: 22:26>::eq"
+kappa = "992ab95f8fce22e3d22a13118af14b128254d1fc205ef0a4c42c3431996405d5"
+embedded = "da5e8f7db026597bc687f998daa456d6c6083a9fc274918f93f1bd037ba9eca2"
+status = "residue"
+cause = "mir::Ty: Endianness"
+
+[[fn]]
+path = "nom::number::<impl at src/number/mod.rs:22:28: 22:30>::assert_fields_are_eq"
+kappa = "715881643092d5423343e804e82caa5549384b99b47df5f49c379480189abed0"
+embedded = "0918930548963fa8881a65e64ff3d061dd38f62af760bccb1d04beda28a4c4f4"
+status = "residue"
+cause = "mir::Ty: Endianness"
+
+[[fn]]
+path = "nom::number::<impl at src/number/mod.rs:22:32: 22:37>::clone"
+kappa = "985c418e9ceccb2905f7ed6c9d7123a4a5bd3d9dd4e99e85a689341d05c1a883"
+embedded = "c61ff8cbbb3078393e6653fd3b5355e5089cc89d9f4c3e8d9db440164aefcba0"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::BeUint::process"
+kappa = "278143905a4733e59571eb6babba8ca8fce36ce5730dc6c61c0d967c0a2d889e"
+at = "E=u32, I=u32, OM=u32, Uint=u32"
+embedded = "d044a7522bebfa899f0b6d8a35e55d257e6c184236a8d41ffb5adf94a929fa25"
+status = "residue"
+cause = "mir::Ty: u32<u32>"
+
+[[fn]]
+path = "nom::number::Float::process"
+kappa = "804b0e32913ca46987bdf24f47768b167ba8a5deeb393c011e1f693608e82d19"
+at = "E=u32, I=u32, O=u32, OM=u32"
+embedded = "86cef8ddc059fd170f09256166d567a29ef38ae72b750675ebb78f283621204d"
+status = "residue"
+cause = "mir::Ty: u32<u32>"
+
+[[fn]]
+path = "nom::number::LeUint::process"
+kappa = "b28d8b20272b20af39e89c3afef2a00e8c1e745b5f67fe63d561faf00eddc685"
+at = "E=u32, I=u32, OM=u32, Uint=u32"
+embedded = "aa5dc0afa9c0f59d821f8d0df2a1c63b5c8bcb480453f49b1c03cdf7210e0688"
+status = "residue"
+cause = "mir::Ty: u32<u32>"
+
+[[fn]]
+path = "nom::number::be_f32"
+kappa = "f6671fd5c573be995896d32dbc6c931cd29c7306090aeb2bd28d0d939e573a5a"
+at = "E=u32"
+embedded = "32c1596216d69c16ea2e0dd4528213167c0df823ee9c4aa73c57e2cc27328bb6"
+status = "residue"
+cause = "mir::Ty: internal::Map<number::BeUint<u32, u32>, fn(u32) -> f32 {core::f32::<impl f32>::from_bits}>"
+
+[[fn]]
+path = "nom::number::be_f64"
+kappa = "3678d0da221cc92edad80c0551864b0aad53c6300f16ce4ef809058e6129f8f0"
+at = "E=u32"
+embedded = "9781e5b7ebe4c820b084c39f7f98cef014debab482f6db710f4e07649a5a1745"
+status = "residue"
+cause = "mir::Ty: internal::Map<number::BeUint<u64, u32>, fn(u64) -> f64 {core::f64::<impl f64>::from_bits}>"
+
+[[fn]]
+path = "nom::number::be_i128"
+kappa = "688403228dcbb168bc54a690bfb0d0bded070f86f152d5fd78965e59e9667892"
+at = "E=u32"
+embedded = "80d67a34ac89f92c8bdea45b466369822500fa48944d9d2628d858cf10f6dd46"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u128, u32>"
+
+[[fn]]
+path = "nom::number::be_i16"
+kappa = "030f990cacbd19190e247c1269f89bb3d14ae1d05c99b7e45d92a0f27065e321"
+at = "E=u32"
+embedded = "1521de2b611ccf4f87d882a338f26df7b7b77de436ec1c551d6cc9936aa5b75b"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u16, u32>"
+
+[[fn]]
+path = "nom::number::be_i24"
+kappa = "b4f068854a4f470a1c47d9ac7a6fb662010f4f68c0dc20a812ca0ea26750a8ee"
+at = "E=u32"
+embedded = "370402ced6815490bef7f4a5250d847dc44ced8ef839412559cac6c1b21a17c1"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::be_i32"
+kappa = "0c6eb46040e3a167f5284a01c12e96aae159fd35626901debad5831f59d96f92"
+at = "E=u32"
+embedded = "f0d840a4c4a440598bc4aed3ae5c520934a18cdcd05f1f301adfd7105c44896c"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::be_i64"
+kappa = "1d3976f253d48f23124dc4f8113d35520086dc147e5446ccb76302eb4ebde8df"
+at = "E=u32"
+embedded = "d57f5013713eda70d1130b221e0d1b675444e9d2ccc2f74fa49f77608fd9d225"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u64, u32>"
+
+[[fn]]
+path = "nom::number::be_i8"
+kappa = "f6e4ab7a7e1092b98fdc18a4a21be99a85d5acb89f5ef93b5121c99f73084f2d"
+at = "E=u32"
+embedded = "8b784bc5ab25350edf52276662e70012dd100af49f6c7838994590bcb8c815d4"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u8, u32>"
+
+[[fn]]
+path = "nom::number::be_u128"
+kappa = "cd311a30a04462bd81afa52da9b2535673ae5151d1707f87795dc09d7abc3c12"
+at = "E=u32"
+embedded = "fa7c5bf6fc5c877f679967d57ddd172c3cf7fcc52078f56bcd7ffa4fd35cb788"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u128, u32>"
+
+[[fn]]
+path = "nom::number::be_u16"
+kappa = "516e86142ff3f4088a775be690a7d21aa6ed065e7f06b9b33979b0000fe42e7a"
+at = "E=u32"
+embedded = "b583fbda87e96590b1cb82ca0729aac5af63a686fca6ff4cf395752a4efe96a8"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u16, u32>"
+
+[[fn]]
+path = "nom::number::be_u24"
+kappa = "ab64c6a4cadd1b6072e1a87e74076e3b1ebdc2942c14d74ae9a042dbbd6baaf6"
+at = "E=u32"
+embedded = "b2610eb9226f2e431dd9a7d64478e571b18241bfe4acd506953315f07f4c195d"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::be_u32"
+kappa = "58d2e3ad4bc7e6b1ffe0f680e6f2a2c65c2516126d20f706a816de66796b4f9b"
+at = "E=u32"
+embedded = "c8ff2526036daaf6da3ace1b6b1f35d7a6e2fca6cb48a70da6f84b75a39c0374"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::be_u64"
+kappa = "807c129220e317561f19e262dfc72d9740d7795f55b40d60472b050254ef0d72"
+at = "E=u32"
+embedded = "de4f748b51281cf56c3c0c1f5fb155078db6617a2db5c562f92863398f5c4009"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u64, u32>"
+
+[[fn]]
+path = "nom::number::be_u8"
+kappa = "8398fb4162c597612f82ed42939c6d0a2f52f64b67d07ded164b5b22e4615e06"
+at = "E=u32"
+embedded = "fb0a1ae8e32e9d0f1716a1c29054f25328df1c47e8b2d4ec7d27bf0a423fec6a"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u8, u32>"
+
+[[fn]]
+path = "nom::number::be_uint"
+kappa = "d58365b347978ffe98eb93f6c1ff70c0a5c6292c3bd19402c7de614ff693a84e"
+at = "E=u32, Uint=u32"
+embedded = "389f3813f3faa9ace12f5e0ad022441aca689b8758316035bad6a36d556d4ac0"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::complete::be_f32"
+kappa = "90f4ecf704667faa8b6e213ffa172bd2bb4c407c0593a0e5f1bfbaaa2fe1d147"
+at = "E=u32, I=u32"
+embedded = "3bc93b8f46dc6206b37d01ad4a1369726e9e76cf431b0f41f23e9845d0db6eab"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "nom::number::complete::be_f64"
+kappa = "e430dc3be8bfb51dfef8bc7e727938842ba92d5e3d69fa90e6ac590bcb51667e"
+at = "E=u32, I=u32"
+embedded = "fa816f2ecf6ee64f1624ac1955e2a91e770ddb43b0c24eb62c727c42e970b09e"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "nom::number::complete::be_i128"
+kappa = "cf861bae83b92f0f8a2d2db10a1473d93bcfd79616affbd3002409623bf7cb70"
+at = "E=u32, I=u32"
+embedded = "fca286e4d7186509bfd35ae79c083bfda9f1cb281372130feaa57ef538ddd1b7"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_i16"
+kappa = "f2c3c21442e6a4b9cb09325fbbef7a43799e78b8bc4411b11cd7f1e2f11db400"
+at = "E=u32, I=u32"
+embedded = "28bbc34ecead1926f314ae5fc357bed3f72b78f004ad0f8b7e2d5b7194f70e31"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_i24"
+kappa = "8fdb882ed46b03f2d4f08f0f6cf9a4abb903db1fc33bf1383df51a349451a3ff"
+at = "E=u32, I=u32"
+embedded = "9cc18de51c40173883585ac7085bd57bb168c2d8159f9ab1ffa4556b9770dd7d"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_i32"
+kappa = "01ec2d9d5bc944e8e1afa691deff96955afc6c7058c67086fa302575d37465d6"
+at = "E=u32, I=u32"
+embedded = "ddaaa4b0b12c86176e792bb23172e30b01ed1381ea31648b4ce63f06e28dc7dd"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_i64"
+kappa = "5576e25da95d1369e7bc245f673197eb4488ab73cfc2e0ef1e911719ee63abf6"
+at = "E=u32, I=u32"
+embedded = "8a98ac62c8de8b2dd991bee85c0c314ec08f549235736035156539297dfe6838"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_i8"
+kappa = "51d2d7fec7cd47965b9faa97a488e02a4ffe28440197672f02ab06cc3b249ce8"
+at = "E=u32, I=u32"
+embedded = "50311ea18a5fcd84fb1962806064efe38807065dbb352cff12d029fd165411e3"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_u128"
+kappa = "766767bf12660dfa468f8201b9f4d263bdcfd02b2e7f56946cfc9f7b9c278622"
+at = "E=u32, I=u32"
+embedded = "cb3067f6dfaca06dcf60af36a3f514d6d6199bd48a982e81b713a30132d00f9c"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_u16"
+kappa = "327d9ec87d9a27beccaf7e48622c8381f4eb3bac63af218c8a28a89b4123474f"
+at = "E=u32, I=u32"
+embedded = "0c2b0222cb164f1e6b8035d6fb121ecfa37d03c617c8c903df84926c81833ca8"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_u24"
+kappa = "323ceaed00fb824e8214a958de6bf07ce89e267f3555031bc374bd652a62eece"
+at = "E=u32, I=u32"
+embedded = "625e34106d8a4da1d7cf3506cf80d03442db9ab1cccaf1f5ce1d2f3325e3c19c"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_u32"
+kappa = "11e9489a70fae02722312a006231514bf3e7333b1806a745b15f83518ebeae91"
+at = "E=u32, I=u32"
+embedded = "9e48bae328bf582eb1138d8fa943e35aea3fbaa16d79bc2337b420b6dc9060d5"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_u64"
+kappa = "7b232e4776b128f3d03febfd34f7704b7bc2279f1c504973a386e908fd901a5a"
+at = "E=u32, I=u32"
+embedded = "e737f051134569b846068a86a29be108805a07e0c5999febdfcfcbdb297f82c1"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_u8"
+kappa = "a406aca4ccec1f2318278d3742ba395742704e35da80bc0cdad6d76e8de8ca50"
+at = "E=u32, I=u32"
+embedded = "4c94339410e9752c6ea0d83095729710db74978fd738d78a0074d0c7c2385c24"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::be_uint"
+kappa = "fcb7c4b93d933a43d744498bcf683f39bc9236b44cec79af1e72de6ff6f29b7c"
+at = "E=u32, I=u32, Uint=u32"
+embedded = "c7ef6e32e44f74b8f4a8a6a6a6dde4b75c3f7b9472966d3bfaadd91807f088f1"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::double"
+kappa = "2840408b4fc57796085504ecf8958883ecb1f23a1f2ad841f24d4d3807473cea"
+at = "E=u32, T=u32"
+embedded = "14aec6688653ec0fce5a80af168d534d7e37f37ef096461d7767e0f4835ba8ec"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "nom::number::complete::f32"
+kappa = "121a53944d4f1fd4a3bf9db0ad6d3273901a2bcd078417fb22b9ebd02ba71848"
+at = "E=u32, I=u32"
+embedded = "23097c43a676428bff3ec95e9bcdbc7dea99f7f6ac2b15f1650418a4f06250d1"
+status = "residue"
+cause = "mir::Ty: u32>"
+
+[[fn]]
+path = "nom::number::complete::f64"
+kappa = "79a0debfe9ae75ea6446b96365bb172b1bbfc98daa25e2acc002e6cb2908f56e"
+at = "E=u32, I=u32"
+embedded = "75be4774a733ace887f89b7b58ec36244c64b7e99633001c345588e40957a91a"
+status = "residue"
+cause = "mir::Ty: u32>"
+
+[[fn]]
+path = "nom::number::complete::float"
+kappa = "8e5ae1ac53babb57892526ad8b4044525cd87152d53c72579bdeefdff430cd36"
+at = "E=u32, T=u32"
+embedded = "2e938b62179453f73e9218e1507a7ae4982afeda7dc30d1dc0762083301cea28"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "nom::number::complete::hex_u32"
+kappa = "1f4678cc3dd1d2ac31ef0bbdb42210b2bb690a4ece2713951e0088a0c9dc5a43"
+at = "E=u32, I=u32"
+embedded = "b9ac4962d40176239ee16ca1a24ef2211c759286bb1dddfd9768b9feabac9068"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::i128"
+kappa = "a84e2f11b3ac9f1458344a68eb9082a7064b8f6fdde5ebb7cca749db8a1785d0"
+embedded = "f3f11e14e95082481609064c956879272bceebda9ab380bd168e210e5f5f7a4d"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::i16"
+kappa = "b9e0bff617b1d7aca4960bab99631a062668e1f6b0c3dc928743440982a09f6a"
+embedded = "3071d98d75c6c418b6bc4bea71ff92a7ffbe676a3036ceab8c12c7f0020d1b42"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::i24"
+kappa = "bb987950bfc6c93174f3494f6a94eaf3a4daf63dbf877bb409bcc2a819e36507"
+embedded = "8cb4030de87efb56bb8ad96317e10005d6af7586799131752888d610211657a7"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::i32"
+kappa = "5e634f583acf642e541464f1cb53cb764c06e152bff3d2e7a26dcfa9438fa38a"
+embedded = "efa52e337f2a2d220cb21c8a2bbee995a55d92e6d3c6e44946f298a0356f17c6"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::i64"
+kappa = "9dd29d617c0e9ee85e16fd3b631e56dc82c51c7e13d4dd863b3033df60de589e"
+embedded = "5debd8d41b1b74f937de86e21d857e3c25bd96dfaa8caed33233103df9331982"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::i8"
+kappa = "59633c4cfd4dd1c6300454cfd3643f0ad371caa5ac17bac3abad9457e85bd346"
+at = "E=u32, I=u32"
+embedded = "2121ec7f3fd34ccba2f50f4e90a2d363eeff819acf1b5e7bd656ccec3e1ebaf7"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_f32"
+kappa = "c06d0c6c8d789d48b2093b249660976cf78c05bfc85bd50f2c0b180aa2fa3bc9"
+at = "E=u32, I=u32"
+embedded = "201984ee2faff2ccf66039121b16359f7a6ebe54500e78e15a18ee3b78044c3f"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "nom::number::complete::le_f64"
+kappa = "df7489fbe932206a512fea7de204ad32394c0fd0fd9b8f46748d5520ab70b230"
+at = "E=u32, I=u32"
+embedded = "2c81bb6e7ff3b5cf51464c3d4049be14e2eee341257bd234bd530ef0e3a68fb0"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "nom::number::complete::le_i128"
+kappa = "1c1050450d30b106983f4f631c6b3b8faec95495952f318af0b0033315036fdb"
+at = "E=u32, I=u32"
+embedded = "e3b5c8b5b17679cfceb98af956be82cefe87ed630e8e37cb7635ecc587678ac8"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_i16"
+kappa = "de54b5a3bd700e2f4fb2af8836e633641737f88b075151b81cfc939d951d27b1"
+at = "E=u32, I=u32"
+embedded = "6671b6525a2bb593c1e832dab081e650caef3438547d9768d3d8672209b3bae4"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_i24"
+kappa = "2ec6abe1028b1e3d64733369ad2e720bacc8400f0e92b0ef8aa930751941eced"
+at = "E=u32, I=u32"
+embedded = "646b93ed4107fc710ec1c8b01b91cb33e99b2b04d71ba3176530253d8de64508"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_i32"
+kappa = "da6a48b3ef79db61510f4fcfb39e3df74ba31858d156fb35c6c430beeb660815"
+at = "E=u32, I=u32"
+embedded = "28cfd8681a1a41985b973c9017ec30c470f9001b0552a17b7207cb26ea89f9fd"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_i64"
+kappa = "66f1673de379b67b0b1b6c831a407ec08def86d1d9406868d438585f899e55f2"
+at = "E=u32, I=u32"
+embedded = "77966de6a99286761be3db0678129959bc78867e8cbec7d2562eab443ef4593b"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_i8"
+kappa = "030ccc4be92514e9501d26d5150b33473e2ba7cb364f2854204679d83b34ce50"
+at = "E=u32, I=u32"
+embedded = "72264809dd1a96c523a80e0a4a1c632f79ca07e605ac55b228b28ac70881157e"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_u128"
+kappa = "a2cf50db98ca31cd834da987db6fa98d4508b119eab2a63d3a42d47f6a2eb9bf"
+at = "E=u32, I=u32"
+embedded = "7ee40326df7199bda040e0fd895c038a5bf7c686d1f254e9977d6d9b2a25e02c"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_u16"
+kappa = "4ffb77241e595ccaeaeaba6ad2828a5e26c1610b656eb7a86f89461fe376a050"
+at = "E=u32, I=u32"
+embedded = "bda0f8f7f2c29cef5f817bfaa4e041bc060da2a0d7c4913cc52b05dbe2a2b507"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_u24"
+kappa = "641a65b06505f6a5d571ac009727eee7c3a0c8877ba2c953df75cdd6fde9165d"
+at = "E=u32, I=u32"
+embedded = "f0557c1282925bad9a5f51e2f91454e36ae8879848db7b40c0f0d2bcb12413df"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_u32"
+kappa = "1572f1f5b6b8c449a6cbd10f6c660706bc6f80a286de22cb51d8d75d656506b3"
+at = "E=u32, I=u32"
+embedded = "c2ef1d5574e7b6a9058993ac2307f4e2bea07d83a1ff37cd1ac3623a7adfa68c"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_u64"
+kappa = "82317df591388f225cbad97ebb7d1cd01829ead69258c4b2574765e67ab3f758"
+at = "E=u32, I=u32"
+embedded = "db62f377f75d2eea9474777ee9957affd0aabacf20f538c209a425628059f71a"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_u8"
+kappa = "555f51b3f18b37cf095ecad84d3d8f12094c76412e7e0c1ff32c7416cac86339"
+at = "E=u32, I=u32"
+embedded = "657f020c59ad1e26485c7bf87d2df94983c0759ce0fa92f45129619819f5474b"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::le_uint"
+kappa = "0901f4cfd7ca1828cb4129b3253547dbede2d5aa2e12e4871c3d1c805be9908c"
+at = "E=u32, I=u32, Uint=u32"
+embedded = "276b1d8e1bc648cc7be0238310e0af087ca5250deb747e73c697611752663083"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::recognize_float"
+kappa = "006a281a4ac52f131045846e469321704e63592a8a15559b908a12950c9f1a97"
+at = "E=u32, T=u32"
+embedded = "58edff6dcbb424a3d9b3ba42352bdeefee6267024118e967120da4b87cb2496d"
+blocked = ["Rvalue::Aggregate"]
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::recognize_float_or_exceptions"
+kappa = "da73eb4d0c63171fbac0a09ebdc105b5947f423ba6f1ce12d86a7e59a6413153"
+at = "E=u32, T=u32"
+embedded = "c3f3349392f868354eff6add1b2762bafd592bc8e4f41b00b7e61bdd6f02a965"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::recognize_float_parts"
+kappa = "64353da7127fc690e7e2ea18375a33df9f4a67bb0e675fbb4f1caac30142add0"
+at = "E=u32, T=u32"
+embedded = "8e8e06fda6935a734a9154ffc11af7a45dec0eb7250a7b4519849b6ce76edd3e"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::complete::u128"
+kappa = "8b83713500bf9b1f72efc5bf1d772066092a0e726b98298d9301ce6798855478"
+embedded = "a2d541fff5eda6b3fbaabde9b6d5f08b6d7356ac678dfc83725902bb63e13eeb"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::u16"
+kappa = "5765f95b12002287d0b97774811e08f2bd876ce82b4ea659d60040e0a13e5e7b"
+embedded = "7dfdee3d5d2c14358a263cc280038f1388686fa48e079c47c0a485657ac12e3e"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::u24"
+kappa = "69ae418b42c01ead41dbe89ad36ddf77fd9ea2aff6a83e44cc6791aa471feb13"
+embedded = "3f4dc84ad8b6c087f617da9ecb17df5df72ddf43bb5518c5b1a4fddc73f2a8d9"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::u32"
+kappa = "a9937141181d45423c8e6fba913e40687b72a32ee14aa4e0d68b32a0ba28404d"
+embedded = "d87e26c47dc67280b878fbd2c2bca6e14a0b3a330169885d9652dcc6c4ea822c"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::u64"
+kappa = "b9fc864b2566ccd4847bdf206ba4b235fe9b3297d421db58f09d7bb8741ab4bd"
+embedded = "31e1f0882d95b78ef2bbde0c8a53b7d052bbfcc16dc8fe29b7c486546904ca27"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::complete::u8"
+kappa = "17ae6ad9ec85f87a4c2f1b63609770a627254060bc9932b40af60dc5afa04639"
+at = "E=u32, I=u32"
+embedded = "867abb3dc7654039fe4b47bc8568811a40f764facfd1d88aa379955a1fc6399a"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::double"
+kappa = "8cfdb95d1829ffed78d0b6e13f51d3ab890f2c3a51e27edbf5442619dbc48cc6"
+at = "E=u32"
+embedded = "c1220980def1304656e9f9d0e5d3041628b3bb788bdd4e950e26f3293578d62e"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "nom::number::f32"
+kappa = "95f1bb16549dfdaf2cbc06ca33fb657f150746df5705baa423805985dd7d4dbb"
+at = "E=u32, I=u32"
+embedded = "4eec21878e62cac67ffdec68633368773738fd87be34ca1739f04a99e21887e6"
+status = "residue"
+cause = "mir::Ty: internal::Either<internal::Map<number::BeUint<u32, u32>, fn(u32) -> f32 {core::f32::<impl f32>::from_bits}>, internal::Map<number::LeUint<u32, u32>, fn(u32) -> f32 {core::f32::<impl f32>::from_bits}>>"
+
+[[fn]]
+path = "nom::number::f64"
+kappa = "00e4d91b7ccd2844d9660af307764e23e096cdffcb83de5d289339fa90e0f091"
+at = "E=u32, I=u32"
+embedded = "1b39f531701dda6a261f7c71846671a9da980628b478d0537762001e451af15b"
+status = "residue"
+cause = "mir::Ty: internal::Either<internal::Map<number::BeUint<u64, u32>, fn(u64) -> f64 {core::f64::<impl f64>::from_bits}>, internal::Map<number::LeUint<u64, u32>, fn(u64) -> f64 {core::f64::<impl f64>::from_bits}>>"
+
+[[fn]]
+path = "nom::number::float"
+kappa = "3649dba3b063d4a82e2cd27e2c88943cb4f9cc673f950b2915f6d0cd5280a7b9"
+at = "E=u32"
+embedded = "46e9a01c44d7dabbef964ad381b362639e24637d3c8f5b064f1cf0282cc32041"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "nom::number::i128"
+kappa = "82346748849ee7e6d9e4cc921c2ff558c8e70b2c2109224f736bbc831c8e8722"
+at = "E=u32, I=u32"
+embedded = "9de5ac89dd5c91f7f7adc3fd43c41a3edaa3680d5293c6173ab7c23fd5b8a7ed"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u128, u32>"
+
+[[fn]]
+path = "nom::number::i16"
+kappa = "482af1657b7ff41569a29c2c7767090667cecbf97d11d307a0062e0771bf1f01"
+at = "E=u32, I=u32"
+embedded = "c5f0a6cbe7d7391efdb596261fae018a2ba695ff42c07ca57212f40e8fb963be"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u16, u32>"
+
+[[fn]]
+path = "nom::number::i24"
+kappa = "f7b38dc7f22ed01d870f8d914d144461a1410f0cfdf2bfc05ab21ea45d8b3642"
+at = "E=u32, I=u32"
+embedded = "0e49e8baa1dad2dc4b5cd705f1f6c291c7474e854aa1ad145a82e5ef5e22aba6"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::i32"
+kappa = "8073026fab3e8da4cc84c6cbfe7c075753ddcb345c6491f7aac63ba1f9e6fb6a"
+at = "E=u32, I=u32"
+embedded = "50c47f1df5d869239084252f28a1f9b10b5dab733945a8d2a10489fbf153aacb"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::i64"
+kappa = "70196bd4a0981eb7170bd2c3f9339ade96ef600539c83e63c9018722315142af"
+at = "E=u32, I=u32"
+embedded = "bbf853a7a5c2743430c076892eedeb0877209a01cc8837ca8306197aaae738c7"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u64, u32>"
+
+[[fn]]
+path = "nom::number::i8"
+kappa = "e8a254d308ae5cfb59d8c430255c82e8b6f890a1cee9fff8e9fe873604f7e642"
+at = "E=u32"
+embedded = "f822f6c870f7e043eee69f086236989c21019f47614f149e1f4209f4257e5f59"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u8, u32>"
+
+[[fn]]
+path = "nom::number::le_f32"
+kappa = "31246915462fdd0526fe80edc7d9b0ae21d7d704f333bcbe29d7b0fcb35b2a06"
+at = "E=u32"
+embedded = "7592f8dabf79641fafc825d35a7b69ef40286a744ed81cdaa872f8bd9dbcf554"
+status = "residue"
+cause = "mir::Ty: internal::Map<number::LeUint<u32, u32>, fn(u32) -> f32 {core::f32::<impl f32>::from_bits}>"
+
+[[fn]]
+path = "nom::number::le_f64"
+kappa = "018943877899b8bb661d14bc2a2b0e247553906257064f80e1d10b37a1853d75"
+at = "E=u32"
+embedded = "bac4f8b40176201f90c97cf286d4d26017f711f414154e4883ab3cc61e4c2e12"
+status = "residue"
+cause = "mir::Ty: internal::Map<number::LeUint<u64, u32>, fn(u64) -> f64 {core::f64::<impl f64>::from_bits}>"
+
+[[fn]]
+path = "nom::number::le_i128"
+kappa = "f0d8ea5bb513edf0d6b62de8f2a5497e67f44451af4b3b5a9395eb78410db762"
+at = "E=u32"
+embedded = "633dc8ea83a555344436b533b892814985b271c062c3f0c2e47b422ba816a485"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u128, u32>"
+
+[[fn]]
+path = "nom::number::le_i16"
+kappa = "89e7875b9ea0c57aa37fb24f8bdcf8b25f8d51828f72ffb4e394fa2bf5183919"
+at = "E=u32"
+embedded = "1227e676a57773be349582db5b8c79470181c152b842ae280946c82d006e62fa"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u16, u32>"
+
+[[fn]]
+path = "nom::number::le_i24"
+kappa = "e22d49d9e5e3be9e154d9117d68a81ad1b7a8db8145050da19f05904db356cb9"
+at = "E=u32"
+embedded = "6e9c44efb3ee9e8e15d590f26529071f94f9378d146a7f26b78e56cb1e8a8863"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::le_i32"
+kappa = "1c31b004819f7e7182936b0130935e10e1017c078f77ed3a726b68781d4ad7f0"
+at = "E=u32"
+embedded = "c316559ad87cef5488381c1bcf1350803f230d819a725dcc4ce62b763bcd81c4"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::le_i64"
+kappa = "fa73f346b4dca3045bc1ede7b5c47983c7e3b2a2b025093a31ad4cb7389dd5ab"
+at = "E=u32"
+embedded = "1bcdaa6b063a186afcfc94ab62270fbecd1962b2080c9919a10d2dccf9462654"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u64, u32>"
+
+[[fn]]
+path = "nom::number::le_i8"
+kappa = "602dc325a2ca3de6c95c9d154ebbeb0b8ef82bdc154c01dc0b41c86ce710fc86"
+at = "E=u32"
+embedded = "93972572944e0e55712e2b0586ad82893dc93df9b199b2336d7df28df0b1c9fa"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u8, u32>"
+
+[[fn]]
+path = "nom::number::le_u128"
+kappa = "44ae13fb2dd96f7276786d48b74456d0e25cb2cb7e3a3ee3d521e6b4ff9ba725"
+at = "E=u32"
+embedded = "007c2b0ecc1e1e08c6472216ac1ccf6415779518db71e988adca7ce1cd918c8a"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u128, u32>"
+
+[[fn]]
+path = "nom::number::le_u16"
+kappa = "443ae61295367fb16a8ebdb747823d3c762b3599bcf46b94edebbe8f4e39b9da"
+at = "E=u32"
+embedded = "53046c6c1008a6e235c517eeeccc41408a9c2995a990b52718e72fd0708c592c"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u16, u32>"
+
+[[fn]]
+path = "nom::number::le_u24"
+kappa = "38774d20f05567794401054aaa9b96d45e7eb698c7a1f9dd4d1ee5ca7e9d163e"
+at = "E=u32"
+embedded = "3903f062d2ca3ca461c0073955014b76fbd7442cf4615d74c03ebb45325cee00"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::le_u32"
+kappa = "1e79046b2f676584b9de2010c4d6429e2662fbe81c4251f399371b82d8563069"
+at = "E=u32"
+embedded = "98c9cd104d5173738a49027ae671beea47c9b256f6c2e224396954af8c3d8801"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::le_u64"
+kappa = "5aa0c1d271e1eb78b10877cc394ba84aa34d8590ca50fbbbf6b3a20c7796cebb"
+at = "E=u32"
+embedded = "eb5caa2246f740ef3dd4e972cd858339199c6c518b2dfe306e56039de2883d73"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u64, u32>"
+
+[[fn]]
+path = "nom::number::le_u8"
+kappa = "e7786c51f1158f4b19fc394e5344aad1b24207ac2bd5b5897d20f4880975d6f3"
+at = "E=u32"
+embedded = "d3047b75c39ade1d319955a532dfe57c81d561a6577c330c84d3e8039db58733"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u8, u32>"
+
+[[fn]]
+path = "nom::number::le_uint"
+kappa = "94180fa8542019fa5305eb3b69df1024a70eba4c35826ffa02781af4dc0deb95"
+at = "E=u32, Uint=u32"
+embedded = "fcc1c850c7d6d50780fc9d3cc2fb95dcc363930a58c2261909f47224e88dba29"
+status = "residue"
+cause = "mir::Ty: number::LeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::recognize_float"
+kappa = "1a3a2dbb16dec016df153e172881fe70a26f521dce4423b65462abf8281a326f"
+at = "E=u32"
+embedded = "54c231c786c6ac5bdfabd5949102c0b516d52dcd06d5e19b9c4673b08800d923"
+status = "residue"
+cause = "mir::Ty: character::Char<u32>"
+
+[[fn]]
+path = "nom::number::recognize_float_or_exceptions"
+kappa = "499d79bbc8f880f3ab0634ad560777ecd0068511dc915bad6704827dfd4c434a"
+at = "E=u32"
+embedded = "e5b8c61c5eddf88ab9b1ec142d0bd8d9a78aff7cbf63a703f1dafeed3a38c00d"
+status = "residue"
+cause = "mir::Ty: character::Char<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_f32"
+kappa = "ed3fc3cd6b9266314d781d8369fa0f1f6c0897ddd3350fa82d5cf51af559dd15"
+at = "E=u32, I=u32"
+embedded = "0e4b565957bb4e75527e2cf6f72b69465515d12eb88662fa9b7c1b60e14e3095"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "nom::number::streaming::be_f64"
+kappa = "d6ad148c29fefb09fd4ff0389ad246d574445a06c1d1756404bd40a528e36ff1"
+at = "E=u32, I=u32"
+embedded = "5449ddadcebfbf23062321890723288dac95e8198fc376b88557d323ef0be1e5"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "nom::number::streaming::be_i128"
+kappa = "4f5f029f07c3b895382faefa351a7053f712eb5dffdbe832665c264669399f6e"
+at = "E=u32, I=u32"
+embedded = "29b47d7ca20b63d6e00b2b6f6b1327aad39f1e6cea0bf765bc4201da73aad8bb"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_i16"
+kappa = "eea2e2fbaed6ed0983832aa79e2d5d78dc19bdefe64c86b9dd80722cb818f274"
+at = "E=u32, I=u32"
+embedded = "11fb4aee9408beb2679c5541a8d7eb559767656b71ab4c8d7ecb55a363ed0788"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_i24"
+kappa = "6c6f8300db8a371bb8e62a94d3a7f6bf31df8a85d173a011e20c93d76aec652b"
+at = "E=u32, I=u32"
+embedded = "add40aad6bf08e2807db55b471ccad025e15cb9560482fb44ee6f117a8729892"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_i32"
+kappa = "554af64186442c98fe4ca2e797dee92c0f743d7a838c79ea9446465f1f4184a8"
+at = "E=u32, I=u32"
+embedded = "694e74bd03ec4329a30d51e4efb6a225458ac286d13c095890806a03a8f180c1"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_i64"
+kappa = "a291c4d7d882eb66287b612ef60bb32c0d6cc8ca3a47ebfb86a3d4155426554c"
+at = "E=u32, I=u32"
+embedded = "6dd802bae20feea002ff3b1346ca60a24d744a14b62f33205d922826d822e30f"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_i8"
+kappa = "557f74a803cd5e09831588225b610c7e2ecfc3b9f0fd06b5ff54db4a15bfcda5"
+at = "E=u32, I=u32"
+embedded = "c51bd9731e8017db90bff0fe57ab2d1bc93d00f76a4dce1fad2f75d4d54a2e83"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_u128"
+kappa = "36dbca0443e2651b322ce5e60aab8761eec0c74e65794345a244931e3369bf89"
+at = "E=u32, I=u32"
+embedded = "3848333cb8b700df13f938d870a9edb22e6120901c221e568b38e85e22d0dc36"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_u16"
+kappa = "4173f727e1796e4a7bcd836c7b4e6849ae00479cad6685c7852341a6d0a63e81"
+at = "E=u32, I=u32"
+embedded = "65fed0c02fb720c472f13901f94009224ca4663d8d755c5f69b291129245215c"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_u24"
+kappa = "0e9f56f006ea5def662905364254dfbd75a0a87ce27a4a50b2fa4e5841099706"
+at = "E=u32, I=u32"
+embedded = "14ef4f838f8c1897c3b7591d710cf66220e3fd4844b8e543dd07213a6a41d8d0"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_u32"
+kappa = "774856ae95801e00aa5f16d03433265e61659d69f4fae5d8f23980f988460b42"
+at = "E=u32, I=u32"
+embedded = "4ee28b428ca655e37e34b773287ffdcbd301a0fb4babcc186e4ac9d3a28606b9"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_u64"
+kappa = "b712485e02794e4856b5af8ad7f3b06412e09d80eceaad435315b34ea34ad618"
+at = "E=u32, I=u32"
+embedded = "5a1981560505fc14f07fc601d2fccf7f547b0e08916e4b610e9a78a49e89a583"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_u8"
+kappa = "b13b014e3439282021cad42e130bd941a27f8cb110610c44546740280fb14ba8"
+at = "E=u32, I=u32"
+embedded = "0c602d627508c3190fac3cab1ee976d05d74461d6cda6ab43ffdb7a004c021d2"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::be_uint"
+kappa = "67042bad20bcf64c8705874133da885b796a4413b5cb7fbc6d8472effee5100f"
+at = "E=u32, I=u32, Uint=u32"
+embedded = "94c082c37da81ccb9d00afd9c8bf2a6c80b5a03ebe827ebfd36015ee492ca20e"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::double"
+kappa = "da9d006e01304523e56be44852711fcaf1c7fb10891e6eefa778a51854415551"
+at = "E=u32, T=u32"
+embedded = "16c19f922bd75c04b41b03bf3488d187e7bbc1d77047db4c765d9d77f2d35f54"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "nom::number::streaming::f32"
+kappa = "52e8a30863f8ae4a5d53e2c9acee677ef19c9cceb0bf1944fe51c6435fe28bfa"
+at = "E=u32, I=u32"
+embedded = "04c1519a259b1845ab335b731721e9b45a84900927951294d4daffd19a1282c4"
+status = "residue"
+cause = "mir::Ty: u32>"
+
+[[fn]]
+path = "nom::number::streaming::f64"
+kappa = "f5d072727bf9523a3b8e16f9e1584ce552c38223259960ba67acc4ff552c50b0"
+at = "E=u32, I=u32"
+embedded = "7cb3d19a357c59f57e1c0e32384ba18c89de3bbde9f8d49d93c98bfdf0ed107e"
+status = "residue"
+cause = "mir::Ty: u32>"
+
+[[fn]]
+path = "nom::number::streaming::float"
+kappa = "4a250c33b9eb0c6078fc6efc7135b3102c8ceca5ec4422e771e4ef8d6195f8fe"
+at = "E=u32, T=u32"
+embedded = "09dcb48a243736112ee6b2a466456953d215c118c08d804187a9b5b78f44bdb8"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "nom::number::streaming::hex_u32"
+kappa = "9b76d652cfde29eb65f8501afa53cb63832541ec9b3f249afdbd8c8a1fa774be"
+at = "E=u32, I=u32"
+embedded = "7e2a5400c5e7ef36f7ae53cf89d020846c6d6470855750b2ea5c9e4d703632a2"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::i128"
+kappa = "75fa6a6e37d30a25df3aea975536f44df02e4f63322481beef534645d04681fc"
+embedded = "37cfba78c546f7848aa41579ea8c7d36c0ff0eec514a047616cbaf13c1a4e71c"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::i16"
+kappa = "86a2b0ab9313b8b22f49e4dd50d4e069e662a67a78474bfc8ef2eaf8324cd339"
+embedded = "71fa9ced4935b0d4a5328dfb3d05c26a0ac746f3a1622261ebc2cd192667ac96"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::i24"
+kappa = "e3d43ce08745ad9060be7bf42e66ae6ff8987f58e47392bcc8657616c31cdaa8"
+embedded = "140b2bf0e67303c865e6aa18ef720e4d0466ea094fb2e5418651889887d1e20e"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::i32"
+kappa = "fef4668193268327c98f2f9c90c608003c00db416be93c9940d6c37f66ddae22"
+embedded = "fa38c94652d741504009ccf9bf14181c4a75ef0d65a84604fef137c050e92b3f"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::i64"
+kappa = "ad521891025ba2f3bb78a2fe6b16194be105717dbcbe05f8ecad4ace7379b7f9"
+embedded = "448e9b6fc062f40070bc184b2c9019f126d94ff96150be32efba6b0eaa7e3a62"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::i8"
+kappa = "760a52157cb7e2fb06f0b4c0a4142613db3db639ff4ff30ce1ea543ca66340db"
+at = "E=u32, I=u32"
+embedded = "6b729ad62163d0f6c18721d236b6a517d85ee698ce97e89577e64253614222f3"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_f32"
+kappa = "f3115caeac668435a910543e341477ada204399f0166280d73c66c28b42c8b46"
+at = "E=u32, I=u32"
+embedded = "4f0c209bed7e5dc2f97faa765a371f7585bffa0246ea07ec54adfaaa6deecf3d"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "nom::number::streaming::le_f64"
+kappa = "bb317b989713468ad54bd71d438cc8abaf72c1df7bc5163ecb5ee816a5dba2d6"
+at = "E=u32, I=u32"
+embedded = "b2062230b620615183b661b2b8bdfa7d830d901ac6e6800912071fa87ab5a131"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "nom::number::streaming::le_i128"
+kappa = "7e384f2ed4187237a78bbe8839c1678409c722e11def199197cba9cf5aa900a8"
+at = "E=u32, I=u32"
+embedded = "20f5d2f7c451264bb1c510836aa6aeca5e835e9ebe78656188e6b3ea29e735e0"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_i16"
+kappa = "4d7b0b4f2521b8daafe171bfeb8d9d6a50d909fffe47803b8cbabe07022a5024"
+at = "E=u32, I=u32"
+embedded = "b3839b6cdd72125dce0a81ce82f87951f923f6ddbb69c22d01846c31f825363b"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_i24"
+kappa = "936f0541bfcb7f2b284b828a8f7c030a5da2029be19f8eef417b0862dbc9b4e3"
+at = "E=u32, I=u32"
+embedded = "afa150c4991076d170923d6f051c656cadeda269bdbdf32e4e081c9075f15d1e"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_i32"
+kappa = "5b89475f294adfec825ea6a6354fc71b9f3f4104ca3e33139859f04ba7727bcf"
+at = "E=u32, I=u32"
+embedded = "ec74f8165e5c6ae5003b9128946d0b95849359c683d71bb3a83b25982f8e810f"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_i64"
+kappa = "fdba982951b97dfd16e674396bc3762a5e5b4f95ba0a57a54ba5e3a663fe3471"
+at = "E=u32, I=u32"
+embedded = "6dfe94983e83d5f20c82fb36fde9bdb96a2b86fd743f091f8a8e0e52b1786abd"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_i8"
+kappa = "7386ec8469f8895ae663fed742bb2892a70bf8d652499524188af9f8464ad612"
+at = "E=u32, I=u32"
+embedded = "f4e55eedf80645f0fab673b41aa4c7fd84a3358d832e621534d58cdd1943cca0"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_u128"
+kappa = "ff59a2dbaa0f62bb586d66dfb1ec533068f740a57551df7edb11106462ce7668"
+at = "E=u32, I=u32"
+embedded = "34b3033f011c82d836d9aa053f6e54d8e4327aeea011e0c43d9e0bad660225c3"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_u16"
+kappa = "a64ef57a111963ba8a7085599a2c7e18c99a2df91e28501a0f1159a148a9af2a"
+at = "E=u32, I=u32"
+embedded = "d0de25a377896a4fd1acf809705d44d2f751c9d347945465f4ba848a752df4fd"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_u24"
+kappa = "2e92d9d27d4ae397b9fac44a0cdd50a9028272d6b1dbb1dafa1bb8f29c5f3a97"
+at = "E=u32, I=u32"
+embedded = "d98bf5d58bf16ab11dd74fd7fc9821d7ed72b49c1f99b502dc6e51d764047aef"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_u32"
+kappa = "c7135348230751631715e891297741c83acf96ef9853571daca87035054ad6e2"
+at = "E=u32, I=u32"
+embedded = "1ea04e90eb85f2082463e5c4a02bc0f75ac2e251e12f12b8871c65a0bace8436"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_u64"
+kappa = "33dd95060b2b561cd867621a7fd1d4643877c714afaa39daddbd5e7cb9b6dcc0"
+at = "E=u32, I=u32"
+embedded = "dabce2009d2815f45f2bc0fca0b83e50564ab37571f1cbf345871ebf2d438b17"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_u8"
+kappa = "ca622a80c56e72fb05326abe02512dd3b415b7aae2cbe6e5f93850e54db0d2c8"
+at = "E=u32, I=u32"
+embedded = "527a9daf62e3cf8f3e5fcff4086af26cade8c73e2974990d6e4124eee0c19511"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::le_uint"
+kappa = "d22d6f9cd0e42314b4220cfed42e44315e5733aa53867ec5c1e990a994893c64"
+at = "E=u32, I=u32, Uint=u32"
+embedded = "42e04a8a0fdfaed4e71f9c773337129c038c2aa915e66b22597327c06201de23"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::recognize_float"
+kappa = "126d7ebf1062e0de62a96af1527a27adf04e740f55ccd256ee2d37829e87b96f"
+at = "E=u32, T=u32"
+embedded = "72ccebb08c2fbaae9b92149b3841a029752ab164531b3d612fe4d0a33e6d6aaa"
+blocked = ["Rvalue::Aggregate"]
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::recognize_float_or_exceptions"
+kappa = "6b9d864b47e19651fcd7a80bcb4736f338d51de630a90f611b5031281751f29f"
+at = "E=u32, T=u32"
+embedded = "e3568cedd805054cd7d95573164603be1b93db8268dd14d5d41baab3faa848cb"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::recognize_float_parts"
+kappa = "f9479b460496b9ae4ab889fe7c21b443069696644c38cea7658a620d714515bb"
+at = "E=u32, T=u32"
+embedded = "5df2bd62196f80510aa803e06c7e5e85286b7addda9f33506901a28de49d76f7"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::streaming::u128"
+kappa = "2c1046006936b554b11f5c91a5c0988601025974490bff6ae8edd216fc1f934e"
+embedded = "5ae90db8a7181c2b2f2a756bf3f3b1609a2dd33d990eadaba8d06f743312189e"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::u16"
+kappa = "ec05e6c979d7892596d3734457df3ef0a6751ee19cf90579984cbdf135682ab3"
+embedded = "bd53e1fcd2edbc7df2274edd03f8d1bc5a228ee845b8948eb4df3c92e69f4126"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::u24"
+kappa = "a4dcd928e1d0ffd371d41d8e53d3214ab059781d2be0f9afcda2bea9d7531ac8"
+embedded = "fa3d2b1e55aa098577af16773cf2fdac18f10c315483507b3b9b3e6b23674bbf"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::u32"
+kappa = "acb0aadf5bece7a4d91a555969491ca2174f1b232035de7ecf0f75852eaf428d"
+embedded = "6d68167eeda8f0f4ff24baf73982a607efbbf705027821f3e6a564c97f73933a"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::u64"
+kappa = "699592f9645b65312cd15969f7210cbb1686d0df13d1dd17a5ac298a5d9989cc"
+embedded = "57fe4c71964892e51d84c3033990b94cda6d074ebbd8cf9406abeccdc3aa7f2a"
+status = "residue"
+cause = "mir::Ty: number::Endianness"
+
+[[fn]]
+path = "nom::number::streaming::u8"
+kappa = "2ed286f71296abfced98b125c977fd46b1bce127c96feefc6a680ad8c980a0c7"
+at = "E=u32, I=u32"
+embedded = "529ece922e2ac46c2411ff7e32f9f257e591b95e491d9d5ffc911628e620610f"
+status = "residue"
+cause = "mir::Ty: internal::Err<u32>"
+
+[[fn]]
+path = "nom::number::u128"
+kappa = "e9b035f0d9b4c0c2bba2bce7cf5f0ef55e02d382d72998cc9e2f12806d5b2680"
+at = "E=u32, I=u32"
+embedded = "811983ee412d79019d4f9a28df6a80241a2d5254437646b9c719084a6f29a3f0"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u128, u32>"
+
+[[fn]]
+path = "nom::number::u16"
+kappa = "35009597c3eb90add9543adfe48c854d3322729867b02e0bdc06f08d43b00ab7"
+at = "E=u32, I=u32"
+embedded = "3d217b3ee0d440f36bed817eb21ec780c39fc89d35af6d2b81201394c3cecf66"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u16, u32>"
+
+[[fn]]
+path = "nom::number::u24"
+kappa = "37757a8846bd768fbedece384cd0498b6124c912dc0b8b5edebdf3acb91be461"
+at = "E=u32, I=u32"
+embedded = "ec47576460d893aae92e8393901adbc91b4602701763bce3cba7dc6a9fb0c168"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::u32"
+kappa = "ddd4bb89b2289ce96726e6301fe3aebd08e988c4cbf56011b4e33366fcfc16df"
+at = "E=u32, I=u32"
+embedded = "9d5b77c69b1f51e6c55a57b6c819c0525946da4aa10e2cf5398fbe5068d69922"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u32, u32>"
+
+[[fn]]
+path = "nom::number::u64"
+kappa = "354757d50e7517b4ec391ad7cc7117e5d48938cf7aa187a9e977205a6cabe2b9"
+at = "E=u32, I=u32"
+embedded = "95fe3a1baf0223ff0789d5e5b9fba4d85ed5c03f2cf3150c93713379fcc5ed40"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u64, u32>"
+
+[[fn]]
+path = "nom::number::u8"
+kappa = "7c74a8453b525b2f1ac59bf7c8caea0098997c5028239d1ad26c2d34ab7bded4"
+at = "E=u32"
+embedded = "982a54546080bf4c072331ef65b3740053a09659655d26066bb446496dd07871"
+status = "residue"
+cause = "mir::Ty: number::BeUint<u8, u32>"
+

@@ -1,0 +1,199 @@
+# The zune-core register (written by `uorust crate zune-core@0.5.3`; do not edit): every body of
+# zune-core's MIR at zune-core 0.5.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 244
+translated = 0
+residue = 244
+
+[module.bit_depth]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.bytestream]
+bodies = 112
+translated = 0
+residue = 112
+
+[module.colorspace]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.log]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.options]
+bodies = 84
+translated = 0
+residue = 84
+
+[module.result]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 244
+embedded = 244
+evaluable = 244
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: bytestream::reader::ZByteIoError"
+bodies = 64
+
+[[cause]]
+cause = "mir::Ty: options::decoder::DecoderOptions"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: DecoderOptions"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ZWriter<u32>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: options::encoder::EncoderOptions"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ZReader<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: EncoderOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ColorSpace"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BitDepth"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: options::decoder::DecoderFlags"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BitType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: bit_depth::BitDepth"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Level"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: colorspace::ColorSpace"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: no_std_readers::ZCursor<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::encoder::PngCompression"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ByteEndian"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecodingResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RenderingIntent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ZSeekFrom"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bit_depth::BitType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bit_depth::ByteEndian"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bytestream::reader::no_std_readers::ZCursor<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: colorspace::ColorPrimaries"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: colorspace::SingleColorPrimary"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: options::encoder::EncoderFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ColorCharacteristics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZByteIoError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytestream::reader::ZReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytestream::reader::ZSeekFrom"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytestream::writer::ZWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: colorspace::ColorCharacteristics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: colorspace::RenderingIntent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: log::Level"
+bodies = 1

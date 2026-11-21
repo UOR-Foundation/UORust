@@ -1,0 +1,46 @@
+[[fn]]
+path = "minimal-lexical::add_digit"
+kappa = "f7c924a85f43e6afe5bc43907db9af622a1ef54a835180f16dbabf7db28ea1f7"
+embedded = "8dd019c343fa0f0ff3af1394aaadea0d555dd84300537aa8cb51ddfda62df355"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::checked_mul"
+
+[[fn]]
+path = "minimal-lexical::into_i32"
+kappa = "b8d0e1a31fb7b1fed013362e902644ccc53ad079134a00fce4772bacd2bfa72e"
+differential = 7
+embedded = "df0abebff471814809587747cab84f6b171aac82a5f35e2b85c62f531e9bb8f2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i32>::max_value"
+
+[[fn]]
+path = "minimal-lexical::moderate_path"
+kappa = "9ede8aec03d7344857fecd3bb289f8c582fdcfde85da22a23d3412eae4747a28"
+embedded = "8060bdfa956fa415adbb36e3386285e829fa81f9a9de08212ce24309e90265b6"
+status = "residue"
+cause = "mir::Ty: extended_float::ExtendedFloat"
+
+[[fn]]
+path = "minimal-lexical::parse_float"
+kappa = "e58fbce80b848c6bbf000733db9d97cb1767e655ee42cc305d559d7a7905a5fd"
+at = "F=u32, Iter1=u32, Iter2=u32"
+embedded = "fa3d15ef33556b3471fcb8ed2f25a892da02aa624edd0097fd418e2ea16edff4"
+status = "residue"
+cause = "mir::Ty: number::Number"
+
+[[fn]]
+path = "minimal-lexical::parse_number"
+kappa = "0515a12bdc4df4a35eefdbde35ada742cf5f08620bfd93b92a19d8feed3013a8"
+at = "Iter1=u32, Iter2=u32"
+embedded = "3c82866b8ded9080710c6e4db7a069dffe9487fb83c2021ba800c4dd84c0ae23"
+status = "residue"
+cause = "mir::Ty: number::Number"
+
+[[fn]]
+path = "minimal-lexical::parse_number_fast"
+kappa = "eb8fc6498167d3336784a948b262f0f0d1f241bb356f4a83fdea164300e3f718"
+at = "Iter1=u32, Iter2=u32"
+embedded = "5ce2aed1724fb07290b64e5c4f0359da9762bac1cb749026b3fae43b09ce7322"
+status = "residue"
+cause = "mir::Ty: number::Number"
+

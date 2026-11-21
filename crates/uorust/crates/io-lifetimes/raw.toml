@@ -1,0 +1,48 @@
+[[fn]]
+path = "io-lifetimes::raw::T::as_raw_filelike"
+kappa = "db3892fd0f58c20e7e5ed619744cb761d6311455bc780a517a3f3c3b4e5fd7e1"
+at = "T=u32"
+embedded = "fc3eed43abc4f36c250e06cd29e2a323be79283fb846b63c56a8c580afee3a4f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRawFd, which u32 does not implement in core"
+
+[[fn]]
+path = "io-lifetimes::raw::T::as_raw_socketlike"
+kappa = "3640d860c34adabe0080244a7119c3f6872b180504c12513163f839e6965b274"
+at = "T=u32"
+embedded = "417dccf077fc0972712dd7b4d6e01b1bfed213066612f0f93a3dac18079efda0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRawFd, which u32 does not implement in core"
+
+[[fn]]
+path = "io-lifetimes::raw::T::from_raw_filelike"
+kappa = "8892d2b5880f79644a44482b7bf52efedc6f8f7b6de83ab4f445447a613e66cb"
+at = "T=u32"
+embedded = "d3762b8f8d4655ac36fa90ff7abd3d066ba7978b55ddda5e3b53c35debc21e8c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FromRawFd, which u32 does not implement in core"
+
+[[fn]]
+path = "io-lifetimes::raw::T::from_raw_socketlike"
+kappa = "2f93074d40510951e6619e402f3693b929c0dd28eeea929b24ca51a39f6de0c1"
+at = "T=u32"
+embedded = "fad10670d18cd269e07c44717b7cc096e7343257e28be2ebe9196efc67e68a11"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FromRawFd, which u32 does not implement in core"
+
+[[fn]]
+path = "io-lifetimes::raw::T::into_raw_filelike"
+kappa = "b9e4abeee356a09c5f215ac0c80ca4ea487cc4afa5348c2a273105bddbb03220"
+at = "T=u32"
+embedded = "bdeff063ce2fbfab14b682fb9f2df26f20778ae9de108e56cd1cd5190e92596f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoRawFd, which u32 does not implement in core"
+
+[[fn]]
+path = "io-lifetimes::raw::T::into_raw_socketlike"
+kappa = "7fe5cf915646a2f8177ddb126b69ebe26871e7e5fdb83196a439463e8646c3a8"
+at = "T=u32"
+embedded = "d11284df971aebf5a0ddf81dc7d07282b5b312295ab6744df4e12bef4bae8240"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by IntoRawFd, which u32 does not implement in core"
+

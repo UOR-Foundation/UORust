@@ -1,0 +1,242 @@
+# The core-foundation-sys register (written by `uorust crate core-foundation-sys@0.8.7`; do not edit): every body of
+# core-foundation-sys's MIR at core-foundation-sys 0.8.7, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 101
+translated = 8
+residue = 93
+
+[module.array]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.bag]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.base]
+bodies = 14
+translated = 4
+residue = 10
+
+[module.binary_heap]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.bundle]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.calendar]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.characterset]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.data]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.dictionary]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.filedescriptor]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.mach_port]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.messageport]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.notification_center]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.runloop]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.set]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.socket]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.stream]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.string_tokenizer]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.url]
+bodies = 4
+translated = 4
+residue = 0
+
+[module.url_enumerator]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.uuid]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 101
+embedded = 101
+evaluable = 101
+blocked = 0
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bundle::CFBundleCopyLocalizedString"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bundle::CFBundleGetMainBundle"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CFComparisonResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CFStreamError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: base::CFRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: uuid::CFUUIDBytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CFRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CFUUIDBytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: array::CFArrayCallBacks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bag::CFBagCallBacks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: base::CFAllocatorContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: base::CFComparisonResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: binary_heap::CFBinaryHeapCallBacks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: binary_heap::CFBinaryHeapCompareContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dictionary::CFDictionaryKeyCallBacks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dictionary::CFDictionaryValueCallBacks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: filedescriptor::CFFileDescriptorContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mach_port::CFMachPortContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: messageport::CFMessagePortContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoopObserverContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoopSourceContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoopSourceContext1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoopTimerContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: set::CFSetCallBacks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: socket::CFSocketContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: socket::CFSocketSignature"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::CFStreamClientContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::CFStreamError"
+bodies = 1

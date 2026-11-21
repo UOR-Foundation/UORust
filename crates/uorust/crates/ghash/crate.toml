@@ -1,0 +1,70 @@
+[[fn]]
+path = "ghash::<impl at src/lib.rs:34:10: 34:15>::clone"
+kappa = "5aeb07c5877793981dfa765bc4eb46db65068e9a91c06ecedf28354c7db07395"
+at = "GHash=u32"
+embedded = "ca1d7c6423ab0f969e8a5fdf4de63eea6aac306bdb3df08c1ae8c0eb714b7a62"
+status = "residue"
+cause = "mir::Ty: polyval::Polyval"
+
+[[fn]]
+path = "ghash::GHash::finalize"
+kappa = "484098afd513fff8235e5cfcf04ea22fa8ba3588eb727eedf1cd5df923216ce7"
+embedded = "aa5c6ae5f1ab2f54ee60d79e8610d2c2235b221ca071376d533931c1ee3130c5"
+status = "residue"
+cause = "mir::Ty: polyval::universal_hash::typenum::UTerm"
+
+[[fn]]
+path = "ghash::GHash::fmt"
+kappa = "2bfab6962d4734fb670e14417fe8789a0fd50917e187330dc1780655ded08bd0"
+embedded = "9a65fad93c11398e67d2d793c74553eb54df7332936bf48ea5c14830d18f3bfe"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ghash::GHash::new"
+kappa = "043bb2316a6efbf803f6488712fb243665defc1476d3642b2cd0d807f7efbbe0"
+at = "GHash=u32"
+embedded = "1d51406658de77c0ffcc155af9f6d20c2d85d8857c63bdb7fc74e673a4e632ae"
+status = "residue"
+cause = "mir::Ty: UTerm"
+
+[[fn]]
+path = "ghash::GHash::new#2"
+kappa = "2ffad8d38a02a61d560f027121f967b70ba362232bb4d7ab9a0f8f5c035c948c"
+at = "GHash=u32"
+embedded = "4b159285bd6beb800d2edcc641ff7ddc341ae84beda37402aadcdc64aa5fe541"
+status = "residue"
+cause = "mir::Ty: UTerm"
+
+[[fn]]
+path = "ghash::GHash::update_with_backend"
+kappa = "c8b9f9b997f6e3ee78c570b5fd32f7fa2e68af8c4c6629ffa6073e897de9556b"
+at = "GHash=u32"
+embedded = "9958ff110109ad66ae5dda8c86444ba8cd412bfdf494e85744f5fad73d1849ed"
+status = "residue"
+cause = "mir::Ty: impl UhfClosure<BlockSize = Self::BlockSize>"
+
+[[fn]]
+path = "ghash::GHash::update_with_backend::GHashClosure::call"
+kappa = "2b91e0f1b3c4c0e80c46dccd3d7b06318356d0b7262f142a1a20138b1fb36f40"
+at = "B=u32, C=u32"
+embedded = "28a07f4bafff0276069a97b77a73eaba8441c64b234b7968fc95c10f3bde4289"
+status = "residue"
+cause = "mir::Ty: GHashClosure<u32>"
+
+[[fn]]
+path = "ghash::GHashBackend::proc_block"
+kappa = "72e311a3b01e4bc7f88f40de5ce38971c71e3e3cb28ce5498cd4df8d4969ad23"
+at = "B=u32"
+embedded = "f9ada21172d47bc30d69ce505cb1d2031223adbfa82dcb3d161014b18bb0e95e"
+status = "residue"
+cause = "mir::Ty: GHashBackend<'_, u32>"
+
+[[fn]]
+path = "ghash::GHashBackend::proc_par_blocks"
+kappa = "552a86d822a06c71afbdc7af5294cefed07ecad9a04b86695818867774fdf5e1"
+at = "B=u32"
+embedded = "e2ae0f7e3fcd14d5028a90611fb2725a38e546ac9376977dd95162b7b3b9c650"
+status = "residue"
+cause = "mir::Ty: GHashBackend<'_, u32>"
+

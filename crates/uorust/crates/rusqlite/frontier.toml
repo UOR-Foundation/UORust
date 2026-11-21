@@ -1,0 +1,633 @@
+# The rusqlite register (written by `uorust crate rusqlite@0.43.0`; do not edit): every body of
+# rusqlite's MIR at rusqlite 0.43.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 829
+translated = 3
+residue = 826
+
+[module."_#1"]
+bodies = 90
+translated = 0
+residue = 90
+
+[module._]
+bodies = 90
+translated = 0
+residue = 90
+
+[module.auto_extension]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.bind]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.busy]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.cache]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.column]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.config]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.crate]
+bodies = 84
+translated = 3
+residue = 81
+
+[module.error]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.inner_connection]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.params]
+bodies = 120
+translated = 0
+residue = 120
+
+[module.pragma]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.raw_statement]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.row]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.statement]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.transaction]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.types]
+bodies = 140
+translated = 0
+residue = 140
+
+[module.util]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.version]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 814
+embedded = 814
+evaluable = 814
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 236
+
+[[cause]]
+cause = "mir::Ty: _::InternalBitFlags"
+bodies = 109
+
+[[cause]]
+cause = "mir::Ty: types::to_sql::ToSqlOutput<'_>"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: types::from_sql::FromSqlError"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: types::value::Value"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: RawStatement"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Sql"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OpenFlags"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: PrepFlags"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Statement<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Connection"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: SmallCString"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::from_bits_retain"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: statement::Statement<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: transaction::Savepoint<'_>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: InnerConnection"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: bitflags::iter::Iter<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CStr"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: types::value_ref::ValueRef<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: util::sqlite_string::SqliteMallocString"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: transaction::Transaction<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: types::Type"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::bits"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ColumnsIter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SqliteMallocString"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: bitflags::iter::IterNames<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Savepoint<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StatementCache"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StatementStatus"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Transaction<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cache::CachedStatement<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: row::Row<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: row::Rows<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transaction::DropBehavior"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transaction::TransactionState"
+bodies = 3
+
+[[cause]]
+cause = 'mir::Ty: unsafe extern "u32" fn'
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::small_cstr::SmallCString"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as bitflags::Flags>::all_named::ALL_NAMED"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::complement"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::difference"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::empty"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::insert"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::intersection"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::remove"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::symmetric_difference"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::toggle"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::union"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CachedStatement<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DropBehavior"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TransactionState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bitflags::Flag<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: column::ColumnsIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: inner_connection::InnerConnection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: params::ParamsFromIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pragma::Sql"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: raw_statement::RawStatement"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: row::AndThenRows<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: row::MappedRows<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::Named<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::param_cache::ParamIndexCache"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: busy_handler_callback::{closure#0}: mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <i32 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item OpenFlags::SQLITE_OPEN_READ_WRITE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item bitflags::__private::core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libsqlite3_sys::SQLITE_OPEN_CREATE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libsqlite3_sys::SQLITE_OPEN_FULLMUTEX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libsqlite3_sys::SQLITE_OPEN_MEMORY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libsqlite3_sys::SQLITE_OPEN_NOMUTEX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libsqlite3_sys::SQLITE_OPEN_READONLY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libsqlite3_sys::SQLITE_OPEN_READWRITE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libsqlite3_sys::SQLITE_OPEN_URI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::sqlite_string::NUL_REPLACE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bitflags::__private::core::str::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: cache::flush_prepared_statement_cache"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_uppercase"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sqlite3_bind_zeroblob64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sqlite3_get_autocommit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sqlite3_libversion"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sqlite3_libversion_number"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sqlite3_reset_auto_extension"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::from_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::is_null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::slice::from_raw_parts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AndThenRows<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Batch<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromSqlError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InterruptHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParamIndexCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PhantomData<&"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Row<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Rows<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ToSqlOutput<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ValueRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cache::StatementCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: config::DbConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libsqlite3_sys::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libsqlite3_sys::ErrorCode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: row::Map<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: statement::StatementStatus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::NulError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::CharIndices<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transaction::TransactionBehavior"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: types::Null"
+bodies = 1

@@ -1,0 +1,104 @@
+# The polyval register (written by `uorust crate polyval@0.7.3`; do not edit): every body of
+# polyval's MIR at polyval 0.7.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 63
+translated = 0
+residue = 63
+
+[module.backend]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.crate]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.field_element]
+bodies = 22
+translated = 0
+residue = 22
+
+[embedding]
+bodies = 63
+embedded = 63
+evaluable = 63
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: field_element::FieldElement"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: backend::intrinsics::intrinsics_impl::clmul::InitToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FieldElement"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Polyval"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: universal_hash::typenum::UTerm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: backend::intrinsics::ExpandedKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: backend::intrinsics::State"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UTerm"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: field_element::mul::Product"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Shl"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::max_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: field_element::bmul: polyval's MIR stops at mir::TerminatorKind::Call: <u64 as Shl>::shl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InitToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl UhfClosure<BlockSize = Self::BlockSize>"
+bodies = 1

@@ -1,0 +1,56 @@
+[[fn]]
+path = "crc32fast::BYTES_AT_ONCE"
+kappa = "9df6aa9d35be8c1ad315df28eaa43f7d3e128eb5f1d03fbac7ac206677d297c2"
+embedded = "90319b1c73009e11ed2a49facbdee8563ae579ad5934d128762ac491e010c868"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item baseline::update_fast_16::UNROLL"
+
+[[fn]]
+path = "crc32fast::fold_16"
+kappa = "db7dbeb8161c414b9bef2992072b8a29598f87341eae28d9f53648adb71bb72d"
+embedded = "24262c2849ba142bb97f5334c7711ed2fb9d71c5c7c7b676dd6aaef88c70d6c4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::from_le_bytes"
+
+[[fn]]
+path = "crc32fast::fold_4"
+kappa = "9346154df156fbb1f345785563f192bacbc1c272bb26f7f0a6449c10c055edce"
+embedded = "bc8931170ecb6e94357dc7408dd586437f8f63a36619b84a162045a3c80b8c13"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::from_le_bytes"
+
+[[fn]]
+path = "crc32fast::fold_8"
+kappa = "05f0d28053174f9e331b13ea71fed93c93beef9207f1f6355ab9aab5916a1053"
+embedded = "ab4ac032fe28facdb409f8db2b05e02fe552afa2c73385cdab13a3e0c173c304"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::from_le_bytes"
+
+[[fn]]
+path = "crc32fast::update_4_to_15"
+kappa = "f45d8098f0b3ffaad62b3e52efbcc3b199fcedd7013685621c141922a28a1da7"
+embedded = "316486d07693011e673b817200129ac0e6ac8255d2b5665da4678b0fc08cf7dd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: baseline::fold_8: crc32fast's MIR stops at mir::TerminatorKind::Call: core::num::<impl u32>::from_le_bytes"
+
+[[fn]]
+path = "crc32fast::update_fast_16"
+kappa = "b609158798646e4ed6e3bb4ca018a5dd00e2f70509e430e7b9b9a688084bfd85"
+embedded = "153d67029b37ee702ca76a86a0b93d901e972f677038c0c61c39afc5abb6537f"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "crc32fast::update_short"
+kappa = "44c2f61e368c35a2272622c3757ba5b5193ebf07ef202221dc6f7b4858a5641f"
+embedded = "2b6bbaca107fe5cccc1e843bd2b3772b2055ea5a199a3af21108d5765fb4d574"
+status = "residue"
+cause = "mir::TerminatorKind::Call: baseline::update_slow: crc32fast's MIR stops at mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+
+[[fn]]
+path = "crc32fast::update_slow"
+kappa = "03412fd0811ae1b1ca03ef7ff6a5600b92fd2c1b806a5b2b6ad3bc0df01403c1"
+embedded = "59a88de7d23517811a2fd85c5f0ce8f662a21557bc382aa209deb680d5353dbd"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+

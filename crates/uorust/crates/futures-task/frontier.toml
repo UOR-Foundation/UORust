@@ -1,0 +1,103 @@
+# The futures-task register (written by `uorust crate futures-task@0.3.34`; do not edit): every body of
+# futures-task's MIR at futures-task 0.3.34, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 84
+translated = 1
+residue = 83
+
+[module.arc_wake]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.future_obj]
+bodies = 39
+translated = 0
+residue = 39
+
+[module.noop_waker]
+bodies = 6
+translated = 1
+residue = 5
+
+[module.spawn]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.waker]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.waker_ref]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 84
+embedded = 84
+evaluable = 84
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: spawn::SpawnError"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: *mut dyn core::future::Future<Output = u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: future_obj::LocalFutureObj<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: future_obj::FutureObj<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::cast"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: *mut dyn core::future::Future<Output = T>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::task::Waker"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::task::RawWaker"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: waker_ref::WakerRef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::task::RawWakerVTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unsafe fn"
+bodies = 1

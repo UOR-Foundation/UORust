@@ -1,0 +1,31 @@
+# The anstyle-wincon register (written by `uorust crate anstyle-wincon@3.0.11`; do not edit): every body of
+# anstyle-wincon's MIR at anstyle-wincon 3.0.11, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 12
+translated = 0
+residue = 12
+
+[module.ansi]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.stream]
+bodies = 11
+translated = 0
+residue = 11
+
+[embedding]
+bodies = 12
+embedded = 12
+evaluable = 12
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 12

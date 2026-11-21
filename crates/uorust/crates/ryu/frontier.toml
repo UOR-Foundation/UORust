@@ -1,0 +1,130 @@
+# The ryu register (written by `uorust crate ryu@1.0.23`; do not edit): every body of
+# ryu's MIR at ryu 1.0.23, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 42
+translated = 14
+residue = 28
+
+[module.buffer]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.common]
+bodies = 6
+translated = 6
+residue = 0
+
+[module.d2s]
+bodies = 2
+translated = 1
+residue = 1
+
+[module.d2s_full_table]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.d2s_intrinsics]
+bodies = 8
+translated = 5
+residue = 3
+
+[module.digit_table]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.f2s]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.f2s_intrinsics]
+bodies = 8
+translated = 2
+residue = 6
+
+[module.pretty]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 42
+embedded = 42
+evaluable = 42
+blocked = 0
+
+[differential]
+bodies = 12
+theorems = 58
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: buffer::Buffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <static"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item d2s::DOUBLE_POW5_BITCOUNT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item d2s::DOUBLE_POW5_INV_BITCOUNT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc350: &["
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc6: &["
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::write"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: d2s_intrinsics::pow5_factor: ryu's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: f2s_intrinsics::pow5factor_32: ryu's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: d2s::FloatingDecimal64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f2s::FloatingDecimal32"
+bodies = 1

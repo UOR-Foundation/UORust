@@ -1,0 +1,450 @@
+[[fn]]
+path = "fancy-regex::OPTION_FIND_NOT_EMPTY"
+kappa = "9ff74204152029e6f1079d3fa46ee7cf3b3983ce2456ec7330d500f950b3f1d3"
+embedded = "71629da155b8abdf417f4fc09b5d9119e30a929604d9e8ace4285c246de1a022"
+status = "translated"
+digest = "bfe357f4aa60eab86b4316fe2abbbe82bc2d658a4a15ce42326fc7947439d587"
+
+[[fn]]
+path = "fancy-regex::OPTION_NOT_CONTINUED_FROM_PREVIOUS_MATCH"
+kappa = "932b244268b36b60e2503cfa92b1180fd6f9de0908e963a42adee959fd5d36da"
+embedded = "987a6d9d6d3453a628b1f9742993e57f162eeada3ea7d45e96a4381e7e16af39"
+status = "translated"
+digest = "d5116720f55dc6c259dd1366c2d3fc39a562a80de547a4e727deb89d121f09a1"
+
+[[fn]]
+path = "fancy-regex::OPTION_TRACE"
+kappa = "8aced75ca5f94f2aaca032f2781fe751325a7a94642054564362d307bed7cc18"
+embedded = "7dae5e3881c8dbc1dd07fcb0eb9168cba290be2af0ddd843186c629bc67dc5a5"
+status = "translated"
+digest = "dba6eb82103db82d9ae660c466cb69e1c429948db91af1ad4034b79c2eb7aa97"
+
+[[fn]]
+path = "fancy-regex::advance_one"
+kappa = "6c45ab915bdfbd1fd5049c1f881cd85ec203495c5336884da6abcc41fb8e9c75"
+at = "S=u32"
+embedded = "3b4a6720e70d5a05804965d195ad6b697a167347111ff767022279fe0e0c28cd"
+status = "residue"
+cause = "mir::Ty: BytesMode"
+
+[[fn]]
+path = "fancy-regex::chars_fold_equal"
+kappa = "a70947a85dd2c06d4a316a12a716635fe005ef03b85083b680e774f69d21819a"
+embedded = "4274f11d3e4654ad7c30af253e6811f371f6f168cd9fdd45697fe31c403a912f"
+status = "residue"
+cause = "mir::Ty: regex_syntax::hir::ClassUnicodeRange"
+
+[[fn]]
+path = "fancy-regex::codepoint_len_at"
+kappa = "a4564867e12ed35cb69bf22804e403a2ac46f8df7feea8f8aad11fdd1ebf085f"
+at = "S=u32"
+embedded = "9b4c02c88315101ab9368c1be57b1ecb1aa2f6cb15431a2928d04f8331457f08"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Input, which u32 does not implement in core"
+
+[[fn]]
+path = "fancy-regex::count_after_empty_iteration"
+kappa = "750ca2b2bd21dcf7e0ba97c8d2359bf7a20be7733c976a125f825cc6ea8524f0"
+embedded = "32cb994061cba47ec48764ff5256bbda2da2bedc0c7472743650a0d785ac72f9"
+status = "translated"
+digest = "4662d7c57bad3cc8b7b7e706e9dca2bb0de0d6369d61e8f39a497c434580c236"
+
+[[fn]]
+path = "fancy-regex::matches_literal"
+kappa = "84586c738f84993f6b842f2f7692de5656539256dd0b233f5a577710e2d5170d"
+at = "S=u32"
+embedded = "f70313a1f1bd52c8b01668bbbf5379bbbc94ec8f33c67eb8e5b8febb666d960e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Input, which u32 does not implement in core"
+
+[[fn]]
+path = "fancy-regex::matches_literal_casei"
+kappa = "f8248fe90c1b7714f1fb34198c74d8ca3722bbf2ad9c493b7eba1ad2b84991c6"
+at = "S=u32"
+embedded = "936e6d0bdf4ec9d7cfd1f08cba0775f0d8ac5fdbd63192bdb8d37ee79218fe2e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Input, which u32 does not implement in core"
+
+[[fn]]
+path = "fancy-regex::matches_literal_casei_unicode"
+kappa = "b4a377ec8438a308cbc76d9e8ea4b59ccc75aa5b1350428e013a72ffd2dc6d2c"
+embedded = "839c44a5ad607d1b2124368562dd3bf997fe0fd8355713bfb5d137a4e89d1f0d"
+status = "residue"
+cause = "mir::Ty: std::str::Chars<'_>"
+
+[[fn]]
+path = "fancy-regex::new_scratch"
+kappa = "3b159828f25558c6b3807ef55240a47e6d5894963c58ef883927117726c35a70"
+embedded = "eb43f7f0c2a7db7ec5c25c951216edb1d2e209a9f6867d49b3a92b648fb66ff0"
+status = "residue"
+cause = "mir::Ty: vm::Scratch"
+
+[[fn]]
+path = "fancy-regex::prev_ix"
+kappa = "58e339aeceeadfd43717b292426656129e0a2aabf9a66ac478791a0c893445d5"
+at = "S=u32"
+embedded = "c61417c165ec6900da38d4d74ed91599b11baf0a1251ae15a43ec32a41eb6f9f"
+status = "residue"
+cause = "mir::Ty: BytesMode"
+
+[[fn]]
+path = "fancy-regex::range_contains"
+kappa = "532e59674738f23581427effb05bf42e50eb30376e396a21ab015abc4af163a4"
+at = "T=u32"
+embedded = "0db0a6c9f79e4932d905b05677c45bf7864102e616d8d085adbad2eddfcbb03d"
+status = "residue"
+cause = "mir::AggregateKind::Closure: range_contains::{closure#0}: mir::Instantiation: u32 for a parameter bounded by PartialOrd, which u32 does not implement in core"
+
+[[fn]]
+path = "fancy-regex::run"
+kappa = "b6509495cb23d7e729575b8b18ef9338ec3a9796690aa6e71c13538b670d3bba"
+at = "HardRegexRuntimeOptions=u32, S=u32"
+embedded = "1cd677394275f47d54fc86096c3f545f756039421bd75a37cad291d862128905"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "fancy-regex::run_default"
+kappa = "ad167ba4917ac61ab893fede4a10208e37a2e9bd0732e0d96a2d9f9558cdde4e"
+at = "HardRegexRuntimeOptions=u32"
+embedded = "6281858b8e1cd664ea2ad978b2c18aab771c23f63b2a5166d47f41dba025b5a7"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "fancy-regex::run_spans"
+kappa = "636d3cf4211b4fb575ab4f8b38941441aa10747d7407cbe0b676e57f3c6540a6"
+at = "HardRegexRuntimeOptions=u32, S=u32"
+embedded = "00051ba726b91f8663a3b4318536b460c1b6dfbf65157caaf2d54cf3ef1d39d7"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "fancy-regex::run_trace"
+kappa = "43a79cae98e531834c15f66d6afc226c736d4800c608efd2b474f46447c61eb4"
+at = "HardRegexRuntimeOptions=u32"
+embedded = "b7a1642c6ee42cabd08b5098ef53848b08ba423470a756d96fdb69577151a48b"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "fancy-regex::run_with"
+kappa = "a6462550ac8f4c7ddda5012c4b14900d3d3008b6a12ac581802200b5eab1e9d8"
+at = "Assertion=u32, BytesMode=u32, HardRegexRuntimeOptions=u32, S=u32, State=u32, T=u32"
+embedded = "ed67cbe82f2a45a7e2dcc7a2ad26f115dba878fb77e70c040602139019ab9e92"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "fancy-regex::store_capture_groups"
+kappa = "64bc3b7f7ac04295328b8b12c6c4ac70fd3a00666d089d98dfdd0d793f045287"
+embedded = "8dc7ea3e07c91675700a81474587ed23b1e54217419e4629125fe27723634f62"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:145:10: 145:15>::clone"
+kappa = "21ce300b9f690f3c8be206a852d56dbd4d8049f7465bb4c221880d0fee8ecc86"
+embedded = "65e57087031f1b378271554cb52f398bbb1fe5c21d434b3c174f7e3827d56b8b"
+status = "residue"
+cause = "mir::Ty: vm::CaptureGroupRange"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:145:23: 145:28>::fmt"
+kappa = "dfd5cb2994cd3198a3eef70bc754c7481b7efe7fe86bea275e44d3e40d7d8505"
+embedded = "9814d4a0ab550751a5dac7ff7beec0076aa19e6b9c15030396e754d724db6c65"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:145:30: 145:39>::eq"
+kappa = "a44e2dd6673afc439ed3d4cef89fb7e2f81464bf3e3ddbfc7933046eba8759a8"
+embedded = "f947a7089110df62e31307f7387563e34d667dd5e91278116c0122bf790d4eb9"
+status = "residue"
+cause = "mir::Ty: CaptureGroupRange"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:145:41: 145:43>::assert_fields_are_eq"
+kappa = "fb8771e80d76ddb37a708f8e92bc97c219a01575814002f142f60059e162fb2d"
+embedded = "1df78c12a36bc896d86ce027bcf8397bd86432a4a021afa85912b5e2b27d704d"
+status = "residue"
+cause = "mir::Ty: CaptureGroupRange"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:184:10: 184:15>::clone"
+kappa = "8703ed220a7da52860a74a58752e7a8d98e461da4c5cd899543c11a46426d5b5"
+embedded = "d42591bd1e27f2e2c9338df96085ee0932549342d02d1745f5e34c3477fbb094"
+status = "residue"
+cause = "mir::Ty: vm::CharClassMatcher"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:184:17: 184:26>::eq"
+kappa = "6c53e7ef3f6fc754a24735246ffcf06583e67cc6f43213f6017f33f335cca043"
+embedded = "faea810a0c1cb4f27a83148968607b71f2fcbfc7854af4e361ab99adc6e06e96"
+status = "residue"
+cause = "mir::Ty: CharClassMatcher"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:184:28: 184:30>::assert_fields_are_eq"
+kappa = "52bcdb9d3170ee57714ee1c3d677ee4bb6d467f35b71a5df20aab2e45471bd43"
+embedded = "59425fdeffc8d28a9156b9380870590e4d630a4fdf827afd45b0e0e584b73f01"
+status = "residue"
+cause = "mir::Ty: CharClassMatcher"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:275:10: 275:15>::clone"
+kappa = "35e5538c48411a0d61f8e690d3211080b5945ac46b1642cde9025a396f441cb3"
+embedded = "63588421812577a49ea25c9b8d47b3c73f9b848ba41d834c22b5253d9deda535"
+status = "residue"
+cause = "mir::Ty: vm::CaseiLiteral"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:275:17: 275:22>::fmt"
+kappa = "b3a28223947566c0c6024014e58b02eee134b94d5fc79e21607ea2f2fce734f4"
+embedded = "2a6d771182e174107f942286224806ffb8dc7c28be1e6a54e4a65b05d420be6f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:275:24: 275:33>::eq"
+kappa = "37fa78fbdca28a5138f4ff6a9bd734b608091d8415a434ea0161a52dc8e3aa88"
+embedded = "5034e0dc4209c844957c581ebf42ea748db1acb001e869c0bf364557471bed62"
+status = "residue"
+cause = "mir::Ty: CaseiLiteral"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:275:35: 275:37>::assert_fields_are_eq"
+kappa = "6d16bea3d8ac470409ee8ace3b8b5394147467c34bcf8f034661eaf85a3547d1"
+embedded = "b9efc61c14b69983f612a224e8cc9b2a86873a67d5cb852d8408d1224a6aa850"
+status = "residue"
+cause = "mir::Ty: CaseiLiteral"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:335:10: 335:15>::clone"
+kappa = "b81a6966f200fb5e9a10dfb9de9e56ce2a9c97bef29622235586039a6b432824"
+embedded = "e3f0a25817aa354ab8294e58960d43dc0d138385a6382a56f2f2c9fbb1daaa6a"
+status = "residue"
+cause = "mir::Ty: vm::Delegate"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:451:10: 451:15>::fmt"
+kappa = "fd4d30d9fdd6a2e93c46d8e4e6d984a2d4dae3081b5d08c24016d4395a7321d6"
+at = "Assertion=u32"
+embedded = "33e1229723dc018a3137e397a715fca82ca98d7efb96a04131c096ac2d3608d8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:620:10: 620:15>::fmt"
+kappa = "f3f69655b9d0c2c9a8d20b060cfc7e544575aa6c244b82c0bbe7c8c60353e9d9"
+embedded = "86b6b800de6b464ac6ea58ace454d4a5dabcea6b47969e835312c006abd1d791"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:634:10: 634:15>::fmt"
+kappa = "8f58f043b75d0277560854ff2560ed773ef81b6b082cfda74e263e251438b67d"
+at = "BytesMode=u32"
+embedded = "408ef6738e494aa6e3680aee2dca5d4ca137b89d4250a8c3308a0b0e6c368e78"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:681:10: 681:15>::fmt"
+kappa = "1585a9808ed243a88c4a7c8a535c2e7fd5f0826785da38785a1703a1d0d3a5c4"
+embedded = "c3f8529758b1f40ca0233c79282230b72c27b94f7fac922a4f66bc2065437393"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:688:10: 688:15>::fmt"
+kappa = "8ca0fd28e0ef71c7a6868f5bed2a210cbbf350e5cebd11d9e32aaef46e915e8a"
+embedded = "3df0459e5cfbe39e76d3fb5a7e21efc869ae9d22368d31b5d38f40814e729bff"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::<impl at src/vm.rs:694:10: 694:15>::fmt"
+kappa = "a425dec5e4fc64bac8d420843600caeefebb066f3b6544434f01c03d16b73229"
+embedded = "63764cbcef9b4f9c0c11367b74be7f0b6f4d234f5ca77e602fd792d036f75788"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::CaptureGroupRange::end"
+kappa = "48cea966f877379c087d3e3a430a124d9003c790d92fa7e448a66f8d20d485bf"
+embedded = "444e04b37cb4a6287ea4c1e0b2a3c11222059da788a485cd40a4c18cd557d6ec"
+status = "residue"
+cause = "mir::Ty: CaptureGroupRange"
+
+[[fn]]
+path = "fancy-regex::vm::CaptureGroupRange::start"
+kappa = "b03470a7b5ea9df5fa1fcb8dabfb611d26fcb701091b65306a3ed98fa22c7de1"
+embedded = "9b178b9848b667561258381bee1723c0ada0fca4fd66f37c2569f582127b05c5"
+status = "residue"
+cause = "mir::Ty: CaptureGroupRange"
+
+[[fn]]
+path = "fancy-regex::vm::CaptureGroupRange::to_option_if_non_empty"
+kappa = "993416184dd91130136159e9089afed1621b4734f22ce591750cbdc8dba52604"
+embedded = "237d306736e5079db63d12f586c412e2e8b2cd77b41c312986bc180ed37d505b"
+status = "residue"
+cause = "mir::Ty: vm::CaptureGroupRange"
+
+[[fn]]
+path = "fancy-regex::vm::CaseiLiteral::match_len"
+kappa = "7db08dec8b1b6548c463869839a97b9d693247549d1dd2bad34c1afba3e166d2"
+at = "S=u32"
+embedded = "82ce845f33e70aed360d8f7a22b26455638cb7378f5c47f7fcf218e4c9f56cc6"
+status = "residue"
+cause = "mir::Ty: CaseiLiteral"
+
+[[fn]]
+path = "fancy-regex::vm::CaseiLiteral::new"
+kappa = "3190fa837f797ff982f5324c21e1a4a0035fe52debce9347b0902066c31e8e2f"
+embedded = "4c4a2ee9928b49504db5b72d0eba482668219a48b52ea8fb7111eefed60be079"
+status = "residue"
+cause = "mir::Ty: vm::CaseiLiteral"
+
+[[fn]]
+path = "fancy-regex::vm::CharClassMatcher::fmt"
+kappa = "070b68fecd83c2aaed5bb67fdc9094bc6a485b0114e5e72157007c0888a68eb6"
+embedded = "86e0b4d4cacd6c436a487bb43877009db96e3efb65a834701f7a370fdbdb897c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::CharClassMatcher::match_len"
+kappa = "50982ec69085944e92f9accab06db2a2ca9fb04f03e2181dba2ce4c6657f558e"
+at = "S=u32"
+embedded = "86a8921a5fb0f46c5c03a4e77117d21e739074e6f83349e9c17a18db7e629ffb"
+status = "residue"
+cause = "mir::Ty: CharClassMatcher"
+
+[[fn]]
+path = "fancy-regex::vm::Delegate::fmt"
+kappa = "c3b24c2911d52fdf7283e3ddac61ef9bff1a1ef83094ce0d92379ef03a402370"
+embedded = "9d9915ed8ec73e0e4e02946c7284232e1bf40e78d6a4e7385b00d6b14b4286f0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::HardVariableLookbehind::fmt"
+kappa = "d99ac8d225ee8193685eb7a3ceb74cbb48c42717d7704792ab4d9cc0db715c92"
+embedded = "023965996036502d241c344e8b9e1b478b3ac44e24e9e88f03bb4eb826ebe28a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::Prog::debug_print"
+kappa = "10d3815fed5f663c5ef2c610dfd4b45cadb6e4f60917319757c20c71c2747b37"
+embedded = "3455b327110c2e48535f916567f00c42cbe044ca8ad6b188a0919b9742556cac"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::Prog::new"
+kappa = "4ff0ad0c6f1f8b18f85e93c4b1026abdd645fcf10a3c14e7361e67290681ee70"
+at = "BytesMode=u32"
+embedded = "33e65403c25c8d626a45e19769767f6f3632ac71ed049309c79bd8f0e5f82788"
+status = "residue"
+cause = "mir::Ty: vm::Prog"
+
+[[fn]]
+path = "fancy-regex::vm::ReverseBackwardsDelegate::fmt"
+kappa = "d8fc4cf988555eea10c5aecc2e151bfafd478cf1b0691ccc096ea1928b85bc7b"
+embedded = "62168aac5ab0f38ccb85a5e25321777889437a235b66fc35dfe3ac21681be940"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::Seek::fmt"
+kappa = "c96840a602154427027a7842cc4e97ef0f51cfd3c29293e2043658a3d3d83f79"
+embedded = "a043210e9727aaf2215288bb5b17574a09e16d2fb016ed51ba66417116dd46e7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "fancy-regex::vm::State::backtrack_count"
+kappa = "1a6352cc3d68dc9338a1dc832529a2b53679ae5d8be1944459a5a3af6ea33386"
+embedded = "aba87978f5020779a64b2858f337e6be0803e510510ad3ab6200fef2c1b02bf1"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::backtrack_cut"
+kappa = "bbb347a2c98411c5923bb0d67fbab9a388d03766da0da3f06e1f283f451c5db1"
+embedded = "d65cafb03d34cf7f3668f192ce0af6460a435164b856592ba713cc4ae77d75d6"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::get"
+kappa = "0fac1de162f87af533330e65b104ca0adb0a61e966af603133b584f5227fbf58"
+embedded = "680ef7baed36b7c058726e24229bcf20bbd1e183040f37ff4d1858aaef35530e"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::new"
+kappa = "8369f893a94738dddf67789cc2ddb27ccd6375f7944e0d0fd29121a726c7c69f"
+embedded = "11736354f0336f7e4fb181db6ee211739f0c4bb83554a670383e4915d5347db8"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::pop"
+kappa = "68cfb591f4fdde1a30dc7b76254de04973a85652c637cdff1d8de88f440de597"
+embedded = "db53bcd88a40a6eec5171e774e142a727b40302080f6fd0cf65ffb615efd39de"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::push"
+kappa = "4be6bdabd5523c0ed160fc79ca1c5a03a77b87d9d946059fd8b91e2bb570bc51"
+embedded = "6c56a5b1caaad200e7927e3e6f17b87b39751f759c102748582b05d0e61c33bb"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "fancy-regex::vm::State::reset"
+kappa = "fccae1dd2e2cdbc8a9dc0ca3812ccebcbde7e74615c76822b4d4b52e666abac0"
+embedded = "b72cab29750a13ff1a464acffd798d855c5a44dc2d28fd18937f0e74622ca9be"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::save"
+kappa = "491087bcb2b78537ee85f2be0e563aef921e836ad5b47af05c23c611320f9c71"
+embedded = "f0c83859c4492c52660e8292928d31e403fa2f0b3679f669bc340d6a86f9a747"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::stack_pop"
+kappa = "d1bfaf12642b3682b6dcc59ba6d770f7fa0b91827d08bd3ac15c550ed8f47411"
+embedded = "ea34bc9aa062dad83195da04abab477059d07adb709290cce48d80ccbccc1fca"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::stack_push"
+kappa = "ed417d920076943567303dac5815c851c3ef61aaa38fc1a8db424859b3aea9ae"
+embedded = "a6f439a212a583a12dbebf065278101e3021c0ce2e91df400e1fcef6449fd902"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::start_epsilon_iteration"
+kappa = "c9577281b80cfc6ddbe16f98dadafce7a539d5ff740e8b03f715526d9f4333de"
+embedded = "6486d3f94dbeb967ea9c07472adb0a0b1060f1bfcfb02a94d8e936ccce28d8f4"
+status = "residue"
+cause = "mir::Ty: vm::State"
+
+[[fn]]
+path = "fancy-regex::vm::State::trace_stack"
+kappa = "5e18ee51a80480f4492ea60250984180c55ef7682f172455d41166fbced70af3"
+embedded = "6059da7bea13417a29c1f00f1bfd25221df28ad6c9e06365ad3c9d536a03e9d1"
+status = "residue"
+cause = "mir::Ty: vm::State"
+

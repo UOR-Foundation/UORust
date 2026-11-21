@@ -1,0 +1,112 @@
+[[fn]]
+path = "matrixmultiply::KERNEL_MAX_SIZE"
+kappa = "98e9100293048baa84fb96cfebcc9aa48ed2776a0a5b4758b253349a97992ac6"
+embedded = "1832390b3684e38bc4cbc5ec41ca6eae8e7e51e4feaac7a796d115706b159602"
+status = "translated"
+digest = "a50ff0e5bc8015bcdd1daf643daf1888b5b08d0ca6d1352ab854048279e4ebfb"
+
+[[fn]]
+path = "matrixmultiply::MASK_BUF"
+kappa = "e3b53c8e5757a9b4b3113c029dba80fd1e476aa099a89faf3d4047a5bd6959f6"
+embedded = "a222cbb584c329fd87e65e39046ed63325794d378e02016facb4765e948364de"
+status = "residue"
+cause = "mir::Ty: gemm::MaskBuffer"
+
+[[fn]]
+path = "matrixmultiply::MASK_BUF_SIZE"
+kappa = "0d3ebf6c52f122827f08f481fdae88a438871b610a8071d326f7ba36cc89e6df"
+embedded = "18dc45d7a0bb21e910e6ec18c856e3df7e872f1473b476c423ef75b0f6fd6a41"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item gemm::KERNEL_MAX_ALIGN"
+
+[[fn]]
+path = "matrixmultiply::__rust_std_internal_init_fn"
+kappa = "74aa43048be4a768d677f4c719676628ed16ea177e24032c975885652a75b57d"
+embedded = "3dcf386f34e3c2cf870792ca9b14c937f724a6b397974c20ac0b7fa919d03ab8"
+status = "residue"
+cause = "mir::Ty: gemm::MaskBuffer"
+
+[[fn]]
+path = "matrixmultiply::align_ptr"
+kappa = "f55f7bcd4c00a56aced45d4e89cd1f5b6dd298e6826058e09806367b3ca00fb1"
+at = "T=u32"
+embedded = "6f2cb5cf1da857f07c4ad8fe7daf613fa7edc676b2e5f1659af3df86b2631f0b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "matrixmultiply::c_to_beta_c"
+kappa = "6586d6f2b43c43229fe56fd4767622bab5c977251703ced66a07876540a86066"
+at = "T=u32"
+embedded = "8062485682d348835acab5210c5c3c7282d7c9dc3098ac3d75d184dc24cad813"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "matrixmultiply::c_to_masked_ab_beta_c"
+kappa = "a7b0e2e6c769a272cbd6000806b99284677140b2efc216df4ee5857abc392659"
+at = "T=u32"
+embedded = "036f2078f638e84ec0ce6177767cec29683eb114d9b53fdb6a7a27b591b9cd3d"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "matrixmultiply::dgemm"
+kappa = "3be0585ea69783d3165991dc82ef727f3adf3b678f76e063b820292eddfe7dd6"
+embedded = "0ab5850374f1896e75ad89020cdf8352ef1bc471041b9face54d3e98ecce6016"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "matrixmultiply::ensure_kernel_params"
+kappa = "e07f1c47fb9da026ddccd0b015ab96ecea1f9bf7b8375eb682e7b9ab9370ceb8"
+embedded = "7ee5d0ddbe7a41c464cab81de3b86016139e9beadad35596b4b1bc9756757277"
+status = "residue"
+cause = "mir::Operand::Constant: <K as kernel::GemmKernel>::MR: mir::Operand::Constant: the constant item <<K as kernel::GemmKernel>::MRTy as kernel::ConstNum>::VALUE"
+
+[[fn]]
+path = "matrixmultiply::gemm::GemmParameters::select"
+kappa = "912136f8c3e2756ee7ea5233aa55e46f715ad32276d3dc00955cced0b5f99eb7"
+at = "T=u32"
+embedded = "7e71e329ed7c79fd1c9a5944477f25b7c3d1505560b7d567c8c9c7718e8e2604"
+status = "residue"
+cause = "mir::Ty: GemmParameters<u32>"
+
+[[fn]]
+path = "matrixmultiply::gemm_loop"
+kappa = "e0072e0ade04ea53ba4f4a0530f9cdd9a67b934fc20ec823148ad9aaf0a5286f"
+at = "K=u32"
+embedded = "1ca439895c07476231fbab7acbbd608ae7784784b1b9c7bfacb9421002b00c11"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "matrixmultiply::gemm_packed"
+kappa = "b1f9e124f13fcc75fb2e173980d9acc7fd3726157cb1bb21b8aa1bbeebd52f61"
+embedded = "4d27c070d6260a03514b3fd17d0b3b962df4b0c79df025c097e51976b6146468"
+status = "residue"
+cause = "mir::Ty: <K as GemmKernel>::Elem"
+
+[[fn]]
+path = "matrixmultiply::make_packing_buffer"
+kappa = "4c4f1fcc28e5c5089eeae469ec3d163fd6688571b63caf731ec42cf137d35e30"
+at = "K=u32"
+embedded = "4f978388b3c9aceab04e5738dea2f5f1056e9d254d75cca0e573eec1067e37b2"
+status = "residue"
+cause = "mir::Ty: aligned_alloc::Alloc<u32>"
+
+[[fn]]
+path = "matrixmultiply::masked_kernel"
+kappa = "5507e3fb39e6d487f21798d110f3391fbd6494e034243dc722e9f42d7c240abb"
+at = "T=u32"
+embedded = "ce0f875354e080c2b824e364d7a1c65d33eafbca1b3ee9ff7a03f68ecaa53874"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Element, which u32 does not implement in core"
+
+[[fn]]
+path = "matrixmultiply::sgemm"
+kappa = "0e3de80269debf1e4bdc2cba92303cb024fff76ddca4d9ff001244cde377ba1b"
+embedded = "d47d6c409b900b95bea522d1a5bc32462b8e8edb7b201aabd2cc5b1aecc1162d"
+status = "residue"
+cause = "mir::Ty: f32"
+

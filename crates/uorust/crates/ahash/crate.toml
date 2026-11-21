@@ -1,0 +1,39 @@
+[[fn]]
+path = "ahash::AHasher::default"
+kappa = "a7faef04e471d240a0f5542b90b3d6048c88a8cf82af92ba907a95a558cd3549"
+embedded = "189a4d5644b2ac3c0fb7e9cc97d670ca79b0de3fa31de250bfa7daf93ac9f22d"
+status = "residue"
+cause = "mir::Ty: fallback_hash::AHasher"
+
+[[fn]]
+path = "ahash::HashMap::new"
+kappa = "ca32807736894abcd957ef34d6d2cf75b40cd7ff3388a47ec5200e8f510bbd57"
+at = "K=u32, S=u32, V=u32"
+embedded = "6783317b226460306f959f2da1e10ee09557a0bbf3ceb7f2d9fbf7f48b84f948"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "ahash::HashMap::with_capacity"
+kappa = "46ca2b9b1f8a5b21ef739bd8ef069133fc4ce4c321f13fc80a07d2fe41968a63"
+at = "K=u32, S=u32, V=u32"
+embedded = "d742a5f94ad99226463b4907ca5d427121c57b2c3ad9f142cbe9c1de226b0b1c"
+status = "residue"
+cause = "mir::Ty: std::collections::HashMap<u32, u32, u32>"
+
+[[fn]]
+path = "ahash::HashSet::new"
+kappa = "7dca2f7c68cdf3a5fda6bf427ca4fec6ed71eba3fd9bbe5eae3485530a2afb3f"
+at = "K=u32, S=u32"
+embedded = "2e902b309754858c3834427f7dcc7757018582f1068a280638d0182da772f47e"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+
+[[fn]]
+path = "ahash::HashSet::with_capacity"
+kappa = "f2df836ba22f6fc259b4d490300dde7e39337ece1e00dc433fef7903a46e4192"
+at = "K=u32, S=u32"
+embedded = "7e41baee49ed5f25f59198cf61187f0ec32cf35b09daeecdf6efb071d26fb368"
+status = "residue"
+cause = "mir::Ty: std::collections::HashSet<u32, u32>"
+

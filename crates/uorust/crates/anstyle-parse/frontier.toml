@@ -1,0 +1,104 @@
+# The anstyle-parse register (written by `uorust crate anstyle-parse@1.0.0`; do not edit): every body of
+# anstyle-parse's MIR at anstyle-parse 1.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 69
+translated = 1
+residue = 68
+
+[module.crate]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.params]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.state]
+bodies = 18
+translated = 1
+residue = 17
+
+[embedding]
+bodies = 69
+embedded = 69
+evaluable = 69
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Params"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Parser<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: state::definitions::State"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: state::definitions::Action"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AsciiParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Utf8Parser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: params::Params"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: params::ParamsIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Action"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParamsIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VtUtf8Receiver<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf8parse::Parser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1

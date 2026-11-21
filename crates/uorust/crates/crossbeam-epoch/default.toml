@@ -1,0 +1,50 @@
+[[fn]]
+path = "crossbeam-epoch::HANDLE"
+kappa = "abf882d1be396d166a56f23c2de35bcfd7f5fcab1e24818607d84180826edfd6"
+embedded = "ac0a4c04a2fe92e6b20dcf3c3e577a0f2bd0bcddb5860d74e38fdf616850bcb0"
+status = "residue"
+cause = "mir::Ty: collector::LocalHandle"
+
+[[fn]]
+path = "crossbeam-epoch::__rust_std_internal_init_fn"
+kappa = "4786003dad0dcd22fcd32ab9de00af6d9e7b60960a34ae2c3bb6210f076394a6"
+embedded = "e68beb8c65e86ca275b48f98b11f091a027d25457a23f1826497275e18d6686a"
+status = "residue"
+cause = "mir::Ty: collector::LocalHandle"
+
+[[fn]]
+path = "crossbeam-epoch::collector"
+kappa = "cdcc468fec9eca3cd76cb73fcb9d9b930863625dfadea33bec6b7354490433a4"
+embedded = "61e5a23a11a989a6b9b217eefc94bec951fc7aa649d52d3cee7f4160c210a902"
+status = "residue"
+cause = "mir::Ty: collector::Collector"
+
+[[fn]]
+path = "crossbeam-epoch::default_collector"
+kappa = "50c31c1b4af56cb685ab25d0032b7c5593b1261bd138048c0907c643949051fa"
+embedded = "e7074848d2a9633fbe7a83e1dfefb5b046c43a40a13a1f14f033a565296ef8d1"
+status = "residue"
+cause = "mir::Ty: collector::Collector"
+
+[[fn]]
+path = "crossbeam-epoch::is_pinned"
+kappa = "7799dee221ab4751efa763c59072951318c1bb75bccc120c4a5400ebca9ea214"
+embedded = "7cbf12bac1dbccce6461db9f3c30ca0fc16e47de6b9897adda49e33c010ba885"
+status = "residue"
+cause = "mir::AggregateKind::Closure: is_pinned::{closure#0}: type outside the lift: LocalHandle"
+
+[[fn]]
+path = "crossbeam-epoch::pin"
+kappa = "b166c87a27b718710c22c5397799e341d1d225f1d172279eb8080855c0b921ec"
+embedded = "686342a32ac8507a47c861e7cb58d60d96ce3859125a1c27e06db11707a063b7"
+status = "residue"
+cause = "mir::Ty: guard::Guard"
+
+[[fn]]
+path = "crossbeam-epoch::with_handle"
+kappa = "69a82d6be5ed454d7b1cefdb445fb65af9263b2e0749e1e3fadce5fc1f5e315e"
+at = "F=u32, R=u32"
+embedded = "989f434a19df9025a15e51e3d3c7dade1994a45e5524ce781f5ad52ddc3db9ff"
+status = "residue"
+cause = "mir::Operand::Constant: default::with_handle::<u32, u32>::promoted[0]"
+

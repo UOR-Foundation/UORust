@@ -1,0 +1,78 @@
+[[fn]]
+path = "unindent::count_spaces"
+kappa = "a986066a1b0b120b698fc9510d2e0cd9ab3495cfe7546a329b5ff0e52a66c39d"
+embedded = "9b462d5e96704d8b6a3cfd58328d7a7af5b3b6370d19832fa50500bf99bb63ab"
+status = "residue"
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_, u8>>"
+
+[[fn]]
+path = "unindent::do_unindent"
+kappa = "fc13e26641a94c42c46d37f8a4cca7f62238215c8b3c05c0f9d2d7460039aac8"
+embedded = "7ec43f4812ff795b28e41c17f834a4b368d4b009df771135009d8d648748003c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "unindent::do_unindent_bytes"
+kappa = "c6e5ea8ae48ae7af94beb3ecde79ae375ec431ec50db83aa3f6c73b37f13b194"
+embedded = "97b6b6603847edea3b9e27f870e1af85a0bf12639c899c00873a568d430f7382"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(&'a u8) -> bool"
+
+[[fn]]
+path = "unindent::is_newline"
+kappa = "5310a0d44801036dc1c8497ec9a48fb66326f3b15eac9cac76198c42f9c721ff"
+embedded = "54eb4c796a984dd05aa7f32f2c7aa9b502e30510abeb15c0bb9c767b4daef9e2"
+status = "translated"
+digest = "fa9b0c8dccf3b7497f8d903dbe790063955803d4d6bd4f51d746bb634b7bf11a"
+
+[[fn]]
+path = "unindent::unindent"
+kappa = "935ac81f5122992088f2b501a9c4600f69e33b2a2fc454ba1b71acb0096dd8b2"
+embedded = "de10a739df1cfc0daebfca86c751f8ef208f9f75e9833a3d39f3bb2d6f338756"
+status = "residue"
+cause = "mir::TerminatorKind::Call: unindent::do_unindent: unindent's MIR stops at mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "unindent::unindent::<impl at src/unindent.rs:106:1: 106:23>::lines"
+kappa = "5f7fb6ffadbfffbbd71a3351536664e15e7164ea1fbf42e0415b385ab8faa6df"
+embedded = "1826a886d583f2e57ae372b1925a36f0b6ad25c9005663827f56ccc243e84681"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(&'a u8) -> bool"
+
+[[fn]]
+path = "unindent::unindent::<impl at src/unindent.rs:75:1: 75:23>::unindent"
+kappa = "3329545e3a954d51b2085fff2e757d657b3d9928776205374dfd96da68e9f7b3"
+embedded = "ac9278b21416b8c08b71f2478a0a91a5c934dd4fd86f35137015b759f5f1328c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: unindent::unindent_bytes: unindent's MIR stops at mir::TerminatorKind::Call: unindent::do_unindent_bytes: unindent's MIR stops at type outside the lift: for<'a> fn(&'a u8) -> bool"
+
+[[fn]]
+path = "unindent::unindent::<impl at src/unindent.rs:83:1: 83:43>::unindent"
+kappa = "8c9f26645600a809c88e7223d196c20bfab4f73749ab647db7fa696ae70bf233"
+at = "T=u32"
+embedded = "94661bba2d8236fd03e9c446e07e1b17df4de4653a4fc423e5d9c9530e5d2cf5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Unindent, which u32 does not implement in core"
+
+[[fn]]
+path = "unindent::unindent::String::unindent"
+kappa = "455da0030f95645ee2a8c4fb763b9b76aa361268d32286a5568da77d2c955bd1"
+embedded = "9bda76c8ad33e2e460078c42067ffc51f2b016ab673d0a858bb103f589fd8294"
+status = "residue"
+cause = "mir::TerminatorKind::Call: unindent"
+
+[[fn]]
+path = "unindent::unindent::str::unindent"
+kappa = "20e6e93b932878d54d80e4f0fe9c27e0dfded2e9d2f7d670be7803b387fd71e0"
+embedded = "857adf560b1595cf2dc7f59fa2d3d5448245a489627ba2b3dee29f1388492f93"
+status = "residue"
+cause = "mir::TerminatorKind::Call: unindent"
+
+[[fn]]
+path = "unindent::unindent_bytes"
+kappa = "f1a6167942ab8a4f0ab391af6513bdf2fed98ea3f309c83f794aca314497d1c9"
+embedded = "5d72b2e8e482308c8d5e55bed5224e2f363f8cec8dbbe2eeffa1a03e54753198"
+status = "residue"
+cause = "mir::TerminatorKind::Call: unindent::do_unindent_bytes: unindent's MIR stops at type outside the lift: for<'a> fn(&'a u8) -> bool"
+

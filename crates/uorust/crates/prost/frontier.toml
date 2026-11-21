@@ -1,0 +1,210 @@
+# The prost register (written by `uorust crate prost@0.14.6`; do not edit): every body of
+# prost's MIR at prost 0.14.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 276
+translated = 10
+residue = 266
+
+[module.encoding]
+bodies = 174
+translated = 2
+residue = 172
+
+[module.error]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.message]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.name]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.types]
+bodies = 56
+translated = 8
+residue = 48
+
+[embedding]
+bodies = 276
+embedded = 276
+evaluable = 276
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::DecodeError"
+bodies = 70
+
+[[cause]]
+cause = "mir::Ty: impl BufMut"
+bodies = 50
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 32
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: types::googleapis_type_url_for: prost's MIR stops at mir::Operand::Constant: types::googleapis_type_url_for::promoted[1]"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 9
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: uint64::encoded_len_packed::{closure#0}: mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: error::EncodeError"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: types::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::uint32::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EncodeError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HashMap<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: impl BytesAdapter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: encoding::DecodeContext"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encoding::wire_type::WireType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::DecodeErrorKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: wire_type::WireType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Inner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnknownEnumValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BytesAdapter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <Self as name::Name>::PACKAGE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: types::googleapis_type_url_for::promoted[1]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as Name>::full_name"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding::bytes::encoded_len: prost's MIR stops at type outside the lift: impl BytesAdapter"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding::int32::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding::int64::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding::string::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding::uint32::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding::uint64::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::string::String::clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::vec::Vec::clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::string::merge::DropGuard<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::UnknownEnumValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Buf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::btree_map::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u64>"
+bodies = 1

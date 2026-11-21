@@ -1,0 +1,936 @@
+[[fn]]
+path = "fixedbitset::<impl at src/lib.rs:1300:10: 1300:15>::clone"
+kappa = "e97448fb72596bf0d1ebdcb14b9efae4ed1aeae4ea2688c7272638a690cc291b"
+embedded = "e067fe273d5d75e0a8739cb4d11f28f05aeca9ab20320a702b8874145937749f"
+status = "residue"
+cause = "mir::Ty: Ones<'_>"
+
+[[fn]]
+path = "fixedbitset::<impl at src/lib.rs:1639:1: 1639:29>::bitand"
+kappa = "c672d230dff2e226c5fb0294957e0028ea56b907be52b7b76c956883c1270431"
+at = "FixedBitSet=u32"
+embedded = "304ace85d13cb4dcde1b9d6fad69dd0a36320f5a5ddc7a42aee602d20e3f9e69"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::<impl at src/lib.rs:1670:1: 1670:28>::bitor"
+kappa = "4a1c4fffce5c04fa31afa179c86d2b43742990aa186bce5da711d1e9ca0a66f2"
+at = "FixedBitSet=u32"
+embedded = "cefb34af28193833ab085c8d7c8cdae17e6c0396e00453df788869db0c390cc9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::<impl at src/lib.rs:1701:1: 1701:29>::bitxor"
+kappa = "c2a29507343b43518a66ce31ab786bf482ee751ca9910f265782d0e9eb85303e"
+at = "FixedBitSet=u32"
+embedded = "9ed2dce838fd3a90aff9ff495eabd4fe9d7dd3470a95dad7524f0b333ecdfc9f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::<impl at src/lib.rs:78:10: 78:15>::fmt"
+kappa = "86cb2fe4947029393d31fcd907100d2757064de6fba681ec694a5d81f7336e0e"
+embedded = "1873844e553e3bd5aee9bfdf4b72f1cdca0555629eb932f00b1e6cc6683483e0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "fixedbitset::<impl at src/lib.rs:78:17: 78:19>::assert_fields_are_eq"
+kappa = "e38f64cc66015ea27f0a9e767727873e54f3f0d45073428e26b2d95f95100cd1"
+embedded = "3e652e0450f67b3c0875ab4f9a267a9f22f3e8d2e5401f6496931abe59e87ff9"
+status = "residue"
+cause = "mir::Ty: FixedBitSet"
+
+[[fn]]
+path = "fixedbitset::BITS"
+kappa = "928d9caef2966feb703deefdceab3ee9543f9db451ffef0612f3e8d994ff11f8"
+embedded = "0db0965691a1f9637487dde0c13c9c9450f0546e828842d2eb07bcd11370f82a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::Difference::next"
+kappa = "dc4e9411de8bcfacbd6d001d42cc27653ea21873b6cbec23759dd0d7d40aa4be"
+at = "FixedBitSet=u32"
+embedded = "c4a9b895468b08332268e2e489f226f3edec039da41fdb3d5de9eabbfbdd4041"
+status = "residue"
+cause = "mir::Ty: Difference<'_>"
+
+[[fn]]
+path = "fixedbitset::Difference::next_back"
+kappa = "598a08df8269edb57691978ba5b3590d276f1a8e2799e37c96fff130d02dc2d2"
+at = "FixedBitSet=u32"
+embedded = "2a05e93e0992c102d3638ea212cdc43f274ca6a2baf911e026358c3d48828e83"
+status = "residue"
+cause = "mir::Ty: Difference<'_>"
+
+[[fn]]
+path = "fixedbitset::Difference::size_hint"
+kappa = "457dc347b8515ce777dbfb8634c08c62ccf457b127ef3eabc7132a53d6c96caf"
+embedded = "d8c752ebd44c0cc9ac022bcb1d8c2cf189c95e94127a0cbfea23bd6c28e15244"
+status = "residue"
+cause = "mir::Ty: Difference<'_>"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::as_mut_simd_slice"
+kappa = "85d2b5baa82235451d2a9f2297a073506036bd9bb572c417e0ab9806bcb4dfc5"
+at = "FixedBitSet=u32"
+embedded = "785a178278f9c96c357949d9b1d1c0df94c0c1bd77335037ba5332b0ca31d9e7"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::as_mut_simd_slice_uninit"
+kappa = "835a923ae671f1725788c0d6248c37d8fcb3d6ac95837c1b77fd7b9671ef65ac"
+at = "FixedBitSet=u32"
+embedded = "5bb06b55fdd10e43045b2cac0c9a6e0bb1750d2ffb20812fa0a04fde4d9a5184"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::as_mut_slice"
+kappa = "7d4da57d7d490203c5bbf081726000969d5e4b8544e0d2d43ef374ef9983e1f9"
+at = "FixedBitSet=u32"
+embedded = "1075747ccb4a9cb20e596a1305fdf8cba3d2aacef857f64b90ffe9e6769089cd"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::as_simd_slice"
+kappa = "c145761a3c7c3efa300d479b40c05785cbdb6f1d7acde5510eab45c562c1a286"
+at = "FixedBitSet=u32"
+embedded = "523b45e4fff7c2c44844de0c4b04b422e369f6d8b5f6e73415942061163c0f07"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::as_simd_slice_uninit"
+kappa = "4dd0fabc6311f2f50f6a406c0be0d7a21399ea638fe0696b3b93b0899de08064"
+at = "FixedBitSet=u32"
+embedded = "75b2b5a6d9428d835da26263f61bc0b2c16f59a1718f76439a4ba01e5c9788bf"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::as_slice"
+kappa = "6794553e0a541b78c32be8040d9c290eadc78b1fcbbe819574966000588e7144"
+at = "FixedBitSet=u32"
+embedded = "c633573514d2036a22862c6ffb3fa845d1f6b988a932ad32621012c81df83c82"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::batch_count_ones"
+kappa = "43cfceff8c490515cbb3ae7ff21bfa107a1ce30908c1c47334bafdb1efd67a68"
+at = "Block=u32"
+embedded = "6e3214840723a72552f51e437bb6701714fd066dc28836fd8cc852add857970d"
+status = "residue"
+cause = "mir::Ty: impl IntoIterator<Item = u32>"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::bitand_assign"
+kappa = "d9a71b0311211cceb01b10b816bfcd4e3cad56f2f9a93a56970f4eedc3ebced9"
+at = "FixedBitSet=u32"
+embedded = "389b55e2a471b508f17239d2f6acd6074f7ae666328af71adec6318858ab84de"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::intersect_with: fixedbitset's MIR stops at type outside the lift: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::bitand_assign#2"
+kappa = "60092f21af3065c37f2cc70fcfea99be829c15f239262af545f1a87fd6e22516"
+at = "FixedBitSet=u32"
+embedded = "1e13b1f22e733f2782176314135c7cf98458fabfe59f67a4725cc96807350927"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::intersect_with: fixedbitset's MIR stops at type outside the lift: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::bitor_assign"
+kappa = "6fd5db4ef888947c00859bc284c1bff662ac9c8854beb187b6b992ad9b073686"
+at = "FixedBitSet=u32"
+embedded = "9e9f3fe6351bca6c0c8a290eb19d96d750726928a0fef7b9ea6467e189aba197"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::union_with: fixedbitset's MIR stops at mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::bitor_assign#2"
+kappa = "78d6a855cf30e04ec8c0679264e596c8e208b00994e6e8f662134039c0920b17"
+at = "FixedBitSet=u32"
+embedded = "1c832375102a0ae32b0ebd6ceb137b499cec31e3f71a6f89220cb646474e4127"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::union_with: fixedbitset's MIR stops at mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::bitxor_assign"
+kappa = "6c0a4633b0f1a2ec76aa317018dbf7fd40ba9082fb373b60e7a26e7def451607"
+at = "FixedBitSet=u32"
+embedded = "472f76e293fdf1396721d8849b2c83fec2b17ed4547d804e76316e70cc7ba8c7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::symmetric_difference_with: fixedbitset's MIR stops at mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::bitxor_assign#2"
+kappa = "f0312ef5f5dd436b459e9ed1453ce67499596869a5db5a9af05d58340c5f7919"
+at = "FixedBitSet=u32"
+embedded = "7928249294a51604322df9620aa5cce5b2cfa74df64d69dfaa1792bb614bc0c5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::symmetric_difference_with: fixedbitset's MIR stops at mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::clear"
+kappa = "1b95f103d326fe8efd4164dfcf5a9d25dc7ce5200a6eb0efaa6ec6bf3e442d12"
+at = "FixedBitSet=u32"
+embedded = "1e6d09756e7e18836e9c940965045d5559f0730b020cf1759ae695e7eb933a8a"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::clone"
+kappa = "2bc92b2fb2939bfbbeaf512c1a5e18cdbb820bda9ae9865d94775ea9b4fc7992"
+at = "FixedBitSet=u32"
+embedded = "b2a5f186d1ed23a729738a525f63d34bf4d0328f1da308adffde9ce9f09c0bb1"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::clone_from"
+kappa = "3ad309571fab774cc69ae2e402386109b7e18846ed0f8275874d6d4b327a8b37"
+at = "FixedBitSet=u32"
+embedded = "3ddb33190164abf964f7930ee9c6bec7d30ff93620628268ded345fdd2018572"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::cmp"
+kappa = "06d1267707b0cf39092e8fd371c3bde7229439d1ccebddeb8975c8fec9210e64"
+at = "FixedBitSet=u32"
+embedded = "0d7ba405401964f2d12862d2e545caa05bf129bb5e435059e61e281d4c1e49de"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::contains"
+kappa = "9ce527f40723904ffec8d95657c5d7516de0b63adda4bd411261373913708c00"
+at = "FixedBitSet=u32"
+embedded = "7bb99726ba3ba7d70d4dec6b2f01662386ed6fde6498ab8f7259228101a238fb"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::contains_all_in_range"
+kappa = "44bef7d513f323d10382cbb9d5fbeb5726d19bcfbe144aab89c47612da1aeb03"
+at = "FixedBitSet=u32, Masks=u32, T=u32"
+embedded = "410480225c1713ac0ff525924d5d9c69fb0071cbf63e71c29b1ed8aaca5460bf"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::contains_any_in_range"
+kappa = "506fce37f75a43b81ea2f704a7a0b3e162d68a1550fbe690cafd5253278896af"
+at = "FixedBitSet=u32, Masks=u32, T=u32"
+embedded = "82ad8eee612f09c17c64fef2f824d391827ee3f27cf826f3dc8554280ea7373f"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::contains_unchecked"
+kappa = "bd21d2cdaffcdb7dc98fed40ed969c6c46283f2729d995406d4bcd67dec764aa"
+at = "FixedBitSet=u32"
+embedded = "faa6ed35c76e91435193ca6bbe725a37a25e341ec2e647931a9164c64dbc1a9d"
+status = "residue"
+cause = "mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::copy_bit"
+kappa = "d0dacccfcfed1698d3fadae72f93f481874d90723203eb16f2b8eeea7f396950"
+at = "FixedBitSet=u32"
+embedded = "be1d1d8eeb5e26599f1e959999ff3d0e1ef830fbb057b297cf8fc7641bcab14f"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::copy_bit_unchecked"
+kappa = "14fb5168814cc5b485191bb70c30fba5c6e1b6822c18aa97e89ffa661262c393"
+at = "FixedBitSet=u32"
+embedded = "0322ad26d57b7826f00e90aadd6131fded0953e7f640a32f6fc50d27bcc642cc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::contains_unchecked: fixedbitset's MIR stops at mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::count_ones"
+kappa = "b9bec0b6a31a153f8a41c39dd1cfd4468b772cb8e5fe383a8fd6ca4093e97665"
+at = "FixedBitSet=u32, Masks=u32, T=u32"
+embedded = "b113839bbcae64f17b3140b3557443c8e4b93f3c4b42b135e2a6262a96d8a7b9"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::count_zeroes"
+kappa = "4cc04e71dc1eddc3917e131ac06d582fba48f42f04da9176c09606aca557aef5"
+at = "FixedBitSet=u32, Masks=u32, T=u32"
+embedded = "a719510a1a156b6e6d997364e43279010e279c916676a144901a3b4d55ac6afe"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::default"
+kappa = "318c3c4e01d0013e7495a808efb2b6c6e69f0070f575c661bcff09bd1539e2ba"
+at = "FixedBitSet=u32"
+embedded = "74406e40597193b2f11cf14a6e8eb7f983230b581460cf73c42db312ddb81930"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::new: fixedbitset's MIR stops at mir::TerminatorKind::Call: NonNull::dangling"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::difference"
+kappa = "3ce3f8aa522a95e5886dae3b8e7b1a5c9349670e3411299e64cb8f93e409e3cd"
+at = "FixedBitSet=u32"
+embedded = "5578e7524e00c0cc0dbd058d6811ebfc88dfb7bfd5278795967a98aaf2843ee2"
+status = "residue"
+cause = "mir::Ty: Difference<'_>"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::difference_count"
+kappa = "d946c169a905e260acce6dfecad7f1f22932d4a09463b69bdeeaafdd5496b83a"
+at = "FixedBitSet=u32"
+embedded = "5a3f60daf3b67653b737acd2e50c2b4db2f5643b4e5b090dff070770be321a1a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::as_slice: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::difference_with"
+kappa = "a4ffdef70ce35e8bf3bab495c55d0183db08bebbf0f1ed2147eb4fd0e2ab6932"
+at = "FixedBitSet=u32"
+embedded = "321fcdc7d82b1d54ada6ccf5946780c3119154f9faf800d96f7687610a4e3d6e"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::drop"
+kappa = "e992251c6d135ef61e4546320694c60fef991a47a0554010683d2d7903e11939"
+at = "FixedBitSet=u32"
+embedded = "2b415c6ad6ab8a1541e4394ce5e5ffb0e9c780479a492e9d638083216db0de9d"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::eq"
+kappa = "5dc1cad575fb701583171ef45a0a5bc2a9077407450b30b651c1e4c2c8aa8116"
+at = "FixedBitSet=u32"
+embedded = "b9801edc7f14fbc60a0d17beb573c4c06153624a841f9792122cfedfd25209f0"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::extend"
+kappa = "bc5e1d875ad17b4683ee86bcd88a745eadee28e7f77fd8b0bd27b441a8819251"
+at = "FixedBitSet=u32, I=u32"
+embedded = "977855ff2227f53e65b6fca5d778ef77474c26d3ed591e9c9d44955d8c5d1806"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::fmt"
+kappa = "044480b2b195574342b65a09a7a7ea283648b48b1121d1514b3429bf04a5c41d"
+at = "FixedBitSet=u32"
+embedded = "a94763c13c257ec674b9b183d6ab2f875b7fc8d305b63030471522a20ce22cd7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::fmt#2"
+kappa = "6ecfcb10c68f9e6a9ca74a85e301cf4b998ae678fda8e05af74a56d1197cd1bd"
+at = "FixedBitSet=u32"
+embedded = "5d0f73a3bd65a821a371487973117bc4c9c0426f041a943f1e6fb8020e6c28af"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::from_blocks_and_len"
+kappa = "355d41f0d29949826d132d1c1df37f27fdd10576d3a436b9761bbce36e3bae69"
+at = "FixedBitSet=u32"
+embedded = "5bdcc8ade96f042aa2759c73f3a983844bd32b3fcf638ef2be9af2bd0f46eac5"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::from_iter"
+kappa = "da586a81fe5784fdf471b6d16205e4c76d8eb6b06e2b98473951036c4cfe0aee"
+at = "FixedBitSet=u32, I=u32"
+embedded = "ca3c9d72d41068683e7cb76e382416cac2f5249c49af43279d8497526c7685d3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::with_capacity: fixedbitset's MIR stops at mir::Operand::Constant: the constant item block::<impl block::sse2::Block>::BITS"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::get_unchecked"
+kappa = "12c825dbdc5a365c423850595c1bcea39a17d768eba9cf0b358a9081a6ed3816"
+embedded = "25d374cb0e67d5ba69e33791c6cb596b8d3a1f6aadc146540bfe4f6afb75f9ae"
+status = "residue"
+cause = "mir::Ty: FixedBitSet"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::get_unchecked_mut"
+kappa = "0834b7527fa3f96b5bc67564a8bff0c1d86ce7e3284f87d767d39f693bfccf08"
+embedded = "d8f7a30f2be94214f382efa3b7344afe7b564b04621e9b93f1d64b8befdeddf1"
+status = "residue"
+cause = "mir::Ty: FixedBitSet"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::grow"
+kappa = "8a1d34cc5878b5952592f7dd920eb1260ca4b73f61ce3d95487438196f6c3468"
+at = "FixedBitSet=u32"
+embedded = "d7064ee14d966618041bd74b1917753652ad549f55d7659dd7064c8d1819bcd3"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::grow_and_insert"
+kappa = "28c3086f08df13061be9678f85407f4492da2471a6f83b7efb2a6173ef571ac5"
+at = "FixedBitSet=u32"
+embedded = "354802b91d155d7a4b9f834bb336a063fa55c77318cfe096d68fed4079a3ff45"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_add"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::grow_inner"
+kappa = "b123ed847561237fe45155c8af6bacebabfecb4969104d7d10d58b62c31a5f4e"
+at = "FixedBitSet=u32"
+embedded = "7fdef0880fdd5e6b89f9aac5f3e2a687d71fdeaabaecd16d2f42119a80f7937a"
+status = "residue"
+cause = "mir::Ty: sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::hash"
+kappa = "24dcdb0e918a93c779b3ff1c4e0a37696838d5357a2966daaa2964164c5aa447"
+at = "FixedBitSet=u32, H=u32"
+embedded = "06fd796f0ee592ef9120229fbed52564422700cd4e5602d90c18aa517c47dd32"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::index"
+kappa = "563904d771405a70e85d263d78dab87e70b9df84fce2ff8b91f6334af099e0d2"
+at = "FixedBitSet=u32"
+embedded = "315aa786972fbf2f30ae3a710fcbbec66929299d731554df6567bc5a6f928e80"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::contains: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::insert"
+kappa = "9f2becf33b3d7b8997cf2cd8c73a4592c89f50c506e1b986e7beb307928b2dc4"
+at = "FixedBitSet=u32"
+embedded = "dc7c17eae80ec79e214ba32766bdca9eec8d3d83cd4673711fd196a66868153f"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::insert_range"
+kappa = "20e224d421bc3495356e1c60e62a5e5f08a5014708758a472a2a5a1f8b5ef46d"
+at = "FixedBitSet=u32, Masks=u32, T=u32"
+embedded = "094e061d10385ed9df543ef2e419f6f2e7b1707a4d00b1cc92e120c2014a6416"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::insert_unchecked"
+kappa = "158dcef279e0eee3b57cd0e3aa7329e4ccbc46ab0c70094c93a746d91e46b968"
+at = "FixedBitSet=u32"
+embedded = "a1794f8e14129e4c981a2e6ec05036137971ea9cb94262b29c64f75296122142"
+status = "residue"
+cause = "mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::intersect_with"
+kappa = "8ef0327239855b0b588f47b8a47c30a689e5266284e44872a78aa9e24c6ae67f"
+at = "FixedBitSet=u32"
+embedded = "009ef6d52123c239258c8fb5e840d5ff5127c3a8444683f0af61abcc6fa155e0"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::intersection"
+kappa = "132ee8413986ed5e86520899924de931a3d3a4348112e6ca483ea2ccc41a4e13"
+at = "FixedBitSet=u32"
+embedded = "6d8724b5e41fb81b73e01076c9a62af6390614486a00a4ee51fbfa216fa20149"
+status = "residue"
+cause = "mir::Ty: Intersection<'_>"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::intersection_count"
+kappa = "bb71958b35ecbf6ed9cdc9730374abfc2903e16951be6d8c281db4f1f4642b9a"
+at = "FixedBitSet=u32"
+embedded = "353883f278cddb68c67a336778e1a4bbcc9ce16491bddd52df90404980012d0c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::as_slice: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::into_ones"
+kappa = "20ecaa20216c6e5d7b8294ec732e8500d0c86372a5ef48289a738271f931a5b2"
+at = "FixedBitSet=u32, IntoOnes=u32"
+embedded = "cec207f91c1acbc45e19364e4aaa51080ee14504b8e8122a13c22520ea10f9ed"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::is_clear"
+kappa = "1d0ce00f2a275326083437e6ac0f2b4fa6bdc342ad73fcb006c5a68656c219b7"
+at = "FixedBitSet=u32"
+embedded = "0c77f94de95784f125e7689fd8db7e60fbe919236331e3580c21d8e67ae2c93e"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::is_disjoint"
+kappa = "588a2920e82ee42445c1c68c3a8a49e426d2b52c931f89f0007c78ffc2e50522"
+at = "FixedBitSet=u32"
+embedded = "ca95de9f281c3067ab8febcfb9fd2916dcf6f24c7555a73b550acce71b753c14"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::is_empty"
+kappa = "494b5e5726e4ba4f9b1103732e2f89d20f4bd0e16f20f478ca8396614033d94d"
+at = "FixedBitSet=u32"
+embedded = "5a6725626bf17a288c236fde2e8cb38c69bbd344e43a5fbc7636a16254525ac8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::is_full"
+kappa = "ff476b0e26529d3b692813e2600f158ee941b559c5a108514ee2872819917593"
+at = "FixedBitSet=u32"
+embedded = "bd53cf88beb737d028ce6550e2494596e3265c92164a72b66836f1f8d1b63abf"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeFull"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::is_subset"
+kappa = "52cdb4509bd249946db598a6e7592da0d707b2a7a815c99bf26ffbae4809092a"
+at = "FixedBitSet=u32"
+embedded = "98a3b3ab0a8d0217c288180ec1279cd64b0894953d80965ed25de325aa74aa62"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::is_superset"
+kappa = "c05c8ec74917ffd9fa6696a7c4c7312c62e079949f8b0eaca9d4179781a13ad3"
+at = "FixedBitSet=u32"
+embedded = "da7c4e894b33da2829a7dbe88b386902744a1eadd091c027ff24909f630ccf1f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::is_subset: fixedbitset's MIR stops at type outside the lift: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::len"
+kappa = "620f4b24f6b3a94041c93c892968adb4bbd6294ea43c5e2b5036af5df1119d4f"
+embedded = "773b6cbd6b73b1422a20b31edc72371029a8bd4f3cc054a7b7c11733b5525799"
+status = "residue"
+cause = "mir::Ty: FixedBitSet"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::maximum"
+kappa = "c99e9ddd7f0fb44fdfe1d161a81e52e30862e51947f59f90bce5037ac268c001"
+at = "FixedBitSet=u32"
+embedded = "fab86ab6fa6da6e033435d99451c44e0c9724b652421b1a5575c3b2c386f795b"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::minimum"
+kappa = "de62b086d1cf7372b39ad7b8e26c224d313b4684407213beeac04f5c7a94d455"
+at = "FixedBitSet=u32"
+embedded = "1007b654979b0e9e04b732107d03e2f73810eb19253e4ef969d1bc241138ca20"
+status = "residue"
+cause = "mir::Ty: block::sse2::Block"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::new"
+kappa = "36517ec3f49771f064905876d8a201678deaea1bf8161e16d1267975bafffb93"
+at = "FixedBitSet=u32"
+embedded = "6434776a11423b676fc18d9d11b96271b40df950f4157fd44f5df2a0f3f0af7d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: NonNull::dangling"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::ones"
+kappa = "d797a6f1369c3ad4e143bb3161380e40be04d6ee33c62e54cbb746d3e4569973"
+at = "FixedBitSet=u32"
+embedded = "129b94bb55242a1e3d59f8decbbd2c191a6eaa21e6ffe1a5ba908ce4115e7735"
+status = "residue"
+cause = "mir::Ty: Ones<'_>"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::partial_cmp"
+kappa = "906e66f7a32a7e15ac8f3c735d66b463966db95fe75cdf9216f74af6ca88c9c2"
+at = "FixedBitSet=u32"
+embedded = "866ddc6d66f6e4587888b6824666a5e7f3fe56f0d8680564444a584a9fd9c9ce"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord, which u32 does not implement in core"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::put"
+kappa = "b92242cf6b9a2e98c069f224c7f4c62b54e295b8ee4c849ae5a84bba4287defc"
+at = "FixedBitSet=u32"
+embedded = "27b2948eb535ffd106dbbdc32f1c5199b56c51773642fc078290a10c1ed8b473"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::put_unchecked"
+kappa = "e7752ed46719e4b13e75e6dc7771f50658a45cb1c6de004a6eee4286f1e40fa3"
+at = "FixedBitSet=u32"
+embedded = "14ad9c9b3c7a12f63927a3975a5943d278a801a503a985c4f9a9d11af543652f"
+status = "residue"
+cause = "mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::remove"
+kappa = "7bd539b12d765480c656cf0bcb0f81a79d11ed58bb8249a40ea263eab6dde300"
+at = "FixedBitSet=u32"
+embedded = "f10a66a6e6aaf7b9fbf18241ae2d9b71e15311edaea350cc71255b3574049928"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::remove_range"
+kappa = "8275104bde0ad4ad9920cf3abb4f1135700376b37b5980591a7e1365644b8183"
+at = "FixedBitSet=u32, Masks=u32, T=u32"
+embedded = "c052709fe782090a5b99124bcc750444b8baa612e983df735d93dab121cf1c48"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::remove_unchecked"
+kappa = "fe8f765f656c57b6dcc1d1798e83ca03fad0a26c9a5bfb76868d018e4b3e7142"
+at = "FixedBitSet=u32"
+embedded = "e7adc48ffbb06fed2bd6aa36318132d10957b4e8aca50930678bc16ab3ad1e4c"
+status = "residue"
+cause = "mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::set"
+kappa = "0435252d97e39eee3368580bfaf0c3986d384031b67d43a15d7e436619671fba"
+at = "FixedBitSet=u32"
+embedded = "3232266c070fddaed4d7231c21eb52dd483098b2d0e66e14021e623e7c18580d"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::set_range"
+kappa = "3f90da9b164267046f8d10eaec3a32501859c5f230989bd01c563ce89e5b0c49"
+at = "FixedBitSet=u32, T=u32"
+embedded = "d878640401b8e5b04e3757690f2582fc270d1e67e4be8f9f2948a4d9439d47e9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::insert_range: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::set_unchecked"
+kappa = "69795252c16149f4852cb434e65cce35340ce478d1abfb3287594a41c1cc0938"
+at = "FixedBitSet=u32"
+embedded = "9195b62817d5d793230c6d709d058a66b73fd91c370d5017f4af154b2cbbb955"
+status = "residue"
+cause = "mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::simd_block_len"
+kappa = "2d120cef55e9b58d51d3a070987710b148e7c8e69a1b00c5452ba903cc231884"
+embedded = "f0b9c3ce1376921bfd981ccfd8b7756faf156bf6db8b06e39eefb846ff1297be"
+status = "residue"
+cause = "mir::Ty: FixedBitSet"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::symmetric_difference"
+kappa = "b8ac3e562e15c7b94a989a0b2a0bea7a949c20b9d6d97c9f3baf64468a5fa993"
+at = "FixedBitSet=u32"
+embedded = "f8256125c0de62ae8172514c08bc1aab842b40bc33dc8f8ac51d59b6dee8acd9"
+status = "residue"
+cause = "mir::Ty: SymmetricDifference<'_>"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::symmetric_difference_count"
+kappa = "254f6fa305e64b9486f337e7cc8921796921e5d0fd2f23023960cea18207fe5c"
+at = "FixedBitSet=u32"
+embedded = "d843cd0606025699aa249ae2559944fcb9a90cbe7481c29b65343a44f91f50ea"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::as_slice: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::symmetric_difference_with"
+kappa = "7423c7316aa7573b8b53c44d8b554e6cb87f8cea02a0d58651b64d873e00f920"
+at = "FixedBitSet=u32"
+embedded = "a42411162b7ae4fcf8f0733853f5423d39ad54b3cbd3c4dff96f4cc0e553e345"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::toggle"
+kappa = "7ae0638ac919fb2781cc069aeac011b91c591eba5f4841ceb621a3b824b991ae"
+at = "FixedBitSet=u32"
+embedded = "f7c42726ff931f8bc9bc8e996858e56183cea79d9772c289b862083caec42407"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::toggle_range"
+kappa = "f9f15464e137e382328de9b8bde34e1d0b422611086bd8655c75b56069f191b2"
+at = "FixedBitSet=u32, Masks=u32, T=u32"
+embedded = "4689f6b0b4950fe1f35da4f1abc636dc672ddc10316a142bc6f0f5254be6b6e6"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::toggle_unchecked"
+kappa = "0543196b3c17c84e4c74d9da6bceda754313062a338bd6ee0f49c8fdcceef9d8"
+at = "FixedBitSet=u32"
+embedded = "dc96bf44cc66876a98e75eb06c7dea69bffd2919a8751e45db543ee1f3254377"
+status = "residue"
+cause = "mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::union"
+kappa = "385b073742f9512745418530ed30c52d38cd48e6fa43befb2ddcaf05554d12cc"
+at = "FixedBitSet=u32"
+embedded = "9f2a62de84e1a87bc001226dacde91a844702cbf1d17cacef067268e24827311"
+status = "residue"
+cause = "mir::Ty: Union<'_>"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::union_count"
+kappa = "ae5eb42724d935901a3adbc079edba5cbebbe7a6488942bdf9f85e89f911202f"
+at = "FixedBitSet=u32"
+embedded = "f48e000fe1f85f1e50c00b082b6800fcb807a37a8b358bbc009c1e6ad1d4e548"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::as_slice: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::union_with"
+kappa = "29ada790a479ad701b64883c1a07848644d3247dd5000599bf17946cae1464b9"
+at = "FixedBitSet=u32"
+embedded = "5392da62dd926eecb5d24c2709562e035f53b69ed306e8789f4e5c8e9af1cc34"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::usize_len"
+kappa = "dc30095bfa9e8736d324b8e85029fbb98d0c69d62b464e71b62d1652cac33471"
+embedded = "5b7dd05751d0e38054f64842e479ad59ed3125f9399cc8286da7487610108e0e"
+status = "residue"
+cause = "mir::Ty: FixedBitSet"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::with_capacity"
+kappa = "f91f97bd86bdbb160ae4b3988f10dd72cbb25051534438ab174cb2fa6bdc27bb"
+at = "FixedBitSet=u32"
+embedded = "9718cf1a79a10a9d57f80d82bed44d89912a49b07f49083a7c998e74929d2c10"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item block::<impl block::sse2::Block>::BITS"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::with_capacity_and_blocks"
+kappa = "b8b2bf3321dfe6c541d874096c2affed406400a2fa050bb36cb8b4d45b9a5301"
+at = "FixedBitSet=u32, I=u32"
+embedded = "a180f03eebab8ea7339c780d32aaa6909afa64d62a78108f79dc9aa9bf720286"
+status = "residue"
+cause = "mir::TerminatorKind::Call: FixedBitSet::with_capacity: fixedbitset's MIR stops at mir::Operand::Constant: the constant item block::<impl block::sse2::Block>::BITS"
+
+[[fn]]
+path = "fixedbitset::FixedBitSet::zeroes"
+kappa = "9498ab1077ea8dde7f6b553c60185d8ed955299c7419d3f66a3083a847bf695f"
+at = "FixedBitSet=u32"
+embedded = "091a7632133eab273c412ad113c6724ad6df13513f3b3b7e1a94931c4e738557"
+status = "residue"
+cause = "mir::Ty: Zeroes<'_>"
+
+[[fn]]
+path = "fixedbitset::Intersection::next"
+kappa = "781bf6205a99dd39b9f80bddb869e492cf597cf3547d5190ebbf8749fb488e40"
+at = "FixedBitSet=u32"
+embedded = "7d23362a8449c42301fe91ee81c8ae572c9db05b0eff17653e8ca82861ea4469"
+status = "residue"
+cause = "mir::Ty: Intersection<'_>"
+
+[[fn]]
+path = "fixedbitset::Intersection::next_back"
+kappa = "057e01b173fe8db53ced2b9320e52e963c4990feaecb77b2384e96a8b33bbf82"
+at = "FixedBitSet=u32"
+embedded = "b9d8e8caaf75af285e743c8b4386175819ba3393c4bd2b0a053825cad108cb6f"
+status = "residue"
+cause = "mir::Ty: Intersection<'_>"
+
+[[fn]]
+path = "fixedbitset::Intersection::size_hint"
+kappa = "12eb0692f40134dfa32bf08a1357d806900b6aa1b6acb398e032f60d8beeb5c0"
+embedded = "3d85f04ca93be7a55ddb934064f8e3f1dfe28871793173d0cc81b7690f61cd16"
+status = "residue"
+cause = "mir::Ty: Intersection<'_>"
+
+[[fn]]
+path = "fixedbitset::IntoOnes::first_positive_bit_and_unset"
+kappa = "e6930d418692799e8a373b588c639f5b6ce629bd4f877ebeb3aa5378865d30e1"
+embedded = "1658a255d71379ffbef13689aee64a2e36c15ef77e867abaa91043179b9f8280"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::leading_zeros"
+
+[[fn]]
+path = "fixedbitset::IntoOnes::last_positive_bit_and_unset"
+kappa = "76e640463f33e7633549ef6f6c263a5036692e1082621943429b8286c725b1f8"
+embedded = "8b7a4b715c05e90706902476b0e65c6181c2bac217b3823358a7d06464899a5a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_neg"
+
+[[fn]]
+path = "fixedbitset::IntoOnes::next"
+kappa = "6d0a9a9d991e31c4e45a87f8752126c3003b3e7c22db0637254b0f2a216fc07e"
+embedded = "56cee50689713f05eaba79bb4a84752304ddb532fdd752ce4f9fe71519eb9bbb"
+status = "residue"
+cause = "mir::Ty: IntoOnes"
+
+[[fn]]
+path = "fixedbitset::IntoOnes::next_back"
+kappa = "12dbb0c1fb7e604467804aac9094445fa6b7e18000beca150cedad9299ffa90f"
+embedded = "610041778505536d0bdd77497fe25f539c452db7b6845cad78394eb37e45ff8e"
+status = "residue"
+cause = "mir::Ty: IntoOnes"
+
+[[fn]]
+path = "fixedbitset::IntoOnes::size_hint"
+kappa = "209c393705d98954fca15cea21e3ba8949237e116898e57dd809d7a98dab1678"
+embedded = "fc6dd6db250e4ad6d606428d5105890f2351cd6e740eb377d1da4a64b2566c46"
+status = "residue"
+cause = "mir::Ty: IntoOnes"
+
+[[fn]]
+path = "fixedbitset::Masks::new"
+kappa = "96ef2fc472add700bdb29ac95f897987759a93294b23c950e8f516461b64ebf3"
+at = "Masks=u32, T=u32"
+embedded = "64cbd0109209598d71ffc02bbd54b997b7f220b1a91ae3cedc469d1ce5d430c9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by IndexRange, which u32 does not implement in core"
+
+[[fn]]
+path = "fixedbitset::Masks::next"
+kappa = "609a89d84020a89ca6d93b97d9c4427a7dc27b46b14101f28648e58c836628bc"
+embedded = "f24bf580ac9aec06bd0b88f89dc3af145398fa50d5b42995c2cc9d4ba247d1cf"
+status = "residue"
+cause = "mir::Ty: Masks"
+
+[[fn]]
+path = "fixedbitset::Masks::size_hint"
+kappa = "9abd0cf1d7f994194e5a2f59a525a29d21d8ff56f24a1a45e308043cc8ced976"
+embedded = "96bc8f78c282ec75712b780418419a42ad670721b7c3d4adc4d7be6beeeda535"
+status = "residue"
+cause = "mir::Ty: Masks"
+
+[[fn]]
+path = "fixedbitset::Ones::first_positive_bit_and_unset"
+kappa = "ebf60ef80043e7aefd50c1a27c15bce6a3f6643e45714bdd6701e3bc3e9dc2ac"
+embedded = "053f96978b151f1d2bd6e19b6a61af0a3ce536cc3fd49dfbfe2bbe9796125228"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::leading_zeros"
+
+[[fn]]
+path = "fixedbitset::Ones::last_positive_bit_and_unset"
+kappa = "c90f86cc6c6417c99b4e35209f00ed39d7a0bc653b8f8d661abd24b3b61126f1"
+embedded = "07d033786be46d20148297c27a2e46933317b3b1606d8821dabf01218c73a9c6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_neg"
+
+[[fn]]
+path = "fixedbitset::Ones::next"
+kappa = "f310216a9aa0f089fcaa0f6f77ef86b177edaff8057ccda65f55176a6c3f86cf"
+embedded = "2025f05d81f96293ae4c8120a209ff2cf06a06b48ceb732262dae495eff71d79"
+status = "residue"
+cause = "mir::Ty: Ones<'_>"
+
+[[fn]]
+path = "fixedbitset::Ones::next_back"
+kappa = "f31117ff68ec8bcb5efc09364e35c398564007c8ad9c6d64056d671a59657374"
+embedded = "d417bc7d5224521417304b9be1fb755d57880ada2728cf635367e83004a27f32"
+status = "residue"
+cause = "mir::Ty: Ones<'_>"
+
+[[fn]]
+path = "fixedbitset::Ones::size_hint"
+kappa = "b0acd30418c916951b599cf8699c321c25c3d6e62cba02317c3cee663dfb8145"
+embedded = "d6b0817301e047605f8acef15cfeca774d96a37474791017426e4e010562f7ec"
+status = "residue"
+cause = "mir::Ty: Ones<'_>"
+
+[[fn]]
+path = "fixedbitset::SymmetricDifference::next"
+kappa = "be574f01829b0276234361ee4e36e3f61591a50643d2c8b9a1d13a91884cd6ef"
+embedded = "a31a941858f32c5f6dc90a64241748960f07e32f77a25649cf31157445084475"
+status = "residue"
+cause = "mir::Ty: SymmetricDifference<'_>"
+
+[[fn]]
+path = "fixedbitset::SymmetricDifference::next_back"
+kappa = "5a13dd725943739ce3002af5ee4c96afaf580f3d706668dc04851184acee9a81"
+embedded = "e43b6b910b448773b70f6e851bdec9caae1ce2b4e2f39ac9cf5ee1cfe8942d51"
+status = "residue"
+cause = "mir::Ty: SymmetricDifference<'_>"
+
+[[fn]]
+path = "fixedbitset::SymmetricDifference::size_hint"
+kappa = "f7b9db7756aee749a669d04c39456677ab344ad61a7eb48cbadf8c761b7fc36d"
+embedded = "2754d2b266cd1c46d2fbe862c9962bbd17ba987d8417a7219d4b611b42bcc86f"
+status = "residue"
+cause = "mir::Ty: SymmetricDifference<'_>"
+
+[[fn]]
+path = "fixedbitset::Union::next"
+kappa = "77f3c8da050c802b4a5121b5f8c32bf25996a533cd8a866179daa372e0aca8c6"
+embedded = "926e9753a59117fc02df8b338ac48ae7b8616b2fdf06a7a86a5fa0478b45e17e"
+status = "residue"
+cause = "mir::Ty: Union<'_>"
+
+[[fn]]
+path = "fixedbitset::Union::next_back"
+kappa = "2b5e4794481f1be0ec8db89e8b4ff6fa9639e65e000271144eaec6463739aeba"
+embedded = "9c774688a9b3e38be94dd0292881a21dec305d0929a5f433e6fa172ba1462563"
+status = "residue"
+cause = "mir::Ty: Union<'_>"
+
+[[fn]]
+path = "fixedbitset::Union::size_hint"
+kappa = "1e1bbb769b6e366a674548e0b98a27f1173afeb963fe83d2d6d1379730ead354"
+embedded = "ccf6ce34a6ff9792847f25bf8a639ae1ac3a484fdf27f19cbebc57e944edc10c"
+status = "residue"
+cause = "mir::Ty: Union<'_>"
+
+[[fn]]
+path = "fixedbitset::Zeroes::next"
+kappa = "a2765051b961280321f2423b7f4685ffba539e37e6de2b18ba118a829111b55d"
+embedded = "54a3d40e4b7f2fae055cdc426d0f0db1ab8a83c8efe2a52d1849f922ac420451"
+status = "residue"
+cause = "mir::Ty: Zeroes<'_>"
+
+[[fn]]
+path = "fixedbitset::Zeroes::size_hint"
+kappa = "e75db0f29023f2699ad60803dbca0a76bd51b405f288278e06425038416a5d2b"
+embedded = "9debd2037e2b10a393ba1aac044a0eeb21181340b7704838b09e4cad54a450e4"
+status = "residue"
+cause = "mir::Ty: Zeroes<'_>"
+
+[[fn]]
+path = "fixedbitset::div_rem"
+kappa = "a6eace535e3defe76bc9eb9e8ceff9b4797002c686806b81bb40dc0c64586625"
+embedded = "ed1a218d19d3c530aecb1b3978874e37416a5e35dd2974ae82bebd12e7c885cf"
+status = "translated"
+digest = "b62839902d00da8484878f1286eabf157ac3a29a66076cbbb6755f06259c7e9f"
+
+[[fn]]
+path = "fixedbitset::do_grow"
+kappa = "e4d29533f294a976ccfb15e34059639b23b20352b0acec2c03997b5c9e573f49"
+at = "FixedBitSet=u32"
+embedded = "0503f8cb27044cf1a7456e3221d657b4049a3b51a37b5ff70bc59d9828093881"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item block::<impl block::sse2::Block>::NONE"
+
+[[fn]]
+path = "fixedbitset::vec_into_parts"
+kappa = "acd6064890c2f2934dce886e5edcd2dc4a8aad910ad4012dcaab9dce0360e397"
+at = "T=u32"
+embedded = "26384b6c2ec391e7ad730565a311125511919a3c0af353a7f88fa0bfa069fff5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ManuallyDrop::new"
+

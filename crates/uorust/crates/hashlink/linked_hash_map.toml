@@ -1,0 +1,1569 @@
+[[fn]]
+path = "hashlink::allocate_node"
+kappa = "a137b26bf231bb2843a45918863662d126eec3ebca6e9c44a799451e0b40acd6"
+at = "K=u32, V=u32"
+embedded = "b86efcab7e887040434969bf161e4d775bfbd69c55a6ab39a9a33e5970c2fdf5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: linked_hash_map::pop_free: hashlink's MIR stops at type outside the lift: linked_hash_map::Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::attach_before"
+kappa = "2c30f68c62eea23ed7c92ee16b0abc1f75674a260c07e6592f16283a09e7fd78"
+at = "K=u32, V=u32"
+embedded = "651b808409020656b204bf68c643d2942e843addb2696456336eab2dccee0498"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::detach_node"
+kappa = "0af3f72ef2c518caf17dd6e34595883bd11ee5952e77351e3d8acff037be2452"
+at = "K=u32, V=u32"
+embedded = "357517555fe1bb3d0e3012314a4dff94a9cf215383e858e4691a072a0115abaa"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::drop_free_nodes"
+kappa = "4b7d3460f6a6b975b4cc22d220adadcbccd33fa16bb29fb1a964dd759b6f8e1a"
+at = "K=u32, V=u32"
+embedded = "9593545bba87992d644b14957bf302757be5b0eb0b3bb529a6f533829078b89b"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+
+[[fn]]
+path = "hashlink::drop_value_nodes"
+kappa = "bb15da61990baca04573bd74c5c61ef4cb0c5e05fd152f314928b221e99743d3"
+at = "K=u32, V=u32"
+embedded = "80b32737ba808351eb6693a5f11ee112b3ea78507a9f24cba8247263a2790723"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::drop_value_nodes::Remainder::drop"
+kappa = "ba26847ceea033c69198b42b396200e0b79971a99ec5bdf966e7bf12ddaf8ebb"
+at = "K=u32, V=u32"
+embedded = "9361289c00fa48ceb48ed6605462544dd4f101a3b808ff666b35ff1d4c44350f"
+status = "residue"
+cause = "mir::Ty: Remainder<u32, u32>"
+
+[[fn]]
+path = "hashlink::ensure_guard_node"
+kappa = "fd46fac892944d40befbcafc137b43d60b5624dd072cbc0b8f42c0c28fefce03"
+at = "K=u32, V=u32"
+embedded = "bc366ace6db53aeee5e43ce9118b4ba9f72675a17ec96f2dd26651b76b3d2cfd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Option::is_none"
+
+[[fn]]
+path = "hashlink::hash_key"
+kappa = "e25de9d3b37ffea590dc093ae928cd39c6e6bf05a68f8a51b5212f34dc90514d"
+at = "Q=u32, S=u32"
+embedded = "700e98a32b99bb2c4645447cd0c33aa4507b726fbc853da092e4c888e8fc6741"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BuildHasher, which u32 does not implement in core"
+
+[[fn]]
+path = "hashlink::hash_node"
+kappa = "94a26297703c8a9497edfb29a47484da1343bc54400f7c3e8d982e77fc114f20"
+at = "K=u32, S=u32, V=u32"
+embedded = "9be9ee7f1af70e1da21884d86b36e35ae50e36c5281ae52d9449d473e4acc883"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::<impl at src/linked_hash_map.rs:2175:1: 2175:62>::into_iter"
+kappa = "1f7bece723fd6490d3e01347742b99bd67349f8e38f2be3bfba38b2951441f38"
+at = "K=u32, S=u32, V=u32"
+embedded = "9d747193972b56d2e0b827ed083f163cfe9d327a5b6dc44a1a83c0ceaf10058d"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::<impl at src/linked_hash_map.rs:2185:1: 2185:66>::into_iter"
+kappa = "00b1f3911f420c1584d4696349a41063820261c2513abb7b9e0dfdf81d581f1f"
+at = "K=u32, S=u32, V=u32"
+embedded = "f60500437e34016f1f45d8a6f8bbc2a5e8d25cbe3a0a2de6343c69b317a9e916"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::current"
+kappa = "8e01c7cce4fd7b8eb2b1dde72bbe90b390fcc5d04e23feecea118a9fa348c6b7"
+at = "K=u32, S=u32, V=u32"
+embedded = "4e33dd90466fe9a2f23e5fffac89e0f1ead3eabf0a7261e902254b4fd769b4b9"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::current_entry"
+kappa = "9585d47c35d929b3d69bb2e8c0033d97b3ea02c391df8cdc149471eb573bca78"
+at = "K=u32, S=u32, V=u32"
+embedded = "9c1eb7c4eb1607176b00011c5b5cfdbe1b0c3019f4d0717957c0b28383e829d1"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::insert"
+kappa = "7540a3a2754b5920029b9b9f0f3b203da0a15055bc9e5fcf02a401eeeb3bf0ae"
+at = "K=u32, S=u32, V=u32"
+embedded = "e9aa3858fd022c5dc228a6f04d0ec7c99400017234eec9e04751adbb3b88d699"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::insert_after"
+kappa = "3e7ef2c292d425d6d900ed643f5b0e4a8dc3a76c9793e1d1304b71ab89876691"
+at = "K=u32, S=u32, V=u32"
+embedded = "673edd73e5db2030a43d72a3f7ed5f6819dc751fa70fcca168e6bb0650ec6f27"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::insert_before"
+kappa = "6fae78a8ebe4e8cd8f7e1fb767f22f879ed37ff4a280668cfe7ce830b3305b7f"
+at = "K=u32, S=u32, V=u32"
+embedded = "591c1b29aa9e43f47f4793963a600a0f44d98bc79b99523a0a535cbe9c3bcd7d"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::move_next"
+kappa = "75c8847b2bcb5339ecb31f76cde6a93f33f1b8320af998a255ae1677cc7c8541"
+at = "K=u32, S=u32, V=u32"
+embedded = "fd7ef204d06c44c8a66e8302d6cd4d78de6f85bf18ac9d91aa7c2be11f2d37ed"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::move_prev"
+kappa = "c88aac26bf86e4c3d4740d159aa76f2a845cce201477c2d2350126529b83dd81"
+at = "K=u32, S=u32, V=u32"
+embedded = "9cd1b1f0d5997d81c531c0f73d3d2e1936df7276727abf505c315a580faec7a3"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::muv"
+kappa = "8f692d8b0e5e620979538f197aaa5b46d7ee4e4794a4ef1d2f707b2047294bd2"
+at = "K=u32, V=u32"
+embedded = "764c3361057185a3c2803d1673ec550770ed8f6e2c4aed072f8aa0dd63b4322c"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::peek"
+kappa = "635ddb79b3f021747549775f81ab49a6a3f8ba6070df9626afa6178c4438f1bb"
+at = "K=u32, V=u32"
+embedded = "202573980aa279752e650e951336e2e6cfe39d3512d2a89aae77072a9d03262c"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::peek_next"
+kappa = "4e5d462f1694eacf32514196b5ccd491f6d025f116bf48d789b0b1f7184a51b1"
+at = "K=u32, S=u32, V=u32"
+embedded = "bf7217899667e5561216842c3313bc37912c941602d3c64ce6d1da1639b0c6d7"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::CursorMut::peek_prev"
+kappa = "f9299f95d1ff80c29bc648e7f3722710e487f6517f132140ace8e1d691885dd0"
+at = "K=u32, S=u32, V=u32"
+embedded = "69faa072be619f9a866ec81008088854d28ea8fa92eca57571c40ccbb003550a"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Drain::drop"
+kappa = "ba17a0bcfb62b2dff5b2168dd905f14be38f0efc5d640c05f01f87593323f8ba"
+at = "K=u32, V=u32"
+embedded = "63fdb8d6576a89f1d9fc6342c64d5950794ffcf9de321967bb9076e5fefb9e83"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Drain::fmt"
+kappa = "1eb80f7f755e2a528109941e995d19e003c2417cf9e28372d21c55db9db2f873"
+at = "K=u32, V=u32"
+embedded = "509a8bd56a595bb80ddc7a3e39cc035e0e566d3d1ed2c775fedb8b89aa60b89c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Drain::iter"
+kappa = "db6147895a3696c23f60a783c84141233c2ab4d732d9863aafed486435285d1d"
+at = "K=u32, V=u32"
+embedded = "610df6e021e606ef96933a0857c5bcc43fb70005bc038b4f4103a3679f3dac6f"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Drain::next"
+kappa = "2e485468cdd53efd2a9cb513204fa939b8b0ca1f08bf887dcd23b86c360bf64b"
+at = "K=u32, V=u32"
+embedded = "e1290e96dab18963c2d88232322773f5f43e038e52f5277d2f2438374da9c06e"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Drain::next_back"
+kappa = "b56cba448a173bb594e3bd75955b906d19b1767a5f1e8cd7f509bf8753563c98"
+at = "K=u32, V=u32"
+embedded = "e750e1e69fd32c3e15d2998e56ed237b865001f64852c7bdda9cd1bb60f0c6b0"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Drain::size_hint"
+kappa = "d6971dbef8925aedf82f935be2562c6e64b71bbb81a2deab720c5fd5f6639de3"
+embedded = "7ad9af1fe8c05219fc1cada7669c4d0b88feada1d20ca5bb415e035653e32d0e"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "hashlink::linked_hash_map::DropFilteredValues::drop"
+kappa = "5969ce8582ad88363def32b60b605c0a7bd884ccc93d0d3309cd1585928c7028"
+at = "K=u32, V=u32"
+embedded = "c18ffd8b3477ee10686d8928d75c81c6eafa8141e63945953e431d3ef313e008"
+status = "residue"
+cause = "mir::Ty: DropFilteredValues<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::DropFilteredValues::drop_later"
+kappa = "a726f594e743704bde3224f0e235e30b6d254216d3be36037df46fc23ca31f75"
+at = "K=u32, V=u32"
+embedded = "8e46d07be2bb2a76d359a7aa2f64bedcd9fe0362e0b65fce98585ef7c7351215"
+status = "residue"
+cause = "mir::Ty: DropFilteredValues<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Entry::and_modify"
+kappa = "6c8438ea2b6057b681f829ed2a213bf6641058032662e61ed68c63af58979090"
+at = "F=u32, K=u32, S=u32, V=u32"
+embedded = "691c26d3409b6f6239814fbe3143eb8a133e2457954b2ec3dfeb9241fed045e3"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Entry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Entry::fmt"
+kappa = "d1ab7aefcef6db9aed170a9c4d22f47a5026312004126d6e09e63512b7fb1381"
+at = "K=u32, S=u32, V=u32"
+embedded = "6055f3b3f890f45384f83784d7e54a9e6b6a971e0b5bba6fb920b6c4d8e4f74f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Entry::key"
+kappa = "0d0e7acee094e1f5606345540fd6a9894c7d24f71fc8d893562a7979234e7fec"
+at = "K=u32, S=u32, V=u32"
+embedded = "86bf1a6e62ee18990b62514ad948fb92a7a7f92f9430a2b5fa485d5e1c6572c4"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Entry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Entry::or_insert"
+kappa = "f754d827488062c5121df547e189e42bef67f0384ed0ddbad70e12e6ad972513"
+at = "K=u32, S=u32, V=u32"
+embedded = "092f93528f5df13a0bf733ed202164f6df2fab16b09e6a40b1e8308e0bf1f0a5"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Entry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Entry::or_insert_with"
+kappa = "799a45498beeabc21417718f8fe4e0cc71131388b7456983716f72263ac0bbbd"
+at = "F=u32, K=u32, S=u32, V=u32"
+embedded = "0f6a36e4c81e865bfcf2c14c0eafd3c2d944dcfd4316624b09493c8b7c9a1004"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Entry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::FreeLink::clone"
+kappa = "5f8805cbaa8e4ec96a3417f993ff84a5cacb4ac1b893810055239c5d1fdcc256"
+at = "K=u32, V=u32"
+embedded = "77ea9b4487e8e1be23dbe589d1acedec11c88ce436a8bb63530fb9b7f0d144b3"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::FreeLink<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IntoIter::drop"
+kappa = "644e1a8fdf08a010b7fe371f53abd616fa41be1dff45a5a4ef7dbc4ddbf7b38b"
+at = "K=u32, V=u32"
+embedded = "65fb51df21484b7029bea56797db6843b8e4ecd7201d3b7e889d85b82a845474"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IntoIter::fmt"
+kappa = "03863e843ffa66e6118725ab33a9a7fe68e98637bdcc5c7b14653c1cca8bb33b"
+at = "K=u32, V=u32"
+embedded = "72a04f8b5a872f745fec6683eb8cd0b4436f09278472b8e03c66ab59ec7f9af0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IntoIter::iter"
+kappa = "75a02b96cf21b14b14da692ca95c9fd6aefd9940d1a3d1d203240288fb63afdf"
+at = "K=u32, V=u32"
+embedded = "e6943deb5e2bd6c441177604a329d7ad179680f9517966ae136465eb1174412c"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IntoIter::next"
+kappa = "c203d6f05129a29a79c159097ba67e66a39d9d6837171dba0f43aae6360648c0"
+at = "K=u32, V=u32"
+embedded = "43c5c742b051fb97d6ac86626763cb3a1b8ae09e5f98ee9c79a3bd21d4c6eb7d"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IntoIter::next_back"
+kappa = "174226c68b80c58061937709e544445a3dfe1d273520299627c29b9454a1da18"
+at = "K=u32, V=u32"
+embedded = "2d1f7377c802c65a8b8c439adbf2ec0d45366305b0426817bb7d6eec6c40ec13"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IntoIter::size_hint"
+kappa = "286b796e951358523b14b3197230f83df5adcae8d998d0e9a50378ea4047d447"
+embedded = "1e5cefe8ce1d2794a78391896ab7c3aa7d8bea276a303fb38b3ad908ea4ca487"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Iter::clone"
+kappa = "a82729aef3ad7a51541ac0390cf023093ef4e8e2c4eafc75bb8e2a9cdde69e8b"
+at = "K=u32, V=u32"
+embedded = "0522692a90536c90e6b4bc32cd8b4b90484b843432509ba765c68c6aa047fdc7"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Iter::fmt"
+kappa = "6d68975c5ae9403c505e324cb4a5cc11150668739a5152d48afbcc6f563292e4"
+at = "K=u32, V=u32"
+embedded = "be1e0b3d9531ec28d0f415695655da1daf69c03dee6a11e035a230b4a5d768f6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Iter::next"
+kappa = "a42198fb0ec963c371b4536ee94ac47a247812a6300e6526acc12494ae049893"
+at = "K=u32, V=u32"
+embedded = "73515538f144184c87b4f0ee2d7fa3a617e1ac811b9f0ee9a703fafe9249984a"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Iter::next_back"
+kappa = "20cfda4f8beb4e2caa936b50c33af883d29b85af47bb9539b299e4ad9ecd4005"
+at = "K=u32, V=u32"
+embedded = "3907b34ce6bba384a412a189d351cebe91bfdd968b2b02437ae56a144a587ff2"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Iter::size_hint"
+kappa = "b9213d76e1b160f5f021dcb11c2db73d38587db8b93ee7e59fc0c265d0da00d9"
+embedded = "07156b3a587ab541c69409a157441335c888e765a68a65f5599407bf0922d4b2"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IterMut::fmt"
+kappa = "c70708ff800f91c1ed9927bfd04b7b252835aba12d0afe762b3a3e6e7c750500"
+at = "K=u32, V=u32"
+embedded = "bfff2e4a420fb2d76c2a98453b75c3a9a8737de11856d941b7a7d49c4e421c66"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IterMut::iter"
+kappa = "b94e78874343d805602edaf679f0c3ebf90ba2c76b8aca4005089f87d31b1333"
+at = "K=u32, V=u32"
+embedded = "482702c8ec50f0af2c6c719daf0143bf73b1b2193a53eeb2ee9db8857ac7f1a9"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IterMut::next"
+kappa = "7283c15d48c09ae3a18ae3cc68ed0a0db76253c6b9f8da4e933b19f5a7fb5dbc"
+at = "K=u32, V=u32"
+embedded = "ea976422e89424deda487493cb478cfffb43d69b4356220a206ec6e9e6e6aa27"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IterMut::next_back"
+kappa = "6b9a9d666b513584735344783dd1195e951633e9af8995d59256ed55a7d394e1"
+at = "K=u32, V=u32"
+embedded = "fc0d5243d50ee4727637f13362cc814368003becb039f1772fba1618bbc6cbc3"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::IterMut::size_hint"
+kappa = "ab5a4743fb8ba74b1d99925db8ad938d8244c4a29bc46a8cb24cc810cbabae89"
+embedded = "d14d6e97478dcdf0175c267b94f0781fe30b32848683df5f944c30dc0742a061"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Keys::clone"
+kappa = "c43d6c8a3bee33d8bedbeffe39545ea0c3b753da284f3d49d946b16dbd00dd6e"
+at = "K=u32, V=u32"
+embedded = "5ffa3769440545b185e75a449c489026f39356fef4c51a95a4402324965fc731"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Keys<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Keys::fmt"
+kappa = "47a0e2c93c7891ebee3b30ff3e1f748a90d4fbc76cc9379549d32aef37c35e54"
+at = "K=u32, V=u32"
+embedded = "bf9d7000bc8abdb03b26945b73ba2df30156969bccf881d049000e6b487a6530"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Keys::len"
+kappa = "c4e176b3bd6f5959d1e65c3a456ee0608a8b49a9cc85111d53474963bd5029ec"
+at = "K=u32, V=u32"
+embedded = "11bc6f62ff6a60af3ed48fbbfa35cd2abd9e74eaf140f0a0394a783b34a8a9a6"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Keys<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Keys::next"
+kappa = "bf8c36cda23869bf2e7f8fbe3af2161520adc94ec956e698069cc13ba4b9f926"
+at = "K=u32, V=u32"
+embedded = "64c946fb793e721092874dc99f1212c52f94cbc1b49fee4b2d7031dbcdd0af5a"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Keys<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Keys::next_back"
+kappa = "6695820d85bbfd51dcdad46d0e5e9c17e437bb9449e11e56296a8127ce024a74"
+at = "K=u32, V=u32"
+embedded = "421dde49357fd347382d0df96d4f6ea9b0ab0b5d9e364619a3fb36f0e2ac5055"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Keys<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Keys::size_hint"
+kappa = "33f795a667fe621724e7321fae4e9122b7465fe73fe3abe12af400fcde9b289d"
+at = "K=u32, V=u32"
+embedded = "f5715ddf8228b20c6feb7e16ab59da77b23f5e5b234ebfaa6f70e5a716f5431c"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Keys<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::back"
+kappa = "2fe0760127fcf39cc2dbe0c75d6cac4118e53808baf5de6935eb88e296e30818"
+at = "K=u32, S=u32, V=u32"
+embedded = "2b4d2272b742e36b01b39c0c29d12c8fac220965cdfe4fa1aa738886be467fab"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::back_entry"
+kappa = "8915243810d75041c75f79232804f3cdf3b32e10ef1ee97ed026ba3dc42684fb"
+at = "K=u32, S=u32, V=u32"
+embedded = "21bb3fe6179998c41516ca01bf8414af05b243c2326f87ded828167291c9e2c3"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::capacity"
+kappa = "66480eeaf252d34e3e81594d20c2844ad16863837b762e5bcf44a3fc8ddc3a5d"
+at = "K=u32, V=u32"
+embedded = "5bd88c83c4ecf170ee0b7a7e6a47b06f1e05abf96ece08b258cebfc85901170c"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::clear"
+kappa = "ea71b2f929e1595247c47a6687abc0e4bd44c1cd3b31fece29ec252fb424c803"
+at = "K=u32, V=u32"
+embedded = "6d465610ea4f0bacea340c33b879c60b71d291b7954fdd812043c8dae93d90ba"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::clone"
+kappa = "5af6aeac440bf63b8a5f45938a335dbdb5262960a92ca0ab7edea27c8a0ea425"
+at = "K=u32, S=u32, V=u32"
+embedded = "094bdd73f4501380296733bcc2eb33b9152ba8e81fa0c95cc79b5cdb8ebe6513"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::cmp"
+kappa = "30c4af6718ac53297f2ff538a048449c5c9aa129d9fdb7e5ce1709afc000a37d"
+at = "K=u32, S=u32, V=u32"
+embedded = "378f1d1ab9f1235156d13e48f4a196aff7a3815eed0b70d97d360439b2bdf01e"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::contains_key"
+kappa = "6ce8a871de36bcb0677c0ca6086627371b7c2dd83436bf8ab77dfb7bda770acc"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "adace6a290b632b5dbe25ee3c71b7b9f0e525b57283a109dad78196ec0a3f881"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::cursor_back_mut"
+kappa = "0c8db7539d02ccfb8225301cc9dc99ae6475908c1e47cf9ad7497327b7e335fd"
+at = "K=u32, S=u32, V=u32"
+embedded = "fdbd5e4044cc2b5ec58a4b6bdf0db4ea6404df59142cf31a7c3a6d3a3c53d9b4"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::cursor_front_mut"
+kappa = "72bde31eedd27e3667b34c24e379f3e1a3d7e8082ae72f3d66e2fe5ac66b7b65"
+at = "K=u32, S=u32, V=u32"
+embedded = "59f270653a8f21a456d1400e5adf01a7cb620cb5ddd65e403072cf5a90598f5b"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::cursor_mut"
+kappa = "8a4a71b39461f81abe0f6faf35493c2d32ef7f45e42c470baad6d7bbdf36d37c"
+at = "K=u32, S=u32, V=u32"
+embedded = "8e962eec1b419d5181db8964cf44432cd401185b794b95b4e06b06c11f5b01e9"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::default"
+kappa = "5ec0be241c143a99931715d0af7eabe8be820514f369656466f5939e22b1ae6b"
+at = "K=u32, S=u32, V=u32"
+embedded = "e2710df2e63d59da5101981e2a5745b0320476d26ebd81cad42d362421acf9f4"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::drain"
+kappa = "91143625b73f4ce07e954b3d0b839c18b29a7b9a087c0241428dd8e975aa8c3f"
+at = "K=u32, S=u32, V=u32"
+embedded = "8659ae977fb99331c11469bc37f298f50ec859971f8d862c4bc43e1fa9342eab"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::drop"
+kappa = "c4a2fbc0ee3c7a91f07c18c3d3c7271d0ade9e40e50aa241252c9a3132a0146d"
+at = "K=u32, V=u32"
+embedded = "04df2b6adb5b2a5a96b561f91995e1583c6b757ef20e271d3d5af54120fadf78"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::entry"
+kappa = "af050f077917c23430af999e187f8d5c705b357b06697878f54304cc28200ba4"
+at = "K=u32, S=u32, V=u32"
+embedded = "235b2ccdf8de38a95d1a5ffa4562c5b7be7a2d02e2b7ecbfe530100a910c1e91"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Entry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::eq"
+kappa = "010e454d8b0c7f3ba1cc9eff7e60d7742b94f878457edc8de05013d3c0deb504"
+at = "K=u32, S=u32, V=u32"
+embedded = "6ddce6c1c0b1ea72e62876f5e2378e296c105d1aa3edf1cddfe59a87ceb40fd8"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::extend"
+kappa = "d58d27c1e706e0b0ef8bf514ddadba26675b9919ce26e863121b5f02374c9fd5"
+at = "I=u32, K=u32, S=u32, V=u32"
+embedded = "33f9d065238ea5610c2c9847e779dd5334552914aaf8a4f32d8193da024e1e04"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::extend#2"
+kappa = "0ce89b3e000bc30bea7f60d532c8169bb47a4d0209fa6b78c9af67f9ba646f48"
+at = "I=u32, K=u32, S=u32, V=u32"
+embedded = "c56348be975fa08b5a25be3eb67c50dd66f4b3346a405ba174ec8e01bf9da3fc"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::fmt"
+kappa = "46dcf60c788e6f87432f1aaa0d6bb55c5e591f3715528ffa71dd5cfcfb6ddf60"
+at = "K=u32, S=u32, V=u32"
+embedded = "1a9d9dddd59893b430f9c6f834e90575c77ccfec61360f6d205c90896efabfb6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::from_iter"
+kappa = "e783bb5669583da1044b2fd9bdf52e97dacda703b40b1b5138fd074a4ac9ce26"
+at = "I=u32, K=u32, S=u32, V=u32"
+embedded = "541ae35a75817b07e1d42cd3ca1a47ff15939db4bb675c64a5d5cd8d972db0fc"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::front"
+kappa = "c3c81e4b98b4c85ab0076c73971fab9fc9bb115687cf51677654c0d70af7a4aa"
+at = "K=u32, S=u32, V=u32"
+embedded = "408e43a8b5634bc04a04858823976c2f19b2760a022b89ab057cc26d1cec0357"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::front_entry"
+kappa = "f893da6f450e6f6a13b316b7bdfec13457069201532df631ac56009c0b1d7d58"
+at = "K=u32, S=u32, V=u32"
+embedded = "2cc5279625aa8d3a0847f395e980430a9bbf4905a82ebda54ec8e0a135c31196"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::ge"
+kappa = "fab1b4039f27eb7b364e72ea883001e17e74f42218e888935afbf6af4a07edac"
+at = "K=u32, S=u32, V=u32"
+embedded = "8e570622868588391085db8fd83da552c7479a092e611c3023a6024c8ec4e3ca"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::get"
+kappa = "3d188c2ae82893dce90990d5be31acd3cbba31f2842a48c9e6f80a06ad46f4de"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "3ef12fdef2bb77b03eb5336309d8502971627a2b51a253b993ab6397218c84db"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::get_key_value"
+kappa = "341ab8349412d52f4988260301d234c2dac88e74b9a4a0037142ad1ad16ea140"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "1d13d5fb9f0e065bcb6b80cd88e28ffaf121fcc4aca58366e2781f922b965117"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::get_mut"
+kappa = "c60a77a07e80e41aa1111772ef056ece6979ff5aa828d486b574683b66e5cde6"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "4ff1cb537d74358d186faf05e986e1a550fd8a156660a0bfeea1dba3870c2d91"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::gt"
+kappa = "92fbb3ae0e14ea75966137be2d8236e5c7e2a7f06230881d67711886bf54a5d4"
+at = "K=u32, S=u32, V=u32"
+embedded = "aa69d80eb9a06a5fffe44682f321b57f47f67cf6a93d2fe43b85fbe94997ebc2"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::hash"
+kappa = "2a47f9857127b2edd3784ede36980337ddb97d0394c46d79513fa49aec2b2358"
+at = "H=u32, K=u32, S=u32, V=u32"
+embedded = "60fb441c826646fd66377ff372689266130ea3168d66491ed7b5ad22a380dde7"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::hasher"
+kappa = "72ddec68a4dfe50f5e4af00eca874ae9e7249501633885551651b13be6b97d9c"
+at = "S=u32"
+embedded = "1e51a90df9f3036e31e0bf6803630c385865261c88893cbf341a3244d1bb542e"
+status = "residue"
+cause = "mir::Ty: K"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::index"
+kappa = "438db2e0c4d8a663fadc05629e7305997bc24c1012994431faf821d90dfb0781"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "96e361f04fb4bf2e747908a2a9f4a464d6c1aa53a59f3461e65ff1ced8668a53"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::index_mut"
+kappa = "6e577364eda57637974b4419d3765f1235e290b71fab0b5ac36114cb3ee06b5f"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "7df03e9b048dce88c5dbf257738b11016c4e038b19c378df5b96360df488a406"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::insert"
+kappa = "eea87877c8b50f38e1f0c1c68764b61c27be45080ed965d7e073ed4a0de27edc"
+at = "K=u32, S=u32, V=u32"
+embedded = "febd8f4328e82efd440d240308c6dde2d96290f1ea5c10a0bec3dfadf57dacf8"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::insert_front"
+kappa = "5ff234ec9cdcd11f4f7bccd6d2a05710b735313bf733ed945a5657dc558817e4"
+at = "K=u32, S=u32, V=u32"
+embedded = "5612d63352c0d27aa91e80cd1836ee7603185187b6c3b5e7386482e4418c8da0"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::into_iter"
+kappa = "56f0249be11feb8ae431386594c6d98dd0f8c01bc7d9792f4e6b066b45617912"
+at = "K=u32, S=u32, V=u32"
+embedded = "23dffa7bbae29e68a06149b722621447632f4fa035f379921fe17db67e52ffa4"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::IntoIter<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::is_empty"
+kappa = "3405437ff5e1f7bbfc37f66d2675b736f04081044e61e6ce6c107033e3669ed4"
+at = "K=u32, S=u32, V=u32"
+embedded = "6bbced21de6698d2101c6698a1cc8d20a651629321ef39cc38eb09d5e755bc99"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::iter"
+kappa = "7e75ae319a569e762ca6fa8bafb5b39c1a0465c875844412cc25b587342dd000"
+at = "K=u32, S=u32, V=u32"
+embedded = "89d5d2f2c0fe929c6003c3e5825e5ca6cd381866ecfef848b3089c6992fa2ca9"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::iter_mut"
+kappa = "bc7db1b2f14cab8d30b7db370b0b283cedcf51eff9eac26781c20f8d77de4ad2"
+at = "K=u32, S=u32, V=u32"
+embedded = "b43ddafe62df400cbeb1e1c5331af233b86e65a59a7ebde6f26c1d29af998151"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::IterMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::keys"
+kappa = "e57e851ca31980684a74e05d9781ee32e8debda8ee79edf3aea726718e6ead55"
+at = "K=u32, S=u32, V=u32"
+embedded = "746336feaee557ebab3c1b5f62b79bfbc2d19f8b2f9e55086d1420e0d75dd9b6"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Keys<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::le"
+kappa = "30c5a49bd66bd47c1fba4f1dc3a49d0734f4ac40ad34b7a1e6d05b87fe233859"
+at = "K=u32, S=u32, V=u32"
+embedded = "191785baeee985d2601515aef8d2cad6ac67924915dc72f0d76b4f54c3a5cd26"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::len"
+kappa = "e2273ff4d18ef00656261e67f97cef255e7459b731b53ce7e81ab3ef4cd99511"
+at = "K=u32, V=u32"
+embedded = "45dea5f5ea50a39900ddb4850fe8523ef8cabe38304b954754742c3365bde02e"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::lt"
+kappa = "73760fff66cd3a794eee9ef7727a919fd0acf259153779ef2906ed27cf9c3752"
+at = "K=u32, S=u32, V=u32"
+embedded = "6c358b7fc479bc14e62097b2679138a4409e4b6c63469985a32a0286507e7d33"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::new"
+kappa = "762f010e25d2adbe96d98606bf1bae7c3b485159cdd2fdf2e91b7a5aff94eb23"
+at = "DefaultHashBuilder=u32, K=u32, V=u32"
+embedded = "776dca36fc7182e1b9aff0fa3c9511b77392033ee375481cb6978ea58ba9462b"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::LinkedHashMap<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::partial_cmp"
+kappa = "b71cf3bdc111db931617f65b66e003f9cd55c43bec7ce45a240eb0fe797e1091"
+at = "K=u32, S=u32, V=u32"
+embedded = "b124fce19a6531f3646e35d170d355e66c07e40031e0ec64c6554d73ccc1244a"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::pop_back"
+kappa = "4bbb5dc309c3ca960f2f2e9ad6bc849944c6eb76c8f7ef7bd8ca7a25ef77a508"
+at = "K=u32, S=u32, V=u32"
+embedded = "7b47cd61665c6d9fb73a203841c975b5f5f05eae4884af50ebb08e4fca668ad3"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::pop_front"
+kappa = "8711c3f793a211de3a346d643b21d5c88e428eb49343858a0f399aa3eb8964ac"
+at = "K=u32, S=u32, V=u32"
+embedded = "418db92afad22f70ccd6d270e678fe2833bd7fee86e3a98616aae618ac045748"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::raw_entry"
+kappa = "89e3501eb1960e7f7a351112b85e854b5a78828796aeeb232d59c873c75cd043"
+at = "K=u32, S=u32, V=u32"
+embedded = "7e4294376e843d19ac5eacfb491a2055b961ca9cdcd0803d7a2bcae3b8a6ddab"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawEntryBuilder<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::raw_entry_mut"
+kappa = "5dadc0c18432bf120d5d64d294346a5886223873876a144a5d0128d3f4a83c39"
+at = "K=u32, S=u32, V=u32"
+embedded = "d43ddf5eb1aa5e2b1441cc08bddfadece7834f81d3dfbb4d0e881a43de93bb01"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawEntryBuilderMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::remove"
+kappa = "ea56a0f50e56fb6f4f5040351059da351c621974ead711503dad6214c75082ac"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "c326cb3d6a440b759f913fef08ed8d92bef9a1e14b8d088af5321e3985ae61f7"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::remove_entry"
+kappa = "ef532cd08e82aecb993cc042ebc1cb6e39ca7c48adca24df682e04478445a14b"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "602f16657447bb7753f2ffc431e27b62bca43d69f1a24632bb0a23b8b68d8248"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::replace"
+kappa = "56dced9f0752ed78e9fddc7b5822633dcd5b5c2f5c3f90f7c8e26ed3f5124788"
+at = "K=u32, S=u32, V=u32"
+embedded = "7048713d6309e8c037310392c1420e4908bbf66d021c99d69f0b2f99e7affec9"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::reserve"
+kappa = "0e00b9b9503545faf57f93895cbf5835830b4bf1abd4e46b7f738f210484bb82"
+at = "K=u32, S=u32, V=u32"
+embedded = "ff472914f30feaffdeb5dfc9a0816d2d3f6d097f5476c53f3acaaac6968ee6a6"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::retain"
+kappa = "1e63978e043e70e8749ad39ef09667a9e4de244f32709149476091ade7bf0257"
+at = "F=u32, K=u32, V=u32"
+embedded = "0404e014b0f04eac67ee588bafd2ef0f1c844aa354b9844e556f2df9e91ec8af"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::retain_with_order"
+kappa = "a02ccaca1395af91cf6c56a24db4745741a4a088b8341a37b920bc67467a5e16"
+at = "F=u32, K=u32, S=u32, V=u32"
+embedded = "6aed6697a4e4022d297a85edbd04e5229ca53909d29027534e3bdaf901b16c91"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::shrink_to_fit"
+kappa = "f34c9baf93c75c2a1118f907964c7beb17837a979ce11617fffae913eeb99a3a"
+at = "K=u32, S=u32, V=u32"
+embedded = "d2aa3b14c0ede7826baef3b53414b040fc2cb8a3175b4e45612285e856480519"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::to_back"
+kappa = "625e9c6d93424770aa758ec3dfc0cdfbf19baa0d729529772aad3a08cc006723"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "694400aed9e9209882982b73546b53fda28e2bac34e4009d13ce1bac850e9512"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::to_front"
+kappa = "492deb6b4811f77155978af0467cde5d44d6d219daf68381fb8e8dc7998b3bbb"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "795552580fee9aabd0a9955e993ab7e519de07f0cb0adca8199d4661305a8dfa"
+status = "residue"
+cause = "mir::Ty: LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::try_reserve"
+kappa = "f83e5109ff428bb2e829f976fa6c635a3ef764e4c7e418183cc5af8db1a45c55"
+at = "K=u32, S=u32, V=u32"
+embedded = "e5815b55ddd9b3901ac762da688bdcf6f98bf240a9c57cb212b45b143c9ca5a8"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::TryReserveError"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::values"
+kappa = "93c9b37516425f478c3f59d190cdea6f69a9dc6750030028ffa6506abe453fd4"
+at = "K=u32, S=u32, V=u32"
+embedded = "0d7bffd9417ae73f786e9a25d6ea8b4179727e9d3fde28300354504856a91a4d"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Values<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::values_mut"
+kappa = "0181545a19d78bedba07cf4dd3335442956e430398b081ee4f9ad6286b22ab55"
+at = "K=u32, S=u32, V=u32"
+embedded = "58f499668c497ed1f61bacb7cd7c9a82325693b4bb58e2a4e232607c3e8e177f"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::ValuesMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::with_capacity"
+kappa = "d196c07d2012516fecfe05a4006508f0cf4da3d0173c661e50f520d3e7fb3223"
+at = "DefaultHashBuilder=u32, K=u32, V=u32"
+embedded = "dd7e567fc45d73cb6c470aae8b183ca32420e9bcf392b7b6b845179088919e7b"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::LinkedHashMap<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::with_capacity_and_hasher"
+kappa = "43d257edb34aaf16bc4b83869076ca1055eea32a70c8364588c9b22d5e5ce9a5"
+at = "K=u32, S=u32, V=u32"
+embedded = "fa26831579780bbf27d1f5f687dc122dd3975ee918343cbd5483473be1d49940"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::LinkedHashMap::with_hasher"
+kappa = "42d67e5673397266231968ad9fa8dd0e744ac6dfa0a3a1783f17516f60135090"
+at = "K=u32, S=u32, V=u32"
+embedded = "7355431bf0d12b691b0071b277564d8b8e0f77d6692935332c88748121868af2"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::LinkedHashMap<u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Node::entry_mut"
+kappa = "efa824bf57a08ca1b8bedc0050d5a49bab164a0a9a857ad70c66d37498ce8890"
+at = "K=u32, V=u32"
+embedded = "e296485f6cfe98b9fd47700f8f0c64be78561e9cc3faffb27f63f108ea9089e3"
+status = "residue"
+cause = "mir::Ty: Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Node::entry_ref"
+kappa = "37ed32b5413461e689206dfa7e019700459b1c156baebd1ecef120bbc6f4410a"
+at = "K=u32, V=u32"
+embedded = "b5bd6f216638ef196973394ce1724f5adb4439b361881db25f2042802a5f838d"
+status = "residue"
+cause = "mir::Ty: Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Node::key_ref"
+kappa = "381c67dd8732f71480fd11c3531cc5d49dc9f9ea5a03c4186e5be05ffa3a1e3f"
+at = "K=u32, V=u32"
+embedded = "5b831717f9d82bf7fcf536392b98b1b4c3783bbdca2298f735f1b5ed9bc208f7"
+status = "residue"
+cause = "mir::Ty: Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Node::put_entry"
+kappa = "b3f24039293e85b16294c6e47d5fb1f1ee8db8d1ab5cd8d320a4bea4845b7d41"
+at = "K=u32, V=u32"
+embedded = "4f085c688b2ab3cdf4048c5973f371e0d0edbf1f440640f3edccd126f00e5111"
+status = "residue"
+cause = "mir::Ty: Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Node::take_entry"
+kappa = "881084a85475cceab9df915ae81b29fe17aeda18dd0aa4c474d20437a437fb2c"
+at = "K=u32, V=u32"
+embedded = "4543de515078cdb67efb1519bd603def4697bb863e2a0d2a11f088823a6833b1"
+status = "residue"
+cause = "mir::Ty: Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::cursor_mut"
+kappa = "199c43c822fc7f65db59c34cada7fb1f063d41b70981602051962991dcab68e3"
+at = "K=u32, S=u32, V=u32"
+embedded = "c33ace213ffcc7754d877dee57c566c5d1e544f21beee6eb6d748b9a0eb9e17e"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::fmt"
+kappa = "694cf01e635033f425d95b0c5b8cbeacbb521400a9305b693a847789d3b9758c"
+at = "K=u32, S=u32, V=u32"
+embedded = "c915b45afd0883ecd44aa657b173b306e0edb50973f36d76a9ca5ac67b000489"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::get"
+kappa = "ec7ea3c6744c767c7ed5a8b5a1dd603ef3508c0ca4a00b61979918f168625d02"
+at = "K=u32, S=u32, V=u32"
+embedded = "c9089eb80548ec360f565ae8f4b2c89fc4b66f443c193c7bebcaeeb77e6b685c"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::get_mut"
+kappa = "daf49fe398d12dc35148f5b64931465ddd38fba4ec133de48e69b69a0e94a162"
+at = "K=u32, S=u32, V=u32"
+embedded = "8f5d0b9e00f1e536ec65664d490ba6db4b715c56d7cc4bc937ccbe5358e8c1c6"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::insert"
+kappa = "231673490dbd7a4b87ac9007aa1267fd8c456ca1bab6ed215d9889e5b43c644b"
+at = "K=u32, S=u32, V=u32"
+embedded = "48f4d6e2988aca004d16a18d563e5064f12c8b2ae7797d2f15fec2a85e556da1"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::insert_entry"
+kappa = "d6d5bdc73688642b109ee823bd4d2185d570f5bd83c41d4a55658c319350b20c"
+at = "K=u32, S=u32, V=u32"
+embedded = "fa3a34add2977257a92ea279358efb16895d0097fb9ee9caffba2889ee837885"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::into_mut"
+kappa = "2d3559aa328d59893e66fabde67ecedc9fc4685d45ab5ecedaa4fb44e68d4884"
+at = "K=u32, S=u32, V=u32"
+embedded = "7b7b56b836586d66f823116074b8ab2ecab105cf5caba98522bd3ae489ab8598"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::key"
+kappa = "e10c2d444b325724cd3ae355baa750a1e1d73c2033707818aa5674b2c5aa3c49"
+at = "K=u32, S=u32, V=u32"
+embedded = "b1561d72e288a2e6e00106d6643cb75100bc8a2e822b0032239aed72692307ae"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::raw_entry_mut"
+kappa = "a63b237588f266f416cbaadea39712d0ee6f340e6169b04da350e761ab391e00"
+at = "K=u32, S=u32, V=u32"
+embedded = "13ecd887c74007d9e48d025d9af01cf41be8b0f1bc8632eb6ca88c05433b54aa"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::remove"
+kappa = "c15efd47056f0f467b2ec9a6263bed3c24f11e02151d7b16d52851ab6e11ea0f"
+at = "K=u32, S=u32, V=u32"
+embedded = "1ef2783e9f02432fac48e22d81a8b001f33a9b72760db6bb76f0e9975504eff8"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::remove_entry"
+kappa = "b4e182b862f48aa5b420ebde248e40581c4af4fe1c8c4077d716eba6ae762b30"
+at = "K=u32, S=u32, V=u32"
+embedded = "942a26cd5594e88714892e7e8e3074a43f39f4eb87ab9abc23f9f6e76280184c"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::replace_entry"
+kappa = "ff97663ba933a7cc9d2a2106df98f74b354502c4565b1a2a52c3912cd4bb8225"
+at = "K=u32, S=u32, V=u32"
+embedded = "aa9587bc35f88e31c5d14c914bd1ca353300f28c781659a0d1274830f4457657"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::replace_key"
+kappa = "ccdd039a8915dff2ed10be314f2180f9ed00be81db209ede5facb0b0bae6b9d0"
+at = "K=u32, S=u32, V=u32"
+embedded = "e413e424da6817dd3bd5bb024abfae6e1107cdd8e4d361f88385ad6740db5a1a"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::to_back"
+kappa = "374159608b0a70fb83faf0910d625ad4f316d4f102549704b70dad2ac629feeb"
+at = "K=u32, S=u32, V=u32"
+embedded = "b92afb6a8021cc22aa9d32bb93e00e14ea6a7c7ee46bd1549116b594647ca7f0"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::OccupiedEntry::to_front"
+kappa = "eb8f0a264c014568da5f5811777940bd60bd6fb3850aba96f65ce6cd6c324435"
+at = "K=u32, S=u32, V=u32"
+embedded = "cacfbf3154d60aa6d48049a9995ba7d43d175f223c42ec945caa26cb853de941"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Option::as_ptr"
+kappa = "901f191d6729c9b22bdd04f5c58829bae577b3b27aaf531b9d3891bbad2c7398"
+at = "T=u32"
+embedded = "52921178cc572f800c492c1190ea649e704d295d9fa7ccf4aec7f37c57d71e4c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: null_mut"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryBuilder::fmt"
+kappa = "99af3fa6e1e8b883b93a5c665b47af10e3e8c2e89d30ed120b690a4dece4d054"
+embedded = "6f2ea4622df8936535c82b11dafa9aee2149b828f4fc74fbb02140fbcd1bca11"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryBuilder::from_hash"
+kappa = "ae8a18d960831f9b9d6a7765467c960176807b05414765a5fe0dd0f337e7373e"
+at = "K=u32, S=u32, V=u32"
+embedded = "373446f4db61e72eeb47230ceacfcb41651c9cb2206a87e985301998ba33b796"
+status = "residue"
+cause = "mir::Ty: RawEntryBuilder<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryBuilder::from_key"
+kappa = "edd0241c49e12ba5d22c9387dde3fef0c006aced6ff0e214ffc1e536e1058f8b"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "cc86aece798abfa666ec568fca0ed63ae4cb153c795f5bff9e79e57ed8cb9030"
+status = "residue"
+cause = "mir::Ty: RawEntryBuilder<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryBuilder::from_key_hashed_nocheck"
+kappa = "2d125856f4622d927786b969ff826279e6e51c15d0b40e52d1a1827e7fcad6c0"
+at = "K=u32, S=u32, V=u32"
+embedded = "badf990629e7d72c423107491dcc4919fec36cecfb1c731b627c825e455608ab"
+status = "residue"
+cause = "mir::Ty: RawEntryBuilder<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryBuilderMut::fmt"
+kappa = "e7511a1b1424ec2c13a002ce4c094e908edf6723b86c9fa2ef57b9a628d18f5e"
+embedded = "04602079b6af78472b9fd1666f75bb4c740d88399de17f9899de4fde39a95236"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryBuilderMut::from_hash"
+kappa = "681d129ad2d5ce1fbcd5af3e033f9a0b6c5a0cf39477a8ce617d2a6b0fe62e34"
+at = "K=u32, S=u32, V=u32"
+embedded = "bc49d8fea878706741f714fce43bf1c015c22197e45cfd068eb8a0e9a600dd80"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryBuilderMut::from_key"
+kappa = "8dc9a48c688a29ffe01466a4e71be3743e23fba502a3d36fadb6127ebb74debb"
+at = "K=u32, Q=u32, S=u32, V=u32"
+embedded = "7705a6b3fce284f2fa52aa689522b2ce032e2a8656ff1c73041ba50bfbab7a02"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryBuilderMut::from_key_hashed_nocheck"
+kappa = "f4501d1761a40d43a7b9033c292fa5fc0e20fd358fd0f4828844d12d062d538e"
+at = "K=u32, S=u32, V=u32"
+embedded = "cc789804b96291aea5cd0103176c5f88fb22c516fc4232f850aa18ad26288758"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryMut::and_modify"
+kappa = "2a0cc3ea7a98023ebcee078b63db08a48a9fb5f0d6bffb8bda3cdff1577d9287"
+at = "F=u32, K=u32, S=u32, V=u32"
+embedded = "37b5e766761cfab00fcf3628cc2a6d0688e916dd666ea908bc83082bc35fba0a"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryMut::fmt"
+kappa = "56b6775bd3bab244ce82f2c93bb3aac7a83585882ffdfadf92e9da98f20c2dcc"
+at = "K=u32, S=u32, V=u32"
+embedded = "05c5c005ffd5b9b9fd266f36494b0b85249937a2dc3bde0db398fc80c7b12e42"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryMut::or_insert"
+kappa = "b01a33ceaa86ec0bd276a969eb4077b25d8dad96cae12bfd419c31bac54d6d1b"
+at = "K=u32, S=u32, V=u32"
+embedded = "0bb6bbf2b511161eb86fc86fbd6150de9837893f3379b31fa3cb8284091fd728"
+status = "residue"
+cause = "mir::Ty: RawEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawEntryMut::or_insert_with"
+kappa = "173846adc55707628ffbd274bf63b89fcdf20b2e20a0b5eb8d0482c89eb4e51e"
+at = "F=u32, K=u32, S=u32, V=u32"
+embedded = "b07b6093c96031c70c970f0a5567ff42017d51b938c7f6ddc1b8dcecd019f0e3"
+status = "residue"
+cause = "mir::Ty: RawEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::cursor_mut"
+kappa = "22a3d9ff60834ab12599fd24f4788f6bc4f0727076b1915ef58bca1d611098cb"
+at = "K=u32, S=u32, V=u32"
+embedded = "2512c814361ace15dcfb61c5a505f939dd9ecee3de834484411731a1e703deaa"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::CursorMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::fmt"
+kappa = "ef3884af7d004b0fd69ee8594424c65a40e0b33068887760622a941f07add388"
+at = "K=u32, S=u32, V=u32"
+embedded = "f534653fbf8d8279b5a0aec1f7fb16a70164ea4ce03f9cfe531065def401c68c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::get"
+kappa = "6e8882033012f2a18869effaac26832c64d147ca34cf2c55b88e2f5ce016947e"
+at = "K=u32, S=u32, V=u32"
+embedded = "b15a015e7fd65aec9f76e73d043a125618a693ca62c6fdaafcd354133e244c71"
+status = "residue"
+cause = "mir::Ty: RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::get_key_value"
+kappa = "35f549c1e106638ba834a30861e26a49df6acfd8027a081b75e3e339596c4b0d"
+at = "K=u32, V=u32"
+embedded = "1802b63e7761b0838f2ff2851a191d97574a7246618b75b8b6f63b2037c4d0bb"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::get_key_value_mut"
+kappa = "b1707fc0c850ed101ec241009060507ddab6f712f5a2ac84c92ecafcdb3f004e"
+at = "K=u32, V=u32"
+embedded = "562c5e91746fe30a415beaecbd9f1519ac5b7e42a5ae7f06f801c0674a4a745f"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::get_mut"
+kappa = "cb9b3a9fd0553efffad03fb888666bd2bbad7ec06f8f09d755d02643a06ee1ce"
+at = "K=u32, S=u32, V=u32"
+embedded = "253cba62dc41081e281be052d16b9a9379c7649f887e7347db3ad8f0f02cfa04"
+status = "residue"
+cause = "mir::Ty: RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::into_key"
+kappa = "aa9426c217de2fa49b124a3a1b6c2188fbba459eaf32610e9d47b8b49d83ae94"
+at = "K=u32, S=u32, V=u32"
+embedded = "a0abbe4ed116cb3968725c7a825e36a5de4b347260e966b35cf11dc540857120"
+status = "residue"
+cause = "mir::Ty: RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::into_key_value"
+kappa = "a25add30716814a8551a18fa0f96adad9e3075b7012004628cd67a7f61b44253"
+at = "K=u32, V=u32"
+embedded = "0ca3abfa0a728dd186973163a3b88ed21d59902e2ac7d7a2f900c1373cd3726e"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::into_mut"
+kappa = "758444e67df5ffadb3529675768bd7849cc9a9261b95e2457d523c6e02ff41cc"
+at = "K=u32, S=u32, V=u32"
+embedded = "e4d67b9128cf597be9015b917ca56392c8284089d4d5055250cc2f04140795f2"
+status = "residue"
+cause = "mir::Ty: RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::key"
+kappa = "26ce5f57857827988e941f36bb1e61786bf879af767b671e6366b8c76d0ac5c0"
+at = "K=u32, S=u32, V=u32"
+embedded = "68144b7f28c3a9d90ee9d511d70650870c88d4d131c93c0f3194e6147a4cd9b6"
+status = "residue"
+cause = "mir::Ty: RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::key_mut"
+kappa = "5b0e3111e0bd9a5ffdc019e051d7a882e4463fb32d86ce11de3bc030435f45f6"
+at = "K=u32, S=u32, V=u32"
+embedded = "0eee3e84f6c6333189f75ee4f5b6803c07c9e5669e95fb1b4b532bc715fc2a96"
+status = "residue"
+cause = "mir::Ty: RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::remove"
+kappa = "8b20e5376abde8cad95877bd3f9f2fbab55af7e5a3d06d70fad7884a05298988"
+at = "K=u32, S=u32, V=u32"
+embedded = "60db5ccd664b5253c321c1464c9f94a2651510bde9237523311a447be172bec7"
+status = "residue"
+cause = "mir::Ty: RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::remove_entry"
+kappa = "2a662dfc3eb3a324c47ed845f2c27522dcf1f3b103d1945e80e38c5a0b4ed73d"
+at = "K=u32, V=u32"
+embedded = "fcbcc11a8b6b743d3a9c6897f20a990c74c91e0783b7c26d1098fa43abf8cbde"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::replace_key"
+kappa = "ba400599b6a3ba892b7d2d7482272ce5ee06aaf61975bd47cc0a5fe430cf3608"
+at = "K=u32, V=u32"
+embedded = "eb2c7ffc2df64571e029b1b81d07194ae38d2916fada9510c248e1b2639249ab"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::replace_value"
+kappa = "c122688dcb9bb5d6c7ee61feb7fc2e24d9d2ab0a7e7242983fa36c6c3d23f828"
+at = "K=u32, V=u32"
+embedded = "c531f4ed62bb35b3dd762a92103c320961416178d3011d5cbfe25dc78b89d000"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::to_back"
+kappa = "38af08ec56d3a73d9724c66033c71a4a4278eb11649ec6903ea679f9803923c4"
+at = "K=u32, V=u32"
+embedded = "b061f605a5721fb604cd7bb5880ef375a7f5806ea803dbec437a226c60ad5580"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawOccupiedEntryMut::to_front"
+kappa = "b755fd2bfaf71fb437f5c7d65fa9535d51712e39feee1f42ac75eb28adb3bb99"
+at = "K=u32, V=u32"
+embedded = "20d797a0a0561fdb5c495092f8a04088046d3ad5f439ccf09988f6fe1f7de508"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawVacantEntryMut::fmt"
+kappa = "934aab0c367d9e9f8dfe7ee102686b152adbf1d2fe8b70f1eef0a0fe1559236b"
+embedded = "ed1c5d1e240212f4fe77d04359b366308651a16ec1f73882b9fe4b437a59578a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawVacantEntryMut::insert"
+kappa = "2ce73dfbf91f3226ccb712776f9ad12d124b159cfdb1268ca01ebf18fcdf74ed"
+at = "K=u32, S=u32, V=u32"
+embedded = "de801160dfa53e4a302d5f56dac49bd92eb26ed33368df5b7410c76c259571da"
+status = "residue"
+cause = "mir::Ty: RawVacantEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawVacantEntryMut::insert_entry"
+kappa = "f20c56eb603cd34fdc2258dfca5529a373badd12fd1e70de4fcfc3f04bff08e4"
+at = "K=u32, S=u32, V=u32"
+embedded = "80869ad798b8a5a71c4ef65fb92b59c3b88f547302e4e1af12b3a37f62bf7f35"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawVacantEntryMut::insert_entry_hashed_nocheck"
+kappa = "c2bc7c0c62c1fea2cac891e5e5167ef4c9f869b9f3b5bcef0eaeebc0b3f1f0b1"
+at = "K=u32, S=u32, V=u32"
+embedded = "2afde7e3feaa8d1f9206f620b79b0ba7dd62cfc3b6ae382e8269f55c8f6311ea"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawVacantEntryMut::insert_entry_with_hasher"
+kappa = "6efb37347292a59e717fd42c029f6545080dc3ed77d8f5baec02c7b424beae0c"
+at = "K=u32, S=u32, V=u32"
+embedded = "d7bdc0ee7a6cbeb2930021ee2b2c37ad44942a4b17f40bc4cbb5848f32b499ae"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawVacantEntryMut::insert_hashed_nocheck"
+kappa = "ea4a7b1b7d48f589d0a6ff48acf4b831ca84ba9cf75b873ab67f38a92d784ad9"
+at = "K=u32, S=u32, V=u32"
+embedded = "745fb99b2e168513cb2b1156fb3701454a49374f3a8accc8df7c00fe8e0b0cd2"
+status = "residue"
+cause = "mir::Ty: RawVacantEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::RawVacantEntryMut::insert_with_hasher"
+kappa = "26a49d6f722492d759ffdf7af37a37cfe1e26c7797954a4d5f7e984d49bd222d"
+at = "K=u32, S=u32, V=u32"
+embedded = "aa081877dd9a5c491e995dc57812e7f1754bcc11e05d8e2ad5f26b057546fd78"
+status = "residue"
+cause = "mir::Ty: RawVacantEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::VacantEntry::fmt"
+kappa = "6d61db2b0d3fac97a057310c3d944db3e233f6c084e74c5ce14155c429b50a13"
+at = "K=u32, S=u32, V=u32"
+embedded = "c400707f3e2b68474074427c729a7e1f183cc10c9ae0d0e12b517f59facd893c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::VacantEntry::insert"
+kappa = "dc9e207bed0da4c0a432548561cf63bb272be3231626fe19ec054e5cda5d4973"
+at = "K=u32, S=u32, V=u32"
+embedded = "4175f9d593d16533f7aada454f73f88f1c0c0cf84cc60a166da10ab98af7d09a"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::VacantEntry<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::VacantEntry::insert_entry"
+kappa = "7ba64fea2ecd674bc2e15f8b4e5dfbb04fc667b4657bba2a351eed9ee5f9508b"
+at = "K=u32, S=u32, V=u32"
+embedded = "b006669a0fceb06f24d2732c3b135202b0644c652b71519447155fdf1ecd912c"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::VacantEntry::into_key"
+kappa = "bc6f9c90da341f3bb5dfe558bab617ecab34c4f35f350566ceeaf0f278f73804"
+at = "K=u32"
+embedded = "49a8020d56a73c9ee078b0ecfe12b438367e2a33f41562c42f1ef405c50b4f40"
+status = "residue"
+cause = "mir::Ty: V"
+
+[[fn]]
+path = "hashlink::linked_hash_map::VacantEntry::key"
+kappa = "0ccdd00d7d358b4bc6700a726f45e867b281067a0c0aab002443e28e1e03215f"
+at = "K=u32"
+embedded = "5c2058a11a9988447b1404caac21be18927e79f93d880d0e2fbdda8baa942011"
+status = "residue"
+cause = "mir::Ty: V"
+
+[[fn]]
+path = "hashlink::linked_hash_map::VacantEntry::raw_entry_mut"
+kappa = "2c63a673304fd2f11444d0bdc227d85badb25d9efb0162cd29c2b6b82b89cb5b"
+at = "K=u32, S=u32, V=u32"
+embedded = "92e3bc7a62183534df7e3931c67360c75190c4b8c1eaa8c269d37a88298a7816"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::RawVacantEntryMut<'_, u32, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::ValueLinks::clone"
+kappa = "b36b12c06b30e1ec17be32b31fc6b846d28fb952b352ee665f5e02d5e0216137"
+at = "K=u32, V=u32"
+embedded = "7faa34e8c1c715ac718fa8cc9a87dd0a60e4e519d5b052c8301ace3821f8a1ce"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::ValueLinks<u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Values::clone"
+kappa = "6a5085e6c787fb7762effcc71e40e0198baf20fef091ee17a8607ddb1ba48dd1"
+at = "K=u32, V=u32"
+embedded = "7a0f4d55252c108298190b0a56410d8b67387ec1ddd786de9ee2fa8035f2ae6e"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Values<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Values::fmt"
+kappa = "c21bca1621f970d33dd9d553e8e668bfc92c963aaddc29bd09a69d93ca4d80fd"
+at = "K=u32, V=u32"
+embedded = "d405ade7138ae10760ba498257bfc13fefffb8f3b08f90744b82c0bd2f6615dd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Values::len"
+kappa = "b36d52f0c3027886211429a414389315187ac2d5363cd5aabeaf5196063966fb"
+at = "K=u32, V=u32"
+embedded = "5df77343236f2dd500525208d9e648d5b066855284f1c23d7c2fe2607d12d169"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Values<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Values::next"
+kappa = "a22299cbde8e2cff95bc1cc9c0df2ba3a98d14257299fc255918a707fec0d460"
+at = "K=u32, V=u32"
+embedded = "7efaa1e528c541430c9468f4f08801b45c640dd9d59234685b263a70ac0bd47f"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Values<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Values::next_back"
+kappa = "2404818fca1234bc1f8a82ee248f94d8317b8a47d81dfb0807ba83e868753b0f"
+at = "K=u32, V=u32"
+embedded = "fc7b8d9f7377ba7d8c203dc912e8c2e8269bcb38c34c1f3c80357513cbd3774c"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Values<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::Values::size_hint"
+kappa = "13a7c034d23bfb6cdf435847ba216ed092d4b54b2ab525821c2f124b699cbb83"
+at = "K=u32, V=u32"
+embedded = "f21f4d4c33f8bc15a6f65af784e8e3d7865879e5f194c87c32d9890fa51bca6d"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Values<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::ValuesMut::fmt"
+kappa = "00dcd15b1b7f745330871fe1710ea7b9d37fa109558482bc4f792040569f0240"
+at = "K=u32, V=u32"
+embedded = "3d957bd9310dc6a7bbd0793afe3ff8447329584c548c62edc80d279ec9de62eb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "hashlink::linked_hash_map::ValuesMut::len"
+kappa = "71cd54adc525daaa84ecae4841ba9b22170f3877b79478fc3430080e5904cb03"
+at = "K=u32, V=u32"
+embedded = "25d47a17d5df028c64f28c1c5baa6156397fdef77cd7de0198ed36ce5161b660"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::ValuesMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::ValuesMut::next"
+kappa = "733489f551b03a0f5fcb497181f7b55d3e1d1297ff342cb02bbaed1d622ad97a"
+at = "K=u32, V=u32"
+embedded = "f4e45f59fc92b68087119ed2586a964a00d73b46bd61d96c54fecefabae13e29"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::ValuesMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::ValuesMut::next_back"
+kappa = "b25532de486f353d1c3bfc124751978e4f6b681663bd52383b11eb9d4d2cce16"
+at = "K=u32, V=u32"
+embedded = "b841218b7303d0ede33972d8bdded04c40ec0e4d7387fcb586dfffc6614782b4"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::ValuesMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::linked_hash_map::ValuesMut::size_hint"
+kappa = "86e29a4ae63e45053400ae6cf34ada4691dc26e530b25acd3af4f115af4a0f80"
+at = "K=u32, V=u32"
+embedded = "3213a235dbb8871129e4e9e5468d237715a6dfa6c1512c76f213bdfedf2758c5"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::ValuesMut<'_, u32, u32>"
+
+[[fn]]
+path = "hashlink::pop_free"
+kappa = "8c937a83704d30d69f774d72e73a01a52f0778524ec0cfc31344c0da64eb745f"
+at = "K=u32, V=u32"
+embedded = "09566c766b0759f5b474c10aaa700ae062735d56c941b77a5578beb84d0debcd"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::push_free"
+kappa = "b7addf9eeeeec8c91f715741c3a9dc924789940caa277dbfc5468dd07f1a033a"
+at = "K=u32, V=u32"
+embedded = "97bca4ce90b37108cac9f23882fd75e9d266b26343c5818cee212cd61f627079"
+status = "residue"
+cause = "mir::Ty: linked_hash_map::Node<u32, u32>"
+
+[[fn]]
+path = "hashlink::remove_node"
+kappa = "5c361b7ec15c75ed068fd8cd27234b257ed992f3346c5e59b73780b8e5ea5783"
+at = "K=u32, V=u32"
+embedded = "3c5c5f5612f3470c52e658aa001423f28689d39a6c10873f1a5d839efae58877"
+status = "residue"
+cause = "mir::TerminatorKind::Call: linked_hash_map::detach_node: hashlink's MIR stops at type outside the lift: linked_hash_map::Node<u32, u32>"
+

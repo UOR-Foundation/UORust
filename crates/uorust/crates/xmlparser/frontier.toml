@@ -1,0 +1,110 @@
+# The xmlparser register (written by `uorust crate xmlparser@0.13.6`; do not edit): every body of
+# xmlparser's MIR at xmlparser 0.13.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 153
+translated = 9
+residue = 144
+
+[module.crate]
+bodies = 57
+translated = 1
+residue = 56
+
+[module.error]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.stream]
+bodies = 47
+translated = 0
+residue = 47
+
+[module.strspan]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.xmlchar]
+bodies = 8
+translated = 8
+residue = 0
+
+[embedding]
+bodies = 153
+embedded = 153
+evaluable = 153
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: strspan::StrSpan<'_>"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: Token<'_>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: stream::Stream<'_>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: error::StreamError"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: error::TextPos"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: stream::Reference<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: EntityDefinition<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ExternalId<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ElementEnd<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Tokenizer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Chars<'_>"
+bodies = 1

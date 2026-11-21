@@ -1,0 +1,157 @@
+[[fn]]
+path = "num_cpus::cgroups_num_cpus"
+kappa = "39e1098485a6384a92a2ad8920b9c62e3c671c3609e67ed39e0f1916514d8a70"
+embedded = "36b6ad95905cf56cc7bb93b18c7eea18a43e18f40506c84c263f4e3abe08ed09"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc6: &std::sync::Once}"
+
+[[fn]]
+path = "num_cpus::get_num_cpus"
+kappa = "5ad00513ae8de0e27c5daea9280d0bf5191d2392fbd373d4503bf3049063515f"
+embedded = "4afed31b665753290bece1d433178812126fec01600a33d2041b80e23a31fcae"
+status = "residue"
+cause = "mir::TerminatorKind::Call: linux::cgroups_num_cpus: num_cpus's MIR stops at mir::Operand::Constant: {alloc6: &std::sync::Once}"
+
+[[fn]]
+path = "num_cpus::get_num_physical_cpus"
+kappa = "9b9261d5cd710407af909d6ef41cfc22b642deeb255eee32e544e24349981630"
+embedded = "a69065e7a0c1128d7c80da1c2e4c375578e807c10604b3d50e08288caf048943"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "num_cpus::init_cgroups"
+kappa = "3ac553ab489a79809afef9df0bd10e524085067073bbd9b3f29ca334324b1c3f"
+embedded = "4b361628c28e9dca8764dfe17ece9b1d6cf236d177241cfaffd43dea2e18fdd7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: linux::load_cgroups: num_cpus's MIR stops at type outside the lift: P1"
+
+[[fn]]
+path = "num_cpus::linux::<impl at src/linux.rs:157:10: 157:15>::fmt"
+kappa = "29792486766bdee700d7dd46446948dcfe54f060d2c24c4973c109261bbe89f2"
+embedded = "549c9c70cf5050fd4a3024dc78e3a6931336f253a67f0e3c0145617a5b333bef"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "num_cpus::linux::<impl at src/linux.rs:157:17: 157:22>::clone"
+kappa = "999ee689f2926ffb44c5f88cb1e834906c439536e7e222b91e7b56a94b36ca29"
+embedded = "80e1dd329fb4cc1c01983e822801807141039351aa9ea65f014e95fd172ec3da"
+status = "residue"
+cause = "mir::Ty: linux::CgroupVersion"
+
+[[fn]]
+path = "num_cpus::linux::<impl at src/linux.rs:157:30: 157:39>::eq"
+kappa = "5abfcc18fe43794d3c65b1ede36c975014814eb3573faf74eab9d5f0779d7768"
+embedded = "847586a197e4f32b34a76ab36f871a9608432f4955e0cbb288d05a35c1aeff0d"
+status = "residue"
+cause = "mir::Ty: CgroupVersion"
+
+[[fn]]
+path = "num_cpus::linux::<impl at src/linux.rs:157:41: 157:43>::assert_fields_are_eq"
+kappa = "b2627e2a7553ee2c9893446c4dde4da2632544a0ae1910b3d967479a51311336"
+embedded = "333ed6545f2d642b8c8eb2156b1da2f05dc1d21cc50eeb9a065ebe8eaf13808f"
+status = "residue"
+cause = "mir::Ty: CgroupVersion"
+
+[[fn]]
+path = "num_cpus::linux::Cgroup::cpu_quota"
+kappa = "acdc1ddb0b560afc19207defa77f8b351ca23e7a234f4ff5731da8f576a62073"
+embedded = "4faf783a9321af7148a5b709ac8edee2c3b9796a757654439014a6b14de17d0b"
+status = "residue"
+cause = "mir::Ty: Cgroup"
+
+[[fn]]
+path = "num_cpus::linux::Cgroup::max"
+kappa = "12be2175feab0be6b8ab92a879e90493ceb6fd3387127556da7c4745bcda4b4f"
+embedded = "446dc20c85ae799e61735d04eb1091b23c23e2d138a8794f2c23e013f32b8789"
+status = "residue"
+cause = "mir::Ty: Cgroup"
+
+[[fn]]
+path = "num_cpus::linux::Cgroup::new"
+kappa = "4310846f054bcf800a415643bf835ac48e2bcd70c11dca057cda32ee0c2aecc3"
+embedded = "d5c101a9a5b42f68b6f6632984a9b48c367000addc43a946535d6d462e20c044"
+status = "residue"
+cause = "mir::Ty: linux::Cgroup"
+
+[[fn]]
+path = "num_cpus::linux::Cgroup::param"
+kappa = "44cd8859fe50e599725981e4c29d0369f8abde0e1c2dd0f0972b40b9b4f245d0"
+embedded = "0da20b10bfbd89d92b1ee3ca357203caad34b9e5bc0ae70e71391bbe5e7b5011"
+status = "residue"
+cause = "mir::Ty: Cgroup"
+
+[[fn]]
+path = "num_cpus::linux::Cgroup::period_us"
+kappa = "0dfee6dd9ce5f4533066d84c116e27abb62c5625000b18bd56e8a8ed676b1906"
+embedded = "c1a809a38476bea33e13581e32f82c2b6817aa89dce97174843a338b2b676839"
+status = "residue"
+cause = "mir::Ty: Cgroup"
+
+[[fn]]
+path = "num_cpus::linux::Cgroup::quota_us"
+kappa = "25c18c00bf6fc76b127b1b43eadb3281089ae971469e6c64ca05bd93965a6b5a"
+embedded = "fc8d02ad1272585ab931dc96565b36f27a22a3dd2c5aa92217a7f57689311884"
+status = "residue"
+cause = "mir::Ty: Cgroup"
+
+[[fn]]
+path = "num_cpus::linux::Cgroup::raw_param"
+kappa = "890546aabf37555efb67e085dd1320ecbf5c74ac771d94fa0261dea30b1dd558"
+embedded = "754829d6936dda9e75a567497ac1409bff74fc46f81d3e292991a956f3c2eeff"
+status = "residue"
+cause = "mir::Ty: Cgroup"
+
+[[fn]]
+path = "num_cpus::linux::Cgroup::translate"
+kappa = "6b7005e2cc9d8d93a1d073a8b319facad808d29ba4f54ae88848886696cdadb1"
+embedded = "d4a06d89829fb9c1a6bec63516923e7f42f9d24bb3e8381588034466c4b3b68f"
+status = "residue"
+cause = "mir::Ty: linux::Cgroup"
+
+[[fn]]
+path = "num_cpus::linux::MountInfo::load_cpu"
+kappa = "33c4fc3d82b1b7af28d9ee96f95c3032d8c67db106670c4669565eb7f2756b12"
+at = "P=u32"
+embedded = "30a324dc73207c8e7f82c27a7d17e5835eb219814161c16c64b827c2a0eb67e6"
+status = "residue"
+cause = "mir::Ty: linux::MountInfo"
+
+[[fn]]
+path = "num_cpus::linux::MountInfo::parse_line"
+kappa = "f5c6ac19f690295dff91faee3ce43b5646d5a14388753e075edf4ee779be6314"
+embedded = "3e4ba4936389296e6ba640693a778128a732429e2af19d1421c6cfb6d7517179"
+status = "residue"
+cause = "mir::Ty: linux::MountInfo"
+
+[[fn]]
+path = "num_cpus::linux::Subsys::load_cpu"
+kappa = "c64eb7ef25e746ccdaf4deedf61e622d9e31565e5759252ebae6938c8c8de20b"
+at = "P=u32"
+embedded = "e48a5600ca188c6047dbbb52647cfa685514751ec9de79175b3e266300a86a96"
+status = "residue"
+cause = "mir::Ty: linux::Subsys"
+
+[[fn]]
+path = "num_cpus::linux::Subsys::parse_line"
+kappa = "82ac03c0953c5415fe784f52d82da701a2edd3784b8ea245e856234df7e71dc8"
+embedded = "24eaaa59793e56d3781cc430ec10816502312a7ecab828f47c95b9164d8c86ca"
+status = "residue"
+cause = "mir::Ty: linux::Subsys"
+
+[[fn]]
+path = "num_cpus::load_cgroups"
+kappa = "c5fc1381e0ec681b69cf737c629af1334f70576841d74166c96e17df1ab8dd6e"
+at = "P1=u32, P2=u32"
+embedded = "f9e88078d62da8ce376955712d4a9e6c93676e725490ba67a4b0b2bbb37354de"
+status = "residue"
+cause = "mir::Ty: linux::Subsys"
+
+[[fn]]
+path = "num_cpus::logical_cpus"
+kappa = "05ad1c31dde981b062459c3834606b4432075aebccd7f29f3355b0d340459f5e"
+embedded = "9d5995620b9a31a8f16050c6d1cae4e3bcb1fc36e35061582bc54a7aec045efc"
+status = "residue"
+cause = "mir::Ty: libc::cpu_set_t"
+

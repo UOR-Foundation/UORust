@@ -1,0 +1,31 @@
+[[fn]]
+path = "zerotrie::MAX_USIZE_LEN_AS_DIGITS"
+kappa = "ea8e05ed15dcee5ef9f8558c8c1cb2bfcb868eb6533ff2ea3a6c9675585283a2"
+embedded = "ad4541d16f93bacdc41da17b3b5ae192698b1ba9ca21aac2214c52a3799a679e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "zerotrie::const_fmt_int"
+kappa = "b8625b2e44c3cdd1647fd79bd91df1e5ce6c4ed5a825626f4160b516c5070709"
+at = "N=#_N"
+embedded = "f3721b389c039cfada0bbc7652e57123f639391ccb7bc11c515450b666384208"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "zerotrie::helpers::<impl at src/helpers.rs:11:1: 11:32>::debug_split_at"
+kappa = "883b6596c4523e793b046bebab4744b448cff5fe6810a23a41e2a8238dcaf574"
+at = "T=u32"
+embedded = "880375469ebd8d48067069f55b5329ffc0f9df65721986659749a3b2b7ef58c1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u32]>::split_at_checked"
+
+[[fn]]
+path = "zerotrie::helpers::Option::debug_unwrap_or"
+kappa = "0f90d05ec515c8619d24207387446ef1323eecce548ed7251f3aff49fe63536d"
+at = "T=u32"
+embedded = "8920e4c8967946229f83204629c95eb1ddff371cc0aded17aa72c00d41987e4c"
+status = "translated"
+digest = "add244f3393035e9efa50860ecc44570ec1467676de750b407fccfb408f7a31d"
+

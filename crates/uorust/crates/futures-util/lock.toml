@@ -1,0 +1,304 @@
+[[fn]]
+path = "futures-util::HAS_WAITERS"
+kappa = "2e1dd6cfb79f068fb71ee047c959f58877b270f7db4c17622120cff06d91a80c"
+embedded = "dc9cc572c822679cb527ed7bd60172722c6b6affa903ec00803ef6b432e721df"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "futures-util::IS_LOCKED"
+kappa = "292bab9dfff05efc4c2f3e897e2307e5694b55f92cdb6add06672e1ecaef4bed"
+embedded = "a5e27317332a522072dbf6368893485faf72256ee1634652d076826072efcc53"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "futures-util::WAIT_KEY_NONE"
+kappa = "1ccf9161bf9db006705b4380b6c7cb5cb3e14c8fcde43efe4464e621ce237514"
+embedded = "5c66a0c06eeb5cffd5162cd72d88a139a09070d6b7e0fc35561c1047ccef7906"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "futures-util::mutex::MappedMutexGuard::deref"
+kappa = "c5c93469b6c7effa13f8c90fba36628b72905614b831d6f89dce457e194dc026"
+at = "U=u32"
+embedded = "3a600413dafe96edfbacdb1d0f0ff0d946a5e264d5acf38b23c98e1c45602bbc"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-util::mutex::MappedMutexGuard::deref_mut"
+kappa = "34e10bd445418cde33faf837647f4041e2e0e76571ef153c0226f6378e34beef"
+at = "U=u32"
+embedded = "3fbd2eeec0faabe9aefbdad9ecf3ed59c04c56fcbbae12c1779007c42677ddf4"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-util::mutex::MappedMutexGuard::drop"
+kappa = "cbdfc80d8b31ec93b3ef99d21913a2d68020689084b5208abcb7a4fa59aed534"
+at = "T=u32"
+embedded = "8421763ecc79abb344cb59f9c2523b94baeefa52771420084d4984da7d4d104f"
+status = "residue"
+cause = "mir::Ty: U"
+
+[[fn]]
+path = "futures-util::mutex::MappedMutexGuard::fmt"
+kappa = "c2fb5256bf91d4e2bd09b38d90cca7eb3b5abf36b863e4b2f8ad14b2d0abea96"
+at = "T=u32, U=u32"
+embedded = "9cdffdbe0823bca3e56fa24e533cf3885ae0bd87d8ddbcf91d3328e16c4e11f0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-util::mutex::MappedMutexGuard::map"
+kappa = "cc01c9d418994bd83c2aeb742342e87386872150d0a088409d8897a498c2e2b3"
+at = "F=u32, T=u32, U=u32, V=u32"
+embedded = "a7b9793c0564187f92adfe2c91daca30f13c422ad888a284ea796fb797fafab3"
+status = "residue"
+cause = "mir::Ty: lock::mutex::MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::default"
+kappa = "d77da64c50f1cfae60affa8b46713c6ef4b4df266cd6e4339ac357f8977324f5"
+at = "T=u32"
+embedded = "4f033b01cfdb65880d235438ae1207fbd3f7f92f7b8733b6b157dca0adaab867"
+status = "residue"
+cause = "mir::Ty: lock::mutex::Mutex<u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::fmt"
+kappa = "872182b6ec18adb17374c4bc8772c5e2695a567371a14004864993808ced130d"
+embedded = "e2134d02c0b3c464ef63a8ad21f616b082ebe4044066220a55542e1c1252093c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::from"
+kappa = "2da6e1a0d0bef7cdeda6c4ec6203057e26ba9c76e0cecbfc02ca5ca06b7c7b40"
+at = "T=u32"
+embedded = "83573cfbeb8e3ac7fa1ca08c9d9b30cee3dad7993ded15f690e72310897df5c9"
+status = "residue"
+cause = "mir::Ty: lock::mutex::Mutex<u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::get_mut"
+kappa = "3f7c8bc7bec22a97b6410f9aef3783c7904b231820b2a517c8eb771e8a8e7bf8"
+at = "T=u32"
+embedded = "ce2cf82a02f0bd1c588a32ac3f4ba117bcfc7de0dd1822c64d7140b8f7717e81"
+status = "residue"
+cause = "mir::Ty: mutex::Mutex<u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::into_inner"
+kappa = "f081668ea930b778d0a32880006a9c38f5f9f436519decb105d2fcd618a15f36"
+at = "T=u32"
+embedded = "fd21a4ba84f0c33895f56f3f8aa7fa89f9af833c6e9a55d8a08c2ee9f3bdbdd6"
+status = "residue"
+cause = "mir::Ty: mutex::Mutex<u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::lock"
+kappa = "c593cf747dd6aba24ed5b70e4bf292030f62f115a196b1030fcbb319ac44a90b"
+at = "T=u32"
+embedded = "55aebdef1b2cb756059bbe5b7c070d1a6619cb210a1f570d5397057effed1eb6"
+status = "residue"
+cause = "mir::Ty: lock::mutex::MutexLockFuture<'_, u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::lock_owned"
+kappa = "e166aab4b142fbc1a7603b6bf5f87e5249588261d417a6ed5e6a673fdad70f84"
+at = "T=u32"
+embedded = "1c6562bfa4fd0d2cdaf0f69ac7b21bae6236a1b484b4c71f65ef7ca74613d38d"
+status = "residue"
+cause = "mir::Ty: lock::mutex::OwnedMutexLockFuture<u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::new"
+kappa = "4b18991ec507f4684ea4f1ed95405c4512f44a5ad5b4d0b85c983536d86ae05c"
+at = "T=u32"
+embedded = "15d364fdd86bf39cda892fa55eaf8e38b1aa97f10781fd12e7d6ecd2d7aeb4da"
+status = "residue"
+cause = "mir::Ty: lock::mutex::Mutex<u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::remove_waker"
+kappa = "6aa60b2da9ef105666b78fca411c1e391901ea3dae1a16c964159b2d614f560a"
+embedded = "609e04015268ff73faefb60c9e0153e69500d288a2b4174202a7c8ca5e30d4dd"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::try_lock"
+kappa = "2a95abe6105993b6def148177a9f5a501eccdc37c2e70e2c13f42b9a3118b3ad"
+at = "T=u32"
+embedded = "78c082804c2f644e0721d8a0990c0672a7226faa4f975900552086c2a8c5fdf9"
+status = "residue"
+cause = "mir::Ty: lock::mutex::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::try_lock_owned"
+kappa = "cc20a1fd3d7472d9de7d5bcd64b29e218aa708676834c9a6cba3e36d5ca3da1d"
+at = "T=u32"
+embedded = "725107a2d8e7c9320e07a8308ff2476afca47978b437507c766a203a06ffb387"
+status = "residue"
+cause = "mir::Ty: lock::mutex::OwnedMutexGuard<u32>"
+
+[[fn]]
+path = "futures-util::mutex::Mutex::unlock"
+kappa = "15477dd2d206c28aa0d5ef7e1e8057d31cc48405206d64707627895cbdc3e95f"
+embedded = "20c93f194095e1eabad53159cc003e2c4688ea75122a0a510506277639e85722"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-util::mutex::MutexGuard::deref"
+kappa = "02beb57147fbffebabc62a6d1490b526073234ff308b39a1c9a6030973105714"
+at = "T=u32"
+embedded = "3aa4b6da4912a2bd00d12147e2f42bb610f4b5d49f82117056b440a2740160b3"
+status = "residue"
+cause = "mir::Ty: mutex::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "futures-util::mutex::MutexGuard::deref_mut"
+kappa = "51caabc9b6fa4bf44ed4c82560a7bb572bb2fcfbc2b8fdb3446432ed50385889"
+at = "T=u32"
+embedded = "ac87eb2547682c3959a607ba014061fb6936a12810d18f9f548aee2ac765f1cc"
+status = "residue"
+cause = "mir::Ty: mutex::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "futures-util::mutex::MutexGuard::drop"
+kappa = "665830ced6e6aa88383bb761f8bef6b68bbc5f2e90fec3a3937acfd238bd8353"
+at = "T=u32"
+embedded = "6c38c87e0dbe2c23edd5c284c11afd29837ad35140b88452d6c89e39a922646f"
+status = "residue"
+cause = "mir::Ty: mutex::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "futures-util::mutex::MutexGuard::fmt"
+kappa = "078625b8dc82eab25d36a476de316e222e00420cf10ab38a430c50a16a607cad"
+at = "T=u32"
+embedded = "7e22cc0c79c9cec80c52c3a67b3b06570dc95da9d48688a3ac9197732da2ed81"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-util::mutex::MutexGuard::map"
+kappa = "9a57a78d7996c1fb1a358d76075d925e30a44ed80a2f81f2e23ae04a0337e90d"
+at = "F=u32, T=u32, U=u32"
+embedded = "f67184b6d0f0c497e07c8531851b1833398b88647e661c52fa0b3ccb363a006d"
+status = "residue"
+cause = "mir::Ty: lock::mutex::MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "futures-util::mutex::MutexLockFuture::drop"
+kappa = "3493c420dc1d8e6430657d12d56729bb4af1f1d02eb75a73156dfaccbbe2c3a1"
+at = "T=u32"
+embedded = "85518512b485ea0f12bd50b6c8b2bb593f64e7b1409faa231c5db261d713a5b4"
+status = "residue"
+cause = "mir::Ty: MutexLockFuture<'_, u32>"
+
+[[fn]]
+path = "futures-util::mutex::MutexLockFuture::fmt"
+kappa = "a04fff8e4eca1fa66c7be5d5b4846f9d4eaefb6bc27cb5452d33fd3f9d1ff809"
+at = "T=u32"
+embedded = "101b7c62b0f5a634b0357ce920747bc8667eb8768f8dc71260cedbea4fa4e63e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-util::mutex::MutexLockFuture::is_terminated"
+kappa = "6265ee705ae85c134e73e98209e66b11c07e8b89386d8a608ef1baf3e0782c90"
+at = "T=u32"
+embedded = "49cea474753cdfb26e356e97b1fc2636ee21d83656e3270c8ffa2230b31f9958"
+status = "residue"
+cause = "mir::Ty: MutexLockFuture<'_, u32>"
+
+[[fn]]
+path = "futures-util::mutex::MutexLockFuture::poll"
+kappa = "9c42ec9fd3ec1681652f57d4b7f585d4e9d7de8a088bfc390f347a9cecb1b666"
+at = "T=u32"
+embedded = "6aee48b3e582821d3d26b020cb982581b15033c3ca00abc3d33d0b2ac64f0f30"
+status = "residue"
+cause = "mir::Ty: lock::mutex::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "futures-util::mutex::OwnedMutexGuard::deref"
+kappa = "66a9d9289ad54c51939481a7763c888b6455058247c7bd32f8f3c642a4b5a36f"
+at = "T=u32"
+embedded = "b5f18b852be324063375be8064d01a1c713ed6c3d1b0db0f17661cc8b405d785"
+status = "residue"
+cause = "mir::Ty: OwnedMutexGuard<u32>"
+
+[[fn]]
+path = "futures-util::mutex::OwnedMutexGuard::deref_mut"
+kappa = "8c594998587c1dcc6a8423ce497c956ba3dd58d9eaaffbb6fd9c4fb61996cabe"
+at = "T=u32"
+embedded = "eb9477472bdbbc1532ec16f99372fffae5a3fe60a87882d8ccb0ae3c1ca36815"
+status = "residue"
+cause = "mir::Ty: OwnedMutexGuard<u32>"
+
+[[fn]]
+path = "futures-util::mutex::OwnedMutexGuard::drop"
+kappa = "21a0b30294b305d3468852952bf55b99ab98f82ffbd9980ec7f1b0e9374a8974"
+at = "T=u32"
+embedded = "2f21f9588e66c7a0b484eaa078631840958ae969580a3ba441398ee5609a8ff1"
+status = "residue"
+cause = "mir::Ty: OwnedMutexGuard<u32>"
+
+[[fn]]
+path = "futures-util::mutex::OwnedMutexGuard::fmt"
+kappa = "a3468132e7218e20db36b1c31deaca349cd9188eb7c6899faa4bc00f8414450e"
+at = "T=u32"
+embedded = "8cea70225dfeff36b620fef62814043432e442bbcc7d0571f457f6f48955de4b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-util::mutex::OwnedMutexLockFuture::drop"
+kappa = "1674af75bc6da0e981979a423232f048bf59da604a3376588b437266dbf7b160"
+at = "T=u32"
+embedded = "f35b89082b49418a722ba4d88b7a86556d844710be8ce624934682f045486a41"
+status = "residue"
+cause = "mir::Ty: OwnedMutexLockFuture<u32>"
+
+[[fn]]
+path = "futures-util::mutex::OwnedMutexLockFuture::fmt"
+kappa = "a7fbff70b4f39ca69a6ed4c050715c6a7d03d3bb8ba7fa9e80751a22234d03e1"
+at = "T=u32"
+embedded = "890388782804e0b0c6c4b789aca864f2c6a61223859d5840ac88e537e8d099b4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-util::mutex::OwnedMutexLockFuture::is_terminated"
+kappa = "8b714b226fd07eea74f88cdbff0ae572333e7ef35be7b04e737f624573f14d40"
+at = "T=u32"
+embedded = "9c604ebc03fd749cd8af40e478326a356b1eecee87de77ad3b6d6bf334581d18"
+status = "residue"
+cause = "mir::Ty: OwnedMutexLockFuture<u32>"
+
+[[fn]]
+path = "futures-util::mutex::OwnedMutexLockFuture::poll"
+kappa = "011fca6aba18cd74676b29ae4eaedcbf99cea43124c3935e1f3072432ddcea8e"
+at = "T=u32"
+embedded = "13c37b9b30358b0f2c850368a30b7b5def50464e0c02e0cb0141d4a625a4e801"
+status = "residue"
+cause = "mir::Ty: lock::mutex::OwnedMutexGuard<u32>"
+
+[[fn]]
+path = "futures-util::mutex::Waiter::register"
+kappa = "1424bf0d8a07a6b0d9bd9284bff69b4803b5c216987391f0834fecc1d5ec6c32"
+embedded = "bb0b795651db289a7c9c0bfb22fb0c513961a878f9fe63f778de9baf794b8d86"
+status = "residue"
+cause = "mir::Ty: Waiter"
+
+[[fn]]
+path = "futures-util::mutex::Waiter::wake"
+kappa = "e447d3d65dec17695d6fd786a3358dd7784af5cd067477f4487b9676341643f5"
+embedded = "98f74f60a4225f5e0cd0b5c592bd2805f7567d30c1f432b35a1b0f89be7df40c"
+status = "residue"
+cause = "mir::Ty: Waiter"
+

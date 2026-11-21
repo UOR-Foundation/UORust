@@ -1,0 +1,1153 @@
+[[fn]]
+path = "petgraph::Nullable::is_null"
+kappa = "c17f1f157517c967c4a4abe7ecfb297d9134a6d0570c2b2b5443430c68a2ab95"
+at = "Self=u32"
+embedded = "fef3500e2aee4673b765de77f4acebf4c0bf660110091492702747a18887aa44"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Nullable, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::ensure_len"
+kappa = "dbb1a746969c63b43332018e2d58ade8284eaa6503b9890e33869bb885f72881"
+at = "T=u32"
+embedded = "8eda2a8a8dc6ac0826fd5f14d67008aa3a8da245154c2c5cd4446139911db029"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as Default>::default"
+
+[[fn]]
+path = "petgraph::extend_flat_square_matrix"
+kappa = "f0be39b336c0a0c88c9c95a26ddb2ae3c290fd8380e58ad30a73c587476b8ef9"
+at = "T=u32"
+embedded = "a4021c6d3070f2243385f43b7f6e21e792abe953309f63d2955264cb4bf508db"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "petgraph::extend_linearized_matrix"
+kappa = "d4b6aee1a5f37baf6fd1788ceb4f0e2774eff23b9d614e8df0b1b506b4aac3a2"
+at = "T=u32"
+embedded = "e7d72c8f2d6e3a432d4c6f0ae108fda669a6b62217c38cdac474765cff3d1166"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Ty as EdgeType>::is_directed"
+
+[[fn]]
+path = "petgraph::extend_lower_triangular_matrix"
+kappa = "216fdd9ac88424b63dc3be0d3f32247afbe21dda538c3036c6a03f512354ff23"
+at = "T=u32"
+embedded = "bcd91fd31c531ecab83b8f23ed4e3282a6279627c992c11d6949a721ddc28d8b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: matrix_graph::ensure_len: petgraph's MIR stops at mir::Operand::Constant: the constant item <u32 as Default>::default"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1104:10: 1104:15>::fmt"
+kappa = "650cbc4b9c8791f1f8213059708b5d1ef2a41c4f288096c5cd7d8fb8c0145619"
+at = "S=u32, T=u32"
+embedded = "a8343c4f90b21a6aacec9154ebba12e5d93d90e9741ec5951ac8bb71e7dfa326"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1104:17: 1104:22>::clone"
+kappa = "4c69609d98c223055860662105a93080334163e0ea8c852bb99693dd1167214e"
+at = "S=u32, T=u32"
+embedded = "dccec249b10f7681642fdadbc2358ce22ff316a8714860d78e7cc4446d0e3712"
+status = "residue"
+cause = "mir::Ty: matrix_graph::IdStorage<u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1180:10: 1180:15>::fmt"
+kappa = "ad6e70a34037b2f928ba2dadfdb83129d0b10773da60929f26b433de0ad57573"
+at = "S=u32"
+embedded = "215ff4157e8dea46c6a86a9f50c0a891ce4aeb113d60727242e77b17ed87a1ce"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1180:17: 1180:22>::clone"
+kappa = "3c72523633d24ef171311383022cda8dfd5d84a54cc71f7e63ed5cef9599cb31"
+at = "S=u32"
+embedded = "02b45c15ffa9e20396492f2b0ec5549a0ebed7af39ae4336f902b4b359dc5bdd"
+status = "residue"
+cause = "mir::Ty: matrix_graph::IdIterator<'_, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1361:1: 1362:67>::node_identifiers"
+kappa = "2efa2d6a56c7e6120264ab6e22f0b25cb3b15c48c1c830229768853ef9bfb0ba"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "a3d5fe0188c3409097b64779e9914d85522aacd1505cf4841ec5ca53e7429ee9"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NodeIdentifiers<'_, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1371:1: 1372:61>::neighbors"
+kappa = "3fd04cf33b94c667c61dcc5d971ae856b4ce5aea8f97069dabf91de693b56dcd"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "f3bb4ea2a40d2246b8c1cb090401fc600adf7acdf8dcb26baa9f14883b317b81"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Neighbors<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1381:1: 1382:53>::neighbors_directed"
+kappa = "1bde9a3f4294a0e82177c8656461bcda224075efcc8d18a568fbf692d8e11f56"
+at = "Directed=u32, Direction=u32, E=u32, Ix=u32, N=u32, Null=u32, S=u32"
+embedded = "f76afafe740c1299f9ae13ae0976fb8afd1db44fc6553e0cffdf5c03aafaf9f5"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Neighbors<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1391:1: 1392:66>::node_references"
+kappa = "90c04a34e940c9c651df93f1e18dd47aa3145453fb7903aa3870992eae903898"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "2a8815d3972db6562fdac1e75cdf25cbe3121eb1c72493cdb57bebf66b2cb320"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NodeReferences<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1401:1: 1402:47>::edge_references"
+kappa = "b6e3136fc6a61d6f53610b2639ed78ff6fd6e9125bcc1c03ac960b34d6f1c3b0"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "470e24f6123167d6d346c509827b08e3d0b6ae1c7c9dbca3ec157f9443c538e1"
+status = "residue"
+cause = "mir::Ty: matrix_graph::EdgeReferences<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1411:1: 1412:47>::edges"
+kappa = "c7b93cd132f030b16a0a1268ec59b62f248cd7b62fbef57bbcfefedaf92ab157"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "fa7a10b2235fead1eedf902e9892d201d86ed6b7d73fb9ae371373fe2a7c567a"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Edges<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:1420:1: 1421:53>::edges_directed"
+kappa = "be03f1e77c0df6f5a412c16792664be71c6a45bca273e9c25e4a1755cb8f5902"
+at = "Directed=u32, Direction=u32, E=u32, Ix=u32, N=u32, Null=u32, S=u32"
+embedded = "bf42f740c9340784087d5391ec7bae196a6822d3ed6ee404ee564f912f7e537a"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Edges<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero"
+kappa = "0f4ec2e9705f9a357bb3118ed89aae5a36a862574952c5a37838c7a0fe1bce0e"
+embedded = "756ae854195e233b8caba045eb3925c64738a790467c971a873c2b34b41a2cc0"
+status = "translated"
+digest = "e27b57d67c3df9dde7e453bd5f4bc750d4d5dd8a77679e67c9a0e4ebc2873cb0"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#10"
+kappa = "bba01937cb06490523e9d3bbfc25931798c1eca45ec4dfecb8d95786c40e2b06"
+embedded = "4bb4335ecec523e6edc725a5ddc9f79f89b7aad3e5f91f9afc5d263d1ff1a343"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&isize as PartialEq>::eq"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#11"
+kappa = "77f98640b18e9a9b109b1a204a4f5138059dee2aa4d24ab5f7eb3291f22bdfd4"
+embedded = "94765f5414ca62b583b358a1fba1468858e9ea9defd7e2fdc130403453052fee"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#12"
+kappa = "338e8c991847bf5d07d8d6cce3d691294cab45befcd0f733557b34067f5203f8"
+embedded = "a6d4dfbed9cd27f9c5711f09819b959af99a1ec949939fd4e1036e0d77780099"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#2"
+kappa = "bd2dc98d35d76d03a0182139746a212e97dc90b18e03c872abb4d10857803d7d"
+embedded = "1e4c47a2a72ce2584b2cfa111130d9e21d21e615c537b9065061f8011e7bb871"
+status = "translated"
+digest = "e27b57d67c3df9dde7e453bd5f4bc750d4d5dd8a77679e67c9a0e4ebc2873cb0"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#3"
+kappa = "83e684f6a2501e622bb8fa9b7d5630edefba5fd3bdd05ad5aa6f5a4805b0c1bb"
+embedded = "254fb9ea5bb37aacf30e025c8d6aa1df01221b6a95eb0b052d64fbbbec7ca063"
+status = "translated"
+digest = "e27b57d67c3df9dde7e453bd5f4bc750d4d5dd8a77679e67c9a0e4ebc2873cb0"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#4"
+kappa = "23a5b449fc5611494368fcdae976cdd610a85bb42a912bd60cf21e36d3a9e047"
+embedded = "66638ed977d8fa08fa7cfd7374c4ab2f23edb543d2aad44b32e208350d6557a0"
+status = "translated"
+digest = "e27b57d67c3df9dde7e453bd5f4bc750d4d5dd8a77679e67c9a0e4ebc2873cb0"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#5"
+kappa = "d566910fa393a089625a513b3efbe3ffb7a0930e3d1d247be18905ed96cde45f"
+embedded = "2efbebc86feefb4f7df99bb4bbde7759e3e975fe71ba048713ef367e6861735c"
+status = "translated"
+digest = "e27b57d67c3df9dde7e453bd5f4bc750d4d5dd8a77679e67c9a0e4ebc2873cb0"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#6"
+kappa = "fa26787fdc206b659b4cfde9496ebdeca42095ad5bb4ba20f4c39e628ed55447"
+embedded = "4a742140d2a83754f46416e3ac584a279978e752755573be96261a931e19ee40"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&i8 as PartialEq>::eq"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#7"
+kappa = "d87faeeb665d79df93d0ddd2bc8e3273d50241ae7e2a34553b2887b32654e60c"
+embedded = "daf46803c441df3ae8f05b25eebf870e819b12e58384eb918c62273862aba544"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&i16 as PartialEq>::eq"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#8"
+kappa = "765f0199848cfb62d2ca6966ae313fff4850f12d792660b60dc8d910d3a307c3"
+embedded = "66afb841fd815b8bb8edd7de501b6e70651e2ab513c852e1018f5bdd371f9254"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&i32 as PartialEq>::eq"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::is_zero#9"
+kappa = "d5cff39a8dda9759e51042d60b73d3d285929222cc2ae4de82d021609b6f69a9"
+embedded = "c7ee042af598c62325b483a02f914ba2f003fdcdcd28d980c6cfbac2d148bbe7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&i64 as PartialEq>::eq"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero"
+kappa = "7118ab51eef11b9f53518d2cfe83d18a0717e4f2e26e276f6a0a08a224d0d203"
+embedded = "9fc129e1a5812dc28c0ec617cbaad7f4a6d9b7b8a2dcd04babee07bf4026f806"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#10"
+kappa = "c8abdda93e670f9b94a4acf3d1b27bf32179b9ea943d9288e183daf4fbb7bb01"
+embedded = "049340b77d8f098e8a9737f80d92477ad92ed0722f59bdebcac7f2695b135b77"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#11"
+kappa = "2297b949edf2eba992b89821d24ccff4e099e67af9bdcc02c2f502d676dc074a"
+embedded = "bb197a46583c5add5fc2bf718fc7a3b592ad5e95969f2e2c235285bccd50c2e9"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#12"
+kappa = "6cc3b0438c99a5cfe497244a5440f32207691fdb6ff72031106080ee028572cc"
+embedded = "a5bc577e3ab1e23aaaab39511be4a1ba396720c2b19d02d361c8e6994f7a1c99"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#2"
+kappa = "5a451e773ee9391182b5d8d13e922c1eed5653ab2f6a803de1a0ab71e8103994"
+embedded = "ed604ca1ac35ff2bbffbd0613f38e9cb2226032f46aab836dbc0e258206fe660"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#3"
+kappa = "4ee66a0bf2312e78a546cff4afa7a4484b6857dc172abee66af2fcc12f22a5fa"
+embedded = "63d6d40bed495e312fd92b3fa0dae725a8cad1c4e0402cd082c718bc48bcef20"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#4"
+kappa = "7df660b197645e1482304322c6de6bacb0916f39b617e8d1b0b447b633ebe3c8"
+embedded = "a4bc3746917a1430ecb66ef02dd8443875ca8420f5c1b46e946a90652377d7cd"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#5"
+kappa = "4fd14f7ad5b24e3dde0fb7a85fe874b0d7b3454de708ae6e03a399ab7fcd65b4"
+embedded = "90fc9a0b78d23470738fd644f9fd788119b1327c98fe113c65b8d192d8c53c6f"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#6"
+kappa = "00b5d8c14a1382bcab790d5632a385ee128ef4102fa804c1c6afbd7f740fe41a"
+embedded = "6c296c13631be9dddfabadff2baa022f32932a7422db05f205a687f3944fc6d9"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#7"
+kappa = "47a39a96c2384d15dbe37763571a84f3641bcc7f72c604a40e8e685e0c43a317"
+embedded = "7a78321ca23200af9630194bc4264302d9ace7a4a99f06bd74705c52ebe224c0"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#8"
+kappa = "83a69c726e9ed8e4e6fd1def437387c9932224e0dba466445495a5282e8f78ad"
+embedded = "aee37fc416fbf8a87024b39559d7b6c49cedd95e424bd1e2c259905a60908eb8"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:161:9: 161:25>::zero#9"
+kappa = "def3c0967eadebb572149f742aa96ab357e3d4077fdbf2c83433b7645e445d06"
+embedded = "28c24e91434fa3a0bab9f4ea7f1e0e95b4bd3d66a95406069c930111ebc331bf"
+status = "translated"
+digest = "05782c6e71fff0d13bacaff65bfbee28c00add516516365c75e6da3e00a68fa9"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:193:10: 193:15>::fmt"
+kappa = "3614f62dd66020e93b8c01bc78c731beff889e6dc9a0b978508d9300d7fb0c13"
+embedded = "b99ce9d964f37ef093247f029dff60ef6023f2bebbbfe511d62d544bfa4a1a46"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:193:17: 193:22>::clone"
+kappa = "8d9151c610da4099dcd641a54bdde4d7b4d112ff1a74054ea62a6513a0065621"
+embedded = "7021551672051a67e22a3529abb9bf06c937c6565b189f1d34fbf73294216e0b"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixError"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:193:30: 193:39>::eq"
+kappa = "832af80e45c65674a2d91d8f8e43bdc64675a11700adb5ecfd65c5557bb35de8"
+embedded = "1fcdcfddaeb29edb8af9e4ea0ba0e86acee1715829e26e521eda8ac09a99442a"
+status = "residue"
+cause = "mir::Ty: MatrixError"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:193:41: 193:43>::assert_fields_are_eq"
+kappa = "767e19b059f056a7c2cc47e334f7374821468bfd51f3cf5b5285d440056cb436"
+embedded = "a3b9c3d478b8984e80cb9526cb0eae54261ff594b5889d5fe6920359ca790c05"
+status = "residue"
+cause = "mir::Ty: MatrixError"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:242:10: 242:15>::clone"
+kappa = "0f0723428851fc679d9f9c8351060628a4e404e6dbcbd802de7066bbcd3c3034"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "94244b4b4e05c30cd2ef7dbd8d888eb4037cd59557c44fcf19f48435091b8f45"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:765:10: 765:15>::fmt"
+kappa = "23cf3fde8c4ddb88e690ca37a74ed0b41495e76119e8b3725883b307bca19c11"
+at = "Ix=u32, S=u32"
+embedded = "160d87ea1524adb56ff780dc56bfa28f37186267853b330a3972fbd1c12e98a2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:765:17: 765:22>::clone"
+kappa = "38c5fd7763000f3f2c02b4f84a171ff6e73f6189443c5ac2a1923ebe9c4183d4"
+at = "Ix=u32, S=u32"
+embedded = "be6d3fa3cac9523c688809f336fb74e833c2d47c31b4aa10713fa6beb69797d8"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NodeIdentifiers<'_, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:802:10: 802:15>::fmt"
+kappa = "eae4730601ca5a7368ac38501e86ec948f148badccd7b7111a25c049601eb75c"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "d73ab1b3d7b678e5937f758d4c40b91595d33254df16e393a16f895a1007cf03"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:802:17: 802:22>::clone"
+kappa = "b0b10bad0ecf141a4a1d6a1ff72cec55b7eb06a960e47c19ca48762b3dad2005"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "6eaa1b16612f84b6c7d322d8a6fd3488860c2bb3fe46d404cb84c0c0ad522bca"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NodeReferences<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:844:10: 844:15>::fmt"
+kappa = "d9b1656bafe670e322ca7bdc0cf2bce98fe69e1019a8ef36798666f2ad6e8b48"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "820cc80cd5f96af27f57a7cd20eebf6af2cb8a2e49c96a2a2a2fb9704024cd9a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:844:17: 844:22>::clone"
+kappa = "f6f467305388dc1daac9c62d2aa351da6b7d946de68e4dc6d4d1170a9d082815"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "9066608cdee3794e97c748bc315c8767fc59403a0c1d902aa987ff920c71048f"
+status = "residue"
+cause = "mir::Ty: matrix_graph::EdgeReferences<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:910:10: 910:15>::fmt"
+kappa = "5fa7547d44623126c89a5b2ca166c1233b928834919d8da9aea2dccf69c2af99"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "466a125934f53efacb8dfa30ab42d2a270dc40fb703ad4ad18ba325ac6a047bb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:910:17: 910:22>::clone"
+kappa = "3fccde10f9716ee4e8208a20d6fb8091f73403da02bb22f641e37f903fec0b40"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "448ccc62808a8c745d5729a8565c72dcf80e3c4b674bcaa9dccfb32047430798"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Neighbors<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:924:10: 924:15>::fmt"
+kappa = "d1ef2a9dc9ca2e376473a4e7ad50c5c07a695b86486ebe9cba4c2ebc7052bfb4"
+embedded = "25675a20e9e09ff2f6a3ee8837fad7e536b81b1e2b059520d48fd50c9319cf24"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:924:17: 924:22>::clone"
+kappa = "b9cae19f11e74eb818d4d831ff1c82730b725ae84f94eb887e15a5a497bb7723"
+embedded = "fce52dc32042f47a6731e5f545cedc1b8c937147ac07c12a1a19fc998e3a1a1d"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NeighborIterDirection"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:924:30: 924:39>::eq"
+kappa = "116807412ddd36edd17ec91c1a0d7c81f4a09d33443fb67cabfb40719664d9eb"
+embedded = "88aae4d33c7b2103e05b5c6859747159589837615f02094ba0c4cf5bd33f1917"
+status = "residue"
+cause = "mir::Ty: NeighborIterDirection"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:924:41: 924:43>::assert_fields_are_eq"
+kappa = "1facac7fbaaa423bcf8069ee8abc4a9c533788c6e1bec0e9212af985a53e9094"
+embedded = "b6b7c551d19ca621e6cd3f53da31779cbb6cc4af31d74b973e9648b6294fdeb2"
+status = "residue"
+cause = "mir::Ty: NeighborIterDirection"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:936:10: 936:15>::fmt"
+kappa = "fca5b23d9f9b61cb3ae77c9f2e5cc91ba1639d4b9c05ab09e3a3bfc96ef7ee7c"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "f5d9a81d0c90b25e0191c3fcededab3349717c66e0c2c9ed6e42a169c7db4fa4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::<impl at src/matrix_graph.rs:936:17: 936:22>::clone"
+kappa = "b7e3694c284bb68a5f5c8e5f32cd7073684c0caebf8b6c4d620a211bb4ac6904"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "7e8855bd39d89250e7e1a1730e8a4b85158ceef74f3ee7dbcdaf4a18400fcfc1"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Edges<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::EdgeReferences::new"
+kappa = "70b070f28f9615e616398a8aa089241d29fbbf6dd0ad204ce249483748794e57"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "d43de4c3ee7463af6745b16752b0af6a7dd5db6f30ec4af70ba2264e115aed3b"
+status = "residue"
+cause = "mir::Ty: matrix_graph::EdgeReferences<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::EdgeReferences::next"
+kappa = "c5453cdb2c6fb75ec4ca2a69153f5aa49833f4bdf79dc81c46059902a4662a25"
+at = "Ix=u32, Null=u32"
+embedded = "33afd1772ef248ff224e8396ed9eda5b809da774baf7f2a21726fefbca337498"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::Edges::next"
+kappa = "55e7adcac821758fb13076ce3eb1f208bebc771e292288359933de4441f7e1a0"
+at = "Ix=u32, Null=u32"
+embedded = "3dcaa0795600c8dede307c606f6ccbef556b66e954296f23a67ab5cd3827e20b"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::Edges::on_columns"
+kappa = "e83c6eebe21618bf72d295a9ac265d4c9547f73bf2dd4ef642caba6464f15fb2"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "dd0c9c415d912c80a92911cce493dfaf79b5cc254264ca355d6f83b591347176"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Edges<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::Edges::on_rows"
+kappa = "e18190f28ab03c6c980986de9557838aeff622445a4c5b6c194919f6717f7c9a"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "cafd502de1548597bfd9daadf84c4b950d08b0e2315245b08fa988ed3352e9e3"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Edges<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdIterator::next"
+kappa = "d5b19785c4019393254f838a0bfead7807d638e5bc504c8fd61531f485154381"
+at = "S=u32"
+embedded = "952ee81544c4034211f6743431d3f671269c04d88cb10dc06fae5245bec4808d"
+status = "residue"
+cause = "mir::Ty: IdIterator<'_, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdStorage::add"
+kappa = "5fd51d564510842e3addf5d2d86f046ab58bd3a51561fba75fb9c05d4ff0fb8b"
+at = "S=u32, T=u32"
+embedded = "7bc872d1f6ae864393b65ddeda9136cf3d1a153bc0f750532e938338b70bba17"
+status = "residue"
+cause = "mir::Ty: IdStorage<u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdStorage::clear"
+kappa = "769c676d216db376d02c6fee53e6009ba1f221551b4e7a9afeeb913997be9073"
+at = "S=u32, T=u32"
+embedded = "8c066b557cadc49f1982c75a60b715c1a0eb22f87dd0b259b8ee7c077c4f8e81"
+status = "residue"
+cause = "mir::Ty: IdStorage<u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdStorage::index"
+kappa = "53501f11f7a3a50b0dd8df69bcb074770b2d07d031aa87c4f3e2e0981ebacdf2"
+at = "T=u32"
+embedded = "57739620d6d405560bbde2b89ebbeaeec6ab247ab66af47dc1307c773066fecf"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdStorage::index_mut"
+kappa = "63bb79f6cc81b4a02c750c8dda76a33845339405e5f900ac05b64b2950e1103c"
+at = "T=u32"
+embedded = "0f8e67924390c3aa0bd37b4922aa09f7c5c05702def007a4f5275d310380ce2b"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdStorage::iter_ids"
+kappa = "28ca02c9c80670e02c03858654b7554b63a99e355f8c61f4f3ac72c3cdfcc2c8"
+at = "S=u32"
+embedded = "7f231f4e0660ea4e7aac6ce3460263ec41c5b823c5acfaae4b018b116ab5057e"
+status = "residue"
+cause = "mir::Ty: matrix_graph::IdIterator<'_, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdStorage::len"
+kappa = "5039a3da3c0152a0b509a0804ed509844d9c471f47d568460dbd3590588545f5"
+at = "S=u32"
+embedded = "53d1946f61a194e09c601fcee88683f4c34c785cb6abe4796c01dd6483a46bb4"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdStorage::remove"
+kappa = "4a18389257cc1c02cfb71d095fcef6dee6ed549fee4980e6411217466c49fffb"
+at = "S=u32, T=u32"
+embedded = "6e0115d24bb5782623e54bd316e7b1b03555d014c2d4e01beddd18b772cfa226"
+status = "residue"
+cause = "mir::Ty: IdStorage<u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::IdStorage::with_capacity_and_hasher"
+kappa = "d3c9f3e789a682b89067044ce46c6f676cced9cb94451c957f0abbd56fdb747d"
+at = "S=u32, T=u32"
+embedded = "6d73ce774ea1c26ce57d260c9bebc5310cf00336735c6844bc07482443a27b52"
+status = "residue"
+cause = "mir::Ty: matrix_graph::IdStorage<u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixError::fmt"
+kappa = "63ec5c848181ca4e7ec6ff4441145f76c6f92b04e127838ccc4a852951245ff1"
+embedded = "cb74f594026f1c081d6e0192cefbf24f6cd40ee4cd1df690da7f8b8244c857ba"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::add_edge"
+kappa = "111c49088ffe86c2ad26dad4fb545074bf860b6b65c1d0ce984f91112a4be64e"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "44953d71802196f652802c63e984f7efd1a41061dad7cd42ab8a58f6c3328a51"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::add_edge#2"
+kappa = "92c067970bc937b3a6c1a99f2ca4f863edf4a97736cb8cd4bd42bf29ba44b5de"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "bf2be34444d90c1d1c215e7968f355cbb1ce895e6e9d9055f95554bfc2e18d71"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::add_node"
+kappa = "0f78e8ff0f57cc0c1bfcb4e91757ebacbc8fb8b83501d0b24b0564f8d78c0a73"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "3f424df3888717ecfa60cf4961acc808775da24a1cc6fe068cc2866b4ff73463"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::add_node#2"
+kappa = "0f52e55d6cfc91b7240f6509602c16851d0ba2afa31455b353df7f2f712c6fcc"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "78717d88a940eb09dfad347d5eb85e34e3bd44f9be0d31c21ad10adb0aee2300"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::add_or_update_edge"
+kappa = "a8c5b8c50a21c41da9aea7c03290292fdcca9f0c336ff404c2ad225d590f85ab"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "a0c540a99541dca6a6176a4fdd826873e593119291830079fc9f371dddd250c2"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixError"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::adjacency_matrix"
+kappa = "67a5dc820a5c48ba5fe4e80333a711a11e86b504638238cab9d2c71508a78930"
+embedded = "e22487cacd183e84b30e8b4cd7f1ea72609dba84e0a4adb09c7a47da06b8fdfa"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::assert_node_bounds"
+kappa = "5f0f9c5b733502c5fb1c0d18a60658b03bde076ed1191e613db5d91d8f3400d0"
+at = "Ix=u32"
+embedded = "5b3026090a453c472a96fc3549356623ad7e81a62db449f1c30633f455fd7518"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixError"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::clear"
+kappa = "825bf6b54a3f6e85a17215e52671d4fb692148085294a07bedc70f5ab9b74ae5"
+at = "N=u32, Null=u32, S=u32"
+embedded = "85bfe48e267bdf5a31c8e30298339200fe44fc13347ab02062f49866ee91ea5d"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::default"
+kappa = "d24e09580ddb14842a80f5f23752ce257de2be9a98032a4ca214b2a29d341161"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "b44c8fe6cef4762ec94d47401e076e0bf83ad1a9e217dd9e1a436e4972345879"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::edge_count"
+kappa = "38d6db8670194f44d5e8e3b89c4b73e006282a9a7ccad2c38658ec87ea33a50a"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "4b2562be9a4a540a35a80fa68b4097048c0503addfdbac7c416c7c8192769600"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::edge_count#2"
+kappa = "516863561f1497cb5a781a16a3f899cd56e9bcc96f5fa7eed7e4948339fe28fe"
+embedded = "f6f7fe204b3fd6e6631fb43ea362f027ad4bb070bc3966488b37d3dbdfa6bb53"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::edge_weight"
+kappa = "a64d494472d6ab830c1227b6b5068e13d5839ebc8ff66bc0858adf9965d5b3ab"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "1b0def275806e06e0a37a3eb54be32d3042cd2a4313034f184e74028094f01d2"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::edge_weight_mut"
+kappa = "3364ee7149e64437e82989a0b8b6e560a7caf45c066b707f5f0abf2cad1dacbf"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "a61be6d25174298f007b315192f603671b2d8059a05b27179d8bbaf5bc5353f1"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::edges"
+kappa = "a9eec07b0ece8ffde02cb9c6846b82f294a3a7289fd99cea0e3e83dbf5e726a5"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "400f73e3df4e77df97986403e285e3d0b74771dfaed398ecb57f437d8e5be9d2"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Edges<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::edges_directed"
+kappa = "2531ce906faf6451e9ed4025c2e9ea2e6af606f288f8891582e7d99ac67f1f7a"
+at = "Directed=u32, Direction=u32, E=u32, Ix=u32, N=u32, Null=u32, S=u32"
+embedded = "e0fc3bc2890c1abb584e3bd0f7b4c485b70fd5af50ed0902ec73fa6871548649"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Edges<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::extend_capacity_for_edge"
+kappa = "c8804247ca04421733569cda4254cac04ae9d4cd0e34d768d3bfb0ef56448aa3"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "5c970455ee9b850d5f54b642c758f50004db762d599f5c66a72c32026af29e72"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::extend_capacity_for_node"
+kappa = "67548554d179542cda3757824f251ecb41cbf6771a1fae762d63d046a83e25c8"
+at = "Ix=u32, Null=u32"
+embedded = "ec345dce76854c665846857eba1607379da4dd15d42fe064ace6621db212e758"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::extend_with_edges"
+kappa = "f303e203adcb7a0b51024e2184f786b9f3e9b8f6c49fafda1c7db5bb26874d26"
+at = "E=u32, I=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "eb0231b15c485d4991f88b58f8dc73dc5c0241ca1549631fcf2a02e698a754af"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::from_edges"
+kappa = "9ad3b8ca941b27bba7368353a1450af81e85e986f6ce7d013b0de57ca2ded580"
+at = "E=u32, I=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "07739736f6c9773769925a098005396f3a68279dd99a38b11e5aab21d13b2c58"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::from_index"
+kappa = "aa385c17bc72ce8fcf809f44aefc0988052f2ffad989855acce749a83fe71078"
+at = "Ix=u32"
+embedded = "e57f9546a29f41bd416b8cefa37fc919ed69494f3eb798c2958d9cb1279017bf"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::get_edge_weight"
+kappa = "93e0c466a7ef82070019d047ccba2d8b53cf0fccc3a33763ebf6c40bc2f85f7c"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "c657a9ca16a9df1a429ec04b830bc7dca722c96120470a3f455b42310a88cd3c"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::get_edge_weight_mut"
+kappa = "377bebf1dd85818d2e606ee04876489ed780065cfa2e8c52aef7baf409b1c53d"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "855eca8d0af40438a5a77e066c7380c7d339dc613127e281f651532789f6b098"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::get_node_weight"
+kappa = "cbdada3a183781ceda13d5dcd9eaa6191e9abaf6ac91f5d86b0e2da6a8b3fe9d"
+at = "Ix=u32, N=u32"
+embedded = "1ddc482f26a6b95fa5a1bd5c813b1ca71ab1b5c0e55556119ee9581fc4ad744d"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::get_node_weight_mut"
+kappa = "d8be613fab67b604d0e68dbc280889b6686b2f694612750335d38085fcfdd30c"
+at = "Ix=u32, N=u32"
+embedded = "6fb516a122b48bfc4f5f53a117e16238db77b4be25a922a2da56cef50d6add2e"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::has_edge"
+kappa = "193d1d4e9ffa9a943986208ef8872e1c3009dde9e79cd7a9c00f04c4c3107312"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "a4350134cd08198f1710006831b528d18b3809ff54475eff8c26c5cf61ac2b66"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::index"
+kappa = "9f5f3a700f1b080a1e124e057dd0093c5379bf8b342d0e144ad53566cc94d162"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "ab0edf378c8ea25807bb826032474facf94077d7a24321886b78db667f34c037"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::index#2"
+kappa = "510ef1889f1c1def11493b56e6ba3a0bd4e84928b9dae80cb135d6e0704dac8a"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "43eb15540366f114a3f5230cff94719807e3515a6d48eb7a3b022b12175c71b0"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::index_mut"
+kappa = "309b84966d0aa48f955151126059c3f156de156e4f3dfff834da3af63dd0e476"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "14897cc7a33aa6ed93c072a65ce0ab7439d7ed45d82c6e0f6662378c90f28798"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::index_mut#2"
+kappa = "323ec530ac296aaaab8a0eefbe303c7dd8d19b22d7438027d9f4065c7b587c4e"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "22d81764669a6cc26dab66e0cc92ba23daf3d626918d07a27ee16f209d33082e"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::is_adjacent"
+kappa = "10e5b9f0586990ceb133f33f9661d04e92dac31b1d650962c77fb151b53fd8f1"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "599532747559fc969146e5d236883cf61bbeb3da462c834227126f9a0f8c714f"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::is_directed"
+kappa = "62e399a6f07cc69b1875d6f889cf3747a6fb7e7cf98870fa54117334aedee405"
+embedded = "58be88f8ef06c47ea21f45dec3245a6f3578d3be0a0cb381d82a277994b852e6"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::neighbors"
+kappa = "e64d09c8f0270934b0d2e71af217d3dafdb8471a188f2b140d4c96d846b4ebc4"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "91b1c5309dfcee3e8ed0259bd6b2d8e8a7a33cf6aafd1cc51adab28314ba5cb9"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Neighbors<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::neighbors_directed"
+kappa = "28f19003204287f41a100e3ddfa6a406bf4c3a3bcb0bfdae6af19d83d4610810"
+at = "Directed=u32, Direction=u32, E=u32, Ix=u32, N=u32, Null=u32, S=u32"
+embedded = "1b78050e1cfd50cac6cbfbf4aabb992b866cde7715de74ea5f94d15c14aa5d1e"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Neighbors<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::new"
+kappa = "6cb789b9188c360ea8991b1a148920e1f03b3b569e60a90f6ae9bad2790e0156"
+at = "E=u32, N=u32, S=u32"
+embedded = "f6aad7af1b1f5826ba16faded27e1a35f70634acaeab394c3e23cc6783cd34d7"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixGraph<u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::new_undirected"
+kappa = "21ff427a5d722a7777a658a1839412d5df41e8c89c8344fc0f8dc61f39bc33d0"
+at = "E=u32, N=u32, S=u32, Undirected=u32"
+embedded = "6102234a2641d9f7a39ca26e34c8401c712fadf4e2aad82efaf0ed47c7d72053"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::node_bound"
+kappa = "a92b24524ab13758168462ac671c05a2283340a9cfe4973b2ddc47b09112c375"
+embedded = "e00dd8c0370da3de5f299f147b3033de81b290420f64a32c7f0c5f145c95491f"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::node_count"
+kappa = "1f4221866b8f6c7e8e2bd59032f5fc04a5e1684afacd69203ef5a328687c049a"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "191b4bb640b6362da32abd31a2c8dc5fa684c918002b48bdc410ac5e5daeab2d"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::node_count#2"
+kappa = "fb7f751d2ae8da02249f913b36eff65156172c51e1abfe5198a7a3a38a13a512"
+at = "N=u32, S=u32"
+embedded = "5c8d84ee4df5365ba7853aa95e90ad856789a87572048b6d88633d6a74cd638d"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::node_weight"
+kappa = "42e954c8b3e2a0b103a720a2b2861015d16c8bcc3116b675709dd180f6e465eb"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "8fc318cf60d47d9d2e7a2b1737057eeaa6c74d19b36fc9aefefed8e75a6f7234"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::node_weight_mut"
+kappa = "663a6ff1c0b263d922a00d001adcbbe1a67f165f1096da515faa940a5ee92185"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "799c04022dc042ca14e7ed50600b9133b625efd191b9b2b50ab094b07430cec5"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::remove_edge"
+kappa = "b614ed1947dec890996b7548ea1cdc11720505b263932b8df6855dcae36bfbf8"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "ec93529e5c882a159164dc641f7b7340d7c9674a71d2ec0eb5a788b4d550e95f"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::remove_node"
+kappa = "7c890e5ec669f0e999806d5f14a99678e759570a24364ab86f7228b981462881"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "b926f1bb87a6643010b887741b685e1ab7119689c2b617d65a1f70340dd02599"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::reset_map"
+kappa = "624bb2a29b7287821934f6d9e14c8748688463eccd3e448f37515b79b6a6522d"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "f01aa514619d74694bec1c66e565a450e984347a94b1759ad9f9f4df176fb493"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::to_edge_position"
+kappa = "03ef1f91ad098e803af20b38ead9d7783209325136bb0d9f255625d2d3ac7496"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "ab42b3556c3ff3afc99293ab145ef0f992f4801809372f4a1a8aa46c6e29014e"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::to_edge_position_unchecked"
+kappa = "9603f78532bac4928bede79be0db0dfbaa16f5b61e624702df5c17bd7cc11e5b"
+at = "Ix=u32"
+embedded = "475e86002fe60aa9b5f0e42b84e7ea63e57d0e014a63567ec182186152eb5b21"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::to_index"
+kappa = "bc594a89bdc7c0026bbbc9a7d8870eeb9ac5f356a2f8802937922d4490ea3664"
+at = "Ix=u32"
+embedded = "771d4e9c2a73a5d3d70c34bb6b97c30dbc7ec34fc89bffdb5b1c94e96ce969e2"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::try_add_node"
+kappa = "166251da6a7d9493998694558f5942660f1876ddebabe9b007944c63a146362a"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "4f007ba4df3e01454be5eb6c224751a5a6a63fc1a2afe1db01d95c40d8188836"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::try_remove_edge"
+kappa = "fe19466a749494da595518ea46abd4ea4dfa26bd11f7d8702b8c13ec80c6cc82"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "9befb55baa2e5a421f35f638bba12a5452c39f68a369e63b3cd416feb1606786"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::try_update_edge"
+kappa = "38828f45a40b39ffa7cd5764f4a53487451f2de408b7149a0a1d6d8294be7db6"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "1467769015e1aa1c935ad3a06bacb9df3a84a6d2411c68640648d683d66d7f37"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixError"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::update_edge"
+kappa = "9f273c236064ae9878a9576a857d8b7b420d3941e39eef04bd64230d9406df38"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "a338a9c3790961b75a18d423e3b1f3023910eaaec0ae0d998171c0409cc4f733"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::update_edge#2"
+kappa = "33bd3a2723497e0593bd6116ddd30cce673af6bcc0ed9ae2e932c37c34f5673a"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "92c47832f4743d9e9fb5089fc0bda25c029f3c19f11fe72a4b32467eeae8fe97"
+status = "residue"
+cause = "mir::Ty: MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::visit_map"
+kappa = "36608bfde32c3193fc0d286cd46e5575144cc34cebd92eadce290ce1c9c74561"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "d32e52caad61e538dc2e55f9a999c0479688667b762558a12be29309094ffda5"
+status = "residue"
+cause = "mir::Ty: fixedbitset::FixedBitSet"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::with_capacity"
+kappa = "9a3c53c65706584f4e7baadc860253e0319344184e7fe4f0701a15820eff6f18"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "14a60698d2431e0b0972a49342e555d4675c82dbf2843aa4761e20770db8068e"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::MatrixGraph::with_capacity_and_hasher"
+kappa = "0a9a6b1748ad19f0f72f96de025535531a143ce3c7a470cc23b4cb86357856a2"
+at = "E=u32, Ix=u32, N=u32, Null=u32, S=u32, Ty=u32"
+embedded = "7029a77d04ee4914e10e74bf14a765a7c7a826a591f6cae0657690c0223c4ae2"
+status = "residue"
+cause = "mir::Ty: matrix_graph::MatrixGraph<u32, u32, u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::Neighbors::next"
+kappa = "fb169c0ee1a8f156870e6bd796b4c04fe4335c53b9fff82f29beb8f3f7e74517"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "6ed5cf1fa968a470a14e50fb900025581d17aaa3126441795045b29c326d7130"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::Neighbors::size_hint"
+kappa = "e34ef6ab6859f20a358860625e0cfadf0408bf8a8ed302987c9b5ab2ad8fa1fb"
+at = "Ix=u32, Null=u32, Ty=u32"
+embedded = "e337d68811012dd87ab3f71c529630b10822281260ec0c85a790ba82dc486abb"
+status = "residue"
+cause = "mir::Ty: matrix_graph::Neighbors<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NodeIdentifiers::new"
+kappa = "f5a7ee1c4c091a5800443c49f0a9935ef29823143d11c1161ab0bba066ef1371"
+at = "Ix=u32, S=u32"
+embedded = "9bcf9ef98aeeab8bc47caffc94f51cdd16c73ba0963551cd58e4e95825dec78f"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NodeIdentifiers<'_, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NodeIdentifiers::next"
+kappa = "189b188a95e1412067937617f91465b81bafd8e4478da19658c99a5d87d7725d"
+at = "Ix=u32, S=u32"
+embedded = "7a160246924581a4408261f97851984340fedc3750ac2c7582ed4d31d4874e5a"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NodeIdentifiers::size_hint"
+kappa = "d9fd574ef0c2ba191a929c3bbd96b5933c6f47eddf7670f29d1edfdc401b1bd3"
+at = "S=u32"
+embedded = "31448e8a42394591ff73bff8675831b64b9ef8bbe7db70a49df41a045aa74152"
+status = "residue"
+cause = "mir::Ty: Ix"
+
+[[fn]]
+path = "petgraph::matrix_graph::NodeReferences::new"
+kappa = "4c43e7538b1c0d2cc19d7bb7d771eb4c7dfd859b3dc6908df079abb438f1e4de"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "d921e9bd363542f3ac38037c84fd37c5de0ad5250e44e4721319fed7baffe43b"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NodeReferences<'_, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NodeReferences::next"
+kappa = "114ec4c2146726ffb7c8ae8dfb0bb9ed76bee5e7802c5fe76a46027be0c34907"
+at = "Ix=u32, N=u32, S=u32"
+embedded = "2d34993d764d164cef9dc2ad1293ef4887b4f7f3dcf5ab24cca9c0b394a91e22"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NodeReferences::size_hint"
+kappa = "e339aa5b44c663a7bca673b656d9031f6e7b0d435d4d6e67224522d269584322"
+at = "S=u32"
+embedded = "91db16beeec5983c6234bd7c346ac2a954def8a6956ecd4313050e04beb07cb2"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::matrix_graph::NotZero::as_mut"
+kappa = "eadcc8df307d88501e805fbbecd73e39615152407c797f86d232a33124390040"
+at = "T=u32"
+embedded = "d2b7300ed7ee811d36bb241797532a918e6a54a9536822f6d4c1f7f97eff1b27"
+status = "residue"
+cause = "mir::Ty: NotZero<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NotZero::as_ref"
+kappa = "48c7e6b1302f80a2576d807f8e1b3e4f831e1e38c88cd12f2b3dd99d8cc467ea"
+at = "T=u32"
+embedded = "a1393ec931f67e9d31349ac73834c88270cafe8a13be5db3d64f3e15d37161b0"
+status = "residue"
+cause = "mir::Ty: NotZero<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NotZero::default"
+kappa = "7bef6175ba9465d3b8ee5b7e0330034f24ce9e02e4b42cfda65570216f267f82"
+at = "T=u32"
+embedded = "b3ad7dbae96401e40fca0b3ec483c92b609201e35768c05f9ae59911fa2c713b"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NotZero<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NotZero::is_null"
+kappa = "e7243e6febf9f536a0ab0b5d3a0220088628a2b8207f36cf5b1047f6012bd5fb"
+at = "T=u32"
+embedded = "113e4e24459b785a629add9fe3e205286f80782cca56281fa1b3108f6541a13b"
+status = "residue"
+cause = "mir::Ty: NotZero<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::NotZero::new"
+kappa = "ab2abd252bca80cdbd71c99a65118ab16bbf025b10da60798d98ac431a522cfb"
+at = "T=u32"
+embedded = "2228ccde0eb4c4c52c82c3f3680751afc216980d8de450e1869e8aab67fc7ce4"
+status = "residue"
+cause = "mir::Ty: matrix_graph::NotZero<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::Option::as_mut"
+kappa = "5bc626b70fdd6f9f705491dcaf06ae68987f21b569d7238f1b98aef8298114e5"
+at = "T=u32"
+embedded = "dcb3a8d6b7efdfa72856f603d4fb364eac78905bbb6e82bb330d4546bfb6ed3e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Option::as_mut"
+
+[[fn]]
+path = "petgraph::matrix_graph::Option::as_ref"
+kappa = "a61386a82138d7c498338a0edd0fe05ed995fb29a670d5dd8b6bd45de6a517ba"
+at = "T=u32"
+embedded = "1a92b27337dbda006490b1229068388207a277dc2a59d0086f61cca3efd210c9"
+status = "translated"
+digest = "cbeb9604755e95ab3dd7c98fdcd49bf0028832bbe915a18aa624a1e5199f9b0c"
+
+[[fn]]
+path = "petgraph::matrix_graph::Option::from"
+kappa = "cc2e62fbafc3e8d569665501fd0bbb8914dde03d1ec4a7b72029c696289d6e3b"
+at = "T=u32"
+embedded = "1e5fa49609df418409d72b97af8d2c5377a6813b1f452fbf3c1214671e03eea6"
+status = "residue"
+cause = "mir::Ty: NotZero<u32>"
+
+[[fn]]
+path = "petgraph::matrix_graph::Option::new"
+kappa = "bf1d9d5ebc4c267daf005ddc71a5e1ae1a3b43eb0fc6f2b50c6c81984e6b89a7"
+at = "T=u32"
+embedded = "619ecf1ca74270236f6ecc1e6922594bd4aab2c623096954997e6cd5d4497a84"
+status = "translated"
+digest = "ac08f29787593c25fec25bb6c761a86752a225b8da1be6969d7ab63e0b017e99"
+
+[[fn]]
+path = "petgraph::matrix_graph::node_index"
+kappa = "a184a15c1ab4e55c6aa54f76e71c47cfe088785d0506522526eeb5047ca8bd03"
+embedded = "f4c264f4025e300cddd168471eafb77823875a35a88104eb63fab701fa0159e9"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u16>"
+
+[[fn]]
+path = "petgraph::to_flat_square_matrix_position"
+kappa = "0a18f0608f6e8e5cbf856dc9af180b849becb7bb386fee33b0483a09ab40e977"
+differential = 4
+embedded = "02101e2d5f63ab2e168094e2800975a20f5eb54ad590c5bb1e74bc7a76bb712a"
+status = "translated"
+digest = "2d8a881c65a409662643acbbb7065fac155c57eff3d5eeb6d66145939f042a24"
+
+[[fn]]
+path = "petgraph::to_linearized_matrix_position"
+kappa = "4ac8ba8d4fcb50f7e21299efb82deddfec3745dbb48a20875b1e25d94518502f"
+embedded = "00e12524b284cde073e275b34f280e418d7c1844cf947f4b75e9265e4381f069"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Ty as EdgeType>::is_directed"
+
+[[fn]]
+path = "petgraph::to_lower_triangular_matrix_position"
+kappa = "8ced92cbcc1952c51583150e5500c1fa22d854cdec52687378f274d967a3cf80"
+differential = 3
+embedded = "3a353b2a4861e7fd38dd92674cc852178c0821ec94b48afe66ac41478b6f5507"
+status = "translated"
+digest = "9391c097387d57bcb5d0e6ebed00e67a21befec93afe7c1d0c7235add3670625"
+

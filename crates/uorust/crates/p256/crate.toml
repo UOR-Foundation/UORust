@@ -1,0 +1,65 @@
+[[fn]]
+path = "p256::<impl at src/lib.rs:83:16: 83:21>::clone"
+kappa = "7292f693d9f5d4f8be63705fa22607c7fea3e8e6c680c1a318cfa8b1781c54aa"
+at = "NistP256=u32"
+embedded = "0702b93ce56f71dc24c510d1ada4624389ad6f61f1110a334b2a5705579d6724"
+status = "translated"
+digest = "81c50fdfab7f6462deeac1498a8dc0e4f5bab6135f4eb036c61ee70d877bcb59"
+
+[[fn]]
+path = "p256::<impl at src/lib.rs:83:23: 83:28>::fmt"
+kappa = "3ef7e54067fd16dab34afb9b563b168ff63138e1398ed450f478d89e63307177"
+embedded = "a7f8e5b191f309bf5ac825a81014ff139a3cbed0bb391110a4d14394eaca1983"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "p256::<impl at src/lib.rs:83:30: 83:37>::default"
+kappa = "ca121aa5546715eec4857766cfb48f405bc1748f4ef4318944e6eb83734fa495"
+at = "NistP256=u32"
+embedded = "f2e9ad9085472d498a1eb1c94223afcb530ae511d75ba41ad2e283faec194577"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "p256::<impl at src/lib.rs:83:39: 83:41>::assert_fields_are_eq"
+kappa = "5942adeb58b6f32fb8cedfacf979a656cd7a91bf430f8d48cca1d3a4c2ca3c1b"
+embedded = "1f1be9040524397cf5d8e623ee9c29014ac54b78fe1c2d13168bde3939f64f8b"
+status = "residue"
+cause = "mir::Ty: NistP256"
+
+[[fn]]
+path = "p256::<impl at src/lib.rs:83:43: 83:52>::eq"
+kappa = "459090e4d36f46ea8a79dd17f3e144824ae66fce95e3288d622785cbbe0d0009"
+embedded = "ef3276d6791320ffe048b361b2848c2679e0353977a70d7ea6c3356eedc59ca0"
+status = "residue"
+cause = "mir::Ty: NistP256"
+
+[[fn]]
+path = "p256::<impl at src/lib.rs:83:54: 83:64>::partial_cmp"
+kappa = "cf15c9564fee9164626152dca8c7b3513b63d14c242c0123c3402b61cef050b1"
+embedded = "d1fe7994c02a2092c40cb4bb7547523846fe3151e571c019fbed5be36218cf3b"
+status = "residue"
+cause = "mir::Ty: NistP256"
+
+[[fn]]
+path = "p256::<impl at src/lib.rs:83:66: 83:69>::cmp"
+kappa = "eb1ce01e9032a3df0854cd70507ece293ed50bc5563226df89c7d846d927e819"
+embedded = "9b45228a220f01174c5fc8b38a0921f4f0feef2ca3a60841be549d43ec9d90f3"
+status = "residue"
+cause = "mir::Ty: NistP256"
+
+[[fn]]
+path = "p256::NistP256::OID"
+kappa = "3f2b7649fa16ad6ec1ed4d08ac3427efed11027593c4aac295a52211b7fd7347"
+embedded = "cedd3bd901328589bc406a7b1535d0155cb6f6f9f6dbaf21c115070aedc69faa"
+status = "residue"
+cause = "mir::Ty: elliptic_curve::pkcs8::ObjectIdentifier<39>"
+
+[[fn]]
+path = "p256::NistP256::ORDER"
+kappa = "f3775cb23ec02e76fcd8d532b2783b70de90d3f7cfffa0079b1039a9cfce4393"
+embedded = "5123cffe3132959781e9907378b05b72a17f828e1ac779b204d9156903e89f74"
+status = "residue"
+cause = "mir::Ty: elliptic_curve::crypto_bigint::Uint<4>"
+

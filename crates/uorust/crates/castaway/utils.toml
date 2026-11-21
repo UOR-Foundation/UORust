@@ -1,0 +1,37 @@
+[[fn]]
+path = "castaway::non_static_type_id"
+kappa = "8d2ce1df63aa5a0e7dc9d63f80729f07c178446c4457d3b26c6dfee878220f65"
+at = "T=u32"
+embedded = "73d4a909431821381ca6b75c496ae415b50c41bf8f6fb9387745311d53d216e4"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "castaway::non_static_type_id::PhantomData::get_type_id"
+kappa = "cf9b6d7fd3215023846c943fbbb3d902388036ba7e9543ed64e2273233f4516f"
+embedded = "bedd6797ac9aa3f3d52b1a011a3b4503ebf477901dc0bf52e56cc72733697ba9"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "castaway::type_eq"
+kappa = "e644eceb7f13fb0ff28d74660b3e9871b0d7cb3ad1332f9e76e227efaff6336b"
+embedded = "8b21eb435471a360ea5c87a33362830d945abb3e0c7961b09163de8da2686e33"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "castaway::type_eq_non_static"
+kappa = "31ba03e3856ef46bd0458523f546ad7fff323ce9665ac2a9e65ea5298c006f28"
+embedded = "dbfc247ec06639af4d902b599de3c952081dec957c98a3b722ab6a593f0557c6"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "castaway::utils::transmute_unchecked"
+kappa = "74d5bf7668f6f87502376d2322ea68a26b79984a64f673c63ce8aa4c90d7f28b"
+at = "T=u32, U=u32"
+embedded = "8ac6d494e2ac0aa80e94e2bab9c7dc3ad2c8cd2b8b19d1bfc586b772d691426c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+

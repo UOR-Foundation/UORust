@@ -1,0 +1,74 @@
+# The oorandom register (written by `uorust crate oorandom@11.1.5`; do not edit): every body of
+# oorandom's MIR at oorandom 11.1.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 26
+translated = 2
+residue = 24
+
+[module.crate]
+bodies = 26
+translated = 2
+residue = 24
+
+[embedding]
+bodies = 26
+embedded = 26
+evaluable = 26
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Rand32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Rand64"
+bodies = 4
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_shl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item Rand32::DEFAULT_INC"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item Rand64::DEFAULT_INC"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Rand32::rand_u32: oorandom's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Rand64::rand_u64: oorandom's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u64>"
+bodies = 1

@@ -1,0 +1,45 @@
+[[fn]]
+path = "aws-lc-sys::BIO_get_mem_data"
+kappa = "30d6864ebf58865235a185c97351ba9eb85ff11bcec2cd4c38bf855e5fe3ae49"
+embedded = "26cac9875cea314125020d94cc0d331b30f9d88dc6e76aba9594e5b3cde53fc8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut *mut i8>::cast"
+
+[[fn]]
+path = "aws-lc-sys::ERR_GET_FUNC"
+kappa = "b3aa5905cdc87920e73315a5821211165d7079c9906628d1c271356bbf685a59"
+differential = 7
+embedded = "0c0d090178dcb4e14440839a3dc54d056dd8a3e390e5f5aa5a102a1dc7616803"
+status = "translated"
+digest = "9dfb93a13ae484125731dd007364c99367c58c06f1f41eb5c9e9f88166fc25d6"
+
+[[fn]]
+path = "aws-lc-sys::ERR_GET_LIB"
+kappa = "7bd1a4cabbcd346f18817d624f515a0640e629f9efbb47ccc84c24d8368cc2b3"
+differential = 7
+embedded = "8fd4ea0e5a7fafc3bd6ecf92dedd808c73a713512288875a8a97071904feb796"
+status = "translated"
+digest = "7364bae4fb68dd9283336649d9324bc2ee4cfa050b39e1bae956d4172c183b24"
+
+[[fn]]
+path = "aws-lc-sys::ERR_GET_REASON"
+kappa = "438c10456f2476d063b394f2e1dab48750a833248bf55e461fa4a2bcdef7a005"
+differential = 7
+embedded = "5eee924e2c1cf00a6a47ff615b5ce2f91df6b8673c5a11d61a9824b8a11c8a6f"
+status = "translated"
+digest = "dc6e6f4555370f3fb343fa96e28b8cd3c9a8ef0e3f15955b2f3cd99a13510774"
+
+[[fn]]
+path = "aws-lc-sys::fips_version"
+kappa = "9fa2efd292aa3aaf49741e0a46e3c2735eef292fb49022432c1581cca02c4044"
+embedded = "270ac50fbe9ddbf1b953b89d7f2b9eb81cf6f463cdb28d75720886812d115c1e"
+status = "translated"
+digest = "2c6fc3d617dd8f9ac36646e9c2c69926d0d1e04568b7f6eec2cd768fccf80072"
+
+[[fn]]
+path = "aws-lc-sys::init"
+kappa = "cf55d3596cc9bf67d595b6384eec83e57506045ca8b47fb091013172e9c7a8a9"
+embedded = "648d23cfcd6efe8389366a8a502c32739720280b5fcb8c32a7690a56a14adb1d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: x86_64_unknown_linux_gnu_crypto::CRYPTO_library_init"
+

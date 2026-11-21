@@ -1,0 +1,42 @@
+[[fn]]
+path = "seahash::reference::State::finish"
+kappa = "bc6ddb2a63c2ecb881fd9d761c89b26ae610276b86ccd70f56fbf7b8402af982"
+embedded = "4e0427ccfe09c435a412cf101fe1c7be11062e07889aadc30e45a8724b82fbb8"
+status = "residue"
+cause = "mir::Ty: reference::State"
+
+[[fn]]
+path = "seahash::reference::State::with_seeds"
+kappa = "cd1e18661e7c49378bed40466e7a1fe1653e969f80d7789465997f84da640999"
+embedded = "c2d4bbd973e88233dcc32956719958075beae32f400a1f90a011a2d92281f7ee"
+status = "residue"
+cause = "mir::Ty: reference::State"
+
+[[fn]]
+path = "seahash::reference::State::write_u64"
+kappa = "3d3106333e533c9c08f62e18489ab1faeb7e6d9ab640ceefd48a7281b64fd91d"
+embedded = "f6a9224ce957fc70c039f3c9757919ae553241d016d331c6f1f2ee3c923c3878"
+status = "residue"
+cause = "mir::Ty: reference::State"
+
+[[fn]]
+path = "seahash::reference::hash"
+kappa = "4db5791c87d4920a69c362c21f926a5db4ab7523f2d603eed64a9b34eb5246ea"
+embedded = "56d4b035af32df2b5652dc6191ad1282456a617737aa12559ed27ff3478b541e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: reference::hash_seeded: seahash's MIR stops at type outside the lift: reference::State"
+
+[[fn]]
+path = "seahash::reference::hash_seeded"
+kappa = "10e0ae860e954a227bbd5e748789bb45d462b354942b42ce74a96d82b87d3ef0"
+embedded = "e9ca9f423c7164a61595b3b76c499277eee69ac7ed20f6ca22058af166889ebb"
+status = "residue"
+cause = "mir::Ty: reference::State"
+
+[[fn]]
+path = "seahash::reference::read_int"
+kappa = "dbdd0ceb275da0899dab3d93708ec8dcc6888f40b6212054d4cc121db905f155"
+embedded = "99a6844340ce0f3693425b5e651f53544f51085148c8fe537df86e6cc9c4a5c4"
+status = "residue"
+cause = "mir::Ty: core::iter::Rev<core::slice::Iter<'_, u8>>"
+

@@ -1,0 +1,559 @@
+# The quick-xml register (written by `uorust crate quick-xml@0.42.0`; do not edit): every body of
+# quick-xml's MIR at quick-xml 0.42.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 570
+translated = 7
+residue = 563
+
+[module.crate]
+bodies = 7
+translated = 1
+residue = 6
+
+[module.encoding]
+bodies = 16
+translated = 3
+residue = 13
+
+[module.errors]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.escape]
+bodies = 33
+translated = 2
+residue = 31
+
+[module.events]
+bodies = 217
+translated = 0
+residue = 217
+
+[module.name]
+bodies = 94
+translated = 0
+residue = 94
+
+[module.parser]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.reader]
+bodies = 91
+translated = 0
+residue = 91
+
+[module.utils]
+bodies = 22
+translated = 1
+residue = 21
+
+[module.writer]
+bodies = 37
+translated = 0
+residue = 37
+
+[embedding]
+bodies = 570
+embedded = 570
+evaluable = 570
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 65
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: events::Event<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: errors::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: events::BytesText<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: name::Prefix<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: BytesStart<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: events::BytesStart<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: reader::Config"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: BytesPI<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: BytesText<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: name::ResolveResult<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: BytesRef<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: QName<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: events::BytesEnd<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: events::attributes::Attributes<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: writer::Writer<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: BytesCData<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: BytesDecl<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: BytesEnd<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: LocalName<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Namespace<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Event<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: events::BytesCData<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: events::attributes::Attribute<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: name::LocalName<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: writer::Config"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Attr<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Indentation"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PrefixDeclaration<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: errors::SyntaxError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: events::BytesDecl<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: events::BytesPI<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: events::BytesRef<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: name::NamespaceResolver"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CommentParser"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NamespaceResolver"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: name::NamespaceError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: name::PrefixDeclaration<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: name::QName<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u64>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: writer::ElementWriter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Attribute<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BinaryStream<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DtdParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ElementParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IdentityHasher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IterState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PiParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Reader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ResolveResult<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Writer<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: escape::EscapeError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: escape::ParseCharRefError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reader::BangType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reader::Reader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: reader::ns_reader::NsReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: utils::CDataIterator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AttrError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BangType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ByteBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Decoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EncodingError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IllFormedError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NamespaceError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NsReader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SyntaxError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encoding::EncodingError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: events::CDataIterator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: events::attributes::Attr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: events::attributes::IterState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: name::Namespace<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: name::NamespaceBindingsIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: name::NamespaceBindingsOfLevelIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::comment::CommentParser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::element::ElementParser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::pi::PiParser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::ReadRefResult<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::ReadTextResult<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::state::ReaderState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::Bytes<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: writer::Indentation"
+bodies = 2
+
+[[cause]]
+cause = "mir::ProjectionElem::Subslice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::starts_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: escape::resolve_xml_entity: quick-xml's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::comment::seen1: quick-xml's MIR stops at mir::TerminatorKind::Call: core::slice::starts_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: utils::trim_xml_start: quick-xml's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Attr<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Attributes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CowRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DetectedEncoding"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ElementWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EscapeError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Fountain<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NamespaceBindingsIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NamespaceBindingsOfLevelIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseCharRefError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: XmlVersion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::Decoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encoding::DetectedEncoding"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::IllFormedError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: events::attributes::AttrError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: events::attributes::IdentityHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: events::attributes::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: memchr::Memchr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: name::NamespaceBinding"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::dtd::DtdParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::BinaryStream<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::ParseState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::Reader<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::ns_reader::NsReader<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::hash::DefaultHasher"
+bodies = 1

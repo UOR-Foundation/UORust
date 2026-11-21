@@ -1,0 +1,50 @@
+# The colorchoice register (written by `uorust crate colorchoice@1.0.5`; do not edit): every body of
+# colorchoice's MIR at colorchoice 1.0.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 14
+translated = 1
+residue = 13
+
+[module.crate]
+bodies = 14
+translated = 1
+residue = 13
+
+[embedding]
+bodies = 14
+embedded = 14
+evaluable = 14
+blocked = 0
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc1: &u32}"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicChoice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ColorChoice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: AtomicChoice::new: colorchoice's MIR stops at type outside the lift: ColorChoice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1

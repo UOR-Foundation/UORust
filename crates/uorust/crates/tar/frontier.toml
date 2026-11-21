@@ -1,0 +1,285 @@
+# The tar register (written by `uorust crate tar@0.4.46`; do not edit): every body of
+# tar's MIR at tar 0.4.46, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 299
+translated = 1
+residue = 298
+
+[module.archive]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.builder]
+bodies = 53
+translated = 0
+residue = 53
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.entry]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.entry_type]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.error]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.header]
+bodies = 137
+translated = 0
+residue = 137
+
+[module.pax]
+bodies = 9
+translated = 1
+residue = 8
+
+[embedding]
+bodies = 299
+embedded = 299
+evaluable = 299
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 93
+
+[[cause]]
+cause = "mir::Ty: Header"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: EntryType"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: header::Header"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: entry_type::EntryType"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: GnuHeader"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: UstarHeader"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: GnuExtSparseHeader"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: builder::Builder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: builder::SparseEntries"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pax::PaxExtensions<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: GnuSparseHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SparseEntries"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: archive::Entries<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::TarError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::io::Empty"
+bodies = 3
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HeaderMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PaxExtension<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SparseEntry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: builder::EntryWriter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: entry::Entry<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: entry::Unpacked"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::GnuExtSparseHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::GnuHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::GnuSparseHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::OldHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::UstarHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::slice::Iter as Iterator>::position"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: header::numeric_extended_into: tar's MIR stops at type outside the lift: std::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Archive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EntryFields<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EntryWriter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: archive::Archive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: archive::EntriesFields<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::BuilderOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::SparseEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: entry::EntryFields<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: filetime::FileTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::HeaderMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pax::PaxExtension<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Skip<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 1

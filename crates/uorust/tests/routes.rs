@@ -5,10 +5,8 @@ use std::path::PathBuf;
 
 fn table() -> toml::Value {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../model/routes.toml");
-    std::fs::read_to_string(&path)
-        .expect("model/routes.toml")
-        .parse()
-        .expect("routes.toml parses")
+    let text = std::fs::read_to_string(&path).expect("model/routes.toml");
+    toml::from_str(&text).expect("routes.toml parses")
 }
 
 fn field<'a>(row: &'a toml::Value, key: &str) -> &'a str {

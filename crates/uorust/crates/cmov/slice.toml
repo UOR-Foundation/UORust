@@ -1,0 +1,444 @@
+[[fn]]
+path = "cmov::WORD_SIZE"
+kappa = "7e8b00962feb763f999c3ca080edb4568477aa8c8d156f8dfbfa9c8474bfee13"
+embedded = "f10cd88e01e03852d30e7ff9400bac1bfb3dda8bbc60630d8c695e17c3f5cfcd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "cmov::cast_slice"
+kappa = "ba981022d07da62afc4c03f7d9645bb62770b18d3ed442c8a117d1ec9ed8f22d"
+at = "T=u32, U=u32"
+embedded = "c7eb29424e89f0cc7d0c3917396e43ede44a0428fbb516bbe13a1ce3b14587c0"
+status = "residue"
+cause = "mir::Operand::Constant: slice::cast_slice::<u32, u32>::{constant#0}"
+
+[[fn]]
+path = "cmov::cast_slice_mut"
+kappa = "37654343350525fb9a6c8db291539425e7432e2379ceb2bb219ea14cf0f3f2d1"
+at = "T=u32, U=u32"
+embedded = "3f047457fa66c5402980c36796233ad7a8c78adc182bebd3921d74f1d5a0d30b"
+status = "residue"
+cause = "mir::Operand::Constant: slice::cast_slice_mut::<u32, u32>::{constant#0}"
+
+[[fn]]
+path = "cmov::cmovne_remainder"
+kappa = "81399afdf1308040389938e0880212ed09666f5a995cf06640954f2c50c1cf16"
+at = "T=u32"
+embedded = "389964eba2c73acdac73b233717cfc967f2b0a75781fc0bc5fb35346992a9fac"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::slice_to_word: cmov's MIR stops at type outside the lift: core::iter::Rev<core::slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "cmov::cmovnz_remainder"
+kappa = "c6152b4fc3a83428e1f35be41ab63a61bc9a397ce1ed6460bacbc62ea0a1da69"
+at = "T=u32"
+embedded = "e9778fd53119e6eed9ddbacc5e34292fcb2dca8264e4270d1fdf0ceba727d540"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::slice_to_word: cmov's MIR stops at type outside the lift: core::iter::Rev<core::slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:122:13: 122:33>::cmovnz"
+kappa = "47b4563156f67297591756a32a848b95a90d87350c4dde1d7e64f11a4ba7bbee"
+embedded = "4c89265d3bff1e1c186d8a487da9f3132ef6c29ff7d272d497cf28a54a621162"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u32>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:122:13: 122:33>::cmovnz#2"
+kappa = "e9a1ef0b12486825f616f2318cec52d03267f8bdc217561b4eb06d44e5c17f74"
+embedded = "f18033af13e6615c4aae64b5903a7ad7a27fd05a0aea1464d7039eea31508872"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u64>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:122:13: 122:33>::cmovnz#3"
+kappa = "68c93ef6791d5d5dfd4f4fc9805884ebed66a32fbc684526eb5200a10db6788e"
+embedded = "88d99ae063dcec7ee6f1e67165fcd63c196a6d1f8c43e91bbf1114a232b54816"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u128>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:122:13: 122:33>::cmovnz#4"
+kappa = "351b85e0bb4fede24c27ed1e5a5c162525a58401db75300d26be8490efa562b8"
+embedded = "4247b5c3909e77c33231545cc660c3caa6d4d0e7b4e11d05033cbbf9ed1afa3a"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, usize>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz"
+kappa = "cff2e24c2e7352094594a4ed071c3b2caca6c4d6016e05b8fe99d02d9cdf7a91"
+embedded = "22b20def42979792281561bb21b38b8000ac6dfde63dc2c2d819b57a7ef7517e"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl Cmov for [i64]>::cmovnz::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#10"
+kappa = "55c30fea1dedf40300ab531c3b53705320a7cce294eb5bb692b9127959d4785a"
+embedded = "2b0cd99fb8a44222aaee7bd9aeda3ef9b470aee240f27741f26e6264f20b0b9f"
+status = "residue"
+cause = "mir::Ty: NonZero<u8>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#11"
+kappa = "b9b8b05634c12643dcebd1f37758bab67f44bc027aa9e3e2a6d09d5d77d9fedb"
+embedded = "063dc7b38a49b7d7cf4b5cae6500d95908f801e1bb584697d17462a212ced6e4"
+status = "residue"
+cause = "mir::Ty: NonZero<u16>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#12"
+kappa = "b94e03cc1052b1fe9d4329c24f08674aa90f3e40f9263add22ec746c03700e6d"
+embedded = "e86e4325b807c8f0fc378c7f0743df75c7f8fd96e25f4095469f8a6e88b95bec"
+status = "residue"
+cause = "mir::Ty: NonZero<u32>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#13"
+kappa = "d10a3c3cbe301c64fce7edc4cfbac464a136daefe28d3be572f244b6db81d6c2"
+embedded = "d249105621a1bf26851e18b1656a521a4d9a997d4cd0bf776b2163925f6cfb6c"
+status = "residue"
+cause = "mir::Ty: NonZero<u64>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#14"
+kappa = "1b5ffe4e39a4148f2dab715916f56e9d36f882d6e583174616a4ac57a3a7fa3c"
+embedded = "95bbe65d8e3f2a4c0a6d9a410f1fbe9b169e5441385fe127b1eaaafeeafa9771"
+status = "residue"
+cause = "mir::Ty: NonZero<u128>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#15"
+kappa = "0e25cec773e2abc7bbd867e0fbfe1b2b2018dd0fb7f417db34ab9ffebb48fc0d"
+embedded = "9486f535b102b12dabf7cf5e45c35c0ef36ceae9603f104777710fdc18d3e79b"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#16"
+kappa = "a7dfaf31a4deda4f2dc5c3c78d1058ae9acfd88062ad4e15b8685d891cac8473"
+embedded = "e101351c41cc6cbe85a14137c6f83e52f78f1ac4917b849c62745ed95899b150"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl Cmov for [core::cmp::Ordering]>::cmovnz::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#17"
+kappa = "63ac7619e1f593487a932f9aff074719e8f0801393879bfc246803e4d1b4a1a6"
+embedded = "636c9b9011f946042254b06878b8361c9826ea25b5e2cf95124a7ee6b3a1fe43"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl Cmov for [i8]>::cmovnz::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#18"
+kappa = "76eac36c9a26a0a746e4d57a43cc098577c4491fe03148187cbca20b5c0724c5"
+embedded = "4db2899e251a7e90eff188cd2c7d09995a69505427a04a02f7aa2df9951bb0f7"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl Cmov for [i16]>::cmovnz::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#19"
+kappa = "fd1bd57ed655e7753c82c52ca12490e7281e3dbe63630263e34949525b3ff0e4"
+embedded = "469875f84b6fa3d1b266426ecc3fd7d142eacf38bca718b6afc335abb13bdd58"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl Cmov for [i32]>::cmovnz::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#2"
+kappa = "09f1058987df5c4fab557b8dc3ecd8a0c9fd6d4841ceb51b898d55b4ba0703d5"
+embedded = "4f4ba066dcc75432d25ad2dff4182b80a7937adb1861cd67acb6bdca982c63ca"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl Cmov for [i128]>::cmovnz::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#3"
+kappa = "ab27e41c1f73a7ff8322d4d4aafa7245ec3161e8b5d0c160e18745e08cf3521f"
+embedded = "d834e8c86cfd62a3def4a80fd6867daa5c31b94c357ac7326af1e5da1364b660"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl Cmov for [isize]>::cmovnz::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#4"
+kappa = "1e0b55c6d6037cabfd0c8bb8fdaa0d198f2ceb78a82571ae29295c42dc1e5487"
+embedded = "cac7f6f3a72158e2bafc26dc7e1f61cc1bed9e289b0957ae168786791417ce4a"
+status = "residue"
+cause = "mir::Ty: NonZero<i8>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#5"
+kappa = "fb628932f537728a01c44fc7dd8ddfcec2965eedd9ab891e42385de3851963f1"
+embedded = "730163d7be339b6bb369227e13e2c964819e447d1c02a4004c5fdac011362954"
+status = "residue"
+cause = "mir::Ty: NonZero<i16>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#6"
+kappa = "0db89de45642d9fbd9fd289335eaa9cb5d219f71c1533eba71965a7170ce2109"
+embedded = "afeb99779c1fbcf8de89a03ea9139694cc9fc0e770faf204524a9e104fbdee41"
+status = "residue"
+cause = "mir::Ty: NonZero<i32>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#7"
+kappa = "fc01e44749e3c10d4deb9bbe954be490daaba2f609da76f893db4536411f2502"
+embedded = "ef57de57787afaf3219385533a0633db4a97cb2812a5464ca214d80b565d30e9"
+status = "residue"
+cause = "mir::Ty: NonZero<i64>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#8"
+kappa = "45644180d6f6973279ee4ac696fc20d3ab775daba540bdc7b03bbc5fd64e27a0"
+embedded = "b99920d12d268258218bb01d47894224076194e02a59de8d2d7d2af85e34cc2c"
+status = "residue"
+cause = "mir::Ty: NonZero<i128>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:160:13: 160:33>::cmovnz#9"
+kappa = "15ca628d1133816c4c97a05b4a6b9a5fc481a3b2425070fa40c6b1856f8c57b2"
+embedded = "031451c60ccfe1b3085fab5a2c250f73f65911acc92c8f889987081a7113de14"
+status = "residue"
+cause = "mir::Ty: NonZero<isize>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:208:1: 208:21>::cmovne"
+kappa = "882fb2c3de7da53a41c72fe24b0d647a83ca3bea4e3fcb864a0f9566bdf1d66f"
+embedded = "f1d728524b4de52245b750cf3bd804b883c926c0c60ca36ef77b2e4adc1f6607"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::slice_as_chunks: cmov's MIR stops at mir::Operand::Constant: the constant item 8"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:235:13: 235:35>::cmovne"
+kappa = "4708771dc616d50aa8c5d28cf4d8ed5bedd747ad46b080457d5ce9ceee6a827f"
+embedded = "47f70da4a7770dc51056d5a53f3fd4098585fde3cdede6640d5a7b0e3dade6e4"
+status = "residue"
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_, u16>, core::slice::Iter<'_, u16>>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:235:13: 235:35>::cmovne#2"
+kappa = "e86771c27d97db430c8a6d259cf6506966062f3b5251736cf75b2ed60df3eb1d"
+embedded = "2114801d8682d111560090fa750cc91da5122449bbbd02f9a566651b8ccef3c6"
+status = "residue"
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_, u32>, core::slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:235:13: 235:35>::cmovne#3"
+kappa = "bf4e6171f47e80c6dbf0cec9e3ea34ca67fb561397f69173030296e3d7f3f255"
+embedded = "fd84314b49b374aaa18395c883e3eef3261c00a75eb0805458aea7aae37f432c"
+status = "residue"
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_, u64>, core::slice::Iter<'_, u64>>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:235:13: 235:35>::cmovne#4"
+kappa = "bc5ae08bb05599838ecd6dc6a7d99b48ab80f9d5cda32b355447b0184c94481b"
+embedded = "b7d38fdc1a91c02f90934fbd1281e96f89c1fa4bdc807b51dd38f734dbb8650a"
+status = "residue"
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_, u128>, core::slice::Iter<'_, u128>>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:235:13: 235:35>::cmovne#5"
+kappa = "39c85b3fdd81e8ff56238de5b8869790875ea4c60b7b3ea4f4d5b7c837533d9c"
+embedded = "cd8b6e93a279567658326bc0715c0e178a403a42d11c22f25eaf00b421f8dd82"
+status = "residue"
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_, usize>, core::slice::Iter<'_, usize>>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne"
+kappa = "e65bffbeb434a1745b25da1b462fb5e1713d9cbd69aeeffcf2358473fc55b207"
+embedded = "65f4c6f600693383ff26ae96905dbda429116b276cce4408c523b719db98cbeb"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl CmovEq for [i8]>::cmovne::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#10"
+kappa = "1fd3bb7b37ed32086987c1f674ae92e045639e099af5b93a04694f4ec360b826"
+embedded = "e59f379f36eb5d9169d6b7dd7cf880fc0918223f3b62ef91959df097c3d1f4f0"
+status = "residue"
+cause = "mir::Ty: NonZero<i64>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#11"
+kappa = "174f4ec53ebf0862437a8345874208404e7aa362be9a6859d777f0d4c38d407f"
+embedded = "8e46a844e87471ba4dc3d4310ef51737b5bb0daf7111eb488eedb548a78b2a56"
+status = "residue"
+cause = "mir::Ty: NonZero<i128>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#12"
+kappa = "ed738519ddb8836741657e878889b44d0f470190f902372c1c2942d06f73ea04"
+embedded = "a5e796aa96140842e847ac4c7fd5b0df5bbad473b9f0e5aaf14fd13d4ee0b0b9"
+status = "residue"
+cause = "mir::Ty: NonZero<isize>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#13"
+kappa = "ea253cb9f98bb6f0d0753de9f456c62284d38055808bc55a261bb4f9843be1c8"
+embedded = "a1bc1cd9b07c6935ed5cdf001af9781e0f944ed53becc6521b5f9983f9114243"
+status = "residue"
+cause = "mir::Ty: NonZero<u8>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#14"
+kappa = "72384424098c7e7be5c09d854c94b8390f0bbc1c34fba87614daa7e10f3c2e29"
+embedded = "4318e3fdf73aa5f220d8f5198403d7a505f4f28dec28c525b690f8e184f71bef"
+status = "residue"
+cause = "mir::Ty: NonZero<u16>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#15"
+kappa = "d0485a605872ca16a302c82111ae190e5e6db616b8b7531c87a8d2de360f1d6b"
+embedded = "37f0a24b77026bc9f6df2369e2a669261a93cfba3bd23024f8a7553b15839f66"
+status = "residue"
+cause = "mir::Ty: NonZero<u32>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#16"
+kappa = "01c4c5b0740a87abdadb03dab4a2462f8e86cf49be647716ec44ab12230b27e4"
+embedded = "7d4626960adaba1014cdc883f802f6e75e6f66ab87e56cbd1c4bb78e63f5c35d"
+status = "residue"
+cause = "mir::Ty: NonZero<u64>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#17"
+kappa = "c2f9c62e9fe5c5c8f2d69cd8e355b9942d411c7600b9a99f9d2814f20eca7cde"
+embedded = "151005b86886b2e275c7d144c1e7fda1b7e4f33615ebf86edc42ee13bce71f67"
+status = "residue"
+cause = "mir::Ty: NonZero<u128>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#18"
+kappa = "a6b45c8c2ce2119992122bacb2100d9a386192813ab46f93e487b07c513cd70a"
+embedded = "193cb40208e2a924b7b4f3045ad464e1edd4ba3f828cd30adaebfbf0946aeb9a"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#19"
+kappa = "fca1dfe440e8af4935a01fcc9d2bf21523628339c90c4870b4bcf867e458403d"
+embedded = "98860a4e5635f229b8739b6d270433f5264396f520087bfe56df42a0de917ebb"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl CmovEq for [core::cmp::Ordering]>::cmovne::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#2"
+kappa = "dcfc812d1eb1e2f2a1bcccbc120d5ea7fb2feef838ca4f22af8abefca98fb3ab"
+embedded = "223273726009bd94795def955e233cee38f76e5ffaf969e493be70432e9b95c7"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl CmovEq for [i16]>::cmovne::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#3"
+kappa = "b511b9177464c8a8d01fc802112637c1d72ebd884dd02c850b4801f8efcc4636"
+embedded = "29b7133007c9c50da8675a5b333c4928f3c55246621f73e5ac094cf09a019183"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl CmovEq for [i32]>::cmovne::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#4"
+kappa = "f485b9b14ed60d2a9321ee6e563239c66e735f32aa1f9070a5f5442a999090d2"
+embedded = "c158a583e814273ea57dbf87f6ec305c21c49501dc50f529d7df157295819eb3"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl CmovEq for [i64]>::cmovne::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#5"
+kappa = "25d5094125e52eda40633c23921237ab70d421a4756b9797904b211203ded4bb"
+embedded = "e825b0a5b707905fa5347271c6afaae9db0adf601117a966557aa5892c03cf90"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl CmovEq for [i128]>::cmovne::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#6"
+kappa = "2259508c042e8c1a6a3df4ecc92a9859f5e74e18e6b9d7a528723a60c7490ad0"
+embedded = "f2fbfd875329ff0802186a36438d7e713c0f492624e4f0f3f2667bf8b838f425"
+status = "residue"
+cause = "mir::Operand::Constant: slice::<impl CmovEq for [isize]>::cmovne::{constant#0}"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#7"
+kappa = "461ca6e3ca63b182f0019aef98ff840cfaebd3484c381df41a20fae7e4d551d5"
+embedded = "51c17e543158441caffe81cb48cea1727373a3c1b9955604c928908e85c60f85"
+status = "residue"
+cause = "mir::Ty: NonZero<i8>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#8"
+kappa = "7b817ecc31984d8c7dc176c2fd8721dc5dd702d37349dc2f501cb9fac8b26c92"
+embedded = "ae8f3f196d4404e5b5face795bd084986de242420c9e8c0994b5a020af487a8b"
+status = "residue"
+cause = "mir::Ty: NonZero<i16>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:261:13: 261:35>::cmovne#9"
+kappa = "409fcd0881bd122a07dce10462b663a8fd841246811b8509dc490ba6e06ed65d"
+embedded = "63318ac7ab71a7fdfbbd2fbf4e46d474d2a843675e2c0bb1e6c9c0fc4f680801"
+status = "residue"
+cause = "mir::Ty: NonZero<i32>"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:38:1: 38:19>::cmovnz"
+kappa = "acbab71986243dc1d4be3384a653a5e715da29649a45f035b4331e046e1c1cd8"
+embedded = "8ee9ed0c1c7410451d286a2fb4769155f6279fd18601dc11472e0b6e600bf412"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::slice_as_chunks_mut: cmov's MIR stops at mir::Operand::Constant: the constant item 8"
+
+[[fn]]
+path = "cmov::slice::<impl at src/slice.rs:87:1: 87:20>::cmovnz"
+kappa = "77b16141dbe7ff88ea601b9ba6a095bc1b50bb6c93eb47d15a68e2cf665fa7a4"
+embedded = "bfbdf8eec79c11d8064f0000ad73f62aa231e9ebf8a14f3c0722da40fb9f3f9a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::slice_as_chunks_mut: cmov's MIR stops at mir::Operand::Constant: the constant item 4"
+
+[[fn]]
+path = "cmov::slice_as_chunks"
+kappa = "981248253f488fe2b1419aedb5746602284438196c6e8fbbb4920e2059dfd857"
+at = "N=#_N, T=u32"
+embedded = "2eb830d8fd463c4d7debd3518cc1c09a31b8ad052c9ce8417ebaf9ee246f7a7f"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "cmov::slice_as_chunks_mut"
+kappa = "7d39bdd943f91250e209601d7988e7eb2e48ab0a94f36109f0de9288882076b5"
+at = "N=#_N, T=u32"
+embedded = "dadc335a2ecc6473d382439fde6bcb93af48206ff10a2cb0a09fc9de84500933"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "cmov::slice_as_chunks_unchecked"
+kappa = "aba4a15ae49b6fee515f21c183c1e29b5707cb70c4e97d5c42942745685e08dc"
+at = "N=#_N, T=u32"
+embedded = "8246026b3409e4a85db30038c1ce2dc6abd6be7c30f76272c38bae05ca8292ed"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "cmov::slice_as_chunks_unchecked_mut"
+kappa = "4a46af09de87c0d3e278025cd4d19f8fadb027f9dd45909e68da2b8ba5ce93e8"
+at = "N=#_N, T=u32"
+embedded = "aee5fea410e0085fb43ad4e67b94210dd3bc4f13ad092fbdebed5fcdeccf5231"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "cmov::slice_to_word"
+kappa = "904cd945b513c1d3f83b44ea61ba7406652e1044a6cdb5dc46f6400b6364b5ec"
+at = "T=u32"
+embedded = "834a9e64a14200f0aa49a9bc6f2103dade0f78dc9f28d28687ae59569465ecc1"
+status = "residue"
+cause = "mir::Ty: core::iter::Rev<core::slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "cmov::u16x4_to_u64"
+kappa = "6bf328a7e59432891f748725bbbae3295f0d37ed15fe0474e86def2cc577068f"
+embedded = "5d778817dcfda56a19361555a1f28b77185c0b81cff2bbdac27673bcec3e96a0"
+status = "translated"
+digest = "6fc764440b420052a75b9daf2ca215981e3b5d7f933fd3d65277c59046be40a3"
+
+[[fn]]
+path = "cmov::word_to_slice"
+kappa = "adf99dbbf4951b977ab8524af4cd6203eb1318c9f7d1c34bbe977e882b1a1e88"
+at = "T=u32"
+embedded = "3cf9731b40ad796e38116daf6a99937d528e46ae76950abb9983a3529d05f2a7"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+

@@ -1,0 +1,148 @@
+# The polling register (written by `uorust crate polling@3.11.0`; do not edit): every body of
+# polling's MIR at polling 3.11.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 94
+translated = 6
+residue = 88
+
+[module.crate]
+bodies = 56
+translated = 6
+residue = 50
+
+[module.epoll]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.raw_fd_impl]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 94
+embedded = 94
+evaluable = 94
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Event"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: EventExtra"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: epoll::Poller"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Event::new: polling's MIR stops at type outside the lift: epoll::EventExtra"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rustix::fd::BorrowedFd<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Poller"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: epoll::EventExtra"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: epoll::Events"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rustix::event::epoll::Event"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rustix::event::epoll::EventFlags"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Notifier"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRawFd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item Events::new::DEFAULT_CAPACITY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Event::clear_extra: polling's MIR stops at type outside the lift: epoll::EventExtra"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Event::set_interrupt: polling's MIR stops at type outside the lift: epoll::EventExtra"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Event::set_priority: polling's MIR stops at type outside the lift: epoll::EventExtra"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Events::len: polling's MIR stops at type outside the lift: rustix::event::epoll::Event"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Events::new: polling's MIR stops at mir::Operand::Constant: the constant item Events::new::DEFAULT_CAPACITY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Events"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PollMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: epoll::Notifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustix::event::Timespec"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 1

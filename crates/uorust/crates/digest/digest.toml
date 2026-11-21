@@ -1,0 +1,126 @@
+[[fn]]
+path = "digest::digest::D::chain_update"
+kappa = "29d060d9d2e9a59e15955dcebfd93bb555abc2fe4d8f43e5c113579e46bf00c1"
+at = "D=u32"
+embedded = "f0fddb5418608175905600df4b7f52fb64fa656e7424899e732f8702152ee7a2"
+status = "residue"
+cause = "mir::Ty: impl AsRef<[u8]>"
+
+[[fn]]
+path = "digest::digest::D::digest"
+kappa = "1aadfea848ee5af9b6d6dbdbbdefa1c71b6bf261e0f8f4b76b770503916e5fce"
+at = "D=u32"
+embedded = "229e4c88b1bfe164e8837a6b26c2c78f3b9567b652c84f61e2fa511f8c001f6c"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::digest::D::finalize"
+kappa = "97a42bb8bf2db9c80cbe36be5d75b9ce7acf14d8c0f50e05f978b0f001f810df"
+at = "D=u32"
+embedded = "7e41cece8e6055aacc47fe4e814e02b178e7ff250e867236ee9e3bdc5cdbd404"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::digest::D::finalize_into"
+kappa = "51b5046bc0fa3f308b0ac9f750fa511b2f81623078c89b6b4bbab5d17f322f7c"
+at = "D=u32"
+embedded = "8f4b6763855323a0048d4bf7a61eec879deb45eb5de26c76069ebe170bae61cc"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::digest::D::finalize_into#2"
+kappa = "748f0d7cc31b768205c08fe45eaa3e1a62283bb34abb79b5d66e7d2c723ff8f4"
+at = "D=u32, InvalidBufferSize=u32"
+embedded = "9f7f0cbb99ec19d0fb6b491145bc5051a470f52ec908056bc25c25e104a285e3"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::digest::D::finalize_into_reset"
+kappa = "940440b5ded99d1bbaea4c4681e7b8081d42de2fbb17750cb7517c11d07ab632"
+at = "D=u32"
+embedded = "16af9ed0722bb9f073e9857633027b46bdb62ca0696654c29f607280b754dca4"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::digest::D::finalize_into_reset#2"
+kappa = "4a75cfeaf12e017647d98b4b542168a79bef8d131b86105119a98cf0cc2adc20"
+at = "D=u32, InvalidBufferSize=u32"
+embedded = "e6050acb7d8da56ac2ee63e9a89a73979e445c080acb1a46f66fcb790a96769a"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::digest::D::finalize_reset"
+kappa = "a40692829d2b66b5c0e095a32988fa5ab8b58657beecaffb5d294ca9e5423c8a"
+at = "D=u32"
+embedded = "82370bc43d8a5aa9bcc47e34136b28ae0d41bbdd5c0a1e78b1737b4079708b78"
+status = "residue"
+cause = "mir::Ty: block_buffer::hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "digest::digest::D::new"
+kappa = "2a5dd9a66379f947ce30d621c19396b8e9c7811765884e347b315ba206bd514f"
+at = "D=u32"
+embedded = "96c01621d52a9fe38502e8e8c5a9cc3dd77e0b7374ba613504705fde3dabd78c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "digest::digest::D::new_with_prefix"
+kappa = "8db4fd0e0c55f4f95086460a0456312651f3928bf87b6b9e7b385a503782fa31"
+at = "D=u32"
+embedded = "ea9118b3991b8d5d10cc06ae2c0676f2fb5875c2e9ff7c04fc9a090b9f116704"
+status = "residue"
+cause = "mir::Ty: impl AsRef<[u8]>"
+
+[[fn]]
+path = "digest::digest::D::output_size"
+kappa = "f91a844085b44ab7ca2a6ebb8da8c69bef7dd16255dd1e6008ab66efa60e7d3a"
+embedded = "632955111f31c14fa1cf9dbea586fae2e8e5df78289ceb3991a8594be6f2d3d3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <::OutputSize as Unsigned>::to_usize"
+
+[[fn]]
+path = "digest::digest::D::output_size#2"
+kappa = "3b5380706b404076424894ae553ba8587295edc67c7a5896199bc45944aae89a"
+embedded = "592ae59740b97663f34935ea3a2d7c8c54a52965df3d249523be26e2c61f1832"
+status = "residue"
+cause = "mir::Ty: D"
+
+[[fn]]
+path = "digest::digest::D::reset"
+kappa = "95b8333ecfc2d8be301c02701b58beae58726ac6f922fe986df89ac2e6587648"
+at = "D=u32"
+embedded = "f91d5e2ec6be6c81d9c13f1c0bfb445fbb98203a2ad3be3e47f4813580fe69be"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Reset, which u32 does not implement in core"
+
+[[fn]]
+path = "digest::digest::D::reset#2"
+kappa = "631dce72c6426657f0c9890f526d9d345d0e251b9bc8193645d39874c25205f0"
+at = "D=u32"
+embedded = "840e8857809a4d275790c8dd93a4c3016d1825da11e985e62703508b173e10fb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Reset, which u32 does not implement in core"
+
+[[fn]]
+path = "digest::digest::D::update"
+kappa = "59b44d8e8a381ffc62043db2aec663b5aa2a62ddb05ede9d9d71610d5c985bee"
+at = "D=u32"
+embedded = "b0f7a1a082a14fe149d8bf9c658529453b9b8f3feffdaed186ec06c3f15d16bd"
+status = "residue"
+cause = "mir::Ty: impl AsRef<[u8]>"
+
+[[fn]]
+path = "digest::digest::D::update#2"
+kappa = "852045d48faa52eb908d045db131453e0a4b9882933e45858599f12883e4205d"
+at = "D=u32"
+embedded = "db923a564a20a0ba7668b730bf0f132c37a9ecdb083200ff04e1d85f0de0d7d7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Update, which u32 does not implement in core"
+

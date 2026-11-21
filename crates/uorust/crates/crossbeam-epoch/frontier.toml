@@ -1,0 +1,258 @@
+# The crossbeam-epoch register (written by `uorust crate crossbeam-epoch@0.9.21`; do not edit): every body of
+# crossbeam-epoch's MIR at crossbeam-epoch 0.9.21, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 199
+translated = 4
+residue = 195
+
+[module.atomic]
+bodies = 88
+translated = 3
+residue = 85
+
+[module.collector]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.default]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.deferred]
+bodies = 7
+translated = 1
+residue = 6
+
+[module.epoch]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.guard]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.internal]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.primitive]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.sync]
+bodies = 25
+translated = 0
+residue = 25
+
+[embedding]
+bodies = 199
+embedded = 199
+evaluable = 199
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: atomic::Owned<u32>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: atomic::Shared<'_"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: atomic::Atomic<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: epoch::Epoch"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Local"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: collector::Collector"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Guard"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Queue<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Epoch"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Shared<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: collector::LocalHandle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: guard::Guard"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: internal::Global"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic::low_bits: crossbeam-epoch's MIR stops at mir::Operand::Constant: the constant item <T as atomic::Pointable>::ALIGN"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: deferred::Deferred"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: primitive::cell::UnsafeCell<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::cast"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Bag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LocalHandle"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: epoch::AtomicEpoch"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::Bag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: internal::SealedBag"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: list::Entry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::list::Entry"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: is_pinned::{closure#0}: type outside the lift: LocalHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: default::with_handle::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as atomic::Pointable>::ALIGN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Relaxed"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Box::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic::strongest_failure_ordering: crossbeam-epoch's MIR stops at mir::Rvalue::Aggregate: the variant CmpOrdering::Relaxed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AtomicEpoch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Collector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Deferred"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ScopeGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SealedBag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: internal::Local"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::list::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::list::IterError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::list::List<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::once_lock::OnceLock<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::queue::Queue<u32>"
+bodies = 1

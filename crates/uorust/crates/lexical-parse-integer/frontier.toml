@@ -1,0 +1,73 @@
+# The lexical-parse-integer register (written by `uorust crate lexical-parse-integer@1.0.6`; do not edit): every body of
+# lexical-parse-integer's MIR at lexical-parse-integer 1.0.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 92
+translated = 0
+residue = 92
+
+[module.algorithm]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.api]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.options]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.parse]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 92
+embedded = 92
+evaluable = 92
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: lexical_util::Error"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: Options"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: options::Options"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: OptionsBuilder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: options::OptionsBuilder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item lexical_util::NumberFormat::MANTISSA_RADIX"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Iter"
+bodies = 1

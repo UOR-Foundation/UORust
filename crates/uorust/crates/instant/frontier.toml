@@ -1,0 +1,26 @@
+# The instant register (written by `uorust crate instant@0.1.13`; do not edit): every body of
+# instant's MIR at instant 0.1.13, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1
+translated = 0
+residue = 1
+
+[module.native]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 1
+embedded = 1
+evaluable = 1
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1

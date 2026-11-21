@@ -1,0 +1,56 @@
+[[fn]]
+path = "tokio-tungstenite::client_handshake"
+kappa = "29029e491c075455e8d6f70a175a4a5d20c32bc59ef00aba694a822247edc8d4"
+at = "F=u32, S=u32"
+embedded = "bc9ba5d7facb3346d49e44aaeefefbb34909258f1e5fd15dd4655b479058051e"
+status = "residue"
+cause = "mir::Ty: {async fn body of handshake::client_handshake<u32, u32>()}"
+
+[[fn]]
+path = "tokio-tungstenite::handshake"
+kappa = "f6cd7d9e491c38e1515788df0074456ef979f72d3374841845c58c4665e1aebb"
+at = "F=u32, Role=u32, S=u32"
+embedded = "5005ec945a19710c7152909381d34a1ca2759f9f02b12c35be646e1e056606d0"
+status = "residue"
+cause = "mir::Ty: {async fn body of handshake::handshake<u32, u32, u32>()}"
+
+[[fn]]
+path = "tokio-tungstenite::handshake::MidHandshake::poll"
+kappa = "2665b9cfc4feff5fb7e972a9b5dabf168efc24bddc2cc95837696b39a7b6761d"
+at = "Role=u32"
+embedded = "d839269f1f23d7fe7c5d5d1372ccc9a967a91ad7d61601c6601ce1219095aa2d"
+status = "residue"
+cause = "mir::Ty: tungstenite::HandshakeError<u32>"
+
+[[fn]]
+path = "tokio-tungstenite::handshake::SkippedHandshakeFuture::poll"
+kappa = "251349d418feec8702b28000ea12bbc39268767fad340adce9a25882b04ae8bc"
+at = "F=u32, S=u32"
+embedded = "d36a06b60aef6f3d425666861b30707571c17eeb6ddf48bdaac585c05c5265b0"
+status = "residue"
+cause = "mir::Ty: compat::AllowStd<u32>"
+
+[[fn]]
+path = "tokio-tungstenite::handshake::StartedHandshakeFuture::poll"
+kappa = "7ceb3fffbf2ad65c89223fe0e5711fa292cec62c8f7c9fd7ee57c5df44cb4c7e"
+at = "F=u32, Role=u32, S=u32"
+embedded = "283bd5417cb5a7cb423ecb5bb0d1e950591d09f9f7ffa91a35b5051968382088"
+status = "residue"
+cause = "mir::Ty: handshake::StartedHandshake<u32>"
+
+[[fn]]
+path = "tokio-tungstenite::server_handshake"
+kappa = "0b6944fe69b6fa5a7dcbba0abb6a096c51a5857b980611daf2a9d5ef6551babc"
+at = "C=u32, F=u32, S=u32"
+embedded = "d0f8deda9e027b2234ad5761b76ecdbffd9dcd82c1cc9aa0c5fe934966b7a185"
+status = "residue"
+cause = "mir::Ty: {async fn body of handshake::server_handshake<u32, u32, u32>()}"
+
+[[fn]]
+path = "tokio-tungstenite::without_handshake"
+kappa = "39a4b7ea269f268b1b80517d29c072d8a5e792a72b24020b7213384a2f3396ad"
+at = "F=u32, S=u32"
+embedded = "cfc18227684cf51f6be8b7098b9235b4000119ed31dab8e215ef38267871020a"
+status = "residue"
+cause = "mir::Ty: {async fn body of handshake::without_handshake<u32, u32>()}"
+

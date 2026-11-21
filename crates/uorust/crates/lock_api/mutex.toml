@@ -1,0 +1,343 @@
+[[fn]]
+path = "lock_api::RawMutexFair::bump"
+kappa = "839ef24989ffa3f15f4e898226f7e0effbbb135e4ca681957d1178de11a9e8da"
+at = "Self=u32"
+embedded = "d06aa5ee18b5d9a2b563da9703f4fac558108667210c73dcc5905b17760f2323"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::deref"
+kappa = "c1d58dd13b170ebd50653d91ca65c59545a1ea808d9f8158bdf3ddd265e140c4"
+at = "T=u32"
+embedded = "c5329dafd58e2a2336fdd554bd189cb1c33e48154baa234c7864ec9f428a7f85"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::deref_mut"
+kappa = "44c142b459d7559ccdba924657f75b46d3e6b645de35425518ea4bfc9828141b"
+at = "T=u32"
+embedded = "d00660be997a9a16efea74e78c64ddd61cfa2149b7c2568f1a4b36efba841403"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::drop"
+kappa = "af756bedb9fc640ee0f7f5152081f91b5d6ced88106a297633814bdfe8b86688"
+at = "R=u32"
+embedded = "f803cdb7f62a728aa87161886dfe5cd5b6a6ef3e79750b8695e34a19a90e625a"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::fmt"
+kappa = "e8a5c4091edfef09daf1de5f856977fff5aee49196b89aabc6e62ce9a1150011"
+at = "R=u32, T=u32"
+embedded = "25debeb67cadc76917e91082fdbb52b0d4164272b9166312b59a8230b5bf60f2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::fmt#2"
+kappa = "7942b815d64fac51aab0e0cefd1b10174875af10780fd7d208ccace8569467a7"
+at = "R=u32, T=u32"
+embedded = "a9307871bee126f5cec3cbc12231c65f44d52d4fba075c9f80db63190a95ef9f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::map"
+kappa = "f794e1dda31b6ccaf5a0d357a6d3aed7d952c83f5998c7d21ca53d33ea138ba0"
+at = "F=u32, R=u32, T=u32, U=u32"
+embedded = "f8919046b1ed105bc657b89ac1572c6eeb9cc0e6c3d5d84db2268182eea07c2a"
+status = "residue"
+cause = "mir::Ty: mutex::MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::try_map"
+kappa = "79f63b8c45ca94e328f80c32e26e602617eac577b3a1b1b0eda888b378fa88e1"
+at = "F=u32, R=u32, T=u32, U=u32"
+embedded = "aed9b166ae7532db3d7d5abc96b8e1839e70daac73da2cfc904e374fc71e3ea6"
+status = "residue"
+cause = "mir::Ty: mutex::MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::try_map_or_err"
+kappa = "771e807e3893739cc9688dbc84b033872ddf66a42eb955a8a939dc6f1405c98d"
+at = "E=u32, F=u32, R=u32, T=u32, U=u32"
+embedded = "0dc514487579478622817f28045d3238be514812af4f44f96fa247d78598b231"
+status = "residue"
+cause = "mir::Ty: mutex::MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MappedMutexGuard::unlock_fair"
+kappa = "6195be14c2674532305ebd445ea0a4ecdd578c7e19d4af53c9c7af294c3d9657"
+at = "R=u32, T=u32"
+embedded = "6e119fac9877bdbabe40934505408da8a13d66f829a13bc34b70e851f4d7926e"
+status = "residue"
+cause = "mir::Ty: MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::data_ptr"
+kappa = "0241979cfe9e0fe8ed57bbf14c057911e4d62e29941e1bbcd1938d86bced21ca"
+at = "T=u32"
+embedded = "d5a2366158f1b5a4d65af485a7d4de654bb4a29adb8aea3f7d66d4f452da0c2e"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::default"
+kappa = "13f826a4d8ef5b7cb70e7bf4cf8d5cc6f591bb9e38606148ab0211ec09546cfd"
+at = "R=u32, T=u32"
+embedded = "be4d3e35489caf248af886a9a8a384d575811591ad05a272c7dad17dab0ece60"
+status = "residue"
+cause = "mir::Ty: mutex::Mutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::fmt"
+kappa = "f4057337f0ca1fed244a0345335f14e11aaeb16531bd0010c5b74808a2d9408b"
+at = "R=u32, T=u32"
+embedded = "48bdc28fc42b83d8d11112405260d3fe3a0f9d5ff25dd1c59c2a229c72ac1275"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::fmt::LockedPlaceholder::fmt"
+kappa = "d40daf04033e7b3a79ceddcc544279db7b5b92b9c5b938d0745371410b85dfb0"
+embedded = "5cad2d34e9cec1f7839f7680205ed3a394e7005b45bc6d1f1be088549b2a3e7f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::force_unlock"
+kappa = "7c37330d5fe6b54e6f28c97dc5a8f480a5bb32b577e3510b1374bd9c3a5a215b"
+at = "R=u32"
+embedded = "7eeb53bee14c4690bf12509a81dec6c13a4aefd72822e0b6a2ab233003bc36aa"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::force_unlock_fair"
+kappa = "aa3de8cadf201b17f6adbc840ae4b86fcbacca006d754b6bf7c1e073e65c1d57"
+at = "R=u32"
+embedded = "d74b5dcfce1d510510d456fb78e3d293629a4ebbf63b06f5e64a95d45ec5ca33"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::from"
+kappa = "db21387685eb6431a15d52f6157b6109a06f4c7324364082275291291d898a87"
+at = "R=u32, T=u32"
+embedded = "2a8bf74e7c651a6296b16f1647a95c1358b8be3e24d7055362491cab8686f000"
+status = "residue"
+cause = "mir::Ty: mutex::Mutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::from_raw"
+kappa = "444c1c2a726c6a6986e1cda920de5e266094d91a319981fbdc8b1ef86bcdd7c9"
+at = "R=u32, T=u32"
+embedded = "28271d5d55a036f2ad31546199a9e1fd6ff83a50a2e40cd3dd26ecdde0bb4194"
+status = "residue"
+cause = "mir::Ty: mutex::Mutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::get_mut"
+kappa = "c478489f5af78f3980f5f8d164a3742e6c503bb21371cd5af185924586e6cae3"
+at = "T=u32"
+embedded = "190df231b4106c0bb4436d0da0b752b97220c0782410d55a8adf619ffa4d3f78"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::into_inner"
+kappa = "6e9d806765717a373a63acbc873f554a6c2184c6fa32ea5adbeda9d1321cacbf"
+at = "T=u32"
+embedded = "e8c7a00f8cf90b05ec9dbce003860b8739de65fe4e19278b165ecebb19f8a837"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::into_inner_with_raw"
+kappa = "cbed7441ad2df41ffe07653431f63cd1714da5bf8f737c83653486632613f6ef"
+at = "R=u32, T=u32"
+embedded = "ee80e13fce975b547cfc87b4a30d031f78698268cc75a17aa6d495bd99ed939a"
+status = "residue"
+cause = "mir::Ty: Mutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::is_locked"
+kappa = "d75ef0dbeb3be2d4c340c97d4034d26aaaf22ffd1c0b9b5533d72b822c391e0b"
+at = "R=u32"
+embedded = "b0047855d8b17831a8bfcbe09ff680b06ebec6835938ad0a8116d60c366a2052"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::lock"
+kappa = "feebb1ea4c79f093d364a57469b4fd267413ead7752cdd3d20c81d01b11a4ae7"
+at = "R=u32, T=u32"
+embedded = "57e05a82a0dfef8420e62926be70e943e636677d5261398abcdd18982f1364b4"
+status = "residue"
+cause = "mir::Ty: mutex::MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::make_guard_unchecked"
+kappa = "383fdd0bd94d50dce02074ec2d27d403040737b238e986d9c279aa57e91092c5"
+at = "R=u32, T=u32"
+embedded = "57dda51b1ac3d2ff46327df76dadb518cae9ba46606d38e534d810685c78c337"
+status = "residue"
+cause = "mir::Ty: mutex::MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::new"
+kappa = "d8d081c6e5bf55a61fbb716618c74831954530e510d0f7065b59552c74e27fbf"
+at = "R=u32, T=u32"
+embedded = "e8c633e242282fb362f69e3731aafb98f5904df2a6a47940b4b7036b83bcdc71"
+status = "residue"
+cause = "mir::Ty: mutex::Mutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::raw"
+kappa = "1ce1c0994880ce0642d20b0d5f260e3dec0181b5e87071e67248bb4442024976"
+at = "R=u32"
+embedded = "4a18d41ce1d8a7e09fdf87706e5861e4ae891a01dacd7614e0210ca8e055aa6d"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::try_lock"
+kappa = "b60c68b8e187577485ac96c5832fbda012ffcf7df0d917c9477cbcda58f95157"
+at = "R=u32, T=u32"
+embedded = "02c92b7ab40c695066341f4eb3cfc03d46803a1018e68e312f8e7049da9db928"
+status = "residue"
+cause = "mir::Ty: mutex::MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::try_lock_for"
+kappa = "e55bd3b4ed029159bf662f67de4983c0042f58a86badbed3ec0ac6a67f0835d1"
+at = "R=u32, T=u32"
+embedded = "24de0bc93628e6ba0c4922ee47d3de072228af8659167f6982746b4901d60367"
+status = "residue"
+cause = "mir::Ty: mutex::MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::Mutex::try_lock_until"
+kappa = "ad598d0b74f0b0d5ae62de4c0796c7775812b385fceea28ac57025236047dab0"
+at = "R=u32, T=u32"
+embedded = "b0b55f81b61e360b2f5c73cafe764e1e6a0d05a4525679ab8ce72bb92a89dba5"
+status = "residue"
+cause = "mir::Ty: mutex::MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::bump"
+kappa = "5b1a0afbc888bf5ca01cc5de27406cc0dd5a259af89ef112fb21f42bacb67ac5"
+at = "R=u32, T=u32"
+embedded = "d78fe63338a6e292ed52a61cc23be53f2787fd79495efb522546e9c8a9a9037a"
+status = "residue"
+cause = "mir::Ty: MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::deref"
+kappa = "8b0a7bb5017818b2d21e3ed0aa118d3e5ec3c08e858ddb68ecabb63a76337161"
+at = "R=u32, T=u32"
+embedded = "c0d896f88a2f9f4a5bf55ae9351186078f5cf3614c4029cbb7b87d8e74ca4e57"
+status = "residue"
+cause = "mir::Ty: MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::deref_mut"
+kappa = "60cd1b4911ee8aabdf00f5cbf2bae902becc2ac7abdd78942af8cee9f260a475"
+at = "R=u32, T=u32"
+embedded = "f726d07947c5ce63e7c2243bef9ae9935cac185bbb8e719175fe310de12954cf"
+status = "residue"
+cause = "mir::Ty: MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::drop"
+kappa = "525484bd9acdafa512d6b1618a5d57b69341d84b67309317bc3f9b58434e0103"
+at = "R=u32, T=u32"
+embedded = "6e41b85e64b1677fa0e3446c8ad2c1f8649ef5d4382f03074946a9d188d93e9c"
+status = "residue"
+cause = "mir::Ty: MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::fmt"
+kappa = "671182fcb722ab7d156430b33b4bd6c2c9f7a8261a580b533cbfd503952654ff"
+at = "R=u32, T=u32"
+embedded = "211a29b1fa2d8fc7ed5d944e0c4f2c5eff47e975b8599f8df5dc59692404fc5e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::fmt#2"
+kappa = "7aaa6df8c75deff4bab5d1534089a301a1b24046618f5df12dddb0bdde49c108"
+at = "R=u32, T=u32"
+embedded = "ebdd17ff920f51525eba5b32aa52e46ecb1fdebc665941a8e48fa58b9a5015ca"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::leak"
+kappa = "5a05d18b228dd0370c636379a20637ae03d296a8822abdeb0d69f0fe40d47ef9"
+at = "R=u32, T=u32"
+embedded = "547a4a99edc3bc1eac199d0cbcb7fea2860de43d44599178dd52165a0d55ad75"
+status = "residue"
+cause = "mir::Ty: MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::map"
+kappa = "32a7601db6d8e2b34512eefda824bdcd0762dcba4cb580e21adfc50bce0760f1"
+at = "F=u32, R=u32, T=u32, U=u32"
+embedded = "d8ca362d824027aa321333c63e251af3cc48fc7651d17039247079a977440279"
+status = "residue"
+cause = "mir::Ty: mutex::MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::mutex"
+kappa = "bb2eebc133d13ffdf06605c76ee2cac2f8395cd98db252688602acf763bc1e8d"
+at = "R=u32, T=u32"
+embedded = "f04389f22239cd3fa26c517c57f63ba752e45180d9483dcdc46862b492c18c39"
+status = "residue"
+cause = "mir::Ty: mutex::Mutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::try_map"
+kappa = "19830e224503638ff3d2394f1f1efd2d12cf55e45c08d8a6374db9364747bcf7"
+at = "F=u32, R=u32, T=u32, U=u32"
+embedded = "d367a532904e81c598fa17852f54b11e1197df68b88a7e20e6817faa6aa5e109"
+status = "residue"
+cause = "mir::Ty: mutex::MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::try_map_or_err"
+kappa = "6d277d4b1c43e0c7dceca276f39e2efb43e76b5e8b38d3aad5ad9dd6758512be"
+at = "E=u32, F=u32, R=u32, T=u32, U=u32"
+embedded = "b0528280c5e62435c3a0c8e0a16f39f44325fa6e7ea2c7c3ab8276dc1b1221c5"
+status = "residue"
+cause = "mir::Ty: mutex::MappedMutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::unlock_fair"
+kappa = "9a8cfcd86d9a7a5992dd54600b00fa49dbf5c5c96740bd4ac46a002d9a213f09"
+at = "R=u32, T=u32"
+embedded = "cdf4c444bfdab8853cb6912e0483b8d2f222ef9feec515ebf3dbff4a9697ddf8"
+status = "residue"
+cause = "mir::Ty: MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::unlocked"
+kappa = "3dc935f808638249012d88c0b5e06dcf88515756dbbfe70db749de1ff73f18d4"
+at = "F=u32, R=u32, T=u32, U=u32"
+embedded = "73d11789a689e1788e5814a017c5f7b8f780eb877c3ebf3744655b8dc8246964"
+status = "residue"
+cause = "mir::Ty: MutexGuard<'_, u32, u32>"
+
+[[fn]]
+path = "lock_api::mutex::MutexGuard::unlocked_fair"
+kappa = "adb27121df7034f3888df05e5e21fb9345fba15dad64d111f449f7f23e484ebf"
+at = "F=u32, R=u32, T=u32, U=u32"
+embedded = "2f0fbeb9c2f5cc9d0fdf58be63f5395cb50026742e8d0191d31d6c22325ce6a8"
+status = "residue"
+cause = "mir::Ty: MutexGuard<'_, u32, u32>"
+

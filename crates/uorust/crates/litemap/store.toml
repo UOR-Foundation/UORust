@@ -1,0 +1,304 @@
+[[fn]]
+path = "litemap::map_f_mut"
+kappa = "820ece40a865f7d4dadab7069d33e91ccc50c37fcede43a263df11cfb68f60f6"
+at = "K=u32, V=u32"
+embedded = "a1b789df6b204be29334ed06a51e4d09a057d4c76fc24edc73b36788d0ef7650"
+status = "translated"
+digest = "865453cc3479337e8f79f86918dc3b4e28df02dec4d5b38320f5f74a9e15ff3a"
+
+[[fn]]
+path = "litemap::partition_dedup_by"
+kappa = "d3f95c3fbba5b4562b95d875b1851a96f38fc57b96671ac2246892fd40dc8ff6"
+at = "K=u32, V=u32"
+embedded = "c15c44dfd1daee5a2f661628f66d562e38b3b38ded4f379e4afa23d385623a24"
+status = "residue"
+cause = "mir::Operand::Constant: store::vec_impl::partition_dedup_by::<u32, u32>::promoted[0]"
+
+[[fn]]
+path = "litemap::slice_impl::<impl at src/store/slice_impl.rs:14:1: 14:62>::EMPTY"
+kappa = "36826b398fc64dcc840209f028c284e3d60ddf00197247ed3e58bb8de6958cef"
+at = "K=u32, V=u32"
+embedded = "7614e69583e2f0c9320430c11d3d9d8ab6f68119ab0a3762d8d1efadbf908265"
+status = "residue"
+cause = "mir::Operand::Constant: store::slice_impl::<impl store::StoreConstEmpty<u32, u32> for &[(u32, u32)]>::EMPTY::promoted[0]"
+
+[[fn]]
+path = "litemap::slice_impl::<impl at src/store/slice_impl.rs:18:1: 18:52>::lm_binary_search_by"
+kappa = "53ac97aa31e0f6e156d8b576b321305f72b1357b2252f9139749a1dbe5e934d1"
+at = "F=u32, K=u32, V=u32"
+embedded = "4ebcc3b7c69b0dff4cfe5376cd4cc2057462c0a360cd8af09fbe2b58177702de"
+status = "residue"
+cause = "mir::AggregateKind::Closure: slice_impl::<impl at src/store/slice_impl.rs:18:1: 18:52>::lm_binary_search_by::{closure#0}: type outside the lift: V"
+
+[[fn]]
+path = "litemap::slice_impl::<impl at src/store/slice_impl.rs:18:1: 18:52>::lm_get"
+kappa = "d8b05903f602813294fc5a6391114ab3746bcc29004026512b736ef8282a9555"
+at = "K=u32, V=u32"
+embedded = "ac8c5ff9b3bf14d1bab32e9dc1d997737497cbebb4d2eefbebe4d288c5eca92c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item slice_impl::map_f::<u32, u32>"
+
+[[fn]]
+path = "litemap::slice_impl::<impl at src/store/slice_impl.rs:18:1: 18:52>::lm_is_empty"
+kappa = "63866cdde79055984dec3ec3a4b0a1d90e4e2f3208ee95a76b9a1f1a435b04fc"
+at = "K=u32, V=u32"
+embedded = "25a17e3ee3147e85d228005b2a85f0ce639207f21de94c9fea128b78d1045e10"
+status = "translated"
+digest = "ed1237f093cce3c24d8f3ffe8fb24393e1309df8fd5cdcd808583ae137db7347"
+
+[[fn]]
+path = "litemap::slice_impl::<impl at src/store/slice_impl.rs:18:1: 18:52>::lm_last"
+kappa = "5691a7da37cdead0ff71a829599858489005d56dbc9f64817c2fdb210e0c9890"
+at = "K=u32, V=u32"
+embedded = "3ceb23a95d66b016f2e4d52c20ba516f0b05f7bcdd3157aedb018f448987f187"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item slice_impl::map_f::<u32, u32>"
+
+[[fn]]
+path = "litemap::slice_impl::<impl at src/store/slice_impl.rs:18:1: 18:52>::lm_len"
+kappa = "1472ac5aec3977a25d148f0756426c33b9336b0b66d03f667cf1c66a4120454a"
+at = "K=u32, V=u32"
+embedded = "7660c49edd14b60662e9b1b7734cd9aeefefb5b57915fd730ebdc1553686a0cc"
+status = "translated"
+digest = "59298090347ab4967410ba3ce01a51c16b13b8100677f69acecb1525df86a4b2"
+
+[[fn]]
+path = "litemap::slice_impl::<impl at src/store/slice_impl.rs:48:1: 48:42>::lm_get_range"
+kappa = "95d661f834c6b20671501ff5585d196038103df24892ef37e9aef07338434682"
+at = "K=u32, V=u32"
+embedded = "cb3ee01b7b1d3c2d4f31f92fd87f3a5c53d8997bef1ac63b1da9cc29a34153e6"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "litemap::slice_impl::<impl at src/store/slice_impl.rs:56:1: 56:64>::lm_iter"
+kappa = "b52dead6f081a83b4cbc14e897ce9f74a73e8058c58fffc0f520196df60c76a1"
+at = "K=u32, V=u32"
+embedded = "46278dfca464b303a63107f267da8d767d245dbc21ad84d723d43f0a4649c629"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(&'a (u32, u32)) -> (&'a u32, &'a u32)"
+
+[[fn]]
+path = "litemap::slice_impl::map_f"
+kappa = "0bd6adf491df5cc7ae92e39397483b537221d9b3b25ae277887bcc20ce9e8c4e"
+at = "K=u32, V=u32"
+embedded = "29ce69375ee67ccd0b6059e162342b5db4e8379b31b027e011ccf45c9336c993"
+status = "translated"
+digest = "aab96b2590d61129dc9d7bbb836d2e0522c14bd577fd1383301965be53e6f071"
+
+[[fn]]
+path = "litemap::store::Store::lm_is_empty"
+kappa = "0aac699a31c6a6e7b7a1febe66aca25bf8e1ffeff2b5ddcec6aad43adff4d2a1"
+at = "Self=u32"
+embedded = "b11c7e2a4f169243a387a377d73205d59cfe35fdb87a2ac92c5a93139e7db67d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Store, which u32 does not implement in core"
+
+[[fn]]
+path = "litemap::store::Store::lm_last"
+kappa = "66809ba9b570af56126a291647408105fea74ff381a0c90264cb39de594a713a"
+at = "K=u32, Self=u32, V=u32"
+embedded = "4adb286397ef62e40a914033a3adfc79db9055324e10ef87b13f32b2fc3b1249"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Store, which u32 does not implement in core"
+
+[[fn]]
+path = "litemap::store::StoreIntoIterator::lm_extend_end"
+kappa = "72279f3c3882ebdda72497ed9fb5726dc43814ed6aa0d09bdc2c5ac2ca6f098f"
+at = "K=u32, Self=u32, V=u32"
+embedded = "a156ef856b84ef281a381a74ae4640795d8a24231d8e778c20722f7a59e26d06"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by StoreIntoIterator, which u32 does not implement in core"
+
+[[fn]]
+path = "litemap::store::StoreIntoIterator::lm_extend_start"
+kappa = "4f1021cbc83de5349b5c451fd34285229f83c62f9d8b7bb142badb57592bc2e4"
+at = "K=u32, Self=u32, V=u32"
+embedded = "3d615dd83da2f5cbeb5dc61b89c1be8c714f7b374d95a2c16f659b87c2ce1f8a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by StoreIntoIterator, which u32 does not implement in core"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::EMPTY"
+kappa = "03620f2e54fffcfb4507115c0ca1e43307e0f8768dcd082644a5e41b2a772d06"
+at = "K=u32, V=u32"
+embedded = "cbd94f6298e07a06ba202be64334c486da8a75dc24865a6083ae4da9bf0518dc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_binary_search_by"
+kappa = "482a7c2bcd6f05468f165d0faf1df4eeb501c3ea7414e33022de5b447142f6ca"
+at = "F=u32, K=u32, V=u32"
+embedded = "6027959268c20942c96156733cbc24190cf4385eea3ab2b7eb5b5ee2627513ea"
+status = "residue"
+cause = "mir::AggregateKind::Closure: vec_impl::<impl at src/store/vec_impl.rs:26:1: 26:39>::lm_binary_search_by::{closure#0}: type outside the lift: V"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_clear"
+kappa = "d56bad2359ec1c88d517977f3c9eca9af7a4c2166a750c8fe86a4b0be5887710"
+at = "K=u32, V=u32"
+embedded = "498658b15460a0b220c4e6b9248b38f39f92bb1b65826b7b5aabd284e1d0d8f5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::clear"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_extend"
+kappa = "ad699a9b1ba321dd7ddf854f9571814b5ddabb848165cf2d84471ca96b4296fa"
+at = "I=u32, K=u32, V=u32"
+embedded = "ff03dd3ca0bfa0aeb26148ee174a51b5978be58d52e23a5915e3320c3a37b53b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Vec as Extend>::extend"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_extend_end"
+kappa = "baec068fc6d6de48aabdec371185c9ed2e8097ca1578a8665abba44740d3281e"
+at = "K=u32, V=u32"
+embedded = "aba4ed859d3a0fec3e74e36c241b6a6daa5b2e04924ca94e36e6c20a734195b9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Vec as Extend>::extend"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_extend_start"
+kappa = "453af26a592c1e06370b65b93d17b3bec3129fd8a281ebeece6e90231d36e708"
+at = "K=u32, V=u32"
+embedded = "d474df9ac733bed7d4cf271b65b79337963528608763c3cfd228b8253c3dcd5b"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_get"
+kappa = "ca1864209c7f29af9e6e5696bb6da5560f5410971d45c8a57e773af44b413533"
+at = "K=u32, V=u32"
+embedded = "43791994f7c3188072f3c096a52aa8c6c33e0bb2fd9f1736b17abb5660831ff4"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item vec_impl::map_f::<u32, u32>"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_get_mut"
+kappa = "bca8e27ba885601b37141d4ae09d5cef75368518c56e11d6a7ab172189428c99"
+at = "K=u32, V=u32"
+embedded = "d231f8ea0b9712f6cc495d7e99a9e248f27cdd364cd8367822f0026ac9810592"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::as_mut_slice"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_get_range"
+kappa = "a3020a9db6e469af9d58767a779b758ef4dd700ca651d81f9a75a4d62b08f7c7"
+at = "K=u32, V=u32"
+embedded = "761fa7483266aeac62fa5de56efd1147c8ce9d2440faac2dba9d8d58c5749cd5"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_insert"
+kappa = "e24b0fe3aa3e9b435cf1eba6f5422a778b5e0c8ac0716847463f0ee52ce5b404"
+at = "K=u32, V=u32"
+embedded = "4c51eb53bd8fdff9db2a06939a1dbf360452f181c96086663f1cc4e3e038d842"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::insert"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_into_iter"
+kappa = "0dd504de872d77a69a2d7d0ce0f6eaefdeedb73ac3111598e4cfe9470fb96294"
+at = "K=u32, V=u32"
+embedded = "5c946d41205e6116f4ee8a206c0f6dc7d72f942a1f4a5bfc43218d8cd5608d62"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Vec as IntoIterator>::into_iter"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_is_empty"
+kappa = "f5cde3b8b9ff5cc795fae10995ccb8427a8d5832b676c68b50dd9a3810838ef3"
+at = "K=u32, V=u32"
+embedded = "600f7e2533656e6425a9ccababb4d40386f20d6587e0c83090b606baadf66a14"
+status = "translated"
+digest = "25f54c4a3987f63b8c929a06a645d02d332d6ad82d23275eff41acd12ed6943a"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_iter"
+kappa = "ebfd16ddda3ea28a102a92b37bce55813a4951b7a99f1f1cc55853e883e0b62a"
+at = "K=u32, V=u32"
+embedded = "fe3a3bc70d0715dff0ac7c201fabc71bd199b172cfec82f5dbd79fdaa8c3e90f"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(&'a (u32, u32)) -> (&'a u32, &'a u32)"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_iter_mut"
+kappa = "f2ca627d8539437e091ce07a1f3666d38890fe19fb17e5399fc09ca3a6ab2ef2"
+at = "K=u32, V=u32"
+embedded = "2ab56c341fa8f1c60d16e6d7efc2a1eb6d4fdd3f563212933bc0ab76cb2656fa"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, (u32, u32)>"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_last"
+kappa = "91d58dca2c50101ea512faa14e8d0967a3c038e6560fb106fceba86c04e57837"
+at = "K=u32, V=u32"
+embedded = "5fe7d066f5c1e69282aa0820488ffee34e75debea1044a3a9a798bb31bdbd8c8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item vec_impl::map_f::<u32, u32>"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_len"
+kappa = "42ed610cdce5ed3b9167832172cd3d962ec9ffe96b9225e67f8e23cecd24ed34"
+at = "K=u32, V=u32"
+embedded = "bd98376c5c7bbaf87464d4ec657aeac5a4c40f7f26e2464c1cf68d8887f8d4a9"
+status = "translated"
+digest = "a4bacccd7990437fe2a9c8d1b8cc53908a07e67f5c8adec622167d7e143a1cb7"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_push"
+kappa = "37aa1cad89ce3678cf06668c989541e112a747a90307ba1aa528e9500ecaa217"
+at = "K=u32, V=u32"
+embedded = "c50daa8fceadb1f87f5a27bca74fc4b682af889207ec612f0aa37b6f76422020"
+status = "translated"
+digest = "bc3243b71d0345fe667cef35e2b317fd220bda12d83678c42275e7285e73b434"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_remove"
+kappa = "f78410830898f7c67db9f7ee7e6a02215f77a7f51d5ca12c1e8b04e92c3d5f34"
+at = "K=u32, V=u32"
+embedded = "cc3d4d36e4ed51a743adf1e897501aceccd19bf6105eed5a1710ded2185c866d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::remove"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_reserve"
+kappa = "4ee34e5e48e7a65c0c07b71dfe4014a8449845f01bee9a95c8fe67f1e2d56b08"
+at = "K=u32, V=u32"
+embedded = "72b00b3462032f63315b1745aea40ddb5f629b545530cb447aec8269f546c8f7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::reserve"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_retain"
+kappa = "923a392ab160f8fb61447ac88b213cdf73ca34eae8aa046fb73208cb8076014a"
+at = "F=u32, K=u32, V=u32"
+embedded = "0452a2210e4bb432387b2c1941c1bbaa65a5bfbf4be01850a0f40df65ad0abd0"
+status = "residue"
+cause = "mir::AggregateKind::Closure: vec_impl::<impl at src/store/vec_impl.rs:101:1: 101:51>::lm_retain::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_sort_from_iter"
+kappa = "7051ebffc9c1237d989ae2eafbef02a34e604fe811f3a94232423de7ca3be196"
+at = "I=u32, K=u32, V=u32"
+embedded = "25814199a2f80759d5ab7a71d6faa9b5ce9b01a9423bc1b8262f63884d1ad2ff"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+
+[[fn]]
+path = "litemap::vec_impl::Vec::lm_with_capacity"
+kappa = "62f30ce4f3ead451a4b0227f9b02e3055b1b2c7968303554417c4b32a17d06d5"
+at = "K=u32, V=u32"
+embedded = "cea164d6eece61a1a9dee4ce941891405cb18ca33aff7f00dce577b83834ea65"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+
+[[fn]]
+path = "litemap::vec_impl::map_f"
+kappa = "ceb568628df2a44d2a57b9a402ae8ef26a3e200c6f2ae802164e247fd616fe5e"
+at = "K=u32, V=u32"
+embedded = "ae2aafb0fba404feb3243dd345a8ddfad59d9ba8aa352d05241fda1952ba611c"
+status = "translated"
+digest = "fda0b9da6dcfff81ce271ba801051df30c421d7c9d65e13dc7c9f94793988b2c"
+

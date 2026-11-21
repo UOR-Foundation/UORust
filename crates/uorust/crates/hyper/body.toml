@@ -1,0 +1,70 @@
+[[fn]]
+path = "hyper::_assert_send"
+kappa = "1decead2f3b10f657e17c56b1b37a6e4ba65c451d159a415c897cd3f48380081"
+embedded = "2db66bff4e55336c3c6622f2468ab13b9a5c30f5999b8d11b0b55035c7a72619"
+status = "translated"
+digest = "1c80471022f863438b260ba5a1204650a352b562fb9339c7cfde1c2f949212bc"
+
+[[fn]]
+path = "hyper::_assert_send_sync"
+kappa = "607ac36c07846dd27dd58c5e31b9d3c49e6f4cba358acff747690187acef6069"
+embedded = "d2f2a0a858a03575b5dc479afe5033002e1725d6e6f4cd837d74c8ce972ee4b0"
+status = "translated"
+digest = "41bd088badd4ef51115b146eea3c6b83e53e96d1f0031a93c87a9109b74bf882"
+
+[[fn]]
+path = "hyper::_assert_sync"
+kappa = "bdd2f73651da66151f723cefe6cca5bd2bcadc75b3460f8f4c5fa7db6ecf9f3b"
+embedded = "386064294e511b1f103b90a53b57f75f7e16aafdb2f4792e2bb26f69b6a9a45a"
+status = "translated"
+digest = "3c4fe12e14e25981a49a7a236853d50bb47f3361676a4cb322b8ae9edb0b3339"
+
+[[fn]]
+path = "hyper::incoming::<impl at src/body/incoming.rs:271:1: 271:29>::fmt::<impl at src/body/incoming.rs:282:18: 282:23>::fmt"
+kappa = "222e654239c475c963b0c8b1bcf6c88f4d65be3512f1ac7832d2488004fde118"
+embedded = "0b6012a5608d81a13093c47d31f8990fc3bc18c1af2db71e2d0600639fafcbcf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "hyper::incoming::Incoming::empty"
+kappa = "2c6c98533492b5939b3a73b1d29842377ebace61993e5e76be8ce113be21b97d"
+embedded = "d05c2e6cc40291179089a40d6fa66330b67f920807af5d8e1eaa3f3e46207fee"
+status = "residue"
+cause = "mir::Ty: body::incoming::Incoming"
+
+[[fn]]
+path = "hyper::incoming::Incoming::fmt"
+kappa = "0896cfcbfd240921d59da77d2ffdf3de0ae80cba77f9e9ef65ffed92345c6707"
+embedded = "e69e8b485cd864a3e061afb1f5b4a7d95e73e3cba52783af07dd14b0c8544b12"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "hyper::incoming::Incoming::is_end_stream"
+kappa = "6a1b779b0ddad5f58a165127e6a2ee837f305033dbd433e4738907a4f48ffc9b"
+embedded = "4785753af5dfe672c603f651b2c0a865a75b7497bca7c5e3cb7e0902390476e0"
+status = "residue"
+cause = "mir::Ty: incoming::Incoming"
+
+[[fn]]
+path = "hyper::incoming::Incoming::new"
+kappa = "6c6338c4afa7690a6a783de7781b4c04ad614900ace57f1a9c8c68a82fb4a620"
+embedded = "ad2b2f9f3eaacf33f9cd362110564e1a02e8dae08fe4cf68ed25727571bdfcc3"
+status = "residue"
+cause = "mir::Ty: body::incoming::Incoming"
+
+[[fn]]
+path = "hyper::incoming::Incoming::poll_frame"
+kappa = "056b5195e36a1991f46cfe036ddb3adc94973e7b87a18b0a894cd1940ef36408"
+embedded = "bf22ae3f08b12728ad0e7dda1ff8a664b7eb0f13524ec88fcf9cf523d92d44fc"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "hyper::incoming::Incoming::size_hint"
+kappa = "00332258a593b22ff7bf94ca820af3ba9738c86c3a3087c3e946fd5427203098"
+embedded = "d2ed883c6b5a8fd505baa0172826207cb21fda18e0cc64cd75271e0a9dca4a6a"
+status = "residue"
+cause = "mir::Ty: http_body::SizeHint"
+

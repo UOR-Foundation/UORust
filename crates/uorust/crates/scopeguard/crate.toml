@@ -1,0 +1,114 @@
+[[fn]]
+path = "scopeguard::<impl at src/lib.rs:212:10: 212:15>::fmt"
+kappa = "1a645517a6fd22b26f2b3c67c8ec8bbbf9eedd83756075c61e6c13004d8481dd"
+embedded = "91149fae43a394cd05a8eff178dd33ffb1bec5217bb72f5789260c26ff5c8d1d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "scopeguard::<impl at src/lib.rs:219:10: 219:15>::fmt"
+kappa = "583c762fc05aa4c4776e07e35165533324039957a9e234cb3535232b981281cb"
+embedded = "05812a3189963bfb2f4978352e0bbdb0261e9e522ab18d5b5305b6138424506e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "scopeguard::<impl at src/lib.rs:226:10: 226:15>::fmt"
+kappa = "7786dcd642c9fd1e9738db3b79037f42b77ec04b5a27e02b8f83ef28a31a9a6d"
+embedded = "5f4b440d6620e325feeea3db21835aaf7e2a1a9fc03e485e12cb2a1282783344"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "scopeguard::Always::should_run"
+kappa = "c9a7ce23fb67f15b2ba065fd5c8c170a22d3ac191af3fd40366053c5995f0276"
+embedded = "677d9716e1b6664c83f98b87d2cd4cb0f110946bea25ad520e053fba3f135504"
+status = "translated"
+digest = "ff7ca0860a09adc9a38058e4bf4d4f2a8c45cf31bfe2b4d61a38678b8b4466bd"
+
+[[fn]]
+path = "scopeguard::OnSuccess::should_run"
+kappa = "ad89db07021875f73aa22f5b16f6946d81c95b4842cfcb0d2cf4d9d500617b89"
+embedded = "545490f0095c594f3a48bc817abf04a16d447cb7a729ad4324454a433a5218e9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: panicking"
+
+[[fn]]
+path = "scopeguard::OnUnwind::should_run"
+kappa = "2c3fc03791eed57379f5b66de8249ac8019f9820a572412b9a0ecc191fc095f6"
+embedded = "49ae801c3f5fb11b1d569edbe2a846535c23962dbcf5b40ef245792b3315e921"
+status = "residue"
+cause = "mir::TerminatorKind::Call: panicking"
+
+[[fn]]
+path = "scopeguard::ScopeGuard::deref"
+kappa = "62dc0c76519554d9f8eb443a75a0d6e1ccac31df883726eb1a70168ed032e9e0"
+at = "T=u32"
+embedded = "03e0d46855191142736f5eda4d04dc76d89aaafdf8acc317b1b85e3e943c503d"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "scopeguard::ScopeGuard::deref_mut"
+kappa = "6a45dbb9ca33337b69235922db51722bf63c103834ac0d57c88288ec026afc3f"
+at = "T=u32"
+embedded = "6e69ceb544b55972aa9879cf6282e781f826d61e705cde825ef97f6465ac6473"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "scopeguard::ScopeGuard::drop"
+kappa = "9d226492e5ebbc16b49223337473d20d95ad4fc6587c57fc535830df8a4eb59b"
+at = "F=u32, T=u32"
+embedded = "1c362d1109bb54bba6025f22bc163e8e2480e5c619c9450d3b64c8ddd9d21420"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "scopeguard::ScopeGuard::fmt"
+kappa = "ffd9efdccaa69708e5e4e1d6b8ab1d26d627c34fe810a5e7869e2282eebd6df5"
+at = "T=u32"
+embedded = "55e7651967a0d45dd87c5b9359edc4160d85fa5f3659f93ae1c68d054f1b485e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "scopeguard::ScopeGuard::into_inner"
+kappa = "fc9e89e146a0b8ea1321b14f275fc4bdda3135a64876f9cde2a8228ae1a4cce3"
+at = "F=u32, S=u32, T=u32"
+embedded = "71505b59398b5a5bf3e85ce914a1c984e6ec9253088cf25b27da5c9bc59ee9dd"
+status = "residue"
+cause = "mir::Ty: ScopeGuard<u32, u32, u32>"
+
+[[fn]]
+path = "scopeguard::ScopeGuard::with_strategy"
+kappa = "5fb0d6a20eef14aa48f2b377ce261cd09af630a2445bdeb352980a673fb1bba5"
+at = "F=u32, S=u32, T=u32"
+embedded = "72e08250415ef9097d9f395cc7dc9fe83089e89e7c20410bfcbbb33b0f7748cc"
+status = "residue"
+cause = "mir::Ty: ScopeGuard<u32, u32, u32>"
+
+[[fn]]
+path = "scopeguard::guard"
+kappa = "2f4d0d3ce9b2aae0cfc9da7922bf0b51bc1a0246d68cf054bcbc2b5c649e276a"
+at = "F=u32, T=u32"
+embedded = "436ced2150f5a57e3060aa7bd1250d71026d13609446cfccabcfd31346403915"
+status = "residue"
+cause = "mir::Ty: ScopeGuard<u32, u32>"
+
+[[fn]]
+path = "scopeguard::guard_on_success"
+kappa = "4f236a23b47e448f18fc124101d26837f4fd965a34e81491ef0897ccd4a8f2e4"
+at = "F=u32, OnSuccess=u32, T=u32"
+embedded = "d6caec3bfe1bfb3dea506d3be425d1fb7a0cc9b7dcd6850a859c58514491f6d9"
+status = "residue"
+cause = "mir::Ty: ScopeGuard<u32, u32, u32>"
+
+[[fn]]
+path = "scopeguard::guard_on_unwind"
+kappa = "cd6016ce63e8bfb71ed59a284c24925355bc96ff40a5699d16863349b5cfead1"
+at = "F=u32, OnUnwind=u32, T=u32"
+embedded = "499ad3f89ae160c89fd4c08950f50b71e6e8f6ee56a628198ad46c923793cac5"
+status = "residue"
+cause = "mir::Ty: ScopeGuard<u32, u32, u32>"
+

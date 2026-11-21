@@ -1,0 +1,310 @@
+# The csv register (written by `uorust crate csv@1.4.0`; do not edit): every body of
+# csv's MIR at csv 1.4.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 473
+translated = 4
+residue = 469
+
+[module.byte_record]
+bodies = 73
+translated = 0
+residue = 73
+
+[module.crate]
+bodies = 15
+translated = 3
+residue = 12
+
+[module.debug]
+bodies = 3
+translated = 1
+residue = 2
+
+[module.deserializer]
+bodies = 90
+translated = 0
+residue = 90
+
+[module.error]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.reader]
+bodies = 78
+translated = 0
+residue = 78
+
+[module.serializer]
+bodies = 99
+translated = 0
+residue = 99
+
+[module.string_record]
+bodies = 41
+translated = 0
+residue = 41
+
+[module.writer]
+bodies = 40
+translated = 0
+residue = 40
+
+[embedding]
+bodies = 473
+embedded = 473
+evaluable = 473
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 107
+
+[[cause]]
+cause = "mir::Ty: deserializer::DeserializeError"
+bodies = 58
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: reader::Reader<u32>"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: ByteRecord"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: StringRecord"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: byte_record::ByteRecord"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: reader::ReaderBuilder"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: string_record::StringRecord"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: writer::WriterBuilder"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: byte_record::Position"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: serializer::SeHeader<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: error::Utf8Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Bounds"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: serializer::SeRecord<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: writer::Writer<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Position"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ByteRecordIter<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DeserializeError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StringRecordIter<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::FromUtf8Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::num::ParseIntError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: writer::Buffer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DeserializeErrorKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: byte_record::Bounds"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: byte_record::ByteRecordIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: string_record::StringRecordIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::ProjectionElem::Subslice"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ByteRecordInner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DeByteRecord<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DeRecordWrap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DeStringRecord<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReaderEofState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: deserializer::DeserializeErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::ErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::IntoInnerError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::ByteRecordsIntoIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::ByteRecordsIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::DeserializeRecordsIntoIter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::DeserializeRecordsIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::StringRecordsIntoIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::StringRecordsIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: Trim::should_trim_fields::promoted[1]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: Trim::should_trim_headers::promoted[1]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::option::Option as Deserialize>::deserialize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: byte_record::trim_ascii_end: csv's MIR stops at mir::ProjectionElem::Subslice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: byte_record::ByteRecordInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: csv_core::QuoteStyle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: csv_core::Terminator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: deserializer::DeRecordWrap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: reader::ReaderEofState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1

@@ -1,0 +1,108 @@
+[[fn]]
+path = "bstr::BufReadExt::byte_lines"
+kappa = "518afd3ee1f2905f9aa6504c9d56f2bd921d4dd2f86855982dd89666d85e5f8b"
+at = "Self=u32"
+embedded = "992eb7e159a4fce7a9038c1f10cff30824dfc5310167275b9395744322678085"
+status = "residue"
+cause = "mir::Ty: io::ByteLines<u32>"
+
+[[fn]]
+path = "bstr::BufReadExt::byte_records"
+kappa = "fc9687c06d08e010f14f4ca7a281da35f3622ac66862e651ccf98900a9b170a0"
+at = "Self=u32"
+embedded = "f4a168fa203be5944badf892df04a9ffe15e7e713907a5bbce9bec9b5468cee8"
+status = "residue"
+cause = "mir::Ty: io::ByteRecords<u32>"
+
+[[fn]]
+path = "bstr::BufReadExt::for_byte_line"
+kappa = "6c3cde4c0d69f9bb5c86ee89b73cbadf6d1d592cd116a5a739db9988eda3b944"
+at = "F=u32, Self=u32"
+embedded = "73e1d2835a14a105b27cb7970d2c3056c49675a1c10e2fa82812841724fdda7e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bstr::BufReadExt::for_byte_line_with_terminator"
+kappa = "0b1a1f674e574d60ed9dacd03f4d88db7b36bcb3a5f7c9f1c6a01691c0fd2f0e"
+at = "F=u32, Self=u32"
+embedded = "3c0c45f94f49b3cc5ab5a1a935223c66fb53bfb19d9554244295a9e613f18343"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bstr::BufReadExt::for_byte_record"
+kappa = "1eebc7bd2e3d309455c90d585c040d35351bafcd738e02ed4be4affb90c2a396"
+at = "F=u32, Self=u32"
+embedded = "eec4c19b568b71c92b5ab90b0e651a7e49647cfe073f4466ceaf0b2cf1fb13d2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bstr::BufReadExt::for_byte_record_with_terminator"
+kappa = "ac9419bea17c1a436fda6636b1be5beadd7a6db66d655d7f7b98941cb79c459b"
+at = "F=u32, Self=u32"
+embedded = "5d631cc552649726e29cb089a0107e0c19433681b389051f382bb599bbe5e1e4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bstr::io::<impl at src/io.rs:357:10: 357:15>::fmt"
+kappa = "a58e7670b9b7b3c85aed4759de465cc9836fe8c5447158328263566a422cc674"
+at = "B=u32"
+embedded = "bbd3728f4d05e3ec05e048f8a0bfa14c463ea57427a6f510f3e78275a1c5ad39"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::io::<impl at src/io.rs:374:10: 374:15>::fmt"
+kappa = "454b6788c9f880cdade03a659abee1810f386f9d82e14e40490aa45525feb08e"
+at = "B=u32"
+embedded = "ae827aac02733138c60dcb347c09a59c2d571e12b6cb523d30f50db2adb1ec63"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::io::ByteLines::next"
+kappa = "1203ac541c52b98933cdab5f7e4006f03b75118917e6dcff2707c45c8d6bcc18"
+at = "B=u32"
+embedded = "c10c909cbd808916b8670f844335c1f4ae627981751b2c3a75f10adc9ed22e22"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bstr::io::ByteRecords::next"
+kappa = "05d2930193671bde57650a91c90be16f934091ac0e14bcaa066c28c3a997f89b"
+at = "B=u32"
+embedded = "605ad72c08b86b8a165f71301c95f85503e82ce881bf913393985960e5dc358c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bstr::trim_line"
+kappa = "590059bd047c57058fecace1b5ce97aa11a1c08b73371d59d302886f15b31e2e"
+embedded = "c8a5dd06699b2e7ff4f5a34e2dc48576a3f093994dba4acc38856a3f43476aab"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Option as PartialEq>::eq"
+
+[[fn]]
+path = "bstr::trim_line_slice"
+kappa = "84ee900e0ea4f48afa0c142f9fa22b910630f18c5ed8354c7c61bb47e83823a6"
+embedded = "156829177931f125786bb7b84fa7a38ae018175f5ef7822720e587284e812958"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Option as PartialEq>::eq"
+
+[[fn]]
+path = "bstr::trim_record"
+kappa = "e4e7bd7731b51e0242ea25eeec541e974441ab15fe0ee3d95171dd1249501e3b"
+embedded = "59be87294abfe08e89cbf8e2c838a8ef8d5a46e901b2674a62ba5ee0f4da0ea2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Option as PartialEq>::eq"
+
+[[fn]]
+path = "bstr::trim_record_slice"
+kappa = "b13778b6e3c40ededbec54e141162039c2adda88a4df0e35659f8784a7d126da"
+embedded = "a7e7b09d955cfbaf7f129cb78999b5b6b4452d151c1bb4971a4bb94a3567c62a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Option as PartialEq>::eq"
+

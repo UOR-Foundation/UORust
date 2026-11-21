@@ -1,0 +1,96 @@
+[[fn]]
+path = "prost::message::Box::clear"
+kappa = "cae6cb5701adf39eafc65dbc342d6ac0c6659d2661aa130e14a148ccc38f4bf4"
+at = "M=u32"
+embedded = "6260e7ce88a380659cd08e33342ee7eaca4294e77d79ec4bab3f89b8dada928e"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "prost::message::Box::encode_raw"
+kappa = "263c7bad6eab3a43a2f681d1ea0c52e533d2ea1509ec513b509642f289f860c9"
+at = "M=u32"
+embedded = "d2fa43cfdb9da4c7459f5d8d11de04ba6014b5b3e27119bf1922aa7c31b366ce"
+status = "residue"
+cause = "mir::Ty: impl BufMut"
+
+[[fn]]
+path = "prost::message::Box::encoded_len"
+kappa = "59f6b9710b99e286468b1671fbea4ccf51bc46e2ba88640c676a26c0f61f36e2"
+at = "M=u32"
+embedded = "c67a912bc2f42aed8ddb3052ac9fb63661ee95bcec06c82ff5cfcf745ebcc17a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: types::<impl at src/types.rs:65:1: 65:21>::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::uint32::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+
+[[fn]]
+path = "prost::message::Box::merge_field"
+kappa = "20fdaf2ef5602efd8e16b496c2eb7f4e7b13824fd91958072dba9a664f122d0b"
+at = "M=u32"
+embedded = "a1a3ea801de2647d23b5ae954cd972f20770f4c4c00f17d380a89cb003c89171"
+status = "residue"
+cause = "mir::Ty: error::DecodeError"
+
+[[fn]]
+path = "prost::message::Message::decode"
+kappa = "689708c7e4d81a6c403053111ffc2796d66846b37b9425e224456c0709706f4c"
+at = "Self=u32"
+embedded = "5177f7a0b8eee932a1e6cae5679ccad62724f9109fbcf2a87af4a2f3db91096f"
+status = "residue"
+cause = "mir::Ty: error::DecodeError"
+
+[[fn]]
+path = "prost::message::Message::decode_length_delimited"
+kappa = "f53dd2c0d049ae71c852c8b8f22dfe7f874576645cc0f24715bfc46c5623e7c8"
+at = "Self=u32"
+embedded = "a1ee8068d40bd31d73ef23ccb779c48b3f8c5eed599016096dc51ba8393257b6"
+status = "residue"
+cause = "mir::Ty: error::DecodeError"
+
+[[fn]]
+path = "prost::message::Message::encode"
+kappa = "18fd7a4cbf17765c1d400c7928a5151fc9cf91fe2a88c4f6b1d8e999dc24f3b5"
+at = "Self=u32"
+embedded = "80aea81ec8aaffd0c97649e21cd203be6071f705d5b02b13eb043668c036731c"
+status = "residue"
+cause = "mir::Ty: error::EncodeError"
+
+[[fn]]
+path = "prost::message::Message::encode_length_delimited"
+kappa = "00d7ffc52e4e037ac2a04349b5736602bbc8da14c5d9f6bd81bb28d5832f0b14"
+at = "Self=u32"
+embedded = "927350897766e215700275c27d332242fa244e160bb2e992ec5d2436faf22bb9"
+status = "residue"
+cause = "mir::Ty: error::EncodeError"
+
+[[fn]]
+path = "prost::message::Message::encode_length_delimited_to_vec"
+kappa = "9337bf949de9d581b51037c69f2caa56e67daeee48d426e1e4cab75f17c8403d"
+at = "Self=u32"
+embedded = "96df5016dd4c0b58d7bfc21db186f30470166464a87f9e47e2d556e8e9186672"
+status = "residue"
+cause = "mir::TerminatorKind::Call: types::<impl at src/types.rs:65:1: 65:21>::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::uint32::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+
+[[fn]]
+path = "prost::message::Message::encode_to_vec"
+kappa = "aba46e17f6de2e0f5ee96afd037f39f5483e6f147cadf7591389d9f8151f628a"
+at = "Self=u32"
+embedded = "cec9df8934c5400f6fb40d7bb83f956373d913896cd2b9e2ab87d27177443941"
+status = "residue"
+cause = "mir::TerminatorKind::Call: types::<impl at src/types.rs:65:1: 65:21>::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::uint32::encoded_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::key_len: prost's MIR stops at mir::TerminatorKind::Call: encoding::varint::encoded_len_varint: prost's MIR stops at type outside the lift: std::num::NonZero<u64>"
+
+[[fn]]
+path = "prost::message::Message::merge"
+kappa = "5f996327a43d4266efc5d9ea273500c1d974d95b79f1368cf6a0d4697b9110e9"
+at = "Self=u32"
+embedded = "ec595a8563e56f3ed930d072fd76cc2d342230d0490900213020ff6dadb5d00d"
+status = "residue"
+cause = "mir::Ty: error::DecodeError"
+
+[[fn]]
+path = "prost::message::Message::merge_length_delimited"
+kappa = "010f41268d26802f98b9d2a98cd180f68683dca23258774b8144045bdb376d03"
+at = "Self=u32"
+embedded = "2b63bc2e4abf382616be59cc4f48c8fcde51fece902d9b96d246d280321377c9"
+status = "residue"
+cause = "mir::Ty: error::DecodeError"
+

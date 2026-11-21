@@ -1,0 +1,449 @@
+# The tracing-core register (written by `uorust crate tracing-core@0.1.36`; do not edit): every body of
+# tracing-core's MIR at tracing-core 0.1.36, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 404
+translated = 3
+residue = 401
+
+[module.callsite]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.dispatcher]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.event]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.field]
+bodies = 103
+translated = 0
+residue = 103
+
+[module.metadata]
+bodies = 102
+translated = 3
+residue = 99
+
+[module.parent]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.span]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.subscriber]
+bodies = 74
+translated = 0
+residue = 74
+
+[embedding]
+bodies = 404
+embedded = 404
+evaluable = 404
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: field::Field"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: span::Id"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: Level"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: metadata::Metadata<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: LevelFilter"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: metadata::LevelFilter"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Dispatch"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: subscriber::Interest"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Id"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: metadata::Kind"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: metadata::Level"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: dispatcher::Dispatch"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: span::Current"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: NoSubscriber"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Attributes<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Event<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: callsite::Identifier"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Callsites"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FieldSet"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: InterestKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Record<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ValueSet<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: field::FieldSet"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Interest"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LevelInner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TypeId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn subscriber::Subscriber + core::marker::Send + core::marker::Sync"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: field::Empty"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: field::Iter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: field::ValueSet<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: span::Attributes<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: subscriber::NoSubscriber"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: metadata::LevelInner::Error::{constant#0}"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc177: &Atomic<usize>}"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Identifier"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: callsite::dispatchers::Rebuilder<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dispatcher::DefaultGuard"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dispatcher::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dispatcher::WeakDispatch"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn Callsite"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn Subscriber"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn Subscriber + Send"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn Subscriber + Send + Sync"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn Subscriber + Sync"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::Event<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: field::DebugValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: field::DisplayValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: metadata::LevelInner::Debug::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: metadata::LevelInner::Info::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: metadata::LevelInner::Trace::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: metadata::LevelInner::Warn::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc171: &Atomic<bool>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc87: &Callsites}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugMap<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugStruct<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DefaultCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DefaultGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DisplayValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Entered<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NullCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Rebuilder<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: callsite::DefaultCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: callsite::dispatchers::Dispatchers"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::any::TypeId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dispatcher::Entered<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dispatcher::Kind<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dispatcher::Registrar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dispatcher::SetGlobalDefaultError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error + Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error + Send + Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error + Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Into<Option<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::LevelInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::ParseLevelFilterError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: span::Record<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: subscriber::InterestKind"
+bodies = 1

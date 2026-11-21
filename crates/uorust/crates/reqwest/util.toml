@@ -1,0 +1,71 @@
+[[fn]]
+path = "reqwest::COUNTER"
+kappa = "723e7eef225763e8d2f9aa67b7e8fed43fea1ec883f67ce7c69b8af287137d1e"
+embedded = "3d8484e2ca53e68381938f7712fbc070ef1f3cb22c6c449a6abe606de829bdcb"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<u64>"
+
+[[fn]]
+path = "reqwest::COUNTER::__rust_std_internal_init_fn"
+kappa = "67e9510e97665c0c6a3d1029f65e91d6d5dc055357ba8d656490e0866675b1c8"
+embedded = "65792221382e85b5bd874c95994a85766ca6c82853b68c3f988bcf3857c1434d"
+status = "residue"
+cause = "mir::Ty: std::cell::Cell<u64>"
+
+[[fn]]
+path = "reqwest::KEY"
+kappa = "8d6615cacd3eb8b3afb40cd6c6ff12b502c7fadaa49d8ac82b049297b521d682"
+embedded = "1d15459a6cc8825ad510ce5d4a3df159d4119566683a3d53b2909bf516910e09"
+status = "residue"
+cause = "mir::Ty: std::hash::RandomState"
+
+[[fn]]
+path = "reqwest::KEY::__rust_std_internal_init_fn"
+kappa = "79f600b40ca46924882282c98950c9bf1d00c92968a433a362fe0bc2d9096fd6"
+embedded = "58da7f91b49cdac9db584d87f1042e44edcb8db8ac838e9c6457fad24bb87b69"
+status = "residue"
+cause = "mir::Ty: std::hash::RandomState"
+
+[[fn]]
+path = "reqwest::basic_auth"
+kappa = "3f7ebcc5517d54221267d03bba8285a94910a640f5d1cb97d4c3af248d304e0d"
+at = "P=u32, U=u32"
+embedded = "e82c84d20f654a23e2dd9007e32725858a7c65664eb60e17a1a4e0898f56d6a8"
+status = "residue"
+cause = "mir::Ty: http::HeaderValue"
+
+[[fn]]
+path = "reqwest::fast_random"
+kappa = "69139baa7394432333c39dd24977f37890f20dac58e204ec87b416a21146dab0"
+embedded = "40b9a6de00dee26ac203233f11ee6dde2b33555faa0d16bdc2b9221612574d63"
+status = "residue"
+cause = "mir::Operand::Constant: util::fast_random::promoted[0]: type outside the lift: std::hash::RandomState"
+
+[[fn]]
+path = "reqwest::replace_headers"
+kappa = "f28cde33ac682c66cadc0680fb9b3785d08df6bf2c842cd62f510ebbc0ab6a6d"
+embedded = "f0bb22865fcb759e8ef1fa961462ab571615dd1754fb613a0b872df3620b1a38"
+status = "residue"
+cause = "mir::Ty: HeaderMap"
+
+[[fn]]
+path = "reqwest::util::Escape::fmt"
+kappa = "e120c826ecb9f637f247d80e3f6847fd222b64af8a837ac33f2f63654f501254"
+embedded = "4bbd3944761a76353fba78b2ffa378e04071b83e8a424f8207816800959aee5b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "reqwest::util::Escape::fmt#2"
+kappa = "1fbe79101d338e2018854a06767f38abf95c556ff916d5575d4a445f85ebc23b"
+embedded = "ff80a81470b517440905164201cc4a78efa4d87b760db8cbf26772dd7cd3ff72"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "reqwest::util::Escape::new"
+kappa = "ecc2cc618d064fa3aaff788abff3e993a98ea45fef18b554f43aa0f68fc80d79"
+embedded = "fd7e8310609d25206f2c154230da42ade715be3a939d985239e87ddff2bce5c5"
+status = "residue"
+cause = "mir::Ty: util::Escape<'_>"
+

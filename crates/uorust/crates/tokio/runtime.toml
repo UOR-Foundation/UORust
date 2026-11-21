@@ -1,0 +1,410 @@
+[[fn]]
+path = "tokio::CONTEXT"
+kappa = "c84cd09b20ee6ea0a5549314786a87f862425efdfa864bf5b718c71543ede651"
+embedded = "439335a85309b124fd19fb7f3f6936e94f3405daa821198927105a60d374f695"
+status = "residue"
+cause = "mir::Ty: runtime::context::Context"
+
+[[fn]]
+path = "tokio::CURRENT_PARKER"
+kappa = "c71246ca57cd5cce8a389382d00fa8bda6aa32ffe16048513f6f52df07a0d635"
+embedded = "fe8896e363b2fe11d8d8d2058426e55af90cfc88fbd4201ab5e1ae3fd167f651"
+status = "residue"
+cause = "mir::Ty: runtime::park::ParkThread"
+
+[[fn]]
+path = "tokio::__RUST_STD_INTERNAL_INIT"
+kappa = "fcf5b6dceb533e643ddcccaba5582fd22c9e4baf17c286548cce07538619b631"
+embedded = "dbb5400b2d728699603a5bda360ca92d9c8c90992e8863ba5d19768e32e7375f"
+status = "residue"
+cause = "mir::Ty: runtime::context::Context"
+
+[[fn]]
+path = "tokio::__rust_std_internal_init_fn"
+kappa = "e8095bf5efd090ce75fba0bafdabdd88261d1e62e30981eb68596a61dd9f5695"
+embedded = "9160101891aa212837622eb0743817e1d951e40626f1a982b6ae9a22960454a9"
+status = "residue"
+cause = "mir::Ty: runtime::park::ParkThread"
+
+[[fn]]
+path = "tokio::context::budget"
+kappa = "c528a3edc5d8f7d864b708fc89d24be67a31f4e4f466e846fc617e2f116d6eb6"
+at = "R=u32"
+embedded = "4b35765ee92d46eebe6d5730da589535f95b6f97f153150301a35d4413193947"
+status = "residue"
+cause = "mir::Ty: std::thread::AccessError"
+
+[[fn]]
+path = "tokio::create_clock"
+kappa = "d7d4e09601e35a449c0eae389b45b921d594d67809b96b1a6acd706e8699d4fd"
+embedded = "6623ea0a2644cf985a33824b70d5d425e75ae6a38292ce083812b1d6a16e8d47"
+status = "translated"
+digest = "c5c907f62b7a865831f7d37788ec7a8c5500b9bce5167e02f1ed29feffa64263"
+
+[[fn]]
+path = "tokio::create_io_stack"
+kappa = "6a609a748b4baa8ebc78d67387c6209562637ce7f3d76a3a36efdcdcaeb30bd9"
+embedded = "f5b8dd2990bf15b74bbd91cf0a4d5ae4f210d03fcfbcc09ea3a6f376bc350e49"
+status = "residue"
+cause = "mir::Ty: runtime::driver::IoStack"
+
+[[fn]]
+path = "tokio::create_time_driver"
+kappa = "8a5e360f3ec2d664f1ac8ffd5f933eb7b168ecc3487f8426da1c527da8f28368"
+embedded = "f4242888d50d5ad2d300eafd1c77bb32ab909f0ad88343b1c25b1ed224d2de39"
+status = "residue"
+cause = "mir::Ty: runtime::driver::IoStack"
+
+[[fn]]
+path = "tokio::driver::<impl at src/runtime/driver.rs:15:10: 15:15>::fmt"
+kappa = "87cbae06ee12334ae1385b12c1f36a4ed070dcfd7c72ecea02ccc0f3bb48a06e"
+embedded = "54c0041161a15574f0271e30bd3609cdd1479fc77c1dc8105facb8aabda9c050"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::driver::<impl at src/runtime/driver.rs:20:10: 20:15>::fmt"
+kappa = "0e9a241c5fc4e540ab5dec5eb8066af494ba8a1dbc83985c0a2ebc11cc2e9b2f"
+embedded = "33ce09f7adabcfcd4546424b175644ca37e934c53fe19d8ad665bf68a8b242cf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::driver::<impl at src/runtime/driver.rs:226:14: 226:19>::fmt"
+kappa = "8e24c2e2fe27e5b661b18737d7b4113bef893e71a103a8f951b14ca8b83f2964"
+embedded = "542ce7c3fc8e40a816d92188b23868936e313365532b70a65cfbd4719114f1c6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::driver::Driver::new"
+kappa = "1637f9cffa00e1605cb0fafa4a9540dcfd0d1c1b6f7cee237efd5181a286dc3e"
+embedded = "48484d569a3e6950b60b259ebcadee9291346d5109377cbd0a3f31d8e8104edb"
+status = "residue"
+cause = "mir::Ty: runtime::driver::Driver"
+
+[[fn]]
+path = "tokio::driver::Driver::park"
+kappa = "78514fe2cb0629bd14881c47d2da3d0730d94cbc3c0b3d98e45b56e0fa005eda"
+embedded = "9294d13676a0de1d34c9bade6b359c04ec565c541d312364a92afa7d1b3c2eb1"
+status = "residue"
+cause = "mir::Ty: Driver"
+
+[[fn]]
+path = "tokio::driver::Driver::park_timeout"
+kappa = "d3c9541acb7d6c9553d4c0683dae3659c771c71a53102a2ba1d958d324458b33"
+embedded = "adefdd729d4d82a7b62bd6fb3bcfd2958ef817cc0782cc40f5b2f24f9c81b30b"
+status = "residue"
+cause = "mir::Ty: Driver"
+
+[[fn]]
+path = "tokio::driver::Driver::shutdown"
+kappa = "769b4b0b571e08a1a1f399f0ea168c93b54823c6cb9b375b97168a04ab3260c1"
+embedded = "ec85a66c0008af02c46bdea3a852a64095750bc4285a6f44cf93a87e22abe434"
+status = "residue"
+cause = "mir::Ty: Driver"
+
+[[fn]]
+path = "tokio::driver::Handle::unpark"
+kappa = "98c0638a4ebc39305f97a318be809d917a77e133590105f249f5127a4a8a4817"
+embedded = "94a504ade1efff51e5412ebf215c98868be4a1a0c19546a69c00f65569905582"
+status = "residue"
+cause = "mir::Ty: driver::Handle"
+
+[[fn]]
+path = "tokio::driver::Handle::unpark_self"
+kappa = "8af3c5c831498319bf94de09c5b64dab4afa01d5b71f85a791b9209e028580c7"
+embedded = "d87cba2aa295fbf53ab51649837cdcbf4318659e0aa6fde42dfb7f91f4dfa97a"
+status = "residue"
+cause = "mir::Ty: driver::Handle"
+
+[[fn]]
+path = "tokio::driver::IoStack::is_enabled"
+kappa = "09df68b79b25585596550676d93bd4cb16a5a9a98c683410f1ce3e457aa0f8e4"
+embedded = "0da50522e425dd87beb6986d5ac9e706ee8b2a02061be00ac0796d10d1c4e3b5"
+status = "residue"
+cause = "mir::Ty: IoStack"
+
+[[fn]]
+path = "tokio::driver::IoStack::park"
+kappa = "8c6c2078c3527f896fcbad6bcff3ba3e64fdee25a47b862dfe3f1eb766839cbe"
+embedded = "3d2752250157816fd82b7910f3da95acd4955a565eb5c973b394697b84bb4ee1"
+status = "residue"
+cause = "mir::Ty: IoStack"
+
+[[fn]]
+path = "tokio::driver::IoStack::park_timeout"
+kappa = "68ddc3f4e3dc1c25f36f30b2c65f14a49aac9231438c044be553197d21068301"
+embedded = "9b31de2759a30c86a03505b0bb7157ec32d90ef0b385c324fe1d8a68f68afd56"
+status = "residue"
+cause = "mir::Ty: IoStack"
+
+[[fn]]
+path = "tokio::driver::IoStack::shutdown"
+kappa = "2afae1e6c1a777c7b2ef16416eea29491bb93492d3c201e225c15ef7aee814ef"
+embedded = "f5c2a1ee920a1ea7ff62a8e143d4b2a0a33894b6537ba2401c5efbded7327560"
+status = "residue"
+cause = "mir::Ty: IoStack"
+
+[[fn]]
+path = "tokio::drop_waker"
+kappa = "af4731c5fb1a759c118da1219478c4969ac443d37b974c988f51ff46dd2c0abb"
+embedded = "5eec87e320f9632f68813ee339e24e14ede2810c4374b7952482a6fc1e145619"
+status = "residue"
+cause = "mir::Ty: runtime::park::Inner"
+
+[[fn]]
+path = "tokio::park::<impl at src/runtime/park.rs:15:10: 15:15>::clone"
+kappa = "7be773e79900ad4b01a35cf935d9f5a60d05977f761b702c89b345b117c55bb4"
+embedded = "4840198bc5ed10e74580830b490d38c9b904551731258cf1af5d280c2e2109fe"
+status = "residue"
+cause = "mir::Ty: runtime::park::UnparkThread"
+
+[[fn]]
+path = "tokio::park::<impl at src/runtime/park.rs:15:17: 15:22>::fmt"
+kappa = "b49cd9cdceaaefcd2bdc167f04c6bcc5861ddc12cb8b60baed96ae61725052b1"
+embedded = "8231d2cbf690fa94fbc9beda7f8bb72ae4be641f94642bb3f227fa5befa64a8c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::park::<impl at src/runtime/park.rs:20:10: 20:15>::fmt"
+kappa = "4b62b0e791c4e17b93194dba8ecc781b4a21277bc923d0c2810261dc50cc8c0e"
+embedded = "280591677056f72cf78c0ecb6a34d37f26a6241fe96854ae7396ccea95b889ea"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::park::<impl at src/runtime/park.rs:311:10: 311:15>::fmt"
+kappa = "28af737e365a3aacace4feae48267f169e832f16711642fde9b7eaa313c42d7e"
+embedded = "71fa1f137e2deaba216dde674e9d436b344e452e03e3f9bdd423336b4af9cec9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::park::<impl at src/runtime/park.rs:9:10: 9:15>::fmt"
+kappa = "69938b8447e4ff830e2da20498e6aee5b68782cacc9044923cded14f0957cfd9"
+embedded = "7a2acd0a3a782aacc21b6fde4622952c88a971dbae92ef77f7101ec6aff09812"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::park::CachedParkThread::block_on"
+kappa = "e622a4550db6efd7912e18f79c9863e180c75d3a656b8530026535b704d8c3aa"
+at = "F=u32"
+embedded = "36851826943521f618ba96cba4e5ff8b12110569959435507ac5d7c054efbad7"
+status = "residue"
+cause = "mir::Ty: std::thread::AccessError"
+
+[[fn]]
+path = "tokio::park::CachedParkThread::new"
+kappa = "9dcd580be4d31dc68ad4408ae5914105efb66689e83e19b7241e30b2f246c0d6"
+embedded = "2c84bf339567c3d65c8d7d1107726563d5ae2a8a1735e3a6580f4e33a23df758"
+status = "residue"
+cause = "mir::Ty: runtime::park::CachedParkThread"
+
+[[fn]]
+path = "tokio::park::CachedParkThread::park"
+kappa = "6fa5c1bcfdb32d1e4e5973e2ab9cc880b37d24d6aae1657eb4b18847922c6026"
+embedded = "95211e12e931246b8c0885adff352e1fdb633c45358031dfb0d8579875505241"
+status = "residue"
+cause = "mir::Ty: CachedParkThread"
+
+[[fn]]
+path = "tokio::park::CachedParkThread::park_timeout"
+kappa = "ced333af0f60362878194e8c646ab8271f514381f8559b4a0febffce41917cd0"
+embedded = "5952706677f3d927bf3725a4bb953c0d8f32acd32e6e55f58632388c62f69a6f"
+status = "residue"
+cause = "mir::Ty: CachedParkThread"
+
+[[fn]]
+path = "tokio::park::CachedParkThread::unpark"
+kappa = "8a3f97688bfdb8615eda9756e660d2e5b9b26a8a0256ad6580e709f880215877"
+embedded = "1064c28a021e789a7c179e5b044ce825fc5ded2e38489c0b5e696327410b6d9b"
+status = "residue"
+cause = "mir::Ty: runtime::park::UnparkThread"
+
+[[fn]]
+path = "tokio::park::CachedParkThread::waker"
+kappa = "03d75706603e7a63c9bdeef39cb6802a3c5f412408abda20e34c5f39fc0bb2f2"
+embedded = "f8b40d58939a93a9acee171ae02948adb90d4dd1f073a84c2e8a1effce00f9ce"
+status = "residue"
+cause = "mir::Ty: std::task::Waker"
+
+[[fn]]
+path = "tokio::park::CachedParkThread::with_current"
+kappa = "8b229ae90b0da5ab311ded823fcdfb7fc5e197e133a8a534bceeb35e89d52d4f"
+at = "R=u32"
+embedded = "cbe07d69501428cb2bae2c9f7c4376af90ca68130f49e9f2dd75023cf8e81bd9"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: std::thread::AccessError"
+
+[[fn]]
+path = "tokio::park::Inner::from_raw"
+kappa = "dce68f97c4b0e64777a7b37138565d57cf21dccfcef01fc5500cf6e1aa20058b"
+embedded = "28ee54728c9c8259a83506e084fa62a7b740431ae49e6a81e330d987dc925574"
+status = "residue"
+cause = "mir::Ty: runtime::park::Inner"
+
+[[fn]]
+path = "tokio::park::Inner::into_raw"
+kappa = "5657e798d62e99220c147c43e9e6361560b5f63eaaee37c383766ea8a3f6f97a"
+embedded = "c8c76fe83501a2c7e9bdc7ba265c2e4f82d522acbf051991b8dafadc7c511967"
+status = "residue"
+cause = "mir::Ty: Inner"
+
+[[fn]]
+path = "tokio::park::Inner::park"
+kappa = "07b9d32cd4db6165a8d648abe7c8145a7c36beaf318c0ffdfa5ff1a365c2f723"
+embedded = "eab467078c8213cf15b06c467ed43a7b9037361febcf234652a4aa9b8d0f8123"
+status = "residue"
+cause = "mir::Ty: Inner"
+
+[[fn]]
+path = "tokio::park::Inner::park_timeout"
+kappa = "329e484a9727b84d5ce3a0a803b95810c7b71ff97934484c098a46ae108e0c58"
+embedded = "987128fc87af9d4b4c61a49b92059dcca36c7bb0bd6ba81e3cd0f4080f093dea"
+status = "residue"
+cause = "mir::Ty: Inner"
+
+[[fn]]
+path = "tokio::park::Inner::shutdown"
+kappa = "3bd4cef52e75df9f5dc8cfc1afddedc02c4d6c0cf35425c0ab0c5088a1d2371b"
+embedded = "a3dd9940e35df077dfcd1cae0b49abf2819cb73e2195752393c3394633be619e"
+status = "residue"
+cause = "mir::Ty: Inner"
+
+[[fn]]
+path = "tokio::park::Inner::unpark"
+kappa = "0ef6ee75756c26f81dfc098cf57b72d6fae9279e818928f07b19c82f20e3afa0"
+embedded = "500363303658dd55883458e8da782be4e3983390170eda65c15ee6198350a5d8"
+status = "residue"
+cause = "mir::Ty: Inner"
+
+[[fn]]
+path = "tokio::park::ParkThread::default"
+kappa = "d3174acae75760c29bad6f8e05023bfaaf6dea8b82759c8fef1a092e52d43ab3"
+embedded = "2baff3c3ee661d2e21f8b651e410e4d5bb94effc00c1d3b9569905eaeb569b29"
+status = "residue"
+cause = "mir::Ty: runtime::park::ParkThread"
+
+[[fn]]
+path = "tokio::park::ParkThread::new"
+kappa = "7751fba660167bf1db52df3d20ec2cd26d0fbbcebd6f3260bff5bb0289ea866f"
+embedded = "e1b85848b42b5706beb9b9252eb912941dead05505a32129b9c03c02caa20b7e"
+status = "residue"
+cause = "mir::Ty: runtime::park::ParkThread"
+
+[[fn]]
+path = "tokio::park::ParkThread::park"
+kappa = "bb2c01191b55d19ce5bf9e51b6462085c9157c7839240a608a89de2da7e5200e"
+embedded = "3e79c56c7844ef32b822f461df0ed86a037f674f152920093c220fa52392912b"
+status = "residue"
+cause = "mir::Ty: ParkThread"
+
+[[fn]]
+path = "tokio::park::ParkThread::park_timeout"
+kappa = "a7eb56812ea3d5bbf936eb4aeae025ad322f04e5024459bb5c6ef1b670c3272c"
+embedded = "a25d770850e9c16bc6567475d356c7f3845618dbc34806e6573ac1d8a0941dfa"
+status = "residue"
+cause = "mir::Ty: ParkThread"
+
+[[fn]]
+path = "tokio::park::ParkThread::shutdown"
+kappa = "d3ee51fa62e6d16e4e4a0facd41133b014e39766c65c20e60db42ba2bcccb813"
+embedded = "57f3413ee96b6ca131fae69d2fb38dba44ac499580836e81d21b25648d6f0492"
+status = "residue"
+cause = "mir::Ty: ParkThread"
+
+[[fn]]
+path = "tokio::park::ParkThread::unpark"
+kappa = "30db9411e46a55abe2abce7f569ca6c2d61c52c9f21ad0b8ab923f9d7884f395"
+embedded = "6a8f4c68f687333fd8e4955f558ab84aea59ec5f4b98596ab7fbc5ab39a20ad2"
+status = "residue"
+cause = "mir::Ty: runtime::park::UnparkThread"
+
+[[fn]]
+path = "tokio::park::UnparkThread::into_waker"
+kappa = "a8bb707da197650e7c283bca9834a83d3ca58b609b78d5a048c1ca386ba296c0"
+embedded = "ca279d03642636af00c60775e06197e177d4d1598e40d3d21f8fb6adbdaa60bb"
+status = "residue"
+cause = "mir::Ty: std::task::Waker"
+
+[[fn]]
+path = "tokio::park::UnparkThread::unpark"
+kappa = "aefd91737a850b7f038a51d1b955134d7ee668cfd00c5cd291329f9b13921729"
+embedded = "157d36ae5ed9fb04ff51ee7fa869d86b7ba7ced20ade910b681d9446809e4214"
+status = "residue"
+cause = "mir::Ty: UnparkThread"
+
+[[fn]]
+path = "tokio::park::clone"
+kappa = "83cd427fc9cb2dc5f277d51928597cd19ffcf385b052c52a25d79dff2d9ec412"
+embedded = "fab40d759f2824ea3562fd2324c56bc2cbc9bdf796e69c7b172b1d67d1cbfda7"
+status = "residue"
+cause = "mir::Ty: std::task::RawWaker"
+
+[[fn]]
+path = "tokio::park::wake"
+kappa = "0557a9e77259d7bc10c6cfe70e9b5ed457eaa6f8eef7ac12ce8b093b427d447a"
+embedded = "fb6e9ac29ce389971cdc7a841cfa7c9b953955f7cf3fbff9b78773a586eb4540"
+status = "residue"
+cause = "mir::Ty: runtime::park::Inner"
+
+[[fn]]
+path = "tokio::park::wake_by_ref"
+kappa = "d9298c7310107c1745af209385ddaee45c54207aefbda5d497a83069bc53fe04"
+embedded = "094d41800276e90b9942cd646f94f1c907625b35a3740935ede56cefe9b58ec3"
+status = "residue"
+cause = "mir::Ty: runtime::park::Inner"
+
+[[fn]]
+path = "tokio::runtime::<impl at src/runtime/mod.rs:439:10: 439:15>::fmt"
+kappa = "90e6f51a6775a195b351183054416c03cd39ac95a0372ce526548306e4857519"
+embedded = "664dd602aebf79c05a8432075ca5f6bb5d2409001e12495c1372d823eaf5fd9a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::runtime::<impl at src/runtime/mod.rs:439:23: 439:28>::clone"
+kappa = "a7e860801997d0d5016d7c7c3158a31544b61463a4b9aa849ab7f3aa42b148a4"
+embedded = "76f1067d275399a2d4684923c560aa5b1a1eedd0d5f15ec93b41ca05c301efe6"
+status = "residue"
+cause = "mir::Ty: runtime::TimerFlavor"
+
+[[fn]]
+path = "tokio::runtime::<impl at src/runtime/mod.rs:439:30: 439:39>::eq"
+kappa = "ac1638a5e551468f1805e8b5c2280efce790ff54aecd4cba0ca12b6c906374f8"
+embedded = "30e5d606812f6defaf3b66d3df20e45b44c118cb6ab7a6d105012b5e5ea12a18"
+status = "residue"
+cause = "mir::Ty: TimerFlavor"
+
+[[fn]]
+path = "tokio::scheduler::<impl at src/runtime/scheduler/mod.rs:28:10: 28:15>::fmt"
+kappa = "032bc663e0e178f121b6bf2c3b9e75ffb8bf7f7d6f4cf4b799504d0d61be0cf4"
+embedded = "26b44f3b1381d877cc90b58332d4aab17a45a3d7883f911a149a5f0659468e16"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::scheduler::<impl at src/runtime/scheduler/mod.rs:28:17: 28:22>::clone"
+kappa = "4bec73b9edbd55c13b074895725ab56f1bee047c2d9c0f4ee9b815784c6863fd"
+embedded = "8d38d2877f4d03e712404beb85bdc75e7af41b034886726c2707792fac58c5d5"
+status = "residue"
+cause = "mir::Ty: runtime::scheduler::Handle"
+
+[[fn]]
+path = "tokio::scheduler::Handle::driver"
+kappa = "2f5f8e3c47e5c85ded135139f8ce25fae1dfc2340edbe556482bcf5e89eed6b8"
+embedded = "32244916e51b47b16cb46308aa4ec7eda616d276db26d1de1f956974d42f0c45"
+status = "residue"
+cause = "mir::Ty: runtime::driver::Handle"
+
+[[fn]]
+path = "tokio::unparker_to_raw_waker"
+kappa = "84a41df620ef7692e92bd5e9b227c745f3ed5fa63e85075c5f51fd10b72ba0ab"
+embedded = "a12deb8a2f2707fcd29ffcc234f6c3102e1a580b82287b1371a96d1c398f5309"
+status = "residue"
+cause = "mir::Ty: std::task::RawWaker"
+

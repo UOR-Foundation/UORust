@@ -1,0 +1,83 @@
+[[fn]]
+path = "mime::is_restricted_quoted_char"
+kappa = "78726024ff493d732dedae96a9a8179f4dbe42b48a8bbc3121156f7bdb332d6d"
+differential = 7
+embedded = "f65246fea60d6e0edda3612b8f5d8c86c9deb80b2864718502906f6ce6a1d394"
+status = "translated"
+digest = "1426e96d739d0a21a857c478d1437d64c6306703b7b988969dc3ace759290daf"
+
+[[fn]]
+path = "mime::is_token"
+kappa = "526a816c3560b5ae0c6f1481113d9c43d64d0377d6f29f8196a303b23a3f4301"
+differential = 7
+embedded = "a297907984356e001531076a9ea4bbd306eba459fe9621e795aefa2d035e4001"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc1: &[bool; 256]}"
+
+[[fn]]
+path = "mime::lower_ascii_with_params"
+kappa = "491f833a3a6ba246d4e3bca0be1f99104e10566c98d21c7fa6828ced02947215"
+at = "Indexed=u32"
+embedded = "ff8b0d8682493ed4bbf1c03b68d4b58353ae03b3348365fe37d3506174e77077"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "mime::params_from_str"
+kappa = "d19925562f57cf7a4c83f58e74e1529e54f3886d7b7e36d4d9832efca5cd2c1b"
+at = "Indexed=u32, ParamSource=u32"
+embedded = "23188aa0a216f8060540ddf5cc7dedb8768a4f2322c392e3fcd204ca8cb28673"
+status = "residue"
+cause = "mir::Ty: parse::ParseError"
+
+[[fn]]
+path = "mime::parse"
+kappa = "6b9f1ebb39870d34d07d17939f8f34b9130fc5238d01671a48b1f3f2f3415738"
+at = "Indexed=u32, Mime=u32, ParamSource=u32, Source=u32"
+embedded = "fd4631efb9fccafd0cf93e715f716af21dd2cd99fa4d6a2b5680e0ecb6d2a566"
+status = "residue"
+cause = "mir::Ty: parse::ParseError"
+
+[[fn]]
+path = "mime::parse::<impl at src/parse.rs:10:10: 10:15>::fmt"
+kappa = "6bb79cf1eba1e951703037d301204b3af3fd843e1da40290b8686b45ecec9e69"
+embedded = "e691c411cd3a195de1b6698cc5e9654fad09f6d0486150935ebea2856281be3b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "mime::parse::MimeIter::new"
+kappa = "20d51d4a3adfdb3c96a1651052bf3f3a4b5eb7f343ee7e8ec0db7819c91cb102"
+embedded = "67126454149bb1abeb0838fdad9e274b0c4a3bad7ca3ae2934b5f63858a9834d"
+status = "residue"
+cause = "mir::Ty: MimeIter<'_>"
+
+[[fn]]
+path = "mime::parse::MimeIter::next"
+kappa = "8e7a413ee37fb0bcedddb764b275811036eac1fa71a73a2cf73544d6fd010e12"
+at = "Mime=u32"
+embedded = "349e0810d4cb0b46e0f87e3d3b30d419f234ad181ab80f3e2136f6ef98883927"
+status = "residue"
+cause = "mir::Ty: MimeIter<'_>"
+
+[[fn]]
+path = "mime::parse::ParseError::description"
+kappa = "4e59982bffc3b1590479a021587bfb8f12d6d25a266cd7e2af1c73d4832b445e"
+embedded = "8372b5894aaae8fb36ada9c783473ead13abb2198be4023706723245965699ae"
+status = "residue"
+cause = "mir::Ty: ParseError"
+
+[[fn]]
+path = "mime::parse::ParseError::fmt"
+kappa = "c2f71ba6a05f5917c61cafbeb93b3d75cf4ba611e525a5a8b3295d17b69cd4f1"
+embedded = "dd2cf74f69e5aa32d3288c95916297124aa0dfcf01fccab74633f3530cadec6d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "mime::parse::ParseError::s"
+kappa = "f6fae203952b2e2f8c294be764ba708bce9e5ebb5fca008a8b718cdd0480143c"
+embedded = "2c75da68db082faae77974e4fe67dbe22402c919d5c5ee75980ad0a9c811091a"
+status = "residue"
+cause = "mir::Ty: ParseError"
+

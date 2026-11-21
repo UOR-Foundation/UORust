@@ -1,0 +1,133 @@
+# The cexpr register (written by `uorust crate cexpr@0.6.0`; do not edit): every body of
+# cexpr's MIR at cexpr 0.6.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 107
+translated = 0
+residue = 107
+
+[module.crate]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.expr]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.literal]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.token]
+bodies = 10
+translated = 0
+residue = 10
+
+[embedding]
+bodies = 104
+embedded = 104
+evaluable = 102
+blocked = 2
+
+[[construct]]
+construct = "Rvalue::Aggregate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: token::Token"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: nom::error::Error<&[u8]>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: EvalResult"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: literal::CChar"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Error<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: expr::EvalResult"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CChar"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Kind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: expr::IdentifierParser<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: expr::PRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: one_of_punctuation::{closure#0}: type outside the lift: token::Token"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: p::{closure#0}: type outside the lift: token::Token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Error<&[u32]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: nom::error::ErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::Wrapping<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: token::Kind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {closure@nom::combinator::map_opt<u32"
+bodies = 1

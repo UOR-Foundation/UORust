@@ -1,0 +1,119 @@
+[[fn]]
+path = "crc32fast::MIN_AVX512_BYTES"
+kappa = "129ec838f51662eeb71f3b47e77c00ee2f5586e5dd5bef18ba76642f1bdd33f5"
+embedded = "c7d82e02a28435ac4829c713f7101e46a2d27fc6de29cb4546336270d66fbfb1"
+status = "translated"
+digest = "46a61c6b00c73768d004c505f20e1bfb64cbda1a63f2df19568212bcc21cb433"
+
+[[fn]]
+path = "crc32fast::calculate"
+kappa = "a0c69f3c3b65c02636f64186b86035e5cfbe0f38b9fad632cd643df8558bcffa"
+embedded = "702d9051ef65240b5b48dd738deb8390ebed1ebea4ab85e56f857dd7bf452410"
+status = "residue"
+cause = "mir::TerminatorKind::Call: baseline::update_short: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_slow: crc32fast's MIR stops at mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+
+[[fn]]
+path = "crc32fast::calculate_avx2"
+kappa = "209224ee3cba61df09816ab4f92b42d9d786bec8b9ab95c698da9a12429930e7"
+embedded = "f91109e5e2d37eb8d2e7dcb558217f110473a76a71ffe27ebe96e5d7917d5c57"
+status = "residue"
+cause = "mir::TerminatorKind::Call: specialized::pclmulqdq::calculate: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_short: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_slow: crc32fast's MIR stops at mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+
+[[fn]]
+path = "crc32fast::calculate_avx512"
+kappa = "12cc0f43a1da6bda209998446819bbeca27452794aa91e699b198e61aac2786c"
+embedded = "0c1b32cdb919bb318a0b4ddc4d92fb3084259d67a52440d1e601c57545a708b5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: specialized::pclmulqdq::calculate_avx2: crc32fast's MIR stops at mir::TerminatorKind::Call: specialized::pclmulqdq::calculate: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_short: crc32fast's MIR stops at mir::TerminatorKind::Call: baseline::update_slow: crc32fast's MIR stops at mir::Operand::Constant: {alloc9: &[[u32; 256]; 16]}"
+
+[[fn]]
+path = "crc32fast::get256"
+kappa = "8c390cf25d7ef89891b58174613feb9a16e7fd046ead9b1a8b0bf06e8d05b698"
+embedded = "27e0017947bbd06068a89866af8280a98054fc4e9233f6322a1f4899fe6fbc50"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "crc32fast::get512"
+kappa = "4dc6ac6de15b3c5e1f64434b73e6eee33274e65aa752994ad14caa29a79bdc59"
+embedded = "52a6d71b85bd9115c02089b92718baa33f3e4e075a1dd4651054e9d091165eb6"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m512i"
+
+[[fn]]
+path = "crc32fast::partial_words"
+kappa = "060cea070c613998069252cbef6092c9e7f99b7e22d6807191c6917dfd0e1a4f"
+embedded = "2fbbf48a4c9cdb842eedb2be6d18f3a1ea69f96c13f457b6298f52307b7aae83"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "crc32fast::pclmulqdq::<impl at src/specialized/pclmulqdq.rs:27:10: 27:15>::clone"
+kappa = "d11b9521d5a637eeb19d7efee494687638924fee3132922ae76500a4a0ae646e"
+embedded = "f7ee8379f5c31c6fe94dae6cff5535880574e4365f98b7bd23d250ea98c18f9a"
+status = "residue"
+cause = "mir::Ty: specialized::pclmulqdq::Kind"
+
+[[fn]]
+path = "crc32fast::pclmulqdq::<impl at src/specialized/pclmulqdq.rs:39:10: 39:15>::clone"
+kappa = "018e831e8690947d7b1d6f1e1937667fb8280769f8f12e1cae22ddc138f28f6a"
+embedded = "9b738a4bee171708c137388322ac4bcb43df4f6feb2050c02ca1fedf44bc8d7b"
+status = "residue"
+cause = "mir::Ty: specialized::pclmulqdq::State"
+
+[[fn]]
+path = "crc32fast::pclmulqdq::State::detect"
+kappa = "0b5fc10d896b6b7d7fbd0285f3d1d37faad23e6e22e4239434071e4d1724f50e"
+embedded = "d7815fb713808c5bd5c44fe80a2cff1a780b5a0f6490d2718506945258ad2764"
+status = "residue"
+cause = "mir::Ty: specialized::pclmulqdq::Kind"
+
+[[fn]]
+path = "crc32fast::pclmulqdq::State::new"
+kappa = "10231baf0e74242ac4df3736047c101d74dff5d01fd25a2eefe1bf6ec6ff90de"
+embedded = "b962b396008efee83033aa06bd4451071a45f75227c5f99f95aac0602be41c33"
+status = "residue"
+cause = "mir::Ty: specialized::pclmulqdq::State"
+
+[[fn]]
+path = "crc32fast::pclmulqdq::State::update"
+kappa = "38a661c613e9cc22c2820904c0059740cd37aacb4c23776a62ee451f2ccea156"
+embedded = "2c69388b2e00f9450cc0b10d3ae39a5939e8d8a50677e01dd95b82ced0a5b953"
+status = "residue"
+cause = "mir::Ty: State"
+
+[[fn]]
+path = "crc32fast::pclmulqdq::get"
+kappa = "c1c7e35b1674e452a6ec8c0995deaa5f484a4ff8ef84efeab65a95b89eec1fc7"
+embedded = "8f80468c0f5134b6346ab6170d8bef7f2483127955b3c759f0a8b874f132b2f8"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "crc32fast::reduce128"
+kappa = "7b955e936f73b8c5bdf163a9159124f68be89c8bde1f4aaf4c82039ab056afda"
+embedded = "60866ef4d9cb3586f4590f2ca96db7bfaa725d42de6716145b301029de258096"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "crc32fast::reduce256"
+kappa = "1e1736d84aba649631d9b626d22eceb8a3e6e088f8be34e3ab4567daf63e1828"
+embedded = "eac6b6b80842656e19cc747013df30e4d0e7ce571120d6ef70dce597141b9dc8"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "crc32fast::reduce512"
+kappa = "7915675c554b7bde777206207fbe64600ab31cbbb0c27a2272eb97c04def893a"
+embedded = "ad98afe4732ce37d79eba2d5c4670a366bf800ff66152fe2fad1eb6731327c9b"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m512i"
+
+[[fn]]
+path = "crc32fast::reduce_128_to_crc"
+kappa = "04af974fe05d3799b5fd6cad1f8a350245b8a77f4dcb5bbdce8d7bd18593014b"
+embedded = "4c422a8a7759443619c8a495688c392629228859cdaf14d27bfce713d50a730e"
+status = "residue"
+cause = "mir::Ty: __m128i"
+

@@ -1,0 +1,169 @@
+# The ciborium register (written by `uorust crate ciborium@0.2.2`; do not edit): every body of
+# ciborium's MIR at ciborium 0.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 499
+translated = 0
+residue = 499
+
+[module.de]
+bodies = 89
+translated = 0
+residue = 89
+
+[module.ser]
+bodies = 53
+translated = 0
+residue = 53
+
+[module.tag]
+bodies = 126
+translated = 0
+residue = 126
+
+[module.value]
+bodies = 231
+translated = 0
+residue = 231
+
+[embedding]
+bodies = 499
+embedded = 499
+evaluable = 499
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: value::Value"
+bodies = 105
+
+[[cause]]
+cause = "mir::Ty: de::error::Error<u32>"
+bodies = 80
+
+[[cause]]
+cause = "mir::Ty: value::error::Error"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: ser::error::Error<u32>"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: tag::Error"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: tag::TagAccess<u32>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: value::integer::Integer"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: std::num::TryFromIntError"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: TAG"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: integer::Integer"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tag::Serializer"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ser::CollectionSerializer<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: tag::Captured<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CanonicalValue"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tag::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tag::Internal<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: value::canonical::CanonicalValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::Serializer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tag::Accepted<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tag::Required<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tag::_::_serde::de::Unexpected<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: tag::_::deserialize::VARIANTS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <__S as tag::_::_serde::Serializer>::Ok"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ciborium_ll::Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::Access<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::ser::Map"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::ser::Serializer<"
+bodies = 1

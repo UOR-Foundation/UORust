@@ -1,0 +1,87 @@
+# The tracing-serde register (written by `uorust crate tracing-serde@0.2.0`; do not edit): every body of
+# tracing-serde's MIR at tracing-serde 0.2.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 47
+translated = 0
+residue = 47
+
+[module.crate]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.fields]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 47
+embedded = 47
+evaluable = 47
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: SerdeMapVisitor<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: SerdeStructVisitor<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SerializeAttributes<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeEvent<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeField<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeFieldSet<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeId<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeLevel<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeMetadata<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeRecord<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fields::SerializeFieldMap<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::Event<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::span::Attributes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::span::Record<'_>"
+bodies = 1

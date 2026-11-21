@@ -1,0 +1,89 @@
+# The serial_test register (written by `uorust crate serial_test@4.0.1`; do not edit): every body of
+# serial_test's MIR at serial_test 4.0.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 29
+translated = 0
+residue = 29
+
+[module.code_lock]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.parallel_code_lock]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.rwlock]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.serial_code_lock]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 29
+embedded = 29
+evaluable = 29
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: code_lock::UniqueReentrantMutex"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: code_lock::LockMap"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Locks"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UniqueReentrantMutex"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rwlock::Locks"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rwlock::MutexGuardWrapper<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MutexGuardWrapper<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code_lock::ValueRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of parallel_code_lock::local_async_parallel_core<impl std::future::Future<Output ="
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of parallel_code_lock::local_async_parallel_core_with_return<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of serial_code_lock::local_async_serial_core<impl std::future::Future<Output ="
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of serial_code_lock::local_async_serial_core_with_return<u32"
+bodies = 1

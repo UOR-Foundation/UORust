@@ -1,0 +1,171 @@
+[[fn]]
+path = "quinn-proto::decode_addr"
+kappa = "ed14a858fde4d9fe4e8a3b2e8af02deeb163d28b1359fcc02ce0ddceb0edc386"
+at = "B=u32"
+embedded = "6f01fd2dc6c5a3e03eb9a5d8546e68d0dfe6877b2745ac3448367cd077c58947"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "quinn-proto::decode_ip"
+kappa = "18d586c58bd12f9bc8f65d73d0041a54439987c7c15face69f48feb2cd40984c"
+at = "B=u32"
+embedded = "badff909e73f0ff8290dabbb2a5ccc19cb90a931c4d8872cce0bd33396b7a9f3"
+status = "residue"
+cause = "mir::Ty: std::net::IpAddr"
+
+[[fn]]
+path = "quinn-proto::decode_unix_secs"
+kappa = "9350e16d7a3e49baf5b28d3f76184bbe03267a6b8f5b3f101e134d07347de13d"
+at = "B=u32"
+embedded = "4790518a7864be72d512f5fd690f523c6e14f8505be6ce4cefc7bdd6ced3c0ce"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "quinn-proto::encode_addr"
+kappa = "50464efa04981541094889853002ba9542e206a6b20b72d9b510e87ef044f303"
+embedded = "87734a530b0e0cdb9b120e5344b07867e91afd659d66fe66d64aa67ff16dc12c"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "quinn-proto::encode_ip"
+kappa = "994fc8f07f63fa709323b94f2d476a3a9b3c8bf24b4a138fb566086b94a79f96"
+embedded = "13b12110415e3e40bcf7613d53c9236f24a08a459ae345ab48cd844b8872abd7"
+status = "residue"
+cause = "mir::Ty: std::net::IpAddr"
+
+[[fn]]
+path = "quinn-proto::encode_unix_secs"
+kappa = "acda9fa9f285a235594e4c6fa53a62ade12e5a3e6e3e9a8c8ed672061f8264c2"
+embedded = "dce11f283b4f261e05ca497f1271cdbe6428a92107fc2084493b9d5cc2a641d0"
+status = "residue"
+cause = "mir::Ty: SystemTime"
+
+[[fn]]
+path = "quinn-proto::token::<impl at src/token.rs:106:10: 106:15>::fmt"
+kappa = "0fc5ebd9508733e1af021a70d6dddf0a5c808a86fa36ec6062df6cfcdb75a54e"
+embedded = "a8f08111c3bb0b9121552fad43666d4e9e2e703c26513f983c3adf8dc02cebbf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::token::<impl at src/token.rs:304:16: 304:21>::clone"
+kappa = "0d1cf5529cbe3c7f3dff63c94f9a2a1a0f199b89769d23eddd87377937406922"
+embedded = "39dd9b3ae54a12d1565da5f601ddd32d60087f6201f522d6c2b0ed664ebf53b3"
+status = "residue"
+cause = "mir::Ty: token::TokenType"
+
+[[fn]]
+path = "quinn-proto::token::<impl at src/token.rs:366:10: 366:15>::fmt"
+kappa = "12a32382e7600852184613b35f7a85408350d547354f6b86c49b538f4e7aea37"
+embedded = "acf947738e1db59f9f2a6aa218a5df6330b98df15a192250381efb7ee7ca593b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::token::<impl at src/token.rs:366:23: 366:28>::clone"
+kappa = "a49eeea4c72e519804961efff95fe57a1604e4c37dbd72c1d062066a61d90d55"
+embedded = "daa52962c087bd48c74bae98588914267b4f97690afe5b97ad00e335e3475bfe"
+status = "residue"
+cause = "mir::Ty: token::ResetToken"
+
+[[fn]]
+path = "quinn-proto::token::<impl at src/token.rs:366:30: 366:34>::hash"
+kappa = "408a97226cc9e0b9f12f8eb01aafb2f3d8be78fe9f40c32bfedfa2a23457369d"
+embedded = "e1997889f6d62d6bbe4b60948be11620d732c32a8fbba50813ccd5c811d415e6"
+status = "residue"
+cause = "mir::Ty: token::ResetToken"
+
+[[fn]]
+path = "quinn-proto::token::IncomingToken::from_header"
+kappa = "05223e25d321f6565fb0272b0bbd0d0783c2d2ca77af24f1a07ffd548377c882"
+embedded = "d2d9c1ba7b7d0372acdd5e02567effc4179044f6b807e08d2adc9f85fe8a873e"
+status = "residue"
+cause = "mir::Ty: token::IncomingToken"
+
+[[fn]]
+path = "quinn-proto::token::NoneTokenLog::check_and_insert"
+kappa = "720c4fbe1f716496af141fb5e86196b4a1cb26a946fe43a6edd3847663f96c0c"
+embedded = "cd8cd12c50d003aa349e7859655275f426e90420cd49a0395e05f5d49565c388"
+status = "residue"
+cause = "mir::Ty: token::TokenReuseError"
+
+[[fn]]
+path = "quinn-proto::token::NoneTokenStore::insert"
+kappa = "0a001c3fb31a69e728f7380fbc3e4624f77a416e15f4eafbb602f4a42d4faa61"
+embedded = "828cc477e62d7cf557d0e7b2a918b4146f7d731519b905d3ebbf1cb27940412c"
+status = "residue"
+cause = "mir::Ty: NoneTokenStore"
+
+[[fn]]
+path = "quinn-proto::token::NoneTokenStore::take"
+kappa = "8fc540a17731d66c9f344a4ae9bf7017dda8de03d0ed2fc2222c5cd84c51133e"
+embedded = "67283254663d27fe04b4c24985b38d0c4ed5084afa637aafc550843ef726ca29"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "quinn-proto::token::ResetToken::deref"
+kappa = "d2f1944812b197ca3db6677a4d96d05c7f23ef840684e8b6719720eefd57c77b"
+embedded = "cacbfa91fe5faec166da759e6ec0f211bade2247e1a7c50336b65757f1bd9fc8"
+status = "residue"
+cause = "mir::Ty: token::ResetToken"
+
+[[fn]]
+path = "quinn-proto::token::ResetToken::eq"
+kappa = "35bb176eeac95b8bf1aa0bfffb1a7e2113bb70318c47b2725df6b76d07be7425"
+embedded = "ad051b163fbe2ca822c47b79503561841e83208081f0be4561ed01aa95e5004d"
+status = "residue"
+cause = "mir::Ty: token::ResetToken"
+
+[[fn]]
+path = "quinn-proto::token::ResetToken::fmt"
+kappa = "2fcc8345c0fb5bc78e5c5e0b76a4bf300466f8d99739f07de0f5e06b14f7b40f"
+embedded = "5939460bbfd10e2b1b6b5b14bc658326cf73fb5c55b0849744a6efec6d2abacb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::token::ResetToken::from"
+kappa = "1be335515c82fa2de2daeee278fc5b84e770a84f2500760b52646578d6e9b459"
+embedded = "8afb733f8a23c5ab0406a204301246c7232d369b42a763c8e2971dc583800313"
+status = "residue"
+cause = "mir::Ty: token::ResetToken"
+
+[[fn]]
+path = "quinn-proto::token::ResetToken::new"
+kappa = "622c81069452ad055d833da8e69fdd7ea5a3db9e61d54137b5712fde3e5e0c23"
+embedded = "83185160bae1f2930d6b3705ffd2943430dd681d9be0f114135df2775c6f0551"
+status = "residue"
+cause = "mir::Ty: token::ResetToken"
+
+[[fn]]
+path = "quinn-proto::token::Token::decode"
+kappa = "d6e45f463fbd30307592c69a4891db6cdf671526bbdc644c3cffab6c36e0a0a5"
+embedded = "8cb071b6a22a91494a814709fb75be748042145dc5cb29ed1701ced1cd085ac7"
+status = "residue"
+cause = "mir::Ty: token::Token"
+
+[[fn]]
+path = "quinn-proto::token::Token::encode"
+kappa = "58e6a0acd3692dcd5e5230089c94cef947e031b430775968019832bcc75c729d"
+embedded = "1bbd7e4cbca7694589f93a9383cce1fc1353d418769a63f46231db99484a8a32"
+status = "residue"
+cause = "mir::Ty: Token"
+
+[[fn]]
+path = "quinn-proto::token::Token::new"
+kappa = "51fd4cc5455a6c7d89f2a97d1897d67678e0844dd1f2905fda068f6e1cb9a5e6"
+embedded = "c243d5cd764cdc0636e5290788adb184505311e9a4567e83444abf68749cd5a1"
+status = "residue"
+cause = "mir::Ty: token::Token"
+
+[[fn]]
+path = "quinn-proto::token::TokenType::from_byte"
+kappa = "6199fd703566cff91868d1dc2819567bacd22d54e4fafb28eb002236e6745a48"
+embedded = "081df422a27ff563b60943f1b8834b14fad65cfe6695b96cb5904ce41b390d7a"
+status = "residue"
+cause = "mir::Ty: token::TokenType"
+

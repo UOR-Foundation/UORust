@@ -1,0 +1,197 @@
+[[fn]]
+path = "ring::DECIMAL"
+kappa = "ea3186ed341a0519ae2827a2b4f5f81f6f76912a7ed811ceb258448f4ad9b4b5"
+embedded = "7f644a86279a2fb876e5a03421287692187f46d7f47d71474082c471abb2dcde"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<u8>"
+
+[[fn]]
+path = "ring::HEX_LOWER"
+kappa = "0c32145ce49ce95a9c39585ddd8dbe902a9eebd19604e5f7c9c78e43ca605079"
+embedded = "cc0f36a54f51b62e62c1505f7eef66b0386f1ef0fec94c16d01d644a7fc6b863"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<u8>"
+
+[[fn]]
+path = "ring::HEX_UPPER"
+kappa = "6b30d5e3ed34f4a18bec0c9f3d7cd03a6378450c1756cb1fe52fab3553d93b7c"
+embedded = "8fa8a6c678f578738e6c31a7b633b7efffcafebe14b2bb80f8673694f741c751"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<u8>"
+
+[[fn]]
+path = "ring::compile_time_assert_clone"
+kappa = "25fc80be764a7627bf19cfa315ed1e07a9dc2eaf12940988fa708602b08ac71c"
+embedded = "2ef8f6e9d322957291d6fad64b819fedd622fb039ec2060d248fca1d39078391"
+status = "translated"
+digest = "6754f29732c0a0bb8b827d648ff1851787236cd05a4eb5b9c2a9ecc0bb146cfd"
+
+[[fn]]
+path = "ring::compile_time_assert_copy"
+kappa = "16d846312290b85c212476fb3aa156b0a11f78eae9944520cb4ede491b2cdc34"
+embedded = "a9639fa801ec444ee8bc5c412cd0bba44a1aa12d36bd32641aa0c3f9f0ef402a"
+status = "translated"
+digest = "b51aecc9d7b2b431fab497ff9ac5d4b6faed4ac989522c4f46ec31b292bc7f97"
+
+[[fn]]
+path = "ring::compile_time_assert_eq"
+kappa = "fc959b2e2a2629486e2ae6a3d7bc97b8a3c7eeec9c175f7e72580acf5b430bae"
+embedded = "033da3a92e1783435f5ff2c930e125574801c77e09c3c38eae16f0d26e3ffe33"
+status = "translated"
+digest = "51ca6855b3a9b18f63ef4a8c413f1ce5332c82f8b0deef285df531ac651f2370"
+
+[[fn]]
+path = "ring::compile_time_assert_send"
+kappa = "b3184287463e740475b9f5dbe0de7d93caf58957ddf11637a866888ef90b77be"
+embedded = "b5dfb04dcf3a74845cd6712489f6621647b69ba2ec870752b60aa0d15eaf4b6a"
+status = "translated"
+digest = "391ad1bfd89a4a63e1d6f2f9fd961da46f0238f719043f41310f1bc8f6f5d25d"
+
+[[fn]]
+path = "ring::compile_time_assert_sync"
+kappa = "e7977c2bf217d7c217d2057d6e456f0ff4385e792c97aebd360a71a17dd4dd75"
+embedded = "7c4bb6b42b5ba7628adaaaad9120e2c8e13bfc27fe86a031dcfbbee3009742a1"
+status = "translated"
+digest = "ddd08225dcc5c03b5596674e98bca6b9c090127a8525181bad591ee4204ed099"
+
+[[fn]]
+path = "ring::from_hex"
+kappa = "d2653f0ab71807086c05c93cb6372b85636045f6a6e0fb92055f85ccaa692fc7"
+embedded = "4b9342aded448ff95a33f19bbb971f5af41f84f5e6976eb1b3b6e7a95b32692b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+
+[[fn]]
+path = "ring::from_hex_digit"
+kappa = "6eadfb8a4a433409d4ca24e69ad17186045530eab4654b28c7e18425f125f237"
+embedded = "7b11462268455ffb3652c941a9453016f5f19b57443db2580aef3156c9f00a3d"
+status = "residue"
+cause = "mir::Operand::Constant: testutil::from_hex_digit::promoted[0]: type outside the lift: core::ops::RangeInclusive<u8>"
+
+[[fn]]
+path = "ring::parse_test_case"
+kappa = "a7e4640498ddbb5932451b467fa00f8c027ad18451e19fcffd9ce1d803ee90d3"
+embedded = "34ecbf85db55a39d5d0bd25242c24540b51842f693a2b05ecdbae0fac832863f"
+status = "residue"
+cause = "mir::Ty: testutil::TestCase"
+
+[[fn]]
+path = "ring::run"
+kappa = "b1ebc5067f36f1733ae6c96677d8974ddddfd43ece1634feb01d0f3640bc4f9c"
+at = "F=u32"
+embedded = "1d7a4b18b57c83e05f188e97fe081f52b0ca2ee696854dfe89be3d3f30a8c618"
+status = "residue"
+cause = "mir::Ty: File<'_>"
+
+[[fn]]
+path = "ring::testutil::<impl at src/testutil.rs:159:10: 159:15>::fmt"
+kappa = "ebfd41ab7abbe817329e6b12d39c5fbd239f29a1e7805fe96a3b2d586570c459"
+embedded = "1b1e3089afb12096f84a5cc276ab06c929a5ab9ef65227d0f0c73b433c7cc923"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::testutil::TestCase::consume_bool"
+kappa = "ded2c68490105517959115cc5889cae782b84661dfd22da28433ab9d8e21c4cd"
+embedded = "9f9de479748b5c2eee191bcb5673aaffb781253a737f599de432d0f7e52cc4a4"
+status = "residue"
+cause = "mir::Ty: TestCase"
+
+[[fn]]
+path = "ring::testutil::TestCase::consume_bytes"
+kappa = "7d625cd348f96a47411258b028cac458fca626868b1af6373fac28640a65aa34"
+embedded = "7f02eb02a2efe7315e63a5eb7118a7a5fff4199b0531f81d86685295e14217ce"
+status = "residue"
+cause = "mir::Ty: TestCase"
+
+[[fn]]
+path = "ring::testutil::TestCase::consume_digest_alg"
+kappa = "6c6482a2a3fc7075c65face30eb3335f31c4b3cc13077449151da5183c0aefce"
+embedded = "f2710e4913ca8bbfd3a4cf4eff138964f9e26f55095187cdfc899904097049de"
+status = "residue"
+cause = "mir::Ty: digest::Algorithm"
+
+[[fn]]
+path = "ring::testutil::TestCase::consume_optional_bytes"
+kappa = "9dd787a0d8e86eac41dbb8609a003579ff347a96bd70941d04c3a1980f33bd98"
+embedded = "7a24475f61f8a07528ea666a412ea70f8df69107ea76358525d260779ca9330d"
+status = "residue"
+cause = "mir::Ty: TestCase"
+
+[[fn]]
+path = "ring::testutil::TestCase::consume_optional_string"
+kappa = "017e521b344c074cc9204fc28992a5cbfb3e73ce04c2085372039609a6ee1e29"
+embedded = "1eb02dc377debf5e3af030999752266b7918b521478e9892ef24f2a8eb0f4f29"
+status = "residue"
+cause = "mir::Ty: TestCase"
+
+[[fn]]
+path = "ring::testutil::TestCase::consume_string"
+kappa = "be8fbf1d95dcfc23ae536b50d0d60f0640d64226280be39e9e64179557730a44"
+embedded = "184ef74c537418fc8e8baa26d80427d05c9d5ae0f121e3bdf5b9116f94dba98c"
+status = "residue"
+cause = "mir::Ty: TestCase"
+
+[[fn]]
+path = "ring::testutil::TestCase::consume_usize"
+kappa = "342bfb5df6a2234bfd7fc4a1aa60bc682755c455639df1b01a413f6b6ec36e27"
+embedded = "c27a4940f7b8d5f105930e471e1c271040fb32578635771173d024d38f7dbb6c"
+status = "residue"
+cause = "mir::Ty: TestCase"
+
+[[fn]]
+path = "ring::testutil::TestCase::consume_usize_bits"
+kappa = "651c63f3fab7272233ff7ff6c98f3cc383c5d7a7444efee54dd12d5ac3e73b1a"
+embedded = "fad82f63514fc23a184588786255e8c8e68b4b7bc9981a927222d9a185845ce7"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::testutil::rand::<impl at src/testutil.rs:475:14: 475:19>::fmt"
+kappa = "7ab5ffc9788f1e6822a70844d33175adede8e4ec3c4fbe43af5973b9cfa9678b"
+embedded = "53f9ff7bbb18ad1a20dba4e63bc1ac332e820b33307450359ffada3c8564a8d5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::testutil::rand::<impl at src/testutil.rs:490:14: 490:19>::fmt"
+kappa = "f5d86f27ff0716560a30b728fb93871e9b2603cc5f84dd1b45dc5ddd69c87a99"
+embedded = "1c8c3e46fd79268010d33f8d0ffad4c8cc8efe054bd0148cc1047cd852740643"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::testutil::rand::<impl at src/testutil.rs:511:14: 511:19>::fmt"
+kappa = "9c115179eccf8eea7c9ac1322bb16c51bb525192b0ceeed67f1893bd4075db84"
+embedded = "50531c77672972d7f9dd9205547392cc4c71e4d9e65ef1616645c9da9b01a597"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::testutil::rand::FixedByteRandom::fill_impl"
+kappa = "7e25b1717958a840d558ff6fe349c0760a3190ce1158c254c92e96b6eb540c62"
+embedded = "37ef6facae5c72e32edacb189c0504db4c918d7ca983c1d2e48430b4bb632955"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::testutil::rand::FixedSliceRandom::fill_impl"
+kappa = "27f2121432bc08859b1bb4de9a3313498f5ead773328addc0ac2fd1672929614"
+embedded = "619b2209b65999ea97ed4aca39899197d02f9fc5ef716d085615731042fb1ef8"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::testutil::rand::FixedSliceSequenceRandom::drop"
+kappa = "f104f30824db2ee9ab821174ebede9526abea07744b95f4a86ac2ed2a8c2bd2f"
+embedded = "dbba99226934fff7e482d7803ebd612a8539bc51e28275d3fc50cdfdc0fa5dc1"
+status = "residue"
+cause = "mir::Ty: testutil::rand::FixedSliceSequenceRandom<'_>"
+
+[[fn]]
+path = "ring::testutil::rand::FixedSliceSequenceRandom::fill_impl"
+kappa = "7ad8de81ecfc9e3962d4954d70ab0d62e33a3363617dce82c4e77c31092461ad"
+embedded = "c7893fc5f01432bc0e3f81e792809ee356e898f48fdc17655b17d575abe71bc9"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+

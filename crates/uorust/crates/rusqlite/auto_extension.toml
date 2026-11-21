@@ -1,0 +1,31 @@
+[[fn]]
+path = "rusqlite::cancel_auto_extension"
+kappa = "b4e7935a670522e850591f11983db9ed095d796d5908cfc9df4ecd061d117658"
+at = "C=u32"
+embedded = "55d2458fe13b214125b02daed5adbc67fe2c944fd4e691119b8bc7d9cb5fbec3"
+status = "residue"
+cause = 'mir::Ty: unsafe extern "u32" fn(*mut sqlite3, *mut *mut i8, *const sqlite3_api_routines) -> i32'
+
+[[fn]]
+path = "rusqlite::init_auto_extension"
+kappa = "a20b8b334846f12c149dc2bb39988b3c947bbefc5d7e13aa48f61750b6190140"
+at = "Connection=u32"
+embedded = "c0939545dc1fdd521637da623350e0f046e6ad289a94564d5158428fa64c3235"
+status = "residue"
+cause = "mir::Ty: fn(u32) -> std::result::Result<(), error::Error>"
+
+[[fn]]
+path = "rusqlite::register_auto_extension"
+kappa = "b22368738ab1ea559cb9804fb539df7d400a9adc807e981f358f18111f307d5e"
+at = "C=u32"
+embedded = "4b49ed9fc7edfa07061ddd540719ccaa7be0ee0f3da6dd9a2496e04f61fc78ed"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rusqlite::reset_auto_extension"
+kappa = "b1cc0b9a69cf44b052fc0360ff36f4de3d95cc1490ab18769d59198499d12ff0"
+embedded = "d3ce09a11617b5f4dcf9ef72f66ddf7ea08044a1f7fbeea9e97fb95512dc2516"
+status = "residue"
+cause = "mir::TerminatorKind::Call: sqlite3_reset_auto_extension"
+

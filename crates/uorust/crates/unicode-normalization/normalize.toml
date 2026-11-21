@@ -1,0 +1,117 @@
+[[fn]]
+path = "unicode-normalization::L_LAST"
+kappa = "0bf9d9983622c3aba92ca7baf5ab4a2dc1060319452bca7118223f3d8873934e"
+embedded = "65ad584dcf59b2a569ef7121a6ac3f9fd9e47ddb7cf0090e79d80f1662c061e1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::L_BASE"
+
+[[fn]]
+path = "unicode-normalization::N_COUNT"
+kappa = "aeeeb9aaeb4862c607594f1b79fae1bb1f9bb331fd5a06711233292835838d98"
+embedded = "1987e65d2817424b54a645b3b5e8763b1ecf86560199138da78a0d547fca43d6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::V_COUNT"
+
+[[fn]]
+path = "unicode-normalization::S_COUNT"
+kappa = "bd23d99e0ee4fbab4bd7f44fedc1a923e7ed053eea50718fd14962f4a0016749"
+embedded = "ec044c379c2634b4aeb1ca96a72dee32a5e361b1372beb5d13ca338ae41cf613"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::L_COUNT"
+
+[[fn]]
+path = "unicode-normalization::S_LAST"
+kappa = "53e09cada175518af28f79145beab6b34b6e1a4ed05bc1fa28223f6ec1b39ab0"
+embedded = "d4a8511e075eebb336ab4b4737a2d6805b4c40a0ae2ef588b0bf72295a92f148"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::S_BASE"
+
+[[fn]]
+path = "unicode-normalization::T_FIRST"
+kappa = "7a709f34d7bf925f675f863be286e5ee6935b7999863b75ceaea476cca71c8fc"
+embedded = "a2cd2b2f236ae753dee256ce3c5d7f420e83cef227e36a46d37ea7c0964977f5"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::T_BASE"
+
+[[fn]]
+path = "unicode-normalization::T_LAST"
+kappa = "f00a6271b8cb7697cd7bb61659df4a78635d98284be178e9d9a2fb187c1e6b10"
+embedded = "442fdb250b9d16c7dc61b421b636abb0f96ede5dce995a029e56796060d79cc5"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::T_BASE"
+
+[[fn]]
+path = "unicode-normalization::V_LAST"
+kappa = "119a9f112ff9f91b99580946b42a043cf80c0868d359545b07de6f2474dd5613"
+embedded = "a661aafce45b35491936373d2026e218c38fb06361b8251f881da997197c020f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::V_BASE"
+
+[[fn]]
+path = "unicode-normalization::compose"
+kappa = "97beb8a53f9ae93f4c07bbbeef2d7cffbb484311cf4c9941d986e5fdbc71b68b"
+embedded = "cccb3238e1c5ec0d12859da3ea5c94f811808bcea081c6f58f3650f67e3262a7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: normalize::compose_hangul: unicode-normalization's MIR stops at mir::Operand::Constant: the constant item normalize::L_BASE"
+
+[[fn]]
+path = "unicode-normalization::compose_hangul"
+kappa = "c4ac03cb4750a010a5dc7ce2e3294302865d35d93ce3cbfe61d3fbef153cad78"
+embedded = "23c5500eb5d6973305baba6302f25ca040fc5c4a891f575925d7139a66dffe59"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::L_BASE"
+
+[[fn]]
+path = "unicode-normalization::decompose"
+kappa = "27c5fbf0462df46a12df7d4542ae56e722b4783b75492bd0f1289a63e4b31cdb"
+at = "D=u32, F=u32"
+embedded = "b045f0c3e9fad3676d8ba8ba8d6fda5fc67e878d5eff97fe2e69149990473866"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "unicode-normalization::decompose_canonical"
+kappa = "0d88f7d153b0b5aa6a196caa6971e1e3960cb5e39c95314629cf9e80636e3f2d"
+at = "F=u32"
+embedded = "da4d65ae0408885619aa5aa25c29d42dc83c6843c22f4711adc80af85fed3e14"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item canonical_fully_decomposed"
+
+[[fn]]
+path = "unicode-normalization::decompose_cjk_compat_variants"
+kappa = "8de5e9ece47786f0de4a4dea91dcbafeec44a11969e82e83d57ba17d63971e46"
+at = "F=u32"
+embedded = "0c51851ef40370a2fb89b85efdfc22d323437da6bcb04c0389fa4b8c0af88ccd"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut, which u32 does not implement in core"
+
+[[fn]]
+path = "unicode-normalization::decompose_compatible"
+kappa = "e518356d9a95c77daaeef17d52f665b54c56e47722145a42654afc592f7b0bd8"
+at = "F=u32"
+embedded = "dabc5fe1b82851bb70be88cf06fb720e8fa7a934c344b042e5aa7ba39913ab31"
+status = "residue"
+cause = "mir::AggregateKind::Closure: decompose_compatible::{closure#0}: mir::TerminatorKind::Call: lookups::compatibility_fully_decomposed: unicode-normalization's MIR stops at mir::TerminatorKind::Call: <char as Into>::into"
+
+[[fn]]
+path = "unicode-normalization::decompose_hangul"
+kappa = "f18991adfed7f9509e86582f91d43434616ff0051d38f630eb9cf2f0002328cb"
+at = "F=u32"
+embedded = "0263cb20bd3776ee5d6fe737e56e8dd82e170d6e92b41f5e3fc1ac9ec4d8425e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::S_BASE"
+
+[[fn]]
+path = "unicode-normalization::hangul_decomposition_length"
+kappa = "5e88578106f28dff3aa026a2deec181500626fe938d7f0fa4277832ffe911212"
+embedded = "d52083b40d2070a106c47718f9489f9aabee2b7628630eb0b8e1596a56774c80"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::S_BASE"
+
+[[fn]]
+path = "unicode-normalization::is_hangul_syllable"
+kappa = "cb1be772dc1c7a1be7dc50783e58df7de0974578b651f901fe3245d2b1c63636"
+embedded = "50799e7af16182685a6c282363e132497c211d120c25a9e74cf1085ebc39778c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item normalize::S_BASE"
+

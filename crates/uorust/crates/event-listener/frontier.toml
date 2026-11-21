@@ -1,0 +1,235 @@
+# The event-listener register (written by `uorust crate event-listener@5.4.2`; do not edit): every body of
+# event-listener's MIR at event-listener 5.4.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 157
+translated = 5
+residue = 152
+
+[module._]
+bodies = 6
+translated = 1
+residue = 5
+
+[module.__private]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.crate]
+bodies = 51
+translated = 3
+residue = 48
+
+[module.notify]
+bodies = 62
+translated = 1
+residue = 61
+
+[module.sync]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.sys]
+bodies = 14
+translated = 0
+residue = 14
+
+[embedding]
+bodies = 157
+embedded = 157
+evaluable = 156
+blocked = 1
+
+[[construct]]
+construct = "TerminatorKind::InlineAsm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: notify::Notify"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Inner<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: EventListener<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: InnerListener<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Event<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: StackListener<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: notify::Relaxed<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TaskRef<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Notify"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: State<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Additional<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RegisterResult<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: notify::Additional<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: notify::Tag<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parking::Parker"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sync::cell::UnsafeCell<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sys::Inner<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ConstPtr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: List<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: notify::TagWith<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Event::new: event-listener's MIR stops at mir::TerminatorKind::Call: null_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: null_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<*mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericNotify<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ListLock<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ListenerProject<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StackSlot<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Task"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: _::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::StackListener<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::StackSlot<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __private::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: notify::GenericNotify<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: notify::__private::Internal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::UnsafeCell<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::cell::ConstPtr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sys::List<u32>"
+bodies = 1

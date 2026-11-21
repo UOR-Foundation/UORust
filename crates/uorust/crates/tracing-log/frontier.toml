@@ -1,0 +1,115 @@
+# The tracing-log register (written by `uorust crate tracing-log@0.2.0`; do not edit): every body of
+# tracing-log's MIR at tracing-log 0.2.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 45
+translated = 0
+residue = 45
+
+[module.crate]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.log_tracer]
+bodies = 17
+translated = 0
+residue = 17
+
+[embedding]
+bodies = 45
+embedded = 45
+evaluable = 45
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: tracing_core::Metadata<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: log_tracer::Builder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: LogVisitor<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LogTracer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: log::SetLoggerError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn tracing_core::Callsite"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: log::Metadata<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: log_tracer::LogTracer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DebugCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrorCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Event<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InfoCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TraceCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WarnCallsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Callsite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: log::Level"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: log::LevelFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: log::Record<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::Level"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing_core::LevelFilter"
+bodies = 1

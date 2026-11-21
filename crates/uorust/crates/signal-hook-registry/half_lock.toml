@@ -1,0 +1,85 @@
+[[fn]]
+path = "signal-hook-registry::MAX_GUARDS"
+kappa = "faeed88954370a60b7113356eb52799f308b1105b620f531a4f7f83d63d717cf"
+embedded = "f916d0313ea6c6b7c3e77e8a357651a66a8061c7ccdd7c82bc996000495bfba1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item std::isize::MAX"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::HalfLock::drop"
+kappa = "68f7e2406bab6ae9ef990925ffb6427b4827fbde91ffa51a19b38a780a4de483"
+at = "T=u32"
+embedded = "9a2a0089d404532b9656f9ce0353bfa084d5104aae782df1ba7ae17cb98b9b81"
+status = "residue"
+cause = "mir::Ty: HalfLock<u32>"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::HalfLock::new"
+kappa = "7f3c19ae291a4316a6a2378152078bc56d274b24f2f44f530cb005b5c9e6b309"
+at = "T=u32"
+embedded = "bb1ada5f66fbd6f08b12e6ad64358b8d32e3fb2d6035d30305b06271e95ca754"
+status = "residue"
+cause = "mir::Ty: half_lock::HalfLock<u32>"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::HalfLock::read"
+kappa = "9c11b8136d0ff9d27f6598e4adbd9c1601fc2b832db795fb5765b3a626ce88e6"
+at = "T=u32"
+embedded = "6922b1217e99db33b7831c38506fd40ea436fc1a67a2492867f4f717541138a9"
+status = "residue"
+cause = "mir::Ty: half_lock::ReadGuard<'_, u32>"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::HalfLock::update_seen"
+kappa = "551a2c894f0e08bc0314c161b98d1105bd010dc9b1082d225e68e000ef39989b"
+embedded = "618dd8e6e19d75e1de2b2f9d103aaae8bf05d6ca13903462a62254c6a5045855"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::HalfLock::write"
+kappa = "e8ca24da059c79e1fadcef00797502e357e92309e3e4e221deb4338f7e059be7"
+at = "T=u32"
+embedded = "e861cb9490a46ed50830859b48ec9a3e3cffaeff06a71ded73090622a9193a2b"
+status = "residue"
+cause = "mir::Ty: half_lock::WriteGuard<'_, u32>"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::HalfLock::write_barrier"
+kappa = "ca9d27054562e51645d86252b6b52c8cbefcbaa6d15d7bb4070000c481f87ab8"
+at = "T=u32"
+embedded = "988e47660159458d08be0be62e0130cbc22ead8720fbedd4945151dfce7f1c1b"
+status = "residue"
+cause = "mir::Ty: HalfLock<u32>"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::ReadGuard::deref"
+kappa = "4fe04695e6f0aac2d938de50d3c42d7189f03cebdf651445f4205737b93e1ce1"
+at = "T=u32"
+embedded = "fd6045ff5d11a4c617a34ca299de76aa762f59b4343b7f4c4ad4d87c784ba286"
+status = "residue"
+cause = "mir::Ty: ReadGuard<'_, u32>"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::ReadGuard::drop"
+kappa = "907189f64b340964d21aac70280e97045d0d8c28b20a41f0300e8ba81b9b780f"
+embedded = "19f478dd046b185e8f993a70e19f8497eeda5117af301a3434d96c3327c9c576"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::WriteGuard::deref"
+kappa = "81bfbeaf78144ab058cde3123b6ee59ed063d46c365f8bcf0047a268103c3593"
+at = "T=u32"
+embedded = "992a9ee5ab4d184d91f87e99022807da38bf32361e07fb8639e90a17469a48f2"
+status = "residue"
+cause = "mir::Ty: WriteGuard<'_, u32>"
+
+[[fn]]
+path = "signal-hook-registry::half_lock::WriteGuard::store"
+kappa = "0753b2f61c3cba07436ff3cd8c3c0ad937ea060de4ce5d0f16b38d553b865058"
+at = "T=u32"
+embedded = "ea85366b712a9900826af12f19012359d8e1af145bd020670a90c124f04e100e"
+status = "residue"
+cause = "mir::Ty: WriteGuard<'_, u32>"
+

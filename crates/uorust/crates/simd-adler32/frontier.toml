@@ -1,0 +1,134 @@
+# The simd-adler32 register (written by `uorust crate simd-adler32@0.3.10`; do not edit): every body of
+# simd-adler32's MIR at simd-adler32 0.3.10, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 54
+translated = 1
+residue = 53
+
+[module.bufread]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.crate]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.hash]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.imp]
+bodies = 41
+translated = 1
+residue = 40
+
+[module.read]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 54
+embedded = 54
+evaluable = 54
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Adler32::new: simd-adler32's MIR stops at mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Adler32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::avx2::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::sse2::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::ssse3::imp::reduce_add_blocks: simd-adler32's MIR stops at mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Adler32Hash"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: imp::avx2::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: imp::sse2::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: imp::ssse3::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::avx2::imp::update_imp: simd-adler32's MIR stops at mir::Operand::Constant: imp::avx2::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::avx2::imp::BLOCK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::sse2::imp::update_imp: simd-adler32's MIR stops at mir::Operand::Constant: imp::sse2::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::sse2::imp::BLOCK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::ssse3::imp::update_imp: simd-adler32's MIR stops at mir::Operand::Constant: imp::ssse3::imp::CHUNK_SIZE: mir::Operand::Constant: the constant item imp::ssse3::imp::BLOCK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1

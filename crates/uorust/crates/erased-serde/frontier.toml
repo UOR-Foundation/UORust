@@ -1,0 +1,291 @@
+# The erased-serde register (written by `uorust crate erased-serde@0.4.11`; do not edit): every body of
+# erased-serde's MIR at erased-serde 0.4.11, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 656
+translated = 2
+residue = 654
+
+[module.__private]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.any]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.de]
+bodies = 448
+translated = 0
+residue = 448
+
+[module.error]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.map]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.ser]
+bodies = 182
+translated = 1
+residue = 181
+
+[embedding]
+bodies = 656
+embedded = 656
+evaluable = 656
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 269
+
+[[cause]]
+cause = "mir::Ty: de::Out"
+bodies = 156
+
+[[cause]]
+cause = "mir::Ty: ser::ErrorImpl"
+bodies = 55
+
+[[cause]]
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: dyn ser::Serialize"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: de::erase::Deserializer<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: any::Any"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::erase::MapAccess<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::erase::SeqAccess<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn ser::SerializeMap"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn ser::SerializeSeq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn ser::SerializeStruct"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn ser::SerializeStructVariant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn ser::SerializeTuple"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn ser::SerializeTupleStruct"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn ser::SerializeTupleVariant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::erase::Visitor<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::Formatter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Deserializer"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_is_human_readable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::erase::DeserializeSeed<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::erase::EnumAccess<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn de::Deserializer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn de::Deserializer<'_> + Send"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn de::Deserializer<'_> + Send + Sync"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn de::Deserializer<'_> + Sync"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unsafe fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_bool"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_char"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_str"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_unit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_unit_struct"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_unit_variant"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Out"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::Variant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn de::MapAccess<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn de::SeqAccess<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn ser::Serialize + Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn ser::Serialize + Send + Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn ser::Serialize + Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn ser::Serializer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Unexpected"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde::de::Unexpected<'_>"
+bodies = 1

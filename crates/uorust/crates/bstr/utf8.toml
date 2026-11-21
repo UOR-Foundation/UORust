@@ -1,0 +1,292 @@
+[[fn]]
+path = "bstr::CLASSES"
+kappa = "e225024f11470974e7355f282c08ebc6dd228109fdf95b7b2d606598c049632e"
+embedded = "d61b820026bc5141b89709c53d1effe936caad56ecd90cf15d49b6e0499d7e1b"
+status = "translated"
+digest = "b0c351da54ff5a363da878755d88c47db7c196c0ed42ab6479a8610e6f1d4d5c"
+
+[[fn]]
+path = "bstr::STATES_FORWARD"
+kappa = "1a3f994e5db274646672b59baf135ebc2346bd6f70b85040109a460ac8986fd5"
+embedded = "5b3bea5650b67f5c7e52abe45c6495f2cd3899c8c49fda0c2043b8abf05f4771"
+status = "translated"
+digest = "8391addc0b16a49fe0da0f79ed8308bcec177b81212f6f8687239e1c8b49fc90"
+
+[[fn]]
+path = "bstr::decode"
+kappa = "cc4198ed22b97c3b0e045377aee33171fd4af513aa07d8e9c5d3dda058b793b0"
+at = "B=u32"
+embedded = "8dfd94e7865373a87c941b39dea9d395fa0e6ae034cdcde713eb29534c47fe15"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::decode_last"
+kappa = "ec3f3b360175dc22e13d2c38d68e94a6887cd98b53b09f89bcdcd2c40f42bd5f"
+at = "B=u32"
+embedded = "45eaeba7e3735cb9a47bb3cef045865e7027ea8f3fa9d3799f86ec1bb5684c42"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::decode_last_lossy"
+kappa = "b330ecb7c7b7229e6e0df1efa67029f0af6b1794f2b7ff8f4b8ab55acd0a7868"
+at = "B=u32"
+embedded = "172433755803de14196a6040d71c6cb0576ef29c4eecbf0864c78cc7f1848cd1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: utf8::decode_last: bstr's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::decode_lossy"
+kappa = "4df62d3ff0c44d767cf37cc5dbde3b852c19a159e7c8789244a1e1b0574b991e"
+at = "B=u32"
+embedded = "965b7c655adc2e5ef3521a6ec8810b53ced4c7a1516a3a85ec022059f444fb58"
+status = "residue"
+cause = "mir::TerminatorKind::Call: utf8::decode: bstr's MIR stops at mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::decode_step"
+kappa = "c3f8da6f0cc9ecdd22329ef6ce52ca8091d136d0a8576d5fb8af1793b1d96c91"
+embedded = "1388ac05fc761e52b262bf7cef7c0639187365e1a56025f5ccfc3214570eda92"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item utf8::ACCEPT"
+
+[[fn]]
+path = "bstr::fast"
+kappa = "588f3381ac47acce00c7dd9ac3632ea7647fd9574eefde9a6d3e9fc1557de54f"
+embedded = "700c3258484c67963cbec4d185b012b80bbd0395a11ff5c1df8c91bbe97c44e7"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::find_valid_up_to"
+kappa = "92942a5555fb3b4ec31de0b85bd3cf49368a84dba145cdee7d08051d66c0d1bf"
+embedded = "86a73b632dd3b4550e46cf2b0fed17a8afad58b0ef1e8766661455cee120fa82"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::is_leading_or_invalid_utf8_byte"
+kappa = "414e35100ed21acafb3cf089fdcbca092fe0a67970e921f4648caebabc745ee3"
+differential = 7
+embedded = "2321abb50de102fec66c6cac195b3e7b5c6b53a1f574cff94e4c84e04ac4a530"
+status = "translated"
+digest = "ddd1c2b83c0d38fc5a94fc3bbbec45c523e6fdf294d408a75c3096e2f8b73605"
+
+[[fn]]
+path = "bstr::slow"
+kappa = "37f91d7a0685390b032453cf591ad0ebeac0d484936f7445bae013d2c05df354"
+embedded = "5175f6efc242c7645c29d5ee3bce2a2fa203ff89c2749ce501ffb52e0e082d1c"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::step"
+kappa = "a632b895e243b404936b4573c0e2d02de0eb018f3c32a1c463d0e91d262b9adf"
+embedded = "fbd2106f7bc07b278d3dc22b41c957e0d09ec2b30061c1516a8171838e279cc4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::get_unchecked"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:179:10: 179:15>::clone"
+kappa = "e361303ac6ee27883d4b6120a251063640100faae20e21e6890caa4a47a6dd7b"
+embedded = "0fb07a4fc1d4124ea58a8076b4ca5ec2ae181a0b48797c299a33585a6fa03c52"
+status = "residue"
+cause = "mir::Ty: utf8::CharIndices<'_>"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:179:17: 179:22>::fmt"
+kappa = "9a45012e5849901c3ebf7baa210da09f73d722e7c15e217fc104fd32dc07e542"
+embedded = "a7926ceb97e9470f189d59615e59b502ce65df2cc7bbab8f4bdb8c4169883a90"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:250:10: 250:15>::clone"
+kappa = "f3f6b2d696592e02e2b6662059597531f4bd8e2d90f1b44777fb2bb80f6d3b1d"
+embedded = "bb6cad357b4d851789139ff26cfaaefc3215aaf26b0633c6123b676e645aa091"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Chunks<'_>"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:250:17: 250:22>::fmt"
+kappa = "818db7ee1a4eaab71a6b4ca087a7764b138ce58d5fe0fab5902310df698c89a5"
+embedded = "4dce1f63cd87d4200c1e4fb0ec60925028e2705bb61f75127b27761eedee055e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:426:10: 426:15>::clone"
+kappa = "a60becb4619f2b3617cee1895e7374536f13379b2159e8339f8a61b1ebee760a"
+embedded = "154436de5cfa691a63600bac9f369633eaf1f33b5c8371a96de98f650292bb8f"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:426:17: 426:22>::fmt"
+kappa = "935b3943438b9fde9b7f8b7a54a2d0de6525e99c28c4644be936dd1281eac1bd"
+embedded = "e421fbceb18dd81d0f5a8f6b186a3e2c7e37f72ecdb6b560a2204028ec96684d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:426:24: 426:26>::assert_fields_are_eq"
+kappa = "923fa73499cd155f9a13788ecff3a7f499370c9d5f00273c2f47d4a7e05e5088"
+embedded = "37b371ebde5fff30c2e1226dd350823ce781b3513ca3a0b2ef86c340e00c9242"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:426:28: 426:37>::eq"
+kappa = "a227e3bbe7355b9055c2bb27b8122cc5f6675c00fced64ee77937aa4103e6124"
+embedded = "a73586a86bebabac01a11d17df6f528c38ade17f44971c76e53bf7a1c2141b54"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:76:10: 76:15>::clone"
+kappa = "e9be2b5c61355932e2194a5301cd680278888950da144f593bd8514a06eb7bc5"
+embedded = "2eaa72efbf7d2136854c047e549f89b1ad26458f2d3ab1d62e63379254ef97e2"
+status = "residue"
+cause = "mir::Ty: utf8::Chars<'_>"
+
+[[fn]]
+path = "bstr::utf8::<impl at src/utf8.rs:76:17: 76:22>::fmt"
+kappa = "aaf4d20383b461d9a63f16277ae4870fb983d4ce182f892ae9032222e177331d"
+embedded = "70fb0c7542af2321f1e8a4c03367e80d868822fd5877856ea90575371dd8192a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::utf8::CharIndices::as_bytes"
+kappa = "ef86831bb8ffdbbb8f1d8594d757310870269b55823d408a9c6c0ed07300fd4c"
+embedded = "ecd07d0717ff87970ee96fc7b3f652cd16dd5ef1acfb9ffff46685d2dd7fca9d"
+status = "residue"
+cause = "mir::Ty: utf8::CharIndices<'_>"
+
+[[fn]]
+path = "bstr::utf8::CharIndices::new"
+kappa = "0f7a48908d9acc05cdc612c2e3f15485d19735abfbeb5ecd641ee7f32bd6c2f9"
+embedded = "1e48b4b08730e3e6659899dbf57f6bb65f5b385d139db8ae9131168441391887"
+status = "residue"
+cause = "mir::Ty: utf8::CharIndices<'_>"
+
+[[fn]]
+path = "bstr::utf8::CharIndices::next"
+kappa = "730f435e5ed6490251d6e2cc0941adbcca690d5629c51e40f15407136bc248e2"
+embedded = "a976cb0e57110754729fdc13d21ad1fdfb50daa686f6eae51f27d5efd0483969"
+status = "residue"
+cause = "mir::Ty: utf8::CharIndices<'_>"
+
+[[fn]]
+path = "bstr::utf8::CharIndices::next_back"
+kappa = "1b5013fd972aaff1fe9551109c5051b1743786ae87bf57b82bb962012a95de1f"
+embedded = "af961f36dc01305d7b0f64969e139ab5675f7223aea6f47a72dd0addad88bff4"
+status = "residue"
+cause = "mir::Ty: utf8::CharIndices<'_>"
+
+[[fn]]
+path = "bstr::utf8::Chars::as_bytes"
+kappa = "8eb08b83e0fb19f08835db7e08f660dc0e08a2235b2f7fc49249763ae46ce1ee"
+embedded = "814f9b0ec8b9829da101791c1f6011dab12d544f3bdf1fb269888856e16cb014"
+status = "residue"
+cause = "mir::Ty: utf8::Chars<'_>"
+
+[[fn]]
+path = "bstr::utf8::Chars::count"
+kappa = "a1529623a74f4fb826cd8995e8529941a974b7c5a6fa6651a401e211806b4c8a"
+embedded = "5e3a960defdea6bbbcfead77257fd13edaa28f5cc54e4dadf026501625066727"
+status = "residue"
+cause = "mir::Ty: utf8::Chars<'_>"
+
+[[fn]]
+path = "bstr::utf8::Chars::new"
+kappa = "061d71e5a7701cc326c15c1418fcb0310fdcbba5eeeb96852edf8dd7f18b6d13"
+embedded = "e7073cc96aa2b09903f491a4a682862b4a490fa2e6b97fde0432f3c7ada303e4"
+status = "residue"
+cause = "mir::Ty: utf8::Chars<'_>"
+
+[[fn]]
+path = "bstr::utf8::Chars::next"
+kappa = "5b11954fc0e96cb9666841654ba7b2fbd8a00e3db74b79eba1551e9b09d62555"
+embedded = "6e197da8ba8060be7c4241a1796409c54d12713bbc5c4204815f3be0d4679a0b"
+status = "residue"
+cause = "mir::Ty: utf8::Chars<'_>"
+
+[[fn]]
+path = "bstr::utf8::Chars::next_back"
+kappa = "03fa659584183da7c76a463a0c855aeb1f3d1930f90dfab3e6752308dbe6e1c8"
+embedded = "b6b909e3defb1dbea166e30b100c73e5f536e50b65f364dbf78034b8d96be947"
+status = "residue"
+cause = "mir::Ty: utf8::Chars<'_>"
+
+[[fn]]
+path = "bstr::utf8::Utf8Chunk::incomplete"
+kappa = "4e41988b8795ced625895fe73642634c552fa31aef54db612b774d506266d74f"
+embedded = "2c7c71647a2183af30fc6b8dea0463eb0fd773e0a29903d2db62cff5a176b1c3"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Chunk<'_>"
+
+[[fn]]
+path = "bstr::utf8::Utf8Chunk::invalid"
+kappa = "4e6278403a17338cd4de57caa22def06577e86793049dd8a1c11a61ccd51c461"
+embedded = "e4ee7db93f59938fda07feb9641ae173c372fa6944b4faec666ef9590b889680"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Chunk<'_>"
+
+[[fn]]
+path = "bstr::utf8::Utf8Chunk::valid"
+kappa = "6aa1b8a4241db0aca8e40526fe3ce44aa8beb1a2cc0b6f721c7534b02f1f198a"
+embedded = "9a2d8c92e2f4f3e25db5e9c6166041cb221830544038d2d98aa600f078af6c5e"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Chunk<'_>"
+
+[[fn]]
+path = "bstr::utf8::Utf8Chunks::next"
+kappa = "f85cf8f1c1d9bb512e32b384c0941a4e96c0f852c4d909691476b8930d419971"
+embedded = "3501e1ffafbded5fcc3fc156e91b317c2d6cdd61a619de6f7588228eb411b0e6"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Chunk<'_>"
+
+[[fn]]
+path = "bstr::utf8::Utf8Chunks::size_hint"
+kappa = "6e6ce7859749091654e4d05d63cd64100a94debe0902a0f15f67e3fbff2a42dd"
+embedded = "491e10806841e36bf1993165575d2c637a229eedb0de5ebe948db2421c7259c8"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Chunks<'_>"
+
+[[fn]]
+path = "bstr::utf8::Utf8Error::description"
+kappa = "3a430083a37c42147a57d1dd676cefc21e341e3021f6f81700d2bdb943041cc0"
+embedded = "b5b1fe1f8df71848edcc0f0413fefd7c48fde7f33b4137b096a74564c692d295"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::utf8::Utf8Error::error_len"
+kappa = "af06a524e013271491049807ed89467d100d34f38ba81fc29577e84e624571b5"
+embedded = "0c35f66318a3835f6dba1b80f64892d9f20f6a00b1f2f3d2a70be3a3f517dd51"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::utf8::Utf8Error::fmt"
+kappa = "01d705f5b336e96c4e0f6756b5dadf5f77cc231952ccaa9ad16e8d4b30eeed8c"
+embedded = "8167ab8b8062f3dac36ca15476d4b422e032a1d750323b3ed918b3677ba6e907"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::utf8::Utf8Error::valid_up_to"
+kappa = "84adbf396bac8acc3d2a280257eae6861e26b53b3c0d6b90d2bee6c29d8e73a7"
+embedded = "8a03f15f790fa1f201f536404c1058c107fd90ebe66249bc5a84e780558e6c27"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::validate"
+kappa = "bd4dd3326bbb7e9fcb6e55892340672c7425f7bb7bd7d2ca861b17aa6820f2c3"
+embedded = "2c0af5475ff8ae8514f1cff1604b8320689d161edd07451bd90c9d31ce5f0348"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+

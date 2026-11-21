@@ -1,0 +1,32 @@
+[[fn]]
+path = "tokio-stream::iter"
+kappa = "cbf1bd02bf48c5415ae5fa7e51bff9e06a1684ba997ea30b45802fc5d31ab75f"
+at = "I=u32"
+embedded = "b359a401c97113e38e4db671cde0fc3c70b8a5d505b77060712ec2b7dc2b3f4b"
+status = "residue"
+cause = "mir::Ty: iter::Iter<u32>"
+
+[[fn]]
+path = "tokio-stream::iter::<impl at src/iter.rs:7:10: 7:15>::fmt"
+kappa = "7fdc4ce84e6ecf66a1d5ff67bd5e4be1006580148c487c37a83e224915079ecd"
+at = "I=u32"
+embedded = "8fc5093f092211974b112a646c523aecf7371b10bd111cecd0340aa126bc534f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio-stream::iter::Iter::poll_next"
+kappa = "2f785e29644d08271450acca65d1532e24266bec365005bc05bccd989c14d5e7"
+at = "I=u32"
+embedded = "052ebc6149d162e168bffd08f8579456f341450b6f471a4f129772ba96cdcd68"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+
+[[fn]]
+path = "tokio-stream::iter::Iter::size_hint"
+kappa = "7cda1031817163dab72ae3df8ff2a9a1cb79f7d79caefd78046e5988b6b02420"
+at = "I=u32"
+embedded = "74555c18ba45cbfd6412a32e474bd00d4054e7a4b988a21a4167866ba06c51bb"
+status = "residue"
+cause = "mir::Ty: iter::Iter<u32>"
+

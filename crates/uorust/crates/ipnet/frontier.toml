@@ -1,0 +1,153 @@
+# The ipnet register (written by `uorust crate ipnet@2.12.2`; do not edit): every body of
+# ipnet's MIR at ipnet 2.12.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 237
+translated = 1
+residue = 236
+
+[module.ipext]
+bodies = 77
+translated = 0
+residue = 77
+
+[module.ipnet]
+bodies = 128
+translated = 0
+residue = 128
+
+[module.mask]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.parser]
+bodies = 29
+translated = 1
+residue = 28
+
+[embedding]
+bodies = 237
+embedded = 237
+evaluable = 237
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::net::Ipv6Addr"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: core::net::Ipv4Addr"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ipnet::IpNet"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Ipv4Net"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: Ipv6Net"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ipnet::Ipv4Net"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ipnet::Ipv6Net"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: core::net::IpAddr"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: IpNet"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Parser<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Ipv6AddrRange"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Ipv4AddrRange"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: IpAddrRange"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: IpSubnets"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Ipv4Subnets"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Ipv6Subnets"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ipext::IpAddrRange"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ipnet::IpSubnets"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ipnet::PrefixLenError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ipext::Ipv4AddrRange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ipext::Ipv6AddrRange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ipnet::Ipv4Subnets"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ipnet::Ipv6Subnets"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::AddrParseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PrefixLenError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Ipv4Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Ipv6Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::Parser<'_>"
+bodies = 1

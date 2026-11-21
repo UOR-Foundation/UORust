@@ -1,0 +1,204 @@
+# The fixedbitset register (written by `uorust crate fixedbitset@0.5.9`; do not edit): every body of
+# fixedbitset's MIR at fixedbitset 0.5.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 149
+translated = 1
+residue = 148
+
+[module.block]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.crate]
+bodies = 121
+translated = 1
+residue = 120
+
+[module.range]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 149
+embedded = 149
+evaluable = 147
+blocked = 2
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 2
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: block::sse2::Block"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: sse2::Block"
+bodies = 11
+
+[[cause]]
+cause = "mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FixedBitSet"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ones<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::as_slice: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Difference<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Intersection<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SymmetricDifference<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Union<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IntoOnes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Zeroes<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::intersect_with: fixedbitset's MIR stops at type outside the lift: block::sse2::Block"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::symmetric_difference_with: fixedbitset's MIR stops at mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::union_with: fixedbitset's MIR stops at mir::TerminatorKind::Call: FixedBitSet::len: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::with_capacity: fixedbitset's MIR stops at mir::Operand::Constant: the constant item block::BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_neg"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Masks"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IndexRange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item block::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item block::NONE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::contains: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::contains_unchecked: fixedbitset's MIR stops at mir::Operand::Constant: BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::insert_range: fixedbitset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::is_subset: fixedbitset's MIR stops at type outside the lift: block::sse2::Block"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FixedBitSet::new: fixedbitset's MIR stops at mir::TerminatorKind::Call: NonNull::dangling"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ManuallyDrop::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::dangling"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl IntoIterator<Item = u32>"
+bodies = 1

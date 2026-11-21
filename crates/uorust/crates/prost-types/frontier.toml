@@ -1,0 +1,562 @@
+# The prost-types register (written by `uorust crate prost-types@0.14.6`; do not edit): every body of
+# prost-types's MIR at prost-types 0.14.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 989
+translated = 147
+residue = 842
+
+[module.any]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.compiler]
+bodies = 80
+translated = 12
+residue = 68
+
+[module.conversions]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.datetime]
+bodies = 34
+translated = 8
+residue = 26
+
+[module.duration]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.protobuf]
+bodies = 828
+translated = 127
+residue = 701
+
+[module.timestamp]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.type_url]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 856
+embedded = 856
+evaluable = 856
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 181
+
+[[cause]]
+cause = "mir::Ty: prost::DecodeError"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: FileOptions"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: protobuf::Timestamp"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: protobuf::Value"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: FieldDescriptorProto"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: protobuf::Duration"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: protobuf::field::Kind"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: FieldOptions"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Annotation"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: MethodDescriptorProto"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: UninterpretedOption"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: protobuf::Any"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: protobuf::FileDescriptorProto"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: protobuf::Syntax"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: EnumReservedRange"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: MessageOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ReservedRange"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: protobuf::Field"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: protobuf::Option"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: source_code_info::Location"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Cardinality"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Feature"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: IdempotencyLevel"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: JsType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Label"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: NullValue"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: OptimizeMode"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Syntax"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: code_generator_response::File"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: field_descriptor_proto::Type"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: protobuf::Enum"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: protobuf::Type"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CodeGeneratorResponse"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DateTime"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EnumOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EnumValueDescriptorProto"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExtensionRange"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FieldMask"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MethodOptions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Mixin"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NamePart"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SourceContext"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::GeneratedCodeInfo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::Struct"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::field::Cardinality"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::field_descriptor_proto::Label"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::field_descriptor_proto::Type"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::field_options::CType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::field_options::JsType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::file_options::OptimizeMode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protobuf::method_options::IdempotencyLevel"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Api"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CodeGeneratorRequest"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DescriptorProto"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EnumDescriptorProto"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EnumValueOptions"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Method"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: OneofDescriptorProto"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ServiceDescriptorProto"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ServiceOptions"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: compiler::code_generator_response::Feature"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: datetime::DateTime"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: protobuf::NullValue"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EnumValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExtensionRangeOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FileDescriptorSet"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ListValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OneofOptions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SourceCodeInfo"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: protobuf::value::Kind"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: type_url::type_url_for: prost-types's MIR stops at mir::Operand::Constant: type_url::type_url_for::promoted[1]"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: type_url::TypeUrl<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: datetime::parse_char: prost-types's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compiler::CodeGeneratorRequest"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compiler::CodeGeneratorResponse"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compiler::Version"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compiler::code_generator_response::File"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::Api"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::DescriptorProto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::EnumDescriptorProto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::EnumOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::EnumValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::EnumValueDescriptorProto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::EnumValueOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::ExtensionRangeOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::FieldDescriptorProto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::FieldMask"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::FieldOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::FileDescriptorSet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::FileOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::ListValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::MessageOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::Method"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::MethodDescriptorProto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::MethodOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::Mixin"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::OneofDescriptorProto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::OneofOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::ServiceDescriptorProto"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::ServiceOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::SourceCodeInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::SourceContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::UninterpretedOption"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::descriptor_proto::ExtensionRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::descriptor_proto::ReservedRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::enum_descriptor_proto::EnumReservedRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::generated_code_info::Annotation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::source_code_info::Location"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protobuf::uninterpreted_option::NamePart"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: datetime::year_to_seconds::promoted[0]: type outside the lift: std::ops::RangeInclusive<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item NANOS_PER_SECOND"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: type_url::type_url_for::promoted[1]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: datetime::parse_two_digit_numeric: prost-types's MIR stops at mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: datetime::year_to_seconds: prost-types's MIR stops at mir::Operand::Constant: datetime::year_to_seconds::promoted[0]: type outside the lift: std::ops::RangeInclusive<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DurationError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimestampError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 1

@@ -1,0 +1,71 @@
+[[fn]]
+path = "base64ct::decode_padding"
+kappa = "a4617b31e594dbfd876d8175defda72b0ad93f1151149233f5f682f31daf6dff"
+embedded = "deff31b1a91b4217353b716ec7047e5d5728728cc31d19637315561392f100b0"
+status = "residue"
+cause = "mir::Ty: errors::InvalidEncodingError"
+
+[[fn]]
+path = "base64ct::decoded_len"
+kappa = "2f3f3bb25932a833504b94072d0b3d087ca4f89315eda92b83310b9486755da7"
+differential = 7
+embedded = "b95c7d60a98425626ee4a13128ee41a9470f7e03a48cc636a15a2e2f7caae318"
+status = "translated"
+digest = "6521524d601605ec066256b877fbaf1fbc10d272e3b92670773d890d137a6fa5"
+
+[[fn]]
+path = "base64ct::encoded_len_inner"
+kappa = "5b687b03aa790d283138fbd545f74996310dee9218a957512083db753780f4fb"
+embedded = "d426785dc69ce7f8517243b524e8f1979a04a436adc3eb2aad4e30b9224ac63b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::checked_mul"
+
+[[fn]]
+path = "base64ct::encoding::T::decode"
+kappa = "a5ab345885631a547de6260b85c6f1e3319f2fc3fbe04ec2a8ca71d627cbf121"
+embedded = "d4c5e0c21df00cdbaf9dee1bf3a6414146ae98baff62096e30bfbc80bb2da283"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "base64ct::encoding::T::decode_in_place"
+kappa = "1ddb520093632138e92b776a774621531e9962299e70186f54c9eb2616ebaee8"
+embedded = "0db8cfa1ec296ffa6a07d9c68c0cf76e7de2be504d17b2c0d4ef3afefb810529"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "base64ct::encoding::T::encode"
+kappa = "ff2ae83f6e7a50971df07a146164588ca57437f0525a85278f92e234d9a8f1dc"
+embedded = "9f512eb6c4263204f51f821cbf49180f6866b34be6c131cd9e0cff27e445c29d"
+status = "residue"
+cause = "mir::Ty: errors::InvalidLengthError"
+
+[[fn]]
+path = "base64ct::encoding::T::encoded_len"
+kappa = "46e39d66d673d54afb7cf34a987176db0b92623eb0864ba60cc3c86854abec32"
+embedded = "e904075dfa82d81fd2128c6d9c1bd43ae4c4eeaa1baba765648ee3803a1fe5d9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as alphabet::Alphabet>::PADDED"
+
+[[fn]]
+path = "base64ct::is_pad_ct"
+kappa = "4ca39965d64221a8f2e83b5920ded0ecc7a0f002a8dbf550026d3d4c029ccdd7"
+embedded = "a1876afe545b38595124a0a9e27362827a0b495281a768f6684d10114ea0cab9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item encoding::PAD"
+
+[[fn]]
+path = "base64ct::last_block_start"
+kappa = "717442f8f536af228605bfc6b16d43fda361dcefdd28d705e651c11e51e09a4e"
+embedded = "90b753fc3889914847df7dfe27f32085a00d30fb162a773a6fe1f4cf6083781d"
+status = "translated"
+digest = "c8733ea0c93a53c746fb15ad720cbff31e905b9f7c14484f35e55e34686cdb40"
+
+[[fn]]
+path = "base64ct::validate_last_block"
+kappa = "183f9c0758edf192d52b1e32ba5e3afbedc60be5663e8242037d06391dfe2f03"
+embedded = "7bdd6ea02d26944ff7dc394efa3684323c1470587f5d73d8e0f10b16fc19c305"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+

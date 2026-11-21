@@ -1,0 +1,109 @@
+# The tokio-macros register (written by `uorust crate tokio-macros@2.7.2`; do not edit): every body of
+# tokio-macros's MIR at tokio-macros 2.7.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 44
+translated = 0
+residue = 44
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.entry]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.select]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 44
+embedded = 44
+evaluable = 44
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: entry::FinalConfig"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: entry::RuntimeFlavor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: entry::UnhandledPanic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Body<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Configuration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RuntimeFlavor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnhandledPanic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: entry::Body<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: entry::Configuration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: entry::ItemFn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Attribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 1

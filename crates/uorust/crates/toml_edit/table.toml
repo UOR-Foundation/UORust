@@ -1,0 +1,631 @@
+[[fn]]
+path = "toml_edit::DEFAULT_KEY_DECOR"
+kappa = "b09ef37969ea840bea211d147b2a789014c0abe47c1db798579914bc9f6f3f77"
+embedded = "6ccba11936ff9234b5453e9b890daa7ca2b73376ccdd7e1d61d4bd0f871b7c63"
+status = "translated"
+digest = "c515a9ad9a90441384417b41c6d31314f6f06b97da7216687671c87217a7b81c"
+
+[[fn]]
+path = "toml_edit::DEFAULT_KEY_PATH_DECOR"
+kappa = "d16d9db8ebfe54f451cb53f4894561878e23af448a47bc989f656797ac95244c"
+embedded = "0d3e9e5b94e3bcfc8e3bfa726280770a862cfb87175b65af964b3f3d83b5ae73"
+status = "translated"
+digest = "a66610cdd839914402c8119a5754cb618308e49fe1c38f6f6720331b3f746620"
+
+[[fn]]
+path = "toml_edit::DEFAULT_ROOT_DECOR"
+kappa = "efb0910a8ced0f060e689f6c01e91acff2430c500ab964545c63a4e1b70f2d3d"
+embedded = "2a0f29d0a06a7a4346777cd741412596a4779b9d65e99ad4b64fd0aad2bef73d"
+status = "translated"
+digest = "e867e770edf51cfaed0392f12c5a2e0a5be6e17c8d752aa63449f03b10010696"
+
+[[fn]]
+path = "toml_edit::DEFAULT_TABLE_DECOR"
+kappa = "3e1ce0bab484786c1e02fc188457f7accde24999ed4ad8687c03395d8ecf2a3a"
+embedded = "1d08cf06ceb40194d23b116b26ac6a9bba493283861ca439c54b2e732dcf52d1"
+status = "translated"
+digest = "79c5b242483768d44ffca882c38e081a2e6e1592b485a469a26deb0bd7bc9449"
+
+[[fn]]
+path = "toml_edit::TableLike::is_empty"
+kappa = "710ab646cbcc552302172fa7d1dbf7abc483e8f48f86e8003fabf4f71011ddc5"
+at = "Self=u32"
+embedded = "543a91b86cdb59447efd1b5d5ebe8d7ce4af43ebd0705d6a78b57851a8563a8f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TableLike, which u32 does not implement in core"
+
+[[fn]]
+path = "toml_edit::TableLike::len"
+kappa = "6405067350f5431c33583635d25885af1b44eaf7f228ffbaba9914928b45f402"
+at = "Self=u32"
+embedded = "3f22170ef0a14befab65df69b221ed81d8590bdde74d32268e4ff209333367d5"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = (&str, &item::Item)>"
+
+[[fn]]
+path = "toml_edit::decorate_table"
+kappa = "7d7be6cd404e7cd3d39de0f394d389a4751cec0a642068be9d8419b5be4a9ad5"
+embedded = "6a84440e93690e0521dd00bb39dd5eda555c63ae9abd6db276ad8752c74e8757"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::<impl at src/table.rs:12:10: 12:15>::clone"
+kappa = "272399180c10bdf6168026e95bd9292e5f1ad3aaa074bb7603ec280735ac276b"
+embedded = "6582ee8c8d0fa3864924e39d273cea7a92f91cfc28e1d9bf49f3dc80b3a0b28d"
+status = "residue"
+cause = "mir::Ty: table::Table"
+
+[[fn]]
+path = "toml_edit::table::<impl at src/table.rs:12:17: 12:22>::fmt"
+kappa = "4038039b9814f65ff1f23183cf1d21341844ada3ba18256b19f0b5a4d1e45d0b"
+embedded = "9613526302cd99ac4b5094e49ed911ee9308bed8c2d8f2161031f2ae9fdd3cf6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "toml_edit::table::<impl at src/table.rs:12:24: 12:31>::default"
+kappa = "7f7eeadce4e033c0164f86907a42a781407624b58743e07fbf65c9929dcd9628"
+embedded = "ad6940efcc0c214209a39097ee7c15cad9e76c761b6c449d5720fc16f75f3bbe"
+status = "residue"
+cause = "mir::Ty: table::Table"
+
+[[fn]]
+path = "toml_edit::table::<impl at src/table.rs:534:1: 534:36>::into_iter"
+kappa = "68ffbaf3937dddcbed93569407c887f8645de3157bc2f717da2bfb7af997adac"
+embedded = "a2dfe3a1edd5673ad612fd7bc26af3862276eaccb95d8937431f2a163379b3a8"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = (&str, &item::Item)>"
+
+[[fn]]
+path = "toml_edit::table::Entry::key"
+kappa = "d3c6e86aa4e2fd2adae6507c5c695eb150422c96bb761b2c33002948fb614e8d"
+embedded = "70392a99e2608876aa09e04128b946b97ae2d009591a874597e5fa1acbeec0a7"
+status = "residue"
+cause = "mir::Ty: table::Entry<'_>"
+
+[[fn]]
+path = "toml_edit::table::Entry::or_insert"
+kappa = "c3443f57f6b5b69f3f1c6b16784e36c522ec53446f9f479e17d60f1d790617fa"
+embedded = "8cabc87db9cce75953795b1e3d17012853a770853b6ce77265971f98c4b4eb3d"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Entry::or_insert_with"
+kappa = "aba67544c836dad7ee9705ecd4ba557e96a2ebc25e200a8cf83a6c64c7ae1faf"
+at = "F=u32"
+embedded = "e9a55742e3d65e5caf6ab755cd00ce4519d9167050a27a7469a4ea0cc9e08785"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::OccupiedEntry::get"
+kappa = "52b62cb5b1e05bac40bc743ad6996b799bae41d79c90b4a65a83c49d23185782"
+embedded = "3747164e75425a55db9803e5e8166897ae985f9cd7c5c3d8bd04755ced57690f"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::OccupiedEntry::get_mut"
+kappa = "7990fde2ecb5ed2a1a925c05e3f11dddafabccc795c12b8e6a3e77ad516060ed"
+embedded = "3e10d8affe2801b7a914f62067eee830ee521a2e4c27e71cda949ef511ac7169"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::OccupiedEntry::insert"
+kappa = "96ec6f8a3e7ee1ed4d3fbe1d2530843b2e8f8ce8aa0f7fe4706629583c20150c"
+embedded = "ef8ab848c9f334bc315fa39783482ce4d0b070c1564c890e6ab9ebfd4042970f"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::OccupiedEntry::into_mut"
+kappa = "b0bf4a1c06bfcb9f40e418511284aac96be72da93dee00fab772cbc513a94f3d"
+embedded = "1048ff048e7d66fb399e489fa34d8d447481ed6cb8087faabab28fd120ae7ff9"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::OccupiedEntry::key"
+kappa = "1f3c5f73d0b46aae4bb531d5d1bfd05bdb63eef04f1cfbdb8e2e3046db9163bf"
+embedded = "1d23fcff67933e3c83582d9746902a828fe90ebb36ad290bceb0354b223c8b47"
+status = "residue"
+cause = "mir::Ty: table::OccupiedEntry<'_>"
+
+[[fn]]
+path = "toml_edit::table::OccupiedEntry::key_mut"
+kappa = "4db4d7e32e73568132f77cab4efeca83f5347ce063ea3202de2a95d22c494165"
+embedded = "e668f64bc0ebfb8f882d13b683408a9aecee23476cc4d88071fba962c2e8dfdf"
+status = "residue"
+cause = "mir::Ty: key::KeyMut<'_>"
+
+[[fn]]
+path = "toml_edit::table::OccupiedEntry::remove"
+kappa = "630ffef9ee14dd172910fd9e64744ca4b5f238273e18457ccf6fc9df1ead711c"
+embedded = "736e934f547b46323a63c50626f88c220940c1abdf24a6e36c075ed25132ac9e"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::append_all_values"
+kappa = "84c69ed8e01483369122330dd02105835db8f271244faf004e9a13cfb8732df9"
+embedded = "49d93f94331cff42d998203a42a79b8581a95d1b22eb8db054266f263db176a4"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::append_values"
+kappa = "270a068fdd081a84ef634ac4f6869ee064b289f45558f8d54e376b951649c673"
+embedded = "bf329d95dad01e144c8c2b88d0ab86cada3b0f2055c21cde0bb61f0208616c5a"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::clear"
+kappa = "5c9699a25f5f46c44b14e5009a1ce004c3782c7eb2d9fa1d60cf3f4ef4dc69c0"
+embedded = "40ab5f3aac09c7ea376fee7571f8bcf7482e4286356efbe567e4208e8ad50858"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::clear#2"
+kappa = "5b7b31920460478b13250e750954537a18361ff8312e58fff86b10c1ab3943b2"
+embedded = "81aaf5023d9396053059f12b04eb109118dcc388d1fe42e916bbfb27f7fbbb31"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::contains_array_of_tables"
+kappa = "d6b8c9eb57742486203eaeb3d26ce99eeb74026e1231b4b74e94ede6b5af4fe6"
+embedded = "5c2c050efc3f340b0820486fba0d94da6cec1664de543d690e21955aa30064c5"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::contains_key"
+kappa = "869a6f63b7fba507e14419e8b9a074004801a2f1f406c984a96897bb7e44e491"
+embedded = "b1250628f2b94f438ca0a889087e59da4352e2ab25d0f5189f69ff4674262ccc"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::contains_key#2"
+kappa = "283247aaea2f11019e076ba7a02aaf16db2f2e5725a048fe0d4b0b8617f8f6d9"
+embedded = "5cdc2a663d08621f12d76e09c33867b5467a778ff211f089a4e353c894037e77"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::contains_table"
+kappa = "452b8d03eba063c1c4ff17862f49ff92707eb594d88e049ec59d2e3fe44a425b"
+embedded = "3ab6a117e063dbe9256b816edb6be2fb744e80571283f6d1c3a7e7e06414a49c"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::contains_value"
+kappa = "23aa9e13eff0f51c7d0dc43743acc687a1ff24c4ad3fae28090a5c6ebdb016a8"
+embedded = "64687d3a5e2146750e4d614af70869f51e94a2183e3fd811e3340d4237213350"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::decor"
+kappa = "227d6269bd1e05f6537909bad20516f2b4b0ba67f648d424c660468e7aa68934"
+embedded = "0f79f40bf260af0b366adcf920069704f1fb9e2f29eb04a42c8de95f7b3269cb"
+status = "residue"
+cause = "mir::Ty: repr::Decor"
+
+[[fn]]
+path = "toml_edit::table::Table::decor_mut"
+kappa = "fff2610d355138dc83e8ca40738d91a25a929381cb9b4f7f0830e0ff12aa765c"
+embedded = "e98591c1bac4ac7b9608e7d6e56581444c698271b47d05a593ca49adbc5ded94"
+status = "residue"
+cause = "mir::Ty: repr::Decor"
+
+[[fn]]
+path = "toml_edit::table::Table::despan"
+kappa = "125df42b5718efa7d0b1760739ee21bd0715384039da5488525080d0be73c937"
+embedded = "caac628fcae6443c9feaefbbe9868ef2977887cc0f4fa09183c31836b8840670"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::entry"
+kappa = "6aeb9d3695d777d78182a1c2dbc19a846ef4143e39e3139f7447ebaf4360b465"
+embedded = "76b51585343106f47a281adb342d45d02ce2810871e7f48a832bc14ead5a2867"
+status = "residue"
+cause = "mir::Ty: table::Entry<'_>"
+
+[[fn]]
+path = "toml_edit::table::Table::entry#2"
+kappa = "71cf236c6d0557d4cfd02c16a953d005e1381d0430744d87810c3f30f88fedc5"
+embedded = "eec7aa69f08f9c43160049fedd9a12e8ba29c095bc2eb5390f459fb98b130fd9"
+status = "residue"
+cause = "mir::Ty: table::Entry<'_>"
+
+[[fn]]
+path = "toml_edit::table::Table::entry_format"
+kappa = "443104b5d1b9485cb2533cf7402de26c07732fd38123539e0768041c8715f00c"
+embedded = "cc3c93f225c41b750bdde9885b54d3206da638f6ff8800a623edc9d8ba9d0aa2"
+status = "residue"
+cause = "mir::Ty: table::Entry<'_>"
+
+[[fn]]
+path = "toml_edit::table::Table::entry_format#2"
+kappa = "7993cad7eb58eece50f0240580781985834ccb66c4b34fd6c02e804019773f05"
+embedded = "82de6905cc3dfaa0eb119d51cb0432b9d44f176d0604fdedd50d30471ba32c06"
+status = "residue"
+cause = "mir::Ty: table::Entry<'_>"
+
+[[fn]]
+path = "toml_edit::table::Table::extend"
+kappa = "1425128bb700f53e5189f9b919fdbe76ae3851359548dd72176f0a58c5570ec0"
+at = "K=u32, T=u32, V=u32"
+embedded = "87ad72e2662c704282de4ed06715ad48568207c717ba378083611c5305ad989c"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::fmt"
+kappa = "c75fd00c473e984342eaece533aab68ec7289c689857173e88c98c11a27a1211"
+embedded = "2dff153e6a19b49aa327bb1d9302f8be8cf3e6895ce71d351527344a0b7e7bdb"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::fmt#2"
+kappa = "14584369c6e4ff51dae054f3b6322e55ffe6483d7d666d1c48279fb793e48284"
+embedded = "02bc91f2c058f3f8572c7a7215d1ea4116c6b42937416c3d6d484a7940f3a707"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "toml_edit::table::Table::fmt#3"
+kappa = "0191f8ba32f61b1bea4c04a2a9e56257bf11cd75ae8d35f791a9b091c70271e5"
+embedded = "1b4302ab4e5865b4a8f92f21434cbff192a97861feeded2f325345c6b571be26"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::from_iter"
+kappa = "d1a1f2ddee860e3092d5d2e03dcda105e77be799278cce2aa1f28e4cb1bb2689"
+at = "I=u32"
+embedded = "cc1ca6f45e8ce6b1735526b16a0a1430c67cad91c33a2dbbf2b48055da76332b"
+status = "residue"
+cause = "mir::Ty: table::Table"
+
+[[fn]]
+path = "toml_edit::table::Table::get"
+kappa = "b3e4620ed28d0a05e6bbcdb42926cb5f118142de347da4792aec141fb6230af8"
+embedded = "acc343429c399a647fd526e7dd688b83148e47b1fe26522ed59b2ac613ebbaaa"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::get#2"
+kappa = "9e0d5197eea39d7a1829ac9825bcd5531a91aec4579d18d8e854ee7ab4185055"
+embedded = "8b1b8aab655b586cdbb08294fcdac1994043aed89e30e51dc231a167d51a170e"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::get_key_value"
+kappa = "512d2e16c94f4ade723a915cc15e8f665a7f4fe8383189541ba70d6f3a37ea03"
+embedded = "5de00d7ae92d2b3ce2e45b3bbe2b9b3616889b7a5229376c573eeec336ddbbbd"
+status = "residue"
+cause = "mir::Ty: key::Key"
+
+[[fn]]
+path = "toml_edit::table::Table::get_key_value#2"
+kappa = "012a011110be9345e75445462c5d50c307455b024cbd35f2e0bbc5d3b79b57af"
+embedded = "67c2f9f334f83cc6d83bf6a970cee3892a7b799061a4bc9b4c3d4b9d4f16c6b1"
+status = "residue"
+cause = "mir::Ty: key::Key"
+
+[[fn]]
+path = "toml_edit::table::Table::get_key_value_mut"
+kappa = "d449598ebb70831b1b05f0b5a46b02e0b190f4eaf65e57b9a8845276394bf97d"
+embedded = "121ad7641738c5dae45df569cc9b90327ef8eae6c189f306863027e27dcee931"
+status = "residue"
+cause = "mir::Ty: key::KeyMut<'_>"
+
+[[fn]]
+path = "toml_edit::table::Table::get_key_value_mut#2"
+kappa = "65a29a68d8c690169009f0dc480a051c1f5284c54c747f7868d82d22af8d2028"
+embedded = "42b685d3c3eb7d8e800cb6e78001cbc59f854cf09aa3c5f2bb2de29398fb3504"
+status = "residue"
+cause = "mir::Ty: key::KeyMut<'_>"
+
+[[fn]]
+path = "toml_edit::table::Table::get_mut"
+kappa = "b03ed553608abe24ce5fd8d35a87e642d7d29f3b4e8e71ed5fbc7f6761172c39"
+embedded = "679b6af453ff356a6c7cd7ab681928f59df3f2de4b8a0cc4de5cfa9549e610b3"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::get_mut#2"
+kappa = "0a414ea72155b14b1414c870c0e8b5fa2a6571bd608fdf9e84cf38a86c469fe6"
+embedded = "7288d64750d6b458158fdbba3954d7edb468df809767b523c67ae4526164a266"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::get_values"
+kappa = "a79904592a0105cc264fcdaa73a318868da7c15101c5346584a9fe4f8391f111"
+embedded = "4a7cb50342e02d87bb18860549ab9913ab8499cb4234430df75771508f80e6fe"
+status = "residue"
+cause = "mir::Ty: key::Key"
+
+[[fn]]
+path = "toml_edit::table::Table::get_values#2"
+kappa = "b55b9ef92b34a3b20c249a46e36b592c9c1dcb30108e7058eb60adde1dec670c"
+embedded = "58af0e50d54133739ae770d0bf6082a2f99966816f70d5ec35c140b27665b17e"
+status = "residue"
+cause = "mir::Ty: key::Key"
+
+[[fn]]
+path = "toml_edit::table::Table::insert"
+kappa = "0855d62ee2e53f230ccb9bfa3822e4a1ca072f26e2426897fc8fac168a303eda"
+embedded = "863ef09ad6ca27937678ca53f5560064637c31a42d3a6d9e8da59c3a1e629ea3"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::insert#2"
+kappa = "38b05b3870f21735ad80bd809a6b4a987914a6f66d9df7997487a8bf1509d278"
+embedded = "ba0c09efdbb4e3fc21ba3567a359e6748d7ee0fece7d27051f6378835b00ec73"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::insert_formatted"
+kappa = "f4b598d477ae9b53f44c13ef9799cf3bc4bd067cf067b8e4b1bf4794c363f143"
+embedded = "e239583f56103c8752a748d214493279d1b9aa8ab87188b4419830c48c353517"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::into_inline_table"
+kappa = "de8c3845a4158b66c2343e4a500af90b2f0baffd9e6802354729347dd75731e7"
+embedded = "76ac3ab6f3af666307e9444acdc428119be0f821f5bb2f2b1cfb4b900cd20da2"
+status = "residue"
+cause = "mir::Ty: inline_table::InlineTable"
+
+[[fn]]
+path = "toml_edit::table::Table::into_iter"
+kappa = "855e80e100f7835acb0beb1eede432cd4008b3a5f9c205cd72c7470ec949636f"
+embedded = "30a0ca2ec9071ad36892d4997428afb6780c219b158707c00472305b9426a4ed"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = (std::string::String, item::Item)>"
+
+[[fn]]
+path = "toml_edit::table::Table::is_dotted"
+kappa = "a03e33cc9b5c156ee1ed94c2cb38b7cd3cbdce1ecf899cacefe4e3b446ec44bb"
+embedded = "a18da9f8aa3ae39d9fd24a6c63ed1834950039f1aa62ada7cac25426763f4cbe"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::is_dotted#2"
+kappa = "1608e0b5637b3d388ac91547c6a8df1be291975e7a635c41e58756337f8bd46f"
+embedded = "d816a7767ac1ef43c34ce4b3311009814045ee7655916956f65799fb3f3233b4"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::is_empty"
+kappa = "531b1deb7b2fbd37191350ea648de69e01a800ce6ea81bb53d27e547ecb6ee9f"
+embedded = "0795453d73a32cd6ec1c434f5495d6380b33cf8e1f82ab07f09d4ccab3e9933c"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::is_implicit"
+kappa = "a85ff4e6d9933ad5abfe599818625218a87922f76bb9c18a36120630db656b0e"
+embedded = "53fd4f3f2dcdd4e20399ce4bc41729f52474c6de45e429d2e4b3cebd122a4eea"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::iter"
+kappa = "83638ae530c47559260c893ac651eaf0f00c1b9d33515887eaa2ed501c6e7955"
+embedded = "3cbabaf40adc41ec106e77540ad15eb18e9be8f0d141349227604ada239bfed8"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = (&str, &item::Item)>"
+
+[[fn]]
+path = "toml_edit::table::Table::iter#2"
+kappa = "306d809d621022f1f8d7f57717d095086d29b834524b71d58134d6ceceee5f05"
+embedded = "d24cceeccc4ed10d14df944fe836d273f083092de7765b011753d5be5f583a91"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = (&str, &item::Item)>"
+
+[[fn]]
+path = "toml_edit::table::Table::iter_mut"
+kappa = "b891fd69e365da189bf878faa4c6fc83112281d17413543e69e23134e05a73e7"
+embedded = "408187795507f07f6d80d82f0d01759541b66e9b360a4ce46a02ee10c9c91288"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = (key::KeyMut<'_>, &mut item::Item)>"
+
+[[fn]]
+path = "toml_edit::table::Table::iter_mut#2"
+kappa = "b3460aa7c4c8094895f677829b26c788a14cb435e902c50eb90cfaa56c5ac970"
+embedded = "aca6507e5c50ecada6763d93490f357884360f24b2c0bd677cfdd9819536ad06"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = (key::KeyMut<'_>, &mut item::Item)>"
+
+[[fn]]
+path = "toml_edit::table::Table::key"
+kappa = "a44a20d70d57cdceab260c2413dcb45c76661a053b4bd4cb38436a4b5530e637"
+embedded = "b0eb6237a6fac423e32bdabb3556355f53be8feea5c3c9ed6c08792836c59648"
+status = "residue"
+cause = "mir::Ty: key::Key"
+
+[[fn]]
+path = "toml_edit::table::Table::key#2"
+kappa = "d74872565c149e2d08b909724c53606c4f8efc99cb75198839f4adad1ef6649d"
+embedded = "cfaf0253a0ba299e4faacc67c8075bf5c2a3f985ef4d7386666e9e43acb20887"
+status = "residue"
+cause = "mir::Ty: key::Key"
+
+[[fn]]
+path = "toml_edit::table::Table::key_mut"
+kappa = "bbfa8f202662e050871f54764cd2808c0444230dafa336fd3bafd6186caf71bc"
+embedded = "e06ae603a833508a7c6db15ec0b75f95bafe648f4f6f7f8979482ae9323a25b6"
+status = "residue"
+cause = "mir::Ty: key::KeyMut<'_>"
+
+[[fn]]
+path = "toml_edit::table::Table::key_mut#2"
+kappa = "7b2c1fab1cea8a67f1f9145e4bbba9ccb2f1a3b17b176fc25fdfe8f7892bbd4c"
+embedded = "e1922f5ac92de50f827cc08d50c11a5ee5d63f6d89be04ac0f5d3095f66a60b5"
+status = "residue"
+cause = "mir::Ty: key::KeyMut<'_>"
+
+[[fn]]
+path = "toml_edit::table::Table::len"
+kappa = "7e3a1f71a064486937403d2faf8becaf3a27b2508c8c42a8e2286faa1c012d3f"
+embedded = "c599f31f014fd213330c8566fa904317f85accdc4617bd118fb588e9b7acdc87"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::new"
+kappa = "b0a036bce04ca16a21aa6f223e56d038c44a891dfa1e81e1e90b7767efce1cbb"
+embedded = "618bb0fb83ba78e75d4d5debe84d458718b149c39b14d5dd6b01f67025ccd77c"
+status = "residue"
+cause = "mir::Ty: table::Table"
+
+[[fn]]
+path = "toml_edit::table::Table::position"
+kappa = "16758cc73a44bb25717696d4276e5a8d4df8e199217a9e454f75640d4a2e194c"
+embedded = "1918e234877089adcb6251cf1f9e48898c8deb613d604d098a8c0e10d6c426a7"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::remove"
+kappa = "2ca9c9c10f3f48669d62eb2a1e623c8c6f95f479e6dd1f1ab3db290d28c8df76"
+embedded = "58c7f5818ba6888b10cded1b931b27bbf2bdb3a3d3d33c156604127b957ab859"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::remove#2"
+kappa = "36e1811ef4e05b3b82c2cf3dbff91c2090c2ee00944f259094ac97cf3cc01d62"
+embedded = "1d53de64fc2e8d82eb455f632f741eff80d71612ee61f1d319f559ee711beeb0"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::Table::remove_entry"
+kappa = "48e23ff811f5d2983e2685163d14d9885fa826ac7e022a8d0236792ab17f6d01"
+embedded = "3ef72938c886369ae0d881223bb833905ef667b8ebc2b08a94815bd5ff894bc0"
+status = "residue"
+cause = "mir::Ty: key::Key"
+
+[[fn]]
+path = "toml_edit::table::Table::retain"
+kappa = "19393fab2c862bc8251e9ded20b2d099c599dc71d2a88d0cb876f257d264afa4"
+at = "F=u32"
+embedded = "7303196919237043982dcb6e67e7c49fba40a74bac753a116103059ae5d81d5d"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::set_dotted"
+kappa = "6b9d39cebc1a1d83a69382580df25bf3bbfc29fb2e6a2145f4b3ef186a32b9bb"
+embedded = "98b046bbd03b93a83922d093191f76d7289222ac10ce37dcdec0d5a98d1aac79"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::set_dotted#2"
+kappa = "577150e7aa285d384d92b84e2639a49903ed0220c926d637f2de86a943f65523"
+embedded = "3a2cd8499a8c21eddcdb1534bdb9c0b56b9500bfc2a9fedb94e521689357bbfa"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::set_implicit"
+kappa = "e99a3a9c62d85b396dd3525717bc400e8d1f38d3d363bcacb5b0c907a5be171b"
+embedded = "2aa55f04a43f5b8bef11046764672d93a9c5978fcbb3e05fc06adf8880064da0"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::set_position"
+kappa = "94fce23c79fe51889b5b9e4664a33bb3b3cf7671b96674890efa9d8516ded431"
+embedded = "64832050cabbbc1cc2b3d970d190cf7f7a0859ecfba5d52921ebf28de7ec607a"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::sort_values"
+kappa = "0bf3dcefb4e55ede3e17bd6cba123e51292414813e05f4a8e82bacaa295ee88d"
+embedded = "e9cc7f137c63a47d35e0657d41a08f5fba850bfb2566b65ee040ed9e670071f7"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::sort_values#2"
+kappa = "664acc4817dc6a882ed91c668481602aaca50e3987d0d4873cf78e265bfc53d6"
+embedded = "4971515cc0650ef16ec998a86fe267459d11a2454b4b5f0391732637e5eecee9"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::sort_values_by"
+kappa = "d76ed56bce8acf455e4431badd5e2d4f3fdafe9710a555adb99e6e799676d4c5"
+at = "F=u32"
+embedded = "70987bd037f18af9ead25b329d7890a11e96f00df31ac07024cb793a50f8c300"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::sort_values_by_internal"
+kappa = "2dde43e92a21c7136988830eda900813ec47a9beed939a41acac5f9e97c1f391"
+at = "F=u32"
+embedded = "34803ebda38264f7f5bfff2096ba2072af6095aea0da9a82ac5a29ccd3bbe12c"
+status = "residue"
+cause = "mir::Ty: Table"
+
+[[fn]]
+path = "toml_edit::table::Table::span"
+kappa = "58a84517f37522d75167577a82628202fd1fc8d7978774e904ca52dcd9d1fdcc"
+embedded = "3a742af7043b11147ccf660e6e2f39a560e88209158d067c18449b9d87b483b0"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "toml_edit::table::Table::with_pairs"
+kappa = "09e071a429530d287932c23a0a93e1df5daa4aec09a1a3ec50eab5384e5fb783"
+embedded = "a0ba5ab12ef3dc0d1b9c528d790d3cd5bdcd4f356940a5c5394c399042e2c182"
+status = "residue"
+cause = "mir::Ty: table::Table"
+
+[[fn]]
+path = "toml_edit::table::Table::with_pos"
+kappa = "3e50bdfa96045de5868e4d78eb486cb56fcab60e950149563aaba9aec3045c33"
+embedded = "2c88af899190705fc608fd6e40bcc6a566bcb40fd0f808ef738b1031d87d1ba7"
+status = "residue"
+cause = "mir::Ty: table::Table"
+
+[[fn]]
+path = "toml_edit::table::VacantEntry::insert"
+kappa = "9119d98dd67c6e7af2b38a0d934038e71ce6f168c0d80270b5b1163ad5d7cff3"
+embedded = "46ef4117c7f938af4757cb3138e08ed624af4076e528717a393b626eeca37978"
+status = "residue"
+cause = "mir::Ty: item::Item"
+
+[[fn]]
+path = "toml_edit::table::VacantEntry::key"
+kappa = "4c238008448593420b1712e67231ef973507dd2f4fd72e4bb54d24b180153973"
+embedded = "ac65dc4f833094b8296f210093a6ec82f8e780ce68cec85dcee6ab4e8e613e45"
+status = "residue"
+cause = "mir::Ty: table::VacantEntry<'_>"
+

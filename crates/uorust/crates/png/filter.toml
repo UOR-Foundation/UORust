@@ -1,0 +1,176 @@
+[[fn]]
+path = "png::adaptive_filter"
+kappa = "c9b453f4ec9dadf777dbd5141221b2725bb43a5ba2e2b7e402aff612c3fa0e03"
+embedded = "d1dacfeef30ef0b12fc911deeb27a7d3201797a192563f43021111b0f72f6945"
+status = "residue"
+cause = "mir::Ty: filter::RowFilter"
+
+[[fn]]
+path = "png::entropy"
+kappa = "e9f505b4380616839241c1444ff455522f4a8e28f52b3b7ef34fa2198256b29f"
+embedded = "5258478c7b9474fef01331495e360abe12d853c59701ba6336547d78ea920844"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "png::filter::<impl at src/filter/mod.rs:19:10: 19:15>::fmt"
+kappa = "157b8c98744f77d48cb113b5186706e8bc116abf8421844b477a8c133bf425ed"
+embedded = "e95a623b10cca238c0c07571a8f8d03c186796252d9d05f3c53c85e5908612bd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "png::filter::<impl at src/filter/mod.rs:19:17: 19:22>::clone"
+kappa = "76bbed5891f6d2553490f7779e45af9ec13ea6ad1dcda408444f26218a4338dd"
+embedded = "d29466dfd5c3246f524b78a1b1a1edf3aad76725b5b47b7fc43e1a76fc9ad72e"
+status = "residue"
+cause = "mir::Ty: filter::Filter"
+
+[[fn]]
+path = "png::filter::<impl at src/filter/mod.rs:19:30: 19:39>::eq"
+kappa = "8f95345f1501278381a9621745e853922cb0608b5295bebda78842536188837a"
+embedded = "040866bc98a1e9443681b25fc6444717ae6da1d60699f439bdaf730e4e0d927d"
+status = "residue"
+cause = "mir::Ty: filter::Filter"
+
+[[fn]]
+path = "png::filter::<impl at src/filter/mod.rs:19:41: 19:43>::assert_fields_are_eq"
+kappa = "971c2e272705e6127736fa2d6c3f8b94473cd73fd47d54850056b138ffc48dff"
+embedded = "90a8a117545bf6e1c2660f0cebc331cf7ee705e697922490ca798bbc6e6afe6b"
+status = "residue"
+cause = "mir::Ty: filter::Filter"
+
+[[fn]]
+path = "png::filter::<impl at src/filter/mod.rs:62:10: 62:15>::fmt"
+kappa = "39c3472bfc3476e14d5a7ef2add579cde83dbd3883ebd1d7a9e7f779e4880ab7"
+embedded = "4b2e7307f76d93565354d0ffeaf587a0d3e88c0969df21ef17372a09006350df"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "png::filter::<impl at src/filter/mod.rs:62:17: 62:22>::clone"
+kappa = "d05f4642a96a543e10e1dd8c36984a3daf6ff96e967ae2dd421705fdc9f06596"
+embedded = "872ae5ccc36705d8ceb5b382244df43d3c6476ac7818e954415795bb3c14e33c"
+status = "residue"
+cause = "mir::Ty: filter::RowFilter"
+
+[[fn]]
+path = "png::filter::<impl at src/filter/mod.rs:62:30: 62:39>::eq"
+kappa = "fe12365a525c273cb89e7f5109fd355b2b53ff759cf2c9ff5d5393f976e3d414"
+embedded = "9d8427fbb635ee6b7eab3b24663764c8f9b67ab8512cc77d1a7e0c15719ea5ae"
+status = "residue"
+cause = "mir::Ty: RowFilter"
+
+[[fn]]
+path = "png::filter::<impl at src/filter/mod.rs:62:41: 62:43>::assert_fields_are_eq"
+kappa = "66ef12fa28bf9ed3d43bf1d9d3661634b068b053503f85f4c243d65c621fe50b"
+embedded = "5ac7a6c7ff6b88a61abdd8af7ead989924fd95d2eafd34f3b75227d31257c908"
+status = "residue"
+cause = "mir::Ty: RowFilter"
+
+[[fn]]
+path = "png::filter::Filter::default"
+kappa = "47d6e509e80325d412798252d300ca37c997502a3ed9826e1ba8d50f75698687"
+embedded = "8e56201608f51148a766defea86c775eb2feec06a48629001ab4f154e60e9117"
+status = "residue"
+cause = "mir::Ty: filter::Filter"
+
+[[fn]]
+path = "png::filter::Filter::from"
+kappa = "1eb99e38a69a28a5680178a9e69464f1f82f94003c8863860dc182e1ed48a383"
+embedded = "f80066aba00d4eb0c4bc505b086a1869e0763cd7897622e93ab0cd18d4b7ed78"
+status = "residue"
+cause = "mir::Ty: filter::Filter"
+
+[[fn]]
+path = "png::filter::Filter::from_simple"
+kappa = "0c721014f21ecae43ec1dc9c807e9869e3d3128e7dca7b00e82a3618ce06c55d"
+embedded = "29e63c9ab4727df6f600ac7ef4439d24972787e2cc4a09f549f219a86c2f14e4"
+status = "residue"
+cause = "mir::Ty: filter::Filter"
+
+[[fn]]
+path = "png::filter::RowFilter::default"
+kappa = "09ffd59b84a4cfa67bf46cd53c18a5576c386a9ee7927003ea67d848f8ba8bcc"
+embedded = "7ebb9b36e653cb95263318a3d5543da96bffdda196dd64c309b7e4305b688309"
+status = "residue"
+cause = "mir::Ty: filter::RowFilter"
+
+[[fn]]
+path = "png::filter::RowFilter::from_method"
+kappa = "daa9dc3f03d719b4e2a39ae529633ed000de7661e8f170d8dc087536c6340466"
+embedded = "8e37ca7b9ddf4d0b28b5dc339d18b31156d80a1b4e87cc24431d461f5ca00f5e"
+status = "residue"
+cause = "mir::Ty: filter::RowFilter"
+
+[[fn]]
+path = "png::filter::RowFilter::from_u8"
+kappa = "6925c11a41da9753315db5dfdd8e091892632907d09c45dcce88f88e13d77f49"
+embedded = "6c397634abf734f901c781800a76a0162b19cedab41b4e7071486e2dde6f0616"
+status = "residue"
+cause = "mir::Ty: filter::RowFilter"
+
+[[fn]]
+path = "png::filter::filter"
+kappa = "ff87c32ff75daba8c0a41d8ca4432a12fbdba0f60bf3aceb0838bf73fe94c400"
+embedded = "47d25ab86a74338f4aacc29cf26b40827e33e2e35b514ea1a3441ad1ff8e2279"
+status = "residue"
+cause = "mir::Ty: filter::RowFilter"
+
+[[fn]]
+path = "png::filter::unfilter"
+kappa = "bd99eab567bdd89547179229d63d7098e64615306bdfdfc8bc16b0c60afff53d"
+embedded = "2b5d5945a4b8fc081e0b51d3f4d150f422dc770aaabd2744ac95ecd4f0440e06"
+status = "residue"
+cause = "mir::Ty: RowFilter"
+
+[[fn]]
+path = "png::filter_internal"
+kappa = "92c73c9eb3a027c96053896d16ee02ef8ecebde872c8257ee319e84fbad826a1"
+embedded = "a25b0db9914ce9b79ff900fa6b706bd3e21d2f9c9cfcadf6619a74564df3f494"
+status = "residue"
+cause = "mir::Ty: filter::RowFilter"
+
+[[fn]]
+path = "png::filter_paeth"
+kappa = "5e3f998fb23392e2a0c4497dcb2c0e38ad2305aaf9c21d9626052ef81973bc89"
+embedded = "f5f09469b71d20fa73d4740afbcd9817b36783577a85c466253f880fff024539"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <i16 as From>::from"
+
+[[fn]]
+path = "png::filter_paeth_fpnge"
+kappa = "378972f9e0b671e81f49bc6c81e2699fd406d5752ba5fa42b304b7e9f75fe27d"
+embedded = "6397782056c2a8f73c5a901599560b74823f525f94f3c86de1c5844641afc1c9"
+status = "translated"
+digest = "d8f4e1327eb9a94368698a4a255c6728b72d883de25c7e95d45c147cdbee1207"
+
+[[fn]]
+path = "png::filter_paeth_stbi"
+kappa = "a1cf123e8db81b4473d02cae2614d70bc378117c7e21ccad4c033e5c42b86ccd"
+embedded = "21890c560c3bafb9aee456b4ad7b9f229838eee45adafbbf74322e8ff04cbadf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <i16 as Ord>::min"
+
+[[fn]]
+path = "png::ilog2i"
+kappa = "6ecff073da63208e3019f342a7cad81d54f51062708503eb3623e3ece513c9e9"
+differential = 3
+embedded = "bf3e4cecf0603d8c35c5c66d823303fe8bdc0483fb97190bff22b99dfd09d029"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::leading_zeros"
+
+[[fn]]
+path = "png::paeth::unfilter"
+kappa = "9b8540a50728653246cf33c36ced5f5a88e1ed251685aa47ffc2378f8d27e760"
+embedded = "9c4d06417914810fe62da20942fd22b6b51b37093582ac312a8068cd94c4e354"
+status = "residue"
+cause = "mir::Ty: common::BytesPerPixel"
+
+[[fn]]
+path = "png::sum_buffer"
+kappa = "a0ca26468d342542e11ed5fe1013400b95b0b3e2b68bc6138d039a2cfc98aabe"
+embedded = "60e1b3d670579f977f80e1c7d1ec5f0dbb25ccb0bfee22933c55fdbc5218757c"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+

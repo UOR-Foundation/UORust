@@ -1,0 +1,538 @@
+# The zerovec register (written by `uorust crate zerovec@0.11.9`; do not edit): every body of
+# zerovec's MIR at zerovec 0.11.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 558
+translated = 10
+residue = 548
+
+[module.cow]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.ule]
+bodies = 346
+translated = 9
+residue = 337
+
+[module.varzerovec]
+bodies = 116
+translated = 1
+residue = 115
+
+[module.zerofrom_impls]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.zerovec]
+bodies = 69
+translated = 0
+residue = 69
+
+[embedding]
+bodies = 558
+embedded = 558
+evaluable = 557
+blocked = 1
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[differential]
+bodies = 6
+theorems = 30
+
+[[cause]]
+cause = "mir::Ty: ule::UleError"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: zerovec::ZeroVec<'_"
+bodies = 24
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: <u32 as ule::AsULE>::ULE"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: varzerovec::slice::VarZeroSlice<u32"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: ZeroSlice<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: ule::plain::RawBytesULE<4>"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ule::encode::EncodeAsVarULE::encode_var_ule_len: zerovec's MIR stops at mir::AggregateKind::Closure: encode::EncodeAsVarULE::encode_var_ule_len::{closure#0}: type outside the lift: core::iter::Map<core::slice::Iter<'_"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ule::plain::RawBytesULE<8>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: varzerovec::components::VarZeroVecComponents<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ule::plain::RawBytesULE<2>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: varzerovec::vec::VarZeroVec<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: cow::VarZeroCow<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ule::plain::RawBytesULE<16>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CharULE"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: components::VarZeroVecComponents<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: vec::VarZeroVec<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: VarZeroCow<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: AE"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: B"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Index32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Index8"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: LEN"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: components::Index16"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: plain::RawBytesULE<2>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: plain::RawBytesULE<4>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: OptionVarULE<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Tuple2VarULE<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Tuple3VarULE<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Tuple4VarULE<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Tuple5VarULE<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Tuple6VarULE<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: VarTuple<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ZeroSliceIter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: plain::RawBytesULE<#_N>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: plain::RawBytesULE<16>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: plain::RawBytesULE<8>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ule::chars::CharULE"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: varzerovec::components::VarZeroSliceIter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by VarULE"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BlankSliceEncoder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EyepatchHackVector<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NichedOptionULE<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Tuple2ULE<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Tuple3ULE<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Tuple4ULE<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Tuple5ULE<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Tuple6ULE<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: VarTupleULE<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: VarZeroLengthlessSlice<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: VarZeroSliceIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u8>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ule::niche::NichedOption<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: varzerovec::lengthless::VarZeroLengthlessSlice<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as varzerovec::components::IntegerULE>::MAX_VALUE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OptionULE<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RawVarZeroCow"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ule::multi::MultiFieldsULE<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ule::niche::NichedOptionULE<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ule::option::OptionULE<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ule::plain::RawBytesULE<#usize_N>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ule::vartuple::VarTuple<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: encode::EncodeAsVarULE::encode_var_ule_len::{closure#0}: type outside the lift: core::iter::Map<core::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: encode::EncodeAsVarULE::encode_var_ule_write::{closure#0}: type outside the lift: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ULE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item BlankSliceEncoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_utf8_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: varzerovec::components::compute_serializable_len: zerovec's MIR stops at mir::TerminatorKind::Call: varzerovec::components::compute_serializable_len_without_length: zerovec's MIR stops at mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: varzerovec::components::compute_serializable_len_without_length: zerovec's MIR stops at mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: varzerovec::components::write_serializable_bytes: zerovec's MIR stops at mir::Operand::Constant: the constant item <<F as varzerovec::components::VarZeroVecFormat>::Len as varzerovec::components::IntegerULE>::MAX_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: U"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::TryFromIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::option::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cow::RawVarZeroCow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: plain::RawBytesULE<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::multi::MultiFieldsULE<#usize_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::option::OptionVarULE<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::plain::RawBytesULE<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuple::Tuple2ULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuple::Tuple3ULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuple::Tuple4ULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuple::Tuple5ULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuple::Tuple6ULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuplevar::Tuple2VarULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuplevar::Tuple3VarULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuplevar::Tuple4VarULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuplevar::Tuple5VarULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::tuplevar::Tuple6VarULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ule::vartuple::VarTupleULE<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: varzerovec::components::Index16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: varzerovec::components::Index32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: varzerovec::components::Index8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: varzerovec::error::VarZeroVecFormatError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: varzerovec::slice::VarZeroSlice<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSlice<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::slice::ZeroSliceIter<'_"
+bodies = 1

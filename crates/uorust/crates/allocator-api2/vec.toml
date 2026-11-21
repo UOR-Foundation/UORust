@@ -1,0 +1,1198 @@
+[[fn]]
+path = "allocator-api2::drain::Drain::allocator"
+kappa = "253a11cd3579f01e4d43ebc371429abc13204f61b0fe8ff4796d95c7b486e405"
+at = "A=u32, T=u32"
+embedded = "4ea9554be27885b5355ec8fcfa8ffedf05e9c56b262cdeec6ba1d2c097990535"
+status = "residue"
+cause = "mir::Ty: drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::as_ref"
+kappa = "42402cd9d906dc76aa11142db1cc5fe3af8e4a849fbfa711811984c696833ef9"
+at = "A=u32, T=u32"
+embedded = "bdade51b313d3b71da14066908443a0749898198c434e7bcd910b30a6e09e4fc"
+status = "residue"
+cause = "mir::Ty: drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::as_slice"
+kappa = "c2eb55124bdb9d51252b41ce8180d080cd6399addca4ba38829f210403d434c7"
+at = "T=u32"
+embedded = "af856a82b24b5138a92e25c394d368c52d442e651fe70c205a8564b81cde4ffa"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::drop"
+kappa = "a7d308c80012558aa73a1b6a707747d4c490df93607237c988d9bd67efaf5aaa"
+at = "A=u32, T=u32"
+embedded = "b6c9ea409c9e51dd421cd0bc2b56a8c0a7394898969594048dc294c634ed78c8"
+status = "residue"
+cause = "mir::Ty: drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::drop::DropGuard::drop"
+kappa = "6bc2db213f534dc877142735ae27618fffe2a1787153bed2a048d7553d85b39d"
+at = "A=u32, T=u32"
+embedded = "ed62d5845c0ad3573ab2d4849f7caf3c9188b88ac9f42bc4f4d029a96bc8f478"
+status = "residue"
+cause = "mir::Ty: <drain::Drain<'_, u32, u32> as Drop>::drop::DropGuard<'_, '_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::fmt"
+kappa = "88ff3272bbe2518a736fd7ce24aca4494e19819c9d906c2824922dd75e9093cb"
+at = "T=u32"
+embedded = "d6aba82e49eeac352fefaf31ad46fd2ac9e989447dbd091df2e050617e9ad15d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::keep_rest"
+kappa = "956746e028251e2ecb67207a0197683f5c12399c35ac27962d42a2f96fe9740c"
+at = "A=u32, T=u32"
+embedded = "762cbb9586acbe9ffd3cb35ab7e1b57910c1f88fe42f583b04a692c33c3b2c20"
+status = "residue"
+cause = "mir::Ty: drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::next"
+kappa = "09f3eedf65ead1145299b7855cea9c8da90f64e8512f806d95047dc35fede45d"
+at = "T=u32"
+embedded = "3177779d71b9894bd867b8edee664809e0c16560ce98a1f481167efd3c57c947"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::next_back"
+kappa = "2459fdfe6a9e3eeb490ef266931770a19d338c01ddcdab4dad3b381087d604ef"
+at = "T=u32"
+embedded = "1b95510a9e58980720769eaf558287260690702b71b8b689b63169363ee31161"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "allocator-api2::drain::Drain::size_hint"
+kappa = "be9cd2feb5ce553935bcffa79812da0a5c78de5973debafb715accb7514a47bc"
+at = "T=u32"
+embedded = "e782c6362749036bc82997e9fddeb88036d08be6b6921b5ee2633682cc2718ce"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "allocator-api2::from_elem"
+kappa = "773fd58e84fd5d2367b03f97b614182f94503e5e103ba432e2ddf76c89348789"
+at = "T=u32"
+embedded = "8662081404240bfdfb251b9706ffc1a6c57be4b6094701de0e6bd21b4cffb6cc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::Vec::with_capacity: allocator-api2's MIR stops at type outside the lift: alloc::global::Global"
+
+[[fn]]
+path = "allocator-api2::from_elem_in"
+kappa = "d5abe96e0660fea15c05eeefa0b289030455efd6ce68a4d400ebdf56f0a14ef9"
+at = "A=u32, T=u32"
+embedded = "55deaedeaf6e048be20f255cebe6d8b5d46618de72e7bf659208c9dc844a5d4b"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::allocator"
+kappa = "c48ba4b2e584fca60b43c0cd194a76f8c29e664e1d0941c934c38fda73de4d24"
+at = "A=u32"
+embedded = "6b75788af9e68f1f139ded63cafa3c636446206ea3bb1eeecebe6b37aed2be69"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::as_mut_slice"
+kappa = "94a384f1a978e9658b03e2ac49115b47cd6c3cdebbd539509053018dff4a68af"
+at = "A=u32, T=u32"
+embedded = "006c2444cce995857eae85f759cdc6f4888c2b1ad210f777d12b5dfe4b2717b4"
+status = "residue"
+cause = "mir::Ty: into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::as_raw_mut_slice"
+kappa = "266bbbb8faefd74cb4dee346d4ca229a138e43f815fe1c039d88a389e4e81ec4"
+at = "A=u32, T=u32"
+embedded = "0396c4607913eefd459c9038a0b8194553342dc9c465b24336d4c1be6fb11630"
+status = "residue"
+cause = "mir::Ty: into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::as_ref"
+kappa = "260e411ff3cc6b34bd0a734f0f22b7e151535293923fe91d154410aa7381f7e0"
+at = "A=u32, T=u32"
+embedded = "05ea37a475a5e71451ab9edb9eafb6edccbcc52ee407e743360040f9e8937f9a"
+status = "residue"
+cause = "mir::Ty: into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::as_slice"
+kappa = "507bbdf7670a1ba20e600a323ab2f7b78ea7cc402002f3ea582d7a4a6b460fe2"
+at = "A=u32, T=u32"
+embedded = "49c0d4758690ce713128578d9d26b90487817ddfd216457f54c546f7d300f6dc"
+status = "residue"
+cause = "mir::Ty: into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::clone"
+kappa = "7ce44e5dc23fb84d277dab4238f1f7fbe615fc99f36a2f74040f7f32de9e303b"
+at = "A=u32, T=u32"
+embedded = "198c47e41aa9e4cccf0193ebe3c95efcaf9f351fd958e947641fa1d4b7a098af"
+status = "residue"
+cause = "mir::Ty: vec::into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::count"
+kappa = "2049cfd9e561ea03e4b6efba77cf8f11efdd963a32d540c9be5817a9ca22d0f8"
+at = "A=u32, T=u32"
+embedded = "d29b2003df723bcd85f19fec5e99eadbe45a85e1169dd3c79eaccdf5fa49adef"
+status = "residue"
+cause = "mir::Ty: into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::default"
+kappa = "7ede8a3fe43536cdf28585ca774938b0eb21310c24c2a61f14b5ae01f936b23d"
+at = "A=u32, T=u32"
+embedded = "a4817ec5f1dd07a7096d5e074d7bb31ee2ddfb011fafb3ff117ccf07e248d05e"
+status = "residue"
+cause = "mir::Ty: vec::into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::drop"
+kappa = "8b3bbbea995a68598c86746c44ce57d5f5bb99b7e31756a0ffedc7299f6dadc1"
+at = "A=u32, T=u32"
+embedded = "b3eda7f322fe656986cd6be20df4a8473650882a9672f3cf1863154e41efaba4"
+status = "residue"
+cause = "mir::Ty: into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::drop::DropGuard::drop"
+kappa = "ab84740b6c1c56f6c92eda16027840cd4307b8dcac2448eacb3ebe4adddfc4ce"
+at = "A=u32, T=u32"
+embedded = "40417bbdd25e753e28e855cf67fa84132deb8093c0755a2809bf7ae4c04104e2"
+status = "residue"
+cause = "mir::Ty: <into_iter::IntoIter<u32, u32> as Drop>::drop::DropGuard<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::fmt"
+kappa = "4ca45cc1ad9632b25f7d308debc6eecf533462d9e36b7223994b77e5eefaacb6"
+at = "A=u32, T=u32"
+embedded = "0322bd1d900b849c74a58b43ddde32acb324edeb87cb3f0016a5ec57ad62394b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::next"
+kappa = "5c13fd5be4e993bb55cc10f9efee1f4f4a046bc6e09fd5bfa17c854d21aee82d"
+at = "T=u32"
+embedded = "915656e72b8323fac82e5508d45b43357af99236e5548e2367e5c31e541fa3df"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::next_back"
+kappa = "0ce99ccea6b332bf726bb39a4cb06c276d4b29db593e12401d20c9b321c7efc8"
+at = "T=u32"
+embedded = "6fb483d46b046d054bba28f3a98ceb12c551d40e7016b4969c442592fcb1044a"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "allocator-api2::into_iter::IntoIter::size_hint"
+kappa = "b7b7805904962262eea25ac4e62ae57068d056b2e1adcefa652a5e79ecd949ed"
+at = "T=u32"
+embedded = "6d3886d9c1d4155d0689c82bde953b22f4f3840402785ec171faf38952eec1d2"
+status = "residue"
+cause = "mir::Ty: A"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq"
+kappa = "34fca1dddfa6a2098744354bc7e6acf8a4efbfafa3170a4973fb60c88a1976c2"
+at = "A1=u32, A2=u32, T=u32, U=u32"
+embedded = "30dd02aa6fc440e806dfa5c1a2f59cbad8802dbb022c2a389ed0980d983ca6ae"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq#2"
+kappa = "ea51db7b4dbd286c266430761be5f5794da04c239ebaabdd9656278012bdb9f7"
+at = "A=u32, T=u32, U=u32"
+embedded = "2f06cbefb515513a1d4d57fc4dbdd6439979182e80c2d5f8eb198116bc330e78"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq#3"
+kappa = "4fbb4775c06aecb705fd47ef61916ba80d8ba0cb8853bd1666f617e506aeca6a"
+at = "A=u32, T=u32, U=u32"
+embedded = "a02a81c91f7c0552e496cad2add8fdaa03b22aa25b2774906fe0d4c17e0c3b6d"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq#4"
+kappa = "52c830dd3cc92bd21932740ef627ee233d1bb4ea229a8d8d8ec734c7135697b6"
+at = "A=u32, T=u32, U=u32"
+embedded = "db347475d45a16dee5529cd7a3ad07a928993bd0905cd645ed79a856b1efeeaf"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq#5"
+kappa = "436f797316f75c8f8a494888e0752faf26669a6d780cd12ec4502ee95d13e352"
+at = "A=u32, T=u32, U=u32"
+embedded = "b73e3d25b56e59dd0efa0b5fa6391109547df3018a93d7da93341139c80bf476"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq#6"
+kappa = "4013fec457f2068913e8c00d0de3c5a4726000990552a129734d9c1ba0c9742c"
+at = "A=u32, T=u32, U=u32"
+embedded = "a93ff4bbdea15a7815839734444f265732e36a41e7e616336a38a94ce623d5d6"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq#7"
+kappa = "e37d96fd42645049345fce73d8f427d62fddefff2a767fdfd99d02db7d0e9221"
+at = "A=u32, T=u32, U=u32"
+embedded = "be9bbdd4bbd6ff3b034a10b186e43394406de6dec8f01ff4f1d77dc6c0fc8bad"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq#8"
+kappa = "1e1f21c2b64dfb26a34c1ac7942b710ed567ee7edd8fda23670bb0bf6e1c9706"
+at = "A=u32, N=#_N, T=u32, U=u32"
+embedded = "ec328d4a1794bb743a852e8496af25d5de0799fbd21c8071a89ab92ed8c7e8dd"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::eq#9"
+kappa = "0edae4524f936bc5645e352704cb6b02d309bf8577fb90e5122546737ffcdf87"
+at = "A=u32, N=#_N, T=u32, U=u32"
+embedded = "f0a19f6cf923089403718ea270cf6cdacd83cf30ec633ca0f77dc67b938e84b2"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne"
+kappa = "d8b9ec32783c343a3f5e257a722bc0390a40d5e85c70ee7f6bb7ecd3b1028d8a"
+at = "A1=u32, A2=u32, T=u32, U=u32"
+embedded = "94fdf6be8fd269efdc0c5fcc32131ce0e83bb91c55a2d0a45d6c7e400da664ac"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne#2"
+kappa = "a67855c15b182205e6665b32275792484698f1a8868aa042a7769af0ea8f88e3"
+at = "A=u32, T=u32, U=u32"
+embedded = "283b7bcb5dab21a8a2a33ab4622b080fd169c5e2214c9e7e328bd9552803239f"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne#3"
+kappa = "0f7ce15f9ade08f6c444d51659f53321894148a55e6cd1e93715f5f0b848d110"
+at = "A=u32, T=u32, U=u32"
+embedded = "64c9f95fbf21f1631954600a8b4b721f714eab1fbae26c516778268a329c0791"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne#4"
+kappa = "6b5af61e0a01b57a50ed9a3e1cf7956b9f9154028a5df18f77ec8eadb6e37634"
+at = "A=u32, T=u32, U=u32"
+embedded = "06055b64bd26a53cd1046e3adb2ad002fdd13c001cb5262b068f103b58ee9888"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne#5"
+kappa = "00b40d9a128bb7a701647ada87e38accaed57216167e1edb829ade2426c9cc4c"
+at = "A=u32, T=u32, U=u32"
+embedded = "c213ddbb35a3c7c76fea62f279c72bd45c34bd1f72d3c9c3a38c97983da89722"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne#6"
+kappa = "77190347efb9414268cbd099ae5161f438b1483dcbe4150f55c1d660a3093b9c"
+at = "A=u32, T=u32, U=u32"
+embedded = "b2c9e842fd48aac1da1e4580fee40d20eeca9d11e78750be0076bb29936a0aa1"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne#7"
+kappa = "10621c02b93096e5ff2751bc102d3afbdc606c87b7b4c221e70391a86b7db9ba"
+at = "A=u32, T=u32, U=u32"
+embedded = "364680fb1ff71052c200a06344141a19570f4bd77d1f6148f312edd1eb1b989e"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne#8"
+kappa = "ec72726d23a2801ab4bce3122e4bf4654489bcbd253b6c7941c3bde9d26227e3"
+at = "A=u32, N=#_N, T=u32, U=u32"
+embedded = "719948c53b162726e145d88a336d0fc00e3b2e91a23e626a99f8458e30595b51"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 12:29>::ne#9"
+kappa = "32d778995c0c9f56ac0129b3942b93e53fc982fa603ce45af0af0edf6d0250de"
+at = "A=u32, N=#_N, T=u32, U=u32"
+embedded = "1edc125b8887958614be2022d5a4450886ebbeb155ac17a18d367279a5d3fc71"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 13:26>::eq"
+kappa = "5892b99a6480f1caf1c1cce30fb9c6177620ebb9928742483a487d3b55181567"
+at = "A=u32, T=u32, U=u32"
+embedded = "57a097419c136c941f79eedc5a3ffaf051f12f6da78d21a3ab3971ad605d10e2"
+status = "residue"
+cause = "mir::Ty: Cow<'_, [u32]>"
+
+[[fn]]
+path = "allocator-api2::partial_eq::<impl at src/vec/partial_eq.rs:10:9: 13:26>::ne"
+kappa = "e3b356ac894c3d1c9e8848b83809081800f078ad610468a91f44341f0c261a7c"
+at = "A=u32, T=u32, U=u32"
+embedded = "a4d923faa8910477bc434d5ff53380974b7e6a54c932b413b0785be2308c857c"
+status = "residue"
+cause = "mir::Ty: Cow<'_, [u32]>"
+
+[[fn]]
+path = "allocator-api2::process_loop"
+kappa = "eb66243245d219c403ed385fe746cf57aadfb0608da3c5729832ab4bb1c8ab36"
+at = "A=u32, F=u32, T=u32"
+embedded = "a12c48890428f47262731c1c274aae0c1efd98335f99da7143cda8ce4bca73e2"
+status = "residue"
+cause = "mir::Ty: BackshiftOnDrop<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::set_len_on_drop::SetLenOnDrop::drop"
+kappa = "93c1d5053d1a708ec156233d58e3c41f40f64316af87b5a2cace1264932f9d34"
+embedded = "b6e7362e5ad01f408bfa40829991a468babb0d1263f5bb338a403e449cf4cf6e"
+status = "residue"
+cause = "mir::Ty: SetLenOnDrop<'_>"
+
+[[fn]]
+path = "allocator-api2::set_len_on_drop::SetLenOnDrop::increment_len"
+kappa = "65cfc425d103bc0910d241f35bca8815aa32729fc6c025e2a3410b9680313a4f"
+embedded = "d8b973b9d6fcad249920fd5bcb66a944246d43a878f3a414b64a1e3d6df682c2"
+status = "residue"
+cause = "mir::Ty: SetLenOnDrop<'_>"
+
+[[fn]]
+path = "allocator-api2::set_len_on_drop::SetLenOnDrop::new"
+kappa = "9e01bb8e616ad41da16d8a455f64b4aee4293678aa447fb67e8f166ce1565c07"
+embedded = "872d558363ece4956c593b784d7b9f448def445d17fc453308e46517440feca2"
+status = "residue"
+cause = "mir::Ty: vec::set_len_on_drop::SetLenOnDrop<'_>"
+
+[[fn]]
+path = "allocator-api2::splice::<impl at src/vec/splice.rs:22:10: 22:15>::fmt"
+kappa = "e9ed08105c5dc508875ffcd46d41eb695b7f501fbd8bb5906d0dcc1fa27eaec3"
+at = "A=u32, I=u32"
+embedded = "7ffcbc5ead52008db799c96334e7018f7bab2ba29f64219c71d8f7b4ce3f04dd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "allocator-api2::splice::Drain::fill"
+kappa = "3039067319a93e9000c6b4ef1122ef285c7e4fb6720478f36f1c0ca4d00bce75"
+at = "A=u32, I=u32, T=u32"
+embedded = "df8fbabf05c20d89c16b2fa462a815560106acf8dcb9c37f10c39f5920b3c25b"
+status = "residue"
+cause = "mir::Ty: drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::splice::Drain::move_tail"
+kappa = "42999305a61fcc20fd3339632be2993d06cb32ffdb3b9f701f68424d592a09e7"
+at = "A=u32, T=u32"
+embedded = "7f808c2a7a2f6b4b94516e4ecb101a58307120e9eae2de6a64a151d136cafa10"
+status = "residue"
+cause = "mir::Ty: drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::splice::Splice::drop"
+kappa = "d44efd8ae60156fabbdc9610318aa5663d9347023ffb234d6ab5f5c06f4e4a08"
+at = "A=u32, I=u32"
+embedded = "95df51eb81556ac4e922fae01e3d2dad2568ddf5367963b5d717c0b1366f3966"
+status = "residue"
+cause = "mir::Ty: splice::Splice<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::splice::Splice::next"
+kappa = "6e804c34523d2aba0b7c01c655dcde5da8a249ba3dd20f22529fa7f8b3cb57ae"
+at = "A=u32, I=u32"
+embedded = "93ab6b576d8ef7cd3dbc85ff297b9372eca8b0f6e0cfd7e795f151c53b9789f2"
+status = "residue"
+cause = "mir::Ty: splice::Splice<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::splice::Splice::next_back"
+kappa = "db0820268ad0ba34db26d03414c3af68fc904c7757480134911824d85fddedac"
+at = "A=u32, I=u32"
+embedded = "6b237856efa643b98d7079bbff00de103b32fe0b153cbd26c1b976a3ba93c9c9"
+status = "residue"
+cause = "mir::Ty: splice::Splice<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::splice::Splice::size_hint"
+kappa = "17b36fa0df80de0a2eb6b4b5e646e40e97b82609c6c0490a575e33e82ef82dae"
+at = "A=u32, I=u32"
+embedded = "ace89726b5fd1d55c50e6f876e887d1957ea213606ec5577180e81044811f6ff"
+status = "residue"
+cause = "mir::Ty: splice::Splice<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::<impl at src/vec/mod.rs:2788:1: 2788:57>::into_iter"
+kappa = "66ba6766780b3669c567ffd24c8cef05fe442555075e8d4e7600d1124b2dd701"
+at = "A=u32, T=u32"
+embedded = "d018a2bd90ba45a425f50b3c2a800d779caa8e6ff958a3510549b5c50668d37b"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::<impl at src/vec/mod.rs:2798:1: 2798:61>::into_iter"
+kappa = "9503673b001f68fb535d1e65467f4c84c827e62ea0e693051269b6c6bbcc6717"
+at = "A=u32, T=u32"
+embedded = "3efd406d95e51263307e12fc0a28781cfd888bdc157a725bbb3ca9361fb5bcaa"
+status = "residue"
+cause = "mir::Ty: std::slice::IterMut<'_, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::<impl at src/vec/mod.rs:3121:1: 3121:68>::try_from"
+kappa = "5262e310443e278240f8752f9fe4fb5b33a92713648aa24bbea1792f5170c6c1"
+at = "A=u32, N=#usize_N, T=u32"
+embedded = "305c5552d151206be0be2885afad538f480d72e5feee010f9c35f6f7235aa9b4"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Box::from"
+kappa = "9071927610680d9bb01b6969338cb2942d5aa51f097f1cb4e4ac0fb2ca3d2970"
+at = "A=u32, T=u32"
+embedded = "f976764d9bb1d5e85f7616342588c9175406726c744c8b259a82aa16b3311e1b"
+status = "residue"
+cause = "mir::Ty: boxed::Box<[u32], u32>"
+
+[[fn]]
+path = "allocator-api2::vec::ExtendElement::last"
+kappa = "b0f924b25ff8a070db2779c27ea70c67ea1c00fe346c845ca5bf9f1ece082c92"
+at = "T=u32"
+embedded = "0ba0876e79a52da2c0e9f726014085477b486356b2e5cdd76eaf83c37e43485e"
+status = "residue"
+cause = "mir::Ty: ExtendElement<u32>"
+
+[[fn]]
+path = "allocator-api2::vec::ExtendElement::next"
+kappa = "3e91ebed8718cba642b6b1075baa6a598894128af1466b1b821f75b6c30fc905"
+at = "T=u32"
+embedded = "3e05f2b193203fd20bd2e743e8c8a8b7eea906f14b5b7b40656a941440cc9155"
+status = "residue"
+cause = "mir::Ty: ExtendElement<u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::allocator"
+kappa = "89c8ecce640b8ee20decdbb35a4b704f28646a52c888fa1a7d66897f06e7b645"
+at = "A=u32, T=u32"
+embedded = "e297cd555caff7f3d6c5cd15c8de7b34b7b6b6e3f5b1636770f6ab5162b52b74"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::append"
+kappa = "2c0fa69ecb4fd06bf9d3a818eb4208e2e91d15206aa438b4901fb0777a6643c7"
+at = "A=u32, T=u32"
+embedded = "c481b7ad49fe0fd501e2772988f2f9da4a3b8168149137531fb773069fe37109"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::append_elements"
+kappa = "d2ef474341e7002127daca1be0847d37faacd0285106ca13daf6954f24291fc4"
+at = "A=u32, T=u32"
+embedded = "9d109ce8bacb65a061a28c32e43aeb8ce86ef987cc5a132a9340be1aa12eeb52"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::as_mut"
+kappa = "c54a79b83f2c5811e0d376f78387e359daa8784c00a96c3ec728dd88efaf872f"
+at = "A=u32, T=u32"
+embedded = "625d8292cb2b285906188d8c09e65f7d059a55f05631896a427856d7a235842d"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::as_mut#2"
+kappa = "9ecfdb191cca1e99d2eccde8604b5df0bc4ef5f3d66c2d52918f4ec95fec8baa"
+at = "A=u32, T=u32"
+embedded = "d5721b00374cf7819743bb536328da33b907fe29bd68793cd399eb03b59bdca3"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::as_mut_ptr"
+kappa = "cd88025d53b903a7f582618b45627f2f2b87458ee9fc41a7668ac424cbeb6e03"
+at = "A=u32, T=u32"
+embedded = "211d30f9b7a83d1ffda1ab0c553371dd2b6d83de06834f0fb8b81356c77e379c"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::as_mut_slice"
+kappa = "81c76b18361508d2215af603edf370b8b7f8a7ef70c564fac65a7cd20cf49143"
+at = "A=u32, T=u32"
+embedded = "924a404053ba37c030ea918dc3056829730f3482a53451327e5f75812685c886"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::as_ptr"
+kappa = "d50baf25b4c1fcf96070dad9655dbca07b5536c2ed9adbfd3eb6694b138b8357"
+at = "A=u32, T=u32"
+embedded = "68e9d1c66b6d6c5af9364b3bc63817586da396401ad03dbd16fbb8c76dcf4133"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::as_ref"
+kappa = "1b0fe7b2fb1fbdda7df572c9ac873b76d485578de60fafb184c2d372ed2f07d2"
+at = "A=u32, T=u32"
+embedded = "fd248c3803f488559d85c3cfb54e87ca97cd0096e217329cfe8858ab7bdaaf63"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::as_ref#2"
+kappa = "2e12888d03cee907315b4baf91617c66dfc66fed4efd18ef5b195f7f10c4ab45"
+at = "A=u32, T=u32"
+embedded = "a4e06429e138a62faaf958e0c9e4c128c18ebbb7bdca84400a8be26054430af9"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::as_slice"
+kappa = "c15b54d2f86c1dcc370a6dbc8c17b66a81f20c9060c3f21d4a019d6958dbe3fa"
+at = "A=u32, T=u32"
+embedded = "aa35336f4a097ef3b7f6aa03748c0d254c01d2930b479982b94c1c858827b6af"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::capacity"
+kappa = "674d6252685f74dc3259ea3702cecd13a382290fa88bb07813003b77df76fbf1"
+at = "A=u32, T=u32"
+embedded = "62e847bc2151af1adbf9cc77f63512b1634eee51d0c4656c973fd47f5a2dcb7f"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::clear"
+kappa = "a03b5fd824a294880df23c3780823c332322aaf570adaeb05ba819626d62ff6a"
+at = "A=u32, T=u32"
+embedded = "2756a3ab90f5a5247a13abe2620530fb4877eee0b8fe57007dc2d6d893a501a0"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::clone"
+kappa = "93a306e5253dc5bcc76330f34d9f769b4263eb564fa260df969ddbb8a396b4fb"
+at = "A=u32, T=u32"
+embedded = "7b91942e2ab8ad314b4308ff1ac2b95b67d70a38e60500c4f98d701b0cafe989"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::clone_from"
+kappa = "73c7ce82dbe2978eaa8dc163dbd148fa4467df116dbbf032b10861ef15947ceb"
+at = "A=u32, T=u32"
+embedded = "b3fc811479f674dd6d27d28a38d06966438f60849ab60929dd0c88ed88bf0c59"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::cmp"
+kappa = "4a6cc2884d04c169891ede6a4603a486ad8da8dd0b06c2ee90ba10bb9708e28d"
+at = "A=u32, T=u32"
+embedded = "9c498680440e2e760396369b03eaed4c0bcaaa0b8e8540e3739f41459aabaa67"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::dedup"
+kappa = "df6398afc5d4bbae9b08279173d2389af2bfb01669bd18add0cbe2f0a54841c7"
+at = "A=u32, T=u32"
+embedded = "24ae4531e9a441a90d6b4c9a49233eeab058b97cfc7b4fb18b193180e6067b0b"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::dedup_by"
+kappa = "51065f606e74fc477a21ec8f2264a88ca3eaa39b33819411dfd2e450468e0b56"
+at = "A=u32, F=u32, T=u32"
+embedded = "f05a51f3082992b24ed1f83ebb14932e1968f1999c68ccb3c026d3701e4b1503"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::dedup_by::FillGapOnDrop::drop"
+kappa = "8bee4289d8777741b54036cce89f65e86ada427eb6d7bf00135e8717b1367470"
+at = "A=u32, T=u32"
+embedded = "89e8a30fac41e00c0e13e23daa7fa4f2fd813f9c385d327b9dfec84b05aca21f"
+status = "residue"
+cause = "mir::Ty: FillGapOnDrop<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::dedup_by_key"
+kappa = "30b823f301dd9010fdc8a776755575f573cddb8c740b7349a81b78ca99bda88d"
+at = "A=u32, F=u32, T=u32"
+embedded = "d786c89478241c09da0ef6dc44aef378ae51033ecf6c5013c289659394c671a4"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::default"
+kappa = "b35a5c69e7576ef01624a737f2ab34b447e39dda8f9beedec1348673e7691b4c"
+at = "T=u32"
+embedded = "98b78570c3c5fbbdb8b7d29f4a458e1e4d958a82804fbb280121b8f594b8bbc1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::Vec::new: allocator-api2's MIR stops at type outside the lift: raw_vec::RawVec<u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::deref"
+kappa = "bfab4f4f86902ddd15053080d57654fb995fb0d7b02683430c745d9a44c803be"
+at = "A=u32, T=u32"
+embedded = "0afd50f4ddebee31b0cae7f1fb852ddec25a1ad63513976403e5301fc5857fbb"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::deref_mut"
+kappa = "4e2664e85a9ac02c2ceb9dc1155ecf757b31424854ba8a9f529ceb81acf1b311"
+at = "A=u32, T=u32"
+embedded = "57cea62267335d3b3bb255ee0d43af29748be30f294c156def32ae224acd905b"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::drain"
+kappa = "c2caccdbc51b1a896b770a4c1453b205daf28171f13e6437d6fc465cca911401"
+at = "A=u32, R=u32, T=u32"
+embedded = "bfbde8751b822a5f966f2a3091796def3ff672ae8482e03f2388fd8f366643a0"
+status = "residue"
+cause = "mir::Ty: vec::drain::Drain<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::drop"
+kappa = "aca45949fd320ba432d639f24bddc77c7fff3260d74e98c4dae0f9d257c4a419"
+at = "A=u32, T=u32"
+embedded = "22b568443892313527cbbf99642c3e83ab78207e020731af33a8c4c7707c8459"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::extend"
+kappa = "eaf63cbdcf907dff0d1a85826a8a1dc355f6a1686a554ab5a0aaed684e1b1872"
+at = "A=u32, I=u32, T=u32"
+embedded = "4b369a07e91a2dc6a9e63e14ffcd95104d40e12e2d997b3dcf99080fff1f62b3"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::extend#2"
+kappa = "f4ddb5ce8eb4203fa956a4b515fe63d630fa356d99c76027da88491f6d3a81fc"
+at = "A=u32, I=u32, T=u32"
+embedded = "e8ba827410e59756d2adca08684464d92ae808c912a49640237e6b0f7b6c350c"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::extend_from_slice"
+kappa = "889faa00cbbd58123edc12b5bc86638f35484c853596ba7d8ec567de6911890a"
+at = "A=u32, T=u32"
+embedded = "705813c950656b91d31e16b3ee4f9b9279ce57be2e19a6e02e2e3f7897277ff8"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::extend_from_within"
+kappa = "1a33e08950eb0206f6b844b03bde68960a3a2c666b135c4d9b73c00497d300a3"
+at = "A=u32, R=u32, T=u32"
+embedded = "905ff3f2de01d4605b68980d2608f4054dabd332586f4266cd414734226424ea"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::extend_with"
+kappa = "d5f5aee5ba14528ced318828064253867c99b5fc6a8693cfc35fad773d407b9a"
+at = "A=u32, E=u32, T=u32"
+embedded = "dd118f90633085eec0c796580a557920b194985b1b8977699166f05847ce095d"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::flush"
+kappa = "24c8031a9313d9ca3bc167b9df688b4d6b13dbaba816e76d1060c6d3bfda56eb"
+embedded = "8c7449a6bee55f05d9e38b581d656988645eac174c45842a844309de146a1698"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::fmt"
+kappa = "30f9acad804d1b6fc482e312016618fd07ea81f47c41103793c1404f0ba75a78"
+at = "A=u32, T=u32"
+embedded = "3785b2a27b4c3afe8e04c59a642c1aa783ca200137d123c093df8405b94b745f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from"
+kappa = "3582e74e228863f01650763b14077b1b52708fe292417d75607c01c23e1cf746"
+at = "T=u32"
+embedded = "b9511ea1a2256119a134783a3ca290840da159745a475f0ce6caa392faa867b8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::Vec::with_capacity: allocator-api2's MIR stops at type outside the lift: alloc::global::Global"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from#2"
+kappa = "648aa4606f26a33595cdd67f7a997344b9957ef5fc7c2ea9a98e3f39d15bcfd1"
+at = "T=u32"
+embedded = "d8fea80f009eeeac0554ed47dbcc36d7639f64e1aee0b8c11df81e8a954fe262"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::Vec::with_capacity: allocator-api2's MIR stops at type outside the lift: alloc::global::Global"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from#3"
+kappa = "b028bc0aff3ce43694132e28ab9153acfe173767d5c7d7c7a239221192d96fcd"
+at = "N=#usize_N, T=u32"
+embedded = "74a91d74df903bb4d5a634e1bb5d1bbcc88d449039def18f312d738aca95cc60"
+status = "residue"
+cause = "mir::TerminatorKind::Call: boxed::Box::new: allocator-api2's MIR stops at type outside the lift: alloc::global::Global"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from#4"
+kappa = "d07945d4d1a5fb2bbe9a13beafaeb56c5023fc72f480ef3b46c59822bb5e804f"
+at = "A=u32, T=u32"
+embedded = "8bb08d9f3c2d91141fcc891356bcf5ce247df132b2497e2681300dcb27f9860e"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from#5"
+kappa = "c4b85882438209df746cb4554421e1b3e70c4e9fcd54a19579a2194bcb441e97"
+at = "A=u32, N=#usize_N, T=u32"
+embedded = "2c857ebaeff4c8841661e0eec884d011073afc7177442e8d13473b883be2d70f"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from#6"
+kappa = "48f44198f154c3cfe3097fb3c2485273c8e5090dd58e32fe49890456b133ecc9"
+embedded = "6b4c40c600d7354b3c869467a9a0037b9ad9c09ab19850f8566ca7468fdadb76"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from_iter"
+kappa = "828c3cb5620e6b11e1d6d7f796bf30cd127d318857714347c9b85225092b367c"
+at = "I=u32, T=u32"
+embedded = "8abd1623f96bf2262681c0c94d612d6520f695ded8fc69c0052bed7675db6ff7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::Vec::new: allocator-api2's MIR stops at type outside the lift: raw_vec::RawVec<u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from_raw_parts"
+kappa = "d2bbea5da804d7cd8387b0fc6b4794568a28f02d750eb559891e5dc39d8f3606"
+at = "T=u32"
+embedded = "948d35f64f9ae6869267dff6cb289ebb71c9e0b56b354f264a431de51a414dec"
+status = "residue"
+cause = "mir::Ty: alloc::global::Global"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::from_raw_parts_in"
+kappa = "2b404a29a354ecc0c7362b3d750e7ef8f2ec16d98ac415be3ad69ff6f2ec8ed6"
+at = "A=u32, T=u32"
+embedded = "b8d458d40580ec2f8e09a4377120653b99ed3f4ac25010b0af1030cf3edf4358"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::hash"
+kappa = "ff3d0843fa2ae36e3561fa12398dad02f5847d440fac248b205babc3305bdaa5"
+at = "A=u32, H=u32, T=u32"
+embedded = "77ad6201f56c3ba2074ef7222a9952ecd7d29c5a7019907e7e8a6dc7f6978b02"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::index"
+kappa = "e2eb0a9ef027fdcdd2d9d62ee8e19bace0dd91f7ba3d939215e825444497983f"
+at = "A=u32, I=u32, T=u32"
+embedded = "887a8b3118baae77e06be743607b80863e0579fd2b251dd18a112bcc2b63de3f"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::index_mut"
+kappa = "20190fbeb691279fc15b90c8ac4e365d125ea59479b3be12968f36c1be888439"
+at = "A=u32, I=u32, T=u32"
+embedded = "51903fb34b8747d2b04bbbcedefa616e580f2e3f70b72836eb4f01f014088bd5"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::insert"
+kappa = "3f97c24c9ccc24e3a6c947d6764df4eb45dacb161c94c68b075e59255f41f28a"
+at = "A=u32, T=u32"
+embedded = "6b13d29bec75975dc433aa648f27301dbf051f81fa29363299700639fe2b03d4"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::insert::assert_failed"
+kappa = "3ab2b631f6ab5a682c856db7daa07f6944156b192dfb1b04fe8fc4d46e4326d0"
+embedded = "fe9c762d65f74cf8b23a9e730c2c15408a69f0d45ddebd3fe5511cc8cced59c4"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::into_boxed_slice"
+kappa = "ae6cffe49840d8af9bdcbb90248a2bf63a398dc31198a14096f9795d49364835"
+at = "A=u32, T=u32"
+embedded = "0fe4d568cbabd32a37dba9174096c4190bafd68ed0ca7c12af3c6231accfba30"
+status = "residue"
+cause = "mir::Ty: boxed::Box<[u32], u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::into_flattened"
+kappa = "2c811a6f9dd3ff138f7a5bb28f84655cf0f7cd309bba3f76efdb7bd67fa51c35"
+at = "A=u32, N=#usize_N, T=u32"
+embedded = "4e76001f81dcd5ff924721a58fa9a5f125b49816ef2755e3a8ade60d60650cde"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::into_iter"
+kappa = "2a4c2b6c652cf9f1edc63711140258b863a12c285cca8e49e406cf9dd7a0f970"
+at = "A=u32, T=u32"
+embedded = "e46aca7a554be8088bf8c69fab3e3bd71f6fdefda548d9e37e9c23698327483a"
+status = "residue"
+cause = "mir::Ty: vec::into_iter::IntoIter<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::into_raw_parts"
+kappa = "0ebf413d0dad0f8766dfce5d0b6a77331047ed92d7cadac826d6faacb6337119"
+at = "A=u32, T=u32"
+embedded = "22bb0a426366d3837b95841672d348d0666e36a1647e7adf28ca847d26e5f6e2"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::into_raw_parts_with_alloc"
+kappa = "3402a0f54695412f80f18b19dd0ce97bd54471649d641826fd50764a6f5eee48"
+at = "A=u32, T=u32"
+embedded = "2e94599f237d70e790501cfc1370813aa17b88bfcb7d12e949f95d4d97faeaf3"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::is_empty"
+kappa = "4973bd55e33969d3762bfb9f83d271bd38f4ca60c5c101f30206feb8a91b4f34"
+at = "A=u32, T=u32"
+embedded = "f63032f498abaf204bb780a9ad00f36511ba610f7f1b54acffc5eb2cbc118d43"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::leak"
+kappa = "23dd64da84b0f168f6191efc053fb11e39277ed1e92c19a02e7b2588fe3b64ed"
+at = "A=u32, T=u32"
+embedded = "9a0ef331cbaef789ad09645010be5e3189cfcccf1ce312d20a147c8e3132b93d"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::len"
+kappa = "bdf88eee387ad69d47b9293df3ddb472143c14aba8b754c341a4b208d18c1ba8"
+embedded = "501ab38540565a61e9250e2a5ab85b772712285cd2f6abd031692dc25c58d40d"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::new"
+kappa = "ed24a30ee3e6fbf9cd365b42f5ac111b1c5b169e34c8e31f3d3bfe65cfa72bda"
+at = "T=u32"
+embedded = "a61be9439e4a51c17ee65b87bead1cd3c836830c79db4acfb53303454d1a66ff"
+status = "residue"
+cause = "mir::Ty: raw_vec::RawVec<u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::new_in"
+kappa = "4a587921de94bfbe80e3343baa0df6dd1fcbbc3684e9e8662d327ad31d80d930"
+at = "A=u32, T=u32"
+embedded = "35b52522ed6d8aa431486375cd89b0612f3a4a5e00d7985328d8976019d787f3"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::partial_cmp"
+kappa = "ac6f2cdae0cd7ffc3f2707f009cfb27d59b145f17824b287c89cde575fb17ecf"
+at = "A=u32, T=u32"
+embedded = "a7231b6b5b5b99114ac8814cc2acfb0f114382d973cae505c1dec4370f188a3a"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::pop"
+kappa = "2cf2f4eacc70f243eb89f520056d4f5300bd2f69093742e15b1c6c62cf8b867a"
+at = "A=u32, T=u32"
+embedded = "4d7b88e5832c89791c0405590e274ddb94c5bda6d920f481b47e704054d0d9f9"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::push"
+kappa = "1134350f0852ed142cd4001a2b966fc13ca66b1f2883938a1b7542c9a237e132"
+at = "A=u32, T=u32"
+embedded = "92c47a63d7b5bf4ad3d3bc5356ff9f15b3a4eb2962ad4786e0e3a88c2a36ed11"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::push_within_capacity"
+kappa = "eb529d968fec659f35960c7f9c88c7b77113929e4e9f37928ae53a0213c285b9"
+at = "A=u32, T=u32"
+embedded = "77ef3291eb12e5262638943e13ab3e2e91543718fcf804785e851c79d86a50ea"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::remove"
+kappa = "c0d2e000aee54aa63cf003a3c2b56dc69e03f739345f6eed9ffeb3be1421c7dc"
+at = "A=u32, T=u32"
+embedded = "2701e4f328ac21f25645a3dcb4150c8e1904d9618697973d8c45276ab1811dd6"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::remove::assert_failed"
+kappa = "82d3a04e9fbe02357e129af7e9fc5110e78c27c13d2b0abddbde77202096ddcb"
+embedded = "b41ae26264141c166a6f3ef79f95169f290c62fabb8729a1d764372560cde99d"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::reserve"
+kappa = "db258042c8c83f8e9e27f823d02dd6cc26dc59f4fbf4ddf63d6d50490e4059f8"
+at = "A=u32, T=u32"
+embedded = "db5629d3a6ff72381b6a11df36dc7e2aca9af85a7dc1154a86d927ce33adbff8"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::reserve_exact"
+kappa = "c1a578aee48ef821eb46cdeb3a08b6e15448b6b0012da3218dab2ac98267ed9b"
+at = "A=u32, T=u32"
+embedded = "8ff79389d21fcc5726add3aa42409492743243b97e233efb6e02eba9cda46fb4"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::resize"
+kappa = "610e0f60501e7070b04046517233815117fa5b994c6133c1d502803f3f1461a7"
+at = "A=u32, T=u32"
+embedded = "5b0673157a9a0d20c8a0697e269dcd69d150011d1fa4f0bee03d766582841ff5"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::resize_with"
+kappa = "44b80fe19e03b7d02d80e83cef95d1596e11d37bc6f1a35bc748a13a2d36a01b"
+at = "A=u32, F=u32, T=u32"
+embedded = "ccafb96a770a18806e2a2b157a5acf7d2c676e0195acddabf7c9580eb00bdbc8"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::retain"
+kappa = "f185139a2208c53c947364bef4cb2950036f23bf1f5095bdb16f28ac511f0131"
+at = "A=u32, F=u32, T=u32"
+embedded = "ac3bbd7653fda1d2580f8c206cc391bc4b3007764f57a1ce1671fa213d8a2e12"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::retain_mut"
+kappa = "c449ef940f73f5480ca834a4937cb23680e88645c8259a50b0e429aeae6f6ac4"
+at = "A=u32, F=u32, T=u32"
+embedded = "443509cf954b04899348cf2e2885e69d8a98d576a8facf7aa215a2d935f742de"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::retain_mut::BackshiftOnDrop::drop"
+kappa = "ddd3d68af127d42f115dadb04e1ad998d573f417f3821db76e175ac351ba46fc"
+at = "A=u32, T=u32"
+embedded = "7677cde554e1bb02ab866629bb2271be4891b160f2c5924c0a2397d0af61fbed"
+status = "residue"
+cause = "mir::Ty: BackshiftOnDrop<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::set_len"
+kappa = "fd349b2c712ea1e8329d9c26d2a101cba1ce2f2f6cb79c3b27c5ce91b8fca3dd"
+at = "A=u32, T=u32"
+embedded = "ed1c146c38cf69564758cea3858410ac875c40eb661e7c542ead6d92c48b2887"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::shrink_to"
+kappa = "b3e916034ae01f6ac50f14bdd064baa00799ce0666c0cceb6dfd4b17d059f98f"
+at = "A=u32, T=u32"
+embedded = "f311a966e5a1b3446d129a4a6897c96d6d7f0962708a6e3c714aa825bd39d2ad"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::shrink_to_fit"
+kappa = "f108b38f069e2e22cd6e7ec9cec28359f4c15fef5022f7950dc549bd762e7011"
+at = "A=u32, T=u32"
+embedded = "242db5c07b99ecdc089b166c29842b8c4f66a4e7c7423b32b3e2aa207929b7ce"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::spare_capacity_mut"
+kappa = "8009d2c5d4e279328f0061a80bedb17a19e71141a5df5a88d5e814c176e28e4e"
+at = "A=u32, T=u32"
+embedded = "8d4e00d9696f71d5f28e52adede571cfc62a848507f5800c9863f71ceffad012"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::splice"
+kappa = "0bd8e0366f9d8cdd456cbf2b18cfbb52ed61efa153147f3b9107ba9fd08e9f64"
+at = "A=u32, I=u32, R=u32, T=u32"
+embedded = "3f30c9043a05e2c8dc0db0acba06fc409216744855e399b6029d26d276a758bd"
+status = "residue"
+cause = "mir::Ty: vec::splice::Splice<'_, u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::split_at_spare_mut"
+kappa = "8ff5fd294026bc282cb619a3b2a7b1debb05ad93023deb204c592efd91eca8c4"
+at = "A=u32, T=u32"
+embedded = "6ebf85ef8345456e6d22b9e87a20961e868d15290f0fdd87eb92ad18aba25288"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::split_at_spare_mut_with_len"
+kappa = "7a242023f1e2e75c67b01c966de5842a13d8abecab4a08606db58a75a0221762"
+at = "A=u32, T=u32"
+embedded = "e0fa716b6c958187925fb05dd91fbeb763a5ca83b51e54868f5b115522ac0135"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::split_off"
+kappa = "071577c56c87cb9d8750d1b980b856bf5ab3b262bfb62b445a4bd9aeb612f50e"
+at = "A=u32, T=u32"
+embedded = "96dad701ba5741f0dcffd16ad5ff3385ccc2dd6ba64c6eeff5126fad4afb19d7"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::split_off::assert_failed"
+kappa = "832e4e0c5455be18ff470486ab3c1c6679819d9578d6e78fbc52d53f79b29cea"
+embedded = "3f2ecc7cc7dd17cdb2662f594ed60c39cb94d5f3066e9ac7ed528fd7b9cce1ef"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::swap_remove"
+kappa = "a887f078961fc02128b01fba2325dad86709ecbd0d9af6e8b2e35b4df085b273"
+at = "A=u32, T=u32"
+embedded = "50ee1e26ab112577ed6b1b96442c2c4cdf5e5bb44fee6a96436237e5711a98fa"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::swap_remove::assert_failed"
+kappa = "9d1ac02bd9c17c766b4c35cfaa0d5b167aee85a0fbcb11997a4af430cb1f1538"
+embedded = "d2691303f11693a77ccafe2d510a3fe076bf05fb2e47a48b9ba80c226cc761a9"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::truncate"
+kappa = "7b5dc66d5e7dfa4a02309692dee0d039b895780cda00c4bcfac115ed82a8d6cf"
+at = "A=u32, T=u32"
+embedded = "7eba7b699428356078f879e16b231db55a0da01fb701dc4da22ffa7afb911e87"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::try_reserve"
+kappa = "0afcc8356912e37d22fe899a9d37ea0a09cc88bff013986ad18919b4a1f88645"
+at = "A=u32, T=u32"
+embedded = "8bbc2780a2d163b9d05f347afd801c75302820a342d654a11f56e245fa09425a"
+status = "residue"
+cause = "mir::Ty: raw_vec::TryReserveError"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::try_reserve_exact"
+kappa = "6aad61c794acb09d6e046b312e5ed6ec700475eedf247137716065a30849d604"
+at = "A=u32, T=u32"
+embedded = "f9e079aef04a739b82dd32a878e105948740aaa8ec661bf7b7464fe35b53c317"
+status = "residue"
+cause = "mir::Ty: raw_vec::TryReserveError"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::with_capacity"
+kappa = "02fafc1b31e3c57ccc5c4a7b4294d2a9d7d5a92bb83d20aa1212bac585af4141"
+at = "T=u32"
+embedded = "5d0caf6a37f988c60742e2ced3072f5ca9505691cb6db66fbe5a44d798d4b7a8"
+status = "residue"
+cause = "mir::Ty: alloc::global::Global"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::with_capacity_in"
+kappa = "00336cf7146b8b84d4297439be355997da8a5e69d7437e9f64f42e586cd42dab"
+at = "A=u32, T=u32"
+embedded = "e0854b67faa1ea8b1778a5ef807f63e3199eff03604b2d5ce144edfc8bbf70f0"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::write"
+kappa = "20b7891be309af3bb709e6f0445424870f8456516076f07902f2daf61f91cc4e"
+at = "A=u32"
+embedded = "a9887a905bc4963454e41d6f2226f77a028eb24de0b06fa86fba7a0702168794"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::write_all"
+kappa = "d90ebdd0ff5286e3001b3b6e153e6d0087dc9d1bc4c8829b5bea9ed089391e3c"
+at = "A=u32"
+embedded = "78c0d1f48802a1e647f28e051058f1b7d5a6095854394ca2e21d1b213b1bb18f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "allocator-api2::vec::Vec::write_vectored"
+kappa = "7afd7751f49893b863812d377030858c1b0e4272810329dd765d830ba3091432"
+at = "A=u32"
+embedded = "2204a3ba28cc2daa2b437b4328f23744ba68c2e4984027b62e4af31ba97c5099"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

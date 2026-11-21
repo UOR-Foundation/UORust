@@ -1,0 +1,168 @@
+[[fn]]
+path = "tonic::compression_override_from_response"
+kappa = "6c42eef6694474643dd6bb4d932f7f65d7fbf6f90db63edc98bf794d38a21964"
+at = "B=u32, E=u32"
+embedded = "8a3ece4703793afdf2c574d61fb99b2f12fb2a3f5ee8a40d08309ac35e16fd01"
+status = "residue"
+cause = "mir::Ty: codec::compression::SingleMessageCompressionOverride"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::accept_compressed"
+kappa = "22313c218adf5ac0fa5348735d52a54103812b60b50f730f96e879ccc03467b1"
+at = "T=u32"
+embedded = "ef78c930ce6a7e360672e5112e30e7de21227ca31f3e849484b4d5996d02583f"
+status = "residue"
+cause = "mir::Ty: server::grpc::Grpc<u32>"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::apply_compression_config"
+kappa = "a130100c0527c7bc20aa36be0ff74cc3f581154b712cf10d0fc2a6d1aa88fd83"
+at = "T=u32"
+embedded = "ce9536a75f261bcc2a78e0a75ada169a89d2a6e9fd00b94c139e36e6d5e6d390"
+status = "residue"
+cause = "mir::Ty: server::grpc::Grpc<u32>"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::apply_max_message_size_config"
+kappa = "bdcfe76abc1233fe568b356222139f679566501e8f9c8e6125b6461f0aba1f93"
+at = "T=u32"
+embedded = "12e28ae09bc1250d7743aeadaa25edd3d704ca2b4c25b2d5442ba64ef5896d01"
+status = "residue"
+cause = "mir::Ty: server::grpc::Grpc<u32>"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::client_streaming"
+kappa = "be895253aa897a200ea46a9660558d4dd73e7421cac1eb91c8347b020bb15c69"
+at = "B=u32, S=u32, T=u32"
+embedded = "70a03b5726e1de0ca6de9a545ff27e60ebe9713fb65b882607435e5549897f77"
+status = "residue"
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::client_streaming<u32, u32>()}"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::fmt"
+kappa = "f5508c4b1cbe91c2d873fe9c4aafac55ca638594b88a6c3ddb4dad5c3cdaf182"
+at = "T=u32"
+embedded = "5f9e8262a8dbe6e792f8ebe0adaac94c29615d2d025340f951a909d01a588a71"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::map_request_streaming"
+kappa = "962f7a561b561d85b55b65affe66dadb66f45b8d7da1c5581e70c1d97323e42a"
+at = "B=u32, T=u32"
+embedded = "9fac467771e2ab1c17f08a79a38b33f59bbc55f5cdeaca3074266f367961ac0e"
+status = "residue"
+cause = "mir::Ty: codec::decode::Streaming<u32>"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::map_request_unary"
+kappa = "98e4ddc44eeb072a6f987cc5679bcf65a62d25e2c819eba102fcddd45bb06298"
+at = "B=u32, T=u32"
+embedded = "56c6edad887f186cd4b50367866db3403cab3b58bc7b232e9838df166fca536d"
+status = "residue"
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::map_request_unary<u32>()}"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::map_response"
+kappa = "7a6aca8aeadd5d8bb16312d4fbc935d658940fb337dec2f4aad0b2f9b9926876"
+at = "B=u32, T=u32"
+embedded = "6806e26f4c547b8d792e79c3dbdccf428e720734e31983911108c8d1c894874f"
+status = "residue"
+cause = "mir::Ty: body::Body"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::max_decoding_message_size"
+kappa = "dc524f005702f21ab6491eb62bd39d00f8c7ed180b0a1838eef8743d4e950663"
+at = "T=u32"
+embedded = "f0e34d1b543bba7219e6f0b94a2759c4a8c66de792c1bdc1897534b0a2fcf6f4"
+status = "residue"
+cause = "mir::Ty: server::grpc::Grpc<u32>"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::max_encoding_message_size"
+kappa = "346a93d42c779c7b4c6adb6fa7bd62463c12d53a937ec309e0a83a08046b8863"
+at = "T=u32"
+embedded = "5fae7003e475d1887f7f377f779267f4e36e1b849d0727189c386e38533daf23"
+status = "residue"
+cause = "mir::Ty: server::grpc::Grpc<u32>"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::new"
+kappa = "32b6a7c1b822db488e9b4e2cb43fbd63f9944c44e222dba025fda39c936619ad"
+at = "T=u32"
+embedded = "2b3ed856ebfa81d9198f6973e6380ddd88f358919499aa8b2e9fe88c36de51c8"
+status = "residue"
+cause = "mir::Ty: server::grpc::Grpc<u32>"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::request_encoding_if_supported"
+kappa = "053a1e13f7157ace5bbbdda444c0123f5776c9e573cdf555cec279b61ddc6701"
+at = "B=u32"
+embedded = "0ea25e3c919e377655c00ffb8d1d94d246078387107c8888b70f0d4a6dccc4ba"
+status = "residue"
+cause = "mir::Ty: codec::compression::CompressionEncoding"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::send_compressed"
+kappa = "47dc83f7e15242eebe16dc877af3c549f5c93a933e349d48203d14fb8a614b9a"
+at = "T=u32"
+embedded = "6ffa2c6e281c0a58bf730f6e07e6b076e05f89f8465e672a6b0f9358ea4ef157"
+status = "residue"
+cause = "mir::Ty: server::grpc::Grpc<u32>"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::server_streaming"
+kappa = "dd74e262288781d86394057d5935e313950772f5aca54f55090321b232242a60"
+at = "B=u32, S=u32, T=u32"
+embedded = "dbbf0d17d75176235ea236cb8d2256c4dc18a3f846f3fadb686b9f7ba7911eb8"
+status = "residue"
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::server_streaming<u32, u32>()}"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::streaming"
+kappa = "1669aec2642945306e5b5648de88badd7d8c127952a4dd476c56f2dee16b994f"
+at = "B=u32, S=u32, T=u32"
+embedded = "46afb20a7feb72e2a378251e21cd100406a9bf46d76c0b0c5d4d299b518d4c1c"
+status = "residue"
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::streaming<u32, u32>()}"
+
+[[fn]]
+path = "tonic::server::grpc::Grpc::unary"
+kappa = "f3fcf40e51e72b591d9346465e6524c8abca277bb277fd3f3b0cd6491c2acb71"
+at = "B=u32, S=u32, T=u32"
+embedded = "50c4bb73fc17a2a1e6a50b4ec6e6e8e50237d7369f92b3344329cee4f70c91c9"
+status = "residue"
+cause = "mir::Ty: {async fn body of server::grpc::Grpc<u32>::unary<u32, u32>()}"
+
+[[fn]]
+path = "tonic::server::service::T::call"
+kappa = "f64374d59edbc1b25cdf4938e538061ebf584bc49f51ffb51207e3880483ce7b"
+at = "M1=u32, T=u32"
+embedded = "d876881d7b08ac1e34d1c29bcaacba980209568dbeebde41213227e50b1480ce"
+status = "residue"
+cause = "mir::Ty: request::Request<u32>"
+
+[[fn]]
+path = "tonic::server::service::T::call#2"
+kappa = "957a1d1227db0aa550dc6cec8f293a8b3e648efcbb99025bb1e2075e76405672"
+at = "M1=u32, T=u32"
+embedded = "576bc4d9656c55a29c0eb144cc4be239f7621216c4145e1732e360578f256bb2"
+status = "residue"
+cause = "mir::Ty: request::Request<u32>"
+
+[[fn]]
+path = "tonic::server::service::T::call#3"
+kappa = "6a0ab674bd6ce67da2419dd98479b0772e9d69f0e6e7410de60b33d66440f6fc"
+at = "M1=u32, T=u32"
+embedded = "1bcef7fb6955cc374f67b09be71a0a5f6325f38d7ecde4ceecf0af2857faf793"
+status = "residue"
+cause = "mir::Ty: Streaming<u32>"
+
+[[fn]]
+path = "tonic::server::service::T::call#4"
+kappa = "0d71ac59ebca9d68516bf2a41d2a065bfdf6eb075b82b3fa5066cf9f5b8b693e"
+at = "M1=u32, T=u32"
+embedded = "67769be574fe2c0be438e92434e777792b3876bb6a0d6ec4a51e82e5f3650c86"
+status = "residue"
+cause = "mir::Ty: Streaming<u32>"
+

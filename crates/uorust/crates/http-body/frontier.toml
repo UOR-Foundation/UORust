@@ -1,0 +1,88 @@
+# The http-body register (written by `uorust crate http-body@1.1.0`; do not edit): every body of
+# http-body's MIR at http-body 1.1.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 45
+translated = 1
+residue = 44
+
+[module.crate]
+bodies = 20
+translated = 1
+residue = 19
+
+[module.frame]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.size_hint]
+bodies = 12
+translated = 0
+residue = 12
+
+[embedding]
+bodies = 45
+embedded = 45
+evaluable = 45
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: size_hint::SizeHint"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: frame::Frame<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: SizeHint"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: http::HeaderMap"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Frame<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Body"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pin<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Response<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Request<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::pin::Pin<&u32>"
+bodies = 1

@@ -1,0 +1,1135 @@
+[[fn]]
+path = "bstr::ByteSlice::as_bstr"
+kappa = "eb3c6e374e3ba306b7047ffcd8b7364caf166b7b95abcab61fc14991826e80a0"
+at = "Self=u32"
+embedded = "8d3606493e0151536642614c5a251c377eec8b913db7082069b20f1ee71224f9"
+status = "residue"
+cause = "mir::Ty: bstr::BStr"
+
+[[fn]]
+path = "bstr::ByteSlice::as_bstr_mut"
+kappa = "2e5a96061edab35f764d288d24b004318b471109132092957ffc4fd76bf0136f"
+at = "Self=u32"
+embedded = "b4eb88ba8588ac6b1f6d136888ae6d237efa65ab87d8ea722f35787bcae35f3d"
+status = "residue"
+cause = "mir::Ty: bstr::BStr"
+
+[[fn]]
+path = "bstr::ByteSlice::bytes"
+kappa = "063e599a7a4b9feb3faa7ef1df53a8004f2c1b9a4924fb92297c535ec3818b33"
+at = "Self=u32"
+embedded = "55eee8f712d50f6fde109dfb3396ea1a9c256fa9397f1dcf9d01986448770f63"
+status = "residue"
+cause = "mir::Ty: ext_slice::Bytes<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::char_indices"
+kappa = "ff873f5525f24d7a22e8e93e35ec8e3c0c1176d905483f287d160b91895a1eda"
+at = "Self=u32"
+embedded = "2ac765d47cf0b8d0c93e36ebf2baacada8b28193328c35d27c718a54f5195576"
+status = "residue"
+cause = "mir::Ty: utf8::CharIndices<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::chars"
+kappa = "99336b8980d05c10608d6e5b1ff40adf372c24ade00d4d104061c1d1e2793ec5"
+at = "Self=u32"
+embedded = "942f5e0adfe8c535dda0e48f63b5391992d3bcecaefebe47df2e442cf4ea8f4c"
+status = "residue"
+cause = "mir::Ty: utf8::Chars<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::contains_str"
+kappa = "1f896be17582c9f792a236a0c43dbd9cc44cdf33352df61d9b2535cc44398520"
+at = "B=u32, Self=u32"
+embedded = "6e47d3841fa80054fbd76c8354231012e53b1b476cfd54133870872f441e4371"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::ends_with_str"
+kappa = "aada1726694e282a46644cacd4b08abd2cfa7e6b33f4d74d3b669345daa44c79"
+at = "B=u32, Self=u32"
+embedded = "0dc6678407e8ec75bcf6ce16436d06e8fbc5774528d2706589b4923342e02fd3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::escape_bytes"
+kappa = "ad25e40208b9db5c838c2fe6cdd4dadf31006f71c123b8e723abd852a53a48e8"
+at = "Self=u32"
+embedded = "3e83b6d7078aab0dca04c18cd667efd7746b37b79c1fcdb98afe50b577aeeb21"
+status = "residue"
+cause = "mir::Ty: escape_bytes::EscapeBytes<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::fields"
+kappa = "a0486e0f4c73e82b187e6d138d59c7a91c5c04041610ade1c7c21618efed56cc"
+at = "Self=u32"
+embedded = "8d8c8b65a1e976d638655665133b337779a3b519abaed9d63e5bdfad130a5235"
+status = "residue"
+cause = "mir::Ty: ext_slice::Fields<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::fields_with"
+kappa = "6c2b4135db00933e2ba206aa40d81c662a18a97b22c1f9f1e70b77abe1f39b2c"
+at = "F=u32, Self=u32"
+embedded = "5393a7f915375cd0365b484444d802cbb50ec9985cbe8a0b591cc3c11cf6a197"
+status = "residue"
+cause = "mir::Ty: ext_slice::FieldsWith<'_, u32>"
+
+[[fn]]
+path = "bstr::ByteSlice::find"
+kappa = "a6fe3513f695858b63f0df95072e5c33b5a261caafb010d30c93ca2ede7fcc22"
+at = "B=u32, Self=u32"
+embedded = "786328b7e07b347fec6291094b22d7f98d808bb6cf81a35ba02ca0512fed7fc9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::find_byte"
+kappa = "d099e04ebd1161107610d6aff311a76ec5ffa1b93e651e3598e758a9b8bbff04"
+at = "Self=u32"
+embedded = "547d29b0944558e5f7fad5af466dda96bb4ce1fe15b7703e4de27e52e36a3a92"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::find_byteset"
+kappa = "027ad811e9caf72b2c870e286e76be08d1cce6175762af0254aeff09219f9bd8"
+at = "B=u32, Self=u32"
+embedded = "e549e8eaa3843376df427e91f6485e5c83cd605fb04ea9a4c1c81afa2c7a73b4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::find_char"
+kappa = "7bf660ef0546942fa2916d29dab2c6796d0f45eeca60180901cf793099373141"
+at = "Self=u32"
+embedded = "51e53d28abe1f226c941bb4cb96c0cf6db2d929515e77082e0002ca88df5ffe0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::encode_utf8"
+
+[[fn]]
+path = "bstr::ByteSlice::find_iter"
+kappa = "e646bd993e08967946be613ff85909b8e623dbaadd7369a9e327019866fa113e"
+at = "B=u32, Self=u32"
+embedded = "c4d95a4b1fbebddc5d6c1058d368c088b7dca66dd8b363ac54f7f01c20d73c44"
+status = "residue"
+cause = "mir::Ty: ext_slice::Find<'_, '_>"
+
+[[fn]]
+path = "bstr::ByteSlice::find_non_ascii_byte"
+kappa = "a6a429ca3118b0944d9ef82bdeecd486101e7fcde59a467418aa4f2c63289765"
+at = "Self=u32"
+embedded = "3d6dfc6f6d83ed752ec4b4f399ce68e38773abb231605c77200c0506516c9ece"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::find_not_byteset"
+kappa = "2cfdeb3338a3ac2e23cc7d41ebd28fce302f11a030baeb8e9cfdc56d85c3ef66"
+at = "B=u32, Self=u32"
+embedded = "2809a80cc4fe33fd4d9426051ff517553dc3fd16fd0a83d9b9b13b921ba1df20"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::from_os_str"
+kappa = "9a2cc1d1f3b508f2a7a0dd3a3f5576645dc3eefa5b240f2a0fe0e058a675c536"
+embedded = "df8ea8d09499b6099341173a1de0de9e1762c8f0ab31e8dd4e0b505f00fee111"
+status = "residue"
+cause = "mir::Ty: OsStr"
+
+[[fn]]
+path = "bstr::ByteSlice::from_os_str::imp"
+kappa = "215b1a2e55973a4418009406aced4eeebd089f3ef2a261b6df9da62ac617bb54"
+embedded = "a556c6a8f7fc24dfda6321cde451506d4793dd00e4ea66a99c6190fa180462f1"
+status = "residue"
+cause = "mir::Ty: OsStr"
+
+[[fn]]
+path = "bstr::ByteSlice::from_path"
+kappa = "8fc70e98604e7f82b56cfc3aef99cd637cb5c6f5a02b83b2aba73900d8c63946"
+embedded = "7585fa106efe14b4a2ea1d392331bb538e4021a73b48b5c67d9c71f955fc5b0f"
+status = "residue"
+cause = "mir::Ty: Path"
+
+[[fn]]
+path = "bstr::ByteSlice::grapheme_indices"
+kappa = "6fbb371727a87e5016cb9fa785f0d7940fdb77ba3aecff404b84ac59bef9bc57"
+at = "Self=u32"
+embedded = "e2db26d2283f3162949975b78422484b52d02744a7eb3fec0390214477716d2b"
+status = "residue"
+cause = "mir::Ty: unicode::grapheme::GraphemeIndices<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::graphemes"
+kappa = "c43871e30eeba3d8fe7923cb6c16d8b7f7f6641e662b07009bfbcaa4716478ad"
+at = "Self=u32"
+embedded = "3da43ba3a69c855c3a5a4d58e78c3393d8fbdf92d30ac59b55d5d4ed308f5d2d"
+status = "residue"
+cause = "mir::Ty: unicode::grapheme::Graphemes<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::is_ascii"
+kappa = "0d6e6deb1e0b978973ce2d36dc2cda58856524c1dc139ac91ba638f502089b08"
+at = "Self=u32"
+embedded = "2bac75fd73f48de25ba1ab2f6ba2ef2a5e53830144a4175b760e4b8f2b2f402a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::is_utf8"
+kappa = "8dace2ae953832c49368b4db55dfe43761f578936e4ce0435ec4aa51ae240c00"
+at = "Self=u32"
+embedded = "0e798b81b97b5e0c5050b2f933a136590cd8bae9901026218a8a6c791b2585c0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::last_byte"
+kappa = "89ccb04edb3b8794c74fe953390f68927f8f4565e9775928ad13e41fbab2fde1"
+at = "Self=u32"
+embedded = "7135e05e415161fb53acf2477d7137213e54b455fd7aa8d9a79ee06443e2062b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::lines"
+kappa = "97a72620c993c8dc0f515fd190664f423ce5292d66498f3f861d0a7c0a35ed53"
+at = "Self=u32"
+embedded = "3aec638ec2f4a674866bbd16ef9c696fd47bbb4824bdd50f8b87e03a290e6e74"
+status = "residue"
+cause = "mir::Ty: ext_slice::Lines<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::lines_with_terminator"
+kappa = "561156a213843f6d6b23daaebeb398b9967345fd8e286efaf00c414684ba3514"
+at = "Self=u32"
+embedded = "a9b4bcc6f05f73ef515def97ccd6b9273733910c1a143beb46181576c05f32fe"
+status = "residue"
+cause = "mir::Ty: ext_slice::LinesWithTerminator<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::make_ascii_lowercase"
+kappa = "6125e137b1ed394fb1e147174881942e903448d088c280c122d103e384b1d95d"
+at = "Self=u32"
+embedded = "d9fdd64e698946266a005e2f8265efcf44e85af418d225185f74b251abd0839d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::make_ascii_uppercase"
+kappa = "a2654ff40e6c4412e465d1f3e43d5c54d128a53c59235ded1fbe246393f93131"
+at = "Self=u32"
+embedded = "01d9731ee71bcb68d9e9277555f8ddcaf3ca0a0919162015492b35eb7b2b44c1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::repeatn"
+kappa = "a7d05a56526e08471f2a6ef975ecf208af24d1dd38e4e7067c7f095d3e2491aa"
+at = "Self=u32"
+embedded = "d2bd6bb2c2e65345b9d4a201fb72c42a67650380cd7b9116848e6a839d5b33b0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::replace"
+kappa = "46bad85d044afd2adf2589a823c515be97d32d06a5dc1b266a3831cbf4a5ad4b"
+at = "N=u32, R=u32, Self=u32"
+embedded = "699c43009e834c137e168f68e6b472092540e96b0f65dbf093a4d4898b44c7df"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::replace_into"
+kappa = "eb7ee830a6dfafdcb76f074a2ea50c53ca57dcf729758195092645d6468bf3d7"
+at = "N=u32, R=u32, Self=u32"
+embedded = "cc57602e3c6865c1f422af11b188429bdd0b549e795c0c0d68f151c85659a744"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::replacen"
+kappa = "d5929c711ad9713382b1acd16b9992d5a532700e67cda68bc70a89aa8c2ba2d7"
+at = "N=u32, R=u32, Self=u32"
+embedded = "33fe4687975be5f1047276cccc4aaeea1e1a2e82808ab88dd035a60069717faa"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::replacen_into"
+kappa = "b3d247532171f60aaf6f25f152b6f50cf7a30fe75eed5bd5676d81777d9c9188"
+at = "N=u32, R=u32, Self=u32"
+embedded = "b9c20b1d8d2be3f0a4fb76c4462c91b843652b299fa894d13375d0c1d5b49fc7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::reverse_bytes"
+kappa = "8297d5bdb765815eb0a03c04d6bede8dbb82924a0caca2addfc4d3fc5fac5b9d"
+at = "Self=u32"
+embedded = "195b2b901cf1a08c26ab15b842329f0de783147f8ad7d6d05a5863831e45989b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::reverse_chars"
+kappa = "61f8588c1e7be3330fca999081dcef30235f5816b4fe9d627f94c59f72fe777b"
+at = "Self=u32"
+embedded = "a9087a1350d0f73b7a8c0cc9f2791d5f88c5a8c5002781f29d125a52e4028c01"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::reverse_graphemes"
+kappa = "016cad43892f66e364b6bd98024cf1130cfc5cb2a183849aa1e183e66c92c819"
+at = "Self=u32"
+embedded = "d2f6d52af4ce26baeb27d00c03a5a7feaf64964b902dc5c90ce8eb0d6c05f4e0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::rfind"
+kappa = "3094fe6fa1dfd10b8fe045c70a5943483a10f5effab22b9ad36ee6d6e9ed90e7"
+at = "B=u32, Self=u32"
+embedded = "386acc70c103b5780ed70d2d12201e447a4b45386106e346e655cd48401aacea"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::rfind_byte"
+kappa = "fcc0d6fba6bd3a02643403da5d4e0a8ffdb2f9e28914a9704a39fe25b644a453"
+at = "Self=u32"
+embedded = "390273d987bbcdaa0f0ffba30345e802a908928776f77a90d36574ba9a70cd2e"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::rfind_byteset"
+kappa = "f15253eb98155881ca83da273521de7ccc0cdb4a5e12a2a772d914fd893ae6f9"
+at = "B=u32, Self=u32"
+embedded = "5b9aff081ab17155a67fd93a2f683160a0b60e44598e044d40ac9206cdb7301d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::rfind_char"
+kappa = "3b7f1a02fd4a8a12ed6bb37156b20ded52cb6851c86f0a49774606af25d98861"
+at = "Self=u32"
+embedded = "c29f2e3aaf8cfa2e85fe2cd6751791c49d2fabf48a06e2d3c42751b790dabf94"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::encode_utf8"
+
+[[fn]]
+path = "bstr::ByteSlice::rfind_iter"
+kappa = "78eead80d3b14068ac71eb94d5881bdf379a4f70aa8669f2c79d7c3b1b19f274"
+at = "B=u32, Self=u32"
+embedded = "2000d22c794c356f050aecfb0d44af626404dab3430dde8735e5dc95a7946dab"
+status = "residue"
+cause = "mir::Ty: ext_slice::FindReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ByteSlice::rfind_not_byteset"
+kappa = "e20e84a795eaf844dec487fd2659c19439a837ea4ba0a8c85d61e8923dd08a48"
+at = "B=u32, Self=u32"
+embedded = "a714bb9da3e93cdb481fba644311b5eed4a248bb946b65967aae396b4170ee3a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::rsplit_once_str"
+kappa = "145779cb2e1b5a7cf16c3115f9d7ff6e1843602679d453487a0f22ced162af52"
+at = "B=u32, Self=u32"
+embedded = "be6eccda3d2c4ef19e54232d887ace4de0eafecc1cb9e33d817b72c33ed484e3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::rsplit_str"
+kappa = "74cbe785b6bfb079564401a41abf7142bf2c2c5db6da47df86880fc5d0f39404"
+at = "B=u32, Self=u32"
+embedded = "b1c750f00674ebae6d4d633d6360529ca4364fc827e417311a35f249dd21d876"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ByteSlice::rsplitn_str"
+kappa = "cffa2d5d0d3eea724fe095ce5d8ce6c28be902fc143c0ba4d4081be23a772991"
+at = "B=u32, Self=u32"
+embedded = "6b0395934349da133f430735129c039ba50e569d930914c39b81d6e5e70a0177"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitNReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ByteSlice::sentence_indices"
+kappa = "c17d0f710128fe6119ca96512dd9401332b7d8728a1cd7d7d0fd353c90e962f9"
+at = "Self=u32"
+embedded = "30e6b84b392cb24a18fb4de031d0da46d88c4355adb54a88a75681f2534f0d8f"
+status = "residue"
+cause = "mir::Ty: unicode::sentence::SentenceIndices<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::sentences"
+kappa = "d4e069dd66e3f1427f7b9d68459e883c2124744ac542a184eb1f4632461145a4"
+at = "Self=u32"
+embedded = "1f8fcb2a5dfdfe553ac01ea92b2cda8f4f834fa5b3afc01ba097093535ff26bc"
+status = "residue"
+cause = "mir::Ty: unicode::sentence::Sentences<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::split_once_str"
+kappa = "c5bfc81fc925b56492d3d8ee1d3fdb6f8de36844fc762c1078cfa3f4493c914a"
+at = "B=u32, Self=u32"
+embedded = "c7d263777d2288e3ec12a235e955355142fbb147ac009872c755555e8c68776c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::split_str"
+kappa = "f2654fe53cb9f1f86c8415fd97acd0743d303b8f29caa4045d933eb14c267bc7"
+at = "B=u32, Self=u32"
+embedded = "dd2b2aea3d343ab796da7efd8cc9615d534ac0e3b75edd0a2cb856ca4a619f4b"
+status = "residue"
+cause = "mir::Ty: ext_slice::Split<'_, '_>"
+
+[[fn]]
+path = "bstr::ByteSlice::splitn_str"
+kappa = "a541a7c0313bae18e9e320563a4b2c1b2f73307ffecc1d4e4604a3719da1713e"
+at = "B=u32, Self=u32"
+embedded = "8151bc302befdbd84aeee7768b8107b3d675560a63b33fb6ecb61b432c5d0e5e"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitN<'_, '_>"
+
+[[fn]]
+path = "bstr::ByteSlice::starts_with_str"
+kappa = "bc8a497ad4c375a7fda8ddcf636c6dcc6c613084064e538a4debba86eba8bb96"
+at = "B=u32, Self=u32"
+embedded = "34d31ea684403a051b233a63a763dab5a85e23a9a28e9c2cc6c1dec6a265e763"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::to_ascii_lowercase"
+kappa = "326ba7c917292cb1b26032dd3948c704ea7551f2dd341a7d59f68ea0440aff98"
+at = "Self=u32"
+embedded = "ec0f8e741196eedeb4031794f0143019528a7c89f378e786a43f6364eb18e274"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::to_ascii_uppercase"
+kappa = "ea20dac791455d9865c70e2343e0f2fe681d8811c4ca69edee09212d344ff846"
+at = "Self=u32"
+embedded = "de470e8a2211a77a79fbac7e898e422f4715136f386435f06dc1a9cbe8e74e30"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::to_lowercase"
+kappa = "489fb9cbc658f5feb28e2ca7c6303a6ff7703a3a3658a6458ca60d09745e6495"
+at = "Self=u32"
+embedded = "89ce35fb28bed5bf28363a8441f06c86419c02b293afa7432a4e8e18e3a935d6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+
+[[fn]]
+path = "bstr::ByteSlice::to_lowercase_into"
+kappa = "445967b51f0aa7bd75b01264990e25783545c46804f64b9322fad1a642327438"
+at = "Self=u32"
+embedded = "35891ef944861e09830d9d8b975754f7af326a1a476060b349c2d442ee6c929e"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "bstr::ByteSlice::to_os_str"
+kappa = "bf1f2193efdf8f5ae8a4b8ae23892240f5780c5435a3d126ba845551c1c93a50"
+at = "Self=u32"
+embedded = "cb47bfa8cc6613885f8b94e79a9a43973d8c9e18a484ec340af2297a246ffca0"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsStr"
+
+[[fn]]
+path = "bstr::ByteSlice::to_os_str::imp"
+kappa = "6ad02aa2d5dad0c8c221f3a81fdcb5cacd118508fad23e70a37ed4657fff2b0d"
+embedded = "3877b083085733b2186c38d4a46bb6e8bdbe05b7e31bee122fbab8eb6b77733e"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsStr"
+
+[[fn]]
+path = "bstr::ByteSlice::to_os_str_lossy"
+kappa = "f8d529adcd3a5cf0d4139385c328490ba809ae70cd4aa27c2598b49063a357bb"
+at = "Self=u32"
+embedded = "bd92806b58cf35574153bd849ca18d776720074a51197a04be2acc5e1f26c66c"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsStr"
+
+[[fn]]
+path = "bstr::ByteSlice::to_os_str_lossy::imp"
+kappa = "213b1b8791dca7a2b72fd5caec0588625177da58f8215290fec8e118d3bd13f4"
+embedded = "ce63a63079d4dee2173cc43f707fe3f4c7cae50dfaab6328192f1b8dfcf416dc"
+status = "residue"
+cause = "mir::Ty: std::ffi::OsStr"
+
+[[fn]]
+path = "bstr::ByteSlice::to_path"
+kappa = "01e99eefe3d31fe012b6272287dea4c1bd0bf3f11ab08ba70c044fe956573845"
+at = "Self=u32"
+embedded = "1139fb5f88bc1a601370a036d4b6279aaa13855849af818f6d91d3ddfb0d5eec"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "bstr::ByteSlice::to_path_lossy"
+kappa = "3a9e40c6aa807170e9125906b56a5dd5663dc16860726c33a665d10ed709430e"
+at = "Self=u32"
+embedded = "d4f69de7b932e8c30c842b574c9156b81b4cadb29bfdcc789992af988fe4f9a1"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "bstr::ByteSlice::to_str"
+kappa = "04ed4911e0f0d23d4ee5079af061d66d71a3110f460faba48f6ca9cb31815cc7"
+at = "Self=u32"
+embedded = "5ce896daabf3f60c550fbd6e7f0c55ec118ef6eb6787515966745cd91693c17d"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Error"
+
+[[fn]]
+path = "bstr::ByteSlice::to_str_lossy"
+kappa = "c2a9be0b09549d561e8337892ba95e747ad64fb08a4c478a3cbb75d492ea3ffb"
+at = "Self=u32"
+embedded = "d4c9b03e64f0123d59e64e5eca8d4535fe5a1a42aaf76c1afb15df43ffd9b2f4"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "bstr::ByteSlice::to_str_lossy_into"
+kappa = "542216743ef943e3557c0b04103ffed0233d09c93b17b0042bc1f1af6b8889bd"
+at = "Self=u32"
+embedded = "edda7892f6eefc3d2e01e31f47cb62ccbfc3807e678c1dc96fee5d73bfc6e85a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::to_str_unchecked"
+kappa = "a8c3c4e440d3ea53915e09f9a358d7adb64ba1a4914456f52be9bbb8ea2c7731"
+at = "Self=u32"
+embedded = "66eae508f4298a009dde9df81e55d6fa207d291fde420e9a43571293a07e25c3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::to_uppercase"
+kappa = "e2c1b5534e9ba275b028a8de66d103f9c30df88a30dc7e4ab02d01de4f0b2775"
+at = "Self=u32"
+embedded = "8851625594b152036563914c5ddc2cb8edf86a5ef35d0e8655a6577cbb5076c2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Vec::new"
+
+[[fn]]
+path = "bstr::ByteSlice::to_uppercase_into"
+kappa = "3ce187e2b7898b9dceb43fe4371089c9491564106ee9dde8023b0625797f29d8"
+at = "Self=u32"
+embedded = "72948f3e84822b4cb66e03e84dd1f2f09999398711b9274eacf957f7fe732303"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "bstr::ByteSlice::trim"
+kappa = "56bbd239fc167ff944b621e47e91bfc45651e8fb88e05433a48b84b6d6e77c16"
+at = "Self=u32"
+embedded = "4dc68db2e2696f72d0664e9dccecefccd7c84a15a3110ff24d2086784362f7c7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::trim_end"
+kappa = "cd8cef61cdb838e1254cf20841942ba1158b8d99cd687935e2c0faabca6479e2"
+at = "Self=u32"
+embedded = "b1de779d9a9a1a5122e57ab610a2b96773fa54eac6eb2b50a2bbed56d420bc72"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::trim_end_with"
+kappa = "6759cf68000f03311da9e1351c294738c35889b6f7f6ab506195e281234393ec"
+at = "F=u32, Self=u32"
+embedded = "dfde8887d280b8ad53d296bb2c78a350b3241cf1a6f65b76060721c933eb58ce"
+status = "residue"
+cause = "mir::Ty: utf8::CharIndices<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::trim_start"
+kappa = "0725dc0fa59064390038dfb98804b3d61dabb2ed3a3ff886a94aefebb929e3f2"
+at = "Self=u32"
+embedded = "05e012747ea4bffa5cfc54d3deec9430b9b60f5fb99fff8cfb728dcd70cc22e9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::trim_start_with"
+kappa = "e93445b3836a83b1a886fe66ba5fbd5b599a7ef325b5148314388139ce90e801"
+at = "F=u32, Self=u32"
+embedded = "0108bc1bed6030e3ae29c09d46cb8f8f144e0ffaa02cad1d6078bc9ee58fa9d2"
+status = "residue"
+cause = "mir::Ty: utf8::CharIndices<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::trim_with"
+kappa = "6b1173318e987cf0266181234bed0f24aa65f6fa043558e43df98c8397faabbf"
+at = "F=u32, Self=u32"
+embedded = "21e234d5d08950f0d883775069fab1fe34bba4ca9b379834931d57b4deae4aa2"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ByteSlice, which u32 does not implement in core"
+
+[[fn]]
+path = "bstr::ByteSlice::utf8_chunks"
+kappa = "fab2c2bc48ac9b6e65161d654afc527b4ee743b8e6ae0b368b5ba44d87ba5163"
+at = "Self=u32"
+embedded = "d3d30b01f38112f2dd9b9f7f7eebce74097b3bdeba6e3c9f5ce279ea5883afe5"
+status = "residue"
+cause = "mir::Ty: utf8::Utf8Chunks<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::word_indices"
+kappa = "aa62f4691038335a0548191d86c567579b7c2d7c9eb50378bd89f2c2409b9327"
+at = "Self=u32"
+embedded = "e4440c434e1f27c97e2412cc79ca1d2880304ea1a8723740dcfe000e9c12cfc7"
+status = "residue"
+cause = "mir::Ty: unicode::word::WordIndices<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::words"
+kappa = "4bc0ccb098da2a11b6c72b78d93cd1ff1bd34cbac20bc27eb184937ff567bd7a"
+at = "Self=u32"
+embedded = "761c14624a374c1531cf786d3cc73c8c5d9939a0288d15af2ac50f92869d5c1a"
+status = "residue"
+cause = "mir::Ty: unicode::word::Words<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::words_with_break_indices"
+kappa = "3ab0790441b447318846bf1d50c363197f88b84927d734a319481077173bba31"
+at = "Self=u32"
+embedded = "461839eee99d4a438843ba34c4095a336021a9f75e8ce15b2f07fc55bfee8cfb"
+status = "residue"
+cause = "mir::Ty: unicode::word::WordsWithBreakIndices<'_>"
+
+[[fn]]
+path = "bstr::ByteSlice::words_with_breaks"
+kappa = "382f07841d23f13ef07d00b02dae08e4903e0fa80861ae5c27e82f5af5d7adf6"
+at = "Self=u32"
+embedded = "542062eb117e065583bba3a4e4e04f75536897a893b91baf17d7d586dad8d1c1"
+status = "residue"
+cause = "mir::Ty: unicode::word::WordsWithBreaks<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3096:10: 3096:15>::clone"
+kappa = "c76685d6cf7b0acac0d98525522d4127d95098b9f345e7d80690144e68779263"
+embedded = "328539dc935048017be079574738fee9cb21da0b99f8a1cf62bc838e82c21772"
+status = "residue"
+cause = "mir::Ty: ext_slice::Finder<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3096:17: 3096:22>::fmt"
+kappa = "adebdf543c839d053ca06c888401d3addc1c1813c289a492a4d3dc556152a237"
+embedded = "53df51ffe288aec26e2e795e13c5fd889a7a09bad60b5d04610b12f3e329b5a5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3179:10: 3179:15>::clone"
+kappa = "17df40afc65ea167b5d546b40d45798ea928bc0ff3b843d89a3ee4457cf7cf4a"
+embedded = "e89fee670ca93fa52d1182b5eccd7f0fab51c4fb808caaaaea433c169c87fe0d"
+status = "residue"
+cause = "mir::Ty: ext_slice::FinderReverse<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3179:17: 3179:22>::fmt"
+kappa = "79cfa8ec60015ceebbd68898177728310a4c39587ebcf9dd49911d4694231932"
+embedded = "7242c44279f61bce47e6e943341d40d133bd5d894bf24f0ffb9940dcc5a5d136"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3252:10: 3252:15>::clone"
+kappa = "3b0cee428fe9eb7562b7edb1a6d1bd9a06d7ca2b660fe2daca4410a0ef293bd1"
+embedded = "a0bbee847bcb8f173581b7866a5dadf7b5c07f36ec4eccaff9a474616d13f7c5"
+status = "residue"
+cause = "mir::Ty: ext_slice::Find<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3252:17: 3252:22>::fmt"
+kappa = "a87fe1eedd3c27721c7bd7b7da4c9bc647afb964c00c6c65b82b8cfad701a9cf"
+embedded = "5b800b30b3738b59749895f033d0d04e72d99fed9f2ee95578019097508c5b2d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3280:10: 3280:15>::clone"
+kappa = "285d6263e0bee9bed62a598b70a0bfc73c31115a719c22e55cdfc28c73d024f9"
+embedded = "511977de9b767a7eff2a29a1fd5c667a2e980744ccb4f5bbb743858369066666"
+status = "residue"
+cause = "mir::Ty: ext_slice::FindReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3280:17: 3280:22>::fmt"
+kappa = "d8ddf36f1de69abd572f46359e5cd63f7cd3a091468bd1c9013acbb7e17149c7"
+embedded = "c59d92dffaf06d05b4cac28725d1aee2a16365a5066ed477ac0eecd5b04c167a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3317:10: 3317:15>::clone"
+kappa = "5dcc6b161815c9da6d3fde7db418e9639b2d2e8590d96b92bbf76f09dbf92c1a"
+embedded = "f18f09b0a946b6c4c83415cff1f894a71445ba9fc643e99a1f939dfa04870891"
+status = "residue"
+cause = "mir::Ty: ext_slice::Bytes<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3317:17: 3317:22>::fmt"
+kappa = "94a0ff678c582fb72b45aa187f9c9e34b3397f63f0b87281986633dcc424aee5"
+embedded = "1bad80a1506809d5cc7e13d9a19c1466f3781894de3ef8c2c00811d6b36a5a38"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3373:10: 3373:15>::clone"
+kappa = "03fc4e8f9d24787443beb51d54689c108294e9c0ced69b50cc2a997f7f156c73"
+embedded = "9e29f9085babef2159bd11b73f01f1faabf3a679b981b014dc854c699bab8405"
+status = "residue"
+cause = "mir::Ty: ext_slice::Fields<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3373:17: 3373:22>::fmt"
+kappa = "cbd22349d277db4dafebd1a7f57cec3a54b8550d3e09326c58a085c1f6507bba"
+embedded = "50bcb3bb278b5a23c14db6da99a0db07888fa90b6a99ff12d5fe990679290f11"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3404:10: 3404:15>::clone"
+kappa = "98a92f3d2061ff05b9cebdc1f386ae917da2df4e8acda31428c158855a98506d"
+at = "F=u32"
+embedded = "cc8f9e571901afa16a78efd298d7638e5b54fa7dbeeab7c1b6a63040ca91b0a8"
+status = "residue"
+cause = "mir::Ty: ext_slice::FieldsWith<'_, u32>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3404:17: 3404:22>::fmt"
+kappa = "058279e9efc00f73d32806956f31f1e7effd1e0a0c38e908eb2dd355d7b16e48"
+at = "F=u32"
+embedded = "effaf85339052ec98f9e6937bd347212d4fbb07410e32871f5c676756f019a42"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3411:1: 3411:51>::new"
+kappa = "571df849b86606249b6e7046a79521d5dea24a422338cabc292ebcdb61baad03"
+at = "F=u32"
+embedded = "4d70a932fe2f91101cdbcc95e45b26ea9330195114f2ba9a5ec7967ce674a54a"
+status = "residue"
+cause = "mir::Ty: ext_slice::FieldsWith<'_, u32>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3449:10: 3449:15>::clone"
+kappa = "1b774a55de9b2d26580f2b5fc983292ce6b0a66c394e50a6594a12afacf8e396"
+embedded = "d7d7b2011f3d68c3b72a65ea747f260babb077f52f1b6395a81ed6893a8637e9"
+status = "residue"
+cause = "mir::Ty: ext_slice::Split<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3449:17: 3449:22>::fmt"
+kappa = "696c3812960bd97adde8b495ab237bf51fb80912e54c30a9b09919df83c35d7f"
+embedded = "4232ca9f86a424c42902f85f8eebfc8e972184a0ac26730d06cfc25150fc5640"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3505:10: 3505:15>::clone"
+kappa = "008f0b776f80d3dab902679e6a32d996df7aa19d6aaf6cc778fa0a13fd0ab8e2"
+embedded = "16f246f39c057ed1ef421175609e6478d11b3b1fa8b4e67fcf7f84ae1ad9da8a"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3505:17: 3505:22>::fmt"
+kappa = "cd4483f36be93989c3e37db66c757d1d51ccfd93f5be1154338d91e730bc0cf1"
+embedded = "daf2f0da672fc0cee770c71a141d946a78ee856c70809283675b13483246fb53"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3562:10: 3562:15>::clone"
+kappa = "ed77ccaaf80fd9b67816874b05df3029226ccd7659ae0eb1193afb2f10abc83e"
+embedded = "1090fa5c87afd180f342ebac0ff0ab1fdb9a1618dfe6cd89f6ca47af89af543a"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitN<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3562:17: 3562:22>::fmt"
+kappa = "4538b52da42367a7131de490bef997de8a01a9e54784c06cb52646d0d7c3adf1"
+embedded = "1330c3b4199473c1ab879d61ead4191cf267b3ec8ad884abb9628c3a9d4e1dad"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3601:10: 3601:15>::clone"
+kappa = "fd7021f905824e2c8e2dafceb342de8f4756518e69018de902cba48928702f51"
+embedded = "1ca98e9aaa4fbbf4a7eebace26d748f8591a2d6d614b977d96216f3215f07a85"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitNReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3601:17: 3601:22>::fmt"
+kappa = "349b1750329ffccb4b7c28d5c10294bd13ecf8091f9c290bbd68d16dce280bc1"
+embedded = "5c0ece4079819729b0ea18b98fa3e801f4be048ec1cf2a1ddd7d323ca6ecd231"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3641:10: 3641:15>::clone"
+kappa = "1808bdebee442e25a24c03c146bf84d825e2a75e83e27b3579b82bd017bc6561"
+embedded = "4b7f1ead634ee899d07608be46f1bd503fa401e74ad6df297067117abccb9c37"
+status = "residue"
+cause = "mir::Ty: ext_slice::Lines<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3641:17: 3641:22>::fmt"
+kappa = "ab7f0bfb4a22e2634191b0714a711c48255a81a3011b42726b8432ec88aeb3c8"
+embedded = "3323cfb04246d26cd464233b9cfa1dc0c72857ee4361902edf2dcd9c6e2a4776"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3705:10: 3705:15>::clone"
+kappa = "07ca09859bca54be8a57ebf50b7c13084ca08b725d2d0c732b2ec108ad9dd361"
+embedded = "9cb86532e085931fca5483bd9dc0d662af422d0369d5ec5f8b462a9c6f929c9f"
+status = "residue"
+cause = "mir::Ty: ext_slice::LinesWithTerminator<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:3705:17: 3705:22>::fmt"
+kappa = "98c2e3fcc43b4caa0ea5e56d3292ef12448d1d5ba424541f37e40e3282cb5885"
+embedded = "d6b235659f7d400a0e0250c3683a2009e6516336307be8f505c9db68734c6135"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:79:1: 79:24>::as_bytes"
+kappa = "3bc018d7ed21f43b169fb94babfd92874d445634b6890b4e0f2c2fedca0e6e6d"
+embedded = "f73e91e36f0bad2a9437a7c45db32431b26fbfc6ac6a77dec7eddbd37554a70d"
+status = "translated"
+digest = "8f777cbd62a72eb04ec34d165822918161d4977d41934ba117930a24d2246b9d"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:79:1: 79:24>::as_bytes_mut"
+kappa = "eb21a9ef756f87db9785aa68211eb861a4cf850138c0a814670c7c2f24d392c0"
+embedded = "cebfab4bf03af26d7b689b8eb37263de319f64935f3029ffdcd8ca260c00c86b"
+status = "translated"
+digest = "dc14e735db8a75f3ff4c72bbd26ed31f45cb965af09384e06944984370080211"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:91:1: 91:43>::as_bytes"
+kappa = "58b1742117357675752b9f0af3f9ef4c60dff4475d9bd71d87947e49c73c6bf6"
+at = "N=#usize_N"
+embedded = "d26909d8616ab504cfa0c04835783c782b9295afd678d1b3d084af92dae2e065"
+status = "translated"
+digest = "b460e6da7848ffecfdcadbdf12618bcdd90b656e94be3046c051f9c0f8ad978b"
+
+[[fn]]
+path = "bstr::ext_slice::<impl at src/ext_slice.rs:91:1: 91:43>::as_bytes_mut"
+kappa = "eb42e862e0613a7b948924061c55805ba60fb7033b2590e5201742c8b901fa80"
+at = "N=#usize_N"
+embedded = "085df03b5940d82b6837243c8d2b855e1095a9274b53f1e6acad8501769b5880"
+status = "translated"
+digest = "e22aa78d92d808422c9f1cd9094942cee7fcf85a2de72c77a5db34153110a39f"
+
+[[fn]]
+path = "bstr::ext_slice::Bytes::as_bytes"
+kappa = "2a901b481c276403ceee303bdb1db7dc93cf91828f81db5f87a90cb0099df2e1"
+embedded = "e02c62297e5af8d0ceb63b66a9ebd347faf750c553671a2e97b346fde4f8b519"
+status = "residue"
+cause = "mir::Ty: ext_slice::Bytes<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Bytes::len"
+kappa = "022b0352ed34101a5c2daa9110936f63b7a7061158fc5b6841ebd058c20ea666"
+embedded = "3b5ab34143af78c8883fc90e867216d8a59df3f784657b86dae6939a5f94da0c"
+status = "residue"
+cause = "mir::Ty: ext_slice::Bytes<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Bytes::next"
+kappa = "04f5ce902a642e98c60368b3b08e4386cc3253fa8bb0d00a936cd92088c8813d"
+embedded = "5ae9aa6b978374dd82d223eefed9f07fae7a48bda8ede0aaffb396315a21962c"
+status = "residue"
+cause = "mir::Ty: ext_slice::Bytes<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Bytes::next_back"
+kappa = "bf39e37a02ff26d2efcb34a4f9650ecc014f08ebc41246a27b859a1c59972663"
+embedded = "38fbc32bc14f6bfccc1fc4b26739694ea3191ac64852c432817c96a89ad2383d"
+status = "residue"
+cause = "mir::Ty: ext_slice::Bytes<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Bytes::size_hint"
+kappa = "a79cb7e69c40fe4b0a20e3d3f48eb80ea1f51961e6512c9da4748614c9678082"
+embedded = "7e051a85b3d4a004a79c0f93890059c5cb424c9088b724bd311ee9473751cbbd"
+status = "residue"
+cause = "mir::Ty: ext_slice::Bytes<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Fields::new"
+kappa = "a48740c58da6d98aea0266dd5e38f43de56ac5629e4515d9aca520691491a8aa"
+embedded = "2853c2e0a358e10dcb37fbf91f5b298e7592f855613befe6b1913d6f38e8c952"
+status = "residue"
+cause = "mir::Ty: ext_slice::Fields<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Fields::next"
+kappa = "732031874d2a664f8cba31113dfd422b0a59cb9bc62e42cdabbfe789fe2ed1bd"
+embedded = "f803fa12abaebb65c5af769026904e20fba352e50d10ea3e87696d3d1688e253"
+status = "residue"
+cause = "mir::Ty: Fields<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::FieldsWith::next"
+kappa = "d5a6f334b493d549820870d11099285c267561c922ed5472320a67c932fc7153"
+at = "F=u32"
+embedded = "b0a48623085dc27735b345c950638c953de760301d1588119bbdb3d02bee74d0"
+status = "residue"
+cause = "mir::Ty: FieldsWith<'_, u32>"
+
+[[fn]]
+path = "bstr::ext_slice::Find::new"
+kappa = "c00719fbfee31fd46213b2976830e88e72ffc63f92f64bbdc34e8d1b7e8b852a"
+embedded = "a718a35dbdd33389b4b8279cf501388613b6198016c99bd5509c9eb1858e939c"
+status = "residue"
+cause = "mir::Ty: ext_slice::Find<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::Find::next"
+kappa = "8e4ff3862c1e40466d79cbcf2baa8382ea2345432438beccd373f3e1bd126390"
+embedded = "ee52f64a27ef4948ed311c396afe5902aeeb83bf50d02e4401f59c4ec407716b"
+status = "residue"
+cause = "mir::Ty: Find<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::FindReverse::haystack"
+kappa = "82c9d82cf707f4b54bcb7b797df82150ddfd70d882735c2cd0400bc8f464dbb2"
+embedded = "c4b1a4f56a12b376d435aaaf64b0301a21300f4ae1d6db97e169e53e92b3dc0c"
+status = "residue"
+cause = "mir::Ty: FindReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::FindReverse::needle"
+kappa = "2643da0225d3bbcf10f6b0f2970ef417ac5d8995730e3470a45ad7bd80822126"
+embedded = "e4a5b7e92bdb9f88011b0e6b04a5bfa1bab06ac554725d5c87e70f9c016e6431"
+status = "residue"
+cause = "mir::Ty: FindReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::FindReverse::new"
+kappa = "2410a209f2bb8f86b0adf502c3b01edb0921ecf3f08ac428cde69639ba0fe366"
+embedded = "5c918ece930718e161b0becc20dfd86e035109f0d4e0d38662e95f7b662ce698"
+status = "residue"
+cause = "mir::Ty: ext_slice::FindReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::FindReverse::next"
+kappa = "755fc563d676ca65c0c7d9d88ca9e36f5657d9a3691c0d6bbc7929d1d982b6c6"
+embedded = "c0c50858cbbf581b501789120da945e8732872ad1ef62519979e3a1f3b6e835e"
+status = "residue"
+cause = "mir::Ty: FindReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::Finder::find"
+kappa = "1c4eefbdaff09e62c6230706faa8ad2e7c115c65d7f1c572ae44ca8cd00b002f"
+at = "B=u32"
+embedded = "020befb8e30042ae072e713fe360c82b7579d2fb8e01d1774d1d9099e0544f5d"
+status = "residue"
+cause = "mir::Ty: ext_slice::Finder<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Finder::into_owned"
+kappa = "71f7708c150468e1a2121f271e6cfbf5b4604e78c20c64ab42bca6ff53451c21"
+embedded = "ccbd7410956efef4dfc2999c5ec0a1f2272400745f791ea1a975ae74c7c85ad6"
+status = "residue"
+cause = "mir::Ty: ext_slice::Finder<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Finder::needle"
+kappa = "d511eff3305a3ff3d606ada7ef88badfc5cfb73725dd6e986b2b0bea6b49333b"
+embedded = "b74359acbbb470a772d7c0e46f3c44d9637d98956ae45b0f476dce5622272246"
+status = "residue"
+cause = "mir::Ty: ext_slice::Finder<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Finder::new"
+kappa = "451b83797630f96c328478f1b309a918c6a1a1bf603325e8aa1f72124c4a2b5f"
+at = "B=u32"
+embedded = "7dadffa3dc9ff8c4e921faa6b4c5ac13ff63858f44361bb923dbbd795104805c"
+status = "residue"
+cause = "mir::Ty: ext_slice::Finder<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::FinderReverse::into_owned"
+kappa = "6593a86228a9af2fd686b1260b05a6efc52a9a7c2859a0e792a3c2e08bbea907"
+embedded = "09e0023d6b0897f8218cf873f51552f0c59c714faa7ed1aa2b01c33681b2beb6"
+status = "residue"
+cause = "mir::Ty: ext_slice::FinderReverse<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::FinderReverse::needle"
+kappa = "60dd2b711589d201aab90a37c239daf19a65f2b871a881c73133509a8361b6f2"
+embedded = "fe9fc4efcd25e847f026a5b8954d15e44c691d8360b7f8875d0558e69bcc0fb9"
+status = "residue"
+cause = "mir::Ty: FinderReverse<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::FinderReverse::new"
+kappa = "58a15fd4bc941772df4fafebd98bc42321c21015e38e6757fd942f96498ce91f"
+at = "B=u32"
+embedded = "ce0e76ade9a1126abe894f3256ec213100b6831a8375d13d979593d60a0ff659"
+status = "residue"
+cause = "mir::Ty: ext_slice::FinderReverse<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::FinderReverse::rfind"
+kappa = "3e8392042d7e27997663e36a54e0520eaa04ae5a08f3e0dcb7497e9b5d3452c4"
+at = "B=u32"
+embedded = "8142b7b1113637f8eea3cd8701517772837cb9488151f79640169c375e6a2c8c"
+status = "residue"
+cause = "mir::Ty: FinderReverse<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Lines::as_bytes"
+kappa = "dd081260df2e6e8abba0a03e306244f7638384cc257915496baac4f095c2a332"
+embedded = "dfa0d4bddf990d19500179082dd36924773e3d39da7c366bddebcb840cb19dc5"
+status = "residue"
+cause = "mir::Ty: ext_slice::Lines<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Lines::new"
+kappa = "056ec16715bffd7c547cda59e4451686026889b99f84a6a2989483320e8936a1"
+embedded = "e077b362357dd1e6fac5b5149da6840562a5a924dbe79d7d01feffb45926a673"
+status = "residue"
+cause = "mir::Ty: ext_slice::Lines<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Lines::next"
+kappa = "ee8c1ec926881d184a7020d75c0d8ca1caf0e5ecf6b802e73cd85fca2de8d018"
+embedded = "1777fd0d0e06b2d914cddd553ae3c4baaa7de616a9a9ba7289188a1e32c4cbd7"
+status = "residue"
+cause = "mir::Ty: ext_slice::Lines<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Lines::next_back"
+kappa = "4a72139ed2410a7ec881cfda80899da7b784b7b62662d7a1189103919d4445e5"
+embedded = "edd1c1cdef47f30c893da684c4e172b15e145d2441fabf84cc99434a5eb4a923"
+status = "residue"
+cause = "mir::Ty: ext_slice::Lines<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::LinesWithTerminator::as_bytes"
+kappa = "2b7cf68c3a5f0b5c799219ef8c1f25dddde8fbfa31b374e1c35c159c5f8fc911"
+embedded = "4393ffcf4b4fba10472ab33dc827e7de9ad2b51a5982c6bf9a94d598c0e586c4"
+status = "residue"
+cause = "mir::Ty: LinesWithTerminator<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::LinesWithTerminator::new"
+kappa = "57bdae8156409cbd4eb6a8adaf2933b0170f217d2efb06d40bbdd93a93d42001"
+embedded = "ab7374550d12ad9c93545857c6224758309b9e66622f63850088f97ac3b05136"
+status = "residue"
+cause = "mir::Ty: ext_slice::LinesWithTerminator<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::LinesWithTerminator::next"
+kappa = "4487ce3e6c574a634b22b645fb0d0a284397c7f51b9d4eb0a50c47eb222eda03"
+embedded = "60378a1c7c49fee49a2460bd282ad93a00fafd8ed428b83d7e7db6ef9352dfce"
+status = "residue"
+cause = "mir::Ty: LinesWithTerminator<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::LinesWithTerminator::next_back"
+kappa = "2e20b70de05444f09f7cabf03602f57bfa184db002acf532d28ada87160345c3"
+embedded = "6706237e54d4ecbec83b6ff824522290783eb1652f9794528ca44034869ac6ed"
+status = "residue"
+cause = "mir::Ty: LinesWithTerminator<'_>"
+
+[[fn]]
+path = "bstr::ext_slice::Split::new"
+kappa = "b84c8d99d1bb9527e76779369ba23d55141e4d3d4901f16d6ac12d4daa097610"
+embedded = "21084add53923040c23ba75685cb1e9c306fba530baf9bd5a0c751527016a247"
+status = "residue"
+cause = "mir::Ty: ext_slice::Split<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::Split::next"
+kappa = "476d4efec6773c19ebb1f63f03f6414be77ce984da4d71a5c9bd4bd8ff898405"
+embedded = "8cb54a92b58c2eddd5347a82898f2780c8ac0a3ab864cce886dda9845368bda2"
+status = "residue"
+cause = "mir::Ty: ext_slice::Split<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::SplitN::new"
+kappa = "b42c4a5c892899d9d594068fe95d952d3fda3eea741d52bab1f63e81e4af58e8"
+embedded = "86b10990fc3c04eec729b049a73612e277090e247b180833d2364001fb225695"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitN<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::SplitN::next"
+kappa = "2d4c60302116f5ee7a35d3acf9a55b9e7ebe34d9c5734129a378ba58cda64083"
+embedded = "a08257106ab604d9b25bacb49f4f55e956b0127bee3fd3737e830dc2673e88e9"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitN<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::SplitNReverse::new"
+kappa = "cc38ae8f7734ffc39f26dfe89c50e6fec2389145cb103f46412e9fd5556a4f9f"
+embedded = "92ad5f0f17678763a65341e4de2b74ac4c60d91063d2069021040e26e0ffbdda"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitNReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::SplitNReverse::next"
+kappa = "ef16a3083f5aa25475c5d0184bafd0bef75fa5f48abd4e231d5dce0e9bd05bd1"
+embedded = "7af989e9a502a949958cdba7da5a74c10de80f2f53118247cecee86e685936af"
+status = "residue"
+cause = "mir::Ty: SplitNReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::SplitReverse::new"
+kappa = "cd30af53451968d7da568e2517bd4880a3408acc11ac90143988555baed33949"
+embedded = "6fbb8a7a448b5e2c690e10cb6c06704200dd53f1db2803d9ecd3c65e6d83ce90"
+status = "residue"
+cause = "mir::Ty: ext_slice::SplitReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::ext_slice::SplitReverse::next"
+kappa = "a81e64b5518fb7fab85189056adc677b8b739b83d380f67e6ff5b99b455bef38"
+embedded = "69060f2aef966097c7b5e57fa2a04bc40203992e7476a382adc7f0896b8c8e53"
+status = "residue"
+cause = "mir::Ty: SplitReverse<'_, '_>"
+
+[[fn]]
+path = "bstr::trim_last_terminator"
+kappa = "ab26e5c09788f1fb9b8221033d1e25b3a0b01dab375c74ce9f1db6a7feae2081"
+embedded = "aa4c97e40c94ca573df6d0aa8ff0f0b22ecace7ec66fa0bc767f400c00ed00a1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Option as PartialEq>::eq"
+
+[[fn]]
+path = "bstr::u32"
+kappa = "68026e1d13a17b7b29c9c4c54cb0688911790ef9098c344534f8fa6dc6b449a9"
+at = "B=u32"
+embedded = "c09517fe18ae683e5195d717ef34f29f97dcd6bab7cd4b6a4b4b5c7d3d5ce8d6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef, which u32 does not implement in core"
+

@@ -1,0 +1,343 @@
+[[fn]]
+path = "heapless::history_buf::HistoryBuf::INIT"
+kappa = "bd74fc256ac79d9b964b2fa7fd7d2e92587bc34f0770d931a1dc5d9e90078292"
+at = "T=u32"
+embedded = "f05493d210f0434827a20d397671757726ce420be27f4dcd5f4f7b86e707d9e8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBuf::clone"
+kappa = "505669c7a4bbdcfd7bb0364b5193861e60332ce2b26c3b57858f61ffcb0d1986"
+at = "N=#usize_N, T=u32"
+embedded = "f23f6dc8d3fc33910c9131d707ea8c2ac80516cd6e58e16b41a997f394cc8863"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBuf::default"
+kappa = "98f74ce3034921f017984db497fdb84610aec5494fe67ae00ae76a971a6c3a8b"
+at = "N=#usize_N, T=u32"
+embedded = "f2d35054a83f978fc5eb423ac58de1892b9ec9641c8c64aa864edfd037606dfb"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBuf::new"
+kappa = "de6076dc31f2a6d342646384687cb41b19f3946799d24b2aed544c028eefb2ee"
+at = "N=#usize_N, T=u32"
+embedded = "eea7fd70829fbc62c4494b15694f003f994cb642993270b0eeda033e09c2f852"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBuf::new_with"
+kappa = "1b329af3e6884e3aba7be227d6606cd4e224f17c8a143a14856e0f50284b5280"
+at = "N=#usize_N, T=u32"
+embedded = "5a158825c5262f5cbc0b387212330df22fe4008e5b8c6b784b18730a1ce9055d"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>; #usize_N]>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::as_mut_view"
+kappa = "4834089c3d8feeca4e30b662744b9e5f409fc714a7e1a686f18c7011a47a52a0"
+at = "S=u32, T=u32"
+embedded = "df34272625e6e9e087fd12be5dde6cc81ad94867d343c1c300f9ee0947ec2e2c"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::as_ref"
+kappa = "779e99cb942f2a30c9bb89c745611c4a7572f4968180ce18e23eeb3e50929bab"
+at = "S=u32, T=u32"
+embedded = "2e215dc591697fedaaf0b38ee8466db49bb32dcbfc786390482e3f1147b1e01a"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::as_slice"
+kappa = "0c9b1f7c8d9226640e51634083de95fb0097092915cd519bf1e12170a9212d51"
+at = "S=u32, T=u32"
+embedded = "446264a767fa4e6339ec6063978d23b2030623c8c791da594cabb15ac545f4a7"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::as_slices"
+kappa = "f9a0a88be5560a89dbfddeccaec94c7762db11f0ce7e423a989fd3a5bd7b7740"
+at = "S=u32, T=u32"
+embedded = "bebc0ed6c977d3cfe23a09960a5fbda131d8c06ccedd42bed41265eea585d475"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::as_view"
+kappa = "365b15222d70531f838f990573efce56cd15c23d4d8d5c884b44d28dd755da32"
+at = "S=u32, T=u32"
+embedded = "1ac50c14ebde8c41d9fe213501e05b1f7586cf9bd07ffd9372e59c7c50a5b47f"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::capacity"
+kappa = "0d36fed1339ff709b2f0480ad49d951ed95f8b1deb7584f86051f08a399be063"
+at = "S=u32, T=u32"
+embedded = "086419585a23e0cdd066df05303d6e531e984dbc0924d2aab166e3c1c3df5707"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::clear"
+kappa = "ac4845747263e426a2bf1b0b3c2a12514f1855bfde038db16290f5b7c27ac832"
+at = "S=u32, T=u32"
+embedded = "6e599844dc3ec74779fdb4e0424e362d8520926806da06db86a85308f9de79b0"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::clear::Guard::drop"
+kappa = "47e3fbab9ef72a58b12ab6c43a82bc6fba864f02a921a4121faf29061a2b8809"
+at = "S=u32, T=u32"
+embedded = "5c82342ec5c04986222afe44e9ce30938cdb90b5f8a80e33e5c08deb4d2c7874"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>::clear::Guard<'_, u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::clear_with"
+kappa = "1b606b3908709432a9cd09101cecb6456a71b89e795a06b71c5b278aa3d5edbc"
+at = "S=u32, T=u32"
+embedded = "14a556c3a9eb6d3c43205f8f40022eb0b8dba24acad7a8c93fda6581bf1c36ed"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::deref"
+kappa = "520305c16e0cc68d2ddf06bb0989928304a0e39373e5bd1f43683f2fd23123d3"
+at = "S=u32, T=u32"
+embedded = "4ab603f711a8cbbc1da5cd059d9367ada41ed7304d12fdf923374eef5ca248ad"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::drop"
+kappa = "edcac2aad17f227102132b8dcaac1756af2f7ecbe9387efc9990a88cb20e0c35"
+at = "S=u32, T=u32"
+embedded = "bb5da362160ba26e715e4bac6b36656e013d94e97f1fe8e1949faffa2497fd04"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::drop_contents"
+kappa = "e4f69c093e58a9dde3489c400de7931434c4ca1ad44182f1ce69252fe417a572"
+at = "S=u32, T=u32"
+embedded = "2a5d2b6ad69e54f1106d5e87f051e72ffb598eb1ec72538475257b9e7ed8d78c"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::eq"
+kappa = "30cf3f1351e6f9da58c6318c46d4b856ab7ad6af844d6657d6f58710e5900015"
+at = "S1=u32, S2=u32, T=u32"
+embedded = "dc061c27d5e8fb0e52f8ea23c922f1979310d84d921e40858c2145c6e583513a"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::extend"
+kappa = "24e3a6eb101ccbddf339282c20353604d609aec5cb8bc86b530228a3e49bd2bf"
+at = "I=u32, S=u32, T=u32"
+embedded = "05292ffb4d6f1c1f2cbc3a974d7f33469fd2048ff2427b3c5c65d174afcc62f0"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::extend#2"
+kappa = "55badc237dde9294161d1861b58e2d358dab9c266783a76615b63c3b23bfbb56"
+at = "I=u32, S=u32, T=u32"
+embedded = "480ce3fe474067636a2151c13d760a9aa4df97bb32d5ca9e13a730974e59e5ba"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::extend_from_slice"
+kappa = "e90ef3d27c7cb574c5dcad901e2fd85e441950749cf2f4421c2c906d2027c562"
+at = "S=u32, T=u32"
+embedded = "a598623232ade425f3ffbd030b8705085c63c11d28ab8f7d8a083b1a6e71e17d"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::fmt"
+kappa = "dc529b89197091bc1a45b3c6b9de604b36b73b8af40c897c0da306ed2ab5e81b"
+at = "S=u32, T=u32"
+embedded = "846e5d38985d4c7eec92470b6305839daf70578b37c5434166fc57231e1193c6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::is_empty"
+kappa = "b9b5365f9afe274fac43973ce082dcea69ddafd8f1bd86b19cabe9f5feb56768"
+at = "S=u32, T=u32"
+embedded = "8655acb8d6e122444543f56c7f1e6a494a480a73b3e12bb5426c3f8178ab302b"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::is_full"
+kappa = "bf9ed90afb32db77489c693c6604ca52cfcdf781aa0b3ed13879567a531428ca"
+embedded = "8274e27c45c19a2aeba2124b4a019b0abddb2cfce251f1e9bbbd0e8477d487ac"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::len"
+kappa = "c203ce99be114f31c19da5ed5c3fceebceaf088cb7ccaa4ae3c937164ae6f8aa"
+at = "S=u32, T=u32"
+embedded = "478f75f475d902f05ba0ab4006c8b7a9b6c21e2a1070a147c1744354ded5ef59"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::oldest"
+kappa = "de9a70e5683e4a2bd30f441599b7f04572e1d4b156856404f164df5e010194ee"
+at = "S=u32, T=u32"
+embedded = "bcaeea1ff9b0b9ec2904a9c2f154a7f9b2973880a071d9d33053059d582b82ec"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::oldest_index"
+kappa = "2f64d7b17c3fb5f8c71d9164cab4af92094dc464d790b1ddead2f8d67ffa56ab"
+embedded = "6cce4273ff5754f1729d32da93e399ae4011b8a8aacd2489554b0598d56f0e52"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::oldest_ordered"
+kappa = "45ab0447415b4496b660d4eea2464db3f65c5d3096cfac3d585a4895c750ab4f"
+at = "S=u32, T=u32"
+embedded = "6daedb821c4f94d9f18bbe9111ff8e36305e88e1ffc5d030653674fb2e0b11da"
+status = "residue"
+cause = "mir::Ty: history_buf::OldestOrdered<'_, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::recent"
+kappa = "d27dd07982ddf2df11d7fb0613630f8d3585fbe7105043c09d4f3558513739fe"
+at = "S=u32, T=u32"
+embedded = "f70accd34a0ffdbce91215e735704065237f0f301196ca8219f0ef2b2a54a499"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::recent_index"
+kappa = "3d87fb90686f392bbb4059b67b329a756a502ba6e2d4496560a48db1ade64d8b"
+at = "S=u32, T=u32"
+embedded = "e428dd4302c95e8a01e32576eed4237af65885a7619b3b3d9f6020559fdf3c29"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::HistoryBufInner::write"
+kappa = "0c64b6f467500064d285c908dd0c6b2cc88696efce0ba8bce4fcb87e491a2485"
+at = "S=u32, T=u32"
+embedded = "b2a34822e8b9383da5648274026ee1443126264344ee66c46ebbfc28f13d89a0"
+status = "residue"
+cause = "mir::Ty: HistoryBufInner<u32, u32>"
+
+[[fn]]
+path = "heapless::history_buf::OldestOrdered::clone"
+kappa = "5646ef2338f38e12f62f3d5da4552572c2ec690c9f098bab3decadea09c82512"
+at = "T=u32"
+embedded = "47df508b97377f80b5ca1ab3bc21782b5928f7741de6b26be32a29d6bb783b97"
+status = "residue"
+cause = "mir::Ty: history_buf::OldestOrdered<'_, u32>"
+
+[[fn]]
+path = "heapless::history_buf::OldestOrdered::next"
+kappa = "932d694855946ab1432dcf94df7d113b6a395a55d15d62b02264f2c01e04c838"
+at = "T=u32"
+embedded = "ab89cf9ea6b1272e7498f2cd1b96417a05a086039e8774f33f5981b44f7345db"
+status = "residue"
+cause = "mir::Ty: OldestOrdered<'_, u32>"
+
+[[fn]]
+path = "heapless::history_buf::OldestOrdered::next_back"
+kappa = "f9de17bc3454032b77e570b5a84e5186685c14d664edb7bd454fab8208f1e884"
+at = "T=u32"
+embedded = "36cd59b17b5a6e67ac8226a5755513179c1b1efb0ac29286a25423f2a883a2fc"
+status = "residue"
+cause = "mir::Ty: OldestOrdered<'_, u32>"
+
+[[fn]]
+path = "heapless::history_buf::OldestOrdered::size_hint"
+kappa = "985a52d02b32dd0f4a2fcc6e5dbb6990fc0f116f035f35a4a9cbece01811157f"
+at = "T=u32"
+embedded = "65d1804223c72e66207369b3ff333e5e95ddc5aa378b4a9601090233cce185a9"
+status = "residue"
+cause = "mir::Ty: OldestOrdered<'_, u32>"
+
+[[fn]]
+path = "heapless::history_buf::storage::OwnedHistoryBufStorage::as_hist_buf_mut_view"
+kappa = "6e3bc573089d0ee019d927023c3eb8c1503604910f874f643d2e1966cf5efe58"
+at = "N=#usize_N, T=u32"
+embedded = "8bac82bf3c511cb572f6162b80dd8aa41b1ab8cb9288b71da77c93c6aed8c35b"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::history_buf::storage::OwnedHistoryBufStorage::as_hist_buf_view"
+kappa = "71e0a2fe7b401e785add2fad3ab14ced509e132008592f809abc97e92ef50ac6"
+at = "N=#usize_N, T=u32"
+embedded = "4b972696cd5927ffca068904ea97bcd886d882282382e93f2f4e32a888df9dbb"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::history_buf::storage::OwnedHistoryBufStorage::borrow"
+kappa = "22056515fb7c8a833f12cd1337180b6e48daab75a044ed501c3efdb67343da7c"
+at = "N=#usize_N, T=u32"
+embedded = "5498d7ef818192b555599d2e5cb0fbdcfa21fe7777363d5c7be961fad8cd1417"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "heapless::history_buf::storage::OwnedHistoryBufStorage::borrow_mut"
+kappa = "7e0b30a7f15ad7474821e0266a8b11184511cf25884a8c8b99d1c5dbf0db242b"
+at = "N=#usize_N, T=u32"
+embedded = "951a67cf00862c70ffe556394df916716732de3f84b5b27c642fa368cd48f466"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "heapless::history_buf::storage::ViewHistoryBufStorage::as_hist_buf_mut_view"
+kappa = "bb7ad8cb17ae485f38706d7d25d06db092b1fc2d5eaa10309bc44eb6a3b3f4c8"
+at = "T=u32"
+embedded = "5cc765f71f53c6acbb1b2bef1e0e7740d6fb8376b9212b13d0849ed8811dac3d"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::history_buf::storage::ViewHistoryBufStorage::as_hist_buf_view"
+kappa = "7d2b15cddf696d3969ef34dfeae805f42bfe666d6d6e88f11f72536485159c8a"
+at = "T=u32"
+embedded = "e2d17af7055add398cb8ac922654bd5d46f29be9dade82f758204e42f02b0d3d"
+status = "residue"
+cause = "mir::Ty: history_buf::storage::HistoryBufStorageInner<[core::mem::MaybeUninit<u32>]>"
+
+[[fn]]
+path = "heapless::history_buf::storage::ViewHistoryBufStorage::borrow"
+kappa = "2c1428e989df5a6195e3c2b026fa50ea6c99ab9e6d4befffe50d7e4118eef07a"
+at = "T=u32"
+embedded = "07cba790bce3eadd9e448c78b9c35be4b413ee52158674a5fddbb5c66a141ce7"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+
+[[fn]]
+path = "heapless::history_buf::storage::ViewHistoryBufStorage::borrow_mut"
+kappa = "c91594d37e69d49f8f212b037d46743e67d37540953c6d1388e436af8a73ccb4"
+at = "T=u32"
+embedded = "1cd128cb71f74469e23b3b660fc5aaf464ebd043862bde52b94739bfbc801118"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u32>"
+

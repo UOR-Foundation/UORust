@@ -1,0 +1,42 @@
+[[fn]]
+path = "ring::bb::verify_slices_are_equal"
+kappa = "7d18ed0827dbfd944b76debc2d21ab1af1c5dc2e60e40adb68fc22d03740a2f2"
+embedded = "1369213783c2d0fa8dbf8b300ce006b2a26da52f69d9404865c8e26fbf62e58d"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::boolmask::BoolMask::bitand"
+kappa = "bcf5a097b0d5ac790d6bc0bfffa1b475ccfa7f2986223028b5eddb9c21699f2b"
+embedded = "4438008ec807e9d29850a1b6ca77c3a0cab1c5422cc78e341c30cec750c5ce15"
+status = "residue"
+cause = "mir::Ty: bb::boolmask::BoolMask"
+
+[[fn]]
+path = "ring::boolmask::BoolMask::leak"
+kappa = "d81c0a01419038a45fe544064d2b595e98f676450a4725520974a599a4cc9363"
+embedded = "7a64b7087542649d2f020d23906c58ad31b274962fd6daf9bec4a813810da7bd"
+status = "residue"
+cause = "mir::Ty: BoolMask"
+
+[[fn]]
+path = "ring::xor_16"
+kappa = "df8edb443ba26c3ddc8aa8fd447797b1febb31fc23d654add8227cf4076ab66a"
+embedded = "3c9db15e81362e48122eb65696e2a4d4ab1709b90d417f85183a14852c8ae5c5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::from_ne_bytes"
+
+[[fn]]
+path = "ring::xor_assign"
+kappa = "e8460cc7482e0aac0200cd89e1505100a1c9e2c9781f8c2891e49e5d7efe642a"
+embedded = "cfd84778e9e8cd8437476cf63f1a49b8de2f23baa0a8a86905bf7f63cebaab80"
+status = "residue"
+cause = "mir::Ty: impl IntoIterator<Item = &'a mut u8>"
+
+[[fn]]
+path = "ring::xor_assign_at_start"
+kappa = "e901fbf748d29d52f0fc01c2c0e38774687a248b0c233f3668e6e3ade2e3aa8d"
+embedded = "7915d394753286434c5c933d1546daa201a2fc9dd9e299e572fcda0f60d2460d"
+status = "residue"
+cause = "mir::Ty: impl IntoIterator<Item = &'a mut u8>"
+

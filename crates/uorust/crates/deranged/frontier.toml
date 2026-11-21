@@ -1,0 +1,379 @@
+# The deranged register (written by `uorust crate deranged@0.5.9`; do not edit): every body of
+# deranged's MIR at deranged 0.5.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1267
+translated = 1
+residue = 1266
+
+[module.crate]
+bodies = 1257
+translated = 1
+residue = 1256
+
+[module.unsafe_wrapper]
+bodies = 10
+translated = 0
+residue = 10
+
+[embedding]
+bodies = 1267
+embedded = 1267
+evaluable = 1267
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: MIN"
+bodies = 120
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 113
+
+[[cause]]
+cause = "mir::Ty: RangedI128<u32"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: RangedI16<u32"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: RangedI32<u32"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: RangedI64<u32"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: RangedI8<u32"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: RangedIsize<u32"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: RangedU128<u32"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: RangedU16<u32"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: RangedU32<u32"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: RangedU64<u32"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: RangedU8<u32"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: RangedUsize<u32"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI128<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI16<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI32<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI64<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI8<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedIsize<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU128<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU16<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU32<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU64<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU8<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: OptionRangedUsize<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item MIN"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: RangedI128<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedI16<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedI32<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedI64<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedI8<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedIsize<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedU128<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedU16<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedU32<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedU64<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedU8<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RangedUsize<#_MIN"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Unsafe<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ParseIntError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TryFromIntError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::IntErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u128::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u16::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u32::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u64::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u8::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unsafe_wrapper::Unsafe<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: usize::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI128<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI16<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI32<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI64<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedI8<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedIsize<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU128<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU16<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU32<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU64<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedU8<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionRangedUsize<#_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedI128<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedI16<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedI32<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedI64<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedI8<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedIsize<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU128<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU128<0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU16<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU16<0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU32<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU32<0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU64<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU64<0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU8<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedU8<0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedUsize<#_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangedUsize<0"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1

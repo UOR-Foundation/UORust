@@ -1,0 +1,1416 @@
+[[fn]]
+path = "erased-serde::__check_erased_serialize_supertrait"
+kappa = "a52ede5a91dfc3219662cfbd3db3c9f977a5795748f4479ce5a629158f768cc7"
+embedded = "992ebd33b5e53cecbf0b220e9428df40dda55761149892e4af000f734a96e991"
+status = "translated"
+digest = "c45e8770584f44158c46e1d4c8c4bb289e34c8d92941249f93a4ab902af17aff"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/macros.rs:103:9: 104:14>::serialize"
+kappa = "387130264f5b7081b1d8797d48f88ab70697e296b5e102b737fa5539448ca07e"
+at = "S=u32"
+embedded = "bddd3d27e7282b5a6b6bf521b03316484ea2a998beafa16c129d667de8f83be5"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/macros.rs:103:9: 104:14>::serialize#2"
+kappa = "0f84e76885529fa72b6c2feb1f7a4afb90888336146847c59bb8f27eb551b77f"
+at = "S=u32"
+embedded = "291a0e0b887b9168e0b5a8c15f01fbf41ab4fb3b9e481765b3fde29a3f955080"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize + Send"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/macros.rs:103:9: 104:14>::serialize#3"
+kappa = "6bf1778454f8ccc42ecb28182c4f5acf7d99092a1338ab12487ffec058784e55"
+at = "S=u32"
+embedded = "4f0fcdb6d44ad2595b17cdda9dc8ee7188da35acbc6629bda301c3703707b696"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize + Sync"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/macros.rs:103:9: 104:14>::serialize#4"
+kappa = "f6fdf7bbeb380b597a2e3dbdcd15c86978cb7db632c3c88ffb9ff6afa0127ebf"
+at = "S=u32"
+embedded = "d54580eaea50fe09699fab3746dfb3a181325ee695df1d998f95f69e8f383e0f"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize + Send + Sync"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_collect_str"
+kappa = "f80c47ebebc14fcb4b9f92118e4b73df5a94539dbec1a74acb503ef635809841"
+at = "T=u32"
+embedded = "f56fccc97efc7b130eef574ca612e6b6e984b0716b410456ba621ed4d74153b9"
+status = "residue"
+cause = "mir::Ty: fmt::Formatter<'_>"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_collect_str#2"
+kappa = "8a1eae7826d33ea89033931cc6b17feebcff84f928c4351adf9960525ef0798f"
+at = "T=u32"
+embedded = "0c81bdc553d6bef88072d6f5e90436e2bd3d103e7b09ed09fec99c0f253662fe"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_display_error"
+kappa = "ab1c1f176d45c4f4d2d62120107325ea7fbd7daad28d1f706884c9000824d56f"
+at = "T=u32"
+embedded = "07d2b6c78b72eb9eec057459115667b673847dc97db72b751884400698c16f31"
+status = "residue"
+cause = "mir::Ty: fmt::Formatter<'_>"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_display_error#2"
+kappa = "9712c317a32f94330023b181828d319f4a70936ac41613142b3374b93506e1e1"
+at = "T=u32"
+embedded = "80972de71a74251a5bf45f6992168e3bc5ebff8c3806be70ecbed62b0635fbd7"
+status = "residue"
+cause = "mir::Ty: fmt::Formatter<'_>"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_is_human_readable"
+kappa = "03f478385d7f3060ec3670a838fa591710b17eeb0ecd050a49744e2d24d7da91"
+at = "T=u32"
+embedded = "9d82950db994136a0463a43f7e8d24ff2556457f45ffb727e07f52b7af449579"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_is_human_readable"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_is_human_readable#2"
+kappa = "486e8a8a8c79f11423443a1fe413b763595b36d11b62879e55ac954821128d92"
+at = "T=u32"
+embedded = "2ee4236c59628dc252e37bb0eae8eb858817593fbb025f6c0037abff3d46b7d2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_is_human_readable"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_bool"
+kappa = "b6b2e6256c5fa8e4f5ee43e49128c693833c456be3aa556607ded15202831eba"
+at = "T=u32"
+embedded = "d6889881bc1fcb1824d8be6106c654bdfcf5fdbf6d62b5083ba61b385d8fc7c4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_bool"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_bool#2"
+kappa = "0ca26c581e1effe3003587a184424b276ca6c2c0c6ddea500867c0ea95c4c769"
+at = "T=u32"
+embedded = "df7f6005b456b23740a9c8b970a448bbfef3ac3f43328126284d8b6120160b91"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_bytes"
+kappa = "8ad9b3f39b6076c2f2bcbe926ebf74f598439e22d3266346c255a3f68af48c13"
+at = "T=u32"
+embedded = "77932253deb4922511ee8794050c7ba24332d509ffdc9921da73f3b6a3decd0c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_bytes"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_bytes#2"
+kappa = "6ccfab5a61cfee3f843cb7f56ae1294a0010d286e604a66d875daf394f9fbb33"
+at = "T=u32"
+embedded = "2f7cd5db48fafa3c2e9075afd18ec6e4eaf6e95a9a0fb9a80f8688f0d5b8ffeb"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_char"
+kappa = "484e1d2030d9bd84036f04813d853bbfb029998383a2652e35741d5f681c5548"
+at = "T=u32"
+embedded = "b99a6644409b27631e8b62afd1b26598dcdaa18100f67e369b58f0c5c67a1a98"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_char"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_char#2"
+kappa = "aff557fb31fcb7e7818db84bf40df440add069ca752cdab499b19b60ad192fe8"
+at = "T=u32"
+embedded = "5fad95eab2edcf2f0c3dd9be19e2d56ef7517cb2726a21aba5d131e0435a9318"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_f32"
+kappa = "e5c18d40a40a8ab9fe8e181b00b7ac57b9774460ebbb45ea5798e80f7a01eb90"
+at = "T=u32"
+embedded = "1c4d1d6ca90ba5acfa424497a3a66db4f1a56d3b57ef996b08ab7bd935368a08"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_f32#2"
+kappa = "a6392dc72357b95b6f4f05e6cbb14ab6311ddf87b22aec5826111ee6b3099e62"
+at = "T=u32"
+embedded = "6d8b0c05eb8f801318af9d7da21bcbd8bbbca7dea0c1d0c78da77bb5e8f21874"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_f64"
+kappa = "c6a6dcfbfa49dc292fb319f0c87ff9b52af7b79a5430bf6c3894d30ef68d6dd8"
+at = "T=u32"
+embedded = "5dead5901dcea409b31b08821c0aa2e14db9614917183a086990a709a0bab827"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_f64#2"
+kappa = "8c03d4cfc1005a49dd8438a1fe1c67c0cc71e1124361148a9167ec12b7634ae2"
+at = "T=u32"
+embedded = "2a8a03a03cebbc0db047242f0f8f810dfd9d1dda5eb537d821e323bf49d3e2fb"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i128"
+kappa = "267dcac69badd442854042bcd28bcdfd16ee9b8e0953b80560a3d0f9fe9f6359"
+at = "T=u32"
+embedded = "81ee4d3318e4cd5bb2a1683d16ed79e119c313494b87908dd62afd48b2737bb4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i128"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i128#2"
+kappa = "ab1326593cd67b2d16b3b762927e39eb01a24d3741a96398b49188a43d7d10e4"
+at = "T=u32"
+embedded = "5cfdc34c0f56c91d7cf0ecbd17fdc4a792a9bdd4486f67900c4db5b6a7dcd774"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i16"
+kappa = "d7466bb9f2384fd305479212616032c77f88249d5bc0a2c931b7044f255a6815"
+at = "T=u32"
+embedded = "6c395e223be3f6ea7a376027ff0641b6a10509002b34f2bb3d0d92fc6abaece1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i16"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i16#2"
+kappa = "1497184ce2bc2ffe7647069cefa139efc89c2e799ac06f90c6e0869185584035"
+at = "T=u32"
+embedded = "6ecfc9d402f1e588e5601d506503fc8cae85a38d9c9622f2202c9672bd60af77"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i32"
+kappa = "81bc171e72f883713a2bf796098b8310137ff18a017d1f8abb9f921a31bc8947"
+at = "T=u32"
+embedded = "ffa41d46d9eca042a1384a3bc879eb17a300375d6407f84fdb29c9273f0537aa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i32"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i32#2"
+kappa = "002cd6227834475d126bcabe4d355e60fa6e80a5dbf9e05ed61719a6a3f3285d"
+at = "T=u32"
+embedded = "9e3bfbb89778c866f2b4692bfaf79a9144da5a7ecb903f489fa0ed8e754da235"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i64"
+kappa = "418747f8a32f2f03e819fec65d4ccb7293c535912c8d41518ef58c21d2e9390f"
+at = "T=u32"
+embedded = "fef74fb653ce193f223db22b97020dd3580d092d14019320dc35ee44ead9d02c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i64"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i64#2"
+kappa = "6fb2ab5f734f30f8f96e7f23fe4b4b1dc1c0466696cb7dc7d36a951e6b6f1ea7"
+at = "T=u32"
+embedded = "13d29dd4611568889e0bfb83fb404dc168bdfb365e253ed3bc362a75b9456e24"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i8"
+kappa = "f53568230ea54fef0319c633fce63ec10b5c62f4f125dee4aaec7b1c7cf652c0"
+at = "T=u32"
+embedded = "2e2ef9c7744edd7a0b287dcd5525f0d15f5f38fd1d86a6e9c0c8dfe75d1afb29"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_i8"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_i8#2"
+kappa = "b3a65b9db0fa6423d83e31807080206092c8efa846e0a6b3eeec5ceffa35e94a"
+at = "T=u32"
+embedded = "b8c71d7d79fc9179917fa60d938e284cef48151dd7050ff706c8a82b888986c8"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_map"
+kappa = "8e8fcebe7ec4b1c99c5599822c4236d1c06e3b47cd101aededb31b5a7a8bcd3f"
+at = "T=u32"
+embedded = "28fbb89cf7cbba7f7048151b08147ec9299598be16c6e8246bd8cc0d70d46c1a"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeMap"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_map#2"
+kappa = "9507abd14cf797f941cff4f8b23215e0309921cf4e45c6b3c247f3ec724f66af"
+at = "T=u32"
+embedded = "4a699cc1d74a72e2133cfd6c28a0e2ebdbed76b8b7309d1336ab6c25afae5e79"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeMap"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_newtype_struct"
+kappa = "ad9066ce650f0ed57f527a36da97e8fffed60e7a7f01a3247e16a33ef9303ba6"
+at = "T=u32"
+embedded = "84fbca464c26fa1d0d13c64f8b341194c2c76b55acb1957b6bc46e1b6c977169"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_newtype_struct#2"
+kappa = "7ecc1b0bd5a140b52f1db54c2d7d2a8e66597f39a7cecc6015d6f9e0325a3100"
+at = "T=u32"
+embedded = "c2ba7e030ec1a5d4bbdcfe2fd7c61e84e9028ec17898fbddc0e1d149174071ac"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_newtype_variant"
+kappa = "14ce60abb70d81a8ef2c25fc3801b75825fc81382fe4a9ddaf006b55f0f46818"
+at = "T=u32"
+embedded = "2215827b4473f806365ed6db2c46f858d3f9ecdc2ea99e479a9685a0637cd4bd"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_newtype_variant#2"
+kappa = "02521a63d0e235d19707be0e28d785dc8ebd9e63d179641fcb8749c0cd73f6c7"
+at = "T=u32"
+embedded = "879524db07e49804cfdbaa74fe348c39632ae89ade2800d37f96072c76887a16"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_none"
+kappa = "960c061ce74c1dd5591e75de6a5988721ddd89cb5aaaf03ade2f48a7ae969b44"
+at = "T=u32"
+embedded = "8993b2db1a7e4afa5b37ea96b4d52ab19ee9b72cdf64f7a7a7277d09c2cb260c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_none"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_none#2"
+kappa = "a285602c574c0d12aa23aefa3f3668a2e3460ce93f8ef69c8707f46883301055"
+at = "T=u32"
+embedded = "e3f2dbb7a7001a361e969094aa0514d4e0c78adfd557ac251e013a205066368d"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_seq"
+kappa = "52838316e548b1a508f44f0afc95041529ffc63010b8481809f018c0ae24345d"
+at = "T=u32"
+embedded = "071e1048c59d858345428a7840f7a5abb7be2d374ff1b73a226644fa378236ae"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeSeq"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_seq#2"
+kappa = "2f605415fb6663ea3b4276fcebf83673a77817b8b1e0b7f624338d2a536b9047"
+at = "T=u32"
+embedded = "d4f0f298c7e17c6377a2996bdb9b97bd03aecb9d667d73e8618e87cc39c90c9e"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeSeq"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_some"
+kappa = "065ad153e8b3067a750a35e55a48448653db9cb68c6bb69caecfcc68f2388b9e"
+at = "T=u32"
+embedded = "0d89cb25443612643494c75961a524b35db687e4f9227afb63984930960f7a0d"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_some#2"
+kappa = "bb9be04d289b299ed158db530ab76a8ced6741bb4e77b57246ffa571c71456f6"
+at = "T=u32"
+embedded = "2b31f6195e68167d314d8b71ddfa981fe74b6ca095ea0eced771f9e4d71e843e"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serialize"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_str"
+kappa = "4e216aa34b84ed3bdf922016d234e8330054e243b6d7ff563db98dbf8da9a5e1"
+at = "T=u32"
+embedded = "e4b6ff50645ee559202e66ec1415120ac460b4d691fbd4b6f5b7180e2dc96ecc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_str"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_str#2"
+kappa = "3f8cca95add168ba2aa57bac01b2bb19fc6d9fc249a450314d050ec39828b338"
+at = "T=u32"
+embedded = "3ece376d66c5f31a4d39964e0acdc5315359f05a3615cae4e1c75af14f10c691"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_struct"
+kappa = "6607a2b7ded6749364411c16754adec03b9cac11d56026140c2829165a0aea9b"
+at = "T=u32"
+embedded = "820ea121895aa5c9a08a1449a22154d4040b707b242f14d1156a9510ba5052ad"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeStruct"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_struct#2"
+kappa = "c7da36362a8a239ab4a8de9b691d1133b2e6293a76f8cea7e04aeb048fd3404a"
+at = "T=u32"
+embedded = "5d59e643ba1768c217390aaeca0debf87ea6de4a631fb486b56ab24fbd621fbf"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeStruct"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_struct_variant"
+kappa = "750caf130e55d1402f078c7488cd5379a4e3b749e254afa6c4b9cce42dcc7dc5"
+at = "T=u32"
+embedded = "b08e7daed9b42ce835696f29afc20e04c0ca9787ff343649bab8263132a3082d"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeStructVariant"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_struct_variant#2"
+kappa = "a492faa503dec27cfc01cf1d7dfe381b10981bb205d0b596968c3aa8d0f91bf8"
+at = "T=u32"
+embedded = "92a5f36459352fa8d4f02a9753b448a20e8065e0bd1e8bbc1126f7ecdb973b13"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeStructVariant"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_tuple"
+kappa = "b4a82ebed98cc3346ffcf39b2fef3195650ceb4a1a83b81a2bd39809789c41f9"
+at = "T=u32"
+embedded = "7dd1c220e7dcb7a9ae4c2c13927124f0bb6642237d634ca4e535afde7a760962"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTuple"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_tuple#2"
+kappa = "2d2a3571f83dba917037197be38f1c2a6bd656b7de7446e909dde81c868fe3b5"
+at = "T=u32"
+embedded = "491d2d58b3e420debce59d9bafb88f80bd3fd4689bd2846485438a33c91f00d6"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTuple"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_tuple_struct"
+kappa = "0bb1c8aae8030acce29a3cea7efe3f9f0f0aca1580888af45e6c3b33afa6d74d"
+at = "T=u32"
+embedded = "1377a98c6e1e9d67c6f459161f2c51b98961ff7c1cf6e870f715399de074e47b"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTupleStruct"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_tuple_struct#2"
+kappa = "3f84e08b00a218a69c21b39e5d60a389345a7b18ce1de2404cf4452048bc27bd"
+at = "T=u32"
+embedded = "2c814cae14e320fb24c1eece6abfe024a09f99e69ae1e26523871fef9a10c8f8"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTupleStruct"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_tuple_variant"
+kappa = "561059442a23594b6edb3711e43c5737e6bce76639618478c2b07fe3d4eeee26"
+at = "T=u32"
+embedded = "d62e684a8828879c554728f57de4b0f47e7222a833d0d2d43729461b2ba0798e"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTupleVariant"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_tuple_variant#2"
+kappa = "250be4b6ad2cf133135f7ddd7abef4d4da27f32f8793708d08d5a072071ec85a"
+at = "T=u32"
+embedded = "12b480802a8264db4db7ed02b754c7d26848929f5f5bbfbb76cd9b285dfdc2b6"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTupleVariant"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u128"
+kappa = "24d0474f421627b33fd81177aa21e87f10f6029a21c00fb008d792927e7a4b59"
+at = "T=u32"
+embedded = "9d0196c129e298c4c553f3689a5653e109626b996e73e857b6d3844051dfde14"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u128"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u128#2"
+kappa = "79c4e0f9c7da9b2da0d7d564a0498aa5bc8a0c88764dc69a5adc0c7bd5a11bbb"
+at = "T=u32"
+embedded = "a6204814fec049e24a57300f70cc468c1b9aa3208b59c2cbf925099a36de5300"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u16"
+kappa = "58ad9ccff6242330db355c9ab8381d1bd5020ea937682e5df6a5b1391ba335fc"
+at = "T=u32"
+embedded = "9c54f50c3aa5626c4d1f38d56f1c61fe985dcef7edb34f17ee66b166e2402348"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u16"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u16#2"
+kappa = "f8fbb8bd29a4b8270a72d5b9bdd76cd38c93a7f9d45152d38c15f8ccee825132"
+at = "T=u32"
+embedded = "ed8163b8cb5935b5d4282adbffdf5c80082ec49ddceac2024dd61f9c9a924c09"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u32"
+kappa = "416b0ad5e0dee32dc2bb3d948ed03762ac5d5a643ea9cab93084dd645138b2a5"
+at = "T=u32"
+embedded = "f9dcf5c2e5998a4dfef2d3b276545b4d7102e7eb7b05930ea072d11a8f04b8f8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u32"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u32#2"
+kappa = "ea15bfb3127ffd4de939a41aabd59a8f0fd375bf06c7d440d5a452b75f71ed49"
+at = "T=u32"
+embedded = "a263a19d1cf10c44d452ea0159049b13bf783f13ae2c6725cc2239e97c8bfea3"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u64"
+kappa = "b12a0e5ceb040dda47ca95c72091f93362ea4829eac5d94df4b67c89ca2301f8"
+at = "T=u32"
+embedded = "3dd6cc2538ba0e0cd47c9f0999b62b9428c34d4d5b6b1e474ab43d0538fc6334"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u64"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u64#2"
+kappa = "340c2bd27afb67664beb6b795c680b5ee26e1e22f19f8c7dc8c27a94591586e3"
+at = "T=u32"
+embedded = "0e80c0f9b1fcac8d9fa6e1a843792cc153b4fbdf3de059c94b1d2dd4c528cbc1"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u8"
+kappa = "f6089673cd4838d5e1cc947a23ae2ab51d6cef4e80a10d08cb06d3c5b426e36a"
+at = "T=u32"
+embedded = "df91f606ba1de08eeb2e0b546aa13957c29b79de8fc7a0e07e7b33cd16210352"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_u8"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_u8#2"
+kappa = "921c6d8225960bf39e4f3c094a6561d50b86383a25bedb8ed445a65a36a41380"
+at = "T=u32"
+embedded = "21e0814772c67bd629031a4816e8d0dd2a615d3b529fe2c50a0c595b88090382"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_unit"
+kappa = "809ad99ed8df02303e15f1ac312fbe325f0725cdf038c22ceb33a830787f0cb8"
+at = "T=u32"
+embedded = "ac413e887fe51e1bf2385b77b6728ae18e94c63ebe5e5b9c3c1b2606143145fa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_unit"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_unit#2"
+kappa = "06c5a50f728eee8869ab7bc081a9c3aeecb5ec6a7ce69020fb84e6607753af70"
+at = "T=u32"
+embedded = "7b0bfd1df50caad6787e04f268be8aaa847c8089b048c2cf0d27b9d766b2ae55"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_unit_struct"
+kappa = "f68f3c9bd91e5f49f6633236582265ff243234d9bbf075bec51a3bcbcc7603bd"
+at = "T=u32"
+embedded = "82880b35828366352f3167b3674409994ed95e07dba42965ef0e29a3095e29f4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_unit_struct"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_unit_struct#2"
+kappa = "0bc51dd884861de2fda1555242b32ffcab4214c0a2106151c58ecd5ab59b09af"
+at = "T=u32"
+embedded = "86a3dd64220b9bf82c502bd3eb02894de2fd1570d9d56624a9368305cdd38287"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_unit_variant"
+kappa = "f1a826f32230ada4d50c0a6a878ccca3a210bd9819a25a7f74c13648777d9bf0"
+at = "T=u32"
+embedded = "38e8c27fe5c0dfa7991e55b482048e12258a9f10f30547c076e26fe15407a2a5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as ser::Serializer>::erased_serialize_unit_variant"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:1348:9: 1348:44>::erased_serialize_unit_variant#2"
+kappa = "8dc85b7d68a51feb677f6b55af6bf1091e6b04ae663e6c2c33a0be1a6b811b11"
+at = "T=u32"
+embedded = "1da69a72b00d239b0aeaf5e51cadb796493789e8aa1c65fd09a6d35debddacc1"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "erased-serde::ser::<impl at src/ser.rs:186:1: 186:20>::erase"
+kappa = "e9cfa5a404b9eef5f2534664312a77cd9eeb87110bb673ad20fdc7732a997a63"
+at = "S=u32"
+embedded = "f572d3e03a43d3c8ff3394f74f44ba159452971ff2c97c99ef3d2d77e380f31e"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::ErrorImpl::custom"
+kappa = "d3a490ba7df9b9591eb1349aad2843ea182abbcad39834025323335396a666a6"
+at = "T=u32"
+embedded = "e0047af0f608a9c39a1c1bad09b6abf15f7be1225988329f1b3ca580878b4c38"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::ErrorImpl::fmt"
+kappa = "7748ca74ec87228ac65158170021600c14f6456f237a749f5caf43011ed93a2d"
+embedded = "69620514b56dc1328a12518b675fd80ff7aa5064b4b3e66fbdbc94b7d3f49db2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "erased-serde::ser::ErrorImpl::fmt#2"
+kappa = "a44bb4e8f62ff1d59ecd06643f156b01deb4e7c243b39f3f1297845aca61555d"
+embedded = "33fd55283d360b2df6672e50bb0e8b5159a9e94feaaf2cd7507498d8d94bdd8b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::collect_str"
+kappa = "003d1762560eb7f96f392e1999d8a25a66e9f29dc4122d1f68232ee1ee02b41a"
+at = "T=u32"
+embedded = "a37cdeaf258755d44d5ec0da359a73688a804f922c06fd298defe0437941484e"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::end"
+kappa = "8018a013aabe9274484e0bd133dffad0e87b868a7c7bec0768df1c73eca18099"
+embedded = "bb99bca6a20cbc75fda523c5a84254aeda40bfdb20c3a46c148606f8b88eec31"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::end#2"
+kappa = "1097e14133f4edda9344974e39da43e41ad4c8a46cf3072062a95d1a3576aea4"
+embedded = "f0160daee0d4e3e7fb408297104b14cc60769bd0ae46cbedfaee71e58321a9d0"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::end#3"
+kappa = "14ab2e6752ecef34a242108e5ae01cc28b87d7cc2572e366e911438a0530d066"
+embedded = "384fa5f7ed5bdf53fccab2a8d8ccee5c6c58501598aa46365bef93082545afc2"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::end#4"
+kappa = "24545f16f1a6c6e38d1f4810e5f8daddce6a99043ba02a3c23e01124e4464d96"
+embedded = "71c19c3fa20760e2f823dc60cfec0c3468cfe08dacbda0e58ca62c5626d9976f"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::end#5"
+kappa = "79e642072df79a01c780e633eb0f704cb6c2b68904f3e7de66ec33e693c573ef"
+embedded = "e101b8a5eb772fa45a1250cd295bb47532ab94b10692a8ce5d5d3817daef2843"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::end#6"
+kappa = "2998777826eab15ee1ec4efa465250c396b1d869d7753c38a00cfa290c453651"
+embedded = "eb67631cac9929f5b630a63919e0eca6d7dab66f2dd4f990e2aa19dfa60e3087"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::end#7"
+kappa = "fef0aa502fdc3c007ae10e115a1981ff4f7fb97a56c1ff36b86b61146e5cb75f"
+embedded = "8954cf903d7a1699f6059315988f7820d9348c8ed144b8ab9dfb45701ed6e22e"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::is_human_readable"
+kappa = "167f63ac125b47c3a415eb8be76179fa4b9c506f6883893a7096954d1dc34939"
+embedded = "1048d8d33af74fd7fb1965971069cbafd852543b5be684c17ca0b6274f3d94b2"
+status = "residue"
+cause = "mir::Ty: dyn ser::Serializer"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_bool"
+kappa = "dd077d41af6152348d90ac1d1dd0a03242c75287c58755c4aae0d8528b02169a"
+embedded = "4c162fb645817e7b449323fca865393e5d7c43876dc951ad72eb16c19d3d6947"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_bytes"
+kappa = "e8e0ef0252b80a71cf6874fe294071fc3a956f067a4d991c35151aded5381d5e"
+embedded = "ecbff191cd32afac7b2011505f8d8d30440a058f4c7e480762927a7ac5a0b5f6"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_char"
+kappa = "f61a3cb5cddf44895a4ccb5fed02d8a67df70f84e979afe54821446c62ec09a6"
+embedded = "7505dbeb92e328f91160b9012c9cc0c7a6db2290e3c04099e64aef27c922672a"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_element"
+kappa = "1b085fd7d3a64f475ef5e1a87e902be2279e1da59fb9cafec4830784e8a8263d"
+at = "T=u32"
+embedded = "b2d0bfdba98543b8d659689f177c75aa1cac53f9782f97fee6e445d953bc4668"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_element#2"
+kappa = "9cf77ff40643cbaf73264a183225842be637054093594c5e748a776f627bb28a"
+at = "T=u32"
+embedded = "febadb9ca2a65f5886686856e95ca256f9225fedcc0345f9ee97ab637953a079"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_entry"
+kappa = "7a694099e5353a069b0a1fe618ff3bfbaaf1caa521c3bce4ba4d0184e14d9b38"
+at = "K=u32, V=u32"
+embedded = "38e594347a83013e22bad0d797e1b2acc4667b6204220515956f9f1d8ac8d59b"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_f32"
+kappa = "fa3afc2cf69d2594513358369f8d2f8ed1d56a3d051a93ec3f93747fbe54c8e1"
+embedded = "e9133f0737b775cdb6636f0c67266cc4f37cd0dccb44b5cefc4d6e2ada9a706a"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_f64"
+kappa = "f6356ca88bfd0672854d106055a7bc1c792415bfaf67b031dd6e171346d5b23e"
+embedded = "6086a04abffa8da7cb8bd99af315e1bd173fabd4ea661592ebebd2b6411fde4e"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_field"
+kappa = "e61e90fea7ad239cfd7401fe694b53bc83304cc0b3d9740f6f5da8d749337f70"
+at = "T=u32"
+embedded = "23a846003a256950fdf473b921d3acb5315116a7c3bebbbb497d4dbcec8251a8"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_field#2"
+kappa = "77b19f1c14fe9054a7cd8cde37388f2a8e05bb59ff3747d0d56b755988214c0a"
+at = "T=u32"
+embedded = "d145db91c36296aae87d3bc4f8a1da4d207694306be3debd9366141022bcf127"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_field#3"
+kappa = "6b3a2d6bb0725d4d3af4a24101e71033061be67f00b92073028b566fea07949a"
+at = "T=u32"
+embedded = "3a5f2a3c8de0400e8671d9b4aaf8121f0b47c88d7229a44154b24fc36e7934c7"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_field#4"
+kappa = "86b0c97ae332a8b137227dfa60d942d3a0d4350087853d22387db9891ec8271c"
+at = "T=u32"
+embedded = "f8d21da111a17c06f58e1d08deb19cedba396975f8c188dcd8744d403249af98"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_i128"
+kappa = "adf8aef6bbaec58ed0b23825d80294aa5bbab1de40e43e5fe9fd72585efc53f4"
+embedded = "3fcada479a1e1e0ff14c07d358d150aded3a42d8ac4bd0640363639338879b88"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_i16"
+kappa = "6636b5da0d2bcfd21e93e3141e84b2fd95524ba1dbd096a22101c91fc6655abd"
+embedded = "b1695169402faf7625457b3ebe9208b6d48e830ef17153a2d0d8c0df9a567eea"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_i32"
+kappa = "713b849a81534f4c3bd48fae990bdf538c1c272cccabdf2582e144edff7de6e6"
+embedded = "49be01ab604983859b36ce4e660bbf977884bf65e0cc385d2f3e916467ff0088"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_i64"
+kappa = "5c723fc049d6be07bf5050b6e23c6a118e82ededbdafb7e2443f472a47976841"
+embedded = "acbc7ef607040a7eb7367b9a524a31e0e1c5f5fc6b7a7c8b8d06cc0f4b48f99d"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_i8"
+kappa = "57f8e34166ab256c292906a92c28d71a5265788d60c578f7671d8d03e270425e"
+embedded = "e7f030650bc4b34316acee25a98a2fb0441fee671960ac869f21bf3b55c269d6"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_key"
+kappa = "76671013044e9d9bdb68857b4444d639fdb930a99bce5b8854ac55ddd9d95d09"
+at = "T=u32"
+embedded = "ffb9a08636a58eba9aac3656e7df52c3a351c0ff4b377d4fdcae4bf561370e02"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_map"
+kappa = "2427a3d385534a2a81c875593cf398e592a1dcbf09a064722803cbd916387564"
+embedded = "2e3a09fe0e5d304cd71b7839b00eca828ea594ecc7ae5fb7c9c13e51451f45e4"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeMap"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_newtype_struct"
+kappa = "bfc2b8a66116429153157bdd00ddf70a24b5e3a0a214129d1a8ce47e524aa09c"
+at = "T=u32"
+embedded = "33c9f4d2be9833d0ac098c31ff386da761544ee05cb181ea00c5be39249ba38d"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_newtype_variant"
+kappa = "bcc4c57e387d7834d8db8c14784325d20cde92cf8137a8b660aa28fadd9ab860"
+at = "T=u32"
+embedded = "1ef9c005ab3ce7256a219b1eba50fd87b2529ed8db7aaadae175da1813a9e2fe"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_none"
+kappa = "a5982d5cd676937d8c0288749e500ba17a7079c6748c3346a90feffe4928a205"
+embedded = "6fbb99ca24739ca55f9445ed3161b2734550c5e14a35c1bf69b833b89acc2d02"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_seq"
+kappa = "f4e941a86da3f77158c487a727007c46f14e6e35491542b6a96b418cac02cbf0"
+embedded = "5013f879568a93c96f95db6522b9355c2d7dbfdae0a1c7be27bc82df04f2a5f0"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeSeq"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_some"
+kappa = "4ce2ef3e4bc271cff528d5708ec4a66f913e065d490fab5b22e38a80b3eea50a"
+at = "T=u32"
+embedded = "7be5236a09fbb8abc2a02b5f4ccc17ee37bdbf7bea1d914fd13dfa8aaddbc069"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_str"
+kappa = "553163db4293b7233016360d502aa90ffe36fdf3b72c9950f57d841680f2fae1"
+embedded = "e3dd4ddb13deebd19bcedae4a9830bf6ed520ce915509848a3a36449f4e59c14"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_struct"
+kappa = "5518f8f0b7816fb819421475c73958e718aea8a1ae17fc0a47cf873dd5fc768a"
+embedded = "eafa76457505a149119a28ea68575baa1f997453a6eb739eab1e09a20dea9b29"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeStruct"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_struct_variant"
+kappa = "b0c4af3f994d7a2381b4be24e39d75a890858faafded77b3ff8362f873d04e7a"
+embedded = "b4e0959a7b138ee4db9a17cedb68484d08c8a67f94be30c421ed14a6c38d5e3a"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeStructVariant"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_tuple"
+kappa = "34397a36e28b7c299a1cbd17e84467eac80883970e21c7a69aab3055b9173ed4"
+embedded = "62fdd00486d9722869552575da1d6c692e934b7abe7e5f6a02c50a2739d9ba02"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTuple"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_tuple_struct"
+kappa = "4cf892cc268857012feae5c508a48be491ea567ef6d11bcb8fa10c83e576467e"
+embedded = "69267cf2de400da43433d34985312ecb0bc24db54c6e5be7156edccb2017be0e"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTupleStruct"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_tuple_variant"
+kappa = "a50336301211bbe9725daee3fc51172f63ac8e3ecb063edd64a5117231ac4d17"
+embedded = "2dd1878b581358f3602e829db3bba2241ffe5bd9f98c1fb3f76ddaf82dcc60c8"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTupleVariant"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_u128"
+kappa = "58b71a720cd698206a04f5b1b4a780f7d2ea87ba8f732c8a408a99da7078f1ee"
+embedded = "27168c421ac5fab85e0924fadc50758ca140c44b0a237278653e04dc2bb2e8b7"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_u16"
+kappa = "5fd71ec1787e078d7fce2966041cfa0c6b87e2be1a3623b387184c19bc6144cf"
+embedded = "3fa80671f74d8c34f325df62d88336ec1faffce11cb72fc9684cd69a6971b31a"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_u32"
+kappa = "ad196718632f8e2668226465ecbf9bb02fcb03397ae93eb37c5549f9a951d401"
+embedded = "0d90f4e593f84a53b4b5ad83a2e3b094f23de9de2a6657803a0c09d765b24254"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_u64"
+kappa = "87a1d3e1bf22fb1d2acb965eebcf5972a0e77c6267101297360d79b445bd5ff3"
+embedded = "a5572f4d8b00187e58c1008dda1df6ddbeb21e1a1c4402f0c51aacf8f60487d5"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_u8"
+kappa = "61a17b7f286b1ee1773e145010f200f70077e33b63828165538492a9b75deb8a"
+embedded = "4100449e4638dc69a967e696e5549f2b20f70ad0970831867375f3ddb9e97aa5"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_unit"
+kappa = "df48a9affee3f419836b2eb0124a0f910d6978581c8cb13f08326b5e9841aced"
+embedded = "45bf35cd789dadb226a763bac4bacce96e2c0dde5513a7f7e7bed66564a3fd7c"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_unit_struct"
+kappa = "dde4e42b24855ffa2788a908785ce6604f5b634202caab2f03c2731634690c8f"
+embedded = "93bbb1723cd95691658289b5c6dda9baf5153a4400fef1ec7251fad8f3e17b58"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_unit_variant"
+kappa = "361cf67f2324e9f7f33eeca0538caf32a8a77b1d5ccaefc4c1cb6b1db1776065"
+embedded = "cbadcd6a0389c33654a9f30fbe8bc8a0f7a8e018e8053c903e06bff6c039099f"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::serialize_value"
+kappa = "fc54ee8a042741f9daa538a93386aeaca88f7246d73e9639979f120cc7569313"
+at = "T=u32"
+embedded = "48dde9018b19fcf78f625dc6a29ce2f0a4fc0d71e98e092ba99ad61c7bf3cbc0"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::skip_field"
+kappa = "7cb1396c3931ae0412a67c4a9fd29ee999c9c8b8007a32d9005ec1c05710bd39"
+embedded = "4dbb8d2f711b2a5c5d6dd7370166d4cefe25f5ce8377aeedb99f3533324d662d"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::MakeSerializer::skip_field#2"
+kappa = "0d7c3fa4c397c029ed761240adcd51b4b32195661a0948361ab2028dc3b64d22"
+embedded = "76dd91e708443bc8bb953a078a4dff418fcea69b485534af79353731d55bfe63"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_collect_str"
+kappa = "dbee002775750c0e72dff35883d8a3596fbaa786230ebdaa739cc13792c9797f"
+at = "T=u32"
+embedded = "f62dd474f71c5e290deba23fc9dd79c0908169b32bf4f05eb3f83202d0dcc3d8"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_display_error"
+kappa = "173b81004af5b8a0949020feb7d24c535c5e622441b7c92e282338d6e45d9ba7"
+at = "T=u32"
+embedded = "2014ae61a60912d4c91d53d24b81ebbe903be6a2198501e047fbdd27050d1e9d"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_end"
+kappa = "de7bd40ca9b0f194ba62d1ce2044ac55e3777c8249761b78f52f20ce76b75f59"
+at = "T=u32"
+embedded = "a174a972d628fb372a851f994393f029ab7ad7294ebbd3cf7fc03bae93bc1d13"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_end#2"
+kappa = "e82a83d7e9288943b2a64fafbb02418fdabcb67bf2ad0c983784a2e8a976092b"
+at = "T=u32"
+embedded = "ef78f5b5f3226d0e7b0fce10e522bfabf8d9f0f06b7efb66c7c0e04f73092d73"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_end#3"
+kappa = "294bc05992083eb9ef1fad8774d3aadac3eabaf83930f9517c82bbe8a61d186f"
+at = "T=u32"
+embedded = "743268ede6929c2f961f1f6707ab7bb2c4fc5a324decb70972e6c16ec2f74669"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_end#4"
+kappa = "c320732a73b5070a8ed4e55a3dfb5771c0b6ab7b706e9e3bb99e67ab80013b0c"
+at = "T=u32"
+embedded = "1abf8a4e89a48749cf21b3290fec9b45b2abd2902c164b624a77ddee84af8a0c"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_end#5"
+kappa = "019dab4e1a15da248fee71987cb547c43a8559333ee6a1645459414be5905485"
+at = "T=u32"
+embedded = "8dfdef95ee434730007095f323a7a01c528aa7f0e7c1f73bb64ad078c463e515"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_end#6"
+kappa = "3cd0d876ea65005032aa085e02328d79983266eedfd6c26a38ec495c447e21a4"
+at = "T=u32"
+embedded = "8376fc78b5781622af090c4d44905eb66782073b255e7a6f347e99389c74999c"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_end#7"
+kappa = "0689149d6eeb837b18246902cd0c5f611d61ff097856deda2e33aefeb9f45b96"
+at = "T=u32"
+embedded = "32149253a1fbd14997d64c6e9d592a980941053e009952b54c343e3225f2fedf"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_is_human_readable"
+kappa = "4778bcef957accc6f7772be1134d3ec0a7f68927962bec2a76a4619d9bbeec69"
+at = "T=u32"
+embedded = "c21ddc58a7bb4695587e38516b5573399292acddbf313a919a4d7f86437c3b6d"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_bool"
+kappa = "6df949f3d187d9d293024e881ce212e4ed2700974938870f3a08615afb89e461"
+at = "T=u32"
+embedded = "8e70e3ead4588d924d0d07f4594c1cf2fbb24c593c3e5a7466c7bc67590faa86"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_bytes"
+kappa = "38da32b5dbac60a68c9fe592f7dcad41b7eb2b5d427e200ecb9412769fb20848"
+at = "T=u32"
+embedded = "e9ae7284f9936e2be81c55762b7d4f4adf39354ee5cbfd707ea62044454cdb0c"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_char"
+kappa = "e503b6458933015f54d59f35613ca222c811b22782004b6e275b821cde7d254f"
+at = "T=u32"
+embedded = "65c325ad733e808767b6a38501e11976225c9eb6b5eeb33f8f4f670b517c2a9d"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_element"
+kappa = "5837d675eac89ca9b3961f6accf1f37b89fb20df501da9346ed58d38f4a53c87"
+at = "T=u32"
+embedded = "2aef4af4ad81af95911ea23e47f07ce37d268f24b9dc5ff8844b925147d6e21f"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_element#2"
+kappa = "0f1af4b67d8a6e3e944afa32f762e9b8e9c80fbaf12af6b94a13c663b7c98f48"
+at = "T=u32"
+embedded = "1f3320ed51605888b588f24ec4a786eb7cbea038d15c64fb19c8095a8622515c"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_entry"
+kappa = "98383dcc2ed145cbd7e3f2ddd1dbecf1bb6447a97b0a4f9ca9af611252453d37"
+at = "T=u32"
+embedded = "0b3cb68636df6356c6925cf5733c13b79472f0cc865095bc71b89f2764c35ddb"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_f32"
+kappa = "4f0a89417a8e1335a18b5117088cc29b092cdce72e962d75b3f7f24db8acfd57"
+at = "T=u32"
+embedded = "924bccbc55bc83cd5d704c7504f04e107f54ac9f011db0e485b959df55da3ace"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_f64"
+kappa = "a3ed4357eb51be1f327ea6fdcd9b4638c6c11d2fc09eb13d68b36adacb773e41"
+at = "T=u32"
+embedded = "ac3c961c0af513a057fe6743fa971bbee01eea7b7e8acde333aa4bcad138e97c"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_field"
+kappa = "7357801e332b327ae03fbdea3bc1ffcf7f92923730f4ba565608a8c917e77cd2"
+at = "T=u32"
+embedded = "78856cdb1713612e3b8016a99b04a6ec4ae9c4fc0fa2155bfe535546a53fbb89"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_field#2"
+kappa = "9ca6194b2884232751392134f06df1cd4ec33020f6489e6f41e0d88f462735ae"
+at = "T=u32"
+embedded = "c22cdd4e13806e368d39193d251a1e54c5c27f2f677edf099f0f9c7c6b984e8d"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_field#3"
+kappa = "e2be967d020fe5f530668c512f28b0a99a198415b7fc7feb39b88f19d704a0d3"
+at = "T=u32"
+embedded = "8f153b370ecc716ff4dafc894776f1f3adf9d5f728bd08561868c28744e9a319"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_field#4"
+kappa = "3abf906f243d178570b3d6d73d623f9e6afd8b43ab6bb7a7cda65e624b11f2ed"
+at = "T=u32"
+embedded = "92fc19de4cd0187a30e87ea39abb7502b160cc6c96368d600171dd6b54f128b3"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_i128"
+kappa = "af1f129a4c947e4b099097434cc89620813223e2b81913e3877520e17ce35d00"
+at = "T=u32"
+embedded = "fa9b824aef0f102b8092d54cc525ffd46c9c6f7c3c609a324ef5926d6dfebfb1"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_i16"
+kappa = "1ed9afc30cdd34e43750ee3199ff7990b62ddbfac470759761656daf12b9248b"
+at = "T=u32"
+embedded = "896b83c98e6cfaf3856dd212d84cf6778ae6adc8ab3a90b0251908f2873a0ff2"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_i32"
+kappa = "547e750901d87cc1bf4e222508241ec03256c5507cd70e676275c5fdbca86e36"
+at = "T=u32"
+embedded = "bd9a764444f9621141fe0f362a81acb0bb374999ab632b48c83350e1485f9bc1"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_i64"
+kappa = "cf5654758ead2e4edd1caafdd6a5e13a7792d36d75ed6903ec82c4ba00d18c6e"
+at = "T=u32"
+embedded = "63f21eece60f0116a8a1d01dfddab113387137e6deedba258c08220f6d32adc0"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_i8"
+kappa = "ddb23c827c42a2921b0ea2e7b8e67e04c998e649c412a353c7412a4c92ada654"
+at = "T=u32"
+embedded = "da84ef4a3cd0c3af22238f36f8df584868dc9b51fc8620e117cc5681b92f0787"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_key"
+kappa = "4dd5311a2516ba36d97c864fb42da07f0dc3cb7a2119a0109085cffbaf8c38de"
+at = "T=u32"
+embedded = "70eb0b671d5c0e7f4520dd188c3ed4a61182b0e29c84638d72c99dafc3a1cfa4"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_map"
+kappa = "99bb07c89adec6d7959d04a6202f5742827bcb8074aa7e0dfa5032bf4fe7583f"
+at = "T=u32"
+embedded = "ea2c67805ab72a3d8457ef8a954015723555ab9fa31a89617d893ffa4adbc7c6"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeMap"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_newtype_struct"
+kappa = "c60dfe725141fcb03fe60a5b3ff527a065b5191a45e98781e86c25df84477168"
+at = "T=u32"
+embedded = "6892a99431e6ad84e35e06ccb989625a4412184831fba88a312dfc537a48609b"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_newtype_variant"
+kappa = "968c242a0276c6a0091cf3da677f032f2a9041e838d1659b76393d27ea177ae9"
+at = "T=u32"
+embedded = "140456a19cdee735cf8259471c8f5b8858f95c190eebf413e3b19b1d430a8a9b"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_none"
+kappa = "dcf0020fe24a2d99dc07fe3e21656d520b9dc9003a2216fbd0bcc2f36ae41196"
+at = "T=u32"
+embedded = "526c97527cfc961a107ab3b597b7402c451a8dfcd8274d0d75beb3f8726796ed"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_seq"
+kappa = "6e3d3fd8472aa6319a9fd580e4d9a364f08c73fe377750f058b3e9fc67672463"
+at = "T=u32"
+embedded = "6879e372da7e8d06bd4c7335f5366d94174f05477f1cd41b5aa15b652f23fb39"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeSeq"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_some"
+kappa = "91e24cd4c9b7f85e3eaa1ba54034879684dfa76c5f0500054d898a020d23ceeb"
+at = "T=u32"
+embedded = "7f007c28fb7248b2b9a54003b459e15937cd246805f1a67d1fbccf7df7a8e839"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_str"
+kappa = "93bdaff6b7c7628ba5e7f642576fe0e9856f10b042415021e13426953766585b"
+at = "T=u32"
+embedded = "6dae9cc12153cf7a8c823bba77d3e9797940a23c486737c45cc1a5a00fbdc43c"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_struct"
+kappa = "40a6d42f7ae2f941131f5c9a451fb8573132aa5d9527f5e952eb8b62031c5a9e"
+at = "T=u32"
+embedded = "3f34ff580add4eb2a5a77d766cfa1283af8da08a0a50eadcd3f5f4074d75029c"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeStruct"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_struct_variant"
+kappa = "8c4e72618189bd0352d996716d164101c875b79902dff8962cafca947b53fcd5"
+at = "T=u32"
+embedded = "a1c44af2b512748e21a8433fd31c20153dfa65889ccaabc1ed22da5517a952d0"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeStructVariant"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_tuple"
+kappa = "80e586981db23c4f67f372a173ec7978f7d659ea9dc75caa1d59dbf73cc2481e"
+at = "T=u32"
+embedded = "c7ece542483601bfbe5307c39f0b1edbaff5971f3f4b2bd9bbcae5e54be03c88"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTuple"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_tuple_struct"
+kappa = "1cd1b4b8cbac4fb1e380b979853c6931431152a361c13cbc200159213e08bb30"
+at = "T=u32"
+embedded = "f6c010b257adb09e48dacb4c77a8cca5286a27fb6f547de1ba3492dd2fc5a61e"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTupleStruct"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_tuple_variant"
+kappa = "d163f204dbe5fa37a19768755d41f8b8bbb4aea8ca4f1e68ef5f4d1f99bec507"
+at = "T=u32"
+embedded = "26d411ad9f1f7fbe768c759824b6f327612934f9005fe907f16ec26bc60cab03"
+status = "residue"
+cause = "mir::Ty: dyn ser::SerializeTupleVariant"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_u128"
+kappa = "03bf77bff4a7f5b72f89f9c575b291e6fa1eadd983cb457f08778d88ada50f67"
+at = "T=u32"
+embedded = "497db7f83a0697e726abf27c71f01f1dc26e8b3aa439302b69a57c1cfa0e715c"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_u16"
+kappa = "b40ab9117b91f715f1989f6b816942c5fbdcf6c1b0abbd6aed21ec0213760263"
+at = "T=u32"
+embedded = "ed500b05657f99f930d82418586f2b200eb97afa219e1ad1801761e3bbca5117"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_u32"
+kappa = "d0b66c4efa9677e90aa2107c6e1936584840e51289aafda97007997143bdc39f"
+at = "T=u32"
+embedded = "5465672010d9ad9032ae5f4b6db9bfcda223503cd53a516a9349fae483e2f064"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_u64"
+kappa = "47ee465bbcb3e48bf1eca961f108767f17d6c5ee0293cf5c4d24ccc55a7dbb82"
+at = "T=u32"
+embedded = "7f97c80135509a3cd6e5f2049bab866782adb6bc3d1b4a70e00bb3d40dbc35c6"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_u8"
+kappa = "b5712c63af14bc6e8bb280b23b94aac5107a6ccf905c6de155b48495cd2f8b36"
+at = "T=u32"
+embedded = "8a4af5ab9af7b15ea47311998c6aa1c457fbb0f1487abbb6af9765678c3dbb83"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_unit"
+kappa = "a3f969c98c6ddd84768992d4941c58e824b7d71fee77c2375a6a8d0c2164e068"
+at = "T=u32"
+embedded = "7075ef0826f22352ce1c231bbad5ace3270851accac6768c86d7a4375a07048f"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_unit_struct"
+kappa = "0e572d924bf053496d7e65b0046ae74fb571229e6708e004d5ffcd157c687e2c"
+at = "T=u32"
+embedded = "f8d7198d2b5f1f43a475bbbc4b017d6dbf054860de6b1f54d04e89015f60eee3"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_unit_variant"
+kappa = "0bb7e899d71876cce1fb53e017bb0141604cd7613e60694a246cd6f75e17b9e4"
+at = "T=u32"
+embedded = "2b9a7b65dd66a281cd2140844c34ef999ea44e9ca3f91360326392e153f2574d"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_serialize_value"
+kappa = "6d56286a75ad043ad61aff7d8ad168d5c3ff62c0c9cf1c0e011e5830ae0b2a22"
+at = "T=u32"
+embedded = "6edfeb08ef6ae9d48556df0f8c7618e68e791056de7029bbc6f5dc48d64b89f6"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_skip_field"
+kappa = "675e0df75f185b41d56c1022c049e71b08d174ac4320c17c98d33e1f3f27fb27"
+at = "T=u32"
+embedded = "98c54380d392b81d25264e2b3d076b1d94c04b8adcd270f4c7489dbdec80efa1"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::Serializer::erased_skip_field#2"
+kappa = "a819132f28faa4638e4226f4a631727e55b0d55e9461db318f0d85b7e5606d0c"
+at = "T=u32"
+embedded = "cb27821b8f3c358f1f67ec6252f38dcafd983bd8705e54ba66a91506b41e4cf6"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::T::do_erased_serialize"
+kappa = "c3c85288a155dec80e986f031d9fffd5f61a3c9990cf43c579f43dd751011215"
+at = "T=u32"
+embedded = "c76e3cd878f994363b386dec47e75d6fd4f8a370e0ab5732d21a266b2fc886bc"
+status = "residue"
+cause = "mir::Ty: ser::ErrorImpl"
+
+[[fn]]
+path = "erased-serde::ser::T::erased_serialize"
+kappa = "77bcd8dfbeff3e26157cf73f1a2556628bbe1ec737f818a5f3dcbc98b00bd761"
+at = "T=u32"
+embedded = "e03bd959242e9fccb257065cc8240b87ade11cf5fd9a84d13fbe7fd071227f31"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "erased-serde::ser::erase::Serializer::new"
+kappa = "589c44d8696a4032f5adf6b7d1a8ebefac0976b51c91fd76c9a96f38a5132358"
+at = "S=u32"
+embedded = "71d05af3251e94b4d81154e1bb062fff4504660e295400700c1d318c1bb66609"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::erase::Serializer::take"
+kappa = "b0be7b4f0c929ec66b503e18d7992d304530ea4f807532618210f71cfdef7c94"
+at = "S=u32"
+embedded = "f7f7b8e25c8bbe4b41b08336aae98dececc38a1893dc884b870fe750ab671943"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::erase::Serializer::take_serializer"
+kappa = "494f8d3a0df3903f8b3deb542f27c513bb56a86e0e50d6b1e8288f2b7991475d"
+at = "S=u32"
+embedded = "150ab25012d62c3fc2720be0740741d88e157a37efa530c6eaad708b8868fa8d"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+
+[[fn]]
+path = "erased-serde::ser::serialize"
+kappa = "333a347f55d7486532d56762f94d9cea4e8590861967175ed7efb571b56c272c"
+at = "S=u32, T=u32"
+embedded = "6963eb052f9742ec5f0a9ee4f5ceea25ed55f842e9db5a6279d324a46e5ed4e7"
+status = "residue"
+cause = "mir::Ty: ser::erase::Serializer<u32>"
+

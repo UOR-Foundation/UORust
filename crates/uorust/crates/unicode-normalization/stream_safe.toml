@@ -1,0 +1,30 @@
+[[fn]]
+path = "unicode-normalization::classify_nonstarters"
+kappa = "bdd1747d2f8295fe9f0a5d787f9bcba27a76de6ebdedb2e55b49aaad9ca5288a"
+embedded = "b045e8e7665bd185c5be7f0abdad4fd3987d618475e2437103f25f5c1a9d1b19"
+status = "residue"
+cause = "mir::Ty: stream_safe::Decomposition"
+
+[[fn]]
+path = "unicode-normalization::stream_safe::<impl at src/stream_safe.rs:70:10: 70:15>::fmt"
+kappa = "67fc71263bb0b5d06dc56f8a1d0c1d2c198a28e32c858706b23407c7cbe913a4"
+embedded = "44cd6d8e66af7f9a5d55c43b291fcb2b00b5f448035c3b2fbde415d9eab226c0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "unicode-normalization::stream_safe::StreamSafe::new"
+kappa = "3e95d7003b02cdfdcea53a67ed0e0b3229ac8de6b8c36f45e10912a0e1ebfb28"
+at = "I=u32"
+embedded = "bc9a2b7e38387e9492c58e17c4d6e3c488c0c39df706332161077ae9119f9508"
+status = "residue"
+cause = "mir::Ty: stream_safe::StreamSafe<u32>"
+
+[[fn]]
+path = "unicode-normalization::stream_safe::StreamSafe::next"
+kappa = "af9cf7a0200c5b71cffdafce892385545540d05a904a2d0b915c36bc542a99fc"
+at = "I=u32"
+embedded = "7c5ca96eba31f4cb85da08d659fd505a4fb265c2e38290b6c8329038c6e71c2a"
+status = "residue"
+cause = "mir::Ty: StreamSafe<u32>"
+

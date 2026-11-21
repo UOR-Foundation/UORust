@@ -1,0 +1,86 @@
+[[fn]]
+path = "writeable::get_pi_bytes"
+kappa = "4d742b0bfcdcd382c4427a2bad12691df0f3fbac8210d1dd5c54a01872cbfad6"
+embedded = "3dfd55088014319fa1f7c9dbc47de5cfad2d8b21c7d90fdadc121238a7112d86"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "writeable::replace::<impl at src/lib.rs:499:9: 499:62>::fmt"
+kappa = "f09ff8296d8165156f23eadc69300fddbbb10b57129d59736e3380c202b35302"
+at = "A=u32, C=u32"
+embedded = "ef85d1b3a3adb6365778a55853744a802cf3abf02886909678ac8ab87512830a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::replace::<impl at src/lib.rs:509:9: 509:39>::to_string"
+kappa = "803d4b32bd554e2adea6b68b7eb1bff85ea52fb167a8a17cacbd526935d9a78e"
+at = "A=u32, C=u32"
+embedded = "c949400517753790601c60c78adc8c5988782338b281676d962444018b99df75"
+status = "residue"
+cause = "mir::Ty: Replace<u32, &str, u32>"
+
+[[fn]]
+path = "writeable::replace::<impl at src/replace.rs:29:10: 29:15>::fmt"
+kappa = "9598919751995c7f8161f816a01ef5aaca68db3bc39ccf249888ab558261396d"
+at = "A=u32, B=u32, C=u32"
+embedded = "92230439aeff6ffc5a53c5477c95efc28ad3d39fc15707f8fa8b182c4e4511a4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::replace::Replace::write_to"
+kappa = "f36149b0eb9fa488dd87cc2077bdb0c0658e3f2b40057c6a4a355a48ad406efd"
+at = "A=u32, C=u32, W=u32"
+embedded = "914e571821c4d99977b6a7bbb1965461c42be117349e91bcb8576c534246d369"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::replace::Replace::writeable_length_hint"
+kappa = "572732565dfada0f68216898bbe55760534a1af39ae82be695a3ad05713d91be"
+at = "A=u32, C=u32, LengthHint=u32"
+embedded = "515c58b6d4bfefbb81804fa930c3a1291ebd6349c31a898ec811e368760b5308"
+status = "residue"
+cause = "mir::Ty: Replace<u32, &str, u32>"
+
+[[fn]]
+path = "writeable::replace::ReplaceWriter::finalize"
+kappa = "a58ab65860e22a31475b1e6a1eb418e6d5c7169172707b868f4855f245903c34"
+at = "C=u32, W=u32"
+embedded = "e42a25e65fef03a2c62c37bfc83ce2d2bf658aea64a5fe7a860f9a1f67b968b3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::replace::ReplaceWriter::matched_len"
+kappa = "5619c8c623595f2ad5b25c2bcdcd181f910b7d30609b2379d8606bed211e7b3d"
+embedded = "b23d191baaa580cc092d18d044ba4e30bee5e65d25749175e5413bd5e1c3fe8f"
+status = "residue"
+cause = "mir::Ty: W"
+
+[[fn]]
+path = "writeable::replace::ReplaceWriter::new"
+kappa = "b0decc14e37c37bfe2c51414340c48cf4cea39487e32092c3764fe2684cb975e"
+at = "C=u32, W=u32"
+embedded = "e27a1bb5a1dc772e8b9484d116a030c27cdb1489b91f6499996395c6a890f98f"
+status = "residue"
+cause = "mir::Ty: replace::ReplaceWriter<'_, u32, u32>"
+
+[[fn]]
+path = "writeable::replace::ReplaceWriter::write_char"
+kappa = "919575b28a1d042caf118140e5017cb9657321091cdf1ea194fa830022fe67a9"
+at = "C=u32, W=u32"
+embedded = "0fd191b0af9873c9630454f629ebb50f13c905f90363efc7c069085b4c148c82"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "writeable::replace::ReplaceWriter::write_str"
+kappa = "f3e2408b0d64861eada35a80d8f362fef9a811ccf9cb85aabd2381062afb2830"
+at = "C=u32, W=u32"
+embedded = "260240047c4a7f547be9eab57c1196a07589d25076a6e1e12e0bccd22039cfe0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+

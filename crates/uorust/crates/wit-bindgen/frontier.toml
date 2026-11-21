@@ -1,0 +1,431 @@
+# The wit-bindgen register (written by `uorust crate wit-bindgen@0.63.0`; do not edit): every body of
+# wit-bindgen's MIR at wit-bindgen 0.63.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 249
+translated = 25
+residue = 224
+
+[module.resource]
+bodies = 4
+translated = 1
+residue = 3
+
+[module.rt]
+bodies = 245
+translated = 24
+residue = 221
+
+[embedding]
+bodies = 249
+embedded = 249
+evaluable = 247
+blocked = 2
+
+[[construct]]
+construct = "StatementKind::Assign"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: StreamVtable<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::stream_support::StreamResult"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: FutureVtable<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: TaskState<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: abi_buffer::AbiBuffer<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ErrorContext"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SharedTaskState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WaitableSet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::SharedTaskState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::RawFutureReader<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: WaitableOperation<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rt::Cleanup"
+bodies = 4
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: O"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SubtaskOps<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TryLockGuard<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: future_support::RawFutureReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::RawFutureWriteCancel<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::RawFutureWriter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream_support::RawStreamReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::cast"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CabiTask"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CallbackCode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FutureReadOp<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FutureWriteOp<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HashMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StreamReadOp<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StreamWriteOp<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TaskCancelOnDrop"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Tasks<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future_support::RawFutureWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::ReturnCode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::abi_buffer::AbiBuffer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::error_context::ErrorContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::FutureWriteError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::FutureWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::spawn_disabled::Tasks<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::stream_support::RawStreamWrite<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::stream_support::RawStreamWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::subtask::InProgress<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::try_lock::TryLock<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_support::StreamResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: subtask::InProgress<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rt::cabi_realloc: wit-bindgen's MIR stops at mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CompletionStatus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeferredWrite<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ResetTask"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RetPtr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReturnCode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SubtaskHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WakerState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::task::Waker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future_support::FutureWrite<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future_support::FutureWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Future<Output ="
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Future<Output = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::CallbackCode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::TaskCancelOnDrop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::TaskState<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::cabi::wasip3_task_vtable_v3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::FutureReadOp<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::FutureVtable<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::FutureWrite<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::FutureWriteCancel<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::FutureWriteOp<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::RawFutureRead<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::RawFutureWrite<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::ReadComplete<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::future_support::WriteComplete<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::inter_task_wakeup_disabled::State"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::inter_task_wakeup_disabled::WakerState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::stream_support::RawStreamRead<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::stream_support::RawStreamReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::stream_support::StreamReadOp<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::stream_support::StreamVtable<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::stream_support::StreamWriteOp<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::try_lock::TryLockGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::waitable::CabiTask"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::waitable::WaitableOperation<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::waitable::WaitableOperationState<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::async_support::waitable_set::WaitableSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_support::RawStreamWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = 'mir::Ty: unsafe extern "u32" fn'
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async block@src/rt/async_support/subtask.rs:82:9: 82:14}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of rt::async_support::stream_support::RawStreamReader<u32>::collect"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of rt::async_support::stream_support::RawStreamReader<u32>::next"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of rt::async_support::stream_support::RawStreamWriter<u32>::write_all"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of rt::async_support::stream_support::RawStreamWriter<u32>::write_one"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of rt::async_support::yield_async"
+bodies = 1

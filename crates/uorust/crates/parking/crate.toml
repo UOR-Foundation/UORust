@@ -1,0 +1,148 @@
+[[fn]]
+path = "parking::Inner::park"
+kappa = "cfde84b0332d0d45ceb9e54fca66d2cb91efe87982141d7d62d8a63f2adf1e0f"
+embedded = "c921bad67aebb80d60efec7fea7cee60f676d03c1db8d112c01bfd20b298dda6"
+status = "residue"
+cause = "mir::Ty: Inner"
+
+[[fn]]
+path = "parking::Inner::unpark"
+kappa = "61925a4bd8be18ab7f84779b9682404d14866125fffe2820ec4e143ceec227ea"
+embedded = "1c60d71c9601696a997a65a6a323ab40437307b2a53b92b4661c94389251589f"
+status = "residue"
+cause = "mir::Ty: Inner"
+
+[[fn]]
+path = "parking::Inner::wake"
+kappa = "97d44906d2b0b5ea81c1a24d56ee697f71a971c3b6e28f883fcab86652ba5322"
+at = "Inner=u32"
+embedded = "6158b98472beeff3f13647adefdefb548fbcfc1b1b91af5ba8a56458013417d3"
+status = "residue"
+cause = "mir::Ty: Arc<u32>"
+
+[[fn]]
+path = "parking::Inner::wake_by_ref"
+kappa = "86a36680ae07161ca437b4fa7a9a23fd55aa9344eed819228a06e9d14f9d5d19"
+at = "Inner=u32"
+embedded = "054cb53d31e9c6fa966a7f3c8a3f3b8482f2ea4df4285f978d58f46b2c581984"
+status = "residue"
+cause = "mir::Ty: Arc<u32>"
+
+[[fn]]
+path = "parking::Parker::default"
+kappa = "582993d0b34a675a073728e3cb789f4153eaeebb91e8396bcb0c0a3fbd812da8"
+at = "Parker=u32"
+embedded = "954a0d310028f8e59096250fb57111d2e881fb8ee01ac1e510a7b54e73f1b37b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Parker::new: parking's MIR stops at mir::Operand::Constant: the constant item EMPTY"
+
+[[fn]]
+path = "parking::Parker::fmt"
+kappa = "f6357bc05a6d6a65972817920153ad9e077a10442bd6f193bbd249c72ad2c7b7"
+embedded = "6dfed40da2e371d59d89cc08144a5070da72b9d6c8eead77154789a4adb17f26"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "parking::Parker::new"
+kappa = "70be8d1d4c4fceab50b5e00f4c353628fc7bfd2876fe0b40d0569e609b0cced7"
+at = "Inner=u32, Parker=u32, Unparker=u32"
+embedded = "e8f380e477c91ed973d768f9b2f545f730a30b3316a48f59196ead95310c4534"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item EMPTY"
+
+[[fn]]
+path = "parking::Parker::park"
+kappa = "7d3865374b00b097b7ffef87883e8c94c8320be4ba0a9ed3f16b248589aebdf4"
+at = "Inner=u32"
+embedded = "d0644d7dddacbb601cc5011410bbd0639bfc1a215f322b9ab138d22fcd83e196"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "parking::Parker::park_deadline"
+kappa = "60e0201de4799afbe6d4040a4b3bafdfa31a4d713ea4c4b1d6a4a3bd29cb9e1f"
+at = "Inner=u32"
+embedded = "164d2df382335c7936c0ed5c13a0236fc8e53b6ca23fc12734cd950826752bb2"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "parking::Parker::park_timeout"
+kappa = "22dfde15d0640a7e094dd0c79d303eb6ef60d11216a29beb2c672d819fc00a34"
+at = "Inner=u32"
+embedded = "6336336450a8a128e63793c52b1a51597055711d769fbd786a8cc50fd8180019"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "parking::Parker::unpark"
+kappa = "0a568457317e75318c586b43934014055d0a2ddc6bf0b4790e583c2c01cdaab3"
+at = "Unparker=u32"
+embedded = "51fd7939c46e9b48960332070af612309cdebb90176a6e8b784c46251333aea6"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "parking::Parker::unparker"
+kappa = "3c13c86415ff9ffc3e24b6321124234b13145655aa510ddd0949ca0c5d494d8b"
+at = "Unparker=u32"
+embedded = "7af8dc829de1b4eb3fa3dfed98d915768b2751e04e18330c289ea6db676d0a6c"
+status = "residue"
+cause = "mir::Ty: Parker"
+
+[[fn]]
+path = "parking::Unparker::clone"
+kappa = "64aa1164baa1d4add5abac01db9fb1486e8dc17caee231bcfa20ecfb44c6c52c"
+at = "Inner=u32, Unparker=u32"
+embedded = "b5088c0c34c23e745dc68489e934e52bab86c59a468e19a325c5b65760516f32"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "parking::Unparker::fmt"
+kappa = "b5c0e2ceb4666fdcac35797317558e26b676e4d136873b99b38ace72b58bee36"
+embedded = "4a86b0f5ff05d11484bf508369ec2a3f307fc5125c661c100750f1243f872fad"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "parking::Unparker::same_parker"
+kappa = "ed620cecdcaab53ec01c94d6ab6bd0a95175546d8e51cb3127f1897f640044bd"
+at = "Inner=u32"
+embedded = "664200b9ef85f5d87341f3eddf316200f340627c3b671bcb58770461d6a207f8"
+status = "residue"
+cause = "mir::Ty: Unparker"
+
+[[fn]]
+path = "parking::Unparker::unpark"
+kappa = "47ca1ae7733a73953cea9c6f81523125040e4771361d0984e502e2606672423f"
+at = "Inner=u32"
+embedded = "22c03b1bf75e16a48ccfacef2a443a0a44f031213111a9d4543050e5b5c2d754"
+status = "residue"
+cause = "mir::Ty: Unparker"
+
+[[fn]]
+path = "parking::Unparker::will_unpark"
+kappa = "a664dea3291fef4e4e1baff86e1a3786482b65745d36f4a318f2a32532121ea2"
+at = "Inner=u32"
+embedded = "f255917ca1cce83945820cb0959174f6384bf0cf19fef6790641a89ec3d4c384"
+status = "residue"
+cause = "mir::Ty: Unparker"
+
+[[fn]]
+path = "parking::Waker::from"
+kappa = "01da898608cd5f95e806c7fadab403c0fae9a43bcfc5ff74703b72b219c9eca2"
+at = "Inner=u32"
+embedded = "26c0c7648e22599c388419ade3570133e74c8861045c388fd34b8872e8c8ddcb"
+status = "residue"
+cause = "mir::Ty: std::task::Waker"
+
+[[fn]]
+path = "parking::pair"
+kappa = "d4a812aa100dd8f9741be561f8d23f2c7632847141e041702851f8e99735e4f8"
+at = "Parker=u32, Unparker=u32"
+embedded = "420e04897424c40f2aa942ba620eacc6fd4efa0be89918c872b8adaaf9e7a8d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Parker::new: parking's MIR stops at mir::Operand::Constant: the constant item EMPTY"
+

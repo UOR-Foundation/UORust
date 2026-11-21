@@ -1,0 +1,373 @@
+# The crossbeam-channel register (written by `uorust crate crossbeam-channel@0.5.17`; do not edit): every body of
+# crossbeam-channel's MIR at crossbeam-channel 0.5.17, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 393
+translated = 0
+residue = 393
+
+[module.channel]
+bodies = 58
+translated = 0
+residue = 58
+
+[module.context]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.counter]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.err]
+bodies = 63
+translated = 0
+residue = 63
+
+[module.flavors]
+bodies = 167
+translated = 0
+residue = 167
+
+[module.select]
+bodies = 51
+translated = 0
+residue = 51
+
+[module.utils]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.waker]
+bodies = 22
+translated = 0
+residue = 22
+
+[embedding]
+bodies = 393
+embedded = 393
+evaluable = 393
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: channel::Sender<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: channel::Receiver<u32>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: err::RecvTimeoutError"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: at::Channel"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: err::TryRecvError"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: list::Channel<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tick::Channel"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: err::SendTimeoutError<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: waker::Waker"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: context::Context"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: err::TrySendError<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: flavors::array::Receiver<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: flavors::array::Sender<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: select::Select<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: select::SelectedOperation<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: list::Receiver<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Operation"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SyncWaker"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: flavors::array::Channel<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: zero::Receiver<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: zero::Sender<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: counter::Sender<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: err::RecvError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: err::SendError<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: select::Selected"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: counter::Receiver<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: list::Sender<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: never::Channel<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::thread::ThreadId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Selected"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: channel::Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: err::ReadyTimeoutError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: flavors::zero::Packet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: select::Timeout"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: waker::Entry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ReadyTimeoutError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SelectTimeoutError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SelectedOperation<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TryReadyError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TrySelectError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: channel::IntoIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: channel::TryIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::Wrapping<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: counter::Counter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: err::TryReadyError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: select::Operation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: select::Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zero::Channel<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: context::with::{closure#0}: type outside the lift: context::Context"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by SelectHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: flavors::list::BLOCK_CAP: mir::Operand::Constant: the constant item flavors::list::LAP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item flavors::list::LAP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: utils::shuffle::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Block<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Instant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn SelectHandle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: err::SelectTimeoutError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: err::TrySelectError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::array::ArrayToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::at::Channel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::list::Block<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::list::Channel<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::list::ListToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::list::Receiver<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::list::Sender<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::never::Channel<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::tick::Channel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::zero::Channel<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::zero::Receiver<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::zero::Sender<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: flavors::zero::ZeroToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::MutexGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::Mutex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: waker::SyncWaker"
+bodies = 1

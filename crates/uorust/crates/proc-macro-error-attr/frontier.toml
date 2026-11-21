@@ -1,0 +1,73 @@
+# The proc-macro-error-attr register (written by `uorust crate proc-macro-error-attr@1.0.4`; do not edit): every body of
+# proc-macro-error-attr's MIR at proc-macro-error-attr 1.0.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 17
+translated = 0
+residue = 17
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.parse]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.settings]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 17
+embedded = 17
+evaluable = 17
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: settings::Settings"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parse::Attribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Setting"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenTree"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: settings::Setting"
+bodies = 1

@@ -502,7 +502,7 @@ pub fn admit_roots(input: &Input<'_>, out: &Path) -> Result<Admission, UorustErr
     };
     let path = out.join(REFUSALS);
     let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
-    let doc: toml::Value = text.parse().map_err(|e| UorustError::Malformed {
+    let doc: toml::Value = toml::from_str(&text).map_err(|e| UorustError::Malformed {
         path: path.clone(),
         reason: format!("{e}"),
     })?;
@@ -1308,7 +1308,7 @@ fn declarations(source: &str) -> (Vec<String>, BTreeMap<String, String>, Vec<Str
 fn project_files(projection: &Path) -> Result<Vec<(String, String)>, UorustError> {
     let config_path = projection.join("lexlean.toml");
     let config_text = std::fs::read_to_string(&config_path).map_err(|e| io(&config_path, e))?;
-    let config: toml::Value = config_text.parse().map_err(|e| UorustError::Malformed {
+    let config: toml::Value = toml::from_str(&config_text).map_err(|e| UorustError::Malformed {
         path: config_path.clone(),
         reason: format!("{e}"),
     })?;
@@ -1318,7 +1318,7 @@ fn project_files(projection: &Path) -> Result<Vec<(String, String)>, UorustError
         .and_then(toml::Value::as_str)
         .unwrap_or("lexlean.lock");
     if let Ok(text) = std::fs::read_to_string(projection.join(lock)) {
-        if let Ok(doc) = text.parse::<toml::Value>() {
+        if let Ok(doc) = toml::from_str::<toml::Value>(&text) {
             files.extend(
                 doc.get("workspace_file")
                     .and_then(toml::Value::as_array)
@@ -1369,7 +1369,7 @@ fn package_rows(config: &Path) -> Result<Vec<(String, String, String)>, UorustEr
         Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(Vec::new()),
         Err(e) => return Err(io(config, e)),
     };
-    let doc: toml::Value = text.parse().map_err(|e| UorustError::Malformed {
+    let doc: toml::Value = toml::from_str(&text).map_err(|e| UorustError::Malformed {
         path: config.to_path_buf(),
         reason: format!("{e}"),
     })?;
@@ -1399,7 +1399,7 @@ fn package_rows(config: &Path) -> Result<Vec<(String, String, String)>, UorustEr
 fn source_roots(config: &Path) -> Vec<String> {
     let roots: Vec<String> = std::fs::read_to_string(config)
         .ok()
-        .and_then(|t| t.parse::<toml::Value>().ok())
+        .and_then(|t| toml::from_str::<toml::Value>(&t).ok())
         .and_then(|doc| {
             Some(
                 doc.get("source_roots")?
@@ -1550,7 +1550,7 @@ pub fn project_identity(input: &Input<'_>, compiler: &Compiler) -> Result<String
     let mut files: BTreeMap<String, String> = project_files(projection)?.into_iter().collect();
     let lock = std::fs::read_to_string(&config)
         .ok()
-        .and_then(|t| t.parse::<toml::Value>().ok())
+        .and_then(|t| toml::from_str::<toml::Value>(&t).ok())
         .and_then(|d| d.get("lockfile")?.as_str().map(str::to_string))
         .unwrap_or_else(|| "lexlean.lock".to_string());
     let lock_path = projection.join(&lock);
@@ -2510,7 +2510,7 @@ impl Manifest {
             path: path.to_path_buf(),
             reason,
         };
-        let doc: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
+        let doc: toml::Value = toml::from_str(text).map_err(|e| bad(format!("{e}")))?;
         if doc.get("schema").and_then(toml::Value::as_str) != Some(SCHEMA) {
             return Err(bad(format!("not a {SCHEMA} manifest")));
         }
@@ -2748,12 +2748,14 @@ pub(crate) fn sync(
     for k in &outputs {
         let kappas = k.join(KAPPAS);
         if let Ok(text) = std::fs::read_to_string(&kappas) {
-            let table: toml::Table = text.parse().map_err(|e| bad(&kappas, format!("{e}")))?;
+            let table: toml::Table =
+                toml::from_str(&text).map_err(|e| bad(&kappas, format!("{e}")))?;
             measured.get_or_insert_with(toml::Table::new).extend(table);
         }
         let ids = k.join(CLOSURES);
         if let Ok(text) = std::fs::read_to_string(&ids) {
-            let table: toml::Table = text.parse().map_err(|e| bad(&ids, format!("{e}")))?;
+            let table: toml::Table =
+                toml::from_str(&text).map_err(|e| bad(&ids, format!("{e}")))?;
             identified.extend(table);
         }
         all.extend(bundles(k)?);
@@ -2851,7 +2853,7 @@ pub(crate) fn sync(
         let Ok(text) = std::fs::read_to_string(&list) else {
             continue;
         };
-        let doc: toml::Value = text.parse().map_err(|e| bad(&list, format!("{e}")))?;
+        let doc: toml::Value = toml::from_str(&text).map_err(|e| bad(&list, format!("{e}")))?;
         let rows = doc.get("carried").and_then(toml::Value::as_array);
         if rows.is_some_and(|r| !r.is_empty()) {
             carried_results.extend(
@@ -2915,7 +2917,7 @@ pub(crate) fn sync(
         let Ok(text) = std::fs::read_to_string(&path) else {
             continue;
         };
-        let table: toml::Table = text.parse().map_err(|e| bad(&path, format!("{e}")))?;
+        let table: toml::Table = toml::from_str(&text).map_err(|e| bad(&path, format!("{e}")))?;
         verified.extend(
             table
                 .get("identity")
@@ -2969,7 +2971,7 @@ pub(crate) fn sync(
         let Ok(text) = std::fs::read_to_string(&refusals) else {
             continue;
         };
-        let doc: toml::Value = text.parse().map_err(|e| bad(&refusals, format!("{e}")))?;
+        let doc: toml::Value = toml::from_str(&text).map_err(|e| bad(&refusals, format!("{e}")))?;
         refused.extend(
             doc.get("refused")
                 .and_then(toml::Value::as_array)
@@ -2984,7 +2986,7 @@ pub(crate) fn sync(
         );
         let timing: toml::Table = std::fs::read_to_string(k.join(TIMING))
             .ok()
-            .and_then(|t| t.parse().ok())
+            .and_then(|t| toml::from_str::<toml::Table>(&t).ok())
             .unwrap_or_default();
         let count = |key: &str| {
             timing
@@ -3039,7 +3041,7 @@ pub(crate) fn sync(
 /// The edition a bundle's package declares in its Cargo manifest.
 fn package_edition(package: &Path) -> Option<String> {
     let text = std::fs::read_to_string(package.join("Cargo.toml")).ok()?;
-    let doc: toml::Value = text.parse().ok()?;
+    let doc: toml::Value = toml::from_str(&text).ok()?;
     doc.get("package")?
         .get("edition")?
         .as_str()
@@ -4206,7 +4208,14 @@ mod tests {
             .into_iter()
             .collect(),
         };
-        assert_eq!(Manifest::parse(Path::new("m"), &m.to_text()), Ok(m));
+        let document = m.to_text();
+        assert!(
+            document.starts_with('#'),
+            "the manifest includes a comment header"
+        );
+        assert_eq!(Manifest::parse(Path::new("m"), &document), Ok(m));
+        // A text that is not a TOML document must still be rejected.
+        assert!(Manifest::parse(Path::new("m"), "not a valid = [").is_err());
     }
 
     #[test]
@@ -4430,7 +4439,7 @@ mod tests {
         );
         assert_eq!(resolved.scope, ["meter::"]);
         // What an export records is read back whole, whatever the base.
-        let table: toml::Value = resolved.rows().parse().expect("rows");
+        let table: toml::Value = toml::from_str(&resolved.rows()).expect("rows");
         assert_eq!(
             Profile::parse(&cargo, &table, Profile::default()),
             Ok(resolved)

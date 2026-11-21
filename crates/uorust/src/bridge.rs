@@ -464,13 +464,11 @@ pub(crate) fn project(
         if !file.exists() {
             continue;
         }
-        let doc: toml::Table =
-            crate::embed::read_text(&file)?
-                .parse()
-                .map_err(|e| UorustError::Malformed {
-                    path: file.clone(),
-                    reason: format!("{e}"),
-                })?;
+        let text = crate::embed::read_text(&file)?;
+        let doc: toml::Table = toml::from_str(&text).map_err(|e| UorustError::Malformed {
+            path: file.clone(),
+            reason: format!("{e}"),
+        })?;
         let rows = doc
             .get("fn")
             .and_then(toml::Value::as_array)
@@ -1203,8 +1201,10 @@ fn copy_tree(from: &Path, to: &Path) -> Result<(), UorustError> {
     Ok(())
 }
 
-/// How long the screen lets one part's Lean process run.
-const SCREEN_TIMEOUT: std::time::Duration = std::time::Duration::from_secs(120);
+/// How long the screen lets one part's Lean process run: as long as
+/// `lexlean verify` lets a part run, [`PART_TIMEOUT_MS`].
+const SCREEN_TIMEOUT: std::time::Duration = std::time::Duration::from_millis(PART_TIMEOUT_MS);
+const _: () = assert!(SCREEN_TIMEOUT.as_millis() == 120_000);
 
 /// Elaborate every part with Lean directly, against the imports LexLean
 /// verifies, each theorem bounded by [`SCREEN_HEARTBEATS`]: what each part

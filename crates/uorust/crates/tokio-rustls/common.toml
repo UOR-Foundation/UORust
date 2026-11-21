@@ -1,0 +1,217 @@
+[[fn]]
+path = "tokio-rustls::common::<impl at src/common/mod.rs:12:10: 12:15>::fmt"
+kappa = "a1b80e185f66530ce998d9577a6e137871ac65c92fc93fb8cc51e28562f9b518"
+embedded = "11be9a4aec9ad700e9af0db4b9c7cd0a86551b9944e5aa7553948593f454746f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::as_mut_pin"
+kappa = "eda48d1b87385a22d26cfaf4c3314b001db5203221cb647fbf8bb268bcd50fb7"
+at = "C=u32, IO=u32"
+embedded = "9ca68fa211cafb0c0815440b8d8ee419e631280e51d434870882e03c924e4788"
+status = "residue"
+cause = "mir::Ty: common::Stream<'_, u32, u32>"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::consume"
+kappa = "164de136d5fb3affea02b6669c321c35fe6fe3f08eab51e1b76f19c2be531222"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "22b1b51b73a3722422481bd5199e1c954ef6dbd10ed91cf4a7ce10dae5648075"
+status = "residue"
+cause = "mir::Ty: common::Stream<'_, u32, u32>"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::handshake"
+kappa = "570de9c4686357b88bc8f84c80c71ad93ed670a1cc0cde16b9da2774011f294c"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "11ce5df03b3d638bbf033b6532afeb5796cb138f505cf784a99d0ef13429aac1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::is_write_vectored"
+kappa = "bbcf95f31b86c9947b7233bdf61cf9f32af5f2b800a14df724de524d0388a17f"
+embedded = "4b5083b112fe9067baa0556ef24d9aa33c91516372beff388980f30259deea27"
+status = "residue"
+cause = "mir::Ty: IO"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::new"
+kappa = "0307db19e7f4bcc7136f104ca6a0eae86a6bd889a14f2980ec8a42b34b802835"
+at = "C=u32, IO=u32"
+embedded = "d85ef9bb5a29df73e0199aa5ce0af25e2446ce03b12aebdb13b32bcc93ba395a"
+status = "residue"
+cause = "mir::Ty: common::Stream<'_, u32, u32>"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::poll_fill_buf"
+kappa = "21d721453a29757863f4fd0eed3fe17bc9d3ca1bce56de49400d77a3819c31c1"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "13acde54a29f2c1c94f62590588cbea6b70e00c4c6f21f512d040409639a8a09"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::poll_fill_buf#2"
+kappa = "2777a8335ee8e69c3ec69be5ba2fbee075da1093fcc11ce9ddfef224e0eabf03"
+at = "C=u32, IO=u32"
+embedded = "97887bb014ce52dde14e0fc2f94955754898dcad3a4039a92981a8c59f953c99"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::poll_flush"
+kappa = "3d8980b1ebf30f410bf753a6147b1997301db6d594f1b7993443f434d6007612"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "52b4b07004e79e88c7e4a0c479ba2a6a65454a4b5bafdeca9c7a340e7d4feeab"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::poll_read"
+kappa = "7d690e40d13634cc9bce7e0c68106b4a73885b141ee9c6a165dc89267b4e8a3d"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "0782dbf44556dcadb466d95c7c04576e6d407a6fbb98b0de3d71630e179dc7e9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::poll_shutdown"
+kappa = "a715bad8aad57ef90eb677e89c836b26e66ec5e003ba07c47d9e345e4e7c17e6"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "812f529056ae0ec70dbfc5deeb8873f218405d07ae1a358221df8f17651e57a3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::poll_write"
+kappa = "f298d49b31cc5c57a48ca4fa5e2657e49b2582985eb9308206ccc12441e4088b"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "3eb39b38cd47698c1ac27172ecbe8bc0f8e2847c04feaf19d409ae22480b05e9"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::poll_write_vectored"
+kappa = "98af7c4a827a67fad1f59cebf71a31e5ea4a04e2e97df042430762eefa5527bd"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "294e709100f91324f9e55a5ccd6d7c2805cd8aab5bd2473d6f09e435b768c05d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::read_io"
+kappa = "092cd7b286a0b9294120dbb9f3a1aa0a1cc6bb1719b16fe2eb4bed1d462982bd"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "99752c2033f88219634a19725236f07d88ad7990a763c5e4df486d7295c0326f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::set_eof"
+kappa = "47a098aaafc1af266b0cdacb85042c711f77a5730f7663f72d24d86d40128d61"
+at = "C=u32, IO=u32"
+embedded = "8c708f9d3a6d8a4b6f777e0bc122480e08a80e1345ab128d996321d13ff59622"
+status = "residue"
+cause = "mir::Ty: common::Stream<'_, u32, u32>"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::set_need_flush"
+kappa = "ee549f8d4230dccf5b610e82bbbe8695e5a3825047141320017d2480094f8cd6"
+at = "C=u32, IO=u32"
+embedded = "d5e66289ad4a5f1dd1328ddc846c78750ab7aa1b77eb2a4a55a5d181c979f5f6"
+status = "residue"
+cause = "mir::Ty: common::Stream<'_, u32, u32>"
+
+[[fn]]
+path = "tokio-rustls::common::Stream::write_io"
+kappa = "9d8f82fded4797f0254f82b64091b3a51117782d8b768eb54a505ac85b30ea05"
+at = "C=u32, IO=u32, SD=u32"
+embedded = "a0a4cf3160435b36a085d00d9be2c84d0eb1ef417b807a437b13de9f4e859b58"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::SyncReadAdapter::read"
+kappa = "e5a82745587e021a25f3dedbba2a836e2ecb25c60834bb17370f1cc94f2ff497"
+at = "T=u32"
+embedded = "3ba80eae40e3d38ec69612ce82a6ba5fc0ec59e3c7e00fd71e3a26bc16ddc291"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::SyncWriteAdapter::flush"
+kappa = "c4d009854dfad215bfa0cd1e4193a69ddb144b0ad2572502bf6afa626a3f88f8"
+at = "T=u32"
+embedded = "c6a6f56f5813bf3c52c646776d412966079dd9045a3d45dd933230c285148c54"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::SyncWriteAdapter::poll_with"
+kappa = "2150c889b2689ff1256f3d4b984a9b4f3579c9ad78fa2189b8654c3ff2db99c0"
+at = "T=u32, U=u32"
+embedded = "aa0a9263eadc71f6e6f9032d714ee0b0baa688b199f019a4f206ad27178e8506"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::SyncWriteAdapter::write"
+kappa = "e589f6cbf98e055ae1717abb7aad6e2166c7d8589de239b0caf2f75859c38894"
+at = "T=u32"
+embedded = "5ce29f9305a3806d597c14464a107036583cda7e1c4b17b666cd65dad968cf7d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::SyncWriteAdapter::write_vectored"
+kappa = "4925dc1d599dd37934db8b3461a450b1a6ef0372fc9f0d1078ddf21901e8518e"
+at = "T=u32"
+embedded = "17c6e07c7f7005296eb68cf250f4155ccd1c26be3477e42231df11300ab475fc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tokio-rustls::common::TlsState::is_early_data"
+kappa = "6d7cab72535a8ad65a9a833935bc7db709b12fb688db828cab26e69678a5cfcc"
+embedded = "0e23a838ba1f4345e2a5d951736abe53c6f40844fbbe637953fcf768595011f5"
+status = "residue"
+cause = "mir::Ty: TlsState"
+
+[[fn]]
+path = "tokio-rustls::common::TlsState::readable"
+kappa = "cfd2ef638d5fb87054594c6d0e89329f46d3660cb7aab37a9e326dd11ef3a0e0"
+embedded = "2cb969962dc086c5ecd7997645e0898be84e50322530cc29ba7e4757d0eaae30"
+status = "residue"
+cause = "mir::Ty: TlsState"
+
+[[fn]]
+path = "tokio-rustls::common::TlsState::shutdown_read"
+kappa = "12ec58d73750e3e13393b444db380b7e1a3d8974c1fc1093db4ac015f6ab66dd"
+embedded = "14826ee1799f56e2fc1f6fe50ae9d988f689418bec4fdbefe411578fecc46ff4"
+status = "residue"
+cause = "mir::Ty: TlsState"
+
+[[fn]]
+path = "tokio-rustls::common::TlsState::shutdown_write"
+kappa = "e2d84be0e6d2509d08931685b014e53dc5448dbb4aa5f1db20c61069742225bb"
+embedded = "432300465e8e5e2fe3472795dac56e9367848500d8b21dbde771b2d5fb2855dc"
+status = "residue"
+cause = "mir::Ty: TlsState"
+
+[[fn]]
+path = "tokio-rustls::common::TlsState::writeable"
+kappa = "a1da4464d29e4ed2673b2a50e02e5bb4359a9032ef933cecdab7180b4caa5cad"
+embedded = "f5ad5f05f089aa0dc082105fea9674cab16d617bc70049e00606e3f33a93e11d"
+status = "residue"
+cause = "mir::Ty: TlsState"
+
+[[fn]]
+path = "tokio-rustls::handshake::MidHandshake::poll"
+kappa = "2ad10d6a444bbf087fab2603c082a6b636f005ef41c86d10d6bc17ed00e9e252"
+at = "IS=u32, SD=u32"
+embedded = "dd9ce38292254282599a081f5ebc3859aefdce601b0ca2e79c31eb4a84735aa1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

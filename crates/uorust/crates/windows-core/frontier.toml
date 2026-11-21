@@ -1,0 +1,427 @@
+# The windows-core register (written by `uorust crate windows-core@0.100.0`; do not edit): every body of
+# windows-core's MIR at windows-core 0.100.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 330
+translated = 7
+residue = 323
+
+[module.agile_reference]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.as_impl]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.com_object]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.compose]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.crate]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.event]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.event_revoker]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.guid]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.imp]
+bodies = 127
+translated = 6
+residue = 121
+
+[module.in_ref]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.inspectable]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.interface]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.out_param]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.out_ref]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.param]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.param_value]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.runtime_name]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.runtime_type]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.scoped_interface]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.type]
+bodies = 16
+translated = 1
+residue = 15
+
+[module.unknown]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.weak]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+bodies = 330
+embedded = 330
+evaluable = 330
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 6
+
+[[cause]]
+cause = "mir::Ty: imp::sha1::ConstBuffer"
+bodies = 47
+
+[[cause]]
+cause = "mir::Ty: guid::GUID"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: windows_result::Error"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: windows_result::HRESULT"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: com_object::ComObject<u32>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: unknown::IUnknown"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: in_ref::InRef<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: interface::InterfaceRef<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: imp::weak_ref_count::TearOff"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: out_ref::OutRef<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: param_value::ParamValue<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: weak::Weak<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::sha1::blk: windows-core's MIR stops at mir::TerminatorKind::Call: imp::sha1::rol: windows-core's MIR stops at mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WeakRefCount"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: inspectable::IInspectable"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Event<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EventRevoker"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: agile::AgileSlot"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: agile_reference::AgileReference<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: imp::delegate_box::DelegateBox<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item OFFSET"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::sha1::rol: windows-core's MIR stops at mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: interface::Interface::as_raw: windows-core's MIR stops at mir::TerminatorKind::Call: transmute_copy"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::is_null"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: transmute_copy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IAgileReference"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ScopedInterface<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StaticComObject<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bindings::IAgileObject"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bindings::IWeakReference"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bindings::IWeakReferenceSource"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::any::Any"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::Delegate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: event::Event<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::agile::AgileSlot"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::bindings::IWeakReference"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::bindings::IWeakReferenceSource"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::bindings::IWeakReferenceSource_Vtbl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::bindings::IWeakReference_Vtbl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::ref_count::RefCount"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::sha1::Digest"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imp::weak_ref_count::WeakRefCount"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ref_count::RefCount"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: windows_strings::PCWSTR"
+bodies = 2
+
+[[cause]]
+cause = "mir::CastKind::PointerExposeProvenance: from RawPointer to Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsImpl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: imp::sha1::r0: windows-core's MIR stops at mir::TerminatorKind::Call: imp::sha1::rol: windows-core's MIR stops at mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: interface::Interface::assume_vtable: windows-core's MIR stops at type outside the lift: <T as interface::Interface>::Vtable"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::boxed::Box::from_raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::boxed::Box::into_raw"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::intrinsics::transmute"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Delegate<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Digest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: com_object::StaticComObject<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: compose::ComposeBase"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: event_revoker::EventRevoker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::bindings::IAgileObject"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::bindings::IAgileObject_Vtbl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::bindings::IAgileReference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::bindings::IAgileReference_Vtbl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::sha1::Blocks"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: inspectable::IInspectable_Vtbl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: scoped_interface::ScopedInterface<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unknown::IUnknown_Vtbl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: windows_strings::HSTRING"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: windows_strings::PCSTR"
+bodies = 1

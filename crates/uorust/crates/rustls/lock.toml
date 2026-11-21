@@ -1,0 +1,24 @@
+[[fn]]
+path = "rustls::std_lock::<impl at src/lock.rs:12:14: 12:19>::fmt"
+kappa = "ec7aa02dd486e4b56cfd24579c7bb46566b6d6a3e8c9bdea8a1b65f2cac95476"
+at = "T=u32"
+embedded = "e3e68742a235903ca95c27ec44bdc84d256daeaea73dd6faa01178f3003aad8d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls::std_lock::Mutex::lock"
+kappa = "35ea744e7894e3d5b4d5543e51255d67fd50636c0604a84fde5b389d57285c8c"
+at = "T=u32"
+embedded = "06c48b868e7e29aad607aab64c4ca172dfa4f13cd09f4ff27b254cd2069cbb52"
+status = "residue"
+cause = "mir::Ty: std::sync::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "rustls::std_lock::Mutex::new"
+kappa = "399dba3e0dc827ff9b6dd20b19fbe7e46d8073b98329e7b956d43ab1421d4005"
+at = "T=u32"
+embedded = "e5b7a83a610f8fd12def77b1aebecda816e2e2a3a1737ce21787964c05449934"
+status = "residue"
+cause = "mir::Ty: lock::std_lock::Mutex<u32>"
+

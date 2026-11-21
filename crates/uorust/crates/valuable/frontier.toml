@@ -1,0 +1,364 @@
+# The valuable register (written by `uorust crate valuable@0.1.1`; do not edit): every body of
+# valuable's MIR at valuable 0.1.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 396
+translated = 4
+residue = 392
+
+[module.enumerable]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.field]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.listable]
+bodies = 40
+translated = 4
+residue = 36
+
+[module.mappable]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.named_values]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.slice]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.structable]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.tuplable]
+bodies = 63
+translated = 0
+residue = 63
+
+[module.valuable]
+bodies = 124
+translated = 0
+residue = 124
+
+[module.value]
+bodies = 54
+translated = 0
+residue = 54
+
+[module.visit]
+bodies = 15
+translated = 0
+residue = 15
+
+[embedding]
+bodies = 396
+embedded = 396
+evaluable = 377
+blocked = 19
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: value::Value<'_>"
+bodies = 136
+
+[[cause]]
+cause = "mir::Ty: dyn visit::Visit"
+bodies = 59
+
+[[cause]]
+cause = "mir::Ty: tuplable::TupleDef"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: enumerable::Variant<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: enumerable::EnumDef<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: field::Fields<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: structable::StructDef<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: field::NamedField<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: named_values::NamedValues<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: slice::Iter<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: slice::Slice<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: <dyn enumerable::Enumerable as Debug>::fmt::DebugEnum<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: <dyn structable::Structable as Debug>::fmt::DebugStruct<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: named_values::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Listable"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Mappable"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EnumDef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Rc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StructDef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TupleDef"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: <dyn tuplable::Tuplable as Debug>::fmt::DebugTuple<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Arc<[u32]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BTreeSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BinaryHeap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DebugMappable<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HashMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HashSet<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LinkedList<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Rc<[u32]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VecDeque<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enumerable::VariantDef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugListable<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VariantDef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Wrapping<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn enumerable::Enumerable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn listable::Listable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn mappable::Mappable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn structable::Structable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn tuplable::Tuplable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Valuable"
+bodies = 1

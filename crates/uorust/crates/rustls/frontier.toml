@@ -1,0 +1,2697 @@
+# The rustls register (written by `uorust crate rustls@0.23.46`; do not edit): every body of
+# rustls's MIR at rustls 0.23.46, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 2442
+translated = 18
+residue = 2424
+
+[module.bs_debug]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.builder]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.check]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.client]
+bodies = 259
+translated = 1
+residue = 258
+
+[module.common_state]
+bodies = 85
+translated = 2
+residue = 83
+
+[module.compress]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.conn]
+bodies = 103
+translated = 0
+residue = 103
+
+[module.crypto]
+bodies = 330
+translated = 2
+residue = 328
+
+[module.enums]
+bodies = 103
+translated = 0
+residue = 103
+
+[module.error]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.hash_hs]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.key_log]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.key_log_file]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.limited_cache]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.lock]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.msgs]
+bodies = 881
+translated = 8
+residue = 873
+
+[module.polyfill]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.quic]
+bodies = 63
+translated = 2
+residue = 61
+
+[module.rand]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.record_layer]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.server]
+bodies = 196
+translated = 1
+residue = 195
+
+[module.stream]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.suites]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.ticketer]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.time_provider]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.tls12]
+bodies = 21
+translated = 1
+residue = 20
+
+[module.tls13]
+bodies = 72
+translated = 1
+residue = 71
+
+[module.vecbuf]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.verify]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.versions]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.webpki]
+bodies = 74
+translated = 0
+residue = 74
+
+[module.x509]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 2438
+embedded = 2438
+evaluable = 2436
+blocked = 2
+
+[[construct]]
+construct = "CastKind::Transmute"
+bodies = 1
+
+[[construct]]
+construct = "Rvalue::Repeat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 256
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 107
+
+[[cause]]
+cause = "mir::Ty: dyn common_state::State<client::client_conn::ClientConnectionData>"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: common_state::CommonState"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: dyn common_state::State<server::server_conn::ServerConnectionData>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::ExtensionType"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: error::InvalidMessage"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: msgs::codec::ListLength"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: msgs::ffdhe_groups::FfdheGroup<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::NamedGroup"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: RecordLayer"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: enums::SignatureAlgorithm"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: enums::SignatureScheme"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: msgs::message::inbound::InboundPlainMessage<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: suites::ConnectionTrafficSecrets"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: crypto::SharedSecret"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: crypto::tls13::OkmBlock"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: enums::AlertDescription"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ChunkVecBuffer"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::ClientConfig"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: crypto::hmac::Tag"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: enums::ProtocolVersion"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: hash_hs::HandshakeHash"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: crypto::CryptoProvider"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificateExtensions<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: msgs::message::Message<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: msgs::message::outbound::OutboundOpaqueMessage"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: suites::ExtractedSecrets"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tls12::ConnectionSecrets"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: webpki::client_verifier::ClientCertVerifierBuilder"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: crypto::hash::Output"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::ServerConfig"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::ServerConnectionData"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: verify::HandshakeSignatureValid"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::ClientConnectionData"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: common_state::HandshakeFlight<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: crypto::signer::CertifiedKey"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::cipher::MessageDecrypter"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::DistinguishedName"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: EarlyData"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SignatureScheme"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: crypto::cipher::AeadKey"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::tls13::HkdfExpander"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::HandshakeMessagePayload<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::SessionId"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: webpki::server_verifier::ServerCertVerifierBuilder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CertificateRequestExtensions"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ClientExtensions<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ContentType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ExtensionType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: HelloRetryRequestExtensions<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: HpkeAead"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: NewSessionTicketExtensions"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: PrefixedPayload"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ServerExtensions<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::cipher::MessageEncrypter"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: msgs::codec::Reader<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificateChain<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::Random"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: server_conn::EarlyDataState"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: suites::PartiallyExtractedSecrets"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: suites::SupportedCipherSuite"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AlertLevel"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CertificateCompressionAlgorithm"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CertificateStatusType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CertificateType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CipherSuite"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ClientCertificateType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Compression"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ECCurveType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ECPointFormat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EchClientHelloType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: EchVersion"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: HandshakeDeframer"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: HandshakeType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: HashAlgorithm"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: HeartbeatMessageType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: HeartbeatMode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: HpkeKdf"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: HpkeKem"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: KeyUpdateRequest"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NamedCurve"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NamedGroup"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PskKeyExchangeMode"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ServerNameType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SupportedCipherSuite"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Tls13ClientSessionValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::Resumption"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::EncryptError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: crypto::cipher::Iv"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: dyn conn::kernel::KernelState"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: enums::CertificateType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: enums::ContentType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msgs::base::Payload<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificateStatus<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ClientExtensions<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::HelloRetryRequestExtensions<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerExtensions<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msgs::message::outbound::OutboundChunks<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msgs::persist::ClientSessionCommon"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msgs::persist::ServerSessionValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::CertificateDer<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BorrowedPayload<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ClientConfig"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ClientHelloPayload"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: IoState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: LimitedCache<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Payload<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ServerConnectionData"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: crypto::hpke::HpkePublicKey"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::ActiveKeyExchange"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::signer::Signer"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::signer::SigningKey"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: enums::CipherSuite"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: enums::HandshakeType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::HashAlgorithm"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ClientHelloPayload"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ProtocolName"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: msgs::persist::Tls13ClientSessionValue"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: quic::Tag"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: server_conn::connection::ServerConnection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tls13::Tls13CipherSuite"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BufferProgress"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ClientSessionMemoryCache"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DeframerVecBuffer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EchConfigContents"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NeverProducesTickets"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NoClientSessionStorage"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NoServerSessionStorage"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OutboundChunks<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ProtocolName"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Rfc5077Ticketer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RootCertStore"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ServerSessionMemoryCache"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TicketRotator"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TicketSwitcher"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common_state::IoState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: conn::ConnectionCommon<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::ConnectionState<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::quic::PacketKey"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: hybrid::Layout"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::base::PayloadU24<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::HpkeAead"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::HpkeKdf"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ClientExtensionsInput<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CompressedCertificatePayload<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::EncryptedClientHello"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::HelloRetryRequest"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerNamePayload<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::message::MessagePayload<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::message::outbound::PrefixedPayload"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: msgs::persist::Tls12ClientSessionValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: quic::connection::ClientConnection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rand::GetRandomFailed"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tls12::Tls12CipherSuite"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleHandshake"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ClientSessionCommon"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DeframerSliceBuffer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HandshakeHashBuffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HpkeSymmetricCipherSuite"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Protocol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SecretKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ServerSessionValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: builder::WantsVerifier"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::UnbufferedClientConnection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::connection::ClientConnection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: client::ech::EchMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: client_conn::connection::ClientConnection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common_state::HandshakeKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common_state::Side"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: compress::CompressionCacheEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: conn::connection::Connection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: conn::connection::Reader<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: conn::connection::Writer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: crypto::CompletedKeyExchange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: crypto::cipher::Nonce"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: crypto::hpke::EncapsulatedSecret"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: crypto::tls13::OutputLengthError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::SupportedKxGroup"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: enums::CertificateCompressionAlgorithm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: enums::EchClientHelloType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hash_hs::HandshakeHashBuffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::base::PayloadU16<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::base::PayloadU8<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::buffers::BufferProgress"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::AlertLevel"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::CertificateStatusType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::ClientCertificateType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::Compression"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::ECCurveType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::ECPointFormat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::EchVersion"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::HeartbeatMessageType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::HeartbeatMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::HpkeKem"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::KeyUpdateRequest"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::NamedCurve"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::PskKeyExchangeMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::enums::ServerNameType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::fragmenter::Chunker<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificateEntry<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificatePayloadTls13<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificateRequestExtensions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificateStatusRequest"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::HpkeSymmetricCipherSuite"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::KeyExchangeAlgorithm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::KeyShareEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::NewSessionTicketExtensions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::PresharedKeyBinder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::PresharedKeyIdentity"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::PresharedKeyOffer"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::PskKeyExchangeModes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ResponderId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::SingleProtocolName"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::SupportedEcPointFormats"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::SupportedProtocolVersions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: msgs::message::PlainMessage"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: quic::DirectionalKeys"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: quic::KeyChange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: quic::Keys"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: quic::connection::Connection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: quic::connection::ServerConnection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::UnixTime"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: server_conn::ServerConfig"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tls13::VerifyMessage"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleSuite"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: verify::ClientCertVerified"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: verify::DigitallySignedStruct"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: webpki::anchors::RootCertStore"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: webpki::server_verifier::WebPkiServerVerifier"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item x509::DER_SEQUENCE_TAG"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Aes128GcmAead"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Aes256GcmAead"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AlwaysResolvesClientRawPublicKeys"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AnonymousClientPolicy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AwsLcRs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CertificatePayloadTls13<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Chacha20Poly1305Aead"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClientKeyExchangeParams"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClientTicketRequest"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CompressionLevel"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DigitallySignedStruct"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Direction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DistinguishedName"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EchConfigExtension"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EchConfigPayload"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EchState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EchStatus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EncryptedClientHelloError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedKeyPurpose"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FfdheGroup<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HkdfExpanderUsingHmac"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HpkeKeyConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HpkePrivateKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HpkeSuite"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InconsistentKeys"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KEY_SIZE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyScheduleHandshake"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyScheduleSuite"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyScheduleTraffic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeEmpty"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MlKem"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NoKeyLog"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonEmpty"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OkmBlock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PreEncryptAction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PresharedKeyBinder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResponderId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Retrieved<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ServerHelloPayload"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ServerKeyExchangeParams"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ServerTicketRequestHint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StreamOwned<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SupportedProtocolVersion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SupportedProtocolVersions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TLS13"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Tls12ClientSessionValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Tls12Prf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnknownExtension"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnsupportedOperationError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WebPkiClientVerifier"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::EarlyDataError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::connection::WriteEarlyData<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::common::ServerCertDetails<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::ech::EchConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::ech::EchGreaseConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::ech::EchState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::ech::EchStatus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::handy::AlwaysResolvesClientRawPublicKeys"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::hs::ClientSessionValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: client::tls12::ExpectFinished"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: compress::CompressionCache"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::AppDataRecord<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::EncodeError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hash::Hash"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hmac::Hmac"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::KemSharedSecret<#usize_KDF_SIZE>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::quic::HeaderProtectionKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::quic::KeyBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::sign::PqdsaKeyKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::cipher::KeyBlockShape"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::hpke::HpkeSuite"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::signer::SingleCertAndKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn HkdfExpander"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn common_state::State<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::hash::Context"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::hmac::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn quic::HeaderProtectionKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn quic::PacketKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn server::server_conn::ProducesTickets"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn verify::ClientCertVerifier"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::CertRevocationListError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::ExtendedKeyPurpose"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::PeerIncompatible"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::PeerMisbehaved"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hybrid::Hybrid"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: key_schedule::KeySchedule"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::base::PayloadU16"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::codec::u24"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::buffers::Delocator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::buffers::Locator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ClientSessionTicket"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ClientTicketRequest"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::EchConfigContents"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::EchConfigExtension"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::EchConfigPayload"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::EncryptedClientHelloOuter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::HandshakePayload<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::HostNamePayload"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::HpkeKeyConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::NewSessionTicketPayload"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::NewSessionTicketPayloadTls13"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::OcspCertificateStatusRequest"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerDhParams"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerEcdhParams"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerEncryptedClientHello"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerHelloPayload"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerKeyExchange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerKeyExchangeParams"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerKeyExchangePayload"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerTicketRequestHint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::TransportParameters<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::UnknownExtension"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: msgs::message::inbound::InboundOpaqueMessage<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quic::PacketKeySet"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quic::Secrets"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quic::Suite"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: quic::Version"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: record_layer::PreEncryptAction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: server::common::ActiveCertifiedKey<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: server::handy::AlwaysResolvesServerRawPublicKeys"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: server::hs::ExtensionProcessing"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::connection::AcceptedAlert"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::connection::ReadEarlyData<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::connection::ServerConnection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: server::tls13::client_hello::EarlyDataDecision"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::Stream<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeySchedule"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleBeforeFinished"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleEarly"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeySchedulePreHandshake"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleTraffic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleTrafficWithClientFinishedPending"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u24"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: verify::ServerCertVerified"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: versions::EnabledVersions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: webpki::VerifierBuilderError"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: error::join::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ClientCertVerifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as msgs::codec::TlsListElement>::SIZE_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item crypto::aws_lc_rs::tls12::GCM_EXPLICIT_NONCE_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item msgs::fragmenter::MAX_FRAGMENT_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item tls13::CLIENT_CONSTANT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item x509::DER_BIT_STRING_TAG"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item x509::DER_OCTET_STRING_TAG"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <alloc::vec::Vec as DerefMut>::deref_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as msgs::codec::Codec>::encode"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: alloc::vec::Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: alloc::vec::Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_be_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: msgs::codec::put_u16: rustls's MIR stops at type outside the lift: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: msgs::codec::put_u64: rustls's MIR stops at type outside the lift: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: try_fips_mode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Active"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ActiveHybrid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AeadAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AeadMessageEncrypter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AlertMessagePayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AlwaysResolvesServerRawPublicKeys"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AwsLcHkdf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AwsLcHkdfExpander"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CertRevocationListError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CertificateEntry<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CertificateError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CertificateRequestPayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CertificateRequestPayloadTls13"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CertificateStatusRequest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChaCha20Poly1305"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChaCha20Poly1305MessageEncrypter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ChangeCipherSpecPayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Chunker<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CipherSuiteCommon"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ClientConnectionData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ClientDhParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ClientEcdhParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ClientHelloDetails"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ClientSessionTicket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Coalescer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CompressedCertificatePayload<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConnectionCore<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CryptoProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DangerousClientConfig<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeframerIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Delocator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DhKem<#usize_KDF_SIZE>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DirectionState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EarlyDataDecision"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EcParameters"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EchConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EchMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnabledVersions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncryptedClientHello"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EncryptedClientHelloOuter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtensionProcessing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FailResolveClientCert"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FragmentSpan"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GcmAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HandshakeIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HkdfUsingHmac<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InboundPlainMessage<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InvalidMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InvalidMessageEncrypter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Iv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KemSharedSecret<#usize_KDF_LEN>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KernelContext<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyExchange"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyExchangeAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyLogFile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyScheduleEarly"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyScheduleHandshakeStart"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyShareEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KxGroup"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KxState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Label"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LabeledSuiteId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Len"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LengthPrefixedBuffer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Locator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NewSessionTicketPayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NewSessionTicketPayloadTls13"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoClientAuth"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OcspCertificateStatusRequest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OtherError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OutboundOpaqueMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OutboundPlainMessage<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PayloadU16<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PayloadU24<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PayloadU8<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PresharedKeyIdentity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PresharedKeyOffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PrfUsingHmac<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PskKeyExchangeModes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Secrets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Seed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ServerDhParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ServerEcdhParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ServerEncryptedClientHello"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ServerKeyExchangePayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ServerNamePayload<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SingleCertAndKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SingleProtocolName"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SupportedEcPointFormats"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TemperCounters"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TicketRequest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Tls12Resumption"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TransmitTlsData<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnbufferedClientConnection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VerifyMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WebPkiSupportedAlgorithms"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WriteEarlyData<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_lc_rs::aead::Nonce"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_lc_rs::error::Unspecified"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_lc_rs::signature::PqdsaSigningAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::ConfigBuilder<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: builder::WantsVersions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::builder::WantsClientCert"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::builder::danger::DangerousClientConfigBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::EarlyData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::MayEncryptEarlyData<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::TicketRequest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::Tls12Resumption"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::client_conn::danger::DangerousClientConfig<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::common::ClientAuthDetails"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::common::ClientHelloDetails"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::ech::EchAccepted"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::handy::cache::ClientSessionMemoryCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::handy::cache::ServerData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::hs::ClientHelloInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::tls12::ServerKxDetails"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client::tls13::KeyExchangeChoice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: client_conn::EarlyDataState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common_state::Context<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common_state::KxState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common_state::Protocol"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common_state::TemperCounters"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: compress::CompressionLevel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::ConnectionCore<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::ConnectionRandoms"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::InboundUnborrowedMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::UnbufferedConnectionCommon<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::kernel::Direction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::kernel::KernelConnection<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::EncodeTlsData<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::InsufficientSizeError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::ReadTraffic<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::UnbufferedStatus<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: conn::unbuffered::WriteTraffic<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hash::Context"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hmac::Key"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::AeadKey<#usize_KEY_LEN>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::KemSharedSecret<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::KeySchedule<#usize_KEY_SIZE>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::LabeledSuiteId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::hpke::Opener<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::pq::hybrid::Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::sign::EcdsaSigningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::sign::Ed25519SigningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::sign::PqdsaSigningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::sign::RsaSigningKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::ticketer::Rfc5077Ticketer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::tls12::GcmMessageEncrypter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::aws_lc_rs::tls13::GcmMessageEncrypter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::cipher::UnsupportedOperationError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crypto::hpke::HpkePrivateKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Hkdf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn HkdfPrkExtract"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn KeyLog"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn compress::CertCompressor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn compress::CertDecompressor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::hash::Hash"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn crypto::hpke::HpkeOpener"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn rustls_pki_types::SignatureVerificationAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::CertificateError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::EncryptedClientHelloError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::InconsistentKeys"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::other_error::OtherError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_log_file::KeyLogFile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_log_file::KeyLogFileInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_schedule::KeyScheduleTrafficWithClientFinishedPending"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: limited_cache::LimitedCache<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lock::std_lock::Mutex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::alert::AlertMessagePayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::base::MaybeEmpty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::base::NonEmpty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::base::PayloadU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::ccs::ChangeCipherSpecPayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::codec::LengthPrefixedBuffer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::codec::TlsListIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::DeframerIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::buffers::Coalescer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::buffers::DeframerSliceBuffer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::buffers::DeframerVecBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::handshake::DissectHandshakeIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::handshake::FragmentSpan"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::handshake::HandshakeDeframer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::deframer::handshake::HandshakeIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::fragmenter::MessageFragmenter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificateRequestPayload"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::CertificateRequestPayloadTls13"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ClientDhParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ClientEcdhParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ClientKeyExchangeParams"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::DuplicateExtensionChecker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::EcParameters"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::handshake::ServerExtensionsInput<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::message::outbound::OutboundPlainMessage<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::persist::Retrieved<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: msgs::persist::Retrieved<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quic::KeyBuilder<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quic::Quic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: quic::connection::ConnectionCommon<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: record_layer::Decrypted<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: record_layer::RecordLayer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::AlgorithmIdentifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls_pki_types::DnsName<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::builder::WantsServerCert"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::handy::cache::ServerSessionMemoryCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::handy::sni_resolver::ResolvesServerCertUsingSni"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::hs::ExpectClientHello"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::Accepted"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::ClientHello<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::EarlyDataState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::UnbufferedServerConnection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::server_conn::connection::Acceptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server::tls13::client_hello::CompleteClientHelloHandling"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: server_conn::ClientHello<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::MutexGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::StreamOwned<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: suites::CipherSuiteCommon"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ticketer::TicketRotator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ticketer::TicketRotatorState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ticketer::TicketSwitcher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ticketer::TicketSwitcherState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleClientBeforeFinished"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::KeyScheduleHandshakeStart"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tls13::key_schedule::SecretKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vecbuf::ChunkVecBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: verify::FinishedMessageVerified"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: versions::SupportedProtocolVersion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: webpki::CertRevocationList<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: webpki::client_verifier::AnonymousClientPolicy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: webpki::client_verifier::WebPkiClientVerifier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: webpki::verify::ParsedCertificate<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: webpki::verify::WebPkiSupportedAlgorithms"
+bodies = 1

@@ -1,0 +1,104 @@
+# The hyper-rustls register (written by `uorust crate hyper-rustls@0.27.10`; do not edit): every body of
+# hyper-rustls's MIR at hyper-rustls 0.27.10, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 38
+translated = 0
+residue = 38
+
+[module.config]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.connector]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.stream]
+bodies = 10
+translated = 0
+residue = 10
+
+[embedding]
+bodies = 38
+embedded = 38
+evaluable = 38
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: connector::HttpsConnector<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: connector::builder::WantsProtocols1"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: connector::builder::WantsSchemes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: connector::builder::WantsTlsConfig"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rustls::pki_types::ServerName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: hyper_util::client::legacy::connect::HttpConnector"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::MaybeHttpsStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeHttpsStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connector::DefaultServerNameResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connector::FixedServerNameResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connector::builder::WantsProtocols2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<stream::MaybeHttpsStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rustls::ClientConfig"
+bodies = 1

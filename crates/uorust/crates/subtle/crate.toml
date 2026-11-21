@@ -1,0 +1,733 @@
+[[fn]]
+path = "subtle::<impl at src/lib.rs:119:16: 119:21>::clone"
+kappa = "36b80306cfac0892a01cd35020b96559ec80fad8b3cd51b43db16a4af5ae6a2a"
+at = "Choice=u32"
+embedded = "594b0fb6584e71563ed4614a18ffa5af075a6bf69ed56e3c2afb018f5d7a11bb"
+status = "translated"
+digest = "4ad52afa5e667a92b4e943a0ebfe4f0042032c6dabf8973cfb5774689420d570"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:119:23: 119:28>::fmt"
+kappa = "ed5c3a199ca9de5d19d1b6170edce160740f01d107d76c03b33d9397a2fa02b5"
+embedded = "06a8b8dadfd612ba7b6dedb3dc8bfa0933fcbc2de03050fbca7274adb8e6b161"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:289:1: 289:47>::ct_eq"
+kappa = "1d2c9f77fe04310312ffdc6f56b3c7a4fc564a14b92acdbcbb63c855eae69fdd"
+at = "Choice=u32, T=u32"
+embedded = "ac3d327828bca662e19915bbd8020af49f8939a6365d182f10b3f5b6e708311d"
+status = "residue"
+cause = "mir::Ty: core::iter::Zip<core::slice::Iter<'_, u32>, core::slice::Iter<'_, u32>>"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:346:9: 346:37>::ct_eq"
+kappa = "6067df14ab16f98b75ac931f71d1836d1bca256ed33dc0b14d513c4447c75ce4"
+at = "Choice=u32"
+embedded = "bcf140eab07c6af3273e50a4f6169b8ea1d90e31864d06a7c90d433c0de7cb3d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u8 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:346:9: 346:37>::ct_eq#2"
+kappa = "94a9de4504e73a83a6b336b013552111f8803773dbd99cb81a00c7dbccb06d71"
+at = "Choice=u32"
+embedded = "61af41c87c4bc7dcf532c1bf540002fa5f1a09da1f0a3785f88b068ab58f6e17"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u16 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:346:9: 346:37>::ct_eq#3"
+kappa = "492b01f9c157c37e201ed3cb7101b95502883db44e882f94e0fd136872b02a76"
+at = "Choice=u32"
+embedded = "24877332bf7c96feb48f2b2eb1a4d2e43e759232e65e1e80447d2c0f0ef85e79"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u32 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:346:9: 346:37>::ct_eq#4"
+kappa = "e447d25b86ef03507ef666d2716284fbe6ce67fd19e1364d3b5b3879ef44e3de"
+at = "Choice=u32"
+embedded = "021f764636d7fa4640f28de350eba795cfb454ffc687b18ec0b98aa13b6af2c8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u64 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:346:9: 346:37>::ct_eq#5"
+kappa = "75d9bc358751771de61f2dc25b1eb941f46c650a8368683ba7d916d350ea5a1f"
+at = "Choice=u32"
+embedded = "9c7e547108adf0f234289c875391c64b13718bee5438b9d5ab127f2973259784"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u128 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:346:9: 346:37>::ct_eq#6"
+kappa = "b97bfe8a50c7f51adac2e23f6a85eeb1932d0bd6438504a82cc7e3d1bc6b64c5"
+at = "Choice=u32"
+embedded = "9bb921953812131ee230ca5cc339c5d7ebc224d04f7fe45b746dcae54940ef5e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&usize as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:360:9: 360:37>::ct_eq"
+kappa = "da5f9e5ad12d379bcb1afdb75cfeacfe92e57afc420ca0e4f2a3090afed5a061"
+at = "Choice=u32"
+embedded = "f61ef54be1205c392680c66ecb3dbe8e230be64c0ba5d97335dd033495cb2455"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:346:9: 346:37>::ct_eq: subtle's MIR stops at mir::TerminatorKind::Call: <&u8 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:360:9: 360:37>::ct_eq#2"
+kappa = "da2c1b27592cdfb2a33d5e4bc4726664b644cf31fc29b92099b65028a24588da"
+at = "Choice=u32"
+embedded = "c033b00061ff81e724dfa2c3f8bb1187292f59de136f459fa7497047749f8377"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:346:9: 346:37>::ct_eq: subtle's MIR stops at mir::TerminatorKind::Call: <&u16 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:360:9: 360:37>::ct_eq#3"
+kappa = "465c5496e6f4c87d3d426566548ea70a18231a0b7a3292be270641288106ac0d"
+at = "Choice=u32"
+embedded = "60271fff97c57117eb67933445cb283b29098b7049c3b4ee4b88c583d6426d05"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:346:9: 346:37>::ct_eq: subtle's MIR stops at mir::TerminatorKind::Call: <&u32 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:360:9: 360:37>::ct_eq#4"
+kappa = "9a551b3c902728fcc1a7d50915d7e194074868f44e10badc41ef8875201fa9b2"
+at = "Choice=u32"
+embedded = "f583d8c54079d115b2431c338bcb222f8972b2fabaf6225f66d238ddff86b082"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:346:9: 346:37>::ct_eq: subtle's MIR stops at mir::TerminatorKind::Call: <&u64 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:360:9: 360:37>::ct_eq#5"
+kappa = "7a453cb6c494eb815cc518cef5d926e55daa912c27b935672c0ecbafad407d5c"
+at = "Choice=u32"
+embedded = "aef6109464fe5992afae60daaa06653f9e60c35c7f4b052316aecc2ae3476298"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:346:9: 346:37>::ct_eq: subtle's MIR stops at mir::TerminatorKind::Call: <&u128 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:360:9: 360:37>::ct_eq#6"
+kappa = "6f765f4e63a5b26e865454597671f8dc9887e852b8446c3f67a70eaefaa9b6fb"
+at = "Choice=u32"
+embedded = "10abd333cb9b29f45e4c57742630f0b46eca9c840f242b0b34cb9dfe009b00cf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:346:9: 346:37>::ct_eq: subtle's MIR stops at mir::TerminatorKind::Call: <&usize as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign"
+kappa = "fe1bb713a3395f81eff60ae7e6af207cec4b698952a83a971eacf628df97ff32"
+at = "Choice=u32"
+embedded = "aee4c810536007051b5404ff3928babf01a7b92766ccebe3fda30f4a5b9d8249"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#10"
+kappa = "4462b8e507b9bc65aea918beff9e12079c931f6917f3dea3140c3c57c93cf5d4"
+at = "Choice=u32"
+embedded = "e0ac761ab30f6912c9e7079e3d9c30a3df4b24a6ba52bd83f0fe2cab7bd695b4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#2"
+kappa = "60874d0270770b3db535d813ae1730e24c48c2f1e7ee53784de88e1884ee6ae3"
+at = "Choice=u32"
+embedded = "6851b3980b4ab9feb1d0fddb6891295e2673ed9927db5f20cde7e79a5559ca89"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#3"
+kappa = "98b6e0dc959ab825cb4b964dacbf03fe7a0c9b0410ffab024f31244356c94842"
+at = "Choice=u32"
+embedded = "3f3eadca96de2dd62442907b7d1bb41487156eb4419738086b2fbca8697feff9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#4"
+kappa = "c546b228b9a9d3c7610235b37e8f73ffd17b33f13cf6535e783012cb143d72df"
+at = "Choice=u32"
+embedded = "17739fd46f9b731693138a9396bfe287342c35293737f01e8bcd8b18082d917a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#5"
+kappa = "d2d760ef97b22fb3b9f17e398800724eefe7aac7da0ff70ff22d573ef414e684"
+at = "Choice=u32"
+embedded = "ba8eb2d106848c5d8bed6dc8e12b8a97ebd3416ff8640e00b3b9097fc5b64d1f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#6"
+kappa = "e180be0e615dcfd70f8f17c4dab595fc0042671020680726ad6c9b3a22a649e2"
+at = "Choice=u32"
+embedded = "7da166bf6b3226dc5a948f5b4f6ee7feef92741b2a5e34e3b43b2d4294d47a05"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#7"
+kappa = "bfb0ab21b291b05171648672710c022ab443a1e2a82d850dcf29124c0b9cd891"
+at = "Choice=u32"
+embedded = "2c083e5683cbf32c4ec15643b1733bfb70b0ef7fb13d51ed0bed15916977f567"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#8"
+kappa = "7bcb3435ebc67bbec4639efceba4c8bd618b4c361c3e402b7e6d88f3e53552d2"
+at = "Choice=u32"
+embedded = "e05f0875ab7864641488fdaa20c345ffdc3ca1c4a5f4a2d3b3f0e96a25f54a2f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_assign#9"
+kappa = "a63a03bbc3c4cbc157831ac56de3409f2fed6e65e395a6f18f3a2b757f39b7b9"
+at = "Choice=u32"
+embedded = "9736595db1ec31b39df9115946bc8bb41affabc9756ea635f6944817a1a9cab0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select"
+kappa = "860e476813eb01c8d404b993a27522d3b5e4266afcde416272f6b7d792c01682"
+at = "Choice=u32"
+embedded = "8e1e769e1bc5f73420500e8cd811058b0e8d2f13792e5c67399a0490017f6af4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#10"
+kappa = "b33f7e2b96fc586226f8e1c34ba547e9f64ef13b1162aeec458dbe16b143bbc5"
+at = "Choice=u32"
+embedded = "1f4c17beab451ee62505585e3e976a26fc29c78b8a12ec04f7bab10da33bccc3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#2"
+kappa = "fc4fbfa09e013c616008d3a9be82d43a7a1f8699775bb06eca46b0f96a0ed259"
+at = "Choice=u32"
+embedded = "b4aa97d01ba9d832b6417345c2d14947c79fcc4829936a55e973f69a47bf090c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#3"
+kappa = "5f7cd88a15d0877e839e06303f6ec869afa6a2b8a25f354c82cdc5b60106948b"
+at = "Choice=u32"
+embedded = "5e9d7ed3abca60dc67725e92f8e74874b4dcff88928e16298563e5024ed52b19"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#4"
+kappa = "af00210e00d19808615cb4bf2964137b917fab1a732f82331a9d7c4ebf49bb9d"
+at = "Choice=u32"
+embedded = "d53d4a833d77207a14359abf95105473032b622ba6a148729488df9451f2f7a1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#5"
+kappa = "8ba8d16eea824b210712b6729f5a6f735c8a38048c05d174d7c74f9ccf89a434"
+at = "Choice=u32"
+embedded = "b2317d12c58903c9b8bbc958441ff8a26c9097e503335ec9636b0462682f6423"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#6"
+kappa = "ff93946a88c83c381e579248dc4364c6cc051d15419e1b57a0f3e6012d128c09"
+at = "Choice=u32"
+embedded = "e6eeb593f7146c5b54ad72f6cb20412d29849a9801b0e2b73792498970f9a44f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#7"
+kappa = "ba9cefd6edfa12a92ee0c3c88a2d9f69965166d5274feba1b2bdfd70a02cd0da"
+at = "Choice=u32"
+embedded = "a76189440618bd743ea011b1a492b5499d253925dc469383548f98a5ec13eae8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#8"
+kappa = "0a86f8ebe501877319b781f6e9c6fd830ceb1f2dd88096d5256b327be53fedff"
+at = "Choice=u32"
+embedded = "fa0c317062640d74a49c01c51f667fd73e4e73d6e659992ab554f88614667b99"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_select#9"
+kappa = "caf28a5eac8ee38125a61664b22f3e61fde87709ba3a4ab3a9f769cb29e798da"
+at = "Choice=u32"
+embedded = "0c0b39cc2c05815f6e15cd580a15494b6f7a547c8aa8909a0f2d649f5427c607"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap"
+kappa = "76c7b4f4ac91f9c438d88d880ce10c4645493834783f43fd12329edde63e0adc"
+at = "Choice=u32"
+embedded = "764614a20f8715cf56d47649b63564eeffad8fc5ab13006590e6c5042d8cf42c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#10"
+kappa = "371998b16d46b583f13dbc77d073ede00b47e7a9051d7743c42f3b5d8d900f2b"
+at = "Choice=u32"
+embedded = "9c3841a92efe948ff101cbb5477aad07ea418d552cec816b02fe08a37ec39fd3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#2"
+kappa = "b9e352d8168d5d85395348212cad60259809a904b9476924d4592456954b6557"
+at = "Choice=u32"
+embedded = "03039cfbcb6fa43fdf86765347ca6ffb00013dd6209ce409b6b84a0a97d123d5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#3"
+kappa = "770284a6b57df867369081366f5a2de7cd825ac2af098d940d320b24acf90fb7"
+at = "Choice=u32"
+embedded = "37a052729aa38aff0707700a8fb2009657a74de636b3cc5eb1b7d8b6ef7a6d64"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#4"
+kappa = "95452abd5ce1b82e26e87beba45ea1f54a099a11957fdab4abec16fc97bb95d6"
+at = "Choice=u32"
+embedded = "4624c0869e1da763633d2d3cb23cae195c041bcaf621c4490779c792067ae114"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#5"
+kappa = "386bd145f33134a46aa031650374906af4fbddadaac7d4e6fbbeefbe953afeb6"
+at = "Choice=u32"
+embedded = "992fcf43cb859492387afb2f96abd9c1dc876578e1d98bfa38a7b27432257926"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#6"
+kappa = "48e877687cd54e7f71a25d404651b569af8af93bdc9add3524abe639c1fe856b"
+at = "Choice=u32"
+embedded = "a01686526bcc9484bb5707cc59e062930e13a398cf511a6641c63e05c2ff1c8a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#7"
+kappa = "2577f0959979b683a80317864eb78a9a0b2bd0f72dd92b29fef7e430f1f6e84d"
+at = "Choice=u32"
+embedded = "819d0d83a28e9b734b3908aa06798ecf538810df1377c28eb987557c2396818a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#8"
+kappa = "0556d5e94134d883fd85483b730933cd48d10f6a3b00f2c79cae4cf816d7bbfd"
+at = "Choice=u32"
+embedded = "d7da01b9d29cf8af94fdde50326f277339ec1651b50b485be1e3ac7c0c3e0f1c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:511:9: 537:11>::conditional_swap#9"
+kappa = "637b17923a4bfbe9b5a4368ca50cee822a6914cbbf890facacb8651ad8e0c5a1"
+at = "Choice=u32"
+embedded = "d3504761df513a7684644d129132e2ce6cbb54eedab76fdb3c2e6ffe25c1e9ca"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:646:10: 646:15>::clone"
+kappa = "fcc3cfec86c714ca6cf21eda52cb82b515f498379d9a6e25c237c76e757ee9bc"
+at = "Choice=u32, T=u32"
+embedded = "93e426d92142a421807dea7c46378eba1d6501d1281fa72d035bc4575db245b5"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:646:23: 646:28>::fmt"
+kappa = "518b2a56175ef5b376a1ffad7a4fe372282458c35a7349c52aa36bb4a6bdd422"
+at = "Choice=u32, T=u32"
+embedded = "aa3b4ce675a9a1bbea36065ea239df6c4e0f1b546d5994654244c562d49999c1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:881:9: 881:42>::ct_gt"
+kappa = "b69d82dd317bb9e009574466bcaea3775168e777340e11b777a82a058ace4659"
+at = "Choice=u32"
+embedded = "f10b9df83a2eeeb83eaf3ab6d00fd581ae8890a821ce3f48c8a2f5a274d6b874"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u8 as Not>::not"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:881:9: 881:42>::ct_gt#2"
+kappa = "1379ecb5e8c12259a375c5af1c73aa295cbbeb9f6512a9dad9682396d5bcaa41"
+at = "Choice=u32"
+embedded = "ade4507fa43eff04f1f196d6d5f42a984fb4894b4eb92faa9f91e23a9163c6d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u16 as Not>::not"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:881:9: 881:42>::ct_gt#3"
+kappa = "8a6ccb0eb514369aebae1660c4171b2ae8a9efab80f11c58f811de948f2a5567"
+at = "Choice=u32"
+embedded = "29ae64c58876e41b19c21b08fa93fbac70c33c055a1af94b52a48618d1447f71"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u32 as Not>::not"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:881:9: 881:42>::ct_gt#4"
+kappa = "5a7d55b45e25ef3b6f9c0340bd7ead299c02cb15c7dc4db75af0b1adbffcd630"
+at = "Choice=u32"
+embedded = "7dd1bb6fe3fd6d8d00b7a6b6b25468f21a06e37eb923d348dd80b74095174e0f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u64 as Not>::not"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:881:9: 881:42>::ct_gt#5"
+kappa = "3351b15ff82ae2b8953cae0e9bcda5cc2290dd6826d25ab78b6a8911872df8d0"
+at = "Choice=u32"
+embedded = "52bbdc1d9a523a2aa0d1e34cb098c7530e9dd10d10512f7b628081a96772e83e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u128 as Not>::not"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:993:10: 993:15>::clone"
+kappa = "1eafb4662036a67184159982b299a6a079f76c4ba2eb2b6a056d7bc16a5656fa"
+at = "T=u32"
+embedded = "f64796c135b1267ebf16fc492f4c0673e8375792bfa51940b0496f402dbda8a2"
+status = "residue"
+cause = "mir::Ty: BlackBox<u32>"
+
+[[fn]]
+path = "subtle::<impl at src/lib.rs:993:23: 993:28>::fmt"
+kappa = "37991396dcc7fc7fda1af2b5bb6d2a5f150ac751ba540ed2f24160964235bc72"
+at = "T=u32"
+embedded = "3967251dcc3bb5fbfe5f38e3d2ee838b24e9ff84f3e078e07fa8d078c857b5b8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "subtle::BlackBox::get"
+kappa = "c76bd5ab9fabfeef97ba4dab40b90333deeb709cfca4dc77a103f6c548d020ff"
+at = "T=u32"
+embedded = "19235c747b26f62b5b74ff57c70bfe75db5e9186cf91b2085f865b262b042327"
+status = "residue"
+cause = "mir::Ty: BlackBox<u32>"
+
+[[fn]]
+path = "subtle::BlackBox::new"
+kappa = "c4addfc0c93b39db47f9d46ee1565cbe6821f50a823aac518dd98c2bba720da1"
+at = "T=u32"
+embedded = "68c152b8f25b33ad83ae8cdf7afafe7004cce2785bff7f81bb7fd7d4621cb193"
+status = "residue"
+cause = "mir::Ty: BlackBox<u32>"
+
+[[fn]]
+path = "subtle::Choice::bitand"
+kappa = "8528385f4324163ff47d46e083be7749f72fddbb694a29100f6e57f91767db01"
+at = "Choice=u32"
+embedded = "38bb9002f53c96b6c401807fa384f506ac7c5099d7a5f7df35832ac2563629b3"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::Choice::bitand_assign"
+kappa = "aecc88be2e8a1d84483d8256af8c95c58074895d5de82ec121f3dba3fab281ae"
+at = "Choice=u32"
+embedded = "fb02580b2254afc5527da674b196d819dc23fd959db562b66962e130829473cd"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitAnd, which u32 does not implement in core"
+
+[[fn]]
+path = "subtle::Choice::bitor"
+kappa = "7326a202bebe442c758e5b52e338876ef219292f21a536f698491c24c2f8fa43"
+at = "Choice=u32"
+embedded = "092965ec2caaf435a6025d7a9baea1f9b48d66243e2969dadcd31d9ba07fbc87"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::Choice::bitor_assign"
+kappa = "97c4a21b58baf143c6bdfa6b5944ef0ecdb076be66b805dfeedb9d49f6f017bd"
+at = "Choice=u32"
+embedded = "b150fb42ec91009d83b377e60cd35a23cb4d6d73fe17499d8063cf80642cf774"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitOr, which u32 does not implement in core"
+
+[[fn]]
+path = "subtle::Choice::bitxor"
+kappa = "d0f4dd3db4f76018fdff20fb066532efd71c878e88b05415c516797451b36741"
+at = "Choice=u32"
+embedded = "b86f517f13159b19b94bc164c259c6498aba8b4f2f77473e8d55bcfa14fe2dc9"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::Choice::bitxor_assign"
+kappa = "111cd8ae09baf4fc04088fb4731d990fdc74e1d11f860597fda84f22905ad0bb"
+at = "Choice=u32"
+embedded = "91d77fd66073057ac0cc6dd1287456858930561e4a593b34c731567ef7aa6999"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitXor, which u32 does not implement in core"
+
+[[fn]]
+path = "subtle::Choice::conditional_select"
+kappa = "000b0499bde49e624efe23344c71cdddcbd8e1fb0af72ca87a7e59f274e49374"
+at = "Choice=u32"
+embedded = "bcd079c53999ced29adc8535276e1c13d783e99e2039acf36a92b900458fe23e"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::Choice::ct_eq"
+kappa = "ce81fcb48e3869bad8db8e121e6ab2b8bec95c0248ad2c65572d65ec9dff4966"
+at = "Choice=u32"
+embedded = "8724b2281bcab553313e95661b0b724e62a9d2eb1670be9794b8ef1ab6c47ef4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitXor, which u32 does not implement in core"
+
+[[fn]]
+path = "subtle::Choice::from"
+kappa = "64036a2e0351f654f84b76c1d55edd9d98e8d6ed3f78df24da9fd089ea1fa086"
+at = "Choice=u32"
+embedded = "887f97e542902e2a2c10eedec3d030882aa7a07ac5cae713de5116b9543223d1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: black_box: subtle's MIR stops at mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "subtle::Choice::not"
+kappa = "8e380eec189f0b35f8dfb1daa8ee0122e703a750b328ade2393219cb49e0d38b"
+at = "Choice=u32"
+embedded = "d7ff3da7bb5e3584a8b8ffb60f1afa2b3e611aff3680201c55479ce0dab53a94"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::Choice::unwrap_u8"
+kappa = "63a5d8b19c254fafac1bcbbef5500b1e89860458aa18c29f0af4a8b65e40b9d1"
+embedded = "1c7b05a12443a642329a7e584307eed059edd56a1296168d218ad2605c53477f"
+status = "residue"
+cause = "mir::Ty: Choice"
+
+[[fn]]
+path = "subtle::ConditionallySelectable::conditional_assign"
+kappa = "281db4a6aaa7c91e1b65557ea29060a7430eba8bb8367c0417c79b5804cb1465"
+at = "Choice=u32, Self=u32"
+embedded = "f1d11a0b15a74c190c2c4c310c92284491ab6f33dba23e0ee627f7d6f781b879"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:511:9: 537:11>::conditional_select: subtle's MIR stops at mir::TerminatorKind::Call: Choice::unwrap_u8: subtle's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "subtle::ConditionallySelectable::conditional_swap"
+kappa = "b0f26b46366771701e2a2dfe8005c8f7b5161cf9b08e86b5b2471468b7dd20dc"
+at = "Choice=u32, Self=u32"
+embedded = "a435b2eef5b491cea3a1901ef068320741b8e2e045ef1d86877ebabcad5e9e0c"
+status = "residue"
+cause = "mir::Ty: mut u32"
+
+[[fn]]
+path = "subtle::ConstantTimeEq::ct_ne"
+kappa = "882bd52d4cb4a1ad0d007f37f23851675b039e7f74408902ff5b87b76936acdf"
+at = "Choice=u32, Self=u32"
+embedded = "215577c2bbc9c5d2457d04a3c972236543d1148a3f3995b431e013f437d798d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:346:9: 346:37>::ct_eq: subtle's MIR stops at mir::TerminatorKind::Call: <&u32 as BitXor>::bitxor"
+
+[[fn]]
+path = "subtle::ConstantTimeLess::ct_lt"
+kappa = "185bd99cc522adc1c8783431eefcbe6c5d732c71b06cc831f05dc06db1421918"
+at = "Choice=u32, Self=u32"
+embedded = "2f72006d00237c5b46c5559449faebf96cb95bdfdb46449cd56adb8ecd9c4104"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:881:9: 881:42>::ct_gt: subtle's MIR stops at mir::TerminatorKind::Call: <&u32 as Not>::not"
+
+[[fn]]
+path = "subtle::CtOption::and_then"
+kappa = "c2ade2e27da104dbbd3c31b9243bbef78ffbad63ec57eede63f09a755f1b3712"
+at = "Choice=u32, F=u32, T=u32, U=u32"
+embedded = "b35d9a44d613cb40f5ee63d527795020153792243aa9e487c51997ea87db4410"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::conditional_select"
+kappa = "34c47d1937f3c59209065d03168a92de4124580816e84ebfabfdd600af037319"
+at = "Choice=u32, T=u32"
+embedded = "fa71a1f31a75e49ae5fccb2b05746e706e0af985090ae6cc4cb8ce3deae1396e"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::ct_eq"
+kappa = "5f53af4436b942877ef12997f51f160d7f4b4c07568977ae4830ab4950a274eb"
+at = "Choice=u32, T=u32"
+embedded = "973f0385b01ce5d9c6623aad653f2a0b05484e17f323ac40d63dbc5157910056"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::expect"
+kappa = "f0e98ac847be54b1b4c216b6bc23ec9d5eb62afff7322dc923a34a1d3bb1d572"
+at = "Choice=u32, T=u32"
+embedded = "0a95343966942f14b108a2f39f906b950623b09464205958fb0f34b17106abda"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::into_option"
+kappa = "a1ac9fec04e5ab5fe73ab6bd4fa4e361650ad3c3aa132416baedafc9e861bc13"
+at = "T=u32"
+embedded = "66f0e22677e540d6532c17fd03305b6a9e91f58a27b6dc452487d434031bc885"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::is_none"
+kappa = "86873286b2bb850fd16d8390c48c3a103e0e24d3f941d6097844cb60d61d8c28"
+at = "Choice=u32"
+embedded = "a46e010b01be0e428d70f3792dbebcdb06f60ad443b6f1e62c469a38fbf97485"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "subtle::CtOption::is_some"
+kappa = "cb56ae35d2095cf700dff47a2a475069608270387e198aad860c7c131af002e8"
+at = "Choice=u32"
+embedded = "f82bcce6def01f5e404657b9450472ed5593b1177a56b8fb0cd8229b6e2d9342"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "subtle::CtOption::map"
+kappa = "93e73236e62819f95752526d90fa1b21574afb942644e7b5ffc06b72a1a98db1"
+at = "Choice=u32, F=u32, T=u32, U=u32"
+embedded = "2af4ef2caaa7199c617d9e2d559a9e82b24dd9df04bc15d4b490ee8dd5a6a84a"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::new"
+kappa = "0bdac0199d8cb469fc3845006add542cd570c09cb7bd0dd5faf6bd89cbb8c613"
+at = "Choice=u32, T=u32"
+embedded = "eb88997116b9d0779fd14c074a64f4ef0547b1967d0880c721d13d4e3c23ae34"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::or_else"
+kappa = "3ce331a16fb0b55f2403aac66444f01d646c93cc0be63115f5a02df96eb7b22f"
+at = "Choice=u32, F=u32, T=u32"
+embedded = "823e3513af6bc60d69e0309a844c17102dcbdc79d4dab1aa74ae4308b16d25eb"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::unwrap"
+kappa = "cd8ceb28b8cdd944a862045a6939dafbadfcd993968287156d8e5f80e6f0f73a"
+at = "Choice=u32, T=u32"
+embedded = "b20bc6458fea351aac43bd77e48eef5bf1ce0e32b95fbde88b90b5072cbc440b"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::unwrap_or"
+kappa = "bc21e404ff0602ba8fe1831771b53c6b17e3ce7a31b4f1a774bcbcc5520831d9"
+at = "Choice=u32, T=u32"
+embedded = "4aadcb0f934004dda805afa89ae7207b0aae3b3bf91c742cbc1ac102a70c7498"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::CtOption::unwrap_or_else"
+kappa = "193176dead9d118671b9f9324aa1f2c09ce529d73b404042eb89d31aeb62189d"
+at = "Choice=u32, F=u32, T=u32"
+embedded = "dde45dec2461be467c450b7763ed77523ca4c60ec80c654d9c04ae06228b1f95"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::Option::from"
+kappa = "2ea1760d6718021762a56560041a56b5d698e2431bd3bf01e17a30ca9cae9296"
+at = "Choice=u32, T=u32"
+embedded = "ba86b0ba4e0195c3fe500f83aa95f9b828403d2b1c453b285f3d278ff152ff1a"
+status = "residue"
+cause = "mir::Ty: CtOption<u32>"
+
+[[fn]]
+path = "subtle::Ordering::conditional_select"
+kappa = "383ba6dc99068fe44efab64ee7528c829d42cb90207d4ccf859cef5da1a40a95"
+at = "Choice=u32"
+embedded = "0b444360be6e9d628d03c0553130cc6770c1ec999d2b2f39d1efe47c9d07aa6e"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+
+[[fn]]
+path = "subtle::Ordering::ct_eq"
+kappa = "c373e84e3b4ca1f6908f10fa905c438463d185a7dbd1a78c6e82043d13ff463b"
+at = "Choice=u32"
+embedded = "faa99f3ec188e05821162771dfb06333ad7a508dc363c0ab518d1bc0d6afb24e"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+
+[[fn]]
+path = "subtle::Ordering::ct_gt"
+kappa = "69b5b5c9503134019e73c934695a21cb77dd84f6ba9113e3f24c059274eabba3"
+at = "Choice=u32"
+embedded = "3e3430f49d47376d04e52cc285795d2cf9187ee795f066ae8f72ba9cc2cb4232"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+
+[[fn]]
+path = "subtle::Ordering::ct_lt"
+kappa = "796aec97c73d8b0b5bda7a55d9abb560b9cddb8bd24339b4ad1fadb08082258e"
+at = "Choice=u32"
+embedded = "5771beef3dcff2e8052ab2582bda8ab9b926550c2d8995d9cf69a6b8e692be34"
+status = "residue"
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+
+[[fn]]
+path = "subtle::T::conditional_negate"
+kappa = "02cf7e447d0f4a21de8f0f6fde3744759fb99090c1f7cf345119fe5e7cdfbeac"
+at = "Choice=u32, T=u32"
+embedded = "6f3b4b6e216bdd5475ac48413511f3f4ae3a93fb077b7baf8bd9e6bca9b872d3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <&u32 as Neg>::neg"
+
+[[fn]]
+path = "subtle::black_box"
+kappa = "7022a644e3b2a2edd5ffa42cdd72303a11b615ff9cc100eea79df743679e0dae"
+at = "T=u32"
+embedded = "d91602f8c343674c6958385d158f4706891e1747df66fa7f829bbd8ca1fdbda0"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "subtle::bool::from"
+kappa = "6f987f8f544370ba00a1621e8b5a7097124a74a17c0dfdc41caf086cb8e0fe0b"
+embedded = "b2ea5ee88364f27d455684a5b0b97ee712473bdfb2c3e819445682ae5d66968f"
+status = "residue"
+cause = "mir::Ty: Choice"
+

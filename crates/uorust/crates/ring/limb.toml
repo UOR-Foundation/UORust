@@ -1,0 +1,169 @@
+[[fn]]
+path = "ring::big_endian_from_limbs"
+kappa = "43d9421ac17805da0262cf6ec1a6f182abb77b2a6ce2c0f604c378b959555728"
+embedded = "9f61763fee51e165141d4283d0b05af82d69756139a8d816cdd2c26ac3831791"
+status = "residue"
+cause = "mir::Ty: polyfill::array_flat_map::ArrayFlatMap<core::iter::Copied<core::iter::Rev<core::slice::Iter<'_, u64>>>, u8, fn(u64) -> [u8; core::::num::{impl#9}::to_be_bytes::{constant#0}] {core::num::<impl u64>::to_be_bytes}, 8>"
+
+[[fn]]
+path = "ring::fold_5_bit_windows"
+kappa = "8ff8b9046aad2fba7864299d5a7308f516f8eee1f989282c5bcd0369520c74d1"
+at = "F=u32, I=u32, R=u32"
+embedded = "c0fd7a79d991ca85b25374e84d1d9aa0c66ee56fb4ca7c61e9f1ea3fdbaddbff"
+status = "residue"
+cause = "mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::fold_5_bit_windows::<impl at src/limb.rs:266:14: 266:19>::clone"
+kappa = "b00bb8149a81be98b6a7830b1c5e9797aaeeacceb956cedfd46c468050f15585"
+embedded = "74153b4f9f4431035ba11ee72a00c4fca8dc30298d80342c5218b3c0725d289f"
+status = "residue"
+cause = "mir::Ty: limb::fold_5_bit_windows::BitIndex"
+
+[[fn]]
+path = "ring::fold_5_bit_windows::WINDOW_BITS"
+kappa = "c754750e3060dda7f6f26e0a820e588596636454048ebc85c64ccd957801e163"
+embedded = "def1a7008385b000d7c4e406acfcb435af57e86cb504ffc04ca64b85d1b0c623"
+status = "residue"
+cause = "mir::Ty: core::num::Wrapping<usize>"
+
+[[fn]]
+path = "ring::limb::<impl at src/limb.rs:168:10: 168:15>::clone"
+kappa = "3a32a648fdb586530e75863f0dd0bbfd14507b03fe90b3cc8bc43949b66c16d6"
+embedded = "6be87c288a2791afdaa332a04acd5234e73d4c826bd0ba0f9ab39048f481fb26"
+status = "residue"
+cause = "mir::Ty: limb::AllowZero"
+
+[[fn]]
+path = "ring::limb::<impl at src/limb.rs:168:23: 168:32>::eq"
+kappa = "c53730004225a4a0637a6400c784728154c053706af1b35af906535d48bdcff2"
+embedded = "e40c71cff93ae9b7b02897f5d49f91e7ed5df17b8517faca532c472676fca5cb"
+status = "residue"
+cause = "mir::Ty: limb::AllowZero"
+
+[[fn]]
+path = "ring::limb::LIMB_BITS"
+kappa = "08c22be453dfb8c4c1039644626d2f2199e9d112cca663f06b47c4e00b6520ab"
+embedded = "3395bf26ddcdf0703a9f8ce35d22feff5e8abf650c327f72f546f291b012061e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::limb::LIMB_BYTES"
+kappa = "c9f56054406a182aeb26f3a3a02178e5e1cfbcee3f6ec3fe29ad1067bb2f62c4"
+embedded = "92bb357b7d3870f231290cc94330d9c52531db69076f266d27d342b65c1fd605"
+status = "residue"
+cause = "mir::Operand::Constant: limb::LIMB_BITS: mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ring::limb::limbs_add_assign_mod"
+kappa = "4d52742617934e4a3265891f95937d49837b144153bca29716f0ac0fd78ebd16"
+embedded = "4a8195c3f713fd486ba6dc1178bf96a602c9747984dc5f5513d9154c5d9020d0"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::limb::limbs_are_zero"
+kappa = "c6a4a099e9dbe21585fa26fafb2c1e4b44dc9565f35d6f22a2fa9e23022e8537"
+embedded = "66f5647ff5289421930e4090b57950d26c2510b9c131014bb6d5729ad74df3ae"
+status = "residue"
+cause = "mir::Ty: bb::boolmask::BoolMask"
+
+[[fn]]
+path = "ring::limb::limbs_equal_limbs_consttime"
+kappa = "2eb2adb83664837a3393df89651fd4a79975bf1a5e30ae6b3dbee8468efcb994"
+embedded = "d62720974bea08e12943d5326dfddb0cf49048e0eefb10f83f71dceece522697"
+status = "residue"
+cause = "mir::Ty: bb::boolmask::BoolMask"
+
+[[fn]]
+path = "ring::limb::limbs_less_than_limbs_vartime"
+kappa = "766324947f8650012df48406426e80cf19d0363dc4f18c6d8a17fa124830bd56"
+embedded = "dae8d619cde46ccf3426b2f4779d1e66c8b7a49b54421b0a85db81b5c4bcab0f"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::limb::limbs_reduce_once"
+kappa = "ff9b9d8b4a24c2abe8cfbff5beccc51100a41401a944f47d82041e59fd24f814"
+embedded = "282e72187ea37647f56dff02085ed589d5f36f4eef7d79a4e06b6edbebc70bb4"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::limb::parse_big_endian_and_pad_consttime"
+kappa = "6efaaf8019c8c378c8db09776b65477633031f92a63625df93b696e66628dcca"
+embedded = "41bdc60e9cfc2f1449487b9ad0e105b2c56012510804d209f4512186927a985e"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::limb::parse_big_endian_in_range_and_pad_consttime"
+kappa = "0e0676adb63865a8a603a2e83fa02860260b4e9974d51c764dfaf47b24851236"
+embedded = "abaab8baf18b41f9a2e7775ac42f5173cd9eda14886b2c83016bf443c66106b4"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::limb_is_zero"
+kappa = "993517896789e5882a1d0f427aed05bff5470c259196f9bf3c80a486d7a89117"
+embedded = "7d67bb6a33fff1ab5c1f2a84976b0d0cb9bc935b03e5a030412f5ef09d05ccd6"
+status = "residue"
+cause = "mir::Ty: bb::boolmask::BoolMask"
+
+[[fn]]
+path = "ring::limbs_double_mod"
+kappa = "1ac2c976e80873edb797d345ebb1db8a13262ac71ba6e3582beaf2d9ec701019"
+embedded = "d7900129d224cfc2f1c12006ffabd86b12b6f93b637800d73fc7f239acaced11"
+status = "residue"
+cause = "mir::Ty: error::len_mismatch_error::LenMismatchError"
+
+[[fn]]
+path = "ring::limbs_less_than_limbs"
+kappa = "7d75e5fc12842e656cd8d9735679fdb4ad2f2c8ba2c5fb54ff3dea0c298a1c6e"
+embedded = "268763f0493b8871cae704be3f7df408a5b32696a02dda9a94beccb1c36e0f11"
+status = "residue"
+cause = "mir::Ty: bb::boolmask::BoolMask"
+
+[[fn]]
+path = "ring::limbs_minimal_bits"
+kappa = "c82b1addb48921f8601754ecdb3a6d56a7e87f214300f90b1078d3cbea64b6f7"
+embedded = "4024d588448b734161c245c5f5c47de3023117bc67d749a131406752ac14bbf3"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::limbs_negative_odd"
+kappa = "70d8badebd6450a1afaf1b5fb4b8ede9458b947ff662bdaf9457585c06b2be04"
+embedded = "b2242983708a8fe8cc4a7d0a3cc1a151e1c393de37512a1939b14393b8c4a9a6"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u64>"
+
+[[fn]]
+path = "ring::limbs_reject_even_leak_bit"
+kappa = "7f30d115fc90cc8e1a9b0b1583367736b5720a7a0a7a806aa9fa7e3552435e06"
+embedded = "3f8d07954b2e1b8a01bf00e450f974d7e4e71228657cff59b1c5c11145d75a0b"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::unstripped_be_bytes"
+kappa = "ccf6cc157528e0bd3fb3c3d524361259088f664cf10a02b8ac70b50a160a5556"
+embedded = "1d927e701400b25ad315a541951f8b710979371c748ffccdd6704d7f40c9a39d"
+status = "residue"
+cause = "mir::Ty: polyfill::array_flat_map::ArrayFlatMap<core::iter::Copied<core::iter::Rev<core::slice::Iter<'_, u64>>>, u8, fn(u64) -> [u8; core::::num::{impl#9}::to_be_bytes::{constant#0}] {core::num::<impl u64>::to_be_bytes}, 8>"
+
+[[fn]]
+path = "ring::verify_limbs_equal_1_leak_bit"
+kappa = "ece77f6927a75befbd6cd39c9e090df96f2800ae018636f158abcfd47f3e6150"
+embedded = "b28058521b67f32879c7295cb25cafa8bfd3d9a08cd3bfdf86003a0d459cb5aa"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+
+[[fn]]
+path = "ring::verify_limbs_less_than_limbs_leak_bit"
+kappa = "908b939d5f4b2fcc9ed364cc826d21018ecbe0017239b92b4f622d9e389f5359"
+embedded = "d984160565a26024766f26fec8ef421f10b3ee4f6d860794029c881fc77a38f2"
+status = "residue"
+cause = "mir::Ty: error::unspecified::Unspecified"
+

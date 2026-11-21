@@ -1,0 +1,102 @@
+# The vcpkg register (written by `uorust crate vcpkg@0.2.15`; do not edit): every body of
+# vcpkg's MIR at vcpkg 0.2.15, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 43
+translated = 0
+residue = 43
+
+[module.crate]
+bodies = 43
+translated = 0
+residue = 43
+
+[embedding]
+bodies = 43
+embedded = 43
+evaluable = 43
+blocked = 0
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Config"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Config::new: vcpkg's MIR stops at mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VcpkgTarget"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <bool as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::slice::Iter as Iterator>::position"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Config::get_target_triplet: vcpkg's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PcFiles"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TargetTriplet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1

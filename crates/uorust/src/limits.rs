@@ -59,7 +59,7 @@ pub struct Limits {
 /// The scaffold is a fixed asset that a test reads whole, so a table it
 /// lacks is a defect of the asset, not of an input.
 fn scaffold(text: &str) -> Vec<(String, u64)> {
-    let value: toml::Value = text.parse().unwrap_or(toml::Value::Boolean(false));
+    let value: toml::Value = toml::from_str(text).unwrap_or(toml::Value::Boolean(false));
     let mut keys: Vec<(usize, String, u64)> = value
         .get("limits")
         .and_then(toml::Value::as_table)
@@ -104,7 +104,7 @@ impl Limits {
         // reading it lossily would take a file no TOML reader takes.
         let text = std::str::from_utf8(&bytes)
             .map_err(|e| refused(format!("the file is not UTF-8, as TOML requires: {e}")))?;
-        let value: toml::Value = text.parse().map_err(|e| refused(format!("{e}")))?;
+        let value: toml::Value = toml::from_str(text).map_err(|e| refused(format!("{e}")))?;
         let sdk = Self::sdk();
         let lexlean = table(&value, "lexlean", &sdk.lexlean, path)?;
         let prismpm = table(&value, "prismpm", &sdk.prismpm, path)?;

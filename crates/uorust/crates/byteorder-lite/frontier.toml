@@ -1,0 +1,271 @@
+# The byteorder-lite register (written by `uorust crate byteorder-lite@0.1.0`; do not edit): every body of
+# byteorder-lite's MIR at byteorder-lite 0.1.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 213
+translated = 14
+residue = 199
+
+[module.crate]
+bodies = 173
+translated = 14
+residue = 159
+
+[module.io]
+bodies = 40
+translated = 0
+residue = 40
+
+[embedding]
+bodies = 213
+embedded = 213
+evaluable = 213
+blocked = 0
+
+[differential]
+bodies = 6
+theorems = 22
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 40
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: BigEndian"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: LittleEndian"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::read_uint"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::write_uint"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::read_int"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::write_int"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: pack_size128: byteorder-lite's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: pack_size: byteorder-lite's MIR stops at mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::read_i128_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::read_i16_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::read_i32_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::read_i64_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::read_u128_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::read_u16_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::read_u32_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::read_u64_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::write_i128_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::write_i16_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::write_i32_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::write_i64_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::write_u128_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::write_u16_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::write_u32_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <BigEndian as ByteOrder>::write_u64_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::read_i128_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::read_i16_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::read_i32_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::read_i64_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::read_u128_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::read_u16_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::read_u32_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::read_u64_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::write_i128_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::write_i16_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::write_i32_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::write_i64_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::write_u128_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::write_u16_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::write_u32_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <LittleEndian as ByteOrder>::write_u64_into::SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::read_u128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::read_u16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::read_u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::read_u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::read_uint128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::write_u128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::write_u16"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::write_u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::write_u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as ByteOrder>::write_uint128"
+bodies = 1

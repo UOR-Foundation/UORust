@@ -1,0 +1,3231 @@
+[[fn]]
+path = "portable-atomic::L"
+kappa = "04f53b2318ceb720d013704e3fc2a8919ddde4a5f4c9440ec171835a32e08e25"
+embedded = "57a3eb5b68c938be347462cf73bd6bdbc682bd85ce27565bebe20bee86ab9b6b"
+status = "residue"
+cause = "mir::Ty: imp::fallback::seq_lock::SeqLock"
+
+[[fn]]
+path = "portable-atomic::_atomic_load_vmovdqa"
+kappa = "23c50b90c2565cbd0370a8f924f9de2f436eb6bbf263a762c775c30c51e40dee"
+embedded = "1aedddf7d340f7b844bc3c8dc9fc95fd359dcab7805f83f62be6860c85eca1a4"
+status = "residue"
+cause = "mir::TerminatorKind::InlineAsm"
+
+[[fn]]
+path = "portable-atomic::_atomic_store_cmpxchg16b"
+kappa = "1e001384369bc93157a1b9f7b19b0c90b4c3f340a4fa2dce73d54ca6d5a123ab"
+embedded = "a9390c6eef5d61887e0fa285a2106cdeb62175f9c89c1ad67575a17b63e1c43c"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::_atomic_store_vmovdqa_non_seqcst"
+kappa = "3257e8fb40e337c384d1fbb9d49c45cab9b45070938b3d5600e9a67d5ed61465"
+embedded = "386a33e55b040059c998b0fe9e3463ec3542d5a0feedb5754f37c9e66a9e79dd"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Release"
+
+[[fn]]
+path = "portable-atomic::_atomic_store_vmovdqa_seqcst"
+kappa = "e4cf4b6b233444b6811cd60a2f87dbc0f895679000df61f6fac00035077ffa1b"
+embedded = "e6fabafba63aefe30fadedb060ee54e23a9739d1d31b897b0b8f64587966785c"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::_detect"
+kappa = "6c58cda8c032fad49d89a555df4884e5c4f09dd190c04c7fbfb14a89606d95eb"
+embedded = "7cfa28b0dda0eafde18d90f10c4d3ea7e226a13d4e2fee736e475f96ae30ecad"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::as_ptr"
+kappa = "858d21a77bc3043832613c7f85926aab40f6ed635002980d7c28c3a2fe5498ca"
+embedded = "4250cc4f3563f6792fba8a632834654c3c23f0a3c65919b675db8df47977618e"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::as_ptr#2"
+kappa = "8b594e14c08cd203557a4d890e9d4103b9c3193da89c77059c69f8400d1b4728"
+embedded = "00e2aad8a7475e14fadbbea53d9e455bc79258de86b6611f7b6780ae199c824d"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::compare_exchange"
+kappa = "025df5d2d8b66754714ca936d265615f6ad9a96292f19e21221d253569a6a187"
+embedded = "0b4602e931d623e5772f25f4cbafb6fefb17d19adf96b55600bb5ad90a75cf0f"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::compare_exchange#2"
+kappa = "53b23d2638be8252df9d9145040793c81d863b777466388a0ca18b5fe7b0d947"
+embedded = "8e798096605fbb49004fc19a2eee0f7c903f9eae1d5f62876297414a89925e48"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::compare_exchange_weak"
+kappa = "f192c78f338c530ab4c1760267ebce387a3b10bb78dcf351087a6a471ee72337"
+embedded = "d642a68e5d495b7dd18e6aa1738ed09910d0be925ce903f51d4508f48ed18c4e"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::compare_exchange_weak#2"
+kappa = "2d5b63f3dbd4fe81335f0b8fea1efc6046e274c39d17ad7984dd6a2ed7e797e5"
+embedded = "7608f00e969a7692d5388c033e20c297d1695c605fb4a7996a1a0f3e5f81ebde"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_add"
+kappa = "ca8ed52c2fb71c58700975458d0922056190585631f7b086ea02e9870d8e3071"
+embedded = "248c34126547d01ebca049bf2bbc5fc55e4af7794b09e5e6d7aa6537e3d80895"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_add#2"
+kappa = "b11a33035d762f2ced77e599e8de694347f781884842994c797c2debdc52a9df"
+embedded = "b373139037e86021795ccaf5bcbc9daa3ee21ac5e41a77b5afe76555fbafea76"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_and"
+kappa = "b521f6144577f2a8b77ada4a1083bee22e97380b239b34bbeea527d95b4da459"
+embedded = "d8bb0071b62046009cee6a440b2f51f7841d72037d560fd3b89f0cdff4246a4c"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_and#2"
+kappa = "e351152d7ca596cda79dfd32df2852df6ef73445f5a6f9a88183f8bd9057f230"
+embedded = "6344d362ace085dede6e9e565e939d01914ce36a49910aad22163c6fda156f1f"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_max"
+kappa = "4baab426ca4e13ac784e2a2e620ecc757b5c04fd38b0177cdd3ac765824bc7d5"
+embedded = "fd3d981eff1af6e7f8224339095b4b94c035f0c4443be5708b80fce63c035404"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_max#2"
+kappa = "4a2a7de9ab41ce03fe99cb894bbfd3ea8a14a1f69c8817e1eb79420eb26de28c"
+embedded = "211516ef2d537fd33b554a55144727f8039c73a8b603af86abf6216b3c640ae6"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_min"
+kappa = "9bf3bab40c7e6a898e2e9fdf3f984c507c827e9d5c1c5a1d0d36854fd77c642a"
+embedded = "89682ecb658d103143aabc44506c319bc377a1dd262e2cd628269c0d30895f77"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_min#2"
+kappa = "afe28e6f50a21ebcc13af623a5fef04d179a9115f392255b451ae0e56a85a355"
+embedded = "52c1e391b1eec0e058d14e38e028dec56e4a42147c31cabb4440e597bae1bc10"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_nand"
+kappa = "a050b31e80974189c0cf8ff11310b64a05eb78e632638bf24a2010d17833c094"
+embedded = "998fd96c26e3b0179b48b37ad5b240e33ee617cf11e1a5cac49e7794ef1bb87e"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_nand#2"
+kappa = "55db1cab45971ffd3e986c3df6843fd9b6c174de76cff64755ab3c5d2bf44b01"
+embedded = "365f22d2d37f7b22d00b4de68cacc93994abda71d7bb145ad2402c6b9b2711fe"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_neg"
+kappa = "7ea0ba5017e1b8ccdecfde35ce34ce776b963dfc166caf8e6adcb5993320c89d"
+embedded = "4751ded5259e3802f7cbfd132c14a1fec688582ee349132437212508e2f6cbe7"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_neg#2"
+kappa = "5d3ccc829175eee6f7c046c32dce9a00aa4d2a13af3ae86eb4e95a0b27a6ed86"
+embedded = "aff5ff0cd6c8e78fa1ea46e2bd8953139c6bc31b074b09bf79e4d5d2896d0bdc"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_not"
+kappa = "ba0439b15658a3a4461fbe2c364148aebdc2efb19fd30228d1cbc7aa3979b279"
+embedded = "4509e3eca9737540e9c864c6f0e5aadf6697809e6c1d81fbb33dcc378721d171"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_not#2"
+kappa = "c85eb5cf87d7fddc0653995f6689ec69033460b4512ac2df9051170b257bd436"
+embedded = "fda71a7a0f98fbeb522e9d1ecbdc6a6a673d75ec6c21e5632cd948a6ae002261"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_or"
+kappa = "2a48378c1997183481feed7d335375b441c693ca2a6b1128813e95a1e5ca469c"
+embedded = "034d7f2ab3b139009954ee2b80f5c1dad713ffc8e78e352dc305ff9b1ea2d0a0"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_or#2"
+kappa = "9686da0437ddf2b0ec7d420e4e407f41c34eeaace97e25db6f1ee7edd053825f"
+embedded = "90cfbda22c9271738b8458345bcc14a4023b01dd3832e54d9b7cfd96a27e9e40"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_sub"
+kappa = "36c8daf7b21f729b2f5293cad7d3fb354dcbf4300ddbad2d1360b34aff87199c"
+embedded = "54aef7b18cee1902e8382297cd4efc80ca608cff97d8e1c8115b7a30d9d5fa4a"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_sub#2"
+kappa = "162fcca89ca17b830efda8cedb3f9732c85383cdc55915fe39c223d0794ed9d1"
+embedded = "88d54088f4cfe4cc12227546344841aa2e22781c802bdda5b25a3da14dfd4b7a"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_xor"
+kappa = "03bd8dbadefe15a99b3d32a97b30b4de8bac5d41a89a5fa5237a9eb0f0ac267a"
+embedded = "932ff85515e0470dd5630e22dc17cf4f0d0f7e37fc96bb088d3b9f9b37380843"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::fetch_xor#2"
+kappa = "5665a2dd30fe75ff033c28457d20b0ba85924e04b481694f5bc0a88693929a9b"
+embedded = "8e8a1cd58f30362728ff931f934a66ed6603dd774f6c18a9b7ce2e5030e621b7"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::is_lock_free"
+kappa = "f45c6bc91d4340a2b84a2ccbb70fe7da4ca971d89bae97ecb31d63afc3e7cc7b"
+embedded = "6f7967beb13071f14c49c5b48b469c6a1bdf1e4aa887ed81c19195dcd1b22074"
+status = "residue"
+cause = "mir::TerminatorKind::Call: is_lock_free"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::is_lock_free#2"
+kappa = "f45c6bc91d4340a2b84a2ccbb70fe7da4ca971d89bae97ecb31d63afc3e7cc7b"
+embedded = "6f7967beb13071f14c49c5b48b469c6a1bdf1e4aa887ed81c19195dcd1b22074"
+status = "residue"
+cause = "mir::TerminatorKind::Call: is_lock_free"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::load"
+kappa = "61c32cfa5e38a7ef2f8b0bb33b452b2e0d8f76b785360e4dda601be20c9f0d73"
+embedded = "0c935e1d0d45db76332d5080b24a2c62db320c39ee32068d67e806a84bb712a5"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::load#2"
+kappa = "c03fd25dae5a79c7f51ebcd3786843bad9a05df704258de45b22399581b33209"
+embedded = "ce67e9d357ac058d1ea23e6f695888de11799c4c74a32181840f6a3ba9dda9f3"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::neg"
+kappa = "1ab9ffee2fc4b0aa460853a182d5fbbaf7f4785465d130e911d56785a72b6406"
+embedded = "846b6104d577409ff263d6c38a466558ac3a2f326bc3fd6f93bcf628c4ad507e"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::neg#2"
+kappa = "b8da5440406056b2cfdccbd8224ee93ec3939bc4381e47fcf90f3a0eb7749356"
+embedded = "0653af729fec365caaefe24879dc42de899cdde3d9d9ddbe0f95bad14ef44745"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::new"
+kappa = "c4f5b2d09f020ca3169ebb98387bb31a07c384dbfa7a425bb158846df50a54b5"
+embedded = "a2144598df25ba60737cf1e176891181a84ee01f1ba30d8c00259c34c6ca7625"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::new#2"
+kappa = "d4fc8a3cb4409f118ad528d1ad5a90ee9b7fb7d2576de974ba184f95ccc4b631"
+embedded = "788a872fa803571cd8c06cdba6a614f4394c63e8f74e43331e5d7a76f4b848ef"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::not"
+kappa = "3592eeeec320241e44bf0213255ed5b12427cebc2f1b8b76e14975729cebce43"
+embedded = "816ebe22e74469e2015bc6f6200fafbbe3007a88d2e98349ddec720af7d39c2c"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::not#2"
+kappa = "fc251cb23d0fec2dd5c78d515b3a98fd1296d86a58781988b1cc227647fda911"
+embedded = "892e893a295733bdfcc183574279aaad70b4559381ef380e4daf0052e308e16e"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::store"
+kappa = "034bf43d611c36b695a38b934ef6323626fb511bb27fa4145a4700c46cbf34a8"
+embedded = "e6c8126e9acbbad3c71dd63abfec9e0d0ecf3be4e4488340fb5c5b299ae96771"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::store#2"
+kappa = "97d8dd894c7f7862416f28abc3f0f7d77033e608bd36896e99e3de4c6b45063e"
+embedded = "8236a875c5c1c930b8402fbee61fabcedf464972040dd652b2b677afc0d9d52a"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::swap"
+kappa = "427f9fa620a9860f22e67ac1cb2e8b26960eacdbcabc7745cb3c3cd2a2c482e3"
+embedded = "a3c3aec8d7a982b2db3d39a580bc2bfe168a83c9b10806789f7f585a8174d897"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/imp/atomic128/macros.rs:16:9: 16:26>::swap#2"
+kappa = "910a757aea028d645f0da6edcfcd5bd2d66ac9aa798f5532c1641122194bd135"
+embedded = "89c6fe64a6254c0d3a6850971c4d04adf735b0ed66dfba1e5db7a275aa4d5207"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::add"
+kappa = "2da04a6166f843b119773b4012983500d35065fa55b6a48da8ba5a3407456894"
+embedded = "8a8222d5f4998dcc97abc962973ccb0176af1d5433cad6b4f83526828c6398ad"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::add#2"
+kappa = "ec7fec442dd5df74b87c2290476f9b20667b85f0f4cb2113c951f0a1202556c6"
+embedded = "f635ea46a576199af938880f8d831e1c05f0a119535322ab616200e85c645c01"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::and"
+kappa = "845762e4ded8d4cb09fb5d69172af2585f2503a1f0c8775e989b35a5f0b8020e"
+embedded = "c99ee87c5257872f3f240a507705be9390472431db247cd4e528434b422a09f9"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::and#2"
+kappa = "f9bf899b1e0e376c3dccce158734e7ea77dfe661c25b528e8de25179ef96d744"
+embedded = "0d1f4c77dd404a6ef395bbc9f6da1cadc3cfacac639a14b2f9a523486208001c"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::or"
+kappa = "54d732d58275aaef42274da98a259946bfd884e2d9c2954c5fbcd1cf75469391"
+embedded = "14d86da00c4a24d38812b98ba6d95d8ad6cec7d6c57eaeb43f60dc25949c946f"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::or#2"
+kappa = "90856a678d9436a381b18bff4e0df837e94397381b414b77039c72ef5038317e"
+embedded = "4da95e33093e2ddf92fc1cd009ca21f85a1fd8db1796ea195529475f821b6f1e"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::sub"
+kappa = "5bba36e05a26821c1a9be610b812e541f6da270287f7619520d80f34973c32bd"
+embedded = "0a98714bd707fde04a66b166206a08f0547ad205db11487e168e953e950809dd"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::sub#2"
+kappa = "3c7d085d1684d691f14a6e8caec492ef675475d3cd4081a027da2656fa1fafd4"
+embedded = "e4c854889bf645107a0a09ca13545c772a2d2649210acc3ec30f7fac7ef05f50"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::xor"
+kappa = "489f9643560654919ab3ac53c213e09866b8a5cc78b3dd96b1fbcaca61d0dd3c"
+embedded = "ab5999ff8c5277262bf9dfec8969890dba1497fc1ec1b8bd69e6e63af34bd068"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:220:9: 220:26>::xor#2"
+kappa = "e232d6efdc681b52c57260e03489a53565500a6e036afa930fa99c6c0c9458b2"
+embedded = "d6a35eec646c410167efde950d497ae3579755e3c09c5ac959b46c08ef329706"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:279:9: 279:26>::bit_clear"
+kappa = "336b0b6543be760a5ec911d5309a1c1cacdd9bc880cbf598de6ebd07ea70dcc4"
+embedded = "4e9288fa04ae1ee75b1b3c7f083e1ef0eb85e066fa70b6f4b3e943798e5137ea"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:279:9: 279:26>::bit_clear#2"
+kappa = "7b270677fe16dcfb952525bc689d1ef80b39b53e2afdbb7e1cfc668f3038ba49"
+embedded = "4a78b485d1eb8ae08b76dd871294772582ea8d408121ffd9adef53a928062cae"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:279:9: 279:26>::bit_set"
+kappa = "12eaa8d32da86bf8ccae5f496b20db5121920fa0a85f24f16d761e971d123615"
+embedded = "f813d8a2a720b306f85e176ba762b2942f0a8376df19416e75e5d1a1bfc9a293"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:279:9: 279:26>::bit_set#2"
+kappa = "76a71253d4e270c9702690dddf13d84b43ce91cb16c7641a8368af2f20da8b5d"
+embedded = "449f7f770566cc30b62eea02f101667595d7ccaa6ad2665dbe1769c03ee0aea8"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:279:9: 279:26>::bit_toggle"
+kappa = "f07f3ea07be260e34b5ba9c7c26e1073fe9e42a6c32494fa1ca1208c124aa0f6"
+embedded = "f97e3d8769edc230d21bb30dbf63fe401d497a0d5b316813923fbcd05f51a15c"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#2"
+kappa = "e8fe798f202a78c2276921a3e2d277c26143094c2293e36b0d69183a42710b5a"
+embedded = "fcc3493955637139514b30df030790bd7ddd179218e46001aceb303ed0047116"
+status = "residue"
+cause = "mir::Ty: atomic128::x86_64::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_add"
+kappa = "e7dbc57d1c70704e15e3de078d4afb66a2f260e815b7a6f2a501261f2655ad9d"
+embedded = "474ebefeab461f8ec2281af2457fc8e8e97c7d475fc2bfd02d8fac7445ed8b49"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc32: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_add::cmpxchg16b_seqcst_fn"
+kappa = "eca0ef7c63327c252bc3b35d8d59e4c9807553e47a0cde7eefabb5c20641db9c"
+embedded = "43c13e8f2a609cb1d1858fb423be58086ad6ead6112443eaee92745891f7936b"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_add::init"
+kappa = "8b66084ba7fa0b9b73f931c7698cdd1ff5ddcfaaf397ae2ddc6d7a80cefb2f94"
+embedded = "f5364503034de518011cdc4d2f303a9dedee916e6053847bd16c4adacf6e5ea2"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_and"
+kappa = "83c3878c4874817593631b733fbb24e30c5c175221d7718635195a2a66f04426"
+embedded = "663451733e2d16c2d719ab5b55f04bf447474bca79b8492128b346f5fdeda53f"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc40: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_and::cmpxchg16b_seqcst_fn"
+kappa = "9626cf04172f3542d1fb8d1008892afa7b924dfd633f43992c24aa3804065e3d"
+embedded = "2e298874e42ae6a105b073dae02e2161791f5b47795135b74432b09dd4e510ef"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_and::init"
+kappa = "dd7d469f075494fd7daf661542b68444173c26bd0becff9b02063bc747cce44f"
+embedded = "281204b58ab5109aa48d4fbc368802d0558c92d3fc50c9ed08365a357771ae35"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_compare_exchange"
+kappa = "e3d11acd107ba140121ebe6d12ec2f22da333e2e6cabb8fed61937aa6c43f4c8"
+embedded = "3bc2f684ca538ed3e378f5de8026aff3607badbc420e58d006417b97fc7b9e12"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc24: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_compare_exchange::init"
+kappa = "d9b6d311971daaa5eacd92fe044f47903927cd2dba6d2f7a9749d3d1fab26b61"
+embedded = "bdc83ece57a27dbb835c2d40f4a15dd4915c93c791c43d1e5c4b0cfd81823ff5"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_load"
+kappa = "6deb0c4bad34e10221c719aa4b3d3597edaef238c7d60eff88e09e6d041b13c4"
+embedded = "230b4e25056568e32918906feb65d87b71e36b171d1c22353c20bf7ec0755d39"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc12: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_load::init"
+kappa = "4c8baadd03dd7744b922f127adb6dc571ab611c1d14a9df92cf8fa57f801c9f6"
+embedded = "0c491e02e1183e79019710da4408fe5653de2c94d1e92cda6b120f1626d4cbef"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_max"
+kappa = "b4176e698333b1ca61da0d61f082f958b012d95906ab4161cb83f1774031e6c7"
+embedded = "8a186f9559b46b6707199530ab304b3f4f24ecf3eb316e83edfdc7598efc2401"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc56: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_max::cmpxchg16b_seqcst_fn"
+kappa = "b7039866aa1f9dd5c19eb40f214c168b08f77f6df1ce720fc558088990948ba0"
+embedded = "edf7cbc4b8b2c0ec7aee5ec60396d042fe57ec1b8fdb917028ac2f7b6bde9db8"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_max::init"
+kappa = "91afab4695a6e2a719b23bfec225598cbd89b8083b11f26afcc16c45bac25d47"
+embedded = "2b218d0e179c6c188a1f8a0ee2972225f4cc285fac49d1e117b62242a09d39cb"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_min"
+kappa = "18a19049ea78e533b71b6883cd91f5a5e69506f5b69c957197b9b350ee30de76"
+embedded = "e90b21a1d639b8e3c805072f93d800f9b9111aae9109dfac4ad12b1c905e3cbf"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc64: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_min::cmpxchg16b_seqcst_fn"
+kappa = "379be5608b3dedf0aed43195ce407ee95ac68ade8a14276369c0efd1d5fe1e0c"
+embedded = "9fb30235be5f9dc3f9ce33fb1ae08fa9ff62754edbd871e58137866f578833e0"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_min::init"
+kappa = "31a5839585c27ed9bd434de8450f43d8ee712cc43868503525cf9529473f469a"
+embedded = "618457bb2e54600b1e829ce9db1f8f6674fffb332b19e332a4d9b3050abf8ffb"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_nand"
+kappa = "0d8b9d627bf87efbb48e43cfca3bada83b3e6c98947c9e2a41f2fc8acf0c1837"
+embedded = "2d38e3c4b6800a0a9be6359791ebd5fa3b3ceb1d9c535e4b7706bb6517c56f98"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc44: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_nand::cmpxchg16b_seqcst_fn"
+kappa = "776b2e6f0e6942c74ff258605e3b44b548146d9f4c3c9bc9b3a2fd8ce566536f"
+embedded = "94b861f6d51ba06bc7bc92e0f764c3752d30e5c9277f00f4b0794a7d231914cc"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_nand::init"
+kappa = "53bd2a8e8d98d90a65f1d90bff7e3c69e66adff1176d06e5e8a2741871851261"
+embedded = "1387937a90c78d8305daba8fe808b6e525246f65692838654782335aefde944a"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_neg"
+kappa = "7e420df38b7c0c38327e3c1e56ca0c9cbe6b1cbdf09b8b952a9a1c275386f14d"
+embedded = "b1d1ab5680626d85507cb6b2dc89ed6ef03cb2cca982082c772119567d6bd701"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc76: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_neg::cmpxchg16b_seqcst_fn"
+kappa = "20220d96ea314488d7e736087f46e3a9af6ffe922b928e3cfe21fdef2cd2ec01"
+embedded = "ddcc30e665d6a60add92cfa0af37ef477627c0515ff02a4a9c7c1c15f0066c93"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_neg::init"
+kappa = "890a97c0166b0c8c61d09b3179c1ed1bb76262d7ac1c6cc2a55e71a442a15e47"
+embedded = "9a534efb066ec324e6a2079b6099a66b745796de1cbdf481431b40906fc5772c"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_not"
+kappa = "f46be55bc5675c4c78fb7b97505b2973eb2aaef792eab7f38de35d432b640005"
+embedded = "f8cb18f3cd8d1891ec572b89169be1a27415fc1aa82245c9790ee63d7feff9da"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc72: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_not::cmpxchg16b_seqcst_fn"
+kappa = "5ec4cd1c1c4d6f8bcdebdcfd12f1241a0fe21b2f0918d08c37b3700fd5a8484f"
+embedded = "a2f718cd73d42ca1996b8285057dea983d950bf8b0efd8224f263f6998841c54"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_not::init"
+kappa = "8fd19db4e3c214b350a818fda91c32c03e9d86ddda68fc9f8a0549f9b7334f11"
+embedded = "9e0635a99767f12603a5c770b88d361fdf281f6c37409c18450dd7bdea42b20e"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_or"
+kappa = "be884c8f9babf911dfee75b972c00c9e203b152bf768b60e143aebefe1b8b834"
+embedded = "d45321bf68bf8f9ab826b5bd52cef8df7fad151e01419f2bd93c12cd769c7b7f"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc48: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_or::cmpxchg16b_seqcst_fn"
+kappa = "5a79271633918568df6429976f916a2b30f166cef901c176926b2f4ba3d3062f"
+embedded = "35baac97eac922c8f64a3164c7ee0f278938f26e539f1304dd33186059181e1f"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_or::init"
+kappa = "8ad6f2bdf762f471e33574ac7d589733354432012fe1fb5120c438ea248a9233"
+embedded = "095346d76935366a8c33766d56a0ea9a8cd875330900fa664f9905797015518b"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_store"
+kappa = "6b96ff9188a4947faaecbfdb65a2e66ed76d531244bfa768886d87af8087b250"
+embedded = "e34e64e3ac0ac22627a3c7713827b447b70d591f5d745622d5064920dd0a42cb"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Operand::Constant: {alloc16: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_store::init"
+kappa = "ec6eef28f819e994c74c6b33b585da606171539189ca942c6a8119729f0e281b"
+embedded = "bb191deee2be66be65e6a16101b81a119edc661dd1d7a324eb3ef8ad932f4a46"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_store::init#2"
+kappa = "a8dc71cf76e4341a270a47da3fa91427114ce3c4331e4724729edc79d54f56c7"
+embedded = "14e220dd180f7b4b543f6683d39e6f12bb432f4097671a39b13d50df06e00b39"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_sub"
+kappa = "3211818c1b4c757d4b0cc6d822a46fba3be17b6b640547b79ba4a368511e5235"
+embedded = "3a909f86d3ecc3b896145ef611aa19480feb8de6c4a29070d735de83e6e2458a"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc36: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_sub::cmpxchg16b_seqcst_fn"
+kappa = "73805252f64529d034f70b3c725d55754b107a1789427496d390a26e89a28147"
+embedded = "e2471d3ab09d77f70d2fd2a5c8e8d90ba11dfd27a6d8b7baca3bf3d8167c9f98"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_sub::init"
+kappa = "4a4d7dc7de052738b12cc8ca61dd0628f3ba69340df60e199dc20a418a68696c"
+embedded = "6a6bd5661d2fd5a2e1b4c6917ab3416356b79b0cd8d9bc6621318e103c67bbc3"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_swap"
+kappa = "66ef04b3b651797f3f7a96589cf13371cbf895b162bc07ea97a064b953278124"
+embedded = "b6f609638d0c0d1147cad6c141d96ec27d30a3638e7cdb8fe8294000b9f44d5e"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc28: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_swap::cmpxchg16b_seqcst_fn"
+kappa = "016906d56070c636c5ff5f6ecd6b30d864d2ef7cdfb51732b0f742cc94b3bbfa"
+embedded = "d20e610f6195a6ed733e89d4d84487df694ac30daf5dbc95f006dc7e826cbbbb"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_swap::init"
+kappa = "d817b66cbdbf2e6a8a55e6df48a0252f1f764e3924512c9fa0a0224267d096aa"
+embedded = "f3f076002aeb8986e10bef2eb7d79ac70572564c60058a76fd6e1bde85551a1c"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_umax"
+kappa = "4d81552dbd476cd5f0df67f652c989c3165d1b1a0e2c10858022d1a495c77b05"
+embedded = "dfd8a0a57a560f2f5ad0ad013b68bb67992208f3cb9fb8d35bdc0e6567235c2c"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc60: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_umax::cmpxchg16b_seqcst_fn"
+kappa = "d4eec346bbfb1093f0fc3d9aa4246714944db223f8829de6039210fb4310000a"
+embedded = "c0d1e31e5a8fc688a42e7ec0220582a50fb24c320e5fb216f4ba6ab0f2670159"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_umax::init"
+kappa = "efe5642d2e685392ae87ca29b4509a6773dd3c166541cb7fb93ccf68e40701a2"
+embedded = "a0259b444b3366aaaf178acdc2367f4e61c2ae6e9cde02dfc7c3f2be732cfff9"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_umin"
+kappa = "6c7c6ac0c2c39a3bbe1790e332c96a5e95582a656c9a920ebb4c067868191e3e"
+embedded = "39e7bc2634fdce7f292fb7e90fc875e14539292c88c504e96b8ede8fe8bc1939"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc68: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_umin::cmpxchg16b_seqcst_fn"
+kappa = "428b645c4ecd816676e7eba2ef4ef0c73a11071cc68c579c914011bae0720e0e"
+embedded = "989bf223b452bc1d5379d65b4ab561d44926c6f4b6b72a87b5f9a18970514074"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_umin::init"
+kappa = "35d07e09f7ab5221a6430d0752b3f17350154328cdf2ed7f2541861a1fa0a3e3"
+embedded = "5c7be0c05e87f176d502777453cee234b0e4bab5e0884e55e53c30749eaf1943"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_xor"
+kappa = "b12e9df91003c133d25186f12fda64356514b3d936fc559f9406f4412865ff8d"
+embedded = "b1c877f91ade54462c864d0f0bfd4efa6185fcabc302ecb59aa874e392c47865"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc52: &Atomic<*mut ()>}"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_xor::cmpxchg16b_seqcst_fn"
+kappa = "714fdb6e4c64a1fcb77e3db9bf60bb189decdf446adae2a724074358a60a255c"
+embedded = "27eabd18f5d0658fc49ffa39ba856cc657597e4e06d84f33f1e843448434d840"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::atomic_xor::init"
+kappa = "81b7d30bc05d7eb3b40fa0c378ac6c993dbdbdd41a4c2165fbd748a95505c119"
+embedded = "5a5664979b6669bdbff256a738eda843a38bb8385b171d7dd0e65b075fe2b1d0"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_add"
+kappa = "9efad4c143f59cf20e2c462f666cb1726be9e4ed2a97bacccb8e0f14dc6e26d3"
+embedded = "4ac140890390604ac67ffd9bbc65147528c665155a589c5fe05309ce42469007"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_and"
+kappa = "f9342ac33c766537a242ac2a4536266567590a5a049b7ec06a3c451c42e9aeb7"
+embedded = "c7cac1bd90570f3755ce6ee5408690e9099c196a20d30e43d1661ed09509385c"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_compare_exchange"
+kappa = "ef19c499f0510a11d9d90e2702483137114e2ead1d2239b47a3e7bba5d0dc9d8"
+embedded = "a6761461f13cec49d9c3a35f351de1f7b9a4105253051d46a43d3aebe83f6add"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_load"
+kappa = "36decdf43ede7317d0cfa6a8f1e280f07187468aa31f7f9e21f3da5922bb7790"
+embedded = "29f5eff095db7c4f14aefaedef85a258aeb7ceeef5c1860f6a70ef4342ec0989"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_max"
+kappa = "7326904b955c9c902953a6c90cf47bedd8878e7d4414298e8879957f6e1952d8"
+embedded = "9c43f3a3c1c30edb845b1ee06a37de1c22eebe725f17e2f6fd75b9f5c60c4921"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_min"
+kappa = "09863e3f0be1444f5762147ed6f3b532ceccc99d401a3ab78348fa52c3fd8d04"
+embedded = "4016be51313f2e0aa9f2010d265e12f5476ced22fc8408d081ba054edd95f4af"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_nand"
+kappa = "ad651061a0d8d233e67249f740e2c3f0218e8f37c3e481990dd822e304afcc3a"
+embedded = "a7254208781d9236b10d9bd6e294e9ce0b87171ac573e4e399c8656b2df07fe1"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_neg"
+kappa = "a0ea934859c13b7999334f2139e54d73138fcee4e6e7c7a6f7b3486bd71e9492"
+embedded = "fa5c5ec0a3e6db9355c77d30ba3cb188b189442fb4a393c98094ab3652423edd"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_not"
+kappa = "bad6e7753d8ae588bb37644d4230ceefdb0ada8f5e7e5044316ecd1ec52e4f64"
+embedded = "93421ce54c47b7127c8e4c2090466660103a9b0e48ff7d940b30b0d37ede68e6"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_or"
+kappa = "43c038a69ed49addbeaac905dbb5c0bba57451c44c510acd2a4dfa243920edcb"
+embedded = "f64953c6b55d4fe1bceb0f0f99d3aa7e843a149ee2a3aa338284cdff60e06745"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_store"
+kappa = "6be956c4c84b46500fdc6b2c3a13a37b01803ae14cc8a7bd85d3ea39679fd597"
+embedded = "298fba1d21590f34c0d05f7d0309b3465c3397dc4c3a108f26d202ba12118fae"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_sub"
+kappa = "6d420e4420eeb212a13af6da08cfdb56bf1e99e809044054c08390da18251053"
+embedded = "7512402e119c8e6752a8b7786188e34fc204dbe7f7d266c5c50148befc467812"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_swap"
+kappa = "29c1964b033648f09632dc129b0583f7e058a7da5f8ca88cf9f0e5576f2e8f8a"
+embedded = "48f473a35967b10b1ae0a906ae7f600b7da01169a23f01290ef74d343eedaee3"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_umax"
+kappa = "8925549ee98a636c273bae13156aba47c19507a02c330744b9eb3011e4fe5584"
+embedded = "3493523c892ebac2867e05c40f01031bccd951a6cf7f7bf113716525e9e471a6"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_umin"
+kappa = "25ef2205a416979991d8c71e0b7ab7bc4def68d7cce589c2d9efc93fc22e9a5e"
+embedded = "7d4dd8434411996d0cb305f8b6e3293b489319b4ccacdde9e5e77a0b761b6168"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic128::x86_64::fallback::atomic_xor"
+kappa = "d01065f5d7cff5094b2aa1bedfb79e54855e27676aa6718b93344ab5d10d2b07"
+embedded = "f491b3f6774b9dfeede9ba82b2ef9e65c5fb5db20a80e6a02e1880fe0efb41bf"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::atomic_add_seqcst"
+kappa = "8d721770f90cece2a5bbd1e619d407cc7ad206234312e23e3d0b2e0ad627c7c6"
+embedded = "8438a60b1f1f8ea405d5441a3af6d6c3363c668baccba772992ce60b0a49edfb"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_and_seqcst"
+kappa = "42b14bdfe1d5520b66afb510a2fe67a9a4eecb5cc8d31d4cf17a0cc87b608263"
+embedded = "e8e29f2da6ea7cd93cfe6351dd0cd146ecef5db83d08e648406ed0b26d15ae58"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_compare_exchange_seqcst"
+kappa = "0abc1d6caaf8759043819c0e3b89f9b9e2def20584b9b3c2523d04b0bacce3af"
+embedded = "83de98661ee8aaa368e4305405ea2c6c704299593de68cc19cb970b23f1f7b52"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_load_seqcst"
+kappa = "aa01f9c3f68826d33104967580dfe0e2bf87fed3151b19e3bd1f844ed074db8d"
+embedded = "faef39db2a32d8b66a044fb388730b966fd12fb759dc0fef8dd0bffb33084f76"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_max_seqcst"
+kappa = "cd19cbb1bfa4b6869af131cceb1589be98d910626ec2835a7ad82ff474a1868e"
+embedded = "f22beee483c13260adfef71231f750d3cc2769ddbb093fceab5228fba73bc130"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_min_seqcst"
+kappa = "e0921db05e2bebdfb455ed925ca1f5eb2e8a3f7d6944ed02114b908aeb8f6683"
+embedded = "6053112eb9d9ae523ad3cc94dd672d49dd86eefac32cb837716cad1c76044b5b"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_nand_seqcst"
+kappa = "878ebe2fc82feace7d6a0f4f182eb76f773654aaf96752f62681366c693d96f3"
+embedded = "7fe4db6b068bbea59f5cffb820e7f5038d6877c36831cbd3d048362ce6202aaf"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_neg_seqcst"
+kappa = "899560332601ef4c45f69bf3856e35af6b0acd7a8e90213bb23c348012d1e22f"
+embedded = "e8fd8c3a7d6ee9a79ec7a4fad6407e5201312d91994c01f71f6e876fa93a0953"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_not_seqcst"
+kappa = "35c6fa9042a00aa5bbcda25c00ca20902f67bda9f6a01fd4a4580502c3640750"
+embedded = "d702d56ca9e3177e223904da5b6be85d0040d4b0b7e4f72747df0b5d9e652cfb"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_or_seqcst"
+kappa = "fb566907c5f939d31b83778b140d24d4440cc66e999d4e13a34d678c9f8a77f1"
+embedded = "b51e72a17029c486d70e71146fb56cf72c1d53d1d506dc941b764541a93fc2a1"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_store_non_seqcst"
+kappa = "10298512240a2ba174fe6273309144a1d035b970166b9f52bbc6df2e25db7513"
+embedded = "f0987b7c9c26d46651fc3fced7282e664960cfa9a719d2bafb50bf487a28d934"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::Release"
+
+[[fn]]
+path = "portable-atomic::atomic_store_seqcst"
+kappa = "1d20309a4a8513ff6bbf2cfcedaec581d71531f34d7231be704d31a0a184a825"
+embedded = "c5b1edd367042689089ff285b78ab873c4c6399ddfa084ef31752784264cfc4e"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_sub_seqcst"
+kappa = "76740bf69b6823243bee48a3a0ca0a9f43f99c661d661ee93064cabaecd091e9"
+embedded = "d54c954ff40123a1ff372cd4edd7d1c95a8e6279cc0d941741027936a0e29d2e"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_swap_seqcst"
+kappa = "0cd22eecc7c66adc6dfa1ee123d7e75e70f9d850e5a293e85e6def591ed931a5"
+embedded = "20d7f7f004f633fbe2f76f844b6559dfe7d67e516fb62e61510548066c116b36"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_umax_seqcst"
+kappa = "8720fa49c76ea67c70ebe358907a0a4e126198048f55ced45113d55395bfb20f"
+embedded = "dfb5884e454444085401ecaba09c18c6f3f5794bd1c6c797631f01a040656972"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_umin_seqcst"
+kappa = "cd74d1be34c97eec6d356bc5fa8c606c51e4ba416e57aa260e22a57968224e5e"
+embedded = "efad05a1c09c08195e1f6c7db568a60e887c1db3092a81e54308da5e708cdc84"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::atomic_xor_seqcst"
+kappa = "41ee62bb88b1dd1d3d4b9c668548d66e9eaa963ea0a38edb627288ca5945bdf7"
+embedded = "74bdd97d369713e8b0aaa000c71af084e19dc20e6bd185ef7acadee1cdfab605"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE"
+kappa = "4eeda85ae0916b05b52927822b7a7b16e0d306371d24529e2ea8865eaa134e20"
+embedded = "87e2fe74294de39807ecadb118e88dd40b2a0895913c2e42f18de255a504fb3d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#10"
+kappa = "6cbc98f68b04c94b6052d9b063ee41037dcd7249390f7f74e8a5434360c480ba"
+embedded = "39a49e4bdacf6a4c058a3532d70ea93c2f3d7061a09a7f40963dcd0692ed9b8a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#2"
+kappa = "45d0e208f35a62618557f8ebd5dfcb941dce8e7a29599a66df05c65ef8fa226d"
+embedded = "f4fc7f6fd7d0ee40363a4a4bff981c61f82a911f82030d27a4a649ca91dde02d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#3"
+kappa = "f7f34682397f11a1e14c9c75670c6c1c7843125f4ad7bc1c1066a97c73150cfc"
+embedded = "d0da13c3e06c8a424c41a9a5db84d281ba2a9beaf43da21b8b4c6e268bd62fcf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#4"
+kappa = "b2762a5d23136acb450ef9e7bc3628cbf7da02da8045661d6ee8597955664dd4"
+embedded = "2f095b894238a33a685fcb438e003dcf66d8486a1beadd985df91da1900ff8be"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#5"
+kappa = "5ac52c40864325191b9beebf5e47773e19c50098b75eafe052284e1fa652df5f"
+embedded = "8f72d755d5a397c2100e4d0e09c6cd5f82168fdc0270314d646f8aa463b46c4a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#6"
+kappa = "a63468ee1c63055f4f59053c779f7c5ab4472c356fd2af43bae43bca449da72d"
+embedded = "00f9be0bb1c12544b9e34aa2768da7c59e1a50e7e67db97c48d9061383ddf8e1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#7"
+kappa = "dfce09307c3c6f46fc092370c1ba0e341b82302bf49563da7f4c1ce4cfd6f279"
+embedded = "b17df65f516c735d560dfc3c77d04faf6867c97b1aeb198b0b2f262d8abfe93f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#8"
+kappa = "91a3cb7d22a29fea21f2c5cc3bc299740b2c54df625053756fe62220f07997b7"
+embedded = "53ed18dab0f9bf0c4f18d7d018eeb6420039dd5fc4e2971681dc000601bf56df"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::IS_ALWAYS_LOCK_FREE#9"
+kappa = "85717779c982298477c5bc71c14b08ba70368877d7d20b498aaad36fe424f15d"
+embedded = "26036e79c0e63ee1287498243df396dc1d8c63da951c06c55fb1126e2bcde760"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr"
+kappa = "cc51666e206911f19c680647a902a9a173733b2f6502a6cb1612e2c4bd107bf2"
+embedded = "cc179e9ecaf00c7b916d897fd26f64922c992650da252d96fc53df173de5dcf9"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#10"
+kappa = "63a7117d214e8ab88103c7a6035ace01c9b9064998c79bae808235edd5848d01"
+embedded = "88aeaead7eaefce8b3e8a8b9579a859aa26252bb215692af2cd46190f766e537"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#2"
+kappa = "be0374e1b8f132527fae11365bb4deac08a9a2cb5b4b6018c59c6996acf07f2b"
+embedded = "d7bd038a9e919c73b0f188c01373737353c7576816b28933b7c0441d9deaf32c"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#3"
+kappa = "2122a5cddeab34c85fb5a20a7f9be563df202fef3bde963213ad29eab6b55965"
+embedded = "4813d29845bc1a96e542c0cf73c224a3b55a635f27fea4990d1b90e3dd888938"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#4"
+kappa = "0e6b365cd9d4f0ec92fe9602d0eefec7ce7fd5c61ce881b1571189118d3df083"
+embedded = "a2cfd4c0be3457f3e20e77d6855456bfee551834b77fb42d5dff416dbca1a6e9"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#5"
+kappa = "fc2e1850d69e4f6ca2169aee69d48e1d1ffb4d507a3a47bcfce2fe6acece4435"
+embedded = "c16ad83296b1bf339526d19386a8050a30d2286d20053b29875f6c100bae4584"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#6"
+kappa = "53d7e27e725dc39cb0ebb0ebc38c9f7358a3775b2eeae03566970a770cff856a"
+embedded = "5a71b9dbb3fca3c88feb2f4fc1ba732be3516feebba271b91d9432744ed3ccca"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#7"
+kappa = "341858c6e35ca9bdbc2ffd08631fb4d749ab3898038dd429393a0001985a569a"
+embedded = "21e6060b4af596390daad26407e0f6ee648b9f957910c537a1baf848e54465c2"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#8"
+kappa = "4dc3b8901760392c9ae0b93d43f083aa66fac5f42af102f2f4f1eb3c1436dd52"
+embedded = "578220dd73b1f6194e0e76e19330432c1e2a6593e9d1a34a36ed120620a7c3df"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::as_ptr#9"
+kappa = "43f7f321adcf6257203f9b584578b386869d4d49d07afb0895e485dfd320091a"
+embedded = "af9e19269100b70cf5c42b3f80aa06eba998c54b95d61207dae7f2773a6317ef"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free"
+kappa = "a9cc07e23d52881c1e6c776f38bba919dbae7293e6eaf1b5828ee2e32a1f8b43"
+embedded = "d7c5a72f55ce2d71a3f8307c10f9c5d63bfc4129c4972cb034a1f8a0704a59f7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicUsize::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#10"
+kappa = "b9d81d267b8d6f9f86de4c34f383e5eb9e3077ae97237511f3eeabd2f80bccb1"
+embedded = "8bf8e9ec73d9bd804e46c973dca5218c7feedb25d4da2f12d7b9909f7eddcb97"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicIsize::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#2"
+kappa = "c45b09e81c808c1aae85ac5005c5cda470c32586270e73f5fc0d6ec2e1832f11"
+embedded = "f0be4e905c5d16ccc91bc0f9420a4f7870a1a696f850e26031c3eae3e50b8762"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicI8::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#3"
+kappa = "149e1922319a2d3c4011db3a5438f0c0abb9c45c8baa2b05a7eac38c08cde056"
+embedded = "5c02158f7af47597e5db65ab63cc2ff359959b10f0a25154377748e280a2013c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicU8::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#4"
+kappa = "8552e90ce1329c41044ffdcfa24b2155594ca5e06d6fbf7ae8bb30d3f1e2d41a"
+embedded = "6a86274e431e8d318d7caf885fd806ee81c3733b88e6111c38f5f9bbd64e53d5"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicI16::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#5"
+kappa = "a903e154a9b64a189a39ee4ea0b7f3aa6fb587a61978509859cd176046a850c9"
+embedded = "d894f3d97d671897551dba72c88e1667816244ee3df584d3dc824cb592f7dfb1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicU16::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#6"
+kappa = "60052c27bd4b99ce3fdd8a94c008f04005fd6b6368ca3903a28f2aa190e04a6c"
+embedded = "5f4d5fc220284341d635f82cb2a92e4b56017cae69069f92cf37b92c24935b7a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicI32::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#7"
+kappa = "8c69f4b4fe9e061f8bf842aca16edd1edd2e366191fd1f78c35a0c791910e787"
+embedded = "112a2d57c911aeb2e6b4eee99c565bbe87f045c06a995bbf584af155d345ba44"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicU32::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#8"
+kappa = "196dca906b96070487fb05181d3cf5f29d681780710910fd9946b58ebad46b86"
+embedded = "10c6855e148b95d0d68f698a546f5c522d39b1eff47241de0063eef943296084"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicI64::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::is_lock_free#9"
+kappa = "814145a8741b535400104fb5e67bf51a1d0d301618baea714c541bdd5d171c8e"
+embedded = "3fddf545b12477e1691a030dae1cc29ff3a159c4da4d5b2482b57c9d4a5e0507"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicU64::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new"
+kappa = "d683dae44daa1226837533d3a74771ff57c1eb1439ae950cda5320f9e6e8bf4d"
+embedded = "cb2aecf2575938319bf870b5cf524a1f8377d72ae6dc301209f383c2578f4364"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#10"
+kappa = "cdaa653db570ae727827c3d4e0cd0442ae5a1afe5e10648773f58962b3a0fed4"
+embedded = "5e19b0bcbd92147551d1f1419a52ddcb2961fedb41f76957ad7505aa9e316d21"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#2"
+kappa = "33257088b95bc3611445887f180aa063ad0f2895adba1179074ccff7c12f4eb9"
+embedded = "72602caddbd5b9513c376962cf99b37496a1504105af964cec76fefd66b02f8a"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#3"
+kappa = "2832db4d34297b43813500f580fcd6e46dca196a2599527da9f1fb6a757bbc37"
+embedded = "9722fad3a56e23bda0d82ecc5d7db23cd68aa586c148347ae7fd83ab7bb11a4c"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#4"
+kappa = "cac55489116f461a9dfa2cd41e8307349f0936dc7450a423ec597f709a221cbc"
+embedded = "3e362bc63d6315cf85fcad23726ad88aabf019c68c42b05f45be829445d076d2"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#5"
+kappa = "8bbb70e11755ffcfd08f0c58d4f5d2765cf0d71e65cdf7b1c8bf890202918b6d"
+embedded = "2aaadcb49fc9c0c0a31f325ac3c4323507b333897eea2baa666faafc57844ff1"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#6"
+kappa = "94d5a3cf8570a36571285e22ab2e53a8a5c203808e62da14d5e24009071aa9ad"
+embedded = "1e0564f3ef6c55c6fcb4359dbbe88bea0f4d60f94b0acfbe895e98523a5bfae5"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#7"
+kappa = "714327c117049fe609039168b3144a12e8c04a65f21d80fdb2c0a9553c89f192"
+embedded = "18c14892d14244a256e16b1239bcab397699259abcdfe8d6f405bb36f8b28540"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#8"
+kappa = "15517cd061965d3928160e23b48668a5ed85e80c227f46107a6fb338ebfda827"
+embedded = "defc1911a4bf47abb1bd2c78220b77d04f57252827303ce0133686699f00da26"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:267:9: 267:26>::new#9"
+kappa = "dd48be83fb8e084bc51d67dcfda566f914c15c325d7f9d1066b89980f580f2bd"
+embedded = "0f4a5db43745fb63a5a73a1e36d0b5cb2576289e5c96cc0acc7b9bea15b2a647"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load"
+kappa = "4b6d2f414d6393731d10498616ce732a4ef41a50fd22a7e9fac5e97de48bf59c"
+embedded = "bacb8234ad8ae5ced1b630b4b008ad4e4c0003d967f229a1797289d840730b74"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#10"
+kappa = "b6194077166adcf135ac8f6c32d9fd330ae2a5e99db6d3b10836baad23d6e8d6"
+embedded = "855e77b6ba47ed4f1f58dd7325ba77a182c5d8532572b12293666384ea7d7f1e"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#2"
+kappa = "2a7e083431431ec0a0cd2bbce0f54b61d4ab97be9b1fc85614a51bb8b6712b92"
+embedded = "5fc180e1be30f0dc8383a77e1387476013af3561f821eb1e7146540759cd6d06"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#3"
+kappa = "09da3a4d5dd4a956a2af5f0868631fda24c7ee40bd95b1b7481bbc545d0d0fd1"
+embedded = "ed348f27bd6ddec6189adcadcf346046c2fb86ca2e3578b96b9c12c2f43ae6ea"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#4"
+kappa = "d68a21ab6717226710ae3e41a633b357b8f2e766250013b186d0466626ce6b22"
+embedded = "16fc7dbc1e07db257d6d81787057192b7a646d7f793b84e4e1ba5111499cd1ab"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#5"
+kappa = "b01dac66381694bac7cb8e558907f15e0e4c5f3fb022fef26dd6437aaaec6162"
+embedded = "68fc3dd0fea95798b7ffb9dd1245dd102b2991a7f08d502555b75cebdaf2107e"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#6"
+kappa = "a588eda399b5c0373ef9dff42aa3620fccdf3169c802cdcfffd6adef27a3db4d"
+embedded = "144b920ba4b448c44ce24cb54d28d0f03d818d3374313cd135c55a3c94cc5425"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#7"
+kappa = "6bd864f3defc95f84be5f5092f3d31229ce56ced77567beb8c712516589856c0"
+embedded = "0e87215a5882ce470f0ed8cc04183f423803374de3da1d4330566c8878bb24c1"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#8"
+kappa = "ab9285d476058b399f88056ec88733d470722a39bccd2700f7c4f4a0ab1a4164"
+embedded = "82b3922dde6a96f84a8e409e6e54bc343c6429d17dde88f7b1449a7516338812"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::load#9"
+kappa = "526e1285697637eab2808d773369fbb4d67ffc2a17dd5a66890c170cb6b2295f"
+embedded = "a8ca1e5eab917f6f831e2591fd862a6b5ecca17d56f4d9ed27c7b5162d42b19b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store"
+kappa = "3361d13140f7830d0601db1d09a3b769cc451970715b987ab38ce80f0d235453"
+embedded = "3c8dc2c3d647089ff846abd64b022f14de5e087a1e2c00e4fc359f1eb6b8f081"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#10"
+kappa = "94fe90c5f18bf968b0d7b9f9ed4160fd1545a1358c5c6f730e87c44b272b83fc"
+embedded = "2e588fa89923743b8c218ec6c5971c78fccf78bd9072a3de8e7b35b5c95f4c59"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#2"
+kappa = "cabb61d935de5702cbca3bf1afa7c20b5bf40a4827299f53be227c740910edc9"
+embedded = "1af0e362d208b492d3c939a448d6a6a6fc5697682deaeb49e37473e8d9055b9b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#3"
+kappa = "f86aefe00ec309a5ad11e0bac1f9fd5907e96efecfb3318f3e6b2d9c9ad2508a"
+embedded = "f132de442991c094d7ae33a49704fb9e4e3596f0b8ea0bb0585f982158df5aa1"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#4"
+kappa = "7491445351adb59904679cc500f0eded5310fe7cb8a7002c7532a8e8f998ba92"
+embedded = "e55d0078321a8b0726f376e3bb5adf9ff9e0bed4fe4a5d7dde2fdf76c14a5635"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#5"
+kappa = "ed53ca4ed564710f49907e739e25f87c177a439387c49bb4c8acdb1458a157c5"
+embedded = "3615c63de8dc4b7183e1f834e624ce132c8bcaf2a69ee64cc1b056fd41c5c3b9"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#6"
+kappa = "41bcb9a06b0ee36cb054af27983080bdf88b19985bebec849a3750933f1d1401"
+embedded = "0b56956cf2397562a2909d65b139ef8c5da0670382c6efa960019dd62af8333f"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#7"
+kappa = "fe533b633c67aa53cd3e3608fb88193bbc4fc004b8f41278f89863042dd871b2"
+embedded = "a2c087f2a5ee3c6d4a37a2dbcf76271c9c9adff8a333b0ec349fb971d641cef5"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#8"
+kappa = "6e557c75ae3c1cf4319a31264d2e791c583d36fd183db389d2bd1c91ee43bc1d"
+embedded = "78c9b3989b30830de7fe9af2c21abe72d6c4c5a01780577b46d1362a40151a22"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:305:9: 305:26>::store#9"
+kappa = "651072675fd85549b57367a3dd0c2dfbed1589ee703798f32508e0b4fe907f9b"
+embedded = "f6674d2ee460aae04a489543a3a0f531dc26e55393f521ea688ca9cfdd817556"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange"
+kappa = "0100d40642700665348a4bfeacbca6c92aca346474b281e9d734943af4c57a75"
+embedded = "642ef9da96679027226d6bf01ee5560890390f0221ab96655bdb41e91b8d3d24"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#10"
+kappa = "01f57577e896fd6dce0fce9ff52447d25982a2b9356c8ea823e778402060844b"
+embedded = "697e37ed705a49ec463ba8dc478258b18747e6c6a0e13471ca6764d3ce67051e"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#2"
+kappa = "42f858218c18b6e83b3396d5537fa0f0e07b1f78fad8d6a6c561778a12f6f905"
+embedded = "030d10bbe7cfe5c6a7d8b758568029d76ea0f69edf1de4991fd10ace9f1d65ac"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#3"
+kappa = "f81675db1acb9943561b6d806a76d3354c5f63b0e6f09af4354648f6137f1f36"
+embedded = "4cb67b3d0a1f109af715b02b54774bb1048da785d686f6ebee8ae1b530325cb0"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#4"
+kappa = "1c4841b714958e7b3c565a4a8724c5cb328fdb52c759fdde818ddf2a05eb15f4"
+embedded = "f4830f2fe9ea4757ab701c989ec2e38eb0e4313d93465c7a79e7c680e1afd7ae"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#5"
+kappa = "e90652d6309219a4427a01a9a1f45b1012e2dfe8a1597ab321f7d2e002f04b2b"
+embedded = "e0b835082909bd4dbdc29b478d91029f3640dc6936deccca7535428771165e99"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#6"
+kappa = "8ed7dc931d94a9b70b85ed88ef0b23f878747f75c29bca73dcc342e795734a0c"
+embedded = "46154f231475fb64e15caddf190fc302bbc3d58597f7f512487999d294a1f038"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#7"
+kappa = "dbb5ebdf176129cdd9d08c5cf87e2efece43dc6b9d6809bed23758bc030af8ef"
+embedded = "b63278335bfb5c937dd003ab237de403ebe842f9d1b90c050ecb708059d6454b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#8"
+kappa = "ef669373b36f22fd00de339cd06115dbcbaf06d8d7ae74fe6c66f51a830cef57"
+embedded = "c03efc9ba88fa220a12eb7eb039b899bc0f339c3c282f3497d2123671cb9cac0"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange#9"
+kappa = "9450498734cffbf76da809c23220900b0fc81e2f341f5e8ed4590561b1cb4832"
+embedded = "55d8344f505da93d517a1c39577146e02fd0c0a9e8e662e8992d766a3ea22080"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak"
+kappa = "21e6c9237b71b8e22d9fa0fa27811e1414ecd279de7f7ecdcab7fd8eae2d382b"
+embedded = "6dace4cb6968ef2d81766e72b5662591763038783d2dc06a7e7ed3dd40507b9d"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#10"
+kappa = "6b442e019f08146c54656890aa878b062f1b56552e9b99c751eaeae146b8dfa3"
+embedded = "b58d965adc13724e1083b3f50a9fcfb83905a1c57a3262b1c212704b1f49c124"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#2"
+kappa = "d66d97ed3d2f9fa154d0cf9be09f89134302ed3431b3d2fb61ccf889ca6b2aca"
+embedded = "6a67c8757c3b99cefb2f7e62f781d4472b5dff8e8df73f1821ea3716cf34dd36"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#3"
+kappa = "2ee65f70b21161d1eb348aa704d4b8a7cc178f426bc3324f532beb4c8278f988"
+embedded = "4124fa2172855ecaa7effe5270e1c8d640f28b694998799906fcccd83da8db15"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#4"
+kappa = "cc2e42ef9392096ac8abb203455650607f514997781105abb7a295f1a9b4a4d4"
+embedded = "b8321e910fbb3a383d2028a213df2accdeeb81d6b7f43a608fc61db1becfcf22"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#5"
+kappa = "aa0d120d17a9f9e519b5a8aaa59cdb944e1d305d82e6e81549af4131467b0754"
+embedded = "6a5d1ce7308cd77df689c98b88087ac4d3c6904c11047cc1d4a7af596a6bac81"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#6"
+kappa = "c188591ab459390ab424fca009892a51dfaaf93dc639ebe1a4c696d5b0c95268"
+embedded = "813cbc87c3b6371386f7e300f6bfe142eabb5eca15e783efeef832c7c9214bc8"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#7"
+kappa = "4fd3d32267929a5fb10e10f6f03d73e176faf8bf24be376f0b9e7b7012774f6a"
+embedded = "5c1ec3fcbabe19ef1fbb764e91060bc71713936dd43c59dbdeac3280cf68cc29"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#8"
+kappa = "fb0e25cef9f5abba44a6966c9ec70eb287f2997b936e02dc6b63dd44a1aead63"
+embedded = "d2bfd3ac1c6d412061b9f784f40975be34f6bf0fe4a95eaf234e86a8d341df11"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:338:13: 338:30>::compare_exchange_weak#9"
+kappa = "1477f78070f3b66a88395c4bd4faded06da3cb162fada6488f1bfe0ef2bc65e8"
+embedded = "b778453e813b15de34365ac26c1dacfd31b8dbee63015378441fd78845f2e2d7"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max"
+kappa = "d0ce790ce5bf3278fc142bb6aae5e2af750633769b9d3f989f71ed11a131c388"
+embedded = "f9cd4cb5dc6cee9965cd1f8874b11e589753aa8d62e277c80d84b3dffddf837d"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#10"
+kappa = "947c56e485cedb23f4f9cc1e392a5ee13aa12ac92b50dc78ee9123b1cbc782f6"
+embedded = "0a34d61316573ddccb9068c79285924f75d106b528e139b6bca8dd2d813f524c"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#2"
+kappa = "8db9c8594fda53c35b05cfc8f28b210a0badc4f7528fbc90ce685d17192db50f"
+embedded = "88e8d5232296bfabddc1efdccf22d601d2498083c7341d9836b3472cf1153f68"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#3"
+kappa = "dc4fda51e9e9394ae6f3eae631b16a6c6068713de9bbc82969560fb86f36ca80"
+embedded = "898bd63a9969dc3f7ee6a4136fc3f845347563f26cab4decdee1ddc0fb37a4b0"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#4"
+kappa = "615e5e8e806766fc4eaa4c2215a55b4f86b987f7913c30cebd768a1dfab913c7"
+embedded = "14f88216827a4d22bba0d67a6990492ed9a9f2716c5c64a21316e0ef240b2eb3"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#5"
+kappa = "35282ee5a453a4600bd706916dc9cd775402e5ada1efd7b767b9074ad6fe07cb"
+embedded = "b3b2139c75fe167fff234d84627eab6cb4914f1f2bc70378b68e5a8f216ea710"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#6"
+kappa = "7e536d1fea995763e7875335e8466c2a44a97a52d2f7ab88f5c6f980cd6855e9"
+embedded = "1e5b349352b3c38fc6f3f8b06282e07abc3b7dc1fc183c03b3661bc72f3c13f4"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#7"
+kappa = "47f6c44b25f61fdb1cd33f82f9df66dac380edf15733ff8cb53cd031f567e894"
+embedded = "56eebb5c5db76da9ba9e861b64f8b708b45878443ce1f9e14d53c2cf558dcc96"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#8"
+kappa = "2b5dae5c69daddd4e1a279fb1e1f7e407f23ec918967ad00eb59509348f4de15"
+embedded = "cea7b7754de38a1077b71d1cf6633014a6e789cf8ddee673b87393fd1a739ff5"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_max#9"
+kappa = "e8d071a4bb82932a4aa4b07ca4155a29b9aafe19f1a2bbee4f4df12de13eb790"
+embedded = "e15fab67f7036981d5f6e439de6616f05796df3a2841d5251520e8beb0fffe4a"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min"
+kappa = "337912b3d821ea7dceec589d537e4acab0edfc167a56dd1ff32b727e39ead07d"
+embedded = "03cf19e70f3939d2eecd081f669f98e7d28b60d7d8d00c8181c86f6ed4f50a98"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#10"
+kappa = "fc04259a6462aee03e4c26b650a303c64a2ded52cad3e3959e68dd373514038c"
+embedded = "a275bbd1739c02d33669b5d0ac1633014a9c55a4efbb2b7ceb274736af170d90"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#2"
+kappa = "dfb1c1c4356a7bcac2b98361d1c9dc4ce8004bd5dd9bd8989e7a254abd54442d"
+embedded = "e66dbcb613ac88aebadf80b5e1a791f8b22f344619821cf64c22f3d390df4a97"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#3"
+kappa = "02e2894435c4e4f108ef7c54ce5da2becf864b989dcd29bb1ea24b98d8305131"
+embedded = "1c24a47dde24fcc4bc91455e27405166c3a82167063e18bf2506f40198c7f9d9"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#4"
+kappa = "32ee200459cfb3dbfdbd747fbc10baf4b10b26114117c469287787ac6eff4e69"
+embedded = "dc7b2014bb44cbef71513f0e98d71d81aa8f1dfd4ce137f1b882613ea53fdbca"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#5"
+kappa = "90bf21afb9cbef153e20834791788578803a312fd60ec182236dbec8cec41649"
+embedded = "e7860670fe237dea149b1bbaa809803e473ae4d90cf7132378da95db2c7c22ef"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#6"
+kappa = "179ae33c1eea9e90c3e1d266957e0b916699ceaac2f8a9f7063f105e1ab22043"
+embedded = "909e42fbc8c4881703c92b9d7db334d296028f446d2dfe62c34a79349efc1d84"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#7"
+kappa = "cceeec1d3dd8baeafbc48b2be8e09bee4bbf8199f8fd7d85d2fa4d163acf71a9"
+embedded = "ad435e86e06f0863358425dfbcd833c80a316462380f96e2fd16bb954cdda574"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#8"
+kappa = "bbbc992f9fd8821f164e6f870660253890a6b0f6a54d21750d85ab5a1fb8d348"
+embedded = "f7c1235f919dc0471431c8e0dd1e5efff150bced73ee8c1eca27d3c953cf2fcb"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_min#9"
+kappa = "9660cae9a93139979c5cafe0ffecbc1df015ab28bd37015d101c571706fa9e09"
+embedded = "6f627f433240cd67a476fa4754b15e1700b2600463131f7985405d60b2fd469f"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg"
+kappa = "e369c09e035800dda4d466c81e6a5d4be9458392fc36828b14408d9b2e28d134"
+embedded = "66e4fc5a959fdef15f4c0ff44a8cc32edd7503f9ec3e178b7c13cacaebcbd54e"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#10"
+kappa = "31b19b4617960524842c2300156763bf4b478d61d21b3646fcf20891f2ff9bce"
+embedded = "536675a6b09c994e89fe6f82db5632fa99215136f18ecba4026e654903dcf276"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#2"
+kappa = "6da351e32d8a880a25e21ef186f4b9fae4912a8a2c58cbcd1fb1ebddef000820"
+embedded = "c123b80c7b69fcccc6c59ae0f0f8a842468655c9d44a7c14f93715097714e1a7"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#3"
+kappa = "42864aac24a083f9381a763e2e880850fe8050749bc3cec065efa85ec49c071f"
+embedded = "44572efe00b7521e4c9ccacc73f136dc1cc0ab9151daf2384fd86e243eac671c"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#4"
+kappa = "81ae9c5615e0709c249b461b801e2ab5025168736be696197ce4cc532423ee09"
+embedded = "7941f4a06721547bcc5875004c1ed1aa150cef93ecde920f5afbac57ede1411d"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#5"
+kappa = "5fe8ba1aaa4d21b9d59c74d07c452efc8714cdf8398d7757093f22a3dafa53ef"
+embedded = "6f8fe6520fd9f36e7504bcf812b26f81aa7c1620b4cf08f5ea7dae86a203a83b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#6"
+kappa = "d1737ea7bbda2644e7d051f6153c873a1a69d5660c806c1c7167ea38e20957aa"
+embedded = "61af0248d2f5e53136503a2fd2e2e89b01e40d29c63a99df05b8b732c79e46fd"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#7"
+kappa = "562552fe117e9630b240f4642c8ada92294ccf981d324284806a4319deba9630"
+embedded = "8b18f01c3858cfc321b6602d38dab55dea81c97de4124d8b652b77c22484faa4"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#8"
+kappa = "f45eb7389543cd39eec2ba81073ccf22c542be0328190dd75ddfb70eb41fd7c9"
+embedded = "68d95f906c32c5045a3be75d8812829cb9b2f114f9c64eb00596399c2304bf3a"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_neg#9"
+kappa = "9012aeae34fc5fcc17e8d83a00cde56743eba16e4d071c7d47b578b2054b96e2"
+embedded = "38f7f9b1c9c01064059f2521feb3de6fcb802df0231f5127e29d37b40aa80ff3"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not"
+kappa = "37944987c421c1825c86e0af1c9a02db20edb93556efa24a5a399b0d7e492cec"
+embedded = "ced6b145b68e3b13e5e8bc8fd3f8219b4f0d391abd58dc27ed8193a1a0f99426"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#10"
+kappa = "2b6743a3b17d5134adce925c8b62bda628b710a9d0691893e7190a7cdcec8827"
+embedded = "7aef3ada3e5a603c92d83db93add042c39b418592be32a40f63b07296835b747"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#2"
+kappa = "5125fecba3c933412f4517ca27372274c01f738bbb67d1210edcbca8305b7bab"
+embedded = "90ea2c85e906bcba50003ca177fe1f59c723da5f0b0dcc8dc2769665d8af6cce"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#3"
+kappa = "14f12febd7cd7611ce7fb0557d165c5da3d84745496dda351afbf9eba59d2307"
+embedded = "72a796cc64faa7ba3af118ba2512df7ec325488c825e742aa22505c1adabb0a8"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#4"
+kappa = "ffa9cbf0b2a0d81689bb248dcdce74a62ef93fb96166fccd090a0384f75cb10f"
+embedded = "3125947744254be6854bab61033c616fd6ef797267b1ee109c911cc52bc92d2c"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#5"
+kappa = "0aa8d4e909dc4b1cb8c68661a8deb2162877f23776de69bf288d42a699282832"
+embedded = "08641e0f5fa1a45ee86c6f5d984a5335eb101ca10a75031e6b76e13f56bf7ef8"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#6"
+kappa = "816ce657a26b6d634e5331455bb7eb3ee5a6a00f0931f950a94543fe1e53de3b"
+embedded = "3a24d4f5a57199e757d5376153b6d965ff3337ae0225bf18875054f6168c4cf8"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#7"
+kappa = "9225e75b918b4999b78f88e74ba921851effdc8ab5e0a4da874ba210cfd9df17"
+embedded = "7881fb60e7206812f85b867dc635cad43ec0d9e5e184e3673ae5da8ae59a721d"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#8"
+kappa = "0186a26bcb5b8cb1e141fa6b2c617a79919913c9e9cb2f91a504f41ddf1eb80b"
+embedded = "31f050fc332474cc6c2e77c4a4380cd1008c9f36798599a6b43b1ba91db3a281"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_not#9"
+kappa = "af92dffd59afe88d2c0d053a531d45b9080be6f29242203fffd2079f23dcd33d"
+embedded = "39b795d48a8139151a09144c6fc1ec7dd63d92e071aafcf52af61a8d1ac71f7f"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_"
+kappa = "37f6d5bc6e75b0f314363b41e4123928ca36eec072d4d7e2ab216e11cffbbd21"
+at = "F=u32"
+embedded = "6fe1ee06090302a99fa268f3298610c02c59c9edc05700c2356b02488486abe6"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#10"
+kappa = "268dc19ed0d4a654c54f8258c3187618d096144d29068f8ee8864e688a91da5e"
+at = "F=u32"
+embedded = "05ccbfe2ae1c9ece884b27ff131806321e32cfacf6dde4a135f909caf7e4afaa"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#2"
+kappa = "83e46c66a9a85afec0145894c3dedf55d687bd14d5817eea98b21054f12f10e9"
+at = "F=u32"
+embedded = "fdadb469d4e54f4152efb7d76721fe003cf5fd91992ac80f961fa4ea1509a4d8"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#3"
+kappa = "ad2065cd684615223ec75f5a84e9c0fc7a2acb76c6de83fecaf3dfe8631b6a38"
+at = "F=u32"
+embedded = "33f2bc95c1ae1f6b912b594aed5eb8006064f9255056ea3073b93b58e9581950"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#4"
+kappa = "bb325b3a65e5a4898a3ea1c8cfc9b410a9d55dff9d1e7b3c9c6dd616a68e9293"
+at = "F=u32"
+embedded = "71c0e885548f1514f23ee0a72d28b0b3b6287e6ba4165ef89339e077a4e1897d"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#5"
+kappa = "486c1fa619de2e19e59f7e46525caa351648c67ec6e8ea7e1a3bcf7f19f4f4d8"
+at = "F=u32"
+embedded = "01e62ec03131c533e086b0a8aeccff1bc1960017eb0d0db7dc62936dc590f647"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#6"
+kappa = "98581ee15a560caf5e5cd139014567ce3dc7dd89c03b62ff191b73b83e645e33"
+at = "F=u32"
+embedded = "80250503559934f7b1398ce2326b68e219eb90d7617b257f8192e045ecc2f769"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#7"
+kappa = "55f78de7c00cb4d6ad055c5545cb149d9fe069351fe2e2b5ebedc2c2af6b910c"
+at = "F=u32"
+embedded = "3270f523eef08659d7db5b76f2dcb84c5fbb1b0a5707502ce96acf606bb081e8"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#8"
+kappa = "a9e035da29082573fbc678655ce44189c29e2988ea776b039899b4c3aa7d1866"
+at = "F=u32"
+embedded = "650f73ef78a0391fd1b2dd21063f27d04cc999f2c26a7e4e1845ced1b9d92155"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:374:13: 374:30>::fetch_update_#9"
+kappa = "1bcb6b5d91e1049d1cd120669ba261ab2e9106911b8780a57d29989b9e3ebee8"
+at = "F=u32"
+embedded = "2a88b7f54306b6be8fb0f499e4bf0863b07e46e900027d0e78887e94cea61adb"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref"
+kappa = "ddef42da09c51782229d0cfa061563140281addef59abe44e74fedb4314a1aa2"
+embedded = "69cce08ba990775391d3c5d4c8aa1d4ce120a76cae3c60c941f81631ac3ed7b6"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<usize>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#10"
+kappa = "a2c880e4bc0f7d696127ad656781dc431fca94bac0f8a28c40d1a312bcbd086f"
+embedded = "602ee9852c32c5e80bcd458f5ebafa6e63037ec7b8fe67f4f1082bca3b2abf4b"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<isize>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#2"
+kappa = "c203ab23c0a8b8ee931fe206c5b27de2e33a260802cf73bae6e1e78384d932d7"
+embedded = "ed212b81b9021a7ff023a878116e3a4e978ac6266ed375a290425d54d5e24dcf"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<i8>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#3"
+kappa = "b0c95355dec742ebd3121d00ac783574d96b21b269960fe5a2fdda9863d09771"
+embedded = "cefd71029a939399d40351cecea12a99f42f6550d11c2d80381df61cb10af730"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<u8>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#4"
+kappa = "1e42e69ce4458cb16c0f3e24d5d9fec7c8b78454d3f878402343c695c63b1fff"
+embedded = "be29b14c527033396cc045ab918902d92356d21e627070c02833357986018995"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<i16>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#5"
+kappa = "dd53d4973cec2ba1007806704c41201af76ebbd6bb3d0f35b661f77cdfa7d9b5"
+embedded = "54c0b8b3d1299ee7c0e04b60104a7a8e34fac942b46c224b38482482fd7ee82f"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<u16>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#6"
+kappa = "dbc899ae15682cfdfe988cbb0207ce995cdbe215129fd7272ad6f18bf042d4aa"
+embedded = "cb19433474eb28e79dc2227c368e9856aac35cc9a927fd7b762d9224cbd31d9a"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<i32>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#7"
+kappa = "fbfe62734a9556fba099f2b6162dc086157f77ab08e524a58ceee56e16622d0e"
+embedded = "90f58afc2dee456986aebd0e8ea985f0b2581331ea831d499da2164a82db0895"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<u32>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#8"
+kappa = "de36792cd6232feb656f34046121409d95d73851d1e0c5390b46713185bc4723"
+embedded = "94c4c5d6575a1869567485906d9634fe63893f3f08f0f51c372a084d21a916b4"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<i64>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/imp/core_atomic.rs:536:9: 536:47>::deref#9"
+kappa = "159f4b00fd117e53356486abb18d8f834c9f31925ac54245d9458a93c672b63d"
+embedded = "09edc63b80c8047d66a1e13fad459595d2371ed0abf5aba00ec84cd9dcc5a473"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<u64>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add"
+kappa = "aceb263e2aa7f2f940fae585283cefbb9a5183ec05160951acd923f83d613bbd"
+embedded = "a9c87e70043a09003f12e34721cddf1e92afa9d0846b813225dbd28d19be24fc"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#10"
+kappa = "b31448de93cf4fa9477d500fb9c525a32afe44e3401ef806e93e267e988f06fb"
+embedded = "d3af84d98c297455f971bac87034fc82abc98a5abeca30f005b3212dfc3a3d00"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#2"
+kappa = "d6742c0ab14441003fda1968b3851723ac72420d927c1920ec0d7984fa33befc"
+embedded = "721bde7e9f591bde5b4b49a0a783d8faa0f89068d7b9b66cec4475ba3c6d9f4b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#3"
+kappa = "e239e7b24163268d72045c534df261114e15c2e6a19c643e37cb28ae64d22f03"
+embedded = "e71125e5957387b4918dd756891db7e3d477d73463f5f6898a2215b30ee7999b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#4"
+kappa = "1a51b339a6d2be993b158b27de5f829661d6bc1ae100bce3c72349d9bf6f89dc"
+embedded = "d77c907ec96eb58b8c0875663ca88b394400669098bcd29fc42cf168e5c36775"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#5"
+kappa = "0b88c65d1afc0cc314e51942d95eac90f9c35136ed43ef0a4d448f6013ab6795"
+embedded = "48af12368e2eaad10f37336944fad12148e79cb0a2c232cba97777dc9f06ae21"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#6"
+kappa = "16ca1ef28116fd70d72aef6391b49b636230a6f034291d71f7d058099049f34e"
+embedded = "89cfd2e44e1ab9ff68aaacfbe7c7c7334d8fef0498caa2e0170645196bc50040"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#7"
+kappa = "07fc79b81c16dce24f9b4294f59eb01e7c6c71cc85f4b4a94c07b76463d0d707"
+embedded = "e03263b26b66ee7dbc231a87f8f76ef1828befac95a9ca90a3cf90c1a6214435"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#8"
+kappa = "8cb01a0b1517c37b3fd19493f1c4b8d3d7efac9f3bed1b452ce186a2f8901b2f"
+embedded = "918d10556c256a47680b8cfa714c594f4afdc3c46a6d25935c19744c5080cf81"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::add#9"
+kappa = "a6266603dd65d7d9756a9ee14f6b616066ef494ea937fd881810b14e33bf769b"
+embedded = "9cf45bd22e0ad760b9a81f1e7c9cec4b366ac1568219eb2b0e24a8e27433e6ed"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and"
+kappa = "fd80cc55caa5d7391fcbd7502aa8a4e146d2d27450d121c84cd6ae6ee9b5d571"
+embedded = "aacd7051bdb2113a5194999582c661b94adef1812ae01fa05027f08d31c90746"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#10"
+kappa = "e18e013a4e0b019f5b5043b823a2a69f67c3985759eb2493c2cc4dadd25e096c"
+embedded = "30bfcff2746e6e5c584fa4c070f959ae07817a786b3ef499b594d64608940605"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#2"
+kappa = "68f744be6189ad7cd87a98745e33ad090fb746b380e2688bd20798b58f091a9d"
+embedded = "5829d279fc230ca6c93883a6341bc819d6173eda7e9d62a8f7c176939cab962a"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#3"
+kappa = "35f836ea030c59b9dd5968f8901116cbb5ea1960bc53eca76b88e9410bc33a71"
+embedded = "5d7ecfcf01e58d513fa06caa668fcbdfb3dd729ebe6a0a2d61fc2c6281ad1871"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#4"
+kappa = "959bbad386feede7b88a7dfe5fc92ffbc9874c7e3192e88502aa071d22529112"
+embedded = "ee106a808759a01ddd7f4e2341df6d804bf059a1ecaf54db095c83f994ef54c9"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#5"
+kappa = "522212a74f43279dbe11db8b22fc4512b7d01cea0a64b8b7a1917deccb3a8a48"
+embedded = "7dc9f5ae0e1f2e8dafaaec9fd93d1402a631f79cdfc537382211d5294cbc1b9b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#6"
+kappa = "d6eb651b088812ffbcb6ccb5bfe1db629acc248dbafc0db54cee2eeb89418943"
+embedded = "463a933b553508657d0b2d381ac7d702bb8346c796bef67245de72b494514ae8"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#7"
+kappa = "a019af4f4c807cbddb75d4a1d000749e1b671a03429e7388bfb18a6f179e12fc"
+embedded = "ade7f6140b8f9f1cc1a8abf205bd673c8b73ce72a451cc9157538962910ebaed"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#8"
+kappa = "b0ee571b3bb437dd2dbda96f2f0c337ed6fa1ada5ae6d937c46ad23004653984"
+embedded = "bb40ae4b6c21c03889fecc5bccfa3d3fb6dca31b26b09bbab0fbcbd88bf61445"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::and#9"
+kappa = "7ac03cd9dc21f6d783499396633b17720a0a2a63d677b27c7c50b2c71c3c1319"
+embedded = "7bc66d1bd839bbaa581b3e6d18fdaf18de7498cd5bc864a413a98486072fba26"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or"
+kappa = "c2c73fcbcd2c2159e36b90dc54acfc1a50c33eef0e21c5e5f5c0a2bb30ca260c"
+embedded = "d0bce939db269f3497fbf2433f30e2ee973358b33ea6f1a0535fe30b5f8dba5e"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#10"
+kappa = "9b62b71716b05bb9e31635d820bebda2532379f37090923b2944f40be7e5aab9"
+embedded = "8a370c1b81b7987e711f5950393eb94bf4b7edd19ad1b543c04ad61db91262d2"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#2"
+kappa = "a037d2fb432e2fb7b41e95195be2d3839993ab30405178a21fa2586dc74aad0c"
+embedded = "008161ed62f76f0f9c67bc07099e82d3edbc66bd7a863d1d266ef25f8cc5a109"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#3"
+kappa = "3b1908ac566f65f4ba534d5ff3eb9c01c0f068918d59ca2ae89e02c3e3e7dec6"
+embedded = "ece6a4dba7a0e15ebfe8faad9da975e30f10a79688b5c523ada6dca41d046eaf"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#4"
+kappa = "fdac991e200aaf1466325608c166bfef97c6e56d2796a50d83be227d07596678"
+embedded = "8c4dfd8142b68e834e1f93c707848b36b70a41bbfd4eab67f0dfcaaac08c0daa"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#5"
+kappa = "49616a6286246c8e2d99944e17355f78ced1b2345c647bc7f5afcd7bb502b450"
+embedded = "363b96aa2f53302e0028c913ad9b4064507767fbcd80ae5db861a0f584b5ea3f"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#6"
+kappa = "4ef6981635ba8cf5889741166ccfb5a4ca7b4b16be46fb772a28af0b573285c9"
+embedded = "d684d382a4b886c9731f68a50848b9f5f9040189902e5adffe9417b1f737222b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#7"
+kappa = "5caed6c9963ee5f9958424b8f1f30de7796dee76ff762b17bf7c15b38f4a71a9"
+embedded = "1c550324fa367679d44f8a2e3462a99a680fb5e974eda24774e99245fba5a1ce"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#8"
+kappa = "4bb680a3e3b00021018c3849f4e3eceb9b3fe936b7ec8f6c6354e0bc485b722a"
+embedded = "c50f4f9708eabb3ff461a6decb1577cb4ce36b04af461a29f0b4f47d623fb958"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::or#9"
+kappa = "ad4e5e74f0e60048df27e80a563b623a8e1499d656c820c49d4fd1542746dc3b"
+embedded = "812d8ffe8c1c83563bf261677577d7ac0d01c5201e8dd65223b9df35fae2a865"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub"
+kappa = "fe0bfe308fc63e0d126c5d411db88f0981805565331f2609104379fd4eb86ad5"
+embedded = "07d302b3aca43c176396d26a56549152973e7fc17aeb77c4d308e540e064d875"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#10"
+kappa = "4e0cf3d5d77e05d60e240098a9f233f2521dd37efa993345550fa3f51c223433"
+embedded = "bc51b8881460649c9dc4afc89961acef3be1bc90595ae0935ed37f9c5d98a4b9"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#2"
+kappa = "73c9f1ab9de777ca64591a9285b51a14ecf51526db09098ae0f8d5fff99fc14e"
+embedded = "8e90c7ad928439270070d8ddbcaf00c895e7def2bb3fc31628129ac4b23a71ad"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#3"
+kappa = "2255e6dfa66063bbf9dc9fde86477a28d7365dd5523a1f994a33cc407369608c"
+embedded = "c92bccb40ea38f2662cd001fc7077b23cc1429036b65a6cc2dce0f631d601af5"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#4"
+kappa = "ffcb52a6cd4ef8d0436ce51b428fbc8192cd1fc0e255c280b0db79ef73d6ce00"
+embedded = "68e6b66b307e1903e7d8b42c2b716985db3519e6f381a1137f368249447a8cc1"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#5"
+kappa = "dc29f4e39e922e44a87bddb76fd4f05af56a43d1b3f687e76a11eab72b34c3e6"
+embedded = "dee9ac402f323fe07bfe160443a9db1c7aa29b58af8559667469e3f5535e914b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#6"
+kappa = "a939555974a4b12495d2c415b7c9b11d5b994771de7364aa7f2c480e4ce093bc"
+embedded = "87d7c88733df9673d56037ed2156089e099848429a884b582236fbfa99a8d342"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#7"
+kappa = "e981eb67b546ac3253ca1d407483ffeb839c15fe846a13332599d8797c0de225"
+embedded = "df635fddde282722521a7e75c94278f82699256672fa455357500e12e11ada53"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#8"
+kappa = "5882223033f58b6ecb06c3c133f63ce025688cf8526ea5a17f922161acbd68c4"
+embedded = "fa455a270f6b161d329801892433f09ef3d41e5f4b346b6d2e9862ef8667d082"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::sub#9"
+kappa = "a9d2363f09ce287ece1d5c64d34372c4c75c75938cda01d3eb1185bf3a7130d9"
+embedded = "3555b77cf62cd774cadae577350c179b1ba451477453726c41cc36c64faf2ec6"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor"
+kappa = "ab38a88f759adc7ff16ccefc80822011890c50b72f2d529afc92fac73516790f"
+embedded = "1ee14891e8433d39dc05f17db9ede5ae5e9ce1d439001d63a1c54488d83000a9"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#10"
+kappa = "175750303923e0ed2c9a5ff85b37bda2456c3ec3e33ea16f45556dc7a1de1c93"
+embedded = "1c6ec49599453b8c12c6c0ebf5829cf001bea66b42f3aebc11fd7ef5794af02b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#2"
+kappa = "ff3b310b387faf606d5888378104cbec68259fbddbdea748b1c545709bbd6527"
+embedded = "e9dc66485925ac1dd26a0b0126b5dc87c771d58b6abd2051894b623b30668455"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#3"
+kappa = "1d29d4427742a6569804316cea444255e516a9f9f8805008fae17d82f2acb75f"
+embedded = "b1020dfe68c01d141d48b9e4df694d457988e7c029e9c67c3e2229dff6ba3abc"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#4"
+kappa = "c70b09556e53f896342d9a6336aebfbff0630afbf17b1c9e49b98434cd8da776"
+embedded = "45aa5caca9b278a2e3b2b94ea10c11982256920494bd88069d35ac435bb3163c"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#5"
+kappa = "7713e0d3e0dfb457022dd59c554c22b1f357c587a9c06c431bf7a2c85acd7e2f"
+embedded = "934ff94548de867d80f11bda7abe599b8e6ecac5da8a6ffa1c942c55d5140327"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#6"
+kappa = "a45780a7fa683dc4c188192878afe6372b0a581d8451427b7ff4aa02ca36a699"
+embedded = "bb05ad65d4734bda7c70132edbfcf53d3535250906425a0e1b1f7c8a5726e024"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#7"
+kappa = "d1317a880b41de48de4a8ba344caa329031954729379346a8f1c9e2243a5f2a1"
+embedded = "822a6f8cd397fff17d6255a0c399933ecbcf8c85fbacd9ae4a604cc3840122ec"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#8"
+kappa = "52cd65d370d4c409ee3954a55160606726a1f38df831216308d3260e5a2de3fa"
+embedded = "db9f5d0a5fc827c6f31251fee880944b310d77d5da7264c87797f9cbceaae60b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::core_atomic::<impl at src/utils.rs:220:9: 220:26>::xor#9"
+kappa = "0371ae2c67f15e722f700085f680b1f822cb874a5d28736442f74a2c176a8ecb"
+embedded = "b6cc043abced8ec960bac2f4dcbf7a878f80617abef4c37f64fa8484aa136575"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::core_atomic::AtomicPtr::as_ptr"
+kappa = "a2de11e9d7747642e3c50f64c81374b0655d596719a760ee0cba0a07fee84aba"
+at = "T=u32"
+embedded = "b830e727316ea449c8e3cdf3a7f5cc59ed7755914bd97b536fe5a929c0ef63c7"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::AtomicPtr::compare_exchange"
+kappa = "dc324d69ec36aecf8fa8662dacbfba56c84382c08da6c7490667c182a5c2c9e4"
+at = "T=u32"
+embedded = "05537525ed1736619b7138e7ace745ae72a99e3f857dbda9be703ef26c92dd3e"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::AtomicPtr::compare_exchange_weak"
+kappa = "6e17062e343072cdc0f253259eaa3d76473a38088f84d1c9ae12be9c7017f2d2"
+at = "T=u32"
+embedded = "e72565239103c7f2c114b2c0def43708e070cbf29910ca8542af4f2e89970d38"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::AtomicPtr::deref"
+kappa = "9ea0ae99ca6fbac530f506b8434ded49a38e6c07321bfb652c3b5113ab7fc930"
+at = "T=u32"
+embedded = "d77714fec174e68b1c0417b26c6409ec31aeebed39971980775cceadbe3ab9f6"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<*mut u32>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::AtomicPtr::is_lock_free"
+kappa = "241371ce95a1177bcf3b031f2802dc9f7b5d9ee5476431b5a71a401247f5a5ce"
+embedded = "70104942447ba96d735139b85c6015dc96d12d07ebed4102ba6052c869af6559"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item imp::core_atomic::AtomicPtr::<T>::IS_ALWAYS_LOCK_FREE"
+
+[[fn]]
+path = "portable-atomic::core_atomic::AtomicPtr::load"
+kappa = "3c8e53f4f25b05853cd2862d16c87b378ccc9088fa027ee4b502c63e9f6fa3a5"
+at = "T=u32"
+embedded = "552db9ccaf6ef471f4aea3406bbce3691c721619b7326eeb2eef414aa83aed26"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::AtomicPtr::new"
+kappa = "eb0ba5d3104eaa013c007c343cd68e41ab1d7277866f8854b8da6fca59250350"
+at = "T=u32"
+embedded = "d95d5c7731a982513e3e27f02d5ea1f7f68e86c987b6e47ffb60f5c0a90f9cac"
+status = "residue"
+cause = "mir::Ty: imp::core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::core_atomic::AtomicPtr::store"
+kappa = "c01d3b53038dc6a4599c57becf0235fef29f2e300f56ddaf467cb287259390d6"
+at = "T=u32"
+embedded = "3cd7ef54e08da95e96a77e27dfd82d44d269d8e59761ea4c5a6337a294760076"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::detect"
+kappa = "040d9e957a72f8facfe3d926b9276c7bd6e994e504e07e0e3c6aef6c517ef1e8"
+embedded = "6f0184bcf71f96b9ca0d6192af61edf220d6bbb8b3492ed80dbbcfb5dd7ac49e"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::detect::<impl at src/imp/atomic128/../detect/common.rs:3:10: 3:15>::clone"
+kappa = "c86f7cba9ff0d7f2c08aa84465e4abea944f41738bb73cc1f7de1baa0d9764cd"
+embedded = "856b9aa93de4e5649cecdbb7e3bd83c1f455b899e55336b00e680a124a18cafe"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::detect::<impl at src/imp/atomic128/../detect/common.rs:82:18: 82:23>::clone"
+kappa = "460ea8cde78e4b69af3353ce35b891d5afd139e162ce8e7c8c00d6546a57b050"
+embedded = "4f6c0cb2dcdad585d9d29d9a7e68cd364491224b33cbdda5af4b639382473b79"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfoFlag"
+
+[[fn]]
+path = "portable-atomic::detect::CpuInfo::avx"
+kappa = "7985fcb10bcf199e3b9f6606dab56c5d7f08dd28e3fe84eb6f5ec907ade22a9c"
+embedded = "bd66c0d1d1aa775e8c773ab70b6c1bfff45f10e6999242199110978c8d056fd3"
+status = "residue"
+cause = "mir::Ty: CpuInfo"
+
+[[fn]]
+path = "portable-atomic::detect::CpuInfo::cmpxchg16b"
+kappa = "aeb18453aecef2ce7fae7cc5b4b5a4f710ed25267096e532deafbf27bb8642de"
+embedded = "ba68dca33162fba13c9961591031d6371746448940f68a0857913464965289c1"
+status = "residue"
+cause = "mir::Ty: CpuInfo"
+
+[[fn]]
+path = "portable-atomic::detect::CpuInfo::set"
+kappa = "49036ee0e31477db6031627daca0b3dd1cb957c1d436169979ed8f4c3e2354a7"
+embedded = "944d9766bca74ed8d74392bd9113a5a802893b4dae3a588aaee49363e6536326"
+status = "residue"
+cause = "mir::Ty: CpuInfo"
+
+[[fn]]
+path = "portable-atomic::detect::CpuInfo::test"
+kappa = "937a4f81355dfe132d1e341dc389069b64a08ea0a3ac8e1e2c9761fe7dee5810"
+embedded = "f10aa3620740bdd3c0ba93066d781825054df4d1f3111961d5ac193f902b26fe"
+status = "residue"
+cause = "mir::Ty: CpuInfo"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::LEN"
+kappa = "2126482c2f7cedcf39591ba188a25cecbfcb7b3f0354942a7210b7092f3f1da5"
+embedded = "3680eacd9029375f9672e11114ed7f8791367872026c69e726c67edb46ef4f38"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::LEN#2"
+kappa = "3e1d41fd6d45d889d26dac011b969a80d14d748eee5d456460344deda2e42bca"
+embedded = "d30bbbfc2bc35860ca16b70bd0880bc8f8c33dbaee7670e1873c63e6cac95777"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::chunks"
+kappa = "9419cd2562ee068e8cf989809afab09e07b35c8f32f39a0078db45071ff3078c"
+embedded = "a34e9e154d0157a876140762fc0983e6d4d309873448f6a301a9cb32860c3c57"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<u64>"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::chunks#2"
+kappa = "7866c5b0972ca4cda1d35c627b212bc8814b01f625aa8fb1196ec4f87fc4e2f8"
+embedded = "9ed3583b89f1098548c6f316c9731d4f935ca6d451d348b87d4ff914a9df4391"
+status = "residue"
+cause = "mir::Ty: core::sync::atomic::Atomic<u64>"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::optimistic_read"
+kappa = "b7b2c565e4eb16bc3854088c210b2e1c770a99f8a17e1387f30c0c6509348467"
+embedded = "0edcd8e8ce2ecd4598f9c7ea7845505218ed42dbc53ae573e4169441b522ff9a"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::optimistic_read#2"
+kappa = "6793e3b77e8cfcfa889ca7fbf4a85934861897e5d576208bd86f559697fbd8fe"
+embedded = "5e2de46fdb4f73c1c55621ad24eeccc0067c295b7357bc6671aaaa8e67d1ee72"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::read"
+kappa = "06f90e56157cfc881dbf3be3be7f96cb8014badede7025d5f60da96e3b724921"
+embedded = "cdbc8457249dbcd9e61b324977460cac9f3e786c88a77db9939219600e3026dc"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::read#2"
+kappa = "d17033b08a98340c5ee25757121ef9d7ec2c763455f4ac345eb3bdcac921ae7b"
+embedded = "93e6b3fabeba2dbd68a63f75e68518963288f1a17528e7b84afd27814acd718b"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::write"
+kappa = "ddd881c5bf60c83b6e73ce09c1a320071f8738fb5f255785f82145621416ed66"
+embedded = "e5348fb8832291c58cb98db391ea9e9c134a3d58ae7ce566d6d7200ae925a763"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:127:9: 127:26>::write#2"
+kappa = "6acb28e5ce31da14815e4f962041128c9cc102f962e65a66823f0610c57fecaa"
+embedded = "4577674e2b4af9ce0cebaa30c5070f310fe19a2b9e776cb2ffdbf851ca9b69fc"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::compare_exchange"
+kappa = "3a678e31f86212ca08669ba7ec4f4d855186fe114dc4d580e11168b2b8c9729f"
+embedded = "d56d4f38748abd5529816ce286495030ba5e61cdbf73b8d8ac548c1024960e86"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::compare_exchange#2"
+kappa = "97422b8d7fa3da04bb8926c1f6ace3f416bab0a97314166b65b9c7f3a844dd96"
+embedded = "b6e619836317c4f5e4b401c65be35575ca7038a8bb19e32f673b4ac8b6d5d5a5"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_add"
+kappa = "ebc7eb4d233ed50b7d5c7f32983bd56a00f5b473bb181bec9ec1db59dfb2cca0"
+embedded = "1afef5b5af1643ff0afc476fe1471a4c7bdf18a415ccd713fd623c314efd35b4"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_add#2"
+kappa = "e1352f7db00c8650a912a05f6bad84eee7d15dd5e8c5a896f12975e5e69ae606"
+embedded = "88c41e25c2fdf91e64b1626d5bafbd2f240bb8ff04bf90c06bbcec0556ea1bf1"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_and"
+kappa = "ca9df96f1dff91a6d83167636d7177e3805a9e84e873b2ad8a0a9f64027d51ed"
+embedded = "a5d3fb76435b1fdc3ae6818bdab89444caf7bd642cab877f2d0dd5c7b6972826"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_and#2"
+kappa = "ce324e251d349c919913ea202f3533cb7ab922106d7c654d893c77c6c67864de"
+embedded = "5e7d0f0cfa0a1ce9b599f47ae854fd9841b2a615a2a1e5994ec347133a132fa8"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_nand"
+kappa = "7d08d80aff7f3837dc9abe959d2e9bbb6b75165cd059283287aba91cf48ecf14"
+embedded = "1ce2597f704cdb8ce15b0ac72d15954b5c18365a8eb1dc4c35c8af86e9841e36"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_nand#2"
+kappa = "22618c6c49c2a32d199e652266a09a07b55ce4eecf705c574577fbec93fcc685"
+embedded = "acfa8b20a5c8df1fa01867469b40f2822577230ca0e2820834b0ac8a33585556"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_neg"
+kappa = "430e0c9e270b13207672cf9b0e050fa471972ecb48f7d77d7b39c21f93c87d06"
+embedded = "5e19bd7b1dbfe3893e33eb04a1b2329bb71247d34849b1a2e78522ef502c22aa"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_neg#2"
+kappa = "554190aa29a21bd534fbf2650c8fc7d7307a0f32a388796876c1d65cc7eaec6a"
+embedded = "d6872009d077a372793a1b35777d156e6d09ff0c4ed2110c489376e327a6ec9e"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_not"
+kappa = "c90f84b5d757e45f913cd667cf47144fdafcfdd33b2ec03c062cb15179ee7a43"
+embedded = "84f705a962c785d2fa50060b386bee48e4df051d0a397149ce130104ae2bc3e5"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_not#2"
+kappa = "0f86bb154587741060701070d0b608b9dec221a44f7e71191ec5553a10de0537"
+embedded = "735213810c886e7d93db9d48952b9ee79b5d27d7f42427195d52cc3c47318bca"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_or"
+kappa = "c90713393c15006803838995126aa88d452b89835885ca5ce33dfbffccfa2ff7"
+embedded = "2d22548090da7136ba4443c3fc6e07906e29a4b0487435e1189e88e408d6d6ac"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_or#2"
+kappa = "c0c862c4bc54ce258d1a2e99b9c0a64648ec0b484d5543156ffaa4fe6544ac04"
+embedded = "93de1bf2808e1ba25a32d0979df98a002a085c7e4f4711fc37e5887ab31f3e9e"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_sub"
+kappa = "f4f9077d33670a8090fe53907f1188b0aa51ce9f888ede29b25bb2fb2b2f7aa2"
+embedded = "2f5a38292418f72b2165c2611e2d5efb8a59cfa4ad72232e34e7b813a303c8d1"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_sub#2"
+kappa = "636de34bd273c5d8902fe00539b89c8996398200e3fd9ebc33e8c2c72d8749af"
+embedded = "63bd985239f068b4577d29f0fed21586f23ca63f6374e5e23a0765702b71149b"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_xor"
+kappa = "bc8d2086a6540b65d7957839a1e6644b55b3a4113c5c80be67a6c7f6693063cf"
+embedded = "5741fab518e5b92dbe4dae21354fd5f9b5cf0b5a196f940896dffb86e556b3db"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::fetch_xor#2"
+kappa = "8c23c881eadac05942dd655c18837d00f1d934025d9787b1745811535fc104f9"
+embedded = "b31e3d48fad9173d8890faff3ce2ba6a203b21c463076cf7cee2cc06ac7dc9e0"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::load"
+kappa = "47b8da63931bf761db0efade2528fb37130c03de7b75434ffe47854dd601ab32"
+embedded = "e70c4c27bd8f905272742e19d04c27a54b631ed0fc40c4ddfa177685fdb067b4"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::load#2"
+kappa = "a9a55b91d3c7ce99dcea834ced96583067d2e62777c4172bc4e6ea3faf882603"
+embedded = "6617e799d934f68cbc206654c795517da3605df3b51fda9b289a4a3ea4874289"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::store"
+kappa = "9e5b06eff5dfae16554571c5855b3e2f95aa10e98547a0202849e84dc2e62776"
+embedded = "46c6ed09cbea28270dc28467141f215b4e3f62046fc304d3c0443af75c4e8c27"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::store#2"
+kappa = "fbe3d20c05c9a555fc811e337b9d438ff96f494757a95de09891058516661bad"
+embedded = "795e6c6e2171f71382476be6d4735e0f18aa9892e75422efda0168559b858222"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::swap"
+kappa = "ba2d723d50afc0474cb21dfa8b26d2d8d2e0d62d1f9b0ff1a9c426d7d3ca5a92"
+embedded = "f83d907488f37ea4bcc9136dc377ceb25e2e438dff65872257822ee304785f92"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:363:9: 363:26>::swap#2"
+kappa = "4f061ec3f25f3d62b8d909be8076db8ed303685fbeb810b1ce3ffb38a3c7d737"
+embedded = "6ea2522279be134faf10841e43dc26fee22260c68fc3a481891ea565f591a7a9"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:503:9: 503:26>::fetch_max"
+kappa = "ffe5e7135b15b42a3ead811c2860c628ae871ed2a09ff80f14a6d59d03695d9f"
+embedded = "57d674cebc854090358a15d4fc8c2a4d6a3c567006ee153bf18598fdf290245f"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:503:9: 503:26>::fetch_max#2"
+kappa = "c06ef23aa20d78c2fb9cb950661d064027aa19441572762dfcc95c016330449f"
+embedded = "0463529e5bb4e2d19754f06377d413c6dffc257d1375bb469400f41c513dff62"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:503:9: 503:26>::fetch_min"
+kappa = "0ddb7455acf7aee3dd64678c1dfc07841b950e47f2ae66a1f6d0653e639627dc"
+embedded = "b39a05c9d3342f2a36ef2d5325aa88919360ef524503bf55f04705627bae9154"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicI128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::<impl at src/imp/fallback/mod.rs:503:9: 503:26>::fetch_min#2"
+kappa = "f735781c74e75aa8a1227b22b959371d6ce6c118cc437767f84a331a3015f0f9"
+embedded = "6315e73eaa22d1939347529393c26a6904f77c65271a2b87a4a2172a90d7349d"
+status = "residue"
+cause = "mir::Ty: imp::fallback::AtomicU128"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::ScFenceGuard::drop"
+kappa = "5afe6cdd0a71d649a830938ff661ba84953b83f40bf8676a024f000b2ca82ba3"
+embedded = "1cb7f5211247ad19d2a392b4f181f1d8291d9a5b44f581a7cb849b0a9cf1258b"
+status = "residue"
+cause = "mir::Ty: ScFenceGuard"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::ScFenceGuard::new"
+kappa = "ce38eeefb178731d28f5aa888c48f5c7310c3ea50e6360f63e5f0a67dd4e4556"
+embedded = "27103c985b0a5a43cbaa98749fb1f4daa532d67d07c43f8c111be4aa68f82f0b"
+status = "residue"
+cause = "mir::Ty: imp::fallback::ScFenceGuard"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::utils::Backoff::new"
+kappa = "765bf79a54076b16063a4d11234e82761213180e2a4b8d5c2ba9171a0643135d"
+embedded = "97a70d2a77ffd196809eb37174ebdd1907415cf262b0fa2a178e86c9ff1b2fc2"
+status = "residue"
+cause = "mir::Ty: imp::fallback::utils::Backoff"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::utils::Backoff::snooze"
+kappa = "6b8c99cb2f21518a6c12e35be4cafd8e8800cdb1916244e076a2152bdd6690a4"
+embedded = "80a08d8001074d6501bd5c67f58fdc2ada97b3aa4e0558dbb3e46e74adbe2d0f"
+status = "residue"
+cause = "mir::Ty: Backoff"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::utils::CachePadded::deref"
+kappa = "1c748a5a6d2b5ef642c698bfae4aa569ba837c788cec3f2b583c3a197ed87cba"
+at = "T=u32"
+embedded = "34e0e84f1233f6a60275b5e8fed50abf295f70f038a18cbee742d5eda514882e"
+status = "residue"
+cause = "mir::Ty: CachePadded<u32>"
+
+[[fn]]
+path = "portable-atomic::imp::fallback::utils::CachePadded::new"
+kappa = "a829985245df622bcbbb2d9f9606a537e6a0ee358c51c81456e7a3fabb73b3cf"
+at = "T=u32"
+embedded = "b64d6fc4b616256dbd2541e534c5f38ade2469f5140fc56fd5688001f9db8fd4"
+status = "residue"
+cause = "mir::Ty: imp::fallback::utils::CachePadded<u32>"
+
+[[fn]]
+path = "portable-atomic::is_lock_free"
+kappa = "6a8255a831f44f9b6eff2baf0e67289a2ba17f65a0094319e63cd9651a24a03f"
+embedded = "46abb2f1dd64d2a8966a328c7afe9f5b8e407b60ec4345dd2ca2a4f2d24fb321"
+status = "residue"
+cause = "mir::Ty: imp::atomic128::x86_64::detect::CpuInfo"
+
+[[fn]]
+path = "portable-atomic::lock"
+kappa = "4fd00b2a0b5fe3309d621499518a0aa06e5ddad219f2112f05cb4f67840c56d9"
+embedded = "43ef9fb45f2f46faf9defcd035de29dfed734463d83080ded7e0956a864b5f80"
+status = "residue"
+cause = "mir::Ty: imp::fallback::seq_lock::SeqLock"
+
+[[fn]]
+path = "portable-atomic::seq_lock::SeqLock::new"
+kappa = "2b7612ff555773254ccefe603955b32219b1f61654753ea00b8845ad5bfd771b"
+embedded = "67b881aaff741e4048f39a90837821c5a442ed7a0b1032d0261fbe5862a05d3e"
+status = "residue"
+cause = "mir::Ty: imp::fallback::seq_lock::SeqLock"
+
+[[fn]]
+path = "portable-atomic::seq_lock::SeqLock::optimistic_read"
+kappa = "c6e6b12ef3524733947535f1fca7648f5bba2737c6a2bb823a9867ad1035b6e8"
+embedded = "6b3763a293eb0bc612a3165883b7c1384b6265727d449b0a569967147b140611"
+status = "residue"
+cause = "mir::Ty: SeqLock"
+
+[[fn]]
+path = "portable-atomic::seq_lock::SeqLock::validate_read"
+kappa = "99e77bbc5ff434190e91a1eae16d43b23e7f4b05cdf19dafd9c822a6741eeb11"
+embedded = "556c8ccc2cad82e4a1b61ae41efe91fe1acdc296ea1121f8309daf99122501ab"
+status = "residue"
+cause = "mir::Ty: SeqLock"
+
+[[fn]]
+path = "portable-atomic::seq_lock::SeqLock::write"
+kappa = "48d5c14002be3f12ba8912e6a4d00825f9eb2947b1930432260682a041aeaf21"
+embedded = "8260a9a719ef6d4dc7e4a758b692a678be7c29d073a0e524dd8020a627c6f23d"
+status = "residue"
+cause = "mir::Ty: imp::fallback::seq_lock::SeqLockWriteGuard<'_>"
+
+[[fn]]
+path = "portable-atomic::seq_lock::SeqLockWriteGuard::abort"
+kappa = "db717c35f795b3c3baa3fea3dc387030ced4860ac8d3588499ea7f285c49955f"
+embedded = "6d106a27bbf6e16e6454045294901ca5ca243ec3edbd87e3b1bea1e836551585"
+status = "residue"
+cause = "mir::Ty: SeqLockWriteGuard<'_>"
+
+[[fn]]
+path = "portable-atomic::seq_lock::SeqLockWriteGuard::drop"
+kappa = "bc6d9cd4cf17173c64e7db23aaed0621f425b2fde7e0f2de689ddbce58646428"
+embedded = "6775035c96f4df223c6082b4c685b8cbf0ec5822e58b33631b7c09d4c2099745"
+status = "residue"
+cause = "mir::Ty: SeqLockWriteGuard<'_>"
+
+[[fn]]
+path = "portable-atomic::seq_lock::SeqLockWriteGuard::next_stamp"
+kappa = "13887316e6f7f7c547f3f56a82a28cc8d2dd862fd79b4951d88dfc241a1cd4a3"
+embedded = "b514cdf24158ce2ff251a3b628dede31efa03123e970f57f417bcc558a763381"
+status = "residue"
+cause = "mir::Ty: SeqLockWriteGuard<'_>"
+
+[[fn]]
+path = "portable-atomic::set"
+kappa = "12c09759209f2bb5777bf0a6145c98056303aab8657705a3228e9f8e831cad91"
+embedded = "b640906fc4395c2c93fecd3ee67fe91cedd41dc1810cc1e0d7017a44f92398ae"
+status = "translated"
+digest = "b6c6bbee8ababcf1d683fa16a0ca023a34b382d7e30639e6e694fa43fbe72d64"
+
+[[fn]]
+path = "portable-atomic::test"
+kappa = "eaba727ac3e7c75d3b9d755f776e97a75e3122bfb60dddc2976a0f7276139c36"
+embedded = "02dc9863929a43fd880b7651a0cf9675a00395c9a5d759fcff6d587745ec9e05"
+status = "translated"
+digest = "96c4616fef9b507e014b34aed9d46010fac24771abba10afc5e9ec29c30148a2"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg"
+kappa = "19399016df81183a3585f8e485b64d2eacdd41d6b9ae7bad1713110f70a72d33"
+embedded = "93f04757d536aacd9596663fadc84f9a000fe23c9dee9b48c76ea77ac39f2db7"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#10"
+kappa = "d90076bf0fb730e2392593778484b7e47c4bb7f8a6dd2eee7d38eff88b32f2dd"
+embedded = "d0960c8403ba751a3480a0a2cb0ce140a67d72ce326dba466cae05250e341f70"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#2"
+kappa = "2807e8299e885c1f0461186609994e839d0157c2e53014c1bdaa06ef96b1a70b"
+embedded = "7994c3eb69f4117a78af7a734934e07b288af269db84429e6dbd0bd790469d08"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#3"
+kappa = "e20f6516d3a9cd45dbe90d5b824d3cc45541f67ed854edfb522dc8224e9dc262"
+embedded = "d88a8d53dbb35cefb7f265f19c4ada405344899fd19e7e85571ace2a7bc15c33"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#4"
+kappa = "cefd6ccc194bb23232bf165293b9dbca279a3202a6caf659930ec27fcb40b108"
+embedded = "a85aae4a1f80faf87f1fc7affca82a2e97b1344c1cd77e6c213bf3dc03cd0f81"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#5"
+kappa = "586352dbd425b0626b43f0f03b833c44aa9278ab64c93a86c92de245184bd902"
+embedded = "c57e33a321e7671ce1f7bb5ec2bd0cf9e45e1c4dd39df44053c68a4f9d9580ff"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#6"
+kappa = "1772221eaeea142609576b6befd032c0b1b079a97c63b54e0fbb40e5361c415a"
+embedded = "00dbc75061378579fce6d71109c37404719ce5d42ce9156c7864020ee04b345d"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#7"
+kappa = "b34aacee5d4a23c874fae6d7560baf115c3ced0edfcd6cf72f816600a7b8414d"
+embedded = "fa08ebe0734d1675dd0448139b8861e65e4fb02fb02112e5627cbe9140aa5cea"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#8"
+kappa = "b2a6d93a1483c399271ef7eed76efc1bbfff3cbeda1c2e5dc73a341fa5a529a7"
+embedded = "8493675f0be07c655570ad2100ce1936ce4fd9e944f14a88d22c38c0fa88ed9b"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::neg#9"
+kappa = "fcbff68c1a9be18872537a1b8a58dd64d9369d63862d5311d02f749b44c8815c"
+embedded = "6d8422cb7db308e84461509e05e385b761a56cc5ed92bf0b72d35b8b7920bf22"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not"
+kappa = "5a2801197800ce898e8fb1ecb16bdc62dd3ef7193fef96ea5b5a930832dfdaf1"
+embedded = "9f5231a38c96f5c49ae117b7edf07c2ecaaa0dd101fcc32b8e7496c2161dc3f7"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#10"
+kappa = "cf7a48174d7151d5d842cfc4524c6eeb6627480d270124bb29245bb55f27947c"
+embedded = "70c99f04e3519e95b382c815e9d0a20e10ae918122290c922d381358bcfe756e"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#2"
+kappa = "c80330150ec4a539553d51037ae94b97e0881343168674619f62b3e29a3d1d4a"
+embedded = "dc897100ca29128c3b1f60a2cf5437361516619cd1e060d2e5772d5e91b1d44e"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#3"
+kappa = "a8468deb9a7b4754e51f6e2af49895266d50e4ec9208e475773fc6813fab6809"
+embedded = "aa8742f5091fad1a04072120c9e40866f43a4285dd4a572b8b5073f8305846e1"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#4"
+kappa = "4524ccf2806f936ce41236fcfca6fe0df991af2e7fc37a2d51a5c1ce9c7ea3bd"
+embedded = "5762b19d73ecd6dc63016c7e9cec097379e1ce01d0a476ef421968e747f9e49f"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#5"
+kappa = "6a39ff0e3251a81ece84987f8401a74507afb198398f45a4bbfe68560f2f9dca"
+embedded = "0a684d0350b3c3df045638320a27ab273cbd402f31c3020bf8f5a2d371876731"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#6"
+kappa = "70f9ad0999e8d750f9be455eb5b8fe490071730016492bbdee682562cf35fa22"
+embedded = "282a0b066acab6be16fccc3bbeb5406569d8fb32590309e9b93ce91dd3f999c5"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#7"
+kappa = "c8228dbaff4cb534a3665d606ce5589c3e3cfaac7f224d932a7d74f510e299cb"
+embedded = "3862c3a568352fefd66edc25a4a81344e987a406e2ca52fece010dd5a98ab1d8"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#8"
+kappa = "b4e0cf055b6493f94ed03948f95476bd612604568a8dde9222777d62c5d846a9"
+embedded = "9a8242f3226b098a8e94f64aaa28b92e8ed6bd79f1d096bda3612ec81de118f8"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/imp/x86.rs:82:13: 82:30>::not#9"
+kappa = "631429b76331b9211a279672e0d61c538b68ee0b107e4fce0b67ea7d75d0268b"
+embedded = "1ea7dcf593721c79b84fc84ba4d9e77b810ca6ebf95f843c9624ad68d7a37bdf"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear"
+kappa = "93a36ee134cd3f3e32c9c23fc32e827bfcb57e485c1d0706175193ab05da7ad0"
+embedded = "bd63d298ebd22eb22cff890dd9a80789fc9e2c2d842737065ef7da2faffeea93"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#10"
+kappa = "46ba0930133fc50e9a3cf8e3175c999ff1ddea3f90c88c956b684d86c86b5c86"
+embedded = "85a4b3c3c87a9485cba704ff856760ef4776bf94f5a67dae3ce49ac6a799426d"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#2"
+kappa = "0c2c0d7538c0f0ddbe549388b3cc7e747fd6cb75e9ea70ea56219a78ddcaa548"
+embedded = "df194d5a686a1daae8baa0cd6dfbd7fbe153b259bcc5357bea1ce3bf6b0ccb37"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#3"
+kappa = "6fb6ba226b57bb79330aaeceb3b5891118695cf7435a9bd705f963dc83d021ad"
+embedded = "5d47f91b15334532a7933feb30d109e7361321b415e0dc98671c767831055b31"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#4"
+kappa = "ef15149aacc84ba589c4101fa4bd45ecf80d123dddc1dd2c8941a87ca070ae2b"
+embedded = "88726f4e9c74e3e9965be6b99cc7fb9374490467c612849d6e31f5287da1f3cf"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#5"
+kappa = "abaf41252d9396559a2f4b233268df1d459e11e6483445869d400b31aa138d78"
+embedded = "1d9e2cdd4ebe3a423a4200a4292f1364b88a980ab0395476c85d9292a9477407"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#6"
+kappa = "f3dfefbe3965280358e2527cf4efd9c10fa998f0cfc1445b017265cd79dcbdf5"
+embedded = "87f4dcc5eff1dd12dbb8f7d59d7b77e4666ac19ca15e06b15d0ad612bb0bca54"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#7"
+kappa = "1782b98518d7730f8733ad92f266301ad95850440647f81abc313d9589850780"
+embedded = "5d10ed6f1d157c8ab0f6f73174244b32a67f1138cb79af32a575af680232e43a"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#8"
+kappa = "849cfe284ec0f47418391f0c7387024b65ba2c846957788bd160a21459a082b8"
+embedded = "dd8712e81f892c63e16856b444811aec38e8b0a2536b43c697f134426a1ac9df"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_clear#9"
+kappa = "2d39b4b1e7a46a5ec8ebe7dbd97132967dd2b958dce71c3cbf78c1624e2e44c1"
+embedded = "2e4c16dec231e62ebd5bbe2d96fa44827f9af21ab1bf2cdda6ce3f5013713c20"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set"
+kappa = "1073b9e7735a98593f7009bbf390ae04590ae05b361284835372d31be480526a"
+embedded = "64253a2a61f33f9537dee6d544fb0698c696388def26baa9efd504af29aaf67f"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#10"
+kappa = "d87ffecab98d0fcfd42f411e4b3f94fefed5923e99e25f0271a1f806df787fff"
+embedded = "5ddad68862340313823fb8c969123d69d6d8dd9a7a7646f92472b6ee55b5c72c"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#2"
+kappa = "b67b3778248c1b2b04fa0511d5e228bcc335a27d9f56d30687eb86257d8100df"
+embedded = "bc2e605212e1c7016aa37a7a714723ead97b3d96555d3a0355a7b325aa6c25d2"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#3"
+kappa = "52d2e3ceba38285f087bf8acf4be802f2b40498e232e0f80800797c547c7cf4e"
+embedded = "4b4d2344322fb21bfb0ad5c8a421849ee95957431c11750306af6f807c44dde6"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#4"
+kappa = "f32461c35cfe6cbf5428bb0981ed5f18b0c0407daae922e0da8527359e61c56c"
+embedded = "2a4d7c7c8b601c284faab3179d2d43b0086c30a233821b46089c2b7dcea1e745"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#5"
+kappa = "8e725ad563f791f11f2fe18daf83b613bbfcad783a500a2d3cae29c7528bdb33"
+embedded = "a7297327e7fa9784e758613869a862789dcf9431f45df7bab272e8c6f3a2b778"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#6"
+kappa = "e56b5a5609969092e5205d306a3b8fc36b908b2a5991ad7beae5589dcac19caf"
+embedded = "c432ee663a0eece65bb6b2917e37d5737d3260b8f7340a5460eb704f4d8ff62c"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#7"
+kappa = "acfbf8dd6cba57ff6f8bc1d3111ac60b02a3abe9aef02b8c38269f0f0d1be052"
+embedded = "9a134e366ac794e661d1d4a96e5650aa77e90ed4897a60a664e8d738d77fb348"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#8"
+kappa = "36f32b44f4292aa8a4541da0cf4cbdd60f13f61a41110e9204f1cab2c591a0c9"
+embedded = "4b111b50107221153eda4aaae13b7f8c8fa046c22e4f0e77a5e45d4438d0af87"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_set#9"
+kappa = "c5786a2b26477f61468757d5ce6c04d316767ced3cc2960efb5c0854993ab37d"
+embedded = "4dda735038e187ad519fb5313ac8df0a46d284a2a020212b9e9d130917137b8f"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle"
+kappa = "ff3123627f9d1072c3c862d1a560e93e137072c4cc5f56e0ee2180c343fc7f24"
+embedded = "ddb085c6d1de3a1bd7815e26b4c8382f47646bb353c49a7b59f430609e843164"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#10"
+kappa = "420fb13ed3748e13a9f37943bebd47bb598483391362cab00d6adacf2a1a523c"
+embedded = "00859ffdd7535f49700cef05e77b9b7bf7f63520ebb7c264eff50db79f3e7355"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicUsize"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#2"
+kappa = "e91086c5821bbff1896065335809d705bc5ca2b1f1166963e5a251092c208f2e"
+embedded = "8794484f0fe364aa76761b1e1de5cd50a405495de690fad2652a7d0cd4cbfe78"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU8"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#3"
+kappa = "7ecb9f0996dd13350c571e034e338ae89d62c7b214102448b07233d158100dd6"
+embedded = "533f9d05679b9810a124f63eb2b00ef15be83d57a8e3c866cf4bae2320087a03"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#4"
+kappa = "46f72d84f9790e6b4b88a472755b00427025aad8d114abfd7c473de0aaff4cde"
+embedded = "99d5f9f326fd41df7187aab5118e8a0e2990b43ce7fcea1da3107d00663f90c3"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU16"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#5"
+kappa = "42d008db0542449fbf8bf4732d389cc28b9c84f87a0b5ceb22aaf60552244e26"
+embedded = "693aa77e20861edca86baafb4eb267aa400a43ecd39c977f7fa7934c52b68b27"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#6"
+kappa = "a3f0ddcf7d53cb7b0b7cc63fea5d891dd9ba906ac6f942ec4e462f1ea5475d55"
+embedded = "b9b0e54db93208e900b44e999a769484088ec866e9450e8deb9b6f1b503dbe60"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU32"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#7"
+kappa = "361bc19c119a3af677504c88c4c4dd11eec83b2fcb2aff0d53147e2f0c3588df"
+embedded = "1dd624f8ac46e32c2ea8713c1745307336b7048fcbae586d5670b4d10ef34bc3"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicI64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#8"
+kappa = "137e8592154361a998e7f5ca5dd0c1df5d822ddf72b6533aac45120b933a6906"
+embedded = "30954ccb0e24f368c2fd1f53c14b5d5154a374e233d76a0fe98ca4277679cc3b"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicU64"
+
+[[fn]]
+path = "portable-atomic::x86::<impl at src/utils.rs:279:9: 279:26>::bit_toggle#9"
+kappa = "4f3fa8d7ba1ff5cf8ed86fac6af2dee3ed030a8071d25d4945385a420e52e9dc"
+embedded = "473663e7bd2ddd2599f3c88043e8a70e8246b61913040eeb81c7e469f30126fc"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicIsize"
+
+[[fn]]
+path = "portable-atomic::x86::AtomicPtr::bit_clear"
+kappa = "f55b34008785e063a939579ca538acb5afeae042f5171b961e04cfe35f9f2daf"
+at = "T=u32"
+embedded = "b87a0613cec22135fbc97da1d83bb3f49d5b27a9e46d2ab4fce557ad3c858bca"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::x86::AtomicPtr::bit_set"
+kappa = "3319435a90a88d1712f1ad4470f7f21c04902f08d978811bcd8c000f54db621a"
+at = "T=u32"
+embedded = "149c881c8a9b697401d783f7e81bbbf76b2d54d3fcf631ef8a19a72e950032e6"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::x86::AtomicPtr::bit_toggle"
+kappa = "3fdb2eeabe7bb6eaa6c4082ba99a98b3ad1bc4e1eb95e631b936da9e1b3d7bfa"
+at = "T=u32"
+embedded = "386d62f5dc9a6a26d43d715e691d36cb1a1b5cbab24d5780f3096775716c5dbb"
+status = "residue"
+cause = "mir::Ty: core_atomic::AtomicPtr<u32>"
+
+[[fn]]
+path = "portable-atomic::x86::fence"
+kappa = "519b6f5f55aed89bc80caf8e64c5d10391b882b3b234403a6f3b5920852f2ac7"
+embedded = "a1b780e0e9dac06be909903cc6b28a25a7ba84346c5e8aeb3576802ad0ad5634"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Operand::Constant: imp::x86::fence::promoted[0]: mir::Rvalue::Aggregate: the variant CmpOrdering::SeqCst"
+

@@ -1,0 +1,69 @@
+[[fn]]
+path = "semver::impls::BuildMetadata::cmp"
+kappa = "d041b8709d9f40d05a5fbb8d09e70a107a513dfec381fe7aa9e4aa96763ef806"
+at = "BuildMetadata=u32"
+embedded = "756a22ac1f47e063153394feb0d9c647cb46db73a26735a2078d57e554444904"
+status = "residue"
+cause = "mir::Ty: identifier::Identifier"
+
+[[fn]]
+path = "semver::impls::BuildMetadata::deref"
+kappa = "4ddd14d2c8edb722801d5fd924cbea460d1df3f5f38643790e7245d53ca72924"
+embedded = "8e966f25c934dda8c413f231275e6014165217dc26beca5edbc2ed55f4fc1b3a"
+status = "residue"
+cause = "mir::Ty: BuildMetadata"
+
+[[fn]]
+path = "semver::impls::BuildMetadata::partial_cmp"
+kappa = "9e56415a0f2310308edbdfda2f425be2f993d6d46dd1470840cff04232b54223"
+at = "BuildMetadata=u32"
+embedded = "82800123ad76d485b8b51e6bf205ade505f490df859b1061bb389db018bc0470"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord, which u32 does not implement in core"
+
+[[fn]]
+path = "semver::impls::Identifier::default"
+kappa = "a4e4c6ebd3c0c1514f681e3e3b2586ff4776fbb9045eaedc6c071160c46267d3"
+embedded = "3bd894e8d4768133130c7e42c2f790d60b0394db2154195808bcf6d6ce586fad"
+status = "residue"
+cause = "mir::Ty: identifier::Identifier"
+
+[[fn]]
+path = "semver::impls::Identifier::hash"
+kappa = "6ee59c66aba03689a3b3dd1a6ba5eb40af9f544294f239990418277185e2d7c6"
+at = "H=u32"
+embedded = "2de114c5e4351838bbae85861ba3d5237721d238c66c950311b5ee8fd0e1ca01"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::impls::Prerelease::cmp"
+kappa = "9353943e32d6e9a900ad90142bc6de86ca877abc587dc8de04ca61f07ad2f5f5"
+at = "Prerelease=u32"
+embedded = "2ae6cbaaa2afde67668b7cc422c56ae7e954fbd78bbff4eefc4d9ae299f065d7"
+status = "residue"
+cause = "mir::Ty: identifier::Identifier"
+
+[[fn]]
+path = "semver::impls::Prerelease::deref"
+kappa = "c6b5f8453b9def4f96be4b0c851bd89e3b81d039ac6af8a2fb3036ae3c5955f1"
+embedded = "89cbec5ac198fbd1f1be02e3e905331170f2d7f8c1f31430acd8f70f5b8ce12f"
+status = "residue"
+cause = "mir::Ty: Prerelease"
+
+[[fn]]
+path = "semver::impls::Prerelease::partial_cmp"
+kappa = "0c781cde7977883c0e09ed7752f03920b1bf4d707a5c8fee00df184ee7821df9"
+at = "Prerelease=u32"
+embedded = "fb6aedcbea6a610f55b3f8502e62b45f7751f99098c87ab6b5f422958264d42a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord, which u32 does not implement in core"
+
+[[fn]]
+path = "semver::impls::VersionReq::from_iter"
+kappa = "f33c745dec95017be8c5a1499ab016de688135aa84f5b33640e70046acc60081"
+at = "Comparator=u32, I=u32, VersionReq=u32"
+embedded = "0fa371ee57f5b8369deb8d5933ea07d8a81face2817949964b2f5640dcf58ced"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <Vec as FromIterator>::from_iter"
+

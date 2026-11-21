@@ -1,0 +1,170 @@
+# The rustversion register (written by `uorust crate rustversion@1.0.23`; do not edit): every body of
+# rustversion's MIR at rustversion 1.0.23, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 74
+translated = 2
+residue = 72
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.bound]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.constfn]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.crate]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.date]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.error]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.expand]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.expr]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.iter]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.release]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.time]
+bodies = 4
+translated = 2
+residue = 2
+
+[module.token]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.version]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 74
+embedded = 74
+evaluable = 69
+blocked = 5
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: date::Date"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: expr::Expr"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: release::Release"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Qualifiers"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro::Group"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenTree"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: version::Version"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Channel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Expr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IterImpl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::Args"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bound::Bound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: constfn::Qualifiers"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::IterImpl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::Literal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::Span"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: version::Channel"
+bodies = 1

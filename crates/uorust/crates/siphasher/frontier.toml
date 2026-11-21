@@ -1,0 +1,108 @@
+# The siphasher register (written by `uorust crate siphasher@1.0.4`; do not edit): every body of
+# siphasher's MIR at siphasher 1.0.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 164
+translated = 0
+residue = 164
+
+[module.common]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.sip]
+bodies = 75
+translated = 0
+residue = 75
+
+[module.sip128]
+bodies = 88
+translated = 0
+residue = 88
+
+[embedding]
+bodies = 164
+embedded = 164
+evaluable = 164
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: sip::SipHasher"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: sip::SipHasher13"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: sip::SipHasher24"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: sip128::SipHasher"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: sip128::SipHasher13"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: sip128::SipHasher24"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: sip128::Hash128"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: sip128::Hasher<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: sip::Hasher<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: sip::State"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Hash128"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: sip128::State"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: sip128::Sip13Rounds"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sip128::Sip24Rounds"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sip::Sip13Rounds"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sip::Sip24Rounds"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1

@@ -1,0 +1,119 @@
+# The chacha20 register (written by `uorust crate chacha20@0.10.2`; do not edit): every body of
+# chacha20's MIR at chacha20 0.10.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 64
+translated = 6
+residue = 58
+
+[module.avx2_cpuid]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.backends]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.chacha]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.crate]
+bodies = 16
+translated = 4
+residue = 12
+
+[module.sse2_cpuid]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.variants]
+bodies = 5
+translated = 2
+residue = 3
+
+[embedding]
+bodies = 64
+embedded = 64
+evaluable = 62
+blocked = 2
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: avx2_cpuid::InitToken"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: sse2_cpuid::InitToken"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ChaChaCore<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::max_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: backends::sse2::Backend<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: variants::Ietf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item backends::avx2::PAR_BLOCKS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_left"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: soft::Backend<'_"
+bodies = 1

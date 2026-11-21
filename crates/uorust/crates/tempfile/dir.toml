@@ -1,0 +1,132 @@
+[[fn]]
+path = "tempfile::dir::TempDir::as_ref"
+kappa = "5099c03988280dd49186fbc09e4345136e3435560878e219f53ff1e6a06ece0a"
+embedded = "c47fdd264f1d528b93de53900aec43c19c740eadd19162ef0935296167db4d29"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "tempfile::dir::TempDir::close"
+kappa = "b882c6f0e72bb7612c67441b22f51538d90947222517661c0f5fb3f0a153a2b7"
+embedded = "6dc2f6a2a4e54e79008dc028889b95ec88fe6a9d9ccfa9728ab1b714a2eb28ad"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tempfile::dir::TempDir::disable_cleanup"
+kappa = "adb66c575d448b5d658b5203e717f31e1df0325c7889e0cbe66279ade5c32eab"
+embedded = "6c83c2e2a88e97cd73c1079d6ba77cc2cf4e3ee35fb195462f30d7e344906a92"
+status = "residue"
+cause = "mir::Ty: TempDir"
+
+[[fn]]
+path = "tempfile::dir::TempDir::drop"
+kappa = "ac409711d828d85a3690b0e6bba5d113a170cecad06baa8689fabc0552d6f734"
+embedded = "506751d4deacb6b15063d804a5b1ce08db6e94e52df3d24037ab92c8ce4142a5"
+status = "residue"
+cause = "mir::Ty: TempDir"
+
+[[fn]]
+path = "tempfile::dir::TempDir::fmt"
+kappa = "ff9379e2c5983c8d5a528c6fe22f9cf69b503f9ade9a09359eb4ca65f605e3ee"
+embedded = "a637c5cad889c1f99eea44d2a9b9ca893cd2f03a9b85980a81468daaced12e51"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tempfile::dir::TempDir::into_path"
+kappa = "4dbbe18a92db30a3d7809a917b0c746df17b27c2f72642df85e8dcaaa22e2df7"
+embedded = "4598fd3ef8a25cc0e6ffeff037f7a33890d011cdfcdae1d1feda16e8d5ab520a"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "tempfile::dir::TempDir::keep"
+kappa = "be6341d51a903abdc88f141922070a35d3d05063acc0c1abffab606e2cb1f3a8"
+embedded = "6a8eca1a8437759f9d1b4fdaf364f5252a55c9a7fd14be5b74e13376bb6826fe"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "tempfile::dir::TempDir::new"
+kappa = "30e4ff5e4582392dae85973f47da079a88c7371f545acd1878aa209dc59b8398"
+embedded = "adc2198be1530f8d65c2b87edf0e56cdfd019829c145c5f955f40fd4ecdd61e4"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::dir::TempDir::new_in"
+kappa = "06f07cba38c36deb2c0b94b2c42ac2a94df5122032918c97edcc8c25c322a7d2"
+at = "P=u32"
+embedded = "a13cf1e2637d006e755113b9aae5522059cb35b3c515b361bbe83d6a29aff34b"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::dir::TempDir::path"
+kappa = "663697ab5444df547ea29c7cd1fd405db0805a34b501d8491255519f1b7af61b"
+embedded = "2625a429052f090dcad6187ec335b24ba024c36fdf6b5cbb25204b7c20d04136"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "tempfile::dir::TempDir::with_prefix"
+kappa = "58565adb3b14ee69570c146001d06490abd59d679eea3dcb814f310cae589174"
+at = "S=u32"
+embedded = "683f4857fe315885249cd7832f3a2fdaa8e6a543b8136fe1b4e6f80e92c726fb"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::dir::TempDir::with_prefix_in"
+kappa = "5540fd17c45aed1ff304b59abc0a77e17d7b02088809849cf8e7fb584688fd17"
+at = "P=u32, S=u32"
+embedded = "3f829932ed8fc80dfe003441db255d659f401eaee4b2f78c144d59f92b0ec1f4"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::dir::TempDir::with_suffix"
+kappa = "ce93232ed16a530a78eacc2812e95ec2b73e6b1e0ec8a6ecc3861e66720c7952"
+at = "S=u32"
+embedded = "965cf5d0ebec079c477dbde830008fbb99fb23c16dd98c4b22489ca05de39a0e"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::dir::TempDir::with_suffix_in"
+kappa = "fd27e252fb2f6725b95ea3c34adf9e2e007f2751f4f24f004ef1533904ae10f3"
+at = "P=u32, S=u32"
+embedded = "19f992a924a2971d242ef83985dfd097a8ce0fefa54cc9e96a802f3cffbc5a73"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::dir::create"
+kappa = "47842ac726b157de363f8b542489dcc0b0e737db174a83922a3a07b0db953748"
+embedded = "71e3b52a4ee51195ceeaa61ab79d4ff3d17ecc3ff771b2677d8b2d70990df87d"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::dir::imp::unix::create"
+kappa = "0ba1c3ccab897bb15e0ec84f287c654098b6bf0d346b421ea64582f100d84d4d"
+embedded = "4f8ebff280a8aacf556f66ca5fffd390572c0843af8f20dfed74f2e4f5fec2de"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::tempdir"
+kappa = "b7b80dab56f56230fda67035b4d3cf24c36668b82d5a6dd2d6551ce943dfa798"
+embedded = "4817640d41515287813d1cebcfcbe4c82d15a15b949368f6ac94c6f2f75abff5"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+
+[[fn]]
+path = "tempfile::tempdir_in"
+kappa = "35a788df1af06692cede02aff671628013d12b27b0ce4a4edffb9406e7a163bc"
+at = "P=u32"
+embedded = "e822c61c7fa3c22a23b2d94449b12d101004a01f8a1bc6e8e5d4e40dd25ea1af"
+status = "residue"
+cause = "mir::Ty: dir::TempDir"
+

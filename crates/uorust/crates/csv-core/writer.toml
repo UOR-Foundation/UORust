@@ -1,0 +1,295 @@
+[[fn]]
+path = "csv-core::is_non_numeric"
+kappa = "d7a1cc62036788d0124bd6581b9ccef68e9b87440d6c6dcdbba33a2787cab13c"
+embedded = "d5846c5883fbd7d2e7c14facb3855194efbe1e479d99a36ced17b8ec9fcfa71c"
+status = "residue"
+cause = "mir::Ty: core::str::Utf8Error"
+
+[[fn]]
+path = "csv-core::moving"
+kappa = "960d41a97bf5d73c96a46c0320cba80a375f8b8a006a7ff36491bf1edecd3ed0"
+at = "T=u32"
+embedded = "598c584662a020e6d7cbb9775746efe571db20799422f9ed3ea7c326cc6b0779"
+status = "translated"
+digest = "1d11d18571da6a2c8171f69dc4f9e774e5489f73fccb91e1680229990946bd24"
+
+[[fn]]
+path = "csv-core::quote"
+kappa = "a59610b84bfe054cdd94c345775efc7a2d94162fa410136c6306003993c3ee9a"
+embedded = "cc7a9ea4ab2c6577c6cfc6bc8af92229caf10e34a67752a73a450118c4021a96"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "csv-core::write_optimistic"
+kappa = "1710b0c709a0e41aca96e67d72a28dcc122930ca476fb9e684000e23862b883d"
+embedded = "639f2cae6885b6ecc57b350e2b770d90090cdd73067fde46346cfa97b9b1615a"
+status = "residue"
+cause = "mir::Ty: writer::WriteResult"
+
+[[fn]]
+path = "csv-core::write_pessimistic"
+kappa = "6b743a359a8caa22119088df829fe9f04adbf0de62abfacb199d65557aafdd95"
+embedded = "92338c1ea469daf6dd1c5c773bfeb000fd44eaa3b67131024134cec5be4182aa"
+status = "residue"
+cause = "mir::Ty: writer::WriteResult"
+
+[[fn]]
+path = "csv-core::writer::<impl at src/writer.rs:12:10: 12:15>::fmt"
+kappa = "be02ad5c902317c3bc0d09b6a45033d41251f6eb2c6468f9920f47e56eb972e7"
+embedded = "b4fe525f9108fafd601fe7063433e7e52c60e1cb2ed32c471ee2dab5cb6b4d74"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "csv-core::writer::<impl at src/writer.rs:154:10: 154:15>::clone"
+kappa = "b1ddb30f50ac9346b814558cd79860ac9f16e43f17e3eee2adc8263a1a36bdc6"
+embedded = "a9cbf4c23a9140bd0c43031bd91f31af18d6436a8410921ad01e223dde602d1f"
+status = "residue"
+cause = "mir::Ty: writer::WriteResult"
+
+[[fn]]
+path = "csv-core::writer::<impl at src/writer.rs:154:17: 154:22>::fmt"
+kappa = "2c394985615e5830c098b51f382bb4ff1091c40a42ad0f127d3a1f2aa26b8fed"
+embedded = "2a296e918f44a806e5c97017baefd4b7b65f50b33a96f9052aa7ec0423e5cf59"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "csv-core::writer::<impl at src/writer.rs:154:24: 154:26>::assert_fields_are_eq"
+kappa = "123a729bd54887085160f4282d567c99f37b40ad8580df55495c3d1208276c4b"
+embedded = "383d2a18b5418899da54c90625ae2b29f1a7f87b8f8b4be67710433b0f2590b9"
+status = "residue"
+cause = "mir::Ty: WriteResult"
+
+[[fn]]
+path = "csv-core::writer::<impl at src/writer.rs:154:28: 154:37>::eq"
+kappa = "b9234bf2aa8b8bbf60dc82cef877da5d723eb85cdcee1e4c55d1c8cb8ad08123"
+embedded = "995ca8b832ffc93d659d1be8fc74239cef3902ec0e59cf7871afc784a45ec48a"
+status = "residue"
+cause = "mir::Ty: WriteResult"
+
+[[fn]]
+path = "csv-core::writer::<impl at src/writer.rs:220:10: 220:15>::clone"
+kappa = "e158e726ad74ce69c6e624155bb7c532fa64e589d2d61b3e085b461af70b00fe"
+embedded = "090e3a2c5fff4dff61959778d5fa75fd4c6d88e66f1c8cd5d7a9f74c464b586c"
+status = "residue"
+cause = "mir::Ty: writer::WriterState"
+
+[[fn]]
+path = "csv-core::writer::<impl at src/writer.rs:220:17: 220:22>::fmt"
+kappa = "ff2df8d1390351d24cf9782443c0c56e6f397b91a965ae1d2f4e57021a65ce7b"
+embedded = "ad8c9d3070977e33853f5aa119cb7d7e650dd30b7d8d8650284f1e38cf342cec"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "csv-core::writer::Writer::clone"
+kappa = "96cf3082279b13148aeded61de146fa559251ee041576749dc3d9da6e2c48a86"
+at = "QuoteStyle=u32, Terminator=u32"
+embedded = "d03c40fa6f60f5613a664b45171af63a98da07c4ba84276275b2d218c562e169"
+status = "residue"
+cause = "mir::Ty: writer::Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::default"
+kappa = "7307c182a2aba2480d9e8765d411ee8e0072bb84251ccda0961cb8edbae00e54"
+embedded = "900c84b3bb1d4f49585b491bf4c158f42b54d10f6c5cf84f51b39f4a7c9cd87d"
+status = "residue"
+cause = "mir::Ty: writer::Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::delimiter"
+kappa = "9502d24c58bdadcadd6aa07f06d8540bd2c7bb3e2131384f7e1a32cc2b43cc10"
+embedded = "bd61ecd16cd2cf4fee1f4faf970709b9c46746755ca975fc4a9256723acbe63a"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "csv-core::writer::Writer::field"
+kappa = "956e7eeb1ddf52633323742f4e41d151f8d4ca311b0683ca1b429076a72f9f16"
+embedded = "f25e200c752d63e618302bd8c7b0cb920b285775867c6f545afaa28ab7b04b88"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "csv-core::writer::Writer::finish"
+kappa = "0ea812a366bbbb1f3b0add4eaede26cfb6d27619a669ab94b9618fcb3602270c"
+embedded = "2460ca963f7381ab434041a14b0fa9a487b0400259c8f2d14204d021200807d0"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "csv-core::writer::Writer::fmt"
+kappa = "2988bdda67552944ba3c8ce8cad16061eb00976441ccf41fd1658a416dffed11"
+at = "QuoteStyle=u32, Terminator=u32"
+embedded = "3cdc8e3ad5fb600b9b1dce8764117f7c70ab10a5e2a93aab6d14f57ea8b6f3e4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "csv-core::writer::Writer::get_delimiter"
+kappa = "69420918c3ac5c48d5dc11634667e6d8a9b9ee14fbb1b7322a3fb2ecdb77c293"
+embedded = "de84207135f952a9d9032861d61d2488b48dc2b509f11ba275d012a425eae06a"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::get_double_quote"
+kappa = "f451ecc628fd24b6bcac6bdca24d2b5fd319c94bffeda78905b73a5d3f648f41"
+embedded = "d7e1a965694a0a0cd55d96e6ed1122e9d3384fc30dbfb53619fdba46bc4f5d90"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::get_escape"
+kappa = "9e48f50870bff0b9e13f9e514606841510d1bab2361d379c61b09b6b5aa6a5d0"
+embedded = "625793543bd3cbe67cd5353cbc97e4c46e376de358294af305e2db21f07ff147"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::get_quote"
+kappa = "f422afb9233b7f3e2ebcbeecb9da59bb157ccb42d1fc62a86a82577057668b77"
+embedded = "396d5818e444a4266d06912411c5c6f0ebd078b80361e8770ff14059c3edb530"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::get_quote_style"
+kappa = "bb772ebe38405cb65c53a0ade266c2ba2e370893222cdf53975ec1a888e47a93"
+at = "QuoteStyle=u32"
+embedded = "c979cce65ea0eeefb9de2eeb7cdb08bd8844d75045d5bbf28ed6f40fe24ca4e2"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::get_terminator"
+kappa = "72a0729b00f0c34191c56f5e275224769def979db73b544543e019d7d72d41e3"
+at = "Terminator=u32"
+embedded = "ece5dbb9f543297b11cc4c6eb7a056538f17d79b7ca34d9ee6b6bf6c680986cc"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::is_special_byte"
+kappa = "8b49cc2074744a6ac3a3b5d5927a4e07968712becbb70f1a2ad798297e8182fa"
+embedded = "dd5800718370d278c2b4f46320d461a54875c34dab3c647ed135af89c842a906"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::needs_quotes"
+kappa = "bdb890e295cac13972bfa6f2a8888e0dc6dbea834ba787f169f573d7035aa4f0"
+embedded = "52b403d9947b33fdf1706446d86921995a5463d344062c17a6c4e3a8c7722cc1"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::new"
+kappa = "438472bf6f0784c83c586cfd0919eb8295917115353ae296378e2324202fab67"
+embedded = "5b87ab17c27ecf1702e1f0df0d2ecc3991b32f1fb6df6d0eaf702030e3d1afc3"
+status = "residue"
+cause = "mir::Ty: writer::Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::should_quote"
+kappa = "0d079e7a40432dea93f8e12c3a07d962351709e436bc816fc40efb1c417d8dfd"
+embedded = "d272452779a6af57879545402897001db8f1d6dc66e467e0597584ef08d0dbd0"
+status = "residue"
+cause = "mir::Ty: Writer"
+
+[[fn]]
+path = "csv-core::writer::Writer::terminator"
+kappa = "014efe1cab088742724586895c8398c4e066e17ed7c315bcc1269428b4863c9c"
+embedded = "1682c5c383d59cdc03a5937a4f1fda34308535a274d21524b04f2eb613260c79"
+status = "residue"
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+
+[[fn]]
+path = "csv-core::writer::Writer::write"
+kappa = "ea272508d84948fef72b4a8dc01601b7d043c84c7ac77c47ad6790ac19f47f67"
+embedded = "6c61def1793ed02a4958cd0c5336030c3316d6f73eef34ead87334aa127f7912"
+status = "residue"
+cause = "mir::Ty: writer::WriteResult"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::build"
+kappa = "6c97c23642154a57669ecee388884b29df5a18d03a781da2440ae494eec7b386"
+embedded = "34e19323f76d4aac43ed9dedcbad0bffeda7c52fb0c922fbd6db1a10113833bb"
+status = "residue"
+cause = "mir::Ty: writer::Writer"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::comment"
+kappa = "603f86da4cd7937a9ff40b9a52946e38d1350d60e499b6ed1fff2ac6771eee4e"
+embedded = "aba0b102dff1925379f8341f215289484890e57dec964b04674adc4fd7c24dfe"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::default"
+kappa = "e1273af40c41a41be9d9b0a283208fcbde7948347dac91c1644e13ab8d70da7a"
+embedded = "05d0c7954fdaaef8be86bc7da20dec82fe02119c8d1882045fc35d7aa6e3ae83"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::delimiter"
+kappa = "f94a889534f1553c791316d2bef8abd39f7f69ecefb05d3ced02db16d6205d22"
+embedded = "8ebbfcbe197b92ea170f0a536b30c95dccf31ccfa29d8914e4538d10771524df"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::double_quote"
+kappa = "8f266e357be7c4ee5a722e289c106d3991cde9e7e9faa5d8b16cd975d9e5e17d"
+embedded = "5d1ea6ca4dcb460051d729db50713912ac70c70a4f6d05648bfc250b1361e387"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::escape"
+kappa = "3bb30499954b7d36fe33cbfa272a69700a3bd626376c63f3dba7b76aadd8a553"
+embedded = "baa59ac02b5b3b93e7f4fcf8d3a87644e58988ab9833ed6c38a9a4fc1fab85eb"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::new"
+kappa = "6f1fe3b1b2a88dd4c4a06dfbe44ed533af5ba67877c5a746fa15bd82d5c36e40"
+at = "QuoteStyle=u32, Terminator=u32"
+embedded = "4e398ed5a879dafd2393b1f0d5eb6903fc843fbcc6964d983ee12791d93eed74"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::quote"
+kappa = "97d1b5336bcbfb9a2288b47fc87bf1a541d116dcbac5b3cd91c30857bff2d40e"
+embedded = "7e4611fc92f5ec2657bc47eaa75596616afa39004748919c06929c008d197b1e"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::quote_style"
+kappa = "9e754bd2fef3fa1e3266d52045d29ef4f23b0c33de49ce8f93300aa14e12271d"
+at = "QuoteStyle=u32"
+embedded = "b33fe6ce6220c7eeb87e13de9e0fca76df7a94dc66733e66fb18fd8703125bf3"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterBuilder::terminator"
+kappa = "1cfb9df2cf3cc79da76bbc88d34b8fceb8c8a42f19a1bd6259abc021157104c0"
+at = "Terminator=u32"
+embedded = "f4f053abf238dab86baa8b7592623f2fffab4fd9720776d73318e23afa23c81b"
+status = "residue"
+cause = "mir::Ty: writer::WriterBuilder"
+
+[[fn]]
+path = "csv-core::writer::WriterState::default"
+kappa = "91dc2fe1043f27c0938910b691ab1a12c82913f5da60cba0f3320ea805634130"
+embedded = "f1295bb93aed9854be4db0ea17f26ba80fb426ba933a06eeca26d947e4032a49"
+status = "residue"
+cause = "mir::Ty: writer::WriterState"
+

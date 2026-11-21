@@ -1,0 +1,264 @@
+[[fn]]
+path = "twox-hash::finalize_medium"
+kappa = "a9cf5b2c414cfc4394ffae76655d7d12a2b32b33eea988714af1af5d8bc21d20"
+embedded = "f3d409cdb4a2a225dbf05dc702a293b1cdcec9e4b1d8c66ffdf7032b32ce01ac"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item xxhash3::primes::PRIME64_1"
+
+[[fn]]
+path = "twox-hash::mix_two_chunks"
+kappa = "ffa5c99153a9a349c4fea7d511ea4611f2f8ef5697b2f9410d663a59941f407c"
+embedded = "a14df3db7b78c35ef736aa316b77f7d5e33d8437d6d6271fddcb89ca289e848c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: xxhash3::to_u64s: twox-hash's MIR stops at mir::TerminatorKind::Call: xxhash3::<impl at src/xxhash3.rs:322:1: 322:33>::bp_as_chunks: twox-hash's MIR stops at mir::Operand::Constant: <[u8] as xxhash3::SliceBackport<u8>>::bp_as_chunks::<8>::promoted[1]"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::<impl at src/xxhash3_128.rs:202:10: 202:15>::clone"
+kappa = "f539c53a1e5d55b5e32233d9d9ee7e080ef3a74ee821acc846d3d8caa425d2e6"
+at = "S=u32"
+embedded = "901c8ac28ca55730eed2adb507339b4d4f2afd28d400d49d6b6d62b05f567f28"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::RawHasher<u32>"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::<impl at src/xxhash3_128.rs:25:10: 25:15>::clone"
+kappa = "d067b55d9e65d0d108ea92a2d77bae2250289529bcfe25e32fe200639c0bc537"
+embedded = "d3138932bd78ebae4ee8247a77635a91d034e322fa5dd49b0eac9222ce0b7ccc"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Hasher"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Finalize128::large"
+kappa = "c750b798890d6f2786867baff64c3927260c4e38e21c7464b8220c694ecc4e08"
+embedded = "49c0a39f95dc67d8fdb4735f0314e8c7124e749e02f7754974b14d3e04e1d79a"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Finalize128"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Finalize128::small"
+kappa = "531932d8bf8150f0a04f89350e54bcf77ec38728da512a28e13b7270b3670fea"
+embedded = "62f9bcf3b08aeb412ecada7a4bb66a83c272f3ac462aa1e27b1f183b6507fd11"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Finalize128"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Hasher::oneshot"
+kappa = "a728ce6e15fe293735dfd16b603940cc89377103fa9b8844391ceb1ef137cc1a"
+embedded = "cf6f8e9df675ed43fcabd24dcc61c9dcbc701bfb17e3a08b7c21d60fbf82d0c0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: xxhash3_128::Hasher::oneshot::optimize_for_latency: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Hasher::oneshot::optimize_for_latency"
+kappa = "e1342e6703dd730f3c4dade53c41f444912871f1aaf5acbe05417e4943b769e3"
+embedded = "9c9a166baf3a5f0000788d54b64e0e28c376cc08e57a64a4f3cab6933c295b8c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Hasher::oneshot::outline"
+kappa = "fe37e060c515536dabf0719c7fbe4ad58601f940861159e8aa79a022c3a39c1f"
+embedded = "99914d99b77a0522c371c158ac4dc75c3aa024bf4b3853b54003b44885f4ee1c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: xxhash3_128::Hasher::oneshot::optimize_for_latency: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Hasher::oneshot_with_secret"
+kappa = "1379fe93eca59037ec512fc3317feff37c794526dc22e6dc8978668de50dea95"
+embedded = "7d921150fc88f70c47abbf2504d9df4f20805e2aee94372143a6248f5dc0155c"
+status = "residue"
+cause = "mir::Ty: xxhash3::OneshotWithSecretError"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Hasher::oneshot_with_seed"
+kappa = "45adc2628eade3d1c9477c76fa1f2e3450c7c96ff5dc080c8fca824463beda17"
+embedded = "854d58991e06f018fb9d7be7858fcaa1cf9e3ebfc99f020738019ba4ae5cbd07"
+status = "residue"
+cause = "mir::TerminatorKind::Call: xxhash3_128::Hasher::oneshot_with_seed::simple_case: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Hasher::oneshot_with_seed::outline"
+kappa = "0a0e57990cbc0e2b9a326fd03385c54d29b13a6ee80cfa2a8a7516505bf55ab8"
+embedded = "a1bc14f96a1589f69851be74e4508c85b647b0423d52c54b04f6a4235749d627"
+status = "residue"
+cause = "mir::TerminatorKind::Call: xxhash3_128::Hasher::oneshot_with_seed::simple_case: twox-hash's MIR stops at mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Hasher::oneshot_with_seed::simple_case"
+kappa = "7fe5cf8906092eeb221447ce239d2758093b3e78f4127dc552b49be9e30de092"
+embedded = "bf3538b297663ba0a0cbd7049aa0a9c17244d2084b1bd93c6592f857224140d1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item xxhash3::CUTOFF"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::Hasher::oneshot_with_seed_and_secret"
+kappa = "353e2bde13ad260115aaa8a176951b43db10ce829c9d313a30b62469968e4342"
+embedded = "ca5eecfd841a972e986abef9dbb925e2e834f88cfda473cf82533594a13bf540"
+status = "residue"
+cause = "mir::Ty: xxhash3::OneshotWithSecretError"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::RawHasher::finish_128"
+kappa = "26d8f1928e0c4822cf91a24b69f13353c9f57f9fb0dfc6c7888d8290beb39d96"
+at = "S=u32"
+embedded = "4a685f3cdd6bf5dd231f65f3aca1a51847708c3ef9caf25ccc7f5af039508f2c"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::RawHasher<u32>"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::RawHasher::into_secret"
+kappa = "dcfbfcd040d5a71e85230558e3ae78fd6ad79726d751b0fe73750572f06f487c"
+at = "S=u32"
+embedded = "26139388e592213b4268361f9e33018ec85169122dc9488bf2bd75f41a5a9a09"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::RawHasher<u32>"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::RawHasher::new"
+kappa = "9bae18e64c0903c3ece34cc2d9703fa73c9a3c3287a888c10094d0567f9a82cf"
+at = "S=u32"
+embedded = "2195a7444b2680921ed5822a78fe0df5bf6ed5921c8652259ec841b175865ad0"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::RawHasher<u32>"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::RawHasher::write"
+kappa = "3809c414c082a27738cc796e96e1731f296aa7dc54d0e7eab00a9e9d2349ff98"
+at = "S=u32"
+embedded = "c1800519ce1e6269bf239fe7d9afef8076336e9bc94974b22e0ff701c0227d22"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::RawHasher<u32>"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_0_bytes"
+kappa = "d431569a1db382fc6807e80c47ddd37761162eded63a706d2f0b20dfd52e5b70"
+embedded = "7c0f242f6d516ba369fd745742781ef4ed950476d4d98a8c9505ff0d6a3a6967"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_129_to_240_bytes"
+kappa = "9829f440f9c5863ddd057b3855ebdb67ced980277ebcdf3cf81c027c4cf7e35e"
+embedded = "4e23fd31ccfec5010ddf28035945863ad8abdc9d272ecc28b9bdd42225195fc5"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_17_to_128_bytes"
+kappa = "caa5bd71152ea68909154f43970e241f5e2bd564e070f3108d67b5046a657530"
+embedded = "12059baf5f211946b96107a0a8c1891515dad3b1cbac50b73b177e43b54c5f52"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_1_to_3_bytes"
+kappa = "3fdbbf05bd70782f751c2b312d601ec330bafee377e7929ffdac7f1725602eb4"
+embedded = "4427046fe51484c3617c531de5b0b402016ff37bebe14a4bc56c79d20b21d8cb"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_241_plus_bytes"
+kappa = "5a96bfb134821a7271bacc970c86899321faa913545b766872adefc31c2d8162"
+embedded = "1be3f544e2e88ebd6bff0cd9c11159a15529e67ac200fb83da78639f07be9b1f"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_241_plus_bytes::do_avx2"
+kappa = "36949fc8b5a98ec8d8151e56357b03eb80c62e391e6e2201908f9135b243bf37"
+embedded = "be3eca4f61302f82349b6e099f92df420535512c44b14f3642a1ba805164c1d9"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_241_plus_bytes::do_scalar"
+kappa = "abe23cd8caaa1aff4e186943f775b9e8760371bcc75bfe56d1c7a12994f9f181"
+embedded = "3f925a8916ff9ab441f1e0e13f3e5b93eba57584ef8f0fb453b21f50cf2f3bd8"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_241_plus_bytes::do_sse2"
+kappa = "266acdcf206c2d905639718dd30a703b8a76672f42be96e0e7730fa65403f01a"
+embedded = "737b6e7e5a35818592f0e5a5d6b5fec479f78d69986f2feb3ac6ee48172eb503"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_4_to_8_bytes"
+kappa = "323cf6e75cdf24b9c39650837a5e22c04b0619ea83660733c2cd69eda82a238c"
+embedded = "be98a45b939fbe8f2068dd13262d790fc91f4a6b44d544f79bda951242bb6d66"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_9_to_16_bytes"
+kappa = "219b77525a84fd3eaf3ff61d61764b751a18a2f6ba74e9cd46d27f0d0a36787c"
+embedded = "97df68e91b0557deb66ce61961fe2938a4e45d6e2b160dd8f12928e78e86114d"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::impl_oneshot"
+kappa = "d00efbede53164857b9cdb0f4f9433fa6f17cc33bfe96c6467e94a12bae375f0"
+embedded = "10dcbcae11bd4011b68067b6434f4015e2b96d9da04b38f1b48a8ab558e98348"
+status = "residue"
+cause = "mir::Ty: xxhash3::secret::Secret"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::oneshot_impl"
+kappa = "3677bbd1c98636b9a193634d63248c875632284d4f126c7f5c65cf45a85a5c17"
+embedded = "3f5cd259a3bcb8e51f9d53d85aa3de545a3c3b5d09e7a817f6abe32d4e011dc7"
+status = "residue"
+cause = "mir::Ty: impl Vector"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::with_alloc::Hasher::default"
+kappa = "a32e11865851dc229351b49cbb566c1e040241656066d26239e300555f92cbb4"
+embedded = "4c23c30c459539d9b1ce7179c708436c2c6d4087f6c9653c085e5391e29bbff7"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Hasher"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::with_alloc::Hasher::finish_128"
+kappa = "c4dd26414341943a870beee5c84d5eb4886300f5cf47a17d42f85ae3e819a6a1"
+embedded = "8d7810e777c74698eb6dc7e0ffa5170c63dc37e3d06b59fd96c0abf78bef03f3"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Hasher"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::with_alloc::Hasher::into_secret"
+kappa = "2f5ac56567065a1b92f5531dab30425f817ad9f8db79d528a3afa77c270d85be"
+embedded = "c0ccd906931ffa6ee1bc32ee84aa66789ecbf50de52053b03a459cf59136c40e"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Hasher"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::with_alloc::Hasher::new"
+kappa = "dc2ed2d38a582de4e563a0787f3e56c02c007fa93b329d2dc0437db949d4e17e"
+embedded = "3e865e0d3b71792375f5bdb2c57fe1068b586610a2ca30f73fb2a2bd1901d706"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Hasher"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::with_alloc::Hasher::with_seed"
+kappa = "3409721b1e907aedeb6679aba7d547772b525670473bd91d7f5fa592e72de0fa"
+embedded = "234d002595a2b04e4b9455281bac182b5017b95deddfb7b2202de8c74c5901b3"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Hasher"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::with_alloc::Hasher::with_seed_and_secret"
+kappa = "f0e2cd43b659fd305aaaa30b64e32c934d013fc155b1b6a9fb8d4d90bc64e98e"
+embedded = "e7ee009aad5a04dfecd7afb1efd42fb8d4e680910e0f653c5343284d801dbfb3"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Hasher"
+
+[[fn]]
+path = "twox-hash::xxhash3_128::with_alloc::Hasher::write"
+kappa = "c4d76b7ac8a2ea04dae572c521b0811b551dab1d0e1764f2d0c3760937ce17a0"
+embedded = "7bb82011411cd1c5f92fe50b7db2a9e705d196029fa2d4954ce4d86493e14805"
+status = "residue"
+cause = "mir::Ty: xxhash3_128::Hasher"
+

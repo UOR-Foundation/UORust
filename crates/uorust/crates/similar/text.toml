@@ -1,0 +1,683 @@
+[[fn]]
+path = "similar::CR"
+kappa = "694ee7e4b4a59345fdb0bcf20f7b05375a764c81782ab4f0471265a0207c223a"
+embedded = "517ccb1031128ca6da991b0a9dd24e889f6699cfc9fbfb0e2a75747c91d2fa7b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item text::abstraction::line_terminator_offsets::LO"
+
+[[fn]]
+path = "similar::LF"
+kappa = "408315d136fc5982f0b4e3a04fa491c0212f231eaee2d49651167fe7662ce20f"
+embedded = "3a450ddb9e8dc493da83c5845160566c4e72b6bd3adc8d603bc6798ae1965193"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item text::abstraction::line_terminator_offsets::LO"
+
+[[fn]]
+path = "similar::MAX_INITIAL_TOKEN_CAPACITY"
+kappa = "6d14339ffffaf4abe29710cae880b4916820c4a74aa79efca2482b7efb9cd67f"
+embedded = "904039db37f11a106d56a03f2685f9194f98703639bab54f0a282f406aa26b3d"
+status = "translated"
+digest = "a7fe3f7d9c1c070379bccf99cfd54798a0d6dfca633cdfae0cf311693a43e6c8"
+
+[[fn]]
+path = "similar::abstraction::<impl at src/text/abstraction.rs:83:1: 83:65>::into_diff_input"
+kappa = "7dfc6b5457759836a115242a77f3721ca171b99d4a220536eb3e2814b9b3af18"
+at = "T=u32"
+embedded = "b4d56b1ffe63b36e86a88fe242c28e23bb7107c522ca3b1dc64cb8f4ed494573"
+status = "residue"
+cause = "mir::Ty: text::abstraction::DiffInput<'_, u32>"
+
+[[fn]]
+path = "similar::abstraction::Cow::as_diffable_str"
+kappa = "0ba74daeb2f70063ac42b99669897bc5235af845613a2465de0a30080296baa0"
+at = "T=u32"
+embedded = "b5228f51969e9875578db63d9a384a9fec714a4937220ba155318ea82a4fab46"
+status = "residue"
+cause = "mir::Ty: Cow<'_, u32>"
+
+[[fn]]
+path = "similar::abstraction::Cow::into_diff_input"
+kappa = "d1851dc54a094c8c0a06300be9b031871d8c52e0d96424e0da3e1c59332686bc"
+embedded = "855c632e827db603ed5326057141bb03ee98344f85b0f33411e8ffac3425e182"
+status = "residue"
+cause = "mir::Ty: text::abstraction::DiffInput<'_, str>"
+
+[[fn]]
+path = "similar::abstraction::DiffInput::as_diffable_str"
+kappa = "122ebc54ecfb375d594f4a07efbebb752d92caa24ec59fe83bdb05b03fcf5dbc"
+at = "T=u32"
+embedded = "e5a455e6c4e8111db2032c7b43b36d2ac8bb2db885c8612c89a926e6001ad6c8"
+status = "residue"
+cause = "mir::Ty: DiffInput<'_, u32>"
+
+[[fn]]
+path = "similar::abstraction::DiffableStr::is_empty"
+kappa = "b46ae35c63edb26eba1d9f672978945cf0ae98a639d79b6bc82af83c68a0dfc9"
+at = "Self=u32"
+embedded = "4d87c21b2f1e49f9f232289b8b64f24b853d7ef74d4760f33046a94089b5f8ba"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DiffableStr, which u32 does not implement in core"
+
+[[fn]]
+path = "similar::abstraction::String::as_diffable_str"
+kappa = "1201280cdf3574338fa49493393d6ef71c9283352dfb3ee40ec9e0088a9d73d7"
+embedded = "6a2027a6cc3a0cf02b67be435e2f1d9b39c943b62ee18d18b0f895f7f934932f"
+status = "translated"
+digest = "c519f76c935309ca6d93f4c8e24374e6f8b35486f073b7232ae2910246c6b6ce"
+
+[[fn]]
+path = "similar::abstraction::String::into_diff_input"
+kappa = "6824ab81b88f03b6e4927c9339a61ae4aed87cc8a128015b9ca11aa37f20d60a"
+embedded = "602c4e0999fedaa93bfa0ddc2148b22af8a687dcc24b90a304ad68266d1dc60c"
+status = "residue"
+cause = "mir::Ty: text::abstraction::DiffInput<'_, str>"
+
+[[fn]]
+path = "similar::abstraction::T::as_diffable_str"
+kappa = "61d18401d124009905d6c749cec163923042be04bdf361c6c084833da4c615e1"
+at = "T=u32"
+embedded = "635f49be5e419bead13d0069a93bbb8d795a321e217d791a6b7882c68a80c98e"
+status = "translated"
+digest = "e186f9b8ebd6bee8d80dea968946751a4ec8ba3f90efa73f22f4cc8e1bb93488"
+
+[[fn]]
+path = "similar::abstraction::str::as_bytes"
+kappa = "63f2cc93a06d91983face663e9d04fab19ecbc42d681625a86298938a9529811"
+embedded = "4d10422fe5f9385aa13d0a2ae5e8df021c8536848e8cd88bf6199a9e81bdf30e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "similar::abstraction::str::as_str"
+kappa = "ff9ee8ce3e4f76dac864417b8d288149be9fae3951a553a26c61b1ce72c9e909"
+embedded = "17a9dd85df8c87f97f6216a6a7f294b90fe4362ccf115a9ca50ee92b09f6cc8c"
+status = "translated"
+digest = "3e9a5f6e334cef0b1593647e154b0f4ac53381b8d419f1709b64469bbe526b73"
+
+[[fn]]
+path = "similar::abstraction::str::ends_with_newline"
+kappa = "b22d27749b65681a54e985bcbf38d621f94e7a6abc6065a58956a25d76ce1220"
+embedded = "458da9f1fecc51dd0028857000d6b30b77ab763d7e68272ceed9a42e694243a8"
+status = "residue"
+cause = "mir::Operand::Constant: <str as text::abstraction::DiffableStr>::ends_with_newline::promoted[0]"
+
+[[fn]]
+path = "similar::abstraction::str::len"
+kappa = "90b5aaf70739d4ec7b41c8d2f20cf0c11f76b4e5235e6a44a798ab48cc17056b"
+embedded = "676c0c8c7c50fca6a09f0374b1b3672a519f1acf1ff6547ef7d5910fac7b2bd3"
+status = "translated"
+digest = "3a2d00bae2465c96d613ec1f0c44a75794e6739761e5c2558ead23c4124a1c80"
+
+[[fn]]
+path = "similar::abstraction::str::slice"
+kappa = "d988dd19853c80abd14b6024498e67791412a6c8ea380641d84e46151e053fda"
+embedded = "b2ed9675996727ef1445021720cbff60915a7b5111449560a1bc20ee6b3e34f6"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "similar::abstraction::str::to_string_lossy"
+kappa = "05035e51c35d8a0b88f697d359f8cfc61c19e9ecf2f784b0b235ae5906d922a2"
+embedded = "dea30fb858d5caca2f3719c238b78bab7497a24dc23e3d55557ffe542c3b8c78"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "similar::abstraction::str::tokenize_chars"
+kappa = "050ffaa7b86c0a74ae817d3b884b549ba9dc67a3f71cba0d257651b40c76b412"
+embedded = "cbe5f95235fdecf8b384d585f6ebc02a6388688b471d1c205f6338ddbf4d835d"
+status = "residue"
+cause = "mir::Ty: std::str::CharIndices<'_>"
+
+[[fn]]
+path = "similar::abstraction::str::tokenize_lines"
+kappa = "ad128018e2f9c6d92f8f3a5905c2f082c310023ff74ceec1779cdc3669c6e2bc"
+embedded = "93ac3a0e3dd20860231a7cdfedaf4e5bc3c827b04d42196e3b001943079439d5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "similar::abstraction::str::tokenize_lines_and_newlines"
+kappa = "a8b94c1d03f321ea96d64da8dc7a2cb5c8a29446b44a212dd066b66feb61828d"
+embedded = "bb25c43dda8f1e97ac0ccdfdaa00c14c421d05d71bdd4c6c791e6d8fa8945f1b"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "similar::abstraction::str::tokenize_words"
+kappa = "84130d3a4b790c3fd3fed3a8bfa6f6b5ccbfbbda395927f6470091ef1490e86b"
+embedded = "40397b46d541419b16a96e6fcc501145c63a11fe8ea9136cc6a6db00c2135790"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "similar::get_close_matches"
+kappa = "2be0f827534501a29424254b5e08496d2cebf35ade164574fef0dd97ece1d0ac"
+at = "T=u32"
+embedded = "22c9f03f68cd8f6a9780cb27272b88219d5f7d843eb5cac72d8fbca3ad2ad2c4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "similar::is_git_whitespace"
+kappa = "76381c2ee0920d4cc256bcfb1f9a4174c27f50d947584057b94121fbf4ec1c93"
+differential = 7
+embedded = "bb10faf0f760056792fc0d8f2a32e10c98259577701c4805cd4cf8f0ef529a65"
+status = "translated"
+digest = "b95c661247b83e73b6aa925222c2b27b202fc5dee7261206556694a48049b758"
+
+[[fn]]
+path = "similar::line_terminator_offsets"
+kappa = "9ec90914c3e1072c2b4f80d4b96ae94c0c9c1bbd59e22b4d7e5e609c95836b6e"
+embedded = "0f6a64719d21a9dfcea5922c96ceaffe6fec6195b53c20c43bbfc30103d51623"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:32:10: 32:15>::fmt"
+kappa = "d9be72f7ce1a42bef8fe6f73d6bf45daf3e20d53ce44582b9b6deb0edd845c97"
+embedded = "a862155cad23f251874948f33a254c6e8e24f301c0239dcdb4c95655f8217985"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:32:17: 32:22>::clone"
+kappa = "e9fccbf3d4472b284f4319defc60268c92a3e033470672599e2854faa05a06fc"
+embedded = "e6f757337b80b232c7659b67ec2f8d59a8cc0c5b15bd53eda70d6bdcf4bcc58e"
+status = "residue"
+cause = "mir::Ty: text::Deadline"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:360:10: 360:15>::clone"
+kappa = "38145808d450ce40510525152b20bec2f82d8bbb16dda26a899d9e3389c03c82"
+embedded = "42257faf4c3a76d5f54268a05e5f6dc0f04b47b70f417dac737bb8d64840aa88"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:360:17: 360:22>::fmt"
+kappa = "f931400abb121d7d6d8aba39180a417677eab94f38259276d306d86fcf2c90bf"
+embedded = "5e1a1c5f91abfbc0f245a1d4f3a72f47aa4fbb460519fdf7f8de407c9d4cc761"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:360:24: 360:31>::default"
+kappa = "74eb41545a8cec0d0d8c64b2a6a5963c3d332df79de0d5c1a5cf6754ea8792ae"
+embedded = "91527ca20f9a9be886f1e33d13639f425917d0a10f39da3a4ee7b0cb86eae6d9"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:51:10: 51:15>::fmt"
+kappa = "8af5a3bab57ccc779182d53d101eab1355cc7b6b56d19a34f78b2cc42e08626f"
+embedded = "6edfa3b2f5af701c5033f0308ae0e33e9bad7d521b2b1d536ef3fad044a2de80"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:51:17: 51:22>::clone"
+kappa = "104496b296d25e212d9f8aa731987ed7a2f720aa619ba15f88d7f656617f99a2"
+embedded = "df6c9939ddc43473c7fe6600eed0e38e9e469f6d68c6966b7942d2dc47a30833"
+status = "residue"
+cause = "mir::Ty: text::WhitespaceMode"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:51:30: 51:39>::eq"
+kappa = "5a34ee25a0fc87614fc315e7aeeaaec4eb5526f45a24436d0595bd06bd44876e"
+embedded = "e3c7e0e79b7c7ebef67d9c77bbc3c7a73a7afbd586818fd34be4bcc1b6309f59"
+status = "residue"
+cause = "mir::Ty: WhitespaceMode"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:51:41: 51:43>::assert_fields_are_eq"
+kappa = "7483700c9b537d1417363953ff5664f18f78170cf3b0ac8ebf0a6ed5b41c51cc"
+embedded = "4ce90572bd3a8f06987d1620d6ee9a7eb6d382f3997e69032ac0766ed6244566"
+status = "residue"
+cause = "mir::Ty: WhitespaceMode"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:51:45: 51:49>::hash"
+kappa = "231fe3b9998a9d7505232b772873e7680b463b4e2505c513809520d6d5259596"
+embedded = "d3bdc760961ad137871e91e1d1ee7806dbe89eea9019a092c7ea0ada5bc49911"
+status = "residue"
+cause = "mir::Ty: WhitespaceMode"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:51:51: 51:58>::default"
+kappa = "e0692a26e769c4e1aceec8c8d20b52c71f1ea1c57d59794c7d063818e51dcc62"
+embedded = "87f67c1870f5ac46eca16f8b4afc2b1af9f60710f61d11c81d858df0579e50b8"
+status = "residue"
+cause = "mir::Ty: text::WhitespaceMode"
+
+[[fn]]
+path = "similar::text::<impl at src/text/mod.rs:73:10: 73:15>::clone"
+kappa = "ee524b660377b7aff2c7cbd227055eb32978d0b149f1734b733efafad20ed623"
+embedded = "c524f3b288589021d362ff214cfa91e17a1a2e74aec002bc045ff6af6f9f27bb"
+status = "residue"
+cause = "mir::Ty: text::WhitespaceKey<'_>"
+
+[[fn]]
+path = "similar::text::Deadline::into_instant"
+kappa = "e3a0723fe0fc63bdea64d49225579d8eec4b10562eb291779d6e2f3e4d36745d"
+embedded = "13f159f82ef44d02e3dae07e8c423b5c3fc56f4df87c257a8e1e56b6212199f7"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "similar::text::TextChangesIter::new"
+kappa = "1cc0679d222a1e0f5ca5a3770a22c2b371fea4e8ab3881b3c3d98856b04b9538"
+at = "T=u32"
+embedded = "712115e446664fbaa8a9c178ae489e6680fb3ad38121c8de29de207ba3202994"
+status = "residue"
+cause = "mir::Ty: text::TextChangesIter<'_, '_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextChangesIter::next"
+kappa = "1a3eba21c4ae262eb94d93225f194410103e70743fb5e53616714f402b332671"
+at = "T=u32"
+embedded = "a2c7f136ed899fb1ac508be42e6058bb38a536362ab76e073e4f4d6ed7025f4e"
+status = "residue"
+cause = "mir::Ty: types::Change<&u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::algorithm"
+kappa = "325aac1ee1846619199944a59ee421e1bf136c26195e96d466f1e0e4cab7bd86"
+embedded = "b276aa966758f95f272402b3a900a70fca7a1b1f2ecf4236bfe116b764a33bc7"
+status = "residue"
+cause = "mir::Ty: types::Algorithm"
+
+[[fn]]
+path = "similar::text::TextDiff::configure"
+kappa = "ea4fe17b945dc4e335ea490502cd561e79624e83c36981943fa48fb58bb047a9"
+embedded = "ca495cb40df7d210b8a191c610776f1860a710890a318044a3b20e7143f58172"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::TextDiff::from_chars"
+kappa = "fc69208f62c475670d9d164d516ef2a60a7551e86d6c7f18d81be02782786cbb"
+at = "New=u32, Old=u32, T=u32"
+embedded = "de4543869a57ee9f44455a435b6b57a54656931e80a207298e8b2d5a06c6dbee"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::from_lines"
+kappa = "942a76413efb83450d808f2d908961c0d26bb83a5250f46eff94ded362e66b3b"
+at = "New=u32, Old=u32, T=u32"
+embedded = "905976f721fcb40e44b7276e49228cdd055a3776def51bbca8efe83c36cc1d73"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::from_slices"
+kappa = "0e9f91ef4b4bd6cbfd6c266a77dea4720e72010a5fdde31acc621c4932a4a8ee"
+at = "T=u32"
+embedded = "ef3f51444604c0214db228fa133fde3cc19c200a201b2286d121572f55a7608a"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::from_words"
+kappa = "eaecb12064a3cc311852992c01866a6940e5aa830f8dea568dc6674ecd7778cf"
+at = "New=u32, Old=u32, T=u32"
+embedded = "df89937e4a8b7f4c424e951320be6b0539d824b8b0bb4e0530e5c1485f24a51d"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::grouped_ops"
+kappa = "a40cc01b600e3900aca68e9cf44d89386de98a6892ba69b65f10d66e9a92b38c"
+at = "T=u32"
+embedded = "1e1855f8c87d6d612177db353d13c1c11c5badba382df1bd4340565aca6ad237"
+status = "residue"
+cause = "mir::Ty: types::DiffOp"
+
+[[fn]]
+path = "similar::text::TextDiff::iter_all_changes"
+kappa = "e833cad55aaae92918388ccf8998f88ae0b15f2839b79db5b585fc334c31368a"
+at = "T=u32"
+embedded = "f8cf55e1bfb24e1ad7d90a857e1972489d23d0082a053c0479e5284373669eeb"
+status = "residue"
+cause = "mir::Ty: types::DiffOp"
+
+[[fn]]
+path = "similar::text::TextDiff::iter_changes"
+kappa = "1e8abc42682a9055db84aadd27ff155e9ce839efa57f1589ffb0bb541cac9132"
+at = "T=u32"
+embedded = "7fcd0a31e4dcc88ef31d1690f47116000428f1971e9b33f692095364a8cdf815"
+status = "residue"
+cause = "mir::Ty: text::TextChangesIter<'_, '_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::iter_new_slices"
+kappa = "aae6c58abfc6ec9729aa95761c4a4f38f250629e0a48d2af45f3287677b0e8cd"
+at = "T=u32"
+embedded = "7fcada2c85de5ed05bcd522198868b44edddaa4c8cc292cb130454c6baca5913"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "similar::text::TextDiff::iter_old_slices"
+kappa = "22cfb267e5f3717c1ea95097a4e3165060bbaa9496e78a452aa1cdd0336dbdfe"
+at = "T=u32"
+embedded = "4812fbf468cd7a7edc65b3e706ec162e2400b719079cddd301435fab431fce37"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "similar::text::TextDiff::new_len"
+kappa = "2d363a76d669ff6820b51f97a10387cd77e79dde8ed556402107bc43ab30912a"
+at = "T=u32"
+embedded = "863e837eecb6e83c541a22d25e4fd274ba4c1885741f355d85c1f3f4a13bfed3"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::new_lookup"
+kappa = "eb444640c8e55e7229eaff9acffd2c69d048485d985d9b8d068ee7f2bd20b345"
+at = "T=u32"
+embedded = "52c667778cb480f4072b54d15000082e59141f992443a58a60b197caab76920e"
+status = "residue"
+cause = "mir::Ty: text::TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::new_side"
+kappa = "496b6197aafb356c8905d3f4f88f9913ac8ab37c59ee2445d3f3f1dd470194a7"
+at = "T=u32"
+embedded = "c6bb8fee61996ef2f18eba983a60c906662221786b0e748b7267dc92156e004e"
+status = "residue"
+cause = "mir::Ty: text::TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::new_slice"
+kappa = "2966fc6b5a0db56b01bcabea503d7bedfb25b04ea2ed7c28242ed975ec79dd68"
+at = "T=u32"
+embedded = "e32a61881f3c59361301a08e5aaf85cc6908e2fe3dda43813483e3935cdfc2b6"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::newline_terminated"
+kappa = "6942afee7a59c668b02ee30b0ffbe0ab748930466229724dfc1159308f79c8be"
+embedded = "fac750e867ad39b9dc308a8f014c39025a419a98e10f5b4b765f3e12837612ab"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "similar::text::TextDiff::old_len"
+kappa = "290eb95af719027359b59a012261e6c4ccf6fcc0326c0e41f3abb87c7cefacd2"
+at = "T=u32"
+embedded = "b5c28a49d5aeccac4f556f168070b5654ac4acb20d2ccce5a60f4262b615a8cf"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::old_lookup"
+kappa = "1ddba9e4e34a4fe117acbbc40f882bf3a95f528214e626f73aa08319f60b9100"
+at = "T=u32"
+embedded = "7785b02b1d4541c2a2135d31f4bad2e33aadff5e8d89bd79ee227c9b58c4484e"
+status = "residue"
+cause = "mir::Ty: text::TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::old_side"
+kappa = "8e07d4b0035354971861393eda4735e56e1a307200da64b5d064a5496b0015bd"
+at = "T=u32"
+embedded = "94249f35df1f9a1717220ecb7e17b38b09f773bfecde160462d1cdb02221f2d9"
+status = "residue"
+cause = "mir::Ty: text::TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::old_slice"
+kappa = "48e6c8cdf839a2c0c9c26994912465a4232e691bf1d3ab01e09628287c83b050"
+at = "T=u32"
+embedded = "fcf99ba232280e3e779561391823ff09ea77a4f94c769eee78acc67eb01d6d33"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::ops"
+kappa = "aea813c9df2dc0da89656f52a3499f4fb356da059d07f59804447410bf18885f"
+embedded = "6f3233efb32f499db36469c299eca5405a71b8764c6fba8cb883d9e2686396b7"
+status = "residue"
+cause = "mir::Ty: types::DiffOp"
+
+[[fn]]
+path = "similar::text::TextDiff::ratio"
+kappa = "1af6b11f98f220133da18f56bda12ab22441e4b61d9b2aca339d69af211abed8"
+at = "T=u32"
+embedded = "bddb2215f72c24a6b17561856534a3694a10411dd911b2f5abb0b9c015b5e2e4"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "similar::text::TextDiff::unified_diff"
+kappa = "94301cd94125cb4386df61cbc9d1dfa5650267987b3fb39946a92ca8e8055f6b"
+at = "T=u32"
+embedded = "d9812bd3129c394329416af21740943c35675dd1a7e5ceecc721963725d3c878"
+status = "residue"
+cause = "mir::Ty: udiff::UnifiedDiff<'_, '_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiff::whitespace_mode"
+kappa = "993113d8425cd606632b8fe58db202442c62b607ff757b4becd7df16c5082b82"
+embedded = "4bc58df50efe16ebe73a392b4df18ea7a623f3f5f66b46834a212502fd7abd1f"
+status = "residue"
+cause = "mir::Ty: text::WhitespaceMode"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::algorithm"
+kappa = "8a8c0e81d6e1ba6c2149058b306c979791e7ea81c0966433e14c22461d7ee271"
+embedded = "a0940a743939458bd326b38449ba203b81f74d919a7591bd872c956f2d8300eb"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::capture_ops"
+kappa = "bef7524f41688b7af558f38d978a1c566b7ae0127c6b2ed9bc859b332aef780b"
+at = "New=u32, Old=u32"
+embedded = "acd81b9f94c788576a30daa505b6f7cd15fc138371330782c914619b09f0770e"
+status = "residue"
+cause = "mir::Ty: types::DiffOp"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::capture_ops_pretrimmed"
+kappa = "cd5d12685f2152261a880e8a451c59fe216806e738b54dc2c0ce8def1af906e0"
+at = "New=u32, Old=u32"
+embedded = "fc7b7a62cff565b5a2e4d8b2a2dbdc078819324ba9e48f79a5f8ef8d46918990"
+status = "residue"
+cause = "mir::Ty: types::DiffOp"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::deadline"
+kappa = "9fccc73166fcaaa0a04db185f4aa44530b38b2ebae5b6b474b2c32149a08d228"
+embedded = "451d1098a655366d2e614ea57e71f748ff2e40435fa24e2223577080dc9b3dca"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::diff"
+kappa = "a64e2fa6eaf9100d2011fabca4614d7578f1a7bbca2d7670f871d44b63955965"
+at = "T=u32"
+embedded = "f9b9e9063f63b30d587151cb81ba26d24aa56078ec2766e2033392ecca688140"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::diff_chars"
+kappa = "43e34da5fa24a94a8e43380687edc440992f9c7defd6b60af7039e39fa7330c1"
+at = "New=u32, Old=u32, T=u32"
+embedded = "4950dd8aedf46927afb8b48beae137d4f398f673db66d234f7c582087120f36d"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::diff_lines"
+kappa = "9a1f4624941048c02ed2513d932feecd3d2a508cecbaa841e4f9bfb231ff497e"
+at = "New=u32, Old=u32, T=u32"
+embedded = "128e56b45131f5f22de8380f9c7d7ec1f996d242f036693e8e4d51445f2e813b"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::diff_slices"
+kappa = "5dbd8c6ecba1f8552e1b2d9e24c1c57893eedf36c0a0b5caba07854bb1dc42d1"
+at = "T=u32"
+embedded = "9b068c2d6a9abaa2c0c6d45e1ab454f318ce31979799cc2738c2fe7bb20c2225"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::diff_words"
+kappa = "fea46533e9710aa6f426e847318e98cf539dbc0bbe0845e01ada7fcdd5d8870a"
+at = "New=u32, Old=u32, T=u32"
+embedded = "be8dfe4afcb7989f2e55d76aa25f38ffd665c291e4fad19a682d57bb2331a311"
+status = "residue"
+cause = "mir::Ty: text::TextDiff<'_, '_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::new"
+kappa = "6d2c3b343ab691000317ff0b3e889ea100125d9cf53318417ccfdcf6495c96a7"
+embedded = "3c30e0b11654dd09ccfb0df309aac6df947e6c618241b3f0463f5235b83f3734"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::newline_terminated"
+kappa = "c17f17c21b3df5013a0e9e05745f0e46f6a9f7388ee112ce312a7f8b7659a39f"
+embedded = "3745c011aa51c7fdc57eb10e53e2966fd5f5557562bb6b107b267ddfc01fbd0f"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::timeout"
+kappa = "e2385e36df2e7c1c2935df35f15d89302128ba47f089bfe5e59f22b516dafaf3"
+embedded = "237f81ce0397c90d607ff1ed42f64b5829c61a453329848d77442b2a634ab3c4"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::TextDiffConfig::whitespace_mode"
+kappa = "9b74d68536e078a4eed70bbe3c424488cb6fdfe4b51851bd3d055cfa50ad93fc"
+embedded = "64b645e7abf6e97478517e96ca4fdca4db38ab255efc01e85ec83cd612309e99"
+status = "residue"
+cause = "mir::Ty: text::TextDiffConfig"
+
+[[fn]]
+path = "similar::text::TextDiffSide::from_slices"
+kappa = "e0cf39129de9d21e972ca236a351a861dc42f64c3d5b1208a71408931e17c0ea"
+at = "T=u32"
+embedded = "2beafcb16badf7d391ee3ae6ea3afdcec51923843433b36c8b3a677642f4cc10"
+status = "residue"
+cause = "mir::Ty: text::TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffSide::from_tokenized"
+kappa = "5408cb1748743fa20b732adf65922653a821e712a54a128e17209c5d312362b1"
+at = "T=u32"
+embedded = "f43ceeb9c2d912839b5ec00dc63c16a072fa865835d6fb97e16c4704cd9d5b7c"
+status = "residue"
+cause = "mir::Ty: text::TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffSide::get"
+kappa = "34016c61843a3506dd5b470bca590ecde507563545eedfdf7abee799077af1f7"
+at = "T=u32"
+embedded = "5ffe86721fd20c80469dd15fa599c8a25348cc5f8ca2c7e928acb6752611d718"
+status = "residue"
+cause = "mir::Ty: TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffSide::index"
+kappa = "204caba8e913b9cdcdcac8efd1b46e76a733a644e3ab2dfe89fa0b522af886e7"
+at = "T=u32"
+embedded = "19cbbe0e78879546afe325867f5a8eb09569705fae6501361e0ada8fadd32f8a"
+status = "residue"
+cause = "mir::Ty: TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::TextDiffSide::iter"
+kappa = "1f22f80d76767124d0447635d366dee3daabfe3daa9f1aa137006a121c079be9"
+at = "T=u32"
+embedded = "edb32b633bb8c6b547237b41374fad090eb2541a15895819fc21d8df4709930b"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "similar::text::TextDiffSide::len"
+kappa = "5e3bc6d6f3970a78252d652c52610f9bec201c07041692470fdb966785d216da"
+at = "T=u32"
+embedded = "c7c4e99b0ca6c479cfaa81f8e2773c6e5b5cba668bd0a82cd51cbadfb7d36a9a"
+status = "residue"
+cause = "mir::Ty: TextDiffSide<'_, u32>"
+
+[[fn]]
+path = "similar::text::WhitespaceIter::next"
+kappa = "42a2dcac9838d514e4fd178fc9acdd55b28485eccb05d00fb43fa2a479e36a3d"
+embedded = "7cecf47cdf206ea88752f5fb50b2ef64da3d8009dc8e11cd5b18c1a3bbe5f9d6"
+status = "residue"
+cause = "mir::Ty: WhitespaceIter<'_>"
+
+[[fn]]
+path = "similar::text::WhitespaceKey::eq"
+kappa = "4bc9b81a32e451e2ef8b60809b468ecbd561ffe58cec5571a5db36d29a36cbc6"
+embedded = "b2d12a04545fd27aa4d2130a3d5c37bbe81432a74c3240c90b33a2926f1e21bb"
+status = "residue"
+cause = "mir::Ty: WhitespaceKey<'_>"
+
+[[fn]]
+path = "similar::text::WhitespaceKey::hash"
+kappa = "c13d66f857c3529e6f93d3e588059a537cdf889f399634065d509bb277ab7604"
+at = "H=u32"
+embedded = "26aa4b24b04e5fa1dff3b6ba2eb247dbcc6b8d1c74275880b142cdadb8ca4dff"
+status = "residue"
+cause = "mir::Ty: WhitespaceKey<'_>"
+
+[[fn]]
+path = "similar::text::WhitespaceKey::iter"
+kappa = "c5c18acc8b287efddba1a61b8cddc924e775b18154ef53233d3a99fd223748af"
+embedded = "dda3f213600b62c20a04fc06098a7eab4afee69f6570547230eadffb7b2b86a2"
+status = "residue"
+cause = "mir::Ty: text::WhitespaceIter<'_>"
+
+[[fn]]
+path = "similar::text::utils::QuickSeqRatio::calc"
+kappa = "c05967403386913be87b9c67f4f83832c0abd44f54bd8cf17cd10cf6a37e0be5"
+at = "T=u32"
+embedded = "a0287d4a6ff45d3dfbe02b3015849f7eeb0caae87a2dff53bc019b10dd7e65b2"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "similar::text::utils::QuickSeqRatio::new"
+kappa = "b31586440a570eac4f463a1cedb68c939da5bd00bf4e46263dc27e0287efcac8"
+at = "T=u32"
+embedded = "80d05e95827d3cfc8aa185b4910e9149e9ec519b82ad0529298d5da47d9ec01a"
+status = "residue"
+cause = "mir::Ty: text::utils::QuickSeqRatio<'_, u32>"
+
+[[fn]]
+path = "similar::tokenize_lines_by_bytes"
+kappa = "ad52d37b44d9896d0d8768a9c2be032cf5d1b8b922569810cbb40c3a1cdd3645"
+at = "T=u32"
+embedded = "d8abab7571685571a3b44a1246231d1a89db84ab8b35950a01a94ad6dfe1d086"
+status = "residue"
+cause = "mir::Ty: Range<usize>"
+
+[[fn]]
+path = "similar::upper_seq_ratio"
+kappa = "f1f6e9ac4efa83a2f448cb9fa7bddb8986a949457f5a4933fda48859c641d626"
+at = "T=u32"
+embedded = "fb3beb4c07adbfbf66655e30788550a72ea34d9bdc0ce6aae892ea249beb2206"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "similar::zero_bytes"
+kappa = "7303491831fd61ac52663c3fad04345032b51f68df1ee134aa3d77201bc4ad39"
+embedded = "2e64fcce6266a89cea0b289c3a22d96547182fc85c8aae1d2e3a9690cde9b990"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item text::abstraction::zero_bytes::HI"
+

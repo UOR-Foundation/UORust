@@ -1,0 +1,100 @@
+[[fn]]
+path = "parking_lot_core::QUEUE_MASK"
+kappa = "5d906e7bbe75e7571d4112231120c07784d8a6441b73e2281f648585262b4099"
+embedded = "6671594ae5d0b29d349fb7e2dadaaddf13015fe1827c0cb3e873fd5204f5d815"
+status = "residue"
+cause = "mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "parking_lot_core::word_lock::<impl at src/word_lock.rs:294:1: 294:37>::is_locked"
+kappa = "3dcb734ba81a4390307d14e518de28bc2a8ba7f96001cc603b98d4173fafce86"
+embedded = "fd3b08d83fde781c6e90658feedf6cf97a9e32a527009a43b44b95aeb126e2bf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const word_lock::ThreadData>::addr"
+
+[[fn]]
+path = "parking_lot_core::word_lock::<impl at src/word_lock.rs:294:1: 294:37>::is_queue_locked"
+kappa = "d12272c2ca5cf7f63b31898cc347d09058a11a810aa6c0f65cd839b7267be844"
+embedded = "62a71bd6fcdc5eaaba4d0af1dcad254aa8f7058250329dc81eaca71b84d27258"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const word_lock::ThreadData>::addr"
+
+[[fn]]
+path = "parking_lot_core::word_lock::<impl at src/word_lock.rs:294:1: 294:37>::queue_head"
+kappa = "28a0b44bf35ee4320ed38964c457e748de7c03bdc8342aa14e06a3cfad9f10f2"
+embedded = "5771243a1ad61c2b06296ef1b50bead976d9ee708199c3521e330eac2d388b79"
+status = "residue"
+cause = "mir::AggregateKind::Closure: word_lock::<impl at src/word_lock.rs:294:1: 294:37>::queue_head::{closure#0}: mir::Operand::Constant: word_lock::QUEUE_MASK: mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "parking_lot_core::word_lock::<impl at src/word_lock.rs:294:1: 294:37>::with_queue_head"
+kappa = "23b22b802766561b65bca1fa40b0acf8435a5b17d017b33f97952f77bc943dce"
+embedded = "63a5ae281389fb278bbbc496504f27b5933b708a8d0641b96439d00f5ed61e05"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::<impl *const word_lock::ThreadData>::addr"
+
+[[fn]]
+path = "parking_lot_core::word_lock::ThreadData::new"
+kappa = "56b6f0080b07aa9b5be274843c52046eae87ed5022ad8a370fbfa30286574d2c"
+embedded = "be3ba6b368d7bbae4aa9caf87665dddaf071ea10c4b44bd043014c4878eea1a3"
+status = "residue"
+cause = "mir::Ty: word_lock::ThreadData"
+
+[[fn]]
+path = "parking_lot_core::word_lock::WordLock::lock"
+kappa = "9cbfff270630f87734e86bc4d1c5eed4fa02c7f31caa041d51c3d0525939fe30"
+embedded = "039728efd331467659da21c49b03e558e8e3dd556725b5875ff2734bfe6afdf1"
+status = "residue"
+cause = "mir::Ty: WordLock"
+
+[[fn]]
+path = "parking_lot_core::word_lock::WordLock::lock_slow"
+kappa = "4c576496d98e53e5fd165220f15bb8e92d3137989b501eae35c0f5105d8627f0"
+embedded = "d8de040ab81c69120ff643f974d8b7748b217a21435c3d13f6ce913fdae2b3dc"
+status = "residue"
+cause = "mir::Ty: WordLock"
+
+[[fn]]
+path = "parking_lot_core::word_lock::WordLock::new"
+kappa = "eb76ec000e40c463ee1a5cf24af4212b40ea309e6c26bb27e4849cc4d265cb68"
+embedded = "57421f564b75c43154111018d78a92658023e06072b2133629af665c17a2b86b"
+status = "residue"
+cause = "mir::Ty: word_lock::WordLock"
+
+[[fn]]
+path = "parking_lot_core::word_lock::WordLock::unlock"
+kappa = "a5efa83cd2801d0bab5fbdc71ee5201e0cfd3e8b1c316a0302fd5a218e666989"
+embedded = "02cadfb595632f6e336af019fc4574f402d652658775f6d2b37fea55d0c41225"
+status = "residue"
+cause = "mir::Ty: WordLock"
+
+[[fn]]
+path = "parking_lot_core::word_lock::WordLock::unlock_slow"
+kappa = "5db92c6bde0a8374dcae0b46e11f5e000b066b35b21523a58df704aee614105b"
+embedded = "5cf4052670f6c1cce93a5f992598a552ffcf853e6dc8eefbe65fa286849ea143"
+status = "residue"
+cause = "mir::Ty: WordLock"
+
+[[fn]]
+path = "parking_lot_core::word_lock::with_thread_data"
+kappa = "a1e300f8c9893be31e346b8bcde5f043aaa31dc487de827ca0c8b85c21651c66"
+at = "T=u32, ThreadData=u32"
+embedded = "3da0da591cce981002a9da078962948420d68cc1dfcccee842a0ec102a2fda5b"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::TerminatorKind::Call: null"
+
+[[fn]]
+path = "parking_lot_core::word_lock::with_thread_data::THREAD_DATA"
+kappa = "49060ab668f54cf91b8385d15e5fd6bead424c28417aeab9f88ba51121af66d3"
+embedded = "9f8ebecaadc9c432be739cf59fdba3e470e31bae711298fbfb03dddfbd8edf65"
+status = "residue"
+cause = "mir::Ty: word_lock::ThreadData"
+
+[[fn]]
+path = "parking_lot_core::word_lock::with_thread_data::THREAD_DATA::__rust_std_internal_init_fn"
+kappa = "a1fd7eefe66426c0394c5839cc08c78d27a22c1fc58eec7bf414a357da557402"
+embedded = "f88fc5f6a59237221ca4aa6a0659aba91681c1bc134008ac27e6bb6639cd5754"
+status = "residue"
+cause = "mir::Ty: word_lock::ThreadData"
+

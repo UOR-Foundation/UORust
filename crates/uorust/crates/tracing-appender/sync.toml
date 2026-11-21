@@ -1,0 +1,56 @@
+[[fn]]
+path = "tracing-appender::std_impl::<impl at src/sync.rs:22:14: 22:19>::fmt"
+kappa = "1ec6b8bb6c6648429a032981236a3188389d2cec704e6287b4087f852f1519bb"
+at = "T=u32"
+embedded = "4a9a4bbd160363ad41db1102fe3849c444fa08f56146e87f409f0db02ddcd29d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tracing-appender::std_impl::RwLock::get_mut"
+kappa = "1e8ba29ccf2c50a8bda31b88650f1b1440284ca091141c1f1a1507b42332db1c"
+at = "T=u32"
+embedded = "e6e1e10f4cf0e62264104ecb879fba0e231a7d5145417d5ead375c16bdf62bc8"
+status = "residue"
+cause = "mir::Ty: std_impl::RwLock<u32>"
+
+[[fn]]
+path = "tracing-appender::std_impl::RwLock::new"
+kappa = "36213de637a95c68f37ae013e660d9e42a7fc844795d79ad31e323bdb17b5625"
+at = "T=u32"
+embedded = "a2ff97c5a9f25bddb6ccaf11683f964c125432954860abdb67f1c1dfba79fa1d"
+status = "residue"
+cause = "mir::Ty: sync::std_impl::RwLock<u32>"
+
+[[fn]]
+path = "tracing-appender::std_impl::RwLock::read"
+kappa = "a19d85367591fbea6687298a07fa65a26276ffe79faafbb9bfdb9ac3ef39a4d2"
+at = "T=u32"
+embedded = "a65bda9e89aa5b3483f8d320f460cdb380c0e265c72160cd1109bdea033159ea"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLockReadGuard<'_, u32>"
+
+[[fn]]
+path = "tracing-appender::std_impl::RwLock::try_read"
+kappa = "904045b5820ef1ae619873468ee64a5a35b4caff2ddad5404091229d027cb711"
+at = "T=u32"
+embedded = "d9f1db2f719956d8ebfd2e5596465c655561492c276de06e4c9a8f1e43d64604"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLockReadGuard<'_, u32>"
+
+[[fn]]
+path = "tracing-appender::std_impl::RwLock::try_write"
+kappa = "0f0b84d8ba04a01218b37258a760e2614d07ec880c3331b29dd65b5ef3752c03"
+at = "T=u32"
+embedded = "40c7984a0b8d2396de8140027edc902fd8c176c7d9447659bb94fe61973d6e57"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLockWriteGuard<'_, u32>"
+
+[[fn]]
+path = "tracing-appender::std_impl::RwLock::write"
+kappa = "e8c80bc77b0fff23280a88b347597e855c588b634779cfce6d1a503bf8574ff2"
+at = "T=u32"
+embedded = "330e357042aeeda0e5fe0dbd669d87c58afddf79a9829c1e32d0f31bacaa3ab4"
+status = "residue"
+cause = "mir::Ty: std::sync::RwLockWriteGuard<'_, u32>"
+

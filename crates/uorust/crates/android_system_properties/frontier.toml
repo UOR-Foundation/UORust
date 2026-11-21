@@ -1,0 +1,42 @@
+# The android_system_properties register (written by `uorust crate android_system_properties@0.1.6`; do not edit): every body of
+# android_system_properties's MIR at android_system_properties 0.1.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 6
+translated = 0
+residue = 6
+
+[module.crate]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 6
+embedded = 6
+evaluable = 6
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: AndroidSystemProperties"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: null_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1

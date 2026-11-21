@@ -1,0 +1,24 @@
+[[fn]]
+path = "group::Curve::batch_normalize"
+kappa = "20d2c4da265dee44d3253e1026a4ecad04675b06924a2e6144d787c0420a554a"
+at = "Self=u32"
+embedded = "67407c5fa35b920c68572bf3207bc7a9f1829bbb4037c7b9564c76b181dfcf32"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, u32>"
+
+[[fn]]
+path = "group::Group::mul_by_generator"
+kappa = "beb4cd321ca394699ae9efa9c8dfa02d7bc7c0dd0ba885659724d233a357ffb7"
+at = "Self=u32"
+embedded = "64c7769e6c29bc2212450ddae1de83591249a63e6b2f2bcde2604c4612dfab79"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Group, which u32 does not implement in core"
+
+[[fn]]
+path = "group::Group::random"
+kappa = "f5420408ef91b545d2a2e885dc9e588b8895ec4f2f896e26fae10d55b4a87a96"
+at = "R=u32, Self=u32"
+embedded = "90eedc442d065f5544291513ab83b86432cb7817fcd2d80a9cdbed5e03c7c3f3"
+status = "residue"
+cause = "mir::Ty: rand_core::Infallible"
+

@@ -1,0 +1,322 @@
+# The wasm-bindgen-backend register (written by `uorust crate wasm-bindgen-backend@0.2.104`; do not edit): every body of
+# wasm-bindgen-backend's MIR at wasm-bindgen-backend 0.2.104, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 149
+translated = 1
+residue = 148
+
+[module.ast]
+bodies = 45
+translated = 0
+residue = 45
+
+[module.codegen]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.encode]
+bodies = 61
+translated = 0
+residue = 61
+
+[module.error]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.util]
+bodies = 10
+translated = 1
+residue = 9
+
+[embedding]
+bodies = 149
+embedded = 149
+evaluable = 149
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Diagnostic"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Encoder"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Interner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::Program"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::TypeKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: encode::ImportModule<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Diagnostic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ThreadLocal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TypeLocation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Enum"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Export"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Function"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Import"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ImportKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ImportModule"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ImportStatic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ImportString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::ImportType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::StringEnum"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::Struct"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::StructField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::EncodeChunk"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Enum<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Export<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Function<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Import<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportFunction<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportKind<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportStatic<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportString<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::ImportType<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::LitOrExpr<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::MethodKind<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Program<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::StringEnum<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::Struct<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: encode::StructField<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<std::string::String>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DescribeImport<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Descriptor<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnumVariant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LinkedModule<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LocalModule<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MethodData<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::FunctionArgumentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::FunctionReturnData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ImportFunction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ImportFunctionKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::LinkToModule"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::LitOrExpr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::MethodKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::MethodSelf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Operation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::OperationKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::ThreadLocal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::TypeLocation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::Variant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::EncodeResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::Encoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::EnumVariant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::FunctionArgumentData<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::Interner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::LinkedModule<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::Operation<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: encode::OperationKind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 1

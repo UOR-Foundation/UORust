@@ -1,0 +1,336 @@
+[[fn]]
+path = "zerocopy::cast_for_sized"
+kappa = "abcfd3d95f99839d0a5f63bcb372bf4555a97d88d5f1ac738811f88a783bdb25"
+at = "A=u32, T=u32"
+embedded = "c5a469347f494896d6ab22cc5298bf052d9ccf93407a9e5228fd999807d70be1"
+status = "residue"
+cause = "mir::Ty: pointer::invariant::Unaligned"
+
+[[fn]]
+path = "zerocopy::cast_for_sized::<impl at src/ref.rs:1440:5: 1440:75>::project"
+kappa = "3476d4b9b3ebd5613dbf07a5ff5b8b9071c3aa7c974011d1b3e9233d1ca54324"
+at = "T=u32"
+embedded = "3e6d93a81a0bbe8f26daaba28b7d359409855ca21029e313989e069e5d34ae2f"
+status = "residue"
+cause = "mir::Ty: _def::PtrInner<'_, [u8]>"
+
+[[fn]]
+path = "zerocopy::r#ref::<impl at src/ref.rs:1280:1: 1286:65>::deref_mut"
+kappa = "079b9431f2d23b143eac7b563f262d8ecb01051feb0ecc5fdf2c926fe394685a"
+at = "B=u32, T=u32"
+embedded = "5ec6d9831c81322446c55c1b7bd0f3ba267447694210990fb3ea6edaef787deb"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::<impl at src/ref.rs:1280:1: 1286:65>::deref_mut::<impl at src/util/macros.rs:676:9: 676:121>::ASSERT"
+kappa = "6d4435d85bdb0944c52edeab7b6d6ad8db1ec8c755dfd0bcdaee3efdf6df53be"
+embedded = "5a237481e36e693670da1a0ffb46063e058c88463fc00081c097fb0e3a34a067"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::bytes"
+kappa = "5a71b1df2568524efec1a807f1e2ee0c97d9c27ecd3dfe7822b68ce8d64a416e"
+at = "B=u32, T=u32"
+embedded = "30c882a2334a57616b5bbf14b50f28bd31b2aa7103f49003214e52e6d58c2c99"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::bytes_mut"
+kappa = "a75bb0d3bb10e71efea9e3559f5fe278e684cee2e11d081f3502eb4276e2ccd8"
+at = "B=u32, T=u32"
+embedded = "bd4b833df7f6d712770b05d09d257658dbcb9321dd9368e8f4d81e705e8c4b8e"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::cmp"
+kappa = "ffceaae83887d988e81c442a7c96040104db861702722c6140aa8851bc4bd168"
+at = "B=u32, T=u32"
+embedded = "830a54f836da780668e4939d35b284260420b6f29a18139c6f578a5322370867"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::deref"
+kappa = "379e718da4ada4e8abd151110359e273a19587898f053587735184c384b48ed8"
+at = "B=u32, T=u32"
+embedded = "248ef6bd31bd91e0490a5097ff271c4e5819713df59e802bcdf86dfbeb4ee5c8"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::deref::PhantomData::ASSERT"
+kappa = "6d1c955090ff3b04f0499a0ecf977036bcef39a4efcc603baadb21816cfebf07"
+embedded = "4f2eebcd225bf3bd6c5bfd33a45086f586f1362eb925d5042bdde09b3c08b1e6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::eq"
+kappa = "cd26960844c49cb95e93440ccacf6650a520ae175355823ada212149548d87b7"
+at = "B=u32, T=u32"
+embedded = "dff77ba7127ac0d19bdc7b4ce7f0f4109cbd314c09ff4511310e27b1d92714bb"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::fmt"
+kappa = "2078b094446d4bd42660479732b9f35ddbd3f1299e6a430c49d80fd73c68a3a8"
+at = "B=u32, T=u32"
+embedded = "9fae5522dba93dadc6d3d90250631918c5650dd21701fddd897b609a7513df80"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::fmt#2"
+kappa = "4600bec967f5a60ddd460f4e443df2b3d027186579b00ffe79df9911d8b35021"
+at = "B=u32, T=u32"
+embedded = "1f9bcc0a17ccacd46c0fa5f3653fc789e7e60218b4e59307ea2c89640e0be875"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_bytes"
+kappa = "16672ef7d6c9dbdbed228bc5df4ef2e7a6875f2afc345d267d2baf5e49064867"
+at = "B=u32, T=u32"
+embedded = "e9ddce2dd54d905d8b589c3563493ca5bc7b28c05c5235e99cf08f6e378bccba"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_bytes::PhantomData::ASSERT"
+kappa = "f13b7bbc54d252dcf1c26e9e04e2f1e227103c57b1d21dd543cc61255b1c69a1"
+embedded = "6af30029d5c6bf6f99e4aa0a2e408dbd3bb39c258bc098f3c90db6505569453e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_bytes_with_elems"
+kappa = "8bb605b337862517efb555dca24f328b0e7c9d35d7f34ff3082fd6a79633d8fb"
+at = "B=u32, T=u32"
+embedded = "abbe20dcc5fb3fddf6402b501ab6708da813c401db9335f3313c3d1c7e4be8e4"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_bytes_with_elems::PhantomData::ASSERT"
+kappa = "08dff6081ab6a0bf83dee85133cc8069ebc8952daa3534c53827bfeecd48a575"
+embedded = "a80c82774a02f2868c5fd0a2587f6f8928db2f041ef6722695629e5957c9e899"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_prefix"
+kappa = "cc41a3292558a48fe5ca56aaa3ac7031f8f45e8edea73fd129e636ca5433a9b2"
+at = "B=u32, T=u32"
+embedded = "165b6b8518d8895bf465a80c057b2637b577156f5b70938fde5675e1a307103d"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_prefix::PhantomData::ASSERT"
+kappa = "e8b6f03d29980c3a92fc6661f0e70c4520cc6b20692d542465c38626125a2248"
+embedded = "a30cab626c0c6a2b8db2c52044e4a6a5cb3b6186855c91ae311c3d3fceb12e04"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_prefix_with_elems"
+kappa = "021d1a62c98af3f574b8ab5b0ac6b5635fa95deec94053cb9c09c0aa388c27ae"
+at = "B=u32, T=u32"
+embedded = "0a4e9403b4d832a9b7474be6b310479e0cea39cc4bf7544529922d296148d686"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_prefix_with_elems::PhantomData::ASSERT"
+kappa = "e95389683fe4989d908e0afd882998cdaea79301f34bcdadfc7ff9ca2cd45a79"
+embedded = "926d82370ada081ac3a6c2ecd053f12951402cc765b7383a537f58fd6cd614db"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_suffix"
+kappa = "88268dc610742148938bc060e697633e15123bb5697cd2ac43efa2d91af18bf3"
+at = "B=u32, T=u32"
+embedded = "63eeca4bd47c1ada88621148939d81f233245a8b47e743a06dd830e2b6289a58"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_suffix::PhantomData::ASSERT"
+kappa = "b356eb2519d530cbcbcbea3c26062c084882d42a3b22af6b64ffbee219e97251"
+embedded = "72f6967a92ef27500ea5724b2895e6e817f5604a998408b7d4ede13263e4345e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_suffix_with_elems"
+kappa = "20994404ee9dad50d213898f9af168fd6ac24c7081b38c226a42033831b96467"
+at = "B=u32, T=u32"
+embedded = "45f3ac10d2aeec382e242323142e5b5afbf2395146a72cd09b639c97a36250c2"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::from_suffix_with_elems::PhantomData::ASSERT"
+kappa = "5ee0ee1c37b65929bce0abca0927a28c5f1447f0f0bcd8ac6b0872d61d17d392"
+embedded = "1f6c9fe49677854605df25baa9a2eaddd32a4e5727b24c76c43cd7369863591e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::into_mut"
+kappa = "3c540aeaafd36d4918cf2ec57ee924e141b91e54b857ca0ca907d11ec762dd58"
+at = "B=u32, T=u32"
+embedded = "fb0b3781bea2cefa6af500041e7e37bf51479db90e65782159ea7ade81433b3e"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::into_mut::PhantomData::ASSERT"
+kappa = "0a62cd1eac03ae4fc445975d2f63bc5f4c730c128c72348d8e63f6d9990bfb91"
+embedded = "dbf9c826277de0ee150fce7debb26030b8a144bb943f196d61c512e4fcbcab9a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::into_ref"
+kappa = "338008e73a482f0bd7883bddcdd025a81b916546262c1d079a6fe2418d61f69d"
+at = "B=u32, T=u32"
+embedded = "23fd2365eb85c2b06f969d4500b007a5878f8663b6fcc5949eb50909d5eaed36"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::into_ref::PhantomData::ASSERT"
+kappa = "f1bfcf4d34fdf1132b19058be1ef01c8cdab9887b7bb492eb852e46eada5bfca"
+embedded = "2b3a73657c5f009421e75b5f21e32acffa7f30a20f1bbbad7b5ab230c481fced"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <T as KnownLayout>::LAYOUT"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::partial_cmp"
+kappa = "afe1bb2a2a49a2e618328ad3636709a1ae51dca3f0c357555af685b407d46416"
+at = "B=u32, T=u32"
+embedded = "bc93dca053285d5a2200d931ffb6d9a8cbdf28619195751b1a34bd837a953929"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::read"
+kappa = "b6c2a0c864ff53b08bc09ca364b47abaf3cb42598072abdfdb6f8355fb006d9d"
+at = "B=u32, T=u32"
+embedded = "803cfbc111adfb748a862f7fa208f0a50076bb3b13cfe0c26dfa5af1302b3620"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::sized_from"
+kappa = "ce1e8f2a2a99c587e3d71708b130157c657fc1d1439d0b8436a431b943ca9173"
+at = "B=u32, T=u32"
+embedded = "4de3b79325df6352d21cd3e5edc0f951e3afd1e04372ffa678abad3c7a5e5dda"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::sized_from_prefix"
+kappa = "308e548813e4dbfc0847bce4cb6b6bcf338d2d9c8e897731290cbec183e2bf91"
+at = "B=u32, T=u32"
+embedded = "953f3caab272760a7dc18e46a7f89a01de57adf7c9ffd25441b66c5ee867e46b"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::sized_from_suffix"
+kappa = "ed60010025e4025e48a12cf269255cc3e3b8a8363e93a86ca4b0e3fd3c43da44"
+at = "B=u32, T=u32"
+embedded = "4d871fe80828b92a3dd1cd2e02774dafe4730e03321f21e5e1b8fa746008c675"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::Ref::write"
+kappa = "1cbb8b9ac399910b51c6eaa296a913e9d5d37e1a6c24ffa0917748b2edeb896e"
+at = "B=u32, T=u32"
+embedded = "6f0b1cd86be809273b3703f583a42fc4b2e9b9d39ae19c4a32c62e10e593c6f2"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::def::Ref::as_byte_slice"
+kappa = "cbded5cce2fedc1e324ba9a425753a847fdbc1af7ddf8f1984f695d2b71f9aa3"
+at = "B=u32"
+embedded = "9bdaba3c00151fb555a1e7319d72773a5ece8ce7b477bf1d4dbd9730a65b2868"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zerocopy::r#ref::def::Ref::as_byte_slice_mut"
+kappa = "f9cf6556c366d715ccc043bbb3b8114c3960c6dac4c5c20eec937f344e9bfa43"
+at = "B=u32"
+embedded = "ceb33b7ac9019f1add2db9e7b07b7c375192116e193145c1b60bd36430f63e2f"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zerocopy::r#ref::def::Ref::clone"
+kappa = "ad066b21697fa9ade99cc3f72a95a1387faec65a813a7fb2fda2c2a4c51b5b49"
+at = "B=u32, T=u32"
+embedded = "dd023e24eedb9275fa2db53384aa44abd9e454505be06ca79b063a4da26d2ab2"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::def::Ref::into_byte_slice"
+kappa = "35ec9c918d8807a4bfdddc6a578785ec6c3c73befe408817acf646cd1a336514"
+at = "B=u32"
+embedded = "a949be26f85690bc41aeb540be181210e62593c1ca95823f9bec8c5ce64fea5e"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zerocopy::r#ref::def::Ref::into_byte_slice_mut"
+kappa = "0e3c81b0d03122f6e9222a2b5b652405faca6ed00b18e4ddf034ee3d95e911e3"
+at = "B=u32"
+embedded = "ebe3a5d58a9c7b337900ddac216d254801fbf84abe6101fce4c8a0fd7a03dbb0"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zerocopy::r#ref::def::Ref::new_sized_unchecked"
+kappa = "2002d8873f803efca2ba247f97babd1606d3a63d6f470e57b0bc5e8e9a2d9b5a"
+at = "B=u32, T=u32"
+embedded = "3da88f29d917b3cfff3556ed8f2dc884c8a5da59b67f01422eaa39c5762f5c65"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::def::Ref::new_unchecked"
+kappa = "f38db9c5657cb18b70173ddd4e95bc80a4d0d45732f2100c6323c4dc868e0207"
+at = "B=u32, T=u32"
+embedded = "ba06bc562ce90a30b8e054dd6738cbd0e7389dbe089e19b0c30b02216235be21"
+status = "residue"
+cause = "mir::Ty: r#ref::def::Ref<u32, u32>"
+
+[[fn]]
+path = "zerocopy::r#ref::def::Ref::pointer_metadata"
+kappa = "433175c58da786539e8a9439634b819c169e7b0b657ad18fe6e5a62eabc6bd36"
+at = "T=u32"
+embedded = "7de357f1273e2937f6637db909acdf0ec5ce7f06fab2149fa7ebe4a406cdaa83"
+status = "residue"
+cause = "mir::Ty: B"
+

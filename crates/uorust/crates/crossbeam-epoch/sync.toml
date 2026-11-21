@@ -1,0 +1,194 @@
+[[fn]]
+path = "crossbeam-epoch::list::<impl at src/sync/list.rs:124:10: 124:19>::eq"
+kappa = "03dd7113559b2dde66688cf7982cfd89962a3d0262dec532c8a4fad405164cde"
+embedded = "1a8e9c24d5d29732e09ffd7a7d7342d9e28c9b5f2d9f8fc0db5d1f3552c31e33"
+status = "residue"
+cause = "mir::Ty: IterError"
+
+[[fn]]
+path = "crossbeam-epoch::list::<impl at src/sync/list.rs:124:21: 124:26>::fmt"
+kappa = "fbb1751312b560f21188466984cb55cb848a2ff17cfa16bc5f500827da922b2e"
+embedded = "1ec81938699aac1aa62331130929dc4aed7a6b4c0c68aeff7e9c729d8fabc0b7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::list::<impl at src/sync/list.rs:15:10: 15:15>::fmt"
+kappa = "1dc837148e7306d23bb8d5a9e96ca4e5a4251b227d54cda14e3d63da3b2468f8"
+embedded = "0cbdaf2184d3b471a410ceefcd86aea2813cb50d9874bcbc634115bff7d14c0f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::list::<impl at src/sync/list.rs:95:10: 95:15>::fmt"
+kappa = "971e9e176817851f661e03807b5e371db4dde64116a430890edcd5fe58d96f61"
+at = "C=u32, T=u32"
+embedded = "e47e72447f2b83d6796bd7eb042335591b3a3c52866f19b2b63e0037c355bad3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::list::Entry::default"
+kappa = "929df8ccadb4ca9cbd4d126587976c55c27ddfc42bd8a977fde1eec60ade3660"
+embedded = "bd30030cd76b771039415e4e76203efbf9a490b41eb88b76762b5049196f157e"
+status = "residue"
+cause = "mir::Ty: sync::list::Entry"
+
+[[fn]]
+path = "crossbeam-epoch::list::Entry::delete"
+kappa = "416d55f3de9823186f523d649a49896e061b08e738d315649eaaa8471aa6048e"
+embedded = "48cd9a0e5d0f7b210b76ca3c04cd25f6bb81c09610be3331ebc2b2d4dcaea1e4"
+status = "residue"
+cause = "mir::Ty: list::Entry"
+
+[[fn]]
+path = "crossbeam-epoch::list::Iter::next"
+kappa = "5e01b985521752ee0aba81ce8e75e810e64dcc29bb564955af086cf00fb8fd20"
+at = "T=u32"
+embedded = "2aefb52cb0c9ea127806bc7d54cc223c7180b9b093a3c3e142438072e203ce4a"
+status = "residue"
+cause = "mir::Ty: sync::list::IterError"
+
+[[fn]]
+path = "crossbeam-epoch::list::List::drop"
+kappa = "2119790beb23d1eb2fab133def4f8c82143ed5a392547ef4239b6db4b747e719"
+embedded = "932174a73bd55d43aafcc8a3f79e23e7a7a0fbdd6c3e28ae821f5d327ef42cc8"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "crossbeam-epoch::list::List::insert"
+kappa = "73ef3bae9ae83369b938a35c440fea5fda696372a2cde1bceb43c9249bf0f665"
+at = "T=u32"
+embedded = "aca3e38e5722d20e8baf92069cee6a466b08884fde4379dd46309f9ae18981e4"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "crossbeam-epoch::list::List::iter"
+kappa = "27e0a9c40d3975e7eb8e23eacebd92797e380fab4bcaa344e0711ab91bc8c9bb"
+at = "C=u32, T=u32"
+embedded = "0a2426cfc93c70b568138da5a7549486742c6e774d6d711283084deb8edd4caf"
+status = "residue"
+cause = "mir::Ty: sync::list::Iter<'_, u32, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::list::List::new"
+kappa = "f743cfac68e7a1a04aa5ef04423fbcad8b5552973c0908b16ff92103c40ce14c"
+at = "C=u32, T=u32"
+embedded = "71f2a9d8a7e5fab28a679b29586cafa2ad417e87e9c3618e5da844d4974f31a4"
+status = "residue"
+cause = "mir::Ty: sync::list::List<u32, u32>"
+
+[[fn]]
+path = "crossbeam-epoch::once_lock::OnceLock::drop"
+kappa = "cad9419e95cfc65d4db0711ee4dc8817dd4777c1d016db33521ff8ff6a8038e0"
+at = "T=u32"
+embedded = "1bafc0a27a65e3dd77fba78d905ff5236f0dffcd9359fe1c4663e987e09159e7"
+status = "residue"
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::once_lock::OnceLock::get_or_init"
+kappa = "4c89815535a7cf8bb4ea19f142c32dca70cf6c1af08bb9c6cd3ca7241ffb23dc"
+at = "F=u32, T=u32"
+embedded = "d12b3fc3453a593bd34f73a44b9df381710019dc5abab1740afe764a8098bd3a"
+status = "residue"
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::once_lock::OnceLock::get_unchecked"
+kappa = "9fa67d354edd0ae053edccffb7620c06aabd64a3e10df25754d3a729d483a4a8"
+at = "T=u32"
+embedded = "a8034b82fccc1dd56ba0bd01c9f1845c9b33d70bf425eb4bd466bbe9dad242c4"
+status = "residue"
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::once_lock::OnceLock::initialize"
+kappa = "3f8a2ab7c6b3f76d54295d814d0b9a06cb62ecb3ad3305cc43623e501943491b"
+at = "T=u32"
+embedded = "a0444a5676b7c5fd6e0c87c72ff42ef16c0c50b35bdeefac3ac563bf7a91215c"
+status = "residue"
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::once_lock::OnceLock::new"
+kappa = "edcdf95583b7e700b0c32c73ba7883d24b76b60ccce06fb72690a0d162907479"
+at = "T=u32"
+embedded = "65572d27ab87be07767809c8f7c80605dd2553e445b09d0c17dbf89408548711"
+status = "residue"
+cause = "mir::Ty: sync::once_lock::OnceLock<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::queue::<impl at src/sync/queue.rs:21:10: 21:15>::fmt"
+kappa = "8e52119b17e41913e5cf9c5f7db30d70be544ea776311fb0cec33a3c90c4cd3b"
+at = "T=u32"
+embedded = "74a1d329709d4e231339c9f405d45861e1180502da9d330d9e707543a0c2c820"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::queue::Queue::drop"
+kappa = "5ca49511c47162765a7a889695c431ebc4a331e44c2fa2bd557db6297dbddde0"
+at = "T=u32"
+embedded = "5aced9890e0d398de7748ff8aff67c90ca7c926831847e079c5405c6c6a32689"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::queue::Queue::new"
+kappa = "b3910d89f0a00bdab139d8e0ebe538f75563192cc792559d8b72566ab245cb76"
+at = "T=u32"
+embedded = "0b03379a30850e8642d9d33d837ca0eeb3c392e9fe5147d761af418cb6f23df4"
+status = "residue"
+cause = "mir::Ty: sync::queue::Queue<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::queue::Queue::pop_if_internal"
+kappa = "3c444ad0248427c4f13a1d82d7e68a10a48822e4cd8ce4dbef40f4d8c801be45"
+at = "F=u32, T=u32"
+embedded = "39fc025e81064456ca28e0699e5bfde455d0f8aeac0022ad804cc440fa5c3493"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::queue::Queue::pop_internal"
+kappa = "6aaee962dc1399e9f9c2270aa0ad887c8c5b73366a6182e80231fd076b9b2171"
+at = "T=u32"
+embedded = "8bdfc9c5bc28be62acf36fd5343a2ff53ae9d03ccd28dec700244ab5d68c7c09"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::queue::Queue::push"
+kappa = "5ebc05851ac919046829ce7f0711a672d7e0fbcd23275bced033279f4eda0f81"
+at = "T=u32"
+embedded = "bf143e34ddc0c7a07016eb263aad858437ed99f42fb539d20b47a1f965bb2cea"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::queue::Queue::push_internal"
+kappa = "fdd4f7cbbadd2a8bd0a51823677a90387502ed5ff5971f34deeee837d45c78e2"
+at = "T=u32"
+embedded = "d6597cc90385f2ca900fe8968616ebf4af96bc46b213ed656cb2ef1cc9077bf1"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::queue::Queue::try_pop"
+kappa = "8a84761c6bbd886e03ce77c42ebf78cf8cc89da5289aed23ac65b76409e71ca4"
+at = "T=u32"
+embedded = "f5dc8c913f4f87855c8f496bbb2e1ef6ba65a91f2ddad58d379bad37a9544f48"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "crossbeam-epoch::queue::Queue::try_pop_if"
+kappa = "b34571b9e2054f43bdb83a35de13140e4f17f0d1ed2dfedaa191d3af544231fb"
+at = "F=u32, T=u32"
+embedded = "bae186f207280f785ad70bc5e4b242c0a0dcde29340f9ac0f5372e8a7bdc5614"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+

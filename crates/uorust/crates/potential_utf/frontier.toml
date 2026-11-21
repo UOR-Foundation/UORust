@@ -1,0 +1,80 @@
+# The potential_utf register (written by `uorust crate potential_utf@0.1.6`; do not edit): every body of
+# potential_utf's MIR at potential_utf 0.1.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 49
+translated = 0
+residue = 49
+
+[module.uchar]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.ustr]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.writeable]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 49
+embedded = 49
+evaluable = 49
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: PotentialCodePoint"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: PotentialUtf8"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ustr::PotentialUtf8"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: uchar::PotentialCodePoint"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PotentialUtf16"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::char::CharTryFromError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::str::Utf8Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: writeable::LengthHint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::char::DecodeUtf16Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Copied<core::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ustr::PotentialUtf16"
+bodies = 1

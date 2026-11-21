@@ -1,0 +1,104 @@
+[[fn]]
+path = "zeroize_derive::<impl at src/lib.rs:123:10: 123:17>::default"
+kappa = "b07d54277316966e98b1a6ad52a8d5223eb32ef5cafebb60a71df0bb67583b55"
+at = "Bounds=u32, ZeroizeAttrs=u32"
+embedded = "1f922a7712c97d60a3b33eb727f7bc6bda488026bf7415f9dc5570bb0607683f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <bool as std::default::Default>::default"
+
+[[fn]]
+path = "zeroize_derive::BoundAccumulator::visit_path"
+kappa = "58e8705e29bbccc51d0865773b1456899c454fc635d4aa1cd87bdb4dc12850ef"
+embedded = "d2a4b98baa2d2b4e47ef77d8e80e4fb8efa71422a12a632e787e1159eecaaf67"
+status = "residue"
+cause = "mir::Ty: BoundAccumulator<'_>"
+
+[[fn]]
+path = "zeroize_derive::Bounds::parse"
+kappa = "0f222302cf4efd9836a363e50e659062d3cc7c7c3b8637b40945464882e8a77c"
+at = "Bounds=u32"
+embedded = "9f163fab9c093d031ed307578a76b929d0bc4d07e19623c8d15b7e902276968f"
+status = "residue"
+cause = "mir::Ty: syn::Error"
+
+[[fn]]
+path = "zeroize_derive::ZeroizeAttrs::parse"
+kappa = "816c6697de629119d070ecc7a37710c846da023cac88d411337fa71ac7945e8c"
+at = "ZeroizeAttrs=u32"
+embedded = "ec2716f8fe8c355f291b26acc9340237166ad3380629075b632e947429f2a9eb"
+status = "residue"
+cause = "mir::Ty: DeriveInput"
+
+[[fn]]
+path = "zeroize_derive::ZeroizeAttrs::parse_attr"
+kappa = "428b35567ea4cd44a6951cb12520d32a45068b4451d9a96b21f8da64b463a113"
+at = "ZeroizeAttrs=u32"
+embedded = "21e9f95cbae1a3e418136449aabba1bce52aa9904c6d800f2ab85898ef4af0f9"
+status = "residue"
+cause = "mir::Ty: Attribute"
+
+[[fn]]
+path = "zeroize_derive::ZeroizeAttrs::parse_meta"
+kappa = "cd7f086edd6c21f51c75fe688bfc31b057ab778b0e3ed7ef778fe1b7328808eb"
+at = "Bounds=u32"
+embedded = "bc5ae09fab9e351b436027df56a04bd938d1c8ce39d14b4e3006d5afa5801940"
+status = "residue"
+cause = "mir::Ty: ZeroizeAttrs"
+
+[[fn]]
+path = "zeroize_derive::attr_skip"
+kappa = "beb274b3c43d45f90679036f6d13941e71b71b015f1e33cebe8c64af9de6a161"
+embedded = "9bfca42eb928e82c1864fb4b8b072a9b70f5258defb50b5cf045681ca053efb3"
+status = "residue"
+cause = "mir::Ty: Attribute"
+
+[[fn]]
+path = "zeroize_derive::derive_zeroize"
+kappa = "8e981e3d043f61c86ab043e55bbeae32024c8e5dfc7071aa1ef6b7d3fe8ba4bb"
+embedded = "835da96eb8acc85505a6c9c7607e59febf3f3b0b0ae8554d26c6204e41177b65"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "zeroize_derive::derive_zeroize_impl"
+kappa = "6c4d1c5a5e788d896bdc4c4b69c517955dd73e6546ef2ff6980fdbff22c2ee85"
+at = "Bounds=u32, ZeroizeAttrs=u32"
+embedded = "351a0609aec17dffd6be2b17d9cd54fe0b5f826ba4a0f80a6c9913aa6c5c4399"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "zeroize_derive::derive_zeroize_on_drop"
+kappa = "0a2a6ed039b43d0f27c59387f739d4ae07b17748bb5f06eb29fe416b14999371"
+embedded = "f30b942d954f54b7de9b93395306e07fb3bf47abc84a8a32848824a4c11753e2"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "zeroize_derive::derive_zeroize_on_drop_impl"
+kappa = "ad1c6023eb32f1abfa48d8a9309e888d5a9bc16403af097a41113e544b55480e"
+embedded = "38b30f8db22409a9caef6b550bddd3191747f9731ad1ddc6b57bd33ba5b0a5da"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "zeroize_derive::field_ident"
+kappa = "b087f12563c48c0f8fba7a36da23238a245d3c57af6261a0737cab7a31624912"
+embedded = "87f60eb5198d8f6c236dcc1c455daf3f17718acf57f96b5d8e96a00c888352d1"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Ident"
+
+[[fn]]
+path = "zeroize_derive::generate_fields"
+kappa = "e2e1a525d7b9c074fb61e7cd410d59e4c3e5543e9a568ccc7d60f75533725c1a"
+embedded = "82ac6bbee70e03a69be761a53cd8637e67466a334a8a1bd1bb622ae4f3833c6c"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "zeroize_derive::impl_zeroize_on_drop"
+kappa = "c0d5622ef9e462bd9d0bc27c022f67532e42f08fe31def48e3e41347a303471c"
+embedded = "3035feb3f4cbfd1121b02a28f6dbcee872d6f300864a1a6adbcfa7a280023ac6"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+

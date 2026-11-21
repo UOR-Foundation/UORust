@@ -1,0 +1,111 @@
+[[fn]]
+path = "sqlx-core::ConnectOptions::__unstable_apply_driver_config"
+kappa = "e350168fbc2f26bcfd5665106565d4919744abb11eb611a4fc0943f5efad2572"
+at = "Self=u32"
+embedded = "8136f795e78f15f009c8fb742123328e4acf801005dd34b5a99a6cbc93b40ec2"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "sqlx-core::ConnectOptions::disable_statement_logging"
+kappa = "54dd6da22cc06cbfbced22253b16188e7dc9ba51c83510ece90d51e7381be3c2"
+at = "Self=u32"
+embedded = "4c2b2a292047b518b1e827ac9d0304f7865ddb093693d2d2d2653b690e8e9f32"
+status = "residue"
+cause = "mir::Ty: log::LevelFilter"
+
+[[fn]]
+path = "sqlx-core::ConnectOptions::to_url_lossy"
+kappa = "eb4e8fe5ff2c58bda9a77b865be365c14cad3c33dba9c0f66d922136951edcef"
+embedded = "f5021966aff9c9eb507d11f303159518999a5a3e6c77b25c8121398f29c1ba85"
+status = "residue"
+cause = "mir::Ty: url::Url"
+
+[[fn]]
+path = "sqlx-core::Connection::begin_with"
+kappa = "d39f1888994131a7bc99cf5973cc6e5b5018e308502465f05c96072116a57d52"
+at = "Self=u32"
+embedded = "2adeaf041eca1e36f00363369b0b67ab43ceb9d3665a071083fff6016a4bb7aa"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<transaction::Transaction<'_, u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::Connection::cached_statements_size"
+kappa = "031a1222dd878ad80b565d52ca33ebf01c742d59000954fad928ae88c466c9e8"
+embedded = "31adb11e421a89a033ab6d583230da068aa38cc4bb97b783213f863867808552"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "sqlx-core::Connection::clear_cached_statements"
+kappa = "7cc839ab7ba680edabb054afd775f55bb06011000aa69c94d1fd798f242d0d99"
+embedded = "a491f455ee630e3b2f47f547ae0f1a2b0b8762bb98ac584b56ba9effbe5c6bd4"
+status = "residue"
+cause = "mir::Ty: {async block@src/connection.rs:145:9: 145:19}"
+
+[[fn]]
+path = "sqlx-core::Connection::connect"
+kappa = "44ea7ccc71b02e6513937b88477f985d6af88bcff680657f18e4d9e2083c148b"
+at = "Self=u32"
+embedded = "84956fb3e40f8d4fba377bd5997026605c66982c1aa8211822d1746fcdeff017"
+status = "residue"
+cause = "mir::Ty: {async block@src/connection.rs:179:9: 179:19}"
+
+[[fn]]
+path = "sqlx-core::Connection::connect_with"
+kappa = "c0ca667f23cbd6425daaaf965e3098def07fbd1930e44dcd965190f0e9e2b7b9"
+at = "Self=u32"
+embedded = "d29c0dd618a32250cf23d0b5a9a70563629d668ad61751add28bc4ad041df2a9"
+status = "residue"
+cause = "mir::Ty: impl futures_core::Future<Output = std::result::Result<u32, error::Error>> + std::marker::Send + '_"
+
+[[fn]]
+path = "sqlx-core::Connection::is_in_transaction"
+kappa = "d94f407983a84908e229a237c45a7ec829b13747227a12f2c9bc537d388dbaad"
+at = "Self=u32"
+embedded = "43e15e7ccd1189d64573027cbcfc2978ff29c111101408457afd05dc9016fb5f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TransactionManager, which u32 does not implement in core"
+
+[[fn]]
+path = "sqlx-core::Connection::transaction"
+kappa = "072aacb9e0f0b75229582246bf0a9bc6d3b0c4acdb2f51a41b93a3c5b783ad70"
+embedded = "736ababcf7f168fa84235ad2858f6b576f22a89e80ab76040a3f33a388ab2af7"
+status = "residue"
+cause = "mir::Ty: {async block@src/connection.rs:112:9: 112:19}"
+
+[[fn]]
+path = "sqlx-core::connection::<impl at src/connection.rs:193:10: 193:15>::clone"
+kappa = "b7903910a8a5deb56523c97106c55210293e9ece572e2a0a91781375411dba49"
+embedded = "cf4a707b59331f6b8fb50cbc208926a98f4bd9539d2a5caab760ecefc676ba5b"
+status = "residue"
+cause = "mir::Ty: connection::LogSettings"
+
+[[fn]]
+path = "sqlx-core::connection::<impl at src/connection.rs:193:17: 193:22>::fmt"
+kappa = "e71804bb851438e11d76cfd59a073693ce641181eedc864c22a3d92457d8a61a"
+embedded = "a507a7fa653f0d4c923893178c92cc999e5ca6a0c8ffb598281f7225279dfa4a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::connection::LogSettings::default"
+kappa = "94371167e3e9af8c4733a803aa094b8208ee70fe79946262d06fb5faefc4fc47"
+embedded = "48555e3dde56ed86805f64009cba0ffb6ef445e56089c315f5c15c419184e6ef"
+status = "residue"
+cause = "mir::Ty: connection::LogSettings"
+
+[[fn]]
+path = "sqlx-core::connection::LogSettings::log_slow_statements"
+kappa = "a0be3cddf7a2202273143e5649a45b936e016076280a8ea05dbcca52f4214ab3"
+embedded = "becd976e68e40c9fd9fbb73b4be3a0298998f22948168e64254dfb02dc154c0e"
+status = "residue"
+cause = "mir::Ty: LogSettings"
+
+[[fn]]
+path = "sqlx-core::connection::LogSettings::log_statements"
+kappa = "b6e48b30bfbbea5f8769d6bf8fcc7131734b48018571da462f77c236c457720b"
+embedded = "321bf6bcde83fa2927422482c380f41707040696e698cae10884c05d035736ec"
+status = "residue"
+cause = "mir::Ty: LogSettings"
+

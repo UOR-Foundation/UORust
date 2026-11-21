@@ -1,0 +1,997 @@
+[[fn]]
+path = "futures-channel::INIT_STATE"
+kappa = "f95ad3f521329ed765f5d7c8399799fb6b366c34e31a4ba5b77b64dbf87b91b2"
+embedded = "05a5ec5b8dff549ae33d6101455cd532fc53d47a00bd1e78c53b3185253406e3"
+status = "residue"
+cause = "mir::Operand::Constant: mpsc::OPEN_MASK: mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "futures-channel::MAX_BUFFER"
+kappa = "e8fcc81eb2fe06178b7e3a29f2575951a6ae9c4bafa34fa9085dda2e8f1f082b"
+embedded = "2a041a2b7d8172b43bd129306d08688821bdf6784737c8f1260f4f6c50a9f2f1"
+status = "residue"
+cause = "mir::Operand::Constant: mpsc::MAX_CAPACITY: mir::Operand::Constant: mpsc::OPEN_MASK: mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "futures-channel::MAX_CAPACITY"
+kappa = "50459ebeb594297e4d00741b286843bbc4def2a8109d2534ada2bfa8f8aac781"
+embedded = "2f4be2e06fdedcda42e427198fb02f684fb46be1d1b2bc87ca4c79ec60d051f3"
+status = "residue"
+cause = "mir::Operand::Constant: mpsc::OPEN_MASK: mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "futures-channel::OPEN_MASK"
+kappa = "8e89d28b759b39711856b86e4387885907f448417509d6e9a74bcc12010ac25d"
+embedded = "b5baf6b312e495094140bf2fa398d39e768ae3eae16253b6837d40f8a19f83d8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "futures-channel::decode_state"
+kappa = "fdbcc480ca3823d952b6dd1db44c9deff91d18dc783cf69ab9a181c81a04148a"
+embedded = "218edbf0f15868f02bd09df152bb5b1a1263fa1e95bbe5954816b429cb8d0838"
+status = "residue"
+cause = "mir::Ty: mpsc::State"
+
+[[fn]]
+path = "futures-channel::encode_state"
+kappa = "a9703d2cf7c6ab5bab79dcf9ad958d30d8537def49a4ad94ae61d5aac1a0048a"
+embedded = "0f38ee14754dbe8d819b12964dd6fe8461b359fc7c56e503f109043e88527e17"
+status = "residue"
+cause = "mir::Ty: State"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:154:10: 154:15>::clone"
+kappa = "53bfed6166713bbcc704ad3f9d2ec9e3a625d5cdaac943c452c7aeaa509653fb"
+embedded = "9ee3f2e9bfdcb1e82d92d271a54d4668ccb435a4611f8db1fb3df3b5a7543cbe"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:154:17: 154:22>::fmt"
+kappa = "0ebf29eb58be1ef78db5f368324736e390c7ae6f01523cd97548b4f69a993a71"
+embedded = "30d994d2692a5d6c2ebdef8a1c681654597f5ec0cb99152f466bb6219fb886f3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:154:24: 154:33>::eq"
+kappa = "9d686fa6565a83d7b0dae7bf86b7db0d50455146b25235bfa104157e2bf6e45d"
+embedded = "cc2ed0a700b2981cf8eec97da19108c364bbeadb0f6594d5a820886fbb2d12c2"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:154:35: 154:37>::assert_fields_are_eq"
+kappa = "8da2ac728bf9feed3ceddfc73479d63a65fc5af089ad4a54ac49788369aa91ce"
+embedded = "6194e52327ee54ab07bb71abf170fb922bc05ce3f9451c71216b26046497ece5"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:160:10: 160:15>::clone"
+kappa = "1b0a59550cde25798841d79f222d4be93eebfc71c2b681ab9e90def5ca562769"
+at = "T=u32"
+embedded = "9e8c68e6cc0e99db578036a3c3f3eda49eab43090e74c983a1dc4491ad32bd29"
+status = "residue"
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:160:17: 160:26>::eq"
+kappa = "568f59bf0653a156de6342b882ada6df83495048cda6bf663ad28047be12e180"
+at = "T=u32"
+embedded = "88f8e4234015973c3401a9225018a4cae4bcfd11107031080e9f3b819a752265"
+status = "residue"
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:160:28: 160:30>::assert_fields_are_eq"
+kappa = "ca7343cf972077556d574dbf6be19f944174075c2fc5f15b5fe8a6579a6de0fd"
+embedded = "3e748981dc5d170584dcac35ac3bf333521f5402c1270207055cde9b720ccb40"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:166:10: 166:15>::clone"
+kappa = "9fd82e8f2da7205e3bf4dfc8142ffe71399333a67d1ae1d319eb446dee6c0f28"
+embedded = "3ea90ed525842c7bbf4acee6d3ce1d8d1a35859b158a61c6ad3dbc042eaa7d8f"
+status = "residue"
+cause = "mir::Ty: mpsc::SendErrorKind"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:166:17: 166:22>::fmt"
+kappa = "48f56a9d2cdbfad301a1c9edd56e7e2a4c922c5cf94c6e5be0297aecbcc5ebe7"
+embedded = "c64b26ee1576a52ea0a3c1d75b2ea2347d178b965125a118afe9705f1ab48d28"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:166:24: 166:33>::eq"
+kappa = "cfabfc2123d187d671994c6a307f36b65a65ccc087524af4c8ed70d003d42cbc"
+embedded = "f389662c6198116b2fce40d68777c3dbc28194dc40735e5ffa8567d33991d020"
+status = "residue"
+cause = "mir::Ty: SendErrorKind"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:166:35: 166:37>::assert_fields_are_eq"
+kappa = "cdf1ee95bd26f4545d7005b1fad8dbc1cff2f04476bec7347c93c03bd2e3ba01"
+embedded = "4ed3bdb17f6f61d407591649ec0ddffe20b1fc41ba90153810e983d809518e2d"
+status = "residue"
+cause = "mir::Ty: SendErrorKind"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:173:10: 173:19>::eq"
+kappa = "6cef39b7aba0195fb382c06ffe54569afda845ed41e861e113acf3cccdea19be"
+embedded = "e8c9cbebed669ac793f02c369437556c151d08915adcc5558c1babde52be85c2"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:173:21: 173:23>::assert_fields_are_eq"
+kappa = "12a838afce48d2e8db94dc6bcac12f42e2999f03efbea63c1aa9b1c7a8007b7b"
+embedded = "3b37fd36d09b7576bd569b9c1e5082c133bf97915d34bc5a043f510bc7df6332"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:173:25: 173:30>::clone"
+kappa = "6c53a9859e2654c6ec5703722a5edbcb3b775b40c7be654aad990848c4d88430"
+embedded = "1e1dbc3fcd57a8a8c67035d0d4258c057cf5c484085aac3be0d98048fe1bf94d"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:173:38: 173:43>::fmt"
+kappa = "f4a10c5e0a34590d3d99a7d5595573058739c3b1519d7311f1a6724a0b82d717"
+embedded = "e99846f51e5dc1ad65e7cdb1014cd65224e4096848b849e74499f7ac99bbb6bf"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:184:10: 184:19>::eq"
+kappa = "56e65e337927f3f9415530252008ccbf811476c1c4bdb6c05d7071a2b46efd71"
+embedded = "c065f0baaabafb5e042f9e53f73b83e5724a4473387dc0143432f25fbb2f3677"
+status = "residue"
+cause = "mir::Ty: mpsc::RecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:184:21: 184:23>::assert_fields_are_eq"
+kappa = "88119b80b4b39bb924b24f8301b121ddf541ea1a9c875a8724a52b8ecf299d2c"
+embedded = "33582dad5ab8bbefc44af8820bc8670ba1d369dd64c8795723419c28578d9fb0"
+status = "residue"
+cause = "mir::Ty: mpsc::RecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:184:25: 184:30>::clone"
+kappa = "96ec0e9aebb08d6f458bf023a819bf97a67d9239c623eef6222b4eecd9565015"
+embedded = "1fd97eed32e34bd2ca4d671767cde1f3b8d6ea8e18e75aa85b61b54372d74550"
+status = "residue"
+cause = "mir::Ty: mpsc::RecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:184:38: 184:43>::fmt"
+kappa = "fae4b869aac82e57c27d6c1fdb1c7f5075ace705a4937a4c37e85181d2def320"
+embedded = "262bc4cc1bac6438ff5189e45350c159443ecdd73ca26a8559ecc1fa6aadbecd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:188:10: 188:15>::fmt"
+kappa = "c33915467036333c43f402b0f0a74768f92e0a0a827543d329aba1cd1374fc6d"
+at = "St=u32"
+embedded = "8af66625c9120fc874c57ec32a3aebea3edbf0d566272475bb25c8393496bf4c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::<impl at src/mpsc/mod.rs:332:10: 332:15>::clone"
+kappa = "2ac5755b05c13bc967839684c28bc8a667a0ec354bbf3cc9e7553a8385830f58"
+embedded = "d2095a305d751289999a2de7085bbc3831332cccfb95559fb4cdb64e73b34155"
+status = "residue"
+cause = "mir::Ty: mpsc::State"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedInner::max_senders"
+kappa = "ebe72bfc87522745c725bb61a541ad1e76c9d628cf5fca70ef323973ada6e0a3"
+embedded = "70cd57dd507bff7d79c69173f7b042f44d60cc1bc4794cfe735c927cb62e7c59"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedInner::set_closed"
+kappa = "8c356c6a9782cf43886ba80670f8d6c7196706d76537b8def7c16501a04e3e41"
+embedded = "859993f3fd3c270fa4b8eae2fb87706904de14032823c20302fa5e52da211957"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::clone"
+kappa = "bd455218e4652a65fa04e446f47976b27f03214ef4070bd7708f59217dfc042c"
+at = "T=u32"
+embedded = "26756296bf91b39b5d32161561b97b9ea7287cf4d23a77d0fe38903bb4279375"
+status = "residue"
+cause = "mir::Ty: mpsc::BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::close_channel"
+kappa = "7add490245f99917cf3c20222479f222be41e53ce4138e5a6624255bc47e349e"
+at = "T=u32"
+embedded = "71b05fdd5c4a0a5d41188790a5f60baf712eb3854d13f4f30aef7aa5263bbef7"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::do_send_b"
+kappa = "6da894f2ccc10b51cb1e8f1796d7e336202fa07b97d4fb3a2be6e17d43888085"
+at = "T=u32"
+embedded = "d523126fc38559b0ff17ad8b7823d3f71dbe099cbde1bd93d74765bfadb0b0ae"
+status = "residue"
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::drop"
+kappa = "248ce3f043a08657d2f86c9309f7eb79644f144d402086f194e98d9c4e759874"
+at = "T=u32"
+embedded = "98941c3964d0e9c0b179fd972f20fa77f9f146c9a7a731ffcd614c3e48082c08"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::inc_num_messages"
+kappa = "321d2b0f82f265b6630433248ab3c2d4158a96f19314b632600dd0c242f3861b"
+at = "T=u32"
+embedded = "b55533e6997a145a25ed679c4d4fa0abad0da91e1ef69d1115be007195ccfbaf"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::is_closed"
+kappa = "5ef33fd7e53c4e2fb912188264121c37d5db88833e44d770ba72558f35ac9fc6"
+at = "T=u32"
+embedded = "3e8467bf8a1ad29ad32e9569c2fd98d975ef8f405ec326fb2acd30226f054d40"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::is_connected_to"
+kappa = "c05fa74b0ee965a490f8c13f9d86eb1528e3b0ecb866b2153d6efdaa1eca0333"
+at = "T=u32"
+embedded = "dc039f18bab1d2c8c39e19f9b31dc5676da6886746a74405758d86f927d6d6fe"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::park"
+kappa = "7cb7991fab9a17b954a1bec025795428552a64d89b7b685a8196b48f01ff929a"
+at = "T=u32"
+embedded = "bbeefb009e4bc8dda2a00d65ac51501bf092f40a23e46ce574f4da9494683251"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::poll_ready"
+kappa = "abaed0f5c59f3daa0f548285e317bb57db9fb49fe4c4aed247fe8fe2282a3643"
+at = "T=u32"
+embedded = "45b14822bb079339342d4534534737ae7c4fb28fc0aa1014724f72a9e259a385"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::poll_unparked"
+kappa = "95e1e0fc546af03761fff024933cb22b43bfcb36c4d8c74f67e9def9196bf446"
+embedded = "28a4fa09d8340f66def9dee058fcc54a8c05c3daaea28bd57adba0cb2a1b5a97"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<()>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::ptr"
+kappa = "4bf80dd7fce43ca85cbe018eab538421c2d2c7c2c7916726900ac2548baebe24"
+at = "T=u32"
+embedded = "3faf29db4d300deba34f6cc2d6968423d5ddafba7dca3f095439d480c2ea1eba"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::queue_push_and_signal"
+kappa = "e9437f5af4d761f95b6e9cf07464352e420778809c4760790e93c1bd6798975d"
+at = "T=u32"
+embedded = "11c26b1a499347e5f8ac4fca21ba82d8d1c85d7a77110900a4a5e0a2bde9b6a7"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::same_receiver"
+kappa = "3860cb3e86f24ccc9df89cc52e9bfd8dcae8f6c3ed2b2098ac3c00d3a63c7bcd"
+at = "T=u32"
+embedded = "5eac678253fc13dccd93d44e3f3dcb2a07032744729763ddcf430302257b4e02"
+status = "residue"
+cause = "mir::Ty: BoundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::BoundedSenderInner::try_send"
+kappa = "391622e2860dcf0c5bd148013c22ad27ed03ab7a643607a933b9d8a0c2fe4520"
+at = "T=u32"
+embedded = "93d1a112e3be5844b9c51fba78473d66fe92bf046c57b2121876b2dd1e780580"
+status = "residue"
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::close"
+kappa = "e337d062703c97f9dbf7c31ff201eb7cc32d02a5b34f8e588331382fec469509"
+at = "T=u32"
+embedded = "d5fa3d29d6306a3beb71817982d7b604c42325d1d2bf5225416028e3e4c2cbc8"
+status = "residue"
+cause = "mir::Ty: mpsc::Receiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::dec_num_messages"
+kappa = "b43fbbdf979b5ccdee14cb86b7e96930d5ad5cc0282c11a42ea2c0c215a6e336"
+at = "T=u32"
+embedded = "bcf0f57a6d27f1e58cf6e817ef45d265781d548b2643854e2dc8f3e704542f2f"
+status = "residue"
+cause = "mir::Ty: mpsc::Receiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::drop"
+kappa = "ce0c2b5acab247f38015e1bdc5673a17fa0815cdd973b436e9a180734de62790"
+at = "T=u32"
+embedded = "767d94657012670c0864669db049d8fd0c72a80c5d4ac7a13f10425a91887f0e"
+status = "residue"
+cause = "mir::Ty: mpsc::Receiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::fmt"
+kappa = "8b51f6ec7f45ec9b78e46f097d7ab17b47137e600a9bd0d6b41290998fdb6a63"
+at = "T=u32"
+embedded = "59bb869269b2dcc532d291d0090093fd84cb5d93e93835fd3d23b5a663c56189"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::is_terminated"
+kappa = "690a9bbe9f936a19c2189370308b4753567b17eb58664e5ce7c4eacf22103721"
+at = "T=u32"
+embedded = "5d22a87bee4ebc298fd6e89ef18b97c99baca942957ac03966374cc422ba3932"
+status = "residue"
+cause = "mir::Ty: mpsc::Receiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::next_message"
+kappa = "37099d3a43c8261a0a936d29b9b349c2c13445882491340d37ee0da2baa56b1e"
+at = "T=u32"
+embedded = "a0bca5cdc3e6fdb11af0bb2d3ad241c6e5c2cfb194ac785f7810bd52dac516dd"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::poll_next"
+kappa = "67d40f507a7f90261bb793b8d4d0efcbf9def63d8555118a3894c9758b19b0a2"
+at = "T=u32"
+embedded = "fdfbe03cb7b57fd8911a80933d35a0fc9fc73057af758b658a0e74850e74ba57"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::recv"
+kappa = "6ed7f5869bfaeb23876e395a670805c486df0f7f7622aa279548c7d88367a1eb"
+at = "T=u32"
+embedded = "1b05aedadb2489e7dae4f7fdf8e748cc7f0771eaf6182b0daa053f3cf658aa0e"
+status = "residue"
+cause = "mir::Ty: mpsc::Receiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::size_hint"
+kappa = "3f5dc08d0761c171fd0c3824da145f92a668ea8a95da1a89e40c16e736f72791"
+at = "T=u32"
+embedded = "d0ae7c40cdde60d494ad196b9385182877952e61bcc8a44c84cbdb7bdae4ea11"
+status = "residue"
+cause = "mir::Ty: mpsc::Receiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::try_next"
+kappa = "e0b107ada0af4cade904d45522f2954f4b549e26823e438906ad60f6256e3c61"
+at = "T=u32"
+embedded = "06487258a2a00402bddb8f947d2b0d48607cb9d3d26803548cd8c761ef1cf289"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::try_recv"
+kappa = "49727f64f20625473f07ca79dd1dfe7b8baa60d27bc76506f7ff05317e241c79"
+at = "T=u32"
+embedded = "acd8f8fe5ed38473462a55490a86f997801feacc2fdb6456874af3e769416a2c"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::Receiver::unpark_one"
+kappa = "fca443feaecfd1c315e8e4b56e1c0534fe5fdd0a51ea13c9ea8c65a34af7913b"
+at = "T=u32"
+embedded = "7bcb30586c7e37812ad6acb89210cd8d7ff43408a5a44c8461e8d139b6c7a42a"
+status = "residue"
+cause = "mir::Ty: mpsc::Receiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Recv::is_terminated"
+kappa = "93e866fa7fa77c595e25b713267a82f6e85ad1e87b1c71c5cee3be1a32048f36"
+at = "St=u32"
+embedded = "5796b25f9e805ead70c9cec369c47904ee44361206f82bf9a03a70309eec8c23"
+status = "residue"
+cause = "mir::Ty: Recv<'_, u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Recv::new"
+kappa = "ddf881fed229324c5a918e89431fb463ba95fd62412f9f18ba134a7e0e45f250"
+at = "St=u32"
+embedded = "5b3e802c4f6926724180108b910b8712f3be9dec583c75215855cf688bb4b780"
+status = "residue"
+cause = "mir::Ty: mpsc::Recv<'_, u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Recv::poll"
+kappa = "992745d2d5e6db7bc32abb42f622cfec92302453aedb688580994257d1933dff"
+at = "St=u32"
+embedded = "a9b59c65e884a496e150f37830c9ff2cb8d1d6b191ef38e37d1c59c208f25a26"
+status = "residue"
+cause = "mir::Ty: mpsc::RecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::RecvError::fmt"
+kappa = "53d33a68be4a70a25e7b289e7e7d00419a79e4d23070e95361069171f483b2a5"
+embedded = "56fe9d26d44c6e255abc4afec2474e589bd0a90a516e0e091d0463042c013d4b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::SendError::fmt"
+kappa = "23d4b7f13b15648aa7a7c3a8b11c55a41d4d19ee35d9a8ff390dfc55e82e0c95"
+embedded = "ca211adbfda3b4dedf1be07ebbe70b912a87c7724f030b62b00df27c65578923"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::SendError::is_disconnected"
+kappa = "c42c4c922d24a23ad96dc7bf406968a182a4a7383d630722e9fa41b05cf9d9ff"
+embedded = "65e0d4504eca26ef56536767ecfbd7125d98380aa8401e88f0019fb4519f9237"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::SendError::is_full"
+kappa = "1a0bf43ca257bf264d4f790d64f39b37f02ecfbedc32973c40f31ddd5f9fda76"
+embedded = "58cb831c87d1513c65904c604fb68fe4de0e16f4b7b577478173de380b8ac50e"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::clone"
+kappa = "4c608f85994900f67bf9426da075dce68128e9b2a1d0f2c4b54a859735d6fed2"
+at = "T=u32"
+embedded = "82284d1ff50c2643f0301b428122af0b32c4ce8adee17d58c9c4c0d78d29744b"
+status = "residue"
+cause = "mir::Ty: mpsc::Sender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::close_channel"
+kappa = "c8b818b68565a564bbf747749e2385ad002fb7de22488608864aa0b823e690f2"
+at = "T=u32"
+embedded = "d276c319db2a9ef27cd237417266ca92870c7d6745fdae5d1595f0798d99cc6c"
+status = "residue"
+cause = "mir::Ty: mpsc::Sender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::disconnect"
+kappa = "fb8bf5243f4cdcb370114469fc85597ab3b75cca23612aff6ab487a441bde934"
+at = "T=u32"
+embedded = "46033e45984eff36ce1af0158862da6f1fa5629abe20f9ce3f8038adda9535bc"
+status = "residue"
+cause = "mir::Ty: mpsc::Sender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::fmt"
+kappa = "0714fd56b9ea63a01cd23ab7d3d9f18769b527fdce2b19384c8f5bcf8ad456ec"
+at = "T=u32"
+embedded = "fc1af5af56d4e47b712a90a34af8a2f6105f04d9a1448c9cf9dbc9e509f10392"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::hash_receiver"
+kappa = "3cbeff6a17644f0be40b9e0115dd8b26357710f933f8a265b1f97e7db98a8c6f"
+at = "H=u32, T=u32"
+embedded = "a6e093c7ff1794ce10122390f073074f0a0e9b70711594c6493408e8ba40d6bd"
+status = "residue"
+cause = "mir::Ty: mpsc::Sender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::is_closed"
+kappa = "df4f270bba7c9bb679bff5d5ab7cee1733e07960b561553416cfd41948780472"
+at = "T=u32"
+embedded = "699f8ff3c7a36262039423933a30ec8b78fbbfff1c54635605db87ca4ee3f823"
+status = "residue"
+cause = "mir::Ty: mpsc::Sender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::is_connected_to"
+kappa = "11b6c8854283f9e94ef33f691854dba71a9a98b44148e29890e6eb5c322c09c3"
+at = "T=u32"
+embedded = "95633979431bcf5e5796df9201b2fe661fbc813cc916a32fc5fade4b0dfad18a"
+status = "residue"
+cause = "mir::Ty: mpsc::Sender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::poll_ready"
+kappa = "1ad986f3ff53b6c6705abd0e585aa338389987cf13a4f9d8fab427f09e9b8b60"
+at = "T=u32"
+embedded = "f77782106587eff1bf4acd4498f0e7e84afcffe9f200518eb7cb545b4d2d9884"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::same_receiver"
+kappa = "f7739056ea93c9eb001238ce99d1546c81e62bcc23d21f458f0717c3cf80cf8f"
+at = "T=u32"
+embedded = "ddcf18ca781d16abfdd42d9f036a857cf746c26ad1313517be818db78e85a54a"
+status = "residue"
+cause = "mir::Ty: mpsc::Sender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::start_send"
+kappa = "e8661e3a47b8924d4d270bff5fb7f9d7415aff88a77d4238aab5790a37513a44"
+at = "T=u32"
+embedded = "45b8302f85fa751ae46e7b2d38e39c5c2d2d004a7a862fc4799dd27e12e03b20"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::Sender::try_send"
+kappa = "38fe36eaa198bc30bce3423163412dea5060383278f9299947dd9256c9e0f4d5"
+at = "T=u32"
+embedded = "78e1465b1fcf22ffbd7f7f19e6bbe9485519784eec74b6fea70cd29d00dee31d"
+status = "residue"
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::SenderTask::new"
+kappa = "c039c3393f1294b9e64623e25066ca41e2745bc8e437621fa88b234bf1e00fc8"
+embedded = "e484dad3cebe9dea02d32704dd4ad95f663b5f66476e407315a20636ec5f261c"
+status = "residue"
+cause = "mir::Ty: mpsc::SenderTask"
+
+[[fn]]
+path = "futures-channel::mpsc::SenderTask::notify"
+kappa = "bfbe30aede34852750d15fe814627a87392f3e440361bfdd7fb4c9412a56a42b"
+embedded = "13df742b70a38294c2f38dde9d56403dd3749bdd323936bd24df357280259b0a"
+status = "residue"
+cause = "mir::Ty: SenderTask"
+
+[[fn]]
+path = "futures-channel::mpsc::State::is_closed"
+kappa = "98a7abf884064542f826293ab7e1c655b1d93d59beb6529473619f2cae0c3f6c"
+embedded = "fbc38404c0a3a1267a0305794523cdc621ea236bb24afd7ed396a4ae8b8c8892"
+status = "residue"
+cause = "mir::Ty: State"
+
+[[fn]]
+path = "futures-channel::mpsc::State::size_hint"
+kappa = "94544f121354d323e3d23bd2b8ce5c58adb0ccff2ec03e3dc9f1bd5a6f5ba47d"
+embedded = "1438a61dc9950368c5782a9320e7fb6966f12acf62a6135d218b3431755775ed"
+status = "residue"
+cause = "mir::Ty: State"
+
+[[fn]]
+path = "futures-channel::mpsc::TryRecvError::fmt"
+kappa = "d997b21b47f0f007b037bcc1b5421a9ac7b41b3f5fe16880f2ae6977baf43b1d"
+embedded = "096821fb70a515f72f1dc6a63325a2fa0a2b55f54cfdc8e9f6070f01aa05d8c8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::TryRecvError::is_closed"
+kappa = "6d6952589e848fe852f14cfbd4dff3b5fbd2c0e07f7b5a00457ee1d448640fab"
+embedded = "b9f82201a8655e927510bd65a942e0868a4c6862916ab9edac3668e7019058ed"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::TryRecvError::is_empty"
+kappa = "a94b93353b1a7051cc66a5fcee3beec38130e76f7776aa900de97f6c073f85ce"
+embedded = "ecaaa22c181dba8575cab5b343fdda5a2a19a9cbee30148f4eeca8afe4340dcd"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::TrySendError::fmt"
+kappa = "c54b23d6c144423200049dd8d873cc1f8bc1c775c206177117e3bd4d9a89c4d9"
+embedded = "c0c897b3e5b514c1bd7a96cfac5aa4677b7d3dfe0453fefb8deb695bc3853f54"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::TrySendError::fmt#2"
+kappa = "074b0634b21f2e70ac5630d075e549d2f490b019e7a7ebdabf7eac543d15badf"
+at = "T=u32"
+embedded = "0a50df61a7c69653f4cb415dc7bd878ba5e4059934727ebfb0d8402d17c9a43d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::TrySendError::into_inner"
+kappa = "c3dceced38c0f5c4ad02e661b7c01782552ac5968f7f2d0c48eeb55880473348"
+at = "T=u32"
+embedded = "41d607a567bce138193a45e2abb5a3c7e176fd7947b4340985865ec7986bcbbf"
+status = "residue"
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::TrySendError::into_send_error"
+kappa = "9a4224572f8ba9cd902b392608867c4bd7188fdd7f2b68696cc596885951f503"
+embedded = "a501c290cd3f6362352c938e24c2feb17d9767f0f2292e3757aa03112e37fa35"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::TrySendError::is_disconnected"
+kappa = "60b52982692d94c1acb9e271a64b5a467295ddf2ddae90fe52526f5c681c7444"
+embedded = "fdd5d926e52fd3f89a31837b8435342c25c67c69780303a2337527b5de97802b"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-channel::mpsc::TrySendError::is_full"
+kappa = "81521cba5376b7d7e69e9bc71b651099d89332375fef11c36ce46789f1c1865c"
+embedded = "ea8dd0d49fe654d52a09c6bace959b3e8b96f402545895f7436f729ccfb7635f"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedInner::set_closed"
+kappa = "72b6ae80486a56f93b8f94b2b78b7e0efbc392f86b8a8d72c1faef1014638c8a"
+embedded = "42c30cc55279501c3c5328911803b6f4e7e90afb8e54a1000d52a64ff38b7f8c"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::close"
+kappa = "bed9cad5b2b832a2f0127d0d71957dffaedd0672a28ea28e664cb78de36593f7"
+at = "T=u32"
+embedded = "928980da0e3ce0e2ee9b3880ff0dda1995fb7d6fd5a3387750a81920989e4826"
+status = "residue"
+cause = "mir::Ty: UnboundedReceiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::dec_num_messages"
+kappa = "39132924e7d714649c353b1e366478f2a1d0c1009786c2ea456b6d8e860ab08e"
+at = "T=u32"
+embedded = "28c64579435550e8faf377ad867944b5584ade6645a8cfcb9011444e9b22125e"
+status = "residue"
+cause = "mir::Ty: UnboundedReceiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::drop"
+kappa = "b6afbad3d7a3999dcc45b081066dabfb66f28fe5a4e3a180bf4a500f663e6a2f"
+at = "T=u32"
+embedded = "9d29efa413104ba047fc08b980d734c8bd91d3249fdfd6a4ecbd50829d558c37"
+status = "residue"
+cause = "mir::Ty: UnboundedReceiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::fmt"
+kappa = "e950627f9aec97873be4b5750021157a4ec8dadec3c8b103d5e46257de2df30e"
+at = "T=u32"
+embedded = "75f63213ec3126cb3325afc899dcc602eaee447e658ed1121fc6fcfa412e9742"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::is_terminated"
+kappa = "b4522a318d50151364853bf583d7bf2b2478d30018b75aff878906083213621b"
+at = "T=u32"
+embedded = "72aec01156fb6f14e1d597d15ec1cedb733f452accab8562c29a0182fbdb20b2"
+status = "residue"
+cause = "mir::Ty: UnboundedReceiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::next_message"
+kappa = "4c071b6470c50d7d0202e20e22f279ee257681d79298f1dbd22852e7352fdc95"
+at = "T=u32"
+embedded = "df136cf8ab72db7f6a3c3941b1af25961dc5786f185bd3a36cf4e8f4a63613dc"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::poll_next"
+kappa = "bac53d67eeb8aa129ef4c0e2d77834613b9e084ebf9bc3116ccbbf67e4840222"
+at = "T=u32"
+embedded = "d7876a83996569de25067af8e1ed9e8d680450188c7d8fe7ca760712d736a9ce"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::recv"
+kappa = "f2ab199138235e7d5ae109ca3c0b8e7c77901ce96e26ad89c46943b85c7c123c"
+at = "T=u32"
+embedded = "087ccd24ab121236ed09eea260bb233f32e49dda7b14531e37204720278105a0"
+status = "residue"
+cause = "mir::Ty: mpsc::UnboundedReceiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::size_hint"
+kappa = "d9fd747b04df7c647e950391d11e211aba69d542f1b1060f8019dfea5185ef16"
+at = "T=u32"
+embedded = "6fc51ea5fa183ba0d567c8cf701f231e49e625b4e84763616418e493ea1eda5f"
+status = "residue"
+cause = "mir::Ty: UnboundedReceiver<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::try_next"
+kappa = "cd9275d5b55f74e415cf0395dcd715780b3ff0af8722c20bdf55d0a8bbf16d42"
+at = "T=u32"
+embedded = "afc102ef7d0a4c398470d732844c9bdca40f6363f53e3dd591abc4825a1baa29"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedReceiver::try_recv"
+kappa = "1742d0f4828e12584d1d7566eef4d142ca5aba8ec987651449c6dd48824f0c73"
+at = "T=u32"
+embedded = "6e9b0d4003ee963decba977f81e33c5523c14b001cfbeca18aeb637f27f42985"
+status = "residue"
+cause = "mir::Ty: mpsc::TryRecvError"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::clone"
+kappa = "a409a04b5d0c673fbec196eae17a29778cef1d7ed7545c5751a72432020940d3"
+at = "T=u32"
+embedded = "31b5a3b405d6d20ab4d0923bef6e9c7d45b1984c18ff88e20b7cc0ce2ec9157c"
+status = "residue"
+cause = "mir::Ty: mpsc::UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::close_channel"
+kappa = "ceb598d5f98aa12f35a4cdce8a3eb332b9ff9051e36240874c8fae6e4ea880f2"
+at = "T=u32"
+embedded = "1e7d15e6cdda3ff05fb9c14ea16543783842ac90305722fe5f154502afab31b1"
+status = "residue"
+cause = "mir::Ty: UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::disconnect"
+kappa = "789739cf8c55632fd56f6d2f9bfbb8e6fdbb4c5a5a96c61a4021701233d7f907"
+at = "T=u32"
+embedded = "99585c128d5847f5f470729bddc9ff502fe5cc6635f3a9aa4c5e3e6e51ef9e53"
+status = "residue"
+cause = "mir::Ty: UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::do_send_nb"
+kappa = "818e2454860b5d86f491555d9eda431a626c78eaa9bb89bad304da333c4c3b61"
+at = "T=u32"
+embedded = "a8978e43996480ce336393dc09ab2e797d1e66df510e7a4825171fe31a425230"
+status = "residue"
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::fmt"
+kappa = "658b1383aa5c46f7dedff8053011979c40d08038f8285f406d67b5992b7fec7d"
+at = "T=u32"
+embedded = "18fa364a7c88bc269f21949fcd2d3a09d68e2542bf4d9f934e8a2456859cfd94"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::hash_receiver"
+kappa = "8ef21e3ecb6e11c455254b65e53e8bff88be8351f696847e3a54969b14f86f4f"
+at = "H=u32, T=u32"
+embedded = "7341e63545a97a0a2b2b03dce1b7d4eb903b9c4c887f2096f01782b917b871e7"
+status = "residue"
+cause = "mir::Ty: UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::is_closed"
+kappa = "350b789c4d4860316d4d764fc338fab66ee920fb1fccae469fe506fff7eeea0e"
+at = "T=u32"
+embedded = "bc798e2e4560f1a2e233f4ae626f10fa9480434966cbc61f59f08d7f391dd200"
+status = "residue"
+cause = "mir::Ty: UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::is_connected_to"
+kappa = "a17c3feb678c19679d3c8f2bef0c62ec62cca1d6f284ce50426d31726ca4fdbe"
+at = "T=u32"
+embedded = "d07fe424142e6f73796b61ca160c537ee549640ed11a3e344358c32009dcc00c"
+status = "residue"
+cause = "mir::Ty: UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::is_empty"
+kappa = "7e15463f5a2bc1fbbd01dae7a25073b5a764139f0a2e054b4e27823d9a09013e"
+at = "T=u32"
+embedded = "5279f4d618e29e06811afd4173ad7a2b242438d8d856830d92a00e8e1c3cc0aa"
+status = "residue"
+cause = "mir::Ty: UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::len"
+kappa = "80fccbc7d300b78f624a41e4ec5bab378db3826612ce9280412c3710d4561bfe"
+at = "T=u32"
+embedded = "0a7cf7eeb2b2895c492cbb27cf67a57fe5b6c4471f901ba6cadf4a3a2f2cc214"
+status = "residue"
+cause = "mir::Ty: UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::poll_ready"
+kappa = "a0e622571f52d1c5aac48ef540926885096aa3de17907b6e607e43a9687cf726"
+at = "T=u32"
+embedded = "d5a0745e90c16c49213c82894d94c31b07666e6da4c8bbe0ebb89c095da13faa"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::same_receiver"
+kappa = "4d71c7692cd605e499da9a1bdfe40c1d1e94d2ef34c65c0994684765ea9b8b9f"
+at = "T=u32"
+embedded = "eb66e9edd6805bbc0de2780e1b67379b0e4d3c5726a8783482c04d34dc2be7b8"
+status = "residue"
+cause = "mir::Ty: UnboundedSender<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::start_send"
+kappa = "e2c9f732e1297775175dc0c1350f401ba8fc17117865023bd45d443f721dac68"
+at = "T=u32"
+embedded = "a7aab7e6b3122fc78e4ab9bf9e367227827ed2730f8e8087454bd6c830f23608"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSender::unbounded_send"
+kappa = "8686174eaa261a8bf6aaa8267afb139d4d5aeb5f2d3e395dc765ef308fdd026a"
+at = "T=u32"
+embedded = "e333435298168db6ad21265f608166b595af1524bf2b0aac71b8f55caff8b5ad"
+status = "residue"
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::clone"
+kappa = "b027e0d9011b4375dc4742ab99ce999a0247bec7cbbdba2c84b33a96043df5bf"
+at = "T=u32"
+embedded = "bc2d92df1c9d0f564635ac23c8d8015bb2fec69ac6bddff25b852ec1ac920635"
+status = "residue"
+cause = "mir::Ty: mpsc::UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::close_channel"
+kappa = "afa1fbc17885d71a29979acc794a0547f45f6c1fde68e60de921d8ca6dac6a8e"
+at = "T=u32"
+embedded = "48edb8930bcfc38839e80e65e3dcfe8e864ee78efc8f7414e55766569c5f12f7"
+status = "residue"
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::drop"
+kappa = "365ed70a79182336b688de9ce5ca0d4e04f42811f986403d5a1d9be70f57a99a"
+at = "T=u32"
+embedded = "b8a51655ca6ae05ac7bd603a5e957632adc59e693162e3297a0daff2a7a553dd"
+status = "residue"
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::inc_num_messages"
+kappa = "348d415552cfde0d1b0709478c2b880c0e7ea37cd761bc0d15708e38118544c4"
+at = "T=u32"
+embedded = "b037486f256d91b4dc8de134e29501fd6be52fceb932b28ce7c93071eb0bdebb"
+status = "residue"
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::is_closed"
+kappa = "9510b17e18aafa29ebc88f93520ae0908f42b20e3b6cb4a90dbcd42ccc2e19dd"
+at = "T=u32"
+embedded = "e9040b9428b0f7440a81b7793ae5a297d2ddc296c9c17b3a598e8fde69fe5647"
+status = "residue"
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::is_connected_to"
+kappa = "d502880eaffe95e05f5e4b5f8dd32ab50c55fee9a413fbd1f8c0c13d97e4325f"
+at = "T=u32"
+embedded = "988f616430721e5a6357ff88233bd3f661df0e861e48c2794e85898381215293"
+status = "residue"
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::poll_ready_nb"
+kappa = "86fc6d65971da601632118ffa03c1fc455739bdba569cc4a82d6b944283da45f"
+at = "T=u32"
+embedded = "9a1b1973600cefe5e6f5875044cabb3256c75f9462bc2b92334fa0b6fa86552e"
+status = "residue"
+cause = "mir::Ty: mpsc::SendError"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::ptr"
+kappa = "70d8e4d123be619d420e3d0e805f2c9498a5cf40a5cb351d06e1bdb979caa4d8"
+at = "T=u32"
+embedded = "a69ae68f8d3cdfea17c1c4bc445753c7222d6c02920d0e3b8d3c74b516ac937f"
+status = "residue"
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::queue_push_and_signal"
+kappa = "6a8f36bddc12fd96524c4e2c54fa2698c082428185db5744161264495606d11c"
+at = "T=u32"
+embedded = "55dbd9a2e864093d05d311712d1de23ebde6af121d496e8e8b3294de32b50acb"
+status = "residue"
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::UnboundedSenderInner::same_receiver"
+kappa = "8c9b7cb8c8ba6dd1c59af9bafc9899cef929853374997ef3181553519213f0a8"
+at = "T=u32"
+embedded = "70349a5149fc13e5f4a4795b2d8e570087cb190a6b79208d7bdd4724a94cf8fd"
+status = "residue"
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+
+[[fn]]
+path = "futures-channel::mpsc::channel"
+kappa = "fe153d018043fe46ac2a5f1aaf9bdf89f678be36183e02e6cc6ae8e88c410f36"
+at = "T=u32"
+embedded = "3073b4d2d87d422c82e194a8cb56b86d250ef430e6086b4c65ecdcd298132fa7"
+status = "residue"
+cause = "mir::Ty: mpsc::Sender<u32>"
+
+[[fn]]
+path = "futures-channel::queue::Node::new"
+kappa = "4a6d3fb9683d7de6f0c0653ff4d2cf8a886bd80ee81ba2a98f511a9efaae7a8b"
+at = "T=u32"
+embedded = "061c0b83edfeaefccd02725b888c27ae99bd0d8c674924b82063dea0d1967988"
+status = "residue"
+cause = "mir::TerminatorKind::Call: null_mut"
+
+[[fn]]
+path = "futures-channel::queue::Queue::drop"
+kappa = "a50a9b6d95c5908cfca5abf99c99a0c78079326295c2007b2d0cd3f069e9e50c"
+at = "T=u32"
+embedded = "40fbc14fdf87b2fe8fe78f68ebb78defbb269585e25cd482787563fb96b4edb5"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "futures-channel::queue::Queue::new"
+kappa = "ce06343723d90b51938eee5454f11f9ff47d3d197996a80bf3a977ea5cce49fc"
+at = "T=u32"
+embedded = "d4b525e9ae84e8e5ea66ea77fdd3b7b7ace1c8b01ab1c4dce035cbdbd8da1861"
+status = "residue"
+cause = "mir::Ty: mpsc::queue::Queue<u32>"
+
+[[fn]]
+path = "futures-channel::queue::Queue::pop"
+kappa = "75812cceefc209b80a68a7ae8c5eb3297e9e73e766c0b53adf8524773b4da347"
+at = "T=u32"
+embedded = "307da6250cfaf8c75d2321d2faf289f46e8595c18fd575d7c52994c27e0da4f1"
+status = "residue"
+cause = "mir::Ty: mpsc::queue::PopResult<u32>"
+
+[[fn]]
+path = "futures-channel::queue::Queue::pop_spin"
+kappa = "f7cb36915e6c3b1dc8511835ff450813eaa299a62fe07cfcaeef9ec809a6d47d"
+at = "T=u32"
+embedded = "56f1e8e44b40202cd9ddaf1c475d34910cd7047d6803308361eb069173e41809"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "futures-channel::queue::Queue::push"
+kappa = "58b612ebc124d59d7501ab4e9373bbd8df3433de6638eca8c234b35621d95ef8"
+at = "T=u32"
+embedded = "af28e196d6ee248a2527db822ec2686d2252f57a62c85addb86b91a4efe7daf6"
+status = "residue"
+cause = "mir::Ty: Queue<u32>"
+
+[[fn]]
+path = "futures-channel::unbounded"
+kappa = "529463e621b75e055b784b75e5d0d28e190296c21d30437d67639d66b4fc4abd"
+at = "T=u32"
+embedded = "4b37a0459c04943e08e4e1c00f5bfb78ea0e564f3a7c7658402457358f450e51"
+status = "residue"
+cause = "mir::Ty: mpsc::UnboundedSender<u32>"
+

@@ -1,0 +1,62 @@
+[[fn]]
+path = "ciborium-io::<impl at src/lib.rs:104:10: 104:15>::fmt"
+kappa = "973ab0e1eee65fb1b3c875a39807b394dd6e4399dbaa5f36089eba3608fbf0ba"
+embedded = "85b3ccedfbb35a4fb990b710883379a91873f7405d8f0f8b22d749e87034668f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ciborium-io::<impl at src/lib.rs:108:1: 108:20>::read_exact"
+kappa = "4c8f63e88bc27bc89aaa885ae1840467d0091675328b0e72a38ba32fec71e718"
+at = "EndOfFile=u32"
+embedded = "3b96baee83a53a51efd98d7556c58b8ab4caab5cfc21d9c3e471b400816fa46c"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "ciborium-io::<impl at src/lib.rs:126:10: 126:15>::fmt"
+kappa = "5ee451222780e84c0e10ce7c00ccde4a5e1b1ef637433f500ac79dad762f8697"
+embedded = "39e8156c468f2d99b0bf5d9c0e750fd9ed3e29beb83809216517db4a7625bc17"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ciborium-io::<impl at src/lib.rs:130:1: 130:25>::flush"
+kappa = "831cd3dfb3fd2ad83901aa2a970bab98a12b9196d3bcb122c486b4953cfe424b"
+at = "OutOfSpace=u32"
+embedded = "f4f1a685837e6e301511a4a8c0ea9224d1cf164b7ea7be93e007b6e769807981"
+status = "translated"
+digest = "14a5b94b4a321009fc392a1392765ca3bb15af09e21d44fdff4286c8ef23ae22"
+
+[[fn]]
+path = "ciborium-io::<impl at src/lib.rs:130:1: 130:25>::write_all"
+kappa = "e12d517caca20d93dbf8dafee591ae9fb633527708b4c7edf432c31e7ef7a5bf"
+at = "OutOfSpace=u32"
+embedded = "9f5e47552e0d94da28bd5c5cea17171bb32579a97051b09adf36a2cbe4548b39"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "ciborium-io::<impl at src/lib.rs:78:1: 78:39>::read_exact"
+kappa = "9242c67391365c154b5cf6bff79789bc3f17a54c930816fbfccb3d62373e1d04"
+at = "R=u32"
+embedded = "9b367f1a5a0438b5c36de3876bab2cdde3a7d3e7a16faf9de94339a569a580c6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Read, which u32 does not implement in core"
+
+[[fn]]
+path = "ciborium-io::<impl at src/lib.rs:88:1: 88:41>::flush"
+kappa = "85322a4f27a8d1183557fd954af3d9e2102401fd9b45a36b9aa5b7f6b209f296"
+at = "W=u32"
+embedded = "fe8244ae353d2e23e512fc96cf03b421ebc5210af7a1f78a28c77e6589bbf16a"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Write, which u32 does not implement in core"
+
+[[fn]]
+path = "ciborium-io::<impl at src/lib.rs:88:1: 88:41>::write_all"
+kappa = "f2f7fe45eb42ccce3852f78aa0d1487326f4f859bd70e2c3bb6bd0a499a49a60"
+at = "W=u32"
+embedded = "3f3a3ff21778e16cedbba6d7255349906956802ca1aa8efa9dc3d598d6bddb20"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Write, which u32 does not implement in core"
+

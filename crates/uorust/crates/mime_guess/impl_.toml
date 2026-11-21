@@ -1,0 +1,36 @@
+[[fn]]
+path = "mime_guess::EXTS"
+kappa = "cd2aa10a150616e84923c771139da904625506623f8ee5fa127f9707aa563350"
+embedded = "5ff5adfde64a30af95d6788aaa394fc1424d673850463863f0a168c32c1007b2"
+status = "translated"
+digest = "b538868f883e531573504c18b004773191795583c6121d9a83e532677ece8124"
+
+[[fn]]
+path = "mime_guess::get_mime_types"
+kappa = "ad473aa455608a1530d6bb4c6d47bb89221d57655f93c0f94f7b14b00b808d75"
+embedded = "61a58edb8eebe2a9bfd22cd3c79733f3db828e332448afdf2e8d10ba1b1f0db6"
+status = "residue"
+cause = "mir::Ty: unicase::UniCase<&str>"
+
+[[fn]]
+path = "mime_guess::impl_::<impl at src/impl_bin_search.rs:7:16: 7:21>::clone"
+kappa = "fedfb4aa631767cf93d20afc1ff0e4ee6f27ef13c377ce236c74abbd785cd7c8"
+embedded = "525fcc01bd62aff6e3df895937c60d6f7267fbd01ef1a6607a9b873d30502b67"
+status = "residue"
+cause = "mir::Ty: impl_::TopLevelExts"
+
+[[fn]]
+path = "mime_guess::impl_::get_extensions"
+kappa = "6fabbfa517017d38545a3deab3a35d772bb95ba20e18faebadbbac848dc1d64c"
+embedded = "d59541140805232368a9823bb67961172cd2b807ba1ff42af5e520c5924b5274"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc6045: &&[(UniCase<&str>, TopLevelExts)]}"
+
+[[fn]]
+path = "mime_guess::map_lookup"
+kappa = "5492b3ab7d55f55c7f694f83440ae6eb16c4c81f2d38dca687ebb0a8018be075"
+at = "K=u32, V=u32"
+embedded = "308b004c1606be182fc62f56d65b6bd642ebebc896d12edd7279d0dc2b5f8ff1"
+status = "residue"
+cause = "mir::Ty: unicase::UniCase<&str>"
+

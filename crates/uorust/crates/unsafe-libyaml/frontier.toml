@@ -1,0 +1,495 @@
+# The unsafe-libyaml register (written by `uorust crate unsafe-libyaml@0.2.11`; do not edit): every body of
+# unsafe-libyaml's MIR at unsafe-libyaml 0.2.11, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 367
+translated = 2
+residue = 365
+
+[module.api]
+bodies = 49
+translated = 0
+residue = 49
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.dumper]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.emitter]
+bodies = 52
+translated = 1
+residue = 51
+
+[module.externs]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.fmt]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.loader]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.ops]
+bodies = 12
+translated = 1
+residue = 11
+
+[module.parser]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.reader]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.scanner]
+bodies = 46
+translated = 0
+residue = 46
+
+[module.success]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.writer]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.yaml]
+bodies = 126
+translated = 0
+residue = 126
+
+[embedding]
+bodies = 367
+embedded = 367
+evaluable = 367
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: success::Success"
+bodies = 150
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::is_null"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: yaml_emitter_t"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: yaml_encoding_t"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: yaml_break_t"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: yaml_mapping_style_t"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: yaml_parser_t"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: yaml_scalar_style_t"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: yaml_sequence_style_t"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::cast"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: yaml_emitter_state_t"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: yaml_error_type_t"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: yaml_event_type_t"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: yaml_node_type_t"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: yaml_parser_state_t"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: yaml_token_type_t"
+bodies = 5
+
+[[cause]]
+cause = "mir::Memory: a value of RawPointer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::cast"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: yaml_mark_t"
+bodies = 3
+
+[[cause]]
+cause = "mir::CastKind::PointerExposeProvenance: from RawPointer to Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unsafe fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_emitter_t"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_mark_t"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_parser_t"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_string_t"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_token_t"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: yaml_string_t"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TryInto"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item api::INPUT_RAW_BUFFER_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item api::OUTPUT_BUFFER_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: api::yaml_malloc: unsafe-libyaml's MIR stops at mir::TerminatorKind::Call: externs::malloc: unsafe-libyaml's MIR stops at mir::TerminatorKind::Call: ops::force_into: unsafe-libyaml's MIR stops at type outside the lift: <u64 as core::convert::TryInto<usize>>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::is_null"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: externs::malloc: unsafe-libyaml's MIR stops at mir::TerminatorKind::Call: ops::force_into: unsafe-libyaml's MIR stops at type outside the lift: <u64 as core::convert::TryInto<usize>>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: externs::strlen: unsafe-libyaml's MIR stops at mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ops::force_into: unsafe-libyaml's MIR stops at type outside the lift: <u64 as core::convert::TryInto<usize>>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Abort"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PanicAgain"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WriteToPtr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: externs::__assert_fail::Abort"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::WriteToPtr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ops::die::PanicAgain"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: success::Failure"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_document_t_tag_directives"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_emitter_t_anchor_data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_emitter_t_output"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_emitter_t_output_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_emitter_t_scalar_data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_emitter_t_tag_data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data_alias"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data_document_end"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data_document_start"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data_document_start_tag_directives"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data_mapping_start"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data_scalar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data_sequence_start"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_event_t_data_stream_start"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_node_t_data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_node_t_data_mapping"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_node_t_data_scalar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_node_t_data_sequence"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_parser_t_input"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_parser_t_input_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_token_t_data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_token_t_data_alias"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_token_t_data_anchor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_token_t_data_scalar"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_token_t_data_stream_start"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_token_t_data_tag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_token_t_data_tag_directive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::unnamed_yaml_token_t_data_version_directive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_alias_data_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_anchors_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_break_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_buffer_t<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_document_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_emitter_state_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_emitter_t_prefix"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_encoding_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_error_type_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_event_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_event_type_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_mapping_style_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_node_pair_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_node_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_node_type_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_parser_state_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_parser_t_prefix"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_queue_t<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_scalar_style_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_sequence_style_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_simple_key_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_stack_t<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_tag_directive_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_token_type_t"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: yaml::yaml_version_directive_t"
+bodies = 1

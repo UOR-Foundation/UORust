@@ -1,0 +1,68 @@
+# The stringprep register (written by `uorust crate stringprep@0.1.5`; do not edit): every body of
+# stringprep's MIR at stringprep 0.1.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 31
+translated = 15
+residue = 16
+
+[module.crate]
+bodies = 10
+translated = 1
+residue = 9
+
+[module.rfc3454]
+bodies = 2
+translated = 2
+residue = 0
+
+[module.tables]
+bodies = 19
+translated = 12
+residue = 7
+
+[embedding]
+bodies = 31
+embedded = 31
+evaluable = 31
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: unicode_bidi::BidiClass"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: rfc3454::A_1: mir::Operand::Constant: rfc3454::A_1::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item bidi_r_or_al"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::char::methods::is_control"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CaseFoldForNfkc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tables::CaseFoldForNfkc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unicode_properties::GeneralCategoryGroup"
+bodies = 1

@@ -61,7 +61,7 @@ pub(crate) const MAX_FILE_BYTES: usize = 4_194_304;
 const FRONTIER: &str = "frontier.toml";
 
 /// The projection's LexLean project file, which states its limits.
-const LEXLEAN: &str = "lexlean.toml";
+const LEXLEAN_TOML: &str = "lexlean.toml";
 
 const ARCH: &str = "Architecture";
 const IFACE: &str = "Interface";
@@ -675,7 +675,7 @@ fn config(
         crate::limits::Limits::table_text(&limits.prismpm)
     );
     vec![
-        (LEXLEAN.into(), lexlean.into_bytes()),
+        (LEXLEAN_TOML.into(), lexlean.into_bytes()),
         ("lexlean.lock".into(), lock.into_bytes()),
         ("lakefile.toml".into(), lakefile.into_bytes()),
         ("lake-manifest.json".into(), manifest.into_bytes()),
@@ -6642,13 +6642,13 @@ fn function_rows(
 /// writes, so the check and the stated limit cannot part. A module beyond it
 /// is [`UorustError::ModuleTooLarge`], naming the first such module.
 fn within_limit(files: &BTreeMap<String, Vec<u8>>) -> Result<(), UorustError> {
-    let at = std::path::Path::new(LEXLEAN);
+    let at = std::path::Path::new(LEXLEAN_TOML);
     let bad = |reason: String| UorustError::Malformed {
         path: at.to_path_buf(),
         reason,
     };
-    let text = String::from_utf8_lossy(files.get(LEXLEAN).map_or(&[][..], Vec::as_slice));
-    let config: toml::Value = text.parse().map_err(|e| bad(format!("{e}")))?;
+    let text = String::from_utf8_lossy(files.get(LEXLEAN_TOML).map_or(&[][..], Vec::as_slice));
+    let config: toml::Value = toml::from_str(&text).map_err(|e| bad(format!("{e}")))?;
     let limit = config
         .get("limits")
         .and_then(|limits| limits.get("max_file_bytes"))
@@ -8361,7 +8361,7 @@ pub fn fb(n: &Node) -> u8 {
 
     use super::{
         frontier, function_rows, refusal_queue, within_limit, Notes, Refusal, Register, Residue,
-        Span, UorustError, FRONTIER, LEXLEAN, MAX_FILE_BYTES,
+        Span, UorustError, FRONTIER, LEXLEAN_TOML, MAX_FILE_BYTES,
     };
 
     fn at(line: usize) -> Span {
@@ -8408,9 +8408,7 @@ pub fn fb(n: &Node) -> u8 {
     }
 
     fn toml_of(files: &BTreeMap<String, Vec<u8>>, path: &str) -> toml::Value {
-        String::from_utf8_lossy(&files[path])
-            .parse()
-            .expect("the file is TOML")
+        toml::from_str(&String::from_utf8_lossy(&files[path])).expect("the file is TOML")
     }
 
     fn count(value: &toml::Value) -> usize {
@@ -8472,7 +8470,7 @@ pub fn fb(n: &Node) -> u8 {
         ]
         .into_iter()
         .collect();
-        let doc: toml::Value = refusal_queue(&refusals).parse().expect("TOML");
+        let doc: toml::Value = toml::from_str(&refusal_queue(&refusals)).expect("TOML");
         assert_eq!(count(&doc["admission"]["refusals"]), refusals.len());
         let rows: Vec<(&str, &str, usize)> = doc["reason"]
             .as_array()
@@ -8498,7 +8496,7 @@ pub fn fb(n: &Node) -> u8 {
         );
         assert_eq!(rows.iter().map(|r| r.2).sum::<usize>(), refusals.len());
         // No refusal: the count is stated, and the queue is empty.
-        let none: toml::Value = refusal_queue(&BTreeSet::new()).parse().expect("TOML");
+        let none: toml::Value = toml::from_str(&refusal_queue(&BTreeSet::new())).expect("TOML");
         assert_eq!(count(&none["admission"]["refusals"]), 0);
         assert!(none.get("reason").is_none());
     }
@@ -8527,7 +8525,7 @@ pub fn fb(n: &Node) -> u8 {
         let rows = function_rows(&notes, &kappas, &BTreeMap::new());
         let lift = Register::parse(Path::new(FRONTIER), &rows).expect("the rows are a register");
         let text = frontier(&notes, &lift, &rows, &crate::limits::Limits::sdk());
-        let doc: toml::Value = text.parse().expect("the frontier is TOML");
+        let doc: toml::Value = toml::from_str(&text).expect("the frontier is TOML");
         let totals: Vec<usize> = ["functions", "lifted", "residue", "foreign", "effect"]
             .iter()
             .map(|key| count(&doc["lift"][key]))
@@ -8643,7 +8641,7 @@ pub fn fb(n: &Node) -> u8 {
     fn limits_without_a_file_the_projection_states_the_scaffold_and_says_so() {
         let files = limits_projection("sdk", None).expect("projects");
         let sdk = crate::limits::Limits::sdk();
-        let lexlean = String::from_utf8_lossy(&files[LEXLEAN]).to_string();
+        let lexlean = String::from_utf8_lossy(&files[LEXLEAN_TOML]).to_string();
         let prismpm = String::from_utf8_lossy(&files["prismpm.toml"]).to_string();
         assert!(
             lexlean.ends_with(&crate::limits::Limits::table_text(&sdk.lexlean)),
@@ -8670,7 +8668,7 @@ pub fn fb(n: &Node) -> u8 {
             let v = rows.iter().find(|(k, _)| k == key).expect("a key").1;
             format!("\n{key} = {}\n", v * 2)
         };
-        let lexlean = String::from_utf8_lossy(&files[LEXLEAN]).to_string();
+        let lexlean = String::from_utf8_lossy(&files[LEXLEAN_TOML]).to_string();
         let prismpm = String::from_utf8_lossy(&files["prismpm.toml"]).to_string();
         assert!(
             lexlean.contains(&doubled(&sdk.lexlean, "max_ir_nodes")),
@@ -8751,7 +8749,7 @@ pub fn fb(n: &Node) -> u8 {
         let project = |limit: usize, module: usize| -> BTreeMap<String, Vec<u8>> {
             [
                 (
-                    LEXLEAN.to_string(),
+                    LEXLEAN_TOML.to_string(),
                     format!("[limits]\nmax_file_bytes = {limit}\n").into_bytes(),
                 ),
                 ("src/Design.lex.tex".to_string(), vec![b' '; module]),
@@ -8780,7 +8778,7 @@ pub fn fb(n: &Node) -> u8 {
         );
         // A project file that states no limit is not one to check against.
         let mut silent = project(limit, limit);
-        silent.insert(LEXLEAN.to_string(), b"[limits]\n".to_vec());
+        silent.insert(LEXLEAN_TOML.to_string(), b"[limits]\n".to_vec());
         assert!(matches!(
             within_limit(&silent),
             Err(UorustError::Malformed { .. })
@@ -8794,7 +8792,7 @@ pub fn fb(n: &Node) -> u8 {
     fn a_projection_is_checked_against_the_limit_it_states() {
         let mut files = projected_files("limit");
         let stated = format!("max_file_bytes = {MAX_FILE_BYTES}\n");
-        let config = String::from_utf8_lossy(&files[LEXLEAN]).to_string();
+        let config = String::from_utf8_lossy(&files[LEXLEAN_TOML]).to_string();
         assert!(config.contains(&stated), "{config}");
         assert_eq!(within_limit(&files), Ok(()));
         // The first of the largest, in the order the check reads them.
@@ -8807,7 +8805,7 @@ pub fn fb(n: &Node) -> u8 {
             .expect("a module");
         let lower = bytes - 1;
         files.insert(
-            LEXLEAN.to_string(),
+            LEXLEAN_TOML.to_string(),
             config
                 .replace(&stated, &format!("max_file_bytes = {lower}\n"))
                 .into_bytes(),
@@ -8977,7 +8975,7 @@ pub fn fb(n: &Node) -> u8 {
         // Left whole, it is the typed error's.
         let files: BTreeMap<String, Vec<u8>> = [
             (
-                LEXLEAN.to_string(),
+                LEXLEAN_TOML.to_string(),
                 format!("[limits]\nmax_file_bytes = {limit}\n").into_bytes(),
             ),
             (module.path(), whole.clone().into_bytes()),

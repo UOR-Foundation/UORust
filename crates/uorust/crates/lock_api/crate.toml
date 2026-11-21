@@ -1,0 +1,32 @@
+[[fn]]
+path = "lock_api::<impl at src/lib.rs:104:10: 104:17>::default"
+kappa = "791c323ff289de3bee0ee1322ae7ddd243964858c5a3e8dee40c003f06975281"
+at = "GuardSend=u32"
+embedded = "3b4f23cb62d5916c1418f5ec3661ddc167b3c2fc9fe2cf618f7080cd53c7c617"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <() as Default>::default"
+
+[[fn]]
+path = "lock_api::<impl at src/lib.rs:116:10: 116:17>::default"
+kappa = "534be46bf6b7cb5431c150654f12aeab3ab0e103dcd4361eca6320941a83267f"
+at = "GuardNoSend=u32"
+embedded = "3190ff2db15aa6d7ad9f537e93519efe594202c81a391d8c5544f5ce227d9b97"
+status = "residue"
+cause = "mir::Ty: core::marker::PhantomData<*mut ()>"
+
+[[fn]]
+path = "lock_api::GuardNoSend::new"
+kappa = "8a8d20ed0371e06dc2cf201de779d3bb8293904efd5153c4508f5ce3ab0f855d"
+at = "GuardNoSend=u32"
+embedded = "7da2d19bce05ef8c197a26c50cf5d9c63c85e1d2e95a8eecf5935b69098e12c2"
+status = "residue"
+cause = "mir::Rvalue::Use"
+
+[[fn]]
+path = "lock_api::GuardSend::new"
+kappa = "7d4232ed18a00b92ab847798177af26b07a6ddfb8006eef71597db7f962b0f3b"
+at = "GuardSend=u32"
+embedded = "37a8c4084b9b158cfbf4b4f5d61f98b8e5a4c99d60fc49609e585017ab8e6d2d"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+

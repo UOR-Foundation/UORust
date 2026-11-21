@@ -1,0 +1,168 @@
+# The time-core register (written by `uorust crate time-core@0.1.9`; do not edit): every body of
+# time-core's MIR at time-core 0.1.9, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 235
+translated = 5
+residue = 230
+
+[module.hint]
+bodies = 3
+translated = 3
+residue = 0
+
+[module.unit]
+bodies = 224
+translated = 0
+residue = 224
+
+[module.util]
+bodies = 8
+translated = 2
+residue = 6
+
+[embedding]
+bodies = 235
+embedded = 235
+evaluable = 235
+blocked = 0
+
+[differential]
+bodies = 9
+theorems = 49
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 153
+
+[[cause]]
+cause = "mir::Ty: Unit<u32>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: impl MultipleOf<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::unsigned_abs"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: util::is_leap_year: time-core's MIR stops at mir::TerminatorKind::Call: core::num::unsigned_abs"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: util::range_validated::is_leap_year: time-core's MIR stops at mir::TerminatorKind::Call: core::num::unsigned_abs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Day<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Hour<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Microsecond<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Millisecond<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Minute<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Nanosecond<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Second<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Week<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as unit::sealed::MultipleOf<unit::Day"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as unit::sealed::MultipleOf<unit::Hour"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as unit::sealed::MultipleOf<unit::Microsecond"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as unit::sealed::MultipleOf<unit::Millisecond"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as unit::sealed::MultipleOf<unit::Minute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as unit::sealed::MultipleOf<unit::Nanosecond"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as unit::sealed::MultipleOf<unit::Second"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as unit::sealed::MultipleOf<unit::Week"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Day<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Hour<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Microsecond<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Millisecond<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Minute<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Nanosecond<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Second<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Unit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unit::Week<u32>"
+bodies = 1

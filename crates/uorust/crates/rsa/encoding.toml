@@ -1,0 +1,107 @@
+[[fn]]
+path = "rsa::ID_RSASSA_PSS"
+kappa = "b33ffd4e4388963e6b5233ab688e96d9048dab78fe08d1a80f93de650d535c32"
+embedded = "47206f997e5be93d8f1b1569366d33e0735333587119fd60f4978926abcba94e"
+status = "residue"
+cause = "mir::Ty: const_oid::ObjectIdentifier<39>"
+
+[[fn]]
+path = "rsa::encoding::PrivateKey::from_pkcs1_der"
+kappa = "011e565d1420cec2f7624e90324e52b2105fa37d0f737862c99080728e4a9199"
+embedded = "338e840e4ad47c4b5026ae8fe155b28f804143be10b5258092a199c99c5fbbc3"
+status = "residue"
+cause = "mir::Ty: private_key::PrivateKey"
+
+[[fn]]
+path = "rsa::encoding::PrivateKey::to_pkcs1_der"
+kappa = "90a3ffa5bacafc7921cbe93d05ffd671fc32da860fe08853a257e20d4d360f5a"
+embedded = "c7bbdfd38b3d4fb0da253f19d8dd303fd19d11e23ce3aa2b0931c97815487e65"
+status = "residue"
+cause = "mir::Ty: pkcs8::SecretDocument"
+
+[[fn]]
+path = "rsa::encoding::PrivateKey::to_pkcs8_der"
+kappa = "c7e87b5fb4f711c03164c50ce6d8568fc2a1562d2243d287a3e7a3765f0ad9bf"
+embedded = "2988c80658aa0adb73d2c05f000e350ae804776fcbb46e8ce98f4bcd9cf892b7"
+status = "residue"
+cause = "mir::Ty: pkcs8::SecretDocument"
+
+[[fn]]
+path = "rsa::encoding::PrivateKey::try_from"
+kappa = "c1cd65ee6a84f82721ecb9510bfbbc620d8821db80bdbbac8bd646be4159c755"
+at = "U=u32"
+embedded = "8c53db837fc1efef23a98e0ac02f804f2c36a1969c281f1f0ad926d6cdd790ef"
+status = "residue"
+cause = "mir::Ty: private_key::PrivateKey"
+
+[[fn]]
+path = "rsa::encoding::PrivateKey::try_from#2"
+kappa = "fe11107a606492ce02729247f0fca01fdc665656edbcbd2cd713e45c6ae9bfdd"
+embedded = "6865e50012e58151d7400f8fc5496b6b9877bc120583a94e7f4ae2eb87b52602"
+status = "residue"
+cause = "mir::Ty: private_key::PrivateKey"
+
+[[fn]]
+path = "rsa::encoding::PublicKey::from_pkcs1_der"
+kappa = "5418d9eb8918931a0f5b2417572024db126e5865df61ae8cde73f2a79ff8a2ae"
+embedded = "70ec88c8d18c6ef02cece1c7953a7e3ac02ae8f8da7ce630c07fc2e2643c7319"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::encoding::PublicKey::to_pkcs1_der"
+kappa = "38d79ed657adccf6d6561fbaa822e3358e8caaa719e8bd5a68ce6bc26eafe8e0"
+embedded = "e110f9c1e308970871f7481d73fd63f49398d14a296b1b44b20ab22ed210f834"
+status = "residue"
+cause = "mir::Ty: spki::Document"
+
+[[fn]]
+path = "rsa::encoding::PublicKey::to_public_key_der"
+kappa = "5a478420279dd9d4d903bd64580f0c961ca7470ecb1fdfbbf621cde30d7554d0"
+embedded = "9d39b8bd4ffdd5ed3efda64902c58071a59c037acd306aec98ce8604ba2934c9"
+status = "residue"
+cause = "mir::Ty: spki::Document"
+
+[[fn]]
+path = "rsa::encoding::PublicKey::try_from"
+kappa = "0954a4184776833a96f2cd06ea1006cee505117fe192af885b3ebb213926044a"
+at = "U=u32"
+embedded = "d8f180e6984883b4c6426d478564b35dd8a88cb96236ba8140538b6395207cd1"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::encoding::PublicKey::try_from#2"
+kappa = "fa5a172eb37210cd1c16745fd8aa0e83f3291661ea9846dd3f086b67dbabcc48"
+embedded = "c55e7e6d0f89bcb3731ac5af88456fbea0e6d2d952e6cc40cc1f59baf0185453"
+status = "residue"
+cause = "mir::Ty: public_key::PublicKey"
+
+[[fn]]
+path = "rsa::pkcs1_error_to_pkcs8"
+kappa = "a2f79e5f988919bee9006b0bb80a395b6b2b14837c575d3ddbd81d7cdc92bc61"
+embedded = "867a24e0ce88d68ce6b938c27d349cdf98f8d9fafd787c6e3755706497a9946a"
+status = "residue"
+cause = "mir::Ty: pkcs8::Error"
+
+[[fn]]
+path = "rsa::pkcs1_error_to_spki"
+kappa = "1fd2f9a239dceb3b2c3bcaff01c78635334fe640efec77ae709630d2614febe0"
+embedded = "39e4f27d44a5c5d88b3c8a9a743b43e615e375421c5b4cb079d9bb2220370c93"
+status = "residue"
+cause = "mir::Ty: spki::Error"
+
+[[fn]]
+path = "rsa::uint_from_slice"
+kappa = "1dcb186dce57bb9de76103333168944cd21b0664ff84d8e64b0a0087f3d9bd58"
+embedded = "e7ac2439efb6ea08040912fdf68bef7e1416e9700385de6cc425417f7e859563"
+status = "residue"
+cause = "mir::Ty: crypto_bigint::BoxedUint"
+
+[[fn]]
+path = "rsa::verify_algorithm_id"
+kappa = "0ab9ad7c5d9b3f528baedc6253ce254c39d4bff2f437cc98c97f4a427c9549b4"
+embedded = "dc1e0a9f490e3e64fc5a2689dc482a9981643a55aeb8e99fa1a85773a03b9c95"
+status = "residue"
+cause = "mir::Ty: spki::Error"
+

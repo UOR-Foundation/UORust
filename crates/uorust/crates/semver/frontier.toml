@@ -1,0 +1,192 @@
+# The semver register (written by `uorust crate semver@1.0.28`; do not edit): every body of
+# semver's MIR at semver 1.0.28, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 121
+translated = 1
+residue = 120
+
+[module.crate]
+bodies = 48
+translated = 1
+residue = 47
+
+[module.display]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.error]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.eval]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.identifier]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.impls]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.parse]
+bodies = 16
+translated = 0
+residue = 16
+
+[embedding]
+bodies = 121
+embedded = 121
+evaluable = 121
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: parse::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: identifier::Identifier"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Comparator"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Identifier"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: BuildMetadata"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Prerelease"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: VersionReq"
+bodies = 4
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: identifier::repr_to_ptr: semver's MIR stops at mir::TerminatorKind::Call: NonNull::as_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Op"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Position"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::Position"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: Prerelease::EMPTY: type outside the lift: Prerelease"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: VersionReq::STAR: type outside the lift: VersionReq"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: identifier::PTR_BYTES: mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Vec as FromIterator>::from_iter"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_right"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: display::digits: semver's MIR stops at mir::TerminatorKind::Call: display::digits"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: eval::matches_comparator: semver's MIR stops at mir::TerminatorKind::Call: eval::matches_impl: semver's MIR stops at type outside the lift: Op"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: eval::matches_impl: semver's MIR stops at type outside the lift: Op"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: eval::matches_req: semver's MIR stops at type outside the lift: Comparator"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::UnOp::Not: on Nat"
+bodies = 1

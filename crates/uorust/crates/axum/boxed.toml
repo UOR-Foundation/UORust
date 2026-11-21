@@ -1,0 +1,135 @@
+[[fn]]
+path = "axum::boxed::BoxedIntoRoute::clone"
+kappa = "f26331d2e7d12126ace273fec9748b8266eaace1724c88ee7e921a21980670fa"
+at = "E=u32, S=u32"
+embedded = "c384294deba88ad80418267ca65eaa3f073d09641aa2cb304a517b550c69979b"
+status = "residue"
+cause = "mir::Ty: boxed::BoxedIntoRoute<u32, u32>"
+
+[[fn]]
+path = "axum::boxed::BoxedIntoRoute::fmt"
+kappa = "dea26674068120373cc328dd7e3e62d8595ebb25fc7d7382a388a7d4f2159192"
+embedded = "bf4ec008f35f0f890dcaf9c9b533bd14debddfdf8f625ab228eccbb75fd8af5b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "axum::boxed::BoxedIntoRoute::from_handler"
+kappa = "69d5615d5d1fa9810994109cf2f8d14854c9e932b9f3e5290f14bf525ededa96"
+at = "H=u32, S=u32"
+embedded = "b4892e1eb905aa71d09c1f8c10dabec93db1425ba4b9bfa304100e789f6e4de3"
+status = "residue"
+cause = "mir::Ty: std::convert::Infallible"
+
+[[fn]]
+path = "axum::boxed::BoxedIntoRoute::into_route"
+kappa = "2c101cf7a3c43cd6da5b04b4cdd7b8d18bc146a930604c5cb6362f02be291c1b"
+at = "E=u32, S=u32"
+embedded = "93f49f435d4fd94f1e051dcc4db7c8d338e452d379a007a6c3c81b28c894e789"
+status = "residue"
+cause = "mir::Ty: routing::route::Route<u32>"
+
+[[fn]]
+path = "axum::boxed::BoxedIntoRoute::map"
+kappa = "babd56edfd0de5cdca5bc81bebae6855141f4fa8f0163148a123462bcc5f5237"
+at = "E=u32, E2=u32, F=u32, S=u32"
+embedded = "c2b7a21f63b6d086c6ba92927d05faa65df5a21e2fb029b6d18a67c4ae64e044"
+status = "residue"
+cause = "mir::Ty: boxed::BoxedIntoRoute<u32, u32>"
+
+[[fn]]
+path = "axum::boxed::F::clone_box"
+kappa = "c4aecee7bd79b569f94139fc4552320457531f96afa6161a9e607b0b9ec0b917"
+at = "E=u32, E2=u32, F=u32"
+embedded = "b4e230e0dbb6b94e6f960a287760e4f5625429d9ed4bf655a63be28bc8e089b7"
+status = "residue"
+cause = "mir::Ty: dyn boxed::LayerFn<u32, u32>"
+
+[[fn]]
+path = "axum::boxed::MakeErasedHandler::call_with_state"
+kappa = "515bdcc46fff00905dcd745ff76c906e9f4fb12992264991cce1d73e1d0cad06"
+at = "H=u32, S=u32"
+embedded = "708856bc3865c4545eaf1724a2ce4c3a3c7620e74d9380059e65e7b15782451b"
+status = "residue"
+cause = "mir::Ty: std::convert::Infallible"
+
+[[fn]]
+path = "axum::boxed::MakeErasedHandler::clone"
+kappa = "bea2de411ea1a1e0c74b737d2f88becbc05b11fb061346db1a6c0e132f63922f"
+at = "H=u32, S=u32"
+embedded = "5753a6c104c17a19a7adead09281f6654d0b723605f25f08ea3eb52bda5eba21"
+status = "residue"
+cause = "mir::Ty: boxed::MakeErasedHandler<u32, u32>"
+
+[[fn]]
+path = "axum::boxed::MakeErasedHandler::clone_box"
+kappa = "f95619ef200bf359828297955935be43523e0cf4929bb588c835bb7ba9b69495"
+at = "H=u32, S=u32"
+embedded = "8e09c147801f040fbd4485bcee89010152b843759242062ba485fb13c202d134"
+status = "residue"
+cause = "mir::Ty: dyn boxed::ErasedIntoRoute<u32, std::convert::Infallible>"
+
+[[fn]]
+path = "axum::boxed::MakeErasedHandler::into_route"
+kappa = "e14f2e9cac599219b92d39b22e5f31a5e34e6c33dcaf24cb467a037c6ad8f061"
+at = "H=u32, S=u32"
+embedded = "de2f60e7efc8b590a967bcf5a270d34bc0e8a33cdf732394b7677bc8b2ddb855"
+status = "residue"
+cause = "mir::Ty: routing::route::Route"
+
+[[fn]]
+path = "axum::boxed::MakeErasedRouter::call_with_state"
+kappa = "6295cd78e3431de07d96f583006c6a14ccb668c2a7ab587884f431126581788e"
+at = "S=u32"
+embedded = "1039c2d8439286078476d92a694be40535b8c51b29101ded035e6392b6a1d074"
+status = "residue"
+cause = "mir::Ty: std::convert::Infallible"
+
+[[fn]]
+path = "axum::boxed::MakeErasedRouter::clone"
+kappa = "41345072c2145b2aa760e7d3c6acb3354b0703ad88d0c7e96b1fd16e5bb840ef"
+at = "S=u32"
+embedded = "1169ab5dce7cb609892361b24fb1c3871ea20a09b532a0144b98a0cc2bc19474"
+status = "residue"
+cause = "mir::Ty: boxed::MakeErasedRouter<u32>"
+
+[[fn]]
+path = "axum::boxed::MakeErasedRouter::clone_box"
+kappa = "561edcabaa50e6f922c0d64ea3c1557e840ac8431ab6774d0c58217797a64322"
+at = "S=u32"
+embedded = "de2a42eadad0e7170cca457bb3efc471015ee8f1ae9b647743fe216003ee5903"
+status = "residue"
+cause = "mir::Ty: dyn boxed::ErasedIntoRoute<u32, std::convert::Infallible>"
+
+[[fn]]
+path = "axum::boxed::MakeErasedRouter::into_route"
+kappa = "dab881df83359e65066eb288bdea98f97a419b7a71001c47ba67639ecb4ca152"
+at = "S=u32"
+embedded = "0e0f3a83a8a797c5285b0fcfa902a9d6229045cc822ce0857f520df2027508bc"
+status = "residue"
+cause = "mir::Ty: routing::route::Route"
+
+[[fn]]
+path = "axum::boxed::Map::call_with_state"
+kappa = "42fb53f92437d937cec44720e565e8d956e37d0fd979610a4fd7711ecafbe808"
+at = "E=u32, E2=u32, S=u32"
+embedded = "06eb5ca578387cf6b208db545eebf66b173ed2af2d4e5786d77c8c4f01268046"
+status = "residue"
+cause = "mir::Ty: routing::route::RouteFuture<u32>"
+
+[[fn]]
+path = "axum::boxed::Map::clone_box"
+kappa = "b1c8d797aa40d27b93caac46496dfc47fb385ed729d372ec920301d848d29fd3"
+at = "E=u32, E2=u32, S=u32"
+embedded = "14c1848b68071c82a8052c9f927e81c211f1da6296c0469e36673790eacd99a0"
+status = "residue"
+cause = "mir::Ty: dyn boxed::ErasedIntoRoute<u32, u32>"
+
+[[fn]]
+path = "axum::boxed::Map::into_route"
+kappa = "db1cf42f9ab0180dcab520f0943e04ab29b77bd8e582de73dca36635f54677b6"
+at = "E=u32, E2=u32, S=u32"
+embedded = "cb4babf72c10a228463ed3ad687109cb1ee7c10d216426df465b3be1c9587aa1"
+status = "residue"
+cause = "mir::Ty: routing::route::Route<u32>"
+

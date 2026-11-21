@@ -1,0 +1,173 @@
+# The quinn-udp register (written by `uorust crate quinn-udp@0.6.3`; do not edit): every body of
+# quinn-udp's MIR at quinn-udp 0.6.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 81
+translated = 4
+residue = 77
+
+[module.cmsg]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.crate]
+bodies = 21
+translated = 4
+residue = 17
+
+[module.imp]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.linux]
+bodies = 14
+translated = 0
+residue = 14
+
+[embedding]
+bodies = 81
+embedded = 81
+evaluable = 79
+blocked = 2
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: UdpSocketState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: msghdr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: KernelVersion"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CMsg<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Transmit<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Encoder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cmsg::CMsg<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cmsghdr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linux::LinuxError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linux::gso::KernelVersion"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item std::net::Ipv6Addr::UNSPECIFIED"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CMSG_DATA"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CMSG_LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CMSG_SPACE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ControlMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EcnCodepoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Instant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LinuxError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: M"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TransportError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UdpSockRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cmsg::Encoder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cmsg::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: cmsg::imp::Aligned<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imp::UdpSocketState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl AsRawFd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sockaddr_storage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1

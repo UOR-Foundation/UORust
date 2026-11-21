@@ -1,0 +1,93 @@
+[[fn]]
+path = "rustls-webpki::FULL_NAME_TAG"
+kappa = "c794ce985adf36af41ae1c89f0c32d1b11909308261cd3093698e870e96f07c9"
+embedded = "176ddae7d1a2c417900d365b6edf547ac10cff76931aa4ff21e15f2be48c593b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item der::CONTEXT_SPECIFIC"
+
+[[fn]]
+path = "rustls-webpki::NAME_RELATIVE_TO_CRL_ISSUER_TAG"
+kappa = "d94028cd7b65bb2aed0260fd583519b6ad9994d85bdf09089cd11a6bd4fc6478"
+embedded = "87377e73f19cb2e090d3f46e2a65f327aef19501103594a4330a984d35a59508"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item der::CONTEXT_SPECIFIC"
+
+[[fn]]
+path = "rustls-webpki::SCT_LIST_OID"
+kappa = "15ef70b54a0140b0d40ab4c2e18ed16f3f92b35b33eac4930a068e99d382cb03"
+embedded = "cc3458de0695d1e8383140c1a506e7101569f65d925ef559f8f22073e04d1556"
+status = "translated"
+digest = "52756e88667c36b6f0669294078339ba32913c30300cc816cd177d1a13bc5824"
+
+[[fn]]
+path = "rustls-webpki::remember_extension"
+kappa = "809db4f818e3fad6e3173baf6fe6cdbd6c28bef188deb345c29b9942a67de74f"
+at = "Error=u32"
+embedded = "2c58d2f52170daac4e29ea5159b3991fbfa2fee725b65bc964e9497b3b9d7047"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::set_extension_once"
+kappa = "1ada1252a4a2d1b917602e6b8337476801da1c24ee6b8cc5bd26396730f6a2cd"
+at = "Error=u32, T=u32"
+embedded = "1ba2bb263415b9afc617e49d812daf415cfcae4cb55389af58f38de7c3f9055e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::x509::<impl at src/x509.rs:84:10: 84:15>::clone"
+kappa = "79bd4468a3be48f9e2a2015b43b3cd9066f86624f6c5f96b71ab661bf9dc839f"
+embedded = "ffafe27d33f9b5627543625c68993784046f6689134a119569f6436de6595604"
+status = "residue"
+cause = "mir::Ty: x509::UnknownExtensionPolicy"
+
+[[fn]]
+path = "rustls-webpki::x509::<impl at src/x509.rs:84:23: 84:28>::fmt"
+kappa = "9e4bbce8e4b36def093a617af2ca1fa80758eff6f23897f21affa9b26ab46651"
+embedded = "14d21e213073a0d22a9384dc110b2d2d3fca6de4c90f90ddb5b9381f110b2d4d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls-webpki::x509::<impl at src/x509.rs:84:30: 84:37>::default"
+kappa = "ef7919bd53f9fdb82dd64ff396284aa2b42a5d774bb949bb2116251fa08abc8e"
+embedded = "fce6f629f9287138a70c14584e3cc192874e8bbb1ea8022d431333b73266683e"
+status = "residue"
+cause = "mir::Ty: x509::UnknownExtensionPolicy"
+
+[[fn]]
+path = "rustls-webpki::x509::DistributionPointName::TYPE_ID"
+kappa = "a13d53471befb1ba75a3e6087622796c5d283b88534208c7bea7ac98fa52cf4e"
+embedded = "377c6b02216515bf9404c37ba841ae8f221cd06c52c67fb05665301927375a00"
+status = "residue"
+cause = "mir::Ty: error::DerTypeId"
+
+[[fn]]
+path = "rustls-webpki::x509::DistributionPointName::from_der"
+kappa = "54c9bc06103982959374fb306162268ca7c1d586ca6d4e0ed1c19c20aad1796e"
+embedded = "c75b3ae8218ca1a0107419178f81617530d88fdb55936dac53193921f56b37b4"
+status = "residue"
+cause = "mir::Ty: x509::DistributionPointName<'_>"
+
+[[fn]]
+path = "rustls-webpki::x509::Extension::TYPE_ID"
+kappa = "21d2d6b1f4721af15f15fffed4afe01566b7d41be99cfb3f1210253ce9707947"
+embedded = "774f5da2b284bcb4c5fa1004cbff3af2b302845c89a33ad78b3125859686696f"
+status = "residue"
+cause = "mir::Ty: error::DerTypeId"
+
+[[fn]]
+path = "rustls-webpki::x509::Extension::from_der"
+kappa = "54650269b96376289cbf46510dc0097f64c32b6f3cbad5bcf38fbd5e830de5fa"
+embedded = "7521394651145fbc04e2bb215d4021c053475a34ed1a1ac4b8450db0b621191a"
+status = "residue"
+cause = "mir::Ty: x509::Extension<'_>"
+
+[[fn]]
+path = "rustls-webpki::x509::Extension::unsupported"
+kappa = "999f4d3324282f258b8bcba6cea0479a15e55ed5fa74a02d4b85272529f2ece5"
+embedded = "517ad89e01b6cf102b7146321b0449cdb0a0bd3ae77fac6952f6b1f74f33dc8c"
+status = "residue"
+cause = "mir::Ty: error::Error"
+

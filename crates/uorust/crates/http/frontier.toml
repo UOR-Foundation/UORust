@@ -1,0 +1,615 @@
+# The http register (written by `uorust crate http@1.5.0`; do not edit): every body of
+# http's MIR at http 1.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 906
+translated = 12
+residue = 894
+
+[module.byte_str]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.error]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.extensions]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.header]
+bodies = 420
+translated = 8
+residue = 412
+
+[module.method]
+bodies = 56
+translated = 1
+residue = 55
+
+[module.request]
+bodies = 50
+translated = 0
+residue = 50
+
+[module.response]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.status]
+bodies = 93
+translated = 1
+residue = 92
+
+[module.uri]
+bodies = 178
+translated = 2
+residue = 176
+
+[module.version]
+bodies = 19
+translated = 0
+residue = 19
+
+[embedding]
+bodies = 906
+embedded = 906
+evaluable = 905
+blocked = 1
+
+[[construct]]
+construct = "CastKind::Transmute"
+bodies = 1
+
+[differential]
+bodies = 3
+theorems = 21
+
+[[cause]]
+cause = "mir::Ty: header::name::HeaderName"
+bodies = 108
+
+[[cause]]
+cause = "mir::Ty: status::StatusCode"
+bodies = 89
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 78
+
+[[cause]]
+cause = "mir::Ty: method::Method"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: uri::Uri"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: value::HeaderValue"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: header::value::HeaderValue"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: HeaderMap<u32>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: header::map::MaxSizeReached"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: Authority"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: PathAndQuery"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: name::HeaderName"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: request::Builder"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: uri::path::PathAndQuery"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: byte_str::ByteStr"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: uri::authority::Authority"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: version::Version"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Extensions"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: extensions::Extensions"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: header::map::Entry<'_"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: header::map::HeaderMap"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: request::Request<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: uri::scheme::Scheme"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: response::Builder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: uri::builder::Builder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Scheme"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: header::map::HeaderMap<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: header::map::ValueIter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: map::OccupiedEntry<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: response::Response<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: version::Http"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Danger"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Version"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AllocatedExtension"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HashValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: InlineExtension"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StandardHeader"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: header::map::ValueIterMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Custom"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IdHasher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Inner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Port<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Pos"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Response<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ValueDrain<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn std::any::Any"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: header::map::ExtraValue<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: header::map::HashValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: header::map::Links"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: header::map::Pos"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: header::name::HdrName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: request::Parts"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: response::Parts"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: uri::InvalidUri"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: uri::Parts"
+bodies = 3
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item uri::path::CLASS_INVALID"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AuthorityError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FnvHasher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InvalidUri"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Link"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Repr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ValueIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ValueIterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn extensions::AnyClone + std::marker::Send + std::marker::Sync"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::map::Bucket<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::map::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::map::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::map::OccupiedEntry<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::map::RawLinks<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::map::ValueDrain<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::map::as_header_name::TryEntryError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::name::InvalidHeaderName"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::name::StandardHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::Cursor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::Drain<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::Entry<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::IntoIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::Keys<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::Values<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::ValuesMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::InvalidMethod"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::extension::AllocatedExtension"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::extension::InlineExtension"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: uri::ErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: uri::authority::AuthorityError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: uri::port::Port<&str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: uri::scheme::Scheme2<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: header::map::MAX_SIZE: mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item header::name::SCRATCH_BUF_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: header::name::uninit_u8_array: http's MIR stops at mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: uri::path::build_path_map: http's MIR stops at mir::Operand::Constant: the constant item uri::path::CLASS_INVALID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: uri::path::build_query_map: http's MIR stops at mir::Operand::Constant: the constant item uri::path::CLASS_INVALID"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Bucket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GetAll<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Guard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HdrName<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeLower<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Protocol"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawLinks<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: extensions::IdHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::Cursor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::Danger"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::Drain<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::FnvHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::GetAll<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::IntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::Keys<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::Link"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::Values<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::map::ValuesMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::name::Custom"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::name::MaybeLower<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::name::Repr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: header::value::ToStrError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::VacantEntry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: method::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: status::InvalidStatusCode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Zip<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::RSplit<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uri::InvalidUriParts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uri::path::Scanned"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uri::port::Port<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uri::scheme::Protocol"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uri::scheme::Scheme2<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uri::scheme::Scheme2<usize>"
+bodies = 1

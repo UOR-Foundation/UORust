@@ -1,0 +1,401 @@
+# The compact_str register (written by `uorust crate compact_str@0.10.0`; do not edit): every body of
+# compact_str's MIR at compact_str 0.10.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 350
+translated = 15
+residue = 335
+
+[module.crate]
+bodies = 165
+translated = 4
+residue = 161
+
+[module.repr]
+bodies = 174
+translated = 9
+residue = 165
+
+[module.traits]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.unicode_data]
+bodies = 5
+translated = 2
+residue = 3
+
+[embedding]
+bodies = 348
+embedded = 348
+evaluable = 342
+blocked = 6
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 5
+
+[[construct]]
+construct = "TerminatorKind::InlineAsm"
+bodies = 1
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: repr::Repr"
+bodies = 65
+
+[[cause]]
+cause = "mir::Ty: Repr"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: CompactString"
+bodies = 23
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::as_str: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: fn"
+bodies = 13
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Drain<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: repr::heap::HeapBuffer"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: HeapBuffer"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Capacity"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: repr::capacity::Capacity"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::len: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::const_new: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<[u8]>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: repr::inline::InlineBuffer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: repr::static_str::StaticStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by DerefMut"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: repr::capacity::USIZE_SIZE: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: repr::last_utf8_char::LastByte::Heap::{constant#0}"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::as_mut_str: compact_str's MIR stops at mir::TerminatorKind::Call: CompactString::len: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::is_heap_allocated: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::new: compact_str's MIR stops at type outside the lift: castaway::internal::CastToken<&str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::push_str: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::encode_utf8"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StaticStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: castaway::internal::CastToken<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::str::Utf8Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: case_ignorable_then_cased::{closure#0}: mir::TerminatorKind::Call: unicode_data::case_ignorable::lookup: compact_str's MIR stops at mir::Operand::Constant: {alloc96: &[u32; 35]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Deref"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: convert_while_ascii::USIZE_SIZE: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: repr::last_utf8_char::LastByte::Static::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc100: &[u32; 22]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc96: &[u32; 35]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::as_bytes: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::as_static_str: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::into_string: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::new: compact_str's MIR stops at type outside the lift: castaway::internal::CastToken<&std::string::String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::reserve: compact_str's MIR stops at type outside the lift: ReserveError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::set_len: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::try_reserve: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CompactString::try_with_capacity: compact_str's MIR stops at type outside the lift: repr::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_ilog10"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::unsigned_abs"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::copy_nonoverlapping"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: repr::heap::heap_capacity::alloc: compact_str's MIR stops at type outside the lift: core::alloc::Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: repr::num::num_chars: compact_str's MIR stops at mir::TerminatorKind::Call: core::num::checked_ilog10"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: repr::num::num_chars: compact_str's MIR stops at mir::TerminatorKind::Call: core::num::unsigned_abs"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::str::into_string"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: traits::try_to_compact_string: compact_str's MIR stops at type outside the lift: castaway::internal::CastToken<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::InlineAsm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InlineBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReserveError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SetLenOnDrop<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StringError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: castaway::internal::CastToken<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Arguments<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::error::Error + core::marker::Send + core::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: repr::last_utf8_char::LastByte"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<str>"
+bodies = 1

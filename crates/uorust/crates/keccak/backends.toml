@@ -1,0 +1,78 @@
+[[fn]]
+path = "keccak::backends::Backend::get_f1600"
+kappa = "49725834d0e5a70010413a1c9a3e4c957915a69598f048b7ddbe2ca277f337cf"
+embedded = "a7a91f6081431e9c46f16ed1dffd6ea8a41239a90dc3fc5b302df3291b20663f"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(&'a mut [u64; 25])"
+
+[[fn]]
+path = "keccak::backends::soft::<impl at src/backends/soft.rs:29:9: 29:32>::RC"
+kappa = "7051cf623efef6dc05e26b65a09ddd9ee94d2819f62dc860c45da0b70c0a0915"
+embedded = "d2a494865d2ff0310338b2d56c9e08e4bd5d8b9cc8ddd7dcb124fc3739b1be59"
+status = "translated"
+digest = "6a9706c9e900a75b04e2923b6287be149212dda22c65a38e573fb2723cb73c54"
+
+[[fn]]
+path = "keccak::backends::soft::<impl at src/backends/soft.rs:29:9: 29:32>::RC#2"
+kappa = "efafdf4bf121d7d54049ca9460840ca4b9e8a052c053ff66a89e728eafa4f856"
+embedded = "5bc381a49260c678923d36474b6cf0303f65d362e85284ad73a2ea84c56b85a8"
+status = "translated"
+digest = "f511cec7c52131fcd1812aa366d1786096c8511c54c3f45af6760d5ce606857b"
+
+[[fn]]
+path = "keccak::backends::soft::<impl at src/backends/soft.rs:29:9: 29:32>::RC#3"
+kappa = "3e4d8d924f86301fc046600d4959620834f0dac25e61a8dc8bab11068d6ec4ec"
+embedded = "64c2c1e9b574feaae6968a4d23bfafc34d877670556f80963d8d0635c2455887"
+status = "translated"
+digest = "1203341b32459b86ab26f85014dd2530f53fb0ddfa5b571b6b42310afa7d94c0"
+
+[[fn]]
+path = "keccak::backends::soft::<impl at src/backends/soft.rs:29:9: 29:32>::RC#4"
+kappa = "4ab9885ffe91cdaf6f519a346c8b2af00fa014fe07bfef86dc938aff6e7cefea"
+embedded = "f4f4b950ec9c3cbc41bb9e05dbc20536713d8f10f262f72e13d885abf855bb3f"
+status = "translated"
+digest = "294e48c9454986a0186e2195e802ebdbc5ad0c1ffb149baf2064471bde631f23"
+
+[[fn]]
+path = "keccak::backends::soft::<impl at src/backends/soft.rs:29:9: 29:32>::rotate_left"
+kappa = "26794a31d1593457e64695026218dc495fe1118aa656b38c43da3f700dbc30ac"
+embedded = "c432904b011849aeb4ef023a1336ba8279be7abecad42439ad1c825b46463135"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::rotate_left"
+
+[[fn]]
+path = "keccak::backends::soft::<impl at src/backends/soft.rs:29:9: 29:32>::rotate_left#2"
+kappa = "5f613c79f23083ef2e4ffd5603b9e6a1829547742e3d862287d6e65a983a8f55"
+embedded = "a9da554dbe774ec70c69c322fc227ff1cdf7be94cc55b7f611eddec643b0b6d7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u16>::rotate_left"
+
+[[fn]]
+path = "keccak::backends::soft::<impl at src/backends/soft.rs:29:9: 29:32>::rotate_left#3"
+kappa = "d5abcfd2b3f1a152d822ab655dabe88b60d3c2c5f83f461cfec6216e82dec76f"
+embedded = "6bfe065b30b6f6194e37e36ac23f5e5d7040d66f92f00129e8f85c8fcee4beb9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::rotate_left"
+
+[[fn]]
+path = "keccak::backends::soft::<impl at src/backends/soft.rs:29:9: 29:32>::rotate_left#4"
+kappa = "af6315d9332b39ad3bd7f41ee9c36b8a1aedbaf23c0a2e460f7a5cdcb4c76845"
+embedded = "c5ca347b36d72d612e87b794d4ef58920c9e83e4c0fe9fc4cf0bfb9db0c45b46"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::rotate_left"
+
+[[fn]]
+path = "keccak::backends::soft::Backend::get_p1600"
+kappa = "04b016da59c8df782ba0facbdd62dca49705a25bc74b8a4bd35db78750a9862b"
+embedded = "c4b03f143c34d86fad83b45d3650e3b802d7e08f672e98003f6506d5264957ac"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(&'a mut [u64; 25])"
+
+[[fn]]
+path = "keccak::keccak_p"
+kappa = "1e440bccd3398f527a8e379635153cc14347edf736a27c1a08acbce582e8aa7c"
+at = "L=u32, ROUNDS=#_ROUNDS"
+embedded = "1432858f4ce90f7067dd84f2da17d2045fe2487cbc9b79b085e3876acbe5c23a"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+

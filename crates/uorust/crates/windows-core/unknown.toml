@@ -1,0 +1,82 @@
+[[fn]]
+path = "windows-core::AddRef"
+kappa = "eee5507a410573c9f11eb7d225225297a135443cfd6d3101410c2842f51f1476"
+at = "T=u32"
+embedded = "8de6385cd0df721e137a65b86e6248e54363995e0cbf7aec6c121cb8742a00e1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item OFFSET"
+
+[[fn]]
+path = "windows-core::QueryInterface"
+kappa = "154d9e65ffc783d8160c3fd45e3908ae5211ef61ce24a74560906292da479d7f"
+at = "T=u32"
+embedded = "ac17cdea1fcd865d60d40a70c5a50d0a65cb71de78ab08d24e9a7d40042c382a"
+status = "residue"
+cause = "mir::Ty: windows_result::HRESULT"
+
+[[fn]]
+path = "windows-core::unknown::<impl at src/unknown.rs:26:1: 26:35>::IID"
+kappa = "f9ed4756f3d9b13d2de44adf8f9b66415d9926c2cf2246b6a8ddbbf9251248bb"
+embedded = "907589ea476684c112f4a8203b90123df164b9a9281176899ac9c8363e2eb101"
+status = "residue"
+cause = "mir::Ty: guid::GUID"
+
+[[fn]]
+path = "windows-core::unknown::IUnknown::clone"
+kappa = "cc8ca5bf55e208cfa46300ff9dbd663d038d99770424685e861bae3fcecd48fd"
+embedded = "d5d04b883dc033256154d0d3dac152678ec46ed76195d29f21b784f94765910f"
+status = "residue"
+cause = "mir::Ty: unknown::IUnknown"
+
+[[fn]]
+path = "windows-core::unknown::IUnknown::drop"
+kappa = "dc2d87cf5f9ab742385a92c6cdae3bd06bea73a6597b337471e349bbc1b6250a"
+embedded = "b65e2992d8283342216ee6213395f8558aaf88ae5d0244076bed8473d8546163"
+status = "residue"
+cause = "mir::Ty: unknown::IUnknown"
+
+[[fn]]
+path = "windows-core::unknown::IUnknown::eq"
+kappa = "306c684699c07943d2170b83f54f6b04c17b15db8898c0f86d7bba4705500f56"
+embedded = "55f46a262b08d26fdda583bab1514e3103075a1ca39c9573499b8813f63555a7"
+status = "residue"
+cause = "mir::Ty: unknown::IUnknown"
+
+[[fn]]
+path = "windows-core::unknown::IUnknown::fmt"
+kappa = "729f82af779fff3eda8bfd8cc6732c63c343286b52c631d00affbca36c20e96b"
+embedded = "215ab258f64e7864e33a91e2d152fb9cc7d8079870f09c0be12955bd778f545d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "windows-core::unknown::IUnknownImpl::as_interface"
+kappa = "fa2fb847a32d15c90fc5d599f2688cec1f5c94d2a2337c6f3354f35948e370f4"
+at = "I=u32, Self=u32"
+embedded = "7f9fd6c80b2e182aa4411806a75cd44db3551232e1148da1d32cef556557a3e2"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+
+[[fn]]
+path = "windows-core::unknown::IUnknownImpl::to_interface"
+kappa = "f213969c953da0986c7c52f792d7a2ec944e9bc385b42a02c9e41cccb855ac94"
+at = "I=u32, Self=u32"
+embedded = "1a9a87d9fa633847fefc962ad8cf7b6b2b918838451197a46071f6c49cafc999"
+status = "residue"
+cause = "mir::Ty: interface::InterfaceRef<'_, u32>"
+
+[[fn]]
+path = "windows-core::unknown::IUnknown_Vtbl::new"
+kappa = "58b22138024cbbc41158fc717bed7fe0564804ee0275b9a4ec6b48b8b4b7995b"
+embedded = "94f79138aa1070c36b1e6d4ae0369a8bdd8caa9758eb029a46d6b466722df08e"
+status = "residue"
+cause = "mir::Ty: unknown::IUnknown_Vtbl"
+
+[[fn]]
+path = "windows-core::unknown::IUnknown_Vtbl::new::Release"
+kappa = "489c1fc60f892d9fff2c74fcd0b9fce91ccf6fc2066c0328cf4601abcb8fab8e"
+at = "T=u32"
+embedded = "9fbe30f03f15f15659e066f76702da3aab0fe5a504e0be6fce1487bbec746e6d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item OFFSET"
+

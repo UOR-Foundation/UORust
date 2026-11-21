@@ -1,0 +1,247 @@
+[[fn]]
+path = "elliptic-curve::BatchNormalize::batch_normalize_vartime"
+kappa = "9760685d27e1cd91450b90809417dbf657cebc09068b4bb7d10162a320cc07f4"
+at = "Points=u32, Self=u32"
+embedded = "e4767fbb0c133a8213fd359004a792910786228e6e382eed9362e0f783b347f3"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BatchNormalize, which u32 does not implement in core"
+
+[[fn]]
+path = "elliptic-curve::non_identity::<impl at src/point/non_identity.rs:25:10: 25:15>::clone"
+kappa = "7813899e2e922fc68e2ab0ec9a0df606acf8eab96e630af186e873aed4f2e764"
+at = "P=u32"
+embedded = "4137bc596bfcfe8741359496743180881ec76acedb609f87de62779e3524e332"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::<impl at src/point/non_identity.rs:25:23: 25:28>::fmt"
+kappa = "262c351a883db2ef36117a9e2c8c2f94a52f1ddeb52f9a98ade8a930908d924f"
+at = "P=u32"
+embedded = "6132f472fe79ba93b4f5cb76bb2ff7d3687e45bd9162289c0086cdf0353a9107"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "elliptic-curve::non_identity::<impl at src/point/non_identity.rs:25:30: 25:39>::eq"
+kappa = "6f30c572446875ccb56fadbaf868a59ef54fd0040c14da92c2552e6445441356"
+at = "P=u32"
+embedded = "8aec7791fea97711de3d266c5b8e70bb199e6682cd11e778bdf86c99d054ee50"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::<impl at src/point/non_identity.rs:25:41: 25:43>::assert_fields_are_eq"
+kappa = "1f55da02470ac447091af2c80dc9ed7f5dda6e857c9edcd066f7f8ba3846d335"
+embedded = "0015b38b949ddc63d861dc7b340e89c05345502987c69d2b06ecce5e2f984f99"
+status = "residue"
+cause = "mir::Ty: P"
+
+[[fn]]
+path = "elliptic-curve::non_identity::<impl at src/point/non_identity.rs:264:1: 267:42>::mul"
+kappa = "8e3b665acf677b3e0183d40005112864826354d7d4bd4fac144c04f21720a21b"
+at = "C=u32, P=u32"
+embedded = "c17adb90c2d1cd0bc568ddf82a61cad60bb640e6aab7bf160bb1b42fc1e92404"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::<impl at src/point/non_identity.rs:278:1: 281:42>::mul"
+kappa = "a9195cdd958dbfc76241403fea5b53734c90bf43f5aafbea0a01cf80c6b1178a"
+at = "C=u32, P=u32"
+embedded = "7e631a5fc142096cb85dc7f9b3449d47d56e4b8a92e8b483709a43210742f02d"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::array_as_inner"
+kappa = "92eaab97a7b04944944834bef0431be59fdaa83fa0cd64ad260aba1c289d8591"
+at = "N=#_N, P=u32"
+embedded = "55e0dfc1fdc65d79fc4b3aa87d205c3912dd04894d8ff0f5084d5bb38d8316c2"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::as_ref"
+kappa = "42c53eef9b66b79cfda4e169759328db930505a036a9bd3e6afdd5bbb81ee6ce"
+at = "P=u32"
+embedded = "124ba6b2747c4e58ea9d454f8003c251d4d9a3d551c42d72ee8788d0829badd1"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::batch_normalize"
+kappa = "faba363fe59d5e0daa2b44604648ed52d7e834f8b3f271a1aa0f2e018f2f0d59"
+at = "N=#usize_N, P=u32"
+embedded = "d856198ad5f0279c959f2f2331d8a73aa6458eef4444f671f40c28fb5b879a54"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::cast_array_as_inner"
+kappa = "43bedd83f16b15a264dba475825dfc77ea25c6ee1e9b1f56352f81be8f1421d3"
+at = "N=#_N, P=u32"
+embedded = "f195ad33aa600b0c84ddae54f1aa176132d1046d6a7ccd0d95c82c8386589566"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::cast_slice_as_inner"
+kappa = "83ff918b2e6486c3af0ac90e3973c5c1db54b94930172168d294cc6138301fe9"
+at = "P=u32"
+embedded = "19e65c19a37c12fcadc942f4566e93b93f6256c2bf287a5e2a374c928b5be129"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::conditional_select"
+kappa = "860ba5e24d2911b3825a21c5f57e2905ab12b33061301c2d015738bb26e093ce"
+at = "P=u32"
+embedded = "7e9ba8f619e14b53149fab7ccdc106feedd682fc69e603689bdac5e526f37ab7"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::ct_eq"
+kappa = "a38771b9e1243868a51013438e9608d7534f36139e1053a5577b978a84b551da"
+at = "P=u32"
+embedded = "d2d742847fbd1e8e79067a897ce754420c02ee782e1036621867a5f826094ba2"
+status = "residue"
+cause = "mir::Ty: subtle::Choice"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::deref"
+kappa = "8bb97069ecaed71ac4435bdce1cd6102893687928b5c9fd630ce2287c2a2e5c5"
+at = "P=u32"
+embedded = "425f515e55db03fcd9b936a9dd7b8f997a5d86b881fc188a196c30c7977da6a9"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::from_bytes"
+kappa = "80e32999883bdd77916b1303361730f96c16a6d88b62c7e12b9e63a30f6f3300"
+at = "P=u32"
+embedded = "b6c1b715df8491b650d718c5287899c7f8d3d7ff9c41c34b6a72f04bb74b14d2"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::from_bytes_unchecked"
+kappa = "c93627dc2374c3834a39283629a144764a70ce3246135c6d3b3bcc230089df6e"
+at = "P=u32"
+embedded = "3eeaae4595501e5f1d0b128805543a3c8560b28db8095a6b40ab72a30e16c4cb"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::from_repr"
+kappa = "e94c4131219002eaa88a9a513babd98be9b5197d1e66103fccc30e862900c285"
+at = "P=u32"
+embedded = "14c9c86be45e588bc2fa81a18003772d2a8f18f103668f694a2c037caf8ed9d9"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::mul"
+kappa = "cf3d7f57ee2dff36886ade5a9d5aaf47397456bc5019004a3c00bec0b07dcef0"
+at = "C=u32, P=u32"
+embedded = "ada4a824a91279608f2e559fbbacc4904a2584e312556a9f8e13d8b320a3ab41"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::mul#2"
+kappa = "794a5927cd355a7f6184cfc0d67b84dbf3a0fcb404d926afe34ef68c120fb4ea"
+at = "C=u32, P=u32"
+embedded = "95f3330ce921374299ada259ba7235836f52c72d5f8e6abc446233c60b6df7a9"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::mul_by_generator"
+kappa = "84d9bfe12f172f8c56e6621a6d32c35ce0ded6483adf77fedda4a25bb539bcfe"
+at = "C=u32, P=u32"
+embedded = "e9e1b8977a91a6821a642beb7df8322095e4e0160901e68604291606d7b31c27"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::new"
+kappa = "eaa5617a21799b9665dc2d2c74ce3f25be9ed1a2a850933d7589ba7a9c2fc6b7"
+at = "P=u32"
+embedded = "d89ff2e5d4560cb49b9312409d07a19f52306de914886e4ac6de8cadcf714474"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::new_unchecked"
+kappa = "d26d93914bce0e03d81a9dbfd1b22de179456c898b01037624248f614c9ad36a"
+at = "P=u32"
+embedded = "05b9f9f2cc58dfd0cfdf3fb3bb104316d8da04cd5f21d8e0025adecca2092185"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::random"
+kappa = "74559ef10cb95d757b0ed88e27e3e2cb909e09f5d5a8030f3dde3df7d5c52e6c"
+at = "P=u32, R=u32"
+embedded = "88f75af66ab7ada9ea91d9f9924c8878dc983fffeabf1c0ceb028456e5f46387"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::slice_as_inner"
+kappa = "7251b59f385b0d6a8d10bda00ff75f40d4cd532a33f6f38f8746ea1202906e56"
+at = "P=u32"
+embedded = "182a276a02611bd6645b7c27bbf11e3b7add38363c84970caec2dc27a635fbc1"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::to_affine"
+kappa = "16f1b2017511bb6f4a90d6f33eafb6a399b7b9b8ea43894bd98b2dc3a8009430"
+at = "P=u32"
+embedded = "cc1c58bb743bba2d29134de764056bb4d3f1793eb31f87898162afc7d1fc6158"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::to_bytes"
+kappa = "790c7bab755a23a5a50385c8dfd56dc514c13139809ade27361cbda785fa1810"
+at = "P=u32"
+embedded = "1eceef7f91de34ffa2e1910511874fe25470ccdcb253d9b3bbe366e1d5056b62"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::to_curve"
+kappa = "ed2d38e223189fb4955e0a55878b3b38d3a91c9387b5e67b9dacbf79d36d3e16"
+at = "P=u32"
+embedded = "80fa60a72085055b2aefe6e581805c73e16ec24ed12a8987b02a374beac08bf8"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::to_point"
+kappa = "120064f6b4ac8ab32b2e9944bc552c2d883a4ea3d78831c71dcaa385d9303c1d"
+at = "P=u32"
+embedded = "819a5a1a4d5ce921e884249fb00b590183bde22a1b16fcadae3e58f832d5bda9"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::try_generate_from_rng"
+kappa = "d21a85f741231916039cac8cd472a66693e4856555b68d877302ff65246d38fe"
+at = "P=u32, R=u32"
+embedded = "106a2b8189ecb537c51254973dacdd83522931b9f1a6649012b9a8bc2666880b"
+status = "residue"
+cause = "mir::Ty: point::non_identity::NonIdentity<u32>"
+
+[[fn]]
+path = "elliptic-curve::non_identity::NonIdentity::zeroize"
+kappa = "c1eef7640138dfee882a59a50aa90d20b10bad44abb5ff7a05bf3d99a843cb60"
+at = "P=u32"
+embedded = "f9a0ce1955ab121180c47e1ca5cf5449c64946df0a7aaddc8f9a5fa09067e1ac"
+status = "residue"
+cause = "mir::Ty: NonIdentity<u32>"
+

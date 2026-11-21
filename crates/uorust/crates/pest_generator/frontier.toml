@@ -1,0 +1,69 @@
+# The pest_generator register (written by `uorust crate pest_generator@2.9.6`; do not edit): every body of
+# pest_generator's MIR at pest_generator 2.9.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 21
+translated = 0
+residue = 21
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.docs]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.generator]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.parse_derive]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 21
+embedded = 21
+evaluable = 21
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GrammarSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QuoteOption<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: docs::DocComment"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse_derive::GrammarSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse_derive::ParsedDerive"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1

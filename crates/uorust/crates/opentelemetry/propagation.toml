@@ -1,0 +1,119 @@
+[[fn]]
+path = "opentelemetry::Extractor::get_all"
+kappa = "ff2169c6e2fd7cc6f52978e7f42db9f53cf2ad46f43192420036308fb3e18650"
+at = "Self=u32"
+embedded = "afa9f7c9ac278d465972843dd149c307ca58edec2613831604eaa888589356a4"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Extractor, which u32 does not implement in core"
+
+[[fn]]
+path = "opentelemetry::Injector::reserve"
+kappa = "8e61d28f8400b446a83e35b57cf1afb1e401c24424c5eac1bc9d5dcad23f7a12"
+embedded = "9bac2fa6b496014a91ee2ccc43c4506e89a44dcb7f259ea94a646782659ae5cb"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "opentelemetry::TextMapPropagator::extract"
+kappa = "9d512e18ed95e95eddf7ebcdb8ab53ee196a8ee0bbfba40d8d42010a24e79083"
+at = "Self=u32"
+embedded = "602ab9d3ee44f4ade04f72b179851894c4fab5885a269f7d9ceacb5bef8f2d32"
+status = "residue"
+cause = "mir::Ty: context::Context"
+
+[[fn]]
+path = "opentelemetry::TextMapPropagator::inject"
+kappa = "9eff4e5fc4c9207250e36822623d6a2d1e66a7d3e07fcb8e9f199d19f53a4266"
+at = "Self=u32"
+embedded = "a987d6e8539d05f12bfe74a13c4236ac90dc32eadffe335fea2828d123d8dfcd"
+status = "residue"
+cause = "mir::Ty: dyn Injector"
+
+[[fn]]
+path = "opentelemetry::composite::<impl at src/propagation/composite.rs:67:10: 67:15>::fmt"
+kappa = "8bb1cb30386d8dce2fadbfbcee70ea9b2ed763cd1bb68e568c3d4aa96308f22e"
+embedded = "e3f9b95174f1d1c13745182cd7d283ce88c6d747e0a1ec91c276fa99b5c2a818"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry::composite::TextMapCompositePropagator::extract_with_context"
+kappa = "cfafbd2000c2f296f338d865fc3e0232f3c40e863c4d2e6a93643dc4286f6d58"
+embedded = "50ea5c9e2f7cf99c7fcf4160bb9cfdcb0ed8345fa3143d3ce15c8760e27ccd89"
+status = "residue"
+cause = "mir::Ty: context::Context"
+
+[[fn]]
+path = "opentelemetry::composite::TextMapCompositePropagator::fields"
+kappa = "de13a580a4c13590cde1b264d94d339891dd1384abeaf84ec9f27160b90c19f7"
+embedded = "256fe4bb768f7609cdd551fe89f68044ecdeecf291a3b4b0968cd7adb7034d60"
+status = "residue"
+cause = "mir::Ty: propagation::text_map_propagator::FieldIter<'_>"
+
+[[fn]]
+path = "opentelemetry::composite::TextMapCompositePropagator::inject_context"
+kappa = "3d2b3ff69c4fc2d366e890b538efc4db94e97e7494c7504c94cb23b49620464b"
+embedded = "7b23fdffab87e993bff5f321631eca8c92cf87e134f551b051fbaea30ef6fcae"
+status = "residue"
+cause = "mir::Ty: TextMapCompositePropagator"
+
+[[fn]]
+path = "opentelemetry::composite::TextMapCompositePropagator::new"
+kappa = "94cfcb6743f58c4c7cb34d17f1d844744a02035b729f715c1e16c86c79f4f732"
+embedded = "ecded439531bfb59f843dd6c3a9917a5871fb3e0c9e4a0d39c4025a218c35e6f"
+status = "residue"
+cause = "mir::Ty: propagation::composite::TextMapCompositePropagator"
+
+[[fn]]
+path = "opentelemetry::propagation::HashMap::get"
+kappa = "c7f8ff3d219f15e956324fd5f6ee7e7e4d86eec6a679db7598ef44c6e491441b"
+at = "S=u32"
+embedded = "7de260aa6e5f2c72b07b2fb65c6b10713715657d2bd5a323aeb688d10ef80607"
+status = "residue"
+cause = "mir::Ty: HashMap<String, String, u32>"
+
+[[fn]]
+path = "opentelemetry::propagation::HashMap::keys"
+kappa = "7cf3916a56dec498f07c35659f37fb23d36450cc584fdf5a799b60461fe9dbc9"
+at = "S=u32"
+embedded = "6578ca119f5fbf65fe993e5ad415b71aa23c2a86b1a3af4d2816180b7f219a6f"
+status = "residue"
+cause = "mir::Ty: HashMap<String, String, u32>"
+
+[[fn]]
+path = "opentelemetry::propagation::HashMap::reserve"
+kappa = "a98dd6d56fa6b2d9c75f168dae7b560f8561260821ec5299f68474d5a84fefa1"
+at = "S=u32"
+embedded = "53079d32c5524f84f6cba826ebbe3b28987f128b1b49eb8848b8214624e90c7f"
+status = "residue"
+cause = "mir::Ty: HashMap<String, String, u32>"
+
+[[fn]]
+path = "opentelemetry::propagation::HashMap::set"
+kappa = "a2441f96001e75aef6bf3cf250017ed8f23bda343c0a469c9e8e1efe8fd0b55d"
+at = "S=u32"
+embedded = "3dce294a3d4daf37557e95e3063e264ed0a922d0cb49070e8820509f16c70bf5"
+status = "residue"
+cause = "mir::Ty: HashMap<String, String, u32>"
+
+[[fn]]
+path = "opentelemetry::text_map_propagator::<impl at src/propagation/text_map_propagator.rs:62:10: 62:15>::fmt"
+kappa = "b359552c60720bb3a48367c998d1d65a79449d0d87f7c2fe96389241aefcd43b"
+embedded = "fa853785f30e29545d28f10e0c345d5022cd2dcfd91cd959f7051762c906b592"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "opentelemetry::text_map_propagator::FieldIter::new"
+kappa = "4fa2c2e615987ceef72efbc4c70bbcc368201bd4d9bd7a0f12be6567b2b3651e"
+embedded = "0aae83aad2f6bba0839c1228d8de28b698ace18b22d40849ae016547a37fc1a9"
+status = "residue"
+cause = "mir::Ty: propagation::text_map_propagator::FieldIter<'_>"
+
+[[fn]]
+path = "opentelemetry::text_map_propagator::FieldIter::next"
+kappa = "9543e588ea5a54f8498df89d87debcf5515457740ecdf666a8fdc1c8c66810ce"
+embedded = "7a1cab309220ccea191fa2adc9b3d65408f4eeb88e1c8c45dc1c06e36a5d4496"
+status = "residue"
+cause = "mir::Ty: FieldIter<'_>"
+

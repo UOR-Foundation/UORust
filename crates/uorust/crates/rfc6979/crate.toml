@@ -1,0 +1,47 @@
+[[fn]]
+path = "rfc6979::KGenerator::fill_next_k"
+kappa = "1c456baea1ac5d55abcaac41fdea1352afbff8d0ed2f98efd25c54f765c825ba"
+at = "D=u32, U=u32"
+embedded = "2a6c0538a17eab7c81ebbbce9db03a10c9a7949bd45f1aad330e59f07882c70d"
+status = "residue"
+cause = "mir::Ty: KGenerator<'_, u32, u32>"
+
+[[fn]]
+path = "rfc6979::KGenerator::fmt"
+kappa = "416127ca90322e4a9105a7716a01818fd0408a2bf7994be8705cbac224ff4ec7"
+embedded = "40af7225387f8c51da0ae2ba0c2edd1304977234159860cb6dd62f4e2e4c422c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rfc6979::KGenerator::new"
+kappa = "1fd1f4dff9f795e94039f9c0bf17a3395a9b91312390caa772613d1067b2e52b"
+at = "D=u32, U=u32"
+embedded = "0bd63a0d5382f5dddcabeff1d47904c1ecff5b83c2f91375b9fa41386a8ded88"
+status = "residue"
+cause = "mir::Ty: KGenerator<'_, u32, u32>"
+
+[[fn]]
+path = "rfc6979::bits2int"
+kappa = "65503bb84eb362fa88659f2e45ddffca3b9a81b2c6847120ad3b4d27b4822ee1"
+at = "U=u32"
+embedded = "f07de61f46459bbc7d882a769356a6caa8f90886be85cac16b30b27f6d990a4f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitOps, which u32 does not implement in core"
+
+[[fn]]
+path = "rfc6979::bits2octets"
+kappa = "796bd8409a97dcbbd6a58154085c65c0fbd6b7a0334bdec8a05c60fa3465e06b"
+at = "U=u32"
+embedded = "647a2c24c5603a15d7da9fafc64e75694e2bd89d6f9672090dab491dd1d88ad5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bits2int: rfc6979's MIR stops at mir::Instantiation: u32 for a parameter bounded by BitOps, which u32 does not implement in core"
+
+[[fn]]
+path = "rfc6979::int2octets"
+kappa = "8631ef3ff68a870a1ba618b1d11ad6cb9a704fb21fd15ed54f04f563f27e2079"
+at = "U=u32"
+embedded = "b62bfab108f8b3e7ea8b86e5c3c4573e1c716c4f18ffda3c7bd2ac0630fcd8bb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitOps, which u32 does not implement in core"
+

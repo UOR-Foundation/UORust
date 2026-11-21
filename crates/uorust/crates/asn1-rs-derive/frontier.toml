@@ -1,0 +1,161 @@
+# The asn1-rs-derive register (written by `uorust crate asn1-rs-derive@0.7.0`; do not edit): every body of
+# asn1-rs-derive's MIR at asn1-rs-derive 0.7.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 136
+translated = 1
+residue = 135
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.alias]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.asn1_type]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.check_derive]
+bodies = 3
+translated = 1
+residue = 2
+
+[module.choice]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.container]
+bodies = 34
+translated = 0
+residue = 34
+
+[module.crate]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.enumerated]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.options]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.sequence]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.set]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.tostatic]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 136
+embedded = 136
+evaluable = 136
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 76
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: container::Asn1TagKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: asn1_type::Asn1Type"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: container::ContainerType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Asn1TagClass"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: container::Asn1TagClass"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: container::FieldInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: options::Options"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Asn1Type"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeriveInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alias::DeriveAlias<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: choice::DeriveChoice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: choice::TagVariant<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: container::Container"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: enumerated::DeriveEnumerated<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: enumerated::EnumVariant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sequence::DeriveSequence<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 1

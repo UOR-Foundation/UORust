@@ -1,0 +1,173 @@
+[[fn]]
+path = "signal-hook::DETAILS"
+kappa = "6d34e29397ba8b1eb7b3a012d49fa5507a4f86bdf1cc95c860d98a4a7dec690f"
+embedded = "b57e83af2b1e3fb7f5d5555677eaec82bd9caae7e26d649a44cff6e1209040ca"
+status = "residue"
+cause = "mir::Ty: low_level::signal_details::Details"
+
+[[fn]]
+path = "signal-hook::add_fcntl_flag"
+kappa = "1d3c0712232dfb9b51f3e9063ba3c7c9fe79441b8c43c817473f13fe4c2710c8"
+embedded = "f5e5ec327d2076745f00e43f6988362a4b0d3c466d22c7477c15e408dd755345"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "signal-hook::channel::Channel::default"
+kappa = "849dc378771b607e174c8143a360e0e85d491c5fa214aeee93bb7dd7acc1e0e8"
+at = "T=u32"
+embedded = "57f50bf7d35a4820cb5b8cd856a37dde21e16e7e54a50e62556f3cca9fabcb3b"
+status = "residue"
+cause = "mir::Ty: low_level::channel::Channel<u32>"
+
+[[fn]]
+path = "signal-hook::channel::Channel::new"
+kappa = "b34aa4a3ad7ab26076a1e4e7e050e87bbd216640b77fa5a23e26b35cfab08352"
+at = "T=u32"
+embedded = "36bebd226a871cb44702d002a0045c492e8c0df096731e03aeec2b55323d289e"
+status = "residue"
+cause = "mir::Ty: low_level::channel::Channel<u32>"
+
+[[fn]]
+path = "signal-hook::channel::Channel::recv"
+kappa = "4485857c8dbae19acb6b632d12b824ef05926976b23a1446d9fed7a573d1b31f"
+at = "T=u32"
+embedded = "c966a2bac4f4ca8754e7fa67e711095bad0a24724ac90451665d048d52e7630c"
+status = "residue"
+cause = "mir::Ty: Channel<u32>"
+
+[[fn]]
+path = "signal-hook::channel::Channel::send"
+kappa = "7c3f626299654eb80783354f1d70de274131acb3f60d5124bd633d50b90afa81"
+at = "T=u32"
+embedded = "e21233cc6231f5f8f65c6492117ab1356da0f225160c08d2f7c47ccc1552dcd6"
+status = "residue"
+cause = "mir::Ty: Channel<u32>"
+
+[[fn]]
+path = "signal-hook::channel::get"
+kappa = "4005e49fa0c6acefc28ffc82faeec7e645478346603b4a00292de84dcae0effb"
+embedded = "aa538339d9f84c8e3c201f0796e1c649e411d8fdc74a8edc89c02a9b0f0f4fce"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item low_level::channel::BITS"
+
+[[fn]]
+path = "signal-hook::dequeue"
+kappa = "537193c8131192e2ecb017c9bcbb40f04216b1ed802a85b104b21258059ea929"
+embedded = "09616ec4497081c6d7b4489b3e72b9e5379f71701129cfac7a57c7d63d9ffc69"
+status = "residue"
+cause = "mir::Ty: Atomic<u16>"
+
+[[fn]]
+path = "signal-hook::emulate_default_handler"
+kappa = "5227bc825ec25737e14675aec16e5afddea540d9c7407cab3d7478513e67ad96"
+embedded = "1e77066c4540ed85a6118c8b0d931c8d3f45f5ceed80c431fa73437e731148fb"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "signal-hook::enqueue"
+kappa = "619b3d30d715e4dd1a425bcd4396b7173b830c4f01e62a9fbcd6ebd62195da8a"
+embedded = "3bb90dec29953832bb8a7a9fd7f6af597cba3833a2dbc5a951e8108a11b53384"
+status = "residue"
+cause = "mir::Ty: Atomic<u16>"
+
+[[fn]]
+path = "signal-hook::low_level::abort"
+kappa = "6bcf62e7e7743779392f0b76e2aa940826195baf5ccaff741fdfa59ebb5a16ff"
+embedded = "5fd28e340655cd3e7026b2fc5e44280e55bb91c80916b0d669d05b2a896f9bc1"
+status = "translated"
+digest = "52d741acca824cea81c0ba623cd42618ff80d21ce756ffdd665423e33d4eb9d4"
+
+[[fn]]
+path = "signal-hook::low_level::exit"
+kappa = "16dce0dd9afc25ab4974368b72a3bbd8801210ffefd8f61210a43fb75486344d"
+embedded = "aa89d4367647a2138f3057766162826922dd8cd4d8113970f98882c5adca7db5"
+status = "translated"
+digest = "e044ee6c4c11d074de7374a4638a2527ea3e01e4e1b26857e26e68428c26828d"
+
+[[fn]]
+path = "signal-hook::low_level::raise"
+kappa = "4e1c7847ec8ea106c4f93b453364d3421dac811873dc0641f2090ce52371d349"
+embedded = "5048ca2b1aff282e73457dd817da13834f514cb0eeb4609dbef55e8ce314816e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "signal-hook::pipe::<impl at src/low_level/pipe.rs:91:16: 91:21>::clone"
+kappa = "b43807523c816fec3855905661dcccbf4bf5208e65090c998d17c01ec0d3f94b"
+embedded = "461483de2043a0b88a1bc20220b2d5570ce516a54a8160126c5d83d0f226bbbb"
+status = "residue"
+cause = "mir::Ty: low_level::pipe::WakeMethod"
+
+[[fn]]
+path = "signal-hook::pipe::WakeFd::as_fd"
+kappa = "45f417c7586e61490fea6d85848924019dc47a2f0ad58bd510a49a8775d9d129"
+embedded = "609e9c6c9995f05973f336da17b0ac832e5769782a03f154982ed383ae04154f"
+status = "residue"
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "signal-hook::pipe::WakeFd::wake"
+kappa = "4aadba140ab61adabe82d109d3485807ecadefd42198f2c79c41e2fedef37022"
+embedded = "48ec8f89a7c091d508633e5fad26bea48ef799fbe2883bc27558537164bb801a"
+status = "residue"
+cause = "mir::Ty: WakeFd"
+
+[[fn]]
+path = "signal-hook::pipe::register"
+kappa = "b3b3158cb827f410fcdb56cbb05f38bbac14f5d4325e2d39da590558d8dd4c58"
+at = "P=u32"
+embedded = "8e0e4e86b7991110a624bfd43be2cacc67c2781de36e026298685806900e2860"
+status = "residue"
+cause = "mir::Ty: signal_hook_registry::SigId"
+
+[[fn]]
+path = "signal-hook::pipe::wake"
+kappa = "2c1d06b5d893e409e5ee19982bbe0974e60a8a5234345a545e20157f5009c7a8"
+embedded = "9064adae1b1b408ac57628b7ac34de0c0903fd1e648b407797b87106d11fdb07"
+status = "residue"
+cause = "mir::Ty: BorrowedFd<'_>"
+
+[[fn]]
+path = "signal-hook::register_raw"
+kappa = "537cd8f63a13813edcaf6759ad082e8a68f1d20df39e000b53a844ec7b794eba"
+embedded = "a412977684ca24c536bc61eb0d25da5e95f83e86a7217fffb92d9487863688c7"
+status = "residue"
+cause = "mir::Ty: signal_hook_registry::SigId"
+
+[[fn]]
+path = "signal-hook::restore_default"
+kappa = "283c6f064715ce99d241a0d1736aa95a116de293e438a47525fcf6e09620c510"
+embedded = "ca15d305cf1171ba9f03377614397757390e22d68f4c019d0cc37939c5b99277"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "signal-hook::set"
+kappa = "9dca439f6dc34cf89cd2648410678ed3ba60bde6da6272b4960e720c562f46c5"
+embedded = "3deb4f090de4f07f43ccdb38e2520abd97498b22c11acf3583c3107c013d8e1c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item low_level::channel::BITS"
+
+[[fn]]
+path = "signal-hook::signal_details::<impl at src/low_level/signal_details.rs:16:10: 16:15>::clone"
+kappa = "cef6a89880878fe1a20adf4890433e6355510a13c33f84bc22b16fac96ae60fb"
+embedded = "0442e262f91019301cc2119eeb508113ae4dec35e42edc02569176a3d961438e"
+status = "residue"
+cause = "mir::Ty: low_level::signal_details::DefaultKind"
+
+[[fn]]
+path = "signal-hook::signal_details::<impl at src/low_level/signal_details.rs:16:23: 16:28>::fmt"
+kappa = "f72a210bc5d860fdbb95355f05fcb8ba1037b494cfbf03bbb3ac10dc72b20fe0"
+embedded = "3ec7fe4031be69cea85ebef7329ee87bd4668850d90887ac4b97321b427e0121"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "signal-hook::signal_name"
+kappa = "28e833279f84400e86786c55f325736984db0983248bada78359489d626df72f"
+embedded = "0f7ff4384f914a9924f9e948d3f8be1db764baa1071317457c27f375bcda4040"
+status = "residue"
+cause = "mir::Operand::Constant: low_level::signal_details::DETAILS: type outside the lift: low_level::signal_details::Details"
+

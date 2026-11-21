@@ -1,0 +1,90 @@
+# The smallvec register (written by `uorust crate smallvec@1.16.5`; do not edit): every body of
+# smallvec's MIR at smallvec 1.16.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 170
+translated = 47
+residue = 123
+
+[module.crate]
+bodies = 170
+translated = 47
+residue = 123
+
+[embedding]
+bodies = 170
+embedded = 170
+evaluable = 170
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: SmallVec<u32>"
+bodies = 71
+
+[[cause]]
+cause = "mir::Ty: IntoIter<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: a usize literal"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ConstNonNull<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Drain<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SmallVecData<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SetLenOnDrop<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::alloc::Layout"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::extend_from_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CollectionAllocErr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DropOnPanic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LayoutError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PanicGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 1

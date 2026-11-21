@@ -1,0 +1,83 @@
+[[fn]]
+path = "rusticata-macros::align32"
+kappa = "d3dd4764194f06490ef440679e4ff4556b510affac1b5dd79c75308a5f636592"
+differential = 6
+embedded = "5191ca3b05eb1d3d1a7d9793ada4e6b37ae8a9cf789b3557209bd808c6f4932b"
+status = "residue"
+cause = "mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "rusticata-macros::align_n2"
+kappa = "cca410fcb42722b889029979fb90b2414fa58086bef0e8a67aa22d6550e76f9e"
+differential = 5
+embedded = "af7a2219e0ac83d2332e1012c58dbe56fe9231d3d1836151adb955a2c782bd9a"
+status = "residue"
+cause = "mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "rusticata-macros::be_var_u64"
+kappa = "442288a9f3da4d2e65aaf869c38efb8a6377c00c7074cc7f2cd9c32fc314fc49"
+at = "E=u32"
+embedded = "cd37a7dae2042bd5445b3c4c2e8d80a41680fa41a2a92491e0af4d88b87e774e"
+status = "residue"
+cause = "mir::Ty: nom::Err<u32>"
+
+[[fn]]
+path = "rusticata-macros::combinator::bytes_to_u64"
+kappa = "2ba847b65c64ec3fa9de2d5abf9376ed5d58e4c3ff83f716a6231980d7fbfe1b"
+embedded = "5a6fbbc2dc9de8ae677fc967afd53a095086696a5607bcdc8abee2a098207f52"
+status = "translated"
+digest = "e7312b1fa2e30bcfe26dcd730ca0b1a58bf945d6635e756345020655bddc908e"
+
+[[fn]]
+path = "rusticata-macros::cond_else"
+kappa = "e2fb286ee11f432c4120f5f4231dc42bcc908504d0a1b10bd7cac8971e7d9501"
+embedded = "3d1723270f82f85b16442a2a52621504a63441cb8ee617218dfc0c8036bd5117"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "rusticata-macros::flat_take"
+kappa = "0890dba2dac859622822000d7219016ca9a4a102b3379025f46dcc3bab8cc12e"
+embedded = "1a463556ad622555b9bb7fe622cf54525892f34286e664df7d8da8f5429d916f"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "rusticata-macros::flat_takec"
+kappa = "5caf191fc40dbca6bb50bdc6ef5f72e2911f3a717584b68924a7a35428a52c0b"
+at = "C=u32, E=u32, F=u32, I=u32, O=u32"
+embedded = "72664a67ac5e20a6e8f3f5628eb2a5da5f724dac5600966b1ae90aab16e2e7f5"
+status = "residue"
+cause = "mir::Ty: nom::Err<u32>"
+
+[[fn]]
+path = "rusticata-macros::le_var_u64"
+kappa = "e38e4931a6b124af5af1aba509e65432f492401b5f24de1b1172346c34b11ff0"
+at = "E=u32"
+embedded = "8c2653aef0a09f476aa7a74a68fcdd465dacef25b22f0f8ac1db828eeb3b1333"
+status = "residue"
+cause = "mir::Ty: nom::Err<u32>"
+
+[[fn]]
+path = "rusticata-macros::parse_hex_to_u64"
+kappa = "fa237e99d547c6b4139374abbcae2b0ef75fdad3219feb3d1615d6c1ccb65b92"
+at = "S=u32"
+embedded = "c12715ea52893425512a4d4b7aabfc8bae1ede76c63b217542aef9b2f0a89d6f"
+status = "residue"
+cause = "mir::Ty: nom::error::Error<&[u8]>"
+
+[[fn]]
+path = "rusticata-macros::pure"
+kappa = "f4a9c09e156ef9c2897fca8db51622512b50516ce20886697ac65a9d72894f34"
+embedded = "405bd4ae6eab3235c520e3b50424fba949a482169583943604282bddbae8e4cb"
+status = "residue"
+cause = "mir::Ty: O"
+
+[[fn]]
+path = "rusticata-macros::upgrade_error"
+kappa = "8a2b521c4b9a18b803d97ab6d5184e630bf8346c983960045dfa242bb2a5a8b5"
+embedded = "4cfca1f3001d8b191b5811a32c1460ed91882e2bb0585ef7976ae811bd9f5dfd"
+status = "residue"
+cause = "mir::Ty: F"
+

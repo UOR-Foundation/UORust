@@ -1,0 +1,1262 @@
+[[fn]]
+path = "http::MAX_LEN"
+kappa = "aebf927712e9909959e682ae8d85e99359fb1c401b8b0d516416ac67589fc380"
+embedded = "a0b8b50fa331276429743446b9e831f5a817831913ac320d7f7edc3d2a55c490"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::MAX"
+
+[[fn]]
+path = "http::NONE"
+kappa = "f610c7145e52daf8efd633f1d3309f19441d042fb4e0e6077528fb846d2f78c8"
+embedded = "8dcc75618ed335464a421030b889b78de0bef1723b5910301cf85cecfb03e5ca"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u16>::MAX"
+
+[[fn]]
+path = "http::PATH_MAP"
+kappa = "270bbb779db90c94f95f6fd172521c98266b0870a4854be0f930623fafe3805f"
+embedded = "1048c83557387a3265cb265a8f12ad5dd42922b2d5b7bea3dcafeecec1927c37"
+status = "residue"
+cause = "mir::TerminatorKind::Call: uri::path::build_path_map: http's MIR stops at mir::Operand::Constant: the constant item uri::path::CLASS_INVALID"
+
+[[fn]]
+path = "http::QUERY_MAP"
+kappa = "a88d8dd29f52e9ca8eab545a65780e7bcccd6a826afedcea4d94d3fb2ebbfa93"
+embedded = "1bf181846c95be68ffc28a85fd71dce3785962194ff8b6b419a0aac9ab639603"
+status = "residue"
+cause = "mir::TerminatorKind::Call: uri::path::build_query_map: http's MIR stops at mir::Operand::Constant: the constant item uri::path::CLASS_INVALID"
+
+[[fn]]
+path = "http::SCHEME_CHARS"
+kappa = "b7cca49003c51a5a4b9f88334f0e739084076599d366a2231159e90c702c7655"
+embedded = "0cb543427c46e48c008ca32b811089a7615667b736bdcc05e46818bc0d882830"
+status = "translated"
+digest = "c2b3d19db198f1b6958fefcc8d421287f849514a128bc0ff330c266501519440"
+
+[[fn]]
+path = "http::URI_CHARS"
+kappa = "cb479ebf5fd379e22a4624bd2b24b587a3748d07def5d7c31b6c9c339d73b885"
+embedded = "30e3ca747a82eac8433277dea5f72d546bacaade5714e42cc520c48f642e16d7"
+status = "translated"
+digest = "83fa17a087359b260318abfe372f177667b830522c7677cde97a14ec9e924611"
+
+[[fn]]
+path = "http::authority::<impl at src/uri/authority.rs:12:10: 12:15>::fmt"
+kappa = "91b0cfe39ab0a9a493145513759621683fd3dd904a1a449404a588b8dedb1c18"
+embedded = "a6900cda7fea0aff18d2a06a9d535f0c33f50f8b4c5481279eb8d3ee417d710c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::authority::<impl at src/uri/authority.rs:12:17: 12:22>::clone"
+kappa = "9c3c0597841c49e6b9c3737e690952048db5a9ffa8da0bee832b94d7a80324d9"
+embedded = "bea1d447bbfaafc21c41c8d28c6bfa947926b64bcc1c2c7695c3f4891519bb8a"
+status = "residue"
+cause = "mir::Ty: uri::authority::AuthorityError"
+
+[[fn]]
+path = "http::authority::<impl at src/uri/authority.rs:12:30: 12:39>::eq"
+kappa = "c945e6fc51bf8ea728702d28425d03c1cbfc39c19ed6091b37da2a63768cacbb"
+embedded = "bb03fe47c3331e1c4e4b4b97aa7fbfde0e94b02b389079dbfa0e5a4206e6cfd8"
+status = "residue"
+cause = "mir::Ty: AuthorityError"
+
+[[fn]]
+path = "http::authority::<impl at src/uri/authority.rs:12:41: 12:43>::assert_fields_are_eq"
+kappa = "01034e91f27d6c70c3570d2c22554b91085162ae412c47720c97a0d75114417b"
+embedded = "397d1244cf0e5136430517fa098756b407252e6ca837c19ff4f9fb30818c603d"
+status = "residue"
+cause = "mir::Ty: AuthorityError"
+
+[[fn]]
+path = "http::authority::<impl at src/uri/authority.rs:247:1: 247:35>::eq"
+kappa = "fed17aa4311daf311ad48c166d416e0997e674ec8910faa9e71ecf41e752e87f"
+embedded = "34de14f84444311dc32f9e912405740782e8070072282650d6aec9d0523a0f89"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::<impl at src/uri/authority.rs:25:10: 25:15>::clone"
+kappa = "0893d199e4fab76378556b59e8ee29fd89e8cde72ffdaba2e4c918c47f57e24c"
+embedded = "6e36d6b5ac288dd79af54705f4af18ad3611ed4f19493ec5d38f1f5451b8f868"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::<impl at src/uri/authority.rs:305:1: 305:36>::partial_cmp"
+kappa = "ebeef0d009511cc7a94047fd6ce7d86aa4e74edf7967eb480d27372bc6303e6a"
+embedded = "d742fd5702abc79d6a1598c96b00652777ca117a43de6b9ebfe3acf456bb0bc0"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::as_ref"
+kappa = "2b847b5db7307b7947b7967d4bcffb28cce12f10b1d746139832fb544e2e620c"
+embedded = "b9e4aa8accc892b362ea063073e151211aee9771bcf999bc267f58150ea9cc69"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::as_str"
+kappa = "cc6b2ec7ab9664dfd2a3d9ad48c2c1a47923f2d6b1bb18c2d3376438b4c76775"
+embedded = "349907ee0c97ad0cf58e299551ad1ced2c9c37508cce66d262cb3fd0adcd3b7a"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::empty"
+kappa = "32e52d79bcd8f3c5c7b1b84846c2daa0b0f9bf0827f88a8d3a69199df49a9c7d"
+embedded = "62200d8cab3eae2bede0ac51d1392f9d87f2df89218b357e2511837f4a91a287"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::Authority::eq"
+kappa = "35b132bdf23bd0bb6ed314a1671db596bca9f761cd718c5e16029474d0545d30"
+embedded = "dcdf27f69da079999289b882c78ce1b19d5e66dc2aefbfd98b6f741c4aa59bf1"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::eq#2"
+kappa = "50d2c1e16cc730491abda473dc85096b254a2ea80ae9ca3bddea0ed962755747"
+embedded = "724e228439d69940b202d3d78cb93eac229f167c408f074367a1f1cd1916eefa"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::eq#3"
+kappa = "7bfa75de3b8088eb9e20426d319940d5456d2462c2a5b5a6f854a5331c07f39b"
+embedded = "9f3ed0e075e51a7f75bf4b42ced4d25dcdb3785de446dac9a805eccd553d0244"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::eq#4"
+kappa = "269922ab23cb12a73872c5953accfec28b99a768a258824ba27716997f41955a"
+embedded = "8f4c3db9a5674f3c4222df202f5f2d9d879fddcaca401e4b4220523910def1d8"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::fmt"
+kappa = "ae3e430fcbb11f0031c03c61bfe89d4f4117308ff7a040e9acc23a2eff933a83"
+embedded = "268fe6f91947399ab2e2e7113d8d210c69d3ed12bda96b45adda37664220b461"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::authority::Authority::fmt#2"
+kappa = "c1353ab86d439f387cac6b209875240f128205a541445e02d273f12b73f2ffba"
+embedded = "c1706f53364fe515dc22255e0961a51cd96410ef49b0d2fd3873da18bf6a4068"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::authority::Authority::from_maybe_shared"
+kappa = "8ce571029bce51b15c458515537660a02918043f083dded1a888eafddecd6b8c"
+at = "T=u32"
+embedded = "97103be878372778e2afc83539895570d1a6341c947131be9ce22875f54ae741"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::Authority::from_shared"
+kappa = "afd9502905707fb7719c0021dd3ebd192d5d3147c9741164efd0f29965617ef8"
+embedded = "71918fa6455e04658fa8d5680bfa8c5c9aca19ea03213c00e1f7815a78abb50d"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::Authority::from_static"
+kappa = "8cec0ab6a6ad1615c32d8908b146d18a8d9fe4cdc7c9226709f6d133a8b635f4"
+embedded = "ce6fe721e7e19f6c8ae9ecb19233f6696372e2c7c63b8dc0c7a9beb49a70188f"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::Authority::from_str"
+kappa = "47b2412423f1ee410e18c5222c71abbae1d7e44a209dad927747338db177931e"
+embedded = "4c1243952e8399a68737337f9c81606bbb18c272d81f20d811c5d8c306bab5a6"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::Authority::hash"
+kappa = "cda3006f116763aaf603b740f45a0d03367974ab8ca79dc0e124ce2678826b6d"
+at = "H=u32"
+embedded = "5e2a73e9f9a1c7ff4a83e372254ec2baa88849caef8afe77385d3a2a5227c4fa"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::host"
+kappa = "f3aff5cc81243881299fbed409636c48b04025c9f012339ef9bc8f469db3ecdb"
+embedded = "fa00b5c171a919cd2a383280d6b0a4879d35f159a39e0bff3324b10f8bcefadb"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::parse"
+kappa = "fc9ffd28a745338f74cc81cb76e3a2b29590062c3c06aa62e0068ad1ec5777da"
+embedded = "844c3d6d87433099fbf7991b49e7ae565b5fb9164dc7faf4bbe4d7bc84a553f8"
+status = "residue"
+cause = "mir::Ty: uri::InvalidUri"
+
+[[fn]]
+path = "http::authority::Authority::parse_non_empty"
+kappa = "e3cd2264a8571913d2b2b862ea78fb11446f110573da72b91c70289e48cd87a1"
+embedded = "5d9915a2f9343743c77e070b104ca150de47fc5c1b7d18bc9fd39a8b40ce5b82"
+status = "residue"
+cause = "mir::Ty: uri::InvalidUri"
+
+[[fn]]
+path = "http::authority::Authority::partial_cmp"
+kappa = "40b742f8d2dcc399e137b7d6e3ba566c8bffc77c3fae72181169602d2da35d59"
+embedded = "99df4e87b932c552acd10c012a2b3b3351ef1a26bec82237126e33be642c8f34"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::partial_cmp#2"
+kappa = "c0482852c69af8c87a1133593723ae98d511705798d85473c0fb14c757e84d4b"
+embedded = "b80d913485e81108d76ac43fc030384915e915ab8671a9415bc31d799c2426e2"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::partial_cmp#3"
+kappa = "703076a7e2a12fc35a96fd3d7f35145a9224ccd44140bf9480b7bd49e60939c8"
+embedded = "f0be09d4d31888222aa1562128258224a53b44d9f1ee762233591e0cb9a4a8e5"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::partial_cmp#4"
+kappa = "c1a66e7dde080a96528017739c9ce3da212c3e1ca1e287ae563d293b435a74dc"
+embedded = "3bd1aebb01e6d37fae61caec2a58ac28378a0182f37e777d472d1f1c868a10cc"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::port"
+kappa = "c43b4837b752ad66b1bef730437e62cbfe367307b911c02db733faed0e015547"
+embedded = "8b9a9445bb2185b82eedaf99dd4631eddac6f204067191cde3b2792d46136db5"
+status = "residue"
+cause = "mir::Ty: uri::port::Port<&str>"
+
+[[fn]]
+path = "http::authority::Authority::port_u16"
+kappa = "f05839b22cc590e09755eff948c8eec60551f61fa0bbd3a0f27053fdfa3ce916"
+embedded = "d89fb38ca778b6c9aa23c39c0d294a5854af72c5a04a4bb2d8764d27fec7a48d"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::Authority::try_from"
+kappa = "90f5df4b59847355bccc510d4ae113f3e5fbeecf6a40939eae61ae69fc5eae4e"
+embedded = "56a5f8b90040e7850bbcf10f84da275f7b4b6a6176c1ae454474b09f66133d7a"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::Authority::try_from#2"
+kappa = "01ec656fc5ddb7cf3f1f9101df410cced426d4fb010868252589c5d8aaa755d1"
+embedded = "2c167441fc40132eeaafc87cf8db48fb68f16d1f5daede48aa920ad94295f24f"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::Authority::try_from#3"
+kappa = "9b306404ccdd458676fe7cce102198cea3c7e401e58e7dd5da49d291f98aba7c"
+embedded = "a57e88d7458bbfc4a7c5f84cc30cd3cd91f2a6e39a735fc59f513b013e0263cf"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::Authority::try_from#4"
+kappa = "371f3fddec2e1a31a6d254d7e1d0c711913a07abaa2ebe8a4f2056667fd5b6e7"
+embedded = "461da2bec3de8d2d4590327b580fb35c9aef4f54df5939054bde0d9d7e214597"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::authority::String::eq"
+kappa = "7a7f8d25c828faabc03e8b678b127af4fbb68b5dff23994df9681ff72ca3914b"
+embedded = "9aa04ce2dce4e79bda4d9b3e5dae93b4ca8be4d8d4372bac2a2929d62e97ca76"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::String::partial_cmp"
+kappa = "5f42f00adc47caecd23ebcdaca2391fcc4788a3fedf08524e00bc9bab45ff91d"
+embedded = "3d8cc34143119b03bef230b82e65a61d058b813582981a884367117921b8df81"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::str::eq"
+kappa = "98761cdb8896d59389a1df26afdd134a81ed0a49d8652292e64a32c0460f2c92"
+embedded = "b2be6def4240b59c0f0c943abb80ffa0b21c29b546cda56a6913a4ec8c4be0cf"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::authority::str::partial_cmp"
+kappa = "37712905be0867b1f7a3bc61b29f3aa2f7c6dfa5d76a6a10664a47efaa8eeacf"
+embedded = "f368d3eaa30125f6143f69126c96b3fbc81931f6b7875a259ba9d1aa78d251d4"
+status = "residue"
+cause = "mir::Ty: Authority"
+
+[[fn]]
+path = "http::build_path_map"
+kappa = "ec62d8c40a3e0175d4a9e94a9801460c0f9cd13ee0529a2849a68ccc4a1c480a"
+embedded = "40ad83e4c2e63b4f5849151c4ff151c69e88c53af1bd8ed1d7a8eecefc9da852"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item uri::path::CLASS_INVALID"
+
+[[fn]]
+path = "http::build_query_map"
+kappa = "eafbbcaa6659e6b42c7ef84526342b37112bbbe349d0fea0be274f1d28cf0714"
+embedded = "7177e4b3d1b18d0512245c0d8c7a8ad1725eb511aa23bfbd2b6f6858d1e6498c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item uri::path::CLASS_INVALID"
+
+[[fn]]
+path = "http::builder::<impl at src/uri/builder.rs:10:10: 10:15>::fmt"
+kappa = "6abb14285684a876775eee462483c1636c66b69952eb111d006c315b00383f32"
+embedded = "e5ffabc23b142400ab7b222ce21f9ed12f2cc0e52a04cc8a8a2a0bfd88e1f8f1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::builder::Builder::authority"
+kappa = "2366cf0ca306a491951672f1ca10446c4e471bfdf23781fd25722a9bd7f32ef3"
+embedded = "7ba92d3a1c1bd7d5024202a8a975f823bfb248201f6e3028af1124f398056ac1"
+status = "residue"
+cause = "mir::Ty: uri::builder::Builder"
+
+[[fn]]
+path = "http::builder::Builder::build"
+kappa = "12b2b1e01c3d401d3b146d7df0798197279d2ac3632eca5e01b5dc511e1b5294"
+embedded = "564098724cb4686e1a1918b3788b02cbd1dd795ff78a50839da3869b66172653"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::builder::Builder::default"
+kappa = "6285749a0ea256fd883ecbdc1de8e021d1f340b418fbb3ae57b4e99d70913c3d"
+embedded = "939eb1b1dc0f88dc43c5bae23ac1154b5c59ab60a0a7bfcfb8763ffeb42a5793"
+status = "residue"
+cause = "mir::Ty: uri::builder::Builder"
+
+[[fn]]
+path = "http::builder::Builder::from"
+kappa = "1a6f55c55df56d57f48dc59d566306b9758e6565f3c43dbc82f5a8c821f0a528"
+embedded = "56040dcbc11d9eaf05c103d570b1b3103aee775b517c939e836c5c8549845c8a"
+status = "residue"
+cause = "mir::Ty: uri::builder::Builder"
+
+[[fn]]
+path = "http::builder::Builder::map"
+kappa = "a1d67487e778844e862c7cb810617f798268ac19002ccb35f82fff3c5057cbfa"
+at = "F=u32"
+embedded = "7e0fd27350606340e632f8389bfa9ce4c5bbc7d1b6e65a1966605f5d66f2a751"
+status = "residue"
+cause = "mir::Ty: uri::builder::Builder"
+
+[[fn]]
+path = "http::builder::Builder::new"
+kappa = "5d42a5677078c13e736e9057fc507dcd750b14b5e8ddfb2457cb8feec15fe192"
+embedded = "6059443c66eeae58d03e4ccddf6b5c40c211f97b990b5986defcdff1b70d9d3c"
+status = "residue"
+cause = "mir::Ty: uri::builder::Builder"
+
+[[fn]]
+path = "http::builder::Builder::path_and_query"
+kappa = "1b61a9a3facdfedf6860342ea9d88f19273a3cecfef76cd420e5eef21e337f84"
+embedded = "ccc2c33276ca5a4d996d1b6a9204ce98f6e194dd20f5f55e3363033bf8e9232b"
+status = "residue"
+cause = "mir::Ty: uri::builder::Builder"
+
+[[fn]]
+path = "http::builder::Builder::scheme"
+kappa = "10679584807dc1b061204c0a6618383883307dc7fbb5577bf1c6e09160ae97b7"
+embedded = "fff172c729eaf30e20b68abe06745eeca8d6794845afd5f819703baedee49583"
+status = "residue"
+cause = "mir::Ty: uri::builder::Builder"
+
+[[fn]]
+path = "http::create_authority"
+kappa = "4e98120d1ac663ccbd993468a18638a6c41a16c84a5518504abed948efd2c768"
+at = "B=u32, F=u32"
+embedded = "3d5a80a4c7d9352e88b049baf7ea137b0f97af8a3ff2334e639b6245d923e184"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::host"
+kappa = "a5dbd09538a402042eb4693082e9dd1f50d34efa8a73f6b46a5c8087247c47b3"
+embedded = "d594a16edb166d704a3cdf67ff785f3d3b64991d6639816d6ecd4e226d02ad09"
+status = "residue"
+cause = "mir::Ty: std::str::RSplit<'_, char>"
+
+[[fn]]
+path = "http::parse_full"
+kappa = "dd091bbc340f988cbd589b321ec5982a3c3d899e8b841de253eb2b68104a3801"
+embedded = "d27b7e5dc470e19272898b1ff3562e40ea3e36e9561fba09445ae63da902673e"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::port::Port::as_ref"
+kappa = "dcb8bf961a910e015560dc2f1715b3c39d68796cb0b39090d87e779f5c6cfa8b"
+at = "T=u32"
+embedded = "cc5860a1ef4a9be9a22bfd3e7f7ca96087fd53a724527cc941357a3fd7c97d6f"
+status = "residue"
+cause = "mir::Ty: Port<u32>"
+
+[[fn]]
+path = "http::port::Port::as_str"
+kappa = "d2367ef98f06827016a99fff9a8445c6b0f010e2dfa32ce3e8caa79bd532eff1"
+at = "T=u32"
+embedded = "482a7d198557cd727a4532ee28d4b3b088cc1b1f128f4b8c2d09349cd00b1090"
+status = "residue"
+cause = "mir::Ty: Port<u32>"
+
+[[fn]]
+path = "http::port::Port::as_u16"
+kappa = "c86da312885842cce138303f20b143d1dc4f7e1e7b5fee98af3c42cfa68b0b3a"
+embedded = "cc896f1d6c5d1f394938b9271a4a8ef069eb6ff6ca0a8adccc80ca203872d702"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "http::port::Port::eq"
+kappa = "21237c862d97cbbc146e655d9c1c98a268b8c2eb4c24be087279f6136d28affa"
+embedded = "45dca051f41bef8cb374969ebe77d4ff3863ed91a6748d9a7169658d07782487"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "http::port::Port::eq#2"
+kappa = "2a33b23ee7365f1240287de7ce2e5efb00f0e5013954b3299b9a4d2d9f5771ad"
+embedded = "1940dffc41e05b3aef85ba775c730e1039f69c61c24c8df4513355851d4263d9"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "http::port::Port::fmt"
+kappa = "75f0b41607755923e33ec1f139658228f154e1d321738a551d7be9a56998dba9"
+embedded = "c53a51e8828b0a8529d429501830cc832eb2a805f9529ba8490f06bd306ff0ec"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::port::Port::fmt#2"
+kappa = "3ff8a20217fc916647edf2d6e0361eca7093607fc94691602e8809b7187a0630"
+embedded = "de6e2619a21e3fbadcaffa8d9cdcd82289e14be28cfe5a13c72a8fadb95a5202"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::port::Port::from_str"
+kappa = "159fde5b13cf18b07c44b40c0e6099534228cfbdc1e36955ad39d9a676da6f8d"
+at = "T=u32"
+embedded = "37dfd6025de92bc9e60bd2cef86fdb2051564afaae7a0cb4f0ea670d3d84ace9"
+status = "residue"
+cause = "mir::Ty: uri::port::Port<u32>"
+
+[[fn]]
+path = "http::port::u16::eq"
+kappa = "38849076a3f6612b646ac7b63c389b3798f95653baa66963c8ab8917ab4bdfcb"
+embedded = "881df6f5165a497cd0aef030230d3b980d8d8661c48cd0d2876565a34c8b000d"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "http::port::u16::from"
+kappa = "cd80cdc135e16a763172089fc6ee09b8e792f71554e5affbb2e1b6c3fbf18b0d"
+at = "T=u32"
+embedded = "44431eba9fe02dde1d5b5ef8a9f96aadfeccca8041530d733e98c180a35ce319"
+status = "residue"
+cause = "mir::Ty: Port<u32>"
+
+[[fn]]
+path = "http::scan_path_and_query"
+kappa = "579d692d6c5674dfd721c39118efc40326e6f5b42f2dd10f363d4d6b948a29a8"
+embedded = "bdeebcc56bf0d78dd7bd13427f8224c23c36391f6a8ad78a7e650af0332d3f21"
+status = "residue"
+cause = "mir::Ty: uri::path::Scanned"
+
+[[fn]]
+path = "http::scheme::<impl at src/uri/scheme.rs:12:10: 12:15>::clone"
+kappa = "281b195efd42fece11777f141d526653bce49d5c653fde81771a18d693d1a175"
+embedded = "ee148e0e9fec9a90a54102f076d287c68a395b623ac534ddc748267a3e99f5f6"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::scheme::<impl at src/uri/scheme.rs:17:10: 17:15>::clone"
+kappa = "16264c059774d04e1895b97c8312592ad6f7cf8fb95760dc89891b4f4623eac9"
+at = "T=u32"
+embedded = "bd056038526d170e525ce7ac60c00545b5764d7f2db1c44e26d0bcea4d9d22ad"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme2<u32>"
+
+[[fn]]
+path = "http::scheme::<impl at src/uri/scheme.rs:17:17: 17:22>::fmt"
+kappa = "816ff3ad0968b1371593651f50ad42df91471007fc9f945df5efd4778e22b841"
+at = "T=u32"
+embedded = "2fdf31b16bba10e8016fffce8562a57084359c6f12dd50e9bf6db0b57fea28fb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::scheme::<impl at src/uri/scheme.rs:24:16: 24:21>::clone"
+kappa = "43cdd844eb9dde458fcfc02e63ddb782d555550814b552011323949b16d76b48"
+embedded = "85b7429ecdcc3899f341f90aa3f7ab1f39f9d93d218cdac0553e2e1563d555cb"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Protocol"
+
+[[fn]]
+path = "http::scheme::<impl at src/uri/scheme.rs:24:23: 24:28>::fmt"
+kappa = "b59e732bbc8332d0a90778d7a55d48f2c3ce3acaaf884f0da31fed42230f5a3e"
+embedded = "1b3bb82eaf8204b3aae35c7c97d556f7aaf401b72c75aa7e82f2b77c2abcef5d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::scheme::Protocol::len"
+kappa = "27ebe2b60073d25286f44e31775ad17ce4c0b12cfdac1d0c196f9ecd9f40adf1"
+embedded = "81b1aa43f60794b7e9ae7c5055c147609c6da4c5be57046ac14ae2d19b70d9e0"
+status = "residue"
+cause = "mir::Ty: Protocol"
+
+[[fn]]
+path = "http::scheme::Scheme2::from"
+kappa = "aa446a5f2d65987288da50edbef4c6cf0687bb7dd17638a15b8e593bfafd9394"
+at = "T=u32"
+embedded = "c74b1b8426532da52a6e7754a68b817f61b0ce4d697207366c794205afaf33d2"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme2<u32>"
+
+[[fn]]
+path = "http::scheme::Scheme2::is_none"
+kappa = "198bb56e8ce6842fae4f590da133cb2f71c6e8f5d685e5bbcf6d2f1dfe23888e"
+embedded = "ceeacb2168bd0518ea89bc7dd156396a8643b9dc00d2312ca742215f8f195f58"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "http::scheme::Scheme2::parse"
+kappa = "8ebdd5dbae33eb851bac67cf1b070dac51435dee0c4f7624d1c788e2d90a6789"
+embedded = "40ac080e8f9bd80e2acddef4f9821fc801cee3343c0b4e34d8037ea7e00709dc"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme2<usize>"
+
+[[fn]]
+path = "http::scheme::Scheme2::parse_exact"
+kappa = "6003c02dd6b65d4339b59d5433868b56a11aeb6fa197a9f9e57da94b410ece72"
+embedded = "ffb8b3729a9c061691f06e1aee0fcd1d73b6a97a2309c4e5ea58f9bffbd950ca"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme2<()>"
+
+[[fn]]
+path = "http::scheme::Scheme::HTTP"
+kappa = "82e91bd26a9d8a6cd8e4d51de7f8a915931408226b368b3568516c4cbd34a6d1"
+embedded = "1cfce116c528d748a4b904447b387c8fd50b0f364acad3788dc3cc2a40ee06c0"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::HTTPS"
+kappa = "1df6fad34f8f506a864846f5bb59e71af4dfddfa314cfd364cfd2ee5a5b5e0ab"
+embedded = "0e407243d1a1545c58d2b2eefe716b1345abf159230e53366acd3e7fd488af94"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::as_ref"
+kappa = "847c0ef324e97abbe11cba353e7c33bbc004a2e220634976616abafd9f4c0ed0"
+embedded = "65b6d782c4780dfc00dcae8378e41b4e56cb568b815159c9a0e3cb846e6a8c8b"
+status = "residue"
+cause = "mir::Ty: Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::as_str"
+kappa = "9f0144e4ec90ff685feb8209d49bd80fb1d1406b0c42e9a1366f73a2d19305a9"
+embedded = "d203e47361e93fd23327e428a6f4d408ed3904031cbd96aca1934454322b6b80"
+status = "residue"
+cause = "mir::Ty: Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::empty"
+kappa = "215364741b54e37e34277605188dbe515e659fb31e3227f97448979cbcf21561"
+embedded = "d8bfbc87ae9ca74e47431f33cfc825698021540dbfda7d9d80e67485ea502d5c"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::eq"
+kappa = "406b50956cb1ed35aa8a21de51ec37764bd13914cbebf4cdcbe8be5a073735d1"
+embedded = "9620de71f5e1eec416f1d7830bf995c1f59fdf8763ac625444cfb6a1ff6613a9"
+status = "residue"
+cause = "mir::Ty: Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::eq#2"
+kappa = "6d3240443aa7efc8424de217e61df09a2659cbd871a98a0a2bdbc19951825fba"
+embedded = "8cf71e7226e420f84dcfc08226bbaaf782515168d9cbac9bc1c134fe52eee86e"
+status = "residue"
+cause = "mir::Ty: Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::fmt"
+kappa = "8ac635daa98a7d998c1638edae199d5a78900da3d90f651a96907fccf1a08f18"
+embedded = "09a2424e50be11ed065a73f8dfbf1f68050b786c4a20409ba4a0f63e5c13e8c9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::scheme::Scheme::fmt#2"
+kappa = "04082a79ac1cb11d790b3aa4b45bb699ca3b24bd4005f6079c468bf5583ef077"
+embedded = "0d3a23d9b68b57220ba36c84d159668a35369482e90a511c18c8aff07f03bbc2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::scheme::Scheme::from"
+kappa = "a3537927abb0c175518f60db117da35a848c5c364dde072e427449912f59be37"
+embedded = "56d1493926550c3418bf282be6398061bab00b7ca10240420f7c3819fbec88cf"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::from_str"
+kappa = "5e119286fa6acd3c76cc0b023fef123c35d51aa9dcb62a6887a1c4e8750d9679"
+embedded = "910774007ecc4d57ee596657f2075f7c07bbe0ffed5f334b15c326a5d18c0d0f"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::hash"
+kappa = "813cf91eb5a4caa5fad1a05c6191fdd922323cf0f50d901e49307d7ac49ded33"
+at = "H=u32"
+embedded = "ea252ebf259adfc7664286242868aaa5408e780df60abc823fcd59875d531003"
+status = "residue"
+cause = "mir::Ty: Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::try_from"
+kappa = "b7e8c792149ac435c4480a954a1720f4f3c3af874e03578155da859225b36414"
+embedded = "f80aaa6d505464e2a28e0e195f2e6d81640abdb34dc9301b531dc618eca6b074"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::scheme::Scheme::try_from#2"
+kappa = "ab7fc922e7d1660e725f76a1299e97d8e7b7c12632ad2e6541ce187cc5ffaede"
+embedded = "027c7e1bc04c49618cf31d0ed66cbfdd6f73e68d289d71bed61936d8afa0d1e6"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::scheme::str::eq"
+kappa = "12e5568a88f4ce7d2201b8eec47d3b4ad3aee3c6444a1cb464cde6b1ef1d098d"
+embedded = "98a7dcfc0fcc315ccac34486af6ac59543972ea5cef4464d1b48caf4f60a3707"
+status = "residue"
+cause = "mir::Ty: Scheme"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:1012:1: 1012:29>::eq"
+kappa = "bef4416be0abb31b25f234fb18bb71b31e1a748c485aed5f4dcde6b1b4153213"
+embedded = "721fbc4b5047bbf27487660130e262de950ace6074c56df8b942836a51d49ddb"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:105:10: 105:15>::fmt"
+kappa = "2c5cb27dea58e2323903f0b1265b95c532d24372fb83c3815ba6101a9c32ae49"
+embedded = "cabd75293f6afb5cc90c36d087ee6ce759d578b0673fa488ccb6741635fb4da7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:105:17: 105:24>::default"
+kappa = "5854929789bdd5947c0bb8ba250d0150c03a3fb618c44237ba1f201a7bf4d780"
+embedded = "eb7091e798c3492962fc53f76da44292996d8ae168a5e64c870ab07b684cb959"
+status = "residue"
+cause = "mir::Ty: uri::Parts"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:121:10: 121:15>::fmt"
+kappa = "5f2092fc67ee2852c696e1ce8545b281211568add437b9fe4b290a2d1c2ca32f"
+embedded = "0ebd2bdfa07713ed58d36a4a22b13aa551a346e187fc50d7d4a7f3e4ccb6a089"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:125:10: 125:15>::fmt"
+kappa = "e28ae22f8f3d9fbbc3f9796903d2ceaf6a1e3227189a72a6e5cb794eb5c9cafb"
+embedded = "92888da615e3f21ae9b4dae530ef5df92c65af6a9615a277971219766259a413"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:128:10: 128:15>::fmt"
+kappa = "302210c5879ac4d2d32268d0f280cf05209c51c609d4548d4c40e50002eae403"
+embedded = "a29aef31db47de8c2f28c8c0a92cb3d9f9b52bf0a3260941be09a9e120cf4c49"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:128:17: 128:19>::assert_fields_are_eq"
+kappa = "1badc3f503a8994ae0a31739a8a8cc5c84fa0a6e6bf5c68c229fcd48bb78d63d"
+embedded = "50949c52a35b9f5e8f16a4c226043061b35003422d14408b3037d7bf0c15d564"
+status = "residue"
+cause = "mir::Ty: uri::ErrorKind"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:128:21: 128:30>::eq"
+kappa = "fefc18383cda986772f617bbea47a38fa826e2629c3aa6a55d58ffe944eb25a6"
+embedded = "a92ad7209bcb6baa61f4fcb195b10817d7dd050e1c58b126f487dcb7863aac25"
+status = "residue"
+cause = "mir::Ty: uri::ErrorKind"
+
+[[fn]]
+path = "http::uri::<impl at src/uri/mod.rs:95:10: 95:15>::clone"
+kappa = "07c0546a0f99a0d3f95676ebc341912ea68a3cc0ce7cab3177f3c8fda3377abe"
+embedded = "2ad54c2ed3cfe570a640904b61e60353436a90e2716f87ae43a6e86d01cc0cad"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::InvalidUri::fmt"
+kappa = "718589139638401d3130e6eadcb4e57c8d24342ffb31ec8e7d8ce49e5624a26c"
+embedded = "7a1ea872afcb804f2ef3f9b7876e4345943a4b4ce6e37b41c1591963e6684a3b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::InvalidUri::from"
+kappa = "9830f5c1067c7373ae3d6b9633b6658867854d58e1fe6f91c216bc12a1ed2a39"
+embedded = "5ca0e466f90050c3591adfe10bb428466517afd1be119ccfec4d95e0f6460afc"
+status = "residue"
+cause = "mir::Ty: uri::InvalidUri"
+
+[[fn]]
+path = "http::uri::InvalidUri::is_empty"
+kappa = "3572c549873c0a1b70b92d441a88c671f972e8d03d85ad5385b1fec6a595f969"
+embedded = "8758aece49d9aaac9ba4be115dde2ed017f189021dfb05fe1da3930a6ed30f53"
+status = "residue"
+cause = "mir::Ty: InvalidUri"
+
+[[fn]]
+path = "http::uri::InvalidUri::s"
+kappa = "6fc56bf28f61aa8ee30042ea83f725b5a7b1e1a97e663c9b0dfd2f8404e09e78"
+embedded = "d7ee1a095fe6318fd6b9232916a6adad19991aaf30c20b6c0172423fd017f9fa"
+status = "residue"
+cause = "mir::Ty: InvalidUri"
+
+[[fn]]
+path = "http::uri::InvalidUriParts::fmt"
+kappa = "461498e746640352a09612cd2f3b1270705f55091a2528ee3ab7e2fba2ebcecf"
+embedded = "61822561be25420c4f3acd8511a2b84d11d3bf35bded88b0052239d9f6edc5e2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::InvalidUriParts::from"
+kappa = "33c74f8260415852c39c41b35ee845d115777c8d6a28fc35a782798c0f0f55ee"
+embedded = "77c1311bcee53b9217a62d3dfb7409febf8e1a1888aa051b9b5ddbe570481b5f"
+status = "residue"
+cause = "mir::Ty: uri::InvalidUriParts"
+
+[[fn]]
+path = "http::uri::Parts::from"
+kappa = "626b13b39defbfc38c22ec4af9f6be8d1012862707d67e7b9519e0c5e3a99b07"
+embedded = "37acacd480bd72718c40588fba4bd7dc735fbf65bfbbc9756f0c76abfc99bbd8"
+status = "residue"
+cause = "mir::Ty: uri::Parts"
+
+[[fn]]
+path = "http::uri::Uri::authority"
+kappa = "a28f59c4907b191d5fee5d2f21c9f55cc7d9c0f5adcb4c4f61da9819b054f6f0"
+embedded = "966d146d7e7e0534cf3702c2f956b8ae594820fce37ee0899eacba5682b676dc"
+status = "residue"
+cause = "mir::Ty: uri::authority::Authority"
+
+[[fn]]
+path = "http::uri::Uri::builder"
+kappa = "3474c5ea13ce6eecef5386afeda5feefd035e2725da1c93c81e4de034c9b44d9"
+embedded = "bd7ba9cc2659757b20a8a5fc3782a2714331dc37e396869b09e0b7bf5f96612d"
+status = "residue"
+cause = "mir::Ty: uri::builder::Builder"
+
+[[fn]]
+path = "http::uri::Uri::default"
+kappa = "0796746b69656e476a2d487b5816059264bed369de1d505fdc2f4dad68a9b1b0"
+embedded = "b8458283ad472df67bd386d02053e8a6fa210721e1ece32a17dccb8f9ae85aee"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::eq"
+kappa = "9aae469be468216176b807ebe01a4e62cf3f33dea44bd6b5c36d97cdf9ebaf0a"
+embedded = "4ca74940858a70d4f496e8ecd19cc770035c2f344c63c5e4c83c289e99aabeab"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::eq#2"
+kappa = "a7ee354914332f604a455b3b1377b1a64f6f5b450f546447d0255ca4ecf27818"
+embedded = "9f51ebd34bdbb45520bd9c02e43d77d406119f2b0d9eaddc15f241935678a0f0"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::eq#3"
+kappa = "4a62a602ae38ca87989a7cbba6f22b7be004abece0a0d13ed77eaef1c9a05738"
+embedded = "4bf2c76b443f13e7b1323291ac972e49c033633c94df7860b6acd6c41f8df28f"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::fmt"
+kappa = "2676fc7514a49b6e5d2d22eb5d24b46176966ad1c56fe781d99c487447a69170"
+embedded = "4a903d4a2503a0acfcc6a5b6691b35c8ab73388a7c00e5f584c371d839282f0d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::Uri::fmt#2"
+kappa = "cde2ccd371fd9e6ed45792ece309264e2a44e58a525c62b7e2da80c44e82f069"
+embedded = "6aecf194c10bf53ba51cd66c6927c19f72882f967ed00808207bcf326db7b38a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::Uri::from"
+kappa = "b3b46215e6c50ce4692623631c94bd927f6189fbf942801ba43612996c091a05"
+embedded = "6bf27dd7f5887eaeab0cdc3dc8727d23c7dfcb2ee0e77306aca149ac53eb88f7"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::from#2"
+kappa = "2bee57cf467b3df86044aeac5d266643c442b2da313193cbc38ccfa9b0c7ef1d"
+embedded = "a11920cfd88ff669fa48487c1511e26fc94a2f317b4d1809ce03a39f1d8e7894"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::from_maybe_shared"
+kappa = "8f0d1706a6765429610f114ab9c65067eb41f708bd14e2b4f3648378615505c7"
+at = "T=u32"
+embedded = "2d418dbe34cbe08ac9691c0a25e56e9e81649dddb2f86109bf17bf98f47841ca"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::from_parts"
+kappa = "5bba4f53d7a8fd7445bd4987d8ff3dc44b0f3531fae6a802add6d99a634f8580"
+embedded = "e31125b8d0914d6a229067e24ce44719de6d58cc0a194c0fc403442e0abd0d68"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::from_shared"
+kappa = "de94d272a304839517c02d22a5ddd78fb66117a73c935d1d003e43e272c2753a"
+embedded = "00b2caa1fd16353cad72ae5b5191a520089ea0123976e391fbc0ed8221425d7f"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::from_static"
+kappa = "40ee70c868fea59d1637303df80e25c7f629373b1ce44d17e2cc84431c0a6009"
+embedded = "4e8bafb311fb5f68ee0e43b20f692346477e913929a894b40e92cfffbbd6dd83"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::from_str"
+kappa = "745f99c07e36c6cfaecbaef66880a09983b722c3fdb7979914ac88c9f37f9d52"
+embedded = "d60851b6a15f4f9dacf73654d8308efd47821e91530e41c01a07d4aab09b7b4b"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::has_path"
+kappa = "7aaf822fa638e4869061cff9e18553424925a899f4c4deee6caba3c14eb14579"
+embedded = "4b257bfa5b8381b9b84d7e46e036d576a7658727ac6857abd3720cdb9815d7d3"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::hash"
+kappa = "ea27f763b8f5e080d9e198e28c9d41f618e506c42058fb7f20fc60e0c91066fd"
+at = "H=u32"
+embedded = "1551965cc87234cee7de6185b03f012132e19f2bd5019f451e92d36e02ee9b2d"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::host"
+kappa = "05609e22bba04419295eefde8772f14a46124850a73ecbc930b8708d520719ba"
+embedded = "1643b8b8d7304908137681f87d02b48f6462744aaae9b549154dee10276f064c"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::into_parts"
+kappa = "87d6d4200a32363670c25e1c6775c8668692c8479d34370feb61d052397cb55a"
+embedded = "eda85fd0a998e6865f3656432ed04932496fd6054cfea9260ad82e083c10eaad"
+status = "residue"
+cause = "mir::Ty: uri::Parts"
+
+[[fn]]
+path = "http::uri::Uri::path"
+kappa = "ae12e96f79817812fb07d75f1382cd653a15c15c6d457ea66f757d4f6d25f3d8"
+embedded = "3e48829347140df75323c2932d4f79f23a2edd4c2c07e181b153360b4bc1c480"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::path_and_query"
+kappa = "b3cfc786a826397e964e8e1b4fdfe6c2c3d9ad0f73d998bee7e3d17d968d196f"
+embedded = "2af4086f3f69b4cf7291d8f5e3f5cbc0ebcf9295ef32134e118e1b0b92e13b3c"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::Uri::port"
+kappa = "c631a59defeab5f96523ba0694b802995d1428c888a7c0c9eb0ee68f79f791b3"
+embedded = "6abc3a748fde59438370169a93c95ad663b98314e79d02422387d252bb54e7ba"
+status = "residue"
+cause = "mir::Ty: uri::port::Port<&str>"
+
+[[fn]]
+path = "http::uri::Uri::port_u16"
+kappa = "75fa6c8c0df39991eb4b03d393e140c23b5642374cfc955e30d8cd18ce98660d"
+embedded = "cee9b55e240b08210ae40f0accac77e3fa2455f0263c8ec0d40331a12303270a"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::query"
+kappa = "76b02e7bf34c77ad45601190932afe8c49ca1ea76af2b9c107f19ef52b183015"
+embedded = "07f2168eb2b5569d4cef5390492d09470160ada105eec1c8d607c4a906b14185"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::scheme"
+kappa = "95312fb7282a950ba5318964ff266c5e60fb9f9b86cc6248dfcd156fa5ccd586"
+embedded = "e2da4d9dfa104e77ed1693e868822721c83ce61e5237f855eb7bcae8815a655a"
+status = "residue"
+cause = "mir::Ty: uri::scheme::Scheme"
+
+[[fn]]
+path = "http::uri::Uri::scheme_str"
+kappa = "d8ac05910eb363429efcaffcec6d3b18ba0e95e675cd55f5e81e9aef1ca65ecb"
+embedded = "dd22b58cdf41e314f634dcaba7d38021875529c285ac6926a3b5f1f3823e316b"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::try_from"
+kappa = "c359425655b4d3803568674ea9b5aa16817b80d56e9941c832748409c8153f6e"
+embedded = "9af39478ac5b3d848250f2f2a2c3bbc3c802d4ae40bedb4b9574d24bbb7625a4"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::try_from#2"
+kappa = "53008e2b07dc91d2a9296ec1c79d3f52fb1ef589fbdd8ef68eda1890c3bb41f6"
+embedded = "469e5bd1aca79f82ec2f2f5fe09855a7c3a14235f9b1cdd6b43a20d15c9347a1"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::try_from#3"
+kappa = "6e2157b2201a9d248c1a81f161c8b3d8dc9e9b2c454664242448dbe3ace92192"
+embedded = "b6f363bac37f131d68bca5474dadead9dd8170bcd149b7ba3aca545bfb0663ee"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::try_from#4"
+kappa = "7f42d356fe44814a46635d08bbd123d8401170e29bbdd716781dc18dba1f8dca"
+embedded = "40d504016264def931f48fbe68962b3e99f97e110b33be47479099399dcb907e"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::try_from#5"
+kappa = "fffa7b16aa380a3a0a5628399350631b1317c286a0072e88630094f01ccda20d"
+embedded = "7ece5789edd8da836dcb1f2fd15579bb2e0a1732683e41394f9496b60d839f81"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::try_from#6"
+kappa = "8c398e3da68632381e0a64d586969b95c3be238fd7d45be387eb4a3b80390edf"
+embedded = "8c49b242eea4f4ae90fa9d6338d9d6e7e7197bf1a3d8f0fc48cd9ab060b9dc3a"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::Uri::try_from#7"
+kappa = "104cb3f36ff0d1d2aa0a7d428c25f8db3e0abf15b7ee700dda552a255769901b"
+embedded = "7825e7fe2e3bdba233c8034df64fe093ff7e203f39063e4962e03c6ceab0e60c"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::uri::path::<impl at src/uri/path.rs:11:10: 11:15>::clone"
+kappa = "486c40998b5843fb0d41e0273dcb77ded80279f8bc2afd102e64ed10fcbd8869"
+embedded = "19bcf3c1656a352f5bd52061f1121609f038423d908da4dfc3ac2591ca386dc5"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::<impl at src/uri/path.rs:317:1: 317:38>::eq"
+kappa = "30503f80eecaa1c71a5c06fc82285df367d955c10f0c4bbd67027d2441c91ee9"
+embedded = "d0fa1384163c7d10b69dbaf30e37661440ad9b241451ef23f1c3046468509d83"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::<impl at src/uri/path.rs:380:1: 380:39>::partial_cmp"
+kappa = "167420d95a814857f5729a7f92ec76c56fe96634343b50b56c867e4b26a5a145"
+embedded = "5e37846cb7d6bad00cb765d8bdc19e6fb6e8384e2dcb7302bbf14571c6c2130b"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::as_str"
+kappa = "d6877e1176236794c86f086dc5358f7ae926c388d3e70b26c9ceaca1d4294029"
+embedded = "3f3c808bc3f4ac9458f4ee6bcdf8ae148f7a8f3f748a4c2a915ad7b568d46e05"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::empty"
+kappa = "eb3c8551b3c5fc6b62d61ccfc4625e7a0baaa2337efaaff2e984e488686bff19"
+embedded = "d203fbb73fb23f9c81d7d34b5cd7c11fa9d5734abc7d4b882fa8a05ae3a5e8b0"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::eq"
+kappa = "b26a7f68cfc199e6bfd72e2b6e1995ba19de4cf3b8062f0f028612cb7e943742"
+embedded = "3920844b906f183a435892d9b1c1affb67298f0a36f2b2bd6ad580d10329a3b8"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::eq#2"
+kappa = "8a7bf98fde561905f4a05af95ffaea7ca398eeef6ebe5ec6ab4a4235f409adeb"
+embedded = "5116970a6fc8553e866076f2e15d7850d99b292c15b95d7a9a58a8f26269fe94"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::eq#3"
+kappa = "7018b019b5be162d66dd060fc9747df19271657391ea4e4e6b3d5a9ff5688548"
+embedded = "5f97d904bac8f629de3eaa911fe4035dbcf0737f2cef8dce55dbf67d5f9ed93d"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::eq#4"
+kappa = "bc65669204ead7d562314e9aa08485429969194e17f4881b4107f91aded6f614"
+embedded = "f5134e50546ed2f2596855d653b924ef9044f554303553056529f6c2e7eab3ea"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::fmt"
+kappa = "18eb1bf890d44abe99bb60d3f0b1c51743d042ff87a28aed848e4ce2b8a352a0"
+embedded = "d2a9e621a28075aa73f22a2b1f3419a3fb093ab36a2df59c102e43093a4446b2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::fmt#2"
+kappa = "670858c01d4be396da44862f2d25e447f383e0a1a0054c61182d2d5622d7339a"
+embedded = "e7ef0377401294300a6fbc7ee2f784901bd42a8be1c616ed2f509a75c649a6fd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::from_maybe_shared"
+kappa = "e59eb7de35cbd8d9dab2c190f15663909d65c5f9d60edf3da856774728a384f2"
+at = "T=u32"
+embedded = "b7c1262c4551a2864074f3af33d7160772f227084b8c7a6fd4c0059ebc70769b"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::from_shared"
+kappa = "4e85974835f63ce6789bf43e0f2b6184a9f2fd0b4a9a8e7a2874823fa345d114"
+embedded = "4db47f125aa45ecba3942269157d2ec6e4cb557bd2369e5cf239858bd55b8e8f"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::from_static"
+kappa = "9318f9f66dbf2949587faf6f0e511fc8309c6015e4e5dfdeb25e48a11c2f5ca3"
+embedded = "5b1fa812d2640a731a58b99a2a583007ed9ddbb17d6d7521781e59fc3fb4eb2f"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::from_str"
+kappa = "48b680c69e10efec5ecbe404151c78d40cb6559674260d45bbd1c52d12b9f6df"
+embedded = "4ccd352c1cc201ad30b98d00b243ed3af1b3b4ea1980a43ad8efc2e002f7ec60"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::hash"
+kappa = "1698e2b4fab5affef18035d71de90ac2f0d9cdad342b4f46d6fb4cc1ed76b6d9"
+at = "H=u32"
+embedded = "1838225c64eb3872ebe07bd55e4d99ec6d675911d09eea2f50663fa51efb4878"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::partial_cmp"
+kappa = "b2e9f09fc84dc4c240480c425c61f8754380e856b117c40da58b43d9ed5667c7"
+embedded = "ffc3fdc1f1176c71eb6466c4c397e87575217cbbd0b78e57465f332895b29db2"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::partial_cmp#2"
+kappa = "dbe8d2cdd134966924405b5c233ac8f52ec956bde909384c9a121352d6df0123"
+embedded = "36cc63d4c602cad34aa9982c7fcf3fbea166b48f372c34eb08a7f5f0cf37b57c"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::partial_cmp#3"
+kappa = "fc9d79b786ea808ceef257c93b8d1d8ec866e753416ad848d6ab17e27dfe6837"
+embedded = "85a9ee5dd9d49c2b7930726f3766a1a1f65e04957060cf246326bdca81c956e2"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::partial_cmp#4"
+kappa = "b72b86b6297925d8344e2e2691508e1bb2e0f18e789a1ca0e50550822dc6fb47"
+embedded = "a62fc8881e7f9282d66a0408ca611f6df03551c14fdb6c165c4357bb22fc3717"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::path"
+kappa = "bbae692be810d0338017f4445d5d1d5a7669f4bd55f6f5488608980748bb9286"
+embedded = "99e7768dd651adad6922edf0068ba73b788bfc46304a0636f256d9b5b378edc6"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::query"
+kappa = "b1f83c7e926d0201d067f3d3b278037f18e8b3746ff3e3b2bfb72a91a447594b"
+embedded = "699640b6b95a6e6fd6d58256040340654371ad17a5d279f432980ed052bc2b2c"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::slash"
+kappa = "0185c96f993000d04bff873c902313bae172cb90da358366d6306cff70b1ae97"
+embedded = "266009be4cc23e7459cdceb41099ff037f8feed2ad93021f7c4842c40fb2caa7"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::star"
+kappa = "05e51497f479769e7807c95df879e2f9d55e23471226842805a28f312671956e"
+embedded = "7e64d286947eb9202439e04a6abf22af8a538fad14876822862cd66dcefb654e"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::try_from"
+kappa = "31aa83c107fadc9db9304f4293d73dc38ea75ce2a1fef13ab40129cfd59ba40e"
+embedded = "b505c3f60e756328895e90681de2a7c458c672459a4e40d16afbb84cf7e35daf"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::try_from#2"
+kappa = "ba1e08fd56a3ef44ed15f11fe38e607d4a81b0ba1403e1be3ac100ae1ceeec83"
+embedded = "3b1c5e5c460aed4137d56f07887b1646b9ef601f484dedf6f5040aee54e27b47"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::try_from#3"
+kappa = "9e476973c39eda1a2c295af50809cb4e4c26723db6453dfe4bb2086d1eab7cce"
+embedded = "cba100c8a0731b94eb771d460bf87194c212d26ba54f36522425122dea74de57"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::try_from#4"
+kappa = "8ca02b3ada36c062e24e48e51b5e3238c95e105121d16cee7163da41e12a072e"
+embedded = "68a54abe765a7b44e840d402ca1da32b8125c8fa889332a3ba6c8ae1489d3c48"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::PathAndQuery::try_from#5"
+kappa = "ac8e4ba10da92508740a8355da95063d797faf48e58d2ebbd2a9e9aeeb9d224b"
+embedded = "30f2e739cc31a2edc38a95c1746d1adad5dd52c9194bbfa0ef92c0d6ae555bc7"
+status = "residue"
+cause = "mir::Ty: uri::path::PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::String::eq"
+kappa = "61a25682adceb33789890206400a1dccc6752ee42435df77dc9c63f44ded5420"
+embedded = "65bf06838495a96687ae3cd681e9f4823a373e8f8a9b64095dee5b94d8940fac"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::String::partial_cmp"
+kappa = "58e5388e2fa25d043cc8f81fbda502b7cf1292c3af16fd88e9a6927859d2f0a7"
+embedded = "0d19c76bfa37d19d04b9df2223a3e187ac6bcaaee06db38d5dc3e174b6999a0d"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::str::eq"
+kappa = "8f58a5bb4633ab2cc5d69192063423f360ece565f199fcbbba31b81ad415effb"
+embedded = "ba25ac4280474592bc760a8956a526b7f315d241e8e8cdbafd9f491becc66a2e"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::path::str::partial_cmp"
+kappa = "323a65c127899e945a32e3c8be824f9eb58a646d2e7c5c3041a8b5126b2d87ff"
+embedded = "b1281d8365b904769ab4832e9e3df604cfceccca7ab6e6ac8d94b61f9de746d1"
+status = "residue"
+cause = "mir::Ty: PathAndQuery"
+
+[[fn]]
+path = "http::uri::str::eq"
+kappa = "f2de496817d966bc854791afe1bc018e24e7d6afa20171c9e4720d6d0eed521c"
+embedded = "4f54d1de7ecd2814140b711f19081dabcec7a2388aefccb934541e8451227fa3"
+status = "residue"
+cause = "mir::Ty: uri::Uri"
+
+[[fn]]
+path = "http::validate_authority_bytes"
+kappa = "0900dfd19f1d56549971536da5399a7f3f591248cde1663a89e3d5cfeb9bdac6"
+embedded = "6658c356d10f1d70affaef1f70723c52feea40ae76ed3f512fc46839a8336319"
+status = "residue"
+cause = "mir::Ty: uri::authority::AuthorityError"
+

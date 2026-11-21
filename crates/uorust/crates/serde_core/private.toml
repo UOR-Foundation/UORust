@@ -1,0 +1,72 @@
+[[fn]]
+path = "serde_core::MAX_PREALLOC_BYTES"
+kappa = "65405ba642f0af40cb06990c802a322554e49bc0fc59e1530dcbe061fbf6f4b2"
+embedded = "065f4288fd8c1c0ad095edeca18755a8daccf7f323448ff5f4eb7f83da247884"
+status = "translated"
+digest = "4a08bc29f11ca118df12999a42af8dd0265753c1f9264b4836107480498ee60b"
+
+[[fn]]
+path = "serde_core::cautious"
+kappa = "36a8c21123e1e074e28caa790f4fcbd4f04f29843957cef7c89270dc1aa9f307"
+embedded = "1ae5e450a0b3af9f054173661ffed4c1f72fadcb311500223b1286740481241e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "serde_core::doc::<impl at src/private/doc.rs:8:10: 8:15>::fmt"
+kappa = "d96a7bd604a200e128bae042f6c9cd23562b9492983ead0aec495565e83d2062"
+embedded = "dcfdd670a1c889e99fbcf390c58dec35d8c6a0ddd67abd5b64803ada553aa8cf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "serde_core::doc::Error::custom"
+kappa = "9c9d910f4e41bb7a488aa88acbf570be5a105bac913e875f1e8e437442eae4bf"
+embedded = "b53e5006325c202b60467db83616c3ea64207bd192c3869850a939d953b980cc"
+status = "residue"
+cause = "mir::Ty: private::doc::Error"
+
+[[fn]]
+path = "serde_core::doc::Error::description"
+kappa = "75907c7e4910475709b3b0053af63e90f719d0f3974959b096979abb4ccc5ec4"
+embedded = "a9462ef2c949690e42961cc5be25c3eb079159ca5d14cdaa188ce567574c1010"
+status = "residue"
+cause = "mir::Ty: doc::Error"
+
+[[fn]]
+path = "serde_core::doc::Error::fmt"
+kappa = "0bab3359779306caa28f80d3d2080b634eb09cd3a877817b85c934743d4e48ee"
+embedded = "839a2978670ad2040d37447b411a81785e0d2983fb4bd867fe918522ef2d0269"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "serde_core::from_bounds"
+kappa = "9aea5236310bdde741383a3c0467a6e184d12d7fc12197874676bbc5c8a43f2c"
+at = "I=u32"
+embedded = "37c13ad005f91a197a8193dae5ff7597ad03a9e53894bf912dec4adb1e32a460"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_core::from_utf8_lossy"
+kappa = "35609aae3c32f6b55687d9eecc1821dc19c8a8e01f64b5c546176fcd370e4a25"
+embedded = "a30a716cb654f379bbc350237da39fb6a16cc838156b1eaeadb1982e16a339b5"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "serde_core::helper"
+kappa = "8ba4cb3e3d3f49092ad1be78e97f8feef85eb2f79e6e43a0d7b6c31407e40c95"
+embedded = "77766b6e167e5b7217d7606b3843a86b3f23774a565c38f64f3184bc58d2ea0b"
+status = "translated"
+digest = "ee2ec597465af9a670533441bdf52ab32a8d4205be162dc46e47723739e140e1"
+
+[[fn]]
+path = "serde_core::seed::InPlaceSeed::deserialize"
+kappa = "201ed38e7863d4807e8caad6dd20855a90ed7565c1dae3fc285cb77719372be0"
+at = "D=u32, T=u32"
+embedded = "82946e993011b9d0b04c6a13c2ba051c2e164169fbcde88c390ddbfa18e3827b"
+status = "residue"
+cause = "mir::Ty: InPlaceSeed<'_, u32>"
+

@@ -1,0 +1,118 @@
+# The foldhash register (written by `uorust crate foldhash@0.2.0`; do not edit): every body of
+# foldhash's MIR at foldhash 0.2.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 83
+translated = 2
+residue = 81
+
+[module.convenience]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.crate]
+bodies = 6
+translated = 1
+residue = 5
+
+[module.fast]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.quality]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.seed]
+bodies = 16
+translated = 1
+residue = 15
+
+[embedding]
+bodies = 83
+embedded = 83
+evaluable = 83
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: fast::FoldHasher<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: quality::FoldHasher<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: seed::SharedSeed"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: fast::FixedState"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: fast::RandomState"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: fast::SeedableRandomState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: quality::SeedableRandomState"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: quality::FixedState"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: quality::RandomState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: seed::global::GlobalSeed"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rotate_right"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: load: foldhash's MIR stops at mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1

@@ -1,0 +1,75 @@
+[[fn]]
+path = "ahash::add_and_shuffle"
+kappa = "1803a1e5dfd2775b7ab2ff66ab3b6052cdccdadae3b0bf33e4502c9cc8692e4a"
+embedded = "ddbb2093a28cb8c87e3056ae882bd79c05611bb6bfa8daff9ba8c00fcc1b40cd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: convert::<impl at src/convert.rs:7:9: 7:32>::convert: ahash's MIR stops at mir::TerminatorKind::Call: std::intrinsics::transmute"
+
+[[fn]]
+path = "ahash::add_by_64s"
+kappa = "952324c9469da30585c9aa67ced43361308812b7d8958c8b869d6ba28ee53126"
+embedded = "8c85866ec2ff9e2792cc0f46fab261672ea5764ee7e26d8d88a44b3787a7233d"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+
+[[fn]]
+path = "ahash::add_by_64s::transmute"
+kappa = "dfaceccaeefdb9827d166e6eb984e1a77dd3b4ce56ab1c500b471e027485d29d"
+at = "Dst=u32"
+embedded = "0ec37ca1ed9719e52b4b1176b92bd3345b7abc0ad05c2167f74ab5697f51c39b"
+status = "residue"
+cause = "mir::Ty: Src"
+
+[[fn]]
+path = "ahash::add_by_64s::transmute#2"
+kappa = "dfaceccaeefdb9827d166e6eb984e1a77dd3b4ce56ab1c500b471e027485d29d"
+at = "Dst=u32"
+embedded = "0ec37ca1ed9719e52b4b1176b92bd3345b7abc0ad05c2167f74ab5697f51c39b"
+status = "residue"
+cause = "mir::Ty: Src"
+
+[[fn]]
+path = "ahash::add_by_64s::transmute#3"
+kappa = "dfaceccaeefdb9827d166e6eb984e1a77dd3b4ce56ab1c500b471e027485d29d"
+at = "Dst=u32"
+embedded = "0ec37ca1ed9719e52b4b1176b92bd3345b7abc0ad05c2167f74ab5697f51c39b"
+status = "residue"
+cause = "mir::Ty: Src"
+
+[[fn]]
+path = "ahash::add_in_length"
+kappa = "37dc6c06bad321c2a18b8d9ac5d99acbcf470dd63f85791c4025cf7fc3534a09"
+embedded = "4f616f3474a00801c9beb1114050a59f3db4779e3a6e12e4c552376dfb5852aa"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "ahash::folded_multiply"
+kappa = "58499e0afd8420af6dee19e39426a6e2a15533c26672dfaa1a000b08d074ad43"
+differential = 7
+embedded = "7d2961c3c6e154fa2c3ee4e8bd43cf4bc61f62d1b593fe64f4845f07b000fb0c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::wrapping_mul"
+
+[[fn]]
+path = "ahash::read_small"
+kappa = "1b3063822528a60ed643fb495a0d842eb9dea469010e4819120c605339a00570"
+embedded = "29b131448200b44c6fdc9c3871f3cde8d30eb79db4fd0e84f33e54bf99c0f7f5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: convert::<impl at src/convert.rs:79:1: 79:28>::read_u32: ahash's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [u8]>::split_at"
+
+[[fn]]
+path = "ahash::shuffle"
+kappa = "b0ea95f7414aa06e36d8340b34339ea367220ac9507eec17dba746221774d3ef"
+differential = 7
+embedded = "f1636a2da3e10e0d17670308490623a88ec8400f5240bc1d009c636aac0a1115"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u128>::swap_bytes"
+
+[[fn]]
+path = "ahash::shuffle_and_add"
+kappa = "953fde04c9bdad630889f3489caf7c7e96640f16ac33f6284786e4591073d86d"
+embedded = "34e8cb7d3eef4884ddfe2030b9ae118bd3c5ad5438abd0900ad7550c37f1530b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: operations::shuffle: ahash's MIR stops at mir::TerminatorKind::Call: core::num::<impl u128>::swap_bytes"
+

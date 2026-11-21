@@ -1,0 +1,47 @@
+[[fn]]
+path = "phf_generator::EMPTY_SLOT"
+kappa = "c7bf8ccae976a8d972d015b81aa7896bd81abf88b027562c38d8461773f34549"
+embedded = "e034de46abd1b83e275cae7d4a5033c3ccc40289d190f2b7e48a708bdf957772"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "phf_generator::Generator::new"
+kappa = "9d9172476ef475f7128d66602de3ee176b2fcaa5382bb0a45d8ae16cabd8c967"
+at = "Bucket=u32, Generator=u32"
+embedded = "d24e0c222a30f17335c02fd36a6751ab5d7a184ad0387a405821b80ffcf75a8e"
+status = "residue"
+cause = "mir::Ty: phf_shared::Hashes"
+
+[[fn]]
+path = "phf_generator::Generator::reset"
+kappa = "c8ffb7900bd1b5b8639aad28a76f017181eba490e839de669e3f88be548fc21a"
+at = "Bucket=u32, I=u32"
+embedded = "96462f92b7de2b5a37369821d915d73f6cfba3cd8bde5372f89090d3c1b0d42c"
+status = "residue"
+cause = "mir::Ty: Generator"
+
+[[fn]]
+path = "phf_generator::Generator::try_generate_hash"
+kappa = "5522496ccd0a3a1dd022031c651c3d09d2817cb9568dc26efa0d35362ad1c23d"
+at = "Bucket=u32"
+embedded = "3b8d0d215840e83968387d44a811251554b367548ea4b5648d22f1121beca77b"
+status = "residue"
+cause = "mir::Ty: Generator"
+
+[[fn]]
+path = "phf_generator::generate_hash"
+kappa = "f178baddc9a13be9ab8a611906103994e25d48977e6506727560f12835d4ff76"
+at = "H=u32, HashState=u32"
+embedded = "11a56839f5dfc98a87100dfd3a1a10b002206e3d502d04a0fec0d81ec4125187"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item phf_shared::hash::<u32>"
+
+[[fn]]
+path = "phf_generator::generate_hash_with_hash_fn"
+kappa = "6379771935a79157d27399c5ada8933d79d033e279d33299cf60b5642d6537bb"
+at = "F=u32, Generator=u32, HashState=u32, T=u32"
+embedded = "c3291771e81104d24c03c26a8e2fd5e60b6d7c652876af5d76950df56c2b85d4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Generator::new: phf_generator's MIR stops at type outside the lift: phf_shared::Hashes"
+

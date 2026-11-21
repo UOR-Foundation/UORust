@@ -1,0 +1,122 @@
+[[fn]]
+path = "crc32fast::<impl at src/lib.rs:63:10: 63:15>::clone"
+kappa = "e50c23bc4fd61266fb028d5bb77ff78f135f18b4c96f874e505ad74022327ab0"
+at = "Hasher=u32"
+embedded = "bb7675e301ca10c8caf742d9dbee543100a8a2210d867dd8dc6a75122881d31c"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "crc32fast::Hasher::combine"
+kappa = "f80ab9e4bcb5a3ae4b849235781a340e6c2a575973797f1aae8f7e2e59788dd4"
+embedded = "cedffb53b65cd8aaa90b4df7e2be745f975c7967eae11fb7446ba8e686ec5a59"
+status = "residue"
+cause = "mir::Ty: Hasher"
+
+[[fn]]
+path = "crc32fast::Hasher::default"
+kappa = "1fec26070fce84370253c343a551edad14103d8b17c9e4952732a2363a562be8"
+at = "Hasher=u32"
+embedded = "1fb4e7fb82a20eb935c393b7e8a4872b278bf8770831ec6b4f465abcab639aad"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hasher::new: crc32fast's MIR stops at mir::Operand::Constant: the constant item DEFAULT_INIT_STATE"
+
+[[fn]]
+path = "crc32fast::Hasher::finalize"
+kappa = "62aff5cd5f12c36c14e4c7b289e58585f9d4dff6719ffc58f5b170c79e89fece"
+embedded = "bd61291771c885e836daeff3bcb712f4fcecbc89c1ebffbea8433433092f7113"
+status = "residue"
+cause = "mir::Ty: Hasher"
+
+[[fn]]
+path = "crc32fast::Hasher::finish"
+kappa = "7703becc8254d8baed3a69b73786df8c6baa0db4bf4010a3e50cde5271b4fd5c"
+at = "Hasher=u32"
+embedded = "ac9f03ca7718d47487a229b6eab3a5fe359e3debc99532c7d9673bfd8bfce1e9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hasher::finalize: crc32fast's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "crc32fast::Hasher::fmt"
+kappa = "3b0fe04c60ef9e8fac9da6a1d0899d05ae00d016a5d9013f8e463cf0bf0518aa"
+embedded = "4c038a5029ab13f5cfb6216a67606a7bed996fefc6b6386e1b7934bcd0c9e5ce"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "crc32fast::Hasher::internal_new_baseline"
+kappa = "e339573f0f621b50fe7568a9ac0f68cbcb2c24a21ee59529cd14799f70462235"
+at = "Hasher=u32"
+embedded = "84ce542449ecbc699e39891010a071071acb926b94669534f48905a0d1597709"
+status = "residue"
+cause = "mir::Ty: specialized::pclmulqdq::State"
+
+[[fn]]
+path = "crc32fast::Hasher::internal_new_specialized"
+kappa = "85f2cd283798a6db685f6282a02881233f1e8ced4396050136ae3e4d2d18d267"
+at = "Hasher=u32"
+embedded = "b1f2f2578a71e61fcbf2fe1c627534598aa7afc100babebb908a1764f3ef6f69"
+status = "residue"
+cause = "mir::Ty: specialized::pclmulqdq::State"
+
+[[fn]]
+path = "crc32fast::Hasher::new"
+kappa = "607074c6a4e0c008ec9ae31e4c8b6df5b9ea43f6aaa9e7230e7ecdc19639a03f"
+at = "Hasher=u32"
+embedded = "52b0fe5effc27c1b1cb15706192f2bed61275b2a0995bfc333f17782ff8d56d2"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item DEFAULT_INIT_STATE"
+
+[[fn]]
+path = "crc32fast::Hasher::new_with_initial"
+kappa = "3af54365a55d5bde2ebedbfc711973498a1b42d7ffde2fdb0c6e758ecd31bbbb"
+at = "Hasher=u32"
+embedded = "4f87c043451a096955b881846284e76ccff9d94ff042646c76a53f031df73a4d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hasher::new_with_initial_len: crc32fast's MIR stops at mir::TerminatorKind::Call: Hasher::internal_new_specialized: crc32fast's MIR stops at type outside the lift: specialized::pclmulqdq::State"
+
+[[fn]]
+path = "crc32fast::Hasher::new_with_initial_len"
+kappa = "26e58a2714fe69c87ce2ad79f072440c66385daa2a04801b5510370daedf029b"
+at = "Hasher=u32"
+embedded = "67dfb6bec835272335dad77fa7320cb1205b9333bdbfc37d67b5abc90556512b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hasher::internal_new_specialized: crc32fast's MIR stops at type outside the lift: specialized::pclmulqdq::State"
+
+[[fn]]
+path = "crc32fast::Hasher::reset"
+kappa = "dea91040730ea12f8db92d5293dc9a9edfc8943c7c5e2b45a0c4a1ffbeb23255"
+embedded = "35ee924d92e8de204bc65cde44c49fd87b4c00360eeb49eafb74f64357032bdb"
+status = "residue"
+cause = "mir::Ty: Hasher"
+
+[[fn]]
+path = "crc32fast::Hasher::total_len"
+kappa = "c020f8bf13167866301081e9481df83ff8ba6c11e1b8639347f2b0e6c4067658"
+embedded = "fd5a95dccd9b1b1f593a726f02393924fd28658d8fb300ddd047fd1a3c73d6b3"
+status = "residue"
+cause = "mir::Ty: Hasher"
+
+[[fn]]
+path = "crc32fast::Hasher::update"
+kappa = "bf1664f9bb9b7f31e13b67764f1f6642b08da2f549962216b57493b313a58137"
+embedded = "d1e2275c3f21f625775292b71410adae19c734c71beaab4d29548838c21b88e6"
+status = "residue"
+cause = "mir::Ty: Hasher"
+
+[[fn]]
+path = "crc32fast::Hasher::write"
+kappa = "ffc08d10de4f43f72c0beee04fb49ef2275da1c2986290890bcde4e804e1ff27"
+at = "Hasher=u32"
+embedded = "8e785a63d83a92bf219d794c63fd7d4aa89656e8c94fc10022a32d5180ec419c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hasher::update: crc32fast's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "crc32fast::hash"
+kappa = "a3dbcc7887b40af07ef235211f6ff7750cecd7442291a81fa17c672e599a1e29"
+at = "Hasher=u32"
+embedded = "5631c2ebf44c26448dc6a60dcdacfba4a74ac1e05213e9724a59180c573d7495"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Hasher::new: crc32fast's MIR stops at mir::Operand::Constant: the constant item DEFAULT_INIT_STATE"
+

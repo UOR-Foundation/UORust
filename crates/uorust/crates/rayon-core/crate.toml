@@ -1,0 +1,378 @@
+[[fn]]
+path = "rayon-core::<impl at src/lib.rs:141:10: 141:15>::fmt"
+kappa = "9082267babf4069af59d9bc86da7eb7eafc6f761a9ccc6a486462bfe7b1aee00"
+at = "ErrorKind=u32"
+embedded = "b5117cb3e9668342179c49c07039317760665b08262f5ea3bf7c25196164cc0f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::<impl at src/lib.rs:146:10: 146:15>::fmt"
+kappa = "44337cc62fa06cc7773def2d22673e9ca0ce4cae8a7f7ef66cc3df044fae8030"
+embedded = "a07926a3cf3cfd96850f3c1f6c8acef94b9dc4533234ff942bc2cb19d5ae36b6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::<impl at src/lib.rs:206:10: 206:17>::default"
+kappa = "a351553ebcab3be6339c02859d767204e9fc7057ae89a2dae6312dd659328629"
+at = "Configuration=u32, ThreadPoolBuilder=u32"
+embedded = "1a4060fac89c680dc7b6e40b0d2b030e5c202d9652df26060cf39136ecc446b7"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "rayon-core::<impl at src/lib.rs:839:10: 839:15>::fmt"
+kappa = "35185840055e334d91e24181d4eb3016d9830eaedf34855128de09ac67aefa9a"
+embedded = "2763e9f2f386178f25881edaefce8d38739f72f3f2043fb7717efb2c3242aa6a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::Configuration::breadth_first"
+kappa = "97de0fa1d6b4da71c17ef95b250d578b73481d273f8be4033f593a8399d2b14c"
+at = "Configuration=u32, ThreadPoolBuilder=u32"
+embedded = "3403b658d58dc5efa5414d7826c1849e151a0e8b75bba6ed441628b94a1c2e7f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::breadth_first"
+
+[[fn]]
+path = "rayon-core::Configuration::build"
+kappa = "b435c322c5969bf86e336de2eeb6f94efbc946a0aa005d5bbcdd99b698b0fe46"
+at = "ThreadPoolBuildError=u32, ThreadPoolBuilder=u32"
+embedded = "15ce9197cba9483a4fd54a20738c96e78c4f0b9abc71bb2c2957cd932d97ab05"
+status = "residue"
+cause = "mir::Ty: thread_pool::ThreadPool"
+
+[[fn]]
+path = "rayon-core::Configuration::exit_handler"
+kappa = "80ec7bfbac9d7adaa44f7b13dedbe0a69a286b5acc194888ca98749de9f7214d"
+at = "Configuration=u32, H=u32, ThreadPoolBuilder=u32"
+embedded = "bd7108095535d55bc8f508b73f58f57ab59edf4b6d86c570f383b196af1a5e2c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::exit_handler"
+
+[[fn]]
+path = "rayon-core::Configuration::fmt"
+kappa = "0ac2055c3ab0588f019fc77588b71802283e5b870758797795a82d28ccc50964"
+at = "ThreadPoolBuilder=u32"
+embedded = "8535b9c309b4c755eec4a21401700e4ed21cfdc6220895f3d3c79f1001d345f7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::Configuration::into_builder"
+kappa = "d686cc511c351d1354c8db2eec3f1efd39ff884664476909df224e55378b3488"
+at = "ThreadPoolBuilder=u32"
+embedded = "4445c34686be610bafa0594e3f6d77dc90c0d892493d1a32739dc9b800c57971"
+status = "residue"
+cause = "mir::Ty: Configuration"
+
+[[fn]]
+path = "rayon-core::Configuration::new"
+kappa = "9bbf6d4b216e4ebd0c13198039bf4a986fa0f3ec9a1bdd1f8d5e90edb82b0c1b"
+at = "Configuration=u32, ThreadPoolBuilder=u32"
+embedded = "6b1e2c6afecc7cc40af90d233fa3147586e887bba7119d8f32c377430691a83d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::new: rayon-core's MIR stops at mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "rayon-core::Configuration::num_threads"
+kappa = "054fd0e63633dec0ce1b2c92fb83f3f2b2902391620083632cd9b26b8e62097e"
+at = "Configuration=u32, ThreadPoolBuilder=u32"
+embedded = "f9349506dcc7f70999d698ee3521f86fd431b973ce2090008cc46a9f13453eff"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::num_threads"
+
+[[fn]]
+path = "rayon-core::Configuration::panic_handler"
+kappa = "5392b186f45038b260d613c6ba6119e4449ecf1770bc17baababd9cabe09f85f"
+at = "Configuration=u32, H=u32, ThreadPoolBuilder=u32"
+embedded = "c5bfa47461b5c7b0743833220e75d3f427ee57132a64ef50a75378337a64078b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::panic_handler"
+
+[[fn]]
+path = "rayon-core::Configuration::stack_size"
+kappa = "d752086ccf2a77e8dfafc32e41ed8f8d5e0e8aebb91bd946951d8606ed545c56"
+at = "Configuration=u32, ThreadPoolBuilder=u32"
+embedded = "45e7fff6d80823b64d1b519a7bcdd33d0961729f788a7ff0e4538789b7566d36"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::stack_size"
+
+[[fn]]
+path = "rayon-core::Configuration::start_handler"
+kappa = "f187bf047ac26d79c0dbda20d239ff1078de106ac8d10246404b8617c0a65036"
+at = "Configuration=u32, H=u32, ThreadPoolBuilder=u32"
+embedded = "a074f8bb226b29ae01ce4c41cd98168923a55ca368f1f77c0079e422fc7b263f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::start_handler"
+
+[[fn]]
+path = "rayon-core::Configuration::thread_name"
+kappa = "08d7b85690c8a9f816221209c4d66e6a25c4ffc8217d50819c38ab45564a2acb"
+at = "Configuration=u32, F=u32, ThreadPoolBuilder=u32"
+embedded = "2bb52272f97e03b6aa475531ae9235d8372f2ad870c4f84ed0001352fbca73a2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::thread_name"
+
+[[fn]]
+path = "rayon-core::FnContext::migrated"
+kappa = "5d170c55b446c9f805f19eb4c940c30a4733e018733525eff6343ae429449b23"
+embedded = "0835533660be8456bc4565c4ac65d6bdb7af3fc9148f9582116dc4731fa8b17e"
+status = "residue"
+cause = "mir::Ty: FnContext"
+
+[[fn]]
+path = "rayon-core::FnContext::new"
+kappa = "89ab5470bbe348759f8a1c7d85164d8dd4772b18093f21fc1ec5a3e56f3abfb6"
+at = "FnContext=u32"
+embedded = "dc73ac3e7caa33374305f02b459bd2e1c0784771d516bfcfbbe9eda41dcdfe49"
+status = "residue"
+cause = "mir::Rvalue::Use"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuildError::description"
+kappa = "0fca400ca9c8055d1b448eb769760a27c0653d3f6f51ae0cc2c40c1cdced22c2"
+embedded = "6e14e468a098a20cb0066281934706b4825492eaf0454dfc2d951c77f49b3f38"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuildError"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuildError::fmt"
+kappa = "79ef02b2233830cd8de111ee08509ffecd88e9b2e86f06edcda11f370fb68da0"
+at = "ErrorKind=u32"
+embedded = "0bce6c525f5d9e25a879b94f4318bc5575b824c189612f020a1540005151c52d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuildError::is_unsupported"
+kappa = "89f2ba253d6e7c7ee76fc6fad18140447795b7c44546bda005f5808504c22b1b"
+at = "ErrorKind=u32"
+embedded = "0569f8c0fc6c4d280b8a3197ce8c3c3c0d1dd1511a4de1a1b5f9fce44854016d"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuildError"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuildError::new"
+kappa = "4874f3823bd04df38cce0054b264b8559640d0abb53128f3ae4e6166040b3cfa"
+at = "ErrorKind=u32, ThreadPoolBuildError=u32"
+embedded = "59fd006b9386ad488eff9f4a9f3fa69917df4c0b35fe941628f373737abd29a1"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuildError::source"
+kappa = "824ccd3f28db01450763d2e209d2b40ef089e0eea7363493dcfa0d6ab2577d6d"
+at = "ErrorKind=u32"
+embedded = "3d076a67933dd6c9514682cced5993c0eaca40662c9f6eaaa88380d0a75c3460"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::breadth_first"
+kappa = "8bb1a986d4717999ecd8ac253dad4e2e0321c3eb1b1a0220e20f206aa45a9b3b"
+at = "S=u32"
+embedded = "441a3f15acc7c140819ee2536b4672e2e2a088baefa5d97b7c9b774c40a47215"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::build"
+kappa = "d5c829ca8cc862322464f82feff7603dec4a5ee1c9d8b011852d71d483747aa8"
+at = "S=u32, ThreadPoolBuildError=u32"
+embedded = "10cc937ef52801cbb07b9329fd2ae53f03f72e322a384c61fbd0b8995742d722"
+status = "residue"
+cause = "mir::Ty: thread_pool::ThreadPool"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::build_global"
+kappa = "937bc1b997fae70c667d627e6e2c26d3f3a279e8d3c1a6ef11b7aedc97e4794d"
+at = "S=u32, ThreadPoolBuildError=u32"
+embedded = "c8c7fa4a813bdd62cd3e84da50c3db094d875bc09925e352a60995c40ca84746"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::build_scoped"
+kappa = "68dae9d2dad03aff3ab504fb4817de5049d0c5c7258ae449ecb4c9ee3c488d52"
+at = "R=u32, ThreadPoolBuildError=u32, W=u32"
+embedded = "d918939cdf695cb6509af4accc9ad58cbb332799065c0982b6a1f2b38712fb16"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::default"
+kappa = "4c62c484e2bef3ba3d0706ccbc0351d605987d2cfba02ce4cb4ed29541090590"
+at = "ThreadPoolBuilder=u32"
+embedded = "378b2ba3ad2a06f5a88883674694c7688ffeebfd1fc850f74e6f4d9cfc01536f"
+status = "residue"
+cause = "mir::Rvalue::Use"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::exit_handler"
+kappa = "8290fae4aea20e185f434d2672553638a849c41aa5aaec688e2cfac2d5bc6caa"
+at = "H=u32, S=u32"
+embedded = "a85dea718d4a5c04431576ddc2d25c1684cf85f384b4f67462998cf7a3dd8fdd"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::fmt"
+kappa = "030c09d44ef89b1037b6d39a0af22443ff6fa89559c8668378bdb3c9a815dd2a"
+at = "S=u32"
+embedded = "a15a9eac65e137917d5fea18c60b674de39a4cab24fb745d9841c71ac7fcce82"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::fmt::ClosurePlaceholder::fmt"
+kappa = "22dedb7b5313110a8c8e9d405d7de399a226476a5c46710840a7a49a28edd9df"
+embedded = "8b12d2d167931a3c36be32742315a003cbb0c62ed35b72ff7b8cf3155f2e8a7d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::get_breadth_first"
+kappa = "516b7091ae32d988938bf1adec9d31bfcc844d9db4cc5216cbbcf3792f98da4b"
+embedded = "8935f3770aff8e0fc5dfbdc8efcaea9bb58b5ac07208fb19ad29e4b2d24d408a"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::get_num_threads"
+kappa = "f86a28bd09228513c220f8099ded7632e59efe445fcae560c7770eb7916fdc2a"
+embedded = "0184d4fd56af038c7e25791d2cff95dcbcaae0d411c7681142c59435a2c7cd86"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::get_spawn_handler"
+kappa = "72623a05b2de43d7d37f0afa530907c2184f5f8bd3268cc3c7c798d38ba0e494"
+at = "S=u32"
+embedded = "5601bbd514470ec9ceed7f4786b2789ff2a69f937c045b31f9260f3368a48021"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::get_stack_size"
+kappa = "6edbd087305a8f85943deb000189650cc9e3b062d4c4423b89bb4c32730f5b6d"
+embedded = "b16ebc73682c7a2c29a0ed01cc929ccb9c44d5e56381e21965c68491aa7cd9ab"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::get_thread_name"
+kappa = "a1c6964f189fe59904623c8bd06a127cb24811f85e055d87c0d1fd8107201a42"
+embedded = "8c2cb37e1054110573b07afcb3ab3977b022f73aefed4e2357d73fe0f6cc9c47"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::new"
+kappa = "275a4c070400cc706373989e63d2ce5be3d237a7fb75864e4e62384c0e7b2b66"
+at = "ThreadPoolBuilder=u32"
+embedded = "a17da05be1ddf01b4fa67fe3f7fd0cab40e61ae4a264e07e137e97b54a1e992b"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::num_threads"
+kappa = "ee9ac3ea19c1d9f309eee85154c4b43f23aa0d846579122d473c674a8b46c571"
+at = "S=u32"
+embedded = "c2b0db5c548c17c37f4c20e13c4fae2e59b833f1a9f2aa1f298e0e0ea658a141"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::panic_handler"
+kappa = "3eeb6c072edc5174a211ec267c01fb4be0a7a1f77d8c4716d4b340e18c3ebbae"
+at = "H=u32, S=u32"
+embedded = "789b17e294d113e291562793fdf7cec67383bd0cf133eda636edde9e22b70eb2"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::spawn_handler"
+kappa = "c7b765ff5fa05b77d977ae05c74682c25177124a72a968be8e65c0fe23efe06d"
+at = "F=u32"
+embedded = "c43de99f8f57f6e191dc99e17de7e3d00f01228be863efd112117a61b467b727"
+status = "residue"
+cause = "mir::Ty: registry::CustomSpawn<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::stack_size"
+kappa = "ef8e218e1195ed8c9e33b4b780270f158549213ed7d4affb9ba603a725fe6197"
+at = "S=u32"
+embedded = "9e057613ba677f440451c581c4da8713976605f3e27cfd2bf6a9d4d56db6c19e"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::start_handler"
+kappa = "ad11779748554cd8f1781ede7b3c5a671767cd15ba5caca89e7245ae73536bdd"
+at = "H=u32, S=u32"
+embedded = "ddb099df75a1b34128eeb219f57dcbbc7804d93843ab6114d506db2e6f4aa3f3"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::take_exit_handler"
+kappa = "3f2d729ca91237e7d53bb4fc1e26279705452b775902db88a365bd0afe27f2cc"
+embedded = "bb65deeef7c1072ef5b9ade410f29b8719a017f78b76a65c6adce9ca99987824"
+status = "residue"
+cause = "mir::Ty: dyn std::ops::Fn(usize) + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::take_panic_handler"
+kappa = "ab856b7ad3c2e38f4b17a599310142635ede4484630569c3567c9ae290433377"
+embedded = "b94d9adc99bea69f162a9e8f2266fee0d7224d9b7f8ba5d679486d8da99049eb"
+status = "residue"
+cause = "mir::Ty: dyn std::ops::Fn(std::boxed::Box<dyn std::any::Any + std::marker::Send>) + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::take_start_handler"
+kappa = "ef66df93cbce3933fbd33a95be6bf7f271357389195e165b3128bc9081c0d925"
+embedded = "e06d35fd726c2c70d943c4e740d0285d22a6a8841c60c2d46cb2d4e6db26f92d"
+status = "residue"
+cause = "mir::Ty: dyn std::ops::Fn(usize) + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::thread_name"
+kappa = "a2c9666da9eac5271fc769bfc599e581739edfd0d12dbfe936252470c56d86d0"
+at = "F=u32, S=u32"
+embedded = "a741a540f7f7871b4bdc00a6d094ac7eba92563ba8315cf12f598efa3dd6cffe"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::ThreadPoolBuilder::use_current_thread"
+kappa = "8ea4e97c3303cf0f2c9bd82c6346d756d39275f20d2b55935bbfb60b0242856d"
+at = "S=u32"
+embedded = "47d1af74617e48f34847086855f03b6f5794a742b6d9885d5bacc677ebf3c882"
+status = "residue"
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+
+[[fn]]
+path = "rayon-core::current_num_threads"
+kappa = "3d644ce60a8590683808f819ef2282852d1b497064e18c14f700857e92645eaf"
+embedded = "b3130b9a6b210fcaf2960c81ce7abcf6ed09e15bed838ba04a70ec6bd05187a9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: registry::Registry::current_num_threads: rayon-core's MIR stops at mir::TerminatorKind::Call: registry::WorkerThread::current: rayon-core's MIR stops at mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+
+[[fn]]
+path = "rayon-core::initialize"
+kappa = "759394614f1f4d6cc3df85e35b84d3888a14ff1ad8e4ee0fd8ec43ca6a82f03c"
+at = "Configuration=u32, ThreadPoolBuildError=u32, ThreadPoolBuilder=u32"
+embedded = "167d2ffc480ebe5c15016e7b91f4c911ccf6d7c67ab2f841cfbe2b1d0cb4b041"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "rayon-core::max_num_threads"
+kappa = "de98a053f73d03560103b8d49f307dcc0f4927e33e68287c652f79fb1bbd465b"
+embedded = "3c92a9bb19062170a7a4d25a0e421ead0f4729b39b4c9a7c571a07a0cb424511"
+status = "residue"
+cause = "mir::Operand::Constant: sleep::counters::THREADS_MAX: mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+

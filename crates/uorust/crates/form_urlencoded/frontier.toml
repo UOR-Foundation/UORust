@@ -1,0 +1,62 @@
+# The form_urlencoded register (written by `uorust crate form_urlencoded@1.2.2`; do not edit): every body of
+# form_urlencoded's MIR at form_urlencoded 1.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 32
+translated = 1
+residue = 31
+
+[module.crate]
+bodies = 32
+translated = 1
+residue = 31
+
+[embedding]
+bodies = 32
+embedded = 32
+evaluable = 32
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: Serializer<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: _::string::String"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: _::borrow::Cow<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ByteSerialize<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn for<'a> Fn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Parse<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::len"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseIntoOwned<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1

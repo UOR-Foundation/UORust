@@ -1,0 +1,760 @@
+[[fn]]
+path = "sharded-slab::exponential_backoff"
+kappa = "dee9f16add6571c2ba96b0fe2469793d6351a84ffa69144dcb430e0c1a9ca800"
+embedded = "efeaccccb29635d48126447231676292048c26dfe3e9d215807a8ca146ba011e"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<i32>"
+
+[[fn]]
+path = "sharded-slab::indices"
+kappa = "1e5e2de853563ce1813b7760dddbdb13a6906d4fc9c168f18d4c0d146310b0e2"
+at = "C=u32"
+embedded = "d43f5dbc501f865da40fba0a2d5cca2c8915175e01ae5b6572890d4b630c2304"
+status = "residue"
+cause = "mir::Ty: page::Addr<u32>"
+
+[[fn]]
+path = "sharded-slab::page::Addr::LEN"
+kappa = "2627df752de1246710c2dea597912f60819b3e87832633393ada42d290301e24"
+embedded = "c57c1e50ecc2a6ec4591020cb0c48ce45312954b9b90ae4c5eebf509ad13af73"
+status = "residue"
+cause = "mir::Operand::Constant: <C as cfg::Config>::MAX_PAGES: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::MAX_PAGES: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::MAX_PAGES, which refers to itself"
+
+[[fn]]
+path = "sharded-slab::page::Addr::NULL"
+kappa = "7477d160b5e0b06944843b95b99b87b45492312b8d1b5620c24ecdc492f21d03"
+embedded = "0345bf0520ed94e526276668c298d96aaa5e2e8fa4ca48e9a62bc786918d4598"
+status = "residue"
+cause = "mir::Operand::Constant: <page::Addr<C> as Pack<C>>::BITS: mir::Operand::Constant: the constant item <page::Addr<C> as Pack<C>>::LEN"
+
+[[fn]]
+path = "sharded-slab::page::Addr::as_usize"
+kappa = "9ba1f82b230c322bd5a7c8c12707de41ea8271d8f785ae0cfda7a8b03ded264c"
+embedded = "cf4386df3dcdbbb022894acdcace1f01d56bef91fc9b28a144b8ab5238f386e9"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::page::Addr::clone"
+kappa = "8fc519ed68b42df0d87fe390c060b44ae3f19153e22966db06b949c6c0e42c3f"
+at = "C=u32"
+embedded = "8c7c1f651e41ccfb8699ba0ceec20995143863dac9d909d0c2d2d18feaafa81d"
+status = "residue"
+cause = "mir::Ty: page::Addr<u32>"
+
+[[fn]]
+path = "sharded-slab::page::Addr::cmp"
+kappa = "f36ec6605071b925cbd10f90a1869679d77060269d64e4268b4cb2695681d00a"
+embedded = "4cadf03a20073d21907477e0ae2fb7c14fd7ef7b499c6e4cca1a1c64e591f87f"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::page::Addr::eq"
+kappa = "bd9d70870a421bc8a6aab6c5878cd560c82bac6d9ab2574c1c8a90ec7df744f8"
+embedded = "811b5f9cf9e38b23c37490e70703c34a6f08137130aaecb1caca742a72d0980a"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::page::Addr::fmt"
+kappa = "17fefa2adfb773e9a1b49d5c0223a07ed9f8f4f5f002022fed2583fea0a5b9c9"
+at = "C=u32"
+embedded = "841b6a5895b4ae4827629a359e96e37ec95ce6a2c8ee4fdc2dc27282b0796ce1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::page::Addr::from_usize"
+kappa = "bf96227d281d2782d0077996def2da0d18747fed79b06695002f46205984e68c"
+at = "C=u32"
+embedded = "3b6f7a3c8217e1e39468d800f080e6156c704555e1c3d483f81954f54421bf42"
+status = "residue"
+cause = "mir::Ty: page::Addr<u32>"
+
+[[fn]]
+path = "sharded-slab::page::Addr::index"
+kappa = "96ced97a78c10bc7388acbea4b03e58b2251f67660ccb4ad33281980afc0c8a0"
+embedded = "c9d54064438dd9e298c19576dd7334fca0f73d17858f226c438a73c7f16db794"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::page::Addr::offset"
+kappa = "48310f35dce7a799833f45a88af222c00444c41694747f1c2559a9e49a094045"
+embedded = "d18f672b0a339576c7e6833827a4f16aea1357b94ac914b37e4b230c02849637"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::page::Addr::partial_cmp"
+kappa = "75eec8dc7541e2c9d4c907efc6f958dc5e2122286b81864c9b598ecaf5a8d958"
+embedded = "a43fb2ed18456cd0e490560170d538f77df8fcf0db2c7afde77d5e3bdd92e84d"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::page::Local::fmt"
+kappa = "d1f010001dbc9b325dd84433c8f53d16c19a993bf22939be5f337c9a5320f129"
+embedded = "a051eb7e5aa1cec00f812e7dfbb152334d71c8d06c75a23c94f8ce013e4ce42d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::page::Local::head"
+kappa = "4e1caf37b132508a477cc2683d606916d67e2c075873556408390eba60eec697"
+embedded = "5363a0afb8118efe288b2fed204d5788b09e6d0253c4601640e725cedf7f8e32"
+status = "residue"
+cause = "mir::Ty: Local"
+
+[[fn]]
+path = "sharded-slab::page::Local::new"
+kappa = "dedad3e01cdfbd9e866e56f08b8a4447708a2012092d5cb226db77073aac1647"
+embedded = "35a63c43bca810f06050b97e8b4d032152134800f078aed0f1e4c88057aca951"
+status = "residue"
+cause = "mir::Ty: page::Local"
+
+[[fn]]
+path = "sharded-slab::page::Local::push"
+kappa = "1e9a0590f6fecf147f6b553b7f85980df3d307f1767438c1ddb56cdef3d16cce"
+at = "C=u32, T=u32"
+embedded = "03882e409820fdd93cefb8e847e1b3c2a1c79a4a99291b39715c017dbfb84d8f"
+status = "residue"
+cause = "mir::Ty: Local"
+
+[[fn]]
+path = "sharded-slab::page::Local::set_head"
+kappa = "9c89beeb32c01ae13d309e9e9ac67e4bf91e900b8f3795ecfe4cdc8dc6ea922f"
+embedded = "81ba350a3c1df2b3a9740cdfb2c8979b35584b7a8a0492082cb6883f73d7aaa5"
+status = "residue"
+cause = "mir::Ty: Local"
+
+[[fn]]
+path = "sharded-slab::page::Shared::NULL"
+kappa = "e5badbd3c449068cdb279ce1f3efa3e9889efaf212ac79ee99ff8c553ec244c1"
+embedded = "7c1a8786b1011d3ba84e400869b0812f72bfe5e01902186a1e00c539886ee39f"
+status = "residue"
+cause = "mir::Operand::Constant: page::Addr::<C>::NULL: mir::Operand::Constant: <page::Addr<C> as Pack<C>>::BITS: mir::Operand::Constant: the constant item <page::Addr<C> as Pack<C>>::LEN"
+
+[[fn]]
+path = "sharded-slab::page::Shared::allocate"
+kappa = "1ada188a1e270b7d5702d08624193b07e0fbfcad21625085b68f7e227a9cf4ae"
+at = "C=u32, T=u32"
+embedded = "171d0e49b719c310ba27b87228db2344095597f574508139f6317bfed0083db3"
+status = "residue"
+cause = "mir::Ty: Shared<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::clear"
+kappa = "6e5fb908e401fb99c866880637e9bbdc416518e8e7b9e283022d0ab310541f5b"
+at = "C=u32, F=u32, T=u32"
+embedded = "c4c6e1dd5e48ce6c2030bb0491cee322ee0e30d722e226247fc582fd2de3bfe8"
+status = "residue"
+cause = "mir::Ty: Shared<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::fmt"
+kappa = "be7810ac7721eedbcfea1f0a6f6169cc630fbb4aedc0f50bf0a088702ea91a4c"
+at = "T=u32"
+embedded = "96155297264234d1d4e66503c15157f9a40cee3c79fbba64ea6f37554a30889a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::page::Shared::free_list"
+kappa = "f7d92b2c7f2394445e61449967ae4633f563bae4d728692725690fcd2716343b"
+at = "C=u32"
+embedded = "c4dc88ba196d1cbc51b3c09e3e05904b0d3e0b81860adbf5d160d7ce4c0e73fe"
+status = "residue"
+cause = "mir::Ty: page::stack::TransferStack<u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::init_with"
+kappa = "0bf47d3e4320880a65db65fde02045339b1b78b562aa8132b33e3eef95bd5be6"
+at = "C=u32, T=u32, U=u32"
+embedded = "8f3af8319ff4591a2c146b008b32f857f25b9cbab6c6d93c64075370309496c2"
+status = "residue"
+cause = "mir::Ty: Shared<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::is_unallocated"
+kappa = "b3db9f45c3412f09c7e71f843440452a090ab205c34af7baf3c1050db71735cf"
+at = "C=u32, T=u32"
+embedded = "9e218df71a92ccb9e159e50476e9aebc7c7541a6a7a323722cc0532cfc8160af"
+status = "residue"
+cause = "mir::Ty: Shared<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::iter"
+kappa = "230977222a44ce8f0f994fc6e4aadd919be964df41437a170880e210b409c431"
+at = "C=u32, T=u32"
+embedded = "2392214cf2aa816c5b66f29a8c722e15e693d7a38cc8c8f99193026accf25d1a"
+status = "residue"
+cause = "mir::Ty: u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::make_ref"
+kappa = "8f9e176c27abe9229fdcb1fc94b52dbec4530324169c4345c499bb308844c669"
+at = "C=u32, T=u32"
+embedded = "c4ac566aed92cb1c2cf03e28800ba9f7e037e615ec77724c5566500151dbc0ab"
+status = "residue"
+cause = "mir::Ty: Slot<Option<u32>, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::mark_clear"
+kappa = "613a0c3be31c0102bf89bc11421a60bdd49375d234b77cd1b3217324c30f788e"
+at = "C=u32, F=u32, T=u32"
+embedded = "186b165086886e837c51e047d8eb0ab18e1ad336a27ed11a1e71ee416dcb9c56"
+status = "residue"
+cause = "mir::Ty: Shared<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::new"
+kappa = "a2cb76a049c14224fa58cbbd78a77baaf3ca1d350227e30103a467f9a533e28d"
+at = "C=u32, T=u32"
+embedded = "3c465c3b0a23022b14fdcea93372083ce5b22003471eb8493fe4f4040f4d6bf9"
+status = "residue"
+cause = "mir::Ty: page::Shared<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::pop"
+kappa = "84b4e2383e60d4ba7132c386cab1c46a46a2b0b4aa2111e59920e469b73f0eca"
+at = "C=u32"
+embedded = "a18bcad5eebfebb2bfd9cb2c5afb5fa185360ed4fd9cf78504858c4d73e3024a"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sharded-slab::page::Shared::remove"
+kappa = "946c5b628f04209f672aa2a0ac101cb720b04d23c223fc9e5631904482c642a4"
+at = "C=u32, F=u32, T=u32"
+embedded = "3b381380355dff587aec70c2706d7345e695ecf4d36312a5bc1d226f398cc411"
+status = "residue"
+cause = "mir::Ty: Shared<Option<u32>, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::take"
+kappa = "eaf97054ef821ea45150442124299b94ab7dcdada5c97ef2fd32a34b1601af97"
+at = "C=u32, F=u32, T=u32"
+embedded = "c7e1524e87094410e5c872d48c62f4c41b735fd73e58eb4b56a2882739e2ba8a"
+status = "residue"
+cause = "mir::Ty: Shared<Option<u32>, u32>"
+
+[[fn]]
+path = "sharded-slab::page::Shared::with_slot"
+kappa = "d28b0a2c846cd3ec187c3d0abdf3f7b646997cb13911bcc5f624317c34a97e1e"
+at = "C=u32, T=u32, U=u32"
+embedded = "59ff561a99460baa97f766f050d1b7502196fdda7fffa08dd6675bda663351e5"
+status = "residue"
+cause = "mir::Ty: Shared<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::<impl at src/page/slot.rs:18:10: 18:15>::fmt"
+kappa = "0921c8db702113484357016d85ff68d52c98654a250a565afdad0faccf7c5069"
+at = "C=u32, T=u32"
+embedded = "6acc988852fe25fbe59ad5161cad9e0b1d5574403d765c0ef6a784ae312b5d3b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::slot::<impl at src/page/slot.rs:23:10: 23:15>::fmt"
+kappa = "ef31a24c147ccf0a54bfaccb138fcee8ced2fd062afacc077f3db5950aac0185"
+at = "C=u32, T=u32"
+embedded = "1c86237ac33c4b99778cc2966a8134736637a7d13b5477ff4e19c009061de1b4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::slot::<impl at src/page/slot.rs:48:10: 48:15>::fmt"
+kappa = "6e6cd5ae555ed0b245366bc3ed035b7266ce3d4f4c09b218384bdfd66f8d93a8"
+embedded = "d49c824dd93184198b99016dcd998857b3efe4947a37ec8706312189e30fd825"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::slot::<impl at src/page/slot.rs:48:17: 48:19>::assert_fields_are_eq"
+kappa = "212638d24f6ac3a286c6487856619a4705de1ed0f256ea211b80da2f64a08b1a"
+embedded = "0e1ccce5718f72bcada77d252b5b3057b961717c03f6780b30870c8138baf5f9"
+status = "residue"
+cause = "mir::Ty: State"
+
+[[fn]]
+path = "sharded-slab::slot::<impl at src/page/slot.rs:48:21: 48:30>::eq"
+kappa = "d2ab1e743d5b935587dcd027bd10a08a7b186f4a1d3ea0f07f59bb544c4d2e54"
+embedded = "d429baf9179cd1184e1745a666b3bf24c932bf3a680d98ba32044dd4c6724389"
+status = "residue"
+cause = "mir::Ty: State"
+
+[[fn]]
+path = "sharded-slab::slot::<impl at src/page/slot.rs:48:38: 48:43>::clone"
+kappa = "ca4733741b43fe689c938c236b976b2cd3e8494099ccc04f5e0d713ae5b102c3"
+embedded = "2fdd7674801c14315927a96bb7283fc40156b17727a28f3bad9afc99c0d866c1"
+status = "residue"
+cause = "mir::Ty: page::slot::State"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::LEN"
+kappa = "67a0c9bedd685cf1a10188b8e63ed41366ca5ac016b5a08a23941a988800f3f9"
+embedded = "25689511ea62a73948b4701123a1acb7ad228e85da1f2ef1b2cc7f2c470acd1b"
+status = "residue"
+cause = "mir::Operand::Constant: cfg::WIDTH: mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::advance"
+kappa = "328c637add58e8c307787aa58b74c1eeaf091f44bf40b4312749d01508b4a279"
+at = "C=u32"
+embedded = "7ea6b6eb4ef7794957259e95ad7720ca7386275129f587f6ec6c50563ecdfa54"
+status = "residue"
+cause = "mir::Ty: page::slot::Generation<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::as_usize"
+kappa = "ed76574e473e85ea9245788042c7d8e70ad5549ca652039b48602f2d061cb172"
+embedded = "8f98cccfedf5fda9f5a04f89cc375a4353e4008bd1da0c8266ae7dfe2dd8d92c"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::clone"
+kappa = "98fa526aed081f9867edd203fee449fef6da00753578b266f62fda5af3d9098f"
+at = "C=u32"
+embedded = "bf99aa7bb0963bee545a6d9cadf036b1c700de90c4a0295845c26a7298dcb940"
+status = "residue"
+cause = "mir::Ty: page::slot::Generation<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::cmp"
+kappa = "e71bfac8dc7cf5207456e1035fb8dad42758e0494571f9805b6e0a2b4d9306de"
+embedded = "b6d1b970441711f16272483bfb0ad39a8dc9244e31f9c527bd3ded041ef079a7"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::eq"
+kappa = "60c791852838d7bc17491723babc4e1fe9847e6173ae82543df241a2daa4f1bc"
+embedded = "b2d772631c1f08cb3154bb6d325f06d38f8bdd3d2e5f8f959c9c7724dc98020e"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::fmt"
+kappa = "18a721cb9d8c615d5c307ea61adf5e86dc1fc86c9b115a481087dde8c366103f"
+embedded = "24819baf496a3f22ca520e5b8bbb4064f2060180c8717f3b6b90c30d45d60aab"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::from_usize"
+kappa = "5b78919741efa8f41fb020b388b9c6db5b51fd5fc425358483b8622b64233b67"
+at = "C=u32"
+embedded = "c369333534b6b25a422490b68d346001ff6abac4906b26c06958f7b53fa0fa45"
+status = "residue"
+cause = "mir::Ty: page::slot::Generation<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::new"
+kappa = "44feeb3b391e1f3c1b57c87c4836bfcf3bdd1b9af974169914c4ff174020e05f"
+at = "C=u32"
+embedded = "caf1e108296110dcf7a20bdd0874397fb47ec4c1b35b0528bbb843045f9cac75"
+status = "residue"
+cause = "mir::Ty: page::slot::Generation<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Generation::partial_cmp"
+kappa = "ab4b3e2bd3e4132dd44bd1a6290956ea1bc405cf0b7cd22760a17a97e7a23311"
+embedded = "69f0696007f149a23861fa98e792ffb6dd261a82aaeca7d20f8d0dd3a626efb5"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::Guard::release"
+kappa = "07343f5683551ae5a6dcfba2920f3b5fb30a4b5bdac3f3f35ef88a28df5d66ca"
+at = "C=u32, T=u32"
+embedded = "370283e71632be90c1430d2e2d7faa6a36daaeb2eedd3143c5aeaf49d3c11ca7"
+status = "residue"
+cause = "mir::Ty: Guard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Guard::slot"
+kappa = "fb137722c0dd5f4ee54ac74a31e480a013e1238b6c4a1b05f122d87dcbdb0de3"
+at = "C=u32, T=u32"
+embedded = "c2c27a6f0cdd0196a6214721c0c16efcb62caf23d2e71bed6de10fa68db46099"
+status = "residue"
+cause = "mir::Ty: page::slot::Slot<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Guard::value"
+kappa = "9603d6c7c11e569e381641b01580d2acf3aea80db5254c77a899616f882e1712"
+at = "C=u32, T=u32"
+embedded = "578742cc7a49e7fa0f3ee32c8917ea348372f886ee3dfd8f540c9e2dbdd8cf5d"
+status = "residue"
+cause = "mir::Ty: Guard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::InitGuard::downgrade"
+kappa = "04e0d679d41dab105b2b75fc3fe3d8f2a9a60dd659149ca83cc496a74ecba4e8"
+at = "C=u32, T=u32"
+embedded = "742773eea2482e3b3bb31b143056e1f6629e07584e5856debd1b1f8c62cb4d12"
+status = "residue"
+cause = "mir::Ty: page::slot::Guard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::InitGuard::generation"
+kappa = "e9b41940b5fe124ac66cf07b8f8b7823b08fde4bbca8cbb37d3c89bbd97897a6"
+at = "C=u32"
+embedded = "d3e83dd54ee3095c47f53fec073f760a205c9751243a3c2baaa8da50eed40693"
+status = "residue"
+cause = "mir::Ty: page::slot::Generation<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::InitGuard::release"
+kappa = "3c72c6e3933b12095b4e69808bdd338f5605d1e612fbf7d349a274f20bec9b02"
+at = "C=u32, T=u32"
+embedded = "19dc47608297e0acc1d7f570eb3cc0b4090685046cba919461e161d32542eba4"
+status = "residue"
+cause = "mir::Ty: InitGuard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::InitGuard::release2"
+kappa = "bb9fa7e12d40c701e9b260d8f11cd181dd8f9602853fe37f6db3f9192e3817d9"
+at = "C=u32, T=u32"
+embedded = "5b7ea25436a1cc73382064e5522930bfc57ec0cd8fd5bbbeda9575b1d21784ad"
+status = "residue"
+cause = "mir::Ty: InitGuard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::InitGuard::value"
+kappa = "cbbf356dbf5c3974b0ef93947461b2ae692f8222996074270a39e89273969f47"
+at = "C=u32, T=u32"
+embedded = "b1783ce0f2f500c6d6e519cb052960780393d746855f6bbed7e1445f848c7339"
+status = "residue"
+cause = "mir::Ty: InitGuard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::InitGuard::value_mut"
+kappa = "32cf22f4972b1dadecb5b9b0bc251a140233c0cce150c33e800db78c939cefff"
+at = "C=u32, T=u32"
+embedded = "59f27d3d2b79c8541dc0ac11d1a353488d923ef4332ce6157506a2de018bf1b4"
+status = "residue"
+cause = "mir::Ty: InitGuard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Lifecycle::MARKED"
+kappa = "e813e0aef90567769738055bf341bd8b99fca246ffe02b44cc6475887cf52677"
+at = "C=u32"
+embedded = "d7171d7354aa9fa1379eb0817f235313f1b1caacfdad27492049f3edca35aceb"
+status = "residue"
+cause = "mir::Ty: page::slot::Lifecycle<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Lifecycle::PRESENT"
+kappa = "e3b10c8baf9913030def1bdf6b0ec68c4347cd57fd34e87952fab94ed9f21a5c"
+at = "C=u32"
+embedded = "d67f5b37979b46e5faa96a8c12d29f7e91e58f73bed4ce97ff0e7d96e8d992cc"
+status = "residue"
+cause = "mir::Ty: page::slot::Lifecycle<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Lifecycle::REMOVING"
+kappa = "64fa30fc5a4deed55bba3296285698e75b1c40425cf90e3742e202378f6f015a"
+at = "C=u32"
+embedded = "8349b1d0bd303dab45d741a1b234ebc5b598e825dadbd6f4b5bb6d96a9cf64d3"
+status = "residue"
+cause = "mir::Ty: page::slot::Lifecycle<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Lifecycle::as_usize"
+kappa = "199a40021d046948213c05cda002e1dbfa23520f9eee0d65ce19c06e113a296a"
+embedded = "1e26a7d7deb3c0ab175a6f8c8bee2c6ffda26c915353555449ad817d4c87115b"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::Lifecycle::eq"
+kappa = "20dcc13c896e3a25ab7e58551a5681a851c63c1ff9d02d8dd8fc4d7ee7f5b47b"
+embedded = "dee764a5f8fe46c718b8368dcac75a3c0722279ae40d98181be09a98e25e0625"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::Lifecycle::fmt"
+kappa = "89461d36d520778fd627cbce4e5116451f969278e473e3de726d24e7ca08fe5f"
+embedded = "01f27e1263c0b553d53d31f14fb8d1e770c9551848e93c35a0422a6076e59575"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::slot::Lifecycle::from_usize"
+kappa = "b34e0a568a9fed73f6f849d8b571b9d5405bbd3cbcc3a3e426f31b9563e5d7c9"
+at = "C=u32"
+embedded = "4a1459cf85622cac9442f39f72de710f60376a308994de2e9194c0e3e0008454"
+status = "residue"
+cause = "mir::Ty: page::slot::Lifecycle<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::LifecycleGen::LEN"
+kappa = "46bd185b97bf5f165295f63d9cb78c36f0859703e029ab38cb8b1ff412cc98c6"
+embedded = "18259d3c0cc963d75d8f19c6bd38f9f01faf6a9ce8e8844ba73790b25a2c873d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <page::slot::Generation<C> as Pack<C>>::LEN"
+
+[[fn]]
+path = "sharded-slab::slot::LifecycleGen::as_usize"
+kappa = "25849a9e93cfad01979418966f59b6eee18bed615078fed0518c7519ab8c3aac"
+at = "C=u32"
+embedded = "27dd89bdf611ff0303736f3e59762cb180fbb81a0981d1e117f6363a2536e7a8"
+status = "residue"
+cause = "mir::Ty: LifecycleGen<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::LifecycleGen::from_usize"
+kappa = "e5cfa7d874a5e558c9afa9bf4351498fec47692fe618b479a505e7f2e19af793"
+at = "C=u32"
+embedded = "9d8bc38e107b03c2e6a58834e5aa2a67595e8a86fe76a09452a1b64214693258"
+status = "residue"
+cause = "mir::Ty: page::slot::LifecycleGen<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::LEN"
+kappa = "040c8df06f8a1019ac944c71fe5e9dfa99eaf8dde9283ddeea1c6a49f9442897"
+embedded = "c4c4ddd9cbb50e246210e3a60ab407e46617ea8af0b91c4dcac32ad558bb6609"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <page::slot::Lifecycle<C> as Pack<C>>::LEN"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::MAX"
+kappa = "488c04d00faf189dd0c66876cca3967ac15158a31c248b62d66c2205b03ce0e1"
+embedded = "3776680d245448561fd19a9abfb43c3ff37274887e11bf98aaea3873bb20d282"
+status = "residue"
+cause = "mir::Operand::Constant: <page::slot::RefCount<C> as Pack<C>>::BITS: mir::Operand::Constant: the constant item <page::slot::RefCount<C> as Pack<C>>::LEN"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::as_usize"
+kappa = "480d3379808751a633588a6180ed9ace439b31db1d7aea110103fe1c15175d31"
+embedded = "5a742d6d1206885ffa6e01a65f654a4729dbfefdd9b177d0362b2264723b7e89"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::clone"
+kappa = "2335c9f825306618b1617cfc8c235ef02e1b8875c879577f7662f6b2e0927268"
+at = "C=u32"
+embedded = "1cf24aa20a6bc9a1daa6119bddbc740a1d986c4107f48ece297d48495a1973c7"
+status = "residue"
+cause = "mir::Ty: page::slot::RefCount<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::cmp"
+kappa = "594f844df79a84e18964c07ebc5daba589e7919d8ae154cb518018d105ef71c3"
+embedded = "880e0cfe4c85549b80f9a21208665af6b129ea7bcdbdf52bba99ba7a9f9ef15c"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::decr"
+kappa = "dca81cfe694115ec23bb721b4bcae68d5a87f42ded65f9c273eded01131c4a5c"
+at = "C=u32"
+embedded = "654ff12785956fe485767d541b9e01f60a63575b52efb3d7590ecfc29f08d7a9"
+status = "residue"
+cause = "mir::Ty: page::slot::RefCount<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::eq"
+kappa = "a5b5945be06557192873d03f2d4e7a23282173ad4c3716b164458e4bb4e7876e"
+embedded = "9f51ee0267a4d1e4dc498b0c067bee887b3ec2418a2d260c69e043d1f811987b"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::fmt"
+kappa = "27f5b52621894814a77f5daa79bb80b27dbdc27c00cc468cef91b08f45fc95c6"
+embedded = "ff9ba4d13b542da8dbab3b55a4aa51c968461dde7dd8ea085e572a8f1e32f973"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::from_usize"
+kappa = "5635607fe4fc3c7e610aa4c91934b6b6ee1844aa6f30e41c46047eaf4af49010"
+at = "C=u32"
+embedded = "cc199031492295467c2de88ab6e647c82cc0196f132c4e6f978f37717b0e04cf"
+status = "residue"
+cause = "mir::Ty: page::slot::RefCount<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::incr"
+kappa = "3568a2d86c58873fd3c7d3c3b26319c62f16d102fc335ea7d87db534b0f61c6c"
+at = "C=u32"
+embedded = "923f85469f358d1f74af23994b27cff57adbed5faad08280c9a303d8f0b31e52"
+status = "residue"
+cause = "mir::Ty: page::slot::RefCount<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::RefCount::partial_cmp"
+kappa = "bfe0713f65b1a1fa746a98fd1a7eeb21976899ae578b7713decf8dabebe1156e"
+embedded = "c6f287cef1f3f7bd690b5f4d05567665d1da37c7a727effef0d887198843d67e"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::clear_storage"
+kappa = "c3730d98cc64803938b62dec7175fa1e13b54f08dd9874ce5665966cb12a8b92"
+at = "C=u32, F=u32, T=u32"
+embedded = "b27fd171aaa1cfd1130d62ff33112776bea272f0568ebad138979cfc4bc2155b"
+status = "residue"
+cause = "mir::Ty: Slot<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::fmt"
+kappa = "f7b520c82f3c308555229ac44d6b6e8aa9002011bbfd64ef61e895a105a3d8d0"
+at = "C=u32, T=u32"
+embedded = "f241c8c3d990dd5c1f2cbef888f670623c142adaaa25f49464183c2a0134bb50"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::get"
+kappa = "32df1dac44f756f947594323e66e604b850f2188867ab0148bc20e7493ab6736"
+at = "C=u32, T=u32"
+embedded = "a6e22aaa7888ac10fcce90f3344ac5edf56b375ab6899845b3550a5450fe7922"
+status = "residue"
+cause = "mir::Ty: page::slot::Guard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::init"
+kappa = "f088eaa7e2f40f833485b99fc8fc7026fae12dee55881879b4c2cc2b7509a32c"
+at = "C=u32, T=u32"
+embedded = "2e3b7b46aa4e796d97f22db59e9db856772c944b5da26d20663152c6f3da7d3e"
+status = "residue"
+cause = "mir::Ty: page::slot::InitGuard<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::insert"
+kappa = "35b20734ba4fdcbc68af1678b4bdf3ec26877641b43dbe0538a256631823f356"
+at = "C=u32, T=u32"
+embedded = "9a207c84533775712038a70d412402f4c409fcab441291229506bafff54252a7"
+status = "residue"
+cause = "mir::Ty: page::slot::Generation<u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::is_empty"
+kappa = "41b30ec22b15e221ce437cc06afb4a364213943cf2054b463dfe9bb0c61c4c1e"
+at = "T=u32"
+embedded = "9285f4978af0b7270a0e54e45ea3d4d5985a71f2054624ac4b261d712e8f44ce"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::mark_release"
+kappa = "6b313bb590408be98da046a4d7886321b32acd92cfd4c8a12f0a2184e5addc08"
+at = "C=u32"
+embedded = "123a7364dfee929c505c050320fb1c51bffdb60b018c5cf9edf3eda560777c84"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::new"
+kappa = "7fd08ed734404d428fee427e2443300fcad91c460776f03888270ff9b8ce992a"
+at = "C=u32, T=u32"
+embedded = "fab3aedd69e78e4ae6d78e1ab946a05546a01f160d5e9a05551af85f6c6b29e7"
+status = "residue"
+cause = "mir::Ty: page::slot::Slot<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::next"
+kappa = "1ba6aff8959a56730dbf55326a7ae069f1ad3c35f99360d27873432cc435abc2"
+embedded = "0ad541db27313fbc1534eca22e2d71f0a2f2679e90b0c4e751ea089bf2bddb97"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::release"
+kappa = "857c56e13fade7d62ec9c9c4baa9a1e208bd0599afdf43c9cd08cd05ea0c4cf6"
+at = "C=u32"
+embedded = "cb0fd66f65cdd8f43df8c7f5c9e31a559f4ef90d63180fa18844328152f7800e"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::release_with"
+kappa = "7984632c8519da4343b77c70dd6c5cc16dd2428e024395059b8ab8e1a8bcc552"
+at = "C=u32, F=u32, M=u32, R=u32, T=u32"
+embedded = "87cc7a941cde98dd3d2bdcbae8126c1899e05f58e3f839a52af259833605a4a6"
+status = "residue"
+cause = "mir::Ty: Slot<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::remove_value"
+kappa = "27af49671391db4a68f8168f993d56ec5089db87f4cde3d65db95659ba589666"
+at = "C=u32, F=u32, T=u32"
+embedded = "fe614e91ac6c82efa61f721e47182eb99e37eaa27d37bbf338a0570d04b9b6f4"
+status = "residue"
+cause = "mir::Ty: Slot<Option<u32>, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::set_next"
+kappa = "a9d80a384e1815bdef15de7fcdcb47f17419c860fa35a43ee41572d2fbc2225a"
+embedded = "38300e69893d864c8c61a0c5321b502e0e1fe5be6a04ccf18c3d0371d4a01baa"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::try_clear_storage"
+kappa = "05b39ab619099c4c9a283788df49e09dcb5f9120fae9fed99584a0b9a3a34cd3"
+at = "C=u32, F=u32, T=u32"
+embedded = "87da2d8dfa5cca9023a5c3512812dd7a7c82096012b2076f76933e8ab32f3790"
+status = "residue"
+cause = "mir::Ty: Slot<u32, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::try_remove_value"
+kappa = "cc7ffc6ff8cc0d046edb0727d0eab58255d90b183110c55e80a21fe09f9484d7"
+at = "C=u32, F=u32, T=u32"
+embedded = "76d84f6a7a34267d6ded74021df9954cea718a4d2f4f0b06d363048fab4ced7b"
+status = "residue"
+cause = "mir::Ty: Slot<Option<u32>, u32>"
+
+[[fn]]
+path = "sharded-slab::slot::Slot::value"
+kappa = "68054d93523049af46a32717ac028fad3638bcf4c9b2d4098e72128ef2621724"
+at = "T=u32"
+embedded = "675cb36a91664def3efbf8202cbc230a6602ba07e26ae1557965b5766f2ffe57"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::stack::TransferStack::fmt"
+kappa = "03f180535fb7bff63028799788df335217c8229c9ef8e71fc9bf607c997e05f9"
+embedded = "bdfaa8118384df703482aa2f652341704f1d6c11e38a1d4e9229bf50fcf1e8ac"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::stack::TransferStack::new"
+kappa = "2e4287040a5bd1d45a714c3a3d36912f9d1d864e6af30cb8d4aa9407ed41854b"
+at = "C=u32"
+embedded = "86e026bb6070b4cca092a074e4c59037aee566f15c8cbdf31331c32e63585ad4"
+status = "residue"
+cause = "mir::Ty: page::stack::TransferStack<u32>"
+
+[[fn]]
+path = "sharded-slab::stack::TransferStack::pop_all"
+kappa = "19c1b5b32ad1f0191235db037039a5da065bc9ae65718661343762dc55402d87"
+embedded = "64149af3aa7d7ceb5455a548796c6ae86cc73ab9133916994dabae4f3f74c131"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::stack::TransferStack::push"
+kappa = "2dd101d562012ebf587ef771fae6b326c4446e9775ff9ff4a50618be1f94ad06"
+embedded = "4bf891e5abb0ea59d9f5c746536e64db92f877f543b48e2abb12dc5c581b69b8"
+status = "residue"
+cause = "mir::Ty: C"
+
+[[fn]]
+path = "sharded-slab::stack::TransferStack::push#2"
+kappa = "4803ca32f2a9975922205a1b5ba33ec30c0a0ad4e660e2dc0289d488d0dd3014"
+at = "C=u32, T=u32"
+embedded = "05bf87b8224aab188406a503d424d476a7cd607ccadc51395cb6b5a2a4c6a98e"
+status = "residue"
+cause = "mir::Ty: TransferStack<u32>"
+

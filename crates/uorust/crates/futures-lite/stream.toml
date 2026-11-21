@@ -1,0 +1,2691 @@
+[[fn]]
+path = "futures-lite::StreamExt::all"
+kappa = "10340ffe5678e391a4839e66995d79c367cb9035f2a1f6b8c54e6c812f06e21e"
+at = "P=u32, Self=u32"
+embedded = "0cbbbf4475ee7dcc917df82691e87acd589938595ee264503c7c23178b7a4314"
+status = "residue"
+cause = "mir::Ty: stream::AllFuture<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::any"
+kappa = "89c7212c3dc920156f6d35cda269f0eaebf4a293887a654901528656e2bf5d2d"
+at = "P=u32, Self=u32"
+embedded = "7f59a712f79cac4e6e635d3415ba8cc4dd50b705c8d6694a3e15aa615dd27afb"
+status = "residue"
+cause = "mir::Ty: stream::AnyFuture<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::boxed"
+kappa = "f137437be9a91694e013d8cd46dea40eb1c7e229b63d65a563cabaf8b2599d78"
+at = "Self=u32"
+embedded = "18b92cabe6ca004e6a250d2ba34a85e247d2a92cc7207cd74031cea5806c3fd9"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = u32> + core::marker::Send"
+
+[[fn]]
+path = "futures-lite::StreamExt::boxed_local"
+kappa = "36955a7d29db346d8cdcfe35cb55406997dd3bac2289800cc5f45a353e5e3752"
+at = "Self=u32"
+embedded = "5a486b2f0d56483a94308094f0fdb8ca4f15eb898cf83b5af95dd38f37c053a3"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Stream<Item = u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::chain"
+kappa = "397795cd5197b3e524a37ea7e4b09b234c7a809816ef8d594b7c09241dc00e69"
+at = "Self=u32, U=u32"
+embedded = "888a8373cb5899485ab0cb2fff30a904aca3682ad342ad43e764eef2043d53e9"
+status = "residue"
+cause = "mir::Ty: stream::Chain<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::cloned"
+kappa = "4c643934d30b2a7020542417e7a4db745bb308c0b7b41a7339f4b4bce6f21685"
+at = "Self=u32"
+embedded = "ed0352bf04ed8b2521a96a0c0f05d6dd2ef34f39b671ec882cb7d0c765d4a950"
+status = "residue"
+cause = "mir::Ty: stream::Cloned<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::collect"
+kappa = "dff32c22ba09447d692733e75618d13c30ceb646db2e475dfe4e1636fcd225ef"
+at = "C=u32, Self=u32"
+embedded = "1426b1dc7d46b5d009a1f4f708999f3e53a021ef5e85208fdd52f38dd4ca003c"
+status = "residue"
+cause = "mir::Ty: stream::CollectFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::copied"
+kappa = "14f420c117680430c6006f4cb2516b39da95164afcc289cdadd53fad91ddbda0"
+at = "Self=u32"
+embedded = "8e3734c03a71a70facdff41d5d5450d1a87e7ad31cf763cb81e21b00f3383a9d"
+status = "residue"
+cause = "mir::Ty: stream::Copied<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::count"
+kappa = "4215031d0d119fb765d69fc11d472c50b6c775495921519547c4ffcc0d837bc8"
+at = "Self=u32"
+embedded = "9feec78f203f623d8ae11ff02554d266e8b9a9548b1d9d44ebbcec320d0339d2"
+status = "residue"
+cause = "mir::Ty: stream::CountFuture<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::cycle"
+kappa = "74da1aef6c254e592a8105f68c5335a3979bc0c555f17c066cdfcb6986a84662"
+at = "Self=u32"
+embedded = "fa332e7b3346d8f76860e05e771ae61a3585d709efadc66e0074ef1659a72efe"
+status = "residue"
+cause = "mir::Ty: stream::Cycle<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::drain"
+kappa = "fdfae775580a3511f152ab4ae7a7789af6f1a8087605306be52a1cc8ca34a749"
+at = "Self=u32"
+embedded = "5fe563680910e55efb86e5c6db10f60f5dc663304ba17f26776b21b148ce1df2"
+status = "residue"
+cause = "mir::Ty: stream::Drain<'_, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::enumerate"
+kappa = "b0967b510b35eac66a505254748e974460841ed5614c054b08eb41e44bec9993"
+at = "Self=u32"
+embedded = "32a70d21fac0bab76c62d01b1653aaf20dab1288f4654025dab5a73e765dbe98"
+status = "residue"
+cause = "mir::Ty: stream::Enumerate<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::filter"
+kappa = "d6564bfcafb52f4fca5d86d7afd4456ce939343f2a0bca8f5574b60b2b0d762b"
+at = "P=u32, Self=u32"
+embedded = "a0327218d41932c89e0e15c9c9689eed81e225a97d063620e1c10d7591dab038"
+status = "residue"
+cause = "mir::Ty: stream::Filter<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::filter_map"
+kappa = "b03a768cb0ec5d8f33f514eafb0ca9b556fe6a7f17017f4ec77bf407f8aee6cd"
+at = "F=u32, Self=u32"
+embedded = "1aca1118809a232ef8baf088ef1bdeb050f10450cd8a92dc6bb61aa7ef2185bb"
+status = "residue"
+cause = "mir::Ty: stream::FilterMap<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::find"
+kappa = "d10f5cbbbd94a7cd2747a0d8e34026515361d97141e2b2a02fa7ad23e90af3a2"
+at = "P=u32, Self=u32"
+embedded = "cce9150864be1e58cf457ed38f5f0387f7df98a280792080ff686ccb49d8f715"
+status = "residue"
+cause = "mir::Ty: stream::FindFuture<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::find_map"
+kappa = "adf0590f02afbda27a0bb7aca4ca7ef370db5cdb669941795e7e526f2782b083"
+at = "F=u32, Self=u32"
+embedded = "3622648f78b5c4d92fec4969f388bbee475cf4c5289941a762a2c752cadf2cab"
+status = "residue"
+cause = "mir::Ty: stream::FindMapFuture<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::flat_map"
+kappa = "238306c8664bb56571a6e85d9b3f244b32a0bbc8465057f092698fd22dfdd4be"
+at = "F=u32, Self=u32, U=u32"
+embedded = "e56ed4509da2937a8ce3edd39253b25aeb0e2d6e6e24c022601613cd89186ce9"
+status = "residue"
+cause = "mir::Ty: stream::FlatMap<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::flatten"
+kappa = "4238b0cf2eec22385625de15a03e3060ffb3cbd8b639ace80382e2b66a1c8849"
+at = "Self=u32"
+embedded = "af9281fa490bc71fdcb1db64408eae6fe1e14001ab79c776b89290e76ad4a852"
+status = "residue"
+cause = "mir::Ty: stream::Flatten<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::fold"
+kappa = "2edafb94807bc836232aa103488875cf373e5e25a518d381947a385894df7b18"
+at = "F=u32, Self=u32, T=u32"
+embedded = "ecc12c06f60b5823f7d9b59997149d495ebe5a291c30d925075b335a11b545e7"
+status = "residue"
+cause = "mir::Ty: stream::FoldFuture<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::for_each"
+kappa = "7d0a36f6d204b69c154b6100b01aa269971cdb48d271e1c32e5c41692f232d3d"
+at = "F=u32, Self=u32"
+embedded = "60a6791f4920b1f0fa0203e4bd759a861a0647949d38214719cbd6573e111d91"
+status = "residue"
+cause = "mir::Ty: stream::ForEachFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::fuse"
+kappa = "9d35360d8cc1f97f81775edcd1af54f20daca0d1df7a1520da3121f257059b59"
+at = "Self=u32"
+embedded = "634072da0a1c8e06cb16bc8598c76ed714f06a65f6078a46ea38dc5efc7b1cae"
+status = "residue"
+cause = "mir::Ty: stream::Fuse<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::inspect"
+kappa = "2b2c29b00beb22095e335a6171ef1f30343d041ab33dd4d5a3c11b591f79d03c"
+at = "F=u32, Self=u32"
+embedded = "97f8967bd80849d7c411d0ab90c1790adb65fdee4c969e25a8d0656b37226f8a"
+status = "residue"
+cause = "mir::Ty: stream::Inspect<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::last"
+kappa = "a3682ad1809b69182a2b426da6b45b3877102bbe264d52801ae42622861f206a"
+at = "Self=u32"
+embedded = "341f560302275a223d15a45613a4cf7cb442e089c96f55a58b3cf8b2f7f701d8"
+status = "residue"
+cause = "mir::Ty: stream::LastFuture<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::map"
+kappa = "dfd23b02a97ec4e474995fb14b4c67c7f1c82967dc01ad937d75ab44d1d3dc27"
+at = "F=u32, Self=u32"
+embedded = "f261fd03b6395493415d818581d407f0aed05f6ed3de81c312f2229a240f43d7"
+status = "residue"
+cause = "mir::Ty: stream::Map<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::map_while"
+kappa = "b8434be366420ed2535b9f1c8c51d62d1aae0d8c286d016796bb8e24c808715d"
+at = "P=u32, Self=u32"
+embedded = "be4c3f51b80ed16a6b97554196252e2733990c2d98029744657912e197c60ced"
+status = "residue"
+cause = "mir::Ty: stream::MapWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::next"
+kappa = "2a3dfd20b8dd9ea5dfa293d2a4fba0f3d7a48b1e78bb45a04a545614fea3c857"
+at = "Self=u32"
+embedded = "7ad6e31259974be9afb0651186da2bc01a599ea7d095c01d99ac913c3f572698"
+status = "residue"
+cause = "mir::Ty: stream::NextFuture<'_, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::nth"
+kappa = "30299af7cb8161ba7b8fe7c852078dfc532bc98365310db0b55986d03a85319a"
+at = "Self=u32"
+embedded = "d1801140f42ddac41d1aef3679de81fbd66f4c3d933601f29361e5a38e522b93"
+status = "residue"
+cause = "mir::Ty: stream::NthFuture<'_, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::or"
+kappa = "4c917391d4c67463036a627ca92a227e80ffb307300cf4a3cb4488fc448b6bdb"
+at = "S=u32, Self=u32"
+embedded = "a18ef86c2f3ec9edbe5f95f9ac03a38251a9770c58fa5eea59893e97849cf32e"
+status = "residue"
+cause = "mir::Ty: stream::Or<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::partition"
+kappa = "390b7c1fbfa40125f43b8a44a287f8f53c7d9677c4b991269f823ee92cee6186"
+at = "B=u32, P=u32, Self=u32"
+embedded = "b3db1ed68f9e93d25a252e270e7dfad290fed9195970c3fd6927f7999d99bbed"
+status = "residue"
+cause = "mir::Ty: stream::PartitionFuture<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::poll_next"
+kappa = "953f2cee3061ba99346acd024647ecf7e60c01a6561172f8d594a10d48213594"
+at = "Self=u32"
+embedded = "f9dcdace03d72194715aa786ce25802e705433150a642fc6c0c8bc95068ddb7c"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::StreamExt::position"
+kappa = "22e179d31501fb000c0cc3f9ca01e2721ea6bd6308da5ec6c6af2ef1584c09d3"
+at = "P=u32, Self=u32"
+embedded = "438841a855b9aa4b5e12689a89fe71075e63e5bd7883a682ad9692f33b88ec6a"
+status = "residue"
+cause = "mir::Ty: stream::PositionFuture<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::race"
+kappa = "c0f6f33c10b033f9233fed5cf631b3e2492aace10c627cab54b8b324efdc79aa"
+at = "S=u32, Self=u32"
+embedded = "ec68fca05a425c9a39c0135f3a48a4aed12c08111d305155c927cdd73a3145d2"
+status = "residue"
+cause = "mir::Ty: stream::Race<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::scan"
+kappa = "9464f18d122de64fdafbb61ba109b71f0d5cc55ee7afc4d516e758407845bce2"
+at = "F=u32, Self=u32, St=u32"
+embedded = "97fdadf31ef111b44d7fccc2770ef32dfea1d66892d57ba3852e90689954b808"
+status = "residue"
+cause = "mir::Ty: stream::Scan<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::skip"
+kappa = "a6d367a03f84584421c7a9cbbbd6683a1c3fcb2e2b32c96d366f1e09c66d3d9b"
+at = "Self=u32"
+embedded = "faaa76606586d4325dee1029b70036065dae8d513c1a64d95ee8edec1ac81111"
+status = "residue"
+cause = "mir::Ty: stream::Skip<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::skip_while"
+kappa = "0f409a95740dd62033382b0e24717645b7fea58ed8aeb5a67220023361b52b6e"
+at = "P=u32, Self=u32"
+embedded = "994d20032e3fbd0bab0fadab2946fe733bdbedef05cdd005eb2e2d22e7d70c80"
+status = "residue"
+cause = "mir::Ty: stream::SkipWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::step_by"
+kappa = "3020cd858931e0c74dd795e0598e3e52e38b3d7d44106da09d3c2b526fe39626"
+at = "Self=u32"
+embedded = "ec3fcacc2ed2d9c9d35ec52032dff7ecc8f91769ec03229593db3aa8ce4d021a"
+status = "residue"
+cause = "mir::Ty: stream::StepBy<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::take"
+kappa = "555b8240f8e2613b06f0f8e6189338cdd06073a43231d23d81bf8ab2959146b0"
+at = "Self=u32"
+embedded = "63807d955ff9ece59a9b530d6d345767ba21f7cb5ca71c31fb2ff5ed4402b6d1"
+status = "residue"
+cause = "mir::Ty: stream::Take<u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::take_while"
+kappa = "1062e577245432e7766ff41381293278ac2565118f94a8dfc4da6fb9145d5ede"
+at = "P=u32, Self=u32"
+embedded = "3d3ba8929bf2729b9d23f049934931813ac38d84068632b441cfed228188657e"
+status = "residue"
+cause = "mir::Ty: stream::TakeWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::then"
+kappa = "a1c5dea18506c67875673c62f3ef0226cac2641428e7b436cf5ea22cffe05a0a"
+at = "F=u32, Fut=u32, Self=u32"
+embedded = "c87546482c474b2fcb5bfee1f42fb910907dd4170809735f31f600bac8e59f49"
+status = "residue"
+cause = "mir::Ty: stream::Then<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::try_collect"
+kappa = "af137f8aec386053ead1d85f59a0e979284c968e9a262dfaacf3e3cd147e67b6"
+at = "C=u32, Self=u32"
+embedded = "c02215266fe115e5b287b3b548b2bba733c25a50f65ca9c845c80a727a87021c"
+status = "residue"
+cause = "mir::Ty: stream::TryCollectFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::try_fold"
+kappa = "4aaead5152c821a73d2dd636a842b0c0e4e5a2da966063bc291121402f6cbb0f"
+at = "B=u32, F=u32, Self=u32"
+embedded = "11754865512ca61f8429a884152c70954f18c2116a1ccd4ed3e4845a08f70784"
+status = "residue"
+cause = "mir::Ty: stream::TryFoldFuture<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::try_for_each"
+kappa = "1f0b660a88ed8879f63fbe24bb2a66008e4afcc146c11548fb7537ae175e83c6"
+at = "F=u32, Self=u32"
+embedded = "6b1d3706ad293257c106e7c0cfdf29f47f78a84ba30d4d9dbe2160c4e6362867"
+status = "residue"
+cause = "mir::Ty: stream::TryForEachFuture<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::try_next"
+kappa = "f45720825747bf58dead8d2094b6fc89e1e30a26339bae037c5c6b125322b78e"
+at = "Self=u32"
+embedded = "fd44d0c43d08675aeb117c93906d193cce5130e9437b07bd1ff39fef2e44e62c"
+status = "residue"
+cause = "mir::Ty: stream::TryNextFuture<'_, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::unzip"
+kappa = "57a443242ea3e286615b7d7e3199a084743349234fead8842439c4a558f63f49"
+at = "FromA=u32, FromB=u32, Self=u32"
+embedded = "27bb9d22bf6e1beec9f2732a6ac85014c0268959d1ed35bb0ff8ed8702472f0c"
+status = "residue"
+cause = "mir::Ty: stream::UnzipFuture<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::StreamExt::zip"
+kappa = "f2ca7705c26558061c8c972fad1ee17820dfabf5100752428f2881f1d8e4c87e"
+at = "Self=u32, U=u32"
+embedded = "647d76e87e5477aa2865e93c1fcc3de69d9d3dee819d2a9f3a225ee29d5805e3"
+status = "residue"
+cause = "mir::Ty: stream::Zip<u32, u32>"
+
+[[fn]]
+path = "futures-lite::iter"
+kappa = "773a006ff377d5e3c179d21ca2abbbd3fdd6272f4e191ce641ed75655e27b043"
+at = "I=u32"
+embedded = "ebc47daaf305216b2ff1b521e4d0a2f708e5bb86d4773d5c2b136f4efdbf8d42"
+status = "residue"
+cause = "mir::Ty: stream::Iter<u32>"
+
+[[fn]]
+path = "futures-lite::once_future"
+kappa = "bcb9b5422ceff84acc6e9ee05211597dbcfb7d5008e55e525b2e99e0315b7b16"
+at = "F=u32"
+embedded = "022a17d939d8a642862cbdafd9f0499724e07a61c64401890a1f659bb448b354"
+status = "residue"
+cause = "mir::Ty: stream::OnceFuture<u32>"
+
+[[fn]]
+path = "futures-lite::stop_after_future"
+kappa = "417b25edada40e81f8692157854d7578cd79f311d216f947c4c2d2a0e2d1494a"
+at = "F=u32, S=u32"
+embedded = "e42a53a7df6ea98e4e31533dbf3734eda0507aaad714aaaf4629b2555facb42b"
+status = "residue"
+cause = "mir::Ty: stream::StopAfterFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:154:10: 154:15>::clone"
+kappa = "03ca3bb6b6affc80d3ce3711f45fba999195266dfff8fcba1a30957da7658a85"
+at = "T=u32"
+embedded = "673e7448fdc5f172679517d915a48cb22e8ef43eee3c9175ffc761a1b9acc692"
+status = "residue"
+cause = "mir::Ty: stream::Empty<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:154:17: 154:22>::fmt"
+kappa = "fbe9a736b4bc9eb02ae355dc3dfc6445c5d8ded6864a87ba92113d5b0633858a"
+at = "T=u32"
+embedded = "e63544caf53bc4c0bf5da426f64327d7344d1d3578c92e82b359297dbbbad26d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:196:10: 196:15>::clone"
+kappa = "72d27a3d6cd5e863876b6ffa7d53ae46f5a48f6616d54253307b39fff0d52eb4"
+at = "I=u32"
+embedded = "d760f95d1c423589e11d95cd7681c03bdd954f7dd5fbe5e1ff5495c8ca9a0f57"
+status = "residue"
+cause = "mir::Ty: stream::Iter<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:196:17: 196:22>::fmt"
+kappa = "9419cc62e70aea1bf5dd57e57a345627a75afea137408bcb5805f750ad08fbed"
+at = "I=u32"
+embedded = "669605c045ae0f22698482489aa94b2b2d81e6a953bac09c1d24a36513ed0b67"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2099:10: 2099:15>::fmt"
+kappa = "b1015525a6553e67e1d09f1b0309bf965d8283813a694371c018a68048be6e9d"
+at = "S=u32"
+embedded = "e189322ffc2d610ed5f9ed1d6bc1e773cd6e47b06a01c1c71fed109df55b6f50"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2116:10: 2116:15>::fmt"
+kappa = "e4679498f6481e6930aa1ecd2845c6da59f4f98a4ddc8399015c886072c04207"
+at = "S=u32"
+embedded = "95a57dcce4109bb12239ab8a96187a7e9dc3654efda5b9dac52feeec13229996"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2138:14: 2138:19>::fmt"
+kappa = "9cf6a124bc0cb355b78a641b47d037533f9c8581e29574487219c3f1619364b0"
+at = "S=u32"
+embedded = "ea7f80829476c26df8a90c86ab0d09ea47539cfcb312e574f6fa4461e723fc68"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2162:14: 2162:19>::fmt"
+kappa = "3ccafacffc0fd696cb0e5f40d6e2883e3afbdc85f419a350bb0c13a09f83c673"
+at = "C=u32, S=u32"
+embedded = "8069838d5d3653cee10a57e30471c47de442aba6d9b18d4e1e215a9264c2f8f7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2191:14: 2191:19>::fmt"
+kappa = "e6c32cfe1aef85da3a68c8bf595fdf40ec03da626f15dacfa1e1c788776149e3"
+at = "C=u32, S=u32"
+embedded = "dc12c94d863bfe86eed78662bb5ea99362fec79fb20c3a9f7d820b0d0974d725"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2220:14: 2220:19>::fmt"
+kappa = "4af7ceea19a131426530be0efc66874ddeb101d62f177f69f06d4622124e1e0b"
+at = "B=u32, P=u32, S=u32"
+embedded = "d3b5127c577d69073f7a17f4c6817c4a71d84d415d19444ce559779bffe0c6b2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2258:14: 2258:19>::fmt"
+kappa = "b0e19f3f18f80672cbf5302cec77bab75035bd7a5e52e26e50ab6e75b24032af"
+at = "F=u32, S=u32, T=u32"
+embedded = "02e3ae5db59b79ecfd3bb736805729959d4012330d473992e7f659c0405bbd75"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2291:10: 2291:15>::fmt"
+kappa = "c926faac34a3ea1d44737036c915b084cd1c233623ceed3c224dbc01a07b1d18"
+at = "B=u32, F=u32, S=u32"
+embedded = "66b3cf5fcad02083511c67ec9270c3bb794717752e7a85c86e5da38058faf634"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2329:14: 2329:19>::clone"
+kappa = "349bff84bc1f1ebd73d0efb1556de4cda9f9b2527848820fee2b0fb2beacb6c1"
+at = "F=u32, S=u32, St=u32"
+embedded = "974fa598d70d41507a0532929b237b404852288973c65c02c4347646c034b794"
+status = "residue"
+cause = "mir::Ty: stream::Scan<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2329:21: 2329:26>::fmt"
+kappa = "b34292a9fa7582bb88971ba29fd2999cd9f90addf85d49a8e53e9b303893fc86"
+at = "F=u32, S=u32, St=u32"
+embedded = "2a866a5352dfb69719ffe7df38f3542ef4341435a0c4ef2581ebce5f4949916e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2358:14: 2358:19>::clone"
+kappa = "53519b47a555a2a13c81c5400239f1d8172890999c05abe9afc75747043938a6"
+at = "S=u32"
+embedded = "fbcb8da986c098bf2f50efa12e4b5c313b170f17d707dabf882686aedd5d27a9"
+status = "residue"
+cause = "mir::Ty: stream::Fuse<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2358:21: 2358:26>::fmt"
+kappa = "542457c07792aa863dd92b45a4d212c5e21b760e44a5cdc7c970cc1c81947085"
+at = "S=u32"
+embedded = "78f6da41a60e2cf296a443b1843b8d6b7d9129d8c73af36472bacba9b5c271f4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:236:14: 236:19>::clone"
+kappa = "97e14dfe7ed6a3033fbf906400ce2d30d911a6eec89d8c5b3b0a974cd04303fd"
+at = "T=u32"
+embedded = "783eae61c4574a261c5d804a2dd808fc3465b3a1a3fdc2ec8951e459b5a73d59"
+status = "residue"
+cause = "mir::Ty: stream::Once<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:236:21: 236:26>::fmt"
+kappa = "d52796b051d8a4925e74cec95321101ef9fed2ba781501a02279bb5dfdb9c875"
+at = "T=u32"
+embedded = "d26fcd2b57ac1e041f4666dadf8320d55f2ac245356ddf8f8ac6a8dfd441954b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2387:14: 2387:19>::clone"
+kappa = "e17b2d7a703e8364e46f1d7b51c7b65c5debea5758b419192b3156d591ddf1fa"
+at = "F=u32, S=u32"
+embedded = "8a1905999d37d250b7ca1708fd447bfe807bb60845373220424c34c5454fda3f"
+status = "residue"
+cause = "mir::Ty: stream::Map<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2387:21: 2387:26>::fmt"
+kappa = "e92554d6d9dc909deb6d09336ba43d40076a4cb1e720d1c0712bc42b3441419d"
+at = "F=u32, S=u32"
+embedded = "71b2bdd51588cfe8bf5f82442d9f2f5d8171ac72a46041027ff3074136acba2f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2416:14: 2416:19>::clone"
+kappa = "e800f73aff8c8bdaf0d3bd160f37293e4371e6843e7e7e0c29c874805740ffbc"
+at = "F=u32, S=u32, U=u32"
+embedded = "87a9b1f15d8d1e3ce01dceab5a8c1b26fe87b01dd69b1218b3141bf8c4e83283"
+status = "residue"
+cause = "mir::Ty: stream::FlatMap<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2416:21: 2416:26>::fmt"
+kappa = "6ef8723fb57abd102b5e441a4f2e6ac246f841ecd927b80f3e097ecdc1eb8f6a"
+at = "F=u32, S=u32, U=u32"
+embedded = "9795a2fbc653cb2361af8610066b82066c2365e11184133aa2032c137f99a375"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2454:14: 2454:19>::clone"
+kappa = "0fad3f52e698335f040299c4461bb630ea30a8b195cd0ad7b424079d18949c07"
+at = "S=u32"
+embedded = "a73d3f0c22a369952b255658954a1ff4aad251b92030acb1410227184a66d496"
+status = "residue"
+cause = "mir::Ty: stream::Flatten<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2454:21: 2454:26>::fmt"
+kappa = "57ed9425db637c96ca71f1ffd83087cf33b3271ac9145f529d37678899d9636f"
+at = "S=u32"
+embedded = "12cba84361d13bbfa12116e8a6e1f91dd436669ef0f11a2c6eb5477ee3eb951f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2491:14: 2491:19>::clone"
+kappa = "ecc11ec158cb5c748ec132ca99ddcf8edaf27f07201a454ce1782925ca36c2fc"
+at = "F=u32, Fut=u32, S=u32"
+embedded = "a6ae21abe11162c9e2ee8d61cf979887d3654704f3a8d6320285ba4a23d411f4"
+status = "residue"
+cause = "mir::Ty: stream::Then<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2491:21: 2491:26>::fmt"
+kappa = "3fb7bfd02848cb308cdde4326750356788e3a34bf94f5528de44515e3c68b6d6"
+at = "F=u32, Fut=u32, S=u32"
+embedded = "b4f0ce88cfd3591d44c207d92072c8cb8d2db8a9e005c4f934bb3c462cfe8b37"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2537:14: 2537:19>::clone"
+kappa = "1acc6a67256b1daaa85dc431791500c0a878cae71d40d584989729c073689c21"
+at = "P=u32, S=u32"
+embedded = "737d02e356c9efacab4c0eb8f12f1ac43e8b412b0cc9e1e4806f4a7489a3d122"
+status = "residue"
+cause = "mir::Ty: stream::Filter<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2537:21: 2537:26>::fmt"
+kappa = "eb51a91edca38aaa22ff42a0ea6e2ad2720d53fe5255eac637a2019ae8457cde"
+at = "P=u32, S=u32"
+embedded = "70eb3eb76c8b6a10769e3ba6cfabd9781266bf64bb65dc130df6d43893e27636"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2598:14: 2598:19>::clone"
+kappa = "75522aa0469f5c0adade51bd61ced5e61556c1b714e8e11a541fbf8fb2654189"
+at = "S1=u32, S2=u32"
+embedded = "84267406ee09be6b9fd6aff390f32f0acd81c00cd6e71b1cfaf9a4f300e511f5"
+status = "residue"
+cause = "mir::Ty: stream::Or<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2598:21: 2598:26>::fmt"
+kappa = "3f973cb02a2cbd645db586725e7cc5e9b57990bdb58f2e3e1ee72fad9b2e577a"
+at = "S1=u32, S2=u32"
+embedded = "681b5be4a093012d5fa525f0dc13033e33dd0dbb7d8bb768f85f9614497a7f4a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2687:14: 2687:19>::clone"
+kappa = "173b658443dc74d5256b6951d6e728b15522e08129a861780ca63f8f89de07e7"
+at = "S1=u32, S2=u32"
+embedded = "84de0073f2e55a7053e0499a3fa3bf119b27af67942bf8aa83f1cda3f87e283b"
+status = "residue"
+cause = "mir::Ty: stream::Race<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2687:21: 2687:26>::fmt"
+kappa = "f7278cc6e5845d934d531105b5ecbb98ab41ea0ad7afd4d1eb5cd61bbe771db3"
+at = "S1=u32, S2=u32"
+embedded = "9d1d6203b51e8096916e6ce4ce0f619ad1fd1afb8b438f5ed5534f652c93316d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2730:14: 2730:19>::clone"
+kappa = "0b38d90eb5dbe9710660b42a729e0d879e189d979265b3d720cef199830601e5"
+at = "F=u32, S=u32"
+embedded = "d457e2f9b3e2655b9a2a35ffb8a819e88e4f231321f64a14380580481469858c"
+status = "residue"
+cause = "mir::Ty: stream::FilterMap<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2730:21: 2730:26>::fmt"
+kappa = "3528fa6a3e32d90140fe4a094d75f12b4574fa5087da89513959a7d8cd985581"
+at = "F=u32, S=u32"
+embedded = "8bc2979d7ada702be872627fa75eb5aff51141048c46e446e2a77efe16577847"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2763:14: 2763:19>::clone"
+kappa = "6429bd51ccead51d29cf07b2d48cd674df821add90f69f23710d075a78d7063c"
+at = "S=u32"
+embedded = "9dbac7c7dd2cba11c3b21f05e7a44f7062577727d20e4697e96ee00cc086a336"
+status = "residue"
+cause = "mir::Ty: stream::Take<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2763:21: 2763:26>::fmt"
+kappa = "59032c9adb7ec87e2b020de777dfdf3e8da87427501c569fde34a749d3b5bf4f"
+at = "S=u32"
+embedded = "30200f9946e9db2bfd2bc57a0cb0576f8b4fcbbd4ed67a650bb050f1b04fa959"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2793:14: 2793:19>::clone"
+kappa = "31e2bd3c0f61d2bb7c444f87e727b1e80af0ec70406a4e24ce9b634b5b591d86"
+at = "P=u32, S=u32"
+embedded = "4e1203555fced2b2f1fef29212b55f30c6a9701a156e4a0714c92b0ed5e37dcc"
+status = "residue"
+cause = "mir::Ty: stream::TakeWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2793:21: 2793:26>::fmt"
+kappa = "20d8953e2d6d298462ff11e19d3c06d8a2cdcaece50a12539999d56b8ff8b75b"
+at = "P=u32, S=u32"
+embedded = "2abb2b347fe9e59b73a75ac36ffa054034fa525378768da8334512ce03c7219e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:279:10: 279:15>::clone"
+kappa = "108cbdd5ea11096c81dc0f09bb904a73ff5cb4e3015b1ee308807c9bc2b94293"
+at = "T=u32"
+embedded = "c8b90e476a31f58ec2c197909b16dfd805f533de1cfc0aa8c1fed27d85f8091c"
+status = "residue"
+cause = "mir::Ty: stream::Pending<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:279:17: 279:22>::fmt"
+kappa = "9723242e87f85c8287a54bbc667b59d843044e02f5fee15ff767336a03c749b8"
+at = "T=u32"
+embedded = "25a62bf3ddd6bf62b0256d45b3f7ead223b1ec7bf658f9223679fa2a8feb73d0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2827:14: 2827:19>::clone"
+kappa = "43e0ea04044e2db090508e1113db49ea85462b98a8da8ccd578aca36d6a115ed"
+at = "P=u32, S=u32"
+embedded = "2e3e4fc2736de6773a75d9d75c0f4a33d8fb7b399497ef731df6d3c0bae1d3eb"
+status = "residue"
+cause = "mir::Ty: stream::MapWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2827:21: 2827:26>::fmt"
+kappa = "8c72ed19cec16487129187f660a25c123d5eda9d38a814a4365cd3612e36c079"
+at = "P=u32, S=u32"
+embedded = "38c9f7905f4c789ab53937068b9a862ac8941d71e516d20f14238ee6b5ed762d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2855:14: 2855:19>::clone"
+kappa = "7728d66653c4a82f29cdcc9f71f0d42e179320d05db5570bbf67c7585b580d79"
+at = "S=u32"
+embedded = "bb40d7bbf1f2a43d064d6b9d5c388d87944ebabe5eee5c6b76ab05effc488447"
+status = "residue"
+cause = "mir::Ty: stream::Skip<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2855:21: 2855:26>::fmt"
+kappa = "700022b22593a67d13b14618a5b14c054fa5da9631fa7fa75f190ced00a3dd9e"
+at = "S=u32"
+embedded = "c400cbfd506365ac917e9821c7685e76e8e11ed0ec9e0641b3a421d41a23cf18"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2883:14: 2883:19>::clone"
+kappa = "a7b27195bc798d575cf8cfb413d26aa758ec17305dc8ef24175ca99aa8ddac78"
+at = "P=u32, S=u32"
+embedded = "577d431200e99d922ac42c705e9ff0c67585ac98dacdeb279c614359f3f51b32"
+status = "residue"
+cause = "mir::Ty: stream::SkipWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2883:21: 2883:26>::fmt"
+kappa = "e29b72a8e359944dd2e9d3dcb4b73d1aeb10b52ddcff2390143dd4a1b1306026"
+at = "P=u32, S=u32"
+embedded = "89f8e26fdb055d0bf207771f6ab457a3f9fe8e2f708a36d485f69dd33aa2c702"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2920:14: 2920:19>::clone"
+kappa = "79f722632567c04e6c0a83119512cb8f43dd5ccf67198e578236decb6cbf60d7"
+at = "S=u32"
+embedded = "2f48b28af061019d298397d791fa5fe4b75dbcdefa60b0eef02d64113fb10940"
+status = "residue"
+cause = "mir::Ty: stream::StepBy<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2920:21: 2920:26>::fmt"
+kappa = "b0d488b068d6fc70cd82468dcedeef98b259cb9d4576682ab0be5684e848c3d9"
+at = "S=u32"
+embedded = "11c16b1b40ba07f1294f460c5befb48c3dedfe2a34faf5ca3958ab7babd91f63"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2953:14: 2953:19>::clone"
+kappa = "411f99455789bf5619c773b931914c5a493248a3bb3ae1130e555facac2ab690"
+at = "S=u32, U=u32"
+embedded = "311c2291e4b4f34e7f3c037ed21ab1fd071954e1848e90cf216e120f7fcc9332"
+status = "residue"
+cause = "mir::Ty: stream::Chain<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2953:21: 2953:26>::fmt"
+kappa = "9402efe2cdd91b656bb253980f6a84aaca1ea71cab88581018b7481504e40905"
+at = "S=u32, U=u32"
+embedded = "4c25f184aac6504ab51f4115d640b9217a9954d294e125e6fa11233b27b71808"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2993:14: 2993:19>::clone"
+kappa = "a5dcf9e721ea70d21c9321508f86d8e5ef34368271f1bdcfb9364cc28fca2a4d"
+at = "S=u32"
+embedded = "79d45a742fc4364c2f1497511756508d2b786e0f3f391db055cd4be0183cee53"
+status = "residue"
+cause = "mir::Ty: stream::Cloned<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:2993:21: 2993:26>::fmt"
+kappa = "d199e68bf4a8001c11aa87ca51b9dab9504b96aae757499a469040034e87a8fa"
+at = "S=u32"
+embedded = "483d8d2d8d9eb3f90bffa518efac5712dc69b647f1a07d19fd3c94aa44a5510d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3017:14: 3017:19>::clone"
+kappa = "789fa608b9a4841d31e2b24d9de5b134d7c63e1c0928e6c07b52d64d7ad8ad47"
+at = "S=u32"
+embedded = "57e023b4a03c6fee402df53b042e24f641e5ef9001251e38de6b547467f8b4e1"
+status = "residue"
+cause = "mir::Ty: stream::Copied<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3017:21: 3017:26>::fmt"
+kappa = "45e0bcceceee2461c60c1cff6961e8014548248a172aabbeccb67938382aca32"
+at = "S=u32"
+embedded = "2a494b0ae7a54fdf8f76aa53726fa9f41a036cd95d4fd478b9f1fe595e2927b6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3041:14: 3041:19>::clone"
+kappa = "109791938a1c8216be7ca17791f2c7ecc30816eb90682b4584cbf5f5bddd0fe5"
+at = "S=u32"
+embedded = "4c7e79d171799253de45bb6b56fc72f1236cdc067bb1dc8d0fce7a56e0c23f5e"
+status = "residue"
+cause = "mir::Ty: stream::Cycle<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3041:21: 3041:26>::fmt"
+kappa = "54e9c4226480d23f3e5061b5bb5d23fa61abc2856d39e99b2f465061aba1c224"
+at = "S=u32"
+embedded = "6f242a35c15bf1094cd466c111947ef54b5f7ab0661a591b76f1bf2af58f9984"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3070:14: 3070:19>::clone"
+kappa = "d1d71a0f1bf42157718d479c004f19708f8e8fefbf1086ab5801de1e63e709f3"
+at = "S=u32"
+embedded = "83abd8993fab7ff5635968e2708695300ddfa2b019f7f5f2e8f782ef0615f28c"
+status = "residue"
+cause = "mir::Ty: stream::Enumerate<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3070:21: 3070:26>::fmt"
+kappa = "a4d5773445e6b115165b16e2f9fa1446f62d8d9caafd0a54bf6919443c4677a8"
+at = "S=u32"
+embedded = "a96c67722145fa5f61cf3cf6d30ba64709eec06d66f05147b713981c651bb0fa"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3101:14: 3101:19>::clone"
+kappa = "7f13f54996b7e94c423092d5efb4ceb1974da346af4f8c860a985bd8ed92eae5"
+at = "F=u32, S=u32"
+embedded = "2257bc0fd60a7b21945e3617fc4398c6defcf93755f04ce7ddeea3a7a287bfd1"
+status = "residue"
+cause = "mir::Ty: stream::Inspect<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3101:21: 3101:26>::fmt"
+kappa = "fe98f8d66ecf316098933aa72a4548382b71982e663e0322695dd78be975e922"
+at = "F=u32, S=u32"
+embedded = "7c17a381b96cc7ded462ddba0a0665ee532f24164092a62ba4f38a86c81acb32"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3128:10: 3128:15>::fmt"
+kappa = "f04c2c12d6cb2e664737f65a70838ce5f2f3998b608c84e42b4b5e7eb67ef79a"
+at = "S=u32"
+embedded = "38a5c345833bc371b9ebae2a935903407c05dbe767d5d08b0b43ff73d346ceae"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3158:14: 3158:19>::fmt"
+kappa = "ea400273cbea507ff99765b68d447a3b13baf6ee65f98c74ccfdc443d301d494"
+at = "S=u32"
+embedded = "992ab7e091656e4eaaaa43873af7d716384773ae5e04f22c0872291c956c53f2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3182:10: 3182:15>::fmt"
+kappa = "dc0f8cda9bfa7cfcf08b3ca3ecfb3d8ae54e4d6cc97b6adaacc88b0172513dc9"
+at = "P=u32, S=u32"
+embedded = "428a0e601c2e594f5eda2c3e7e11ba8bae7c47755550714d7e34a8c1a3d7658a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3210:10: 3210:15>::fmt"
+kappa = "65dcc55f9f86aed2e1ccc71fc45b885b46ec6aaea2939da1b0ca63f1bb40cc0d"
+at = "F=u32, S=u32"
+embedded = "fd810f6767d526db382d2f3a4718a39346fdf174ae49e142c09fcf031f444ae2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:323:10: 323:15>::clone"
+kappa = "544321eab21e7b6254f57bfa066ad0c096938fc5411f913b6d480c2ff65da403"
+at = "F=u32"
+embedded = "a8ae5f9ffc8d89fe41ba988073a41c0b1992708039c0f5eb2d648ebcc55c050b"
+status = "residue"
+cause = "mir::Ty: stream::PollFn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3241:10: 3241:15>::fmt"
+kappa = "6aaa0bc7be3b5f4c3cad67bc0b5b2d497b5fbb0de15d47b83585e452b801e289"
+at = "P=u32, S=u32"
+embedded = "bb7b4d961e8ec4aec1d5c61c20f1875e93395195ecbfdbde049716509727b50a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3275:10: 3275:15>::fmt"
+kappa = "4bb8cc73efd53e1fc424a54bb0123a5b95aafd8bfffd2f3ebbc471bd6e556bc1"
+at = "P=u32, S=u32"
+embedded = "7c36c649ce91dfde8f6a7be262d27887c710f119a9c075323fbda421f0434da7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3306:10: 3306:15>::fmt"
+kappa = "9ab25f6deea577efe9fa7491b632435d67114847df84207f508fccdb854f1a7c"
+at = "P=u32, S=u32"
+embedded = "33d36736b1cdd777bf7c045269a326f4f473ab602b6db955374a6b73b08b9920"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3338:14: 3338:19>::fmt"
+kappa = "224dc573a6446f9d704c6dc9bf76861fcacc278f70fd705acb50e964fad61a50"
+at = "F=u32, S=u32"
+embedded = "4c31282335246b5b00ec1d83352b9b4d07bc846288de1c7f9ebafe755a648f74"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3366:10: 3366:15>::fmt"
+kappa = "bf9d4c79cc92d2e54283a2c72708265a28d72a2f3d70e1a2f03dbf35af17057e"
+at = "F=u32, S=u32"
+embedded = "65c19e3d4b8fbeaa6ecbfa3d841b385e58210da69be46377fe94fedb54d33dea"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3394:14: 3394:19>::clone"
+kappa = "516234fb39ef8ced20ebf03c1238018292ab2acb6d3b0243a167566656f23a2b"
+at = "A=u32, B=u32"
+embedded = "a2fefd0ab3acd0121e798b4a6a00b70db77f502648207a0e08f214e54a4f94e5"
+status = "residue"
+cause = "mir::Ty: stream::Zip<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3394:21: 3394:26>::fmt"
+kappa = "fa4442f8aba72fffa7a36804af51ea973d72cc2e0c580e81959c349b4a0b5281"
+at = "A=u32, B=u32"
+embedded = "f4700bc167dd4ad3df065fd50fc7fb419b0be413a8430ca167f8b6c40d80ca03"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3427:14: 3427:19>::fmt"
+kappa = "178a4ca3b458ce8fb9708e87e7bdfdd9751c3a047178dc074632c9abf310f736"
+at = "FromA=u32, FromB=u32, S=u32"
+embedded = "97be74ad420a1396e04784144110d5a2ea8c3c20ca008c84c83d5d4c328f98d5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:3461:10: 3461:15>::fmt"
+kappa = "54258283dbe94bdd2851a317a106f8660a6ecb67d49104f1f41f250ecd206178"
+at = "S=u32"
+embedded = "9314a90967e0a49de693df2aba6bdc908f5d2b223b7127c0e36c6517cb77aca1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:367:10: 367:15>::clone"
+kappa = "67b386b0bd71b0eb2abc8ddf49f90e83512c803be1965844243744097d52f5db"
+at = "T=u32"
+embedded = "3df59ce1036e7db8d0638369ffe45f218f72612ba1145d12abc3182dd4b74e66"
+status = "residue"
+cause = "mir::Ty: stream::Repeat<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:367:17: 367:22>::fmt"
+kappa = "0ad66612cee5e8a35ba52678894124a888b7698351ddc1af50aa22d459516250"
+at = "T=u32"
+embedded = "29a1fe4b58ebe7591ae598cef1a5619fb09388bcae3eb592478fcf74aef2887b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:409:10: 409:15>::clone"
+kappa = "dc97909305a61276a54e6aaf9819dea6e2fdadb0e0df87e47c37afa35e8f43f2"
+at = "F=u32"
+embedded = "1e404ea3b35b915bb6b6bf235aba75bcf191b3aeaa215ae7b797ad8c25677f28"
+status = "residue"
+cause = "mir::Ty: stream::RepeatWith<u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:409:17: 409:22>::fmt"
+kappa = "5a739b6736d7eeb7646f2eb86ed974b903431313cf3cf3f8e55c7f9d7d5972c4"
+at = "F=u32"
+embedded = "220e9a123f606a6c57669f0f8ead922748823fa675b788dd9bc56a569d914335"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:468:14: 468:19>::clone"
+kappa = "f63bd512556a5577c01b711300a67f1a8a62c4ef012fd2364399b9f79232e00a"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "c547976a7ab386ed651e848f9cba56c0b2f4001c1a9ede6997451e40cf499ce3"
+status = "residue"
+cause = "mir::Ty: stream::Unfold<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:557:14: 557:19>::clone"
+kappa = "542478f77e27a4a2e13d955f74f553961c2af483d70ad76a84e1bec8b91ca96b"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "40913435f9cbdd0d5918491397978a526967f7fb2157536f361a91333bf4b076"
+status = "residue"
+cause = "mir::Ty: stream::TryUnfold<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:58:10: 58:15>::fmt"
+kappa = "8d6f37f28a6f37ae6dbeb8bf9d5182bc68f286edade6aa61d9fa1dca957e7959"
+at = "S=u32"
+embedded = "647fa258e14e2ec3f5ddf99f7a180ec142ad016a254e682b36f8857ab7f532aa"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:638:14: 638:19>::fmt"
+kappa = "7a0a8bc8ca07f31d36ec03fc99f0bc2f079e62f8763847a9866edbf2c265fad6"
+at = "F=u32"
+embedded = "62dbde7fe897f120d45159abb71f7819d3f47ee99f14b34ab6e992b05fac0077"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:711:14: 711:19>::clone"
+kappa = "3076f0c04fb8e159d942cd90c813601351ab6e379e3d8debdec0f10e2c4fb1d8"
+at = "Fut=u32, S=u32"
+embedded = "6ce8b5e0630904dae4f9b545bfc9328361a8a448353deb13e534e6f3847cdd79"
+status = "residue"
+cause = "mir::Ty: stream::StopAfterFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::<impl at src/stream.rs:711:21: 711:26>::fmt"
+kappa = "b071eed998eab1a7d5ac0c30682e6aa386012a3377750283c461e1e55708966f"
+at = "Fut=u32, S=u32"
+embedded = "f45dc0f6f0a07429186a05d15abc4c5a9d24979ec6698a8cc5f0eafc7bc24cc3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::AllFuture::poll"
+kappa = "d01222d6ad1ab5b990fb740572f99d4463cfaeca71bd8fbc2b5db11749387fbd"
+at = "P=u32, S=u32"
+embedded = "c47837c023c79adb1bc920d8648565906da4c498ee45ae89d0443fa5e5921c7d"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<bool>"
+
+[[fn]]
+path = "futures-lite::stream::AnyFuture::poll"
+kappa = "28736b39a1e5f1317acb299e7281c9cf784fe7923439a85da65d7a9c55277590"
+at = "P=u32, S=u32"
+embedded = "ffb7b1accf3a234895cb8e8effd0cfbee137d721e5bc2552c47371a1f5e23560"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<bool>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::all"
+kappa = "73d687e7ad7d4cb50b5c61caae43e4c80ef6f097eb6760425fdf8f6967110bcd"
+at = "F=u32, S=u32"
+embedded = "3af5d64bc14fc2c86f26d1ef10e22ed45bf9884081e86014fbaca44e21dddbb6"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::any"
+kappa = "0948ed496eb71cb4074db5acc89d69092b4500d5c2ccc57487e77c266f32e93a"
+at = "F=u32, S=u32"
+embedded = "11836fb1faf7a113485b8bb893f4d8e6215d8606869ca9376b0c761728468216"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::count"
+kappa = "f7fdc191a26268000aeef9b267b555d081bbf9a8b1a4d294759b6bdc3650d29b"
+at = "S=u32"
+embedded = "13e0a5e49337174e307f8c1b6630440d1d760d345482653a062850371f6b6b59"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::find"
+kappa = "8d633bbeb8ffd27393bc84e9079cd0ce4e8e35141f7d956a703809b199c88838"
+at = "P=u32, S=u32"
+embedded = "6a3cad70a982db199608109ae5d3d78c10ae04af55a833c2c7ab1f1621c9a5f2"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::find_map"
+kappa = "398997eab5b5fce6d2f48573dd225ccf9f41fb512b5ee5cf359fa6159afc0d74"
+at = "B=u32, F=u32, S=u32"
+embedded = "b36fc762bf8377f8e161afc1dd375b8755cd84cba52b9d9d8c3f89081f05bf09"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::fold"
+kappa = "d9269dae46dfda5397c3ab9eecaceb1f449fb0329e48985668d20352010326ba"
+at = "B=u32, F=u32, S=u32"
+embedded = "0d4cbc76f7813044876443412ea97fd08a6c3b9a93f6aff33abd8524c019e8d0"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::for_each"
+kappa = "b6fd295adb84ccfa3a63b0eb4e608c849763db9492aae0021f1d0e4b56313440"
+at = "F=u32, S=u32"
+embedded = "fbc9acda0bd0f821228779aa8529ea1d1309051d86af785d0c923a3f45dc0fb7"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::last"
+kappa = "d818ddd5d21e5c105725ef46b7e52cd44ca2807a2a0f7b6d5426a3e3310f92b7"
+at = "S=u32"
+embedded = "991803210d3bfc67166accfdaa9ef117467b3f142399d5736b4b3ff168236e53"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::next"
+kappa = "193e11e1d0036d7bc5abcc05c1edb47734031b829a3b6f58c4d4dfb07759f908"
+at = "S=u32"
+embedded = "26950c3f92039583830711ca91d1451312e340219a069737b612b24ab9b2dc5c"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::nth"
+kappa = "7621177dddf18c69836973ac0bcc45dff7f32312b4afd33a3fc3485444d26702"
+at = "S=u32"
+embedded = "a8c3c580bea3fc1542052ad9c07deab21cb355f07bf6b1dddea1bce14e5e34fc"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::position"
+kappa = "396d1be5568caa2de842a8e3fca85a624eadb521178882640bf91dc52615e01b"
+at = "P=u32, S=u32"
+embedded = "c3bf52c5b993ebde8a0de72f002a6aae8c2c95596ba855c2d7664043e56af5d9"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::BlockOn::size_hint"
+kappa = "19571589034d3542289a6dbd1d614c4beb666cfc8095242675309f379270afa7"
+at = "S=u32"
+embedded = "7b9539c145cbb46c3b166b5d3c042f226cc5415b0512e6072b5903bd3e602dd5"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::Chain::poll_next"
+kappa = "ba0d0e2cb9281f89a70d42ed477709786fc43abb793f1ae1af889acbce6a93fb"
+at = "S=u32, U=u32"
+embedded = "5bb04e14f1a397a42b0c8006fe3c3851e29e7ac16eaac5bf2f1e6a9381659bb0"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Cloned::poll_next"
+kappa = "c0e245602dc79b15da3bebb9a64bf4a6c90976551135a222abbaae15b2b12407"
+at = "S=u32, T=u32"
+embedded = "d5633bbb31890eb63e7b5adb3b545909c4b8a12a47ec64773881c9af823cce2b"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::CollectFuture::poll"
+kappa = "b2e298320ede4c9dfddb110c98d28553bab1a445241cc1b4bb6c604720af00f3"
+at = "C=u32, S=u32"
+embedded = "c515a7a3953a225664246f4d973818d277c93946d7319ba8d54d07460976f349"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<u32>"
+
+[[fn]]
+path = "futures-lite::stream::Copied::poll_next"
+kappa = "b7bd5e640f67ff359045ff58f51688fe5ad88d0e2d90f1d2c34b3b5d04162bad"
+at = "S=u32, T=u32"
+embedded = "9d9c946a5d6be53a58db11eec3b9a9d47d706d1f5cf28d06a6dec84e2449ae83"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::CountFuture::poll"
+kappa = "10ff0be2a23f658c8545411fb8f7ec041b0739cdc26eca49495d32f99c627934"
+at = "S=u32"
+embedded = "58be9a0bcb8d52bb7d14171e5c52900ad6a33b5dc88d4e2cb0889ac15429f1a8"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<usize>"
+
+[[fn]]
+path = "futures-lite::stream::Cycle::poll_next"
+kappa = "3e767fbdfde0ec11b8f916e922d82bf61ea70100af58e7f758232b4f89108fc6"
+at = "S=u32"
+embedded = "feb3204b6837aad7e233063c499b2c99ea8c2e593e1ab56362d4abed76c2ffaf"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Drain::get_mut"
+kappa = "3fb56a7a36943f326e5950045f8aacef004440505e5c249de9236c176f1885e5"
+at = "S=u32"
+embedded = "fd51c8f655cec788ad5f551acd6cee752a0cfc38b3c1da368639eb2e1c44464a"
+status = "residue"
+cause = "mir::Ty: stream::Drain<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::Drain::get_ref"
+kappa = "75ea5d10deee44e9cfd168d7ce0fec676b0b1f926b0c461b52c0ca07e372c02e"
+at = "S=u32"
+embedded = "86e0da3c8ba1d73302f24cccc40c5e30954eb5ec540b1d3197b7364771bd0ac3"
+status = "residue"
+cause = "mir::Ty: stream::Drain<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::Drain::into_inner"
+kappa = "d61297908f18bb6754f7e298d588f09d6d07efccbc412747585eeca54aaa30d5"
+at = "S=u32"
+embedded = "aeb08edfa3eecdc575e86d7944956e3eb9aafb01035ae199de306925b1f8b686"
+status = "residue"
+cause = "mir::Ty: stream::Drain<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::Drain::poll_next"
+kappa = "bed57b86c5299384aa696aa1943984b637f92b7b04d5e0e2e725e78844a3d923"
+at = "S=u32"
+embedded = "c6d08668fc5c31c2c8e6b53dc22614d929654510d1ee2f74072589baa549734f"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Drain::size_hint"
+kappa = "46af9360ed99ccaba1ce6b63974f5b383b673ba15e964160d8c3632f6d28c6ca"
+at = "S=u32"
+embedded = "7cec712ccaa40ad2085a4b2ec6510177b405ba31aa8844e28cdce619103ba8ec"
+status = "residue"
+cause = "mir::Ty: stream::Drain<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::Empty::poll_next"
+kappa = "bf181969cff48fc1a8e29426a6378b13d6023575483d28c466b8abad59f8301d"
+at = "T=u32"
+embedded = "393f025d06c9c3b466b583a540e24ee9c4dd95f97bf7b5331c94c865c20f96db"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Empty::size_hint"
+kappa = "c516803b85341e27a7825f5dde17d6fd223245db2ce19e07bcc26f07bda257c9"
+embedded = "94bdc964a4fc25ed491762f2b97497e8987ec8865f3f76ff3c1e9fcee5f87c05"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-lite::stream::Enumerate::poll_next"
+kappa = "99078d62a18d1a9dd4ac96bf11c93f170494c15d0f92502608e64ff5334efcd3"
+at = "S=u32"
+embedded = "6391577f54b2cbacd244afd9d2252265fe3a4d74ebeccfd84807a901c7e17656"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<(usize, u32)>>"
+
+[[fn]]
+path = "futures-lite::stream::Filter::poll_next"
+kappa = "f7cb751cf432cbccb74ecf9c6bae432d5b1b6339fef23d62645ae8d4ca09180a"
+at = "P=u32, S=u32"
+embedded = "f81ea832e7cdb166d796633cbd68d2fafb6b4989ccbc9b41f6bbb1affac59f34"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Filter::size_hint"
+kappa = "e0c4bac037387d95e51ce14c9da17b928a8fb1c3312cb0fd93934af2f5aabb41"
+at = "S=u32"
+embedded = "a60f47f0fb5b2bf9407886b0c2d127d7ebc05203634329b64a5a9e3d9de40650"
+status = "residue"
+cause = "mir::Ty: P"
+
+[[fn]]
+path = "futures-lite::stream::FilterMap::poll_next"
+kappa = "0177791ddf2bd526866225760267ed8847d1a1b4bdd0799d4976e230cda15f00"
+at = "F=u32, S=u32, T=u32"
+embedded = "468889181e599c5930c0afe112c0dabe3f573d62696a51c4c5ffdc3f1910e7d8"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::FindFuture::poll"
+kappa = "581aeba09ad3dad1787ec9e7a8d7a42d3bd97f84c2795da53a90fa3db190659c"
+at = "P=u32, S=u32"
+embedded = "a56a8054af70fe28ac31f2a0bba093654eb4ec9e9f54b8510b11191892155354"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::FindMapFuture::poll"
+kappa = "b376dfe052b027daf8a9dd150bd9e3614caa4b49358604d807147cc3ee76b326"
+at = "B=u32, F=u32, S=u32"
+embedded = "b0d97415728b9437eea22496bec46c621cca5aec363da69fcaa27ea2f5c92278"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::FlatMap::poll_next"
+kappa = "5b175627fa72f9cae1f1e9d7cc4a520209c3bf03959ab32ee75414cc0f0e186c"
+at = "F=u32, S=u32, U=u32"
+embedded = "d1af7d5fe504ddc9bfdf29e355bfee5af2829724ece7ee86af2959683a1aea0f"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Flatten::poll_next"
+kappa = "8c66fa74f8d09b26b65eb659866d96726464cb434837ea73d34fdde3037ca3af"
+at = "S=u32, U=u32"
+embedded = "9a71c3e51041dc8bee94a39f73eb0ed18ffff38aa334c58bca20d73de09330fb"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::FoldFuture::poll"
+kappa = "8cb07731d0c1e39f93524ca253d18866c21fa17d9ec6b7a5f42286eea6dcd480"
+at = "F=u32, S=u32, T=u32"
+embedded = "1bdf7af749539c729c1f8f9e83d70f9957ebe4077f412e8f4d3d0f2e8f388970"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<u32>"
+
+[[fn]]
+path = "futures-lite::stream::ForEachFuture::poll"
+kappa = "cce04c77c491827a5c4d8af649437bf8b69d78abf3a674c57d3e3cee72784518"
+at = "F=u32, S=u32"
+embedded = "7caa386804d75eae8d2882316c88aed58d3289825bfcb583c3b235edcff99e3c"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<()>"
+
+[[fn]]
+path = "futures-lite::stream::Fuse::poll_next"
+kappa = "b07f99d6c827da96bbc608d7d9260a10f8e3db53965b67debfdd5c895a2c59d0"
+at = "S=u32"
+embedded = "5ab7cc0f27539c81fa253c6a8acd5d9a71ccc6fdd51b5abf7138c7fb8d1dbee6"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Inspect::poll_next"
+kappa = "54c6b2200c4da5ce57194f249132fd9d6ef045bc6c079fba844082c39a4ecb90"
+at = "F=u32, S=u32"
+embedded = "ff1b648e8004c5671efd90cea8fc1c6a6a37a15dc4b8874e88d335ec1ce354bb"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Iter::poll_next"
+kappa = "904e4bf445f11ef223882dddf4cd7ca81e5e1437ad7453ef942193a5e31e8350"
+at = "I=u32"
+embedded = "d1455ea5cebb77f9779b3bd696930102626b6ac351b0414e52bf972427cf9ab5"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Iter::size_hint"
+kappa = "092ec976fee9b8419dce24922610e5092560d4359a699b05cbed6232dc501517"
+at = "I=u32"
+embedded = "64c9348d9e504677aa260897fb02d04c808f73b28a45fe3f52ae4f127aa394c8"
+status = "residue"
+cause = "mir::Ty: stream::Iter<u32>"
+
+[[fn]]
+path = "futures-lite::stream::LastFuture::poll"
+kappa = "965c00fc69829693ac31099d744917a5765e0886ae2edde4d573c068f1682651"
+at = "S=u32"
+embedded = "6c186b67fcaa651ce8d1dd4a7c45f8477ccc9ad39b40f6cb259d96efac1eddff"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Map::poll_next"
+kappa = "f38b73bf5125747486da4d5898802e79bf3eb5d775f87019840407383e714dc5"
+at = "F=u32, S=u32, T=u32"
+embedded = "91df4dd9cd5c4e491dae11f6a047a312724f8305003237657818edcd643ba4be"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Map::size_hint"
+kappa = "7225ce72463cf1519c4b4c69680c651c2cbcd4581dbefc6356b89033e58526e4"
+at = "S=u32"
+embedded = "f50d54f2856e03b43c1f7b30fcaae2dc9b4289c004d0d648f88ff05d9ec4f5fa"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "futures-lite::stream::MapWhile::poll_next"
+kappa = "0c3a4d970daaff905524fc52ce13086346cdc41abe10e940ab9516fc2670ab93"
+at = "B=u32, P=u32, S=u32"
+embedded = "199bafc6d648cf96dbd5be2f86185a6e27efac29e3e7dbcab1489a0059ca2737"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::NextFuture::poll"
+kappa = "67fbe8a52b34886ebdf5d84a9630551b49c53a2062a4772d84912f5d2df91b99"
+at = "S=u32"
+embedded = "0410b0a8e484aa025fdd2ec81f17f0c79817718cb8e9709e4acd8a96c0c0f302"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::NthFuture::poll"
+kappa = "fa894621a1a688ce21411692d2621b929440403876952f34253f3009c409a6a4"
+at = "S=u32"
+embedded = "7dfe6411ecb65e132c4880bc855eb18aa511ae0863a6df1d9c6f41d31cc9a669"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Once::poll_next"
+kappa = "8cc4f807e6c2c827ea8bedadc91a910e0c8f96411787dcfd1afef865f98880a9"
+at = "T=u32"
+embedded = "0c9632d010d8524ce6bcbcc74efbd1908f0dd7e74c95b122d690602fec007d4d"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Once::size_hint"
+kappa = "3a4059fad35bf397e5e1372183ce78b483a5f7776c26a06802dce9d55844c42b"
+at = "T=u32"
+embedded = "eb57eb61b5f86d91f6d5c4236ca92bea9c7d6c73c56711e39b048697db8825f8"
+status = "residue"
+cause = "mir::Ty: stream::Once<u32>"
+
+[[fn]]
+path = "futures-lite::stream::OnceFuture::poll_next"
+kappa = "952798b21cacb1d12257059303bd2ad375cdc41ca504a04a4c9dd2da9eea820f"
+at = "F=u32"
+embedded = "e315bb206fb4009f3f892f2695872002717f78f2d8c5d47e1f5ed31fac01af29"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Or::poll_next"
+kappa = "e27427d68c089f82e7c99c2f9baf2e8aaa50b23d575ac12848211671a0dd8d09"
+at = "S1=u32, S2=u32, T=u32"
+embedded = "d13d6268065befcff548f5c2dd89da33c1e04ccb6eaa01203e0b925032e29b10"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::PartitionFuture::poll"
+kappa = "826b8ce5113fba0456007bd06f4ca549a8efe7ad5f3667e45af2cf0f2bea677b"
+at = "B=u32, P=u32, S=u32"
+embedded = "816a781338a5f268bffb223df6c13d2a379c4803790676b1f6941d1c74f95300"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<(u32, u32)>"
+
+[[fn]]
+path = "futures-lite::stream::Pending::poll_next"
+kappa = "55a2d6e412a64dde02808ee341fcbf94421676aab342aa6426dcc829f5426367"
+at = "T=u32"
+embedded = "b6160ccf07a5df331a5acab0ec5bc0e3376daf141367de9aa498d41afa16bb69"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Pending::size_hint"
+kappa = "f8b90422a3ac16cb63420503350115994d12b5279a3e188522640334f2e64cb0"
+embedded = "91435cc1388646198a6455cfd3209acad08cb79b9aecede78866e6e29c9932ac"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-lite::stream::PollFn::fmt"
+kappa = "c489df3810625d7280e03c25254d58e010c4235e145b29ff2e4c2cb2a23b2971"
+embedded = "3e41e5dc65d650845f2eb88b85f724853481d8ff36e3f2310b8c06f6abf14c6b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::PollFn::poll_next"
+kappa = "5d76fa1b27065b863696980de3e5b1f0bf3e4b72080e9637f28162f7b9c00875"
+at = "F=u32, T=u32"
+embedded = "9fb31b7f2245b62c175471be8d0f7a667496e2d28c2aa492d1c33fcd7ab5bdaf"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::PositionFuture::poll"
+kappa = "445933eddcd741c1c225dbda25aabcfc71c420c84ebcba8ce59af6ba4f84e170"
+at = "P=u32, S=u32"
+embedded = "aa079c8713ac5ccd9d77e0f69dc8ac22ac9199c4ad90dc74d864da33340f0627"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<usize>>"
+
+[[fn]]
+path = "futures-lite::stream::Race::poll_next"
+kappa = "acbb71fcbb993de2b7da4559a2447d32877fdd04c2b78794c6bf19e30c7ddf2c"
+at = "S1=u32, S2=u32, T=u32"
+embedded = "a386e6d3d62901ab6033dd4e0054e9785dbb157b047c9e79a72c6c60797fd4b2"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Repeat::poll_next"
+kappa = "dcee55d065d8a1249c922b729b9150d4ead7f78ab6b55882374c493bda911f29"
+at = "T=u32"
+embedded = "2e688be81808caf61567775239fae937a6059d9bf5a2075190af78dbe1c4844c"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Repeat::size_hint"
+kappa = "7b189b15165cf31cd6b473f702706584fbdd1db5a68e24161bbc2f0f6b3cce8b"
+embedded = "d23bdbba2be1241eede4bc69885165725da430f7809af7647f94655fd2b7df2b"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "futures-lite::stream::RepeatWith::poll_next"
+kappa = "5dd0e2fdaad190516b45a81ea155fe13166791961d1b92c3f8039c0c50dd5387"
+at = "F=u32, T=u32"
+embedded = "93604bf61ef64c5285192c89a086950f24e286037317a9bc23f102bbe9dad9c8"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::RepeatWith::size_hint"
+kappa = "5c53e578dde23518799af9a4e152109884dc293f26345e29647e9bef6a04d282"
+embedded = "c516d694c5f9e1230660db6b38414e87b2e01fd77672ade4db553cd1ff821c37"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "futures-lite::stream::Scan::poll_next"
+kappa = "dc14bb2424405aed3c12151e9ff762c861f1dcbf1f63c6f7164797f8258f5509"
+at = "B=u32, F=u32, S=u32, St=u32"
+embedded = "c7d178816560e46bc29ce0784b4f6def28895fa2bfb726771f2a6c8a877aab10"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Skip::poll_next"
+kappa = "238b05b455fecdcaa4d4968c260669622d80e17e355693d707500bd8af616766"
+at = "S=u32"
+embedded = "61b575a86f437991a963917d35634a66b386a8bc6301fed127e5e314db14e149"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::SkipWhile::poll_next"
+kappa = "326e631d4c3a9503d71f8565efa9960be78092c41807851da4e6d10b37ac8da8"
+at = "P=u32, S=u32"
+embedded = "dc00aff5cff74fe03f5ea157cb2bf8b5265769f37cf858ec300710427eaeb0f0"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::StepBy::poll_next"
+kappa = "56cdea95c319c99a6fd2a623ce72811a6c22ac3af8ce0cecea62c26a5192ef96"
+at = "S=u32"
+embedded = "2a5659831e3e0578e1aadf616a67dcd42b56a0f108c7bc654d28fe4a56917f7a"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::StopAfterFuture::is_stopped"
+kappa = "48a95875d4d96c7ff5fe82bf552e44b7bb0a499320dc0becd344fce68613ac59"
+at = "Fut=u32"
+embedded = "8e324a39fb2bab1d8a15576b402467c4ced204a3eac89d00b3453044dd20baff"
+status = "residue"
+cause = "mir::Ty: St"
+
+[[fn]]
+path = "futures-lite::stream::StopAfterFuture::poll_next"
+kappa = "331ea65fa00a3f84407e2a107367188eb87920a0fb1b6358ee32f0d53418fd9f"
+at = "Fut=u32, St=u32"
+embedded = "80356481581ed5dc320c3b047cb5dd5de3e1d63935d7886d0f74469909a8e345"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::StopAfterFuture::size_hint"
+kappa = "0e5f56e69a878513f1f02d7d21ef881864846b463ddb348056da770a129e045e"
+at = "Fut=u32, St=u32"
+embedded = "fab9c03c1eb462e7327662b23c115ecbb957edcf2e74185cac7e08d0ffb0443a"
+status = "residue"
+cause = "mir::Ty: StopAfterFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::StopAfterFuture::take_future"
+kappa = "baf79ae68e73b5562d754b5f0abe59992582661aa0b8c58db995b6972643746a"
+at = "Fut=u32"
+embedded = "ca96a4d9a4474d2c607ed3176d2f2610f3ff86fc6b20a419d745b4238a85a17d"
+status = "residue"
+cause = "mir::Ty: St"
+
+[[fn]]
+path = "futures-lite::stream::StopAfterFuture::take_result"
+kappa = "4ca2bc637ad28342ee0c43516c55bc2214638b16569339f3aafec2c8b634206b"
+at = "Fut=u32"
+embedded = "01e3aa1b81f6bcc93afe6810e2daaa38354fd3d4aee4240078d87ce1bd9a8b08"
+status = "residue"
+cause = "mir::Ty: St"
+
+[[fn]]
+path = "futures-lite::stream::Take::poll_next"
+kappa = "fa64bfd85cdc92d9f99d72982d863e41619ec7278500de59a55d01515d7d501c"
+at = "S=u32"
+embedded = "88b2de93bc196981a1cec3dfab843679357690aa7301057af88e62d8228398a1"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::TakeWhile::poll_next"
+kappa = "41265f2594170a54db19da73a8bd4a1bb9439e8737bb400743a42894e48dd423"
+at = "P=u32, S=u32"
+embedded = "ec321948c6b79177a18791931dd6e6056b9155ba10d3a8ff63f7860c9215730a"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Then::poll_next"
+kappa = "ebacee5a32f9f9d56cc01ac6d06274e165c252120d1326c445337313e7477709"
+at = "F=u32, Fut=u32, S=u32"
+embedded = "929a69ca79e967c29e427ab7ad9408983a25babbb5314e480718d692da133392"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::Then::size_hint"
+kappa = "9753b6f1d291acdcb62e12997ca8cb4bc109ccad9b5d925cc55f503dec5f219b"
+at = "Fut=u32, S=u32"
+embedded = "b3bf7f78f132e22db9376ae6a855ed7e69084c03d3221a874de0290b6cddf4f6"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "futures-lite::stream::TryCollectFuture::poll"
+kappa = "3f55290e19ad4ca91a297d904c6b8d2adcb9ce785e74c61dc17c2e983bbba90d"
+at = "C=u32, E=u32, S=u32, T=u32"
+embedded = "83526278018a9c26aedcf6eda0c452863aabaf5e56d692a068213c9e996f7230"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::result::Result<u32, u32>>"
+
+[[fn]]
+path = "futures-lite::stream::TryFoldFuture::poll"
+kappa = "6dc26c0edf81443958e55250a859d931bdff2c59e2498e6a1f9a8a1fee7d56a0"
+at = "B=u32, E=u32, F=u32, S=u32, T=u32"
+embedded = "45e5b11546f21f611f1c377d942cbd555260dea2f4eea98a7b601577b184d01f"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::result::Result<u32, u32>>"
+
+[[fn]]
+path = "futures-lite::stream::TryForEachFuture::poll"
+kappa = "19e3016b31448e51e6e31625fd9d21fb54387778a06759c00731630ff39e034e"
+at = "E=u32, F=u32, S=u32"
+embedded = "64d629fac93f808d6dcbd9197a575f5117adbb765d01899f1134d57c26534223"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::result::Result<(), u32>>"
+
+[[fn]]
+path = "futures-lite::stream::TryNextFuture::poll"
+kappa = "2c7d3702b270d6498725a52a02ec40f0496f20e8a5185be7c788f2329ef99295"
+at = "E=u32, S=u32, T=u32"
+embedded = "f503cedf5290f534a3e7545dfde0b6b95ec1e1f8ac0d5d342cf942944e8da1f7"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::result::Result<core::option::Option<u32>, u32>>"
+
+[[fn]]
+path = "futures-lite::stream::TryUnfold::fmt"
+kappa = "72546dece247d0f35e47a5e3af4efbc29135f966b949b0dab0f351b4d5807074"
+at = "Fut=u32, T=u32"
+embedded = "14938ce82277c9eb6042b31ca27f89a5c7bc1a8b3839f9fcba687367f49724cf"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::TryUnfold::poll_next"
+kappa = "0046a9240b3a9b96cc32828c7941932bf950801046a355743d0264021cb6305a"
+at = "E=u32, F=u32, Fut=u32, Item=u32, T=u32"
+embedded = "ef0954ca215b8bef4989e70a2413e9b6b3ff19c1b1b010a1c842361eeb1f30c2"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<core::result::Result<u32, u32>>>"
+
+[[fn]]
+path = "futures-lite::stream::Unfold::fmt"
+kappa = "d634ec7edbeb82a45a7bfddbf4428129287b0c5e9319fecdbf623cc41e2f78c6"
+at = "Fut=u32, T=u32"
+embedded = "aa8bd7a75c6c2ba7be0de260719791691b480b440b6ad48613e6995a31b8a7fd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-lite::stream::Unfold::poll_next"
+kappa = "95c44a046602c2b397d3f004371081edfc62bcdb263ef545f8e9643fdaca3161"
+at = "F=u32, Fut=u32, Item=u32, T=u32"
+embedded = "e95557a9df985ffcd71f7c44059eb2430c8d8119806993cb4ecb02abbe47a95e"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+
+[[fn]]
+path = "futures-lite::stream::UnzipFuture::poll"
+kappa = "a72f81c7430e142a5eeaad5a1237007a461d3e08fd246dede792da9659f2402f"
+at = "A=u32, B=u32, FromA=u32, FromB=u32, S=u32"
+embedded = "488b452bf0faeceb2a16c060f571bd4966903c8b6bfaced495efe41667598a1b"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<(u32, u32)>"
+
+[[fn]]
+path = "futures-lite::stream::Zip::poll_next"
+kappa = "436d37ec27fe04169cdaa615be0045def851d255eb101c665a116fcbb9f11c6c"
+at = "A=u32, B=u32"
+embedded = "aac13ce6e09aa64f410d5a264f1133d039b2f2d866279d7a63ca25abd38f60bd"
+status = "residue"
+cause = "mir::Ty: core::task::Poll<core::option::Option<(u32, u32)>>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project"
+kappa = "51a66add52ed2d67195491f391a449fa77b745700004d57384832905eaca2d38"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "cc66c3b11c4085c5ebdc0c54411b0d62185f5aadbbfc0eca8b9a0f2aa4670c1d"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#10"
+kappa = "5d377ef6e9b3cf1ca0287b15e6ca0bafeb45072898a7c7ebe91afbc0842625da"
+at = "S1=u32, S2=u32"
+embedded = "8f1f2af7bf42eba4015d3043d17ad949b768d9e749a4cf21ca73210112674f0e"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#11"
+kappa = "2445e0699389d3dd0b0d829b71d50ec8da1d3449de5f74e2db6daae4d75bfed2"
+at = "F=u32, S=u32"
+embedded = "894ef0bf0597d8ea5bd5b59db30dd1805aef6ea577f6d456a0f91a4a7ee39948"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#12"
+kappa = "d5848d2cbac86dafb3df0caf6da16741559c6c645f78b1fbf3b55cdb3af2476b"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "7f0a868f5cb0a0281be93dc2a021e41441d8d826241dbe61a1f06795d250cbfb"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#13"
+kappa = "671fe6df34a51d5e39fd5642e4f0509062e185811d44956fe5b019062e688409"
+at = "S=u32"
+embedded = "bbc83ac1fdefe1d4cd48350826bee252c9e53daf3787fbd99a707d7021be98ad"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#14"
+kappa = "0c303f2ad5f7ebcc8b5e99e471d815110f5479f3d9a61365eb93b2ac7a82e4d2"
+at = "P=u32, S=u32"
+embedded = "8a5f20ac564ade62ebd841a298f3b371bad72b8f0162d1b2f24e01229c41111f"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#15"
+kappa = "3328f4ded714014e7b58b6a21d8f4adfc106f9e9701560ac8229e7fe56df5326"
+at = "P=u32, S=u32"
+embedded = "95baa94e3cc0a4a8123625b69041a5bfef1cac7e2f106c1c8570a86757d6e95d"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#16"
+kappa = "39bee3eb64a50c50baac50079da313cab63eb3ab74db65bfd6dbbb10bde471a1"
+at = "S=u32"
+embedded = "b45e36d00084fbb00020fbee013f6388e0561fbdd54aaecc0da8acf2f9d6d613"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#17"
+kappa = "b3337a5a67621e8d9df5f132ac7543f9cb8ebb1e83da7902681471912f925790"
+at = "P=u32, S=u32"
+embedded = "80a2c7d96592b0c2eaa8bc366b896372a4ef69398cc2b925f743e5b027abcc38"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#18"
+kappa = "ace159c9329d53e523c26416e56309339ac735cd3fc433832db563fba022f105"
+at = "S=u32"
+embedded = "acce3dfcb0e192817b59b1738e4c029ccf52ff885175bcf8e2ff6a08b38c0d53"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#19"
+kappa = "bba7e67a929bebe512518b062540520d5e655cb89b6808f7e43fe486eb7a814b"
+at = "S=u32, U=u32"
+embedded = "34579aedbd00af5a537e69fd629279cb63da080d6aaae36d9b306e579ae97af7"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#2"
+kappa = "f986a0cc7e6c02080c7105a1fb255d08b1e1308dbc1ef3d94a170f7387acd852"
+at = "F=u32, S=u32, St=u32"
+embedded = "b4a8fafb596db6f204f1349c911ed18e557267ee6c7e147f1af7f3646a422f2a"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#20"
+kappa = "3ecb9b4cd1be4b379f5418c22cef83020cd97622acec97d39f1d91ffabde6f76"
+at = "S=u32"
+embedded = "20f85852a7834b709b958ae36d77b9e7008f9380329cc516353d6165ebf6a6e8"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#21"
+kappa = "932caf8fc077ba4d24c3e670fd6dedc395cfb5476641023ba724efb180f891b6"
+at = "S=u32"
+embedded = "589888c8521199d9d6c1dd64b5d01b968fa20116a16053cabae1886645cbd67d"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#22"
+kappa = "73bc4d19d310429e5a1043b7252fa247ce41431794c1356bfb9f55226346dde3"
+at = "S=u32"
+embedded = "b8275dc19f50c0cd2138d3eb766ff2dab1634a1c778786de92703fc9e51800fc"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#23"
+kappa = "e16ce3b937c97d1ecaeeaac89bd7603589a4fbdb55bcb5ad4aa1f72973acb12a"
+at = "F=u32"
+embedded = "6103b0db6fb946092bc91f7c506957e7d99590ff8407da50c32c7c78415665e7"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#24"
+kappa = "7137b5db5e43466fe34eed25a7b39b0557778e197c177afd4ff70adf2520b125"
+at = "S=u32"
+embedded = "489127ee3638357a246ab2e701b9bdafc19ef0a6cea6ad118a48cf79a9def592"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#25"
+kappa = "0321b462545420dc5b186a6957efa09fee1da6fec68e29470ed8bfc2e507d089"
+at = "F=u32, S=u32"
+embedded = "3b017a55c5fb632b7f8469a22037eef3ddec6b3ec576cbd56e29b7de9ec2d4e4"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#26"
+kappa = "5233a1150d652c7acb0903e74d0b295ec26de3cfe5c228fe2f5625143e6b39bc"
+at = "S=u32"
+embedded = "1ba6e4ba6c9008a38d105e9a70fc814fd374e448e59209b1773eb774f018b95b"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#27"
+kappa = "4fb9bc73c43447a74bf5d94997df466c7581b19b1c48913fe91d56089c95c708"
+at = "F=u32, S=u32"
+embedded = "7c7f46247e9132b0a3c6a939f64292ce8794b8d6c08b3d9a587079868d034fda"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#28"
+kappa = "edc90eca08770686e73f69d94bd04715405b315bfb8e62aa71ee79bc94802ac0"
+at = "A=u32, B=u32"
+embedded = "8ba3afc48d2cdbcf27cb21303484330267c8f77957c4620777ff18706adfa3fd"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#29"
+kappa = "6a7d234926145d2567f48dca72dafc4c698d34409a72ae21c3dd1ca153583449"
+at = "FromA=u32, FromB=u32, S=u32"
+embedded = "a12a456186153a132ab3d49cccc9b23800a973f28d764a733341e89bbe23c5c1"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#3"
+kappa = "353389c33c661233e26d307918cfaa5793aa6583c26a629aaf6cf7f5700b1f77"
+at = "S=u32"
+embedded = "1d3fb261f6f4e523d92c76950c5308fc68fdc899c02cf94f0d451208de6e78de"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#30"
+kappa = "6a79c9e982cb9cf71c5abdbf7b5d0b56061792451114af03031a0a6ef6bc1823"
+at = "Fut=u32, S=u32"
+embedded = "7302c5d2539af89a7339c5c0be414573d4a5026e890c6b43a421a24f623ef14c"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#31"
+kappa = "e0d6968125f168e5311b7ac64af2d5ca4e79e8556b5e0aee5da1729dfe79bdd7"
+at = "S=u32"
+embedded = "414c8535c581ae58d57a418f08fe051343c9eb3acf448ff746e74f7baaf0a35e"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#32"
+kappa = "dacbb23195d2265ef6735e8691ab2a70e84d42d2edd9cf3693d5f66a474dd9d9"
+at = "C=u32, S=u32"
+embedded = "87db6151c9e3c38c1874c1431b171f85d354bcbd762a00fdd41b4177df635a9d"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#33"
+kappa = "0be7847be709297f985bf7d9795a27c10127639c430473d465dcc9e13674dd92"
+at = "C=u32, S=u32"
+embedded = "d8cac1193a0d3e4475bf51f8719d5885838a02ff1bbe0915fb62931ce10a8611"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#34"
+kappa = "af6c43cc308073a53c225b42eb4952cea20a2b8a8e23ccd912d9633bcac2e248"
+at = "B=u32, P=u32, S=u32"
+embedded = "432c3f2b8969151eae7ba391ac8a8474e71acaec19bcf5ff61987fa338752b6c"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#35"
+kappa = "804c707d4cb0619323bb7e32e8d7526f2d98878bc02ba22b4aa204f69caa0459"
+at = "F=u32, S=u32, T=u32"
+embedded = "20b84a83bbd45d96bc350b8125d8e3a141e92f3c143405dce422e0333da5ff83"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#36"
+kappa = "0b729546982659f645dd22aaaa1c5edb0ecbecae6864dd6be67e20ce3126c99f"
+at = "T=u32"
+embedded = "fd566c0d8853a650c64472bb0975ff78bc928e06ba0b5b7852be06fa0b7c2389"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#4"
+kappa = "3da70f50a587dab4dcaf7ff8269d7b3f01c6be2dd6e249ecbaf44d8ae8787f20"
+at = "F=u32, S=u32"
+embedded = "0cea789e3690ee1c1a4ca54883f7096990b89feccc81815dae87d1e862bfdddd"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#5"
+kappa = "4fe3a976881c0fb9625a54b0e6bc14378f225fb64f85428139bc3c8ba62a827d"
+at = "F=u32, S=u32, U=u32"
+embedded = "b7fd497ff508ccdea6100eacbb11162750063f173f8503a45828e9e20c858b97"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#6"
+kappa = "e02a2c7f6e7d9595d9ec1bb8d2d46d9a682f2bcd604b95f6e8cc52a09d962267"
+at = "S=u32"
+embedded = "f70dda4043cfadb824790fb5cf31b799e744abf65f4d95c080be9a3deb4d577b"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#7"
+kappa = "009480ce6bad1c2ebd440ea6ac1e9fb5ed58ac8e93a8b924b6e6e40a856a0fa5"
+at = "F=u32, Fut=u32, S=u32"
+embedded = "d896a7df057044b7fce9c4a3ab7e317638f20fc8b08d76d685f13f5035e33adf"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#8"
+kappa = "ec9ed59b9ca8676b1b0e65be2e05b67c92fd30a9516ad87b9c3529989ca932cf"
+at = "P=u32, S=u32"
+embedded = "df5a953f501776358e2b2546c150efcb5bb394288c529e6dcda28bb712a683de"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project#9"
+kappa = "724ea2b3a50c79b7ebc49cd5d3c85d4f60e00a15a4a6f962a3b82fad4816559e"
+at = "S1=u32, S2=u32"
+embedded = "85e633ca32363c422e8f3eb063b5757ff9051758e7a4d13afa688fd6199a75a9"
+status = "residue"
+cause = "mir::Ty: stream::_::Projection<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref"
+kappa = "d450bac587870de31bcaa2dfe943688fc13c5413f9d3c1a26af659b38fc47296"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "8fd87341f4b3c15883900068f156588a4de80501115f56a7d4e5b93976e21f63"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#10"
+kappa = "7fe8ea1f0a32fdd09976d76ddac7b43a07e4ff2585e9c08211e8728058c2b3e1"
+at = "S1=u32, S2=u32"
+embedded = "c352b51dfe71eb1159895d3f93e2f51fd1ced3970a124b502f2d45a1bbfd8e74"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#11"
+kappa = "a78bd2fc8ba2f3faedb28eeb83eeb8eb3ee73a08affee64be6c50ee89c4ff06c"
+at = "F=u32, S=u32"
+embedded = "6deaf5652092d28af39d60dff1a0583bc3208318808454b91d319618993bc255"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#12"
+kappa = "6e378e2cc651b8a269ca731d456e699c36f9b1f9c6d4e4c17bb8cccfc2dd4f79"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "9f1d5f353883709862d71fe316fa4868b93e4efc885420102f374e6a616717ae"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#13"
+kappa = "3c55ed730a349e97b2c4d93a851535254ac9b568b0240be16a0e3bf46e761cab"
+at = "S=u32"
+embedded = "52fe21e50464cff4eb2ff7ef101f5be3bad0e18a37604c06954181febc4f18ce"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#14"
+kappa = "ae378922a0e36c18be51fb5e918ee5d6e7b89737f680b202fb909d58b520e6ae"
+at = "P=u32, S=u32"
+embedded = "f212a67303c2189ae43836907c77596f17d5d3e964a9d2e44199691d6bd22794"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#15"
+kappa = "8a74d5c5979a9ffe59529301c3cb207401a7548ac2939ffac80993fd19f81cac"
+at = "P=u32, S=u32"
+embedded = "4d9d8e1ec124e7811aa133a1c079347e25c3efaa7a804c08b6463f5313bf3f34"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#16"
+kappa = "9a0ade1f6f8cc53892c44ed20638bdaa462e75c9ed240793cec5eaa26b4ad5da"
+at = "S=u32"
+embedded = "a197afb8adc15c93b7128af44c200342c2095a10474431e0816a85d2865180a0"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#17"
+kappa = "d7d06d5e7adbf73636634e351035075e5607d7844240e29580842e9ac345d542"
+at = "P=u32, S=u32"
+embedded = "8e4f775dfb4862f56e5b9dba3ef6e10f2bc9266abff8c27f9288af8b53afff9e"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#18"
+kappa = "bcdfa726e314dbeb12b17d5bc522eba4c568637ea5b83302eaf8156ddd2e7f8b"
+at = "S=u32"
+embedded = "791096e33ba80469e41a2d01522cc0757fffdf90e7ae90da8a3984325d88ca9d"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#19"
+kappa = "22715410b4cbc16f2585a4ff71acce9c6499aff883e5eb176dff9de7a53ae540"
+at = "S=u32, U=u32"
+embedded = "cc1e515e11a3d7f4d492c260579b82c9385c360d7cdca6a43c49df1033be9a04"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#2"
+kappa = "432883e8e54455c482403e5c0c3767162d8618f1c56942166704511a251d95fe"
+at = "F=u32, S=u32, St=u32"
+embedded = "36250831b778fddbc9281390bcdd7d004733086751c7cf9e125cd1e69b6e276b"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#20"
+kappa = "6ed67048f1ae9dfc8c96182c81aea2e225120db22a902d7f71e65276196ed124"
+at = "S=u32"
+embedded = "269bc0cc9947fa96919b0e12b85aac7d7938e61563547ce9b58d346d6143d23e"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#21"
+kappa = "8bb80ddf8298db9ecb2da631b63694c20f3b156a1185271d82661f9efa22152b"
+at = "S=u32"
+embedded = "87888b933d010a448fa15b4498777ab27c207b71869eff8df7315e76e2ed6497"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#22"
+kappa = "20fffea95941fe124d820a3a49daab9e531730b534c568a2ada66a07790fbb4e"
+at = "S=u32"
+embedded = "9a22a18acbfbbd3c241f4656769531c20053531b0425419ddb4695416197ed7d"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#23"
+kappa = "26468e23e4907e9d5aa5ba8cc6ede3367dac4022c9da770e3a7108a9338c5fba"
+at = "F=u32"
+embedded = "3ae6904bcac32fda98ef93940d151f9e7d661e56d3916b587fe3017db5831166"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#24"
+kappa = "80747b3383e21ec43f87c76a76d24a718a449baff9feb472fc7f406b05a91dce"
+at = "S=u32"
+embedded = "5773b993eb23078b7eb3a5ee04826ae4de807993bf3345de19d4601bb2dae880"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#25"
+kappa = "0da12353d22df6c9b30a06d146456dd2dbc07fc41ba779d95ce018d3a6a3870a"
+at = "F=u32, S=u32"
+embedded = "f7755fb4ce37a28a65ff50068db9e65a7c17204d0af92cdcca3aefb23d6a32e1"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#26"
+kappa = "b113fad2830c4a430b90a8db220477d6800872c1bc0000843cc3a3b9833c0330"
+at = "S=u32"
+embedded = "b1208fe3f1d57ea6ae5649974e72a8b04a348bdbdd4536190f0e51984037d045"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#27"
+kappa = "142058eef3aba460614ac20b1015de15295524917c6ecd21e0a752712fba2849"
+at = "F=u32, S=u32"
+embedded = "f1308eae2841fa4809b24169a31362a7d555f23f142912023c8ac4cbcc7ddee3"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#28"
+kappa = "a43eba0c90acb74f558f6365ce9d80d38e750209edcce1ca745a34a2ada4f78a"
+at = "A=u32, B=u32"
+embedded = "f3ea1ee075ecaa7186a1efff85713c8cb8feaca6e1287d08c651ce1a3bcbbfcd"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#29"
+kappa = "fcb6f60d33ee53b6a5f4b3775a200872f2b3e12e528fa175f74850ce96de4f88"
+at = "FromA=u32, FromB=u32, S=u32"
+embedded = "ed4c39d075319d5d0461532462c56b75e0dfe4629f31f3d48a31c0df2859b6f9"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#3"
+kappa = "d3f9afc5158dfa5bd2b5a4356384047f77d486c7afe14bf775cdaf487dfa4414"
+at = "S=u32"
+embedded = "3203e673a86755053534675e3edb4ba0dfb141017e0430625e9a24c6b1900977"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#30"
+kappa = "c71ec1c9ed140244a845b489dd1abd8c652048e8d994f28022748bee47b833d2"
+at = "Fut=u32, S=u32"
+embedded = "419ed1020a33c797dd63a5c442434d8f62f7a2ea3dcf3eec81386e433102ee72"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#31"
+kappa = "ca88c83dc866469b2916210fb43c07cf9c2f18e198010fcb113c004180d6751d"
+at = "S=u32"
+embedded = "79342c9f4b942a085284e7e65d41465d9fa6689b4aec3ecca8bb286d4a181ea8"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#32"
+kappa = "ae3c2e1e2f76612e0be8bab11e37113f1f14b2830dbffccea8cda927b352a08a"
+at = "C=u32, S=u32"
+embedded = "b441ae6f452fbae3cbd91e3f123577bda1174fce3141953448c56d5c076560b5"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#33"
+kappa = "90148ded60f5e690dec151eaff7bc2a28a4791f187edb625e16ff892a706c15f"
+at = "C=u32, S=u32"
+embedded = "76d0aa181666b8fb2bc88db998d399c72ace8765bb11983785e89b5041149179"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#34"
+kappa = "ee4b6f4d17fe803a14c44cafcfcc800b53ee437f8e337bcbbbdf960653b55d6e"
+at = "B=u32, P=u32, S=u32"
+embedded = "235cdce3f3fab46f17135c488d95eda70b23a6fcd941b4a38b003bea41ac2a6f"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#35"
+kappa = "b5ec3322cc8bbfa13dd79a4afac8ca7f2c05016b3ece67c6baafad66e17560d0"
+at = "F=u32, S=u32, T=u32"
+embedded = "b88baa4ef4c5173651d1e4b51581bd8c1584e7d4b753832157215611a823ee05"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#36"
+kappa = "d9fbd27f8daa1e767854459f8505a0c6101872732b6fc3559ccddcd18b70e046"
+at = "T=u32"
+embedded = "d72504a48e7d1b7d3a3a98318df74d28f9070179251044b2ac4207d14eaa5540"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#4"
+kappa = "411913401382d4839435bd4b72f1e75f5fcc31d4e8cce7114cfcad578bcc4ea5"
+at = "F=u32, S=u32"
+embedded = "cb8befa3a388353a55ce056924359aa29a14e45cfa5631f7533528473aa33ed2"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#5"
+kappa = "65a559f841012b74da357b9502de63040f7dc45e81bb42ee6386c5569a8f0600"
+at = "F=u32, S=u32, U=u32"
+embedded = "5fd2d6c5512192b28ece5bb87322d8bd15831afc32fba71426ded44e9806c9d1"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#6"
+kappa = "73d389b61b69e80ddada2d36367394d214c9aaf5d293be5b25599538d38ad188"
+at = "S=u32"
+embedded = "41578002a921df67518e9e5a654efc19fb1a4ec923236e1266e7cdf5fff514d8"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#7"
+kappa = "26d21967f8e521daad1047876b7bd74dc74acc8f1a9297b7f6d0f6d9336360f7"
+at = "F=u32, Fut=u32, S=u32"
+embedded = "0b95612b63f2ed8ab493a6159d53a0d402611b3f908b1abae466e44889cb55d6"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#8"
+kappa = "6d2f371b6157baf889cd764eda876bfaeffcf89f2563ec55a9ab4c46fcd83b29"
+at = "P=u32, S=u32"
+embedded = "7b809460ad062ecd20cbbabac76aedc52cd36c8a0a1b2941afe6a3971b7f8db7"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.16/src/lib.rs:525:13: 525:63>::project_ref#9"
+kappa = "e5c00924e8afdc6b140896943f12c1ab61e7d3dcf24763e2be775cb0b85d95f4"
+at = "S1=u32, S2=u32"
+embedded = "babf1d337f8de42dd2e20a3d9bcc758955270e0f86ab55b98baee3f0c2f64a70"
+status = "residue"
+cause = "mir::Ty: stream::_::ProjectionRef<'_, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed"
+kappa = "bc96087a55a4a022ef2f6643f963a021047f1d6aedc9ae374e991dc8a69f20b6"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "6083c5b68bdcb0278ee3afa9d0d5cd747665e7a53782aa0c5706b3f1d9b43942"
+status = "residue"
+cause = "mir::Ty: Unfold<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#10"
+kappa = "9de2db90c4fc1c70b43ef3a8f0ab3fc1c9849ba9b8d7664e7a122fbe8da5a86b"
+at = "S1=u32, S2=u32"
+embedded = "2ffb126d4a570d8db487116e23fc59df8f39262f6291fa152295df0fcbc066da"
+status = "residue"
+cause = "mir::Ty: stream::Race<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#11"
+kappa = "eb537d4c6bb9f1fef4c219b883ebfab12943c60cfc018ff2acd1c7fb05a20d55"
+at = "F=u32, S=u32"
+embedded = "64c93bf1fc9bad9b7f568b63dc242e8b7e5edff5df620cb0fbf4250ba5138b1c"
+status = "residue"
+cause = "mir::Ty: stream::FilterMap<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#12"
+kappa = "6dc200e1c4e8f2d22300ea424902282b82de43c551c70f2c25ecd519c7c0f824"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "e2ce17c8488c2464570757de49ae01653b20d158b42ee6c02875bc5ae4386709"
+status = "residue"
+cause = "mir::Ty: TryUnfold<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#13"
+kappa = "6687a4ad87b69f5df4ca20db17d9a7a72d47e93487c26dd09052059cf7456da5"
+at = "S=u32"
+embedded = "6da848e423b3bf63186d8d69c0cdba1cd5cc32c06d45fe7bd52fb8ebd99f4962"
+status = "residue"
+cause = "mir::Ty: stream::Take<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#14"
+kappa = "0eb0fdf89e287e382fe0ca7d4b8a640970df65e401abc835c0f64dee9c0b2e38"
+at = "P=u32, S=u32"
+embedded = "62fd6c63c983fe59273bf3f9d3ec0ca6b8062ef214afe802543c723d531ba9c0"
+status = "residue"
+cause = "mir::Ty: stream::TakeWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#15"
+kappa = "238199d01640198423d03475b1967428da86e916ee4ae9e4ff6eec7c25cec6ba"
+at = "P=u32, S=u32"
+embedded = "de82787540e7f330882641b00d9e5edb971bee1e7800e495b5698cfae06b3f24"
+status = "residue"
+cause = "mir::Ty: stream::MapWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#16"
+kappa = "34609739647251a3ab67cf8f981bcbb375552a7b9c87962f95fea28f1db913b5"
+at = "S=u32"
+embedded = "c43842864f618142465d59f7aa20d48e23ff28a3cc52854cf64b33a219bdc45a"
+status = "residue"
+cause = "mir::Ty: stream::Skip<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#17"
+kappa = "19e5138eb75c4c6282b29e1ce1c08c0a1cb30d17fe75d1c690fccb3fcc2907de"
+at = "P=u32, S=u32"
+embedded = "e872d1fe1d3e914074f735a5d9382630be1a6024abcdf502e4689d851072a505"
+status = "residue"
+cause = "mir::Ty: stream::SkipWhile<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#18"
+kappa = "d180440fb9d8cf9141226f8d8c1f0c27a66bf8f73ee97e77f2a104a2c7e2f91a"
+at = "S=u32"
+embedded = "56546d62ed5ad6bfdb86388b41f0777f96bfae1a53cc634fa92095ca012b1ee0"
+status = "residue"
+cause = "mir::Ty: stream::StepBy<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#19"
+kappa = "f51aa36a78dea0f2fa57007dd6120215284f715ea8a6e4e9b1849749046f9b84"
+at = "S=u32, U=u32"
+embedded = "8b8e94c03fc52d2d204efacb733afa4c41fd0076ff7e039fc51a5d6097ba2aec"
+status = "residue"
+cause = "mir::Ty: stream::Chain<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#2"
+kappa = "dd34dba9921d2e6967a9a9dbf10799ee00463fb8de93c8d43a16a080dbdb188a"
+at = "F=u32, S=u32, St=u32"
+embedded = "600a9f864ec25fd0610a1ad2bf1f3aa5a47144be30ced355974e95a02b9d0ea8"
+status = "residue"
+cause = "mir::Ty: stream::Scan<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#20"
+kappa = "ac7ebff89f8398829b3b4c26a4d55d34191d4d1ca1b3673fb3bdbc401ca5a97d"
+at = "S=u32"
+embedded = "6355ad3adf7bff95e6ae39f6aab4e512063cb60a84f7c026cf892c7830244ea4"
+status = "residue"
+cause = "mir::Ty: stream::Cloned<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#21"
+kappa = "cc30af422f9910e91d6789ca4f815c0c8ff58ad66f2c76d3842d62e6baf0d556"
+at = "S=u32"
+embedded = "3b5b13f1be0c6c14ed3c339b8b79a287c85243e6a3ee043384515f8178a90133"
+status = "residue"
+cause = "mir::Ty: stream::Copied<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#22"
+kappa = "af7c9c2da855d9b2544ba18027efcb4244a6a986062f29b5bca702ebaa040372"
+at = "S=u32"
+embedded = "d9fff0ed8cacfef5f0b46de2b7255e5b7254c603f9e0d72bfe62de0ea7db7359"
+status = "residue"
+cause = "mir::Ty: stream::Cycle<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#23"
+kappa = "76872736af74a23931fdc990cdcaf2f7994e8af54dd95983fbc6065d2f226eb0"
+at = "F=u32"
+embedded = "da876653876824d8551432dffb046840ce9135716b5bd0e7ffcb0e3df2902fb7"
+status = "residue"
+cause = "mir::Ty: OnceFuture<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#24"
+kappa = "0e031870370a0d646362cdc7defacc54f36c493399c2267597a905b63571a89b"
+at = "S=u32"
+embedded = "45501f1211535d54405216210153a193f7d5cee5053a2f635b93b0639fa9ac20"
+status = "residue"
+cause = "mir::Ty: stream::Enumerate<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#25"
+kappa = "d33e618d738d9541607ecb076a5d53070cd1f3ebb73e921b440b58321992a442"
+at = "F=u32, S=u32"
+embedded = "c0a7ed3cc92c7d3d51339a239efec287cb68a5986fbb611eaffac3e2a84b4775"
+status = "residue"
+cause = "mir::Ty: stream::Inspect<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#26"
+kappa = "55d8b7f162d40110970eab7eb131be79c19c2bfe18ea5f3f6d96b86a91880812"
+at = "S=u32"
+embedded = "6a391a197b065581cba32a6471fff356d83a121f724b5ac76b90567965ac5c58"
+status = "residue"
+cause = "mir::Ty: LastFuture<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#27"
+kappa = "45efd15006750fc01368c7147dc44e20ad08352fd8324abfb3577f5dd4ced0a0"
+at = "F=u32, S=u32"
+embedded = "b8b96d3e32dce58703e25907f356d340ce1cbf3559062db3eb4727984e86a23a"
+status = "residue"
+cause = "mir::Ty: ForEachFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#28"
+kappa = "99c59c08c35ddc4cdff38df712bb1d76dc7b9e376e34d9d715d100037d7d0e57"
+at = "A=u32, B=u32"
+embedded = "af570410f22a90964f5598653b12b5b1d70dafde97887e1841aa2e5a8aea5746"
+status = "residue"
+cause = "mir::Ty: stream::Zip<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#29"
+kappa = "34ea157346b71704f8860b346e28a2e719ec7d2963951ae81c5627b764b152c8"
+at = "FromA=u32, FromB=u32, S=u32"
+embedded = "000d0686e092ceb608b4c399479902c082d5955f0275f66d78b14665e98f2d21"
+status = "residue"
+cause = "mir::Ty: UnzipFuture<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#3"
+kappa = "20730af8ac7e496ceb3355d924d4dd6dc869ef09297116bc2d4320521a7df4f6"
+at = "S=u32"
+embedded = "564664e9c688e24abcf3e34a3001cabe95849f19e140682c976f4e9ece8762f1"
+status = "residue"
+cause = "mir::Ty: stream::Fuse<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#30"
+kappa = "b226aca8eda05d937e4867012d2c0a0597450c21d185e92ef01e14507075c225"
+at = "Fut=u32, S=u32"
+embedded = "6d10d62b6df99d1dd9c9ce224b539a849a99a793bfc14484eaba5f0b3c80ffc4"
+status = "residue"
+cause = "mir::Ty: StopAfterFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#31"
+kappa = "7b130c43b8a5b1af39bcd23299233dfcbaf3c0f2830a19914d05b9103510dc98"
+at = "S=u32"
+embedded = "67ecda9686db5b9d66cbeb0474a4dd105e8148228ab81cd968eec2b23aaf63b0"
+status = "residue"
+cause = "mir::Ty: CountFuture<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#32"
+kappa = "5e24e5a52ac1c8fc92e8f9179bae5e47389efe2f1baf80edd8a27740962d205b"
+at = "C=u32, S=u32"
+embedded = "91f67c50c353beceec11275290aa6978dfd6d2a73785988c212ffa54457fa8e4"
+status = "residue"
+cause = "mir::Ty: CollectFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#33"
+kappa = "856d52d04512aeb280c9106138aedf015835631487c2d49735597a97dc99e9b1"
+at = "C=u32, S=u32"
+embedded = "4040784a4562da70bad9337740430c4a3e7b2409ff274182d4505e9dba6ef74f"
+status = "residue"
+cause = "mir::Ty: TryCollectFuture<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#34"
+kappa = "ce239905f5392c9146cb9164fa5f13b9fccf3ddd6fc725bb2d4ba6df3a75273d"
+at = "B=u32, P=u32, S=u32"
+embedded = "85b38a4a06f8a740b51ae2c2b3f16a751a224c69e4808fd4768144fd03d7c0bf"
+status = "residue"
+cause = "mir::Ty: PartitionFuture<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#35"
+kappa = "e8da250affbd2e3db9798c9550101b01d7ab0fa347ff000bffdb834f08175eb6"
+at = "F=u32, S=u32, T=u32"
+embedded = "ece3eb0005c42f94c9c6f5a3ba8abe97dc9c1a650f5f5f4f482c8c2e7f785221"
+status = "residue"
+cause = "mir::Ty: FoldFuture<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#36"
+kappa = "736606d2b8356f202d3d0faf67d42e7669566e168e95c49c29124da4b8472ada"
+at = "T=u32"
+embedded = "f05fc68532db22c58ad692559334a3fffe4285f4825dc6993e22ce994cf5a19f"
+status = "residue"
+cause = "mir::Ty: stream::Once<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#4"
+kappa = "4546de2cc332e47539f4c509c3651671b5f753698f89f8f525ddeae295fdeefc"
+at = "F=u32, S=u32"
+embedded = "bbeeb7cf299e423d31858bf97b988eef5747da14db1f412e03c4500106416978"
+status = "residue"
+cause = "mir::Ty: stream::Map<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#5"
+kappa = "c3c895f5bd6ed909da0718a1a44dca300089e58591c19003ca660d6e03b5e385"
+at = "F=u32, S=u32, U=u32"
+embedded = "eecda7198118ea94b2dfc663854fec07bee3346a0fe46798c37f12a9009bbc60"
+status = "residue"
+cause = "mir::Ty: stream::FlatMap<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#6"
+kappa = "c9fe077ce083dd8f7771c26939accb9b6778f26f4f5bf81b674ee3212884dbed"
+at = "S=u32"
+embedded = "7ec01193f9eba9bff8e63be2cc5ce6a000c833d8fe7177363b2b03c768c34a1c"
+status = "residue"
+cause = "mir::Ty: stream::Flatten<u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#7"
+kappa = "1890d32bbc97f3da85ddb76a5eecee0ec198db15f8b316c668c1a88d314b9ff6"
+at = "F=u32, Fut=u32, S=u32"
+embedded = "a2f21b41a9a1a1fd0fe5c72789e8250c9239e321e10f5bf61c4e576a88be9297"
+status = "residue"
+cause = "mir::Ty: Then<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#8"
+kappa = "bb55821cc32a117a2e3283cb64476e20153bf975086422f8674ee237a104a0b4"
+at = "P=u32, S=u32"
+embedded = "53e4ef7e8e1e09e7b09c31fd3db9c9c93f0c6f6e14c60c2c451752f97ce85571"
+status = "residue"
+cause = "mir::Ty: stream::Filter<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::_::__assert_not_repr_packed#9"
+kappa = "4bf3eeb4216bbc0c03440a5447d7920c2ad6fd4bf34109da5f7d27c087b217be"
+at = "S1=u32, S2=u32"
+embedded = "a7765acf6ef7541e5a4a9c40760db74230986f34bdc68235954cd25d75277d19"
+status = "residue"
+cause = "mir::Ty: stream::Or<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::block_on"
+kappa = "bb38c98b505a547715fecb920da59ca0da5ba60524f77bfbd0bcd79793a755e0"
+at = "S=u32"
+embedded = "f612fed0bd4cf3a9bd773e55b857edf0ea7f482b11a5eeb43449699ca50fb084"
+status = "residue"
+cause = "mir::Ty: stream::BlockOn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::empty"
+kappa = "74194ad5f88948c09847fb5c781d0b511190f57aab18f140149c94c01994e014"
+at = "T=u32"
+embedded = "7364f1e6f1bb3bd04f3c441cfb93b30e8f1ae0e1eb090733bb3af251cd9beec9"
+status = "residue"
+cause = "mir::Ty: stream::Empty<u32>"
+
+[[fn]]
+path = "futures-lite::stream::once"
+kappa = "1553a4bfc1c8f58a2b1797c95f636b84113398d90144f8d6410df596abd7c737"
+at = "T=u32"
+embedded = "70c0ed86aff6afb6afbe926c423d8df41a629e7ef14862d663c81ddca14098b3"
+status = "residue"
+cause = "mir::Ty: stream::Once<u32>"
+
+[[fn]]
+path = "futures-lite::stream::or"
+kappa = "585e9d77667316b52f972cf770b39b31f4df3dfa85476edef542842b827169bc"
+at = "S1=u32, S2=u32"
+embedded = "5546b91183c2e06de3eff621c2c75d79725f0e17fd791ca814ed2437c9e5655f"
+status = "residue"
+cause = "mir::Ty: stream::Or<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::pending"
+kappa = "c9c24b0312508057b14dbd9cf033e277fac7369e3abfab98d300e4f77309c6e0"
+at = "T=u32"
+embedded = "f64135dd8f12de81b2d4ecd66d4bc80f715e916203a14f5b1a3ef534dbfcda81"
+status = "residue"
+cause = "mir::Ty: stream::Pending<u32>"
+
+[[fn]]
+path = "futures-lite::stream::poll_fn"
+kappa = "4742534680065288f42bf6c2f9c84febd791d4d981938ca41f639d1ba00780f9"
+at = "F=u32"
+embedded = "392ad7e5d5fc49ba9bcf1e8e7670bc794fcfdde4a5defd19ea07596f3040b544"
+status = "residue"
+cause = "mir::Ty: stream::PollFn<u32>"
+
+[[fn]]
+path = "futures-lite::stream::race"
+kappa = "dbcb477e687368b3a6ca8699ecd16e98f47afc8a59c39b3d5bdd4fd69cc46e33"
+at = "S1=u32, S2=u32"
+embedded = "0a14fbef36cdb3f15f0cc9ae8852e7bbd7a3da8be6289f945ef65ab89b3c6766"
+status = "residue"
+cause = "mir::Ty: stream::Race<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::race_with_seed"
+kappa = "2c5287e775155ab2908fcbbc4beba30dbc5f0d9e92f3ec9a2ebc942ebb5b0f14"
+at = "S1=u32, S2=u32"
+embedded = "e5ba82086d01bd6f0ad68e85fd5a9949d4c1e6d4e0c8095847226dd224a9312c"
+status = "residue"
+cause = "mir::Ty: stream::Race<u32, u32>"
+
+[[fn]]
+path = "futures-lite::stream::repeat"
+kappa = "dbb04ec5f902e2af2f3401c677c27f4f24b7d9fd3802dd5c005b5e6a9d7ccd67"
+at = "T=u32"
+embedded = "e653860e74423c6d82f486d58097655af71539e8655e071936cfe228452d9c4a"
+status = "residue"
+cause = "mir::Ty: stream::Repeat<u32>"
+
+[[fn]]
+path = "futures-lite::stream::repeat_with"
+kappa = "44227fa770447cbecb904204ad8c01d7caf86ca162dbeb22dcfb0b90a948eb90"
+at = "F=u32"
+embedded = "4bb90cb178a8734af74a6c5fdf00a16a0d65e13df08e5eadd977e48ab2922a8d"
+status = "residue"
+cause = "mir::Ty: stream::RepeatWith<u32>"
+
+[[fn]]
+path = "futures-lite::try_unfold"
+kappa = "a34b2b42ac1d0896241990db796e9d6c25fa3502bbe56f6eb1a3907958dc74f5"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "de434618788a456033372a322e48b9aea961b09d4d15a80d53e753087911651c"
+status = "residue"
+cause = "mir::Ty: stream::TryUnfold<u32, u32, u32>"
+
+[[fn]]
+path = "futures-lite::unfold"
+kappa = "1bc6a1344d93d6a9b4ee44be0b12eb7edbca642ea0f1ba6fb7caa8a18b8a860b"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "c061fac244e52274d2b007047d2022a101d44476c4867ba50de09c392ed69141"
+status = "residue"
+cause = "mir::Ty: stream::Unfold<u32, u32, u32>"
+

@@ -1,0 +1,116 @@
+# The simdutf8 register (written by `uorust crate simdutf8@0.1.5`; do not edit): every body of
+# simdutf8's MIR at simdutf8 0.1.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 121
+translated = 18
+residue = 103
+
+[module.basic]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.compat]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.implementation]
+bodies = 105
+translated = 18
+residue = 87
+
+[embedding]
+bodies = 121
+embedded = 121
+evaluable = 121
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m128i"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: compat::Utf8Error"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: basic::Utf8Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: __m128i"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: __m256i"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::const_ptr::cast"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: for<'a> unsafe fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item implementation::x86::avx2::check_special_cases::TOO_SHORT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item implementation::x86::sse42::check_special_cases::TOO_SHORT"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: implementation::helpers::memcpy_unaligned_nonoverlapping_inline_opt_lt_64::memcpy_u64: simdutf8's MIR stops at mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: avx2::SimdInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: implementation::helpers::SimdU8Value<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: implementation::helpers::TempSimdChunkA16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: implementation::helpers::TempSimdChunkA32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: implementation::x86::avx2::SimdInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: implementation::x86::sse42::SimdInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sse42::SimdInput"
+bodies = 1

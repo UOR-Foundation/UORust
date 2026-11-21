@@ -1,0 +1,302 @@
+[[fn]]
+path = "hyper::Sleep::__type_id"
+kappa = "d27b32a36e132cbe504073d222f97e067963c574d0641862e74bd466e5de67d6"
+embedded = "b43e87f4da5950fd331e814255e4a729c79a5e059b8741d89ddb35e9ee37f556"
+status = "residue"
+cause = "mir::Ty: std::any::TypeId"
+
+[[fn]]
+path = "hyper::Timer::now"
+kappa = "58ef477fba84dfd9b344baf8c36dcf80a37d6142508656d9c5388df2234d08f5"
+embedded = "ac249c67e674535cacd4f59bf71a69504144f199ecd872044cbb2ddab340e342"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "hyper::Timer::reset"
+kappa = "e1cb8bd315ed68be5b632875f9010596fbb8a6a2ddf71a53413cd85894e9fa60"
+at = "Self=u32"
+embedded = "3f18adcd4dbfec8bba589a3faa9ec38975a0fb76cc34f03c48cc0d764c81ecb2"
+status = "residue"
+cause = "mir::Ty: dyn Sleep"
+
+[[fn]]
+path = "hyper::pin_as_deref_mut"
+kappa = "597a2ac2137548597d52f48d27e9be73e5d87de7241027a69151829a8f7da335"
+at = "P=u32"
+embedded = "86776acd541dee7546ccccd75991e77abd4a5bf3710f3bd26192f82d597293b9"
+status = "residue"
+cause = "mir::Ty: std::pin::Pin<&mut u32>"
+
+[[fn]]
+path = "hyper::rt::io::<impl at src/rt/io.rs:229:10: 229:15>::fmt"
+kappa = "34f754292d679b778891814b8b83c7d4cdc252d73a31fff32387179b48ff8b95"
+embedded = "6cad878df1495a402306889fdbff24443147cc78b3f08bc95a06fbcae5acd08b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "hyper::rt::io::<impl at src/rt/io.rs:448:1: 448:47>::poll_read"
+kappa = "352c82b791b462872f6c29db183a11e7427c9fd0ebc66ce20a8eae85f30628dd"
+at = "T=u32"
+embedded = "28802edc42babc91dcc659f5ecb0f47de8284ab4a284560f4da97fd64e01b05a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::<impl at src/rt/io.rs:505:1: 505:49>::is_write_vectored"
+kappa = "f689a50a68d136bf1f921e31201cc5eb9beb8f8ebe23c7d187c688397a34486e"
+at = "T=u32"
+embedded = "3c40d4ad2d3626e645fc7c2a0371ec8a41e8d372627e90f7d1650b9088ddb556"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Write, which u32 does not implement in core"
+
+[[fn]]
+path = "hyper::rt::io::<impl at src/rt/io.rs:505:1: 505:49>::poll_flush"
+kappa = "a6c01c406ee4f51272faf583bdc7e779d3ad95d8259132e22b91491ff8ff359d"
+at = "T=u32"
+embedded = "265cd4becc539ceb3c94c27e245f7cac4d7923f94231d4f3664f5d739080828e"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::<impl at src/rt/io.rs:505:1: 505:49>::poll_shutdown"
+kappa = "3f70181d4cf5f28a6b65fd85f22e2c2c95023b918ddc73386d4238ee0c4ac414"
+at = "T=u32"
+embedded = "c871bea8e22b7c184204d223ce94929911163ee80683253cb350733a17709f64"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::<impl at src/rt/io.rs:505:1: 505:49>::poll_write"
+kappa = "d84b19d59a1308b97c8809c27ac938d1af1972ec17dbc8bd03d7d3c8e7c4db83"
+at = "T=u32"
+embedded = "8899044940ba201cc7ce64310df8cae9cb9372ebd1860a75e345d048141f6490"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::<impl at src/rt/io.rs:505:1: 505:49>::poll_write_vectored"
+kappa = "de834e7ca9717ceef3bc4435423bad09ad2a413211188b92b76aa45ab2d11a8a"
+at = "T=u32"
+embedded = "cd86dc039bc048a6a396de127dc0297c76bc1467e4e45e85c25b8fb3a6939c2f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Box::is_write_vectored"
+kappa = "4d235c464b68c63e76b98386f7a01435823f11bd3e77b1952a96e52219a43f69"
+at = "T=u32"
+embedded = "317432f6a63d0903de3f12f2bb0f7830c3c16d6c6640c53fa98d76ec8e76a1a8"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Write, which u32 does not implement in core"
+
+[[fn]]
+path = "hyper::rt::io::Box::poll_flush"
+kappa = "3e1456978794803cdc242666d9bc97d117649d6890bc55ecc27e4427d6aaff98"
+at = "T=u32"
+embedded = "52d1a9d52ebf5c837d17e194bde0df25a10e6441f384c48dab4b95933fa0ffce"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Box::poll_read"
+kappa = "b4c4255aa4a913f2123cdb0bde7af10e64210be87bc1b2a593c3728257af5825"
+at = "T=u32"
+embedded = "21d74ddfc8a1812b967ce6dcc6179143033fc06557e9fe54a1397b4da8f8be15"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Box::poll_shutdown"
+kappa = "048afc917315005b9a63bd4a3d0892d20da6dedaf16119bd1e7174b2d0621cfc"
+at = "T=u32"
+embedded = "bfcbfab34d8dd9b7c7a25ad537c433abf96896b6a26dbe7efdb0829bdc783a5a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Box::poll_write"
+kappa = "b7de367e521530da967adaa95bf3388e20aea19a766a85ee07bdde4d280d1b73"
+at = "T=u32"
+embedded = "f4573c8fa76310c2e2afd735566e05a017701a30496837f2fd1ead2c14f3df29"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Box::poll_write_vectored"
+kappa = "cc549f8d74e71676605ddfae841cc14c9039b2ff923308ec60bcedd80627e04e"
+at = "T=u32"
+embedded = "7188be75c4114428c074afc7ce9395710e32264d21b823e081364296071b1529"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Pin::is_write_vectored"
+kappa = "5828dfb44dbb79fa7f2e30c12f9ff78e59e2b96e8ec52a315c8ff0c9917ca980"
+at = "P=u32"
+embedded = "ad5ae41aa314519a9bdae931241998835ebc047bb2f69c746046f9ee934012e6"
+status = "residue"
+cause = "mir::Ty: Pin<u32>"
+
+[[fn]]
+path = "hyper::rt::io::Pin::poll_flush"
+kappa = "0c8ec48a5df5557d83477246ff7cf40753ce552e20805cba20aea4ff60877f32"
+at = "P=u32"
+embedded = "c70c513072aa0e94f5bd88ab5ead6b5ea01da5a3fccfe9db88ca48bc041c1eaa"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Pin::poll_read"
+kappa = "a79fb3b890a5c901fe2f11633bcc79a08afa6a35664a0c15ee4acf00488cf55c"
+at = "P=u32"
+embedded = "11d962b49890549f773e580f14f60e0a734df7ee2b40c0c2403c8c0a50666dc5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Pin::poll_shutdown"
+kappa = "089dcf38e3f25363130cdbe4bdf1b3c8262437fcd730a1b73eb38eef9633b6bb"
+at = "P=u32"
+embedded = "4be3c239b7c0f5705aa95571226433ce41a36999165bb92fca1dc496d0584e68"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Pin::poll_write"
+kappa = "3febb432055bd040eba51738960f43d89adbbb5a2c4a909b4421990e1bee28d5"
+at = "P=u32"
+embedded = "c31eff114c2dd33ece3c1323a130ac4f494ed40a94086454b7b37c0d109b9f23"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::Pin::poll_write_vectored"
+kappa = "3990f9310714388e1c9f0cb41fdebb35fb6a817694405346339a120adbf3b7fc"
+at = "P=u32"
+embedded = "b86d28136e4f040e02c1cd277b8d4ee417562ded34f419f2b4583106e23f7b18"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::rt::io::ReadBuf::capacity"
+kappa = "2d22eaa5fd89586fd25236bb918477afbd4fae810434e991d1e627c0f137937b"
+embedded = "0f227f1bf59abbee1aa56d703a63cb6652197782f3e66e6622f4e9b8501d6005"
+status = "residue"
+cause = "mir::Ty: rt::io::ReadBuf<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBuf::filled"
+kappa = "da15d4573feabd164b89e93d907f632f5f8c3fa67a0ed89154c88cc8dc08f73d"
+embedded = "6a567b070c388a6c8b72b6424538c3ef05ed4fc5bde9560ac603855e270995d4"
+status = "residue"
+cause = "mir::Ty: rt::io::ReadBuf<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBuf::fmt"
+kappa = "2336bd663d0d434e1208884bee43d3fa3d2dc3f338cba4d3824251e6e4e88b11"
+embedded = "7cd41d4c9a5b9be67187158f828208c8004283302fd896ae84229ad53b5e6a36"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "hyper::rt::io::ReadBuf::new"
+kappa = "bcdc235ceaa33b00414ed40d9da823d3e303b0fe7fe3a04266bd4c01192790ff"
+embedded = "62dcbc6962244db82a377a7f34b70dfcf57cb292c77ee3a428ae08188ca760de"
+status = "residue"
+cause = "mir::Ty: rt::io::ReadBuf<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBuf::remaining"
+kappa = "903b1e8bb88e14842061511312e14e29a32d9e6034efbd76aacd66783cacb8b8"
+embedded = "d3ea571312889937e964b3b83a96581ac3fc8366183e1759c1d80dbe0dd8abb3"
+status = "residue"
+cause = "mir::Ty: rt::io::ReadBuf<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBuf::unfilled"
+kappa = "6b1540dec260434e8d9dd200be32a8e0b8498e962d15ad06dd97ac195c7036c7"
+embedded = "f7fe3e6b09be0c178586f1af3b8d1782bce744f3e64049ff264fe4ebe060c5ab"
+status = "residue"
+cause = "mir::Ty: rt::io::ReadBufCursor<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBuf::uninit"
+kappa = "6d7da5d2d2d55db0e6ffb5f77e1f50339c4b7f234b72bdc409fb84e4651dbb84"
+embedded = "509252e6bae34c2f7cd0fb82400ae6b59fd675884bf020bc6ec96d00a0ad2078"
+status = "residue"
+cause = "mir::Ty: rt::io::ReadBuf<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBufCursor::advance"
+kappa = "47e4b93301645f3b903ef84266a485e1814119f432bd7774ac9d910405ed2c00"
+embedded = "c5eba0ed9bc39679bf0dc3408cb7c0ac26c1b357fc10d7f978451f7f12b954d8"
+status = "residue"
+cause = "mir::Ty: ReadBufCursor<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBufCursor::as_mut"
+kappa = "4fea375b425b8212b05077e2ea5e45959fdf13be2514b5e4e6149481e68d432e"
+embedded = "22fb3011ec89a51a8556f2a2f8950df275337b72834843222f954d7860bd6c62"
+status = "residue"
+cause = "mir::Ty: ReadBufCursor<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBufCursor::initialize_unfilled"
+kappa = "b9d82ac4c3be54ec100b326929e7f696541603f3652a2abefbd4440582ba706d"
+embedded = "fc6b3322fdd0a62efaf2ea1b41358d2946f0a9ad6007a1edf8f38e7425f56053"
+status = "residue"
+cause = "mir::Ty: ReadBufCursor<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBufCursor::initialize_unfilled_to"
+kappa = "47f4913d91c314bd5327f11b75641d1dd9b37b0232a16fdd6d96427989833b12"
+embedded = "7cb9b36ee1ef041d484776d468a6ed1acd081b7f57db7620985c672bd01add2a"
+status = "residue"
+cause = "mir::Ty: ReadBufCursor<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBufCursor::put_slice"
+kappa = "6684f5576616d5eed8771eb3de134a6230a2fa590fd9ba975b8b3bb316929911"
+embedded = "762f6fe8e36288f275a2238d7e191b684e86a3d784c42ac82a8ef5cda1278106"
+status = "residue"
+cause = "mir::Ty: ReadBufCursor<'_>"
+
+[[fn]]
+path = "hyper::rt::io::ReadBufCursor::remaining"
+kappa = "4eee448a26742ce9fe584fd0a3f61b79ae5a9728cbcbbad21dffd8703b592de0"
+embedded = "748c3632d307dc7d02907a01e438387595c812342ecadde2143d9cd4fc45eacd"
+status = "residue"
+cause = "mir::Ty: ReadBufCursor<'_>"
+
+[[fn]]
+path = "hyper::rt::io::Write::is_write_vectored"
+kappa = "79daba0d5575993700774aaf18ecb81d0a50d77cd18d4be0162fb0567cb6034a"
+embedded = "61fa89fb7f5ea060286923771b7196207c3508e99957b1733a15da7d883c767c"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "hyper::rt::io::Write::poll_write_vectored"
+kappa = "30fd43b4900afaf78dd5dd1c091db1e4ded5df4a8d8318ec85413bd6c86b407d"
+at = "Self=u32"
+embedded = "812703c53ee34f56fff5d2d7359b712752e6d9ecd725ae5c5d530a4ec2ff64c5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "hyper::timer::<impl at src/rt/timer.rs:102:1: 102:15>::downcast_mut_pin"
+kappa = "e0bf6e21959d99c8fcea55f43543dc865f3345167d7e4dac32e550cef03b1c89"
+at = "T=u32"
+embedded = "6603752c51df41828cfccc2f11d75ad034240a94e3932734237a514f23811f65"
+status = "residue"
+cause = "mir::Ty: std::pin::Pin<&mut u32>"
+
+[[fn]]
+path = "hyper::timer::<impl at src/rt/timer.rs:102:1: 102:15>::is"
+kappa = "ebbe37b1e7396f707ea036d8c7f9f4b4d37a5496b6d5dc53e2f324a5e914065b"
+embedded = "de057c002cd5ada34fc0e0c54c9ad3309ad910e2e73f67ea15a508a031a34ea6"
+status = "residue"
+cause = "mir::Ty: dyn Sleep"
+

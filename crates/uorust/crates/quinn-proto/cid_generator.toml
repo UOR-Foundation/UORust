@@ -1,0 +1,140 @@
+[[fn]]
+path = "quinn-proto::ConnectionIdGenerator::validate"
+kappa = "82c1d865773b029f31613d96b58ae1c2d86a688aedd00ca477bde38c015faadb"
+embedded = "9c460ebe5fa574dd59c6368225e92e2a26ae6063efe14938c9f4924bc7831ae1"
+status = "residue"
+cause = "mir::Ty: cid_generator::InvalidCid"
+
+[[fn]]
+path = "quinn-proto::SIGNATURE_LEN"
+kappa = "e51fdabedc16e2e8afce565d77fcd81c3b06116e907bc3ec82105df1531bfdf5"
+embedded = "43a137b1676d2679e97960958f59ed5d37b2fc9869da57835704f73106ef1029"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item cid_generator::NONCE_LEN"
+
+[[fn]]
+path = "quinn-proto::cid_generator::<impl at src/cid_generator.rs:36:10: 36:15>::fmt"
+kappa = "95f4f999396d06efda63ccc30808dad4e9f16e8bd9d6e517e93fa36b15864235"
+embedded = "c6d8fe9c0db1b42dc780b6ce394fdf2f91803dc6c66b8ff6538da67d2107bab8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::cid_generator::<impl at src/cid_generator.rs:36:23: 36:28>::clone"
+kappa = "dcd43759e5aa1f9662268a9b34dc877c339439af3109ff1f0af6c33d500c5216"
+embedded = "accd06a33dc7707109ff81c462c9140471252928537dbbbaffcf15c52ec835e8"
+status = "residue"
+cause = "mir::Ty: cid_generator::InvalidCid"
+
+[[fn]]
+path = "quinn-proto::cid_generator::<impl at src/cid_generator.rs:43:10: 43:15>::fmt"
+kappa = "89760afee47319be85fd0216d30b204a646bc1a8325bb36d2840c66f6d6b6a0f"
+embedded = "c9ad6af4672a465a2a8a3731a99709784886f3b6f83302815697b26e2ddaedb8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::cid_generator::<impl at src/cid_generator.rs:43:17: 43:22>::clone"
+kappa = "0a0a065e52ddb3e8095c73231f2d5d636a3c4e564ab6318b85375c647fc0b6f9"
+embedded = "255db6499fe7a776f02bd3b13edce3d66da5157d9ba7d1f1dae697fceaa74bd0"
+status = "residue"
+cause = "mir::Ty: cid_generator::RandomConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::HashedConnectionIdGenerator::cid_len"
+kappa = "179a21c768eaf4940f75b04b2f8a8ce360f4fb1966ecbf32afa717ad9914d442"
+embedded = "89046dc3a03c36e295e59b7833468f94adc9bc6c973e3cbdcb7868930b7750b8"
+status = "residue"
+cause = "mir::Ty: HashedConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::HashedConnectionIdGenerator::cid_lifetime"
+kappa = "091258eeb5c148b178ad4bd18675b14ef9decea36b930c48dc58c74cfa72e5b0"
+embedded = "3db8769fa0cfe542a1dcc5ad00a9211d70c1d591afcc16027613346cd58f2d15"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::cid_generator::HashedConnectionIdGenerator::default"
+kappa = "41852b7d68707e4a821ae6fbb16918ebc1e2cc45906409c23288725291492b61"
+embedded = "da688329e4a31734028ac7f93988b9fc362bf29ebb44e9a993d5c8a6c2856b3a"
+status = "residue"
+cause = "mir::Ty: cid_generator::HashedConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::HashedConnectionIdGenerator::from_key"
+kappa = "a68c5d6435eddcba21ffaa4962cb7b04d260254cb93cc2ab36b0e5240ab534f7"
+embedded = "3daa978bc661f1b6addcbea12d8178279882711b74d00105e6a5501064b47190"
+status = "residue"
+cause = "mir::Ty: cid_generator::HashedConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::HashedConnectionIdGenerator::generate_cid"
+kappa = "912a90cbcf1d43cd03d7462d1d3cdb2adee693d17fd23d616a3b3cdcfef2cfe7"
+embedded = "84e7de6dd3559627647c3666918c3690dd8717db2726b9293024c8ed0d45f93e"
+status = "residue"
+cause = "mir::Ty: shared::ConnectionId"
+
+[[fn]]
+path = "quinn-proto::cid_generator::HashedConnectionIdGenerator::new"
+kappa = "b45f3035761c83fef03200ab7dbd503f0aba832003c57a09600af705a9bc8790"
+embedded = "ecc90e3f22606b840914b07ebe7f2b7fd34b2b81a7a16758905f7374141b0b29"
+status = "residue"
+cause = "mir::Ty: cid_generator::HashedConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::HashedConnectionIdGenerator::set_lifetime"
+kappa = "c8af46c160900b3c4ff50614d00e4129a11a9ac96f1e88e63e500e2752b37de0"
+embedded = "d006469015bdf646c4303fdcc70771e33642f15cafe84663c84bc286289f10c2"
+status = "residue"
+cause = "mir::Ty: cid_generator::HashedConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::HashedConnectionIdGenerator::validate"
+kappa = "c7ac2c8b2161e7ed60763b75a33414c1855d193e134218787eff1d0436715651"
+embedded = "9baacee186efdf8b3f3284a14230e9bff9bf1765adca3823372bbf9272290bc4"
+status = "residue"
+cause = "mir::Ty: cid_generator::InvalidCid"
+
+[[fn]]
+path = "quinn-proto::cid_generator::RandomConnectionIdGenerator::cid_len"
+kappa = "10d2a81202f5fbf7bb856bb8939e53051562448c983e1606990c4a836da7d733"
+embedded = "b428d846729c533067a95cea35e4399bd1efe39ab43106d9bcf1435ab1f17a22"
+status = "residue"
+cause = "mir::Ty: RandomConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::RandomConnectionIdGenerator::cid_lifetime"
+kappa = "cebc50b6d9785162fe9659fe69f8c1535cd93336f5542305490ad82ab3a94a89"
+embedded = "a6be52716ef77a6bda9fa0ec5888310752cc5fb10bbc0c1a0f5dbb1410f65691"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::cid_generator::RandomConnectionIdGenerator::default"
+kappa = "63efae783aa488b5c4988141dcc70458e900ec89381baf9f7e62d6c5f0b10b23"
+embedded = "57c15cc1d40a843faf7022a77048cc081f959c0e63676e3c000f64ed50189326"
+status = "residue"
+cause = "mir::Ty: cid_generator::RandomConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::RandomConnectionIdGenerator::generate_cid"
+kappa = "ea30b6e71a08a4720b6cd8a52ebe6b2fa4075c9e87b7362719835923727f5d96"
+embedded = "530de4e7900d8f646dc19109945e543d45b3bb7a147f8d0df437c656a1c280f7"
+status = "residue"
+cause = "mir::Ty: shared::ConnectionId"
+
+[[fn]]
+path = "quinn-proto::cid_generator::RandomConnectionIdGenerator::new"
+kappa = "033c1de21baed28ea65b60ea09a2eef94167c8f3ea323d02e08cbf18e748f5a1"
+embedded = "ebc5fcdc297ee96608bfa82313fb31d2ad56ba6ba26c7214477c1068f1a33299"
+status = "residue"
+cause = "mir::Ty: cid_generator::RandomConnectionIdGenerator"
+
+[[fn]]
+path = "quinn-proto::cid_generator::RandomConnectionIdGenerator::set_lifetime"
+kappa = "02e68cf1a7338f3375e3ef7d447372cfb238f850369c9200ba2588f1c7e70b89"
+embedded = "b31d002acdf3634a4cb5ca28f3032dd91c615f0c0dd64d510991a5e79ff0bb1b"
+status = "residue"
+cause = "mir::Ty: cid_generator::RandomConnectionIdGenerator"
+

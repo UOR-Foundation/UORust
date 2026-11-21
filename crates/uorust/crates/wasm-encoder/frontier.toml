@@ -1,0 +1,797 @@
+# The wasm-encoder register (written by `uorust crate wasm-encoder@0.263.0`; do not edit): every body of
+# wasm-encoder's MIR at wasm-encoder 0.263.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1591
+translated = 5
+residue = 1586
+
+[module.component]
+bodies = 413
+translated = 1
+residue = 412
+
+[module."core#1"]
+bodies = 1160
+translated = 4
+residue = 1156
+
+[module.crate]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.raw]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 1591
+embedded = 1591
+evaluable = 1591
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::instructions::InstructionSink<'_>"
+bodies = 630
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 109
+
+[[cause]]
+cause = "mir::Ty: ComponentBuilder"
+bodies = 85
+
+[[cause]]
+cause = "mir::Ty: component::canonicals::CanonicalFunctionSection"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: core::code::ConstExpr"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: component::names::ComponentNameSection"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: NameSection"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: core::types::ValType"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: component::types::ComponentDefinedTypeEncoder<'_>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: core::types::CoreTypeEncoder<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: core::types::RefType"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: component::types::ComponentTypeSection"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: component::types::InstanceType"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: core::types::HeapType"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: component::types::ComponentType"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: component::exports::ComponentExportSection"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: component::imports::ComponentImportSection"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: component::types::CoreTypeSection"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::elements::ElementSection"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::imports::EntityType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: StorageType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: component::ComponentSectionId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: component::types::ComponentFuncTypeEncoder<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: component::types::ComponentTypeEncoder<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: component::types::ComponentValType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::Module"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::SectionId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::custom::CustomSection<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::data::DataSection"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::linking::SymbolTable"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::names::NameMap"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AbstractHeapType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: component::Component"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: component::instances::ComponentInstanceSection"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: component::instances::InstanceSection"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: component::types::ModuleType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: memories::MemoryType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BranchHints"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CodeSection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FieldType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Function"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: code::Ieee32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: code::Ieee64"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: component::aliases::ComponentAliasSection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: component::exports::ComponentExportKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: component::imports::ComponentExternName<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: component::imports::ComponentTypeRef"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: component::types::ComponentCoreTypeEncoder<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::code::CodeSection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::code::Function"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::exports::ExportKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::globals::GlobalSection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::imports::ImportSection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::linking::LinkingSection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::tables::TableSection"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DataSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ElementSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExportSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FunctionSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: GlobalSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ImportSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MemArgOrdering"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MemorySection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PrimitiveValType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TableSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TagSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TypeBounds"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TypeSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aliases::ComponentAliasSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: canonicals::CanonicalFunctionSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::dump::CoreDumpStackSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::exports::ExportSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::functions::FunctionSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::memories::MemorySection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::producers::ProducersField"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::producers::ProducersSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::tags::TagSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: custom::CustomSection<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: globals::GlobalType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: instances::ComponentInstanceSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: instances::InstanceSection"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: raw::RawSection<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tables::TableType"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:130:1: 130:22>::encode: wasm-encoder's MIR stops at mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ArrayType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ContType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CoreDumpInstancesSection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CoreDumpModulesSection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FuncType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IndirectNameMap"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MemArgTarget"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StructType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aliases::ComponentOuterAliasKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: canonicals::CanonicalOption"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::code::Ieee32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::code::Ieee64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::dump::CoreDumpSection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::names::IndirectNameMap"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::names::NameSection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::types::FuncType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::types::TypeSection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: custom::RawCustomSection<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: instances::ModuleArg"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: producers::ProducersSection"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tags::TagType"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:137:1: 137:20>::encode: wasm-encoder's MIR stops at mir::TerminatorKind::Call: encode_u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encode_u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CoreDumpSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CoreDumpStackSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DataCountSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LinkingSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ModuleType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StartSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TagKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: code::ConstExpr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: component::start::ComponentStartSection<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: components::NestedComponentSection<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::branch_hints::BranchHints"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::code::MemArgTarget"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::dump::CoreDumpInstancesSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::dump::CoreDumpModulesSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: modules::ModuleSection<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ComponentSection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ExactSizeIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Section"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encode_s32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encode_s64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encode_u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: encoding_size: wasm-encoder's MIR stops at mir::TerminatorKind::Call: encode_u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CoreDumpValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Namespace"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ProducersField"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SymbolTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aliases::Alias<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code::BlockType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code::Catch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code::Handle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code::Instruction<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: code::MemArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::aliases::Alias<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::aliases::ComponentOuterAliasKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::builder::ComponentBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::builder::LastSection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::builder::Namespace"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::canonicals::CanonicalOption"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::components::NestedComponentSection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::imports::TypeBounds"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::instances::ModuleArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::modules::ModuleSection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: component::types::PrimitiveValType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::branch_hints::BranchHint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::code::BlockType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::code::Catch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::code::Handle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::code::Instruction<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::code::MemArg"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::code::MemArgOrdering"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::custom::RawCustomSection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::data::DataCountSection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::data::DataSegment<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::data::DataSegmentMode<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::dump::CoreDumpValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::elements::ElementMode<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::elements::ElementSegment<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::elements::Elements<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::globals::GlobalType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::imports::Import<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::imports::ImportCompact<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::imports::Imports<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::linking::DataSymbolDefinition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::memories::MemoryType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::start::StartSection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::tables::TableType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::tags::TagKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::tags::TagType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::AbstractHeapType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::ArrayType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::CompositeInnerType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::CompositeType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::ContType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::FieldType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::StorageType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::StructType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::types::SubType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1

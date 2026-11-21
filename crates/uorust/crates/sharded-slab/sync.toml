@@ -1,0 +1,87 @@
+[[fn]]
+path = "sharded-slab::inner::<impl at src/sync.rs:82:14: 82:19>::fmt"
+kappa = "79c9a3bc7c5dbe151b4d519736cc4de90b1a34cbf51ba95b35839362ec792fd7"
+at = "T=u32"
+embedded = "79f66730fb71d22f83ceaeb7904dc0b63a996b31726c787f42c936cbd7dda485"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::inner::UnsafeCell::new"
+kappa = "2e88573bb4680cda18ed93656cb3522fcf9c81e52ee9b6670a8722d09093d9e3"
+at = "T=u32"
+embedded = "90dbe2b2b3c4a930016e5a697862e83dc083692d5cd2da64fb5c8c6b24ba503c"
+status = "residue"
+cause = "mir::Ty: sync::inner::UnsafeCell<u32>"
+
+[[fn]]
+path = "sharded-slab::inner::UnsafeCell::with"
+kappa = "2c1663f521a212034368b892d4b5200eed79bfd72f8708542e13d308c9f6964c"
+at = "F=u32, R=u32, T=u32"
+embedded = "f1ddc7be55da07d1007fea5eea7d71db425fb064154f4c8814b9c579857868ff"
+status = "residue"
+cause = "mir::Ty: inner::UnsafeCell<u32>"
+
+[[fn]]
+path = "sharded-slab::inner::UnsafeCell::with_mut"
+kappa = "a631712abc9a2c014195791f080c2ca33388999251eb79dc0eeabfffbd07c230"
+at = "F=u32, R=u32, T=u32"
+embedded = "955528afeeb6d9172b7281b7f344a42e2607495d9ffb2519c62e633a17f27703"
+status = "residue"
+cause = "mir::Ty: inner::UnsafeCell<u32>"
+
+[[fn]]
+path = "sharded-slab::inner::alloc::<impl at src/sync.rs:109:18: 109:23>::fmt"
+kappa = "b499f11bf84f1dd08bee6d190a23dbbad07c46566f23a8f5479ed0b7ad5f6590"
+at = "T=u32"
+embedded = "818e00d0eeac725edb1f98ad64db975188204f87423974bf55e4f968ca083d62"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::inner::alloc::<impl at src/sync.rs:109:25: 109:32>::default"
+kappa = "8f86dbf8d14f39891e0a0041816dc0501b9ec143e2c6b3d8acf54108123e6d2e"
+at = "T=u32"
+embedded = "2fdf67dbcf88b11097dae294f9ff18f0a61667d99c28cb711285d0c0236c326b"
+status = "residue"
+cause = "mir::Ty: sync::inner::alloc::Track<u32>"
+
+[[fn]]
+path = "sharded-slab::inner::alloc::Track::get_mut"
+kappa = "cc105e3e956123b5ff0cdb2e22887554d7edef3a852ed3b5396710838ccc4531"
+at = "T=u32"
+embedded = "ceead33131ac92c46f5d135c09d412e753275a088aba003bf3704349edcbd7a0"
+status = "residue"
+cause = "mir::Ty: Track<u32>"
+
+[[fn]]
+path = "sharded-slab::inner::alloc::Track::get_ref"
+kappa = "5f09b7ef332c61de0bf0c72c11dba1139a6bc813f807cff555ef207fa21326ec"
+at = "T=u32"
+embedded = "731bf0223ddc7d51f2419640f6fa420d0a960cbe00ccb61d1618b3351f2b2a55"
+status = "residue"
+cause = "mir::Ty: Track<u32>"
+
+[[fn]]
+path = "sharded-slab::inner::alloc::Track::into_inner"
+kappa = "afe4a3716268508d6ba1bfb0f58a469c48948e9c9b97dad5c039c034bab17ce8"
+at = "T=u32"
+embedded = "a6af3b0d2ec53ae1bc21feefc78545f198b83cf6d0c16f50f8776fc70a5b622c"
+status = "residue"
+cause = "mir::Ty: Track<u32>"
+
+[[fn]]
+path = "sharded-slab::inner::alloc::Track::new"
+kappa = "8614a2ace2d4f0cf8f29d16a13cfc1d114821c3ba4a585b087ca55bd4c2e4c00"
+at = "T=u32"
+embedded = "b1f7784364e940515b5b3d229731bad561fb9fdba301c03dfe5f997273a791eb"
+status = "residue"
+cause = "mir::Ty: sync::inner::alloc::Track<u32>"
+
+[[fn]]
+path = "sharded-slab::inner::hint::spin_loop"
+kappa = "5c1a8640c44b5fd4fab29970ac79050e116e63b71f583a8513aedffd0c739738"
+embedded = "32ddfd1fc2710a413a69f46573269627c1de2940912af85be68dd932ab1557e6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: spin_loop_hint"
+

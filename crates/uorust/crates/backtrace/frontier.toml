@@ -1,0 +1,287 @@
+# The backtrace register (written by `uorust crate backtrace@0.3.77`; do not edit): every body of
+# backtrace's MIR at backtrace 0.3.77, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 156
+translated = 4
+residue = 152
+
+[module.backtrace]
+bodies = 16
+translated = 1
+residue = 15
+
+[module.capture]
+bodies = 34
+translated = 2
+residue = 32
+
+[module.lock]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.print]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.symbolize]
+bodies = 79
+translated = 1
+residue = 78
+
+[module.types]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 156
+embedded = 156
+evaluable = 155
+blocked = 1
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: capture::BacktraceFrame"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: backtrace::Frame"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: capture::Backtrace"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::Mapping"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::elf::Object<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: capture::Frame"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: libunwind::Frame"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lock::LockGuard"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: symbolize::SymbolName<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BacktraceSymbol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Lru<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MapsEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: capture::BacktraceSymbol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: symbolize::Symbol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::Context<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::Symbol<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Mmap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PrintFmt"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResolveWhat<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Stash"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SymbolName<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: addr2line::gimli::LittleEndian"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::cell::Cell<bool>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::Cache"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::mmap::Mmap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::parse_running_mmaps::MapsEntry"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: types::BytesOrWideString<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: symbolize::gimli::clear_symbol_cache::{closure#0}: type outside the lift: Cache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc9: &Atomic<u8>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::is_null"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BacktraceFrameFmt<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Bomb"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LockGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TracePtr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backtrace::libunwind::Frame"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: backtrace::libunwind::uw::_Unwind_Reason_Code"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: capture::TracePtr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Formatter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<core::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dl_phdr_info"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn for<'a> core::ops::FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl FnOnce"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: miniz_oxide::inflate::core::DecompressorOxide"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: object::LittleEndian"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: print::BacktraceFmt<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: print::BacktraceFrameFmt<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: print::PrintFmt"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: symbolize::ResolveWhat<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::Library"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::lru::Lru<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: symbolize::gimli::stash::Stash"
+bodies = 1

@@ -1,0 +1,70 @@
+# The async-compression register (written by `uorust crate async-compression@0.4.52`; do not edit): every body of
+# async-compression's MIR at async-compression 0.4.52, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 34
+translated = 0
+residue = 34
+
+[module.generic]
+bodies = 34
+translated = 0
+residue = 34
+
+[embedding]
+bodies = 34
+embedded = 34
+evaluable = 34
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: generic::write::buf_writer::BufWriter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::decoder::Decoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buf_writer::BufWriter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: buf_writer::Buffer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bufread::decoder::Decoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generic::bufread::decoder::Decoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generic::bufread::encoder::Encoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generic::write::buf_writer::Buffer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generic::write::decoder::Decoder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generic::write::encoder::Encoder"
+bodies = 1

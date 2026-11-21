@@ -1,0 +1,90 @@
+# The bytecheck_derive register (written by `uorust crate bytecheck_derive@0.8.3`; do not edit): every body of
+# bytecheck_derive's MIR at bytecheck_derive 0.8.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 21
+translated = 0
+residue = 21
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.attributes]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.repr]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.util]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 21
+embedded = 21
+evaluable = 21
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Primitive"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::Attributes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::FieldAttributes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: repr::Primitive"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Field"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: repr::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::FieldsIter<'_>"
+bodies = 1

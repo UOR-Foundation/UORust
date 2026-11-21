@@ -1,0 +1,635 @@
+# The redox_syscall register (written by `uorust crate redox_syscall@0.9.5`; do not edit): every body of
+# redox_syscall's MIR at redox_syscall 0.9.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1941
+translated = 3
+residue = 1938
+
+[module.arch]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.call]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.data]
+bodies = 201
+translated = 0
+residue = 201
+
+[module.dirent]
+bodies = 21
+translated = 1
+residue = 20
+
+[module.error]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.flag]
+bodies = 1355
+translated = 1
+residue = 1354
+
+[module.io]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.number]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.schemev2]
+bodies = 214
+translated = 0
+residue = 214
+
+[module.sigabi]
+bodies = 23
+translated = 1
+residue = 22
+
+[embedding]
+bodies = 1473
+embedded = 1473
+evaluable = 1462
+blocked = 11
+
+[[construct]]
+construct = "TerminatorKind::InlineAsm"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: flag::_::InternalBitFlags"
+bodies = 504
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 212
+
+[[cause]]
+cause = "mir::Ty: flag::CallFlags"
+bodies = 88
+
+[[cause]]
+cause = "mir::Ty: schemev2::_::InternalBitFlags"
+bodies = 84
+
+[[cause]]
+cause = "mir::Ty: flag::MapFlags"
+bodies = 66
+
+[[cause]]
+cause = "mir::Ty: flag::PtraceFlags"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: data::_::InternalBitFlags"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: data::GrantFlags"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: flag::EventFlags"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: flag::MremapFlags"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: flag::RwFlags"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: flag::SigcontrolFlags"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: flag::FobtainFdFlags"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: flag::MunmapFlags"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: flag::RecvFdFlags"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: schemev2::SqeFlags"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: flag::FmoveFdFlags"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: flag::SendFdFlags"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: schemev2::NewFdFlags"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: PtraceFlags"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: EventFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: GrantFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: MremapFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: MunmapFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: RwFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: SigcontrolFlags"
+bodies = 20
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item number::SYS_CLASS_FILE"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: NewFdFlags"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: FmoveFdFlags"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: FobtainFdFlags"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: RecvFdFlags"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: SendFdFlags"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: SqeFlags"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: arch::Exception"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: GlobalSchemes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MmioPtr<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: StdFsCallKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TimeSpec"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: data::Map"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item number::SYS_CLASS_PATH"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Cqe"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ProcSchemeAttrs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Stat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StatVfs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StdFsCallMeta"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: data::NumaMemoryPolicy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: data::StdFsCallMeta"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: data::TimeSpec"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dirent::DirentHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dirent::DirentKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: io::mmio::Mmio<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Io"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AcpiVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AddrSpaceVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContextStatus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContextVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CqeOpcode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CtxtStsBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DirentHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnvRegisters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Event"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FileTableVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FloatRegisters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FsCall"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GrantDesc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ITimerSpec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IntRegisters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Mmio<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Mmio<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Mmio<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Mmio<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MmioPtr<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MmioPtr<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MmioPtr<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NonatomicUsize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NumaVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OldMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pio<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pio<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pio<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ProcSchemeVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PtraceEvent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReadOnly<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SchemeSocketCall"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetSighandlerData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SigProcControl"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SigatomicUsize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Sigcontrol"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Sqe"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WriteOnly<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::EnvRegisters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::FloatRegisters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arch::IntRegisters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::CtxtStsBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::Event"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::GlobalSchemes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::GrantDesc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::ITimerSpec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::KernelSchemeInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::NewFdParams"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::OldMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::ProcSchemeAttrs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::PtraceEvent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::SetSighandlerData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::Stat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::StatVfs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::AcpiVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::AddrSpaceVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::ContextStatus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::ContextVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::FileTableVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::FsCall"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::NumaVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::ProcSchemeVerb"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::SchemeSocketCall"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: flag::StdFsCallKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::pio::Pio<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: schemev2::Cqe"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: schemev2::CqeOpcode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: schemev2::Opcode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: schemev2::Sqe"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sigabi::NonatomicUsize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sigabi::SenderInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <&mut [u8] as dirent::Buffer<'_>>::empty::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item arch::PAGE_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item flag::O_NONBLOCK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item flag::O_RDONLY"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::split_at_mut_checked"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: B"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SenderInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dirent::DirentBuf<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dirent::DirentIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::ReadOnly<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::WriteOnly<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::mmio_ptr::MmioPtr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sigabi::RawAction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sigabi::SigatomicUsize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sigabi::Sigcontrol"
+bodies = 1

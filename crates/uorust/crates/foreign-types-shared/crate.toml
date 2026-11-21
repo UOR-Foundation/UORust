@@ -1,0 +1,32 @@
+[[fn]]
+path = "foreign-types-shared::ForeignType::into_ptr"
+kappa = "ecc5356d6b900adc0a3840bebef22f70948ba59fb79e119e3b8aedf85bc67337"
+at = "Self=u32"
+embedded = "ce05466c775d6b207ad77263bd5f7727853a9db294b3126d256a54bd65fb2c8f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ForeignType, which u32 does not implement in core"
+
+[[fn]]
+path = "foreign-types-shared::ForeignTypeRef::as_ptr"
+kappa = "18211fff4701fe740bc37476d09477108411ce2b535b40e45b15985e83bd974b"
+at = "Self=u32"
+embedded = "2aeed75d7c60f04d334bd94cbaec432f50cebdae6e8be4beb42f3dc5bcd29a52"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "foreign-types-shared::ForeignTypeRef::from_ptr"
+kappa = "d80fbedcdbb29de78d93f09d18b2483ca9ea9ffd609dc1d4ed62f69237fcfcfd"
+at = "Self=u32"
+embedded = "6ae67cd2f4eb6fbe149b5e0ddc4624209d4905df9d8ed32bb560198d4b604c9f"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "foreign-types-shared::ForeignTypeRef::from_ptr_mut"
+kappa = "99c14a68fe2d362106fb4ad15656df38a2370e9673ddf680a93565a19c880203"
+at = "Self=u32"
+embedded = "e8bdb075f76ecc06d0891488d5b2bfe4a15ce88dba7ff0f48026f117c8b7ebb7"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+

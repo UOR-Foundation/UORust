@@ -1,0 +1,598 @@
+# The arbitrary register (written by `uorust crate arbitrary@1.5.0`; do not edit): every body of
+# arbitrary's MIR at arbitrary 1.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 440
+translated = 73
+residue = 367
+
+[module.crate]
+bodies = 6
+translated = 1
+residue = 5
+
+[module.error]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.foreign]
+bodies = 305
+translated = 20
+residue = 285
+
+[module.size_hint]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.unstructured]
+bodies = 118
+translated = 52
+residue = 66
+
+[embedding]
+bodies = 440
+embedded = 440
+evaluable = 440
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 107
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Arbitrary::try_size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <Self as Arbitrary>::size_hint"
+bodies = 27
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 10
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_add"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <A as Arbitrary>::try_size_hint"
+bodies = 7
+
+[[cause]]
+cause = "mir::Operand::Constant: foreign::core::ops::try_size_hint::promoted[0]"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: <A as Arbitrary<'_>>::try_size_hint: type outside the lift: MaxRecursionReached"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as Arbitrary>::size_hint"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::core::bool::size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <u8 as Arbitrary>::size_hint"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Unstructured<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&str as Arbitrary>::size_hint"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as Arbitrary>::size_hint"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as Arbitrary>::size_hint"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::core::cell::try_size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <A as Arbitrary>::try_size_hint"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as Arbitrary>::try_size_hint"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as Arbitrary>::size_hint"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <isize as Arbitrary>::size_hint"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as Arbitrary>::size_hint"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as Arbitrary>::size_hint"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::alloc::string::size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <&str as Arbitrary>::size_hint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::BinaryHeap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::VecDeque<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<[u32]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<[u32]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: and::{closure#0}: mir::TerminatorKind::Call: Option::map"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: foreign::alloc::borrow::try_size_hint::{closure#0}: mir::TerminatorKind::Call: <::Owned as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: or::{closure#0}: mir::TerminatorKind::Call: Option::map"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item size_hint::MAX_DEPTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <B as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <C as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <D as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <E as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <F as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <G as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <H as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <I as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <J as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <K as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <L as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <M as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <N as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <O as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Option as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <P as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Q as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <R as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <RangeTo as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <S as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Self as Arbitrary>::size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <U as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <V as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <W as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <X as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Y as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Z as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i128 as Arbitrary>::size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i16 as Arbitrary>::size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as Arbitrary>::size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i8 as Arbitrary>::size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::ops::Range as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::ops::RangeFrom as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::ops::RangeInclusive as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::ops::RangeToInclusive as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::result::Result as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u128 as Arbitrary>::size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::alloc::borrow::try_size_hint: arbitrary's MIR stops at mir::AggregateKind::Closure: foreign::alloc::borrow::try_size_hint::{closure#0}: mir::TerminatorKind::Call: <::Owned as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::alloc::boxed::try_size_hint: arbitrary's MIR stops at mir::Operand::Constant: <A as Arbitrary<'_>>::try_size_hint: type outside the lift: MaxRecursionReached"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::alloc::rc::try_size_hint: arbitrary's MIR stops at mir::Operand::Constant: <A as Arbitrary<'_>>::try_size_hint: type outside the lift: MaxRecursionReached"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::alloc::sync::try_size_hint: arbitrary's MIR stops at mir::Operand::Constant: <A as Arbitrary<'_>>::try_size_hint: type outside the lift: MaxRecursionReached"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::core::array::try_size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <T as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::core::cmp::try_size_hint: arbitrary's MIR stops at mir::Operand::Constant: <A as Arbitrary<'_>>::try_size_hint: type outside the lift: MaxRecursionReached"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::core::num::try_size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <A as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::core::ops::try_size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <A as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::std::ffi::os_str::size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: foreign::alloc::string::size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <&str as Arbitrary>::size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: foreign::std::sync::try_size_hint: arbitrary's MIR stops at mir::TerminatorKind::Call: <A as Arbitrary>::try_size_hint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: crate::MaxRecursionReached"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::RefCell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cell::UnsafeCell<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::cmp::Reverse<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Copied<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Empty<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::marker::PhantomPinned"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::IpAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv4Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv6Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV6"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::Wrapping<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeToInclusive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Mutex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unstructured::ArbitraryIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unstructured::ArbitraryTakeRestIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unstructured::Unstructured<'_>"
+bodies = 1

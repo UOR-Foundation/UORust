@@ -1,0 +1,108 @@
+# The rustc-demangle register (written by `uorust crate rustc-demangle@0.1.28`; do not edit): every body of
+# rustc-demangle's MIR at rustc-demangle 0.1.28, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 62
+translated = 4
+residue = 58
+
+[module.crate]
+bodies = 14
+translated = 3
+residue = 11
+
+[module.legacy]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.v0]
+bodies = 45
+translated = 1
+residue = 44
+
+[embedding]
+bodies = 62
+embedded = 62
+evaluable = 61
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: v0::ParseError"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Demangle<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Parser<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Printer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Ident<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HexNibbles<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<core::iter::FromFn<{closure@src/v0.rs:312:35: 312:42}>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: legacy::Demangle<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: v0::Demangle<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: v0::HexNibbles<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: v0::HexNibbles<'s>::try_parse_str_chars::{closure#2}::{closure#0}::Utf8FirstByteError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: v0::Ident<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: v0::Parser<'_>"
+bodies = 1

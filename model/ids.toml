@@ -59,6 +59,12 @@ suite = "self-model"
 statement = "UORust's context of use (ISO 9241-11) is read from its own model: every journey's actor is a user group, every journey a goal whose tasks are its steps in order and each accepted, every user-facing component a technical environment, and every goal's usability measured or recorded open"
 
 [[id]]
+id = "SM-07"
+level = "build"
+suite = "self-model"
+statement = "The browser accepts only validated acceptance results, preserves failing vector indices across Worker and fallback paths, and exposes modeled typed errors for malformed results"
+
+[[id]]
 id = "UE-01"
 level = "build"
 suite = "engine"
@@ -183,3 +189,15 @@ id = "UE-21"
 level = "build"
 suite = "engine"
 statement = "Every numeric literal of a workspace gets a home by extraction and rewrite: `uorust figures extract` reads every file the compiler reads, with the tool's own reader, into a register of one site per numeric literal (its file, span, token as written, syntactic place, stratum and a key that survives unrelated edits) and one row per figure (name, value, a home of kind authority, parameter, derived or definition, what it cites and its check), and never invents a figure; `figures write` generates a package with no dependencies whose macro for each figure expands to the identical literal token, a typed constant only where a range pattern needs a path, and the LexLean module that declares the same values; `figures rewrite` replaces each figured site by the generated name, a second run changing nothing, keeping the file's formatter layout and its program's tokens, and refuses with a typed reason every site it cannot place soundly (the tokens of a macro whose grammar it does not know, an attribute, a format width or precision, a range bound of no stated type, a line that reads its own location); and `figures check` fails on a counted site without a figure, a home without a citation, a rewritten site its figure does not list, a stale register, a stale generated package or module, and more figures without a check than the rules allow"
+
+[[id]]
+id = "CI-01"
+level = "build"
+suite = "ci"
+statement = "PR impact reporting evaluates exact base/head Git changes using a trusted-base classifier and factory input graph; passive documentation is distinguished from model inputs, while missing, renamed or nonregular evidence never authorizes skipping native acceptance"
+
+[[id]]
+id = "PG-01"
+level = "build"
+suite = "pages"
+statement = "Pages identity preflights use exactly one mandatory unskippable guard in both workflows, refuse a stale or malformed repository, and require ten named and executed negative controls without failures, omissions or skips; an incomplete result exits nonzero with model-defined PAGES_IDENTITY_CONTROLS_INCOMPLETE"

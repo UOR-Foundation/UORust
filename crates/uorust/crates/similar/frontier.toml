@@ -1,0 +1,607 @@
+# The similar register (written by `uorust crate similar@3.2.1`; do not edit): every body of
+# similar's MIR at similar 3.2.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 516
+translated = 15
+residue = 501
+
+[module.algorithms]
+bodies = 230
+translated = 7
+residue = 223
+
+[module.common]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.deadline_support]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.iter]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.lookup]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.merge]
+bodies = 68
+translated = 0
+residue = 68
+
+[module.text]
+bodies = 91
+translated = 6
+residue = 85
+
+[module.types]
+bodies = 72
+translated = 2
+residue = 70
+
+[module.udiff]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.utils]
+bodies = 13
+translated = 0
+residue = 13
+
+[embedding]
+bodies = 516
+embedded = 516
+evaluable = 515
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[differential]
+bodies = 4
+theorems = 27
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 48
+
+[[cause]]
+cause = "mir::Ty: types::DiffOp"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: types::Algorithm"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: text::TextDiff<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: types::ChangeTag"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ContentHasher"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Replace<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: text::TextDiffConfig"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: types::Change<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: TextMerge<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: types::DiffTag"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: IntKeyHasher"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: OpsBuffer"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by DiffHook"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MergeRegion"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: NoFinishHook<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Old"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: merge::TextMergeConfig"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: text::TextDiffSide<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: udiff::UnifiedDiff<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RecordAction"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ReducedDiffHook<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SideEdit"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: merge::TextMerge<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Capture"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Scratch"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TextDiffSide<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: algorithms::myers::MiddleSnakeSplit"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: algorithms::utils::ContentHasher"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: merge::MergeRegion"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: text::WhitespaceMode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: types::Change<&u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ConflictStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MergeResolution"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UniqueItem<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: WhitespaceMode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algorithms::capture::Capture"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algorithms::histogram::DiffOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algorithms::hunt::DiffOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algorithms::patience::DiffOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: algorithms::utils::IdentifyDistinct<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: text::abstraction::DiffInput<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: types::IntKeyHasher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Index"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item text::abstraction::line_terminator_offsets::LO"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Anchor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HashBucket<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Instant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MyersMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Patience<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SliceRemapper<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TextDiffRemapper<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnifiedDiffHunkRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WhitespaceKey<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algorithms::histogram::Scratch"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algorithms::histogram::SearchResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algorithms::lcs::LcsTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algorithms::myers::MyersSearch"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algorithms::preflight::RecordAction"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: algorithms::utils::OffsetLookup<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::ChangesIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: merge::ConflictStyle"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: merge::MergeResolution"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: merge::SideEdit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: text::TextChangesIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: udiff::UnifiedHunkHeader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::SliceRemapper<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::TextDiffRemapper<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by DiffableStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: <str as text::abstraction::DiffableStr>::ends_with_newline::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item text::abstraction::zero_bytes::HI"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc7: &OnceLock<"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::div_ceil"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::unsigned_abs"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CachedLookup<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Compact<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DiffInput<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HeuristicSplit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Idx"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Int"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LcsTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OffsetLookup<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReducedDiffInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TrimmedDiffInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WhitespaceIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::compact::Compact<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::compact::OpsBuffer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::histogram::Anchor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::hook::NoFinishHook<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::hunt::Candidate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::lcs::LcsTableLayout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::myers::HeuristicSplit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::myers::MyersMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::myers::SplitDirection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::myers::V"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::preflight::MyersPreflight"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::replace::Replace<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::utils::HashBucket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::utils::HashBucket<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::utils::IdentifyDistinct<u32>::build::Representative"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: algorithms::utils::UniqueItem<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iter::text::AllChangesIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lookup::CachedLookup<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Once<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Once<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Once<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::CharIndices<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: text::Deadline"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: text::WhitespaceIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: text::WhitespaceKey<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: text::utils::QuickSeqRatio<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: udiff::UnifiedDiffHunk<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: udiff::UnifiedDiffHunkRange"
+bodies = 1

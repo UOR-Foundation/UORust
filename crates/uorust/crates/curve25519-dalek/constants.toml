@@ -1,0 +1,35 @@
+[[fn]]
+path = "curve25519-dalek::BASEPOINT_ORDER"
+kappa = "8661a73a2375af20f8ef18c0c49499f806d929ab037da337981ddad25b76331f"
+embedded = "199f530afee9ab5e9d6930b918108212dd8baf1997493284efc0d699a8f3d1a7"
+status = "residue"
+cause = "mir::Ty: scalar::Scalar"
+
+[[fn]]
+path = "curve25519-dalek::ED25519_BASEPOINT_COMPRESSED"
+kappa = "9e1aee4307fe749c2c2b1b69e6c1bcb0b604dea2c5e116c6003b80618acc80f4"
+embedded = "8f3f14937cd8ef6a3d3d4bc2a39d74a0efcaa1c5ed099b7a2defc10b48a20cf1"
+status = "residue"
+cause = "mir::Ty: edwards::CompressedEdwardsY"
+
+[[fn]]
+path = "curve25519-dalek::RISTRETTO_BASEPOINT_COMPRESSED"
+kappa = "2c430e11bdd4792a65a5a442f999a66c8a8f2810a5e611329f5efc7b41fcdd0e"
+embedded = "9abed49c13df287d60822ea23e4cf84a5d72552c3f0f7b682ccac223a943c394"
+status = "residue"
+cause = "mir::Ty: ristretto::CompressedRistretto"
+
+[[fn]]
+path = "curve25519-dalek::RISTRETTO_BASEPOINT_POINT"
+kappa = "3835fd17c69e7959f2e761a57a1518efdf1b0e8325d60c9f57289c5d0281d531"
+embedded = "e300c0c117c75f6c3ba7db0c01ae20c6ebc8a040a1cd06808128d34074dd9ae2"
+status = "residue"
+cause = "mir::Ty: ristretto::RistrettoPoint"
+
+[[fn]]
+path = "curve25519-dalek::X25519_BASEPOINT"
+kappa = "7b19a0a76f4fa1bf57554b354976648acb8f1f8cd55e928d64470215d8275f80"
+embedded = "b49cc04284807a945430339e69aa79a97b12defd1a3f2089f2313071b907f6b5"
+status = "residue"
+cause = "mir::Ty: montgomery::MontgomeryPoint"
+

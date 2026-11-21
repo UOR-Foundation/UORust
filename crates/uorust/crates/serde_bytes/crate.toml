@@ -1,0 +1,16 @@
+[[fn]]
+path = "serde_bytes::deserialize"
+kappa = "9baaf0881e08aa8ee385557039c94acc32e557faaa70336535066bc15a802b0a"
+at = "D=u32, T=u32"
+embedded = "d560d8f8fadb80a706386a8035ac2f7df0aa7864e314b362d44637e0b8a1e9aa"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Deserialize, which u32 does not implement in core"
+
+[[fn]]
+path = "serde_bytes::serialize"
+kappa = "faaccfa9c5cacce7bca0d6427df8aea326bcb3e8178b26e2ef73d42e8f3c0ab5"
+at = "S=u32, T=u32"
+embedded = "b0a827064338d063bb82a2ddb9c5173ffb3c101698b2bb5a9c0035a804cb0d1d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize, which u32 does not implement in core"
+

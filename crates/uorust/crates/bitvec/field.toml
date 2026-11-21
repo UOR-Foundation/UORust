@@ -1,0 +1,285 @@
+[[fn]]
+path = "bitvec::BitField::load"
+kappa = "d7e7ceccec0bf74fcfc6e26ae060ac411624bfb2787bff5e585dbac62cfc353e"
+at = "I=u32, Self=u32"
+embedded = "e7cb9e47ad3aedbff50f96623849f59375045d3819281f721310a3a54e9ec63f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitField, which u32 does not implement in core"
+
+[[fn]]
+path = "bitvec::BitField::store"
+kappa = "cafb7e982b75a60560806fd270e02c843ddf744dff5c23cdfeaddf37eaaaad01"
+at = "I=u32, Self=u32"
+embedded = "d75544f629b35ab576afc4fc213721d0cb1da40be1765459599ade3234d7a2da"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BitField, which u32 does not implement in core"
+
+[[fn]]
+path = "bitvec::check"
+kappa = "0e373f13109b3b7d29f361ca0be2b3a51c7470e804548d1694fc604f30e732a5"
+embedded = "517024ea533403822768f169ae93222035a2c52ff0a5f5fbea083cebcf47ad87"
+status = "residue"
+cause = "mir::TerminatorKind::Call: mem::bits_of: bitvec's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "bitvec::field::BitArray::load_be"
+kappa = "99417c492a108117b0277b088de8bb0734fe4f5c16d3dcc4fa4412a55928bc06"
+at = "A=u32, I=u32, O=u32"
+embedded = "6c901aa9767db626412268f4f5d9534fdd3638ac564c487e5409726acbb3445b"
+status = "residue"
+cause = "mir::Ty: BitArray<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitArray::load_le"
+kappa = "c80f95c45310b776fdaf026a56073b64d88f8f599b72f2f8436f3cdcb7b0df80"
+at = "A=u32, I=u32, O=u32"
+embedded = "5ab5513717148881e3eb60f7932593e4566ab9f55cb77129ea695a9f37a8eb32"
+status = "residue"
+cause = "mir::Ty: BitArray<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitArray::store_be"
+kappa = "fe94449cacb5e45cbfbfb87af2af61696e315697b77cfa2d376d42ed085c445a"
+at = "A=u32, I=u32, O=u32"
+embedded = "366054dbe9707314a223d6c18682616f68e1c70b619dd53638a1b2948f02c8ba"
+status = "residue"
+cause = "mir::Ty: BitArray<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitArray::store_le"
+kappa = "d3a63e507d034c464541e2ec8da43651a68302f6076a7ad80a52d9070c66db06"
+at = "A=u32, I=u32, O=u32"
+embedded = "b2c67eee90ca8da484a37c366752093e1c9c72c9cd3d4172d635345a6b7e873a"
+status = "residue"
+cause = "mir::Ty: BitArray<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitBox::load_be"
+kappa = "2fe1deec846bb91bce4380721c123208a290acd5838db99a65feb39d7c401e5d"
+at = "I=u32, O=u32, T=u32"
+embedded = "33c30f3e526cbe425f48db855942b5e0420b708c080fefdcb09256113c25e767"
+status = "residue"
+cause = "mir::Ty: BitBox<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitBox::load_le"
+kappa = "83d3f30f685dc0638404e9f8c019f03edddec2292f101cb84ac2b2aa0bfac10d"
+at = "I=u32, O=u32, T=u32"
+embedded = "7359d60af021910998fd552d2086954b935e08a77e98df50890b5b47ce9240be"
+status = "residue"
+cause = "mir::Ty: BitBox<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitBox::store_be"
+kappa = "98c32b097500c2b554f599deb604ec10efbb1824fc3fa7c2bdfa15bd21cb3390"
+at = "I=u32, O=u32, T=u32"
+embedded = "bc105b5abae316c281d3bf222181d2338d274c5747dc36fc56b99afadbfe0aac"
+status = "residue"
+cause = "mir::Ty: BitBox<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitBox::store_le"
+kappa = "64027a855937e3af1bc86ea685b656cc97c2d8b239eb8f2b0fe5867ee18aa99f"
+at = "I=u32, O=u32, T=u32"
+embedded = "5054bcbc7b95da93ab5462129cdcfc0782c08cfb0422eb1eaedf76b596f4d468"
+status = "residue"
+cause = "mir::Ty: BitBox<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitSlice::load_be"
+kappa = "16bfe9dd4ef8715b06ba3caa2ea0b8caa63c75aa5b2b42bd5dd857fbe42039db"
+at = "I=u32, T=u32"
+embedded = "6b17195773115529a9b2242443f65902122c0e3b03ea96c8ac9aa9a74bd3c525"
+status = "residue"
+cause = "mir::Ty: BitSlice<u32>"
+
+[[fn]]
+path = "bitvec::field::BitSlice::load_be#2"
+kappa = "a241594252ffac3f1220bc30a5104fe4ee6b463e49b01c6e27c28c05abbae9f8"
+at = "I=u32, T=u32"
+embedded = "abe4f59bf5f785aec86c23b3bd9c28e564d82c948061db1e10a6d4b7a9e40cd3"
+status = "residue"
+cause = "mir::Ty: Msb0"
+
+[[fn]]
+path = "bitvec::field::BitSlice::load_le"
+kappa = "7779291fb38721eed55a9ebc86edc3cc7fefb524bc06cfeefa036fe9e12740bd"
+at = "I=u32, T=u32"
+embedded = "24a60cc08dd6d7583150126e1e40f0a8055eb5d1895e785e162dbd4d41440172"
+status = "residue"
+cause = "mir::Ty: BitSlice<u32>"
+
+[[fn]]
+path = "bitvec::field::BitSlice::load_le#2"
+kappa = "098605c0d42028ed29e28f2cb9384bd707139874ce476e7bd089d0155dd776ab"
+at = "I=u32, T=u32"
+embedded = "0f6ee1601d963e362391046b625eb7bb71c34d68af74ad6f807d395307f3c7dc"
+status = "residue"
+cause = "mir::Ty: Msb0"
+
+[[fn]]
+path = "bitvec::field::BitSlice::store_be"
+kappa = "a92a8a4cbaf1f3795a7bffe52c810e0155816f66782a196a683bd3f2418be35f"
+at = "I=u32, T=u32"
+embedded = "7aa675119c041a0a82c7e373cd9dddd8eee0cc514c3b906b33ec09212b8b5571"
+status = "residue"
+cause = "mir::Ty: BitSlice<u32>"
+
+[[fn]]
+path = "bitvec::field::BitSlice::store_be#2"
+kappa = "321c66b40025846fb130f0ef4124633958eab8a1dcf361e215ff8aa48112d3cd"
+at = "I=u32, T=u32"
+embedded = "1d23ba7a075a16f7510c83b89dc974afd557ee369014017fc49c3d5396ecb0ac"
+status = "residue"
+cause = "mir::Ty: Msb0"
+
+[[fn]]
+path = "bitvec::field::BitSlice::store_le"
+kappa = "5376c538aebef019ad67115c4ccabc9444e0c9da37e7906aacad329c54e5ced3"
+at = "I=u32, T=u32"
+embedded = "d0b02e7522c5e8b1631f31d4241f4c0bcb5a760507d107f8f048441536302c67"
+status = "residue"
+cause = "mir::Ty: BitSlice<u32>"
+
+[[fn]]
+path = "bitvec::field::BitSlice::store_le#2"
+kappa = "3d6a506c6365ff6e7cc8d4e75dd1fd3a5e815947191727f9aaa579547599b416"
+at = "I=u32, T=u32"
+embedded = "4bfb8a7ed9953f2ef5513262edc7fb316956f23e58271f949357d82f5dcd1567"
+status = "residue"
+cause = "mir::Ty: Msb0"
+
+[[fn]]
+path = "bitvec::field::BitVec::load_be"
+kappa = "6ca96acf6aa6b0b7b22a2d2b678c66e24119b0939f81e1f2b2c59bc904f115d3"
+at = "I=u32, O=u32, T=u32"
+embedded = "00c971e758b3c4cf6af392329beaef0dfc5fe84ed09662ec47cc49f46aef666e"
+status = "residue"
+cause = "mir::Ty: BitVec<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitVec::load_le"
+kappa = "99848e651dffafe0ec3ab05f9f20381da9c1571a6b8c43c77a66599b6973044a"
+at = "I=u32, O=u32, T=u32"
+embedded = "710a9eb69672772a98e8320d7108a3f1fb3a47c50156112950289e0eaa540330"
+status = "residue"
+cause = "mir::Ty: BitVec<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitVec::store_be"
+kappa = "f5419522ca057b729a0c578e6aa3acb1b54d740caa0519ef7a85d7cb3f7dd7fd"
+at = "I=u32, O=u32, T=u32"
+embedded = "76b54f7a71f2a0d728ccb17eb52affd9148002d1bd51e8971ab68c41c8771150"
+status = "residue"
+cause = "mir::Ty: BitVec<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::BitVec::store_le"
+kappa = "556a7bb9862a03f6352ef9966daa74fa1b7db29c1fce685f41cd59df2154501e"
+at = "I=u32, O=u32, T=u32"
+embedded = "48940ec2c1ca00e4bdba78bbfe4ae0f0444f51294a615dd3220b163f2ae5d76d"
+status = "residue"
+cause = "mir::Ty: BitVec<u32, u32>"
+
+[[fn]]
+path = "bitvec::field::get"
+kappa = "bee17b8a59e2973ee27fa5bc57403eb7cd422ad6104460a15a803662323dd4e9"
+at = "I=u32, O=u32, T=u32"
+embedded = "da172e767de54066306a93a88c37b1ed085ef3eab123a7bf4bfbefbf0b685e3e"
+status = "residue"
+cause = "mir::Ty: wyz::Const"
+
+[[fn]]
+path = "bitvec::field::io::<impl at src/field/io.rs:21:1: 25:27>::read"
+kappa = "9793a3d35e8986e7fa36d29bea2898166ba5517047a1f396a19dcaaebc6566fe"
+at = "O=u32, T=u32"
+embedded = "3f18ec1da078a233e1be5773d6b984eac7243cc3486756f5dc19bc0316d6db0a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bitvec::field::io::<impl at src/field/io.rs:42:1: 46:27>::flush"
+kappa = "424f578127a964c390e6c2338a37804c724ae3efceef98594bbe8359ed47e063"
+embedded = "9494c860e928a89497c233c983b00ff31285e34bec8c45baa75e4cee8ffb91cb"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bitvec::field::io::<impl at src/field/io.rs:42:1: 46:27>::write"
+kappa = "fe24812eb023d37cab3fb7fdee1f9889f7555f672bfda80b8e35dcbc1110604e"
+at = "O=u32, T=u32"
+embedded = "06825fe09ae3b847297762ac5d53e3b0d07872323512dca448b8c5576ac82382"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bitvec::field::io::BitVec::flush"
+kappa = "4890954653dbc685187f935f5d79d3d3a90e84857ad2e3cada58b9827f7438c7"
+embedded = "6725fc4bd915fa9610ba6b15b99b021c130b33298dd023f3d7104e1fe67f092b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bitvec::field::io::BitVec::read"
+kappa = "8f7afb102068b61d1b695d4d32c0988c43ad24a60824ce77d2434ca7b89b6957"
+at = "O=u32, T=u32"
+embedded = "a6bfffafbbee21246f8ccc8eedd9578655fa494ef688926087034236d12e2d2a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bitvec::field::io::BitVec::write"
+kappa = "1c3c8aa90cecea7258a7923eca7f946a233ce2497340f4e4c4ae3da49230476c"
+at = "O=u32, T=u32"
+embedded = "19790659098a7ee172510f5d742342cfd65cce81da148c17f4682caf7fb0407f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bitvec::maybe_shift_left"
+kappa = "425267f7e52704e783a81700b0163f3869c65138706fd6ae2ed40b73b1b3cfcb"
+at = "T=u32"
+embedded = "65a8dfc1ad9a136b8facafeba25244a0531a20829cefcb1fc71e1b7742418df0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: mem::bits_of: bitvec's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "bitvec::maybe_shift_right"
+kappa = "df15542fda313993cd4b4727707c9bf8d2696de37e923d05db408b0abb8d4007"
+at = "T=u32"
+embedded = "b1f09e4c56f4e6ed7b79d822e85d8489adf11c8d8f3c0e5b7883a15f0c06869c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: mem::bits_of: bitvec's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "bitvec::resize"
+kappa = "bcd6a196448eebb6233d7f2437b9db22a43a9ace41361e156343c17e81a3b8e2"
+at = "T=u32, U=u32"
+embedded = "0f2dde4ab21f2765a07995d1bceb6a34ff3e7eca44e4b60b999eaaf6bae8eefa"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as funty::Integral>::ZERO"
+
+[[fn]]
+path = "bitvec::resize_inner"
+kappa = "07eb5289b1a4bd22bd4453cf595d56bbbfd846c4b0851c3185d1ea514600e3b7"
+at = "T=u32, U=u32"
+embedded = "452605cdb8c101ece8fd1e2779755ea769d3fb2fb44fc350926f496973920854"
+status = "residue"
+cause = "mir::Memory: the layout of Nat, with no data layout recorded for the target"
+
+[[fn]]
+path = "bitvec::set"
+kappa = "687f03e4b3b202fbd548ee1d02c3113dd48ed470491f01a97ff58d7a7f6c2c3d"
+at = "I=u32, O=u32, T=u32"
+embedded = "c8067049997e9384b8ff81c3ad5c3d46b89fac9dd4d07a461f4eb9b671ddb12b"
+status = "residue"
+cause = "mir::Ty: Mut"
+
+[[fn]]
+path = "bitvec::sign"
+kappa = "b5352847973b45d64cefa94996ac7b5a08c72fb334621b96ab2d9a3aca174f61"
+at = "I=u32"
+embedded = "a899fcd33a3c5d8e27b9c37db4b3aa4847831dedc7d8ca107a0be4f3032469dc"
+status = "residue"
+cause = "mir::TerminatorKind::Call: devel::is_unsigned: bitvec's MIR stops at mir::TerminatorKind::Call: devel::eq_types: bitvec's MIR stops at type outside the lift: std::any::TypeId"
+

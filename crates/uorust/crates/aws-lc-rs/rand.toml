@@ -1,0 +1,89 @@
+[[fn]]
+path = "aws-lc-rs::SYSTEM_RANDOM"
+kappa = "cc210dcc29a33dcf27a10f08c78179592fc6b488a465a3dcee85159a889f736d"
+embedded = "aee1976b974d0ab4fd450d70f10ac972a22cf54871a9fa0289fdeb79d3f94b40"
+status = "residue"
+cause = "mir::Ty: rand::SystemRandom"
+
+[[fn]]
+path = "aws-lc-rs::fill"
+kappa = "5bbbbecf432081467b767971745d4aa34520c2596debc5603aa92e34e130d790"
+embedded = "561303f52ba138c4568e1da050ed077153084de36fd3c9868b37b3b8ba2799ad"
+status = "residue"
+cause = "mir::Ty: error::Unspecified"
+
+[[fn]]
+path = "aws-lc-rs::generate"
+kappa = "0fe062a248f33248f9d6bd367334dec502a51e8e11f3b82426e715e290d653f6"
+at = "T=u32"
+embedded = "6c1c468b0eb6454e31e7f812a32f2f5056ee307ac15f2926a70c2adae589218b"
+status = "residue"
+cause = "mir::Ty: rand::Random<u32>"
+
+[[fn]]
+path = "aws-lc-rs::rand::<impl at src/rand.rs:171:10: 171:15>::clone"
+kappa = "7b8b481a54fb1f1d298cf3c6b531db37970b32be5d27e62866a3f94f49b30705"
+embedded = "62aa2fc0ba07de082dfc2f7da5f16405ebadb520017005347c0fe2d1415d1f56"
+status = "residue"
+cause = "mir::Ty: rand::SystemRandom"
+
+[[fn]]
+path = "aws-lc-rs::rand::<impl at src/rand.rs:171:17: 171:22>::fmt"
+kappa = "f581fa07009bcf5fbdd4182bba24d7b92cb5cbc6bbcedc64dcaa1ffe25a0df9a"
+embedded = "636f7d70d1e949ed692d50a8bf8e474c83edb3db47c21d5a4d27d73ec16ed46d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-lc-rs::rand::Random::expose"
+kappa = "f7f0d85001d886e82c9d361a4a76f146e6838b178068c5e6606b2028f0bf7e6b"
+at = "T=u32"
+embedded = "31778aeb3126f73e598adce7d6485692ea6763a6a3f48d9eaf35f0f162fc3289"
+status = "residue"
+cause = "mir::Ty: Random<u32>"
+
+[[fn]]
+path = "aws-lc-rs::rand::SystemRandom::default"
+kappa = "b57f7a6fb51df568f022f9853d9a73a70535f56d4f268693a532336bea9ac825"
+embedded = "54f3a8e9d818e855d45b5784e840d07c86eb0091e6d4fd5fae6950142d438003"
+status = "residue"
+cause = "mir::Ty: rand::SystemRandom"
+
+[[fn]]
+path = "aws-lc-rs::rand::SystemRandom::fill_impl"
+kappa = "eec289b0f1b0b12535a5a33c407ab9377d578b2cbb82e102c6264ddc73cfe431"
+embedded = "605bab33984fbae2b944f03661daf3625bed5ef0886388765f8b630a0e1fac4c"
+status = "residue"
+cause = "mir::Ty: error::Unspecified"
+
+[[fn]]
+path = "aws-lc-rs::rand::SystemRandom::new"
+kappa = "247420c11254bf53328c2aea90c8eeb3d92164d67ff0b1c676c1bef54c174a67"
+embedded = "4aac8d9661ff26c3ebc2dc4ed31e430731a6e68fe5be56b2ff7e725a517553a4"
+status = "residue"
+cause = "mir::Ty: rand::SystemRandom"
+
+[[fn]]
+path = "aws-lc-rs::rand::T::fill"
+kappa = "b4e7c605b871a2eb1b1ea0591f1a11770051e47b345b93d2109feac74da2110b"
+at = "T=u32"
+embedded = "0bb34373b55d4b5ec351b38e7c691b11188aace8194b1642c9c51b4e518a6967"
+status = "residue"
+cause = "mir::Ty: error::Unspecified"
+
+[[fn]]
+path = "aws-lc-rs::rand::sealed::<impl at src/rand.rs:146:5: 146:59>::as_mut_bytes"
+kappa = "b5a3df1057ea8ab311e693af70bf7a55654b02e8b354ed063642c10ff4d6c19a"
+at = "T=#usize_T"
+embedded = "1573f53f345ab2bda8b3cb79e0612ac33ab944ba7c99d50c78918e41e6dd4290"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFull"
+
+[[fn]]
+path = "aws-lc-rs::rand::sealed::<impl at src/rand.rs:146:5: 146:59>::zero"
+kappa = "5e82abcb08ea8714db0e1ed8fed8d3392e63a28121a134d450a87b5037aa9da9"
+at = "T=#usize_T"
+embedded = "1ef7fa3957f3894281c4d78c41db9b0e0ea1cc09979548c6d1524b00333ebfa2"
+status = "translated"
+digest = "2cf2cb02bb9d24580a81478f82ca311b2ffaa11a649f841204c2be5f00e1a2b7"
+

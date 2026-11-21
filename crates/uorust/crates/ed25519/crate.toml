@@ -1,0 +1,153 @@
+[[fn]]
+path = "ed25519::<impl at src/lib.rs:310:16: 310:21>::clone"
+kappa = "a09790263a8ee7a7e3f8a869ea572b2698cb6ae0c609e2c1b3a49c3e54c1354e"
+at = "Signature=u32"
+embedded = "2dd7ab4a66b21675f9c2435627b926b16cd627d3593233731b6965e40b10f3b2"
+status = "translated"
+digest = "2f677a8cb53a7f40a1ef509f4834d1b31f1cdd43275d33d3bd08d09d5936d54a"
+
+[[fn]]
+path = "ed25519::<impl at src/lib.rs:310:23: 310:25>::assert_fields_are_eq"
+kappa = "8623aa80f3a5c1fc41db08b1b1aba5f9c3169ceeaf3e947cc2903138bd17e8d4"
+embedded = "9df034d1058f9bad34e6266808cf0a92b610b19d4f610b70741cebb4ccbb93e6"
+status = "residue"
+cause = "mir::Ty: Signature"
+
+[[fn]]
+path = "ed25519::<impl at src/lib.rs:310:27: 310:31>::hash"
+kappa = "bc44a0b4718cca4b089fd4dd4da5f553db3c53562ea127736e57486720c067e8"
+embedded = "695e3a1e05a7aff22b96a2da900f678f65865ded2763624ae623aea1e8d727e2"
+status = "residue"
+cause = "mir::Ty: Signature"
+
+[[fn]]
+path = "ed25519::<impl at src/lib.rs:310:33: 310:42>::eq"
+kappa = "54b81d4056804564756bbf8ffc628ca934e074228d9df7eeb27f0470bd6ad73d"
+embedded = "7035d0b49aa6c4c23c391fe3c7341f37ff1793139f39c508cf49f87164483321"
+status = "residue"
+cause = "mir::Ty: Signature"
+
+[[fn]]
+path = "ed25519::Signature::BYTE_SIZE"
+kappa = "fa151ce9948fa75ce0f9ba06a5fbf43244fe4a55394058adb7ce981b2255d3a0"
+embedded = "48a9a3062d794164f99537fb00db14b94c7baf252821216198884802ac85c673"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item COMPONENT_SIZE"
+
+[[fn]]
+path = "ed25519::Signature::fmt"
+kappa = "a158f98e85f33fc62dd517884a4b70520f11bcd010552e42c3605d446c4be656"
+at = "Signature=u32"
+embedded = "d6637c8f8f68740e0f9d243aa005ba16d094ef730b53c052f828e6d94a5f2b29"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ed25519::Signature::fmt#2"
+kappa = "32a204f87f0288ac518d215e1190ef0155d1466b7e32b6750df84dbad429ac5a"
+at = "Signature=u32"
+embedded = "c2cab11e408575fd0156a0fd317fd9b592c1ed59a6e4ea8bf4a3a28628045bd2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ed25519::Signature::from"
+kappa = "f5a15038067681cd237153899a627170c31e7b6044cdf6ff9fa1c71e97015d28"
+at = "Signature=u32"
+embedded = "e8fd0ca3d077a08a6153d625d06da6b0a3e519d47190300c1e5783ce5f4daadf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Signature::from_bytes: ed25519's MIR stops at mir::TerminatorKind::Call: <[u8; 32] as Default>::default"
+
+[[fn]]
+path = "ed25519::Signature::from#2"
+kappa = "1ada8ffda56b7e2ea0ba1c8365b6313e4b8140d30958028ae87e708bea500ccb"
+at = "Signature=u32"
+embedded = "48029f39823c921749860aebd871e63c5ec5da3fafab76b553afbcf4c78f8232"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Signature::from_bytes: ed25519's MIR stops at mir::TerminatorKind::Call: <[u8; 32] as Default>::default"
+
+[[fn]]
+path = "ed25519::Signature::from_bytes"
+kappa = "226720c601f4b80207008edd56a4973800c496d4c05cf1ba7abe1c6ab0a4ad91"
+at = "Signature=u32"
+embedded = "68262541a900356e37d905f05a9913c08fb37a12d9d190ba4e260cd2dbb6e21f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <[u8; 32] as Default>::default"
+
+[[fn]]
+path = "ed25519::Signature::from_components"
+kappa = "9b069fae0227f5fb5edc4cfa048a21f463739673d329588f1398cd99b71487e8"
+at = "Signature=u32"
+embedded = "049a4b3b16fda735b07e844b2737cb126f5ca1fe08e7ac4fcd2b1ba04df35b4b"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "ed25519::Signature::from_slice"
+kappa = "11ce86fb19577f5440f83c1807a4fd43f3b2084cb87b0790444f74ddcca1803b"
+at = "Signature=u32"
+embedded = "0332215911ec774dd09692212fc0008a989fb40ed1baec11e53aa629273722ad"
+status = "residue"
+cause = "mir::Ty: signature::Error"
+
+[[fn]]
+path = "ed25519::Signature::r_bytes"
+kappa = "ae1cfee3eea556e4d34092ae2a544433f470efc24c84470e0e0372e1cb76575f"
+embedded = "b66582887a3dfc79bd44f3e85a798c07556f3efd8f24194b37babc17d3cbe507"
+status = "residue"
+cause = "mir::Ty: Signature"
+
+[[fn]]
+path = "ed25519::Signature::s_bytes"
+kappa = "0251b849b81d5d0f8252d8ef5c1712e0187bef96eb87e9a5df639405fc1cac9c"
+embedded = "47d2f46af3b2b79b68720dfb29a47c7b20aff410b1b40b2069fecf81745a88d8"
+status = "residue"
+cause = "mir::Ty: Signature"
+
+[[fn]]
+path = "ed25519::Signature::to_bytes"
+kappa = "53e797180a80dc02d26f242a308a023cdd2e53b865ea852851edbfd3671a7e4a"
+embedded = "def6afabba87e7924178e7b31aedee5ccfdfad0753a8c68fd058d9008bbcfbf0"
+status = "residue"
+cause = "mir::Ty: Signature"
+
+[[fn]]
+path = "ed25519::Signature::to_bytes#2"
+kappa = "81e2321ae069a92ccb4fe1cd63cea792e7381f43c9a3e3deb88578b653cbfd17"
+at = "Signature=u32"
+embedded = "9817c104742789f27fb749c58ea29353b3ab51317f7d611ce32dee2ca0a1c85d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Signature::to_bytes: ed25519's MIR stops at mir::Operand::Constant: the constant item COMPONENT_SIZE"
+
+[[fn]]
+path = "ed25519::Signature::to_vec"
+kappa = "d7ca039c219ea683e3b08f9e282659f3e7107c504ed75bdf0b25e8533fcffeae"
+at = "Signature=u32"
+embedded = "19b99cad45b18147636fb2c409a9736845f65ed50cd37374743ce6752cc1d7e3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Signature::to_bytes: ed25519's MIR stops at mir::Operand::Constant: the constant item COMPONENT_SIZE"
+
+[[fn]]
+path = "ed25519::Signature::try_from"
+kappa = "f76059adb15a3bd65566aafbaa9aa543f3e0ac9a72c9c799893ca6203a1b3c57"
+at = "Signature=u32"
+embedded = "a1c290db24f8f7936927b220656618dedf17f5aaf67f3af8b52a677de93fb3c4"
+status = "residue"
+cause = "mir::Ty: signature::Error"
+
+[[fn]]
+path = "ed25519::SignatureBytes::from"
+kappa = "c49abf8767b653c43d2b374628d1bfa6de4a365bbfab3d4df0535da94d4a081d"
+at = "Signature=u32"
+embedded = "fc760c5e1d82cc458cb5875f2603eaae16bed9bb5cd9dae9d54bee6f2ec7d2ce"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Signature::to_bytes: ed25519's MIR stops at mir::Operand::Constant: the constant item COMPONENT_SIZE"
+
+[[fn]]
+path = "ed25519::SignatureBytes::from#2"
+kappa = "17d9672e7b689e853ab57fdac06f45f59413ddc5b28e91165f404efc1a792c16"
+at = "Signature=u32"
+embedded = "93aba867cc0c109b509374591d8dedcdc26943ce8afd4050ded66a93e8bef647"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Signature::to_bytes: ed25519's MIR stops at mir::Operand::Constant: the constant item COMPONENT_SIZE"
+

@@ -1,0 +1,82 @@
+# The unicode-width register (written by `uorust crate unicode-width@0.2.3`; do not edit): every body of
+# unicode-width's MIR at unicode-width 0.2.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 84
+translated = 3
+residue = 81
+
+[module.crate]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.lookup]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.props]
+bodies = 7
+translated = 2
+residue = 5
+
+[module.tables]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.width_info]
+bodies = 59
+translated = 0
+residue = 59
+
+[embedding]
+bodies = 84
+embedded = 84
+evaluable = 84
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: width_info::WidthInfo"
+bodies = 61
+
+[[cause]]
+cause = "mir::Ty: WidthInfo"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <char as Into>::into"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lookup::single_char_width_generic: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lookup::single_char_width: unicode-width's MIR stops at mir::TerminatorKind::Call: lookup::single_char_width_generic: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lookup::single_char_width_cjk: unicode-width's MIR stops at mir::TerminatorKind::Call: lookup::single_char_width_generic: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lookup::str_width: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: lookup::str_width_cjk: unicode-width's MIR stops at type outside the lift: width_info::WidthInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1

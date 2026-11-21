@@ -1,0 +1,114 @@
+# The ciborium-ll register (written by `uorust crate ciborium-ll@0.2.2`; do not edit): every body of
+# ciborium-ll's MIR at ciborium-ll 0.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 47
+translated = 3
+residue = 44
+
+[module.crate]
+bodies = 15
+translated = 3
+residue = 12
+
+[module.dec]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.enc]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.hdr]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.seg]
+bodies = 10
+translated = 0
+residue = 10
+
+[embedding]
+bodies = 47
+embedded = 47
+evaluable = 47
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Encoder<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: hdr::Header"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Minor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dec::Decoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dec::Error<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: seg::Bytes"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Title"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: seg::Text"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Major"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Text"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: enc::Encoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: seg::Segment<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: seg::Segments<'_"
+bodies = 1

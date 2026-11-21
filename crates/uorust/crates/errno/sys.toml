@@ -1,0 +1,30 @@
+[[fn]]
+path = "errno::from_utf8_lossy"
+kappa = "dbf2cf6ea833fb80b02a2609d725ddc0909ffc1f99e4d0f60ff04c1dd1a43d8e"
+embedded = "a4b167d85264483ab1406cd98a9feb03ab6d718465278d556cc67b9cb7e4ce64"
+status = "residue"
+cause = "mir::Ty: std::str::Utf8Error"
+
+[[fn]]
+path = "errno::sys::errno"
+kappa = "b8c17865b52ee3b36127bd5d597cd036817e9e6b49b246ab4d4f7ad10b2bb36e"
+at = "Errno=u32"
+embedded = "9b89d2314dc90387ed102e651865f9767b9cefb3b79ad825cd739baecaebeeac"
+status = "residue"
+cause = "mir::TerminatorKind::Call: sys::errno_location"
+
+[[fn]]
+path = "errno::sys::set_errno"
+kappa = "e1474b21e64aedb32ef2bc98534915031f2967f4b659b55e99473c1a5041c1e9"
+embedded = "8562c8a8401b2d948a22733f9586a43d5c6d95623cb8088be8d81b372ed917aa"
+status = "residue"
+cause = "mir::Ty: Errno"
+
+[[fn]]
+path = "errno::with_description"
+kappa = "d8d5b404e960ace7a7930c0b7656b83f07f81ec69670ff7bf19af7f6a9c1488c"
+at = "Errno=u32, F=u32, T=u32"
+embedded = "7519dde535b028f32cc567d25ae16e2425da42b5806e5a7293c664effbb01e50"
+status = "residue"
+cause = "mir::ProjectionElem::Field: a field of Nat"
+

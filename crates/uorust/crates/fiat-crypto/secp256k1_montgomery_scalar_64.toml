@@ -1,0 +1,219 @@
+[[fn]]
+path = "fiat-crypto::fiat_secp256k1_montgomery_scalar_addcarryx_u64"
+kappa = "0f1180e62311cd54be7cd6ae10f20baffc4713b222ed635f4395929b29bb38b9"
+embedded = "fc64b5acb03f9b24f7fe8d8a45c311eef8ed76367c06bfb43bd72e343f7d8cea"
+status = "translated"
+digest = "145fcb6e58e1947f5de28c5bef132899c6f9efeaa259b4cc329373c6db06ec01"
+
+[[fn]]
+path = "fiat-crypto::fiat_secp256k1_montgomery_scalar_cmovznz_u64"
+kappa = "7fe7d879471979277779033e9cb09dde41ff8df1c6408fea6468b8d5c9c86485"
+embedded = "5a61d909fdd45e57d072cd85789f5153e5b9d3d301418b5325271aa3603d50d2"
+status = "translated"
+digest = "b45a17dd4f02a53bcd31121ca21ec2d27965907f5f8d791bfe05f054789671c3"
+
+[[fn]]
+path = "fiat-crypto::fiat_secp256k1_montgomery_scalar_mulx_u64"
+kappa = "beca2d853f34217cceaccf381bf4562781a9ca22c66052faac015cb7b6e6d755"
+embedded = "b2d64a1b4adf6cff75d6ac30fada32d1b4f7ba5374de0bee015eafa353948192"
+status = "translated"
+digest = "1e8e82ade4e2bfa2c7ad231e4e450d1ec4ad183c4c7b3185a76d485b1029ff0b"
+
+[[fn]]
+path = "fiat-crypto::fiat_secp256k1_montgomery_scalar_subborrowx_u64"
+kappa = "9c4e8a9666d8b453dc72d398e195342677a1dda5bb446defc7b9b7a3d7f20cd8"
+embedded = "4ebaeebd53854ef272f7cf6920f90876ce7d0e7c43f5ecfa7947cd1fb79c4044"
+status = "translated"
+digest = "0f33b2b5ad657a57242e0b1007f6634f91cf43b5fecc830939d2ea32471e822a"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::<impl at src/secp256k1_montgomery_scalar_64.rs:54:10: 54:15>::clone"
+kappa = "b506afbc125a7ec4756b9f0686f8143540d520a7b85592938456d836d6b3e59e"
+embedded = "82ded06b7a43110b4e0c65c92278932490626259ad4d195dbbf53f40d3511f0b"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::<impl at src/secp256k1_montgomery_scalar_64.rs:90:10: 90:15>::clone"
+kappa = "c85f7cb530cd52415b992c7973a3a98d5e259ce3962f5d1553b865e357d24d51"
+embedded = "485ee18dc452e96ad5ba93f452a05b39df9c3af4c46a3f36852f1bf6cd779b2f"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::IndexConst::index"
+kappa = "62e29f950399f774e903eda999e4b5a23461d6b41125d0df325c41a0ffe94b99"
+at = "N=#usize_N, T=u32"
+embedded = "6711c2bf2f1bbfa0907dde64092cc87aebbc05ca24cb4b96978614a30ab56fd3"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::IndexConst::index#2"
+kappa = "f40ffd9f9a6a22b32589ff294903ced6f8c130836a6418d099f1451f22eac820"
+embedded = "6a01686099c69b44ab1cfcf83029b76d8d4c4a7f640ac2ee4c76ec8447208c32"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::IndexConst::index#3"
+kappa = "13c8b72d31ba699661bd5261e935ed061abcc7f48f8dee32915a5150ce40cdb3"
+embedded = "12d3c9876229866d4861fb701d2dc24fa99dde03e462b33672db96cfec4e022e"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::IndexConst::index_mut"
+kappa = "10c19c65381f6922334e1ac433724d9599e9a125c7a23dc9b40aa11df38d8463"
+at = "N=#usize_N, T=u32"
+embedded = "26229df117edcfc62a29deb3f7b67a2974a087e798cace5498ef1dde90cada5f"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&mut &mut [u32; #usize_N]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::IndexConst::index_mut#2"
+kappa = "4c805549c985d872c33f9ebf676366bb870818938093e159b275b3a1608b2d66"
+embedded = "9513c5404a14c933b7b4d98e370f71e063ad3e25cea2e037ed9969365348db45"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::IndexConst::index_mut#3"
+kappa = "59751103ae0e3032be0d9d56f1ad9bf8d5ebe93166a761dc516865432602c7b9"
+embedded = "22c0a75262826a7da8a56cf76194056523e77864d9f49afacc8be61c5c1230f7"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_add"
+kappa = "1efd3b649490bd6aef67155824d4beed04eecf4bf7978a741ed8e6ae77bec7aa"
+embedded = "4fa3c715b214584b2275fd629b9c3c7dc43842ea5fffa672cf526db8bd220861"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_divstep"
+kappa = "f232ae0b2998004a9a042ee37b7be26a6bdae2308f2b6dba920795416ed1c4f7"
+embedded = "aa81a95ae942b1d289955156f86aa86d4f2e6d858b97dc34e11b67b766879d9f"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u64; 5]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_divstep_precomp"
+kappa = "1bb19cd7c86fb556df3a031d7ed5c6db758a327e90972ad932b4cbc0f8b53b72"
+embedded = "8b03053c1baf6da31a3ccdd691f04db017f4e52c5505563f61fab1f82cfedd6d"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&mut &mut [u64; 4]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_from_bytes"
+kappa = "8482bf019893981e770f70d0c701cee2412d9a2b5bb1d536931adfe9d64b23bc"
+embedded = "4d1a6e0752ba80433ecbcb1b06d123d1890f54f827008fe9d3c2ba6d20c80a63"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u8; 32]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_from_montgomery"
+kappa = "e3fab72330d34e064b7ddf53db773119034928e29d8d6f69a3df260e806aa257"
+embedded = "3e8f557cb03300bf72a6eaaf869455bfddc2b1ca9730c707fbce7b6c026f3adf"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element::index"
+kappa = "f87d7eea043e77e129495cb9f7ae9d28c5273d87491548b2f51040f29160cf81"
+embedded = "d7011ca35e39fc9f22fd692f442761e96e221e79ae81b36fe546416fd009ed14"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element::index_mut"
+kappa = "0fc4d2710b9c1e9375710e1ed8e2c2fcd53daab6ae81bbc4a52a59b209f29d8d"
+embedded = "1c5a6861efcfe0450042739f5b566094170b9802331cab3828716379821d8872"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_msat"
+kappa = "8cb905a5ed1e338964e4af6157e22e5cce2e984cb98088f81597f6596db9d5b1"
+embedded = "5b75f282ae05e43f5c8cbc9ec475641fc6967f1334c952941e23a5495439dfee"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&mut &mut [u64; 5]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_mul"
+kappa = "19f183e58183a1f9c99917bd517c71903bf712e2c1659f87bb1f9fefc69ea336"
+embedded = "6f5ef3645bf89ab79b4fcda6e892a4d3abd1650a71cb924d560014ee10db9b49"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element::index"
+kappa = "9735c1103dc833866ff228e7fa8a80fa1df8e9f53d6e9515ad521d5ab0c93064"
+embedded = "356c690e78fa9cf5d1792c147cd82034fa79b40900e6f0d5dd73b6143062988b"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element::index_mut"
+kappa = "2598dbb47f7a1b24940653d30419dee6b8f93d2c3bd3675c01e07f6d189c220a"
+embedded = "a9d78e76dee68fe03513848378bc9cd891f355ce223bcfb7043020d809b30f3b"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_nonzero"
+kappa = "ed42ec748a4d99f8558e5232c77229e4f654371f2de9dac9191a86e23b2b6f12"
+embedded = "2c8b9b5cb61ed0fd449ce61e7739bf2ce9e3f9143e128200cd77a92ef6919463"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u64; 4]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_opp"
+kappa = "fc53bc7d4fc028d9d55750f722c9405f2aa451b7d19304b91d1d5aee2774e570"
+embedded = "379ac351c646fbf85690c9ee76e4448306286b9736474925d4cc724275f302d2"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_selectznz"
+kappa = "4448caea27739a4115033d233958080c11b77383e44fec70383822982a399e10"
+embedded = "d98ce435d76ee9e03d982a7d00d612e1af4e4596978ef3b7e8f9686b4d361a12"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u64; 4]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_set_one"
+kappa = "cc63e11c4c444ff310b5cf9a7eacd54ac2d03d3b571b91ecab7f7f0985257997"
+embedded = "6a45dc87cb4cd7641c1b62c4bd404f8fea85487a9c763798fe952f79ca830a29"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_square"
+kappa = "19facef3acee12f480d46da6ef2ad36930ecc8039bda15de176262187cd5f927"
+embedded = "343be84afab3e5fe4d5e75701b321cacb4b02c18a7e7df240347ddadc4a79ec6"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_sub"
+kappa = "2790138694b70582145851d43e6217719de6d81c55153e70c54193f44832f668"
+embedded = "c24ce438160b19fcdb4da37609ad1be70e334665a30c19928f4b26d851c3aba7"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_to_bytes"
+kappa = "14a4f26955fc09c987394b379a2cfaf240230d5841c47990d3766d80b91dec3f"
+embedded = "e2d953a437be5ee9e2c4efd0f9e5dbb5ec285791bb1b4133075687483ab70b43"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::IndexConst<&[u64; 4]>"
+
+[[fn]]
+path = "fiat-crypto::secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_to_montgomery"
+kappa = "6ee4acc51d3b182ac074a05ada5b98590cefb169aa401c36cb4ec205fb196772"
+embedded = "71ed46b3c3eaffc7c46df8b53a6c5fe2b74f968100ccafde05a639a444e31fa1"
+status = "residue"
+cause = "mir::Ty: secp256k1_montgomery_scalar_64::fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element"
+

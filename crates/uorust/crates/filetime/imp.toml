@@ -1,0 +1,63 @@
+[[fn]]
+path = "filetime::get_times"
+kappa = "06dfafbe11e7c9cfcfa590731d7b1bc8d3405ff724eba3265368fae5476ab9b4"
+at = "FileTime=u32"
+embedded = "b500b404c5aee5269557de7aae0bb875e9643054d4f263bcbb12fb702cc7230a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "filetime::imp::linux::set_symlink_file_times"
+kappa = "d610f8804f447f0c68891dfb06991787ac38de9102fb7d59325dc8ecad87b605"
+at = "FileTime=u32"
+embedded = "a09d33218bc2148e0dcc1245e68e008334fc2a2b89c5b4acb42f536a03ac429c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "filetime::imp::linux::set_times"
+kappa = "d3faafb182db887070370ac3772a1318af3d3bb157404ee7c15d370ac4abe804"
+at = "FileTime=u32"
+embedded = "1c3d1c955f9546dfa65182729b90380d06420142f79a092d74521df283bbe317"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "filetime::imp::open"
+kappa = "b6e9a4e1e2119f5531c13f543ba6a0056673002e3001aac96cb45bb8c07099ad"
+embedded = "2bfa91b9be37a0bb4b9efc1b5046d542c38e5a7a925d63afb009d9dd33da69bf"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "filetime::to_timespec"
+kappa = "90e9e1ccfde44ce7507212554f7f571e5c0e7e97408a00645eb83c89ed2b78fe"
+at = "FileTime=u32"
+embedded = "22ee589ececbc274ce79589f9f8ad83913dc23fab909b0caa3f305d886eba292"
+status = "residue"
+cause = "mir::Ty: libc::timespec"
+
+[[fn]]
+path = "filetime::to_timeval"
+kappa = "bf484464f59b011f8174181f536685552bb759b795aa0bb496833fa36daa506e"
+at = "FileTime=u32"
+embedded = "883fc4a7e06efd16c89f93f181de8f145b9757e201e1b3f5e4c1a99f143bc852"
+status = "residue"
+cause = "mir::Ty: libc::timeval"
+
+[[fn]]
+path = "filetime::utimes::set_symlink_file_times"
+kappa = "f3256014af44a7ed252af91a052be96d21e2e8395b8d2d35ba1bc814e3c93512"
+at = "FileTime=u32"
+embedded = "719f550c1ada90ded56f6b711e280790acf899ebba99a3ea3875e72a6e34a53a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "filetime::utimes::set_times"
+kappa = "0f2c449925a0188ea6f50a80c878b316bdaf25a5ee99418324e771f8b910f552"
+at = "FileTime=u32"
+embedded = "e77a3288cd2bebf52388e8a5933b1fc1c17dc6dea139e76093ba92f5e01ec112"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

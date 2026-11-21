@@ -1,0 +1,675 @@
+# The raw-cpuid register (written by `uorust crate raw-cpuid@11.6.0`; do not edit): every body of
+# raw-cpuid's MIR at raw-cpuid 11.6.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 3594
+translated = 15
+residue = 3579
+
+[module."_#1"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#10"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#2"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#3"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#4"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#5"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#6"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#7"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#8"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module."_#9"]
+bodies = 89
+translated = 0
+residue = 89
+
+[module._]
+bodies = 89
+translated = 0
+residue = 89
+
+[module.crate]
+bodies = 730
+translated = 15
+residue = 715
+
+[module.extended]
+bodies = 1882
+translated = 0
+residue = 1882
+
+[module.native_cpuid]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 2568
+embedded = 2568
+evaluable = 2568
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: _::InternalBitFlags"
+bodies = 682
+
+[[cause]]
+cause = "mir::Ty: extended::_::InternalBitFlags"
+bodies = 630
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 362
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::from_bits_retain"
+bodies = 192
+
+[[cause]]
+cause = "mir::Ty: ExtendedFeatures"
+bodies = 75
+
+[[cause]]
+cause = "mir::Ty: FeatureInfo"
+bodies = 67
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedFunctionInfoEcx"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: bitflags::iter::Iter<u32>"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: extended::SvmFeaturesEdx"
+bodies = 44
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedProcessorFeatureIdentifiers"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: extended::MemoryEncryptionInfoEax"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: extended::ApmInfoEdx"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: extended::InstructionBasedSamplingCapabilitiesEax"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: extended::ProcessorCapacityAndFeatureEbx"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedFeatureIdentification2Eax"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedFunctionInfoEdx"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: extended::BandwidthMonitoringEventCountersEcx"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: extended::PqosExtendedFeatureInfoEbx"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedPerformanceMonitoringDebugEax"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: extended::PerformanceOptimizationInfoEax"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: extended::RasCapabilities"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: extended::MultiKeyEncryptedMemoryCapabilitiesEax"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: extended::PqosExtendedFeatureInfoEbx5"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: extended::SvmFeatures"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: extended::ProcessorCapacityAndFeatureInfo"
+bodies = 23
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::bits"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: bitflags::iter::IterNames<u32>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: ThermalPowerInfo"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: extended::MemoryEncryptionInfo"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: extended::ApmInfo"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: extended::Associativity"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: ApmInfoEdx"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: BandwidthMonitoringEventCountersEcx"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ExtendedFeatureIdentification2Eax"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ExtendedFunctionInfoEcx"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ExtendedFunctionInfoEdx"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ExtendedPerformanceMonitoringDebugEax"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: InstructionBasedSamplingCapabilitiesEax"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: MemoryEncryptionInfoEax"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: MultiKeyEncryptedMemoryCapabilitiesEax"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: PerformanceOptimizationInfoEax"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: PqosExtendedFeatureInfoEbx"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: PqosExtendedFeatureInfoEbx5"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: ProcessorCapacityAndFeatureEbx"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: RasCapabilities"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: SvmFeaturesEdx"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: CacheParameter"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: CpuId<u32>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: ProcessorTraceInfo"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: MonitorMwaitInfo"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: PerformanceMonitoringInfo"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedFeatureIdentification2"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: extended::InstructionBasedSamplingCapabilities"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: extended::L1CacheTlbInfo"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: extended::L2And3CacheTlbInfo"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: ExtendedCpuTopologyLevel"
+bodies = 12
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::complement"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::difference"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::empty"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::insert"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::intersection"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::remove"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::symmetric_difference"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::toggle"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: _::union"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: DatInfo"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: bitflags::Flag<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: BandwidthMonitoringEventCounters"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedPerformanceMonitoringDebug"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: extended::ProcessorTopologyInfo"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: extended::Tlb1gbPageInfo"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ExtendedTopologyLevel"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: extended::PerformanceOptimizationInfo"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AssignableBandwidthMonitoringCounterInfo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExtendedState"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extended::MultiKeyEncryptedMemoryCapabilities"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: L2CatInfo"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: L3MonitoringInfo"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MemBwAllocationInfo"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ProcessorSerial"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CpuIdResult"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExtendedTopologyIter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: L3CatInfo"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: L3MemoryBandwidthEnforcementInformation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RdtAllocationInfo<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CacheParametersIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DatIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExtendedStateIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: HypervisorInfo<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ProcessorFrequencyInfo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SgxSectionIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TscInfo"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedCpuTopologyIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extended::L3MemoryBandwidthEnforcementInformation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extended::PqosExtendedFeatureInfo<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extended::ProcessorBrandString"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: native_cpuid::CpuIdReaderNative"
+bodies = 3
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FeatureInfo::base_family_id: raw-cpuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ProcessorSerial::serial_middle: raw-cpuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Associativity"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CacheInfoIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EpcSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedFeaturesEax1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedFeaturesEbx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedFeaturesEcx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedFeaturesEdx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedFeaturesEdx1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedStateInfoXCR0Flags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendedStateInfoXSSFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FeatureInfoFlags"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HierarchyLevelType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PerformanceMonitoringFeaturesEbx"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RdtMonitoringInfo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SoCVendorAttributesIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SoCVendorBrand"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SoCVendorInfo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VendorInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extended::AssignableBandwidthMonitoringCounterInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extended::BandwidthMonitoringEventCounters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extended::ExtendedCpuTopologyLevel"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: extended::HierarchyLevelType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:181:1: 183:44>::cpuid2: raw-cpuid's MIR stops at mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ExtendedState::is_in_xcr0: raw-cpuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: SoCVendorBrand::as_str: raw-cpuid's MIR stops at mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: TscInfo::nominal_frequency: raw-cpuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: VendorInfo::as_str: raw-cpuid's MIR stops at mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CacheInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CacheType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CpuIdReaderNative"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DatType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DirectCacheAccessInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedRegisterStateLocation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedRegisterType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedStateInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Hypervisor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SgxInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TopologyType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Vendor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::arch::x86_64::CpuidResult"
+bodies = 1

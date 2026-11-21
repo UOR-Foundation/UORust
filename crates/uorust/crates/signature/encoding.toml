@@ -1,0 +1,16 @@
+[[fn]]
+path = "signature::SignatureEncoding::encoded_len"
+kappa = "1d60c095de48436c6e5e701d13b6d3bfa7976c52607b2fec6756447a2666f495"
+at = "Self=u32"
+embedded = "2c3e2f507c51f777872a4db2e73c31ae7ff9207792422a7895ea8d6b1dad55e1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by SignatureEncoding, which u32 does not implement in core"
+
+[[fn]]
+path = "signature::SignatureEncoding::to_bytes"
+kappa = "71d59779f5622e1a390fb3b1937862334763aa7ded013eef3a22ce3061617eee"
+at = "Self=u32"
+embedded = "41976391c838cabe1f873bc047aa249a327d1b5d9834f39abb6c88e2a5f23978"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TryInto, which u32 does not implement in core"
+

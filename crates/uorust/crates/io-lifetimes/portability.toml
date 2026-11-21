@@ -1,0 +1,80 @@
+[[fn]]
+path = "io-lifetimes::portability::T::as_filelike"
+kappa = "7e4d91d2ad49b3bc50eff3c5607f2cda7f361d4f873b2d138fce62f480212171"
+at = "T=u32"
+embedded = "e7530137fd4178ed357936ad533769b0d50b206ddfbe545132020a225358a9b4"
+status = "residue"
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "io-lifetimes::portability::T::as_filelike_view"
+kappa = "34d8b913b872d26b2886cea118f36c7995e25f0aca2a08589e17e9fce42f1b2b"
+at = "T=u32, Target=u32"
+embedded = "5e8495059e6baa0f1588334b09668c55ce1c7a8f8694446d89eaf7f96d2c59b9"
+status = "residue"
+cause = "mir::Ty: views::FilelikeView<'_, u32>"
+
+[[fn]]
+path = "io-lifetimes::portability::T::as_socketlike"
+kappa = "676aeecccb84cc697887566b65ecd7f7e22cef66c4309d376d36a17398972448"
+at = "T=u32"
+embedded = "41c848d877d40600fc1bc4feadaebe25ca640496029a9115086febdc5a9d7650"
+status = "residue"
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+
+[[fn]]
+path = "io-lifetimes::portability::T::as_socketlike_view"
+kappa = "d6c3db5b4426a98a00fc1042eeb667097c3ee1cd139ff655addb9f4ee6fe52d4"
+at = "T=u32, Target=u32"
+embedded = "bf4ad752fbf8474382c2c93929c9e8b0acb893c506d36f9fa5e9dfb933400437"
+status = "residue"
+cause = "mir::Ty: views::SocketlikeView<'_, u32>"
+
+[[fn]]
+path = "io-lifetimes::portability::T::from_filelike"
+kappa = "7112ed455e1a2f728b466e8492b091345a26b94a3aa2616aeae4f865291cd387"
+at = "T=u32"
+embedded = "5f2ca936ab99e13585a6c438132fd6c0eea35d4327d0beed5e18e9cc77733981"
+status = "residue"
+cause = "mir::Ty: OwnedFd"
+
+[[fn]]
+path = "io-lifetimes::portability::T::from_into_filelike"
+kappa = "f9de33ec5b6e69a84bd24a4a21f34621f98b8ee4d6711f47ecc64e33c53ee35f"
+at = "Owned=u32, T=u32"
+embedded = "7e3a039ac3bfd9407965a8cc676850903e44f69cb41e33ed428423c842b981ac"
+status = "residue"
+cause = "mir::Ty: std::os::fd::OwnedFd"
+
+[[fn]]
+path = "io-lifetimes::portability::T::from_into_socketlike"
+kappa = "b90437a0231ff8282beba76a271a9b28a45e2216b076943676c286a66a3ee5c3"
+at = "Owned=u32, T=u32"
+embedded = "781675dbbc68d12bf1e9025b9c996affffc2e9ce6303cba52ec5b77987ab085c"
+status = "residue"
+cause = "mir::Ty: std::os::fd::OwnedFd"
+
+[[fn]]
+path = "io-lifetimes::portability::T::from_socketlike"
+kappa = "594731f10ec7bf15e795a89b1b1a3ad54c36ed8ff68b2da3b23019d4000054d2"
+at = "T=u32"
+embedded = "a035a42a08e49a026268dcf37ef9d9182cc874b56d0d1e027472142b07e57706"
+status = "residue"
+cause = "mir::Ty: OwnedFd"
+
+[[fn]]
+path = "io-lifetimes::portability::T::into_filelike"
+kappa = "173c5b018ed27f3102709a1daaec8e726e8fd91182637e98a3bfc3532ae2f2af"
+at = "T=u32"
+embedded = "8ee4d9ee00081d2372a633675dde56b308a8200e2436f7b419538ef853cf0847"
+status = "residue"
+cause = "mir::Ty: std::os::fd::OwnedFd"
+
+[[fn]]
+path = "io-lifetimes::portability::T::into_socketlike"
+kappa = "ed1e932d9a0d771ded1c04ae766ff96de3fb98bdb1ddacccff45e31c3a31b412"
+at = "T=u32"
+embedded = "3582d2682d500bbf9f31b15c988abbeb190107b05e2015268cfedec3ae0a2d37"
+status = "residue"
+cause = "mir::Ty: std::os::fd::OwnedFd"
+

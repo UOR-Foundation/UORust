@@ -1,0 +1,310 @@
+# The crossbeam-utils register (written by `uorust crate crossbeam-utils@0.8.23`; do not edit): every body of
+# crossbeam-utils's MIR at crossbeam-utils 0.8.23, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 232
+translated = 0
+residue = 232
+
+[module.atomic]
+bodies = 146
+translated = 0
+residue = 146
+
+[module.backoff]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.cache_padded]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.sync]
+bodies = 53
+translated = 0
+residue = 53
+
+[module.thread]
+bodies = 14
+translated = 0
+residue = 14
+
+[embedding]
+bodies = 232
+embedded = 232
+evaluable = 228
+blocked = 4
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 3
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<i128>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<i16>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<i32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<i64>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<i8>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<isize>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<u128>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<u16>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<u64>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<u8>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<usize>"
+bodies = 8
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic::atomic_cell::can_transmute: crossbeam-utils's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CachePadded<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AtomicCell<bool>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AtomicUnit"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Backoff"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Parker"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: cache_padded::CachePadded<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: once_lock::OnceLock<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ShardedLockWriteGuard<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: atomic::atomic_cell::AtomicCell<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: atomic::seq_lock::SeqLock"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sync::parker::Parker"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sync::parker::Unparker"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sync::sharded_lock::ShardedLock<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sync::wait_group::WaitGroup"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: thread::ScopedJoinHandle<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: thread::ScopedThreadBuilder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SeqLock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SeqLockWriteGuard"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Unparker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WaitGroup"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: backoff::Backoff"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn core::any::Any + core::marker::Send"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parker::Inner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::sharded_lock::Registration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::sharded_lock::ShardedLockReadGuard<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::sharded_lock::ShardedLockWriteGuard<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::sharded_lock::ThreadIndices"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: sync::sharded_lock::current_index::promoted[0]: type outside the lift: sync::sharded_lock::Registration"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: atomic::atomic_cell::atomic_is_lock_free: crossbeam-utils's MIR stops at mir::TerminatorKind::Call: atomic::atomic_cell::can_transmute: crossbeam-utils's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AbortOnPanic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<*mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Registration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ShardedLockReadGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: atomic::seq_lock::SeqLockWriteGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::PoisonError<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::PoisonError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::thread::Thread"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::once_lock::OnceLock<u32>"
+bodies = 1

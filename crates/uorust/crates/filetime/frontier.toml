@@ -1,0 +1,67 @@
+# The filetime register (written by `uorust crate filetime@0.2.30`; do not edit): every body of
+# filetime's MIR at filetime 0.2.30, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 35
+translated = 2
+residue = 33
+
+[module.crate]
+bodies = 27
+translated = 2
+residue = 25
+
+[module.imp]
+bodies = 8
+translated = 0
+residue = 8
+
+[embedding]
+bodies = 35
+embedded = 35
+evaluable = 35
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: FileTime"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Metadata"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: libc::timespec"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::timeval"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 1

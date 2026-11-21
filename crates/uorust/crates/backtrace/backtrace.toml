@@ -1,0 +1,115 @@
+[[fn]]
+path = "backtrace::backtrace::<impl at src/backtrace/mod.rs:75:10: 75:15>::clone"
+kappa = "b40980c4aff88520fc6e4b6ecba378f9c6c655d2af10f1a76b370ffcd4c2a4a8"
+embedded = "bb1544dc2fc6b05cff07f4353dbc2fc61e504c6abf8409a446c7752dc6253718"
+status = "residue"
+cause = "mir::Ty: backtrace::Frame"
+
+[[fn]]
+path = "backtrace::backtrace::Frame::fmt"
+kappa = "e942f710b522fd124feba2e1916ea07ea43fb9a81a9c67a5e6e41a47951418f9"
+embedded = "b1356cb832b0fe4c9b3ee6a63334f7218fdcd161480cec12a27066bb28686fb2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "backtrace::backtrace::Frame::ip"
+kappa = "e708223454899e6cf2760f2c64cb63c279f778d997cc4f7cf20cb1ebcf3256bc"
+embedded = "0cb6959cb0230b7d8a9ef573cb852b42ba79b7ca9df20178e5825a6355c90134"
+status = "residue"
+cause = "mir::Ty: backtrace::Frame"
+
+[[fn]]
+path = "backtrace::backtrace::Frame::module_base_address"
+kappa = "547e8db953f5448045829926445f0132e3e1019a15a429bcf11368b3bec5df84"
+embedded = "3c3759e91a5e4246598a4586d7b121ffefcfdcee448dc6eea2216e4b406d3338"
+status = "residue"
+cause = "mir::Ty: backtrace::Frame"
+
+[[fn]]
+path = "backtrace::backtrace::Frame::sp"
+kappa = "cac12816ba5add3bccc41db29322adad5277305a61120bb002c72f7fb71c8959"
+embedded = "0ab1c72595d0343fb683766e76b56dc5e31f98af6343cd1081ee0b3dcd1a1f96"
+status = "residue"
+cause = "mir::Ty: backtrace::Frame"
+
+[[fn]]
+path = "backtrace::backtrace::Frame::symbol_address"
+kappa = "0f928b96e375ea2cca76ca48eeb27fc18d21d69cf5b03b79df29a8f3e64f313e"
+embedded = "894a0d8244ca4cb8ce17a093c34a9a5063b3f0636efba1978d4b7c5337c9b9e3"
+status = "residue"
+cause = "mir::Ty: backtrace::Frame"
+
+[[fn]]
+path = "backtrace::backtrace::trace"
+kappa = "fd1c29e9a5b0c5499903215c0555a6a2d7821b5d5f2a016774193f114a169352"
+at = "F=u32"
+embedded = "dfab4a7600a5ba2219c782c1f7ca173001212b881af664e015a0d945b568faed"
+status = "residue"
+cause = "mir::Ty: lock::LockGuard"
+
+[[fn]]
+path = "backtrace::libunwind::Bomb::drop"
+kappa = "990d1ffb9c87750de9db6b1428d6a29be143e4bb0302fc15239fe2161486b1ee"
+embedded = "457df1ced04d25f7baff2794f9c3bf13870f82748444cb8a4ee62c7933649fa1"
+status = "residue"
+cause = "mir::Ty: Bomb"
+
+[[fn]]
+path = "backtrace::libunwind::Frame::clone"
+kappa = "0742f78da809a7eb2028bef1eec24eb1c99e37330c86c95923e37818b14f6451"
+embedded = "92e260d5240bff56e0b4f4bc3f883cdfd2d98734ec6a4b2bd8197c9e4781c535"
+status = "residue"
+cause = "mir::Ty: backtrace::libunwind::Frame"
+
+[[fn]]
+path = "backtrace::libunwind::Frame::ip"
+kappa = "d0ab4ebfb5f296be343ab1c54560dfd770c2e0aff1c12d327ceed5db8fc65981"
+embedded = "e558cb48ba5b18b3cf007ac89a5acf9772df92e7630c27c11dfdcc6d40816d52"
+status = "residue"
+cause = "mir::Ty: libunwind::Frame"
+
+[[fn]]
+path = "backtrace::libunwind::Frame::module_base_address"
+kappa = "4056227d9d973eeb84229c5495126b0db8105ba532a671224778211b18f2c2fb"
+embedded = "3d2351b38106fe9cbcb6ac50201219a50f86e0794acd399c9bfcaea6484bdb3d"
+status = "residue"
+cause = "mir::Ty: libunwind::Frame"
+
+[[fn]]
+path = "backtrace::libunwind::Frame::sp"
+kappa = "074a93cf76e5168f4d2c86efbcfc501c09b3d1985e0f01dad6baee7f7e941a82"
+embedded = "fac3efc80304b4ae5f4e9fd5baf30691e24f0579b8636f46e45cbd95f33915e7"
+status = "residue"
+cause = "mir::Ty: libunwind::Frame"
+
+[[fn]]
+path = "backtrace::libunwind::Frame::symbol_address"
+kappa = "c7d815e3e69b685d6d04db6525d423a82022c08d8b667292c19442ecf4508cca"
+embedded = "a091045df5458f603119bde94575da630fd922ff5182bca0cc67bda61ad5476d"
+status = "residue"
+cause = "mir::Ty: libunwind::Frame"
+
+[[fn]]
+path = "backtrace::libunwind::trace"
+kappa = "5131259ab13f067be5f7365d14d52afd18e7eb7dce5d0e0687993d8a8add92f9"
+at = "C=u32"
+embedded = "2ce923d184ddad141e0c4a4097873504025e93301d081951e19996e38ff1daeb"
+status = "residue"
+cause = "mir::Ty: dyn for<'a> core::ops::FnMut(&'a backtrace::Frame) -> bool"
+
+[[fn]]
+path = "backtrace::trace_fn"
+kappa = "3217d7dc475a55c67c9488a63f278122cb4f3d838739711aec325eaff560791f"
+embedded = "a03315446e21e930a38ef629e2289d38f82e70bccc9daf79222847dd980d4fb8"
+status = "residue"
+cause = "mir::Ty: backtrace::libunwind::uw::_Unwind_Reason_Code"
+
+[[fn]]
+path = "backtrace::trace_unsynchronized"
+kappa = "f02822af57f33386ad5bd2aa05361404a9cd263c2c81076d9dcc372064f865c1"
+at = "F=u32"
+embedded = "64a8b79acb2a71030cfc84859bd64e0e99dc2e6c15c3e25e72f46598ea8898ed"
+status = "translated"
+digest = "f3eb488a27d81689d39e3edeac1a1eff7b99397843c4980d52100c915af8ca02"
+

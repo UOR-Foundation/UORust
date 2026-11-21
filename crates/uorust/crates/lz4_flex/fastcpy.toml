@@ -1,0 +1,28 @@
+[[fn]]
+path = "lz4_flex::double_copy_trick"
+kappa = "743733a463835735f0b41ef4cc39328890f23fe7710497ff9aae1cef60649b20"
+embedded = "d3a1829211dd60c29e4f0e423ff36658e4dbfcaeb0c9eba7007c31a4ce1236cf"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "lz4_flex::len_mismatch_fail"
+kappa = "cb878285e967e98b5422235e15e1611d582de55083c8fc3b07e520faf9a84e7d"
+embedded = "a39ecd61e7f9bb831abbbffb12019b56a572fd45d57b9a6de5d3a53294da7bb7"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "lz4_flex::short_copy"
+kappa = "7559a2bdbeebec1145a97696b70fdfa865e1cf991cee85ff44c526befad8b2ed"
+embedded = "4f40305a859c8773ff359cc2c0bc38cf39c2471141915026b274918c9afca68e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: fastcpy::double_copy_trick: lz4_flex's MIR stops at type outside the lift: std::ops::Range<usize>"
+
+[[fn]]
+path = "lz4_flex::slice_copy"
+kappa = "c3a63438cc679f154d6ba5f4762076370c2d7c43d4fd4f0e8dfe46ac1689b52a"
+embedded = "c3a3c405afeacb01584ad22fbad69cc96d2cbb15b8364e0052b2f32b45854ce1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: fastcpy::short_copy: lz4_flex's MIR stops at mir::TerminatorKind::Call: fastcpy::double_copy_trick: lz4_flex's MIR stops at type outside the lift: std::ops::Range<usize>"
+

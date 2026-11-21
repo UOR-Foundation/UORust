@@ -1,0 +1,984 @@
+# The opentelemetry_sdk register (written by `uorust crate opentelemetry_sdk@0.33.1`; do not edit): every body of
+# opentelemetry_sdk's MIR at opentelemetry_sdk 0.33.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 922
+translated = 1
+residue = 921
+
+[module.error]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.growable_array]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.logs]
+bodies = 139
+translated = 0
+residue = 139
+
+[module.metrics]
+bodies = 515
+translated = 1
+residue = 514
+
+[module.propagation]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.resource]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.trace]
+bodies = 191
+translated = 0
+residue = 191
+
+[embedding]
+bodies = 818
+embedded = 818
+evaluable = 799
+blocked = 19
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 19
+
+[differential]
+bodies = 3
+theorems = 25
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 90
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+bodies = 82
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: error::OTelSdkError"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<10>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<15>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: SdkLogRecord"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: metrics::data::MetricData<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: trace::provider::TracerProviderBuilder"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: metrics::data::AggregatedMetrics"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: resource::Resource"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: span::Span"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: metrics::Temporality"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: metrics::instrument::StreamBuilder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: resource::ResourceBuilder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: metrics::error::MetricError"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::aggregate::AggregateFns<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::KeyValue"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: trace::sampler::ParentBasedSampler"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: logs::logger_provider::LoggerProviderBuilder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: metrics::meter_provider::MeterProviderBuilder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: trace::provider::SdkTracerProvider"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ValueMap<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: logs::batch_log_processor::BatchConfigBuilder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: metrics::data::Exemplar<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: trace::span_processor::BatchConfigBuilder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Atomic<i64>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Atomic<u64>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ExponentialHistogramDataPoint<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HistogramDataPoint<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: InstrumentId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Resource"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: dyn metrics::internal::aggregate::Measure<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: logs::logger::SdkLogger"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: logs::record::SdkLogRecord"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::histogram::Buckets<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: trace::export::SpanData"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: trace::tracer::SdkTracer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<11>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BatchSpanProcessor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExpoBuckets"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExpoHistogramDataPoint<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Instrument"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InstrumentKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MAX_INLINE_CAPACITY"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Metric"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SimpleLogProcessor<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Temporality"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn trace::sampler::ShouldSample"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: growable_array::GrowableArray<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: logs::logger_provider::SdkLoggerProvider"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: logs::record::TraceContext"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::data::ExponentialBucket"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instrument::Stream"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::exponential_histogram::ExpoHistogramDataPoint<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::meter_provider::SdkMeterProvider"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::periodic_reader::PeriodicReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::periodic_reader::PeriodicReaderBuilder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::InstrumentationScope"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::Value"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: propagation::trace_context::TraceContextPropagator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::sampler::SamplingResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::span::Span"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::span_processor::BatchSpanProcessorBuilder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MIN"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BatchLogProcessor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExponentialBucket"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: F64AtomicTracker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GaugeDataPoint<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Pipeline"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SamplingDecision"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SdkLogger"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SimpleSpanProcessor<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpanEvents"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpanLinks"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SumDataPoint<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: growable_array::GrowableArrayIntoIter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: logs::batch_log_processor::BatchConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: logs::batch_log_processor::BatchLogProcessor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: logs::batch_log_processor::BatchLogProcessorBuilder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: logs::export::LogBatch<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::aggregation::Aggregation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::data::ExponentialHistogramDataPoint<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::data::GaugeDataPoint<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::data::HistogramDataPoint<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::data::MetricData<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::data::MetricData<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::data::ScopeMetrics"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::data::SumDataPoint<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instrument::InstrumentKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instrument::Observable<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::F64AtomicTracker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::aggregate::AggregateTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::aggregate::AttributeSetFilter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::last_value::Assign<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::sum::Increment<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::noop::NoopMeter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::noop::NoopSyncInstrument"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::pipeline::Pipelines"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::Context"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::Key"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::Meter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::propagation::text_map_propagator::FieldIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::trace::Event"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::trace::Link"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::trace::SpanContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: propagation::baggage::BaggagePropagator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rand::prelude::SmallRng"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: resource::Iter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: resource::env::EnvResourceDetector"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::Copied<std::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trace::config::Config"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trace::events::SpanEvents"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trace::id_generator::RandomIdGenerator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trace::links::SpanLinks"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trace::sampler::SamplingDecision"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trace::span_limit::SpanLimits"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trace::span_processor::BatchConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: trace::span_processor::BatchSpanProcessor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<14>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<18>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<23>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc10170: &OnceLock<[std::string::String; 1]>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc10413: &OnceLock<[std::string::String; 2]>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Aggregation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Assign<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AttributeSetFilter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BaggagePropagator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BucketConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Buckets<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Exemplar<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExpoHistogram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GrowableArrayIntoIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: INITIAL_OVERFLOW_CAPACITY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Increment<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LastValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LoggerProviderInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoopSyncInstrument"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Observable<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PeriodicReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pipelines"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PrecomputedSum<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ResolvedMeasures<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ResourceInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SamplingResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SdkMeterProviderInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SdkTracerProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TraceContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TraceContextPropagator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TracerProviderInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WorkerTerminationGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn logs::log_processor::LogProcessor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn trace::span_processor::SpanProcessor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: histogram::Histogram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: logs::export::LogBatchDataIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: logs::simple_log_processor::SimpleLogProcessor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::data::ExponentialHistogram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::data::Gauge<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::data::Histogram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::data::Metric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::data::ResourceMetrics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::data::Sum<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::instrument::Instrument"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::instrument::InstrumentId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::instrument::ResolvedMeasures<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::TrackerEntry<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::ValueMap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::aggregate::AggregateBuilder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::aggregate::AggregateTimeInitiator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::exponential_histogram::BucketConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::exponential_histogram::ExpoBuckets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::exponential_histogram::ExpoHistogram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::histogram::Histogram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::last_value::LastValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::precomputed_sum::PrecomputedSum<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::internal::sum::Sum<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::meter::InstrumentResolver<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::meter::SdkMeter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::periodic_reader::WorkerTerminationGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::pipeline::Inserter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::pipeline::PipelineInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metrics::pipeline::Resolver<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::SpanId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::TraceId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::logs::AnyValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::logs::Severity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::Counter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::Counter<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::Gauge<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::Gauge<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::Gauge<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::Histogram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::Histogram<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::ObservableCounter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::ObservableCounter<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::ObservableGauge<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::ObservableGauge<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::ObservableGauge<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::ObservableUpDownCounter<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::ObservableUpDownCounter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::UpDownCounter<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: opentelemetry::metrics::UpDownCounter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: percent_encoding::AsciiSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: resource::ResourceInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: span::SpanData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::array::IntoIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Take<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sum::Sum<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: trace::sampler::Sampler"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: trace::span::SpanData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: trace::span_processor::SimpleSpanProcessor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<12>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<13>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<20>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<9>"
+bodies = 1

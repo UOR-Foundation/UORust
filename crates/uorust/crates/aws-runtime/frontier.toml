@@ -1,0 +1,696 @@
+# The aws-runtime register (written by `uorust crate aws-runtime@1.10.4`; do not edit): every body of
+# aws-runtime's MIR at aws-runtime 1.10.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 498
+translated = 10
+residue = 488
+
+[module.auth]
+bodies = 52
+translated = 0
+residue = 52
+
+[module.content_encoding]
+bodies = 60
+translated = 5
+residue = 55
+
+[module.env_config]
+bodies = 180
+translated = 2
+residue = 178
+
+[module.fs_util]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.invocation_id]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.recursion_detection]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.request_info]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.retries]
+bodies = 14
+translated = 2
+residue = 12
+
+[module.sdk_feature]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.service_clock_skew]
+bodies = 41
+translated = 1
+residue = 40
+
+[module.user_agent]
+bodies = 93
+translated = 0
+residue = 93
+
+[embedding]
+bodies = 496
+embedded = 496
+evaluable = 490
+blocked = 6
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 98
+
+[[cause]]
+cause = "mir::Ty: user_agent::AwsUserAgent"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Profile"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: content_encoding::options::AwsChunkedBodyOptions"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: env_config::file::Builder"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: env_config::parse::EnvConfigParseError"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: AwsChunkedBodyOptions"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SsoSession"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: EnvConfigSections"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SectionInner"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: env_config::property::PropertiesKeyBuilder"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: user_agent::metrics::BusinessMetric"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: SectionPair<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::interceptors::OverriddenHooks"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: env_config::EnvConfigValue<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: env_config::property::Property"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Properties"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Property"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: aws_sigv4::http_request::SigningError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: env_config::EnvConfigSource<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: env_config::property::Properties"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: http::HeaderValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: invocation_id::InvocationId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BusinessMetric"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PropertiesKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: auth::SigV4OperationSigningConfig"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: auth::SigningOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aws_sigv4::http_request::SigningSettings"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::retries::classifiers::RetryAction"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: content_encoding::sign::DeferredSigner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: env_config::file::EnvConfigFiles"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: env_config::section::EnvConfigSections"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: env_config::section::Profile"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: env_config::section::SsoSession"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http::HeaderName"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: invocation_id::DefaultInvocationIdGenerator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: request_info::RequestPairs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: retries::classifiers::AwsErrorCodeClassifier<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: service_clock_skew::ClockSkew"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: user_agent::FeatureMetadata"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: content_encoding::options::int_log16: aws-runtime's MIR stops at mir::TerminatorKind::Call: <u64 as PartialOrd>::gt"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::trim_matches"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AwsChunkedBodyState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AwsSdkFeature"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AwsUserAgent"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Base64Iterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BusinessMetrics"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ChunkBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ClockSkew"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnvConfigFileKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HttpSignatureType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InvocationId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Os"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PropertyError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SigV4OperationSigningConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SigningOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: auth::PayloadSigningOverride"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: auth::sigv4::SigV4AuthScheme"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: auth::sigv4::SigV4Signer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::auth::AuthSchemeId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::retries::classifiers::RetryClassifierPriority"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aws_types::origin::Origin"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: content_encoding::body::AwsChunkedBody<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn content_encoding::sign::SignChunk + std::marker::Send + std::marker::Sync"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: env_config::EnvConfigError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: env_config::error::EnvConfigFileLoadError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: env_config::normalize::SectionPair<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: env_config::property::PropertiesKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fs_util::Os"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: invocation_id::InvocationIdInterceptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: invocation_id::SharedInvocationIdGenerator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parse::Location"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: recursion_detection::RecursionDetectionInterceptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: request_info::RequestInfoInterceptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: retries::classifiers::AwsErrorCodeClassifierBuilder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: service_clock_skew::AttemptSkew"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: service_clock_skew::DisableClockSkewCorrection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: service_clock_skew::ServiceClockSkewClassifier<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: service_clock_skew::ServiceClockSkewInterceptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::collections::hash_map::Keys<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: user_agent::AdditionalMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: user_agent::AdditionalMetadataList"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: user_agent::ApiMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: user_agent::ConfigMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: user_agent::interceptor::UserAgentInterceptor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: user_agent::interceptor::UserAgentInterceptorError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: user_agent::metrics::BusinessMetrics"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_alphanumeric"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::starts_with"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AdditionalMetadataList"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AwsChunkedBody<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConfigBag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DisableClockSkewCorrection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Env"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnvConfigError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HeaderMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InvocationIdInterceptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RecursionDetectionInterceptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RequestInfoInterceptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ServiceClockSkewInterceptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UserAgentInterceptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: auth::HttpSignatureType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: auth::PayloadSigningOverrideRuntimePlugin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: auth::SigV4SessionTokenNameOverride"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: auth::sigv4::SigV4MessageSigner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_sigv4::http_request::SignableBody<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_sigv4::sign::v4::SigningParams<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::identity::SharedIdentityResolver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::Document"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::config_bag::FrozenLayer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_types::SigningName"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_types::region::SigningRegion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::BytesMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content_encoding::body::ChunkBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content_encoding::body::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content_encoding::body::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Section"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn aws_smithy_runtime_api::client::auth::Sign"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: env_config::error::CouldNotReadConfigFile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: env_config::file::EnvConfigFile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: env_config::file::EnvConfigFileKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: env_config::parse::Location"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: env_config::section::SectionInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_body::SizeHint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sdk_feature::AwsSdkFeature"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service_clock_skew::ResponseClockSkew"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: service_clock_skew::TimeRequestSent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Split<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<18>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<30>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: user_agent::ExecEnvMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: user_agent::LanguageMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: user_agent::OsMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: user_agent::SdkMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: user_agent::UaMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: user_agent::metrics::Base64Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of env_config::source::load"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of env_config::source::load_config_file"
+bodies = 1

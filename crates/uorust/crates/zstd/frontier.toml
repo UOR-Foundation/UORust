@@ -1,0 +1,221 @@
+# The zstd register (written by `uorust crate zstd@0.14.4`; do not edit): every body of
+# zstd's MIR at zstd 0.14.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 222
+translated = 3
+residue = 219
+
+[module.bulk]
+bodies = 39
+translated = 1
+residue = 38
+
+[module.crate]
+bodies = 9
+translated = 1
+residue = 8
+
+[module.dict]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.stream]
+bodies = 163
+translated = 1
+residue = 162
+
+[embedding]
+bodies = 222
+embedded = 222
+evaluable = 222
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 99
+
+[[cause]]
+cause = "mir::Ty: stream::read::Decoder<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: stream::write::Encoder<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: stream::write::Decoder<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: D"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: bulk::compressor::Compressor<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: bulk::decompressor::Decompressor<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::raw::Decoder<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::raw::Encoder<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::Decoder<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::read::Encoder<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::Encoder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::io::BufReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream::zio::writer::Writer<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: write::Decoder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dict::DecoderDictionary<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dict::EncoderDictionary<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::ops::FnMut"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::write::AutoFinishEncoder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::write::AutoFlushDecoder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::Encoder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CCtx::in_size"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CCtx::out_size"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: DCtx::in_size"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: DCtx::out_size"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bulk::decompressor::total_decompressed_size: zstd's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AutoFinishEncoder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AutoFlushDecoder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Writer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::raw::Status"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::zio::reader::Reader<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zstd_safe::CCtx<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zstd_safe::CDict<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zstd_safe::ContentSizeError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zstd_safe::DCtx<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zstd_safe::DDict<'_>"
+bodies = 1

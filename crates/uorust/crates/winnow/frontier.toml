@@ -1,0 +1,993 @@
+# The winnow register (written by `uorust crate winnow@1.0.5`; do not edit): every body of
+# winnow's MIR at winnow 1.0.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 939
+translated = 64
+residue = 875
+
+[module.ascii]
+bodies = 64
+translated = 0
+residue = 64
+
+[module.binary]
+bodies = 87
+translated = 0
+residue = 87
+
+[module.combinator]
+bodies = 89
+translated = 0
+residue = 89
+
+[module.error]
+bodies = 120
+translated = 4
+residue = 116
+
+[module.parser]
+bodies = 43
+translated = 0
+residue = 43
+
+[module.stream]
+bodies = 514
+translated = 60
+residue = 454
+
+[module.token]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.util]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 939
+embedded = 939
+evaluable = 937
+blocked = 2
+
+[[construct]]
+construct = "Rvalue::Aggregate"
+bodies = 2
+
+[differential]
+bodies = 8
+theorems = 56
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 55
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: BStr"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: LocatingSlice<u32>"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: stream::CompareResult"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: Partial<u32>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: TokenSlice<'_"
+bodies = 22
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Stream"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: Bits<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: error::ErrMode<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: stream::Needed"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: stream::bstr::BStr"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: stream::bytes::Bytes"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: ParseNext"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+bodies = 15
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::parse_next: winnow's MIR stops at mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: binary::Endianness"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::num::ParseIntError"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: error::TreeError<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: stream::range::Range"
+bodies = 11
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: stream::contains_token: winnow's MIR stops at mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: error::InputError<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ParserError"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: error::ContextError<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsChar"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SealedMarker"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: error::EmptyError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: impl Into<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::locating::LocatingSlice<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::partial::Partial<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: stream::token::TokenSlice<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: {closure@src/token/mod.rs:170:42: 170:62}"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Accumulate"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ContextError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Needed"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Stateful<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: binary::bits::stream::Bits<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: combinator::expression::Expression<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::ParseError<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream::stateful::Stateful<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: take_unsigned_float_or_exceptions::{closure#0}: mir::Operand::Constant: the constant item token::any"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <I as StreamIsPartial>::is_partial_supported"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: trace"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CountParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::StrContextValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: a capture the closure is not given"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: binary::i8: winnow's MIR stops at mir::AggregateKind::Closure: i8::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: binary::u8: winnow's MIR stops at mir::AggregateKind::Closure: u8::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::len_utf8"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: stream::is_alpha: winnow's MIR stops at mir::TerminatorKind::Call: char::methods::is_ascii_alphabetic"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Checkpoint<&[u32]"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Checkpoint<&str"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CompareResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EmptyError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Endianness"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Normal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StrContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StrContextValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: combinator::expression::Infix<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: combinator::expression::Postfix<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: combinator::expression::Prefix<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::ByRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::Bound<&usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::CharIndices<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::Checkpoint<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: u32>}"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_i128::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_i16::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_i24::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_i32::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_i64::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_u128::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_u16::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_u24::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_u32::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: be_u64::{closure#0}: mir::TerminatorKind::Call: binary::be_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: bits::take::{closure#0}: type outside the lift: Bits<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: dec_int::{closure#0}: mir::AggregateKind::Closure: take_unsigned_float_or_exceptions::{closure#0}: mir::Operand::Constant: the constant item token::any"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: dec_uint::{closure#0}: type outside the lift: std::ops::RangeInclusive<char>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: eof::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Stream"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: fail::{closure#0}: mir::Instantiation: u32 for a parameter bounded by ParserError"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: float::{closure#0}: mir::TerminatorKind::Call: ascii::take_float_or_exceptions: winnow's MIR stops at type outside the lift: <u32 as stream::Stream>::Slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: hex_uint::{closure#0}: mir::AggregateKind::Closure: hex_uint::{closure#0}::{closure#0}: mir::Instantiation: u32 for a parameter bounded by AsChar"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: i8::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_i128::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_i16::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_i24::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_i32::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_i64::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_u128::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_u16::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_u24::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_u32::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: le_u64::{closure#0}: mir::TerminatorKind::Call: binary::le_uint: winnow's MIR stops at type outside the lift: stream::Needed"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: rest::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Stream"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: rest_len::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Stream"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: stream::offset_for::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: till_line_ending::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: todo::{closure#0}: type outside the lift: Input"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: token::any::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: token::take::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: u8::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by SliceLen"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&[T] as StreamIsPartial>::is_partial_supported"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <std::slice::Iter as Iterator>::position"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_alphabetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_hexdigit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_at"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_first"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::parse"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::split_at"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::split_once"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: stream::is_alphanum: winnow's MIR stops at mir::TerminatorKind::Call: stream::is_alpha: winnow's MIR stops at mir::TerminatorKind::Call: char::methods::is_ascii_alphabetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: stream::is_dec_digit: winnow's MIR stops at mir::TerminatorKind::Call: char::methods::is_ascii_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: stream::is_hex_digit: winnow's MIR stops at mir::TerminatorKind::Call: char::methods::is_ascii_hexdigit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: stream::is_oct_digit: winnow's MIR stops at mir::TerminatorKind::Call: char::methods::is_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: stream::len: winnow's MIR stops at mir::TerminatorKind::Call: char::methods::len_utf8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Alternatives"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AndThen<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BTreeSet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BitOffsets<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ByRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: C"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Caseless<&[u8; #usize_N]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Caseless<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Caseless<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Caseless<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CompleteErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DefaultValue<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrInto<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrMode<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashSet<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IgnoredParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IgnoredParser1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Input"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: InputError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Output"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OutputInto<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseTo<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Parser1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParserIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Value<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VecDeque<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Verify<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VerifyMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Void<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WithTaken<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ascii::caseless::Caseless<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ascii::caseless::Caseless<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: binary::bits::stream::BitOffsets<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::debug::DisplayDebug<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::AndThen<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::CompleteErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::Context<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::ContextWith<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::DefaultValue<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::ErrInto<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::FlatMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::MapErr<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::OutputInto<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::ParseIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::ParseTo<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::Span<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::Take<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::TryMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::Value<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::Verify<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::VerifyMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::Void<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::WithSpan<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::impls::WithTaken<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::multi::ParserIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: combinator::multi::Repeat<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Parser<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::StrContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::TreeError<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Parser<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl core::fmt::Display"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impls::FlatMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impls::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impls::Take<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::VecDeque<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Enumerate<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Rev<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFrom<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeToInclusive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::Checkpoint<&[u32]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream::Checkpoint<&str"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::FromFn<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {closure@src/combinator/branch.rs:54:18: 54:38}"
+bodies = 1

@@ -1,0 +1,76 @@
+[[fn]]
+path = "hyper-timeout::<impl at src/lib.rs:20:10: 20:15>::fmt"
+kappa = "305a84c504fd10c3a929cc90fdce3ee40913f729a03b7817cb1d0ad19fa819d2"
+at = "T=u32"
+embedded = "8a85d14ae9314e63aa8633788582acc27d916695d70e38f2720af48c9b140b81"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "hyper-timeout::<impl at src/lib.rs:20:17: 20:22>::clone"
+kappa = "284e8ab2946063900c609ccc14ab0d12a1bcafe7c59e76755275c2a8b348bf0c"
+at = "T=u32"
+embedded = "2e3f24ccb590d930d9c0f050d6518375ab59910b141533ff84363063acec0146"
+status = "residue"
+cause = "mir::Ty: TimeoutConnector<u32>"
+
+[[fn]]
+path = "hyper-timeout::TimeoutConnector::call"
+kappa = "0cc2397f45a548d73b63f29054139df0564f12c543c1d3ea0a8e335fa54dcad5"
+at = "T=u32"
+embedded = "85905f86e319cf4078c94e5536a1e6e53d14397ce8ef9d23b2a5df57fbf539e5"
+status = "residue"
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<std::pin::Pin<std::boxed::Box<stream::TimeoutStream<u32>>>, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "hyper-timeout::TimeoutConnector::connected"
+kappa = "0388e16d61939794bbebb5096727617cd252e747738be83ed162aad3ea7b474c"
+at = "T=u32"
+embedded = "c36e3b93ace76c8b33cd2f045b4aa3cd59300d771922a8472843b8d98be60f16"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+
+[[fn]]
+path = "hyper-timeout::TimeoutConnector::new"
+kappa = "38344403c245b7cab5063a8ccca541becca0740953ca0f1b294c349a8c48c863"
+at = "T=u32"
+embedded = "360029e220dda15dfef8e6b496fa0480aae01fa54491bbe20cb45cccb1a70778"
+status = "residue"
+cause = "mir::Ty: TimeoutConnector<u32>"
+
+[[fn]]
+path = "hyper-timeout::TimeoutConnector::poll_ready"
+kappa = "0c92620dad49bdf3f3930cab92ed72acad7d270c6f44c6f2dada5a7ac8341c33"
+at = "T=u32"
+embedded = "b0baf884fe6027acd639ee1f3dc5c77164968302c1bf715c1844e775ddd7d626"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "hyper-timeout::TimeoutConnector::set_connect_timeout"
+kappa = "1db222e6a8f596acf5bfea3d7ad2a83cfc99f963d2b5de6da5d3c46407114f2e"
+embedded = "1fe361913a557b6bf77a33e7873e4e2481dc10ff30465289554f438cf082f460"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "hyper-timeout::TimeoutConnector::set_read_timeout"
+kappa = "5ef9328873bf1ff7bdff4f4dc0441075547e0d414da49446a44acef5d20bad9c"
+embedded = "ffdb1cef8483bcabc990ca00908a839b6004ab506f44442639cf9be9ccd84c1e"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "hyper-timeout::TimeoutConnector::set_reset_reader_on_write"
+kappa = "832df0c62ad52058392731cea771c6fedd4257866d06e761468e70031c0deac8"
+embedded = "12b06a55ce6ef156441af92f8b3d1de1a6040409b24aacfdd1230ebf8a7c743a"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "hyper-timeout::TimeoutConnector::set_write_timeout"
+kappa = "4deca320fb63a537bed92fa2f2a585f98408d10684a78d946f29038847e633b7"
+embedded = "47b013ad957a3c3a7a5069a06fcd2bc14d1ee1920d3f88887a03697b4c7828d2"
+status = "residue"
+cause = "mir::Ty: T"
+

@@ -1,0 +1,56 @@
+[[fn]]
+path = "ed25519-dalek::check_scalar"
+kappa = "ff1234c889a529999795d51793943c27937f6e3df7876f8038942f472b0eaad1"
+embedded = "e91fe7becb07465eaf83b3aa2c9fd738c321b5ffe0d80767d1ac6eec96ad31a6"
+status = "residue"
+cause = "mir::Ty: curve25519_dalek::Scalar"
+
+[[fn]]
+path = "ed25519-dalek::signature::<impl at src/signature.rs:28:16: 28:18>::assert_fields_are_eq"
+kappa = "a973ac26d88ef95f23a0daa887faad0403bf42d7ad1b3159ab7734ee83adf7c7"
+embedded = "63da44f1746ff723a977f579c671f133261be670dba507654e8d41a8a7b4a56f"
+status = "residue"
+cause = "mir::Ty: InternalSignature"
+
+[[fn]]
+path = "ed25519-dalek::signature::<impl at src/signature.rs:28:20: 28:29>::eq"
+kappa = "78f43b3ba2ed54b3bfcee4dca048de0ba011bda30a165e1d877e41eac6a2d7f1"
+embedded = "c538b0c36a7233045b8059258af3751e59b59206e61ee27495b581d736926ea2"
+status = "residue"
+cause = "mir::Ty: InternalSignature"
+
+[[fn]]
+path = "ed25519-dalek::signature::InternalSignature::clone"
+kappa = "5626b23755c43d40a9b38aa5ea65d0810f545449016595ec135f238e39c5abb6"
+embedded = "c86a9b89adbfb5c37a69aadad5d1586ed338909f9be47158880cd9d05a702b25"
+status = "residue"
+cause = "mir::Ty: signature::InternalSignature"
+
+[[fn]]
+path = "ed25519-dalek::signature::InternalSignature::fmt"
+kappa = "72b0ce5c671279b8dbc533071e14975cbd71b9a7bff436f150de3dffe1aeecad"
+embedded = "a498887bb53f89d3436c146e2126f39a39c28919ee897d174861792ae3e1911f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ed25519-dalek::signature::InternalSignature::from_bytes"
+kappa = "91c7f27f04445f95c8b7a322ebdc4410704dbb0a57c720233f3b23b1df65fee4"
+embedded = "417197cd14a2cf0523d93d9cdd6f56a055cd7dde5b1af31fc3643b66a8e365bf"
+status = "residue"
+cause = "mir::Ty: signature::InternalSignature"
+
+[[fn]]
+path = "ed25519-dalek::signature::InternalSignature::try_from"
+kappa = "b684a6f61fe4ffd6be499e2aedb6ecffccf7e347bb200a6d23310c1399fb52ed"
+embedded = "8bab32e99fd6a1bc70c0aedfa3c0fa061e03afc75fbd835659e05c43d7414742"
+status = "residue"
+cause = "mir::Ty: signature::InternalSignature"
+
+[[fn]]
+path = "ed25519-dalek::signature::Signature::from"
+kappa = "ab89573da4e49433c38fd4cecf1cdfef41150ef744b8dfab00e715b063251863"
+embedded = "c878c227b67e03b050ceb790a58372461334c49a6d04bfd19664aa6ffe795873"
+status = "residue"
+cause = "mir::Ty: ed25519::Signature"
+

@@ -1,0 +1,984 @@
+# The pyo3-macros-backend register (written by `uorust crate pyo3-macros-backend@0.30.1`; do not edit): every body of
+# pyo3-macros-backend's MIR at pyo3-macros-backend 0.30.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 947
+translated = 45
+residue = 902
+
+[module.attributes]
+bodies = 482
+translated = 45
+residue = 437
+
+[module.combine_errors]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.derive_attributes]
+bodies = 14
+translated = 0
+residue = 14
+
+[module.frompyobject]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.intopyobject]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.konst]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.method]
+bodies = 58
+translated = 0
+residue = 58
+
+[module.module]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.params]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.pyclass]
+bodies = 83
+translated = 0
+residue = 83
+
+[module.pyfunction]
+bodies = 82
+translated = 0
+residue = 82
+
+[module.pyimpl]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.pymethod]
+bodies = 142
+translated = 0
+residue = 142
+
+[module.quotes]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.utils]
+bodies = 21
+translated = 0
+residue = 21
+
+[embedding]
+bodies = 947
+embedded = 947
+evaluable = 947
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 76
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 67
+
+[[cause]]
+cause = "mir::Ty: pymethod::SlotDef"
+bodies = 51
+
+[[cause]]
+cause = "mir::Ty: pymethod::SlotFragmentDef"
+bodies = 48
+
+[[cause]]
+cause = "mir::Ty: syn::buffer::Cursor<'_>"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: pymethod::MethodAndMethodDef"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: pymethod::MethodAndSlotDef"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: utils::StaticIdent"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: syn::ImplItemFn"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::from_py_with"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::signature"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: intopyobject::IntoPyObjectImpl"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: pyclass::EnumVariantPyO3Options"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::annotation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::attribute"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::cancel_handle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::category"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::constructor"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::dict"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::eq"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::eq_int"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::extends"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::freelist"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::from_item_all"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::from_py_object"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::frozen"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::generic"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::get"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::get_all"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::gil_used"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::hash"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::immutable_type"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::into_py_with"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::item"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::mapping"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::message"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::module"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::name"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::new"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::ord"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::pass_module"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::rename_all"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::sequence"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::set"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::set_all"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::skip_from_py_object"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::subclass"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::submodule"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::text_signature"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::transparent"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::unsendable"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::warn"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributes::kw::weakref"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: method::FnArg<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassArgs"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::Attribute"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: utils::PythonDoc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FunctionSignature<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NameLitStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NewImplTypeAttributeValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PyTypeAnnotation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PythonSignature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RenamingRule"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RenamingRuleLitStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SignatureItem"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SignatureItemArgument"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SignatureItemKwargs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SignatureItemPosargsSep"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SignatureItemVarargs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SignatureItemVarargsSep"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TextSignatureAttributeValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: annotation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: attribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cancel_handle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: category"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: constructor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: derive_attributes::ContainerAttributes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: derive_attributes::FieldAttributes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dict"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: eq"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: eq_int"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extends"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: freelist"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: from_item_all"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: from_py_object"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: from_py_with"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: frozen"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: generic"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: get"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: get_all"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: gil_used"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: immutable_type"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: into_py_with"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: item"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: kw::hash"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: kw::module"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: kw::signature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mapping"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: message"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: method::SelfConversionPolicy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: name"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: new"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ord"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pass_module"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassPyO3Options"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pyfunction::PyFunctionOptions"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::FunctionSignature<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::Signature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rename_all"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sequence"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: set"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: set_all"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: skip_from_py_object"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: subclass"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: submodule"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::LitCStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: text_signature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: transparent"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: unsendable"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: warn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: weakref"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FnType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LitStrValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PyClassKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PyMethodProtoKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SlotDef"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::KeywordAttribute<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::LitStrValue<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::NameLitStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::NewImplTypeAttributeValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::OptionalKeywordAttribute<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::RenamingRuleLitStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::StringFormatter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: attributes::TextSignatureAttributeValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: frompyobject::Container<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::CallingConvention"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::FnSpec<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::FnType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::MethodTypeAttribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::PyArg<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: method::SelfType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: module::PyModuleOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassImplsBuilder<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::PyFunctionArgPyO3Attributes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::PyFunctionWarning"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::PyTypeAnnotation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::PythonSignature"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::SignatureItem"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::SignatureItemArgument"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::SignatureItemKwargs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::SignatureItemPosargsSep"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::SignatureItemVarargs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pyfunction::signature::SignatureItemVarargsSep"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pymethod::PyMethodKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::LifetimeParam"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FnSpec<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IdentOrStr<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeywordAttribute<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OptionalKeywordAttribute<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PyFunctionWarningAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PyFunctionWarningCategory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PyO3CratePath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SlotFragmentDef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StaticIdent"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StrOrExpr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StringFormatter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokenGeneratorCtx<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokenStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __H"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __S"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attributes::RenamingRule"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: derive_attributes::ContainerAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: derive_attributes::FieldAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: derive_attributes::FieldGetter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: frompyobject::Enum<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: intopyobject::Container<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: intopyobject::Enum<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: konst::ConstAttributes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: konst::PyO3ConstAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: method::CancelHandleArg<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: method::ClassMethodReceiver"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: method::ExtractErrorMode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: method::KwargsArg<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: method::RegularArg<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: method::SelfConversionPolicyInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: method::VarargsArg<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: module::PyFnArgs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: module::PyModulePyO3Option"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: params::Holders"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::EnumVariantPyO3Option"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::FieldPyO3Option"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::FieldPyO3Options"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassComplexEnum<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassEnum<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassEnumUnitVariant<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassPyO3Option"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyclass::PyClassSimpleEnum<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyfunction::PyFunctionArgPyO3Attribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyfunction::PyFunctionOption"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyfunction::PyFunctionWarningAttribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyfunction::PyFunctionWarningCategory"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyimpl::PyClassMethodsType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyimpl::PyImplOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pyimpl::PyImplPyO3Option"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pymethod::GeneratedPyMethod"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pymethod::MethodBody"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pymethod::PyMethod<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pymethod::TokenGenerator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pymethod::Ty"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Expr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::LitStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::token::Comma"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::Ctx"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::PyO3CratePath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::StrOrExpr"
+bodies = 1

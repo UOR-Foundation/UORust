@@ -1,0 +1,293 @@
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:479:10: 479:15>::clone"
+kappa = "04f9fa93972894cdd3eb940d473bc758fc4013da06975841bb636a70b4729de0"
+at = "T=u32"
+embedded = "e940f29bc77d6d395ed8baa074eb97777d081d8421857f7e9011f5a64b95a7b4"
+status = "residue"
+cause = "mir::Ty: TryIter<'_, u32>"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:499:10: 499:15>::clone"
+kappa = "c20b1347032b6a7155c9fa0c11deda7c6d63d3c00be5f9f95a206f9d966abbf6"
+at = "PopError=u32"
+embedded = "ab8ff3bebef983ba0cd3ce54efbe05df4882ea76e92a001d4e64718a80d0a274"
+status = "translated"
+digest = "ad37c014968fd6d21c802fe09ad66fd97003171a116f9b6b218958f923a67d86"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:499:23: 499:25>::assert_fields_are_eq"
+kappa = "868bdbbe52021b1e5c45b287eeff242d5236373abe4f9f09afabae0e727b4f0c"
+embedded = "969c92844594fe25929044ce0904ad76dae51ffebf7757af37af38fa2e74847e"
+status = "residue"
+cause = "mir::Ty: PopError"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:499:27: 499:36>::eq"
+kappa = "bbc15b6927c267c1b49b882781cd4ec8eac62700582cb8c9f58ce6521f94dc83"
+at = "PopError=u32"
+embedded = "93d39749d002b24a4b10fa522a169b1223ccde9755cb09af56c70e58929e8f05"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:548:10: 548:15>::clone"
+kappa = "35f84e99a0abf7120ac8d788e2c52f8d6042caff410335b9b7324c211fda8406"
+at = "T=u32"
+embedded = "c30d2dbc9c8806f314d3f6122742bbacc16073feb745ed4e408cc74f06a6811f"
+status = "residue"
+cause = "mir::Ty: PushError<u32>"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:548:23: 548:25>::assert_fields_are_eq"
+kappa = "1235f9bb4126fad0fb3b900402ac827d0e4e9f94060f31d1ed3ea436eac3c917"
+embedded = "67a51348c93bde4c8715a89dcebb267897966331160cc5627b853ff54d4ca1f4"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:548:27: 548:36>::eq"
+kappa = "378404c3dea9eb96d7a792bd7efdd3f955e44866acfa52cedbe76d56f802987f"
+at = "T=u32"
+embedded = "9f9afe270adafd33a6d7a2acec9bf39f57b229bb88d66175eae5676b301f1045"
+status = "residue"
+cause = "mir::Ty: PushError<u32>"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:605:10: 605:15>::clone"
+kappa = "ed9564156bd8613c310c1dc2e881f0fe3fd2cbf336f9217f508505c44e0092a3"
+at = "T=u32"
+embedded = "cf1991a24217c897d02348a2c4a7f58a3a11372530d1d394e1348b83ea5632f2"
+status = "residue"
+cause = "mir::Ty: ForcePushError<u32>"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:605:23: 605:32>::eq"
+kappa = "1db8710b57c060d78c451c7470b3b26bcd2f7315c89fb760ebb840e865a9f6f7"
+at = "T=u32"
+embedded = "8070d297ddcde6d84243de9ab3ddecdd45080bb2de814dea0f3f4fa6f3a7aad7"
+status = "residue"
+cause = "mir::Ty: ForcePushError<u32>"
+
+[[fn]]
+path = "concurrent-queue::<impl at src/lib.rs:605:34: 605:36>::assert_fields_are_eq"
+kappa = "c6b48f8eec6d9e95662cf16b44ab3438593e5e28a522f5a45c88476496795f13"
+embedded = "5ff8e17d60e959181d0aca79b8a04bf7122503776443a8bac1abefc7b972b44c"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::bounded"
+kappa = "f6ffe70336f2e096b4a44873d308c3232c660c667e693603dd7608c1b941b46c"
+at = "T=u32"
+embedded = "1e6d42bad9e616211952b4f5dfa6049f6760915ac74fd0003b254d3a3e90b17f"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::capacity"
+kappa = "5b781cb07ee5b524812dfcb16710803c35b51f4a166a8a1d7cc0abc805541e2c"
+at = "T=u32"
+embedded = "b061d1838f946e9dbfe719ed9ff44a41aeed5ae56cd12e115de47a338efcd325"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::close"
+kappa = "9480deafcf469f73b8645c7f23e5dc5a7830795597ad570308cafcd183abf0d9"
+at = "T=u32"
+embedded = "a3a7bc47f5865ed916b2a5271686c11ccfbb7cac97dd1710b1041d83f5b39336"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::fmt"
+kappa = "6f7bc8b134d4a5aa64f3275b0279b06a55e548d5b9d61e42693e1511c4ec6f39"
+at = "T=u32"
+embedded = "5d5e1992261456a359c42d165fcdd5d1c62e2b7ca70bed6e31630ef95b4b0940"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::force_push"
+kappa = "ebbf69dbb8104672cc228c451bd358a03e89b456e08d78dc4abbc4aadc780486"
+at = "T=u32"
+embedded = "5361dc7502cbced5c9d8110cf86ed9a3260d9dafd2193608c396b9c9920868e9"
+status = "residue"
+cause = "mir::Ty: ForcePushError<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::is_closed"
+kappa = "2c1bd5719e2aef444bb35541277076fc811c1d392d5c26b08db9dce9676dc7f8"
+at = "T=u32"
+embedded = "f71e9b201a62e45b4aff5e23cd4dcb818c33569310e84cc75506dbb508d8c1ff"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::is_empty"
+kappa = "e972b093b6094b257eebd177d3c7bcdd028856380bf42b8b21505054fcd5c446"
+at = "T=u32"
+embedded = "9fc4741d1c45d91d6afffe5ad59067f993809499b83c2cca75352fe37e723bae"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::is_full"
+kappa = "36dc73d38d3ede4c9f2f7ded495ab72458d721480aa5a6515cc474eeb604a787"
+at = "T=u32"
+embedded = "de86f64fc10977b2c8e9519d2d224982a9de91445f030d5635e3bf55f73291ba"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::len"
+kappa = "ae272de8028225534db927763eef8cc0d0f84084cb12df5f0b1bbe68f1e8e779"
+at = "T=u32"
+embedded = "76c8c7ab6956fe6a6fb3154c3689ddac593fdad5d88b6d65e199dd6e9fdf835e"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::pop"
+kappa = "7892b08097d73943b4823289b4636f3cdaf90497a9d03e50b2f0de94f129ed84"
+at = "PopError=u32, T=u32"
+embedded = "7ff339a63f416579b32b52d29ed88d8dc8ecdb3ca88a5723a2019d65f49a8d3c"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::push"
+kappa = "a106f326127bc459c17aeea477160d178040fd827fc507d630e25698bdf2294f"
+at = "T=u32"
+embedded = "500634e10e232fa291a5765e6e464027c456ac4a8e2969e2c4827b6197e9a64f"
+status = "residue"
+cause = "mir::Ty: PushError<u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::try_iter"
+kappa = "a66e348de4935564e0c7111190e5679308df8cb9ebf88ff412d3ad6903fae0e3"
+at = "T=u32"
+embedded = "a4325937332ffa991b6ace1c6faa29088387b9d8eb24a91afa81fbe8f7278463"
+status = "residue"
+cause = "mir::Ty: TryIter<'_, u32>"
+
+[[fn]]
+path = "concurrent-queue::ConcurrentQueue::unbounded"
+kappa = "b57e553fab7b71216af2909ea1f29ec95e4567e02f221fb0a1c01f4098764e42"
+at = "T=u32"
+embedded = "63ee25942c4d7cee272dc8e9df32505a97ac5cc16fc9f34aa8f55b9a01cfca97"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+
+[[fn]]
+path = "concurrent-queue::ForcePushError::fmt"
+kappa = "9def6452c7f96d2fa643f174788926ec388a9dbf8ff7928dfdbf6ac3fe3b2fc8"
+at = "T=u32"
+embedded = "f21aeaa91ff32a25587672fc9ba8ddb45299a21fc73741b000ab910c10456286"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "concurrent-queue::ForcePushError::fmt#2"
+kappa = "75045bdb7da5ecb1e7575c08d10e2ef940d6a1b01f2f9b5ad66c0096ed89fd9c"
+embedded = "4562273e85f324cde7da771b40393ebfe0c9bd0ccc9e10a1ec6f6ad2758ba5d4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "concurrent-queue::ForcePushError::into_inner"
+kappa = "34597213d28c011593167cfd83a9da6031fe6d094411dfe024b211c03e04c392"
+at = "T=u32"
+embedded = "20133b5808f06b1983ca2c3fb88f57063a10cf058ab0a78656db544bcf2bcfae"
+status = "residue"
+cause = "mir::Ty: ForcePushError<u32>"
+
+[[fn]]
+path = "concurrent-queue::PopError::fmt"
+kappa = "d25ebf32296f0a4137eccf3099e8a4374db3b24af18008196f99d7fc237b54e7"
+embedded = "63c2b60f9414c8963f10ca570af189305bcd9409de438e5644b15dc42fb66cc4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "concurrent-queue::PopError::fmt#2"
+kappa = "fa5586e2fe508111e7351f25e9eb821fd15816853ae35e7b4f491559cc05dd07"
+embedded = "1528959c5186b4a13f2bcdf1ed2b565d2c3aae1257f6975060f35254050c874f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "concurrent-queue::PopError::is_closed"
+kappa = "25345ae970f56d1c26ed70e431d1c4c5a372be764c3cceacffa41a8b13f8a32e"
+embedded = "2a3bb7c999dede638315d48c08109055b52b1d51f18a6657f113072ae98d41b8"
+status = "residue"
+cause = "mir::Ty: PopError"
+
+[[fn]]
+path = "concurrent-queue::PopError::is_empty"
+kappa = "e3b0eb8b712770d9ca23772f7631788d562bc80c2c7ac8a98205c2e4bb50cfbe"
+embedded = "7fd8aaf7dc39f505b77f15e4e394392ada1afe19e9e5ee7b9cb4d1102ae1e14c"
+status = "residue"
+cause = "mir::Ty: PopError"
+
+[[fn]]
+path = "concurrent-queue::PushError::fmt"
+kappa = "7faaf5bfb9b9388f3f8cce6edae908cfc525c0b818dd1404353664ce9b71cec5"
+at = "T=u32"
+embedded = "80e1640bae0ae2259ed6fc722feee593b457828294dec3912a9dd72ec95fa9af"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "concurrent-queue::PushError::fmt#2"
+kappa = "810e45f6d6a14e2b323d73b4b78a9b5ac674a6acdc587a23e5e1cb8edf0cc9fe"
+embedded = "55e0f5b78f8452584cffb1263e2fda656605ca28198256c596fed5e082e1c868"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "concurrent-queue::PushError::into_inner"
+kappa = "66296ce8ee77345907a0261f81e78ba263ec7f99e36d241d4d0938d8364aff69"
+at = "T=u32"
+embedded = "1f55cd60b0fb8324308c53ff06514d6e926dec9dc134fd0f9feefca6171f70c8"
+status = "residue"
+cause = "mir::Ty: PushError<u32>"
+
+[[fn]]
+path = "concurrent-queue::PushError::is_closed"
+kappa = "09e80f24bb8c30a60be4d5e7557b3e3257807dd5dc0c956a8db15287e8ccdcdb"
+embedded = "f2faf09e94bad60b7378b4f966768cb9f4f6c496ffcc0463405c90b98f1e161c"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "concurrent-queue::PushError::is_full"
+kappa = "b836fe7ac74526cddb54f869b5f87ede998d1986f9401779c817d64d36dd157e"
+embedded = "84bac69bc298006a4de6a97eeef1315cb93bb93feebfac1d2b4a6d6be318b2c1"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "concurrent-queue::TryIter::fmt"
+kappa = "9911bc54f49827fcb961f2452f8193f521a4a8326715e8684db49ab28d75e405"
+at = "T=u32"
+embedded = "b587fddaef04489871b62d76a06eae7c622221f51204d7e668ffbec3847aae29"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "concurrent-queue::TryIter::next"
+kappa = "a9eb2b0c2f63d609fd23b955a5fd7006420e87d5194fd11a274261250dcb8d65"
+at = "PopError=u32, T=u32"
+embedded = "449eaba99c5231afd5cf4485e02283e98c601409d2d4c3f4f211ca1ebadb4627"
+status = "residue"
+cause = "mir::Ty: TryIter<'_, u32>"
+
+[[fn]]
+path = "concurrent-queue::full_fence"
+kappa = "77066229d3b94b6a26d58906fb7d130c480614cc781c297b615637adbb991093"
+embedded = "bea0d841a46c47a1a85dd83be0d4bee7c09baa3b2ab97f1c1d2f0a47cce6d664"
+blocked = ["TerminatorKind::InlineAsm"]
+status = "residue"
+cause = "mir::Ty: core::cell::UnsafeCell<usize>"
+

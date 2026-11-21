@@ -1,0 +1,151 @@
+[[fn]]
+path = "ctutils::borrowing_sub_inner_u32"
+kappa = "a84c0833f81047eabebbed404d90d29b441cc26b74b0e04c1d826926c3fecee1"
+embedded = "a1d5eb7a5c2311bc015ab3fc3d9d762dde5f2009bba9bacf1e2ea7cc192cae71"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::wrapping_sub"
+
+[[fn]]
+path = "ctutils::borrowing_sub_inner_u64"
+kappa = "169f5dd930c63364a1dbfc09428cc344d3bc9c3026fc8e90cb1c8c28cff4b492"
+embedded = "c3f33f358c46c92497390b675048066cbed213b715844ecc955b77484cc95787"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_sub"
+
+[[fn]]
+path = "ctutils::borrowing_sub_mask_u32"
+kappa = "625051a147e17d2dd59856295e4407395c2f444ae2a1542b0d3a78618b5ad57c"
+embedded = "40e6989a44141894ff883e394b7955ee9d76d0f5433db4fa3b926e15bd0e1976"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u32>::BITS"
+
+[[fn]]
+path = "ctutils::borrowing_sub_mask_u64"
+kappa = "ca9ff77872946b0f98ae1b10ecf624e77d52a80e48515fcda97b374a00a80400"
+embedded = "7995b8fee130f1df86b997378a7c72f2cebd91f4d29f56624db6355c6efccf54"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::BITS"
+
+[[fn]]
+path = "ctutils::borrowing_sub_u32"
+kappa = "e1733808d10b0e713efac433bd3685381d9f6a4e70f28798dd57685c5a397654"
+embedded = "7d4b2d7bbf7f07149c160260340134e7e76fae54e0ef1c92ba7e55aaa224fed7"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::borrowing_sub_u64"
+kappa = "0747fd0408a658b859dee253c4e7993f4db97a949d214b94b951642dd0e56574"
+embedded = "204a9c329697e33094382b9b222106a70d4543e5b969ed121ef96fb2f3e2210d"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::le_u32"
+kappa = "01661e5777d7369e30f1c5b216d8e7023272df7e69d2dc704a3db76fe4c30dc7"
+embedded = "8ee8575aa872a782e1a4dd4d9524cd7fa9a144609661920b73d6e3261064470b"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::le_u64"
+kappa = "9a4eb7c3ce351f8f88b3a8d41b60f0247df3ab1899bba2c8d0a6a96356127207"
+embedded = "b5d47ab126314061b7e88d4c52ffc497215b656dae243171301b89be45a42298"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::leading_zeros_u32"
+kappa = "f37582eb4bbd32df75d019adb10f4fbe85c098dd62366201d4b6967efcb56a02"
+differential = 7
+embedded = "37a6db8fe695f3476bed2c07815453094add3be452d19da3d13490a2e447af84"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::leading_zeros"
+
+[[fn]]
+path = "ctutils::leading_zeros_u64"
+kappa = "0da0f7ace04cd3b34df2bd3f7d1406eb4669f8ea770f09d6b23b0f120143ac64"
+differential = 7
+embedded = "34e0db4e7126e96cc7edf3c77853866593e860f0bb8386da51730571c79f8e7d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "ctutils::lt_u32"
+kappa = "69c6960bbec30959d70edbaf4cd294a82431fff928d27be87a18c98100cf2e08"
+embedded = "a6d402b76d922145da7d4755742d630527a13d16bcce86a260d733d39845ee91"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::lt_u64"
+kappa = "cc4a9b753cff300b7d8871105778918bea1ac0e9f1129e782ba6bdf08f872fef"
+embedded = "b5390dc4d94f1c808f70dda8b828872e49580f888335cf01a977cfc93073325c"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::nz_u128"
+kappa = "a626bc5f1849f37ef380dd0ddfd4aec588c18ff78d80edd0b9b47bd8f8df70a9"
+embedded = "59e973f49f2a7b733b8937b6286d6d5cc60b519bbeacaff1f18f1ad943c4f57c"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::nz_u16"
+kappa = "b787b38a0287ab860d83c748aff60c95d46bcf663750f0fe7c39e9b06e3bfe94"
+embedded = "6fd708710058d3b0f59af445874f4a5d8df0efedf6971b523859ed4690992fdb"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::nz_u32"
+kappa = "c405577b3e8008a3719767c4f58b0d6d2651da74113c077d5bad22be99c6aac1"
+embedded = "72213697e6fd67fd23d13271974eade4ed48fcf5672ff89e631c19a521f6c30b"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::nz_u64"
+kappa = "58fe3b09a62c379609454a044c34e79d2e575836b4df5004770d82be86465b8c"
+embedded = "ce639448c867a1739b58cc2ce1c51991b3abb80145101eefc24308524ba37cf9"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::nz_u8"
+kappa = "ed628ac5f4e3231d08de41aec43f6291f29a3fb74337059093eb06e10790a42e"
+embedded = "cca6119238cd73fe8df5846acfa35966b53e54ee1793bc5f9a52e53d34ab0967"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::overflowing_add_u128"
+kappa = "7773fa58777f0bfddf948de9a1c1d42bd19330255a23533aef836720f5e77df0"
+embedded = "fe54dd7afff9d2dc289e7651fedfe8dca3ea12d39aab333ffd6102000d70f2d9"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::overflowing_add_u64"
+kappa = "0dcc4a1b601fd920af991545a70d45a1899d3ebcc507d1e766accbc12d38e8b7"
+embedded = "56e0bb9661258be3806722cdc4a14be0f10cdef7372f7847738326844aef5b09"
+status = "residue"
+cause = "mir::Ty: choice::Choice"
+
+[[fn]]
+path = "ctutils::trailing_zeros_u32"
+kappa = "d17b4345e1df73bc643b354e68a8c644dc44b63bbb4ffdce9f0f3d5f9be4a965"
+differential = 7
+embedded = "dc94ef0b8334d691ca186c8a3a007440b91d8db734ee760c7284938ed2a422b2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u32>::trailing_zeros"
+
+[[fn]]
+path = "ctutils::trailing_zeros_u64"
+kappa = "9173686f89698e2402d70d4cb6de6446516c6a6244102eacb5cb331b0ac92985"
+differential = 7
+embedded = "65275280d9d796a7beb1d5798c2517ac40cf165f6354b00dadcdec88f778e692"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::trailing_zeros"
+

@@ -1,0 +1,401 @@
+# The predicates register (written by `uorust crate predicates@3.1.4`; do not edit): every body of
+# predicates's MIR at predicates 3.1.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 310
+translated = 0
+residue = 310
+
+[module.boolean]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.boxed]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.color]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.constant]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.float]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.function]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.iter]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.name]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.ord]
+bodies = 30
+translated = 0
+residue = 30
+
+[module.path]
+bodies = 65
+translated = 0
+residue = 65
+
+[module.str]
+bodies = 93
+translated = 0
+residue = 93
+
+[module.utils]
+bodies = 7
+translated = 0
+residue = 7
+
+[embedding]
+bodies = 310
+embedded = 310
+evaluable = 310
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 69
+
+[[cause]]
+cause = "mir::Ty: predicates_core::reflection::Case<'_>"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = predicates_core::reflection::Parameter<'_>>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<Item = predicates_core::reflection::Child<'_>>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: path::ft::FileTypePredicate"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: StrFilePredicate"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: float::close::IsClosePredicate"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ord::OrdPredicate<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BinaryFilePredicate"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: color::Palette"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: color::Styled<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BooleanPredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ContainsPredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DifferencePredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EndsWithPredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExistencePredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FileTypePredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IsEmptyPredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MatchesPredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StartsWithPredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Utf8Predicate<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: boolean::AndPredicate<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: boolean::NotPredicate<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: boolean::OrPredicate<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: constant::BooleanPredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ft::FileType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: function::FnPredicate<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ord::EqPredicate<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: path::existence::ExistencePredicate"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AndPredicate<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EqOps"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EqPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FileContentPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FnPredicate<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HashableInPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IsClosePredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: M"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: M1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NamePredicate<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NormalizedPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NotPredicate<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OrPredicate<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OrdInPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OrdOps"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OrdPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TrimPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: boxed::BoxPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::HashableInPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::InPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::OrdInPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: name::NamePredicate<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::fc::FileContentPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::fs::BinaryFilePredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::fs::StrFilePredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: path::ft::FileType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::adapters::TrimPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::adapters::Utf8Predicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::basics::ContainsPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::basics::EndsWithPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::basics::IsEmptyPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::basics::MatchesPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::basics::StartsWithPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::difference::DifferencePredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::normalize::NormalizedPredicate<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::regex::RegexMatchesPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: str::regex::RegexPredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::DebugAdapter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BoxPredicate<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugAdapter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Palette"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RegexMatchesPredicate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RegexPredicate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<u32 = predicates_core::reflection::Child<'_>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::iter::Iterator<u32 = predicates_core::reflection::Parameter<'_>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ord::EqOps"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ord::OrdOps"
+bodies = 1

@@ -1,0 +1,441 @@
+[[fn]]
+path = "ctr::ctr128::<impl at src/flavors/ctr128.rs:108:10: 108:15>::clone"
+kappa = "7a6ce968eeab3fd15868b2fcfced3f5779738b7a4e3d3b617f04f8e1cb124835"
+embedded = "1f497dab8bb5f694690ae200c08f68559c7ae4850ffa94529961eb078cd72ed1"
+status = "residue"
+cause = "mir::Ty: flavors::ctr128::Ctr128LE"
+
+[[fn]]
+path = "ctr::ctr128::<impl at src/flavors/ctr128.rs:108:23: 108:28>::fmt"
+kappa = "3249776823c6d96c9fced0b2b7f53c58166a466853fc24c1f3a93a0139bf1c58"
+embedded = "dd4cbc6f7c4e8abbca4bdbd85ff8d58c693b522f7498caf26633ba4f18a15cab"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr128::<impl at src/flavors/ctr128.rs:13:10: 13:15>::clone"
+kappa = "dbb6e2cda4ba119b6a71d61bf5d025b1a9e932f7c9dcf5304ec4cace15b7d87a"
+at = "N=u32"
+embedded = "25e0eebb6d7a46fb7fb18784c38f2dcbf5fe9ece85f0b6f63b0966e09443c86e"
+status = "residue"
+cause = "mir::Ty: flavors::ctr128::CtrNonce128<u32>"
+
+[[fn]]
+path = "ctr::ctr128::<impl at src/flavors/ctr128.rs:41:10: 41:15>::clone"
+kappa = "8339c933d3de92b59059650d2a5dd4354aa252c7cc9031e89cd259c6a5484249"
+embedded = "a762884253f782186770017f9e9f636f950e7e3c017ef7c1f4c70f49ebd6aa5f"
+status = "residue"
+cause = "mir::Ty: flavors::ctr128::Ctr128BE"
+
+[[fn]]
+path = "ctr::ctr128::<impl at src/flavors/ctr128.rs:41:23: 41:28>::fmt"
+kappa = "6d6b76840ea3b103697ca30f5e49881e0df2ea50b91b032a9b8430e805c601a6"
+embedded = "6658113501c44b66dcf8b33f715d38cac872e87e468f25c26122db1715cfabc8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr128::CS"
+kappa = "b42f1d0b64db001a66bd83695c7139822a169381ae358f814ec9632377da2f6c"
+embedded = "4a14190a374ea1fc946376a059facb0fedcaf8acbe6073b06579e063da7c142b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UTerm, cipher::typenum::B1>, cipher::typenum::B0>, cipher::typenum::B0>, cipher::typenum::B0>, cipher::typenum::B0> as cipher::typenum::Unsigned>::USIZE"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128BE::as_backend"
+kappa = "de9bb40fd8fa5ab76d5371a40cb11f5f1f6db1412d54ffd2296454b3716d63e6"
+embedded = "1a4859cfcf65912b14b22f74b8de5923de84b47230da4b18ceef2d602de70bca"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128BE::current_block"
+kappa = "f1637c7176cbb06bf047d7fcb8ae9a37f24759872cf2e3cf1fd67f9d2b87ff8b"
+at = "B=u32"
+embedded = "d608debdd713dc00aa321d70358f43ad3597abbc60dd2e22d8f71cbd51b04bdd"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128BE::from_nonce"
+kappa = "47ccf5b083078ebdb16dd05345078fecb3b7c6e95433da5092b8570f23c39f16"
+at = "B=u32"
+embedded = "e063d00d8a02962d5196d9a8f81fa5f367c188b1c3294e6052a8c9b622f789e9"
+status = "residue"
+cause = "mir::Ty: flavors::ctr128::CtrNonce128<u32>"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128BE::next_block"
+kappa = "6b0cc802f0ed5f3bbba4fb08b375825d15230079d80d24027936519f7d4b1aaf"
+at = "B=u32"
+embedded = "eb3d17a8f0dd06d1b4cbd9a104687adad2f4f6baa34d65774c167e6393dd2d2f"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128BE::remaining"
+kappa = "2ddcd2d468e756f3037f8a28a3a518e03995bf577f2c944b8b2ac0ca46dc5fc2"
+embedded = "619ef458fbd7617f03573b57185d5a98ff7e4c941b226faff5ed338ca775fc66"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128BE::set_from_backend"
+kappa = "86ae3d92ee54e166ecab42064c04e2af01ce6c103ca5ab9f4159752a2d592d1c"
+embedded = "88e048874dd3bfba9272ded793998e444328902467f100fb7417b7482065194a"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128LE::as_backend"
+kappa = "578e7ee92d9c242a5cda704b706359e80c004ff15675dc0331545614fa94af62"
+embedded = "66a8ea7f7d6e44f8297376ed9638600218ce1e4d50c311bda27797b132cb707b"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128LE::current_block"
+kappa = "3dde8159eea02b5bd0dfdc67b3334ac639430ecf62a85c4af9125592ca75e9b4"
+at = "B=u32"
+embedded = "702774aa1a6d0e9304e607ae07d93d212f5838393cdd41b44ead55837d398db2"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128LE::from_nonce"
+kappa = "04ed6f3e95cf599b7aa2dcce60f80e770cba51a16889c690638bfbad00bcb35b"
+at = "B=u32"
+embedded = "a4757c3d2f8561b2afa9e51d87c6e2f15dfa4f1df367ab0714a7a548a96743f1"
+status = "residue"
+cause = "mir::Ty: flavors::ctr128::CtrNonce128<u32>"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128LE::next_block"
+kappa = "7b03be963209656929f7883632cd7aac75ca97884647ca9437c12bf11c97a5fe"
+at = "B=u32"
+embedded = "8fcd4a12d9e65f32b7199f73898d7d1f8cda38a7c9d3fec97f58ae15b9ba3f86"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128LE::remaining"
+kappa = "404c70639e25bb7eb91eea658834648faba9f4309172dbbb199ce2f3f1866b43"
+embedded = "8fdf35147fcdf8b49bba50b47d7743e43d1260238eb9bd7a788ee49472815543"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr128::Ctr128LE::set_from_backend"
+kappa = "ef606a2971bcf0a13e6d3c57d49e481d1f88bb7d669d797e692ced763c8f7bbd"
+embedded = "d60be670e958ea8028c646050dba3a69055bd6b1d79150f7ccd0fdc23bd04cc7"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr128::CtrNonce128::drop"
+kappa = "26987e642285e7bd188030296ac06ebd9deff0bf0c88a5910553d54852df836f"
+embedded = "ded339bf58c29b365792296f50695502f93404bb11fc3aa261f44ed48739e81b"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "ctr::ctr128::CtrNonce128::fmt"
+kappa = "a693e546854cc6ae9c04b58a6dfcafd9034719ffdb59ea9332754b4b441765c8"
+embedded = "7e9e0d7af8e089a0ea792fd924f93dc31cc25cc0b458f515f6610289e0d1db17"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr32::<impl at src/flavors/ctr32.rs:108:10: 108:15>::clone"
+kappa = "abe9c7a52b0cba0df04800825f1104a5d3f5cfa8f3d952f604fd9be6a3d9794b"
+embedded = "098329f5bf5b6a623c87cea18956975e3e52ebac339f24198152e0d0765ebb2d"
+status = "residue"
+cause = "mir::Ty: flavors::ctr32::Ctr32LE"
+
+[[fn]]
+path = "ctr::ctr32::<impl at src/flavors/ctr32.rs:108:23: 108:28>::fmt"
+kappa = "7c8fc96cc56d7b4f8110a3bbf3d46fc93426f2a18922c0558cf0bb38cce67dad"
+embedded = "4879ee8089afe3838b3a721047ab3ed304ea3bc5ff40adbe1c14fcad96380954"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr32::<impl at src/flavors/ctr32.rs:13:10: 13:15>::clone"
+kappa = "9a2158540190f597d8e9a16a5aac167be1dcdea9fd463e2f290ccc4fd088a5fb"
+at = "N=u32"
+embedded = "5e33b7478006c75ea8883adf6b9f2a96f86d7b198da82f1a1294ccf2e0cc1759"
+status = "residue"
+cause = "mir::Ty: flavors::ctr32::CtrNonce32<u32>"
+
+[[fn]]
+path = "ctr::ctr32::<impl at src/flavors/ctr32.rs:41:10: 41:15>::clone"
+kappa = "1e6c5fae65b784cdf089c4d826ed97a5e279a15c204f03ce310c32bda1676f26"
+embedded = "629a57b40cf7970a9af145a13bc33d20cb6e1d30418d79a04c11b88177d2f647"
+status = "residue"
+cause = "mir::Ty: flavors::ctr32::Ctr32BE"
+
+[[fn]]
+path = "ctr::ctr32::<impl at src/flavors/ctr32.rs:41:23: 41:28>::fmt"
+kappa = "f0fadca4f959a1427f55446310d362f6843ffa896bea32d204d05bab9f6e385a"
+embedded = "4cabc35058e05e1b8110a17a9c932aa6083ea19a5a636bfa684f8d5042ddc129"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr32::CS"
+kappa = "8dccd90bda2ed3a7cedf7d38d8c7a03af8c57edecee734b120dc20231562f9b6"
+embedded = "322e67c873954e2bc26e21f2a1f64f9d45284252fd8c6f8e09db8bc94bf0c981"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UTerm, cipher::typenum::B1>, cipher::typenum::B0>, cipher::typenum::B0> as cipher::typenum::Unsigned>::USIZE"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32BE::as_backend"
+kappa = "69683c4618bfb375fb3660cfef0479135d6e40c807aaae0a4d2577d294895580"
+embedded = "744834d4cab590a7c19d49113aa3dd0847d8b46b927a13365fb82f8cfc529cfb"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UTerm, B1>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32BE::current_block"
+kappa = "10b718e1be1ed40d3054ab049fda1f2b5c55a8f3eb3ac721c1fca9788b03f6de"
+at = "B=u32"
+embedded = "a68d771c5337c8ea0f123c9debcd88b017681802eaa5a27fdd3e216d4bd13676"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32BE::from_nonce"
+kappa = "f5482a1be8c244ada9101f45c4b91d5d6cef3b191a4a56cfe4a9bc5df7371fb2"
+at = "B=u32"
+embedded = "5680d98ef16d2e5f5847d9458d4fbfc85c035a6321a41ffdf14cc9eaf44175dc"
+status = "residue"
+cause = "mir::Ty: flavors::ctr32::CtrNonce32<u32>"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32BE::next_block"
+kappa = "d6dea0159c63a8b6e57da20ab4c5f11469274873ffebebab7a66627ef780a8b6"
+at = "B=u32"
+embedded = "bf014bf776c5663eb18e422112b3017002f127da46c1a5ed2f24746455576d27"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32BE::remaining"
+kappa = "31741bd058c0c1508931ee7307e32329902f900d1df6d03273bd5d84817a6d63"
+embedded = "b7172e527272a7c7a7a435c1ad18f71368c769dde3adb663c1415c4bab626a3d"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UTerm, B1>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32BE::set_from_backend"
+kappa = "9139415f8f74a77b28b802643c929d9c3f15c73b7a2f48aec344679353b1bfb8"
+embedded = "146ea8d0eb4174577f20e24cb0f8e93fb1cdbaaa59188d5d91db4aa3c8b143c3"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UTerm, B1>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32LE::as_backend"
+kappa = "0fa92c971e012aac2ae5d166365cfae40029150562e6d41af43ba356305b430b"
+embedded = "e937330b3dcd776ef3b28b35a862c0db0e92b4c272fc90aee30374a2f8c90520"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UTerm, B1>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32LE::current_block"
+kappa = "4675026e20c516135f13045fdfbfaafaa74b6cce3aad26687742e22de5cf1157"
+at = "B=u32"
+embedded = "8600f1613347d7ef3253f84b485ecf448dd61bdc499e74105712277bd6788e82"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32LE::from_nonce"
+kappa = "a2a380a261074ac8086bb931024b8713cd600d81f20c502815aa063993bd6a23"
+at = "B=u32"
+embedded = "ac505ffb419678bbdc6a38c75e83b57a5d21e7e2ccf97b4fc8db98ba6e4a60a3"
+status = "residue"
+cause = "mir::Ty: flavors::ctr32::CtrNonce32<u32>"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32LE::next_block"
+kappa = "2147b301caaf3baf6ef72d4941dfbdad15406b2c9ed574872f594978fade29bb"
+at = "B=u32"
+embedded = "1c979520a11c7d4c51070fcced237a8a80d6d10097105dbba24887e803cf9c6d"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32LE::remaining"
+kappa = "c84b63ad850b02820895768b9ba4568eff99a5924d349d60b848eda6bb2bfe24"
+embedded = "ca78a29e179f2a3c2d53833f5e856289818cb6d8d08215d09ac8accd266beef9"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UTerm, B1>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr32::Ctr32LE::set_from_backend"
+kappa = "ca67e5c5b0c84895daae2287058d7a44eed6a0a803b3bf868a43e1240b639501"
+embedded = "31af58091f685d41387b63cdb1186ed3729cd6d6e5958dfc2c018c5838941d6d"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UTerm, B1>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr32::CtrNonce32::drop"
+kappa = "3dea8485243248b450a0879c8071f6e3ad4bbff160fe4b8e13e55a604f7d206f"
+embedded = "40d90515e31bcb49b84c4a779d227a013577056aa265edb34fbf981f9c5e4778"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "ctr::ctr32::CtrNonce32::fmt"
+kappa = "e59591b3d4b2b79d080d7cfd33f2b99847c8a638a155c70ac87c816f1a51b8ee"
+embedded = "8744d7a86896781e526d8ac572bcf0e4c69208ef9c94f821edbf3c8484ee8856"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr64::<impl at src/flavors/ctr64.rs:108:10: 108:15>::clone"
+kappa = "a970c84dffece7e345f53e463f692882b828d0bb90c3158acfac697d09bed3f8"
+embedded = "d779b28d6615a3d7191dedb74b2d61feeebfb30e2feb9da6b533d6d14cec4039"
+status = "residue"
+cause = "mir::Ty: flavors::ctr64::Ctr64LE"
+
+[[fn]]
+path = "ctr::ctr64::<impl at src/flavors/ctr64.rs:108:23: 108:28>::fmt"
+kappa = "a2f0adb63863813af12c27b90d0aa8988f5a0c00fc9860e74055cd13d0800495"
+embedded = "5946eb40b2003d02ed3a0084c69d7dd1e167a8bceb3dc41c8035d0876013b57d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr64::<impl at src/flavors/ctr64.rs:13:10: 13:15>::clone"
+kappa = "bd1c7d8d4e97103d9719f7ffc8423724fb91b9c0acef2192c557a0a5f981cfd6"
+at = "N=u32"
+embedded = "9a4cd7df4ecea496a3810ff85a95c1d3fad98798830c18295a79c19358006ebf"
+status = "residue"
+cause = "mir::Ty: flavors::ctr64::CtrNonce64<u32>"
+
+[[fn]]
+path = "ctr::ctr64::<impl at src/flavors/ctr64.rs:41:10: 41:15>::clone"
+kappa = "6d767cbc3e903a02d4b3fbb5bd450c8ab5b053475b327d2a335ba46b46a5de18"
+embedded = "e82a5406f280cae80ecf887f6267432f7fcfe82c10cc1a03e5a5c07b46e4cb05"
+status = "residue"
+cause = "mir::Ty: flavors::ctr64::Ctr64BE"
+
+[[fn]]
+path = "ctr::ctr64::<impl at src/flavors/ctr64.rs:41:23: 41:28>::fmt"
+kappa = "81829011670819640669bb8bc9b06457aa223a89832a71e78149e58fa55918c9"
+embedded = "bbc74ea042a1181d8a76fe92e93a85fae96b64e532eec873d182c26f909d93ef"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr64::CS"
+kappa = "a260b454639b18a12577412ea2a01374a2a73c113c03bf6f7ac63ce0dcee3c65"
+embedded = "d45808faef21b2989f6290d93c187c5d39b3efd8ee58aed2866001acff4a4cc1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UInt<cipher::typenum::UTerm, cipher::typenum::B1>, cipher::typenum::B0>, cipher::typenum::B0>, cipher::typenum::B0> as cipher::typenum::Unsigned>::USIZE"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64BE::as_backend"
+kappa = "6c4f970060a7ea4934cbe4cb405bccda8ca393dd67a6b754b55e8f1049ba42fa"
+embedded = "bcf83c6a025ef38fb02d0d07bd540c9a2faae64628340487440b6b1c427e627b"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64BE::current_block"
+kappa = "c8897c907efbbfd37b443ee71c3a3274b38a2c8d154712fe50a9803825f6aafb"
+at = "B=u32"
+embedded = "9628db7d438fa04f27590e77e4ba83ccff7bd7c495b2497ccba1e9f1290f1f2a"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64BE::from_nonce"
+kappa = "5419cf7fb21e0807b63d6fc7ded92d512a6384133c44519e918a128d70ac72c8"
+at = "B=u32"
+embedded = "5c819fb5199384fccfd375ddeddc37f882ee73530298b540262d1155d683cf06"
+status = "residue"
+cause = "mir::Ty: flavors::ctr64::CtrNonce64<u32>"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64BE::next_block"
+kappa = "26cd973e5c6b6a8e02c58c5c6748fbb06cc12c16f374930ea0c3141d1ea6143b"
+at = "B=u32"
+embedded = "c2ad40d0c27680d0b6f83edcf7c6871d1cfd9c4733f2557a681bc5a7ffb6f5b2"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64BE::remaining"
+kappa = "8c36c9b8bf6e72ae0c33627a2c5609c6f1aa8b7bbab144fb4da94c1e53eaa1e2"
+embedded = "6f809fa136cb59c31edf5fbc48b3a429fdeda73f6281637de6fc77fe59cb68b6"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64BE::set_from_backend"
+kappa = "9acf0139a3c142a29e93cc4b01c9a18ff9c5536fdd1b08db9ded858521bf1c07"
+embedded = "f4a910a3e489e752becfcadd34fabd43a58ae5eda589df123b8fc9cbdafd5a1f"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64LE::as_backend"
+kappa = "a86c89efad8b9a9f70e7f473073fe2ff621fccfe5065701ebb79371d84e459a7"
+embedded = "658c934df4cf1ed38f87ddcc245559b66a7fedd15fed036bd9484b193a9ee8c9"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64LE::current_block"
+kappa = "4d7dac5df4b93fd1df22c7f05fa4236bce5a581978ddc1b2ad7a505f7d5de4c0"
+at = "B=u32"
+embedded = "5a6d2896b5606a0a8e5d894161410a8828a79a7210528f9a781c5a5e85424f33"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64LE::from_nonce"
+kappa = "c93b072371ab932832f62b616f3baad4d3a3669414b1f83ccc92d589564f9dee"
+at = "B=u32"
+embedded = "f9cce375bf1e200a64f0abbc50515382ff7a5748b763c7485c571e82b59aa6b0"
+status = "residue"
+cause = "mir::Ty: flavors::ctr64::CtrNonce64<u32>"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64LE::next_block"
+kappa = "52e98864148acfd34c9b31bf2006ecd4c40a8b07482dc1ece86e82d6c1f06103"
+at = "B=u32"
+embedded = "a328e3ac4674026297725b8b5419572af9a8c4490d8a47b1f54b42e80b27d2c2"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64LE::remaining"
+kappa = "08820401858e778ab15e0eafdb7519efd25c0696ebff5af1687aaa68dc1ccb1e"
+embedded = "6b8f84a2baaaf9ecf9ce598410d2599bccc960a63250e67d8e4df9b22ca04f9e"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr64::Ctr64LE::set_from_backend"
+kappa = "9d65a327a00f522b985c82356850c156e71682459f9c17cf56e27d09110b12ef"
+embedded = "c8200c7eb7e085e2748b14054f1c64de2478cda127319762a9e4a4cc6b78db0e"
+status = "residue"
+cause = "mir::Ty: <B as PartialDiv<UInt<UInt<UInt<UInt<UTerm, B1>, B0>, B0>, B0>>>::Output"
+
+[[fn]]
+path = "ctr::ctr64::CtrNonce64::drop"
+kappa = "9c16f3130e54c1f084d10385a0d5af2292f02d7ec98a22c2136ce1bdf252c2fa"
+embedded = "143362543b5b039b6099faea99ab78ec5fa3299ce31424dd157be7d618b9380b"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "ctr::ctr64::CtrNonce64::fmt"
+kappa = "b1e297b5b3a64a32952ab17b87a7c5f9a0f4ad8f65784258b9664426b7e1bf64"
+embedded = "afb3a59b6337844900cb169c58334e3c7346a4e37fccef7bae08306bd265a436"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+

@@ -1,0 +1,267 @@
+[[fn]]
+path = "minimal-lexical::BIGINT_LIMBS"
+kappa = "2cc812405fb60196b7cff218fa06b9c523046d0afa401af176e72bf7670e137b"
+embedded = "ec6207a6bae86658b008db36eaa10582af54f234b81808a19949e8d8284c22c5"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item bigint::LIMB_BITS"
+
+[[fn]]
+path = "minimal-lexical::bigint::<impl at src/bigint.rs:42:10: 42:15>::clone"
+kappa = "2cd22fa9a75e3dc93c2885242a3e8e562285cb006ed7067a2e218f4694b8806e"
+embedded = "4f1944b7535b738adafb5a232c1fa6aa9d36811a292f2f2ac6b9275de4ab59bf"
+status = "residue"
+cause = "mir::Ty: bigint::Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::<impl at src/bigint.rs:42:17: 42:26>::eq"
+kappa = "011aafa035084ca5c8f118d713fee92f2ac7c9d68faf72c8164ea813bae8a55c"
+embedded = "302ef4d14b0246e29101f81c45d2feca2edd70749eec94246e41561508eac610"
+status = "residue"
+cause = "mir::Ty: Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::<impl at src/bigint.rs:42:28: 42:30>::assert_fields_are_eq"
+kappa = "5213c8b049880db96494a7a09925d5d8c28b67500968d6535d629ad40f98730d"
+embedded = "9f4caef4a2d838c970b8f735a5f272c59bcb158aa53a9d57e8ff581492977d9f"
+status = "residue"
+cause = "mir::Ty: Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::Bigint::bit_length"
+kappa = "683c8f5a8f6d65b8a1e0b9528ca89ef86b3254e7a4acfe44cbff0d5077106084"
+embedded = "48f40996f7197fc2a63a1ef72168a1229ce56074a16b0decca306891161879c1"
+status = "residue"
+cause = "mir::Ty: Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::Bigint::from_u64"
+kappa = "b51244e20bfff865d8ea061d2c757c54084112bc8fef52569bb4a059cc1c8d87"
+embedded = "6da43d9ac68bdace26a838be3f9361cb72bf98a555158b0a645be05f4a943bc7"
+status = "residue"
+cause = "mir::Ty: bigint::Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::Bigint::hi64"
+kappa = "3d8b3c9cb5ace0e2868b1013a1c0cd65210dc4bc348a20c21d0fa9034c4c464c"
+embedded = "52689388154da29ec1fa87f0cc2d45865e9f82ce12084997e53a2dd488e864bd"
+status = "residue"
+cause = "mir::Ty: Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::Bigint::mul_assign"
+kappa = "a6fb511d25d04be8741db509363ef566d7ea82c4bc0e3b9d75dbc1f3e75a6cb9"
+embedded = "7ea8a0a6908f8cfffd394ee651dc7b3eb324b3f6677885c66c20738bad8ee807"
+status = "residue"
+cause = "mir::Ty: Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::Bigint::new"
+kappa = "fa15b8e6f342e62b8718d8c5e655705563646c1b6331d457e6c8fe7098afdb10"
+embedded = "7cdfa5677914e56236d914734209295f5667a0201f9401bfa3a761812290f1e5"
+status = "residue"
+cause = "mir::Ty: bigint::Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::Bigint::pow"
+kappa = "3a0e85ec33221b79f835f07c84f79c45fa1924792c83ca7fd5bda841dc292d3f"
+embedded = "8d96898953e0348fc01208eb5cfbb11ecdb408190158ecb57ec83c19b84fab03"
+status = "residue"
+cause = "mir::Ty: Bigint"
+
+[[fn]]
+path = "minimal-lexical::bigint::ReverseView::index"
+kappa = "56fa6b9588fb195dd17fe45398fd8523fb37fa2a37af45dc4e6d81c2c6047fe4"
+at = "T=u32"
+embedded = "aef8c52dac9797b13b1fcb6e0ea0d9248fbdeafa3982b4fec7f3a2a875f3770e"
+status = "residue"
+cause = "mir::Ty: ReverseView<'_, u32>"
+
+[[fn]]
+path = "minimal-lexical::bigint::leading_zeros"
+kappa = "17af1d262c13fac9b23bbcb0e6a566599e3a7d569166bd8a7d39a2a4d4628ad5"
+embedded = "59c840d6aacf9a2ce7859240587cf630df8b10ffb1c705616d956c30ef4a8783"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_sub"
+
+[[fn]]
+path = "minimal-lexical::bigint::shl"
+kappa = "4ad2e48e075c7b1b04e56e03d9e2771495f96f1a1fdddb930866e344f078adb7"
+embedded = "47ee1905d57169da77a765e353fa1e3ed1944f5b4882d1fd8c3c958d0f5b2c6f"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::bit_length"
+kappa = "8c81fcc0389ad682f1a6819a50758cd24a49bbf4c741789fa3cfa96a338f0fb9"
+embedded = "1133f63db3ecda131e5e2f02303bea8464fa91ff0a9522488b1dc1edde435c50"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bigint::leading_zeros: minimal-lexical's MIR stops at mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_sub"
+
+[[fn]]
+path = "minimal-lexical::compare"
+kappa = "5f67df64d4d25f949e2011ffea7e011401beca142f036059b78e1d7b0d277795"
+embedded = "31dae12384d542d636a77cf8ef19919fd69b5849a93ab4446f6eda23459e091d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <usize as Ord>::cmp"
+
+[[fn]]
+path = "minimal-lexical::from_u64"
+kappa = "548c066d2700055a2607061f55188ff9aabc3415b359227f1a2ef465ed87a0ac"
+embedded = "9c1ca1a42f2cb4f619af3e9869fd03454784f84cfb4f8d99d4b4d5ed61fb7918"
+status = "residue"
+cause = "mir::Ty: stackvec::StackVec"
+
+[[fn]]
+path = "minimal-lexical::hi64"
+kappa = "0ee33528218b9a93ce189d57d45c9f0df02b7934d16a72c1382dbf2b85c39a2e"
+embedded = "ed5a9804fdf15f721371ec8abfe1f199782dc6e8320f32cb287e4cf5080f0da5"
+status = "residue"
+cause = "mir::Ty: bigint::ReverseView<'_, u64>"
+
+[[fn]]
+path = "minimal-lexical::is_normalized"
+kappa = "0a7c902634fa286f547414495a99f1cc5d5e0fb103894dafc241b03e9286a5d5"
+embedded = "14810a0e06c3060fc4b3bb7bea7b95a1a0e4e82f7c653723ca78a2a7f2562d78"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::wrapping_sub"
+
+[[fn]]
+path = "minimal-lexical::large_add"
+kappa = "29d911aedda0455ec8fdb1980a320fec077948ed1b918f67b2808aead08adedf"
+embedded = "6af28840db6abc0b354c3345e5752eda56624eaac9295477249dbc1c69efee61"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::large_add_from"
+kappa = "f9221b3527fd7eca392059a3ecc48b71ea617686bc2751afc1dfe4fada39eac3"
+embedded = "fc8ce67857d872e41fcb9748fa626a219538f2381c014b842c4f987f74f8dc48"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::large_mul"
+kappa = "e2ea2c6089b683426b8377f267408fd08854576558af0f8c1e5171054ad6ea58"
+embedded = "50ac04e593da8830a10a65b73babab73a8cd668f2a0cafb204f03efd56e144a6"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::long_mul"
+kappa = "409419acf3759969b1b035a3b79af6c244bd841e2d43dcc0b971b5e589eff75e"
+embedded = "e3c407819bcd4e9f6b41fa29e31082c4f7f76234be0d4284e9d1f8043d7036b7"
+status = "residue"
+cause = "mir::Ty: stackvec::StackVec"
+
+[[fn]]
+path = "minimal-lexical::nonzero"
+kappa = "62deb0762badfab4182fe47df23b8d7aa24ff89ca4cc453accd5529f2591937a"
+embedded = "fcbda3ee5b8d403addfa69c2e66e9278f8f3815634125b1c3f49bdd95edac924"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "minimal-lexical::normalize"
+kappa = "95c9b8a44c60711d6ea79fc34b18ec92453aab27dd58562dcd4c4dac3953bec8"
+embedded = "9aa6062240d75045d60f40fe60eb4b9f8509418f7b803b9139a064f69a3f3d61"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::pow"
+kappa = "6a99e17cd9753f22322ffcfbba6ee260a506e11c467084791d49b15bd93d9dc7"
+embedded = "0f3eea2b9b000c4c78fb41d4b259ccbe88c5fd897badf23fbf92cea8a4dea8a6"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::rview"
+kappa = "ab50e66852c815663408772fbc2bc3027a6742391dceb16fe53cbbc13feb1240"
+embedded = "5e047533ddc28fff15c10a3bf787ecb68298f78eaf72afe3440d10a3f5395fd1"
+status = "residue"
+cause = "mir::Ty: bigint::ReverseView<'_, u64>"
+
+[[fn]]
+path = "minimal-lexical::scalar_add"
+kappa = "4ff8111e7292ddc3868f1726db52eab4fb3462e9b31499cd04d1c160d3392091"
+embedded = "f7ec7d622328647ea3bb798991634af7a42830a37c7688ddc1ef94d1f72333e8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::overflowing_add"
+
+[[fn]]
+path = "minimal-lexical::scalar_mul"
+kappa = "b77eee48827d8829afd2ec0617b9e2a2f7633233b9b75f9f0c69d573e38a3589"
+embedded = "ce9d5479390bdf7ce8cff01c1a2f3ec88259b8828b330948711e1f9663c8361f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item bigint::LIMB_BITS"
+
+[[fn]]
+path = "minimal-lexical::shl_bits"
+kappa = "3cc9c955eed822186e8d8eef274ff0d9ea6ddcd9561fc308687a47b3bf4908f2"
+embedded = "951955c53ef6861a0790a299ad385eaef07ae49e137efe99dd41b91be1e584f6"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::shl_limbs"
+kappa = "6c0a2fd003dc512d7187270be9ef1f46f49a7402d958bd04aca611127040c10d"
+embedded = "0e7fe4b396845729f057ae340f8a93b30be63940894fdf98e40488151860d3d3"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::small_add"
+kappa = "62dc62d1a04dc2a2c4c990014a6d38897af5580f8579dcb62e9535be95eb0aa6"
+embedded = "6fa9921ce5a121247df770c8aeadfa0c9f234c82bb2ab2d227f33202bcac6f52"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::small_add_from"
+kappa = "0ee15ab017869e18746f982f5a971c7cd28241f34cd5abf88f827a8545749589"
+embedded = "75e5ccdc78b6b644885f0a3e50e2d649ea9ad369c13aedf5ab4c0e3e3ce8e08d"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::small_mul"
+kappa = "fd704694d4f9c0ea406a2ae1f9f064fb15d5f5a05efa744756c112be48b82f35"
+embedded = "41934c104c2d3766758268c035cc3bac387bbe99c9dd8ff18791b60deca3042d"
+status = "residue"
+cause = "mir::Ty: StackVec"
+
+[[fn]]
+path = "minimal-lexical::u32_to_hi64_1"
+kappa = "c1a5251d40bad5ce12d078b0c899bc7eb68784f289bf9720e2c16de9a08843f2"
+embedded = "9f7ad097f1dbe9645c32ca90f58e8d577b685442514a95df3c221bd2654a224e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bigint::u64_to_hi64_1: minimal-lexical's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "minimal-lexical::u32_to_hi64_2"
+kappa = "db279075c55f8d32509db1f04709a81b370df7f43ecac970ea886946be536fc5"
+embedded = "12b0f391a42967730a854cd2b065322ca86fb1efc862ad1c72d7c935f343f106"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bigint::u64_to_hi64_1: minimal-lexical's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "minimal-lexical::u32_to_hi64_3"
+kappa = "afa24b3332ddba264ba8915c7553bd747371e3e734f61d5bf289a1ae0c77fc41"
+embedded = "38a084c70342c140db728939484fce32425dffa5a280df838be0bca77b3b3eb6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bigint::u64_to_hi64_2: minimal-lexical's MIR stops at mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "minimal-lexical::u64_to_hi64_1"
+kappa = "2e0ba0198a642143b77e4d5e68f79a133fa49303ae8f1f3d1cee2910aadb9aa0"
+embedded = "90db07892a76acb160203445260ccb3ad3b973eb29c649287efe1c1c598322f6"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+
+[[fn]]
+path = "minimal-lexical::u64_to_hi64_2"
+kappa = "07aa859d1e5f9c21c7aaef428451008e49e8a5a104a2406dfb32e47a834e6063"
+embedded = "85d3923a68ab6eb7d9dd89b67b5a05423ba31cb11d0a8d1e4f2534b24945b441"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::leading_zeros"
+

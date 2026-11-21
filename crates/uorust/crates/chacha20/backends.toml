@@ -1,0 +1,153 @@
+[[fn]]
+path = "chacha20::N"
+kappa = "8256df528151898578319fe297fcd54fe6774af85e94eaae85d7da77bf119b9a"
+embedded = "c0a2b39718d0281bf9eeeefd243f4ab167dc76ef994d0d9f1bd4b153c9ea326a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item backends::avx2::PAR_BLOCKS"
+
+[[fn]]
+path = "chacha20::avx2::Backend::gen_ks_block"
+kappa = "1d88b66739eef9fa9ba6cc25c69fd131ed39e2777db9bb0e5631a450a87989d3"
+embedded = "c1ae87a38c9b16a1034e9b8eeb54cd22a77788aac892646e715c343f00a8dfd7"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "chacha20::avx2::Backend::gen_par_ks_blocks"
+kappa = "f75bba170079a455d794fdf6ae913ad055b7411b9480665241089ff64fbc39d9"
+embedded = "c6817f3e7b4f07db6f2bd2eaee45ce3b96e50e75b82c4586c3289c1a38e0b680"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "chacha20::avx2::add_xor_rot"
+kappa = "44abd1b9f8fd1f7fbfe1a15d0e646e020df02ef2acebb530c2a169fe2357e78f"
+embedded = "0565bf100a641c9b356373e244c53b4a4db6fc4e627ae9e90b5a3dad7dda0b41"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "chacha20::avx2::cols_to_rows"
+kappa = "8df461fdc33ed2dc761b9aa98aead5e4c3be9bd15901dea704ef8dc543fa27c5"
+embedded = "5d9bf011c060596360c553d0907f9974c592f6b6f3019d0ab1710db6df6224a9"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "chacha20::avx2::double_quarter_round"
+kappa = "8e965104706f3bffa24bb164b98dbb408830bf79586760b46948136c867d0d79"
+embedded = "9c58e3e2225348458e0cb9f3654111b6b9d837e676c1367e82011178ebfdb27e"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "chacha20::avx2::inner"
+kappa = "1083f90999050544c2991be200214e58309ef550e8cbb2fdb3ed6732e959eefd"
+at = "F=u32, R=u32, V=u32"
+embedded = "94201d30def32338391c7c422ea88cd52df84bcb2e560d8b7004760f40e124a0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u32]>::as_ptr"
+
+[[fn]]
+path = "chacha20::avx2::rounds"
+kappa = "08ba5369deebb91cb6c31fcc43f0926bfe687ac934d0580a42d1108d4f19d5ba"
+embedded = "a352c942123a3028160907fc31eb5f29940b578e34c6f7cdab3090b29c347475"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "chacha20::avx2::rows_to_cols"
+kappa = "f83ed761c4b90517db219c684400d28262eb9840f96e34547256ffc687372358"
+embedded = "b2f46fb9a356d67bcf0841f7ce5980ad171b3d1df2ca13c81badb7f1fbbdc09a"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m256i"
+
+[[fn]]
+path = "chacha20::run_rounds"
+kappa = "b20f57950d403e4c6b422a9286a070cad033589bbdd6cf5eba6e8ce1f1eb84c2"
+embedded = "ccf0a43486e93bc0164e66d18bd1230f833fcb5f3e8e386115189a66af1cd77d"
+status = "residue"
+cause = "mir::Ty: core::ops::Range<usize>"
+
+[[fn]]
+path = "chacha20::soft::Backend::gen_ks_block"
+kappa = "f4d2d70a0b127f4953f2299bf559f0d92db738debe8fb9225f4979dc90e308e9"
+at = "R=u32, V=u32"
+embedded = "c3638f54e321db10343e1826e3c3cccd8ba7e04c5b4b3402bf4c6da25151fedd"
+status = "residue"
+cause = "mir::Ty: soft::Backend<'_, u32, u32>"
+
+[[fn]]
+path = "chacha20::sse2::Backend::gen_ks_block"
+kappa = "ff27615dd2d23c82bb8ef4ff7cdf793ad29ecc1584c2a8bd11a25bd2fbacb58d"
+embedded = "57930341e78b8bd36d8edbc6564c1b679662ec21a898788b3069cae143449545"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "chacha20::sse2::Backend::gen_par_ks_blocks"
+kappa = "6f7f5fdcbf1c80ff16ba8e44c0de38876d48bc8a2bf31d87b36fc012845ebed2"
+embedded = "b25ab9173f05dc4f9d146ae3b3e02b0aa9b8ff0a2ffb69ed2c8e0e3b06aea931"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "chacha20::sse2::Backend::new"
+kappa = "238813552264199f93ac710528054794d673aff98ce4521b6d0661bae7f7f414"
+at = "R=u32, V=u32"
+embedded = "ee735d90d86ab63e5fcdee32dc194c6150bc753a288ba3c7891eb33a976df164"
+status = "residue"
+cause = "mir::Ty: backends::sse2::Backend<u32, u32>"
+
+[[fn]]
+path = "chacha20::sse2::Backend::save_ctr"
+kappa = "4c61ebe15292e9b9bef0fed4c42bd9e34f5428a367aa3895ce2653ac314c6752"
+embedded = "3c40e7698e4d58d14908312b03a2a268ff29e9e85816aee0c8f065f49c9a1f5d"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "chacha20::sse2::add_xor_rot"
+kappa = "c4ac3e8d4eab8465b8decbed816c224cf70e83cf6c393c8d4b29d7db18951ee2"
+embedded = "987a0e80ece30b298dcc6386a519463ef72fc12ad384c8211ab4b2a96b1f476f"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "chacha20::sse2::cols_to_rows"
+kappa = "cd76ed5e1cc26a4965c8701b11e0620ed9a74396d7c425de25c316ce3ef7b8d8"
+embedded = "48ed80350dc1f4c36e9c28e91dd564e4842877e08b1cc6e4371f6fcb3b6b7aa9"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "chacha20::sse2::double_quarter_round"
+kappa = "9c2e8924e9363b416920d8b0b5cce31e853f5fbbbf50257fd7e6c8a2abf343f1"
+embedded = "552ab9fbb4b361467c5f0e75e200ae8ec5506e0da34e14dd995dc4aeec8fbba6"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "chacha20::sse2::inner"
+kappa = "71e30f7dc3937a2eaba74994736169064e4843f688ac44cf96a1ddce5a0ba76a"
+at = "F=u32, R=u32, V=u32"
+embedded = "622e6fcbb11aa177f78c2c9496d46eade63d7d0379990358da2001a71ff22598"
+status = "residue"
+cause = "mir::Ty: backends::sse2::Backend<u32, u32>"
+
+[[fn]]
+path = "chacha20::sse2::rounds"
+kappa = "1f63e46fd095a6b64771b8415938c213e45bebf6dd4cca0a2e78a3e333abf48f"
+embedded = "a3d130a780e2e64cf0e083d3da5bf22e54a20380a2d38194660c42c69f4a4b27"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+
+[[fn]]
+path = "chacha20::sse2::rows_to_cols"
+kappa = "d22e058bd603ac3844b0767bb4af0de055ca73d1db19dd2b2ba2198e666891c1"
+embedded = "23464cb84f6f194226f6b783db5d9bb78bad2a6af574c57b8e1fc09a9cc982d9"
+status = "residue"
+cause = "mir::Ty: core::arch::x86_64::__m128i"
+

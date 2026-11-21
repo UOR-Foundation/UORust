@@ -697,7 +697,7 @@ pub fn read_figures(path: &Path) -> Result<Vec<Figure>, UorustError> {
     let text = std::fs::read_to_string(path).map_err(|e| io(path, e))?;
     // The site rows are output, re-derived on every read: only the figure
     // rows are the register's statement.
-    let value: toml::Value = text.parse().map_err(|e| malformed(path, e))?;
+    let value: toml::Value = toml::from_str(&text).map_err(|e| malformed(path, e))?;
     let mut table = value
         .as_table()
         .cloned()
@@ -4050,7 +4050,7 @@ fn registered(path: &Path) -> Result<Register, UorustError> {
     }
     let figures = read_figures(path)?;
     let text = std::fs::read_to_string(path).map_err(|e| io(path, e))?;
-    let value: toml::Value = text.parse().map_err(|e| malformed(path, e))?;
+    let value: toml::Value = toml::from_str(&text).map_err(|e| malformed(path, e))?;
     let mut table = value.as_table().cloned().unwrap_or_default();
     table.retain(|k, _| k == "site");
     let file: File = toml::Value::Table(table)

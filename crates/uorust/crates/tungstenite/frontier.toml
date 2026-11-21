@@ -1,0 +1,410 @@
+# The tungstenite register (written by `uorust crate tungstenite@0.30.0`; do not edit): every body of
+# tungstenite's MIR at tungstenite 0.30.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 361
+translated = 2
+residue = 359
+
+[module.buffer]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.client]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.error]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.handshake]
+bodies = 50
+translated = 1
+residue = 49
+
+[module.protocol]
+bodies = 210
+translated = 1
+residue = 209
+
+[module.server]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.stream]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.utf8]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.util]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 361
+embedded = 361
+evaluable = 361
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: protocol::message::Message"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::utf8::Utf8Bytes"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Utf8Bytes"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: http::Request<"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: protocol::WebSocket<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: protocol::WebSocketConfig"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Message"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::frame::Frame"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Frame"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: buffer::ReadBuffer<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::frame::FrameHeader"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CloseCode"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FrameHeader"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WebSocketContext"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WebSocketState"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: client::ClientRequestBuilder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: handshake::machine::HandshakeMachine<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::net::TcpStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OpCode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Stream"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: WebSocket<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http::Response<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: http::Response<std::option::Option<std::vec::Vec<u8>>>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: protocol::WebSocketContext"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::frame::CloseFrame"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: rand::random"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CapacityError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CloseFrame"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FrameCodec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FrameSocket<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HandshakeMachine<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Incomplete"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LengthFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ProtocolError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Role"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SubProtocolError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UrlError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: buffer::ReadBuffer<#usize_CHUNK_SIZE>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: coding::Control"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: coding::Data"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::ProtocolError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: handshake::HandshakeError<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: http::HeaderMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::FrameCodec"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::FrameSocket<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::coding::CloseCode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::coding::OpCode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::frame::LengthFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Cursor<std::vec::Vec<u8>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream::Mode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf8::Completed<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf8::DecodeError<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf8::Incomplete"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by NonBlockingError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item handshake::client::generate_request::KEY_HEADERNAME"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: protocol::frame::mask::apply_mask_fast32: tungstenite's MIR stops at mir::TerminatorKind::Call: core::num::from_ne_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CHUNK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IncompleteMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StringCollector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WebSocketConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: bytes::BytesMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::CapacityError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::SubProtocolError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: handshake::client::ClientHandshake<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: handshake::machine::AttackCheck"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: handshake::machine::RoundResult<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: handshake::server::NoCallback"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: handshake::server::ServerHandshake<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::HeaderValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Response<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::response::Builder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::Role"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::WebSocketState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::coding::Control"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::frame::coding::Data"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::message::IncompleteMessage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::message::string_collect::StringCollector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sha1::Sha1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Utf8Error"
+bodies = 1

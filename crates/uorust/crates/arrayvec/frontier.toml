@@ -1,0 +1,155 @@
+# The arrayvec register (written by `uorust crate arrayvec@0.7.8`; do not edit): every body of
+# arrayvec's MIR at arrayvec 0.7.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 167
+translated = 1
+residue = 166
+
+[module.array_string]
+bodies = 59
+translated = 0
+residue = 59
+
+[module.arrayvec]
+bodies = 87
+translated = 1
+residue = 86
+
+[module.arrayvec_impl]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.char]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.errors]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.utils]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 167
+embedded = 167
+evaluable = 167
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: ArrayVec<u32"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: ArrayString<u32>"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: arrayvec::ArrayVec<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: arrayvec::IntoIter<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ArrayVecImpl"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: array_string::ArrayString<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: errors::CapacityError<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CAP"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CapacityError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: array_string::ArrayString<#usize_CAP>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: arrayvec::Drain<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item CAP"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ArrayString<#usize_CAP>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BackshiftOnDrop<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: errors::CapacityError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: utils::MakeMaybeUninit::VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ScopeExitGuard<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: char::EncodeUtf8Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::CapacityError<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errors::CapacityError<char>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 1

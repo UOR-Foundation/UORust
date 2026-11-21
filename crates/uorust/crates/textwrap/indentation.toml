@@ -1,0 +1,14 @@
+[[fn]]
+path = "textwrap::dedent"
+kappa = "9836085569dd60fb916fb01caaf4266f02437fa1a4542fce78b89711f280486c"
+embedded = "edf6b73a7cbfc021f6c27427a16af8e4c4274279a0c0355d9478c18b29324a96"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "textwrap::indent"
+kappa = "1d59e1c2ac2ce5812a564ee4f57adc960a03490999a6121c71644485fa27820d"
+embedded = "c70d94b71ddf9d74b0cb969d4fa0c028fc9deb4836a2e5470bd0739a79e5d456"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::with_capacity"
+

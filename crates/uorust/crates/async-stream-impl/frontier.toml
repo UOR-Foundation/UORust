@@ -1,0 +1,43 @@
+# The async-stream-impl register (written by `uorust crate async-stream-impl@0.3.6`; do not edit): every body of
+# async-stream-impl's MIR at async-stream-impl 0.3.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 11
+translated = 0
+residue = 11
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 11
+translated = 0
+residue = 11
+
+[embedding]
+bodies = 11
+embedded = 11
+evaluable = 11
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: Scrub<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Partial<u32>"
+bodies = 1

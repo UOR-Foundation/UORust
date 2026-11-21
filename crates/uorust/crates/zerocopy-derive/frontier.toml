@@ -1,0 +1,219 @@
+# The zerocopy-derive register (written by `uorust crate zerocopy-derive@0.8.63`; do not edit): every body of
+# zerocopy-derive's MIR at zerocopy-derive 0.8.63, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 159
+translated = 1
+residue = 158
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.derive]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.invariant]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.repr]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.util]
+bodies = 52
+translated = 1
+residue = 51
+
+[embedding]
+bodies = 159
+embedded = 159
+evaluable = 159
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: util::ImplBlockBuilder<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: repr::PrimitiveRepr"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: repr::util::Spanned<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: syn::Visibility"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Prim"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::Variant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Repr<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: repr::RawRepr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::Ctx"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CratePath"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RawRepr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Validity"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: derive::project::Validity"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: repr::FromAttrsError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: repr::Repr<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Expr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::WherePredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::FieldBounds<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::SelfBounds<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::Trait"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AlignRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Client"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CompoundRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DataEnum"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl ToString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: repr::AlignRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: repr::CompoundRepr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::convert::Infallible"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::Client"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::CratePath"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::FieldProjection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::TraitBound"
+bodies = 1

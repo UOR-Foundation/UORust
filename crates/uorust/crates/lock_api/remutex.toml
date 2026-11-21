@@ -1,0 +1,407 @@
+[[fn]]
+path = "lock_api::remutex::MappedReentrantMutexGuard::deref"
+kappa = "419687f1c38c775d02f8ffa69bf51369f995f62f887b287fe934c9b38bde4ac8"
+at = "T=u32"
+embedded = "d771dfa3a7e01095bb9bb54419acd4a304cf93e00cefa9cdf153ce71bbd87f84"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::remutex::MappedReentrantMutexGuard::drop"
+kappa = "f2dccccb58df1a158064c35cb4199cfe7ece5fd7bb70e531420523c6e37abf0a"
+at = "G=u32, R=u32"
+embedded = "b5f4e8c78350adfa5f88be4c1579866b0d68e1d48b4f4c533c543c1626f06201"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::remutex::MappedReentrantMutexGuard::fmt"
+kappa = "1b365e574cb1a814438de90fb64a33c4fb9258d64af976a4326c20d0d3c5fe02"
+at = "G=u32, R=u32, T=u32"
+embedded = "82cee170ab2c91c1047d89b8cd207879b15660ad8d525aa436957a8d68a8b04c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::remutex::MappedReentrantMutexGuard::fmt#2"
+kappa = "d96d59bf40eb71003adf35e2d8b98c96d0a2263f61a0a626007680f090a219b7"
+at = "G=u32, R=u32, T=u32"
+embedded = "d03c85034613c2882d186250e1543ccae348a54dab76c4ccdc570847885e0a9b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::remutex::MappedReentrantMutexGuard::map"
+kappa = "2cf53d1704625f6dfc0201861cf74cd8141f89e8b64f79b05c582b01f8e84f80"
+at = "F=u32, G=u32, GuardNoSend=u32, R=u32, T=u32, U=u32"
+embedded = "27fdb70b77ad504f5f48937cab51108ee33fb50931c80df10a75877aa2354675"
+status = "residue"
+cause = "mir::Ty: remutex::MappedReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::MappedReentrantMutexGuard::try_map"
+kappa = "ae2cbee828df54252a114bc30a7c3032628fb2b002fc6d808ea5dbdc2c618d86"
+at = "F=u32, G=u32, GuardNoSend=u32, R=u32, T=u32, U=u32"
+embedded = "99ef0e0d9fb0cf1d34105a18a749660ef6ef576d498f88390c06a6506f7b8e79"
+status = "residue"
+cause = "mir::Ty: remutex::MappedReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::MappedReentrantMutexGuard::try_map_or_err"
+kappa = "00b55ab2dc0760306665ffd10a36333182c4435b9d19c177932c997c0f66b100"
+at = "E=u32, F=u32, G=u32, GuardNoSend=u32, R=u32, T=u32, U=u32"
+embedded = "5285520a3d9e54a9e4dc2ada1f74f7b9b230c9b1cdc6533fcccbc8e497d3feda"
+status = "residue"
+cause = "mir::Ty: remutex::MappedReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::MappedReentrantMutexGuard::unlock_fair"
+kappa = "6d6283fd4ee3655bea6608300bc0daafb793cc7600a7703f5477d11f1aa41b85"
+at = "G=u32, R=u32, T=u32"
+embedded = "864ab22c3a5f6d7d600f6b07f1dbf141d21138db320e462261a9985fce22f111"
+status = "residue"
+cause = "mir::Ty: MappedReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::INIT"
+kappa = "eea5046086d6ee886f73f5522c01304eea27369773ba2dd99be7b4ed7aeb7d1c"
+at = "G=u32, R=u32"
+embedded = "b314bea864cebcfbec026e657ef0fa782a15c2e0d3e85a05c0af30f1d8c15a66"
+status = "residue"
+cause = "mir::Ty: remutex::RawReentrantMutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::bump"
+kappa = "2b57914eef76ab489de62a783a9d2541f9247c7d051f58ddd8aa701d0a5ca0d8"
+at = "G=u32, R=u32"
+embedded = "1ba9ec3d8477f03c66bb1e232c3d3ebee7d3f31fa47a1b13de4e2caa6a473214"
+status = "residue"
+cause = "mir::Ty: RawReentrantMutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::is_locked"
+kappa = "1d41549f29e2da5284ceee3db4360ddbdcf0e9ecda49fe4d19cb0404c79ab3aa"
+at = "R=u32"
+embedded = "d0c8391567a32b5576f1a844e2822332d7baa4cd8334a8b34288ced870e585c5"
+status = "residue"
+cause = "mir::Ty: G"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::is_owned_by_current_thread"
+kappa = "ea7d69425639483815f3f18044bc99eb1b591124c064f59cd67ff05594e36fb0"
+at = "G=u32"
+embedded = "f4479d21956d8e4ba86018f67a101a16904e1da43197eeb5d7cbe96fdf1e22c6"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::lock"
+kappa = "cb19ca8f2bc5cb0c4f5d42a71582b09b5c8957aea046d16983de1171a7c88b7e"
+at = "G=u32, R=u32"
+embedded = "b41b72888454db131871106b0ec5f65ec8eb9fa0c2906f3421f780efab6ee8da"
+status = "residue"
+cause = "mir::Ty: RawReentrantMutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::lock_internal"
+kappa = "ecc35f2ca2e99d85eb0996722c05bec468088a73077df07e42b8f221ee2d81a0"
+at = "F=u32, G=u32, R=u32"
+embedded = "8053198418ca8b51012c8be29b374faaed75d40741afa7eb7bbf0763af0e75f8"
+status = "residue"
+cause = "mir::Ty: RawReentrantMutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::try_lock"
+kappa = "3f1b9af236d1f7ec7e88f4ba174b21c6b0344106a610e8fa5f447582bddb9218"
+at = "G=u32, R=u32"
+embedded = "a90b9515e93a75b12294768400992f73a72cf66c457386adfb4e0f43f5acd497"
+status = "residue"
+cause = "mir::Ty: RawReentrantMutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::try_lock_for"
+kappa = "27e6971e1e445978341b43077bee194e4cb35ce1f8a31e6427740412f32694ba"
+at = "G=u32, R=u32"
+embedded = "b776aafa39a0fd8fc126a1536ce53e216c4eca05cc8b317b114cce705eab3587"
+status = "residue"
+cause = "mir::Ty: RawReentrantMutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::try_lock_until"
+kappa = "94891ee690e0d6da00bae8692172f8cefa48f08fca4358181997785926a32f13"
+at = "G=u32, R=u32"
+embedded = "8bf1def9df412ab308cfd15beca6f5539036461c960b0b7d18ec00f169c9795a"
+status = "residue"
+cause = "mir::Ty: RawReentrantMutex<u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::unlock"
+kappa = "2b6b7f15b4fd27f15c921e4b25d16f8036426afc8a81a2e6b70c9492a5134691"
+at = "R=u32"
+embedded = "15fd940670b8e7712d446861893fcc85e82ae12c39b2d6e3c351c68052dfbe0b"
+status = "residue"
+cause = "mir::Ty: G"
+
+[[fn]]
+path = "lock_api::remutex::RawReentrantMutex::unlock_fair"
+kappa = "36b148c8687edc324c7754a0c86650e81ef89541ecfdd785b69df890920317c5"
+at = "R=u32"
+embedded = "63cc880817565aea1c3e967073b16e6ccd08901c4eb55a84fbfb01e915558bf5"
+status = "residue"
+cause = "mir::Ty: G"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::data_ptr"
+kappa = "7a8cece80c0b36cbd98950cf4b9ee6ee68518cc02e338da1ea5d44c4b0bfbe67"
+at = "T=u32"
+embedded = "1d4cc1729da3b71e9876834594d44db03604668de229dea138a703f788bbf166"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::default"
+kappa = "66d24cd938d271dec5e3ad4957cc6ed774ffac3e7ec7bf1ac56ea1e333abd762"
+at = "G=u32, R=u32, T=u32"
+embedded = "8779d1e0c4783a8bdb640c2ee7645bab208ccae90cfe4953003b22ef40945271"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutex<u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::fmt"
+kappa = "7b7256525fa0d83e891891673e1ef18cf73eb2f00e61d813dde0e0d13a52d108"
+at = "G=u32, R=u32, T=u32"
+embedded = "713640ab5a2ef30f074d34a7c9bccd2d8f44d9ab1de35dc06ca6a10e0af1a5d7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::fmt::LockedPlaceholder::fmt"
+kappa = "27a759c8941f2011be97ea035e2281d975fb183b41919ea4122d3fd8926e9831"
+embedded = "da4d491f0278445e4a15a3b9151004e617468f8c9741411b22302dc2da246c52"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::force_unlock"
+kappa = "fd90d19cb44113128b7e2210b1a8eeec0eb68525f8d99e8ec45978e97279d4f3"
+at = "G=u32, R=u32"
+embedded = "cb0078b3be21407a98303c53905001494627bdd5331575e0a707c439bf56eeab"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::force_unlock_fair"
+kappa = "b0cca34828aea4f1d4043dd4918e0f5e59c27ecbaac9ffb14d9354dfe46a48fb"
+at = "G=u32, R=u32"
+embedded = "5792c5c4fd4119ea75ce3de22414a980282431dde7f5adfc5757094cfba62ab8"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::from"
+kappa = "a8a0a3342c2377e7b9e783108df0d0dde29e8ceae08cd0672e9b2a7101491844"
+at = "G=u32, R=u32, T=u32"
+embedded = "7e7a7005ad271f53ce631858ecd1ffa812c87fabf7273a731d8fd11ba6ca0ff6"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutex<u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::from_raw"
+kappa = "4fbca3fb12326e1c52fb018f4063fb72607fe1bc82f205330427f8b72de20ce2"
+at = "G=u32, R=u32, T=u32"
+embedded = "41d81bdd22ff68d7a2c08426ef8dbfd332312a5e7854de5536884db51a7ff1d1"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutex<u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::get_mut"
+kappa = "fb6e9818e660562043b840ddbfcf4df8a7946f5b0a9ec617a32e866a9858c222"
+at = "T=u32"
+embedded = "371d6096e0c913c098c48fbbd693ed8b4c40d530337dab073789d49bd14a5e47"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::into_inner"
+kappa = "aa23861e5ba0371e618bd9af390b1ccdcab3ab0a5b0ad9cd4e816571ab3b07a9"
+at = "T=u32"
+embedded = "842cfc10054440b03db1afca93efe3334145ae89fe35fdd7443b3d5f8710d554"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::into_inner_with_raw"
+kappa = "8d99b9323c3ecd7839588df118169a44848c405ae8d2c68373d645cda5fdb856"
+at = "G=u32, R=u32, T=u32"
+embedded = "629095a2944b117a7b9dd50deabcaa0bb09523f280ea9bfbe1fdd157c42ff2a9"
+status = "residue"
+cause = "mir::Ty: ReentrantMutex<u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::is_locked"
+kappa = "f3ca93c9904b130325f531fe421d93571ccd6c04ad0cd1eccd6aaf70f6116bf3"
+at = "G=u32, R=u32"
+embedded = "f46493550e8159982910111073cb5e4dd99ef6c81e1fd7897e957b88aa0e6fbd"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::is_owned_by_current_thread"
+kappa = "bb3dc3fe991188601088f95fff0f71ce4f8c6791a71ba34e699db944bfb4cfdf"
+at = "G=u32, R=u32"
+embedded = "aa83849f2831e20dfd795dff0ba50157245b97e5766bf6e500e694268bc775e0"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::lock"
+kappa = "b2d1f5d067ab90981d6698f8e676be1aa1cb354a1909cf356ee4c7f37e56cec8"
+at = "G=u32, R=u32, T=u32"
+embedded = "cc84ed413a912029678602712b98ad18d80bceb6b1c5d1aa3a9ddc4e2e1be88e"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::make_guard_unchecked"
+kappa = "0d102eb76bcd192532aeead85a31e8cfd584a7af49864418f3f5d37e4e5f1b6e"
+at = "G=u32, GuardNoSend=u32, R=u32, T=u32"
+embedded = "e7c3af44368caf86806529c22fc6a8ad1793361bec233cf0d564a5a970c98a61"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::new"
+kappa = "ac0c7a2088c4841ce4cec1c34977fc81ad4c656f7c7e496b4a42e98227d95c56"
+at = "G=u32, R=u32, T=u32"
+embedded = "c8e4cf4a7d434eca7f8ac7f51f1ba3fb089980e1245de14ebb74e1d818838450"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutex<u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::raw"
+kappa = "fb7ebe4a33817bc67058245d5d0241fb9c1bcc8d0b3b62dd27fdd21039ce950c"
+at = "R=u32"
+embedded = "1a9265eda7a9056bb7d9ab154224fd825d6988503568b3d3fa6932b1cdf98450"
+status = "residue"
+cause = "mir::Ty: G"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::try_lock"
+kappa = "03bbcf79364c43dc1aff9c0f36b5174198687f026b230e3bfe87eca2d8592130"
+at = "G=u32, R=u32, T=u32"
+embedded = "b1e007c41368e398def9eb5fe4facf2f6c62d9cc3edb440d957aa7f6d5b78663"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::try_lock_for"
+kappa = "ec59807ed6279e8b6c490b319dce6d5e5260854470eda5130f270886eacf8c14"
+at = "G=u32, R=u32, T=u32"
+embedded = "de99ff7956e25418f83f5fd41a8b5a81a205ce512d03117aa37fa69cf555f923"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutex::try_lock_until"
+kappa = "b7fa9fcc275140dfbb1269c485c2aedd390afa3fd706c8eea64df6c37668162d"
+at = "G=u32, R=u32, T=u32"
+embedded = "d1fa03f342c2b4b5deb7201f50b8b798190a6f8a8791d32f5caf62c992ba8981"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::bump"
+kappa = "4b41e6b39332c28a3a4da8f2d65f1e6e125ca975c3338de2bd9b49aede3468c2"
+at = "G=u32, R=u32, T=u32"
+embedded = "17bb96fc55fda5009335732807cd2ad7d4cd8242f419db4f0b9199b672a1625d"
+status = "residue"
+cause = "mir::Ty: ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::deref"
+kappa = "2513f47a4cf43fe7d06a00bef81bd0e45686a7f5a5241a9043e0d4aeb00715ee"
+at = "G=u32, R=u32, T=u32"
+embedded = "60650e2c5eec6e99c527a80743647f34c17e6e45bde31eaf6e56f09cbc89db72"
+status = "residue"
+cause = "mir::Ty: ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::drop"
+kappa = "1d5e54c557ff12c2fade80452b65bd0d436ac98094f8979fc979dc25f3acd8da"
+at = "G=u32, R=u32, T=u32"
+embedded = "eb4a246348d9155159096d90d62112cae377f735c6d5a3bff41ecd5aa49b0495"
+status = "residue"
+cause = "mir::Ty: ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::fmt"
+kappa = "080d78d6d7f2d505eaa6569c89cdb4aa013c0740e8852a68fa2abc6351a1edfd"
+at = "G=u32, R=u32, T=u32"
+embedded = "572bace214afa1eb90db710ad8763fc5e50e7063999274986695075f8608e6f0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::fmt#2"
+kappa = "fd98ef3349d5f96e53a56e218e6920ee7448fd9dd478a1d1a2fd8fa87d803dae"
+at = "G=u32, R=u32, T=u32"
+embedded = "24daca435ead7790876358e95875f6430e560a9667aa0561ba0e1f8ca2cbc328"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::map"
+kappa = "a2e29dea484461690f5736655efbc98ba3723f78f967dda044d8ab7783bd39fd"
+at = "F=u32, G=u32, GuardNoSend=u32, R=u32, T=u32, U=u32"
+embedded = "3e041e14ab8b43c872ed96106e7725b6d9dcf619859c51bed9e1a1b47a94c4a7"
+status = "residue"
+cause = "mir::Ty: remutex::MappedReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::remutex"
+kappa = "201e5a0912946aaf96b692d5b1a235921bb823b5f9ee8cbf96869f17daa1ea50"
+at = "G=u32, R=u32, T=u32"
+embedded = "d490228e2f4d64097c1c447ca37d954751d9145fb0e429c38efaac1582d70c6d"
+status = "residue"
+cause = "mir::Ty: remutex::ReentrantMutex<u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::try_map"
+kappa = "0273a39fad1fe9db35c42e41065e3d09e330df5cf4d3e201a91fcb42185e6f69"
+at = "F=u32, G=u32, GuardNoSend=u32, R=u32, T=u32, U=u32"
+embedded = "96c3103aed6c963c1417ab442b8ed16cc23749eb873bb6c68e6e2fafe0302d64"
+status = "residue"
+cause = "mir::Ty: remutex::MappedReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::try_map_or_err"
+kappa = "1e864722c63416407bf5a8c3448024316603137c784ecad737dcaca3d95c0cc5"
+at = "E=u32, F=u32, G=u32, GuardNoSend=u32, R=u32, T=u32, U=u32"
+embedded = "ce975d896aa05388b42544f7ce90ab1ef7721e7de0e137869b454a101fabe395"
+status = "residue"
+cause = "mir::Ty: remutex::MappedReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::unlock_fair"
+kappa = "1a2f3119fb7b8867156f402162bfe796547587fb205b65a744e02dd775598a03"
+at = "G=u32, R=u32, T=u32"
+embedded = "b202da5bfc108bdb85280a94d98eeb93ecbbc712c8d919502e43d05b2503f9bc"
+status = "residue"
+cause = "mir::Ty: ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::unlocked"
+kappa = "79eae3d6f136ceca17c72d70ddd72c2305f3cc0be45cf859b5bd28e52bb7b53a"
+at = "F=u32, G=u32, R=u32, T=u32, U=u32"
+embedded = "fcb4a4902a7cbfbdfa07e9bb094a19848c28395a7b634265ed68ffc8e57f6063"
+status = "residue"
+cause = "mir::Ty: ReentrantMutexGuard<'_, u32, u32, u32>"
+
+[[fn]]
+path = "lock_api::remutex::ReentrantMutexGuard::unlocked_fair"
+kappa = "1719b7dfcd2b38974d1afd1425d5edfba7c6d71c09764cb18ed1ea2d83bf68b3"
+at = "F=u32, G=u32, R=u32, T=u32, U=u32"
+embedded = "592e7081455435770ea58b428edd418bcda4cc82e332437bcfb22e0dbb2fbc2d"
+status = "residue"
+cause = "mir::Ty: ReentrantMutexGuard<'_, u32, u32, u32>"
+

@@ -1,0 +1,60 @@
+[[fn]]
+path = "vsimd::alsw::<impl at src/alsw.rs:35:10: 35:15>::fmt"
+kappa = "102e2c2a3bab9be26b9e6c5fb45635e7a65f786f208ded0103ec25befd84348d"
+at = "V=u32"
+embedded = "c2cb2de1caf40da6a0c3b58aa219f0abcba3d4b11a0d1a05505f86cf50bda8f7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "vsimd::alsw::<impl at src/alsw.rs:35:17: 35:22>::clone"
+kappa = "8e4fa32099256241e31c8d28d025a20a7903a37fbe9be2c6b9fdf9ff66b3e0a6"
+at = "V=u32"
+embedded = "a4c459b8c107582d6c6ed7802119eacd59403303f3979b8c30a6eecf338555fe"
+status = "residue"
+cause = "mir::Ty: alsw::AlswLut<u32>"
+
+[[fn]]
+path = "vsimd::alsw::AlswLut::x2"
+kappa = "0bcfb62dababc4cf07db4ed2649404a029a8334cd0425930abe8999a19d61994"
+embedded = "02e9ceaa03d4a2c19b5a2b5ec809648c18d3eb751586fb7682f484980b943d3a"
+status = "residue"
+cause = "mir::Ty: vector::V256"
+
+[[fn]]
+path = "vsimd::alsw::hash"
+kappa = "e7306773e271faee618992653596ea0ae8293819948d7e6cbc1cc1627b94344d"
+embedded = "2bf09042ecd8f28f221e329ce54f054d75c8c70a02fd2c5b8c4ae27025119386"
+status = "translated"
+digest = "d03f8dc735eaf6c938a5e4334b844ca9a6a1619c15a3e056af538a0b0c36b4a1"
+
+[[fn]]
+path = "vsimd::check"
+kappa = "4f21b534e0771e109d819997740046b2a300f3295bfcd5faf64a24604486f017"
+embedded = "805e45aea9a41832ea203010eee66d79b15087d0b5319f300af6ef1b52b366c9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl i8>::saturating_add"
+
+[[fn]]
+path = "vsimd::check_ascii_xn"
+kappa = "263a222fd7f5b9f37b56412ce8bec38deb2f0543236fb79db7bc28df9aaff61f"
+at = "S=u32, V=u32"
+embedded = "2a757aac5521768df59ed179391a26e350a08dcae633a30f20bcdf47167d4e05"
+status = "residue"
+cause = "mir::Ty: AlswLut<u32>"
+
+[[fn]]
+path = "vsimd::decode"
+kappa = "bdf29b22e88ed149c2aeab391896a74ce212fae1892de60f1bbdd3235bc58b73"
+embedded = "3948935ccb6f039890caa713c0b264bdfd2f1622fd5819931655f7cb5a70a584"
+status = "translated"
+digest = "79c7723a7d2fd538b95657ae80ccec69d63d928fe8a2006163d6dc5c0da54a8c"
+
+[[fn]]
+path = "vsimd::decode_ascii_xn"
+kappa = "333c8f346678cff1df6f81507c4fa1f242499dc8392c9222c1e0526eda592446"
+at = "S=u32, V=u32"
+embedded = "5c0223d0cda1bb278f8e02143dca2a9be09bd5cc3af72bb8659c6e73841e8263"
+status = "residue"
+cause = "mir::Ty: AlswLut<u32>"
+

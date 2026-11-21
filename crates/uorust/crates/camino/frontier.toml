@@ -1,0 +1,214 @@
+# The camino register (written by `uorust crate camino@1.2.6`; do not edit): every body of
+# camino's MIR at camino 1.2.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 399
+translated = 7
+residue = 392
+
+[module.crate]
+bodies = 399
+translated = 7
+residue = 392
+
+[embedding]
+bodies = 399
+embedded = 399
+evaluable = 398
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 61
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Utf8Path::new: camino's MIR stops at type outside the lift: impl AsRef<str> + ?Sized"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: OsStr"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: Utf8Path"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Utf8PathBuf"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: OsString"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: Utf8Components<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: Utf8Component<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Iter<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Utf8Prefix<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Utf8PrefixComponent<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsString"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Utf8PathBuf::as_path: camino's MIR stops at type outside the lift: std::path::PathBuf"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::fs::Metadata"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FromBoxedPathError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FromOsStringError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FromPathBufError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Utf8Ancestors<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Utf8DirEntry"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Utf8Path::as_str: camino's MIR stops at type outside the lift: std::ffi::OsStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Utf8PathBuf::into_boxed_path: camino's MIR stops at type outside the lift: std::path::PathBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FromOsStrError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FromPathError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::TryReserveError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Utf8Path::into_path_buf: camino's MIR stops at type outside the lift: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Utf8Path::to_path_buf: camino's MIR stops at type outside the lift: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Utf8PathBuf::into_string: camino's MIR stops at type outside the lift: std::ffi::OsString"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Utf8PathBuf::new: camino's MIR stops at type outside the lift: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<str> + ?u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl AsRef<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::DirEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::FileType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::ReadDir"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::StripPrefixError"
+bodies = 1

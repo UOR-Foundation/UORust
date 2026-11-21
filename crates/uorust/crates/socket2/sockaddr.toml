@@ -1,0 +1,201 @@
+[[fn]]
+path = "socket2::STORAGE_SIZE"
+kappa = "05de632bd36161d8d17d3ce1995cab4e020f7cf48d3d1e183f16e4416310300f"
+embedded = "c53601fff9b3a9f205ec6c268c9e5aa61e21e2b6ad0cd4def37af57667665a47"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "socket2::sockaddr::<impl at src/sockaddr.rs:93:10: 93:15>::clone"
+kappa = "f4426908002fa218359f4e1d345c9c43ef34b285a128aff0fdb9d3f6ac807c2a"
+embedded = "2d0e79c9af259c730ad17e644e32c7fd9b97fff32a24bff1030ac07314c4c528"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::as_bytes"
+kappa = "9e903cc419b1b3e76634c1493befb0806b26513a1fec97227b8c7a84f791b310"
+embedded = "5c0c52dda25eed54b6334871d2ad4fba73f8d00ef2b3dee5cd69cfe69cbe7282"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::as_ptr"
+kappa = "2393c904a63c947b49012ebeaf0ac46485b2554f5cdd390aa51fa5afbd702602"
+embedded = "562e65c850aead96813f8f57dc3381d99c0d5fbeeb67f3aee947c6190ef37cbe"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::as_socket"
+kappa = "0b7e516d69d81ae97913ac907fc2f8bc1d2fa642442f205e0eaa266e4bbd18b2"
+embedded = "e845eea45114ff49c291da9bf05455ac695ed4d75736f98e22c99b25e3c3ea04"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::as_socket_ipv4"
+kappa = "11a8b2008d45c2651b0a8bf54af32661950d3f01e3b57a55bee6b883a71e6be6"
+embedded = "03eb41ee2ce522a70167f9c68cba95d2d36ce8c994472419d4cd04b6314ea6cc"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddrV4"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::as_socket_ipv6"
+kappa = "f66a7b7f6056bc1c1fffdf00b4a8ae56aac1126b975d59c83ca9841338a12bde"
+embedded = "412d707d84c09337a495a2c30ccddc08ee8194b9b2dca976c8a185f517ead09a"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddrV6"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::as_storage"
+kappa = "9e7e387c37bc17fd67bcbfd9a2e3f5181dd35a1e8e7cccdc66d93b7bc0e6944b"
+embedded = "3c5e24c2cf35738509228819191c66364d51ae63db1c0f1f427812b64116fa86"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddrStorage"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::domain"
+kappa = "af94e5d9d90d26e8535babed98e3104943a1fec71409bb6427db56ccf7671901"
+at = "Domain=u32"
+embedded = "f50bc277a7aae54ac9a2759fc71c2858788efab99ed54348b4d9b42ae3c1d142"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::eq"
+kappa = "05c133f2a439897162b1422759c3c0c25b8422d595d7913e78b2ed7bfbf810c7"
+embedded = "166251dffdc6f0871f1874207338d8003410cf164fb988088110fb1c2512f82d"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::family"
+kappa = "b2a40d7adcd5318b227f2e55a713d2e49808245fb15913c5e763eb13993456f8"
+embedded = "0bbd24f8adbe07e586513bf170948d65a9900b1c454f32deea61b57b228b74a4"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::fmt"
+kappa = "94ce881518d2f5e791dd0b00866955dc11a5b9f1bb531d2d98906be5c39b5e07"
+embedded = "d3eb15c9d6680e96beac66a17e664d36559f0137e794ca18827943fe6bcc0ada"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::from"
+kappa = "f8d4e5c577caaed5552229a31244663cd2a9979fc5dd10b57da24a45584e2492"
+embedded = "eac25bc71916c5f0b259acd2e225f5eb739d70d2334983f29b0e141ad800cedf"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::from#2"
+kappa = "802b577e5a222df48c8b590f06c5a23461eaeb15eb0c3060fcf205ca50009675"
+embedded = "59d33c4c968a931adb25479f279912e39c93345f29e4f632495c9dfafb5d6737"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::from#3"
+kappa = "80a9125ff9fb5f193f3f96effd171b59051bd6f8468c10c3f06562d61cf9cd47"
+embedded = "80a8b4e7b2779dd48343fb06f242e1a11f72c4b01718cfb2b5ffddd5847227c1"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::hash"
+kappa = "cdeb6f6b5c494776cb431052170f4104f48fc700d1fec7a992a28ac8597a3ab9"
+at = "H=u32"
+embedded = "4b093ce3d4f54f289709d284ee335593ec8d4f943b71b87f763368a7dcafb4d6"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::is_ipv4"
+kappa = "81607e6c7fdb60a933908bf3dd1718137979172ad32fa6e35b08d4904925c78a"
+embedded = "eccff34b97dc25cfae39655ad7ba6fd23610bfc90b48f72406ff4faa25691073"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::is_ipv6"
+kappa = "1d6c5e4a2395a3bcb164123169273ab594f63ebda231ed2b0cccc69560db029e"
+embedded = "5bb1217568ee62141cf1429ff532867c68187e8962ebbae6ed6d043a186d66d7"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::is_unix"
+kappa = "a63778b824bc126c02d1d6dbe45d27ebc599f966bba7af1eff84a9ca0da624e7"
+embedded = "5585327adcaa8c6d2ae04e1acbf8a2e4eb64235c434db3b5c11d2282840ff88a"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::len"
+kappa = "6b03a4b7d263b23446cb85abc2ee0e1ed0728a136870d763a22f71f694834cb4"
+embedded = "baee74b7f09aeec939a16a398873d26eeab13de62f03693125bb1428e7619f31"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::new"
+kappa = "ff8e36a72a459a30ee56c36d8cadd8679574f0f3b6d8ad5539f711999d62c45d"
+embedded = "350e17d7dda087b6f7235de20cbfb68530287ce65f50a490f29feeb865c28de2"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::set_length"
+kappa = "726500ce65ece94fd78be1a22daf7e82a65839757aa767814d39b956414208d4"
+embedded = "43d52cd4da0c9d0644fdbe21f0f3a9fadcdbc813b48f3de0ebb9cb30b74cb568"
+status = "residue"
+cause = "mir::Ty: SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::try_init"
+kappa = "cc3e7e2f9d03e27d8fbc546929147179580f89ef64e7ca621fdd1163084c853a"
+at = "F=u32, T=u32"
+embedded = "fb0dcab47355462d508650adc56787aba10c3c0a7a79ec433838f4764649c4a7"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddr::unix"
+kappa = "2eaca1749b38bcfc0b69915e782730331e04b597e8f2e851666c69c3f1e0a93c"
+at = "P=u32"
+embedded = "4ee34d8a72e7f1359bb0c9113ce9f01bfc7bdf4fc8473ae70f7c131e9aaf5817"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddr"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddrStorage::fmt"
+kappa = "9f965c6ad37239746d235457bb6842b8a34f1c303b05048c4591e62963e324ae"
+embedded = "42d8efa118be7d3883ab03128eb0dbe46e2c943066458921ef3ebd3cf6952a98"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddrStorage::size_of"
+kappa = "dae1ed2e19861154b69c4951afe6bbca2021e7f989719569d6bb06b20e710e6d"
+embedded = "9ae92144dc4d6d237004c7fad2d6aa5e995d388c3b64aba22292ef91ef9a7877"
+status = "residue"
+cause = "mir::Ty: SockAddrStorage"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddrStorage::view_as"
+kappa = "8eccd6e83a805c49967f49e85b0c5089f4fcec594c04e6f6df9f59b0c9c58650"
+at = "T=u32"
+embedded = "5d69362de7585d4f79c40794ea33f4aa747bf99a990f537d2646480ea292129a"
+status = "residue"
+cause = "mir::Ty: SockAddrStorage"
+
+[[fn]]
+path = "socket2::sockaddr::SockAddrStorage::zeroed"
+kappa = "3e273832831c6af6f9a4ee5a7da1873ca8581f5eaf0cfbd31e5fdbd2c52884f7"
+embedded = "c8fe34b1e88ce76843b3c1f72e0c5801fb0d4a88da1be4167ea9d33abb15b98a"
+status = "residue"
+cause = "mir::Ty: sockaddr::SockAddrStorage"
+

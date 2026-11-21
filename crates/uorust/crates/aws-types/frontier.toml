@@ -1,0 +1,324 @@
+# The aws-types register (written by `uorust crate aws-types@1.7.0`; do not edit): every body of
+# aws-types's MIR at aws-types 1.7.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 243
+translated = 0
+residue = 243
+
+[module.app_name]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.build_metadata]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.crate]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.endpoint_config]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.origin]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.os_shim_internal]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.region]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.request_id]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.sdk_config]
+bodies = 88
+translated = 0
+residue = 88
+
+[module.sdk_ua_metadata]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.service_config]
+bodies = 22
+translated = 0
+residue = 22
+
+[embedding]
+bodies = 243
+embedded = 243
+evaluable = 243
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: sdk_config::Builder"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: origin::Origin"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: os_shim_internal::Fs"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SdkConfig"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ServiceConfigKey<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: endpoint_config::AccountIdEndpointMode"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: os_shim_internal::Env"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: region::SigningRegionSet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: service_config::builder::Builder<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FrameworkMetadata"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Region"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: build_metadata::OsFamily"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: origin::Inner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: origin::Kind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: region::Region"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: region::SigningRegion"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: AppName"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Origin"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SigningName"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SigningRegion"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SigningRegionSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: app_name::AppName"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sdk_ua_metadata::FrameworkMetadata"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: service_config::builder::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_alphanumeric"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AccountIdEndpointMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OsFamily"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sdk_config::SdkConfig"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: service_config::ServiceConfigKey<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by RequestId"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: SigningName::from_static: aws-types's MIR stops at type outside the lift: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrorMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Headers"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Response"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Response<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_credential_types::provider::SharedCredentialsProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_credential_types::provider::token::SharedTokenProvider"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_async::rt::sleep::SharedAsyncSleep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_async::time::SharedTimeSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::auth::AuthSchemePreference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::behavior_version::BehaviorVersion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::http::SharedHttpClient"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::identity::SharedIdentityCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_runtime_api::client::stalled_stream_protection::StalledStreamProtectionConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_schema::protocol::SharedClientProtocol"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::checksum_config::RequestChecksumCalculation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::checksum_config::ResponseChecksumValidation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::error::metadata::Builder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::retry::RetryConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aws_smithy_types::timeout::TimeoutConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: build_metadata::BuildMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn service_config::LoadServiceConfig"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint_config::AccountIdEndpointModeParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint_config::EndpointUrl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint_config::UseDualStack"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: endpoint_config::UseFips"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: os_shim_internal::env::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: os_shim_internal::fs::Inner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::env::VarError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of os_shim_internal::Fs::read_to_end<impl AsRef<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of os_shim_internal::Fs::write<impl AsRef<u32>"
+bodies = 1

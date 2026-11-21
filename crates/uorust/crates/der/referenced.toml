@@ -1,0 +1,16 @@
+[[fn]]
+path = "der::referenced::Option::owned_to_ref"
+kappa = "1f3bca6bc37db0139694605425095ef23c8a59591bc93356623c682703f160c0"
+at = "T=u32"
+embedded = "cbd93339b273db394b38b3d68b3700074d51f55e406b63be678a242020c86759"
+status = "residue"
+cause = "mir::AggregateKind::Closure: referenced::<impl at src/referenced.rs:37:1: 39:19>::owned_to_ref::{closure#0}: mir::Instantiation: u32 for a parameter bounded by OwnedToRef, which u32 does not implement in core"
+
+[[fn]]
+path = "der::referenced::Option::ref_to_owned"
+kappa = "5337363a42a3e6a6f9b4c548dcf8e49c12377b17c3234cdec6ab502911965836"
+at = "T=u32"
+embedded = "8d9148b53f98fd78edfd4a3e95b445d02e1c05e24ae3cef069889ba30a9eb879"
+status = "residue"
+cause = "mir::AggregateKind::Closure: referenced::<impl at src/referenced.rs:52:1: 55:26>::ref_to_owned::{closure#0}: mir::Instantiation: u32 for a parameter bounded by RefToOwned, which u32 does not implement in core"
+

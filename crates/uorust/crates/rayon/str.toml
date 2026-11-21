@@ -1,0 +1,921 @@
+[[fn]]
+path = "rayon::find_char_midpoint"
+kappa = "7c708882909d05512181ca409c066ae9b3a655f0204cf1903fde16324c720dd6"
+embedded = "d1e9dbc3091fbaf482f30e29465bd148aea69d22801fc2ff778e43be36116047"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "rayon::is_ascii_whitespace"
+kappa = "2e5486836a2a99eb446ddbd350afe5e46bf819573432057ef7f31c7a45cdf943"
+embedded = "65d67a3af0835f9612fa2d91e2ece14a4a0ffcc9f1e0daa41f98bb275429c55c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii_whitespace"
+
+[[fn]]
+path = "rayon::is_char_boundary"
+kappa = "4f9cd199c007e236a59f05bf71f65bdb17477eaceb501c600428b4768d0cd8c3"
+differential = 7
+embedded = "02750f45a6ad92a59f00a836611aee1d29addcd568346f9a1c628c08d93f581f"
+status = "translated"
+digest = "d2d20ec41cbc844238e3b7ce72bd0ce3c844434350845b56c89739099ae16326"
+
+[[fn]]
+path = "rayon::no_carriage_return"
+kappa = "eb301e84cb041a14251007ed365921c255bd4c680eb36ed3b71ecbc570c46cdb"
+embedded = "66eeff2d7652ca6872ed5e2cfb016b5d9c944ab7665a348a2fc7e505d8d679d0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Option::unwrap_or"
+
+[[fn]]
+path = "rayon::not_empty"
+kappa = "a53dc9d119201edff885067c91842772e15f5366936c9a58e8b94e89e2fa123e"
+embedded = "06dcb1f558a4b2ada511c7d159fc040fec74496f81d9653bedd9b40cf5fb9f8b"
+status = "translated"
+digest = "d2eb2aa63589cca91e3f235152aee7c6dc2597287ae3601e0656062a897ce794"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:448:1: 448:25>::__rayon_private__"
+kappa = "baabd2f4fb2c86ef56086853eb950079f132d08be12c81b506f6234f23235ff5"
+embedded = "136234b6d90b247a97f771543663f92af89f82147b2931f907e0e4f906df5697"
+status = "residue"
+cause = "mir::Ty: private::PrivateMarker"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:448:1: 448:25>::find_in"
+kappa = "eac3f3029cf44e76741f589f0b47d3cb88e89c7c1ae7101d1042d62c11770237"
+embedded = "4fdab5371320a07de586e19e6d3bcaa254282f9e98cacdbfaaee019e26d35ca2"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::find"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:448:1: 448:25>::fold_inclusive_splits"
+kappa = "2f02590c34c31c46ae11e4767c15d674b2acab713b813d024b6b5645d925cfab"
+at = "F=u32"
+embedded = "eca7c5888059c4a6c68d17b7241fcd3c43ce6205a5178bd7bd7eaa2b2519af8d"
+status = "residue"
+cause = "mir::Ty: std::str::SplitInclusive<'_, &[char]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:448:1: 448:25>::fold_match_indices"
+kappa = "d0f7a85c4746c5510548c83611eb39f4fb7dee37fb06ce9c1f5223e761a25c40"
+at = "F=u32"
+embedded = "8f84fa9be50c40c4688912984512923809c49ebd68fadc4f1a75dcb4fe20bd97"
+status = "residue"
+cause = "mir::Ty: std::str::MatchIndices<'_, &[char]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:448:1: 448:25>::fold_matches"
+kappa = "1dcc85cd4865e6080401b95d291d60e0d8c8f97ecc9e8df581ebd1e3ef438e04"
+at = "F=u32"
+embedded = "547be4f341188749d571a65680cb47fe2712500b8aa384dc550fb83d55857715"
+status = "residue"
+cause = "mir::Ty: std::str::Matches<'_, &[char]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:448:1: 448:25>::fold_splits"
+kappa = "261728ef8cdf85eb701049b0a7ba4f0325f1e4b5c15bd392980ecd6a09640fad"
+at = "F=u32"
+embedded = "74f040bdb98241cb2de890ebe24f2cf5b5279627d0fd3325fa69dc42c11dc2f0"
+status = "residue"
+cause = "mir::Ty: std::str::Split<'_, &[char]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:448:1: 448:25>::is_suffix_of"
+kappa = "8f998c57960973c50ef01ca86af7654bde2947c0b96d67ac5897f3ca18034d5f"
+embedded = "70f34c4ced898021eb1420c3d447597d9faff4955f221705bac806cf0f38e95b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::ends_with"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:448:1: 448:25>::rfind_in"
+kappa = "63780d2e7be6f84e567ce6d5cba59f23934add64d4d943a331685ac57733facb"
+embedded = "ee60d2004a72b1fbf30b197266fe1bc5e5fe0100583bcc15c4cc0f440bf1d1a9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::rfind"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:452:1: 452:43>::__rayon_private__"
+kappa = "ca768475d8a473d4a50851465e3f4e573ef15eb619ef72ebcaf04261513c3b74"
+embedded = "7ae819cf58227adcf01360d37d0adcc0ffd07962a214429fdd3ac12eaf377f31"
+status = "residue"
+cause = "mir::Ty: private::PrivateMarker"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:452:1: 452:43>::find_in"
+kappa = "aa336e5ee914a652b54e080b51d65f3aff45dc4fd499977ee2c04ad07f52c5c9"
+at = "N=#usize_N"
+embedded = "41abf3c4a4f7614d8d25e083522244e8a516bd98abe21e8bbf9e6d6ff006d2db"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::find"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:452:1: 452:43>::fold_inclusive_splits"
+kappa = "b0cc74c7cb293746eea69d0097274cd0dc27e46a1d8e9e14074d0aa280fe48b2"
+at = "F=u32, N=#usize_N"
+embedded = "fefe86e8b1255960cc77cda9af3b87123e0fff7df447950d5324915a843b2bee"
+status = "residue"
+cause = "mir::Ty: std::str::SplitInclusive<'_, [char; #usize_N]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:452:1: 452:43>::fold_match_indices"
+kappa = "b8ad37f1697e1433e170b7766c6e3af1b6ae66de30c4820b2e18313feace659d"
+at = "F=u32, N=#usize_N"
+embedded = "2e2d30bc4fefd1d64b140ba58a7f8fafec56dc0207e3eced8c4f1bf77b2e8f56"
+status = "residue"
+cause = "mir::Ty: std::str::MatchIndices<'_, [char; #usize_N]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:452:1: 452:43>::fold_matches"
+kappa = "3bc48d70ce61b67d275a976ef785f5177aeb925e3f8a4bc5981ee7116dbb883d"
+at = "F=u32, N=#usize_N"
+embedded = "0111b843c567731fd4e74bbc357d5d78dbcea4b309f78a47ffe3b88884745038"
+status = "residue"
+cause = "mir::Ty: std::str::Matches<'_, [char; #usize_N]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:452:1: 452:43>::fold_splits"
+kappa = "736dde42f1fece2b14933f9dc658e14816cc8ba01833f65c5ad8a2ac8545aa40"
+at = "F=u32, N=#usize_N"
+embedded = "46eed8345103795c649f0e34578c4e301f658b72a0552331e8a5c7d60ea71bbe"
+status = "residue"
+cause = "mir::Ty: std::str::Split<'_, [char; #usize_N]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:452:1: 452:43>::is_suffix_of"
+kappa = "e276378abeb844b430c4f2309aff46e9b263662f4c5b046859f5308c83d18b74"
+at = "N=#usize_N"
+embedded = "5cc62375e051c8ef1e7702dd96a69b27c3d70dc34da366dbbcc5f3338d12a1ae"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::ends_with"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:452:1: 452:43>::rfind_in"
+kappa = "3399c54a861de0d99bd8a0ab52ac6ef1eb02352423e8d152a10c14ae4ec29989"
+at = "N=#usize_N"
+embedded = "9722f1885da0cfa6de9b1b4174c9957dd72af53b3715d4b0ea02de4b3faded68"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::rfind"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:456:1: 456:44>::__rayon_private__"
+kappa = "0d4a7b89506e1b16dca01becfc1a890c06a0926f0060fdadefdea996e9de027a"
+embedded = "40994bd76bf0d9f51a4101b3a9918c7757946706faf1faa3f1b56a4ef36acf75"
+status = "residue"
+cause = "mir::Ty: private::PrivateMarker"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:456:1: 456:44>::find_in"
+kappa = "0c3e574dc8973aa512737b4c0415337fb088ff4c45d537b35e2232f01b6e323c"
+at = "N=#usize_N"
+embedded = "4556e56256d7e9e6c4fb549966a7fc2d449e15f08cd5a72bc308f619123ee22b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::find"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:456:1: 456:44>::fold_inclusive_splits"
+kappa = "349782277841583d5810f6af7e89569d2a72001841864d697c7a99a1ea54e537"
+at = "F=u32, N=#usize_N"
+embedded = "c78129abb920eac2305709bfbd70d9e9a1420d22f9ee4576f93149fee498896e"
+status = "residue"
+cause = "mir::Ty: std::str::SplitInclusive<'_, &[char; #usize_N]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:456:1: 456:44>::fold_match_indices"
+kappa = "38f3a79ff3b7310ff9036ff0092bb51c092d807a4a8a81bab28c6513efb1bb08"
+at = "F=u32, N=#usize_N"
+embedded = "f2c1389d22bdbd8625f29960f01daaf17afe4c4a6eb3a12084ce764bc726fdbe"
+status = "residue"
+cause = "mir::Ty: std::str::MatchIndices<'_, &[char; #usize_N]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:456:1: 456:44>::fold_matches"
+kappa = "4857a894fe2d2a726fc767ed223c1c3a038163ebe777a5e017b7b534f32bb7b5"
+at = "F=u32, N=#usize_N"
+embedded = "9a34e4d0a29a7a695d985eb0ccd77d98cab77091bc39b89be5b154256a204e92"
+status = "residue"
+cause = "mir::Ty: std::str::Matches<'_, &[char; #usize_N]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:456:1: 456:44>::fold_splits"
+kappa = "0b08caad0cbd1b5a90081e55ed26931ce2dd52b27e6c24007915819b286683b7"
+at = "F=u32, N=#usize_N"
+embedded = "8f2b151667dc7dd655594cad434ba4c7ed30c7a8731ce8a2d70e3abdda1c3504"
+status = "residue"
+cause = "mir::Ty: std::str::Split<'_, &[char; #usize_N]>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:456:1: 456:44>::is_suffix_of"
+kappa = "fde625894e8622013919be282e94755bc6c597640590a7d7c884197a6fd9fc12"
+at = "N=#usize_N"
+embedded = "69de1eb3e2ba74200669f746bc2dfa0a4455c67c7a090ce0d9059cd4e125e2d5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::ends_with"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:456:1: 456:44>::rfind_in"
+kappa = "0a9e32df40485449d745e444f7bdadfd286ce4107e764607bf222d414a919ef6"
+at = "N=#usize_N"
+embedded = "71052626118e1089c978a012f0beab5635d80ea7f4c54ae1a3222dd4e3307e01"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::rfind"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:467:10: 467:15>::fmt"
+kappa = "44d89310d00fe71fd1e3150a08e10d5258b7e31bbe84b41ccc53e8b0f11ae274"
+embedded = "94c4364ebebc380755a225f3a2e251a5510571a21c7d85d1bb5bbd8919c21fc2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:467:17: 467:22>::clone"
+kappa = "f8535cfdeb15fdf212c7f9a04bc6a9a82ae15bd7ead037ffc74f55c38cd3bbeb"
+embedded = "55b83facdb0dbcf5fd3e63a7db673406530635e9ff4e1853c62cb2acc4ca0c8e"
+status = "residue"
+cause = "mir::Ty: str::Chars<'_>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:511:10: 511:15>::fmt"
+kappa = "2bfbd99d15a2b2ac017ebedc73a6e5c0926bfa4ea6068d7dc59c27210a58b4f7"
+embedded = "a6f06b97782a0b6b7435fab29ab142fbdec7d579eedeced46cf1485c03d051d1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:511:17: 511:22>::clone"
+kappa = "17ba9a3d9d8f24fbe165ddf4880bcba6fd653104b758312758cb8830aa3584ce"
+embedded = "ce79a991e1f1c7a1d09d857045cef5659c1294019269960d73b6555916d7c914"
+status = "residue"
+cause = "mir::Ty: str::CharIndices<'_>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:567:10: 567:15>::fmt"
+kappa = "c08acf0ddb28ca6936084ccb8e09217fdc32ce63b3a7a590dc40878160928680"
+embedded = "8acaf049afa5cb3a5fb3974cbe11555be8967f5a58aac0d0b3a3483aef5029b4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:567:17: 567:22>::clone"
+kappa = "f38c9a4277e61663afe06bb38242e8abc7c458b98572455be693dd86af567f58"
+embedded = "a7dd54363bd9778e959d0a89373220b22b491563d65741cfc918ce11eee46cad"
+status = "residue"
+cause = "mir::Ty: str::Bytes<'_>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:611:10: 611:15>::fmt"
+kappa = "0700cf3220b84ed30b3605a46d9cabd4a1b0366594ff43815be631ef45aa2fa2"
+embedded = "f15c927dc9539b5912868285bd6265788aea2e37b8523ae6976db9204a68c051"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:611:17: 611:22>::clone"
+kappa = "7d6c6d4d59cb3089b74d3eb7fda7eb983ad996320a45f210ddfe072b10a1810d"
+embedded = "850e444b9bce486230a006e976f72fa5515ce49c5daf667be33e908de5ec0187"
+status = "residue"
+cause = "mir::Ty: str::EncodeUtf16<'_>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:655:10: 655:15>::fmt"
+kappa = "4e195a6f22e50d86da3c0497894e85b1f3f29aa70381e8e698b4915e4ca413a2"
+at = "P=u32"
+embedded = "b2332eb608e29d953ad1b9c6be6d741c8c7c2140dcb54dca1126af550875812a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:655:17: 655:22>::clone"
+kappa = "4d4a145538dbcc2bbc54119e59d0d79768537f119af15102390e6988e681d48e"
+at = "P=u32"
+embedded = "945b4f429b54584b20bd50b3abd184f7636060f5f6e6a1bbd6cb0b78a4c6afae"
+status = "residue"
+cause = "mir::Ty: str::Split<'_, u32>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:680:1: 680:37>::find"
+kappa = "eb612afc1a6334b8c6f627de370a988062cbd70efac4785b8be71555045bbbe8"
+at = "P=u32"
+embedded = "e74c665c3b934f58b6825f10972ea66e6e83f9039325f3f723b0efb34bcaf484"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:680:1: 680:37>::fold_splits"
+kappa = "4b453f4510d7691ec4fe4a3d212005bc41e4600e6a7fbadb6a0ecedf677d3435"
+at = "F=u32, P=u32"
+embedded = "da704e8d11b8968207285023b2c2752e1bb20be82a6ad0904ed79c4c7102afd7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item INCL"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:680:1: 680:37>::length"
+kappa = "0a077edc4f32750715e84182a026f8794c21d7c2ffc00eede7dcd0dbdbfbfca1"
+embedded = "a1237632b7ae463f06e6da2246fccfec72a2af5b264d0dfc5474ba6f4eae231e"
+status = "translated"
+digest = "eaabb758429d7a9969c119f512a2e407fa018e2aef55da4c4ad98663298b020f"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:680:1: 680:37>::midpoint"
+kappa = "a7c0fe9a26f68aee9a46b11bede6ef531b05c69d39cdef4b7c6d9f91ab874698"
+embedded = "5ae1be162312eb6682aa1a23540cdd9624a7db04d0535aefd9f6641b25b162e1"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:680:1: 680:37>::rfind"
+kappa = "1b003a23c1ac68f73e05ad8085f95f5d81e070c7f9844da590430f7513be9abd"
+at = "P=u32"
+embedded = "02a2d90918105ef411549458325d911ec50a63f5d3f36454645456a4b0a4eb51"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:680:1: 680:37>::split_once"
+kappa = "9f46e09932c91e7a5c66e4682fd4aeac533d477f899239fb4e0b7f6761cbfee3"
+embedded = "e20053a6bd543be3a5f935982141cc1872d1604f1c889439944f5f4ea0fa7b45"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item INCL"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:727:10: 727:15>::fmt"
+kappa = "5967fc6e28f1be6e63720f61f6adf56ca0390f61726e1b9d0d7a1fccef874401"
+at = "P=u32"
+embedded = "7c4a646b889881f9df95b6cb28a898869fb79557ab8535f7de73c226aa9e1d0c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:727:17: 727:22>::clone"
+kappa = "ba783976a15b0afcbd155341a3a519304004e64eb25b62737e163b2716948ae5"
+at = "P=u32"
+embedded = "383553175068d86f54ce87f354137deec7546b4cb7fd2584a4d4b4373fa40864"
+status = "residue"
+cause = "mir::Ty: str::SplitInclusive<'_, u32>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:754:10: 754:15>::fmt"
+kappa = "da1f311c5b54bf8b98b8c953215ac6121bd1d57d4fd005dbc92e480ff404a397"
+at = "P=u32"
+embedded = "974583188f2ca92956b82d6102cd761cffde64baa4abdd2372b256a39a13f20f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:754:17: 754:22>::clone"
+kappa = "e5efcc7dabd93258f15d7d417e789584078dc75a9779adebc120da001f515779"
+at = "P=u32"
+embedded = "9426af0fa5ed65ac75eb620f418ef9b60a4e9e85b10102acc009709728ba3dfc"
+status = "residue"
+cause = "mir::Ty: str::SplitTerminator<'_, u32>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:820:10: 820:15>::fmt"
+kappa = "3e4a0341f35c4de94b21fd17d2412d1ad2fd8e33b7988550463cabfd69245402"
+embedded = "c3d51e82b9fa9f951b0dd2f64209eeed5424d2a2f3039d058d62aa7483ceaaa8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:820:17: 820:22>::clone"
+kappa = "b841dbf6be211af6c97bf011a1c9502f803372a76add24789f042faaeeceefb4"
+embedded = "0aa445e4a19ac71ad496dde1d03a4deab030b5e54ede712cf340b97591c4e598"
+status = "residue"
+cause = "mir::Ty: str::Lines<'_>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:845:10: 845:15>::fmt"
+kappa = "d83b4b16964a421a6ea795757c6afb93d02b28f98833b08dbc95c8186381f46b"
+embedded = "3af0056c4cf6ec475d3b928e8fcbee53b61c5d5c841f4bd8983ea08588e5ad18"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:845:17: 845:22>::clone"
+kappa = "db883eadfa184ac93845a0ddfc19c4be8dd70e77736ba91a2250bf2ceee15375"
+embedded = "4e4a8ab471ff8cecd9a5330f782eb5a861db2ed3bc458a33065a806105af3709"
+status = "residue"
+cause = "mir::Ty: str::SplitWhitespace<'_>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:870:10: 870:15>::fmt"
+kappa = "71d982b24bd8f2520d6b47985ebee4a02526d83fda3f97a9a92ee37d65ddb716"
+embedded = "597252b6d803c48f496bb3af74edfd5d46aa868a6de5180ca36f3efb6fb62b75"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:870:17: 870:22>::clone"
+kappa = "538c7b7557a42ad302f0feb6075876a70b9b4383cceec113c7347609c79aff9d"
+embedded = "e9eac2c2a8c32f626457d80e5e422c57464471bba51f2a53e956acc87e64df56"
+status = "residue"
+cause = "mir::Ty: str::SplitAsciiWhitespace<'_>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:895:10: 895:15>::fmt"
+kappa = "2ae1d46e6e066fd69a9e98ee7fdb7dea13c78963800c1f9420e507813b38ba7f"
+at = "P=u32"
+embedded = "477d6b50b7f3c7d55cc4c3235ab422f5347753744c20c11cf1ab32eb172df61c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:895:17: 895:22>::clone"
+kappa = "4b82fd0f5c9327cbf43399ef51b2ed9e2f3d2a980f59f0d50f41fa4666c33b18"
+at = "P=u32"
+embedded = "b7d6bf2f26d554628a4f80715af5b4538351c249baa9128e8ec7867a999f7599"
+status = "residue"
+cause = "mir::Ty: str::Matches<'_, u32>"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:951:10: 951:15>::fmt"
+kappa = "b63a5d97a312246ca61a4cdfff9d436bab617cf75e9ee95f6ffc8b48cfc49877"
+at = "P=u32"
+embedded = "856a02069d4e94cb016fb79755e340b7c9ae7b62cb112381d42ecfcb45c74ad9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::str::<impl at src/str.rs:951:17: 951:22>::clone"
+kappa = "f5f4ff8fa84fac4f6e444cc6a4b2adcb1aa91b345e744218b9a3c37eb5df0b35"
+at = "P=u32"
+embedded = "1efd5397f3bf09d732146b0eb9e04d85b44880a18cf6a6b85517c08555bd9722"
+status = "residue"
+cause = "mir::Ty: str::MatchIndices<'_, u32>"
+
+[[fn]]
+path = "rayon::str::Bytes::drive_unindexed"
+kappa = "7f5bd77a76066b37a9c432f93c32bff439c9c857d0dd3292cf96cd3b41fa404e"
+at = "C=u32"
+embedded = "55d668b8e104ecab7e48c89321f1e6b3efc598351f7d8303b6906952cca79203"
+status = "residue"
+cause = "mir::Ty: str::Bytes<'_>"
+
+[[fn]]
+path = "rayon::str::BytesProducer::fold_with"
+kappa = "30fa2635b2ff92fc78026ffb59e023a88173cf459ef7fbcc89b8613947d756f4"
+at = "F=u32"
+embedded = "59af54c18a0c82e1751b49c1289eafb9a3cb2c64f5c93bdde96633677824905f"
+status = "residue"
+cause = "mir::Ty: BytesProducer<'_>"
+
+[[fn]]
+path = "rayon::str::BytesProducer::split"
+kappa = "adfebec68794d7baf0542a19124d96e480614c9d8f016ea035d81c889e2c5c57"
+embedded = "a7da5469b0b613837714cd4c34a9a3b97f9d6893adc9bb45d73151cb48b077a8"
+status = "residue"
+cause = "mir::Ty: str::BytesProducer<'_>"
+
+[[fn]]
+path = "rayon::str::CharIndices::drive_unindexed"
+kappa = "41204c86b80bd67b5e3de67512ba56da99a9d514fddc01a0200edc2e34b3661b"
+at = "C=u32"
+embedded = "8e26c5f919658d6d47044340bea86f4322cbff73db855ad61eb6155a10e9e9af"
+status = "residue"
+cause = "mir::Ty: str::CharIndices<'_>"
+
+[[fn]]
+path = "rayon::str::CharIndicesProducer::fold_with"
+kappa = "8255ab998c03364c65a0d512894de104b83635972381458a8c75481ad2f4b03f"
+at = "F=u32"
+embedded = "16cee482705f46c46cba07387e5eae3729b42442d6c96652a909d9c341477a98"
+status = "residue"
+cause = "mir::Ty: CharIndicesProducer<'_>"
+
+[[fn]]
+path = "rayon::str::CharIndicesProducer::split"
+kappa = "9e6427191780261819bbe62c92b0dbbb72f91e6d2f8910fc5223fd80cfe031cd"
+embedded = "3f174cc8909c2c205b7b364ba6ad189735de5769cbb8979f3152d160a566f103"
+status = "residue"
+cause = "mir::Ty: str::CharIndicesProducer<'_>"
+
+[[fn]]
+path = "rayon::str::Chars::drive_unindexed"
+kappa = "bb5319b03f61d3e9bea6bfb2b0442dbd8ce4836b153f622bdf86eddffd30fd70"
+at = "C=u32"
+embedded = "7a6ed4701285da52589c12f5184b60d49a9efb5d6bce42a075de99c3b54b31a6"
+status = "residue"
+cause = "mir::Ty: str::Chars<'_>"
+
+[[fn]]
+path = "rayon::str::CharsProducer::fold_with"
+kappa = "22751c546981e1a7c979554ff8d0d9c3bd1b2cf107228fe1c92f5ca1d906fbfd"
+at = "F=u32"
+embedded = "8a68c01b4786143a54e4935cf4dc43475e8318f4bf32a8b1574019e51c61419a"
+status = "residue"
+cause = "mir::Ty: CharsProducer<'_>"
+
+[[fn]]
+path = "rayon::str::CharsProducer::split"
+kappa = "012ccf7273acca08a08f023a19f2ee8d2626fdefdd66fd61b689aced2c96fb0c"
+embedded = "888bec4c1f9346883a17eda6330d4cca203a6c492134ad6bec360e21c960a9a3"
+status = "residue"
+cause = "mir::Ty: str::CharsProducer<'_>"
+
+[[fn]]
+path = "rayon::str::EncodeUtf16::drive_unindexed"
+kappa = "c521e0251e9a4deabbf8db75a0ef426fd8f293470f0d914dd2cb9156b1811915"
+at = "C=u32"
+embedded = "75450b868bd5ff24148f9e7eb603bfa537fe4258185a19c7111dbd1ff56542ab"
+status = "residue"
+cause = "mir::Ty: str::EncodeUtf16<'_>"
+
+[[fn]]
+path = "rayon::str::EncodeUtf16Producer::fold_with"
+kappa = "9049d3b77dddcb28820a126760fc9645869a8b25889a321ba19901c8257f1fe9"
+at = "F=u32"
+embedded = "3b347606217bb74386b6eea241f7a4627b0ed5c1134d4df5e96570f71dc862fe"
+status = "residue"
+cause = "mir::Ty: EncodeUtf16Producer<'_>"
+
+[[fn]]
+path = "rayon::str::EncodeUtf16Producer::split"
+kappa = "f8f7da1f01158dabbffc5fe71536b737cc1be624a2155f49e5843af29e9a09e3"
+embedded = "1e7019e467a8da7fe80781756ad0ad3b90792561787d57834849c216e590ed7a"
+status = "residue"
+cause = "mir::Ty: str::EncodeUtf16Producer<'_>"
+
+[[fn]]
+path = "rayon::str::FN::__rayon_private__"
+kappa = "08cf747b157518470c2647dd3ba52998722b9f078f1f7234d7245ef1a498a781"
+embedded = "09a9f1e99f023f97f1355deab19c14d84f3bee9b4f131a683199ba87640ec60f"
+status = "residue"
+cause = "mir::Ty: private::PrivateMarker"
+
+[[fn]]
+path = "rayon::str::FN::find_in"
+kappa = "9d8b640aa6d7f4edc44fa0f238839cad1a18a580708462b1d8f073106565f123"
+at = "FN=u32"
+embedded = "803533f10e092f09ea3bfbf87f63f27e759638f34a1b3488facdaf7c26168727"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::find"
+
+[[fn]]
+path = "rayon::str::FN::fold_inclusive_splits"
+kappa = "a6c1f682da354ccc9a935acf9b4f46a4db2e47eff4df64a45483d82f005440c8"
+at = "F=u32, FN=u32"
+embedded = "89bd373e3374943950f7f9feff85a9e4ae8e45083233e6db77e71fe85f68b294"
+status = "residue"
+cause = "mir::Ty: std::str::SplitInclusive<'_, &u32>"
+
+[[fn]]
+path = "rayon::str::FN::fold_match_indices"
+kappa = "5eae9d19bea3d81ee25a51d31349f1504b858f33cb537be57892b0655a9118b6"
+at = "F=u32, FN=u32"
+embedded = "aedea243857174b41604d2aa2c6377288401d9be0860017dbffa164051a2e31c"
+status = "residue"
+cause = "mir::Ty: std::str::MatchIndices<'_, &u32>"
+
+[[fn]]
+path = "rayon::str::FN::fold_matches"
+kappa = "00eb9643d920de097e96232491e736a7c206924086aa448ec858ff7404ca3489"
+at = "F=u32, FN=u32"
+embedded = "fa3d53c4c5eec440785fba49f585a9209576054672d61a65aa2785a7106889bd"
+status = "residue"
+cause = "mir::Ty: std::str::Matches<'_, &u32>"
+
+[[fn]]
+path = "rayon::str::FN::fold_splits"
+kappa = "83dc8c6e386612fca947be054753e8a3ca4a56361f685fa5e3814c0af27c1add"
+at = "F=u32, FN=u32"
+embedded = "b4cf5456a2653e5e7b4990735f42f92d787b5b8916a9e87ac225d260182ae44c"
+status = "residue"
+cause = "mir::Ty: std::str::Split<'_, &u32>"
+
+[[fn]]
+path = "rayon::str::FN::is_suffix_of"
+kappa = "a0e2f79b0aefa58bdde02d955d574ed19c11b8636a7dfa74f2c58fe5b14f0857"
+at = "FN=u32"
+embedded = "ea7cd6ea2073d53b0f7d4997e53d2853a906592e926ae3e061e0fd4e3ec7a7ac"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::ends_with"
+
+[[fn]]
+path = "rayon::str::FN::rfind_in"
+kappa = "ec643dc5dc827c7afb9a893c84bb0855ea16c7dea372a32fd77b79d48e33c59e"
+at = "FN=u32"
+embedded = "6835551f7aabc5951339d9dbd9ee94cdaa8328e1b5a9d9d5e60f14d5cf4ae315"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::rfind"
+
+[[fn]]
+path = "rayon::str::Lines::drive_unindexed"
+kappa = "8cdf2bbd5abde55a11adaa3f0b1fabbbff5eb643e2f2d35fc9a561601b5a70b4"
+at = "C=u32"
+embedded = "e1debe9ae2a49be9a0b065022960cd224a5b8ff90f8adbfd6c6272d614fbff90"
+status = "residue"
+cause = "mir::Ty: str::Lines<'_>"
+
+[[fn]]
+path = "rayon::str::MatchIndices::drive_unindexed"
+kappa = "5e007418a3b7253e89ff435f471954ad067d2490ec6051e378c647978d7e453b"
+at = "C=u32, P=u32"
+embedded = "aee02b482cb1d777b6fedf358db407676482b0e5b8617e14069390ca5e3e876b"
+status = "residue"
+cause = "mir::Ty: str::MatchIndices<'_, u32>"
+
+[[fn]]
+path = "rayon::str::MatchIndicesProducer::fold_with"
+kappa = "5b7ebdf690cd5b43f382485b9ffd855aa84c57b63926cbee3052def1d92105e0"
+at = "F=u32, P=u32"
+embedded = "26941f9b66075916cd51e4a8bd13e76f1654440b8e1a04a1302f22322c208465"
+status = "residue"
+cause = "mir::Ty: MatchIndicesProducer<'_, '_, u32>"
+
+[[fn]]
+path = "rayon::str::MatchIndicesProducer::split"
+kappa = "55005a45f324fe234ee2d8fbbc6fbe7840365587beafb21855e32f0c68697ab6"
+at = "P=u32"
+embedded = "61f49e986ed0e62f2aec2a600dc7dea6fa99b21e10e7d5aa6ba29c9fbc080d58"
+status = "residue"
+cause = "mir::Ty: str::MatchIndicesProducer<'_, '_, u32>"
+
+[[fn]]
+path = "rayon::str::Matches::drive_unindexed"
+kappa = "460d445ddc8ec8181af98a6f1252c4284144d8e80ea0a15e44806dd793e03ef0"
+at = "C=u32, P=u32"
+embedded = "5958a96b8100b125d2ee72225d3bb4aa2391af04c3d333570704c68793e1c653"
+status = "residue"
+cause = "mir::Ty: str::Matches<'_, u32>"
+
+[[fn]]
+path = "rayon::str::MatchesProducer::fold_with"
+kappa = "fd657197473c16f6b131e532d4c38b57f428c0829d8159739cdadbf68c3ca367"
+at = "F=u32, P=u32"
+embedded = "41de92f6926aef4cb596736991d5801225039f4c53f65184e195111eb6e62cdd"
+status = "residue"
+cause = "mir::Ty: MatchesProducer<'_, '_, u32>"
+
+[[fn]]
+path = "rayon::str::MatchesProducer::split"
+kappa = "6c1ed3db6d68897951fc5afaa3a14b6b271914a96ecb53536154a47bae0dedf6"
+at = "P=u32"
+embedded = "c2bacd9d1b47a23ce4a29b71241ad008ec6b4fc05aab603abbe22289a06dba90"
+status = "residue"
+cause = "mir::Ty: str::MatchesProducer<'_, '_, u32>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_bytes"
+kappa = "a015f5823f9ded8985e378ca00e5a7925f1bfabb9558c06be9b2d9e2e16e6d50"
+at = "Self=u32"
+embedded = "b0763f89ed008e360add727cad7f2a3b33c83e880b1a23ca740a87b7f6a118aa"
+status = "residue"
+cause = "mir::Ty: str::Bytes<'_>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_char_indices"
+kappa = "d5feafede4ca3a83ac977d59182bd54c4b7a5cfd59e2cf1d65c71e2638a4c93b"
+at = "Self=u32"
+embedded = "4885fbbc0abffde5638ce44f48e97093db5b5ebeab9641234b6c70a2f978d4b1"
+status = "residue"
+cause = "mir::Ty: str::CharIndices<'_>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_chars"
+kappa = "2b5323325bf66d6d53e36634d6aec72d6c4ca788b64ac911644de43f8af5498f"
+at = "Self=u32"
+embedded = "bd63274ec57d0899bbe1136041215e7347a25b20f5489fd3efb23e61d9b20156"
+status = "residue"
+cause = "mir::Ty: str::Chars<'_>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_encode_utf16"
+kappa = "5f0a0792d38ed46aacc4b7f73ac3b8ca88a3c7568d84563a6a7d536078d53b70"
+at = "Self=u32"
+embedded = "94e4486e872a0bea8024cb5494b10f0833e0ab7d63bcd1f48eacc37f67ea3671"
+status = "residue"
+cause = "mir::Ty: str::EncodeUtf16<'_>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_lines"
+kappa = "60e88c883fddf875a419006a81624ba43a4a51e136333d936ed7f51f9834959b"
+at = "Self=u32"
+embedded = "6afb6e80167ea0c3efc24ab3db0eadcf3eb6a0e73385426666815b2f6ead0393"
+status = "residue"
+cause = "mir::Ty: str::Lines<'_>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_match_indices"
+kappa = "80fc62c867bc83ec5acc9692419b31c05ed0f855a811ed48484e5da98a4e1f93"
+at = "P=u32, Self=u32"
+embedded = "3566ea21db2df364bad4836661f86c19df3813ff652c26fa7f72adbc4059bbef"
+status = "residue"
+cause = "mir::Ty: str::MatchIndices<'_, u32>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_matches"
+kappa = "a89be540ddc0a71678cb825ad906ba84a52530e84a53114e1930607bd2114b0b"
+at = "P=u32, Self=u32"
+embedded = "7453afccf8e92bdf247d4c1426496026df125dab1851ff69c378f571a025804d"
+status = "residue"
+cause = "mir::Ty: str::Matches<'_, u32>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_split"
+kappa = "a684cae2015885f73953bf59ab7c755661d9568272a1925b64268754d7abecba"
+at = "P=u32, Self=u32"
+embedded = "a5ca3a105aa3158b34339a0149dc323f6bcf074eba612d9208ced1dab71f157b"
+status = "residue"
+cause = "mir::Ty: str::Split<'_, u32>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_split_ascii_whitespace"
+kappa = "dd5827f8d300e93b06f1b55f2962752ba083f4277efdaba78580bdfd1deede0b"
+at = "Self=u32"
+embedded = "c113f80d0298fbb6670dc36d6e5a0040f22933bc24b2a5c9cee34addc9ea881b"
+status = "residue"
+cause = "mir::Ty: str::SplitAsciiWhitespace<'_>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_split_inclusive"
+kappa = "3dc66312685bcc4e8ff03ed546e9d5b83d4327c4c316075d07aa9d8a31919c03"
+at = "P=u32, Self=u32"
+embedded = "3fb7a554b37778fcf0933be1ad88dd19e047087c4cf6a0b70ce39e87a7ca5aec"
+status = "residue"
+cause = "mir::Ty: str::SplitInclusive<'_, u32>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_split_terminator"
+kappa = "d26ce79eca2fb82d88637a533e7e224393cea3cac625f84d37aaa924ed8f569d"
+at = "P=u32, Self=u32"
+embedded = "a8f64da0f1d07752b609572ea1aef1e5652f8ab952cda23530373b7d862676ac"
+status = "residue"
+cause = "mir::Ty: str::SplitTerminator<'_, u32>"
+
+[[fn]]
+path = "rayon::str::ParallelString::par_split_whitespace"
+kappa = "0dbd995f86dcaa10fb46f9e7b64c2e5f0ba84eab54cfabae95fea9e337738f8b"
+at = "Self=u32"
+embedded = "32a26d6cb3aa6cbd9455147d6928299cb02a7e72b6311fb2f2c77a04fce3abc6"
+status = "residue"
+cause = "mir::Ty: str::SplitWhitespace<'_>"
+
+[[fn]]
+path = "rayon::str::Split::drive_unindexed"
+kappa = "aaa91306c867ed4193f6c61bf8d5e740ba0ce48cafaa3e2329a0a8a9dfec7f83"
+at = "C=u32, P=u32"
+embedded = "32d63a71f36708aa3393dc994c42dabe1cd64d4b3be00087e2783e90cfd93e9a"
+status = "residue"
+cause = "mir::Ty: str::Split<'_, u32>"
+
+[[fn]]
+path = "rayon::str::Split::new"
+kappa = "495306a4fb756105c7fb0b7aa953abc46b3bde99e54f5c014b308836c3e532d2"
+at = "P=u32"
+embedded = "5565977f93723b147b5b5c5603bb1f2c711c229e93c9d77da21a87ebf8e7f9e3"
+status = "residue"
+cause = "mir::Ty: str::Split<'_, u32>"
+
+[[fn]]
+path = "rayon::str::SplitAsciiWhitespace::drive_unindexed"
+kappa = "0d8bad8429ebcc057e6de5dab127bc15152a5418578b79d756f91a486eb0c496"
+at = "C=u32"
+embedded = "bc8371b20d83b50cde099fe37fa6e677dffcf19eaebbff8386c008d8acff3a92"
+status = "residue"
+cause = "mir::Ty: str::SplitAsciiWhitespace<'_>"
+
+[[fn]]
+path = "rayon::str::SplitInclusive::drive_unindexed"
+kappa = "e69f6e96597db7c1a0a1c95d03470f1d4811b259614fa4ebadd4f7fdf84674f5"
+at = "C=u32, P=u32"
+embedded = "c4fb9b6358f604a9abc0550147aff9d711462011e7172d96d3c4dacd2b89d33c"
+status = "residue"
+cause = "mir::Ty: str::SplitInclusive<'_, u32>"
+
+[[fn]]
+path = "rayon::str::SplitInclusive::new"
+kappa = "f6e1c5694bd5df6858084b9ba915cf512b009c5e7181b60cd66c7795d1051ce9"
+at = "P=u32"
+embedded = "a1c66dc0d2c18e646791fbb330666f659574f6c0ae10c7f2fea66240dd28bb07"
+status = "residue"
+cause = "mir::Ty: str::SplitInclusive<'_, u32>"
+
+[[fn]]
+path = "rayon::str::SplitTerminator::drive_unindexed"
+kappa = "c2178f0ddd19c7f47d7739f448239e82088bc183eb44330813eba2a97171659b"
+at = "C=u32, P=u32"
+embedded = "9169343913bd39e4446bfae9aac9ac81550a644b62bbf98d55e575508b52e98e"
+status = "residue"
+cause = "mir::Ty: str::SplitTerminator<'_, u32>"
+
+[[fn]]
+path = "rayon::str::SplitTerminator::new"
+kappa = "d2c78eba72ca2f8a985721619e39db17fb5617acaed4bbe9e46891da2058e3cd"
+at = "P=u32"
+embedded = "b5dbe5875416084f571c61dab1ea41c165449bdcbb36735b1559cff01e8f6fee"
+status = "residue"
+cause = "mir::Ty: str::SplitTerminator<'_, u32>"
+
+[[fn]]
+path = "rayon::str::SplitTerminatorProducer::fold_with"
+kappa = "604588d259e8a5710fa4bfd0b64af7c4dfc4002b37c9739eec755e44373be630"
+at = "F=u32, P=u32"
+embedded = "c4583c0a4ca0f719ec6be4850e94e9b09e443634618471b1f3abbf05d543624d"
+status = "residue"
+cause = "mir::Ty: SplitTerminatorProducer<'_, '_, u32>"
+
+[[fn]]
+path = "rayon::str::SplitTerminatorProducer::new"
+kappa = "df5316830dc8ce4c39698d1529e1f80863480253cfb29ae8ac94f3f0c94439eb"
+at = "P=u32"
+embedded = "fc3c9d8507d65487fb2f0b81029ec0599f123f231cdc2d07ac22f7a50fb6d36a"
+status = "residue"
+cause = "mir::Ty: str::SplitTerminatorProducer<'_, '_, u32>"
+
+[[fn]]
+path = "rayon::str::SplitTerminatorProducer::split"
+kappa = "32c5721c8303adfb09f9c60d640321922add0ba54667f55ea5d5a556ab290d93"
+at = "P=u32"
+embedded = "f78974288c8117159ec9bf99279830f9666f7403486cdfa1c02610d9f0a9a610"
+status = "residue"
+cause = "mir::Ty: str::SplitTerminatorProducer<'_, '_, u32>"
+
+[[fn]]
+path = "rayon::str::SplitWhitespace::drive_unindexed"
+kappa = "e5ddce7381b1059321dc31bca822e544ccbb27149783083fcd28c2b69e5bf23e"
+at = "C=u32"
+embedded = "307c49b2327402cd6df23a6d23734b14905f1723a9b773c021c46eaf1dbc37e6"
+status = "residue"
+cause = "mir::Ty: str::SplitWhitespace<'_>"
+
+[[fn]]
+path = "rayon::str::char::__rayon_private__"
+kappa = "8afa79b821d39968e25c1f2a6e8b594eb0a62ed4284fd4c421f3c170150c1f8f"
+embedded = "1d43f0bb3aed18da8123db9fda88504de4f94c22eb13898f73798ace2f07f16c"
+status = "residue"
+cause = "mir::Ty: private::PrivateMarker"
+
+[[fn]]
+path = "rayon::str::char::find_in"
+kappa = "22a4017d7bd0510592a5ebd6d92d1976d1cd5125aefb0415023b8a15ee338a01"
+embedded = "2a186f866748ef4be2d973bcceb4f6315b83d0012d273f07cecb2613b2b327f5"
+status = "translated"
+digest = "c8623da82bdee53e33f7175d11e1e520ad0d19edcd7fe756970d75d8d4ca4411"
+
+[[fn]]
+path = "rayon::str::char::fold_inclusive_splits"
+kappa = "4d20219fc12861cda69e9cafb7bf698685129da38916bf903023cbe945038afa"
+at = "F=u32"
+embedded = "813da4a5d28f05ca68b16f828066541f05e03ef79345ec2c90be8795b6931025"
+status = "residue"
+cause = "mir::Ty: std::str::SplitInclusive<'_, char>"
+
+[[fn]]
+path = "rayon::str::char::fold_match_indices"
+kappa = "9aab9bd7eebf1ffee2959a8d03a54ff8ca4e8b2388be1537f3f88f7f53305ba9"
+at = "F=u32"
+embedded = "1e51f0ec76ef73095e6f0ab33ca4b5b05db08fe5c1bc90d3fbe3bfed7ff1f2be"
+status = "residue"
+cause = "mir::Ty: std::str::MatchIndices<'_, char>"
+
+[[fn]]
+path = "rayon::str::char::fold_matches"
+kappa = "6ece8b015e070dbbba39237b07e1a377302be473c8bac77a104ed3b41ad98720"
+at = "F=u32"
+embedded = "3f9ad9771bed1e35be2cf2bb4cf79e9f33cc2ceac4b95473d8a907339e18de0a"
+status = "residue"
+cause = "mir::Ty: std::str::Matches<'_, char>"
+
+[[fn]]
+path = "rayon::str::char::fold_splits"
+kappa = "99779bcd35e5cb1f7cdca1ab90f0026132f60f111a28c7e21e05f467d35493be"
+at = "F=u32"
+embedded = "5582b22f2645d47252094c49e89f2ebe79fc4ee5eccc8f6f918e5dec0a54e2dd"
+status = "residue"
+cause = "mir::Ty: std::str::Split<'_, char>"
+
+[[fn]]
+path = "rayon::str::char::is_suffix_of"
+kappa = "5e4d3c056a6258347524a908cb3c50ef85138fa62bccdc198f24efd3e132d23f"
+embedded = "23ca09bf8473393fe907d00d0e19a6786f18d30b63c4141ee95cc8d319597d1b"
+status = "translated"
+digest = "94977ca69ecf45502d798bd31de182943dbe536b087db046ff57cabad9e27ebd"
+
+[[fn]]
+path = "rayon::str::char::rfind_in"
+kappa = "df0025e952ee0cde63f6266d5432fd9d3c0ea629c7e881b2d330f2443ee79a17"
+embedded = "1f6bdd8daeedb24c6bb47377bc14e10abaa8f5bf33b5ca88e58de6a38eb44b94"
+status = "translated"
+digest = "6cbbbd658f07dd9e4c653e9dfdf80c80fb1af5731d0381e4752293b934884a0e"
+
+[[fn]]
+path = "rayon::str::offset"
+kappa = "d433088a4cf255486407b5372dc7982353bce6e9f0452a694b57afaec5129e78"
+embedded = "1cb65dd36d470e6c3c6e4592b1b2b8124f4898e6350bdaddf58c0dbaf8a3d729"
+status = "translated"
+digest = "35b4282fc152dd31f31007bf9c99bbe65d2c140cf20492103fe7d8aa96d14ca7"
+
+[[fn]]
+path = "rayon::str::split"
+kappa = "f4296b390c93d67148765d8fe3bf85438f2b96361aadd58b863b0197cff0b0b6"
+embedded = "dc74a19e31bb4b1f0cb7851dffb4ecb9de6eb11f1f1d5877190d7397c318ba99"
+status = "residue"
+cause = "mir::TerminatorKind::Call: str::find_char_midpoint: rayon's MIR stops at mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "rayon::str::str::as_parallel_string"
+kappa = "2e1b177cf1b6dc0e9e849e1af3164030add4968df8b101685dd64bd8539233b0"
+embedded = "f7f1192364c3bea6683256ae6800997168034149599afeef837c976228a6b6d4"
+status = "translated"
+digest = "50125ef185373292fe33a54231cc2221c331a111a1faf09ac128e13e03a4c6c0"
+

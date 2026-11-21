@@ -1,0 +1,94 @@
+# The displaydoc register (written by `uorust crate displaydoc@0.2.7`; do not edit): every body of
+# displaydoc's MIR at displaydoc 0.2.7, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 23
+translated = 0
+residue = 23
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.attr]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.expand]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.fmt]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 23
+embedded = 23
+evaluable = 23
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: attr::Display"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WhereClause"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::WhereClause"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PredicateType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VariantDisplay"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::AttrsHelper"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attr::VariantDisplay"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::PredicateType"
+bodies = 1

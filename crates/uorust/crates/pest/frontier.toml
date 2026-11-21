@@ -1,0 +1,1435 @@
+# The pest register (written by `uorust crate pest@2.9.6`; do not edit): every body of
+# pest's MIR at pest 2.9.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 885
+translated = 2
+residue = 883
+
+[module.error]
+bodies = 49
+translated = 0
+residue = 49
+
+[module.iterators]
+bodies = 73
+translated = 0
+residue = 73
+
+[module.parser_state]
+bodies = 113
+translated = 2
+residue = 111
+
+[module.position]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.pratt_parser]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.prec_climber]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.span]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.stack]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.token]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.unicode]
+bodies = 544
+translated = 0
+residue = 544
+
+[embedding]
+bodies = 885
+embedded = 885
+evaluable = 885
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: ucd_trie::TrieSetSlice<'_>"
+bodies = 283
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: parser_state::ParserState<'_"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: Position<'_>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: error::Error<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: ParseAttempts<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Stack<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: span::Span<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Pairs<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: iterators::pair::Pair<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: pair::Pair<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: position::Position<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ParsingToken"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Span<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: iterators::pairs::Pairs<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ParseAttempt<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iterators::pairs_builder::PairsBuilder<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: iterators::tokens::Tokens<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: parser_state::ParseAttempts<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: pratt_parser::Affix"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CallLimitTracker"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FlatPairs<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PrattParserMap<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RulesCallStack<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: iterators::flat_pairs::FlatPairs<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pratt_parser::Op<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: pratt_parser::PrattParserMap<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: prec_climber::Assoc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: token::Token<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: InputLocation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LineColLocation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ParserState<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::LineColLocation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser_state::BorrowedOrArc<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser_state::ParsingToken"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser_state::RulesCallStack<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pratt_parser::Assoc"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: pratt_parser::PrattParser<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Affix"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomicity"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ErrorInner<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ErrorVariant<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LimitKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Lookahead"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MatchDir"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PrecClimber<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Token<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iterators::line_index::LineIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser_state::Atomicity"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: pratt_parser::ConstPrattParser<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: prec_climber::Operator<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: span::Lines<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stack::Stack<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::ALPHABETIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::BIDI_CONTROL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::CASED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::CASE_IGNORABLE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::CHANGES_WHEN_CASEFOLDED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::CHANGES_WHEN_CASEMAPPED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::CHANGES_WHEN_LOWERCASED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::CHANGES_WHEN_TITLECASED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::CHANGES_WHEN_UPPERCASED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::DASH: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::DEFAULT_IGNORABLE_CODE_POINT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::DEPRECATED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::DIACRITIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::EMOJI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::EMOJI_COMPONENT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::EMOJI_MODIFIER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::EMOJI_MODIFIER_BASE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::EMOJI_PRESENTATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::EXTENDED_PICTOGRAPHIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::EXTENDER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::GRAPHEME_BASE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::GRAPHEME_EXTEND: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::GRAPHEME_LINK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::HEX_DIGIT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::HYPHEN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::IDEOGRAPHIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::IDS_BINARY_OPERATOR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::IDS_TRINARY_OPERATOR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::ID_CONTINUE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::ID_START: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::JOIN_CONTROL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::LOGICAL_ORDER_EXCEPTION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::LOWERCASE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::MATH: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::NONCHARACTER_CODE_POINT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::OTHER_ALPHABETIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::OTHER_DEFAULT_IGNORABLE_CODE_POINT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::OTHER_GRAPHEME_EXTEND: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::OTHER_ID_CONTINUE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::OTHER_ID_START: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::OTHER_LOWERCASE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::OTHER_MATH: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::OTHER_UPPERCASE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::PATTERN_SYNTAX: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::PATTERN_WHITE_SPACE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::PREPENDED_CONCATENATION_MARK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::QUOTATION_MARK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::RADICAL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::REGIONAL_INDICATOR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::SENTENCE_TERMINAL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::SOFT_DOTTED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::TERMINAL_PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::UNIFIED_IDEOGRAPH: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::UPPERCASE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::VARIATION_SELECTOR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::WHITE_SPACE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::XID_CONTINUE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::binary::XID_START: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::CASED_LETTER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::CLOSE_PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::CONNECTOR_PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::CONTROL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::CURRENCY_SYMBOL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::DASH_PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::DECIMAL_NUMBER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::ENCLOSING_MARK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::FINAL_PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::FORMAT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::INITIAL_PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::LETTER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::LETTER_NUMBER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::LINE_SEPARATOR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::LOWERCASE_LETTER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::MARK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::MATH_SYMBOL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::MODIFIER_LETTER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::MODIFIER_SYMBOL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::NONSPACING_MARK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::NUMBER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::OPEN_PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::OTHER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::OTHER_LETTER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::OTHER_NUMBER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::OTHER_PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::OTHER_SYMBOL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::PARAGRAPH_SEPARATOR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::PRIVATE_USE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::PUNCTUATION: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::SEPARATOR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::SPACE_SEPARATOR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::SPACING_MARK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::SURROGATE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::SYMBOL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::TITLECASE_LETTER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::UNASSIGNED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::category::UPPERCASE_LETTER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ADLAM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::AHOM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ANATOLIAN_HIEROGLYPHS: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ARABIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ARMENIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::AVESTAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BALINESE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BAMUM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BASSA_VAH: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BATAK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BENGALI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BHAIKSUKI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BOPOMOFO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BRAHMI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BRAILLE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BUGINESE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::BUHID: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CANADIAN_ABORIGINAL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CARIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CAUCASIAN_ALBANIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CHAKMA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CHAM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CHEROKEE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CHORASMIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::COMMON: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::COPTIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CUNEIFORM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CYPRIOT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CYPRO_MINOAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::CYRILLIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::DESERET: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::DEVANAGARI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::DIVES_AKURU: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::DOGRA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::DUPLOYAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::EGYPTIAN_HIEROGLYPHS: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ELBASAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ELYMAIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ETHIOPIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::GEORGIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::GLAGOLITIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::GOTHIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::GRANTHA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::GREEK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::GUJARATI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::GUNJALA_GONDI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::GURMUKHI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::HAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::HANGUL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::HANIFI_ROHINGYA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::HANUNOO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::HATRAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::HEBREW: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::HIRAGANA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::IMPERIAL_ARAMAIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::INHERITED: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::INSCRIPTIONAL_PAHLAVI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::INSCRIPTIONAL_PARTHIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::JAVANESE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KAITHI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KANNADA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KATAKANA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KAWI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KAYAH_LI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KHAROSHTHI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KHITAN_SMALL_SCRIPT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KHMER: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KHOJKI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::KHUDAWADI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LAO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LATIN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LEPCHA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LIMBU: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LINEAR_A: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LINEAR_B: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LISU: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LYCIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::LYDIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MAHAJANI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MAKASAR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MALAYALAM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MANDAIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MANICHAEAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MARCHEN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MASARAM_GONDI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MEDEFAIDRIN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MEETEI_MAYEK: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MENDE_KIKAKUI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MEROITIC_CURSIVE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MEROITIC_HIEROGLYPHS: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MIAO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MODI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MONGOLIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MRO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MULTANI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::MYANMAR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::NABATAEAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::NAG_MUNDARI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::NANDINAGARI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::NEWA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::NEW_TAI_LUE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::NKO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::NUSHU: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::NYIAKENG_PUACHUE_HMONG: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OGHAM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_HUNGARIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_ITALIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_NORTH_ARABIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_PERMIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_PERSIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_SOGDIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_SOUTH_ARABIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_TURKIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OLD_UYGHUR: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OL_CHIKI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ORIYA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OSAGE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::OSMANYA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::PAHAWH_HMONG: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::PALMYRENE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::PAU_CIN_HAU: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::PHAGS_PA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::PHOENICIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::PSALTER_PAHLAVI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::REJANG: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::RUNIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SAMARITAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SAURASHTRA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SHARADA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SHAVIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SIDDHAM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SIGNWRITING: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SINHALA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SOGDIAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SORA_SOMPENG: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SOYOMBO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SUNDANESE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SYLOTI_NAGRI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::SYRIAC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TAGALOG: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TAGBANWA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TAI_LE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TAI_THAM: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TAI_VIET: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TAKRI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TAMIL: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TANGSA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TANGUT: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TELUGU: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::THAANA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::THAI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TIBETAN: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TIFINAGH: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TIRHUTA: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::TOTO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::UGARITIC: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::VAI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::VITHKUQI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::WANCHO: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::WARANG_CITI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::YEZIDI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::YI: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: unicode::script::ZANABAZAR_SQUARE: type outside the lift: ucd_trie::TrieSetSlice<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc4: &Atomic<bool>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: alloc::str::replace"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: error::Error::enumerate: pest's MIR stops at mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: pest_stack_guard::remaining_stack"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BorrowedOrArc<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LineIndex"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Op<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Operator<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QueueableToken<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Tokens<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::iter::Iterator<Item = &str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn core::ops::Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ErrorInner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ErrorVariant<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::InputLocation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iterators::pairs_builder::BuilderNode<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser_state::CallLimitTracker"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser_state::LimitKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser_state::Lookahead"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser_state::MatchDir"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser_state::ParseAttempt<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser_state::SpanOrLiteral<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: prec_climber::PrecClimber<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: span::LinesSpan<'_>"
+bodies = 1

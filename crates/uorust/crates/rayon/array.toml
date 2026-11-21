@@ -1,0 +1,78 @@
+[[fn]]
+path = "rayon::array::<impl at src/array.rs:14:1: 14:84>::into_par_iter"
+kappa = "15f9c8e25495b98d77049334bdf3e00d26d2cb407a93c316ac58263894a30d2e"
+at = "N=#usize_N, T=u32"
+embedded = "f4cccda566ae719dc282b1cd8e807c12b4a3b1cd3d3c1dcd164791ea3710dbdd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl at src/slice/mod.rs:776:1: 776:57>::into_par_iter: rayon's MIR stops at mir::Rvalue::Aggregate: of TupleListNatNatNat"
+
+[[fn]]
+path = "rayon::array::<impl at src/array.rs:23:1: 23:88>::into_par_iter"
+kappa = "59d965a409a8cf73ae653f3f4f1585e97634041db3194072d320634ea20705b1"
+at = "N=#usize_N, T=u32"
+embedded = "35c0d6b987c1a949fe637935fee6c4d9f09e1488b87a563d0f9a9e968073214c"
+status = "residue"
+cause = "mir::Ty: slice::IterMut<'_, u32>"
+
+[[fn]]
+path = "rayon::array::<impl at src/array.rs:32:1: 32:62>::into_par_iter"
+kappa = "c320fee5766f81c2d3cf9fff75eb094654935cc470240f04356adbb399f8875b"
+at = "N=#usize_N, T=u32"
+embedded = "3edf508a6f7c88ed664d248c9e2b97286cc0562e2eb04c2798b80b62a63d79c3"
+status = "residue"
+cause = "mir::Ty: array::IntoIter<u32, #usize_N>"
+
+[[fn]]
+path = "rayon::array::<impl at src/array.rs:42:10: 42:15>::fmt"
+kappa = "6dd3bd4df41649aacc27c80b5e008d47709ad86fbc31c36e9538e9144e1f62aa"
+at = "N=#_N, T=u32"
+embedded = "6b8f09a59a0797c2622f40c68aa24d24fbdeed235ca79c4c7cce69029e4d7c02"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "rayon::array::<impl at src/array.rs:42:17: 42:22>::clone"
+kappa = "d3a6798191fea6eeaeb21288ccb5d496746290a2844356e0afc199c0d9ba238f"
+at = "N=#_N, T=u32"
+embedded = "f67cfccaac45f57cd31c22181f907b258f88437c56da39be3a523243e8caadad"
+status = "residue"
+cause = "mir::Ty: array::IntoIter<u32, #_N>"
+
+[[fn]]
+path = "rayon::array::IntoIter::drive"
+kappa = "ff062f2e6dc797d7ec136d6b10c99d9f188f300cc77aa5b3cb3164f0b2c91016"
+at = "C=u32, N=u32, T=u32"
+embedded = "1330965738136514fec1756f8158cc03229067bbb39c9ec697f06f862cd65813"
+status = "residue"
+cause = "mir::Ty: array::IntoIter<u32, u32>"
+
+[[fn]]
+path = "rayon::array::IntoIter::drive_unindexed"
+kappa = "50c7aab64ce4a452d3268c011b8428bfc9f33df7a02772a1e1262e6c0b94184e"
+at = "C=u32, N=u32, T=u32"
+embedded = "bee3959b946bdb65ab7adf53196a6266248c6e0bb783b71dd17a5e0114bc3c5a"
+status = "residue"
+cause = "mir::Ty: array::IntoIter<u32, u32>"
+
+[[fn]]
+path = "rayon::array::IntoIter::len"
+kappa = "1739dccad55301c49bfe0cff70f24384a44d0176a46cd5590fc3fe6f9eed5805"
+embedded = "d8910379d7bd10f726f73a9a4c023e6e45355687b124dd5b7276701e2197b962"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "rayon::array::IntoIter::opt_len"
+kappa = "d93e6b1dd19273ef1d06c4a9b5b8e98e54f4258ebfbf0125de764732c38c6e40"
+embedded = "dfafac4c74f29c8c997b8da85a40be165815052196403bf0440f02e21a5855e0"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "rayon::array::IntoIter::with_producer"
+kappa = "1455e4c78750df08c9c0396ecdeb2d81e0a7f5b398771d10ce3e1709481f11c3"
+at = "CB=u32, N=#usize_N, T=u32"
+embedded = "1c137d133344ebf1d888e875b7db06ff6dd459d21750e26b2a8178dafce46fc2"
+status = "residue"
+cause = "mir::Ty: array::IntoIter<u32, #usize_N>"
+

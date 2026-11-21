@@ -6187,7 +6187,7 @@ fn dump_target(dumps: &Path) -> Result<(u32, Option<bool>), UorustError> {
         reason,
     };
     let text = read_text(&file).map_err(|e| bad(e.to_string()))?;
-    let doc: toml::Table = text.parse().map_err(|e| bad(format!("{e}")))?;
+    let doc: toml::Table = toml::from_str(&text).map_err(|e| bad(format!("{e}")))?;
     let width = doc
         .get("pointer_width")
         .and_then(toml::Value::as_integer)

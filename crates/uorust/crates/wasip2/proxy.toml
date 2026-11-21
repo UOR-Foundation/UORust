@@ -1,0 +1,1483 @@
+[[fn]]
+path = "wasip2::_export_handle_cabi"
+kappa = "6a014861f5d9da9e95579c785eedd52bcbe64eae39ddaedad27da2c1ba270b1f"
+embedded = "67c2ad1e75ce4638217095997b968e140e766e7bc38c7d94478584514b14580f"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingRequest"
+
+[[fn]]
+path = "wasip2::handle"
+kappa = "49f7df4bd4209ced86be90dc1f49591ec94ac072cee5c6a9f937a11a523a3099"
+embedded = "c01d32dbfac20b91cd5df099635723c3f0a5eb7c93951d4abb03e7c0506b55db"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::FutureIncomingResponse"
+
+[[fn]]
+path = "wasip2::handle::wit_import2"
+kappa = "6b87641608da26a4bdfed142472bbdd94c4338b003f6d5b8b71116c41f02f928"
+embedded = "339b73e7cf09a27d94b187b3d8d8e2f4dee1cebc3bae6dc9b2216c99181e2e00"
+status = "translated"
+digest = "3a022f5c41daffbab12f5f97261c41e6dec6c5245e14991dff5973891c9816ca"
+
+[[fn]]
+path = "wasip2::http_error_code"
+kappa = "361bef2e7c68b6ca818781a19c8037d45c5507efe56e5e38f180f1d94660449b"
+embedded = "9a9103f635e7a6b6f702a09869304d6d4fbd2bc6e39a5f75c6b08de6544484f2"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::ErrorCode"
+
+[[fn]]
+path = "wasip2::http_error_code::wit_import1"
+kappa = "cfca4cdbfe164369107ca427604429123093cd40dd700840ed2f80be02688277"
+embedded = "16e8446d6b23ddcebc243f64f73ff116c4f61d495a6ec7b4220bf793f7b54b34"
+status = "translated"
+digest = "887fc8866bd7ea9d90e76c67d05de1255091fd1788cc104db66307e958a574e1"
+
+[[fn]]
+path = "wasip2::proxy::__link_custom_section_describing_imports"
+kappa = "d455df5aafcb33cfb4bae4e2643d3b6eb07b3f65117f907a9b0d4767d9624e5d"
+embedded = "b3d4d2a51981f9f3cc90ccb1ecc1fcea1e0454fd6784eec140f576a7b64c4e4e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: wit_bindgen::rt::maybe_link_cabi_realloc"
+
+[[fn]]
+path = "wasip2::proxy::_rt::<impl at src/proxy.rs:7064:5: 7064:46>::as_i64"
+kappa = "a1d28a446326cdbb8bb850a93081cf7faafb78c7f24c82068d99dc4f0d3daf03"
+at = "T=u32"
+embedded = "981fac8e96385bf7ed39bbcae01fc5b5c5d3334fa0e0cf0b0832e6091d9d4d00"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsI64, which u32 does not implement in core"
+
+[[fn]]
+path = "wasip2::proxy::_rt::<impl at src/proxy.rs:7087:5: 7087:46>::as_i32"
+kappa = "9d5eb263aaeee867eb7481f90e795086dc85d3263d3a9ad74571ec65f58d8a80"
+at = "T=u32"
+embedded = "37f441aad662e4aee7d8dd01983259a21aed1a4cd9b90e3cdcacfc463759ac70"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as proxy::_rt::AsI32>::as_i32"
+
+[[fn]]
+path = "wasip2::proxy::_rt::Resource::drop"
+kappa = "930ece8e7d475e292b3129b2c79be3e84dd959c2ed91505b7a4ade047b8a2d3e"
+embedded = "23ecbd8794c5c86838d1bc73d77d5d945675e25467ef7ad472c6e57dadcda287"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "wasip2::proxy::_rt::Resource::fmt"
+kappa = "3bde40b6a0551c8dac1c059a6688d3901010d7322bfc61afe75efa3f5a331434"
+embedded = "c993e58f96bf1e308c4079c4a69073b3e453be5d6694f64111d28cc3564c5696"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::_rt::Resource::from_handle"
+kappa = "53cfafb4bd857f04ad5b473198e625fde449c6a0fb5b8a8d1ab0dcc6b4a570ca"
+at = "T=u32"
+embedded = "8e09ffa54563d030a57ffd32807603c53882fa487da59019b0a721f53721d5cd"
+status = "residue"
+cause = "mir::Ty: proxy::_rt::Resource<u32>"
+
+[[fn]]
+path = "wasip2::proxy::_rt::Resource::handle"
+kappa = "22807e1b76e1f528d4f11b22e3bd21f492dd1962c92a1f83c0d223fab7e63cbf"
+embedded = "56af3e4a2203527fcb9830385416aaf164c78748185ae944f802b32c9b329dc0"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "wasip2::proxy::_rt::Resource::take_handle"
+kappa = "8820a8baa55d43c06a79aa64454b7fac9f6283f9488b2050e09f3a443a874b55"
+embedded = "b0e563d149d678edcb873cb1a208901d6e38e3f2efeac15bc6c12a14603e10f2"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "wasip2::proxy::_rt::as_i32"
+kappa = "d18194aae27dde2e4e08b3694b1d4f3b2c8e126e635a9afd1fb14ec160c57e84"
+at = "T=u32"
+embedded = "17b44ff4d29f0d1504b074e934ad83d5cbad47029b63af452740791750fcf61a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as proxy::_rt::AsI32>::as_i32"
+
+[[fn]]
+path = "wasip2::proxy::_rt::as_i64"
+kappa = "0c63132ac7c44f072025100ba244026e49df093a4e57cb559aa841ea8debe8a7"
+at = "T=u32"
+embedded = "494216cca76b2fa0d2f6532f8d757e36d87d65b0fa0f401a3119a41aef08dd47"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by AsI64, which u32 does not implement in core"
+
+[[fn]]
+path = "wasip2::proxy::_rt::bool_lift"
+kappa = "f365682950a0db425b6aa64d89f97b5ee88163679e22c2e8d1c8ec2b1384ea2a"
+embedded = "db3a30b46996cbdb12de757eee302d5aceef40e1e0635a30c8b220e0c78e5a5b"
+status = "translated"
+digest = "bdb59d0959a96b733188579f4e1c3f77b629b13429b84b0449cc34d90f5d8587"
+
+[[fn]]
+path = "wasip2::proxy::_rt::cabi_dealloc"
+kappa = "2a33cc3c18fde40a2ea3a6c5bd924b711e697b1aa4c814e431f86791cc2e7897"
+embedded = "07c800b4ec0ed6d9079daf88079638b5abca3e5cb31a33d2dc4f2cd95d624201"
+status = "residue"
+cause = "mir::Ty: core::alloc::Layout"
+
+[[fn]]
+path = "wasip2::proxy::_rt::char::as_i32"
+kappa = "06990f027ec57ba4e41cfdfc5f3555c62b7b7a338710d571fb238402c14938fe"
+embedded = "3604e1e2ec9c367f7e4cdb7b12f50ece09a2e5cd5adc4c0e502c0ce35677a1af"
+status = "translated"
+digest = "8e4d71f95916ce6e4957ba4c998a2600f893fc4e33426b3d8da8a3baf15ae3e1"
+
+[[fn]]
+path = "wasip2::proxy::_rt::i16::as_i32"
+kappa = "b755cb8d5c958f60ee42775d01d09a37d207647545a78445d5bd5a92594e4a75"
+embedded = "67223c04f96ff3a61557c19acd9265a19a52c1ead8bba39c58c1de5b7268991a"
+status = "translated"
+digest = "8940d77502e212a48038fcbdb2f5296e392c319c473fbf3083cb13c64da4f40f"
+
+[[fn]]
+path = "wasip2::proxy::_rt::i32::as_i32"
+kappa = "d3bfaa02389c2ac4247bb182977c2be82d483b70228e7603e4546d159eb02250"
+embedded = "f0f0508ba4c0e05fea0180c4c48f0285433bfac5ec26a6a759e637f30e049095"
+status = "translated"
+digest = "fb3d1dd523a0485f1a83dac9369c7d06732f9598b182f1437d7f1edaf461b6c9"
+
+[[fn]]
+path = "wasip2::proxy::_rt::i64::as_i64"
+kappa = "4c4f44a7efd77eae7a993d4d9d74edc090fa581fd20afadb62a5844f14aba916"
+embedded = "6835d6b63639c44e853cb31637d72657f69029fc07068871fe8a5018b8efd016"
+status = "translated"
+digest = "ea4381c6e53f1dc77abd54ee2538f83cca797a6f4e4d737f3eaee1b0beb6dff9"
+
+[[fn]]
+path = "wasip2::proxy::_rt::i8::as_i32"
+kappa = "9c451d3fe695d7ad9d1eb4a8bb427190a4c980f2de9a8ef7130c94912d0b75d9"
+embedded = "ef4ef21f00eda8be1cab1129fa2104324132e595c476f8ce00dd460571944abb"
+status = "translated"
+digest = "400829cb8afc65b98ce95f27c123cd9ea703b0e881874c52082242b6ccc39ca8"
+
+[[fn]]
+path = "wasip2::proxy::_rt::invalid_enum_discriminant"
+kappa = "543dedc6b5d3c775f3ced4f83dced95f89a258a504bbf7e7144e64e3805498b3"
+at = "T=u32"
+embedded = "93ae3bda20cc5366661dddbb965733d1a2de011f5d2dd741f00d8f9fdad1d8a1"
+status = "translated"
+digest = "73989cf190cdf6d37f723a64861a259db1dd22e75bde5ff3845b0813a6ad8ecb"
+
+[[fn]]
+path = "wasip2::proxy::_rt::string_lift"
+kappa = "b5519a68abba37dce2e2c9f1dabb7edba9d66e400e807518093bf479475c4e0c"
+embedded = "790aa7a4d7af3eb9e1993da68c26a5ef798c91f1d66842fd752b43f5455470d7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::from_utf8_unchecked"
+
+[[fn]]
+path = "wasip2::proxy::_rt::u16::as_i32"
+kappa = "0e8caf3acaeb1846ca1e92edd8019e1df5f313e19e52eaaae4f43567ac2bacfa"
+embedded = "fcb3fb7244baf7e8fceaf79e6f38c92703cc8f640479da8e7b4aaec4f24e402e"
+status = "translated"
+digest = "8e7e8614a11681a9b5ee3a9c44dd720fd6f6599442ebf8f56992f1466fd08b8c"
+
+[[fn]]
+path = "wasip2::proxy::_rt::u32::as_i32"
+kappa = "b5846945be92fc1b64bc7b85b1e2b679f8edb359c18ee7b667eed1afeff51be0"
+embedded = "3657c3d12a7dc09369b0e698e81bbbe302c7c5234a35978510f947b3eb7876ab"
+status = "translated"
+digest = "60f67a8a2f9eb65e43d78cabfde0cfe1f9579d1a7c783be488b6bcca097d187c"
+
+[[fn]]
+path = "wasip2::proxy::_rt::u64::as_i64"
+kappa = "59c2a724aa7733e9bf70a741196b9ba76a9c8c42a7876fdafc49e5ca8853afb1"
+embedded = "785bbf6ff3683f9be0c11b8523067f8909459ed862f76ab76b7d914fbc5b1cf7"
+status = "translated"
+digest = "2bbee76ee49b68894b67b3d3135871d36090044e85fc92a057bdc758a320e159"
+
+[[fn]]
+path = "wasip2::proxy::_rt::u8::as_i32"
+kappa = "d83253546c83283deb8ee270189c47bf24ce42d486433d2be0bbaca288e7d256"
+embedded = "77332a294fe16ac2026b165db1e05f1131cb1312e5685954c5aca5b7f23a4e71"
+status = "translated"
+digest = "f26766b32b4d23abe55d55aab86411dc6d281ffc1ba699a5df5296de7a47ffa2"
+
+[[fn]]
+path = "wasip2::proxy::_rt::usize::as_i32"
+kappa = "15538f2b8b347cd2582c089e96599ff6e72f5c51616e46dffa1c8821500d5236"
+embedded = "0f04404ba7ff7a14c475582aab132fa13b224b45b66029c70bfc2c96d4698654"
+status = "translated"
+digest = "fb5462e5db0f2d4bba8c436fe0b009cae508e3c4410e70b5910a87eb02f2a475"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:110:22: 110:27>::clone"
+kappa = "69d6a67f3d005deff090c2eadbd254ef5b9946bd6194508ab1462405a788021c"
+embedded = "e9525c51d10eff206252c41066c6826a51c73e95ce167a3777184dd2578f2e3c"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::DnsErrorPayload"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:127:22: 127:27>::clone"
+kappa = "4dc1315a57579e040e2ae1a6e87f7cbd02bd5d1420cb28483d0c76fd46e26495"
+embedded = "9f461ac6ac237cc6b300d09df58df5ffe8c30bb0044e3fe63a9be530e4b90615"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::TlsAlertReceivedPayload"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:144:22: 144:27>::clone"
+kappa = "cdf3f3dda52aa16e1ccd5538400345f63384a9497575856fa0c6216d48fff84b"
+embedded = "48ccde0f3856128084ba897793ffa907f3ab3c84f705805e8a276e763390e579"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::FieldSizePayload"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:162:22: 162:27>::clone"
+kappa = "46cb45ac51eff9cd1dab80463360d3e75f490b3df0e761315d7fb8e61269b48c"
+embedded = "a91d1849e34786e5d592925fc06ac24ab22aed8dd2731d33950ee69f2f6a353b"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::ErrorCode"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:374:22: 374:27>::clone"
+kappa = "3b41c4b16f0c74c60cd4b643c0ee6b391a12427bc5c69be658938d5313486acb"
+embedded = "dac72091c761a8c46c7f1a9df20abb4b0554e8600e8d6c5079f30429a4674e38"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::HeaderError"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:443:22: 443:27>::fmt"
+kappa = "41f07016d163eacb47afc38604504c115b5d8ed80cf68fc7ae4168a178c595f3"
+embedded = "fa8f1432ffd4c1a5f136b8f81d940415672a07c7ba599dff82aa17837562fc70"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:464:13: 464:53>::drop"
+kappa = "0bb5fe7943ee1f5d3825db89611c1543fde30114ccf8c15cc842462f9b3b6f9f"
+embedded = "e1b1d526fbb7adf101fc7486f76e9e8dec56f69acf2d5610d2de82dc4a91dc48"
+status = "translated"
+digest = "0dad98818972fc807c0ae78183ae6c906645206846ce528ae182cffdf419ffd4"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:464:13: 464:53>::drop::drop"
+kappa = "d9c12e674c8581d41692597e656ac4b3cef0ed655b1338c1d945c452cb6ae6ef"
+embedded = "e589695671d05ecaf3a97c407c965d13fcdf0804384f00eacb297b1a5e15b2b7"
+status = "translated"
+digest = "3964f411d1806a63f4744e5e556d5492a9c85eada5103fb1929fde1c894dd7e4"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:487:22: 487:27>::fmt"
+kappa = "719797711fbb99fff0fd99bd63f4ea0e7f6b096cdcc0becbee696b4e8379c368"
+embedded = "fcdc11d5f655f34e4016756a560c653e0333cefe0e679cebf15da523c9c874e8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:508:13: 508:62>::drop"
+kappa = "722469d150f206ad6296358d7afe3fd91706f52a3a347ebf4d5fd617b316dc1c"
+embedded = "52524a7b3c376721a5fa8c29d9b2618885bf3888f01595eb00d2dfe1765877e2"
+status = "translated"
+digest = "4b8a889041fe3584a508d76ed22d6d590726fd898b5c587f01a774f28e3bff39"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:508:13: 508:62>::drop::drop"
+kappa = "e8cf19be6aac8cb2d8da4f53009114007074345b23dbe79bda9fbabd3323a823"
+embedded = "e8a13730da50b25968b756e9f33056446fa7699be95b3e9fc07aa091935786ea"
+status = "translated"
+digest = "b46a4b2326ec6337511cbbaa5c67b2d8f96e9ae6ebbe0c10b983a5029f1ff1a2"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:527:22: 527:27>::fmt"
+kappa = "75ab00d71371e8241629098ae58660e92381137599bd3e32850de275882ddd5b"
+embedded = "33bcecf24fd6920590dd433e60b068b13b7b41473178151218fe62e177f71bfa"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:548:13: 548:62>::drop"
+kappa = "6345783c07e0db6af5242d1de91796c1467029d45c5ce8d06d3fcd72403cfebd"
+embedded = "8d2d53d6a7e7f99d28afd3abf02272d71f7435140c42e18d295d939b3e6de660"
+status = "translated"
+digest = "064bfdfb9b13a20ac381db83a2ccdb182081461b8396993a1e3ac85ab10194ef"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:548:13: 548:62>::drop::drop"
+kappa = "31d1cced1c0c12280bfcafae5235b9e5bb402f0960422e6d845e4e538cba3b88"
+embedded = "784c4f278068b2d008efa21ef3c3ff7499bfddb4f0c768f0da192634ad846ed6"
+status = "translated"
+digest = "4b78bfc4930afb895bf5e9425e0828e876a8adade2fdd2559bb534a97d90f5bb"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:54:22: 54:27>::clone"
+kappa = "2dd810dd89d8887c0b371630c7922007e26651ffd7baf9dc7a83044ebad1be6c"
+embedded = "7d0f5982b224d8d43cbfe2826f663c8939f2ea7d850061985509d13540227b9d"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Method"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:572:22: 572:27>::fmt"
+kappa = "8525b7f61537fdc7e099c018b4c4ecf4e8d877851f080b4fe2f2164ba31a9fea"
+embedded = "8919ac45bf5929b13825ed69024960cabeb20ba2e1cc11c42167f5fbebc87bb8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:593:13: 593:61>::drop"
+kappa = "2be8bb25cd0d803c260f67c074d73d5357f03e9cb1a78e946ba7e67fc1497355"
+embedded = "ccabe1d67d3b3fb5863e80d55d1eb260bb694d99be35b554a9ead2c4abcaf194"
+status = "translated"
+digest = "e8e4dc1dc54f100db0b00a5101fd22107990694aa4df6b422d574c34de39ee8c"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:593:13: 593:61>::drop::drop"
+kappa = "8a952587d64ba4204fb91e39836d33518737877bdeff3205d80ba4a612c1577f"
+embedded = "137c2092b098d27215ca4b6ee2c23654a52e7337f9ce967954fda209283c6c5f"
+status = "translated"
+digest = "bf6ebc3afa2a3f7839947142e6d2acb07da4d2b34252184b2cc26da72e67f068"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:616:22: 616:27>::fmt"
+kappa = "a8e9a9ac75aadcd0fa60896f8a22e9175de481cf296a7dd3197bc20d3a38ee8f"
+embedded = "fa7bc8854735d3f3c634abd5e14c4df4cda95d9636936f1634f6406528034cbb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:637:13: 637:63>::drop"
+kappa = "35d39e388b9f8ad1b2afd4b446d62319b38c7ec61690d3ce86c9026f4a5d6cbd"
+embedded = "04c9f97f391053166781c0c3560e66f16789353a2fd5ac67d83bab97aae264aa"
+status = "translated"
+digest = "bf90b0653c9ec2ce29aa57290db38182aacda778dca81952f9cfa34be2d6debd"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:637:13: 637:63>::drop::drop"
+kappa = "c27b98e4f4a1c9d1118630ae99469a140f4a60be8052d2a0fcc9e441e0276fc2"
+embedded = "562be05bbb651eadcb4cbe36186d8f3408943c713c8beb0916675b6e3985de5e"
+status = "translated"
+digest = "9ef29090b6a9033fe1ee3cc8a459614e82307ab90587ca9ee3f3c49b6de352d9"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:658:22: 658:27>::fmt"
+kappa = "660951ffda6bf50a77a0c034a7762fabba0f56bb115badfeef4a81d6f56c2af7"
+embedded = "3f1cacd4903c0d902892a7357358ae6c8d8607a7301e3e2c0bd168a6721eab6f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:679:13: 679:63>::drop"
+kappa = "890ca7ae035005ae685184b444276ac04796a0fa81c264350321f5db29d44502"
+embedded = "64b4fb1410b78425f23145fd2613997856cff5e1cc942c66b19d465dc923cfee"
+status = "translated"
+digest = "d2ba50fcc656f48456ea8f0b8365a6cd46b5e94b7c942755105501e737dbcc03"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:679:13: 679:63>::drop::drop"
+kappa = "ad5cf6d0b8783b562d42a6f3d271f445747b1e7b752fc19e9c5af322b644628b"
+embedded = "cde683fdf02a2cd236e1a40b482e230ff4a704ab0f13d25360b559ec90187905"
+status = "translated"
+digest = "435bbbc80bfefc1a577a6b9ad5884df7fc57edcda0e09da2cd3bddf4d16a7a2b"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:705:22: 705:27>::fmt"
+kappa = "a2811db3f7edb013265522d1e5744e266be05b2fbb5e23c6c0e8225fc056bfca"
+embedded = "e6aaed2ab8427d1ccb5836ad3cb51ac79d923b25e4438bdbdcedb0991a4e38ed"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:726:13: 726:59>::drop"
+kappa = "e34c33f3332773848858fce94a1ef38dcb157f6894817a801c0c070324e5b39d"
+embedded = "2a8dfe9061da0158ed1cbcb05afd84cf08d5ac08f2348ef95ca565a777c936ca"
+status = "translated"
+digest = "df612570fbac2356e5fa673bf026b912bdfc5e02c4e7ec4bdcdcbeed01263fd4"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:726:13: 726:59>::drop::drop"
+kappa = "603298c36a1b8a5139975f7d6457aa6312061bd6e821d71b2302a7ca8357106f"
+embedded = "ee97ae58c0fa3bd7d79f173e7f3f4ab71adbb2ae89290761569ed2315740c2c2"
+status = "translated"
+digest = "191c1e50d29d1d90e1c77688d01ea8192bb9f2d65687ea8efedc28ce4f6a9f0e"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:749:22: 749:27>::fmt"
+kappa = "e96cf4dcb1b392ac406dd8fae8546858add73ebe901a9c7086f6594994b32c6a"
+embedded = "1526886efb0cee9978b61a4c01086924066d01ca25fb45489b6f0d91a1a42e13"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:770:13: 770:61>::drop"
+kappa = "cb139e5cf9c58249c947319bfc146297e4cf64b5565ec66414457137736ceed0"
+embedded = "196c8a7037cc7f12e06f0183451dbc76b6ad9e0a5d181bc2578fbf314eaaa265"
+status = "translated"
+digest = "9574175273a1b70d02e35bd155c49f4698ce247e12cfe2c0c6e26b6162bed15d"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:770:13: 770:61>::drop::drop"
+kappa = "c043b167c9c50b3c9b0aedafdc96655f28adf3dfc163e0559d1dc6ad0ec0ccb2"
+embedded = "b1582a282aec5cf0e47a6a6bc8b96a39f1e1317468f2cc480bfe2a2909a4f872"
+status = "translated"
+digest = "737d4d0b6b2593ea5a82afda66253015e3dbaea3595beb8283c117d3febd23c0"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:789:22: 789:27>::fmt"
+kappa = "5a3c177641faea21cb91c4de5497340f1bc31a380eb2c2b82762e8f512f53875"
+embedded = "65db78bcc72584a87413ff0ca73309e08ea21e99d84f876fbc0f5c79c2e00294"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:810:13: 810:63>::drop"
+kappa = "597c9405dc530a1b7499cccf9d479306d864aed380a5fbcdb3740712bf8bc3bd"
+embedded = "2d5714e64241a63d61767a82f7dd89d6d88459eb75782734a6795d51dd391d2f"
+status = "translated"
+digest = "d6bb90f47228aff2815eeb6c08d0d9e348e4e3ac06136a0c731edb729780449f"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:810:13: 810:63>::drop::drop"
+kappa = "d0e2665e15130f89fe915487e45b34711efa0d986503398ab416e0e589b13c75"
+embedded = "b86397e9ca2df0867b3b9c530109964b3f340fd94eafd2d6705ad0683b97c413"
+status = "translated"
+digest = "eb8fb8295c32fa42d539cc1647dc6abcf1c5acb7211d9fa887a0f96aee7ac21d"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:844:22: 844:27>::fmt"
+kappa = "40bdd0234fb9bc266b69de1b148df49c571aef51cbfedfb1f4a506434dd4288c"
+embedded = "7209543064318d0c1a79998238eab87668b8bd1317e888b2ad06370db14c15ea"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:865:13: 865:59>::drop"
+kappa = "8363591e16cd525ba1aa170fc1912d9e0f31f7566b3f018cf5701759577e6155"
+embedded = "270e639a9c0fa1364d5d3712dcbe3254d8b1b2be55eb98eb9cf0b5167375e603"
+status = "translated"
+digest = "e0e3986e26c8ded7d945f94cbd5e9f504b7d500c9e5a9ec12afb9a2d2e961940"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:865:13: 865:59>::drop::drop"
+kappa = "3b4798d42c74d9fe0f3efc25bb4f20950145b7db877d7e2fb3c9d6147f94df56"
+embedded = "776b7b93b1dc36eb46c77f9bbaf0a581b78deb0d7fccfd25fdb39c644cec706e"
+status = "translated"
+digest = "d3e617401d136945ceebdba63751c0a7bdfd277de1880c0fb470f04897d4a4ed"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:888:22: 888:27>::fmt"
+kappa = "738e4c4ec0e5a05b0abf4e78bd8d71bb1b6f0b94dd12466cf94ebb81ce9adbe9"
+embedded = "0015a856fc3166bebdda897ec8a7d7d2984a1c7e2e78b884bcc347f88b1014c3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:89:22: 89:27>::clone"
+kappa = "99636f7cd0119cbbe5e3601745ddea6e4cc2ce84393f608f27f969a958c4d6a1"
+embedded = "b027c75ec09b167e82d0926da579c023d7255c062a0ee492cb6e08d5ab5a6547"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Scheme"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:909:13: 909:69>::drop"
+kappa = "65c16a91ed3c16fa06cd2df2bde4e6fca429d94a42c80dc3a37d7c23344329e8"
+embedded = "82fd42eba5ad788985b519efa3795de88ceb0ba246c789f0d148b7e9d378e686"
+status = "translated"
+digest = "3134350048b5fd50dff21d33b0368b488458ccabd18e6c84143518b20d59be58"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::<impl at src/proxy.rs:909:13: 909:69>::drop::drop"
+kappa = "7af49cb9bc075628d203cab0892a9b246f657bdb0c3b53180d71d4d261e6fb4b"
+embedded = "b19e1a80215e7e49912b798c626ba71194e52366e0a50c84d1f0a68c6e1107bb"
+status = "translated"
+digest = "0dc427d9be91cfb738de03716b7c22ed2aa76be58349369f16aa075073a4a347"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::DnsErrorPayload::fmt"
+kappa = "484af7a1f42afc234272bd4494828faf4fc9b3d723f5e0babebfe4a26904e7c3"
+embedded = "0c9f4f96f24a0c2cfaf97c60c766a13b146d139ec4ab074e317b682101703329"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::ErrorCode::fmt"
+kappa = "74b07985970bb375cb92c1c012d668841c61061ef20881fec833f43f4bad9d67"
+embedded = "e974da4fdea73aeb093cecf62ce44924c1464ce4f65db9a1440b632ffabcc15a"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::ErrorCode::fmt#2"
+kappa = "46a22d0e0cc83fae2722533cf42f917e73cd018567a78ddf15b3ece2b97f99f1"
+embedded = "abef8cb57f6064103625b40acb8b834d60788731663ef70f31f6de04d242d82c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FieldSizePayload::fmt"
+kappa = "502ccc7078c100e5c93f4a49d3cd69cad830ecdf4c78c63fa45c09fc90ea786f"
+embedded = "c1f0b60c003235a8c3cafa823d6ffaa889a21ccf53051c9eeaeaefee43b5d368"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::append"
+kappa = "a7ab5aededd14adf620c785290ceff16e21424216523367a234de344ae1daad1"
+embedded = "d454393674b3ba7e86aeb1d8aedac1ce7b7f708ac5958d854d21aeea57cd4d8a"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::HeaderError"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::append::wit_import3"
+kappa = "25fdba422870aa8d4aff9b99ea6977fe81de68c3272f8179e1d8fcce69de9577"
+embedded = "e80bd52fb727354d9f2bbbb006f2f0506d53c9e679e49f5a6ea9887e50ead27b"
+status = "translated"
+digest = "c228c5d68eb2dc42fa394187d7eeafe83e9c499f18af03663b38a14d945cd5f5"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::clone"
+kappa = "1e8d9d8e559701350f7d227fc2cfbeb6dadfdea726bcd4dcd8a8d0a02bbdcdd3"
+embedded = "77ba8bae3bb94d91513679be8525352fdebd948b44a1100eeeefe1320ff6e31a"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::clone::wit_import0"
+kappa = "c1a4d46a686dc71e90b3d532610795f79f98a374b593c612f844a2748750cf81"
+embedded = "3d11314a55c900c3608edba6039a90abab5eab168b2cf4587826ce1b91adb088"
+status = "translated"
+digest = "ff8ff90ed37338116ba13903dee484e9e06af9e4b5e635a771c1695334e2f756"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::delete"
+kappa = "db871e0a4ea3fb7c99f25b64d91d1ba469a5779b46e478f916fc6580ef4b4103"
+embedded = "ffeb8471ce7fd859458f437b2834795acc84e76f6cf7301deadc14efc32808ae"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::HeaderError"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::delete::wit_import2"
+kappa = "3490d65121b2248c259047d50a8cbb7866acd022c71a60a672569108bb17b30a"
+embedded = "60a36be890974f43a17df10c08db0cac0e6526e73180b56d411f545b141ff492"
+status = "translated"
+digest = "a62bedbecdd52f93514ac2b8ffe6435d96d1a85e6c11f52d80ee563022e07e06"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::entries"
+kappa = "f816468ded4d6d359dbb1527960c5c0bb9a78eb2bb383b80e8b3ed6b0efe663a"
+embedded = "71a87164fc1c41f5211d34dd0d6ff84c056262ce7583cbb2173b11c0f247b72a"
+status = "residue"
+cause = "mir::Ty: Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::entries::wit_import1"
+kappa = "956b59ece3bf593e15254cd43f45751ec3291cec15bd02f062c3d1aa80f0f7aa"
+embedded = "f75f65768a8e4b20a33209f41f4170f048f0c2e4e8ef4b39873424f104063d88"
+status = "translated"
+digest = "8087902525a242441358923f6ba5b9cf24fc8cb79fb62321e8e53ed00facff83"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::from_handle"
+kappa = "b461318f5b3528d11236ea02a869e39a916ae0f2b5f02a56233a238a73355a97"
+embedded = "3e9b078e8e3cd59e2ca189fee088384b32e55af71b51800ceec66b714d586a31"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::from_list"
+kappa = "b9adf5debc7633842946714aa89528c123d4c104a62515a31f57b86911b96f8a"
+embedded = "e4ceae9ec0457005e0ea70079a9e4aa6fd38fad24dd8730c8b72b737f728db80"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::from_list::wit_import5"
+kappa = "d19002e76d43b08ea7d61b1ca78a99b464359218841ba960c81dcd59a562993c"
+embedded = "e7e5535571084d74c9e351f8a30637a00fc42f713305b8526ed7fcc86218585c"
+status = "translated"
+digest = "3bc2921abcb0eaaa38143608442407610f3a983bf94a410a91721f4d8b70b3e8"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::get"
+kappa = "2b47bad8e01d2e6a451e1fd17d1265f7cd4b9e570f4f0930538cece4a85915b9"
+embedded = "0c238f1a2ac7dc26f6b8152c1ba51ea2113a7a57d5fcb82896c44c12629f4ede"
+status = "residue"
+cause = "mir::Ty: Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::get::wit_import2"
+kappa = "20b7cf183a34d0e09100c078831133bd66a1e61f2293f90780c27bf5808b6444"
+embedded = "8ec5efc8540727e674088c48f62fc2a3a22f5c5539c68e889402057fc7c97ec3"
+status = "translated"
+digest = "32d8b5661d47635ea0487b1f7664428858d7340ee0860462aee08e43f5386dc2"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::handle"
+kappa = "40a94b5b45931714b25b0288a9f89512f5845967975dfa9cac74d955af2291dc"
+embedded = "1ebac889bff3a47189d59fd9ecad608853c06074f0b7bc089d2af98b853c6ef1"
+status = "residue"
+cause = "mir::Ty: Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::has"
+kappa = "00b56246d2fa4aa6ecfd2b21e332fe31a26338137ada19e4c3c2bc9c5f184021"
+embedded = "1be76b83509849bc0837a7d394a64ba468b2934a05c7a1fb7c250f3783079b2f"
+status = "residue"
+cause = "mir::Ty: Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::has::wit_import1"
+kappa = "ff6da30d2c545a8fb7e67747aa47cf0c84f0f96e2979d5ca409030c3a9b570b7"
+embedded = "02a327df1543287554d3437b41ccd7ee04aa8aab6df90c30c357a6e7db72b959"
+status = "translated"
+digest = "9a04a356815ad7ba8ced77a03192714da88830eb8856fc9dc2df33bd3acf52cf"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::new"
+kappa = "b3721c27d446679f985b8dd90051dc41b3b1858da2454cda31f30d09199bdf6b"
+embedded = "62c47a2a27ecf34f56345453db2af058581bff013f693f1663fdfa3f936f8255"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::new::wit_import0"
+kappa = "3de639f688abf93027142b8cbe97ffe7b629f065ba13f2ec55ea2271e452b724"
+embedded = "2c107459b3749abdcb4c9c17d1508ad9ddfe41922f09eedb1d5d1218b5a08e05"
+status = "translated"
+digest = "73117b8fdc55d8a333a9aeb9198e545d31e1c260efb00f36e5872b8812569204"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::set"
+kappa = "8f8752895fd70c47f0dc70e6a20a0e8bc2fd329c215531096a84afe972d89099"
+embedded = "651875f64f826723ddc4d5c90bca37c642c4fe8403692473e80c48127dd15540"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::HeaderError"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::set::wit_import4"
+kappa = "de7912219635d8d1e01d0d9176cd5001508432d3a6ce26b90ff03c6990be84c5"
+embedded = "90e78903013b9b57886e64e7cde2da8722d314116fdb51f5c12764fa939f3837"
+status = "translated"
+digest = "89614520c745d1431cc253b18768a6dec1b9a011039bdbddcd79278148d459fe"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Fields::take_handle"
+kappa = "f8ec9e63c11831dd77d9d893db5f17e68767c85c16b77a3414369c795ca8e112"
+embedded = "63b9b199e353de6422fae32aa5ec128139ab3f73b80de24628edbe99ac42b46b"
+status = "residue"
+cause = "mir::Ty: Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureIncomingResponse::from_handle"
+kappa = "e83e823ea0f8b466b13ceca388990e86ac9b4cc8e1c8a2f4983bea0bfa396f42"
+embedded = "fbf9c44e1190f3e4fe5618897564b30e1088cb940615535f6074992d1a9cb284"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::FutureIncomingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureIncomingResponse::get"
+kappa = "66f6b4d0d1f373217888f197611ff41e54fe8f16428001768506e71e6938b310"
+embedded = "d5ac26e6391c2a43623179d88fb83ba792990288a2c84374f364228c1d9829e7"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureIncomingResponse::get::wit_import1"
+kappa = "12ba61bb5f8d614a06de03dc010b006cb3cccda4e1f1a53d0b0ef49a69605268"
+embedded = "f83b88f909b13cde09703474f30a2959f4861bc3706fd0eb896a8d6308ba2dae"
+status = "translated"
+digest = "983e7ea5c8ca59a777e42e4a17ce0c83daa19ad3a1d793cb44b086f1d6ef5deb"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureIncomingResponse::handle"
+kappa = "09216d7521da52149d5a3e58805c824136f6451daed903101ddaa9eba6f8700e"
+embedded = "5a54a24ba33d0e3474c5c96ef83eb8fb753f3132096186d8298666aac0b27218"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::FutureIncomingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureIncomingResponse::subscribe"
+kappa = "3ca722c107d89d044cc11dd5918a2b10c75ae43e9754d9aad89977bfb939ec7f"
+embedded = "32da363d5bd1b9a2e9584ef1c5a3ba77fb50dcc8793a4f30951afa7dbcb1be1f"
+status = "residue"
+cause = "mir::Ty: imports::wasi::io::poll::Pollable"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureIncomingResponse::subscribe::wit_import0"
+kappa = "ff1ad6e790ff26aed36f5b21de4a7bcccdfb77b4f1a181bca9d53d8ee1eee7f4"
+embedded = "972e1126fddcf5e0ad1164987e4e5b9ebbd7aacc7520e5e77a0db40b6242855c"
+status = "translated"
+digest = "f0d1feb76e5f00e1b15e3781ca639c50cfabe2e3c2375a4cd58dc0737821bc2a"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureIncomingResponse::take_handle"
+kappa = "e7f8a3fa1b83fb98a76ddd4a8725956b2377b13fde237d506853380afb376d75"
+embedded = "d5a5542ee802e3e18542548e35e5df93cfc6f2455c54ab8d4f029588c45ce905"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::FutureIncomingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureTrailers::from_handle"
+kappa = "ae212f3c5397f51ea8fc3f840dd08fe3c40cd98b8cd127ef07f157332cbfb9d7"
+embedded = "9429280bbc7cfdb86e1e8e3c8e7d4317fb998f60e5d8bf11b07347c7584729a1"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::FutureTrailers"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureTrailers::get"
+kappa = "2ddad1d01106cba99d356da5d0b3bc0e55f4b0c51e7f0baf56a1381d9e0ec3a7"
+embedded = "02fa7c8cc3e4f8d5ba8ced195155ac3967035652e9155e3bc45b6dc496b81af6"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureTrailers::get::wit_import1"
+kappa = "f114bb85a0a2e1213e34915d463d050ec876fafc149e65529b8adcd58a128a2d"
+embedded = "ec4f163e1df294d0dedca68198912313121bf8485d0252b97e4afcace24a395d"
+status = "translated"
+digest = "14a215e18907c10a12787c5ffe4554dfd76c4263578ae9af7fd997f1a531a2b4"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureTrailers::handle"
+kappa = "a6e542e6908d17a1edd75d334e02e03e53f5f00743dc832aaf91fdd9bedfca35"
+embedded = "8f6361d6ace74f4c4ee1d63112d82fb4592a76a7b72b2790217344d0823def69"
+status = "residue"
+cause = "mir::Ty: FutureTrailers"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureTrailers::subscribe"
+kappa = "6fcef925d2e267d08caa186abec24e70e18e5c1b9cab1d314451bf222326aa4b"
+embedded = "70ba65c6f9fabb3ce1c1bdd86c18a67def2b23f987eacd3ef26f1c2b51356f23"
+status = "residue"
+cause = "mir::Ty: imports::wasi::io::poll::Pollable"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureTrailers::subscribe::wit_import0"
+kappa = "edaa00a6cdbbcd6607550417379da81abc0c94ee6febc9a08544562112c88db5"
+embedded = "e3d36370efec3b0e5b43be66f24f24e54924cd888764bcef1bfefeb1729756b1"
+status = "translated"
+digest = "4c11be7c60baa40fa23e886d99a43fb100879d8fa63431a00a7228fe68e0b68e"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::FutureTrailers::take_handle"
+kappa = "af6311b515c6cd49b120b4af7485acfb11c08fc733e553932b0bf3397b55bc3d"
+embedded = "998a12ac5b1613ef6ecaffa2688111fab14565ad95051da2556aab83be93b207"
+status = "residue"
+cause = "mir::Ty: FutureTrailers"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::HeaderError::fmt"
+kappa = "04c4e48670d1a8e1796182da396fb478adbf566b387353499c27c6ab35208dd3"
+embedded = "c9c296328d8bc20f08578f80cb966fab08969b947bbf8843cdf27b06e23ce083"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::HeaderError::fmt#2"
+kappa = "71f8f120fd82322431b3784a44f720d63d159e227d03b6afc4c9313b78cfe22c"
+embedded = "a39dfcdf4ad734e8418ad83a47ad30b6f1adf0a66ff5724b0c7c3cf0d3131632"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingBody::finish"
+kappa = "db618fbced7db6f547e46eaf8b15b30d1d387879c640044016dee2d1df6259e8"
+embedded = "0bc830492c6010899746af1eaccb15ed434e5b6eef3179582b5fe441078993a4"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::FutureTrailers"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingBody::finish::wit_import0"
+kappa = "4eb024fb07f99d6c844071470af135b552866265783054946cf908c12152995b"
+embedded = "6ac7fde76928d4e1b960ec43bd86342b7cad6281f6d447a1d6058452ee9c6a59"
+status = "translated"
+digest = "e535d0fd79e134ac65e9423fb349fa914839e13e8d30817e5d444f3bd98f8ffd"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingBody::from_handle"
+kappa = "6f27af699661814bd36c1abdaa075cdaddbaf941af9b555c6980c01ced085bc4"
+embedded = "c0a71edc38f7eb0bb4fdf6576f57ade62eb89a4766bcf3ed67d2e673e3fe6265"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingBody::handle"
+kappa = "f3cc0c06554153b808d35ef265b4406152bb4b55f8f24ebf3a58d2ee9c74d76d"
+embedded = "4aa4097f26777c8349d47a65cf95301fcb60ed2899c21095d451b446579fea16"
+status = "residue"
+cause = "mir::Ty: IncomingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingBody::stream"
+kappa = "85ff607dc810ad38710e005e283ea3085f29a0d4a41339bcda136657548a730d"
+embedded = "24f1b34742799fea63bec0a78117a1d592f9f2e4a835cfd7d63b81b70bb4e105"
+status = "residue"
+cause = "mir::Ty: imports::wasi::io::streams::InputStream"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingBody::stream::wit_import1"
+kappa = "6402bd0044e083734745fc0c488089f62c5e38cdafe0ac5a36a8c293fcd54e77"
+embedded = "4229b0b0ae06cc5be491e9c40e296f3fc57825877db3cc61294bcb84bf9c0ec7"
+status = "translated"
+digest = "4842af516d767bff108cdd1ac3c20777f090c694addb9ae9808c19e24444cf13"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingBody::take_handle"
+kappa = "74f9dcbebe06231f6e155e00915a66ab0eb1a63adacfc489febc0b78f2f96f7b"
+embedded = "32dc1c8abb5f45f50a2cc5f4eafb191665d4b73e394e76777f389fec2d275a74"
+status = "residue"
+cause = "mir::Ty: IncomingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::authority"
+kappa = "c7ab0169fa5c646ccde6352204641007ee22619297e27846eb758b71383c6737"
+embedded = "277fec7a6384848cc698e0fa5c9a362f78b25642172d93e6c7456babc563c1cd"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::authority::wit_import1"
+kappa = "580778fc23c56428e495b5933457542f4e37626ea81ae02c62c2f81997d62dde"
+embedded = "49dfae8e73da30954eab0dd243a08eb36cdfc5e5567284d8f5150242f325724c"
+status = "translated"
+digest = "18bfb37701b2fab92c7fa545e5c909e7994dbe4adcd3babb0c4082366ba7c17a"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::consume"
+kappa = "5a6619a765b595705da8bbc3fd937b8aa6276069d58db2cd0302af0383d12cb0"
+embedded = "589f06e46db92941a25f92b584c36488a6e077be821e9b741100742810239046"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::consume::wit_import1"
+kappa = "da711578bd31f42288deb89fb15845537aea4e346adfd9b8612bf18d69c2ffe3"
+embedded = "7c1870b635d2eb0ff18b11bd0962e0e2391097e8a66b43fbd1af4ac8489abb0a"
+status = "translated"
+digest = "e1f702a805a0124604a280038e1808a2396c5a75bc346254407bfda6776f5787"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::from_handle"
+kappa = "2d7a01c1f89dc6f3b211639274d6997d9e831edbe67b9f871d98343c9b218ecb"
+embedded = "e9f971a9c1929c889e62cf237c44818ba78336463876a09856e2492a93114fce"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::handle"
+kappa = "ab08e855e68e558699ecdc587044c726871956f65689480f3438b00aee856b49"
+embedded = "bee0cbb0469da15d587b47630520d33c5744e743c4df7449e5d7d27b36409c1d"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::headers"
+kappa = "084f839ff53ad16c94bf4d67b8a370013bec97549f54b88aebcb34e09b8b5310"
+embedded = "727e0437add9120677794ad7540a2ac5c52493479196b30744e8a93a1c91cf75"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::headers::wit_import0"
+kappa = "631f07992f9a995a2ca18938db195e433b77f38ecca79cb4bf384df70c6ed446"
+embedded = "476ae622a3116f55eabbf18b78f4f83ceb7abd1f09a1077409d7848452f7c58d"
+status = "translated"
+digest = "60f386f1793ec7e255b2d8c766934cf8085cc1a0164679bdec3ff15434299cab"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::method"
+kappa = "1cb72322cda277b10007aa059bd702d5e168f112dbeda5361451b29ce1451900"
+embedded = "3350e7e0d0320a7e2e0533c68f3de7797a05788caf5cca358b9e82948323192c"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Method"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::method::wit_import1"
+kappa = "7096ccc057d3d2d1a09e24256400ff0b8a339bd1e65ea2d1e156a32c3561c7ce"
+embedded = "67aab6bdbe589719c90382ea62175c5c35891dd339f995ec85ab9c5dc161a7d8"
+status = "translated"
+digest = "921253a30ecbd00fe01971a72df45ae2c649a9e9b9f01309afae9bbe647377f3"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::path_with_query"
+kappa = "4ff4836430697b27082c19751a3a95e904e18b6ffc6d40f5a8e69d52fa6b5063"
+embedded = "4c272982d8402783d607083511f3881f1defc362e5d51028bca0d9c292300a91"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::path_with_query::wit_import1"
+kappa = "ad84b56be9450b671fe26cd76f096144fe9c511ec5aa4e4802aece8d4d3602f5"
+embedded = "8679b37419983ccbe700911fbeaad7042230b1acef42065246a2871cf5ab0756"
+status = "translated"
+digest = "46ce29bf931094a8eb06c76aa1ed6daf8330aa145a5f08cad2d6d9c66b7e2edf"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::scheme"
+kappa = "ce2bf40d6d8f7d10da04c6320e627c8758deeb963df3ef8c72a691108148474c"
+embedded = "2415dbe375479bb707a1221ade019b657feec00f16ba7456a2883069cd2427ba"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Scheme"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::scheme::wit_import1"
+kappa = "986816b87672a2a719d89da6916cc1ef32c8ca749419bc4e7981a9b38b43d884"
+embedded = "27cc739111b22670bba5ff61a4bf9caccc6420679456869d7bf4c5ada70b5b78"
+status = "translated"
+digest = "1306f4daba2078ca37b2fdd6422d068b19c1c8ce1f624f1c4c80c32f761b18bd"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingRequest::take_handle"
+kappa = "2ea5e1b92a58156b09cd08e67b45644a6ba84895eeecb3ea98fc2e1b3dbe000d"
+embedded = "2ab30a83cba24e830369968d390203536bfe15f6cffdef8ca9a903f4034f5a6d"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::consume"
+kappa = "f14d908575fb454ba5e133ee5aee5255ecc5fe7c7c6e1fbec007d620ae85749f"
+embedded = "5502541283d22ec27138b35ea53c57dc1c582c281d8676efb1e89458cfa23570"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::consume::wit_import1"
+kappa = "c980e21edbe8683deac141468e99003522da8b04964c8a28a7647387aa2a8af5"
+embedded = "a8097d20e5406fd1d72ccfd141c9b99ee87c48f22a13d007230749f230504ee1"
+status = "translated"
+digest = "579b666879559be00688a2067333b2b5e3072a0f325cbec7458efc8dafb4dd84"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::from_handle"
+kappa = "118776fab14699d79e0c068f2e9a71247801265a75f03c2ba8aaf9113521b281"
+embedded = "67fca36efcf1c2ca882faf27b8e32ae10fe00a573fd2ca59258e2ed667ea7e9a"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::IncomingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::handle"
+kappa = "f273e81c1d030eaae360482ff15bd0256776f240daf1d5d02d25a7634617065d"
+embedded = "e57a5c134efd8c0b84a965467f61b7bba1713df39cc48b967d9dfbb072db77f7"
+status = "residue"
+cause = "mir::Ty: IncomingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::headers"
+kappa = "9c676fa178ddaea786533a7fdf0f6b3713b7910d598ae4b0d63f9a4e54085abe"
+embedded = "60299e5b0b7e93410a277e3557ca8389b57ea71d2c1beb0093aaa0f1c465a4b8"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::headers::wit_import0"
+kappa = "c83cb0e6341152195440b6ccfc5545685f5a4ecb6b7618a28975dbe59243f93b"
+embedded = "4a60b8d6459f83cda03d941704e8e347140c1bdbaf11b8917fe343046c859c22"
+status = "translated"
+digest = "af2480fb972e017e4967b626aea9d3eb68cdc043dac4d6b388d2f1e58004d7ae"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::status"
+kappa = "1bd7b5cf80ae847f055e81484bda3c0b9a514b0a090f491240e6acbe63df2b7f"
+embedded = "6810f82d855e6125573cf9a50511187562f902f78727bbf7e19ee4efee07d272"
+status = "residue"
+cause = "mir::Ty: IncomingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::status::wit_import0"
+kappa = "a6cb6f25aa401f9f3fac717f280b1d99f4f3d83067508c09bb096d1a4f8364e5"
+embedded = "33a8737a5f82902480d7344dcaee5a63fae84bfb8a118a7660dd75e383ca5bba"
+status = "translated"
+digest = "2e8d9ef83f389b46dbee7310d1d04d86194b4ffeb755f0d98fd5cb0791f61859"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::IncomingResponse::take_handle"
+kappa = "d02a5abaf7904ed28a22ceaf6b551749f4db9fb48f15965a2d53840dd1c9fc07"
+embedded = "ca9419297b37c010c81ff9ab9d7fba4359cf088d01816dd23313617c7c9569b7"
+status = "residue"
+cause = "mir::Ty: IncomingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Method::fmt"
+kappa = "f4207347b54ab6c1ec8270d9bbe042d2570dcef5f03a4079a1697e7548552dbd"
+embedded = "e29af90fe2bb734b3f67465735e89b29110870acfef84cdf570d11a20d24850f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingBody::finish"
+kappa = "8a757d33a0f569b6bb7365ef58f9f97f39d805d79f3913fd54090046ad1e119b"
+embedded = "9c54a03ab4424c03320a994eb11cb40adefa2e6b0268ac7757da9d1c0d36feed"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::ErrorCode"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingBody::finish::wit_import2"
+kappa = "0c58d0d20836e844fb4f0a79a68992e49589520820dd8a614285b6addcfaa68c"
+embedded = "b938ed35904d084c5603e9c5eee8e9f433e9f9a24ec9785e8134d0da9e11b388"
+status = "translated"
+digest = "bbc1a54ec227ca293762562be40cc8d075ded20f9f91e24385073c003cbde731"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingBody::from_handle"
+kappa = "56cd6b0b571571911517ff088c0694a35f915ca5ba13073652730782a60d0eca"
+embedded = "b2af16ffa06b36816bf471b35759f7f59134408cf6f5ffa9f8d3550d99636ba8"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingBody::handle"
+kappa = "12e682450ad2a5895a597a849b83e8c64c2cea160e0306c89f54eed38770e94f"
+embedded = "4208c36b0251d71030088b7f0043483aaf9a59198974953b8e22c8b0285ce953"
+status = "residue"
+cause = "mir::Ty: OutgoingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingBody::take_handle"
+kappa = "4a9d113f6a16f991392304013080ef5023bc5d81037a2fdfc18f7948ede97654"
+embedded = "78478fab9af99df8c5f49d424f0825b98a3931f876a699191d1c0348e9b996be"
+status = "residue"
+cause = "mir::Ty: OutgoingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingBody::write"
+kappa = "dae413d29b39827291a445b566a98d6c94d0815b3f8444eb3357a496946b7fb0"
+embedded = "137761b4cfd954f7ed4fc164897d1ca1d70df1eca8554bc22cfce34520fefe52"
+status = "residue"
+cause = "mir::Ty: imports::wasi::io::streams::OutputStream"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingBody::write::wit_import1"
+kappa = "6c8e9095fc91cf918f87b0d88dc746fda961eb3dfaecec0cbec9860feb8f5ec8"
+embedded = "0d32cbd276399c2cf2a7ceff9dbb2f18e5a49b6831e6e7591e33aef69dbeb69d"
+status = "translated"
+digest = "7467ef0825a856b8131ed010026e1ea8bbefba77c9eeadf8229b7284b073b77f"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::authority"
+kappa = "6b06cb80f2b0780387a615dcbb9e487b919093bd2cb35ddcbeac0ce770e33635"
+embedded = "cd5926b62b7c0bf2ca253d9e7ffb7b11a4c8159a5a7a08c808008cb598477505"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::authority::wit_import1"
+kappa = "1a83957e64baf237be807ceaaa7caa449e4c9131b6b43ef095d66b7fe6a2575a"
+embedded = "18857ff92f576ee0588f202abe3dcd54dce9bf7e4ac5c25994441b8e34b43e0d"
+status = "translated"
+digest = "9f4b5124ad6687f51f0eb3e5c542516be62c9acae2fd0c63c5137f90397f9c6f"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::body"
+kappa = "ecb0252e5ac20d30da0dafdeceb948882a4ff8c34c859348d7c4a3019dd005ab"
+embedded = "c4d48d3944933c4d864d312b397aaee41c187cd870fec20c132aa9a18e839d60"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::body::wit_import1"
+kappa = "fa3e13736add160012e50d8faa74304bd4b01b774c85ad92ecabc0e25ba1e0e5"
+embedded = "2a8c16dca02449e965eb22ea44e19cb027db2e5bd4dfa07cbf277ab7e357ebdc"
+status = "translated"
+digest = "75f0af19565b7f29b231c88febd5edacdff5ebb7872e03d39a3756683444a090"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::from_handle"
+kappa = "5e50b8590224cbdea751d2fa4c9913e057aa01e45efdbe83c0147e6e3d7b5841"
+embedded = "25808938809a63c893d55dc7ea72b391eceeeb4935a261f43de221b884dd2955"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::handle"
+kappa = "f64243d015bbb76c8b5517977ca0ea9026925701943a96ad09c3ca85df489a35"
+embedded = "2cb0509b317c4d9aaf8cb78754c37efce2f6b0498f18bacde14e5d53755d09e4"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::headers"
+kappa = "030dd2b7840b47bd569bd834b7e112afa8da04ebb0f62b2a7da45e13402a9b45"
+embedded = "5d191792fc4a56f75f47e51e4d67072d2a5e48c206a48ed9995e1e1f66692e9a"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::headers::wit_import0"
+kappa = "dea04f3e2efcb35788c3d53e965753c1baecacb78adb0a0c921f7468976d12a1"
+embedded = "8febfc3b7e665f62a453d464aefc7f2c0bc813c789e89504b82d03fe63dd71b4"
+status = "translated"
+digest = "819c7f8e3cca28c7321955e53da5da8128e35410ccf9836f5048e303ec482c7e"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::method"
+kappa = "080e9a7b37e12c3baba41c45dc14510937555db5712226d87bd96b44ddb566e6"
+embedded = "0804b250218b42cd4a0820fdf8e7a0bcc3da2883d0aafccc311d89a56b81f8f9"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Method"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::method::wit_import1"
+kappa = "eccedb5294db42024e57c50d1248bba023ef906b9f417dc9c12347323bd35969"
+embedded = "c39e629c62bda3bf17ad77630626e1ab3566586be6dc87cb865d4646a346051e"
+status = "translated"
+digest = "e22d473367abeff70722344d77789395928fe56ee5128ed62e7fdfee3d1332a0"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::new"
+kappa = "755b38b53fb31e214b735f3885bd78922e02c9c9488da890934b4aed695e2b90"
+embedded = "d929e145ba3a18180b7fec4bce80563090478d67719fa28064d909360baf35ee"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::new::wit_import0"
+kappa = "2f1a154b6491f13740d7395c1776644f677460324a5cc8efb969b0ca8b538bce"
+embedded = "84e8b6bb61beb941f88ff9382a41854eb7ee1f78de9757ee50b85ff067f89999"
+status = "translated"
+digest = "513e2d5f51d23988bd89cda8f288d8a98d4018d98856d9d9e32488e25a977486"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::path_with_query"
+kappa = "2ce67a473c86f83a7b27c71431097bf21909863470b071c4e79df5d4df122a8a"
+embedded = "86f2177f0b029574510bb96a9ee6fbff6fb149a256cfaea9adde34145cf3d970"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::path_with_query::wit_import1"
+kappa = "242bca971f665c64ede7f803e1449f5de80fc97178eef34496963a91e5228978"
+embedded = "541545e92d8f2bc3d43009f9859ed0268f33caccb750d406f37403541e8dbf56"
+status = "translated"
+digest = "dc8e55d183a86dbcc24d9b896fc5936af73a24df347a03634b24a0566aaee267"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::scheme"
+kappa = "d36651a44293278e968f614ec63439e044f31115376db56d06effe447b85a4ed"
+embedded = "11d40a5328644259cb677487a36853b1952351cf1c99750d955f6338a7a12991"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Scheme"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::scheme::wit_import1"
+kappa = "1b6481354a5d7a3eeef1034e78536e08c3499f7fb2b7ffa50f7b7024c77ac356"
+embedded = "b2f0a2ffbb81690c64a9caaee80c912665e5760ffcfca9f0ece53bc914c21bed"
+status = "translated"
+digest = "e08c6262b5e2fbe3c74cde21333eb121f842fd20341fd77895eca233edc7b0fa"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::set_authority"
+kappa = "e96c670b8a8ad4425b225308e81fca2cdf9fda421eb0ca7d9aaa02b0aab387ee"
+embedded = "9327ffae893e6522e1c3b820e0569f4c06083130b26314fb0f34c670caa746c2"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::set_authority::wit_import2"
+kappa = "4693a16dad447e788d1802bb63d7eefb35137e4ccbd19b00913017f8b1c52d7c"
+embedded = "6bcbb4e0f8ab2fd3abd5097c97c6a17d6acbc3750fc33a843376a2fd0bae7eb6"
+status = "translated"
+digest = "6320829fb7528b1fff73d1f2444e78f570b21c99b8e14f058b5787544811805c"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::set_method"
+kappa = "4e9fed97bb6b22ae3c560270012dcf91d89a7c2948070afc959ec0c6f4b156b2"
+embedded = "9b61dced2a1f125a03e22f8911b07d1d3b17570bdd354c7500c7beacdcc75d95"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::set_method::wit_import2"
+kappa = "340c49af150a53afb9fbebeb46880eb89a12657da2db1297f7a49ea460e64357"
+embedded = "92adec9e8f6d6dac1be75ab24bb01597466d8b4f9d0ffd4e0ef14b39b414ea81"
+status = "translated"
+digest = "ad3aad6d237467ae6a6cae70228c1e6eeabcac39219f663cc03e8abc9ab47316"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::set_path_with_query"
+kappa = "72f40b9b0b448ba5b0fb905c40d5bc369c7b0ddfe94a523fedeb9e7610f07f7e"
+embedded = "c70cb6315fb995493aab68550b627c34664aa3eefbc0391ca529cfc91ca9884e"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::set_path_with_query::wit_import2"
+kappa = "618c7c0a462b6175ab1605bfa3e1145da9f46d1f09ddfffb5fa71234c19bf393"
+embedded = "a1737206bb7d8f610349221e927454b1e8b301b161d189668a748028311ed682"
+status = "translated"
+digest = "00709c3b3f42065b54a69bdb62d2c963366a6aa6d9c2e7c937df98c2bc3c4781"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::set_scheme"
+kappa = "858c40365727f48f5e306b70e260d84a3d6515130193fab3ad1d6d45d2907427"
+embedded = "7c8f34a297a35a993b41519372358fd310cb265f3516795b9d9d2c307d291886"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::set_scheme::wit_import3"
+kappa = "e02ec616766578bb4c29798b95851c4ec13207bb1642e64e8c546a4817223c51"
+embedded = "551d7b30e14a24ab1986eaa70368d9bd903f9be3e59ad6afe0a13d0f13fd3815"
+status = "translated"
+digest = "c1748c76a50ae7d280e4e65961962fea40034ce2842fadb7102532982df450a8"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingRequest::take_handle"
+kappa = "1054dc885bd54b4ff9b14a257d2ec50c8583ddcabdfaaeac30894bd3986b6234"
+embedded = "5d62a8699c02380d08f12f7a876852dab2af5035c6765970af0f69c992b5fb69"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingRequest"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::body"
+kappa = "2ec949532ef16411498432986bb1e25a9510a32dc2dc7136f5b471ad7f516881"
+embedded = "e0b27df5ae72702672ec64f760e4cd41adeb9158571ceee7b035aebac940d4e4"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingBody"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::body::wit_import1"
+kappa = "f90d912bd956d49ce751682598aab8f98b4e695c9eb49276d0e9266281ad0c5e"
+embedded = "3d1930face6c5e6e7e2a4b90d7b2e70625e2fc743d3663fa9d23ec581f0636e9"
+status = "translated"
+digest = "6e8b507bb81640c94735bce6229b610a67a0d3c4aa9b406fa7d9cb3764b26fd9"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::from_handle"
+kappa = "72fff00e4fe8789c88c8def4310c994e3eca98cab85b098283fe3c5283e35416"
+embedded = "d42377b5b31633ddeea50886006aec0382bda9ded385a9669c3f2e792ea28c98"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::handle"
+kappa = "0f2994c6bf92ddf950139dce46eabc8f3217c52e8b410c8bdef7248e3ad09d70"
+embedded = "dbc7db020b99eb23481aff8369ffd1b3780b42fdbbcd2f2751ce162bee523c5c"
+status = "residue"
+cause = "mir::Ty: OutgoingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::headers"
+kappa = "946fdc1c14210984a0799dec7ea1429bf9a30a2f186e9cf60d23e17c38032af5"
+embedded = "daeb9402c9b2462913ba0ea00f0b6b54a2184a8bc97cc63bd1a510147278e67f"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::Fields"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::headers::wit_import0"
+kappa = "45d2f805f837573499071f8099fd5ced4b8f7d855736e047444a309425b2fb7b"
+embedded = "593fd51ffc00391b47f44272be830311421112ec94f084d1575d96b6239fe4f8"
+status = "translated"
+digest = "b1847aa5af2a4283f84eadb0dc250d2fd0931c8d1581cac5decbadd945b96f83"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::new"
+kappa = "5a891967b1a1b754a3b9ca4cf4c397454873db221e974dd97806a0021398467f"
+embedded = "5cf022747b6adda3dca080ac6db4a00002323cee6d652a708cb2a3a1e9fe32a0"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::OutgoingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::new::wit_import0"
+kappa = "6479819b874222c6a8808efb1e36db7883b8af5aecfda0a8115f88003a4ee5be"
+embedded = "b5e10d588c75b55b313412c1b9a73242907973e8dd8d27ddc8aec587f0cb2420"
+status = "translated"
+digest = "0e08561b8a4cc177fb58e453baa38c93f3c3ced503688041b20a59f9185625a9"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::set_status_code"
+kappa = "06a7b6c3a45df7ea8a4986a8051c68959b3aa3d33cba240367c8de99cbe165ba"
+embedded = "70c836f3b448c6fa3ad0231add5add5444a10a73f5ac50f2faf8f04996a79c8e"
+status = "residue"
+cause = "mir::Ty: OutgoingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::set_status_code::wit_import0"
+kappa = "ec21c26d6efdcc7727cccc8420a84385e2092a7dd30f4ee0f41e5b5d0a0afa9e"
+embedded = "fad68eedf335f1baa2761588299f2e7f37bf6784e938f11ff9329854ff776263"
+status = "translated"
+digest = "ee140a481fe7218e5d953aafd47519a35281a35dbfd3617195b801d5ce4ed067"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::status_code"
+kappa = "f2403ec595fdc289db2fe1157643cbdd30da4a0517adb401ba753819465663c4"
+embedded = "ea3c13b74c32f3d76e1907fdbf20d08efa85a3d29bb8178c1e26c80ee116eb30"
+status = "residue"
+cause = "mir::Ty: OutgoingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::status_code::wit_import0"
+kappa = "735cff326eab8506e0a1bc0c7547f63e7c0b5fde215f0bf0419ecef20d04cd9f"
+embedded = "9ca064e2d15b3f20b2a7cafc81b30c01dd01ff94dec4f6fa20586be156f10dc0"
+status = "translated"
+digest = "957f38a21a9dbcbde03c1c3abb850c916d8688b71d54a78c8de686482250be01"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::OutgoingResponse::take_handle"
+kappa = "c6d76ba5c146e6c44cc841916e37690e6fa46d83457813d2e8e99c1f6b0e6f64"
+embedded = "5f38bb90e4ea44d7712e98df260116bed3d64e4616353d82faa8a04ccff38ce3"
+status = "residue"
+cause = "mir::Ty: OutgoingResponse"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::between_bytes_timeout"
+kappa = "892dae14f22f2d653fb7760abbcb25a6295290226ec6083e84af688dee5bd062"
+embedded = "d76d431504e21fb48081d374e901994133ffcb7646024d800869e4e075b2ded2"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::between_bytes_timeout::wit_import1"
+kappa = "3a0703925d47ba89b1a9b4529a19d05b230d1a0217fe77b4b925ed951af97b37"
+embedded = "b7798ae3c8bd1f750fa73c588d9bae13995572fa2f569490c805c0934a9396a3"
+status = "translated"
+digest = "71483501ac4ac95359883459b4c64402fbe75fa8654e6e5e6816ff4c474ff5ca"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::connect_timeout"
+kappa = "2587a9a8e10412a2753709ec6389b7127515d881fdee12eaea006788dfbe8ed3"
+embedded = "247f6ac2d7d59a2065bc34ad4ae4f6057435ecf968010d89bb73a3ad7b640c4b"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::connect_timeout::wit_import1"
+kappa = "141a9aab01f47991ce5551094b1cabbd6a9a86e2526a710c0333fa94e83abf8c"
+embedded = "7dfc8acb43800e711b79d70a2295563dfbe990198289ebd63cb515d4205e739f"
+status = "translated"
+digest = "8b60ff8ecc487c4cec35bc2fa6740e9542ff02e9b83851bd3e03b066486f3e4e"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::first_byte_timeout"
+kappa = "be54f0c376a804131ed30a638ef56bc5ffdc5ab9d63b5748f330453f0c8cc345"
+embedded = "43cf5ebc1f3f116b3db44f332bf3f08e2617badd09f6f065d35651fcf9883860"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::first_byte_timeout::wit_import1"
+kappa = "a5f691dae9ac7f61fdfda45d038d3861e8c3f194ca5d8adc5de5cbe458c555b7"
+embedded = "a0bd95eabc1ff396a6231e9ab6fd8dae5c3cc397b38a0c0c6ac680425a41a14e"
+status = "translated"
+digest = "fd093318c4fca41b5b4d900d9c44abc15ac8a690231412b2f64035a879bfcd2c"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::from_handle"
+kappa = "88be5758f85455dde65554fda08b17f05b90ebc9f34095e050d0cb484024b39b"
+embedded = "32e1e40f034e49d9a779282e36ce49737d278784bbd2f6f99e13d643ce939133"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::handle"
+kappa = "c25e02202a050fba959db81ed1f461ea5ab804b31a221374c6f11c97cc585fe5"
+embedded = "70e9e112d3122349aa4a982dfb1bd3f7b1745e6f4d5ddf2a6f2d0980e48dffce"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::new"
+kappa = "8bb184fe06f4452cda23adac61289d4869ade0dcf9a6a15bf4e6f7d0072c6389"
+embedded = "044aa4c910ebb9a6db0de438d92f3f663c76cf876b01863a13ef2a7334cde7c5"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::new::wit_import0"
+kappa = "6a2fadcc2e0f2d0a04a372b6c74c757f6ea19c8a25653c6e5189fce1d01c8610"
+embedded = "a217bdbaffa49b7889e0b6414ca9fba741d3e76cd89395bd7869393bcad4e797"
+status = "translated"
+digest = "08b9f6f308bdecf954bf5f0f8d7eab8ef00a8bc8f517ed1cd9f9785c9f7606e5"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::set_between_bytes_timeout"
+kappa = "0461e2d27ecab4074034d0a8f25177573c1085d8761b71b16a1631c3477dfac5"
+embedded = "d709b295b5950a8642ba8c943974577e2a40303b9c09d59d2c938f7171881e40"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::set_between_bytes_timeout::wit_import1"
+kappa = "4d42247a29c9cc3d1586b65b939a7ba12ce3b2e6d784783e01e0cb29a14b98d1"
+embedded = "dcc2822a03c74c7a041cefdbe49c490d2da8958c2b4fc618f334bdc6e19d2a8f"
+status = "translated"
+digest = "42542c68a2801111acae76ef20f77e65ba88237f72b53d0e8a9704ad251d7efe"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::set_connect_timeout"
+kappa = "c45729caa7a6c17f28d4846d69c39dde1693101139f4de24e9bfefd3583f40fd"
+embedded = "8a7e68982c735d2e590ecc449d1b24a599b8afd56ed97f61a2d7c8833d646056"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::set_connect_timeout::wit_import1"
+kappa = "035552bcfab21c71c805855e19c93160bfc79830849c19c82138bcdb047969b4"
+embedded = "c9c96ca46ab182d7f342c32b40336e867f08a52fd4307653c3b544532fdcf4b1"
+status = "translated"
+digest = "290b6c0de9c118c690e9d15c0165a291a4630adc64ae83b016de7e5a09d9d16d"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::set_first_byte_timeout"
+kappa = "502d964b16a66442b47f5160d3c8cd5f8a0fe0bd523dfa96b973d244c5fb0544"
+embedded = "5a01d9018916a039ccbc684c9b123a03c0ede4674a45810966efdc551d6e5d9f"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::set_first_byte_timeout::wit_import1"
+kappa = "9673d87f163bc8cd2202eb44b88b598e325c8716465f2130591a7cdac4f694e1"
+embedded = "4808d4a1d8ae5a91eb1906138b11f807cfcf6ce0e4ffd9d3d10365df08573f73"
+status = "translated"
+digest = "5b44096f716c0a1c1b15b711580f168b10254d3af70a6f9d87c0fa351e7282f2"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::RequestOptions::take_handle"
+kappa = "265c9a5ba8af41caa2457aa45b8c0f54d836da2b6a9e53b256714834f1813410"
+embedded = "186bd5f4d62092f4141d995523303de1c364392ea5b680b0f3f1fc2012c63a60"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::RequestOptions"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::ResponseOutparam::from_handle"
+kappa = "339ab14ad2e8acfcfe419439d0b033b08fc0e5f645b20ed01c7bac0831db78b8"
+embedded = "ce9363b7f24c527cf32d60551d7fd85a20e7e33dcc4750692952794a06b45b0b"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::ResponseOutparam"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::ResponseOutparam::handle"
+kappa = "eb7b64a8670aa9f03c304a63f2de475cef9d2c717753d559bd5c87bd34a3ebb1"
+embedded = "2cd2df9d31e028d6f34590a22564cbcb0bf6d419ee64309670054a6ad41cd082"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::ResponseOutparam"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::ResponseOutparam::set"
+kappa = "cecec98f0c59f52ab4d64c42a35da4b18552aa490a4685772753f691e9f64125"
+embedded = "051e74e7f1ff245efe560a6188ee2ce826daae5093ddba44e7e59007c21a7940"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::ResponseOutparam"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::ResponseOutparam::take_handle"
+kappa = "8ef469316454b84e5c3e805deeef3e4d6ffbe5f07172871b1b0090d5ecbe583c"
+embedded = "ff5da8995cc10024039c4032a0ba745b86a5d484a315e33a91662d1b48a74e48"
+status = "residue"
+cause = "mir::Ty: proxy::wasi::http::types::ResponseOutparam"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::Scheme::fmt"
+kappa = "b7211fc03170d1d12fd38abcb5f3a177ab420856786b55e0dcaa223b6e841451"
+embedded = "c2db8ed341a812434853d53aae2374f0e75dddf5768dd757c5ef1573be59f394"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::proxy::wasi::http::types::TlsAlertReceivedPayload::fmt"
+kappa = "9cb20c13f130988933123489342a887afe6f6ad61b18488a31389c3244c56e3c"
+embedded = "95e56bd7dc4cadcfca6ba39f2d68baa4318cf6f646e728e22b18b9f63b63a547"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "wasip2::wit_import39"
+kappa = "66b188fe64727566bb2a5e09fbd6700c3397cea29a7830791f8c0f3e95c5add4"
+embedded = "30296eb646bb131b2ba5b899d86b0dead5721f0557cd9157c0e822a17b425294"
+status = "residue"
+cause = "mir::Ty: MaybeUninit<u64>"
+

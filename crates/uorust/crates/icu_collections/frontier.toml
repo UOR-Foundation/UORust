@@ -1,0 +1,310 @@
+# The icu_collections register (written by `uorust crate icu_collections@2.4.0`; do not edit): every body of
+# icu_collections's MIR at icu_collections 2.4.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 250
+translated = 12
+residue = 238
+
+[module.char16trie]
+bodies = 47
+translated = 2
+residue = 45
+
+[module.codepointinvlist]
+bodies = 54
+translated = 1
+residue = 53
+
+[module.codepointinvliststringlist]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.codepointtrie]
+bodies = 112
+translated = 9
+residue = 103
+
+[module.iterator_utils]
+bodies = 2
+translated = 0
+residue = 2
+
+[embedding]
+bodies = 250
+embedded = 250
+evaluable = 245
+blocked = 5
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 5
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: CodePointInversionList<'_>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: cptrie::CodePointTrie<'_"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: CodePointInversionListAndStringList<'_>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: Char16TrieCursor<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: codepointinvliststringlist::CodePointInversionListAndStringList<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: char16trie::trie::Char16Trie<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrieHeader"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::num::TryFromIntError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: char16trie::trie::TrieResult"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codepointtrie::cptrie::CodePointMapRange<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codepointtrie::cptrie::FastCodePointTrie<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codepointtrie::cptrie::TrieType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TypedCodePointTrie"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item codepointtrie::impl_const::FAST_TYPE_SHIFT"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Char16Trie<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: char16trie::trie::Char16TrieCursor<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: char16trie::trie::Char16TrieIterator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codepointtrie::cptrie::CodePointMapRangeIterator<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codepointtrie::error::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cptrie::CodePointTrieHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionListULE"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codepointtrie::cptrie::SmallCodePointTrie<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cptrie::TrieType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zerovec::VarZeroSlice<str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zerovec::ule::UleError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by From"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TryFrom"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: char16trie::trie::MIN_TWO_UNIT_NODE_VALUE_LEAD: mir::Operand::Constant: the constant item char16trie::trie::MAX_ONE_UNIT_NODE_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: char16trie::trie::MIN_TWO_UNIT_VALUE_LEAD: mir::Operand::Constant: the constant item char16trie::trie::MAX_ONE_UNIT_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: char16trie::trie::MIN_VALUE_LEAD: mir::Operand::Constant: the constant item char16trie::trie::MIN_LINEAR_MATCH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: codepointtrie::impl_const::FAST_TYPE_DATA_BLOCK_LENGTH: mir::Operand::Constant: the constant item codepointtrie::impl_const::FAST_TYPE_SHIFT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: codepointtrie::impl_const::INDEX_2_BLOCK_LENGTH: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1_2: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: codepointtrie::impl_const::INDEX_3_BLOCK_LENGTH: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2_3: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1_2: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2_3: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SMALL_DATA_BLOCK_LENGTH: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <codepointinvlist::cpinvlist::CodePointInversionList<'data> as zerovec::ule::EncodeAsVarULE<codepointinvlist::cpinvlist::CodePointInversionListULE>>::encode_var_ule_write::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <codepointinvlist::cpinvlist::CodePointInversionListULE as zerovec::ule::VarULE>::validate_bytes::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as codepointtrie::cptrie::TypedCodePointTrie<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item char16trie::trie::MAX_ONE_UNIT_DELTA"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item char16trie::trie::MAX_ONE_UNIT_NODE_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item char16trie::trie::MAX_ONE_UNIT_VALUE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item char16trie::trie::MIN_LINEAR_MATCH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <u32 as zerovec::ule::AsULE>::ULE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CodePointInversionListAndStringListULE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CodePointInversionListULE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CodePointMapRange<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FastCodePointTrie<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PotentialCodePoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TrieResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codepointinvliststringlist::CodePointInversionListAndStringListULE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::char::CharTryFromError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::FilterMap<core::iter::FlatMap<core::slice::Chunks<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: iterator_utils::RangeListIteratorCoalescer<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zerovec::ule::RawBytesULE<3>"
+bodies = 1

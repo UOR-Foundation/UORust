@@ -18,6 +18,12 @@ The three honesty levels (R2):
 `cargo xtask audit-limits` fails if any code path returns an error the
 model does not sanction.
 
+## ci
+
+| ID | Level | Statement |
+| --- | --- | --- |
+| `CI-01` | `build` | PR impact reporting evaluates exact base/head Git changes using a trusted-base classifier and factory input graph; passive documentation is distinguished from model inputs, while missing, renamed or nonregular evidence never authorizes skipping native acceptance |
+
 ## engine
 
 | ID | Level | Statement |
@@ -49,6 +55,12 @@ model does not sanction.
 | --- | --- | --- |
 | `UE-20` | `build` | The gate, the writers and the certified export are obligations of the upstream Prism factory installed under prism-factory/: its engine, standard library and identity protocol are upstream's at the revision prism-factory/upstream.toml names and an installed file that differs from what that record states is refused, the graph's one source is prism-factory/graph.toml with the Justfile's recipe bodies and a model text or table that differs from what graph.py writes from them is refused, no obligation reads the whole tree, one run in the SDK declares the lock that pins the image and the launcher, the certified plan routes each obligation proved, observe, refuted or blocked from receipts of its identity, a test target that names or a compiled source that embeds a tracked file its obligation does not declare is refused before the plan, each obligation runs in a closure that is its own repository whose parent holds exactly the base entries it declares, under a work directory no cargo or rustup configuration sits above, a command stopped by a signal leaves no receipt, and one run at a time holds the receipt store |
 
+## pages
+
+| ID | Level | Statement |
+| --- | --- | --- |
+| `PG-01` | `build` | Pages identity preflights use exactly one mandatory unskippable guard in both workflows, refuse a stale or malformed repository, and require ten named and executed negative controls without failures, omissions or skips; an incomplete result exits nonzero with model-defined PAGES_IDENTITY_CONTROLS_INCOMPLETE |
+
 ## self-model
 
 | ID | Level | Statement |
@@ -59,6 +71,7 @@ model does not sanction.
 | `SM-04` | `build` | The threat model maps every threat to a control with evidence or accepts it with a rationale, and every control's evidence names a gate, proof or review |
 | `SM-05` | `build` | UORust's brand identity and design system are read from uor.foundation: every Wheeler brand element and every W3C design token of the pinned site, each with its source span, and every text and focus colour the site sets on a surface meets its WCAG 2.2 contrast criterion |
 | `SM-06` | `build` | UORust's context of use (ISO 9241-11) is read from its own model: every journey's actor is a user group, every journey a goal whose tasks are its steps in order and each accepted, every user-facing component a technical environment, and every goal's usability measured or recorded open |
+| `SM-07` | `build` | The browser accepts only validated acceptance results, preserves failing vector indices across Worker and fallback paths, and exposes modeled typed errors for malformed results |
 
 ## Cited authorities
 

@@ -1,0 +1,452 @@
+# The rayon-core register (written by `uorust crate rayon-core@1.13.0`; do not edit): every body of
+# rayon-core's MIR at rayon-core 1.13.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 295
+translated = 0
+residue = 295
+
+[module.broadcast]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.crate]
+bodies = 49
+translated = 0
+residue = 49
+
+[module.job]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.join]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.latch]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.registry]
+bodies = 72
+translated = 0
+residue = 72
+
+[module.scope]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.sleep]
+bodies = 48
+translated = 0
+residue = 48
+
+[module.spawn]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.thread_pool]
+bodies = 27
+translated = 0
+residue = 27
+
+[module.unwind]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 295
+embedded = 295
+evaluable = 295
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: Registry"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: ThreadPool"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: job::JobRef"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: registry::Registry"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: WorkerThread"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ThreadPoolBuilder<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Sleep"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: thread_pool::Yield"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: AtomicCounters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CoreLatch"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: JobsEventCounter"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ThreadBuilder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: sleep::counters::Counters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: registry::WorkerThread::current: rayon-core's MIR stops at mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BODY"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: OP"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RegistryId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: latch::CoreLatch"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: sleep::counters::JobsEventCounter"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: thread_pool::ThreadPool"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BroadcastContext<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CountLatch"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Counters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FnContext"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LockLatch"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ScopeBase<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn std::ops::Fn"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: latch::LockLatch"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: registry::WorkerThread"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: sleep::counters::JEC_SHIFT: mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: sleep::counters::THREADS_MAX: mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IdleState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: L"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LatchRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpinLatch<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ThreadPoolBuildError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: XorShift64Star"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Yield"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::any::Any + std::marker::Send"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: job::ArcJob<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: job::HeapJob<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: job::JobFifo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: job::StackJob<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: latch::CountLatch"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: latch::SpinLatch<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: private::PrivateMarker"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: registry::CustomSpawn<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: registry::RegistryId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<*const registry::WorkerThread>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: registry::WorkerThread::set_current::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: sleep::counters::INACTIVE_SHIFT: mir::Operand::Constant: the constant item sleep::counters::THREADS_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item sleep::ROUNDS_UNTIL_SLEEPY"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::breadth_first"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::exit_handler"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::new: rayon-core's MIR stops at mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::num_threads"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::panic_handler"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::stack_size"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::start_handler"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ThreadPoolBuilder::thread_name"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: join::join::call: rayon-core's MIR stops at type outside the lift: R"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: registry::Registry::current_num_threads: rayon-core's MIR stops at mir::TerminatorKind::Call: registry::WorkerThread::current: rayon-core's MIR stops at mir::Operand::Constant: registry::WorkerThread::current::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: scope::ScopeBase::execute_job_closure: rayon-core's MIR stops at type outside the lift: dyn std::any::Any + std::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AbortIfPanic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Configuration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: JobResult<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ScopePtr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Terminator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ThreadPoolBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Any + Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: job::JobResult<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: latch::LatchRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: latch::OnceLatch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::DefaultSpawn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::ThreadInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: registry::XorShift64Star"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: scope::Scope<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: scope::ScopeBase<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: scope::ScopeFifo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sleep::IdleState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sleep::Sleep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sleep::WorkerSleepState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sleep::counters::AtomicCounters"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: unsafe fn"
+bodies = 1

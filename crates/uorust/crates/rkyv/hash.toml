@@ -1,0 +1,92 @@
+[[fn]]
+path = "rkyv::hash::<impl at src/hash.rs:11:10: 11:17>::default"
+kappa = "4d968379e10200c870e8f6fe356b707d4fc6e19b44d3f80dce3263a2c9ff603c"
+embedded = "2624d3f0bd2a5001fc06984f88c0880d77f1a495862137797d2d6415000b8496"
+status = "residue"
+cause = "mir::Ty: hash::FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::finish"
+kappa = "3f8bc616d300a476ffe3504743115dae6ca5439534c4a6f9e368613698ab8257"
+embedded = "394acfc5357d839b1b0feb82cb0cb9237fbe3c043752e026f510f80817009770"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::write"
+kappa = "a66438039f3851401ad294735a01630045a6ed765be2e369d9d9678f04789b41"
+embedded = "2f1ea32988ba54c41ff8b7872765d8633f32ccbad25971f8d18cfd20e48c4d6a"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::write_isize"
+kappa = "6ec40796aca502efc4d66a22bcf5a292079cc208a503eca2e43eae4a1aec41ef"
+embedded = "56645581bbef0f20ec153d8b817446d8dfa59ba2722ba590de50382a12407dd8"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::write_u128"
+kappa = "dcce9b4fc9eacb4201412f8e69291d7fe733c58594ffba43c3524f7445d275cc"
+embedded = "d22fcc9f1d4c8fb8b6db217b9cb3400d034423d6b0b6fc66676ae582d267f1f3"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::write_u16"
+kappa = "d9f7fee956cd1d93f803b9b9234919585aedc97d97329649f000d7a2824140e2"
+embedded = "1e682b14335dc4619d6e80b45bfb11b0d3e112e2dd1dd966a64ed4167fec1360"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::write_u32"
+kappa = "d4ec3c0b7b6d91027f9ee61eb3d6c043698784fdd0865908aed0e4d86915a6a0"
+embedded = "09b00b9f4613123fc1ecae2464dd2d6b089c43b3b558f4f5c1ca7fbcd0530d6b"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::write_u64"
+kappa = "b0cc6a7922a5636e5ca8a066a94f6f8740a44faa5b1f1c13cdbab04ebe85bd88"
+embedded = "3ae92d15e5f2ad03e7e4ff08d9606fcd808a245a08675bb85c6cbb7eede39c68"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::write_u8"
+kappa = "cf62318bbc551e2d4d9c190856f2576ba2c49e02b762d47fef9b0fc8c9233627"
+embedded = "87c4747a9e77e61ebaae81685c92498f9b466470662c8f9871fd90a5bfede673"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash::FxHasher64::write_usize"
+kappa = "8150b7e7bc0e13c8ea28733f7666ac04d17afc30d63bc55be87efc8ba6a1d15a"
+embedded = "cf497805c43950bf6c38b50b8f5e8c1d4debb42411774bacef8a8d83c7f4d2f3"
+status = "residue"
+cause = "mir::Ty: FxHasher64"
+
+[[fn]]
+path = "rkyv::hash_bytes"
+kappa = "d775fd000f228f8cc704850516b829590e99f278d03234341a9e72939a116baa"
+embedded = "a75f656ecf3e02fdf67e79fa8cc46da1181779ff68517701b74403803db41b1e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "rkyv::hash_value"
+kappa = "887c8446d372502bfc0e382f02308092def64a99fc13926aeca2fa5d52540a30"
+at = "H=u32, Q=u32"
+embedded = "c97b61d98f36316ce3fdd6c3975fad200e94246248fc2e5259eaca6cddec6540"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "rkyv::hash_word"
+kappa = "be5054bf21135433b6f883068cfadbe000b4d9b7b1015e2469b1bec198027317"
+embedded = "bfaf5535a630addd6274554054654507fed8feeb596f8001e2a3e23997768aa7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item hash::hash_word::ROTATE"
+

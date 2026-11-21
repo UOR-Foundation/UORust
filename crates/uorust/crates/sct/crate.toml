@@ -1,0 +1,112 @@
+[[fn]]
+path = "sct::<impl at src/lib.rs:31:10: 31:15>::fmt"
+kappa = "b37589edfabc447eca8179bea3075bacf430229a562cfae7c841c96eb2174a87"
+embedded = "c9fe9ca37789d2d0f82271e4ccb6ff57cde4cd60af0476d98a82900ed440bcfc"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "sct::<impl at src/lib.rs:61:10: 61:15>::fmt"
+kappa = "6fb1567dd2f362a061b988c145a86822df08ec9250a5ddd714a6b227b04c9834"
+embedded = "3ea9ad7b77f79f8732ef4348e897d0e8cfa76f75023bb99051a6ed4354147d42"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "sct::<impl at src/lib.rs:61:17: 61:26>::eq"
+kappa = "b6d89be6e5da3610ea2ca4594e755001a675bd1ac3f4178f152234e8e6a3dd22"
+at = "Error=u32"
+embedded = "72ebfc59aecd6c1bd7b49f219f6eb97e4b0840e9dbcc2abfe809fcbc2785b0f7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "sct::<impl at src/lib.rs:61:28: 61:33>::clone"
+kappa = "d204fe046328a38a4e40e6984c4e2a914adfcda500ea9509f1e07791defad3ab"
+at = "Error=u32"
+embedded = "627f48a03c6a99ebf5f5170d5ef0013fc307e98ccab1c8e69b63e826c857e94f"
+status = "translated"
+digest = "e0a9641f5023f00684a68f0c3811ccb5dcdcbee467e55b277c52cfc0ed5cd9f9"
+
+[[fn]]
+path = "sct::Error::should_be_fatal"
+kappa = "258185eba07ae396bd1312a3be147f81aa3dd69fe9787d7b9d51bf4fad9a1624"
+embedded = "772a1dbbb9995e2cf50ced434305288ae74d19d8aa926011708c0b2de53606c6"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "sct::SCT_X509_ENTRY"
+kappa = "52708abc55f96b558b9897b6d7daccf66fce61cb052183986294b1285b9bce0f"
+embedded = "de639de47c7a4e8aae692bdd8927e330e48a4550f19fa6e43d6ff52d11954b64"
+status = "translated"
+digest = "557fb2b374c7396e6e251968aeb3ba862c0f6cc2faac25d59a43c6bec8518f29"
+
+[[fn]]
+path = "sct::Sct::parse"
+kappa = "ce1da0732ee6aee3d191f23f36961f97c696eda433b21d52dba6ba4073e799c5"
+at = "Error=u32"
+embedded = "4806a7a3198604b3ca84052b22d1f42cffb4343d86b41155c949c84362d998ee"
+status = "residue"
+cause = "mir::Ty: Sct<'_>"
+
+[[fn]]
+path = "sct::Sct::verify"
+kappa = "a2f60f9c2bc7c1200314e19e3499a81ec6d5c2066cb836c9d688f994fe0e1bc6"
+at = "Error=u32"
+embedded = "55a24435e472a847a20d8652088e5119471d35082419b5142bc0228253a27039"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: Sct<'_>"
+
+[[fn]]
+path = "sct::decode_u16"
+kappa = "b0a76f90e22ec6481359814e778e5e214a602a42baba9e4bf30a1b665a7f043e"
+embedded = "3a571afadf7fbfc76e1ec616eee4548264cdb6bf6c3f503c8b6e1365f806108f"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "sct::decode_u64"
+kappa = "77a5f471b81414e9373f2358d07bc68e48b551070794074032e6a4c1704d0b0d"
+embedded = "8f3bf957bc9710f0f9bd3d20505c7623e443f413b0d24be86952a786b4a9e9af"
+status = "residue"
+cause = "mir::Ty: Input<'_>"
+
+[[fn]]
+path = "sct::lookup"
+kappa = "5f6bec827e0d9524ee993bc5e55a46e9ce5de2fff16b701cf7ef6bdefbfec61b"
+at = "Error=u32"
+embedded = "ff1446fcf2ee1d1df906c1a020acf7b91effad2172e7438d27048b12739d914f"
+status = "residue"
+cause = "mir::Ty: Log<'_>"
+
+[[fn]]
+path = "sct::verify_sct"
+kappa = "1f77626173e0d7f50145322e1833f2568a5afcafa4b678120ec074b7aca46ab6"
+at = "Error=u32"
+embedded = "3cf082aea1ed01f5cb439961653fced79ce9c0eb7a46c4463b0d5e7150517069"
+status = "residue"
+cause = "mir::Ty: Log<'_>"
+
+[[fn]]
+path = "sct::write_u16"
+kappa = "127ee0978f1c9f53fcd5dc074dd1998466d19057b24191e9e46b73808d79402b"
+embedded = "198ac0f68d9e11fd25cc65a3689e1d2db98e400eeb305a27e8c7877222b8df60"
+status = "translated"
+digest = "a7271b4e67370a2ae013f5bfa71f2e1b70423b1d927436b3d3f74cf786a31590"
+
+[[fn]]
+path = "sct::write_u24"
+kappa = "9f6990678d55e85da9cfcff2e513da8f07cad58df461e94e0b0a9d7fc9a8aa86"
+embedded = "526ead67664c3fd3297665e7b8470600bc7307f52578b7ed217e2c75a14a3eab"
+status = "translated"
+digest = "e37cf786ad661a4d77d31d464e5528e7c342ede9f24d9907f7aad07b18707765"
+
+[[fn]]
+path = "sct::write_u64"
+kappa = "d5f74613e0cda09df0847e57eac52d7b06e778661257e436bcc2bae177e48316"
+embedded = "7dc575a1dfa7aca2f876d9303223db3ee9f8b805a795ff08a809a1275f760f63"
+status = "translated"
+digest = "51c23ad3604c02d8a0839016eaaedb5c154002e5026762ab3aa60da2d85506bb"
+

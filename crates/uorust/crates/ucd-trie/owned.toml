@@ -1,0 +1,107 @@
+[[fn]]
+path = "ucd-trie::CHUNKS"
+kappa = "32f98cd24e03ad109b0d442f2eb7fb4401d3aab6e32d05597c25b053ba67d820"
+embedded = "e778cce2aaa189e1b1e48f2e4e711e0a72bd0294698a031b0da18371a5c09044"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item CHUNK_SIZE"
+
+[[fn]]
+path = "ucd-trie::compress_postfix_leaves"
+kappa = "30b79bdb98954920ec0c0e2d021cce3c64101124f9bfb8fddbd5755cc179002f"
+embedded = "a4c985d0b99357dddc1e7f2ebca1cdabf2fc37698a44b3c0df42bba6cc55ddbb"
+status = "residue"
+cause = "mir::Ty: owned::Error"
+
+[[fn]]
+path = "ucd-trie::compress_postfix_mid"
+kappa = "4cab17faed652b65bf76a359e711ed8a52506f385e98be7124d6e843d7e8c86d"
+embedded = "ce40a203385182024273e7b89569d4cc183f8a76d9fc5ffac95035aa87e1ea30"
+status = "residue"
+cause = "mir::Ty: owned::Error"
+
+[[fn]]
+path = "ucd-trie::owned::<impl at src/owned.rs:102:10: 102:15>::clone"
+kappa = "e7679d2abaa743b05522d809d0a0c574f00ec4c0b8950f55e7ca231cec268bf4"
+embedded = "f8136b69e92acb1eaf2be1e594c71ce772f0975740ef5ccd57584c8e745e6838"
+status = "residue"
+cause = "mir::Ty: owned::TrieSetOwned"
+
+[[fn]]
+path = "ucd-trie::owned::<impl at src/owned.rs:65:10: 65:15>::clone"
+kappa = "7a0bbd66e466c9e3dac27686af00de65901ac50ad1bc6b3467803ce89ea496d6"
+embedded = "f00c276eaec517d49547c70e3a7b92ef414aef491bfc70afa7d28c811bc8c160"
+status = "residue"
+cause = "mir::Ty: owned::Error"
+
+[[fn]]
+path = "ucd-trie::owned::<impl at src/owned.rs:65:17: 65:22>::fmt"
+kappa = "1616d64fd55299fef3ce967e8b6dcc9e6a0d01dbf1e484c83c9ba666b2ebd692"
+embedded = "92e0db7927145171859e32be6b53f357f2c3871d2d3ceae07e678e1d84ae72d9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ucd-trie::owned::Error::fmt"
+kappa = "9e2b1a8dc2c21fbf1d0ecf27bdd8e43524f5fc705761b078cc7b68a8558f9ff4"
+embedded = "6eaa6ffb279d7f2bcdf25a01e41ca20be54c3ec394b10953854a2592bb04f652"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ucd-trie::owned::Error::from"
+kappa = "18fb3ccb2a85107442d63474a5f4b6963d465b125c693b2cfe3f2f93546feb10"
+embedded = "ef8a170e6a93a4f5d596db7399efe3eb91cf4b566ecb094a1d6fc7b6c224a1dd"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ucd-trie::owned::TrieSetOwned::as_slice"
+kappa = "0b1935b6c85b7e6483b069b588c4957555c103f3e3683682bd483b9ef689c93e"
+embedded = "30be1203d944e51747373d3022509a99d13538ca8079376bf6e9f3b67b01a9b7"
+status = "residue"
+cause = "mir::Ty: TrieSetSlice<'_>"
+
+[[fn]]
+path = "ucd-trie::owned::TrieSetOwned::contains_char"
+kappa = "681e3c4af6efc3af08129f3d479d401c61eafcaac08c1025998dcb42c0f0e571"
+embedded = "0d7884b5631ab30160f5988224895a3f8a8c6f6962ab756199922a554a5615ea"
+status = "residue"
+cause = "mir::Ty: TrieSetOwned"
+
+[[fn]]
+path = "ucd-trie::owned::TrieSetOwned::contains_u32"
+kappa = "8e827ad62abf67ae73c9fd64bed124ac8cb24951d001fd5c3cbb78ea52645f75"
+embedded = "4553216fdeb18dcea67cd07bc4066e4210ba93e5ccc1d4e22928399ece35b577"
+status = "residue"
+cause = "mir::Ty: TrieSetOwned"
+
+[[fn]]
+path = "ucd-trie::owned::TrieSetOwned::fmt"
+kappa = "bfef00499ade5d24bdaaee2788925241bc643d1ed1a3f4b0e14078756ef22e8e"
+embedded = "60274a8571f3e39d2653aadeba21c10d60d51d77a9b1df67cb5da84798a1c5d6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ucd-trie::owned::TrieSetOwned::from_codepoints"
+kappa = "b8558e22c86e1e421d191154e19ce0ef898ceeca1071354bd144fa51abdceab6"
+at = "C=u32, I=u32"
+embedded = "2cb4c87671162c8d352c7e1a8c7ba606e1764a0a6f23f2c70e0ccc04e2303954"
+status = "residue"
+cause = "mir::Ty: owned::TrieSetOwned"
+
+[[fn]]
+path = "ucd-trie::owned::TrieSetOwned::from_scalars"
+kappa = "8dc5e6b60eaafe2296696f7ceab3ec920a439f4d7be032078791819906652df7"
+at = "C=u32, I=u32"
+embedded = "1db57b78fac9ac12d8e51765df67b25c74f50bee5d1a943c251ad742669b3032"
+status = "residue"
+cause = "mir::Ty: owned::TrieSetOwned"
+
+[[fn]]
+path = "ucd-trie::owned::TrieSetOwned::new"
+kappa = "e6eab0ee46bc01c487dbfafc8349bca0c8cc487fc1e40bde163a1baf906ee510"
+embedded = "5b7f8e670b7d6290542ae34c582e5fd27b0476da913595318777b57c2b089d9d"
+status = "residue"
+cause = "mir::Ty: owned::TrieSetOwned"
+

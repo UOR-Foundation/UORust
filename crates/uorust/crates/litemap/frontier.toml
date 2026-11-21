@@ -1,0 +1,227 @@
+# The litemap register (written by `uorust crate litemap@0.8.3`; do not edit): every body of
+# litemap's MIR at litemap 0.8.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 141
+translated = 8
+residue = 133
+
+[module.map]
+bodies = 103
+translated = 0
+residue = 103
+
+[module.store]
+bodies = 38
+translated = 8
+residue = 30
+
+[embedding]
+bodies = 141
+embedded = 141
+evaluable = 141
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: LiteMap<u32"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: map::LiteMap<u32"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: map::OccupiedEntry<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: KeysIterWrap<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ValuesIterWrap<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: map::Entry<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Store"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by StoreIntoIterator"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item slice_impl::map_f"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item vec_impl::map_f"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Vec as Extend>::extend"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::KeysIterWrap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::LiteMap<&u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::LiteMap<alloc::boxed::Box<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: map::ValuesIterWrap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: slice_impl::lm_binary_search_by::{closure#0}: type outside the lift: V"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: vec_impl::lm_binary_search_by::{closure#0}: type outside the lift: V"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: vec_impl::lm_retain::{closure#0}: mir::Instantiation: u32 for a parameter bounded by FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: store::slice_impl::EMPTY::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: store::vec_impl::partition_dedup_by::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: CmpOrdering"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Vec as IntoIterator>::into_iter"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::as_mut_slice"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::clear"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::insert"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::remove"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::reserve"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<&[u8]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<&str"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<i128"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<i16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<i64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<i8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<isize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<u128"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<u16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<u8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LiteMap<usize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::VacantEntry<'_"
+bodies = 1

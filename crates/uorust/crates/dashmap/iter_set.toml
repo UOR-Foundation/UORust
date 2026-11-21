@@ -1,0 +1,32 @@
+[[fn]]
+path = "dashmap::iter_set::Iter::new"
+kappa = "062f9d93dccafbc6a8b0676d320d58d65d4906f5de838a581a31f1a312f118b2"
+at = "K=u32, M=u32, S=u32"
+embedded = "83a5dbfbf3f508d5ca5711f9229cffd91ee4937acd2d576abd942ece8a56e1b7"
+status = "residue"
+cause = "mir::Ty: iter_set::Iter<'_, u32, u32, u32>"
+
+[[fn]]
+path = "dashmap::iter_set::Iter::next"
+kappa = "220904451dac37c7ec9284aa88e5af5ad88b0538e25886f5d4823aa2a278c06a"
+at = "K=u32, M=u32, S=u32"
+embedded = "1e9470596c3b69d5c0785d7fde7751ec7f4085a366f31e1b7c0255fd165a268c"
+status = "residue"
+cause = "mir::Ty: setref::multiple::RefMulti<'_, u32>"
+
+[[fn]]
+path = "dashmap::iter_set::OwningIter::new"
+kappa = "09a467f820e5f0b5b31194f40af732b5f3623c6f3ef1f662ec1e3dcf7faa82c2"
+at = "K=u32, S=u32"
+embedded = "3a6d9b6151771445f05e896a24d8878b9cb0ea25a2b80614a516078aa5571cb6"
+status = "residue"
+cause = "mir::Ty: iter_set::OwningIter<u32, u32>"
+
+[[fn]]
+path = "dashmap::iter_set::OwningIter::next"
+kappa = "00563258056d7cd86e2980db7bc39aed347db8fbc067dfdb4840c7fc8bdf72e1"
+at = "K=u32, S=u32"
+embedded = "8b227b7137503962722a8cb97bc9d8cf557b86591c299c0075c104d7e158a6b6"
+status = "residue"
+cause = "mir::Ty: iter_set::OwningIter<u32, u32>"
+

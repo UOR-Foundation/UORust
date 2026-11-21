@@ -1,0 +1,166 @@
+[[fn]]
+path = "cast::<impl at src/lib.rs:109:10: 109:15>::clone"
+kappa = "7d066aefb6547a0bda2969e13be5eb9c0d4a41ffb7880c06d1da39c70017787e"
+at = "Error=u32"
+embedded = "3d6c0a8a6b4f931668c46f1409f5cf507fc135c249cb045a1071e6b3242eff0b"
+status = "translated"
+digest = "a6061824df2445a903a6f0189a32896681628cb3b1855cdf16e9e5e0dedc0fdd"
+
+[[fn]]
+path = "cast::<impl at src/lib.rs:109:23: 109:28>::fmt"
+kappa = "86cf760ea6c7fb292c79d953ebb103574cb0ff8734bd0523489286780bf6a455"
+embedded = "0ec8b1949fc717f4bb3707a54ecbf8f82cf2676522799be6d7042e1f8b504c88"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "cast::<impl at src/lib.rs:109:30: 109:32>::assert_fields_are_eq"
+kappa = "393fb5a941a02d9e83a8742b5538da90dbf93abf8c509aa0037038fffc233bd1"
+embedded = "09ad16cbdf9ec9fd0598783ad5075a8f9dc8502d838731ac6eb01e986774b651"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "cast::<impl at src/lib.rs:109:34: 109:43>::eq"
+kappa = "30aff13d0955f2ae6b23db3da99d6ea8fae746b68fff4be58e7d871ba08e1ca4"
+at = "Error=u32"
+embedded = "c6f975711c1075f31611f7de752f8896e7339712d0a3ef92f475423759eb01a8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: discriminant_value"
+
+[[fn]]
+path = "cast::Error::description_helper"
+kappa = "2b1e347978441c39ff57a7b50fe1fa9c30d052076c045feed4929eea46c13a04"
+embedded = "dc726236d64c87f3a81f074a01aedfa6b37e43edf8b3a2f8920ec616fdf4058c"
+status = "residue"
+cause = "mir::Ty: Error"
+
+[[fn]]
+path = "cast::Error::fmt"
+kappa = "6c3ba8a74b62bbf22f4751edd5aa06a23126a9e79ed32ab641e101c5756848f0"
+at = "Error=u32"
+embedded = "67f5ed72797f65922f250d3a30b57e899c4ab79c6fe3db48f8a12e24ca23030c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "cast::f32"
+kappa = "0a73e5b43b8f6169930aa70df9e503d8b4590e561c475579100225706de0ae32"
+at = "T=u32"
+embedded = "b340e432ae48f8534ead57cc9a7c4855040507c5919d94f3f958bc303848e787"
+status = "residue"
+cause = "mir::Ty: <f32 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::f32::cast"
+kappa = "90d9681bb4e68a75deed5ae5b7249f32669657c0899cd3f3ac33c88b5ccc803d"
+at = "Error=u32"
+embedded = "209eb22a21388deb189c921f7f37601262b467a6ead20d4222aff27dbe5fa1e0"
+blocked = ["CastKind::FloatToFloat"]
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "cast::f64"
+kappa = "9bb39e8a58087238c780949d99a156f60caa32ffe38ca1f5847349c967c2af6f"
+at = "T=u32"
+embedded = "ff7557c8a388960bd3620a383fe0ce98b6256c0b1e0c5872c5fc132ce7a8a910"
+status = "residue"
+cause = "mir::Ty: <f64 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::i128"
+kappa = "c17d9eeee5ee422f40fbad5e323e0ed1ed289b1bfd8089bea1ceaa70469b0c00"
+at = "T=u32"
+embedded = "9cc1d2dcf5f535f72913af308a5fa116f1d1925ebd1bc6488ebc10443b16b3ef"
+status = "residue"
+cause = "mir::Ty: <i128 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::i16"
+kappa = "f74f6df7373f0c2757e2c5627fb02fa3e91e5d55f0d28e3f6c551c136f8853c0"
+at = "T=u32"
+embedded = "b212d595e3ecc0e3db35b3a3fae5c4a516b148b6f7c1b043a380428fea650152"
+status = "residue"
+cause = "mir::Ty: <i16 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::i32"
+kappa = "f2e47e4468d40ec7e89d8eb608ea72c2a35918009d323d1a901f2d6a5064bcdb"
+at = "T=u32"
+embedded = "39b733fe56b34c2d68e0b1cbbe706199e064284dc257f2568a88478002421e68"
+status = "residue"
+cause = "mir::Ty: <i32 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::i64"
+kappa = "f32947d8de47d56489c956e1ffce83f3793cfc0abccfd84f28287eea6632f204"
+at = "T=u32"
+embedded = "07d55eae6a691feeb80b21b6d21a042b20efd04e56451e1824cd1be84024c530"
+status = "residue"
+cause = "mir::Ty: <i64 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::i8"
+kappa = "9e4942dc8a392e00fdbcca80b35151c37f509ed86b2892f7d376f73b294a2e3b"
+at = "T=u32"
+embedded = "c20556336c9670aa899edd546238b76d9a47cdc3650602e2b4d3af766dcf1a8a"
+status = "residue"
+cause = "mir::Ty: <i8 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::isize"
+kappa = "cabdc7f58a0f13ebeb18db87c5719a2aeec762866b79ebd2c5f622c24d169d0a"
+at = "T=u32"
+embedded = "3343133e95d8fbdf46d3663420b11d1cd917ae2cdbeb1d8e31bb6066843c6f54"
+status = "residue"
+cause = "mir::Ty: <isize as From<u32>>::Output"
+
+[[fn]]
+path = "cast::u128"
+kappa = "89cceb1fe1d4fc437f3fe0fa65198cb6657e564a1ddc74b550172c82706eb5c7"
+at = "T=u32"
+embedded = "b320be38c20da86c97bf5e90dbddf8298858edd17818918eee7ac69a1503b294"
+status = "residue"
+cause = "mir::Ty: <u128 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::u16"
+kappa = "8b4909aba91fda86fb9185549f91cacac58811187f7cf21cbb8abe63c47982c7"
+at = "T=u32"
+embedded = "151048a690c33d3a6e1340f9d56fc25a446c9a50aab677f04ef26c68a3d41d74"
+status = "residue"
+cause = "mir::Ty: <u16 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::u32"
+kappa = "3faf629aaf693878c825301521e7d5fe32e08624c27289552dbbadc54d407734"
+at = "T=u32"
+embedded = "a56a17b172367dc031e47e1f36bf87b11cdeed0f94360de9b83f7b8db7c0eb51"
+status = "residue"
+cause = "mir::Ty: <u32 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::u64"
+kappa = "3577feabeed18b4219c8ed3858e177d3b3927fd6ebfe85dc39084d82aefd782e"
+at = "T=u32"
+embedded = "e810750a75b1aba29514f627a1b92c8860cac5aed885084e570df32db6bfdcad"
+status = "residue"
+cause = "mir::Ty: <u64 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::u8"
+kappa = "b8394d334855bdf05ed34f2847867ea44d9cc13eea2e134c1582dd2781ca030f"
+at = "T=u32"
+embedded = "2894627ca1a98f36cf500b90afd9bd5185476efe2d4b7e41bad3ab71b279fbaf"
+status = "residue"
+cause = "mir::Ty: <u8 as From<u32>>::Output"
+
+[[fn]]
+path = "cast::usize"
+kappa = "cec1a3134e5d8d2d3e4c722262f828e6de756bb83e06ebec9c6f8100db114ab1"
+at = "T=u32"
+embedded = "a2f79570f9bd48183465793ef6bf7ec69dd23c2e3b055cce65acb4d9e86cacaf"
+status = "residue"
+cause = "mir::Ty: <usize as From<u32>>::Output"
+

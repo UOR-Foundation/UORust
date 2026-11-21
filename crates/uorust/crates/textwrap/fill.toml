@@ -1,0 +1,22 @@
+[[fn]]
+path = "textwrap::fill"
+kappa = "3f288c3801a129a89c20c55d1ac06fc63792435cfcdbf32457cb34cf86e004ab"
+at = "Opt=u32"
+embedded = "e189a66f8cd94a52fc15f4480537e4110d24a2ac77632f3271648beee152019e"
+status = "residue"
+cause = "mir::Ty: options::Options<'_>"
+
+[[fn]]
+path = "textwrap::fill_inplace"
+kappa = "7dbe3633e2e7af72a5c2d24f0f7231961887173a804433ac5e800eeb999b88c3"
+embedded = "6310c4f55597c665f7ebf4c1bb88059814548c96de6d0851b9460db5e5167ee4"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "textwrap::fill_slow_path"
+kappa = "c3099fe0822f99239400d8579b7017d39443e438b43be8e6d2214d865247cc18"
+embedded = "e9be7c331383fe7a665cb503fe6fab894230bc251ccb1a1665f1196c1f502527"
+status = "residue"
+cause = "mir::Ty: Options<'_>"
+

@@ -1,0 +1,155 @@
+[[fn]]
+path = "http-body::<impl at src/lib.rs:90:1: 90:47>::is_end_stream"
+kappa = "a712bf1556f9dbecae041867a216003e7dfd514b45f53b186d7d5a698c90e022"
+at = "T=u32"
+embedded = "98e44be771ead6e124eb0a0a3aa4861f9174d02bf213e2c87988c2eac9cf7af4"
+status = "residue"
+cause = "mir::Ty: std::pin::Pin<&u32>"
+
+[[fn]]
+path = "http-body::<impl at src/lib.rs:90:1: 90:47>::poll_frame"
+kappa = "82da44d01a27aedfecfef5269785169776194b6825ca7766894434c9569c42c3"
+at = "T=u32"
+embedded = "0309557100a0e31d368e1379625eeeed29259251f3f021824f2716230d8b6e8c"
+status = "residue"
+cause = "mir::Ty: frame::Frame<u32>"
+
+[[fn]]
+path = "http-body::<impl at src/lib.rs:90:1: 90:47>::size_hint"
+kappa = "dceb30c656bff85a83e94d13595a81fa394d9021be5720e3b70ecc88ad594d76"
+at = "T=u32"
+embedded = "fc1842cce6083f5ac80bb7e88fcdf4738848c8911a5da1223968ee0253af1997"
+status = "residue"
+cause = "mir::Ty: size_hint::SizeHint"
+
+[[fn]]
+path = "http-body::Body::is_end_stream"
+kappa = "0ec6835f954f214429f0f46db0aa6ab9426f9eaf65191a6715e1a0bd9f9ad3ee"
+embedded = "d0d60cb41565d8d7e9af840446330e80d0e533a76d11d38bec929e8e07f9ea64"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "http-body::Body::size_hint"
+kappa = "64b8674eb3996102c6f80093e1823042441e30a3237c92d6ba285c58e60c8d60"
+embedded = "be83ab8be99eb8f56fb52d2139e44a876db8950442cd2f894ed3ff8f832ca4a9"
+status = "residue"
+cause = "mir::Ty: size_hint::SizeHint"
+
+[[fn]]
+path = "http-body::Box::is_end_stream"
+kappa = "9b9b3721ed91216a34147e6a2c25151954b087cdaf3ef50e9f3a153073077bd3"
+at = "T=u32"
+embedded = "5707feae6afef90bd86dc78412d5260943c1259e721fc3e8a5ba34c4bc15e899"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Body, which u32 does not implement in core"
+
+[[fn]]
+path = "http-body::Box::poll_frame"
+kappa = "a4de80da44658beb47f75cd9bdd94e8cbb10a2dc7ddcd131823eeb0b6781d218"
+at = "T=u32"
+embedded = "e23ea7a9e52d4036096e32a81468447b6a79e6e9ef5a05ca829ff3ed612b795a"
+status = "residue"
+cause = "mir::Ty: frame::Frame<u32>"
+
+[[fn]]
+path = "http-body::Box::size_hint"
+kappa = "6a9aee2b4d7e4da0e442f0f909a27802872f9b39c241c39ac211af6e59ade8e4"
+at = "T=u32"
+embedded = "de29501c65c75db9f51787abfe369ab4551d68202772ab7017e73205562ffbc4"
+status = "residue"
+cause = "mir::Ty: size_hint::SizeHint"
+
+[[fn]]
+path = "http-body::Pin::is_end_stream"
+kappa = "99ce947a961a9da93b55596d09cee9b8de1eae30a996679144be6303d96a9ed6"
+at = "P=u32"
+embedded = "1618f29e6070622ba04d6ab962ae61b97ad9d15652a742280a07f0d0aabcdd28"
+status = "residue"
+cause = "mir::Ty: Pin<u32>"
+
+[[fn]]
+path = "http-body::Pin::poll_frame"
+kappa = "b0b8ed6c692ebbf664b4b214ae30cd88720bb87c64e7d985a8179de116bc8926"
+at = "P=u32"
+embedded = "a47e280dfe4a6c88e2808c8224ac7be4c1fa16c00b7f02def4ce3dfc46ace257"
+status = "residue"
+cause = "mir::Ty: frame::Frame<u32>"
+
+[[fn]]
+path = "http-body::Pin::size_hint"
+kappa = "978b22dc73fbdca22e6507ec667b6e244002e9316af49209a76d04d7e3bc0ac3"
+at = "P=u32"
+embedded = "369d9afdcf0f73b08fa6e51560c9f0865848c21736388258028747c26197543e"
+status = "residue"
+cause = "mir::Ty: size_hint::SizeHint"
+
+[[fn]]
+path = "http-body::Request::is_end_stream"
+kappa = "3878bc509a1c97e66686b5ee5c4d498ec328c361b5a4324ded492b248aefbdf7"
+at = "B=u32"
+embedded = "e67d93163c9c5403b6abb5edb93304715bdae7ecd1cb2cc542bfbb12fb21a147"
+status = "residue"
+cause = "mir::Ty: http::Request<u32>"
+
+[[fn]]
+path = "http-body::Request::poll_frame"
+kappa = "4f69dadf4510d30ba1271c33595a75a430a8b276e1dad5ca297549daebd3bbc6"
+at = "B=u32"
+embedded = "72b7eec4b9ddf6b0142cfb64d2d746264e628ef64d0140e5ff7e5e40375cef15"
+status = "residue"
+cause = "mir::Ty: frame::Frame<u32>"
+
+[[fn]]
+path = "http-body::Request::size_hint"
+kappa = "1888d9b94f87c52fb3e0c7c959722b92288a32ef206874eecce2258e7ffae6e7"
+at = "B=u32"
+embedded = "396360f3f21c37c2d1cd96dda4993c92bd83d740c017e17a27b4614eea0d39c6"
+status = "residue"
+cause = "mir::Ty: size_hint::SizeHint"
+
+[[fn]]
+path = "http-body::Response::is_end_stream"
+kappa = "14d443dcbf5a5cb41072caa0c0d54e4b13406d5565528411343191b15059a758"
+at = "B=u32"
+embedded = "dffdc5803cd2cd7fa2476559602e6ab63156a90b9a7dfc22055ca4c5fa777d0b"
+status = "residue"
+cause = "mir::Ty: Response<u32>"
+
+[[fn]]
+path = "http-body::Response::poll_frame"
+kappa = "1eead01c54ddc0b6bec76623e50bda6ba53810d2dd9f9da0d4668d4a4ec792b7"
+at = "B=u32"
+embedded = "24dd7fb32e752f37817781022632af6fee70bf4bebc64859118fada58487207b"
+status = "residue"
+cause = "mir::Ty: frame::Frame<u32>"
+
+[[fn]]
+path = "http-body::Response::size_hint"
+kappa = "54a0c45f401f92b9dfa76b81e7e91f00966f09a548510ffddeb383d23324ecf9"
+at = "B=u32"
+embedded = "6978a42571c2ce683d57289e96a6efd8705026cc4da7885c0ab6858430201411"
+status = "residue"
+cause = "mir::Ty: size_hint::SizeHint"
+
+[[fn]]
+path = "http-body::String::is_end_stream"
+kappa = "788921d29738ca6078c55a3c3ea4bc0c14f332da2c58dd8dc738ee431ea16f31"
+embedded = "2654735e174e7ccea36f4c7f1a0da3b95282d526616a4f84d1ede612baac4de3"
+status = "translated"
+digest = "59591825bbac7f5a25ca82b0e053dc0c5f77ba287f1a38dcd5854a3fbde5e87b"
+
+[[fn]]
+path = "http-body::String::poll_frame"
+kappa = "5a6f14641959fdc10fad4aac01d2ba174212c2e954dd72fe3dd9c239c72bcd4e"
+embedded = "f1797f9eabd9ce654137763005a8017b7e1f1b7e246284fe8ebad55323b75257"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "http-body::String::size_hint"
+kappa = "ee6143b50aa90dc1b2d77435952db627ef885fd56a6ee77b915bd760df086940"
+embedded = "09852c67db84bae921119b472e19cb7872592f6a5acb36ed3730d1e4fd944d8f"
+status = "residue"
+cause = "mir::Ty: size_hint::SizeHint"
+

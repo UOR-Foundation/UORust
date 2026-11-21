@@ -1,0 +1,461 @@
+[[fn]]
+path = "async-executor::AsyncCallOnDrop::new"
+kappa = "6ec34dac471226b45bda6093ad5b0cca6625c6c07051ea8a17507408061a84b2"
+at = "Cleanup=u32, Fut=u32"
+embedded = "7eecf8dcbf0079e4c4fb6b7e7072ba33c2097cbc6bcd8661f0a32179d840faeb"
+status = "residue"
+cause = "mir::Ty: AsyncCallOnDrop<u32, u32>"
+
+[[fn]]
+path = "async-executor::AsyncCallOnDrop::poll"
+kappa = "0a217cdf15b867d8c98f622286aa6dde2f048f375a7c21f782dcc8b69572b1e7"
+at = "Cleanup=u32, Fut=u32"
+embedded = "53a6a35d409a7b088dea2246293ef6a02b3881aead793dd4a076a41932808a10"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "async-executor::CallOnDrop::drop"
+kappa = "3a7a1fb9ae7e0397cd1f10d5baa0c8d1a0ee4f921dc836ce4808d9cad6f114ec"
+at = "F=u32"
+embedded = "2c10abfec6779508d3fa206227910e6e6fac078e0f477a8e3b2aa9457f90d959"
+status = "residue"
+cause = "mir::Ty: CallOnDrop<u32>"
+
+[[fn]]
+path = "async-executor::Executor::default"
+kappa = "3d874468970f44d34196f34acf0a07a9a844cf146c2705eee44a6675795a2987"
+embedded = "64e0e65699b37c9a3a830478fb83462eacfa6a2fdb93af84b9e5fcbe3dce5a34"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::Executor::drop"
+kappa = "3ef00c004f9d7568f70ac7f2cda43ddf47b0e85645a0e1a270a0f8b5d8c0e3ef"
+at = "State=u32"
+embedded = "6519cec73110cda79242cde64c94b69dab5082f363e40ec83a792981cb4516a4"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::Executor::fmt"
+kappa = "14338963c30389fbcec0dfd12202db180680a71c4f73ec0a3d88d4d37ac92f8d"
+embedded = "29d9a782807c3a2699214d3820bdf1df24344241054720141b4079658ebfbc4d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-executor::Executor::is_empty"
+kappa = "4ba12c00f23033d6da1bc61aade624e0818a56f23248b20bf87f1b003c97af24"
+at = "State=u32"
+embedded = "a64a9b5038cd8dfd8239abe96279fa4b57c542a70f75fdf4397f6cef7da44039"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::Executor::new"
+kappa = "4a5cca2fd9f8ee75c6e854543d67dc955cabc8912454fc19f92d1a18ee74921e"
+at = "State=u32"
+embedded = "742231a09b2e8732368a1b2df205519dcd31bfb10704ac52e3e3f2a96449cb38"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::Executor::run"
+kappa = "acac36ef773b9c2a14505b53cc471a3cc95d5f1e5c15c7a62bf97b604f267300"
+at = "T=u32"
+embedded = "a0754cb32f21e596ec8d72dd2e999f24d598c168222949f93091b2b512026379"
+status = "residue"
+cause = "mir::Ty: {async fn body of Executor<'_>::run<u32, impl Future<Output = u32>>()}"
+
+[[fn]]
+path = "async-executor::Executor::schedule"
+kappa = "40b70a6844d28131a5817bbbdd37149086447ca948785a4acf7e68daa84ddea3"
+at = "State=u32"
+embedded = "b086db7f49630bb496cd676e7f111f34c9ff11ae7563dd9aad14a079568b557e"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "async-executor::Executor::spawn"
+kappa = "2548a6d837c87178d8094659c4863918429c15f848aceb1cac68a2196f618e8a"
+at = "Send=u32, State=u32, T=u32"
+embedded = "481ee9e950e66f5ef6eac03b813409e84ef1001b056a2b3391647c4ca91bd93d"
+status = "residue"
+cause = "mir::Ty: async_task::Task<u32>"
+
+[[fn]]
+path = "async-executor::Executor::spawn_inner"
+kappa = "acd9829df063a0992d7b8079b508bc1f2133db04ad218f5a43ca21ca19a4fe48"
+at = "State=u32, T=u32"
+embedded = "17f54ee054e0c375ed473d748fcbf61245b2b5d663e05e30524209ff53c1035e"
+status = "residue"
+cause = "mir::Ty: async_task::Task<u32>"
+
+[[fn]]
+path = "async-executor::Executor::spawn_many"
+kappa = "5edcfe69c7286376c4f535804f6a7dd2763c2760a250352924f023ee8193ad60"
+at = "F=u32, State=u32"
+embedded = "604bcdf6a039763917a864ca8b6fab4cfcf81b8ed9c04384ee54052975da330a"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::Executor::state"
+kappa = "d288b7d6b65d882ac16a23303584d2660759e1d75d7e397472a412dc3172befe"
+at = "State=u32"
+embedded = "80474db28b920cfac6b420e6dc56e95f9776afe576d0a6c578a40b6b4a5bba8a"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::Executor::state_as_arc"
+kappa = "6888b201a7e1b6af57842241791f4c741ece262d5308ce8c03b1c652778040fe"
+at = "State=u32"
+embedded = "29701054f25bb4e0da6c4970e0b16e6061f92d495af16730a7894145b5d02010"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "async-executor::Executor::state_ptr"
+kappa = "a7d6ed0581480f7e56e3fc81ffa444c6a0fbb884fab84b62eae87c6803fe4b6d"
+at = "State=u32"
+embedded = "867d9cb4ce6d41d315093723035dd229f982ac037ab0fddd081406e6c7d8a073"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::Executor::tick"
+kappa = "906f7415f4e0b91370035a80aed303dbd2f2184fd533d64f2670b9bef7cfcf6c"
+embedded = "1580976aff43c38d17874b82d9e6ea1927263f2b9c9a439b14b72baa5b3eab9a"
+status = "residue"
+cause = "mir::Ty: {async fn body of Executor<'_>::tick()}"
+
+[[fn]]
+path = "async-executor::Executor::try_tick"
+kappa = "6c107f06476a3cbfc9959ce959093f1bd855681c62c98f4eaec8a43048a836cd"
+at = "State=u32"
+embedded = "1a6c57e795756018063f3461305d965a608efd28990683b2ca87d726ee1345d1"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::LocalExecutor::default"
+kappa = "02deecf3ec8a9a0ea9baf3be169ee507bec621a5ca60deccb883a361c3e984f3"
+embedded = "27ed20ef3b2a594ff68ec14df52e1611126926040d98095c90e3d5e08ca55a80"
+status = "residue"
+cause = "mir::Ty: LocalExecutor<'_>"
+
+[[fn]]
+path = "async-executor::LocalExecutor::fmt"
+kappa = "6bd498e843b3affd52affaa69b940e4a5151281fdfd4ff422849a1d5a3df43a9"
+embedded = "b5df3ad2f8047efa7a6b9f5dd10749ab2d64892838bc0d1be0bebe8b8dba5ae4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-executor::LocalExecutor::inner"
+kappa = "7dff3df8a1bde16e70c3e54aab3aaa3673eb54e7270a4d551d7b89b3a501ec03"
+embedded = "1713c722dafd6c584f2401e07d4ee307ccee533d36af3c7abf68a9d195484222"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::LocalExecutor::is_empty"
+kappa = "15a4e4b951cd3ef76d21c1ce17c5c1d5d1bda57b35f1d7d48798563e37e84a3c"
+embedded = "b2027daef8bd4c28ed4d4ddbfe048b2dc09dc1b2797b26ecab70517adbf93856"
+status = "residue"
+cause = "mir::Ty: LocalExecutor<'_>"
+
+[[fn]]
+path = "async-executor::LocalExecutor::new"
+kappa = "788f1f5bb10a11c2092fd970e6ae88a17586a110205dd2def20b095e811c578b"
+embedded = "050f6f1c385bc4e5d3ce42396eb5a4361e9f30b90633ffeff1ca1d377e3d9f9a"
+status = "residue"
+cause = "mir::Ty: LocalExecutor<'_>"
+
+[[fn]]
+path = "async-executor::LocalExecutor::run"
+kappa = "35df0cb11aafc817e12bbdec600f16aff5352f029ebf8cc37bdc5488db34cfd4"
+at = "T=u32"
+embedded = "48d2af3a70bfb57788247d742a84538d5b32bc260e0af49669f396062165bdb7"
+status = "residue"
+cause = "mir::Ty: {async fn body of LocalExecutor<'_>::run<u32, impl Future<Output = u32>>()}"
+
+[[fn]]
+path = "async-executor::LocalExecutor::spawn"
+kappa = "2ad036e9d699c44a77f6e99afc3ca17cfb0d0cdc1154fd1f6b1b3cc20938fcea"
+at = "State=u32, T=u32"
+embedded = "d7aee0f877db5df492657e17c458c8e95d295ecf5f2b019eecd8e4e28602b1d8"
+status = "residue"
+cause = "mir::Ty: async_task::Task<u32>"
+
+[[fn]]
+path = "async-executor::LocalExecutor::spawn_many"
+kappa = "22f5feeb5de790dec2a92d4f7e074853d91b2564eb0d8c793456130317b1359c"
+at = "F=u32, State=u32"
+embedded = "b1730cb518c48cc4558af3c141e348f61110e4a22fe0de75a8a262728adbb85d"
+status = "residue"
+cause = "mir::Ty: LocalExecutor<'_>"
+
+[[fn]]
+path = "async-executor::LocalExecutor::tick"
+kappa = "178d24bb523c6a5a6b707c806c7863ede982f964a95842bebc773b3407814d4d"
+embedded = "ab6680a981b3d8b494c626f6c511994cebadfb82c37d7ea1d92924e06b28e241"
+status = "residue"
+cause = "mir::Ty: {async fn body of LocalExecutor<'_>::tick()}"
+
+[[fn]]
+path = "async-executor::LocalExecutor::try_tick"
+kappa = "85b1b2efade235897a5ad4d65988722f57806780e7aa5cfec40e311fce624ad0"
+embedded = "402bfcb9b533ecd4c04ebb687601f91052326d84ecc29e460002ab230dcd5f7b"
+status = "residue"
+cause = "mir::Ty: LocalExecutor<'_>"
+
+[[fn]]
+path = "async-executor::Runner::drop"
+kappa = "bed585de61a1d74a20710bdbe809593d99fb719f869d53d9aa2e13b22117a678"
+at = "State=u32"
+embedded = "f39f76c58772ed3df13b474def71e59361c25cde07bf2650829f54cf7c8ab401"
+status = "residue"
+cause = "mir::Ty: Runner<'_>"
+
+[[fn]]
+path = "async-executor::Runner::new"
+kappa = "54c297464007ab9a8bf1350a7ac4425209bc38adfcb0af146f20499d41f3b690"
+at = "State=u32"
+embedded = "98c4aa200cfe1347524b376962e574e4d53e46bfea7aa0cdde449dfc27486d25"
+status = "residue"
+cause = "mir::Ty: Runner<'_>"
+
+[[fn]]
+path = "async-executor::Runner::runnable"
+kappa = "1bce4003d82d23e5e810480680dd82f600bf6ca39288132cf40159e62f0e6029"
+embedded = "3f166d9d8e41a6a067c371e94cc081dd87cf88045d72ad8ecf36f0baed816e13"
+status = "residue"
+cause = "mir::Ty: {async fn body of Runner<'_>::runnable()}"
+
+[[fn]]
+path = "async-executor::Sleepers::insert"
+kappa = "9b1ba50ce534a4454a3e9131a782b340d5953d3b4bfde70f698ead30ee444ee1"
+embedded = "804d2e5e39ce2769a4b219b07e81f1bd8dfafef1bb2af0fb9608fa546102c1fd"
+status = "residue"
+cause = "mir::Ty: Sleepers"
+
+[[fn]]
+path = "async-executor::Sleepers::is_notified"
+kappa = "090cc2f8ad5543079f6a371087addd0983e13f0a75087bc0bfdf95bbeda7864c"
+embedded = "bd60996d9a4f3fec850ebc1b2a8f8ec40b7a0598ddc21c83dd56a3ebdc0587e6"
+status = "residue"
+cause = "mir::Ty: Sleepers"
+
+[[fn]]
+path = "async-executor::Sleepers::notify"
+kappa = "bd029359ba5d140b19fe09ecb6e47e06754a08a478eb4ab94ff051ea75251059"
+embedded = "14aa9066037d4dc0c4c7d98186c9f2d00d8c8e9cf30057a5b6380f2a3943a4a2"
+status = "residue"
+cause = "mir::Ty: std::task::Waker"
+
+[[fn]]
+path = "async-executor::Sleepers::remove"
+kappa = "0bfe2a920a2e11fbb9e68d4f9683c6bff025b62baac36bca3040047410a6b336"
+embedded = "e65d77bb83edb1125da98335265dc9030b0d8d802764d126dc4737ff35686089"
+status = "residue"
+cause = "mir::Ty: Sleepers"
+
+[[fn]]
+path = "async-executor::Sleepers::update"
+kappa = "2b5ebc15b08f7809d088d62df518f8a14a6f6eccab2c2fb63552b008838cdfe8"
+embedded = "1fabecbab6eac6b1d3c97d34e1c3da9d34041bd0ef147762d432ea70e803fa8e"
+status = "residue"
+cause = "mir::Ty: Sleepers"
+
+[[fn]]
+path = "async-executor::State::active"
+kappa = "3b00e8d001e83cf95148f0144dc5f55704372b4ac24c896f299156a9d90e9742"
+embedded = "966d6e0e89b774ac845bc713bb1893acd2f91dea2d4b9f13570f5f8f7df3f8ff"
+status = "residue"
+cause = "mir::Ty: std::task::Waker"
+
+[[fn]]
+path = "async-executor::State::new"
+kappa = "fc38ae2acfa784c96527a57a5ee1eda5dc46d3f38dac1fb98d1b03218936f113"
+at = "Sleepers=u32, State=u32"
+embedded = "31dc1501f14015f2180ed0086503ff84096c41487e10877e0e2d8716d9120b70"
+status = "residue"
+cause = "mir::Ty: async_task::Runnable"
+
+[[fn]]
+path = "async-executor::State::notify"
+kappa = "4e2a396e1fb8d30d8a6e2085d78bc875b76b1156e704c8c996a4f69f40a8318a"
+at = "Sleepers=u32"
+embedded = "59e7b29ea332fb7e17b1810809e0f1d1af090aca4b87f05c8f820dee20d4eb3f"
+status = "residue"
+cause = "mir::Ty: State"
+
+[[fn]]
+path = "async-executor::State::run"
+kappa = "d61fcc46f886f54ef3925d9f0e0b48678357a8cc42f4869c62622fd2ab7ebcc3"
+at = "T=u32"
+embedded = "81e0bbd3ecb5614fb25ceb6c9f2db1cb611fe3fdc17458231f68985fc6608b30"
+status = "residue"
+cause = "mir::Ty: {async fn body of State::run<u32, impl Future<Output = u32>>()}"
+
+[[fn]]
+path = "async-executor::State::tick"
+kappa = "1a6b02c3d42fcd0c6ad18c8ef4ade6eaf510a57840fb16037dd4fb635b134995"
+embedded = "5a156916044c1f0e930dced34d11fc1f8fe311fc2c2a821ed9b89c8ad733ec4e"
+status = "residue"
+cause = "mir::Ty: {async fn body of State::tick()}"
+
+[[fn]]
+path = "async-executor::State::try_tick"
+kappa = "e320e1ea15ac0c1f001ea6d046ccc6f7eeb7b4424053d7c1b6764dba7bdc3aab"
+at = "State=u32"
+embedded = "35d726d03fb7cd7be161dc820568246663920b30f37846d0fdb40a4d393e373a"
+status = "residue"
+cause = "mir::Ty: async_task::Runnable"
+
+[[fn]]
+path = "async-executor::Ticker::drop"
+kappa = "1796d8f727f526b2933f475fd490837fc4a95037269525c5a8aab038046506ee"
+at = "Sleepers=u32, State=u32"
+embedded = "07572f7c75bb2f95ec10527f2e13b872f6a3e5dfe1e125f39a6fc251e51803bb"
+status = "residue"
+cause = "mir::Ty: Ticker<'_>"
+
+[[fn]]
+path = "async-executor::Ticker::new"
+kappa = "ee14a0765012016b6256f29b626b37132328e8d5c6ad80e82708ecd8069e591c"
+at = "State=u32"
+embedded = "c624a18d40d6fc7f98bbca2635257656fcedaddaac608737d96b27472360bc46"
+status = "residue"
+cause = "mir::Ty: Ticker<'_>"
+
+[[fn]]
+path = "async-executor::Ticker::runnable"
+kappa = "3c94898b78ee61357e448d8fe879937ff08d0de869c1cd079aacd4a2bcbbe6c1"
+embedded = "9d4b9ddf79b7113ec748b1e4b9ac0a8cfcbb25d60133ff6b6d55765b65ccd3f8"
+status = "residue"
+cause = "mir::Ty: {async fn body of Ticker<'_>::runnable()}"
+
+[[fn]]
+path = "async-executor::Ticker::runnable_with"
+kappa = "8ac3ff533f0042d1056c9e2202968afdbd0c47d90e79b45ba0d0bb11a2d34e3b"
+at = "Runnable=u32"
+embedded = "ba98063260ca154f636d9592e9f86e484ed2b5316326ce7e8db4df9b9ddfcfcf"
+status = "residue"
+cause = "mir::Ty: {async fn body of Ticker<'_>::runnable_with<impl FnMut() -> Option<u32>>()}"
+
+[[fn]]
+path = "async-executor::Ticker::sleep"
+kappa = "3f5af4cb96b76c7659520e7218a0bc3045f9ee3b0562f54252008862759179c5"
+at = "Sleepers=u32, State=u32"
+embedded = "8b90d633b9bfb8ec096c84f708e0c2ac54aab19b1278fe3ee246738acaf99166"
+status = "residue"
+cause = "mir::Ty: Ticker<'_>"
+
+[[fn]]
+path = "async-executor::Ticker::wake"
+kappa = "330b409bf8f3b842dd6e8609fa3ee78a4dcb103f16b3757350742f8ec1b82534"
+at = "Sleepers=u32, State=u32"
+embedded = "fe5c70ad1417944d837e6f92b197f81176ab4c53720bb32ce8211cc712f51980"
+status = "residue"
+cause = "mir::Ty: Ticker<'_>"
+
+[[fn]]
+path = "async-executor::_ensure_send_and_sync"
+kappa = "b21b1ecd2b5515088a9572c88c33ed128617180b890944160bb6839d3f789f4a"
+embedded = "e909dc65021ba97a0ad87ba0535ddb5deb2ec443affb320bce32a3c0a254aa24"
+status = "residue"
+cause = "mir::Ty: Executor<'_>"
+
+[[fn]]
+path = "async-executor::_negative_test"
+kappa = "7ad03de84a0dbc913823d9c3834a7cf94aefc98cf20264c44849422b8da2f663"
+embedded = "bf620469b3814743b6435aee5ad8a0ef591334577188aba8a1ac1808ff7d361d"
+status = "translated"
+digest = "c02030bf7be6f3fe1105ba4104da9509a26525dfe5532bf5efdb001b301fc0c6"
+
+[[fn]]
+path = "async-executor::alloc_state"
+kappa = "927385a96b46af45bdb356a4e01cd4ae5d83625e23fd6dda496bd12447f08ae0"
+at = "State=u32"
+embedded = "86617d7d7131388230ed564e6d43647280b82903a2c9a9d0646d21e3d3e63e83"
+status = "residue"
+cause = "mir::Ty: Atomic<*mut u32>"
+
+[[fn]]
+path = "async-executor::debug_executor"
+kappa = "e43b8d2e1abfc1a798c76bf383efb0b6912100505ea3fc0449f64309cab1fec2"
+at = "State=u32"
+embedded = "856dbbe1cad22f2d37e18a612ec1b1007f0b61763e96a78c97527fcd5c44847d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-executor::debug_executor::Uninitialized::fmt"
+kappa = "b81240972b281bde634db6c254134a69e08a4a9d6a16c00f4e4b844605d64976"
+embedded = "99a06523ea1a2b9a3753505d441087d7ea7a0777c249f42581d127dca6a18e62"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-executor::debug_state"
+kappa = "de2fc72e03b90d231d946950eb23e5f2fd85fbd840dab56324f06aa9e4658bf7"
+at = "Sleepers=u32"
+embedded = "3f70c41733bbcc7380f13ae8741bdd3e6e956e1c4a862fd85bc894d33018c7bc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-executor::debug_state::ActiveTasks::fmt"
+kappa = "a209c839732bac030f08cadf0ab624ec1c12f721972555f9e1123c1a73784cb1"
+embedded = "687409a384945ceed8f3aa1fed9a4025a9f07caea12ad36cc81f2f7669210de8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-executor::debug_state::LocalRunners::fmt"
+kappa = "69b30418f3ae9a5ca5eb266f3f62b9569452baed91ee4a89a823d9330707e82d"
+embedded = "e31d50d29731e7305c3d83abe5d67571ed8a3248368695474e856839cffd2ffc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-executor::debug_state::SleepCount::fmt"
+kappa = "6290a0959210e4487e4c6c7b8dd79000d385aaac0080bcfc0ab733bb97dabaa3"
+at = "Sleepers=u32"
+embedded = "ab37ee450ef243bc1538de057b0acb6b3a86df32f67fd8bc34423b291d4c30f7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "async-executor::is_send"
+kappa = "c924bfa20c3db804027c24e2c5222512236c48a486fd55c4a4aef644cb6f95cd"
+embedded = "f56658d142fd51995279d5a28e5d8005cbd2e305153190f0a1d5cb33a62ce3ad"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "async-executor::is_static"
+kappa = "faea1ed0cc0a66de34abb2dd91abecc96792050bd90e4c0b485dc04407a05ad4"
+embedded = "59e5f35b17874194c3235f3c410a84adbeaea4f7999c0549feb1a151dc15a2ef"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "async-executor::is_sync"
+kappa = "a365017f8d037295bc76a53a0e5b3d71176bc0bf2f3bfe1a56b2e7e51ac46176"
+embedded = "9f8f3835c604c306ebeccf5adb41841f96dbfe2efc006d15fbeab1fbc33586ea"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "async-executor::steal"
+kappa = "dcc2d1b89e246b6a777643e7c67fefc0dc5a6e4f116a0e0f4342bec1af6e96c2"
+at = "T=u32"
+embedded = "b710f2fbc35cf3473ad5cbd455ecb6ac9c84365bdd5aeb81236ce1037565faa6"
+status = "residue"
+cause = "mir::Ty: ConcurrentQueue<u32>"
+

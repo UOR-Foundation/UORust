@@ -1,0 +1,75 @@
+# The rustc-hash register (written by `uorust crate rustc-hash@2.1.3`; do not edit): every body of
+# rustc-hash's MIR at rustc-hash 2.1.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 21
+translated = 1
+residue = 20
+
+[module.crate]
+bodies = 18
+translated = 1
+residue = 17
+
+[module.seeded_state]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 21
+embedded = 21
+evaluable = 21
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: FxHasher::add_to_hash: rustc-hash's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FxHasher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: seeded_state::FxSeededState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item SEED1"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: hash_bytes: rustc-hash's MIR stops at mir::Operand::Constant: the constant item SEED1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FxBuildHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FxSeededState"
+bodies = 1

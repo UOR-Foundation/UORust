@@ -1,0 +1,134 @@
+# The time-macros register (written by `uorust crate time-macros@0.2.32`; do not edit): every body of
+# time-macros's MIR at time-macros 0.2.32, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 54
+translated = 0
+residue = 54
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.error]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.helpers]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.to_tokens]
+bodies = 17
+translated = 0
+residue = 17
+
+[embedding]
+bodies = 54
+embedded = 54
+evaluable = 39
+blocked = 15
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenTree"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: proc_macro::Span"
+bodies = 7
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as Widen>::widen"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UtcDateTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item date::MAX_YEAR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: timestamp::MAX::promoted[0]: type outside the lift: utc_datetime::UtcDateTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: timestamp::MIN::promoted[0]: type outside the lift: utc_datetime::UtcDateTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::rem_euclid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Date"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DateTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Offset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Time"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Timestamp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: date::Date"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: datetime::DateTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: offset::Offset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: time::Time"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timestamp::Timestamp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utc_datetime::UtcDateTime"
+bodies = 1

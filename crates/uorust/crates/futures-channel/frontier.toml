@@ -1,0 +1,204 @@
+# The futures-channel register (written by `uorust crate futures-channel@0.3.34`; do not edit): every body of
+# futures-channel's MIR at futures-channel 0.3.34, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 166
+translated = 0
+residue = 166
+
+[module.lock]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.mpsc]
+bodies = 130
+translated = 0
+residue = 130
+
+[module.oneshot]
+bodies = 30
+translated = 0
+residue = 30
+
+[embedding]
+bodies = 166
+embedded = 166
+evaluable = 166
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: mpsc::SendError"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: BoundedSenderInner<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: mpsc::TryRecvError"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: UnboundedSender<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: UnboundedSenderInner<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: mpsc::Sender<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: mpsc::TrySendError<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: mpsc::Receiver<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: UnboundedReceiver<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: oneshot::Canceled"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: oneshot::Sender<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::task::Poll<core::option::Option<u32>>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: mpsc::RecvError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Queue<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TryLock<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: oneshot::Receiver<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: mpsc::OPEN_MASK: mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Canceled"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SendErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mpsc::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mpsc::UnboundedSender<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: mpsc::MAX_CAPACITY: mir::Operand::Constant: mpsc::OPEN_MASK: mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: null_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Inner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Recv<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SenderTask"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lock::Lock<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: lock::TryLock<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpsc::BoundedSenderInner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpsc::Recv<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpsc::SendErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpsc::SenderTask"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpsc::UnboundedReceiver<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpsc::UnboundedSenderInner<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpsc::queue::PopResult<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mpsc::queue::Queue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: oneshot::Cancellation<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: oneshot::Inner<u32>"
+bodies = 1

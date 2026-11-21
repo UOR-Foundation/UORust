@@ -1,0 +1,78 @@
+[[fn]]
+path = "bytes::<impl at src/lib.rs:174:10: 174:15>::fmt"
+kappa = "27fde32addcb414f5c268337b9b88edac8eb79da90cc61d15951f0b83fb76183"
+embedded = "05de176d6c754d081b65638d719ecef99b8150a0a154885f289e9b513b8f3473"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::<impl at src/lib.rs:174:17: 174:26>::eq"
+kappa = "7e6cc658afffd2ee88d905a695996927bf1eed0d5187fb35c325215c5434a744"
+embedded = "343b06229750933563b26fc98a8461a797f29fc7d8ddf101ad14804441c86602"
+status = "residue"
+cause = "mir::Ty: TryGetError"
+
+[[fn]]
+path = "bytes::<impl at src/lib.rs:174:28: 174:30>::assert_fields_are_eq"
+kappa = "edb0db50bdb4d1ec8119b46fd69eaaaf25a807d72bf7e5effb29c41c464842a3"
+embedded = "9d6958025045f175bf202c88daf715af43432bc356648b79d1dec96fe6298ff4"
+status = "residue"
+cause = "mir::Ty: TryGetError"
+
+[[fn]]
+path = "bytes::Error::from"
+kappa = "2623c156532f4698e50dc24cde57dabe6bc3ecb8ac8f2476a654c9263067b1ae"
+at = "TryGetError=u32"
+embedded = "8d9120a14e23879995e38c43b1a0036a44dd68e7d46300b365118ece424fcc33"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "bytes::TryGetError::fmt"
+kappa = "3d89acdf961d1311e64fcfbaed45cdd6a41e8d82942bcdf9dc9dd78ada7649d5"
+embedded = "4ff59279424c9f38da3162e0877c4c4276462e8c6d827b7b94f72d10951a78af"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "bytes::abort"
+kappa = "ccf5d5e23e9b03ae5463633df62c7cd3d0da783f9701ea09c6db37cbf37e2ff6"
+embedded = "1f4b1ab16934e9a2f51880ad68a5f23eab15f78f552d828b1e658c93e879d341"
+status = "translated"
+digest = "b9ae93c1a7146d59eed069c4682546eafb99d27870b9dd40f068e6959aa6d9f8"
+
+[[fn]]
+path = "bytes::min_u64_usize"
+kappa = "44a2097513ee9b1ce5136569cc303c085f03fb4d4909ad36751571c7737dc429"
+embedded = "a06f42b03724a62f46f379c002c99b39f126dea3defd703048c3e81016b7135a"
+status = "residue"
+cause = "mir::Ty: core::num::TryFromIntError"
+
+[[fn]]
+path = "bytes::panic_advance"
+kappa = "618e77af6147c3d75a14d259b20a0b7119383e44b84dd96e7acbe932c1f0a4c7"
+embedded = "857cc368396d59d49f4fff960c500d5ef5ec7ab129ae21b38a3e65d42bf606e8"
+status = "residue"
+cause = "mir::Ty: TryGetError"
+
+[[fn]]
+path = "bytes::panic_does_not_fit"
+kappa = "d28d099e20dc2172a703e5b12ca76ac45850076d18a5f0a8e016b90b44f0e3d5"
+embedded = "db8ae540a496b6e80df688466d611b9f6eb78065c8e946342790af33d003db67"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "bytes::range"
+kappa = "4dfa7519036ac262998d359e865ea761302c3c9a0214f7deb950c8972bf32d39"
+embedded = "766c473366cb415122b35a0af1bb91249ff2b08e99b2074c977f528e92a908bf"
+status = "residue"
+cause = "mir::Ty: impl core::ops::RangeBounds<usize>"
+
+[[fn]]
+path = "bytes::saturating_sub_usize_u64"
+kappa = "6659fd8a23f34055921d39ecc6d0bc1d45142304d5b6b8aa78544cfed75b7a38"
+embedded = "81bfed8c7f94c8397d0c543f3f660c6a62d073234e7bb97a19945a7607a8f355"
+status = "residue"
+cause = "mir::Ty: core::num::TryFromIntError"
+

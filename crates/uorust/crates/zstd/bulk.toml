@@ -1,0 +1,275 @@
+[[fn]]
+path = "zstd::bound_from_zstd"
+kappa = "be2e5a31b6d52f2191343d23c169bd4e40f5c8cbd845c92faf25747890159700"
+embedded = "966f3b6a47b9dd515ec34b2148a1dfa20295856f3ee46d089c76d7c2a5b59ebe"
+status = "translated"
+digest = "feb32475598bfdf1e0edb7c0645530b60aaefaba65d8e589844bdcacef85dee6"
+
+[[fn]]
+path = "zstd::bulk::compress"
+kappa = "48823dbfba8279db85d8dd8c8f6b7743a0126ccb2fda2f8d6485ee9bdf5b2307"
+embedded = "1d28f77c7f7e4b83b51b572f5433d81fe288c54720666c67cac8a58c5fb28d41"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::bulk::decompress"
+kappa = "2b9cf15bb6b26538f6c61325bc5b0300b8ad95de58332c6fe7ae437aee7fe1f4"
+embedded = "7889f31102ee4ac7b3814d7668e12e7864e0191377346127da96501171e49d8c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compress_to_buffer"
+kappa = "ef4f87fae9797f7adf2d425da10d1f5a6087870082361b9997ea9f52e8a488c1"
+embedded = "e680c687b31b80cb3d44b3dbc5fb9afd8060999487de3c81e78916ab2aabd0b3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::<impl at src/bulk/compressor.rs:15:10: 15:17>::default"
+kappa = "ae52872c788491e132fcf8f7bcb335ce54525fc80ff2df2dcb7e9b4b2b6badd3"
+embedded = "f7e9c144573c89a37bc212de855021182f8670e3b3eaa59ba29305cf7f4d0a10"
+status = "residue"
+cause = "mir::Ty: bulk::compressor::Compressor<'_>"
+
+[[fn]]
+path = "zstd::compressor::Compressor::compress"
+kappa = "e7af7c1e5cd9580e63ade2d71ad43b6d000ab615ab7d092a5b0206dea3429e02"
+embedded = "619b9d69967b64f9753cefccc16602ded3fc82a69c04670ac586fec9d8c10b47"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::compress_to_buffer"
+kappa = "49046de1c46c104cef9442dde769406a8e8a897afd8133e56d6ac43a5d109bc4"
+at = "C=u32"
+embedded = "f08a108929714afbbd0c8511bba59e1afab82fb39def6eebf2e9489be5148c6a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::context_mut"
+kappa = "75384fe55950d7aafd017abd359fe0d23125490e18dd75aa2ad405fa08e33131"
+embedded = "fe4364c7620a0758fa180179ec3346d644cfc6dc810c70bac029a4ceb35095f4"
+status = "residue"
+cause = "mir::Ty: zstd_safe::CCtx<'_>"
+
+[[fn]]
+path = "zstd::compressor::Compressor::include_checksum"
+kappa = "78c50784085e99b584d2efca18ce060c85c2ab56f9012e7f81b2faae9182e0d7"
+embedded = "58e077f93fef4e10e04b5585f519b9f1e88020bee351b036a505ef38ef73b367"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::include_contentsize"
+kappa = "5af0b3923c5550e2ecfa1dbfe56fd9872a07e83fd15065633c8558370fdba337"
+embedded = "d0ba3ccfcd3ff20ff76e766bf0bf741b48305b3a5dc2064782d7c1b3fb9978d7"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::include_dictid"
+kappa = "44228909a53cd2b84967d5d3505987749fe6126ca818ce14ca4f3251a099f5fe"
+embedded = "d984439b9f44c9345b6f2eb972d82aa0d2da94a4700c33a2acbeabdf5da3b438"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::long_distance_matching"
+kappa = "77b25e8e5beb569507dedde0dc4dc6bac575c53c3ef8d7f9e952b58e4bb30cb2"
+embedded = "081e6243fadf5e6eb9f61b0d3853ac907ca03fcea261ce9031d097d4a9c50bbc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::new"
+kappa = "64799f3175c16ca2f1e797d974433e36087548825dfed29fec8a1bb8b3734274"
+embedded = "2e598b52ff4091a68954cfc7c2b440486e7261a3cdc71685210dcff5d4bd4916"
+status = "residue"
+cause = "mir::Ty: bulk::compressor::Compressor<'_>"
+
+[[fn]]
+path = "zstd::compressor::Compressor::set_compression_level"
+kappa = "c60efbcf73315f0f398c1802d37158536039f4fbfabf484b66d163b7556f81b4"
+embedded = "da7530ff023928c850efa19d5d09abaf06463cf459b884087a3ae0e2b851e46c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::set_dictionary"
+kappa = "4677e454d90c09e8fe2afa6923fcbcddfa95a4874c213b58ae02e7dbf45fc452"
+embedded = "a231745e585977232ae0172753482288fa990b8759c091e1ffc90da777153afc"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::set_parameter"
+kappa = "f3a0d04bf471964fa680a301f6d7ce91bb9b5d512f21ae5bba89a7ef441ab919"
+embedded = "a72aac1efae834968d03bfa77e9d0fca91c5d7249a63932280bbd01e13c36b92"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::set_pledged_src_size"
+kappa = "9273bc8e0e18da6bfa91d2b68b0978422be6f9c8dfecd63baa8867038951bc9b"
+embedded = "6ccb3bbb9f797cf261ca877682eacf3b70f8a60d6f9b5b2fb9491dd22c33c7ab"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::set_prepared_dictionary"
+kappa = "6093416bde101f7e1fb6681a5f9b1277f20d8c41e33917ca5f223f2a452eb248"
+embedded = "afe8d6814e51bee3e45fde6941468afe7ea9211c10cbf60ee8f3161e834643a1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::set_target_cblock_size"
+kappa = "bfc8d538150f19174209d2ab77b26bab8e709bf5747f62133d86ba0b1b62e7ab"
+embedded = "1d520f39a0b81e245bdb121e4f649797161d0ca00fd7a1a3e95dab3940f417a1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::window_log"
+kappa = "029ae336ce12338efcffc9d8ea8e9021670de6d0557463ec6877245576d2a11f"
+embedded = "d4875a313ef868209cc4ac90cb1583589c19530d84edccedc3b503c98462c501"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::compressor::Compressor::with_dictionary"
+kappa = "113f00a0d95858b99895149806fcb1152e01c1d5356c9f1c870728f9db5368b8"
+embedded = "ece2d75c8d3c26c72ca4edda491c6b0a857a240491bb134c6ee3783fcad80c87"
+status = "residue"
+cause = "mir::Ty: bulk::compressor::Compressor<'_>"
+
+[[fn]]
+path = "zstd::compressor::Compressor::with_prepared_dictionary"
+kappa = "6b4364b0fc98fb3d2c356315cca20ede42a73b065501ded9801ed8035657b87c"
+embedded = "75929a7f3cb3a285bdf77622d044cac717dd3fda90840163269c8f7a72a69482"
+status = "residue"
+cause = "mir::Ty: bulk::compressor::Compressor<'_>"
+
+[[fn]]
+path = "zstd::compressor::_assert_traits"
+kappa = "e27c42c7e3c752c24f286d18d14ed57d15c7c59a273fe5e0181cd6ad7287be96"
+embedded = "cba52297cd27346a1af163c1d3a12d8566d10a5fb7cd7fcc7d1a45cf8ea0edc9"
+status = "residue"
+cause = "mir::Ty: bulk::compressor::Compressor<'_>"
+
+[[fn]]
+path = "zstd::compressor::_assert_traits::_assert_send"
+kappa = "dfc36e78ac660d3a74bd185d9429d800b7b49029db75ea0ae2e4a9c4465ac88b"
+embedded = "7872030f714d23397d12863e36b9908d5738a88c1089987f69ba714cf819bf53"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zstd::decompress_to_buffer"
+kappa = "eb787731f28acdb09f65f275d3f605b96cfd3c5fa73916926c55508c876d81ed"
+embedded = "8a3188522bcc9154b82dbea68011fb2c3adcfbc392fd2dd1c24512ea75201583"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::decompressor::<impl at src/bulk/decompressor.rs:10:10: 10:17>::default"
+kappa = "d00b33125a5ab7befa962fd56803228fb5492179de2d31515ff5c21c97c50036"
+embedded = "b9c3e8551a3a7599e6c6032b609cdbff923ba61427fd20889905c794f5744772"
+status = "residue"
+cause = "mir::Ty: bulk::decompressor::Decompressor<'_>"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::decompress"
+kappa = "78331ddd39b80b0cef5904501cff927712832b7dd6468fb73ee9c0050dc99e9f"
+embedded = "5b88d40ea02bd69e421a8d8ae7b8dfbf9ce807217e44fc57cf8d28bd59c87237"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::decompress_to_buffer"
+kappa = "bf780f9b8840b7bdada45e516f28eb778bbd10f7c209775e79f37bec42c06b74"
+at = "C=u32"
+embedded = "be3e4c517a8ff2b3d69078a24bc64037f5219445a6ab0d2ba9d64b582f0f21a2"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::new"
+kappa = "7d4ef0e73258227a9e94b826987cc1311e704d0c3d70ebc6ec718916ce373ad8"
+embedded = "fdbacf942aa5e5976acaf67d84723b620138e2ef56aa0c18a3a99fc715bb8d8c"
+status = "residue"
+cause = "mir::Ty: bulk::decompressor::Decompressor<'_>"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::set_dictionary"
+kappa = "de58e4591c4b425bb6c008402830c3bf429eba92b52890c0de95b26d6edf4fcc"
+embedded = "bc8e608c895702f47be32cd638ad0c58c1db2c064df11fcb30b46f9ae0ec2154"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::set_parameter"
+kappa = "125d22210c67c3332680303f0ebc0ebeb8e228c07c539b16d42d9c1a860c543e"
+embedded = "95090d4df6d16180ca6a6deb4357a227c933f7ed5541c22519c16638c08c87b4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::set_prepared_dictionary"
+kappa = "9a84651a9c4a720d927c8b6743cb792d430a8e630e8330b5f39b7bb40a4ca706"
+embedded = "e57ad9219990a160904a7955ae9944681d1e5145a4c024055ef53a742b9abe8b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::upper_bound"
+kappa = "0691da70778deb282fa8d936f8a9dccbf6134eb17f8a15e69d241b3b15f18972"
+embedded = "b5ab30e723cba6aa76444513acf4dabb6ba42c77b41485bc4752f9e02c7482d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: bulk::decompressor::total_decompressed_size: zstd's MIR stops at mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::window_log_max"
+kappa = "ad433dc532660186303d1a1d00cf7c48ffa8a06892415a4a26dc16d453ee5704"
+embedded = "03dffc99685427847fca30af3e2d9862b365cb7745e4c28d4623a0e672ce3457"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::with_dictionary"
+kappa = "fbd923a3e778fbfd6ee995c32d21b4541e22beaaff180970bf066f39a5cca296"
+embedded = "85fc89fad96ea3e1c8914af5f698444fb1d5ffb6808e1a08078735743c9b251a"
+status = "residue"
+cause = "mir::Ty: bulk::decompressor::Decompressor<'_>"
+
+[[fn]]
+path = "zstd::decompressor::Decompressor::with_prepared_dictionary"
+kappa = "dfa0f3ad7d0a83a22b3c703b75b1f3929fa469e19217fb0af6a3a1ac1a5e3af0"
+embedded = "4127fd3e1f46288831d0e4c216f531590bbcdb72e5dd2352f9bcabb8e1190063"
+status = "residue"
+cause = "mir::Ty: bulk::decompressor::Decompressor<'_>"
+
+[[fn]]
+path = "zstd::decompressor::_assert_traits"
+kappa = "38450ce53fb09a5f419ed83958a8693fd901da41271931558bee2c1bff43c8cf"
+embedded = "ab03180a55feb15eda5bdaafa4756b75f76281a1c28ce7681122f01bdd9afebc"
+status = "residue"
+cause = "mir::Ty: bulk::decompressor::Decompressor<'_>"
+
+[[fn]]
+path = "zstd::decompressor::_assert_traits::_assert_send"
+kappa = "64bfb8257172796bb5372dd49f8be46434d1cea6b95dc576517dc7dde02cc3d8"
+embedded = "3ec24c253af95f54a9eb0eb993aa6e338f2afe77171ab3f00e7d76e70d3c57f5"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "zstd::total_decompressed_size"
+kappa = "3e875864fa854bfc43322c86e6e0b65441d25ef83f64976eb2f8e0e7b8501379"
+embedded = "72aa18c85db2ec0c16a3ef023df0e4a4f6c35c4343aa17a9de5d50743726d138"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+

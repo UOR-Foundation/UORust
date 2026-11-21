@@ -1,0 +1,800 @@
+# The bitvec register (written by `uorust crate bitvec@1.1.1`; do not edit): every body of
+# bitvec's MIR at bitvec 1.1.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1517
+translated = 62
+residue = 1455
+
+[module.access]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.array]
+bodies = 84
+translated = 0
+residue = 84
+
+[module.boxed]
+bodies = 82
+translated = 0
+residue = 82
+
+[module.devel]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.domain]
+bodies = 42
+translated = 0
+residue = 42
+
+[module.field]
+bodies = 36
+translated = 0
+residue = 36
+
+[module.index]
+bodies = 106
+translated = 0
+residue = 106
+
+[module.macros]
+bodies = 2
+translated = 2
+residue = 0
+
+[module.mem]
+bodies = 34
+translated = 4
+residue = 30
+
+[module.order]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.ptr]
+bodies = 206
+translated = 0
+residue = 206
+
+[module.slice]
+bodies = 575
+translated = 0
+residue = 575
+
+[module.store]
+bodies = 116
+translated = 55
+residue = 61
+
+[module.vec]
+bodies = 155
+translated = 0
+residue = 155
+
+[module.view]
+bodies = 23
+translated = 1
+residue = 22
+
+[embedding]
+bodies = 1483
+embedded = 1483
+evaluable = 1483
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 4
+
+[[cause]]
+cause = "mir::Ty: slice::BitSlice<u32"
+bodies = 276
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 105
+
+[[cause]]
+cause = "mir::Ty: BitSlice<u32"
+bodies = 103
+
+[[cause]]
+cause = "mir::Ty: BitVec<u32"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: wyz::Const"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: wyz::Mut"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: vec::BitVec<u32"
+bodies = 37
+
+[[cause]]
+cause = "mir::Ty: Mut"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: ptr::single::BitPtr<u32"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: BitBox<u32"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: boxed::BitBox<u32"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: Msb0"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: index::BitMask<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: mem::bits_of: bitvec's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: BitSlice<u32>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: array::BitArray<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: index::BitIdx<u32>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: slice::iter::IterOnes<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: slice::iter::IterZeros<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: M"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: ptr::span::BitSpan<u32"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: vec::iter::Drain<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: BitArray<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: array::iter::IntoIter<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: boxed::iter::IntoIter<u32"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: BitMask<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: O"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: index::BitEnd<u32>"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: index::BitPos<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: index::BitSel<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: slice::iter::Iter<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: BitValIter<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: domain::Domain<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: slice::iter::IterMut<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: BitPtr<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: BitPtrRange<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: access::BitSafeU16"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: access::BitSafeU32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: access::BitSafeU64"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: access::BitSafeU8"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: access::BitSafeUsize"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ptr::range::BitPtrRange<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: vec::iter::Splice<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: wyz::Address<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: <slice::BitSlice<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BitIdx<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: slice::iter::Chunks<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: slice::iter::ChunksExact<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RChunks<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RChunksExact<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: slice::iter::Windows<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BitSel<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: FillStatus"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: InnerError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Lsb0"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: slice::iter::ChunksExactMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: slice::iter::ChunksMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RChunksExactMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RChunksMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item slice::traits::fmt::M"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: <wyz::Address<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BitElement<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BitEnd<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BitIdxError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BitPos<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BitPtrError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BitRef<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: BitSpanError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MisalignError<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TryFromBitSliceError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RSplitN<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: slice::iter::SplitN<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ptr::span::BitSpan::REGION_MAX_BITS"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: devel::eq_types: bitvec's MIR stops at type outside the lift: std::any::TypeId"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BitSpan<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChunksExactMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ChunksMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IterMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RChunksExactMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RChunksMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RSplitMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RSplitNMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SplitInclusiveMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SplitMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SplitNMutNoAlias<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: domain::PartialElement<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: index::BitIdxError<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mem::BitElement<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ptr::single::BitPtrError<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ptr::span::BitSpanError<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::iter::BitValIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RSplit<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RSplitNMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::iter::Split<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::iter::SplitInclusive<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: slice::iter::SplitNMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<u16>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<u8>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::cell::Cell<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u8>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u16>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<u8>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::UnOp::Not: on Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BitField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as store::BitStore>::ZERO"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cell<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cell<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cell<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cell<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: M1"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: array::traits::InnerError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: array::traits::TryFromBitSliceError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: domain::BitDomain<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: order::Lsb0"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: order::Msb0"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ptr::proxy::BitRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RSplitMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::iter::SplitInclusiveMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: slice::iter::SplitMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeFull"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: vec::iter::FillStatus"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BitAnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Not"
+bodies = 1
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <<T as store::BitStore>::Mem as mem::BitRegister>::INDX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as funty::Integral>::ZERO"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ptr::addr::MisalignError::ALIGN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ptr::span::BitSpan::PTR_ADDR_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ptr::span::BitSpan::REGION_MAX_ELTS"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: devel::is_unsigned: bitvec's MIR stops at mir::TerminatorKind::Call: devel::eq_types: bitvec's MIR stops at type outside the lift: std::any::TypeId"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: devel::match_order: bitvec's MIR stops at mir::TerminatorKind::Call: devel::eq_types: bitvec's MIR stops at type outside the lift: std::any::TypeId"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: order::verify_for_type: bitvec's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ptr::span::BitSpan::len_encodable: bitvec's MIR stops at mir::Operand::Constant: the constant item ptr::span::BitSpan::REGION_MAX_BITS"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::slice::from_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Frozen<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PartialElement<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mem::BitElement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mem::BitElement<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mem::BitElement<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mem::BitElement<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ptr::addr::MisalignError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::ChunksExactMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::ChunksMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::IterMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RChunksExactMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RChunksMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RSplitMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::RSplitNMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::SplitInclusiveMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::SplitMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: slice::iter::SplitNMutNoAlias<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::any::TypeId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::iter::Map<std::iter::Map<std::ops::Range<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeInclusive<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wyz::Frozen<u32>"
+bodies = 1

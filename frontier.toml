@@ -5,14 +5,14 @@
 # stops the functions it counts (the detail their rows state, under its
 # cause), the one that stops the most first: the work queue.
 
-# Honesty report: 379 of 1808 functions of product code are lifted; 1007
-# are residue, 184 foreign and 238 effect rows.
+# Honesty report: 382 of 1822 functions of product code are lifted; 1008
+# are residue, 187 foreign and 245 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
 #   collision: 1
 #   form: 24
-#   mir::AggregateKind::Closure: 87
+#   mir::AggregateKind::Closure: 88
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
@@ -20,7 +20,7 @@
 #     1 bridge::<impl at crates/uorust/src/bridge.rs:150:1: 150:17>::parse::{closure#2}: type outside the lift: std::num::ParseIntError
 #     1 bridge::bound_type::{closure#0}: mir::Operand::Constant: the constant item std::string::String::as_str
 #     1 bridge::row_field::{closure#0}: mir::Operand::Constant: the constant item <str as std::string::ToString>::to_string
-#     1 certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
+#     1 certify::<impl at crates/uorust/src/certify.rs:3443:1: 3443:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 certify::<impl at crates/uorust/src/certify.rs:529:1: 529:13>::descriptor::{closure#0}: type outside the lift: std::path::PathBuf
 #     1 certify::<impl at crates/uorust/src/certify.rs:529:1: 529:13>::descriptor_text::{closure#0}: type outside the lift: std::path::PathBuf
 #     1 certify::plan_keyed::{closure#0}: mir::TerminatorKind::Call: <std::collections::BTreeMap as std::ops::Index>::index
@@ -95,6 +95,7 @@
 #     1 project::library::https_uri::{closure#0}: mir::TerminatorKind::Call: core::num::<impl u8>::is_ascii_alphanumeric
 #     1 project::library::project::{closure#0}: mir::TerminatorKind::Call: <facts::TargetKind as std::cmp::PartialEq>::eq
 #     1 project::library::stored::{closure#0}: type outside the lift: std::slice::Iter<'_, project::library::Term>
+#     1 proof::binds::{closure#0}: type outside the lift: serde_json::Value
 #     1 register::admit_parent::{closure#0}: type outside the lift: std::collections::btree_map::Values<'_, std::string::String, register::Row>
 #     1 register::embedded_fields::{closure#0}: type outside the lift: dyn for<'a> std::ops::Fn(&'a register::EmbeddedAt) -> &str
 #     1 register::stops_line::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
@@ -123,18 +124,18 @@
 #     1 the constant item mir::spec::MirStatementKind::ALL
 #     1 the constant item order::ORDERING
 #     1 the constant item order::PROOF_COLUMN
-#     1 the constant item project::LEXLEAN
+#     1 the constant item project::LEXLEAN_TOML
 #     1 the constant item project::compiler_semantics::SELF_LOCK
 #     1 the constant item project::library::DESCRIPTION_BYTES
 #     2 the constant item project::library::Term::atom
 #     1 the constant item std::string::String::as_str
 #     1 the constant item wf::Node::word
-#     1 {alloc1598: &std::sync::OnceLock<mir::stdlib::StdTable>}
-#     2 {alloc260: &std::sync::atomic::Atomic<bool>}
-#     1 {alloc338: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc353: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc368: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
-#     1 {alloc394: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc1602: &std::sync::OnceLock<mir::stdlib::StdTable>}
+#     2 {alloc264: &std::sync::atomic::Atomic<bool>}
+#     1 {alloc342: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc357: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc372: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
+#     1 {alloc398: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
 #   mir::ProjectionElem::Downcast: 10
 #     10 a variant's field read outside a match on it
 #   mir::ProjectionElem::Subslice: 1
@@ -251,7 +252,7 @@
 #     1 K
 #     1 bridge::BridgeOutcome<(std::string::String, std::string::String, std::vec::Vec<(std::string::String, std::string::String)>, usize)>
 #     2 bridge::BridgeOutcome<std::vec::Vec<std::string::String>>
-#     67 core::fmt::rt::Argument<'_>
+#     66 core::fmt::rt::Argument<'_>
 #     1 dyn for<'a> std::ops::Fn(&'a figures::Site) -> figures::Placement
 #     1 dyn for<'a> std::ops::Fn(&'a lift::Ty) -> std::option::Option<std::string::String>
 #     5 dyn for<'a> std::ops::Fn(&'a str) -> bool
@@ -322,12 +323,12 @@
 #     1 std::iter::FlatMap<std::slice::Iter<'_, &embedding::Recorded>, &std::vec::Vec<std::string::String>, {closure@crates/uorust/src/embedding.rs:405:60: 405:63}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:182:37: 182:40}>
 #     1 std::iter::Map<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/order.rs:121:18: 121:21}>
-#     1 std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:9228:58: 9228:61}>
+#     1 std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:9188:58: 9188:61}>
 #     1 std::iter::Map<std::slice::Iter<'_, ast::MatchArm>, {closure@crates/uorust/src/lift.rs:2621:14: 2621:17}>
-#     1 std::iter::Map<std::slice::Iter<'_, ast::MatchArm>, {closure@crates/uorust/src/lift.rs:9802:55: 9802:58}>
+#     1 std::iter::Map<std::slice::Iter<'_, ast::MatchArm>, {closure@crates/uorust/src/lift.rs:9762:55: 9762:58}>
 #     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:2305:54: 2305:57}>
 #     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:3658:55: 3658:58}>
-#     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5894:53: 5894:56}>
+#     1 std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5854:53: 5854:56}>
 #     1 std::iter::Map<std::slice::Iter<'_, certify::Root>, {closure@crates/uorust/src/certify.rs:1884:14: 1884:17}>
 #     1 std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/lex.rs:573:48: 573:54}>
 #     1 std::iter::Once<&str>
@@ -364,7 +365,7 @@
 #     1 std::slice::Iter<'_, wf::Node>
 #     7 std::str::CharIndices<'_>
 #     16 std::str::Chars<'_>
-#     15 std::str::Lines<'_>
+#     16 std::str::Lines<'_>
 #     3 std::str::MatchIndices<'_, &str>
 #     1 std::str::RSplit<'_, &str>
 #     2 std::str::Split<'_, &str>
@@ -534,11 +535,11 @@
 spec = "uorust/register/1"
 
 [lift]
-functions = 1808
-lifted = 379
-residue = 1007
-foreign = 184
-effect = 238
+functions = 1822
+lifted = 382
+residue = 1008
+foreign = 187
+effect = 245
 
 [[construct]]
 construct = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -553,7 +554,7 @@ functions = 69
 [[construct]]
 construct = "mir::Ty: core::fmt::rt::Argument<'_>"
 cause = "mir::Ty"
-functions = 67
+functions = 66
 
 [[construct]]
 construct = "type outside the lift: UorustEmbedCx.items: std::cell::RefCell<Vec<String>>"
@@ -586,19 +587,19 @@ cause = "mir::Ty"
 functions = 17
 
 [[construct]]
+construct = "Fs effect: Path::exists"
+cause = "effect"
+functions = 16
+
+[[construct]]
 construct = "mir::Ty: std::str::Chars<'_>"
 cause = "mir::Ty"
 functions = 16
 
 [[construct]]
-construct = "Fs effect: Path::exists"
-cause = "effect"
-functions = 15
-
-[[construct]]
 construct = "mir::Ty: std::str::Lines<'_>"
 cause = "mir::Ty"
-functions = 15
+functions = 16
 
 [[construct]]
 construct = "Fs effect: Path::is_dir"
@@ -629,6 +630,11 @@ functions = 12
 construct = "signature outside the lift: takes &mut self of Walk: the lift reads self and &self as the value, and threads no other receiver"
 cause = "signature"
 functions = 12
+
+[[construct]]
+construct = "Fs effect: std::fs::read"
+cause = "effect"
+functions = 11
 
 [[construct]]
 construct = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
@@ -666,7 +672,7 @@ cause = "mir::TerminatorKind::Call"
 functions = 9
 
 [[construct]]
-construct = "Fs effect: std::fs::read"
+construct = "Process effect: Command::new"
 cause = "effect"
 functions = 8
 
@@ -679,11 +685,6 @@ functions = 8
 construct = "mir::Ty: std::collections::BTreeMap<std::string::String, (std::string::String, lift::Ty)>"
 cause = "mir::Ty"
 functions = 8
-
-[[construct]]
-construct = "Process effect: Command::new"
-cause = "effect"
-functions = 7
 
 [[construct]]
 construct = "takes or returns syn::Generics, a type of the syn crate with no LexLean model"
@@ -892,6 +893,11 @@ functions = 3
 
 [[construct]]
 construct = "takes or returns Macros.rules: Matcher::Group.0: Delimiter, a type of the proc_macro2 crate with no LexLean model"
+cause = "foreign"
+functions = 3
+
+[[construct]]
+construct = "takes or returns Value, a type of the serde_json crate with no LexLean model"
 cause = "foreign"
 functions = 3
 
@@ -1116,7 +1122,7 @@ cause = "mir::Operand::Constant"
 functions = 2
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc260: &std::sync::atomic::Atomic<bool>}"
+construct = "mir::Operand::Constant: {alloc264: &std::sync::atomic::Atomic<bool>}"
 cause = "mir::Operand::Constant"
 functions = 2
 
@@ -1547,6 +1553,16 @@ functions = 1
 
 [[construct]]
 construct = "calls xtask::bootstrap::read, which performs a Fs effect: std::fs::read_to_string"
+cause = "effect"
+functions = 1
+
+[[construct]]
+construct = "calls xtask::proof::check, which reaches an effect"
+cause = "effect"
+functions = 1
+
+[[construct]]
+construct = "calls xtask::proof::observe, which performs a Fs effect: std::fs::read"
 cause = "effect"
 functions = 1
 
@@ -1996,7 +2012,7 @@ cause = "mir::AggregateKind::Closure"
 functions = 1
 
 [[construct]]
-construct = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+construct = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3443:1: 3443:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
 cause = "mir::AggregateKind::Closure"
 functions = 1
 
@@ -2371,6 +2387,11 @@ cause = "mir::AggregateKind::Closure"
 functions = 1
 
 [[construct]]
+construct = "mir::AggregateKind::Closure: proof::binds::{closure#0}: type outside the lift: serde_json::Value"
+cause = "mir::AggregateKind::Closure"
+functions = 1
+
+[[construct]]
 construct = "mir::AggregateKind::Closure: register::admit_parent::{closure#0}: type outside the lift: std::collections::btree_map::Values<'_, std::string::String, register::Row>"
 cause = "mir::AggregateKind::Closure"
 functions = 1
@@ -2491,7 +2512,7 @@ cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: the constant item project::LEXLEAN"
+construct = "mir::Operand::Constant: the constant item project::LEXLEAN_TOML"
 cause = "mir::Operand::Constant"
 functions = 1
 
@@ -2516,27 +2537,27 @@ cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc1598: &std::sync::OnceLock<mir::stdlib::StdTable>}"
+construct = "mir::Operand::Constant: {alloc1602: &std::sync::OnceLock<mir::stdlib::StdTable>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc338: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+construct = "mir::Operand::Constant: {alloc342: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc353: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+construct = "mir::Operand::Constant: {alloc357: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc368: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+construct = "mir::Operand::Constant: {alloc372: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc394: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+construct = "mir::Operand::Constant: {alloc398: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
@@ -3131,7 +3152,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:9228:58: 9228:61}>"
+construct = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:9188:58: 9188:61}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3141,7 +3162,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::MatchArm>, {closure@crates/uorust/src/lift.rs:9802:55: 9802:58}>"
+construct = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::MatchArm>, {closure@crates/uorust/src/lift.rs:9762:55: 9762:58}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3156,7 +3177,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5894:53: 5894:56}>"
+construct = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5854:53: 5854:56}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3754,7 +3775,7 @@ stops = [["type", "type outside the lift: A0"], ["type", "type outside the lift:
 kappa = "aef11346e48239175c2a3ab2db54ca7ba3fbc939dee662aabfbaf2ee14cac344"
 function = "uorust::certified::hand"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc260: &std::sync::atomic::Atomic<bool>}"
+detail = "mir::Operand::Constant: {alloc264: &std::sync::atomic::Atomic<bool>}"
 stops = []
 
 [[residue]]
@@ -3922,7 +3943,7 @@ stops = []
 kappa = "9118434e7cc0fed6e9795577a672c8276dde5fbc53ed1f01f4d97ea4d5798c36"
 function = "uorust::certified::use_hand"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc260: &std::sync::atomic::Atomic<bool>}"
+detail = "mir::Operand::Constant: {alloc264: &std::sync::atomic::Atomic<bool>}"
 stops = []
 
 [[residue]]
@@ -3954,7 +3975,7 @@ detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers woul
 stops = []
 
 [[residue]]
-kappa = "63a32d6a5d9a7a95f49c5033b5e3bc65bfee543eb9dff12376265837b3c3f5a9"
+kappa = "acdf50719543bc23d97c9ae236394ec6075707c8b6f8daac0c1735ef3bc1d426"
 function = "uorust::certify::Manifest::parse"
 reason = "mir"
 detail = "mir::Ty: std::path::Path"
@@ -3985,7 +4006,7 @@ stops = [["type", "type outside the lift: IrBody.blocks: IrBlock.statements: IrS
 kappa = "a6f0acd7875848fae482fd78593f32df889beb11c75c8554e97a0d49d4c4f89f"
 function = "uorust::certify::Profile::cargo_manifest"
 reason = "mir"
-detail = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3441:1: 3441:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
+detail = "mir::AggregateKind::Closure: certify::<impl at crates/uorust/src/certify.rs:3443:1: 3443:13>::cargo_manifest::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>"
 stops = []
 
 [[residue]]
@@ -4192,7 +4213,7 @@ detail = "mir::Ty: std::path::Path"
 stops = []
 
 [[residue]]
-kappa = "d017e0f4be55ad987510d8848a0829be46bb1647f3752274d2b8225f368e2d01"
+kappa = "fd5d1a289fca7ca3dcc6a94515d1789654f2399f74125071754addded3e7d18f"
 function = "uorust::certify::profile::Profile::recorded"
 reason = "mir"
 detail = "mir::Ty: std::path::Path"
@@ -4769,21 +4790,21 @@ stops = []
 kappa = "e69b494047df0de0474cd19bd1fd0f8b467f867b639f60d60fe50bd3a63abc2b"
 function = "uorust::embed::defined_float_intrinsics"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc353: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc357: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 stops = []
 
 [[residue]]
 kappa = "bcfcb0fdc7be5af8f14bfd9c8dad1d118d2887b7816855fb6ad322fca464c482"
 function = "uorust::embed::defined_intrinsics"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc338: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc342: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 stops = []
 
 [[residue]]
 kappa = "520427207441734718b88fdbf38d7648dcd8182ec0f9e49abc013bf5b066ccf5"
 function = "uorust::embed::defined_layout_queries"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc368: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc372: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 stops = []
 
 [[residue]]
@@ -5224,7 +5245,7 @@ stops = []
 kappa = "c55e780bbdd5fed1280f58966b9f63fbf933e85e5043ceab3a04894f3eb9aa92"
 function = "uorust::embed::undefined_constructs"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc394: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
+detail = "mir::Operand::Constant: {alloc398: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}"
 stops = []
 
 [[residue]]
@@ -6197,7 +6218,7 @@ stops = []
 kappa = "908d4c720768e46449580df96033e99950a2ab33eb0ff15a285696bf3b9d773d"
 function = "uorust::lift::applied_path"
 reason = "mir"
-detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5894:53: 5894:56}>"
+detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/lift.rs:5854:53: 5854:56}>"
 stops = []
 
 [[residue]]
@@ -6775,7 +6796,7 @@ detail = "mir::Ty: std::iter::Rev<std::vec::IntoIter<(std::string::String, std::
 stops = []
 
 [[residue]]
-kappa = "e05dd9968a114358a64e16bbbf32d747ed03a7a596f5cc9f6f8246e9dafcf5cf"
+kappa = "dd3a4c8b277184cecf9d601d6acee01c830a10222c15eabfd0390ce14b4d3fb1"
 function = "uorust::lift::lift_all"
 reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -6855,7 +6876,7 @@ stops = []
 kappa = "3fd5a2e76e118b6b014781f731327612bea70554bc399226356cb2d0c15d0437"
 function = "uorust::lift::match_rest"
 reason = "mir"
-detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::MatchArm>, {closure@crates/uorust/src/lift.rs:9802:55: 9802:58}>"
+detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::MatchArm>, {closure@crates/uorust/src/lift.rs:9762:55: 9762:58}>"
 stops = []
 
 [[residue]]
@@ -6964,13 +6985,6 @@ detail = "mir::Ty: core::fmt::rt::Argument<'_>"
 stops = []
 
 [[residue]]
-kappa = "93d4813b3902b6b7a3fb87331e172fc4e92268ca75d8510cd9445faf11070b88"
-function = "uorust::lift::method_nat_checked_div"
-reason = "mir"
-detail = "mir::Ty: core::fmt::rt::Argument<'_>"
-stops = []
-
-[[residue]]
 kappa = "342efafd75b68bc40b15040302c203c956945ac139048d7342ff358a384ddfff"
 function = "uorust::lift::method_nat_checked_div_args"
 reason = "mir"
@@ -7041,7 +7055,7 @@ detail = "mir::TerminatorKind::Call: std::boxed::Box::new_uninit"
 stops = []
 
 [[residue]]
-kappa = "73682db20316c17f224997601e0b563994570e40aee8a295168e2638e0dc7b41"
+kappa = "4552a99d93cad5166e622a6a592de0e1501c0572c780a3c88c88a39b3a851276"
 function = "uorust::lift::method_typed"
 reason = "mir"
 detail = "mir::Ty: core::fmt::rt::Argument<'_>"
@@ -7373,7 +7387,7 @@ stops = []
 kappa = "799816964ea0cdda583eb37dfbb25de865f1303fd7a738ef7c5ceba702b2ff33"
 function = "uorust::lift::try_in_struct"
 reason = "mir"
-detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:9228:58: 9228:61}>"
+detail = "mir::Ty: std::iter::Map<std::slice::Iter<'_, ast::FieldValue>, {closure@crates/uorust/src/lift.rs:9188:58: 9188:61}>"
 stops = []
 
 [[residue]]
@@ -8847,7 +8861,7 @@ detail = "mir::TerminatorKind::Call: std::option::Option::map"
 stops = []
 
 [[residue]]
-kappa = "13b670770d426cf6f750a797e6194dc9659b384740ba56e9dd529e5c1e0811f6"
+kappa = "ff3f2c7e1072d0c86bfca2a0cbd3ea29fed032ca7f572690e40f627a06d3a99e"
 function = "uorust::mir::prove::candidates"
 reason = "mir"
 detail = "mir::Operand::Constant: the constant item mir::CANDIDATES"
@@ -9036,7 +9050,7 @@ detail = "mir::ProjectionElem::Subslice"
 stops = []
 
 [[residue]]
-kappa = "2b3fdeb5996920ddf570274076cc525ff640993333f719474b8fc11a032421c6"
+kappa = "dbb5128d8e8dd86ef8745f6ed2bacbcfe90a9330a7c4ab6835b3c485b2bc01a6"
 function = "uorust::mir::stdlib::parse_table"
 reason = "mir"
 detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -9074,7 +9088,7 @@ stops = []
 kappa = "a52e07bf3cf71f0bb47d0620049df5db15379922c1410a447a682b7af77a6e4c"
 function = "uorust::mir::stdlib::table"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc1598: &std::sync::OnceLock<mir::stdlib::StdTable>}"
+detail = "mir::Operand::Constant: {alloc1602: &std::sync::OnceLock<mir::stdlib::StdTable>}"
 stops = []
 
 [[residue]]
@@ -9134,7 +9148,7 @@ detail = "mir::Ty: std::num::ParseIntError"
 stops = []
 
 [[residue]]
-kappa = "c739e27951bf399bee66ac0ae4cf581d9737f27d5dfb719d168c7a37bd1c0189"
+kappa = "01c757b8a822b5bfdfedc6be49ed9c64e6daf17c9c20fcec31a0b0bb669a02d7"
 function = "uorust::mir::verdict::Verdicts::parse"
 reason = "mir"
 detail = "mir::Ty: std::path::Path"
@@ -9771,7 +9785,7 @@ detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers woul
 stops = []
 
 [[residue]]
-kappa = "f245a94acc77cdf0c8b12384419f904f29ba04eb24322af1a4014401b0d56655"
+kappa = "ff6504f003c1789421f1551ae6362d7b5a1b4b3d658cb6e3861684cf5a90a69a"
 function = "uorust::project::config"
 reason = "mir"
 detail = "mir::Ty: std::str::Chars<'_>"
@@ -10128,10 +10142,10 @@ detail = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers woul
 stops = []
 
 [[residue]]
-kappa = "e6c55013f92e01a8cb399ff30a2966b2304830dca6257afb1df354dad7f40d9d"
+kappa = "9a7588dcad6fa55260aace8e191b41164217dc230f5afdb9b58bb56837914b11"
 function = "uorust::project::within_limit"
 reason = "mir"
-detail = "mir::Operand::Constant: the constant item project::LEXLEAN"
+detail = "mir::Operand::Constant: the constant item project::LEXLEAN_TOML"
 stops = []
 
 [[residue]]
@@ -10492,7 +10506,7 @@ detail = "mir::Ty: serde_json::Value"
 stops = []
 
 [[residue]]
-kappa = "e21eaa0bb22efffd59cd786e91bf5e71e24492a6d7d3466f473eb3bbcc092640"
+kappa = "c7f465b417e31cda20c0b7774574c2145efdf8bcf484a6df7f79a49fc4d6d563"
 function = "xtask::bootstrap::docker_credentials_are_confined"
 reason = "mir"
 detail = "mir::Ty: std::str::Lines<'_>"
@@ -10503,6 +10517,20 @@ kappa = "33f9423e9537477066c28b505b50eeeb4c16d0664cc3d6eeb5bbf600c1874d61"
 function = "xtask::bootstrap::policy_boundary_is_canonical"
 reason = "mir"
 detail = "mir::Ty: std::iter::Copied<std::slice::Iter<'_, &str>>"
+stops = []
+
+[[residue]]
+kappa = "30bc8b508554437f91bacda73441e2580abdb952ee347bc781537f2a4d31dfeb"
+function = "xtask::bootstrap::private_scratch"
+reason = "mir"
+detail = "mir::Ty: std::str::Lines<'_>"
+stops = []
+
+[[residue]]
+kappa = "aa9f2e538cb4e3051647112fdf731e263aa73fa37a70bb0496078673fd9a31f7"
+function = "xtask::proof::binds"
+reason = "mir"
+detail = "mir::AggregateKind::Closure: proof::binds::{closure#0}: type outside the lift: serde_json::Value"
 stops = []
 
 [[residue]]
@@ -11402,7 +11430,7 @@ detail = "takes or returns syn::UseTree, a type of the syn crate with no LexLean
 stops = [["foreign", "takes or returns syn::UseTree, a type of the syn crate with no LexLean model"], ["type", "type outside the lift: &mut Vec<(Option<String>, Vec<String>)>"]]
 
 [[foreign]]
-kappa = "1eb44bd92feea04c3925c7a364181430cf556a16c3a386b7295eb480c1c002c3"
+kappa = "bd3d22f6020c2fa8d912f6b36a0f73aa063d6639679a7ed03adb45ad2ea4fb1d"
 function = "uorust::limits::scaffold"
 detail = "takes or returns toml::Value, a type of the toml crate with no LexLean model"
 stops = []
@@ -11594,7 +11622,7 @@ detail = "takes or returns toml::Value, a type of the toml crate with no LexLean
 stops = [["foreign", "takes or returns toml::Value, a type of the toml crate with no LexLean model"]]
 
 [[foreign]]
-kappa = "4c795db2c1fc17f5c8568e7ebd9cd5be63e21fe747b69fb483b4a177dbca8c46"
+kappa = "7a98c226f98cee548f95c6fad3ccf3c18b5a81db7285b807d3a9691800189412"
 function = "uorust::register::Register::rows_of"
 detail = "takes or returns toml::Value, a type of the toml crate with no LexLean model"
 stops = [["foreign", "takes or returns toml::Value, a type of the toml crate with no LexLean model"]]
@@ -11622,6 +11650,24 @@ kappa = "540ca4889f33ed9054727dce400ae758300dab2d48c9c078e5060ebca1967b6a"
 function = "xtask::bootstrap::compare_sdk_inventory"
 detail = "takes or returns serde_json::Value, a type of the serde_json crate with no LexLean model"
 stops = [["foreign", "takes or returns serde_json::Value, a type of the serde_json crate with no LexLean model"], ["type", "type outside the lift: dyn std::error::Error"]]
+
+[[foreign]]
+kappa = "ed85948bba3898cdd257b8a3f3f45913e7fff3086b02573815c873b0fd9cdf34"
+function = "xtask::proof::acceptance_digest"
+detail = "takes or returns Value, a type of the serde_json crate with no LexLean model"
+stops = [["foreign", "takes or returns Value, a type of the serde_json crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "ca7d36c763a9ca1ce36e41dfd1d72f0d4c444108626ac3470653b8bef1ae2b97"
+function = "xtask::proof::text"
+detail = "takes or returns Value, a type of the serde_json crate with no LexLean model"
+stops = [["foreign", "takes or returns Value, a type of the serde_json crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "f996c99c865c15c91814ba724569c89e000f9368c01f0606ac67012165dc4519"
+function = "xtask::proof::workspace_paths"
+detail = "takes or returns Value, a type of the serde_json crate with no LexLean model"
+stops = [["foreign", "takes or returns Value, a type of the serde_json crate with no LexLean model"]]
 
 [[effect]]
 kappa = "770ac4d9830c9579d0f73a4534fa6afd9f8b4813f06454732d2fbdf69dc26cdc"
@@ -11708,7 +11754,7 @@ effect = "Process effect: std::process::Command::new"
 stops = []
 
 [[effect]]
-kappa = "8716cece9f6d4b84d10271922edeb43a67b09fbdf153486c7f71682aeccbfd12"
+kappa = "945b9ae956bde176b45ab8be1d3a04e0bd46a1df287c1afb10aad268e857f08d"
 function = "uorust::bridge::project"
 effect = "Fs effect: Path::exists"
 stops = []
@@ -11762,7 +11808,7 @@ effect = "calls uorust::certify::modules, which performs a Fs effect: std::fs::r
 stops = []
 
 [[effect]]
-kappa = "532df9ef8a960ff3b7cc58c521d1b37b9ea0cf663873bcdc8cecdf7acd0b0af6"
+kappa = "dfd58f67c0cd498fb3a10e7ac41ae06e32b3d3443e018c52e35709494eee7108"
 function = "uorust::certify::admit_roots"
 effect = "Fs effect: Path::exists"
 stops = []
@@ -11900,13 +11946,13 @@ effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "5177a716da1371557a705d96571ca0bab5dabc3edfe0d8521d0606813e6ec7b2"
+kappa = "a0a21b449eed11ceaff44e2469f3e6fbdb7417cdb935482e5eb3e6268993f569"
 function = "uorust::certify::package_edition"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "800877b4d07cde952a828fb06b887c2e34b521d0befe9923cacbef99cf0e425b"
+kappa = "aca09fedb306c1d18b683f558e2a469ed2ec9a9bb961100e66fd49b6a7cd78b5"
 function = "uorust::certify::package_rows"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -11930,13 +11976,13 @@ effect = "Fs effect: Path::exists"
 stops = [["type", "type outside the lift: Prior.verify: fn(&Path) -> Result<Option<String>, UorustError>"], ["type", "type outside the lift: UorustCertifyScope.within: std::time::Duration"]]
 
 [[effect]]
-kappa = "edae880ad5e53692b200a72ac7fb6843521fa7acb319b93e74ae9f79a9bf8af8"
+kappa = "337f694becec063a6f9ca07fd94f0423f0f10130b3df4b0f452a06acd153163a"
 function = "uorust::certify::profile::Profile::kept"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "9c74777feb27cd9270785830106acf5491cbf9a3d18982c4a63e35965e337dba"
+kappa = "942953110ab5347de94bfa52576005d5da7da95dccd1163bac89d3d5b19ad439"
 function = "uorust::certify::profile::Profile::of_workspace"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -11954,13 +12000,13 @@ effect = "calls uorust::certify::profile::Profile::of_workspace, which performs 
 stops = []
 
 [[effect]]
-kappa = "f1d9d4a6a1249d276e499f25e4e0e973db3877786dbc7c02d3877c227b0d8352"
+kappa = "ed967a2ec7a7c813db9281f14ae8fc6b6c1ec0581914be8a2340841ab02b19c3"
 function = "uorust::certify::project_files"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "ad99276ed6c8744cc32436f978852f6cf8653731fd37f647d170b5200a3f4859"
+kappa = "21cc291ffe36c81d6899f6edd21c84f75adfcb079c5206b708a0be14bdd3a9e0"
 function = "uorust::certify::project_identity"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -11978,13 +12024,13 @@ effect = "Fs effect: Path::canonicalize"
 stops = []
 
 [[effect]]
-kappa = "2e5bdd2a7026cfd00fe406eaf0c8443748b23f8885fb054da8a8f33bfdebf757"
+kappa = "e163c78a375ae459ebcd5bb2ac4bc68462dc266b41a7cd27da30aa85b8090668"
 function = "uorust::certify::source_roots"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "a3d6bed9ec7d71a5e7f385f6b0d6500e88dcb1810eac34f6f84ac6aebc74ce87"
+kappa = "e2513e99acdf732a47d54c9bb38e1f52390f58df3642c7d94015b18d674bad19"
 function = "uorust::certify::sync"
 effect = "Fs effect: Path::is_file"
 stops = [["type", "type outside the lift: Dumps.crates: IrBody.blocks: IrBlock.statements: IrStatement::Assign.0: IrPlace.projection: IrProjection::Other.0: spec::MirProjectionElem"]]
@@ -12032,7 +12078,7 @@ effect = "Process effect: std::process::Command::new"
 stops = []
 
 [[effect]]
-kappa = "b08ade3950cce71ff5b9fceeeb249001d3757251e7561ba8bd273436a7a1a7d0"
+kappa = "422217d73065b15d7f61a8c86ac0642b3ef360f14994dfb63eadf9413ffe11a5"
 function = "uorust::declared_name"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -12080,7 +12126,7 @@ effect = "Fs effect: std::fs::read_dir"
 stops = []
 
 [[effect]]
-kappa = "d9703b92acc75c1e231987fbffbd0951f4d56cd027962c89bdca402cc96b829b"
+kappa = "646c7ed17786d7f91c59ae8aef16f8620dad81418c7120c483c2c6e2ee481464"
 function = "uorust::embed::dump_target"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 stops = []
@@ -12278,7 +12324,7 @@ effect = "Fs effect: std::fs::read_dir"
 stops = [["type", "type outside the lift: &mut Locating"]]
 
 [[effect]]
-kappa = "09d2e1ad51d096a56b0e667e5f6724470443f551a563dc050064df3d87988b99"
+kappa = "88cdd55e2af0ea98b32512f343ff4505485fe0b2310bc57352d0c0ab6f46cc95"
 function = "uorust::figures::read_figures"
 effect = "Fs effect: Path::exists"
 stops = []
@@ -12296,7 +12342,7 @@ effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "af3df95169038699a9e13d8798b7d3114cd51383fcdeb851569277b984752e6a"
+kappa = "18c9ae4af203ef67a9c503d6ef85d39fbaeb34248d48c6b49e8106e206ebdf6a"
 function = "uorust::figures::registered"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -12350,7 +12396,7 @@ effect = "Fs effect: std::fs::read_to_string"
 stops = [["foreign", "takes or returns Value::Float.0: f64, a type of the serde_json crate with no LexLean model"]]
 
 [[effect]]
-kappa = "db02a4198f33a97725b00beb35f4e09beb6b97e62853e27c3272567b3f769ce9"
+kappa = "0918af771636869b1562446b26e5f842c7fcd6a1a01f3f8ac70639962766c9c9"
 function = "uorust::ingest::read_toml"
 effect = "Fs effect: std::fs::read_to_string"
 stops = [["foreign", "takes or returns toml::Value, a type of the toml crate with no LexLean model"]]
@@ -12464,7 +12510,7 @@ effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "09523c1a50015e8461ab5066a2c03b501b4c3105c62eef347bf01a0199bd1e12"
+kappa = "d7825e6ca70a81c576d0669cc517fefe7b6032ba173569251fd49959a0336670"
 function = "uorust::limits::Limits::declared"
 effect = "Fs effect: std::fs::read"
 stops = [["type", "type outside the lift: Self"]]
@@ -12476,7 +12522,7 @@ effect = "calls uorust::run, which performs a Env effect: std::env::temp_dir"
 stops = [["type", "type outside the lift: ExitCode"]]
 
 [[effect]]
-kappa = "1d4728416233ca023598f300a07628058aa847ba8b97d499f267998e5aad1449"
+kappa = "adc467e78b44a2d64848bb78abd5c915932abd7416178a36acedcec31919e4db"
 function = "uorust::mir::core::census"
 effect = "Fs effect: Path::is_dir"
 stops = []
@@ -12494,7 +12540,7 @@ effect = "calls uorust::mir::core::library_decls, which performs a Fs effect: Pa
 stops = []
 
 [[effect]]
-kappa = "5573a0d8f147d67ae7619ef4af438be9ad293e24dfca683f73643cb3fb6bbf25"
+kappa = "a8844044aedf11cf42262f205a9f7242c94ff0c7915e30e13e3ed2e5a6bd9e70"
 function = "uorust::mir::core::core_regressions"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 stops = []
@@ -12524,13 +12570,13 @@ effect = "calls uorust::mir::core::summarize_register, which performs a Fs effec
 stops = []
 
 [[effect]]
-kappa = "685dc2ea1796dfa95ff8326a83a07b91490819ba8102bc44466ca426b11037cd"
+kappa = "3e7e196b5f98c52fb48ece270391a0dcdb1735c1b0da485603ed815633d56d51"
 function = "uorust::mir::core::summarize_register"
 effect = "Fs effect: std::fs::write"
 stops = []
 
 [[effect]]
-kappa = "612a4671b6886ec214f0fdd44372788ad58c08c3bbbf6eef2bb8445ee612444b"
+kappa = "1d5e5a6d5e9ee6e03baa6ac49a53c0d3955679335a61f6e1d0fd2b9e8e45a0e2"
 function = "uorust::mir::core::unembedded"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 stops = []
@@ -12596,7 +12642,7 @@ effect = "Fs effect: Path::is_file"
 stops = []
 
 [[effect]]
-kappa = "6084d59247771ad583d4277b04004099e9a9979c234cd1e22117c220b9ac9a0d"
+kappa = "e10a1235d4d1e03d419a41896edf141bf281f78c64f90afd5d75bc0e3a88e529"
 function = "uorust::mir::load"
 effect = "Fs effect: Path::is_dir"
 stops = [["type", "type outside the lift: Dumps.crates: IrBody.blocks: IrBlock.statements: IrStatement::Assign.0: IrPlace.projection: IrProjection::Other.0: spec::MirProjectionElem"]]
@@ -12620,7 +12666,7 @@ effect = "Fs effect: Path::is_dir"
 stops = []
 
 [[effect]]
-kappa = "b8756c115a08a1884830664a0b4b635830ebb50d335b82b0a55a1c11e3587832"
+kappa = "edbd7359ce07a9e17b4c29ab3dd5836114c4bd83eaab18287b65d95c87df1fc1"
 function = "uorust::mir::record_layouts"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -12650,7 +12696,7 @@ effect = "Fs effect: Path::is_file"
 stops = []
 
 [[effect]]
-kappa = "e834d8e8ffb4055e80a8ebfb7d311ab8cb7c73ff317f0e0abebc54fae07e4ba5"
+kappa = "501eda56ba5ffef0b51ce3f09bda3c7daae4f1d0d1c865136d4cf00fe5ee207b"
 function = "uorust::names::default_features"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -12698,13 +12744,13 @@ effect = "Fs effect: std::fs::read_dir"
 stops = []
 
 [[effect]]
-kappa = "44de6b8a283ca4477b9ce0aecbe54936f8fec0b359cee4f0f8c4baf6c9cd2eac"
+kappa = "00fea684ab04f9424d6af75612812b71110373c13e0c2db45b97cd811a016d2d"
 function = "uorust::queue::retractions"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "651ba8bb5fdeaaf1984f5e384ad7438227898cd39bc72819ed36735e2597edb9"
+kappa = "67ceb115a425263b2393c9cc66524d2bd3bbb3227db809358e9a9542047bc278"
 function = "uorust::queue::rows"
 effect = "Fs effect: std::fs::read_to_string"
 stops = [["foreign", "takes or returns toml::Value, a type of the toml crate with no LexLean model"]]
@@ -12770,7 +12816,7 @@ effect = "Fs effect: std::fs::create_dir_all"
 stops = []
 
 [[effect]]
-kappa = "558735fee0a0b0c82ed2627191563e87698185de246fe1a31e903060e7b4145e"
+kappa = "f3cb42d28ee05d0dabd48f4c809936e584c52817d7930e5b62c4aef4054b265e"
 function = "uorust::registry::lib_name"
 effect = "calls uorust::embed::read_text, which performs a Fs effect: std::fs::read_to_string"
 stops = []
@@ -13034,10 +13080,52 @@ effect = "Fs effect: std::fs::write"
 stops = [["type", "type outside the lift: dyn std::error::Error"]]
 
 [[effect]]
-kappa = "2a39e42ecb9cab1289762445f968670f7c1494a51249770914ea755955aa9a2b"
+kappa = "d06e88e3f790bb9f6ce95524614086da0a5387bfd51c3637c0ea1ba2573d3ba7"
 function = "xtask::main"
 effect = "Env effect: std::env::args"
 stops = [["type", "type outside the lift: ExitCode"]]
+
+[[effect]]
+kappa = "6d5c7898d04bb97d1ec6d3b65b0e6aa44f1cd42bb886ce93d9cf9d74189d32a3"
+function = "xtask::proof::check"
+effect = "calls xtask::proof::observe, which performs a Fs effect: std::fs::read"
+stops = [["type", "type outside the lift: dyn std::error::Error"]]
+
+[[effect]]
+kappa = "cc7a7c015834ac41a03af3894165119ec1b3c2a60012d0b67814bcac074c341a"
+function = "xtask::proof::inputs"
+effect = "Fs effect: std::fs::read"
+stops = [["type", "type outside the lift: dyn std::error::Error"]]
+
+[[effect]]
+kappa = "0dbaf98fdb57d67b997889ada05fc778982d93b92e3fe034a105afbd19377d5c"
+function = "xtask::proof::keep"
+effect = "Fs effect: Path::exists"
+stops = [["type", "type outside the lift: dyn std::error::Error"]]
+
+[[effect]]
+kappa = "0d3e3f3c6dc66c99b80f39406572a4307557c127ffd6b8ea1e3196153783116c"
+function = "xtask::proof::observe"
+effect = "Fs effect: std::fs::read"
+stops = [["foreign", "takes or returns Value, a type of the serde_json crate with no LexLean model"], ["type", "type outside the lift: dyn std::error::Error"]]
+
+[[effect]]
+kappa = "07c8cc1dff40bd9f29e46f249723481f23dffc7eef3843f4442d0245f515dde0"
+function = "xtask::proof::read_kept"
+effect = "Fs effect: std::fs::read"
+stops = [["type", "type outside the lift: dyn std::error::Error"]]
+
+[[effect]]
+kappa = "80daff23e48bd07127887d37f666dfe124942fe70ae13eec71d19250f64f7ebf"
+function = "xtask::proof::reuse"
+effect = "calls xtask::proof::check, which reaches an effect"
+stops = [["type", "type outside the lift: dyn std::error::Error"]]
+
+[[effect]]
+kappa = "57a6a12b0378131070dfd4fdaf15276df9ad469585d7379576e79ba435831040"
+function = "xtask::proof::run"
+effect = "Process effect: Command::new"
+stops = [["type", "type outside the lift: dyn std::error::Error"]]
 
 [[effect]]
 kappa = "630582ab12fcde0d16ee2dd9d552369da07720787c88321b19c3ecdc4cf2783e"
@@ -13404,7 +13492,7 @@ definition = "Behavior::formatPosition"
 [[lifted]]
 kappa = "16582e77e04d9938bac48b37ce0c4543a29e1dc86d8d94d3945b2b424a9f00a0"
 function = "uorust::figures::hex"
-definition = "Behavior::hex"
+definition = "Behavior::uorustHex"
 
 [[lifted]]
 kappa = "19a380b39ec85cb65a1475ad0f4fabcdf605f82167b3b41d6598c92933696e4a"
@@ -14882,7 +14970,7 @@ function = "xtask::bootstrap::immutable_image"
 definition = "Behavior::immutableImage"
 
 [[lifted]]
-kappa = "c6c2b8d047434b8cfa7e493d986adf4aa08e68f912b5dd80b89213dd3396ba39"
+kappa = "d86f100a893bc87071052f82ff391060283e2391105eb1f7bcd96a1a2d21fed4"
 function = "xtask::bootstrap::native_coverage_is_complete"
 definition = "Behavior::nativeCoverageIsComplete"
 
@@ -14910,6 +14998,21 @@ definition = "Behavior::updatePreservesProjectContent"
 kappa = "30497fdb1dad1ab60d11b8b916e1755cd7b9afb0f4302bd74ceff27267db4d3c"
 function = "xtask::bootstrap::workflow_history_is_complete"
 definition = "Behavior::workflowHistoryIsComplete"
+
+[[lifted]]
+kappa = "767665080a8e832189946d379357baf73a8c2b905433fddfe1b9c00a7df9a52f"
+function = "xtask::proof::hex"
+definition = "Behavior::xtaskHex"
+
+[[lifted]]
+kappa = "033beba02e07198289969c4b79780b11434a6a1abbd0193d80812ab43520b2ca"
+function = "xtask::proof::is_id"
+definition = "Behavior::isId"
+
+[[lifted]]
+kappa = "e2d0a4cad842282e7677de54d82f8b1e6815ede10303f32e500aab1c5403e95a"
+function = "xtask::proof::same"
+definition = "Behavior::same"
 
 [[lifted]]
 kappa = "8f19c5063aee90357f93316cddddd4883fecfd9d02dfd33e95aa9f5134fe1e35"

@@ -1,0 +1,140 @@
+[[fn]]
+path = "zlib-rs::DOT2V"
+kappa = "fa24607019cdc14dea0016f3d58db5129affea8ad87a41a62ea021630ed396e5"
+embedded = "d85f2cfcf9cdef912032cd9a4feae2e16d4601a886165704078262bbcf565bf4"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zlib-rs::DOT3V"
+kappa = "baa7ed8a96789fffff0b75b8f88561e8d1a59ddd37922041b31744f471cc6e23"
+embedded = "7cb2458abb19c5ede81e36b5b336c041bdb5484abcaf204063ca90b981064bb7"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zlib-rs::PERM_VEC"
+kappa = "009a5c26c28ca732fbb98fb6ebe4c10b2c2402c6c68bc909f8752c547ca74b97"
+embedded = "b7c1ab69fbf18f0e3dbcdc05754e0570d4775bd8270408933cf6e4ddde20d245"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zlib-rs::ZERO"
+kappa = "a7a5c71ac8e8d50f823942d1fdaff8c6e1bf102df6c6e494c7a83a1730833c72"
+embedded = "6ce78470e238009aa6407e278e760a0f196ce573cb37355ad40ecb9d9f015121"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zlib-rs::__m256i_literal"
+kappa = "d82d8db38e6b93229addfa16fa48d7946205f1a1d3e997bda4ded6e545de1d13"
+embedded = "bdb3ebada86614baabf686c43cbb854b4107da7d55a4e8c1f34804eb30fd3c73"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zlib-rs::adler32"
+kappa = "085433c78fb7f0a39d3684a763ce100c55c7fc8fa9321ee8a31b6ecd6ad80fa0"
+embedded = "bd650afab6b24dfc62caf967ff10f9bd8e5b48b0175afd129763f57dd2683fec"
+status = "residue"
+cause = "mir::TerminatorKind::Call: cpu_features::is_enabled_avx2_and_bmi2: zlib-rs's MIR stops at mir::Operand::Constant: {alloc3490: &Atomic<u32>}"
+
+[[fn]]
+path = "zlib-rs::adler32_avx2"
+kappa = "0cf852346c817e3b8b0583b9540ef7418c41385e1c8671a23209b7ab21f0cfb8"
+embedded = "c339c2c887a51aec4ba814ff7cce938a8ad37c536229a063f9f9e486956695cb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: cpu_features::is_enabled_avx2_and_bmi2: zlib-rs's MIR stops at mir::Operand::Constant: {alloc3490: &Atomic<u32>}"
+
+[[fn]]
+path = "zlib-rs::adler32_avx2_help"
+kappa = "325b07c773aaea048f69d4644f536ad5d8db37d47c605fb47bb86098d348c9ed"
+embedded = "e3e12871e8b60dce9c9ca9a7811dada6fe28e0590e3eee29a8fdad5e0109db9b"
+status = "residue"
+cause = "mir::Ty: std::arch::x86_64::__m256i"
+
+[[fn]]
+path = "zlib-rs::adler32_combine"
+kappa = "cc7dc448dd6cfc28a33336c8ec55f2a272a3a1df400d9b3b76d84a744cb0779f"
+embedded = "9e336ac98120373ecb2cd64aedfa013f1bdc1f7d50bdfa673a1c92bb853b655d"
+status = "residue"
+cause = "mir::Operand::Constant: adler32::adler32_combine::BASE: mir::Operand::Constant: the constant item adler32::BASE"
+
+[[fn]]
+path = "zlib-rs::adler32_combine::BASE"
+kappa = "c07fcf7a133797e50ed572e0fcdb597de314be359ae4a25d15f61974d49ce987"
+embedded = "593c6952350bbc54f6ef3f1426a93011231faffb81884837027b82f0f0c8d0b7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item adler32::BASE"
+
+[[fn]]
+path = "zlib-rs::adler32_fold_copy"
+kappa = "47fbbb91feebdc63fcd8f8e2501ef05762bc1fe8e6776aed2590de4f8fbeb6c5"
+embedded = "14875c68bcb5ddf1b6a21ff8dc034891a1eee265664c8c3af293ee10c178cb28"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "zlib-rs::adler32_len_1"
+kappa = "f1f89a831d550b203793ec6fe4223365641ce6b3fbd75747ed3f3a1753848341"
+embedded = "7aad786ebfbd4e8db4238b65e92bd771673b6045dd9f426a95feed982e287249"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item adler32::BASE"
+
+[[fn]]
+path = "zlib-rs::adler32_len_16"
+kappa = "d7b9c9aa21b92682a1ecb92f9eb05799c9d08a355775ce7781263f7309624aa2"
+embedded = "9e2cefa10aa23116e3574086048ba0ac6dd21c200e8f4ca97ce9be1d3664f9cb"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item adler32::BASE"
+
+[[fn]]
+path = "zlib-rs::adler32_len_64"
+kappa = "2803b0bc99dc6c5d1961cb7ea369dc6ff9c826e8eef6de8b353da2cede475827"
+embedded = "743abe2a5a123af90d75473860ddd94693fd4467953cd8b96fa739c10a968ce5"
+status = "residue"
+cause = "mir::Operand::Constant: adler32::generic::adler32_len_64::N: mir::Operand::Constant: the constant item adler32::generic::UNROLL_MORE"
+
+[[fn]]
+path = "zlib-rs::adler32_len_64::N"
+kappa = "c9191595c25ff14993fe1e791a264cc2c8121208687f5dee1378a2448de862f5"
+embedded = "292a8738bf076cd99952b7a4ba8512b00c908a79ddbbe3184415ce6fdeb3fa61"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item adler32::generic::UNROLL_MORE"
+
+[[fn]]
+path = "zlib-rs::adler32_rust"
+kappa = "e75d73f8d1e014a3bdcb974b670b0e6f12b4a13b9a217be678db0723708f5737"
+embedded = "d6845a5a5b83fe422cd2f430012cc5d90b5bac0e73b14f552151903cfdfe133e"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+
+[[fn]]
+path = "zlib-rs::adler32_rust::N"
+kappa = "d871593b1846528182e3e58e9617c1b201ab76c239b14a36fcf9b328be94575f"
+embedded = "528fd7412a65c1040b9d2c2b2c06890b55671c5be8683a10438ddf49b81710e9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item adler32::generic::UNROLL_MORE"
+
+[[fn]]
+path = "zlib-rs::helper_32_bytes"
+kappa = "cfd367489e22702f8441eead344d85fc31b9a69c04a5ffb334edabab74c70a00"
+embedded = "72d65905e86a3f9d7d5250e8dab2b9bd55b05020593bfb8c459c752952b506ac"
+status = "residue"
+cause = "mir::Ty: __m256i"
+
+[[fn]]
+path = "zlib-rs::hsum256"
+kappa = "58ea0ead4a339f90df257b62e44ce80a4e1bc4003b28a8d9a6033bc097658036"
+embedded = "45aba3baa46042467263e0a31fee4166e7d1704b307ca5c860ab9342d32a1962"
+status = "residue"
+cause = "mir::Ty: __m256i"
+
+[[fn]]
+path = "zlib-rs::partial_hsum256"
+kappa = "3cbd0373dedc4692c953805f0dc787c59e32b0db271d4bd696710ced6b42f72e"
+embedded = "5f833d178d5f554547fce857dd82d5cb061b5e6b670a1403355a9192bb3b8aa0"
+status = "residue"
+cause = "mir::Ty: __m256i"
+

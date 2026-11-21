@@ -1,0 +1,257 @@
+# The hashlink register (written by `uorust crate hashlink@0.12.2`; do not edit): every body of
+# hashlink's MIR at hashlink 0.12.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 324
+translated = 0
+residue = 324
+
+[module.crate]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.linked_hash_map]
+bodies = 197
+translated = 0
+residue = 197
+
+[module.linked_hash_set]
+bodies = 78
+translated = 0
+residue = 78
+
+[module.lru_cache]
+bodies = 30
+translated = 0
+residue = 30
+
+[embedding]
+bodies = 324
+embedded = 324
+evaluable = 324
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: LinkedHashMap<u32"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: LinkedHashSet<u32"
+bodies = 30
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: LruCache<u32"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: DefaultHasher"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::CursorMut<'_"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::OccupiedEntry<'_"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::Iter<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::LinkedHashSet<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::RawOccupiedEntryMut<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: RawOccupiedEntryMut<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::LinkedHashMap<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::Entry<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::IterMut<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::Keys<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::Node<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::Values<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::Iter<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Node<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::Drain<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::IntoIter<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::ValuesMut<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::RawEntryMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::Drain<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::IntoIter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::SymmetricDifference<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::Union<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: lru_cache::LruCache<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RawEntryBuilder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RawVacantEntryMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::Difference<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::Intersection<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DropFilteredValues<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RawEntryMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: hashbrown::DefaultHashBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::RawEntryBuilder<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::RawEntryBuilderMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::TryReserveError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: linked_hash_set::LinkedHashSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by BuildHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: a discriminant read as a value"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::is_none"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: linked_hash_map::detach_node: hashlink's MIR stops at type outside the lift: linked_hash_map::Node<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: linked_hash_map::pop_free: hashlink's MIR stops at type outside the lift: linked_hash_map::Node<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: null_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DefaultHashBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Remainder<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hashbrown::DefaultHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::FreeLink<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::RawVacantEntryMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::VacantEntry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: linked_hash_map::ValueLinks<u32"
+bodies = 1

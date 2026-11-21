@@ -1,0 +1,643 @@
+# The opentelemetry register (written by `uorust crate opentelemetry@0.33.1`; do not edit): every body of
+# opentelemetry's MIR at opentelemetry 0.33.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 593
+translated = 3
+residue = 590
+
+[module.baggage]
+bodies = 44
+translated = 2
+residue = 42
+
+[module.common]
+bodies = 84
+translated = 0
+residue = 84
+
+[module.context]
+bodies = 56
+translated = 0
+residue = 56
+
+[module.global]
+bodies = 54
+translated = 0
+residue = 54
+
+[module.logs]
+bodies = 51
+translated = 0
+residue = 51
+
+[module.metrics]
+bodies = 105
+translated = 0
+residue = 105
+
+[module.propagation]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.time]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.trace]
+bodies = 142
+translated = 1
+residue = 141
+
+[module.trace_context]
+bodies = 40
+translated = 0
+residue = 40
+
+[embedding]
+bodies = 586
+embedded = 586
+evaluable = 583
+blocked = 3
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 72
+
+[[cause]]
+cause = "mir::Ty: context::Context"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: logs::record::AnyValue"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: SpanRef<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: common::StringValue"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: common::Value"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: trace::tracer::SpanBuilder"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: trace_context::TraceFlags"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Key"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NoopLogRecord"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: global::trace::BoxedSpan"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: trace::span_context::SpanContext"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: trace::span_context::TraceState"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: NoopSpan"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: baggage::Baggage"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: common::Key"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SpanContext"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: OtelString"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: StringValue"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TraceState"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::Array"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: metrics::meter::Meter"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: trace_context::SpanId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: trace_context::TraceId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: InstrumentationScope"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Severity"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SpanBuilder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TraceFlags"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: global::trace::GlobalTracerProvider"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BaggageMetadata"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HashMap<String"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: KeyValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SpanId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Status"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TraceId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: baggage::BaggageMetadata"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::InstrumentationScopeBuilder"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: global::trace::BoxedTracer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::AsyncInstrumentBuilder<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::HistogramBuilder<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: trace::Event"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: trace::noop::NoopTracer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: IdHasher"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TraceStateIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: baggage::KeyValueMetadata"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::InstrumentationScope"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::KeyValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: context::ContextGuard"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: context::ContextStack"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: context::ContextToDrop"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: context::future_ext::WithContext<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn metrics::meter::MeterProvider + std::marker::Send + std::marker::Sync"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: logs::noop::NoopLogRecord"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: logs::noop::NoopLoggerProvider"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::InstrumentBuilder<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::counter::Counter<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::counter::ObservableCounter<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::gauge::Gauge<i64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::gauge::Gauge<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::gauge::ObservableGauge<i64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::gauge::ObservableGauge<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::histogram::Histogram<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::up_down_counter::ObservableUpDownCounter<i64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::up_down_counter::UpDownCounter<i64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: propagation::text_map_propagator::FieldIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::Link"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::context::SynchronizedSpan"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::noop::NoopSpan"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::noop::NoopTextMapPropagator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::noop::NoopTracerProvider"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: trace::span::Status"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Baggage"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ContextStack"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: F64Hashable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NoopLogger"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpanKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WithContext<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: baggage::Iter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: context::IdHasher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn propagation::text_map_propagator::TextMapPropagator + std::marker::Send + std::marker::Sync"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl Into<Cow<'static"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: logs::noop::NoopLogger"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::counter::Counter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::counter::ObservableCounter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::gauge::Gauge<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::gauge::ObservableGauge<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::histogram::Histogram<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::up_down_counter::ObservableUpDownCounter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::instruments::up_down_counter::UpDownCounter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::noop::NoopMeter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::noop::NoopMeterProvider"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metrics::noop::NoopSyncInstrument"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<12>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: baggage::is_key_valid::{closure#0}: mir::TerminatorKind::Call: core::num::is_ascii_graphic"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: context::is_current_telemetry_suppressed::{closure#0}: type outside the lift: context::Context"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Extractor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Span"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AnyValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Context"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ContextGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Counter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FieldIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Gauge<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Histogram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyValueMetadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Link"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoopSyncInstrument"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NoopTextMapPropagator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TextMapCompositePropagator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UpDownCounter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::OtelString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: context::future_ext::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: context::future_ext::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Injector"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn global::trace::ObjectSafeSpan + std::marker::Send + std::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn global::trace::ObjectSafeTracer + std::marker::Send + std::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl IntoIterator<Item = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: logs::record::Severity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: propagation::composite::TextMapCompositePropagator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: trace::context::SpanRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: trace::span::SpanKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: trace::span_context::TraceStateIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<10>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+bodies = 1

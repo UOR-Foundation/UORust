@@ -1,0 +1,34 @@
+# The once_cell_polyfill register (written by `uorust crate once_cell_polyfill@1.70.2`; do not edit): every body of
+# once_cell_polyfill's MIR at once_cell_polyfill 1.70.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 13
+translated = 0
+residue = 13
+
+[module.sync]
+bodies = 13
+translated = 0
+residue = 13
+
+[embedding]
+bodies = 13
+embedded = 13
+evaluable = 13
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: sync::OnceLock<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1

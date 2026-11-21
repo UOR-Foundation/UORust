@@ -1,0 +1,124 @@
+[[fn]]
+path = "bstr::ALIGN_MASK"
+kappa = "0c130db1964e1ecc83b909a40be74c7d51744ee0c744f70ea44d5dffa05f5da8"
+embedded = "2c334de2f25f1d2fecf096b38370956a0db6e18abb025b610dd6e56ba0ae507a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::align_of"
+
+[[fn]]
+path = "bstr::LOOP_SIZE"
+kappa = "0506b05e0137b85ce0afd3788146ebe3f42c46ce691d08d6e2b490660c518b76"
+embedded = "4f076b55c049aa6730efc7e437ce2e2dcc743d019e59cbcaba1dbcb573dd2fa1"
+status = "residue"
+cause = "mir::Operand::Constant: byteset::scalar::USIZE_BYTES: mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bstr::USIZE_BYTES"
+kappa = "dcad284835775b02206973272f06995ef66b6e96731ac93834cbe203b1014868"
+embedded = "0856bec98a858ca58f9247db1254cc5ba506227b2a07e7bd1fce9ea500ec1040"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "bstr::build_table"
+kappa = "8b893a4b66f09bb4e2491716b237f52dca2f0a0aac42e4673d94a104f0324153"
+embedded = "f72959ac26c3f9d55fd29c1aa1ad43688bd00ae4849adfc5d9c2d250ee5464b1"
+status = "translated"
+digest = "87d5d401257f9f2402d5c873e4760769385a878a90a173d6c0221acaa3ceb5e1"
+
+[[fn]]
+path = "bstr::byteset::find"
+kappa = "be2142754e3eb955a7d9e7499d70b184edce0bc091252d73d4ae7137c711c949"
+embedded = "1c56c61d329d345d0c5beededd4c88a26fb7d28c147ec2e92c48d452ab54f2ed"
+status = "residue"
+cause = "mir::TerminatorKind::Call: byteset::scalar::forward_search_bytes: bstr's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "bstr::byteset::rfind"
+kappa = "33ef4a8fd9ab5798b38adb46dcfcb2fad1a2e262aab88a8fd887a45372037fc8"
+embedded = "dc94911c76e28276e4712c5522e493183026025ade0ddb1a05b99b4a9ee93f7b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: byteset::scalar::reverse_search_bytes: bstr's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "bstr::find_not"
+kappa = "407b52c7ccc35e626a17ef86e0308da03ff4b0f52a0f1997a62008277039100a"
+embedded = "255224ae7c6898ce798122906b94f1c6c1787885c448a1f1e66be217ee3050e5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: byteset::scalar::forward_search_bytes: bstr's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "bstr::forward_search"
+kappa = "f3bd94c1d7dbefdadab1f936aa7d83cefc69056377c054c4d6ed7fdde2693575"
+at = "F=u32"
+embedded = "5003161656d2b4af70a303a80f73485eb44f3bc409f018982b6627dd5ec52e35"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "bstr::forward_search_bytes"
+kappa = "846aa1369720e90402bcee26b57004231ee444a92d78631c1b69440f336f9fc6"
+at = "F=u32"
+embedded = "2a2adaf450c4f123f0d7d467818c5a0594358acbaba4794a3d7fe896c79c36bf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "bstr::inv_memchr"
+kappa = "3b401e96a59de029a2e1785fd59e130e09e31629b3ae5f08888775e3ce108d71"
+embedded = "29d66aa82399790c9ae19c25ed3d0ace85e61ea1ba3c8c640f0ad7e729f4c161"
+status = "residue"
+cause = "mir::TerminatorKind::Call: byteset::scalar::repeat_byte: bstr's MIR stops at mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "bstr::inv_memrchr"
+kappa = "82111904856c534f2b78804345c4affd792d2c694dd8a3b238c2b5fabdbd4dbb"
+embedded = "98b34fd9ca93a33a6a45c3afa41c618fee5e73fd1b245413acaf4e3237a710b7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: byteset::scalar::repeat_byte: bstr's MIR stops at mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "bstr::read_unaligned_usize"
+kappa = "2d5ef67fffcf7132696d37c8a0c34e2b4aac6b5b3c8476cd4865a2c8c98cb06c"
+embedded = "7c08cce15d4e7a594d2660fb51cc4178e3e4caf973942157e1922021f374faea"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::const_ptr::<impl *const usize>::read_unaligned"
+
+[[fn]]
+path = "bstr::repeat_byte"
+kappa = "a72e7effa79d56e7114a80e6924fad7859dd8264e017ae64f7a2d5b5a64bad49"
+differential = 7
+embedded = "9b0678059d470ef07ba7d7dc806d25cbfc87a5acc89578342e41780a751b2a25"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::MAX"
+
+[[fn]]
+path = "bstr::reverse_search"
+kappa = "63b54b0425c9d6da9cc50ce0b33b7c72819900a969577d89b7b9e97fbe473904"
+at = "F=u32"
+embedded = "61f5a44d6d2368a11bb62c183f59c19a640593796914794b5e13c991c183587a"
+status = "residue"
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals, so no measure is derived"
+
+[[fn]]
+path = "bstr::reverse_search_bytes"
+kappa = "74e673681632e9d90e8f9ff04a8de1c620e29b4b7e044ee227b14a5af2c3ca89"
+at = "F=u32"
+embedded = "f2ae42f92c1ed3bf464d560ef037e5c806ea81eb811645da072a83ed9dccbdb8"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "bstr::rfind_not"
+kappa = "6e4beec62fc538a328d483d8120c292cb816873f28fed4bc3e47781953f47a1f"
+embedded = "2bd2faca716acef7e255bfe20388a80e2464af3b7484215fb797f8a89c7216db"
+status = "residue"
+cause = "mir::TerminatorKind::Call: byteset::scalar::reverse_search_bytes: bstr's MIR stops at mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "bstr::scalar::sub"
+kappa = "d180bea9d9983c3141b2f9f22db682a1c4711d721e329f9bc620531dca911711"
+embedded = "af1b4f26d44ebcabf8aec5dfd92b2457ba1c3e2199f9cbc4f21c829e54444e46"
+status = "translated"
+digest = "3b694d6cb8db58f777bd0d9cfb7840eb124c03fbfc2f2134142f8a2f2aa67228"
+

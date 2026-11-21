@@ -1,0 +1,359 @@
+[[fn]]
+path = "petgraph::Build::add_edge"
+kappa = "23325caeaddb1dbd929f2699367d1a2d10e41fc8ec06669683ef1ff66128479f"
+at = "Self=u32"
+embedded = "ee91f1b32196134d9e8e4fb7c743d666a963eb9fd0549713a8c3b3ce60ac0adb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Build, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::ElementIterator::filter_elements"
+kappa = "7c69ec2206ddd8d19a1e27e02dfe496fdddbee59f966437238cdb66b3a63d963"
+at = "F=u32, Self=u32"
+embedded = "6ece12b5d44e6099a5f68e6276fc7e3101b3ef179e46a9128f351fe652d03e86"
+status = "residue"
+cause = "mir::Ty: data::FilterElements<u32, u32>"
+
+[[fn]]
+path = "petgraph::FromElements::from_elements"
+kappa = "b1654703e91082889fb36ea08a3557c1ef62e6b818bf554b8f86ff5d5676db6a"
+at = "I=u32, Self=u32"
+embedded = "aa9ff28c68ae867096ad65d945403c7cad3a92a38d7dcdcf2080d6222c8b5695"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Create, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::data::<impl at src/data.rs:274:10: 274:15>::clone"
+kappa = "28579c58cf04787039edd7bc654b9f208768539e09cf869c80dd5189fbcc791e"
+at = "E=u32, N=u32"
+embedded = "05439e3a531d77a2b0f4296a459d4aff4f024e7ab8a1c5016d3fe8dbae59eb86"
+status = "residue"
+cause = "mir::Ty: data::Element<u32, u32>"
+
+[[fn]]
+path = "petgraph::data::<impl at src/data.rs:274:17: 274:22>::fmt"
+kappa = "06634b6f5aaf69d9f28f5e0e3384adc279fef694c88cd40405ccb8a68109b8c1"
+at = "E=u32, N=u32"
+embedded = "540ef2a296d26ef63179ed572e8e60a9c123866b6c55c6984eb79cd397869b75"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::data::<impl at src/data.rs:274:24: 274:33>::eq"
+kappa = "90cdd950ecca561a5f6e2e806b002a403da4b3a523b8bcd94ce7a9171ed99a5c"
+at = "E=u32, N=u32"
+embedded = "9b23bffd4f75ce99871633b429ded19e12fae4f789c2e6535a474fc2c64ec90c"
+status = "residue"
+cause = "mir::Ty: data::Element<u32, u32>"
+
+[[fn]]
+path = "petgraph::data::<impl at src/data.rs:274:35: 274:37>::assert_fields_are_eq"
+kappa = "2bcaa7a5eef28ecc33039b6d10b6f99294b94889c38fbfa0cecb03cbdc3c8a8a"
+embedded = "b12442e82f5766219846ca5531988b4bb2b7ffb3b7d9312beae821c058c1f95e"
+status = "residue"
+cause = "mir::Ty: N"
+
+[[fn]]
+path = "petgraph::data::<impl at src/data.rs:417:10: 417:15>::fmt"
+kappa = "7fc9c35fe32b1b4ce34abc3a569e3c33dcd76295e5d529d124dc45aab1023be0"
+at = "F=u32, I=u32"
+embedded = "690b9e108374422d50a9fa2c22d386a2141ee1633ec5f7f36e75d913949f6c82"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "petgraph::data::<impl at src/data.rs:417:17: 417:22>::clone"
+kappa = "efe6417399ee9db6bb36c1b7244042404d78201a54cfe757c524337c017bc708"
+at = "F=u32, I=u32"
+embedded = "b353c34b59c5dbc26041329f9a0c388c6dbc16d7f91d3f4ee49de2d51f6783bb"
+status = "residue"
+cause = "mir::Ty: data::FilterElements<u32, u32>"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::edge_weight"
+kappa = "80f9a005e656c7837a1c6a28c828862014031f09978066257f398c28d68847cb"
+at = "G=u32"
+embedded = "57537b537fcf116405d696da1b8e49f7f14d96fb36bbe456eb322cf8813db579"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMap, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::edge_weight#2"
+kappa = "918ce78a2c8005939dd6ca5a8d7f73f664435087298426bbf2352e52bccdd138"
+at = "G=u32"
+embedded = "6bfad92fc136b3bd7eef6720560b1f9308440c9403cfbb0ea4349ad8ec2282a9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMap, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::edge_weight#3"
+kappa = "01bddcc2eedd52b6dd809d8f8f48f10b6f0afa170a82b3a5004957140495ce80"
+at = "G=u32"
+embedded = "5754bf496f69566283088f29f4ffd20d1299bb4543945bec2dd33c696d673d36"
+status = "residue"
+cause = "mir::Ty: reversed::Reversed<u32>"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::edge_weight_mut"
+kappa = "15f1308739db377c33924a9fc7451b8296c7b7605906c79902a9e5b05b7e1d16"
+at = "G=u32"
+embedded = "0d21bc41e92bc4a9ebcfe01be7e5df2829f65a7343dc537548a81356284813ef"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMapMut, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::edge_weight_mut#2"
+kappa = "c5782d769cc3b1c56b41a6a2f466c7be47f4f6a7a26f5ac8341cfb60590985f7"
+at = "G=u32"
+embedded = "ed64043983d03fd21a308a827e716a641525efa62615e5ea497d169e3023e4f9"
+status = "residue"
+cause = "mir::Ty: reversed::Reversed<u32>"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::node_weight"
+kappa = "67575783f307257dc4fae97cbe1d815c1e296a5db0d650d94455c7c51d306f05"
+at = "G=u32"
+embedded = "4607fef94728e1b4985a755a02b129a835d2b3e6dcb1cf374e08326d7a8ba567"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMap, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::node_weight#2"
+kappa = "ca1ef9bb2fc65c6c74aa74c15e367d91ce29e51cfc7617a8e348794f303ec2b8"
+at = "G=u32"
+embedded = "eb839dcb23fc5e497579a09e6161b88c96884fb4bf4dfb956c893b0ededaa302"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMap, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::node_weight#3"
+kappa = "87f82d04b1cde5196c8a72b9500474f62581dd7f81e42ba437d3c2edba7aae59"
+at = "G=u32"
+embedded = "5b19b88652f8544aa70325c4852afc8aa730148b90ea9a79d061aa2c1286211b"
+status = "residue"
+cause = "mir::Ty: reversed::Reversed<u32>"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::node_weight_mut"
+kappa = "712f14acbbd1933f8d0fdc5c6fdf61622864894e9c0231cf4cc4c9bed872d7a2"
+at = "G=u32"
+embedded = "882a86496ef31bc0325d02223d77af529b4d18504911aef50372924dd11a6596"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by DataMapMut, which u32 does not implement in core"
+
+[[fn]]
+path = "petgraph::data::<impl at src/visit/macros.rs:117:9: 117:70>::node_weight_mut#2"
+kappa = "606744ba3a42e6f8354346452bf1a6917493d8407807d6428b53f1f8ad0d193b"
+at = "G=u32"
+embedded = "8078be68001eb49ee4edd6715efd5214a99983ecb46dbf30b199512b37388cd8"
+status = "residue"
+cause = "mir::Ty: reversed::Reversed<u32>"
+
+[[fn]]
+path = "petgraph::data::FilterElements::next"
+kappa = "4d75d221e33aea83f4f3edd20cf84dc71a1397100a35e244697881eb9980ebed"
+at = "E=u32, F=u32, I=u32, N=u32"
+embedded = "4c128b700bcbab04ef23dd92c910f322c79da9990f76734ce1ee941efcd88e1f"
+status = "residue"
+cause = "mir::Ty: data::Element<u32, u32>"
+
+[[fn]]
+path = "petgraph::data::FilterElements::size_hint"
+kappa = "9d98bb6c828c3e0c8b03a9fa6bc713d9a424886d94994b33ab5eabb5e52dabdf"
+at = "I=u32"
+embedded = "4579fc518128b1513434f75b7397ebd626e22a5f788d588a6161baf36e0429d8"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "petgraph::data::Graph::add_edge"
+kappa = "955bcce3a9ebc48a223910aa7ff0fbc9045330d87e21601c99b25facb087a57c"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "61e6265bae1adbb9379c526cb3657f461c9b0a0a09f8c16f15948cc175bc7fa4"
+status = "residue"
+cause = "mir::Ty: graph_impl::EdgeIndex<u32>"
+
+[[fn]]
+path = "petgraph::data::Graph::add_node"
+kappa = "e850a476e26da4714cb9ff3034ecdf1df533a23f506b7d8829c6ee56912b8870"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "e89e6c25fb2b3b2612ad92abd30f1bbb8664ddd04a3a767fdc56dda04cb91a8b"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::data::Graph::edge_weight"
+kappa = "bf9fedfd90e96c9ad9231f692eb607480d98b4d27206ff3d9d4c7cb42773a30f"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "3729e18abdc6ad23fb6639fc9832eb35ea67a109e3c34a0da670da2d06140c50"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::Graph::edge_weight_mut"
+kappa = "732e631e3944ede31fa9ec005f6d3a0aa19e1c6e797dd70d8d8fd2b527be1b06"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "f786690af3ae5ce3b34c1731c162462c8a7f1ff1073c2b1638a1331343297dea"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::Graph::from_elements"
+kappa = "b95c65c4e2be80675cb516b4b11e119cf11ca2e36d827442882d84b41e64f356"
+at = "E=u32, I=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "77058de52d2e1cf3d5958a4373cce8faedc08aade3c6db623492f069470d807f"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::Graph::node_weight"
+kappa = "b09f2779c898d67a7bf226170dc0012f2cb58287d3a95d704a491d87cd5af3ed"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "df4c1cea12a5674c87c5fe9ac6e5fff496f803986621e6f26e1f2d2426855735"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::Graph::node_weight_mut"
+kappa = "052a4b191bdb384eea55422abcebc5a696522192cbf3213fd48ca12db9e48400"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "7dedfb129fafbe0c1fda139e2b5f9ad8e957d96da5cfd8a730093b8e2d478890"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::Graph::update_edge"
+kappa = "05568716d0d435e4289a203bf2ce87f278c1188ab91eab756d7f0bb1b209f75d"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "0b7bcf32a4a0defd978137027a77005ff1312fdd5d02662a7eecbb56dc2d16ac"
+status = "residue"
+cause = "mir::Ty: graph_impl::EdgeIndex<u32>"
+
+[[fn]]
+path = "petgraph::data::Graph::with_capacity"
+kappa = "29212f0f617867511532f4fbb9855d445e550cf8cf7562e84ffcc53e3a1b5e54"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "cdab1c704aaf9dffc013ba2f79804715f3f69dad74cc24b8507e6d66ac7c4f4e"
+status = "residue"
+cause = "mir::Ty: graph_impl::Graph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::GraphMap::add_edge"
+kappa = "616c72a3e9f0f38ea529c549df26571b46f670dc268602b9ec8e5069c6a425ea"
+at = "E=u32, N=u32, S=u32, Ty=u32"
+embedded = "98a0e16961b30176f994d0f6dce94c1806abcecb9f89afc27a4c04bf5a4b6e6e"
+status = "residue"
+cause = "mir::Ty: GraphMap<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::GraphMap::add_node"
+kappa = "916363e2abf2f3242567a04b89df4d128dc9e24fb634f5bf77aef4856794b6ff"
+at = "E=u32, N=u32, S=u32, Ty=u32"
+embedded = "a5baec4f16a8a71f44968a5847dd613452af73287ed1f983993b9ff15bfe000d"
+status = "residue"
+cause = "mir::Ty: GraphMap<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::GraphMap::from_elements"
+kappa = "2ba0945e1739b2c1007f49861244fa6c299dba61a1a4cca13586ab6ff43a6511"
+at = "E=u32, I=u32, N=u32, S=u32, Ty=u32"
+embedded = "904462f10ff562ceaa39842cd4d0ffb30d0b87772f2fa943f39dde27bc63ea9e"
+status = "residue"
+cause = "mir::Ty: graphmap::GraphMap<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::GraphMap::update_edge"
+kappa = "c1af407742de8ef8a7f7e87f30ada035e44af70eec90c5224f2821909ddcca90"
+at = "E=u32, N=u32, S=u32, Ty=u32"
+embedded = "c70d926959f6cb63ac32a0f6aacafa0ddf1424ab5a8feeab2c0f1c8d906894ca"
+status = "residue"
+cause = "mir::Ty: GraphMap<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::GraphMap::with_capacity"
+kappa = "1937031cc5173a1746110708e2285397b464df33ea21c8716c27547ec87a6708"
+at = "E=u32, N=u32, S=u32, Ty=u32"
+embedded = "1705437d8e2793d7c151bc392e37345403610aff30586d7f7fa35fa7dd2a7dc6"
+status = "residue"
+cause = "mir::Ty: graphmap::GraphMap<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::add_edge"
+kappa = "628ac29dd814ab2600daa0f6b85dcf8799360b1bf367d6310badc37aab16618a"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "83b804b91b2ff9d228aa1cd6d1be402dddb232c058fa5b43f1f138385038e029"
+status = "residue"
+cause = "mir::Ty: graph_impl::EdgeIndex<u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::add_node"
+kappa = "31a134dd4514284fb293007fbf2d67b0938084ab4e29ad781b540f08a31dc695"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "372671368ad19d55890b32fc7458ecd275d462bd3349539846bd46b27ecd35d1"
+status = "residue"
+cause = "mir::Ty: graph_impl::NodeIndex<u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::edge_weight"
+kappa = "5856e824189c22e890939bda6a03c27522ef2acfd1fefa602a0a53f368b32203"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "85da2255d5b13efd7a68ee26e262e0112e514b9e8164f7ca119605bce6173da2"
+status = "residue"
+cause = "mir::Ty: StableGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::edge_weight_mut"
+kappa = "bf6349abd20b6f0dfd83522789d76dba7ea8d0f9525a6784f84af0e810e0a6e7"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "9f1093185cf3b54b106f72e555e37b365b863c3f06895f130ee345d09aefd988"
+status = "residue"
+cause = "mir::Ty: StableGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::from_elements"
+kappa = "cf9c0a6e3dde2e12522fdae257b2fc3690b60b9ba912ea509883c107ce815eb6"
+at = "E=u32, I=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "5d26be1b70208c04a5f51424c8489b93d605622328dc2caa0a2b4f8133e83166"
+status = "residue"
+cause = "mir::Ty: graph_impl::stable_graph::StableGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::node_weight"
+kappa = "b88e3aabb5bb04de96be8e817dea795eb9f6e953a15f48b292152d6cf98aaaff"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "b388d9895e5feca6f0e36e8c6086913444f97f04c385f07b7dc28864928a6766"
+status = "residue"
+cause = "mir::Ty: StableGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::node_weight_mut"
+kappa = "0d003970504d1f7a7956b91743439162a80080e37582b103b540bb25f4412dbb"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "eba2cf0931c7f720119d4b6292aef6c732db3c033ec1054c02b3c74028c599a1"
+status = "residue"
+cause = "mir::Ty: StableGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::update_edge"
+kappa = "d4a85db8a2a94c12f9a9a650d6c5adb80d74d7868cf34e396d807df14ab562fa"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "56c676915eae50fd75b05d10c1111a6a9c3fdf7e83ec4e39ffecb2a0a8fbaab1"
+status = "residue"
+cause = "mir::Ty: graph_impl::EdgeIndex<u32>"
+
+[[fn]]
+path = "petgraph::data::StableGraph::with_capacity"
+kappa = "ab935c9dcc0bffdedfd064b0e72a99959e67123d8819f7e65059f3cb0fb94a8c"
+at = "E=u32, Ix=u32, N=u32, Ty=u32"
+embedded = "5ef5d53f67a77d28ee8bef4f2732a0fffe3ac9cee32527e8db4a45307591802c"
+status = "residue"
+cause = "mir::Ty: graph_impl::stable_graph::StableGraph<u32, u32, u32, u32>"
+
+[[fn]]
+path = "petgraph::from_elements_indexable"
+kappa = "963cd67c862bf46e21207bfab96e4ec60bb233082bd1fc1bd7139524f3146b51"
+at = "G=u32, I=u32"
+embedded = "01bc95c371f2829255656a31d14b0abc64bd92cd2dcc7043670889193dc3bf5d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Create, which u32 does not implement in core"
+

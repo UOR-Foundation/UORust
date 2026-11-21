@@ -1,0 +1,39 @@
+[[fn]]
+path = "serde_spanned::de::SpannedDeserializer::new"
+kappa = "9267bf71e362e6ffd51e0282af19a030ba025db3a1d86307d6c4664e2aded419"
+at = "E=u32, T=u32"
+embedded = "4540d749eeefc4a3534309602008494fb7ad2ef92e85f25aa6a535dcaa007a90"
+status = "residue"
+cause = "mir::Ty: de::SpannedDeserializer<'_, u32, u32>"
+
+[[fn]]
+path = "serde_spanned::de::SpannedDeserializer::next_key_seed"
+kappa = "d8091c3e20479fc5d6413820023783901c2fcde615485ba4f363fd0459110544"
+at = "E=u32, K=u32, T=u32"
+embedded = "59f4ecbab0dedfd924813047617e84d50ff07634f457c60cb06a5161c30fad39"
+status = "residue"
+cause = "mir::Ty: SpannedDeserializer<'_, u32, u32>"
+
+[[fn]]
+path = "serde_spanned::de::SpannedDeserializer::next_value_seed"
+kappa = "17e2e176a18948b7b235c3f22581d15b53c928b1b4eb146b3e0b163732f36adc"
+at = "E=u32, T=u32, V=u32"
+embedded = "b4a3ba25f635b6f1df38020d16df6089e859681073d1e71bffe0f4b8beff173f"
+status = "residue"
+cause = "mir::Ty: SpannedDeserializer<'_, u32, u32>"
+
+[[fn]]
+path = "serde_spanned::de::SpannedDeserializer::size_hint"
+kappa = "76da480ddc659dac067db2768f7f0406622a95b74efa82a56e10b8c31ecac8c1"
+at = "T=u32"
+embedded = "6ae8cb862cc318e59d5cd91b841e9bee62b4adc3af6e963823dc41f7a4797c55"
+status = "residue"
+cause = "mir::Ty: E"
+
+[[fn]]
+path = "serde_spanned::de::is_spanned"
+kappa = "eaf85016ac2e924c4dadb2240f49804b825372472b54b93899234f3b117910e9"
+embedded = "9f8000c3903eda7e15df406b5d611ad623da64a5efdc00252e5f69a39d8b9643"
+status = "residue"
+cause = "mir::TerminatorKind::Call: spanned::is_spanned: serde_spanned's MIR stops at mir::Operand::Constant: spanned::is_spanned::promoted[0]"
+

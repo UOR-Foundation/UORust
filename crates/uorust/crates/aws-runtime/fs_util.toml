@@ -1,0 +1,64 @@
+[[fn]]
+path = "aws-runtime::fs_util::<impl at src/fs_util.rs:9:10: 9:15>::fmt"
+kappa = "8101e292dbdafa7b3bf95c31c0fe084fab3fb6e028d303c0abd29c5dc42cf1c3"
+embedded = "81296ba13d50ecb712355866ee16d35f371f346ef8bae12d9ab4a879b14bdbf6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-runtime::fs_util::<impl at src/fs_util.rs:9:23: 9:28>::clone"
+kappa = "b6db76ff8498c7f897a8b91aec03cc81e5866cde0254b20e362cb9c70f9d2b93"
+embedded = "91b3da65ed6ba1838b8cfdc4190741adb862bc75048bfb021e6a0bc0d0357195"
+status = "residue"
+cause = "mir::Ty: fs_util::Os"
+
+[[fn]]
+path = "aws-runtime::fs_util::<impl at src/fs_util.rs:9:30: 9:32>::assert_fields_are_eq"
+kappa = "56507ff7b808a6e5405d87ddc28a7f0d9ff2f8c9117c4afda12a236e09b940b0"
+embedded = "0fb4b5ed7dd92f7999410de1319917819999c6279cb8bb32523a59fcdb903711"
+status = "residue"
+cause = "mir::Ty: Os"
+
+[[fn]]
+path = "aws-runtime::fs_util::<impl at src/fs_util.rs:9:34: 9:43>::eq"
+kappa = "3a0142ede57a22ac5b663891e7b9521c76d1046d346799d7cb4f5c19e9f5ccd8"
+embedded = "372dab7423029ae08c8070f6194528dcd522799f63054e65fa5bea77dde8a6f4"
+status = "residue"
+cause = "mir::Ty: Os"
+
+[[fn]]
+path = "aws-runtime::fs_util::Os::real"
+kappa = "f0d17a5c589a0e70a8ef7daeb4c43d4d6a9bd4ba8d72b0abbb57736beceff117"
+embedded = "d6fc197096de17f2a6a178ebf999de964f18f88dcb43d24b6a6c9c754951960d"
+status = "residue"
+cause = "mir::Ty: fs_util::Os"
+
+[[fn]]
+path = "aws-runtime::fs_util::home_dir"
+kappa = "e03f200517fc0b7d0e5e432bcf514d96a3b48f27bbc9f04704ef2414ed81b62d"
+embedded = "5b5ef0b03854c1067947f2f1353d0daaf2edcb96c3310e20f7c03041fc4b18e8"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: Env"
+
+[[fn]]
+path = "aws-runtime::fs_util::home_dir::__CALLSITE::META::NAME"
+kappa = "e4c4e7cb2dd095e8c0ee8cab7a8e16a01acbf63d5f47bde386139ae4a401e60a"
+embedded = "e9335098f672cc30ee03d9201f0838609ec23473ae6790cddfe218209dd2de61"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "aws-runtime::fs_util::home_dir::__CALLSITE::META::NAME#2"
+kappa = "e4c4e7cb2dd095e8c0ee8cab7a8e16a01acbf63d5f47bde386139ae4a401e60a"
+embedded = "e9335098f672cc30ee03d9201f0838609ec23473ae6790cddfe218209dd2de61"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "aws-runtime::fs_util::home_dir::__CALLSITE::META::NAME#3"
+kappa = "e4c4e7cb2dd095e8c0ee8cab7a8e16a01acbf63d5f47bde386139ae4a401e60a"
+embedded = "e9335098f672cc30ee03d9201f0838609ec23473ae6790cddfe218209dd2de61"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+

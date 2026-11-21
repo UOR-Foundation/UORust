@@ -1,0 +1,213 @@
+[[fn]]
+path = "aws-sigv4::calculate_signature"
+kappa = "39b2db876328d8647a75cccd9c6f39e6c26b75d3c771265f20ed08d41904a5e4"
+embedded = "b1c719b5bf4e702e56a5677dea93121d564670d18a0f49932805d13dee15a88f"
+status = "residue"
+cause = "mir::Ty: impl AsRef<[u8]>"
+
+[[fn]]
+path = "aws-sigv4::canonical_headers"
+kappa = "4cb877c90985283dba57cf6a75c7c59e163af4f732509ee4a1937c226bdd01fc"
+embedded = "702f2169960a3647e33e063e40c6baf419c46cd0538a931eb42d7a827a8ca6f5"
+status = "residue"
+cause = "mir::Ty: Headers"
+
+[[fn]]
+path = "aws-sigv4::generate_signing_key"
+kappa = "8a0d262d327993b356da81d8f47e9c63a6269e4cb1a11f4a48b0ab3487d5c552"
+embedded = "e0ce13757edf78a710208fda8e89757f40717e10de42e9d433254916f7d06df0"
+status = "residue"
+cause = "mir::Ty: hmac::digest::typenum::UTerm"
+
+[[fn]]
+path = "aws-sigv4::sha256_hex_string"
+kappa = "08dce1ac217a4bacb368c998fb778f523fc1cc81d057ec42ce0fc50a89871f1c"
+embedded = "118de41ead87f7a41e88557573f6a90304bd9276207e72054000bbd692cf872e"
+status = "residue"
+cause = "mir::Ty: impl AsRef<[u8]>"
+
+[[fn]]
+path = "aws-sigv4::sign_chunk"
+kappa = "6837ab5f7930860afb0df0dd35a93787ee556b6a48583df003d255acf2d50124"
+at = "S=u32"
+embedded = "ec1464ecd113fb4d1ed66247ae72e9cab954e60b4a63070177c8c1bf0c65c0aa"
+status = "residue"
+cause = "mir::Ty: SigningOutput<()>"
+
+[[fn]]
+path = "aws-sigv4::sign_streaming_payload"
+kappa = "682340931e779150e3d5104176ff8cdc3e1b2e4b1ef0faa1aae4aa1da02bb215"
+embedded = "b7938d28fb33949455ef819b476100e0f80caba42772f032c9e6732205818e78"
+status = "residue"
+cause = "mir::Ty: SigningOutput<()>"
+
+[[fn]]
+path = "aws-sigv4::sign_trailer"
+kappa = "53bb3a032f8ed782dcdfe4fb60b88a899681cf861adae97e6dce0124bf1ae274"
+at = "S=u32"
+embedded = "771e77fbab8901fd2552a0950a2cfeb3e233c2466abb2bc929a0f91752bfc98b"
+status = "residue"
+cause = "mir::Ty: SigningOutput<()>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::<impl at src/sign/v4.rs:130:14: 130:19>::fmt"
+kappa = "d23fafc29ae2b897660916d6a71a45858b5bda17e12c1884ac1d7dbbec9268aa"
+embedded = "b0c1779abced0765dc7080a39dc4c877ef71108340b29f2bdbb1f7335237414b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::signing_params::<impl at src/sign/v4.rs:149:14: 149:19>::fmt"
+kappa = "ee2043cada83d9ef7b2ec1973f5129d72c3ed027cdb3134894127bf35a290c55"
+at = "S=u32"
+embedded = "817182a29c7b2b809ba38a9a345006c4f2dceddf91ee02332b9fa167851cd1af"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::signing_params::<impl at src/sign/v4.rs:149:21: 149:28>::default"
+kappa = "98f272f0b517d2f5b7f0f7a9340c60e5a925d0eca0df74bb161cb6ead5c69aea"
+at = "S=u32"
+embedded = "07cefde29bfe658244f1a0aecd10877150a9c2a85cb1d469814d8448abdf2c45"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::BuildError::fmt"
+kappa = "5ff684ca8ebc04a936b1f521b07f45afc25dea18f5215c3831b670c03ef2723f"
+embedded = "8790356ad102e770bb3e284d234743d4e7ba7a34e8873810ab7d1c6d77ec5cbc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::signing_params::BuildError::new"
+kappa = "bac2f83ff6155c6e186e731e3f762f4bf2172fdb0bd974004c04d590edca9224"
+embedded = "803d006c0cba277d500951dbaca0ba5759f366475ac4c4eadb1057153e39f8ec"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::BuildError"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::build"
+kappa = "588d62c6e6e4858456da914c57652264ab488bca7a0b8c95df450f93253b1c93"
+at = "S=u32"
+embedded = "6de7685252144174c27d1d8f07722e7343cd098e002350376aa18d6701e27690"
+status = "residue"
+cause = "mir::Ty: sign::v4::SigningParams<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::identity"
+kappa = "01380c53ee5b1eab34d7a65dcd35614eeb54773f94eed1cbffe4d9524d940301"
+at = "S=u32"
+embedded = "89d8498555268ec04382a2c750d6b33af3409bb48bb0a6eb8e16faddc5bc9d47"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::name"
+kappa = "51a8aea8a4d0e1cf88cfbfbc7ba4b6ea18513fdc93fa7c3f095b4d221f4d9916"
+at = "S=u32"
+embedded = "e1cebc0b055275e1f5ec38048a1d4b7dd80c434ec1d8fb4aa1450e0f60167444"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::region"
+kappa = "be6e978c66e077cf8a5dac94fd64a7765285228cd2bfd2a548854b9921d4f577"
+at = "S=u32"
+embedded = "8aa9d58b6fb0890c7ec584273f7494463a1d400e5b7d1b2997febf332e45ea93"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::set_identity"
+kappa = "5eb387589c19fbc8b7a10c45601a00fee2afc3b5a17df5655728b606bb72ebcd"
+at = "S=u32"
+embedded = "1b2d5d839c1dca961f05f80db04181f2e1800911dd91c780276acd24dc3ed5cd"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::set_name"
+kappa = "9f5fe88b2f26e620f08e3c7dbda76810e7f805b79c51f73f72a35dbbf5d78396"
+at = "S=u32"
+embedded = "1416dd140ba4888c22ad58253abc379bcf75d8d5617a38e5c3c9a0c143d17e5e"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::set_region"
+kappa = "beb7433890b773f42ad923bd0b146a653a692fa82ed95f1de37b055152d02088"
+at = "S=u32"
+embedded = "c9609a32b74d2dcdc627d77eb4c47755ff8ce3c3ce383280e27823a1bab5e15b"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::set_settings"
+kappa = "95ec067616680c37c0e13c0bc026c6894c5febb53d7d2a312765fd23782b4c1b"
+at = "S=u32"
+embedded = "74f76a64a9136eaae7babb8f98aebc92f8af1e3dc296df3e6e8e5bf0525251f8"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::set_time"
+kappa = "aa7890a21512c13c8e99ed45418c1f94252c095f0dd33381bcebdd01dff33e1b"
+at = "S=u32"
+embedded = "c0a8a5345a5db0a4950b65612b0f28cfae1354fbbaebe5aa6272494a29f8d0f8"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::settings"
+kappa = "940154afd73193922ae324376d5863beffdd8862c58249b83c1408ec616ee249"
+at = "S=u32"
+embedded = "298ce575c001a1eea7160af96bf2637a0118ec880eab33ca7a8c0b019eccbcba"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::signing_params::Builder::time"
+kappa = "32c1d69800fec75a3c4e42533bf8c1c2f862abb6784ed48c80c58194fe1a2ad0"
+at = "S=u32"
+embedded = "8453a1830f693fb1040bfa62784801b1c531ec2d860cebf00ec32c4399b61f6a"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::v4::<impl at src/sign/v4.rs:74:10: 74:15>::fmt"
+kappa = "24a84ca2870d8b33d22e55d3c670db2d0f3fe7e3372b1f8b09e304c3e80f108b"
+at = "S=u32"
+embedded = "2444daebc5531c12cbfb00b7f27ee44c09c8b33cac2a8fcfb081a8c30baa3433"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-sigv4::v4::SigningParams::algorithm"
+kappa = "4ca128abb7f417a996b9de2ed0b513c77b1625703ea6aa105c06d0e5658d860f"
+embedded = "2ddbf0a095d0a370e721dbbbf4ed951d134da98a283ae1e4f2e78fbe9ac1649a"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "aws-sigv4::v4::SigningParams::builder"
+kappa = "80523646bd53f10937137e5a5b035059c85dfa45be3a00b4eca256479f34d4ad"
+at = "S=u32"
+embedded = "3cdfc494878b2c8511f3fb39aee9420f055965b8b3aa88c91e3db5a06b0466a0"
+status = "residue"
+cause = "mir::Ty: sign::v4::signing_params::Builder<'_, u32>"
+
+[[fn]]
+path = "aws-sigv4::v4::SigningParams::name"
+kappa = "1a336461c41a2f51c35b645dcf57204a9fbc8114aae6d35204931ed5411a3003"
+embedded = "b33d9cdefe4822213c6cc09baf5cccbe92a70633424d93a250bb788d4fe83c0f"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "aws-sigv4::v4::SigningParams::region"
+kappa = "1d060bdb3d6343dff4521d1cf514036426ee81e633ddeb97c1447048560c8d57"
+embedded = "85ccaf6ac473096cb3de3c36e0f932588269812e9642e1a8118f84a6a7cac9e1"
+status = "residue"
+cause = "mir::Ty: S"
+

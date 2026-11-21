@@ -1,0 +1,183 @@
+# The hyper register (written by `uorust crate hyper@1.12.0`; do not edit): every body of
+# hyper's MIR at hyper 1.12.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 122
+translated = 3
+residue = 119
+
+[module.body]
+bodies = 10
+translated = 3
+residue = 7
+
+[module.common]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.error]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.rt]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.service]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.upgrade]
+bodies = 23
+translated = 0
+residue = 23
+
+[embedding]
+bodies = 122
+embedded = 122
+evaluable = 122
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: upgrade::OnUpgrade"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ReadBufCursor<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rt::io::ReadBuf<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: error::Parse"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Service"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Write"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: body::incoming::Incoming"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn Sleep"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: service::util::ServiceFn<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::any::TypeId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::pin::Pin<&mut u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Arc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pin<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PoisonError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Rc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Rewind<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ServiceFn<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Upgraded"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::io::rewind::Rewind<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Io + Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn upgrade::Io + std::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http::Request<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: http_body::SizeHint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: incoming::Incoming"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rt::io::ReadBufCursor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: upgrade::Parts<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: upgrade::Upgraded"
+bodies = 1

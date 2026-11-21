@@ -1,0 +1,23 @@
+[[fn]]
+path = "elliptic-curve::bytes_to_uint"
+kappa = "ce525d4d179ff5d293769843128cdec075a0d17ec83842dc9eb4af2076797418"
+at = "C=u32"
+embedded = "cf3d91b06e9ecb189fc72bc24f2aa52bc18110a38ca4b3b181123986333368a4"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+
+[[fn]]
+path = "elliptic-curve::modulus_bits"
+kappa = "61c1767bfc95dd0c0c916c68d49934b8ad26da669d6d3e9f3e23111b45ea46b2"
+embedded = "109719a5b06a050a3728f60d62d63a0308b19eb56170f448a30a8726c1a9a7df"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <<C as Curve>::FieldBytesSize as hybrid_array::typenum::Unsigned>::USIZE"
+
+[[fn]]
+path = "elliptic-curve::uint_to_bytes"
+kappa = "58e96633b43e4c68602295b102a02c45aed73f4f6547dd0a58f4a39f54857264"
+at = "C=u32"
+embedded = "3254255d817fb3fda135aebafba5c92b10d8c20f70742c6ebcf09811f2415a95"
+status = "residue"
+cause = "mir::Ty: hybrid_array::Array<u8, u32>"
+

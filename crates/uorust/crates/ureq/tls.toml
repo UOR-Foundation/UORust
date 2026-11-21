@@ -1,0 +1,595 @@
+[[fn]]
+path = "ureq::build_config"
+kappa = "0023b6a6ee56e45659030f6ea01bea4d301ffb2898ff58b7d4f31285a8f3494b"
+embedded = "4bd8f9fac394c6a1175af6c3c1b985a2b11cfdb46a07c04249fdaf208158f5ee"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: tls::rustls::CachedRustlConfig"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:126:10: 126:15>::fmt"
+kappa = "ae075099d67024b2a542a218cfdd5dd0750b835f9b8e7fb588ca673c6d459975"
+embedded = "7cc579621eed3d58545c999d4c5983096f8fd00907affaac6884b5d4868ab37a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:126:17: 126:22>::clone"
+kappa = "d5a4fc5be60cb9f947baf719a10dbb9be5528235d6c898ca3cc7a0c890666138"
+embedded = "37706ffb113b3a06a7a3b9ddbc76ea58691b08b4f6c7e60a939dc9971fb12dd4"
+status = "residue"
+cause = "mir::Ty: tls::cert::KeyKind"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:126:30: 126:39>::eq"
+kappa = "0c6d49070748b4c980fdd8a654758292365f89e7349c926b9108036b50e33013"
+embedded = "cde587b0800aea1e8245bfb01c625c0e9cd3eeedfa786daf0134e9f97f603ee6"
+status = "residue"
+cause = "mir::Ty: KeyKind"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:126:41: 126:43>::assert_fields_are_eq"
+kappa = "f33efe89cf675e8bd128ff9806ba565016b78bff0b7ef01446618a981ec54195"
+embedded = "59c30dec78afaeba510907effdb81f3e46843c55d3f20fa6f43905c48cd20fec"
+status = "residue"
+cause = "mir::Ty: KeyKind"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:126:45: 126:49>::hash"
+kappa = "16c38b3c47685c8b2c71c9aa8b634e2497fe9d1d8f7c3854c540deaa329ec5ef"
+embedded = "ff76050a5ef3f481b67baea6cffd715cb68aa7e3aa6be0312f5e9e179008bd32"
+status = "residue"
+cause = "mir::Ty: KeyKind"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:12:10: 12:15>::clone"
+kappa = "46bf1edaffd2deeb3d40db3900334f625f8c5c8cce407bb8ad765f29c10d6839"
+embedded = "4addab18524d871c47db07469178b21a32b30a953296ea533614ccf969eecc1d"
+status = "residue"
+cause = "mir::Ty: tls::cert::Certificate<'_>"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:12:17: 12:21>::hash"
+kappa = "e33dee3b0e56b73f31e6e27aa527e081e8dd14990177219d55dddf839b20c05d"
+embedded = "d74c6887620001fdeb69a2b39f097f2db9e6b2f68dfc2319b6a05ef1d883878d"
+status = "residue"
+cause = "mir::Ty: cert::Certificate<'_>"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:17:10: 17:15>::clone"
+kappa = "71b4085e7af6bd186dfc11594bc568a77245e8726a52c26dd8d71d74564816af"
+embedded = "caf49ad4cbc813b15b4bb0842ab87c303b0887bb42f18195c4e94bc07f7727dc"
+status = "residue"
+cause = "mir::Ty: tls::cert::CertDer<'_>"
+
+[[fn]]
+path = "ureq::cert::<impl at src/tls/cert.rs:89:10: 89:14>::hash"
+kappa = "d01460e020cec46e317692037b4620ff8badbb045c403babe3862be3cfb8cc3d"
+embedded = "2ac255ba1e8d9d4d0c051c6e028094b7b3eefb3f431e0a6f55cbe7d3928b3a1d"
+status = "residue"
+cause = "mir::Ty: cert::PrivateKey<'_>"
+
+[[fn]]
+path = "ureq::cert::CertDer::as_ref"
+kappa = "ea94d65868fdea255ffa0d8b23906bafad6390addfd208af22f39284fd8803b4"
+embedded = "93b854d9c7f583adacf88366557ea03c9dac224cdc0e1a3eeec8f8be7f5332a6"
+status = "residue"
+cause = "mir::Ty: CertDer<'_>"
+
+[[fn]]
+path = "ureq::cert::CertDer::hash"
+kappa = "064344fcf4d46b708f97eedfcab3a87d42e6174e405d16e9945949571f1645de"
+at = "H=u32"
+embedded = "78cb7ee282da80e5048c3848bfbe4c580d6f583086db601d6093a3fad94726ac"
+status = "residue"
+cause = "mir::Ty: CertDer<'_>"
+
+[[fn]]
+path = "ureq::cert::Certificate::der"
+kappa = "a0956f566b9de1afa7919c0c9a728e0230340715b358c02cf218210a55ac759f"
+embedded = "b869c438320563d26a75224d5031c71799d0d6b9f1f61dee24151955cb472875"
+status = "residue"
+cause = "mir::Ty: cert::Certificate<'_>"
+
+[[fn]]
+path = "ureq::cert::Certificate::fmt"
+kappa = "8386f78b2c173c05a6ccb78676127e97461596fc81ad1a98d08455e749805d18"
+embedded = "d28e6b0d77391f4fd1910766fdaf7dfbb7ae2f4f699b09c27295b54a98bdcaa1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::cert::Certificate::from_der"
+kappa = "c2f747fe878e6ab404f242bc55d6ce1b2a6cb75cc6e41b16c9cdc55a094f20a7"
+embedded = "a9589cd31d18941b8002c62f154249a9e70836a5c36be1ec95d84f9fe142675c"
+status = "residue"
+cause = "mir::Ty: tls::cert::Certificate<'_>"
+
+[[fn]]
+path = "ureq::cert::Certificate::from_pem"
+kappa = "2df2efa2d62254d2805d9afbb86282f4b6c6ff140ced6448c40f920c39637c4c"
+embedded = "9d8765859b8779998dff5af800fe38215744b4cd231aeba2a0fb559e089c2765"
+status = "residue"
+cause = "mir::Ty: tls::cert::Certificate<'_>"
+
+[[fn]]
+path = "ureq::cert::Certificate::to_owned"
+kappa = "0dca685da76bd2104fc42045c685ea4bf5d7950ee78613b90ed4d901efc8eeeb"
+embedded = "c52a1eaaa504205c6120760569dab68c2d8ecd9bb266cd00f209799dbdee70e2"
+status = "residue"
+cause = "mir::Ty: tls::cert::Certificate<'_>"
+
+[[fn]]
+path = "ureq::cert::PemItem::from"
+kappa = "3c86b24d793756ab701859965d9d3588d1cd2587e0ae157645ae2aca762d82fa"
+embedded = "08a12cdc005ec363998a10bb7e1b1d05aefcb4cd6f380a5be3a44d81fc838477"
+status = "residue"
+cause = "mir::Ty: tls::cert::PemItem<'_>"
+
+[[fn]]
+path = "ureq::cert::PemItem::from#2"
+kappa = "d3fcc7e1abe07400cc795dd7b79912ee9d10bb0dfd6ab70305cd84dbe1705a9e"
+embedded = "53859a56371b3847d90fa4ab8116dc00a3a931b1033d21cd720ae1cbc9e09977"
+status = "residue"
+cause = "mir::Ty: tls::cert::PemItem<'_>"
+
+[[fn]]
+path = "ureq::cert::PemIter::next"
+kappa = "2bce9da0cc6124ad3b455037f5e9a2dceffeb678aecc1bfe6b2d2c995ae41f8f"
+at = "I=u32"
+embedded = "891c00cce22dbd0640b6a7e77fad6cfa5d5c1cbbe9ebdedba43438ef7dccbf18"
+status = "residue"
+cause = "mir::Ty: tls::cert::PemItem<'_>"
+
+[[fn]]
+path = "ureq::cert::PrivateKey::as_ref"
+kappa = "c1a2159a616c013764c56738c30389ad0d7dc44120761d93aebec19842565ea0"
+embedded = "fa0176ff898f2eaf500518d80ca9f23f340ffd44737e80c0668bde73992bead7"
+status = "residue"
+cause = "mir::Ty: cert::PrivateKey<'_>"
+
+[[fn]]
+path = "ureq::cert::PrivateKey::der"
+kappa = "aef0f327ce96a1355db29506ae10407baddcdc04b500974c5676d4c79d3e4c8f"
+embedded = "20b438a5a6b3ce306d72b0009727e48c4b7e6ca35b764d936f37348da5b1b8eb"
+status = "residue"
+cause = "mir::Ty: cert::PrivateKey<'_>"
+
+[[fn]]
+path = "ureq::cert::PrivateKey::fmt"
+kappa = "d27a585d799ed425fc6f7e2f71bbd12d71cb5c957dfa0768796c0e3a31baf0be"
+embedded = "32c45bdb8c1f6bf526e5270d37f30c6e1f8b6831469b4e3337e02e379c798b8c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::cert::PrivateKey::from_der"
+kappa = "cadf6876d8b3dbddfa1298df1f051399fcacd1737b7edfe209ed3a715c74a104"
+embedded = "24b1232416a3babbf947bd00ac1446864727d5ec8a087abafb07d7892c15f535"
+status = "residue"
+cause = "mir::Ty: tls::cert::PrivateKey<'_>"
+
+[[fn]]
+path = "ureq::cert::PrivateKey::from_pem"
+kappa = "4fdd0849542e96b39a20e7047f8fe38948280c3e1b73ec20a468ad156e255168"
+embedded = "6c9e813f632c93b438b76f45005a83d5bb1e2efbc6f1cb5a0f4653e5ac44571d"
+status = "residue"
+cause = "mir::Ty: tls::cert::PrivateKey<'_>"
+
+[[fn]]
+path = "ureq::cert::PrivateKey::kind"
+kappa = "f6590f119075134f58b3f248272d320b2b16ed010c40bd83fd6d94e0a6d7deaf"
+embedded = "ef9741fdbb6a59ef2a833ee45f5225fc3cd0892a03d0af74177d145d7dde21a5"
+status = "residue"
+cause = "mir::Ty: tls::cert::KeyKind"
+
+[[fn]]
+path = "ureq::cert::PrivateKey::to_owned"
+kappa = "d06266b6bd12bdf0a0ac9ad71baced7c3fefda56966e26037dff888ff7c1a991"
+embedded = "3a84cd59eaa64805590024c53b9cd487d9a0999299b51fffbf484e0e2e048939"
+status = "residue"
+cause = "mir::Ty: tls::cert::PrivateKey<'_>"
+
+[[fn]]
+path = "ureq::cert::PrivateKeyDer::hash"
+kappa = "89f1e0e411cca40df0b2f97eacaa2f2e50222afc399b47b68b5abcd7cc86b1ce"
+at = "H=u32"
+embedded = "4578eb64bb4b051c9c243a8c4c7daee9e9fc07972d69c5a1896d6b66c76b536a"
+status = "residue"
+cause = "mir::Ty: cert::PrivateKeyDer<'_>"
+
+[[fn]]
+path = "ureq::parse_pem"
+kappa = "3b87c3b226a284737cbab8dd681eb75c725ba828256ad8985de77f57e0b517a0"
+embedded = "478a8c99e68409c89796725512ff6ffc1ecbca8e733dc3cec1b0deb16c929b71"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::pem::SectionKind"
+
+[[fn]]
+path = "ureq::ring_if_enabled"
+kappa = "88dbc3391b6b5aa57ba156100062ebb5c8bd25430ff9d6a1418f703861d38d78"
+embedded = "37bd16c824aecd1ba1f8cd3bdd04343cf99bb83ee14b1601e1365ed485929f3d"
+status = "residue"
+cause = "mir::Ty: rustls::crypto::CryptoProvider"
+
+[[fn]]
+path = "ureq::rustls::<impl at src/tls/rustls.rs:24:10: 24:17>::default"
+kappa = "ad249c19d853837e65b40a54cddb88d1f88d08744e51a328d01f2e080af3a976"
+embedded = "c1a3bdbd5e6b8b14caca7c1040941b28bcf5aa1495014f0189f6ed1d41d8be3d"
+status = "residue"
+cause = "mir::Ty: tls::rustls::RustlsConnector"
+
+[[fn]]
+path = "ureq::rustls::<impl at src/tls/rustls.rs:280:10: 280:15>::fmt"
+kappa = "8a8f27e2d7eb8e43b9678e9f16222bd05d6eddb460329218a306c6dd0da974e1"
+embedded = "1b178fffa53f04a193838482fb2b4e4d895d937056be2e5322853dcc3dcfad43"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::rustls::DisabledVerifier::supported_verify_schemes"
+kappa = "f83d680ad1a3bbcef78fec546fce0d8c18d3a78caa73feeb92e4edf0b701d518"
+embedded = "da3c756c4e1baf88ebc3f487bad093e1b4b4b6e556421dd56d13cd9a5ff1f450"
+status = "residue"
+cause = "mir::Ty: rustls::SignatureScheme"
+
+[[fn]]
+path = "ureq::rustls::DisabledVerifier::verify_server_cert"
+kappa = "9098c3e18bb02dcfb1fc84d173c22dc37f7615d8f443a606413787339411d566"
+embedded = "ec44ef324a87a4e13822eb26d3ea6b4e1329a0a66f0d7959f299224c8ecafd5b"
+status = "residue"
+cause = "mir::Ty: rustls::client::danger::ServerCertVerified"
+
+[[fn]]
+path = "ureq::rustls::DisabledVerifier::verify_tls12_signature"
+kappa = "18ed976eb076f13591f6bb03f5b2d550f2b8e8f0882ba062eedf0719cb899eb8"
+embedded = "94f80d7541bd05b7421910b80f941792455f09dd92d93bad4ccefa65dde07bbb"
+status = "residue"
+cause = "mir::Ty: rustls::client::danger::HandshakeSignatureValid"
+
+[[fn]]
+path = "ureq::rustls::DisabledVerifier::verify_tls13_signature"
+kappa = "0b9563add0e26b4ece078796fdc307d7e8977a49c22ceb9cbb0dbb0347ace371"
+embedded = "f8a7849e47e038d9d070b8c9ed7df00aeadc5d2184f7e3cc0230576777bc0e42"
+status = "residue"
+cause = "mir::Ty: rustls::client::danger::HandshakeSignatureValid"
+
+[[fn]]
+path = "ureq::rustls::RustlsConnector::connect"
+kappa = "14db78b77b945adceeb60f043585f4ab6ba96314ebe80230dbfe4316f645fabd"
+at = "In=u32"
+embedded = "6cc7b1e419ceea6d4cad7c0790c4a33a5b05fbb7f49051007ad26f71a18dcfc8"
+status = "residue"
+cause = "mir::Ty: tls::rustls::RustlsTransport"
+
+[[fn]]
+path = "ureq::rustls::RustlsConnector::fmt"
+kappa = "b17c2dacb775d2edca92cc88941dac4f2841b8a5564b348b216a8d34e56cfa68"
+embedded = "577722418e2fcd8e198f30b473966ed2d2124d37fc260e11197c907db545cfd6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::rustls::RustlsConnector::get_cached_config"
+kappa = "6ee01ad12ae3a713eda3ca69e7e0ef6f92f6b22634e40cbb657a01662366667b"
+embedded = "dfa367f88fe69d16dc2ca7384f40cd2e5ff526abdb64e666ce84998b395ab107"
+status = "residue"
+cause = "mir::Ty: rustls::ClientConfig"
+
+[[fn]]
+path = "ureq::rustls::RustlsTransport::await_input"
+kappa = "270f97fc504129b4fd07209391e787749939b7838dce9f9ba3dbce72fc666f1e"
+embedded = "807c4d2cbc4bd31c6dca7bbc089bb71dcef4661d39af916810f5f942015fa699"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::rustls::RustlsTransport::buffers"
+kappa = "3baa4291c62b55d99f337e41b9eb5d35b028df3115dabf68721fb54f88e5a611"
+embedded = "e5ada54a11aa6b21e2fc1edf638fb26665dff79ec54d17003cda293531c6aed4"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::buf::Buffers"
+
+[[fn]]
+path = "ureq::rustls::RustlsTransport::fmt"
+kappa = "c4534cfa44ba03926989ce551769e48ba7f6c416aa6bee1d2fe08e43bd73e46c"
+embedded = "0343b1b493be5af09230e098fb8e4374c5673abbaeae25ec8ec0788eb15c9d6d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::rustls::RustlsTransport::is_open"
+kappa = "132be91ce5f7568994afde584e7d161ae133af7ee36446b8d8f12cf408a406fa"
+embedded = "7e6f6099a3c6292192be1c2493c9d36c456cddf0e69d9474a63cd0f4a74e568c"
+status = "residue"
+cause = "mir::Ty: RustlsTransport"
+
+[[fn]]
+path = "ureq::rustls::RustlsTransport::is_tls"
+kappa = "6b9347e59f6c992401ffe43449f13ce88a6a540791c063b36e2b757d936c8ec4"
+embedded = "56fc2a7759db08f2533dfde532faecc78699cd3f1c99b293ec38027f22be106b"
+status = "residue"
+cause = "mir::Ty: RustlsTransport"
+
+[[fn]]
+path = "ureq::rustls::RustlsTransport::transmit_output"
+kappa = "ae85f39b328ee91773ed53b3608f6fe93e49513a6a0ff4e170ff317ba4c1d08e"
+embedded = "589524de376e007be937568a5f188ca21a8ddc2abd9dd3bb9c995007cb4ec397"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:22:10: 22:15>::fmt"
+kappa = "de3acc8c727fb6c23d1dbaa8e851a21ca2b5e12cf99f9bac0bb9ba4714bb6143"
+embedded = "945706dbd903ea3993e35f195e724636ea0ae4d9e2c061561a785f019c0301f4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:22:17: 22:22>::clone"
+kappa = "a333e194d3ad5cb15a518cbb6b0a25163a8d5e42ddcfd1496b1fb2c8e112e8f5"
+embedded = "57ae0e705a2ffc4f9fca54ee56ca68ea54c44ebb75fa6541584dfc318b3f5406"
+status = "residue"
+cause = "mir::Ty: tls::TlsProvider"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:22:30: 22:39>::eq"
+kappa = "3a901ff08266a482249be9320cb90ff2a7dfe27c23f5f7f7bffb6496fcdab4e2"
+embedded = "520cc0050de7522069707da122af0e943c9a3a3a6065ec2180e540914664784a"
+status = "residue"
+cause = "mir::Ty: TlsProvider"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:22:41: 22:43>::assert_fields_are_eq"
+kappa = "0881399057588d77d391a363a86bfe68c4b9c1994aab8d234abcd9c25d92781e"
+embedded = "1af38507269a230997bc025dbf2fbedff4e4d848a53d8318c8dee68bef4630a0"
+status = "residue"
+cause = "mir::Ty: TlsProvider"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:22:45: 22:49>::hash"
+kappa = "34b86148f952c7fa6a58df0a304ae6fe240c86e87a3f4c956ce366c8780ff73d"
+embedded = "6d170b4688af000afffa42dd16a9b7538e02192ae0d18d0722937dfb67ad303d"
+status = "residue"
+cause = "mir::Ty: TlsProvider"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:22:51: 22:58>::default"
+kappa = "ae569c47c11d44f57e375ca7a32ad9888924048de08f0be3b8fd7714a11e7310"
+embedded = "beddb2b00c1d42b6cb85fcfa8e069fa68535e98bfe39de129dc89c9dfc78798f"
+status = "residue"
+cause = "mir::Ty: tls::TlsProvider"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:313:10: 313:15>::fmt"
+kappa = "9a93d34ea87af12b856ec7da92d5e5f0f22ca96de459b8d61bcc796dd6b4ff4d"
+embedded = "c21ff9550558cd1f42cac38ee7684425cc0d4c8f0d49405fb9bcf2cb8108c52f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:313:17: 313:22>::clone"
+kappa = "16699e07d5607d537e7d6140c4543eaee5dd902e07e5a9bff6405a68767afe0d"
+embedded = "270947ce30bd6a53ed0138ff9d469b2eb211a186d9603c8e3a28b80a89d00cb9"
+status = "residue"
+cause = "mir::Ty: tls::ClientCert"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:313:24: 313:28>::hash"
+kappa = "2cc5b92c7cb0967c88958a532b4d772f5f105372fbf1c9fd4566f630bbee4846"
+embedded = "859f47d994173c01f57eb42c9d1d3e9694f73e156c0b94a549b45e412614a0ff"
+status = "residue"
+cause = "mir::Ty: ClientCert"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:334:10: 334:15>::fmt"
+kappa = "0ee440e531db20cb1e716616c0fb0a4c09cc6355afc737bb22795da60ac9a0ab"
+embedded = "8533c6d2c97356653c220aaed766bc6227e12c3366dc11b5ce4ba0f26862a886"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:334:17: 334:22>::clone"
+kappa = "b555b3728a504568974fa86316d0439b1ed24a0aee3fac350e6c1e45ab76614e"
+embedded = "b306a630eed685edb6fdc504cf168972b2f56eff9152d94e554b7e5099f5699b"
+status = "residue"
+cause = "mir::Ty: tls::RootCerts"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:334:24: 334:28>::hash"
+kappa = "87743e43175477ef92432470d1fbbe4355342e62ee11471b11c727e2826e037a"
+embedded = "f0c1ed153ed6524f0b4e9d1fd424062139ae5533f9470c3bf60d9fda72a01e86"
+status = "residue"
+cause = "mir::Ty: RootCerts"
+
+[[fn]]
+path = "ureq::tls::<impl at src/tls/mod.rs:71:10: 71:15>::clone"
+kappa = "e3104a3ae38299156e64bea4bdb5448d57cde8db15aa97b2b227e5561c79aa17"
+embedded = "e4ba213f2c89a9ec6fed6d081a4ab155560a8d5cf3babcfd3862e1e674f15a81"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfig"
+
+[[fn]]
+path = "ureq::tls::ClientCert::certs"
+kappa = "c94c1a07ff6b21819e39f6fcae5e0899ccdbe3c1b22e8c50625e11dba563a2e0"
+embedded = "de207f0f57358d9c98f07907aca47b3be0b9af3efa603cdfbf9f0462bd5c59a3"
+status = "residue"
+cause = "mir::Ty: tls::cert::Certificate<'_>"
+
+[[fn]]
+path = "ureq::tls::ClientCert::new_with_certs"
+kappa = "7e9a1907ebee880e5d46fb63264671335e3ad2681e34cee0ea71a228e1a4693b"
+embedded = "33077e867c443f50c31e2019ea9727e1424150042f141904b31e4b9528b16c8c"
+status = "residue"
+cause = "mir::Ty: tls::ClientCert"
+
+[[fn]]
+path = "ureq::tls::ClientCert::private_key"
+kappa = "95a304c4ed0016d82ed54b2984976c0fba425a84bf93cffea79dc843a962e842"
+embedded = "8f44ca51a0d060e736c12f8391eab16713aaff87cfe948498f79988d5bb7782c"
+status = "residue"
+cause = "mir::Ty: tls::cert::PrivateKey<'_>"
+
+[[fn]]
+path = "ureq::tls::RootCerts::from"
+kappa = "8a1a9baa1d21218ed72854d3713dbdec19c70a85c3c074a1f4d5e98417115ed9"
+at = "I=u32"
+embedded = "0ee8df42a9e29bee8b02a783dc4ec965b1676e8f4079cf4087241a1dd8a21cd9"
+status = "residue"
+cause = "mir::Ty: tls::RootCerts"
+
+[[fn]]
+path = "ureq::tls::RootCerts::new_with_certs"
+kappa = "4da91487a925a34948204fc88740dc579c74f44048dee48d3134ebaaff9bf5d2"
+embedded = "9a8fc57fe32096e086d2685ba671d935e94ad88072ea16c3e437478dd7a37d68"
+status = "residue"
+cause = "mir::Ty: tls::RootCerts"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::builder"
+kappa = "c7c43004eb5a359b32d0fd9e3d6813d5814bf4c45beb5b27514cff335f5cb655"
+embedded = "0f09826c8cc6fa4b11c2834f0803851ae94f4133139a64f6fa099a716a7b7dea"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfigBuilder"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::can_share_pool_with"
+kappa = "dd103c9321e2c2b33dac47146c6497211c485a2eb4be91213dc78d323045d313"
+embedded = "e937f77ab0616f99ac990aad26a1125809094647b58fed6e66fc187c09078eff"
+status = "residue"
+cause = "mir::Ty: TlsConfig"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::client_cert"
+kappa = "d0025e0e01db9806d76610cb42e959981efa58f6363ad7729d0518ebec6f4d41"
+embedded = "916c8e82e15320edb1190fbc9a08701cc0b2c0f06ddabe1d6cadc33294c83ada"
+status = "residue"
+cause = "mir::Ty: tls::ClientCert"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::default"
+kappa = "53490a92e9878ce634631895659f67af419f46c797d30dc99cf42a1075b49202"
+embedded = "10b01f5b73d3add72e817a5bf265c415119abeb06783ecdf3874be2c7dabeda2"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfig"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::disable_verification"
+kappa = "3e9eab9c6bf4c5584fdad0dd81dc92075492c98210c82cfc724ac37559ada976"
+embedded = "e4069212658ddd181eb74a3270ceacdf3bc4435d749c43305f488d4d6c99c0cf"
+status = "residue"
+cause = "mir::Ty: TlsConfig"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::fmt"
+kappa = "f5546b6dd4d41e8e2a22fcad5c15ce1c52a72d1470828b534fef79d0ccf63af9"
+embedded = "4dfca4d28910b4e0d47b5d8654ed151a193e4af1bcbd85eb04ea4f274ebd1bad"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::hash"
+kappa = "e679723a1c1fbbf63ab610ed93176f11fc4599579f15f8a376b77cff8393ca74"
+at = "H=u32"
+embedded = "c1ad42656b1142df9afaf5f8e302f7a7cb16d280fce052a2e59fe640bf565d28"
+status = "residue"
+cause = "mir::Ty: TlsConfig"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::hash_value"
+kappa = "8cad50a9d7180b3204a0c6af963acb77b67393c0a7342c937a679390cfbbf872"
+embedded = "86e781694aff12793645f75e32f057a20b6e514da2f6c1650dc1de98e14628e1"
+status = "residue"
+cause = "mir::Ty: TlsConfig"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::provider"
+kappa = "d1f657d2b470040d90148f6a0192de686d24f9bfcddc4379cde8dd3637c55cd4"
+embedded = "fbd9e6862323bf338583e81d1326f3457778bdab28b28ffb2fe1bdc85f748a6a"
+status = "residue"
+cause = "mir::Ty: tls::TlsProvider"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::root_certs"
+kappa = "a70590032223b49e5dffb959a96f3063168282df2ab8e9326f3fdc5d8cd8d170"
+embedded = "3cb15189bb716297baa98d9a94b2d204b9318f5cf89e205bcf968cfa063785f6"
+status = "residue"
+cause = "mir::Ty: tls::RootCerts"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::unversioned_rustls_crypto_provider"
+kappa = "35ed5776c5b6db256f545082056e40a7d5fe9c38df822a88b2f67e3bdc77841c"
+embedded = "182d5b9931b85c4277056450da556c957bb102170a4594670ae4e14087e4155f"
+status = "residue"
+cause = "mir::Ty: rustls::crypto::CryptoProvider"
+
+[[fn]]
+path = "ureq::tls::TlsConfig::use_sni"
+kappa = "93fa8d6c0cdbd416532e0114b1202ab81c33ca33685afb235b1bd71277d86189"
+embedded = "ee40803d4d15f5befeeacdbe83cf3acd5d664abc5c057e3e940040d52ae8b363"
+status = "residue"
+cause = "mir::Ty: TlsConfig"
+
+[[fn]]
+path = "ureq::tls::TlsConfigBuilder::build"
+kappa = "3273174b002fffa8adaff0925f94611bde0e11751e2da6b6ac29872b9fc172a6"
+embedded = "8d80866b39e59900c39346a4e16471f069160540a1b5b1f0e77335ec60f7a641"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfig"
+
+[[fn]]
+path = "ureq::tls::TlsConfigBuilder::client_cert"
+kappa = "62f48fd9bdb560641c3937fc3c20d7ca75fcb6a4e12caa17cb9110a4270c0a5e"
+embedded = "7763b7947ecbfdaf1a67cb0320c0b6de2f6c27be9a9de8ee56317d974d92f246"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfigBuilder"
+
+[[fn]]
+path = "ureq::tls::TlsConfigBuilder::disable_verification"
+kappa = "4f383b52fb6ea86e1e767f5cc852ada917252b47dc7b310685c52cd4076ff022"
+embedded = "dec255be8321914e502bf5ca7fc07374a39a3bd6b4df16adc9ab58995c00d460"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfigBuilder"
+
+[[fn]]
+path = "ureq::tls::TlsConfigBuilder::provider"
+kappa = "ccbcc88d02104f9f6ca77bd136b137f3adcd1131493563c6eb824979a52019a3"
+embedded = "f20fe11c975a7340dccf51ffe4d071ed164310a59ac68a086a4ae9ad5e4fae58"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfigBuilder"
+
+[[fn]]
+path = "ureq::tls::TlsConfigBuilder::root_certs"
+kappa = "36bc9c980c684b69f9ca8dc2c764fdc4049936ddb9397ff170052385eb9b0c31"
+embedded = "7efd0817bc79a31a1b686ad0781e12792e17b52565a8449b274fe67d0b9c3b67"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfigBuilder"
+
+[[fn]]
+path = "ureq::tls::TlsConfigBuilder::unversioned_rustls_crypto_provider"
+kappa = "efcd834f388f1b000d0bee970440c47899bec68b0905c92c8de15399995ceae5"
+embedded = "df814d5dd9705db2174c8b69d93568593bec502c52cd3052bdada7268b253509"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfigBuilder"
+
+[[fn]]
+path = "ureq::tls::TlsConfigBuilder::use_sni"
+kappa = "7b10341f98e095d3b9c496f9c44e4b35f16a6fa73f3ebbfeeb96e519272b9636"
+embedded = "ebd7b02edb737e06afdbe30bd39c91f843dc7c772536c2e862e66164adfd05a5"
+status = "residue"
+cause = "mir::Ty: tls::TlsConfigBuilder"
+
+[[fn]]
+path = "ureq::tls::TlsProvider::feature_name"
+kappa = "8e2ea547e97517f9c0b926f5bb514a45e09fd2edf2d1fbc97a5e899cbb59adb2"
+embedded = "7eac3d60350872b259352b66622b75a827f24fac7eb004a2c7deb4bc818d7e34"
+status = "residue"
+cause = "mir::Ty: TlsProvider"
+
+[[fn]]
+path = "ureq::tls::TlsProvider::is_feature_enabled"
+kappa = "edf68d0f398edd12930a60bcec1b1dee987aa3eb46f20cfc303dd41637fe16a9"
+embedded = "3abd38e80f8a0c018831b033756afcf5542bb21bdd763be25e4c3aad8427f9ce"
+status = "residue"
+cause = "mir::Ty: TlsProvider"
+

@@ -1,0 +1,331 @@
+[[fn]]
+path = "jsonwebtoken::get_current_timestamp"
+kappa = "dc0480089381a9b1035d4793e1012aee289fcee9d49ef2e48b2ddbfadaf64793"
+embedded = "0224ef6efe8a98d2a4c43267ca1791ea02efecd24aa5d81387968e1fd88e7355"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "jsonwebtoken::is_subset"
+kappa = "984ef69392bdcc876a1961b6cbb10313e2ba01115645946d74eed9e2dc312964"
+embedded = "f7c5e2cc16f1e370a868781b3b86d4691db73f971cbcaeef0e8322cc3ae00293"
+status = "residue"
+cause = "mir::Ty: HashSet<std::string::String>"
+
+[[fn]]
+path = "jsonwebtoken::numeric_type"
+kappa = "1f6ddd5f24c862b0bc5d2d079ceb8c665b15309de1b7c5df7d62ff6d5a9274d9"
+at = "D=u32"
+embedded = "34352526c5958a893beda74b709d227e022598e2d3862f8bc6d97dcb73614e2c"
+status = "residue"
+cause = "mir::Ty: validation::TryParse<u64>"
+
+[[fn]]
+path = "jsonwebtoken::numeric_type::NumericType::expecting"
+kappa = "e29b012d04e71eb70482abf4e1c3a5288d135e87d2f866f4a629fb622e4a8824"
+embedded = "00fc399ef84d11a09f731eb3eecb452d646e9fb5f9ac47536797e9f29f0b8dd4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jsonwebtoken::numeric_type::NumericType::visit_f64"
+kappa = "ea7cc43b79a93c71f03132ff581132b4d037a724b03895551650ff12f39b1675"
+at = "E=u32"
+embedded = "edc20144388ee2a8d4789c70435b1295bc9d746cd1ce940bf02817a80e275725"
+status = "residue"
+cause = "mir::Ty: validation::TryParse<u64>"
+
+[[fn]]
+path = "jsonwebtoken::numeric_type::NumericType::visit_u64"
+kappa = "9d67cf233df2b48005b39f280140bde0628af1ab8f37b4626cb9cf4a35a33753"
+at = "E=u32"
+embedded = "0ac592eee94f01bc8880a45f252ca42c18805e5b3da677d515691b91760de12c"
+status = "residue"
+cause = "mir::Ty: validation::TryParse<u64>"
+
+[[fn]]
+path = "jsonwebtoken::validate"
+kappa = "be2fca9d877b10e9ec7b5cf50f2db6cbfa1ee3a59a6d11424b40eb9c49ce928a"
+embedded = "bab8231d6919914d77ba96a1622020a7abc83a99b0aaa9162abd5a684b3e7b8a"
+status = "residue"
+cause = "mir::Ty: errors::Error"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:196:10: 196:17>::default"
+kappa = "93480a512fee05014adefde2dd86c2c6457b9e1d12bf10513a67a29a06d09d1d"
+at = "T=u32"
+embedded = "b08e82b2e97200b0e76b90c730572e2f86baa123db1dafb6b67111500e63434b"
+status = "residue"
+cause = "mir::Ty: validation::TryParse<u32>"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:196:19: 196:24>::fmt"
+kappa = "e226cdee6625479a0c22cbc1b9ab8d1764f49ccab63b851ecb25e21c928caf84"
+at = "T=u32"
+embedded = "8757d2babf6e807518304c0aeddf149afa18f34c7ed4512da835c31fea0f4521"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:233:23: 233:32>::eq"
+kappa = "bca100a33dadd104fa27dd0fb61cf79ac7dbaa51aa93e74739504c484cde95c5"
+embedded = "7c1a693a7a0e3b94cee273298cff2e2077eb1a386a2e7708eefd097d2ba069bf"
+status = "residue"
+cause = "mir::Ty: BorrowedCowIfPossible<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:233:34: 233:36>::assert_fields_are_eq"
+kappa = "a68579fab046d1168e1a25724390a9edd3c4862363a65a2c218d83b9dada00ec"
+embedded = "ef1f24ab0b9e45696137449137da14d2166bb0a5c9b681268a217ead9be397c6"
+status = "residue"
+cause = "mir::Ty: BorrowedCowIfPossible<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:233:38: 233:42>::hash"
+kappa = "70624286e5d2c7b0efd3a335b3b1a8fce58b82703893c6a28cbb48cbacbbc614"
+embedded = "1fcfacbdf3cc0f0011e4757659e8c7b8790da0946578a36b944aa29ecda5a5e2"
+status = "residue"
+cause = "mir::Ty: BorrowedCowIfPossible<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:30:10: 30:15>::fmt"
+kappa = "c09b3d905a40353a26fb5372309945f6e2df93ab041b9518a1bb2718490c8a3c"
+embedded = "b155ddd241c162ae3a4d945552c23a5dd25727f7e2d70db2d1ccb18d9e724326"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:30:17: 30:22>::clone"
+kappa = "fea9fbab3ff7f52c1d65080d847aebb07eba40df4630bd570ee21ac366b60cb6"
+embedded = "9fcc72c728357198570d67514091ffe79d23ff53367d302ef2bddc7dc7053beb"
+status = "residue"
+cause = "mir::Ty: validation::Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:30:24: 30:33>::eq"
+kappa = "ee9f2e3c3913ac6ef2ad67477821112fdd9350e053b6a2af13c2cb6ccfb96ad0"
+embedded = "6086ca839ac41a9f2aa17ffd9a3a023829c0b4b3f1fd668cb5687dfa9bb3a2c8"
+status = "residue"
+cause = "mir::Ty: Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::<impl at src/validation.rs:30:35: 30:37>::assert_fields_are_eq"
+kappa = "ce2fb03e0d4bc18867c191b9d56dcd45007088a86ab4032f868f1a95c1487196"
+embedded = "d55f3572e22105a5b05898e3197c104b9fa94f501cedc7d3b873ca74a65d8ce5"
+status = "residue"
+cause = "mir::Ty: Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::BorrowedCowIfPossible::borrow"
+kappa = "4dd59b6ad3d293ebaa21f31a5da75915c8fabf94d870a6df95b518deb3b37f61"
+embedded = "a385bf816589e6313de19ea727a4ae0eb3f78ce673478e2069b07957c69ab9e2"
+status = "residue"
+cause = "mir::Ty: BorrowedCowIfPossible<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::TryParse::deserialize"
+kappa = "1f588907f9aceb1166ac643c03912115265fc1283463effdea254959793298ef"
+at = "D=u32, T=u32"
+embedded = "7b6f196fee200e2b2f5a2a69ca58bc1e343c2b2cdce1b881da937161f5ecdbdb"
+status = "residue"
+cause = "mir::Ty: validation::TryParse<u32>"
+
+[[fn]]
+path = "jsonwebtoken::validation::Validation::default"
+kappa = "f4579bfd73a3f9ceb55de80a9d97e30da6a0f02cff39af939d28d604e7930371"
+embedded = "c1a22c8706c4487b5a5b94521685c1b3650df36a02dd8a601e38aa1623b12fb3"
+status = "residue"
+cause = "mir::Ty: validation::Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::Validation::new"
+kappa = "9b0e4f1bbcd2df10f9ae981b5d945a811c9b78023e74acdab89bdf547338f4e1"
+embedded = "1a9934cc4fdcee07277e51f3960e4ca71a2d7e754c2e691ea5206e5f7504fb1d"
+status = "residue"
+cause = "mir::Ty: validation::Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::Validation::new_for_family"
+kappa = "0be6571e74615c666a01f692b9d2de88fe420acd3537e3cbc272ee4b7c6b67a3"
+embedded = "7695b74c332b8ee604e058d2f8c27bfc3c536cad4f73503bc9c388adf4643db8"
+status = "residue"
+cause = "mir::Ty: validation::Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::Validation::new_impl"
+kappa = "87aca83ff172c63f407978ab2aa3e39b518629d92b7274e8c18d7a011cf281f6"
+embedded = "b931ed7ecb2f124aaac61a1ed4c38d596c188c85ce20bd21575eb57a146290ed"
+status = "residue"
+cause = "mir::Ty: validation::Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::Validation::set_audience"
+kappa = "0038d8ece25d991057b8665a842b887d9ed2003b8a4a3e0b46a434ef8ade3e09"
+at = "T=u32"
+embedded = "19e0b5c88829a42f7a10bfa90b8e03b688cfefa5ae244e7f415bdccbd02adcfe"
+status = "residue"
+cause = "mir::Ty: Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::Validation::set_issuer"
+kappa = "06e74d36b09ce7d0485ef11ed16364b0d910a14549e081c2689212399b9b7196"
+at = "T=u32"
+embedded = "fb98fc6b9464b42f78c9e0f90eb66993e853f9b95349b2e3f939af91043c991a"
+status = "residue"
+cause = "mir::Ty: Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::Validation::set_required_spec_claims"
+kappa = "1aaff2508d6d02a58f6c4de00b4fe7d697c2c9e4c7fc18b9c02a9ba6c8305225"
+at = "T=u32"
+embedded = "a5b0c2bc01dda3a8699ad37e0959fc7b2dd654e78c3398e7dfd6ca32f0f06cfb"
+status = "residue"
+cause = "mir::Ty: Validation"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize"
+kappa = "6e6f245525efe451151f9554fa7fdcbabff65af033918d4a283a9acab3b31d12"
+embedded = "68c3743a9ba34d4e6103ec8fc8febe6a6be3e0827f092309b209b8c42ae5416e"
+status = "residue"
+cause = "mir::Ty: validation::ClaimsForValidation<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::deserialize"
+kappa = "927d80372149bf63feee50366179bf7eed466d374eb2d516b7e0d24ac140c58b"
+embedded = "78c70dd6d12beaa17f9d844914837babd65cfad35095bab514fd6aed50375b26"
+status = "residue"
+cause = "mir::Ty: validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::__Field"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::expecting"
+kappa = "86e03716030e498f91192242d580741f9d66c5c048d3d03d8ec87dc56a9f95f0"
+embedded = "f233de33a7e26c1c8763514c1e1ac3705deb8f3d4a6f4e6a17b69bfd64fd13b6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::expecting#2"
+kappa = "019fcf6b1b85c1f275fc14a66e014b49e233c03eea100e79a349ffacb2d645c4"
+embedded = "00c11eec71a5e60e0c6b25bb4d79024d17c8f1bb6a0cfe7eb8a5e0f109bfc161"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_bytes"
+kappa = "352abc5ec61a5e946e444e6664868f6c7856e47873f33e3fdf13436b8dbdd255"
+embedded = "7a3888b7b9bc9e8477dbaf845931bbfbe458494f361bf6aa0e5cb5a0d4968829"
+status = "residue"
+cause = "mir::Ty: validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::__Field"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_map"
+kappa = "3fbb586b9dccba57e0cc7bf4279a6beada6df2400f5597d991cd7b2e6a5d1170"
+embedded = "c7a08a286abc580ff9ef8f0ed183c8c852e96cfda6e492f11d154e4bb61bced1"
+status = "residue"
+cause = "mir::Ty: validation::ClaimsForValidation<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_map::<impl at src/validation.rs:182:10: 182:21>::deserialize"
+kappa = "6975d609407705e96c5d6cafa3b380aca124dce14c6d1e9cc12f917e69d87d2b"
+embedded = "9424235da5fd8d689ad96eb2a9be233511412ca83ee1ee66cc94472dd818fe54"
+status = "residue"
+cause = "mir::Ty: <validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::__Visitor<'de, 'a> as algorithms::_::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_, '_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_map::<impl at src/validation.rs:182:10: 182:21>::deserialize#2"
+kappa = "6975d609407705e96c5d6cafa3b380aca124dce14c6d1e9cc12f917e69d87d2b"
+embedded = "9424235da5fd8d689ad96eb2a9be233511412ca83ee1ee66cc94472dd818fe54"
+status = "residue"
+cause = "mir::Ty: <validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::__Visitor<'de, 'a> as algorithms::_::_serde::de::Visitor<'de>>::visit_map::__DeserializeWith<'_, '_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_seq"
+kappa = "6be56e3637fb886baa025d20266eb124f96dcda042f08a84f07a2ed36eda0edb"
+embedded = "01322a7302473dfe9fcf466c0f0ee6ae145388bcd8e5a2f0335f98437bce9e4c"
+status = "residue"
+cause = "mir::Ty: validation::ClaimsForValidation<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_seq::<impl at src/validation.rs:182:10: 182:21>::deserialize"
+kappa = "ff82c54d07b37babb2a77b89454fcfee33084d81b1466e5c799e03d862246aef"
+embedded = "fa614182304cae6c9ca83c331ab8119ddd80de193ef6d2a57f388696c357b043"
+status = "residue"
+cause = "mir::Ty: <validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::__Visitor<'de, 'a> as algorithms::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_, '_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_seq::<impl at src/validation.rs:182:10: 182:21>::deserialize#2"
+kappa = "ff82c54d07b37babb2a77b89454fcfee33084d81b1466e5c799e03d862246aef"
+embedded = "fa614182304cae6c9ca83c331ab8119ddd80de193ef6d2a57f388696c357b043"
+status = "residue"
+cause = "mir::Ty: <validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::__Visitor<'de, 'a> as algorithms::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_, '_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_str"
+kappa = "626914a2f2e73d6049e8d176849a7628c0757526bc62d7f6dced96fadad42194"
+embedded = "7b9bdcfc6dbd6e0e33886faa3861aff162f3a8300769234e08bb32ef0f86477f"
+status = "residue"
+cause = "mir::Ty: validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::__Field"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::<impl at src/validation.rs:182:10: 182:21>::visit_u64"
+kappa = "b54b7e6f38092f7446a5455de37899977df42441fed1580f3c78c5f4441687af"
+embedded = "7bddc1847636277dd0477f56af8124fe591dbe4ede2ee5f6475fbec83eaad546"
+status = "residue"
+cause = "mir::Ty: validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::__Field"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:182:10: 182:21>::deserialize::FIELDS"
+kappa = "5a58909090ac8df410a227df40afc541bd3bd3654ccc28f8c3eb19220ce759af"
+embedded = "58709512b0856383be2a0a93f64ed123e5315d301f864eabbe4cc3bff5013f6f"
+status = "residue"
+cause = "mir::Operand::Constant: validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::ClaimsForValidation<'a>>::deserialize::FIELDS::promoted[0]"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:216:10: 216:21>::deserialize"
+kappa = "e94c578b4ee164265f3f753a9ac1aba742b6eba1e41c42bec56960170f44a536"
+embedded = "a833bc28252ec642216c37041734c80c883e7ed426e0c80f3b081be010ab2402"
+status = "residue"
+cause = "mir::Ty: validation::Audience<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:223:10: 223:21>::deserialize"
+kappa = "a9dc98ab199f7c7d683daca91a00fb8535f7f9e5be0b3d67950feb215c233976"
+embedded = "2fda18e77a2b5fdcef1d2f208e7b3a5d55bfcc49f9133e09c5761dcb66a46798"
+status = "residue"
+cause = "mir::Ty: validation::Issuer<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:233:10: 233:21>::deserialize"
+kappa = "f98eb6e666664ae531a11b5e43f00fe26c88eab375cebebb80b67c7bba8741a6"
+embedded = "6039f4fab507874c69b1158cf3a5f8ca36544986a323a400201b02134346f419"
+status = "residue"
+cause = "mir::Ty: validation::BorrowedCowIfPossible<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:233:10: 233:21>::deserialize::<impl at src/validation.rs:233:10: 233:21>::expecting"
+kappa = "727281a86d7efb0516dff323698fd4f18414e3af886a9927556036cf5c33747b"
+embedded = "b262563f080b3513bed542f0e97ae0b264200c9f5fda113945a9cb54a561c2a1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:233:10: 233:21>::deserialize::<impl at src/validation.rs:233:10: 233:21>::visit_newtype_struct"
+kappa = "a5ed719d62f948cdd9e2b4f0cd109a8c0233a58cc4476ce2bf4efc6de47562d6"
+embedded = "1492ad287fc3e4920277cf0375b8041ceac8d91c997cacefcfcd08f93c9d16c7"
+status = "residue"
+cause = "mir::Ty: validation::BorrowedCowIfPossible<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:233:10: 233:21>::deserialize::<impl at src/validation.rs:233:10: 233:21>::visit_seq"
+kappa = "35ccc216f92d6d04b591b097f95e1b781f5ec6166c49efaf0967b13bf8a35818"
+embedded = "b8bfa7fbff8f7c0939a78ea8b1340e75435dc7cae497394164f093962102f8a4"
+status = "residue"
+cause = "mir::Ty: validation::BorrowedCowIfPossible<'_>"
+
+[[fn]]
+path = "jsonwebtoken::validation::_::<impl at src/validation.rs:233:10: 233:21>::deserialize::<impl at src/validation.rs:233:10: 233:21>::visit_seq::<impl at src/validation.rs:233:10: 233:21>::deserialize"
+kappa = "e98f399def1d322c731ee7a173ce7ca9d750bb631f33628223133ad932191278"
+embedded = "c5dcc2fdec3423340bbc17a756c8ff0fcea8174542ed53f3c6ca99863309978f"
+status = "residue"
+cause = "mir::Ty: <validation::_::<impl algorithms::_::_serde::Deserialize<'de> for validation::BorrowedCowIfPossible<'a>>::deserialize::__Visitor<'de, 'a> as algorithms::_::_serde::de::Visitor<'de>>::visit_seq::__DeserializeWith<'_, '_>"
+

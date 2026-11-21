@@ -1,0 +1,68 @@
+# The windows-implement register (written by `uorust crate windows-implement@0.100.0`; do not edit): every body of
+# windows-implement's MIR at windows-implement 0.100.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 26
+translated = 0
+residue = 26
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.gen]
+bodies = 14
+translated = 0
+residue = 14
+
+[embedding]
+bodies = 26
+embedded = 26
+evaluable = 26
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: syn::Item"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::ImplItem"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Vec as std::default::Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::ImplItemFn"
+bodies = 1

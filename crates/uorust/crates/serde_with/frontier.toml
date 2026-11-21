@@ -1,0 +1,922 @@
+# The serde_with register (written by `uorust crate serde_with@3.24.0`; do not edit): every body of
+# serde_with's MIR at serde_with 3.24.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1580
+translated = 13
+residue = 1567
+
+[module.content]
+bodies = 348
+translated = 0
+residue = 348
+
+[module.crate]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.de]
+bodies = 382
+translated = 0
+residue = 382
+
+[module.duplicate_key_impls]
+bodies = 16
+translated = 5
+residue = 11
+
+[module.enum_map]
+bodies = 145
+translated = 0
+residue = 145
+
+[module.flatten_maybe]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.formats]
+bodies = 6
+translated = 6
+residue = 0
+
+[module.key_value_map]
+bodies = 156
+translated = 0
+residue = 156
+
+[module.rust]
+bodies = 21
+translated = 0
+residue = 21
+
+[module.ser]
+bodies = 197
+translated = 0
+residue = 197
+
+[module.utils]
+bodies = 70
+translated = 2
+residue = 68
+
+[module.with_prefix]
+bodies = 107
+translated = 0
+residue = 107
+
+[module.with_suffix]
+bodies = 107
+translated = 0
+residue = 107
+
+[embedding]
+bodies = 1558
+embedded = 1558
+evaluable = 1554
+blocked = 4
+
+[[construct]]
+construct = "Rvalue::Use"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 93
+
+[[cause]]
+cause = "mir::Ty: WithPrefix<'_"
+bodies = 63
+
+[[cause]]
+cause = "mir::Ty: WithSuffix<'_"
+bodies = 63
+
+[[cause]]
+cause = "mir::Ty: core::time::Duration"
+bodies = 49
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 49
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: enum_map::EnumDeserializer<u32>"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: WithPrefixOption<'_"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: WithSuffixOption<'_"
+bodies = 35
+
+[[cause]]
+cause = "mir::Ty: ContentDeserializer<'_"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: ContentRefDeserializer<'_"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: content::de::Content<'_>"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: content::de::MapDeserializer<'_"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: MapRefDeserializer<'_"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: content::de::SeqDeserializer<'_"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: enum_map::SeqDeserializer<u32>"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: key_value_map::SeqDeserializer<u32>"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: SeqRefDeserializer<'_"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: content::ser::Content"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: MapKeyDeserializer<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: FlatMapDeserializer<'_"
+bodies = 29
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Serializer"
+bodies = 28
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: ser::impls::serialize_as::{closure#0}: type outside the lift: ser::SerializeAsWrap<'_"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: utils::duration::DurationSigned"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: enum_map::SeqAsMapSerializer<u32>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: key_value_map::SeqAsMapSerializer<u32>"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: ElementAsKeyValueSerializer<'_"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: EnumAsMapElementSerializer<'_"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: de::DeserializeAsWrap<u32"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: serde_core::ser::Impossible<u32"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: <flatten_maybe::FlattenedMaybe<u32> as serde_core::de::DeserializeSeed<'de>>::deserialize::Field<'_>"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_as::MapVisitor<u32"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_as::U8Visitor"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: duration::DurationSigned"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: E"
+bodies = 11
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Deserializer"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ser::SerializeAsWrap<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::BinaryHeap<"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::LinkedList<"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::VecDeque<"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<"
+bodies = 9
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Serialize"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: serde_core::ser::Impossible<"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Deserialize"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: M"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::BinaryHeap<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::LinkedList<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::VecDeque<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::marker::PhantomData<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: BytesOrStringVisitor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: U"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: VecVisitor"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_as::ArrayVisitor<#usize_M>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_as::SeqVisitor<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: duration::Sign"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SerializeVariant<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: VariantDeserializer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: VariantRefDeserializer<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: alloc::rc::Rc<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: alloc::sync::Arc<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <alloc::collections::BTreeMap as ser::SerializeAs>::serialize_as"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: de::impls::deserialize_as: serde_with's MIR stops at type outside the lift: <u32 as serde_core::Deserializer<'_>>::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ser::impls::serialize_as: serde_with's MIR stops at type outside the lift: <u32 as serde_core::Serializer>::Ok"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: KeyValueMapSerializer<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MapSerialize<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::btree_map::Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::option::Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: enum_map::SerializeSeqElement<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: key_value_map::SerializeSeqElement<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: serde_core::de::Unexpected<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FlatMapAccess<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FlatStructAccess<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyValueSeqSerializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyValueStructSerializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyValueTupleSerializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: KeyValueTupleStructSerializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MapAccessWrapper<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OptionStringEmptyNone<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VisitorWrapper<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alloc::rc::Weak<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: alloc::sync::Weak<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: content::de::ContentDeserializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: content::de::ContentRefDeserializer<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: content::ser::ContentSerializer<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::cell::Cell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::cell::RefCell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::Bound<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::pin::Pin<alloc::boxed::Box<u32>>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: enum_map::SerializeVariant<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ser::impls::serialize_as::DisplayWithSeparator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::Mutex<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::RwLock<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::BufWriter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::duration::Sign"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: with_prefix::WithPrefix<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: with_suffix::WithSuffix<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TryInto"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: rust::unwrap_or_skip::serialize::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item ser::SerializeAsWrap::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&[u8] as serde_core::Deserialize>::deserialize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as de::DeserializeAs>::deserialize_as"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <T as ser::SerializeAs>::serialize_as"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <TAs as ser::SerializeAs>::serialize_as"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <alloc::vec::Vec as serde_core::Serialize>::serialize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <core::option::Option as serde_core::Deserialize>::deserialize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as From>::from"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: alloc::collections::BTreeSet::replace"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: option::Option::is_none: std's MIR stops at mir::TerminatorKind::Call: Option::is_some"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: utils::size_hint_cautious: serde_with's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <&u32 as core::convert::TryInto<u32>>::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EnumMapVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlattenedMaybe<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlattenedMaybeVisitor<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyValueMapDeserialize<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyValueSeqDeserialize<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyValueStructDeserialize<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyValueTupleDeserialize<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: KeyValueTupleStructDeserialize<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapFirstKeyWinsVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapPreventDuplicatesVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapSkipErrorVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SEPARATOR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeedStructVariant<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeedTupleVariant<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeqAccessWrapper<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeqIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeqSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SetLastValueWinsVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SetPreventDuplicatesVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StructSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StructVariantSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TAs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TupleSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TupleStructSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TupleVariantSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alloc::collections::btree_map::Entry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::de::EnumDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::de::MapRefDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::de::SeqRefDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::de::VariantDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::de::VariantRefDeserializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::ser::MapSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::ser::SeqSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::ser::StructSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::ser::StructVariantSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::ser::TupleSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::ser::TupleStructSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: content::ser::TupleVariantSerialize<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::pin::Pin<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::pin::Pin<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_as::BytesOrStringVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_as::Helper<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::impls::deserialize_as::VecVisitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::skip_error::GoodOrError<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::skip_error::deserialize_as::SeqVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn serde_core::de::Expected"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl serde_core::de::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_value_map::KeyValueMapSerializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_value_map::KeyValueSeqSerializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_value_map::KeyValueStructSerializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_value_map::KeyValueTupleSerializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: key_value_map::KeyValueTupleStructSerializer<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: maps_duplicate_key_is_error::deserialize::MapVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: maps_first_key_wins::deserialize::MapVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_core::de::IgnoredAny"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sets_duplicate_value_is_error::deserialize::SeqVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sets_last_value_wins::deserialize::SeqVisitor<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::MapIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::SeqIter<'_"
+bodies = 1

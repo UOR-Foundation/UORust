@@ -1,0 +1,2815 @@
+[[fn]]
+path = "zip::COMMON_FILTER_ROOT_FILES"
+kappa = "536beb2fc6d630d1c77d3d67208f41d15c1ddd9a0ea36b35cdd78a3be2f93dd2"
+embedded = "e7ba1c1c73de628e707b52bb977dac4ba3080dac6664a2fb692e9ea2552e1d46"
+status = "translated"
+digest = "7927e4a87be786482fbce6278935ae6a9f1b08dff1cceec7e74778f3ca66168e"
+
+[[fn]]
+path = "zip::EOCD_FIXED_LEN"
+kappa = "be4ca5aaf712f6976bf652b7075465c53e2df31c03f988b97da03c0d278b3c77"
+embedded = "fd3b9f4df0e50462db86f41b7443473e191b42649f2d3aff03a56318e7deaf0e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "zip::EOCD_SIGNATURE"
+kappa = "375e6710feb64806df27fdfd55c1044f376fbda83ed96f62582034d581121db6"
+embedded = "036408fc89ea9ae8f73f6055ccc576ddf62660d0e43b3ecea1eec9a00ab4e979"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::CENTRAL_DIRECTORY_END_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::EXTRACT_BUFFER_SIZE"
+kappa = "15d0fead20d3e9d455035cc7eadb15c24b0ea98d30f876b26e6edb748980ed64"
+embedded = "57c27d6864d10ad23c5ac4f785d987681e79d21d291c8473c559046f7287db25"
+status = "translated"
+digest = "9508f8d693390d5ec45b1c7a1d0f7c977f16c88b9bb325c75b2c77bfb44ebc00"
+
+[[fn]]
+path = "zip::FIXED_HEADER_LEN"
+kappa = "bd94aebb3daa1f64b7f7d6f1a3444202fde7f8412d9b40e7543745474b8881ae"
+embedded = "9d9d75baed28a4f5cba2fba8f928a22a80bf36c8988ea6d1d43fc2ae526fcad7"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "zip::MAX_PREALLOCATE_LEN"
+kappa = "dadffc62cd008a32389f583f9d2ca871a468f16c6a5dcccb4139484bffc8cf3b"
+embedded = "0bae8dc23f3619eec8e84dc3fcfa044e5cb240f95ff98baa680372190c8f52a7"
+status = "translated"
+digest = "362f7437df6eeb6c8ebf89995eeb494ab0f985fbf798e166138c13904d699f13"
+
+[[fn]]
+path = "zip::central_header_to_zip_file_inner"
+kappa = "2fa0d00a19af8340b7551ad68497938ba3e1faa9a6434b0e2168eb4634acafed"
+at = "R=u32"
+embedded = "68ec43622fbdf93985c3e490b58c3a6143ba663ca3b0af90e8c5442dea8e2774"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:12:10: 12:15>::fmt"
+kappa = "2d4d512f11d7f7762dd78a20afbeaec8bebed6c95f0a946f7cb3c4d64e32ca1b"
+embedded = "56609cc0342a9ab595e0805f81d732c2422ccc3df5a763f0d7cbd27fb318d9bd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:12:17: 12:24>::default"
+kappa = "af59c0d7d9b4f6e41773788cc5634c30667d3171d91e8fb526a7301b7f671bfd"
+embedded = "f208e3df1af4644d71025b3e3cd456b3b5e2b365703ba765db007466a955d5b4"
+status = "residue"
+cause = "mir::Ty: read::config::ArchiveOffset"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:12:26: 12:31>::clone"
+kappa = "a2de31f805a24fcc16ee2821e083ca2b7c13d5338cb6fd8d892a82cb1ea303f1"
+embedded = "dd088d71387fecf77d6055380c013eed7c458a4d6d8fe52455ea3fb50eb5c173"
+status = "residue"
+cause = "mir::Ty: read::config::ArchiveOffset"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:12:39: 12:48>::eq"
+kappa = "c286a9723b6113cd14e7566d72da5e4862571958d2071d72e16cebdbbef1a10c"
+embedded = "4661e419e742cc7c8dabe5bead5069d2a2448d476390dde025ad4cdad2b3d82b"
+status = "residue"
+cause = "mir::Ty: ArchiveOffset"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:12:50: 12:52>::assert_fields_are_eq"
+kappa = "58611d2f353948aa00d15ab04dec9d55705a912de428e04e75c62dd0dd64e760"
+embedded = "01ebad95ef1602004157c76026110a44a66dbfe69a6bf080306e2895e14e2326"
+status = "residue"
+cause = "mir::Ty: ArchiveOffset"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:12:54: 12:58>::hash"
+kappa = "fdad266a575e5337513303b87aeefe441c77903f3df4e83459e73ede78db1a69"
+embedded = "f1015ba70790afa651c5fa32b322904d08986fcfa9f7da279f9247db9fb0efaf"
+status = "residue"
+cause = "mir::Ty: ArchiveOffset"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:5:10: 5:15>::fmt"
+kappa = "27ef26d9606926e3245e5904d3cd96a85d72622afca2fee39dd1fb2dd1427005"
+embedded = "f5ea0de16985f76f50f6f9fa56a21e88585c3c5e1413c8198a9d0a55a8ecc15a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:5:17: 5:24>::default"
+kappa = "c5eeb278d2021cefbe9d6d8740d001f55e81f79cc6486e2d190690cd2a04b503"
+embedded = "3d59b16a9548bf3a500364f8300842d9b05109d86ac97ac6bc1755a993844af7"
+status = "residue"
+cause = "mir::Ty: read::config::Config"
+
+[[fn]]
+path = "zip::config::<impl at src/read/config.rs:5:26: 5:31>::clone"
+kappa = "4f944ff8ba6b723745274c21a8128ccc1330852a5e76f9fe88e725afc6980b16"
+embedded = "afa38a4de3214ff8874ae96e5671acbc73cb83dabdc1a2e0394bd2f8d703c149"
+status = "residue"
+cause = "mir::Ty: read::config::Config"
+
+[[fn]]
+path = "zip::contains_unlisted_local_header_or_extra_eocd"
+kappa = "1c9083e868f16697812af260033e93ad55999d26350ed788e90aff0d50da2ad6"
+at = "R=u32"
+embedded = "8a92025e909871e65f6b4a8127dd9c09c265e5aa0fd0f9af76ba50524946c532"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::contains_unlisted_local_header_or_extra_eocd::LOCAL_FILE_HEADER_SIGNATURE"
+kappa = "003da5b16934178a48f660ccba6c03697d910c7b99cc6fe28044ba2a887b123c"
+embedded = "bacbb92c0148e3f18d4518510ca3322a25eb88dafba6f2869e0885ba543ec060"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::LOCAL_FILE_HEADER_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::copy_into"
+kappa = "98500ca99a2fa669e18a2a5ef96805397aa88822d1f3bf90efb9568aea101c98"
+at = "R=u32, W=u32"
+embedded = "b5a1e3522d52db8f8b22ab36afe8f1ce8493727172d4a3b8f9cd52f38b8b1088"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::create_outfile"
+kappa = "df4deee24562814b3ee2b49811200f621c0c848385c06cd0db7625b9469c673d"
+embedded = "1937135cdd5411f9ad988cd30d69ed9c8d6cdcbba732dbf5b4c53a69e794e551"
+status = "residue"
+cause = "mir::Ty: std::fs::File"
+
+[[fn]]
+path = "zip::create_staging_dir"
+kappa = "a49fc0e0758eb2f447921995c77756929cd31f8983e40d816195fc7bf41b961f"
+embedded = "c2b707b77c7fecedb526eba479a7bd3366cb78d4a1e81b850691bf6857e2e4cb"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::extract::<impl at src/read/extract.rs:53:10: 53:15>::fmt"
+kappa = "17b2f34795ab2cf0a53ed644134cec8426cce3d8e77fcf94535af1e510a2bf50"
+embedded = "4ebe62031864aa0d2ffc09f00fa8879648b1c729951b5cc751afe635cae48a0c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::extract::<impl at src/read/extract.rs:53:17: 53:24>::default"
+kappa = "486b1acbe2f51d2c64368290d8af20f3aaca9ffe7a2a7ec9622af8353ec7cf38"
+embedded = "7c75eaf98d937d1b5961343960233fc7d4d08484feb7726caa9e0ebd9a82c380"
+status = "residue"
+cause = "mir::Ty: read::extract::SymlinkExtractAction"
+
+[[fn]]
+path = "zip::extract::<impl at src/read/extract.rs:53:32: 53:37>::clone"
+kappa = "19030baf699c252b6163d721cb6c82c2328316471f7fe73478b0511ed15f7c4a"
+embedded = "868646cf0e1fa0c973462407c7750e2b7b71f27975bdf0aef4796ed87fd44e9c"
+status = "residue"
+cause = "mir::Ty: read::extract::SymlinkExtractAction"
+
+[[fn]]
+path = "zip::extract::<impl at src/read/extract.rs:664:10: 664:17>::default"
+kappa = "3fea8456e449811cc6550ddc5df9c4ab8ed670b20274f799322c3fce2c62cb00"
+embedded = "31e5eadcaf2a502bb676755ce4b46c555d4d93b2a337b391453decdd14552660"
+status = "residue"
+cause = "mir::Ty: read::extract::UnixFileModes"
+
+[[fn]]
+path = "zip::extract::<impl at src/read/extract.rs:664:19: 664:24>::fmt"
+kappa = "bae7968d12f6881c8869283f6ebb211eb4be5115704d3b958e10dcd1073297a3"
+embedded = "7b8b591ffe069e1b62d2c8ab0637cd6de3d33fb32224c6df0c7610cea9aaa1ad"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::extract::ExtractOptions::default"
+kappa = "89561c81a53d6bcbf1f3830242df4b6c68118f86d86c02c29a9b0e653bcdf4e0"
+embedded = "4cda98cb788aac20c4113d6f6a352ad7e75b9b16e680bc07072a05cb8e6adb05"
+status = "residue"
+cause = "mir::Ty: for<'a> fn(&'a std::path::Path) -> bool"
+
+[[fn]]
+path = "zip::extract::ExtractOptions::enforce_header_consistency"
+kappa = "2860b2f3881994f0065ad66595b3cdd9ac07cba3f4874253bc69bda970abd24e"
+at = "F=u32"
+embedded = "3e564a8132e21ed0f8fd0ffc4f21bf4a29c253b49ad36a858e26a235816cc3a1"
+status = "residue"
+cause = "mir::Ty: read::extract::ExtractOptions<u32>"
+
+[[fn]]
+path = "zip::extract::ExtractOptions::fmt"
+kappa = "ffacde2f7c6b7601bb18f765ac94e272869c10497321f2110184e6f26959ef41"
+at = "F=u32"
+embedded = "001f8abd7c6e86fef4d403bb933f11684ec71e98656006e5420ea3a03aab57a9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::extract::ExtractOptions::symlink_action"
+kappa = "4890572eef99a1014901fdd5167e9508660a33fc66cbfafebf171961d2568b0e"
+at = "F=u32"
+embedded = "c017bec91a662e3f626c49bbc7fe65fe62c9da4db6f6cb9dd9f3e72b383387b3"
+status = "residue"
+cause = "mir::Ty: read::extract::ExtractOptions<u32>"
+
+[[fn]]
+path = "zip::extract::ExtractOptions::with_root_dir_filter"
+kappa = "e2d3e8da2f01f01446548e566156b50adad570b667ae44ac3f015dbddfccb8b5"
+at = "G=u32"
+embedded = "8defd5b37efb986a4ced83421fca797528e4214c9c7c3753974d854a6d23108e"
+status = "residue"
+cause = "mir::Ty: read::extract::ExtractOptions<u32>"
+
+[[fn]]
+path = "zip::extract::ExtractOptions::with_size_limit"
+kappa = "3ced1b471f8f273fb3276615a3380094c50a18b4a4b6b8ffa884c44421e9c7c5"
+at = "F=u32"
+embedded = "3a8a5ed65c016b338a86a6d951af41b88aa3ae0bb8c52c8bb2d7a99eaff6ac89"
+status = "residue"
+cause = "mir::Ty: read::extract::ExtractOptions<u32>"
+
+[[fn]]
+path = "zip::extract::UnixFileModes::add_mode"
+kappa = "a3debb84336de6cad56be54f9688a976461ebebe2e7960e1e75b3fc55cce0eb2"
+embedded = "d770ef6322153307c17d5d330182d17f08fd073eaa784ab2ae6d465c9c71e01f"
+status = "residue"
+cause = "mir::Ty: UnixFileModes"
+
+[[fn]]
+path = "zip::extract::UnixFileModes::all_perms_with_children_first"
+kappa = "2cac6f25f9daa745b6c729b3dfdfe91cf4a170ebcbb0487236ce93b75b1938ff"
+embedded = "91f00135f1e7748e0c560dbd5895c2d6e11da38c939ae65ccc2c0163e8eaf878"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::extract::ZipArchive::extract"
+kappa = "ec732ba4d1004f7ac087f08a32f09d0148b01f8296c852834132f3c719b03c84"
+at = "P=u32, R=u32"
+embedded = "f274988453d3793c6e8db9535a1f50191553d3bddc7d34c3a6a7f8efe0d6b7d2"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::extract::ZipArchive::extract_internal"
+kappa = "dd1b7cafadb6fea0a886b6e39b0be2665999658c834029a5d43ffe95ad460dca"
+at = "P=u32, R=u32"
+embedded = "49bf035a5f11d3add2c27be9b9eebe3a3441b72c9d421917a5daf5b4e2ef64d5"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::extract::ZipArchive::extract_unwrapped_root_dir"
+kappa = "78b9061e265b62531f8d0a8db22415077608e9461d8a4225cb6aa1c377227ed6"
+at = "P=u32, R=u32"
+embedded = "7261f1e56fb3ba3f8ff24d110d30b76d22242198d1bff25dc04b13cfcde5ae6a"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::extract::ZipArchive::extract_with_options"
+kappa = "22f528c2f42a8d13859c13e64a1288ca4b2575a9c469ebf86403355e839562e6"
+at = "P=u32, R=u32"
+embedded = "386cbca11771631e5b893615c5f55e8466b9fc9a19d1de728b5a529b62293c64"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::extract::ZipArchive::pre_extract_checks"
+kappa = "f1a97a445515f3e02c2dcc8979be5e7fcb68b32229930764a3abe5f245758a42"
+at = "R=u32"
+embedded = "38835292b092384eea37d64e0ba1c049d6996584ccbd55335ac1054bf39ccbb5"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::file_extension"
+kappa = "406587cff7401fd3ce453c0dc59d0814060412f80405eb85eaa93e32253896ae"
+embedded = "be90963fb5bf77ebcf25fd4b6c7233d2b7064d1de46effb293eec773e8916006"
+status = "residue"
+cause = "mir::Ty: typed_path::Utf8WindowsEncoding"
+
+[[fn]]
+path = "zip::get_upath"
+kappa = "d3b3eb7bd5abaf896fb416cac3254d916956832738f29ac7c198af152f8cf96e"
+embedded = "a3f498269580a051cf49a794dcdcb722463c2baa6e62a9d4e72d745ab4513a8e"
+status = "residue"
+cause = "mir::Ty: ExtraFields"
+
+[[fn]]
+path = "zip::is_ascii_subsequence"
+kappa = "53807bf03434f47256662408c396a358ef789f05b6ffd238ad5bad465875e252"
+embedded = "65f216f4a92a8887761a2c0306273fb5fb55c8b8261b5c7ce286c2b3f6df5638"
+status = "residue"
+cause = "mir::Ty: std::str::Chars<'_>"
+
+[[fn]]
+path = "zip::magic_finder::<impl at src/read/magic_finder.rs:100:10: 100:15>::fmt"
+kappa = "eff750612dbc86f4c33c7ca937bcc180d97a2a6bab4fc59edd4bb69b23ac4213"
+at = "Direction=u32"
+embedded = "6093d632fbce72e88f228d41ea6864834ee720e55c1284edc17dd9e538f1d40a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::magic_finder::<impl at src/read/magic_finder.rs:19:10: 19:15>::fmt"
+kappa = "5bc7d5e7d2a3d0a691b57b5c177c9f36ecbfd740494795d34251bf31a5866dfb"
+embedded = "f92403780a89b1a3434ca8b6202eb9a4c79115a7c2cc3cac2ba63a4784cb1468"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::magic_finder::<impl at src/read/magic_finder.rs:51:10: 51:15>::fmt"
+kappa = "5451f3c3160b642581cfca0d50eba22eb3018f90ad48a78d4b3b039daceff0ae"
+embedded = "ad451d55bf865596c7ed5fcd87cd3719619e12407046083cee84cd8403f9ffc8"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::magic_finder::Backwards::find"
+kappa = "687693f6608bb8fc6124b8cad58f04f4bc015ca2c6effb2c207d0b5d0d0f063e"
+embedded = "9ee38a1a0e8f2672fde4f6f17ce6db60a3e8252d2f67efd5d8a1550c4f484b25"
+status = "residue"
+cause = "mir::Ty: Backwards<'_>"
+
+[[fn]]
+path = "zip::magic_finder::Backwards::move_cursor"
+kappa = "b5f41cc20085180ffbc6024ececf427011cf146b74916c228ab705e27268b5d1"
+embedded = "2fd389913aee1bfbc4d1ced6cf0059f06513b7c665bac73e4df1911131731b8d"
+status = "residue"
+cause = "mir::Ty: Backwards<'_>"
+
+[[fn]]
+path = "zip::magic_finder::Backwards::move_scope"
+kappa = "5155f535d14516abc64ba8171e2c82b27acc78d63321309f989d244be6d39947"
+embedded = "7352cb467053671263a252a4b393d9a7b2592e1a37772ca734003977fe19cb29"
+status = "residue"
+cause = "mir::Ty: Backwards<'_>"
+
+[[fn]]
+path = "zip::magic_finder::Backwards::new"
+kappa = "f3ac22534534748c6f8d0d84d41e7799612c594d0392a50628df52936a3e32e6"
+embedded = "d711f42a353b419fef4333e0b346e12d17d923e2d109685116506c048eeafc0f"
+status = "residue"
+cause = "mir::Ty: read::magic_finder::Backwards<'_>"
+
+[[fn]]
+path = "zip::magic_finder::Backwards::reset_cursor"
+kappa = "f1b9671c80f68e24e112a70a687716fe066803b0058f24a193e942bb9c64a4bd"
+embedded = "61ee9809ac61d91b76e6166dca251b529b6dfdfacbb046f00314d49a4656cd37"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u64 as std::cmp::Ord>::clamp"
+
+[[fn]]
+path = "zip::magic_finder::Backwards::scope_window"
+kappa = "e08526608c54f243b96d7baf89f87146cd9d54c77c1cd9d014267302d58f8c54"
+embedded = "2593462670d223ff37e8bd7fe91d0d25c9c1a6dfa9638aa4b2143b1faf720ae7"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+
+[[fn]]
+path = "zip::magic_finder::Forward::find"
+kappa = "a1202bdcdec934b56b17be526e8ee56cabd5f6f45abadfd18fbe78ece92b3ae1"
+embedded = "0e0b5507fe85bb7b6e7cd9060d887ffb4198bd0f93fd744981df60aa2f57fe2e"
+status = "residue"
+cause = "mir::Ty: Forward<'_>"
+
+[[fn]]
+path = "zip::magic_finder::Forward::move_cursor"
+kappa = "b7bc611b1c317f766035e8e68fae9f1aac59e481223e99847022c42c3aa76972"
+embedded = "3f14f4aa71bfef0ed7cba90dad95cb372d687b4b632f7aa85bf2c67592a69063"
+status = "residue"
+cause = "mir::Ty: Forward<'_>"
+
+[[fn]]
+path = "zip::magic_finder::Forward::move_scope"
+kappa = "6f3f396b0cb9a82a325e34d04dc4e234662487a7e72f0549f582f27895d74a0f"
+embedded = "4509cd9656fad1b48e276314ce0955d48b2722b8f89dd68401b3ab8273f353b8"
+status = "residue"
+cause = "mir::Ty: Forward<'_>"
+
+[[fn]]
+path = "zip::magic_finder::Forward::new"
+kappa = "79edc06a36f738e90736d9e6b25e0150b5ee1de49d2b6468e9f55d93a4c5529a"
+embedded = "e5d13ca54b7d47bc7d7434ec1262733a90deb987a47a8e0ce69db1ff0de85f22"
+status = "residue"
+cause = "mir::Ty: read::magic_finder::Forward<'_>"
+
+[[fn]]
+path = "zip::magic_finder::Forward::reset_cursor"
+kappa = "6758584bae1648226a90c832aa1d3587438bc0ce966685402f9a5b68929bde63"
+embedded = "540d1ee667256fc962f884642ccdd06b38532931b414feb99da5a466082b1a0d"
+status = "translated"
+digest = "fc63f5c78fd1e577f075dd950d1f99de9676e2d72c3760b8921255be485741c7"
+
+[[fn]]
+path = "zip::magic_finder::Forward::scope_window"
+kappa = "eaae4e3daca680e7b1a3ab74418b36712f738e9e0fcff3f5a73aa49c625df9c0"
+embedded = "530bb1ebea08178da776e28f8219947dff306e18c072b9f45786a166590ade24"
+status = "residue"
+cause = "mir::Ty: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "zip::magic_finder::MagicFinder::new"
+kappa = "4420f2abba010d916bee80bbd84d8257f82cfa9cc69598c7e56b252c63c5517d"
+at = "T=u32"
+embedded = "b215ecfc764727b9c1c8bab52f1a77007b934b544095b3eea1f4a4b55ef8eda6"
+status = "residue"
+cause = "mir::Ty: read::magic_finder::MagicFinder<u32>"
+
+[[fn]]
+path = "zip::magic_finder::MagicFinder::next"
+kappa = "7e6772896d242f518e31de777fb467796d58e6da00b58a516de13e87aff9d596"
+at = "R=u32, T=u32"
+embedded = "b82e37806e77210e43ef2ffb34e5f28c584b29b75734745adf58dd6361345fcf"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::make_crypto_reader"
+kappa = "63a4c2b941c6c5b02b6428dab177937ae144109d46c40a48fad95680db3710a7"
+at = "R=u32"
+embedded = "95b017a3549ffc170483661f4de789592ee339717a386947f0cfbfcaa2293ba8"
+status = "residue"
+cause = "mir::Ty: read::readers::CryptoReader<'_, u32>"
+
+[[fn]]
+path = "zip::make_reader"
+kappa = "550cb1647ce8cc9f63fdbe98bbced2a88cbdcd870953c1f6e4c85b4f7d275013"
+at = "R=u32"
+embedded = "ea0ce84302cd935bfdb41b3c49449a7aee8bce05546accd45a19e3116d1a54b2"
+status = "residue"
+cause = "mir::Ty: read::readers::ZipFileReader<'_, u32>"
+
+[[fn]]
+path = "zip::make_symlink"
+kappa = "1a243316ea3c4f96d6a07b845b56c5b53f8ce519e04d13759150f3d0e685cf2a"
+at = "T=u32"
+embedded = "5c8d836d44d7369c7d74bd8f8992c2463dbab9eb0df73022af39d1664ff693ca"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::make_symlink_as_file"
+kappa = "35af04685c54adbd3dbbe5333790f784e3da3d8cfc30939d3ef089e409fbc55f"
+embedded = "baeb18f118599fd59d2255903fbc9efbc5b896c65fa98eaf9ea9a4c323212e5b"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::make_symlink_as_file_utf8"
+kappa = "bd7bf3014b2c7836b440f06afdb1265d56b5fc88cbaaaddb6d05adaab7c7790a"
+embedded = "eb3be66eb4334066bf1a6327b6ba55860c8c52aee061b67b0a4a1ee252cca0b0"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::make_symlink_impl"
+kappa = "6b85342f4551e992edca37d6ac4bdc6c36f250ebba2e9f75b4c5c62662f8054d"
+embedded = "ecbeed16e60088bc9753c4a8194249102a64a7ca0cb7a5c57a5fe15782223bf7"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::make_writable_dir_all"
+kappa = "0091f6df01787c9d0db324caa5b46ac50260e08136e745ab015d9d8be5b068b6"
+at = "T=u32"
+embedded = "5f986600122804d21075be36767956ac340365556a10a81175c78760bd76678e"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::move_staged_entries"
+kappa = "271074e2859e1bfe7d42387f692997bc5eaaede93bfac78130223b9e4e40e647"
+embedded = "3ee5e3aa5d1bc3fc6a2b10ff3f120593ed5f33830008eb4452351f0224404a2a"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::parse_central_directory"
+kappa = "72ffab0c7e8a14726935becbf17b4758b77e577da19a2511793ce397384a7fdc"
+at = "R=u32"
+embedded = "2d23b2092f9e6032f58cc12768e5d4c7296da0ff00c0e1309f0354d4915b3350"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::parse_dos_8_3_alias"
+kappa = "a681121f6284aecc6e51e521d59cd3480ee909a4b69d68c4152c8720dc86d43a"
+embedded = "f6b53aabff012035e3b1672b7f8794a9ffd28996af27d680bb613fafdc894e0e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::rsplit_once"
+
+[[fn]]
+path = "zip::prepare_merge_files"
+kappa = "f70ab1f4638a073fd698db1795f072a78c9288a923ee3b6750e3439e850a3f8e"
+at = "I=u32"
+embedded = "623367eeb5f681a5391da794d4bd077c796f50d50f815f9c05eaa5233fd6c8a7"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:298:10: 298:15>::clone"
+kappa = "322e0706f36563ec82e5c6a06b09dfcd17715ddf9eec54f81ef30b3dd2526613"
+embedded = "21dd60d262e92d8fdc7ef11e2f9b562cff97b7164eb3a48a30d2f137dbe131bd"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:298:17: 298:24>::default"
+kappa = "429ed78ab26cff488df77fbcc7e6937cb6c135ad94bab73bf9c6284c79f22e2e"
+embedded = "885c17216481567aea2a7d8987c36115c03b779e9509cc7962e81deaa7781e4f"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:298:26: 298:31>::fmt"
+kappa = "1f558c73066b6a719fb217b44c530c8faeb862903def0930cd4a009c8d2fa97c"
+embedded = "1fec53a71d7222cf51437bbb6949acce98d6bd2c778b1d097be9a42132792b17"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:396:10: 396:15>::fmt"
+kappa = "c62c74b9ee869b2ebf1347249bc37904a36c8b30ca194238055836a9090131a8"
+embedded = "115d788e9af6e36371e4cba09deea7dcb54978dcc52f1da50c335c45571146b1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:396:23: 396:28>::clone"
+kappa = "90be900e67db1c87985e821cf217343bcd83f4ef0d51b6d148a280bf22da2053"
+embedded = "68ecba4d404874aacf328d2afcc2fd45564768e41891f59be5fff4539fb04d14"
+status = "residue"
+cause = "mir::Ty: read::HeaderDataDescriptorMetadata"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:396:30: 396:39>::eq"
+kappa = "a179e8107aac712652fe2ac77b6bd77d1760720fabda04c74523af3cb9195430"
+embedded = "3d46447a2217bcead76c7cf918d2be81cacc2c1c4297b032ba3b52b1192b06d8"
+status = "residue"
+cause = "mir::Ty: HeaderDataDescriptorMetadata"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:396:41: 396:43>::assert_fields_are_eq"
+kappa = "be41a3d4b488e69c9b22d8cd34b8c8e84c9c5bed0802d34764846b9cc7f374db"
+embedded = "3b19f4d8bef0f90785fe15ce2c28bf2100405d6be97eda0b52a4c72ad056ca93"
+status = "residue"
+cause = "mir::Ty: HeaderDataDescriptorMetadata"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:396:45: 396:52>::default"
+kappa = "552c0b05b7bfefbc3dccdd1871fe19b9d53277f93e8e910b67e313e13a63e797"
+embedded = "423e2bb1da225857a36218c06bb8015e4d10d8e0a9f28afea2cfb2ea73c1f1ef"
+status = "residue"
+cause = "mir::Ty: read::HeaderDataDescriptorMetadata"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:434:10: 434:15>::fmt"
+kappa = "ffa477e999c474cbeba913cfd58cc1ddf781b47330604b100321c7ffc0725222"
+at = "T=u32"
+embedded = "cb7ec3e98fc6238aad09fc5cc632eecc93b1851da272abbb1578ea6f4abdfee6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:434:17: 434:22>::clone"
+kappa = "0dba598f09afd1003025cc5d0bf1b4a4e9de9808cd293995aa638783ab463579"
+at = "T=u32"
+embedded = "ee103ab3fc46d7f812036abd3d5075acf97c0e425b955e870c39af602fcb5741"
+status = "residue"
+cause = "mir::Ty: read::HeaderConsistencyMetadata<u32>"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:434:24: 434:33>::eq"
+kappa = "d5effe86f1bde253674af1562077698cf890ffc919caea5d33b2746ff940eb6d"
+at = "T=u32"
+embedded = "974af02339476ead24ef831447e76d7fa6620ec40d0f2ef1b0c11e36ce6eb466"
+status = "residue"
+cause = "mir::Ty: HeaderConsistencyMetadata<u32>"
+
+[[fn]]
+path = "zip::read::<impl at src/read/mod.rs:45:10: 45:15>::fmt"
+kappa = "df72963718b6be2534364378520ef1cb8ab456fe417e0b6c578bf5e23d553088"
+embedded = "f2b63f16e6fdb69e6a66368ba46e4ff2af6241792ffa7f8e6506a9e3a00da8f4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::read::CentralDirectoryInfo::try_from"
+kappa = "b1d040d44a35a8260d4a3ac6f6f01aabdf2705bd1046f9e452528cff933cc9cf"
+embedded = "da3e3f9cf9f4e94febab0e4b454515868758881b2290aecf31470f803c159309"
+status = "residue"
+cause = "mir::Ty: read::CentralDirectoryInfo"
+
+[[fn]]
+path = "zip::read::HeaderConsistencyMetadata::into_owned"
+kappa = "8520f342338bfddfb49bbcaf683fdc1a8f4ccc30ac415275550a0dda833da0ed"
+embedded = "d998705653edd73487c98376819d9d1b05f7a4fd0aeca60b72199c9def74db90"
+status = "residue"
+cause = "mir::Ty: read::HeaderConsistencyMetadata<std::boxed::Box<[u8]>>"
+
+[[fn]]
+path = "zip::read::HeaderConsistencyMetadata::validate_data_matches"
+kappa = "4efc93bdbd8d9fff0aaadb84f2a485486ee2315c5da7de0074052e63105101ea"
+embedded = "cf1eee31d26d1b57c54aea685570409835c1c1d613a4d13921c8289c91bdaaab"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read::HeaderConsistencyMetadata::validate_identity_matches"
+kappa = "f7ee7fe9ada159268f3df9ddfa55fe1fe60f6680745aa3eac28d0de8081be1af"
+at = "T=u32, T2=u32"
+embedded = "19f74705e245177d5a114d5620ddec43fe0832f310b10f4845b3c71b5979dd6d"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read::HeaderConsistencyMetadata::validate_matches"
+kappa = "94963991047b4d9ecf59cace1640a14f07dd1b5ddda59643b476c4bd1fee5cec"
+at = "T=u32, T2=u32"
+embedded = "61baa3b1872822e5dfb657642aeacc9fa47d830ae357e4ac36f0cfaf5943bc45"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read::HeaderDataDescriptorMetadata::validate_matches"
+kappa = "e808d669db3701867b37335479870aa2f943f4ddc799a86750d223c23d51b290"
+embedded = "bfee8fc36726bf08842e97bb12ab9236bd80a90bbdeb4f5802be03bd066ea780"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read::ZipArchive::merge_contents"
+kappa = "d5a337d0b623e460c4a48d5e76b52b78733c55933caf1b3657381945857bf2b5"
+at = "R=u32, W=u32"
+embedded = "7829e4b564333a95254beca1813bc02f4fe4c6394b18a24d176a6282f6456a68"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::read::ZipReadOptions::enforce_header_consistency"
+kappa = "9ff8ac7b5fb1b7523a74200c1b5abb8d9dffb6afdcb9c277344fe77cf081b170"
+embedded = "76a36c699680457cf14cc85e0948d59ac939577ffe20b9371c9793b8edec4415"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::ZipReadOptions::ignore_crc32"
+kappa = "b02b89c514457c1e0877d214ce9830a68ba5c33d50199b9f4e4c46acded94d7f"
+embedded = "e155f70da18024ec3d84ebc74456e62007ccf2b8ac470f834e1f36afe2b62b86"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::ZipReadOptions::ignore_encryption_flag"
+kappa = "135092df2a40098ee3a32ecea78e9d527e1c90a6c35b1f1700491d67b56cb921"
+embedded = "d18db4701fcf580177db2f4207fb392a24f51c2955b2f0b5116573bca3e7cecf"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::ZipReadOptions::new"
+kappa = "f2987f037394ebf68e077624277abf8e047cc5b12f7ab91b55f205fe4fbca1e1"
+embedded = "1104ac08cdd24afcc2a3e854d74546c09646c1b1907aca345ae894c01de618c6"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::ZipReadOptions::override_compressed_size"
+kappa = "ccd60bc9d4ea32d7d3b090fae4eb97890d87e9adaba7ad79d42f0c98322ae063"
+embedded = "2d3c4e1cf7f68c4d958b48a3ffa5c7efa62b1341a0d45db73e00952db69f2eca"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::ZipReadOptions::override_crc"
+kappa = "5994b78418cbe173eb36b028f6a4cc1b4a394b3d205f77067baf3c5ee76b9202"
+embedded = "02c4da8401d996c206be4bb6b06df20a85a5a050f45a86475d32b82f716cca8b"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::ZipReadOptions::override_uncompressed_size"
+kappa = "c48972af1d21b46d9eb3e30a0a70ace62f9c2d115256777b15cb2c7c0ce98a14"
+embedded = "5a7ef05a23a005b4b2fa837b48b22e500391e436d62008fc8040cc3099bf2a30"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::ZipReadOptions::password"
+kappa = "016984fbf9339621a3f02b7e8d6dea496f3e58c16b93df46f950c10b2c1f91c7"
+embedded = "3145414fd6a353a429c5dc0aa7a0bbc48e18a24c1c0f6ecdceb1f6a1e6e88b15"
+status = "residue"
+cause = "mir::Ty: read::ZipReadOptions<'_>"
+
+[[fn]]
+path = "zip::read::stream::<impl at src/read/stream.rs:27:10: 27:15>::fmt"
+kappa = "8018a5039f7245180b0a9cfa71302b43a6f73da15b64cb084c42324ad4d5f7b1"
+at = "R=u32"
+embedded = "9861fe9ff7f45ec540189921fea77b8c79c64ae082a71d36d403b6c91d93729e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::read::stream::ZipStreamReader::enforce_header_consistency"
+kappa = "efed88fee57b3e122326a67c1f168486ae7b378b3ffa0ca2e9f0a419230422a7"
+at = "R=u32"
+embedded = "7dd188a03203af83864ecf043fa7722f6e456970b2e231a17ad4e5a8d9ad69df"
+status = "residue"
+cause = "mir::Ty: read::stream::ZipStreamReader<u32>"
+
+[[fn]]
+path = "zip::read::stream::ZipStreamReader::extract"
+kappa = "bba9ffbc7e93cd9910402b56ed001b1e44fae5aadf22cf174db3f505d230547a"
+at = "P=u32, R=u32"
+embedded = "e1b6aa73fb8a6513bed7de5618adba71d5668a87a8a778f702ea292788e421b7"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read::stream::ZipStreamReader::extract::Extractor::visit_additional_metadata"
+kappa = "e81cbef165ea78430e71532e373d7f305b084bcb98032c6c0a2a49e764a277b2"
+embedded = "7b7174fafe7ed7943c33edbd22cd31590438b50333a40cf3a37df3fb83283163"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read::stream::ZipStreamReader::extract::Extractor::visit_file"
+kappa = "2227ee09ee6eb368e04543235ee32ba9e34e824f1432762011cac6548e44bad3"
+at = "R=u32"
+embedded = "955a1e30f39795002eb0ac727c11d8800c709c5b4e8b439049f433378dd919e4"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read::stream::ZipStreamReader::new"
+kappa = "2759f29877a553a70cb53951be3be338d9049164a638aa0fda3c1d306da9e020"
+at = "R=u32"
+embedded = "4a67f92e66ee1ec1617c5da344c2a880532526e58681608c15e551b056cb8644"
+status = "residue"
+cause = "mir::Ty: read::stream::ZipStreamReader<u32>"
+
+[[fn]]
+path = "zip::read::stream::ZipStreamReader::visit"
+kappa = "7d0f8d30cfea7bd7c13ec9dbdefaa9d566c426d8e4ddc28472892156b1733681"
+at = "R=u32, V=u32"
+embedded = "42bec3e9b8bb6efdd8a4827dc9bc4cc77e17bfcbe63be3978dc84c0031b1c1d9"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read::stream::ZipStreamReader::visit::CountingReader::read"
+kappa = "4e1349ba094f8e1861bfce54cfb594ce167e1faf0975924e070a981af70d1dd5"
+at = "R=u32"
+embedded = "e64db8634d975f096b8a745510be18d88c1288fa3e58edf6a7e7442fc4a510bf"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::read_variable_length_byte_field"
+kappa = "8f03c5af11e5c81d0bbaa75c6a1dca648f40a35baa8fc01c9af05c5e8f8cf55a"
+at = "R=u32"
+embedded = "233ca436cf3650a6a724e2571dd83ad2f2b881f1481035a800db72ccde72875b"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::read_zipfile_from_stream"
+kappa = "1f723ecea5226638b83c40ce3ca015846f174bb9f2602e62cfd8b384a9b30279"
+at = "R=u32"
+embedded = "0ceb703cb89e03be159ad070802c5919526c0eae0b334cf69c8bb7ea91881d29"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::read_zipfile_from_stream_with_compressed_size"
+kappa = "6e6772b76cc0291eb364cb3e826fe604f71b54fd0fcf5272ea38598a2ebc2db3"
+at = "R=u32"
+embedded = "d0ce0f11b539badda1d0d9e56bca1832a6590ad83830883ba9693ab2dcb66b26"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::read_zipfile_from_stream_with_options"
+kappa = "819d4d5169ddd8c63eb6af56efe7b60531eac5322a9c5a6eaa478d7d07ea6133"
+at = "R=u32"
+embedded = "ce59bfd1bb63ae1895dae767244498a8bb8d11b9ee038c8385add8699f006acc"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::read_zipfile_from_stream_with_options_internal"
+kappa = "16e4b8f6f5e02ad320dadfddb336ee1f30c9431ab941f35e2c69d297387f1410"
+at = "R=u32"
+embedded = "9e748e55d4b9e942589c4e25345be3ca7841a9d9c3e97425a5175a85c9e97de1"
+status = "residue"
+cause = "mir::Ty: read::stream::ReadFromStreamResult<'_, u32>"
+
+[[fn]]
+path = "zip::readers::<impl at src/read/readers.rs:173:10: 173:15>::fmt"
+kappa = "a55729fd307611decf98b932144bfec8cec8da2c1148dc46019010f209ae9a77"
+at = "R=u32"
+embedded = "8d7764fa76672f109557b8a042e8f145a63a15e337c844af84e638f60899a7b7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::readers::CryptoReader::finish"
+kappa = "65a16621cce362388542ea3e66c4284007f3521c7719adb740afdd1b66b00f21"
+at = "R=u32"
+embedded = "1a70a6df043121c5c4305a6a6aa5270d8ed01f556636e0d95afc0f201ff811b7"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::CryptoReader::fmt"
+kappa = "a798ac509d9132d5de571fbef05417effc19e9d9fd812df236772b08f8ff91f0"
+embedded = "432028abd35d58ef7f1ff3248e028b3dcc3805318e7c16f312455d3e2544f32f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::readers::CryptoReader::inner"
+kappa = "30d50932607aed758fa47e64e079997de6b6828aca9b8168ee3d249bfab1e5d6"
+at = "R=u32"
+embedded = "3b870830b4a4526bda914dd5785e9e273e23654eca9f8f47cc5d00257aa48590"
+status = "residue"
+cause = "mir::Ty: std::io::Take<&mut u32>"
+
+[[fn]]
+path = "zip::readers::CryptoReader::into_inner"
+kappa = "f39c500822d0bef4f6f7d0076199786661fb00461e607b5a15b04a0d73d28d64"
+at = "R=u32"
+embedded = "ee1cbd40a0e905cf819efb8b7842726e871b8d652bfd15832aad8877312ddd0a"
+status = "residue"
+cause = "mir::Ty: std::io::Take<&mut u32>"
+
+[[fn]]
+path = "zip::readers::CryptoReader::is_aes"
+kappa = "bc332193748e440d79282fb31231203dd3d4b8a282f33e0a6453e4eb143160c7"
+embedded = "4a84ad99dc6a9cb3b0408193ef135a97559b7a5c07289420898af376c43c8395"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::readers::CryptoReader::read"
+kappa = "4cec55c55a51c9bd06c85e5274f543aab3fdc0251fb7b6c75ac3c1031c3c52a2"
+at = "R=u32"
+embedded = "feed1a6d1f2342347ed6dd2eb73cb0e5b660e37e9c49f1764830d71f47e3dd57"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::CryptoReader::read_to_end"
+kappa = "b0e46a8c8d5d3642d36bf164bf61361bcbb49dbce409f42b339bd969ab0589cb"
+at = "R=u32"
+embedded = "991f5c2265b9352d88e1675e890e87638616cfc1ec249b2ce1263a8e7b45eae5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::CryptoReader::read_to_string"
+kappa = "f6ee34aa3eb732df06f0242a29d018ae5d7dcf472645d887e44dad9525203c67"
+at = "R=u32"
+embedded = "04ec82a4964df1162cab0b276191c9d4161cb72bf5311c934e7b4536d8d211b1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::SeekableTake::new"
+kappa = "60b55d04de883712a70f8a38157b16ef3ca9dcae306444400dd33bf90a2367c5"
+at = "R=u32"
+embedded = "a4fd73d061ec9d61a16f7bb65ef578bcc35f3b0877920eea8fd93f76c9eda64b"
+status = "residue"
+cause = "mir::Ty: read::readers::SeekableTake<'_, u32>"
+
+[[fn]]
+path = "zip::readers::SeekableTake::read"
+kappa = "11b3444f88bcb65cc3849817e51ce888ddbbbe00433d6b300073b067d9ab35bf"
+at = "R=u32"
+embedded = "ac539a18ef567ef50904e7624f61126911ee999256480e797dcdd737d7f8a917"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::SeekableTake::seek"
+kappa = "bad75edaf5fbd678a386bf119dc02f277db6b8078437caff2d1ae22647733d0b"
+at = "R=u32"
+embedded = "7c0e1fb32cf8bfada8a09d64b2224f50745363d70854d9048a18ae37312f70d3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::ZipFileReader::finish_aes"
+kappa = "8028e95bd1e4b122f113f461f0d7ec35bb2c0ae32a34d212becb05e99e88e225"
+at = "R=u32"
+embedded = "696ff76ca8ef9a39a36c0bf9de5b460eac6cbc0f1b3716e71323dd2799798584"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::ZipFileReader::inner"
+kappa = "26acdb93087544a406ab1037fdf9018a448a94ace130fa5e1fb9a8dd0196d1eb"
+at = "R=u32"
+embedded = "91782bc4afd71efc4a712e829e3f69b945c4f5524a1e61c1b70fd642a185aaa2"
+status = "residue"
+cause = "mir::Ty: std::io::Take<&mut u32>"
+
+[[fn]]
+path = "zip::readers::ZipFileReader::into_inner"
+kappa = "3d4a70211c5e70d565ea6384d6371b04a02271c06f3d0bd16cd3135d25802557"
+at = "R=u32"
+embedded = "654810755cb803112d4c81ca347a17408b94ddce5bd51b0ff2e9a7afbe77b336"
+status = "residue"
+cause = "mir::Ty: std::io::Take<&mut u32>"
+
+[[fn]]
+path = "zip::readers::ZipFileReader::read"
+kappa = "ac7b3ca7a6b6d2a6acff6a5189e2491ef8d2a6fed864e5fd724e9476db2bf212"
+at = "R=u32"
+embedded = "61e6a272c0de397ed68e3020565fc6bfa79c8957cd07ef7d6f2ebb201b7a25f3"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::ZipFileReader::read_exact"
+kappa = "a1d594f4fa59e599ae853dd52e36f6c2482b64785ed1ac0bcee98d0d581ab015"
+at = "R=u32"
+embedded = "2cd33d6bebb329d2182e175807b88998875358a62382455cda3612cbdcdf66d1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::ZipFileReader::read_to_end"
+kappa = "6bf8b2743c92117150e0047cd6d90e2c51b03a3cafcde260377c3bee77ad4c39"
+at = "R=u32"
+embedded = "626a5f54e8af7573e101533edfee3c5435b71ae08cce6dce6f0a59c809327f9a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::readers::ZipFileReader::read_to_string"
+kappa = "50e38342101a206aabf594647132e5c7577d7c8f4c2db6921a770c58aa93663a"
+at = "R=u32"
+embedded = "8a71fe63d65ed5f42596a6e1e47a35cb64b2f61050d4cc031bc6e9387fba7f83"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::root_dir_common_filter"
+kappa = "8aea29a720f06aefcb33824786b569438c1d97dbf2a6ee4b5dbc530f99a94e9b"
+embedded = "1183456df69f8a3848f6dbc66f9b881ded19d519ae40ebdfffb4c6c1da720350"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "zip::safe_prepare_path_from_metadata"
+kappa = "70f1c1b4396dbf3a6cfad7529cacc50b6fa1d6b5ec82007385430786c07d0a07"
+at = "Filter=u32"
+embedded = "2bc55b6b88bf85a26086fef19a12a22e3de1aa76c1e6b6ee667b1be7aec61a0f"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::set_permissions_no_follow_symlink"
+kappa = "9f15aece33f573758762faa86aff75af1a5ec8adbf1351b9ff33418057129f1d"
+embedded = "cb001f2b8c41a5a1d8b1412c59bd09d8884198706c2a845fac46135faea98aeb"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::staged_file_identity"
+kappa = "e16176f75c9fa094503af1b6dd2e81c18547b63af9c27a13715b98ad08caf489"
+embedded = "5084cc68b44abd8b7e11620f33689af27237a35417021db60de599ef1a421f9d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::staging_path"
+kappa = "5d9e277bd8d8bb564c009b6db7ba8576a3bc98c9701c53f1a4a93376404d92ee"
+embedded = "d16e64a8156cb62fb4e1438b46988695fb2e05e43d085dee041566cdb41348c8"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::to_subsequence_ascii"
+kappa = "6f4ca01af7bda2955560e71dc46f08aca31c8ae562441cfacae5c99373fdb8be"
+embedded = "8f42bb3238c4f5dd7dc195c57423bfae7506bff18e183063b78e5382ce6ad286"
+status = "residue"
+cause = "mir::TerminatorKind::Call: char::methods::<impl char>::is_ascii"
+
+[[fn]]
+path = "zip::validate_language_encoding_upath"
+kappa = "322a93cc309b84c11e5c5673d102635ea410e13bb35a74dacef95a8959b30914"
+embedded = "9c27b364fbae961af77a7c4313cfeb40a5a674b6bc8547b1f00557149fe79c79"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::validate_stream_footer"
+kappa = "246b9db3bffad4e00133e2e3b56dd81814c39495b4d941b18c725b8fa12c9a93"
+at = "R=u32"
+embedded = "b4e13e2ad1307d8f6f668d80c9ea24e1cb3de723d0a1211916d910e3033b8ac8"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::validate_unicode_path_name"
+kappa = "e5ee724040577cab708caee1bc9dd5913734b91a31cae75811b43445bc76d76f"
+embedded = "1a0ebfc68ef6dd8c81ec235328d12c519fe60392299075f73980718a6422c607"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:101:10: 101:15>::fmt"
+kappa = "0ae5ab9e467e1c781dae7c8ee27ca9a3f7a0f96a1ce9f4b8b63d33f1c12af3d5"
+embedded = "6b4753d37aa39b54876a6f5e792b325c138632020c63390a99eeafc7a6e587f6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:136:10: 136:15>::clone"
+kappa = "fe92a19a6e2bd31e10f3748937ebfbb5109da3feb998b26dee642bc0437f8cc7"
+at = "R=u32"
+embedded = "c868e8a0a5bbc667a590190c816fd1f4d3083f3f54aac17b331420da47934831"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:136:17: 136:22>::fmt"
+kappa = "6bf6146aefbb04f2a0fc7498f6de3accbbda9020f749a2ca850618d4374d330a"
+at = "R=u32"
+embedded = "d56abeae780bdcbaf6686f2cd36a6061e1cfe698e4348ff1c953615f0d61b2c7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:193:10: 193:15>::fmt"
+kappa = "b33189282279513f5ddc0a3bd69594f5508570943fd2ddef365d36c4cca76757"
+embedded = "fb87412a2edaa736236921632325f50e7790b07526349230855cb65b34de3b08"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:193:17: 193:22>::clone"
+kappa = "ad79bc6b347556b11ba3d6d7733f19ae6714218756d4d4242d7f29ec37646760"
+embedded = "87637395690b3be7bc85fc9214d558214e0f43686d680769dbc8f5fea38bbeee"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::FailedRun"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:200:10: 200:15>::fmt"
+kappa = "dace134721ee64d624cc371b3189ea7edb3ac92f6c8342b16f3397f707982584"
+embedded = "906413c2aa9f1ea798234792d740682a0fd29df9468da98e76ffce198136292f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:200:17: 200:24>::default"
+kappa = "d118fe25a30970c5da6dde8ab753253ec1d5bfe1ef0ff71dcd62e3d107717c87"
+embedded = "e607bf1f1ce42d35a74afbad6e1c3729849dded8d4d8d9df47ec6034ba569ba2"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::CentralDirectoryChains"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:29:10: 29:15>::fmt"
+kappa = "9dc4b73f538bc7febe305d582194712d0d8c7a2c19e0f5fd6128bc466316a53f"
+embedded = "28dbd9448887ee8366bc9d4a53bf00aff6fce1d46578f2428532b31e1b1ddcd2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_archive::<impl at src/read/zip_archive.rs:72:10: 72:15>::fmt"
+kappa = "a6d0a488b4d9d20a5e4b7dea627634ee8069b2c2428b2f1188b8ed32e2d50873"
+embedded = "ff28c34b58b778e366f5e1b6d6aee1bcfe034e47042d4da20a1ee264c03c65af"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_archive::ArchiveMetadataBuilder::build"
+kappa = "69bd6c5b8427498cdaa453119bae471fb075f35c34542462321ca1169fed0ab7"
+embedded = "91b2612cec2d5f233380ca4acda26a6183f9924f71d7ecebde096c6450851f90"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ZipArchiveMetadata"
+
+[[fn]]
+path = "zip::zip_archive::CentralDirectoryChains::fail"
+kappa = "9d16584ecb044ff8304c3fd649fd93a771ac803edb05e86bd66e7cea5e9ee8c3"
+embedded = "1b0e64b07d7c8be9cfcb8b9cfad40087b65b5ae81ab92eece68458f770a1deac"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_archive::SharedBuilder::build"
+kappa = "b709be96c789f5e52afc236e99cf33aec78a133fece49ed7599235c2c5914c39"
+embedded = "e900fc327dd1ae1ba7c09ce16d8a14e088bf6438d4cda782636f3e02313cd315"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ZipArchiveMetadata"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_index"
+kappa = "6e691055f8697e7caeff82bd008f6840be75c14bbb6081782635d79b4d8316bf"
+at = "R=u32"
+embedded = "e449c8b53c111c6924db491d4c869cb552c94adae75650f1d402cc475099e9b3"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_index_data"
+kappa = "29bce36ea2f0d1e31d976f0be4f86e7dca431c5f4fd7e0273c1f6c48a3d27bc2"
+embedded = "979b8bd825b5525041a3ae12f9df1fda3a157b53b7955212919babebc661e32c"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_index_decrypt"
+kappa = "61a1834ac48cb9e4bee8a495776516d7f9d6222cd1ff19cb5241189edea6f6a2"
+at = "R=u32"
+embedded = "e65fa3268021259c8bb93ae4ac47a6cfd47e0e8f0436f3f7395d5169820828bd"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_index_raw"
+kappa = "678b25cba6258d19cc9cfbc5b6bfe1b0c7c5a83a113681a9c3080067c23386f4"
+at = "R=u32"
+embedded = "d365f81532e97b038be12c4c450c9fcc2b46697625eb8923c8027d5ef499fbed"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_index_seek"
+kappa = "1692f92bb5b3abcf82f494cf9f7647716d819f2666f4afb872022ce7d920eb21"
+at = "R=u32"
+embedded = "fad261e6e912d0db6bb97ec889013217bdbf4f4ade534ad9a1dd8f7f78ff39df"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_index_with_data_descriptor"
+kappa = "f8dd155bb292eecc670f75838248ab7a54a9106345c30e96d888b99a0de969ae"
+at = "R=u32"
+embedded = "4ca1bf390e45f0d7062d9893e621bf96c5fecc6c01afa5923a013c97e42acd7d"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_index_with_options"
+kappa = "8f52c2e50314035d86159340e6789a74ae8de859efce3537da97c5c6eed31005"
+at = "R=u32"
+embedded = "fdf6cfde45afc6c9c0e7f7dee72ae761fd2c841bfd986d42903c3770a282cd2d"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_name"
+kappa = "5433c02b875dd1bee1a5fb8db7c463761087794b165bcc83f208fcf357896e93"
+at = "R=u32"
+embedded = "62b40c59346b07d739d9d623c461c678ab0f705494a0ddccfd7ad645fb890291"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_name_decrypt"
+kappa = "39eca53db05b9711554d939f2c533cb82761ecc47f19fc121bdd0f68f7e3c45b"
+at = "R=u32"
+embedded = "e9beea4b1a22c3b5bb81ab2ae14ae7f27339fa173716a1958aaef59dc29e6648"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_name_raw"
+kappa = "598b72fbb8fb07172fab5df319eb979b8769b407251f2244f8f74a853ff78206"
+at = "R=u32"
+embedded = "078fa76f5f3b919deeaa33f860b228c657a43b263635e8ebd48f9bec496d5c28"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_name_seek"
+kappa = "a87aeb53cf7cb789bcb42f7be8f179ab74d3f84bd640b02302b235ebc33445b5"
+at = "R=u32"
+embedded = "a5546f696809ccb39285b771c5799ee2340a02c80f14119cc384a804fa47f5b3"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_name_with_optional_password"
+kappa = "96662a747cfe87e99ca6d47068afe94ce52264da03ee5a691680943911d2a6bc"
+at = "R=u32"
+embedded = "27f19b24089f8d9b9b43f6c71196080a4d9ad3bbf487ee8af98a6f4f9a98e11d"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_name_with_options"
+kappa = "fd69d2825346d9ee66c3fc3963647054a9bd647dcd9a595f52b609f68c81ca6d"
+at = "R=u32"
+embedded = "a4399bcc54863a4c8af34182704de356df2ecbb5ac8cc50d33281bc59cc48753"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_path"
+kappa = "5668b033c940148297152cb1c8250cbc53927344ef676f4d892e50d0e6f872bf"
+at = "R=u32, T=u32"
+embedded = "f855ce76d8721e085ba3e8b5fca508a2f6e67e4fa6f8426bed859906747aa55e"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::by_path_decrypt"
+kappa = "1bba35e26ef3499726449a7bb30c46dbc3fec01a7b3a6e4c2f81de787ef014a2"
+at = "R=u32, T=u32"
+embedded = "29b5365188d58f9df0b5637de5bbfadc318ed675449d79f112e3894795556421"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::central_directory_start"
+kappa = "61e074018e9d2271a27d3132ee962819b6dd4278649ba6a9cae92301ccb12fde"
+embedded = "23fa8fafa2e707193e553f61dffbf02eba42b5a05208815a39780a02825b552a"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::comment"
+kappa = "b1c6a306ec1e21f5ff372252fa8f7a5734b880aa902675aea6877e4e6691bba4"
+embedded = "20fdcd99bc513a5b10257b44db0ae476648a4e943aee137284c31ac827fd86b2"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::decompressed_size"
+kappa = "64c7906246052bb6736336165a546977a2f2afef69d0d292335ee2e06eccf150"
+embedded = "e686c608b5c0a0267f3519e633dbc6d2bd4d6bf0c85dd7ec1da72338a08e5e76"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::entry_byte_ranges"
+kappa = "2f6d78c869f13ea80efea5adf3dc22e4c36d427de43595c121a6147e029d8cd8"
+at = "R=u32"
+embedded = "c52d9d9003e11da155ce3428f5190a139d16879cd9e0b0a1fd17227cc257a7bf"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<u64>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::file_names"
+kappa = "a90012ce9ceb4ec099d51adb8e21043cc24ac1c96815f623fc368e0bb3dc0dbb"
+embedded = "1ed83cd7a27d07fb50c474201bdc1902238c158b801fae454a0d2ce9c27728e4"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::file_names_raw"
+kappa = "57db1850a86a6e7e1396bd01951f2189f64c8be0252eda2a4ac296b713ddc64a"
+embedded = "701357258b04c16362813267ebaa3ec661b24cfe1e05174260f0e414b4c0051b"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::from_finalized_writer"
+kappa = "e82ab0ca7cc9fa2b412d3e22d6127a80312025da3951fb5b840a32e4f2579c5f"
+at = "R=u32"
+embedded = "37c741282aca41d3dbb9ee9b6118daa94b3c5f74f800ec8903b9ba00cdbea970"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::get_aes_verification_key_and_salt"
+kappa = "e6e1dcdb22418b1befd18e891f90120c593e877ea6065ae08139d6aca099ad8c"
+at = "R=u32"
+embedded = "c904f1c1c7369c9a20edaf5e46d643fcc7c7b2f3485cd2fdbdd23328eb5431f2"
+status = "residue"
+cause = "mir::Ty: aes::AesInfo"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::get_metadata"
+kappa = "64866edf82d5b35d05b1fbb23dd188c15008801495c3f653bee4573ca90de79d"
+at = "R=u32"
+embedded = "6f805b43d90be44a1f838958c077be7b36e3f03c4b37451da5adafda4b83d7b4"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ArchiveMetadataBuilder"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::get_metadata::CDFH_SIG_BYTES"
+kappa = "c6d1e7033ee6a7f81baada61e5f3a50601e3eb89ff915bc3bdb4c98048bb05f8"
+embedded = "766ef4918e4f3ffa074350b27666c51524bda999bf44e44ebcf50ec369098cd1"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::CENTRAL_DIRECTORY_HEADER_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::get_metadata::EOCD64_SIG_BYTES"
+kappa = "a1a012aa36720be8ddfa8ec8cfefb60ff4997cd748669eb2e3b96ab2bd94d257"
+embedded = "0aec138a63027e7b0a1246ff53af1882a50973a2e96b14a3c02e46f91b39a6f3"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::ZIP64_CENTRAL_DIRECTORY_END_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::get_metadata::EOCD_SIG_BYTES"
+kappa = "a1c2a6ea3985aab5d818258ec287cfc9c7c35024560ec95a85fa20f6bf1cb9e8"
+embedded = "e5b3974b3f90a1bc802becb2cdaea73abeb817ec6d168b0d39e187226a3989ee"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::CENTRAL_DIRECTORY_END_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::has_duplicate_names"
+kappa = "dd58ebfe0d1537b0c18fb72780cf64aeb7f84b6a0b79cbd9289db40eb5c55737"
+embedded = "cace60908b8b47cda96b85421b384dc4a948b48f478a2eba0e8c4b7d475dc9db"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::has_overlap"
+kappa = "ce5bce4953178151f5cc4908eff6c52716059c40c62f067f484d1e44d462b79c"
+at = "R=u32"
+embedded = "916e42bb4a1be9797bc1c47aabb994b6b6281c147263d020fc08d484b9f51119"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::has_overlapping_entries"
+kappa = "1d579e2efecd51ec8084b58ef5a43c178a447ea4f9811d60cb0d22d6b7f88ad0"
+at = "R=u32"
+embedded = "5c4bbcba48e4a71281303bd5df50d4b1133e0ed67e1324cd6df46346a0a91515"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::has_overlapping_files"
+kappa = "b430d233bd328e5907ce993140442fa61e88a890f9d02a1a9273cdd9b67fe7da"
+at = "R=u32"
+embedded = "0d76ae4085b4657ab09fef7c4f9b1733f7e22230d81d00053e0f18041770e513"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::index_for_name"
+kappa = "d6f44766df1f93c0aac302d88399a5c26a1942649c22c2710dfea1b0ce2b57d3"
+at = "R=u32"
+embedded = "793b7e33fc46fc65b3c18b0709be09a329f80df131ef998036b287250293b711"
+status = "residue"
+cause = "mir::Ty: ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::index_for_name_raw"
+kappa = "52bc0624f5940673643ee9661e10fa4977b9913a765ed15bec747ea9be5fc79e"
+embedded = "e7a5e820e97a0241cd77b03d2f2fbdba596c08c0f7843861f623d64aed05203a"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::index_for_path"
+kappa = "46fbb1147a75d59127ee74f8e8aa46871527e97723d0df2e8c502419766c0b50"
+at = "R=u32, T=u32"
+embedded = "5ea22b4a5634f1a65dc64879024d81ee9867f9194c76da9dcbe927460abf1e80"
+status = "residue"
+cause = "mir::Ty: ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::into_inner"
+kappa = "cd78f6d645e108130c6056acacd77e292a726a5b78873d305d64d5d6b860dcb2"
+at = "R=u32"
+embedded = "24241132f005c3ace7be9fa5c07b0df6eee7e441e4a6332b0d91c79053caac08"
+status = "residue"
+cause = "mir::Ty: ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::is_empty"
+kappa = "c92d1cc6c1cd776af58b621fa9c5251d6f0f5be886909889ab5a4a636b68f0b0"
+at = "R=u32"
+embedded = "59a2b817010dcee05343d753ed45c75503e83bbc86a273fab52fe2d1d7ddf35c"
+status = "residue"
+cause = "mir::Ty: ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::is_valid_local_header_at"
+kappa = "afe2f5f86271ccddea423703094516425b29fc35dd0680bd97c00bd94041cdc6"
+at = "T=u32"
+embedded = "a8eba205157ebc0cf58f22d20472e5c257aee0791628406142dda0f7e9d53706"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::len"
+kappa = "76dd22719035d6ed7757430da6913d0c1fe881fb724c381c5aa9a453408f4468"
+embedded = "f72acd21be53281a1a2dd5a7cef5cadb24424e79f23e088f6051fac076e5648e"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::metadata"
+kappa = "9dd21c6c91bff82828b1ce31bca0e44207a1484a8bd91fc30599223003bd0b23"
+embedded = "b36d75ae2522614e75677ef18cc321e60db500d11433c31dd6d39fb0c1586364"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ZipArchiveMetadata"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::name_for_index"
+kappa = "5e01b31f511b01a283a379ae96c50a25e44ee50fce3aea8cc707273e090ef3e3"
+embedded = "2c748b52c575192e011a2b8441531345f8fef3b7b61f05ce3f639ab23a68f4ec"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::new"
+kappa = "9ceee90cfb8acfda489ad60920d09a9831b93e0be0200f0c87db9e3dcc3b9a04"
+at = "R=u32"
+embedded = "c0b43b28e7094190d26ed47de55032a4a2bd64a14bed4295bd70b6b33a04729c"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::offset"
+kappa = "aef4f6b8c8043cbe1c4494a1e69d2d8a6f8eaf54a8146b41677f4965c61ded96"
+embedded = "a8682a28a5af9563cc0163413150a894d47533c3e94925e4f3712bac546768a2"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::ranges_overlap"
+kappa = "510d459146516e5156dc822bc66fe902cc99222b62fff5c409fdd7477cdd9e9a"
+embedded = "825879c3e9a1317e07c3a1aae94018979e4dcfd42c1e5a2a4d259b6d1f0e0c90"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<u64>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::raw_zip64_extensible_data_sector"
+kappa = "4ba60500bd5ea067d1d374a3a45e691f97711acb1e8cee2cc6f966c9b656d53a"
+embedded = "01432c3eacecb1e2c879a6184937e59498ca7767b65de02dae01dc6f2cad2a7f"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::read_central_header"
+kappa = "eb8beed752e7897928b2c25c5cecaa1cc2c891a4b3676a561464fd7e153fc129"
+at = "R=u32"
+embedded = "7aff8cf329a938ce12d0ec0beac309a786e97f98f6689840931872b383c473b7"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::SharedBuilder"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::read_one_central_header"
+kappa = "2832817b3f80c46066e80e568b99d90b5e9767679f0869708ff580ab3d73aa90"
+at = "R=u32"
+embedded = "19b75d24899819107e51ece788176a22d6efd90d2cd8720430cdb802080d1ed1"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::root_dir"
+kappa = "dfc3f0367ce2ed7d01251c2a3ce22c299b82d23070008be2ad88706160a175fc"
+at = "R=u32"
+embedded = "93796be651c81fb8cffadcd44b45c875246275c3fdc274ed4f0a74af4bf3d69e"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::scan_for_unlisted_local_headers"
+kappa = "6b162efde12162e76ef9499ac45b7b4cc1c5a7c422b998fd4cf0a8589fffa19a"
+at = "R=u32"
+embedded = "91a21541f6031e4972abed925a4cf0246ba1503cd67c659840b682d71d6ac895"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::scan_for_unlisted_local_headers::LOCAL_FILE_HEADER_SIGNATURE"
+kappa = "a3cbe72a11e420600414f251fa5b190cb40d4117ad53312f9375519c230bd5f5"
+embedded = "7fdefa066bedb6efd5fb6775d18ae49df1c674c01bdf822144fb3cd7dfcc1c58"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::LOCAL_FILE_HEADER_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::unoccupied_ranges"
+kappa = "b3866b2a7db803bea4dcd2c0a31f734378dd9abb46ce6a363140cc9fe9c58a27"
+embedded = "1e8f0ec3f97710b38e0ef6652eaa590eec6003e75a43bf0e366652a9cf330cd4"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<u64>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::unsafe_new_with_metadata"
+kappa = "ff3683adf405dc31c7f0152007bee3b74e6d53febf2243bd33e37f0ee99f9b56"
+at = "R=u32"
+embedded = "101a5ea589f9e060465be004ded42d006e1b51990dd7094f595293d4d1e6f7f8"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::validate_header_consistency"
+kappa = "261ed09f66cb61e771c72f4385c091ae8b0004861cba2144c8eb8db225bf375a"
+at = "R=u32"
+embedded = "ae2380460e6a676886afcdcc3db9260c81c620753b4ef57ea36cd98c8fb6e1de"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchive::with_config"
+kappa = "d7445fe97ec6bf8f469e999b9a73280c9515fd682cc99b9288caee04620e6fb7"
+at = "R=u32"
+embedded = "2614ef6c318c97e2e1c96036a72542d302aba70d3b54ae0574103edf985be9d8"
+status = "residue"
+cause = "mir::Ty: read::zip_archive::ZipArchive<u32>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchiveMetadata::entry"
+kappa = "6a672c3def1c096265d012d6caa65027290f7c4eac5b205a494217176e76f72c"
+embedded = "1090faf38ef4017cc287f5b21987524b097356a95d8414e266cba2fc48229e86"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchiveMetadata::has_duplicate_names"
+kappa = "2a31a674a17077032818d49ac66d4cede56147f470c2ee3f991e2c9ccb035b75"
+embedded = "ed29b37b67750b00d98447eeb9edb4ef0816edeca6ccb9a351f5560fb6bef5e4"
+status = "residue"
+cause = "mir::Ty: ZipArchiveMetadata"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchiveMetadata::is_empty"
+kappa = "f497e33cef34be751e34a076bbf6fce3a2514f40e4747fdb06758bade6bb4501"
+embedded = "e377de004f5761179a0eb059d2aabd0763ea37252bb73124e013821d356f096d"
+status = "residue"
+cause = "mir::Ty: ZipArchiveMetadata"
+
+[[fn]]
+path = "zip::zip_archive::ZipArchiveMetadata::len"
+kappa = "206aca44ef9a69bddac7e83f07923d36b762b89b9c397e0f642431a1de35e905"
+embedded = "6985e3583bc669b36cb43a1c7fdc6df6b220776f15bf253fde35f8be1608fe73"
+status = "residue"
+cause = "mir::Ty: ZipArchiveMetadata"
+
+[[fn]]
+path = "zip::zip_iterable::<impl at src/read/zip_iterable.rs:183:10: 183:15>::fmt"
+kappa = "613ec4ed525a4abc97e80128205feaa7d9bc5a8168c0b15eb24ae8ea4dc428ef"
+at = "R=u32"
+embedded = "cf0b563ea76f993e0fbcd64af1c8ec98b1a6e935ab2b8f7d00c1ea841c715f7c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_iterable::<impl at src/read/zip_iterable.rs:193:10: 193:15>::fmt"
+kappa = "d98569cfb7f96cbc7e81fdeec2b0f091b056fb7234c2e4a2d27f088f9dd55a81"
+at = "R=u32"
+embedded = "38b47b6304ced70158a896a6c10dbabeee39ff81c0c0a3b49da2fe9b4fd95a2f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_iterable::<impl at src/read/zip_iterable.rs:34:10: 34:15>::fmt"
+kappa = "090c35197f10aae0a8035e81f509f705933f60a7a387f1f8daa74acc649e89aa"
+at = "R=u32"
+embedded = "c3a777b6194905371aa4104255fd6b4ab45639e41c668d5b8e50aa236d16f48e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::enforce_header_consistency"
+kappa = "6c0a2c09aa1264485f4a143c258a7364498dd862dc1b94d1fcbf269fa8335beb"
+at = "R=u32"
+embedded = "6259ad89a3d36437956adfaae45ce923307e369de303696d36d5ba8c97e63f49"
+status = "residue"
+cause = "mir::Ty: read::zip_iterable::ZipIterable<u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::files"
+kappa = "e580527dc8356d0d257e3aceec4e1d55dc6b4612f28449777840b7a11e8ec9d8"
+at = "R=u32"
+embedded = "94a680c944eab855f0611289aadca45c0a4e2b42671a975545620430e1208fc5"
+status = "residue"
+cause = "mir::Ty: read::zip_iterable::ZipIterableFiles<u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::files_with_cloned_reader"
+kappa = "658a22be72819bf775d233275dd44b8b22e781401d50a44612c47fd885f96d8b"
+at = "R=u32"
+embedded = "eae83090f0d9d7792ab5d5702d7033579a0bb7ea351049ab95749c13ec8ffb10"
+status = "residue"
+cause = "mir::Ty: read::zip_iterable::ZipIterableFilesWithReader<'_, '_, u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::files_with_reader"
+kappa = "eb6e8ef9ff2c46ec331fe3e6cf0bd1430cb309b8c71cd06bcf3f633f1a041bfc"
+at = "R=u32"
+embedded = "26e732cc79b61634d2bf205c451f937c97f0c54f2850aa96e8c06167b8afab0a"
+status = "residue"
+cause = "mir::Ty: read::zip_iterable::ZipIterableFilesWithReader<'_, '_, u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::is_empty"
+kappa = "831616a705d0056fedc21e7ae24492e8e24c040a6afdc26136c41c920d39f988"
+at = "R=u32"
+embedded = "d78e664076450fd6ccad7d3d788433bdc2a9fd24a70e43781339feebdfef76df"
+status = "residue"
+cause = "mir::Ty: ZipIterable<u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::len"
+kappa = "090b3acdc2eef4e5d156be94f3c205b6d00594c9c1691565e8e46622fc75b66a"
+embedded = "87ee995e3a8e4b4a157f9a7c55f6479475c2e0751cd47687ed1a24ada085a00c"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::try_new"
+kappa = "19951ce758a2f2420779b74a77277446edda99e89349e982c2f403789cf87e3e"
+at = "R=u32"
+embedded = "5002475c285b119cafecacb7eb3197281f005fedb4e1b6ec69be8730bb092399"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: read::zip_iterable::ZipIterable<u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::try_new::CDFH_SIG_BYTES"
+kappa = "3f19bd296921edbd3e5e031afc1add8b690822ce2b29aebddf558547181b1c2d"
+embedded = "bb62574605d2839f00fce5fce7cdbc10131c5a19f109e50c3b74996faad733ae"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::CENTRAL_DIRECTORY_HEADER_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::try_new::EOCD64_SIG_BYTES"
+kappa = "b910b7a1fd917b2224c50084647c195351fb9f2a5bf4dd4f44b9fe4f0c3dd528"
+embedded = "a85886d0c9f19f3a4ac60824739bfb9f343523eb8f9ce5b82850f303192b34ee"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::ZIP64_CENTRAL_DIRECTORY_END_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterable::try_new::EOCD_SIG_BYTES"
+kappa = "3c7ef17f7e56b9220105b9a177052250554521def63dcc9263be2c5210c67628"
+embedded = "cf69acf4297224648e55774b37ae33540b1d15ffb79ad3a2c9c4d481475d46e3"
+status = "residue"
+cause = "mir::Operand::Constant: format::magic::Magic::CENTRAL_DIRECTORY_END_SIGNATURE: type outside the lift: format::magic::Magic"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFiles::is_empty"
+kappa = "0b2ab6e8492c6470d9f1da6afc5e28aa141d9ed20230f85c07137e06ff5fbbee"
+embedded = "b309a7bd93e5df95ee4ae3abcfb92924322d246af7f19591e8d3b829da1bcf72"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFiles::len"
+kappa = "08d0b2e8bc87f99f5143b5273685347cca8a6968dfaa345aeea10bfb30a83f44"
+embedded = "56139b4ff8a70e3682907fcf628e85e6efe082c01fa08e14a950d10bb9d46dfd"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFiles::new"
+kappa = "11bfaed07bf729221f2cc4e3d356339402337cc8f537eacf9d95b2a009591a30"
+at = "R=u32"
+embedded = "251b0aa0ba266a502d746c03a8dc1742bd3e39688a228d3c51d3c99f4b80ab6b"
+status = "residue"
+cause = "mir::Ty: read::zip_iterable::ZipIterableFiles<u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFiles::next"
+kappa = "15936c5d4c65f704a312e0fce6c4181e989bd170f88ca0f51ac260993abe4172"
+at = "R=u32"
+embedded = "e0ccde4e817e892fe77f65de1ee11aedb753f518b1a371c2ddee12e4bc78d8aa"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFiles::parse_entry"
+kappa = "c7cba4fefad83858e9ef35b2aac5ff32350cd648b1e4d2eccfc79158522ad12f"
+at = "R=u32"
+embedded = "694eab952253ce4b60a0c57994b6e8451efbf1380644b5ad0752b9d80e6c5101"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFiles::reader_mut"
+kappa = "ea08f0e9d5b917c00bdd3775d87f5e6a930fa8ea2ac984bd6cbc776c9db517d3"
+at = "R=u32"
+embedded = "92e95d5a105828c9a45a442d3525a366f419e194aeb49ca362e1f7e24915f88d"
+status = "residue"
+cause = "mir::Ty: ZipIterableFiles<u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFiles::reset"
+kappa = "bc09100ef7efd3ef95b39d03ddbfb1d40bb8df51fb8dfe1a38fff299bae9daf2"
+at = "R=u32"
+embedded = "e8e50e7f75702fb302ffa809b2d9b956bec3a4fbb95e24e13e5e40930077ac94"
+status = "residue"
+cause = "mir::Ty: result::ZipError"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFiles::size_hint"
+kappa = "ca1c458e01e3e0400af83ed373d5db213ff7c4e8d6719bf527b8c48c344e268d"
+embedded = "e4c52c49ae1614998ae73304e50e713f3cd7aea84f1237c4af25f074621edea6"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFilesWithReader::next"
+kappa = "7978ec775d776855a494f5e28beb06282e54bd42fa823509495c98006a0d52e4"
+at = "R=u32"
+embedded = "18be63b1dc6ff7863a7c653fea86380db4b3cfc0d0432447ac1391aee6e536f1"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zip_iterable::ZipIterableFilesWithReader::size_hint"
+kappa = "2ded758373afb9b63863f2266944f74616d906a40a9352710b094a3be30558bf"
+at = "R=u32"
+embedded = "71ff5ea8cc93f0510f29f4b6f036e921b779db4758694ed0528f508b231a7abe"
+status = "residue"
+cause = "mir::Ty: ZipIterableFilesWithReader<'_, '_, u32>"
+
+[[fn]]
+path = "zip::zipfile::<impl at src/read/zipfile.rs:30:10: 30:15>::fmt"
+kappa = "8efdf9a05377a007e079bb287aefa8ad4b920c2bf61e1b6b9ef601fb38f120a6"
+at = "R=u32"
+embedded = "4b847183bbbb63ae0ee02599f3a4bf12079bd81198d960c2dedd91e48d7ac75a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zipfile::<impl at src/read/zipfile.rs:40:10: 40:15>::fmt"
+kappa = "6eb3e2023f24ca87de72bf38093eb78a2487b93472bf9d171c76c446c640ceb9"
+embedded = "c90a6ea833189c706bab0af7027145a56175e051d948034e68498771c1834321"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zipfile::<impl at src/read/zipfile.rs:48:10: 48:15>::fmt"
+kappa = "c288f9a7e4c3fbd5d762c74d30c0d90f1986a000913813cbf021025c3426bedd"
+embedded = "be0adedee148bce54cd5160f37f579cde96142518423690117776ed2f925bb45"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zipfile::<impl at src/read/zipfile.rs:55:10: 55:15>::fmt"
+kappa = "b46d854a82439415468b6603e907e869785d85cd7e87731afce989930843cf15"
+embedded = "5a4c64e49fe403392b8e7ae3799b4c86838758477bd40c3456b2ab224c351cef"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::as_ref"
+kappa = "7820458d2dcc93690ebf6b912d691c9298cecf25aaf22528b4c33b10bda2f7d7"
+embedded = "eb0b48dd9af9a5a64bdc1078d7e1360d936636179a4bb61697bf76ef45ae000a"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::central_header_start"
+kappa = "f2213ec3eba9282e25b40ba7b2e36b17e78eac6bb452ea20ad6ee498cb7c31c1"
+embedded = "884a976580e49120bdd350f68c84cd32616af5385bbc93823bd87e0e2110bf57"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::comment"
+kappa = "5ff63cd8ef2d8c115c8170fa984b016eaf62178b23c0969dc6a280e6f66d3aa2"
+embedded = "0b2756e5232b2193631f4f39f2b1c313c4b1f41603096c15f32d6b5873eefacd"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::comment_raw"
+kappa = "6ece34fc3a6b11fcfaef6b19d73b1f8195bfbb186d2db864f78e8b0407584e53"
+embedded = "8f0ecf56b6764e990304728e473176ab44900e6734e80e13d942760f2ff9e18e"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::compressed_size"
+kappa = "b304ee90ccdd8cb5688e898d7d2972a94d05483285d9169820b06f1cc3cd6bff"
+embedded = "a83222901773b78939bb8e85bb08969b7c2fb850f825da5960d8e986351cdfbd"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::compression"
+kappa = "ece7be9fcc7d483f3cd05a9b26da66200d28616dad9bebc2a9f1cf7054ddd8a9"
+embedded = "611eb4fc22649178689a555f433d53858535983936991522f76592ffbf7234ba"
+status = "residue"
+cause = "mir::Ty: compression::CompressionMethod"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::crc32"
+kappa = "243a520aae2275ddb62197bbb716f0807a33ec29e46069e1b63f223ca70b854d"
+embedded = "fd506cd456e40ef0c35603d530938844708323bcbf3ff58fc5486a8182dfefc2"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::enclosed_name"
+kappa = "4ddd29caafed72e699f483d0f150032ad0ffebf33c8d9519680f84c39c9df877"
+embedded = "e7a6ed079efd4225db8c102fb7e9009aaab307538b7e6088efcc00da7306f0dc"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::encrypted"
+kappa = "7c8ba63aee1ba3269a247538c421659bb99b153237a906dc889ea8b84c5b9c44"
+embedded = "f5fb97b0edb17fc3dfb5215237429d556aa83d8d8074ba71199e8c1058c7906d"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::external_attributes"
+kappa = "8edb9b012806cff0ea7af73b7ad6fabc26728f0ef01884085094862d7150e046"
+embedded = "23994b8d2076a7ef12a1d1c5c4ad1a7d3c35ac2db9647a53724792e26b6fdd9d"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::flags"
+kappa = "426e207888b223106f20dcc868808ba205f51deb88622c41b1d49133701410c6"
+embedded = "5ee0381cf72cc24754a8f7becd999f0a01ae6ea13627350c40193118332fd91a"
+status = "residue"
+cause = "mir::Ty: format::flags::ZipFileFlags"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::from"
+kappa = "efdfe08ad9fb6278a47074496680d3e405c4d3d88f497e20aaecd855032e1a1f"
+embedded = "bc1de8c3c8edb64e777f5c1a9d7971e8a1bdbf4f1cbc36a62b202b641272e007"
+status = "residue"
+cause = "mir::Ty: read::zipfile::OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::get_metadata"
+kappa = "ddb5a05926d0f8f04ffc55dade04041fc0dac15593663400a64bea04b0d28f47"
+embedded = "231d0244eebf6b6b0fa723f100def7b8d66f57fc348b0be5977722b88ef1dbf6"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::header_start"
+kappa = "7d64b225a3fcbc40a214ff1952cad7cae0f98929cc83399511abdd9adf7357cf"
+embedded = "c71df16c7eab44e729687e30f810b5de66ca844e96dbc60ce7b97f4581031572"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::is_dir"
+kappa = "5b84187f7931f948495e38e73208479150f7eb6ddcf93556c58b866437b95f44"
+embedded = "038f6c329ac5159e89d976f71b7e36d6df7313bc8b5bf0dbefc2ac9ea4dc53a8"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::is_file"
+kappa = "a054a33a812cf93cee2f353106855d6277b750f7a7779c6dff4a293c50b3b9bb"
+embedded = "3683286589e392113568fb843c9df94135533781af42674ff2ba3808f5a000c2"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::is_read_only"
+kappa = "a3a67bfb77a3ac14c1f93e14aa0372b5c25cbaf3234889a22ddc36c1d6e3d4a6"
+embedded = "a72cb2c9ac5550a150d23606fda2ed8658f3ab4bfa0be3643242e20508bc4cbf"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::is_symlink"
+kappa = "399865a8e2b7d730d78c81093614441a68d6659b058419e02839846373a5feae"
+embedded = "7b1f24dfb39f290cb1d910ad9966c7abf07823973f32c433c94d7c45927a7e2c"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::last_modified"
+kappa = "c4ba451b9fd1a425adf64b2620b1ff43a6fa7c3d024c9dbabf7afc75c2ff1f24"
+embedded = "f89cb84663b1349bf7daf6673b6434b879b3ef4518847ce778829cb997f37ddb"
+status = "residue"
+cause = "mir::Ty: datetime::DateTime"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::mangled_name"
+kappa = "5dbe9adc96b71f082a73596a0f41002f7afc13dd0ca7fa4e73c55b16ae1f20b7"
+embedded = "fe003fec252e1120ace17369ea0a06c1b521281b99809db686e15924ebc04fd5"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::name"
+kappa = "7cdf29ab0bf60ecf1f204988684516e9b0d708e5865ee1a990711a26e5993c46"
+embedded = "e9b91779e1dfabaabf5c374bd3cad9ae6deee94f6dd65ae608f8acdce7d5e6ab"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::name_raw"
+kappa = "d3d0ccb88c7db39cab6b1850a45a8836e59a9b079149b42dbfc22239dbe267f0"
+embedded = "c4de5e892adeda6d6348fc90a435517efbee7b3c14024e2630cfc840ad975ab4"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::size"
+kappa = "38d88652414db28fb8d508831bf54e08be8a493383f07cb55b966324991cd84f"
+embedded = "55f118c6cb1ba7214d220a362aea49eaee34fb215c63385ecbe65e723abffa87"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::system"
+kappa = "afb932c314801beb69c35f5d6c69cf9d42c6e9444429605afe9f6389202340ee"
+embedded = "9bb3ac383f7ea9ac3c57ec1277c8bbc9590046eaf67fb3666b8669929df04199"
+status = "residue"
+cause = "mir::Ty: format::system::System"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::unix_mode"
+kappa = "021b6611aabe7a9b641c950b0912e413cd5a4326920b60922e966c8d961b0bd1"
+embedded = "a43f629cc04c4662a566b78f5753a90046972dbd577088801207f71476cfb7a6"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::version_made_by"
+kappa = "7be73d28187e3b707b0e1e5fa2ecef95cbac8ea7b611c37a038900d4fcee9c41"
+embedded = "e8eefdae548e7b8242abfb80852eb500336aeb0203bfed890d5044db5cb4c3bd"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::OwnedZipFileEntry::version_needed"
+kappa = "259d2796157f5f99bb4a9f62ca766925f5e03f2139df820a29ca90fda65fec85"
+embedded = "5b1fe2efc8bc4f607b04e87343656823afc0eb4c3b72c9c49856cac894d8f43f"
+status = "residue"
+cause = "mir::Ty: OwnedZipFileEntry"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::central_header_start"
+kappa = "c99a7777d7fd6bfb83d25d79226b027f8ebaf6102c76a91d4c7fcd671ccb7649"
+at = "R=u32"
+embedded = "1e2bee3cbcc830f2bf89f8dc061bb015fd1a4de69feea017b4a3e76d8537ac25"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::comment"
+kappa = "70c8a360c9bc107bb30548d295edfaac9d8e4c7ea6b66bb7b6d6ec8a4a4d222d"
+at = "R=u32"
+embedded = "ebf52332a4b1ac46013faaf168f15fb3159beb8be3872c04d6efe3950705c61a"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::comment_raw"
+kappa = "0abdbc26990f4083f5e62c1f912f3338ba2fbd053d51af0716cc8737f30c4a03"
+at = "R=u32"
+embedded = "d425cb262af47c7f76f9611f23747f39c4694d8e0e82244cce1e368bd8a86f8d"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::compressed_size"
+kappa = "67f4e17bebbcbe67c316a91d18805065a9a539d2551689a83da2c92c68d8d531"
+at = "R=u32"
+embedded = "18c2d203ad7898b4569931e12a1f79c5cc94e370148c44b7b96e880616f7ca7c"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::compression"
+kappa = "b0ca72496520d101d94d9b4103846d9b57bd9de7490f8323af7549029dfd8e04"
+at = "R=u32"
+embedded = "8f23580b0f99f2e7b7ff2972b1d5a15e9be539861251b271634b2fef3bce3326"
+status = "residue"
+cause = "mir::Ty: compression::CompressionMethod"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::crc32"
+kappa = "2f0c209337c42f4a437d105bcbe140aaac9907b37dea0e231b362c8401c5bd3f"
+at = "R=u32"
+embedded = "aaa375a89674c69db3b19511628ed7b9b4c5aff879d751abb765abe3f704eab6"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::data_start"
+kappa = "fafa1a00d9b101b3fb57da6a86ad3c87d718208ef5a483b895899a12d88e2baf"
+embedded = "30bcc1e1bea641fafa86a9333b4b7391036a55db90ede7dfa98942d4a80b130f"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::drop"
+kappa = "a5fee4102c8f54324367249148c803e2ee19df90fbf7412788d9b667942ec439"
+at = "R=u32"
+embedded = "d1f8e791c9ec9441fb55f56a90f876d2bde88c5179d8a691b81ec0e5ad85d754"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::enclosed_name"
+kappa = "cb6560f7524bc46fbe9bd2b886610d86dba7701d83fee6cf497a77d8cba7a1ad"
+at = "R=u32"
+embedded = "94dda887bedad31ecb34d0f6e5b066af0436cb56282c846443c9478c65b9def1"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::encrypted"
+kappa = "2cee502be06c3925cb757cacb9d9ffad4bb11d11bcf51ea04aa904ca0b3f6eac"
+embedded = "9da4874d8f9847b5f405d3c6e3a018ba89ff934b03be56b4e5d37813faaa052b"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::entry"
+kappa = "f35069bb56ce5e930e06e49960a0f1df18f912e8b68b687a02122d7969950578"
+embedded = "9a8bb00f90ab5e59802974ac3788eb17e5b9cca099b7705c5d1a1b878a84ec2d"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::external_attributes"
+kappa = "3f850d9165c87fd61ee0b902f78085c1258af66bb4fab3621c3714d64ab4d65d"
+at = "R=u32"
+embedded = "e6a865080d86807155fa68073798377fe35082a5adc36cca22e3f60853d41540"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::extra_data"
+kappa = "629f8fbd564ab01a364c6dc013425b231fa6ad9a3e74e6f6c879c5f47c7bfc22"
+embedded = "def05742a55c2dad91e3e2aac51eb9f24a5b3827b156d332977b504919b2bb4d"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::extra_data_fields"
+kappa = "d0da029c52f6e7956cef2e42c7a431979e5b1ca52bce2a6829805650235fdd89"
+embedded = "fb35c3cb92ef12c44b7c3f4b38995276a6b3819017452a9cb00a970bc9c884c1"
+status = "residue"
+cause = "mir::Ty: extra_fields::extra_field::ExtraField"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::flags"
+kappa = "107e5c67d1d4e57086c0da020a0b30a6ac28997dbee8fcd9e9c0433cfe80fd69"
+at = "R=u32"
+embedded = "3839c6e86163b50487bab663daa5fa72b6918bf38d6b084ffb0fdcb6b08b7848"
+status = "residue"
+cause = "mir::Ty: format::flags::ZipFileFlags"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::get_metadata"
+kappa = "530d676a4a5ef234a6964b246a5589fcea3d25449e48ea31b0455c8bc8bd8d4f"
+embedded = "1c6f55c1f5bd16297edc88e61f068965d88f69ceb39bf1046c905a621f91df9e"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::header_start"
+kappa = "bca86a676774832a9baf98479f86f3edc619c5fbfb815cf84243f63f4008b001"
+at = "R=u32"
+embedded = "027d8b5999592cf07c48839ac3b1dfb2c1d3a8915b587f7a8e2131bfb4edd14e"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::is_dir"
+kappa = "9c5189ee616d26d99326acd50a6dcf741d7173b830bb73b0b6c40204937dfde8"
+at = "R=u32"
+embedded = "939bfa6cf48a093248b39735c299b1971fc45de1138feab00c775f8843c9c214"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::is_file"
+kappa = "ad96fcbce87ea48df180cb0f2d3d70a0f63f907113161462324033726657fe8a"
+at = "R=u32"
+embedded = "1876575f15e2eeac5f609f80f09323c4d3806d21f9a41aa1dc300191f7bec412"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::is_read_only"
+kappa = "6b56b5d5b66b3f6979d8d8c69d4ccd7a0b74b40307ef2c42309923ba4e2b6eef"
+at = "R=u32"
+embedded = "592a44f3a9c1c12eedc6f1b4ff982ae9e545f6502fc015b96eb0a10e7b8c296c"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::is_symlink"
+kappa = "c6973bbeaffd9bbade928d7ecd4b5a4183beb6670cad46d2a41c0a5892f14984"
+at = "R=u32"
+embedded = "5374a9d52104139b130c0a28bad53823d801406e72e7c8f3600515e8fef0288c"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::last_modified"
+kappa = "5caf3253e2b11907aebc678230d175e6e19a286cd3430258ebe18333ad3e69d3"
+at = "R=u32"
+embedded = "6ff79ffc317aaa77f7214c98b954ec43f5624c97bb391464836d36a9d0f75e58"
+status = "residue"
+cause = "mir::Ty: datetime::DateTime"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::mangled_name"
+kappa = "664280d7935b5478c582cf70c0c668950aa95da6907e89fb01035030d09865c6"
+at = "R=u32"
+embedded = "e597636e6a5350486904ed40baae9d672ddd340270a86d050f23de98d2e260a9"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::name"
+kappa = "41dd7f6838844dfe2f74b505330cbbfd4b81a0a58edec1813609bf7b2a748a2b"
+at = "R=u32"
+embedded = "f012dd3b0d5a36e503db39fb8ee0dc154be38be7f3d8eb4210b9c08c810fe120"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::name_raw"
+kappa = "ea642275dd03bed772261e4b91c027e97de40a4dd6a7626cf7fbefa9762fc9f7"
+embedded = "3ebfe978ae5954f74db48f8897506f870df4320e5ba702a9529b43a562df0d9a"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::options"
+kappa = "60f8911c91189ba9d252fd7d116c51308b12b52af56a910594f5f7fcd3858d5a"
+at = "R=u32"
+embedded = "0dee14d48771019287f7ca7e7cb3c33a7db4e62ca7bc9eeccae1a3d5e87066e4"
+status = "residue"
+cause = "mir::Ty: write::options::FileOptions<'_, '_, ()>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::read"
+kappa = "94c2e4ff172641808bb20966f34471318ed4be03bf9c4a71ee19bdda090d9f59"
+at = "R=u32"
+embedded = "a75a96ec9fe74cffeeaf27a23ffd37bb547871db9f7db3958fe7b35b0f52e6db"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::read_exact"
+kappa = "1aecb55b2e22726aa24d956ef5442b132206a88043e6bc9cbf4dba8706137db3"
+at = "R=u32"
+embedded = "f0a137454a0a48cbbb452605739188fb859dfa350c91b9416fa4bc6ccded2da0"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::read_to_end"
+kappa = "eec52964b8190e7c8669e2857c83c127297607f4226e41a644aefa756e593f77"
+at = "R=u32"
+embedded = "e85e1398d42813577fdf6390d72ea280506f7c8d5318c56b02008b4eb3733675"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::read_to_end_authenticated"
+kappa = "8f2113fa15cab36f851b04fbc613e0e12a91c74bba98ec30cf4def0136523d32"
+at = "R=u32"
+embedded = "a3cb7727c145969bde9a2f98ad1181b9f0272571d7436bbf92de153736fdc9da"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::read_to_string"
+kappa = "756ec88f15358cb62a2e0d9d096b9108dccbcb17be51b2745e55968a17ca4be3"
+at = "R=u32"
+embedded = "f80c2e959a6dc9643c85dfb08da9fa6cae49e6aee632f6fa9b3e70cab25b3877"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::safe_prepare_path"
+kappa = "a7fc7f6eb1f789e9de1adea630ca1f531295de09b71724b8e8655b9a7e09ddd2"
+embedded = "a2f00cf031160993dbe78aa3061b26b943c100c98421c52df3161b5886957619"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::size"
+kappa = "82588894a4dd8e9d3551845c1a275338f4f05bc8eaa142be95bef3ff3646cace"
+at = "R=u32"
+embedded = "fbe84998f6dbf5cc45a05be245d8d82eff8f9930e09f3aca95a7eff1df25ac60"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::system"
+kappa = "4b383a8b8dfc11f2de2818781dffdfe74c0545c148da5379da9a97d6ed58ce6e"
+at = "R=u32"
+embedded = "411965415ef2a37ce7a2384e85a914c9b6bb7fc1cbb52bc5b9562f8998ef3a79"
+status = "residue"
+cause = "mir::Ty: format::system::System"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::take_raw_reader"
+kappa = "c0dbc0a1b153788127701ed4ebb0cc25415b0bf05e3563c38c35a0710b8f1b31"
+at = "R=u32"
+embedded = "34a508743e0e2d094fb23fc573d39c771b57f13e3bf5e481cf803d3cc447c0cc"
+status = "residue"
+cause = "mir::Ty: std::io::Take<&mut u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::unix_mode"
+kappa = "4270f9bf01a324db7280c63abe93b75a3eb3c28427b9750999a7a992f39607f6"
+at = "R=u32"
+embedded = "2146f1e61ae29da3025eec35450373d0257fda38f9895e9c36316d45ea2c0f3e"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::version_made_by"
+kappa = "6c1a0ca38fac3a30faf7839374da5007fab719146b7d1fc40a917a837b3fe217"
+at = "R=u32"
+embedded = "6d0edc7f089d95766ff0500bf18db12664dc74fc58e1455c85ab89730cc5df36"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFile::version_needed"
+kappa = "27b95c0a7b7e5a0f5c13f4d79f2abf79b0cfb07d1a6b0fab3a14d48d76d8a0ef"
+at = "R=u32"
+embedded = "f867321d2b7977b56488c954db5ec10d9707e6b93c52b303783cf917d7dba548"
+status = "residue"
+cause = "mir::Ty: ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::central_header_start"
+kappa = "2b974c07fb629da5c342e5fb3dd0407ba6e061bf247119306f73c543468bfd6b"
+embedded = "762dea04cbb3987b29cec88fe7a482cbb2cf69efc1b45f6d6a3638e6d4e216e5"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::comment"
+kappa = "91baf637ae7c50d955c76df442ac49fb5f5827f411533df070db60e07b7fae20"
+embedded = "2725f2d833999e332bf3d79bc5d8f16fbf9ced974d31e0aa5a0adcb02faabd5a"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::comment_raw"
+kappa = "5737d1710231e7317dd42b6d3545f296d361d3ad339886c081278b7c7d6dfee3"
+embedded = "dda2fb6cd023078fa9b3101759f0a2134fabe72b3adf51bb618faf81c5174f72"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::compressed_size"
+kappa = "2c8ee7665bad5016fb43d6a78d2bdc51607cd324fba7f98578d3c3f5a5fe2f27"
+embedded = "cfa66562ea50871bee420de4fd85083f1eaebfcb2c9ab875355a6eef4676708c"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::compression"
+kappa = "0eb374b3cdbdde2f892ed0a0e5e4be45ba1dd1c5280c7ad537297e5065fc0ef5"
+embedded = "b285e73c7b6c6307876382b603c21fed496c693275555147b425cd06aef918fc"
+status = "residue"
+cause = "mir::Ty: compression::CompressionMethod"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::crc32"
+kappa = "5853b8fc11a0f05ebf3fe62fc13026adf3333eb04d906d25034996d772717eac"
+embedded = "dc408d25182a0ec0df3b02fd588991b532bdfa8c9d40be2923cb3541ff421892"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::enclosed_name"
+kappa = "5106a417c424b60c01b5910112a8e6b7c311efd08f332dc7a9b3a403da28554d"
+embedded = "aadb96881da1ea348c61867668ff990ef9e247caa44f12fa41aca2c9a829016a"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::encrypted"
+kappa = "e97d3d109d2425ea54cfda3c030fd46af003e152aa0835f236daccc96d64454d"
+embedded = "65b255fe10dfa49e2c6132096dc8a0fc46d26d235c2b8a9cbe1c7dfc40335647"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::external_attributes"
+kappa = "83072d406ca190f9c92941daa6dd5469c6dc0973de91028b7b63d34cda51cba1"
+embedded = "87a28da8088bd33f9f291437f7c5f980f42c4209847d9d2995c349f903f382d8"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::flags"
+kappa = "cc8207622fde4e1ed8b16745d63f060bad12617a477c3ac14f1776b00d296fed"
+embedded = "0dc021821fa4d740b7658235dd16b6afbf5761b293ab1678aac66463230ab341"
+status = "residue"
+cause = "mir::Ty: format::flags::ZipFileFlags"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::get_metadata"
+kappa = "cf3dc609cb974594c029409d0d7b91562c6807371f85696a1f61b29cd8cbaa5d"
+embedded = "523ed141a340cc496c20faeec6f6f2843334cd89eef7dc5a5f1d794b685d00c7"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::header_start"
+kappa = "3ca26c3a000b72b4fc52b70deccb0106b9472ce2533389d0488876b14cd999f2"
+embedded = "e25337db4e98fa1914e5d9e5b948667d98363f596ec059e58d3f4a91cfeb8dc0"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::is_dir"
+kappa = "590658e31f03522a102248946b904c2b1b8152b421a82657f0af0255e3954107"
+embedded = "9c3b12e796498caa08bf9fa157f4dd1d8e68fceb76f3d5febfa7569555364fec"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::is_file"
+kappa = "a60436bc90d44b546a4a135ab47a5e4ab6f85f21a2ed9ae2f5fb7d466f75db25"
+embedded = "15a4fd6a5fe2097a8942fbd663afe8bd4c3e95010a2512a441cee0200fd4c265"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::is_read_only"
+kappa = "9928f53234defc304f37b91de8bc2c32715188f1e658666b8214ce8d4a43e280"
+embedded = "f2d748ecf7388a2c9bda0585a5876997eebb61f821d742b71d6fd518122ec9a7"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::is_symlink"
+kappa = "82c31fe733fcbcd333683c94c6c1aecd3019fa41bd72fa7297ed589964608f64"
+embedded = "f0db4f79c4042eb656b105c4d62d89473f80075c8905a518ab103a29e7729781"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::last_modified"
+kappa = "b293e8c42a1b209b62b62eb8ec2cd2ad019530ec1ab73c11890aaa14081af408"
+embedded = "0d870dc02f5243164f4e3f4ca3d0f476724fe9b4721227cd4c2bc3445b63da88"
+status = "residue"
+cause = "mir::Ty: datetime::DateTime"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::mangled_name"
+kappa = "cee99309fd3f946c7b3c2d4b8aa9285975c1d1b1dcd43b08092a3874533e4295"
+embedded = "1aa8e1b87369615c51b901e04f1f1cb4c012814de1aade3618c3888ace9fc1fd"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::name"
+kappa = "6966ad374ec045913c7f14002c29ddc823af5d05e78b8761ada934daf15ad2f1"
+embedded = "f5bc4ef3fcd1bf715ce5fef001ef624649e3856e95e624235f308467b456a881"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::name_raw"
+kappa = "5009db656213610a6206489043cdad632f9dd88560dccc14af3cc176a4cbccf7"
+embedded = "c7f397b8ffc421708ef9556a4efff3e2d5c3f4780448e452297d4a6eaabd2838"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::size"
+kappa = "c629041aef3eb9f23f24e4d24f48c40c7a14944a67a70ea19a8b38dd4790f201"
+embedded = "14db481ccebdd0a234749f6a8c96c689200e0cdc6433ea2ff9f42211122c879c"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::system"
+kappa = "be27b500e2b4ad3cb5986f545d179a1aea495be03505fb3936dc14987d6a9fd4"
+embedded = "079a50b0719069fa34f25b56502d7ca10243a75f1f24a5df4680edf50ee298b2"
+status = "residue"
+cause = "mir::Ty: format::system::System"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::unix_mode"
+kappa = "923d9ed7aca01f79c790d93d37ff74048182aecdeedd37ecd1cdbeccb327300f"
+embedded = "1e360ead6d3e33436bdb6ecaaeb66014d64bfd4b5231ad764bf386d205ff50ba"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::version_made_by"
+kappa = "aab1f86393d8158e1ee3fc35c10c23e71ae3971af1cd6fb7e29bb9b656b9105f"
+embedded = "5ff4a2b6e4d4529c7406a2945db72f8f305f9997326a673beb6e489727510893"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::version_needed"
+kappa = "e3d3962d0e64b72c30f4de25dc7cb16e032f8054f4c57ffe783739b3a9d5168f"
+embedded = "42c30a060b8df183e68ee8bc2eeeedc3bd7beeb9092e6dba604c7bca42b4055b"
+status = "residue"
+cause = "mir::Ty: ZipFileEntry<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntry::with_reader"
+kappa = "5de9dee73759a2f467f30a597faa4e3e2235048deaba4dbc4583c300ef134cb9"
+at = "R=u32"
+embedded = "904ce5c2192bc0aa4a61160c89a6119fd13a6cf74df36315f47f03f34e86159a"
+status = "residue"
+cause = "mir::Ty: read::zipfile::ZipFile<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::central_header_start"
+kappa = "64faa4d2ada7edee88e6ce51ce48fe1468c6c1b7807fd29a6e3a94ba88141ed3"
+embedded = "85d1cd73f5aa20f932971930e5c82d939dbd4286a6003a307b867334b32cd394"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::comment"
+kappa = "471db13853728477d516b6abc973ea7d4d5f374ffb77e8fbb3c98d4ec161dff2"
+embedded = "d1d52932c646533ac90e6fef9c6da5d819dc2561da6ee6012f51156e3fae256d"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::comment_raw"
+kappa = "aec7b8cf5181dd7bd528b74399071fa5f31077d0cce8122669546df0424ae845"
+embedded = "d17f3a5d1b3555ab1e635a3126bc1682d570965abd133598c561f2f841499f07"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::compressed_size"
+kappa = "cec5f879350b579fc924bbf3e2e81cb110a5a439b0d3011b4b3936ef29fdf5f7"
+embedded = "307d666283ee995d07dfc1f017f166264db8486beda0fda117cb94f6849f31fe"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::compression"
+kappa = "ddedf24a9a4b87dd4c705be5b010257f01d9538b7e93471914c08ade5651f4e8"
+embedded = "7450ebf6e08621ea90f8cf5bc68b8cfbcba934368ad7ae9b3015956c7773077b"
+status = "residue"
+cause = "mir::Ty: compression::CompressionMethod"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::crc32"
+kappa = "1b93018209b7303d945b40d78e5962bd319d38089f8f70a054e5f11ec063b3fc"
+embedded = "9b6b57455adf237c2cffa4f2eec3f17fa290bd08b6fc9d17dd46a21fe4a59a76"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::data_descriptor"
+kappa = "dc703160a4e7685e928f64080440903b560e4c7003a34d4c4612426f7f73458c"
+embedded = "7f60fb754745075c884f0fad743cd7b719a8e5ad28200e856725b265ad531bb6"
+status = "residue"
+cause = "mir::Ty: format::data_descriptor::ZipDataDescriptor"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::enclosed_name"
+kappa = "7e788fa2bffc1fc8a8f7449df1e68be3f5ad70239171fffb8af38cf04690ddea"
+embedded = "43df81a9ec209a9449e0a40ff7099cec503dbf5c74d3995541a65672ab000d9f"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::encrypted"
+kappa = "ba866bcd0ddf129c307508b18c7c50e6a5e3b12a49094efc1a91b3e2c95ae70a"
+embedded = "2877ddcbf9c153d6d16aac8f755dd99a65f5dd48443e054bc5e71a26aecae9fc"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::external_attributes"
+kappa = "8071b0e3c93ba454fb186176503dc0f1963ae1952cc7efdb6433657efd9fef68"
+embedded = "6b9a3de49318d46475b3f7215c3fbcf7667d51f40caf8adb6aea40dc52fceb6b"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::flags"
+kappa = "d84c0baedeb482e875e0bd7b50dbbb5af065e2951db6507cd69281ee2f4c94ac"
+embedded = "62acb3ac88a3d8b8b0939251c665e66e06ef75d3815beeca3a60dee3d1c8229c"
+status = "residue"
+cause = "mir::Ty: format::flags::ZipFileFlags"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::get_metadata"
+kappa = "32fdffbedec87446741bf5f54f7d9ad4bb752d68eb72b912559e7b39133aa305"
+embedded = "908561fc54a8f5ae26233f66d67c8d06f42819667ed785afbacfb3a61d8e9936"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::header_start"
+kappa = "04f4bca4c33cd4228b18711b2ab37a228cdc442f066e13f9f577c7bb39563ec9"
+embedded = "a7855212d0de8e6dc912bca7f8a5c48f62fd169e9724228c12b7fcc91cbf5cbb"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::is_dir"
+kappa = "e352c253020f1b1c040cf060b66cea99c0b992f0a4877a9500f36e11008cd933"
+embedded = "4785a16312196f0de225c631c3840acc1dbc6837096209a2c660aae232148fbd"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::is_file"
+kappa = "eb0491f448db658adba10cda2bb47ad4fd38ea19f5f0017efd9c8f75acc04140"
+embedded = "7859e19ecc196a7822659578f81b3150b48759f2bb5c4b3d5a2c1285f2aa80ce"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::is_read_only"
+kappa = "8e9bfadb5f5189b17fb769cb2ac3f940db37e5fa68eca144f2be06c3fd441725"
+embedded = "4582247bcce4f7c416f11f0105539ade457f8acb006a86bbf066fc9b497f6e50"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::is_symlink"
+kappa = "a7e157a30917a8c23614096318aa1258a2568381d284c45307034952d63cd119"
+embedded = "6808fbb2538ff4991623072f9980a860887e7d4c022618cfc34cd1744e248a3c"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::last_modified"
+kappa = "fe922ad03f005a8b5ed1cc25c830abe7528007281dcea165d820e3c8ac7987e2"
+embedded = "2886789cc7caefb105a1646758c86ef506ffc99cceb2e532c394578e33a6be89"
+status = "residue"
+cause = "mir::Ty: datetime::DateTime"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::mangled_name"
+kappa = "7032bca1ab8c7f22083acabf35dba17f5f122562ae678fffeb664a556b3a3384"
+embedded = "fb176e277ad2fc5a7fe0d3accfeccbde64bb7d7946023a885e5afbf306d48581"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::name"
+kappa = "5999203f74ddc6fc6a5df971db19f3e402395490825879f2b658c64b5ebae728"
+embedded = "4974ae80a38c13d94c5bbbb699c065a5be0360137ea3693ea8da0612dc3febc6"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::name_raw"
+kappa = "17018ce760001a5211003d8fb6b2b89067a27d3c695b54c0629501304b71a5e0"
+embedded = "cf09f875ae0fe803fb27d780edd821772a76d8ef81338a6c309aec27edde81db"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::size"
+kappa = "60b75a3621d5238a9c04aeeae5a1a0d5d2cae4aff09f2f1713d7808273b5776d"
+embedded = "c4e37a8ccaeb642e7ad404237a4fca996a1a322caa92e1694d7cbe9aaf7b5eb3"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::system"
+kappa = "4f8145722da6cff30031bcd04788f92ef0f12a719eb3c8adacd5ae62dc518b5a"
+embedded = "f9fa4def9878729ccfa546e9189d2f98bdc7df6bc78b3efa4c2c6689323b1248"
+status = "residue"
+cause = "mir::Ty: format::system::System"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::unix_mode"
+kappa = "cfb13c4f68fbedc949b2d68075d5ab4259ab92d268344b7a5e5aa8d78f080381"
+embedded = "85d9effe7768fec1d1f2b7905cecb550e42214ba76d65281274bc1f3a34c7fd9"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::version_made_by"
+kappa = "b05b27ec3eaab739711edc2629f6a4a27c495b84eaa65488ae1b977e8c725df3"
+embedded = "0ad47ea7726bad5f20a01fa614a6383efe66985619aabb00db1bbe5115655b56"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileEntryWithDataDescriptor::version_needed"
+kappa = "e69f65a34240abc7ab60979b73af77a822ba705d2a8b6fc6259b7c380ebe4de5"
+embedded = "3f9272c6f6b3ccc795d3f4550efe0a1b6c8d3560f26b5c7f1766e357901d1993"
+status = "residue"
+cause = "mir::Ty: ZipFileEntryWithDataDescriptor<'_>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::central_header_start"
+kappa = "38541842712aaaa666de777a6a21dbde1da16f419db7ebeac34df001bd9e8933"
+at = "R=u32"
+embedded = "1ebcecb2c193d46ba311af1ca3e0d4a5a5da174e90017584ba0b727a93a0b2e8"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::comment"
+kappa = "2c9e12bff26869daf7e9ea443ccf41fedfa789fade2f613428debc1af4d4d826"
+at = "R=u32"
+embedded = "fc296d6932218d98abaa67f6930ad062cc27d5884dece75721a7d51d464fcc34"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::comment_raw"
+kappa = "93c65ad81320e72a1e60bb55d06d8727ec6bd584394848300dad1ce5b6f40de2"
+at = "R=u32"
+embedded = "73d291ed6d7b7dda58814865d0d1a7197a3fb7141fba8cd8a5f27f6fd43cc1cd"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::compressed_size"
+kappa = "27d2ca4b936ef2a1aba143f7b1fb43aaf94a1639b681c67b9f87109784fe8bee"
+at = "R=u32"
+embedded = "b2ef59d5212b2dd1da4fa7119d29c2e28043d9632d658c4d71bb9cbfda4c5940"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::compression"
+kappa = "f306e8ac4e52fad162cc7908b7052bd35fc6682f1720de0ab24d4ae18dead59c"
+at = "R=u32"
+embedded = "80022e48c59079226304e236a756686b5e990d757a579aa11fe62aee1d36e28e"
+status = "residue"
+cause = "mir::Ty: compression::CompressionMethod"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::crc32"
+kappa = "4c354aa6df7b74d6da5e58e8ed73f08d108a9cb3855cdbc02f5c66ec250480c8"
+at = "R=u32"
+embedded = "20518d77a18c1d3f649b541a89a3f0021aa7f9f529db9d43e1e1deabdd5413ca"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::enclosed_name"
+kappa = "32bc6fa049d0c673c537e390b5c3fae6c6225ea183722be292d6217e0834275b"
+at = "R=u32"
+embedded = "240acdd545d5ef406e62b0dab14de90483e8907130c3cb6b16aebc1157bf4a07"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::encrypted"
+kappa = "78a55bae2f433732be099b96fc182175eb879d27e9fb0895bb43806f81747110"
+embedded = "27faed0d768f3f385aa2147da3f7450c0b948aad18e047fa1ea5a53e9b7e36b5"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::external_attributes"
+kappa = "7c75cb2253537e9f53e827e20b405ab2ade044d4fbe63e79e47e65af53bb980f"
+at = "R=u32"
+embedded = "6e1c621e2f989ba6cae701b582d7ba2b06dd8104f9d8f2ba377f5fab35734f24"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::flags"
+kappa = "7dbd9e49a3bf9169202751f4dfa4ee8d96bfd48370b7c83d29b86b0a92c0a243"
+at = "R=u32"
+embedded = "152415372d605fb22972a9bf241e941f067dab259bc2d1fad5964a6609eed5c7"
+status = "residue"
+cause = "mir::Ty: format::flags::ZipFileFlags"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::get_metadata"
+kappa = "807900240cac2be4e25705bdddda51b15d185b58acf3172a842e2d7fc3edd1a7"
+embedded = "ef9f3b6f1115c288f266ed944a9a0621d3a35f03e576fb874418a32b3a14f691"
+status = "residue"
+cause = "mir::Ty: types::ZipFileData"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::header_start"
+kappa = "72147272d8cad00d68dac28660dc886fc88eaba8cdd842b9310bcca783480431"
+at = "R=u32"
+embedded = "072852362c0660ac05f44bf5e9011c9d3afe8042adb761cac48dcce69e835b12"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::is_dir"
+kappa = "a146bb57b79dfc44d07cb6aa8e924e3233f5827de5a72e55975638f0349f05f6"
+at = "R=u32"
+embedded = "ff9e43d984cdea1ee64d4b34a2a3f40555205fecb9a91553ada6a2dd174305fe"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::is_file"
+kappa = "7100353226035c3784f60e3370f0f2b9f1499359aae52a3547b8eb208e3ade43"
+at = "R=u32"
+embedded = "8b3291504102a830d696d1d9aaf43d8a2b4782a835e970fbeb67df804820cdfe"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::is_read_only"
+kappa = "c0772b5f67b596c0f7e6b36bc434fc243d72c90e78fc63bb2b0dfdc300bf7712"
+at = "R=u32"
+embedded = "9370220624bbf71d17a178a4cc0bf4e290adfd7e302f36176ca6d3b40ad0994c"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::is_symlink"
+kappa = "9256e18ab0e2b2448495a801e313ff497ed87c28d02d55442254742a76f3bf4e"
+at = "R=u32"
+embedded = "c37b16a829494df3313e9720268740816035542aa827175dd87e0137e612a22e"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::last_modified"
+kappa = "96ca71e0421bb34d82973860d7417354eeffacf5ce5787d436e35cf02820f1fe"
+at = "R=u32"
+embedded = "4d7b33fbe73c1158a39264a311de46e9e1df1456e38975e7443c669522e4151b"
+status = "residue"
+cause = "mir::Ty: datetime::DateTime"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::mangled_name"
+kappa = "e61d7f8ec78c2dabfbe5e0e421c6f1cdf4a7631c66ef4bc4678dfb89ed2ffad8"
+at = "R=u32"
+embedded = "e406facd750476ef60db1b066bec243a9b0782e29d771a8b6d9c13ae437f0b00"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::name"
+kappa = "b5fcbe2d736f06f7c18fc732858237b461884bcea5a4e430a391f5d2e1ade958"
+at = "R=u32"
+embedded = "5c3c30c59fedcfe58fb9d597cdf9c348789dc82ef3695bb7daaaa21dccb3284a"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::name_raw"
+kappa = "8c6206aad9f8b1b26967ab6efc014322095b8035ae66956cd39b36c965c1b086"
+embedded = "05f67fb1a4b05ea09c9ac4529047bb81621b594e8054ccf61ed00223bd0b4c06"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::read"
+kappa = "2296a5e9b9803926bc3d1a08b3035594469323c2da547eff916bef31136a288b"
+at = "R=u32"
+embedded = "4229b0df58782f9012cd4684661ff0e62b143396b5a9a1445337e4694214e29c"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::seek"
+kappa = "de777d373501f438245be23645ce2fe33958f03c41495eb3052f86b4ebbe1187"
+at = "R=u32"
+embedded = "73cf31d4be5137af8b22852403071ae8f5f9ace52bd5c887becb32058d07ea37"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::size"
+kappa = "8528cbbe2f231f28c3b99785e98c4342a9cb8ae022fd9810096950d350fdfaac"
+at = "R=u32"
+embedded = "ea44dc15ff7685a880bb174c73cab7196c2494ed26be1b08c1df843f41d8051a"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::system"
+kappa = "2b412fcd888cd1d6ba104ab8636ad2116831bf986e7d9f89cedb3cd75aa88a2a"
+at = "R=u32"
+embedded = "d7b25233767205ff5c911aee9acf270bef65f0fddf544f71632568103a15d7e9"
+status = "residue"
+cause = "mir::Ty: format::system::System"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::unix_mode"
+kappa = "a937ada3121073dd8b8abd2d623f24ac349d651b465f1b70b6ab3814b59b94a8"
+at = "R=u32"
+embedded = "118c2d3ee13c142454f55c89447d1164114d51461989d184da35f89a533f918d"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::version_made_by"
+kappa = "e1dda4297eff142bbab7031e56ed5802475a6204e8cfc70795260c3c02fc32ee"
+at = "R=u32"
+embedded = "a5e6e9d2658c9e844fa1478b12c1d2d877a857709f964f4291405a8df3d5e063"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+
+[[fn]]
+path = "zip::zipfile::ZipFileSeek::version_needed"
+kappa = "81db92a5d56edf827280e80ab318ec3cb17b8a9f50f2f33dc359ea8ad5fe648c"
+at = "R=u32"
+embedded = "acf8ba8606d3d5a7ff4503bdddf1a4daf834a4bb2ab513f3774d1e30957bbfa1"
+status = "residue"
+cause = "mir::Ty: ZipFileSeek<'_, u32>"
+

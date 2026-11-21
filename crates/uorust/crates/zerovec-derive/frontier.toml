@@ -1,0 +1,114 @@
+# The zerovec-derive register (written by `uorust crate zerovec-derive@0.11.7`; do not edit): every body of
+# zerovec-derive's MIR at zerovec-derive 0.11.7, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 65
+translated = 0
+residue = 65
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 38
+translated = 0
+residue = 38
+
+[module.ule]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.utils]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.varule]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 65
+embedded = 65
+evaluable = 65
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::Ident"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: utils::FieldInfo<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: utils::ZeroVecAttrs"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UnsizedFields<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: make_varule::OwnULETy<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: make_varule::UnsizedField<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: make_varule::UnsizedFieldKind<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::ReprInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Expr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FieldInfo<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReprInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnsizedFieldKind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: make_varule::UnsizedFields<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Attribute"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::IdentListAttribute"
+bodies = 1

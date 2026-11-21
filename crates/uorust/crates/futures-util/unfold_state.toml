@@ -1,0 +1,43 @@
+[[fn]]
+path = "futures-util::unfold_state::<impl at src/unfold_state.rs:9:14: 9:19>::fmt"
+kappa = "d619eb752903f0832d9a12ec2c4cd3b7ff61a9d50b86111fa4ff3a83423366e6"
+at = "R=u32, T=u32"
+embedded = "40f76f8cae529e5d295469e4db9e012677c6d4e003325505a073f181260ea589"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-util::unfold_state::UnfoldState::project_future"
+kappa = "4aa0b65f3825093d2dc35cea7ab3c1bb1cc2829583ad4f3e7986cb4aa8fed384"
+at = "R=u32, T=u32"
+embedded = "f75e5945872818d2f12342707b7ecdfd3b59caa91056a6c778eac0be5c454ce2"
+status = "residue"
+cause = "mir::Ty: core::pin::Pin<&mut u32>"
+
+[[fn]]
+path = "futures-util::unfold_state::UnfoldState::take_value"
+kappa = "3c65c96eeeab3ddc1cf716fa8a7d7ce83449136e2f83c17ec1cd694c16d3ad01"
+at = "R=u32, T=u32"
+embedded = "d935f605e5d26c14ff6ed5889a0a3de6dde3de5f780d2016f525d97ddf39d188"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: UnfoldState<u32, u32>"
+
+[[fn]]
+path = "futures-util::unfold_state::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:650:13: 650:63>::project"
+kappa = "3bb62a353a4b39da5790a9e208aa515d46bd50c61835a44fee07bec00b8ec111"
+at = "R=u32, T=u32"
+embedded = "e13acae3f7ac2e743134ea0f2b9647a39d2628af25613ee69f4e4d3767446d4f"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: unfold_state::UnfoldStateProj<'_, u32, u32>"
+
+[[fn]]
+path = "futures-util::unfold_state::_::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/pin-project-lite-0.2.17/src/lib.rs:650:13: 650:63>::project_replace"
+kappa = "1626cb15d4f10e5b980bce32bc794e6c83f0f100f3259cd4513caff2c7b0c958"
+at = "R=u32, T=u32"
+embedded = "95e88d7bea89e8d5540e6669b7a8b8d11a751bcee5c099571e1e888b791df245"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: unfold_state::UnfoldStateProjReplace<u32, u32>"
+

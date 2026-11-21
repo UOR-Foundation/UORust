@@ -1,0 +1,31 @@
+# The wasm-bindgen-macro register (written by `uorust crate wasm-bindgen-macro@0.2.130`; do not edit): every body of
+# wasm-bindgen-macro's MIR at wasm-bindgen-macro 0.2.130, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 4
+translated = 0
+residue = 4
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[embedding]
+bodies = 4
+embedded = 4
+evaluable = 4
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 4

@@ -1,0 +1,118 @@
+[[fn]]
+path = "zlib-rs::allocate::<impl at src/allocate.rs:198:10: 198:15>::clone"
+kappa = "1b9b3e81b58d3594b57dd3b3be1e96046055e335260c9492db72ed6207a032d1"
+embedded = "b5d00c346bdb34cec1b6c4e40f5066e2fd54f4a61626f34364d87bfa803a44c2"
+status = "residue"
+cause = "mir::Ty: allocate::Allocator<'_>"
+
+[[fn]]
+path = "zlib-rs::allocate::Allocator::allocate_layout"
+kappa = "dc71227b40d071186e468054674a3f0938f2868838a2d165550e243f4d0c2ddc"
+at = "C=u32"
+embedded = "cafe55b032c2d5eb24ae9af6122570168d83b1872dfac84dffb7008bdb3d28ce"
+status = "residue"
+cause = "mir::Ty: allocate::Allocator<'_>"
+
+[[fn]]
+path = "zlib-rs::allocate::Allocator::allocate_layout_zeroed"
+kappa = "261d23dd1b0b5cde26a44b78c5e4f2cb28a9d39c6ff8ee3bf0513872b2a51295"
+at = "C=u32"
+embedded = "494176e3734e9e187967d43759d9e3523a61b335fac5450b4942e7b01a98e1ea"
+status = "residue"
+cause = "mir::Ty: allocate::Allocator<'_>"
+
+[[fn]]
+path = "zlib-rs::allocate::Allocator::allocate_raw"
+kappa = "07c998b03251595768993b09daa140b4e1167844cf23894b9d3d197289898dfb"
+at = "T=u32"
+embedded = "ade6811733be99ffb7ee2ae2f766c4fac69fbcffe63eab9cea62d71b13572516"
+status = "residue"
+cause = "mir::Ty: allocate::Allocator<'_>"
+
+[[fn]]
+path = "zlib-rs::allocate::Allocator::allocate_slice_raw"
+kappa = "9125c60eefcd7970d8149a55e0367886788a2171ae769fde113736c4e0ff9e8f"
+at = "T=u32"
+embedded = "aa82d5556dc058a97eb61725e69914642f650602dad4bbff66979f5a06b03cd5"
+status = "residue"
+cause = "mir::Ty: allocate::Allocator<'_>"
+
+[[fn]]
+path = "zlib-rs::allocate::Allocator::allocate_zeroed_buffer"
+kappa = "77f6c3757947e34edded1e836912b3afcef9d677ae7014a55f1df20758023fb1"
+embedded = "dc95543c96e0d23ae4deb57ebc2b7240d4ccdc3a3b892a70d8cca18cf0f21318"
+status = "residue"
+cause = "mir::Ty: allocate::Allocator<'_>"
+
+[[fn]]
+path = "zlib-rs::allocate::Allocator::allocate_zeroed_raw"
+kappa = "eeeef17001c500736708a229e0f02ea583f4685574ad3fe5b95b59c7649c325c"
+at = "T=u32"
+embedded = "7097e5c81beda077e429d8551bc18c3368433d7e11c5076f2d9935b0b592dfc6"
+status = "residue"
+cause = "mir::Ty: allocate::Allocator<'_>"
+
+[[fn]]
+path = "zlib-rs::allocate::Allocator::deallocate"
+kappa = "8c401652461e14da8235044d86e61dc17111bf39eff0f42d2bc2067c308c7933"
+at = "C=u32, T=u32"
+embedded = "bf10e2991c442c2afd40a3dea6b17750a69e3a45c329a161f8ad35baf833d409"
+status = "residue"
+cause = "mir::Ty: allocate::Allocator<'_>"
+
+[[fn]]
+path = "zlib-rs::allocate::_"
+kappa = "4b58fa24be60e6c0cdcaeb2600a18c7b7ac296acf42b5fa205b71822fdceb88f"
+embedded = "ca035769ce687e82fad6a2e3a741bac18fdf7c0379f6c5d35c9461bebdad0603"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item allocate::ALIGN"
+
+[[fn]]
+path = "zlib-rs::allocate::_#2"
+kappa = "f75d51928dcc61d91a2191b212a3a8b40d6d25606959b353f70354b90fb62969"
+embedded = "f52b86b376189b85e66d619c25df929ba2f156a671abb992ad5bb2fdb93856b2"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item allocate::ALIGN"
+
+[[fn]]
+path = "zlib-rs::zalloc_c"
+kappa = "ce173f398b9ab5cf682200785558ca641abd9dde230e6a4f34e51073d48ca8b4"
+embedded = "af80a15210a13765afbc5a3aea7b861a37aed59976697ab618b738e18d2bb87d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: null_mut"
+
+[[fn]]
+path = "zlib-rs::zalloc_c_calloc"
+kappa = "cc9546ce56b6671755a01c80b613df3c823211bc7df4c0c63b4525c2264651ab"
+embedded = "0b706c130459788c14d4a2ab4fdc737930a0d2fb838e8e71dea1a22ea2b63887"
+status = "residue"
+cause = "mir::TerminatorKind::Call: null_mut"
+
+[[fn]]
+path = "zlib-rs::zalloc_rust"
+kappa = "124f44ac6bef00680a374f6e291134eb65f755d72cdc18e718f7caffff9c0ddf"
+embedded = "891008d8a0997552cf790d4b044cd4b551a3dcd90246335f1edef85d68dd3246"
+status = "residue"
+cause = "mir::TerminatorKind::Call: null_mut"
+
+[[fn]]
+path = "zlib-rs::zalloc_rust_calloc"
+kappa = "a4c9f344feb586e7ca2d676b193cf33dd76a857c1e320b7fed4bc3a57dbb15c7"
+embedded = "60c303a0fe9c288a545d1a7ecbfed6d31a6747453a7fb9999f7f728d81c3919e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: null_mut"
+
+[[fn]]
+path = "zlib-rs::zfree_c"
+kappa = "f76b92ee0bd932c3a9011af2761b85300bc1aec1e40c14c01d7aec777034855c"
+embedded = "c7708d20a4f5d7704a5a5cebfdf15d727c624a575cc650b08f73f272c963e431"
+status = "residue"
+cause = "mir::TerminatorKind::Call: zfree_c::free"
+
+[[fn]]
+path = "zlib-rs::zfree_rust"
+kappa = "ac911931f95d60495e720176e1f575c342866e90f4abb2046a972bf45e7c1253"
+embedded = "ce4e6d14174fc15e0febdc8d9c811e8bbc14fde84a371acaa4486573ef6fdb73"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut c_void>::is_null"
+

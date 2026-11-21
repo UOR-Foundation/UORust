@@ -1,0 +1,284 @@
+# The allocator-api2 register (written by `uorust crate allocator-api2@0.4.0`; do not edit): every body of
+# allocator-api2's MIR at allocator-api2 0.4.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 379
+translated = 8
+residue = 371
+
+[module.alloc]
+bodies = 41
+translated = 1
+residue = 40
+
+[module.boxed]
+bodies = 128
+translated = 1
+residue = 127
+
+[module.crate]
+bodies = 3
+translated = 3
+residue = 0
+
+[module.raw_vec]
+bodies = 43
+translated = 1
+residue = 42
+
+[module.slice]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.unique]
+bodies = 6
+translated = 2
+residue = 4
+
+[module.vec]
+bodies = 151
+translated = 0
+residue = 151
+
+[embedding]
+bodies = 379
+embedded = 379
+evaluable = 379
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: vec::Vec<u32"
+bodies = 86
+
+[[cause]]
+cause = "mir::Ty: boxed::Box<u32"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: alloc::AllocError"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: raw_vec::TryReserveError"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: alloc::global::Global"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: boxed::Box<[u32]"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RawVec<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: drain::Drain<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: into_iter::IntoIter<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: raw_vec::RawVec<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: boxed::Box<[std::mem::MaybeUninit<u32>]"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: raw_vec::RawVec<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: raw_vec::TryReserveErrorKind"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: boxed::Box<std::mem::MaybeUninit<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: splice::Splice<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: boxed::Box::new: allocator-api2's MIR stops at type outside the lift: alloc::global::Global"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: vec::Vec::new: allocator-api2's MIR stops at type outside the lift: raw_vec::RawVec<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: vec::Vec::with_capacity: allocator-api2's MIR stops at type outside the lift: alloc::global::Global"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: vec::into_iter::IntoIter<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BackshiftOnDrop<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ExtendElement<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Layout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SetLenOnDrop<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: boxed::Box<str"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::CStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: boxed::extend::{closure#0}: type outside the lift: boxed::Box<str"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by SliceExt"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::as_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: NonNull::new_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: unique::Unique::as_ptr: allocator-api2's MIR stops at mir::TerminatorKind::Call: NonNull::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <[u32] as SliceExt<u32>>::to_vec_in2::DropGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <drain::Drain<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: <into_iter::IntoIter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FillGapOnDrop<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: System"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: boxed::Box<[u32; #usize_N]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: boxed::Box<[u8]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: global::Global"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::alloc::Layout"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::pin::Pin<boxed::Box<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vec::drain::Drain<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vec::set_len_on_drop::SetLenOnDrop<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: vec::splice::Splice<'_"
+bodies = 1

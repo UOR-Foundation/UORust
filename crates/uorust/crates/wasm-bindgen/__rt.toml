@@ -1,0 +1,676 @@
+[[fn]]
+path = "wasm-bindgen::JSIDX_FALSE"
+kappa = "734baf45c75a9b1ae0177a0e56e7a22f1b1fd1181e595b203650b61f4a709b09"
+embedded = "ccf4c094015a4398db206bbde65bf2e506cecb3977aca7e8c3fb66265848854c"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+
+[[fn]]
+path = "wasm-bindgen::JSIDX_NULL"
+kappa = "32be257037f00adb5bd8a2853f954e8667f7237662ce053fc88bb4d99b54b1d3"
+embedded = "c422af139f67138b43e362b1bd459f244fe0db916d4079975bbe4e40520a0884"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+
+[[fn]]
+path = "wasm-bindgen::JSIDX_RESERVED"
+kappa = "253eb27eab99853daed785ba6bc5b30cb3adc763dbba7a55a519b14c796d8319"
+embedded = "feef2afdb7f566c916a9a3ef8ee718ae0b97c2dea97b3464997e23a214555bda"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+
+[[fn]]
+path = "wasm-bindgen::JSIDX_TRUE"
+kappa = "6e1cb7b779d2621e427ba03d008464bc505acd57be141ae89e5a1dadd36b8918"
+embedded = "330a705a371deb8c8e74d14d0360d072913625451b88c1f490fd11fd24a00ef6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item __rt::JSIDX_OFFSET"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:1022:1: 1022:25>::into_js_result"
+kappa = "75dabf510ccc51a3a0ed8d307284dace778ba0a0e096d05d1a73ae3e99cf2204"
+at = "JsValue=u32"
+embedded = "2d566d4d06b5ea3c5ef10106cc1c1d1229c36ed6616873ab7e9fe4afabf22ec5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: JsValue::undefined: wasm-bindgen's MIR stops at mir::Operand::Constant: JsValue::UNDEFINED: type outside the lift: JsValue"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:1058:1: 1058:18>::start"
+kappa = "5eb500e66ec6286cc014bdefe028d1b8e8e3e754bdb4e8d5f5ef4a3596c66b2c"
+embedded = "dab0006c73aa4be805334005197eee1842c2510ae1bbfbcef2f83b5b66575951"
+status = "translated"
+digest = "31c8672da29e8bf47870522a93fb046fb6c022b4ed2a16063977bb697f5a50f1"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:1080:1: 1080:40>::__wasm_bindgen_main"
+kappa = "69013df8128d3f5d2c0bb9d908fc5885b16c072ca43105a996b0faed8960c966"
+embedded = "1fba9afda0c85cfb665e3dacebc5b712cbb3cdde39c6077417c0bae8b3166d1e"
+status = "residue"
+cause = "mir::Ty: MainWrapper<()>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:1085:1: 1085:48>::__wasm_bindgen_main"
+kappa = "4297814f0158fea14e53f63517c05fda714493c9ad50a89f67232d4f58d61a9e"
+embedded = "ee6078339a3b7166fec9797852255016d331cfed05699e0be632641b4e24bdc3"
+status = "residue"
+cause = "mir::Ty: Infallible"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:1090:1: 1090:69>::__wasm_bindgen_main"
+kappa = "b748ebd6e9396fa65a07a6b73118220044759edb67f5922b4ddf51347131e26b"
+at = "E=u32, JsValue=u32"
+embedded = "b707e5bde4e8afd55cbfa12defb2ab656551e82d04e1180b0302a0cad25611ac"
+status = "residue"
+cause = "mir::Ty: MainWrapper<Result<(), u32>>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:1099:1: 1099:67>::__wasm_bindgen_main"
+kappa = "7c0cf6152765752329819bf7f2dbd2d066a579a83cecc6e7ca196ca13c8c580d"
+at = "E=u32"
+embedded = "91dc313aea5e9a6bd5c21bd408efdb2c4c0b56b275de0ac386be157e8a5aaaff"
+status = "residue"
+cause = "mir::Ty: MainWrapper<Result<(), u32>>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:149:1: 149:41>::force"
+kappa = "3cc59c344efc80da0794bdc69ef94d7302c1e8e26bd60668a311fc00ff2ade42"
+at = "F=u32, T=u32"
+embedded = "3cdfe7796aaeaf4912a51923b8dff986b4215f44d724c8d767a9254db3d658be"
+status = "residue"
+cause = "mir::Ty: __rt::LazyCell<u32, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:149:1: 149:41>::new"
+kappa = "b68c4ca0cdf4ca44fbc5f53ae7a1216bdf1973c3438b4a026deafa5c90efe0ec"
+at = "F=u32, T=u32"
+embedded = "a4e38b824a19cffd5dd90f50b2dca13c04e5d4fc8797c2a097db35d304497437"
+status = "residue"
+cause = "mir::Ty: __rt::LazyCell<u32, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:314:16: 314:21>::clone"
+kappa = "d32764c4ff6b5e6c99449e6a781a12cbc2b45cfec97ba106ee49417c576b1858"
+embedded = "9a5e08f728cce1d49c89029f13f0c55b41a37e43fbd2f132057350fc68a0c2e4"
+status = "residue"
+cause = "mir::Ty: __rt::WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:314:23: 314:30>::default"
+kappa = "3af8c68be4dfd140d1a48126d946c914ea0e7ac70e4a44433c769036b70e6883"
+embedded = "64447e1dc6087349655b315679d52b78f7b2fe0265fd6ad4879ff95b01132aec"
+status = "residue"
+cause = "mir::Ty: __rt::WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__rt::<impl at src/rt/mod.rs:384:16: 384:21>::clone"
+kappa = "fad3ce11a816ea9d37e1b253a032957da0edd678f88412270d00e92b57f32e2e"
+at = "T=u32"
+embedded = "ccc5499d067f8544e4944dd9c6505e4ae9ec9a521fccfbaddf4339de8d7a40cc"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::LazyCell::deref"
+kappa = "dbc9c02d54ca38da569bc872dafc0e0026ab27ce7e41a915c28427071c1c7434"
+at = "T=u32"
+embedded = "21905b247f44aa63fd2356d55cbea4108023497f1d44a0a79835e96991058451"
+status = "residue"
+cause = "mir::Ty: __rt::LazyCell<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRef::borrow"
+kappa = "88e347962b186e44389fc5037c3decea93117ad17109b8a965883ae8de03d780"
+at = "T=u32"
+embedded = "74c4590756818e16aae0dc18494ed9e746090cf37393033c2e0cc4edf1f64bdd"
+status = "residue"
+cause = "mir::Ty: RcRef<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRef::deref"
+kappa = "092494c700d23b723561414e68f923a09c0d887078c9bc74c8dc526fea879f02"
+at = "T=u32"
+embedded = "fb9ee01ba32d715858f69e2461d8b03c49f54c5e2f38e7c070f59ac3d8a3eed7"
+status = "residue"
+cause = "mir::Ty: RcRef<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRef::new"
+kappa = "3f38bad81f8ddefd87ef752d21ba8a4820ccbe7d21e4fe1431a042bcb9d7501d"
+at = "T=u32"
+embedded = "9a1396c1bbe0aacc4c28b338177daa2bd096f9f90a17f8db571ba2349d791c7d"
+status = "residue"
+cause = "mir::Ty: __rt::RcRef<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRef::try_new"
+kappa = "bf56071ef4e82671ae9e4d566cb1d1c79d7b21c9c87a3c728becac0400cfd6b9"
+at = "T=u32"
+embedded = "02a5873b46829ed5bbdd6beb1a14874b032106db3a33361752d62b6cb98d36a0"
+status = "residue"
+cause = "mir::Ty: __rt::RcRef<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRefMut::borrow"
+kappa = "0321cb74dcb749a65a711f058c2d1d364b300660fbbcce2486a631046ce817f6"
+at = "T=u32"
+embedded = "7d0939fc3486d87644acc1a92b44941542c8fc0c9dfbe5df3e48ad002b5baab2"
+status = "residue"
+cause = "mir::Ty: RcRefMut<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRefMut::borrow_mut"
+kappa = "82b228239760cf05410e06eb8382ea2f6418b68f4a2925cbdc68149935d2363e"
+at = "T=u32"
+embedded = "c8b790d93169d5cead37f31dcaecf5d9dd92abf05633d55e6377f0eac7644763"
+status = "residue"
+cause = "mir::Ty: RcRefMut<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRefMut::deref"
+kappa = "96419459b3f4bfbc77e8bd80a27048bf396d47ab7a156d7b1e7e4b75b35726be"
+at = "T=u32"
+embedded = "fbc26450f9c421594b75e72886f880c7e87e8e4caf797ee7aa70da2298457143"
+status = "residue"
+cause = "mir::Ty: RcRefMut<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRefMut::deref_mut"
+kappa = "4805346e700cd3a9094fa4fb02a8329af025a96e4362b45a749cd94d7883fa5b"
+at = "T=u32"
+embedded = "4403512cc4ccb5af7ad90e6a792bb05eee9a82cc5342f1c72149bc6a3ab1dcb9"
+status = "residue"
+cause = "mir::Ty: RcRefMut<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRefMut::new"
+kappa = "63a16dfafe88a0a290ce816970bc0574cb06adb9f36310950e8b570b020c935a"
+at = "T=u32"
+embedded = "dd91dcad764183490c03d3343928486e094be61bb4e4ee704cc82a37e68f7d61"
+status = "residue"
+cause = "mir::Ty: __rt::RcRefMut<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RcRefMut::try_new"
+kappa = "e513d38995246e1e23de1ee9d3b880365c7779d714b65fd75c89c844a0ac32cb"
+at = "T=u32"
+embedded = "6409d7f00561a493b473ebe1b61ee6843eb18fe41176b38d70124032783a4b34"
+status = "residue"
+cause = "mir::Ty: __rt::RcRefMut<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::Ref::borrow"
+kappa = "da40ed10df125d1966578f187480d59c88d3a2601a69654634a8bc9d37df53c0"
+at = "T=u32"
+embedded = "9745a53ed25d98208924fc8da85d4ff29dda9d616931994920c98c1a71e2b027"
+status = "residue"
+cause = "mir::Ty: __rt::Ref<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::Ref::deref"
+kappa = "8ed7de7ef68d4ff8f58c0aa926f9c3d920245e9c443512ba68b5ab5d4200a2c7"
+at = "T=u32"
+embedded = "67fd87d16e4b7ce8dabd09f6ca0fa8ea52adde76a25435f0452ed51ab88fc7e1"
+status = "residue"
+cause = "mir::Ty: __rt::Ref<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RefMut::borrow"
+kappa = "e2c8651fcfa6ba5c4109c0dc184fc0af9a7b5714587bee2e1b6bfe85294331ef"
+at = "T=u32"
+embedded = "b184fbf1109ed650b944345f2eca7f228b074318bceb6a20703e89eed71bedf5"
+status = "residue"
+cause = "mir::Ty: __rt::RefMut<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RefMut::borrow_mut"
+kappa = "5381794aeed9385731f77e840c44a9e2d4735e785af361527659234ed2a8a122"
+at = "T=u32"
+embedded = "7da056af35da4c6b9fc46911bab2500aee23ae840835ad9f04fe3435f9e856ac"
+status = "residue"
+cause = "mir::Ty: __rt::RefMut<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RefMut::deref"
+kappa = "672945b6c55ae673303c4f8353252f56a017384e575d18ab6eb9e813c34e9242"
+at = "T=u32"
+embedded = "adc8824e0277039d51bd8884796aa75ad1063d16683692dbf9b1fd04a1d53b2a"
+status = "residue"
+cause = "mir::Ty: __rt::RefMut<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::RefMut::deref_mut"
+kappa = "5e48ddac54eea3e0d5ad251dc83ac0da7d62cb76e5b1066ecb7dfb2e90385692"
+at = "T=u32"
+embedded = "69bc48fa670ac46db0f40ee358e8fe5848f534565a9b44976d5e4ae92cba7828"
+status = "residue"
+cause = "mir::Ty: __rt::RefMut<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::Result::into_js_result"
+kappa = "e9aee2b688610b02a59d3d4016261c64a8e481fb91b06612ffbd419f7d51b486"
+at = "E=u32, JsValue=u32, T=u32"
+embedded = "f38a9de7328c473de77a4915bd41d3db8192d240b6aee99d21c2ad12fde53b20"
+status = "translated"
+digest = "171c5fa119d786ca593a10b0539111d0a7308f08cfbf20d94041416e7d0327cd"
+
+[[fn]]
+path = "wasm-bindgen::__rt::Result::into_js_result#2"
+kappa = "6640fafb7bf51dbf164b39f67eab42ab4861f9ea36e8f5372deff580dfece3a8"
+at = "E=u32, JsValue=u32"
+embedded = "7239f47b12e10e03429debf41972d23d3cfe2c231a4eda56d492e925292f0d00"
+status = "residue"
+cause = "mir::TerminatorKind::Call: JsValue::undefined: wasm-bindgen's MIR stops at mir::Operand::Constant: JsValue::UNDEFINED: type outside the lift: JsValue"
+
+[[fn]]
+path = "wasm-bindgen::__rt::Result::start"
+kappa = "6b8b347b854dd474d695d73461a01f0d991a7b0ac7e6a279e7823ae7650b72b3"
+at = "E=u32, JsValue=u32"
+embedded = "4859d8698fcda7b20bcc1f0cd39d3397a042451593326037821f966bfa9d6b60"
+status = "translated"
+digest = "921496f1db486aab533a697c97a5566b10009f3eaac21de5ae6ce7d6cf8e5373"
+
+[[fn]]
+path = "wasm-bindgen::__rt::T::into_js_result"
+kappa = "b9b561d10457c595dc8bce8c387052cf9e99207b36b24106f5289d2b8fd4d2f4"
+at = "JsValue=u32, T=u32"
+embedded = "33a2615101767234c4d650c4f2e963719f5d2cec97cc179665b05a30985ff2aa"
+status = "translated"
+digest = "e1557193b9b51e1986f5e504bc36ab750a57c0eb5d21c48f9bdc7cb520807f47"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::default"
+kappa = "b5553d6a73040707cba66dcad146bb532a91e37083d052751564f4e044755de0"
+at = "T=u32"
+embedded = "886840feb114482551f6f10b6a2e2d0219985d4f78b73927980129e4c83611fe"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::from_ptr"
+kappa = "afd23f9742c477471b1b7e50774760747f8ce70c812fc9126296b0399023439d"
+at = "T=u32"
+embedded = "97f7a2020a588970c7720d11d21d3c32e042ba973dacbbc9fd018aff6fcb4e9e"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::from_usize"
+kappa = "725294263dc4c411bc0c8a82bd7373339ace6e9963974445419f16d1f5691a43"
+at = "T=u32"
+embedded = "06d361fc43c0ee61e9073952ed513a7aa4968d2aff30a96386a3e37ba7dfc7d5"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::into_ptr"
+kappa = "3b2b1acf3a46e9e219c0ed8bf1388f2229ad82d1500ca50d9a46c6e09161ad89"
+at = "T=u32"
+embedded = "1e7d5cabb912123d8327f18207a3b59ee24d2b88d5cbe7365b4341f1d3102e66"
+status = "residue"
+cause = "mir::Ty: WasmPtr<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::into_usize"
+kappa = "910ac17f022bf9d0cbff0808e4c0f61fbbaca33420c20a65bef0720dd3c2b2fc"
+embedded = "37acb71fe498930a44b30fd18582bbdb41ccb088a8bc242a1845529bc50853f0"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::is_js_null"
+kappa = "482c5449f2040b32330bdc6bcf33b39c56305e83af36911a34555940db0712a5"
+embedded = "9e689f7ea23f564de36fce2672de2afebd0b51ed635c76bcf2da900f6ef97679"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::is_null"
+kappa = "254ca10567e4f77087deb7e626082a006095e4006caca3246c084fec2bb959f6"
+embedded = "ceee5d9a7385149a06b2fd16799942ab1cfa26ca04dedd74df4032b55e97c1fe"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::join"
+kappa = "55fa7c4d0067e707e1c99541ea9f32741070a987895d5ba86255c7952787f9dd"
+at = "T=u32"
+embedded = "5b420a6aa285bb60c19d0638b304b3ea986e76107b2e60a8056bca9b0752d988"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::js_null"
+kappa = "1d7e2bf506f8ed1a797f617e855cb1beed33e9f395fae4b31d8eec85daefa9fa"
+at = "T=u32"
+embedded = "184879bb3c8469dc1517277fe6817e9ee90dbeca97ccd41639577d97d6569c53"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::null"
+kappa = "d7b5327576eb920e9f03720de96535a74057f69345c6eb10279e09d4bf93b19e"
+at = "T=u32"
+embedded = "e6ab1b1424a41fd6b8a75ec14a95bbbc481cb5a7feba549be0f6c979f1d44004"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmPtr::split"
+kappa = "484a18426da7be88875f5c1a2095b1f52c31fd7193ab96ffcb3fb37f62c11159"
+embedded = "584242cf4b85278d4e5b6bdf0405b96933f3629f02fca4afce07d5fa09ac15be"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmRefCell::borrow"
+kappa = "c62427054d505754e31e5209da3a6d440c397a259ad95d5ee2c9ec92e29b4628"
+at = "T=u32"
+embedded = "212f588fcfa1e81202a1c21f30e774f3abf351b7958ce4ddbc20c0f6a898b020"
+status = "residue"
+cause = "mir::Ty: __rt::Ref<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmRefCell::borrow_mut"
+kappa = "bcb2f14e8f8d5015f54cc1b307df8e6e01db82a010f79a4fe74252791d8ab72a"
+at = "T=u32"
+embedded = "df8749120f8063be988b13679fd8a83b2b625c5ef94fb549854c312f80416da8"
+status = "residue"
+cause = "mir::Ty: __rt::RefMut<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmRefCell::get_mut"
+kappa = "7d66c893a484d2b9495182bdd36f62ff2c46a22aa076ca8bd190a0e6910c6d0c"
+at = "T=u32"
+embedded = "36ab0542e8eac12cfb9773961c63dc3b8e8604fdc4c636269315e77b03472c36"
+status = "residue"
+cause = "mir::Ty: WasmRefCell<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmRefCell::into_inner"
+kappa = "3468e053ebfd3203ebe6ed6505cb2b3be56e6d21497aeb13ad126fd9fb748144"
+at = "T=u32"
+embedded = "271c5b2fffe5485a2621fffc188aae85703b0885b8f6561e434bdcd0db7b7c33"
+status = "residue"
+cause = "mir::Ty: WasmRefCell<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmRefCell::new"
+kappa = "7b2a12e5937b752ddc428d189dd0ff18e38b870cc6e2e696f670e49ace4a1561"
+at = "T=u32"
+embedded = "63bbdf7faa14eb3555ac6bb02620bc1bd3aafa98db99555012f03a53bc3a6a3a"
+status = "residue"
+cause = "mir::Ty: __rt::WasmRefCell<u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmRefCell::try_borrow"
+kappa = "9f75db307d8cf4f3d948859dd516769bb8b31b907920c26c447ef00f03084443"
+at = "T=u32"
+embedded = "898bcc4b44c48744143617d19e92c0bc64ddf97ebe62b7bf3d9ba4e8e442245a"
+status = "residue"
+cause = "mir::Ty: __rt::Ref<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmRefCell::try_borrow_mut"
+kappa = "cf445feba414b2c20ca48adc8d9a7ecaa57ed0f2be3c461f8a989511def429c3"
+at = "T=u32"
+embedded = "32cf948b247b0315d9a44e778cfb8610d8b8c277f82e76edf390807f346fb0dc"
+status = "residue"
+cause = "mir::Ty: __rt::RefMut<'_, u32>"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmWord::from_isize"
+kappa = "e14ad7fe387484412a13273aaf035a41ae2a662c9b3f0c8742ab69aa791d9b0c"
+embedded = "9ec13f54f9b18a110b8ec3bad9a869e905e10a3995e135d46bee805ea72f7336"
+status = "residue"
+cause = "mir::Ty: __rt::WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmWord::from_usize"
+kappa = "0f4e4d91fd75e53a0da92ebb523ba72bfecd4da464eb284c33c2e511f2a14bf7"
+embedded = "0a91b970b7db6a58c4dcb23e91b1609ebf5382b60eeead3b3ea882093bcb853a"
+status = "residue"
+cause = "mir::Ty: __rt::WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmWord::into_isize"
+kappa = "cd805fd00a392d51aa0ff76130ff4234b72b556ec984ae4e2aaef3a7fc80255b"
+embedded = "7ecf44a29f2e5162a5beab69b36f4a75e65fbaf6cfa0112dd9874eecd4eee2d9"
+status = "residue"
+cause = "mir::Ty: WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmWord::into_usize"
+kappa = "707d4ef708ec57f450747cf0c53389f33dc294c00b84728a2cef1dc93e74b904"
+embedded = "f7458fda0a41a483426805971782d46c35eba3abcce764478f40f30d12a822dc"
+status = "residue"
+cause = "mir::Ty: WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmWord::is_zero"
+kappa = "8ae124f35b6730f481efa01628fe169b4b94b63bf540262b917fb55bac98fd15"
+embedded = "68c3733c9ae0bd3d2f4b712c9f00f3658d97ce90f9622b325b8f52ea95346449"
+status = "residue"
+cause = "mir::Ty: WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmWord::join"
+kappa = "ebeca3a271339aee708ed6c1794a816b2a61ed3d9093460f40f7076f65588774"
+embedded = "a4f61b27fb2bd50b6dbaff2c29bcb1f753d68afb3c6a77f876a7dc8a89a5225b"
+status = "residue"
+cause = "mir::Ty: __rt::WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__rt::WasmWord::split"
+kappa = "bfcf2a74be6b2086ddca15f38b72fa00a9e2056f106fc232051ec10e8a4747f2"
+embedded = "54a1bf8f392220751c8b582e0b7f5d6f6ce9f11f8bf049c1da97a354d0ad7c99"
+status = "residue"
+cause = "mir::Ty: WasmWord"
+
+[[fn]]
+path = "wasm-bindgen::__wbindgen_exn_store"
+kappa = "c158f552c806b887bde03d7210ec168ffeb12fa5ff05080eadda8355e6f456b6"
+embedded = "3f870df48582660bff15a7b9283b0d1a86923b84798a8b0276df9b6c7c0556ae"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc42: &ThreadLocalWrapper<Cell<[u32; 2]>>}"
+
+[[fn]]
+path = "wasm-bindgen::__wbindgen_free"
+kappa = "0fe5bf75705e0f27c224fd2b173b5a43e0ab2d6c09883316eadedfefe66de47e"
+embedded = "c754ea19e559f783ed2402099431c5212445ece2606d46caa6f1a1cbe746e471"
+status = "residue"
+cause = "mir::Ty: WasmPtr<u8>"
+
+[[fn]]
+path = "wasm-bindgen::__wbindgen_jspi_set_rejected"
+kappa = "478ca79d7e8c4c5f89ede6786de089591bf18a0e9ff5642860056eb88af3464a"
+embedded = "758afa1f1057dda6fd8d0bbaae719b700bbadd0c714c11ba89a3a027c1da8ff6"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc54: *mut u32}"
+
+[[fn]]
+path = "wasm-bindgen::__wbindgen_malloc"
+kappa = "a3c957ffba3d03d07f60100229e1163eb1b64ca187f4d584c6decfbe87e8e1a0"
+embedded = "9c4619dc7ac69e3ce6671e07d7015ef772620ee7508e15f8f32147cd6903ec7d"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u8>"
+
+[[fn]]
+path = "wasm-bindgen::__wbindgen_realloc"
+kappa = "210f156be7441b80f7d395553c036b585258aa23fd8875aaec109104e628552a"
+embedded = "8d0c58ea5e45bf8912ca889e483a6b886a2e21067af6c4a344ab6ab433ab8e00"
+status = "residue"
+cause = "mir::Ty: __rt::WasmPtr<u8>"
+
+[[fn]]
+path = "wasm-bindgen::assert_not_null"
+kappa = "d5bf8d6f2e5f803766f0ac7941180665f9ec42c264bc0529177cfc6769035d3a"
+at = "T=u32"
+embedded = "63f797d212b7d4e0af9cb32312827bc39073c77a8a0b225bbe44c4c08960a287"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut u32>::is_null"
+
+[[fn]]
+path = "wasm-bindgen::borrow_fail"
+kappa = "2233ca67d6b5b63943474dae040f017733451a33e1da3e2b6f930ae8736f3987"
+embedded = "25063557f0579fa0ab3a6ba8fa7ba1f864254c47fd58f14867de3b85efd98c0e"
+status = "residue"
+cause = "mir::Operand::Constant: __rt::borrow_fail::promoted[0]: mir::Operand::Constant: the constant item __rt::BORROW_ERROR"
+
+[[fn]]
+path = "wasm-bindgen::borrow_mut_rust_object"
+kappa = "8abd93474a101d7127165c20a658dc3b9486ad8f4340ae52bf056643e81bd4f8"
+at = "T=u32"
+embedded = "932ecac7481f21353defa8001a36e016f8cd3dfdfb0cda2322953ae222a19fa2"
+status = "residue"
+cause = "mir::Ty: __rt::RcRefMut<u32>"
+
+[[fn]]
+path = "wasm-bindgen::borrow_rust_object"
+kappa = "e0eb9ee43a060bfd27135baaab481f4ee194610e47d1e5a4af0e5cc926aa9bc3"
+at = "T=u32"
+embedded = "fc4cd89c2e3afa5f70a81329ec851ba82ce9ffd90971629c1225d69c1ecc89b4"
+status = "residue"
+cause = "mir::Ty: __rt::RcRef<u32>"
+
+[[fn]]
+path = "wasm-bindgen::breaks_if_inlined"
+kappa = "7c887d27f7a95818ac60fc26a538f6780b83140ebb92be403cbf90b89042de1f"
+at = "C=u32, From=u32, To=u32"
+embedded = "c6a833f5b58e5a9ddfe340faa4ad904e3009e8fd84d4219b79aec54874a3d6a2"
+status = "residue"
+cause = "mir::Ty: convert::traits::WasmRet<u32>"
+
+[[fn]]
+path = "wasm-bindgen::encode_u32_to_fixed_len_bytes"
+kappa = "477759b39e3d1d060c00b04b51715674a1310ae17c4dbf12112e61a7bd75204b"
+embedded = "6a0bd114cad6cab1c92b4cb3281583ac1a5763661111d4369902cd77dfa2c1c1"
+status = "translated"
+digest = "b8a1a5e5c09d8532a1244f647c83c596755e631e5c71826a68bb791275143bb9"
+
+[[fn]]
+path = "wasm-bindgen::ensure_ref_unwind_safe"
+kappa = "89155461b3a678bdf71b073ade2f68afb41a08c91e17e7672e2837242c5e1f29"
+embedded = "ac955327a300924d20a93a24a11d547c5a57d81ea8267b54846f2b19531d1b78"
+status = "translated"
+digest = "bf6122475dee2822049b92d5899c7d086b16d2ed6830f4456051b78cb946f574"
+
+[[fn]]
+path = "wasm-bindgen::ensure_unwind_safe"
+kappa = "0deeaa9ad057d7278b87e5c6a52b175a1c6f915afc5c02588c2f6f7a23bbf475"
+embedded = "7fc783c19a4be60f4c660d06aa83ff7f200b746cd26cb481d5c78247053d2c6d"
+status = "translated"
+digest = "b9529c0f96f558aa5213f5642d2d7884c14910c9dd1652f5fe024c9a0a9acd91"
+
+[[fn]]
+path = "wasm-bindgen::flat_byte_slices"
+kappa = "c4d490c40a315b9f14c925048917c0c6526d9bbf1813a7958502fc83cf43194d"
+at = "RESULT_LEN=#_RESULT_LEN, SIZE=#_SIZE"
+embedded = "2533ec870dfd3db34c68bfba8550eafad62276e1a4c0b9c033cd8c7986580935"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "wasm-bindgen::flat_len"
+kappa = "a8ecdd407c5f90d7165a1032d74ff684fc8625eb506ccb51577000e823c42595"
+at = "SIZE=#_SIZE, T=u32"
+embedded = "73e415fb4af45245f1b287c264ea145e5d5b474debd0b0b08ed66105f18e6c53"
+status = "residue"
+cause = "mir::Operand::Constant: a const parameter's value, of a type its source does not give"
+
+[[fn]]
+path = "wasm-bindgen::free_rust_object"
+kappa = "2bc182b7f2b13163663d46cd80b3e5e876c29eedd623d22252453d0b39543924"
+at = "T=u32"
+embedded = "6d8ca833f9ed927ad26b21fbb5ef42d950677904776d560759845a66ef1b5193"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut WasmRefCell>::is_null"
+
+[[fn]]
+path = "wasm-bindgen::js_panic"
+kappa = "8c5aee0a137e81e97a53fbafd191971b1ac3ddac61ab56964f0913a25baecc2b"
+at = "JsValue=u32"
+embedded = "7391ed67a070d5f2de1e0ae5cfcaf47f190f9ddd5662323a6d3820e8cfa2141f"
+status = "translated"
+digest = "f43a60ad3228ec459568f17c7abfd97d10f25067bb8baab2d170523332f4d219"
+
+[[fn]]
+path = "wasm-bindgen::jspi_rejected"
+kappa = "d588ebadacb7ca07d5fc085e3865e93b26cacae6bb04e01ba8e83dc3c461d1d7"
+embedded = "296cf73e768c9318fabd5bddf0ec02f16c4b952bbeefbcf14b7b1af8dcba2a1b"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc54: *mut u32}"
+
+[[fn]]
+path = "wasm-bindgen::link_mem_intrinsics"
+kappa = "90f1b8d7bcc5f9ca3ed933fe5a78a137b6fec2eb6a035e4209b0cd2d61ad95fa"
+embedded = "a0c1879ebe80afaf17b7804d2042befa29372703d9d226f32ab391a22f0e567f"
+status = "translated"
+digest = "93ce3f165df04762a34f29f3588db760804be3a8d799b0c69c2c81db6e485308"
+
+[[fn]]
+path = "wasm-bindgen::malloc_failure"
+kappa = "e7bb65bbf2ce3b2ea683628294b673066151c4f5f5d6e62630fc02c0c93b17ac"
+embedded = "50584782bb4379128433fd8e334735b3d8d49321e1a7d5f4f84503174fdf9c5b"
+status = "translated"
+digest = "3a92dc01d0700d17fdb6521fcf6bd6ba17047b2ba5ad9e3fec9e61cb4093822e"
+
+[[fn]]
+path = "wasm-bindgen::maybe_catch_unwind"
+kappa = "640a6e5503d25493bf2f47ae11ca37d9d53a8ecde77826427984fc8bb410782f"
+at = "F=u32, R=u32"
+embedded = "9af58864f91c5e0ec5c2a40e472d2d4c4a324b2f3c11a75232866738b8c6f8b6"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by FnOnce, which u32 does not implement in core"
+
+[[fn]]
+path = "wasm-bindgen::no_op"
+kappa = "a26e496dcbfa43a5f2e4303f627349e437542466cb3c37aff67662fc1d59e9a9"
+embedded = "e770cc930363b54fb4a65912e2c8cc77a4c2fdd6fffd41cf0972a7ffc8b21e4d"
+status = "translated"
+digest = "80a3551f0c0eb50dfd5e131f7cb341505d5fb83dbd808a886b8e4fbed9c3972d"
+
+[[fn]]
+path = "wasm-bindgen::schedule_reinit"
+kappa = "e2edf5fa889c9afcf73d6e1fc3baa4aae3e9699a9f2bb92fa8f244c518e3e39b"
+embedded = "6a87a29bbfeb84e807ef20588de5968f91dcb7b023eefa29d46610eb00665fa1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: __wbindgen_reinit: wasm-bindgen's MIR stops at mir::TerminatorKind::Call: __wbindgen_reinit::__wbg___wbindgen_reinit_2fe0d0b9c1cc3c21: wasm-bindgen's MIR stops at type outside the lift: core::fmt::Arguments<'_>"
+
+[[fn]]
+path = "wasm-bindgen::set_on_abort"
+kappa = "7db4e7249965627f1fbdd12e79c43927db4eac2288f36a32ba37e74eb3512129"
+embedded = "254892cda09518cf15bf079367d3435c47e64b89d5878fe019fcbb6821364a47"
+status = "residue"
+cause = "mir::Ty: fn()"
+
+[[fn]]
+path = "wasm-bindgen::take_last_exception"
+kappa = "7a447906f2d86ef875f2f7f43b17764a74a8ef28d8b0c270b188cf8e0777d3b0"
+at = "JsValue=u32"
+embedded = "aaef6a3b03c0f4ecd6dac550f66877477f310e01066d718b302c017b551e485b"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc42: &ThreadLocalWrapper<Cell<[u32; 2]>>}"
+
+[[fn]]
+path = "wasm-bindgen::take_rust_object"
+kappa = "1d68cb929f62eea42d3af1316f85315772315a482e3a51f80e4aa69575531af7"
+at = "T=u32"
+embedded = "5c27bfab5b7e46294b8678556de7a6d55a5688ece34991eb879fe9d679b9a0c1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut WasmRefCell>::is_null"
+
+[[fn]]
+path = "wasm-bindgen::throw_null"
+kappa = "f6bf654fd47a7a727939890b8980a95784e967df7f1474df0c9591295bfe170a"
+embedded = "f95f3df46beb8d06ad5d996b855b96b5d116cff786fee29e3d308e5f72d460b8"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item __rt::NULL_ERROR"
+
+[[fn]]
+path = "wasm-bindgen::wbg_cast"
+kappa = "863483a22cf7ab7d0cd48590a3cbb4ca94e30c239e5e97e49bf7e2e957548349"
+at = "From=u32, To=u32"
+embedded = "b2457a2b658350cdf6f1cf2ff89a5fc9ede81b15d4d9ce20ea54251e2fb82118"
+status = "residue"
+cause = "mir::TerminatorKind::Call: <u32 as traits::WasmAbi>::split"
+

@@ -1,0 +1,204 @@
+# The aws-smithy-async register (written by `uorust crate aws-smithy-async@1.3.1`; do not edit): every body of
+# aws-smithy-async's MIR at aws-smithy-async 1.3.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 86
+translated = 2
+residue = 84
+
+[module.future]
+bodies = 59
+translated = 2
+residue = 57
+
+[module.rt]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.time]
+bodies = 15
+translated = 0
+residue = 15
+
+[embedding]
+bodies = 86
+embedded = 86
+evaluable = 86
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: rt::sleep::SharedAsyncSleep"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rt::sleep::Sleep"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: time::SharedTimeSource"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Collectable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::never::Never"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::now_or_later::NowOrLater<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: time::StaticTimeSource"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: time::SystemTimeSource"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of future::pagination_stream::PaginationStream<std::result::Result<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: {async fn body of future::pagination_stream::fn_stream::FnStream<std::result::Result<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Vec as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Result::as_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FnStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NowOrLater<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn rt::sleep::AsyncSleep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::now_or_later::NowOrLaterProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::now_or_later::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::now_or_later::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::pagination_stream::PaginationStream<std::result::Result<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::pagination_stream::PaginationStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::pagination_stream::TryFlatMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::pagination_stream::fn_stream::FnStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::pagination_stream::fn_stream::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::pagination_stream::fn_stream::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::rendezvous::Sender<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::rendezvous::error::SendError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::timeout::TimedOutError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::timeout::Timeout<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::timeout::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: future::timeout::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timeout::Timeout<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of future::pagination_stream::PaginationStream<u32>::collect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of future::pagination_stream::PaginationStream<u32>::next"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of future::pagination_stream::fn_stream::FnStream<u32>::collect<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of future::pagination_stream::fn_stream::FnStream<u32>::next"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of future::rendezvous::Receiver<u32>::recv"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of future::rendezvous::Sender<u32>::send"
+bodies = 1

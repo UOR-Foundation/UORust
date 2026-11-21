@@ -1,0 +1,88 @@
+[[fn]]
+path = "tracing-attributes::erase_impl_trait"
+kappa = "4e37e8f32c1d8e70c9b76d901e3aa809b116cc910e52f32231bde8fb9b9deb2d"
+embedded = "b116be5e78ca736ba067b1d41de3fee5746e6f5ab691c1826b6711434f72f5d0"
+status = "residue"
+cause = "mir::Ty: syn::Type"
+
+[[fn]]
+path = "tracing-attributes::expand::AsyncInfo::from_fn"
+kappa = "1d1eac53ae6c67320a2ae01f2a1d35d7b1ce70d5cf27eff7a4b3410e4e1be137"
+embedded = "24bda7c1224805aefcd486b7db44fe1d46ccf8fd20031489b92fae578172fd87"
+blocked = ["CastKind::Transmute"]
+status = "residue"
+cause = "mir::Ty: expand::AsyncInfo<'_>"
+
+[[fn]]
+path = "tracing-attributes::expand::AsyncInfo::gen_async"
+kappa = "06d660f6aecdf47efce1a535553825cb596bb2b96fcde1ae1eda46968392cc2a"
+at = "MaybeItemFn=u32"
+embedded = "47aa1e49615c62abd279cadf33096be8109e62594c63c8f881c42e80b519263c"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "tracing-attributes::expand::IdentAndTypesRenamer::visit_ident_mut"
+kappa = "d814606ff497dea5b834cde70ae28b7119c802ca9b7d8d831a0a6bf3adf13f3d"
+embedded = "d7be927a77d88b82f0138f6921406104c1725f12d320aa1206b5141109ea5573"
+status = "residue"
+cause = "mir::Ty: IdentAndTypesRenamer<'_>"
+
+[[fn]]
+path = "tracing-attributes::expand::IdentAndTypesRenamer::visit_type_mut"
+kappa = "2239b921004d91a3229f25fecb507c7101b48b61607f749894a0eacd9b74efaa"
+embedded = "27dc3764b3c4b7a3190bc82aa643b782af0681302a4c0c7cf418a91d7a4da499"
+status = "residue"
+cause = "mir::Ty: IdentAndTypesRenamer<'_>"
+
+[[fn]]
+path = "tracing-attributes::expand::ImplTraitEraser::visit_type_mut"
+kappa = "a2f673baa00c6d75a452a47addc0290a96a6b374acb26e18fc3c7e509fe891a5"
+embedded = "4ebf15ae096ead797067657bf93bd72a86420875ebd1cdcbb0ffa301da77d126"
+status = "residue"
+cause = "mir::Ty: ImplTraitEraser"
+
+[[fn]]
+path = "tracing-attributes::expand::RecordType::TYPES_FOR_VALUE"
+kappa = "2278e1075fa4c0dca961da500f8b9907c1821a54f5d0b5561e3f910174551c20"
+embedded = "1e1468b357f38852f28f2938ecff328e3b06a723a0b437c62dd85220331e8d13"
+status = "residue"
+cause = "mir::Operand::Constant: expand::RecordType::TYPES_FOR_VALUE::promoted[0]"
+
+[[fn]]
+path = "tracing-attributes::expand::RecordType::parse_from_ty"
+kappa = "c5572a41d2997e790291b0c6c54c91d16a68eaed576f42ddd92b4421895e0acd"
+embedded = "8501cbf758bca55c6e9a3a4755ccf384a52fd7926c35b4804892380949afe811"
+status = "residue"
+cause = "mir::Ty: expand::RecordType"
+
+[[fn]]
+path = "tracing-attributes::gen_block"
+kappa = "7f5b8b6ba7873a4d7316a1a781ac01c9a571d898d52f000a0a11faf972cdf62f"
+at = "B=u32"
+embedded = "5ca835db67d42739dcb953500e03c4928c4fd7af7ce8feadea4a28b648f9549c"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "tracing-attributes::gen_function"
+kappa = "d67d1dc4336199481052539fc44eca49053d16161575bdeb9788ec8b58cac7a1"
+at = "B=u32"
+embedded = "edf9de379d5af0ecc9f7a1be6fa29ea5c468a0cf96df178ca0ad8699cf8cf1f1"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "tracing-attributes::param_names"
+kappa = "44572abcfda7324743095f8d297f2e3d9c936bedc655f5afac5055d2da8ef56e"
+embedded = "598c1d37a62313ce6b306878457b960a284bed2f5840ce240f0e631b9c8ac84b"
+status = "residue"
+cause = "mir::Ty: dyn std::iter::Iterator<Item = (proc_macro2::Ident, expand::RecordType)>"
+
+[[fn]]
+path = "tracing-attributes::path_to_string"
+kappa = "9759da7293b4ab9a52c4e12ef22e1764607d6ff060374f7aa5531c1da9d5b813"
+embedded = "b942b8005c5b7acb60c92a47c1062f65389078ce7051d8d04a4ad3e9aad2e437"
+status = "residue"
+cause = "mir::Ty: syn::Path"
+

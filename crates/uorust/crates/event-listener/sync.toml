@@ -1,0 +1,64 @@
+[[fn]]
+path = "event-listener::sync::AtomicPtr::with_mut"
+kappa = "be70ff150889855299a91f89909a4262ab76092e53a046c067ce6b6c98022ab0"
+at = "F=u32, R=u32, T=u32"
+embedded = "5c446667e569996f1d7dd13e70e4d80fe61483b1c5ec0665e12e0047b8b3ed0e"
+status = "residue"
+cause = "mir::Ty: Atomic<*mut u32>"
+
+[[fn]]
+path = "event-listener::sync::cell::<impl at src/lib.rs:1420:18: 1420:23>::fmt"
+kappa = "17c8577613747a4a64b2ab8834d79740f222d62959e0e0857b47020fa8232277"
+at = "T=u32"
+embedded = "fafc3433ac018b5522187d24dc5bd11912308957dd8b5e48e709bcd8b4ac16fb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "event-listener::sync::cell::<impl at src/lib.rs:1420:25: 1420:32>::default"
+kappa = "dd997a574e053594a622e4235809ab0ac010ab56aeb6e0811650a0b121791862"
+at = "T=u32"
+embedded = "8c001d3cee540db0a9e11a84254f72f13917a3b8ac2e79435c931af63b0f4445"
+status = "residue"
+cause = "mir::Ty: sync::cell::UnsafeCell<u32>"
+
+[[fn]]
+path = "event-listener::sync::cell::ConstPtr::deref"
+kappa = "4225fdd9e285f61ba91f2c3b12cba92a2ff889b112cb70f9bc3f94545dfc37af"
+at = "T=u32"
+embedded = "65ae1fd64dcd9d9224c9f2541ddc65f44da4aedc545f571e0d0526f26f8186c9"
+status = "residue"
+cause = "mir::Ty: ConstPtr<u32>"
+
+[[fn]]
+path = "event-listener::sync::cell::ConstPtr::deref_mut"
+kappa = "08f479b7916fca93407103d2d45bb1bc3a6c7179e1a3bf49c7800c4e0714865c"
+at = "T=u32"
+embedded = "01a6ba5d56cea9b96063647b7b6ca8f981e90a8eb39c21107aab5dd704c04391"
+status = "residue"
+cause = "mir::Ty: ConstPtr<u32>"
+
+[[fn]]
+path = "event-listener::sync::cell::UnsafeCell::get"
+kappa = "3ae0903e5b00a931aa144daea2ddcbd217c36815c1845ef7fc6394af3640e223"
+at = "T=u32"
+embedded = "f31c592960ce162c504954a32a1282555c6a952e007839d0754d69af70eb136a"
+status = "residue"
+cause = "mir::Ty: sync::cell::ConstPtr<u32>"
+
+[[fn]]
+path = "event-listener::sync::cell::UnsafeCell::into_inner"
+kappa = "3476c4eb92a0776b28eb10bfa82747a45f564d08ef4999ff648b7dd95f44f26a"
+at = "T=u32"
+embedded = "947e0e949ff354ef05edb1e34438b20155c3dffae60bbd2eaa25889f16b48e81"
+status = "residue"
+cause = "mir::Ty: sync::cell::UnsafeCell<u32>"
+
+[[fn]]
+path = "event-listener::sync::cell::UnsafeCell::new"
+kappa = "13f1e30e477cf04bb45683f21a53e59059b2f0317dd031220fafaba038e4c962"
+at = "T=u32"
+embedded = "93a82f17ead9798371669925c92bd4fbde7eafefbdcb4a58a60ba78012d49dfe"
+status = "residue"
+cause = "mir::Ty: sync::cell::UnsafeCell<u32>"
+

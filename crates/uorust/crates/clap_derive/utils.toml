@@ -1,0 +1,278 @@
+[[fn]]
+path = "clap_derive::extract_doc_comment"
+kappa = "13b0c618793dfdb465cb865af98c809042645642efcb710011136da77d8526f3"
+embedded = "0ad7186bbe19cba739338f1474c7e26404ea01331df8e859279add794b932870"
+status = "residue"
+cause = "mir::Ty: Attribute"
+
+[[fn]]
+path = "clap_derive::format_doc_comment"
+kappa = "cba48ec189d48d02b81aac5dbe786733844611ae00cb96b92fcd282aa5654399"
+embedded = "5bd0719b5863049926240934c7bf41c6f242df2c3d808e6c1c3a4e6def8d46e5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: utils::doc_comments::parse_markdown: clap_derive's MIR stops at mir::TerminatorKind::Call: utils::doc_comments::split_paragraphs: clap_derive's MIR stops at mir::AggregateKind::Closure: split_paragraphs::{closure#0}: type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "clap_derive::get_vec_ty"
+kappa = "1f3f60525d68349e425455ad12e7da27c0439417099caafaf15bd33096a470e7"
+embedded = "53718d15c75711c848bf353f9b4eda5a4dee0d56ef500f666b2d7466395f8f57"
+status = "residue"
+cause = "mir::Ty: utils::ty::Ty"
+
+[[fn]]
+path = "clap_derive::inner_type"
+kappa = "ee752ac2d11bb5d7fb94efce2f04b7c7474e5908a58d50a774a1438c3293a8fb"
+embedded = "8bca65e8236f412c985f982509e258b30d086e85815f748f98b7af400c779299"
+status = "residue"
+cause = "mir::Ty: syn::Type"
+
+[[fn]]
+path = "clap_derive::is_blank"
+kappa = "a6327fc9c7c0395470fb274743dcdb021ffabdee359b17c3b43eaff7c46cc906"
+embedded = "1bddfb0669267e09f55d366d9236d88c5a4badd0952c3605994f8910289a1d30"
+status = "translated"
+digest = "c8d9832a19477eab02524254c42ca2fa3fcf21a555f942be76347190c6a8247d"
+
+[[fn]]
+path = "clap_derive::is_generic_ty"
+kappa = "581c8e4a0131802da9ccebcfd48a8e71f55aa719ddf0c3c5093b24f103d155d9"
+embedded = "c44918c3de8c0b606e8216c44b4045cc8db6044ce62cd08493fe223cf74a413c"
+status = "residue"
+cause = "mir::Ty: syn::Type"
+
+[[fn]]
+path = "clap_derive::is_simple_ty"
+kappa = "007082fcde430564b4588f00f9683ab15da15e10a51d0d6c10356e4ec2ea34a7"
+embedded = "aaadf937756e87172e4530725d7b67ef271d904e9f9e761a7d06312222819725"
+status = "residue"
+cause = "mir::Ty: syn::Type"
+
+[[fn]]
+path = "clap_derive::is_unit_ty"
+kappa = "db252fdb5ca0c411fb9d8e4d8d16d4cfc9f4986f4e151edaf8b7a76b9f9dede5"
+embedded = "3f55f8ed59a32b3f18996aa5e30b85444da9c65e4c8123ca621e9487a575cebc"
+status = "residue"
+cause = "mir::Ty: syn::Type"
+
+[[fn]]
+path = "clap_derive::merge_lines"
+kappa = "0885519f090f4103819b7b43cb9bdca9f5df26710063c113cd23aa5f788bfb7f"
+embedded = "96a25718c81d93ff12e8f8f4d13250eaee460472b451aef2566626f513c24041"
+status = "residue"
+cause = "mir::Ty: impl IntoIterator<Item = impl AsRef<str>>"
+
+[[fn]]
+path = "clap_derive::only_last_segment"
+kappa = "eb289c07f18319c47d90e46b9045e738be66c1a2a2d1ddc3d708818969a133d3"
+embedded = "ddc5b62532ca2c27d0201c3fde12b898fa45eac4d3736d26ea0f38d78326cef2"
+status = "residue"
+cause = "mir::Ty: syn::PathSegment"
+
+[[fn]]
+path = "clap_derive::only_one"
+kappa = "d1658dd78455b0b2f98e8aa7e4921f4a3a81e3b0894ce89f7abb9aa78f2eea15"
+at = "I=u32, T=u32"
+embedded = "f17db54e033a3cfc80caa98a748028489b844b91a5ce9bdb91b9c3646a5d3b47"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator, which u32 does not implement in core"
+
+[[fn]]
+path = "clap_derive::parse_markdown"
+kappa = "804e9ca3d040663fe42d8f7ed757598a55877bf6696612799cbacf940d40a662"
+embedded = "b16e4d38f2767a0b23eb0e11a62d366dc6d96f31f69d0f13f795addd1b73df02"
+status = "residue"
+cause = "mir::TerminatorKind::Call: utils::doc_comments::split_paragraphs: clap_derive's MIR stops at mir::AggregateKind::Closure: split_paragraphs::{closure#0}: type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "clap_derive::remove_period"
+kappa = "f5ef9ee4ba27564d3827e711a8a8c1578107cd302414151e4c5aebe183d4aa39"
+embedded = "7c69b554822b29230e09f1383c1648b0b87aa1c658615cd60e12b82a1cffeaf0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: String::pop"
+
+[[fn]]
+path = "clap_derive::split_paragraphs"
+kappa = "79a97e560f8d5055f3f06edb3f5a488cd748e3befd08f0ea31e6992a44f888e9"
+embedded = "4326344a2ff40b8bed95b324d68d081c47ff17fa1bb56929b395f8815f9bd612"
+status = "residue"
+cause = "mir::AggregateKind::Closure: split_paragraphs::{closure#0}: type outside the lift: std::ops::RangeFrom<usize>"
+
+[[fn]]
+path = "clap_derive::sub_type"
+kappa = "9ec1005367c29dc69a72b34ba629bb439db58691f2fcc1570e07f99b81713892"
+embedded = "c2ac6dca0f01b996e61f990fde6bd86cacd0c83a9103e60ef3e04f7d15b14445"
+status = "residue"
+cause = "mir::Ty: syn::Type"
+
+[[fn]]
+path = "clap_derive::subty_if"
+kappa = "cc767b7ac750b9bfd99f4812759e311a37ccab0a2bd97889ca0d2138136b00b6"
+embedded = "619144d9a2504e4df004c2f41eac5a97a84afb5171befa0bf2a5ed276f8b70aa"
+status = "residue"
+cause = "mir::Ty: syn::Type"
+
+[[fn]]
+path = "clap_derive::subty_if_name"
+kappa = "c88c06ee1dba93576815fda83852dfde4e53731512719269e529023d07e56a17"
+embedded = "6c084d2817152b9d3e255375c29aa89efae291b9ee43c6a83b8b82a4e861a146"
+status = "residue"
+cause = "mir::Ty: syn::Type"
+
+[[fn]]
+path = "clap_derive::ty::<impl at src/utils/ty.rs:10:16: 10:21>::clone"
+kappa = "b48d6fe555518b3f87555db3441f0bf9d706eb0aa98f214a2d7a9accad05f4a6"
+embedded = "6112302120ee835f080cea65c09ced1c9b16d18cdbb1938930d939efcd389bcb"
+status = "residue"
+cause = "mir::Ty: utils::ty::Ty"
+
+[[fn]]
+path = "clap_derive::ty::<impl at src/utils/ty.rs:10:23: 10:32>::eq"
+kappa = "37aaab0325251946eaa5a4a4b51166619411219d4c98793cc05b4bff70907882"
+embedded = "f4d56131743c970ac4ac9df6af8d0a001d9b9b0e58f11a2f3a0034af103e7875"
+status = "residue"
+cause = "mir::Ty: Ty"
+
+[[fn]]
+path = "clap_derive::ty::<impl at src/utils/ty.rs:10:34: 10:36>::assert_fields_are_eq"
+kappa = "39cdeb51e38e15679c7b0c067d1c3fcc0073e19e4ca3b19eb980d16f516f3d74"
+embedded = "906620dce04b3b89427e0c9d13d90308e2ac722076db7fee1c2c81886e4a95fa"
+status = "residue"
+cause = "mir::Ty: Ty"
+
+[[fn]]
+path = "clap_derive::ty::<impl at src/utils/ty.rs:10:38: 10:43>::fmt"
+kappa = "84c739f48b0dd5b4d7388a8df4a64d5bf7ac6364d35179b4cc23097a22ea3b98"
+embedded = "4b963fd5bd411824dde5f08fe278ea592925cceee2760527225ed2cde8dc1cc9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "clap_derive::ty::Ty::as_str"
+kappa = "c8ad892e9f65d780d1e4f4d92aac5a361bfb51b2cdd1271f2e12b8291b4fb0f6"
+embedded = "014cb74e6395abbc337f4284625425bd5e629e47aed6ec3912d69741a2c8de22"
+status = "residue"
+cause = "mir::Ty: Ty"
+
+[[fn]]
+path = "clap_derive::ty::Ty::from_syn_ty"
+kappa = "6b32b46f92602246b46b7b85c9b18ac6bc471dadba5496755f3821ab377cbd93"
+embedded = "ff0af8ec922307842b2bd632aa4bd1e4323651bdb12b395860608b9209e6a45b"
+status = "residue"
+cause = "mir::Ty: utils::ty::Ty"
+
+[[fn]]
+path = "clap_derive::utils::error::Span::EXPECTED_Span_OR_ToTokens"
+kappa = "191578d3896ddd4b61c9ab749af6cd5e4e5b168fa2d6bde1013325842f38e03c"
+at = "D=u32"
+embedded = "cac7ffd967ff1df5d3c9bc40ef7f721bd6aa83d03cc47ab4b642737e753ea37a"
+status = "residue"
+cause = "mir::Ty: syn::Error"
+
+[[fn]]
+path = "clap_derive::utils::error::T::EXPECTED_Span_OR_ToTokens"
+kappa = "3dbba3144b45f6ff396bc38ff83ada34056b82284d9ab3ebe72e6fc4a4355b0a"
+at = "D=u32, T=u32"
+embedded = "0e78efa2db764c593ee87a3e5c07df1d88cb385e17ec88afc1940965f5c4cfeb"
+status = "residue"
+cause = "mir::Ty: syn::Error"
+
+[[fn]]
+path = "clap_derive::utils::spanned::<impl at src/utils/spanned.rs:8:10: 8:15>::fmt"
+kappa = "c58b47426b11aed98d5bfa178849beaa4a070dab383e770f2006d79e514695af"
+at = "T=u32"
+embedded = "138b99c29575977fe56b6c3c5bcb487576db3982914c3ddbd5fa74faa8584530"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "clap_derive::utils::spanned::<impl at src/utils/spanned.rs:8:23: 8:28>::clone"
+kappa = "b12de6ebf68511dadb403c6bdc00aaba12bbae42259d03a8726e9d0b0a606660"
+at = "T=u32"
+embedded = "06f0111d025b6f22648fb8a00f899d1f53f75a24b36308c6bfca1a3d618536b0"
+status = "residue"
+cause = "mir::Ty: utils::spanned::Sp<u32>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::as_ref"
+kappa = "022d9c9bc1e9d616d840d753d6fcdda1b6046afe9b05ca99461220aff78cf05d"
+at = "T=u32"
+embedded = "494cd044b002787c9d01cf55e714b2c1432cdccc8c0e0aaee96e3bf88d9c131e"
+status = "residue"
+cause = "mir::Ty: Sp<u32>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::deref"
+kappa = "c3708ed05300b30701c243d354e8d051e9dd3caf38495cc04099a393734485f9"
+at = "T=u32"
+embedded = "6ca726a927c74c9a3e4c8f03263b569380b0a421870531a9d32f75b6af6318cc"
+status = "residue"
+cause = "mir::Ty: Sp<u32>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::deref_mut"
+kappa = "5f3fa781b39a6f367a3bb9fdad37b85b0e8313ee924d230aba453b48cd32f380"
+at = "T=u32"
+embedded = "d8c80e5de76212aadf8047e9c78230b0d926d1b873d780d6919b10ff11914571"
+status = "residue"
+cause = "mir::Ty: Sp<u32>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::eq"
+kappa = "217069a4c2241ad183ea1993f17e7a2984c8e8bd9e6169369727bb60fe4b07a0"
+at = "T=u32, U=u32"
+embedded = "6e4f520e0bab1fb14035f7bd24f7a1b372940f0b13d6e4c25955be913d1d5d22"
+status = "residue"
+cause = "mir::Ty: Sp<u32>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::from"
+kappa = "2adceabfdf8f9243c2223e2969d01b881134c94a1f4f9e1cfcd84b789c4448c5"
+embedded = "9ca94cfc2d72fc9681f0d875f29d90d58503cf8c0a06e668b78265cb94644822"
+status = "residue"
+cause = "mir::Ty: utils::spanned::Sp<std::string::String>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::from#2"
+kappa = "f97f6f3c3726bbfd23b7b71dc50a337f207029002366d7ed93a986435f1c64da"
+embedded = "2bad130d90d002806246cf9d453bf09188a938c9aa48d65b3b5585b48edaf01d"
+status = "residue"
+cause = "mir::Ty: utils::spanned::Sp<std::string::String>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::from#3"
+kappa = "8455d0e6e68fee5a3cbb2c85045a052be12420bd386b75966046dd0206057dd3"
+embedded = "2ebee9d9872e155afdd918cb93b11dca6ca85e12952369aef4f4853c4ad4ad72"
+status = "residue"
+cause = "mir::Ty: utils::spanned::Sp<std::string::String>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::get"
+kappa = "9da57e31ee71373ac10cdc506ff31f692ee2ee8a52f83e0c2f85b42530a85a1b"
+at = "T=u32"
+embedded = "b32641186bc7c555357e523ff70a32eda4314b185a0afc67750dc37ff5df8faf"
+status = "residue"
+cause = "mir::Ty: Sp<u32>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::new"
+kappa = "9fd4358ee986693f05f15295711aef9a6b5f9aacbcc5df6c71fbe3fe05e54c11"
+at = "T=u32"
+embedded = "8f9095347ce0c1c43a073b5932a009dafd6cdce57986ed6e94c2fa7a107794ef"
+status = "residue"
+cause = "mir::Ty: utils::spanned::Sp<u32>"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::span"
+kappa = "8d3c4d87a11784e6956332e8417b996fdada36b4fd4183a4bd78a5c9cc72ab04"
+embedded = "5e02234acc848a6052205495b3a5c76d951cfa70d2c160d9b5e8169b3146615d"
+status = "residue"
+cause = "mir::Ty: proc_macro2::Span"
+
+[[fn]]
+path = "clap_derive::utils::spanned::Sp::to_tokens"
+kappa = "f22f34b33b357ed8ae09f6d1651cfbcf5f26273484c41590029fb6203458af58"
+at = "T=u32"
+embedded = "185cb5ce59804edab38fb02e6f29b876e212687ecdf37abba3d0ab001c28f01c"
+status = "residue"
+cause = "mir::Ty: Sp<u32>"
+

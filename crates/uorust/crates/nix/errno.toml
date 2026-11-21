@@ -1,0 +1,201 @@
+[[fn]]
+path = "nix::desc"
+kappa = "c46583bc1a1b56e836e51ea32979ebe53c6a882a72e7480a5e94a2aaac3ca333"
+embedded = "7b4d5b6868ade06b2f71952d94080cc151ff2e6b9eff42f3e3c6b747e1716988"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno"
+kappa = "40d7c7a67a825a949db728f5529448ec64b107fd02c9fb1bdc84fcabe2e829c3"
+embedded = "c57c14cedff818f5aebe7e22d14b38b412737b97d556913244678be73aad097f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: errno::<impl at src/errno.rs:61:1: 61:11>::last_raw: nix's MIR stops at mir::TerminatorKind::Call: errno::errno_location: nix's MIR stops at mir::TerminatorKind::Call: __errno_location"
+
+[[fn]]
+path = "nix::errno::<impl at src/errno.rs:164:1: 164:35>::sentinel"
+kappa = "f66e1b8366be796d915495087e0264141a274186371ed152ea6413642ac8bd85"
+embedded = "ddbc080f801f4acd990c7e519572e7c57c60e28db6367e71a3bbdede0b656cf3"
+status = "residue"
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+
+[[fn]]
+path = "nix::errno::Errno::clear"
+kappa = "678e0959418b8ded6ceb34eeabd5d49c520707c7d85ebe19e94dfb1a9f028cad"
+embedded = "5d3b2475fdebaaaa77ea927b68f5dec40d9212fb2d7682e37a1f6c76f3c79b09"
+status = "residue"
+cause = "mir::TerminatorKind::Call: errno::<impl at src/errno.rs:61:1: 61:11>::set_raw: nix's MIR stops at mir::TerminatorKind::Call: errno::errno_location: nix's MIR stops at mir::TerminatorKind::Call: __errno_location"
+
+[[fn]]
+path = "nix::errno::Errno::desc"
+kappa = "43bc14f19088e6da08d3aa8e6f53ee355192e073dad3b0f0ccd19c2f7241cc23"
+embedded = "78f4afa2d1bb05a899e7c5a1dac3b415a0e371a213a71148c61e7460161cd786"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::Errno::fmt"
+kappa = "f5f6369f4d2385dc28053226ea3ed464de803c20d0275e7b999bafcacbfc7874"
+embedded = "b4a766da382658159574f5a305cd83ed2952f2a8b95bd3ab30555d29ddc7d451"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "nix::errno::Errno::from_i32"
+kappa = "71390f916099fd77d4be3c4a1d115adb689b503d5b289877de14870a16b4e38c"
+embedded = "d223da955ff21375680153de6d054fd84ff258e48b7f949331da0db0dc07c241"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::Errno::from_raw"
+kappa = "a45e5c00d755062e326ccf0a01a6553c55ab4438ee0eb2f5e48182a945fbf381"
+embedded = "306990eb9b6433f218f699ff6cf3251af25e01ac7e73888b5292a7f6e522f65c"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::Errno::last"
+kappa = "a6fa59a1172483318069cb957727ae9d77217c3c0aa4b1c163e2f4b5dc9effd5"
+embedded = "b6f44dd10ba77c393b7725019d04ca53ed5f8218e423d4331c7a8d90b0138543"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::Errno::last_raw"
+kappa = "a050d1caaa8109fcce12c4794e4ad9d4a467b54f1e87b0d91484ec4c9ab70a31"
+embedded = "029a581b3bca024870de5e3977771fa99766da986d2f4bca88524006344d118d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: errno::errno_location: nix's MIR stops at mir::TerminatorKind::Call: __errno_location"
+
+[[fn]]
+path = "nix::errno::Errno::result"
+kappa = "76f78b9e1c7cf03af18edfcddb30d306a828d1e96dab6da6cc49a2b66d676874"
+at = "S=u32"
+embedded = "ce79a90802ff7ea7e84243b3e229f4f05336b762b6933f00a9adc11c10a954af"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::Errno::set"
+kappa = "56258252c4b8549de869532bbed647dc53878c2719a1a486a29149177e772f01"
+embedded = "d1a8bf742f52bb03cd56aa3fe07e64e2bfdbbebe73a7d7c73c5891793462f727"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::Errno::set_raw"
+kappa = "06af60aca4d820a8997d458d9c157dfd38cd85d676318b5456e4c67db31013fd"
+embedded = "a1e04aa210fc48ffa0036ec74662c27189733b1f2cc1021d2ec1979e0fe87061"
+status = "residue"
+cause = "mir::TerminatorKind::Call: errno::errno_location: nix's MIR stops at mir::TerminatorKind::Call: __errno_location"
+
+[[fn]]
+path = "nix::errno::Errno::try_from"
+kappa = "395220c2b86c0b336baf0e3985e2c158842aad94efbdc4eec4db3c2008981c50"
+embedded = "29e9a29ab3ea24bc563294ded422642e825036195e532510d88259c0d1aa09f1"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::Error::from"
+kappa = "7139c9630b2072f81f1c77aaa9ea5806a088ed19ab6ce301aa90606eeca603a2"
+embedded = "287baf7f31e787074f4a43025977b5bb404463a27dffc5a2ab67c5125504193a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "nix::errno::consts::<impl at src/errno.rs:1092:14: 1092:19>::clone"
+kappa = "a2058f7ca5efa4f42fffcde91e269a04c84fafb0a350d2a0cc8304bf6e7d6bfd"
+embedded = "9c6bf6011eb6cd4d66693b494c921bc4473f26ed8bf48fc7c6af5799d818f729"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::consts::<impl at src/errno.rs:1092:27: 1092:32>::fmt"
+kappa = "9fa507939736aa355da2a7008a77b9b4fc4d063760e007f9d89b259618f3a3ff"
+embedded = "48eada8e458f9b21fe9326bd4314218238af66eea8a3a2d5d68fd73e7806eb8e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "nix::errno::consts::<impl at src/errno.rs:1092:34: 1092:36>::assert_fields_are_eq"
+kappa = "9ffd5bb0c6b3bc531f4aa853a9df32c3cc7815463d43af564e01a9b8d609f4d4"
+embedded = "3f1cf06304532284f29b58f115a5cb321708014fedfdfbbd3fb34de63817829d"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::consts::<impl at src/errno.rs:1092:38: 1092:47>::eq"
+kappa = "efbbc6ccd0cd6577b0a01d8c4788293f0a7285ba4645047336ea8c10a7f9c7a1"
+embedded = "a1861dc2d2dc6f376374606209e85bd7123e6cce4afc7c976cbb8e545a7a7db3"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::consts::Errno::EDEADLOCK"
+kappa = "3ad9cc11ef9d3b208ddd06280c19660ecb7c860dda8d370667fe1e598127b3fc"
+embedded = "08c3611b51881244d721df4282e544cfe3259f470e91d491a6ed764814072294"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::consts::Errno::ENOTSUP"
+kappa = "1247b89c24e5197b9198b159ab83c479ae2dc43400d81a03c82e73748ce1af4c"
+embedded = "f97cf686ea5ebebc7bfa506d3f3099bfa7596cd7c3a601dc9af73c1c71fa7ff3"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::consts::Errno::EWOULDBLOCK"
+kappa = "9abeb7e6a05c170d9cee2f4c9fa196145e16d965a498e8f6fc2d0231485a3e5c"
+embedded = "05c5bc147e488a87c7c2428e6771553162fc8d6d2f9bebc8e3dbaec8bb7dd811"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::consts::from_i32"
+kappa = "9fb306216355cc2e6ee2940df6b7a4045c49c099f47dbaf904035ccfd9aedfb8"
+embedded = "34dffda79fb4643f4ae2fcde84b40c9326f0e9e5126a85234619cd0065f0c97f"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::errno::i32::sentinel"
+kappa = "a4a9d36f43b50f0f87de48567a58d6e40f341dc8bf870442fde82c4b3d9f1cbf"
+embedded = "76c793a183eb2f99877ff0ec3ab28cecca3079f08ad75f063f60bac2b076e022"
+status = "translated"
+digest = "f86f95fec7c64faa2ea9637a5a94acd3d715672dcc3402110f7c61a570793503"
+
+[[fn]]
+path = "nix::errno::i64::sentinel"
+kappa = "91a712ec842beab10fd46b5bf5430034de26aecd2149251fe2f548e6988deca5"
+embedded = "1f6fd04f19f5dd22312eeb63595390cda4b01f5d4d702d4cf40a4b28db21d1b6"
+status = "translated"
+digest = "791c2650104e7b772d10cce0c9ef836a72b7e774c2da2e3e73c4f721b192801c"
+
+[[fn]]
+path = "nix::errno::isize::sentinel"
+kappa = "dc7b2e08f3878a438c4704f809088e1dec6aa576e24ff3de087397e5e4bfbd6a"
+embedded = "713e6366e566ce1b4b36892b97c373b08801b293b37db339b3d23ac13b46f550"
+status = "translated"
+digest = "22b0b121fde48f99a30c59a4a560c877c545e2dff951885650ac0f9a09099631"
+
+[[fn]]
+path = "nix::errno::sighandler_t::sentinel"
+kappa = "8d179d295822f1e83a71425ad6a729e383fe6d0cbe83dafd299da11c7cc3e358"
+embedded = "4c041d966412b67275c631d4bc1b7a12370db384f5fe091c021f98cf6194602e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item libc::SIG_ERR"
+
+[[fn]]
+path = "nix::errno_location"
+kappa = "ba64a5b236d24d477d86f488a00d3d8e61ad35daf6fe6943af012a3f6cbc9fad"
+embedded = "27899a1efa8d0cb9239ebf4113512a8adc05f3887d110745832637ca9b6dcf04"
+status = "residue"
+cause = "mir::TerminatorKind::Call: __errno_location"
+

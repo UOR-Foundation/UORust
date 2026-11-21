@@ -1,0 +1,107 @@
+# The mime_guess register (written by `uorust crate mime_guess@2.0.5`; do not edit): every body of
+# mime_guess's MIR at mime_guess 2.0.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 48
+translated = 3
+residue = 45
+
+[module.crate]
+bodies = 43
+translated = 2
+residue = 41
+
+[module.impl_]
+bodies = 5
+translated = 1
+residue = 4
+
+[embedding]
+bodies = 48
+embedded = 48
+evaluable = 48
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: mime::Mime"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: MimeGuess"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: IterRaw"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MimeGuess::iter: mime_guess's MIR stops at type outside the lift: IterRaw"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Iter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: unicase::UniCase<&str>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: MimeGuess::from_ext::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc6045: &&["
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MimeGuess::from_ext: mime_guess's MIR stops at mir::Operand::Constant: MimeGuess::from_ext::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MimeGuess::from_path: mime_guess's MIR stops at type outside the lift: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MimeGuess::iter_raw: mime_guess's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_ext: mime_guess's MIR stops at mir::TerminatorKind::Call: MimeGuess::from_ext: mime_guess's MIR stops at mir::Operand::Constant: MimeGuess::from_ext::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: from_path: mime_guess's MIR stops at mir::TerminatorKind::Call: MimeGuess::from_path: mime_guess's MIR stops at type outside the lift: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: impl_::get_extensions: mime_guess's MIR stops at mir::Operand::Constant: impl_::get_extensions::promoted[1]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Mime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl_::TopLevelExts"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Cloned<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1

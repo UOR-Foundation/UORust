@@ -1,0 +1,186 @@
+# The nix register (written by `uorust crate nix@0.32.0`; do not edit): every body of
+# nix's MIR at nix 0.32.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 143
+translated = 9
+residue = 134
+
+[module.crate]
+bodies = 19
+translated = 2
+residue = 17
+
+[module.errno]
+bodies = 28
+translated = 3
+residue = 25
+
+[module.fcntl]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.sys]
+bodies = 90
+translated = 4
+residue = 86
+
+[module.unistd]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 143
+embedded = 143
+evaluable = 137
+blocked = 6
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 6
+
+[[construct]]
+construct = "Operand::Constant of a constant the embedding does not read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: errno::consts::Errno"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: sys::time::TimeSpec"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: TimeSpec"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: TimeVal"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: sys::time::TimeVal"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: SysInfo"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TimeValLike"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: libc::timespec"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: errno::errno_location: nix's MIR stops at mir::TerminatorKind::Call: __errno_location"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OsStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Path"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PathBuf"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: libc::timeval"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::ffi::OsStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sys::sysinfo::SysInfo"
+bodies = 2
+
+[[cause]]
+cause = "mir::CastKind::PointerWithExposedProvenance: from Nat to RawPointer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: sys::time::TS_MAX_SECONDS: mir::Operand::Constant: the constant item sys::time::NANOS_PER_SEC"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: sys::time::TV_MAX_SECONDS: mir::Operand::Constant: the constant item sys::time::MICROS_PER_SEC"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::SIG_ERR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item sys::time::MICROS_PER_SEC"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item sys::time::NANOS_PER_SEC"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item sys::time::SECS_PER_HOUR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item sys::time::SECS_PER_MINUTE"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: __errno_location"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: errno::last_raw: nix's MIR stops at mir::TerminatorKind::Call: errno::errno_location: nix's MIR stops at mir::TerminatorKind::Call: __errno_location"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: errno::set_raw: nix's MIR stops at mir::TerminatorKind::Call: errno::errno_location: nix's MIR stops at mir::TerminatorKind::Call: __errno_location"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: libc::sleep"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::os::fd::OwnedFd"
+bodies = 1

@@ -1,0 +1,633 @@
+# The tokio-stream register (written by `uorust crate tokio-stream@0.1.19`; do not edit): every body of
+# tokio-stream's MIR at tokio-stream 0.1.19, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 317
+translated = 0
+residue = 317
+
+[module.empty]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.iter]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.once]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.pending]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.stream_close]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.stream_ext]
+bodies = 237
+translated = 0
+residue = 237
+
+[module.stream_map]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.wrappers]
+bodies = 26
+translated = 0
+residue = 26
+
+[embedding]
+bodies = 317
+embedded = 317
+evaluable = 317
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: Internal"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: StreamMap<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Throttle<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: stream_map::StreamMap<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ChunksTimeout<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Merge<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: St"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StreamNotifyClose<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: chain::Chain<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fuse::Fuse<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: skip::Skip<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream_ext::timeout::Elapsed"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: stream_map::rand::FastRand"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tokio::sync::mpsc::Receiver<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tokio::sync::mpsc::UnboundedReceiver<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tokio::time::Interval"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FastRand"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IntervalStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ReceiverStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TimeoutRepeating<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnboundedReceiverStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: iter::Iter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: once::Once<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: peekable::Peekable<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: skip_while::SkipWhile<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::BinaryHeap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::LinkedList<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::collections::VecDeque<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::iter::Map<std::slice::Iter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::slice::IterMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<bool>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::all::AllFuture<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::any::AnyFuture<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::chain::Chain<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::chunks_timeout::ChunksTimeout<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::collect::Collect<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::filter::Filter<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::filter_map::FilterMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::fold::FoldFuture<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::fuse::Fuse<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::map::Map<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::map_while::MapWhile<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::merge::Merge<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::next::Next<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::peekable::Peekable<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::skip::Skip<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::skip_while::SkipWhile<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::take::Take<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::take_while::TakeWhile<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::then::Then<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::throttle::Throttle<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::timeout::Timeout<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::timeout_repeating::TimeoutRepeating<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: stream_ext::try_next::TryNext<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: take::Take<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timeout::Elapsed"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timeout::Timeout<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wrappers::mpsc_bounded::ReceiverStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wrappers::mpsc_unbounded::UnboundedReceiverStream<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: stream_map::rand::thread_rng_n::promoted[0]: type outside the lift: stream_map::rand::FastRand"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::saturating_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AllFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AnyFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Collect<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FoldFuture<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Next<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Then<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryNext<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: empty::Empty<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: filter::Filter<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: filter_map::FilterMap<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map::Map<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: map_while::MapWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pending::Pending<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::hash::RandomState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<std::option::Option<u32>>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<std::vec::Vec<u32>>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<std::option::Option<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_close::StreamNotifyClose<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_close::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_close::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::all::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::all::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::any::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::any::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::chain::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::chain::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::chunks_timeout::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::chunks_timeout::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::collect::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::collect::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::filter::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::filter::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::filter_map::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::filter_map::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::fold::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::fold::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::fuse::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::fuse::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::map::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::map::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::map_while::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::map_while::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::merge::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::merge::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::next::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::next::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::peekable::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::peekable::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::skip::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::skip::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::skip_while::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::skip_while::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::take::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::take::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::take_while::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::take_while::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::then::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::then::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::throttle::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::throttle::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::timeout::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::timeout::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::timeout_repeating::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::timeout_repeating::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::try_next::_::Projection<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: stream_ext::try_next::_::ProjectionRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: take_while::TakeWhile<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokio::time::Instant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wrappers::interval::IntervalStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of stream_ext::peekable::Peekable<u32>::peek"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of stream_map::StreamMap<u32"
+bodies = 1

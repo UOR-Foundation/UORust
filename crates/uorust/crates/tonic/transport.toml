@@ -1,0 +1,1983 @@
+[[fn]]
+path = "tonic::DEFAULT_HTTP2_KEEPALIVE_TIMEOUT"
+kappa = "fff4354a11f75bb2c67fb5ef3dc5f4293f4fd699acd26191c7e8f85452db47a2"
+embedded = "cd1a7ed838dbe3970a9a0a82b89896d03441f371e6ed24c7d7d187660b51268b"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "tonic::SECONDS_IN_HOUR"
+kappa = "66e4643b59c29600b561728fa136a8016b54aece7d4e2acb90ee0f64a41f37fa"
+embedded = "1623180efa31cb8e5b015a6dccfad5520f3d79cc729cc64f7cb9b8d2965a4c57"
+status = "translated"
+digest = "86594a74296c29e330592603564f71a3d6b54703cfae1341ee9d7cdcb4d9c5dc"
+
+[[fn]]
+path = "tonic::add_origin::<impl at src/transport/channel/service/add_origin.rs:32:10: 32:15>::fmt"
+kappa = "405d0198430597ff3aa1faf18623a22f1be485825ee20baee7724d45bf1d1331"
+at = "T=u32"
+embedded = "132210443b2c64fdf61539e216a46d5b5015112d64cd47b47ab0d8094d48ef70"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::add_origin::AddOrigin::call"
+kappa = "a7eb2407c4b6c3c6f183421c04ee2a95f5e2a60c5b65fb510d846bf97708f832"
+at = "ReqBody=u32, T=u32"
+embedded = "d39aa62a7644bd70e2da67b3ca1d33d82a4bec47454ff856abf4671fd1112828"
+status = "residue"
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<u32, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "tonic::add_origin::AddOrigin::new"
+kappa = "270bc272ad657210cb515d26b1fd05c5cd6a25255783517e4faf73a3bf6ab1e8"
+at = "T=u32"
+embedded = "83d45fa822c8af1f5a4e55418cf240bad1abfca178c028061e54999ce36d6fdd"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::add_origin::AddOrigin<u32>"
+
+[[fn]]
+path = "tonic::add_origin::AddOrigin::poll_ready"
+kappa = "0fccffddf67a596d3747003a8756cf2e772951ee9d2e0608dfb37da88e707787"
+at = "ReqBody=u32, T=u32"
+embedded = "8a13b5d5fdcd6495b2a6b7be7f1d5fcb711f93136bce70839858777bd7acb136"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::channel::<impl at src/transport/channel/mod.rs:90:10: 90:15>::clone"
+kappa = "0cc6b3915616eff5ee6652733d67b6cd89560188e3edb1427dcbe29449913bdd"
+embedded = "5f4d668f41a9d3b8eace8dbaf7555ce043f08d70d08b674ea860396155a397a7"
+status = "residue"
+cause = "mir::Ty: transport::channel::Channel"
+
+[[fn]]
+path = "tonic::channel::Channel::balance"
+kappa = "ef6fe070abc61a7eabe015fdc09ce0eabc981d7e4b5002296b83e8e4cc674c4b"
+at = "D=u32, E=u32"
+embedded = "f91475eecc06e0b2a2913cdfbc12ded21b175d55403bbf592cc399c2dec30c12"
+status = "residue"
+cause = "mir::Ty: transport::channel::Channel"
+
+[[fn]]
+path = "tonic::channel::Channel::balance_channel"
+kappa = "55be02fb78156684ce6745edd9b987883bf42853d6cfa56a04ce81b4a6344046"
+at = "K=u32"
+embedded = "3242d53ae756804cc3fe5d235b5ec746412640296daf28d51cfe9cc976697a5c"
+status = "residue"
+cause = "mir::Ty: transport::channel::Channel"
+
+[[fn]]
+path = "tonic::channel::Channel::balance_channel_with_executor"
+kappa = "20a2f85527ab3da7865892bb9ab60851a113a113515e1b55a98916d1d2984a33"
+at = "E=u32, K=u32"
+embedded = "3d6548793de020bba9ebdf3ad4ce1bdf6a1f229f53f1615b1b5eabed3f3d9675"
+status = "residue"
+cause = "mir::Ty: transport::channel::Channel"
+
+[[fn]]
+path = "tonic::channel::Channel::balance_list"
+kappa = "87ebde5fd4b0372b79604d6f6c55c6b917f0fafffa56f8ea440367d19a7fb18a"
+at = "Endpoint=u32"
+embedded = "a6d1fccaf814d5c01190d884e4ca2a38e77939dd714481f33fa053c352e7ba6f"
+status = "residue"
+cause = "mir::Ty: transport::channel::Channel"
+
+[[fn]]
+path = "tonic::channel::Channel::builder"
+kappa = "527aa63f13fe73ad8862eb8560907a324d1c1b83648f3fe138d99721e871571d"
+embedded = "fa3b269985a68b7078400b72a349e980ca8406327e97e651de0ab684384f2930"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::channel::Channel::call"
+kappa = "283f379edcc4d9829c286a59e4ce32f05a4ec450661bea6cab4778718919f45d"
+embedded = "3b48b3c798ccecf936445ff4ce1d0fbeddf3fee684d64ebac97487e9c117d1e3"
+status = "residue"
+cause = "mir::Ty: transport::channel::ResponseFuture"
+
+[[fn]]
+path = "tonic::channel::Channel::connect"
+kappa = "b51ec67cec8f2f1daf3f9597faf957a35e96af75f6508d6da0b370582b5d4835"
+at = "C=u32"
+embedded = "edd7ca3f3180550022415f151dffdee6a5a0b71cd9cf60f9c83c317d0b56aa78"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::channel::Channel::connect<u32>()}"
+
+[[fn]]
+path = "tonic::channel::Channel::fmt"
+kappa = "0cbb33b6c7b0ff2a20f1aec82290d2a94ff5d0866c3c0e04bb6a88227ba35934"
+embedded = "72d9db6b0578e128b2991ac3c7645b60f6376c1b91c9b617d106cf1c798b94f5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::channel::Channel::from_shared"
+kappa = "925b8869fccd3d0962cea4c8a584b04c4c92d3bf9e1cfd3100728fd402f7d46e"
+at = "Bytes=u32"
+embedded = "f6eff53b467c1dd4654238e32e385675c4baa67c933864af291ffa9b74d8cb7a"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::channel::Channel::from_static"
+kappa = "ffda691defe4d91ae515f0227396bc389a7e8836d763a79faf66cae040bf9941"
+embedded = "7b99d63d941eb2c9b7b37c653643aa434de982682d387819028ccbedead638b2"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::channel::Channel::new"
+kappa = "8954ad092e1d3b400100aee95b47c597ba5f1ad3b315c635d8460f9fb0f4ae8f"
+at = "C=u32"
+embedded = "3effcae1329f965656d8a7c152116755dd7d4eb42045e827b00dac9934b2af17"
+status = "residue"
+cause = "mir::Ty: transport::channel::Channel"
+
+[[fn]]
+path = "tonic::channel::Channel::poll_ready"
+kappa = "ac9efb2896e0b06867cfa949753d19821d077ba8fa9b4150ebf608b06f01a7f6"
+embedded = "b9631757f6e3e6dd3fbd206bebdc5f36a9249f4d54475922d5d541b4ee4fa490"
+status = "residue"
+cause = "mir::Ty: transport::error::Error"
+
+[[fn]]
+path = "tonic::channel::ResponseFuture::fmt"
+kappa = "0eca4da971e1aa47dbb9de8e12a458180989d2f50e1d3473f0910a270e5e1888"
+embedded = "9fed6fad244b449b830845b6b8f0f8ea0ef919abf1bdeb928961b32b9b0330f7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::channel::ResponseFuture::poll"
+kappa = "9ea36ac7783e446b112471d49254fe37dab80174fd7b272414fcb178a3108f52"
+embedded = "db24c539a828ab732aa62a0054f5068a3f1bf345b3a14d6534dd3ff6c15ec896"
+status = "residue"
+cause = "mir::Ty: body::Body"
+
+[[fn]]
+path = "tonic::channel::service::discover::<impl at src/transport/channel/service/discover.rs:37:10: 37:15>::fmt"
+kappa = "ff75fcf12e96aa5117cfdac6dff01f13fc5697fa742c85d121c56b1f7bd8877a"
+at = "K=u32, V=u32"
+embedded = "06d6a93c40c0e8194bc94f68767cd8940caeabdb62a7442037723f3e18b6d968"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::channel::service::discover::<impl at src/transport/channel/service/discover.rs:37:17: 37:22>::clone"
+kappa = "16cb0e405a5dda157762c38e5fe31cad1301355ce58f32738a64289e88ec9367"
+at = "K=u32, V=u32"
+embedded = "5041302ca61bed5bdc8e6e7d414eccb136cbea7729ed4d6ec0c41857e05161c5"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::discover::Change<u32, u32>"
+
+[[fn]]
+path = "tonic::channel::service::discover::DynamicServiceStream::new"
+kappa = "09176cb08897a618c04c9b18ea2ec6166902b1b27092efa0fa66e98d407f6bd8"
+at = "K=u32"
+embedded = "ac5f6886d2c877f2c91ae5ec3ce03839729b4d1285c7f6445ed8ce130e4597e8"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::discover::DynamicServiceStream<u32>"
+
+[[fn]]
+path = "tonic::channel::service::discover::DynamicServiceStream::poll_next"
+kappa = "93981fb02af04fe333932e969f19d00ed2f1056be729e776fa2abad014054905"
+at = "K=u32"
+embedded = "c7ef0008e867cda63aa4f5260a2b212f138080a07b623854143c8b645f7643ce"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::connection::Connection"
+
+[[fn]]
+path = "tonic::channel::service::io::BoxedIo::connected"
+kappa = "706ba6e6f1f8bf14ad5e2520e5f4e6092fcbcf2485acff03ca9261a622586bfc"
+embedded = "ab00cc2665841b86ffbb44f3b80a60268108dfffcff499091c202832f68d821c"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::Connected"
+
+[[fn]]
+path = "tonic::channel::service::io::BoxedIo::is_write_vectored"
+kappa = "7825db943ba20605c25be00665251a1a2efffe8683b52194ae938f4eb92c4f4e"
+embedded = "ec26e3e972610fca1f01462915477627e34116958b48608ce65385e73293084e"
+status = "residue"
+cause = "mir::Ty: BoxedIo"
+
+[[fn]]
+path = "tonic::channel::service::io::BoxedIo::new"
+kappa = "ea13259d6006bdf0150dab61e2049e44a677b16ec16d7852209cd41b6c66665d"
+at = "I=u32"
+embedded = "c64f81f5a0bf0866e483dc2fd5d8c9507b0ab3a7e75a9bcc5f91c130166d3dc8"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::io::BoxedIo"
+
+[[fn]]
+path = "tonic::channel::service::io::BoxedIo::poll_flush"
+kappa = "459910dc5bff7b0c6b644f9cce61676d6a37a9a1dfb5a7146f50ea9e6187bb23"
+embedded = "c5ed17769df7fd60ba5cf3c90aee78e5a286b96a4210b636819f32c56ad9d070"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::channel::service::io::BoxedIo::poll_read"
+kappa = "b6052918fb8b7d544293e2fbfa81c0731832b019e479ab5affc72d1345f4c8ad"
+embedded = "c88eb3712c651249867cb9df20d9eba5e565a40d2b6bbdd8e326d75fd5bcdc82"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::channel::service::io::BoxedIo::poll_shutdown"
+kappa = "122b3b3b85c67a9d400b4daab0fd6b80aa4dace24f86f1be11e6b2bd3c601f94"
+embedded = "46d70ce1dd03d932772f2355f8f85fd55415c1a80f87bae2ccbf1a9c5bc50fc1"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::channel::service::io::BoxedIo::poll_write"
+kappa = "cac697c89901d413674e3907e8b1b61108af94e49bb02b8139bd61d01758cd78"
+embedded = "162bc0ea2e8349145c71c6b8624560410cb2e497356a69d9b34c60887b260f3a"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::channel::service::io::BoxedIo::poll_write_vectored"
+kappa = "c3be271941ec3e05ca45157e0ec17c828c8daebce43be73def5c6f1ec8f4eb4e"
+embedded = "21f15aadff8417acf639c72803b2cfc12c8179f971ec2169674ac859af73cb5f"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::connect_uds"
+kappa = "d4ea5d85b8cf3f07303e206a5805161307a10836c31fda3e50f3077558ae53f6"
+embedded = "bf69e83d356dc6f42aa5bd7c38feb28e2e5ad8cab2e1164d244c2c441f2f467d"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::channel::uds_connector::connect_uds()}"
+
+[[fn]]
+path = "tonic::connection::Connection::call"
+kappa = "2d19d9e1d01498efe2db0e9f215cbeaf5cf97a4acb61d2f60cfeae65886d4f18"
+embedded = "71c9efae419019ecd2c8a7a3d5f4b38e55fbc513e926af8bff1583119388e1a8"
+status = "residue"
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<http::Response<body::Body>, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "tonic::connection::Connection::connect"
+kappa = "f833e2e05ba0443bf5ce49a1458ac893ec973eee34b1ac56139448a0e8df3f23"
+at = "C=u32"
+embedded = "17c22a5745305285e06f96715990ab21ad30253e0362bdf538b6e0c16574ff66"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::channel::service::connection::Connection::connect<u32>()}"
+
+[[fn]]
+path = "tonic::connection::Connection::fmt"
+kappa = "418107666d632aab13fae48c3435e6be4df3b036ab44d9b9c91d996aa5eba0bc"
+embedded = "bef6970c438b4cc55660a9ca1f5be971b39b8ef4795b150e3bb7e5824ba1a72c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::connection::Connection::lazy"
+kappa = "d67be0f7a3f3bd89cf28883505aeb3a654199487dde44f6eb8d210ca2a86e47c"
+at = "C=u32"
+embedded = "d46525056f517c7bbd44e4aa68e22b1fb5c9396db88c3c0d32fb24a8426165f6"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::connection::Connection"
+
+[[fn]]
+path = "tonic::connection::Connection::load"
+kappa = "1fc00841725211f537897fcccebef1122aa06193efee15885f4fe2170d6c7910"
+embedded = "b810d156a5f679723105cbc7c57fe5e38eb43789af687c9848a7737a4f26902a"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "tonic::connection::Connection::new"
+kappa = "8585bd6d199b2ba26c6c9b95e701be8f0acef0665e5974733347c009576e944f"
+at = "C=u32"
+embedded = "ca667319a12d93bfb3a9675cf7e95bd858ecea2f567a5ae47c7b153bf121695a"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::connection::Connection"
+
+[[fn]]
+path = "tonic::connection::Connection::poll_ready"
+kappa = "9873e6ca9a640cec291bbcc5a4f6852f87814c5a0dabc1599d9b54e8c421b51d"
+embedded = "8d4e9bfbfe726e44373fc92299e88325c593669224ce9a2e7364f828ac29a995"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::connection::MakeSendRequestService::call"
+kappa = "a067407d44c5f2db58149eeaa8011e155a9e0a38ece687dbae3dbd990c1c98d2"
+at = "C=u32"
+embedded = "730a991df98989ccdb11b9a7119fce3b3a3bb0006a5e3a95c4a23c0cb35a6972"
+status = "residue"
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<transport::channel::service::connection::SendRequest, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "tonic::connection::MakeSendRequestService::new"
+kappa = "de5add0001170424c34575bbf2f4989bc6b0e4b0fff1171545eb0f67e9971fac"
+at = "C=u32"
+embedded = "24414c10d1b0e742f5f9db5b0eafb95e73012b2b0a964d0f88e35fd28174ded1"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::connection::MakeSendRequestService<u32>"
+
+[[fn]]
+path = "tonic::connection::MakeSendRequestService::poll_ready"
+kappa = "a705a31081d4679abb5914ea5f080b4d08130093c2d42e2f7e0699127539c149"
+at = "C=u32"
+embedded = "7c50078788dea2614e77dd335730b6afcd21ae8a7f18862ef668657836bb8073"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::connection::SendRequest::call"
+kappa = "55e0b9f8b32602a0b6c2f46f4b2b55d863392bca5d8313e2a532c93660d3f233"
+embedded = "af88f238700c16300ea2cc34e82c21ef154bfcccfd41928016df9e5430a0acef"
+status = "residue"
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<http::Response<body::Body>, std::boxed::Box<dyn std::error::Error + std::marker::Send + std::marker::Sync>>> + std::marker::Send"
+
+[[fn]]
+path = "tonic::connection::SendRequest::from"
+kappa = "7661d6bdc4a736a621a8c16cb979894b7a004279f3296ec1dda84a4be06fd580"
+embedded = "eaa917e6c93bab0348c22212f23030bb694415d8e44358e0c060f545872edd0d"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::connection::SendRequest"
+
+[[fn]]
+path = "tonic::connection::SendRequest::poll_ready"
+kappa = "cb111bc763396dec7da6452ee3b7a55249e93979811b1caec1c38577c869d420"
+embedded = "2aece95083fb6b40f878e4d47b328570cd1a86af039654656b94d4c18c638a9c"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::connection_timeout_future"
+kappa = "8dd7c2466b10798d924dfdeb8a48d3257fbe7b9d46ffde48084fb57ec72bab89"
+embedded = "9639ee8d27f8ec62e336410b952e283a59c4749710b82999abc96165cb0a8703"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::connection_timeout_future()}"
+
+[[fn]]
+path = "tonic::connector::Connector::call"
+kappa = "0e178d9e988c6cfeb7379e8d7ae150383f66f511be2b9f63275ee7a5d49307c8"
+at = "C=u32"
+embedded = "27d80eccef1f6cc0080f75b9f5eff337ed06a5fe34648e1457d228fbadede9e1"
+status = "residue"
+cause = "mir::Ty: dyn std::future::Future<Output = std::result::Result<transport::channel::service::io::BoxedIo, status::ConnectError>> + std::marker::Send"
+
+[[fn]]
+path = "tonic::connector::Connector::new"
+kappa = "7ae3ff2101bef7ebf3e40f26fcd38e4274d57f3d9e9a90addc1e2c8695cb555f"
+at = "C=u32"
+embedded = "a7eacf7a78c5cffbcc6389c0efa5f11bf9b81857834a7618a3c13c6904bdb787"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::connector::Connector<u32>"
+
+[[fn]]
+path = "tonic::connector::Connector::poll_ready"
+kappa = "5f8747d0646d66730d97ac5e527f9e05534507fc8f8e154eb5fa33a03c4b6875"
+at = "C=u32"
+embedded = "23e7445eca3ede7b2c69ac1720a8ed1dd4c67a33ab712665044335df20ee8ce7"
+status = "residue"
+cause = "mir::Ty: status::ConnectError"
+
+[[fn]]
+path = "tonic::display_error_stack::DisplayErrorStack::fmt"
+kappa = "d9439f564b546cd0acac0193b66e81412a34e9981fb3f8eac08dd3b1ae953532"
+embedded = "3252ec1836366116b5a5eeecf5963d71aaba1a4ece8b5a50fa6ad44b0aa9bc98"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::endpoint::<impl at src/transport/channel/endpoint.rs:46:10: 46:15>::clone"
+kappa = "338e7cf81c0a25a8985624a628be3165d28e81ffd518fb2d45386dfbfc742232"
+embedded = "e6bec1f5fd58d68931c6cfb1e096de00f7ed3468af1832ddd702bee64dcadf96"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::EndpointType"
+
+[[fn]]
+path = "tonic::endpoint::<impl at src/transport/channel/endpoint.rs:46:17: 46:26>::eq"
+kappa = "70aff447d05c40676cca62fc465c426901c44845fa6caf12a72bf40f7a2c3727"
+embedded = "3e588c5eb2fbcd99b0e975069690fcc0967c4e290d9c2620c252807208a9076b"
+status = "residue"
+cause = "mir::Ty: EndpointType"
+
+[[fn]]
+path = "tonic::endpoint::<impl at src/transport/channel/endpoint.rs:46:28: 46:30>::assert_fields_are_eq"
+kappa = "5b9cca0ac2f79c8a9dd11d6ab64d2317fd140749825d84ea503039ab87d578e9"
+embedded = "5068c02ba40d275be289f217c95370f1e317e6991a4e7c09bf08100618239962"
+status = "residue"
+cause = "mir::Ty: EndpointType"
+
+[[fn]]
+path = "tonic::endpoint::<impl at src/transport/channel/endpoint.rs:46:32: 46:36>::hash"
+kappa = "f77ca6a63bd4837d58dfbeeec852ee66e52177fb0229dfd9861333e837a5bfdf"
+embedded = "93806d69bba81db3b2b1afddfc36c5819554a784fffdf8b9e9d9afc72efb8108"
+status = "residue"
+cause = "mir::Ty: EndpointType"
+
+[[fn]]
+path = "tonic::endpoint::<impl at src/transport/channel/endpoint.rs:55:10: 55:15>::clone"
+kappa = "1365805df6cd8a5846545cd2c333ec746ece40ebb34636b54ac688cdadb32fd2"
+embedded = "5d0e66e6d7b6f2fb0192c5b26cef2aab005cc5b4d11cd0d1217afad0c0eb492c"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::buffer_size"
+kappa = "1f4f2318a4d8a0deb76edbb9d5b35e8c3f5de60c464ff9e207f96308c59049ae"
+embedded = "d9346876f6e84921e516744b430fc3a12cc4d7d3b364ccbdc19eb25e9acb959a"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::concurrency_limit"
+kappa = "598167aad4bb31c39f0a2d99e54423a88f0015f26e34d9eda9babeca177b098f"
+embedded = "b6e59706add5717415b0ed724e5e6e2e344def8126432596f0a2ab3e486ed32b"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::connect"
+kappa = "cd03305aaed5f512fc412c91cf1c5eded717a88ac1625cf5aaea236693960f36"
+embedded = "481a02f426e0faab889d59bc3af52c468f6ba861626e1092556d77b3c19bf39c"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::channel::endpoint::Endpoint::connect()}"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::connect_lazy"
+kappa = "431d24f6a392c89610583bf50e0810a6e429fb3c7bb60881e19e210cda7b80dc"
+embedded = "3a2e70990077cf769dc071fa81e558670a419a71909889c5f157be1181b954e6"
+status = "residue"
+cause = "mir::Ty: transport::channel::Channel"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::connect_timeout"
+kappa = "4aaed128c1bb47a3e98efd42d68ec2d4a6a916e10049fb9f4f09af333c0e8dc9"
+embedded = "20009a1316d791679904b96d80d7b731793d76228ed3daaa37b0783d15ec0620"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::connect_with_connector"
+kappa = "ab55c80ae8b483b7f5d894ddd5d38af14a86c63470b2275888fefc87328ef0de"
+at = "C=u32"
+embedded = "7a3f0daa7d237229fff9481d50ae46b5d275c664715e42d6042a753cb852dc51"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::channel::endpoint::Endpoint::connect_with_connector<u32>()}"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::connect_with_connector_lazy"
+kappa = "eb4fb15983dba69edb0230372db4f7ce7dfc7502a0e690306403b244a73be017"
+at = "C=u32"
+embedded = "42fc6695307f8b2764e86c5b24c8403e4f60f5cd3561c51d02890ed497a488db"
+status = "residue"
+cause = "mir::Ty: transport::channel::Channel"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::connector"
+kappa = "96591187c3b635d1e77aa980097943fdffc6daf008344d300c7f2352c943f945"
+at = "C=u32"
+embedded = "c7f2b0d6fd785a3b7abe98ec00331abd4b041fb82bd0704f017cd19e965ce44e"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::connector::Connector<u32>"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::executor"
+kappa = "e02c3a28ab3f08445b7604d7d25f4e8b7f65b6250f8e8052569bda5edfe1234e"
+at = "E=u32"
+embedded = "04836d645e38309d66e652502e6fc9648b0adcca3851202fb372cfa8da099c3a"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::fmt"
+kappa = "42b408802b240a4674d56aa6308e0faad85f7eb67fbede4f0a2ea4e280d3bb2d"
+embedded = "70d2a7913b7fd0ed94692c07ba17aeea1ce91a467e0e00c20f52903d58eb6cfb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::from"
+kappa = "b828f3b9131e4f6f87d1f42867b418b5e93b72f8d3030171401cce1894258808"
+embedded = "497c268ab4f9344f860b67b5f88300290548bf00de2a347a90e2a287dc65e84c"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::from_shared"
+kappa = "741248ad9e128f0da518f7ff5f16be915374490d330d564479c46c317be3031a"
+at = "Bytes=u32"
+embedded = "a4744ee695ea66c84ab0e95aa92c343151184bfd61e023cd6bdb9268aadb4eed"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::from_static"
+kappa = "32dae20f7f321c512da363a8418053c325f8d57ad0bb6d0a5bd60c6ff4c0ccfa"
+embedded = "1fb16009977608f3a7a207cb6323ef7cd2466b134fede19551c07f5295658904"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::from_str"
+kappa = "75d8af9917f4207666a2865d79a2553b8e7e0a07d81a570654f3200614b52f8d"
+embedded = "cc8a4cbe8afe24eb831237eed02d3ac72d139beaf4d078244bab91873937198b"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::get_connect_timeout"
+kappa = "8d16f60b42fc09d552c5d7c8dff506bd513e2cafc87714c4cc59290751ccfb72"
+embedded = "0baadd47c8e4aeae50c2daf828c863a3cc864197a0960233a8af68da218c2370"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::get_tcp_keepalive"
+kappa = "c25371001a2b535b5e10cfd33c3a37e561786df58ee371e467111de15106280a"
+embedded = "23a20debe3018172dcdabf792637f6d3ab6c8c5b784df0e1fb11305a0fc131fe"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::get_tcp_keepalive_interval"
+kappa = "670969c2e0c40a1d439b6ac3ced151256e8444fb4b907549692cece2dd88f415"
+embedded = "47e20bb17c625298d2bd90aadfd58ca1ba9f3b0710bfadd378682049cc60738d"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::get_tcp_keepalive_retries"
+kappa = "4f00c7e32b81f2def7546a3255264375233bd75b05c14d73f9ee60c7e7143e47"
+embedded = "932d0425283b671fc46fef0f9e8bc0ae10aee324d377e4cdec6abe38bdc5f464"
+status = "residue"
+cause = "mir::Ty: Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::get_tcp_nodelay"
+kappa = "084732981b169040454946808d515b7416632e013f082c75681e72c2c9620cb0"
+embedded = "a74b51b82fbe9065d7148a6f54a1a45d23b2f565ff16f366c0d68ac8ba81505f"
+status = "residue"
+cause = "mir::Ty: Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::http2_adaptive_window"
+kappa = "2d0c0290ae267236c34b63d8b1f78be8a267e5b1e15cbac6ba4e7d0288ff93cd"
+embedded = "bb82f56edd1cada299e11acd1d9114c14f574deafbfe84b05e22be17b8165dd7"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::http2_header_table_size"
+kappa = "d2209b1e108479310bc29643a7d1853533852adb3efad814a7398d966e255edc"
+embedded = "59f650d9ebec26f37409c3ac062b8d15a4295c1ad7f0988d3dfe7f009361860a"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::http2_keep_alive_interval"
+kappa = "3542fc235cf39737d02a535477d414593bad92c9a9168ade4fad99cfee682e5a"
+embedded = "5ca9618d25835107c04811cada2bff79866d7b85f579628e62e4b24823c20d20"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::http2_max_concurrent_reset_streams"
+kappa = "601951be163dac11bb4c84df89166f19e076259117cf72d5f8e8ead08927e22b"
+embedded = "11498c57502e5633f1af7b944bacb6ab96873651e28352c80420fe80b42fe9f4"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::http2_max_header_list_size"
+kappa = "d076efd45d973f1fc3e64ba939b04c0e21abc8e9be0960d8cd6ca5d4c2dbbb0d"
+embedded = "bceae874d6af5499ac069c41ab4f696015a2c4709383b4ef9832021e657d219e"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::http2_max_local_error_reset_streams"
+kappa = "fc090114f96b1a5eb45df82dee4d78a805c0a299559b3c3946052b605efca865"
+embedded = "3b8b32c530d9fb693ed6dc579c9b0ef17249e1baecf0dfdd711317920e7f5625"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::http2_reset_stream_duration"
+kappa = "293a461907313f7c2d553890f87ea503185a842693229b323c323628323319b7"
+embedded = "dbe70793a3dc6816938f2fd22d892d7ecb097e8840e76537d42668fea66229a9"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::http_connector"
+kappa = "9ebb4a72f856c473ecd699d845616868dd4a2d2a89854249ee548ade111289d7"
+embedded = "176bda9919d54f9d70a3ab503fc816f21854366e9e43589513305b4a891c62f5"
+status = "residue"
+cause = "mir::Ty: hyper_util::client::legacy::connect::HttpConnector"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::initial_connection_window_size"
+kappa = "56c28e3f18bfe84c3578a058f604a73727c04a450ec36a89bade0c3b75e7d90a"
+embedded = "444fc7e767e1e07f50d56ccf55fc407b35be397b52dbe00ccceb54cc2eb8650d"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::initial_stream_window_size"
+kappa = "37f66c219ffd0f8a84b671cf108ed06b88c25ba869a70593c43da5bce34a3b47"
+embedded = "81377829138f5927fb88b9abe79b5f14e609caceb20803fd15b8ecb2677c75ab"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::keep_alive_timeout"
+kappa = "4980e9bb540d34008ea30d20c2467020de2b80d18ac1eb386b0dda41d4437533"
+embedded = "cc13d31dd6130a4776a5c8a7479e0e301e1eb3fd6e9ea285278f2fafd577c08b"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::keep_alive_while_idle"
+kappa = "dcda9f55d22ee927a61ccb3ea8f7e0d6ef115423ced3cdf1e4802d272ba0c1d7"
+embedded = "12d60a6c8fdd2a17af544573f4c0e6a84a37a56fb03737f3fda06fb7700a78b9"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::local_address"
+kappa = "5ce97c7ae6c52242e6a6aeb195857350ab933197d1bcbd71c2a3a475a4fea3d0"
+embedded = "9b3054479080be46c28fb75c0e116574a95b638c2e1dbe68d530958d3cbff774"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::max_frame_size"
+kappa = "6c0d1aad48d6b478823a446cfc86dd2123f617baedbfc0ae5b997b7b998ee332"
+embedded = "67cb4bc736c86d09819483619f42002e4a215bf4620aa0aac0ba18faf799f803"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::new"
+kappa = "d095c3a10a55ede2f39b3a485cd1261900046f8e3b1a067274ad4a0d4e4ccc8b"
+at = "D=u32"
+embedded = "fcc6be8517d59dfaee2efc93c0a3ed615641ed610d352dbd6134fa6530e2c372"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::new_uds"
+kappa = "ce9b6222c09a0b0b2784d076c76e535bfda1bb47aa319cf2e5cb684b988771ac"
+embedded = "cf7859a406132e2cc1208e5c791e798276c71eb35b9c05c31361a0836fe49208"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::new_uri"
+kappa = "bb1706173cac903cc938ce18ab3b31569ed6fff198e2355efc3c23165f021d14"
+embedded = "b9e69e6de9b0c0ebe35851b3edd7c2e48758cb6e2a119d5b0ab92711c2dc0706"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::origin"
+kappa = "7278f9fcc730cd2d5eb565c47fb931c67bf83c5ccf2f8a123eebb8e1155b87d3"
+embedded = "76e2c3b4358671d22ac64daf74796076153d0d37b1f8a71fcc8a51548f5d9906"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::rate_limit"
+kappa = "17c50d7def69e79d706b778d2f415962655cb16bcc3dfbb32c0949faed96d1b2"
+embedded = "5a013e98d2d117f8b796a35d36f7db5ce4d90d70506eda8e3cd0ff3a12d012b9"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::tcp_keepalive"
+kappa = "b7e8854c8ee272c882bd2ec6d48156546502ec614dd84085efcdf61526d88c6e"
+embedded = "88a316db114432ae7853d180a8c69ea96832244eb077ece560734ec9c56f975d"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::tcp_keepalive_interval"
+kappa = "75dce5e4092ca7bb93d21927e2e190705fb602007a9b9772ac0d3820f8e13563"
+embedded = "1ec9532da6fe2ca3bfe5526229c45ac0b2ca2ba1a8aa697b7815289fddec4a16"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::tcp_keepalive_retries"
+kappa = "72abc5f8301f3b7adb690bd9aa88f4b220d6ad247df230a39517d9009e0e0da6"
+embedded = "f05eed1aa045708fad96d33b2b2d5d5d8e793ed417597a49152ff1dbb7017609"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::tcp_nodelay"
+kappa = "6eb3940dc90bba7d7707ee4ccfced8665e3fef777777ed90e5e86dbda15a5cb9"
+embedded = "98402ca7671768514b26a4ba0d1ae9513526cced2fdb11702408c8417850a135"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::timeout"
+kappa = "c6104c618d7e1dddf15265113ed1cfeb5199bad5a34b844e7465ba7f5c823a03"
+embedded = "33722bc554baaf38260a7272320a7a14ec1306a625535f6c8c2c126b17d187e5"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::try_from"
+kappa = "49a0ebc06a464b72bfe4c69b6b2da493f05470aba207b2269bf1f56d7bbd67cb"
+embedded = "906b265c8f2b89410807df75d6098a9dd2b2ca04e533387e12694d6022553ccd"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::try_from#2"
+kappa = "c25f76c7cc0dcd9757a7644f6ac651cbffe22bf980ab3a707b81dcd1dd500ad5"
+embedded = "a8943f23134f9e63470ce5be320f5c054b5e52be99300e650cd477c4ec3284d8"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::try_from#3"
+kappa = "89837528bb9070af273d77905483b4247c480995faf7a8bffa6ae0c546d03b93"
+embedded = "08ebb0cc2983e531e022696fc3f9535455bfc4431ef35832dcc2b74660cc208f"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::uds_connector"
+kappa = "2445a59c576243aa1a8088d6f0bb52845da7e7e385cc93ad7e372475951aaea9"
+embedded = "6452561446099cb759f2b018c1e21dd38a95c80980fb031f62cfda09162d0301"
+status = "residue"
+cause = "mir::Ty: transport::channel::uds_connector::UdsConnector"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::uri"
+kappa = "c55b7744321702ae447a4f1ced49a456a538e09b76ce7705372fc4b1d380b09a"
+embedded = "71d9890ef87cd75a66077c062cc5eea692f4a0951594400b18c9330fcd4f0933"
+status = "residue"
+cause = "mir::Ty: http::Uri"
+
+[[fn]]
+path = "tonic::endpoint::Endpoint::user_agent"
+kappa = "e93490572646ddb79c778d4e5275a343d37855f46a634bbb031e9b09bdbb1c7c"
+at = "T=u32"
+embedded = "472153408d68b3771474da38b0608a4aa5ecfe0603cc44779c669c0cb753b0c8"
+status = "residue"
+cause = "mir::Ty: transport::channel::endpoint::Endpoint"
+
+[[fn]]
+path = "tonic::executor::<impl at src/transport/channel/service/executor.rs:31:10: 31:15>::clone"
+kappa = "7b599d3ebc62379e237de9d379ea177298efd01623b3028ef8041b53edf182f2"
+embedded = "6af2e9c32246f98f12ffda19b3fe4da61ca63ee06244a35f1fd3e46169d77580"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::executor::SharedExec"
+
+[[fn]]
+path = "tonic::executor::SharedExec::execute"
+kappa = "8c94f812edb4f7692d02986c32f2871e4e2979a4063f9327479614302fe44dd6"
+at = "F=u32"
+embedded = "d085360a038848cb4852af6eb3bbb9d2c0e07df36c5e9a72b9e9184ffbdbaa52"
+status = "residue"
+cause = "mir::Ty: SharedExec"
+
+[[fn]]
+path = "tonic::executor::SharedExec::new"
+kappa = "7eb904b83c2ae9a87757514b67a1ba2df669a65a763f435a64b8e664d7cd64e0"
+at = "E=u32"
+embedded = "dd0506d90ae5a7b08e9fb7192809c276732a0f6eda8054ce766e982f4ef861e6"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::executor::SharedExec"
+
+[[fn]]
+path = "tonic::executor::SharedExec::tokio"
+kappa = "5d4993760cdf4113692be3b76b28bc4363784a03cafebc4ae902a73aff484f77"
+embedded = "550e4590ec82e371e3dc5d85adab5ad7d1a9e167d4022f240d8de159c57ce551"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::executor::SharedExec"
+
+[[fn]]
+path = "tonic::grpc_timeout::<impl at src/transport/service/grpc_timeout.rs:37:10: 37:15>::fmt"
+kappa = "a2bd5d9962e086bc84a028a81df41160296b6382c379be7c6569fc1073181d6d"
+at = "S=u32"
+embedded = "8809e406a4fa3028c736455d1fc7be31e4b5f8697ba69267558b20621332b73f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::grpc_timeout::<impl at src/transport/service/grpc_timeout.rs:37:17: 37:22>::clone"
+kappa = "642c98fb740938b6be487c0b86e4827ab8280af4013db5cce65e5a8e5a0606b5"
+at = "S=u32"
+embedded = "90ae3e919693b5026e13216f7ec24a9dd6b7835a7b9a48bb9dd86e7b5495d168"
+status = "residue"
+cause = "mir::Ty: transport::service::grpc_timeout::GrpcTimeout<u32>"
+
+[[fn]]
+path = "tonic::grpc_timeout::GrpcTimeout::call"
+kappa = "7de8b0e7b555f3ed7ebd005bd7c1b045d90ba3da7a6b84a99884752bd62a80db"
+at = "ReqBody=u32, S=u32"
+embedded = "fca4361ba400827ad5cf215d802f675e2718fe338126f3990f111754401ae0a7"
+status = "residue"
+cause = "mir::Ty: transport::service::grpc_timeout::ResponseFuture<u32>"
+
+[[fn]]
+path = "tonic::grpc_timeout::GrpcTimeout::new"
+kappa = "109d2cb008b22b56594b741dd0a11549ff3bdcfcc3844bbc9ade76329ade2469"
+at = "S=u32"
+embedded = "7738d0f440b26b88055f7602c7f9d18ea492997993ad894ed8e31a21bf4545ba"
+status = "residue"
+cause = "mir::Ty: transport::service::grpc_timeout::GrpcTimeout<u32>"
+
+[[fn]]
+path = "tonic::grpc_timeout::GrpcTimeout::poll_ready"
+kappa = "9740e1975da4a5af1e0e2a7f6c1af7a6695f1cd8b977e6640a552d290db59589"
+at = "ReqBody=u32, S=u32"
+embedded = "942d8d1172d0a814461d1692cce86ed1f019b3bf9cfc2bd98d9defb96abfc729"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::grpc_timeout::ResponseFuture::poll"
+kappa = "ae57bc1074b7c2503c05ecbf89fa2b48ed3a4a0d021cca581d2243de7dabf013"
+at = "E=u32, F=u32, Res=u32"
+embedded = "4fbfa7597666e33b4c735effb2819c53c2aee301af655fa6ca4130a8d95448ec"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::grpc_timeout::_::<impl at src/transport/service/grpc_timeout.rs:89:1: 89:15>::drop"
+kappa = "b6fcfcf34d322fe389c6e428dade625846ccad80bfb1c27e5c3a07c0ad4ffb98"
+embedded = "4e7a266e1a163c3db16443cfad4c9ac8d43de86d8b41d718807aaf50b6f36812"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "tonic::grpc_timeout::_::<impl at src/transport/service/grpc_timeout.rs:89:1: 89:15>::project"
+kappa = "214afd48e9ceb253767efa918b4bd5999dc46c722cc673a3781db7a9d86f9850"
+at = "F=u32"
+embedded = "725a3e7280e5dea54fce26b94028099889764a5bfc35fc96f1dc905d6ac581c7"
+status = "residue"
+cause = "mir::Ty: transport::service::grpc_timeout::_::__ResponseFutureProjection<'_, u32>"
+
+[[fn]]
+path = "tonic::grpc_timeout::_::<impl at src/transport/service/grpc_timeout.rs:89:1: 89:15>::project_ref"
+kappa = "a44867ea7886ab586ad32b37ab1227700f5f40fe32278413024ee0af08c9beb8"
+at = "F=u32"
+embedded = "2e0e2fcbd29c5187706db930b004b7ec7af6cc8e411bfc11aeff8ddccba16cd3"
+status = "residue"
+cause = "mir::Ty: transport::service::grpc_timeout::_::__ResponseFutureProjectionRef<'_, u32>"
+
+[[fn]]
+path = "tonic::grpc_timeout::_::__assert_not_repr_packed"
+kappa = "4934ab8f3f9e2a9cb2ada3f42c37626f6eedc6b4b995253b1213f10bceb743cf"
+at = "F=u32"
+embedded = "a36cdfcb9d94fe526c0da6befc5b00a92046ce33d3973302b03b1dbcf46ee260"
+status = "residue"
+cause = "mir::Ty: grpc_timeout::ResponseFuture<u32>"
+
+[[fn]]
+path = "tonic::handle_tcp_accept_error"
+kappa = "de1e85fb5f29185b07bed89b96a8c7c4cd96b2b4e8ccfb8e078e66a265f19580"
+embedded = "4a83c71246b18b7e206f6e4271ae497f0c6707826992f70ae2697cfec740d1b4"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::handle_tcp_accept_error::__CALLSITE::META::NAME"
+kappa = "67edfe17842dd2ec696edba242881304fd233766b33b1ca7383e18650693c24b"
+embedded = "d70ec526c5267463b04571d403b8fb0f030f58b081e2ee08fd4df91a3650ccbf"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "tonic::incoming::<impl at src/transport/server/incoming.rs:41:10: 41:15>::fmt"
+kappa = "6e02fd384e0dee7b977baaf2a9dffb20d10a1ad9fd44353c0cbfe614353aa8f2"
+embedded = "c085fe164cb8ebc5275a9263d8449b9edb384fedd090a8726d66cc6626153faa"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::incoming::TcpIncoming::bind"
+kappa = "82b46a9fef55fc853dbd6c89f3f0d4496e98fe137b7e1d4e04527bce932786c9"
+embedded = "50a7e7cd64cb288abd25dbb72087310bc94ba90be285612da914b25952b252d0"
+status = "residue"
+cause = "mir::Ty: transport::server::incoming::TcpIncoming"
+
+[[fn]]
+path = "tonic::incoming::TcpIncoming::from"
+kappa = "df24818a5113b4531ffb3c87d03cdc5d89bf4839392ca49f578458c18577e44d"
+embedded = "5be5e0543bc4042fb3be10a9e313b3fd959f80452108def90cfe87fa673f6357"
+status = "residue"
+cause = "mir::Ty: transport::server::incoming::TcpIncoming"
+
+[[fn]]
+path = "tonic::incoming::TcpIncoming::local_addr"
+kappa = "845c9d26661b02163112a74e236bc4e0d1eafa6e73dbf587b8d2362b769aa185"
+embedded = "3579aa09605c7e55364daac9445693f67a38ef2ca28b7ed4c2eba77dec08b344"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "tonic::incoming::TcpIncoming::poll_next"
+kappa = "4e00bc791630aa1c463eeee714fd183631c4ced57aaedffc5cdcb7f7e9cbbed2"
+embedded = "0953ddd4c9aec4e4b3edd2f6acb697dbbe3e9b6a627fbf4cef9d3729399ad07f"
+status = "residue"
+cause = "mir::Ty: tokio::net::TcpStream"
+
+[[fn]]
+path = "tonic::incoming::TcpIncoming::with_keepalive"
+kappa = "6cafa32239e8ca9ee3ee234c0ba70d26a799206fff66818a0a0de8edaecf555c"
+embedded = "1a8b7ddf7703057cdfcbcdf959e6c90c85e7fb926eccee5f219f0b89d3898cd6"
+status = "residue"
+cause = "mir::Ty: transport::server::incoming::TcpIncoming"
+
+[[fn]]
+path = "tonic::incoming::TcpIncoming::with_keepalive_interval"
+kappa = "bec1dad0babd41fc077d4da9896276526718a0a1a9f8219549c130a817b08f42"
+embedded = "0516fa2eb9b3c0423cd676ae6e2c0b7c9656663608606038af3d3724a2c93a79"
+status = "residue"
+cause = "mir::Ty: transport::server::incoming::TcpIncoming"
+
+[[fn]]
+path = "tonic::incoming::TcpIncoming::with_keepalive_retries"
+kappa = "e8bee4750e7d1cb6fcbbfe244dc85f3f1d47d175c51fda06d6aa2870fedb5ab8"
+embedded = "2eeb3a38fa0e5457ac47ca60b386e385f9e2fa5fbac7280b7bd35f04170e25a8"
+status = "residue"
+cause = "mir::Ty: transport::server::incoming::TcpIncoming"
+
+[[fn]]
+path = "tonic::incoming::TcpIncoming::with_nodelay"
+kappa = "24ca0539c67ae9c088e1f4d1be59c6ea4b5966a408c2674d68c518a0c77711e2"
+embedded = "372bd2e217d6f95858dd7d62e0e89ef6ac83686a55a59efa484206e976dfc0cf"
+status = "residue"
+cause = "mir::Ty: transport::server::incoming::TcpIncoming"
+
+[[fn]]
+path = "tonic::io_stream::ServerIoStream::new"
+kappa = "d21e580739785df12892af2968dc057610cc40155d86de13b00bb3b2a59020fc"
+at = "IE=u32, IO=u32, S=u32"
+embedded = "61205393491a7936d5d1d6e1891f774a8cd242c790dc2f3cfea133becb6f2037"
+status = "residue"
+cause = "mir::Ty: transport::server::io_stream::ServerIoStream<u32, u32, u32>"
+
+[[fn]]
+path = "tonic::io_stream::ServerIoStream::poll_next"
+kappa = "dbd5c2c47b06a4c49c9657b5c2aaa9e58bff96c7bc64a02560357f0860379b1d"
+at = "IE=u32, IO=u32, S=u32"
+embedded = "8dab2c0838742ee203e30149e5c154b3b558863d62639d85fabc1844bb268c0f"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ServerIo<u32>"
+
+[[fn]]
+path = "tonic::io_stream::ServerIoStream::poll_next_without_tls"
+kappa = "d35a71b6ad947066b415b87937ae33ae6594a4b729aca003a16ae0ad35a5d249"
+at = "IE=u32, IO=u32, S=u32"
+embedded = "4a2de1ed7c9be9a4420504b60cc0d22289735ee0e408dbc8a430e61a2088a6d7"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ServerIo<u32>"
+
+[[fn]]
+path = "tonic::io_stream::_::<impl at src/transport/server/io_stream.rs:51:1: 51:15>::drop"
+kappa = "33e7ee0857a098c395636065fdd74676c71a7ab9f0d3fe7d115285a853cf492c"
+embedded = "1c23ed68c2af5fc97ef8cdff6389bc3119f34abdc5c59441b4141fffb7d576ed"
+status = "residue"
+cause = "mir::Ty: S"
+
+[[fn]]
+path = "tonic::io_stream::_::<impl at src/transport/server/io_stream.rs:51:1: 51:15>::project"
+kappa = "59fe1170a1cca844dd9ec009c415bedba838298036fe39ef9974fc62a7247a33"
+at = "IE=u32, IO=u32, S=u32"
+embedded = "ad2afe506ebca5beda4053992cbacb1e440bff968eff2cbd37da7be7bd4087eb"
+status = "residue"
+cause = "mir::Ty: transport::server::io_stream::_::__ServerIoStreamProjection<'_, u32, u32, u32>"
+
+[[fn]]
+path = "tonic::io_stream::_::<impl at src/transport/server/io_stream.rs:51:1: 51:15>::project_ref"
+kappa = "059ca94d8a35036f6a3fb6817618bafd3366b11175fd0e64a6d6c14db3457db4"
+at = "IE=u32, IO=u32, S=u32"
+embedded = "4ebda166966edee72eeec41c937fa15a06956f3d18b0b6aa96a9e6798d6fc592"
+status = "residue"
+cause = "mir::Ty: transport::server::io_stream::_::__ServerIoStreamProjectionRef<'_, u32, u32, u32>"
+
+[[fn]]
+path = "tonic::io_stream::_::__assert_not_repr_packed"
+kappa = "9690c4c04575856cebc927eb7c119199b9e580e0e3e4a30cb31c07afc1ef89b3"
+at = "S=u32"
+embedded = "7a5cb94dc4b9f5290c6185fe757b7976b7564ee5051da067ff3a66b98acfc7f4"
+status = "residue"
+cause = "mir::Ty: IO"
+
+[[fn]]
+path = "tonic::make_keepalive"
+kappa = "cf0e687047d5f011fcdd64d154adbc6220ea8a209012624a5201ac7646a796cf"
+embedded = "7294df8c674afed0ee31e4cf0645d1e8a761002e5ecefe3ea0f80b8d628013f3"
+status = "residue"
+cause = "mir::Ty: socket2::TcpKeepalive"
+
+[[fn]]
+path = "tonic::reconnect::<impl at src/transport/channel/service/reconnect.rs:199:10: 199:15>::fmt"
+kappa = "c574c36e178f0e6df63b59568b4cdbcdd69a4f6fae9668ea747a456ae909821d"
+at = "F=u32"
+embedded = "64b03fea6c5c66baa924dc9ec15460e20301e701a3945b9aab9d8b9463289542"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::reconnect::<impl at src/transport/channel/service/reconnect.rs:206:10: 206:15>::fmt"
+kappa = "813e2293bfb193f434d9144b798cc407519cf62ca69da1d4e7826fdd465fefdc"
+at = "F=u32"
+embedded = "58a2706196883da90fae9b495a3a50e98271ed8711f7bc9e19817c0b5daac490"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::reconnect::<impl at src/transport/channel/service/reconnect.rs:49:10: 49:15>::fmt"
+kappa = "392ea37c4620f654dda91c8dc60c1ba7d21c498afef31d4de6e628d1a4b52120"
+at = "F=u32, S=u32"
+embedded = "6870580403efbba6da002b8e9f0a7ba78e31ecbac3f1d64712ad9b7e94dc3ffd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::reconnect::Reconnect::call"
+kappa = "5d29b2530a6bd7bf8283967f7f0df844d68d3eed04f1ec88933cb1c04677ce47"
+at = "M=u32, Request=u32, S=u32, Target=u32"
+embedded = "c44d0c51329e8f89b11f414d29634bef08a78b41ef5e70ae1c771a85db97613e"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: transport::channel::service::reconnect::ResponseFuture<u32>"
+
+[[fn]]
+path = "tonic::reconnect::Reconnect::fmt"
+kappa = "41517a9d0f606a3303e830a71e205e20a6a80e4e53840adbdb15627d091200c1"
+at = "M=u32, Target=u32"
+embedded = "db28ef80a9ca71f4703e591d65a7b9ac1eaeabd9d581ee07ba969506a3cd75c6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::reconnect::Reconnect::new"
+kappa = "b53c67b7be918f3de1b06032eadec2f9bda8c0094639119be3bb99524bbc6c0b"
+at = "M=u32, Target=u32"
+embedded = "99f01130c3be3bf2e0de74cdbb93d0859b9344930d35398704ddbdf8e1b28fd4"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::reconnect::Reconnect<u32, u32>"
+
+[[fn]]
+path = "tonic::reconnect::Reconnect::poll_ready"
+kappa = "1fc8d6507b0c7d15eb636f43b779c7e3cf151dd34847afec37afdffeccba2f22"
+at = "M=u32, Request=u32, S=u32, Target=u32"
+embedded = "82df49b1ba0cb0793b09f2076277b160f031ce55714d2046f872129252e6ffa4"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::reconnect::ResponseFuture::error"
+kappa = "a6144964a76255f019b6a3e159e95579d945f1f0ab0d786d22043527a56fc4cf"
+at = "F=u32"
+embedded = "a6fb944b3254631f88175f4f9d4caad4f7b327c7f2b362a6a99fc57588970142"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::reconnect::ResponseFuture<u32>"
+
+[[fn]]
+path = "tonic::reconnect::ResponseFuture::new"
+kappa = "c51813fb94235896ce1b37d2bac36f4372c1399b4e917f320dc0c868013413b8"
+at = "F=u32"
+embedded = "3fd4a5e0674d5518f5a27150c8435dd6df6d9c7f0adab4d1eb2a86755a73ecee"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::reconnect::ResponseFuture<u32>"
+
+[[fn]]
+path = "tonic::reconnect::ResponseFuture::poll"
+kappa = "133a75722676406fd7cf51cf5c71d3dbc08cc39fc43b5fd54268afeaab3df98d"
+at = "E=u32, F=u32, T=u32"
+embedded = "a47530f23f9d676d8dc3e574e407e5ae08d669ceeb9b82c29637e70b772d45ad"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::reconnect::_::<impl at src/transport/channel/service/reconnect.rs:198:1: 198:15>::drop"
+kappa = "d099e30326cdabaabb9250547e5890a1b23127c49b255e8a2d47df7476b37e97"
+embedded = "eaca834a49bbe2b0d21861ba683adf4bb15300b678cc2d6ef7428f5e0f719e6d"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "tonic::reconnect::_::<impl at src/transport/channel/service/reconnect.rs:198:1: 198:15>::project"
+kappa = "3bc8eea954bbcaf5e715284d005fcad7d8bae5b9d9977f02ad27dc3d1c68c023"
+at = "F=u32"
+embedded = "75910be6c0d21c3a2f3cc27ce08a0c809234144239c4a69c7adda900b74ac3a7"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::reconnect::_::__ResponseFutureProjection<'_, u32>"
+
+[[fn]]
+path = "tonic::reconnect::_::<impl at src/transport/channel/service/reconnect.rs:198:1: 198:15>::project_ref"
+kappa = "66742223c8781b710aa2d6d0f7b38e066bb1742dde632c6b46b637310b70efc5"
+at = "F=u32"
+embedded = "11a80189f9f530e4191134c6645d889322bb2eccce42e48ee6f19d2f1e589d59"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::reconnect::_::__ResponseFutureProjectionRef<'_, u32>"
+
+[[fn]]
+path = "tonic::reconnect::_::<impl at src/transport/channel/service/reconnect.rs:205:1: 205:36>::drop"
+kappa = "5780a084ba2869123c6856cd444c32129ebf8bb7b6514a470ecc3ac793f029b0"
+embedded = "00e765828a95a41bbbaec836e68adaea3d0a1484aa84aa30a5cec25325ec5655"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "tonic::reconnect::_::<impl at src/transport/channel/service/reconnect.rs:205:1: 205:36>::project"
+kappa = "0d934fc28f30e8641c3c863acda3fa16062b7708cc5941ee0789657ea26719f0"
+at = "F=u32"
+embedded = "88c71e2b2264af1bf8815b6f51ef8a44067852c8f04fe0813a0cd9f7650b8d7f"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: transport::channel::service::reconnect::InnerProj<'_, u32>"
+
+[[fn]]
+path = "tonic::reconnect::_::__assert_not_repr_packed"
+kappa = "71844be2464d00dee4fbd048e43ce80ac646650aff81a96471142be78e544a1a"
+at = "F=u32"
+embedded = "184238f431350c0060b7c5b664a438b61597f2a2739d0eb1d2addd7f0a5ac5f0"
+status = "residue"
+cause = "mir::Ty: reconnect::ResponseFuture<u32>"
+
+[[fn]]
+path = "tonic::serve_connection"
+kappa = "74bfd60b29bf813cd5933201c80040c8a687e22e23d22215dc5b6c9f6ad90566"
+embedded = "6440febb7305885b6fedd2adb8d6570d1486bdb1cbe31fe7ba0c190081eea6b0"
+status = "residue"
+cause = "mir::Ty: IO"
+
+[[fn]]
+path = "tonic::set_accepted_socket_options"
+kappa = "6ee5436d1dca2c56f610305b4de9d778084e471b3f7592974b005e69df256f67"
+embedded = "130d388180361a6b0fd50fdb4a47accd010101d4e07c2d9d4882375ebab413a2"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: tokio::net::TcpStream"
+
+[[fn]]
+path = "tonic::transport::error::<impl at src/transport/error.rs:39:10: 39:15>::fmt"
+kappa = "4f2b7029a782048ff2d73ee114351076cd2ba1f736d16520dd9ea327412b3a2f"
+embedded = "33f4d01eb7ffba24b793812ef62412b505f906cefadf032936327f43363af3dd"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::description"
+kappa = "011506e0febb0f488caff779b4ca838a0be925e1ed987b6869ffacd97384e08c"
+embedded = "8aa686b1408e6a3bf4e907364d507e6d8b0c5f8d634c3ec5ad5b3b6e24105ad7"
+status = "residue"
+cause = "mir::Ty: transport::error::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::fmt"
+kappa = "4d4f58ce866d4eae869f53b740ff44a417d0f3c9c8cc581ab220467a0b95a79e"
+embedded = "5d917e30e80997ef00a425ff3a3b4c69d5f661efb739886bc0174f8b5651ecc0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::fmt#2"
+kappa = "0a3eeff51c2ff2b71556081024f96e3db5ecc32f1af5c4d45e8161babe2b8eb2"
+embedded = "67e663b4ee53d680a3104b3fa9f431577f424ad1680120e42ea4daf2ea65b593"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::from_source"
+kappa = "60d48e05414852424dc398d0f269145be9b8d92b45c9c8bff781a739e0145303"
+embedded = "07e419f5d71fbeef916c4cb801de05a3f730dafbeeed58b18242128a45c19778"
+status = "residue"
+cause = "mir::Ty: transport::error::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::new"
+kappa = "63515e4632ff389e8aef6fcd686870198bee474dd5dd1a09dab370ed8059c4d5"
+embedded = "d9b29547d4c7d5502b2696ba626db544cb17656cf605eca099052f4ed964427d"
+status = "residue"
+cause = "mir::Ty: transport::error::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::new_invalid_uri"
+kappa = "d3d125156b166d550fb6ac22b9157b17ae8dcf599b7dab03eb71875fb56dcd68"
+embedded = "4204b0266d9db76f8dce49d5dcad561f2809d9c2413ec4902d94eece815a5481"
+status = "residue"
+cause = "mir::Ty: transport::error::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::new_invalid_user_agent"
+kappa = "80cc939dd1661a2f70124480b278faf01ee123d8815292677fd260db390b154e"
+embedded = "9c3a78cf1b69d8d430bfdd2ae2811922e51688fcd71dc0c236a6985b1bf3a53b"
+status = "residue"
+cause = "mir::Ty: transport::error::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::source"
+kappa = "8adeaec2de35e75602fe5c55c111046913802f17674cbc4e911eaafa132866c4"
+embedded = "e8f956686f3400c302533c890ae42a52e4b21b397b53daee7193c9df8dd5741c"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "tonic::transport::error::Error::with"
+kappa = "c5d56ad08096a6396f27fb9abd7ba426cba8bd16634e0f6bc538ece63bbfa27d"
+at = "Source=u32"
+embedded = "d91fe1489f08892b31d42be0fc56d4ce04d93acfbdabb5fe564ef9dd2a1e10a1"
+status = "residue"
+cause = "mir::Ty: transport::error::Error"
+
+[[fn]]
+path = "tonic::transport::server::<impl at src/transport/server/mod.rs:113:10: 113:15>::clone"
+kappa = "e6a79dc83e9dab76df5bb9705d28ea88475bdeee63ebce8d7a084d33b803c8be"
+at = "L=u32"
+embedded = "fcc5ce0096898332592a0cf7508c73524abd7e0aebec67cff4e7fcae26ee6859"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::<impl at src/transport/server/mod.rs:1167:10: 1167:15>::clone"
+kappa = "b2764442378e5e4842750fec26026176d31b7bf1840b3297860bd9c5f7efb063"
+at = "S=u32"
+embedded = "d2c0cdf0f821e98cd7cde21d6dbf7f0ccd2f59e1a3b5b2ff6a9312bcc0e8525a"
+status = "residue"
+cause = "mir::Ty: transport::server::Svc<u32>"
+
+[[fn]]
+path = "tonic::transport::server::<impl at src/transport/server/mod.rs:1242:10: 1242:15>::clone"
+kappa = "164871436bb2981e4a72f149a93ecf836ac9dc0ed0cb82b8e2500fcdf4c4cbb1"
+at = "IO=u32, S=u32"
+embedded = "ebe433404f096ff5fe1152b961b6fa16b2925d3e9f4b6564485654f657dae7a1"
+status = "residue"
+cause = "mir::Ty: transport::server::MakeSvc<u32, u32>"
+
+[[fn]]
+path = "tonic::transport::server::<impl at src/transport/server/mod.rs:174:10: 174:15>::clone"
+kappa = "e899542e606d87fa567f9d9eb1f6b3596f4d01c958572d40a99414313a73ac9c"
+at = "L=u32"
+embedded = "30a42a64f251e615518671899b729a15aea4e7e59f1b748e2aa851d8bb737995"
+status = "residue"
+cause = "mir::Ty: transport::server::Router<u32>"
+
+[[fn]]
+path = "tonic::transport::server::<impl at src/transport/server/mod.rs:174:17: 174:22>::fmt"
+kappa = "e5a778e48fb26b29d10a596c29a2bf071c485b15429b36959f6ae60818fd879b"
+at = "L=u32"
+embedded = "10f43b7d5190dd4c7ae5815a2f6e459f482247c34149ff8a1de0292a1b5bd974"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::server::Fuse::poll"
+kappa = "a7d7e340664b9ee2f39ceb2aef71a98a56c86b12635e06c66bc8be9d9fefb5bd"
+at = "F=u32"
+embedded = "2edf6f3b731ad4f58139a3d4995165b8570280ea06423a305eecf7a1895e9232"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<u32>"
+
+[[fn]]
+path = "tonic::transport::server::MakeSvc::call"
+kappa = "814f1f9d50ac7c0f40e7093fa057439d89d543e5013dff59afe728b16f75e29c"
+at = "IO=u32, S=u32"
+embedded = "10dcd9c3b89933dec96e0b456f2defce6329f9309db81108cc213f28b1aa142d"
+status = "residue"
+cause = "mir::Ty: body::Body"
+
+[[fn]]
+path = "tonic::transport::server::MakeSvc::poll_ready"
+kappa = "c6b4662a470dc39083c4afd99cb99a7b3fcef2f8cb0e65ae115f9b0803e0cd23"
+embedded = "810eb3487752c35d5120d4355f4a60529878daf029ea0b79e74104906fbd7271"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::transport::server::Router::add_optional_service"
+kappa = "879ce2ab012173a5b717449914688ef5c77e1b9d9a9640cf7d148da630ab8ed4"
+at = "L=u32, S=u32"
+embedded = "da855aa7860dee74ca0368951575bb9a21b47abf6a5feab6543c7048b685fa69"
+status = "residue"
+cause = "mir::Ty: transport::server::Router<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Router::add_service"
+kappa = "ed01f17c957678bc02d3655346f554ded012e47a35b64e77dd3f809a91ce0670"
+at = "L=u32, S=u32"
+embedded = "7f91d6b9bfa7fdaf1be74c27d575d9923a5406edddf79cb8760ff4ab61de5ba4"
+status = "residue"
+cause = "mir::Ty: transport::server::Router<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Router::new"
+kappa = "02f41d75ad22afae888fe18c3a561b6119f46689bc91f516c81d7f90b4a0c099"
+at = "L=u32"
+embedded = "5dc773bd5f6626f2a13890b2efde6ddd2f17323e7405e4f6e798c53f717ef204"
+status = "residue"
+cause = "mir::Ty: transport::server::Router<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Router::serve"
+kappa = "c9aa276e2cb94224026b630863bced6fb55bdd281a9c840b997fee3bce6a92ff"
+at = "L=u32, ResBody=u32"
+embedded = "063f1bd3be29c86aad24d4b77d77c6cdc1c24a5ba7f019240e98c433123249b6"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Router<u32>::serve<u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Router::serve_with_incoming"
+kappa = "c70537c99e70952dbf6839f5411311e5072620ebeda51a4c3618e5441e118181"
+at = "I=u32, IE=u32, IO=u32, L=u32, ResBody=u32"
+embedded = "2c3b33164803d9ebc33766ba71b8d4066fad18767047e5d81e609f48c41e2c23"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Router<u32>::serve_with_incoming<u32, u32, u32, u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Router::serve_with_incoming_shutdown"
+kappa = "04a8c6f28f56fc88295632eadc26cd9cbf27251410979c31d110bbc411eecab0"
+at = "F=u32, I=u32, IE=u32, IO=u32, L=u32, ResBody=u32"
+embedded = "cd87737043eeba3f6e5785e0dd40d32e5ffc6455108aa8f3fb5235a620b1b7fd"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Router<u32>::serve_with_incoming_shutdown<u32, u32, u32, u32, u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Router::serve_with_shutdown"
+kappa = "ac3b6683aa6fe8ea9419553563f7ef658dd73e8cabf54d4e89284ef6ea9829b3"
+at = "F=u32, L=u32, ResBody=u32"
+embedded = "fa2a1a4254c7543971cee51beed90cae5cab5bf131e7298d066e8e1e313799e7"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Router<u32>::serve_with_shutdown<u32, u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Server::accept_http1"
+kappa = "42a90bb59aede291a04c91cbc80c3e0ec5e1a0b70bf160986d48e261f7ad9591"
+at = "L=u32"
+embedded = "276b67ff0a1b9abdc1973accd0e5769fbedeb20da1d21610c69d5b3922b3e0a7"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::add_optional_service"
+kappa = "87e0118c3a51bea96a0d927930d8eb8e34cfc868a974b79d50b4718e8377f2aa"
+at = "L=u32, S=u32"
+embedded = "1db6ba789bb9d47d9a0a3d5c5a2140e7474262940fc1d0a47c02657857383970"
+status = "residue"
+cause = "mir::Ty: transport::server::Router<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::add_routes"
+kappa = "c433ec07d1b3b5d8d64b700addcb42e294467ab9c59bfcf58093efb3acd3290d"
+at = "L=u32"
+embedded = "10afd91371fbecce4047f178cd13e1dee2196161ac47662bb6de9d9dfa147953"
+status = "residue"
+cause = "mir::Ty: transport::server::Router<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::add_service"
+kappa = "e8edff4797a6ac4c44cc609f4e960218bd31c19b455b467b403e33770f90a4cd"
+at = "L=u32, S=u32"
+embedded = "4fc8687666d07860519e49a8f571f2400d6e8a064ce250507fbe92298c46ee8f"
+status = "residue"
+cause = "mir::Ty: transport::server::Router<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::bind_incoming"
+kappa = "18f480eafca544f37b59e7af6e6d5e2cd62fa2ca803c60ee5e044a4630d9d782"
+embedded = "4cd355a4174b833fd098b5810bc8ad6cfbd75ff6977d331f366b50958fea0a79"
+status = "residue"
+cause = "mir::Ty: transport::server::incoming::TcpIncoming"
+
+[[fn]]
+path = "tonic::transport::server::Server::builder"
+kappa = "a711f6fbf8e9193ea6b59f7a7c9051beaf93449f2e2ad7d3845b367fb6cff71c"
+embedded = "a60a2cbf72cc75e15a7133981f8abd03ab2740fc87af4e76921966017c9e1017"
+status = "residue"
+cause = "mir::Ty: transport::server::Server"
+
+[[fn]]
+path = "tonic::transport::server::Server::concurrency_limit_per_connection"
+kappa = "3dad317e55a6117100eef2fc240b63d1df4e50670af2c493196ee58cd7cac12c"
+at = "L=u32"
+embedded = "8d543c97560cf08042e607f380189b0a942056eb231f9c8ff497c6b776249358"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::default"
+kappa = "e0d86e49daa83fbc56409d47e77719c59de6ea1a2c26489579fb1064c09badd0"
+embedded = "37a97c83f86f44abb0a9337f7f8c0db0d1ce22c08163aa00a4197d113f1c1ea6"
+status = "residue"
+cause = "mir::Ty: transport::server::Server"
+
+[[fn]]
+path = "tonic::transport::server::Server::fmt"
+kappa = "176264e5b17aa7018f36b35296706772a49911cad77ae90d0f2c88f6eaaa6cba"
+embedded = "c0b8bc8e1014a45e75ec0fab8535141ccba65defcac0c01435903aee64e3a5c4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::server::Server::http2_adaptive_window"
+kappa = "631f69f3fb334cf3f33687bfc0069b7581b39aec30e04b96aa2af509b166cbf2"
+at = "L=u32"
+embedded = "d9604d4243c304861fb1497a8f7945383e08d87fc37f4a72553539cefe207dfc"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::http2_keepalive_interval"
+kappa = "032a3a7e420489f2929852be3d586cb9976965a6cea7b7e301977b32600a6606"
+at = "L=u32"
+embedded = "7a480ef4757976293e90d33e697648757947c433234163ba0857ee6edc2de082"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::http2_keepalive_timeout"
+kappa = "6c2089e673363166ac2a4362e7dd1725d961f7326ab50fe874bf1a6dda030b19"
+at = "L=u32"
+embedded = "00b3f33f0687473792885c8961a60c4a6b0a982ee043ba22971af9d86cb8792e"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::http2_max_header_list_size"
+kappa = "5ca3b7e861da0ab2ea7326d1c9a8b0ed4a25a4a0611f0961350a59a739e49d5b"
+at = "L=u32"
+embedded = "106888347ff1436f4fa41afd2a51e3cd2fe833f899840a7daa1a506dc924e39c"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::http2_max_local_error_reset_streams"
+kappa = "8d4600aabf675862573b57fd87ec491f1ec6c63383fbd1d12ce32886b786be9a"
+at = "L=u32"
+embedded = "cdf7ea32e0784288e9c5de2aefb332ad5306e141f9fd52fa942424dc452a2fb6"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::http2_max_pending_accept_reset_streams"
+kappa = "06295071f850f8e5f8a2a0382fdb75c35eddec242a5e9c32195075fb3d41fd80"
+at = "L=u32"
+embedded = "3116a38fb131cc57cffa0dc39a8e9ce9e6e6535626a4ced38fef3a7000b85640"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::initial_connection_window_size"
+kappa = "d5e6b616953eda74714c35bab0b7ad23ea6e5eca8fec82b1d1d8aff55fc10069"
+at = "L=u32"
+embedded = "42d38e54e3191cf418358af5480c894e30759da68ec800d790449ec56d76a0d0"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::initial_stream_window_size"
+kappa = "5705f735e778648ee88d66ca5f244d6d8457d5a29064997b1278e20c705ab3c3"
+at = "L=u32"
+embedded = "1d9fb0bd3a29db6a02b068be42b17585470c6a9dd2fbeea6b432d09e12e1c29b"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::layer"
+kappa = "dd2f45f9e61615dd9e4871638988a16ac9a67ac3e6d7b5d65729833475c8fe44"
+at = "L=u32, NewLayer=u32"
+embedded = "392cb8737af8ef7e99dd390d916a5ac661ffd9232944ce8ca5d6e0293a0097a1"
+status = "residue"
+cause = "mir::Ty: tower_layer::Stack<u32, u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::load_shed"
+kappa = "ec23306dd71a4b7a68e758ce8c9217d8f96a47fce86b2238f2e76a71c57a5a74"
+at = "L=u32"
+embedded = "05bc23a55d2ece38aeb20acfbca585da0d07243088ec658e7973a783b6e34b01"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::max_concurrent_streams"
+kappa = "180fc1fa8db6e4551d18607ef6132139592cc7338abaabec552f1d144f457901"
+at = "L=u32"
+embedded = "7b109e6a45438117166567db7de6328b89170561c37028c6066c60fb3c57f095"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::max_connection_age"
+kappa = "4aebcf30bcbd4df62fb492fddc020286f5aa9871090d8cddc45a2ec951405287"
+at = "L=u32"
+embedded = "9eecf8a24b86a4c3a5d4245410ee0a294eeb37eb912b527a0b3279476a6de460"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::max_connection_age_grace"
+kappa = "7f8b2709290f7615e1f95b19ac9d1cac6989b03f42e10fcc9da6ce5d923b8c95"
+at = "L=u32"
+embedded = "66fe78a5bc9b358c6f3e1944bbce2332bafec4b24babb1a2f48d3e42c4576871"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::max_frame_size"
+kappa = "42f0d44a3d514c5816c8fbcfc85e0365570851c0d19f7c329ea1e1856605e198"
+at = "L=u32"
+embedded = "8a56ecb53bf63a15cc711dadf7fbc4b484e81936b2b94a99ffd64d8cbeedbcbb"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::serve"
+kappa = "26676430987a1e46bb941d173cfea7ada81aa22e973ffd5ab87945ed6a843929"
+at = "L=u32, ResBody=u32, S=u32"
+embedded = "428137a79b0299c0fad84b333b0704a8aeff04d04f48686c5218610a4834d733"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve<u32, u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Server::serve_internal"
+kappa = "b1308afe9e02a9c2f5cc7b29b8c01fb57a7b59ca3915448f4ac727e72ce57c33"
+at = "F=u32, I=u32, IE=u32, IO=u32, L=u32, ResBody=u32, S=u32"
+embedded = "e6550431b2515eb6c4fb0a8debbac60efe2a6ccf3db5375ee236858d37b2bd18"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve_internal<u32, u32, u32, u32, u32, u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Server::serve_with_incoming"
+kappa = "765726c823e0116e9163fa59d86844d7598d88636605c04b9038674823984a52"
+at = "I=u32, IE=u32, IO=u32, L=u32, ResBody=u32, S=u32"
+embedded = "96f5680b96c3fefe67069da21f6c5049a5791af6a37e00bc5809cfdb7b1f741c"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve_with_incoming<u32, u32, u32, u32, u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Server::serve_with_incoming_shutdown"
+kappa = "67cf4d2d59b94e02fd4bef834f9e87656da3b3be4cb623214fe535e15ba500d9"
+at = "F=u32, I=u32, IE=u32, IO=u32, L=u32, ResBody=u32, S=u32"
+embedded = "28c736b282700ac61c1ca9940d277b3161401aa6d5733ab6f50d2bde289309cb"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve_with_incoming_shutdown<u32, u32, u32, u32, u32, u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Server::serve_with_shutdown"
+kappa = "0285be1fe6a15db6452542c8860e3d49accef7030129b0375215e772a3db00c4"
+at = "F=u32, L=u32, ResBody=u32, S=u32"
+embedded = "e2b84ecbbef5b36fc6e984b8dd7efc4477403b4c25189768505f55fe52b64d5f"
+status = "residue"
+cause = "mir::Ty: {async fn body of transport::server::Server<u32>::serve_with_shutdown<u32, u32, u32>()}"
+
+[[fn]]
+path = "tonic::transport::server::Server::tcp_keepalive"
+kappa = "97f3086aecc76536ce7c49b8c836b0d41e20fcd3da3bb81bd3f681f3c06a9839"
+at = "L=u32"
+embedded = "8b2492b68d23a499a231c5d29eda0b6d70ebcde9b7d5e4de6f7d07d5e9b7a646"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::tcp_keepalive_interval"
+kappa = "b2b58a467045a288bb094acfd7303ebd4072347ef680148d1a87380fa9079b05"
+at = "L=u32"
+embedded = "d555c5097201f9fb38a4c3e14575d672dde54adec242be51a87fbf68f94cf968"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::tcp_keepalive_retries"
+kappa = "8e312926acad65faea4d7e56ebc036900aefd7d492af22ab7677403c31b8dfcf"
+at = "L=u32"
+embedded = "ea67115e78a243b75893e974264ba7c9ffbbc7006136d892400a37b46bd031d4"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::tcp_nodelay"
+kappa = "6f8700b10a508c34c0707b4c5725d1bb7fedec0ea873c16f2e6e514f90a691c5"
+at = "L=u32"
+embedded = "8d3887153de881c885ff34699ab486bf1832b35e31f57f4e7c2a6cec916b0563"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::timeout"
+kappa = "d6025e15e49b4a55eb5d2213f89ca06812c5baaa7fad16d4e5dd0a2c1d9ea2ce"
+at = "L=u32"
+embedded = "e1e74e0ccd2574df99a1a32254ef8a0197aaeb841e3e30038e33e06093e211c3"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Server::trace_fn"
+kappa = "7bd9e7dfde810ccf1eddf399fb12c4223b5b9878f5a8fbebae4f020754e0b1b6"
+at = "F=u32, L=u32"
+embedded = "776bb799e9bf84c809bd7423a836ea648fd94ee15148f0edd7646e95111f28c8"
+status = "residue"
+cause = "mir::Ty: transport::server::Server<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Svc::call"
+kappa = "5239eee58539aa1b54d312c4912b44b5c9654efd53b88570886d8f6fdffd784d"
+at = "S=u32"
+embedded = "d0ecf6faf9680cac1f6bae83fb69854389b7b9aa57fb4c94b7bd6900f5fd5d5c"
+status = "residue"
+cause = "mir::Ty: transport::server::SvcFuture<u32>"
+
+[[fn]]
+path = "tonic::transport::server::Svc::fmt"
+kappa = "3a9c9f05e6d7cf6f80870114134afe3c019f261e4173115f8e235c155cb2f8c6"
+embedded = "6ef0c89fe9aacff5f724435074da38cad2d557071c94430750a342a47a2ecf36"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::server::Svc::poll_ready"
+kappa = "62976f82f2704d26b1fe29cbe65f0fcdf4964993b264cd648a166c50d4980c6d"
+at = "S=u32"
+embedded = "fd185b531e62067146f96acf1790f13975bbd3fc32bc0f519b33c67b0737c0e7"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+
+[[fn]]
+path = "tonic::transport::server::SvcFuture::poll"
+kappa = "724bab60373d2bc059723c0e1ca41459b4e523aafbeea444667293a3ae917465"
+at = "E=u32, F=u32, ResBody=u32"
+embedded = "0d223da4b6b7cb0ff172934050b22a6a4e682cd169b850f5072deecd4e0c0d14"
+status = "residue"
+cause = "mir::Ty: body::Body"
+
+[[fn]]
+path = "tonic::transport::server::_::<impl at src/transport/server/mod.rs:1210:1: 1210:15>::drop"
+kappa = "3ba0dab846def2078d7907760d8e9d1de18adc759f05fb96bc9a737eec191198"
+embedded = "7c368b011a70be668c0e4ab8d244286d1dae1f35ebc2f3eaceae69db52337733"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "tonic::transport::server::_::<impl at src/transport/server/mod.rs:1210:1: 1210:15>::project"
+kappa = "39ccd0b223aa1c87c141516eba2f1c8a943d5fa324e593d175fee70e7657639f"
+at = "F=u32"
+embedded = "1ae959d1a51955a3790f675de661eaafde8f43adffd32c24475f8eb227779128"
+status = "residue"
+cause = "mir::Ty: transport::server::_::__SvcFutureProjection<'_, u32>"
+
+[[fn]]
+path = "tonic::transport::server::_::<impl at src/transport/server/mod.rs:1210:1: 1210:15>::project_ref"
+kappa = "af50dcd3aaa700599e8af31bc64c367ae2e13b4458331f5e4d1406056150299b"
+at = "F=u32"
+embedded = "f75c6095a9e0f004d838919ee58348b949955c3677ff5b19f3c33fc0ddf610f4"
+status = "residue"
+cause = "mir::Ty: transport::server::_::__SvcFutureProjectionRef<'_, u32>"
+
+[[fn]]
+path = "tonic::transport::server::_::<impl at src/transport/server/mod.rs:1299:1: 1299:15>::drop"
+kappa = "0bd64b92633bdc5bb1d6ebfb62392eeb7b3b96fb0405bea2c13948282713cb81"
+embedded = "d7e5ebf6600455d0b38b959c48c0387c9d25c7422df3a7b3eaf7b342b4a326ae"
+status = "residue"
+cause = "mir::Ty: F"
+
+[[fn]]
+path = "tonic::transport::server::_::<impl at src/transport/server/mod.rs:1299:1: 1299:15>::project"
+kappa = "ce54a41ae1cb43508809cdb2d12392e004ffbb585c2c4a84b4d9440677686728"
+at = "F=u32"
+embedded = "76db5933be1981ad9740fee0c561c745cb26ecbd82b2cbab2469c53713b7f3fd"
+status = "residue"
+cause = "mir::Ty: transport::server::_::__FuseProjection<'_, u32>"
+
+[[fn]]
+path = "tonic::transport::server::_::<impl at src/transport/server/mod.rs:1299:1: 1299:15>::project_ref"
+kappa = "6bf211b14b75fa2ecd7ab49824c7ac62d79a7043dd81552d1f42dec73d98316d"
+at = "F=u32"
+embedded = "3fce6a99c9244bfe47bf776c26ab172d6f4517b387582cb81f4c0041e446ab36"
+status = "residue"
+cause = "mir::Ty: transport::server::_::__FuseProjectionRef<'_, u32>"
+
+[[fn]]
+path = "tonic::transport::server::_::__assert_not_repr_packed"
+kappa = "36851c6d4ae8272bbf7ff65c2bb082121994df576785c97cec26270b798f5a09"
+at = "F=u32"
+embedded = "be3d93b8f1e330857940ba013122dd04ed3286b7e97e03e5dc5e5e0c96c42f6f"
+status = "residue"
+cause = "mir::Ty: transport::server::Fuse<u32>"
+
+[[fn]]
+path = "tonic::transport::server::_::__assert_not_repr_packed#2"
+kappa = "f9764f7643da0269b17f541ccbfa782e0da9631c5c3c0dd7093568e90ff97d41"
+at = "F=u32"
+embedded = "dc836b4b096362aa2dbe05abc78694e3c107dd5ade3dda2de140abb93bba4153"
+status = "residue"
+cause = "mir::Ty: SvcFuture<u32>"
+
+[[fn]]
+path = "tonic::transport::server::conn::<impl at src/transport/server/conn.rs:92:10: 92:15>::fmt"
+kappa = "33a01e894bf4b7e844d7b4753b6d160a954b14cea15abd9be8f67932c3029c43"
+embedded = "721c0829039a70c0ac08aaec6d9fdb1c1dfce5cdc66e154f547fca265249686f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::server::conn::<impl at src/transport/server/conn.rs:92:17: 92:22>::clone"
+kappa = "d4ffd0d970dba8b8a4e9f6de0a788a564add88a11e39b3b36ba724c7a3859496"
+embedded = "0a1ee1207ea9579ae308bc0988513813d6dd1acaecc301c4342491115c5fac3f"
+status = "residue"
+cause = "mir::Ty: transport::server::conn::TcpConnectInfo"
+
+[[fn]]
+path = "tonic::transport::server::conn::DuplexStream::connect_info"
+kappa = "8bf70f240efcafe789ababc4d12a2724da11240e57c7ddd95e483393d5611b09"
+embedded = "2a1ed5a1351b7a8e6a5d051c4bbcee08822f04c5994372081cdaa5b251bbb3bc"
+status = "residue"
+cause = "mir::Ty: DuplexStream"
+
+[[fn]]
+path = "tonic::transport::server::conn::TcpConnectInfo::local_addr"
+kappa = "3948faf33da9264e579dcbc044952fcc324d9f416f62ef4228f8eabc3675f4ab"
+embedded = "faa2ad843901f917424b8c97c4843f989fd16f72369a5612a859f5afe500d609"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "tonic::transport::server::conn::TcpConnectInfo::remote_addr"
+kappa = "4c04fb6b6e4e23a0d36d89ee780be6da09de6dfa042fdca3bf0dad3258a5d44b"
+embedded = "d23170bc11216431a3f13fa030e38ea3fb30fe8b0767a945e0d8b68887c8b961"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "tonic::transport::server::conn::TcpStream::connect_info"
+kappa = "0b50b2d5494bf8f43118476c4a5e3717a6f94606b492fea54105124d7dcf46f3"
+embedded = "453395a75d97caf0df5db80d3213e67c3afe743047f390fd4a76f14b3430bf76"
+status = "residue"
+cause = "mir::Ty: transport::server::conn::TcpConnectInfo"
+
+[[fn]]
+path = "tonic::transport::server::service::io::<impl at src/transport/server/service/io.rs:36:10: 36:15>::fmt"
+kappa = "880c0fab2a72a4a9db42fad358e87827ae7a7a55bb6f1216b519df9c24c51a55"
+at = "T=u32"
+embedded = "8f28f0bf3ebcd389c9de98cfa5238dc462d6c25d356f0d40532bfe0a6cafc597"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::server::service::io::<impl at src/transport/server/service/io.rs:36:17: 36:22>::clone"
+kappa = "f088c60b4c3d8499b6eebe730600940aeba34a9290022810b03f62bf3d3cada4"
+at = "T=u32"
+embedded = "dab7de2379d38b50820dbd650d5d0cf17c462cb2c8bf59f24dba80b3d4563a2e"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ConnectInfoLayer<u32>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::<impl at src/transport/server/service/io.rs:58:10: 58:15>::fmt"
+kappa = "ab293af7f87eefaf582eef6308fe8c1b9832eb59792d0641ffac6ca143b936ec"
+at = "S=u32, T=u32"
+embedded = "201e7fdb98c6824596cd32afabdff9b15f49fbe83958684e450a55765f3f8ac1"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::server::service::io::<impl at src/transport/server/service/io.rs:58:17: 58:22>::clone"
+kappa = "57fcd3a5770b0cb8cfa7428da2ee1cc7b7c7108858a28024b3bae89eacf81160"
+at = "S=u32, T=u32"
+embedded = "61291b68767b2d8cb8b6f6dba65e3ff4b14c22f13540b644ef665a638c5cb3da"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ConnectInfo<u32, u32>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ConnectInfo::new"
+kappa = "dff3be5cbc13a6c8057063230a109e4c58be2ebd44fd857b60a1821c45b668cb"
+at = "S=u32, T=u32"
+embedded = "e8ea216606fd7d497b8fe792addd0bfaaf6bac244af540dcb2ffd5f3e5856469"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ConnectInfo<u32, u32>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ConnectInfo::poll_ready"
+kappa = "a50922cb3e7158618e036c63ea8f14afa97eee073f44c0ffb647db04b52d9aac"
+at = "ReqBody=u32, S=u32"
+embedded = "1d48f83328c345f54b7eaeeec83022347d19d6140ef427f482ef07bfe5e8f180"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::result::Result<(), u32>>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ConnectInfoLayer::layer"
+kappa = "25b6ecd51eca31eee15243988560fdd3fb08970e9b9965dce93a84e9a81ef81f"
+at = "S=u32, T=u32"
+embedded = "d6d3008a19605c7170e93a27ddb14c186ccdc1ef30a789b70ad3282db89bb1a2"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ConnectInfo<u32, u32>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ConnectInfoLayer::new"
+kappa = "4c3f6603afec3d11c5ecb56e4d8deffbbe7a83d4a9659085d4a96d01ced9cae8"
+at = "T=u32"
+embedded = "7dc8f5b0588cbf9ddfe490d269468cb972e226d38060aeec2aaa4b8c26493587"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ConnectInfoLayer<u32>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIo::connect_info"
+kappa = "b8c9f91e7adb75ed450d24ee3e3bfbf99c561f31941c50fe11f07840aba5662b"
+at = "IO=u32"
+embedded = "71b137f618877d04cce3ee685aa1fb34de12360dfad229697049752e07441e66"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ServerIoConnectInfo<u32>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIo::is_write_vectored"
+kappa = "fefdd8411e6886a7a2ab2082e9c6d767df571120dcba24e8e8857f7f75eba5ee"
+at = "IO=u32"
+embedded = "e3dd9136d51209d60ce89ca4ccbebe492b13598e21decb7385b472fb27039f98"
+status = "residue"
+cause = "mir::Ty: ServerIo<u32>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIo::new_io"
+kappa = "ca7def5ea1c55dfeaf8c17ec2e3775435cc9afc5de7d2c875ba67a43e304b020"
+at = "IO=u32"
+embedded = "299f335c4360487dd53706ff9224a4ec7e4d3e8d60bd764c05deeb6107e5e366"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ServerIo<u32>"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIo::poll_flush"
+kappa = "5959d50d51f870ccbad822f405b1c0fe1c86e71620cd1d7221a8a7be04d26c68"
+at = "IO=u32"
+embedded = "6c1e605f3a7c5c427f150efde8a84162154f41ed059bd8e12e029bd3085e7367"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIo::poll_read"
+kappa = "1d3609f367abceee3644b48b73bfc70d955db7682ac327e70ce825d31dfbbe1d"
+at = "IO=u32"
+embedded = "f2221b7a93edd79c95f8f674329a838722889bfb5e4290003420425fda7dc856"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIo::poll_shutdown"
+kappa = "21e4e86bce1745116f2f07341af20fce2112f4d97ef0cae0bc43011c1c2f16ce"
+at = "IO=u32"
+embedded = "35bf15e2f5c56fe62cd1bc9eccb442822eabac95205b3d20762f0c8e374e2b21"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIo::poll_write"
+kappa = "f1aaf5964411bdaef562b13aa39f69af3a6eef6f23e9556409d55c5cdcb9bc53"
+at = "IO=u32"
+embedded = "af8cbbefd3ec92e625cacdcbbc31022e01b5d46a902bd7ae0de0ede3d53b837d"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIo::poll_write_vectored"
+kappa = "f5d3762ceda4226c59f7784fa60217a5908e3d41b7752c05766e5b5c7b924b30"
+at = "IO=u32"
+embedded = "a237b4b51bf8ebbe8f7ea638a013a1fd15949770bec5eea915e718d1036ea9ec"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "tonic::transport::server::service::io::ServerIoConnectInfo::clone"
+kappa = "3da6425018276a611cb128bcad6360e0b34ef7d9a891e08a7b8d46d9ba732754"
+at = "IO=u32"
+embedded = "ee461034c5acfc0ecfc2d51ad11d96aa51607e2a88f3182696bcc94c3fabd8c8"
+status = "residue"
+cause = "mir::Ty: transport::server::service::io::ServerIoConnectInfo<u32>"
+
+[[fn]]
+path = "tonic::transport::server::unix::<impl at src/transport/server/unix.rs:36:10: 36:15>::clone"
+kappa = "80c02c0f592cab8fd11a70b1a58801e53b11201f2767d5c54891e65969f5a5e5"
+embedded = "5656c1b4d15ea765ed8a961a26d33872311a2908d3d0c3464c980ce05b74aa3b"
+status = "residue"
+cause = "mir::Ty: transport::server::unix::UdsConnectInfo"
+
+[[fn]]
+path = "tonic::transport::server::unix::<impl at src/transport/server/unix.rs:36:17: 36:22>::fmt"
+kappa = "fc49d5318a37a9e738b34b5817df85ea2b61a69a6b1d411de17f286289b35ba3"
+embedded = "7374cc544fc3fee01e92bfb76a1235cb6d8181b38adbc1c1bc949c408beb68a0"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::transport::server::unix::UnixStream::connect_info"
+kappa = "be840193d342ba5d8e3f5b01ec61c89e0fd28ee7a10c3c5f7239850510a85edf"
+embedded = "a14f630f1cd3a9e3cb31220f2d3d04bd243770df528c7073202b6f5f2137efc8"
+status = "residue"
+cause = "mir::Ty: transport::server::unix::UdsConnectInfo"
+
+[[fn]]
+path = "tonic::try_parse_grpc_timeout"
+kappa = "be48242b81ea601c5861e8974d4411795d89f487c45ba7477a19e65f5c6d54d5"
+embedded = "975783cd416592031f837659265cd902482632b5a1d6017da20d33799dee47c6"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "tonic::uds_connector::UdsConnecting::poll"
+kappa = "cee9c58892dd45ef3acaca770538658129c70d939ef98549a0bf9a5a36a9496e"
+embedded = "9c2bd6864f0307cecd4f88b6577071babb8f7e6f94eda02384a817d4cb1fe368"
+status = "residue"
+cause = "mir::Ty: tokio::net::UnixStream"
+
+[[fn]]
+path = "tonic::uds_connector::UdsConnector::call"
+kappa = "311fb218782d4e62a230c66a04c5401faa22e8534c5a6e3edb87ffdf537a4c83"
+embedded = "772dffe2874abb9535b075e8236f9b3426c0937d892a003ab75b1ba72d07fb66"
+status = "residue"
+cause = "mir::Ty: transport::channel::uds_connector::UdsConnecting"
+
+[[fn]]
+path = "tonic::uds_connector::UdsConnector::new"
+kappa = "1d6a043a152c8d9168e6b609849c2c7df06b861b0c1b20238e85caf7accf5ca8"
+embedded = "4f2b8a0dd00dfc816f727314421e37af8d1cbf8f774431423cb633d25eadc99c"
+status = "residue"
+cause = "mir::Ty: transport::channel::uds_connector::UdsConnector"
+
+[[fn]]
+path = "tonic::uds_connector::UdsConnector::poll_ready"
+kappa = "c64718c990a7825c879b8191e2bb23a740fd9eeeaa4d18627ffd2b89783e3749"
+embedded = "a756242a3bf3bccd1c43a681b82ee4a7b63f86d9f00099de92bd0f3b0c146cdd"
+status = "residue"
+cause = "mir::Ty: status::ConnectError"
+
+[[fn]]
+path = "tonic::user_agent::<impl at src/transport/channel/service/user_agent.rs:31:10: 31:15>::fmt"
+kappa = "3b5c547137f5a2c1b995c4b27125b4cdf5e1018960296e18e711fc804728d892"
+at = "T=u32"
+embedded = "2cf1f159ee1d35663a2e48ec19c0bac41bb62361764cff1deaf561e46d5c3d8a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tonic::user_agent::UserAgent::call"
+kappa = "068d0fe3de143d580c6136d0ed5c245f6cc5dd9cbd88b0d7f464c20d732886ca"
+at = "ReqBody=u32, T=u32"
+embedded = "a1a91b88552ace5b50be851bee54ecce0bfc50c12dbc861f0ae99a87b3ecf479"
+status = "residue"
+cause = "mir::Ty: UserAgent<u32>"
+
+[[fn]]
+path = "tonic::user_agent::UserAgent::new"
+kappa = "3a1375362a63bf79b3de44558c67fe46006a4e18d8843abb2b5011712bf8168f"
+at = "T=u32"
+embedded = "35943297acdc72fdffafbe0e29b4d0be125cc2a54706c852cf708a1b588d3079"
+status = "residue"
+cause = "mir::Ty: transport::channel::service::user_agent::UserAgent<u32>"
+
+[[fn]]
+path = "tonic::user_agent::UserAgent::poll_ready"
+kappa = "dfdbb383f1b3987ec1e4cbea76d0c42651f82870863a1126ba93459529368b2d"
+at = "ReqBody=u32, T=u32"
+embedded = "e33b097731a900947d81592c6de0e404af3d5b6c81bf035513b1d8ef3e35cfbd"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::result::Result<(), u32>>"
+

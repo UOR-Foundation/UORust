@@ -1,0 +1,110 @@
+[[fn]]
+path = "keccak::<impl at src/lib.rs:29:10: 29:15>::fmt"
+kappa = "348fc1a34142801ab445e35dab2a975b1f7af5eaa6250dac3358fde6f3f9773a"
+embedded = "942d4278e97af402e192cec8994038686f1f871a311398020adc01608ee49330"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "keccak::<impl at src/lib.rs:29:23: 29:28>::clone"
+kappa = "2ace25e3e1383c2cbf5ad65da3e05586e7aee185cd336e3aef6ce9d5f656ac3c"
+at = "Keccak=u32"
+embedded = "16068f5bf51213d026ea0248a3f8219b871e91e1048e67d2f1b22f2622760730"
+status = "translated"
+digest = "f9adb6a7b90e3f4fee4557f66b9f1fd32b9dad079719068e13e53cd527cca0f2"
+
+[[fn]]
+path = "keccak::Keccak::default"
+kappa = "24907a5b731ea9efd306470912b531f2402e656c2ba26ca24c581fcf53cb9c5f"
+at = "Keccak=u32"
+embedded = "dee12cd9ae168d41224d59eee4b913cf0b66766115dd1ce90f442fd473ba24da"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "keccak::Keccak::new"
+kappa = "83a46ea60afdadd473a049e3a72f5fa0118b0f0c53030370c7f8bdaf7b4d4b18"
+at = "Keccak=u32"
+embedded = "1769d97f3bd70aa991f0abcb460a52e1c1a0e9a1c62731bcaac19a8b831e85be"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Default, which u32 does not implement in core"
+
+[[fn]]
+path = "keccak::Keccak::with_backend"
+kappa = "8a09a614890a0428da81891120beac4867b3932d8729b457f476edd4b8f627fb"
+embedded = "d91a476103fe9fc78621188ebfcdfcfa7dc10669c00222f89697e9099acfc33f"
+status = "residue"
+cause = "mir::Ty: Keccak"
+
+[[fn]]
+path = "keccak::Keccak::with_f1600"
+kappa = "1a192951f7bc35eaaa18c3a1b2920c2cbb05523ca78c6f58f7a74634296d8eda"
+at = "Fn1600=u32, Keccak=u32"
+embedded = "ff4342332b1f429d4eaaa98c03e477861be59ed917cdb7589466583d029504df"
+status = "residue"
+cause = "mir::Ty: impl FnOnce(u32)"
+
+[[fn]]
+path = "keccak::Keccak::with_f200"
+kappa = "43449d74ea6649aa80939f98e4bdd9700da9f415719011b3cdff4027e5e2f3fb"
+at = "Fn200=u32, Keccak=u32"
+embedded = "05fba3b5d63eed5f44fc6234c21da30c900292c99cb805c239078586a2b845af"
+status = "residue"
+cause = "mir::Ty: impl FnOnce(u32)"
+
+[[fn]]
+path = "keccak::Keccak::with_f400"
+kappa = "9927a6309cdb90dee4e0dd4f628e5d525b3610066a6176cac27ceaf1da551d37"
+at = "Fn400=u32, Keccak=u32"
+embedded = "b44f9577717d475a6dde4dda0f77f7946f413e3ddd68c1161421e368b1eb8b21"
+status = "residue"
+cause = "mir::Ty: impl FnOnce(u32)"
+
+[[fn]]
+path = "keccak::Keccak::with_f800"
+kappa = "36d82bff099cf2d38bf4a157bb478d9a984b12a1ff629b0575d9d334e3f9fa8c"
+at = "Fn800=u32, Keccak=u32"
+embedded = "d6b075307d78a9bfd9578c187803e6a73040b887111031b091148e43116aeeea"
+status = "residue"
+cause = "mir::Ty: impl FnOnce(u32)"
+
+[[fn]]
+path = "keccak::Keccak::with_p1600"
+kappa = "e487614838efd5dfbf30d2615420a90fd0964f4c2a3feb21ae3e0b9f7c3ee1c4"
+at = "Fn1600=u32, Keccak=u32, ROUNDS=u32"
+embedded = "37d20cbdb8580dd78428c86c2cc51a3d5131ccf674f9c48d9fc78d59bdf955eb"
+status = "residue"
+cause = "mir::Ty: impl FnOnce(u32)"
+
+[[fn]]
+path = "keccak::Keccak::with_p1600::Closure::call_once"
+kappa = "14241d066680ac3742935787c86f9dd97abf18855bea6d647e4dbfe52d7c1ab4"
+at = "F=u32"
+embedded = "e591c91e1fa16bd400e05c27903a241afbf3c1189844f8c8686fd80a6d81f3d2"
+status = "residue"
+cause = "mir::Ty: ROUNDS"
+
+[[fn]]
+path = "keccak::Keccak::with_p200"
+kappa = "6b271eb527462a3e371b363d9ab6d225991c254b3263f1fdd94e90c9ced26141"
+at = "Fn200=u32"
+embedded = "8d635cd88f7f76dce9732b385739fb4509e061d29e595ebcb2b6d1fc87a56753"
+status = "residue"
+cause = "mir::Ty: Keccak"
+
+[[fn]]
+path = "keccak::Keccak::with_p400"
+kappa = "752519734034dfd90be1a7d73ebdd33bcd5e972608f43070a25063c8429f9c20"
+at = "Fn400=u32"
+embedded = "a5b74558d749d13fe39b16bf239b2676e9362a05f8b58f8176583cc935511ee9"
+status = "residue"
+cause = "mir::Ty: Keccak"
+
+[[fn]]
+path = "keccak::Keccak::with_p800"
+kappa = "fe74e19ba833866ef86a8f9388093520c3d5c273d0e64b73fb534b73900ca065"
+at = "Fn800=u32"
+embedded = "c3cc3811d59473e252a6dadedfa4f80cb5e2958abb19e0197d71cad0948cf759"
+status = "residue"
+cause = "mir::Ty: Keccak"
+

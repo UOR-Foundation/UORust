@@ -513,9 +513,8 @@ pub(crate) fn read(root: &Path, ws: &Workspace, mut syntax: Syntax) -> Result<Sy
 /// does not.
 fn default_features(manifest: &Path) -> Result<BTreeSet<String>, UorustError> {
     let text = std::fs::read_to_string(manifest).map_err(|e| io(manifest, e))?;
-    let value: toml::Value = text
-        .parse()
-        .map_err(|e: toml::de::Error| UorustError::Malformed {
+    let value: toml::Value =
+        toml::from_str(&text).map_err(|e: toml::de::Error| UorustError::Malformed {
             path: manifest.to_path_buf(),
             reason: e.to_string(),
         })?;
@@ -2913,13 +2912,12 @@ mod tests {
 
     #[test]
     fn default_features_follow_cargos_rules() {
-        let manifest: toml::Value = "[features]\ndefault = [\"a\", \"opt/x\", \"weak?/y\"]\n\
-             a = [\"b\", \"dep:hidden\"]\nb = []\nc = []\n"
-            .parse()
-            .expect("a manifest");
+        let manifest_doc = "[features]\ndefault = [\"a\", \"opt/x\", \"weak?/y\"]\n\
+             a = [\"b\", \"dep:hidden\"]\nb = []\nc = []\n";
+        let manifest: toml::Value = toml::from_str(manifest_doc).expect("a manifest");
         let on: Vec<String> = enabled_by_default(&manifest).into_iter().collect();
         assert_eq!(on, ["a", "b", "default", "opt"]);
-        let none: toml::Value = "[features]\nc = []\n".parse().expect("a manifest");
+        let none: toml::Value = toml::from_str("[features]\nc = []\n").expect("a manifest");
         assert!(enabled_by_default(&none).is_empty());
     }
 

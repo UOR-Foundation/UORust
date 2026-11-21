@@ -1,0 +1,385 @@
+[[fn]]
+path = "unicode-segmentation::ascii_word_ok"
+kappa = "fc9a71156307afef1d657cf7af2b0fcc54552f9570bd871d64869d7fe53325b2"
+embedded = "7f3bcef2d28cf5d88828d956479f8c79eb19714ec93855a96d459f1158c9b5ba"
+status = "residue"
+cause = "mir::TerminatorKind::Call: word::has_ascii_alphanumeric: unicode-segmentation's MIR stops at type outside the lift: core::str::Chars<'_>"
+
+[[fn]]
+path = "unicode-segmentation::has_ascii_alphanumeric"
+kappa = "36e3bc1e434f3e77912335fa4c2f0baaef2b33c59d658a88b5469c7884428100"
+embedded = "34f2b74decc909c3ebfd38c2b6aedfca60d900d1d7cb6767a2d35350f28c86be"
+status = "residue"
+cause = "mir::Ty: core::str::Chars<'_>"
+
+[[fn]]
+path = "unicode-segmentation::is_emoji"
+kappa = "5e9f20fbd93ea105220aac80403efeeb248e5444b28f40d7b85503bda6032b66"
+embedded = "5f73d1a470b1bb7ff276c6421bd87a5397e92eaaa43662161c10da0998e684c9"
+status = "residue"
+cause = "mir::Ty: tables::emoji::EmojiCat"
+
+[[fn]]
+path = "unicode-segmentation::new_ascii_word_bound_indices"
+kappa = "9506d472b2d5053ad6228ce4b2665634beab66886c02fcd096cccfb665017b19"
+embedded = "1712800e361055f162293ba0a8238dc8c0f49641a96dc27a81db8de81fc81dbf"
+status = "residue"
+cause = "mir::Ty: word::AsciiWordBoundIter<'_>"
+
+[[fn]]
+path = "unicode-segmentation::new_unicode_word_indices"
+kappa = "6a5719a5c8aef21b2a472e30f2cb225b5117684b4cc09405e5031cdfd75390ed"
+embedded = "7bf8e23929f79bb02808b8de819e1d5b94d65f8ab3ebc94b049a07e30d2a2657"
+status = "residue"
+cause = "mir::Ty: word::UnicodeWordIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::new_unicode_words"
+kappa = "9534a4f47249ccb6c02f670cbbd7ca7290d6ed7ab3cf3411cfb1ee21381875c8"
+embedded = "8057c21dacdc3ff490841e8570dd7e762f0b3c81dfdfb8fadfd9944235e164d9"
+status = "residue"
+cause = "mir::Ty: word::UnicodeWords<'_>"
+
+[[fn]]
+path = "unicode-segmentation::new_unicode_words_ascii"
+kappa = "62a0f8b8ca0f62a334ee60d6fd507c5815a652e84c62adfceba261c176a8421b"
+embedded = "671a26241b0a083654243e8dac079646a85c4a195fbed9ded241588656aff708"
+status = "residue"
+cause = "mir::Ty: word::AsciiWordBoundIter<'_>"
+
+[[fn]]
+path = "unicode-segmentation::new_unicode_words_general"
+kappa = "c28a231576d4c8a92b1532d8ddde3abe52586c5aea72b7a9866920d076000033"
+embedded = "ad380d6c9b2bd53f6ec94dbf700f32af3620aec203e94d02df92234e8eecba60"
+status = "residue"
+cause = "mir::Ty: word::UWordBounds<'_>"
+
+[[fn]]
+path = "unicode-segmentation::new_word_bound_indices"
+kappa = "5aafae93be21c52b18a11131bf285c6d1af1c05ce5c2a3bf1423a3c03cade5a8"
+embedded = "77f312553e4d066ac86c0bd54cc0e9c829c8a3666bf537a80fd0d88fdda775f4"
+status = "residue"
+cause = "mir::Ty: word::UWordBoundIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::new_word_bounds"
+kappa = "f1c464ed1174265e3109e03582d50f0b592c6e90dbeac0a03650c438cd436acc"
+embedded = "81a4e4a8ef024e5b335a6cb01de84f316b5ceab809917b8cabadc56a9ad112cb"
+status = "residue"
+cause = "mir::Ty: word::UWordBounds<'_>"
+
+[[fn]]
+path = "unicode-segmentation::strip_pos"
+kappa = "99d4e743c7353ad572bc22537b542d82a1cf4e600a3c680b5b664cab9dfbbb08"
+embedded = "4d5102bfb50bfeac51be26bca867b6d6cf038d0b12ba0b15262c2e194ac10313"
+status = "translated"
+digest = "827bad1277c28641d5c7839ff681dea94c52c911d51117cd5c014963129e9295"
+
+[[fn]]
+path = "unicode-segmentation::unicode_word_ok"
+kappa = "3ca3069d8b36e56dd4c59d320063880ab8589c574587a05511f472145d38d0c8"
+embedded = "c8de6aec063ab98984fe42c161b492a3074335b7e575c1c51b20cfad171ad16a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: word::has_alphanumeric: unicode-segmentation's MIR stops at type outside the lift: core::str::Chars<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:113:10: 113:15>::fmt"
+kappa = "92b73e8a2abb0c304ed28389c5d96d6db1212faf3d149d4e22f36546f086a89c"
+embedded = "cc08fd2c2c79384875ebba644537980c79f52930b080f51e774271a158d4487f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:113:17: 113:22>::clone"
+kappa = "4de597b9ab1e8b6719fc75bbf91de330afebf068dd5581f5ba17ced5401ae278"
+embedded = "85b06a5ef567b26b079b01baf26ad3dd80ffd7a9d662d9f784186eaff10d78c6"
+status = "residue"
+cause = "mir::Ty: word::UWordBounds<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:127:10: 127:15>::fmt"
+kappa = "e1fd4a37215f10f65cc8d4873cdf00c35be1c06be294a8f9db86d59c13580fbd"
+embedded = "506d7bbacdde112be344d354d52aacc56c82668de93804ad7dd6287319fd17f5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:127:17: 127:22>::clone"
+kappa = "27178108cf3d5df922b106a9ac7c8fa1e3c1d30cfcaf1516f04781c260595653"
+embedded = "4ba5ca0c6aa08609c7c80b00d85741e28a3035bb60a25edf18b16144fa9931eb"
+status = "residue"
+cause = "mir::Ty: word::UWordBoundIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:177:10: 177:15>::clone"
+kappa = "0e98284ebfd11002837c188cf6cbb04196bfc3e24f712960c25bdc88d2b8373c"
+embedded = "42bf6a8505bb96c59593c122b6fcda0356886e13d59b65dd61617c70560fe5e6"
+status = "residue"
+cause = "mir::Ty: word::UWordBoundsState"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:177:23: 177:32>::eq"
+kappa = "5036bb867341f62a0856600050080504f793b7bc2ab3f6cd60d40a25c33bd5c8"
+embedded = "21189bddd94e769f19a7a4c795ed122a47ab3c68f407f35112653f0325e39f86"
+status = "residue"
+cause = "mir::Ty: UWordBoundsState"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:177:34: 177:36>::assert_fields_are_eq"
+kappa = "9ec4679ae0c30ed3b47ca975c7e4d2b2be4c5be71801176f028f069673d8b612"
+embedded = "85e0e3a599c9ce5a27f357b7914f5774ad096e92f7550f11bc821e391f19bda5"
+status = "residue"
+cause = "mir::Ty: UWordBoundsState"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:177:38: 177:43>::fmt"
+kappa = "08fb3321168254a98db0ddb3da9a7f74296981a314ea90d1cdfd192e4bcac1b9"
+embedded = "0566f4ffddf03c61319a3b3c636e664fb417906e7920fb867776cee9283a77a9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:193:10: 193:15>::clone"
+kappa = "5bb9fed0d28d77ddb6df9200ab48fb7c207c936279a93d1ede54c63acb31248a"
+embedded = "d816caf11d7e89fc68015cf70beadd06d85825094a73081f24fb6167fa577010"
+status = "residue"
+cause = "mir::Ty: word::FormatExtendType"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:193:23: 193:32>::eq"
+kappa = "ad2e65d6d98f559c9aa3775f594f6037380fe579402df68d7f45264239972d4b"
+embedded = "ecd8136e44db20977c241cb3ea01932b1a55dcfaa4031816b57989179b7d42c5"
+status = "residue"
+cause = "mir::Ty: FormatExtendType"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:193:34: 193:36>::assert_fields_are_eq"
+kappa = "dfc941c2e22e6d6cc5ad79f9beb39545410a7ec57fc5223ac07fc6ef9942e498"
+embedded = "06435d0aecedb287ecd1cef8025659ec2b8a3f3329f95c6f5d9fd91e22c3f261"
+status = "residue"
+cause = "mir::Ty: FormatExtendType"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:193:38: 193:43>::fmt"
+kappa = "ff85c1b6e2747280f818ac21d0d7d6ee0b1779ed657cb5283913dbfee21b06e2"
+embedded = "799cd976806cf5cd65562c832e36ab52cbbc90bbb4dff1a18331372d21c449a1"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:203:10: 203:15>::clone"
+kappa = "4504128b038fa887059af2a91df0d68cd893398ea0dd128dc0ab545cc0d89f70"
+embedded = "466472c3daf15ae01045e64ddfd912a4b8e90257e56dba96e20461ac7c71249c"
+status = "residue"
+cause = "mir::Ty: word::RegionalState"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:203:23: 203:32>::eq"
+kappa = "b7c9846c50f12641b322fdbdc698346a4d7e731a7fc2b59540bb9b84880f1031"
+embedded = "1b85763426c1f91a46d904ea29123806ceb67260e42fc8716b378fff13389470"
+status = "residue"
+cause = "mir::Ty: RegionalState"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:203:34: 203:36>::assert_fields_are_eq"
+kappa = "95163b2298827e1d7f047917ec4f57006d4cd7f616df91c11fb61e1101b82246"
+embedded = "ecbf193d8ad9489c851f4c0add23a32c44b57949d66d7751be5255b48e7b0e9d"
+status = "residue"
+cause = "mir::Ty: RegionalState"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:203:38: 203:43>::fmt"
+kappa = "8e3b2a9988a880ddf968cced8f2f42da80554fd3d78fca13e87b7c203b0e2b43"
+embedded = "c0f82bcec30f7af3d95bb50918c0efc510babffba5ca3ae3fc4c7bc21f6cd1bb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:28:10: 28:15>::fmt"
+kappa = "622aa2138c2a00d2ce91c945faf635f4951cbfc30841712b5282682a45b675fb"
+embedded = "7420d3027da95309eb0f21dd32fa07f094b17dcf9a2d961dbe6a583bab282cc2"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:73:10: 73:15>::fmt"
+kappa = "ba2d1664500d3512a51820b9f3a61bb4abb1d25a4c3cab1516dc8d4b73cf0985"
+embedded = "a25ed50f4c7fd31c75e8e6e07d4f819c9c0d0d9f8e5fd3a810d4dd594d4f0c48"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:776:10: 776:15>::fmt"
+kappa = "fe9ee51bb4eb2972641f2f035549784e1c6633f254e8cdd71d0d40f316dc402d"
+embedded = "1edd4977e75d74343f951ae97ae3b49b6620a2a0d4f32de65c2ccd734e516643"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:959:10: 959:15>::fmt"
+kappa = "c9af46eae57196ef56e3b36a958731732019d5dd9fb4d33c42ba09521cb73f15"
+embedded = "ce0f62731c921b7bb2d9041181b8cab7f32f4df9b014476f56ccd2bc0679496d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::<impl at src/word.rs:965:10: 965:15>::fmt"
+kappa = "bc4ebe1bdbb2c493a7fdd3d0824dff2323273b343088b3ef73496e744b96c577"
+embedded = "ea29c420403f4154e7c9ce20d0c1047534622f70a43e94232baf252cecbba344"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "unicode-segmentation::word::AsciiWordBoundIter::is_core"
+kappa = "d87e1703a65ffe573a40f2366f926b0ed67ea38b6860d4ece19f03ab09e980e8"
+embedded = "66ebec1d89d0fe7e7d025afb90aec1e021243b212a5548ecd69071b973b7531e"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::is_ascii_alphanumeric"
+
+[[fn]]
+path = "unicode-segmentation::word::AsciiWordBoundIter::is_infix"
+kappa = "30d18c18d5827ced21456328a41081d7154607198455c1e0dcd9f70e89b073fe"
+embedded = "b8481935aafcaba830ec52e0b93db67bd9231196bf7e576324427e898227fc3a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::is_ascii_digit"
+
+[[fn]]
+path = "unicode-segmentation::word::AsciiWordBoundIter::new"
+kappa = "778d84627426ba2637fb1936b3a6a45a68ac63a0f1938126a4469c0df9c4d139"
+embedded = "19d7943da67dbdbd87d96ec72428b8a51af1ffa5f2de8110a125a3a95ee153e3"
+status = "residue"
+cause = "mir::Ty: word::AsciiWordBoundIter<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::AsciiWordBoundIter::next"
+kappa = "8db4cb0f8ee00d2d902008268cc41a94b7123c669e20f43c98588453d379a80d"
+embedded = "65ac719293f0940a3d5b8f507f817154ea240280036449f4f72ba7cad7de6972"
+status = "residue"
+cause = "mir::Ty: AsciiWordBoundIter<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::AsciiWordBoundIter::next_back"
+kappa = "7c5ae149b953adff81756c695a7266540ca87e26d1ecbe24b1425fb0c1d3c69f"
+embedded = "8161b1fe28d4d89290939d70c96ebdf5defe6f2f212c4238daa24279982237f6"
+status = "residue"
+cause = "mir::Ty: AsciiWordBoundIter<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBoundIndices::as_str"
+kappa = "bfeb722ea479e5305a49c22cb5df87c038e1fea4c59c99007e05a0e847df508b"
+embedded = "987cd661c3edd73093d349bc784fec922f73cb96f302f4e6ce0e517b4a721762"
+status = "residue"
+cause = "mir::Ty: UWordBoundIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBoundIndices::next"
+kappa = "99ebc7533295e17935efcc8d39b7c0bc182f451d195d14de4d8c68244387bca6"
+embedded = "f57c45d24ea2f410198fdf51ef0ddc05da136c5495c3bfcb90e43f04036283d9"
+status = "residue"
+cause = "mir::Ty: UWordBoundIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBoundIndices::next_back"
+kappa = "5a926ca0dd4919b68ae8df2ff7e8714c68fcd438b432b70dda7b128a26edd4eb"
+embedded = "5da5250553111032489973ca40e18588790e7f22d29f34bd2d2d8d98b7e85f36"
+status = "residue"
+cause = "mir::Ty: UWordBoundIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBoundIndices::size_hint"
+kappa = "0fb962a07e8f42e33e95aa57aa7bdc56259d5e3c1b7a3f14d3fbe9795d5f4bf2"
+embedded = "17db23d8406181c77180df402faea4ce25cc4cc435360502909c4f1f7532d3ec"
+status = "residue"
+cause = "mir::Ty: UWordBoundIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBounds::as_str"
+kappa = "635b6f75770c883a0e747ec44297c73cddc4fbe4ea53f9f916399db5a79f9335"
+embedded = "0c0822848048ef3c50f448f4bce28d5dee78980afdfc557d5f17de4bc3e66e07"
+status = "residue"
+cause = "mir::Ty: UWordBounds<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBounds::get_next_cat"
+kappa = "372e5793edd8bbea1589ac3a32e3c50497dcaaf245d05a9a51be2dd04350834d"
+embedded = "c9c8336864d5ab82d996c25a9e326fafdd053181572db07df3a4dc68253818c4"
+status = "residue"
+cause = "mir::Ty: tables::word::WordCat"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBounds::get_prev_cat"
+kappa = "115514b7ad90532b51e3e0320eaa41aed4a43a2ecb8dddf65b6f98035e29a9bc"
+embedded = "842e3a6b78fcfd309f2dc071851b36fba88dc48013101660ed3aa9e0902f7af5"
+status = "residue"
+cause = "mir::Ty: tables::word::WordCat"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBounds::next"
+kappa = "9ffb72cd0b26a5816608b83e36e37a8fd926ee8a54ee91746507f72a706c1173"
+embedded = "c1deb26697fa687754e07279e769970ea52157cf6c9fe2f8d2a6f1420f694dae"
+status = "residue"
+cause = "mir::Ty: UWordBounds<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBounds::next_back"
+kappa = "6326235b25259f3475b62bbf13175724e86d894bf885f92d8f4493001bc06783"
+embedded = "f843c57040d2d58721b38b0d3caf8a3a9edceb7159df4c82a316f5670a353f63"
+status = "residue"
+cause = "mir::Ty: UWordBounds<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UWordBounds::size_hint"
+kappa = "5ee546b310f17500b4800d0971c4b337120071a19161e61763bb26fb17b19f5b"
+embedded = "28c88e55f6f2d52b0927bb0ffeb269651adc3ede15d24fbb0c01cabd29f79e0a"
+status = "residue"
+cause = "mir::Ty: UWordBounds<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UnicodeWordIndices::next"
+kappa = "4cb2a8f7c96fd44f29871e182fad7c3dcbb9a272ae5d64c395d67b63a2ce202c"
+embedded = "6fad73f85bdd2815bab8b5a784400de5aa9ddf15b5fd656f461d1e532cd12d0d"
+status = "residue"
+cause = "mir::Ty: UnicodeWordIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UnicodeWordIndices::next_back"
+kappa = "b81fbc1995fe589e9bfde570b7c8f1039419c056886f02da6868a286b60e7b87"
+embedded = "ce1af96dd6ab41b5359d3d040071a0018dd55621c9040211b6118a74788f4312"
+status = "residue"
+cause = "mir::Ty: UnicodeWordIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UnicodeWordIndices::size_hint"
+kappa = "ae62814801f82847c5052d0313bc887e82cc9866b9c50b9f375d423766240ff3"
+embedded = "9c33ce2c96df85edb1e5c100a3b96401325960afeb6b9d4073c53f54d818c402"
+status = "residue"
+cause = "mir::Ty: UnicodeWordIndices<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UnicodeWords::next"
+kappa = "7f8aa6a8e8a30bfaf7bd619e58d4040b2a19efbf08ee3b274bb774df5d494f9f"
+embedded = "d82e89377bd381d0eabb28036a66015329f17ce6ec0bb70bb2983e49ce4d069d"
+status = "residue"
+cause = "mir::Ty: UnicodeWords<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UnicodeWords::next_back"
+kappa = "ca601f5fe311ff9effdf31bacdf5f8fa907ed81e94a023c229e284ad4119fbae"
+embedded = "08a8f3b4b5252bea74a79c0c5003b7bd04f081d2d0bb47f7bf7cfcb8c66ca631"
+status = "residue"
+cause = "mir::Ty: UnicodeWords<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::UnicodeWords::size_hint"
+kappa = "5ca9ddccb9546720292bae8093e0b707aac3a153ec012ee5a37331d79ff210d6"
+embedded = "b9ee2aa3b0a8e736ce37a2cadde27a84a26f87ad45b6f10332444feb65460d44"
+status = "residue"
+cause = "mir::Ty: UnicodeWords<'_>"
+
+[[fn]]
+path = "unicode-segmentation::word::has_alphanumeric"
+kappa = "6d07ab7703a83aee2ed2cde689e8c222fc4fde07b5f52011725cc72069c94637"
+embedded = "34275fb99223669bb74389be7af97bc84000d63ec13b81723a28a23b7592eed1"
+status = "residue"
+cause = "mir::Ty: core::str::Chars<'_>"
+

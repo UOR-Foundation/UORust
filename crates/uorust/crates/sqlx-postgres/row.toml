@@ -1,0 +1,29 @@
+[[fn]]
+path = "sqlx-postgres::row::<impl at src/row.rs:42:1: 42:36>::index"
+kappa = "e867d9a817a0c3a340966ecf30e809a441c5f491e7164716aed0af2277142f5b"
+embedded = "cf9a00b14717d4bfd87fc6a29094bae357a7c925944375e1818e039c841b79a8"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-postgres::row::PgRow::columns"
+kappa = "f62a3d5f36fa071f7148311183b36478779f7ca5dfb3272b143ca31ab74c7e45"
+embedded = "e2ed0d5e61a61712832aadf81ba4833815f279d039df87ee410c0abca8f98762"
+status = "residue"
+cause = "mir::Ty: column::PgColumn"
+
+[[fn]]
+path = "sqlx-postgres::row::PgRow::fmt"
+kappa = "b94a8bf8051e34c86c8b410fb0aa94dd578ee59136203956690bd1610a94a870"
+embedded = "ba1c9f132d10df82eeccef528bab6987f5e861805f93607e87154855b93f48c4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-postgres::row::PgRow::try_get_raw"
+kappa = "b27a8d78b40f28e44624e32abf2567dbbdbfc6cc8a3ff1ca82f41ab3cfe9f7e5"
+at = "I=u32"
+embedded = "42763fb29b1a254f0bb716c0aa1935c3de9e273d7a75a697c5dfdf9ba6effaf4"
+status = "residue"
+cause = "mir::Ty: value::PgValueRef<'_>"
+

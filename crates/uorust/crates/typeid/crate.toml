@@ -1,0 +1,86 @@
+[[fn]]
+path = "typeid::<impl at src/lib.rs:125:16: 125:21>::clone"
+kappa = "c4025c6b6a4a3270b5ea8caf53a406d3b469763b3008ac9b8a4d3bfebf508e7e"
+at = "ConstTypeId=u32"
+embedded = "da5201a0c91e3773fcbadd14693948dbf85869d11b20694eb7827e36f1f6e74d"
+status = "translated"
+digest = "96c53c98458ecb9c697cb4a921f9e7e09091c5ba1f4176b3e98bc61b28935fbd"
+
+[[fn]]
+path = "typeid::ConstTypeId::cmp"
+kappa = "ccb2aa30d1fa7372946fc2c7a302bf974500f90903a7d2878e93160a19412739"
+at = "ConstTypeId=u32"
+embedded = "bc64f5391d5b7924c492885cce525047375d43ea0fbde5e3c2367a6fd155f50d"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "typeid::ConstTypeId::eq"
+kappa = "c49b4319e6144e2d92dc518fcb61e92b28200f55e03476f6a323668d1162f38f"
+at = "ConstTypeId=u32"
+embedded = "7baa7d3ed03a25754b2a36c9f038ee19a370f6f32202f73f2a7dab5940642f61"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "typeid::ConstTypeId::eq#2"
+kappa = "02ae8418fcd778720fba813cbe1c0847e9917c7f965a4d67dd7bd54d5c2d814f"
+at = "ConstTypeId=u32"
+embedded = "a514a56bd6e83f29705da1a3f0cbfa1a9a4141d822a95ecd2ce4c123a3f5820f"
+status = "residue"
+cause = "mir::Ty: TypeId"
+
+[[fn]]
+path = "typeid::ConstTypeId::fmt"
+kappa = "81b2edaa331a4d073cc3c568373aca44a24a2f6bbfea2c6a8247d9bb947c7bb9"
+at = "ConstTypeId=u32"
+embedded = "e7dca664e59a40d25bea24736b1184d2d8addfdc3016d721b69964ef1e55e17b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "typeid::ConstTypeId::get"
+kappa = "7f06762136fb1fb47145a4532c6954b7a3536827e59b75b40d3cbd2bc5a18bac"
+embedded = "03090cbb36d54d4913247b46aff3f4380c416b77fa24489fb515157f8f872e2a"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "typeid::ConstTypeId::hash"
+kappa = "82e4d26fe2e55476e3667f63f110f2701955b79a6fc27b26ccc3f812b3d58409"
+at = "ConstTypeId=u32, H=u32"
+embedded = "8c2a609af4e7c65bc3004702b9ccecfafbe5c3955712148a42dd5ec550abe640"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "typeid::ConstTypeId::of"
+kappa = "1fb3878b8eca5e8bf65975086ddb3291a06ebdae4963829c708d90adebf942a4"
+at = "ConstTypeId=u32"
+embedded = "64b68eeaf7c6278c3364919b2ef0b6910ef30ae43af413f95703af74981e779d"
+status = "translated"
+digest = "f1ed0489662354899ae6b428e987006e925895f87990eee4c9a1de2f65de65ee"
+
+[[fn]]
+path = "typeid::ConstTypeId::partial_cmp"
+kappa = "4ac52f9cb6081aadd8a36a8c99820ba412735cf571bde297c4b97c908dd91bd5"
+at = "ConstTypeId=u32"
+embedded = "7199d64d415ff60ae50f66dffd44ad4a541ca609a5b59ecac0acc6c93ce9345d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord, which u32 does not implement in core"
+
+[[fn]]
+path = "typeid::of"
+kappa = "142cdbdf328dcce75103e749a75ae76a68b3636b5cf757e355ecdafd695b4164"
+at = "T=u32"
+embedded = "c53936008a186501a82f8ae31a0e3b15c67ae20ca18b35a94bee080603501cdd"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+
+[[fn]]
+path = "typeid::of::PhantomData::get_type_id"
+kappa = "c8868954e855bc11a7a928ce12295f3e6da0c9a3777778422c2aede3c64b6c66"
+embedded = "367721c5677d64c22a8c1228e7ca3ea2d5aec105c884f6495124c2a91615f480"
+status = "residue"
+cause = "mir::Ty: core::any::TypeId"
+

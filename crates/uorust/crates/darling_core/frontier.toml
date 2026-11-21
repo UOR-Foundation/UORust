@@ -1,0 +1,987 @@
+# The darling_core register (written by `uorust crate darling_core@0.24.1`; do not edit): every body of
+# darling_core's MIR at darling_core 0.24.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 961
+translated = 5
+residue = 956
+
+[module.ast]
+bodies = 91
+translated = 3
+residue = 88
+
+[module.codegen]
+bodies = 133
+translated = 0
+residue = 133
+
+[module.derive]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.error]
+bodies = 78
+translated = 0
+residue = 78
+
+[module.from_derive_input]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.from_field]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.from_generic_param]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.from_generics]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.from_meta]
+bodies = 244
+translated = 2
+residue = 242
+
+[module.from_type_param]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.from_variant]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.options]
+bodies = 118
+translated = 0
+residue = 118
+
+[module.usage]
+bodies = 101
+translated = 0
+residue = 101
+
+[module.util]
+bodies = 170
+translated = 0
+residue = 170
+
+[embedding]
+bodies = 961
+embedded = 961
+evaluable = 961
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 138
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 69
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 55
+
+[[cause]]
+cause = "mir::Ty: syn::Lifetime"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 38
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: util::spanned_value::SpannedValue<u32>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: ast::data::Fields<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: util::over_ride::Override<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: IdentString"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: util::path_list::PathList"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: util::ignored::Ignored"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: util::shape::Shape"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ast::data::Data<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: codegen::trait_impl::TraitImpl<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: syn::Expr"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: syn::TypeParam"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: codegen::attrs_field::ForwardAttrs<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: util::callable::Callable"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: data::Fields<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: util::flag::Flag"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Accumulator"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ShapeSet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SpannedValue<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: data::Style"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: over_ride::Override<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Span"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: syn::FieldValue"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: syn::Visibility"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: util::ident_string::IdentString"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PreservedStrExpr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::data::Style"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ast::data::nested_meta::NestedMeta"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: options::DefaultExpression"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: options::input_field::InputField"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: options::shape::DataShape"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Literal"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::LitBool"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::LitByte"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::LitByteStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::LitChar"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::LitFloat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::LitInt"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::LitStr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeArray"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeFnPtr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeGroup"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeImplTrait"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeInfer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeMacro"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeNever"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeParen"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypePtr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeReference"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeSlice"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeTraitObject"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::TypeTuple"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::WhereClause"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: util::shape::ShapeSet"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DataShape"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Flag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ForwardAttrsFilter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Ignored"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PathList"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PostfixTransform"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Shape"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UnknownValuePosition"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codegen::default_expr::DefaultExpression<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codegen::error::ErrorCheck<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codegen::field::Field<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::Accumulator"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::kind::ErrorUnknownValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: nested_meta::NestedMeta"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::forward_attrs::ForwardAttrsFilter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::input_variant::InputVariant"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: options::shape::DeriveInputShapeSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::cell::RefCell<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::rc::Rc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Attribute"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Generics"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Meta"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::TypePath"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::preserved_str_expr::PreservedStrExpr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: F"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FdiOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FromAttributesOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FromFieldOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FromMetaOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FromTypeParamOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FromVariantOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InputVariant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Purpose"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ast::generics::GenericParam<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codegen::error::ErrorDeclaration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codegen::field::Declaration<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codegen::postfix_transform::PostfixTransform"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codegen::variant::Variant<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codegen::variant_data::FieldsGen<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: data::Data<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::kind::ErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::util::Quoted<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: nested_meta::MetaNameValueInvalidExpr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: options::core::Core"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: options::forwarded_field::ForwardedField"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: options::from_variant::FromVariantOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: options::outer_from::OuterFrom"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<i8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<isize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::num::NonZero<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::DeriveInput"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::ExprArray"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::ExprPath"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::ExprRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Field"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::GenericParam"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::MetaList"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Variant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::WherePredicate"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: usage::options::Options"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::with_original::WithOriginal<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item std::boxed::Box::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Callable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CheckMissing<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Core"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DataMatchArm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DefaultDeclaration<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DeriveInputShapeSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrorCheck<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrorDeclaration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ErrorUnknownValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FlattenInitializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ForwardAttrs<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromAttributesImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromDeriveInputImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromFieldImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromMetaImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromMetaTag<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromMetaTagAll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromTypeParamImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromVariantImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Initializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: L"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchArm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MatchArms<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Options"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OuterFrom"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OverrideableCallable<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TokenStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TypeParams<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnitMatchArm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ValuePopulator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WithOriginal<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::data::Data<&u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::data::Fields<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::data::nested_meta::MetaNameValueAnyRhs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::data::nested_meta::MetaNameValueInvalidExpr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::generics::GenericParam<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::generics::Generics<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::generics::Generics<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ast::generics::TypeParams<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: attrs_field::Declaration<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::attrs_field::Declaration<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::attrs_field::MatchArms<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::attrs_field::ValuePopulator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::default_expr::DefaultDeclaration<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::field::CheckMissing<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::field::FlattenInitializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::field::Initializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::field::MatchArm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::from_attributes_impl::FromAttributesImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::from_derive_impl::FromDeriveInputImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::from_field::FromFieldImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::from_meta_impl::FromMetaImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::from_type_param::FromTypeParamImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::from_variant_impl::FromVariantImpl<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::overrideable_callable::OverrideableCallable<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::variant::DataMatchArm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codegen::variant::UnitMatchArm<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: default_expr::DefaultExpression<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::IntoIter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::kind::UnknownValuePosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: from_meta::autoref_specialization::FromMetaTag<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: from_meta::autoref_specialization::FromMetaTagAll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::GenericParam<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generics::Generics<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ident_case::RenameRule"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: kind::ErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::from_attributes::FromAttributesOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::from_derive::FdiOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::from_field::FromFieldOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::from_meta::FromMetaOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: options::from_type_param::FromTypeParamOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::HashMap<std::string::String"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::atomic::Atomic<bool>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::ConstParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::LifetimeParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Lit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Member"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::punctuated::Punctuated<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: usage::options::Purpose"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::over_ride::Override<&mut u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::over_ride::Override<&u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: variant::Variant<'_>"
+bodies = 1

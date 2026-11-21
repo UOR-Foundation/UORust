@@ -1,0 +1,4306 @@
+[[fn]]
+path = "quinn-proto::BITFIELD_SIZE"
+kappa = "82b3ff999376ad07fd7324b1f11c3e32a5ed94a4a33c491de028a79b1c9d1354"
+embedded = "8cc321f72ee97b5b870ee6c29678190d2914c75eca28aba694c316c32bf6a798"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "quinn-proto::COMPACT_THRESHOLD"
+kappa = "25f56955cf307f4e986289e88478100c0d85eab2dcd5726e16a8865b0109814e"
+embedded = "d8b3f113607f8846b80d4134119a738e82d09915e11bff212eab2e12e060b3cb"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item connection::assembler::MAX_CHUNKS"
+
+[[fn]]
+path = "quinn-proto::MAX_HANDSHAKE_OR_0RTT_HEADER_SIZE"
+kappa = "76fbd34023dec1936a92596b0d198eb35203dd06a9690d0c6aeb5620f168ade1"
+embedded = "9745546e69e471e84fb31402d41f8b43eac173e5afa00e3f76767334c3a3c57b"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item MAX_CID_SIZE"
+
+[[fn]]
+path = "quinn-proto::MIN_AUTOMATIC_ACK_DELAY"
+kappa = "f6ba9870893cf9954c844c555e6b3de1e17438f18c4a35f24643687b5c71e4b0"
+embedded = "884937cc765d630c39331f81dd06f47248d90e3726cb64ec2cec4a4f36544e81"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::MIN_PACKET_SPACE"
+kappa = "766a9e5e3be7f06a64b93c9bee46c804ef42c03ccbeae121e5b28717a9f6fc85"
+embedded = "d5e6e07b7ab4d82eba230ee98bdacb67b64ffacde3ae73cd07a8d7df4ba37f99"
+status = "residue"
+cause = "mir::Operand::Constant: connection::MAX_HANDSHAKE_OR_0RTT_HEADER_SIZE: mir::Operand::Constant: the constant item MAX_CID_SIZE"
+
+[[fn]]
+path = "quinn-proto::WINDOW_SIZE"
+kappa = "fc1d38aa59d90e66995a53bfe2c5491b4b2899515995a44e2b115d516027a5b4"
+embedded = "beebda62a98746b5afc494411e83962858deeb778a1996e6533bfdb7b5937e4d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "quinn-proto::ack_frequency::AckFrequencyState::ack_frequency_received"
+kappa = "fc5ec7f86cd2b95235510d386d67ef0d0377d7ee76f09da66f914609f5bc3d16"
+embedded = "4f23d470325a52ea19c07722f1c78a3ece3840973fb8edb594106318eb5a0f4d"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::ack_frequency::AckFrequencyState::ack_frequency_sent"
+kappa = "fbbd5a6a7f88c27ae0a01794dd846b1675aa4482df3df3ed63b9246ad8c3a356"
+embedded = "4aa2527a453fc5997d8e292f1c7c06efca427a760ffdac25f2edfdfbac93f8a0"
+status = "residue"
+cause = "mir::Ty: AckFrequencyState"
+
+[[fn]]
+path = "quinn-proto::ack_frequency::AckFrequencyState::candidate_max_ack_delay"
+kappa = "3775fac02b58b0a2f8cfb1224a6af8d597b061e6255f28ae57e17563042abf99"
+embedded = "3239971b2901c880dbdd90767d892f78224298bbec470f698c6f653cafa92769"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::ack_frequency::AckFrequencyState::max_ack_delay_for_pto"
+kappa = "bb6d52151dea16f459b0603171c9318df61117e659540698ed294179cebec566"
+embedded = "6c753b742cdf1481524b64b181a78b71bf5c766ce1b39a1c6a6a12e63cb4b0ef"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::ack_frequency::AckFrequencyState::new"
+kappa = "cf8a100fadc852651561df4d7e4a39470e734759739de6b4e72c8865281270fe"
+embedded = "e4e86370f075ef4306687230c9d516f0548ac9947d95fa9b97f9a9a78e44edf5"
+status = "residue"
+cause = "mir::Ty: connection::ack_frequency::AckFrequencyState"
+
+[[fn]]
+path = "quinn-proto::ack_frequency::AckFrequencyState::next_sequence_number"
+kappa = "89849f73a97e44ac1f24893a72a2666dddad24dee2bb3220cb060fca9f3053db"
+embedded = "ffb04575b18ce6cfa1b1450116de7c507ae26d929b42cfd93e2e4e6d25d5f532"
+status = "residue"
+cause = "mir::Ty: varint::VarInt"
+
+[[fn]]
+path = "quinn-proto::ack_frequency::AckFrequencyState::on_acked"
+kappa = "4521913d70f2c0a3f1091532d756227e0d02b999050561c339175bbb43d3bd87"
+embedded = "09b7e76d85309a19c5dd43ba0efd305be4f87c67ffab1df13abec92ed7e476cb"
+status = "residue"
+cause = "mir::Ty: AckFrequencyState"
+
+[[fn]]
+path = "quinn-proto::ack_frequency::AckFrequencyState::should_send_ack_frequency"
+kappa = "b01bc371dc3f65844fd92a95a70e1c43b8b1ed2516a1b8ab93579571f4d94259"
+embedded = "7175e00d45a6b6e7d3a07b8ba4c166c3feb961cd71895b79d3305c1cbe85d084"
+status = "residue"
+cause = "mir::Ty: AckFrequencyState"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:12:10: 12:15>::fmt"
+kappa = "0ff9c2747699420f3c0dc2576c7c1e27718a83f74d407238ced45148ab8ba11b"
+embedded = "962a71df993c525f5fc4691a8b3206d68022214cb5a007059f31a1884fab5bcb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:12:17: 12:24>::default"
+kappa = "c4df4e9af47a658991cf3db6e8a7a5af4f369b47cd9a888107f4db558e930e04"
+embedded = "bd7f2fe28f90993bfc8b92388bad64f7975043d4e24dd4554ac4b678a974e4b4"
+status = "residue"
+cause = "mir::Ty: connection::assembler::Assembler"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:240:10: 240:15>::fmt"
+kappa = "faaa6d3a641b65a5c5d16487d5805380d6e22bdf3271927eaf51bb4cc3ee1257"
+embedded = "5a5420432763d05c2df3bc98efcb070984c7a17cd173c0b83abd7330fa6ff340"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:240:17: 240:26>::eq"
+kappa = "d791dbf08bbea1d289e1ee98b2dab9559e5b5f2cafccada307883ed485331ecb"
+embedded = "1c39a9bf2db254ecf54f6656280fd67f1e93736ebcf24c9dd78ad7aa6c5324d5"
+status = "residue"
+cause = "mir::Ty: Chunk"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:240:28: 240:30>::assert_fields_are_eq"
+kappa = "1121292b5c92dcaa82efa320ed41d0ff626f3c98e1b2783ba7144d5ec2075a07"
+embedded = "29acb8ea7a451311bcd8eff9d5c6d687d8470e033ef92e08d9845b902b685943"
+status = "residue"
+cause = "mir::Ty: Chunk"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:254:10: 254:15>::fmt"
+kappa = "6579cd7b8309e4655aea56c57d9b0c4470c08c058170e091b37c4dc9bbdaf796"
+embedded = "f69fe98a1c2d88928952948f813c2b3b5a180d079d61aa4eb3b8729d40c4e5ca"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:254:17: 254:19>::assert_fields_are_eq"
+kappa = "d6a08937447c731a47dfb8aaf03feb4b177d1d08469a126ee5bcc677a1a2f362"
+embedded = "99c7a4801d63dcea270f78a2c64c8f36a30015e2a0ce8d1374a1e5ea32f12c67"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:332:10: 332:15>::fmt"
+kappa = "6784fe9be6647c8e64d6ab57fb48faccd58abac542a29c38c7bffe4de60c1521"
+embedded = "7f10a00a6754b7edbb86c4fbc4ffdae0a0e0c6c5219b7c779c80884d23928982"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:332:17: 332:24>::default"
+kappa = "735ea4f0df290dc852c7be96fc4d2c882886e6149d6f993159ed49134ba18ca9"
+embedded = "9e40d6e4e3721c55c6ed5458bf7340ef97882d831c290a8542ebc52c179be3b5"
+status = "residue"
+cause = "mir::Ty: connection::assembler::State"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:350:10: 350:15>::fmt"
+kappa = "380067c29cef1a721ae5468c225d24f751f84df9341f052086b58072daa1cfb9"
+embedded = "a5639799039838b4bcb2277376f7d58646b7784a6f7422ff28eb6d37e43c3438"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::assembler::<impl at src/connection/assembler.rs:354:10: 354:15>::fmt"
+kappa = "f9584f9a05026d3e0725d3e6dd4813f6d453dc805420fe8f8276acdcfc8daa42"
+embedded = "1bc5d7036e7f5b1c214d391a68301e712d5cb3cdfc24c6c9d4ced208e45cad7c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::assembler::Assembler::bytes_read"
+kappa = "3c944b5419c575d1e230dc19f5b6f57d913abc370e968da158f4a45f79d8a3d8"
+embedded = "e49416776287a2a20b96efc11aeb80ae90158c78a8dd05eaee7724d4be8c3ef3"
+status = "residue"
+cause = "mir::Ty: Assembler"
+
+[[fn]]
+path = "quinn-proto::assembler::Assembler::clear"
+kappa = "210b30a2b07c2fd6245768b24556bfda5a1142fd6b7d6de5728e0cc28b7e1a1d"
+embedded = "fda1e19055f9d6aa38a2a3f45c255c5ab4ee9c55501cc7c882ecf1269bacf0fa"
+status = "residue"
+cause = "mir::Ty: Assembler"
+
+[[fn]]
+path = "quinn-proto::assembler::Assembler::defragment"
+kappa = "b9ac45a58d1a67a9dd2e393c0b71ae0c8f57119441eabc3608085197d440d720"
+embedded = "0721123ca11d87071904bede9bdf54faf82f2335e063b5e383d34a20824e0802"
+status = "residue"
+cause = "mir::Ty: Assembler"
+
+[[fn]]
+path = "quinn-proto::assembler::Assembler::ensure_ordering"
+kappa = "b94c4e4e4d928233e39741e13b68d0391790b860ae5a9b03ef5448eefedea283"
+embedded = "c64737469e28f2ab64f8cf88742aa3c17cc9e8a36bbf284d238d1ae5767a7971"
+status = "residue"
+cause = "mir::Ty: connection::assembler::IllegalOrderedRead"
+
+[[fn]]
+path = "quinn-proto::assembler::Assembler::insert"
+kappa = "f14fceb7fd49b63bbbb073a5954cdb4e0c66678a97f5b8290fc5c124991059d7"
+embedded = "c7934806adc722e08920c76444e2ef6db50a1e68a0b4dbb224c5f4c360f12c49"
+status = "residue"
+cause = "mir::Ty: connection::assembler::TooManyChunks"
+
+[[fn]]
+path = "quinn-proto::assembler::Assembler::new"
+kappa = "750f54ed4a183bdb3cba993530de0dce14f1860d8a253cc01041df8bd5f9535d"
+embedded = "2be43971e49b2c82f8a8e8fdb05837a4142b3dfba01756c6593dfed6da6801c5"
+status = "residue"
+cause = "mir::Ty: connection::assembler::Assembler"
+
+[[fn]]
+path = "quinn-proto::assembler::Assembler::read"
+kappa = "d2deeae9927e94a9b532c7bdce79dda0f594857b5934cf6497899046fce119ad"
+embedded = "f15a29546e5d67e94c21ced4ebfd0f90f41c60d961f97a1520104a1ff095d6c8"
+status = "residue"
+cause = "mir::Ty: connection::assembler::Chunk"
+
+[[fn]]
+path = "quinn-proto::assembler::Assembler::reinit"
+kappa = "5f30a7a2d87c5c04cff0ea004ccc7ab87887e03826c566d6dca5d8918a240fd5"
+embedded = "9fc8eda66765f97eb0c61a7b8ed81178bd01e3470f426555fc50c802e8261cc6"
+status = "residue"
+cause = "mir::Ty: Assembler"
+
+[[fn]]
+path = "quinn-proto::assembler::Buffer::cmp"
+kappa = "83d727c53b4a464e5c8ade3aa07d1c1a80086ba208d88557ac46f0ed5193d097"
+embedded = "5ffeb0a94b3df63959912f0e51de72a01d585b950e20f40745c4447da0e09b55"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "quinn-proto::assembler::Buffer::eq"
+kappa = "1157897d8c85bf4a85a9f61a803f52c192ca71a3f217384e8eaf84f0d0e7d918"
+embedded = "c5d76bd1320b9500401196ae258cbec0d98be4d550f739a4b2ff46718494cc83"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "quinn-proto::assembler::Buffer::new"
+kappa = "e14689fc23f6ac45182e0ed0a55fc343ca569097a82d3062577dea5f9414db14"
+embedded = "3cc6d8f5be53149ea19092f65c0da450af718cd7dc594b86fd265110957cb5cf"
+status = "residue"
+cause = "mir::Ty: connection::assembler::Buffer"
+
+[[fn]]
+path = "quinn-proto::assembler::Buffer::new_defragmented"
+kappa = "2e325742fdc1e61e9491c54034332bf65ef69f257e44d796d41338b95e15701e"
+embedded = "6c97bba124ab3facddd9eb6c21296a319e2a177bad552a18d2da7da411eb1323"
+status = "residue"
+cause = "mir::Ty: connection::assembler::Buffer"
+
+[[fn]]
+path = "quinn-proto::assembler::Buffer::partial_cmp"
+kappa = "f0bf2ce4cedb60b5fa58553b8db130b8bb10835c061e58c7bac71e23652cb642"
+embedded = "2d64aa35097224498e2b141ae5ed92a6524fd473e62460c99c43ac4de5b0ad71"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "quinn-proto::assembler::Buffer::try_mark_defragment"
+kappa = "614a04295e6d855d4af4e73b4dff769e90a2e715cf6114a1def1e8157a978102"
+embedded = "57896ae68de13c8b33b3bcb6f8e9d28f6150053e5e02274fe1ac934a8ede140d"
+status = "residue"
+cause = "mir::Ty: Buffer"
+
+[[fn]]
+path = "quinn-proto::assembler::Chunk::new"
+kappa = "89477b98670b61c26b3c2af4ebaffbed7292b4fa68c268ec6baf9f5f23c4da15"
+embedded = "3e72b3f742574c45b374f5f4653d2c61fe37251e75ab357b12e208385b3e3aac"
+status = "residue"
+cause = "mir::Ty: connection::assembler::Chunk"
+
+[[fn]]
+path = "quinn-proto::assembler::State::is_ordered"
+kappa = "938900fa724c8a03627011f63e781514a54b6e607d40c87de4f7d7c9805c65b6"
+embedded = "284dd6b33911ae52e12914e9701bac127c6bd9d23fc87ae1d34f92cba90d4bf1"
+status = "residue"
+cause = "mir::Ty: assembler::State"
+
+[[fn]]
+path = "quinn-proto::cid_state::<impl at src/connection/cid_state.rs:217:16: 217:21>::clone"
+kappa = "40f7ac018739a33ba5fb455b9aa0a7f2caba7872d1a6b3a0a491e40df124899b"
+embedded = "24ae19d04000d80d364829a29d4b1d358ee594830f53673b3963383c3ac80855"
+status = "residue"
+cause = "mir::Ty: connection::cid_state::CidTimestamp"
+
+[[fn]]
+path = "quinn-proto::cid_state::<impl at src/connection/cid_state.rs:217:23: 217:25>::assert_fields_are_eq"
+kappa = "450228d38686582c3d4fd6525286781f263a5b97919fcfd4d66ef6a3ddf62a0d"
+embedded = "f7649e5736c3a697457092115a61ee127c9f1b4a9dfcc9d5d205ff2b0398e844"
+status = "residue"
+cause = "mir::Ty: CidTimestamp"
+
+[[fn]]
+path = "quinn-proto::cid_state::<impl at src/connection/cid_state.rs:217:27: 217:36>::eq"
+kappa = "575a86350870487bd4f73771388c5cc9ea42ebddf42c04c2a57825f0e3a76a00"
+embedded = "cc96a33af83fef7cdc8501702719152c734fe0a55fa464520df7d755379456c0"
+status = "residue"
+cause = "mir::Ty: CidTimestamp"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::cid_len"
+kappa = "e8cfa8311d9ff4cb21c12a686e0c04a6ffd13ff9d8f03a641f1076b743436dac"
+embedded = "cc8be4cec27fc28d2b5b80217373c641b605699f6777180686333eb3b3fddd4a"
+status = "residue"
+cause = "mir::Ty: CidState"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::new"
+kappa = "cbf26ed610f75d2d8c249fccaf10e80cdc95dd74cf8ee20760f49734dbe4b8f9"
+embedded = "b48f8e8f1fedfafd4f8779b5c20de247cca312e9bd827844c886b04aed33a00c"
+status = "residue"
+cause = "mir::Ty: connection::cid_state::CidState"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::new_cids"
+kappa = "b2b46ef1e11e9d7cd0d4f4f91dc5e65089afe8de5bc97cd5c875850713a92898"
+embedded = "eccece518f6e9691d9ab79319d94d74453651cea5ea5cc5fc237d31c0a98e3d4"
+status = "residue"
+cause = "mir::Ty: CidState"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::next_timeout"
+kappa = "2e64891bb2bc380c83f96007c6300313bc01acc94a17052daa7c61d88a0b28ca"
+embedded = "8574ea3bb0867a8578e4966f597dc3284a082a82a59291ca1279d42e9a505d10"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::on_cid_retirement"
+kappa = "ffc5955f3ebaff3a8b5342f3d1213485f99e799b2b95b5e16ab4ba8f6558d883"
+embedded = "2b30c9d46b084152529c44b1b25fd9cca3561acd21caa171dfc335eee081366a"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::on_cid_retirement::__CALLSITE::META::NAME"
+kappa = "8b081f5755573d744545d29ce3006be297c4d52c2d94a541dca83b759c97beef"
+embedded = "276da475e760ef14baed35f8367281897c601f4f4c0e8a5dd3f9144d411f0813"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::on_cid_timeout"
+kappa = "6c329e124104d6f815646a2e0fb0eb3d5f5c5d4a08548f7205f85c03c14e6661"
+embedded = "2e300550893627e8269f028381fbfb9bd0a71bee937a835105ea6987d2fa5b87"
+status = "residue"
+cause = "mir::Ty: CidState"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::retire_prior_to"
+kappa = "ba60d0ffe6ed568dc1ecab38e07e9c8e103d5a57092cab4e4d04d505cdb90247"
+embedded = "45024d377806171020e869c02a463c560611803bf9887e04ee790113677b25d0"
+status = "residue"
+cause = "mir::Ty: CidState"
+
+[[fn]]
+path = "quinn-proto::cid_state::CidState::track_lifetime"
+kappa = "1accc6a7c59d918b419c7d923900bc692b6bac27641c8ec602c09c494f64a721"
+embedded = "7b0a2abb5745e81e6fea2db83a7f92d90e6a3e38a85556cf63e6e116010e5192"
+status = "residue"
+cause = "mir::Ty: CidState"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:3905:10: 3905:15>::fmt"
+kappa = "fe076a843eddea66016f5bac745783f711a533dfcad5b18ccffc44468fcc473e"
+embedded = "710f901848a65589371846cd84e4764657f9ab3ce532ede6edabc32918f50ede"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:3905:17: 3905:22>::fmt"
+kappa = "0d57a38326828199ff93fa1af3bf872efff7970af8ce72e0fec4a9e6b040483e"
+embedded = "e5ca7cd2412e55ea629f8dfbe83a458bb9ee703b6666f81b554dbb854cccf5ea"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:3905:17: 3905:22>::source"
+kappa = "9982ccaf927694a37c23c8f32cb56df05613edf0cd3f55912b46372edd16ffe9"
+embedded = "fbfceb6e3008d15e8b770e9da7341989c239a2470c6910811445e9ca96d6cc7e"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:3905:24: 3905:29>::clone"
+kappa = "98e977366c3a4bb34690691f1dd9375698b759e0627f2217bb7eed913b900aea"
+embedded = "b8073dc399909641992be2d850afac397a481c55244e4c99b186b604a8e0a2ae"
+status = "residue"
+cause = "mir::Ty: connection::ConnectionError"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:3905:31: 3905:40>::eq"
+kappa = "624c1ad4ecafa0f462aeb241af7f1ab672dac8ec52c28d7f40f136222465a40b"
+embedded = "54cd100b2d0bf6d24d93a22068b4f840c186423a4dc8d1200a66252abdbc22d4"
+status = "residue"
+cause = "mir::Ty: ConnectionError"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:3905:42: 3905:44>::assert_fields_are_eq"
+kappa = "036245bd846cb69f5e8b9d2df52dd433f6e5c2c9be445d01b4021d32ebfb43fd"
+embedded = "c6be9e3933d09985d6cac9477f81c95c8e89ad6c45c587ccf0d2996be99647d8"
+status = "residue"
+cause = "mir::Ty: ConnectionError"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:3912:20: 3912:27>::from"
+kappa = "f2b6c9de9d2590b44685a8526045e811fddc8bfed14af46568b8f149d84e9a29"
+embedded = "98d0896a230b126ba8601dbb95a280b713385a4a7f448f59e1ce4cda37f2ea9f"
+status = "residue"
+cause = "mir::Ty: connection::ConnectionError"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:3965:10: 3965:15>::clone"
+kappa = "6db3cb40dc0d351d3068a5d974ccc51c06f13bddd81bec6565877742d2e7785f"
+embedded = "0ba94eeefddbc24d591b44d57c579cd1959d15021c274d45022af61b0fdfc6af"
+status = "residue"
+cause = "mir::Ty: connection::State"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:4027:10: 4027:15>::fmt"
+kappa = "5404bcb98643ef0509aa62928a39584bb05446402ba3d535efc645ab0b9c1135"
+embedded = "36e889fe0b5b58803cac266a765352bc08539c8cd969a18cae479ceb4bccf043"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::connection::<impl at src/connection/mod.rs:4077:10: 4077:17>::default"
+kappa = "3b9f0f5c7295dfb190bffef81a211a70058e931a37f697942098d1c7bdff2b90"
+embedded = "643e46c45afb2436537517465e557d9bd52acc5f61977feddbb08e598a782586"
+status = "residue"
+cause = "mir::Ty: connection::SentFrames"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::accepted_0rtt"
+kappa = "5e999755474bf6adbe2a651ee853fbc2e16b024c5048dd1f3c0a24abef531df3"
+embedded = "5742b1a4422fc388f3d72bdaf2cdccd0875c00c8fff785ea6932988454549e2a"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::can_send_1rtt"
+kappa = "75539ff8fb7e77a227556e77f58bf6e3e5d9e5da4354245eba6ef618885f6fe1"
+embedded = "93b1fbbeb9e814522cfecc469f83ec829501ede9e7a2dfd7f62bc8db10b1ff89"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::close"
+kappa = "8dfe293db91b69b35066eb1f959d388f2346e10ca90e3257e07aff5629b222d8"
+embedded = "8b2a6d9d8b2a80caf8d3c1bb6a0188fc8f78dfb8b2a9a82a9e161905013617ff"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::close_common"
+kappa = "c1f89032b827adf24c11a52d780003fdee5f4d10f1e9d041240955eeeb1f50c4"
+embedded = "a94375bb979a48b82962cae54f4b2c78ebb683eb80af2793efc943a40ff34f6a"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::close_inner"
+kappa = "d627d4f52ded7e503e54b58b90ae72efbd74102d2feaf4368085579431a5839a"
+embedded = "9ef1bcd42b02385e3aaae8e61671a74e52e9b0e1c4309e3e7fbe56b94141f415"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::congestion_state"
+kappa = "85ec21f008e056be220cc4502a999d28d68764c71069d25c9fde915c36b80ca8"
+embedded = "72b86d873b136edcd43cc25fb279ea0d619907da7d5afdf4d91a18b5347c0975"
+status = "residue"
+cause = "mir::Ty: dyn congestion::Controller"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::crypto_session"
+kappa = "f7f01df68c05a0c29c5ee5c4ea5eb8d85e8fd13ff856025d06809a37f6d7880a"
+embedded = "0ddd8c198316da4fa7eec318526ef8c6280dd3aa8490bac773bb48f072cb28e0"
+status = "residue"
+cause = "mir::Ty: dyn crypto::Session"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::current_mtu"
+kappa = "dde9b2172c83f03ac991c452b5d2be1c4bc71cf79ed045b0ebc3564bbdb6d5fb"
+embedded = "41f5aef9b63375ed228bf83e6aaecf15a6929f2bf13ffb73da1481619db8fc2b"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::datagrams"
+kappa = "7353d5a2edc5781a81c403beb0920b113a60757309b2e851796b4e7e7b97acc7"
+embedded = "06862ba20603d851c544ecf89d727c1343b57d45a176219212c5917d03ac5a53"
+status = "residue"
+cause = "mir::Ty: connection::datagrams::Datagrams<'_>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::decrypt_packet"
+kappa = "a04bbdff6477c10f2094dd666f0fd6ef1754585942829ba1210d3aa657545688"
+embedded = "1e244cb152db47beefeb853b84a2163ba46923fdc133b41b0362bd346357b498"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::detect_lost_packets"
+kappa = "237a3fe6ad173df8298843b9b28a7034b1da749881974842a198866d7f38587f"
+embedded = "eb40f56671beaa75d07851275250bddfa47c773d6d1b831da6f503ce037ffd1f"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::discard_space"
+kappa = "a2e82e6817765d871ec2d277a1999eca5dd47d819197dd528bc54d8d2da8d1d8"
+embedded = "0fad9ae109bb180a78b793845500bc9caee1177b4a12ab0ac11de586c1d0161b"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::fmt"
+kappa = "fc955b17ff6df33e6f79b8ff7c45921a3e9d6534957c525603a42fc4b43cacfb"
+embedded = "36a471ff47a7b2a4e96aa3298ab2c402e1bf02c50fc7deea458f72359666334d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::force_key_update"
+kappa = "aadf6117783cd63ca88b524852c0840b9e6075f2f69dcc942695b6f8251c36e7"
+embedded = "efb1ee3a1a765f135d7f62c1ab67908b74c864f9e6ab7b963ccfa5df5bfc98e5"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_coalesced"
+kappa = "7e52a41920b95246ea9b6d9ea90c06626413de3c571ee3ded6d7f0b773f4df8b"
+embedded = "e4b94031351c81fe75292e9b0f835184f6817403722b3514586fe2bc4ea0b439"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_decode"
+kappa = "aaf58ad8ad50dd6c3b834fa5e5b188a821e2b5408671a3404368f20f24d4d084"
+embedded = "a0976ce646cc0c7b36103c77c9818627fd89c23d3b39ce875c89da523ae608db"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_event"
+kappa = "14f2bfc870fa1afbfb71e365a14ce06b0231d34f3ede0a04deb627e1d9c825b2"
+embedded = "fb5e128e393b766279c7488fb89a18cc22bdb5ab615da554f1733bc531eb1b5f"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_first_packet"
+kappa = "c6d7886c683f22b76083a04de723de2a9c45be3969d844b5a06b1ce70114e1d4"
+embedded = "5c3c0279a16fc6c442ed310ec3a398bcf4cfa28daecb3287d32aa9402f3da00d"
+status = "residue"
+cause = "mir::Ty: connection::ConnectionError"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_packet"
+kappa = "d3c8b642e2eb1ed455c18a6976d71345d7ed2016cf5760a342c14a58ca9df325"
+embedded = "4396cb70d33d97df5df5309f9c017a4a825d1f1096fae3258b01384e9a545362"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_packet::__CALLSITE::META::NAME"
+kappa = "1664664eb7ec2bf979af40cf86c607f9da58642dd32af3d7909190536d33b3c3"
+embedded = "d21b854be4c109446e7e2a80a47c42b9668404d55e82b2bf958f39a64cbeb5a6"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_packet::__CALLSITE::META::NAME#2"
+kappa = "801f0822904e315689f0bd218cb663baf01a664bae7d26bc9d062affdd35e41c"
+embedded = "a2bd189f9fe7f1bbff4c24993c1b335c42982e20cafb2c984beab0862fc6e458"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_packet::__CALLSITE::META::NAME#3"
+kappa = "801f0822904e315689f0bd218cb663baf01a664bae7d26bc9d062affdd35e41c"
+embedded = "a2bd189f9fe7f1bbff4c24993c1b335c42982e20cafb2c984beab0862fc6e458"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_peer_params"
+kappa = "bcb69c8803dd3e300ce660250814e1e7474e583652046fc8b734a50fc9617ae2"
+embedded = "6a71dc1ba87c3498914e569fce2867c6946eaa1665252e24c9f23784a1262a2b"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_timeout"
+kappa = "56f8a65f8c6dffa05d73e86bd1c35f1c33d820b0e549390aa58c3853e1cb3b2b"
+embedded = "c10272d3503e04f9952d1f5940f92a5a8f2fd4cf20032de262e9727ccdc943df"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::handle_timeout::__CALLSITE::META::NAME"
+kappa = "0b5955d57d3bd7f5e547eefeb178f27b4e951790dcadd5d756653d8dabb04dee"
+embedded = "4ef1ed9b2fa7b9e91abd5a7d943314e79e983dc9e6b888e3d3b0770cc6c64b47"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::has_0rtt"
+kappa = "45d188e380e9266d74dfd8cb208fea5bc98b9bef528b4a1ae73b3d2daf9f31b6"
+embedded = "6e54cf8b56b5b3e1d4ee0bb59f1edb632f8aa849c5a8dce75c6a3d51111710ca"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::has_pending_retransmits"
+kappa = "fa333a33e76de712d557f91957936d58fee1773b8db076cb7665b00af0ac978f"
+embedded = "fe99e5d9fe00cb6fa194bf4dc01e57a3124bff4ac0e5f3a79d5366003a133a1c"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::immediate_ack"
+kappa = "3375033c00e3cbaf38107f0fb9b3713914f5b13902c4f43ef075bdd682ed09fd"
+embedded = "87956c0166bf835e86e92d5ab7d7dc5b4f824ba6814475bb896bb50da4f847eb"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::init_0rtt"
+kappa = "e07c9da62cdbf090df0c6defcd9923fb5774575fe60587eee3ace85de3da0c5e"
+embedded = "570bb631ddf82049c2e3a340233614e7d3d7248931311e414fbf7efef09d7f47"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::initiate_key_update"
+kappa = "df42a5f4b4dcffb059eb82177c520e192075338704ded556ad0ca7421a43dba4"
+embedded = "3e6b23cc4f66807bb036c828cea0df500b3cf4ffe34b5d53ce0f8cd38c436b08"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::is_closed"
+kappa = "d2ee41cfdf37d5138c01f15f3b2468d809386e908207a56bad0be6e40be0ec85"
+embedded = "6e4f83aa0de37aeb3daea43a8d0db1e3a91c477d8c59121dbfc8b672b205cf3a"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::is_drained"
+kappa = "39911bd9a841e7848a7129e67296cc15554f4ffba48dc21b83647b5f2c616c74"
+embedded = "6d6967bbe6374548f25c1bdb9b87d7ba7bc510b3ff36ea261eff262d3fab7024"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::is_handshaking"
+kappa = "cd006a9abde93d20c1a03479d5da2462ab0500761f0590e2386e268484a2afde"
+embedded = "17217e5d747cfad8e2e637ee62910965cd1c09f1ea643b3e37f25bb99b37f2b5"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::issue_first_cids"
+kappa = "76c692b17a744004053f1c81a4f377d5afd060dc7230f97c659c11771ae556f6"
+embedded = "55fae1646e6a98e79956b62eaba333c670c748d4dffa5a2c740c8a06ad576e78"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::kill"
+kappa = "1048c65b0c3fc34b50e51b070a8ef038496fd34548a7bcaf2ee7b05248b6aa32"
+embedded = "b4aceebf88d280bc5be8b3d4384aa21cdd0b863beac63895e97a7c710103201c"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::local_address_changed"
+kappa = "7c5efc8727f90c1ec3f92f86f98b04cad81c3016ad35c842081b313367d2bcbf"
+embedded = "9833f84257298f2edccb61672fdf6cd7a16d0d8c5058c90ba6eb9785c9da81b2"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::local_ip"
+kappa = "59514a91c6eb3f00ebff0477054099b40f63931112ce4aa0c1f506827a1b8884"
+embedded = "a24e2c92a2cf00e1f1712d9f79b18b4d8af7d75b85ed58ee95e2df7f5fa04136"
+status = "residue"
+cause = "mir::Ty: std::net::IpAddr"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::loss_time_and_space"
+kappa = "1b6cd29870dc3b8dd1331e297c5e1977a6c703dab89a93fa4069c40399c01e55"
+embedded = "234cb96a157c1b420e09f0ba311acd262b613d449b6fd160d6a118e1cf2dea6f"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::max_concurrent_streams"
+kappa = "a08db171036c82ada55f9a5285e34f73d9a71d9bfb2ee1c0f97f3a04eb235428"
+at = "Dir=u32"
+embedded = "59bd6712ae228cbac714e8bad755e99c46fe89b79b6034ccd2d7aac0bd027eb2"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::migrate"
+kappa = "c47f523c471a535ab9afaf92f07934a66f47f23614de32bf4ba688143655ebfa"
+embedded = "9609fd1cb58e32fb286ac9d0b674a0c4d7ed89cfee0b8a8fa91e3c8deda2dbef"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::migrate::__CALLSITE::META::NAME"
+kappa = "5d5eeeed621a693ed166d476329f64b5e58a4e63295341907042457a22efeaba"
+embedded = "c2238eb388b50907181094ab86a087a7c33e8c44c76424d76379bfe5858d7ded"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::min_rtt"
+kappa = "0b994e33596d800d75f69f1b288ddb034934adfa0b4a463fa67137080235a928"
+embedded = "22bb0a2655d410662272ce0f3efdf72f6dd60414eb4f9c5a04c0580144230e4c"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::new"
+kappa = "074ba1a4771eb5cead9583aebd6658d0603ab688a4d494ff6e8ec2a3d9f49aa4"
+at = "Side=u32"
+embedded = "9d171dc4f7d49e3bcd9d6bf0935726f9f407b171ad1b10b4e0479a0c580b8331"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::next_bundled_ack_delay"
+kappa = "16c41d174e69c34454387d4766d97fcd0d95f0491addf6b7d1563d943d112bd8"
+embedded = "dba7deae47416679da251088d6aa7e23d994166e1dcf6da72176a0ffe7aeb578"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::on_ack_received"
+kappa = "54d0eba41e383e958263fb9b56aea891f34a2e9457e5689c06d490a424487688"
+embedded = "06de1ee08ea51ebc49856de7741d3723064bc82fd2939ca88c4b78c9c6da85a0"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::on_loss_detection_timeout"
+kappa = "bc2096d676f59803d94558635c65b7448b8d6d77e116df1666af7fb1891d4f03"
+embedded = "5d1b788082e80baff4bc30e3bb94cb9dff25b50373cba57ba004c17913c646f9"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::on_loss_detection_timeout::__CALLSITE::META::NAME"
+kappa = "934f6644962c9c869643b3bdd1a9d3689f46054c220d661346cc387892edaf00"
+embedded = "45a88f84ad829319abce279a67a2550844aff894d05af62822be549bd6a57614"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::on_loss_detection_timeout::__CALLSITE::META::NAME#2"
+kappa = "b4088796de7626ce05034ec0904925daed8535a90290cf472d26c11a1ec473ad"
+embedded = "81f8875ff897a8b093e22fbf87c218a04e72d7c7da5640fa28d8dfd441ae4fc4"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::on_loss_detection_timeout::__CALLSITE::META::NAME#3"
+kappa = "46ccdc2beb22cc1e062a6fc0f8632ef2e00a77b1089c5c05f87adbcad1146557"
+embedded = "3592c54ba0055fb52265889dd89f404db09ddce060f2ac1b1943d973f65b6b0f"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<9>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::on_packet_acked"
+kappa = "cdc37db6e29dcda290418cb5ece60d566669b068b160737ed76a512f2b02a0ad"
+at = "StreamId=u32"
+embedded = "e937c96b37b9e96e172e2d9f8a3633da953849de2e4fcbea306d047dc52a170f"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::on_packet_authenticated"
+kappa = "92df54444ee2d69a0ef258d1a7b06060e88f300041bc773bf02a4b355a208043"
+embedded = "6bc4f7d54d4ba41dd1e548471799f5d123661826c18c9bca9ba3de28a241c27a"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::on_path_validated"
+kappa = "d40878adc81288dc2d118bb080df02dbe4f570a8dd3fc6689bd918ec31e4225b"
+embedded = "25338538b47d2032dd7873bf38ecd75b8fd803ae08b60969e4baab0d6982eb56"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::path_changed"
+kappa = "66823fc98d23b5f25f3f114c84a57d866d7af2c03cc189b16a519d964d07ccb7"
+embedded = "89c4a1c772920013a4915d772c8895136635813e26fb00062ddbf60ebed2e952"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::peer_completed_address_validation"
+kappa = "5e46d5141cdbf0d8d28b55361fbe4129c2b13db0d433b9f6d4b7cc651b324a06"
+embedded = "8fe98ca815da6df1a13ef9436da9e22fd96c6b87f8af3ec277552c0a17362af8"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::peer_supports_ack_frequency"
+kappa = "e03b29ea37ebb69cec10b1a1cdc436c8c7a5bdae722316a1ca1e343c8aed2efe"
+embedded = "78b2e3a745e6d6bccde71268d3a2272a926b1b15d208391d5637b5be7a55738d"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::ping"
+kappa = "05aace291d8a306cf337cf7e8ecd3aa0a98bcc259524bef348ab39aca1991aff"
+embedded = "5d083d4a78cf1241a223be27fba4ca2271c24b881895db6e80012dd47dffdf50"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::poll"
+kappa = "90a9c24d866a2d793eec5a7871020a6b8979154dbc1bb0f91a57df5d50f57ac7"
+embedded = "49b00ad3cb0439d2bfaa4728127561f3d45fe92a211d32775daa75c0c3c7d1ae"
+status = "residue"
+cause = "mir::Ty: connection::Event"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::poll_endpoint_events"
+kappa = "601a055365331a5e2da74229e9c9ecf7093c4e18a5d0c3130c0fd715bc50a956"
+embedded = "fa1b91810b4343437f2089fe24b4c877964052807d5e445480ec2f19a69b5fb1"
+status = "residue"
+cause = "mir::Ty: shared::EndpointEvent"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::poll_timeout"
+kappa = "8421a854a7cb1ee99ebad7ed892e8950006dec9454af93ec156dc56907462a12"
+embedded = "ebe2d4ecea0fdb9217e18f7a03774b7680d9cedda273557385bd9743fa0c75aa"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::poll_transmit"
+kappa = "075d4df03f944147084bf12fe75c8a4582f8cec64ff83a71459a9955c33e216b"
+at = "Transmit=u32"
+embedded = "6032570b51f4efa9f38afa9d6e9ed11949384b6b1c63947f8bc4f0484beb39fb"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::poll_transmit::__CALLSITE::META::NAME"
+kappa = "9c62c97d0a32de3b046b2f51a58eaeaf9656a86c32be23134d402f907880183e"
+embedded = "ab8e263d852a3530916af63343ac0c150a46f36c185d38c4c6200996993f4aef"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<10>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::populate_packet"
+kappa = "4ac245cee42d3a6296bf4541cadcb2e059e05a75352278adb53a38fc905a5d83"
+embedded = "1b83a5d6450bcafcf981a2e3c745d8f6320110519b8dede137d84966dc3a59b8"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::SentFrames"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::populate_packet::__CALLSITE::META::NAME"
+kappa = "2a0e190ae1cabd2faa0a1c8255a567d00bf43fa1eb70da3acac9f163a8f29273"
+embedded = "220727a59b0e592110f537118be7f68ad50b5d8db47ef75b12cfdb86f5edc7c5"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<13>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::populate_packet::__CALLSITE::META::NAME#2"
+kappa = "7cfff8aaa58823735b12a4cd9c081996eef96d477c38cf8d841252c917e65f1c"
+embedded = "65c879478cad2d86a1de5c454ef1167db5ae877509e3f9f83c410abe80a31a1a"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::populate_packet::__CALLSITE::META::NAME#3"
+kappa = "c28fd44d18e33c1bf1ec3521ee29c4222a803f165e8691529696e9a54e748789"
+embedded = "8b66a3758b8629507272b11fdff8521ccfd29c4579de0a9ccd79e687d7fe42a3"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::populate_packet::__CALLSITE::META::NAME#4"
+kappa = "c28fd44d18e33c1bf1ec3521ee29c4222a803f165e8691529696e9a54e748789"
+embedded = "8b66a3758b8629507272b11fdff8521ccfd29c4579de0a9ccd79e687d7fe42a3"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::predict_1rtt_overhead"
+kappa = "803d7f0d21cb918a4c107e04bcf51fc28aeefc959ad66d0cfb109f9ef05883ab"
+embedded = "7d2050f6f16bcdd83e8727a9532f312e06a4b5bd509d7ec8e3011028dd7056a9"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_decrypted_packet"
+kappa = "ca75d54db51b7c0b62b61a6b66890247ae302f0834500c1b90069a118e930cc5"
+at = "Side=u32"
+embedded = "b5f911e28840504203100d95240af92567f38e7f59f3b529e80fe259d9ec67f3"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::ConnectionError"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_early_payload"
+kappa = "c6f409e85669a64e7a564be53b773a7ecb9d8bea0bf946b8b372a49038f96f0e"
+embedded = "fa5717a2881eee775571a16181c190c464bc3e393df6d795df764d172ecbccd4"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_early_payload::__CALLSITE::META::NAME"
+kappa = "f3364d647113a8905a8b346160c0de4488167e6cf06143750d94ae8fd830fb5e"
+embedded = "f8cf182f6cee9e61fe8da779b5a82bdb297ab178815b10f009d5698f34c0e27a"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_ecn"
+kappa = "25a1aec7113f1190526eff369b838b0f3457c9ea1f633e44fca35c0a29df06b6"
+embedded = "c62fb0c01cad598c98e5b34e725b5a55770170a6a617852365d4bc680a421c9d"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload"
+kappa = "aef3b23c8552b045841aad18475c334d0326bbb9880b9f2cf349263a2bb01ebc"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "b5fceb84cea156799f5d1575fa3eea10f37c214d51ba18d68139343c3a295b3e"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME"
+kappa = "f95f8a9165cbc86f133921e74bf1020c1e755a09166b8302e3f7ad7cf66927be"
+embedded = "36e416490c10660d3a4ab75e777c7c8b5485b3be710ee05367e507bc41c51272"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#10"
+kappa = "f95f8a9165cbc86f133921e74bf1020c1e755a09166b8302e3f7ad7cf66927be"
+embedded = "36e416490c10660d3a4ab75e777c7c8b5485b3be710ee05367e507bc41c51272"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#11"
+kappa = "5a451e7940d8dbdff51d7d4cced3d31f2c890225c8dabec24c4124b13d4eb187"
+embedded = "581d2c00ada2b813180fe1ef353466ee34488fed44cc22d37ea2dfa3464e23e9"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#12"
+kappa = "77d384c4c1a2013dcff229988568b99f48733f156e84ab73bd5ebfdce74ad050"
+embedded = "2f956d2c8e2b4b2ed8f81a2a83d6be4b5b5a4d45e67e8f03c98423c85ddcca9d"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#13"
+kappa = "77d384c4c1a2013dcff229988568b99f48733f156e84ab73bd5ebfdce74ad050"
+embedded = "2f956d2c8e2b4b2ed8f81a2a83d6be4b5b5a4d45e67e8f03c98423c85ddcca9d"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#14"
+kappa = "309a519a645e1339a319e5d7d25950e0799020130b3f3ce40a4b55f46dc94d42"
+embedded = "a91737c4cb7fd2fed6ac4e3e36f95dc52d9e5a26bb66901355dad42a5fc4c557"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#15"
+kappa = "518a3597f3005e2a010ee110f632ed3b68fc162732b6c309e54a0afb82137ac5"
+embedded = "08558b0143654051aac48c280d25732901bf1e85d8e50caec89472566406ed3c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#2"
+kappa = "77d384c4c1a2013dcff229988568b99f48733f156e84ab73bd5ebfdce74ad050"
+embedded = "2f956d2c8e2b4b2ed8f81a2a83d6be4b5b5a4d45e67e8f03c98423c85ddcca9d"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#3"
+kappa = "70adc9df87f615568f813ffa1a6d9eeddf8870b9bf94bb56bea4d5c67d454273"
+embedded = "beddd2d6b28e754cb4df226466da018481c7c959465c9d0ee05314968fb6103e"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#4"
+kappa = "8475be16feafca6ab86397ff6e3f557ce6e93f1fd3a58f2d3783ddd1fe394d74"
+embedded = "a6c53afb7b994876d6fd7783ade34d03a51c01a6ebfa9b8eb3a2917e5658364b"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<15>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#5"
+kappa = "ec2395c8c246797c5683fa6d42385d901e55e18a5b077114640fb632a8405aa8"
+embedded = "d61fa788a2a8723b0a701556dff3daf328b4d3ef1e0fa4873432fa19c807ca7c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#6"
+kappa = "77d384c4c1a2013dcff229988568b99f48733f156e84ab73bd5ebfdce74ad050"
+embedded = "2f956d2c8e2b4b2ed8f81a2a83d6be4b5b5a4d45e67e8f03c98423c85ddcca9d"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#7"
+kappa = "f95f8a9165cbc86f133921e74bf1020c1e755a09166b8302e3f7ad7cf66927be"
+embedded = "36e416490c10660d3a4ab75e777c7c8b5485b3be710ee05367e507bc41c51272"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#8"
+kappa = "99ff9addafb6021fd05cc4d2f5272ea7b515646ff4af1ad3f320b0b1f3ddc420"
+embedded = "2ad9efa19a7feee13394156f8ce1fdb00540e5391a3ed1d63e4b224dc1b5db71"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::process_payload::__CALLSITE::META::NAME#9"
+kappa = "70adc9df87f615568f813ffa1a6d9eeddf8870b9bf94bb56bea4d5c67d454273"
+embedded = "beddd2d6b28e754cb4df226466da018481c7c959465c9d0ee05314968fb6103e"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::pto"
+kappa = "d3ff94b51ad2c05b527f1ad976ec4067bfef3719aec7821b017bfe723d1d8001"
+embedded = "841303e3c8d248716c10e47b59bc0839a1a042ec3266e82a91966a4d975a90f8"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::pto_time_and_space"
+kappa = "de3e6b9c08215d9c575c48df5a5a62c93dbb4ebf6ca1df2ad3d2ee4c5238ae92"
+embedded = "6f5a5813268fd24213b90447045a7aed7ff3d5d0e5defb5215600e30153593a6"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::read_crypto"
+kappa = "c505a89dfc543cce3ab964a926fd5d9ea46bec66fb71852140b28942e50e7057"
+embedded = "752f13e9bb84c6f4b1d8dabe12f19a379200237678e6e2f558430ecb00e7bea9"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::recv_stream"
+kappa = "d826d72aa207409a1a243646160c818a8a6cd8e41578ade6a3b58fe95ae5421e"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "a15d75fb8efd929983623186c5c0b242e807dd44d4cea7ef9699c2852eec6fa7"
+status = "residue"
+cause = "mir::Ty: connection::streams::RecvStream<'_>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::remote_address"
+kappa = "d9235b7344f5691634fab1fb3de7a5b1307f3224ce6f37f4bab0f1e31f330b8a"
+embedded = "0dc0be338abddf7710af2724d588b97f74c200478feee7fe765a8bf1ae868345"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::remove_in_flight"
+kappa = "18920a3010861224a3d637592e319ed435b950acb7860d1ea989648fce28b9ca"
+embedded = "246c015734e4fdaa8260083112d1cedf8da4c0bfa1eddbbc1e6125286ee12e17"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::reset_cid_retirement"
+kappa = "c1ebf72fb6287c2116a3cb4e7e750c803b7334946362bee78955abd795614bae"
+embedded = "d9ede814e3a27413f03e7fc032d12653c9bbb0974c26a65fb3655bbb9d3bd110"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::reset_idle_timeout"
+kappa = "6480361c718ca7ea4b438048db089c36748036e4e55fbe76d10000cabd6f125c"
+embedded = "e45fb48e9e482a9921b1300b6e481e919aa38fa9c048eed7596f08bc01b51da9"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::reset_keep_alive"
+kappa = "16be7dc5a732f75193b2427291cbc6eb9284729b048cf383c001edde3b57f37d"
+embedded = "b8cc259c92d904966554b99ac9d1d884c8d30f884f4f18033a18b122f061321e"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::rtt"
+kappa = "67b87881bff5b8fc5dc200381f9824cbbfbc6a2668797beb6597cb50a790c68d"
+embedded = "c827f5329ba2ffa09db1c9fc63ece2ae2aec603c8611105410b9f1d6f80b26fa"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::send_path_challenge"
+kappa = "a973414a6ad03b63fc3f8391dd53a7194931a502e92d8d310227679873968814"
+at = "Transmit=u32"
+embedded = "1af808f6f00b4463ff4994fef6e2131fa9c5ab61895567ffa147dec253f003e4"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::send_stream"
+kappa = "0a7ff4797fa139953078273e35bb8bd97bc4a569dfa4406fdf18e80ff5fb1a31"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "df4cee5741ce0e6adcea2a85e7cfedeb3e2e7ab0b7608028eaca393378afe925"
+status = "residue"
+cause = "mir::Ty: connection::streams::SendStream<'_>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::set_close_timer"
+kappa = "1e3c27b168503be26d73240258cf94d36a01f446a2efadba56e6696954e12c44"
+embedded = "86623603411c27495d1c351380ffe5b23204466da9cc23f31fdc3987fed81237"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::set_key_discard_timer"
+kappa = "28930c2d287e5d5c15e93580dedeaa76ba7c72d17009e74a5346215b94a59fa2"
+embedded = "721cdbdc85205d716026a203e56d141b816bb2b38ccbb6818f6f1c4fdafe475a"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::set_loss_detection_timer"
+kappa = "4da25450192555d5af234504a56b0419077eabe4b30e5374910bffc2c0f3d468"
+embedded = "efb7612fe025a73b2c48eea0ab74489c193ddd981b156bade0cc120f462a4895"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::set_max_concurrent_streams"
+kappa = "d43ffb6e0813370204c5afe42ba42e36bc13620b12f109ed85103b129216833e"
+at = "Dir=u32"
+embedded = "e02b8f84872b8933dd353abe0277bedbf8401ca48f991843d5ac8bd9528b2c0e"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::set_peer_params"
+kappa = "e90825bca725c919867eb5a417ba2f21324ec81549a3181f9387bf383234f406"
+embedded = "41683415e08426fcf7c617d09f8593148f6b3662c74f1b6004078d773dbedef4"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::set_receive_window"
+kappa = "2ea7833ad664aa57950bc497d57af3c2f1b60be039fb4f092d880a7635443c58"
+embedded = "74532ea247c9f38a6be100c478b02e47c45c2468fb3e035545d4246517281709"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::set_reset_token"
+kappa = "e616865acd500bea0082055765806a8b8ec9de2105ee70014262447a5f8255a1"
+embedded = "a1dc8e8c18250691b3aa4ca69954c20aee64d7b27d95917d1b62b43c7fb737ac"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::set_send_window"
+kappa = "948d198da257de75d0deb10c33ec9c3d82239abe94d3c31e38f9716edf8ab072"
+embedded = "58a2974aad8c3eba5f017bca3c919f5c65c7db72b4f93fcb3c40294749e167d8"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::side"
+kappa = "a0a4afac9a3d44007d17ba8d566b6fa7def9672d4849fbaa4ff99f9b8ec7a6f2"
+at = "Side=u32"
+embedded = "b77886e4bf60b43792d33a2e3053c471fb4d889c4c9f930418f9fceb22568247"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::space_can_send"
+kappa = "1b7bc97b9d42d56d3845c5946b0fc9428a42721de3ca5e870a00a6e867902c71"
+embedded = "218e4ed191450f31bbeca84726100edecb66140d31e6e326c64f8516217aa3af"
+status = "residue"
+cause = "mir::Ty: connection::spaces::SendableFrames"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::stats"
+kappa = "1003d87788baf77e7c48fc493e28fb03f326adae7447e15868a54ee232d1c364"
+embedded = "5a6258910b0fd4f3ce9a72519c6756e3219f82dabd30443b2951146867430b6c"
+status = "residue"
+cause = "mir::Ty: connection::stats::ConnectionStats"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::streams"
+kappa = "523ba9c74f100190c69ad3db5971844ab58319684264e89fbe402a17a0b9f3f1"
+embedded = "11df11f2b909c72fc013838210ab90cd0e160c61b28298a80789db4b1b75b36c"
+status = "residue"
+cause = "mir::Ty: connection::streams::Streams<'_>"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::tag_len_1rtt"
+kappa = "ec0102e6a6166a21ac7677710efa30a13ccb6543528f630c2792a923044adc74"
+embedded = "bcec2cf46870a63d757031d344313b55c79018e06733ec4f376cc1688b0a4724"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::try_populate_acks"
+kappa = "e54c0aa273a79b225e1d05813d2d6a9d606f7594f42b7b29b5046036b71cf9d4"
+embedded = "9eba5a50910ba06501551a133e3a36301ac7a08811caa8798b75e6715beb1fb2"
+status = "residue"
+cause = "mir::Ty: Instant"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::update_keys"
+kappa = "32f250a1013905a3d19ce664c0a74adbf400fe084dc39698b5ff82fc484cb1da"
+embedded = "d3e9be97f90672705b688aab7f468286a0d1cd13007c0285e2f11574598341f7"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::update_rem_cid"
+kappa = "226ea8609c184fe792d8797c4ba422ad9f4d6d6c30d07c2618f22c917256ba92"
+embedded = "085c72546cbef28b165f86ee4095d158ca282df600588574b74f44b53b2b9139"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::upgrade_crypto"
+kappa = "00ae397d2364d93a47574a8793114f2dd08b039c3a5d3907e115465df9ae75ca"
+embedded = "cd7a4ea228dd7bbca34e486298ea05be0df40e317f8db2f3d3ed130d09a6e401"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::Connection::write_crypto"
+kappa = "1689116bacfd8ebdc62f74c4d354aa28c472568c6112b0d937bc99903add3ed5"
+embedded = "b94df60aad78d6f193346ed12f64fe1a978ddee5734dc72dbc1593ebb01be287"
+status = "residue"
+cause = "mir::Ty: connection::Connection"
+
+[[fn]]
+path = "quinn-proto::connection::ConnectionError::from"
+kappa = "a554cfce0b155fd72c67c6f916d4385b91eaad7dab7a0fee42ed8ee7bc4f60ff"
+embedded = "5aa488ef3407fb2e308353fe8330fff53358b399d2cb2156fe8652250ddf14ea"
+status = "residue"
+cause = "mir::Ty: connection::ConnectionError"
+
+[[fn]]
+path = "quinn-proto::connection::ConnectionSide::from"
+kappa = "2e362f43e49f732d8bc3dca487531756659428f00fb56a314b3ad90f8f71a5cd"
+embedded = "e632ddbc05d2262890f554d312600feff5c62f872d46296a0ae75123dcc8eeb1"
+status = "residue"
+cause = "mir::Ty: connection::ConnectionSide"
+
+[[fn]]
+path = "quinn-proto::connection::ConnectionSide::is_client"
+kappa = "bc3822c83964e1dd76868f2d60d0d9743b694582e5428b853cdfb477be845352"
+at = "Side=u32"
+embedded = "d96cce8309480128c9c8cb1c5234c4b675f2fcc30ad66d48f54348f90c5ddd06"
+status = "residue"
+cause = "mir::Ty: ConnectionSide"
+
+[[fn]]
+path = "quinn-proto::connection::ConnectionSide::is_server"
+kappa = "263e02a89eb97666c7d13eb4de5930967d84c36d96b4495c708cb1214371c55c"
+at = "Side=u32"
+embedded = "0fb04167ff292e07e1080d146732a2695cc2ca14ae9a7224e3605bd14b92038c"
+status = "residue"
+cause = "mir::Ty: ConnectionSide"
+
+[[fn]]
+path = "quinn-proto::connection::ConnectionSide::remote_may_migrate"
+kappa = "5c877a2906a6115e5c825873edc6775a235262d09ca748dfe96c0b630c236357"
+embedded = "80616271283b7544871e58bf906cdef594a42ac8835dd6f136b1d9589a029d77"
+status = "residue"
+cause = "mir::Ty: ConnectionSide"
+
+[[fn]]
+path = "quinn-proto::connection::ConnectionSide::side"
+kappa = "dcaa9d504d1c073095c3dc067d587d22cbbfe2c56cbbc693194cf8481aa81465"
+at = "Side=u32"
+embedded = "c88c6a61abffe6882befc56b9c453f09d7978ec4ffd899ab91c8f1103b6a20e0"
+status = "residue"
+cause = "mir::Ty: ConnectionSide"
+
+[[fn]]
+path = "quinn-proto::connection::Error::from"
+kappa = "a81fc1d44978243ddbdaae50db4db9d414b95056f84ee5973ecf70405fd8e809"
+embedded = "8db889effb7d57e1f1d4ac23c0a94fb0c00ef12e98e15fd061a2bb9be9ab1024"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-proto::connection::SentFrames::is_ack_only"
+kappa = "e28d67bc82c4ccaf671641dc955efc9c1b412431067b133495ab8ef231fb88ab"
+embedded = "e4cd7f51452b695e6bb9020594704dc78ea90574424f962594df913582b30956"
+status = "residue"
+cause = "mir::Ty: SentFrames"
+
+[[fn]]
+path = "quinn-proto::connection::SideArgs::path_validated"
+kappa = "b7c9d0c0509cd30081e53ddb8ffa6f052cd7f9e1d9b146038f338422eb797cfd"
+embedded = "5501edce61ab3e52e30074877eaf59af002848a9127191f69350b24f136455b6"
+status = "residue"
+cause = "mir::Ty: SideArgs"
+
+[[fn]]
+path = "quinn-proto::connection::SideArgs::pref_addr_cid"
+kappa = "7d5e45e34cb8d644194e73c96562c48178526db9689196d3a5e07df7e913b67d"
+embedded = "160825871d6026f97188319587c9509029b04d2e8483a1c5a62032b017085632"
+status = "residue"
+cause = "mir::Ty: shared::ConnectionId"
+
+[[fn]]
+path = "quinn-proto::connection::SideArgs::side"
+kappa = "afacddff2e7295fb5dccfa04ce7b7d2d1a6da850ed6c82c59bf7dea7840fa9bc"
+at = "Side=u32"
+embedded = "1310d6fdb0a15c59cad040c3b354af934ae30aa5ec8a0fc691685429b9d706ab"
+status = "residue"
+cause = "mir::Ty: SideArgs"
+
+[[fn]]
+path = "quinn-proto::connection::State::closed"
+kappa = "8f511b0b1484af9d5d1404a1682cec0929c574d75571b63dcdc4f7f418ce0c90"
+at = "R=u32"
+embedded = "acf02ffe4df3282fc854e08296b664aa70b626218c52f281ab17746de7f9d476"
+status = "residue"
+cause = "mir::Ty: connection::State"
+
+[[fn]]
+path = "quinn-proto::connection::State::is_closed"
+kappa = "b2c641835cdd82d26cc482729f3436bbc7346aca6f052f01bfb9770be2ab8839"
+embedded = "356597039beae120ed3d86094b6c0947b7dfe1f2942cf005b6c52c7fa361c457"
+status = "residue"
+cause = "mir::Ty: connection::State"
+
+[[fn]]
+path = "quinn-proto::connection::State::is_drained"
+kappa = "52936bd4d1233fdf0da7a9bcab147c5cf24f8c0a1ce827698b756c1afa6bb3f4"
+embedded = "fd304737ea456c730cb62bfefcd0502bdba6c5507cc37a4447a3ad85c3f387bb"
+status = "residue"
+cause = "mir::Ty: connection::State"
+
+[[fn]]
+path = "quinn-proto::connection::State::is_established"
+kappa = "bf7a5a560e6c2ca27c9b3ef8e35c3e5ef9c28bce5052fc9f5a322d065a7cebc6"
+embedded = "291d23be122e8940084b9d40cc76f316ead51e16600f44afb26a8afeeb9d6e7d"
+status = "residue"
+cause = "mir::Ty: connection::State"
+
+[[fn]]
+path = "quinn-proto::connection::State::is_handshake"
+kappa = "1f0701f7feadde034e31e665a2c2db8ad3b78c4714f5b81256bef97d39930f5d"
+embedded = "e249d20d613d54735b8ca8456abd37f0bc80515011e1aa4a901f85ab77745076"
+status = "residue"
+cause = "mir::Ty: connection::State"
+
+[[fn]]
+path = "quinn-proto::connection::state::<impl at src/connection/mod.rs:4003:14: 4003:19>::clone"
+kappa = "52a5011b2d98593479c8ff0d0ae94d837f42d858a876b227611e6a2202f06cbb"
+embedded = "841424f963f242248b723a28cae9b4abc26114915d7a258a933fcd890cfc5505"
+status = "residue"
+cause = "mir::Ty: connection::state::Handshake"
+
+[[fn]]
+path = "quinn-proto::connection::state::<impl at src/connection/mod.rs:4020:14: 4020:19>::clone"
+kappa = "883254ff0273bca19d728127622aedfd8111e5d2289ed0230a0f7d9bca664208"
+embedded = "40861676650c472755a0997db28aa825b957159ec2c516a93f48db474ec56c0f"
+status = "residue"
+cause = "mir::Ty: connection::state::Closed"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:116:10: 116:17>::default"
+kappa = "3a85337b19c6eb5c6759eeedd6a8690774c6be9d1c00f39a07073eb6c1c8c17f"
+embedded = "eb72d9ee0cafa7a1b0d9aa08f537289fe965d7bafb89d9d4be07fbd35435b8f7"
+status = "residue"
+cause = "mir::Ty: connection::datagrams::DatagramState"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:228:10: 228:17>::default"
+kappa = "af9667ff48bc5d115e5f263ad0a1a784884c1c9ba4baae89407b57f05ff03857"
+embedded = "0a4ef4b8313fa4b77e33864f8ef954ea3d62d1ff42ba74f9de8223170d0fcceb"
+status = "residue"
+cause = "mir::Ty: connection::datagrams::DatagramBuffer"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:339:10: 339:15>::fmt"
+kappa = "8d99c8ab9271894d1248c3643299cc853cbe51a690cf569e96ae6d3f2c4f2651"
+embedded = "99f8dcd163026bb41984bfc299c1dfcf1416322e1b09ded3c22e1e50938b586c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:339:17: 339:22>::fmt"
+kappa = "3b5017243691dca2b27371e7eb302e4b67602b3625d41647a4298c11efff303e"
+embedded = "ee26a938ae183d040b5a7404dfb28cb094d3cc4bacccb3f3eacdbacfa03edfe2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:339:24: 339:29>::clone"
+kappa = "7ac1ff83f9a182b5455d2540ca0b0f0ea7277082d9c2bb35285f003d4cbb8cf2"
+embedded = "660a5c8169b9fb67cbb6eab49c72165133575135b33e892d048e4781809464ab"
+status = "residue"
+cause = "mir::Ty: connection::datagrams::SendDatagramError"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:339:31: 339:33>::assert_fields_are_eq"
+kappa = "4161d25fcd8a6c8c20717842c78a5460c9be7cdda9a083ef99dcfad165b38049"
+embedded = "10874ddcbbafbb2d276ef40d80edc194561fe73c580077c43ac468ae24034b00"
+status = "residue"
+cause = "mir::Ty: SendDatagramError"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:339:35: 339:44>::eq"
+kappa = "b44e61b4f0911872bba054eaae2e0d00101f7566c51c253038aa322326ce0d83"
+embedded = "e8bb112c42e5ef6163fb676f5ba7979e1a6fcba02e92b3facf59b2aa18f87f1c"
+status = "residue"
+cause = "mir::Ty: SendDatagramError"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:339:46: 339:49>::cmp"
+kappa = "01fc9f6dcc34b501bfb6c5d675c35ed952c37b8553e5afc3a9382b0e0761b595"
+embedded = "79d04f67dc9c89c999cfd615415c3fdfe7acc0f88ecbbccd27a98ce488871976"
+status = "residue"
+cause = "mir::Ty: SendDatagramError"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:339:51: 339:61>::partial_cmp"
+kappa = "ba75f722f6229fc7411123055020651a76bd4d95092072785315696be8309741"
+embedded = "41262ddc7bf929e5f60a2c6a4fb3e436ca1d58ecd1412c7b769ceb5f7d32e684"
+status = "residue"
+cause = "mir::Ty: SendDatagramError"
+
+[[fn]]
+path = "quinn-proto::datagrams::<impl at src/connection/datagrams.rs:339:63: 339:67>::hash"
+kappa = "f4b6d32d458c5142513ac9da2a1da520291633cc54fa087483e2ef33356e5ed4"
+embedded = "e2fff7e72d919806d4a799c07049533bcfb269503ad0d53f8a649d154c1c46e7"
+status = "residue"
+cause = "mir::Ty: SendDatagramError"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramBuffer::can_send_1rtt"
+kappa = "9352e515575a7797c500c55fe429415e8dc97ebc043a8d6a71a58f7c5e773d60"
+embedded = "6f1a2ef95b5d2c3864dc49e1bd84593b29eb7739b2ebe96895a867e9ad1ea638"
+status = "residue"
+cause = "mir::Ty: DatagramBuffer"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramBuffer::is_empty"
+kappa = "a53aaff6df2bc378ee51af07a768efce8467eef89be1de4b784007f563bf8706"
+embedded = "8760cd115e128aa006f316b01b6a8fd698190a7193d5c5c7b9d16856baba33f1"
+status = "residue"
+cause = "mir::Ty: DatagramBuffer"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramBuffer::memory_used"
+kappa = "5ac56a8632599dff1cd2ea06b8f408564f178402970ba04f12f13341b033dc53"
+embedded = "b5f397802db6b1707a009c255267746c0b30ca0b52bacef3840e8193181190fd"
+status = "residue"
+cause = "mir::Ty: DatagramBuffer"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramBuffer::pop_front"
+kappa = "3110868cf6c395c4826478ff8e5ef4ad4301c0896e9285f90ac05325ead4199a"
+embedded = "4aadbdd13c3520b8add90b273a66f0d97310ef021c5e40b7d69ea83a97e78408"
+status = "residue"
+cause = "mir::Ty: frame::Datagram"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramBuffer::push_back"
+kappa = "3763e3b1673769bc61cf82f13f6a7c93a11db50b64c5fe5d1f99cc84c6e15174"
+embedded = "905ac95cd34f618eb6f148e427e15f0c87aa512d80bf2726ac0afea0c6d7454a"
+status = "residue"
+cause = "mir::Ty: DatagramBuffer"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramBuffer::push_front"
+kappa = "2e08fffbba4e737b1c4e8f05407d036b8dc1c2514693f51842c975a6dc326885"
+embedded = "5a3ba6f8a16f2d13d9123d432c9114f1ddc93c4597617a55d4a99c18b4a8b32e"
+status = "residue"
+cause = "mir::Ty: DatagramBuffer"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramState::drop_oversized"
+kappa = "7c1bf87571f14fc1d5c806b065c3c319997be0f274575882dd6dad6ad447667f"
+embedded = "601f47c3629e0bebdfebcacf31ee7a33c0efa4960ae20956ddad567aab84523e"
+status = "residue"
+cause = "mir::Ty: DatagramState"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramState::has_send_buffer_space"
+kappa = "913ddb320558fb88a9b097c6f5c7539824df37eb1c46ded3fcb0d88cd1bd6b32"
+embedded = "eb947f059a5104c26bb14c98027b07f41e11d7b8d92debe638e1650c0c653d3c"
+status = "residue"
+cause = "mir::Ty: DatagramState"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramState::make_space_for"
+kappa = "ca82debc1b85c3da1a8a0b4edb18ec0015d7d8250a46ec4ffbc30b81ceddac64"
+embedded = "fae229276d7d87e9276fafd85f77ba89df99eb1bbe1cf4976556006042a9c910"
+status = "residue"
+cause = "mir::Ty: DatagramState"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramState::make_space_for::__CALLSITE::META::NAME"
+kappa = "9a1be6172a37b95a983d499abad0697e8ff9ec78a0e25a9770783fa4918d203a"
+embedded = "dd46b8d490911041375bfaa53b4ca6cee140f1466c107ba470d1d685e2ce268b"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramState::received"
+kappa = "3fd98c98301975a474bcd4f1991105fc7618010f13a2d0c7689c9623efdd3db5"
+embedded = "829c316c539af282faef5b6d9388deb8e6c5bcbe8c55da8790eaae4edc539c89"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramState::recv"
+kappa = "b749a52a815c61045f4ea3d59ed0496bbaa05bd57e71f0ea59cdd9501b9a27d6"
+embedded = "e6be2d810afcde70ef5560238911c904845b58897742dc90c69f0c324b0b7367"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramState::write"
+kappa = "7ed0200d226fad1da58dcd9360d265889f8dd9abd16ac4323d12d26d40fedc19"
+embedded = "a77733d29d2e8a9c5929e7944b1fb9f19f7e1741d382618172f2e4369db54bdb"
+status = "residue"
+cause = "mir::Ty: DatagramState"
+
+[[fn]]
+path = "quinn-proto::datagrams::DatagramState::write::__CALLSITE::META::NAME"
+kappa = "4e02816dae007ab725b6f2f232c1c6fdebef6f503deadf0da77bf60a087b456b"
+embedded = "8af4dee1781f5ccc269d943db78e25a8f3f6ff41649ad182da45061adce4cdc4"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::datagrams::Datagrams::drop_oversized"
+kappa = "3540e8dd21cd92b50423e8e90d9ec2230a09e8324804504b2318e8108bc54f84"
+embedded = "dd965a7f2700378723bd0d4b5c056d1dd660d7314e450bbab23eb34675aba13f"
+status = "residue"
+cause = "mir::Ty: Datagrams<'_>"
+
+[[fn]]
+path = "quinn-proto::datagrams::Datagrams::max_size"
+kappa = "89fba9667dae3edd51aaade60cacf50a749e4a98d34431f873be26070056007c"
+embedded = "1ce3f106b649c5b1f37dca43c0bdcf1bc5e27bd51e5c00382c31d423fc9650d1"
+status = "residue"
+cause = "mir::Ty: Datagrams<'_>"
+
+[[fn]]
+path = "quinn-proto::datagrams::Datagrams::recv"
+kappa = "19aa15fb98b14693be2863e8b48aac1904bdaa147edde8349bc5bf0728a6c756"
+embedded = "850f3078f42febeae7b46f487d86adfd16bb2c9577fc6f1124191881b9f906cc"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "quinn-proto::datagrams::Datagrams::send"
+kappa = "222d7b80fe00a272b94a414fe2c2f82734f5c7f7e110c8a9ebc9ba797749358b"
+embedded = "8b10dab5b892d383d2b96c38f924b8bb86c63a39dae3689b527ea7692db561c0"
+status = "residue"
+cause = "mir::Ty: connection::datagrams::SendDatagramError"
+
+[[fn]]
+path = "quinn-proto::datagrams::Datagrams::send_buffer_space"
+kappa = "06eb250c625da1009c2e68cb4a0967ae16a27a87b57874c34061db6a1811fba9"
+embedded = "b67ce2bee2a0d8e7da9e731168d8695b283cb6a7092b62778575e0cf4a27490e"
+status = "residue"
+cause = "mir::Ty: Datagrams<'_>"
+
+[[fn]]
+path = "quinn-proto::decrypt_packet_body"
+kappa = "5aa3fbac9823decd1270f4b08b8f266e3669575d2646d41ff182473ca6759e4c"
+embedded = "4a11ad1007fe51637e4c88520cd738cb80e828fbd38aaccb27d0257172dde95b"
+status = "residue"
+cause = "mir::Ty: connection::packet_crypto::DecryptPacketResult"
+
+[[fn]]
+path = "quinn-proto::get_max_ack_delay"
+kappa = "36eb81697a085427ddb74c9c68bcd9ad3e0bbd5ecc65a3cc9e3a97fe49a72bbf"
+embedded = "a68392f194dd80c2b6bdbae84a102becf276268958a946c34e8bfd083def3c38"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::get_or_insert_recv"
+kappa = "8917585231d3ad363dac8fcdb08a22b6ebe1c2a0938d131ae33d878797a14da2"
+embedded = "2bf4368d1286f10af882ed9859e2ec2dccb066aab0d2523394a7d1c90f2286a2"
+status = "residue"
+cause = "mir::AggregateKind::Closure: get_or_insert_recv::{closure#0}: type outside the lift: connection::streams::recv::Recv"
+
+[[fn]]
+path = "quinn-proto::get_or_insert_send"
+kappa = "3a51c8857dad7bac5088a8b5498a58cfeaab824dc89c496cd6fa0a8cb664302d"
+embedded = "f339060ba6c2b4aaaac037a3d57851aad043aaa6f4b595bb26c46b257265f304"
+status = "residue"
+cause = "mir::Ty: varint::VarInt"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:171:10: 171:15>::fmt"
+kappa = "6999e6ba26b11e450e289d3bf4dedcbd0a2237ab5795223be279525a6a2c7b10"
+embedded = "7760dfe0ab24b8242e19d568c1185f0f9a6b5c2ce20d6fd0c7e3dc881e67d147"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:171:17: 171:22>::clone"
+kappa = "798a3e92cb0d78b86129557e55a2aeb66d1f98f60fcf81d129a21e2bfece11a3"
+embedded = "57dedbb22563a707051769d76591878a1a891bdca196b92f8cd5abf0154a7e71"
+status = "residue"
+cause = "mir::Ty: connection::mtud::EnabledMtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:274:10: 274:15>::fmt"
+kappa = "b31783f6df096959ddf002ae26c128ab75f07815cac66c039795ab5fd96e0391"
+embedded = "a31c98aff3a68d3e93509421b816f2c2c13dce4d43b5414cba4143d391ec65e7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:274:17: 274:22>::clone"
+kappa = "8222db45a84c267ac3b662df1fd97b22e8454e06f068651e47e0aa502e85de8d"
+embedded = "82038837298f66ca0f60d7450781f4475ef915987e5e2a7fc094a456f301cf06"
+status = "residue"
+cause = "mir::Ty: connection::mtud::Phase"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:284:10: 284:15>::fmt"
+kappa = "ba8e5444ca015e7021edd3c4444bd5949e491bb505741082c5efded4f7cf48b0"
+embedded = "cbd7a15c1cdab7bf3f3783b1681555ddc8a288afac9eaa7d77e6ff577cefe71b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:284:17: 284:22>::clone"
+kappa = "c4f8bc0dd8a31ddbbab9992e79c0b9ebba2ab4d7c15c752041aa7da7529556e5"
+embedded = "9adc2899dc527a8e60b07e9ed1d85bf12f27e930ff066274b3c8c6ed5ad3ff83"
+status = "residue"
+cause = "mir::Ty: connection::mtud::SearchState"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:366:10: 366:15>::clone"
+kappa = "3b1034ed92c4019ecab0bd9f6d08c179f9fc2f0cb0eb78f72dadff01ea3e3362"
+embedded = "686305d5aab5a502edded3d550e8e16dc757333d6c013deb9798ebcaac89f626"
+status = "residue"
+cause = "mir::Ty: connection::mtud::BlackHoleDetector"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:513:16: 513:21>::clone"
+kappa = "c2f45dc2fc1671d80963a55e4e65c1a185daf59ce301d34c3968cc642ed0769d"
+embedded = "0041285bf9bbc8dccae63c1c9ca60e46be7f7a333897d9dfa2e6ef56938da37c"
+status = "residue"
+cause = "mir::Ty: connection::mtud::LossBurst"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:518:16: 518:21>::clone"
+kappa = "89fdd0a5cd3a9b3528f93b1074ed90d887d1b9770bb88ce47b1fea0d6f11098b"
+embedded = "564dfa76d59cbdd0437f40a1117b1098a0cffaee28db73261609d030a5bf6244"
+status = "residue"
+cause = "mir::Ty: connection::mtud::CurrentLossBurst"
+
+[[fn]]
+path = "quinn-proto::mtud::<impl at src/connection/mtud.rs:8:10: 8:15>::clone"
+kappa = "3de715088c173d35d13b8b30c2131d073021b9f0f0a28ddee635269133306387"
+embedded = "e0be2dc9702570318bed4ab444850ab0949715b0555db79014d474c6d277faf1"
+status = "residue"
+cause = "mir::Ty: connection::mtud::MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::BlackHoleDetector::black_hole_detected"
+kappa = "8040393334f767e80dba2b4074cbbd9e3329d3085e6ce63922e66a30d752a5d8"
+embedded = "01b5a268200b12ebf7ea69760e147fec9efec45770d057f2fc4e062c1788e737"
+status = "residue"
+cause = "mir::Ty: BlackHoleDetector"
+
+[[fn]]
+path = "quinn-proto::mtud::BlackHoleDetector::finish_loss_burst"
+kappa = "261227303b8d8419e4a6da9462b50a81154d383ee62d8d497a6a57df669dbf84"
+embedded = "27d6f9ead11ce176bbfaddf743b2ac1c8468e80d66842a707c5c240a66cb99ec"
+status = "residue"
+cause = "mir::Ty: BlackHoleDetector"
+
+[[fn]]
+path = "quinn-proto::mtud::BlackHoleDetector::new"
+kappa = "18b80d47bb10876427b05999596562bfe1754af619b971c78c56ac6ec25d13ab"
+embedded = "548fd55236d3e4a8207877e75fc61419df6a2c789e96b02ef818206a0155bd04"
+status = "residue"
+cause = "mir::Ty: connection::mtud::BlackHoleDetector"
+
+[[fn]]
+path = "quinn-proto::mtud::BlackHoleDetector::on_non_probe_acked"
+kappa = "893802e8b283a3d641c35c00112494d8257106ac56d3a511a43952e71ac1ea16"
+embedded = "2694dd936fa7f1def9ef30cf44c2ac2bb55214d56ec60a717fca024ce092c4f5"
+status = "residue"
+cause = "mir::Ty: BlackHoleDetector"
+
+[[fn]]
+path = "quinn-proto::mtud::BlackHoleDetector::on_non_probe_lost"
+kappa = "973657a484beb409f108cf2a94a0750f82b70ff2f75cf8a49021849d28696db4"
+embedded = "5258fe899a1e9eee2d8d4b52dd39b6554b9382c87bc4e6bcc3b29e95eb771afd"
+status = "residue"
+cause = "mir::Ty: BlackHoleDetector"
+
+[[fn]]
+path = "quinn-proto::mtud::BlackHoleDetector::on_probe_acked"
+kappa = "58c412760c127c0e3630c23755cb90fe51d2b307ed4a88881b70de202bea3f66"
+embedded = "d8e887513d2c75b701ca9ce9b8f5539a3e6779ba8ede00e4a9bb1ca278326340"
+status = "residue"
+cause = "mir::Ty: BlackHoleDetector"
+
+[[fn]]
+path = "quinn-proto::mtud::EnabledMtuDiscovery::new"
+kappa = "c64710a00d6a67103259b30c57d6a96f13183d758e97db42b0bd27a6c3c9d262"
+embedded = "e4e498d0829b119fe985a318334b2baa1a6e4c71bfcebc51721ede36e82d309b"
+status = "residue"
+cause = "mir::Ty: connection::mtud::EnabledMtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::EnabledMtuDiscovery::on_black_hole_detected"
+kappa = "f011137f13afebb4cb8e09bef214922ca32249baba8eac4b4515eceee55062dc"
+embedded = "87b171ceade9978360a3ee44a033bb3e35d1f76fdb5c19738c0622c5387d23b1"
+status = "residue"
+cause = "mir::Ty: EnabledMtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::EnabledMtuDiscovery::on_probe_acked"
+kappa = "68270bb8d96f61e60e21fa81c43c043db06ae73b9a459d4d75678ad20c82fe96"
+embedded = "40053ca46f7cebee33a67d44642bdfb832d0075d954e8d16fe6e8927c5904139"
+status = "residue"
+cause = "mir::Ty: EnabledMtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::EnabledMtuDiscovery::on_probe_lost"
+kappa = "9fc320fb474c689e19492ce468a7092c10803f0c3d4578a1b21a2463590d5250"
+embedded = "8872fdc3944acef372227d9697013db2af84c46ac7af37b0befc4eae88f492a0"
+status = "residue"
+cause = "mir::Ty: EnabledMtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::EnabledMtuDiscovery::poll_transmit"
+kappa = "a530d67bbee61bc14e75e8df6284ce69f34f7ca4ee41c2bb37f1c835ad965986"
+embedded = "79f46d691aa78a82e61b2ea1def6d60943f02c23c8389a648e823718a4d9c16d"
+status = "residue"
+cause = "mir::Ty: EnabledMtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::black_hole_detected"
+kappa = "31db30657bd0106fb0c732f463b789ff64df1d4776009d03bdea310054a52593"
+embedded = "81c6fc03240652639c15ba2db83aa0bd4a49acbc639cbc2c78c79126de71cb0b"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::current_mtu"
+kappa = "90bc5f6a26d522894c1e4920b655578713a6e31594a3782730c81564f679a71c"
+embedded = "cae7a5aab3d91e77f1b78a52d1a5df6c700743170a8d4613fb029bf263d36476"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::disabled"
+kappa = "439023bffcc19e1c01307a689f323c9bf6e7091a71c1766b880b7da2cbf27925"
+embedded = "7ee0f783eea310508003c05eec50415fb6103a171b7fb361c3085cf6701e43ae"
+status = "residue"
+cause = "mir::Ty: connection::mtud::MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::in_flight_mtu_probe"
+kappa = "ae2f453d136cd9cbeddf91557193d92f42625840c89e03aeff09fd424e8bd2fc"
+embedded = "a99d89a6fe0653bf7890bcc21820a2d5895bec8b8fb63cad6c7e66782707e34d"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::new"
+kappa = "19ec31983e64ba72be460664e57fa0f03a165f5eebd72d975b90a0910e61b338"
+embedded = "e38d76e783ee53014aaaca8e5892dce7242d2bc361d8503f8f88f2ad7e4e7caa"
+status = "residue"
+cause = "mir::Ty: connection::mtud::MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::on_acked"
+kappa = "36e18f52b5640c0dd69692e31d83f14fd39adee324018c13d410e387414a081f"
+embedded = "b8e14cb6c9c5e890febe721a933e51a1be08127eb788a12826fb84183c59c1ec"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::on_acked::__CALLSITE::META::NAME"
+kappa = "7cee26076943e91e701f0cfbdbd3535622ba86fb89f65a783c4cae552e4842a9"
+embedded = "b5c00050ccbee56450d29a8a96dde4126439e83f621bcfa099b6b5ac3dd8c2e4"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<11>"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::on_non_probe_lost"
+kappa = "37dfbc27dc74b3c45f85d99634e088271ccfb7b020863f0914a28b6b900921c8"
+embedded = "0cbed55c023734aa1e6b2de8e14052cb1c05962eddfb72e44ce246c97053ce51"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::on_peer_max_udp_payload_size_received"
+kappa = "e5eb8bbe260fa5363756347480b9b605c2379826fabdc0b528fb576d0d8bb3ee"
+embedded = "1812c743957db23c91dab046682091b2d49e8e1b3b1a2e4564e37eac38007edf"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::on_probe_lost"
+kappa = "a47e18428525cbfc880de15dadf7f77f44f33d1b9e4e257b7ebead59e60aad30"
+embedded = "6f606fd68cb6acbab1bca236637542b610c6649f2c6781b0ae7169d7f52a0bbe"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::poll_transmit"
+kappa = "eec16137befa367126735eca1808fc67dbacca6e2f748ffc3553984c06b3f9a9"
+embedded = "e3781f8fbe59e118b36ccf246363c04d3acde98bf956e1196c42cb4ee7f6a441"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::reset"
+kappa = "0ba0d8999ccb0e759db505548a11be7c92d1f1770ef2c4152ac087e1bf33b71e"
+embedded = "530a6eb7adbc5994b5f389cc2806bdfdfff92e7d70636b04e8859dbb88444a41"
+status = "residue"
+cause = "mir::Ty: MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::MtuDiscovery::with_state"
+kappa = "4c97926285d4b8c6af134ecb11ffe5ac7172c0aaa8b1cc2053a23f25474299b5"
+embedded = "885fe0eeb7aa71e09d6a6be316ac01bb8c20253bc8d866be1c0420ecfa5b70d7"
+status = "residue"
+cause = "mir::Ty: connection::mtud::MtuDiscovery"
+
+[[fn]]
+path = "quinn-proto::mtud::SearchState::new"
+kappa = "5760f5fea2a8c1f13bf3b178a7eff183b259be7800075403b5967d7bfacb8004"
+embedded = "28fc7ecabc4f1f3196a192466ceb33cdc3911a8be8fc1470e57a298870b26d4b"
+status = "residue"
+cause = "mir::Ty: connection::mtud::SearchState"
+
+[[fn]]
+path = "quinn-proto::mtud::SearchState::next_mtu_to_probe"
+kappa = "4f7365ba4120bfd6ed76a9f1563a6c12357d2d9437a62345ef75388bc5fe81e5"
+embedded = "f3db0d1c54a96737e009bcbe1a9ff5a4ea88993dfb066cf5684714f009bf99a9"
+status = "residue"
+cause = "mir::Ty: SearchState"
+
+[[fn]]
+path = "quinn-proto::negotiate_max_idle_timeout"
+kappa = "bb88d1903fa119dfac3c291bd009dd829462f2e002baf53d5ec87e1a29b3b22b"
+embedded = "6ab4da313deda7a77b4f88a9a6393364da01192a2c30e60a6c2cbeeb4129b528"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::optimal_capacity"
+kappa = "22fe1e6a3993001a05e47e0733d076b3f60d5027b3e0589e714d60456c3c4d28"
+embedded = "28e404904631e831e794e537ce1c3b6d5b0182d77ffd7918d3d29f9238bfa3a7"
+status = "residue"
+cause = "mir::Ty: Duration"
+
+[[fn]]
+path = "quinn-proto::pacing::Pacer::delay"
+kappa = "d9d173bdcf2051d8a1cd02377727018d4eac2622d28fa778f750fbbb8bd38ef6"
+embedded = "6e735d750fbe02bc1db152a1d172402835de5d187b7a05efdcf21e01eb30253d"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn-proto::pacing::Pacer::new"
+kappa = "85a37bc5854680f8fd29ce91018e440286757117e79280a3a9e5fbb9a2d1b043"
+embedded = "f0fe4472a36cffd4c5269b2e8e5e3e1046c1b9633caaf2003a0bc8614351c837"
+status = "residue"
+cause = "mir::Ty: connection::pacing::Pacer"
+
+[[fn]]
+path = "quinn-proto::pacing::Pacer::on_transmit"
+kappa = "0cdae2b9d344979491c4becaddd90e09b38342e8417ccd9d226d9e68b63b03e7"
+embedded = "028b69ad4ee4123f861235e24d605bec8ddb3b36b4209da789bad3bd64d4f69e"
+status = "residue"
+cause = "mir::Ty: Pacer"
+
+[[fn]]
+path = "quinn-proto::packet_builder::PacketBuilder::finish"
+kappa = "5fc29ce8ce387f7836445d1d9d68d3a917abc1c3fab78246601e9f210cb82c00"
+embedded = "123050021a9c1718fa97df67442da3206252da409fed629a67954c6a4b3dc68e"
+status = "residue"
+cause = "mir::Ty: PacketBuilder"
+
+[[fn]]
+path = "quinn-proto::packet_builder::PacketBuilder::finish_and_track"
+kappa = "1767ac68f9221fbaa959afe1630479928eca33947eeb1df3bc5135cd932d5d50"
+embedded = "f4ad9e98aa60822ca6ff5a8470bb7a4e1e07b16f6c744dc032616ceee17709b5"
+status = "residue"
+cause = "mir::Ty: PacketBuilder"
+
+[[fn]]
+path = "quinn-proto::packet_builder::PacketBuilder::new"
+kappa = "011956c7c797c072610947649a74a7156445412cd89a1a4f9b98aa6e3477a4a0"
+embedded = "9c8764d02dd5c79b9c5f5373d7cba0f6510ee073fd62392fd546e99218383f80"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::packet_builder::PacketBuilder"
+
+[[fn]]
+path = "quinn-proto::packet_builder::PacketBuilder::new::__CALLSITE::META::NAME"
+kappa = "a69112df22a1deac35546f89c606210c5e816180b912ea7d5b9e0575705c862e"
+embedded = "deff542c46b662a1cf62bf5fac678d9fdf3d625ac21761866496b86768149084"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "quinn-proto::packet_builder::PacketBuilder::new::__CALLSITE::META::NAME#2"
+kappa = "ed2b53f413ca6ba9e73bb0284b2e5555d7a2b9be1f72679ba352a2ab547cb7e2"
+embedded = "d513f0f1b69e5f83101f304e2fc28ba2db831ae3e8682fbac1e8deeb9dc38db6"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::packet_builder::PacketBuilder::pad_to"
+kappa = "da23bf75d7936423b19559c6249f2943011aa86d124e8634983394f4361ad6d0"
+embedded = "e625190c2c6b7225147f45def9d8721b1109709c8bf37c0fb030da2f72fa69db"
+status = "residue"
+cause = "mir::Ty: PacketBuilder"
+
+[[fn]]
+path = "quinn-proto::paths::<impl at src/connection/paths.rs:290:16: 290:21>::clone"
+kappa = "5b47a57f4c88a60df294686e3b9c2b22e5a2b1748e86b6a58afb21a62b858d6b"
+embedded = "1c14fa3f55111883eff9169c26b6ff844fdf2b4fc247ef22d89b747528129cf7"
+status = "residue"
+cause = "mir::Ty: connection::paths::RttEstimator"
+
+[[fn]]
+path = "quinn-proto::paths::<impl at src/connection/paths.rs:357:10: 357:17>::default"
+kappa = "c9588780bd787297418f99059b106473971e47bf77731096bdbcfd88e10c3ef0"
+embedded = "0cbcd8a87f658432062a2fd29788e48a8bafce1ff370833acc45f4d72587eefe"
+status = "residue"
+cause = "mir::Ty: connection::paths::PathResponses"
+
+[[fn]]
+path = "quinn-proto::paths::<impl at src/connection/paths.rs:415:16: 415:21>::clone"
+kappa = "630d0935ec8cc8a9a8cd8cc1a4670c6fd31569f1d4456584cffaf45f0b34e5a6"
+embedded = "afa7da6ab14997af5ee78001277c386bf64f9d9ce5d0c8f54d7a4c2d292536c2"
+status = "residue"
+cause = "mir::Ty: connection::paths::PathResponse"
+
+[[fn]]
+path = "quinn-proto::paths::InFlight::insert"
+kappa = "9e99771d7fc9113661507052533911b68eb97d52195b8efe3e255b837d5aac64"
+embedded = "f485a4ccc1638c8ba2597973180e8ce327009e2fba83fbc13542ee59cca95480"
+status = "residue"
+cause = "mir::Ty: InFlight"
+
+[[fn]]
+path = "quinn-proto::paths::InFlight::new"
+kappa = "eaa4518d1ef6c4c5140e1fbf9fdd5bbe14ac05a966598eca89d4a81b438ce619"
+embedded = "b87cc75ec1b07c8f6801c73a75e21031c2b3a268aa75a4bea7cc19a69fe6e583"
+status = "residue"
+cause = "mir::Ty: connection::paths::InFlight"
+
+[[fn]]
+path = "quinn-proto::paths::InFlight::remove"
+kappa = "e64e7048cee090f67127b12aee908f47cb0fda426584b99a6b6eb67f8dd7d320"
+embedded = "ee16707560fb806959d4fd622bfed80f934b7c0afeab7d4c742fb624456948b1"
+status = "residue"
+cause = "mir::Ty: InFlight"
+
+[[fn]]
+path = "quinn-proto::paths::PathData::anti_amplification_blocked"
+kappa = "6049d7c9495929672ee6d9fae1638647dcd189e38cd183b7c31933d24af7c0dd"
+embedded = "40be4821d7f48d405164d1c6489891a25a48675947402b29295c0b0eba5034ee"
+status = "residue"
+cause = "mir::Ty: PathData"
+
+[[fn]]
+path = "quinn-proto::paths::PathData::current_mtu"
+kappa = "bca40593cc67b1650805d43e56cef070d86c617d9a7d5251a76a95430b6b808e"
+embedded = "1672a59fa54fdff0f636314d42bc6858633f61c8e744f11b07e3c3bbf391c0ce"
+status = "residue"
+cause = "mir::Ty: PathData"
+
+[[fn]]
+path = "quinn-proto::paths::PathData::from_previous"
+kappa = "23c044545a7cb9bfb7b5a0a99de161a8b66dead5a654b844c60a9728646863ef"
+embedded = "0d1d14efd19e085b235407b03b0975d7b16cf74872c5141097aa6271ef24f803"
+status = "residue"
+cause = "mir::Ty: connection::paths::PathData"
+
+[[fn]]
+path = "quinn-proto::paths::PathData::generation"
+kappa = "b31ea34a9e51ab5e7f637945cd21d7af7dec84da8a9ad29782b3c6e48c7b1035"
+embedded = "65b1ba9c9202a5cf4b213e14fe9577d44b1bb6296a2c0f272810764fbf886d16"
+status = "residue"
+cause = "mir::Ty: PathData"
+
+[[fn]]
+path = "quinn-proto::paths::PathData::new"
+kappa = "47bb638c6387c209cb2f1e9a599e97c94c75b5d7b90a79aaa2d7d80e6890dad0"
+embedded = "64ecad4628873e56802312c7c4fa0f45bbf7885c1a78775d43f6a92f84153f69"
+status = "residue"
+cause = "mir::Ty: connection::paths::PathData"
+
+[[fn]]
+path = "quinn-proto::paths::PathData::remove_in_flight"
+kappa = "d5b11e22a43ce3ba49fd618f4d89ba76786f440a2dd0ba2a641052de67e18d84"
+embedded = "b7f911431bb2c1d7bc78dd41636baf458bec954e7e569c869c75328a6a70c48e"
+status = "residue"
+cause = "mir::Ty: PathData"
+
+[[fn]]
+path = "quinn-proto::paths::PathData::reset"
+kappa = "c81ef1e6ec725004884a0a3dc3e0ae354c120369fcdf29deeff4a5f9023d5852"
+embedded = "132193d2d9c0c355ed6af055721d51894788b0a0a01ee248065d0477bbbde64c"
+status = "residue"
+cause = "mir::Ty: PathData"
+
+[[fn]]
+path = "quinn-proto::paths::PathData::sent"
+kappa = "1a806c80e72ec8a816b63e0b7354a1c758758742840365e24b4503257ed94861"
+embedded = "f1fb747ba899f6112a1b81fa5a14df4ba77f5e96cb6a623f0b5731e6bac4fcd4"
+status = "residue"
+cause = "mir::Ty: PathData"
+
+[[fn]]
+path = "quinn-proto::paths::PathResponses::is_empty"
+kappa = "1853a151e0fd92c4ebd17b8007b728eb7ebbf5feaccd5e05f1eea41869af3c10"
+embedded = "e3b9154d43fddb2f64671de394f1c5b5d1f02dd40e5cf01c45a1afbfad9883bb"
+status = "residue"
+cause = "mir::Ty: PathResponses"
+
+[[fn]]
+path = "quinn-proto::paths::PathResponses::pop_off_path"
+kappa = "2a173dd4b4101b7d9b938f12f686120ae3ac4f4ab25dba17ca1c60ec87a7898a"
+embedded = "5b2b159bb706cc215a149c90f7a08c9b278c12ffe4ce5bbd86ba694eca1fd55c"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "quinn-proto::paths::PathResponses::pop_on_path"
+kappa = "ccfe3d346ec189d4c223e3e6275e1340a95726c72a95efdba7892102a926de16"
+embedded = "51f61377c8b7858c624f0a43c4bca66dcae4363885a74edc9225a6946fc76235"
+status = "residue"
+cause = "mir::Ty: PathResponses"
+
+[[fn]]
+path = "quinn-proto::paths::PathResponses::push"
+kappa = "b69aaf80b4e0b2d5993e5b986362c85a79fea2927c42c328ef5ee6cf1f0a6648"
+embedded = "93a855b9543b53d4180458a1a6fbfe6abe09e32f17cc5e9e182dbb990be5cd2d"
+status = "residue"
+cause = "mir::Ty: PathResponses"
+
+[[fn]]
+path = "quinn-proto::paths::RttEstimator::conservative"
+kappa = "490892a740cd418725b09a56440c0157b8b7536880d71272a7d8e8d0a5fafd37"
+embedded = "c433a65cb7edd271f176927e4176abd65bbcaeacd0ee0d5435d9b3e9aae1f306"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::paths::RttEstimator::get"
+kappa = "459da993d7ca90c6fca98235496fa42400c8c8ea53f0d852baeb1f633ada96e9"
+embedded = "83c6e3fd7068cacd37902597651caa12a934932b521d6594d5859c5198ee1a2f"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::paths::RttEstimator::min"
+kappa = "45b8ea435c05782977d70a9013064936c1824045267a498e50c4bcfdfeff3d87"
+embedded = "e326be59f2b2208d520a526f998c881990e2d7a65d1d0bc507e36caca36e3ced"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::paths::RttEstimator::new"
+kappa = "1d0d3ae6b413e18fe7299e136690b8c8d529e2a83d727bdc6ceab5bf5deff7fe"
+embedded = "a1e6be93696cf2baa38bf8f0a6d1b10d2899e1362ad18a07434292b4fa269675"
+status = "residue"
+cause = "mir::Ty: connection::paths::RttEstimator"
+
+[[fn]]
+path = "quinn-proto::paths::RttEstimator::pto_base"
+kappa = "48d3801ad28c97f9136150945bca690c26113e4ec2656f5791b678309d27de9a"
+embedded = "bf74c11f1cbdf773e73754c5ba2bf09b1267598480c5ad7158d4a94728cbac54"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::paths::RttEstimator::update"
+kappa = "e652eb983f395aacd3bfd375e3281e20f225470d383e0c155eb7f1353ea2d106"
+embedded = "76379bd900ce00a3f4f9f1f8847934aff29cacb44013cd073a8b2abf9f9d1947"
+status = "residue"
+cause = "mir::Ty: RttEstimator"
+
+[[fn]]
+path = "quinn-proto::qlog::<impl at src/connection/qlog.rs:47:10: 47:15>::clone"
+kappa = "75011a45e2f656019e43d0f6ed220e5fcd3a179080bee3b312a474322e39698f"
+embedded = "f24713b652353c4023b6de543a7e08e346e6a53e53ed701536e9d0ca9d60f8de"
+status = "residue"
+cause = "mir::Ty: connection::qlog::QlogSink"
+
+[[fn]]
+path = "quinn-proto::qlog::<impl at src/connection/qlog.rs:47:17: 47:24>::default"
+kappa = "a1a2ec74bf60df5827a890b9b135567eebd92cbd956149fccd50416b12d442ab"
+embedded = "881292807b6dc51d574d5f8a376f7ea46da19193c042d7d4cd1746759041f873"
+status = "residue"
+cause = "mir::Ty: connection::qlog::QlogSink"
+
+[[fn]]
+path = "quinn-proto::qlog::QlogSink::emit_packet_lost"
+kappa = "a30595fe00ba98a1ac45b2d62a768c9fad662e88a0c571a501c40e2f7293cb6a"
+embedded = "0ff7b163172f68f3e643e27e0185fcbf9fa3ae4d424f1c3254b982a5e714a824"
+status = "residue"
+cause = "mir::Ty: QlogSink"
+
+[[fn]]
+path = "quinn-proto::qlog::QlogSink::emit_packet_received"
+kappa = "ec4442a7aae509dcb74c47cc37a0ced178d8b6fc5ada55c3fbb02729333bdf70"
+embedded = "91bffb6e9da1c58e0157d8a50794ae9bd3654c0a78eac28a7a9632e703013b08"
+status = "residue"
+cause = "mir::Ty: QlogSink"
+
+[[fn]]
+path = "quinn-proto::qlog::QlogSink::emit_packet_sent"
+kappa = "0f580f58e76cb215a69f313a0a8edebd7c232b48d9e94599c8773a7c5348f614"
+embedded = "c87ddff5e256c6440ea07c81643b8104ed55dbbffa5fd941e6556b92a4d749f4"
+status = "residue"
+cause = "mir::Ty: QlogSink"
+
+[[fn]]
+path = "quinn-proto::qlog::QlogSink::emit_recovery_metrics"
+kappa = "005d7c135dec98a38403ed950ae810229d16824c6714657d16ed597aa9abbe31"
+embedded = "e881661afb24e6794bcc58c4fd22d4f9a12dbc2d116e08d46aab8ef56577b691"
+status = "residue"
+cause = "mir::Ty: QlogSink"
+
+[[fn]]
+path = "quinn-proto::qlog::QlogSink::is_enabled"
+kappa = "64459a884f804d5d143e47fce986dd7aa1f9b4b754d68a8eac823486f5103d40"
+embedded = "7540bed82cc8127b5ddb3f7d1b51ea3748c162138f2a8b11ffe4b942675a52cd"
+status = "residue"
+cause = "mir::Ty: QlogSink"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:13:10: 13:15>::fmt"
+kappa = "20c9ebe57e6d8856903c6d1c9ffcc423772eece138146399f69725f6cadfa7c5"
+embedded = "b96b859d1183b8963b9eebbe9652cd7ca3f02a8a2f0491bf785190f6d16a7e57"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:13:17: 13:24>::default"
+kappa = "e38598b21a3091786370a768d4c97c3fa1988adf4cc15c94edcd5b06bb93d3f8"
+embedded = "2090f4c17e21e6205a30bf62e8ad0cf72ba976452edb721d7d7d771f34e4cc20"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::Recv"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:398:10: 398:15>::fmt"
+kappa = "4bec8a33819615e2342b2e01a1c11632251d709f5281df3038a2a0ca13ac39bf"
+embedded = "05202f6adb050b6d5379a44735962c3af5065f40d305b5a4ae08ff0c0776fffa"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:398:17: 398:22>::fmt"
+kappa = "45af619b972d7e795c216c3213016728757a8fc2afef0a70c33fb7afb61f2e34"
+embedded = "af9864bc81157b15e2df07ce672612c14637bab45d19744306d4e0791b3482db"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:398:24: 398:29>::clone"
+kappa = "b01dfb628a38ea02bb52a7dc424ee14fb4f7cbaeec30dbc45b3c8946cc55765e"
+embedded = "270392f5040f350e21ce614986200e1cf81e8301791a75ee1045b52a65fe85aa"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::ReadError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:398:31: 398:33>::assert_fields_are_eq"
+kappa = "b7cf6849ca33fadd4045c3acee76dbf63d73274a71c8c97ba1a62f8827585fb7"
+embedded = "b746746cf926277cdab966b5f175e1e4186b0c179b1405d4abaa7023605bdf5b"
+status = "residue"
+cause = "mir::Ty: ReadError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:398:35: 398:44>::eq"
+kappa = "a9fb6f8913c5f4239d7e8fb672184a61395d4293d5dd14f8085a62b7d556f22f"
+embedded = "980459c4121a45fd13ba627335e6112232c254df54c94eb6f7c8764a5cc09135"
+status = "residue"
+cause = "mir::Ty: ReadError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:398:46: 398:49>::cmp"
+kappa = "9f0604d1d44cb892e429a770e06b891c54bbe0871d0d0046fa340362844a123c"
+embedded = "2434d13ec2da2992416bd7f51b62a9ea1f38717545c1d69bb7f10fd15259b5c8"
+status = "residue"
+cause = "mir::Ty: ReadError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:398:51: 398:61>::partial_cmp"
+kappa = "fe69fdaaf66f7d9a333a74d366563a4204ea1f084571707b68e71225c44f83cc"
+embedded = "d7e52709b1769297d059419c42796233ff4ddba226309c26029a1aa034fda768"
+status = "residue"
+cause = "mir::Ty: ReadError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:398:63: 398:67>::hash"
+kappa = "0189c25b1bf36547a44d3ed6dd8234e18b406ce6bc5a7d08902df98292e1bb77"
+embedded = "6f875aedd28693e28968e2b70bf5ce2a6d974df0414d5bab05a8b429abd85edd"
+status = "residue"
+cause = "mir::Ty: ReadError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:414:10: 414:15>::fmt"
+kappa = "7b9e8df66bb1fff64012b008d9bcfbc9711a2ead889a37ba81c7b6b2c1d91e24"
+embedded = "48f4a3acc4d90c61d5fbf8e20875867b11b16c50200bb6555b5de1e663c89718"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:414:17: 414:22>::fmt"
+kappa = "7233881b272a8f79b3351dfea583968aff52ce66685df4715822e71292d204d8"
+embedded = "9dca50601a2a1d7bd172067da3082c49d3d6d8be60714074b7964af6837decdb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:414:24: 414:29>::clone"
+kappa = "788f1c247c874fba6b6b588ff5774d342c4a031fed0ec12e4c34be17ab2c7943"
+embedded = "1839073fbd13f283c2d093d19072f0845cb5a5f6c586b6afef64038ff294ac44"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::ReadableError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:414:31: 414:33>::assert_fields_are_eq"
+kappa = "72f7845da81c76f540f7e82fe083b4edb8aef30ed39cbbd08ec8f0b1217a9e5c"
+embedded = "b80991cf0a50ff97a71a58c687c8803402413b98f5347d073921ba9793588f33"
+status = "residue"
+cause = "mir::Ty: ReadableError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:414:35: 414:44>::eq"
+kappa = "3537b12b75bd2f45b4d0ca91ee5bed2c4abae681a0850c2c3dbca2ac32cc8393"
+embedded = "be6af4126bbe1b4520c3b2f348949abc476fd21e23f42da1e3b6662ef7a0d904"
+status = "residue"
+cause = "mir::Ty: ReadableError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:414:46: 414:49>::cmp"
+kappa = "bbb629a2c529cf4feef097db40ca1a470f04f39566ae136d8039d473ddd179ac"
+embedded = "4bca8d4db8cf3d45f608f594e02a00bf02293f168894ca0d4119701bffbf745d"
+status = "residue"
+cause = "mir::Ty: ReadableError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:414:51: 414:61>::partial_cmp"
+kappa = "606506f67fd54845572bb13bc377418fc311044e6b79acef229a065a34408cd6"
+embedded = "b20d67c4de6f5a101cca3a30fd805b26a09c07f38bc3b835aeb3a57e9c773068"
+status = "residue"
+cause = "mir::Ty: ReadableError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:414:63: 414:67>::hash"
+kappa = "76b779097554c4d3dddab61ce2772be5a699dd5b7209ee85680f0620ea8fc72f"
+embedded = "faba1495dbd50a8627033dcda9e2848f2bbc755f1c2b4b67ce013d01572486ad"
+status = "residue"
+cause = "mir::Ty: ReadableError"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:433:10: 433:15>::fmt"
+kappa = "1166d24c80bc682bcd5ed84a2665a1bd3d2624966b8281ed9e24101ea6680b4e"
+embedded = "42d8086af6472e724b183464e8fe9ea2d89f893f87b06c66209178c1d23424e6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:433:23: 433:28>::clone"
+kappa = "f7ea98ec35b63130dfcfc93c62354a66b3a5b47bd6e0217d9ffbd1fcb5474a44"
+embedded = "0d3ce0987d86f6ca49590f2cec2b6963fbfe022eb8c96facb9b77884451b3068"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::RecvState"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:433:30: 433:32>::assert_fields_are_eq"
+kappa = "5fa9402bc46006de23152d7b6a4689f027f130b325b5632923f24f9b7ab4acd0"
+embedded = "4b686c29487189db56febad2a8c71712fa09bc89a6edc773cea8f174a8797cd2"
+status = "residue"
+cause = "mir::Ty: RecvState"
+
+[[fn]]
+path = "quinn-proto::recv::<impl at src/connection/streams/recv.rs:433:34: 433:43>::eq"
+kappa = "b07e3eb5268908489cebae1e4a0385afa11abf832f622bd65ef939e50fa9247a"
+embedded = "137fb9ad8c6a5e8ef6715c720568f3b1f94ef410895016e3f7e02234cfb77809"
+status = "residue"
+cause = "mir::Ty: RecvState"
+
+[[fn]]
+path = "quinn-proto::recv::Chunks::drop"
+kappa = "192c41058380d54c7328125d849caac71392aef14fcf26c07d8ce36787ddf8a5"
+embedded = "e5096c290e86674050abb9fa475b242f747c4c586911b4cbe18d684f5f75ab24"
+status = "residue"
+cause = "mir::Ty: recv::Chunks<'_>"
+
+[[fn]]
+path = "quinn-proto::recv::Chunks::finalize"
+kappa = "704917c292b6826cf7fdb59dbc78f8a3b4f0f4a26668ceb77ac20d247bd8204a"
+embedded = "31d6d144fcfde1d7b29bf418874e8fc0e0687457315a90a92a67ed8cea3eecce"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::recv::Chunks::finalize_inner"
+kappa = "23d993dfee2647687cafe87b97f182d7c9f49bd334ce9f6f92c67a18950c07c9"
+at = "StreamId=u32"
+embedded = "b8dbc9cdd935606e5d13224d9f11519a6ff81df283e6ccdd4f0523af6322e8a4"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::recv::Chunks::new"
+kappa = "8d49cd6092d9a54273ee76e9650203e2f7accf2d27da756b326c8b727274a28c"
+at = "StreamId=u32"
+embedded = "c7cc7f2bb0fdb4e711415a87af5a8a5b20466a36c66e5b777e362500d407f44a"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::Chunks<'_>"
+
+[[fn]]
+path = "quinn-proto::recv::Chunks::next"
+kappa = "7d6d228bf531e24ac46e3eec48158c2701c3a5ca28457b60f47631a096f513ed"
+at = "StreamId=u32"
+embedded = "8a2cd84198a56c6b33a046ecfdee6eeddcb0f321aec28bed24a85a1c3102be0b"
+status = "residue"
+cause = "mir::Ty: connection::assembler::Chunk"
+
+[[fn]]
+path = "quinn-proto::recv::ReadableError::from"
+kappa = "c0401e1c1bd4ab733347c35e1e7c0c6405eeca456a10d52a494958d23c5d1c49"
+embedded = "1166e609e249f691e1536ae65e99f9b1646cc6d927f4369cf5faac6ac40e0aeb"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::ReadableError"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::can_send_flow_control"
+kappa = "6ee5b89c5478c964dfc0d3e20f65ea049cf638577ca19a52ede4d46ad475f655"
+embedded = "c06bc350bbab1dd2a5dc8bb8d83634877501caca408b555b19af0eac0e56b0b9"
+status = "residue"
+cause = "mir::Ty: Recv"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::credit_consumed_by"
+kappa = "f1b2596a0adadb50f71da076fa483e0de108fcff5b54d13f0da5a4727f13e2b6"
+embedded = "af6f6ec5341ca510e2ec2ee74bef79932d2f2c0b3ffc5c3a525aa3b11976adca"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::credit_consumed_by::__CALLSITE::META::NAME"
+kappa = "bf80665694513a86cdddefde5f2294910ae4e4a269e11f2cc3e4fd3510c50af0"
+embedded = "e2906104d7f7d05ba68d80a85e5a05193d5ba0a3963367eef33ba983e3d6ac22"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<9>"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::credit_consumed_by::__CALLSITE::META::NAME#2"
+kappa = "49abd2ba630cebaca16b51b5617f6a38d5092a3433486e52080c8c48ad6d97bd"
+embedded = "03682871e31ce7768dfa6d1fadaba9659af0b1fb59b041ba0c52f253bfead6a2"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::credit_consumed_by::__CALLSITE::META::NAME#3"
+kappa = "182a0d680992b914596dcf5208b9fc68587ec2fb51025aaba6a26359be7361fa"
+embedded = "642ae7ce07faaf2c41665b74e857a9c2d99381473a3219173d4dd2efe451aa84"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::credit_consumed_by::__CALLSITE::META::NAME#4"
+kappa = "a4695993fed2ce9049e91b4c99b2ef84711c0abe2771068119299c15ee9613ed"
+embedded = "7218e0fc055e7f19ea8e269ee64d4efb61e31ab1f4f27e213d5454f3171d0b04"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<15>"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::credit_consumed_by::__CALLSITE::META::NAME#5"
+kappa = "cc67e322ab2a4d9e2eff440499814b9b868b87a07b44a0fa551d0def23c3921a"
+embedded = "0273dbd963912d998cbf6ae055c0a86c1cc64eb4e5e0cc47be3967815459739d"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::final_offset"
+kappa = "e07305d5869ea68a76521c35981d8817f6ca4886075da2cc08752342b26c535c"
+embedded = "8370eb5cfb8644303eab31a7672b0fdf3eb2d8ee7c559a651995af1ed167bc6f"
+status = "residue"
+cause = "mir::Ty: Recv"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::final_offset_unknown"
+kappa = "6ddf1408d625b769d6d3f0018ede29a852e01f801767bc3e7bf3a497d396a0d2"
+embedded = "9e020029e4f5e81186997b8c84ff35b05bea5e16ef7a5e537d7d1ed605d842a5"
+status = "residue"
+cause = "mir::Ty: Recv"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::ingest"
+kappa = "b658b30d3ac17249faac84e50f0de99f649c7b60a1d968ef61e8d336ded8bee2"
+embedded = "4d2c9a962dfcef47c281917003dce6309ee26063e5ed5858d2277541d9c15ba7"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::ingest::__CALLSITE::META::NAME"
+kappa = "bd4ec4a8d312092bf04c1a3085e1aaecdcbf56c1e844eb799a11aaa0c540ec24"
+embedded = "122ec9b816bfad826b33d9c21e50feac29cfb819ef3a2a4796dbf94e94cb5f50"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<12>"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::ingest::__CALLSITE::META::NAME#2"
+kappa = "895e11d97dc27775baa0ae8780fa067a96d1ae0007ad81683e120009a3411a8b"
+embedded = "75786eec6dd45a8cda547dc457aea4a4922f6afda25f1531e0690fbd4255947c"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::is_receiving"
+kappa = "0a370e70aef3116620ebe8f17893400c59c4f35f1779632d6c75ffc55cb1c018"
+embedded = "a36b181367960f490fe27334e3b0ae100e4c63a3ae52ddc35554342a2c19ccaf"
+status = "residue"
+cause = "mir::Ty: Recv"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::max_stream_data"
+kappa = "5b0e3fb07cd13fd7aa512dcb4181e61f932cee3b9bc0d98998b92ce4edc8985c"
+embedded = "e088a42cb434a53d052f95418e62d38e1fed2c306fd1c7e162a800a0752cf66a"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::new"
+kappa = "623667bd7c57473eb386095a2d327d779142874c0faca530dd9c96575d1dcbe1"
+embedded = "de296819405619ca39bc5bd41a4a162faedc02f589ee8447a7d469faaa2de2ab"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::Recv"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::record_sent_max_stream_data"
+kappa = "1c5bbd694280c6a8fc9a613bf1e5bd93b5b2600e431dad976e34a3f91aaaf38d"
+embedded = "c1e551f9f044c704635c57c2e4bbb22295b82ffd45023ebc419d23251e065acf"
+status = "residue"
+cause = "mir::Ty: Recv"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::reinit"
+kappa = "ac76244dd408c9d65ce77374e7d61b11e90a220e08c10f382af84e53b787c755"
+embedded = "d385acd625074dfc2e4e4b3c3125c27155e81fb35e72e3522dee8b33f4f63695"
+status = "residue"
+cause = "mir::Ty: Recv"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::reset"
+kappa = "b21440dc052ac1ba53f5ddd7bc007fd4f5712be2c93893feb56be4225247e891"
+embedded = "652daa54c7d7e679e4e5cd473d7805d615e3681910df7c9fd267484ca68d60c8"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::reset_code"
+kappa = "130c6e72363d56a5ef65918a5871fcbfc638148178a8f1aea212496bc0efaf2c"
+embedded = "1cbadcfb3c1b1ccaf59a1416f3a617e6d7f8c2c92b6488206000e5dfca108f26"
+status = "residue"
+cause = "mir::Ty: varint::VarInt"
+
+[[fn]]
+path = "quinn-proto::recv::Recv::stop"
+kappa = "023da586a5b74577c281d524029f19ce8da21275c41b35994d1099786816c212"
+embedded = "1fbc72567f150b741a476e0b46756e222c87edac2f651d649e1e42817488b882"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::recv::RecvState::default"
+kappa = "ab7bc9a694337fcc7a5d89701a9e9971ad470f52f6db608b3c98b19f8f0bce0e"
+embedded = "da48c66dbf39a5e66b187712ec70a5da9f136c49fb8cc527827c4b6e9bf1f1cf"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::RecvState"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:254:10: 254:15>::fmt"
+kappa = "dc81694b469b5e13f567632a91acd1df1c0da00617abfcad9e70bb4ec1cd0e45"
+embedded = "25ad46aaf164fc9a70850d753bb8de76c01e5fc11ef01203a8768c017548a696"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:254:17: 254:24>::default"
+kappa = "080a5656a7d9f8dce8fed72cb57ea1a725bc716b4ba9844d61250b0014d4160b"
+embedded = "909f5d28c7db0ef64f2afcc9cfae01bff63580b3ef8d3e40e9bd1b2e9e9799b5"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::Written"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:254:26: 254:35>::eq"
+kappa = "a5ccedafb028cd7965f64025254f42167cc11bfe412f377705480eedb12c8f14"
+embedded = "d6101bced2a7116d7e9c7ef1889dd7ba3c3ddb638fd019751c334bef4b1eb124"
+status = "residue"
+cause = "mir::Ty: Written"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:254:37: 254:39>::assert_fields_are_eq"
+kappa = "b7a9eef495350972c2457650b65b0c2afac908d9c1c11b89c563609bcafa7ba7"
+embedded = "cddd34ec6b755882fbfbd7e3a5f891ab75b7768a05bf1029240efd829ea03db9"
+status = "residue"
+cause = "mir::Ty: Written"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:254:41: 254:46>::clone"
+kappa = "00cc5983d8dfd1102b35961106b3595019e9782ef23bad960be65c961c27b375"
+embedded = "8f0f14756e8b895d09625e1603c80d55a6b70507535ebcaf648a94ec47f41425"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::Written"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:265:10: 265:15>::fmt"
+kappa = "0f9f879b43445030c2cfbdb5299ea11c8eb5448195b3946388d59f2da58688c2"
+embedded = "999ad46d21f04db795a40796b56828c326b9b72e89a248f1904aba5d0b7419a5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:265:17: 265:22>::fmt"
+kappa = "2f785aa911a0461a9ba7be59a52ea133b8f7186bdcd3ae3db284f411f63c7bba"
+embedded = "6763b9aa610c269c246eb987d78cc4da6b6a85a1651f15f2803a7c25ec214f64"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:265:24: 265:29>::clone"
+kappa = "debb49649d776bddd853d248efa4ff1b29b5338de3dff4ca94e96f4f07d9e1bb"
+embedded = "21b60d67587f9260d2891db0ca23f854473ed94409705aebfe27f61752aea14f"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::WriteError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:265:31: 265:33>::assert_fields_are_eq"
+kappa = "8a2e0ad239a7aeac30b6aeba7b9d0368a87f6f042cb9a09a1428faa11b734eab"
+embedded = "f6e598cd05a4f5476c199503f2581e9c91ef630b93f2e7bb803ef747697fee79"
+status = "residue"
+cause = "mir::Ty: WriteError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:265:35: 265:44>::eq"
+kappa = "3cc412114df187b9e8f02c24d642b80611dd95e40e20bc4b9e64c536a01aff77"
+embedded = "2f50f2688ceba94d3ccd2eca7a970d7b26d2485ee23899694dfb74f68f72e1b0"
+status = "residue"
+cause = "mir::Ty: WriteError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:265:46: 265:49>::cmp"
+kappa = "d68395b6fbafbf41fc89c121e55d4362bfa002ee21e6b42703dfa6d14219ae05"
+embedded = "a1830ac8c632c1ce69a4169aed8a55cf9724c75ee996a3330fa792ec1ffb72bd"
+status = "residue"
+cause = "mir::Ty: WriteError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:265:51: 265:61>::partial_cmp"
+kappa = "471e75965ecff3fdf793e225fa71a2c338b02b26819da5bea85bdc68ca34bfc1"
+embedded = "47feab6f8134faeea5bd572179935f34e56e62caef5de6fb8e91ebe40bdc017d"
+status = "residue"
+cause = "mir::Ty: WriteError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:265:63: 265:67>::hash"
+kappa = "dfdc8cfbbb05f347a23c57b330243e88e3e28d23791650987a270b82d1115177"
+embedded = "dc03b1aa658998c3f17e8ded6ad2d1bfd97ee5ec426366ffe85a9805db5f0786"
+status = "residue"
+cause = "mir::Ty: WriteError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:288:10: 288:15>::fmt"
+kappa = "356489165abf49ca6d2539941c86c5421c3a1fa2e419a67a03854f959490a0af"
+embedded = "5c2f849f5d827e4322ae725cf15f19148ddf35fde55fbad2b1a7f6132a070e5b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:288:23: 288:28>::clone"
+kappa = "f7753ed971a30a9cf76cfc6464ebd251650aed3164379ed1ec6aa186483ed3a3"
+embedded = "ee86705cc7112d87aa05b4de93e3f307b208523baa57e6b95f4d5ce3c6e13081"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::SendState"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:288:30: 288:32>::assert_fields_are_eq"
+kappa = "fb1e0610c482c47d95262b651809602918c379416083a7dbfcf44e74260803f4"
+embedded = "1b2fc41ba35e907adb323c9958c19fbc249f75a2ba774f4e7ca439c127df29cb"
+status = "residue"
+cause = "mir::Ty: SendState"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:288:34: 288:43>::eq"
+kappa = "ed7927e18240152b7b6f2613cbc1beab3bf8087deae97b9d8a613f65b6daba17"
+embedded = "416b3759a4cfddafbe534c422fb046988fca0a6bd41bdb515f38921475583330"
+status = "residue"
+cause = "mir::Ty: SendState"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:299:10: 299:15>::fmt"
+kappa = "7a1d56d8476057d702f4cd5b0bd04bbe6cfd01c02f5aba8fad333f1a6e0cb071"
+embedded = "d0b5d833a6fe689d4cc867a8527d445f352e151928495d5d7c9f2808983b43b5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:299:17: 299:22>::fmt"
+kappa = "0b31c5de6d0fe7a3e51ee93f7792c8d2a163bb4f7dc0c65e5c8854db13aeffe9"
+embedded = "1ea72d01a31ba625c07fb0022c9bdf2015c9c35c4305bdf265e71b26cdd1138e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:299:24: 299:29>::clone"
+kappa = "9a56771a6296cc08d2ab66ac26e4a162bc07e15cb1ed81fbf58b7c2f0837fb1e"
+embedded = "d090739d4a7f2d80ef2a6cb2a12a18fa19aa3611423338603a75f6a4f3b69155"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::FinishError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:299:31: 299:40>::eq"
+kappa = "fb1c1bcbf61057e563d8fb2bd4b7a3a55d63f23a4e526f232460f0a08b6cdb22"
+embedded = "e25d0d31ba8dd361a93386ffbf7406e5f6d44dafb7b6c582a0c72eadd3d36b44"
+status = "residue"
+cause = "mir::Ty: FinishError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:299:42: 299:44>::assert_fields_are_eq"
+kappa = "cbaba93734d6f7111e5b62021db1955409578e9fe6f101629bf71aa4aa6ac66d"
+embedded = "42acf273e0bd2a27e2d6952287344eac90e9318e5fe69a61dca8f751ee31de06"
+status = "residue"
+cause = "mir::Ty: FinishError"
+
+[[fn]]
+path = "quinn-proto::send::<impl at src/connection/streams/send.rs:6:10: 6:15>::fmt"
+kappa = "e771c25b2e0c0ed2456bc27c51915034119fe45add724b4930e1d1adcf2ce64a"
+embedded = "0c00a00aa7cc381fa75898f7efafdedf25c0d3f911b3d28ec0bf1e016ef55f43"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::send::ByteSlice::from_slice"
+kappa = "47ae158a8a731ec3ad5571a777e85b80b3508132061d64302f8a3b4f4bb3cb7b"
+embedded = "ef75bcfa0fdb432e22d57799ca4ce8903d0b4c8ad78142c984a466ca04e696be"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::ByteSlice<'_>"
+
+[[fn]]
+path = "quinn-proto::send::ByteSlice::pop_chunk"
+kappa = "1a6b9b613b72ae32388fc232f2f522e3ef87856a7db1c9805a8a37ce2c61c3bc"
+embedded = "582bf3676f53c534df50043bc9c71e434f4c716272ab9ef78f978f0ad730e66b"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "quinn-proto::send::BytesArray::from_chunks"
+kappa = "c095f3a06559dd501837156d3cfb58690b331286abf8774c8810e76c85d85865"
+embedded = "d566f0fc0d141ea3e01027ad34fc54b0ddcf05460d75336687b3b54f77530032"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::BytesArray<'_>"
+
+[[fn]]
+path = "quinn-proto::send::BytesArray::pop_chunk"
+kappa = "10292f1a7ff379c2aeb3f1b6749f07ff17c8afd9580151f54c090d5daaf9d08e"
+embedded = "d126d8eb9a3e9531679e963ef9bc20931d909532c99e2c342ce1c478b63a1cb6"
+status = "residue"
+cause = "mir::Ty: bytes::Bytes"
+
+[[fn]]
+path = "quinn-proto::send::Send::ack"
+kappa = "7f85c6a8469de557cb50b09af18f9c2b2fb66b7aa888b176b8b46879f6d54879"
+embedded = "bf238bb4b88206766aa7db484aa4597114f6719ca998b91c2b6507e6be73b479"
+status = "residue"
+cause = "mir::Ty: send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::finish"
+kappa = "578ad064d4ec4d611817a2296255c4fe5c4af59f2a1bd1975b659011a3b91f1b"
+embedded = "3ad0a5a4e896d9e1df76dabecfc5d86f77e985a1f115745b1d269f9411178687"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::FinishError"
+
+[[fn]]
+path = "quinn-proto::send::Send::increase_max_data"
+kappa = "54da2b59c1b2dd55ef14018391a5ca0c1a3cf1f4fb98c6cc920a81ac2ce52fdf"
+embedded = "f3efccb49b3ed542f32a2b2cf08ce9b3afa3821145615cdf7f779f577135d9dd"
+status = "residue"
+cause = "mir::Ty: send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::is_pending"
+kappa = "381c06868e698f66960daf2f09c07099d5b4178854d2d48cbb2a2c4e9c59012a"
+embedded = "51c3f6722da050445acff00078a74fc55f7e1f2a79658c53828606e04f60748b"
+status = "residue"
+cause = "mir::Ty: send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::is_reset"
+kappa = "32bc43e668dbda3fe9f84dda09e7f8918cd580c322ddee5c083c2311e9ecb04d"
+embedded = "e72f7a13b6b70fe1fc06eea73ef944b33dbb90a7adc6a44fba05aa17e66b5e8b"
+status = "residue"
+cause = "mir::Ty: send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::is_writable"
+kappa = "c6641a9e7eb2e908a0faac88f76b1c10fde937f9f45583fec9149f521ca3db3f"
+embedded = "f7a6a39d9f8535036ea33075c434f59c50da812bb0165572f5a16c4fbe5381ab"
+status = "residue"
+cause = "mir::Ty: send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::new"
+kappa = "a5901b9ef3c6920753cb0071ca8391bda5ccc9941b27ea7cd8bbff6f8a3973b3"
+embedded = "cabecdf5f7fd6d97a5fed644404e6f0de910ff109bf281c7d2d8dd5db3ecbc03"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::offset"
+kappa = "eed6d7fcebf581e81c15367b5097ba318c8297c9b0d5419dcf9201e5a6db3122"
+embedded = "108e7d95efcdbca2a66feba4edf92e2027426169c339ab3d0b9512029c57ab0f"
+status = "residue"
+cause = "mir::Ty: send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::reset"
+kappa = "7802c1c64b9855c53b1ac274f927029c3f57d9b1bd663b302f06132c0b2fa1d0"
+embedded = "b16b137027ee80a8480aeecb32997c5de10f2200005efc37d9d8fe22be609150"
+status = "residue"
+cause = "mir::Ty: send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::try_stop"
+kappa = "75e3a6ea2f3ca74bd463eae97dc691a56823e473a9b5bc710558f04c2a53ca92"
+embedded = "7c1ff83e642ad3d42ce572cdef1da98c498718b657af243ae62173730c4739cb"
+status = "residue"
+cause = "mir::Ty: send::Send"
+
+[[fn]]
+path = "quinn-proto::send::Send::write"
+kappa = "90c93813fa61946fa76b847aec7aaa1aefd98dbc2efcc13c19d3f6d0b9afc957"
+at = "S=u32"
+embedded = "9412aabb07d1d90518a88d9eee7914fcde4283938eb18525dd00d103a0e07f3e"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::Written"
+
+[[fn]]
+path = "quinn-proto::send_buffer::<impl at src/connection/send_buffer.rs:8:10: 8:17>::default"
+kappa = "b68d723a53e67f65d1b200a0096642723ccbfe3b5ba58bb4283344b83cb57406"
+embedded = "0cc5ab9656826ba2223308e9acc2fa6941027a960f6d40d0df0d8ef7d20a1325"
+status = "residue"
+cause = "mir::Ty: connection::send_buffer::SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::<impl at src/connection/send_buffer.rs:8:19: 8:24>::fmt"
+kappa = "b6692595c3d30a976162f4840c54e2a8455124102555aa0a2a02c13fa5633ab3"
+embedded = "6d3a3572c582785c963111274dee4af20ebb6ed805586fad28e5338f592c2f96"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::ack"
+kappa = "bb3ddf7de9300dbb0cec609eb18e403b7e2acf1ef293a44ed32bba1c91caf29f"
+embedded = "ad6b63b9361560b6b7cebffb1d71876482905e32a2f5d8fcd13f8d65b41c05d5"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::buffered"
+kappa = "39bb0237e75468d78539849d7eed5fa413b3ba0a882853db6139bd1915c71ac5"
+embedded = "5cec2303e421263f0c2675edaef325f9f12deddb44da9ee5e563e6370e79f47d"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::discard"
+kappa = "37511308a61473cc0ae230d6f7b7a5767b1539a030b0db593746bc4f4acbb4d3"
+embedded = "7503ff1e6fff2b3e26e69f58ea47ffd525403d9fb574ffa9260695212d4888dd"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::get"
+kappa = "fe06c4f03c737295b07c9824ce4734a226db995713bdfad2e6d5b912af1296a0"
+embedded = "b9b1a6860a6d7d8c06fe7fcb14fbcdef6a6a9dc57919718bc82e6bab2d323818"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::has_unsent_data"
+kappa = "349cdce31aa12024facb744dfe8fb36b5ae0cf9cadd2f657a6e8cbfec3717cba"
+embedded = "e7fd9fddab7f59d26a6b3766bda51aba71f1e4c7d65b2a42a688d21a6879a3ec"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::is_fully_acked"
+kappa = "278244ace85d94d22c18a15c415b1624a3f012feead7a230f861727eed2bbe2e"
+embedded = "2fbad43f6671a5a950fa6dae97580b4d3a02c52deb8220fa508193e9255bfc62"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::new"
+kappa = "5c3766f416f52e7d10c4967f0a3bc965118bb7138a720e8459c503bc00a7652e"
+embedded = "65011ea6e1d7674f7766f233dc3e2287299658dd564c687aff49ad343d76057e"
+status = "residue"
+cause = "mir::Ty: connection::send_buffer::SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::offset"
+kappa = "33863535f3f002351e689011cbb0050bf07cc5f16bc898a64739811db77d9edc"
+embedded = "f9fd0925e1f518454c0fe10b2546371db7295d380f50083a0df53563751df763"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::poll_transmit"
+kappa = "25920380024fa0d6f6186d223f93e2f16ffbace7a4d4a7715f5e1c03317184d5"
+embedded = "9c1aa3e07283ce1e478ce740f46a512f74b6854645df3fa785cdf956338b87dd"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<u64>"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::retransmit"
+kappa = "6fb6a6d64e1dc681729a7ccfe23f73803f064e6ced79ea3fc4bff8ec660bb58b"
+embedded = "1be561579ac83674fb97e28dcd6524ba467b0874b51cdcead20b72c3173e981c"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::retransmit_all_for_0rtt"
+kappa = "b7d1a45086d5abc9037bf872e80ab4fb5028b5a28b9a5166c6655e6b2259910a"
+embedded = "e11dc8cb2c02061fe72d427c441f38557ce581b08a4e30e714f1bb2b895e7c26"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::send_buffer::SendBuffer::write"
+kappa = "6bd5e4421f38de6395c9975e2f063970d629d81a978a01b733d185b44de2b8c2"
+embedded = "e126fae3f072c3cb9c5dcb5624ef607a56334ddd7b2cc85fe26b78378b2a2b18"
+status = "residue"
+cause = "mir::Ty: SendBuffer"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:268:1: 268:41>::index"
+kappa = "9628559592dbacf71ae90d770b329bbc431cb46ce79c4de2ced64206b7e67bbc"
+embedded = "bf0d1754a2da2c19902163c456780c1c2cd888e0cff39306b3c5db10fdb99614"
+status = "residue"
+cause = "mir::Ty: connection::spaces::PacketSpace"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:275:1: 275:44>::index_mut"
+kappa = "5e60be0bc1edde7ef8232ab5dae99a66e82a453243b1f68994889b74713f2445"
+embedded = "2369af4937c7f3c74f85ed8e65778872083b98db3419dfd0fecf29e80a0858ce"
+status = "residue"
+cause = "mir::Ty: connection::spaces::PacketSpace"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:282:10: 282:15>::fmt"
+kappa = "01e08442e28593277601beee6ee7904f05c6cdbf41864c429f4b994441cf359c"
+embedded = "03252d2dffbf13b574a6d748f38b6730aec6c75eca603a44af3c81e4e893a487"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:282:17: 282:22>::clone"
+kappa = "1658b99114d23b5591435b55ca50b79a076ccaada61dcca8c1a34c91871a8f6f"
+embedded = "ec95fa7c037ac23e96917cae82dda46a14c55c5b55a8945874e6e1500c394dfd"
+status = "residue"
+cause = "mir::Ty: connection::spaces::SentPacket"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:308:10: 308:15>::fmt"
+kappa = "2a2c67fd9e2cfac419078e7ccbc57249ab66f39ebdb39ababd92a725c683ec8b"
+at = "StreamId=u32"
+embedded = "badec6f9c0bfa8537ea1bd619c497e7deca53b99ca519cb5c6e9e7ccf9089cf3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:308:17: 308:24>::default"
+kappa = "80d1cd50aeff78d79795ea8ddd82422513eb2866d1f65fd848fffbe8e2c8baa6"
+at = "StreamId=u32"
+embedded = "cc589717d41473fd0bb32af9d3778bb774cb274bf5ad724d7dbb17d985544651"
+status = "residue"
+cause = "mir::Ty: connection::spaces::Retransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:308:26: 308:31>::clone"
+kappa = "d9a14bc95e9e342f67be7edfbd1ef86b7d525124d9d52caf9721c8ba0c15cbc5"
+at = "StreamId=u32"
+embedded = "e86026650c56140d80cbb3267ff7eaa420d16e09e2ca93846c0d6211deb0fd93"
+status = "residue"
+cause = "mir::Ty: connection::spaces::Retransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:429:10: 429:15>::fmt"
+kappa = "2561eb8000f2ee1405d9f4567c116ea9084b4a9c1d57970b4b1fe4af8679c5c1"
+embedded = "426155d79241b931d9ca3ca5ec643f2025b3869427f3abce98544809ddc1b35f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:429:17: 429:24>::default"
+kappa = "5af9a2cd79313bd58c21c84d085f8d040c9a555945b45ac54bace39fa7c5e097"
+embedded = "c22662014cdc40868526c62ee7950938d649f5038046b966698dc5ca685c8ed3"
+status = "residue"
+cause = "mir::Ty: connection::spaces::ThinRetransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:429:26: 429:31>::clone"
+kappa = "29a180f5bc22eba2849750d5a0e0af3c40c5d8568121f1bb0f5ad6bfa7e700da"
+embedded = "6f819b91edb73c3bd42021165bf35920a67f0336900088e55d588a39d99cadc4"
+status = "residue"
+cause = "mir::Ty: connection::spaces::ThinRetransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:588:10: 588:15>::clone"
+kappa = "4c31b447e2dfd16525fd3544e504b0e3eee6082ff95899ea3bb741ea6cb5b7f4"
+embedded = "ff8b77c49424262069905dd224d23e715cad95d78d2b920d81835be367f664ff"
+status = "residue"
+cause = "mir::Ty: connection::spaces::SendableFrames"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:588:23: 588:32>::eq"
+kappa = "e02e1995cca8ba89ddc29a3c91bd43933bf4e3816c692365b18210b7dc9557e2"
+embedded = "e3756e6bf4b662881a7b1fc35609514280e8d3bd1c7ed0a9b08738488efb92dc"
+status = "residue"
+cause = "mir::Ty: SendableFrames"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:588:34: 588:36>::assert_fields_are_eq"
+kappa = "6e3e261ace83280316935f824207c039f2022c1e253414338cb364450ebc3257"
+embedded = "e59745e1bf8ecd95c9666f5396b8566f26ac2af2111ba3c877807b053397397b"
+status = "residue"
+cause = "mir::Ty: SendableFrames"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:588:38: 588:43>::fmt"
+kappa = "a38a240552e3c73c3cc060e548cddf3e885a0af618d9b2ebd76f300b18a1acbe"
+embedded = "167687201e831adbc6f78897871bb4348c56c1b6ea903b3837cb2f41f96fbc3d"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::spaces::<impl at src/connection/spaces.rs:609:10: 609:15>::fmt"
+kappa = "0ca3624f4f0863a678bac09954a3bfc01fdee0a06f9fde3a96ef988feb9bba67"
+embedded = "0b2ab19d2de4745a3962148d2edf29602d669b250173820fd184ea61c7a5646a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::spaces::Dedup::highest"
+kappa = "4747017402cda40d16536e3850415f5084527542771dcdcc000e75b8ad61a662"
+embedded = "163a1b1f7cb8ff99b68591c271aff1c5fbc48d82049fb0192255b79f344a058f"
+status = "residue"
+cause = "mir::Ty: Dedup"
+
+[[fn]]
+path = "quinn-proto::spaces::Dedup::insert"
+kappa = "49e919745cbda0a10a850ad02786065f320107114e2f8a5bb191135d94c35532"
+embedded = "9c2b06a4a972ebf7e79dc76207a2b456795bd64d7ff0abd79745998652d59bd1"
+status = "residue"
+cause = "mir::Ty: Dedup"
+
+[[fn]]
+path = "quinn-proto::spaces::Dedup::missing_in_interval"
+kappa = "e0b0e5ef0448e3b6183e5a79dfa7a5c43570e3757af8f2ae56c606238b000fd9"
+embedded = "8cd523879f0ca9768778124d9a60001f199e4e17715ca780439adb99331d07c2"
+status = "residue"
+cause = "mir::Ty: Dedup"
+
+[[fn]]
+path = "quinn-proto::spaces::Dedup::new"
+kappa = "159452bdf94a63f40d8f5f451fd2ac78599d7b5514ffe8291b4a24a316e26ada"
+embedded = "e59d6dd9496f34ff4a700b1fc80a4eb4e5aedf3889397d2fc799ae2991731de5"
+status = "residue"
+cause = "mir::Ty: connection::spaces::Dedup"
+
+[[fn]]
+path = "quinn-proto::spaces::Dedup::smallest_missing_in_interval"
+kappa = "ef99be4e551a8cedba3c647ff0cb7fac48498b2148b9e413abd9fb1498eea50c"
+embedded = "36d6ffc03734a1e84751d4714f33d38ddcdb48a6b7f3277baf86bdd7e1053a0a"
+status = "residue"
+cause = "mir::Ty: Dedup"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketNumberFilter::allocate"
+kappa = "6d5dea9008190c10bd57d412ff86707151713e20af95433a66185840f4be8e9d"
+at = "Sized=u32"
+embedded = "06ac880f51e736bf59bc22b00c967509fd7a9d317b948683dd91cf04756da1b3"
+status = "residue"
+cause = "mir::Ty: PacketNumberFilter"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketNumberFilter::check_ack"
+kappa = "1866c67caf55928dc5d78f29e015b2dbac4b468307aa0281f89600bcdbd3dcff"
+embedded = "aa921aa4fd978e4cc1f3f03c11f48851c4d419b66ad0e69a0562f44827097de2"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketNumberFilter::new"
+kappa = "2ed6d96c7c74d80d4a86836fce190b41337b08fa245b95d775053107dacc20e6"
+at = "Sized=u32"
+embedded = "b35e32e6edf3c8912c603124b5b2f02fa58d2d67e53f811f486c960c33dccafa"
+status = "residue"
+cause = "mir::Ty: connection::spaces::PacketNumberFilter"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketNumberFilter::peek"
+kappa = "d2ed67a285fdc9e0b8517c1399e711f2a17ba718d419750c6f95c2cd3c038798"
+embedded = "3bfe86705885ff222941a282b0fba3e7cd8b90f2323d9836cac3b23695cd250a"
+status = "residue"
+cause = "mir::Ty: PacketNumberFilter"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketSpace::can_send"
+kappa = "f7d8b205cb15b9ffc3eb15686de776843db94e9d077ba6959b9dab30d2378707"
+embedded = "9ed62d8fd4ec1e4cfb046082a211641a9a4ada756953ffe3e3bded647bcda048"
+status = "residue"
+cause = "mir::Ty: connection::spaces::SendableFrames"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketSpace::detect_ecn"
+kappa = "5de9f121ff7254aa089a20769a789614fbba5263a0055f90d62afec85d423cb9"
+embedded = "d5024827b2971d06c1e4e34c366f5a7aa1494b8ea00331cee67d676dfd5eea7c"
+status = "residue"
+cause = "mir::Ty: PacketSpace"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketSpace::get_tx_number"
+kappa = "5ff5b185f89a3ec487f1447bdd04f44a51c4dfcabda9b44f722c1b5895b9ef6e"
+embedded = "3ae71b2515e2199872690220d9b2e345e2779ae614399f712ce72aa81e34dc28"
+status = "residue"
+cause = "mir::Ty: PacketSpace"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketSpace::has_in_flight"
+kappa = "9da37297e0ee124e44a5cceb544192647e352fed430050e50d5abda2dc6c526e"
+embedded = "875c993fa5493161f0f3d44bbff4ffce495467b8290da696602d00145860975e"
+status = "residue"
+cause = "mir::Ty: PacketSpace"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketSpace::maybe_queue_probe"
+kappa = "8c71c9dd1950d009ff2ddacf226b8b43d7c72e74e25ec3664367db6b7c3c8fd1"
+embedded = "2b8a30835d7d197ecd857f920c0188e90b2d224650249167634a70aeca0c4ef3"
+status = "residue"
+cause = "mir::Ty: PacketSpace"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketSpace::new"
+kappa = "a891d588911f40c310a045e5aff749eaaee4dca6243a7b4e560b9c9d1d750999"
+embedded = "c7891a0e839e02a912086b3797880bc45c047111270798bc04ee0a814d4c82a5"
+status = "residue"
+cause = "mir::Ty: connection::spaces::PacketSpace"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketSpace::sent"
+kappa = "d06034ddd7fba9d046f94f8acdabd7994855996e5866178afb49647cb1c76189"
+embedded = "820d3744a0559d54cbeed763c628c6ba4360f5006f6bcfb860e5732eaae1ac61"
+status = "residue"
+cause = "mir::Ty: connection::spaces::SentPacket"
+
+[[fn]]
+path = "quinn-proto::spaces::PacketSpace::take"
+kappa = "fcc6f0ceb27f2d050483c0262ac474bf920b04aca802aff7e552071a6f65accb"
+embedded = "edd8fdf2d5571a9963fdf8fdaf91b84bb08f992426431e6b024f100b6031d1aa"
+status = "residue"
+cause = "mir::Ty: connection::spaces::SentPacket"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::ack_delay"
+kappa = "f64fa12b267ac02373b819975a185432c5abb65aa27dd69cc04a4d632355f94c"
+embedded = "a14827c04f61d2b9a0ab9c1eafda0999a0e525d2460a5328606c98364cf33974"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::acks_sent"
+kappa = "6e99cbc1d21da8e84dec45dd63b053f1cf89c045bc653c25ee96ab374c3f438e"
+embedded = "2062aba428c44982be22d2c1cec69e356ce5af19333d075c0937e21bafdc9dd1"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::can_send"
+kappa = "7b07c34537647bf47792964bc3a30bced3e993c686b92f52f84597c60bbb6e9c"
+embedded = "38cc2396217ac87f357393d592f1074fc1e19654d97784f7266e765b6a57a8b1"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::can_send_with_other_frames"
+kappa = "392c5010d13b2798caa8be70aecb1db9df9ec7057654caec8617730ea198d90c"
+embedded = "0fc06f0e989027683332bf3ba6e39f57cc33fb0a1ced3b2b6262412e1ab397e9"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::insert_one"
+kappa = "7caf07e25e2568e9b9bbf1799973a7d9a7344d06566a34d70ff477da115736b4"
+embedded = "4377921ed5441fcb35e2240823253e4de403c4174546ec7bfe06ca1fae9f426a"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::is_out_of_order"
+kappa = "478ba9b55313296de0a3cd126483bec9732989b34c13121b05811567d76bf5d7"
+embedded = "710bed159fa95489e5665b1926613f0470951b08834549c4eeadf5881219c9f5"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::max_ack_delay_timeout"
+kappa = "001c545b0f1cce1460a820c94e30bd33c07dbfb3dc8b47217fa1ee166b984402"
+embedded = "5ec82b11dab33ac3688740001c5b44bc109ca10d314ff9f9480bb84ca40e8407"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::maybe_ack_non_eliciting"
+kappa = "9cb39e74bd0d10a8ccd8f021dbf60be1d0e4258c3608f9d24194113f9902e379"
+embedded = "60beac82197007d22ea756836f661d2cccdfca9feabe43ab2426eb2cfec7eb90"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::new"
+kappa = "2784a07ee4e6b323b6c37961d0dc98f1cb389e5e6c13873262fee72e2336598d"
+embedded = "d52e7a43a41af1f01642759d3ca9b6623c866a572430f63b797b49d7eceb8eb9"
+status = "residue"
+cause = "mir::Ty: connection::spaces::PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::on_max_ack_delay_timeout"
+kappa = "7e2c6bf11a0c76f14fb39ece214ea5aaa28d84220cac9daa77b0d16e55c86097"
+embedded = "f2b6db81e17561bf9a776f50ffa8de977305cfc2c52854fe8ac1dda50e3ef768"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::packet_received"
+kappa = "9636a1d024dbb20f88b930203e16de92e66d2aa1f38f6ac271ddf1d0b7e911cf"
+embedded = "3fe74b3247c1eb8bee548bdc89b01caa74ce0cb599edea6bd2a027d56857cc7c"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::ranges"
+kappa = "f683cbc6efe2b738f7e41eba658c787fdf238234a5efceb1c5b4f8bf549fd260"
+embedded = "1633ebdc379c5f9ab1be88a03d010550357eeeb00566be142d718c88eb45b0f9"
+status = "residue"
+cause = "mir::Ty: range_set::array_range_set::ArrayRangeSet"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::set_ack_frequency_params"
+kappa = "cd3caa9859c6247dd06184c504e7fca7044353aa85c4246ff10386ee4a2dc95e"
+embedded = "c495c8d693d96c95844da9341b921766196ae16cb146a8b4d8badb272ce55bcd"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::set_immediate_ack_required"
+kappa = "71db42ca58ba0c25d42c29d614e8b56991d9cb6dfac71f75e8d1901904535b73"
+embedded = "03b6e6b814fa33deb6081cd619b0587d9f5850202954f20c1b830cc7ea2b98f1"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::PendingAcks::subtract_below"
+kappa = "30eab135583df6f5198d55c1a0752abe6b342b9dde2e35cfb8021677d598e471"
+embedded = "7730afeb77d6af9b2c2616861e45912f145f822b48fdf6366550f816ac9cc0ad"
+status = "residue"
+cause = "mir::Ty: PendingAcks"
+
+[[fn]]
+path = "quinn-proto::spaces::Retransmits::MAX_PENDING_RETIRED_CIDS"
+kappa = "620ba57ac7d80854fc27654df25f7904c3fc153d822fab75fdf5020b9a423092"
+embedded = "96e938253c43bf923fc450e179f5fae4bfe2de086fe9e6c92a4ac47faaa7ffd5"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item cid_queue::CidQueue::LEN"
+
+[[fn]]
+path = "quinn-proto::spaces::Retransmits::bitor_assign"
+kappa = "7ebdc1dc71635f1d663b4ed4fa08bf00197a5573c27d229357ad063fc8ebf1c3"
+at = "Dir=u32, StreamId=u32"
+embedded = "823222a4497784013899aeff32c2fa39e4d98de83454b68afabffb6f2dea51fb"
+status = "residue"
+cause = "mir::Ty: Retransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::Retransmits::bitor_assign#2"
+kappa = "c1e6bd243f0093191986db8c40e7da3033c129b3b8ab2c88ce868cab43ae7013"
+embedded = "c42f3ff53c5a85f6944f47ad1a590c9e1f520cca08a671a130f68fa1c5702924"
+status = "residue"
+cause = "mir::Ty: Retransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::Retransmits::from_iter"
+kappa = "cbf597703341f8e90850580921a5a2862d41f361febfa9300c623714d0baa1d5"
+at = "T=u32"
+embedded = "4845dd12f033001b83853e49de2c68b453b28710fe254d1bdaf9f26f15e31188"
+status = "residue"
+cause = "mir::Ty: connection::spaces::Retransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::Retransmits::is_empty"
+kappa = "0186ec9eca30cd8bdee1150128d5636f013bafb19c2ca22086d67d6c43bbb7bb"
+at = "StreamId=u32"
+embedded = "7f044d675874d99636bc0f35487538f3d3687d6693643d4ce9c5a5672c7b0c69"
+status = "residue"
+cause = "mir::Ty: Retransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::Retransmits::retire_cids"
+kappa = "bc3fae1be2c7151523c980ef5f17ea1907d77a0e149aa20d95ca98d5c0c56458"
+embedded = "66a45312e9511b1f577e897466000de020efd2a36629f42de5e645773486f98b"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::spaces::SendableFrames::empty"
+kappa = "de17d15e1a16cf2ca478a390381fa0c31d4705f46777c254c97869cc33a5dfba"
+embedded = "0d47bf898bb839c48aa63d6df4f4a48933b4a420f8bc9a1b464d2fbeb93e8ac4"
+status = "residue"
+cause = "mir::Ty: connection::spaces::SendableFrames"
+
+[[fn]]
+path = "quinn-proto::spaces::SendableFrames::is_empty"
+kappa = "b0cd26931cc0b8b5dfbbd24d4e6152c69511d816a37bfe31a64bf62a71ad3973"
+embedded = "6c1cecf6020039d4b8cdaa870adf4b41a40e86b7448e9ac339f9cc917e29f5dd"
+status = "residue"
+cause = "mir::Ty: SendableFrames"
+
+[[fn]]
+path = "quinn-proto::spaces::ThinRetransmits::get"
+kappa = "a85440b6fd295fd2e83134ab3dec50f6e9c723b30e65b5cbd5f0d7134d61f682"
+embedded = "9738fd089c4ea6b128764aa64a4914b697e3080b277d8bed40445421342fc983"
+status = "residue"
+cause = "mir::Ty: connection::spaces::Retransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::ThinRetransmits::get_or_create"
+kappa = "ef07e2f1b9b312c92b88f6ca54f3854ddaa4da96d03a5504f2a58ecf23e15350"
+embedded = "3880949b14502d2055c5c6b9db79118e8eedc230d9b72c67f54cc3c10aacb2f9"
+status = "residue"
+cause = "mir::Ty: connection::spaces::Retransmits"
+
+[[fn]]
+path = "quinn-proto::spaces::ThinRetransmits::is_empty"
+kappa = "bd25c32c9391f25863d6157aa041af43b3a70b77e6f3fe5d87cee5583c78072a"
+embedded = "bfa4f8949ce3020e4a15d8e3a8dd4a1ed3eba5500dff181bcb83f3e7a967d1ba"
+status = "residue"
+cause = "mir::Ty: ThinRetransmits"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:134:10: 134:15>::fmt"
+kappa = "188ef3e8adf3f4982d640489a81eec8ad94466ecc7ceda0c18ebfa420aca256f"
+embedded = "b458013c2737ffefd8165d4cad649816058f5dc67a141a41724f3604f3cb9bda"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:134:17: 134:24>::default"
+kappa = "92535dc8e3efe7d40d31659dad6bfe42b5c639ca90b123c947d7a6e2b0976ca6"
+embedded = "98f3c30f6bee91181e7f55cb529846365808b704a799e176ca1808d193fa405d"
+status = "residue"
+cause = "mir::Ty: connection::stats::PathStats"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:134:32: 134:37>::clone"
+kappa = "1c1216446bea1d848c6eb73da12530485fd45860a73414262253c39a4a797f6c"
+embedded = "cda30896ccbe66166cf057507f5f6d8b75e81ab0813d8e0d70d4d3f6348a3ed5"
+status = "residue"
+cause = "mir::Ty: connection::stats::PathStats"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:163:10: 163:15>::fmt"
+kappa = "c65c3a830ab1fb72a4abaa79230ef6d4cbad6508d1a84f546247b70f1c875bbc"
+embedded = "173360583a102ec76fa2a0c76aca242d8e55464abf7a5f679bacb057cdcc4b8a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:163:17: 163:24>::default"
+kappa = "286b39adef36102644b99f6a0e16528d74bc4b2660af173cd790d743ba94f666"
+embedded = "fabcb10d75793e943f347bc1584a67971b5eafc12920157ea3b6ca7b31ae8c4a"
+status = "residue"
+cause = "mir::Ty: connection::stats::ConnectionStats"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:163:32: 163:37>::clone"
+kappa = "b0a3abca5189435bc095ed8a342e86308902152957902a880a7f4f0d34d883be"
+embedded = "87cb8ae5143eb575c38d10d81b9d6f5b016fa27b053417bbfde8599df3ae7c8b"
+status = "residue"
+cause = "mir::Ty: connection::stats::ConnectionStats"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:30:10: 30:17>::default"
+kappa = "3e786463621b50c82315bae052e1014173c5c965a55aa01a574698c0222a897b"
+embedded = "7b391e647c25c9d331002aaad867d70721f11b140ba7fc5089e7dffd1d809622"
+status = "residue"
+cause = "mir::Ty: connection::stats::FrameStats"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:30:25: 30:30>::clone"
+kappa = "d2576c15eebf56d02d8ec8284ca7b18a52f90e6ba37f902ffe9eaaa0ceaeea55"
+embedded = "7d03b49b4710076a503de8a04bbd81604270747de1fa285dd3c4224425b5e5d2"
+status = "residue"
+cause = "mir::Ty: connection::stats::FrameStats"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:8:10: 8:17>::default"
+kappa = "61c357d5ac4e6296cc69c798b1786e924973f060db83f42253af41462b0eb643"
+embedded = "9491342520eb35a30abca9f02dc6af561642b1a286896107f03b805ac8980946"
+status = "residue"
+cause = "mir::Ty: connection::stats::UdpStats"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:8:19: 8:24>::fmt"
+kappa = "a6d2cc3774c1f6abeab75d947f1a834dc6fe28a699766b34ceadd662195a8c35"
+embedded = "c34638f56bac894d63045d8dddc2840dadf786642cb4317039964e8daaad4c6a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::stats::<impl at src/connection/stats.rs:8:32: 8:37>::clone"
+kappa = "023616f0530f0768cd4867e1b8d3e7ee849abb62fd43eceeccab59c12d2b1479"
+embedded = "1efdb7100f14e4ddceede442f27711ee76e483141dcf16bdc1b6947093842d1b"
+status = "residue"
+cause = "mir::Ty: connection::stats::UdpStats"
+
+[[fn]]
+path = "quinn-proto::stats::FrameStats::fmt"
+kappa = "68c34dbd6bcfa3807cd9d75013f16e57f446f0905eaca727a7a78832ed7b78d0"
+embedded = "bed7100dd71aea47e23e9d51e130d174931a77a9058ef847e78ec3fc59b09db4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::stats::FrameStats::record"
+kappa = "71bdeafbb2a405afc99c616d9b82c9d41647d157daec5d6e2e2b424460b4cddb"
+at = "Dir=u32"
+embedded = "1bf934ee6ebe49f0e0d02f13756b6900ee8c762dccee5f439f48a6038d28644b"
+status = "residue"
+cause = "mir::Ty: FrameStats"
+
+[[fn]]
+path = "quinn-proto::stats::UdpStats::on_sent"
+kappa = "71cec356a4e7315f7ae151bbd1c2c1cd15b53382fb89fb76de269492f5e97042"
+embedded = "5ad1045686dc82dc4b6a872e540a060be0f5c365e12ef9bf542c53b9621227c1"
+status = "residue"
+cause = "mir::Ty: UdpStats"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:456:10: 456:15>::clone"
+kappa = "c148c1e98cd24d890bf0a692296d380ae4099b6cf03d24444345a0e67112a7d0"
+at = "StreamId=u32"
+embedded = "99e1b0a62b6c1c8351ac2324b4be2afe2d2244eb1083255454bd95b20883c78a"
+status = "residue"
+cause = "mir::Ty: connection::streams::PendingStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:456:17: 456:26>::eq"
+kappa = "d7c41b41e3d28d22ad819dcfdffd0fca433386e4180764cafe3ed3e555247e5f"
+at = "StreamId=u32"
+embedded = "a545ba6be11f50145d1654108b137c1960f54c90cfb151e50e0ca5162293079e"
+status = "residue"
+cause = "mir::Ty: PendingStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:456:28: 456:30>::assert_fields_are_eq"
+kappa = "d4b3e60faea69854c0e9bc4c5467f34844beaff4b63dadc7901aa177568772ea"
+embedded = "e5cf94d7980cba3c8ed7d05cb9599c3ff174a58e3c4c5bde0239fb950f9e8bc2"
+status = "residue"
+cause = "mir::Ty: PendingStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:456:32: 456:42>::partial_cmp"
+kappa = "9a25366660ea8724127f257d6414e4a1259504ecf01ef8abc503ef2f8c85a125"
+at = "StreamId=u32"
+embedded = "20cd472c2f43f031fbc68a6a627e25ee7ff5f10f83f4ebf578c5ba2000c060bf"
+status = "residue"
+cause = "mir::Ty: PendingStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:456:44: 456:47>::cmp"
+kappa = "b1e6e728285c10dd232f80f8180a53f9e5cabdfbecc6723d234873e55dd57825"
+at = "StreamId=u32"
+embedded = "c72056be6a825299399d69729e3e9fe4740ade027cf2df33129d98e5565b3bb6"
+status = "residue"
+cause = "mir::Ty: PendingStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:475:10: 475:15>::fmt"
+kappa = "d080d088c8d5230fed2ce7343db9454333bb972145be959d8276e8ed120601da"
+at = "Dir=u32, StreamId=u32"
+embedded = "347a297ad6d540707ade4df0437bec5bc4a33238ff143c34be53181a4576ba96"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:475:17: 475:26>::eq"
+kappa = "e13fb1f67391f7667d652cc176d88a816ff6b6f86879e9ae7f794f92695c3fd4"
+at = "Dir=u32, StreamId=u32"
+embedded = "c9efe25038b4c7e23049dfdde28473ff80007b9489a8336805546bff6cc8ad4c"
+status = "residue"
+cause = "mir::Ty: StreamEvent"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:475:28: 475:30>::assert_fields_are_eq"
+kappa = "f328952026d1a0b54cec78b635ba07bf9c9c3ab95a94446129336bfa72d68104"
+embedded = "33341068c5732b2cdbec591c710bb4c2b7713fd5f7c498350bd6ea91fb28cacb"
+status = "residue"
+cause = "mir::Ty: StreamEvent"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:517:16: 517:21>::clone"
+kappa = "32ae9bdeb00484eb819749fcc76efeb089336324d657011448ac4a7fe09d078e"
+embedded = "c9b8b16b888efb1f0fa5e873036cc1c556bf79da57b83e9142474c1a6d59bfd0"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:517:23: 517:28>::fmt"
+kappa = "626f31b870a1cae0997ccb66b6bd0ada61018cad7f815caa563d01ca64a7f5a0"
+embedded = "11832a5f5421b798bfe8136811b5868aa06b46a4f0c012dfbba3dd62e708e0be"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:517:30: 517:37>::default"
+kappa = "9d096cc2517061f5f4e67ba398b1cdddc838bf70a8f492780c4cadc9102654fd"
+embedded = "aa0de983a7d6e6721c0d94c5e388bb830922aaced81888f875f5cb1f8777e38e"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:517:39: 517:41>::assert_fields_are_eq"
+kappa = "0b65f0fc3adf667efdf1ed5ac1a53f8d5e51438d08fdd08d774696b00d0b4abf"
+embedded = "a9e18f3a8a3eb30a9f6daba868c0a7b383128da90bfa9edd0bf22f015d084168"
+status = "residue"
+cause = "mir::Ty: ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:517:43: 517:52>::eq"
+kappa = "6d17972c2d568a4901e81761b276e81fa50c485e652d20c15a84b78f7a6bbcc6"
+embedded = "4d1f3c80a9a3d3f5347caa7d9784b362763d70e6e299135854638c245bd2c1e9"
+status = "residue"
+cause = "mir::Ty: ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:529:10: 529:15>::fmt"
+kappa = "d39ac733306ec98872bc4e4e818030907c41c3be4b6da2d43d03c1bca1230799"
+embedded = "3225fb850dedbd0220a039dfc33076fe9fcaec81586a735832e5b92593ff5bac"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:529:17: 529:24>::default"
+kappa = "62ccfb799002843c6ae09d48450257a0c4347160ed6f49e0cba40973f51a53c9"
+embedded = "f7787048fe9edf952a453e6c33835eba342f0773f4648290540f51b23364a0bf"
+status = "residue"
+cause = "mir::Ty: connection::streams::ClosedStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:529:26: 529:31>::fmt"
+kappa = "716b77de067475b2c8ab2fd477fce1c709b0bd1a30b4f84c6ea0e0003ebd4e82"
+embedded = "e859784e55cfec020ff46d506b8b6dc3b71b2b36e8143f2114a5e63dc1286c07"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:529:33: 529:38>::clone"
+kappa = "ecbcf7d6da7f2b8209ab08b82d2d5bbb7a3bb0a6576bf46d74102562c8d2ec38"
+embedded = "d28e404c2dbceb10562c1ea659f7d3c6b967a63f2152dc9f2e5f8456f09c41c9"
+status = "residue"
+cause = "mir::Ty: connection::streams::ClosedStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:529:40: 529:49>::eq"
+kappa = "d631d597d9c2115fbf6580391d4a5d15d337e23a307daf4112afe8767b203326"
+embedded = "12bd370e31901a250d2605f46c947c54a1f930dea8612961710a195cd667885e"
+status = "residue"
+cause = "mir::Ty: ClosedStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:529:51: 529:53>::assert_fields_are_eq"
+kappa = "99fc82943662d183de2487da0b62cb293e78ee6a2fd67df3ef626022659d4db7"
+embedded = "f3933cf21e491bec4ff0910d91ff667db012b044913562888914b978362b2a05"
+status = "residue"
+cause = "mir::Ty: ClosedStream"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:541:10: 541:15>::fmt"
+kappa = "e68882e714031ab7d14270e80dfa0bd6519402ccac545cd367de95ed8526f93c"
+embedded = "4e273c07a7d8ed95fade63b97fd31cec6ee8fff91c4aa77de46dbb3f9a97b68c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:541:23: 541:28>::clone"
+kappa = "55c1a13670261d316d5a9ff3dcb85291418100287fdde6e067f5455512ba0a7d"
+embedded = "aa85e564cef37f3862de2330bfd5691fa087d12adf6246e87791f9f9d5f5eafe"
+status = "residue"
+cause = "mir::Ty: connection::streams::StreamHalf"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:541:30: 541:32>::assert_fields_are_eq"
+kappa = "c97fd7783c88ec2be7b159c19b37f58cc108d183a6f497a0967efbea1ce0c91f"
+embedded = "d00f5729d72baa6662832e244e9f4f9d3399eb8dd445583f9e31b90cd3d6261f"
+status = "residue"
+cause = "mir::Ty: StreamHalf"
+
+[[fn]]
+path = "quinn-proto::streams::<impl at src/connection/streams/mod.rs:541:34: 541:43>::eq"
+kappa = "344cdd74c863254d431b20f314a6482a44660213458e21844aa97135f073276e"
+embedded = "bb85dd42b88117aaefabdf5504ca44a55e366dc4fbac00d1872f1cd4db6cf278"
+status = "residue"
+cause = "mir::Ty: StreamHalf"
+
+[[fn]]
+path = "quinn-proto::streams::Error::from"
+kappa = "9ca4778d060d70e686a44c3c3bc96fecd3f3eb3beba89ecab3d3a5e62d9157c3"
+embedded = "10a52c076a82c6a2b5b3afd7e37219683d17d6f9816a0f2af6b9b2131a4a63d5"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quinn-proto::streams::PendingStreamsQueue::clear"
+kappa = "882f87056fec9fce651445854851309e8bbe945333225732f9959259d830f10c"
+embedded = "1ebec68eee527bbefbf1b84219c74d7e4a6f14b64c025f19d721b02e469d52ae"
+status = "residue"
+cause = "mir::Ty: PendingStreamsQueue"
+
+[[fn]]
+path = "quinn-proto::streams::PendingStreamsQueue::iter"
+kappa = "d994b2021dbbf5768dbe6c5b1f0b53a096fa74ff794b9996ccaa7dc38c72b1e3"
+embedded = "66fcc7f3ccd8d7c38ffebbc4488329d5979cb83a67afd18674056b5bb66b92ab"
+status = "residue"
+cause = "mir::Ty: connection::streams::PendingStream"
+
+[[fn]]
+path = "quinn-proto::streams::PendingStreamsQueue::new"
+kappa = "7a4ae6658a4cbd377ab3238d8dd86f56bc223a007b65fd3c629729a6c10730e6"
+embedded = "0eafafb24c1f95fffdaf1b49af846d2cfd9b32fea7abe6161b569d151a7ddd29"
+status = "residue"
+cause = "mir::Ty: connection::streams::PendingStreamsQueue"
+
+[[fn]]
+path = "quinn-proto::streams::PendingStreamsQueue::pop"
+kappa = "d072fa5dadacdce1a392d821650ab7b4cd27140a078368822b3e5d99d9a1e303"
+embedded = "c8a6831109a1b97e6eb48844bc43a7e17a4bbc2a46b096caf804d09f2a8f9cac"
+status = "residue"
+cause = "mir::Ty: connection::streams::PendingStream"
+
+[[fn]]
+path = "quinn-proto::streams::PendingStreamsQueue::push_pending"
+kappa = "2dd3628dcd30881825dfdb5f65c1230dcec15d097d7ce19f9215593d0c37164d"
+at = "StreamId=u32"
+embedded = "798ceebd2c91464da8037ad5667b5c9d1c7738397f08b4805393e5115d68e46b"
+status = "residue"
+cause = "mir::Ty: PendingStreamsQueue"
+
+[[fn]]
+path = "quinn-proto::streams::PendingStreamsQueue::reinsert_pending"
+kappa = "3db19b69147ec25ca41a5d6fc5308356ddbee1a209afb708bf7f4f192e028b3b"
+at = "StreamId=u32"
+embedded = "dedffb405a17feee669a29d53c70ce6aac6aa8d8cfbd9ec2a26f26376d68c01e"
+status = "residue"
+cause = "mir::Ty: PendingStreamsQueue"
+
+[[fn]]
+path = "quinn-proto::streams::RecvStream::read"
+kappa = "6321fa59c409fccf66aaae4302f362b6bbb2af80c81f3b6930e94e50b3fad387"
+at = "StreamId=u32"
+embedded = "abd331f5920628c6100495ee9a2a0ff74377f9d48f22dd49500f447b4eadc284"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::Chunks<'_>"
+
+[[fn]]
+path = "quinn-proto::streams::RecvStream::received_reset"
+kappa = "c548b89a352a0b6247fa871b1e2cb9d79702c5e9fc5e806ca1200f30aaa125ac"
+at = "StreamId=u32"
+embedded = "ecee96b90e83197a28f79632eef461d757f81b75c466447e6bad1702df33d7fa"
+status = "residue"
+cause = "mir::Ty: varint::VarInt"
+
+[[fn]]
+path = "quinn-proto::streams::RecvStream::stop"
+kappa = "fcc88f6efe8d7317296c791e071c9e924f41efca1731d5456ea3eef89838ff51"
+at = "StreamId=u32"
+embedded = "b79f65325153877e287cf3bbeaa6cae31a9c6f63323bb9a814dac54c216da7a6"
+status = "residue"
+cause = "mir::Ty: connection::streams::ClosedStream"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::finish"
+kappa = "3828dba738aacd7c32df9d8ad578bce38ecc4b7fd391ac5ebf31ecaa4e20094c"
+at = "StreamId=u32"
+embedded = "1a4ed44cc9e8efb07de08afca79ac8b15c76e990718c5a1f110981a8dc6a8fbd"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::FinishError"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::priority"
+kappa = "7ea72810b4931e1be63d8d9376a33b24b05fa73fc98001f55b9278a5ea964273"
+at = "StreamId=u32"
+embedded = "254da2959b47f8a824e3e5a04453b1d341128b6afb8e748f940aaff775e8dfe9"
+status = "residue"
+cause = "mir::Ty: connection::streams::ClosedStream"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::reset"
+kappa = "56ed88af778d2ade333d3f552e49d3de02d400839c2a61cb69a12853fc83e1e1"
+at = "StreamId=u32"
+embedded = "59168b4a8c9e6cff0e1c43cb07768e19007ebd922f26efe5d7541c04b06fb87f"
+status = "residue"
+cause = "mir::Ty: connection::streams::ClosedStream"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::set_priority"
+kappa = "5331f4d55ff19dd1514a9f158ffb13db093ea46a7b0c64b1b8e5dcfad66e215a"
+at = "StreamId=u32"
+embedded = "af08ed047cc744a1b3f60040515dfd170dea3f4b1d86cc2d0e5e0d9807ff5bf7"
+status = "residue"
+cause = "mir::Ty: connection::streams::ClosedStream"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::stopped"
+kappa = "8b1b4a7fa9658b1c0021d770d07651054af36b2ddf075b3fd4df3e47c3d39723"
+at = "StreamId=u32"
+embedded = "3231c4be9166eb32c3d385afb2487970e1a811f4d9dfd18d666334fbd92c1a2c"
+status = "residue"
+cause = "mir::Ty: varint::VarInt"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::write"
+kappa = "ec1be7cef2e3f43ffdd32576885262c58789a612b77de2c5e9684a819b9e85a0"
+embedded = "e7e5237fce52ba0908f6da3e6926f51ce5d700359aacf08460585a8dc4473fa0"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::WriteError"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::write_chunks"
+kappa = "7a56da99c70de0bd4ee9c6bdcf3be67e3c6920ff3a27967e017edc460d42e9fe"
+embedded = "e840e0a9937e93d24ebc74b036e158a2e94ad9c9d2a385abff5603c11d405658"
+status = "residue"
+cause = "mir::Ty: connection::streams::send::Written"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::write_source"
+kappa = "4554f26023642a1edf4379b94f83a33d84f548f044fbb9088a614d068b632a16"
+at = "B=u32, StreamId=u32"
+embedded = "99898b68d418f71c95cf86e75752805a94c38e2cebb97f6693457158433313ca"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::streams::send::Written"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::write_source::__CALLSITE::META::NAME"
+kappa = "dc175ec05ff329ef854310a852006cb33482174a9255bd25bc9dc03cbcc9cc89"
+embedded = "3d3fbb23f4aedaca3510d9bfedfcf852b9e94257f88eb29347be601be1c8e7bd"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<8>"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::write_source::__CALLSITE::META::NAME#2"
+kappa = "4590f647cf2648732ef5aad8e8f70cad0bc4a01239b379522456a0a200b8ab0f"
+embedded = "33589fde04d7941f575533251e6a444379fae8dbfbe4a832cce7f099aae7d5e1"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<9>"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::write_source::__CALLSITE::META::NAME#3"
+kappa = "0045df128f39d9703caa6f4bf446b867af0b117d272cf89241538f10afbba45b"
+embedded = "74f14f3832d30c6ec6ab4f025aa4547d57b27bd0204bbbd0e856b64af3edcd90"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::write_source::__CALLSITE::META::NAME#4"
+kappa = "0045df128f39d9703caa6f4bf446b867af0b117d272cf89241538f10afbba45b"
+embedded = "74f14f3832d30c6ec6ab4f025aa4547d57b27bd0204bbbd0e856b64af3edcd90"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::streams::SendStream::write_source::__CALLSITE::META::NAME#5"
+kappa = "3dfb4f69570939b563ae8133dccb51b7d81f13397e7ddaa450a24cb4695474ef"
+embedded = "b07f4f0c622824641e9288a4d80f25335380054750e07272e5bfd78ad647886e"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<7>"
+
+[[fn]]
+path = "quinn-proto::streams::ShouldTransmit::should_transmit"
+kappa = "1461406de15eb162af42b73e02712ad6e232b639b652b20bcf9901b9ac42375a"
+embedded = "716c1e93cec12366613650ed057b24e84d2fe02eaa27817440dffbab0ac806bb"
+status = "residue"
+cause = "mir::Ty: ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::streams::Streams::accept"
+kappa = "890f61ab4d1efd50cb53c232890976e578528344f07bbf6f334efc306123734b"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "a93b82c69ac4213800700ce7f31c8901ef1711634e41f08c9b789b3d5a2c6c5b"
+status = "residue"
+cause = "mir::Ty: Streams<'_>"
+
+[[fn]]
+path = "quinn-proto::streams::Streams::open"
+kappa = "be2bd11d486b0678c6c09ec9a893947fb96685c5c98888b9cca8d3cf60988243"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "0fa71a2bc19acc000eddbe5a3561d8d5cc2ca842a3ea502e2aebb3c01d6d1ff3"
+status = "residue"
+cause = "mir::Ty: Streams<'_>"
+
+[[fn]]
+path = "quinn-proto::streams::Streams::remote_open_streams"
+kappa = "e13a4660f23c9617eac677b58d52de10dabcd6ccc287ef8d45b0c3fad5e367e5"
+at = "Dir=u32"
+embedded = "d1d729bb6b3abb4a03cd19f1c6f2a86edf60fefb918c3840cd360d2c54ef9fbc"
+status = "residue"
+cause = "mir::Ty: Streams<'_>"
+
+[[fn]]
+path = "quinn-proto::streams::Streams::send_streams"
+kappa = "6102c16c939f43682fe3d8bb1ac73157da66d0578b60f836109415ccc4a2d27e"
+embedded = "08b2b7a280e5d8e70e0bc46883e7a62eeedfc7e56c49c9e526141173e827387a"
+status = "residue"
+cause = "mir::Ty: Streams<'_>"
+
+[[fn]]
+path = "quinn-proto::streams::state::<impl at src/connection/streams/state.rs:24:10: 24:15>::fmt"
+kappa = "7a6fc219217b8d4578f528ab0946c83d09b1137c70b9a29296112dadc0f1c7ba"
+embedded = "4eb79eb7531464c0ce4d36e8b84ad4dc36a4d3a8e978881c4c4a09c2e1dd3564"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamRecv::as_open_recv"
+kappa = "99a648956e9b4cbd87accd3df38b2cf69c47ff8119dde5069639a2e83ff4bc10"
+embedded = "874ed61d9ed6e652969bb374b4f166f453d865d87d5e9e17fa4a90b72c6174b1"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::Recv"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamRecv::as_open_recv_mut"
+kappa = "a18ada06c097ca65150909d42e8c2a89766130f9c87017077076c975d04ca156"
+embedded = "40bccd1bc67077a07601d5115272d4c8bfd67caf116180ac354c0cc14daa0a37"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::Recv"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamRecv::free"
+kappa = "dd6ebc2d4385fa1093757b749b5e9a41dd11c75989242012dcbdc273531f5597"
+embedded = "83cd19ee3864e041bb176457ec83a45994e958a454ac797b81c7b9fbb7bba7dc"
+status = "residue"
+cause = "mir::Ty: connection::streams::state::StreamRecv"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamRecv::into_inner"
+kappa = "fb956d2613dd2daaadb4c1edc93df420bd32fd7ff698363167e29475c009087c"
+embedded = "64f6f4a4359a4477b158fc01df2f93e17672920a7e7a3e32ab0cf8982624ecb7"
+status = "residue"
+cause = "mir::Ty: connection::streams::recv::Recv"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::add_read_credits"
+kappa = "3336d691b1ab98d1ed69f9def415a62f96b4b68ba51c3af04f321bb19eea03a9"
+embedded = "bad0d408479736ddfa0ac87d0870afed9688748cdc2d38b6a1ea01ff902c3f64"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::can_send_data_blocked"
+kappa = "d16a825879d30d18971468d25825d150c5fd05cca935901ea5cacd50e0b58169"
+embedded = "37d823677df33a0812bf4d8f10a5d216982739bb816c4183626d67855adc064f"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::can_send_flow_control"
+kappa = "9352f2e1325ce845f46287196d2bec0bddf71c01537fc133e8f2f354dbb86fd2"
+at = "StreamId=u32"
+embedded = "84ef7121da6d0fa9cb5d8b111675520b47136b735f12e6eb27cdc1be78da3694"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::can_send_stream_data"
+kappa = "606c5f2f9082e0ee9d033b7769c7f03fdd83f201df6bac40911ef6c332966beb"
+embedded = "f0e39cad4393ff034797bbef2ce97d9b18585c2025adc633ab5a036dd0cf2adf"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::ensure_remote_streams"
+kappa = "c272a3301fa9488d67513336b353b163eef710bfe6b316bbb9848576ddb85a99"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "4c1d7bfe7e1aafb389315342d1e31869e1accb28a888ba061f4abc777e5d16e2"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::insert"
+kappa = "93383f55af6b6e2c620d531fd209cc47361cc41294fd8af900f6d1d87b2fa3fc"
+at = "Dir=u32, StreamId=u32"
+embedded = "d5f84969a6355b3d884ffc7165b13e3c022c312708dc4ffe7ca115ea0e6c106e"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::is_local_unopened"
+kappa = "afc13eeef5dfff67c885b906f3b61f2cc0adf9cdccd6318d2390c8eb59ddeef9"
+at = "Dir=u32, StreamId=u32"
+embedded = "32191b52fdddcb6390f70b6d879c8b7392065c4a016e4741853edef8c2d50d81"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::max_concurrent"
+kappa = "858016b9fb0cb622480653c8112165d94ff469365e24bd16f22d01738acfcce6"
+at = "Dir=u32"
+embedded = "f4db89e07dbd43e39a81e2a67c942d38775ae690d0938fb4e1f9603182695af1"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::max_send_data"
+kappa = "3d153eb1594f54be77a0cc84defc99313b5473a443f24fb07f8d687b07b3aa69"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "18a16baade04ff4ea15faeacd250c0571aeea79f35e8341d9f8f6cdcab5e926f"
+status = "residue"
+cause = "mir::Ty: varint::VarInt"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::new"
+kappa = "71c3f0a1f36245aa269408fb865b6ff2c0f8c65bacbd756c1a870cc0984811fe"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "0c1c381beacedea6d52b72c4250694bf8126e05ca4ed9468f93c566e19ca7070"
+status = "residue"
+cause = "mir::Ty: connection::streams::state::StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::on_stream_frame"
+kappa = "121783d846791255010b37af10e4e0e7ffb82e8d823e611ac3ea392810e18900"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "4d75f33b42708926dfedf648e20ec24ec0f789cd1eff0f1004d85f24b32fa333"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::poll"
+kappa = "f7ef62f0a33a1a89f76d20bd04857ec92c9002890fdfed31ae015f819df282ad"
+at = "Dir=u32, StreamId=u32"
+embedded = "32b1924dafd06ebcddfc27b00ad2e4f5f5a130ce60ec48d87b82be8bf3f27518"
+status = "residue"
+cause = "mir::Ty: connection::streams::StreamEvent"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::queue_max_stream_id"
+kappa = "8abe899cf0d1fd86461a3ab846fc4c692a019f9af7f10b59ea41470121a941d3"
+at = "Dir=u32"
+embedded = "aa0c9b5dd22ae9995f1586a6ed10e21f0a70172554e3a1239a4a88aa4ad156a3"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::received"
+kappa = "3296669927c8741a51ee5d7ee2c8bdcfe9a9d70180dbd2f920a3d2c99059632e"
+at = "StreamId=u32"
+embedded = "4b330dd81018bbc5b23b5ed5fe5d8969831ae7965e5ea08ab312fc3389628040"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::received_ack_of"
+kappa = "51ee5e004b4acfa82d146478efa3cfd801bd8b76e05280c9814fec58c7acfabb"
+at = "StreamId=u32"
+embedded = "3adfd16719e62b1d582d4a6aad125e0e0eedc0e6ca752f8dd892278ea925876c"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::received_max_data"
+kappa = "80277fc45e67cb5cadfd23b1bbcb34f7aee8ba2170f1e77d4e883285314d1abe"
+embedded = "2f65a283b8c2707f7c2b85d2a1bc653007a93db112c4e0e74ce31d22cf59dd15"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::received_max_stream_data"
+kappa = "3d3ffcc5aa4ef3e42000fb27e38b9c7b1d8f97712195c36dec3c33d3959cbd8f"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "79bf17f69145d10b5c4523b57f31e9af76bbdd91d33ebad66e7e346e3e21e7cc"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::received_max_streams"
+kappa = "5a5a3dc016915aebf46d9ac1cf7b60f9c2e696fbe10b36acc74e6b229b0c1c2f"
+at = "Dir=u32"
+embedded = "7b446f2e2837fe6acc92c4b802a59cf0e4a42f4f737300ca27ae1462b6a0b913"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::received_reset"
+kappa = "c82884fb3e908b173cb2b9ff153c675f4e256cda4a489371b6d5586dce96c17d"
+at = "StreamId=u32"
+embedded = "f67b98235936557e552bb98770bf3ac37a4dcd9d37821b5790befab22f9cb481"
+status = "residue"
+cause = "mir::Ty: connection::streams::ShouldTransmit"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::received_stop_sending"
+kappa = "a264fa442bd771fa6ad34df7f9989cac52a04377cca4db6190033202a5cc2f0d"
+at = "StreamId=u32"
+embedded = "b9ae4324e48fb55d28c0936f13685411dfe22df4caa82bc53a8f064462b17eab"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::reset_acked"
+kappa = "bb8d007648ec0c6a9d65bebe01b8590e8a62762862c73c59a0e7909a3e57caaf"
+at = "StreamId=u32"
+embedded = "7f7d55cb2e936cf50c9a34c1f9c5387265f60c19da73582c17a5c4f80eeadfa9"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::retransmit"
+kappa = "a48af3fb417cb0f727cd6c9bd93b2b3e5dc007c22bafe1978fb50c1c976577a4"
+at = "StreamId=u32"
+embedded = "68b4dc7f2321cb00fdc3d17a6fa835ac444e069a93e257494b11d90ca90c1fdc"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::retransmit_all_for_0rtt"
+kappa = "9bada8f9d1169dd92ad556e07b516a527b3235e69dafbb180b54da63e15dbe7d"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "9670859bd922236ae78e2516fe9f13ff933170b6a1fe7ede90d8b1116fbaf301"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::set_max_concurrent"
+kappa = "5623cd39c7f4265ef9917bf43af0acc9a270f4fda57d93e482f99ba23d5a6e3a"
+at = "Dir=u32"
+embedded = "eb4db7e76a675a9fdf4d6b565c6bb933e9d41d9a64973236ebee7652f6703fea"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::set_params"
+kappa = "08f13bdeed6d3580d46825222a7e83280f1470eb1e1b5f75db318e567c9b4f96"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "6e94b2df2d62fc613fc8d39f3c8e6dd6b2f613084091ad6a3fc9d0c7bf0eef34"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::set_receive_window"
+kappa = "87f4863ba0719ba45434dabb38fc65bfc991d53ea0e8c3f080b4ef1c7bfc2d1a"
+embedded = "163f7e1db53ebb680e9621a6b157417485971e74f07a9e79f05f37d3b57cfb88"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::set_send_window"
+kappa = "8f314739fec56d10ecf27e05b4aeae058cb17270c0ea0ba545cee6519cfdfa51"
+embedded = "0d5ebb098244b90a117fa705cdda0e05a25fd7f6ad1919503dccffb730439f5d"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::stream_data_blocked_limit"
+kappa = "7a4689a04a584bb8258bdb98b221041ccdff2c1b7343891c9ae3c4239ff346a6"
+at = "StreamId=u32"
+embedded = "b29f13180aee0c07cf2d7f66e1023cf093856ac1adcda44f7e720263e8bae439"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::stream_freed"
+kappa = "6cf882c3a585882efb58799efd46da7fe75d87d6f3efd3a0835eba6d469be47f"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "ada5e6359833eb7ee7eee2013deaaf221e0e46edb81328b25530f5dbb41ec4df"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::stream_recv_freed"
+kappa = "fe3cf3406bcfa20d23ed507098d9871830fa4da11a0a3f83865489614c4f92f2"
+at = "StreamId=u32"
+embedded = "bc1ff5639092534c49c30b583880a605943bce154de4f67a26caf3e177e4c02c"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::validate_receive_id"
+kappa = "3cbd503639466324f0caa441bd7be4a3e17d6910fbddfc36db90e75386b7e50d"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "fd2edec0c3b00535d2842eecff471f1823e4ca99c5ab0f91a96c00a26c3aff8a"
+status = "residue"
+cause = "mir::Ty: transport_error::Error"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames"
+kappa = "29adcc19fe8c0a485214a424a165db35b45496ab5246d20a2f0dc2b277649d78"
+at = "Dir=u32, StreamId=u32"
+embedded = "a4fa153c73adca0de12556a594a0edb18d14f42686dc7a21f6fb1152b6edfe8f"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME"
+kappa = "121a7c9aedf4ae8d2aa78072e09727c947d158220875d266197d92e2f8b5ac3b"
+embedded = "fc9b0941d99e7228fb6eeccce51a243be9b1b85921eb1b6075a0c2b88600c458"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME#2"
+kappa = "0430f9ff4538d60add82bb46a82f99d4aa4e568b9f0fe4f495dbdb48ee6b7af7"
+embedded = "f73234c4d67a469259b8a4e465e0d4bceef1e2b7ea783a56bdc93854169ee0be"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME#3"
+kappa = "9a854e98f6cc8a834e0e9d72ec86071468dc874c9df8d90caa4e7894d7cefae2"
+embedded = "aafa689204819e64a49a489b3e4ca069bb18311d83cc9a98037319a0d2e04f64"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME#4"
+kappa = "121a7c9aedf4ae8d2aa78072e09727c947d158220875d266197d92e2f8b5ac3b"
+embedded = "fc9b0941d99e7228fb6eeccce51a243be9b1b85921eb1b6075a0c2b88600c458"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME#5"
+kappa = "0430f9ff4538d60add82bb46a82f99d4aa4e568b9f0fe4f495dbdb48ee6b7af7"
+embedded = "f73234c4d67a469259b8a4e465e0d4bceef1e2b7ea783a56bdc93854169ee0be"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME#6"
+kappa = "d814f93a8392a5e6c6ce35960a8485506b131d5530b8bf318890143a46c88bb9"
+embedded = "8096d22234e38e93907288c6d8d951ed5a92d5bab5cc425c6e1f40bef69cf009"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME#7"
+kappa = "d814f93a8392a5e6c6ce35960a8485506b131d5530b8bf318890143a46c88bb9"
+embedded = "8096d22234e38e93907288c6d8d951ed5a92d5bab5cc425c6e1f40bef69cf009"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<5>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME#8"
+kappa = "121a7c9aedf4ae8d2aa78072e09727c947d158220875d266197d92e2f8b5ac3b"
+embedded = "fc9b0941d99e7228fb6eeccce51a243be9b1b85921eb1b6075a0c2b88600c458"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_control_frames::__CALLSITE::META::NAME#9"
+kappa = "121a7c9aedf4ae8d2aa78072e09727c947d158220875d266197d92e2f8b5ac3b"
+embedded = "fc9b0941d99e7228fb6eeccce51a243be9b1b85921eb1b6075a0c2b88600c458"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<6>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_limit"
+kappa = "bc87bf7eb0aa04e996b04eb8829eb2d7e70a75773b6c42470250c62be08d249d"
+embedded = "80c9f77347edb022ae71edee815ac5d7a89bca15884364b370bce261f2dd8537"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_stream_frames"
+kappa = "63421bee21ff9fc8aeca6ca3003a78ee8b480a0ee5712c4b28bcb5de876d5234"
+at = "StreamId=u32"
+embedded = "6057e8b89592c82e5a96999ad22dba919e9dd994a50ca618014f816249b43123"
+status = "residue"
+cause = "mir::Ty: frame::StreamMeta"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_stream_frames::__CALLSITE::META::NAME"
+kappa = "e2a7d1359577a334ec4697add6e3c9a27d5ee556ba6076cd2066ef4c7a991088"
+embedded = "9e6f390bd59f147563157045d8b44a1cec05d12a7a8a22887565ac5a235e6172"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_stream_frames::__CALLSITE::META::NAME#2"
+kappa = "8f2a643d14e5d030fd833eff9bda33cbaaa1b799de7d145b22d5f18d0ea530ed"
+embedded = "17ac265b3242f9951100b2a81948f14d74a85b25ba35216b22f217716320cf55"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_stream_frames::__CALLSITE::META::NAME#3"
+kappa = "0fe9c3444f674929e33cbd793e4ac44fa994af906718c1757d82fca49d0f26fe"
+embedded = "5642633678b6b8057832738913adfb772cb4026b38e64254d6b76b33619b01fc"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<3>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::write_stream_frames::__CALLSITE::META::NAME#4"
+kappa = "756b4d93bb78c8b056e75f6c3b8eead306ce51ec21c24a8abce9cfe84792103f"
+embedded = "a1de39feecf9b624b0a56dbe490db16049aa30582a85d1b1f50244e9969c530d"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<2>"
+
+[[fn]]
+path = "quinn-proto::streams::state::StreamsState::zero_rtt_rejected"
+kappa = "1704ee29bc8575fdb28aff15c3731e5124f3e8caa06d2dc2d3222c2b913d6d32"
+at = "Dir=u32, Side=u32, StreamId=u32"
+embedded = "2a9f3387bb71e45d6271647a5e4725bd8709390a426af5061e70c89631eb2212"
+status = "residue"
+cause = "mir::Ty: StreamsState"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:3:10: 3:15>::fmt"
+kappa = "576615eb3ebed88c8b59ce778100a06a45df09411b584f4d9e404b14f23f31c8"
+embedded = "378b0e840ea3456ab6cf24d63785cac8cb4a97b1851c0799381758f8189216ea"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:3:23: 3:28>::clone"
+kappa = "a236c964ad36d7560a3312337e82b74826fe7be98675b57b09beca171416b4e0"
+embedded = "60155d80a8de8a777cb2b06adbaa1fe1491bc37b28825e50a8814ef3e664c8fb"
+status = "residue"
+cause = "mir::Ty: connection::timer::Timer"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:3:30: 3:33>::cmp"
+kappa = "32d45b991d59dcdc54719b966007f63a4ee79cc9822da177c54565605aab1c30"
+embedded = "e147c89e40a811c7bcdbadfb91c7921c08f812281a2c229c4706312c35d0b60e"
+status = "residue"
+cause = "mir::Ty: Timer"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:3:35: 3:45>::partial_cmp"
+kappa = "280ce9ca4ca350754da9478a11a96bb76606be132ff70963bfa21b07c22025b9"
+embedded = "447f11f66e3d649759e6967fe1190e73c8a7ba7d78f50e802db5b9a4d7177082"
+status = "residue"
+cause = "mir::Ty: Timer"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:3:47: 3:49>::assert_fields_are_eq"
+kappa = "33b474ecb2bd9b9f0e0b52ae23a8e2acafbf9b0b6c25a0d4c508eb81d339ca23"
+embedded = "d7429c4e9a80fac9bd17d38ee25314b5306c576a0dae6e39427e2e3b661e81c8"
+status = "residue"
+cause = "mir::Ty: Timer"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:3:51: 3:60>::eq"
+kappa = "941afad8d34c5e1e7ef4fefb14541b235c3ac5ae5da8ae9e06cd5bd47d4d8e25"
+embedded = "c1d7a6289e1b43f30f11d04433437e46c4fe2d7870cf7506aeef299c8e93797f"
+status = "residue"
+cause = "mir::Ty: Timer"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:40:10: 40:15>::fmt"
+kappa = "70328ef4c21aa3c240c38e810075459b7adb7c7da49613fd0bdec909be7d52cc"
+embedded = "004b3b0eee63abbec39e9431548ce277200d6a4dc7faed2be866ae017557deea"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:40:23: 40:28>::clone"
+kappa = "13633ba73aaceeb43e93ac80c080058178a467cd6fe2210061108b52ffd7c4da"
+embedded = "331b415de9c7d162a5629e9ce9ade3a67b269011eb9bf30fc701bfc3c3b4213d"
+status = "residue"
+cause = "mir::Ty: connection::timer::TimerTable"
+
+[[fn]]
+path = "quinn-proto::timer::<impl at src/connection/timer.rs:40:30: 40:37>::default"
+kappa = "481afed0b47bc7353fc4ead2076869119d8c9793e961fa3011a26e1844a24d33"
+embedded = "aa9e35c415fbc60d2b19f181e31902d17cea72461396e2607d742597401a0cef"
+status = "residue"
+cause = "mir::Ty: connection::timer::TimerTable"
+
+[[fn]]
+path = "quinn-proto::timer::Timer::VALUES"
+kappa = "144a8ce65d41efb8cce5a964761b3d443bcbfc9550a437ecd48030700035c1ae"
+embedded = "6fad44f342e4cf0fe071a5ace798b32797fca2700aabe8069df4e2ea9254abdb"
+status = "residue"
+cause = "mir::Ty: connection::timer::Timer"
+
+[[fn]]
+path = "quinn-proto::timer::TimerTable::get"
+kappa = "1a51114c6e1e395afcd185c65decd23a3d1c3adccbef6ed53f30bcace8aacb27"
+embedded = "012d764b9c886d72125c056bf8f14ddc85f9d8a418aea1176ad9e0924b050064"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn-proto::timer::TimerTable::is_expired"
+kappa = "d6e6a0fb530ca7b65d21af86ed7334886795ce1143d5cdd412a46da41214da67"
+embedded = "32b2d3ae53562e7713774996b1cd9c210dee14abf2c94006465abddd59f6a56e"
+status = "residue"
+cause = "mir::Ty: TimerTable"
+
+[[fn]]
+path = "quinn-proto::timer::TimerTable::next_timeout"
+kappa = "0c69abf206218f6672c1cdfef66fcaf0a947ad07e6666c95e1165a58cc4e3fdc"
+embedded = "4becbfc705695a141f24d9b94c5aa4f72621afdbf191756af924e32f7bea6c09"
+status = "residue"
+cause = "mir::Ty: std::time::Instant"
+
+[[fn]]
+path = "quinn-proto::timer::TimerTable::set"
+kappa = "ba129f7f3e48d67655424a3bbfb477996a304d378e31c3d836ba09c101ea9b1c"
+embedded = "66e60544397e3fae313b1a051a722470a6a036341da4d64d079e01197b4ce1eb"
+status = "residue"
+cause = "mir::Ty: TimerTable"
+
+[[fn]]
+path = "quinn-proto::timer::TimerTable::stop"
+kappa = "08650ac390722a039d07d0388398d75e49a104eafd37bb980c90ef0e522d860e"
+embedded = "0af86465783bc07a21877fa14568a9acbb1ccae7389f50b765dff34864bbc616"
+status = "residue"
+cause = "mir::Ty: TimerTable"
+
+[[fn]]
+path = "quinn-proto::unprotect_header"
+kappa = "35f43d7deffcba7eb1708f0b3fe926ddb81d800d9110c69db62d55532538afa3"
+embedded = "5e8e24b10cfbf0b6b21a9bed3881328b66b8ff1532b3bb311c370d92d6e603d6"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: connection::packet_crypto::UnprotectHeaderResult"
+

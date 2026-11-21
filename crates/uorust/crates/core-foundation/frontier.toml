@@ -1,0 +1,605 @@
+# The core-foundation register (written by `uorust crate core-foundation@0.10.1`; do not edit): every body of
+# core-foundation's MIR at core-foundation 0.10.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 486
+translated = 2
+residue = 484
+
+[module.array]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.attributed_string]
+bodies = 29
+translated = 0
+residue = 29
+
+[module.base]
+bodies = 47
+translated = 2
+residue = 45
+
+[module.boolean]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.bundle]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.characterset]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.data]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.date]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.dictionary]
+bodies = 54
+translated = 0
+residue = 54
+
+[module.error]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.filedescriptor]
+bodies = 19
+translated = 0
+residue = 19
+
+[module.mach_port]
+bodies = 13
+translated = 0
+residue = 13
+
+[module.number]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.propertylist]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.runloop]
+bodies = 65
+translated = 0
+residue = 65
+
+[module.set]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.string]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.timezone]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.url]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.uuid]
+bodies = 14
+translated = 0
+residue = 14
+
+[embedding]
+bodies = 484
+embedded = 484
+evaluable = 484
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: CFRunLoop"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: string::CFString"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: CFFileDescriptor"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: CFString"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: url::CFURL"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: CFData"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: CFMutableDictionary<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: CFNumber"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: CFPropertyList"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: base::ItemRef<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: dictionary::CFMutableDictionary<u32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: CFMutableAttributedString"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: CFDate"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CFError"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CFType"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: CFArray<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CFAttributedString"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CFBoolean"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CFBundle"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CFDictionary<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: base::CFType"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: number::CFNumber"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CFAllocator"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFCharacterSet"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFMachPort"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFRunLoopObserver"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFRunLoopSource"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFRunLoopTimer"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFSet<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFTimeZone"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFURL"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CFUUID"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: boolean::CFBoolean"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: bundle::CFBundle"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: data::CFData"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoopSource"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: timezone::CFTimeZone"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: array::CFArray<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: attributed_string::CFMutableAttributedString"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: date::CFDate"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: dictionary::CFDictionary<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: propertylist::CFPropertyList"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoop"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: uuid::CFUUID"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by TCFType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: attributed_string::CFAttributedString"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: base::CFAllocator"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::CFError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: filedescriptor::CFFileDescriptor"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoopTimer"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: set::CFSet<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ItemMutRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: base::ItemMutRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: characterset::CFCharacterSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mach_port::CFMachPort"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoopObserver"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const c_void as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::attributed_string::CFAttributedStringGetTypeID"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::dictionary::CFDictionaryGetTypeID"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ItemRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: V"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: array::CFArray"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: array::CFArrayIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dictionary::CFDictionary"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dictionary::CFMutableDictionary"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: runloop::CFRunLoopRunResult"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFArray as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFAttributedString as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFBoolean as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFCharacterSet as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFData as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFDate as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFDictionary as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFNumber as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFSet as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFString as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFTimeZone as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFURL as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*const __CFUUID as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFAttributedString as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFBundle as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFDictionary as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFError as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFFileDescriptor as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFMachPort as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFRunLoop as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFRunLoopObserver as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFRunLoopSource as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <*mut __CFRunLoopTimer as core_foundation_sys::base::TCFTypeRef>::as_void_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CFBooleanGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::array::CFArrayGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::base::CFAllocatorGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::bundle::CFBundleGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::characterset::CFCharacterSetGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::data::CFDataGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::date::CFDateGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::error::CFErrorGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::filedescriptor::CFFileDescriptorGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::mach_port::CFMachPortGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::number::CFNumberGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::runloop::CFRunLoopGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::runloop::CFRunLoopObserverGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::runloop::CFRunLoopRun"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::runloop::CFRunLoopSourceGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::runloop::CFRunLoopTimerGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::set::CFSetGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::string::CFStringGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::timezone::CFTimeZoneGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::url::CFURLGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core_foundation_sys::uuid::CFUUIDGetTypeID"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CFArrayIterator<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CFRunLoopRunResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core_foundation_sys::filedescriptor::CFFileDescriptorContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<u32>"
+bodies = 1

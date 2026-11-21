@@ -1,0 +1,268 @@
+# The uuid register (written by `uorust crate uuid@1.29.3`; do not edit): every body of
+# uuid's MIR at uuid 1.29.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 296
+translated = 10
+residue = 286
+
+[module.builder]
+bodies = 37
+translated = 0
+residue = 37
+
+[module.crate]
+bodies = 37
+translated = 5
+residue = 32
+
+[module.error]
+bodies = 23
+translated = 1
+residue = 22
+
+[module.fmt]
+bodies = 120
+translated = 3
+residue = 117
+
+[module.non_nil]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.parser]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.timestamp]
+bodies = 50
+translated = 1
+residue = 49
+
+[embedding]
+bodies = 296
+embedded = 296
+evaluable = 290
+blocked = 6
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 6
+
+[differential]
+bodies = 2
+theorems = 11
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: builder::Builder"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: Braced"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Hyphenated"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Simple"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Urn"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: NonNilUuid"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Uuid"
+bodies = 10
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uuid::as_bytes: uuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: error::InvalidUuid<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: timestamp::Timestamp"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Timestamp"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: fmt::Braced"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: fmt::Hyphenated"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: fmt::Simple"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: fmt::Urn"
+bodies = 7
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u8>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ClockSequence"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: builder::from_bytes"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::ErrorKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::RequestedUuid"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: non_nil::NonNilUuid"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uuid::as_u128: uuid's MIR stops at mir::TerminatorKind::Call: Uuid::as_bytes: uuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: builder::from_fields"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AssertUnwindSafe<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ThreadLocalContext<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::sync::Mutex<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NoContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timestamp::context::NoContext"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item fmt::Hyphenated::LENGTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item timestamp::UUID_TICKS_BETWEEN_EPOCHS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: timestamp::nanos_to_parts::MAX_NANOS: mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: timestamp::now::promoted[0]: type outside the lift: std::time::SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uuid::get_version: uuid's MIR stops at mir::TerminatorKind::Call: Uuid::get_version_num: uuid's MIR stops at mir::TerminatorKind::Call: Uuid::as_bytes: uuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Uuid::get_version_num: uuid's MIR stops at mir::TerminatorKind::Call: Uuid::as_bytes: uuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: builder::from_u128"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: builder::nil"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::intrinsics::transmute"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_be_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_mut_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: timestamp::context::std_support::ThreadLocalContext<u32>"
+bodies = 1

@@ -1,0 +1,35 @@
+[[fn]]
+path = "bitvec::eq_types"
+kappa = "d9b439e703d442a38a14eea0181fda5dbcf9744304e14d03647449cb634a94a6"
+embedded = "233767ef2e6622db3146569f637e0f2891d3d62fd5140300d3073e069d1b716f"
+status = "residue"
+cause = "mir::Ty: std::any::TypeId"
+
+[[fn]]
+path = "bitvec::is_unsigned"
+kappa = "ed161f884fbb48d9a423cd5f3a8a432e4d173c45fa56a606270350f8ec8d293d"
+embedded = "14a22dd5cbc443e1c9eb6d596e3f77ec2dcbe365e12da7ca2883a4913464545a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: devel::eq_types: bitvec's MIR stops at type outside the lift: std::any::TypeId"
+
+[[fn]]
+path = "bitvec::match_order"
+kappa = "3ce049592aebc7ffa5d65d48ac38b075bd4c9ab6d746477fac0d4837cb5fd338"
+embedded = "ca8a2fc8f983f6929fed90621ac3ec9e5d3127eebe312f6d51164706c29be5b5"
+status = "residue"
+cause = "mir::TerminatorKind::Call: devel::eq_types: bitvec's MIR stops at type outside the lift: std::any::TypeId"
+
+[[fn]]
+path = "bitvec::match_store"
+kappa = "fa5016b359b40e193a8b3ce23dd1abc0395b42cdb440cb6fff6025abef5c9b19"
+embedded = "6d360bee6b8da81387c120bad7d24c00d2d0765d1cb0e2e5ca7e65d6479b027b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: devel::eq_types: bitvec's MIR stops at type outside the lift: std::any::TypeId"
+
+[[fn]]
+path = "bitvec::match_types"
+kappa = "bcbc2e9be35f9a74e966e4069da252c69b724c2b01206cbe33162775f640f22b"
+embedded = "091b961c8f4b484a07276c25591c83dba2acc997eede78de0606a30d4cfb7375"
+status = "residue"
+cause = "mir::TerminatorKind::Call: devel::match_order: bitvec's MIR stops at mir::TerminatorKind::Call: devel::eq_types: bitvec's MIR stops at type outside the lift: std::any::TypeId"
+

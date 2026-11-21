@@ -1,0 +1,322 @@
+[[fn]]
+path = "rustc-demangle::basic_type"
+kappa = "a84d7675394a8f672b9ca1e01f9815a5c375d09b7b5dd30d53152eb9ce81cada"
+embedded = "5034b2bd90385e1cce985f8573b0fefe48d1d3aaa6eac86df8b9006a64ca45cb"
+status = "translated"
+digest = "5a78ba8191b70929b6d429956f886e827374b1054bdfda8190508c6790f73e3f"
+
+[[fn]]
+path = "rustc-demangle::utf8_len_from_first_byte"
+kappa = "188d1f8dc0f5913d8ffb48ddd00a89ec4cf166f846faa87a8bc54913cf995457"
+embedded = "bab97e86b7adc10095066b98ec956f5537ed28c73fd458fb5e69de0fa3b21834"
+blocked = ["AggregateKind::Adt of an enum whose discriminants the crate's source does not give"]
+status = "residue"
+cause = "mir::Ty: v0::HexNibbles<'s>::try_parse_str_chars::{closure#2}::{closure#0}::Utf8FirstByteError"
+
+[[fn]]
+path = "rustc-demangle::v0::<impl at src/v0.rs:23:10: 23:19>::eq"
+kappa = "3213b4f92933ce2bdca9dd8f3969747c904912ed39fccf2f56e635dd60c04273"
+embedded = "bef9fa31301ff7dbe68ec98a2c7ecff299d8be253e662acba43a92da5e8d64d7"
+status = "residue"
+cause = "mir::Ty: ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::<impl at src/v0.rs:23:21: 23:23>::assert_fields_are_eq"
+kappa = "911cdde72441d31407480612627d67b74b96216876533c738c9f76744da7f797"
+embedded = "69d2dc64e8f04e12e3775668a913d76973e85ccd8bea04e46864118640687907"
+status = "residue"
+cause = "mir::Ty: ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::<impl at src/v0.rs:23:25: 23:30>::fmt"
+kappa = "9203f0e686da8097c5fbca1f34b5f3d61b28dbbca04fdefa539a0bb24629fee3"
+embedded = "72ff020f94608c298d40cc4a464bc4922e0982582b5af54938ab1f364aa57a9d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Demangle::fmt"
+kappa = "ed361b195a1c43851ff3880eab83afe1832259d0fbd9bd35dc51709593d3e89f"
+embedded = "065e4616a7d7d693f03b124d6b71989af40b2250e3665dae63c05a7a5937f3a5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::HexNibbles::try_parse_str_chars"
+kappa = "5c86b4ac54260894fff78eb93145f48adcabd621f2c59ccc1c2a506cc4852884"
+embedded = "92d043f8c79be7697bf288c812dd1b237ed033f33aa467c6af15969e5fb36456"
+status = "residue"
+cause = "mir::Ty: core::iter::Map<core::iter::FromFn<{closure@src/v0.rs:312:35: 312:42}>, fn(core::result::Result<char, ()>) -> char {core::result::Result::<char, ()>::unwrap}>"
+
+[[fn]]
+path = "rustc-demangle::v0::HexNibbles::try_parse_uint"
+kappa = "b8d20a600175ff311256ea57eb239d0dc70c4e338aaca6996255294c9dea43fb"
+embedded = "269e8204bdeecc682839e95d6deffe2ffd37d02fc4abbdf8413661a28beba745"
+status = "residue"
+cause = "mir::Ty: HexNibbles<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Ident::fmt"
+kappa = "7e009d46d71d9efa5dcbe27b394745c4d36d16fa71c75df07fa7adad9c126724"
+embedded = "2018e00ca60a540034c183e11dd5db62478b7578d4e411b1677c9fa665904136"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Ident::punycode_decode"
+kappa = "4cf68bc7f7802eaadc50761e2c73ace6651b450683cb2e9b73a5be01c045c235"
+at = "F=u32"
+embedded = "a847109a3a7f71d44564b40e8d4359588e15120ff77811101203cfa936ea1622"
+status = "residue"
+cause = "mir::Ty: Ident<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Ident::try_small_punycode_decode"
+kappa = "5687acf739255ad78b90d08ec8aa964b7750b524cb59697f21ab785f511ac2e4"
+at = "F=u32, R=u32"
+embedded = "20bb2c53705dfe9b950a696eb0c6c599d8de4ab40cfa1f8206cf6b29064d641e"
+status = "residue"
+cause = "mir::Ty: Ident<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::ParseError::message"
+kappa = "30a4a9ea643a9c1172220635d15e7fc541f78f01511f93a8df2241f8a63ee0c9"
+embedded = "dbcbf1c4aed9eba71a356dd09afc2599c3a2564cfcbf997d963f6033b149e43b"
+status = "residue"
+cause = "mir::Ty: ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::backref"
+kappa = "b2479cdb36281eba675f89f22fb96cda117b39ee7716e949048fd26702c5f736"
+embedded = "1e013cff24a7bad54b5c5401c433c891a740160d16311759c55d264d46f23c56"
+status = "residue"
+cause = "mir::Ty: v0::Parser<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::digit_10"
+kappa = "29088dc7ce498b13180c8fadb24eae2704b59fb4506a9031270fdd688be70f90"
+embedded = "4dac74862d57de6d99c1cc5f04678e0ff1baaf289b1f2eac99cfea55db6314fd"
+status = "residue"
+cause = "mir::Ty: v0::ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::digit_62"
+kappa = "aafa2be215e8d31107ab77a1f9247351b1185e76f5df17e1113d9da5923f97a0"
+embedded = "873c47e3bf353fb2983c0251f7c1d13a7a7d927b04b95278c293e293597315a1"
+status = "residue"
+cause = "mir::Ty: v0::ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::disambiguator"
+kappa = "7b2ad3f334f17335c4d4ae0226fa1206e91b78bc3f5ef647060f79845924891f"
+embedded = "d87c975d9036c4d5d0d58ae0143c62d1b0b5c9c3c8d7f3875cb2026ded224b61"
+status = "residue"
+cause = "mir::Ty: v0::ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::eat"
+kappa = "aa7f40fc2563cdbae0dab41eb09e1e6b7355bd917b1c85ff26dd481f53abf3c4"
+embedded = "06b15cd3204257a3a6cd399ebb0516544b4975ec88770b1a7815a1178da96ccd"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::hex_nibbles"
+kappa = "e9d96afb6f5c58cebdd4cba822414cccfb448352dcbeff3af16d0c7e01bdf717"
+embedded = "add4fad3ffbdc55c9119f624a6d1bf251dd8c069d5e3a8d088d2667f21348063"
+status = "residue"
+cause = "mir::Ty: v0::HexNibbles<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::ident"
+kappa = "c9678656277508c1bdc4d87469434826fd8d6243c6183fcd5db7bed309a591b8"
+embedded = "960018d3211b82458d685f5f9438a30a59d558038621c9f94bbfc79636858707"
+status = "residue"
+cause = "mir::Ty: v0::Ident<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::integer_62"
+kappa = "e616f8ec47915cf365095499bd346c97c623a5a5bee5554d042bcb41a685aeaa"
+embedded = "579dc1b0f41c0cae512686cef51650e26558dfe9f103ef88401eed958931b07b"
+status = "residue"
+cause = "mir::Ty: v0::ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::namespace"
+kappa = "ad2b3d19f0ea4a67a6d618d32dd867c0e1b09385757c5267d79d288af3f473c4"
+embedded = "3e251558bb9811b43d0b40b8f1bf7952aa85cd603078630f02bab698beb5b918"
+status = "residue"
+cause = "mir::Ty: v0::ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::next"
+kappa = "720e1a41e58c1161f29290750b9fec50c06982266a50dfa02651689d5322b2ea"
+embedded = "7b1c4b9b1b41db97b9511f9ccaa866c99a55c6b95e5f4d219c5a09245244956b"
+status = "residue"
+cause = "mir::Ty: v0::ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::opt_integer_62"
+kappa = "3a39cd3b1636bb16be6c971afe1f39c30ec7c75d0db16b6ad92963b75486e98f"
+embedded = "3428e537f0268e8eb8e91ef28460916ac9f973de94d12e48244397b484bb784f"
+status = "residue"
+cause = "mir::Ty: v0::ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::peek"
+kappa = "9636d9017d766474f35f4e5055fc6e053683929adab785c72608912aa9139456"
+embedded = "531c00f38476065ba01f40300a4aa3b5b9af289488b0fe9455fabc13572b97cf"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::pop_depth"
+kappa = "f860cd10f0e7a4f29d7388c2d130c32d98a168236fa83f6f055e5a1ca3347bd3"
+embedded = "62070ff1a898334b842862a4ffdfa2001b43243a218fa1eb5395ed5c77f0d906"
+status = "residue"
+cause = "mir::Ty: Parser<'_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Parser::push_depth"
+kappa = "b006770419088e200e81eb1a92faab9e1110075d809f537992b4dbca732c77ab"
+embedded = "273fbc342dedfcb98827e6c6bea7571dbd5bf27f647eaeda3bdcc9b9a7fc6959"
+status = "residue"
+cause = "mir::Ty: v0::ParseError"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::eat"
+kappa = "01eab4b70750b94f5e9cb6b6cc25ef9c24250ab70f5614cbdf9419e8ae1aad49"
+embedded = "1e49a3ca0069044899e2cc69db27727df45f17ff512166451ba28b1956acff55"
+status = "residue"
+cause = "mir::Ty: Printer<'_, '_, '_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::in_binder"
+kappa = "ab39e62447b90a17af9e087f8d04b4390755550dd92a4a4315782dd2d8e13623"
+at = "F=u32"
+embedded = "2a746ea246159147474469ae7553bb916176cc2f2d925920c0b8a9507a5cfcc5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::pop_depth"
+kappa = "7afecb06d69ee08dcc8e2c2cde86e4681d565dbdc9b98dcda3bce3e7e632272c"
+embedded = "ca8863917ae890c829cfffaeab5ce7b6109e66ea9fe8b44a7b63236d15fa6b7f"
+status = "residue"
+cause = "mir::Ty: Printer<'_, '_, '_>"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print"
+kappa = "00e05be717185e528d891d1719b3c60d68c24e42f5dfb62d39cc68971f7d394a"
+embedded = "2fead9347d80b81bc92b02f707635e21dcae2d07175828fd5df7c455720f29e0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_backref"
+kappa = "56de0a3276e6c944e41602bf2354c68f5d7ca5989ee7097f653db6136aa8e38c"
+at = "F=u32"
+embedded = "a9683f09cabc8cef69ed53423efe3d3e934d2c511a74e433a96c5a8da299d39e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_const"
+kappa = "5a846d27a19b7cb189229f76f9d44a10a26ddd4df0bd76a109e816d5bf6aa3c6"
+embedded = "c1d8c827b2cc9184e598ae471f4b8ff0de3359a11f8d27b7f03875e54f0a53a0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_const_str_literal"
+kappa = "4e70523026f5946b2e1f9aa7bbdab35f91ab3d8d0f5106a54e5aef77fd29c486"
+embedded = "d9ee50c2ebdba594b51ece068d1052afbe314264aa283d91166b09705b0f388d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_const_uint"
+kappa = "35b888f0d930a5d9fbc7f504ac562713b2a71f5fbfabd320fd697f180ae4cbef"
+embedded = "a0a82100a2d789cb6a3a1db6bbfa9221503d52ccd94a657546296121b5c3f373"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_dyn_trait"
+kappa = "c616af0ea7a8fe911454440c2ee851dc4a319176f67d774f6e2ee38be07d2ed4"
+embedded = "8972d20c02f04d7dbcb78891e70ee82403a901dd4504bdfbaae983b9aaecdedb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_generic_arg"
+kappa = "e92e48ecd9bb080f04d5ee95507907058fc6bccc1895763ab0b8a7a8453695c2"
+embedded = "37f39a7d60bc06bab9d8030f27659e70478b6efd68700fa65fe9ae40c88ca3b3"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_lifetime_from_index"
+kappa = "bd2ccbe587335e3294c94ddc329a40a6f40f7f3e097a80c29834ed040f925c4c"
+embedded = "a7524b3a69d9042eed095c8a3536b07efe4f8489b718008ea8ed0fdbe3ff188d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_pat"
+kappa = "0ca9fe4eabfd015f5e5d06447c61828f7d3badfb7525ba422c563a23d0701083"
+embedded = "4b95fe637b327668bf07882d12268a104f39a60418cb4bef6c5bed9ea315f80d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_path"
+kappa = "6a9d740fe9befbd7986a781b61e81aa7f499b9f07f708c0e9410680fe5fcaacc"
+embedded = "ba66f8780ef3053284ca3490ffc3b0ce35f00dd2eb3ea7d17ac24bd28f04a347"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_path_maybe_open_generics"
+kappa = "2313cf822cfa13ab65444bb554fca7f801065bc3800f57450e80b49aa2f37bf5"
+embedded = "fcd81614aa1dcb3d38c3c29354a6f9ff907c3e66d3d3b33e3a110cb3b7662ab6"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_quoted_escaped_chars"
+kappa = "3699f0404bed55e613e2aa8a92bdc9c802e1e2b6ea4109c9988554ed5c487cab"
+embedded = "7ddd7f3cf8d20171c01b9bc041c53a1719a790efadfb24c2a2813d09c089865d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_sep_list"
+kappa = "0f0773a4019b7b7f99aea7d897347d8f9673d3a9d4b29bdeb0bb0278906d21ea"
+at = "F=u32"
+embedded = "352254e34627818e2cd740d549c902f1811582b3de2e6813d9e568bb41c104a8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::print_type"
+kappa = "057cd0737509d93292de45bdcba43deb919ad7bacae6096ee03619aefef9864f"
+embedded = "d111f6c4d4888e3206a883ca022fb84a855d393c0f90ca240f736b3f5983ebff"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustc-demangle::v0::Printer::skipping_printing"
+kappa = "ea7e1b070bcf363beb27eaad75585f897978ea28419a985e5370e46efec827c7"
+at = "F=u32"
+embedded = "52444b056173cb9f52acd220f1ab1d323f5f2183f3cd6c43cade7e5cbedfe3c7"
+status = "residue"
+cause = "mir::Ty: Printer<'_, '_, '_>"
+
+[[fn]]
+path = "rustc-demangle::v0::demangle"
+kappa = "7a2c387e426cf8c47e5ea459fc6f2a56a77af8af5ead0efd19008f0027589bf9"
+embedded = "6fd63c33a9804c463b73d76cf7705d4b04d24638d62a804ba73b657aaac1db18"
+status = "residue"
+cause = "mir::Ty: v0::Demangle<'_>"
+

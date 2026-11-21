@@ -1,0 +1,483 @@
+# The serde_yaml register (written by `uorust crate serde_yaml@0.9.34+deprecated`; do not edit): every body of
+# serde_yaml's MIR at serde_yaml 0.9.34+deprecated, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1242
+translated = 2
+residue = 1240
+
+[module.de]
+bodies = 114
+translated = 1
+residue = 113
+
+[module.error]
+bodies = 26
+translated = 0
+residue = 26
+
+[module.libyaml]
+bodies = 65
+translated = 0
+residue = 65
+
+[module.loader]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.mapping]
+bodies = 117
+translated = 0
+residue = 117
+
+[module.number]
+bodies = 101
+translated = 0
+residue = 101
+
+[module.path]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.ser]
+bodies = 70
+translated = 0
+residue = 70
+
+[module.value]
+bodies = 529
+translated = 1
+residue = 528
+
+[module.with]
+bodies = 215
+translated = 0
+residue = 215
+
+[embedding]
+bodies = 1242
+embedded = 1242
+evaluable = 1241
+blocked = 1
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 491
+
+[[cause]]
+cause = "mir::Ty: value::Value"
+bodies = 182
+
+[[cause]]
+cause = "mir::Ty: SingletonMapRecursive<u32>"
+bodies = 100
+
+[[cause]]
+cause = "mir::Ty: SingletonMap<u32>"
+bodies = 63
+
+[[cause]]
+cause = "mir::Ty: Value"
+bodies = 61
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: mapping::Mapping"
+bodies = 27
+
+[[cause]]
+cause = "mir::Ty: number::Number"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: Number"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: SingletonMapAsEnum<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: SingletonMapRecursiveAsEnum<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: tag::Tag"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: libyaml::emitter::ScalarStyle"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ser::Serializer<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: with::singleton_map_recursive::SingletonMapRecursive<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: error::Location"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeArray"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: tagged::Tag"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: value::tagged::Tag"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Anchor"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TaggedValue"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::Deserializer<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: de::Event<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: mapping::Iter<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: mapping::IterMut<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Mark"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: N"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: libyaml::cstr::CStr<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: libyaml::emitter::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: libyaml::error::Mark"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mapping::IntoIter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mapping::IntoKeys"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mapping::IntoValues"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mapping::Keys<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mapping::Values<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: mapping::ValuesMut<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::ScalarStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: u32) -> std::result::Result<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: value::tagged::TaggedValue"
+bodies = 3
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HashLikeValue<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeStructVariantAsSingletonMap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeStructVariantAsSingletonMapRecursive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeTupleVariantAsSingletonMap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerializeTupleVariantAsSingletonMapRecursive<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: cstr::CStr<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: de::DeserializerFromEvents<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: libyaml::error::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: libyaml::parser::Event<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mapping::Entry<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: serde::de::Unexpected<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::de::MapDeserializer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::de::SeqDeserializer"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeStruct"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeStructVariant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::ser::SerializeTupleVariant"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: with::singleton_map::SingletonMap<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Iterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::strip_prefix"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::cast"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EmitterPinned<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Init"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MapRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParserPinned<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeqRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SerializeTag<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::CurrentEnum<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: de::UnitVariantAccess<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ErrorImpl"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libyaml::emitter::Emitter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libyaml::parser::Anchor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libyaml::parser::Parser<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libyaml::parser::ScalarStyle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libyaml::tag::Tag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libyaml::util::InitPtr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libyaml::util::Owned<std::mem::MaybeUninit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libyaml::util::Owned<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: loader::Document<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: loader::Loader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: number::N"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::Scalar<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: path::Path<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: singleton_map::StructVariantSeed<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: singleton_map::TupleVariantSeed<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: singleton_map_recursive::StructVariantSeed<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: singleton_map_recursive::TupleVariantSeed<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::MapRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::SeqRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::VariantDeserializer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::de::VariantRefDeserializer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::tagged::MaybeTag<std::string::String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::singleton_map::SerializeStructVariantAsSingletonMap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::singleton_map::SerializeTupleVariantAsSingletonMap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::singleton_map::SingletonMapAsEnum<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::singleton_map_recursive::SerializeStructVariantAsSingletonMapRecursive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::singleton_map_recursive::SerializeTupleVariantAsSingletonMapRecursive<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: with::singleton_map_recursive::SingletonMapRecursiveAsEnum<u32>"
+bodies = 1

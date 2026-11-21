@@ -1,0 +1,31 @@
+[[fn]]
+path = "concurrent-queue::busy_wait"
+kappa = "57ef3a91477294a045b2fbed4f8e7f4fa1fd0e2849bbd30074ef37506d299487"
+embedded = "b2988e62818edc53493ffeb3cb567c0a35fd6b73666cb2a6d3d4ceab05975b84"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::thread::yield_now"
+
+[[fn]]
+path = "concurrent-queue::sync::prelude::AtomicPtr::with_mut"
+kappa = "109c3555c846ba13fbfe1794405a0ec54744ff13518d3154f811efec25cec785"
+at = "F=u32, R=u32, T=u32"
+embedded = "425556ba8536b84de9f7d0a71bffe611b3fea83d2aaa01dff89a49cd338bf9ed"
+status = "residue"
+cause = "mir::Ty: Atomic<*mut u32>"
+
+[[fn]]
+path = "concurrent-queue::sync::prelude::AtomicUsize::with_mut"
+kappa = "ba22279c6d5b41e68945ded0108910714368dd306e9a6ec21cb7b9882582813d"
+at = "F=u32, R=u32"
+embedded = "63b48264e65828f72dd63f382156df684329f560706e79620ed8efc65ee7ee68"
+status = "residue"
+cause = "mir::Ty: Atomic<usize>"
+
+[[fn]]
+path = "concurrent-queue::sync::prelude::UnsafeCell::with_mut"
+kappa = "017917d70e5fed0f67c7796897a171baea4ebabf46b05cf5f2a98ff134ea9731"
+at = "F=u32, R=u32, T=u32"
+embedded = "d581371549e7eabb4e1a664cfd3790a3988148e52fe062f422ae0696fb525f18"
+status = "residue"
+cause = "mir::Ty: UnsafeCell<u32>"
+

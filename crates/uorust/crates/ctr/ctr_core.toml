@@ -1,0 +1,94 @@
+[[fn]]
+path = "ctr::ctr_core::Backend::gen_ks_block"
+kappa = "3b840e6934e5a980ed1ad2f7e2bcab4ff7eac77305854beb651db94557b766dc"
+at = "B=u32, F=u32"
+embedded = "a66d12b4ec2bd2516ebfc1341eb9ec9d980afbb6395192b4675846fc1bb84bbd"
+status = "residue"
+cause = "mir::Ty: Backend<'_, u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::Backend::gen_par_ks_blocks"
+kappa = "718b1e2d2c26d979a395f4747f769971ce8433e6631f7d7b1ae70aca32dd196b"
+at = "B=u32, F=u32"
+embedded = "acb5761ec30389135e26b812e3d5de06eb3a2e5903cf2cab24068f956f1dac77"
+status = "residue"
+cause = "mir::Ty: Backend<'_, u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::fmt"
+kappa = "b5d0063d3f732b088cd2610782685b1c7af36f53ec65b424dec32e130a1490e7"
+embedded = "aca69674d09efc9d66e10470afff070d69165916fd0599d044f89e1de396687c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::get_block_pos"
+kappa = "1ea6d0db5b331ea58ab55fbc80c6321e36efd403bebea071e9d303e6fdd0aab4"
+at = "C=u32, F=u32"
+embedded = "d2de86c19e826340f3aedeeb8b1b456559290296b2a3426b40e1a3cb063cf6ea"
+status = "residue"
+cause = "mir::Ty: CtrCore<u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::inner_iv_init"
+kappa = "c4c9d5ccae092e4766c6eab4f64613a9595784ebe8053cf92e6fe51e281ba003"
+at = "C=u32, F=u32"
+embedded = "e650ab86caf56b814bd7d27ffbc1cf6346b8b94e2b6c5ec324981b9686ef08ec"
+status = "residue"
+cause = "mir::Ty: ctr_core::CtrCore<u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::iv_state"
+kappa = "4a9adef17e0d5da6a34f5f7afa33de3f1f32942f3f327a4ba012ddc3be897a62"
+at = "C=u32, F=u32"
+embedded = "b68e051018b58e301a55ed2ffc12a5d84081e3dc0c7590985f5d83a3c8c27f00"
+status = "residue"
+cause = "mir::Ty: cipher::Array<u8, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::process_with_backend"
+kappa = "6cf1cb7c65d583c4ff509fcb2c212edb1bc1b18e5171a7ce15bc4ba21e3dad1a"
+at = "C=u32, F=u32"
+embedded = "c2c30283dad2135fc9c9378336a6d2341e698ce2cfa894d4ecdfe279988d52b6"
+status = "residue"
+cause = "mir::Ty: CtrCore<u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::process_with_backend::Closure::call"
+kappa = "228301502890117eae75b41e423d64db965b528cb1eb0595e20e3c4e4e512f0b"
+at = "B=u32, BS=u32, F=u32, SC=u32"
+embedded = "4638279b985e2d9fdb1f7d78515a16c1d8718a2db32c3e3db081486a46b7a34a"
+status = "residue"
+cause = "mir::Ty: Closure<'_, u32, u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::remaining_blocks"
+kappa = "61982f2cb4dd05b0eadd4e4a6893b091115bbb3299b83ffaf1a59b8af23c8cfc"
+at = "C=u32, F=u32"
+embedded = "85fd4664b7a6a80f73ecbb05907c07e823b325d2aa89756d9e828d8c2af346df"
+status = "residue"
+cause = "mir::Ty: CtrCore<u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::set_block_pos"
+kappa = "42137724aa91edaf5eaf3a082c6e1432d1d5007b19721a9961ade259d9086290"
+at = "C=u32, F=u32"
+embedded = "d72a44ed62559558e968a31e2d52cbb590c7ac02f111eaffc3f4ed8604f6f833"
+status = "residue"
+cause = "mir::Ty: CtrCore<u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::set_iv"
+kappa = "6bd56ca3ab8601a90dd760f601b099688022baf3ff3bf65e023cb83cb5b2b898"
+at = "C=u32, F=u32"
+embedded = "0e631f5df717d534e43d7fdfa6b244e218c813800a5972d5dc00654e7ab82385"
+status = "residue"
+cause = "mir::Ty: CtrCore<u32, u32>"
+
+[[fn]]
+path = "ctr::ctr_core::CtrCore::write_alg_name"
+kappa = "ee4b7e3466bd1d74a2c4a9a4f01d8a28cfccbc83c977f9605b2b977a2a6ee9f4"
+embedded = "a19bf0a042aa027b985e2da5aad6ad5f35bbf580717d8dc5bcb7ea089781bc94"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+

@@ -1,0 +1,224 @@
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:12:10: 12:15>::fmt"
+kappa = "62246a9e126cf2c60ab34753917e7a3eaccc42818f65e343906f7d9c90f7ed8b"
+embedded = "826586727cb4f86dcf71aa8403db3dd6d7915d24d39abfedd5bc8bf41de0e085"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:12:17: 12:22>::clone"
+kappa = "729ebf6bce2d16203e02a93ca016fba6afd022d9f5449301db7f033e34680514"
+embedded = "1632c9775420b148f56214ccd01f3797c8e0e477a8d58607a2c88d612d8f4fcb"
+status = "residue"
+cause = "mir::Ty: timings::Timeout"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:12:30: 12:39>::eq"
+kappa = "c775446be469092090cb55c27f1e7f246841f28c4cf7599ae6d6df2837cd68f5"
+embedded = "3de38fa8008749abf10b07d80d03651ac3403d0b4bcfec7e9bffee2b97ed311a"
+status = "residue"
+cause = "mir::Ty: timings::Timeout"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:12:41: 12:43>::assert_fields_are_eq"
+kappa = "186e431bb777ba85afffee44c8f4df6a50cee51dcc89e8aaf1fe751240bb1914"
+embedded = "621956f5f94f509b91a3a3b940a2b8740482d1b939db0b9f5e411b963bcc972e"
+status = "residue"
+cause = "mir::Ty: timings::Timeout"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:203:10: 203:15>::clone"
+kappa = "bc99a3cdc285499cc802be8697b52c898b8bb34c1c0ba430c221b97b929ab652"
+embedded = "49d56809884a097fb0b8f719aef60cfc884af1fb28cf6a395229fc21243869e3"
+status = "residue"
+cause = "mir::Ty: timings::CurrentTime"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:218:10: 218:15>::fmt"
+kappa = "222fe3cf41210b560d6d9cdb193ba86c677e9e5c00b3d9fdde047858e318b6c7"
+embedded = "66419b2be373748d163d58b4b9f8ca1e4a8a8ccbfa0eae836d152e485dbacd36"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:218:17: 218:22>::clone"
+kappa = "d3bdca0a8a16a1e205f6c9f3680b295c4521d90ba760ead16f29e2e94bfebb7f"
+embedded = "86bc6305193137149cc5616644c00d79ff04ab9d93ba9f857b03515c0569d8ab"
+status = "residue"
+cause = "mir::Ty: timings::NextTimeout"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:218:30: 218:39>::eq"
+kappa = "1a72f4ae044564b5bd35251040d860a3caadf2ab0ab2722ec19798ecc3dfda6f"
+embedded = "632ab265a3f15cee7742b02036cb65e96be78f61a3ccf0db39458129e3076ed7"
+status = "residue"
+cause = "mir::Ty: NextTimeout"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:218:41: 218:43>::assert_fields_are_eq"
+kappa = "12e5d626fb557c8d6471088c1abe0bdbe39da5652baddd2a5974af6ce4e3d465"
+embedded = "e847d427a61b29c9077fe7bf5038ff955cfdd71a107d316ed985ea1e44410abc"
+status = "residue"
+cause = "mir::Ty: NextTimeout"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:92:10: 92:17>::default"
+kappa = "158aa25bfaa1adc95adc44eacc82a9290ab6ae9b93e188ff367a86224cc1f829"
+embedded = "3b7743e321923908d1520b853530f883f08aeb30c2fc4393ed22dd3c68f3d843"
+status = "residue"
+cause = "mir::Ty: timings::CallTimings"
+
+[[fn]]
+path = "ureq::timings::<impl at src/timings.rs:92:19: 92:24>::fmt"
+kappa = "16dc4d12bba73c74044ac6d4acfff39554855ec7a704040273db90e551ff37c2"
+embedded = "a6261741df94878057b5095a8cbef6eba25c6486048f95d2f0d0d95260a0d195"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::timings::CallTimings::current_time"
+kappa = "99da7904e240e3d4fa26e0cf724a2deea7664400ce18f78f55e44e34f688b2b4"
+embedded = "507c3042f30e84dfc995d29bb1abca7ba46e40726ad6be1601389a3a6a4da387"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<dyn std::ops::Fn() -> unversioned::transport::time::Instant + std::marker::Send + std::marker::Sync>"
+
+[[fn]]
+path = "ureq::timings::CallTimings::new"
+kappa = "0eb7d6b9e32a106c2cf1fe31d6ff34f7a4682358f4fed0e7831be70ab65b1e8a"
+embedded = "1f767d1caeee90b4d14dbb38ba63a1ea2b4f1608f9e5a7e505a91acc7439434d"
+status = "residue"
+cause = "mir::Ty: timings::CallTimings"
+
+[[fn]]
+path = "ureq::timings::CallTimings::new_call"
+kappa = "e57c98f9654b2584d81b01adb2a9ef5f1e636f7d7f8739a50a8da1db208104ea"
+embedded = "bbeeb76bbddfc03f4e52a3a99fc52633e9a10866923d19f212530d8e12bd2303"
+status = "residue"
+cause = "mir::Ty: timings::CallTimings"
+
+[[fn]]
+path = "ureq::timings::CallTimings::next_timeout"
+kappa = "5b6adb5002b35cdc84b2e90de9266d0b4501058672227003b8898788a1d9ff97"
+embedded = "b73ce058c5cf9012765806f0967fc465c35154a683788b0e0318127f6dff1943"
+status = "residue"
+cause = "mir::Ty: timings::NextTimeout"
+
+[[fn]]
+path = "ureq::timings::CallTimings::now"
+kappa = "8bd081be12947e9ba6dd89e7c43f7a375e913c6cfc2cbfdf7efbfff7e0078d75"
+embedded = "d95b84f3b9be6201dd733aec0be4d90079cb8c58c8b70b4681b49882d8deaa4e"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Instant"
+
+[[fn]]
+path = "ureq::timings::CallTimings::record_time"
+kappa = "d6f67dbd5e489623e2a91889332a508a33efc88d74446f3db924889015d81db3"
+embedded = "9a4405b9d038211ac45bcb1dea71b415f3da4b623f0f5492c74ce1ff209efaa5"
+status = "residue"
+cause = "mir::Ty: CallTimings"
+
+[[fn]]
+path = "ureq::timings::CallTimings::time_of"
+kappa = "20e8320ed2428f7ce7f7b0418f210c61f5beaa249a0b1c93e3825c80aa684f32"
+embedded = "9b40b6b103dab90ad5de8e8ed3d9266617a43f3ac97fdb00197942797a1d2358"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Instant"
+
+[[fn]]
+path = "ureq::timings::CallTimings::with_io_timeouts"
+kappa = "bb98f7f8b8b67500f6426fc1ff74d1755f633d27aec8ea7247db861a020edca6"
+embedded = "d98a705f62e07bc126d58c2659853cb5b8bf5b2ee4c979a1c827547a985451e8"
+status = "residue"
+cause = "mir::Ty: timings::CallTimings"
+
+[[fn]]
+path = "ureq::timings::CurrentTime::default"
+kappa = "93a63b1a4b644061466e0da05b26707c8c5c5eb08b6a94d312651a531a739f56"
+embedded = "d7388a383a61329d1d5ee01b91c91b82445e82ec51c7042d778960af8bc6af15"
+status = "residue"
+cause = "mir::Ty: timings::CurrentTime"
+
+[[fn]]
+path = "ureq::timings::CurrentTime::fmt"
+kappa = "4d0636dbc0c41637d5f42e46e7bfa99119b50840ee735f228537bd703c0775c2"
+embedded = "c36a950c15efc23e9aa0b6166cd1473b36d91181fa08653e4e8f83d2272d6f60"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::timings::CurrentTime::now"
+kappa = "de5bf26ab2cae37d36943dbf71001847bf08c20d5e79fa02b838cddff1713385"
+embedded = "afa95ca0f238529b6e989277075021480692e1280d61da6fbc99a5d84914853d"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Instant"
+
+[[fn]]
+path = "ureq::timings::NextTimeout::capped"
+kappa = "cf7f2d7072e8f250f6ab75afd4c18f826167f0e870f54b4fb3dd77940f26761b"
+embedded = "d034f96ea3c5c7265099ada69636daf234732e65971d0193621ba9a5d5b4a722"
+status = "residue"
+cause = "mir::Ty: timings::NextTimeout"
+
+[[fn]]
+path = "ureq::timings::NextTimeout::check"
+kappa = "3ceb5f69b897da40aab841f6998a1d9902cf12d2de48899975724e141dfa073e"
+embedded = "a1694398b55fada7de45a9b7a64f3f950c45f4754714114f9b7020182374aa6d"
+status = "residue"
+cause = "mir::Ty: timings::NextTimeout"
+
+[[fn]]
+path = "ureq::timings::NextTimeout::default"
+kappa = "b5e9e9751b378d7e192f0da2029262dd4ce3d009eaf9008fbf36cd1d11521db8"
+embedded = "ab3fe26e669cdda88a32e4656f9df14e124c0cafe03a0df0f6aabe444c827c1b"
+status = "residue"
+cause = "mir::Ty: timings::NextTimeout"
+
+[[fn]]
+path = "ureq::timings::NextTimeout::for_read"
+kappa = "ec60a5ba9c820b69be8cb29e671ce325c9e46b48d3977bfec712569041d560c9"
+embedded = "b908bcbe2e213bf0efc6dbc6a4fe94d8a5e4554448c0f297b967da6fcfc8e3e3"
+status = "residue"
+cause = "mir::Ty: timings::NextTimeout"
+
+[[fn]]
+path = "ureq::timings::NextTimeout::for_write"
+kappa = "28b712fc88a651f55fae0e6d0bfb84ba106179cf28ba90ee87b85d0a14e66c66"
+embedded = "269b45e3c17c574500ac2a8e31c2e1e5fd4f09ea81ab660d2951859e734d552f"
+status = "residue"
+cause = "mir::Ty: timings::NextTimeout"
+
+[[fn]]
+path = "ureq::timings::NextTimeout::not_zero"
+kappa = "e08e3954cd6160a911f04abd07eeedca2c95b6d20fee4d264706b47b1bfccb12"
+embedded = "34a0317244dd514f8ab05b7f789bbbb9b88e78de271c007f8234ea7860dc01a2"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::timings::Timeout::configured_timeout"
+kappa = "aa05b6794f9caad1b81dd39e4d57fb6488fdfa48391e7e8395a6a66fbdc64866"
+embedded = "660abd4ee9327ae6209705c717c8234113a3388b9eaa544f82e24bb914af5171"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::timings::Timeout::fmt"
+kappa = "649cb2b7eb1babc631083603d8dea7c7717af390acf57817cdc3f28453f3d13b"
+embedded = "d82a24b5e6d37aeeb13861d26261398f83106f3c7ffeda5cc0b60c127fe62b14"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::timings::Timeout::preceeding"
+kappa = "8f5e8d1b50871b78c6ca00234ff3af5b9040740dbe0403dc3de49dcbceed1244"
+embedded = "a14fc20cd5ac1ca9300356686e8e358de815c4f26d0fe602798d8acc4e88a20a"
+status = "residue"
+cause = "mir::Ty: timings::Timeout"
+
+[[fn]]
+path = "ureq::timings::Timeout::timeouts_to_check"
+kappa = "479ff91aa02ef11be27a9f89cce891bff570b0a39fc2684f61dbed77e11d59ac"
+embedded = "240498d9277f80f30a7284c85a709197e37df7203e74f07993ec73a11a3f47bd"
+status = "residue"
+cause = "mir::Ty: timings::Timeout"
+

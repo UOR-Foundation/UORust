@@ -1,0 +1,2376 @@
+# The jiff register (written by `uorust crate jiff@1.0.1`; do not edit): every body of
+# jiff's MIR at jiff 1.0.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 3206
+translated = 14
+residue = 3192
+
+[module.civil]
+bodies = 487
+translated = 0
+residue = 487
+
+[module.duration]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.error]
+bodies = 187
+translated = 0
+residue = 187
+
+[module.fmt]
+bodies = 779
+translated = 12
+residue = 767
+
+[module.now]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.signed_duration]
+bodies = 125
+translated = 0
+residue = 125
+
+[module.span]
+bodies = 306
+translated = 1
+residue = 305
+
+[module.timestamp]
+bodies = 110
+translated = 0
+residue = 110
+
+[module.tz]
+bodies = 384
+translated = 1
+residue = 383
+
+[module.util]
+bodies = 665
+translated = 0
+residue = 665
+
+[module.zoned]
+bodies = 151
+translated = 0
+residue = 151
+
+[embedding]
+bodies = 3203
+embedded = 3203
+evaluable = 3195
+blocked = 8
+
+[[construct]]
+construct = "CastKind::IntToFloat"
+bodies = 8
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: util::b::BoundsError"
+bodies = 314
+
+[[cause]]
+cause = "mir::Ty: error::Error"
+bodies = 265
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 261
+
+[[cause]]
+cause = "mir::Ty: span::Span"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: signed_duration::SignedDuration"
+bodies = 132
+
+[[cause]]
+cause = "mir::Ty: zoned::ZonedDateTime"
+bodies = 95
+
+[[cause]]
+cause = "mir::Ty: civil::time::Time"
+bodies = 73
+
+[[cause]]
+cause = "mir::Ty: timestamp::Timestamp"
+bodies = 72
+
+[[cause]]
+cause = "mir::Ty: tz::offset::Offset"
+bodies = 65
+
+[[cause]]
+cause = "mir::Ty: civil::datetime::DateTime"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: fmt::Parsed<'_"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: civil::date::Date"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: tz::timezone::TimeZone"
+bodies = 46
+
+[[cause]]
+cause = "mir::Ty: civil::weekday::Weekday"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: datetime::DateTime"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::SpanPrinter"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: civil::iso_week_date::ISOWeekDate"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::printer::ItemInteger"
+bodies = 23
+
+[[cause]]
+cause = "mir::Ty: span::SpanArithmetic<'_>"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: zoned::ZonedDateTimeWith"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: date::Date"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: weekday::Weekday"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: BrokenDownTime"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: civil::datetime::DateTimeWith"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: core::time::Duration"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: BorrowedBuffer<'_>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: span::Unit"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::pieces::Pieces<'_>"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::printer::DateTimePrinter"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: civil::date::DateDifference"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: civil::datetime::DateTimeDifference"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: civil::time::TimeDifference"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::printer::Item"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: span::SpanCompare<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::BrokenDownTime"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: timestamp::TimestampDifference"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: tz::offset::Dst"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::DateTimePrinter"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: span::SpanRound<'_>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Unit"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: civil::time::TimeWith"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: iso_week_date::ISOWeekDate"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: jiff_core::bounds::Sign"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: tz::ambiguous::AmbiguousZonedDateTime"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: ZoneInfoName"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: civil::date::DateWith"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: fmt::offset::Parser"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: span::SpanTotal<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: span::UnitSet"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: util::round::Increment"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: civil::date::DateArithmetic"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: civil::datetime::DateTimeArithmetic"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: civil::datetime::DateTimeRound"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: civil::time::TimeArithmetic"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: civil::time::TimeRound"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::printer::ItemString"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: signed_duration::SignedDurationRound"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: timestamp::TimestampArithmetic"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: timestamp::TimestampRound"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tz::db::TimeZoneDatabase"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tz::offset::OffsetArithmetic"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tz::offset::OffsetRound"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tz::timezone::repr::Repr"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: zoned::ZonedDateTimeArithmetic"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: zoned::ZonedDateTimeDifference<'_>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: zoned::ZonedDateTimeRound"
+bodies = 8
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DesignatorWriter<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: FractionalPrinter"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: StringCow<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::pieces::TimeZoneAnnotation<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: tz::db::TimeZoneNameIter<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: TimeZoneName<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: duration::Duration"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: tz::ambiguous::AmbiguousOffset"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: tz::ambiguous::AmbiguousTimestamp"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: tz::db::concatenated::inner::CachedTimeZone"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: tz::timezone::TimeZoneTransition<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: fmt::buffer::BorrowedBuffer<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::Display<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::printer::ItemOffset"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::SpanPrinter"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::pieces::PiecesOffset"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::pieces::TimeZoneAnnotationKind<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::printer::SpanPrinter"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: span::SpanFieldwise"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: span::SpanRelativeTo<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tz::db::concatenated::inner::Database"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: tz::db::zoneinfo::inner::ZoneInfoName"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MIN"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item signed_duration::SECS_PER_MINUTE"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanMilliseconds::MAX"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanYears::MAX"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Meridiem"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NamesInner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PiecesNumericOffset"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RoundMode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SpanFieldwise"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TimeZoneAnnotation<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TimeZoneAnnotationName<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TimeZoneOffsetInfo<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ZoneInfoNamesInner"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: civil::Era"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: error::util::OsStrUtf8Error"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::DefaultCustom"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::parse::Parser<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::printer::Designators"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: repr::Repr"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: span::Relative<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: span::RelativeCivil"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: span::RelativeZonedDateTime<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tz::db::concatenated::inner::CachedZones"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tz::db::zoneinfo::inner::CachedTimeZone"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: util::borrow::StringCow<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanHours::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanMicroseconds::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanMinutes::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanSeconds::MAX"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AmbiguousZonedDateTime"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Era"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: IndexEntry<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Pieces<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PiecesOffset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TimeZoneAnnotationKind<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UnitSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::tz::db::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: error::util::ParseIntError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::parser::SpanParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::Designators"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::FractionalPrinter"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::offset::ParsedOffset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::rfc9557::ParsedAnnotations<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::Config<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::Extension"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::Flag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::Meridiem"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::PosixCustom"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::DateTimeParser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::pieces::PiecesNumericOffset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::pieces::TimeZoneAnnotationName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: span::Nudge"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: span::RelativeSpan<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: timestamp::TimestampSeries"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tz::db::TimeZoneLocation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tz::db::TimeZoneName<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tz::db::zoneinfo::inner::Database"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tz::timezone::TimeZoneOffsetInfo<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: util::cache::Expiration"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::MINS_PER_HOUR"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::SECS_PER_MIN"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item signed_duration::NANOS_PER_SEC"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::OffsetHours::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::OffsetMinutes::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanDays::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanMonths::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanWeeks::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::UnixEpochMilliseconds::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::UnixEpochSeconds::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::ZonedDateTimeDaySeconds::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Cache"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MaybeNamedTimeZone"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Names"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParsedOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Spacing"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SpanRound<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TimeZoneDatabase"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ZoneInfoNames"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bundled::inner::Database"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: civil::date::DateSeries"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: civil::datetime::DateTimeSeries"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: civil::time::TimeSeries"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: civil::weekday::WeekdaysForward"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: civil::weekday::WeekdaysReverse"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: duration::SDuration<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::fmt::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::fmt::strtime::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::fmt::strtime::FormatError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::util::ParseFractionError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::parser::HMS"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::DirectionSign"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::rfc2822::DateTimeParser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::rfc9557::Parser"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::printer::Case"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::strtime::printer::Formatter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::parser::ParsedTime"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jiff_core::tz::posix::TimeZone"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jiff_core::tz::tzif::MaybeNamedTimeZone"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: timestamp::TimestampDisplayWithOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tz::ambiguous::Disambiguation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tz::concatenated::IndexEntry<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tz::db::bundled::inner::Database"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tz::offset::OffsetConflict"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tz::timezone::TimeZoneFollowingTransitions<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tz::timezone::TimeZonePrecedingTransitions<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utf8::Utf8Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::borrow::DumbCow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::round::RoundMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: util::utf8::Utf8Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zoned::ZonedDateTimeSeries"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zoneinfo::inner::CachedTimeZone"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zoneinfo::inner::CachedZones"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zoneinfo::inner::Database"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: cmp_ignore_ascii_case_bytes::{closure#0}: mir::TerminatorKind::Call: core::num::to_ascii_lowercase"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: offseter::{closure#0}: mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Write"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::CivilDayNanosecond as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::CivilDaySecond as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Day as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::DayOfYear as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Hour as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::ISOWeek as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::ISOYear as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Microsecond as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Millisecond as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Minute as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Month as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Nanosecond as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::NthWeekday as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::OffsetHours as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::OffsetMinutes as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::OffsetSeconds as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::OffsetTotalSeconds as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Second as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::SignedSubsecNanosecond as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::SubsecNanosecond as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::UnixEpochDays as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::UnixEpochSeconds as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::WeekdayMondayOne as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::WeekdayMondayZero as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::WeekdaySundayOne as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::WeekdaySundayZero as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::Year as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::YearBCE as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <jiff_core::bounds::YearCE as jiff_core::bounds::Bounds>::WHAT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Century as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Century as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::CivilDayNanosecond as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::CivilDayNanosecond as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::CivilDaySecond as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::CivilDaySecond as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Day as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Day as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::DayOfYear as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::DayOfYear as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Hour as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Hour as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Hour12 as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Hour12 as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::ISOWeek as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::ISOWeek as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::ISOYear as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::ISOYear as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Increment as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Increment as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Increment32 as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Increment32 as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::LeapSecond as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::LeapSecond as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Microsecond as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Microsecond as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Millisecond as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Millisecond as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Minute as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Minute as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Month as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Month as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Nanosecond as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Nanosecond as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::NthWeekday as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::NthWeekday as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::OffsetHours as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::OffsetHours as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::OffsetMinutes as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::OffsetMinutes as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::OffsetSeconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::OffsetSeconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::OffsetTotalSeconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::OffsetTotalSeconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Second as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Second as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SignedDurationSeconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SignedDurationSeconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SignedSubsecNanosecond as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SignedSubsecNanosecond as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanDays as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanDays as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanHours as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanHours as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMicroseconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMicroseconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMilliseconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMilliseconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMinutes as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMinutes as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMonths as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMonths as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMultiple as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanMultiple as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanNanoseconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanNanoseconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanSeconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanSeconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanWeeks as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanWeeks as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanYears as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SpanYears as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SubsecNanosecond as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::SubsecNanosecond as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::UnixEpochDays as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::UnixEpochDays as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::UnixEpochMicroseconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::UnixEpochMicroseconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::UnixEpochMilliseconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::UnixEpochMilliseconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::UnixEpochSeconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::UnixEpochSeconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekNum as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekNum as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekdayMondayOne as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekdayMondayOne as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekdayMondayZero as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekdayMondayZero as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekdaySundayOne as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekdaySundayOne as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekdaySundayZero as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::WeekdaySundayZero as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Year as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::Year as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::YearBCE as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::YearBCE as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::YearCE as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::YearCE as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::YearTwoDigit as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::YearTwoDigit as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::ZonedDateTimeDayNanoseconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::ZonedDateTimeDayNanoseconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::ZonedDateTimeDaySeconds as jiff_core::bounds::Bounds>::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <util::b::ZonedDateTimeDaySeconds as jiff_core::bounds::Bounds>::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::CivilDayNanosecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::CivilDayNanosecond::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::CivilDaySecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::CivilDaySecond::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Day::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Day::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::DayOfYear::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::DayOfYear::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::DeltaSeconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::DeltaSeconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Hour::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Hour::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::ISOWeek::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::ISOWeek::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::ISOYear::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::ISOYear::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Microsecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Microsecond::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Millisecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Millisecond::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Minute::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Minute::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Month::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Month::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Nanosecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Nanosecond::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::NthWeekday::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::NthWeekday::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::OffsetHours::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::OffsetHours::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::OffsetMinutes::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::OffsetMinutes::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::OffsetSeconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::OffsetSeconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::OffsetTotalSeconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::OffsetTotalSeconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Second::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Second::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::SignedSubsecNanosecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::SignedSubsecNanosecond::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::SubsecNanosecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::SubsecNanosecond::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::UnixEpochDays::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::UnixEpochDays::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::UnixEpochSeconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::UnixEpochSeconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::WeekdayMondayOne::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::WeekdayMondayOne::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::WeekdayMondayZero::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::WeekdayMondayZero::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::WeekdaySundayOne::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::WeekdaySundayOne::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::WeekdaySundayZero::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::WeekdaySundayZero::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Year::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::Year::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::YearBCE::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::YearBCE::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::YearCE::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::bounds::YearCE::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::DAYS_PER_CIVIL_WEEK_32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::HOURS_PER_CIVIL_DAY_32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::NANOS_PER_HOUR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::NANOS_PER_MICRO_32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::NANOS_PER_MILLI_32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::NANOS_PER_MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::SECS_PER_CIVIL_DAY_32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item jiff_core::constants::SECS_PER_HOUR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item signed_duration::MICROS_PER_SEC"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item signed_duration::MILLIS_PER_SEC"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Century::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::CivilDayNanosecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::CivilDaySecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Day::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::DayOfYear::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Hour12::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Hour::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::ISOWeek::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::ISOYear::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Increment32::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Increment::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::LeapSecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Microsecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Millisecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Minute::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Month::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Nanosecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::NthWeekday::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::OffsetSeconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::OffsetTotalSeconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Second::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SignedDurationSeconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SignedSubsecNanosecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanHours::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanMicroseconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanMilliseconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanMinutes::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanMultiple::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanNanoseconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SpanSeconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::SubsecNanosecond::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::UnixEpochDays::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::UnixEpochMicroseconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::UnixEpochMilliseconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::UnixEpochSeconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::WeekNum::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::WeekdayMondayOne::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::WeekdayMondayZero::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::WeekdaySundayOne::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::WeekdaySundayZero::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Year::LEN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::Year::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::YearBCE::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::YearCE::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::YearTwoDigit::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::ZonedDateTimeDayNanoseconds::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item util::b::ZonedDateTimeDaySeconds::MIN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: tz::offset::Offset::round_to_nearest_minute::round::MAX_HOURS: mir::Operand::Constant: the constant item util::b::OffsetHours::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc1089: &&["
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc8668: &std::sync::RwLock<Cache>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <dyn fmt::Write as fmt::Write>::as_mut_vec"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as From>::from"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::as_mut_vec"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::ilog10"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_ascii_whitespace"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: reset"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: util::parse::offseter: jiff's MIR stops at mir::AggregateKind::Closure: offseter::{closure#0}: mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayBuffer<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DateArithmetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DateDifference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DateTimeArithmetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DateTimeDifference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DateTimeRound"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DumbCow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DurationUnits"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Expiration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MustDivide"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OffsetArithmetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimeArithmetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimeDifference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimeZoneLocation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimeZoneTransition<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimestampArithmetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TimestampDifference"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZonedDateTimeArithmetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZonedDateTimeDifference<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: civil::date::DateWithDay"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: civil::date::DateWithYear"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::array::TryFromSliceError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::AdhocError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::CrateFeatureError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::IOError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::civil::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::duration::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::fmt::friendly::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::fmt::offset::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::fmt::rfc2822::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::fmt::rfc9557::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::fmt::strtime::ParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::fmt::temporal::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::fmt::util::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::signed_duration::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::span::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::timestamp::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::tz::ambiguous::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::tz::concatenated::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::tz::offset::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::tz::system::enabled::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::tz::timezone::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::tz::zic::disabled::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::unit::MustDivide"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::unit::UnitConfigError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::util::RoundingIncrementError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::zoned::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::StdFmtWrite<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::StdIoWrite<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::buffer::ArrayBuffer<#usize_N>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::buffer::ArrayBuffer<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::buffer::BorrowedWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::Designator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::DesignatorWriter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::Direction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::FractionalUnit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::friendly::printer::Spacing"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::offset::Numeric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::rfc2822::DateTimePrinter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::rfc9557::ParsedTimeZone<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::SpanParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::parser::DateTimeParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::parser::ParsedDate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::parser::ParsedDateTime<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::parser::ParsedTimeZone<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::temporal::parser::SpanParser"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::util::DurationUnits"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl FnMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::Timestamp"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::civil::Date"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::civil::DateTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::civil::ISOWeekDate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::civil::Time"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::civil::UnixEpochDay"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::civil::Weekday"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::util::ArrayStr<2>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::util::ArrayStr<5>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jiff_core::util::SmallStr<6>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: round::Increment"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: span::RelativeSpanKind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: span::SpanRelativeToKind<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::sync::Arc<str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Instant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tz::concatenated::ConcatenatedTzif<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tz::concatenated::Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tz::db::Repr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tz::db::concatenated::inner::Names"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tz::db::zoneinfo::inner::CachedZones"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tz::db::zoneinfo::inner::ZoneInfoNames"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tz::system::Cache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tz::timezone::DiagnosticName<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::b::SpecialBoundsError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::escape::Byte"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::escape::Bytes<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zoned::ZonedDateTimeInner"
+bodies = 1

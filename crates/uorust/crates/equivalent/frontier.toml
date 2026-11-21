@@ -1,0 +1,26 @@
+# The equivalent register (written by `uorust crate equivalent@1.0.3`; do not edit): every body of
+# equivalent's MIR at equivalent 1.0.3, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 2
+translated = 1
+residue = 1
+
+[module.crate]
+bodies = 2
+translated = 1
+residue = 1
+
+[embedding]
+bodies = 2
+embedded = 2
+evaluable = 2
+blocked = 0
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1

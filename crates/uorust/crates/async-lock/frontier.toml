@@ -1,0 +1,448 @@
+# The async-lock register (written by `uorust crate async-lock@3.5.0`; do not edit): every body of
+# async-lock's MIR at async-lock 3.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 361
+translated = 5
+residue = 356
+
+[module.barrier]
+bodies = 20
+translated = 0
+residue = 20
+
+[module.crate]
+bodies = 1
+translated = 1
+residue = 0
+
+[module.mutex]
+bodies = 57
+translated = 1
+residue = 56
+
+[module.once_cell]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.rwlock]
+bodies = 214
+translated = 3
+residue = 211
+
+[module.semaphore]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.sync]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 360
+embedded = 360
+evaluable = 357
+blocked = 3
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 41
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::_::Projection<'_"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::_::ProjectionRef<'_"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: once_cell::OnceCell<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockWriteGuardArc<u32>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: RawRwLock"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: mutex::MutexGuard<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockReadGuardArc<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLock<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: barrier::BarrierWaitResult"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: mutex::Mutex<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockUpgradableReadGuard<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockUpgradableReadGuardArc<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: mutex::MutexGuardArc<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: semaphore::SemaphoreGuard<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: semaphore::SemaphoreGuardArc"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: once_cell::State"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: AcquireSlow<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RawUpgrade<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: mutex::_::Projection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: mutex::_::ProjectionRef<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::Read<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::Write<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::_::Projection<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::_::ProjectionRef<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MutexGuardArc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RawWrite<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RwLockWriteGuardArc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: UpgradeArcInner<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::ReadArc<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::UpgradableRead<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::UpgradableReadArc<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::Upgrade<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::UpgradeArc<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: rwlock::futures::WriteArc<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: semaphore::Acquire<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RwLockReadGuardArc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RwLockUpgradableReadGuardArc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Semaphore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SemaphoreGuard<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SemaphoreGuardArc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: barrier::BarrierWait<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: barrier::_::Projection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: barrier::_::ProjectionRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mutex::Lock<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: mutex::LockArc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::RawRwLock"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::AcquireArc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::_::Projection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::_::Projection<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::_::ProjectionRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: semaphore::_::ProjectionRef<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AcquireArc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AcquireArcInner"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AcquireInner<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Atomic<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BarrierWait<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BarrierWaitInner<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Lock<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LockArc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LockInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawRead<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RawUpgradableRead<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadArc<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadArcInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReadInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RwLockUpgradableReadGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UpgradableRead<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UpgradableReadArc<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UpgradableReadArcInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UpgradableReadInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Upgrade<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UpgradeArc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UpgradeInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WriteArc<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WriteArcInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WriteInner<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: barrier::Barrier"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Future<Output = u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mutex::AcquireSlow<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: mutex::LockArcInnardsProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::RawRead<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::RawUpgradableRead<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::RawUpgrade<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::RawWrite<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::WriteStateProj<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rwlock::raw::WriteStateProjReplace<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: semaphore::Semaphore"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of once_cell::OnceCell<u32>::get_or_init<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of once_cell::OnceCell<u32>::get_or_try_init<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of once_cell::OnceCell<u32>::initialize_or_wait<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of once_cell::OnceCell<u32>::set"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of once_cell::OnceCell<u32>::wait"
+bodies = 1

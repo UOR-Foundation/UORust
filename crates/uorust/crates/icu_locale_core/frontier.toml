@@ -1,0 +1,529 @@
+# The icu_locale_core register (written by `uorust crate icu_locale_core@2.4.0`; do not edit): every body of
+# icu_locale_core's MIR at icu_locale_core 2.4.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 915
+translated = 2
+residue = 913
+
+[module.data]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.extensions]
+bodies = 327
+translated = 0
+residue = 327
+
+[module.langid]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.locale]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.parser]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.preferences]
+bodies = 305
+translated = 1
+residue = 304
+
+[module.shortvec]
+bodies = 40
+translated = 0
+residue = 40
+
+[module.subtags]
+bodies = 150
+translated = 1
+residue = 149
+
+[embedding]
+bodies = 915
+embedded = 915
+evaluable = 895
+blocked = 20
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 120
+
+[[cause]]
+cause = "mir::Ty: extensions::unicode::value::Value"
+bodies = 63
+
+[[cause]]
+cause = "mir::Ty: extensions::unicode::key::Key"
+bodies = 56
+
+[[cause]]
+cause = "mir::Ty: subtags::Subtag"
+bodies = 50
+
+[[cause]]
+cause = "mir::Ty: writeable::LengthHint"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: subtags::language::Language"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: subtags::variant::Variant"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: data::DataLocale"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Language"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Region"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: SubdivisionSuffix"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: extensions::other::Other"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: Attribute"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: CurrencyType"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Script"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ShortBoxSlice<u32>"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: private::other::Subtag"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: transform::key::Key"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: LanguageIdentifier"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: preferences::locale::LocalePreferences"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Keywords"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Variants"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: extensions::unicode::subdivision::SubdivisionId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: langid::LanguageIdentifier"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::currency::CurrencyType"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: tinystr::TinyAsciiStr<8>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Fields"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: locale::Locale"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: tinystr::TinyAsciiStr<3>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Attributes"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DataLocale"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Locale"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Private"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Transform"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Unicode"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: extensions::private::other::Subtag"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: extensions::unicode::attribute::Attribute"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: extensions::unicode::subdivision::SubdivisionSuffix"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: subtags::region::Region"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: transform::value::Value"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Extensions"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extensions::transform::key::Key"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extensions::unicode::attributes::Attributes"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: extensions::unicode::keywords::Keywords"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: subtags::script::Script"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExtensionType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ShortBoxSlice<"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: SubdivisionId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: extensions::Extensions"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: shortvec::ShortBoxSlice<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: subtags::variants::Variants"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: CalendarAlgorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CollationCaseFirst"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CollationNumericOrdering"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CollationType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CommonVariantType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: CurrencyFormatStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: EmojiPresentationStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: FirstDay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HourCycle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LineBreakStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LineBreakWordHandling"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MeasurementSystem"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MeasurementUnitOverride"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SentenceBreakSupressions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: ShortBoxSliceInner<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::ExtensionType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::private::Private"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::transform::fields::Fields"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: extensions::transform::value::Value"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::calendar::CalendarAlgorithm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::collation::CollationCaseFirst"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::collation::CollationNumericOrdering"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::currency_format::CurrencyFormatStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::emoji::EmojiPresentationStyle"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::numbering_system::NumberingSystem"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::region_override::RegionOverride"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::regional_subdivision::RegionalSubdivision"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::sentence_supression::SentenceBreakSupressions"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::timezone::TimeZoneShortId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tinystr::TinyAsciiStr<2>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: tinystr::TinyAsciiStr<4>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: HijriCalendarAlgorithm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: NumberingSystem"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: TimeZoneShortId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extensions::transform::Transform"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: extensions::unicode::Unicode"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parser::SubtagIterator<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::collation::CollationType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::first_day::FirstDay"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::hour_cycle::HourCycle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::line_break::LineBreakStyle"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::line_break_word::LineBreakWordHandling"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::measurement_system::MeasurementSystem"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::measurement_unit_override::MeasurementUnitOverride"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::variant::CommonVariantType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: region_override::RegionOverride"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: regional_subdivision::RegionalSubdivision"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SubtagIterator<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::errors::ParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::langid::ParserMode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: shortvec::ShortBoxSliceInner<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <preferences::extensions::unicode::keywords::calendar::CalendarAlgorithm as core::convert::TryFrom<&extensions::unicode::value::Value>>::try_from::_::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: extensions::transform::value::Value::is_type_subtag::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::split_at_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: K"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParserPosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ShortBoxSliceIntoIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::iter::Map<core::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeInclusive<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: for<'a> fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::langid::ParserPosition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::errors::PreferencesParseError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: preferences::extensions::unicode::keywords::calendar::HijriCalendarAlgorithm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shortvec::ShortBoxSlice<"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shortvec::ShortBoxSliceIntoIter<u32>"
+bodies = 1

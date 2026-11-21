@@ -1,0 +1,145 @@
+# The serde_with_macros register (written by `uorust crate serde_with_macros@3.24.0`; do not edit): every body of
+# serde_with_macros's MIR at serde_with_macros 3.24.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 87
+translated = 0
+residue = 87
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.lazy_bool]
+bodies = 23
+translated = 0
+residue = 23
+
+[module.utils]
+bodies = 31
+translated = 0
+residue = 31
+
+[embedding]
+bodies = 87
+embedded = 87
+evaluable = 87
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: lazy_bool::LazyBool<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: utils::SchemaFieldCondition"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: LazyBool<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CfgAttrCondition"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SchemaFieldCondition"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Path"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SerdeAsOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SerdeOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: apply::AddAttributesRule"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: darling::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: syn::Field"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::CfgAttrCondition"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: utils::DeriveOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DeImplGenerics<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: apply::ApplyInput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: apply::apply::SerdeContainerOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_as::SerdeContainerOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_as_add_attr_to_field::SerdeAsOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_as_add_attr_to_field::SerdeOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::CfgAttr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: utils::DeImplGenerics<'_>"
+bodies = 1

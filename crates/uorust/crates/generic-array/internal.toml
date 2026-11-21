@@ -1,0 +1,174 @@
+[[fn]]
+path = "generic-array::internal::ArrayBuilder::assume_init"
+kappa = "f823dab9f7643a3e0c91f402b438f154cb1e1b1ea69fbe18711f18612ff87b49"
+at = "N=u32, T=u32"
+embedded = "ce5aea15f4f5e648725e671d89e7acafb42202c256c186fda876b0b0a1de5aec"
+status = "residue"
+cause = "mir::Ty: GenericArray<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::ArrayBuilder::drop"
+kappa = "91095516c7859349b654b28f5d17562ad0c7f03e1b9820ea3bc6c823c69bcac1"
+at = "N=u32, T=u32"
+embedded = "c36fe5864b78bcf1ae3eb50c6ad22105b7f5be3f38235db847f6982774c7ff89"
+status = "residue"
+cause = "mir::Ty: ArrayBuilder<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::ArrayBuilder::extend"
+kappa = "16c3bcf052b5df2f7d9f5cbc4f0a68297e682390c092ca221e75bd3a5ceb834e"
+at = "N=u32, T=u32"
+embedded = "6620acddaabf63540b8bb802a2dc6ca0bc290946badc22adf5ee3be74ce6959f"
+status = "residue"
+cause = "mir::Ty: ArrayBuilder<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::ArrayBuilder::is_full"
+kappa = "2a42cde946316bc8ff92b81f008b84989434e62927795c4c1f09954cb2152535"
+embedded = "781c071ab3f5d988d09fed745c4900abb08ce3fa853d66d55d82eff754dda94c"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "generic-array::internal::ArrayBuilder::iter_position"
+kappa = "c68c6d412c5d9778c34d8acc5f7dfdc86435cbc5a318697bc0b470edebf32fbf"
+at = "N=u32, T=u32"
+embedded = "920236c864f9967f967704d4a28c4bebc8cc91ac9b5e332fa90d4296c5b3dd20"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, core::mem::MaybeUninit<u32>>"
+
+[[fn]]
+path = "generic-array::internal::ArrayBuilder::new"
+kappa = "f450ab0bcd7c1e46b8e9671e2903c547735b8634f661c96e416e2a6909ac1975"
+at = "N=u32, T=u32"
+embedded = "85fa5755da87e83845bd05da96e51badaca3c7444df63ce133311dd148a94d05"
+status = "residue"
+cause = "mir::Ty: internal::ArrayBuilder<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::ArrayConsumer::drop"
+kappa = "784c8881900ce89aa48dbe360eb650cf44cb9d50449f3cc13c749fb11439e5e8"
+at = "N=u32, T=u32"
+embedded = "89af68195a0cab1da2240241ab11e222659fccf9b3bb2d81999a6a8fb9e7f7ef"
+status = "residue"
+cause = "mir::Ty: ArrayConsumer<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::ArrayConsumer::iter_position"
+kappa = "ad3fb18a113771b8095e52ed52197fbf366d7dc456643fe334914c39766408e3"
+at = "N=u32, T=u32"
+embedded = "3afde898fb2fb66a13924ca61dace8748a69c46d94524514cc819eb50a95c39e"
+status = "residue"
+cause = "mir::Ty: ArrayConsumer<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::ArrayConsumer::new"
+kappa = "1b1625aa890a3935c4891595563daa3b3f5eb9bf49831142d815bc6724590028"
+at = "N=u32, T=u32"
+embedded = "be1ff6258693429a8b8f1949a2079adfd9e1dd9ac86995578e3207bb98c65ab1"
+status = "residue"
+cause = "mir::Ty: internal::ArrayConsumer<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::array_assume_init"
+kappa = "2146fd2d48b355d08262af1f15c9eb37392ed11ab68f5f2c3d015373e48d99cd"
+at = "N=u32, T=u32"
+embedded = "130a42bf86113ea968e0c76a4b1de9f8c618d9c240f96e9d1eb99d0860b639b7"
+status = "residue"
+cause = "mir::Ty: GenericArray<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::drop"
+kappa = "d49381c886d0504a57ae9de2ef40edcc8c44ab194e6d997f93a49337b1cd4dfc"
+at = "N=u32, T=u32"
+embedded = "f14b8ff7d2e9bcad3e219a8b8c7f3ffb6f7c3342917ad4b79c18a7e8b46572dc"
+status = "residue"
+cause = "mir::Ty: IntrusiveArrayBuilder<'_, u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::extend"
+kappa = "27a0daaa5f62a64337737576d03e39b84f63c7ea8fec077b788376a2aaa5ac17"
+at = "N=u32, T=u32"
+embedded = "801e2f9f0863f01f9d4a5f9f8322b4b8988d804f0b7ccdba499740ca0d9af40e"
+status = "residue"
+cause = "mir::Ty: IntrusiveArrayBuilder<'_, u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::finish"
+kappa = "1522fa7732ea775cf973998986a5a6171c3707de0676b4726142017a80b805e7"
+at = "N=u32, T=u32"
+embedded = "641d4bb03793aefb5099c609c05fdac9bef84b3e8b4567a5fb42ce21685b48fc"
+status = "residue"
+cause = "mir::Ty: IntrusiveArrayBuilder<'_, u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::finish_and_assume_init"
+kappa = "dc7e0839bb33948052acf3ae7de6451c481b19f56cb4c2031c1a26cb1530eeff"
+at = "N=u32, T=u32"
+embedded = "c6d8b690c1ec5d64081bbb0e7136e2235f6bec4becf93020f1300161155bc70c"
+status = "residue"
+cause = "mir::Ty: GenericArray<u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::is_full"
+kappa = "1824ae38184af2c5d0e0bda6e3444c396f71cfcb9627af83bbf40248a9f0564c"
+embedded = "e88f025a9c69ee0115794bd670a9d915a0b4770e417bb1454015658e7bca422b"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::iter_position"
+kappa = "672a1cc846c6e9a230479e9da5e2d8a60984f2fe042c91c7e9b6d836672208db"
+at = "N=u32, T=u32"
+embedded = "63080a4fb57e0b4a51d784e8fea852d97894a7aee3047f38bad0b716b3a78953"
+status = "residue"
+cause = "mir::Ty: core::slice::IterMut<'_, core::mem::MaybeUninit<u32>>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::new"
+kappa = "0fa733857d7b22c0fb284bb35a27cbd9a573ab9ebcb91c3dc0b813705b67fb1d"
+at = "N=u32, T=u32"
+embedded = "0864eb3a9965ac329cbe28ae6f620ecd1f2e66ad1d702554575353033870bf70"
+status = "residue"
+cause = "mir::Ty: internal::IntrusiveArrayBuilder<'_, u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::new_alt"
+kappa = "ed1eafdfc79d55599be50abea0fe02a3ae3ff84e0cda45438dbe0f5c90aa33f8"
+at = "N=u32, T=u32"
+embedded = "44e1b2dae91111c3f88d0902a84feda8df06e38ada277c11844f02ee153c83d5"
+status = "residue"
+cause = "mir::Ty: internal::IntrusiveArrayBuilder<'_, u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayBuilder::try_extend"
+kappa = "53c0814b9b444b29c1bc1d1e3574ade21baeb0633b339979ad7dd83702c64219"
+at = "E=u32, N=u32, T=u32"
+embedded = "0236bbbc07729dc74f23dfdec5c76d07d9199225ba8b550b7d708de1de2e95fb"
+status = "residue"
+cause = "mir::Ty: IntrusiveArrayBuilder<'_, u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayConsumer::drop"
+kappa = "fb1bf6591a9d414c97dbe5a1a52a80785622d8297e8b6feb42cd73308641d794"
+at = "N=u32, T=u32"
+embedded = "2ebcbea7e0ce4a8c22ba56f658b5e93235a117377f3088a95732352884c1bc07"
+status = "residue"
+cause = "mir::Ty: internal::IntrusiveArrayConsumer<'_, u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayConsumer::iter_position"
+kappa = "32241d319f4856265a004860082dd4611e422286823ff0645db29e650c3c6444"
+at = "N=u32, T=u32"
+embedded = "1d06828971a8d3a7bd44b1ba33dcfc0540e8f115c3196eaf3f808a791bb380ce"
+status = "residue"
+cause = "mir::Ty: internal::IntrusiveArrayConsumer<'_, u32, u32>"
+
+[[fn]]
+path = "generic-array::internal::IntrusiveArrayConsumer::new"
+kappa = "e084c16df6a597b0093ef3910ae29abdc05f973d54cf56da59aaca39f18b9383"
+at = "N=u32, T=u32"
+embedded = "722417674c5daa416abee6e5ae3d0a6175e0b6842cfd61d0ddfc8f15f7e401ef"
+status = "residue"
+cause = "mir::Ty: internal::IntrusiveArrayConsumer<'_, u32, u32>"
+

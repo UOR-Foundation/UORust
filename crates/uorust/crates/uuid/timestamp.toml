@@ -1,0 +1,371 @@
+[[fn]]
+path = "uuid::MAX_NANOS"
+kappa = "f11efc102e4fb8b7555afb31f47372c2fdf2fb6ea52ecf53ed8dffc0521b8ed2"
+embedded = "08aff1f24a6949bd19c0c4adb7f2644139c38877c7fecbf49c99112e028a79f3"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "uuid::context::<impl at src/timestamp.rs:1495:14: 1495:19>::fmt"
+kappa = "cbaede09a0f3d7f8a09412d99234544c2c7be40f4082549deb8bfd74e7b4b91b"
+embedded = "b33524756fc49f29f01d1582fbe6fde2b07911df717f95225c35b3459c6e189c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::context::<impl at src/timestamp.rs:1495:21: 1495:26>::clone"
+kappa = "22a663075daddab4b8ee56c3580ab0e4991f58d421855f6253b35f5bede6f6fe"
+embedded = "a034189e4036a647911729ac96812d0635472f38a8d563b6c1d11bd552fb0720"
+status = "residue"
+cause = "mir::Ty: timestamp::context::NoContext"
+
+[[fn]]
+path = "uuid::context::<impl at src/timestamp.rs:1495:34: 1495:41>::default"
+kappa = "26c85b80e483327dab919290aab8b66719e0483b7bf5661865c27a0d64967278"
+embedded = "909425bd4fe4811ef5418e9f5a3663f9887b1c75259d72a637b95471af1aae16"
+status = "residue"
+cause = "mir::Ty: timestamp::context::NoContext"
+
+[[fn]]
+path = "uuid::context::NoContext::generate_sequence"
+kappa = "0ce6f3ade4c6b6aa2e7d056a135326a1a65c8849a47ce094dd72c2ff767de45f"
+embedded = "36c9ee0ed8f03d9e9c9bebc7a068cc5c6eca59565a40e5e10b71525a45bffd71"
+status = "residue"
+cause = "mir::Ty: NoContext"
+
+[[fn]]
+path = "uuid::context::NoContext::usable_bits"
+kappa = "bd24930d980c0aee81af962544cc432e3ee3c61929722696a6f1866a6469e85a"
+embedded = "415f85aa3385e38fb20047bfb6c065a8960df139dcee8657fb5eb8e6640eb2c1"
+status = "residue"
+cause = "mir::Ty: NoContext"
+
+[[fn]]
+path = "uuid::decode_gregorian_timestamp"
+kappa = "5d15fcfb4886e8b0d6039995eb525e47806a613dc4c56ea9a7f47c99c8a202f2"
+at = "Uuid=u32"
+embedded = "4d3fdb10a321eed972cfe7d7a805ac122cd1375305ec7cc88691ad46c7979120"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Uuid::as_bytes: uuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "uuid::decode_sorted_gregorian_timestamp"
+kappa = "0ec95d6fb74dcf739fc9824926a93bd63ebc1b802bfc9f869e8ae5c6f9e45417"
+at = "Uuid=u32"
+embedded = "d4b16a656659a500d148f56a09fd4a910443d413654ef8a5fa4b081df823a276"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Uuid::as_bytes: uuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "uuid::decode_unix_timestamp_millis"
+kappa = "b1f9e108cffdad94d3a2983787a647d3014e399e4962c0e36d866e65b14be402"
+at = "Uuid=u32"
+embedded = "a13f2bf7335784d42eb581ab3c2eecc54af1a37972d89a374d40e99087a250b0"
+status = "residue"
+cause = "mir::TerminatorKind::Call: Uuid::as_bytes: uuid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+
+[[fn]]
+path = "uuid::encode_gregorian_timestamp"
+kappa = "2181c2dc40d0af6b56cd98c619c09789001dafdaa83966d08b965c313726a449"
+at = "Uuid=u32"
+embedded = "55efdbb322a1a5335f90df6162ea3ec23289754f0d6ee8c18489ffc3d0347e03"
+status = "residue"
+cause = "mir::TerminatorKind::Call: builder::<impl u32>::from_fields"
+
+[[fn]]
+path = "uuid::encode_sorted_gregorian_timestamp"
+kappa = "00df70f9cf1d4c6d6c819997cb61c1c917e42a39dd1776b5203b2b4b1dd82542"
+at = "Uuid=u32"
+embedded = "dc69f2d8490311c5b3608531f093731f1771c013e7ac3910254141fae43ae3da"
+status = "residue"
+cause = "mir::TerminatorKind::Call: builder::<impl u32>::from_fields"
+
+[[fn]]
+path = "uuid::encode_unix_timestamp_millis"
+kappa = "18ee067b15d5c520c199ac680b37548e176601d4b609d77e024188fef4fc3472"
+at = "Uuid=u32"
+embedded = "71ca52ca35b5048f3766f5649d3307d34e44f8ac43678b036eea76ce71bb43d9"
+status = "residue"
+cause = "mir::TerminatorKind::Call: builder::<impl u32>::from_fields"
+
+[[fn]]
+path = "uuid::nanos_to_parts"
+kappa = "fd37111827e13837820e421e586c5cd818faf5fe176257767762ffb13960a8ea"
+embedded = "442b406eaa82c11b553e0217c93e2299428b77dba6d1d1f8622776c83ac0ca9d"
+status = "residue"
+cause = "mir::Operand::Constant: timestamp::nanos_to_parts::MAX_NANOS: mir::Operand::Constant: the constant item core::num::<impl u64>::MAX"
+
+[[fn]]
+path = "uuid::now"
+kappa = "2b5cab3429853b780ad84ded71fa3e9b25e9726ce301a0bcb78401f6943263ea"
+embedded = "2334f4d69b1e4a4221dc7b6cef91c4ed8304c81ec15f835d55f307474c7f7afb"
+status = "residue"
+cause = "mir::Operand::Constant: timestamp::now::promoted[0]: type outside the lift: std::time::SystemTime"
+
+[[fn]]
+path = "uuid::parts_to_nanos"
+kappa = "e9abb37bd5973e8a1df95e69e5aee3ea3820d00d6d0951c1550c52079722aa07"
+differential = 7
+embedded = "54f34b1e160016b991e8ce2bc5c7f44e7398336db7694b3bc08127ae6093b94a"
+status = "translated"
+digest = "6536f63a8896de244aa89386d3e74f9cce241270d1e54cd94b924801854abe01"
+
+[[fn]]
+path = "uuid::std_support::AssertUnwindSafe::generate_sequence"
+kappa = "56a2f3641970e1f52843c75fdc5ebea30d69e07490c0f9b6780c1e6b43b3caf2"
+at = "C=u32"
+embedded = "8b7eaf3c9e5d54198eb3e72a0803e1a53677148113c8f8c6e871b65ae30fa617"
+status = "residue"
+cause = "mir::Ty: AssertUnwindSafe<u32>"
+
+[[fn]]
+path = "uuid::std_support::AssertUnwindSafe::generate_timestamp_sequence"
+kappa = "c14de2ecf1758bf33d37517e1d4a061fd281113fbc4468481763c17c96393e78"
+at = "C=u32"
+embedded = "ee28a7306ec514c168d381ec3024635281e05e18c4bb58e07996af8f1e60f5b8"
+status = "residue"
+cause = "mir::Ty: AssertUnwindSafe<u32>"
+
+[[fn]]
+path = "uuid::std_support::AssertUnwindSafe::usable_bits"
+kappa = "ecb16b06f6df3c8d8ad0d56d73443b92ba43e3659670e36947414726e19c997c"
+at = "C=u32"
+embedded = "f39974bf9f62a8012ca8bd798727ac808c1d8aa85b209102b8539872078bfdaa"
+status = "residue"
+cause = "mir::Ty: AssertUnwindSafe<u32>"
+
+[[fn]]
+path = "uuid::std_support::Mutex::generate_sequence"
+kappa = "0c2319be94aeaf74afcaa49adbf76afe3e28c0491667550fb3dac8d88db544e2"
+at = "C=u32"
+embedded = "17063b531bfd477cb62ceeeacee5b1e894c83f3a2184deb3b0dc6a8a4cfadd6f"
+status = "residue"
+cause = "mir::Ty: std::sync::Mutex<u32>"
+
+[[fn]]
+path = "uuid::std_support::Mutex::generate_timestamp_sequence"
+kappa = "d33be862b80b3afa42213939ddb104424d93c466779d3310c8508ec19571fc1d"
+at = "C=u32"
+embedded = "fda49a58a7fd691daa7a4725b5cd3bf98578637fc08401d7f0c1fd46a98bb503"
+status = "residue"
+cause = "mir::Ty: std::sync::Mutex<u32>"
+
+[[fn]]
+path = "uuid::std_support::Mutex::usable_bits"
+kappa = "50f40267819b3bcc97b4a7fc1bfc1458eb781f96c3e881cfc0caf1f95d743187"
+at = "C=u32"
+embedded = "94d3af32b5e299442590053f9037a579373c222f332eec659537cfdc778d4c34"
+status = "residue"
+cause = "mir::Ty: std::sync::Mutex<u32>"
+
+[[fn]]
+path = "uuid::std_support::ThreadLocalContext::fmt"
+kappa = "4b8f7968a5b843fac04634d1c905089025f6014674ba17a7f8b38811dcfb57c4"
+embedded = "3b6f183bf594444b6c8d0258d47cf3d45ad0ea058f03f1aa0c29a2d12e245563"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::std_support::ThreadLocalContext::generate_sequence"
+kappa = "7d74b12f684ab1674926937d2889e151e509ddac241b2bddd0f26acea95a2624"
+at = "C=u32"
+embedded = "fb79ada00642f3d18a7dee77517631b2296f31c8c3d284da1810c1d7d83d2397"
+status = "residue"
+cause = "mir::Ty: ThreadLocalContext<u32>"
+
+[[fn]]
+path = "uuid::std_support::ThreadLocalContext::generate_timestamp_sequence"
+kappa = "b657baf8fed083c0b352c525d3519dabe9db72cb18f2e6dfb4deed8b14e425e4"
+at = "C=u32"
+embedded = "c564a348478567eec9282f765a36b7bf147709e65719bcdfcd60679b035b3ef6"
+status = "residue"
+cause = "mir::Ty: ThreadLocalContext<u32>"
+
+[[fn]]
+path = "uuid::std_support::ThreadLocalContext::new"
+kappa = "c86307e2f4e76045a5b15aceef7e00256003ab8ffe19467aa0d0a2db99e94c8f"
+at = "C=u32"
+embedded = "6091a0f6c2baf1e445a4fc2ff80fd8ac822d4b2a4383755a4439b86107b38932"
+status = "residue"
+cause = "mir::Ty: timestamp::context::std_support::ThreadLocalContext<u32>"
+
+[[fn]]
+path = "uuid::std_support::ThreadLocalContext::usable_bits"
+kappa = "d91330ae90aefabf2ef359da7b98f3ea607c90a795631985f9b795ab776bd700"
+at = "C=u32"
+embedded = "8be6eab8c5848e474cbaf6e0812a5423b8d3b59689aac3c2ea888fffad7c7e3c"
+status = "residue"
+cause = "mir::Ty: ThreadLocalContext<u32>"
+
+[[fn]]
+path = "uuid::timestamp::<impl at src/timestamp.rs:42:10: 42:15>::fmt"
+kappa = "8514092bb96f4a0b9cd3dc2857dcba03db36ec875c71fb03907e6d2c1661f586"
+embedded = "39c0a0093f02460956252b6601f1fbbdd66a5c8ae725af3db869d26f70448075"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "uuid::timestamp::<impl at src/timestamp.rs:42:17: 42:22>::clone"
+kappa = "ef5f719d37b5ef94c667af53b1e26557d4d2ae388c56b3d2906b327e8e39e89e"
+embedded = "deaad802cb7349600c592bc4686ceafa9ced4b7acdcf67d01579e9fc7eb24144"
+status = "residue"
+cause = "mir::Ty: timestamp::Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::<impl at src/timestamp.rs:42:30: 42:39>::eq"
+kappa = "cac1d4f941b7c71c2c3b181d3947595905e57a372c72c7aad313da0dfa9bafa2"
+embedded = "7c03ccc80abf0f33d0d8be3e0a382c0edd1b1072f57ce7e28ca19c13cc43beee"
+status = "residue"
+cause = "mir::Ty: Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::<impl at src/timestamp.rs:42:41: 42:43>::assert_fields_are_eq"
+kappa = "01e361f4471c9a3754a37da9cd789d17a0a4d58f30957f45bdd1fab0d324a8a6"
+embedded = "06a816cd06112ba349b4ed5a19cb6bb25d914c1cf1d6154a2f275e7231478cff"
+status = "residue"
+cause = "mir::Ty: Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::<impl at src/timestamp.rs:42:45: 42:49>::hash"
+kappa = "a3109c2d1e02054cb0614506e1490239295403f80905b44405d24a7000cad4ae"
+embedded = "6924d882f3e406e8f3fbfbcdbf2b36fdb44831ddcd14614bff56b7ccbfb76bc7"
+status = "residue"
+cause = "mir::Ty: Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::<impl at src/timestamp.rs:503:1: 503:53>::generate_sequence"
+kappa = "17c1f83eb520d625b157138639b928c7aa0a1866e85a7ae0ef44f9ebcf3d44da"
+at = "T=u32"
+embedded = "5d3f0c6ee2f5b9ea43157b8130722466dfbeeb665675b4728e54d1ab6ced9af5"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ClockSequence, which u32 does not implement in core"
+
+[[fn]]
+path = "uuid::timestamp::<impl at src/timestamp.rs:503:1: 503:53>::generate_timestamp_sequence"
+kappa = "8486ec614b108f0e8951c9e15dd6c32e0d2c12098d8e2324fb4571212e819c79"
+at = "T=u32"
+embedded = "9c2d0a452a32d0622bd488d93f8826a212c2b5d902435ca7524540cdc62194ea"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ClockSequence, which u32 does not implement in core"
+
+[[fn]]
+path = "uuid::timestamp::<impl at src/timestamp.rs:503:1: 503:53>::usable_bits"
+kappa = "507cf2c281b0043731f38ccba68aaf06d109e54c5d0c4d385a936ec91dc0fa8e"
+at = "T=u32"
+embedded = "5c4f425083cfc1bc5dc327cc0db76a73c0fcea63fe2d677fdd53bc060942eb74"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ClockSequence, which u32 does not implement in core"
+
+[[fn]]
+path = "uuid::timestamp::ClockSequence::generate_timestamp_sequence"
+kappa = "600d4032af37cd7a3e5d7f784a745e07ea59950e485b95122092d5404608a899"
+at = "Self=u32"
+embedded = "592c1883581220cbae11b34fc63268264c6b84409773daa428ffb263d4310825"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ClockSequence, which u32 does not implement in core"
+
+[[fn]]
+path = "uuid::timestamp::ClockSequence::usable_bits"
+kappa = "f07b9b9238f785e1c9eea71f6201166ffbda44e4a8cfcdeddbea6a1c45ff7b3f"
+embedded = "d71184ac486eda349e0d9f26011324962409fbd0eb711e9908be0bdc491d42c2"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "uuid::timestamp::SystemTime::from"
+kappa = "de63bf9882005cf6988c959f6ecd8895c59772f271eea9b03a71ed741c9282ae"
+embedded = "6273063aa1acfe8157cdacab9d386ff8abaa86b21ae2c7c891a0c6b109ab6614"
+status = "residue"
+cause = "mir::Ty: std::time::SystemTime"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::from_gregorian"
+kappa = "630879bb234ad09b3fd2a897839502e29a1a540212ac1b45c77abcb85e27e350"
+embedded = "f3ff35428c823319ebc3dfb4c2ddd35fdd359e910353f13710b073d424e69c47"
+status = "residue"
+cause = "mir::Ty: timestamp::Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::from_gregorian_time"
+kappa = "0907bb9ddf415e29996de9e88da6f5a749cd24598a6f562195f6ee54ab8bb445"
+embedded = "d098e9ab082d20bc1d70da6469ccf5f99404c895d60bb99e991918c9c72270e5"
+status = "residue"
+cause = "mir::Ty: timestamp::Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::from_rfc4122"
+kappa = "ac2fe5b96d6714963509d46c2f4544ac216f93dee8199ba104dd9e000204f671"
+embedded = "d3dbaf942e137c11fef17faae0cbd0203fb47650ed0283fbba6f08b43073e7a7"
+status = "residue"
+cause = "mir::Ty: timestamp::Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::from_unix"
+kappa = "b4d8b1559d37508179775e2f316598a736d1af06043a8a91a2d080df2dc1bff1"
+embedded = "069ee7c9117ef673d4d320df83aaf9a654fa85acafa280642885f3b4b589fbb2"
+status = "residue"
+cause = "mir::Ty: timestamp::Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::from_unix_time"
+kappa = "cbf397724e9ed487f34baf2090251a85c550c08afe282c5c4f0cf51b900377c0"
+embedded = "7e8bae1d81a92ef71a76d22e91ef08b22715eec53a195b16e3054117126c4a4e"
+status = "residue"
+cause = "mir::Ty: timestamp::Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::gregorian_to_unix"
+kappa = "d97b3578b5cb5a5f596cb84ef066e10c262a5853355606bf20e77eed96718f6e"
+embedded = "a2bc0c6766f92c6a9fd627f2d81a6b93833eca72939fdc4cefc0594af97b33e9"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item timestamp::UUID_TICKS_BETWEEN_EPOCHS"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::now"
+kappa = "1878d1b5271e9111e4865e2262b4008981f9ffa32f710bbfe25f2fe0ed46c80e"
+embedded = "469c495b08231e1bb10401a2d1b9c7ae4c0d300a8bfc163f311de5e0d85a63a8"
+status = "residue"
+cause = "mir::Ty: timestamp::Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::to_gregorian"
+kappa = "16bc85032534e01cb9725d31b880279c533001618abc31f76ab2ecc9c94eaaa6"
+embedded = "b25e37eed5c2c92165f717cdeac1479ea087197f546c46c6f6c2328756432540"
+status = "residue"
+cause = "mir::Ty: Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::to_rfc4122"
+kappa = "e5b0f69c2d9dfb293e8e6536b689b8ff301c2b3d2887c17919b377f970b3d441"
+embedded = "57adc1bdd739655bb180562a612f98e92bb9903c6fcb3b54f4d3d0bdf76b116b"
+status = "residue"
+cause = "mir::Ty: Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::to_unix"
+kappa = "319ffc46bb61db058edbfe02757eb477bdd4458a72c6635714c7458cc1a19f4f"
+embedded = "f6af0c03aadc80036fcf3818fdf1c1f7e8a162f80584b95935eed3864164ba1a"
+status = "residue"
+cause = "mir::Ty: Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::to_unix_nanos"
+kappa = "581e3c5251bc6ee7acfd070d767f8846f449a47165eb65d47b71b2a6608c1fee"
+embedded = "76227f9654ab9f00b8f595f462e15c3ee32db42b555b3c7778b5f686969ca6f0"
+status = "residue"
+cause = "mir::Ty: Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::try_from"
+kappa = "c24479be3b475726377f4f66605239484efc0648982ee82988f0d79710dacacf"
+embedded = "ba30ffdeee5876259b80cf6b3d73c324b90a10b7306e58b6eaaa121ce9c62c35"
+status = "residue"
+cause = "mir::Ty: timestamp::Timestamp"
+
+[[fn]]
+path = "uuid::timestamp::Timestamp::unix_to_gregorian_ticks"
+kappa = "c69f1939bf83f1a182ebd19025f22253defef2e3d661832f434145ff201dc1a0"
+embedded = "b7022e524fa1a0e3639c3fa6cf904533b6935ed5bc8382a48ec5f61b79d11fb3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u64>::wrapping_mul"
+

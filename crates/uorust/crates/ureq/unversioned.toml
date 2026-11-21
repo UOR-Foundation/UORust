@@ -1,0 +1,861 @@
+[[fn]]
+path = "ureq::Connector::chain"
+kappa = "9d8a1b035a00982eed37b63e59ac4b68095c6d687de8921eb8e4189560520161"
+at = "In=u32, Next=u32, Self=u32"
+embedded = "aa3a0a43daa38069d59629e8cebc1720ce38f1c931ee1f06d5a1d61d8afba2af"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::chain::ChainedConnector<u32, u32, u32>"
+
+[[fn]]
+path = "ureq::MIN_PER_ADDRESS_TIMEOUT"
+kappa = "cd28e195fd5f9eaae589a91f156dea229ce7c3e25b457e83566e59c6a524b7cf"
+embedded = "c44a91611cc8ba215ce7ba912d91b91b7816be3d20e213738f17d02e2e47cad6"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::MIN_TMP_SIZE"
+kappa = "afbf2754cc909b0003e463eb830812c0ccaed1d57867700b9ed6fa15c64fd98c"
+embedded = "f6fc2f08698cfa6804232c0c9526b450d4c17d0c9f50da8bdbb9205fc419c2e3"
+status = "translated"
+digest = "995ca3e162a1ab884b520abc9b7fc804825c4cf00fdd6e665b8f625bbe560a6c"
+
+[[fn]]
+path = "ureq::NOT_HAPPENING"
+kappa = "c9e94ff9fe9501c4a4054e248d269219b7e6b9719418db6fd8e9279a902c801b"
+embedded = "5b5e1af09f1dfc5a4019af0e564959eaeb183d53f0f19991b02ec91202a2797e"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "ureq::Resolver::empty"
+kappa = "6a9a7f3f8f5e5747c22cc8b6801045b425a5e72c130829cb9e2f3af7be022df8"
+embedded = "fc5e7dfc280bae0094edab97e007c8212a03e28140208a1a90075983e1810573"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "ureq::Transport::boxed"
+kappa = "d81c100523e1525c07a41503f39dd8dac63f02efbd86d04696afebb3e5d06615"
+at = "Self=u32"
+embedded = "2e48d667e7d5e6222baef6bdba1499ef6b16d9c39c7b049976a1ef4abf49885e"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::Transport"
+
+[[fn]]
+path = "ureq::Transport::is_tls"
+kappa = "a6744a6f2fd7f766fc8cf7e75419161d9e95e74b796c0428ac91db291b1dbe37"
+embedded = "183dff251c66c828bf058f3c1ee36c9b194338751ee1549d644548fb1c6fcf91"
+status = "residue"
+cause = "mir::Ty: Self"
+
+[[fn]]
+path = "ureq::Transport::maybe_await_input"
+kappa = "da93a6900d65f925b001db19dfdb38883a0179f80aca7c00a79587c6eaeab65a"
+at = "Self=u32"
+embedded = "e2a63b541c377af93b437386ef07984a27b57dad2c3bac67b77cc3c2b8968b6d"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::boxed_connector"
+kappa = "e55fb96d2cc1795a08e13a3dc6c3710f7e7f00b16217645fafd373b38060d241"
+at = "C=u32, In=u32"
+embedded = "8f6910b866f32ab4aa30152f99b38779a5f4f4c372590983b547fc1874b97d97"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::Connector<u32, Out = std::boxed::Box<dyn unversioned::transport::Transport>>"
+
+[[fn]]
+path = "ureq::boxed_connector::<impl at src/unversioned/transport/mod.rs:161:14: 161:19>::fmt"
+kappa = "f2fd7e00d0ad1d7a6eb25803689f48778167e7117781f3adb36244db47ebe1f0"
+embedded = "16d3df2a8697b25b7382cc61502491ef2a84d357cd9040524ece908f7d7a78bc"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::boxed_connector::BoxingConnector::connect"
+kappa = "08b6cdcbbef506b275d58554e956139c32910918860bb683dbcb176b0889dcff"
+at = "In=u32"
+embedded = "33fd260e9b05572cbb33d2b3ca78f1f12ceecfd5984ab342a5c77642e253dc79"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::Transport"
+
+[[fn]]
+path = "ureq::buf::<impl at src/unversioned/transport/buf.rs:64:10: 64:15>::fmt"
+kappa = "6a0460f9ee25e6d25acf094a4d42c35046989b9a83e3f4abf34121c399acd743"
+embedded = "83448385257228cddc386594b1bf91eefa8db50dd23295bb3a1c83af6ada07b6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::can_use_input"
+kappa = "d6046b5ac3da7e47fe7f79875c9e046a32661efa7c6df89c9915227c876a5303"
+embedded = "89153f922dac8753ce3b87f19100a4cabe4e181a65cb919c7bed45c5e8b0cbd4"
+status = "residue"
+cause = "mir::Ty: LazyBuffers"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::ensure_allocation"
+kappa = "c1d558aa895c5e03ad62e990ecea9dc10f2d983a7a08c0e629fbbb665d3fa105"
+embedded = "f23fd0d7f2c50269be04ab08d924546e76bcebb4794f13ec9500c6c8ad824106"
+status = "residue"
+cause = "mir::Ty: LazyBuffers"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::input"
+kappa = "1cd8ec76b3fbacaf91f31f8d80ecc9e82c6f40d7715b747cbcbfd8bff18cd868"
+embedded = "248b8318d4cf07db7c33e123041e1c19e2b142e286621450d9e32b4736d80f2b"
+status = "residue"
+cause = "mir::Ty: LazyBuffers"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::input_append_buf"
+kappa = "916d73ccca06447dcb7090a34b88cf83cbeb2196e55d0c5e6a13290c69959465"
+embedded = "1416872e7d2ea76fe98c6d43f169190acc97bc52b5ad506cb2f91f51b2eb8da7"
+status = "residue"
+cause = "mir::Ty: LazyBuffers"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::input_appended"
+kappa = "1c0e29567dcc582eca116a6d4a57d0d40eb2a8361a7595f60f972b443fb28520"
+embedded = "573d5e3b8b8c04a04e00b04125820f85e88c0afdee3a8ac7c8e4ba128019e2be"
+status = "residue"
+cause = "mir::Ty: LazyBuffers"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::input_consume"
+kappa = "47691bbaf1e5770d199b55285fa46b667822a708ad18c5516e6edb65d2473fa6"
+embedded = "55cfb39fafd7e4eda1b90a1a659bd7610c37d40269fe9aeb023978ea824296f6"
+status = "residue"
+cause = "mir::Ty: LazyBuffers"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::new"
+kappa = "7410c3284ab5341de67920278ffc9b3dac8695bc10a9145886d5e2ea6e1016ca"
+embedded = "6db47d5f3b7dfe5823b644f9fca1a72954c2d0838b4f6fad57127d79f7399854"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::buf::LazyBuffers"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::output"
+kappa = "6f1f67baeb05c7553d8dc63336fbcbb2613a09dcc47ddb8d23142e580efb91be"
+embedded = "e5e4d499bbb0fa9523755b7d4ea7487bfbb91e851efc83467c736c213eb05c12"
+status = "residue"
+cause = "mir::Ty: LazyBuffers"
+
+[[fn]]
+path = "ureq::buf::LazyBuffers::tmp_and_output"
+kappa = "bdcb404324db4a2ddddb4517d5e00eefd4a7443ed99ef085c93d5ced2e337363"
+embedded = "80dac47829cb84293056ced26ecb3392c3d3b4ce7b03737d06b448f1697afe73"
+status = "residue"
+cause = "mir::Ty: LazyBuffers"
+
+[[fn]]
+path = "ureq::chain::<impl at src/unversioned/transport/chain.rs:113:1: 113:26>::connect"
+kappa = "6ee21cd57dd7c58dba40094540ef9f6310a3670f8f2abb98c945a450748f2fb7"
+embedded = "57882820b89cf933b0c984c398eeda092430e6827ea1233a9c7e00a497225835"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::chain::<impl at src/unversioned/transport/chain.rs:128:1: 128:22>::await_input"
+kappa = "f7c75e7b31587160f957ba5a7f7558195bfb9ff90f7624ccadcbed6d4cbfc8e4"
+embedded = "3fd3dadc6396dc6ec4b0a3ab27d0224f794779ae97b8256f505956c49ad3af62"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::chain::<impl at src/unversioned/transport/chain.rs:128:1: 128:22>::buffers"
+kappa = "88d4befddbf3a1506c976f2b39e2a8bd55ca4d986fad76ab6301f42b1b06d4e4"
+embedded = "30558818f6b1076b0c26399e2737006e73fa96bd78aea578eae01abf6311b368"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::buf::Buffers"
+
+[[fn]]
+path = "ureq::chain::<impl at src/unversioned/transport/chain.rs:128:1: 128:22>::is_open"
+kappa = "87cd2a63788fbf67af2f25cad532b55f7edbddfb35edcaf10a3d6992ed203d37"
+embedded = "2d67445ddd41af4214febe2417fbe317041ab2583562e6af3921441ac3e36bff"
+status = "residue"
+cause = "mir::Ty: std::fmt::Arguments<'_>"
+
+[[fn]]
+path = "ureq::chain::<impl at src/unversioned/transport/chain.rs:128:1: 128:22>::transmit_output"
+kappa = "004f11d0cdb5da18cdf44dcff7c9cf11f009886b66ff3ea671715e008702a865"
+embedded = "2fdc191b2a72061e1211fd8e7a0bc1f1347ab3ceff690b0ea81dce1d7e95427e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::chain::<impl at src/unversioned/transport/chain.rs:61:10: 61:15>::fmt"
+kappa = "6aa9440e44e4fefaaf66f1af8bbab10ed0bc97e086f97609cd8de45212d76843"
+at = "A=u32, B=u32"
+embedded = "8dfc726d04f2cf60b3531098b33b6c4f5053850d118cdeafff3c678f2b5c8838"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::chain::ChainedConnector::clone"
+kappa = "afdc49ca309890a1f699728db668252e0b5fc55dd6b6405a83ff165149bf1ae0"
+at = "First=u32, In=u32, Second=u32"
+embedded = "bce3d0ec07275b21602a89313b965e60c140510f53c15e08efe5f7d308822c02"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::chain::ChainedConnector<u32, u32, u32>"
+
+[[fn]]
+path = "ureq::chain::ChainedConnector::connect"
+kappa = "965e9d72ef3307bd5576477fe96c6edca57c02a2b689f5159d455ff0454c1737"
+at = "First=u32, In=u32, Second=u32"
+embedded = "10f3e2f01aeb13c4018c0e10437e62a6b3a8eef267bda004c84dccbd2355ab8a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::chain::ChainedConnector::fmt"
+kappa = "2e3d44896fc0f4edc931c21cd25a50216d8b06e605964a239d778c3e82f0e7ca"
+at = "First=u32, Second=u32"
+embedded = "744ca0f33f6d41e74ca09fbea3c9cf597536626156fa77fa194f62b9b5e22b15"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::chain::ChainedConnector::new"
+kappa = "89229925a0784a805f89c1d29cb13edd9638473cd868f2a6fc10dd64393caa88"
+at = "First=u32, In=u32, Second=u32"
+embedded = "1b67c69cb87eb289bd0ce0783f47bec79cbcfaf5326ddc2c9be472573e22d360"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::chain::ChainedConnector<u32, u32, u32>"
+
+[[fn]]
+path = "ureq::chain::Either::await_input"
+kappa = "5504802b0e0ac4399bce2c770367372a70699e04fd34cc1e903b68b002876430"
+at = "A=u32, B=u32"
+embedded = "e1b2789de812e98e4bf9538d8882d941c3a2d27b04a2ee92e11eca2583b8bd35"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::chain::Either::buffers"
+kappa = "22c7b59730aa6db2d9e9d20312906276e898894feedb5f63809859916f874551"
+at = "A=u32, B=u32"
+embedded = "582771d01afe59aca7db7841e67bbc15ce1e024c1f30e539a2229a012ff4f261"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::buf::Buffers"
+
+[[fn]]
+path = "ureq::chain::Either::is_open"
+kappa = "1fbb7ef248e6f987cea3ab8aff61301c819324565280f84676d5ee488f224011"
+at = "A=u32, B=u32"
+embedded = "33617043b4b6eeda527985d581b515b9c66aac7a92beca9fda68c193c4b1fbf8"
+status = "residue"
+cause = "mir::Ty: Either<u32, u32>"
+
+[[fn]]
+path = "ureq::chain::Either::is_tls"
+kappa = "268cf74d079a666d5ac931bee117a363f46360a67273f57d1fb896cc616d3461"
+at = "A=u32, B=u32"
+embedded = "da69adb57d27775c775b2a31a0055ccf1b06e9a119152ffc280d7562daa01791"
+status = "residue"
+cause = "mir::Ty: Either<u32, u32>"
+
+[[fn]]
+path = "ureq::chain::Either::transmit_output"
+kappa = "dcbfbef360c8dc31e630bc849b618c57c44b361177438aabd728c18fe45b08d5"
+at = "A=u32, B=u32"
+embedded = "3f845d04b93f8a858d2f1711f8012c6264dc4f0c9298e2c585fe06d369deb553"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::connect::<impl at src/unversioned/transport/connect.rs:163:10: 163:15>::fmt"
+kappa = "3759fd547d00056279e5f7bf5ce7639237eaae8559ccc98f3cac6510d327c238"
+embedded = "e33fc462c0f3a809d721ae9a0fe7247a9b67237659c5198631bed087a560500e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::connect::<impl at src/unversioned/transport/connect.rs:21:10: 21:17>::default"
+kappa = "c6157e3622ecbae9ac37afb5817cc2f763087c74cecc0746722ed754bcfafb09"
+embedded = "0c749224badf1332cedd1be419d1cc3a54faf2a331f57f6181b36973549c2225"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::connect::ConnectProxyConnector"
+
+[[fn]]
+path = "ureq::connect::ConnectProxyConnector::connect"
+kappa = "4ff2cc5c1bd667799e82ec287bdae87db306e9fe8b3ef7c810206acf5b400aa9"
+at = "In=u32"
+embedded = "89e57e037fc78d8ace6b6b38b0be675e3bd4a54ed702ad39e2b17df1ef671258"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::Transport"
+
+[[fn]]
+path = "ureq::connect::ConnectProxyConnector::fmt"
+kappa = "30f36316320e046d34c199fd4d4f2eee18aa2ce873717bec8dd12e3c4f4d5c9f"
+embedded = "795a6b5fe50a6e8f0e1ff48b3bc131c567f15b125362ae88919e60fabb58a1fe"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::connect::TunnelTransport::await_input"
+kappa = "e3b3f392b31d68b0849653040e03ee66ce6731182943352670f060dae320b262"
+embedded = "ed49fc90d780b627d1bf4edd6e03e1845b7f0087f249eea7e86793e6a432ca58"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::connect::TunnelTransport::buffers"
+kappa = "6502d3a94764a02faae68a94db5d9a8ccb2a9581bd24af490e8309a8c8c40ba9"
+embedded = "dfee80c191874c0c4399783c5b120317e0ddad5b9bc264476457ed7533664e93"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::buf::Buffers"
+
+[[fn]]
+path = "ureq::connect::TunnelTransport::is_open"
+kappa = "5fc4c0b4b9f8fabc88b12738b32439c3a4cd9157b72b1d992117bcb9f96ffd36"
+embedded = "670098462a983c55b9dc86d373ac8da8710537499b518b2820f95b589d2c4741"
+status = "residue"
+cause = "mir::Ty: TunnelTransport"
+
+[[fn]]
+path = "ureq::connect::TunnelTransport::is_tls"
+kappa = "57854abcacabc0be741f4a7bdb7a189195fb22f0dee0a00fe07414c69356a2e4"
+embedded = "d6997168467510793381a86455211d94062d277540ad90253835d7fed1fb2530"
+status = "residue"
+cause = "mir::Ty: TunnelTransport"
+
+[[fn]]
+path = "ureq::connect::TunnelTransport::transmit_output"
+kappa = "bb8d534fbe20c5319ffa0d58ff626496e9371eb4bce14508d49f156d1a65af16"
+embedded = "f2f0985ec53d7f95e4b4e2ea1855edec43f2e99f81f4a71fb336cc9bb7e02e91"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::is_addr_specific_error"
+kappa = "48ba5c8ed13fdf3c2370f263009a2d19dbac20175fb15f24dcb6456b71c0c3bb"
+embedded = "0ab9dec5f188765a84bffc9b4755d659a53a3a08bee170feda3a9128c6df0474"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ureq::maybe_update_timeout"
+kappa = "f6e9d4c98ac9425c4ebcd55e5756070c3f5e37bd5ab9175d4158218814b05ab8"
+at = "TcpStream=u32"
+embedded = "d0a11622a31538ff14bfb664940397deaebb2961f1d7208d0a7d9ccee85ed019"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ureq::no_proxy::<impl at src/unversioned/transport/mod.rs:453:14: 453:19>::fmt"
+kappa = "46982a274ca05e43ca1c18d4e6ef7fb5d6aa7c4f6bd6bd75ac0a3c9eee64d842"
+embedded = "ce2065dd6dbbc7891e10f9692eb3408d86bad7f1e60cb83dc72fb262d8dfe59a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::no_proxy::WarnOnNoSocksConnector::connect"
+kappa = "d753552a8759118e1424789f516823c487401b0312d9e27ffc3f9bfd58fb8910"
+at = "In=u32"
+embedded = "c1559860e588c5f4e9492e77b2f198a35fd70de7322a06907a6ea151396b2299"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::no_tls::<impl at src/unversioned/transport/mod.rs:494:14: 494:19>::fmt"
+kappa = "b8c79b4082fbbf494d40f2c562789b53c90be0c0cbeda7ebe0998ae22db06bcf"
+embedded = "f4a9600727e8649b4a6a488a0d940527a31d3ef58cd1a7790adc17eaa9b355ae"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::no_tls::WarnOnMissingTlsProvider::connect"
+kappa = "108663841f04f6482d6c8d872db10f735f07d6a4d24678622fdf4e9465040dbb"
+at = "In=u32"
+embedded = "061c4c7d023b5f9121a58e96dc2fb0c37e6e8a77f70ef65b545006cd83864766"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::probe_tcp_stream"
+kappa = "47d9c4b733fbf38b109657887e1e39a465e1b97f3a68825c84571b2864c5c01c"
+embedded = "17cb8d6e4b0f72a1a7eb938130c215176c73b9738f57fd250b654a4ccbfda52d"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::read_retrying_interrupts"
+kappa = "2b8eb71186cf2bda9ff025533141ce9b37ae545332f2c22ab647290b9f99c358"
+at = "R=u32"
+embedded = "931ad4b2b245b6db23edcd5af352abca4cb5f162408ce1c08482c76f39434353"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ureq::remaining_after"
+kappa = "47791d526a13081d9e33fe321646fce28005ba2bb3c1433bd9d74a50bbc5f541"
+embedded = "62c47bae80ecf4bb747a4365be1c34f7440a9dbcb8a0a0235cac0bd62b329b29"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::resolve_async"
+kappa = "6206ffe77c12dc66a58b004c17b8c0511fb374f30eeb3bfa43d05c770df715f4"
+embedded = "34a6901fa016b05a082ae4e67e737eb58786790c470520f38041bc4cf7af6331"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "ureq::resolver::<impl at src/unversioned/resolver.rs:65:10: 65:17>::default"
+kappa = "4e61f56cbfa83688706e41cdf5618f1fbbb41540c26435240908262e34fa32ea"
+embedded = "47b862eb25d977b97121a53232385f242d6603262e4f477cd93f67d04496f0f9"
+status = "residue"
+cause = "mir::Ty: unversioned::resolver::DefaultResolver"
+
+[[fn]]
+path = "ureq::resolver::DefaultResolver::fmt"
+kappa = "e25b40321c55770ea083443bef617dc5458ab8a5ba925301634b61f89f3bc77f"
+embedded = "9a8ad8c2184da94ad5ee44bb936c222f205e61a3f2f8853c4f41a621c3dff204"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::resolver::DefaultResolver::host_and_port"
+kappa = "a03ad217c45b77d5975bed43ea525d607a0a379f2bfa5ffdae5180b8664b54e7"
+embedded = "95e9629cd229556dbe6587d5a3c7d3173d3e227e2bc6666acdff09f08c645554"
+status = "residue"
+cause = "mir::Ty: Scheme"
+
+[[fn]]
+path = "ureq::resolver::DefaultResolver::resolve"
+kappa = "f35c747bef026cf236afa52cee174971c7dfd8e72ee761b66a373b1a1668b7e3"
+embedded = "d05f05a3ec09b1ee4f2bc0bfbca3440cb6aeff9fd4e75bb04af789470bc7147e"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "ureq::tcp::<impl at src/unversioned/transport/tcp.rs:22:10: 22:17>::default"
+kappa = "88241ff02e34bb63e4171e0c5ee3046f9783a6cc7808efd7161a1b374960d3b8"
+embedded = "e6622921d5710cd0aea4bce4cccf6675c953bbdf14f2dd0323024e61c509f70a"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::tcp::TcpConnector"
+
+[[fn]]
+path = "ureq::tcp::TcpConnector::connect"
+kappa = "596867bbc8fb0f40e4551198d551c8e89a22bd9a09b4aab296fff04489c42714"
+at = "In=u32"
+embedded = "a345952e205eeabba297b8cd3154acb713ca3b5716b223a1661a7e4147ad1a9c"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::tcp::TcpTransport"
+
+[[fn]]
+path = "ureq::tcp::TcpConnector::fmt"
+kappa = "48b63308d303d8655648cc3dc4f8a180353932e44d108f1461442b6feb27c70e"
+embedded = "814bfa032d27e5b6cf82de074d70a3c16a538025b6d47f34511c96facf1a6f63"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::tcp::TcpStream::shutdown"
+kappa = "30ce29632fc0523790a5ca3025d9a160ea3bd476193eb5b4ebd90a46486de157"
+embedded = "0d665695ad307382826240897c6a67abf707f92e901f09a1f43f9604cbb0fa9a"
+status = "residue"
+cause = "mir::Ty: TcpStream"
+
+[[fn]]
+path = "ureq::tcp::TcpTransport::await_input"
+kappa = "c7901e7b58a19a50700aedce47907b6b81ef77ab0a740b454837ed44dc3efb68"
+embedded = "738cf0fc1700ec0890aef27a0a75d24cf5f009b8b83a76239bbf3b8aa65dea48"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::tcp::TcpTransport::buffers"
+kappa = "a614bb175bd713f189d501a6dcd15fae4da5ae17862fc0e932552df6046d2b4b"
+embedded = "090af64bb5dfff6fb0b1f0f5aaa6de083bc5e972c1b42cd81d1b596178f834ac"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::buf::Buffers"
+
+[[fn]]
+path = "ureq::tcp::TcpTransport::fmt"
+kappa = "03fcef54454fb2f575e0558100a0b16f8b1c082c4760573555783d7d53648994"
+embedded = "2ef4e225604d389b4c21bd353839874bd1fa1dc47efb3712070f52d44cc0dc2a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::tcp::TcpTransport::is_open"
+kappa = "eb4b98313ae49c00190601927b7486d21f86a3aa3919617709a578ed848b38ec"
+embedded = "94a74ecf53d4d51cc8318e810bfe6584d7d41adba0186ad1c0f43dc377b57fff"
+status = "residue"
+cause = "mir::Ty: TcpTransport"
+
+[[fn]]
+path = "ureq::tcp::TcpTransport::new"
+kappa = "60d767002d75c1d466a9b8e7f1c873ed127426f8df006bd2a9dc6f95a3cfe59b"
+embedded = "0c4f0db47f309fb448261fe623920382948dc467e3322e4f2694421993853f2f"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::tcp::TcpTransport"
+
+[[fn]]
+path = "ureq::tcp::TcpTransport::shutdown_handle"
+kappa = "940793440eb56ab6bb4274cfb56282581c63d3612020b9a5534a79bec141cce1"
+embedded = "47c6563a085fe74572aa78e5035ab3a640eb552a060cdc657223f9cc6573d618"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::ShutdownHandle"
+
+[[fn]]
+path = "ureq::tcp::TcpTransport::transmit_output"
+kappa = "d7cd859c13a21fc01eeea6c9df78b13875f03f0ce9128445d0f6a1136b62c7f8"
+embedded = "438642ee280da2024b68efe015ca37659f1c20371b22f2a41e1b0f34c0814e2e"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::transport::<impl at src/unversioned/transport/mod.rs:372:10: 372:15>::fmt"
+kappa = "25418c862486c3d1a1c9c4e9b0a1cc672039b77f0fab1dcfad511d7d4f9dd75e"
+embedded = "b7ecf766d85ef65bc8921f95cefc866f02bb0a5fdf04af59ac8551ad87eee606"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::transport::Box::await_input"
+kappa = "b580c1d212f2cecab97e82b684551c617daf1fb08f7c30168f4d94d85c47491f"
+at = "T=u32"
+embedded = "6f778ee090fd737ccb28b1c9f55935bb7fd6f40f83090cd374126b8f4304e84a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::transport::Box::buffers"
+kappa = "42da89810baea1ae6f3a35d579a7ca8e2aad775ab41f01ea6d1ba3209df37c85"
+at = "T=u32"
+embedded = "d191599e9b4bf57c152d26653e3b96dbc0fa23d702042b02d34fea7b7f14622e"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::buf::Buffers"
+
+[[fn]]
+path = "ureq::transport::Box::is_open"
+kappa = "7c23301fb3f1e5e1fe7e4d0099e5e17da7e9c4b271dbb288fb782c87131a60d8"
+at = "T=u32"
+embedded = "55a6de5dc7e230234c09bba3b71c8c047a35e7e6356f8d2a3732a7ceb2288d86"
+status = "residue"
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+
+[[fn]]
+path = "ureq::transport::Box::is_tls"
+kappa = "7e8e36b41d911e0a4897ca9d2279be715c73585d3d5264135244f65a46b30fff"
+at = "T=u32"
+embedded = "182316f5422709f98cd5d8556f45e25bdbd729f80abe64bb8f8eb4d5e33c8beb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Transport, which u32 does not implement in core"
+
+[[fn]]
+path = "ureq::transport::Box::transmit_output"
+kappa = "f483de528910041d9bbd45d4668cec6304451e10c5b409ca7a35da41de1a991d"
+at = "T=u32"
+embedded = "eda3f524fd49cb939c23780dbe787f8011b8d356812bac09e2908121382bbe4c"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::transport::ConnectionDetails::needs_tls"
+kappa = "ed35c44cc5c7ecd9798c9e9b597ebd58f2d05b33a1b69d145bbc8ea7c8ca110d"
+embedded = "59e5dee1971502b7bc29d73b62fd7bee187c83bfb65b236216fd3177ec261144"
+status = "residue"
+cause = "mir::Ty: ConnectionDetails<'_>"
+
+[[fn]]
+path = "ureq::transport::DefaultConnector::connect"
+kappa = "6d14a8217d2c8eded70fcf45e1e9c516abd43fed72264174a7fd1f4151431a8d"
+embedded = "2ae01f5782127cbfd1bae21b4986083254ee5e29568741fbdaded05c32e3f709"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::Transport"
+
+[[fn]]
+path = "ureq::transport::DefaultConnector::default"
+kappa = "03315f7e438303b197e22426c6a237cd8c59ed49d13e3d31df4b576f825cb39e"
+embedded = "60863a589d5ecd3f81a2ef7de02f36f912c2e917431bde4e422249b6c1752802"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::DefaultConnector"
+
+[[fn]]
+path = "ureq::transport::DefaultConnector::new"
+kappa = "a5eaec169f597148cb254bc2451d86256d57bb36e9532164f761d4c4f323b7b2"
+embedded = "dc6b55e19363a30ad699f7c55078208d5dd0ac3138858a4f537279683bbc4db3"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::DefaultConnector"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::flush"
+kappa = "f94ee58a1e0a876db2ae955b61f8c21962178860930617022ced68d923cbce0c"
+embedded = "0e4485016dd6423ad54dd5cb9b5ea317930a85efe8b504eb6f737ce4605e59cf"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::get_mut"
+kappa = "a4e416ffd529a87adcef1dce68fc7a18ab48515e9e606ea9fcf085656ef58ad0"
+at = "T=u32"
+embedded = "a0ebad055e69937697da09a35577400b777bc218b4a53a4d20ddcd4d81ea2e85"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::Transport"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::get_ref"
+kappa = "45cce303991eee3caa38a38347fd30c57e6381bd331fbf83f1d1f6bcf199def0"
+at = "T=u32"
+embedded = "f259351647045af337d6f5a895616fa8eecad246258db897111cd3d06652df9d"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::Transport"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::inner"
+kappa = "f4798675e3df7c2ce7fb5afde09be9d2caa562d568d73919e3a57c7f85fb5ca0"
+at = "T=u32"
+embedded = "7203212a3e3eab14b048ff321cddb8c23df1a7522d62d011aae52ecb2e2398c1"
+status = "residue"
+cause = "mir::Ty: dyn unversioned::transport::Transport"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::into_inner"
+kappa = "111a9982d94badaec5867108eeb1e44531c2208102734ff330c3e64425172f66"
+at = "T=u32"
+embedded = "77f49e0dcec7291678db66a2c796a29dad330cdcc8b6f0903827c30482fdea86"
+status = "residue"
+cause = "mir::Ty: TransportAdapter<u32>"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::new"
+kappa = "5d739011bb9f363d34bc34f4301c640130f6b269d7be8dfa3ace30fb2a3c3890"
+at = "T=u32"
+embedded = "a711747bd66e55b8586563ce0d030451cfcddf24330a3b7019de7d2dc339c477"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::io::TransportAdapter<u32>"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::read"
+kappa = "5acf4ef2c221cf7da92b452e727d9d195ed2f387ab1a14682423f1342aa813b2"
+at = "T=u32"
+embedded = "123a6061bd19d165290ac0e9246352f320b526dba4446b1515d825efcff219ca"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::set_timeout"
+kappa = "db586c725f37de0a9420a5231f3a11444244c9ddf1948696e07706e15254592a"
+at = "T=u32"
+embedded = "adb87f7a8b40290ff41715f5a33caaacd02790270ab3754676c0c832a7c9d202"
+status = "residue"
+cause = "mir::Ty: TransportAdapter<u32>"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::set_timeout_at"
+kappa = "63e3bb5cf2371401e2e16d18693cd412eeacc0f681f0b19053539e7f62e25f15"
+embedded = "6bfd244013aab692ff0bb87ccbe6c19f793b75c2b3246480f3edca6f33643fd7"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::timeout_now"
+kappa = "5a4bb101c082d1a00d2d730fd492e471af65b170c1465b837c38b8482baf97da"
+embedded = "c478f657868801a5f09c5f6628961cdbae94e5117da99b3f493b6f476396511a"
+status = "residue"
+cause = "mir::Ty: timings::NextTimeout"
+
+[[fn]]
+path = "ureq::transport::io::TransportAdapter::write"
+kappa = "65b7e9eabb5d944073d7b258cf59da975d01cd41c9ee6e81ef12c694d9f378cc"
+at = "T=u32"
+embedded = "e33adc2c97073ea30feee60727d75daca4ac23776acdb9f9ef33fced803f33c8"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "ureq::transport::time::<impl at src/unversioned/transport/time.rs:19:10: 19:15>::fmt"
+kappa = "fffe8cfede9cfff61a51fa20c8237a676c877b22653be1ea5169777c885e748a"
+embedded = "04d2785bdb52d55b2ab4e5ce9cd77d6cc9c37335f33fdc571e9efcd9edc4f5b9"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::transport::time::<impl at src/unversioned/transport/time.rs:19:17: 19:22>::clone"
+kappa = "85ea11f2b50d1e0170faaf609450eaadfdfff51cc3f17adcf191592729775ce3"
+embedded = "7237c98cf15658139c1ebc2da00eab227600a13670d1c33c3311c94af0ad773c"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::<impl at src/unversioned/transport/time.rs:19:30: 19:39>::eq"
+kappa = "77e6c96b41c8653f269756bf51faed6c0b39eacf5234549d9c9436a300b6b591"
+embedded = "b63f9c3fb16afecf2db1dd185c58af8c47690bb1081db7ef6624913bbfce26bc"
+status = "residue"
+cause = "mir::Ty: transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::<impl at src/unversioned/transport/time.rs:19:41: 19:43>::assert_fields_are_eq"
+kappa = "2778d1ce67c76ea706938869e097a4b559f4da5ed961f0a5d501495dea0bfb18"
+embedded = "501802250b80eb29d07956ca6dd19ca53a5accf9ae29f68c6a8865d841a22cc9"
+status = "residue"
+cause = "mir::Ty: transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::<impl at src/unversioned/transport/time.rs:8:10: 8:15>::fmt"
+kappa = "7dfe90a73b2bb83b656fc82ea255322d5e6bf5019fab8641eff3186044a65cf3"
+embedded = "d68927eabf5e6618f9c9022eae25b36078e7203c2cf0ca069fc0c968b2657e7c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ureq::transport::time::<impl at src/unversioned/transport/time.rs:8:17: 8:22>::clone"
+kappa = "950e897958412ab3ae4dd9023519b59ee88be9d9598365960af26ce49502262c"
+embedded = "74a8b19ea7750baafd419a794693c98e7872a5016a3f01bba53eb6dc4eee191f"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Instant"
+
+[[fn]]
+path = "ureq::transport::time::<impl at src/unversioned/transport/time.rs:8:30: 8:39>::eq"
+kappa = "537a06e2ba2c7399b9df004e03fcd09252805d3dbcc619b8f106a05e832a836b"
+embedded = "4ea6007037b720c19868deebb2953aabfed6d3b95caed3074bbbf3eed6a628ab"
+status = "residue"
+cause = "mir::Ty: transport::time::Instant"
+
+[[fn]]
+path = "ureq::transport::time::<impl at src/unversioned/transport/time.rs:8:41: 8:43>::assert_fields_are_eq"
+kappa = "9d4ad0c0dc8ade9a41b2314dcdc2807a5dbdf26f429957e4da1dd902de3d0863"
+embedded = "ae260eb54f06c8b19333fe646738a46291b612fdd3a876b2607ab92c41013c7f"
+status = "residue"
+cause = "mir::Ty: transport::time::Instant"
+
+[[fn]]
+path = "ureq::transport::time::Duration::ZERO"
+kappa = "cab0e3b98c81571730d0fe70f71932e7d8a1ec2b9f9643c734e69cdff70d2848"
+embedded = "6dde7f498cca1f057272c933f5a87d6ca7bf4cdab27b2ad3edacfdde41c341fe"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Duration::cmp"
+kappa = "56f0402d41a70300166493fd068ea52b6e94a6850c5e6abb98e413718db98bd3"
+embedded = "99daa522985989b8e177befc4f396fd1f1045c0c9bb697eeb57db407d8ef53c8"
+status = "residue"
+cause = "mir::Ty: transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Duration::deref"
+kappa = "10381399c535043823e42ad72b39e7d01eb310e1b939cd5a6934940f4f2a3ddc"
+embedded = "8b4d34258cfdf19095f09deab797e4bcea866f68e4994e7876e2bac141079d98"
+status = "residue"
+cause = "mir::Ty: std::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Duration::div"
+kappa = "65f60e2d2fe1b616ac7970abc43bbb158223fc2ef9f28a9b3b14b30d2b666033"
+embedded = "1483351a8a9b93fecf0d896e6ea3f26d44b6c0d0beceb2314441a71f78c9ebda"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Duration::from"
+kappa = "1e99ba5194fb5fe0baec2ca1fd185ee6f113f60b3952d86aa29f782f07af8e9c"
+embedded = "7bf18d9870cf3a38c1a199987262007f6cd63a503514ffc2b72593fffe9a50fb"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Duration::from_millis"
+kappa = "237b41feb73662489855761d32d2409ff3a0675670f415839fe9380c8bc47810"
+embedded = "0575e4060acfeea5abdc41c9717fd7167b61e83809b29cf6e46a798b153d235f"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Duration::from_secs"
+kappa = "995d8d41c1c42f7b52a571c2d9930091c36281a195bbf55efb57442ef660b518"
+embedded = "6dd319dd180237f254abdd3100a765918e2bcbeed2cc3bd9838e2abbfd86de72"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Duration::is_not_happening"
+kappa = "232c72648f878e3f1497546b2957b0435faab3206dfed9d17c417d0c9b9021ce"
+embedded = "16469064993d8cbc6d5d6dc9a397152e024f04921fc7f5357ab9ea83e27e65e3"
+status = "residue"
+cause = "mir::Ty: transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Duration::partial_cmp"
+kappa = "0710f0a147406aa304ddaee05899b3bb42f2a581ece21528c120ae1e15e888d6"
+embedded = "348bd7ca05e3227de32c44cf1400f9cb4c22c791dbfba2476e4e1ed6deeed9b7"
+status = "residue"
+cause = "mir::Ty: transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Instant::add"
+kappa = "e5431d99707004bbec32eea9a5d7050e9d5943670ef974e42ab6789ba3d99ab4"
+embedded = "08d064050f3b7f0b354be831f2d18e8fab1e1a4491379a74327200feeaf6cf7a"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Instant"
+
+[[fn]]
+path = "ureq::transport::time::Instant::cmp"
+kappa = "61066e06a5d0eced0ee7da7395ba246c7de341e8db98fac4fc9aece4c5963b6e"
+embedded = "a1d487e7c21ed0ffe5f5251703847f2f9bf5ebf38192844abf0d593fb33528f0"
+status = "residue"
+cause = "mir::Ty: transport::time::Instant"
+
+[[fn]]
+path = "ureq::transport::time::Instant::duration_since"
+kappa = "9aebb41b18584254bb547c1ac4c1b8b052ae515a97d223afe33b17fdd96c1098"
+embedded = "a6cb0afdd3cbb1eb47a5984949d2fbd8ec92153a2775f2428ee8a211b49ccefc"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Duration"
+
+[[fn]]
+path = "ureq::transport::time::Instant::now"
+kappa = "9a5592d303b2db3a281e9f4f93921300c8ee8f8a5e018ae80070f1bdb43ddd35"
+embedded = "b5f61acf405ff3123e34c2af8c559db5a1b28edaeade8ccd7a948281906eeb93"
+status = "residue"
+cause = "mir::Ty: unversioned::transport::time::Instant"
+
+[[fn]]
+path = "ureq::transport::time::Instant::partial_cmp"
+kappa = "4eea62dac5695011de1456c871eb1ca8c21db51c62d36b29231ca9438022a001"
+embedded = "6efcf9a8cc149ba80178c7a2cbfb0ec34b0b8bc33226569e2fc5c5d1a2026eec"
+status = "residue"
+cause = "mir::Ty: transport::time::Instant"
+
+[[fn]]
+path = "ureq::try_connect"
+kappa = "f1e9d7be21ad3ca6fe155b1b181ac775d90f64901922bfaaaae3d66d5ba58017"
+embedded = "9f9c430ef43c8e20368cf1f5b0c9f68400008786e6942aa5012f2126442c5931"
+status = "residue"
+cause = "mir::Ty: std::net::TcpStream"
+
+[[fn]]
+path = "ureq::try_connect_single"
+kappa = "3eb04283ec0297789deab391e45e1517b1453053445408f2dec01c13cb01570f"
+embedded = "e90ca6c293b5e1239308bf4311a234fcfd73b2480cef1f1c88132d19303de9e6"
+status = "residue"
+cause = "mir::Ty: std::net::TcpStream"
+
+[[fn]]
+path = "ureq::try_connect_with"
+kappa = "184b520876cb905cfc242040cd55723d19db6fa3bee9e428ee643a09e7d39dbe"
+at = "Duration=u32, Error=u32, SocketAddr=u32, T=u32"
+embedded = "e04563f25f3d0885c66213366ab928e59437f826ec71c60246641db42375ec7b"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "ureq::uninited_socketaddr"
+kappa = "aba979512a36b6af5c31e6c8579c2ad0e55b592bd8678db7dfc5dbb47da84ab1"
+embedded = "947a07c2d1e58916314fa7c58b66988d2cb0a121d2dd7492ef63775c1b45e3b7"
+status = "residue"
+cause = "mir::Ty: std::net::SocketAddr"
+
+[[fn]]
+path = "ureq::update_timeout"
+kappa = "f39ad249988cfcefd037b91e4544805ee0734963af1f0286e631026ec11a187b"
+embedded = "a580eafdf8ddfce1ccbea3d3fd620de3254f75a6a7ccf13517ccd9c75f1266e4"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+

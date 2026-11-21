@@ -1,0 +1,56 @@
+# The serde_repr register (written by `uorust crate serde_repr@0.1.21`; do not edit): every body of
+# serde_repr's MIR at serde_repr 0.1.21, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 8
+translated = 0
+residue = 8
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.parse]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 8
+embedded = 8
+evaluable = 8
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: parse::VariantAttrs"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <parse::Input as syn::parse::Parse>::parse::{closure#1}::RECOGNIZED::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: VariantAttrs"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::Input"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parse::Variant"
+bodies = 1

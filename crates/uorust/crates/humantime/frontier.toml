@@ -1,0 +1,100 @@
+# The humantime register (written by `uorust crate humantime@2.4.0`; do not edit): every body of
+# humantime's MIR at humantime 2.4.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 79
+translated = 6
+residue = 73
+
+[module.date]
+bodies = 27
+translated = 6
+residue = 21
+
+[module.duration]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.wrapper]
+bodies = 28
+translated = 0
+residue = 28
+
+[embedding]
+bodies = 79
+embedded = 79
+evaluable = 79
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: wrapper::Duration"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: duration::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: date::Rfc3339Timestamp"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Timestamp"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: date::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: wrapper::Timestamp"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Precision"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: duration::FormattedDuration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: duration::Fraction"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::to_digit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Parser<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: date::Precision"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: duration::Unit"
+bodies = 1

@@ -1,0 +1,221 @@
+# The globset register (written by `uorust crate globset@0.4.21`; do not edit): every body of
+# globset's MIR at globset 0.4.21, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 181
+translated = 0
+residue = 181
+
+[module.crate]
+bodies = 101
+translated = 0
+residue = 101
+
+[module.fnv]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.glob]
+bodies = 74
+translated = 0
+residue = 74
+
+[module.pathutil]
+bodies = 3
+translated = 0
+residue = 3
+
+[embedding]
+bodies = 181
+embedded = 181
+evaluable = 181
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: Candidate<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: Glob"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: glob::Parser<'_>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: fnv::Hasher"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: glob::Glob"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: glob::GlobBuilder<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Error"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: GlobOptions"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MultiStrategyBuilder"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: glob::Token"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: regex_automata::meta::Regex"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 4
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExtensionStrategy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GlobSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GlobSetMatchStrategy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PrefixStrategy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RequiredExtensionStrategy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SuffixStrategy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: LiteralStrategy::may_match_length: globset's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::with_capacity"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::new"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GlobMatcher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LiteralStrategy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MatchStrategy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RequiredExtensionStrategyBuilder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Token"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Tokens"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: aho_corasick::AhoCorasick"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: glob::GlobMatcher"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: glob::GlobOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: glob::MatchStrategy"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: glob::Tokens"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: GlobSet::empty: globset's MIR stops at type outside the lift: GlobSetMatchStrategy"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: GlobSetBuilder::new: globset's MIR stops at type outside the lift: glob::Glob"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::encode_utf8"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GlobSetBuilder"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RegexSetStrategy"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: regex_automata::PatternSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Peekable<u32>"
+bodies = 1

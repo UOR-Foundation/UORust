@@ -1,0 +1,611 @@
+# The sqlx-mysql register (written by `uorust crate sqlx-mysql@0.9.1`; do not edit): every body of
+# sqlx-mysql's MIR at sqlx-mysql 0.9.1, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 789
+translated = 1
+residue = 788
+
+[module.arguments]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.collation]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.column]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.connection]
+bodies = 52
+translated = 1
+residue = 51
+
+[module.crate]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.database]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.error]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.io]
+bodies = 6
+translated = 0
+residue = 6
+
+[module.options]
+bodies = 53
+translated = 0
+residue = 53
+
+[module.protocol]
+bodies = 421
+translated = 0
+residue = 421
+
+[module.query_result]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.row]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.statement]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.transaction]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.type_checking]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.type_info]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.types]
+bodies = 152
+translated = 0
+residue = 152
+
+[module.value]
+bodies = 14
+translated = 0
+residue = 14
+
+[embedding]
+bodies = 789
+embedded = 789
+evaluable = 789
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 80
+
+[[cause]]
+cause = "mir::Ty: protocol::capabilities::Capabilities"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: protocol::text::column::_::InternalBitFlags"
+bodies = 43
+
+[[cause]]
+cause = "mir::Ty: protocol::response::status::Status"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: protocol::text::column::ColumnFlags"
+bodies = 42
+
+[[cause]]
+cause = "mir::Ty: options::MySqlConnectOptions"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: type_info::MySqlTypeInfo"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: MySqlTypeInfo"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error + std::marker::Send + std::marker::Sync"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::Error"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: protocol::capabilities::_::InternalBitFlags"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: protocol::response::status::_::InternalBitFlags"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: capabilities::_::InternalBitFlags"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: status::_::InternalBitFlags"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: Capabilities"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: ColumnFlags"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: Status"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: MySqlTime"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: types::mysql_time::MySqlTime"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: MySqlTimeSign"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: MySqlConnectOptions"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: database::MySql"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: MySqlConnection"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: bytes::Bytes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MySqlDatabaseError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: TimeMagnitude"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: column::MySqlColumn"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: options::ssl_mode::MySqlSslMode"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MySqlQueryResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: arguments::MySqlArguments"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: collation::Collation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: types::mysql_time::MySqlTimeSign"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: types::mysql_time::TimeMagnitude"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: value::MySqlValueRef<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u16 as bitflags::Bits>::EMPTY"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::with_capacity"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Collation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ColumnType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MySqlArguments"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: MySqlColumn"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NullBitMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Waiting"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: arguments::NullBitMap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: options::SslOptions"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::auth::AuthPlugin"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::response::eof::EofPacket"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::response::ok::OkPacket"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocol::text::column::ColumnType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::Url"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::net::BufferedSocket<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::sql_str::SqlStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::type_checking::Error"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: statement::MySqlStatementMetadata"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::MySqlValue"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: value::MySqlValueFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: <database::MySql as sqlx_core::database::Database>::URL_SCHEMES::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: collation::Collation::UTF8MB4_GENERAL_CI: type outside the lift: collation::Collation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as sqlx_core::encode::Encode<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u64 as bitflags::Bits>::EMPTY"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::to_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: io::buf_mut::put_uint_lenenc: sqlx-mysql's MIR stops at mir::TerminatorKind::Call: core::num::to_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AuthPlugin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MySqlValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MySqlValueRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::establish::DoHandshake<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: connection::stream::MySqlStream<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut connection::MySqlConnection"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<statement::MySqlStatement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<std::option::Option<row::MySqlRow>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Stream<Item = std::result::Result<sqlx_core::Either<query_result::MySqlQueryResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn sqlx_core::net::Socket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::connect::auth_switch::AuthSwitchRequest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::connect::handshake::Handshake"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::response::err::ErrPacket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::row::Row"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::statement::prepare_ok::PrepareOk"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::statement::row::BinaryRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::text::column::ColumnDefinition"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocol::text::row::TextRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: query_result::MySqlQueryResult"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::column::ColumnOrigin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::error::ErrorKind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::type_checking::ParamChecking"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sqlx_core::types::Text<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: statement::MySqlStatement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::IpAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv4Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv6Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::MySqlConnection as sqlx_core::connection::Connection>::clear_cached_statements"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::MySqlConnection as sqlx_core::connection::Connection>::close"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::MySqlConnection as sqlx_core::connection::Connection>::close_hard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::MySqlConnection as sqlx_core::connection::Connection>::ping"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::establish::DoHandshake<'_> as sqlx_core::net::WithSocket>::with_socket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <connection::tls::MapStream as sqlx_core::net::WithSocket>::with_socket<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <transaction::MySqlTransactionManager as sqlx_core::transaction::TransactionManager>::begin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <transaction::MySqlTransactionManager as sqlx_core::transaction::TransactionManager>::commit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of <transaction::MySqlTransactionManager as sqlx_core::transaction::TransactionManager>::rollback"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::auth::encrypt_rsa"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::auth::handle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::auth::scramble"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::establish::DoHandshake<'_>::do_handshake<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::establish::establish"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::get_or_prepare_statement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::prepare_statement"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::recv_result_metadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::executor::run<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<std::boxed::Box<dyn sqlx_core::net::Socket>>::wait_until_ready"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::maybe_recv_eof"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::recv<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::recv_ok"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::recv_packet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::recv_packet_part"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::send_packet<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::skip_result_metadata"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::stream::MySqlStream<u32>::wait_until_ready"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of connection::tls::maybe_upgrade<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of options::connect::connect"
+bodies = 1

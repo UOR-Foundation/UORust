@@ -1,0 +1,126 @@
+[[fn]]
+path = "parking_lot::TOKEN_HANDOFF"
+kappa = "337d0544c1657584edcb8e688c44bff352e98990c33e2f1b9a362f10cd294dc4"
+embedded = "172ed7e5ee0d3adc753f9e4c4f4a19f56602a388f47f4586c75b54a398d2dac9"
+status = "residue"
+cause = "mir::Ty: parking_lot_core::UnparkToken"
+
+[[fn]]
+path = "parking_lot::TOKEN_NORMAL"
+kappa = "87d522f4c1461b27780a7d3f85f4fbfbb063f5411aef1e37f393a37bc51dca7f"
+embedded = "d499792a9a6b0bfab43fc3f3902de68f59b8906ad3a5b5b05623a6f512b48a87"
+status = "residue"
+cause = "mir::Ty: parking_lot_core::UnparkToken"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:118:1: 118:49>::try_lock_for"
+kappa = "03f5cd221dfabb56a438bfce8158da433f998b524b82b89ff819988d54af796d"
+embedded = "bc42cfb08016c8849bbc77c8a0958cc388ec2a269d3e856f47e2d8190007b9d9"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:118:1: 118:49>::try_lock_until"
+kappa = "1c95f0c16e5ef4481a79f5aebdffa6c38f93096e0a481495f8421121f3a5b94a"
+embedded = "61553df9fdf8e00c858f62602f7cc938d975b1a791ad6805370da238b35d02eb"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:51:1: 51:44>::INIT"
+kappa = "d8085607e3c0bbb168acb33fb2f8e7a22c428c38ad5d58c23fae4d2405838060"
+embedded = "0e5f9439fc21104f6172492fee88291a09e2955cd8132972f35a19410e2d2ed8"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:51:1: 51:44>::is_locked"
+kappa = "dfc0c53c1f01f0015c140196575972c8236cdbbf8b8b31b40c198cc1314bcf4b"
+embedded = "133c62189965d83a9725881cb781408e8e70438ad0f6169d820818f34d788e23"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:51:1: 51:44>::lock"
+kappa = "c4cbeee2199ecdfe30a1ca3d190c8eb146c049bf94c51a9dab7daf8fa9d2f9ee"
+embedded = "51252bfdfb3d5c4d52df26343209868c4db8e3b259c82871e45025b36dcfc916"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:51:1: 51:44>::try_lock"
+kappa = "1a7ba18c0a793fa67829157c548ed39b7e8d8b6285a330cb3c94e4b0f549f51c"
+embedded = "5171252bee4ffa4fac6caa8dd81750b3718c614a94f0d669b58eb64e4b651a4d"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:51:1: 51:44>::unlock"
+kappa = "568eb1384b66683392366991036f4d31449ff7aa0febf0f7783978870afbad89"
+embedded = "7cc4ade89c37a8d1c70dfa17a0e27afb172d2dee98cfdc15ba1930f6e1d66b42"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:97:1: 97:48>::bump"
+kappa = "e3ca86da17297ac0c3a6bdee674b4320e05f746a2cccd46bba3967c647d0c678"
+embedded = "bb08f927b4fca8f958978aa831632de216f64d250be06e9ee64222ff0f0bb4c8"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::<impl at src/raw_mutex.rs:97:1: 97:48>::unlock_fair"
+kappa = "1c31aeee24750723b8c65b2f885c587b75be10f15c3b22b0de94f2aa623dbbcf"
+embedded = "fded23f419e09666c09f1188a4b830cb49e34e03ca3142ec4f727014c5851c4a"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::RawMutex::bump_slow"
+kappa = "cef38e3b89e4d5474a64bdbedfd522038f001cb6cc2c2883d957e7ee04c1fa1e"
+embedded = "11c55d0def3677fd222a573cc68ac1707485683b69a1d36fd4626e47848b88c1"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::RawMutex::lock_slow"
+kappa = "67c832531a638fa1638162f73db70c605da63fa1bea4c41ae71d520064f51b9e"
+embedded = "2a4c346981d7749c677aca84458a91ca5f5b0a2f6d9714a19ec76d7eb7722e23"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_mutex::RawMutex::mark_parked"
+kappa = "da4a87ac3cdfa9683bc1fc40047c7b5e8337cf08526456453e4b2444f27b1134"
+embedded = "fa9be9824566ae0cfe142049896e8fbb849183fbd0e9b9744696297ada64c2cb"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::RawMutex::mark_parked_if_locked"
+kappa = "b34520ed42983e55df90e93a412638ec81488fba22a666335c49deb370aa0258"
+embedded = "08d3e4b9b3c0a9d80cd449c4241cfc7e36f0531aac1e2884fc4e1a199b0f7ba8"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::RawMutex::unlock_fair_slow"
+kappa = "d868c36b1574c0cfb3d09b5ee5bd4c3c46f56c2dc769d29a177f540989d17c64"
+embedded = "7f685b3b798a7682e5f3f2f53f64ab4e382de905241d5f4f32058ba1b30c15dd"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::RawMutex::unlock_inner"
+kappa = "0bf0a0b08ab64aea58a13c12feb215d32ebbacd2d6fa2922124c40f8dcc19dec"
+embedded = "4a9a287bfecd0633cb88b44580e64f562b552658ef9a0617b3fbc508c6256cf1"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+
+[[fn]]
+path = "parking_lot::raw_mutex::RawMutex::unlock_slow"
+kappa = "ae00647066695f60c95de8802d74e6d9b0414cfb94fd9118e24ef580f377c6c9"
+embedded = "2d8628fb5fc7ba3899ab72eefbb1ee09ab85b4eb98e8dbd66f82c3fec8923b43"
+status = "residue"
+cause = "mir::Ty: raw_mutex::RawMutex"
+

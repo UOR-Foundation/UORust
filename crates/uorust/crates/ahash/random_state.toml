@@ -1,0 +1,128 @@
+[[fn]]
+path = "ahash::PI2"
+kappa = "7b1322c8dc5a3d4639c8064f9cf7e0f2f3d306ab97ea23055d00161aa29b8b3d"
+embedded = "7ff45af289470c9805aac6b7177a03e773340eeb93349d1f943733d8e0d6c6aa"
+status = "translated"
+digest = "7a517d9c47857233284eb076e52a770f9cc225e2b39589d4bc76c66439c3320a"
+
+[[fn]]
+path = "ahash::get_fixed_seeds"
+kappa = "d4757e7380dac0da909906587944a08ae497db8e83a32c160f25e757e3c8d788"
+embedded = "6ec8180172248c3190c8a227d48697166e1ac03a3c6d3de26ba48db9fe8dfd7f"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc17: &OnceBox<[[u64; 4]; 2]>}"
+
+[[fn]]
+path = "ahash::get_src"
+kappa = "06a3a38cddd6bbcd11621ac5b2846f417cf4afd735a9dfe92b00103c93559bed"
+embedded = "c813d5a735a65f1f8d594b20415de91ba59c25fd2a789e04a8ee130a8d6022d1"
+status = "residue"
+cause = "mir::Ty: dyn random_state::RandomSource"
+
+[[fn]]
+path = "ahash::random_state::<impl at src/random_state.rs:214:10: 214:15>::clone"
+kappa = "1ade2f3d50de663e0bcabd80469a6fce3d1f6c917bc68eceb6a03e374ac60d77"
+embedded = "f78c6309548aa78674310928e91417387c25790da848155f6ddfc17ca12b5447"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::random_state::DefaultRandomSource::gen_hasher_seed"
+kappa = "4bac5d7b53a5446d4b108a0fd1e9144b60236c9e45d28c7b0ce77bfaae0dfe9b"
+embedded = "0560007ea31f7fb742d422eb3a6b55b0b14bf3334d1e8ad8da70ba0d162fa086"
+status = "residue"
+cause = "mir::Ty: random_state::DefaultRandomSource"
+
+[[fn]]
+path = "ahash::random_state::DefaultRandomSource::new"
+kappa = "88371a1e1a1a22ad446826cec6d5877bcf3751caa1ef6d29e31433ac4494c4cd"
+embedded = "ca028ca6697f7777ae43523920a96553595de227e4064e500168db906145ef02"
+status = "residue"
+cause = "mir::Ty: random_state::DefaultRandomSource"
+
+[[fn]]
+path = "ahash::random_state::PI"
+kappa = "ae54f5ba8295394e30c1ace1f80e364aaad977c473bd2f83f34d1ff1e6fa5e94"
+embedded = "7e34cd6f1ebb2dcceb82a29d5610e9a8e0a34e7f91005cbe17d6e6f0546ef04f"
+status = "translated"
+digest = "8402efd6d0695605c82af3297c67196404b4b13852b92143cb355e0aab2ee1ae"
+
+[[fn]]
+path = "ahash::random_state::RandomState::build_hasher"
+kappa = "e5b38dcce0ab43a80eabe7461336649a9a2fcc377b3fb8ddd7c3420e334ab9e9"
+embedded = "40e61b98c8c8c251bb4073440d06c712e9bca022159f8d243c9f1c3bf6fe4cd6"
+status = "residue"
+cause = "mir::Ty: fallback_hash::AHasher"
+
+[[fn]]
+path = "ahash::random_state::RandomState::default"
+kappa = "c4ccce8ee1798e1f6c99f73d7f239bb50726d9484294685e840317a0f9224e44"
+embedded = "bf9ec5fafcefc12fa304b832336273af64422b426b35824bbf54841d54699723"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::random_state::RandomState::fmt"
+kappa = "d4a02934708d8c81a1813c1d5a57d64dec5fd7a067b7cbc23cbc731397bd19a2"
+embedded = "8421c49e1e81f8003be3751696f886474f4885d18e39815294a8353607dd56a2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "ahash::random_state::RandomState::from_keys"
+kappa = "5afac784126e76dc7ff5ec6746ddb499960b4a3fc0db153731de1cfbb1d3674a"
+embedded = "0f3efdafaf012448a90a0eadc63596091485a1d8987da61d6c4348e9909a7787"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::random_state::RandomState::generate_with"
+kappa = "84deba6da67f2e7d5be26d6ac168cdf1a2ca0610ed783ccc930ddf3f896848cc"
+embedded = "3581b911314d95c70fe4cc44881901efc5609a6c0e8613db81a71c852c2dfe9f"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::random_state::RandomState::hash_one"
+kappa = "67a6ace1b045ed1a9f2faf174e701a07550431c2d47fd1c36c491bde7199ec1c"
+at = "T=u32"
+embedded = "26352b7608ba50e5a30b8c9991c67861cde83be3b40197698c4dcc80067516e6"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::random_state::RandomState::new"
+kappa = "f08695ba23aabb537e2498d0277b6ac6316c230dc96f6fa5b1443e899487105f"
+embedded = "d0dd319545c2cc822d47c3b2c78c58dff69ca634d9102b93f361b73b187fde62"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::random_state::RandomState::with_fixed_keys"
+kappa = "9ddb31964f08447165ecd77397d4ddfbff798854f30afc1ac343c7e906fc28f3"
+embedded = "8ed6057b83aa5eb647028af5545eb9f7a335d00d6c23c5a6cdf18296d6332cac"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::random_state::RandomState::with_seed"
+kappa = "259269fab2ce1b5caf70fe85e5e1831694e23ca0697331330487630c2923c8da"
+embedded = "43c8d1179b0b3fa4aec3eb9a5e7a6f1fb094ec6c490a6e9ce9ad08187f931262"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::random_state::RandomState::with_seeds"
+kappa = "4549426b207130b7184da54a5edc10932867988f4e48412b11f0dadef9d91f71"
+embedded = "204e4ae441aa2752a925a7894be3505b94dd2a0e0323a0502963aec67313b106"
+status = "residue"
+cause = "mir::Ty: random_state::RandomState"
+
+[[fn]]
+path = "ahash::set_random_source"
+kappa = "1275a238f7dd5ace1a97a95ca0809e987d3f4b12a96fcae9652ac60226f6f430"
+at = "Send=u32, Sync=u32"
+embedded = "7942e07225722f045385be13a0a02f6314295afc93f87024c9c7ac65143b6cb9"
+status = "residue"
+cause = "mir::Ty: impl RandomSource + u32 + u32 + 'static"
+

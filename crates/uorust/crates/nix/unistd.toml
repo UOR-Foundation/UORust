@@ -1,0 +1,38 @@
+[[fn]]
+path = "nix::unistd::close"
+kappa = "21af783117f13ecb5c30dc6238894ef322b14f0a7e6423f209543fe64b7e9dc8"
+at = "Fd=u32"
+embedded = "20ff8defe0b2ed805f91e308b66f3a886505f5ab8dcc760ee6604ad5e443262e"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::unistd::pipe"
+kappa = "3ff9fcb1f37779e6f670098987271b3d650a610f7c4c0cc1b506c4112fa66c44"
+embedded = "19c2dd29f2f0a4a397e7750a87c9dea142ec97e6578c1e4224a110a6de955895"
+status = "residue"
+cause = "mir::Ty: std::os::fd::OwnedFd"
+
+[[fn]]
+path = "nix::unistd::read"
+kappa = "fd9c8aeafa4ad255e5c98030d6721b85d6f9b799a7935d84a6c4831d07015795"
+at = "Fd=u32"
+embedded = "bd8ad24f4c0efa447cdfcd7240e046904263d73d9514367160c05c345daec562"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+
+[[fn]]
+path = "nix::unistd::sleep"
+kappa = "dad014f87fa9ff70f5523801eaa01e79d9961882451830e38e4e81684de231b2"
+embedded = "e8f9cc897a686f8a6a9adb5e235dffbcb65fd91d8eb6fadccc7b7e673f7e346a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: libc::sleep"
+
+[[fn]]
+path = "nix::unistd::write"
+kappa = "086ebd44b215d5c9575af2baafbf6b624288bf131dcca2b90c8f57b42bea8de1"
+at = "Fd=u32"
+embedded = "73fe150677e916c97c8fa15d99ed41cbecd8f3d1d43c76224b502bd55de8b9f1"
+status = "residue"
+cause = "mir::Ty: errno::consts::Errno"
+

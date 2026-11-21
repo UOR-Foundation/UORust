@@ -1,0 +1,146 @@
+[[fn]]
+path = "aws-config::default_session_name"
+kappa = "d2f81226a0f4df3da1702b58f8eabe8333ff35df7728e863a3466e5298e85134"
+embedded = "20fbf5f3617714285499cc08a77db284110726877a1ac025c7d747256ebf9846"
+status = "residue"
+cause = "mir::Ty: SystemTime"
+
+[[fn]]
+path = "aws-config::into_credentials"
+kappa = "88e74fa180a76aa1bf2a1f04b1d13232b144ebe10b9634961c3d0cdc8210a6bb"
+embedded = "afd9e18762c63cac531c183caa050fc5fe76bf6e5f9870c510c17d07a43a6d01"
+status = "residue"
+cause = "mir::Ty: aws_credential_types::Credentials"
+
+[[fn]]
+path = "aws-config::parse_account_id"
+kappa = "8b5aff7cd0d76ca8d87c17ddfd91cbec7962cb3fd008994e69a8256e25777b11"
+embedded = "8fff99ebf3456eafcef5fc5b5e2343d0298012dfee977f35312bb2c332471654"
+status = "residue"
+cause = "mir::Ty: aws_credential_types::attributes::AccountId"
+
+[[fn]]
+path = "aws-config::sts::assume_role::<impl at src/sts/assume_role.rs:70:10: 70:15>::fmt"
+kappa = "ed23c43ea35926ef6cb4fbb92420bb85c056ed8e6ff4b87fcdfaaf4448ff542e"
+embedded = "1c04e5cbcfc8f40b8a6472b4717cbf3df8892b8fba2056e125d831afd0f1e47e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::sts::assume_role::<impl at src/sts/assume_role.rs:75:10: 75:15>::fmt"
+kappa = "7106569ef3c6f77637b0fe231a71ed8409b81d556aee856e925cda4326d67190"
+embedded = "98494de547f96514253320f40199026b39a5a584eb0059bfbebfaa7083a42824"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::sts::assume_role::<impl at src/sts/assume_role.rs:96:10: 96:15>::fmt"
+kappa = "96c28c0a84bc9c8eafec09e194c2ba7fe1341784cde1c679e87c755da489bed2"
+embedded = "9c1e60b5fa36b9709de7e1c0dfdbed404af081d417e670fdc4c6b331e826dcf6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProvider::builder"
+kappa = "a2de75a097a84a6360751939633a0f1589ac71a68e14c50e31a1f34206157e37"
+at = "String=u32"
+embedded = "aefaaadd9411db88cc099de7b913992bdc066b7a1ec071b5e5fcd2638bceb6b1"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProvider::provide_credentials"
+kappa = "c4db789d87a4c58472c29770d9b5773cc7049b76e587993c3b311e61514da6d9"
+embedded = "5cfd2ef6637833e0f54d5ba7835578f1f0ecda54f7668e2368b3877c3561ea2a"
+status = "residue"
+cause = "mir::Ty: aws_credential_types::provider::future::ProvideCredentials<'_>"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::build"
+kappa = "01b7629c637d252ca70776b2d815247e004db63851cee10ce2b765456b1fe150"
+embedded = "4ccbb2415a044bfd172ea118db51d00634ec95383ba50f533e32544676eff479"
+status = "residue"
+cause = "mir::Ty: {async fn body of sts::assume_role::AssumeRoleProviderBuilder::build()}"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::build_from_provider"
+kappa = "1d02111287af396c97288144140fbf20ed0e2b58d7bafafd7b5f705f8b9925e6"
+embedded = "816920cf20f930e1970d6921c1d575b2b1b24aadc253e92dd9474e621443a7cb"
+status = "residue"
+cause = "mir::Ty: {async fn body of sts::assume_role::AssumeRoleProviderBuilder::build_from_provider<impl ProvideCredentials + 'static>()}"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::configure"
+kappa = "10fd8542ecdb243f0ff12ecd35726356f243b8012073b54c45bf888b9c0447e3"
+embedded = "563a3b8269d46bc6f56b18106465187a11e8841b2608c1ba41a0837b5878a4df"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::external_id"
+kappa = "e40077d0ef3f9d947165fa456236494db4c07c5a8806a27a94d091212668d040"
+at = "String=u32"
+embedded = "ad5e7e41ade27c53d1cc4053890a9e3e738c2efff3e85c3444d864a59965e114"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::new"
+kappa = "9328e0391847c4fb0243dc49e6ffa1097c6e914bb194fb323dd6c6c7e03976d4"
+at = "String=u32"
+embedded = "b64438a5fafb216979baf9bb70ff7b787398e2d454ab6cf5ef4ad1a017abee25"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::policy"
+kappa = "7aaa1a2391a746eddef0d652cfc0d698a52a417090940a64d8d8b252354e58e4"
+at = "String=u32"
+embedded = "5d2ad1f31a20481548f30107126bbd6b0b71bf0fce87d2f157a9746c5c47a2df"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::policy_arns"
+kappa = "1ecc0ec68bc8b7e6626f18df2d379f7c43210c3dd740f19e3f796a8fa6d1fe2f"
+embedded = "7f08b22b6b672808e10c9787778d7c3468abef080ac51f3acb600041668fcb4e"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::region"
+kappa = "8ecf72aea5491ac89e1e68c7eca093222c2213c91ea597e151c1dbffd6d50f30"
+embedded = "163d817358ecd8ce8cf9e3006234d0a5d2e5c8d5888c9cb5cccdf4b681a63dac"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::session_length"
+kappa = "9da3f8935f3972af671a074a15dbb54ed9551a30f5a224231f7dfa46af5d718a"
+embedded = "1159d2d1c3e2818de1f4a1ba2a89a01af0fbe5dcb36dc89971f6ce0e678daf63"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::session_name"
+kappa = "7d12b8aa32e4a202f107bff3cbf8b27800695f4648348c9cc53429847ec33e1d"
+at = "String=u32"
+embedded = "b18e2c7e120bde03b2daed937e0295ba66a662efbdc082affce1d2de64360a23"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::AssumeRoleProviderBuilder::tags"
+kappa = "aacfaecd08bbb6d2fd3552ae0e11eb44e50b4c7cf1648d25afa02e2f5d34ae5e"
+at = "K=u32, V=u32"
+embedded = "d3eb3c4f7c252ce22b40a637efdbe9d1d20a0c073e27b09184f6ec76e2deffd0"
+status = "residue"
+cause = "mir::Ty: sts::assume_role::AssumeRoleProviderBuilder"
+
+[[fn]]
+path = "aws-config::sts::assume_role::Inner::credentials"
+kappa = "c48aa177381b32718b9a526314067a7aa05b0a84d5779028ca67c95ad9ace4e0"
+embedded = "017051cafe6bd9af05f72c32ebe3e7ffcb98a6f16977a615bfbc8f6fa9cab7c4"
+status = "residue"
+cause = "mir::Ty: {async fn body of sts::assume_role::Inner::credentials()}"
+

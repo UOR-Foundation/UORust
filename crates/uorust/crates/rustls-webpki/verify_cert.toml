@@ -1,0 +1,473 @@
+[[fn]]
+path = "rustls-webpki::DISTRUSTED_SPKIS"
+kappa = "f02cb02b927df24ebf93a8a25cb30b83c4ddaf50a81d2255b1f8124aaf556d6d"
+embedded = "dec43cf95d14d3779b45fa9ff64cfe26d6ac9c30d24d00ea48bfa8f04f982cdf"
+status = "translated"
+digest = "1c2e644a3c8c87ba53af1c9415b8d5fcae5ef4c6212df4eb324fbccb721f15a0"
+
+[[fn]]
+path = "rustls-webpki::EKU_CLIENT_AUTH"
+kappa = "560b3036895c5af079905d4fb8a0c6697a5f3d19c4b05ecfe2fd788a9165b938"
+embedded = "6dc4d20e52752808e08d00318fdd382d9e90da4340f69a0e40f655f02fd4dc8d"
+status = "translated"
+digest = "5be115a7553ba448a4c76328f2a3cad1e6db4f61f77bc0767429c049b4019da6"
+
+[[fn]]
+path = "rustls-webpki::EKU_SERVER_AUTH"
+kappa = "d61e5eef2b59a44cfa08d415a8f90939959721a95cf19675ae52d293df0712c6"
+embedded = "28477724da50dcda4964ad790e871232442f63b6f9bd3a99a376bc6ef3780936"
+status = "translated"
+digest = "473f1064d5d3f06e8e88d4f494da418cc64c2c4ecbec100db2be49e6ef437fd7"
+
+[[fn]]
+path = "rustls-webpki::check_basic_constraints"
+kappa = "d3899e15e1561e66530c1f6164ab02515f0af6a69e544673e63d3d613ddfa432"
+embedded = "cb6d189528e7db6598bb40a06da5304f796cdfa07ea50b7422e5d9f015fa002a"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::check_eku"
+kappa = "60291589bd21ffb32d6abfb255f2f5e15739b3fa775561bf4e89d039d4a18721"
+embedded = "a5b7d36cc814486b166038f23e77ef0bf568b3870c2814b8cc34c226e835045c"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::check_issuer_independent_properties"
+kappa = "12d2fb7b7fff0a2bc868ac1ff2650fe112628c11185da41080fefcbd3cedfd6e"
+embedded = "e0284e838f14046c3f8b7fcba7be6cc0a8e86dc2ec0f83abd1d788136c59b3ca"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::check_signed_chain_name_constraints"
+kappa = "7140f5a5def8b5337c3c893a343b218cca176ea516ad8479e20d5ed63b52b720"
+embedded = "1e6ccdfd68f5f48b9ad8a3b273b4219ca48a2849248f6ced1ade461f9a150228"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::check_validity"
+kappa = "e414b159835e9f99fdc720453829a75073c8dbda98ba9c478b9ef492e0421392"
+embedded = "34586aeea458b3000ae521b4ec9aace2099cb5c910c7499c680e3d569841b08d"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::loop_while_non_fatal_error"
+kappa = "c7ee74cf4d0e9baf052a0c3e14b511e792a9fd0f741bc2127f15b7522b2d02ca"
+at = "Error=u32, V=u32"
+embedded = "391f98ed5e973a0841628611a957354a9db84918aa801d5765d16dde51a33708"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::TrustAnchor<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:474:10: 474:15>::clone"
+kappa = "3814e224b011de53cf54f25c72999743b6a6be55242a466b425b1904de1c055d"
+embedded = "353aa9786138c0ccc332b07235ea8a4c2b900a88378aca7bb143b9b1a887d339"
+status = "residue"
+cause = "mir::Ty: verify_cert::RequiredEkuNotFoundContext"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:474:17: 474:26>::eq"
+kappa = "49b53db999da8e01658a0ea51859ecd35b96812cf8a8728c633b989363f6a777"
+embedded = "55e60b9a298a0fb5da5dcf69643ef995c55f9be9b97a84bee1db3cc34c72cf58"
+status = "residue"
+cause = "mir::Ty: RequiredEkuNotFoundContext"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:474:28: 474:30>::assert_fields_are_eq"
+kappa = "171106ab4309226caed5abb46e5719b23c68155de1a21bddf0c0f50f587fc808"
+embedded = "d3daf1be9d794022f37fdaeedb043480d2ac975a1c728cb8d6a49e1cc8ae4c4a"
+status = "residue"
+cause = "mir::Ty: RequiredEkuNotFoundContext"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:534:10: 534:15>::clone"
+kappa = "2617862e14759e2b6c4022c8d4bb5b7551f4d24b0a177d4a572acbdc4aac5aba"
+embedded = "197f87e6097859aa4d557024f5fc7d77b1c19eb4185ba6f827154e99ea559837"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:534:23: 534:28>::fmt"
+kappa = "dbaa462c1ceeb0d006e689b74937597a1680bc4285c3769362a1ec9cb40ef72a"
+embedded = "5df1c836054d8ded209f94a3425029df450ae24799713a1337193cd704ca10f9"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:534:30: 534:32>::assert_fields_are_eq"
+kappa = "8b570058ca5ee3d2f430146a6fb8a05a7481ef154d191fcb19ec991eb388a3d8"
+embedded = "91e1e05cb1de32e2ea844aa6f451eea41eb7314e03dfdb932c2a61ee438b6051"
+status = "residue"
+cause = "mir::Ty: KeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:534:34: 534:43>::eq"
+kappa = "ff74ec950f779bf6e5c531fc08cd8eedf9f9762781657a08d6c935899ce0091d"
+embedded = "8b26352b2fd34912ca34765ee444319af5aacb6ac8aab6df65187af3cdc2df30"
+status = "residue"
+cause = "mir::Ty: KeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:618:1: 618:68>::validate"
+kappa = "81868d0a18c695f5f15079eb689f4727b56db2058b7889300c88cfc052544d8c"
+at = "V=u32"
+embedded = "7f4f37c96cdc1dca07a8878f45cc44c22e4fa19f022a85ecd83fbd26886166cb"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:636:10: 636:15>::clone"
+kappa = "5368dd4c2e1b43a1f1e8201b7582e124b2d254ddb6f45ca1f0ac6d64b249818f"
+embedded = "bf3a42cdf0ff7ee515d417662959abf98a66d1a5b5cedd76cae6db762cfc1ff1"
+status = "residue"
+cause = "mir::Ty: verify_cert::ExtendedKeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:636:23: 636:28>::fmt"
+kappa = "3651b6696b7c780a1660d57094df5e78f502940f33b8c2b3d1c20f81ca9a790b"
+embedded = "e9512bb220ad803ed992e248b44f89bfdd1ec808e6c7eed371a65b60d926592f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:636:30: 636:32>::assert_fields_are_eq"
+kappa = "7b487bc96ab0980b429dcf56974ad6e4c4a5b1459a08879a8eaf7be5a9338a8e"
+embedded = "78522715dc492e96c54774780c5d13e220942fbd69c178159a783ef962e3b489"
+status = "residue"
+cause = "mir::Ty: ExtendedKeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:636:34: 636:43>::eq"
+kappa = "d4d143bb5cbd3c69a270ea3f81413cfca0af80f892c48dec4ffabc8fa781cda1"
+embedded = "b72721a60fad628ca4b5ff8ec21549af7eecdb19819d90e1a5b751a65b3df2fc"
+status = "residue"
+cause = "mir::Ty: ExtendedKeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:678:10: 678:15>::clone"
+kappa = "a685a5806cdf05002cafd7551f55972438b79dee18e26dd8cb8742e5ee889467"
+embedded = "e49def9f925e268e80325e9f49a7e0fc7da45c0ef30cc9c71ebf2517a142136b"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyPurposeId<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:923:10: 923:15>::clone"
+kappa = "e6ef04eae60ca686a34558f32f102db89f228a018de6966bf0027fa2ae7777d4"
+embedded = "412d35fcb84ca97569ef2a24fac8fd24d90436073553a17c92017eaad890137c"
+status = "residue"
+cause = "mir::Ty: verify_cert::Role"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::<impl at src/verify_cert.rs:923:23: 923:32>::eq"
+kappa = "5bd4e3acefd7aaa2d3b053261580b9f3014032d7b731d721e86e37681bb3a6cb"
+embedded = "cf71bff317cfab1bdebc860f25ff260e2effcb7df49d8b5f26970a4c5608e939"
+status = "residue"
+cause = "mir::Ty: Role"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::Budget::consume_build_chain_call"
+kappa = "33428e1b83925c56eac945c97b46aadd71797e6101d8067004e11db66103e5fc"
+embedded = "f0a764a687876849e8dfeb020ad52ba8565dae57483c6b04013303de0be9d4ee"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::Budget::consume_name_constraint_comparison"
+kappa = "75e77513edf1472ae0c920fce26b4bb2f4ff4fc8353f2bfe220f6cd73c8201d8"
+embedded = "548334a0149427cf82de842cd5086ef7387e737b34b66ecfa6c566a5a59110e5"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::Budget::consume_signature"
+kappa = "8e0490c91242f76c7878e77057b08e8b66912fe86956a122618e40df4d16ed7c"
+embedded = "121d6271828ab17082aa1b19a28e5bba3658e0e3719b54dcd5c4d068a8474c83"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::Budget::default"
+kappa = "42eb6078b5e32d9dc074991e18f6e77240a05477991be01f4b6e4df98bb05ccc"
+embedded = "474a3980efaf9f20b98d75949ed773542c74e7fa9b502f53d3b6d423220d94da"
+status = "residue"
+cause = "mir::Ty: verify_cert::Budget"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::ChainOptions::build_chain"
+kappa = "8fcd0b3805d66b1ef8c1bab4c52a76133f567a13ded20a8f9d5e4e84fc2384fc"
+at = "V=u32"
+embedded = "ec070e6aba73811ebffc163260970a0a7e24bb52450a015a55a7c94c030b36a6"
+status = "residue"
+cause = "mir::Ty: verify_cert::VerifiedPath<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::ChainOptions::build_chain_inner"
+kappa = "44d49cfe2b27590d8f9fe01c52873e588149ed8fa9ec23a56f5652d0e94e303c"
+at = "V=u32"
+embedded = "794d350e978ea7620bc7ac612bb0c1c1ec5052b1d1da320bc7b609b5c5ce9d40"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::TrustAnchor<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::ChainOptions::check_signed_chain"
+kappa = "cc74bd0f7006a6ee99e0871d8ca5eb42519e6f61c28d5d2a7dc38148356c51f6"
+embedded = "de92286acec3191a2525a7526a1d2e816e2ca17f657bf0bfe5df13e67a03c2c6"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::EkuListDebug::fmt"
+kappa = "6e7cc1434581039cb4f8a9777b7cbc29a2db29863fcf13f7e988c6200c1d256a"
+embedded = "d32e7bb298c71335aa62d9bd8a6e7d11e76915f2e708c921a6907999253dde00"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::ExtendedKeyUsage::id"
+kappa = "f0ddb5f9e340e4275c5e3ca127e845be128a4f26caa0b3bd4f5b498f2ee6f8d8"
+embedded = "45b60338495965c9bca5e7b970f542ab8a34826ddd4a341ddd548a4624fc97e5"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyPurposeId<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::IntermediateIterator::next"
+kappa = "02edc0fb084aca1651772e5dda6190a7f7c192b6bc129ed1810c60ac0c37b5af"
+embedded = "820f1146a5542524f96844ec462f69e8811b609b4598ad6c1b1bcb9a960f821e"
+status = "residue"
+cause = "mir::Ty: cert::Cert<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::IntermediateIterator::next_back"
+kappa = "663d5e31c61fa304eba67f38323aed2dd486e3ba8ae94edcde1ecd6e94d4e41b"
+embedded = "0fe4e8c8d7b5716e74ab91542ed61d6edddb046cb926e8e79fcc55e66bd4aba8"
+status = "residue"
+cause = "mir::Ty: cert::Cert<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::Intermediates::as_ref"
+kappa = "ea5ade1c04ac4157a3e48c96787ba5ffc3d5b4346e0fad3e39b27ce3df7a5145"
+embedded = "e764bd97a18ab9ae471353449957ecf76ebb6d79d4a9ef9fd7db7ad7f4b98d3b"
+status = "residue"
+cause = "mir::Ty: cert::Cert<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyPurposeId::eq"
+kappa = "955b67eaaacb1662f8507b04fabc766e1ae032336c832c11f2e5e30f7281a1bd"
+embedded = "b341de4f2e9eddf001703ba4cab788494b9af171bd03c3a405b4dbd57c2b457b"
+status = "residue"
+cause = "mir::Ty: KeyPurposeId<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyPurposeId::fmt"
+kappa = "f3f89b97ae870a6f7c2769ee2830457b68bf09e745a167945fb2a31339093d51"
+embedded = "3f56d10ad26e1df829a2fa890edb39f029b663dd191a66b8d868e8d93abeec3f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyPurposeId::new"
+kappa = "716f0356a5f38ddcf1667b9d6d2db0d0d812106377a955f50338aa596c7b7a15"
+embedded = "cf27847512155d34b3f1f5dd8c6d97c96b39e2b7f4e30ecaaecf09dae94ef80f"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyPurposeId<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyPurposeId::to_decoded_oid"
+kappa = "78a9f5919b7b9f582388ba8022e944b49a6db3ace98ff89e286b9019a83ef5e7"
+embedded = "810cac20064bc0f16a60fc5250bb73d6034f6dfe454b617fd64607f93388705e"
+status = "residue"
+cause = "mir::Ty: KeyPurposeId<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyPurposeIdIter::drop"
+kappa = "ac6642bbac1e42b4db6efb44d7293d3f44db00332ad7ef17fb9f873c023a6871"
+embedded = "3c4cc92d9c39ddc42039e9ffbb75e705e1470e61e18a8fa3c7bb6a12d5cfa9a1"
+status = "residue"
+cause = "mir::Ty: KeyPurposeIdIter<'_, '_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyPurposeIdIter::next"
+kappa = "15636f89ef4f84a0dc28e1ad292bb7a6ad1900693c6c74f50faf41d4575580d9"
+embedded = "5a61cb7d43d681f04be8738318262af5e1272d2bd4fc1d2835d5c4d5bea7340d"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyPurposeId<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyUsage::CLIENT_AUTH_REPR"
+kappa = "0b6b2331484807d23a32a6d1722cbd00d1a7bfa86f9001de73ae73cc07fd3432"
+embedded = "f001de39b58cb805dd37c505903de4effe25d44a43e54a96d29951d4d17a562a"
+status = "residue"
+cause = "mir::Operand::Constant: verify_cert::KeyUsage::CLIENT_AUTH_REPR::promoted[0]"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyUsage::SERVER_AUTH_REPR"
+kappa = "f5e306dbde0d5bd05de2622d12774f65492642aa1ef398721f304e9068de746c"
+embedded = "a9d2b2276306772c30766fb584cc1136f1f0125efdab1714251017282b6bc602"
+status = "residue"
+cause = "mir::Operand::Constant: verify_cert::KeyUsage::SERVER_AUTH_REPR::promoted[0]"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyUsage::client_auth"
+kappa = "afcb3b844789c7ccee287472a7a8991f861c33b921a873693c03f19f289b72b4"
+embedded = "0859601a9a8401161325845770f251075d2c62e1d0a2dda44cf9421567953834"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyUsage::oid_values"
+kappa = "71e6796783e3d494191a7d64bc212ff7bcccfb61108a3cec04f75bafd57df515"
+embedded = "a8f110e825673feed15d445bb60d002b8d9444ac063b4b699812d079e97e030f"
+status = "residue"
+cause = "mir::Ty: verify_cert::OidDecoder<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyUsage::required"
+kappa = "93f4a8692052c920c17a9ebea64243b59065892da58458bbfac3c3d0131b2be7"
+embedded = "ef295c6bb0754c2af8fbeba1a3f9e46f7cef843603b19f74b5ff3c9cbd5c5cc2"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyUsage::required_if_present"
+kappa = "9ba849fb6d4b1326d6457f3849fe7e71d14f30e9f9c259a254941b7023c4b991"
+embedded = "1ee73bb2c8849612c15e6710622d8276ab9f2db8e752f5677e672481b6ca9213"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyUsage::server_auth"
+kappa = "9a3809252a1f239fd25a99ea9c32030bf9109e8e25dc1c9fc1b2f8a7ccfb6299"
+embedded = "418b4dce04efe50caeb9b4f5073e76904400478f8b78f7f3c3d0545a7b7cad2d"
+status = "residue"
+cause = "mir::Ty: verify_cert::KeyUsage"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::KeyUsage::validate"
+kappa = "8a0577e17eed5a73edf8a34408c618dd48759a22c0f1b21bba6fa7d3cc0d02c2"
+embedded = "c9cb3a97d2fef38e553cf5255ff283313277b5d1b55b4427cf5ef36ed50703fa"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::OidDecoder::new"
+kappa = "cddc0351a553ac8157b7cd990921a7cafb3eada2c9a8088d2e7bc683d6cd236f"
+embedded = "38d35aedd4e7cb3f75ebe79ae179ceef3b37b958094902c768a899167e79e514"
+status = "residue"
+cause = "mir::Ty: verify_cert::OidDecoder<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::OidDecoder::next"
+kappa = "c772aecf80c5215a7ec2eebefc9e990dc2c4396251eea8ff2c01f7ff740e4041"
+embedded = "7046aba142f5e6574aeebc1c68121f3e06b9602080445e997ac3cf6cb979bd69"
+status = "residue"
+cause = "mir::Ty: OidDecoder<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PartialPath::get"
+kappa = "be776ae49b4cc989e31a985201dfbe89ea9a3fcaf456cb2b42c3fd87ba338bf1"
+embedded = "754c78f7ed35679004faef96adef3b0149d7e89b1a1f2a22f58ac77533e3c76b"
+status = "residue"
+cause = "mir::Ty: cert::Cert<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PartialPath::head"
+kappa = "7a6eb6df18db93a219458d4cf4c0389da145bee9c0a5897fbf13c1fabcab814d"
+embedded = "8aae29a29adf560b08d3b805c4ad36438f56b2e7119d8d55709b0ffba2a0e550"
+status = "residue"
+cause = "mir::Ty: cert::Cert<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PartialPath::new"
+kappa = "00080701b42b77f2fe1a0b89d0a2a80f9abbf9a06512fc5476bbdf530cd66e72"
+embedded = "7935630ee7b443082a26f2a956798c40214e451dd7d29d829e958538867a0444"
+status = "residue"
+cause = "mir::Ty: verify_cert::PartialPath<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PartialPath::node"
+kappa = "64bce02f1d4ea61cd0d79ddf449d92bf79ec6660a16616ea3d7d0ec6ff8e1c01"
+embedded = "dd86eea722e5d46d9e40476c0d31f528515cefc109ac11b14828b54821d3d8bd"
+status = "residue"
+cause = "mir::Ty: verify_cert::PathNode<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PartialPath::pop"
+kappa = "cc3a21c8d90825c2a67605cb80cf02fd172f0e7106a281bc8302454e4f16b974"
+embedded = "f16508ac5043c94150b66dce514422d76df726931c84524e608a391e503470d4"
+status = "residue"
+cause = "mir::Ty: PartialPath<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PartialPath::push"
+kappa = "bde43a18e27c78b86b0465a776c9da3b78c374c85141aa2deed122a13e6d14ac"
+embedded = "ab43ef323a7a53e9d33a80f924428ba5ffbcfde7dfaf7fadc9bdb453f66126bc"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PathIter::next"
+kappa = "282551dd2d9aa5e5dc3d7ac9055dac46c0682379114a1e38eb4ec381eef3bbba"
+embedded = "7f60d287b6009a77d15c23dfd4c726031b2b069cc9be98dd73d427424226d304"
+status = "residue"
+cause = "mir::Ty: verify_cert::PathNode<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PathNode::iter"
+kappa = "2f9048303685eb28e160d2b609dbf507a042db37da754dc38c140c62dede38d9"
+embedded = "b9c9cff9146f45a448e5547b612656d85b78c3d573d2333bee0abb8b137bf13f"
+status = "residue"
+cause = "mir::Ty: verify_cert::PathIter<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::PathNode::role"
+kappa = "451763787f9f141ed048b76ee6efb264cee4ce0435a3c686c4b99bbbdc819021"
+embedded = "a787235e7e8e431c87984461bec7076dff0303aa8d5dca3311542c905a309ada"
+status = "residue"
+cause = "mir::Ty: verify_cert::Role"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::RequiredEkuNotFoundContext::fmt"
+kappa = "d8ccc3c07c39f88c673d56910c0a5000477262706f228855378e49d6b5f39da4"
+embedded = "8da3f9a226c8f3707a1b20c977953b509e57318ab92ab83054caddd189ebc1d7"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::VerifiedPath::anchor"
+kappa = "deaadb1356033cab6f4d665e4237ad5457c99b3d184b395251e0e6b85e146770"
+embedded = "03ac95bfb2dbda7acce7537ba566913106589a2ae088be12429d841ab3409811"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::TrustAnchor<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::VerifiedPath::end_entity"
+kappa = "167bc2243740061a7999172d524c3440127f43b156705a550531f8186bc200d6"
+embedded = "874ffd7d97e6870c801aa22ae740a7e4e5611c86315d6c08cff92f0a2e99cec6"
+status = "residue"
+cause = "mir::Ty: end_entity::EndEntityCert<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::VerifiedPath::intermediate_certificates"
+kappa = "d93aa983114f828536eba6d5482ff8bd84ebb16c5d57f7bfdca5b56bb013f1aa"
+embedded = "68ef65f0dc453a8b77d4ea978055a0c7b5447795e5b7af49f2b7d5b76542c13c"
+status = "residue"
+cause = "mir::Ty: verify_cert::IntermediateIterator<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::VerifiedPath::issuer_spki"
+kappa = "29c02e46c5149945c03a64fa4b6260de93e9f89d19ad38d9ff155562c47a407f"
+embedded = "de7e119caea8c75b3fa40fd5d543480797f2f7c522f6c4a97749d8acad0b383f"
+status = "residue"
+cause = "mir::Ty: rustls_pki_types::SubjectPublicKeyInfoDer<'_>"
+
+[[fn]]
+path = "rustls-webpki::verify_cert::VerifiedPath::new"
+kappa = "6623fbdb7e4381c0b6585a81ec4ddbd6671ba05d362f612d7220228a7cb5fc8d"
+embedded = "3747d42ac0984fa83a9b7b7ed3f46704a2ae2dd26d530aa20be6fddddc2dc76a"
+status = "residue"
+cause = "mir::Ty: verify_cert::VerifiedPath<'_>"
+

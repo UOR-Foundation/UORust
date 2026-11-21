@@ -1,0 +1,81 @@
+# The yoke-derive register (written by `uorust crate yoke-derive@0.8.4`; do not edit): every body of
+# yoke-derive's MIR at yoke-derive 0.8.4, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 17
+translated = 0
+residue = 17
+
+[module._]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.lifetimes]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.visitor]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 17
+embedded = 17
+evaluable = 17
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: CheckResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Visitor<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: syn::Lifetime"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: GenericParam"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WhereClause"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::Ident"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro2::TokenStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: proc_macro::TokenStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: syn::Type"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: visitor::CheckResult"
+bodies = 1

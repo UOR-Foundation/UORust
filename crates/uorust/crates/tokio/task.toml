@@ -1,0 +1,73 @@
+[[fn]]
+path = "tokio::coop::<impl at src/task/coop/mod.rs:96:10: 96:15>::fmt"
+kappa = "fe4861899cd05131babf87e3b4cc7d08ab1ac3087cef0920d5409c7422a332bc"
+embedded = "2c55ef51f19cd64673941d659191fface92fa1741135e9650f7760573262e441"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tokio::coop::<impl at src/task/coop/mod.rs:96:23: 96:28>::clone"
+kappa = "7d235ece468440562cf82721b127c214268395e7b5950e9d3a1e0a3489983257"
+embedded = "96edf25b99020101e096b4193bd309d7416a3e37e817861f5b08a1e53185bd12"
+status = "residue"
+cause = "mir::Ty: task::coop::Budget"
+
+[[fn]]
+path = "tokio::coop::Budget::has_remaining"
+kappa = "ec39ca7c62cab2aa264d9d91a017b06dae9d50e2bac3aebd650559ef40f81677"
+embedded = "b1137a23f791cc0ac1d6ea6eece6c4df5f25d8246765515dbb11d9a38807e52f"
+status = "residue"
+cause = "mir::Ty: Budget"
+
+[[fn]]
+path = "tokio::coop::Budget::initial"
+kappa = "4812ea2009e771eca162c67a91ae21b31dced7817cbaabc2d4b3b27af5c41137"
+embedded = "f975764c05e64eeea47ebedd74db73f0ffdfa3ed2f43367bf4ede17573857e9f"
+status = "residue"
+cause = "mir::Ty: task::coop::Budget"
+
+[[fn]]
+path = "tokio::coop::Budget::unconstrained"
+kappa = "c062be242686e8a09340c6d1afa72c972dfa5b2486afab44882b32870d51f0f5"
+embedded = "22b2440489bdc04e797d502570d60b5b001944d48a170c407f2c979b46774f57"
+status = "residue"
+cause = "mir::Ty: task::coop::Budget"
+
+[[fn]]
+path = "tokio::coop::budget"
+kappa = "72335e7727a6b225668bc7e8a6acfe4f42f60a38c3bbfb9a7fbb75a35fd38379"
+at = "R=u32"
+embedded = "154d8c5e9c880554009fe660e255fd4589161bfe80002baf8257c57267c8250b"
+status = "residue"
+cause = "mir::Ty: task::coop::Budget"
+
+[[fn]]
+path = "tokio::has_budget_remaining"
+kappa = "2e190b695bea829ed754ab255c58266b11a12412a0bf4ff4aab8b0a8a1263ae9"
+embedded = "921074d101d57bea3f394eb05025637e99d1aaf6f019d18f62a5f7eba9e00a86"
+status = "residue"
+cause = "mir::AggregateKind::Closure: has_budget_remaining::{closure#0}: type outside the lift: Budget"
+
+[[fn]]
+path = "tokio::with_budget"
+kappa = "5a88dd566d0605bd24535d1b390f40d81c339c3001625f3a9f397f882db253e6"
+at = "R=u32"
+embedded = "5823037aecd802e48e89e4db9c17ffc92afbacef3f3bbbadd4ce1eae380ea538"
+status = "residue"
+cause = "mir::Ty: Budget"
+
+[[fn]]
+path = "tokio::with_budget::ResetGuard::drop"
+kappa = "beb08acf292f8d3f843883d8ec9e30eb7a4ce2f65f271768ca25fc2d133aa798"
+embedded = "8d4a0380ad9df1f12397a36604e4b49d7191f75c75555a4fcdb2f7461d24b9bf"
+status = "residue"
+cause = "mir::Ty: ResetGuard"
+
+[[fn]]
+path = "tokio::with_unconstrained"
+kappa = "a51093a4aa4952a554d035ebe581f11198125d721427f976a614ea844b54950b"
+at = "R=u32"
+embedded = "cba959fc5659598b48b5259eaba1c7ff2528f3b7cd817c4b3c24efd2040c255e"
+status = "residue"
+cause = "mir::Ty: task::coop::Budget"
+

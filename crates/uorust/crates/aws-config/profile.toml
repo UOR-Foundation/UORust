@@ -1,0 +1,524 @@
+[[fn]]
+path = "aws-config::base_provider"
+kappa = "d2540556b271441382ee167133461cd775c615dc54ae93074704cca6e6e31d20"
+embedded = "c5cb0f0aef3517da08a288a8fd9db5287542f7c48bf990c7db3e327cdbed490b"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::BaseProvider<'_>"
+
+[[fn]]
+path = "aws-config::build_provider_chain"
+kappa = "a9d31f77c9d2a23bcacc4f0bd5274b9f74ff40b934ad495291f32f125ab52417"
+embedded = "a731d81c8d5a9cb0ff4c416d122d96b6302e08823486ad53658f626d5799dfdc"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::credentials::build_provider_chain()}"
+
+[[fn]]
+path = "aws-config::chain_provider"
+kappa = "76f1c33ac9e374e7980d291347a3182f10c2a609fb86da175ea3da72cacc38d7"
+embedded = "a6f65cdcced6af5265d43455e87f92cacbbc87f1c45c821a40a3d292823b5e78"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::NextProfile<'_>"
+
+[[fn]]
+path = "aws-config::create_token_provider"
+kappa = "1f75729be312e45c42827d5706c105f187863bdc3fdb3c1edc48d8149ffea5d6"
+embedded = "8da9bab6cc2ca94e61e0ce9e3cec537a19f81f0b4f7122c4aefc2cfcedd6429f"
+status = "residue"
+cause = "mir::Ty: sso::token::SsoTokenProvider"
+
+[[fn]]
+path = "aws-config::credential_process_from_profile"
+kappa = "93338cefcaaf55d3e281643813dff054f388f8555cd958cb61cf4bb019f9825c"
+embedded = "d2447e8396d3b8610ab0ecf80edf11f0a67b00d10667fd8cd5289d39033ee3db"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::BaseProvider<'_>"
+
+[[fn]]
+path = "aws-config::exec::<impl at src/profile/credentials/exec.rs:25:10: 25:15>::fmt"
+kappa = "ff1f651138460c69321db3a5e50384b6e8634f7c8ecd64cb78ae72f39a6d885c"
+embedded = "e799f073861e57b78b1464983a7e6451f86b345051980955db35341b12bb653c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::exec::<impl at src/profile/credentials/exec.rs:63:10: 63:15>::fmt"
+kappa = "0ebad2ba5be097b02021ae09d824346788661e7ac58c2bfb7c5461222f786b39"
+embedded = "5d579d6fb6790107ac45c0e3cf4ceb9aa275963ae8d2536e9db156a8c9cdb0f6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::exec::AssumeRoleProvider::credentials"
+kappa = "70bb2d60d06838fa3d1df92fdfc4409c313d6a5e7f31814e1c7b5c868f8258cb"
+embedded = "fdf3395ec8c4065ad155c95568d370d2f6bcc687081ffa2e15c4caf3e5a59d87"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::credentials::exec::AssumeRoleProvider::credentials()}"
+
+[[fn]]
+path = "aws-config::exec::ProviderChain::base"
+kappa = "1aacde1c2477482bd79b71a65a91ae689c844d642ab873d61c05b67251a864b2"
+embedded = "6887987bdb4572197dd729ebef45f8bb6bbf59116d69100328467084bbf270c9"
+status = "residue"
+cause = "mir::Ty: dyn aws_credential_types::provider::ProvideCredentials"
+
+[[fn]]
+path = "aws-config::exec::ProviderChain::chain"
+kappa = "e2914903087e028726249d34d22c31dc8096039ae10dbfd0ee3809a87ed56342"
+embedded = "dda3faaa581de7cab8f4d0ad92cfeae6ed3ae9cc71e77fe08e38e679900e0af8"
+status = "residue"
+cause = "mir::Ty: profile::credentials::exec::AssumeRoleProvider"
+
+[[fn]]
+path = "aws-config::exec::ProviderChain::from_repr"
+kappa = "d70a5200def218a55d2b823aa4e034a349671c008187d2f7634a6d9302d2f452"
+embedded = "4966858321fcae11e3026737c30fbd869c026747894306e70c028bf396ac1653"
+status = "residue"
+cause = "mir::Ty: profile::credentials::exec::ProviderChain"
+
+[[fn]]
+path = "aws-config::exec::ProviderChain::from_repr::__CALLSITE::META::NAME"
+kappa = "8075a95f7e5c7023368cb5e9c98c656733bb5a1d4c294079460f6968130b9ac2"
+embedded = "f60a397c3458796a154cbe49579853b4b005a2350b5feb4cbe72db6a3fdc5854"
+status = "residue"
+cause = "mir::Ty: tracing::__macro_support::FieldName<4>"
+
+[[fn]]
+path = "aws-config::load_profile_set"
+kappa = "71892d796c02a115272f23871f4d4d66292e0109b6bff8bd91a3d40e482dec3d"
+embedded = "a15988e1c19a1b72ae2e52012c13329f39aafaa8e1434451a1c54f065007dfdd"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::token::load_profile_set()}"
+
+[[fn]]
+path = "aws-config::login_session_from_profile"
+kappa = "495ac16959bd66bb06e7469836a241de383d0639f32d291b4d34d7f3df572b3a"
+embedded = "88edff4bcf00c14a3138e8b2a1f138f38bf32a0ad83c4a444b028c2269145cb2"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::BaseProvider<'_>"
+
+[[fn]]
+path = "aws-config::lower_cow"
+kappa = "b6addec77feedef3751367b8734cb13a2807dfecf42ac77abea0b547b9113245"
+embedded = "9216343e8ed2c9f3fc537f84eb4f192fc70b4736550bf926709f229bcfa1d040"
+status = "residue"
+cause = "mir::Ty: std::borrow::Cow<'_, str>"
+
+[[fn]]
+path = "aws-config::named::<impl at src/profile/credentials/exec.rs:226:14: 226:19>::fmt"
+kappa = "dba911afef7d9bc33d80ebcb4dc9bd24e45be3b56cbdbcd420eb0e896c70a2a7"
+embedded = "fdfa7dc35fd798e683e0f58d316576fb791073c1a000fca8f535fbe370b186ac"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::named::NamedProviderFactory::new"
+kappa = "87c3cea3df3004dddc005791a286b75dfe15edb481efc5c71a9fcbed59f67e16"
+embedded = "cc33df299f7eeec1ea75f6cc51d901e05c9ef2ed15811c1377a8eb57bdb4ac96"
+status = "residue"
+cause = "mir::Ty: profile::credentials::exec::named::NamedProviderFactory"
+
+[[fn]]
+path = "aws-config::named::NamedProviderFactory::provider"
+kappa = "fe192028d5328113a5cb01bbe0dae3b950bf612360d81486358853c6f0a72390"
+embedded = "3ae8c8a9af56beb60dddb57fcabd7dc1ed714f2df62034324e7bc50481539c12"
+status = "residue"
+cause = "mir::Ty: dyn aws_credential_types::provider::ProvideCredentials"
+
+[[fn]]
+path = "aws-config::parser::load"
+kappa = "f305538d5363bd72e25955891b013aefd0c9803dbd620a475d46a0ac248e2513"
+embedded = "33d7d415292bd85ea9d7d0466664bf872ef5e478c8b6f2072f64d411c96edf1c"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::parser::load()}"
+
+[[fn]]
+path = "aws-config::profile::cell::<impl at src/profile.rs:49:14: 49:19>::fmt"
+kappa = "db0d892c63681772e985725ad4162dcc470f877b8387ccbe497baeead2c81c4f"
+at = "E=u32, T=u32"
+embedded = "61960a57b1de8d2a772a333a7425a51cb4bf0228b78c653eb642a6a2d55405c2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::cell::ErrorTakingOnceCell::get_or_init"
+kappa = "929eedf09604f57a551afbbf043829338f10d10190a74d7c3f4f74243fd0dcb3"
+at = "E=u32, F=u32, Fut=u32, T=u32"
+embedded = "4bf8e187c505fc62190f2338948582a4aee41a6d762fe9ea796f37ded815e005"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::cell::ErrorTakingOnceCell<u32, u32>::get_or_init<u32, u32>()}"
+
+[[fn]]
+path = "aws-config::profile::cell::ErrorTakingOnceCell::new"
+kappa = "1c685e6c11ba0e26e3ab1cbd2eabe9322bd005cbcbd871f2d360c2c66f05bce7"
+at = "E=u32, T=u32"
+embedded = "49ef021102355fa9533ca46d5a3e81cc5fce0bbd4cc556065dd992ee6f02e45b"
+status = "residue"
+cause = "mir::Ty: profile::cell::ErrorTakingOnceCell<u32, u32>"
+
+[[fn]]
+path = "aws-config::profile::credentials::<impl at src/profile/credentials.rs:145:10: 145:15>::fmt"
+kappa = "45838adf52ed9b630528d3f67be1f3f26aa7117a9283c3b7a3da389af6070ab2"
+embedded = "63bd4dad2c786ead1d0c1457b6c9a115e1d6be5932715fb30710a4368e9c7ec3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::credentials::<impl at src/profile/credentials.rs:151:10: 151:15>::fmt"
+kappa = "37cd64a24a2efed3303b1bad5887f02a5263e3e41e09a5ce9e3b2369f7d0d79d"
+embedded = "b082645547d53ff38c6d27addc1cb2dbcf6076508f2667db0639d9dba8c39bb3"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::credentials::<impl at src/profile/credentials.rs:222:10: 222:15>::fmt"
+kappa = "fd92d7052dde3ce20927a58fa826336f4561accf90f6543087a049aaf8c7d47b"
+embedded = "00f17ee215329907ba4f73bbaf41da7d37248c840ee59d2d78fb52f8ed2bdc3c"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::credentials::<impl at src/profile/credentials.rs:389:10: 389:15>::fmt"
+kappa = "c6fccfaa725854e7d6b2a6b118a14e136c327d4ec7a820ce2f592c5f6a92123a"
+embedded = "c6e47b800eec131d078639d391e049d3111ff0c346797db60bf6efebcc7fe7ef"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::credentials::<impl at src/profile/credentials.rs:389:17: 389:24>::default"
+kappa = "c85e57a4baacd07f61c66d68720e04a3059bfb459de636978ebd929eefc092ad"
+embedded = "98bcbe00a39afd95eefb2d1a1f6458af8cee4508f24402420a54408bc6cf4b4b"
+status = "residue"
+cause = "mir::Ty: profile::credentials::Builder"
+
+[[fn]]
+path = "aws-config::profile::credentials::<impl at src/profile/credentials.rs:528:10: 528:15>::fmt"
+kappa = "4b5d790171f953849c83e4747bcb14d80836c89fedd17bc88eec1ea37cba6c3f"
+embedded = "91ea9db5d46d09adc73225d367583ad274b3f1c4ec30a2b9d9959cc3af8ce5eb"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::credentials::Builder::build"
+kappa = "4f3d6bb493401926d76e32f755249c78c23a4ecf1ca30131cff5e45d76170b92"
+embedded = "d54d809813a9402bdb840ad61da51ed63b9fe937384f00d13c5dc2776eec913b"
+status = "residue"
+cause = "mir::Ty: profile::credentials::ProfileFileCredentialsProvider"
+
+[[fn]]
+path = "aws-config::profile::credentials::Builder::configure"
+kappa = "dff82c6328e25cd6fdda2da4e29e35aa9355e186d629568a97ba94b7a1242fee"
+embedded = "6c0ec3539798f65e1b1649496ecb7ba719571340e5596e10fcbbd7b8d805eafc"
+status = "residue"
+cause = "mir::Ty: profile::credentials::Builder"
+
+[[fn]]
+path = "aws-config::profile::credentials::Builder::profile_files"
+kappa = "edf914cf5d17de245d007e82a8b50eb7832c9ef1323f243961bb4dbb904309d5"
+embedded = "44b15df9bb60e95beeaeb3abaa620e81416de801c532e21cd329944c991f6c5b"
+status = "residue"
+cause = "mir::Ty: profile::credentials::Builder"
+
+[[fn]]
+path = "aws-config::profile::credentials::Builder::profile_name"
+kappa = "fe895a7a26eddffdfac99b67ed5a70aab628ad19de7e5a031037aca4be530d46"
+at = "String=u32"
+embedded = "5fb8570d6aed4590c47f19239c39f7d2b9c1734d5995c1995a8c0a4c94212591"
+status = "residue"
+cause = "mir::Ty: profile::credentials::Builder"
+
+[[fn]]
+path = "aws-config::profile::credentials::Builder::with_custom_provider"
+kappa = "9ad0a95ef15502aedb61f8d9f6d92b8cde99f9d0c1cb2c04957119c43f4807fe"
+embedded = "218aedc8174dab1c3d67df6014eae0a0ec656ac26ebbd042aa6a78178ab12b35"
+status = "residue"
+cause = "mir::Ty: profile::credentials::Builder"
+
+[[fn]]
+path = "aws-config::profile::credentials::ChainProvider::provide_credentials"
+kappa = "a86750aa4ff738c19350ad60072504892e615a9d15db71a2d5f497abab1a1092"
+embedded = "e736bea3dd41aefce6b46f5d3d148607dbecca2f3c482ffa80864947cf200cac"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::credentials::ChainProvider::provide_credentials()}"
+
+[[fn]]
+path = "aws-config::profile::credentials::ProfileFileCredentialsProvider::builder"
+kappa = "e9357653f39fada9179e039aaf90421ff5dbca24a16c61062aeb7ec83a561f0b"
+embedded = "2d40dd2e3df0ac12049d7342f108cb1d35bc8040dcb5e31f6dcb01a70259556b"
+status = "residue"
+cause = "mir::Ty: profile::credentials::Builder"
+
+[[fn]]
+path = "aws-config::profile::credentials::ProfileFileCredentialsProvider::load_credentials"
+kappa = "5cb523a56ba80b58d0b32a9354214c2b885833add2f1cdf8ebc958d6a9366d7f"
+embedded = "6399f06dda3936c03183b0e2503b09ee132df30dc34c466d6a3f26db24dee4cb"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::credentials::ProfileFileCredentialsProvider::load_credentials()}"
+
+[[fn]]
+path = "aws-config::profile::credentials::ProfileFileCredentialsProvider::provide_credentials"
+kappa = "92250d58b5ecd30f9f4ed5d2d599f0ad297375f4bc1693f859d366d4beecdf20"
+embedded = "e20e4ac666937d366cefaff0fb2ecc7cf2448bf0df9cab16535b748070d3f842"
+status = "residue"
+cause = "mir::Ty: aws_credential_types::provider::future::ProvideCredentials<'_>"
+
+[[fn]]
+path = "aws-config::profile::credentials::ProfileFileError::fmt"
+kappa = "dbc46be6f908ed0195becdd753c61982c928a596f215c10fde39395e6ac26c49"
+embedded = "27a00834653269afed9f59f6ad877e4a30ebd53f194db207d199c9cf77ccc029"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::credentials::ProfileFileError::missing_field"
+kappa = "dd32f82c2875a4f331ad287e26ac4f92cd6846a0f9a20b2cbcd2318d645b0f9e"
+embedded = "edd800b00da5171eed579a0c414215a3a18502156024f382500d58e4d6557054"
+status = "residue"
+cause = "mir::Ty: profile::credentials::ProfileFileError"
+
+[[fn]]
+path = "aws-config::profile::credentials::ProfileFileError::source"
+kappa = "9ac50305ab200460b91e08a4dc591418312313a678c010434d627c364d8a4ec2"
+embedded = "4e6aab44fe1cf937b28b0afca302da4cf9c1d0ba5c0de24bf23133db512e1710"
+status = "residue"
+cause = "mir::Ty: dyn std::error::Error"
+
+[[fn]]
+path = "aws-config::profile::region::<impl at src/profile/region.rs:39:10: 39:15>::fmt"
+kappa = "dd38b4af06417606d1ffe3d7412d5b99bc5d9991d1575c7303cf6e007a49f6c1"
+embedded = "e6d1d53a3506c022819c09646116f1d17f833545f30bbe7825bb13bfbe4ece49"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::region::<impl at src/profile/region.rs:39:17: 39:24>::default"
+kappa = "2219717b8360db3b651553d23ca9da3c1c3b13a5d0ad74705d4ca33ed5f1a322"
+embedded = "0ec6c3a274fb715a56d572f4eb6614ab2e98b675067a774288d7b54282239b16"
+status = "residue"
+cause = "mir::Ty: profile::region::ProfileFileRegionProvider"
+
+[[fn]]
+path = "aws-config::profile::region::<impl at src/profile/region.rs:45:10: 45:15>::fmt"
+kappa = "051538ad9692d17d568d319b89b323bf071e82db37bc54b5f0c36379c30e7a8e"
+embedded = "d9406e0e5b77686a4a4f9802813b77c574daac7d2158b668eeb044c35df4e6db"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::region::<impl at src/profile/region.rs:45:17: 45:24>::default"
+kappa = "7ec2f20c58a37ebc5e56ed56562ce4726f9c03cb384f85fca6fba99e78dfefc6"
+embedded = "25176cd98f6cbada06409ca92b6b38849302d4c532af1b1a21ce7fe2fc09a2ae"
+status = "residue"
+cause = "mir::Ty: profile::region::Builder"
+
+[[fn]]
+path = "aws-config::profile::region::Builder::build"
+kappa = "c3f10ae390dfdef9de92098ee8731a5c3eecd25e575eaf3470b5bf8f72e96144"
+embedded = "7b10656f878fa3d2e28d87ceb28a68735eb8fcfc114e55800b5ec8cea31785ab"
+status = "residue"
+cause = "mir::Ty: profile::region::ProfileFileRegionProvider"
+
+[[fn]]
+path = "aws-config::profile::region::Builder::configure"
+kappa = "d676e45677b51addc930cb3b6d4519078c1d1bcf05f4c552cb71443bb8fffbef"
+embedded = "a28dc20f68e094270ebeda2be3d7f099e75ee5e317d4d445305f36ed9b32a481"
+status = "residue"
+cause = "mir::Ty: profile::region::Builder"
+
+[[fn]]
+path = "aws-config::profile::region::Builder::profile_files"
+kappa = "962d7bf56dc4998953daec9d0405a0c480485f88a396e8f1d8a0714ffa7158c1"
+embedded = "55d23e94a46a2c5d17bb24ef6224ea50bc4063098bf55b3a1863868594814dcc"
+status = "residue"
+cause = "mir::Ty: profile::region::Builder"
+
+[[fn]]
+path = "aws-config::profile::region::Builder::profile_name"
+kappa = "8b3a5b532e8bc2decf7958af6b7c489f0ada26322fea9d4b165573f7b466aa94"
+at = "String=u32"
+embedded = "4c7db3d78f7608ef856269039178c189c7e47ccad8ae03813c2fd1e679c880d9"
+status = "residue"
+cause = "mir::Ty: profile::region::Builder"
+
+[[fn]]
+path = "aws-config::profile::region::ProfileFileRegionProvider::builder"
+kappa = "00a4d7718c0b1442a784d080ef41be3fbf1234026b63f9d6bfc3244e752cdba9"
+embedded = "84411526daa6c65742a63380dd1ecaa109ed1eaedfecb967468efa7a1bd4cc4e"
+status = "residue"
+cause = "mir::Ty: profile::region::Builder"
+
+[[fn]]
+path = "aws-config::profile::region::ProfileFileRegionProvider::new"
+kappa = "dcadaa83a401543c80da66b356316783c3d65faa4bfc570b939625847d585107"
+embedded = "c15f8f1585641fc8d7bc7f3b1062de8b5894ce2a6d09f2fc08f3c5d4db44f292"
+status = "residue"
+cause = "mir::Ty: profile::region::ProfileFileRegionProvider"
+
+[[fn]]
+path = "aws-config::profile::region::ProfileFileRegionProvider::region"
+kappa = "3d5cfe47985e6de9baae1a983e089eef5cb8705df53c243b410421b6eeedcadc"
+embedded = "ea1951727cff59d7a2873c34c2cbca93ab55b61d9e7e066de1bba260201a32d8"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::region::ProfileFileRegionProvider::region()}"
+
+[[fn]]
+path = "aws-config::profile::region::ProfileFileRegionProvider::region#2"
+kappa = "854d9d923e70715cf80bfaba70f99d8505fbdd06ef4b89f2bc003acecedb2bd2"
+embedded = "a835e5b418bb27c41ac77a7cf6942edc04fb0df53899ff55fcb798699d97112e"
+status = "residue"
+cause = "mir::Ty: meta::region::future::ProvideRegion<'_>"
+
+[[fn]]
+path = "aws-config::profile::token::<impl at src/profile/token.rs:123:10: 123:15>::fmt"
+kappa = "1ac16137d5f88e33f9ee4bd6be6701a1e9c312f824c4913461a0768fc3a88293"
+embedded = "cb90e8ccea3c66f8979db3d0e9495e6618382ef9863e33e30477e9e1f2417388"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::token::<impl at src/profile/token.rs:123:17: 123:24>::default"
+kappa = "993145f933b5f86149136f858223d0a3c2b00dca4ee92af12b815b0b773ab97f"
+embedded = "c98f88e382bfb22b5817ee3ab25f35a25ae2458f61c49e3ebfaf43a0c8c6e52f"
+status = "residue"
+cause = "mir::Ty: profile::token::Builder"
+
+[[fn]]
+path = "aws-config::profile::token::<impl at src/profile/token.rs:78:10: 78:15>::fmt"
+kappa = "e83484e1d5837c096629f252ec129a0571e7c870281c91a47fb5c6dfef1e3f42"
+embedded = "90a80399f2745264449c8cd4fccc465b85d9b65684b6944ad475bf24c959c5b6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::profile::token::Builder::build"
+kappa = "a5ecdb1760d9cc38982b9662ebd11f540f06a45e5470b62a34f3dda7ea2f16e3"
+embedded = "9df1f321cc45dfb93767486afc6b58bd0c8f9dd7775e312cf140eb897655a2e6"
+status = "residue"
+cause = "mir::Ty: profile::token::ProfileFileTokenProvider"
+
+[[fn]]
+path = "aws-config::profile::token::Builder::configure"
+kappa = "deba6b32522dca26a28d5aa5a282a53c4eb53a3dd6326f05cc0cb2833980d7b4"
+embedded = "fdafc867f4d0d928fdb1834e064f65df1e9e570035c3c6c305bba7c5194d5f88"
+status = "residue"
+cause = "mir::Ty: profile::token::Builder"
+
+[[fn]]
+path = "aws-config::profile::token::Builder::profile_files"
+kappa = "434d416c3cec97dcc6ae598e585e93e7400cd15175af11038524005eae53ef15"
+embedded = "ef249cffbf842449a263efa27b382cc69b077b448d3a8320801b9abade029bd9"
+status = "residue"
+cause = "mir::Ty: profile::token::Builder"
+
+[[fn]]
+path = "aws-config::profile::token::Builder::profile_name"
+kappa = "20a787792a649e6229ef9c6985bdc4f3fcb1cf95b029abdb652920e8154808fd"
+at = "String=u32"
+embedded = "6ebcf81c0356509a71f935b98277141353c89d8dac6da30bc5898fb1c33995cd"
+status = "residue"
+cause = "mir::Ty: profile::token::Builder"
+
+[[fn]]
+path = "aws-config::profile::token::ProfileFileTokenProvider::builder"
+kappa = "2c8fbcedd7fb59d3dbe9b519ffbfae33b24ad948fb82a32b637a78febaad692f"
+embedded = "f42ddf65aaef49d2b9fc5f05cc820cf6c8addb1a4c04e581faa10b9250ba6eee"
+status = "residue"
+cause = "mir::Ty: profile::token::Builder"
+
+[[fn]]
+path = "aws-config::profile::token::ProfileFileTokenProvider::load_token"
+kappa = "0de6afa2d5b03dea29bec9f3262d2b45de5c285072951e681837f9303258a33e"
+embedded = "fbe84c53e0cb109f7f19d7ca8864e839492b2cbcf5fb3288146c4fa3794eb854"
+status = "residue"
+cause = "mir::Ty: {async fn body of profile::token::ProfileFileTokenProvider::load_token()}"
+
+[[fn]]
+path = "aws-config::profile::token::ProfileFileTokenProvider::provide_token"
+kappa = "fd25ff459557b50c8a2b460806dd720456013c60537469e34861fff45e6983a1"
+embedded = "36d7368ef53cf8deff876a4f2a56410ca1ba9edd07ede0286826dba63b56dd6a"
+status = "residue"
+cause = "mir::Ty: aws_credential_types::provider::future::ProvideToken<'_>"
+
+[[fn]]
+path = "aws-config::repr::<impl at src/profile/credentials/repr.rs:115:10: 115:15>::fmt"
+kappa = "9805ac3d1087219e3a9399c0fcb33a53b32f69de19c61b6586a0a32b39d7b46e"
+embedded = "9b58acf843e734161d29a6c373957b04088df26cbe0e3db58abb307359c9711f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::repr::<impl at src/profile/credentials/repr.rs:28:10: 28:15>::fmt"
+kappa = "59a7b814e5a811a073a67bb46b82b20430b3ef537247d21201bf5426bada5f53"
+embedded = "d7caccb0d8f4626c4ce68cca39292a8a054467eb79e739e312e56a9bfd16fdba"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::repr::<impl at src/profile/credentials/repr.rs:48:10: 48:15>::clone"
+kappa = "9df32f3266036cd773575e8b8c4a4b8e68180e266c89b59b816a45e4c36cc859"
+embedded = "12afb9ec52faeb4027c16ab03540453abbd7b368d59b2bf389df39aeaa3d5dcb"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::BaseProvider<'_>"
+
+[[fn]]
+path = "aws-config::repr::<impl at src/profile/credentials/repr.rs:48:17: 48:22>::fmt"
+kappa = "78e48d5fa32041bb3ddd09f5a472dbaad65e5fa828bea4ed9794b53679f46a95"
+embedded = "f69de0f76ea359b1b3d64aa2a8fb0d6dd53e23097d80ae330d755f49b0f8428f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "aws-config::repr::ProfileChain::base"
+kappa = "378dcc8efeb5baa820c99345bbf536125b38be2a2dc02e1c0c8b012fa2af6d80"
+embedded = "5df351d59b742204dd5355a42df9096711f2c89aa9b712685cb1836ab9411b60"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::BaseProvider<'_>"
+
+[[fn]]
+path = "aws-config::repr::ProfileChain::chain"
+kappa = "f109a8f4bddb6b803efa9647aec38f4b68cf8fb1f0ee8029db528371fc7918ec"
+embedded = "61fb7dd8efe8e5a2394b86b9692b4a9f1df1e87ce06815af96eca14d2781ec3d"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::RoleArn<'_>"
+
+[[fn]]
+path = "aws-config::resolve_chain"
+kappa = "c41e2a9330f950f0cb3f4cf3af9aca635ae544e63acf06c12d902c026b55832c"
+embedded = "58bdb99a2627936ce88459dcde6d82030de7dd95c0032cf7c3574999d75017da"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::ProfileChain<'_>"
+
+[[fn]]
+path = "aws-config::resolve_profile_chain_for_region"
+kappa = "605aa058e9b3987f67b824d4d02bcf7b019d982a8403687348d9ba8e80dd03b0"
+embedded = "65a159fd097bede8a244045b4121091fb3fc50203595ed6916f1f95594b21d19"
+status = "residue"
+cause = "mir::Ty: aws_types::region::Region"
+
+[[fn]]
+path = "aws-config::role_arn_from_profile"
+kappa = "9fbddeb4366ef5ae5a6a8e1ebe4e972cdc22c9b5fd1bdca7217909a600f10eee"
+embedded = "14b3ed1667802e98c247c3ee06878dd47a0137fd2ec2822eec4023583edf0f9f"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::RoleArn<'_>"
+
+[[fn]]
+path = "aws-config::sso_from_profile"
+kappa = "52bd0b2e623e57287bc0f22531d182c5d54f23aae73ed8d33614d8fc7f4ad1e0"
+embedded = "b713fd8aef32aaa044586965c520ad312c99e3342c43b4e6ee195e0791b56c0a"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::BaseProvider<'_>"
+
+[[fn]]
+path = "aws-config::static_creds_from_profile"
+kappa = "d387338b5591bf1a34a314cdacc0bad355bb3619580a4cc12cbe84ac4876394b"
+embedded = "8e9364217b57f0a28b813960db910855f8e09f992455672faf35a08926f856e7"
+status = "residue"
+cause = "mir::Ty: aws_credential_types::Credentials"
+
+[[fn]]
+path = "aws-config::web_identity_token_from_profile"
+kappa = "d9abe02d5427869cc35fbad1c2ef530f7e9548f5c454980b671a83d63f2f8d30"
+embedded = "714ab296197454c537580796aaab25567eac4ecaaa7cf23ea3ab0c2a5930745a"
+status = "residue"
+cause = "mir::Ty: profile::credentials::repr::BaseProvider<'_>"
+

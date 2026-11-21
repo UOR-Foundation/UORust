@@ -1,0 +1,146 @@
+[[fn]]
+path = "sharded-slab::CfgPrivate::ADDR_INDEX_SHIFT"
+kappa = "0cbe9dcc2b062f16f9bfe3848ca5449cac998fa6d10897959c2544892b39e802"
+embedded = "85a23688a9c02057bd9de04ff5540157ea93e26380b8bef56fdc1069416a33f6"
+status = "residue"
+cause = "mir::Operand::Constant: <Self as cfg::CfgPrivate>::INITIAL_SZ: mir::Operand::Constant: <Self as cfg::Config>::INITIAL_PAGE_SIZE: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::INITIAL_PAGE_SIZE: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::INITIAL_PAGE_SIZE, which refers to itself"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::INITIAL_SZ"
+kappa = "e9a112b3fa044ff26bbf8966260702f31d5df8d9c52033f5554dedc92e01b262"
+embedded = "bd651efea86d04570087e1173d2db66a376db1409d86a7af44c210086616450d"
+status = "residue"
+cause = "mir::Operand::Constant: <Self as cfg::Config>::INITIAL_PAGE_SIZE: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::INITIAL_PAGE_SIZE: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::INITIAL_PAGE_SIZE, which refers to itself"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::MAX_SHARDS"
+kappa = "9d8a2d123e6977a5c9af76c604f9702b5937b94dfdcb03706829461885628e2f"
+embedded = "1c22978803f37039b738683cdc8c095019abf4b3bc0ba7194fed32dc20ea051f"
+status = "residue"
+cause = "mir::Operand::Constant: <Self as cfg::Config>::MAX_THREADS: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::MAX_THREADS: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::MAX_THREADS, which refers to itself"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::USED_BITS"
+kappa = "0227eef95615b71bc7d7530b2866bd570da6bdfe998b8bd19febe452e43dc4f8"
+embedded = "b05307e3d855f0060c64566c0c5f7eebbaee8ce2b9fff217be4aee23421407e6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <page::slot::Generation<Self> as Pack<Self>>::LEN"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::debug"
+kappa = "cdbb5f027310f593d3e5ddf0166903fa1e1752a59c77a6bc546279c2562a6a04"
+at = "Self=u32"
+embedded = "c92d44b9a77700f9282cc6506b148a9dbe716ca35ead71eedc571f43a1fc0055"
+status = "residue"
+cause = "mir::Ty: cfg::DebugConfig<u32>"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::page_size"
+kappa = "7d268bbcc2f54ab09afdf1ec7dd24dab601552af78fbce2f1c16616d4e837030"
+embedded = "ab5d0882ce9036b8a292dde50d6c80449a1721f278fb287e6b37a0d53b591bfa"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::pow"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::unpack"
+kappa = "9784e71c2bf5f6680c38a77a26b83c9c6a9b7b6483af0e27b1490269073a3927"
+at = "A=u32"
+embedded = "49ca693e1332f5b661a702a394373c66e749ea7e85ca19109fe7b23e9dad8b57"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Pack, which u32 does not implement in core"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::unpack_addr"
+kappa = "b7842a3adc4bef645f50ef23056e4b8e628c2f0a111496c5cf0cdd9f11bfa6d0"
+at = "Self=u32"
+embedded = "2c49f1c5643f055964e4e2406e2b1c4a05176e8b191f59bc5e1bbc2a79766d59"
+status = "residue"
+cause = "mir::Ty: page::Addr<u32>"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::unpack_gen"
+kappa = "412258feeda9d39fcbf62e78aca2b5a6e6d272af7cb551c1f4079092b7ddbc58"
+at = "Self=u32"
+embedded = "5d507ccc0351ae58cb7346c1a53a2be63d7d82dd72ef293ff87ddf1a18775a08"
+status = "residue"
+cause = "mir::Ty: page::slot::Generation<u32>"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::unpack_tid"
+kappa = "33e5fdda4362fa299b0ea9542c6991118d6c5aa798946f0238b715a19bff611a"
+at = "Self=u32"
+embedded = "14fd78e0d68f5abe80d423743dc6fa3fee8df0126283d8e13173a99b015debb0"
+status = "residue"
+cause = "mir::Ty: tid::Tid<u32>"
+
+[[fn]]
+path = "sharded-slab::CfgPrivate::validate"
+kappa = "085a04c9f5007ac445e143a627938047f7179bb87130dea64c9e88a539f74655"
+at = "Self=u32"
+embedded = "c1c89dcbd3a7c06a34dce415f653de642a7cbd7dfb0e7c49eef8b35a1b884ddb"
+status = "residue"
+cause = "mir::Operand::Constant: <u32 as cfg::CfgPrivate>::INITIAL_SZ: mir::Operand::Constant: <u32 as cfg::Config>::INITIAL_PAGE_SIZE: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::INITIAL_PAGE_SIZE: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::INITIAL_PAGE_SIZE, which refers to itself"
+
+[[fn]]
+path = "sharded-slab::Config::INITIAL_PAGE_SIZE"
+kappa = "11aed15a73f807fc9d6ec4f2ffbf4c448078825e299ff079ace0c72ac34c9cc9"
+embedded = "03414175c194628ac33788d2821ce57b27ac6e60ee1cf625cad26d51faf85ed4"
+status = "residue"
+cause = "mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::INITIAL_PAGE_SIZE: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::INITIAL_PAGE_SIZE, which refers to itself"
+
+[[fn]]
+path = "sharded-slab::Config::MAX_PAGES"
+kappa = "13fba9dd5fbf09f85bf951d80d2f85af83579a5181d98c25ed21a35fa7a2bce0"
+embedded = "e0675334ccfa9d46d8fa1117149427a8c47fefeba241a6e15ae021a42e80d668"
+status = "residue"
+cause = "mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::MAX_PAGES: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::MAX_PAGES, which refers to itself"
+
+[[fn]]
+path = "sharded-slab::Config::MAX_THREADS"
+kappa = "636e929d042ae9cbc6c1e50853aa6a2ccf7c75afe5b91e7fc1a2ec3b711dd10d"
+embedded = "c24fa80c8c95209e19bae00d0323152f021730fda1fad808666a89e48fb378c0"
+status = "residue"
+cause = "mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::MAX_THREADS: mir::Operand::Constant: <cfg::DefaultConfig as cfg::Config>::MAX_THREADS, which refers to itself"
+
+[[fn]]
+path = "sharded-slab::WIDTH"
+kappa = "d77b55ab74a55a3570aff02f3a1bdbf20383ec5ae39adaf752679997718bb5db"
+embedded = "7addb1490f8b64cdff8be74afd6e1b988309650ceb9d0e28f4a1ae9c4a4aa524"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "sharded-slab::cfg::<impl at src/cfg.rs:117:16: 117:21>::clone"
+kappa = "d5eca430504149cfec1b6f0c5557f6451112b3a0bed350ada691883ceed2e980"
+embedded = "0db065f8c0974cd8fb05a416dc9eb02e6293218e851212cd4a5fc5865581db06"
+status = "residue"
+cause = "mir::Ty: cfg::DefaultConfig"
+
+[[fn]]
+path = "sharded-slab::cfg::DebugConfig::fmt"
+kappa = "10c8c662399c17d209f2a00016c65ae82fb382d2d82d6837377aa2936f5e794f"
+embedded = "6d52fccf6c0d0277f903d00af898a18593786e4319bfc400b8255349a864d7cf"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::cfg::DefaultConfig::MAX_PAGES"
+kappa = "7a7f02601a7175ab1ef2f9e788d9d3775f8e006d03aafb9f9411b3c3b3022cda"
+embedded = "5b10b022ddb5fcab9988bc2bccaccfb42d091c8bda7f446dccf55c3a6902c071"
+status = "residue"
+cause = "mir::Operand::Constant: cfg::WIDTH: mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "sharded-slab::cfg::DefaultConfig::fmt"
+kappa = "7ba8bda66ed877cdd8ec0ade12f935270f1d25e78817b3c29593b313471656da"
+embedded = "e5c1b174b0667753a5ccc2768e36b2f329f89dd900cfd1cb08c6f7a2af423560"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sharded-slab::next_pow2"
+kappa = "9ce61243980cfbba86f14b464eda588f1f64809f93dd3ed38057a16fbc18488d"
+embedded = "91c92e837cd69265d1074d21c0cf42bac9f863fe36582c7713ffb0ddc194b283"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::count_ones"
+

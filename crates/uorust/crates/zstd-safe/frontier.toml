@@ -1,0 +1,238 @@
+# The zstd-safe register (written by `uorust crate zstd-safe@8.3.0`; do not edit): every body of
+# zstd-safe's MIR at zstd-safe 8.3.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 155
+translated = 11
+residue = 144
+
+[module.crate]
+bodies = 155
+translated = 11
+residue = 144
+
+[embedding]
+bodies = 155
+embedded = 155
+evaluable = 155
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: CCtx<'_>"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: DCtx<'_>"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: OutBuffer<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: CDict<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DDict<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: InBuffer<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: InBufferWrapper<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OutBufferWrapper<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Poison"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <bool as Default>::default"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ptr_void: zstd-safe's MIR stops at mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ResetDirective"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zstd_sys::ZSTD_inBuffer_s"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: zstd_sys::ZSTD_outBuffer_s"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: compress::{closure#0}: mir::TerminatorKind::Call: ptr_void: zstd-safe's MIR stops at mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: decompress::{closure#0}: mir::TerminatorKind::Call: ptr_void: zstd-safe's MIR stops at mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: train_from_buffer::{closure#0}: mir::TerminatorKind::Call: core::num::checked_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by WriteBuf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item zstd_sys::ZSTD_CLEVEL_DEFAULT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item zstd_sys::ZSTD_CONTENTSIZE_ERROR"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item zstd_sys::ZSTD_CONTENTSIZE_UNKNOWN"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: zstd_sys::ZSTD_ErrorCode::ZSTD_error_dstSize_tooSmall::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: zstd_sys::ZSTD_ErrorCode::ZSTD_error_stage_wrong::{constant#0}"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <Option as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_CStreamInSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_CStreamOutSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_DStreamInSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_DStreamOutSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_compressBound"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_getErrorName"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_isError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_maxCLevel"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_minCLevel"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_versionNumber"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: ZSTD_versionString"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: is_error: zstd-safe's MIR stops at mir::TerminatorKind::Call: ZSTD_isError"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_mut_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CParameter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DParameter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ZSTD_ErrorCode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ffi::CStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl WriteBuf + ?u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zstd_sys::ZSTD_ResetDirective"
+bodies = 1

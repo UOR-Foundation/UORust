@@ -1,0 +1,36 @@
+[[fn]]
+path = "alloc-stdlib::std_alloc::<impl at src/std_alloc.rs:3:10: 3:17>::default"
+kappa = "6ddfe0d98916e617d3f9ca2694f894edfb37f8e673ddb1330ca9a292218650ba"
+embedded = "8676ab9286188e212202084564846e951a73303e448843c18389da2f30ea23f6"
+status = "residue"
+cause = "mir::Ty: std_alloc::StandardAlloc"
+
+[[fn]]
+path = "alloc-stdlib::std_alloc::<impl at src/std_alloc.rs:3:19: 3:24>::clone"
+kappa = "8c36923ea49b12d01450e7b7736738463774b03364d42c61b7410d5fd7f66d97"
+embedded = "fe3f1bd3def27ded5d3dc5dcbd7400b67d592dde503c70507bc7ea4044c5c778"
+status = "residue"
+cause = "mir::Ty: std_alloc::StandardAlloc"
+
+[[fn]]
+path = "alloc-stdlib::std_alloc::<impl at src/std_alloc.rs:3:32: 3:37>::fmt"
+kappa = "faf59a6b7172d5e8e11305ac615ee52af86fc96b6d58abc10811f53ea290880d"
+embedded = "6ec22313ce084877bbc9268f0f54a14a346e3008225b6495f78487a888cb882a"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "alloc-stdlib::std_alloc::StandardAlloc::alloc_cell"
+kappa = "d992f808057a61807919782e2a45c79065c5fbf0109525a772d80610eed80415"
+at = "T=u32"
+embedded = "cb40d3fc1e5cae4d84008ab5d4b1bce52c5dfd744d713f551df60a672c4e3248"
+status = "residue"
+cause = "mir::Ty: heap_alloc::WrapBox<u32>"
+
+[[fn]]
+path = "alloc-stdlib::std_alloc::StandardAlloc::free_cell"
+kappa = "857ab057b3cc3d5202832deaf4f1770d00bc3458769a8d455668ecf692a828ca"
+embedded = "e3a8310192e452f00dff75d3feaa2a21302a72cf8095e0a5d2a7a4e91bc4d6d6"
+status = "residue"
+cause = "mir::Ty: StandardAlloc"
+

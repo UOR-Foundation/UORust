@@ -1,0 +1,152 @@
+[[fn]]
+path = "winnow::any_"
+kappa = "a4ab0bf570bdacdb75e08be6e45ac344d3bc63f75e08f31a47e00839ba66188c"
+at = "E=u32, I=u32"
+embedded = "983ea9368ef093e93f8557d12ffa6963fe474fb7547bf7790a38a0850a3c7d97"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Stream, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::literal"
+kappa = "852e1516211220795f8664994d971fb8e806ba4f860927ff20be39d9f05eb8a2"
+at = "Literal=u32"
+embedded = "afcb0c338fe52b4adec943c1295a6595fe225b4b96f65ef345d783f2f6625041"
+status = "residue"
+cause = "mir::Ty: combinator::debug::DisplayDebug<u32>"
+
+[[fn]]
+path = "winnow::literal_"
+kappa = "60e7f4ff44461d5d70a434a6329a9fdab0fe3e59ab3f5cf700bba03416009045"
+at = "Error=u32, I=u32, T=u32"
+embedded = "b49fc931425d4c6aadf84a461c37e4caa62235f52059517a064d9f52b33f865a"
+status = "residue"
+cause = "mir::Ty: stream::CompareResult"
+
+[[fn]]
+path = "winnow::none_of"
+kappa = "7196658ab27c6f37ff26161d660fcb6f0962373e96b9761555c3b80ab3a957cf"
+at = "Error=u32, Input=u32"
+embedded = "1b04b4feabcc551e3b2b26b1c98e4eeb73402c1d509a456bec7ad863235ae695"
+status = "residue"
+cause = "mir::Ty: u32>}, {closure@src/token/mod.rs:326:20: 326:55}, u32, u32, u32, u32"
+
+[[fn]]
+path = "winnow::one_of"
+kappa = "133fe37ee0327cd925cd098147bcef09f453d1481b4b481aacde3c93ae3ca874"
+at = "Error=u32, Input=u32"
+embedded = "e4f66833b62b22f0ce77f3e23c632ed7bf23f31bac712b0dc3a377fe63875a1c"
+status = "residue"
+cause = "mir::Ty: u32>}, {closure@src/token/mod.rs:273:20: 273:55}, u32, u32, u32, u32"
+
+[[fn]]
+path = "winnow::rest"
+kappa = "f1f024d4072d29cc54a4e6c892d1becff3a40e543056c35dd78a3ca8d36cbb85"
+at = "Error=u32, Input=u32"
+embedded = "6bfe26cd88bc65aa319c6bb210a0b338500bc0ee2a07894e9a7231156f69d9cc"
+status = "residue"
+cause = "mir::AggregateKind::Closure: rest::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Stream, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::rest_len"
+kappa = "08726d39d0ba31966d0fc3c3aaa0a1b616b5b1f3b2022788b608f7aadd7b38ce"
+at = "Error=u32, Input=u32"
+embedded = "742e3a84ff1d02c07686d09e2c88dbd76776256a23e558f4e382694a1314501e"
+status = "residue"
+cause = "mir::AggregateKind::Closure: rest_len::{closure#0}: mir::Instantiation: u32 for a parameter bounded by Stream, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::take_till"
+kappa = "8c81ccb00110b973dd68a0640d0b466089d4c7abefd2de287d4cfacc41408455"
+at = "Range=u32"
+embedded = "a438496ef2a0649544fe06e46730871216252b8b60fe9605c279ffecc327b1a3"
+status = "residue"
+cause = "mir::Ty: impl Into<u32>"
+
+[[fn]]
+path = "winnow::take_till0"
+kappa = "1c1b05e44bed12928fadd9549e2041cd379d8733e138e11a4eac2523c27a1dfb"
+at = "E=u32, I=u32, P=u32"
+embedded = "36a8e8f7097cf6fe997acbe94bd151989e3d184f82825ff2626eb7ccbcee5bb0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Stream, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::take_till1"
+kappa = "bc28d67622a49cfe98b58a1a13478ba37076e829fd8cd56b6b2d1698e8c9e587"
+at = "E=u32, I=u32, P=u32"
+embedded = "160232287ab7a7d7b4f4f8cc0c2721222bbbe0bcca41f5021bfd3f5b1974bdb9"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Stream, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::take_till_m_n"
+kappa = "8275a9fe78c1d48b21d6ec6336a827f7e8238bc89247225b9ec43a4f0fb32c81"
+at = "Error=u32, I=u32, P=u32"
+embedded = "77ad22a9dbc740b7b46114b25d608f99780836f93808504158c68eda555eb392"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ParserError, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::take_until"
+kappa = "15d212e7d57475ded5f517d82aa61d8a88edbe255b88183443959aecf6d3a039"
+at = "Range=u32"
+embedded = "4b63844bd4d845303a4ca8aa34198e5140369c963f7250981b0d67c8e0e40f96"
+status = "residue"
+cause = "mir::Ty: impl Into<u32>"
+
+[[fn]]
+path = "winnow::take_until0_"
+kappa = "7f0bbbcfe6fbf48983b368ad0fd8e1437ca50e6f381fed4e6c28656a129b4963"
+at = "Error=u32, I=u32, T=u32"
+embedded = "ff0decc6cfca8e304f61b55328cd7fbe3cbdcf1c87b9ed78e5a0af4b255c880a"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "winnow::take_until1_"
+kappa = "78638c85d250b84d960ff9484029e4a8a1f5c2b30560478fe72832bff43c7257"
+at = "Error=u32, I=u32, T=u32"
+embedded = "9cce2c22137a5cde8c62afc90c6f501dca12af4155a972b49069d3f41b896a45"
+status = "residue"
+cause = "mir::Ty: std::ops::Range<usize>"
+
+[[fn]]
+path = "winnow::take_until_m_n_"
+kappa = "34442a38fd22680e0b2f7660e6f9ec6311f19708d399f1dba92efb65000f59b1"
+at = "Error=u32, I=u32, T=u32"
+embedded = "0b63a058f085bf3edad416d58b32ba301563155826592128e8edf09b0d28fe06"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by ParserError, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::token::any"
+kappa = "4d456626d6073c7143e3d569863021fa08482f6c7de594ffde5b5900694865cb"
+at = "Error=u32, Input=u32"
+embedded = "66e818b1a605d312c41d4dac0b0fa89992294e5e4bcad0155ffeeb6cd528c4f4"
+status = "residue"
+cause = "mir::AggregateKind::Closure: token::any::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::token::take"
+kappa = "4adcbecd64b7321ade8fe470b41988ae52ba78225e3df9ae4983ff229ae6364e"
+at = "UsizeLike=u32"
+embedded = "d3d461f55a00ab65ac236eb3f61ae3546f51f44ee3529d1d4ac9cbeafbe818fe"
+status = "residue"
+cause = "mir::AggregateKind::Closure: token::take::{closure#0}: mir::Instantiation: u32 for a parameter bounded by StreamIsPartial, which u32 does not implement in core"
+
+[[fn]]
+path = "winnow::token::take_"
+kappa = "093149200a8ed322d59e0f921b14cf4c8194f6f3329e4c0b091aef89a41f30e2"
+at = "Error=u32, I=u32"
+embedded = "fc63129a418d387ad04cae2070069df72315170b1b9365efbadb1485c669f0b7"
+status = "residue"
+cause = "mir::Ty: stream::Needed"
+
+[[fn]]
+path = "winnow::token::take_while"
+kappa = "b2640aefce8dde79e1984976cf4e1b5241b83f45160a210ad59643daf7cf5120"
+at = "Range=u32"
+embedded = "9fe44b92ee04f682126bf36f230b960351291b462b347450a5086ac179b6c5b1"
+status = "residue"
+cause = "mir::Ty: impl Into<u32>"
+

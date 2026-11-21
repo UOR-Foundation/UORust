@@ -1,0 +1,119 @@
+# The mime register (written by `uorust crate mime@0.3.18`; do not edit): every body of
+# mime's MIR at mime 0.3.18, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 130
+translated = 3
+residue = 127
+
+[module.crate]
+bodies = 119
+translated = 2
+residue = 117
+
+[module.parse]
+bodies = 11
+translated = 1
+residue = 10
+
+[embedding]
+bodies = 130
+embedded = 130
+evaluable = 130
+blocked = 0
+
+[differential]
+bodies = 2
+theorems = 14
+
+[[cause]]
+cause = "mir::Ty: Name<'_>"
+bodies = 55
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Mime"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MimeIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: parse::ParseError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Rvalue::Discriminant: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Mime::essence_str: mime's MIR stops at mir::TerminatorKind::Call: Mime::semicolon: mime's MIR stops at type outside the lift: ParamSource"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: mime_eq_str: mime's MIR stops at type outside the lift: Source"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Params<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: TEXT_JAVASCRIPT: mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc1: &[bool; 256]}"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Mime::atom: mime's MIR stops at type outside the lift: Source"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Mime::semicolon: mime's MIR stops at type outside the lift: ParamSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Source::as_ref: mime's MIR stops at mir::Rvalue::Discriminant: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::eq_ignore_ascii_case"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FromStrError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Source"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::RangeTo<usize>"
+bodies = 1

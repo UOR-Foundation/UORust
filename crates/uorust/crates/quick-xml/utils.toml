@@ -1,0 +1,157 @@
+[[fn]]
+path = "quick-xml::is_whitespace"
+kappa = "8331dccd9f77ef93f7b2eee187b935e6bccf9834ec62fd0f2af44316b57c7a8b"
+differential = 7
+embedded = "9981ba7e74fdfb7bd61327fd9b6cdfea2b88e0c01f6814ddf1ef1eb7273329bc"
+status = "translated"
+digest = "f10ae562beeaf9433cbdbd5325f77f14c8bb5ef94f08ce0b9a75d4e353c301d1"
+
+[[fn]]
+path = "quick-xml::name_len"
+kappa = "b82de5a7a319f7c468c03a09a37e2518eeeb1c21ab7f2bc7b682a8f597263180"
+embedded = "116be587d42492e0ccca21e8892e9de3e63fa3830581cb25d0a16341d97d5daf"
+status = "residue"
+cause = "mir::ProjectionElem::Subslice"
+
+[[fn]]
+path = "quick-xml::trim_xml_end"
+kappa = "1bc0beebe89a6a4c557a1ec7ad3ac6d0d8fab1c3895ecc45ce771426307e9599"
+embedded = "148a15bec278fdbec0f8ab9f187168722648d254f84011a9166f472e29eafdde"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "quick-xml::trim_xml_spaces"
+kappa = "6351527ae8cae90eead4b4a3a684f126b3494cfb4c56145839cd3661cf48e46b"
+embedded = "08520ba41f774fe3c1ad191299960a6fc8a5ff4ef315784a088507ae3e8a6d5b"
+status = "residue"
+cause = "mir::TerminatorKind::Call: utils::trim_xml_start: quick-xml's MIR stops at mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "quick-xml::trim_xml_start"
+kappa = "20061686bf4f4120334bde33b5c0e3b7cc1bdc320abde727e5f5fd5c72e9cf37"
+embedded = "b861ead58f1a07ac103db30b229a18e3f4872ce76c7f0d445f6177915f19252d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::str::<impl str>::as_bytes"
+
+[[fn]]
+path = "quick-xml::utils::<impl at src/utils.rs:141:10: 141:19>::eq"
+kappa = "b52f12d64da2dc79bfb26771b9e6c1a896817462ca9c6eac7a2ad0aa9bc541bb"
+embedded = "2b1cfb015be3e6782700b0e4b20a9c7f39536a156050df111e4a64699a1a7f04"
+status = "residue"
+cause = "mir::Ty: ByteBuf"
+
+[[fn]]
+path = "quick-xml::utils::<impl at src/utils.rs:141:21: 141:23>::assert_fields_are_eq"
+kappa = "d777aa25f789066039fcee2a6af2a32ff5b4f3a47dec78b21057e2060032105e"
+embedded = "bb5f13e62ec49fce3732e554839e3562062a33164fd1db36606bb17badbc4286"
+status = "residue"
+cause = "mir::Ty: ByteBuf"
+
+[[fn]]
+path = "quick-xml::utils::<impl at src/utils.rs:198:10: 198:19>::eq"
+kappa = "a5bf17a72e4ee02b97903e1858976fad6b0c15e6aff4426076528039b0b9b494"
+embedded = "7f4d8852d260968e2bed922852680b3fdac671be717c27c2037b6ecebd76fddd"
+status = "residue"
+cause = "mir::Ty: utils::Bytes<'_>"
+
+[[fn]]
+path = "quick-xml::utils::<impl at src/utils.rs:198:21: 198:23>::assert_fields_are_eq"
+kappa = "033ba74fa38e5386e616692ff03a3a4a1e7d8e513926e4bfe2534d87a105aaf9"
+embedded = "6e0a5056358338ce583792e2f0b104257135bda0b5458c1f06a442ca5d88807a"
+status = "residue"
+cause = "mir::Ty: utils::Bytes<'_>"
+
+[[fn]]
+path = "quick-xml::utils::<impl at src/utils.rs:385:10: 385:15>::fmt"
+kappa = "bd646e5717e2a8ae8f9e321e992757caa2cdc9ad3f36314bd002b81eabc80d26"
+embedded = "90caec402f8d92b01e9283c14aca81d5e102e2242744aca07958ed3e258a0a49"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quick-xml::utils::<impl at src/utils.rs:385:17: 385:22>::clone"
+kappa = "8655188476943d491a691526d3eb656eb5b29543a378a9ded20a119eea12c7fb"
+embedded = "40b3199ca716d0d1959124877f3bbd3c1bcd8ad0e2fb4d937a17592a92331a47"
+status = "residue"
+cause = "mir::Ty: utils::CDataIterator<'_>"
+
+[[fn]]
+path = "quick-xml::utils::ByteBuf::fmt"
+kappa = "fa215a1322b6cd2cf0207e5311d36ba10aaf810463031aaf24135d64708b933c"
+embedded = "27f2a28ea0aad9f6c88d345ff11bdc8cf42c28d3c3d4078e6806b666eed67154"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quick-xml::utils::Bytes::fmt"
+kappa = "14aff44133bff0486177f7775a9db95d5debed6cee247e356f76377a4e675cda"
+embedded = "d406db9fbde428b02a8666bb3679d69de8e3db592d97c7d26a4ddd6a768d33d4"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quick-xml::utils::CDataIterator::new"
+kappa = "37df70749e3133b64ba4c1d8502cd7b5b2747df317f6c7a4fd0b72f4e4fa3ce9"
+embedded = "6924be170e607ff7116fc943eb252572272aa421352a497475657068f6e6e3ff"
+status = "residue"
+cause = "mir::Ty: utils::CDataIterator<'_>"
+
+[[fn]]
+path = "quick-xml::utils::CDataIterator::next"
+kappa = "a61a3d9a67a9c172fd03a37199e3b3f2cee5498a01f6cf356bca190b4ac6bf75"
+embedded = "971c0a48e4a3e7a17630b2a1f1c684d8eb50be68ee092c0e903b5c441ed11a6b"
+status = "residue"
+cause = "mir::Ty: utils::CDataIterator<'_>"
+
+[[fn]]
+path = "quick-xml::utils::CowRef::deref"
+kappa = "d401a5d4432ecda0f173d0415960035917370982f4ff0a6b5547fa683c07ca6e"
+at = "B=u32"
+embedded = "c7306a9918a49bc782a49287154e892ad5b19ddfc89060ece6ecfe126d7316d3"
+status = "residue"
+cause = "mir::Ty: CowRef<'_, '_, u32>"
+
+[[fn]]
+path = "quick-xml::utils::CowRef::fmt"
+kappa = "f699057263dba6615b1eecdf78415ef0a17782ffb6a4188cab1a27f55c5c724b"
+at = "B=u32"
+embedded = "752fc8307a1bf604f75159a34fdc83329d25925b748a377382eef27e0a044c8e"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quick-xml::utils::Fountain::consume"
+kappa = "4007600f50ea6791f1442b10b1c1e7aa1a589b687051c40ce51a533b379a7fa1"
+embedded = "4c84f2f773e6f761160e94c84af2a887e150282529f503055c40d1afbeb7616c"
+status = "residue"
+cause = "mir::Ty: Fountain<'_>"
+
+[[fn]]
+path = "quick-xml::utils::Fountain::fill_buf"
+kappa = "54e6113f0b442ff31186b7e5e801a4e1c904ae92f80709d6a207b9ec6b61feaf"
+embedded = "a8ee93b8f3ae40e33361d0d13e647c01534eee4ffa7f807585b8b8b5b16a6dcb"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quick-xml::utils::Fountain::read"
+kappa = "fadbc7d59dde6466e2e2f8b30a36a3193cdcc5d70efe7e76db8237c778e23408"
+embedded = "3ce7b39f51efcdbcd520cd57b4ca4a4bd85a2c1821ea58f8feafffc363a62f25"
+status = "residue"
+cause = "mir::Ty: std::io::Error"
+
+[[fn]]
+path = "quick-xml::write_byte_string"
+kappa = "139736de4d6da577faa91f12c317b217bda3206c085242573b927596d269f367"
+embedded = "3ac70cd039cb6088be5664fd7ad6f9f7be03ba71bf061afdf71856f2863428e2"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quick-xml::write_cow_string"
+kappa = "d9a307568f0b9b9696ac83709d0df9e1e77912a8725ccffd2917da0c2c67c3c4"
+embedded = "27bd0ab38dda4db94d15b669b7cb25c54905200854d83de2ba52ccae8bd75f77"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+

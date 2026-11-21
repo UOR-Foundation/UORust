@@ -1,0 +1,197 @@
+[[fn]]
+path = "want::<impl at src/lib.rs:128:10: 128:15>::clone"
+kappa = "170020db53b289f5d41fb6343b70fc68e53fd5af842d6be2a5f945433942a613"
+at = "Inner=u32, SharedGiver=u32"
+embedded = "dcf86270de7ed9d2a606c70f0fa1c996c68c31488caa02a3693bdcc12db724b8"
+status = "residue"
+cause = "mir::Ty: std::sync::Arc<u32>"
+
+[[fn]]
+path = "want::<impl at src/lib.rs:138:10: 138:15>::clone"
+kappa = "a57ac5853a4433dbcce0676cb0d7443b82f5259f22d07d098a038ef4791b1591"
+at = "State=u32"
+embedded = "b74eebaa049558ae85416ed4b0814d5e2b30fd1428bcfd0fa1bda70688a16d58"
+status = "translated"
+digest = "95d3b88ac64fb0297890753d36a8561eaf0f5d95072756892e3842cb47790ba6"
+
+[[fn]]
+path = "want::<impl at src/lib.rs:138:23: 138:28>::fmt"
+kappa = "cf7527a820c402209e9973202aa5a11bd577c6cf644403cf602e5a009210f322"
+embedded = "3c07a60a4ff8a18219b56a770111ca2901087c80ad6a0d56681bc68136f1db49"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "want::Closed::fmt"
+kappa = "a099fb68361d2346f8c726e30dfb6be2ea87e02514db0e07ac430baaaba3b8e0"
+embedded = "1daeb94484f333d815e368559bd93fa1824d388cee6fac87da738c31e88a67d6"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "want::Giver::fmt"
+kappa = "2b80af3a2ecb821ad8be55a88b371615488ea5aad08c6b91bca371e9bd458b79"
+at = "Inner=u32, State=u32"
+embedded = "5e7fde52031a77d8e4f1fee962aa271748d209d9cb59e5577c593f3ec9814552"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "want::Giver::give"
+kappa = "d94a17f0c937c0cc163b4ce02316a74ed6d968038a66eac2865613af89826b27"
+at = "Inner=u32, State=u32"
+embedded = "0ee63187d0f30ab66ee6ff28642dec540e641151d4415fe9659d01d1294678f6"
+status = "residue"
+cause = "mir::Ty: Giver"
+
+[[fn]]
+path = "want::Giver::is_canceled"
+kappa = "5051d8198282c142c8ecca7a3c19d39a5bf140d8cec55e82a97f25070d318706"
+at = "Inner=u32, State=u32"
+embedded = "0dcb4441121187b8b252ff0b6120a246c4d9d7a06a499b2c651a85c59baa4f27"
+status = "residue"
+cause = "mir::Ty: Giver"
+
+[[fn]]
+path = "want::Giver::is_wanting"
+kappa = "ce56ad56152a9042d8af00bfae92c418156fef66baf0f7dd40d2a7444a7da98d"
+at = "Inner=u32, State=u32"
+embedded = "8914fb2c4cc180b7420a803251d5edb8dcca05a2493e9308d54a5ffebc109868"
+status = "residue"
+cause = "mir::Ty: Giver"
+
+[[fn]]
+path = "want::Giver::poll_want"
+kappa = "1b32051bb2bc9b8e35138bea9ac8005f6c4bb955f37bfb4507b07e7db63e89bc"
+at = "Closed=u32, Inner=u32, State=u32"
+embedded = "d098d20033ea0e59b8e00d946aad50f54e1693f8ae7b22390d5b9aa4846d76d9"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::result::Result<(), u32>>"
+
+[[fn]]
+path = "want::Giver::shared"
+kappa = "ac03672e19687fcbf08d994a0d92c62443fe46a23cd876cccd742182ef477028"
+at = "Inner=u32, SharedGiver=u32"
+embedded = "865c5c2d86cd467f99e5ec95031c5497f6c9ab54f93c8a93870b716811163015"
+status = "residue"
+cause = "mir::Ty: Giver"
+
+[[fn]]
+path = "want::Giver::want"
+kappa = "015dc15fd518370ac50fa09cc7d5433d580f41e703616bb7aafdffbc034361ca"
+at = "Giver=u32"
+embedded = "01297d91cd76630c7ec4d588627ff288d4de89046a8b928b2f6d082fc693bd48"
+status = "residue"
+cause = "mir::Ty: Want<'_>"
+
+[[fn]]
+path = "want::Inner::state"
+kappa = "455174577921d7401ce007ffd5fdfdeeeaaaeac41247b504a67f19928254e098"
+at = "State=u32"
+embedded = "678d1f33c0eb0b5ccc7530b30cb8c0a01375fb5557ae961f8e81b65d376e0eed"
+status = "residue"
+cause = "mir::Ty: Inner"
+
+[[fn]]
+path = "want::SharedGiver::fmt"
+kappa = "06b601ed3bb3893f6e4fc29a5528475e74dc90bb7d5693a97fab8cbdf437eccf"
+at = "Inner=u32, State=u32"
+embedded = "e8883302d048249d514916eeb1850ff63663d492cb444aa718e2846416b15297"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "want::SharedGiver::is_canceled"
+kappa = "52952d4c7082382259440328372af8ace7fd5418e487eec60d56705d9ab99d68"
+at = "Inner=u32, State=u32"
+embedded = "ecf396ab4218313351005b82268cba80b9b8fd45e4601a28513ed8107371b22a"
+status = "residue"
+cause = "mir::Ty: SharedGiver"
+
+[[fn]]
+path = "want::SharedGiver::is_wanting"
+kappa = "11553fd5887c1accc5112995da51a1b40b2c44e7e4ad3ec5bbaadba65852a066"
+at = "Inner=u32, State=u32"
+embedded = "8e9582da161fbc347f6c68382cdf6fe995ade645049e7bc319237a76a7e2840c"
+status = "residue"
+cause = "mir::Ty: SharedGiver"
+
+[[fn]]
+path = "want::State::from"
+kappa = "94f3421691f9d4feae51957fbf4b1b35bbbbb02a8fbde662be8f475dea82e32e"
+at = "State=u32"
+embedded = "137096d9d5bc8d6d2edcd1f215ef58e81579af1154ec93f9a24805ad0d031aa6"
+status = "residue"
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+
+[[fn]]
+path = "want::Taker::cancel"
+kappa = "7da5a525756e9a78a7b9aa38d08068e9270b633a72f4d77edf5cc9534dd1a820"
+at = "State=u32, Taker=u32"
+embedded = "4991cbb3eb3be616b138d6dddd8dda232582f69d4f6aaa21c3fcfe532e0308bc"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "want::Taker::drop"
+kappa = "098ddcd82db2347310c1f1ca8c768731f6b5ddbe1f10919a9cdc6872744c8e49"
+at = "State=u32, Taker=u32"
+embedded = "db8748224afdd7602a9d0e5e29fcc7c38b99ca59b5d2beb1160fa5d9abc102db"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "want::Taker::fmt"
+kappa = "7eff42f68d069d977e832ebe5e80e35906ef640bb9f979738acc9ede6fb360e2"
+at = "Inner=u32, State=u32"
+embedded = "78b46659f5839c7149be4e2fa517db485e82f468d114db62f6a750c01638d1e7"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "want::Taker::signal"
+kappa = "dfba0be07d630179181537729b8b98ad0b76a07fc5c7f39a21f1f6fc8a1dbf26"
+at = "Inner=u32, State=u32"
+embedded = "532041443cc67001bf094e55c91bd4eb86de82dae40d8eab6ff01749952ad2fe"
+status = "residue"
+cause = "mir::Ty: Taker"
+
+[[fn]]
+path = "want::Taker::unwant"
+kappa = "c48aeab277415c2d6b661b03018827fa3f3f1445fd0df522922e1c42850af934"
+at = "Inner=u32, State=u32"
+embedded = "ecbff0ddc292e53ebf466ed44a98fe33c71720cb2546fba9b9575e63ee7eb9c1"
+status = "residue"
+cause = "mir::Ty: Taker"
+
+[[fn]]
+path = "want::Taker::want"
+kappa = "9dbe885e51c0a4b7c159e5d170ecf2ae36a9023f416bfc7db5194eadbbb2fd45"
+at = "Inner=u32, State=u32, Taker=u32"
+embedded = "7c23eda72ea46ddc0e64921fe0ca4e70f8624cc58810da3a78f41b85d9a4cf0e"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "want::Want::poll"
+kappa = "8448809c55b370e49ad12edbeee31200cba0ed5f11bd701d9fff8bcbb99b9d52"
+at = "Closed=u32, Giver=u32"
+embedded = "8391fc8b28599b1dd3dae73058c34bcfbc0d52dff581804e16b6e44a7f444b45"
+status = "residue"
+cause = "mir::Ty: std::task::Poll<std::result::Result<(), u32>>"
+
+[[fn]]
+path = "want::new"
+kappa = "92030fcd88af9a806dfe13e39716eb5c45bc9399a7a960ac11c38af231e31d45"
+at = "Giver=u32, Inner=u32, State=u32, Taker=u32"
+embedded = "56b2a863b86f7f1b26b5055ef2406075eb343627003cb4a8447e83e1334a098f"
+status = "residue"
+cause = "mir::Rvalue::Aggregate: of Nat"
+
+[[fn]]
+path = "want::usize::from"
+kappa = "fd3459fc5ff6fc9a6d170a2c3ddaf707ed7c528b9e13fb36b06a06f9f9635933"
+embedded = "b30499a7a442868818a99bf2acc13b538d2b5cb0467637915ed2f381540c78da"
+status = "residue"
+cause = "mir::Ty: State"
+

@@ -1,0 +1,152 @@
+# The memmap2 register (written by `uorust crate memmap2@0.9.12`; do not edit): every body of
+# memmap2's MIR at memmap2 0.9.12, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 134
+translated = 1
+residue = 133
+
+[module.advice]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.crate]
+bodies = 91
+translated = 1
+residue = 90
+
+[module.os]
+bodies = 31
+translated = 0
+residue = 31
+
+[embedding]
+bodies = 134
+embedded = 134
+evaluable = 134
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 61
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 10
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: os::MmapInner"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: MmapInner"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Advice"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UncheckedAdvice"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: MapIfSafeError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MmapMut"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MmapRaw"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Deref"
+bodies = 2
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Mmap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRawFd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by DerefMut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by MmapAsRawDesc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::F_GET_SEALS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::F_SEAL_SHRINK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc1: &Atomic<usize>}"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <bool as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MmapOptions::new: memmap2's MIR stops at mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::unwrap_or"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: os::MmapInner::check_fd_safe_to_map: memmap2's MIR stops at mir::TerminatorKind::Call: os::MmapInner::get_memfd_seals: memmap2's MIR stops at mir::Operand::Constant: the constant item libc::F_GET_SEALS"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: os::MmapInner::get_memfd_seals: memmap2's MIR stops at mir::Operand::Constant: the constant item libc::F_GET_SEALS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RemapOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: advice::Advice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: advice::UncheckedAdvice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: os::MmapInner::has_fs_verity::FsVerityDigest"
+bodies = 1

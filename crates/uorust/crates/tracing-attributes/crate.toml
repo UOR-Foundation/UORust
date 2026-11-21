@@ -1,0 +1,78 @@
+[[fn]]
+path = "tracing-attributes::<impl at src/lib.rs:637:10: 637:15>::fmt"
+kappa = "861759b90bf64826c78c0a619fabb642f888974931ccfd7bfd8f717c0575b222"
+embedded = "c152da37a427d13cdc13e6260b6f5934e899d9dc71f1b4c66fd9487b595310af"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tracing-attributes::<impl at src/lib.rs:637:17: 637:22>::clone"
+kappa = "ca185af797f93f3dff9f0419afb2b7d869e9b1c181acfa1fe17bf7da6a791da4"
+at = "MaybeItemFn=u32"
+embedded = "571099343168c6fcfa8495b94182da3db1a1b24b1229bed051b8826c25b95944"
+status = "residue"
+cause = "mir::Ty: syn::Attribute"
+
+[[fn]]
+path = "tracing-attributes::<impl at src/lib.rs:709:10: 709:15>::fmt"
+kappa = "69aab50c4196d83b250b942ee1ce9d3d0fff5a28a6451be714bd95ba185e7356"
+at = "B=u32"
+embedded = "f39842d1dd4720b4ea57d19c12fde08b8bcc1cf5b9b6d0900f61aa1cceec7c08"
+blocked = ["Operand::Constant of a constant the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tracing-attributes::<impl at src/lib.rs:709:17: 709:22>::clone"
+kappa = "ad352d4c83eb958a921cb42814bb390b9ba075eeddd6161f4ea9838484ed8366"
+at = "B=u32"
+embedded = "b6dc8834a6fe0437804649dc4c96d0dd61d4c2f8d16dd59d1084a97774c5a1a5"
+status = "residue"
+cause = "mir::Ty: MaybeItemFnRef<'_, u32>"
+
+[[fn]]
+path = "tracing-attributes::MaybeItemFn::as_ref"
+kappa = "3beb435fbc803c981e74b74ed0203e4f5fe9bc26ee312d33ec1fa74f1f3534c2"
+embedded = "a7bb375c2cfa891128272a48e92f3b5d14c53cbd7c6d5638a619c812baf54e8b"
+status = "residue"
+cause = "mir::Ty: proc_macro2::TokenStream"
+
+[[fn]]
+path = "tracing-attributes::MaybeItemFn::from"
+kappa = "5f6bfd9784e17000d72bb438796dc585be433787aac48e5e63825ab0eee2af79"
+at = "MaybeItemFn=u32"
+embedded = "8ad7bf08f25e5ebe5ad9ac71ebee2dd45fddd032f4be584687fc584166ca3a1f"
+status = "residue"
+cause = "mir::Ty: ItemFn"
+
+[[fn]]
+path = "tracing-attributes::MaybeItemFn::parse"
+kappa = "2a02bc4e4913dcb384f81f6791b254add52ae635be1633dac09247be60f5ceb9"
+at = "MaybeItemFn=u32"
+embedded = "546db57e8029ec17d06b3a30a8ddef4477c70e6c275f0669a124a4859a8cc353"
+status = "residue"
+cause = "mir::Ty: syn::Error"
+
+[[fn]]
+path = "tracing-attributes::instrument"
+kappa = "77ae2901c9372798809510f7ca6a4bdfc24283b6b229a179d41941f8b286d18a"
+embedded = "b60d4f62a1852604acf0b1813a1b292cd78e94a36d33f9979953f0832129713e"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "tracing-attributes::instrument_precise"
+kappa = "649bf83be8c8a6db737f5cb9c7d7c9636968f99136e8ab010d477f66041b3600"
+at = "MaybeItemFn=u32"
+embedded = "b88268f51154509927378e355262578f602d7b52b1e3e564de64e87e284b8c0e"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+
+[[fn]]
+path = "tracing-attributes::instrument_speculative"
+kappa = "033c069cbe3686bb437c5eb45cf734dad1410ad63442c875a8c6e952d68e1a5b"
+at = "MaybeItemFn=u32"
+embedded = "9945489c9d54bd68a5e6b753b5d2214afc1cda71012eb57967a0e4fd10616df0"
+status = "residue"
+cause = "mir::Ty: proc_macro::TokenStream"
+

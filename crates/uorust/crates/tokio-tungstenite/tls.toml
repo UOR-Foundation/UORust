@@ -1,0 +1,23 @@
+[[fn]]
+path = "tokio-tungstenite::client_async_tls_with_config"
+kappa = "b669cb66521f78d8926bda308bf4fff59f5df9b0dd9ad0ef5da916eb0af4e635"
+at = "R=u32, S=u32"
+embedded = "03222d24d73e6477c3bd41a82729aa640899a37b06f4a7a60ecea04e99ff1437"
+status = "residue"
+cause = "mir::Ty: {async fn body of tls::client_async_tls_with_config<u32, u32>()}"
+
+[[fn]]
+path = "tokio-tungstenite::tls::<impl at src/tls.rs:16:10: 16:15>::clone"
+kappa = "ec4f84d4beaf4cc963c33b432103c93fa5f68bf0df8ed4f7b17b8636c0688fab"
+embedded = "b683174feb3c1b7bfcac6c00626bdcbb1555cb771c8aede4921693b8c1b76afe"
+status = "residue"
+cause = "mir::Ty: tls::Connector"
+
+[[fn]]
+path = "tokio-tungstenite::wrap_stream"
+kappa = "357b74952c0cb3ac8b5baabae96637de8fe6a7ffc6aadf84aea0e35a3058b0be"
+at = "S=u32"
+embedded = "01bdd7c99cf170ce91ca9fa8c8e35a7df10eefa2933fc1a31ea0b1fc276e8b93"
+status = "residue"
+cause = "mir::Ty: {async fn body of tls::encryption::plain::wrap_stream<u32>()}"
+

@@ -1,0 +1,314 @@
+[[fn]]
+path = "brotli-decompressor::BROTLI_REVERSE_BITS_LOWEST"
+kappa = "3a6c327ac89f11ae3f51af7dcd2406bf3457f2d8434d673deb557a4fc90c219c"
+embedded = "036c91073a821577490e0773ac5c65d2144b26a24d32ff2a6f44998036fa0b19"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item huffman::BROTLI_REVERSE_BITS_MAX"
+
+[[fn]]
+path = "brotli-decompressor::BrotliBuildCodeLengthsHuffmanTable"
+kappa = "211b03bd62161739ff8174edf57cb886d74298183f1e24e65d7f5eece77b0037"
+embedded = "b8da6a5494fb706ae96d359ea926c5cacb2528b5ab40c982eaa23420c6692b87"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::BrotliBuildHuffmanTable"
+kappa = "77d52bf2e82f34749b09f6fcfeefc0e436adc1d716108c270bc19d5a30fe4038"
+embedded = "c7cf14556560d3a9735430c7cc2c5a7aab001c18cee1ff6b8812752c2dfee403"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::BrotliBuildSimpleHuffmanTable"
+kappa = "382ae5c9caf7921f280fef308617aa0de17fc3774ee9464ed762b174932fff74"
+embedded = "6a7340f4fefe5c2b534d72a32a463eaa3e1fc12db2a352a64c1c4d577dcec897"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::BrotliHuffmanMaxTableSize"
+kappa = "03f82a7d34d2c61dcf8e0d470e8c890d72a6ce101a3effbfb79003541a9f045b"
+differential = 7
+embedded = "bf180e43a13b42e4a811839a706feac260df87806c7f983a41dbd342dc782eeb"
+status = "translated"
+digest = "4058f212c57df48534ef9a161ca660338b630c7bdd4f27068204b0e125a26751"
+
+[[fn]]
+path = "brotli-decompressor::BrotliReverseBits"
+kappa = "4bb560c0c2c34daa0d284e9ae5d80cf3b948e983db80822987363121bcc6076c"
+differential = 7
+embedded = "c3cb8c4248c372aa4cac72f8ba6f1dcb9b033853d5b802d45200fe1fbb5f9252"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl u8>::reverse_bits"
+
+[[fn]]
+path = "brotli-decompressor::INSERT_COPY_TABLE_WINDOW"
+kappa = "939bc85aae5e01671c7f1a5324211141044798b97c82140f5fe87809781588df"
+embedded = "78164ce263d2ccbf9e77fab5b083cf1554cb1794de3d31cbaf205db86042eae8"
+status = "translated"
+digest = "d4a10073c902657bfa73f876375b657fc51595014bb193702d82bcca400459ce"
+
+[[fn]]
+path = "brotli-decompressor::LITERAL_TABLE_WINDOW"
+kappa = "1b572ae53fbaf665f40a497af3bbe79b6abb68f7119d5c202ba161ec73d68bd5"
+embedded = "36d90913c67ed307cae243b3eb436a60a4aee5e4b6b3dfbe724241fa09871a93"
+status = "translated"
+digest = "976df7434ca6c1f55589db7d6ed046914f0974e5bc9ab7e0f655fd01fac2f1ed"
+
+[[fn]]
+path = "brotli-decompressor::NextTableBitSize"
+kappa = "d0c3bd65fc2a5b03d95cd2db9e5be959a4c545141e8e4186ab2cdd349d4022de"
+embedded = "1563ebecee44dd675845a084d581b81b6912feefd2550288553ca5b3250ae733"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item huffman::BROTLI_HUFFMAN_MAX_CODE_LENGTH"
+
+[[fn]]
+path = "brotli-decompressor::_REVERSE_BITS_KEYS_FIT_IN_U8"
+kappa = "84182c3e5e03616ff92fe4352b98bb2cda9291f85d58bbbaf4faededf4b7731c"
+embedded = "b6ca27af43daffcded590c2b2a5650a583cae33771301a198a6f651c7e0443d2"
+status = "translated"
+digest = "8187f733e1b4d7286b8be1cb272ce2dc9021073b06376e8b9da743c2b6040f0f"
+
+[[fn]]
+path = "brotli-decompressor::ensure_codes_room"
+kappa = "37483aec3fde86be11592456f8b52b5631619c5e5e2fdc86b638465ad9aee340"
+at = "AllocHC=u32"
+embedded = "e918159d76b19bb5e159130a596523cdbe28e400929c7cb611a342c85d3ea802"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:145:10: 145:19>::eq"
+kappa = "7897ec4807c6af7eb55bc1ef7365cc40c46fd27179c22b37a231beb723e3d153"
+embedded = "c431e9555f4b3ec1901065fca785b3f85a95404f496b55f538bdbfbf0c2952f5"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:145:27: 145:32>::clone"
+kappa = "b15cf7089bcc3ffcb33979d033e6c8b00b63d51acbc905616c549863ad4bc86f"
+embedded = "88a897dd00169aa9833d925b661ca8443df648d262534efb31e578b70befd5aa"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:145:34: 145:39>::fmt"
+kappa = "66e0177365747e4df43f8599184dcb5165bd4931482e2fcd2237e55d3d3307c8"
+embedded = "33c6c856ce6486881523d0a90756d6890a392edc8f019a3eeac557ed94f18d17"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:53:1: 53:36>::entry"
+kappa = "75828cf951169ec88f3ced66e40c8cf80bf012504f3e046f587e9872fa91bf26"
+embedded = "9cf4896aed134d4a67d68f7cb7885c8f327705d15b022725f4511259ca1fd0c3"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:82:5: 82:44>::entry"
+kappa = "4f15c472fa7bb719e51ecbda818cb3f5c5c9d64611719c511ad324bde7629c78"
+embedded = "ae93b78378ca6deff726232ffc399fc83a91bdcd7d662c749128add743536b11"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:82:5: 82:44>::entry#2"
+kappa = "1885ac93ecc3f4eb74e0000d41c8b1bd330141af63d3991a9a4b626850fca434"
+embedded = "536d198dfdc78605706e5564ff4bc95f6f1a4e736c84288e0f0a7088e0dfa03a"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:82:5: 82:44>::entry#3"
+kappa = "d4ecaee0c79032ab53e8f209cca85ea4ceb826689a5976825d4b5a0dff5b35f9"
+embedded = "a96195c616e8b5e8cd0898c9445c20c91d135582fe544f5ff744bdec81d0d407"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:92:5: 92:43>::window"
+kappa = "53e7a3c569da5f88e1cc1d1006d2896c2af85830abcf4fa730659b0b774bbaa5"
+embedded = "faaed95b235b97f3ce0425f90ce90820ced1a5804299060c70690e878a3170d7"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:92:5: 92:43>::window#2"
+kappa = "8f15088fae0b1749b43202e2cda234ad4e39e4009e4e4a682d976768d31ed5f9"
+embedded = "dbd90e525e68dd28c938465be3d7b54ec9454cbfc6c75fa836b513c02c1de4f3"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::<impl at src/huffman/mod.rs:92:5: 92:43>::window#3"
+kappa = "434236c5bf2c635470f346dc1b885ec75245caf340dbf6d8b904cb71ed470356"
+embedded = "af705cbf61834ec64194f54018592900760b5d0ec74bfc6c6107e8a88d37ad68"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanCode::default"
+kappa = "699bc7826851f757f8345b7f2d6d7d67822631c9e802720920b0208e693444d0"
+embedded = "a90183ea9c2ffa77e93b99b05bcc92ea222276294de457dba71422368844ab9c"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanCode::eq"
+kappa = "c4235a587fb2936466ab9b20254dea9ee6913495ad78967c44fc584c386a44fa"
+embedded = "326aa0f9552947a9d0462d9d4c990e414099fda65a410a41883e15c893a06d1d"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::build_hgroup_cache"
+kappa = "57f66124c91fdcde546faa011b5467f46e59e7832dfa03668be2455964d983d0"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "f77538d559db6327f5074e072eeefa3a143d744f7d96fc9a2a4f1de6f1e6d336"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::default"
+kappa = "5f6061565328c0087a46e4bd08b00cf76d56972f2081801b49ad8639763a809a"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "cb8a400f48049eda96d195fa3b5214372a2341c5b10872fda327b18b94f04c57"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanTreeGroup<u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::fill_hgroup_cache"
+kappa = "7632df7e9e69251d464aac41f7a5393c2bd132177b5a8a38b09b3e8a78a1a252"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "21071e0a3f8c4352fe03309072bd3790d27e3c926e4cc35882bfc682c198f9d1"
+status = "residue"
+cause = "mir::Ty: HuffmanTreeGroup<u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::get_tree"
+kappa = "511f5cf1ee6fb979a4abe9a3c43f39d5c46348866eb96dbad1cf05634bc5e74a"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "60a618c58ac2185d1a16ff71b359bdffa88b5ad4cdd105241c71bd6713619cd0"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::get_tree_mut"
+kappa = "a26bd1daee5828ee8a18a5b12e53a5ed283cf4f524072443f44c16bbe989de75"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "c6c708b032a69d86f83169c8ee2efdde67d87c959bad2b3dc6948e7cc39f385d"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::init"
+kappa = "7225cca9b148563f5c79c1bdf5aaf74b37e8958f9acbcb243e931d095c7148a1"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "66f3c576db0026b0913388d48d1c2ee2ae6b9bcaa78dc71d2b20d0914ade57f0"
+status = "residue"
+cause = "mir::Ty: HuffmanTreeGroup<u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::initial_codes_len"
+kappa = "9902ada0d45cbc117dd3b4236baa0a57db51a812b0f77594e5cdec6f45dcb25f"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "31b01cce43cd076805c8d9c01ee8385db0d689ca4c3b47ad4456ffed26bdfd60"
+status = "residue"
+cause = "mir::Ty: HuffmanTreeGroup<u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::max_table_size"
+kappa = "3f7e0d0e74fef49caace6411fb9272bb830673e7213e935e480bf46e63c507cc"
+embedded = "59b39d4d4327da19a3949694d680851c4cdd93ad1723d8eb5aee029376667c04"
+status = "residue"
+cause = "mir::Ty: AllocU32"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::needs_codes_growth"
+kappa = "fc7eb6e8133b5475b8c4204b80d5d82312186c88a036400f6ddce82df047762e"
+at = "AllocHC=u32"
+embedded = "a38468e538e398739153f8ef2951d5e977cfaba20d13e183eaa1944808716c49"
+status = "residue"
+cause = "mir::Ty: AllocU32"
+
+[[fn]]
+path = "brotli-decompressor::huffman::HuffmanTreeGroup::reset"
+kappa = "093892d0aad788254fb44d8bf2d32359eb9bcef6997b9d8a2f18d96eb37ebd17"
+at = "AllocHC=u32, AllocU32=u32"
+embedded = "40d901056ec2b0d4fc7199f6ee99e368d75888104b6021ad1cf4eac2bf13b56b"
+status = "residue"
+cause = "mir::Ty: HuffmanTreeGroup<u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::huffman::_"
+kappa = "e75eda3ea8a0525bbcccbaf7a26db306ec98942c93389a67099ce1cb0d1e9235"
+embedded = "14ebd66353bde5ab9a1c51081f37794f9049ad50e419faac7b25c49be905fb38"
+status = "translated"
+digest = "7b717c818210e101cf501337b1e726239234e14d958941765888f4696c3303bc"
+
+[[fn]]
+path = "brotli-decompressor::huffman::_#2"
+kappa = "e75eda3ea8a0525bbcccbaf7a26db306ec98942c93389a67099ce1cb0d1e9235"
+embedded = "14ebd66353bde5ab9a1c51081f37794f9049ad50e419faac7b25c49be905fb38"
+status = "translated"
+digest = "7b717c818210e101cf501337b1e726239234e14d958941765888f4696c3303bc"
+
+[[fn]]
+path = "brotli-decompressor::huffman::_#3"
+kappa = "e75eda3ea8a0525bbcccbaf7a26db306ec98942c93389a67099ce1cb0d1e9235"
+embedded = "14ebd66353bde5ab9a1c51081f37794f9049ad50e419faac7b25c49be905fb38"
+status = "translated"
+digest = "7b717c818210e101cf501337b1e726239234e14d958941765888f4696c3303bc"
+
+[[fn]]
+path = "brotli-decompressor::huffman::_#4"
+kappa = "e75eda3ea8a0525bbcccbaf7a26db306ec98942c93389a67099ce1cb0d1e9235"
+embedded = "14ebd66353bde5ab9a1c51081f37794f9049ad50e419faac7b25c49be905fb38"
+status = "translated"
+digest = "7b717c818210e101cf501337b1e726239234e14d958941765888f4696c3303bc"
+
+[[fn]]
+path = "brotli-decompressor::huffman::_#5"
+kappa = "e75eda3ea8a0525bbcccbaf7a26db306ec98942c93389a67099ce1cb0d1e9235"
+embedded = "14ebd66353bde5ab9a1c51081f37794f9049ad50e419faac7b25c49be905fb38"
+status = "translated"
+digest = "7b717c818210e101cf501337b1e726239234e14d958941765888f4696c3303bc"
+
+[[fn]]
+path = "brotli-decompressor::load_huffman_code"
+kappa = "813f144d06399bbc248c82f29f62796df457f68086a7a493b755220cf2272be8"
+embedded = "72e92fa075c8d5b09b1e28ec2fc8da07433d1b0d51360a64c3bacb9f4dee4c81"
+status = "residue"
+cause = "mir::Ty: huffman::HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::replicate_value_pow2"
+kappa = "5186d8036c1348a38e6d3f06ec658c5ef019418df9c042d7d8abd6d3c823a879"
+embedded = "7bdc83cbf385f4bc18a54d14fe652bb04894069375d833782eace8c10af2b071"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+
+[[fn]]
+path = "brotli-decompressor::symbol_list_value"
+kappa = "c931e84f90e020897ed0081caf02cbb9112eabca73c9689913a60f6ddf68eaf4"
+embedded = "601d64c053bb1ef68aee0aa3ee89ba88965946721a9b698416dcea98d7b0d417"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl isize>::wrapping_add"
+
+[[fn]]
+path = "brotli-decompressor::table_size"
+kappa = "1250fb80bc3de913d046876262bf0291fa7da6912f9025bbbacb32b72b7a305d"
+embedded = "32f8e385a0af15a03488b9559a5e11a0f9b8feae6c06c934b1b35beb16b6fb0e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item huffman::BROTLI_HUFFMAN_MAX_CODE_LENGTH_CODE_LENGTH"
+
+[[fn]]
+path = "brotli-decompressor::table_window"
+kappa = "fbae892324a079d72d7d5dbdf02d0f1ffb9e0f21472c4505c72bede7f233030c"
+at = "T=u32"
+embedded = "936d2b000cfc5b08b0310cb0e20aa3f7b0457a59d952621ac93c450f11624c01"
+status = "residue"
+cause = "mir::Ty: HuffmanCode"
+

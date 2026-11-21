@@ -1,0 +1,92 @@
+# The group register (written by `uorust crate group@0.14.0`; do not edit): every body of
+# group's MIR at group 0.14.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 26
+translated = 0
+residue = 26
+
+[module.cofactor]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.crate]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.wnaf]
+bodies = 22
+translated = 0
+residue = 22
+
+[embedding]
+bodies = 26
+embedded = 26
+evaluable = 26
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: wnaf::Wnaf<usize"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Group"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LimbBuffer<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Wnaf<usize"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wnaf::Wnaf<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wnaf::WnafBase<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: wnaf::WnafScalar<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::truncate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WINDOW_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rand_core::Infallible"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: subtle::Choice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: wnaf::LimbBuffer<'_>"
+bodies = 1

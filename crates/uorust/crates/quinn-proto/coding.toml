@@ -1,0 +1,163 @@
+[[fn]]
+path = "quinn-proto::coding::<impl at src/coding.rs:11:10: 11:15>::fmt"
+kappa = "2f67baf326f4be7eb57dda1c0e62b90b5e37ad547bf33a08cb20609fbccfefe6"
+embedded = "707ec7c197f95d171a6cfbdf303d41a059ae6e183dfdbfdb33fb5c484d5b0928"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::coding::<impl at src/coding.rs:11:17: 11:22>::fmt"
+kappa = "af4e73ce9d5e913ce60f9f4a8fd21167c18c57fd31d9e717ee5347500c586f7f"
+embedded = "05558d5bad8c0e0c9fb7e251bba3870cc6b37f23ad7f99386f79687665051a87"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn-proto::coding::<impl at src/coding.rs:11:30: 11:35>::clone"
+kappa = "fb1e42e93744ede12e2a89976e0667ab9083ebe9f61368007e9196cba261c909"
+embedded = "d18d7e188aa81a95327d9f036d4ed99ef08a2c1ef1416b8c511625c53499d221"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::<impl at src/coding.rs:11:37: 11:39>::assert_fields_are_eq"
+kappa = "60138708f32bac27924dd39574395a6fc4db89ec77fbd43ba5f3449fd9a57da3"
+embedded = "c4c3a702d73347ed57a1ea889b2f16c629a8069824e293c47a40ff5f8f98d4c2"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::<impl at src/coding.rs:11:41: 11:50>::eq"
+kappa = "c6c48bda96be3307205def2b77b8e7a3f393d4ba57d81dc1da1780239f11a786"
+embedded = "0a270c4e1eae03a7acbf3a5a806ef5d99254e9e2f7c7302e43fc4be028e4e0d0"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::Ipv4Addr::decode"
+kappa = "93b6bb99694e5137b1ba84a153e9badb825e55d851432a69c38feb2cd307851c"
+at = "B=u32"
+embedded = "a576fedb9f3d8ca01e4974e5096f1d90d9696a4b517eb8c9c31bae5b9168f797"
+status = "residue"
+cause = "mir::Ty: std::net::Ipv4Addr"
+
+[[fn]]
+path = "quinn-proto::coding::Ipv4Addr::encode"
+kappa = "d33c15b1651f757f048b9866024905d919651c8c7289a34a0481112394d61eba"
+at = "B=u32"
+embedded = "dc542c15be1c36c55f535b08626de8ff13715f4d37b25948a256dabe45816a3d"
+status = "residue"
+cause = "mir::Ty: std::net::Ipv4Addr"
+
+[[fn]]
+path = "quinn-proto::coding::Ipv6Addr::decode"
+kappa = "cc04ee8f40f30f997193b2ad635d1ff7f2f24781d16693c56108c9337f004d62"
+at = "B=u32"
+embedded = "93ed28eb9cc06df45710d36e0362ca233d343e96e23d87454a80bf0b7ad304da"
+status = "residue"
+cause = "mir::Ty: std::net::Ipv6Addr"
+
+[[fn]]
+path = "quinn-proto::coding::Ipv6Addr::encode"
+kappa = "d80bc1f10ed35dc3878f670b24cabae67f0bec460c8e7e5ccf5faa3b73b6c814"
+at = "B=u32"
+embedded = "18794252920636f89cd513d27a0b3a99501e0232f5706230617306e6ca8b4c89"
+status = "residue"
+cause = "mir::Ty: std::net::Ipv6Addr"
+
+[[fn]]
+path = "quinn-proto::coding::T::get"
+kappa = "d93bfdd48326c723cfe61274d085d4ad70c206c72806dba0ed26da8b055a1ca5"
+at = "T=u32, U=u32"
+embedded = "a7167f1ec29cfa5ce0e3209b2fe51da9f3e0aa4337cef253792f1d0ab0781c42"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::T::get_var"
+kappa = "8ddcf1a5a135b53b8d2401381c948305fe59e5854415ffb701a044bd501e3b4a"
+at = "T=u32"
+embedded = "7bf03cdeac59b45b671ed4bc79091e192f34711dd9eec18eaa09fb138c3c772b"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::T::write"
+kappa = "c5d9b695cc77a9477af8a2dcc255984191a3a8f082d0c6dcdd58ada716773699"
+at = "T=u32, U=u32"
+embedded = "88d5cea7a2af4ef2f660269d90b0227d2f597271856f99c159ed5cc30fc23161"
+status = "residue"
+cause = "mir::TerminatorKind::Call: coding::<impl at src/coding.rs:50:1: 50:19>::encode: quinn-proto's MIR stops at mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "quinn-proto::coding::T::write_var"
+kappa = "90db659371d8eebf2a80dbdcc18e5e5724a6f69fc83b3d1d04c5505930f7e038"
+at = "T=u32"
+embedded = "301901a9a3cff0f0582efab39fac9cc36ba787bd68cad5f8e16920cda6f40e7e"
+status = "residue"
+cause = "mir::Ty: varint::VarInt"
+
+[[fn]]
+path = "quinn-proto::coding::u16::decode"
+kappa = "2f960b4310f6fbf0889b2385946c9cbb2d6ebd6105623c84d79a04eee3883957"
+at = "B=u32"
+embedded = "ee186501dec4c6e0570a93910b9ac6d89cca2a44d48567ea90e4293e23683bf1"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::u16::encode"
+kappa = "a22eae90747e3d4fbb85979e42a65d6c437e8b6840688b13639cff2967b03e42"
+at = "B=u32"
+embedded = "e06a6ee5f417c22f4589e45af663bff116e05a810709456da424ba181abf368d"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "quinn-proto::coding::u32::decode"
+kappa = "df4f51f3a1d7093651b1d43fdc0c8ed040130fcd0303c864cac18635ebdd7c5d"
+at = "B=u32"
+embedded = "ba80edd5b8e293be8c6e4fabea720bd0e23e84d5dfb8a9fd0c2a3fdeac868e5b"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::u32::encode"
+kappa = "01058406b2037e286ceca2cab56228743df731ddc35a5e14e1eef9d4ab7ef267"
+at = "B=u32"
+embedded = "d2a77c7e48d7985dd5ea6fa9bc9449c1da9ac7f0785ca104c8597a3c8801e2bb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "quinn-proto::coding::u64::decode"
+kappa = "8a9f831823246806c9dc845b372f877056036a5cdf1ec6fa2e6113ce36d3af35"
+at = "B=u32"
+embedded = "b3721d318ad8f45374c3d52e984e864b7f0948fcd627a3a7d44b9a634d624973"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::u64::encode"
+kappa = "9f53d46fcf4eb0618168ac91a69d8a95e3be0791fa356e8dec6b62c19c6ba47f"
+at = "B=u32"
+embedded = "27a12dca95080b2dc84e52a7302a4a6ce926d5e87d53c188ff5453d5e846076f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+
+[[fn]]
+path = "quinn-proto::coding::u8::decode"
+kappa = "0d94f665bae3de1546da54f24b21c6ee97b33cc37790ddc386880e97d9ad8356"
+at = "B=u32"
+embedded = "6ea9a44d7bb85ddabc12f6d3d88991d0ced83f6eefb97cb281d3a4b9899421a2"
+status = "residue"
+cause = "mir::Ty: coding::UnexpectedEnd"
+
+[[fn]]
+path = "quinn-proto::coding::u8::encode"
+kappa = "ac794012ef996d70d4c2a7ada0930952f3ab06c4fd612c0ff24538d7639b4173"
+at = "B=u32"
+embedded = "d39e4fcb05707a23fe75bb47931b05dfef4e16fdf4aa023c465f9fb4e8766478"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by BufMut, which u32 does not implement in core"
+

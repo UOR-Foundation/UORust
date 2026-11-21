@@ -1,0 +1,231 @@
+# The lock_api register (written by `uorust crate lock_api@0.5.0`; do not edit): every body of
+# lock_api's MIR at lock_api 0.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 219
+translated = 0
+residue = 219
+
+[module.condvar]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.crate]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.guard]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.mutex]
+bodies = 43
+translated = 0
+residue = 43
+
+[module.remutex]
+bodies = 51
+translated = 0
+residue = 51
+
+[module.rwlock]
+bodies = 96
+translated = 0
+residue = 96
+
+[embedding]
+bodies = 219
+embedded = 219
+evaluable = 219
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: RwLockUpgradableReadGuard<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: MutexGuard<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: RwLockWriteGuard<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLock<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: RawReentrantMutex<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ReentrantMutexGuard<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: RwLockReadGuard<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: mutex::MappedMutexGuard<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: remutex::MappedReentrantMutexGuard<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rwlock::MappedRwLockReadGuard<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rwlock::MappedRwLockWriteGuard<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rwlock::RwLockUpgradableReadGuard<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Condvar<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: condvar::WaitTimeoutResult"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: mutex::Mutex<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: mutex::MutexGuard<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: remutex::ReentrantMutex<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: remutex::ReentrantMutexGuard<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Memory: the layout of Nat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: G"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: WaitTimeoutResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ExclusiveGuardData<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: condvar::Condvar<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by RawCondvarTimed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AbortOnDrop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MappedMutexGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MappedReentrantMutexGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MappedRwLockReadGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MappedRwLockWriteGuard<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Mutex<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ReentrantMutex<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RwLock<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SharedGuardData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::marker::PhantomData<*mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: guard::ExclusiveGuardData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: guard::SharedGuardData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: guard::abort_on_panic::AbortOnDrop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: remutex::RawReentrantMutex<u32"
+bodies = 1

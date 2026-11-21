@@ -1,0 +1,15 @@
+[[fn]]
+path = "textwrap::inner_width"
+kappa = "432682e77b05ef1991054929c2dbb6fe9023f58ff1be0cbc9b7e22f7fe8f90f9"
+embedded = "8c2dfaedcb805cbeadc891a8a1f8e7993ed81f9f0b2f9f58971c5ce7eda60d91"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::display_width: textwrap's MIR stops at type outside the lift: std::str::Chars<'_>"
+
+[[fn]]
+path = "textwrap::wrap_columns"
+kappa = "959bc1f7df63a14de218b72dbd815204e6f9ba0f6639813906307d0dae1d127a"
+at = "Opt=u32"
+embedded = "e26cd047ef7d4c4e8e39cb76aed77a4ff9ed43db2e326549424631c66585012d"
+status = "residue"
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
+

@@ -1,0 +1,842 @@
+[[fn]]
+path = "icu_collections::INDEX_2_BLOCK_LENGTH"
+kappa = "0748c3e24901f42da13764c65bb15bd7fc774ab6c5aa9271d6364ee657e56bba"
+embedded = "e7c00423b18522b1d2bd11edfd088725d04bfbba51d83d7fbb4d548c9496c803"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1_2: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::INDEX_ARRAY_AS_BYTES"
+kappa = "eb270b3eb2bb88b5e0b72a7855c010db59d5d819b76f7223a676888ed2fd76c2"
+embedded = "c6d7916b7013090233a476e899435a502e3d728c0bfac1eea5e46ed74618aacb"
+status = "translated"
+digest = "a60c88f6bae4715cf4c3f47451398b70ec49ba315a7faf9700d0cc4acbd44107"
+
+[[fn]]
+path = "icu_collections::SHIFT_1_2"
+kappa = "246a4b3c184454e199b1a25b300fb7bc4eca96686269c64e68e3336309c47462"
+embedded = "e9777623e144062bba19ac6d374801669717842cc6f1c096174ad63e15f98942"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::SHIFT_2_3"
+kappa = "ae1f72d1a699561b411140c0801a40672e27da190473c5309bfa05155a312724"
+embedded = "ab9dc39510cb850e241ae802aba6d7b76a870d7b3c6426bf0515af2c92118064"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::TypedCodePointTrie::get"
+kappa = "6e29f16dab80581520da1649282ca058108f86c01057de7e5b06726c4260e4cb"
+at = "Self=u32, T=u32"
+embedded = "4eb292993782ff5983624088db5e947274732c5eb5aa03b670618ddbbc5a40dc"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by From, which u32 does not implement in core"
+
+[[fn]]
+path = "icu_collections::TypedCodePointTrie::get16"
+kappa = "455a807121d89fb6d9786263e4b347dba077767e3fb365d73a16559a8ce7491d"
+at = "Self=u32, T=u32"
+embedded = "43bb8abaaa668cab983d0513bf4887f0aa19a28ebcaa4b3b4095472cd719b85f"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TypedCodePointTrie, which u32 does not implement in core"
+
+[[fn]]
+path = "icu_collections::TypedCodePointTrie::get32"
+kappa = "d787a4d88b5725d837369799e6f9619ffe5b4eb9a3c4ab0d8bbabacafd84110f"
+at = "Self=u32, T=u32"
+embedded = "d5a06dd462799f6a5522214c6f5a1b5561d70772270f26c062e940c5704a9af0"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TypedCodePointTrie, which u32 does not implement in core"
+
+[[fn]]
+path = "icu_collections::TypedCodePointTrie::get32_by_fast_index"
+kappa = "f280638999d66a68f1ef4af152bb094030e7669379c902cd41f98387a68fd159"
+at = "Self=u32, T=u32"
+embedded = "43c33e27c47be664203c609d72a9ecae951708d2dba19d8cf9088d18a3f5654f"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as codepointtrie::cptrie::TypedCodePointTrie<'_, u32>>::TRIE_TYPE"
+
+[[fn]]
+path = "icu_collections::TypedCodePointTrie::get32_supplementary"
+kappa = "5181e6f204a11bfe4ea589d47ca076d40db76fd7afb933e169050147d0e82e4e"
+at = "Self=u32, T=u32"
+embedded = "6dd80df102139108140dba7dc4fa36f3e6b3e7977e77736553f155073c33b8af"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::TypedCodePointTrie::get32_u32"
+kappa = "9eb26ab5a12c839c471c0cd54f30c5310f491f0d8efddb7fa8ac9473296a55a5"
+at = "Self=u32, T=u32"
+embedded = "45420144aff04f342df6d7994c9e8e751bd39ddd07efc44b96d43fe10c862bbb"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TypedCodePointTrie, which u32 does not implement in core"
+
+[[fn]]
+path = "icu_collections::codepointtrie::error::<impl at src/codepointtrie/error.rs:10:16: 10:21>::clone"
+kappa = "a8ada131f85973f7eb89e716885485092c92d64f2a9722aa992fca77f583d258"
+embedded = "8ddaf2ca1b64973958424d963e4ff75f0fc605f6f4d26d227f94df88eece933b"
+status = "residue"
+cause = "mir::Ty: codepointtrie::error::Error"
+
+[[fn]]
+path = "icu_collections::codepointtrie::error::<impl at src/codepointtrie/error.rs:10:32: 10:37>::fmt"
+kappa = "8e97f4de7361193896bea571e93b29fd28cc37aa80291532344024a9fddc1977"
+embedded = "4a4d401a1cdf1e19168bfb4db3cf0388381771f10b2d54106757b2d6a666062c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::codepointtrie::error::<impl at src/codepointtrie/error.rs:10:39: 10:48>::eq"
+kappa = "68af2fd913662464482c34279822ec8055491a76fd5531164a0c58eca3f06e52"
+embedded = "279c3f424d48437f22af9f89fbe8e2c8f429784b81daa1d353530019283c8a67"
+status = "residue"
+cause = "mir::Ty: codepointtrie::error::Error"
+
+[[fn]]
+path = "icu_collections::codepointtrie::error::_::<impl at src/codepointtrie/error.rs:10:23: 10:30>::fmt"
+kappa = "6575cab0d68290f4b28adfaf5ee5dd0256fb5f5f0f4486adb41b8fc57811a560"
+embedded = "e74f888643e49480ad3e0de385e6c45375ac313cacc788a626722be1f9cd50d0"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:134:10: 134:15>::fmt"
+kappa = "f315c906902d5179f59f4ad5f1d87dfe34a6a460192acfb1128d94b152154214"
+at = "T=u32"
+embedded = "a9f8acfd1e933698b659503971ed27eea90e6acc18cddaa16738a12c24808e9c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:134:17: 134:19>::assert_fields_are_eq"
+kappa = "37f336706011c66b82a9764a9f4c22f016e10f068b9298fcfbfda09c4c85a5e1"
+embedded = "ee66cc3cae3c3a8d1920b9bbbdd3f00022a344e34b9da090c11f43865968025e"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:134:21: 134:30>::eq"
+kappa = "47532baa49dcf6d04e28ad04e18b3622d2793da78eb4f2133331134e12fc72e7"
+at = "T=u32"
+embedded = "3ca305b6a7424f30dc8a3d1310da9be5dde51cc106cbb67aefdb3a5edd8a5926"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:134:32: 134:40>::make"
+kappa = "ac8f73643f27fe439726c2d0e1c4d569a1a00b0824ea2761bfaa690cc2f40d9c"
+at = "T=u32"
+embedded = "00000c35d09607b81488525c768a5ec8cbe548cf8785af88b45fd75ac423b187"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:134:32: 134:40>::transform"
+kappa = "f0bcc7ae0696734058918e23efee8f4125aecde65ca01d3aa5acd08dd7e1f0cb"
+at = "T=u32"
+embedded = "5634f579a56c6ca86e1befc6a4446a9fbc57dbd3d5148af9f2c0c9a13b2586f8"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:134:32: 134:40>::transform_mut"
+kappa = "2233041fa3b70cd8c2cf56430c2f5b63c5d7b17b46da9dd1e49f9542890c70bf"
+at = "F=u32, T=u32"
+embedded = "557897826efbd8516f2cd0d5fefc101b00432acbf4b832a70cd905fefec67f4a"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:134:32: 134:40>::transform_owned"
+kappa = "bde5fe09292f11bae2fc357156c1c1fa0751de9ffc4c784b62bf2a79b10b43d4"
+at = "T=u32"
+embedded = "f7e2a6b083117a8e9af29dea187ddfb1d294e2082931e0cab72fad24886304d9"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:134:42: 134:50>::zero_from"
+kappa = "ff0fea0a533d12564d85711b47ddf955e6a33434fba425c761a096f42561d3d9"
+at = "T=u32"
+embedded = "dbfa9b4c1bd92afa5f34ce79a8bd25dd9b69abeecc615d070b9426fec3ce5a31"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1388:10: 1388:19>::eq"
+kappa = "eb0add8698bd2de2d4cdf227ebd3e47c176fb2318b46fb650a2d754f3659bd6f"
+at = "T=u32"
+embedded = "4ead2432b77ce40d8a0013d151a713212d54f6b22aa7518d007e55b93609bf8a"
+status = "residue"
+cause = "mir::Ty: CodePointMapRange<u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1388:21: 1388:23>::assert_fields_are_eq"
+kappa = "935e279178d9ba5de38bd7ca761cda5d0777b5ba0f0d92368ca3214d41ce7a74"
+embedded = "2b69706790d6c6ceddbd97abb2a6fda38db1a167f674d0ba0e26c27f2a015b88"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1388:25: 1388:30>::fmt"
+kappa = "467ea0e8096ed43b2adf2b6367fb54a05a410d6981f8a53ee3ea713a0ec86a4f"
+at = "T=u32"
+embedded = "af9926f071ed015db755176c120044d912d3bdd8d6ccf74684cbedfaa90d4bc8"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1388:32: 1388:37>::clone"
+kappa = "a14637363fd723fe9cb61180b1e48de249b78ac70a42f9264b0a79f24a551643"
+at = "T=u32"
+embedded = "3de6564f26b69550be8304b182006b52e500cb5531c6ce03cce79daa4e75a544"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointMapRange<u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1399:10: 1399:15>::fmt"
+kappa = "8ea4d2c10ad36d72e4472eb530b7f0d2cf078e67da99f6634e650ca1754d52bc"
+at = "T=u32"
+embedded = "293b1e195b7c8d883b7d20f3b09ab3633fbade5c900de209ca4b608582b83adb"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1540:10: 1540:15>::fmt"
+kappa = "d036cce60c30451ee19f5a653b17b8f6efc2cb0405aa9ae93be9e57fcd6232c5"
+at = "T=u32"
+embedded = "b87c578aefde2816213777c84328cdfacea2d67881740ddb4c4902c0bc7bfcce"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1582:1: 1583:43>::try_from"
+kappa = "63c0bade0e9d4d5daf2b0400558fb0474d5deb6f5cb511f15aa6cc7efea6b898"
+at = "T=u32"
+embedded = "d36641396ba2c476094719b419ff98c5319dcde0a2a19e349ecdc1965d3e3456"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::FastCodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1612:10: 1612:15>::fmt"
+kappa = "744dbfb18adf2c83557d4b4cb28e3e448e7f26833b612c5a146512491ba8f29b"
+at = "T=u32"
+embedded = "d7ebf615d1056311e9e1464e502413d8ed4e4ac85750cd7f550cc67c1c25b268"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1636:1: 1637:44>::try_from"
+kappa = "3b5a89bb68f4f95a2c288971922a933469cdb2641f9e1bb6a86f6559567ba63b"
+at = "T=u32"
+embedded = "874d8424999bfa5fb128f416497f504f698bda81291a5178ba91752cb27370af"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::SmallCodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1666:10: 1666:15>::fmt"
+kappa = "21d95d1e85ad7979928691db05e3d13f9585719113599a7f250c59c0ffcb5ee3"
+embedded = "6fe8c058c9aa2add69a12e8e6b99f97b2aefe4a4a43dfbd3842bc63aee6e7cba"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:1673:10: 1673:15>::fmt"
+kappa = "dae9928e084bcda56cd65f72887dbd497b14329d049da884ae94a03784c9455d"
+at = "F=u32, S=u32"
+embedded = "a0fa0e9ec1e09fadda3a21ed4b278ac00d8bc1f96b9197894fd888ded91ff18c"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:16: 180:21>::clone"
+kappa = "d4ea36a602b480013a12cf56c789422251737fddc8194685d78c015159880bb9"
+embedded = "faf70f1c447d61ba7a42afdc26e14d914e8e97c780f5bc85422e525c1c5324a9"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrieHeader"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:23: 180:28>::fmt"
+kappa = "20e5e569fcddf81ab931c0a7b2d867d638e1d250b9da5c8a0e8a3c252237de88"
+embedded = "feddef8e56d7e0d6d19a38e03799de5aed01e701a95100a5127f345b393f5d3b"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:30: 180:32>::assert_fields_are_eq"
+kappa = "c83eddcef025d671e3ecbd4df17099490ade515512d6bc7eae3fa6633606c1e9"
+embedded = "f1bbef388529d6dd9fbfc299dc312766c36895b0674990b037d46f15644ec8f3"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrieHeader"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:34: 180:43>::eq"
+kappa = "9e9d4a3dda24d76c0194fac46703c96706ce01d822c6d17a9a0f622fdaf4d7cd"
+embedded = "bbc1fe3f530ceb8d5ba2caa8a694a3bad5f4b9fecaa2467499c4efa1cbf9f5ce"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrieHeader"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:45: 180:53>::make"
+kappa = "3f1b4fe32ed38bd2a176eda361539577f27685a8e168ed145e72e99454fc173f"
+embedded = "b23b18860bd16b05b53af5a5706404a321a09cd443b5823a268bd2a708e3dc06"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrieHeader"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:45: 180:53>::transform"
+kappa = "7fa19c181d7296e4a371aa0437b51f0bc3cdb85865c964274ac5e9ce1a532be2"
+embedded = "b14a03395f45b361d2ce09b759cd93e724cedd1d17a68e26c9477ec8b24c95dd"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrieHeader"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:45: 180:53>::transform_mut"
+kappa = "aa9e3df2185b862b464d69065f594d309253dd1f87119aee413040a3b1e7a027"
+at = "F=u32"
+embedded = "d57c5ac4136a04e0143abcf69d2d6e589867af26d2861a2189afedc4a30b5d11"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrieHeader"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:45: 180:53>::transform_owned"
+kappa = "8f0d82c6349f47a2b8faf403a3356c3f0149fa85a7447a0464ee20f6dc4d4864"
+embedded = "5bd2ed889acfc19931c2ab39c0103396a0f7f34666f1f8f43b21c34c9a3b9ca2"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrieHeader"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:180:55: 180:63>::zero_from"
+kappa = "a1008e17d6f66d2f033feccef56614ffc740e4a61e2c23d9c48b225a83043c4d"
+embedded = "9e8e90c67224b50cb2afab41e43ce5c835c92ab378f3523481105beb2d24aac1"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrieHeader"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:42:10: 42:15>::clone"
+kappa = "bdeb1c91fc780aad5df0a12bf533f0af48a12f153c76d7a737f8dc4dedd34577"
+embedded = "4043639a14c7afd5936835ac047836344f10562aa5fae7a16cdfbda5c61a2574"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::TrieType"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:42:23: 42:32>::eq"
+kappa = "79be409378d993000bd2ba9a7e5597d6db15626d9dac782331b7633112b50ecd"
+embedded = "bfee23b57200ff8cec06ee10f7a52d7e21b7c0cfd957ef41742d854fd6b424fd"
+status = "residue"
+cause = "mir::Ty: cptrie::TrieType"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:42:34: 42:39>::fmt"
+kappa = "bf597cfee88dc428e2dbfdb098d73ae81f1667d40cd917ef415faf784cc1a35c"
+embedded = "6570855fe7d0fac17afc7535e8f297eefbf3854f78281e8a47f15676829f6393"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:42:41: 42:43>::assert_fields_are_eq"
+kappa = "28a2090a3318344e165bfcb3ebae2c5fd47b75fbf51b12926a8a3aaeb035c3e1"
+embedded = "bb46bd0773a87554ad0b8aa88f38f487b5f14515f185c9b180e172da2ef45906"
+status = "residue"
+cause = "mir::Ty: cptrie::TrieType"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::to_u32"
+kappa = "b3c3131ca3f57d43444afaa14823028af7a158e92fd3439cd98dc8f10e08bfe9"
+embedded = "acf3d39726128e087aa8e58a1d6d4b2923beb36d830ce8b8a7267d4c89ce429b"
+status = "translated"
+digest = "c132cea490314c2ee24bc30ba5154a9fa6a01188dd9de3a8fff2a0d83b628475"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::to_u32#2"
+kappa = "a0d4612f16fe3d1826f6ad9c4b1004a511ca889b6fd8c3a112cb307c4f4108ed"
+embedded = "97528a2ad031b262b6722237640e06e4a5dcde79c1450824820c71c854056c59"
+status = "translated"
+digest = "c132cea490314c2ee24bc30ba5154a9fa6a01188dd9de3a8fff2a0d83b628475"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::to_u32#3"
+kappa = "b487cbcc8039a577b421e1092d39363784885fc66ce421ec5fe387f58d1bc723"
+embedded = "1e517b5944bc00064ca06d43922d1a4dd6c9ac4dc3880b1e350d8ddf5d5aff9a"
+status = "translated"
+digest = "c132cea490314c2ee24bc30ba5154a9fa6a01188dd9de3a8fff2a0d83b628475"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::to_u32#4"
+kappa = "dbc60c121792b13c59903c1721f1d578581740472b775d1108190ee9c9bced04"
+embedded = "de4a4709a5a7f6f8abba66e465e46278b3e121def25d65763d74e53b73397b1b"
+status = "translated"
+digest = "564903a1a7fa3528239941246b5f36322761eb0f8459f1c6f0aead017ff11e91"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::to_u32#5"
+kappa = "5282e19427f0abe8670c74822b0f44870f4c74cd246b9b86b996f5b94e4eb218"
+embedded = "6548023ebb2f96cc66b7380ee326df64679eed893bde7d5faa05ad6990de1239"
+status = "translated"
+digest = "2e9c84aac96058776943467dc18dd668bfded08c4a962c0b725d00e569798b44"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::to_u32#6"
+kappa = "91eb717fcea32fbdd7c0fb553397623fff892d2451b3a28a33db91b6edca5a1c"
+embedded = "7c5d62e5376aaf5365848b2857457542af9732a12d19094cf1675886d123801f"
+status = "translated"
+digest = "c132cea490314c2ee24bc30ba5154a9fa6a01188dd9de3a8fff2a0d83b628475"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::to_u32#7"
+kappa = "2bfec1bd69cf307b5e53b8ef504657ed0002178e77fcf016512de94ddd60639a"
+embedded = "8f2c593b5d9a6a014ed4bb212fa7b348e7cedfa6208322761beaf1f83ec79bba"
+status = "translated"
+digest = "c132cea490314c2ee24bc30ba5154a9fa6a01188dd9de3a8fff2a0d83b628475"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::try_from_u32"
+kappa = "f44e4e983b9eed565b14a58a30b4c50f6ffbcad7e43d722f3a159a7b6df43a9d"
+embedded = "b869be2f39b41a11664467ab0d03917b5e0af2c50bcce5f181e6809e9d8dd107"
+status = "residue"
+cause = "mir::Ty: core::num::TryFromIntError"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::try_from_u32#2"
+kappa = "09b1e3113d5581a84ba7ff34164b5e6b9e67d576f555d5c4603ec03711c7b4fc"
+embedded = "316bf3830a826866d2da4a3eceeece38da15e95d8c7575deb711a205b58585c6"
+status = "residue"
+cause = "mir::Ty: core::num::TryFromIntError"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::try_from_u32#3"
+kappa = "147ce5820759bddf9c3b836494560e8ed593346b7478d3f5fb4da03b2b220b40"
+embedded = "da3462d72f49fa4920bce6afddc7dbeee8cbd4ad918109e97c28ba76bfffe5f1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by TryFrom, which u32 does not implement in core"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::try_from_u32#4"
+kappa = "fdf7f5ad1f8d633b353ce824ea4d28aa6f2d27c37cdac248f195b354ec65bcb3"
+embedded = "761bce776e3258b1a61fe4a9e99531732087ed81f780d1a38a10bcaa26ac2240"
+status = "residue"
+cause = "mir::Ty: core::num::TryFromIntError"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::try_from_u32#5"
+kappa = "1db9b41ce2bd10a3a37b8bca759c7e7f3517d8c340e85f3fb839790f874cd52b"
+embedded = "4ecdd6797960119e46a18c2e9c121916b516466a7104736383bfdc5e7cb49557"
+status = "residue"
+cause = "mir::Ty: core::num::TryFromIntError"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::try_from_u32#6"
+kappa = "64cec78067dd07c9c034cae24bb4d124c68322e433e22d9aedd4f4af25cdf3af"
+embedded = "1c0d8126afe9cae5880d52a610fe87953bc7aedb66bc46e4b00d923dd79692ed"
+status = "residue"
+cause = "mir::Ty: core::num::TryFromIntError"
+
+[[fn]]
+path = "icu_collections::cptrie::<impl at src/codepointtrie/cptrie.rs:87:9: 87:38>::try_from_u32#7"
+kappa = "b4164d9c22925b3d6c531988f20ccea93a1eddb21dcc0a06899d560b8253668f"
+embedded = "f71011ae50fa3b64c03688463f3c909b5dcabb12813958ad6f6f62f6cfd164f1"
+status = "residue"
+cause = "mir::Ty: core::char::CharTryFromError"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointMapRangeIterator::next"
+kappa = "46be4d11353aa846a571b72e6cd52cf5c5b6146fa577f8f482a0e017cdfe6288"
+at = "T=u32"
+embedded = "a85ff19eca36b0ff1bb8865d921f42c3233ddb83bf63eb90dea42c1c48d4693d"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointMapRange<u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::as_typed_ref"
+kappa = "ee0c7bd60b446c0c1298e71882797b5963e845c1d0c7886d2927c9bd343e3482"
+at = "T=u32"
+embedded = "6506f7f29666f77ef4dc054ded9dd0d9e8a689d7cac66285257a2e61a9d45a48"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::FastCodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::clone"
+kappa = "5fcf94af2a6b1fa69a343538371f1b93668d10f1ce7b615c92464edcc4a7d496"
+at = "T=u32"
+embedded = "d0ff75c49fe4761eb9a2387bdbedd6c0d4dce8f1ddeb9f8bf854110e734e7e7c"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::error_value"
+kappa = "e570c2f5e92b6e850f06d98c57836de04c44966e06a51ae31c1b75b5b93ecc0d"
+at = "T=u32"
+embedded = "83c7f94cfa48b810021c6d81d1133e82f41dd6e6270ab2d4efbecaede44ce3e9"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::fast_index"
+kappa = "725d81bb0961ab9f62f781690ccf9281b09452051bc627ae0cb7d7da80f64659"
+at = "T=u32"
+embedded = "aa29c639576afd91f2ff45fc2b4b7c66ba2edb60551c0e45a6258eb14b557c6c"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::from_parts_unstable_unchecked_v1"
+kappa = "8fa13cc15c92c0b2ba3271904d6358c059aa4a70e020f6fa4e6b0249e389b440"
+at = "T=u32"
+embedded = "1f8f57fe9bb73e61b91030e9d9b588cf41cc349af760ba6854d5666cd92d665d"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get"
+kappa = "4cdad7e1f24f2ec5fcdfdcb70114480e8a0187a98b74fc61cc3baa4e7bb94904"
+at = "T=u32"
+embedded = "db3d696a6d43f4fcba255fbdd65f8c9298d84023d2100f28497def6488b76d90"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get16"
+kappa = "d87a8ef6d05590180ac0f5acf725edcb7a00acae796b85d41b01691e687b3a6a"
+at = "T=u32"
+embedded = "4ee70d68d75d8086d0f97ba56bb51ec6bbaa04b7de7d66812f8717e3fb272736"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get32"
+kappa = "7ca4945f287324389a3ca4f5a48b7f6fce3d0489c05b58959e618ce076a27bf0"
+at = "T=u32"
+embedded = "e67419a0d77b8f57e616b62ab1a5280baa267f1134dc1886af69692e60fe0e8c"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get32_assuming_fast_index"
+kappa = "bf5ecfd7507c3b53b98095e49215fdd7415ee2b754a1f8d09673e9b0f5374268"
+at = "T=u32"
+embedded = "1e5c20b21b9a370ab2fda726bca24877d374151e28607bf725d59fe6e22bd884"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get32_by_fast_index"
+kappa = "722d0d042ba02ccb7cce4c7a18c2780182647c0decf2b09de75f0e3817ad2740"
+at = "T=u32"
+embedded = "1a2db3f26487bb83cd1178daf816608208a4d8e9422457874123162bb6067c7a"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get32_by_small_index"
+kappa = "6178dd6bcceb2c66dede089c07728e709277291c3a495cf8477f68b4ccc6041e"
+at = "T=u32"
+embedded = "34d9cc84a3d757fb62099b548f27549495a01a651fde01ee9ca234e8af76a3d6"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get32_by_small_index_cold"
+kappa = "1604d34133eec0d4adc32111f6f3a634472a3aba8c2fad4b8546f4fa7e28d589"
+at = "T=u32"
+embedded = "fc8643cbc844dc3e29d74ce8af9dcc6ba7e92ea4013d0f507ddd7cf3af2dfbe3"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get32_supplementary"
+kappa = "fd16e68c030f42fb84d1275f5319dcdff3e787dbe0b23c8ed3f5f498aed63a1f"
+at = "T=u32"
+embedded = "2c7f3b266b7215d909923ecc62e0478f7aa02d03081a937e167232d7eb33143a"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get32_u32"
+kappa = "5fe4d05aaa51e02da6511f4a4514f449d56006aa0a5cf5c38862f661839db221"
+at = "T=u32"
+embedded = "7058b3b5605f7a7e43611d66ad2b8f2d50e2d3cf30772ef03b1a194457457379"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get32_ule"
+kappa = "5da3e94409212c7a55e4eca0a71d7a9411c115c0bab2d1365481162d9ab84a09"
+at = "T=u32"
+embedded = "8bbe1d1d094c28c5baad6a9c9c26454fbf51a71220e45654257123e2aa19dfe2"
+status = "residue"
+cause = "mir::Ty: <u32 as zerovec::ule::AsULE>::ULE"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::get_range"
+kappa = "528c40249513e38a0c9f83f7d2b494b0fe24f13cfcbe6726ef99341f71ac627f"
+at = "T=u32"
+embedded = "f294b179fbaa812fc8d7edcf50868a8088d1faf7a01101d4910eabad9bd86f83"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointMapRange<u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::internal_small_index"
+kappa = "75ddd468ad2d4b8e44848e75185f3f19b43fbaf325705693f85a9372f2d7d3d1"
+at = "T=u32"
+embedded = "9803f6ca2cf8af3867891cc32c10807d47583128146241e12dd212f141e3cca5"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::iter_ranges"
+kappa = "128a14ebe6e0d3255533fc5fff443f432bcede2d4f08a2cb26832cead72dea14"
+at = "T=u32"
+embedded = "c393d50a4aad95b0275b15b46b4f5dbe874a36ed09e6ea744ca8dae9240cdf52"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointMapRangeIterator<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::iter_ranges_for_value"
+kappa = "c881cfe406f8ee68305df5f4e692bf4531b4c5deef16be9c3e4eacd9d3881622"
+at = "T=u32"
+embedded = "c10f25ab8a818bafbc744034b981faafb492d89aae6f7a099db1577b582493c5"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointMapRangeIterator<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::iter_ranges_mapped"
+kappa = "4b07e59199e05319c3dc017af1d16973ab2c55dbaa4d3af830488e26183ba724"
+at = "T=u32, U=u32"
+embedded = "c9b7025e9f27f2eb5619319c104fc88f46a2ca20a3fdaabb55e39bda3af41417"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointMapRangeIterator<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::null_value"
+kappa = "c4a92f95001830448cf2be95624ad8eb1eac101236f295694f3c2a88815105ee"
+at = "T=u32"
+embedded = "893e9253ab1800eeba3c69add490943dd174bd63bf95ddbff30ab710e66003ba"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::small_index"
+kappa = "b04131321b6fa500b54cbab7c8f28b933838810f9b21fd1d93efa450b83896dd"
+at = "T=u32"
+embedded = "b16ea68195dc09a021d4ae52e0c57cf2ccca3de27439f39cf8f636840e2ddd7e"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::to_typed"
+kappa = "338ce0d83a238602fb9277b0fb68615066cb49011853d42fe8bd0213d9412c54"
+at = "T=u32"
+embedded = "10b7613096166f4d9111346416ba4f28fd0ddb00f1c1afc3e8cfbb4bda76364a"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::FastCodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::trie_error_val_index"
+kappa = "85d116b285c10ecc4152d4a3e1727fa12203b05a559fad0a4c718e2036352332"
+at = "T=u32"
+embedded = "8803bcbcc98f963ac40faee6091b968e3de3c360a07c64d39a8ddd081077393f"
+status = "residue"
+cause = "mir::Ty: cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::try_new"
+kappa = "942d9a14eb38aba1484964a2153a46921d5f063cf8e8d28061dcb2d78fb7d8c8"
+at = "T=u32"
+embedded = "902b284b9110e2db94979f88d259a0345f15e8c4ec8555a025887fdfdbd5ff87"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::CodePointTrie::validate_fields"
+kappa = "d50e8193e389a902228b1b83292f7e881169dec45d444deaf9966ad8169a35e6"
+at = "T=u32"
+embedded = "3987f340b402859444ee9a1a71f45d3a2c7c24d3c015f6431a42ba41ffeb1998"
+status = "residue"
+cause = "mir::Ty: codepointtrie::error::Error"
+
+[[fn]]
+path = "icu_collections::cptrie::FastCodePointTrie::TRIE_TYPE"
+kappa = "d6a678c94f8364ff32df306f8ece8f120e36615a3ed546f6100555aebe3825af"
+embedded = "8f00d10577e1386b05990c89a1a41c4b70082d2e02bd5a827bb506ca2681ba7c"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::TrieType"
+
+[[fn]]
+path = "icu_collections::cptrie::FastCodePointTrie::as_untyped_ref"
+kappa = "cadbadf773464d4ae4b929026e82272b1a6a9ed11c75def90ce8394e62b15077"
+at = "T=u32"
+embedded = "eb8807c2e8ac9bcf16c90ab61fad8012fe8abfb7fc7794c8980f616d972a76ae"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::FastCodePointTrie::get16"
+kappa = "bbb9fed3e9c361e2edc946d3a8f50207e810243c20cfa3165095bf09b9ff2eb0"
+at = "T=u32"
+embedded = "2f48d35117af43238af4c3a4952763bd7c3ca89e4b7b0bfb09f17009da655f1a"
+status = "residue"
+cause = "mir::Ty: FastCodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::FastCodePointTrie::to_untyped"
+kappa = "87a614848c2f2d1eb3c55539fac48fff5e44556f0ccb65137a5ad61a6e52cb2b"
+at = "T=u32"
+embedded = "5c9b9b71e99360f13cab83e3fbb8c5e27181407543e43fde51ec8ec62a9f26e4"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::FastCodePointTrie::try_from"
+kappa = "d3b64881650324d10ffbe5431a060148518d71bbed3f7e49ef6eaaf3d52821a2"
+at = "T=u32"
+embedded = "0098dd7ff4b04a20b408a294a8dd72e480f93a02df48467d7943b92e8738e571"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::FastCodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::SmallCodePointTrie::TRIE_TYPE"
+kappa = "0fce3c4f171f26f7bbdc7b08d22e4b1af1eff606e9fa689bc4ed83562e1cfc5b"
+embedded = "086fdbb99e9f033176f0068a25ece44bd8b89212eb7cd07f6ce590b7d0e195b1"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::TrieType"
+
+[[fn]]
+path = "icu_collections::cptrie::SmallCodePointTrie::as_untyped_ref"
+kappa = "c51d3549b3b8d29297c038d3fd7ad90d05295721eab5e2a43aa418c24ca54242"
+at = "T=u32"
+embedded = "551259365ce860e7912cf94f4e50e0070d06b11caf25d095a6cadc91d594f0c4"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::SmallCodePointTrie::to_untyped"
+kappa = "89388ab554dcee0618864d4bae90440908dd0685f0c9a958a7b729f8db16379e"
+at = "T=u32"
+embedded = "65a5c9f200b53a4af4fcd749de73bd497c5107ed78fef80552709f52f2b1b924"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::SmallCodePointTrie::try_from"
+kappa = "53cbe065adbcac9672467d00c03acc30789440eb80c3854ad0eb84a49e8d382e"
+at = "T=u32"
+embedded = "7459f5c7d3b60e1321d5b13d02bc7fa5ecb146d1cc78ff1320fcad5065378230"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::SmallCodePointTrie<'_, u32>"
+
+[[fn]]
+path = "icu_collections::cptrie::TrieType::try_from"
+kappa = "4725947b511d25cdf56a47cce8a6d0b0193dfc3f570d192fcce268f4c6a5c70c"
+embedded = "19e4d333277aaace4c6815415fcda29c13eaf3ef31f8029218852e074f44cdc5"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::TrieType"
+
+[[fn]]
+path = "icu_collections::get_planes_trie"
+kappa = "2fcf777219c9b4eded65ba318d3d7efef72c6f443bbf9497b02ab565e40da22e"
+embedded = "2f9e8b3375a17593e955be76824d8223ac88e709f12c0395635ab209156ff799"
+status = "residue"
+cause = "mir::Ty: codepointtrie::cptrie::CodePointTrie<'_, u8>"
+
+[[fn]]
+path = "icu_collections::impl_const::BMP_INDEX_LENGTH"
+kappa = "c000a0638977f3932ffedfc5e1fe998e70e3ade0dad66a55063c7bf52c4a29fd"
+embedded = "be2b00b29ff28a8831d969ed177374b7ed56d987e2267e892974efa17f0d9979"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item codepointtrie::impl_const::FAST_TYPE_SHIFT"
+
+[[fn]]
+path = "icu_collections::impl_const::CP_PER_INDEX_2_ENTRY"
+kappa = "5160a1e3d8791a1de3df5666e95e85b19ffaeb66acd4c07f95b68f886e5bad7f"
+embedded = "b65df8c238f78178e28d4bef611ed1909d2abf3f7af1abc49340446fe823e94d"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::FAST_TYPE_DATA_BLOCK_LENGTH"
+kappa = "f96daf37834c3c502e568e1a534e5026267d254778da8fc7c6a17b56ae51398d"
+embedded = "466f68d569fe37b33d30f444d3f49be1f2458420d02781236127276ebb7ee60e"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item codepointtrie::impl_const::FAST_TYPE_SHIFT"
+
+[[fn]]
+path = "icu_collections::impl_const::FAST_TYPE_DATA_MASK"
+kappa = "d33a8cb14f909a3625488b45f70057457dec28d64e0e266c7ff223a04bf799b8"
+embedded = "80e669bbc4e0e5d397412cb5cc675222cea74f0e43533552a8a334a27d08d640"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::FAST_TYPE_DATA_BLOCK_LENGTH: mir::Operand::Constant: the constant item codepointtrie::impl_const::FAST_TYPE_SHIFT"
+
+[[fn]]
+path = "icu_collections::impl_const::INDEX_2_MASK"
+kappa = "6b689ade8261bad3a2a6787576a217dd34094efe66fc36c83b30756e560b3674"
+embedded = "8952ad713006712a46510e65ed8c8ca1d07d3e0294fc4210d13c3ba099a51eb2"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::INDEX_2_BLOCK_LENGTH: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1_2: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::INDEX_3_BLOCK_LENGTH"
+kappa = "6d4bb66a79e797a692399ec112327cb3b0e9b59623d9d05c7126be5b9358a113"
+embedded = "9712e398b180404730c63c5dac698afab631ba8651acbec5e7554cddd952f934"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2_3: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::INDEX_3_MASK"
+kappa = "f957ad51a33188e9a8d8d1ccea1120a3b484d605907b4757aa64f62a3c72fd30"
+embedded = "d0a04b4036dc7ba33dfb8d6ab2fe1e2546552be6464378a14a795a996e9f8374"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::INDEX_3_BLOCK_LENGTH: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2_3: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::OMITTED_BMP_INDEX_1_LENGTH"
+kappa = "9f2b2f87f2d55e392ef2464cbcc0c52606ab0c434bc6c200bdf8cc50e1acb2a4"
+embedded = "9a76b72deaf7c00a7f507dc1425be04ba385cae043e556640d2f907c26158c3a"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_1: mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::SHIFT_1"
+kappa = "1aa5dd265fecd62b153fdc0f4d56dcd4281f353eb4d76b959aef6f467d6cc70d"
+embedded = "9a5da16fcf8659b16375c9bc02534974aae682b3d6694b99085ed429a6220663"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SHIFT_2: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::SHIFT_2"
+kappa = "1f8493c75767e52b75e388786c65583aa7f92121ec91394016c51d07b1595a37"
+embedded = "672ba8333a234f0a4405b9f2ae4f15ba8831ab708014961e54940555e3e61b74"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::SMALL_DATA_BLOCK_LENGTH"
+kappa = "bba46ae4907ce279f4050744ae4d3babd43e4f8a3af9f1e5fe3eeffbddb2f71a"
+embedded = "16f1080a993736b461dc15e1c955753cf367c01b355853a47fd31301a14ab2c6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::SMALL_DATA_MASK"
+kappa = "dd07c628a1ebcccf6e500f9f3b619844bb689821ef1dd3b6af93c4cc67b15346"
+embedded = "56de1d08577c5f6b75220bc90810d23e5cb55731d0d7d929f517e68cd99af050"
+status = "residue"
+cause = "mir::Operand::Constant: codepointtrie::impl_const::SMALL_DATA_BLOCK_LENGTH: mir::Operand::Constant: the constant item codepointtrie::impl_const::SHIFT_3"
+
+[[fn]]
+path = "icu_collections::impl_const::SMALL_INDEX_LENGTH"
+kappa = "a9b9f5e7b600eef80a3c04eb5784a0c691767e82e0dcc05e83160f398671d1a6"
+embedded = "a6ca98c2e8e13b562640bc3faa0521e0da31d944e80384e2060d1b1b923c6d62"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item codepointtrie::impl_const::FAST_TYPE_SHIFT"
+
+[[fn]]
+path = "icu_collections::maybe_filter_value"
+kappa = "f3bc648a9cf9748ca44ff70c3312e3b9c4fffd75db34f47999ace83c3c35ce43"
+at = "T=u32"
+embedded = "ac99a2f4957a48093ee447a85c572aad9f8abb39c20ecd8c7ae367933b987f6b"
+status = "translated"
+digest = "a50bf791b70803a1ef15ca26978d11beae982acf1226a9e55c21b6b211314e82"
+

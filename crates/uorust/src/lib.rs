@@ -118,7 +118,7 @@ fn project_workspace_here(
 pub fn declared_name(root: &Path) -> Result<String, UorustError> {
     let manifest = root.join("Cargo.toml");
     let text = std::fs::read_to_string(&manifest).map_err(|e| error::io(&manifest, e))?;
-    let doc: toml::Value = text.parse().map_err(|e| UorustError::Malformed {
+    let doc: toml::Value = toml::from_str(&text).map_err(|e| UorustError::Malformed {
         path: manifest.clone(),
         reason: format!("{e}"),
     })?;

@@ -1,0 +1,40 @@
+[[fn]]
+path = "arc-swap::as_raw::<impl at src/as_raw.rs:40:1: 40:38>::as_raw"
+kappa = "529c49dda38e14bbe925eb1499541879e1aadb2f62f27f3146b42245c7285743"
+at = "T=u32"
+embedded = "4448542ea626b86f50fc724422e6bbdba631daeedf87d39cb3b39c0b96fba7a1"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by RefCnt, which u32 does not implement in core"
+
+[[fn]]
+path = "arc-swap::as_raw::<impl at src/as_raw.rs:47:1: 47:45>::as_raw"
+kappa = "c8108d29066f35c01cb1c8e6c097f235a4497dad028e60fb8b0334e6f0d6e7bb"
+at = "T=u32"
+embedded = "03f4f07e69f193f93ec3bb838c554772c551259afa84ce0f23494f8c44d99d34"
+status = "residue"
+cause = "mir::Ty: Guard<u32>"
+
+[[fn]]
+path = "arc-swap::as_raw::<impl at src/as_raw.rs:61:1: 61:28>::as_raw"
+kappa = "4bd90afaeb516dde68f5242d7a8d8ebb9442d521b69d4b23920d3aecfcfa5b48"
+at = "T=u32"
+embedded = "939466f0f55f7057ba4ff5e81136254eb0016e8d4361ae1ca6b4777af7c86614"
+status = "translated"
+digest = "d4cdc19ef04dc2b434cc3fe1e6bc957249d12f75b4294738e8749405b68c19b8"
+
+[[fn]]
+path = "arc-swap::as_raw::<impl at src/as_raw.rs:68:1: 68:30>::as_raw"
+kappa = "a536f377f2f712a6d8e298e7912d94e3632ea084ef45ed49ddeb4b1f279f2636"
+at = "T=u32"
+embedded = "8bec2b3e92352e7e591ae97943df71c371f8c70e89a2ec89959fde913e47c4b6"
+status = "translated"
+digest = "874f622b98036b2c2c8f48608601ed8031327122750df22af5ca99b1f222b3df"
+
+[[fn]]
+path = "arc-swap::as_raw::Guard::as_raw"
+kappa = "a3d86b6e5bdaecb4e6bfde3aac526f51509473827dc3a16ae8271a664c120030"
+at = "T=u32"
+embedded = "58a57de7469d9753b34adb50b834f2bd2be79a80f70b4ccbf63aca66cc382574"
+status = "residue"
+cause = "mir::Ty: Guard<u32>"
+

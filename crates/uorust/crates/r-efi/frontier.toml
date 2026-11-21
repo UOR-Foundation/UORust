@@ -1,0 +1,1296 @@
+# The r-efi register (written by `uorust crate r-efi@7.2.0`; do not edit): every body of
+# r-efi's MIR at r-efi 7.2.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 771
+translated = 19
+residue = 752
+
+[module.base]
+bodies = 122
+translated = 4
+residue = 118
+
+[module.gpt]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.hii]
+bodies = 262
+translated = 0
+residue = 262
+
+[module.industry]
+bodies = 10
+translated = 0
+residue = 10
+
+[module.protocols]
+bodies = 284
+translated = 0
+residue = 284
+
+[module.system]
+bodies = 90
+translated = 15
+residue = 75
+
+[module.vendor]
+bodies = 1
+translated = 0
+residue = 1
+
+[embedding]
+bodies = 771
+embedded = 771
+evaluable = 770
+blocked = 1
+
+[[construct]]
+construct = "intrinsic transmute of a type whose layout the embedding does not read"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 242
+
+[[cause]]
+cause = "mir::Ty: base::Guid"
+bodies = 100
+
+[[cause]]
+cause = "mir::Ty: base::Status"
+bodies = 52
+
+[[cause]]
+cause = "mir::Ty: Status"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: Boolean"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Guid"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: base::Boolean"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Ipv4Address"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Ipv6Address"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: MacAddress"
+bodies = 5
+
+[[cause]]
+cause = "mir::Operand::Constant: base::Status::WIDTH: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: base::Ipv4Address"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocols::absolute_pointer::Mode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocols::absolute_pointer::State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocols::simple_text_input::InputKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocols::simple_text_input_ex::KeyData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocols::simple_text_input_ex::KeyState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::AccessPoint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::ConfigData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: system::Time"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: system::MEMORY_ACCESS_MASK: mir::Operand::Constant: the constant item system::MEMORY_RP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item system::MEMORY_RP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item system::MEMORY_UC"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: __PrivateGuid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: base::IpAddress"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: base::Ipv6Address"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: base::MacAddress"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::Date"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::FontPackageHdr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::FormPackageHdr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtDefaultsBlock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtDuplicateBlock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtExt1Block"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtExt2Block"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtExt4Block"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtGlyphBlock<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtGlyphDefaultBlock<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtGlyphsBlock<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtGlypshDefaultBlock<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtSkip1Block"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtSkip2Block"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GibtVariabilityBlock<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GlyphBlock<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GlyphGibtEndBlock"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::GlyphInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrAction"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrAction1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrAdd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrAnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrAnimation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrBitwiseAnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrBitwiseNot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrBitwiseOr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrCatenate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrCheckbox"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrConditional"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrDate"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrDefault"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrDefault2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrDefaultstore"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrDisableIf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrDivide"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrDup"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrEnd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrEqIdId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrEqIdVal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrEqIdValList<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrEqual"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrFalse"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrFind"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrForm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrFormMap<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrFormMapMethod"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrFormSet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrGet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrGetVarStoreInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrGrayOutIf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrGreaterEqual"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrGreaterThan"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrGuid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrImage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrInconsistentIf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrLength"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrLessEqual"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrLessThan"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrLocked"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrMatch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrMatch2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrMid"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrModalTag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrModulo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrMultiply"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNoSubmitIf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNot"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNotEqual"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNumeric"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNumericData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNumericDataU16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNumericDataU32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNumericDataU64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrNumericDataU8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrOne"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrOneOf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrOneOfOption"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrOnes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrOpHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrOr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrOrderedList"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrPassword"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrQuestionHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrQuestionHeaderVarstoreInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrQuestionRef1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrQuestionRef2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrQuestionRef3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrQuestionRef32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrQuestionRef33"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRead"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRef2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRef3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRef4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRef5"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRefresh"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRefreshId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrResetButton"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRule"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrRuleRef"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrSecurity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrSet"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrSetVarStoreInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrShiftLeft"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrShiftRight"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrSpan"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrStatementHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrStringRef1"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrStringRef2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrSubtitle"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrSubtract"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrSuppressIf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrText"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrThis"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrToBoolean"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrToLower"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrToString"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrToUint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrToUpper"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrTrue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrTypeValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrUint16"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrUint32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrUint64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrUint8"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrUndefined"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrVarstore<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrVarstoreDevice"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrVarstoreEfi<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrVarstoreNameValue"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrVersion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrWarningIf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrWrite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::IfrZero"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::PackageHeader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::PackageListHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::Ref"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: hii::Time"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: industry::usb::ConfigDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: industry::usb::DeviceDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: industry::usb::DeviceRequest"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: industry::usb::EndpointDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: industry::usb::InterfaceDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::block_io::Media"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::FxSaveStateIA32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::FxSaveStateX64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContext"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextAArch64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextArm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextEbc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextIa32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextIpf"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextRiscV128"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextRiscV32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextRiscV64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::debug_support::SystemContextX64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::device_path::End"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::device_path::HardDriveMedia"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::device_path::Hardware"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::device_path::Protocol"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::disk_io2::Token"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::driver_supported_efi_version::Protocol"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::file::Info<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::file::IoToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::file::SystemInfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::file::SystemVolumeLabel<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::graphics_output::BltPixel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::graphics_output::Mode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::graphics_output::ModeInformation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::graphics_output::PixelBitmask"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::hii_database::KeyDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::hii_database::KeyboardLayout<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::hii_font::RowInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::hii_font_ex::DisplayInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::hii_font_ex::ImageOutput"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::hii_font_ex::ImageOutputImage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::hii_string::Info<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::CompletionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::CompletionTokenPacket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::ConfigData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::FragmentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::IcmpType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::ModeData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::OverrideData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::ReceiveData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::RouteTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip4::TransmitData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::AddressInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::CompletionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::CompletionTokenPacket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::ConfigData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::FragmentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::IcmpType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::ModeData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::NeighborCache"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::OverrideData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::ReceiveData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::RouteTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::ip6::TransmitData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::managed_network::CompletionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::managed_network::CompletionTokenPacket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::managed_network::ConfigData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::managed_network::FragmentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::managed_network::ReceiveData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::managed_network::TransmitData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::mp_services::CpuPhysicalLocation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::mp_services::CpuPhysicalLocation2"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::mp_services::ExtendedProcessorInformation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::mp_services::ProcessorInformation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::partition_info::Protocol"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::partition_info::ProtocolInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::simple_network::Mode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::simple_network::Statistics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::simple_text_output::Mode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::CloseToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::CompletionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::ConnectionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::FragmentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::IoToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::IoTokenPacket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::ListenToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::Option"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::ReceiveData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp4::TransmitData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::AccessPoint"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::CloseToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::CompletionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::ConfigData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::ConnectionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::FragmentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::IoToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::IoTokenPacket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::ListenToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::Option"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::ReceiveData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::tcp6::TransmitData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::timestamp::Properties"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp4::CompletionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp4::CompletionTokenPacket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp4::ConfigData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp4::FragmentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp4::ReceiveData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp4::SessionData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp4::TransmitData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp6::CompletionToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp6::CompletionTokenPacket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp6::ConfigData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp6::FragmentData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp6::ReceiveData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp6::SessionData"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: protocols::udp6::TransmitData<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::CapsuleBlockDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::CapsuleBlockDescriptorUnion"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::CapsuleHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::CapsuleResultVariableFMP<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::CapsuleResultVariableHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::ConfigurationTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::ConformanceProfilesTable<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::DebugImageInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::DebugImageInfoNormal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::DebugImageInfoTableHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::MemoryAttributesTable<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::MemoryDescriptor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::OpenProtocolInformationEntry"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::PropertiesTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::RtPropertiesTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::SystemTablePointer"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::TableHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::TimeCapabilities"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::VariableAuthentication2<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::VariableAuthentication3"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::VariableAuthentication3CertId<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::VariableAuthentication3Nonce<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: system::VariableAuthentication<u32>"
+bodies = 1

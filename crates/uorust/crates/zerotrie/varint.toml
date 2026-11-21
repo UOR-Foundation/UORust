@@ -1,0 +1,35 @@
+[[fn]]
+path = "zerotrie::MAX_VARINT_LENGTH"
+kappa = "62027a252686bb4a45d3a56ab236d7bb2d70d591ebe42e679eb0f9579c0620ce"
+embedded = "1378b9f5b12c5cd2bc722e15fc0dda0a2717ed741a6096512b5c2135c33882e7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item core::num::<impl usize>::BITS"
+
+[[fn]]
+path = "zerotrie::read_varint_meta2"
+kappa = "7fa826963645b2e30b3c05e06090d98a539be80a53a69a17d969b5f96ff6b494"
+embedded = "39f9af10823650fc059f9c5c42db711920c60b7438743bf8d0f45fe0f3a54c5f"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u8]>::split_first"
+
+[[fn]]
+path = "zerotrie::read_varint_meta3"
+kappa = "bbe47cbe1cf5b37a0f849e19db5145e3cbdd56b9683493b62f5b936972cfdf0b"
+embedded = "f23bd90a6dc4c5364c8f04c46231f8910fa6fd9923c4e99de7e16f58adc54b22"
+status = "residue"
+cause = "mir::TerminatorKind::Call: slice::<impl [u8]>::split_first"
+
+[[fn]]
+path = "zerotrie::write_varint_meta2"
+kappa = "56db5fc194f232401634205acd2c2c66c5b6971cc0b9db2c25e69b164c3f1d1e"
+embedded = "a0129e486f238c57a52a4335519303144036f013248fff9f2b1bc08250c08c13"
+status = "residue"
+cause = "mir::Ty: builder::konst::store::ConstArrayBuilder<10, u8>"
+
+[[fn]]
+path = "zerotrie::write_varint_meta3"
+kappa = "42866fb6761e6ceeb3bbef04d0bf726edf6929876fb81df18b8ebefdac8bee19"
+embedded = "8854257533c389c53a02524bdecd5fc29cf23bd7f11c56f91c7ba0e26173634a"
+status = "residue"
+cause = "mir::Ty: builder::konst::store::ConstArrayBuilder<10, u8>"
+

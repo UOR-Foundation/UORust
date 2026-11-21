@@ -1,0 +1,94 @@
+# The debugid register (written by `uorust crate debugid@0.8.0`; do not edit): every body of
+# debugid's MIR at debugid 0.8.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 57
+translated = 4
+residue = 53
+
+[module.crate]
+bodies = 57
+translated = 4
+residue = 53
+
+[embedding]
+bodies = 57
+embedded = 57
+evaluable = 57
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: DebugId"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: CodeId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Uuid"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CodeId::new: debugid's MIR stops at mir::AggregateKind::Closure: <impl at src/lib.rs:423:1: 423:12>::new::{closure#0}: mir::TerminatorKind::Call: char::methods::is_ascii_hexdigit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseCodeIdError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseDebugIdError"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:423:1: 423:12>::new::{closure#0}: mir::TerminatorKind::Call: char::methods::is_ascii_hexdigit"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <String as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <[u8; 16] as Default>::default"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: CodeId::as_str: debugid's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BreakpadFormat<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParseOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: uuid::Uuid"
+bodies = 1

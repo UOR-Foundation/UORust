@@ -1,0 +1,139 @@
+[[fn]]
+path = "ring::_TEST_AS_USIZE_BYTES_ROUNDED_UP_EVEN"
+kappa = "47c3164716443258b44a9350ae67a854d83f7d0637e3c315e29e6c18e2cd8d41"
+embedded = "75bb4148cf238548fb9fb002e153a610d2157a74de86ed9929203368bd9280e9"
+status = "residue"
+cause = "mir::Operand::Constant: bits::_TEST_AS_USIZE_BYTES_ROUNDED_UP_EVEN::promoted[0]: type outside the lift: bits::BitLength"
+
+[[fn]]
+path = "ring::_TEST_AS_USIZE_BYTES_ROUNDED_UP_ONE_BIT_HIGH"
+kappa = "4b256e118975ddf97242e7acb1bbacc58e0111d203a960058e1109065f11688f"
+embedded = "9a6a3db99c71d0fe36e90209e049da0f9441a13e7a65465970b1fa77eee29d22"
+status = "residue"
+cause = "mir::Operand::Constant: bits::_TEST_AS_USIZE_BYTES_ROUNDED_UP_ONE_BIT_HIGH::promoted[0]: type outside the lift: bits::BitLength"
+
+[[fn]]
+path = "ring::_TEST_AS_USIZE_BYTES_ROUNDED_UP_SEVEN_BITS_HIGH"
+kappa = "519662e7b1c97fa785b547e540da09759ea4f646e06b342c6c50bfaffd60d574"
+embedded = "a74bc8e7103b96e24e8ec59612e26681e8562959720354185243b7878c3bbff4"
+status = "residue"
+cause = "mir::Operand::Constant: bits::_TEST_AS_USIZE_BYTES_ROUNDED_UP_SEVEN_BITS_HIGH::promoted[0]: type outside the lift: bits::BitLength"
+
+[[fn]]
+path = "ring::bits::<impl at src/bits.rs:22:10: 22:15>::clone"
+kappa = "7dd95862f0bb1fe4181b8c4385387e7d28008b948b80f3c6a39b165cd6c004e3"
+at = "T=u32"
+embedded = "6895634144564b9c9b587a57b324971535d0e19969d9e796eb027db7a8fdb198"
+status = "residue"
+cause = "mir::Ty: bits::BitLength<u32>"
+
+[[fn]]
+path = "ring::bits::<impl at src/bits.rs:22:23: 22:28>::fmt"
+kappa = "b043460161bb0f888b316eb1b27e65741643b13febfa346386aa9973f5740095"
+at = "T=u32"
+embedded = "209eee195cf8efe0f5db43ba0211554c2712d87e48a95b03a38159d9e4401f6f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "ring::bits::<impl at src/bits.rs:22:30: 22:32>::assert_fields_are_eq"
+kappa = "7e6cc774472d1513b844af4af6eed1ba11559d60bc22cf7b788961c4cc58e91e"
+embedded = "84ff4e6ababf95b964709cbe65da631401ba5bd847b420d85a62b7bb9c87fd7d"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "ring::bits::<impl at src/bits.rs:22:34: 22:43>::eq"
+kappa = "086a6407ec9bbb5888ee74854d37a6d9a27fce0384ba177b9a4cb2380fd25762"
+at = "T=u32"
+embedded = "51d6377ffd00aa4b5ddc2ab1ba9caa51d106c3144167e19e89197e7f081de75e"
+status = "residue"
+cause = "mir::Ty: BitLength<u32>"
+
+[[fn]]
+path = "ring::bits::<impl at src/bits.rs:22:45: 22:55>::partial_cmp"
+kappa = "ebb445f3b459d6807a89049283f2e7edb0d8c938a8c595d5f8eae2706c97465c"
+at = "T=u32"
+embedded = "6c56c5978acb799e4299d38c533c2891e9e74825cc4617e34cd933ade1d67410"
+status = "residue"
+cause = "mir::Ty: BitLength<u32>"
+
+[[fn]]
+path = "ring::bits::BitLength::as_bits"
+kappa = "d3a32cd0d92e08839eee1624cc58143c5d25fcb8b8e2646f4f8db5f8e7d76ed4"
+at = "T=u32"
+embedded = "405ce0f1eb09c6dcdc4eb50b89fad6f07133aec0248540030b446c27d6a3893d"
+status = "residue"
+cause = "mir::Ty: BitLength<u32>"
+
+[[fn]]
+path = "ring::bits::BitLength::as_usize_bytes_rounded_up"
+kappa = "48b6a109bf8d37c126c2d7ab1b0ee484b8f0d8cce8799347dc566fc8556e15d5"
+embedded = "87502167e947c556b0a3fb50352b5932126cf41a5a78e6e3214e3f7a932feb3f"
+status = "residue"
+cause = "mir::Ty: BitLength"
+
+[[fn]]
+path = "ring::bits::BitLength::from"
+kappa = "f6ad5f6bf4d7fc8141919deab153d93fab758cf9245982b57f557fb1abf723b0"
+embedded = "a84b675182bed907e3a9c861c4acaa238b96de9f3ec9db8d9631862e331808dc"
+status = "residue"
+cause = "mir::Ty: bits::BitLength<u64>"
+
+[[fn]]
+path = "ring::bits::BitLength::from_bits"
+kappa = "bb413fa6f59c0faa4a53cc91d37ae01209120d523470c43fdefade2a1e7cf9b3"
+at = "T=u32"
+embedded = "1024574975b7bda3ed72a98fa32ac77075630184b085d8bfcc20e28c93e3f084"
+status = "residue"
+cause = "mir::Ty: bits::BitLength<u32>"
+
+[[fn]]
+path = "ring::bits::BitLength::from_byte_len"
+kappa = "6be67c6a5aafd437754d0ceae8a7bdedd173e51fa172002bf18202501ac8afa9"
+embedded = "1ce6cceb7fcf83ee4566b741e7921e511d9c8661112c23c2f9e25d69d971f458"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::bits::BitLength::from_byte_len#2"
+kappa = "033300059f2d2c529c0ba9d662453537ca327039950a86f2555c357675338809"
+embedded = "189fb9ed20cdf74ad8eb23828a80512703ecdbc1bf2f6994f8f13faae0f77ace"
+status = "residue"
+cause = "mir::Ty: bits::BitLength<u64>"
+
+[[fn]]
+path = "ring::bits::BitLength::from_byte_len#3"
+kappa = "9f0fe6417c0a32845b7e6077f884e7e4d261edd2a98d69d8e683d251047b1939"
+embedded = "1c581e8bb2e47e5b23721ae4e3dea569a44b363f803a5c2ca2c501373d0cb433"
+status = "residue"
+cause = "mir::Ty: bits::BitLength<u64>"
+
+[[fn]]
+path = "ring::bits::BitLength::half_rounded_up"
+kappa = "95ddacb9416307dc6665d64cc54080bfa8cf748e98e3286043c1e1ced9a10c60"
+embedded = "f82657ed9f5cce678db6dc5e7d1be37b6b4c326586c0a7b2156b9d0f6bb99512"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+
+[[fn]]
+path = "ring::bits::BitLength::to_be_bytes"
+kappa = "782654b040100113430ca05018ce8d517e2d7cf23bc862b1f9f0373bb331d65a"
+embedded = "3632de5ce02e37d139d6ded89f42e386c777b57f107ab82aa4381edc0c76124d"
+status = "residue"
+cause = "mir::Ty: BitLength<u64>"
+
+[[fn]]
+path = "ring::bits::BitLength::try_from"
+kappa = "2ed6513fb0d5cdca15f5938ddd87713ba04b729661261041f216a1ca567cd712"
+embedded = "49d8cba3e9c0aa03f05413bfeb3ad348fc81b61d2fff9829e713216fb06283b7"
+status = "residue"
+cause = "mir::Ty: core::num::NonZero<u64>"
+
+[[fn]]
+path = "ring::bits::BitLength::try_sub_1"
+kappa = "6ca9e57588efccb4ff6a8555a71a57bad86ede8cfc4a54a46f620a73bb832cec"
+embedded = "231f04b284a05005c3f8170a6c624f01562a18386f68054c55c7104d7cfb4327"
+status = "residue"
+cause = "mir::Ty: bits::BitLength"
+

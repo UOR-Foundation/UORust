@@ -1,0 +1,1485 @@
+# The image register (written by `uorust crate image@0.25.10`; do not edit): every body of
+# image's MIR at image 0.25.10, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 1777
+translated = 22
+residue = 1755
+
+[module.animation]
+bodies = 36
+translated = 1
+residue = 35
+
+[module.codecs]
+bodies = 644
+translated = 9
+residue = 635
+
+[module.color]
+bodies = 173
+translated = 10
+residue = 163
+
+[module.error]
+bodies = 57
+translated = 0
+residue = 57
+
+[module.hooks]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.imageops]
+bodies = 146
+translated = 2
+residue = 144
+
+[module.images]
+bodies = 439
+translated = 0
+residue = 439
+
+[module.io]
+bodies = 91
+translated = 0
+residue = 91
+
+[module.math]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.metadata]
+bodies = 101
+translated = 0
+residue = 101
+
+[module.traits]
+bodies = 57
+translated = 0
+residue = 57
+
+[module.utils]
+bodies = 9
+translated = 0
+residue = 9
+
+[embedding]
+bodies = 1775
+embedded = 1775
+evaluable = 1772
+blocked = 3
+
+[[construct]]
+construct = "AggregateKind::Adt of an enum whose discriminants the crate's source does not give"
+bodies = 3
+
+[differential]
+bodies = 11
+theorems = 127
+
+[[cause]]
+cause = "mir::Ty: error::ImageError"
+bodies = 237
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 120
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 67
+
+[[cause]]
+cause = "mir::Ty: images::dynimage::DynamicImage"
+bodies = 60
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 47
+
+[[cause]]
+cause = "mir::Ty: images::buffer::ImageBuffer<u32"
+bodies = 39
+
+[[cause]]
+cause = "mir::Ty: color::Rgb<u32>"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: color::ColorType"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: color::Rgba<u32>"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: color::Luma<u32>"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: color::LumaA<u32>"
+bodies = 32
+
+[[cause]]
+cause = "mir::Ty: ImageBuffer<u32"
+bodies = 23
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 19
+
+[[cause]]
+cause = "mir::Ty: color::ExtendedColorType"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: DynamicImage"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: P"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: traits::private::LayoutWithColor"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: SampleLayout"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: metadata::Orientation"
+bodies = 15
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: color::Rgba<u8>"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: error::UnsupportedError"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: animation::Frame"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: dyn for<'a"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: io::format::ImageFormat"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: ImageFormat"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: ViewMut<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::decoder::Rgbe8Pixel"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: codecs::ico::decoder::DirEntry"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::PnmHeader"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: flat::FlatSamples<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: imageops::sample::GaussianBlurParameters"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: images::buffer::Pixels<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Dim"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: color::Luma<u8>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::Cicp"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<usize>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by GenericImageView"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CicpRgb"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExtendedColorType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: FloatNearest"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: codecs::bmp::decoder::DecoderError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: codecs::dds::DecoderError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: codecs::ico::decoder::DecoderError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: codecs::tga::encoder::EncoderError"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: error::ImageFormatHint"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: images::flat::FlatSamples<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: images::flat::View<&[u32]"
+bodies = 6
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MIN"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ChannelWidthError"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EnumeratePixelsMutPar<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: EnumeratePixelsPar<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ErrorDataSource"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: IcoEntryImageFormat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: LineType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PixelsMutPar<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PixelsPar<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: PnmHeaderLine"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: View<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: animation::Delay"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::decoder::PnmDecoder<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::decoder::TupleType"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::encoder::FlatSamples<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: color::Luma<u16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: color::LumaA<u16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: color::LumaA<u8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: color::Rgb<u16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: color::Rgb<u8>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: color::Rgba<u16>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: limits::Limits"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: metadata::LoopCount"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by NumCast"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Cicp"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Delay"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DxtVariant"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NormalForm"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PixelsMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Ratio"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Rect"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SubImageInner<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: animation::Frames<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codecs::avif::encoder::AvifEncoder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codecs::bmp::decoder::BmpDecoder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codecs::png::FilterType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::encoder::PnmEncoder<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: codecs::tga::header::ImageType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: images::flat::SampleLayout"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: images::sub_image::SubImage<&u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: impl GenericImageView<Pixel = u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::slice::ChunksExactMut<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ImageDecoder"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Pixel"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: bytemuck::cast_slice"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::vec::Vec::clear"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: BiLevel"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Bitfield"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CicpMatrixCoefficients"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CicpTransferCharacteristics"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CicpVideoFullRangeFlag"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DerivedLuminance"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EnumeratePixels<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EnumeratePixelsMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: I"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LayoutWithColor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: LimitErrorKind"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PixelDensity"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PnmHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PnmSubtype"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: animation::Ratio"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: cicp::CicpColorPrimaries"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::avif::encoder::ColorSpace"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::bmp::decoder::Bitfields"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::decoder::DecoderError"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::decoder::HdrDecoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::decoder::HdrMetadata"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::jpeg::encoder::Component"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::jpeg::encoder::PixelDensity"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::ArbitraryHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::BitmapHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::GraymapHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::PixmapHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::PnmSubtype"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::tga::header::Header"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: codecs::webp::decoder::WebPDecoder<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: flat::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: images::buffer::EnumeratePixels<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: images::buffer::PixelsMut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: images::buffer::Rows<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: images::flat::FlatSamples<&[u32]>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: images::sub_image::SubImage<&mut u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: images::sub_image::SubImageInner<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: io::image_reader_type::Format"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: io::image_reader_type::ImageReader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: io::limits::Limits"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: limits::LimitSupport"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::CicpRgb"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::CicpTransform"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sample::FilterType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: a const parameter's value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <T as traits::Pixel>::CHANNEL_COUNT"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item imageops::filter_1d::Q0_15"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Bitfields"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CompressionType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnumerateRows<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EnumerateRowsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: GaussianBlurParameters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ImageFormatHint"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OsString"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PacketType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParameterErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PixelDensityUnit"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Rows<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RowsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RunOrNot"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SampleEncoding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SubImage<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TgaOrientation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnsupportedErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: W"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::bmp::decoder::ImageType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::gif::GifEncoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::encoder::RunOrNot"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::ico::encoder::IcoFrame<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::jpeg::encoder::JpegEncoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::openexr::OpenExrDecoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::png::ApngDecoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::png::CompressionType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::png::PngDecoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::png::PngEncoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::encoder::TupleEncoding<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::SampleEncoding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::tga::decoder::TgaOrientation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: codecs::tga::encoder::TgaEncoder<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::fmt::rt::Argument<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn io::decoder::ImageDecoder"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::DecodingError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::EncodingError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::LimitError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::LimitErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::ParameterErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: error::UnsupportedErrorKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: imageops::filter_1d::ArenaColumns<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::buffer::EnumeratePixelsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::buffer::EnumerateRows<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::buffer::RowsMut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::buffer_par::EnumeratePixelsPar<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::buffer_par::PixelsPar<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::flat::Dim"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::flat::FlatSamples<&mut [u32]>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::flat::View<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::flat::ViewMut<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::generic_image::Pixels<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: images::sub_image::SubImage<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: io::limits::LimitSupport"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: math::rect::Rect"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::RgbTransforms<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Bounded"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by GenericImage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: metadata::cicp::Cicp::qualify_stability::_::promoted[2]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <P as traits::Pixel>::CHANNEL_COUNT"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <u32 as traits::Pixel>::HAS_ALPHA"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item codecs::jpeg::encoder::JpegEncoder::write_icc_profile_chunks::MAX_CHUNK_SIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Use"
+bodies = 1
+
+[[cause]]
+cause = "mir::StatementKind::Assign: a `&mut` parameter rebound to another borrow"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as AsPrimitive>::as_"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as From>::from"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as From>::from"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as Ord>::cmp"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as NumCast>::from"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as ToPrimitive>::to_u64"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: codecs::dxt::decode_dxt_colors: image's MIR stops at type outside the lift: std::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: codecs::jpeg::entropy::derive_codes_and_sizes: image's MIR stops at mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::from_le_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::is_multiple_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::unsigned_abs"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_chunks"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_chunks_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: images::buffer::ImageBuffer::image_buffer_len: image's MIR stops at mir::Operand::Constant: the constant item <P as traits::Pixel>::CHANNEL_COUNT"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArbitraryTuplType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AutoBreak<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BMPHeaderType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BmpDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CicpTransform"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DdsDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DisposalMethod"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FilterImageSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FormatFullBytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GenericReader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: GifDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: IcoDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ImageReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OpenExrDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OsStr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PngDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QoiDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RowIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: SeekFrom"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ThumbnailSum<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TiffDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::avif::encoder::RgbColor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::bmp::decoder::Bitfield"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::bmp::decoder::ChannelWidthError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::bmp::decoder::RowIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::bmp::encoder::BmpEncoder<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::dds::DX10Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::dds::DdsDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::dds::Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::dds::PixelFormat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::dxt::DxtDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::dxt::DxtVariant"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::farbfeld::FarbfeldDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::farbfeld::FarbfeldEncoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::farbfeld::FarbfeldReader<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::gif::FrameInfo"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::gif::GifDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::gif::GifFrameIterator<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::gif::Repeat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::decoder::LineType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::encoder::HdrEncoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::encoder::NorunCombineIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::hdr::encoder::RunIterator<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::ico::decoder::IcoDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::ico::decoder::IcoEntryImageFormat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::ico::decoder::InnerDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::ico::encoder::IcoEncoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::jpeg::decoder::JpegDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::jpeg::encoder::BitWriter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::jpeg::encoder::EncoderError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::jpeg::encoder::PixelDensityUnit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::openexr::OpenExrEncoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::autobreak::AutoBreak<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::decoder::DecoderError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::decoder::ErrorDataSource"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::decoder::PnmHeaderLine"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::encoder::CheckedDimensions<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::encoder::CheckedHeader<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::encoder::CheckedHeaderColor<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::encoder::CheckedImageBuffer<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::ArbitraryTuplType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::pnm::header::HeaderRecord"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::qoi::QoiDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::qoi::QoiEncoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::tga::decoder::ColorMap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::tga::decoder::TgaDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::tiff::TiffDecoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::tiff::TiffEncoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: codecs::webp::encoder::WebPEncoder<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn io::encoder::ImageEncoderBoxed"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::ParameterError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: error::TryFromExtendedColorError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: exr::meta::header::Header"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: generic_image::Pixels<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: gif::Frame<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: gif::Repeat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imageops::colorops::BiLevel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imageops::filter_1d::FilterImageSize"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imageops::filter_1d::KernelShape"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imageops::sample::FilterType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: imageops::sample::ThumbnailSum<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::buffer::ConvertColorOptions"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::buffer::EnumerateRowsMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::buffer_par::EnumeratePixelsMutPar<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::buffer_par::PixelsMutPar<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::flat::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::flat::FlatSamples<&[u16]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::flat::FlatSamples<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::flat::FlatSamples<std::vec::Vec<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::flat::NormalForm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::flat::View<&mut [u32]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: images::flat::ViewMut<&mut [u32]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl Into<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: io::encoder::MethodSealedToImage"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::ExifEndian"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::CicpColorPrimaries"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::CicpMatrixCoefficients"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::CicpTransferCharacteristics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::CicpVideoFullRangeFlag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::ColorProfile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: metadata::cicp::DerivedLuminance"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: moxcms::Chromaticity"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: moxcms::CicpColorPrimaries"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: moxcms::ColorProfile"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: moxcms::MatrixCoefficients"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: moxcms::TransferCharacteristics"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ravif::ColorModel"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rgb::Rgba<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::collections::TryReserveError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::iter::Copied<std::slice::Iter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::num::TryFromIntError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::ops::Range<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::str::Chars<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tiff::tags::Tag"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: traits::private::PrivateToken"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zune_core::bytestream::ZCursor<&[u8]>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: zune_core::colorspace::ColorSpace"
+bodies = 1

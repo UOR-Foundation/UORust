@@ -1,0 +1,51 @@
+# The utf8parse register (written by `uorust crate utf8parse@0.2.2`; do not edit): every body of
+# utf8parse's MIR at utf8parse 0.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 16
+translated = 0
+residue = 16
+
+[module.crate]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.types]
+bodies = 8
+translated = 0
+residue = 8
+
+[embedding]
+bodies = 16
+embedded = 16
+evaluable = 16
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: types::State"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Parser"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: types::Action"
+bodies = 1

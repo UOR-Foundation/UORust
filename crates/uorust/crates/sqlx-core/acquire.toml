@@ -1,0 +1,16 @@
+[[fn]]
+path = "sqlx-core::acquire::<impl at src/acquire.rs:80:1: 80:52>::acquire"
+kappa = "6fe7d6db579d0e5736c87a7bbf53ef49cdcbc7e43ed570447dacd8a31a7e4741"
+at = "DB=u32"
+embedded = "ea935f19b7c33f13f95c208915fbc573c26215c3f947661859d7160193eee04c"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<pool::connection::PoolConnection<u32>, error::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-core::acquire::<impl at src/acquire.rs:80:1: 80:52>::begin"
+kappa = "ceed254b94a5abc2992ae85dc0c8632340c96d088347e0cc353a68290aeb1f58"
+at = "DB=u32"
+embedded = "4c80951e2d3234ea61d9fd3c6437cb13973c4403dacf1ff2d7d3ecdb9b8a81b1"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<transaction::Transaction<'_, u32>, error::Error>> + std::marker::Send"
+

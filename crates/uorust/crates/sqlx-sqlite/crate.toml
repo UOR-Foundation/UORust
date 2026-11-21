@@ -1,0 +1,74 @@
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/acquire.rs:101:9: 101:61>::acquire"
+kappa = "01dd4abe768fda4e754ef6bf09518a47c34171c4321a8f62b53756019299fb2e"
+embedded = "aee56ef13ddf41458bc5773e44721f5e06e083c0a20cde53b9e8ae439808bb59"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<&mut connection::SqliteConnection, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/acquire.rs:101:9: 101:61>::begin"
+kappa = "9dc1c113e1da62e915639ec6a1d37992723cff7a839727642374ed9102f251cd"
+embedded = "d65f3437d2c748cf71d40eee9eb884024f3f2029a8c8af9fe66f4ae515ba4e6a"
+status = "residue"
+cause = "mir::Ty: dyn futures_core::Future<Output = std::result::Result<sqlx_core::transaction::Transaction<'_, database::Sqlite>, sqlx_core::Error>> + std::marker::Send"
+
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/arguments.rs:40:9: 42:27>::into_arguments"
+kappa = "0309249fe56f96bc20f680687c14053c011bb75089e97792e00f677d1579a6fd"
+embedded = "81bbb7cf411552e7a6e9c3449751218cf66cfe225c8b899f1be91d1423efdd8c"
+status = "residue"
+cause = "mir::Ty: arguments::SqliteArguments"
+
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/column.rs:116:9: 116:55>::index"
+kappa = "3ef7dcc500178d02c656f456be046274edcc6a1e491a2f910a8df28c599a175d"
+embedded = "84c9e4bc3884c33071bffa203e35a55071d234642d89ce1b80cb9d37bfb5feb6"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/column.rs:133:9: 133:55>::index"
+kappa = "70762daff61793bb56ef4611257bdbb7f28b1030289705191929a5921fa56d19"
+embedded = "7921bbb5bb63e28c9dca6ed3d1a9147fec94e9dcf9a0c0772ca64fd39fc4a4f8"
+status = "residue"
+cause = "mir::Ty: sqlx_core::Error"
+
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::encode"
+kappa = "345e1d57b6efea5f8de8add812d73c2faf3cfa8e29e937002704d73809118ac8"
+at = "T=u32"
+embedded = "2ca79123c63cfe8e90df986a422e53626c4bdc223f1fc8097eb79e5bde04f615"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::encode_by_ref"
+kappa = "6758050b548d1cb347cff4b75ed0e2e78bb0fd74b192489ad6d6726c1e3319ec"
+at = "T=u32"
+embedded = "1b84b32e72278cdbab062ee423a949708937cd4e17b11c9a0ff181937217f57c"
+status = "residue"
+cause = "mir::Ty: sqlx_core::encode::IsNull"
+
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::produces"
+kappa = "d2c40faf72fe751bdaf4d8652195c0c1ddffc5e0ad3f287d053454b1f3a837e1"
+at = "T=u32"
+embedded = "42b2963940efae31d64da9f0c8b8268962b20cb2d3d7464fe9eea85f751e5b59"
+status = "residue"
+cause = "mir::Ty: type_info::SqliteTypeInfo"
+
+[[fn]]
+path = "sqlx-sqlite::<impl at <registry>/index.crates.io-1949cf8c6b5b557f/sqlx-core-0.9.1/src/encode.rs:91:9: 93:80>::size_hint"
+kappa = "118e0e8d83ae0aef9b457afbf9b9e4e70194c4252688e639e398046bd915956d"
+at = "T=u32"
+embedded = "eefa6cc9c831e3926237c127874422496a485fb5bfa3118a6f4b2253bdc6fd0d"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <u32 as sqlx_core::encode::Encode<'_, Sqlite>>::size_hint"
+
+[[fn]]
+path = "sqlx-sqlite::describe_blocking"
+kappa = "a05e6b47c25726622284d14b768fd52ed545400201a59c26dfbe4ed7b3c6dc98"
+embedded = "3308e49b39492948f71ac79dd976b6db94b4fcfb63a90932978e73900ba56546"
+status = "residue"
+cause = "mir::Ty: database::Sqlite"
+

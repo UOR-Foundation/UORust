@@ -1,0 +1,494 @@
+[[fn]]
+path = "spin::MAX_READERS"
+kappa = "a87efb6ac1bfc3bc3075baa5ede48d6381f9e881c27ee620fae15b3036a82fe9"
+embedded = "78de79d9e1e8145575baba3f1dd33075c5bd77080e2eede29ef51e87c2d1b97e"
+status = "residue"
+cause = "mir::Operand::Constant: rwlock::READER: mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "spin::READER"
+kappa = "e22910689d2eb1c718908eb90d406301e088937ebd2c88ab6b7885930b40535b"
+embedded = "9dda56dc42aa030a6863b85b56fa6c0753cc18295ec9b3c95da29f5d831f7f27"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "spin::UPGRADED"
+kappa = "17570230952ba4163b614e041e480aa7432fa1f65bb22ef9fb63950ef831655a"
+embedded = "d0a9fce1fbfede23f72b8e0e15ff28127035a9e56b2c892ba025a5825bffb854"
+status = "residue"
+cause = "mir::BinOp::Shl: on Nat and i32"
+
+[[fn]]
+path = "spin::compare_exchange"
+kappa = "7dc90c4d7ae63c683d7a2397751f5588218a2606673b6798bff93cc7567d1c53"
+embedded = "37b6e4bea388dcd510fb07532b291af4e0f4f20aa5039a28432d51d9fd1eeafb"
+status = "residue"
+cause = "mir::Ty: Atomic<usize>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:800:1: 800:74>::INIT"
+kappa = "22ba2b23ae572dc5bf564b70073a43a109b206837a13b83f705fac1b29d92bd4"
+at = "R=u32"
+embedded = "36533f5735bef65385a99e35dd86a77027303561549573d13150c742f2d5ef06"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:800:1: 800:74>::is_locked"
+kappa = "8d13b534101b5744dd60d581897800288527c41726103e1c7e33d13e8bb0a6f9"
+embedded = "28997387781e451739b3b1248114cd7f238b91e946de1042c062491832eeaf59"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:800:1: 800:74>::lock_exclusive"
+kappa = "2b4606373a3f7b984ca8e8848a8bd40d1aaabf157535d91c02f2309e2591ef1f"
+at = "R=u32"
+embedded = "384c91478924791742d81cca8068a9196be30849e630210c8060ab1bf3cd3b04"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:800:1: 800:74>::lock_shared"
+kappa = "16a84ceec4a088cd7c1ad157ddb3991a978854401d7f91678352566e4897e252"
+at = "R=u32"
+embedded = "bd3ee35c66982d256e09e91f45ec08672429afe957ba437a40433d2fb7e58667"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:800:1: 800:74>::try_lock_exclusive"
+kappa = "cb3d1b8a4d8740dd5edc55bd3ed947e73abb0e50775e736295bf65f6cfbd7314"
+at = "R=u32"
+embedded = "6da64cb50bad4a3e2895c7dcd6c73b62d17b1678b9027140f4c74d7a3e71ca2d"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:800:1: 800:74>::try_lock_shared"
+kappa = "f2b582be25b0cab8ccf0e586c47003ff7fcd385796435e8c242d77b8a1846c2e"
+at = "R=u32"
+embedded = "6270f279b980180e16a30a2b46ee738b0f6ae0229ee70e9d93b7c6a2f01858a4"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:800:1: 800:74>::unlock_exclusive"
+kappa = "9678c6d659efe97ab91a73afb162ee72f169f3d94f3b2bbf86983c522df9b832"
+at = "R=u32"
+embedded = "85d5e376cedae30e262927b7065a1ed5baced76aa49c890221ac4bf1c3c7afbf"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:800:1: 800:74>::unlock_shared"
+kappa = "ca849b1ad427352f920970c2138e344fb41a2178169cf30d4d3eb623dcbc8f3c"
+at = "R=u32"
+embedded = "572520ff39e2b1c94feb4fa9000ec93c2ce9dba009f89478704e658d30c32626"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:846:1: 846:81>::lock_upgradable"
+kappa = "ce58792d5d0a3d16cabbd83650058573cf094a13eba3d057002178d4c7176c08"
+at = "R=u32"
+embedded = "658190a12689968c2d1ac074bafa4d1435d259d48d5792b1748709d5b4c1ed77"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:846:1: 846:81>::try_lock_upgradable"
+kappa = "25e87e585b4b2cc8a34d7c4d4ef79a80c1bcb3fb9aaf93336f2edd5f7cb4b8dd"
+at = "R=u32"
+embedded = "007205e3f7ce8bba1fda9a8ab99e3786a41c991dbfa81f5245744ec75a2b8f5c"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:846:1: 846:81>::try_upgrade"
+kappa = "2e16090129481f822bd83af79aea48c4c1a1072b4e5960d55b32e96e82ea1662"
+at = "R=u32"
+embedded = "46102228e034fc48e50f54203bf35e1c324ac5bdd811bcbe97ac05a15e01752e"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:846:1: 846:81>::unlock_upgradable"
+kappa = "f98d1badc157ee8c71c4429789bb5b27ae9ed89d35a4a4354f08e29fca8baa75"
+at = "R=u32"
+embedded = "edeb9f2b10494947da74ee6284ef7b12640049570d0fa305f2d5f7145a4554d3"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:846:1: 846:81>::upgrade"
+kappa = "9cc92b63e8e7e22d72ae1e2da573aa1a4b788d1a4999dddc49502c343fc4b78c"
+at = "R=u32"
+embedded = "369ed375c0facdf382485e4e0a48c205937491fe738493cfacc1623160816d39"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:882:1: 882:83>::downgrade"
+kappa = "fec9f357473c44cb5a3001fdc0814b84da5decb759b3c473749f8cd8dfcd0f04"
+at = "R=u32"
+embedded = "4b8cb8ea94555b5cda987481b349c871309445271150eb8d7981f1182c4e484e"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:890:1: 890:90>::downgrade_to_upgradable"
+kappa = "b43b52e5c5a1c5e5bf7ee9b293d4b7b0592f896db7c7dd731048234c70290699"
+at = "R=u32"
+embedded = "3a38880ccb466a1e8fded0559b3bb4064bc820abf53ba06edd65dcb45ef061b7"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::<impl at src/rwlock.rs:890:1: 890:90>::downgrade_upgradable"
+kappa = "f0fec066423ff2b4cfce034862d71c7203f1c006afc115bce5c78b7dd6d8344c"
+at = "R=u32"
+embedded = "b541629a8e8aa7cbd32e8b67ad73bae11fc56b17dce3d49d18de20f047068285"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<(), u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::acquire_reader"
+kappa = "14b0d25f087075fbbf70751e406a19c373b7fd46541a9a605cd77b635373cefa"
+embedded = "03d52f79bbfdb71ea8662e888740b53a1aba1ad9ca446d94d577e6e8b756fac1"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "spin::rwlock::RwLock::as_mut_ptr"
+kappa = "8e895e15bcae100bd9aa60c80a9a960c3080b8d2f796cd990d6d86c3052c8f0a"
+at = "T=u32"
+embedded = "3b682198f247709ae22c67eb51aba5e869689014a02da63539f73bba1f29f759"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "spin::rwlock::RwLock::default"
+kappa = "d06b7e8c4f4bd52c05abaa2a8a0ebc368363fe1f8eb88c9a85363cee9ef9367c"
+at = "R=u32, T=u32"
+embedded = "a453c6c7986f03c41fc2ebe4af72cf95e81d2e8f513c06390beaa035209428a1"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::fmt"
+kappa = "4269733a75740832a179c92fa4ebbe0280bf035eaaa86e6d5a06fede679ab4e8"
+at = "R=u32, T=u32"
+embedded = "1f8c242323195c4b8b074df5788c59f26c491a54ce818637d741dfbe3c91885d"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "spin::rwlock::RwLock::force_read_decrement"
+kappa = "3778a3dd3d10a46670b89a6e3566142cf4c47ce6df91f8a5a149e1c4485b2637"
+embedded = "2ab930430ed6fa9febef07f03c5686c79eb3b00268324017643a613f835a8319"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "spin::rwlock::RwLock::force_write_unlock"
+kappa = "6cc155039ac685883da56e32cdbedb3dbfba2b3f0b9a33d34ee8a108b2e6b57f"
+embedded = "b1977397cddf3636d09e82ee17e3c2e29df4cf981468db44c2447f6dc874b240"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "spin::rwlock::RwLock::from"
+kappa = "1acbbf95fa91ba2dde3f9530ca33ca1dfe8e41cbeed9f30e2d698408d2b78530"
+at = "R=u32, T=u32"
+embedded = "ef18570f8a9abda3093a68e3962619c19cc9fa98b08a8c07e03b90a79bf5841c"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::get_mut"
+kappa = "32a98224ba6390fbf813dc74a95a597f38f415c949e018d8ecdbfe4eda049335"
+at = "T=u32"
+embedded = "8473dc09cd5fa9e48e766c84c164614d2a6038a8590052a3d47f69e3f06af43c"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "spin::rwlock::RwLock::into_inner"
+kappa = "bba04cb57151fe8fb70a9877339defde0eff4a9b20fa4b9af8d1aeac2024033c"
+at = "T=u32"
+embedded = "3964ee2d71dfe33b038c27657e599cfede79ced030e0cd416a3e4d910936d7f4"
+status = "residue"
+cause = "mir::Ty: R"
+
+[[fn]]
+path = "spin::rwlock::RwLock::new"
+kappa = "d1de79c5d45e342182b025c2d5159102c316077953cbbe23b3e1a3feb3759fec"
+at = "R=u32, T=u32"
+embedded = "3b344ff5e0b7133ba001ebb0c8681e06ee86b07aa7d71f02a3faf079a644c73a"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLock<u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::read"
+kappa = "3bb5b7f6c4cc4555d50f3e027e8df46537b17d3f9199a7aeb72ac2fec90fed53"
+at = "R=u32, T=u32"
+embedded = "731beb2f1b8c7517274c6ea52926f116509da30def7d4189676f557f7e581ee0"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::reader_count"
+kappa = "8cb3a748fef85b06cf0f579301cc8145694b40c1c806f0736224813e8839c9de"
+embedded = "059cc8c18b19c0d464b84302c6ec4f19336a0a946774693e8159305403d408e4"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "spin::rwlock::RwLock::try_read"
+kappa = "47f6d16a04cfc92c8644dd82be04d348356b858e1e3135b97c62d32691c797b9"
+at = "R=u32, T=u32"
+embedded = "412ddabd551f1de45bd71fb5c5d6735ae0269346b948832f9668849439c0f1cd"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::try_upgradeable_read"
+kappa = "33fe94f9983798ce080978af0984677430463eeb975612e260527730a761bcb2"
+at = "R=u32, T=u32"
+embedded = "c5e8c96eb150074852905ee0280f48a2bf8d98cd20bb846bfa04000111f48f79"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockUpgradableGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::try_write"
+kappa = "7bfa628fafa9850b4657917c0bbc343c99ce2b250bb76f380139afcaba6ed060"
+at = "R=u32, T=u32"
+embedded = "854b41281e0817819464f0bdd17e8d6d90192def9d8873ac4411e5287a414e7c"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::try_write_internal"
+kappa = "b6777213720daf76f653639604e1af72ed7425164f4d115ce42602b8fe2be16d"
+at = "R=u32, T=u32"
+embedded = "157bf52a2974280665ba1a09d29942a33f1c0a79b02379f0f9781baa1c77b182"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::try_write_weak"
+kappa = "8d7495973dfef4b9e29a634ad024da3040212b34ea42f50e08ae3d6a33ee4409"
+at = "R=u32, T=u32"
+embedded = "427d56be948d762157b48380dd8f57e4f3e0a76304c8a1f83f036563468c766c"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::upgradeable_read"
+kappa = "24a4813e5b40e726ca7513f1bea0bbecddb9f4110e879ae3f8b30cbe35778c92"
+at = "R=u32, T=u32"
+embedded = "6976f3ec710e20e6bce66493af05a610e1b370a6d5c46370370917ba4b062b7d"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockUpgradableGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::write"
+kappa = "d255991c95666d05493577584882576d33b8ae0185907f5308e0b4a752dcbd67"
+at = "R=u32, T=u32"
+embedded = "f831d022aa92103ef10541bfb9132aa4c744d8d2f21a7b1d13cfcb37b4cef218"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLock::writer_count"
+kappa = "27d38f392b3d6e5828c211f470b7bcdc338c2ad946497e5ce1aa52c9d845484d"
+embedded = "07b38290bd40caaaac6884a71beb6a6f32051c2c4a8a3c1a82db3c7c704548f2"
+status = "residue"
+cause = "mir::Ty: T"
+
+[[fn]]
+path = "spin::rwlock::RwLockReadGuard::deref"
+kappa = "0f3f8283746b32ea61695f42cf919a9a82f229c200d175b50e4ec22c3a9b8160"
+at = "R=u32, T=u32"
+embedded = "f086bce4360a6ea8906623aa0bd50c962f0382f820661adb0f7bdfc4f6c5fc66"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockReadGuard::drop"
+kappa = "ba68c68ba80904794e533525ed65dc56f0f91660d58b9fcfc76113337e55e8ff"
+at = "R=u32, T=u32"
+embedded = "74965c88f6b62920eff5c803751e1feaf4586394f3a8d75621ee13c9cb4ddb45"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockReadGuard::fmt"
+kappa = "19d4de2dffe7f5655553a8b39fdb3ab01c036b13ccec49e2422cc4a5f0bca841"
+at = "R=u32, T=u32"
+embedded = "a655c0a2e53bec771b85d565f47aa8f671a820ff036fbd72b78ab2159056780f"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "spin::rwlock::RwLockReadGuard::fmt#2"
+kappa = "d250d3b82dcab5bcc74c2f5c467dcfa11cfa7cd4f8ff596a8def1e8777f4d3f9"
+at = "R=u32, T=u32"
+embedded = "fc3a1b8628677eb3202e33a59401d30bff81aa3090d61b20a4913ef516fcf0ce"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "spin::rwlock::RwLockReadGuard::leak"
+kappa = "a92b748045666d75b6452cf4c0cac824f0f876e8eaec8cd3f9978510225f75df"
+at = "R=u32, T=u32"
+embedded = "4fe1f37861081b04cb0eecfeac6bccf1cf28ade6f46f239f5a2cd6861d5fc471"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::deref"
+kappa = "d1b21c1747a4742b00e5dd2c8ee38ac4e890ce7b62e42d6372b96bbbd67fe994"
+at = "R=u32, T=u32"
+embedded = "50bd0f81ba6f81b38b0290f8475ba824d5713c545e9f6fa91263b15803bc5757"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockUpgradableGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::downgrade"
+kappa = "de1455f7de3763cbfe808aa770fa9b96b28133222c084df24d153061ce613393"
+at = "R=u32, T=u32"
+embedded = "878cb2f6b3236ccdc7590db3ab26419d4de75724630dc9d1b650037dee4f9b82"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::drop"
+kappa = "ede2680f094a7a4e7058d8aff0f369e2eb08a4c241bf41faa5a2f8806565c373"
+at = "R=u32, T=u32"
+embedded = "8ceb207fef4b49b493de2804924ca302bc44a90ae0bf7996df16e11438b2e8b9"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockUpgradableGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::fmt"
+kappa = "05cc9331a6eb602e5b007f5340b4ace3473fab4f2c218fae4896493556ff2124"
+at = "R=u32, T=u32"
+embedded = "a836bbf76ab92e0dc097845e4c7d042f3b6808732e2e01ec69e0f5d09ffbfbaa"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::fmt#2"
+kappa = "7ff262252f6f2a4937c4178353479c71fdf2ed2078501a02f0f8d2eafe3b0564"
+at = "R=u32, T=u32"
+embedded = "6b578bda7c31a39d0787fec279bed5577b05ad5e07e70df12d6b0ab5fcc8e962"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::leak"
+kappa = "ffef8db19771c66a1b985d7ca3e304aaa1a8f2572c0064d0af09b436ef97f2e9"
+at = "R=u32, T=u32"
+embedded = "fc28c2899e88e29aae694d83c860534bedc3bffba5b6007f6bc7b40c9e3ef157"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockUpgradableGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::try_upgrade"
+kappa = "699e0c0a67c71ecd306518bafbbc61e78f11be3d56c3567d42def6d7cdc1af96"
+at = "R=u32, T=u32"
+embedded = "96ace87911b1ca4f1e44889379541c11ee624b1cf06df41197d417a10b232387"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::try_upgrade_internal"
+kappa = "fc4493e3554ef1e428f01762d9c4a493bf8777761d03fa27fb7a321cc35b240c"
+at = "R=u32, T=u32"
+embedded = "af4ffe47360e86576f658b7e8127cbd6fbf8a905833f07e2db5620e1e617624b"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::try_upgrade_weak"
+kappa = "5ffab5803d54f6454200fe7db2dde6e2474c10e9da1d614f9c47ae9c4da62d8d"
+at = "R=u32, T=u32"
+embedded = "af2cbed7baa38e5e6442e38e74eb2f0e8960145754083a9ce196ca8cb1cd8a8a"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockUpgradableGuard::upgrade"
+kappa = "0a043464e798ef9241963a4003e688ce31c30e6dd0c78cbd2e5fc2cb73607464"
+at = "R=u32, T=u32"
+embedded = "1282aae0164d88897e3a9c8e7cd927f7a215d648a2a4247254c8be19dae003ba"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockWriteGuard::deref"
+kappa = "a440435c993a3f4d67270fd351a30b3ce01e9716190c70f9bfe100f9e6eec32e"
+at = "R=u32, T=u32"
+embedded = "7789aa17d79a6fb4ed7a5ab39800066c66eda0a7ef73ce4e05afa87ec27381e4"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockWriteGuard::deref_mut"
+kappa = "88dde9e553854f9dcf0acc2587009a66c64628c2140031d6ad8741e40fb512d9"
+at = "R=u32, T=u32"
+embedded = "146d138812d70da457dfeb5e4196a88e93592e3d2dc372c8fc10bf12de427cda"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockWriteGuard::downgrade"
+kappa = "27031ad592d2765c7149b792bdea7bce55368983e513b4a691bd13fee337fa5a"
+at = "R=u32, T=u32"
+embedded = "b16b8539144dfc7ebcead3152d9d47404a407a5f5aed402e8ec71e6ead6982c0"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockReadGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockWriteGuard::downgrade_to_upgradeable"
+kappa = "641ca02431087fcf7d89914db2230b1e2a7641554f0c5427fca9645b5df259a4"
+at = "R=u32, T=u32"
+embedded = "dfd1e4860c228e736347610a871fea61ae5af885519595c2b1b11c78656cbb1a"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockUpgradableGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockWriteGuard::drop"
+kappa = "0ebf29bba9776e86e53e2e7c9488895874b0920b4d68c77952fe72c96c385d5b"
+at = "R=u32, T=u32"
+embedded = "27434253b639071f564db8448c01f917c5945eda57d01dd8cdc407030da0afba"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+
+[[fn]]
+path = "spin::rwlock::RwLockWriteGuard::fmt"
+kappa = "81b1db4ac6a984a40b20810836ff88b53cbac60df964b4d8d3d9ca9bf68b49ab"
+at = "R=u32, T=u32"
+embedded = "9a84c9e966ff1d93d5481182b0b2e2e5df6035510d96e334ac34537fc3bb6924"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "spin::rwlock::RwLockWriteGuard::fmt#2"
+kappa = "48a5de19ccffbd1fa7ebf07eac1852cc675f1c1f613d960b84dad39397646baa"
+at = "R=u32, T=u32"
+embedded = "8b3099bf46c238c15d819300efd0a7fe4a99e49a5719daac4838097a1022cef4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "spin::rwlock::RwLockWriteGuard::leak"
+kappa = "acb5de59d22f961bb05ccd5836d9285a9c2fc028cb4d5bd1cb3eb61424343ea3"
+at = "R=u32, T=u32"
+embedded = "0ca8acb71477ab38d06ce6abfde4620836d8e3f212530e2309387693c40b0885"
+status = "residue"
+cause = "mir::Ty: rwlock::RwLockWriteGuard<'_, u32, u32>"
+

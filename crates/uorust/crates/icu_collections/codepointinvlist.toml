@@ -1,0 +1,384 @@
+[[fn]]
+path = "icu_collections::SENTINEL"
+kappa = "101828513c64845f3c134b97915ed972b0c347b7bda26e95e1a2688cbd52992b"
+embedded = "003f304c1a155a98332367845bfedb3ed5490f97415af731574d3da4e8ec951f"
+status = "translated"
+digest = "25a20e3944ae168619d604d2327f9f973176951998dbf7b834ceb67d3ca1bd06"
+
+[[fn]]
+path = "icu_collections::__IMPL_VarULE_FOR_CodePointInversionListULE_ULE_SIZE"
+kappa = "c653fd6b0d68bec72aba816109481470df57b37b39a0b82e055bffc2d866b6ce"
+embedded = "79fc1aa920cc923d030345f03bdec16b2e9839105faf9e67e3ee2f3e3e983026"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "icu_collections::codepointinvlist::<impl at src/codepointinvlist/mod.rs:70:19: 70:24>::fmt"
+kappa = "ad6c253ab0744b7265d7af0b2f03f57b481a9fb26f6bfabcb054e6a8d18df96b"
+embedded = "7900840a13f7f7bbd605aba22f97f692eba3d862b6b245dd2833538b8f407c09"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::codepointinvlist::<impl at src/codepointinvlist/mod.rs:77:19: 77:24>::fmt"
+kappa = "afdd3b2ba1f47503b7ef62882a722eb2b6f27bd1af7af4671c165b2a0992f01e"
+embedded = "7789374fca8b3eac1ad6658cb16f286bf9604f06f7f9b3c55863cc17cecc625e"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::codepointinvlist::_::<impl at src/codepointinvlist/mod.rs:70:10: 70:17>::fmt"
+kappa = "c024880274986fdff53093bc23a6bad09b6f7edbcab8c3777ee15499be494b5e"
+embedded = "47d56369a7e196ed4f67c927addfe6405c6a20530aace77956812338842694f5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::codepointinvlist::_::<impl at src/codepointinvlist/mod.rs:77:10: 77:17>::fmt"
+kappa = "8ec816bba587e1d4c3f1be53b57544af06dc5ce26120d5b9979a5a07e4811725"
+embedded = "f9e88d78ab2394f9f70db49311c9fe0d92b0658a0f7c0fc3f4f2889d6545c2fd"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:49>::eq"
+kappa = "8c7720f68b36735ea30f489f4d474bead33f570a51138042027a00fee65855b6"
+embedded = "46cd75e58d78aedaf0deeccbce6eb9ad25b8e19a5c37e4e50ebc4dccc2317635"
+status = "residue"
+cause = "mir::Ty: CodePointInversionListULE"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:49>::fmt"
+kappa = "43721b361f80ef3d6efaf3ebe9ab0c81f7c44a2137a5c24e9fa54cb550819b3f"
+embedded = "dab3c053b1f3bb2a1ef29a9cc045f5671c6eca9eb88000f4e18537cf1becab54"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:49>::from_bytes_unchecked"
+kappa = "2cf40aac9f0ec4e2c8b58bec9cc8e3de1f55b6b692ea85681fa698b73959de3b"
+embedded = "c3685d189a1a6336d339105150b6f6e5d0c44d6edfcd80ba176d4d54ef7c1e75"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionListULE"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:49>::validate_bytes"
+kappa = "23379c7f3a2cedcd04706a4bf953437a271eb7e18d3edad30c6128eff026bbb8"
+embedded = "9167b85af824a943bef14e36b8ae79060e1139ed02fe3706fb1aecb34c9b30cc"
+status = "residue"
+cause = "mir::Ty: zerovec::ule::UleError"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:49>::validate_bytes::OFFSET_0"
+kappa = "cae4d0113494ba5f603ea1a3a99fcc5258a2ef3dcfd99df0536c5619d247b80c"
+embedded = "293de97a78753052edb610d2ee990a648ac3ebef6ee6c80d7e3e14b62bb58fe1"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <codepointinvlist::cpinvlist::CodePointInversionListULE as zerovec::ule::VarULE>::validate_bytes::ZERO"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:49>::validate_bytes::SIZE_0"
+kappa = "d2ce7f3b65e5b493c935c2c51e4e4b70ce6013e9894ec08df250041c1e8cb386"
+embedded = "f329fe90eaffba1e28ec1417b6acfddf5440ff974b0f6132d9d27440f7029525"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::encode_var_ule_as_slices"
+kappa = "461de4f4c37c9147d87c33a2b74ed0c8615aed626c3bf6057bbc69620acbf526"
+at = "R=u32"
+embedded = "fd81c41151ef79302840459b045dda6581d2cdd19345bfc57fef44db24cd0ca3"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::encode_var_ule_as_slices#2"
+kappa = "58967e9b21294a1cb950965818614da28b84b6b64847d39ac9d2497f54266cdc"
+at = "R=u32"
+embedded = "b208be6cd7d65a20784b8d08643ce13cb21730abc7e31364bbdec1eb3942a192"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::encode_var_ule_len"
+kappa = "8d84370bd9d4db0e75f54dd3968693f80a52176a2e29a32655dff4f285573f83"
+embedded = "a9d4f68d30e1c3bde80151fc539f87ba685d2af49323ceacd2ae40b5ea5060bc"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::encode_var_ule_len#2"
+kappa = "82efa7194fba3a8992604fb854d50d417196319a94c26d321cee28e734f92b90"
+embedded = "7dd081a298ab35543df30650bac2057cbf43e0f5383f7801386e7b40210caecf"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::encode_var_ule_write"
+kappa = "706ae6dd0719da92dee8f44500a7511ad078ccbdfc25681bffd5def4126978e3"
+embedded = "2474ee3f0bcaa3cd50c8ce856ea44f00a1b29b69df23ee86d89ff8c42e71ce2f"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::encode_var_ule_write#2"
+kappa = "48687c3848103fe4af3871f9bdb71a4d4789b60a40dc1da227d8b2182a1fab6f"
+embedded = "47deabf5be40aefdfef0815aa7429dd44536d1caf775e8960cea8422e25933ef"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::encode_var_ule_write::OFFSET_0"
+kappa = "748fcac73dda6ebd6239ce92ac54ee892caed0f7fecb2669603df4768376fa05"
+embedded = "0ee3b17e5fe8d66c3fe9b510751346b11b72651ad877026b9bc065a55189e699"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <codepointinvlist::cpinvlist::CodePointInversionList<'data> as zerovec::ule::EncodeAsVarULE<codepointinvlist::cpinvlist::CodePointInversionListULE>>::encode_var_ule_write::ZERO"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::encode_var_ule_write::SIZE_0"
+kappa = "e096297fd0926677b764c004db7f403d026e73c77b7ee12767c9a63eba3339cb"
+embedded = "67a92289850a7297fdc17d88a538e0aeedacc70e1a6ac4f812d1d0ab6d56d93c"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::from"
+kappa = "82037f9cab7d37235dea76cc86be132326d8aafb6c227949e7d390aac2b10716"
+embedded = "7e212384f6da9de886d7ec477336f7667476d4b68f6b3e99d221dae8bab32007"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:27:1: 27:51>::zero_from"
+kappa = "dd451a3609461f93650e8380f7e8c3adcb7392050274d6d31d2bbad211102eb4"
+embedded = "558554e1ec5ad1320bd7ebacfb23a26790cb00da1ff9aa605d3bf5067161d3d5"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:10: 30:15>::fmt"
+kappa = "83eb726a4e1deef03e2971d2ed67ca967fe0a0e6bbea68cd9afba64dd96f20ff"
+embedded = "566fa6a136dbd82a5d5bbeea9ba6de087399dedb749d120353a96195de5c4f76"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:17: 30:19>::assert_fields_are_eq"
+kappa = "5a861b484eacc33a5c47fbb3dc78488e331c102717546a2c6e20a9283e24ca1e"
+embedded = "6c9c4fe561f72e733d5fc8b0a7d6367fee58f7c265940b2352b15566bd818f54"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:21: 30:30>::eq"
+kappa = "48783f6ab94eef57a5569ac3f84a9d702d80cf46fad13199ed832d1e00025180"
+embedded = "30aacd4fbb428671f0680e9e06d198125f46f2024ed7a3f6911ed01657fbdd4c"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:32: 30:37>::clone"
+kappa = "b4d3156dd3d73644d7db94a90188695f94022a9b92ee68fbeaae4a1bc0d2875f"
+embedded = "1c3c1f86c6556634621979fd84a05476cecb3ff5121f821ff0df6637774a5b4a"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:39: 30:47>::make"
+kappa = "fccf6360334577a0786417e026e04fd697d68ce2f95c0338ee774968cfa59906"
+embedded = "8ac9e7c31efccc78b1841394dfdf0afd9703b92a0704a40f6f74d875b12669b7"
+blocked = ["intrinsic transmute of a type whose layout the embedding does not read"]
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:39: 30:47>::transform"
+kappa = "4c8c85b4ccd7d41659877094f89e301172cd18bac788c1905865787588b7d3f5"
+embedded = "f789da8e661ee88c546badacc1c1e73a19f65152eb46b049b8c2828f23bc4a81"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:39: 30:47>::transform_mut"
+kappa = "4a03f3c4c13f002a014dbbf89cbcbaf3bde50aeeb98cb0a24aec865588ebacb4"
+at = "F=u32"
+embedded = "d62b4b46e5fdbc317709a4ae127874e357d2b00dfeb1b11bd574507d0703fdae"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:39: 30:47>::transform_owned"
+kappa = "8920efe2c9d9ac728e3c467c9ab238794a548c0b79d9f8c121a990a2e0e65f18"
+embedded = "be507264dbd623b6a515094401956b9c492f782c3c756704691052df3ffd7994"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:49: 30:57>::zero_from"
+kappa = "fd79ef81f5885d5a7670c2825cde996660b2408aac3ee6e3c59ff6f8350c88dd"
+embedded = "56c50b1c7a1c5f570edb0ba6d8544cac4b50ccf7e76e199bdce5088339e47af5"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::<impl at src/codepointinvlist/cpinvlist.rs:30:59: 30:63>::hash"
+kappa = "c1d51d7bb132dc08bd91fe2af5fea384c481aedf44b39c77fd0257dc11614ad7"
+embedded = "f0487387099dcd1c82fb7b0537ea11a987ba460573a9f19ac6b71a457f3c5cce"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::all"
+kappa = "849250ff0ec43f088809476e1486a89249518b79c1e41679920e28c62408a2db"
+embedded = "4f76aa0dc0cc0673c7c833680600f6778bef04d19ec8db968fada8e053e5cf59"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::bmp"
+kappa = "0dedf84ad5b4d22f4ae24bd01a648a159af7aed41600501f64cd9f76aa6f1432"
+embedded = "b6877066013454e272322bb228d353fe5f092b13347d3ba70ca007b9e9555bd1"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::contains"
+kappa = "cada259186014e8f6312b9bb40c279f94cf2771f240880086aa50f14a0b6869d"
+embedded = "bbd93f4a8b5eea74678ce44b85c6060c011c397b44e7cbabd7f136212fc8de34"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::contains32"
+kappa = "f080ce70f85f2fa26323e0ab399d62a053ce9610a089468ce85b88d6d8f28fbd"
+embedded = "62b6c3c84a3c273281f953832711201957bbf9771ff7b9e733c64c34ab294517"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::contains_query"
+kappa = "875554d4a4669b5b73c448f9e123f6772945a739083070dbf48157ddf3882348"
+embedded = "43dd7436062e7d9c62a290d7f77ec7021c2767ce52bd3a9662489c793691baa5"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::contains_range"
+kappa = "5ca41b1f937886e9f1464f3a6c309a7bbe51c7b6eed00b34da9d5ab7559fe7ee"
+embedded = "2042dfcb40dfc3e801379c32b0c0b57d65a4962753342c160014c87645d9449e"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::contains_set"
+kappa = "d0fc403a470e1d2829dd67f5d92b977dc3e0c48054f43918aa653c76022785c0"
+embedded = "18028be5b882253eaaeb149bbfff13d5e0f3f80599e5f1d5aa393fcb8cf37ed8"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::from_parts_unchecked"
+kappa = "b992c818b3b72e09fb1a1bbc2bff28bca5376ec63efe9cc69f54a1a8ad4acffc"
+embedded = "4908c2112e32fd175c6db1d98b5dd140ab492b77ccdaae4d9a6e7abcd1233c34"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::get_nth_range"
+kappa = "a00691ca62d46548debb02d05cbb78baa0c431da226c238300d06d5cbdd43f8f"
+embedded = "c6cfd322020757111962f50021d3cf82b68d1b210980d087490f639029a03c0e"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<u32>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::get_range_count"
+kappa = "769ade9ebfcc24e63c548a124b4250a98b742531c1d637b03959c5d290be3a23"
+embedded = "077ea0867f2c66ee45857d4947d7286a5280857ae1a15e89ab2a5226483c5f7a"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::is_empty"
+kappa = "95976fdfe1e94ff3253c3080e1401f4003605fefa28fba1d4b673d13ba96e50b"
+embedded = "007d94979b4504d6802c5cd28b37562f9354f1f31c90f624af59476a4f8a258b"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::iter_chars"
+kappa = "dc5f4f206cd6b0c9420de5b83a6933f9fa028f2b6d9b96b718e389e4baed229d"
+embedded = "cea9a759a90dac041c6dfcb2d5d6e4e0826946de9903deacb2194ab02b2232d6"
+status = "residue"
+cause = "mir::Ty: core::iter::FilterMap<core::iter::FlatMap<core::slice::Chunks<'_, zerovec::ule::RawBytesULE<3>>, core::ops::Range<u32>, {closure@src/codepointinvlist/cpinvlist.rs:395:23: 395:29}>, fn(u32) -> core::option::Option<char> {core::char::from_u32}>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::iter_ranges"
+kappa = "385d2335e6b72d0489d72fb8db6bb238668fcdd8c4261f9829da94f745597397"
+embedded = "afca8b8ceff4f5b908236c179e5de26a4af5576dca0410bd434503d82dfaa45a"
+status = "residue"
+cause = "mir::Ty: zerovec::ule::RawBytesULE<3>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::iter_ranges_complemented"
+kappa = "e587319b08aa7af8b6ff3bb7813609a6c7ec053246c38910cc021318d8916320"
+embedded = "c01dd00d116089dc90e62f6ca4281726acc37f1065b6b841de3a5ca4e607048d"
+status = "residue"
+cause = "mir::Ty: core::ops::RangeInclusive<u32>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::position"
+kappa = "a79701bf068ebf97662c0b804ca94d39f6a1a009e07bc09bd256e07334e7bdb2"
+embedded = "138ac18fb0455fa4b02989396ecb87ad8a75a944fbfac370dd94e43dd68b6762"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::position32"
+kappa = "d25c37d4c125ca2c247749ce040d72ed346f926e485ac1a48eda6842be7107e4"
+embedded = "6d58f4eed654fb564aded8559a2b22861abc33f20d4b570791a4a7a5277ddffc"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::size"
+kappa = "8eff6b7b9b7ffb2dc42689c68c92b291b90c30ee41f0319af1bbdbdcaebbe7e9"
+embedded = "e1c8837f7a00220ff51d1f0d2417c202f7bb0334962e11a60be61a4d886c225b"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::span"
+kappa = "ac921bab8b007d4131811994080b6e3467e43c6a5971470ce89923f991d05ed0"
+embedded = "1663d7a0bfc561f0f49ac74cfb07e23c1ed45a1ddac10b6c64dc4fc7fa6c5895"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::span_back"
+kappa = "6909a3d9a2b8ad9244c188f8a27d2e872df40b6ce34b6e6b8b7cc5b104590464"
+embedded = "4904b2f5634e5f2fc13300c95e7fd93f7002e1700a46d1ed289acffcf2ddf6d7"
+status = "residue"
+cause = "mir::Ty: CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::cpinvlist::CodePointInversionList::try_from_inversion_list"
+kappa = "e9d35007d2a9a51f252a4d06c9ed1cee6576f9eeead5ee1e79344e08ca1c5d8a"
+embedded = "379ec0d36068a34253aa15d55bb99bfed7ae4728a18563fb1a6febe5d720a936"
+status = "residue"
+cause = "mir::Ty: codepointinvlist::cpinvlist::CodePointInversionList<'_>"
+
+[[fn]]
+path = "icu_collections::deconstruct_range"
+kappa = "b1e1b9faa2de895ae135c12bb51f4a9bfb6e33c1bbdaee8d23c9bb86791d30aa"
+at = "T=u32"
+embedded = "57ef57a190330197512e5c1eaecd14b8699356d3dccff676dc9e9fb45a974cbf"
+status = "residue"
+cause = "mir::Ty: impl RangeBounds<u32>"
+
+[[fn]]
+path = "icu_collections::is_valid_zv"
+kappa = "0ad36bd15ad189057ba1a2ee56f0c3992e3c62d5a1ded0b570fc9a709fa4a83a"
+embedded = "82fcfba8b2934185ae0c23ad9bdd568e1ca013446f4cf313f65e1a991ab927a4"
+status = "residue"
+cause = "mir::Ty: PotentialCodePoint"
+

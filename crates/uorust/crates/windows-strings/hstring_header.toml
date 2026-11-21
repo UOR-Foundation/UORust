@@ -1,0 +1,49 @@
+[[fn]]
+path = "windows-strings::ALIGN"
+kappa = "4349e13a59bd91771653c86f1f97758c52580c302de62178296ac6a1b4454567"
+embedded = "09346da8ccd695681cc755df729b2ea7da1d7da1e877c9ddcf3a438c07ba5390"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "windows-strings::heap_alloc"
+kappa = "f8517e18103c3dd5790e14e8325d61906a977d24998913e0edfde59ae16e363b"
+embedded = "96dc7b35218476879adcdcc556b113fa3d52376f07a5d77cf885bb774b885763"
+status = "residue"
+cause = "mir::Operand::Constant: hstring_header::ALIGN: mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "windows-strings::heap_free"
+kappa = "5fc797210d1205eba0a10554b7f80eeda2503eef426e71409c40d7d5a3893f01"
+embedded = "4b6aad82ec0838dc6821e7823a98fa07ee73094261e31218bc40b5b413a5fa23"
+status = "residue"
+cause = "mir::Operand::Constant: hstring_header::ALIGN: mir::TerminatorKind::Call: std::mem::align_of"
+
+[[fn]]
+path = "windows-strings::hstring_header::HStringHeader::alloc"
+kappa = "1d29f7eed2b6eabac841ce82c15d367643552647a0cfa3fe47dfa9372c0353b1"
+embedded = "32f79593b62f0d4f0c01cc228e28adbbf7549ff9432a4fbaf5b423cdb492b392"
+status = "residue"
+cause = "mir::TerminatorKind::Call: null_mut"
+
+[[fn]]
+path = "windows-strings::hstring_header::HStringHeader::alloc_bytes"
+kappa = "2b84c77ca257b50e6bd77bdb48391fde324819d11eaeca3318bc134f68effc71"
+embedded = "2014eec07264a2d14fd193d8f80f0cbbe179d07647bbd3505253f511f63d77f3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "windows-strings::hstring_header::HStringHeader::duplicate"
+kappa = "06e020f75e0461468a2018790c03eb8fda8a0ee2b9f49f9df3b84f51631d56f0"
+embedded = "25bfaeaf5674611dd3ce88d4b5a36b951607c4787d28b1a878143b1e73997a7c"
+status = "residue"
+cause = "mir::Ty: hstring_header::HStringHeader"
+
+[[fn]]
+path = "windows-strings::hstring_header::HStringHeader::free"
+kappa = "2c9658a627797e02201d00536cae417121fe7a82ee56bc6c133eda80bab89063"
+embedded = "26a062ce6dad738951031057800581e31257dd1ccf2a9e6e2d0c306136fbf9cd"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::ptr::mut_ptr::<impl *mut hstring_header::HStringHeader>::is_null"
+

@@ -1,0 +1,372 @@
+# The url register (written by `uorust crate url@2.5.8`; do not edit): every body of
+# url's MIR at url 2.5.8, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 250
+translated = 5
+residue = 245
+
+[module.crate]
+bodies = 81
+translated = 0
+residue = 81
+
+[module.host]
+bodies = 25
+translated = 0
+residue = 25
+
+[module.origin]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.parser]
+bodies = 89
+translated = 3
+residue = 86
+
+[module.path_segments]
+bodies = 8
+translated = 0
+residue = 8
+
+[module.quirks]
+bodies = 24
+translated = 1
+residue = 23
+
+[module.slicing]
+bodies = 8
+translated = 1
+residue = 7
+
+[embedding]
+bodies = 250
+embedded = 250
+evaluable = 250
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: parser::ParseError"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: Url"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: parser::Input<'_>"
+bodies = 14
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: Input<'_>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: host::HostInternal"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: path_segments::PathSegmentsMut<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: percent_encoding::AsciiSet"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Origin"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Parser<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: host::Host"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::cannot_be_a_base: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: ParseOptions<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: origin::Origin"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: slicing::Position"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::borrow::Cow<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::has_host: url's MIR stops at type outside the lift: host::HostInternal"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Host<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Position"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: SchemeType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UrlQuery<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: parser::Context"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::has_authority: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OpaqueOrigin"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SyntaxViolation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::path::PathBuf"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::as_str: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::scheme: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: HostInternal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ParseError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: parser::SchemeType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Into"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Ord"
+bodies = 1
+
+[[cause]]
+cause = "mir::IrBody: the translation exceeds the projection's file limit"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Option::unwrap_or"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::len"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::from_file_path: url's MIR stops at mir::TerminatorKind::Call: String::len"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::host_str: url's MIR stops at mir::TerminatorKind::Call: Url::has_host: url's MIR stops at type outside the lift: host::HostInternal"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::password: url's MIR stops at mir::TerminatorKind::Call: Url::has_authority: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::path: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::set_fragment: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::set_password: url's MIR stops at mir::TerminatorKind::Call: Url::has_host: url's MIR stops at type outside the lift: host::HostInternal"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::set_query: url's MIR stops at mir::TerminatorKind::Call: Url::take_fragment: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::set_scheme: url's MIR stops at mir::TerminatorKind::Call: String::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::set_username: url's MIR stops at mir::TerminatorKind::Call: Url::has_host: url's MIR stops at type outside the lift: host::HostInternal"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::take_after_path: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::take_fragment: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Url::username: url's MIR stops at mir::TerminatorKind::Call: Url::has_authority: url's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii_alphabetic"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::is_windows_drive_letter: url's MIR stops at mir::TerminatorKind::Call: parser::starts_with_windows_drive_letter: url's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: parser::starts_with_windows_drive_letter: url's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Cow<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FragmentPartIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PathSegmentsMut<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: QueryPartIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RangeTo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::net::IpAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::net::Ipv4Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::net::Ipv6Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::net::SocketAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::RSplit<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::str::Split<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: form_urlencoded::Parse<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: host::Host<&str>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: host::Host<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: origin::OpaqueOrigin"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::Parser<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: parser::SyntaxViolation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 1

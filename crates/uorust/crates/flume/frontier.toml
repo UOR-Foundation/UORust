@@ -1,0 +1,217 @@
+# The flume register (written by `uorust crate flume@0.12.0`; do not edit): every body of
+# flume's MIR at flume 0.12.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 208
+translated = 3
+residue = 205
+
+[module.async]
+bodies = 60
+translated = 0
+residue = 60
+
+[module.crate]
+bodies = 118
+translated = 3
+residue = 115
+
+[module.select]
+bodies = 24
+translated = 0
+residue = 24
+
+[module.signal]
+bodies = 6
+translated = 0
+residue = 6
+
+[embedding]
+bodies = 208
+embedded = 208
+evaluable = 208
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: Receiver<u32>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: Sender<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: SendError<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: Shared<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: RecvFut<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SendFut<'_"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: SyncSignal"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: Hook<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: RecvStream<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SendTimeoutError<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: SendSink<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: TrySendError<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RecvError"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: select::Selector<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Drain<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Iter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Selector<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: dyn std::any::Any"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: r#async::RecvFut<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: r#async::RecvStream<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: r#async::SendSink<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: select::SelectError"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: discriminant_value"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AsyncSignal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Chan<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IntoIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RecvSelection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SelectError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SelectSignal"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SendSelection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: TryIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WeakSender<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: r#async::SendFut<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::sync::MutexGuard<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: OwnedOrRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RecvTimeoutError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TryRecvError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: TrySendTimeoutError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: r#async::AsyncSignal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: r#async::OwnedOrRef<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: signal::SyncSignal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 1

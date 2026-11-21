@@ -1,0 +1,245 @@
+[[fn]]
+path = "rkyv::access_pos_unchecked"
+kappa = "4bdec94870dbd00e0f8ec5e281c0974855851ffc63a5ca30552c8551a40132bb"
+at = "T=u32"
+embedded = "3f23f4212aad9c04c477bd933d7e19da3bacabf876811cb2fb24155ed8055470"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::slice::<impl [u8]>::as_ptr"
+
+[[fn]]
+path = "rkyv::access_pos_unchecked_mut"
+kappa = "acc615ce142402b9921d0148d923c8d4e4de59dd7d56467b5cee8f67530b1f62"
+at = "T=u32"
+embedded = "6e14bb13115def06b4461e2ef1f225fcdd1eb4dffef5ef98c96fb7941840d676"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, u32>"
+
+[[fn]]
+path = "rkyv::access_unchecked"
+kappa = "8afb307f03547f0df5cb4d0b457d1fe98c20e5948348de5d72591001ea2da6b5"
+at = "T=u32"
+embedded = "e59fa6c6f08b55bd1364b1ec864e15c6ad1b9713a7dd8fb5b9d5523c1dc9c744"
+status = "residue"
+cause = "mir::TerminatorKind::Call: api::root_position: rkyv's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "rkyv::access_unchecked_mut"
+kappa = "7dd3151cef19739e1e086515d557a7844439b93f23fac9e8a1ca8ba02fb4c606"
+at = "T=u32"
+embedded = "b23371da34980ac151ef112cd1de491f33fa7ddb73ec92e03bcde9ca6af5562c"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, u32>"
+
+[[fn]]
+path = "rkyv::api::checked::access_pos_with_context"
+kappa = "63adedd16e1220151c218df6a8cf6a47658d2bd693b2fb7a80410ebe12eb5aa3"
+at = "C=u32, E=u32, T=u32"
+embedded = "2fd566d2a2efab961bd9e72116c871750b04ba305efd17a32ebb8985b3745389"
+status = "residue"
+cause = "mir::TerminatorKind::Call: api::checked::check_pos_with_context: rkyv's MIR stops at type outside the lift: rancor::Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::api::checked::access_with_context"
+kappa = "a348071eaa3be052775d4fe5ac74d0e45624b4580a45310d4946cf4ca41e4bb1"
+at = "C=u32, E=u32, T=u32"
+embedded = "2f354c048b131fac575057984e3a7b4a224449f2e239f2d842c8927bd11747ca"
+status = "residue"
+cause = "mir::TerminatorKind::Call: api::root_position: rkyv's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "rkyv::api::checked::check_pos_with_context"
+kappa = "2846afd6cefe0fff76d743d84b5dd0f0fa677fadc463cbc2ff0b656980c228d0"
+at = "C=u32, E=u32, T=u32"
+embedded = "4df6f8ded9790b876fcc3710762f3151a95ab2df45b474f79b7015174c79f6c0"
+status = "residue"
+cause = "mir::Ty: rancor::Strategy<u32, u32>"
+
+[[fn]]
+path = "rkyv::deserialize_using"
+kappa = "69fe3fa290b291a1f43cf37036c20a57c56ebc8973e9c16d1792c5c7f65125e2"
+at = "D=u32, E=u32, T=u32"
+embedded = "b8215e7d187ea9f096ef9724a042ea0a2cdd6291681bef7897305325d74b1ec9"
+status = "residue"
+cause = "mir::Ty: impl Deserialize<u32, Strategy<u32, u32>>"
+
+[[fn]]
+path = "rkyv::high::checked::access"
+kappa = "7ef5c9d71b1e4b7ae261ac99d89146f72a6e4addddc4d236f70482baa2ac7d26"
+at = "E=u32, T=u32"
+embedded = "4bb0b68820bd97423819b48ba0d1016cecf81bf22a708b3196494761c89c6363"
+status = "residue"
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::high::checked::access_mut"
+kappa = "37c63f81e0e78a68787fc718ef10d18b2513224f49d35c848fa987c6ddb1f449"
+at = "E=u32, T=u32"
+embedded = "ba7620ec420bc6e35565aa31dfa621ece316481cea17d59b7c3c02d1cd6ce49a"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, u32>"
+
+[[fn]]
+path = "rkyv::high::checked::access_pos"
+kappa = "024f876c30eae684f1bec7d29e2360cd8be2abddf8c72da3721e730ad247d90e"
+at = "E=u32, T=u32"
+embedded = "79da9d3cab9d8cf519183318c4dead66a4b6468294d2f679b7894f0557cfef13"
+status = "residue"
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::high::checked::access_pos_mut"
+kappa = "715dbd1af05c5ca5c3a5754ffda538fc6bb02f894952eae699c69f571eaa6a91"
+at = "E=u32, T=u32"
+embedded = "5af7ec8f77bd4d0ff7fb6c21aee7907e3dee3ee7f9d9d00e5d33ff906a355064"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, u32>"
+
+[[fn]]
+path = "rkyv::high::checked::from_bytes"
+kappa = "3a545f338965cb56c36f3900373b46a253a52cde5ead4f6b01b0c4b1745344af"
+at = "E=u32, T=u32"
+embedded = "6427290e524a6c7abf90a98ead70accff3f1fe373cc5450c797e76317a789f4d"
+status = "residue"
+cause = "mir::Ty: de::pooling::alloc::Pool"
+
+[[fn]]
+path = "rkyv::high::checked::validator"
+kappa = "3a9e0dd2bd922c55cfcef2ee0a35598ec7b07a33390d6d7c6b5cc3742d49a83f"
+embedded = "0de8d8993a9698768467defd3161ba103103fd0a86ad71b67abb7f5236336807"
+status = "residue"
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::high::deserialize"
+kappa = "59b67079264a5f7840deb43d8cd5c43514aa658a207ae8b129a8dfbc869e456d"
+at = "E=u32, T=u32"
+embedded = "7419a800e870d26dd13e2060a6c7c63cc906f9ca3175ee0e1691ebe9aed36bf3"
+status = "residue"
+cause = "mir::Ty: impl Deserialize<u32, HighDeserializer<u32>>"
+
+[[fn]]
+path = "rkyv::high::from_bytes_unchecked"
+kappa = "6cbe4748f564472259d3f5761d54ea0815136dd98517da50cc34dce34587d898"
+at = "E=u32, T=u32"
+embedded = "08ba4b8fb893d540cf6485d1683331254022d71ad6d8d438accb1cc806586ac3"
+status = "residue"
+cause = "mir::TerminatorKind::Call: api::access_unchecked: rkyv's MIR stops at mir::TerminatorKind::Call: api::root_position: rkyv's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "rkyv::high::to_bytes_in_with_alloc"
+kappa = "065cb728e2cc086362df3133eed99fcd57e57980a3b3476416e4f7bf9452581a"
+at = "A=u32, E=u32, W=u32"
+embedded = "259eba5e9d081887c572c927774d95378963c7a51e2ccaf26305a19bdf27dbd2"
+status = "residue"
+cause = "mir::Ty: impl Serialize<HighSerializer<u32, u32, u32>>"
+
+[[fn]]
+path = "rkyv::low::checked::access"
+kappa = "552859a4d893adac512c98d58e9df5805649f7e994218d39334a8d29516e141c"
+at = "E=u32, T=u32"
+embedded = "06baf7db2fb79de32e0ca8d17378b99ca66c98df219be0321311c6a8564a0c29"
+status = "residue"
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::low::checked::access_mut"
+kappa = "c7786b3aa9f0f7d05c4788fac87eab9e2da94ab57655246fd4fd72590ee8d83f"
+at = "E=u32, T=u32"
+embedded = "a8519d9cee7061ecbe7c42f67e26795fd639543b68f309b99a5ef0cad51201b1"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, u32>"
+
+[[fn]]
+path = "rkyv::low::checked::access_pos"
+kappa = "a73ffc2a5cde080708c300274b0749863defba1161a8ca4669241d8af9f153cf"
+at = "E=u32, T=u32"
+embedded = "f912abdef30f86adb59e1f66ed9961ccd35cbc668759929d693d1485685d4bbe"
+status = "residue"
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::low::checked::access_pos_mut"
+kappa = "6ac165dc2bc7bec64bd81eaf4f92c06c24fa325fee84151194212129e76812dc"
+at = "E=u32, T=u32"
+embedded = "310a862bc253f721288e785c5cb01a6942148b6fdc12c1140b4eb511a993617a"
+status = "residue"
+cause = "mir::Ty: seal::Seal<'_, u32>"
+
+[[fn]]
+path = "rkyv::low::checked::from_bytes"
+kappa = "fc2294dbf4bf4304ddead425cd0dace1b05113f2a7e8a5d740a70c744f93f331"
+at = "E=u32, T=u32"
+embedded = "05e990f9ce768b94339c80dd8fb1e2f174a4f7dc6f5dca08a4dca6230a39f154"
+status = "residue"
+cause = "mir::TerminatorKind::Call: api::low::checked::access: rkyv's MIR stops at type outside the lift: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::low::checked::validator"
+kappa = "2d8c15c09ce33cd2866449425cb47da9b50619a057665b60562d02b71be382ba"
+embedded = "37a0f50b8f07ebfe835c7a70cd7d9da8eea3d7509a2dd40cb8f279f86ffb896f"
+status = "residue"
+cause = "mir::Ty: validation::archive::validator::ArchiveValidator<'_>"
+
+[[fn]]
+path = "rkyv::low::deserialize"
+kappa = "39796fb5916a1247a17b0b3b565c53ab169f24d5730d344f22e9a4b45e280e34"
+at = "E=u32, T=u32"
+embedded = "44647321b1f95a7fb87cabf476450b74725c257cd9a4f0ac3aef6e84f9343d84"
+status = "residue"
+cause = "mir::Ty: impl Deserialize<u32, LowDeserializer<u32>>"
+
+[[fn]]
+path = "rkyv::low::from_bytes_unchecked"
+kappa = "34075bff022723dd342fbe6b9a076b88797acb320ef5658e9da1ca0eacc7b672"
+at = "E=u32, T=u32"
+embedded = "10f87ca6607bae0572334814265bb2019cb022c7d10159a0d0f7dccb945e564d"
+status = "residue"
+cause = "mir::TerminatorKind::Call: api::access_unchecked: rkyv's MIR stops at mir::TerminatorKind::Call: api::root_position: rkyv's MIR stops at mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "rkyv::low::to_bytes_in_with_alloc"
+kappa = "88eff27d3d84e4ef06c0d47e15d352d9c62ffe6635f3825a6ad358699175cd01"
+at = "A=u32, E=u32, W=u32"
+embedded = "06ce9b1700b2d4977d73a2918d108442101e2fe7a21f24489cb98edc976271eb"
+status = "residue"
+cause = "mir::Ty: impl Serialize<LowSerializer<u32, u32, u32>>"
+
+[[fn]]
+path = "rkyv::root_position"
+kappa = "79c154fb3a94a359fcc620804f52c0f60396444116c881efb8fd2ecb0e870801"
+embedded = "d122a0e6a85c8a9bf17e906f8c4eb5cce3ae64ad496034ef53f6d90914934d4a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "rkyv::serialize_using"
+kappa = "598fb194d557fd3309d5f924072215c0338ed72dd97c71a9881a3e005d316cd8"
+at = "E=u32, S=u32"
+embedded = "a4e22be259e50fa108c3bae4e74cc7af0ab723345b89e884ae174763a4a94c5e"
+status = "residue"
+cause = "mir::Ty: impl SerializeUnsized<Strategy<u32, u32>>"
+
+[[fn]]
+path = "rkyv::to_bytes"
+kappa = "915454532ce394aaae936731159cc3a62a3ecb13a357d20940014e7fde10ef22"
+at = "AlignedVec=u32, E=u32"
+embedded = "fdf92a850a53122338f192be889711426aedc21b12bcb00970664695a0e63a56"
+status = "residue"
+cause = "mir::Ty: util::alloc::aligned_vec::AlignedVec"
+
+[[fn]]
+path = "rkyv::to_bytes_in"
+kappa = "7ca57959ddaf5fdc54283fa7af29e6f3986cf95cb2f4c21d5360cad35a9ecf78"
+at = "E=u32, W=u32"
+embedded = "d14f6e14cb14e8551eb6000d383ac37161f2bff119ca102e2f4fd4c9564d1f2e"
+status = "residue"
+cause = "mir::Ty: impl for<'a> Serialize<HighSerializer<u32, ArenaHandle<'a>, u32>>"
+
+[[fn]]
+path = "rkyv::to_bytes_with_alloc"
+kappa = "5b98813927538d9ae1bf1affb1dd544d9ce14982dfb74877f4bb3486070b97c0"
+at = "A=u32, AlignedVec=u32, E=u32"
+embedded = "0d8313705cddefce6bcbe9aa6adea65abef69176f0d5db359c17ab19a09949a1"
+status = "residue"
+cause = "mir::Ty: util::alloc::aligned_vec::AlignedVec"
+

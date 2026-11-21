@@ -1,0 +1,2153 @@
+# The gimli register (written by `uorust crate gimli@0.34.0`; do not edit): every body of
+# gimli's MIR at gimli 0.34.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 4534
+translated = 27
+residue = 4507
+
+[module.arch]
+bodies = 973
+translated = 0
+residue = 973
+
+[module.case_fold]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.common]
+bodies = 175
+translated = 0
+residue = 175
+
+[module.constants]
+bodies = 1197
+translated = 0
+residue = 1197
+
+[module.endianity]
+bodies = 37
+translated = 0
+residue = 37
+
+[module.leb128]
+bodies = 19
+translated = 3
+residue = 16
+
+[module.read]
+bodies = 1524
+translated = 24
+residue = 1500
+
+[module.write]
+bodies = 605
+translated = 0
+residue = 605
+
+[embedding]
+bodies = 4306
+embedded = 4306
+evaluable = 4306
+blocked = 0
+
+[differential]
+bodies = 17
+theorems = 112
+
+[[cause]]
+cause = "mir::Ty: common::Register"
+bodies = 966
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 364
+
+[[cause]]
+cause = "mir::Ty: constants::DwAt"
+bodies = 285
+
+[[cause]]
+cause = "mir::Ty: constants::DwOp"
+bodies = 180
+
+[[cause]]
+cause = "mir::Ty: constants::DwTag"
+bodies = 123
+
+[[cause]]
+cause = "mir::Ty: R"
+bodies = 107
+
+[[cause]]
+cause = "mir::Ty: read::Error"
+bodies = 106
+
+[[cause]]
+cause = "mir::Ty: write::Error"
+bodies = 66
+
+[[cause]]
+cause = "mir::Ty: common::SectionId"
+bodies = 57
+
+[[cause]]
+cause = "mir::Ty: constants::DwForm"
+bodies = 56
+
+[[cause]]
+cause = "mir::Ty: constants::DwLang"
+bodies = 54
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 53
+
+[[cause]]
+cause = "mir::Ty: write::op::Expression"
+bodies = 45
+
+[[cause]]
+cause = "mir::Ty: constants::DwCfa"
+bodies = 34
+
+[[cause]]
+cause = "mir::Ty: read::endian_slice::EndianSlice<'_"
+bodies = 31
+
+[[cause]]
+cause = "mir::Ty: read::value::Value"
+bodies = 29
+
+[[cause]]
+cause = "mir::Ty: constants::DwEhPe"
+bodies = 24
+
+[[cause]]
+cause = "mir::Ty: constants::DwAte"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: constants::DwMacro"
+bodies = 21
+
+[[cause]]
+cause = "mir::Ty: common::DebugInfoOffset<u32>"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: common::Format"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: read::dwarf::Dwarf<u32>"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: read::line::LineRow"
+bodies = 17
+
+[[cause]]
+cause = "mir::Ty: Endian"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: read::cfi::Pointer"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: write::unit::UnitEntryId"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: read::UnitOffset<u32>"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: write::line::LineProgram"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: read::op::EvaluationResult<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: read::unit::Attribute<u32>"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: write::unit::Unit"
+bodies = 14
+
+[[cause]]
+cause = "mir::Ty: common::Encoding"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: constants::DwLns"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: read::unit::AttributeValue<u32"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: write::convert::ConvertError"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: constants::DwMacinfo"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: constants::GdbIndexSymbolKind"
+bodies = 12
+
+[[cause]]
+cause = "mir::Ty: constants::DwLle"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: write::line::LineString"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: alloc::borrow::Cow<'_"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: constants::DwIdx"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: constants::DwUt"
+bodies = 10
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Endianity"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: DwEhPe"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: constants::DwLnct"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: constants::DwRle"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: constants::DwSectV2"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::abbrev::Abbreviation"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::abbrev::Abbreviations"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::abbrev::AttributeSpecification"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::cfi::FrameDescriptionEntry<u32>"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: read::cfi::UnwindTableRow<u32"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: write::unit::DebuggingInformationEntry"
+bodies = 9
+
+[[cause]]
+cause = "mir::Ty: common::RangeListsOffset<u32>"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: constants::DwCc"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: constants::DwSect"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: read::cfi::BaseAddresses"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: read::line::LineProgramHeader<u32"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: write::cfi::CommonInformationEntry"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: ArrayVec<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DwAt"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DwForm"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DwLang"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: EndianReader<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: constants::DwLne"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::loclists::LocListIter<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::macros::MacroIter<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::op::Expression<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::Range"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::unit::DebuggingInformationEntry<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::unit::EntriesCursor<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::unit::EntriesRaw<'_"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::unit::UnitHeader<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: read::unit::UnitHeader<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: write::range::RangeList"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: write::unit::AttributeValue"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: write::unit::DebugInfoRef"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: write::unit::UnitId"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: ArangeEntry"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwAccess"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwAddr"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwAte"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwCc"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwCfa"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwChildren"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwDefaulted"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwDs"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwDsc"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwEnd"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwIdx"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwInl"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwLle"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwLnct"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwLne"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwLns"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwOp"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwOrd"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwRle"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwSect"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwSectV2"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwTag"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwUt"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwVirtuality"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: DwVis"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: GdbIndexSymbolKind"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MaybeUninit<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::DebugStrOffset<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::LineEncoding"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: common::LocationListsOffset<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: constants::DwDs"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: constants::DwEnd"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::aranges::ArangeEntry"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CommonInformationEntry<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::cfi::DebugFrame<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::cfi::EhFrame<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::endian_reader::EndianReader<u32"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::line::ColumnType"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::names::NameTableIndex"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::RngListIter<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: rnglists::Range"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::abbrev::Abbreviation"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::abbrev::AttributeSpecification"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::cfi::FrameDescriptionEntry"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::line::DirectoryId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::line::FileInfo"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::line::LineRow"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::range::RangeListId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::str::LineStringId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::str::StringId"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: write::unit::Attribute"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Offset"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: UnitOffset<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: UnwindContext<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: common::UnitSectionOffset<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: constants::DwId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: constants::DwInl"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: id::FileId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::abbrev::Attributes"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::abbrev::DebugAbbrev<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CallFrameInstruction<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CieOrFde<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::dwarf::RangeIter<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::dwarf::Unit<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::index::DebugCuIndex<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::index::DebugTuIndex<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::index::UnitIndex<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::line::DebugLine<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::line::FileEntry<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::line::IncompleteLineProgram<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::loclists::RawLocListEntry<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::loclists::RawLocListIter<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::names::NameEntry<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::DebugRanges<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::DebugRngLists<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::RawRngListEntry<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::str::DebugLineStr<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::str::DebugStr<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::str::DebugStrOffsets<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::unit::AttributeValue<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::unit::DebugInfo<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::unit::DebugTypes<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::unit::DebuggingInformationEntry<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: read::util::sealed::CapacityFull"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: rnglists::RawRange"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: write::cfi::CallFrameInstruction"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: write::cfi::FrameTable"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: write::line::id::FileId"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: write::range::RangeListOffsets"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::ConvertSplitUnitSection<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::ConvertUnitSection<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BigEndian"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DebugTypesOffset<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: LittleEndian"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: NameEntryOffset<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: RunTimeEndian"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Section"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: UnitSectionOffset<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: common::DebugTypesOffset<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: constants::DwAccess"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: constants::DwChildren"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: constants::DwDefaulted"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: constants::DwVirtuality"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: constants::DwVis"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: endian_slice::EndianSlice<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::abbrev::AbbreviationsCache"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::addr::DebugAddr<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::aranges::DebugAranges<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::cfi::Augmentation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CfaRule<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::cfi::PartialFrameDescriptionEntry<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::cfi::RegisterRule<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::cfi::UnwindTable<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::index::IndexSectionId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::line::CompleteLineProgram<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::line::FileEntryFormat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::loclists::DebugLoc<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::loclists::DebugLocLists<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::loclists::LocationListEntry<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::loclists::LocationLists<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macros::DebugMacinfo<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::macros::DebugMacro<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::names::DebugNames<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::names::NameAbbreviations"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::names::NameIndexHeader<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::names::NameTypeUnit<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::pubnames::PubNamesEntryIter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::pubtypes::PubTypesEntryIter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::reader::ReaderOffsetId"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::RangeLists<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::RawRngListIter<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::unit::EntriesTree<'_"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: read::value::ValueType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: section::Sections<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::Address"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::abbrev::DebugAbbrev<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::cfi::DebugFrame<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::cfi::EhFrame<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::dwarf::Dwarf"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::line::DebugLine<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::loc::LocationList"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::loc::LocationListOffsets"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::op::Operation"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::range::DebugRanges<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::range::DebugRngLists<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::range::Range"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::str::DebugLineStr<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::str::DebugStr<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: write::unit::DebugInfo<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::checked_sub"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CieId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DebugFrameOffset<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DebugTypeSignature"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: DwoId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EhFrameOffset<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: FilterDependencies"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PubNamesEntry<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PubTypesEntry<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: SubRange<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::DebugLineOffset<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::DebugMacroOffset<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::EhFrameOffset<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::LocationListsOffset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::RangeListsOffset"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: common::Vendor"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: constants::DwDsc"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: constants::DwOrd"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: endianity::LittleEndian"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: leb128::write::Leb128"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: loc::Location"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: loc::LocationList"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: loc::LocationListId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::abbrev::AbbreviationsCacheStrategy"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::aranges::ArangeHeader<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::cfi::AugmentationData"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CallFrameInstructionIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CieOffsetEncoding"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::cfi::RegisterRuleIter<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::cfi::RegisterRuleMap<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::cfi::UnwindContext<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::dwarf::DwarfPackage<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::dwarf::UnitRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::line::LineInstruction<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::line::LineInstructions<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::lists::ListsHeader"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::lookup::PubSetEntry<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::lookup::PubSetEntryIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::names::NameAbbreviation"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::names::NameAttributeValue<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::names::NameEntryOffset<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::op::Operation<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pubnames::PubNamesEntry<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pubnames::PubNamesSet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pubnames::PubNamesSetIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pubtypes::PubTypesEntry<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pubtypes::PubTypesSet<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::pubtypes::PubTypesSetIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::relocate::RelocateReader<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::unit::DebugInfoUnitHeadersIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::unit::DebugTypesUnitHeadersIter<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::unit::EntriesTreeNode<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::unit::UnitType<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: read::util::ArrayVec<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: value::ValueType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: write::cfi::CieId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: write::line::LineInstruction"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: write::line::convert::ConvertLineProgram<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: write::loc::LocationListId"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: write::str::LineStringTable"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: write::str::StringTable"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::ConvertUnitEntry<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by RelocateWriter"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: MaybeUninit::uninit"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Attributes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Augmentation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AugmentationData"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CieOffsetEncoding"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ConvertLineRow"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ConvertLineSequence"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ConvertLineSequenceEnd"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DebugAbbrevOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DebugMacinfoOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DebugNamesOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DwarfFileType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: EhFrameHdr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: FileEntryFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Leb128"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LocListsFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LocationListEntry<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: LocationListsOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NameIndexHeader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: NameTableIndex"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PartialFrameDescriptionEntry<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PubNamesSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: PubTypesSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RangeListsFormat"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RangeListsOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RawRangeListsOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RegisterRuleMap<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Relocation"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: RelocationTarget"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SectionBaseAddresses"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StoreOnHeap"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnitIndexSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: UnwindTableRow<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Vendor"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugAbbrevOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugAddrOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugArangesOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugFrameOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugInfoOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugLineOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugLineStrOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugLocListsBase<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugNamesOffset<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugRngListsBase<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugStrOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugStrOffsetsBase<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugStrOffsetsIndex<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DebugTypeSignature"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: common::DwarfFileType"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: constants::DwAddr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endianity::BigEndian"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: endianity::RunTimeEndian"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: loc::DebugLoc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: loc::DebugLocLists<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::addr::AddrEntryIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::addr::AddrHeader<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::addr::AddrHeader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::addr::AddrHeaderIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::aranges::ArangeEntryIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::aranges::ArangeHeader<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::aranges::ArangeHeaderIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CfiEntriesIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CfiEntryPrefix<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::cfi::CommonInformationEntry<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::cfi::EhFrameHdr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::cfi::EhHdrTable<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::cfi::FrameDescriptionEntry<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::cfi::ParsedEhFrameHdr<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::cfi::SectionBaseAddresses"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::dwarf::DwarfPackageSections<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::dwarf::DwarfSections<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::endian_reader::SubRange<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::index::UnitIndexSection"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::index::UnitIndexSectionIterator<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::line::FileEntry<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::lookup::PubSet<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::lookup::PubSetHeader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::lookup::PubSetIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macros::MacroEntry<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::macros::MacroUnitHeader<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::names::NameAbbreviationAttribute"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::names::NameBucketIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::names::NameEntryIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::names::NameHashIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::names::NameIndex<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::names::NameIndexHeaderIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::names::NameTableIter"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::op::DieReference<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::op::Evaluation<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::op::Location<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::op::Operation<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::op::OperationIter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::op::Piece<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pubnames::DebugGnuPubNames<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pubnames::DebugPubNames<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pubtypes::DebugGnuPubTypes<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::pubtypes::DebugPubTypes<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::RawRange"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: read::unit::EntriesTreeIter<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::ReaderOffsetId"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::abbrev::AbbreviationTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::endian_vec::EndianVec<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::loc::DebugLoc<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::loc::DebugLocLists<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::section::Sections<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::unit::UnitTable"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::ConvertUnit<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::FilterUnit<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::FilterUnitEntry<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::FilterUnitSection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: write::writer::InitialLengthOffset"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Reader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ReaderAddress"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item read::cfi::CFI_INSTRUCTION_HIGH_BITS_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc1814: &&["
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Box::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: char::methods::is_ascii"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::leading_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_mul"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AddrHeader<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArangeHeader<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ArrayVec<alloc::vec::Vec<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CfaRule<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: CompleteLineProgram<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ConvertUnitEntry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugAddrBase<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugAddrIndex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugAddrOffset<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugArangesOffset<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugGnuPubNames<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugGnuPubTypes<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugLineStrOffset<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugLocListsBase<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugLocListsIndex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugPubNames<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugPubTypes<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugRngListsBase<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugRngListsIndex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DebugStrOffsetsBase<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: DwarfUnit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EndianVec<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Evaluation<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: EvaluationResult<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FilterUnit<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: FilterUnitEntry<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: LineProgramHeader<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ListsHeader"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MacroEntry<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MacroString<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NameAbbreviation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NameAttribute<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NameAttributeValue<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NameEntry<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: NameTypeUnit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: OperationIter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Piece<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RegisterRule<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: S"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: UnwindExpression<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: addr::DebugAddr<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: aranges::DebugAranges<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::AArch64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::Arm"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::LoongArch"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::MIPS"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::PowerPc64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::RiscV"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::X86"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: arch::X86_64"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DebugAbbrevOffset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DebugAddrBase<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DebugAddrIndex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DebugFrameOffset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DebugLineStrOffset<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DebugLocListsIndex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DebugMacinfoOffset<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DebugRngListsIndex<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::DwoId"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::EhFrameOffset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::RawRangeListsOffset<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: common::UnitSectionOffset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::num::NonZero<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: loc::LocationListOffsets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: loclists::DebugLoc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: loclists::DebugLocLists<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macros::DebugMacinfo<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: macros::DebugMacro<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: names::DebugNames<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::StoreOnHeap"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::cfi::EhHdrTableIter<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::cfi::PointerEncodingParameters<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::cfi::UnwindContext<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::cfi::UnwindExpression<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::line::IncompleteLineProgram<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::line::LineInstruction<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::line::LineRows<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::line::LineSequence<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::loclists::LocListsFormat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::lookup::DebugPubSet<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macros::MacroEntry<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::macros::MacroString<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::names::NameAttribute<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::op::Evaluation<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::op::OperationEvaluationResult<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::op::Piece<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: read::rnglists::RangeListsFormat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rnglists::DebugRanges<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rnglists::DebugRngLists<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: rnglists::RangeLists<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: value::Value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::dwarf::DwarfUnit"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::line::convert::ConvertLineRow"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::line::convert::ConvertLineSequence"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::loc::Location"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::loc::LocationListTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::range::RangeListTable"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::relocate::Relocation"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::relocate::RelocationTarget"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::unit::DebugInfoFixup"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::unit::UnitOffsets"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::FilterDependencies"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: write::unit::convert::FilterParent"
+bodies = 1

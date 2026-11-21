@@ -1,0 +1,58 @@
+[[fn]]
+path = "wait-timeout::drain"
+kappa = "01365c944e970c631c84a382a97151e7878adbca438d3b48e872ddd6f6dc189f"
+embedded = "43adfc08ed4ec42b1fe38bc2f521fb3da603910ae06dcc6ef523cc37eb29638f"
+status = "residue"
+cause = "mir::Ty: UnixStream"
+
+[[fn]]
+path = "wait-timeout::imp::State::init"
+kappa = "b0d67e9befe47950393342f12351f265a4a5889fb70c0b856cc01b41e40ed391"
+at = "C=u32"
+embedded = "7bf9d403d51e788f1327454808493d73205150fbf7c1064aa2983d6cd9db5ba5"
+status = "residue"
+cause = "mir::Ty: std::os::unix::net::UnixStream"
+
+[[fn]]
+path = "wait-timeout::imp::State::process_sigchlds"
+kappa = "2cedc7e87139075285d811487b51127414fffad2000c47d332adc253c35b4152"
+embedded = "2ef396e2d1dffc1cfd2875bce774038fc8a2e6cde3db8d12aaf493549acecedc"
+status = "residue"
+cause = "mir::Ty: State"
+
+[[fn]]
+path = "wait-timeout::imp::State::wait_timeout"
+kappa = "08fc82531f864ed4c8035f499b8b2ccc162ea7717a1ffbddf8aeb9c869d7e66d"
+embedded = "206c5c3175beca7005a7b5cd4fc2c8391f55a72a5f1be701df9f6cdf1c96fcec"
+status = "residue"
+cause = "mir::Ty: std::process::ExitStatus"
+
+[[fn]]
+path = "wait-timeout::imp::State::wait_timeout::Remove::drop"
+kappa = "72d34e91513de4a41993c7559cbc0bace1a08f06c3b62ee1c497db554be625b2"
+embedded = "cb98d25437a97cda38846dc2aa7de4a4c64ebb58e928738f143fb4a4dfbb236c"
+status = "residue"
+cause = "mir::Ty: Remove<'_>"
+
+[[fn]]
+path = "wait-timeout::notify"
+kappa = "2cd795347a75efdaa05f0ac2587672a2eb83c31cbbc1250c0e4d8674c03a022e"
+embedded = "fca883a8bfc76d33068a00d7e347824c90dba23ddc0cbb022f14da6e69bf3670"
+status = "residue"
+cause = "mir::Ty: UnixStream"
+
+[[fn]]
+path = "wait-timeout::sigchld_handler"
+kappa = "f464ff7eb2f607e5f74db8220a50e16d0f60c52d86cefac221044bf72511fc95"
+at = "C=u32"
+embedded = "fff27221a9e0a3f72b1289f411fbbb759cfb5a93eb8f2fe2fbaef7a15cd86c23"
+status = "residue"
+cause = "mir::Operand::Constant: {alloc8: *mut *mut State}"
+
+[[fn]]
+path = "wait-timeout::wait_timeout"
+kappa = "ea3f89d550d587bb91c8b05e9ecd72b0465c76519395c57007e8265f22a323b7"
+embedded = "c06144b0ea9d46ff1db58ede991d87e6be1ce6c5f59e4a86c24fc9838d630ef6"
+status = "residue"
+cause = "mir::Ty: std::process::ExitStatus"
+

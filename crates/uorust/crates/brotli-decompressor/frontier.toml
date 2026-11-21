@@ -1,0 +1,480 @@
+# The brotli-decompressor register (written by `uorust crate brotli-decompressor@6.3.2`; do not edit): every body of
+# brotli-decompressor's MIR at brotli-decompressor 6.3.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 376
+translated = 23
+residue = 353
+
+[module.bit_reader]
+bodies = 54
+translated = 2
+residue = 52
+
+[module.brotli_alloc]
+bodies = 9
+translated = 0
+residue = 9
+
+[module.context]
+bodies = 0
+translated = 0
+residue = 0
+
+[module.crate]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.decode]
+bodies = 91
+translated = 7
+residue = 84
+
+[module.dictionary]
+bodies = 2
+translated = 2
+residue = 0
+
+[module.huffman]
+bodies = 43
+translated = 9
+residue = 34
+
+[module.io_wrappers]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.prefix]
+bodies = 7
+translated = 0
+residue = 7
+
+[module.reader]
+bodies = 31
+translated = 0
+residue = 31
+
+[module.shared_dictionary]
+bodies = 35
+translated = 1
+residue = 34
+
+[module.state]
+bodies = 35
+translated = 0
+residue = 35
+
+[module.transform]
+bodies = 5
+translated = 2
+residue = 3
+
+[module.version]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.writer]
+bodies = 38
+translated = 0
+residue = 38
+
+[embedding]
+bodies = 372
+embedded = 372
+evaluable = 372
+blocked = 0
+
+[differential]
+bodies = 5
+theorems = 30
+
+[[cause]]
+cause = "mir::Ty: BrotliBitReader"
+bodies = 33
+
+[[cause]]
+cause = "mir::Ty: state::BrotliDecoderErrorCode"
+bodies = 26
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: BrotliState<u32"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: huffman::HuffmanCode"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: BitReaderSlice<'_>"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: ErrType"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: AllocU8"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: HuffmanCode"
+bodies = 11
+
+[[cause]]
+cause = "mir::Ty: AllocU32"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: Decompressor<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DecompressorCustomAlloc<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DecompressorWriter<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: DecompressorWriterCustomAlloc<u32"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: Reader<'_>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: brotli_alloc::WrapBox<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: MemPool<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CustomTransforms<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: HuffmanTreeGroup<u32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: bit_reader::BitReaderSlice<'_>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: DecompressorWriterCustomIo<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: state::BrotliState<u32"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: DictTransforms<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: decode::BrotliResult"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: prefix::CmdLutElement"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: prefix::PrefixCodeRange"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::TransformTriplet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item huffman::BROTLI_HUFFMAN_MAX_CODE_LENGTH"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Goto: a loop nested in a loop"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::SwitchInt: a loop whose header does not exit on an order of naturals"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BrotliDecoderCompoundDictionary<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: BrotliDecoderErrorCode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CustomWords<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecompressorCustomIo<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DictWords<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: Self"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bit_reader::BrotliBitReader"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: bit_reader::BrotliBitReaderState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFrom<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::Decompressor<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::DecompressorCustomAlloc<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: reader::DecompressorCustomIo<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::DictTransforms<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::DictWords<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: writer::DecompressorWriter<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: writer::DecompressorWriterCustomAlloc<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: writer::DecompressorWriterCustomIo<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::BinOp::Shl: on Nat and i32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Default"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: a usize literal"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: bit_reader::REG_BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: bit_reader::REG_SHIFT_MASK: mir::Operand::Constant: bit_reader::REG_BITS: mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: decode::SYMBOL_LISTS_OFFSET: mir::Operand::Constant: the constant item huffman::BROTLI_HUFFMAN_MAX_CODE_LENGTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: decode::kRingBufferWriteAheadSlack: mir::Operand::Constant: the constant item shared_dictionary::SHARED_BROTLI_MAX_TRANSFORM_AFFIX_LENGTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item decode::HUFFMAN_TABLE_MASK"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item decode::NUM_DISTANCE_SHORT_CODES"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item decode::TakeDistanceFromRingBuffer::kDistanceShortCodeIndexOffset"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item decode::kCodeLengthRepeatCode"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item huffman::BROTLI_HUFFMAN_MAX_CODE_LENGTH_CODE_LENGTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item huffman::BROTLI_REVERSE_BITS_MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item shared_dictionary::SHARED_BROTLI_MAX_TRANSFORM_AFFIX_LENGTH"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item state::kLiteralContextBits"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: transform::kTransforms: type outside the lift: transform::Transform"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::reverse_bits"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::wrapping_add"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::split_at_mut"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: version::cargo_package_version: brotli-decompressor's MIR stops at mir::TerminatorKind::Call: version::parse_version_component: brotli-decompressor's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: version::parse_version_component: brotli-decompressor's MIR stops at mir::TerminatorKind::Call: core::str::as_bytes"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: AllocHC"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BrotliBitReaderState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BrotliRunningReadBlockLengthState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: BufferType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: MaybeOwnedSlice<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ParsedSerializedDictionary"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: T"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: alloc_stdlib::StandardAlloc"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: brotli_alloc::BrotliAlloc<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::slice::IterMut<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: decode::LiteralBatchStatus"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: huffman::HuffmanTreeGroup<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::BrotliSharedDictionary<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::CustomTransforms<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::CustomWords<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::DictionaryLookup<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::DictionaryLookupError"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: shared_dictionary::ParsedSerializedDictionary"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state::BrotliDecoderCompoundDictionary<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state::BrotliDecoderParameter"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: state::MaybeOwnedSlice<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: transform::Transform"
+bodies = 1

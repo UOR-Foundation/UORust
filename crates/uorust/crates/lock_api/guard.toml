@@ -1,0 +1,55 @@
+[[fn]]
+path = "lock_api::abort_on_panic"
+kappa = "2c6157e882c7e611be7284f1390e19357626c2cd4fb4bbdf6dc75b8709e43f2a"
+at = "T=u32"
+embedded = "56cec5bdd9a14a352db04188331daeb2e14b6a50ab57fa511688f627b0059922"
+status = "residue"
+cause = "mir::Ty: guard::abort_on_panic::AbortOnDrop"
+
+[[fn]]
+path = "lock_api::abort_on_panic::AbortOnDrop::drop"
+kappa = "4beba84048dc239a4dc4c9a5ccb93d044366883a3aff931e03363ef9c658e4b1"
+embedded = "1d1f285481916324d5a07c19b3ec9430410e35ddec6a498d8927e42de964fae4"
+status = "residue"
+cause = "mir::Ty: AbortOnDrop"
+
+[[fn]]
+path = "lock_api::guard::ExclusiveGuardData::as_mut"
+kappa = "7b2b7f74e2b0db7400812a8f5269c7f170bb9a1c83dce7dc82d987a9b9ad9f22"
+at = "T=u32"
+embedded = "473d0f0ff963e6784d3f347e0242e8050a97f90739c73526856cd7ea5df7e71d"
+status = "residue"
+cause = "mir::Ty: ExclusiveGuardData<u32>"
+
+[[fn]]
+path = "lock_api::guard::ExclusiveGuardData::as_ref"
+kappa = "149558d46b079e80d5411d9fcd961485da2ceb5cfacf8bea9dcff9186ab6202a"
+at = "T=u32"
+embedded = "457c9cffa803b5927aaf10293a2db7c145001048756323b33cd202025da00c0e"
+status = "residue"
+cause = "mir::Ty: ExclusiveGuardData<u32>"
+
+[[fn]]
+path = "lock_api::guard::ExclusiveGuardData::new"
+kappa = "1c602b16b380fa1fae116fc7723877343e268eccced872922f8119ab4d50d460"
+at = "T=u32"
+embedded = "b667d4b6b98701c8a859623884555373066f9ed153fca1bb2a0e9ac146901ac4"
+status = "residue"
+cause = "mir::Ty: guard::ExclusiveGuardData<u32>"
+
+[[fn]]
+path = "lock_api::guard::SharedGuardData::as_ref"
+kappa = "7580fbfd7457ef7cdf4f5a30c012349465aae544dc851729eecf29f4a3e5e560"
+at = "T=u32"
+embedded = "15b8e318f5b061540e767b8ffdcef9fd390f406a784457dcd325783ee72bf798"
+status = "residue"
+cause = "mir::Ty: SharedGuardData<u32>"
+
+[[fn]]
+path = "lock_api::guard::SharedGuardData::new"
+kappa = "ee5a97f556bb860b5feffd389fe7aac08145b09d77d364467b84bfff16c1796c"
+at = "T=u32"
+embedded = "72db435205de55760024036d3f9ebbe8e31cef65f8119858998c278651282837"
+status = "residue"
+cause = "mir::Ty: guard::SharedGuardData<u32>"
+

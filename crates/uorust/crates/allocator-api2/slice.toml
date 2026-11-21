@@ -1,0 +1,56 @@
+[[fn]]
+path = "allocator-api2::SliceExt::repeat"
+kappa = "dc948a0cbcec596e1b9fbf449111fbe0bdb78297fea2777888e5504f5609cef5"
+at = "Self=u32, T=u32"
+embedded = "b248eabbf17a60ba277f4ba011480baea5812a0cf0486114ba77b8079695af96"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by SliceExt, which u32 does not implement in core"
+
+[[fn]]
+path = "allocator-api2::SliceExt::to_vec"
+kappa = "f6e0347b413467299f5eb494d722796a71f665da07c7607a1a336ea4c0834074"
+at = "Self=u32, T=u32"
+embedded = "a58e8e2289ac08e04b21d657d0a78f75919767ad1ead2187214741fe3cd71752"
+status = "residue"
+cause = "mir::Ty: alloc::global::Global"
+
+[[fn]]
+path = "allocator-api2::SliceExt::to_vec2"
+kappa = "988930f18d07caf2a9b46ba525b9c9648c9f760086adecdee8e106fdb7ec87b8"
+at = "Self=u32, T=u32"
+embedded = "95d62118059c183c622fe827570a9f52616b3bbec66427e07d010439b4b76246"
+status = "residue"
+cause = "mir::Ty: alloc::global::Global"
+
+[[fn]]
+path = "allocator-api2::SliceExt::to_vec_in"
+kappa = "d01c04139fb34c5e648a683b3b31cf383e4257c685dfb4dd786456c46b278596"
+at = "A=u32, Self=u32, T=u32"
+embedded = "6fe6a47db5067f71c0fd93111a3d6e611dccf2ea2b1da69e17d2187a15005422"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::slice::<impl at src/slice.rs:139:1: 139:28>::repeat2"
+kappa = "9f1f5f5ff55a6bac1c521272bf00dd4ea1605f7be011b1c4f640d02abaafe166"
+at = "T=u32"
+embedded = "e1249da4a602a8425e154a2e384db6963633514b124efc0794da0e5b733ffafb"
+status = "residue"
+cause = "mir::TerminatorKind::Call: vec::Vec::new: allocator-api2's MIR stops at type outside the lift: raw_vec::RawVec<u32>"
+
+[[fn]]
+path = "allocator-api2::slice::<impl at src/slice.rs:139:1: 139:28>::to_vec_in2"
+kappa = "4d8aad391ba9868c46b715be7873fe3ceaa92de9687c40f0cc307ca20cfbba78"
+at = "A=u32, T=u32"
+embedded = "2c496d13b1fa52d47b551b6fc8339c813762b837af389bfce279c22abf73b9f1"
+status = "residue"
+cause = "mir::Ty: vec::Vec<u32, u32>"
+
+[[fn]]
+path = "allocator-api2::slice::<impl at src/slice.rs:139:1: 139:28>::to_vec_in2::<impl at src/slice.rs:150:9: 150:63>::drop"
+kappa = "a75ea24024dfce1df36f6ae580f88a744720469d2394991b42d067c4b670fee6"
+at = "A=u32, T=u32"
+embedded = "e4081e4a904c05406e28fb806e6c688c136d638044095444f94fadf35e65dc4c"
+status = "residue"
+cause = "mir::Ty: <[u32] as SliceExt<u32>>::to_vec_in2::DropGuard<'_, u32, u32>"
+

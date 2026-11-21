@@ -1,0 +1,40 @@
+[[fn]]
+path = "quinn::non_tracking::<impl at src/mutex.rs:121:14: 121:19>::fmt"
+kappa = "aa5129b6ebfd251a86df27fe76f02c8d34c4363a7102485684daf7c97db14294"
+at = "T=u32"
+embedded = "8645997aeb0c3201a520d88e05969cc45fbb9b64f76b8028a1ab9cd91641be4f"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "quinn::non_tracking::Mutex::lock"
+kappa = "3dc12bb56d3511d809d86ccb30b3aff0776dcc593f468e70496875fcc3e91c29"
+at = "T=u32"
+embedded = "78a14502387a97db97edc7d0a1b0609a94831ae79222e729007ab66a58f2be73"
+status = "residue"
+cause = "mir::Ty: mutex::non_tracking::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "quinn::non_tracking::Mutex::new"
+kappa = "e6ddfeb9349b6c2f39a612d56bba82c1f773b257cf1bd559a48ac80fd8e604a2"
+at = "T=u32"
+embedded = "37c76fdf03bc96bb92f8f8558c24cda75b3fa9701e91e227747da7c214df1fd1"
+status = "residue"
+cause = "mir::Ty: mutex::non_tracking::Mutex<u32>"
+
+[[fn]]
+path = "quinn::non_tracking::MutexGuard::deref"
+kappa = "6cce005e64e9512a28a68ff289ea51897d8900cc63fe2251d04e1b373309edd9"
+at = "T=u32"
+embedded = "85200f8fc0aecafa82255f12734818b3ed36f4377ad464a2f09e6b07eb25528d"
+status = "residue"
+cause = "mir::Ty: non_tracking::MutexGuard<'_, u32>"
+
+[[fn]]
+path = "quinn::non_tracking::MutexGuard::deref_mut"
+kappa = "a7cdbba45a907d549603ab6bb5bf64d5c08e77e824696537d312b83450408e63"
+at = "T=u32"
+embedded = "d88ebbb8eb9c2ed14df06cf5a2e96c24170eaf2c0fd34278d6fcd8a4a9c93377"
+status = "residue"
+cause = "mir::Ty: non_tracking::MutexGuard<'_, u32>"
+

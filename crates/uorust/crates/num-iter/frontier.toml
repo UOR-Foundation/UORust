@@ -1,0 +1,58 @@
+# The num-iter register (written by `uorust crate num-iter@0.1.46`; do not edit): every body of
+# num-iter's MIR at num-iter 0.1.46, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 31
+translated = 0
+residue = 31
+
+[module.crate]
+bodies = 31
+translated = 0
+residue = 31
+
+[embedding]
+bodies = 31
+embedded = 31
+evaluable = 31
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: core::ops::Bound<&u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Range<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RangeInclusive<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RangeFrom<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RangeStep<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RangeStepFrom<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RangeStepInclusive<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ToPrimitive"
+bodies = 1

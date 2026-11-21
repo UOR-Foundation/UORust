@@ -1,0 +1,262 @@
+# The socket2 register (written by `uorust crate socket2@0.6.5`; do not edit): every body of
+# socket2's MIR at socket2 0.6.5, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 277
+translated = 4
+residue = 273
+
+[module.crate]
+bodies = 52
+translated = 4
+residue = 48
+
+[module.sockaddr]
+bodies = 28
+translated = 0
+residue = 28
+
+[module.socket]
+bodies = 119
+translated = 0
+residue = 119
+
+[module.sockref]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.sys]
+bodies = 75
+translated = 0
+residue = 75
+
+[embedding]
+bodies = 277
+embedded = 277
+evaluable = 277
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 110
+
+[[cause]]
+cause = "mir::Ty: sockaddr::SockAddr"
+bodies = 22
+
+[[cause]]
+cause = "mir::Ty: socket::Socket"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: SockAddr"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::time::Duration"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: MsgHdrMut<'_"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: msghdr"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: MsgHdr<'_"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: RecvFlags"
+bodies = 5
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Domain"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Duration"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: MaybeUninitSlice<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Protocol"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Type"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sys::MaybeUninitSlice<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OwnedFd"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: SockAddrStorage"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sockaddr::SockAddrStorage"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv4Addr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::os::fd::OwnedFd"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item core::num::MAX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::AF_INET"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::AF_INET6"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::AF_UNIX"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::IPPROTO_ICMP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::IPPROTO_ICMPV6"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::IPPROTO_MPTCP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::IPPROTO_TCP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::IPPROTO_UDP"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::SOCK_DGRAM"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item libc::SOCK_STREAM"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: sys::_cloexec"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::in6_addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::in_addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::ip_mreqn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::linger"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::sockaddr_un"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: libc::timeval"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sockaddr_un"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: socket::InterfaceIndexOrAddress"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sockref::SockRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::Ipv6Addr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV4"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::SocketAddrV6"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::TcpListener"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::TcpStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::net::UdpSocket"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::os::fd::BorrowedFd<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::os::unix::net::SocketAddr"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::path::Path"
+bodies = 1

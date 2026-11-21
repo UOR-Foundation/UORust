@@ -1,0 +1,149 @@
+[[fn]]
+path = "minimal-lexical::num::Float::INFINITE_POWER"
+kappa = "0ce32c5d88c482abc8905e2a668616f11bbf20905bd7435e56354453549d75af"
+embedded = "fbda7710cf6429813f54dcf0147f6b0cadfa660f234cc0c46ef774e140966dc7"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Self as num::Float>::MAX_EXPONENT"
+
+[[fn]]
+path = "minimal-lexical::num::Float::MAX_MANTISSA_FAST_PATH"
+kappa = "5f53365728a2b632cd5c932b15cc1b17b5e6283e6429511398a66b38cbb072d7"
+embedded = "1c35f7bcd7b721737fe922c5f52c28b9102e752f413417319d5c4cb3f8fa7c14"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <Self as num::Float>::MANTISSA_SIZE"
+
+[[fn]]
+path = "minimal-lexical::num::Float::exponent"
+kappa = "819e294ee5babc953d76a8c8fb5f35c3be6fbbf968c81536714b79e449f7a797"
+at = "Self=u32"
+embedded = "b7ca924d9297dadc68ee66292248e1f8074b5c270eb2808613132eb95bbeb537"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Float, which u32 does not implement in core"
+
+[[fn]]
+path = "minimal-lexical::num::Float::int_pow_fast_path"
+kappa = "7c0bb08c66eb861c336c8236f684a1bb500e82d9177feb9a57594ba1833bffd1"
+embedded = "8e6e6b8d2bfb3a35a168a61760aaf8f679180a76fbb2279076780866a8979880"
+status = "residue"
+cause = "mir::Operand::Constant: <Self as num::Float>::int_pow_fast_path::promoted[1]"
+
+[[fn]]
+path = "minimal-lexical::num::Float::is_denormal"
+kappa = "8f7788678224fcebd348e6c6c615a2662997c724e4de4a8c8f2f3161a15314cc"
+at = "Self=u32"
+embedded = "c2332373ee52ae582ada65f373cc95b5b5ce272c73d16b39badd87a851e4cf8c"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Float, which u32 does not implement in core"
+
+[[fn]]
+path = "minimal-lexical::num::Float::mantissa"
+kappa = "57a7eeb915dacf713f578a311263ace1b20197415c7587f4be68a092485785bb"
+at = "Self=u32"
+embedded = "cc17c80dace95b4e217ff8a903d160c5ce7172cf2bebc22056b9b1bda9ee2773"
+status = "residue"
+cause = "mir::Instantiation: u32 for a parameter bounded by Float, which u32 does not implement in core"
+
+[[fn]]
+path = "minimal-lexical::num::f32::DENORMAL_EXPONENT"
+kappa = "54fcd85c1ebc1678c04a04ab2a38a45f414e90ce655e55dde306117d3ec64a6c"
+embedded = "5c40e9b4e91b529e28a73fb07084f20c411c1379b577bc069cf0cedd4c60d4ea"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <f32 as num::Float>::EXPONENT_BIAS"
+
+[[fn]]
+path = "minimal-lexical::num::f32::EXPONENT_BIAS"
+kappa = "8ba943443ce1509e8f6b8915f9ca2eaf460a20323969e227af15069882f45937"
+embedded = "d6b0e24deca27c7f3ceb220af5c7d85f358f5a7270e3e40e0214132a95fdd3e6"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <f32 as num::Float>::MANTISSA_SIZE"
+
+[[fn]]
+path = "minimal-lexical::num::f32::MAX_EXPONENT"
+kappa = "1f042090e0775b21600490323a6e9b3c96f20f093405851023e0ad5b68102309"
+embedded = "71bfa594715aeb5b7d45f267881685823c816d12254fb774113f8c77e620f583"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <f32 as num::Float>::EXPONENT_BIAS"
+
+[[fn]]
+path = "minimal-lexical::num::f32::from_bits"
+kappa = "53fbe6a6c05e76d455100e6aad9a316f780c984c915b1bda24b4c049ca2265e7"
+differential = 7
+embedded = "f35cfe7ac6bf4b4faca3c6227da3834140de95a520b9ca2508d34454fe65c293"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "minimal-lexical::num::f32::from_u64"
+kappa = "ae0525ac6e6a9f64629b263571d49a3f6ff453067b21ed163a22567475ffed24"
+differential = 7
+embedded = "20c9a17a10de061a22c09d7c784d9475cffddf2db162d8fa438ac46df5109933"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "minimal-lexical::num::f32::pow_fast_path"
+kappa = "a93a22c0aea02ab30e3d48f5f1bbd0565cb3fb0400988d763da70bce31b8f5ca"
+embedded = "9d02140d842e68f8e614d1f1f9211550b49bfc9269a0f868cda08f9a017d7d64"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "minimal-lexical::num::f32::to_bits"
+kappa = "54c8c6859d7630e2ecc98324f5f266443f05842764ea2ef745f52810a69756ff"
+differential = 12
+embedded = "b58d12a8b2c63be195f83fe405d399152215f38108cf870f7eb690831d486f60"
+status = "residue"
+cause = "mir::Ty: f32"
+
+[[fn]]
+path = "minimal-lexical::num::f64::DENORMAL_EXPONENT"
+kappa = "46052c0d96ccc525fe4957a2b0355d5b3a15171bd37b09d51d8bd2ff609e24f6"
+embedded = "0bf50197deeaf91f27cf3897457c345908c09fe50e02e88b91b76b9e8c55453a"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <f64 as num::Float>::EXPONENT_BIAS"
+
+[[fn]]
+path = "minimal-lexical::num::f64::EXPONENT_BIAS"
+kappa = "b96cc52e49fd7dbd6f850caefa381c56d5ea16686e396eab3a44e27e821f1c3a"
+embedded = "99c8cbd658c7121ed4e470ebb8e2dbaca3613844473c49ee9dd49d0a60eb0d28"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <f64 as num::Float>::MANTISSA_SIZE"
+
+[[fn]]
+path = "minimal-lexical::num::f64::MAX_EXPONENT"
+kappa = "1831fed418b6ad15fcde905f8c1510d777708ba4fd00cec24deccb5da6bbe898"
+embedded = "2e00c3772a10e5619cdd397aa3d0b39ccf162affb95b458af67f38102de45246"
+status = "residue"
+cause = "mir::Operand::Constant: the constant item <f64 as num::Float>::EXPONENT_BIAS"
+
+[[fn]]
+path = "minimal-lexical::num::f64::from_bits"
+kappa = "b9fcfff6ec571acf4842930a78ebf2118189d97cda1f427e6b93505e34e3ae0f"
+differential = 7
+embedded = "46983f8a69076dab6f77b53c29fd8e56fcd5394168d8f55349c8bdf717bff202"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "minimal-lexical::num::f64::from_u64"
+kappa = "f625c513afe07b28ca1a30f81a344d0aefde3f746d4d6b4b4bf8dd98128eb8eb"
+differential = 7
+embedded = "5d12e1d5f3eb8a13951d1189d332551a6c599ff33441a33afecf8589da9a4075"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "minimal-lexical::num::f64::pow_fast_path"
+kappa = "e86f24643ef0ee13e791ef7439054345cab9c42c2986352743b95c43bde6c337"
+embedded = "60c679e300dd2981ef9b6bd4d1a7c7bc27d401dec476153cfc83a4ebb7d4d7c2"
+status = "residue"
+cause = "mir::Ty: f64"
+
+[[fn]]
+path = "minimal-lexical::num::f64::to_bits"
+kappa = "8327c47d08c942ad09200ff02d7cc6e35888823e26fcbb315f757ad30fb3af2b"
+differential = 12
+embedded = "7000275abb0813d261d9b68ceceb516eca8c9b9c1a75ac89f71e817b2ec7037e"
+status = "residue"
+cause = "mir::Ty: f64"
+

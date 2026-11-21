@@ -1,0 +1,40 @@
+[[fn]]
+path = "tracing-serde::AsMap::field_map"
+kappa = "d49ee5a9ba314d873331ad8dc14d9636b1ad855239708bbe110e3b2c1a82d4e3"
+at = "Self=u32"
+embedded = "b11fb4682c4478d1944aa8e6e8a69daa35b2440f9d50a0ee6fa55b4006df5aa7"
+status = "residue"
+cause = "mir::Ty: fields::SerializeFieldMap<'_, u32>"
+
+[[fn]]
+path = "tracing-serde::fields::<impl at src/fields.rs:4:10: 4:15>::fmt"
+kappa = "177cfc93f555b9a66373d69fdceab0cd23daed3b23b48eafaaedffe00165afe7"
+at = "T=u32"
+embedded = "c7a1c98a64eb8eb7685f1fea2f3d5a2cb6561e7e0673767a5aa3597c877c6501"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "tracing-serde::fields::SerializeFieldMap::serialize"
+kappa = "dfd8f3d8cb4c2735aff8b76550e032681338778d0bcd385345982ae46ec48467"
+at = "S=u32"
+embedded = "a552a79bcbeb317e451c188cb40a995e7f7f64ea381b1c788246dd8dce7faba6"
+status = "residue"
+cause = "mir::Ty: tracing_core::Event<'_>"
+
+[[fn]]
+path = "tracing-serde::fields::SerializeFieldMap::serialize#2"
+kappa = "be1ee72e385759e62e4cb411e10cb500e2096c5868ff106454b5345d7000747c"
+at = "S=u32"
+embedded = "827fb9c51b8632544591931950da956a1c5ccbed9bb62960077279a69100e82b"
+status = "residue"
+cause = "mir::Ty: tracing_core::span::Attributes<'_>"
+
+[[fn]]
+path = "tracing-serde::fields::SerializeFieldMap::serialize#3"
+kappa = "b95cb2a965b346917c5c05025dd82e445042639ff7c662afcb05672022912d1c"
+at = "S=u32"
+embedded = "d8a32c788a6cfecc08ed72b85b1dc173a3bddaf351be19353fc98738065f0f2b"
+status = "residue"
+cause = "mir::Ty: tracing_core::span::Record<'_>"
+

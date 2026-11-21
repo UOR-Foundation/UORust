@@ -1,0 +1,60 @@
+[[fn]]
+path = "openssl-probe::CERTIFICATE_DIRS"
+kappa = "63174e1f70d00a4a478f71cfafb840118b48a7a873ec229155e1fe46eb72a1a5"
+embedded = "161a9dbe1a051e8a6be32b07ee37287a9d8b7b2a92791705c4c054713836a1b9"
+status = "translated"
+digest = "5f1658ec27070d6473e65ce85fa056d3a647a829c29f87ed37bb63c100637da8"
+
+[[fn]]
+path = "openssl-probe::CERTIFICATE_FILE_NAMES"
+kappa = "68584c81ddd7f22ead2bd76ea957a064115e1d47f01c932aca5455048d5f44df"
+embedded = "334d0b6d3a1f9e15e68988130c3192122f5449238b61af00a0e9fef480610588"
+status = "translated"
+digest = "6458fbe8be7a1e76775f6a2d9a85f38f98545b8d421911c1a28f2d9fb25ebb4f"
+
+[[fn]]
+path = "openssl-probe::ProbeResult::from_env"
+kappa = "6de8d4baa1fe3fad92e813b65e8bfce10dc11f7030c6ed3e9e9e75860f8b9f07"
+at = "ProbeResult=u32"
+embedded = "4bdb5319c59c858339d31f9758cbc9949a838838a95c7be7b400491e4bbce8e5"
+status = "residue"
+cause = "mir::AggregateKind::Closure: <impl at src/lib.rs:119:1: 119:17>::from_env::{closure#0}: type outside the lift: std::path::PathBuf"
+
+[[fn]]
+path = "openssl-probe::candidate_cert_dirs"
+kappa = "7951ffb062cdf642b497505dd80d60aae509e0464451b38518e401952db5b344"
+embedded = "8cc0f0c9dc620322d69527dfb4ed0b3f1a43b7c23af0bb57748b36fdbd2b6e4c"
+status = "residue"
+cause = "mir::Ty: str>}"
+
+[[fn]]
+path = "openssl-probe::has_ssl_cert_env_vars"
+kappa = "449189d1b1932a4f9f15147c30a8753297a907d8cc0ea0bad7db8c8d7c6a92d1"
+at = "ProbeResult=u32"
+embedded = "bb2e6da64cd9a61f75d2e4ccc00baea3922c03df99f17188fb0a3609564c8d82"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ProbeResult::from_env: openssl-probe's MIR stops at mir::AggregateKind::Closure: <impl at src/lib.rs:119:1: 119:17>::from_env::{closure#0}: type outside the lift: std::path::PathBuf"
+
+[[fn]]
+path = "openssl-probe::probe"
+kappa = "c092164dc7297ff2c6efb175ba0b3d8d6308cbca1d8fab81dba9b33c792afe44"
+at = "ProbeResult=u32"
+embedded = "bc63b8d9bc14425d1944fd74f4b76bbf83f52c909f46813fe9e6b69f64f9bd61"
+status = "residue"
+cause = "mir::TerminatorKind::Call: ProbeResult::from_env: openssl-probe's MIR stops at mir::AggregateKind::Closure: <impl at src/lib.rs:119:1: 119:17>::from_env::{closure#0}: type outside the lift: std::path::PathBuf"
+
+[[fn]]
+path = "openssl-probe::put"
+kappa = "26424b095adf104fd8ee44b5ee4cd105758a066d8731b235766f766b3cd42187"
+embedded = "e47b04ded03f4c221b25b7a689e9b641931d9fc0a48385cb1543f2185671d179"
+status = "residue"
+cause = "mir::Ty: OsStr"
+
+[[fn]]
+path = "openssl-probe::try_init_openssl_env_vars"
+kappa = "f0488eeb3edd3b481d83e7aeafd6f642c1d11df76d1bffbab484b964fc2e04ad"
+at = "ProbeResult=u32"
+embedded = "0b14d6c1ecc63b50280fa3a419efcfaf88342fe7643b2d597110e4f26b77373a"
+status = "residue"
+cause = "mir::TerminatorKind::Call: probe: openssl-probe's MIR stops at mir::TerminatorKind::Call: ProbeResult::from_env: openssl-probe's MIR stops at mir::AggregateKind::Closure: <impl at src/lib.rs:119:1: 119:17>::from_env::{closure#0}: type outside the lift: std::path::PathBuf"
+

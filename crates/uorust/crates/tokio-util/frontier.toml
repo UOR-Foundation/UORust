@@ -1,0 +1,285 @@
+# The tokio-util register (written by `uorust crate tokio-util@0.7.20`; do not edit): every body of
+# tokio-util's MIR at tokio-util 0.7.20, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 140
+translated = 0
+residue = 140
+
+[module.either]
+bodies = 18
+translated = 0
+residue = 18
+
+[module.future]
+bodies = 12
+translated = 0
+residue = 12
+
+[module.sync]
+bodies = 105
+translated = 0
+residue = 105
+
+[module.util]
+bodies = 5
+translated = 0
+residue = 5
+
+[embedding]
+bodies = 140
+embedded = 140
+evaluable = 140
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 13
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::CancellationToken"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: sync::mpsc::PollSendError<u32>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: CancellationToken"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: TreeNode"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::option::Option<u32>>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Either<u32"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Inner"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PollSemaphore"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: PollSender<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ReusableBoxFuture<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<std::result::Result<"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::_::Projection<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::_::ProjectionRef<'_"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tokio::sync::OwnedSemaphorePermit"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: tokio::sync::Semaphore"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CallOnDrop<u32"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::with_cancellation_token::WithCancellationTokenFuture<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::with_cancellation_token::WithCancellationTokenFutureOwned<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::with_cancellation_token::_::Projection<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: future::with_cancellation_token::_::ProjectionRef<'_"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::task::Poll<"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::WaitForCancellationFutureOwned"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::tree_node::TreeNode"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::mpsc::PollSender<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::mpsc::PollSenderFuture<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: sync::poll_semaphore::PollSemaphore"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: tokio::sync::futures::Notified<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DropGuardRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Pin<Box<u32>>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PollSendError<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PollSenderFuture<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RestoreOnPending"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RunUntilCancelledFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RunUntilCancelledFutureOwned<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WaitForCancellationFuture<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WaitForCancellationFutureOwned"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WithCancellationTokenFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: WithCancellationTokenFutureOwned<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn futures_core::Future<Output = u32> + std::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: either::Either<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: guard::DropGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: maybe_dangling::MaybeDangling<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::RunUntilCancelledFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::RunUntilCancelledFutureOwned<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::WaitForCancellationFuture<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::_::Projection<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::_::ProjectionRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::guard::DropGuard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::cancellation_token::guard_ref::DropGuardRef<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::mpsc::State<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::reusable_box::CallOnDrop<u32"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: sync::reusable_box::ReusableBoxFuture<'_"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokio::sync::mpsc::OwnedPermit<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: tokio::sync::mpsc::Sender<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::RestoreOnPending"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: util::maybe_dangling::MaybeDangling<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sync::cancellation_token::CancellationToken::run_until_cancelled<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sync::cancellation_token::CancellationToken::run_until_cancelled_owned<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: {async fn body of sync::mpsc::make_acquire_future<u32>"
+bodies = 1

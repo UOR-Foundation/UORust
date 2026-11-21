@@ -1,0 +1,289 @@
+# The anstream register (written by `uorust crate anstream@1.0.0`; do not edit): every body of
+# anstream's MIR at anstream 1.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 166
+translated = 3
+residue = 163
+
+[module._macros]
+bodies = 1
+translated = 0
+residue = 1
+
+[module.adapter]
+bodies = 86
+translated = 1
+residue = 85
+
+[module.auto]
+bodies = 22
+translated = 0
+residue = 22
+
+[module.buffer]
+bodies = 11
+translated = 0
+residue = 11
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.fmt]
+bodies = 3
+translated = 0
+residue = 3
+
+[module.stream]
+bodies = 25
+translated = 2
+residue = 23
+
+[module.strip]
+bodies = 16
+translated = 0
+residue = 16
+
+[embedding]
+bodies = 166
+embedded = 166
+evaluable = 166
+blocked = 0
+
+[differential]
+bodies = 1
+theorems = 7
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 18
+
+[[cause]]
+cause = "mir::Ty: std::io::Error"
+bodies = 16
+
+[[cause]]
+cause = "mir::Ty: auto::AutoStream<u32>"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: StrippedBytes<'_>"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: WinconCapture"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: Buffer"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: adapter::strip::Utf8Parser"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: buffer::Buffer"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: StrippedStr<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: adapter::strip::StrippedBytes<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: adapter::strip::StrippedStr<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::io::StderrLock<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: std::io::StdoutLock<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by IsTerminal"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AutoStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StripBytesIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StripStrIter<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: StripStream<u32>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: adapter::strip::StripBytes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: adapter::strip::StripStr"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: adapter::wincon::WinconBytes"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: colorchoice::ColorChoice"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: ColorTarget"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: CsiState"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: State"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StripBytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: StripStr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: VtUtf8Receiver<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WinconBytes"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: WinconBytesIter<'_>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: adapter::wincon::WinconCapture"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: anstyle::Style"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Stderr"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: std::io::Stdout"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by AsLockedWrite"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Ref: BorrowKind::Mut of a place behind a shared reference"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::slice::as_ptr"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: std::str::from_utf8_unchecked"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Action"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StderrLock<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: StdoutLock<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: adapter::strip::StripBytesIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: adapter::strip::StripStrIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: adapter::wincon::ColorTarget"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: adapter::wincon::CsiState"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: adapter::wincon::WinconBytesIter<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: anstyle::AnsiColor"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write + Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write + Send + Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write + std::marker::Send"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::io::Write + std::marker::Send + std::marker::Sync"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: fmt::Adapter<u32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: impl crate::stream::RawStream"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::fs::File"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: strip::StripStream<u32>"
+bodies = 1

@@ -1,0 +1,24 @@
+[[fn]]
+path = "alloc-no-stdlib::stack_allocator::<impl at src/stack_allocator.rs:23:1: 24:31>::clear_if_necessary"
+kappa = "7b159b19af9cc0965bd454c3166a93c4784f54e0cad6c3d785e75f3a226452e7"
+at = "T=u32, U=u32"
+embedded = "141133fd540dafccd33ba93e0741ac02799b696580da6c33e6f890da59a3314d"
+status = "residue"
+cause = "mir::Ty: allocated_stack_memory::AllocatedStackMemory<'_, u32>"
+
+[[fn]]
+path = "alloc-no-stdlib::stack_allocator::StackAllocator::alloc_cell"
+kappa = "e53418d55fae9f355ede98cc34369fa77ff6af47d39959103259343f5100b6d6"
+at = "T=u32, U=u32"
+embedded = "f7bbae5df8039ced2505a152202b5d165fcf5943110b2ed788a90c0cb59005f8"
+status = "residue"
+cause = "mir::Ty: allocated_stack_memory::AllocatedStackMemory<'_, u32>"
+
+[[fn]]
+path = "alloc-no-stdlib::stack_allocator::StackAllocator::free_cell"
+kappa = "89a5f67334c48e8ec5e8ae4407786f45b1dadcd8ecefdbe346f929e6d94ac4cd"
+at = "T=u32, U=u32"
+embedded = "96f4a0a87adc3c52d65475da5fb9061750c6a30924f169cb4eb7e3d2d8ce28a9"
+status = "residue"
+cause = "mir::Ty: StackAllocator<'_, u32, u32>"
+

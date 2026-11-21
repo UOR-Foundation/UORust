@@ -1,0 +1,250 @@
+[[fn]]
+path = "brotli-decompressor::Shift"
+kappa = "fb9e4719dbc101e5b8810086d5bf7a719689b35f911a163a872a60cc20a48ff8"
+embedded = "11e9d615d0f64123dc5f9a26598be174e68d6d1d9ce5e3ed85a115e6b034a054"
+status = "translated"
+digest = "a97b5ce97747d3e18aa3ce15328ef28e906f23c9f08e6e56ca36763e3812bfd8"
+
+[[fn]]
+path = "brotli-decompressor::dry_parse_serialized_dictionary"
+kappa = "271c91ee85d0fd3b0dadd07cc0a21242638f38748e455bd61a2aee7c6401af20"
+embedded = "4a6425fa2883c9225d24e746e3e09e46bb46c2b096bfbbc56128880238a657d4"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::ParsedSerializedDictionary"
+
+[[fn]]
+path = "brotli-decompressor::parse_prefix_suffix_table"
+kappa = "979ecf4ded70f5da1732a19215b8b6eb3793b30e9b35f068066a31f74d8420c7"
+embedded = "3642bb528d579c6f3f183dfc6825ff030d749f3005d278182cabb796547de1f6"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "brotli-decompressor::parse_serialized_dictionary_into"
+kappa = "afe763021dca27815d14d10f054f7afcc4c8db02a1f752b69d57f7e51694ebeb"
+at = "AllocU32=u32"
+embedded = "3dd2c1f7b5ce728075962d0a05ecd60ec4448f8de32939ae4e323af94edc59bc"
+status = "residue"
+cause = "mir::Ty: ParsedSerializedDictionary"
+
+[[fn]]
+path = "brotli-decompressor::parse_transforms_list"
+kappa = "cbba886fd331bee20e92a283651a367e8091c6c689b82f29b130fb174b90dcab"
+embedded = "56bb8df16f24a1df716910a84a28421438c367507151b6c04683ef870399b4e2"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "brotli-decompressor::parse_word_list"
+kappa = "debc1800b76b643454213c2dbf813e460a47c75483216c1ba2128415e9464ef1"
+embedded = "f5eadf5e6bb433c4e6672f03ab4d4d28969ffce9a6b58d1f29cb147bbd51fc24"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::<impl at src/shared_dictionary.rs:104:10: 104:15>::clone"
+kappa = "e20ccb081dcd4d454ae626ddbf93deebee3fd02aa06f9fdc0aa28c876577e74e"
+embedded = "c858a084fe9d2cbc335faf945f337c86b936c25d5b1cbb423052e41e142bace6"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::TransformTriplet"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::<impl at src/shared_dictionary.rs:237:10: 237:15>::clone"
+kappa = "9d34775d1784717d37a7bb2814a07518a4e8d7311e675f913b587e67fdb3a08e"
+embedded = "82a2a90843a2b3fbffc0a6b84eb71396b39504f5cdba932ddc647db6905af1bb"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::CustomWords<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::<impl at src/shared_dictionary.rs:267:10: 267:15>::clone"
+kappa = "89bdbe5f6b313a452b906cbe6c5b30f82c3a29ed8f895ac3bff11122bbfe6040"
+embedded = "9ab53951b1750269a1849c3370f92a88c9a9f70eace183ef84b83fe58eb3e3c3"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::DictionaryLookupError"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::<impl at src/shared_dictionary.rs:275:10: 275:15>::clone"
+kappa = "11c5ae0c31037c2ea7b5a58f30dd35f6290950f1d719395fa726bfc6cf681898"
+embedded = "60a333710be43fee15fcc6e96159635a317069b686d6f37fb6b739c441acd54f"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::DictWords<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::<impl at src/shared_dictionary.rs:306:10: 306:15>::clone"
+kappa = "973d359a361a0c79d30b1b2849b4da0f4adf5cb26b6ec7ce4682bf3ff3e74ff5"
+embedded = "9e2dddf9e9cebe0ebde9937e9db2cbdac4e86a753ea9cef164ea54e811ef2d45"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::CustomTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::<impl at src/shared_dictionary.rs:394:10: 394:15>::clone"
+kappa = "362990bcf5c9b888dc1ca7491cc1f0e01bcb04d575889740568e50bdcc7073db"
+embedded = "e6a0035962a558cc646de322b10b415ee6798cbd02048ec436417b25fbc2d54d"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::DictTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::BrotliSharedDictionary::default"
+kappa = "5feec363b0c74ec78af0258fec80dc7b60e8cb9932940f950a74e9bef0962496"
+at = "AllocU32=u32, AllocU8=u32"
+embedded = "cba60e5c484298fa9dacee249a30348c4c4eb9417f2145598de7406ccbb21de9"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::BrotliSharedDictionary<u32, u32>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::BrotliSharedDictionary::is_custom"
+kappa = "18962e3ca7ddf0f73b337ac147df7a262889a015983cf2385ad8c06ed6e81ed7"
+embedded = "ee38d3f598ba2260d332e09a9a0383ed5c824fa1456da677439f31a63b2f5535"
+status = "residue"
+cause = "mir::Ty: AllocU8"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::BrotliSharedDictionary::lookup"
+kappa = "b63ccd46b418194b0f87da27f7c035b187cd12868cd31a562af8600c026bc515"
+at = "AllocU32=u32, AllocU8=u32"
+embedded = "d8ac7c17536e8e8d00720b26707b3788c63c679dc176a12cf984025f13fed7fb"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::DictionaryLookup<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::BrotliSharedDictionary::transforms_of"
+kappa = "09aa2cbc43db821c283d78534fa08c01250ff7478c0586bc067ee385c6078c15"
+at = "AllocU32=u32, AllocU8=u32"
+embedded = "564c22feffc5d051144b39520edc7fa49a076ea06f1328a747a13c387d653ebf"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::DictTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::BrotliSharedDictionary::words_of"
+kappa = "7dc14e568e55c688f53506e47bc87c51de4a5ad0a3d1730d293f5b33e5b0bb47"
+at = "AllocU32=u32, AllocU8=u32"
+embedded = "0c9e632d798be00f19302ab49bc05b000111a49d26192e042f0c4456fe4add37"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::DictWords<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::CustomTransforms::apply"
+kappa = "3093a9f75a55ac9e817a324e2833e1908e8d8e36246148658363bc88bdee2f67"
+embedded = "febd70024e30ff98f7c5453f72887482042eb9d42792c01e42f41fe131d65edf"
+status = "residue"
+cause = "mir::Ty: CustomTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::CustomTransforms::cutoff_identity"
+kappa = "3ddcf89c51409040e3ee2b1bfa828bac6b69f0f4515bb50457cc24595c23c96c"
+embedded = "0adcccaa5d3dd070613b3bcd58b69f7d02514c2d7685f53a300a25052c0bc41a"
+status = "residue"
+cause = "mir::Ty: CustomTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::CustomTransforms::num_transforms"
+kappa = "3d244de58b7dfd17c52014a3b4a22a909037bcd9515681917cfb5518f2d992c5"
+embedded = "73293301c089f9dc28d1b1a275b037d5a9f0aef3ba11c0830b0be64ee750704f"
+status = "residue"
+cause = "mir::Ty: CustomTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::CustomTransforms::param"
+kappa = "98d3a42bbe396ca95d769fcdde041113ce1264bc3db2a218d6a030e70fbea128"
+embedded = "f81c78080b88576f0e9c218083f8d91803d7c37e9aaedf1506be414d14afe256"
+status = "residue"
+cause = "mir::Ty: CustomTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::CustomTransforms::stringlet"
+kappa = "ed0b3f9eacd4b12eb5783f3db78533e1cbb46d577e84b2ec072e806e7751c69f"
+embedded = "bb3886e78a355a3339430f4217f1e1ede973cbfe5a96126c6bcb81a86f4e819d"
+status = "residue"
+cause = "mir::Ty: CustomTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::CustomTransforms::transform_triplet"
+kappa = "684ee6283af292e193c05fc576dd3712ce8e51d62176c91ebbbfdf0efedbdd64"
+embedded = "8a3f570a1810a239d2fc9edbacf0086b4e2016e108239f3630cc46c909bb6839"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::TransformTriplet"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::CustomWords::size_bits_by_length"
+kappa = "c1e4aec7cb6444e9163d108c78b4fbb92916e61a145f2dfb0f6778cbd1ba737a"
+embedded = "d85e5a31cf56761cd5f6c04890a3817401ebefd9922f0874bdfad8e497dbf6c2"
+status = "residue"
+cause = "mir::Ty: CustomWords<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::CustomWords::word"
+kappa = "799c70d8efc05e7cd0df83ffc1e8113c038ffd348d920b8f2800186cf64d714d"
+embedded = "9fb1b89a1339fdfafa45a03314b239f538684a3a0dbf1743ac1ff27ce0e7666d"
+status = "residue"
+cause = "mir::Ty: CustomWords<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::DictTransforms::apply"
+kappa = "707ea804a7db9dc61b99f34b2fa021bcce6f8842da093a3b00f9922fb08d171f"
+embedded = "795531d2c477a2af9a7aebff34b03b19a69b8f42181f421ac2da3c56b6bf2e29"
+status = "residue"
+cause = "mir::Ty: DictTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::DictTransforms::cutoff_identity"
+kappa = "9da129b870c69e22b105536dc5a145e7228d78a5e1b9e709d4df663595c4cc00"
+embedded = "ab47af47000c8aa12ceb2a6545f683d95b86a2cafa13483a2dcd5c877b57b8c9"
+status = "residue"
+cause = "mir::Ty: DictTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::DictTransforms::num_transforms"
+kappa = "09dde620bf0d047bf7d80f02da88c92b82f960e8538df6213ccf887473bf533d"
+embedded = "9f3bbe000cd6f2e6551dc96b5feed995c515d15656145e0ff23a88848a7d56f3"
+status = "residue"
+cause = "mir::Ty: DictTransforms<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::DictWords::size_bits_by_length"
+kappa = "4eb5c11b632a7c4a6d94316aa0dd295073ba8f9e8fd87963afad718e061e11f7"
+embedded = "5828f17f083c67d67b64e96da13e499b30855fc7a8d58108af00138d0af70a56"
+status = "residue"
+cause = "mir::Ty: DictWords<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::DictWords::word"
+kappa = "d7f4029f4179b6551713e3c874244845d7fde6327bfff78df0ca00c0d1f42289"
+embedded = "1d87dfa457c42ed245a9273453e679cc0b64a17c98facfbd2acf7de76c919a50"
+status = "residue"
+cause = "mir::Ty: DictWords<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::Reader::read_bool"
+kappa = "f181255a792b62dd2b9d3628a456cc7b3820c60e84212a3a136ebc7e102165ca"
+embedded = "a5e0407d56ce8a352957f0fd0cf1dd55cd83c06578759d7319672670033e4c08"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::Reader::read_u16"
+kappa = "c621afb6d9eaae16a000ac2416709b9e2fec544e00e99325f3b8b196c1a363cf"
+embedded = "b299559eea5a6a2c0b8ccfbcffe0ac94b35f76953876ab9ce8832a433c848624"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::Reader::read_u8"
+kappa = "e2f0055a142cb2b44fe05235ee298facd1039c40bf63f9c3da846e5f8146b375"
+embedded = "41b31491e44d08caa3bfe877ebc55efbee71782da18719a8b4796a61a1ce91aa"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "brotli-decompressor::shared_dictionary::Reader::read_varint32"
+kappa = "6fcdf0a88a4c66eb27eb5fb1d6affe48e6f8a350095ae9a1584adeaec1ad2d80"
+embedded = "e259d7f03708c8c7ea138646fbbc5f8902744734492452a504a5cdc9f0244084"
+status = "residue"
+cause = "mir::Ty: Reader<'_>"
+
+[[fn]]
+path = "brotli-decompressor::transform_triplet_at"
+kappa = "8fc3ba347e2e7e560761cc7641f3a2eca0aa300acff40811c84653e3c65f25ec"
+embedded = "f9aa6ca7305900a87aa1ee3598d470add6ddbe6e25584d9d53563ed836b16289"
+status = "residue"
+cause = "mir::Ty: shared_dictionary::TransformTriplet"
+

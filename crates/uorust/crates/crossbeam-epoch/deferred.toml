@@ -1,0 +1,52 @@
+[[fn]]
+path = "crossbeam-epoch::deferred::Deferred::NO_OP"
+kappa = "e34c9df76bf65ee0211804f90ca75e6aa971eb1042684755df32787618a347fe"
+embedded = "2ca122df611814dce0a07b757e01ad72335370b3a0dd7ccbc7cb606828aca8ec"
+status = "residue"
+cause = "mir::Ty: deferred::Deferred"
+
+[[fn]]
+path = "crossbeam-epoch::deferred::Deferred::call"
+kappa = "22e026667327a5e83389bd9b7ac10d7bcbe14c1c95e5d464dbd68a9aa59dec9a"
+embedded = "e2a9eb9c5c70d0bd981f31cfbcfaf3c65773075426eb56d87d9c843603bb5713"
+status = "residue"
+cause = "mir::Ty: Deferred"
+
+[[fn]]
+path = "crossbeam-epoch::deferred::Deferred::fmt"
+kappa = "8adbfc55cb6463c656245be9dcc3163aec1bbc2966077c69ce970f193b5c1a9d"
+embedded = "aba7f582fad53f432c54fca0272d55d8c61116832e91571ba077a0bb19f1ccc5"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "crossbeam-epoch::deferred::Deferred::new"
+kappa = "d8b35b5f6d881f8b7b43bf4f723a1a262dc083e098f326813ce922002c26b47e"
+at = "F=u32"
+embedded = "627a187628b56a646d6a060fbc413fc4c34d84cc9f01c013436e502085bb341b"
+status = "residue"
+cause = "mir::Ty: deferred::Deferred"
+
+[[fn]]
+path = "crossbeam-epoch::deferred::Deferred::new::call"
+kappa = "8ecc678960e7b2a5ef8bca94d1a184219a1b2d2b355dcd57716bdc414bcecd9b"
+at = "F=u32"
+embedded = "45d1c8303c5b0f8c1ae33713af35202e347a82994ec404e89282ecbe0dcb4d67"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut u8>::cast"
+
+[[fn]]
+path = "crossbeam-epoch::deferred::Deferred::new::call#2"
+kappa = "68f526af790975eabd5e2eac3cd9a89427aaa5c040597803605c046f5a176cdd"
+at = "F=u32"
+embedded = "86f9362515a3d3c14bfae4ef6778ba0b856047ba1b8cc4be7091c7dcad969acf"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::ptr::mut_ptr::<impl *mut u8>::cast"
+
+[[fn]]
+path = "crossbeam-epoch::no_op_call"
+kappa = "25b0af47e5aadfb3439447b6e1a5ce9fd2c0818eca6dc609ce3f63f45481a048"
+embedded = "481649d4472a44fde347ec0f7420a1c01f4e2046dfaf5704846aaa4be141b259"
+status = "translated"
+digest = "a019524c29ed5db26651f55a552d4519ed9c84dc84243ecdab397f26ebb38643"
+

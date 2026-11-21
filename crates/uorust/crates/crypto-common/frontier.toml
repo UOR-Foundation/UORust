@@ -1,0 +1,75 @@
+# The crypto-common register (written by `uorust crate crypto-common@0.2.2`; do not edit): every body of
+# crypto-common's MIR at crypto-common 0.2.2, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 398
+translated = 2
+residue = 396
+
+[module.crate]
+bodies = 23
+translated = 2
+residue = 21
+
+[module.hazmat]
+bodies = 375
+translated = 0
+residue = 375
+
+[embedding]
+bodies = 398
+embedded = 398
+evaluable = 398
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: hazmat::DeserializeStateError"
+bodies = 186
+
+[[cause]]
+cause = "mir::Ty: hybrid_array::typenum::UTerm"
+bodies = 185
+
+[[cause]]
+cause = "mir::Ty: hybrid_array::Array<u8"
+bodies = 7
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:353:1: 356:23>::new_from_slice: crypto-common's MIR stops at type outside the lift: <u32 as InnerUser>::Inner"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DeserializeStateError"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InvalidKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: InvalidLength"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <<Self as BlockSizeUser>::BlockSize as hybrid_array::typenum::Unsigned>::USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <<Self as IvSizeUser>::IvSize as hybrid_array::typenum::Unsigned>::USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <<Self as KeySizeUser>::KeySize as hybrid_array::typenum::Unsigned>::USIZE"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item <<Self as OutputSizeUser>::OutputSize as hybrid_array::typenum::Unsigned>::USIZE"
+bodies = 1

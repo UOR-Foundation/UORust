@@ -1,0 +1,223 @@
+# The fastrand register (written by `uorust crate fastrand@2.5.0`; do not edit): every body of
+# fastrand's MIR at fastrand 2.5.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 87
+translated = 7
+residue = 80
+
+[module.crate]
+bodies = 50
+translated = 7
+residue = 43
+
+[module.global_rng]
+bodies = 37
+translated = 0
+residue = 37
+
+[embedding]
+bodies = 87
+embedded = 87
+evaluable = 87
+blocked = 0
+
+[differential]
+bodies = 3
+theorems = 21
+
+[[cause]]
+cause = "mir::Ty: Rng"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: f32"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 5
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+bodies = 4
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: core::cell::Cell<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<char>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<i128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<i16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<i32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<i64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<i8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<isize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<u128>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<u16>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<u64>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<u8>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: impl RangeBounds<usize>"
+bodies = 2
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: alphabetic::{closure#0}: mir::TerminatorKind::Call: Rng::alphabetic: fastrand's MIR stops at mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: alphanumeric::{closure#0}: mir::TerminatorKind::Call: Rng::alphanumeric: fastrand's MIR stops at mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: bool::{closure#0}: mir::TerminatorKind::Call: Rng::bool: fastrand's MIR stops at type outside the lift: core::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: choice::{closure#0}: mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <u32 as core::iter::IntoIterator>::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: choose_multiple::{closure#0}: mir::TerminatorKind::Call: Rng::choose_multiple: fastrand's MIR stops at type outside the lift: <u32 as core::iter::IntoIterator>::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: digit::{closure#0}: mir::TerminatorKind::Call: Rng::digit: fastrand's MIR stops at type outside the lift: core::ops::RangeTo<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: fill::{closure#0}: mir::TerminatorKind::Call: Rng::fill: fastrand's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: get_seed::{closure#0}: mir::TerminatorKind::Call: Rng::get_seed: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: lowercase::{closure#0}: mir::TerminatorKind::Call: Rng::lowercase: fastrand's MIR stops at mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: seed::{closure#0}: mir::TerminatorKind::Call: Rng::seed: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: shuffle::{closure#0}: mir::TerminatorKind::Call: Rng::shuffle: fastrand's MIR stops at type outside the lift: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: uppercase::{closure#0}: mir::TerminatorKind::Call: Rng::uppercase: fastrand's MIR stops at mir::TerminatorKind::Call: Rng::choice: fastrand's MIR stops at type outside the lift: <I as core::iter::IntoIterator>::Item"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by ExactSizeIterator"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: global_rng::with_rng u32>::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: the constant item Rng::fork"
+bodies = 1
+
+[[cause]]
+cause = "mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::Rvalue::Aggregate: of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Rng::gen_u128: fastrand's MIR stops at mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Rng::gen_u32: fastrand's MIR stops at mir::TerminatorKind::Call: Rng::gen_u64: fastrand's MIR stops at mir::ProjectionElem::Field: a field of Nat"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: Vec::with_capacity"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: global_rng::new"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: RestoreOnDrop<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::Range<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeFull"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::ops::RangeTo<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::hash::DefaultHasher"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::thread::AccessError"
+bodies = 1

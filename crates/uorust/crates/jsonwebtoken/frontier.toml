@@ -1,0 +1,444 @@
+# The jsonwebtoken register (written by `uorust crate jsonwebtoken@12.0.0`; do not edit): every body of
+# jsonwebtoken's MIR at jsonwebtoken 12.0.0, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 563
+translated = 0
+residue = 563
+
+[module.algorithms]
+bodies = 33
+translated = 0
+residue = 33
+
+[module.crypto]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.decoding]
+bodies = 32
+translated = 0
+residue = 32
+
+[module.encoding]
+bodies = 16
+translated = 0
+residue = 16
+
+[module.errors]
+bodies = 17
+translated = 0
+residue = 17
+
+[module.header]
+bodies = 78
+translated = 0
+residue = 78
+
+[module.jwk]
+bodies = 291
+translated = 0
+residue = 291
+
+[module.jws]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.pem]
+bodies = 15
+translated = 0
+residue = 15
+
+[module.serialization]
+bodies = 5
+translated = 0
+residue = 5
+
+[module.validation]
+bodies = 46
+translated = 0
+residue = 46
+
+[embedding]
+bodies = 561
+embedded = 561
+evaluable = 561
+blocked = 0
+
+[[cause]]
+cause = "mir::Ty: std::fmt::Error"
+bodies = 85
+
+[[cause]]
+cause = "mir::Ty: jwk::_::deserialize::__Field"
+bodies = 48
+
+[[cause]]
+cause = "mir::Ty: header::_::deserialize::__Field<'_>"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: jwk::_::deserialize::__Field<'_>"
+bodies = 36
+
+[[cause]]
+cause = "mir::Ty: errors::Error"
+bodies = 28
+
+[[cause]]
+cause = "mir::Ty: <__S as algorithms::_::_serde::Serializer>::Ok"
+bodies = 20
+
+[[cause]]
+cause = "mir::Ty: decoding::DecodingKey"
+bodies = 15
+
+[[cause]]
+cause = "mir::Ty: encoding::EncodingKey"
+bodies = 10
+
+[[cause]]
+cause = "mir::Ty: algorithms::Algorithm"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: algorithms::_::deserialize::__Field"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: crypto::CryptoProvider"
+bodies = 8
+
+[[cause]]
+cause = "mir::Ty: header::Header"
+bodies = 8
+
+[[cause]]
+cause = "mir::Operand::Constant: jwk::_::deserialize::FIELDS::promoted[0]"
+bodies = 6
+
+[[cause]]
+cause = "mir::Operand::Constant: jwk::_::deserialize::VARIANTS::promoted[0]"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: algorithms::AlgorithmFamily"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: header::Zip"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: <validation::_::deserialize::__Visitor<'de"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: Validation"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::CommonParameters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::EllipticCurve"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::EllipticCurveKeyParameters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::Jwk"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::JwkSet"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::KeyAlgorithm"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::OctetKeyPairParameters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::OctetKeyParameters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jwk::RSAKeyParameters"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: jws::Jws<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: validation::Validation"
+bodies = 5
+
+[[cause]]
+cause = "mir::Ty: BorrowedCowIfPossible<'_>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Enc"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Extras"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Jwk"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: KeyOperations"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: PublicKeyUse"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: decoding::TokenData<u32>"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: errors::ErrorKind"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: jwk::EllipticCurveKeyType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: jwk::OctetKeyPairType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: jwk::OctetKeyType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: jwk::RSAKeyType"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: jws::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: validation::_::deserialize::__Field"
+bodies = 4
+
+[[cause]]
+cause = "mir::Ty: Algorithm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: AlgorithmParameters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: CommonParameters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EllipticCurve"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EllipticCurveKeyParameters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EllipticCurveKeyType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: EncodingKey"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: Header"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: JwkSet"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: KeyAlgorithm"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OctetKeyPairParameters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OctetKeyPairType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OctetKeyParameters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OctetKeyType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: OtherKeyParameters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RSAKeyParameters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: RSAKeyType"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: header::Extras"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: jwk::KeyOperations"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: jwk::OtherKeyParameters"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: jwk::PublicKeyUse"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validation::BorrowedCowIfPossible<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validation::ClaimsForValidation<'_>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Ty: validation::TryParse<u64>"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: algorithms::_::deserialize::VARIANTS::promoted[0]"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: AlgorithmFamily"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecodingKey"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: DecodingKeyKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: ThumbprintHash"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: crypto::KeyUtils"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: decoding::DecodingKeyKind"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: header::Enc"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: jwk::AlgorithmParameters"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: validation::TryParse<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Operand::Constant: jws::_::deserialize::FIELDS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: serialization::b64_encode::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: validation::_::deserialize::FIELDS::promoted[0]"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Classification"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: HashSet<std::string::String>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: PemType"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: Standard"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: dyn std::error::Error"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: jwk::ThumbprintHash"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pem::decoder::Classification"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: pem::decoder::PemEncodedKey"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serde_json::Value"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: serialization::DecodedJwtPartClaims"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: std::time::SystemTime"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validation::Audience<'_>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: validation::Issuer<'_>"
+bodies = 1

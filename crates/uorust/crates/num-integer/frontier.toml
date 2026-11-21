@@ -1,0 +1,392 @@
+# The num-integer register (written by `uorust crate num-integer@0.1.47`; do not edit): every body of
+# num-integer's MIR at num-integer 0.1.47, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 262
+translated = 84
+residue = 178
+
+[module.average]
+bodies = 4
+translated = 0
+residue = 4
+
+[module.crate]
+bodies = 177
+translated = 84
+residue = 93
+
+[module.roots]
+bodies = 81
+translated = 0
+residue = 81
+
+[embedding]
+bodies = 262
+embedded = 262
+evaluable = 262
+blocked = 0
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::bits: num-integer's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 25
+
+[[cause]]
+cause = "mir::Ty: f64"
+bodies = 12
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::nth_root: num-integer's MIR stops at mir::TerminatorKind::Call: roots::nth_root::go: num-integer's MIR stops at mir::TerminatorKind::Call: roots::bits: num-integer's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 9
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::abs"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::num::trailing_zeros"
+bodies = 6
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::nth_root::go: num-integer's MIR stops at mir::TerminatorKind::Call: roots::bits: num-integer's MIR stops at mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 6
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<u32>"
+bodies = 5
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Zero"
+bodies = 4
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by One"
+bodies = 3
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:440:9: 440:28>::div_rem: num-integer's MIR stops at mir::Operand::Constant: isize::MIN"
+bodies = 3
+
+[[cause]]
+cause = "mir::Operand::Constant: isize::MIN"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i128 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i16 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i32 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i64 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <i8 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:440:9: 440:28>::mod_floor: num-integer's MIR stops at mir::Operand::Constant: isize::MIN"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd: num-integer's MIR stops at mir::TerminatorKind::Call: core::num::trailing_zeros"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd_lcm: num-integer's MIR stops at mir::Instantiation: u32 for a parameter bounded by Zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <isize as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u128 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as num_traits::Zero>::is_zero"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::cbrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u32 as Roots>::cbrt::go"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::sqrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u32 as Roots>::sqrt::go"
+bodies = 2
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::sqrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u64 as Roots>::sqrt::go"
+bodies = 2
+
+[[cause]]
+cause = "mir::Ty: IterBinomial<u32>"
+bodies = 2
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Fn"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by PartialOrd"
+bodies = 1
+
+[[cause]]
+cause = "mir::Instantiation: u32 for a parameter bounded by Sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i128 as Sub>::sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i16 as Sub>::sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i32 as Sub>::sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i64 as Sub>::sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&i8 as Sub>::sub"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as BitAnd>::bitand"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <&u32 as BitOr>::bitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:440:9: 440:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <i128 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:440:9: 440:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <i16 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:440:9: 440:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <i32 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:440:9: 440:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <i64 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:440:9: 440:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <i8 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:440:9: 440:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <isize as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <u128 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <u16 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <u64 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <u8 as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd_lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <usize as num_traits::Zero>::is_zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::is_multiple_of: num-integer's MIR stops at mir::Instantiation: u32 for a parameter bounded by Zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::lcm: num-integer's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd_lcm: num-integer's MIR stops at mir::Instantiation: u32 for a parameter bounded by Zero"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u128 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u128 as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u16 as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u32 as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u64 as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <u8 as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: <usize as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: average::average_ceil: num-integer's MIR stops at mir::TerminatorKind::Call: <&u32 as BitOr>::bitor"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: average::average_floor: num-integer's MIR stops at mir::TerminatorKind::Call: <&u32 as BitAnd>::bitand"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: core::mem::size_of"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: gcd: num-integer's MIR stops at mir::TerminatorKind::Call: <impl at src/lib.rs:852:9: 852:28>::gcd: num-integer's MIR stops at mir::TerminatorKind::Call: core::num::trailing_zeros"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::cbrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u128 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::cbrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u16 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::cbrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u64 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::cbrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u8 as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::cbrt: num-integer's MIR stops at mir::TerminatorKind::Call: <usize as Roots>::cbrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::sqrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u128 as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::sqrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u16 as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::sqrt: num-integer's MIR stops at mir::TerminatorKind::Call: <u8 as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: roots::sqrt: num-integer's MIR stops at mir::TerminatorKind::Call: <usize as Roots>::sqrt::go"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: A"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<i128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<i16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<i32>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<i64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<i8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<isize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<u128>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<u16>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<u64>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<u8>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: ExtendedGcd<usize>"
+bodies = 1
+
+[[cause]]
+cause = "mir::Ty: core::fmt::Error"
+bodies = 1

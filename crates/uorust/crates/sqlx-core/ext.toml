@@ -1,0 +1,140 @@
+[[fn]]
+path = "sqlx-core::async_stream::TryAsyncStream::new"
+kappa = "ce7c47fec90c1213a7ded5f995bcbc66e39eec083b3435446c0a58f6fdf952c3"
+at = "F=u32, Fut=u32, T=u32"
+embedded = "126f3a50817ef620731b50106453dbb8ed54ac003cc2e54024f6f3ebffea67de"
+status = "residue"
+cause = "mir::Ty: ext::async_stream::TryAsyncStream<'_, u32>"
+
+[[fn]]
+path = "sqlx-core::async_stream::TryAsyncStream::poll_next"
+kappa = "463a8eb6a209fa4f3767badc8ede29799284c5eaa0c7ac069658d0082ec9bfe0"
+at = "T=u32"
+embedded = "b61c8f577255b0dc7875042348b74156ad7ca039aaeab01b928c16d6c6ec4c07"
+status = "residue"
+cause = "mir::Ty: error::Error"
+
+[[fn]]
+path = "sqlx-core::async_stream::Yielder::duplicate"
+kappa = "398bdcf633620d5a7c79f6baa3c7e94dec0904f63f94944e01f94185e650686b"
+at = "T=u32"
+embedded = "a4ce0cfc6e5ca44f0acf192bd4200aa27ab8671dda1d14df8f144f2b943cbcd2"
+status = "residue"
+cause = "mir::Ty: ext::async_stream::Yielder<u32>"
+
+[[fn]]
+path = "sqlx-core::async_stream::Yielder::new"
+kappa = "e27789cff6359a45de6738f5c3a492d9e9184ac4b5cba171e157b2dfe8b3b5b2"
+at = "T=u32"
+embedded = "2fa94de7a5a9b11cfbd966d35470c12e4ea6d01b929387d227de5dcd46a4ce94"
+status = "residue"
+cause = "mir::Ty: ext::async_stream::Yielder<u32>"
+
+[[fn]]
+path = "sqlx-core::async_stream::Yielder::r#yield"
+kappa = "1f35f6e99ee16f464ceb38e0363054d53fe98f81bfadb11ef55692eebff7d498"
+at = "T=u32"
+embedded = "3b504fdf1d1666d0915f15c2a61a338387c2089cf04e1b145795b584319aaa5b"
+status = "residue"
+cause = "mir::Ty: {async fn body of ext::async_stream::Yielder<u32>::r#yield()}"
+
+[[fn]]
+path = "sqlx-core::async_stream::Yielder::take"
+kappa = "0a15cafb10e9206f957eff538a5820f78341b9182db0c6554b58cf3f8601eac0"
+at = "T=u32"
+embedded = "ebe3d6e9c0b774e6fdfe8f456e81278a44a94e202656fa4a32e4f7fe61215347"
+status = "residue"
+cause = "mir::Ty: Yielder<u32>"
+
+[[fn]]
+path = "sqlx-core::ustr::<impl at src/ext/ustr.rs:10:10: 10:15>::clone"
+kappa = "d9946be03c5e46338eaf209466943816509c5c7059008470980323e275cd486e"
+embedded = "07c24fac564742f6a25222a83d7df0e378de71c79487f38934469a38bc364b5e"
+status = "residue"
+cause = "mir::Ty: ext::ustr::UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::<impl at src/ext/ustr.rs:10:17: 10:19>::assert_fields_are_eq"
+kappa = "f0579099285a2004c51ae026425e4e08f28822c1b44d765f978cee99d3342d22"
+embedded = "8189f20d27943328673335ead0e3871b6e0a2aa00f73f0f432e9034d37ff8713"
+status = "residue"
+cause = "mir::Ty: UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::borrow"
+kappa = "da0e93d578ab9c313be729fe5a4784b480f5e01900d1cee04d57a55ea863bd7f"
+embedded = "f4e6d4fd281a838dc4711e720e69f74ff8cb84a685311332bcaf202cc8d15bf3"
+status = "residue"
+cause = "mir::Ty: UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::deref"
+kappa = "92ef31aa15bf9758d677f73ef9bdb1f4c21b71620f0afe77e414f150c52829f0"
+embedded = "c03f33eb9e5971526d998705e8f6b589a61f39d6db6c9516683604657974f8c1"
+status = "residue"
+cause = "mir::Ty: UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::eq"
+kappa = "0c02b609a44072bb3e1251d11291ac4f1b9864682c3a604d0acff28502d15fba"
+embedded = "f4abaea54192ed2b6f94244d5d349ad126ecfbee5f670760b1ec93967611baf7"
+status = "residue"
+cause = "mir::Ty: UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::fmt"
+kappa = "b6caa8c003564c2668fc0c877852c85e6399ce1290627d8f37e663230cfb42cb"
+embedded = "6c5a18b9c7cf3ddc598b7c93315795b1829a0c110a6258ca4dc00369ebcd531b"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::fmt#2"
+kappa = "2cb6ece92f0b385f61aaad9585685d3d54f2d62bd7fc213d0f9cd1395e25a273"
+embedded = "da6aaa311ac10fce0fdd4e3c9a839cc1619ae1142df5ed9cdab8d8e8a14042b5"
+status = "residue"
+cause = "mir::Ty: std::fmt::Error"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::from"
+kappa = "02d7c90192b8bda0ac9f818c7386063a1b691170889939bf2f185923e967a3d8"
+embedded = "c322b7558da7e16b6757da957476d2b8c829a12773304a006dc440c35aba13fc"
+status = "residue"
+cause = "mir::Ty: ext::ustr::UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::from#2"
+kappa = "5119f696894fe6958d52558e80f9a2f1712f720e1366d35927b2a5310c0827f6"
+embedded = "cfcca76e596f037404cde3d02b766cc30bbba8774b8c484b2799839570a041a2"
+status = "residue"
+cause = "mir::Ty: ext::ustr::UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::from#3"
+kappa = "635420592eea06cac557016e202acc44110f1b68fe6905f42f7fe10fc9107906"
+embedded = "e763e72ad79389352f0933d4d3fd6857c325be609d2f20ea63321ceedcf377ec"
+status = "residue"
+cause = "mir::Ty: ext::ustr::UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::hash"
+kappa = "37381365667a04ceec4fc428ee6ce02f2585e89097fa09f5bc221fca83de55b9"
+at = "H=u32"
+embedded = "188f677654974f1baed73150673c8cac64406dd4eb6dba18a3731bebec51de38"
+status = "residue"
+cause = "mir::Ty: UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::new"
+kappa = "592c7e53a2e6e6237404399be1a39156e53d4e67c3c1f2fb00b0cada29fa1fe6"
+embedded = "7ef795f5145a18544e840ab95ea7bc3e7ebc4eb1ea0b8525bc59c9ac01ad14c0"
+status = "residue"
+cause = "mir::Ty: ext::ustr::UStr"
+
+[[fn]]
+path = "sqlx-core::ustr::UStr::strip_prefix"
+kappa = "8ba5fa09ec7f3e0699b367b5a3c5904b799086f0edcc8f312c79df645ad3e82b"
+embedded = "97c4d0d324fe2592bdb5f30ce3f6ec5bcae0183c8c69b4637c9ad202c4aaa55b"
+status = "residue"
+cause = "mir::Ty: ext::ustr::UStr"
+

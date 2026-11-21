@@ -1,0 +1,94 @@
+[[fn]]
+path = "which::correct_casing"
+kappa = "47b19b81fc9a9b412333ca3de069d97974802b6df2b43e4e2bdacf823290228c"
+at = "F=u32, TSys=u32"
+embedded = "3524e5251b01c3d3c9f7caaaea6e156ff033b040ed31d7cb6011b0622b0276f9"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "which::finder::Finder::find"
+kappa = "3de76a683397be4c9ec1d63ae5b39961b1b5da80c214c9a1cd5fadbe79eaa4e2"
+at = "F=u32, T=u32, TSys=u32, U=u32, V=u32"
+embedded = "01bbb16cee787f21e00d3f392528df5a7121e395bcd16538c974d09d21433c06"
+status = "residue"
+cause = "mir::Ty: finder::WhichFindIterator<u32, u32>"
+
+[[fn]]
+path = "which::finder::Finder::new"
+kappa = "d3e707a6b287ccce0474e39428a81966e2e0b5ed01b1d220dd09d3b7298e2eb5"
+at = "TSys=u32"
+embedded = "323b0964d9a538cabb17e9cef2f2d545f8245aaca5d01f294515a320b668a874"
+status = "residue"
+cause = "mir::Ty: finder::Finder<u32>"
+
+[[fn]]
+path = "which::finder::PathBuf::has_separator"
+kappa = "b65429951d0f5df8a0fb5f2ba4bf56515a427d96b7d45041558088dcaf424f68"
+embedded = "f7b52b7b9263c839bbd16d7abf840cbe61ae1213b9b056e1e642c683a848a862"
+status = "residue"
+cause = "mir::Ty: PathBuf"
+
+[[fn]]
+path = "which::finder::PathBuf::to_absolute"
+kappa = "84d0e859e7941f337f51b04ddf6aa8ddf45a4b44f1699c3cd74b252326bae97c"
+at = "P=u32"
+embedded = "3694b4093613cc1a28e5312bf2487b86b1a8f5fd92114532475e7bc6c921f703"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "which::finder::PathsIter::next"
+kappa = "a886bd361db575a1db5b0346e90e888b6c38d4cd65a22162fb1fa9061f8afc84"
+at = "P=u32"
+embedded = "e3799ccfa6bec4355b08318c9950a981932800d1e28aefe41f257f7db7fa34ab"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "which::finder::WhichFindIterator::new_cwd"
+kappa = "5d4a146262b7c0c293a7529cd0fcaee537bad3f10e975d57741c50135cc7ba18"
+at = "F=u32, TSys=u32"
+embedded = "25fce256223a65720b8282cdb6241a215bc420a5aece4d25ccce8f7a6cd71ed5"
+status = "residue"
+cause = "mir::Ty: finder::WhichFindIterator<u32, u32>"
+
+[[fn]]
+path = "which::finder::WhichFindIterator::new_path"
+kappa = "51c259d1d655c8e9ade2d3fbc9ee3f0e7906dbdd5072c1aa27f1ffa6cf1b78fb"
+at = "F=u32, TSys=u32"
+embedded = "1129b12171540285dca3c42df4aa6d54be6aaec29c1359703bcae63ffd89c66f"
+status = "residue"
+cause = "mir::Ty: finder::WhichFindIterator<u32, u32>"
+
+[[fn]]
+path = "which::finder::WhichFindIterator::new_paths"
+kappa = "fb190d736fe5fc6a18400d5ef44e3d84ec746b4659948c66bc4455858e179d41"
+at = "F=u32, TSys=u32"
+embedded = "a1d2b99c8dad24c1998b637a55f484cd99f671621400b6d67cfc3c7f3ec66b1d"
+status = "residue"
+cause = "mir::Ty: finder::WhichFindIterator<u32, u32>"
+
+[[fn]]
+path = "which::finder::WhichFindIterator::next"
+kappa = "9192e329b23988c9295aae8070f01863dc112267215f8fbda88a6ce7246257c6"
+at = "F=u32, TSys=u32"
+embedded = "83bbbdf6053b9ba714e08f49b0befdc7d6e16f52c758fb81b1ef4e84bdc2d68d"
+status = "residue"
+cause = "mir::Ty: std::path::PathBuf"
+
+[[fn]]
+path = "which::is_ordinary_relative_path"
+kappa = "9e95913ce07f58eacd773faf66447787a748ec563bf59be78d971b5ad46986af"
+embedded = "7a8de6426cc8773adf01a41ec64b229eaa42939990ee6a7b1ced1fafe96def6d"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+
+[[fn]]
+path = "which::tilde_expansion"
+kappa = "0b38cba15f94d8028432d787fe4f4e46ac862a3c0d77798d50071db388c928a3"
+at = "TSys=u32"
+embedded = "4816162e49f2407984cd265502d28889e98a26171a885456d6a8629f9c8b66ce"
+status = "residue"
+cause = "mir::Ty: std::path::Path"
+

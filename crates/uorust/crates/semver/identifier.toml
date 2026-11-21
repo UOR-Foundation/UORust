@@ -1,0 +1,154 @@
+[[fn]]
+path = "semver::HEAD"
+kappa = "5e6516718aace760da512e3e8339a2be1400f0078669b30e720cf3c8a5312504"
+embedded = "e697cb59ab0d09a0b1985f3c6cff95523899c0e66dd9840c44e7eb45532b3a0c"
+status = "residue"
+cause = "mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "semver::PTR_BYTES"
+kappa = "61258f15d12a7d8597427590c90ab26ca835ea5f587c8604bd340245f3a520df"
+embedded = "ce3a10d4e90fe0496ed70953f3c39f0b7b8f10047b6b76961d18b780b0044cc4"
+status = "residue"
+cause = "mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "semver::TAIL_BYTES"
+kappa = "108c00aea044454a35af4f902b9840f6025c44043daf04537df9cb8564310818"
+embedded = "267cc4aa375cf81a0f05d8798d0e507b528188471ed874e177534f4fa0456d12"
+status = "residue"
+cause = "mir::Operand::Constant: identifier::PTR_BYTES: mir::TerminatorKind::Call: std::mem::size_of"
+
+[[fn]]
+path = "semver::bytes_for_varint"
+kappa = "2644932f0dd768f7655953d88911cb045e009c82d8e8810077a5d3ce0bef5af5"
+embedded = "05f194c838fa1df49755805b1964a074f15f8f9c7921df74f400b7fe59f94c5f"
+status = "residue"
+cause = "mir::Ty: NonZero<usize>"
+
+[[fn]]
+path = "semver::decode_len"
+kappa = "9714e081e57648da473da96afbbaeafbae57c231fcae72dbd0e98638f6305819"
+embedded = "119e2ee32b65a561061b4ccda6c46877bb5189e9a9368df699e53b3f3dc7a855"
+status = "residue"
+cause = "mir::Ty: std::num::NonZero<usize>"
+
+[[fn]]
+path = "semver::decode_len_cold"
+kappa = "37cb1440c07a23e44076e870cb5454d81dad5fa94d79041ad06add4d92445474"
+embedded = "10fa9c6b7154ea45ff60eaa0dfe8d0c5ec9ddc0362219a35c4b79b2a88c467e5"
+status = "residue"
+cause = "mir::Ty: std::num::NonZero<usize>"
+
+[[fn]]
+path = "semver::identifier::Identifier::as_str"
+kappa = "fc5d514de642645a53780030bdb005fec29591448fcaa5a7c50be6efb37c5d03"
+embedded = "e7b40744527404af2a11367588d532927f0ac05b87eeb73e54445ca2d773eddc"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::clone"
+kappa = "2b619082cf1ee704169c2dff6ee4ec974639c9ee31e5eebf1a757a168588c9c2"
+embedded = "341a7eb7c6ab7c28f3b4b3664dbfd73a2d535b553975756a9e0ac6c6608c0542"
+status = "residue"
+cause = "mir::Ty: identifier::Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::drop"
+kappa = "e4dbef45d1b486efbc6f1095a5b45dac1cb0ccca0b1d235090fe62416fe4edac"
+embedded = "840333ba5a1cee2ed2037371da22d5b24132939b5ff33eddc7570ef3c4687a6c"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::empty"
+kappa = "44d5078023b698d18c88d9ebe1252d4a2606c8b8f128f19de7a92a2bee1d0f14"
+embedded = "eb1b6dbea2febb06f59ad3a127924f2db8afd2ac4295921dc6fcf80e9acf5c85"
+status = "residue"
+cause = "mir::Ty: identifier::Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::eq"
+kappa = "b23d04a56307c7b39bf7b2660e3ced1d55fb50270e5d1b3567af204ab8da1747"
+embedded = "5cccf886116d0fde57b142f4a8e055f221fb4bc6ef046ec60ba9e69a9cf6d988"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::is_empty"
+kappa = "da6c8f0b2b5cc0be40b94b6d64b814dead903965b7b354108480048b98835988"
+embedded = "73bc38ab3bd71d03045b68c650c9f80bc355137e9a864e6d699483e43e113110"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::is_empty_or_inline"
+kappa = "9f02b094e8ae7fbaeb9fc5c7fbbdfaea4bc2912c4cc6bbf1dfde6912ac2fca04"
+embedded = "f9472d47fdc8308d589998c8730796a3f195ff263f4fac847acfa3ceebac17ba"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::is_inline"
+kappa = "9544c6ef63fde1033a148ae81959838034293d99abe4a80c0198b954746a202b"
+embedded = "5c704cfb77a91f9128a4f11990dddedc312f6f329abbaf4b0b8aee91a191b93d"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::new_unchecked"
+kappa = "eb27ec98a5d5b95149b6cd7baccb0d4c9ad1de57da40f7690a2e73731b9772a7"
+embedded = "3a245e3fc837105151b015b68c95a5e48fb4395c359f4f88e5510e8dbd4b5a59"
+status = "residue"
+cause = "mir::Ty: identifier::Identifier"
+
+[[fn]]
+path = "semver::identifier::Identifier::ptr_eq"
+kappa = "b12131e2788c8bddb1615c689510a21bf12a1eba650ac3a63718cdde6c307cc2"
+embedded = "3bcedccc71e937695ac4bc331d8c870ad172b7472304a26e9429661a1094485b"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::inline_as_str"
+kappa = "8c65f9e617fc1913db052ab1f46ce59f3fee80eb56e2864082b9546cedd6ad03"
+embedded = "720665f219e0d55623100345af6f11827efcc45fc36e86fc1a90a0c89bb60c35"
+status = "residue"
+cause = "mir::Ty: Identifier"
+
+[[fn]]
+path = "semver::inline_len"
+kappa = "79b38dfb9e02b35ccd463f8fb8eb61c7373198c1aa0cd26b4c194afde1a3327f"
+embedded = "0dc5f4b8eb845a1128c275daa67e58898ce491f3764d2875f3f8fadf491c4992"
+status = "residue"
+cause = "mir::Ty: std::num::NonZero<usize>"
+
+[[fn]]
+path = "semver::ptr_as_str"
+kappa = "53c8b4cdcc832d071261d4e1e6580eb06405ca0ff1c77747efa9a0abce1d33d8"
+embedded = "ce86962213e8be430752334fc3a4382fcb9bfad5a45a4395814c8ccc20960c82"
+status = "residue"
+cause = "mir::TerminatorKind::Call: identifier::repr_to_ptr: semver's MIR stops at mir::TerminatorKind::Call: NonNull::as_ptr"
+
+[[fn]]
+path = "semver::ptr_to_repr"
+kappa = "369c42cbd4cf3a1d92f7d6dcd1fec3a19b711e981702abfcba2692f789fcdc83"
+embedded = "63948c62153af081901ca77b618e269e3ab2bc45934b5dd32fe3fa305c140099"
+status = "residue"
+cause = "mir::TerminatorKind::Call: core::num::<impl usize>::rotate_right"
+
+[[fn]]
+path = "semver::repr_to_ptr"
+kappa = "f76efd1e4d5a07060208f9628f86a4782f0dfea17110c69976213ff2a1f1e0eb"
+embedded = "60859bc49d86f248012bd11de4efc63a7601ec54eeb903ccd4a4bb4d922d06b1"
+status = "residue"
+cause = "mir::TerminatorKind::Call: NonNull::as_ptr"
+
+[[fn]]
+path = "semver::repr_to_ptr_mut"
+kappa = "04beb9d87fb726bf9b18204083dc04df9f807590b4216dc7f4ac33c1356bc232"
+embedded = "70e65f910a2d75d6b0d066892eac1c75b354142c6eac8afee84782e1288fa372"
+status = "residue"
+cause = "mir::TerminatorKind::Call: identifier::repr_to_ptr: semver's MIR stops at mir::TerminatorKind::Call: NonNull::as_ptr"
+

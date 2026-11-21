@@ -1,0 +1,48 @@
+[[fn]]
+path = "futures-channel::lock::<impl at src/lock.rs:16:10: 16:15>::fmt"
+kappa = "4ec4e670cec460447653636e19a224f0e1102870397f9d9541ec39b9f97af32d"
+at = "T=u32"
+embedded = "b494b1f82cc137ed0076833c45be7ccdbc1be2e4877fd1a5ebac7a5493ebe0b4"
+status = "residue"
+cause = "mir::Ty: core::fmt::Error"
+
+[[fn]]
+path = "futures-channel::lock::Lock::new"
+kappa = "b9a40e5d81e4c9c7c259f6b964ac87c88e3c6afc21ff05a8bbf05bb4ceb2d9fa"
+at = "T=u32"
+embedded = "e29dccc17a56a1f863e27048c57d5c476025303b679252a006884d6353bc6984"
+status = "residue"
+cause = "mir::Ty: lock::Lock<u32>"
+
+[[fn]]
+path = "futures-channel::lock::Lock::try_lock"
+kappa = "9b509acc1e94b14b70de0e9a593f0db10348017fda76273b77c307feb8e1ec78"
+at = "T=u32"
+embedded = "7f67a34f6a0b51aec6b99d946ef328eca67b0cfe22fcc1d46f5c099003b7c983"
+status = "residue"
+cause = "mir::Ty: lock::TryLock<'_, u32>"
+
+[[fn]]
+path = "futures-channel::lock::TryLock::deref"
+kappa = "ba1b8723c661b96dc2cdc5a21c978105eded44e463b50de8126693aab1eabe09"
+at = "T=u32"
+embedded = "0e13de2cf8a7b297a74693329dc605dce794083a11828a30571e42aeed53a1af"
+status = "residue"
+cause = "mir::Ty: TryLock<'_, u32>"
+
+[[fn]]
+path = "futures-channel::lock::TryLock::deref_mut"
+kappa = "70aaec662c56662f948925498841601637c7f9bf4a99e05c5226abe8492f7a8b"
+at = "T=u32"
+embedded = "35be4e2d5db1fc55e7c1c910609972e0a72d56968176e34d50e6843f4ff2f9d6"
+status = "residue"
+cause = "mir::Ty: TryLock<'_, u32>"
+
+[[fn]]
+path = "futures-channel::lock::TryLock::drop"
+kappa = "95171205ea1e2dd6df379d3e2c9374e98a02f2a492c33c6ca0c01d02d913c172"
+at = "T=u32"
+embedded = "f9c39be3272cc770174db34fb856937deea301b89a1d38deb2e9bb1f8aa1c576"
+status = "residue"
+cause = "mir::Ty: TryLock<'_, u32>"
+

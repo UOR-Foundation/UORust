@@ -1,0 +1,47 @@
+# The unicode-xid register (written by `uorust crate unicode-xid@0.2.6`; do not edit): every body of
+# unicode-xid's MIR at unicode-xid 0.2.6, translated by the MIR path with each
+# type parameter bound to `u32`, by module. A translated body lowers
+# to LexLean; the residue stops at the causes listed last. Rows, by κ, are
+# in each module's own file, and none recorded translated may regress.
+
+toolchain = "1.97.1"
+instantiation = "u32"
+bodies = 6
+translated = 1
+residue = 5
+
+[module.crate]
+bodies = 2
+translated = 0
+residue = 2
+
+[module.tables]
+bodies = 4
+translated = 1
+residue = 3
+
+[embedding]
+bodies = 6
+embedded = 6
+evaluable = 6
+blocked = 0
+
+[[cause]]
+cause = "mir::AggregateKind::Closure: bsearch_range_table::{closure#0}: mir::Rvalue::Aggregate: CmpOrdering"
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc3: &&["
+bodies = 1
+
+[[cause]]
+cause = "mir::Operand::Constant: {alloc806: &&["
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tables::derived_property::XID_Continue: unicode-xid's MIR stops at mir::Operand::Constant: {alloc3: &&["
+bodies = 1
+
+[[cause]]
+cause = "mir::TerminatorKind::Call: tables::derived_property::XID_Start: unicode-xid's MIR stops at mir::Operand::Constant: {alloc806: &&["
+bodies = 1

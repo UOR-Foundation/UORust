@@ -1,0 +1,485 @@
+[[fn]]
+path = "parking_lot::READERS_MASK"
+kappa = "3137739dc7fdc64e0516b9f8c20b35a56f5bb431c7210db0798fe23f08507796"
+embedded = "76cd8d87f74cd5e0cfe2ff84103a80572e33a0fadb05149d0d97455fbb17e3bb"
+status = "residue"
+cause = "mir::UnOp::Not: on Nat"
+
+[[fn]]
+path = "parking_lot::TOKEN_EXCLUSIVE"
+kappa = "449a3afe603b833e581f29120ca6b7f3afbfb9d91da12459a1a72ee4b18abbde"
+embedded = "771b37e1053baabc2a30801af424e1fbce2d9465264818e0c7235f5423e2252b"
+status = "residue"
+cause = "mir::Ty: parking_lot_core::ParkToken"
+
+[[fn]]
+path = "parking_lot::TOKEN_SHARED"
+kappa = "279f94a380d1f03a0e155fa4c82355a3616b72dfafe94ca3bebb466a7d9b4519"
+embedded = "683445d4f6a4179ae88e79282484a123cdcdec33baea85166f59bfa71ce335b2"
+status = "residue"
+cause = "mir::Ty: parking_lot_core::ParkToken"
+
+[[fn]]
+path = "parking_lot::TOKEN_UPGRADABLE"
+kappa = "0eacd1cb489d1ed6a19822f1168188791aebe667f583f6b7568b3b3f835885e0"
+embedded = "e8af8ea207a9cb7eabc02b14918e8ab8787a251c4537ead4c93037c488610e2f"
+status = "residue"
+cause = "mir::Ty: parking_lot_core::ParkToken"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:140:1: 140:84>::bump_exclusive"
+kappa = "7a408179d533886650075ba983735a4062e6aaa384c0cc2d1d08fd2a4708220c"
+at = "RECURSIVE=u32"
+embedded = "3d703dced26fedb1d5ca0055eeefa96c03591d8d381834cb1a847cfe169968a2"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:140:1: 140:84>::bump_shared"
+kappa = "e113f7d5fad7fbc521f0923df0306e64d4de8d92ca9ed912ca073ac5b2e01342"
+at = "RECURSIVE=#bool_RECURSIVE"
+embedded = "ba3fee5dc2f064d526608bf30f0559d30d7a2f4309a57207c71fc6944b6728d8"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<#bool_RECURSIVE>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:140:1: 140:84>::unlock_exclusive_fair"
+kappa = "26552056faf259b7ad08b229f78c7beacbd04ef6ecafc82106a34ef38e8b8119"
+at = "RECURSIVE=u32"
+embedded = "b231587f0fa828dbddb2330fbff77f205a54593923b6c32560c5a05001d0e11f"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:140:1: 140:84>::unlock_shared_fair"
+kappa = "e5e82ff2ea6aaa21a62ce65c23f247d8d2774431c8389d129b0a3d6806d20f74"
+at = "RECURSIVE=u32"
+embedded = "170a387462ba4e3162ad5440d49d18b66292cd4f78e6e651f8e43aa1ac213065"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:176:1: 176:89>::downgrade"
+kappa = "e63dbc561ea303cd5cc308c569b937e16f31bd415a682404a8380c303c4934f4"
+at = "RECURSIVE=u32"
+embedded = "fbcdebc2d737468ecc7395545d8901e289eb742ff582821b09912ff42aaa49c9"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:192:1: 192:85>::try_lock_exclusive_for"
+kappa = "469fb41cd88d9d96edac0f6e94c5843aa58e225d82be2d5930134e871c4a1d9f"
+at = "RECURSIVE=u32"
+embedded = "8446e216d6c2523a9ef7c10f37a52295323a79b62593f9c1b2e5f8f9aeeb2ecd"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:192:1: 192:85>::try_lock_exclusive_until"
+kappa = "019274a04cabfce8fdecf26191eaa8aa2061ebad931d5b38bb316ef17fb3bd90"
+at = "RECURSIVE=u32"
+embedded = "d8c2f4130ec479371c6b1a6167c5219eafb75d7218d2c720d7bb4635ede13078"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:192:1: 192:85>::try_lock_shared_for"
+kappa = "100c4be0ff8b8604765eb3b9ca587896bdd68280b4a13b6489728eb7a084bafe"
+at = "RECURSIVE=u32"
+embedded = "d53636c0ca35d89a02c6497f8a2e3e93c03f41a9763a4cbab959f3b4715beb65"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:192:1: 192:85>::try_lock_shared_until"
+kappa = "e6014dff7fa8c7b029dfc55ae91c34fb6c3ddd3495c4a142991036e783502dd2"
+at = "RECURSIVE=u32"
+embedded = "24997fb5733317abdccb4caddd512b8940c13f7142a1e6550fe90ed2393a9f69"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:243:1: 243:87>::lock_upgradable"
+kappa = "a9d9c78672528b9a030905914107998b8533c7820137ae3461e85091679b8f38"
+at = "RECURSIVE=u32"
+embedded = "941ff9184312e2b1d6670488c4acf22959f2233c5e826bdf060b0cd751d4ecd2"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:243:1: 243:87>::try_lock_upgradable"
+kappa = "82cabbcb9798c040909f51d2180fd3419ce49584437b3fcf4bc08d58c0cad2d8"
+at = "RECURSIVE=u32"
+embedded = "b78a2d59d9cffbea35482f9ddc7e3c91da63959f8145e8ed62c44ffbd472b7c2"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:243:1: 243:87>::try_upgrade"
+kappa = "1fb5b718e43421ec4c96a8e395c01e95da9a71a1b6cd6add0625c525ee12fff7"
+at = "RECURSIVE=u32"
+embedded = "e4ba4c16334c4fa955671ff37a378b8f38e6e5f14d20905c3af7c7d22e278393"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:243:1: 243:87>::unlock_upgradable"
+kappa = "563597a5c1e55e6d6c35b1482a88731e51c533a249c11a7de823fe1f1b3f4c49"
+at = "RECURSIVE=u32"
+embedded = "7a9671f4691a504d8b7f91a3cbafe91aa9c994fd485cfcee82c605e58a48ec5c"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:243:1: 243:87>::upgrade"
+kappa = "e7bd74340698115ecf5030a1151f17b3687800a36247ebe91aecbf8dc493927a"
+at = "RECURSIVE=u32"
+embedded = "1a3afb00a9c1dceadb81cf960c725b091167721a2bf23c0922db368f801ad61e"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:313:1: 313:91>::bump_upgradable"
+kappa = "1f0c92e816ab73b73d5c357db106aa98128d367327985cb63f9690b7bdd8a941"
+at = "RECURSIVE=u32"
+embedded = "bd4fd6b14988b473e39978e8bc85d28118bba7ea4e006274ced3d0e187313a30"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:313:1: 313:91>::unlock_upgradable_fair"
+kappa = "65c8ed631c96336f4526dd06b441b6114270ccbad366f3903250ac844b14ffae"
+at = "RECURSIVE=u32"
+embedded = "859e8b9ca22b469cc5f4747657f7dcf2d80bad69b7f2133226accd65a119798b"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:344:1: 344:96>::downgrade_to_upgradable"
+kappa = "18fdf71c99d4637bf61a0f20c31ff87fb5134c2413e6e6c6c7a16cb4240623bd"
+at = "RECURSIVE=u32"
+embedded = "8a90d571c12c4275b099f6369185d91ee31270635543fd0f77945fbd685ee307"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:344:1: 344:96>::downgrade_upgradable"
+kappa = "c4a2ba36f14b7a790e50eafa9105a297a2ffe8d920c5869e72a925f661cd1e99"
+at = "RECURSIVE=u32"
+embedded = "e3ef97bac56b7b1dde6ab30dd0f9b8a3cbbcb1a207985ee45d6a3f867564d83c"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:372:1: 372:92>::try_lock_upgradable_for"
+kappa = "756e257564a3fcef503ffa270526f9688dae5cd6928a31f3f0b7c06cedc439ac"
+at = "RECURSIVE=u32"
+embedded = "03c40775d9b7d947290baa733aaaf3b5533d6ceea03098e36e82688aaff99a3e"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:372:1: 372:92>::try_lock_upgradable_until"
+kappa = "7048861ca61437683aea8579a69ab5c8aead2627338f9b088327ed5d12278d5b"
+at = "RECURSIVE=u32"
+embedded = "b7e1e2c0daa468790c65b5566cc34335c905c8dee2473593b9bca508db2eb30c"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:372:1: 372:92>::try_upgrade_for"
+kappa = "92cb95ef4d2ac5fe1b47d1dd381049b45a203ddd9492e163c3e5e624253475f2"
+at = "RECURSIVE=u32"
+embedded = "f422ebf87dce724f824150b5e351e642cc0708935ba1c55ac7b68d855dab5414"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:372:1: 372:92>::try_upgrade_until"
+kappa = "2c2edbf931b21138806319f0015e063e3ad5135aa4f6257efcbc82a11bdf4871"
+at = "RECURSIVE=u32"
+embedded = "756aa79159c23711de61becc669319cc6bbea80d1be19d0db22a23b3be57e722"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::INIT"
+kappa = "4677831f654e0cfdd84246f3cf32ea12cc0456a26989021fed25bf086c4db833"
+at = "RECURSIVE=u32"
+embedded = "74d7c0a0e421d791bb26925b98607efea5ccc0f40c69b42917b6413dee70b764"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::is_locked"
+kappa = "ee4865d26f1d0ca1fb47f1f05d98489f710cfd394580f953d25733afbeb959e3"
+embedded = "dbf4e0be85724f9cd4b9fa3021297f3506a6968d12974b73bf722a78fbb538cb"
+status = "residue"
+cause = "mir::Ty: RECURSIVE"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::is_locked_exclusive"
+kappa = "66f6115f370b710fb37edb26e4406794e2a0561af6bdecf0c01958fb5ca6237a"
+embedded = "cd6e2ed6084da042c5fde47501372d2381af2cfa614169818d07a1558c22937a"
+status = "residue"
+cause = "mir::Ty: RECURSIVE"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::lock_exclusive"
+kappa = "899cc73227c12e914b2c72fc8f1385bfefcfdcdcf566d12691243019a2a11336"
+at = "RECURSIVE=u32"
+embedded = "4a157b06787965ea349bc9030400e0526d00ed1d43f5bf4473c78ffa8b5537d0"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::lock_shared"
+kappa = "c27a15609063fa42dc3d096589a3296f12b0afa849d3cca3ce15475207a4bf28"
+at = "RECURSIVE=u32"
+embedded = "69490f2872d82217e9d35108e9e1898ef888f2c106919282e3d2e4ccf34258f5"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::try_lock_exclusive"
+kappa = "32727a9e8476787841749afb5e2e3d3deab975800ef8f36e07697ffa18ab727d"
+at = "RECURSIVE=u32"
+embedded = "bd7da69c98f133ee16cdc3e04c721fec283a32d43e25cbf75ce7108db5cdf2de"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::try_lock_shared"
+kappa = "9b4a7d431521d3542abc25a7f9883bd55452ced88a77335b6a0df4953c4adfe8"
+at = "RECURSIVE=u32"
+embedded = "ecaa521a2688c131b250d8a9264475b6617df3521e844bf3ff975268653be12b"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::unlock_exclusive"
+kappa = "7dd7278e041d471596d105821cec2b2bef7b2de260117e9445f4005e85572457"
+at = "RECURSIVE=u32"
+embedded = "355808e7ff6ae4a863680091e7e2c77d1ee479afac0a811bca33c083fb5698e0"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::<impl at src/raw_rwlock.rs:60:1: 60:80>::unlock_shared"
+kappa = "96ad15af8195e84386e5ddab4ed7362c27b4bfdce3d8c6013efbb2834c92c51e"
+at = "RECURSIVE=u32"
+embedded = "e9f073a6ed27fa08d01b357131656007d80797907770f0e893b09972cfcef767"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::bump_exclusive_slow"
+kappa = "256efb0ee2efa626c3c0bc0c10ededa1acc06431081f34e4484cff6589f68e69"
+at = "RECURSIVE=u32"
+embedded = "f5de00665ab67d9bdb9bd5f4e9e7b02df167a39a741181e029b458d9365862e0"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::bump_shared_slow"
+kappa = "31f9ca56174eca90750012bb9d368fbadd10dd26d63a46bd4dc9ec792c2b03c4"
+at = "RECURSIVE=u32"
+embedded = "c95b40228500ce32b74406235ab1164e1e2e4db0d6f90fe5c46e7e3388cfdbc5"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::bump_upgradable_slow"
+kappa = "da19121134ee207ff790afe30422d58d0cae85c1ff410afb4019e44f2614adc9"
+at = "RECURSIVE=u32"
+embedded = "765838016d7a10e48c6abdc0c3432ec1320b15a63bf7365340a96083d5cfd6a4"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::deadlock_acquire_all"
+kappa = "9031e4949319c4150840c832fae240f6fcc0db7bdeea5f865b3a6aa876fa85d4"
+at = "RECURSIVE=u32"
+embedded = "c03b205284050bf4de61a6b9ec0822f2b837dc39ce10e4212e2eda0c104a26ea"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::deadlock_acquire_primary"
+kappa = "f6aad96e555d54e129b54920b92a976d324186535096afdefc757d3a9d072b5c"
+at = "RECURSIVE=u32"
+embedded = "edf5ecb0b9f1f914b2c82746a8a1bf1bea4038314236678e3f77f1a0241e6f50"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::deadlock_acquire_secondary"
+kappa = "5aad7f54afcd382a0c128ba17e3d7938d4dcc41e27e2a699f1a4484a363615b2"
+at = "RECURSIVE=u32"
+embedded = "f9cab1de15ad3f3d2b71fae3d56ba7245b077988cea32d76c5fddc8890b18dda"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::deadlock_release_all"
+kappa = "3ddf181f055ea81fe3e3fd4c15daa1628428188002257c49f91637b059726b38"
+at = "RECURSIVE=u32"
+embedded = "14cca8ecc132f7ccf0be3955ff0ace0dfe35c40ac8e46c8decdc3bf118c8ba0a"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::deadlock_release_primary"
+kappa = "9b88aa4f44a2e391faddf7675eb5777b728f867fe314e1e46a6c86d355ffc26a"
+at = "RECURSIVE=u32"
+embedded = "93520876cde6e847eaa5e9ffd383d1205c4652b5de384e01e9984aef86a442c6"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::deadlock_release_secondary"
+kappa = "0dc51dddecc9ac48ae9f2fde5a784166bdceae6acef952491a7dd1a790e3c7ff"
+at = "RECURSIVE=u32"
+embedded = "87b87a367bbf26c3f34d0caac8b5c6f4ef4ce5d229bf0871a24b319fc16d37e1"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::downgrade_slow"
+kappa = "c7c7f901c16d147152f79e3970662aa237045ef088af22a7a871b416afe1c473"
+at = "RECURSIVE=u32"
+embedded = "795f6ccb3b53bec655d4846f3c138f2446a6e4c6341b93d30ad6362a55459878"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::downgrade_to_upgradable_slow"
+kappa = "8c8f38abb27f4ccc5a8b9b5ecde321935d092787c2a98d1bd318ca10cb39f056"
+at = "RECURSIVE=u32"
+embedded = "161a90d5f051d487c95c4c749d3a57fa34b5106042bbebb12f46fcaf9ae2ba93"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::lock_common"
+kappa = "0b7f5d04990861e9fb7623920600286a2cef52939fc5dbff9d3652649882f851"
+at = "RECURSIVE=u32"
+embedded = "7c98817afa11f30d9189c73995162730bdef8efcdf30315f85249dea29e2820d"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::lock_exclusive_slow"
+kappa = "1cf4cb445d00175e595d50ac0d56a08b87d60ec0cb6a7f71d1f85bfd65e74cfd"
+at = "RECURSIVE=u32"
+embedded = "98b3bc47ba2d1337fa3b2b043a76280d53f5d77799301a848dc1a2ac1b23ffe1"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::lock_shared_slow"
+kappa = "2b0ee2e36e5e1a5a4a7bce3bbfcee81e6f275d154fa3cdef6a1533e30281f43f"
+at = "RECURSIVE=u32"
+embedded = "f775175d3eff2db803c3225ea176346a86188c1cb34cffb24efb981f8180c49e"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::lock_upgradable_slow"
+kappa = "3293b5b228ee7a766d6afe6c586e200a7a549cc892285012e4f810a09c5e5626"
+at = "RECURSIVE=u32"
+embedded = "794887aad9c8056494161ff1d110dab4eff6e13bd07a0f217f42b77687ba2f46"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::try_lock_shared_fast"
+kappa = "3a208d15e7b186ad0626c7ebf4eb0dd4dcc84594e8ada51b54fe678cccc20efd"
+embedded = "cb3f19e474ba64cdfb7d23a134c91da00a4c54441080cfcaff6b5f3b162ac3fe"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::try_lock_shared_slow"
+kappa = "3724dfbd004df9450b28f264735b2be5bd845add295f72d0c1a322789a312057"
+embedded = "d98b26f07fd9c3a0968a3db14204c277e76d393ef35b5f4472d09b88546d8e1b"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::try_lock_upgradable_fast"
+kappa = "48a71fb57941847de575e0deff2c706ebc6f5a0281451bee17d58350b438dec2"
+embedded = "55cebd08a2f62f8e21579b8a18306fe600707865b8dfc69643e43a8f5889b363"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::try_lock_upgradable_slow"
+kappa = "2b5b8c11ebc5e8307ddd89648b50da19e80b288648195ef207f74f9ef546f5da"
+embedded = "af51fddb054207f4d01fc7063ab186ed2d20988014a7f93f6bb55094dccc3c3c"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::try_upgrade_slow"
+kappa = "eb5355d7b9cfb5fb0c053b0806545bf45d65323d8073dc9ad0a6c3ff5b487094"
+embedded = "7012072bcadbb880d45ccadf10630fa653be56d8a263fd4b8813cfa206ba8fe1"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::unlock_exclusive_fair_slow"
+kappa = "50f2ac7a8c1688d8c41194229e5870375bde0e4d7e41af5d6a2b206b06d8face"
+at = "RECURSIVE=u32"
+embedded = "9272d0e6024730df0cbe4dbf42ec1d1c5319770162c39b51b055c25d27c10ffb"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::unlock_exclusive_or_upgradable_slow"
+kappa = "bb23e8ad524ed54b8a06f4d75f773252e4a198a3415262304c352b1b5bc8d031"
+at = "RECURSIVE=u32"
+embedded = "3e7c1036c318cd28af6b72db663e1cc58f0c25a1afcbefcc2d28b9649c82fe0b"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::unlock_shared_slow"
+kappa = "a5fda48207a19c54d7bca961b675bb973761ee088373f6a117278434cff7290f"
+at = "RECURSIVE=u32"
+embedded = "b359272fc80fcf03e9f423fb5cacd074c705918eefbb0ae7ac69efc8480d16a8"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::unlock_upgradable_fair_slow"
+kappa = "1654760db5f80585bd153b65df2ddb31a0edff1af22af9fea3e2017958ca55ac"
+at = "RECURSIVE=u32"
+embedded = "5764d1bb2030d9806f1f4fa2ad01b8642c085b779949e7c7fe07ec6a3d1036bb"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::upgrade_slow"
+kappa = "b40b626acac46cc9cb67afb47c7baa46d8d505bab0c5d45018c27f54803bd1b0"
+at = "RECURSIVE=u32"
+embedded = "7f777effe5dc91c8dd6c30631fd4de2ab2aa61ec27a541f56ac7cb3e498d6793"
+status = "residue"
+cause = "mir::Ty: lock_api::GuardNoSend"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::wait_for_readers"
+kappa = "7062ccbb70bddc92c859d8aed0ab1bc6e44cf37f877ab840cceadc30bc832784"
+at = "RECURSIVE=u32"
+embedded = "d1a591b43e14792358523863f5a65a2f1485e4b4a0fb14876420d2c0315c7a26"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
+[[fn]]
+path = "parking_lot::raw_rwlock::RawRwLock::wake_parked_threads"
+kappa = "4b98df60219debd1cda75aee1dce1f5e50925201c0024b503548e3f5a3ff9fc5"
+at = "RECURSIVE=u32"
+embedded = "3603d7fc29811841f6960572a042e4743813899c34a9ec60029ca38c62338acf"
+status = "residue"
+cause = "mir::Ty: raw_rwlock::RawRwLock<u32>"
+
