@@ -108,6 +108,21 @@ class ChangeImpactTests(unittest.TestCase):
         self.assertEqual(impact.report(self.repo, self.base, sha)["route"], "full-unknown")
         self.assertEqual(impact.report(self.repo, sha, sha)["route"], "full-unknown")
 
+    def test_ordered_factory_exclusion_and_later_reinclusion(self):
+        graph = {
+            "test": [
+                "crates/", "!crates/uorust/tests/fixtures/",
+                "crates/uorust/tests/fixtures/nist-sha256/",
+            ],
+        }
+        self.assertEqual(
+            impact.consumers("crates/uorust/tests/fixtures/other/lib.rs", graph), [])
+        self.assertEqual(
+            impact.consumers("crates/uorust/tests/fixtures/nist-sha256/vector.rs", graph),
+            ["test"])
+        self.assertEqual(
+            impact.consumers("crates/uorust/src/lib.rs", graph), ["test"])
+
     def test_graph_consumed_docs_are_not_downgraded(self):
         graph = GRAPH.replace("inputs = []", 'inputs = ["docs/guides/"]')
         baseline = commit(self.repo, "prism-factory/graph.toml", graph)
