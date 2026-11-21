@@ -101,7 +101,7 @@ Feature: engine
   Scenario: A lifted function never turns unlifted
     Given this workspace, the thermostat fixture and their committed lift registers
     When the suite exercises UE-16
-    Then every function of product code counted from the source has exactly one typed row keyed by its κ, a divergence appears on lifted rows only and the register keeps it, no κ a committed register records as lifted is decided otherwise, this workspace's register is current, and a planted function whose callee stops lifting is refused by the register, by uorust write and by uorust check
+    Then every function of product code counted from the source has exactly one typed row keyed by its κ, a divergence appears on lifted rows only and the register keeps it, no κ a committed register records as lifted is decided otherwise, this workspace's register is current, a planted function whose callee stops lifting is refused by the register, by uorust write and by uorust check, and a planted unchanged function counted under another construct while its signature still states its own is refused by uorust admit against its parent's register whether or not another function still states it, while moving functions on whose signatures no longer state it, or whose callee lifted, is admitted, an inline module's homonym of a function is a row of its own, and the frontier's type construct row names the file and line of the declaration each name of its chain means where it is written
 
   @UE-17 @build
   Scenario: The lift translates MIR mechanically
@@ -120,3 +120,9 @@ Feature: engine
     Given core's MIR dumps, rust-src at the pinned toolchain and the MIR semantics module
     When the suite exercises UE-19
     Then every body is a value of the MIR datatype whose kinds are rustc's, a long list nests no deeper than its root, the constructs the evaluator does not define are read from its source, each register row records its embedding and what blocks it, and each sampled case is a theorem that the evaluator returns what rustc's build returned
+
+  @UE-21 @build
+  Scenario: Every numeric literal of a workspace gets a home by extraction and rewrite
+    Given small synthetic workspaces and figure registers written for them
+    When the suite exercises UE-21
+    Then every numeric literal is a site at its place with a key an unrelated edit keeps, the writer expands each figure to its own token, a rewrite names the figure and a second changes nothing, what cannot be placed is refused with its reason, a line that reads its column is refused unless the rules declare columns not behaviour, when the site is placed and the columns it moves are recorded, a layout that would move a line is refused under that declaration too, the gate holds the workspace to its register, a rewritten function lifts to the definition and κ it had, and a figure's call no literal is read for is refused with its cause

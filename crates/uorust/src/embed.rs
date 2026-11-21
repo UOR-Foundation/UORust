@@ -497,6 +497,11 @@ pub(crate) struct Embedded {
     pub(crate) cost: Cost,
 }
 
+/// The construct a body is blocked by when control reaches a block it
+/// lacks: an edge to a block the reader did not read, or an entry block of a
+/// body read with none ([`Cx::cost`]).
+const LACKED: &str = "Terminator to a block the body lacks";
+
 /// The most one run of a body costs the evaluator (UE-19), from its loops'
 /// bounds ([`crate::mir::trips`]): the differential check's fuel.
 #[derive(Clone, Debug, Default)]
@@ -1153,9 +1158,11 @@ fn signed(n: i128) -> String {
     )
 }
 
-/// A LexLean string literal of `text`, every character kept: a quote and a
-/// backslash escaped, and a control character and `%` (which LexLean's TeX
-/// surface reserves) written as their `\\u` escape.
+/// A LexLean string literal of `text`, every character kept, in the
+/// spelling the SDK's `lexlean fmt` writes (LLL1003): a quote and a
+/// backslash escaped, a newline, return, tab, backspace and form feed by
+/// their letter escapes, and every other control character and `%` (which
+/// LexLean's TeX surface reserves) as their `\\u` escape.
 pub(crate) fn mir_string(text: &str) -> String {
     let mut out = String::with_capacity(text.len() + 2);
     out.push('"');
@@ -1163,6 +1170,11 @@ pub(crate) fn mir_string(text: &str) -> String {
         match c {
             '"' => out.push_str("\\\""),
             '\\' => out.push_str("\\\\"),
+            '\n' => out.push_str("\\n"),
+            '\r' => out.push_str("\\r"),
+            '\t' => out.push_str("\\t"),
+            '\u{8}' => out.push_str("\\b"),
+            '\u{c}' => out.push_str("\\f"),
             c if c == '%' || c.is_control() => {
                 let mut units = [0u16; 2];
                 for u in c.encode_utf16(&mut units) {
@@ -3507,6 +3519,11 @@ impl Cx<'_> {
         sites: &[Site],
         blocks: &[String],
     ) -> Cost {
+        // A reached block the body lacks is no run of it: a dump the reader
+        // read short, whatever the input, is refused, never indexed.
+        if reached.iter().any(|&i| i >= b.blocks.len()) {
+            return Cost::Unbounded(LACKED.into());
+        }
         let runs = match crate::mir::trips::runs(b, reached, self.width) {
             crate::mir::trips::Runs::Bounded(r) => r,
             crate::mir::trips::Runs::Unbounded(why) => return Cost::Unbounded(why),
@@ -3635,6 +3652,9 @@ impl Cx<'_> {
                     work.push(next);
                 }
             }
+        }
+        if reached.iter().any(|&i| i >= b.blocks.len()) {
+            e.blocked.insert(LACKED.to_string());
         }
         let blocks: Vec<String> = b
             .blocks
@@ -3833,10 +3853,465 @@ pub struct EmbedCensus {
     pub blocked: BTreeMap<String, usize>,
     /// How many bodies leave a callee to a dictionary.
     pub bound: usize,
+    /// The calls (each callee once per body) that name a body of the
+    /// program, by where the body is: [`OWN`] for the crate's own modules,
+    /// else the linked library's name.
+    pub linked: BTreeMap<String, usize>,
+    /// The calls (each callee once per body) left to a dictionary, by why
+    /// ([`unlinked_reason`]).
+    pub unlinked: BTreeMap<String, usize>,
+    /// Each body counted, by the path the dump prints for it: what joins a
+    /// register row to its body ([`BodyFact`]).
+    pub rows: Vec<BodyFact>,
+    /// Of the calls [`Self::linked`] counts, those whose callee's reach is
+    /// closed ([`EmbedCensus::reach`]), by where the callee is.
+    pub closed: BTreeMap<String, usize>,
+    /// Of those calls, the ones whose callee's reach is open, by where the
+    /// callee is, then by why.
+    pub open: BTreeMap<String, BTreeMap<String, usize>>,
+}
+
+/// One body's embedding, keyed by the path the dump prints for it
+/// (`a::<impl at src/a.rs:3:1: 3:9>::f`, `inner::run`), which is the item
+/// the compiler resolved and never a path the surface reader spells: a
+/// trait's method in two impls of one type, a generic impl's method and a
+/// function of an inline module each keep their own. Its reach is closed
+/// exactly when every body it reaches, itself first, is embedded, uses no
+/// construct the evaluator does not define, calls no intrinsic, leaves no
+/// callee to a dictionary and fixes every instance's generics, and it is
+/// not generic itself (the one test [`closure`] states, which the
+/// differential check's samples are held to as well).
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct BodyFact {
+    /// The path the dump prints.
+    pub path: String,
+    /// The body's κ ([`body_kappa`]).
+    pub kappa: String,
+    /// The SHA-256 of its term, as the register's stamp writes it.
+    pub embedded: String,
+    /// The constructs it uses that the evaluator does not define.
+    pub blocked: Vec<String>,
+    /// Where its reach is open: why, and the key of the body that stops
+    /// it (itself or one it reaches). `None` where it is closed.
+    pub open: Option<(String, String)>,
+    /// The callees it leaves to a dictionary, by why
+    /// ([`unlinked_reason`]).
+    pub unlinked: BTreeMap<String, BTreeSet<String>>,
+}
+
+impl BodyFact {
+    /// Its reach as the register's stamp and a record write it: `closed`,
+    /// or `open: <why> (at <body>)`.
+    pub fn reach(&self) -> String {
+        match &self.open {
+            None => "closed".to_string(),
+            Some((why, at)) => format!("open: {why} (at {at})"),
+        }
+    }
+}
+
+/// The key of [`EmbedCensus::linked`] for a call into the crate's own
+/// modules, which no crate name can be.
+pub const OWN: &str = "(the crate's own modules)";
+
+/// The primitive types, whose inherent methods core and alloc define: a
+/// path a dump prints from one (`i64::checked_add`) is theirs.
+const PRIMITIVES: [&str; 17] = [
+    "bool", "char", "str", "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64",
+    "u128", "usize", "f32", "f64",
+];
+
+/// Why a trait method's call stays unlinked where the crate's own dump
+/// holds a method of that name for an impl over the call's self type
+/// ([`own_impl_body`]): the crate's own impl is the one the call selects,
+/// and its own resolution did not find it.
+pub const OWN_IMPL: &str = "the crate's own impl, which its link does not select";
+
+/// What a callee's printed path names as its home: a crate (a plain
+/// path's), the crates that may hold the impl a qualified path calls, the
+/// crate's own modules, a generic parameter the caller's bound abstracts,
+/// a trait object, or the platform (a name with no path).
+pub(crate) enum Home {
+    Crate(String),
+    /// `<Self as Trait<..>>::item`: the crates that can hold the impl, by
+    /// the orphan rule and by what each can name ([`impl_crates`]), the
+    /// crate's own left out (its bodies are in its dump); the trait's
+    /// crate among them where it can hold it (its default bodies and
+    /// blanket impls are there).
+    Impl(Vec<String>),
+    Own,
+    Parameter,
+    Object,
+    Platform,
+}
+
+/// The top-level arguments of the generic list that opens at `text`'s
+/// first `<` (`Map<A, B<C, D>>` gives `A` and `B<C, D>`): none when it
+/// has no list.
+fn generic_args(text: &str) -> Vec<&str> {
+    let Some(open) = text.find('<') else {
+        return Vec::new();
+    };
+    let mut out = Vec::new();
+    let mut depth = 0usize;
+    let mut start = open + 1;
+    for (i, c) in text.char_indices().skip_while(|(i, _)| *i <= open) {
+        match c {
+            '<' | '(' | '[' => depth += 1,
+            '>' | ')' | ']' if depth == 0 => {
+                out.push(text[start..i].trim());
+                return out;
+            }
+            '>' | ')' | ']' => depth -= 1,
+            ',' if depth == 0 => {
+                out.push(text[start..i].trim());
+                start = i + 1;
+            }
+            _ => {}
+        }
+    }
+    out
+}
+
+/// A type's text past the fundamental wrappers the orphan rule looks
+/// through (`&`, `&mut`, `Box<T>`, `Pin<T>`): an impl for `&Local` or
+/// `Box<Local>` may be in `Local`'s crate.
+fn past_fundamental(ty: &str) -> &str {
+    let mut t = ty.trim();
+    loop {
+        if let Some(r) = t.strip_prefix('&') {
+            t = r.trim_start();
+            if t.starts_with('\'') {
+                t = t.split_once(' ').map_or("", |(_, r)| r).trim_start();
+            }
+            t = t.strip_prefix("mut ").unwrap_or(t).trim_start();
+            continue;
+        }
+        let wrapped = [
+            "alloc::boxed::Box<",
+            "std::boxed::Box<",
+            "core::pin::Pin<",
+            "std::pin::Pin<",
+        ]
+        .iter()
+        .any(|w| t.starts_with(w));
+        match generic_args(t).first() {
+            Some(inner) if wrapped => t = inner,
+            _ => return t,
+        }
+    }
+}
+
+/// What a type's text says of the crate an impl for it may be in.
+enum TypeHome {
+    /// A path's first segment: a crate, or a module of the crate's own.
+    Path(String),
+    /// A trait object `dyn path::Trait`: local to the trait's crate.
+    Object(String),
+    /// A generic parameter (one capitalised segment).
+    Parameter,
+    /// A primitive, a slice, array, tuple, pointer or function type: no
+    /// crate's own.
+    Primitive,
+}
+
+fn type_home(ty: &str) -> TypeHome {
+    let t = past_fundamental(ty);
+    let head = |p: &str| {
+        p.split("::")
+            .next()
+            .unwrap_or_default()
+            .split(['<', ' ', '+'])
+            .next()
+            .unwrap_or_default()
+            .to_string()
+    };
+    if let Some(object) = t.strip_prefix("dyn ") {
+        // A trait of the crate's root prints with no path: the crate's own.
+        let object = object.trim_start();
+        let first = object.split(['<', ' ', '+']).next().unwrap_or_default();
+        return TypeHome::Object(if first.contains("::") {
+            head(object)
+        } else {
+            String::new()
+        });
+    }
+    if t.starts_with(['[', '(', '*', '!']) || t.starts_with("fn(") || t.starts_with("unsafe ") {
+        return TypeHome::Primitive;
+    }
+    let first = t.split(['<', ' ']).next().unwrap_or_default();
+    if !first.contains("::") {
+        return if first.starts_with(char::is_uppercase) {
+            TypeHome::Parameter
+        } else {
+            TypeHome::Primitive
+        };
+    }
+    TypeHome::Path(head(t))
+}
+
+/// Where a library sits in the order in which crates can name each other:
+/// core names none, alloc core, std both, any other crate all three and
+/// may name any other crate but these.
+fn rank(krate: &str) -> usize {
+    crate::library::LIBRARIES
+        .iter()
+        .position(|l| *l == krate)
+        .unwrap_or(crate::library::LIBRARIES.len())
+}
+
+/// The crates that can hold the impl `<self_ty as trait_path>` calls,
+/// own modules left out: by the orphan rule, the trait's crate or the
+/// crate of one of the types (`self_ty` and the trait's arguments, each
+/// past its fundamental wrappers); and of those only a crate that can
+/// name every other one the impl names, since an impl names them all (core
+/// cannot hold an impl for alloc's `Vec`, nor core or alloc one whose
+/// trait argument is std's `Path`). `own` says whether a path's first
+/// segment is the crate's own.
+fn impl_crates(self_ty: &str, trait_path: &str, own: &dyn Fn(&str) -> bool) -> Vec<String> {
+    let mut named = BTreeSet::new();
+    let trait_head = trait_path.split("::").next().unwrap_or_default();
+    if trait_path.contains("::") {
+        named.insert(trait_head.split('<').next().unwrap_or_default().to_string());
+    }
+    for ty in std::iter::once(self_ty).chain(generic_args(trait_path)) {
+        match type_home(ty) {
+            TypeHome::Path(c) | TypeHome::Object(c) => {
+                named.insert(c);
+            }
+            TypeHome::Parameter | TypeHome::Primitive => {}
+        }
+    }
+    named.retain(|c| !c.is_empty() && !own(c));
+    let can_hold = |c: &String| {
+        named
+            .iter()
+            .all(|d| d == c || rank(d) < rank(c) || rank(c) == crate::library::LIBRARIES.len())
+    };
+    named.iter().filter(|c| can_hold(c)).cloned().collect()
+}
+
+/// A qualified path `<Self as Trait>::item...` split into its self type,
+/// its trait (none for `<Type>::item`) and the item's name.
+fn qualified(name: &str) -> Option<(&str, Option<&str>, &str)> {
+    let rest = name.strip_prefix('<')?;
+    let mut depth = 0usize;
+    let mut split = None;
+    let mut end = None;
+    for (i, c) in rest.char_indices() {
+        match c {
+            '<' | '(' | '[' => depth += 1,
+            '>' | ')' | ']' if depth == 0 => {
+                end = Some(i);
+                break;
+            }
+            '>' | ')' | ']' => depth -= 1,
+            _ if depth == 0 && split.is_none() && rest[i..].starts_with(" as ") => {
+                split = Some(i);
+            }
+            _ => {}
+        }
+    }
+    let end = end.unwrap_or(rest.len());
+    let self_ty = rest[..split.unwrap_or(end)].trim();
+    let trait_path = split.map(|at| rest[at + " as ".len()..end].trim());
+    let item = rest
+        .get(end + 1..)
+        .unwrap_or_default()
+        .trim_start_matches("::")
+        .split("::")
+        .next()
+        .unwrap_or_default();
+    Some((self_ty, trait_path, item))
+}
+
+/// Whether the crate's own dump holds a method of the name `name` calls,
+/// of an impl that can be the one the call selects: one whose signature
+/// names a type of the crate's own that the call's self type or trait
+/// arguments name (`fn m::<impl at src/m.rs:4:10: 4:15>::clone(_1:
+/// &m::Mine)` for `<m::Mine as Clone>::clone`, or `fn
+/// m::<impl ..>::from(_1: m::Mine) -> u64` for `<u64 as From<m::Mine>>::from`).
+/// Then the crate's own impl is the one the call selects, even where its
+/// own resolution did not find it, and no default body or blanket impl of
+/// the trait's crate may stand for it. A call that names no type of the
+/// crate's own (`<u64 as From<u16>>::from`) cannot select an impl of the
+/// crate (by the orphan rule it holds none for foreign types alone).
+/// `heads` are the `fn` lines of the crate's own bodies; `own` says
+/// whether a path's first segment is the crate's own. The test reads a
+/// type's path without its generic arguments, so a generic own type
+/// counts too: it can only keep a call unlinked, never link it.
+pub(crate) fn own_impl_body(name: &str, heads: &[&str], own: &dyn Fn(&str) -> bool) -> bool {
+    let Some((self_ty, Some(trait_path), item)) = qualified(name) else {
+        return false;
+    };
+    let method = format!(">::{item}(");
+    std::iter::once(self_ty)
+        .chain(generic_args(trait_path))
+        .filter_map(|ty| {
+            let ty = past_fundamental(ty);
+            let ty = ty.split('<').next().unwrap_or_default();
+            let head = ty.split("::").next().unwrap_or_default();
+            (ty.contains("::") && own(head)).then_some(ty)
+        })
+        .any(|ty| heads.iter().any(|h| h.contains(&method) && h.contains(ty)))
+}
+
+/// The home of the callee `name` (written from the crate that defines it
+/// where the library's paths resolve it) of a body whose own modules
+/// `own` names (the crate's name and its top-level modules, as its MIR
+/// prints its own paths).
+pub(crate) fn home_of(name: &str, own: &dyn Fn(&str) -> bool) -> Home {
+    if !name.starts_with('<') {
+        if !name.contains("::") {
+            return Home::Platform;
+        }
+        let head = name.split("::").next().unwrap_or_default();
+        return if own(head) {
+            Home::Own
+        } else if head.is_empty() {
+            Home::Platform
+        } else {
+            Home::Crate(head.to_string())
+        };
+    }
+    let Some((self_ty, trait_path, _)) = qualified(name) else {
+        return Home::Platform;
+    };
+    // A trait object's method is chosen at run time only where the self
+    // type is the object itself: `&dyn T`, `&mut dyn T` are references,
+    // whose impls (`impl<I: Iterator + ?Sized> Iterator for &mut I`,
+    // `impl<T: Display + ?Sized> Display for &T`) are static calls.
+    if self_ty.starts_with("dyn ") {
+        return Home::Object;
+    }
+    if matches!(type_home(self_ty), TypeHome::Parameter) {
+        return Home::Parameter;
+    }
+    match trait_path {
+        Some(tr) => {
+            let crates = impl_crates(self_ty, tr, own);
+            if crates.is_empty() {
+                Home::Own
+            } else {
+                Home::Impl(crates)
+            }
+        }
+        // `<Type>::item`: an inherent item, its type's crate's.
+        None => match type_home(self_ty) {
+            TypeHome::Path(c) | TypeHome::Object(c) if own(&c) => Home::Own,
+            TypeHome::Path(c) | TypeHome::Object(c) => Home::Crate(c),
+            _ => Home::Platform,
+        },
+    }
+}
+
+/// Why a callee `name` a body of `krate` leaves to its dictionary is not
+/// linked, read from the path the dump prints (written from the crate
+/// that defines it where the library's paths resolve it,
+/// [`crate::library::Paths::canonical_text`]), with the crate's top-level
+/// modules `modules` (its own paths print from them, without its name)
+/// and the libraries `linked` into the program: the crate that holds it
+/// (for a trait method, the crate that can hold the impl,
+/// [`impl_crates`]) when that is not linked, a linked library's own
+/// resolution, the crate's own, a generic parameter the caller's bound
+/// abstracts, a trait object's method (the impl is chosen at run time),
+/// or the platform (an intrinsic, inline assembly, a foreign item: a name
+/// with no path).
+///
+/// A call the dump prints through an operand (`move _5 as &dyn Fn(..)`,
+/// `(_3 as Continue).0: F`), or whose self type is a function pointer or a
+/// closure, names no item: a call through a function value. An `impl
+/// Trait` self type is a generic parameter's. A primitive's inherent item
+/// printed as a plain path (`i64::checked_add`) is core's.
+pub fn unlinked_reason(name: &str, krate: &str, modules: &[&str], linked: &[&str]) -> String {
+    const VALUE: &str = "a call through a function value (a closure, a function pointer, `dyn Fn`)";
+    const BOUND: &str = "a generic parameter's bound";
+    if name.starts_with(['_', '(']) || name.starts_with("move ") || name.starts_with("copy ") {
+        return VALUE.into();
+    }
+    if !name.starts_with('<') {
+        if let Some((head, _)) = name.split_once("::") {
+            if PRIMITIVES.contains(&head) {
+                return if linked.contains(&"core") {
+                    "a linked library leaves it to a dictionary".into()
+                } else {
+                    "crate `core` is not linked".into()
+                };
+            }
+            if !head.chars().all(|x| x.is_alphanumeric() || x == '_') {
+                return VALUE.into();
+            }
+        }
+    }
+    if let Some((self_ty, _, _)) = qualified(name) {
+        let mut ty = past_fundamental(self_ty);
+        if let Some(r) = ty.strip_prefix("for<") {
+            ty = r.split_once("> ").map_or("", |(_, t)| t);
+        }
+        if ty.starts_with("impl ") {
+            return BOUND.into();
+        }
+        if ty.starts_with("fn(") || ty.starts_with("{closure") {
+            return VALUE.into();
+        }
+    }
+    let own = |c: &str| {
+        (c == krate || modules.contains(&c))
+            && !linked.contains(&c)
+            && !crate::library::LIBRARIES.contains(&c)
+    };
+    let leaves = || "a linked library leaves it to a dictionary".to_string();
+    match home_of(name, &own) {
+        Home::Platform => "the platform (an intrinsic, assembly, a foreign item)".into(),
+        Home::Parameter => BOUND.into(),
+        Home::Object => "a trait object's method, chosen at run time".into(),
+        Home::Own => "the crate's own, with no body in the dump".into(),
+        Home::Crate(c) if linked.contains(&c.as_str()) => leaves(),
+        Home::Crate(c) => format!("crate `{c}` is not linked"),
+        Home::Impl(crates) => match crates.iter().find(|c| !linked.contains(&c.as_str())) {
+            Some(c) => format!("crate `{c}` is not linked"),
+            None => leaves(),
+        },
+    }
+}
+
+/// Why the callee `bound` a body of `krate` leaves to its dictionary is
+/// not linked, as the census and a body's row name it: the path written
+/// from the crate that defines it where the library's `paths` resolve it,
+/// then the crate's own impl ([`OWN_IMPL`]) where its dump (`heads`, the
+/// `fn` lines of its own bodies) holds the method the call selects, else
+/// [`unlinked_reason`].
+fn unlinked_why(
+    bound: &str,
+    krate: &str,
+    modules: &[&str],
+    heads: &[&str],
+    linked: &[&str],
+    paths: Option<&crate::library::Paths>,
+) -> String {
+    let named = paths.map_or_else(|| bound.to_string(), |p| p.canonical_text(bound));
+    let own = |c: &str| {
+        (c == krate || modules.contains(&c))
+            && !linked.contains(&c)
+            && !crate::library::LIBRARIES.contains(&c)
+    };
+    if own_impl_body(&named, heads, &own) {
+        OWN_IMPL.to_string()
+    } else {
+        unlinked_reason(&named, krate, modules, linked)
+    }
 }
 
 impl EmbedCensus {
-    fn add(&mut self, e: &Embedded) {
+    fn add(
+        &mut self,
+        e: &Embedded,
+        krate: &str,
+        modules: &[&str],
+        heads: &[&str],
+        linked: &[&str],
+        paths: Option<&crate::library::Paths>,
+    ) {
         self.bodies += 1;
         if e.blocked.is_empty() {
             self.evaluable += 1;
@@ -3849,6 +4324,57 @@ impl EmbedCensus {
         }
         if !e.bound.is_empty() {
             self.bound += 1;
+        }
+        for c in &e.callees {
+            let at = linked
+                .iter()
+                .find(|l| c.starts_with(&format!("{l}::")))
+                .map_or(OWN, |l| l);
+            *self.linked.entry(at.to_string()).or_default() += 1;
+        }
+        for b in &e.bound {
+            let why = unlinked_why(b, krate, modules, heads, linked, paths);
+            *self.unlinked.entry(why).or_default() += 1;
+        }
+    }
+
+    /// Read the reach of each call `calls` names (a body of the program,
+    /// once per calling body) in `every`: a call is closed only where
+    /// every body its callee reaches is embedded, evaluable and leaves
+    /// nothing to a dictionary ([`closure`], the callee taken at the
+    /// call's instance), and is counted open, by why, otherwise. A linked
+    /// library's generic body whose trait calls its own dump leaves to a
+    /// dictionary (`Iterator::count` leaving `fold`) does not evaluate at
+    /// the call, so linking it does not close the call.
+    fn reach(
+        &mut self,
+        calls: &[String],
+        every: &BTreeMap<String, (String, Embedded)>,
+        linked: &[&str],
+    ) {
+        let mut known: BTreeMap<&str, Option<String>> = BTreeMap::new();
+        for c in calls {
+            let at = linked
+                .iter()
+                .find(|l| c.starts_with(&format!("{l}::")))
+                .map_or(OWN, |l| l);
+            let why = known
+                .entry(c.as_str())
+                .or_insert_with(|| match closure(every, c, false) {
+                    Reach::Closed(_) => None,
+                    Reach::Open { why, .. } => Some(why),
+                });
+            match why {
+                None => *self.closed.entry(at.to_string()).or_default() += 1,
+                Some(why) => {
+                    *self
+                        .open
+                        .entry(at.to_string())
+                        .or_default()
+                        .entry(why.clone())
+                        .or_default() += 1;
+                }
+            }
         }
     }
 
@@ -3876,6 +4402,20 @@ impl EmbedCensus {
                 out,
                 "\n[[construct]]\nconstruct = {}\nbodies = {n}\n",
                 census_string(c)
+            );
+        }
+        for (at, n) in &self.linked {
+            let _ = write!(
+                out,
+                "\n[[linked]]\ninto = {}\ncalls = {n}\n",
+                census_string(at)
+            );
+        }
+        for (why, n) in &self.unlinked {
+            let _ = write!(
+                out,
+                "\n[[unlinked]]\nreason = {}\ncalls = {n}\n",
+                census_string(why)
             );
         }
         out
@@ -4023,10 +4563,55 @@ pub fn embed(
     embed_with(krate, &[], library, dumps, out, only, outputs)
 }
 
+/// The stack one body on the path of the embedding's walks takes at most:
+/// a page, the unit a thread's stack is mapped in. The walks over the
+/// program (the fuel and instance walks follow calls) nest once per body
+/// on a call path; measured on a chain of calls in a debug build, a path of
+/// 5000 bodies was held by the main thread's 8 MiB and one of 10000 was
+/// not, so a level takes between about 840 and 1680 bytes, under a page.
+const BODY_STACK: usize = 4096;
+
+/// The bodies the dumps under `dir` hold, at any depth: each `// MIR for`
+/// header.
+fn bodies_under(dir: &Path) -> usize {
+    let mut count = 0;
+    let mut next = vec![dir.to_path_buf()];
+    while let Some(d) = next.pop() {
+        for path in std::fs::read_dir(&d)
+            .into_iter()
+            .flatten()
+            .filter_map(Result::ok)
+            .map(|e| e.path())
+        {
+            if path.is_dir() {
+                next.push(path);
+            } else if let Ok(text) = std::fs::read_to_string(&path) {
+                count += text.matches("// MIR for `").count();
+            }
+        }
+    }
+    count
+}
+
+/// The stack the embedding of the dumps under `dumps`, with the libraries
+/// `link` linked, runs on: a [`BODY_STACK`] for each body the program can
+/// hold, since no call path of it is longer, and never less than the
+/// projection's own ([`crate::PROJECTION_STACK`]).
+fn embedding_stack(dumps: &Path, link: &[(&str, &Path)]) -> usize {
+    let bodies = bodies_under(dumps) + link.iter().map(|(_, d)| bodies_under(d)).sum::<usize>();
+    bodies
+        .saturating_add(1)
+        .saturating_mul(BODY_STACK)
+        .max(crate::PROJECTION_STACK)
+}
+
 /// [`embed`] for a crate that builds on the crates `builds_on` as well as
 /// core and alloc, each a directory of `library` by its name (a crate of
 /// crates.io and its dependencies): its bodies make values of their enums
-/// and structs, read from their declarations as core's are.
+/// and structs, read from their declarations as core's are. It runs on a
+/// thread whose stack is sized for the program ([`embedding_stack`]):
+/// the walks nest once per body on a call path, which the input, not the
+/// caller's thread, bounds.
 pub fn embed_with(
     krate: &str,
     builds_on: &[String],
@@ -4036,33 +4621,114 @@ pub fn embed_with(
     only: &[String],
     outputs: &Outputs<'_>,
 ) -> Result<EmbedCensus, UorustError> {
-    let Outputs {
-        harness,
-        observed,
-        register,
-        bridge,
-        differential: alone,
-        link,
-    } = *outputs;
-    let root = library.parent().unwrap_or(library);
-    // Each library linked with those before it: alloc with core.
+    on_embedding_stack(dumps, outputs.link, || {
+        let root = library.parent().unwrap_or(library);
+        let linked = link_all(dumps, outputs.link, root)?;
+        embed_into(krate, builds_on, root, dumps, out, only, outputs, &linked)
+    })
+}
+
+/// `work` on a thread whose stack is sized for the program the dumps under
+/// `dumps` and the libraries `link` make ([`embedding_stack`]).
+fn on_embedding_stack<T: Send>(
+    dumps: &Path,
+    link: &[(&str, &Path)],
+    work: impl FnOnce() -> Result<T, UorustError> + Send,
+) -> Result<T, UorustError> {
+    let stack = embedding_stack(dumps, link);
+    std::thread::scope(|scope| {
+        std::thread::Builder::new()
+            .stack_size(stack)
+            .spawn_scoped(scope, work)
+            .map_err(|e| UorustError::Tool(format!("the embedding's thread: {e}")))?
+            .join()
+            .unwrap_or_else(|panic| std::panic::resume_unwind(panic))
+    })
+}
+
+/// Each library of `link` linked with those before it (alloc with core),
+/// its declarations read under `root`. A library that does not link is
+/// named and left out: the crate's calls into it stay its dictionary's,
+/// as they are unlinked. A library's dump is of one target: its `cfg`s
+/// chose its items (`impl usize` at `u64`'s width on a 64-bit target), so
+/// it is linked only into a program dumped (under `dumps`) for the same
+/// target, and any other is refused.
+fn link_all(dumps: &Path, link: &[(&str, &Path)], root: &Path) -> Result<Vec<Linked>, UorustError> {
+    for (lib, dir) in link {
+        if let Some(why) = other_target(dumps, dir) {
+            return Err(UorustError::Tool(format!(
+                "embed: {lib} at {} is not linked: {why}",
+                dir.display()
+            )));
+        }
+    }
     let mut linked: Vec<Linked> = Vec::new();
-    // A library that does not link is named and left out: the crate's
-    // calls into it stay its dictionary's, as they are unlinked.
     for (lib, dir) in link {
         match link_library(lib, root, dir, &linked) {
             Ok(l) => linked.push(l),
             Err(e) => eprintln!("embed: {lib} is not linked: {e}"),
         }
     }
-    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, &linked)?;
+    Ok(linked)
+}
+
+/// [`embed_with`] for several sets of modules, each `(only, out)` its own
+/// project, with the libraries `link` names linked once for all of them:
+/// what one factory step per (configuration, module) costs apart from the
+/// linking, which every set shares.
+pub fn embed_each(
+    krate: &str,
+    builds_on: &[String],
+    library: &Path,
+    dumps: &Path,
+    sets: &[(Vec<String>, std::path::PathBuf)],
+    link: &[(&str, &Path)],
+) -> Result<Vec<EmbedCensus>, UorustError> {
+    on_embedding_stack(dumps, link, || {
+        let root = library.parent().unwrap_or(library);
+        let linked = link_all(dumps, link, root)?;
+        let outputs = Outputs {
+            link,
+            ..Outputs::default()
+        };
+        sets.iter()
+            .map(|(only, out)| {
+                embed_into(krate, builds_on, root, dumps, out, only, &outputs, &linked)
+            })
+            .collect()
+    })
+}
+
+/// [`embed_with`] with its libraries already linked.
+#[allow(clippy::too_many_arguments)]
+fn embed_into(
+    krate: &str,
+    builds_on: &[String],
+    root: &Path,
+    dumps: &Path,
+    out: &Path,
+    only: &[String],
+    outputs: &Outputs<'_>,
+    linked: &[Linked],
+) -> Result<EmbedCensus, UorustError> {
+    let Outputs {
+        harness,
+        observed,
+        register,
+        bridge,
+        differential: alone,
+        link: _,
+    } = *outputs;
+    let (modules, census, program, _) = embed_linked(krate, builds_on, root, dumps, only, linked)?;
     if let Some(dir) = register {
         for (module, bodies) in &modules {
             let file = dir.join(format!("{module}.toml"));
             if file.exists() {
                 let by_kappa: BTreeMap<&str, &Embedded> =
                     bodies.iter().map(|(k, e)| (k.as_str(), e)).collect();
-                let text = stamp_rows(&read_text(&file)?, &by_kappa);
+                let reach: BTreeMap<&str, &BodyFact> =
+                    census.rows.iter().map(|r| (r.kappa.as_str(), r)).collect();
+                let text = stamp_rows(&read_text(&file)?, &by_kappa, &reach);
                 std::fs::write(&file, text).map_err(|e| crate::error::io(&file, e))?;
             }
         }
@@ -4126,11 +4792,16 @@ pub struct Outputs<'a> {
 }
 
 /// A register's module file with each row's embedding stamped on it by
-/// its κ: the digest of the body's term (`embedded`) and the constructs
-/// the evaluator does not define that it uses (`blocked`), in place of
+/// its κ: the digest of the body's term (`embedded`), the constructs
+/// the evaluator does not define that it uses (`blocked`) and its reach
+/// ([`BodyFact::reach`], where `reach` holds the κ), in place of
 /// whatever the row recorded. A row whose κ the embedding has no body of
 /// records none.
-pub(crate) fn stamp_rows(text: &str, by_kappa: &BTreeMap<&str, &Embedded>) -> String {
+pub(crate) fn stamp_rows(
+    text: &str,
+    by_kappa: &BTreeMap<&str, &Embedded>,
+    reach: &BTreeMap<&str, &BodyFact>,
+) -> String {
     let mut out = String::new();
     let mut kappa: Option<String> = None;
     let mut pending = false;
@@ -4145,10 +4816,16 @@ pub(crate) fn stamp_rows(text: &str, by_kappa: &BTreeMap<&str, &Embedded>) -> St
                 let quoted: Vec<String> = e.blocked.iter().map(|b| census_string(b)).collect();
                 let _ = writeln!(out, "blocked = [{}]", quoted.join(", "));
             }
+            if let Some(r) = kappa.as_deref().and_then(|k| reach.get(k)) {
+                let _ = writeln!(out, "reach = {}", census_string(&r.reach()));
+            }
         }
     };
     for line in text.lines() {
-        if line.starts_with("embedded = ") || line.starts_with("blocked = ") {
+        if line.starts_with("embedded = ")
+            || line.starts_with("blocked = ")
+            || line.starts_with("reach = ")
+        {
             continue;
         }
         // The stamp follows a row's κ and its span, as the register writes
@@ -4676,19 +5353,13 @@ pub(crate) struct Program {
     unread: BTreeSet<String>,
 }
 
-/// What a sample reaches: every body, which the evaluator defines, or
-/// why it does not.
+/// What a body reaches: every body, which the evaluator defines, or
+/// why it does not and the key of the body that stops it.
 enum Reach {
     Closed(Vec<String>),
-    Open(String),
+    Open { why: String, at: String },
 }
 
-/// The keys of the bodies `key` reaches, itself first, where the evaluator
-/// defines each: else why not, by the first body that stops it, which is
-/// not embedded, is blocked, calls an intrinsic, leaves a callee to a
-/// dictionary, or reaches an instance whose generics no binding fixes
-/// (`Generic.unknown`, and the root's own slots, which a sample's call
-/// supplies none of).
 /// A term read as an s-expression: an atom, or a parenthesized list.
 #[derive(Debug, PartialEq, Eq)]
 enum Sexp {
@@ -4932,43 +5603,88 @@ enum Fuel {
     Unbounded(String),
 }
 
-fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str) -> Reach {
+/// The keys of the bodies `key` reaches, itself first, where the evaluator
+/// defines each: else why not, by the first body that stops it, which is
+/// not embedded, is blocked, calls an intrinsic, leaves a callee to a
+/// dictionary, drops a value, calls a value, or reaches an instance whose
+/// generics no binding fixes (`Generic.unknown`, and the root's own slots,
+/// which a sample's call supplies none of).
+///
+/// A body whose term holds a `drop` is open: rustc keeps a `drop`
+/// terminator after drop elaboration only for a place whose type has drop
+/// glue (a `Drop` impl in it, a type parameter, a box), and the evaluator
+/// takes `Terminator.drop` as a jump, so a `Drop` body that panics or
+/// changes what the caller reads would not run. A call whose callee is an
+/// operand (`Callee.operand`: a function pointer, a closure or a `FnOnce`
+/// value) names no body, so what it calls is not among the callees walked.
+///
+/// For a `sample`, the root's own generic slots open it, since a sample's
+/// call binds none; for a call, the call binds them.
+fn closure(every: &BTreeMap<String, (String, Embedded)>, key: &str, sample: bool) -> Reach {
+    let open = |why: String, at: &str| Reach::Open {
+        why,
+        at: at.to_string(),
+    };
+    // `(ctor Mir::C ` with its first argument to come: the constructor
+    // applied, never a longer name that starts with it.
+    let applies = |term: &str, ctor: &str| {
+        term.contains(mir_ctor(ctor, &[String::new()]).trim_end_matches(')'))
+    };
     let mut seen = vec![key.to_string()];
     let mut at = 0;
     while let Some(k) = seen.get(at).cloned() {
         let Some((_, e)) = every.get(&k) else {
-            return Reach::Open("reaches a body not embedded".into());
+            return open("reaches a body not embedded".into(), &k);
         };
         if let Some(b) = e.blocked.iter().next() {
-            return Reach::Open(format!("reaches a body blocked by {b}"));
+            return open(format!("reaches a body blocked by {b}"), &k);
         }
         if let Some(b) = e.bound.iter().next() {
             // A dictionary's name, its generic arguments and the
-            // instance's impl aside: the kind of callee left.
-            let kind =
-                if b.starts_with("core::") || b.starts_with("alloc::") || b.starts_with("std::") {
-                    b.split("::").next().unwrap_or_default().to_string()
-                } else {
-                    "the crate".to_string()
-                };
+            // instance's impl aside: the kind of callee left. A linked
+            // library's body prints its own paths from its root
+            // (`convert::From`), so its leftover is named by the library
+            // its key is under (`core::...`), not as the crate's.
+            let library = |p: &str| {
+                crate::library::LIBRARIES
+                    .iter()
+                    .find(|l| p.starts_with(&format!("{l}::")))
+                    .map(|l| l.to_string())
+            };
+            let kind = library(b)
+                .or_else(|| library(&k))
+                .unwrap_or_else(|| "the crate".to_string());
             if std::env::var_os("UORUST_DIFFERENTIAL_DETAIL").is_some() {
                 eprintln!("differential: {key} reaches {k}, which leaves {b} to a dictionary");
             }
-            return Reach::Open(format!("leaves a callee of {kind} to a dictionary"));
+            return open(format!("leaves a callee of {kind} to a dictionary"), &k);
         }
         if !e.intrinsics.is_empty() {
-            return Reach::Open("calls an intrinsic".into());
+            return open("calls an intrinsic".into(), &k);
+        }
+        if applies(&e.term, "Terminator.drop") {
+            return open(
+                "drops a value, whose drop glue the evaluator does not run".into(),
+                &k,
+            );
+        }
+        if applies(&e.term, "Callee.operand") {
+            return open(
+                "calls a function pointer or closure value, which names no body".into(),
+                &k,
+            );
         }
         if e.term
             .contains(&mir_ctor("Generic.unknown", &[]).replace(')', ""))
         {
-            return Reach::Open("reaches an instance no binding fixes".into());
+            return open("reaches an instance no binding fixes".into(), &k);
         }
-        if at == 0
+        if sample
+            && at == 0
             && e.term
                 .contains(&mir_ctor("Generic.slot", &[]).replace(')', ""))
         {
-            return Reach::Open("is generic itself".into());
+            return open("is generic itself".into(), &k);
         }
         for c in &e.callees {
             if !seen.contains(c) {
@@ -5434,6 +6150,32 @@ pub(crate) fn resolve_callee(
         (Some(t), None) => Callee::Body(key(&instance.path, t)),
         _ => Callee::Bound(callee.to_string()),
     }
+}
+
+/// How the target the dumps under `linked` were built for differs from
+/// the one of the dumps under `dumps`, by their `target.toml`s: the
+/// triple, the pointer width or the data layout; none where they agree.
+/// A library compiled for another target holds other items (its `cfg`s
+/// chose them) and other layouts, so linking its bodies into the program
+/// would evaluate another program than the one the target compiles.
+pub(crate) fn other_target(dumps: &Path, linked: &Path) -> Option<String> {
+    let read = |dir: &Path| -> Option<toml::Table> {
+        read_text(&dir.join("target.toml")).ok()?.parse().ok()
+    };
+    let (Some(own), Some(theirs)) = (read(dumps), read(linked)) else {
+        return Some("a target.toml is missing or unreadable".into());
+    };
+    ["triple", "pointer_width", "data_layout"]
+        .into_iter()
+        .find(|f| own.get(*f) != theirs.get(*f))
+        .map(|f| {
+            let shown = |t: &toml::Table| t.get(f).map_or("none".to_string(), ToString::to_string);
+            format!(
+                "its {f} is {}, the program's is {}",
+                shown(&theirs),
+                shown(&own)
+            )
+        })
 }
 
 /// The pointer width the dumps under `dumps` were built for, and whether
@@ -5923,15 +6665,72 @@ fn embed_linked(
     // program leaves to its dictionary, as a foreign function is: the
     // evaluator is given the platform's, and stops unlinked without it.
     let platform = platform_intrinsics(&library_root(root));
-    let into_linked = |callee: &str, args: &[Option<String>], dest: &str| {
-        linked.iter().find_map(|l| {
-            let rest = callee.strip_prefix(&format!("{}::", l.krate))?;
-            match resolve_callee(&l.link, &l.krate, rest, args, dest) {
+    // A call into core, alloc or std, as the crate's MIR prints it (by a
+    // path visible from the crate, `std::vec::Vec::<u32>::push`), is the
+    // body of the library that defines it, found by its path from that
+    // library's root (`library::Paths`) with that library's own paths
+    // written as its dumps print them, from its root
+    // (`<ops::range::Range<u32> as iter::traits::iterator::Iterator>::next`).
+    let paths = linked
+        .iter()
+        .any(|l| crate::library::LIBRARIES.contains(&l.krate.as_str()))
+        .then(|| crate::library::Paths::read(&library_root(root)));
+    // The crate's own paths print from its top-level modules, without its
+    // name (`blanket::Mine`).
+    let module_names: Vec<&str> = read.iter().map(|(m, _)| m.as_str()).collect();
+    let linked_names: Vec<&str> = linked.iter().map(|l| l.krate.as_str()).collect();
+    let is_own = |c: &str| {
+        (c == krate || module_names.contains(&c))
+            && !linked_names.contains(&c)
+            && !crate::library::LIBRARIES.contains(&c)
+    };
+    // A plain path is its crate's; a trait method's body is in the crate
+    // that holds the impl ([`impl_crates`]): for a primitive's, a trait
+    // object's behind a reference, or the crate's own type's through a
+    // blanket impl or a default body, that is the trait's crate alone (the
+    // crate's own impl, where it has one, was resolved in its own dump
+    // first).
+    let own_heads: Vec<&str> = read
+        .iter()
+        .flat_map(|(_, texts)| texts.iter())
+        .flat_map(|(_, t)| t.lines().filter(|l| l.starts_with("fn ")))
+        .collect();
+    let in_library = |callee: &str, args: &[Option<String>], dest: &str| {
+        let paths = paths.as_ref()?;
+        let named = paths.canonical_text(callee);
+        if own_impl_body(&named, &own_heads, &is_own) {
+            return None;
+        }
+        let owners = match home_of(&named, &is_own) {
+            Home::Crate(c) => vec![c],
+            Home::Impl(crates) => crates,
+            _ => return None,
+        };
+        owners.iter().find_map(|owner| {
+            let l = linked.iter().find(|l| {
+                &l.krate == owner && crate::library::LIBRARIES.contains(&owner.as_str())
+            })?;
+            let own = |t: &str| crate::library::without_crate(&paths.canonical_text(t), &l.krate);
+            let args: Vec<Option<String>> = args.iter().map(|a| a.as_deref().map(own)).collect();
+            match resolve_callee(&l.link, &l.krate, &own(callee), &args, &own(dest)) {
                 Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
                 Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
                 Callee::Bound(_) => None,
             }
         })
+    };
+    let into_linked = |callee: &str, args: &[Option<String>], dest: &str| {
+        linked
+            .iter()
+            .find_map(|l| {
+                let rest = callee.strip_prefix(&format!("{}::", l.krate))?;
+                match resolve_callee(&l.link, &l.krate, rest, args, dest) {
+                    Callee::Body(k) => Some(Callee::Body(format!("{}::{k}", l.krate))),
+                    Callee::Intrinsic(p) => Some(Callee::Intrinsic(p)),
+                    Callee::Bound(_) => None,
+                }
+            })
+            .or_else(|| in_library(callee, args, dest))
     };
     let resolve = |callee: &str, args: &[Option<String>], dest: &str| match match resolve_callee(
         &link, krate, callee, args, dest,
@@ -5949,6 +6748,10 @@ fn embed_linked(
         c => c,
     };
     let mut census = EmbedCensus::default();
+    let linked_names: Vec<&str> = linked.iter().map(|l| l.krate.as_str()).collect();
+    // The calls of each body the census counts, whose reach is read once
+    // every body of the program, the linked libraries' too, is known.
+    let mut counted_calls: Vec<String> = Vec::new();
     // A constant item no dump holds, as its declaration in the crate's
     // source gives it (`CoreLink::constant`), with its text.
     let declared = |printed: &str| -> Option<(IrBody, String)> {
@@ -5974,6 +6777,8 @@ fn embed_linked(
     };
     let mut modules = Vec::new();
     let mut every: BTreeMap<String, (String, Embedded)> = BTreeMap::new();
+    // Each counted body: the path its dump prints, its key, its κ.
+    let mut counted: Vec<(String, String, String)> = Vec::new();
     let mut samples = Vec::new();
     let mut signatures = BTreeMap::new();
     let package = library_root(root).join(krate);
@@ -6080,7 +6885,16 @@ fn embed_linked(
                 };
                 let e = cx.body(&b, &key);
                 if selected && has_row(&b.path) && !is_static {
-                    census.add(&e);
+                    census.add(
+                        &e,
+                        krate,
+                        &module_names,
+                        &own_heads,
+                        &linked_names,
+                        paths.as_ref(),
+                    );
+                    counted_calls.extend(e.callees.iter().cloned());
+                    counted.push((b.path.clone(), key.clone(), kappa.clone()));
                     signatures.insert(
                         kappa.clone(),
                         (
@@ -6119,6 +6933,7 @@ fn embed_linked(
             every.entry(k.clone()).or_insert_with(|| v.clone());
         }
     }
+    census.reach(&counted_calls, &every, &linked_names);
     let unread = {
         let cx = Cx {
             width,
@@ -6193,7 +7008,7 @@ fn embed_linked(
     // dictionary.
     let mut left: BTreeMap<String, usize> = BTreeMap::new();
     let sampled = samples.len();
-    samples.retain_mut(|s| match closure(&every, &s.key) {
+    samples.retain_mut(|s| match closure(&every, &s.key, true) {
         Reach::Closed(c) => match derived_fuel(&every, &s.key) {
             Fuel::Bounded(fuel, _) => {
                 s.closure = c;
@@ -6205,7 +7020,7 @@ fn embed_linked(
                 false
             }
         },
-        Reach::Open(why) => {
+        Reach::Open { why, .. } => {
             *left.entry(why).or_default() += 1;
             false
         }
@@ -6219,6 +7034,39 @@ fn embed_linked(
                 .collect::<String>()
         );
     }
+    // Each counted body's reach and what it leaves unlinked, over the
+    // whole program: its own crate's bodies and the linked libraries'.
+    census.rows = counted
+        .into_iter()
+        .filter_map(|(path, key, kappa)| {
+            let (_, e) = every.get(&key)?;
+            let mut unlinked: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
+            for b in &e.bound {
+                unlinked
+                    .entry(unlinked_why(
+                        b,
+                        krate,
+                        &module_names,
+                        &own_heads,
+                        &linked_names,
+                        paths.as_ref(),
+                    ))
+                    .or_default()
+                    .insert(b.clone());
+            }
+            Some(BodyFact {
+                path,
+                kappa,
+                embedded: crate::project::sha(e.term.as_bytes()),
+                blocked: e.blocked.iter().cloned().collect(),
+                open: match closure(&every, &key, true) {
+                    Reach::Closed(_) => None,
+                    Reach::Open { why, at } => Some((why, at)),
+                },
+                unlinked,
+            })
+        })
+        .collect();
     let program = Program {
         every,
         samples,
@@ -6233,6 +7081,71 @@ fn embed_linked(
 
 #[cfg(test)]
 mod tests {
+    // lift: a deep call chain embeds whatever the caller's stack.
+
+    #[test]
+    fn lift_a_deep_call_chain_embeds_on_a_stack_sized_for_it() {
+        let work = std::env::temp_dir().join(format!("uorust-embed-deep-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&work);
+        let fixture =
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/core/library");
+        let library = work.join("library");
+        let source = library.join("m/src");
+        std::fs::create_dir_all(&source).unwrap();
+        for k in ["core", "alloc", "std"] {
+            if fixture.join(k).exists() {
+                std::os::unix::fs::symlink(fixture.join(k), library.join(k)).unwrap();
+            }
+        }
+        std::fs::write(
+            library.join("m/Cargo.toml"),
+            "[package]\nname = \"m\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+        )
+        .unwrap();
+        // A chain of calls `f0` -> `f1` -> ... as deep as the walks nest.
+        let depth = 600;
+        let dumps = work.join("dumps");
+        let module = dumps.join(crate::registry::ROOT_MODULE);
+        std::fs::create_dir_all(&module).unwrap();
+        std::fs::write(
+            dumps.join("target.toml"),
+            "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n",
+        )
+        .unwrap();
+        let mut lib = String::new();
+        for i in 0..depth {
+            let call = if i + 1 < depth {
+                format!("_0 = f{}(copy _1) -> [return: bb1, unwind continue];\n    }}\n\n    bb1: {{\n        return;", i + 1)
+            } else {
+                "_0 = copy _1;\n        return;".to_string()
+            };
+            std::fs::write(
+                module.join(format!("m.f{i}.2-2-009.ElaborateBoxDerefs.before.mir")),
+                format!("// MIR for `f{i}` before ElaborateBoxDerefs\n\nfn f{i}(_1: u32) -> u32 {{\n    let mut _0: u32;\n\n    bb0: {{\n        {call}\n    }}\n}}\n"),
+            )
+            .unwrap();
+            lib.push_str(&format!("pub fn f{i}(x: u32) -> u32 {{ x }}\n"));
+        }
+        std::fs::write(source.join("lib.rs"), lib).unwrap();
+        // Called from a thread whose stack the chain's walks overflow.
+        let census = std::thread::Builder::new()
+            .stack_size(1 << 18)
+            .spawn({
+                let (library, dumps, out) = (library.clone(), dumps.clone(), work.join("out"));
+                move || super::embed("m", &library, &dumps, &out, &[], &super::Outputs::default())
+            })
+            .unwrap()
+            .join()
+            .unwrap()
+            .expect("the embedding");
+        assert_eq!(census.bodies, depth);
+        assert_eq!(
+            census.rows.iter().filter(|r| r.open.is_none()).count(),
+            depth
+        );
+        std::fs::remove_dir_all(&work).unwrap();
+    }
+
     /// The embedding stamps each row by its κ, after its span, in place of
     /// what the row recorded, and leaves a row it has no body of unstamped.
     #[test]
@@ -6283,7 +7196,7 @@ mod tests {
         let text = "[[fn]]\npath = \"core::a\"\nkappa = \"a\"\nat = \"x\"\nembedded = \"old\"\nblocked = [\"CastKind::IntToFloat\"]\nstatus = \"residue\"\ncause = \"c\"\n\n[[fn]]\npath = \"core::b\"\nkappa = \"b\"\nstatus = \"translated\"\ndigest = \"d\"\n\n[[fn]]\npath = \"core::c\"\nkappa = \"c\"\nembedded = \"old\"\nstatus = \"translated\"\ndigest = \"d\"\n";
         let (t, u) = (crate::project::sha(b"t"), crate::project::sha(b"u"));
         assert_eq!(
-            super::stamp_rows(text, &by_kappa),
+            super::stamp_rows(text, &by_kappa, &BTreeMap::new()),
             format!("[[fn]]\npath = \"core::a\"\nkappa = \"a\"\nat = \"x\"\nembedded = \"{t}\"\nblocked = [\"intrinsic fabs\"]\nstatus = \"residue\"\ncause = \"c\"\n\n[[fn]]\npath = \"core::b\"\nkappa = \"b\"\nembedded = \"{u}\"\nstatus = \"translated\"\ndigest = \"d\"\n\n[[fn]]\npath = \"core::c\"\nkappa = \"c\"\nstatus = \"translated\"\ndigest = \"d\"\n")
         );
     }
@@ -6732,7 +7645,9 @@ mod tests {
     #[test]
     fn a_string_keeps_every_character_ue_19() {
         assert_eq!(mir_string("a%b"), "\"a\\u0025b\"");
-        assert_eq!(mir_string("q\"\\\n"), "\"q\\\"\\\\\\u000a\"");
+        assert_eq!(mir_string("q\"\\\n"), "\"q\\\"\\\\\\n\"");
+        // The letter escapes `lexlean fmt` writes, and `\u` for the rest.
+        assert_eq!(mir_string("\r\t\u{8}\u{c}\u{1}"), "\"\\r\\t\\b\\f\\u0001\"");
     }
 
     #[test]
@@ -6743,6 +7658,54 @@ mod tests {
         assert_eq!(int_ty("usize", 64), Some((64, false)));
         assert_eq!(int_ty("i16", 64), Some((16, true)));
         assert_eq!(int_ty("u", 64), None);
+    }
+
+    // bare switch: a body control leaves for a block it lacks is refused by
+    // its construct, never indexed past (mir-4-1).
+
+    fn bare_switch_embed(dumps: &[(&str, &str)]) -> EmbedCensus {
+        let fixture = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/core");
+        let work = std::env::temp_dir().join(format!(
+            "uorust-bare-switch-{}-{}",
+            std::process::id(),
+            dumps.len()
+        ));
+        let _ = std::fs::remove_dir_all(&work);
+        let module = work.join("mir/lacked");
+        std::fs::create_dir_all(&module).unwrap();
+        for (name, text) in dumps {
+            std::fs::write(module.join(name), text).unwrap();
+        }
+        std::fs::write(
+            work.join("mir/target.toml"),
+            "triple = \"x86_64-unknown-linux-gnu\"\npointer_width = 64\n",
+        )
+        .unwrap();
+        let census = embed(
+            "core",
+            &fixture.join("library"),
+            &work.join("mir"),
+            &work.join("out"),
+            &[],
+            &Outputs::default(),
+        )
+        .expect("the embedding");
+        let _ = std::fs::remove_dir_all(&work);
+        census
+    }
+
+    #[test]
+    fn bare_switch_a_block_the_body_lacks_is_a_construct_not_a_panic() {
+        // `bb0` goes to `bb1`, which the dump does not hold, as a body the
+        // reader read short; the other body reads whole.
+        let short = "// MIR for `lacked::f` before ElaborateBoxDerefs\n\nfn lacked::f() -> () {\n    let mut _0: ();\n\n    bb0: {\n        goto -> bb1;\n    }\n}\n";
+        let whole = "// MIR for `lacked::g` before ElaborateBoxDerefs\n\nfn lacked::g(_1: bool) -> () {\n    let mut _0: ();\n\n    bb0: {\n        switchInt(copy _1) -> bb1;\n    }\n\n    bb1: {\n        return;\n    }\n}\n";
+        let census = bare_switch_embed(&[
+            ("core.lacked-f.2-0.ElaborateBoxDerefs.before.mir", short),
+            ("core.lacked-g.2-0.ElaborateBoxDerefs.before.mir", whole),
+        ]);
+        assert_eq!(census.bodies, 2);
+        assert_eq!(census.blocked.get(LACKED), Some(&1), "{:?}", census.blocked);
     }
 }
 

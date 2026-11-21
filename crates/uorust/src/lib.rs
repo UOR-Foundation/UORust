@@ -19,28 +19,34 @@ pub mod certified;
 pub mod certify;
 mod convert;
 pub mod embed;
+mod embedding;
 mod error;
 mod expand;
 mod facts;
+pub mod figures;
 mod ingest;
 pub mod layouts;
 mod lex;
+pub mod library;
 mod lift;
+pub mod limits;
 pub mod mir;
 mod names;
 mod order;
+mod ownership;
 mod project;
 pub mod queue;
 pub mod register;
 pub mod registry;
 mod route;
+pub mod shard;
 mod wf;
 
 use std::collections::BTreeMap;
 use std::path::Path;
 
 pub use error::UorustError;
-pub use project::Options;
+pub use project::{Embedding, Options};
 pub use route::{classify, respond, Route, Routing, REQUEST_LIMIT, ROUTES};
 
 /// The name of the file that lists what a projection wrote, with digests.
@@ -68,7 +74,7 @@ pub fn project_workspace(
 /// The stack [`project_workspace`] runs on: the 64 MiB that holds the
 /// projection of this workspace with its certified translator, as the
 /// evaluator's deep recursion is held (`mir::float`'s tests).
-const PROJECTION_STACK: usize = 1 << 26;
+pub(crate) const PROJECTION_STACK: usize = 1 << 26;
 
 fn project_workspace_here(
     root: &Path,
@@ -83,7 +89,19 @@ fn project_workspace_here(
         Some(m) => Some(mir::load(root, &m.dumps)?),
         None => None,
     };
-    let mut files = project::project(&workspace, &syntax, options, dumps.as_ref())?;
+    // The digest of the workspace's sources, which the embedding's records
+    // must state to be joined.
+    let source = match &options.embedding {
+        Some(_) => Some(shard::source_digest(root)?),
+        None => None,
+    };
+    let mut files = project::project(
+        &workspace,
+        &syntax,
+        options,
+        dumps.as_ref(),
+        source.as_deref(),
+    )?;
     let manifest: String = files
         .iter()
         .map(|(path, bytes)| format!("{}  {path}\n", project::sha(bytes)))
@@ -92,7 +110,27 @@ fn project_workspace_here(
     Ok(files)
 }
 
-/// The workspace's name: its directory name.
+/// The name a projection takes when no `--name` is given: the `name` of the
+/// `[package]` the workspace's root manifest declares, a fact of the
+/// workspace that does not change with the directory it is checked out
+/// under. A virtual workspace (no root package) declares no name, and
+/// [`UorustError::NoName`] asks for one.
+pub fn declared_name(root: &Path) -> Result<String, UorustError> {
+    let manifest = root.join("Cargo.toml");
+    let text = std::fs::read_to_string(&manifest).map_err(|e| error::io(&manifest, e))?;
+    let doc: toml::Value = toml::from_str(&text).map_err(|e| UorustError::Malformed {
+        path: manifest.clone(),
+        reason: format!("{e}"),
+    })?;
+    doc.get("package")
+        .and_then(|p| p.get("name"))
+        .and_then(toml::Value::as_str)
+        .map(str::to_string)
+        .ok_or(UorustError::NoName(manifest))
+}
+
+/// The workspace's directory name, which the certified export's package
+/// name derives from (`certify::profile`); a projection never takes it.
 pub fn default_name(root: &Path) -> Result<String, UorustError> {
     let root = root.canonicalize().map_err(|e| error::io(root, e))?;
     Ok(root
@@ -172,6 +210,25 @@ pub fn admit(path: &Path, files: &BTreeMap<String, Vec<u8>>) -> Result<(), Uorus
     let regressed = register::admit(&incumbent, &lift_register(files)?);
     if regressed.is_empty() {
         Ok(())
+    } else {
+        Err(UorustError::Regressed(regressed))
+    }
+}
+
+/// Admit the register file `candidate` against its parent's, `parent` (a
+/// register file or a `frontier.toml` each), by the law per function
+/// ([`register::admit_parent`]), and return the candidate's totals: refused,
+/// naming each function re-decided. The parent is read by its rows alone
+/// ([`register::Register::parse`]), since an earlier tool may have derived
+/// its queue otherwise; the candidate as this tool writes it
+/// ([`register::Register::read`]).
+pub fn admit_register(parent: &Path, candidate: &Path) -> Result<register::Totals, UorustError> {
+    let text = |path: &Path| std::fs::read_to_string(path).map_err(|e| error::io(path, e));
+    let incumbent = register::Register::parse(parent, &text(parent)?)?;
+    let candidate = register::Register::read(candidate, &text(candidate)?)?;
+    let regressed = register::admit_parent(&incumbent, &candidate);
+    if regressed.is_empty() {
+        Ok(candidate.totals())
     } else {
         Err(UorustError::Regressed(regressed))
     }
@@ -257,5 +314,42 @@ mod tests {
         assert_eq!(utc(951_782_400), "2000-02-29T00:00:00Z");
         assert!(is_timestamp(&utc(1_762_884_000)));
         assert!(!is_timestamp("2026-11-11"));
+    }
+
+    /// Without `--name` a projection takes the root package's name, the
+    /// same under any directory name (the refuter's two copies, `w1` and
+    /// `x`), and a virtual workspace has none: the name is asked for, never
+    /// taken from the directory.
+    #[test]
+    fn a_projection_without_a_name_takes_the_root_package_never_the_directory() {
+        let base = std::env::temp_dir().join(format!("uorust-name-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&base);
+        for dir in ["w1", "x"] {
+            let root = base.join(dir);
+            std::fs::create_dir_all(&root).expect("a workspace");
+            std::fs::write(
+                root.join("Cargo.toml"),
+                "[package]\nname = \"omega\"\nversion = \"0.1.0\"\n\n[workspace]\n",
+            )
+            .expect("a manifest");
+            assert_eq!(declared_name(&root), Ok("omega".to_string()));
+        }
+        let virtual_root = base.join("v");
+        std::fs::create_dir_all(&virtual_root).expect("a workspace");
+        std::fs::write(
+            virtual_root.join("Cargo.toml"),
+            "[workspace]\nmembers = [\"a\"]\n",
+        )
+        .expect("a manifest");
+        let got = declared_name(&virtual_root);
+        let _ = std::fs::remove_dir_all(&base);
+        assert_eq!(
+            got,
+            Err(UorustError::NoName(virtual_root.join("Cargo.toml")))
+        );
+        assert!(got
+            .expect_err("no name")
+            .to_string()
+            .starts_with("no project name: pass --name"));
     }
 }

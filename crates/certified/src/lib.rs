@@ -600,12 +600,6 @@ pub mod mir_terminator_kind_path;
 #[path = "../roots/uorust_certified_mir_un_op_path.rs"]
 pub mod mir_un_op_path;
 
-/// `uorust::lex::Module::path`, certified as `Behavior::modulePath`.
-#[rustfmt::skip]
-#[allow(missing_docs, dead_code, clippy::all)]
-#[path = "../roots/uorust_certified_module_path.rs"]
-pub mod module_path;
-
 /// `uorust::mir::lower::mut_target`, certified as `Behavior::mutTarget`.
 #[rustfmt::skip]
 #[allow(missing_docs, dead_code, clippy::all)]
@@ -935,6 +929,12 @@ pub mod untyped;
 #[allow(missing_docs, dead_code, clippy::all)]
 #[path = "../roots/uorust_certified_uorust_helper.rs"]
 pub mod uorust_helper;
+
+/// `uorust::lex::Module::path`, certified as `Behavior::uorustLexModulePath`.
+#[rustfmt::skip]
+#[allow(missing_docs, dead_code, clippy::all)]
+#[path = "../roots/uorust_certified_uorust_lex_module_path.rs"]
+pub mod uorust_lex_module_path;
 
 /// `uorust::lift::Ty::entry`, certified as `Behavior::uorustLiftTyEntry`.
 #[rustfmt::skip]

@@ -5,7 +5,12 @@
 //! normalized token stream (signature and body as `syn` reads them, so
 //! comments, doc comments and layout do not move it). The κ names the
 //! question "does this function lift?", not the answer: a function whose
-//! source changes is a new question with a new κ.
+//! source changes is a new question with a new κ. A call of a generated
+//! figure's macro is read as the literal it expands to
+//! (`figures::Reached`), so `uorust figures rewrite` asks no new question:
+//! a rewritten function keeps its κ while its figure's value is the literal
+//! it replaced, and the law below holds it lifted; a changed value is a new
+//! κ.
 //!
 //! A lifted κ is a proved claim. The ratchet is monotone, not a count: a
 //! candidate register is admitted against the incumbent (the committed one)
@@ -14,7 +19,12 @@
 //! Residue, foreign and effect rows classify what is not lifted yet; none of
 //! them is a budget. Their number is the distance to the requirement that
 //! every function of product code lifts, an open claim the honesty report
-//! states and no gate asserts.
+//! states and no gate asserts. Against a parent's register, given to
+//! `uorust admit --parent`, the classification is also held per function,
+//! not per cause: an unchanged κ stays under the construct the parent stated
+//! for it until it lifts or the candidate shows that this construct no
+//! longer stops that function ([`admit_parent`]), so a cause may rise only
+//! by new questions and by functions whose blocker is shown gone.
 //!
 //! The register is also the work queue. Beside its rows it carries, as data,
 //! the totals ([`Totals`], the `[lift]` table) and one `[[construct]]` row
@@ -52,6 +62,80 @@ const CAUSE: &str = "cause";
 /// is functions of product code.
 const UNIT: &str = "functions";
 
+/// The cause of a residue row whose function a type outside the lift stops.
+const TYPE: &str = "type";
+
+/// The key a type construct row's definition sites are written under.
+pub const DEFINED: &str = "defined";
+
+/// The key a type construct row lists, under, the names its chain writes
+/// that may be types of the workspace and whose declaration the tool
+/// cannot place: a name a glob may bind, or one no declaration, `use` or
+/// macro invocation of its module gives.
+pub const UNSITED: &str = "unsited";
+
+/// A name a type construct writes: a path as the chain writes it (`a::Node`,
+/// `RefCell`, a LexLean name such as `CrateNode`), and whether it owns a
+/// place of the chain (`Node` of `Node.c`, `Enum::Big` of `Enum::Big.0`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Named<'a> {
+    /// The path, `::`-joined, as written.
+    pub name: &'a str,
+    /// Whether a place follows it: the name is a type of the workspace (or
+    /// a type and its variant) whose field the chain reads.
+    pub place: bool,
+}
+
+/// The names a type construct writes, in its order: every path of the
+/// chain after the residue's own words (`type outside the lift: `) except
+/// the name of a field (`leaf` of `Mid.leaf`) and a word that follows a
+/// digit, so the owners of the chain's places, its leaf's types
+/// (`RefCell<Node>` naming `RefCell` and `Node`) and the types its words
+/// name (`Outer, whose field f holds Leaf.x`) are named. A path stays whole
+/// (`holder::Holder`): what it names is read where it is written, not by
+/// its last identifier ([`Named`]).
+pub fn named_types(construct: &str) -> Vec<Named<'_>> {
+    let chain = construct
+        .split_once(": ")
+        .map_or(construct, |(_, chain)| chain);
+    let word = |c: char| c.is_alphanumeric() || c == '_';
+    let starts = |c: char| c.is_alphabetic() || c == '_';
+    let mut names = Vec::new();
+    let mut rest = chain;
+    while let Some(start) = rest.find(starts) {
+        let mut len = rest[start..]
+            .find(|c: char| !word(c))
+            .unwrap_or(rest.len() - start);
+        // A path goes on past `::` while an identifier follows.
+        while rest[start + len..].starts_with("::") && rest[start + len + 2..].starts_with(starts) {
+            len += 2;
+            len += rest[start + len..]
+                .find(|c: char| !word(c))
+                .unwrap_or(rest.len() - start - len);
+        }
+        let (before, name, after) = (
+            &rest[..start],
+            &rest[start..start + len],
+            &rest[start + len..],
+        );
+        let field = before.ends_with('.');
+        let number = before.ends_with(|c: char| c.is_ascii_digit());
+        if !(field || number) {
+            names.push(Named {
+                name,
+                place: after.starts_with('.'),
+            });
+        }
+        rest = after;
+    }
+    names
+}
+
+/// The sites of a type construct: where the workspace declares each type
+/// it writes (`path:line`), and the names it writes whose declaration the
+/// tool cannot place ([`UNSITED`]).
+pub type Sites = (Vec<String>, Vec<String>);
+
 /// The κ of a function: SHA-256 over [`DOMAIN`], its crate path and its
 /// normalized token stream, one line each, as lowercase hex.
 pub fn kappa(path: &str, tokens: &str) -> String {
@@ -77,6 +161,20 @@ pub fn kappa_preimage(path: &str, tokens: &str) -> Vec<u8> {
     format!("{DOMAIN}\n{path}\n{tokens}\n").into_bytes()
 }
 
+/// Where a function's body is embedded with its reach closed, in one
+/// configuration whose dump compiles it: the configuration, the digest of
+/// the module project that holds the body (what a verification of the
+/// project is a receipt of), and the digest of the body's term.
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct EmbeddedAt {
+    /// The configuration, as its record names it.
+    pub configuration: String,
+    /// The module project's digest.
+    pub project: String,
+    /// The body's term's digest.
+    pub body: String,
+}
+
 /// What the lift decided for one function.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Status {
@@ -89,6 +187,15 @@ pub enum Status {
     Foreign(String),
     /// It performs or reaches an operating-system effect: the kind.
     Effect(String),
+    /// It did not lift, and its body is embedded-closed in every declared
+    /// configuration whose dump compiles it: embedded, every construct
+    /// defined by the evaluator, every call reaching a linked body
+    /// ([`crate::embed::BodyFact`]), in the module projects named, one per
+    /// configuration. The tool does not verify a project: a reader that
+    /// counts the row as closed joins each project's digest to a receipt
+    /// of its verification. A row is residue, foreign or effect only while
+    /// it is not embedded-closed.
+    Embedded(Vec<EmbeddedAt>),
 }
 
 impl Status {
@@ -99,9 +206,14 @@ impl Status {
             Self::Residue(..) => "residue",
             Self::Foreign(_) => "foreign",
             Self::Effect(_) => "effect",
+            Self::Embedded(_) => EMBEDDED,
         }
     }
 }
+
+/// The table of the rows whose bodies are embedded-closed, and the key of
+/// the totals that counts them.
+pub const EMBEDDED: &str = "embedded";
 
 impl Status {
     /// What stops a function that is not lifted, as `(cause, construct)`:
@@ -113,7 +225,7 @@ impl Status {
     /// lifted function is stopped by nothing.
     pub fn construct(&self) -> Option<(String, &str)> {
         match self {
-            Self::Lifted(_) => None,
+            Self::Lifted(_) | Self::Embedded(_) => None,
             Self::Residue(reason, detail) => Some((residue_cause(reason, detail).0, detail)),
             Self::Foreign(detail) => Some((self.table().to_string(), detail)),
             Self::Effect(effect) => Some((self.table().to_string(), effect)),
@@ -135,7 +247,7 @@ fn residue_cause(reason: &str, detail: &str) -> (String, String) {
 }
 
 /// The totals of a register: the functions of product code, and how many of
-/// them each table holds. The four tables part the functions, so they sum
+/// them each table holds. The five tables part the functions, so they sum
 /// to `functions`.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct Totals {
@@ -149,18 +261,27 @@ pub struct Totals {
     pub foreign: usize,
     /// Those that perform or reach an operating-system effect.
     pub effect: usize,
+    /// Those that did not lift and whose bodies are embedded-closed.
+    pub embedded: usize,
 }
 
 impl Totals {
     /// The totals by the key each is written under, in the order written.
-    pub fn fields(&self) -> [(&'static str, usize); 5] {
-        [
+    /// The embedded-closed count is written where it is not zero, so a
+    /// register of a run with no embedding reads as it always did, and a
+    /// register that states none states zero.
+    pub fn fields(&self) -> Vec<(&'static str, usize)> {
+        let mut out = vec![
             ("functions", self.functions),
             ("lifted", self.lifted),
             ("residue", self.residue),
             ("foreign", self.foreign),
             ("effect", self.effect),
-        ]
+        ];
+        if self.embedded > 0 {
+            out.push((EMBEDDED, self.embedded));
+        }
+        out
     }
 }
 
@@ -206,6 +327,11 @@ pub struct Row {
     /// a cause the lift states, such as a Unicode table LexLean does not
     /// bind. A row that is not lifted has none.
     pub divergence: Option<String>,
+    /// For a row that is not lifted, where the register records them: every
+    /// construct the types of its signature state (cause and construct),
+    /// whichever stops it first. A register an earlier tool wrote records
+    /// none (`None`), and an empty list records that none does.
+    pub stops: Option<Vec<(String, String)>>,
 }
 
 /// Every function of product code, by κ.
@@ -256,7 +382,7 @@ impl Register {
         let doc: toml::Value = toml::from_str(text).map_err(|e| bad(format!("{e}")))?;
         let mut register = Register::default();
         let mut functions = BTreeMap::new();
-        for table in ["lifted", "residue", "foreign", "effect"] {
+        for table in ["lifted", "residue", "foreign", "effect", EMBEDDED] {
             let rows = doc.get(table).and_then(toml::Value::as_array);
             for row in rows.into_iter().flatten() {
                 let field = |name: &str| {
@@ -278,7 +404,10 @@ impl Register {
                         }
                         Status::Foreign(detail)
                     }
-                    _ => Status::Effect(field("effect")?),
+                    "effect" => Status::Effect(field("effect")?),
+                    _ => Status::Embedded(embedded_at(row).ok_or_else(|| {
+                        bad(format!("an {EMBEDDED} row {EMBEDDED_SHAPE}: {row}"))
+                    })?),
                 };
                 if kappa.len() != 64 || !kappa.bytes().all(|b| b.is_ascii_hexdigit()) {
                     return Err(bad(format!("{function}: κ {kappa} is not a SHA-256")));
@@ -293,10 +422,33 @@ impl Register {
                     }
                     Some(_) => Some(field("divergence")?),
                 };
+                let stops = match row.get(STOPS) {
+                    None => None,
+                    Some(_) if table == "lifted" => {
+                        return Err(bad(format!("a lifted row with {STOPS}: {row}")));
+                    }
+                    Some(list) => {
+                        let pair = |v: &toml::Value| match v.as_array().map(Vec::as_slice) {
+                            Some([cause, construct]) => cause
+                                .as_str()
+                                .zip(construct.as_str())
+                                .map(|(a, b)| (a.to_string(), b.to_string())),
+                            _ => None,
+                        };
+                        let pairs: Option<Vec<(String, String)>> =
+                            list.as_array().and_then(|l| l.iter().map(pair).collect());
+                        Some(pairs.ok_or_else(|| {
+                            bad(format!(
+                                "{STOPS} is not a list of [cause, construct]: {row}"
+                            ))
+                        })?)
+                    }
+                };
                 let new = Row {
                     function,
                     status,
                     divergence,
+                    stops,
                 };
                 if register.rows.insert(kappa.clone(), new).is_some() {
                     return Err(bad(format!("κ {kappa} has more than one row")));
@@ -315,6 +467,16 @@ impl Register {
     fn misstated(&self, doc: &toml::Value) -> Option<String> {
         let totals = doc.get(LIFT);
         if let Some(stated) = totals {
+            // The count is written only where it is not zero, so a stated
+            // count is checked here even where the rows hold none.
+            let embedded = self.totals().embedded;
+            if let Some(n) = stated.get(EMBEDDED).and_then(toml::Value::as_integer) {
+                if i64::try_from(embedded).ok() != Some(n) {
+                    return Some(format!(
+                        "[{LIFT}] states {EMBEDDED} = {n} and the rows hold {embedded}"
+                    ));
+                }
+            }
             for (key, counted) in self.totals().fields() {
                 let found = stated.get(key).and_then(toml::Value::as_integer);
                 if found != i64::try_from(counted).ok() {
@@ -370,6 +532,7 @@ impl Register {
                 Status::Residue(..) => totals.residue += 1,
                 Status::Foreign(_) => totals.foreign += 1,
                 Status::Effect(_) => totals.effect += 1,
+                Status::Embedded(_) => totals.embedded += 1,
             }
         }
         totals
@@ -400,6 +563,16 @@ impl Register {
     /// table, then one `[[construct]]` row per row of the queue. A register
     /// file and a projection's `frontier.toml` both carry this text.
     pub fn queue_text(&self) -> String {
+        self.queue_text_with(None)
+    }
+
+    /// [`Register::queue_text`], and where the sites of the type
+    /// constructs are given (by construct, [`Sites`]), each row whose cause
+    /// is a type outside the lift with the sites that define the types its
+    /// construct writes under [`DEFINED`] and the names it cannot place
+    /// under [`UNSITED`]. A projection's `frontier.toml` carries them; a
+    /// register file, written from rows alone, does not.
+    pub fn queue_text_with(&self, sites: Option<&BTreeMap<String, Sites>>) -> String {
         let mut out = format!("\n[{LIFT}]\n");
         for (key, count) in self.totals().fields() {
             out.push_str(&format!("{key} = {count}\n"));
@@ -412,6 +585,13 @@ impl Register {
                 UNIT,
                 row.functions,
             ));
+            if let Some(sites) = sites.filter(|_| row.cause == TYPE) {
+                let (defined, unsited) = sites.get(&row.construct).cloned().unwrap_or_default();
+                for (key, list) in [(DEFINED, defined), (UNSITED, unsited)] {
+                    let quoted: Vec<String> = list.iter().map(|s| quoted(s)).collect();
+                    out.push_str(&format!("{key} = [{}]\n", quoted.join(", ")));
+                }
+            }
         }
         out
     }
@@ -441,11 +621,12 @@ impl Register {
     /// or obligation that stopped it), as comment lines.
     pub fn honesty(&self) -> String {
         let mut by: BTreeMap<String, BTreeMap<String, usize>> = BTreeMap::new();
-        let (mut foreign, mut effect) = (0usize, 0usize);
+        let (mut foreign, mut effect, mut embedded) = (0usize, 0usize, 0usize);
         let mut mir = false;
         for row in self.rows.values() {
             match &row.status {
                 Status::Lifted(_) => {}
+                Status::Embedded(_) => embedded += 1,
                 Status::Foreign(_) => foreign += 1,
                 Status::Effect(_) => effect += 1,
                 Status::Residue(reason, detail) => {
@@ -462,6 +643,15 @@ impl Register {
             self.lifted(),
             self.rows.len()
         );
+        // Written where there is one, so a register of a run with no
+        // embedding reads as it always did.
+        if embedded > 0 {
+            out.push_str(&format!(
+                "# {embedded} that did not lift are embedded-closed: each body embedded,\n\
+                 # evaluable and reaching only linked bodies in every declared configuration\n\
+                 # whose dump compiles it, in the module projects each row names.\n"
+            ));
+        }
         if residue > 0 {
             out.push_str("# Residue by cause:\n");
         }
@@ -498,7 +688,7 @@ impl Register {
         out.push_str(&self.queue_text());
         let mut rows: Vec<(&String, &Row)> = self.rows.iter().collect();
         rows.sort_by(|a, b| a.1.function.cmp(&b.1.function));
-        for table in ["residue", "foreign", "effect", "lifted"] {
+        for table in ["residue", "foreign", "effect", EMBEDDED, "lifted"] {
             for (kappa, row) in &rows {
                 if row.status.table() != table {
                     continue;
@@ -520,9 +710,13 @@ impl Register {
                     Status::Effect(effect) => {
                         out.push_str(&format!("effect = {}\n", quoted(effect)));
                     }
+                    Status::Embedded(at) => out.push_str(&embedded_fields(at)),
                 }
                 if let Some(divergence) = &row.divergence {
                     out.push_str(&format!("divergence = {}\n", quoted(divergence)));
+                }
+                if let Some(stops) = &row.stops {
+                    out.push_str(&stops_line(stops));
                 }
             }
         }
@@ -530,11 +724,67 @@ impl Register {
     }
 }
 
+/// The key a row's [`Row::stops`] are written under.
+pub const STOPS: &str = "stops";
+
+/// A row's [`Row::stops`] as the register writes them: one
+/// `[cause, construct]` pair each.
+pub fn stops_line(stops: &[(String, String)]) -> String {
+    let pairs: Vec<String> = stops
+        .iter()
+        .map(|(cause, construct)| format!("[{}, {}]", quoted(cause), quoted(construct)))
+        .collect();
+    format!("{STOPS} = [{}]\n", pairs.join(", "))
+}
+
 /// The κ the incumbent records as lifted that the candidate decides
 /// otherwise, each with both decisions: empty exactly when the candidate is
 /// admitted. A κ the candidate does not hold is a question no longer asked
 /// (its function changed or went away), not a regression.
+/// An embedded-closed κ is held the same way: it stays embedded-closed or
+/// lifts, and a candidate that decides it open (residue, foreign or effect)
+/// is refused, naming it. Embedded-closed again, it must be so in every
+/// configuration the incumbent states it closed in: a candidate that
+/// states fewer (its records leave one out, or decide it open there) no
+/// longer claims what was established, and is refused naming the
+/// configurations it drops.
 pub fn admit(incumbent: &Register, candidate: &Register) -> Vec<String> {
+    let closed = incumbent
+        .rows
+        .iter()
+        .filter_map(|(kappa, row)| match &row.status {
+            Status::Embedded(was) => Some((kappa, row, was)),
+            _ => None,
+        })
+        .filter_map(|(kappa, row, was)| {
+            let now = candidate.rows.get(kappa)?;
+            match &now.status {
+                Status::Embedded(at) => {
+                    let dropped: Vec<&str> = was
+                        .iter()
+                        .map(|w| w.configuration.as_str())
+                        .filter(|c| !at.iter().any(|a| a.configuration == *c))
+                        .collect();
+                    (!dropped.is_empty()).then(|| {
+                        format!(
+                            "{} (κ {kappa}) was embedded-closed in {} and is no longer stated closed in {}",
+                            row.function,
+                            was.iter()
+                                .map(|w| w.configuration.as_str())
+                                .collect::<Vec<_>>()
+                                .join(", "),
+                            dropped.join(", ")
+                        )
+                    })
+                }
+                Status::Lifted(_) => None,
+                other => Some(format!(
+                    "{} (κ {kappa}) was embedded-closed and is now {}",
+                    row.function,
+                    describe(other)
+                )),
+            }
+        });
     incumbent
         .rows
         .iter()
@@ -559,11 +809,86 @@ pub fn admit(incumbent: &Register, candidate: &Register) -> Vec<String> {
                 )),
             }
         })
+        .chain(closed)
         .collect()
+}
+
+/// Every function of the parent's register that the candidate decides
+/// against the law per function, each with both decisions: empty exactly
+/// when the candidate is admitted. Beside [`admit`] (a lifted κ stays
+/// lifted, an exact one exact), a κ the parent records as stopped by a
+/// construct A (its cause and detail, [`Status::construct`]) is counted
+/// under A again, or lifts, or is counted under another construct only when
+/// the candidate shows that A no longer stops that function. A function's
+/// row states only the first construct the lift met, so another construct
+/// may stand in front of A while A still applies (a type of another
+/// parameter that changed, a callee that came to reach an effect); the
+/// candidate shows A gone in exactly these ways, and every other move is
+/// refused:
+///
+/// - A is a construct of a type of the signature: both registers record
+///   every construct the signature's types state ([`Row::stops`]), the
+///   parent's holds A and the candidate's does not. The κ is unchanged, so
+///   the signature is the same tokens, and none of its types states A now.
+/// - A is a call of a callee the register names by its path (`calls
+///   c::T::f, which is not lifted`): the parent holds that function not
+///   lifted and the candidate holds it lifted.
+/// - A is an effect and the candidate counts the function under no effect:
+///   the projection decides an effect before every other construct, so a
+///   function it counts otherwise reaches none.
+///
+/// So a cause's count rises only by new questions (a κ the parent does not
+/// hold) and by functions whose blocker is shown gone. A κ's own tokens are
+/// its question: a function whose callee changed keeps its κ, and a move
+/// such a change causes (into an effect, or onto the callee's call) is
+/// refused while the construct it left still applies, as a lifted κ's is.
+pub fn admit_parent(parent: &Register, candidate: &Register) -> Vec<String> {
+    let lifted = |register: &Register| -> BTreeMap<String, bool> {
+        register
+            .rows
+            .values()
+            .map(|r| (r.function.clone(), matches!(r.status, Status::Lifted(_))))
+            .collect()
+    };
+    let (before, after) = (lifted(parent), lifted(candidate));
+    let moved = parent.rows.iter().filter_map(|(kappa, row)| {
+        let was = row.status.construct()?;
+        let now = candidate.rows.get(kappa)?;
+        let is = now.status.construct()?;
+        if was == is {
+            return None;
+        }
+        let pair = (was.0.clone(), was.1.to_string());
+        let signature = row.stops.as_ref().is_some_and(|s| s.contains(&pair))
+            && now.stops.as_ref().is_some_and(|s| !s.contains(&pair));
+        let callee = (was.0 == "call")
+            .then(|| was.1.strip_prefix("calls "))
+            .flatten()
+            .and_then(|c| c.strip_suffix(", which is not lifted"));
+        let call =
+            callee.is_some_and(|c| before.get(c) == Some(&false) && after.get(c) == Some(&true));
+        let effect = was.0 == "effect" && is.0 != "effect";
+        (!(signature || call || effect)).then(|| {
+            format!(
+                "{} (κ {kappa}) was stopped by {} under {} and is now counted under {} \
+                 ({}), and the candidate does not show that {} no longer stops it",
+                row.function,
+                quoted(was.1),
+                quoted(&was.0),
+                quoted(&is.0),
+                describe(&now.status),
+                quoted(was.1)
+            )
+        })
+    });
+    let mut refused = admit(parent, candidate);
+    refused.extend(moved);
+    refused
 }
 
 fn describe(status: &Status) -> String {
     match status {
+        Status::Embedded(at) => format!("embedded-closed in {} configurations", at.len()),
         Status::Lifted(d) => format!("lifted to {d}"),
         Status::Residue(_, detail) => format!("residue: {detail}"),
         Status::Foreign(detail) => format!("foreign: {detail}"),
@@ -573,6 +898,60 @@ fn describe(status: &Status) -> String {
 
 fn quoted(text: &str) -> String {
     toml::Value::String(text.to_string()).to_string()
+}
+
+/// An embedded-closed row's own keys, as a register and a frontier write
+/// them: the configurations, and in the same order each one's module
+/// project and body digest.
+pub fn embedded_fields(at: &[EmbeddedAt]) -> String {
+    let list = |f: &dyn Fn(&EmbeddedAt) -> &str| {
+        at.iter()
+            .map(|a| quoted(f(a)))
+            .collect::<Vec<_>>()
+            .join(", ")
+    };
+    format!(
+        "configurations = [{}]\nprojects = [{}]\nbodies = [{}]\n",
+        list(&|a| &a.configuration),
+        list(&|a| &a.project),
+        list(&|a| &a.body)
+    )
+}
+
+/// What an embedded-closed row holds, as a refusal of one that does not
+/// states it.
+const EMBEDDED_SHAPE: &str = "needs configurations, projects and bodies, three lists of \
+     strings of one nonempty length, each project and body a SHA-256";
+
+/// An embedded-closed row's configurations, projects and bodies, read
+/// back, where the row holds them as [`EMBEDDED_SHAPE`] says.
+fn embedded_at(row: &toml::Value) -> Option<Vec<EmbeddedAt>> {
+    let list = |key: &str| -> Option<Vec<String>> {
+        row.get(key)?
+            .as_array()?
+            .iter()
+            .map(|v| v.as_str().map(str::to_string))
+            .collect()
+    };
+    let (configurations, projects, bodies) =
+        (list("configurations")?, list("projects")?, list("bodies")?);
+    let sha = |d: &String| d.len() == 64 && d.bytes().all(|b| b.is_ascii_hexdigit());
+    let shaped = !configurations.is_empty()
+        && projects.len() == configurations.len()
+        && bodies.len() == configurations.len()
+        && projects.iter().chain(&bodies).all(sha);
+    shaped.then(|| {
+        configurations
+            .into_iter()
+            .zip(projects)
+            .zip(bodies)
+            .map(|((configuration, project), body)| EmbeddedAt {
+                configuration,
+                project,
+                body,
+            })
+            .collect()
+    })
 }
 
 #[cfg(test)]
@@ -586,6 +965,7 @@ mod tests {
                 function: function.into(),
                 status,
                 divergence: None,
+                stops: None,
             },
         )
     }
@@ -607,6 +987,7 @@ mod tests {
                         function: "c::g".into(),
                         status: Status::Lifted("Behavior::g".into()),
                         divergence: None,
+                        stops: None,
                     },
                 ),
             ]
@@ -628,6 +1009,7 @@ mod tests {
                         function: "c::f".into(),
                         status: Status::Residue("call".into(), "calls g".into()),
                         divergence: None,
+                        stops: None,
                     },
                 ),
                 other,
@@ -652,6 +1034,214 @@ mod tests {
         assert_eq!(refused.len(), 1);
         assert!(refused[0].contains("now diverges"), "{refused:?}");
         assert!(admit(&weaker, &incumbent).is_empty());
+    }
+
+    /// The law per function: an unchanged κ stays under the construct the
+    /// parent stated for it until the candidate shows that construct gone
+    /// for that function: a type of its signature no longer states it, its
+    /// callee lifted, or it reaches no effect. Whether another function
+    /// still states the construct decides nothing.
+    #[test]
+    fn a_function_moves_on_only_when_its_construct_is_shown_gone() {
+        let pair = |cause: &str, detail: &str| (cause.to_string(), detail.to_string());
+        let residue = |f: &str, cause: &str, detail: &str, stops: Option<Vec<(String, String)>>| {
+            let (k, mut r) = row(f, Status::Residue(cause.into(), detail.into()));
+            r.stops = stops;
+            (k, r)
+        };
+        let register = |rows: Vec<(String, Row)>| Register {
+            rows: rows.into_iter().collect(),
+        };
+        let (a, b) = (pair("type", "A"), pair("type", "B"));
+        // The parent: f's signature states A and B, the lift met A first;
+        // A is the only construct of the register that states A.
+        let parent = register(vec![
+            residue("c::f", "type", "A", Some(vec![a.clone(), b.clone()])),
+            residue("c::h", "form", "a loop", Some(vec![])),
+        ]);
+        // The refuter's first case: another type of the signature changed
+        // and now stands in front of A, which still applies to f and stops
+        // no other function. Refused, naming f and A.
+        let masked = register(vec![
+            residue("c::f", "type", "B", Some(vec![b.clone(), a.clone()])),
+            residue("c::h", "form", "a loop", Some(vec![])),
+        ]);
+        let refused = admit_parent(&parent, &masked);
+        assert_eq!(refused.len(), 1, "{refused:?}");
+        assert!(
+            refused[0].starts_with("c::f ") && refused[0].contains("\"A\""),
+            "{refused:?}"
+        );
+        // A is gone from f's signature: f moves on to B. Admitted, and the
+        // cause `type` keeps its count by a function whose blocker went.
+        let moved_on = register(vec![
+            residue("c::f", "type", "B", Some(vec![b.clone()])),
+            residue("c::h", "form", "a loop", Some(vec![])),
+        ]);
+        assert!(admit_parent(&parent, &moved_on).is_empty());
+        // A candidate that records no signature constructs shows nothing.
+        let unrecorded = register(vec![
+            residue("c::f", "type", "B", None),
+            residue("c::h", "form", "a loop", None),
+        ]);
+        assert_eq!(admit_parent(&parent, &unrecorded).len(), 1);
+        // A construct of the body (h's loop) never moves while h's tokens
+        // are the same, though no function states it any more.
+        let collided = register(vec![
+            residue("c::f", "type", "A", Some(vec![a.clone(), b.clone()])),
+            residue("c::h", "collision", "h", Some(vec![])),
+        ]);
+        let refused = admit_parent(&parent, &collided);
+        assert!(
+            refused.len() == 1 && refused[0].starts_with("c::h "),
+            "{refused:?}"
+        );
+        // Lifting is always admitted; a new κ is counted under anything.
+        let lifted = register(vec![
+            row("c::f", Status::Lifted("Behavior::f".into())),
+            row("c::h", Status::Lifted("Behavior::h".into())),
+        ]);
+        assert!(admit_parent(&parent, &lifted).is_empty());
+        let mut grown = masked.clone();
+        let (_, f) = grown
+            .rows
+            .remove(&kappa("c::f", "fn f () {}"))
+            .map(|r| ((), r))
+            .expect("f");
+        grown.rows.insert(kappa("c::f", "fn f () { 1 }"), f);
+        assert!(admit_parent(&parent, &grown).is_empty());
+        // A call names its callee by path: f's callee lifted, so f moves on
+        // to its next call. The refuter's second case: a homonym callee of
+        // another type is still residue, and that decides nothing for f.
+        let calls = |callee: &str| pair("call", &format!("calls {callee}, which is not lifted"));
+        let make = calls("c::Alpha::make");
+        let k = calls("c::k");
+        let at = |status: Status| status;
+        let callers = |alpha: Status, f: (String, String), beta: Status| {
+            register(vec![
+                row("c::Alpha::make", at(alpha)),
+                row("c::Beta::make", at(beta)),
+                residue("c::f", &f.0, &f.1, Some(vec![])),
+                residue("c::k", "form", "a loop", Some(vec![])),
+            ])
+        };
+        let form = || Status::Residue("form".into(), "a loop".into());
+        let before = callers(form(), make.clone(), form());
+        let advanced = callers(Status::Lifted("Behavior::make".into()), k.clone(), form());
+        assert!(admit_parent(&before, &advanced).is_empty());
+        let other = callers(form(), k.clone(), Status::Lifted("Behavior::make".into()));
+        assert_eq!(admit_parent(&before, &other).len(), 1);
+        // An effect the function no longer reaches; and the reverse, a
+        // callee that came to reach one while the loop still stops h.
+        let effect = register(vec![row("c::h", Status::Effect("Fs effect: read".into()))]);
+        let looped = register(vec![residue("c::h", "form", "a loop", Some(vec![]))]);
+        assert!(admit_parent(&effect, &looped).is_empty());
+        assert_eq!(admit_parent(&looped, &effect).len(), 1);
+        // Through the files, as `uorust admit --parent` reads them: the
+        // signature constructs round-trip, and a lifted row carries none.
+        let dir = std::env::temp_dir().join(format!("uorust-admit-parent-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).expect("a scratch directory");
+        let file = |name: &str, r: &Register| {
+            let path = dir.join(name);
+            std::fs::write(&path, r.to_text()).expect("write");
+            path
+        };
+        assert_eq!(
+            Register::read(Path::new("p"), &parent.to_text()),
+            Ok(parent.clone())
+        );
+        let at = file("parent.toml", &parent);
+        let totals = crate::admit_register(&at, &file("moved.toml", &moved_on));
+        assert_eq!(totals, Ok(moved_on.totals()));
+        let refused = admit_parent(&parent, &masked);
+        assert_eq!(
+            crate::admit_register(&at, &file("masked.toml", &masked)),
+            Err(UorustError::Regressed(refused))
+        );
+        let stray = lifted.to_text().replace(
+            "definition = \"Behavior::f\"\n",
+            "definition = \"Behavior::f\"\nstops = []\n",
+        );
+        assert!(Register::parse(Path::new("p"), &stray).is_err());
+        let bent = parent
+            .to_text()
+            .replace("stops = [[\"type\", \"A\"]", "stops = [[\"type\"]");
+        assert!(Register::parse(Path::new("p"), &bent).is_err());
+        // A parent an earlier tool wrote, whose queue this tool derives
+        // otherwise, is read by its rows; a candidate is read as written.
+        let older = parent
+            .to_text()
+            .replace("functions = 2\n", "functions = 3\n");
+        std::fs::write(&at, &older).expect("write");
+        let moved = file("moved.toml", &moved_on);
+        assert_eq!(crate::admit_register(&at, &moved), Ok(moved_on.totals()));
+        assert!(matches!(
+            crate::admit_register(&moved, &at),
+            Err(UorustError::Malformed { .. })
+        ));
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A type construct names the types of its chain by their owners and
+    /// its leaf by its paths, kept whole, and marks the owners of places; a
+    /// field is no type. Its row carries the sites and the unplaced names a
+    /// projection found for it, and a row of another cause carries none.
+    #[test]
+    fn a_type_construct_row_carries_the_sites_of_its_types() {
+        let construct = "type outside the lift: Mid.leaf: Enum::Big.0: RefCell<a::Node>";
+        let names =
+            |c| -> Vec<(&str, bool)> { named_types(c).iter().map(|n| (n.name, n.place)).collect() };
+        assert_eq!(
+            names(construct),
+            [
+                ("Mid", true),
+                ("Enum::Big", true),
+                ("RefCell", false),
+                ("a::Node", false)
+            ]
+        );
+        assert_eq!(names("type outside the lift: f64"), [("f64", false)]);
+        assert_eq!(
+            names("type outside the lift: a::Outer, whose field x holds Leaf.y: u8")
+                .iter()
+                .map(|n| n.0)
+                .collect::<Vec<_>>(),
+            ["a::Outer", "whose", "field", "x", "holds", "Leaf", "u8"]
+        );
+        let sites: BTreeMap<String, Sites> = [(
+            construct.to_string(),
+            (
+                vec!["a.rs:3".to_string(), "a.rs:9".to_string()],
+                vec!["Made".to_string()],
+            ),
+        )]
+        .into_iter()
+        .collect();
+        let register = Register {
+            rows: [
+                row("c::f", Status::Residue("type".into(), construct.into())),
+                row("c::g", Status::Residue("form".into(), "Mid.leaf".into())),
+            ]
+            .into_iter()
+            .collect(),
+        };
+        let text = register.queue_text_with(Some(&sites));
+        assert!(
+            text.contains(&format!(
+                "cause = \"type\"\nfunctions = 1\n{DEFINED} = [\"a.rs:3\", \"a.rs:9\"]\n\
+                 {UNSITED} = [\"Made\"]\n"
+            )),
+            "{text}"
+        );
+        assert_eq!(text.matches(DEFINED).count(), 1, "{text}");
+        // Without sites the text is the register file's, and a file that
+        // carries the sites reads back to the same rows.
+        assert!(!register.queue_text().contains(DEFINED));
+        let file = register.to_text().replace(&register.queue_text(), &text);
+        assert!(file.contains(DEFINED));
+        let read = Register::read(Path::new("frontier.toml"), &file);
+        assert_eq!(read, Ok(register));
     }
 
     #[test]
@@ -777,7 +1367,8 @@ mod tests {
                 lifted: 2,
                 residue: 6,
                 foreign: 1,
-                effect: 1
+                effect: 1,
+                embedded: 0
             }
         );
         // The tables part the functions.
@@ -1023,5 +1614,136 @@ mod tests {
             ),
             "[[construct]]\nconstruct = 'a \"loop\"'\ncause = \"form\"\nfunctions = 2\n"
         );
+    }
+
+    // lift: a row whose body is embedded-closed.
+
+    fn lift_at(configuration: &str) -> EmbeddedAt {
+        EmbeddedAt {
+            configuration: configuration.into(),
+            project: "a".repeat(64),
+            body: "b".repeat(64),
+        }
+    }
+
+    #[test]
+    fn lift_an_embedded_closed_row_is_counted_apart_and_held_by_admit() {
+        let closed = row(
+            "c::f",
+            Status::Embedded(vec![lift_at("default features"), lift_at("all features")]),
+        );
+        let lifted = row("c::g", Status::Lifted("Behavior::g".into()));
+        let open = row("c::h", Status::Residue("form".into(), "a loop".into()));
+        let register = Register {
+            rows: [closed.clone(), lifted.clone(), open.clone()]
+                .into_iter()
+                .collect(),
+        };
+        // Counted apart from lifted, in the totals and the honesty line,
+        // and stopped by nothing in the queue.
+        let totals = register.totals();
+        assert_eq!((totals.lifted, totals.embedded, totals.residue), (1, 1, 1));
+        assert_eq!(register.queue().len(), 1);
+        let text = register.to_text();
+        assert!(
+            text.contains("# 1 that did not lift are embedded-closed"),
+            "{text}"
+        );
+        assert!(text.contains("\n[lift]\nfunctions = 3\nlifted = 1\nresidue = 1\nforeign = 0\neffect = 0\nembedded = 1\n"), "{text}");
+        assert!(
+            text.contains("configurations = [\"default features\", \"all features\"]\n"),
+            "{text}"
+        );
+        // It reads back as written, its totals held to its rows.
+        let path = Path::new("register.toml");
+        assert_eq!(Register::read(path, &text), Ok(register.clone()));
+        let misstated = text.replace("embedded = 1\n", "embedded = 2\n");
+        assert!(Register::read(path, &misstated).is_err());
+        // A true count of none, stated, is read; a false one is refused.
+        let none = Register {
+            rows: [lifted.clone(), open.clone()].into_iter().collect(),
+        };
+        let stated = none
+            .to_text()
+            .replace("effect = 0\n", "effect = 0\nembedded = 0\n");
+        assert!(stated.contains("embedded = 0\n"), "{stated}");
+        assert_eq!(Register::read(path, &stated), Ok(none.clone()));
+        let false_none = stated.replace("embedded = 0\n", "embedded = 1\n");
+        assert!(Register::read(path, &false_none).is_err());
+        let uneven = text.replace(
+            "configurations = [\"default features\", \"all features\"]",
+            "configurations = [\"default features\"]",
+        );
+        assert!(Register::parse(path, &uneven).is_err());
+        // A register with none states none, and reads as it always did.
+        let plain = Register {
+            rows: [lifted.clone(), open.clone()].into_iter().collect(),
+        };
+        assert!(!plain.to_text().contains("embedded"));
+        // Held: decided open again it is refused; lifted, or closed
+        // again, it is admitted.
+        let as_ = |status: Status| Register {
+            rows: [
+                (
+                    closed.0.clone(),
+                    Row {
+                        function: "c::f".into(),
+                        status,
+                        divergence: None,
+                        stops: None,
+                    },
+                ),
+                lifted.clone(),
+            ]
+            .into_iter()
+            .collect(),
+        };
+        let refused = admit(
+            &register,
+            &as_(Status::Residue("form".into(), "a loop".into())),
+        );
+        assert_eq!(refused.len(), 1, "{refused:?}");
+        assert!(refused[0].contains("was embedded-closed and is now residue: a loop"));
+        assert!(admit(&register, &as_(Status::Lifted("Behavior::f".into()))).is_empty());
+        assert!(admit(
+            &register,
+            &as_(Status::Embedded(vec![
+                lift_at("all features"),
+                lift_at("default features"),
+                lift_at("features x")
+            ]))
+        )
+        .is_empty());
+        // Closed in fewer configurations than the incumbent states (the
+        // refuter's case: a run whose records hold the default
+        // configuration alone) is refused, naming the one it drops.
+        let fewer = admit(
+            &register,
+            &as_(Status::Embedded(vec![lift_at("default features")])),
+        );
+        assert_eq!(fewer.len(), 1, "{fewer:?}");
+        assert!(
+            fewer[0].ends_with("is no longer stated closed in all features"),
+            "{fewer:?}"
+        );
+        // A lifted κ the candidate decides embedded-closed is no longer
+        // lifted: refused, as any other status is.
+        let demoted = Register {
+            rows: [
+                closed.clone(),
+                (
+                    lifted.0.clone(),
+                    Row {
+                        function: "c::g".into(),
+                        status: Status::Embedded(vec![lift_at("default features")]),
+                        divergence: None,
+                        stops: None,
+                    },
+                ),
+            ]
+            .into_iter()
+            .collect(),
+        };
+        assert_eq!(admit(&register, &demoted).len(), 1);
     }
 }

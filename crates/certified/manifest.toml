@@ -2,21 +2,21 @@
 # every lifted translator function exported by `lexlean production` and
 # kernel-checked, keyed by the κ of the Rust function it certifies.
 schema = "uorust/certified/1"
-result = "f899185302c40d01ab5206229472fe2ca1218653c2bab3377b72ba0e39c294dc 0d9d48788d365159fff524d0fff352f0b62390cc15d9772ed7eb38ea34295e09 2642d93fd13e97ace9a0511f3bbc6d49c46161b62bc6b8b37eb978d3984cd170 32ae74fa19f58cd400f5223e4346647c91abce0fe1a40f406e7e46f2e2ad05da a44f1fe6dbff0c25b5fedb8be2c315071e28ac032032478ac4a8b420483f669a a5609ee41fb680d65c3638008965f4bb453864bed300c3e407d4648ab04568ed 25c1be6b4f6acaaf01330035b89d21a509c3a23a8b21ee311c909f20d60d9380 3be53f964cf3496536f0e5617f8e655d64dd8ad45c5e11d32e004a972e3ab10a 4be0beab1536e27c218cdba3d5ee5c25d89cf1fd30c2b1e065b603edebb29e3a fb5316684229e9ba29968ed87d04f960f1817f4b0e986a932a4da61073421d72 38d8df65fa709a5066b63981c23508b7aa10aa3f57b4cc3b3e89dfb2ba6c7259 c8364f97a8b44c44db9059267ca7f69ba956ca57fd05af195bc86dceaa1bbe21 d402734eeb1df4d10ed21d4351ca12781fb5ff7ef08a8feaa7b9d72bf0a0bd87 e6169eeb1137a677619088940fdf4ff47c440075b3ad2b9fab0788b66461a8d8 b7e27d57d850587541ab375bc95543223b91817de32124bc3049fbdb6ae71244 ec8e7acf8f077ebe670b58c7c62cf91b8c2a398a10ad5504f634b35828c12b29 f6df30113eda14beeb7052688d32c42b8d41b81d962f57d393c472bbc5fa878d 859596190dab9b34bd7d3a81e29763f13ca13102c4c1a0a9e5c045a3a6d9ab0a 64d2b8506933cbac1add4ccbff1369a6f2897ceed78ce7d0b8e2c91eecc20618 4e098b3eeee4df478a7952d2453a438f75a8711c53765dfd612823c9d72bebf8 3e81671fe1eea8ee2aba85a2a26555f891f69f199835a1f1c59dde1c2b4023cb 2ce3ee963344eeac2097617070bc24ee0a045790c88657c3c5a631525478083d 26e8a87b707a668dbc0c90ac1960f987ad55c0f338ad4bf3992f896d6d5c0371 a770b898a555b043012740dddce0a0e51869886491170751aa6efb9f201719c8 160094432a845e4380e27ed2019280dc4ac25740e633daeb1a7e090b90b410f5 fa96855fae091d2f1c1270f959511eb77fdeb8f849ab3098447385117306470f a82fb0ca7e3347b724c0b21d8513bffc80440a9a90b2d03babe95046546bbbf3 a8e98b57cdc0c3cefd2b8ee2d23bda3e9b9d99a42156bf91c336f14578be3c2f 9baf03278118b2478e210a1ed312b2dfb1f83f42f58cb8b206926aab9d6115aa 659f58d049c4c11804e8f114852b69ba3dac2aaef4cafebfc073bf07523416ff 6f1579d9c1b7ffa5929498421b41fc00bd0d003a061f84fb0ba8fce2f8ccff59 efe535c3ef232e025988350ba4b3f78e271a28fec2a5f12d5d900e21eca82c06 f1ce0c1c1053dd08cde37f8712b3e7f8a79991b610013eee7b0e147df297e975 244129c234b18a015bc52486ea5a68729017fad047f168688104344faf181e95 127807e113d02dca9d1f4b7fa2d270fea38dd2ecc78f81ec5b82e7756112752b 21e7fd346897b0347d8b1c9afbaa4cbfa727715d5f9df4a811c654a37e83b807 b13ddfee5e58757406aa5fcfcaedd3440ec728f7a965bad75de4f73c29a09573 d0849d524d429806844eee1d635ac82801005fc0f5aacb5fb0aa6836b67f9b17 00a6e1586178129522c1e4c6231940770f95a226d71d32363b05dbb3ca39d565 8c4aa070494015351f78205b4806dbd1f13b7bb3dbd4c1e32f0fbefa677883b7 43112b84d75b313a65a27bc9e1b90921164da82fdc88e39b25dcc28c60bb5bf5 51f7a7530efc611a51a1e1c770d850b541d5e49f99fb5349c9a29fa9a3d0ae90"
+result = "c8e72454b6ff3143d97d9725080a44ab34060621d864a7b4b3e04e802090c9c3 a044d9f4eb10fae9f83f1eeda6f1afc26380f74eee010b04c4aa7348259fc15a b1316bc93f4a88b7380a69cf2bbb01e89f18e5e176d2783fa6ac2fe89ea74859"
 compiler = "0.4.0"
-project = "8eafd5bc37fa1644473a2413d8d8cbd76c10404ed9aa921be0df068945d47cbb"
+project = "115ca03168b7641799d0b7b935370f64dd45c404fbb38a63e55ae8937b17f792"
 entry = "uorust::mir::core::core_shard"
 
 # The bootstrap: the share of the translator that runs certified.
 [share]
-translator = 675
+translator = 674
 certified = 167
 reachable = 0
 reachable_certified = 0
 
 # The build seconds per published root, which sizes the next export's shards.
 [timing]
-seconds_per_root = 106
+seconds_per_root = 427
 
 [[root]]
 function = "uorust::lift::Acc::all_axioms"
@@ -25,7 +25,7 @@ definition = "accAllAxioms"
 package = "uorust_certified_acc_all_axioms"
 source = "94fbe3360d32eb2d3940ad52be764e3cd254e5a484817937c2834ec0623b4ce3"
 certification = "kernel-checked"
-closure = "3bbc1ee1107854f357cf7d9eaf81f28a7df89821fd7bd4a6942a9607b6104804"
+closure = "743acea2bf075cea357d3cc66031d613f991337cc5d84fbbfccd4d1657ca9b05"
 edition = "2021"
 
 [[root]]
@@ -35,7 +35,7 @@ definition = "accApart"
 package = "uorust_certified_acc_apart"
 source = "4863afb5339c562e51338aa5de57934bdc2230cacc9aca13452bd82b2bb1c3d3"
 certification = "kernel-checked"
-closure = "1acdddc1954c180b269cdb4c69649e06ee03fff481e0244bc29aa7f6180eb139"
+closure = "6c924a0a3807dc5ce05b1f703433088512bab8548dee26682dd27f5956084b52"
 edition = "2021"
 
 [[root]]
@@ -45,7 +45,7 @@ definition = "accAxiom"
 package = "uorust_certified_acc_axiom"
 source = "d237c1c3c70b833b660d3300bad82069338f7b732dd618745d48ba518024ddc7"
 certification = "kernel-checked"
-closure = "dd489da9df1b915de9b377cee91075742ee394cfbf7338067748538c3b5ad6ad"
+closure = "863f07a92671e6af3d3e22bb3e3948a5726f1eeeb47ac7369166d330d272b503"
 edition = "2021"
 
 [[root]]
@@ -55,7 +55,7 @@ definition = "accAxiomsAll"
 package = "uorust_certified_acc_axioms_all"
 source = "9f2ea53164f771fad549237ad6f0c02fe832415e0e08d1ef3281f972d67d087a"
 certification = "kernel-checked"
-closure = "0d9f6a864e086cd2f2a39e2d73de1afb6664a8b6a09b6ab63043641252590aa1"
+closure = "857b3533fc045356cf214609aab5cfb6b0ccb601b623292cebd3601ca7764589"
 edition = "2021"
 
 [[root]]
@@ -65,7 +65,7 @@ definition = "accCalled"
 package = "uorust_certified_acc_called"
 source = "23aea5015eed17cd523381619a0af52021c96530b28a42bcbadcb21348fdecb0"
 certification = "kernel-checked"
-closure = "bc08c650932e8956f3301feb0848ae7d0a1bdbff38b65428d4cb481d62116bc9"
+closure = "05244d78a05dcf95852693fb6c8d07b7c975f384a706c56693da55d9e3e0ea1b"
 edition = "2021"
 
 [[root]]
@@ -75,7 +75,7 @@ definition = "accCalledAll"
 package = "uorust_certified_acc_called_all"
 source = "b710f419e1175a02e117d5b1da444ac0e07df8a8da64ab30ea6a829d6db6db75"
 certification = "kernel-checked"
-closure = "ae05edce197249300b6c733a462e4f8eadca6d4ab54bce81488cc42f092ff3af"
+closure = "1a3448b7def860fd8e05acd480b9192764b24d15722086b02709260c850771ca"
 edition = "2021"
 
 [[root]]
@@ -85,7 +85,7 @@ definition = "accDescended"
 package = "uorust_certified_acc_descended"
 source = "a9b6e6e9ddc66c6551f2d4b872125c63bb9ed845985b10379b108f98ea00c45b"
 certification = "kernel-checked"
-closure = "4431884083230db20a7a7ac9b759865cd01a5840441c62dda5a81201322e34a0"
+closure = "990498bc9a730c8c45bbc8d5fe0101ce6ae72dacf70ea04e7e7b029c2846e369"
 edition = "2021"
 
 [[root]]
@@ -95,7 +95,7 @@ definition = "accHelper"
 package = "uorust_certified_acc_helper"
 source = "837abbd61767d7e82e787d8d8830c7892b2edcad1ef5dd85b703ed92ae561850"
 certification = "kernel-checked"
-closure = "37958ce3d338df0473d0ac8be14b39495d4893feac66d076fe975950ab79b895"
+closure = "b7affa5c805e484d0a05fb9d24bdd54f5a3c3eeece6cc665374cfae55678f4aa"
 edition = "2021"
 
 [[root]]
@@ -105,7 +105,7 @@ definition = "accRejoin"
 package = "uorust_certified_acc_rejoin"
 source = "3e6932a61bee628ef258244761fcb77660e9932118cb9a54b7f1a54504adba17"
 certification = "kernel-checked"
-closure = "f8ee4f9a95a7638d6dea4c48cb5d2a84d177d64c05d996bb5febf3da1f964207"
+closure = "f6e24a400675486100a4a155047755192ceb93be8a28799af285e590e73730ad"
 edition = "2021"
 
 [[root]]
@@ -115,7 +115,7 @@ definition = "address"
 package = "uorust_certified_address"
 source = "4a4c347126f85ac6d132681f65d309fa8ed5b0183c6a1b8879ed7b8f5b904dd8"
 certification = "kernel-checked"
-closure = "47aeb10e8070ff849fa490b20847dca47214efe597e770df062ae3c87f6e4df9"
+closure = "1cf8fdb22a61fce669bec8a277971ac5766aa066c9f55d2a2e05ad9f554275f9"
 edition = "2021"
 
 [[root]]
@@ -125,7 +125,7 @@ definition = "aggregate"
 package = "uorust_certified_aggregate"
 source = "44c8ee7cd4ff693d930944dc8bf7eedc1fc361af24bd3793d6b61126d87fa9b8"
 certification = "kernel-checked"
-closure = "a6ef138eec75819d29c8b533ca97452c7768ae532bb332a6c033d79152241a48"
+closure = "78781a66588e6b7fddddc9e6737a6fb0a002cbd25e9f33ec531aa10a5cb054d0"
 edition = "2021"
 
 [[root]]
@@ -135,7 +135,7 @@ definition = "apart"
 package = "uorust_certified_apart"
 source = "38cc38b436c62898f11ce33a8a08cd21085e2bf08c81eb80a068ee8a8a5df8f2"
 certification = "kernel-checked"
-closure = "6da6907ac25ecfa4eaddc6c46de55790cc7d33f903fc2873c972a0c5bf9f8d61"
+closure = "0a88e5c503d710cb631e3670f4f217bb8bf6bf17c671f14fafade70175905d96"
 edition = "2021"
 
 [[root]]
@@ -145,7 +145,7 @@ definition = "assert"
 package = "uorust_certified_assert"
 source = "3ec8f3609d5dd37f5e4d79e4eb733b856f0398aac78ed5cf8522833bcf3c6bb2"
 certification = "kernel-checked"
-closure = "753bf0a69b1c4b4bdc2ae115a58ffa2e5c5867e2a34075cc097d6e12ad58ca07"
+closure = "4c853032c93e812de697c2b4c745757933e5aba13da6f555c1dc15f8f79ee181"
 edition = "2021"
 
 [[root]]
@@ -155,7 +155,7 @@ definition = "assertKind"
 package = "uorust_certified_assert_kind"
 source = "bdd74dca96a98ead8e13568f0effbe61f2709fdc6f905d25f877999e7fcb5393"
 certification = "kernel-checked"
-closure = "ff71b8689aeb376923e6f6a96ef0cbf931b8ed753496e5ac8a7cda88b195c5d7"
+closure = "3784c6631aefa89876962e0ca1d316a1c56fba7bd613a9f52822dca130af695b"
 edition = "2021"
 
 [[root]]
@@ -165,7 +165,7 @@ definition = "barred"
 package = "uorust_certified_barred"
 source = "194f39919f591c9ea6f82581e143b231d37490237b5b208b66afc6ce6b24470d"
 certification = "kernel-checked"
-closure = "a1f9dc12de2391e4aedfc8af37160d7340022aa0f7f28d04e34e723f7479c041"
+closure = "39dd6f8f6abb8a2ccf1f5453739fed40219baa99d66ec4660a6e63896d3db1c4"
 edition = "2021"
 
 [[root]]
@@ -175,7 +175,7 @@ definition = "binop"
 package = "uorust_certified_binop"
 source = "69a99d175bd2254fac3d87068ddca03d1d8e74c4320cdd8c595b1192e6581ece"
 certification = "kernel-checked"
-closure = "954a710406c5d3c87b121cb0f05270b24478719541625b572434f4244c2b3510"
+closure = "b4926bad939cad7378f16b45d776ea35ef566dded2768f6f15b74412de881095"
 edition = "2021"
 
 [[root]]
@@ -185,7 +185,7 @@ definition = "borrow"
 package = "uorust_certified_borrow"
 source = "84c21a6882ac3a3f0a72dbaf526582674808b0885ae136383f1ffc77ea7399b8"
 certification = "kernel-checked"
-closure = "7835803e77f21fa63e99ed6ed0bb9c41c634dddec9972f13002b28aa5ffd2924"
+closure = "6f92998e503ad8fdcc0f765745c4ebce3694c1ad3724e14bc83cecd10070ea73"
 edition = "2021"
 
 [[root]]
@@ -195,7 +195,7 @@ definition = "calledValue"
 package = "uorust_certified_called_value"
 source = "85222f1e7ed1f2514830eb92411b1dadada68b65bd2653c7059486d9e9477d0a"
 certification = "kernel-checked"
-closure = "dbf83546e947c8ea0732ffa2e490636cc817decabf40a50a0799d888b9a56367"
+closure = "c43abcea7bf6f98c4add86e5c06f2818b7d384f012566c0852987f99cf468509"
 edition = "2021"
 
 [[root]]
@@ -205,7 +205,7 @@ definition = "camel"
 package = "uorust_certified_camel"
 source = "affcc7cfcc05973589b8437c63af5bc9b60fc724e7bcb2fbcb9ab35c74f16727"
 certification = "kernel-checked"
-closure = "9657d31c709cec6032d8282aa78a0995ae6b21c9c5c991d9e1b1f89e1531d03f"
+closure = "a1bc06e0b8930247f07fd6d75426d521e8f3ca2106f121b57a7384b8583b14b7"
 edition = "2021"
 
 [[root]]
@@ -215,7 +215,7 @@ definition = "captures"
 package = "uorust_certified_captures"
 source = "2f7a7696a7eb0c8a69caa9f64cf62a358d134ed692a56bcaa5d9b4f515564c95"
 certification = "kernel-checked"
-closure = "96661078412af459764fa24d084c32c521ac8b9f45c476f571b3938ab06cc974"
+closure = "7f6ffc6103e0dac7410213702f76ff3a81bac797ad41a85b76f814d08be231a3"
 edition = "2021"
 
 [[root]]
@@ -225,7 +225,7 @@ definition = "combCollect"
 package = "uorust_certified_comb_collect"
 source = "ee652e10211cba46b3efea7be7932d73dc102ff790d3eca2aeec238e236537a5"
 certification = "kernel-checked"
-closure = "49f802219f060ef7bda4ab3a52e17806e6cfb29e888ff74b1275953885dc06e9"
+closure = "11db7c5c657a66cde53ca51120d7ca3eb0bec983f6ecff695f6bf416d06acfc3"
 edition = "2021"
 
 [[root]]
@@ -235,7 +235,7 @@ definition = "constMarker"
 package = "uorust_certified_const_marker"
 source = "2c16a803c5df53fdac0f06200c5d01751dcd4cff9542549645c9ef909b9da493"
 certification = "kernel-checked"
-closure = "5a387fab4d418383644c8f0a45182b75f26324e5d6d4aa3c049e46ed0b3f7e1b"
+closure = "9d0803821a0832b0cd9442ea6befea7c9a1dd2d5135025913979f84fe8cc5ac2"
 edition = "2021"
 
 [[root]]
@@ -245,7 +245,7 @@ definition = "constOfMarker"
 package = "uorust_certified_const_of_marker"
 source = "16d42ed885ecfe4b2479d6418f809016e8cc4bd74e5e89bf162c614e566ccc59"
 certification = "kernel-checked"
-closure = "10bbb877e04f06b18bb84f42b5aa68802b8e72756e154a6907b02da01e588320"
+closure = "5507b2084f90d548474a758abf89448e516d7ea80ff7104345ffea8bd8597607"
 edition = "2021"
 
 [[root]]
@@ -255,7 +255,7 @@ definition = "coreShardTranslatedCount"
 package = "uorust_certified_core_shard_translated_count"
 source = "4131ca38c85b28eddc3799ece1724d825c76883e678138a236874e7b56e7edfd"
 certification = "kernel-checked"
-closure = "4cacf4c5a9608de78a01ffd13729822bcb9a4015ee95414e885666fd1bd529d6"
+closure = "2afb3239a4d22b6ecfebf4d6362f7037b056d517d51db06f6ce147102327293c"
 edition = "2021"
 
 [[root]]
@@ -265,7 +265,7 @@ definition = "coreStructName"
 package = "uorust_certified_core_struct_name"
 source = "e4425d2bba2bfdadd88aeaaf2228ca1374ed0decb87a1025e5c003c617fd075d"
 certification = "kernel-checked"
-closure = "96296729a35265741372ea0e9ec29fe8fff7624e58c689fe35ab9e6a74e8fb54"
+closure = "55c637e08fe10319d09d2bd91c0ef9539601bcd13101a8572d413a2cacdb9ce2"
 edition = "2021"
 
 [[root]]
@@ -275,7 +275,7 @@ definition = "ctorValue"
 package = "uorust_certified_ctor_value"
 source = "936026ace11ca91e02145a9d53f7ee6ea37a82f614fe545e6e35236fc55fb22b"
 certification = "kernel-checked"
-closure = "dc83497fa38081cd3f06827450d40215956969250efc1b57d7b4a7a28fdb4b12"
+closure = "ddcce82e54c2a3d61f9005297b2be67dff8ec9bf5f4e699adef10387f734015b"
 edition = "2021"
 
 [[root]]
@@ -285,7 +285,7 @@ definition = "ctxBelow"
 package = "uorust_certified_ctx_below"
 source = "f142d4d06e27e40eec5880d96334fbb3fd04d16921a7a2fd413218f7de0977eb"
 certification = "kernel-checked"
-closure = "d50f7bf30b5f1ff0834954f64bdff16b3e95029134801f24e9f9ec9745afece1"
+closure = "44d64c2b448568b600313e349622a7d20db5188190d1aace666730cceff0b259"
 edition = "2021"
 
 [[root]]
@@ -295,7 +295,7 @@ definition = "ctxFresh"
 package = "uorust_certified_ctx_fresh"
 source = "1a05b06fe6b4999aaa1d1fc83b6dced26b99ef1f96441062df79ce4cb0944356"
 certification = "kernel-checked"
-closure = "089d69f87bcec98d630a7c4a0e05867df3770041d224861d3fc0a45ac553ff28"
+closure = "a789714337a9ef2879c307fd582c7da4e875c863d4aeccf47ce849b90b2e6687"
 edition = "2021"
 
 [[root]]
@@ -305,7 +305,7 @@ definition = "ctxHelperName"
 package = "uorust_certified_ctx_helper_name"
 source = "eb676019defe61c763131f3f14c1784fb2127e7e972a813f0b7fbe5b3eebf117"
 certification = "kernel-checked"
-closure = "64e40e75a5826558e8eecd23f499c1c9404c3bc4e21cc3105e8b3b08dcb44174"
+closure = "0e81f09b3863d00589f2fa2d1231b7c517b1f1fc52ba34719b2584db3689cd00"
 edition = "2021"
 
 [[root]]
@@ -315,7 +315,7 @@ definition = "ctxNamesFrom"
 package = "uorust_certified_ctx_names_from"
 source = "1f4069ae06383967dcc679889db9195d333e40190393ba1adbe5152786c5b65f"
 certification = "kernel-checked"
-closure = "a552bd31f4c181b76b157bb25b7078a91ef7a3b4cbe426f78965cd07570f876d"
+closure = "5e0071613fa0f0ea94a1620e96d09da581c2720d8b7a2dd65723198ca69d07b9"
 edition = "2021"
 
 [[root]]
@@ -325,7 +325,7 @@ definition = "ctxTaken"
 package = "uorust_certified_ctx_taken"
 source = "19dd26bd9d3febc53830bbb0a35a03e59f5d893ed8bc165b2becf62ae1d20b2f"
 certification = "kernel-checked"
-closure = "7cd38f358cad2a038e07176d3f8575920126303a94453375fe6dd9e5ef0e64bd"
+closure = "60093b2d80dba216804303f08649b5423e48948f6ffe6bd7156ee7165a71996c"
 edition = "2021"
 
 [[root]]
@@ -335,7 +335,7 @@ definition = "dataVariant"
 package = "uorust_certified_data_variant"
 source = "909ca01d80576dfc980087ae43b4e8ff11b817d148c58491190afbb0d0942b50"
 certification = "kernel-checked"
-closure = "61e92be42f52013cda6ae120897dcd2188b806f587a25be5d6071356e598eebd"
+closure = "8e52bcdade55141a4f55054ddfa3f754b834b9c1e751d810fd893e9c057cc2f0"
 edition = "2021"
 
 [[root]]
@@ -345,7 +345,7 @@ definition = "declName"
 package = "uorust_certified_decl_name"
 source = "38f65ff1b7aa201143d1f1000017c0779ae729de1a636e25b8dfe251e824e58c"
 certification = "kernel-checked"
-closure = "2789fadf84a2027957af939ab79addbb9cb517a5f33d140935e84c7e07822a7d"
+closure = "cbcb9702bdbc8ef5e894cbd668d5ab1b758b3b3313393d58c52fb02e43a00e5f"
 edition = "2021"
 
 [[root]]
@@ -355,7 +355,7 @@ definition = "decoded"
 package = "uorust_certified_decoded"
 source = "d3610efca88644c7b80f4412a9f0209757438055aa0ba1c16c1ebb98db2168b4"
 certification = "kernel-checked"
-closure = "8792b5b6c85c39610a60bc4a80f5d295c91894d027944b64966e9f4f747bbb4f"
+closure = "63b8cf2038f60c789137fae531a4f177b1e45d397adac89eb51745da9ddcb042"
 edition = "2021"
 
 [[root]]
@@ -365,7 +365,7 @@ definition = "definition"
 package = "uorust_certified_definition"
 source = "dbb1e565ac00330f5ce718e001004bbdc206bdb0f017a7f20ace09361304504a"
 certification = "kernel-checked"
-closure = "821e9381861016de948ce9357607f940e9b897322e212008ba2cb41d47193ad2"
+closure = "00b703fb3a7f2cfbf04a99671a2775e9e41eb6a1425a617ae4affa161997a47b"
 edition = "2021"
 
 [[root]]
@@ -375,7 +375,7 @@ definition = "equality"
 package = "uorust_certified_equality"
 source = "686b8c554ec69fdeebfbe80b2e376fa9ea82d597b15d123364ff505d1523a60c"
 certification = "kernel-checked"
-closure = "008312bf0acffcdca2ee6a9bb95e599a9ca577359e3e4b8a54573cc7efcf98fb"
+closure = "8478153133d939bc267a6afb39618c9e1e28a6da8bd6be15912c5d6e1979603f"
 edition = "2021"
 
 [[root]]
@@ -385,7 +385,7 @@ definition = "equalityName"
 package = "uorust_certified_equality_name"
 source = "794afb6d4a19e30dcaf410578a366403e7679bce2a63f1b8d4984764c1d14d36"
 certification = "kernel-checked"
-closure = "93356ba10aeb4335a4e2edd3a9c950591e08dbafc57c480f045b39e86a6c5fde"
+closure = "4f5790d5d8cfd179229f02079e0815952ac3116f8c1516263483f9265a3d1268"
 edition = "2021"
 
 [[root]]
@@ -395,7 +395,7 @@ definition = "evidenceAxioms"
 package = "uorust_certified_evidence_axioms"
 source = "7e70a8ed0f3d9302729d40b810fa3e2b33c9fa032faf2f509410b907b51ff230"
 certification = "kernel-checked"
-closure = "d9df5af26ec0812802d291080acde3c26bdaa8a2d57dcab8c25011eee19cdef7"
+closure = "3726d091ff300e6c257fb50578ff8958115ff3ef2cb0df0caf5283e8875537f8"
 edition = "2021"
 
 [[root]]
@@ -405,7 +405,7 @@ definition = "evidenceProof"
 package = "uorust_certified_evidence_proof"
 source = "6ffbf2f3984a09ff00f1faf783504ba657a7bdc0688c7d387c1ff1842e6a77ec"
 certification = "kernel-checked"
-closure = "adc1f0fc9dae6c90f6e0432726efbd7fa33e48cfd12fc09e93bcc66d5de2b410"
+closure = "366dd9edbad6e302815b5f7e49a440fafb1946e4040fba72450fef80a375edc8"
 edition = "2021"
 
 [[root]]
@@ -415,7 +415,7 @@ definition = "exprIsFlat"
 package = "uorust_certified_expr_is_flat"
 source = "cbb0921e3ad824945e2e6ffcec28fd18aacb1993424d002f687a54c9e940127d"
 certification = "kernel-checked"
-closure = "7ad46a2abf0134b169fd5e5aeb4e66a709a3169269dfa17993ad4588d0070be0"
+closure = "c20da67768fec9d3db0ac803deb4c7a680ca8efd1ff81e3669202f6673941360"
 edition = "2021"
 
 [[root]]
@@ -425,7 +425,7 @@ definition = "exprPieces"
 package = "uorust_certified_expr_pieces"
 source = "763445f65962871fcb86a9c76c388e60ffdb0ed92e3ac54e03dea06161b90974"
 certification = "kernel-checked"
-closure = "c99491d1d7ec35ddd28cef8d2be08390154d9323464f00b47838d88944671b85"
+closure = "bdd3b088dc987080a86d5bcade6a9f2c1246096e13303242e79ad7052a865ac0"
 edition = "2021"
 
 [[root]]
@@ -435,7 +435,7 @@ definition = "fieldName"
 package = "uorust_certified_field_name"
 source = "e34880c9713aad6fe48592e14c09a27c8bc46a8886817eaf6ab7fe7f4bf0aa10"
 certification = "kernel-checked"
-closure = "72edf9235848c7408e51bed9d99a2ce823d115cb5465a3a349565ccfac7585f6"
+closure = "959add2a500efa9b8627b71bf3d5600169d0a7f4ba5ed75129940d4841e5ec68"
 edition = "2021"
 
 [[root]]
@@ -445,7 +445,7 @@ definition = "firstFree"
 package = "uorust_certified_first_free"
 source = "9e21a100e414ed671927424ac26a88dd824e436e390d160ba89119c2a8b1bac9"
 certification = "kernel-checked"
-closure = "04944c4c106f2e88f1661598381de35702cb4932081f4a28b67f4300b96795fc"
+closure = "94ca30faf7b3961dfc8feaf6a757e53a98169a65809db219f3cd285a7ee3f816"
 edition = "2021"
 
 [[root]]
@@ -455,7 +455,7 @@ definition = "fixed"
 package = "uorust_certified_fixed"
 source = "67b607292b16a2c83e74e61179f1bf4a38e27314a89996939f553a07f78e5494"
 certification = "kernel-checked"
-closure = "731d6c875f8c577ab50e232c9f40cd80329c65bb223b665713cd8bdca4845eb4"
+closure = "e15e4d266de545c7662b5b2556ca568d6ca2ad64d546186c31a70bd7605ac451"
 edition = "2021"
 
 [[root]]
@@ -465,7 +465,7 @@ definition = "flatLift"
 package = "uorust_certified_flat_lift"
 source = "e98d917dfc14100520b7e5ff2c56590e4422102a918102a83b90a30eb7a1d369"
 certification = "kernel-checked"
-closure = "0fa2612f326c053660a57506450fbb54a3e22e30bf4493c0d7b90ad9d2a776ff"
+closure = "c7c31598c9d4d9db14133d4aacb6c9ad52ac5a830cde0c189f3d59792c32eb21"
 edition = "2021"
 
 [[root]]
@@ -475,7 +475,7 @@ definition = "flatSome"
 package = "uorust_certified_flat_some"
 source = "2c45f941b2ce0902d31ccbc41d49c73976fcecbb5eb062952bcc5d696c2bb53d"
 certification = "kernel-checked"
-closure = "c73d251851f5190284054e81db44d6e7d09e23c3a405021e1f7296ad472659b6"
+closure = "7bf454ea7bdf3bff8abf2b754c36e3dfc63c8ed689567b5e94506c8db5951c27"
 edition = "2021"
 
 [[root]]
@@ -485,7 +485,7 @@ definition = "holdsNoPointer"
 package = "uorust_certified_holds_no_pointer"
 source = "8800450e97be5b0945c510150d063cafefea9c796e20d4769c218c2781d2e726"
 certification = "kernel-checked"
-closure = "069e9d0f3f01fdf8e7f1fb182aa8ecb9954ef2e8f46158039d67722a453296cf"
+closure = "447adb2f7cf6d6c0a68f6211b0a54487b587e49582bc2ebc82eec8b2c9e0affc"
 edition = "2021"
 
 [[root]]
@@ -495,7 +495,7 @@ definition = "hypotheses"
 package = "uorust_certified_hypotheses"
 source = "193d053e5a6d3f5c1ebb8f9e5de0403566cf5a2f19c595fce105c935d2819cb8"
 certification = "kernel-checked"
-closure = "b16a3f5b41ed7f003fe687fbf71e2f73048e03f2cc3b90390e13be3a6d662b81"
+closure = "4f069bed777e6f21fbcfa1c55dfd07612f26c947fbf8df434beb3ae383f68a03"
 edition = "2021"
 
 [[root]]
@@ -505,7 +505,7 @@ definition = "implication"
 package = "uorust_certified_implication"
 source = "abc8de8f75ae53b36890e2a30f0c182e22cf398dedce8d94eabeb80154aa134d"
 certification = "kernel-checked"
-closure = "b796d7db8c09a23624672697e0f97744b43e354254a5fe3ba86d4ed5704b51c2"
+closure = "726960811f48c407df8c191a9129a6406d00222c378cd3bb6d5938e49af626f5"
 edition = "2021"
 
 [[root]]
@@ -515,7 +515,7 @@ definition = "insertAll"
 package = "uorust_certified_insert_all"
 source = "d06b4316b3a02890ba1bbbe55b1016ea8b550d9b9e0eae5351d3bc7c298f3ebb"
 certification = "kernel-checked"
-closure = "ee287b03766f833be6367532009bd12436b6271845c906bf9cfcdc50a6938d08"
+closure = "9f5969e5a71c31c7a388f0a6b64b3b9b50d0c041bd9b2ddc12ec26a2509f0e84"
 edition = "2021"
 
 [[root]]
@@ -525,7 +525,7 @@ definition = "intLiteral"
 package = "uorust_certified_int_literal"
 source = "c92755d4000c7a7a87b1ae5ba09fb294df11ff9e7b998206ac55d7110a24f475"
 certification = "kernel-checked"
-closure = "ec9ae9e63aaff62a801bf882d3628fa0848bdb1361a59b7a1cdcc0d9873476c2"
+closure = "f9ebe02c60d365cf9193d1bfa9c937db3d4bd7832c99b3b04e40b593d17e2910"
 edition = "2021"
 
 [[root]]
@@ -535,7 +535,7 @@ definition = "isConstArgument"
 package = "uorust_certified_is_const_argument"
 source = "dee01f95c01537b3af87fcaa1e83338fc7da511a7d575e90212b273e6351e947"
 certification = "kernel-checked"
-closure = "929dbb88a2e65922db51a2da2f249a4c12121ac523de1389d64478779b9a38cd"
+closure = "222e571e1b2c1e2dd253497ead613c859fed69ef5d6183a962c75844208654fc"
 edition = "2021"
 
 [[root]]
@@ -545,7 +545,7 @@ definition = "isEnumOrBool"
 package = "uorust_certified_is_enum_or_bool"
 source = "b6280cb5eda6cc73ef0f6e5e0eebd0a6ce2b7766242a653b5df92d3068203515"
 certification = "kernel-checked"
-closure = "8388e637d7aca5e2157ec3849b4996a617cb161a2ae9d852ed384a0c368b47c7"
+closure = "5928d1929ffbd98462a0a83ca7321b3585c29cbed8e118103cf65fa0a8ad21e0"
 edition = "2021"
 
 [[root]]
@@ -555,7 +555,7 @@ definition = "isLifetime"
 package = "uorust_certified_is_lifetime"
 source = "6c352ee9918c43adad04fb28b2a415a6bb78b3526c9124b5f908983a7defe981"
 certification = "kernel-checked"
-closure = "abb816b5459fae2de6852cf0b5ab2fc51dbb774d790bdd5b7522a8e2560006f4"
+closure = "20aa6f365fd77e890d95552beaca525b6e4c130bb7eeb2bd7e4a68730adcef71"
 edition = "2021"
 
 [[root]]
@@ -565,7 +565,7 @@ definition = "isNeedsAddress"
 package = "uorust_certified_is_needs_address"
 source = "7ec2f80231e906b0d43735d7f4d5ab695d004b9d3fd3dcf5a087af48c33a672a"
 certification = "kernel-checked"
-closure = "c887c0dcd5b8256d1f1b740aba4f5fb0ce1b9aeb0afc9095f89f8e8513b065eb"
+closure = "8fab967b3cd14913b81c4b4aab8f89eb839689b647de74d2c71a5aa4034fe251"
 edition = "2021"
 
 [[root]]
@@ -575,7 +575,7 @@ definition = "isNeedsMemory"
 package = "uorust_certified_is_needs_memory"
 source = "2ec2afeaea2861325dece6440aa5a3ffb786a6f1e8083b13ff788aca378ed868"
 certification = "kernel-checked"
-closure = "dd24b25dfd88b90a8c63ccfbc94490d488a064fc947fff9c704db591d8840402"
+closure = "9079b3d9933baa3508f0cb8e4ba1a6fd226f512194b70d0bd01ba9cbc0e94d13"
 edition = "2021"
 
 [[root]]
@@ -585,7 +585,7 @@ definition = "isPointer"
 package = "uorust_certified_is_pointer"
 source = "f024bcb81a42d1295c16422042a80674e1654f1ee01a35ddb2f2ee805041de7c"
 certification = "kernel-checked"
-closure = "a09a2880166c37962bafb9736626ce76bb818c874248fb251fc3abb9069c32d5"
+closure = "a346429c5bd415396958f42659d06932b125d6374bf2e6206e56af0d5da49a00"
 edition = "2021"
 
 [[root]]
@@ -595,7 +595,7 @@ definition = "kind"
 package = "uorust_certified_kind"
 source = "9eb607a4cf3685a64ab918848c524453430f182819c0af087888560759902226"
 certification = "kernel-checked"
-closure = "22867635961a82de5bd668546bbef9ef4ac15c4a7489d10184e864ec07e04d7d"
+closure = "add15b44782ee2b225af86922844363430220915b78894605046b87074d341e5"
 edition = "2021"
 
 [[root]]
@@ -605,7 +605,7 @@ definition = "lambdaWrap"
 package = "uorust_certified_lambda_wrap"
 source = "3932e97f6fc95f1ca0be0266d73b2752102afc34db4881fafc5a3d7e27b64132"
 certification = "kernel-checked"
-closure = "ad29be4dd14b4c12bc7333019f8d9b130dfc2ce231f8a658f21dbb73393489f5"
+closure = "f8bb4dd4e3671c33cb5d2cbd7bbeed6a4151985aa37e65f84c18cf0760292f62"
 edition = "2021"
 
 [[root]]
@@ -615,7 +615,7 @@ definition = "lambdaWrapExpr"
 package = "uorust_certified_lambda_wrap_expr"
 source = "24ab696c25df7e85c672fd4b39fe81e9672674ec13811e8584e583260bd6c1c7"
 certification = "kernel-checked"
-closure = "bfbafab6d0030177d27106f1fb7fccbbc27497646bf27b81a6c80bd1a6541e30"
+closure = "3d7c9a7a629186b1d90c055c00f6f9a132c1f40e62e22c5296049959d6a13ee5"
 edition = "2021"
 
 [[root]]
@@ -625,7 +625,7 @@ definition = "leaves"
 package = "uorust_certified_leaves"
 source = "debe0cd2ba407fd02a1f232c3d15470804da4bf76d4c6ade73f8a9167627fa7e"
 certification = "kernel-checked"
-closure = "303085ef4327c546b12f577ca09f3ef203dcb8c702579680be2c89df017a7602"
+closure = "019f6587ccb1c58c7af7d310cab334f8eab3d1da30db1c66a53bf2971cd8f3ba"
 edition = "2021"
 
 [[root]]
@@ -635,7 +635,7 @@ definition = "leavingMatch"
 package = "uorust_certified_leaving_match"
 source = "320f40b84dc2f17e76d4a919fba6ceb0c910da65a4b2bfc123a54acb50551546"
 certification = "kernel-checked"
-closure = "bd7978be1301e5442c01684921c6d20aa869584d75ea819b12e4ca5c53052e4e"
+closure = "96765505e5193107dc145fb9db683806d601e14d98933d4c63cd7bfda628f12e"
 edition = "2021"
 
 [[root]]
@@ -645,7 +645,7 @@ definition = "leavingValue"
 package = "uorust_certified_leaving_value"
 source = "291f03a092d8f88a2be2e47d18692b33f468cacb696ab8aafadd931bd74d04dc"
 certification = "kernel-checked"
-closure = "86684089042b391d32d4b16ebf1108f2d9f61805ee32c61dc30c1bc627f1ac69"
+closure = "e417a29b6a83987c981c25941e426f5dcd409491c3962ff6cca0fe18bc3ab969"
 edition = "2021"
 
 [[root]]
@@ -655,7 +655,7 @@ definition = "liftMaxOf"
 package = "uorust_certified_lift_max_of"
 source = "7d7821dd4eb798360225feba9ca9fe911d6e3b1f2cc4279b3d4cd2d15754067f"
 certification = "kernel-checked"
-closure = "66f93acf992d82dff4d1607babaddeea77228752ce5aeef657f10480bea4d44b"
+closure = "bbcd320101d4ffc1cb8a73c345f1d46d4be3c046e0ca1feb6b8ec37db341141b"
 edition = "2021"
 
 [[root]]
@@ -665,7 +665,7 @@ definition = "liftPow2"
 package = "uorust_certified_lift_pow2"
 source = "7c8cfde1440491f0b6fac0758a1fb395a821385ccba0756935e28ff0317d6cc3"
 certification = "kernel-checked"
-closure = "dd9afe3ef36118f3cdf58ec4e058d8d19900a16cd91cb863d082c2fad286a613"
+closure = "a6893d340a6d6d0ffa61b7326ae0bfd8f0feb2b446a7c99b4573221196761107"
 edition = "2021"
 
 [[root]]
@@ -675,7 +675,7 @@ definition = "localName"
 package = "uorust_certified_local_name"
 source = "74973bcbdaa6f1715ece1ad2aa68ccef94bc0fdd8f6f5e4858e3c8dcaaeca7e5"
 certification = "kernel-checked"
-closure = "b733b1786402ad6eea50b9dfa9e1a9a7fb5436b2eb1a530c83051a19efca27e8"
+closure = "856d0fefcb15ae8817e5ba218d2bf072f2e3531d0fb488f540b14524f9d1d76a"
 edition = "2021"
 
 [[root]]
@@ -685,7 +685,7 @@ definition = "members"
 package = "uorust_certified_members"
 source = "55ad958b7926ec5f8b91d2afc04e346fb3fdd38074450f91163650e80cf8a64b"
 certification = "kernel-checked"
-closure = "65c44084b8aa185ce01d57e91a7c35be545bfbb0f302d482f7fe2a188a570a86"
+closure = "6304e87b35e932cfc1876726f989d243ec9c6ca417f80e1c93ce3f2bf207d06f"
 edition = "2021"
 
 [[root]]
@@ -695,7 +695,7 @@ definition = "memoryFields"
 package = "uorust_certified_memory_fields"
 source = "f20611f2ae1ca6be686b6e12428a2916f1e52147df6e789d948c732d28ca06e6"
 certification = "kernel-checked"
-closure = "7cfe42d89f433c587764a1288e394d6bfacce871b7ec6049559110a5a71b8b75"
+closure = "784e2deaddf73392044cb95ae1996ffb4aa4d0cbcf5018dfa10d26a621d01646"
 edition = "2021"
 
 [[root]]
@@ -705,7 +705,7 @@ definition = "memoryTy"
 package = "uorust_certified_memory_ty"
 source = "6974a33eadc50d56212e1ab509c32d84bc8a180aa17115b3244b2a59de3d4cb7"
 certification = "kernel-checked"
-closure = "77b13b695c07dfa7ead774fd2adf270a27e007a9bee52dace2e9db345dfcc305"
+closure = "b7831256993b2473d835cf4823165e8d586d49fda949e506f6b33bad209d4161"
 edition = "2021"
 
 [[root]]
@@ -715,7 +715,7 @@ definition = "mentionsWord"
 package = "uorust_certified_mentions_word"
 source = "31456715f5a0a224e0e4d86dabee2db9223711227fbcae7534b65d707aaec374"
 certification = "kernel-checked"
-closure = "ae5ef2d5739b069b550b2a495522e7dfad011c12544d63d2a3359565ac6f9671"
+closure = "ea4a29419f4bd18469bc13d49b6dda9cf023efbaf3f020c6cdc8f8bbc5356087"
 edition = "2021"
 
 [[root]]
@@ -725,7 +725,7 @@ definition = "methodCharAny"
 package = "uorust_certified_method_char_any"
 source = "99556739c741f6dfb765959cf9ddde1398e54bcc7c03ca57e5704ac851b0f8a0"
 certification = "kernel-checked"
-closure = "05fb6b6c2f645fb94786aed098f8a8f2b28dbc577d5aba9930b8505be20560f6"
+closure = "9fc23d6f4a33d9464bb71db5fb814e82366b61ff0eedca06251fa61d7c18be68"
 edition = "2021"
 
 [[root]]
@@ -735,7 +735,7 @@ definition = "methodIntCheckedNeg"
 package = "uorust_certified_method_int_checked_neg"
 source = "44d9b677684c0411a525aa6a6fa1c46f04fb1ce718db8ab854e60de8b1dfff8d"
 certification = "kernel-checked"
-closure = "1d83c8f8c4139a17c2419699898ae9a76b31a3f2fee9658dadb62dba3606b144"
+closure = "cbbe27ca57c02bdc0b8cb3b7a91258a77be8696dd6b3f6dc05926b31557a38e8"
 edition = "2021"
 
 [[root]]
@@ -745,7 +745,7 @@ definition = "methodListIsEmpty"
 package = "uorust_certified_method_list_is_empty"
 source = "d9c4b8eb311b20d639cc6549b4f43fd030991fb9dc2b0bf72a39268c20499f0b"
 certification = "kernel-checked"
-closure = "75b730dd8bf1495b0a3a505442cb4dc02d2407bfbd60786e97bee6a99dff156a"
+closure = "46c45edffa7e63a55e833e1324c4331e425ebb948288bcba543e1d223e6a2063"
 edition = "2021"
 
 [[root]]
@@ -755,7 +755,7 @@ definition = "methodListLen"
 package = "uorust_certified_method_list_len"
 source = "a4af4ca69516e5d8e900e77257285a334146fd4f4627760086bede4b44a3bd24"
 certification = "kernel-checked"
-closure = "a6ff3214f0d3c54bd7bcc4cd06b5284d232990e12721b0a659df660f9bf50c0e"
+closure = "43d198b40f4b13de7d993f74bef096cab324f051fd8e10fe12536bc3859c8b78"
 edition = "2021"
 
 [[root]]
@@ -765,7 +765,7 @@ definition = "methodOptionIsSome"
 package = "uorust_certified_method_option_is_some"
 source = "34e9bf50c967d147a10041bc2ebd48841ceed6b14f09a7ce37840d25e0413853"
 certification = "kernel-checked"
-closure = "1afa50dc214b18f95f84bd4f142b2594125ab648f1023bf9b1b280eb5c5321d5"
+closure = "dda98d46cea0643733f61091dd31c306a9196d9c36835636034759189c68871c"
 edition = "2021"
 
 [[root]]
@@ -775,7 +775,7 @@ definition = "methodOutcomeIsOk"
 package = "uorust_certified_method_outcome_is_ok"
 source = "1b9ca9d67cf67d4685df9e7d027e0a0ee538d1045fe3c26f7c6b2c1ff2753f70"
 certification = "kernel-checked"
-closure = "8f0ee43527ae475f3a6b924bc6f872a70aac032133988877db41d57ea2fe5adb"
+closure = "d47e60122813f806f905fa1867e3750909ca430ab714d29dc77ea5bd5c7c019e"
 edition = "2021"
 
 [[root]]
@@ -785,7 +785,7 @@ definition = "methodOutcomeOk"
 package = "uorust_certified_method_outcome_ok"
 source = "e1a2e07c2a9593ca4c2a344ef63170f0498aaad7cd8f4d2618f65def9d04f30b"
 certification = "kernel-checked"
-closure = "05ff6dc65b4b6a0c1da46488d3a25e9565434ec02c962c065122d709bd3d6050"
+closure = "715258bd09612b22b387429081dc9013d60c26ace2d9a973b34ad90bfb587058"
 edition = "2021"
 
 [[root]]
@@ -795,7 +795,7 @@ definition = "methodStrIsEmpty"
 package = "uorust_certified_method_str_is_empty"
 source = "e0ef999ea72cdb550c23064dc357e3d888ccc41f7f5462ff5325e1914eafee84"
 certification = "kernel-checked"
-closure = "466c300317a69168fe60e2e3e8e9a38667fbb2423258670941b5754ca9c38ea2"
+closure = "f577a7363b65b7272f0e02e238dfc4fcc51b604a5b638d95e1861da72a7793ec"
 edition = "2021"
 
 [[root]]
@@ -805,7 +805,7 @@ definition = "methodStrToString"
 package = "uorust_certified_method_str_to_string"
 source = "ddf93d69c6feb2388f7bea0506aa32e1b5fe7b4bfa1b8b524174fc9882747b85"
 certification = "kernel-checked"
-closure = "6aecc15142c0d9b92b7f039c0750c89e3ab10e4d744716baaf355bb8ab5b5bb6"
+closure = "0fc88f1fc4ff7fedd577039a06ceeab055286def0dacc5390f0db050c752c273"
 edition = "2021"
 
 [[root]]
@@ -815,7 +815,7 @@ definition = "mirAggregateKindPath"
 package = "uorust_certified_mir_aggregate_kind_path"
 source = "e60693b584c301b843ebc02d1269e705e55ff50d68a2fead6c706c0c2dfa46c5"
 certification = "kernel-checked"
-closure = "655445718c0c7f8b7359086ee9724738bc5015cc5e29a8c89741b142d3091fd0"
+closure = "fd8e68ae94c13b34e1d7d33cbb260647991ac6067b4746a4537b03f4f85bf101"
 edition = "2021"
 
 [[root]]
@@ -825,7 +825,7 @@ definition = "mirAssertKindPath"
 package = "uorust_certified_mir_assert_kind_path"
 source = "3b3457831f90c5b16fb27cd7e0e0fafd895f5e17ac6320d0c8d31774c71577a9"
 certification = "kernel-checked"
-closure = "e4f83327a0a6983ce8b701e6ecf88b432e6c46a0345b775b25b96d4e58876994"
+closure = "acc166264822c60b34ae5c33b3e5352d8b5929d17e6842ef6fbeb6b5d311806e"
 edition = "2021"
 
 [[root]]
@@ -835,7 +835,7 @@ definition = "mirBinOpPath"
 package = "uorust_certified_mir_bin_op_path"
 source = "d2f3e8629b53a9210a4081348dc79a951a78ec5425c9bf3693165ce093911865"
 certification = "kernel-checked"
-closure = "3785f8ec2878bd0184b1c6bc1a4ecbccae808c31550722ca9b94e1832699b9b2"
+closure = "bdc94b8ae33372cf7ddba656560d1e1a12735ed7709cd39f4808d7e882ac96c9"
 edition = "2021"
 
 [[root]]
@@ -845,7 +845,7 @@ definition = "mirBorrowKindPath"
 package = "uorust_certified_mir_borrow_kind_path"
 source = "b0a6505e2d3f0b0917c6a7da1dc6891189125274744c06333ea3b28a475dec86"
 certification = "kernel-checked"
-closure = "bd2c49a352224e12334fac84051a510dc566784f8e2534480c976c24c97b4484"
+closure = "4ce5e50344224e3a5a7d2bc5d9286b0510b5a29ead20cd78fc2ea7cefefd4712"
 edition = "2021"
 
 [[root]]
@@ -855,7 +855,7 @@ definition = "mirCastKindPath"
 package = "uorust_certified_mir_cast_kind_path"
 source = "b6cc5d8338b8bd2b37043a4ee58abf32157acbdf18e8638165bf8c2c5867c4c7"
 certification = "kernel-checked"
-closure = "e0130a68cef583b490e23d78284984d755f87f138d913a0ac2c4dd4d07b24667"
+closure = "75fb88d1a713291519129042ecd7b3befb6bf28cf6c49d2a36438dc3c4c3a5d6"
 edition = "2021"
 
 [[root]]
@@ -865,7 +865,7 @@ definition = "mirCoverageCast"
 package = "uorust_certified_mir_coverage_cast"
 source = "d9c1960f40d3eaa606f3dcb9a8cb1dbbac72b25edea6459e3ee0402180add533"
 certification = "kernel-checked"
-closure = "6dba211aa9ffdc85596e513968e14272c54ccb8e42dd4fba8c6fc14ca9c264e7"
+closure = "966a264c920fe34b2e3823caffcbd29d54a9fe61570a7628cbfd5ec344a40c71"
 edition = "2021"
 
 [[root]]
@@ -875,7 +875,7 @@ definition = "mirCoverageIntrinsic"
 package = "uorust_certified_mir_coverage_intrinsic"
 source = "da74df1004033c3a3e44f37e7825e1540098bf1b235822551ffd72fb09f94488"
 certification = "kernel-checked"
-closure = "13f2e42ca33884556e4fdd05d77e50671e685f1d3c54bc16fc0a4c4dc4c9227c"
+closure = "207c7105ce9e2269c606f66fb3a757fcf1f4a28ee7d52d48b4d0776447017942"
 edition = "2021"
 
 [[root]]
@@ -885,7 +885,7 @@ definition = "mirCoverageOperand"
 package = "uorust_certified_mir_coverage_operand"
 source = "69e9366d9cd869f8863acd7cda2c764ca1a02882660f6c2714bc17234d9a3618"
 certification = "kernel-checked"
-closure = "b3dba3d9af4c608e41da235c1f2eba61b8ca97a66b6e57ddbbbed86bd4cd8bb7"
+closure = "99182c178f29f57b058123fd33c23eaa9ebadf17c1d31238aa9585be7872db0a"
 edition = "2021"
 
 [[root]]
@@ -895,7 +895,7 @@ definition = "mirCoverageRvalue"
 package = "uorust_certified_mir_coverage_rvalue"
 source = "b59fadd2d988facd38248e8ebcd63ee79309e3bf1c2a886130a168777bbce7c8"
 certification = "kernel-checked"
-closure = "0e80681d8192c3ad8ed155d5dcc6adf18624877cf5c1fdb749340a4adb12063d"
+closure = "21eda21aaad545558b8f1c75dadf6c50d279ab11197731a813e7bc18868d093e"
 edition = "2021"
 
 [[root]]
@@ -905,7 +905,7 @@ definition = "mirCoverageStatement"
 package = "uorust_certified_mir_coverage_statement"
 source = "237c07560382a60fe16aae5c40e0ba0fbb1445da064e1ba46e5530ad0506237f"
 certification = "kernel-checked"
-closure = "5d5edb1122d15863d05e3bffd190438d3df2e880b689efff8f781e332c0e426c"
+closure = "d5a9d3a48ae4271fc99b82d7606f6969c41fa9131c5e3ba1c37e455eecfeee7a"
 edition = "2021"
 
 [[root]]
@@ -915,7 +915,7 @@ definition = "mirCoverageTerminator"
 package = "uorust_certified_mir_coverage_terminator"
 source = "c75e0a7ef5decc8df0f31419a3a645a710f1890b6e4c48d9eaeaf3cc9dfdac74"
 certification = "kernel-checked"
-closure = "c7edfbda8d68bff0b49f7d9d9381de8494a5f4a0b28347d2b1304855ec4a7ae2"
+closure = "79ddc48d611f80660bf708c7c6fc2e0a30062db608df4ff12abb8755432622a2"
 edition = "2021"
 
 [[root]]
@@ -925,7 +925,7 @@ definition = "mirMemoryAxioms"
 package = "uorust_certified_mir_memory_axioms"
 source = "7e70a8ed0f3d9302729d40b810fa3e2b33c9fa032faf2f509410b907b51ff230"
 certification = "kernel-checked"
-closure = "35d958ccf3eec0f4df040bccb0f4809ebb8e52f606c537278eba6a1f0d1c84d2"
+closure = "4bb3f9cfc152c55d18c1826b633381d6baadd44f85bdadf226b62727d3c8e68f"
 edition = "2021"
 
 [[root]]
@@ -935,7 +935,7 @@ definition = "mirNonDivergingIntrinsicPath"
 package = "uorust_certified_mir_non_diverging_intrinsic_path"
 source = "224ff1666fb4e14f3228858eb7eff38b6e7a14c4188329885ac431114dbbb7bf"
 certification = "kernel-checked"
-closure = "c57f8736fdeae4b05faa5aa0ae355dc5073b2fedb8eb31d96340ab84fec80b52"
+closure = "e5f45e1189a1c61dcd3f16101dd842864fcfd7713418b22c7cb9613a073c2402"
 edition = "2021"
 
 [[root]]
@@ -945,7 +945,7 @@ definition = "mirOperandPath"
 package = "uorust_certified_mir_operand_path"
 source = "790a0b04257c4de9723e75f384e40a43121d24e29368ff28a116bfaab4b77b60"
 certification = "kernel-checked"
-closure = "08eb9c0162a7cde84a0b5dd3c9dcc9b7c9a60d2680aeac712951b2f51e2b9c0f"
+closure = "f396d72c18a51fb59f05b8ba7ca042543739a1d56a10143b49050f3c2cdb354a"
 edition = "2021"
 
 [[root]]
@@ -955,7 +955,7 @@ definition = "mirProjectionElemPath"
 package = "uorust_certified_mir_projection_elem_path"
 source = "c63280560916f035c01aa8c5062dd0f8f6af2e5d3a68a27b23702621e9bff2bc"
 certification = "kernel-checked"
-closure = "7bc143ba29377d9b9d5944ea9b73ac6385c6113c3ef7dd7ff22a2770a8f58ce4"
+closure = "32ebaa7ec9d3fc82519e45642230d8ee9f4ef80dfd764ed3e129fda937aa5a61"
 edition = "2021"
 
 [[root]]
@@ -965,7 +965,7 @@ definition = "mirRuntimeChecksPath"
 package = "uorust_certified_mir_runtime_checks_path"
 source = "c45226e9740b682fa2524db3a1c77782cbc55141a31332702b9b9646e29d8f62"
 certification = "kernel-checked"
-closure = "1e2e3c8322740cbae365f3722b336b2dd1cb4ec53c1bd1b9bcf24a1f0d2f363b"
+closure = "6aca5b206437e242a105bb2437abad4f8215ebbd914d62c7ab9116b23e9f48db"
 edition = "2021"
 
 [[root]]
@@ -975,7 +975,7 @@ definition = "mirRvaluePath"
 package = "uorust_certified_mir_rvalue_path"
 source = "3ce332c340d82a549df119f2b95f5e33519a571eca89457d5679ff3db16cb090"
 certification = "kernel-checked"
-closure = "839fd32ed0685fb16c4e36c1c2e7d0eb1bc89a564a02dc4075ba4657dece1f7c"
+closure = "9d806a22e320f43f773a995b916b9a678924c7280302b048a4262a4331369691"
 edition = "2021"
 
 [[root]]
@@ -985,7 +985,7 @@ definition = "mirStatementKindPath"
 package = "uorust_certified_mir_statement_kind_path"
 source = "df6de68b18848fd37243d97a5886460dc1dbadd9ed0710002cc20250b34d0dd9"
 certification = "kernel-checked"
-closure = "65a623a382449107fae227a9a51acdb4935b946cfa2a0ef506f0f7ae36ac90cb"
+closure = "dc03291740d5fe60727fecd6fbaf0bde2f50df383edeb30a5427313fa014eb0b"
 edition = "2021"
 
 [[root]]
@@ -995,7 +995,7 @@ definition = "mirTerminatorKindPath"
 package = "uorust_certified_mir_terminator_kind_path"
 source = "315b764b8af467784b6a3698710b2a5049f11f60a57da59bbefe53a32f271b80"
 certification = "kernel-checked"
-closure = "f263bfa21e7a7c701195c8949c0ddcb22f17d351bb3b04d19f195188993914c2"
+closure = "444630037c0cfee23c73e8d3baa956f545ea8dbb32d7278f407c1a2e98a0c87d"
 edition = "2021"
 
 [[root]]
@@ -1005,17 +1005,7 @@ definition = "mirUnOpPath"
 package = "uorust_certified_mir_un_op_path"
 source = "8ea84703ddbb73dea4b72287895dc1aec090bd72028fd617fbbd67ea1b89ba27"
 certification = "kernel-checked"
-closure = "2518a314adba828bb5b2427923f6aa81283d3f9914f4bdd6c46d546fe7d667ef"
-edition = "2021"
-
-[[root]]
-function = "uorust::lex::Module::path"
-kappa = "3b5b843d81bcdbe59266384d6ce729152de4484a5c5e03df2ceaa513d4d5cadd"
-definition = "modulePath"
-package = "uorust_certified_module_path"
-source = "f92c6be4bbb96f8ba9881cac833bb761f6644b1a8894b5c762b669671ace6360"
-certification = "kernel-checked"
-closure = "180eae7ac2531647bfba419523b97cb52964eb99e5b7b472036a52284dda25a3"
+closure = "108c1a2bbacbbcbf7952c5c7fd2ebd577ba5a8f48a15849e3534401b5dffb18f"
 edition = "2021"
 
 [[root]]
@@ -1025,7 +1015,7 @@ definition = "mutTarget"
 package = "uorust_certified_mut_target"
 source = "41c940c1cf359e97df74012b9c5a977625f860cff2eb8b8639e04cf28904e0f0"
 certification = "kernel-checked"
-closure = "7bd1ac3e99aba9019203c34a0f06588a0af9184dbead929cb69f66752de3b6fc"
+closure = "23ec6cfbc43d5881f94dcd30ea3b841f3842dafc5e3171870af9e39a7aeb5eeb"
 edition = "2021"
 
 [[root]]
@@ -1035,7 +1025,7 @@ definition = "nameTaken"
 package = "uorust_certified_name_taken"
 source = "9bd6ff7d238fbdf32a4b7985c1e07c70ea8eb36433800e9069beacf28827aac2"
 certification = "kernel-checked"
-closure = "0324e750f8f72b5523269156b4e9dc1eee18c665a3e108fe9a1a639ec2cfa72b"
+closure = "a3d6b998035236fe781f9021d6a8bfa7e26714b93589f9e40b3d7e862efc153e"
 edition = "2021"
 
 [[root]]
@@ -1045,7 +1035,7 @@ definition = "namedField"
 package = "uorust_certified_named_field"
 source = "123d6bdbaa30c3c0a6e54143df3c7de980db09c2c01aae8196769c542f582497"
 certification = "kernel-checked"
-closure = "15402e0d1a716620fbaad70823ceb51413e665673f9c95d924afa14b9f40d62d"
+closure = "4440a5925e382fdc9dfea48c8051dfbda85660878d72c2a20bd0d5c63f507350"
 edition = "2021"
 
 [[root]]
@@ -1055,7 +1045,7 @@ definition = "namedIn"
 package = "uorust_certified_named_in"
 source = "5f62334596532a3aaccac24bd8a3f838c508581d9724d3233c865ec3a5aa4fc9"
 certification = "kernel-checked"
-closure = "4d6d7c990e42f98b621822609894ca806c9315662867a9bad63f5c9ea91380b0"
+closure = "1c1004a33588dbb7b4d25652c244283d869f2a76922b40e0db452d52df20217e"
 edition = "2021"
 
 [[root]]
@@ -1065,7 +1055,7 @@ definition = "needsAddress"
 package = "uorust_certified_needs_address"
 source = "2871427f4aa86b8f7b061fa0bcf76661c120f11f4d673a3f5c34acf432d215eb"
 certification = "kernel-checked"
-closure = "2858107f43170795a41f202a9862f95d9de90a6346609bd1bdb82bcd39e0c0a3"
+closure = "7ffb7f505e6081cd0361a69573b4033025a0ed18dabe2e9808d3f5d24386672c"
 edition = "2021"
 
 [[root]]
@@ -1075,7 +1065,7 @@ definition = "needsMemory"
 package = "uorust_certified_needs_memory"
 source = "585f8448ead7c26a6c8adba4aa6e6330397ed0019a6dbc9bf1e036892dcfe895"
 certification = "kernel-checked"
-closure = "e1ce0f22ef369d09ac2a1f0f0a4bed1dc16803f34df4f2b48804029eaaba5b57"
+closure = "883d1996ed0ec19d16d1ec5a5e9c337fd640f7a1fed49d813563a4690621ad0e"
 edition = "2021"
 
 [[root]]
@@ -1085,7 +1075,7 @@ definition = "noneOf"
 package = "uorust_certified_none_of"
 source = "0117556ea23a9ddb05064ab14437a6ad31a4cd70a45ecb9fe08df13496e7adea"
 certification = "kernel-checked"
-closure = "b018cec122a4571e375ba4393a0ba7c172ce4db320aab58574be2f192e9c3a7b"
+closure = "8cf0433a0a87d80290cb55e68fe7cb8c958d0c7bfa5092f65ea2a58073423b66"
 edition = "2021"
 
 [[root]]
@@ -1095,7 +1085,7 @@ definition = "of"
 package = "uorust_certified_of"
 source = "5a392ffab0ba004a6e22556282c89a04c4dbaf0ce1818efee39b96e1ef034f83"
 certification = "kernel-checked"
-closure = "5dd8e358434fe141df81d378909a6ae7d8c32e005c1a9f7ee47a275a9d28fcf8"
+closure = "a419abd546729b2fd0329d5c2719841a193458b6a0676fe8fde9375604104387"
 edition = "2021"
 
 [[root]]
@@ -1105,7 +1095,7 @@ definition = "optOf"
 package = "uorust_certified_opt_of"
 source = "fb00a025fdddfa5e224e61444304b749c16d7e5c32c7d94a504fd17112f6d7ed"
 certification = "kernel-checked"
-closure = "ef471d2d23187dd29262fb4401eb941ed7b54cd7547f8a9d17f4d8d26b91bec1"
+closure = "d3955c2d16a59ed9b91a8d565033c925df88375beb8e8999e6981fa14b332c52"
 edition = "2021"
 
 [[root]]
@@ -1115,7 +1105,7 @@ definition = "params"
 package = "uorust_certified_params"
 source = "8a37233ccecbdac9889a52a4e13c2ada78ba61327cba5c52c6ece079ea41e6dd"
 certification = "kernel-checked"
-closure = "83bae612a690775efbb636071695a3585100d3bcf96e09ef5287bd28d1de7f03"
+closure = "1140f0f64c7d3870f7f8671b20cef43009e1e291238052596524ed86e4a00122"
 edition = "2021"
 
 [[root]]
@@ -1125,7 +1115,7 @@ definition = "pascal"
 package = "uorust_certified_pascal"
 source = "ac247566cfbd25eb5fea5371aefeced42066a2d9ef732411ee05a4d6c024626a"
 certification = "kernel-checked"
-closure = "adec8ca0072b28c8334ba418f283eaafa43faddaade4bca38d27839b7e40cb0b"
+closure = "5c5882c6027fa6ab6531b3b56a3ebcbbbac6607492beb54e68c49f982ff77f31"
 edition = "2021"
 
 [[root]]
@@ -1135,7 +1125,7 @@ definition = "plainCell"
 package = "uorust_certified_plain_cell"
 source = "5c000133c9d0870bfa090d5dcb242289d41c6965679fd8e6a54af135abd6cff3"
 certification = "kernel-checked"
-closure = "4965daff4a5ea0a004e46475ff17454b44ef6044c00a691c33e82834b2e25683"
+closure = "111252c5660b75baa458249b89a337cf832e47743ab328b7149014dcedcf1fe7"
 edition = "2021"
 
 [[root]]
@@ -1145,7 +1135,7 @@ definition = "pointerFields"
 package = "uorust_certified_pointer_fields"
 source = "f30c2ab5c90a4e000f22f76b8b39c1cac8906712b1827e1930cd19535f48da00"
 certification = "kernel-checked"
-closure = "75cffa11a2b68b1e77e05b1edfc236b472c17f9386f56d6d92400ced8f489e03"
+closure = "f9272034e121809a490e35a7b5f1d685a03939d369546fd7dfb83ec0b608a919"
 edition = "2021"
 
 [[root]]
@@ -1155,7 +1145,7 @@ definition = "pointerValue"
 package = "uorust_certified_pointer_value"
 source = "73310eee73a574a6158603e724ef2530bd9f300dcf9e6159c25be8d99c2e2d34"
 certification = "kernel-checked"
-closure = "39c5ac7104cd5f89070b5b3c84f82c936372c57523ecbbf095971ae7608da691"
+closure = "664ca01e1fb3980965a79a4b1d62fca1bd6a67dabbdfeb672229db9485534124"
 edition = "2021"
 
 [[root]]
@@ -1165,7 +1155,7 @@ definition = "pointerWidth"
 package = "uorust_certified_pointer_width"
 source = "78cca21bd9cb62dcf1362ff623d870bf022b2a931d78cc62d15a28e4bc1e5c1f"
 certification = "kernel-checked"
-closure = "0b4656ce7ef7b88266d1f4ee0bec862d37fc776087c13c1548c9e79dc7cef833"
+closure = "2a60a6a9251a18960911bfcd0a7f7841bccf531b9e96b7c90506a2111fbf9143"
 edition = "2021"
 
 [[root]]
@@ -1175,7 +1165,7 @@ definition = "pointerWidths"
 package = "uorust_certified_pointer_widths"
 source = "635551365d8189f8d81a14e8906670dd5df87758fc587ee0e17490cf0c20e661"
 certification = "kernel-checked"
-closure = "8acba02932ba9770609cf8a3631030f66357f2f7b06566a201c028a5b1f65ac2"
+closure = "b67953945925796a9e1e13bc987f623be3c3810210b5904fbb7b96e07b423afd"
 edition = "2021"
 
 [[root]]
@@ -1185,7 +1175,7 @@ definition = "projection"
 package = "uorust_certified_projection"
 source = "3c36310f1eb54129fe13e29f362715be2bd31d8af77e0c94b06900ebbebd532b"
 certification = "kernel-checked"
-closure = "9985cbb1e5aa8ee3d7d6be3f55114937882b5092b85fa2a9179d49899481683c"
+closure = "d1f0a7aa1f8d5ba160804b8e05b45f3dd0093e1a1c5462f30fb8730d0b31be8f"
 edition = "2021"
 
 [[root]]
@@ -1195,7 +1185,7 @@ definition = "reason"
 package = "uorust_certified_reason"
 source = "6b82265afef414bed09ef5e0bdacc5c0e513d61a5a9b99371ff67f5a68e2bee8"
 certification = "kernel-checked"
-closure = "f63c185d6fd3e3fa7bbf3d1014037725cd651d9df757fcdab3f10ce88fe50174"
+closure = "24714d425b2d065e5861d97821cbdaa3497cad30d4e2188c3bcd5c3f82216acc"
 edition = "2021"
 
 [[root]]
@@ -1205,7 +1195,7 @@ definition = "referent"
 package = "uorust_certified_referent"
 source = "0dcb52ec8c1240a5584343cb1673ce1b767b3ac58e16ab5b71deb5aeaf277088"
 certification = "kernel-checked"
-closure = "eb304efa1060384e116bc7c20354c5a58f99252885edb0d10f45e8b602659c0a"
+closure = "56749088868e190f84b53a1afd546e339060a7a40b7f337ec03727242ae582b3"
 edition = "2021"
 
 [[root]]
@@ -1215,7 +1205,7 @@ definition = "refused"
 package = "uorust_certified_refused"
 source = "20ab532918365c0b4b5acdc6ef7ee7b74909767bf18d08d3759c596c467e1af0"
 certification = "kernel-checked"
-closure = "6689fc14fe74cee25295ebb284d971aae319c8270f3157cd097dfbedbca93da7"
+closure = "4121bd0c890c088df478938dd333f21ab96f354677a75eb508d2d7ab0b43efbe"
 edition = "2021"
 
 [[root]]
@@ -1225,7 +1215,7 @@ definition = "residueCode"
 package = "uorust_certified_residue_code"
 source = "33cb6e6ea42ca12c1c1a158f751b6e9ad5a0352a9f1687c6d5d9c8ce209e6c59"
 certification = "kernel-checked"
-closure = "b2bd16d913d11dc1b53712452a6a5baab06d4de0c719b54028eba5e504507db5"
+closure = "0bdb1a0fe58a7636da71a51d784be60cc2bb8f90b4a5b55cedc945adfeb7f4c3"
 edition = "2021"
 
 [[root]]
@@ -1235,7 +1225,7 @@ definition = "residueDetail"
 package = "uorust_certified_residue_detail"
 source = "ab455e436ef5f32bedd57d1cfd69f2bd4af4e219291a94515e6de4ec4a7fc8dc"
 certification = "kernel-checked"
-closure = "db1dda258d6e36a4d65fae96dbc3185fc20e2bb52bccae239d82f38c67d6b05e"
+closure = "51e975489b187f11c6de7a8f75a50c09f434cf1d9240c1e4c9002f65967f6107"
 edition = "2021"
 
 [[root]]
@@ -1245,7 +1235,7 @@ definition = "returned"
 package = "uorust_certified_returned"
 source = "772c132c272bc110e97ea534da8966eda4937ce0d313e5cad64cb49f86bf9e94"
 certification = "kernel-checked"
-closure = "eff36e75c5987b1202f024a1475c80b68edfaa34c3713ca3d4835e080b92ed9a"
+closure = "57c4a2c6e0e8b6c1ec953df5e684af27470d3e66fbe7c81d530b4a87078b5ceb"
 edition = "2021"
 
 [[root]]
@@ -1255,7 +1245,7 @@ definition = "runtimeChecks"
 package = "uorust_certified_runtime_checks"
 source = "d2ec2b926c5773bdc89f646c670918e23e95ee162c6bfde645a483f74c524b6d"
 certification = "kernel-checked"
-closure = "be5f73dcdebf31f953d8d3cfcacf83b61858695ca62ba0b269b2d3eab3fa8ac6"
+closure = "02cd0afaee72e2192b2b525603b5b757c8165944439ef2eae5173fd701ac9484"
 edition = "2021"
 
 [[root]]
@@ -1265,7 +1255,7 @@ definition = "sameConstructor"
 package = "uorust_certified_same_constructor"
 source = "dc24e62147436c62df12106519ad6025a5d8706ea79bddaf041325cbfe2a2741"
 certification = "kernel-checked"
-closure = "6364f684590f020efe97a424609e56256d5f14b855452a788876164e8b169d41"
+closure = "c98c87c6e766789892235ed6f1e7c59d3bb30252321f682f4dce14f0f86e1195"
 edition = "2021"
 
 [[root]]
@@ -1275,7 +1265,7 @@ definition = "scalarValue"
 package = "uorust_certified_scalar_value"
 source = "bbd7582b514a349663811a827409766794bee3c54bfd799324e2c367e5a18af2"
 certification = "kernel-checked"
-closure = "39e5dffb17e59c4824b1a6d5fa2fdff85dcdaa55b5fe4859c25254ae14ead21f"
+closure = "765cb12e67c731a4f0ee413188f4abd85df701f0dc5c0a0704fd26625a5d4db8"
 edition = "2021"
 
 [[root]]
@@ -1285,7 +1275,7 @@ definition = "settled"
 package = "uorust_certified_settled"
 source = "e77a06e9822b41c577c9f6e7e79a90b13b2cdf932183e87b46611bb0b1253621"
 certification = "kernel-checked"
-closure = "693e6e28afc8d573440169fe24ee5b83ca6717c46cfec58d0e9bfa146b7da9b6"
+closure = "60ebdefb23284d3082a3375062fcc721d202c16dd5ea4e1dc630c7c1bb31d851"
 edition = "2021"
 
 [[root]]
@@ -1295,7 +1285,7 @@ definition = "singleField"
 package = "uorust_certified_single_field"
 source = "82432eba744b0097700a50332e8d3ab5807c4818a94a36e6f263c67614526913"
 certification = "kernel-checked"
-closure = "1b9c592d81f2df44d67b9d52902f9920ce78472c1dcf54b4bb1d82080f673a76"
+closure = "dd871d3745f42d2dd944ee523b6fbf38d3067ffda82c6500bc84f6100ff51f98"
 edition = "2021"
 
 [[root]]
@@ -1305,7 +1295,7 @@ definition = "sizeSuffix"
 package = "uorust_certified_size_suffix"
 source = "69fbb00db52fcc15f0cad884c092a7b020e64e7aad6e5196837cdaed3e78c2ab"
 certification = "kernel-checked"
-closure = "f68552fe313ca33e11c5cd27aa437687f8d674cf547c5d525586d37d78bb4e44"
+closure = "4c8079da57ac9479d517b04854599077a9d4ce4b834ca520654fbe786506fb89"
 edition = "2021"
 
 [[root]]
@@ -1315,7 +1305,7 @@ definition = "someOf"
 package = "uorust_certified_some_of"
 source = "b37b75408dcf67a140132adf6aa70a6613642f4aa3c4d3c2b06593a1ea87cd64"
 certification = "kernel-checked"
-closure = "eeb6128145e03629524533638abda1037fbd318a1ddffa9e476920effef2a7e6"
+closure = "c4eae483c48aefef7453fd570a6b6300f69cdd91ae0688b3e753f0f1648d934d"
 edition = "2021"
 
 [[root]]
@@ -1325,7 +1315,7 @@ definition = "someValue"
 package = "uorust_certified_some_value"
 source = "6d4dca15067df227de6f27ac4174b919c8c59aea66875abba9a14a47769ebd80"
 certification = "kernel-checked"
-closure = "dbd6415e50211f1605e1c63866b7e21aa6e1aa2b43ff5fc7e9a0882ae850cad6"
+closure = "638d105383418d5423f71ba8e7449aa1bf777b22c1fba4128e7a5dc09e90232d"
 edition = "2021"
 
 [[root]]
@@ -1335,7 +1325,7 @@ definition = "stateExpr"
 package = "uorust_certified_state_expr"
 source = "dd0e66f81583d28bc97b533350ccf97ed5780be851ad61ffe0ee658f22d1e0fd"
 certification = "kernel-checked"
-closure = "2a8c53508e7590c3058c31e7d6c9d2dbcedaf20a8500f67d239448a626306fbc"
+closure = "fc5c12fbd536b8ec55818b67f1be915f0fb36bcde204d131501e409e8e23ab2f"
 edition = "2021"
 
 [[root]]
@@ -1345,7 +1335,7 @@ definition = "stdPath"
 package = "uorust_certified_std_path"
 source = "2ba8c173b781432178c4e85725da97b9a6564f967189822b580054ef62ec9a72"
 certification = "kernel-checked"
-closure = "97cf65b85bd8534015c668d8e283277cb8bb476a8353869ae980018a5893039c"
+closure = "f7ccab889a22839a4925108ea3560ae760954757723925f402fcbdb0b6206bbf"
 edition = "2021"
 
 [[root]]
@@ -1355,7 +1345,7 @@ definition = "structCells"
 package = "uorust_certified_struct_cells"
 source = "189600c92214d91ca27738e788581278703c6ab3cae4837dfc26776b8668f057"
 certification = "kernel-checked"
-closure = "9ca86675552552be0777e0ea2ef29daa469313b6d1bb947e544c6fe94f68c66f"
+closure = "77de77305cc3d727d7863b58065ccfc14e873ecbf965e1dac2c588d8612a671f"
 edition = "2021"
 
 [[root]]
@@ -1365,7 +1355,7 @@ definition = "structValue"
 package = "uorust_certified_struct_value"
 source = "980b4bb36d13dc434c5e7121f0b295fecfbafe9a736cb48f6004c38381580646"
 certification = "kernel-checked"
-closure = "bf5f303c1886839feae5ae3fde4d415be9893aade48959fdd0ba0ef7a7aac029"
+closure = "11b60ddd5bc53444d6a17aad4f214bb850ee5755531b2cb6f4bb77262d6614d7"
 edition = "2021"
 
 [[root]]
@@ -1375,7 +1365,7 @@ definition = "thenRest"
 package = "uorust_certified_then_rest"
 source = "bee24dd3c81856b475708876cf6b47ba391310fe445b9a7c4bed59c6180f875e"
 certification = "kernel-checked"
-closure = "caabe30ba760e5038acc7acd18414979ac7345f42f2f4de998cf2d5e117b2693"
+closure = "396e1f9f70675dea905596e351a56923cc8ccb5593ce983d315b87c7f873b316"
 edition = "2021"
 
 [[root]]
@@ -1385,7 +1375,7 @@ definition = "throughPointer"
 package = "uorust_certified_through_pointer"
 source = "7893473a6eb9404d4de1782bc99226fa5e7ad73a3fad0f16da486f1c20742049"
 certification = "kernel-checked"
-closure = "ecae6be72a3eff75ea1d72d30f32f9d21838debe99f8ab16ae8074849338c521"
+closure = "fe180dfbb3322394e1ae28f12d3399ee758dd22ad502b698e4310fa7da8c8d35"
 edition = "2021"
 
 [[root]]
@@ -1395,7 +1385,7 @@ definition = "trialAdmits"
 package = "uorust_certified_trial_admits"
 source = "72d85baca581f79c65c5844a18e565291b269101781ea301a74baa26186b5ad7"
 certification = "kernel-checked"
-closure = "a1080383c2b9904d22b22da7fa61f8dcc1d2e9044c0c75959f2ea38f12f2b5ca"
+closure = "299f1d20b431cec91fa5738dd43e0ecf85037e2e8178e93ffec12021cc98f831"
 edition = "2021"
 
 [[root]]
@@ -1405,7 +1395,7 @@ definition = "tupleItem"
 package = "uorust_certified_tuple_item"
 source = "bc1b9adce876ca73b9e60302824efa70ac13ce3529c736e03ed9071e10b3af8d"
 certification = "kernel-checked"
-closure = "d45f33572dc7b5a144fc3c5f9ceedb9aced1cca43eca3c7c5c343abaa1f75103"
+closure = "562f9dd004443682810b4a37d51ac9051801a827fb518d4e6973d69df6f58d6e"
 edition = "2021"
 
 [[root]]
@@ -1415,7 +1405,7 @@ definition = "tupleStruct"
 package = "uorust_certified_tuple_struct"
 source = "8bb4d3762f2f68d6ba900992c31fce24c29d8f85fd3f538a13a57eb1ade3fe30"
 certification = "kernel-checked"
-closure = "cf349f2ec544f66f8911db5b191787fd6e4dced18de2f5d88f0d26c3a9c9d7b7"
+closure = "c6f7eb5b9025da135e6e9ebae1bb149e3ca603d0efaca7632ebbfc0967b82a66"
 edition = "2021"
 
 [[root]]
@@ -1425,7 +1415,7 @@ definition = "tupleValue"
 package = "uorust_certified_tuple_value"
 source = "9e88a9f0b576a799c14866c33f493006d41674ea22b38933275fc946e0492b28"
 certification = "kernel-checked"
-closure = "539a9641af5b7b0b97d8437051791964d57cb5a19a8fc25359f4a80d6776eef2"
+closure = "21e3650311f018e083646d1c2a28eaf10a9547f06369e8ba25242cd5659ee711"
 edition = "2021"
 
 [[root]]
@@ -1435,7 +1425,7 @@ definition = "typesAccessor"
 package = "uorust_certified_types_accessor"
 source = "83b57d4f012ac2fbe05e3b1bdce5e2e38cdf1707cc6846275b9deff07bd58dfb"
 certification = "kernel-checked"
-closure = "fbe75fba845b5a6c192b48b6934eeeabd369292cdb554b935349f02d099e0212"
+closure = "7ce78558087bbd9fcf715b239d9cc7c2f8e65f9bb79f6def7c6a681c30687912"
 edition = "2021"
 
 [[root]]
@@ -1445,7 +1435,7 @@ definition = "typesBoxed"
 package = "uorust_certified_types_boxed"
 source = "27696a5f559ed3dd9251c9d9b65a0b5a8fe80e69ad2b61993a1ef2173813e986"
 certification = "kernel-checked"
-closure = "75c761b608b65a6ee131c12f09ccb7ddea70c1e4a48d08c00f8ea3af8bada77c"
+closure = "2cb77ff3956e742ddcd43976f0751081b46f4ec9b8101785a0f083a2aeddf1b0"
 edition = "2021"
 
 [[root]]
@@ -1455,7 +1445,7 @@ definition = "typesDeclares"
 package = "uorust_certified_types_declares"
 source = "336d6ae5361d598ea55da47c8e13586078adcdc13b25e23546e8f1e94077fcfa"
 certification = "kernel-checked"
-closure = "3626439cbe1a9fd6082e72f2f55ef067dca05d30c1a677e4d294838454ac08fd"
+closure = "583dd7a5d78b66606499ff8cf487a1caf2263ec3e2e25ff4fe085acc22d927c3"
 edition = "2021"
 
 [[root]]
@@ -1465,7 +1455,7 @@ definition = "typesFamilyOf"
 package = "uorust_certified_types_family_of"
 source = "5f5f64226e821ff3164cc161868393854e9e9e8bd330e29f15ce65ffa43d8628"
 certification = "kernel-checked"
-closure = "97205d6d7a8b6a27820ee12345e65e5abf3137d244764733eea2b8b21f424100"
+closure = "bc4eeef10902e12d2b8ecea0b65d80f12646b34dabe756b031254d21fc3dc2ce"
 edition = "2021"
 
 [[root]]
@@ -1475,7 +1465,7 @@ definition = "typesHasData"
 package = "uorust_certified_types_has_data"
 source = "e934fefc8a4a1ab35873da9fc9b6be2a923158a0fb6323b2837d7c92c9cae615"
 certification = "kernel-checked"
-closure = "945e649c33bd018adfca71598b919e09731c6d002f7fc76fbc60790b04864d6f"
+closure = "3a04d5894ca6c0a60a96e3cc3ac4d0673c99b45dcf01e962e6ac1b7cde0d5b04"
 edition = "2021"
 
 [[root]]
@@ -1485,7 +1475,7 @@ definition = "typesResolve"
 package = "uorust_certified_types_resolve"
 source = "21dde66ddfefc1a28d2adfad877325f89f6015f19c527371be4464a93591809c"
 certification = "kernel-checked"
-closure = "7e156ccb2f346855b16e8ada137a4397da08bf84f6035ad2c880ce3d9e270a8d"
+closure = "253349c0e67fb7a16d93e463965001f2298f72576c5a54707d26b9027b576fa5"
 edition = "2021"
 
 [[root]]
@@ -1495,7 +1485,7 @@ definition = "typesSizeName"
 package = "uorust_certified_types_size_name"
 source = "2f201716e3acf38575e3f229017000768765b65820fd71e1c2c74b33e07c93ad"
 certification = "kernel-checked"
-closure = "d03707c2d7c22204ea8366fa59251baef08e70d72a272fb7ecb95b41d64f630b"
+closure = "400880cdc1a5f1cb547dc5f248fb902e50e5e76107beff65c76de3b292946273"
 edition = "2021"
 
 [[root]]
@@ -1505,7 +1495,7 @@ definition = "typesUnnamed"
 package = "uorust_certified_types_unnamed"
 source = "ebb887f5cf94a74f606b459fdfd1dacf6e6626590a69ab12f3c928b86663dd5b"
 certification = "kernel-checked"
-closure = "734f92c81f8ef64eba550cd4b6b1a54e510135fc37f2ec2d79550d11c97e7651"
+closure = "28c3cf7322829d6178045ce773a3665ef5b305aecedb5b9b481c20844505c31d"
 edition = "2021"
 
 [[root]]
@@ -1515,7 +1505,7 @@ definition = "unicodeProperty"
 package = "uorust_certified_unicode_property"
 source = "4ea68e98a816bca6f9e2f2634d858146fa0c192d5bd51cfc12d3e91deedb7feb"
 certification = "kernel-checked"
-closure = "f898eed36c4eebbff18f0cc2db5f5b77a7ddd0ace562c5f78abee3ad6b294ad5"
+closure = "a6358641b1ee0f011de77fce8c3afc6848291119d5052335edbc884191e62c2d"
 edition = "2021"
 
 [[root]]
@@ -1525,7 +1515,7 @@ definition = "uninhabited"
 package = "uorust_certified_uninhabited"
 source = "d1592690054d900a109061d72be77c3fee1681fcb3be3a1496ef2d281155564e"
 certification = "kernel-checked"
-closure = "4e2c3afcc03fa9adbb87b11905674badf3ef3b58120b4d9b23af246260234f48"
+closure = "e05bb8b5ca932fdc7818fb4f3b5611265f84a9ce7cc0f1098f8ae67a89a5f27f"
 edition = "2021"
 
 [[root]]
@@ -1535,7 +1525,7 @@ definition = "unop"
 package = "uorust_certified_unop"
 source = "734625f90133eec015da9aaa38d6b7a1ee1ecb1cf74c0475349c88545817c957"
 certification = "kernel-checked"
-closure = "bbbb61c9155f5a040dd87d8bc2a7b8acb21ba06fe2e71b2577d773f906a20c20"
+closure = "10f477d6b57946eea69bf05b59763424767021a2d49b21a461f247355415f072"
 edition = "2021"
 
 [[root]]
@@ -1545,7 +1535,7 @@ definition = "unreadShape"
 package = "uorust_certified_unread_shape"
 source = "636500a7665e65961a3bef2876d1ed4102215531f72167301c71bb75023f8303"
 certification = "kernel-checked"
-closure = "f39f0e581f8ac84e814f2632332d48a56b52bd7f10f6cfa14bf9610b96280ca0"
+closure = "29977dd66dca4e4e991bf854a830483a9b3e3528c1b9240e0646cda0b6140059"
 edition = "2021"
 
 [[root]]
@@ -1555,7 +1545,7 @@ definition = "untyped"
 package = "uorust_certified_untyped"
 source = "5e8f62d0124852636d016b2b2ae668e59d57c2a780574545dd6b4d593cebaf9c"
 certification = "kernel-checked"
-closure = "13f47dce36be70ead3f9a842ac8346e81e8ddaea1695138807778486944c37c8"
+closure = "5665a3db5c51efd0472680d10d96c5963b06ab56d8462058cc269f5ac6a20125"
 edition = "2021"
 
 [[root]]
@@ -1565,7 +1555,17 @@ definition = "uorustHelper"
 package = "uorust_certified_uorust_helper"
 source = "2ba391ef93ebdd3fbe4934f3a6424318ed5cd85fc168e711f0bc00bd76c2d135"
 certification = "kernel-checked"
-closure = "8150720b5845f008ccb940f83b1f128f509b06ae21b5728c8ece86cfd58409ad"
+closure = "c640367e29c5eab079228b2ac632f971e4d12cc2347f9d58e1f8218a65374844"
+edition = "2021"
+
+[[root]]
+function = "uorust::lex::Module::path"
+kappa = "3b5b843d81bcdbe59266384d6ce729152de4484a5c5e03df2ceaa513d4d5cadd"
+definition = "uorustLexModulePath"
+package = "uorust_certified_uorust_lex_module_path"
+source = "f92c6be4bbb96f8ba9881cac833bb761f6644b1a8894b5c762b669671ace6360"
+certification = "kernel-checked"
+closure = "d662eb6d639e7b5e645893195b155cfecee8b8a6fef4ad9e8b90eb565fbfb936"
 edition = "2021"
 
 [[root]]
@@ -1575,7 +1575,7 @@ definition = "uorustLiftTyEntry"
 package = "uorust_certified_uorust_lift_ty_entry"
 source = "b314be9229c77222ac536d42f50212f7f10480b5b9cf756b53d422f531e9205d"
 certification = "kernel-checked"
-closure = "c78bc8cc05eaf9e8cbd0f5e37463341cc1de6e7d5414e2c9cb4aa4eb842eb947"
+closure = "bc0dfa7ed0a56594494b1addd9fc7282ec3da2943512fa9893b1fa8dbb38ed07"
 edition = "2021"
 
 [[root]]
@@ -1585,7 +1585,7 @@ definition = "uorustLiftTyRender"
 package = "uorust_certified_uorust_lift_ty_render"
 source = "b457d950b002bdceafb9268e38d4ee239fe395ac8c87ca7b3f77759110ecb725"
 certification = "kernel-checked"
-closure = "6a4916b7308e54a026885c2024a71974b9d3b973fd4148a615ec0e54be66ef4f"
+closure = "9e149974965f7472f56087264410dfe94523f65cb74cb8aabadd14f23aa9d5cc"
 edition = "2021"
 
 [[root]]
@@ -1595,7 +1595,7 @@ definition = "uorustLiftTySame"
 package = "uorust_certified_uorust_lift_ty_same"
 source = "1b246df6d37eb8d8c529295052db3ebefcee8b14d3e3cc14b7c187097934a0f3"
 certification = "kernel-checked"
-closure = "94ed8878ba9451857577a22da942b9c430f904376457dc89c0fd32fa63789221"
+closure = "28233ba392d0a3a11c550fc0ad2b0695214e3bff89dbb4d6e9dedb89c7430689"
 edition = "2021"
 
 [[root]]
@@ -1605,7 +1605,7 @@ definition = "uorustLiftTyTag"
 package = "uorust_certified_uorust_lift_ty_tag"
 source = "f43371d901d087bf6e39a3e013af8123e0c0dc1f43889f566ea6a9ef7a8b672d"
 certification = "kernel-checked"
-closure = "a12c25e426f14d0c3cf415c6d5f1e8b0832b5505eb450eb17190147f02f2b82b"
+closure = "7b40bed81db3b0efdcbf0fb58c3ecf5f7e9a322b9e964ec33db0d4570e853e7d"
 edition = "2021"
 
 [[root]]
@@ -1615,7 +1615,7 @@ definition = "uorustMirCoreScopeCore"
 package = "uorust_certified_uorust_mir_core_scope_core"
 source = "33f4b25de44ec460e58e99d321a2a860bc336a7c3427474b8f6fa6237f5adae0"
 certification = "kernel-checked"
-closure = "eb9b9b1756d6c479aa1a6be286e3881f5478edf773f830cdc1d2f4fc1897de8e"
+closure = "a5d378c163dac0fd12788d6f583c89041e31ce6af2cf9b7c25206ef276ba8192"
 edition = "2021"
 
 [[root]]
@@ -1625,7 +1625,7 @@ definition = "uorustMirCoreScopeLibrary"
 package = "uorust_certified_uorust_mir_core_scope_library"
 source = "5cd0127282b550e19e1f5799ddb347732d91ad1cf31ba61c3cb7f9154bd5d198"
 certification = "kernel-checked"
-closure = "d7d0e4327e6f8596fc146cd47d9bd7cb4e8516b6576666222f689d011f4b1945"
+closure = "29400055324c5a6f4a06d0eb32d455bce497fd18894541820007fc9f8b49bad2"
 edition = "2021"
 
 [[root]]
@@ -1635,7 +1635,7 @@ definition = "uorustMirCoreScopeRegistry"
 package = "uorust_certified_uorust_mir_core_scope_registry"
 source = "9d9a0d850c1f4c0d7ef3381d195e0d5659ac35dab9cc8a27d1351b4838e82801"
 certification = "kernel-checked"
-closure = "c165f1b221e7f9dc50052073130ecd4d546a6b4b45f72823a3cb5c103771f6ab"
+closure = "b3e37e5f4ca67f512ab5b6eeb9602d3fd461d6c57bc1567706f62ea954e83be8"
 edition = "2021"
 
 [[root]]
@@ -1645,7 +1645,7 @@ definition = "uorustMirLayoutRefusalText"
 package = "uorust_certified_uorust_mir_layout_refusal_text"
 source = "e95886eef556b4ea286ca033c57716258ef119249aa6d06e2718b07ad309c12e"
 certification = "kernel-checked"
-closure = "4593dba0b9511e164d8f0fc7ff0bd54d98fc0c3dfd7e01ba3c33c8902ee6caba"
+closure = "8558ec9913f2cf818f02e56dd6b63ad21111fcfd67277e1954b8f91cb6dfd66a"
 edition = "2021"
 
 [[root]]
@@ -1655,7 +1655,7 @@ definition = "variantField"
 package = "uorust_certified_variant_field"
 source = "3078860ec7ea79f70f66f7554d64d2f8ac71b45e31a64efc8f85a43d439f99f4"
 certification = "kernel-checked"
-closure = "99bae8d3b52b15302c412467791a1445a3689cf7bdc720470942c3b1ff4348c1"
+closure = "3eda2b20ef9cf12fc6553d523f4f3003eae3523a2ad9f71574698b77a1fb0d13"
 edition = "2021"
 
 [[root]]
@@ -1665,7 +1665,7 @@ definition = "variantOwner"
 package = "uorust_certified_variant_owner"
 source = "e692ce33fab0a2dff4323b524df4ee9f1619dc2a38487e2f1004bf8480047ee8"
 certification = "kernel-checked"
-closure = "e5ae197c753233a47722e19fae613d9d045a972b2e0df25e1e84d7189b8feffc"
+closure = "7253762e7748796825d5a35a06159292f6ac4943bd707aac8c88b3c51edd1919"
 edition = "2021"
 
 [[root]]
@@ -1675,7 +1675,7 @@ definition = "wordChar"
 package = "uorust_certified_word_char"
 source = "2d9b5ed9d70b49a331c98cbcdd61fab08d257306e657e95a89cbac9ac37783f8"
 certification = "kernel-checked"
-closure = "d5775c24ba53601b29d5e1e03248503aa725706879dff827c2e95a0906b0f7a2"
+closure = "277ba3124b860c529d8415c98b5d189e8965219867c67afb4cf05b216069cad7"
 edition = "2021"
 
 [[root]]
@@ -1685,7 +1685,7 @@ definition = "wrapLets"
 package = "uorust_certified_wrap_lets"
 source = "ac472f486bfe5d97f20c06d0d537b42c738f48e1bc06e580427fef277fe5a5b2"
 certification = "kernel-checked"
-closure = "609f7afd137b0e0a463685222a4d3a5e50ac85c870bfcb97bb1aa848e096621f"
+closure = "0e3e45e122e4630d6a596fa55786bd2f4a7862f53f9e90c0221898d0f0d184d4"
 edition = "2021"
 
 [[refused]]

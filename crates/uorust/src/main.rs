@@ -56,6 +56,11 @@ enum Command {
     /// The layouts rustc chose for the aggregates a library's dumps print,
     /// as the dump step asks for them (`scripts/mir/dump-lib.sh`).
     Layouts(LayoutsArgs),
+    /// Dump the MIR of core, alloc or std of the pinned toolchain's
+    /// rust-src, one directory per module, as `scripts/mir/dump-lib.sh`
+    /// does, with the dump's key and the digest of what it wrote
+    /// (`library-mir.toml`): what `uorust embed --link <crate>=<dir>` links.
+    LibraryMir(LibraryMirArgs),
     /// Fetch a crate of crates.io, dump the MIR of its library, translate
     /// every body and write its register, `crates/uorust/crates/<name>`.
     Crate(CrateArgs),
@@ -71,6 +76,17 @@ enum Command {
     /// newer head, each row's only while it is the row they were measured
     /// on.
     Carry(CarryArgs),
+    /// Admit a lift register against its parent's (a register file or a
+    /// `frontier.toml` each), by the register's law per function: a lifted
+    /// function stays lifted, and an unchanged one stays under its construct
+    /// until the candidate shows that construct no longer stops it (gone
+    /// from the constructs its signature states, its callee lifted, or no
+    /// effect reached); refused, naming each function re-decided.
+    Admit(AdmitArgs),
+    /// Give every numeric literal of a workspace a home in the model: the
+    /// figure register, the generated package, the rewrite and the gate.
+    #[command(subcommand)]
+    Figures(Figures),
     /// Print the route table.
     Routes,
     /// The certified translator: export the lifted translator through
@@ -325,6 +341,20 @@ struct MirArgs {
     /// The directory the dumps are written to.
     #[arg(long)]
     out: PathBuf,
+    /// Build with these features enabled (repeatable, or comma-separated),
+    /// as cargo takes them: a body under a feature the default build
+    /// leaves off exists only in a dump that enables it.
+    #[arg(long)]
+    features: Vec<String>,
+    /// Build without the default features.
+    #[arg(long)]
+    no_default_features: bool,
+    /// Build with every feature.
+    #[arg(long, conflicts_with_all = ["features", "no_default_features"])]
+    all_features: bool,
+    /// Build for this target triple; the host's when absent.
+    #[arg(long)]
+    target: Option<String>,
 }
 
 #[derive(clap::Args)]
@@ -350,6 +380,92 @@ struct CoreArgs {
     lexlean: Option<PathBuf>,
 }
 
+/// The steps of the figures (`uorust::figures`).
+#[derive(Subcommand)]
+enum Figures {
+    /// Write the figure register of a workspace: one row per counted
+    /// numeric-literal site, and the figure rows the register already holds.
+    Extract(FigureArgs),
+    /// Write the generated package (and the LexLean module) from the
+    /// register, or with `--check` list each file that differs.
+    Write {
+        #[command(flatten)]
+        register: FigureFiles,
+        /// The generated package's directory.
+        #[arg(long)]
+        out: PathBuf,
+        /// The LexLean module that states the same figures.
+        #[arg(long)]
+        lexlean: Option<PathBuf>,
+        /// Write nothing; fail on each file that differs.
+        #[arg(long)]
+        check: bool,
+    },
+    /// Replace each site that has a figure by its generated name, and list
+    /// each site no rewrite can place with why.
+    Rewrite(FigureArgs),
+    /// The gate: no counted site without a figure, no figure without a
+    /// home, the register and the generated files current.
+    Check {
+        #[command(flatten)]
+        args: FigureArgs,
+        /// The generated package's directory, checked current.
+        #[arg(long)]
+        package: Option<PathBuf>,
+        /// The LexLean module, checked current.
+        #[arg(long, requires = "package")]
+        lexlean: Option<PathBuf>,
+    },
+}
+
+#[derive(clap::Args)]
+struct FigureFiles {
+    /// The rule file (`uorust/figure-rules/1`).
+    #[arg(long)]
+    rules: PathBuf,
+    /// The figure register (`uorust/figures/1`).
+    #[arg(long)]
+    register: PathBuf,
+}
+
+#[derive(clap::Args)]
+struct FigureArgs {
+    /// The workspace root.
+    workspace: PathBuf,
+    #[command(flatten)]
+    files: FigureFiles,
+}
+
+#[derive(clap::Args)]
+struct LibraryMirArgs {
+    /// The library: `core`, `alloc` or `std`.
+    #[arg(value_name = "CRATE")]
+    krate: String,
+    /// The directory the dumps are written to.
+    #[arg(long, required_unless_present_any = ["key", "modules"])]
+    out: Option<PathBuf>,
+    /// Dump only this top-level module (repeatable); every module when none.
+    #[arg(long)]
+    only: Vec<String>,
+    /// The target triple the library is built for; the host's when not
+    /// given. It enters the key: a dump links only into a program of the
+    /// same triple and data layout.
+    #[arg(long)]
+    target: Option<String>,
+    /// Where rust-src's archive of the pinned toolchain is kept (taken only
+    /// at the digest its channel manifest records) and unpacked anew for
+    /// each run; `<out>/../rust-src-<toolchain>` when not given.
+    #[arg(long)]
+    source_cache: Option<PathBuf>,
+    /// Print the dump's key (for the target and the modules asked), read
+    /// from the toolchain alone, and dump nothing.
+    #[arg(long, conflicts_with = "modules")]
+    key: bool,
+    /// Print the library's top-level modules as a JSON array and dump nothing.
+    #[arg(long)]
+    modules: bool,
+}
+
 #[derive(clap::Args)]
 struct LayoutsArgs {
     /// The crate the dumps are of: `core`, `std`.
@@ -370,11 +486,34 @@ struct LayoutsArgs {
 
 #[derive(clap::Args)]
 struct EmbedArgs {
-    /// The crate the dumps are of: `core`, `std`.
+    /// The crate the dumps are of: `core`, `std`, or with `--workspace` a
+    /// library crate of that workspace.
     #[arg(long = "crate")]
     krate: String,
+    /// The workspace the crate is a library of: `--mir` is then the
+    /// directory `uorust mir` dumped it into, whose `shards-<crate>` are
+    /// embedded, with the crate's declarations and those of the crates it
+    /// builds on mounted beside `--library`'s core, alloc and std.
+    #[arg(long, conflicts_with_all = ["harness", "observed", "register", "shallow", "bridge"])]
+    workspace: Option<PathBuf>,
+    /// With `--workspace`: the directory `uorust crate --workspace
+    /// --dumps` kept the build's registry crates in; the crate's program
+    /// links each of them its build links, after every `--link`.
+    #[arg(long, requires = "workspace")]
+    links: Option<PathBuf>,
+    /// With `--workspace`: one project per module of the crate,
+    /// `<out>/<module>/project` (its configuration and record in
+    /// `<out>/<module>`, outside the project), smallest module first, each
+    /// linked against every module, as one `--only <module>` run each; with
+    /// `--only`, one per module or part it names. The libraries are linked
+    /// once for all.
+    #[arg(long, requires = "workspace")]
+    each_module: bool,
     /// A library crate to link into the program, `<crate>=<dumps>`, as
-    /// `uorust crate --link` links one.
+    /// `uorust crate --link` links one: core, alloc, or with `--workspace`
+    /// another library of the workspace (`<mir>/shards-<lib>`). `<dumps>`
+    /// may be a published archive of them, `<url>#sha256=<hex>`, fetched
+    /// and taken only at that digest.
     #[arg(long = "link")]
     link: Vec<String>,
     /// The module shards: one directory of the crate's dumps per module.
@@ -412,6 +551,15 @@ struct EmbedArgs {
 }
 
 #[derive(clap::Args)]
+struct AdmitArgs {
+    /// The parent's lift register: the incumbent every row is held against.
+    #[arg(long)]
+    parent: PathBuf,
+    /// The candidate lift register.
+    candidate: PathBuf,
+}
+
+#[derive(clap::Args)]
 struct CarryArgs {
     /// The register's module files the stamps were measured in.
     #[arg(long)]
@@ -441,11 +589,56 @@ struct BridgeArgs {
 #[derive(clap::Args)]
 struct CrateArgs {
     /// The crate and its version, `<name>@<version>`.
-    spec: String,
+    #[arg(required_unless_present = "workspace", conflicts_with = "workspace")]
+    spec: Option<String>,
+    /// Every library of crates.io the build of this workspace links, each
+    /// at the version and checksum its lock records and with the features
+    /// the build enables for it (cargo's unit graph of the build), dumped,
+    /// translated and embedded with those it builds on linked (after each
+    /// `--link`); with `--dumps` and `--library`. Each register is the
+    /// `<name>-<version>` directory of `--registers`.
+    #[arg(long, requires_all = ["dumps", "library"])]
+    workspace: Option<PathBuf>,
+    /// With `--workspace`, only these packages and those they build on
+    /// (repeatable).
+    #[arg(long, requires = "workspace")]
+    only: Vec<String>,
+    /// The features to build with: the crate's own, exactly, in place of
+    /// its defaults (with `<spec>`); the workspace build's, as cargo takes
+    /// them (with `--workspace`).
+    #[arg(long, value_delimiter = ',')]
+    features: Vec<String>,
+    /// Build without the default features (the crate's with `<spec>`, the
+    /// workspace build's with `--workspace`).
+    #[arg(long)]
+    no_default_features: bool,
+    /// With `--workspace`: build the workspace with every feature of its
+    /// members, as `uorust mir --all-features` dumps it.
+    #[arg(long, requires = "workspace", conflicts_with_all = ["features", "no_default_features"])]
+    all_features: bool,
+    /// Keep the crate's dumps (one directory per module, `target.toml`,
+    /// the layouts, `dump.toml`) in this directory, as `--link
+    /// <crate>=<dumps>` reads them; with `--workspace`, one directory per
+    /// crate and `links.toml`.
+    #[arg(long, requires = "library")]
+    dumps: Option<PathBuf>,
     /// The directory the crates' registers are in; the register is its
     /// `<name>` directory.
     #[arg(long, default_value = "crates/uorust/crates")]
     registers: PathBuf,
+    /// With `<spec>`, the register's directory itself, in place of
+    /// `<registers>/<name>`.
+    #[arg(long, conflicts_with = "workspace")]
+    register: Option<PathBuf>,
+    /// With `<spec>`, the checksum a consuming workspace's lock records for
+    /// the crate: the archive is cargo's cached one where the cache holds
+    /// it, and must have this digest.
+    #[arg(long, conflicts_with = "workspace")]
+    checksum: Option<String>,
+    /// With `<spec>`, a consuming workspace's lock file: the crate's own
+    /// dependencies are resolved at the versions it locks.
+    #[arg(long, conflicts_with = "workspace")]
+    lock: Option<PathBuf>,
     /// The rust-src `library` directory of the pinned toolchain: with it,
     /// the crate's bodies are embedded in LexLean too, and each row of its
     /// register stamped with its embedding.
@@ -460,7 +653,8 @@ struct CrateArgs {
     /// A library crate to link into the crate's program, `<crate>=<dumps>`
     /// (`core=target/core-mir`, as `scripts/mir/dump-lib.sh` writes them):
     /// a call into it names its body, so a body that calls core is
-    /// evaluated through core's.
+    /// evaluated through core's. `<dumps>` may be a published archive of
+    /// them, `<url>#sha256=<hex>`, fetched and taken only at that digest.
     #[arg(long = "link", requires = "library")]
     link: Vec<String>,
 }
@@ -495,7 +689,9 @@ struct Args {
     /// The directory the Prism project is written to or checked in.
     #[arg(long)]
     out: PathBuf,
-    /// The project name; the workspace directory's name when absent.
+    /// The project name; when absent, the name of the package the
+    /// workspace's root manifest declares (a virtual workspace declares
+    /// none, and then the name must be given). Never the directory's name.
     #[arg(long)]
     name: Option<String>,
     /// The control set's lastModified, YYYY-MM-DDThh:mm:ssZ; the HEAD commit time when absent.
@@ -504,6 +700,12 @@ struct Args {
     /// A RustSec advisory database checkout to check Cargo.lock against.
     #[arg(long)]
     advisories: Option<PathBuf>,
+    /// The limits the projection's LexLean and PrismPM projects state: a
+    /// TOML file with a [lexlean] and a [prismpm] table holding every key
+    /// the SDK's project schema requires. Without it the SDK scaffold's
+    /// limits are written, and the frontier's [limits] table says which.
+    #[arg(long)]
+    limits: Option<PathBuf>,
     /// A lift register file: the projection is admitted against it (no
     /// function it records as lifted may be decided otherwise), then
     /// `project` writes the projection's register there and `check` requires
@@ -518,12 +720,28 @@ struct Args {
     /// is admitted only on a proved verdict.
     #[arg(long, requires = "mir")]
     verdicts: Option<PathBuf>,
+    /// The records `uorust embed --workspace` wrote (any depth under the
+    /// directory), of this workspace's sources as they are now: a function
+    /// row that did not lift is joined to its body in every declared
+    /// `--configuration`, by the item the dump names, and is embedded-closed
+    /// where every one is embedded, evaluable and reaches only linked
+    /// bodies. A record of another source tree is refused.
+    #[arg(long, requires = "configuration")]
+    embedding: Option<PathBuf>,
+    /// A configuration the workspace declares, by the label its records
+    /// state, target included as `uorust mir` records it (`default features
+    /// on x86_64-unknown-linux-gnu`, `all features on <target>`, `default
+    /// features and a,b on <target>`; repeatable): a row is embedded-closed
+    /// only where the records of every declared configuration cover its
+    /// crate, so a label no record states leaves every row as it was.
+    #[arg(long, requires = "embedding")]
+    configuration: Vec<String>,
 }
 
 fn options(args: &Args) -> Result<Options, UorustError> {
     let name = match &args.name {
         Some(name) => name.clone(),
-        None => uorust::default_name(&args.workspace)?,
+        None => uorust::declared_name(&args.workspace)?,
     };
     let last_modified = match &args.last_modified {
         Some(value) => value.clone(),
@@ -546,6 +764,11 @@ fn options(args: &Args) -> Result<Options, UorustError> {
         last_modified,
         advisories: args.advisories.clone(),
         mir,
+        limits: args.limits.clone(),
+        embedding: args.embedding.clone().map(|records| uorust::Embedding {
+            records,
+            configurations: args.configuration.clone(),
+        }),
     })
 }
 
@@ -574,7 +797,20 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Mir(args) => {
-            uorust::mir::dump(&args.workspace, &args.out)?;
+            let config = uorust::shard::Configuration {
+                features: args
+                    .features
+                    .iter()
+                    .flat_map(|f| f.split(','))
+                    .map(str::trim)
+                    .filter(|f| !f.is_empty())
+                    .map(str::to_string)
+                    .collect(),
+                no_default_features: args.no_default_features,
+                all_features: args.all_features,
+                target: args.target.clone(),
+            };
+            uorust::mir::dump(&args.workspace, &args.out, &config)?;
             println!(
                 "dumped the MIR of {} into {}",
                 args.workspace.display(),
@@ -606,9 +842,126 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Core(args) => library("core", &args),
+        Command::LibraryMir(args) => {
+            let here = std::path::Path::new(".");
+            if args.key {
+                let inputs = uorust::library::inputs(&args.krate, here, args.target.as_deref())?;
+                println!("{}", uorust::library::key(&inputs, &args.only));
+                return Ok(());
+            }
+            let toolchain_cache =
+                |base: &std::path::Path| base.join(format!("rust-src-{}", uorust::mir::TOOLCHAIN));
+            let base = args
+                .out
+                .as_deref()
+                .and_then(std::path::Path::parent)
+                .unwrap_or(here)
+                .to_path_buf();
+            let cache = args
+                .source_cache
+                .clone()
+                .unwrap_or_else(|| toolchain_cache(&base));
+            if args.modules {
+                let inputs = uorust::library::inputs(&args.krate, here, args.target.as_deref())?;
+                let library = uorust::library::source(&inputs, &cache)?;
+                let found = uorust::library::modules(&library, &args.krate)?;
+                println!("{}", serde_json::to_string(&found).unwrap_or_default());
+                return Ok(());
+            }
+            let out = args.out.as_deref().unwrap_or(here);
+            let work = base.join(format!(
+                ".library-mir-{}-{}",
+                args.krate,
+                std::process::id()
+            ));
+            let done = uorust::library::dump(
+                &args.krate,
+                args.target.as_deref(),
+                out,
+                &args.only,
+                &cache,
+                &work,
+            )?;
+            for k in &done.kept {
+                println!("{}: {} bodies, {} bytes", k.module, k.files, k.bytes);
+            }
+            println!(
+                "library-mir {}: {} modules, {} bodies, {} bytes, {} layouts; key {}; digest {}; library {}",
+                args.krate,
+                done.kept.len(),
+                done.kept.iter().map(|k| k.files).sum::<usize>(),
+                done.kept.iter().map(|k| k.bytes).sum::<u64>(),
+                done.layouts,
+                done.key,
+                done.digest,
+                done.library.display()
+            );
+            Ok(())
+        }
         Command::Layouts(args) => {
             let n = uorust::layouts::run(&args.krate, &args.mir, &args.copy, &args.check)?;
             eprintln!("layouts: {n} types laid out");
+            Ok(())
+        }
+        Command::Embed(args) if args.workspace.is_some() => {
+            let workspace = args
+                .workspace
+                .as_deref()
+                .unwrap_or(std::path::Path::new("."));
+            let cache = args
+                .out
+                .parent()
+                .map_or_else(std::env::temp_dir, std::path::Path::to_path_buf)
+                .join("uorust-links");
+            let mut link = args
+                .link
+                .iter()
+                .map(|l| {
+                    let (k, d) = l.split_once('=').ok_or_else(|| {
+                        uorust::UorustError::Tool(format!("--link {l}: not <crate>=<dumps>"))
+                    })?;
+                    Ok((k.to_string(), uorust::registry::link_dumps(d, &cache)?))
+                })
+                .collect::<Result<Vec<_>, UorustError>>()?;
+            if let Some(dir) = &args.links {
+                link.extend(uorust::shard::member_links(dir, &args.krate)?);
+            }
+            let done = uorust::shard::embed_workspace_crate(&uorust::shard::WorkspaceEmbed {
+                workspace,
+                krate: &args.krate,
+                dumps: &args.mir,
+                library: &args.library,
+                out: &args.out,
+                only: &args.only,
+                each_module: args.each_module,
+                link: &link,
+            })?;
+            for d in &done {
+                let c = &d.census;
+                match &d.module {
+                    Some(m) => println!(
+                        "embed: {} ({} files, {} bytes): {} bodies embedded, {} of them evaluable, {} bound; calls {} linked, {} unlinked; project in {}",
+                        m.name,
+                        m.files,
+                        m.bytes,
+                        c.bodies,
+                        c.evaluable,
+                        c.bound,
+                        c.linked.values().sum::<usize>(),
+                        c.unlinked.values().sum::<usize>(),
+                        args.out.join(&m.name).join(uorust::shard::PROJECT).display()
+                    ),
+                    None => println!(
+                        "embed: {} bodies embedded, {} of them evaluable, {} bound; calls {} linked, {} unlinked; project in {}",
+                        c.bodies,
+                        c.evaluable,
+                        c.bound,
+                        c.linked.values().sum::<usize>(),
+                        c.unlinked.values().sum::<usize>(),
+                        args.out.join(uorust::shard::PROJECT).display()
+                    ),
+                }
+            }
             Ok(())
         }
         Command::Embed(args) => {
@@ -652,27 +1005,80 @@ fn run(cli: Cli) -> Result<(), UorustError> {
         }
         Command::Std(args) => library("std", &args),
         Command::Crate(args) => {
-            let (name, version) = uorust::registry::parse_spec(&args.spec)?;
-            let register = args.registers.join(&name);
+            // A published link's dumps are kept by their digest, beside
+            // the kept dumps where there are some.
+            let cache = args
+                .dumps
+                .as_deref()
+                .and_then(std::path::Path::parent)
+                .map_or_else(std::env::temp_dir, std::path::Path::to_path_buf)
+                .join("uorust-links");
+            let link = args
+                .link
+                .iter()
+                .map(|l| {
+                    let (k, d) = l.split_once('=').ok_or_else(|| {
+                        uorust::UorustError::Tool(format!("--link {l}: not <crate>=<dumps>"))
+                    })?;
+                    Ok((k.to_string(), uorust::registry::link_dumps(d, &cache)?))
+                })
+                .collect::<Result<Vec<_>, UorustError>>()?;
+            if let (Some(root), Some(dumps), Some(library)) =
+                (&args.workspace, &args.dumps, &args.library)
+            {
+                let mut cargo_args = Vec::new();
+                if !args.features.is_empty() {
+                    cargo_args.push(format!("--features={}", args.features.join(",")));
+                }
+                if args.no_default_features {
+                    cargo_args.push("--no-default-features".to_string());
+                }
+                if args.all_features {
+                    cargo_args.push("--all-features".to_string());
+                }
+                let (graph, outcomes) =
+                    uorust::registry::lift_workspace(&uorust::registry::Workspace {
+                        root,
+                        cargo_args: &cargo_args,
+                        dumps,
+                        registers: &args.registers,
+                        library,
+                        only: &args.only,
+                        link: &link,
+                    })?;
+                let lifted = outcomes
+                    .iter()
+                    .filter(|o| matches!(o, uorust::registry::Outcome::Lifted(_)))
+                    .count();
+                println!(
+                    "{} of {} libraries of crates.io the build links lifted, {} refused; index in {}",
+                    lifted,
+                    graph.locked.len(),
+                    outcomes.len() - lifted,
+                    dumps.join(uorust::registry::LINKS).display()
+                );
+                return Ok(());
+            }
+            let spec = args.spec.as_deref().unwrap_or_default();
+            let (name, version) = uorust::registry::parse_spec(spec)?;
+            let register = args
+                .register
+                .clone()
+                .unwrap_or_else(|| args.registers.join(&name));
             let lifted = uorust::registry::lift_crate(
                 &name,
                 &version,
                 &register,
-                args.library.as_deref(),
-                args.differential,
-                &args
-                    .link
-                    .iter()
-                    .map(|l| {
-                        l.split_once('=')
-                            .map(|(k, d)| (k.to_string(), PathBuf::from(d)))
-                            .ok_or_else(|| {
-                                uorust::UorustError::Tool(format!(
-                                    "--link {l}: not <crate>=<dumps>"
-                                ))
-                            })
-                    })
-                    .collect::<Result<Vec<_>, UorustError>>()?,
+                &uorust::registry::Options {
+                    library: args.library.as_deref(),
+                    differential: args.differential,
+                    link: &link,
+                    features: &args.features,
+                    no_default_features: args.no_default_features,
+                    checksum: args.checksum.as_deref(),
+                    lock: args.lock.as_deref(),
+                    dumps: args.dumps.as_deref(),
+                },
             )?;
             println!(
                 "{name}@{version}: {} of {} bodies translated in {} modules; register in {}",
@@ -681,9 +1087,9 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 lifted.modules,
                 register.display()
             );
-            if let Some((bodies, evaluable)) = lifted.embedding {
+            if let Some((bodies, evaluable, bound)) = lifted.embedding {
                 println!(
-                    "{name}@{version}: {bodies} bodies embedded, {evaluable} of them evaluable"
+                    "{name}@{version}: {bodies} bodies embedded, {evaluable} of them evaluable, {bound} leave a callee unlinked"
                 );
             }
             if let Some((bodies, theorems)) = lifted.differential {
@@ -732,6 +1138,18 @@ fn run(cli: Cli) -> Result<(), UorustError> {
             Ok(())
         }
         Command::Certify(step) => certify(step),
+        Command::Admit(args) => {
+            let totals = uorust::admit_register(&args.parent, &args.candidate)?;
+            println!(
+                "{} admitted against {}: {} of {} functions lifted",
+                args.candidate.display(),
+                args.parent.display(),
+                totals.lifted,
+                totals.functions
+            );
+            Ok(())
+        }
+        Command::Figures(step) => figures(step),
         Command::Routes => {
             for route in uorust::ROUTES {
                 println!(
@@ -740,6 +1158,113 @@ fn run(cli: Cli) -> Result<(), UorustError> {
                 );
             }
             Ok(())
+        }
+    }
+}
+
+/// A step of the figures.
+fn figures(step: Figures) -> Result<(), UorustError> {
+    use uorust::figures;
+    let declared = |l: &figures::Locations| {
+        println!(
+            "figures: the rules declare columns = \"{}\": {}",
+            l.columns, l.reason
+        );
+    };
+    let counts = |c: &figures::Counts| {
+        println!(
+            "figures: {} counted sites, {} with a figure, {} without; {} rewritten; {} figures, \
+             {} without a home, {} whose home names no check",
+            c.sites, c.figured, c.free, c.rewritten, c.figures, c.unhomed, c.unchecked
+        );
+        for (why, n) in &c.refusals {
+            println!("figures: {n} sites no rewrite can place: {why}");
+        }
+        if let Some(l) = &c.columns {
+            declared(l);
+            println!(
+                "figures: {} rewritten sites moved columns under the declaration",
+                c.moved
+            );
+        }
+    };
+    match step {
+        Figures::Extract(a) => {
+            let done = figures::extract(&a.workspace, &a.files.rules, &a.files.register)?;
+            counts(&done.counts);
+            for v in &done.vanished {
+                println!("figures: a listed site is gone: {v}");
+            }
+            Ok(())
+        }
+        Figures::Write {
+            register,
+            out,
+            lexlean,
+            check,
+        } => {
+            let w = figures::write(
+                &register.rules,
+                &register.register,
+                &out,
+                lexlean.as_deref(),
+                check,
+            )?;
+            if check {
+                if !w.files.is_empty() {
+                    return Err(UorustError::Figures(
+                        w.files
+                            .iter()
+                            .map(|f| format!("{f} is not what the writer writes now"))
+                            .collect(),
+                    ));
+                }
+                println!("figures: the generated files are current");
+            } else {
+                println!("figures: wrote {}", w.files.join(", "));
+            }
+            Ok(())
+        }
+        Figures::Rewrite(a) => {
+            let r = figures::rewrite(&a.workspace, &a.files.rules, &a.files.register)?;
+            println!(
+                "figures: {} sites replaced in {} files; {} refused",
+                r.replaced,
+                r.files.len(),
+                r.refused.len()
+            );
+            for x in &r.refused {
+                println!("figures: refused {}: {}", x.key, x.why);
+            }
+            if let Some(l) = &r.columns {
+                declared(l);
+            }
+            for m in &r.moved {
+                println!(
+                    "figures: placed {} at {}:{}: the columns from {} on move by {}",
+                    m.key, m.file, m.line, m.column, m.by
+                );
+            }
+            Ok(())
+        }
+        Figures::Check {
+            args,
+            package,
+            lexlean,
+        } => {
+            let c = figures::check(
+                &args.workspace,
+                &args.files.rules,
+                &args.files.register,
+                package.as_deref(),
+                lexlean.as_deref(),
+            )?;
+            counts(&c.counts);
+            if c.findings.is_empty() {
+                Ok(())
+            } else {
+                Err(UorustError::Figures(c.findings))
+            }
         }
     }
 }

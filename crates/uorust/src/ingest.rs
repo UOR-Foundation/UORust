@@ -36,16 +36,15 @@ pub(crate) fn workspace(
     let mut packages = Vec::new();
     let mut syntax = Syntax::default();
     for member in members {
-        let (package, files) = package(&root, member, &workspace_lints)?;
+        let reached = crate::figures::Reached::of(&root, member);
+        let (package, files) = package(&root, member, &workspace_lints, &reached)?;
+        if !reached.is_empty() {
+            syntax.figures.insert(package.dir.clone(), reached);
+        }
         packages.push(package);
         syntax.files.extend(files);
     }
     packages.sort_by(|a, b| a.name.cmp(&b.name));
-    let name = root
-        .file_name()
-        .and_then(|n| n.to_str())
-        .unwrap_or("workspace")
-        .to_string();
     let lock = lock(&root.join("Cargo.lock"))?;
     let deny = root.join("deny.toml");
     let deny_ignores = if deny.is_file() {
@@ -65,7 +64,6 @@ pub(crate) fn workspace(
     };
     Ok((
         Workspace {
-            name,
             lock,
             has_deny: deny.is_file(),
             deny_ignores,
@@ -258,7 +256,8 @@ fn advisory(
     }))
 }
 
-fn metadata(root: &Path) -> Result<Value, UorustError> {
+/// `cargo metadata` of a workspace, without its dependencies.
+pub(crate) fn metadata(root: &Path) -> Result<Value, UorustError> {
     let cargo = std::env::var_os("CARGO").unwrap_or_else(|| "cargo".into());
     let output = Command::new(cargo)
         .args([
@@ -317,17 +316,40 @@ fn lints_of(table: Option<&toml::Value>) -> BTreeMap<String, String> {
     out
 }
 
-/// `path` relative to `root`, both as text: the path itself when it is not
-/// inside `root`.
+/// `path` relative to `root`, both absolute and as text with `/`
+/// separators: below `root` the path under it, and elsewhere (a member or
+/// a path dependency Cargo reaches by `..`, as in `members = ["../m"]`) one
+/// `..` for each component of `root` past the two paths' common ancestor,
+/// then the rest of `path`. Never the absolute path, so that nothing of
+/// where the workspace lies on the machine enters a projection.
 fn rel(root: &str, path: &str) -> String {
-    match path.strip_prefix(root) {
-        Some("") => String::new(),
-        Some(rest) => match rest.strip_prefix('/') {
-            Some(inner) => inner.to_string(),
-            None => path.to_string(),
-        },
-        None => path.to_string(),
+    let parts = |text: &str| -> Vec<String> {
+        text.split('/')
+            .filter(|c| !c.is_empty() && *c != ".")
+            .map(str::to_string)
+            .collect()
+    };
+    let (root, path) = (parts(root), parts(path));
+    let common = root.iter().zip(&path).take_while(|(a, b)| a == b).count();
+    let mut out: Vec<String> = vec!["..".to_string(); root.len() - common];
+    out.extend(path[common..].iter().cloned());
+    out.join("/")
+}
+
+/// The file `rel` names under `root` (as [`rel`] writes it), with each `..`
+/// taken lexically, as Cargo forms a member's path from its manifest.
+fn under(root: &Path, rel: &str) -> PathBuf {
+    let mut out = root.to_path_buf();
+    for part in rel.split('/') {
+        match part {
+            "" | "." => {}
+            ".." => {
+                out.pop();
+            }
+            part => out.push(part),
+        }
     }
+    out
 }
 
 fn text(value: &Value, key: &str) -> String {
@@ -342,6 +364,7 @@ fn package(
     root: &Path,
     meta: &Value,
     workspace_lints: &BTreeMap<String, String>,
+    reached: &crate::figures::Reached,
 ) -> Result<(Package, BTreeMap<String, FileSyntax>), UorustError> {
     // Paths as the facts hold them: text with `/` separators.
     let path_text = |path: &Path| path.to_string_lossy().replace('\\', "/");
@@ -435,9 +458,13 @@ fn package(
             continue;
         };
         let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
-        read.push((path, rel_path, target, module, syn::parse_file(&text)));
+        let parsed = syn::parse_file(&text).map(|mut tree| {
+            reached.resolve(&mut tree);
+            tree
+        });
+        read.push((path, rel_path, target, module, parsed));
     }
-    let roots: Vec<PathBuf> = targets.iter().map(|t| root.join(&t.src)).collect();
+    let roots: Vec<PathBuf> = targets.iter().map(|t| under(root, &t.src)).collect();
     let trees: BTreeMap<&Path, &syn::File> = read
         .iter()
         .filter_map(|(path, _, _, _, parsed)| Some((path.as_path(), parsed.as_ref().ok()?)))
@@ -455,6 +482,7 @@ fn package(
             ),
             Err(error) => unparsed(rel_path.clone(), *target, module.clone(), error),
         };
+        let file_syntax = figures_refused(reached, &file, file_syntax);
         syntax.insert(file.rel.clone(), file_syntax);
         files.push(file);
     }
@@ -469,6 +497,7 @@ fn package(
             .get("rust_version")
             .and_then(Value::as_str)
             .map(str::to_string),
+        edition: text(meta, "edition"),
         authors: meta
             .get("authors")
             .and_then(Value::as_array)
@@ -484,6 +513,41 @@ fn package(
         files,
     };
     Ok((package, syntax))
+}
+
+/// `syntax` with the body of each function and constant of `file` that
+/// calls a generated figure package's macro no literal is read for made one
+/// form outside the lift, named by why: what it computes is not known, and
+/// no default stands in for the literal (`figures::Reached::unresolved`).
+fn figures_refused(
+    reached: &crate::figures::Reached,
+    file: &SourceFile,
+    mut syntax: FileSyntax,
+) -> FileSyntax {
+    if reached.is_empty() {
+        return syntax;
+    }
+    let refused = |cause: String| crate::ast::Block {
+        stmts: vec![crate::ast::Stmt::Expr(
+            crate::ast::RustExpr::Other(crate::ast::ExprOther {
+                kind: cause,
+                exprs: Vec::new(),
+                blocks: Vec::new(),
+            }),
+            false,
+        )],
+    };
+    for (fact, fn_syntax) in file.fns.iter().zip(&mut syntax.fns) {
+        if let (Some(_), Some(cause)) = (&fn_syntax.block, reached.unresolved(&fact.tokens)) {
+            fn_syntax.block = Some(refused(cause));
+        }
+    }
+    for (_, _, block, _, tokens, _) in &mut syntax.consts {
+        if let Some(cause) = reached.unresolved(tokens) {
+            *block = refused(cause);
+        }
+    }
+    syntax
 }
 
 /// Every `.rs` file under `dir`, not descending into a nested package or a
@@ -589,15 +653,15 @@ fn lock(path: &Path) -> Result<Vec<LockedPackage>, UorustError> {
 
 /// A file a `mod` declaration names, as the walk over a package's module
 /// tree meets it.
-struct ModFile {
-    file: PathBuf,
+pub(crate) struct ModFile {
+    pub(crate) file: PathBuf,
     /// The directory its own out-of-line modules are found from.
-    dir: PathBuf,
+    pub(crate) dir: PathBuf,
     /// The directory under `dir` that holds them where the file is neither
     /// a `mod.rs` nor named by a `#[path]`: its own name.
-    own: Option<String>,
+    pub(crate) own: Option<String>,
     /// Whether the declaration that names it stands in test code.
-    test: bool,
+    pub(crate) test: bool,
 }
 
 /// The files of a package that are test code as a whole: each file an
@@ -648,7 +712,7 @@ fn test_files(roots: &[PathBuf], trees: &BTreeMap<&Path, &syn::File>) -> BTreeSe
 /// the way; and a `#[path]` names the file itself, or an inline module's
 /// directory. Both files a plain declaration could mean are given: the one
 /// that exists is the module.
-fn declared_files(
+pub(crate) fn declared_files(
     items: &[syn::Item],
     dir: &Path,
     own: Option<&str>,
@@ -714,14 +778,14 @@ fn path_attr(list: &[syn::Attribute]) -> Option<String> {
 }
 
 /// The directory of a file.
-fn parent(file: &Path) -> PathBuf {
+pub(crate) fn parent(file: &Path) -> PathBuf {
     file.parent().map(Path::to_path_buf).unwrap_or_default()
 }
 
 /// A path without its `.` and `..` components, each `..` taking the
 /// component before it: the path a `#[path]` that climbs out of its
 /// directory names.
-fn normal(path: &Path) -> PathBuf {
+pub(crate) fn normal(path: &Path) -> PathBuf {
     let mut out = PathBuf::new();
     for part in path.components() {
         match part {
@@ -828,10 +892,11 @@ fn source(
     let product = matches!(kind, TargetKind::Lib | TargetKind::Bin);
     let lib = matches!(kind, TargetKind::Lib);
     let test_target = matches!(kind, TargetKind::Test);
+    file.test = test_target || test_file;
     items(
         &parsed.items,
         &rel,
-        None,
+        "",
         test_target || test_file,
         product,
         lib,
@@ -948,6 +1013,12 @@ fn is_cfg_test(attrs: &[Attr]) -> bool {
     attrs.iter().any(|a| a.test_only)
 }
 
+/// Whether attributes make their item test code, by the one reading the
+/// facts use.
+pub(crate) fn test_only(list: &[syn::Attribute]) -> bool {
+    is_cfg_test(&attrs(list))
+}
+
 fn doc_of(attrs: &[Attr]) -> String {
     let lines: Vec<String> = attrs.iter().filter_map(|a| a.doc.clone()).collect();
     lines.join("\n")
@@ -1001,6 +1072,24 @@ fn derives(attrs: &[Attr]) -> Vec<String> {
 }
 
 /// Collapse the token spacing of printed Rust to the way it is written.
+/// Each field of `fields`, by its name or its position, with its type as
+/// the source writes it: what the ownership reading reads a type's fields
+/// by ([`crate::ownership::Declared`]).
+fn source_fields(fields: &syn::Fields) -> Vec<(String, String)> {
+    fields
+        .iter()
+        .enumerate()
+        .map(|(i, f)| {
+            (
+                f.ident
+                    .as_ref()
+                    .map_or_else(|| i.to_string(), ToString::to_string),
+                tidy(&f.ty.to_token_stream().to_string()),
+            )
+        })
+        .collect()
+}
+
 pub(crate) fn tidy(text: &str) -> String {
     let mut out = text.to_string();
     for (from, to) in [
@@ -1079,6 +1168,7 @@ fn function(
         trait_path: None,
         impl_params: Vec::new(),
         scope: 0,
+        impl_at: None,
     };
     let syntax = FnSyntax {
         signature: crate::convert::signature(sig),
@@ -1090,10 +1180,29 @@ fn function(
 
 /// The names one module scope binds for its trait methods: what its `use`
 /// items name, whether one of them is a glob, and the traits it declares.
-fn scope_fact(list: &[syn::Item]) -> ScopeFact {
-    let mut fact = ScopeFact::default();
+fn scope_fact(list: &[syn::Item], rel: &str, module: &str) -> ScopeFact {
+    let mut fact = ScopeFact {
+        module: module.to_string(),
+        ..ScopeFact::default()
+    };
     for item in list {
         match item {
+            // An invocation, not a `macro_rules!` definition (which names
+            // the macro it defines).
+            syn::Item::Macro(m) if m.ident.is_none() => {
+                let mut idents = Vec::new();
+                macro_idents(m.mac.tokens.clone(), &mut idents);
+                let span = Span {
+                    file: rel.to_string(),
+                    line: m
+                        .mac
+                        .path
+                        .segments
+                        .first()
+                        .map_or(0, |s| s.ident.span().start().line),
+                };
+                fact.invoked.push((idents, span));
+            }
             syn::Item::Use(u) => scope_uses(&u.tree, &[], u.leading_colon.is_some(), &mut fact),
             syn::Item::Trait(t) => fact.traits.push(t.ident.unraw().to_string()),
             syn::Item::Mod(m) if m.content.is_none() => {
@@ -1103,6 +1212,17 @@ fn scope_fact(list: &[syn::Item]) -> ScopeFact {
         }
     }
     fact
+}
+
+/// Every identifier a macro's arguments write, groups included.
+fn macro_idents(tokens: proc_macro2::TokenStream, out: &mut Vec<String>) {
+    for tree in tokens {
+        match tree {
+            proc_macro2::TokenTree::Ident(i) => out.push(i.unraw().to_string()),
+            proc_macro2::TokenTree::Group(g) => macro_idents(g.stream(), out),
+            _ => {}
+        }
+    }
 }
 
 /// The bindings of one `use` tree, each with the path it names; a path
@@ -1148,7 +1268,7 @@ fn scope_uses(tree: &syn::UseTree, prefix: &[String], rooted: bool, out: &mut Sc
 fn items(
     list: &[syn::Item],
     rel: &str,
-    _owner: Option<String>,
+    module: &str,
     in_test: bool,
     product: bool,
     lib: bool,
@@ -1156,8 +1276,15 @@ fn items(
     syntax: &mut FileSyntax,
 ) {
     let scope = file.scopes.len();
-    file.scopes.push(scope_fact(list));
+    file.scopes.push(scope_fact(list, rel, module));
     for item in list {
+        if let Some(ident) = declared(item) {
+            let span = Span {
+                file: rel.to_string(),
+                line: ident.span().start().line,
+            };
+            file.declared.push((scope, ident.unraw().to_string(), span));
+        }
         match item {
             syn::Item::Fn(f) => {
                 let public = matches!(f.vis, syn::Visibility::Public(_));
@@ -1196,6 +1323,17 @@ fn items(
                         None => written.join("::"),
                     }
                 });
+                // Where the dump's span of the header starts: its first
+                // token after the attributes (`default`, `unsafe` or
+                // `impl`), its column counted from 1 as rustc prints it.
+                let first = imp
+                    .modifiers
+                    .defaultness
+                    .map(|d| d.span)
+                    .or(imp.unsafety.map(|u| u.span))
+                    .unwrap_or(imp.impl_token.span)
+                    .start();
+                let impl_at = Some((first.line, first.column + 1));
                 let impl_params: Vec<String> = imp
                     .generics
                     .params
@@ -1223,6 +1361,7 @@ fn items(
                         fact.trait_ref.clone_from(&trait_ref);
                         fact.trait_path.clone_from(&trait_path);
                         fact.impl_params.clone_from(&impl_params);
+                        fact.impl_at = impl_at;
                         fact.scope = scope;
                         file.fns.push(fact);
                         syntax.fns.push(fn_syntax);
@@ -1277,8 +1416,18 @@ fn items(
                         file: rel.to_string(),
                         line: e.ident.span().start().line,
                     },
+                    scope,
                     derives: derives(&attrs(&e.attrs)),
                     explicit: e.variants.iter().any(|v| v.discriminant.is_some()),
+                    fields: e
+                        .variants
+                        .iter()
+                        .flat_map(|v| {
+                            source_fields(&v.fields)
+                                .into_iter()
+                                .map(move |(f, t)| (format!("{}.{f}", v.ident), t))
+                        })
+                        .collect(),
                     variants: e
                         .variants
                         .iter()
@@ -1301,7 +1450,9 @@ fn items(
                         file: rel.to_string(),
                         line: st.ident.span().start().line,
                     },
+                    scope,
                     derives: derives(&attrs(&st.attrs)),
+                    fields: source_fields(&st.fields),
                 });
                 syntax.structs.push(match &st.fields {
                     _ if !only_lifetimes(&st.generics) => {
@@ -1346,6 +1497,9 @@ fn items(
                     c.ident.to_string(),
                     crate::convert::ty(&c.ty),
                     crate::convert::block(&value),
+                    scope,
+                    c.to_token_stream().to_string(),
+                    c.ident.span().start().line,
                 ));
             }
             syn::Item::Use(u) => {
@@ -1360,7 +1514,11 @@ fn items(
                 }
                 if let Some((_, inner)) = &m.content {
                     let test = in_test || is_cfg_test(&marks);
-                    items(inner, rel, None, test, product, lib, file, syntax);
+                    let inner_module = match module {
+                        "" => m.ident.unraw().to_string(),
+                        outer => format!("{outer}::{}", m.ident.unraw()),
+                    };
+                    items(inner, rel, &inner_module, test, product, lib, file, syntax);
                 }
             }
             _ => {}
@@ -1373,6 +1531,20 @@ fn items(
             scan.visit_item(item);
             file.capabilities.extend(scan.found);
         }
+    }
+}
+
+/// The name an item declares a type under: a struct, enum, union, trait,
+/// trait alias or type alias.
+fn declared(item: &syn::Item) -> Option<&syn::Ident> {
+    match item {
+        syn::Item::Struct(s) => Some(&s.ident),
+        syn::Item::Enum(e) => Some(&e.ident),
+        syn::Item::Union(u) => Some(&u.ident),
+        syn::Item::Trait(t) => Some(&t.ident),
+        syn::Item::TraitAlias(t) => Some(&t.ident),
+        syn::Item::Type(t) => Some(&t.ident),
+        _ => None,
     }
 }
 
@@ -1595,7 +1767,7 @@ pub(crate) fn read_text(text: &str) -> (SourceFile, FileSyntax) {
     items(
         &parsed.items,
         "lib.rs",
-        None,
+        "",
         false,
         true,
         true,
@@ -1850,6 +2022,28 @@ mod tests {
                 ("D".to_string(), "an enum with type parameters"),
                 ("E".to_string(), "a union"),
             ]
+        );
+    }
+
+    /// A path outside the root is written with `..` steps, never as the
+    /// absolute path, and [`under`] reads it back to the same file.
+    #[test]
+    fn a_path_outside_the_root_is_relative_by_dot_dot_steps() {
+        assert_eq!(rel("/w/root", "/w/root"), "");
+        assert_eq!(rel("/w/root", "/w/root/src/lib.rs"), "src/lib.rs");
+        assert_eq!(
+            rel("/w/root", "/w/member/src/lib.rs"),
+            "../member/src/lib.rs"
+        );
+        assert_eq!(rel("/w/root", "/w/rootless/a.rs"), "../rootless/a.rs");
+        assert_eq!(rel("/w/a/b", "/x/y.rs"), "../../../x/y.rs");
+        assert_eq!(
+            under(Path::new("/w/root"), "../member/src/lib.rs"),
+            Path::new("/w/member/src/lib.rs")
+        );
+        assert_eq!(
+            under(Path::new("/w/root"), "src/lib.rs"),
+            Path::new("/w/root/src/lib.rs")
         );
     }
 }

@@ -10719,15 +10719,20 @@ pub(crate) fn lift_all(
                         }
                         decls.push((format!("#{}", t.name()), t));
                     }
-                    let calls = acc
-                        .calls
-                        .into_iter()
-                        .map(|k| match c.homonyms.get(&k) {
-                            Some(Some(meant)) => meant.clone(),
-                            _ => k,
-                        })
-                        .collect();
-                    graph.insert(c.rust.clone(), calls);
+                    // A call of a shared name is a call of the function or
+                    // constant the candidate's file means by it, in its own
+                    // body and in its closures' helpers alike: the order,
+                    // the axioms and the call cycles follow that key.
+                    let meant = |calls: BTreeSet<String>| -> BTreeSet<String> {
+                        calls
+                            .into_iter()
+                            .map(|k| match c.homonyms.get(&k) {
+                                Some(Some(meant)) => meant.clone(),
+                                _ => k,
+                            })
+                            .collect()
+                    };
+                    graph.insert(c.rust.clone(), meant(acc.calls));
                     let mut seen = acc.seen;
                     for (_, _, t) in &c.params {
                         seen.extend(t.mentions());
@@ -10755,7 +10760,7 @@ pub(crate) fn lift_all(
                     }
                     for h in acc.helpers {
                         let key = format!("#{}", h.name);
-                        graph.insert(key.clone(), h.calls);
+                        graph.insert(key.clone(), meant(h.calls));
                         own.insert(key.clone(), h.axioms);
                         let termination = h.termination.map(|(measure, theorems)| {
                             let names: Vec<String> =

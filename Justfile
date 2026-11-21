@@ -55,7 +55,9 @@ app:
     cd app && lexlean fmt --check && lexlean lock --check
     bash -euo pipefail -c 'case "${PRISM_PROOF_EVENT:-}" in pull_request:*|merge_group:*|push:refs/heads/main) if cargo run -q --locked -p xtask -- proof-reuse; then exit 0; fi ;; esac; rm -rf .prism-proof; prismpm --project app verify | tee .prism-proof.log; attestation=$(sed -n "s/^verified attestation: \([0-9a-f]\{64\}\)$/\1/p" .prism-proof.log); rm -f .prism-proof.log; cargo run -q --locked -p xtask -- proof-keep "$attestation"'
 # UE-01, UE-07, UE-11, UE-12: the engine's projections, checked by the SDK.
-# The committed fixture projection must be current and accepted; fresh
+# The committed fixture projection must be current and accepted, and each of
+# its library projects verified: built to its native package, replayed, and
+# every acceptance root run under std and no_std (UR-R29); fresh
 # projections of this workspace and of the advised fixture, whose locked
 # smallvec has RustSec advisories, must be accepted too. `lexlean verify` elaborates both in
 # Lean, so every lifted definition type-checks and every acceptance theorem is
@@ -63,6 +65,7 @@ app:
 uorust:
     cargo run -q --locked -p uorust -- check crates/uorust/tests/fixtures/thermostat --out crates/uorust/tests/fixtures/thermostat-prism --name thermostat --last-modified 2026-11-11T00:00:00Z
     cd crates/uorust/tests/fixtures/thermostat-prism && lexlean fmt --check && lexlean lock --check && lexlean verify && prismpm check
+    for lib in crates/uorust/tests/fixtures/thermostat-prism/library/*/; do (cd "$lib" && lexlean fmt --check && lexlean lock --check && prismpm check && prismpm verify) || exit 1; done
     rm -rf target/uorust-self
     cargo run -q --locked -p uorust -- mir . --out target/mir
     cargo run -q --locked -p uorust -- project . --out target/uorust-self --name uorust --last-modified 2026-11-11T00:00:00Z {{mir}}
