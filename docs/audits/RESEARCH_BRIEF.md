@@ -377,7 +377,8 @@ owner approval. Template-locked files change upstream only (K-5).
   GOV-01); (b) who may create tags and whether `release-tag.yml` stays;
   (c) Windows: sign or drop the leg; (d) reserve `uorust` and
   `uorust-certified` on crates.io or withdraw the claim (OPS-07 interim);
-  (e) GOV-05, blocked on the template contract re-pin.
+  (e) GOV-05, blocked on the template contract re-pin. Recorded (Sprint 1) as
+  open owner-action issues: (a) #47, (b) #48, (c) #49, (d) #50, (e) #51.
 - **O5** `v*` tag ruleset, after O4(b).
 - **O6** Main ruleset: required `acceptance / ubuntu-24.04`, 1 approval,
   CODEOWNERS, no always-bypass. Only after C3, C4, C5 and O2.
