@@ -12319,3 +12319,175 @@ fn compiler_constants_reuse_complete_factory_capture_ue_121() {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn compiler_discriminant_snapshots_ue_122() {
+    let dir = scratch("compiler-enum-snapshot", &[
+        ("Cargo.toml", "[package]\nname=\"enum_snapshot\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", r#"#![feature(custom_mir, core_intrinsics)]
+use core::intrinsics::mir::*;
+#[custom_mir(dialect = "built")]
+pub fn before(mut prior: Option<u8>, replacement: Option<u8>) -> isize {
+    mir! {
+        let tag: isize;
+        {
+            tag = Discriminant(prior);
+            prior = Move(replacement);
+            RET = tag;
+            Return()
+        }
+    }
+}
+#[custom_mir(dialect = "built")]
+pub fn direct(prior: Option<u8>, _replacement: Option<u8>) -> isize {
+    mir! {{ RET = Discriminant(prior); Return() }}
+}
+#[custom_mir(dialect = "built")]
+pub fn branch(mut prior: Option<u8>, replacement: Option<u8>) -> isize {
+    mir! {
+        let tag: isize;
+        {
+            tag = Discriminant(prior);
+            prior = Move(replacement);
+            match tag { 0 => empty, _ => full }
+        }
+        empty = { RET = 0; Return() }
+        full = { RET = 1; Return() }
+    }
+}
+#[custom_mir(dialect = "built")]
+pub fn field(prior: Option<u8>, _replacement: Option<u8>) -> isize {
+    mir! {
+        let pair: (isize, isize);
+        {
+            pair = (0_isize, 0_isize);
+            pair.0 = Discriminant(prior);
+            RET = pair.0;
+            Return()
+        }
+    }
+}
+"#),
+    ]);
+    let vectors = dir.join("src/bin/observations.rs");
+    std::fs::create_dir_all(vectors.parent().unwrap()).unwrap();
+    std::fs::write(&vectors, "fn main(){for (a,b) in [(None,Some(7)),(Some(7),None)] {println!(\"{}\",[enum_snapshot::before(a,b),enum_snapshot::direct(a,b),enum_snapshot::branch(a,b),enum_snapshot::field(a,b)].iter().map(isize::to_string).collect::<Vec<_>>().join(\"|\"));}}").unwrap();
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "observations"])
+        .env("RUSTC_BOOTSTRAP", "1")
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let expected = String::from_utf8(rust.stdout).unwrap();
+    assert_eq!(expected.lines().collect::<Vec<_>>(), ["0|0|0|0", "1|1|1|1"]);
+    let dumps = dumped(&dir, "enum-snapshot");
+    let mut opts = options("enum_snapshot");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let paths = [
+        "enum_snapshot::before",
+        "enum_snapshot::direct",
+        "enum_snapshot::branch",
+        "enum_snapshot::field",
+    ];
+    for path in paths {
+        assert!(
+            frontier_rows(&files, "lifted")
+                .iter()
+                .any(|r| r["function"].as_str() == Some(path)),
+            "{path}: {:?}",
+            residue_detail(&files, path)
+        );
+    }
+    let cache = dir.join("verdicts.toml");
+    let proof = uorust::mir::prove_bounded(
+        &dir,
+        &options("enum_snapshot"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!((proof.proved, proof.refused), (4, 0), "{proof:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let none = "(ctor Option.none [Nat])";
+    let some = "(ctor Option.some [Nat] 7)";
+    let mut checks = String::new();
+    for (i, ((a, b), results)) in [(none, some), (some, none)]
+        .into_iter()
+        .zip(expected.lines())
+        .enumerate()
+    {
+        for (j, (path, result)) in paths.into_iter().zip(results.split('|')).enumerate() {
+            let model = rows
+                .iter()
+                .find(|r| r["function"].as_str() == Some(path))
+                .unwrap()["definition"]
+                .as_str()
+                .unwrap()
+                .strip_prefix("Behavior::")
+                .unwrap();
+            let axioms = decisions
+                .rows
+                .values()
+                .find(|r| r.function == path)
+                .and_then(|r| r.axioms.get(model))
+                .cloned()
+                .unwrap_or_default()
+                .join(", ");
+            checks.push_str(&format!("theorem{{name:tagObservation{i}{j},parameters:[],statement:(({model} {a} {b}) = {result}),proof:decide{{}},axioms:[{axioms}]}}\n"));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{checks}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = checks.replacen(" = 0)", " = 1)", 1);
+    assert_ne!(wrong, checks);
+    std::fs::write(file, body.replace(&checks, &wrong)).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

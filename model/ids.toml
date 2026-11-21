@@ -783,3 +783,9 @@ id = "UE-121"
 level = "build"
 suite = "engine"
 statement = "Compiler constant dependencies reuse the complete exact Factory core capture and existing native kernels under their owning source and target graph, with source-verified unconditional default providers and foreign override target and capture controls"
+
+[[id]]
+id = "UE-122"
+level = "build"
+suite = "engine"
+statement = "Native MIR captures enum discriminants at the read and uses the compiler intrinsic's checked constructor and integer representation for value observations, preserving payloads and rejecting unknown discriminant assignments"

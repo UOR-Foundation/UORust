@@ -2126,3 +2126,11 @@ negatives, altered capture/body/provider rejection, actual Rust/SDK constant
 observations, and a wrong-result LLV7002 rejection. Whole-registry impact,
 production acceptance and the unchanged full `just vv` release gate remain
 separate requirements.
+
+UE-122 exercises a compiler-generated MIR body which reads the discriminant of an
+Option, replaces the input, and returns the earlier tag. The original translation
+refused that read with `mir::Rvalue::Discriminant`. The pinned compiler's
+executable returned 0 and 1 for opposite input variants. Four native proofs and
+eight SDK observations passed for saved values, direct returns, branches and
+field writes after sharing the checked conversion and saving the scrutinee. Substituting the replacement's tag for the original
+failed the SDK observation with LLV7002.

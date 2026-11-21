@@ -389,8 +389,8 @@ enum Val {
     /// The pair an overflow-checked operator yields: the exact value, and
     /// whether it leaves the type's range.
     Checked(String, String, Ty),
-    /// The discriminant of the value at a place.
-    Disc(IrPlace),
+    /// The enum at the time its tag was read, including any branch evidence.
+    Disc(Box<TagRead>),
     /// A mutable borrow of a place (a local or a part of one): a call that
     /// takes it returns the place's new value as well (its backward
     /// function, as in Aeneas), and a write through it writes the place.
@@ -407,6 +407,24 @@ enum Val {
         value: String,
         item: Ty,
     },
+}
+
+#[derive(Clone, Debug)]
+struct TagRead {
+    value: String,
+    ty: Ty,
+    only: Option<Inhabited>,
+    guarded: Option<(String, String)>,
+}
+
+fn saved_tag<'a>(op: &IrOperand, st: &'a State) -> Option<&'a TagRead> {
+    let (IrOperand::Copy(place) | IrOperand::Move(place)) = op else {
+        return None;
+    };
+    match st.env.get(&place.local) {
+        Some(Val::Disc(tag)) if place.projection.is_empty() => Some(tag),
+        _ => None,
+    }
 }
 
 /// What a call gives: its value, the new value of each mutably borrowed
@@ -2344,20 +2362,21 @@ impl Fun<'_, '_> {
                     };
                     // A switch on a guarded option's discriminant exits on
                     // its guard: `None` is 0 and `Some` is 1.
-                    let (c, on_true, on_false) = match self.guarded_disc(op, &st) {
-                        Some((guard, _, _)) => (guard, target(1), target(0)),
-                        None => {
-                            let (c, t) = self.operand(op, &st)?;
-                            if t != Ty::Bool {
-                                return Ok(None);
+                    let (c, on_true, on_false) =
+                        match saved_tag(op, &st).and_then(|tag| tag.guarded.as_ref()) {
+                            Some((guard, _)) => (guard.clone(), target(1), target(0)),
+                            None => {
+                                let (c, t) = self.operand(op, &st)?;
+                                if t != Ty::Bool {
+                                    return Ok(None);
+                                }
+                                match arms.as_slice() {
+                                    [(0, f)] => (c, *otherwise, *f),
+                                    [(1, t)] => (c, *t, *otherwise),
+                                    _ => return Ok(None),
+                                }
                             }
-                            match arms.as_slice() {
-                                [(0, f)] => (c, *otherwise, *f),
-                                [(1, t)] => (c, *t, *otherwise),
-                                _ => return Ok(None),
-                            }
-                        }
-                    };
+                        };
                     return Ok(
                         match (region.contains(&on_true), region.contains(&on_false)) {
                             (true, false) => Some((c, true)),
@@ -2621,7 +2640,7 @@ impl Fun<'_, '_> {
                 }
                 let v = match st.env.get(&0) {
                     // A returned borrow is the value of the place it borrows.
-                    Some(Val::V(..) | Val::Mut(_) | Val::Guarded { .. }) => {
+                    Some(Val::V(..) | Val::Mut(_) | Val::Disc(_) | Val::Guarded { .. }) => {
                         self.read(&whole, &st)?.0
                     }
                     _ if self.ret == Ty::Unit => "()".into(),
@@ -2910,7 +2929,15 @@ impl Fun<'_, '_> {
     /// value is replaced in a new value of the local, and a write through a
     /// mutable borrow writes the place it borrows.
     fn write(&mut self, p: &IrPlace, v: Val, st: &mut State) -> Lift<()> {
-        if let Some((view, steps)) = self.view_of(p, st)? {
+        let view = self.view_of(p, st)?;
+        let v = match v {
+            Val::Disc(tag) if !p.projection.is_empty() || view.is_some() => {
+                let dt = self.local_ty(p.local, &p.projection)?;
+                Val::V(self.tag_integer(&tag, &dt)?, dt)
+            }
+            value => value,
+        };
+        if let Some((view, steps)) = view {
             return self.store(&view, &steps, v, st);
         }
         let k = spec::MirStatementKind::Assign.path();
@@ -3563,26 +3590,6 @@ impl Fun<'_, '_> {
         Ok(())
     }
 
-    /// The guard, held value and item type of the guarded option whose
-    /// discriminant `op` reads.
-    fn guarded_disc(&self, op: &IrOperand, st: &State) -> Option<(String, String, Ty)> {
-        let (IrOperand::Copy(p) | IrOperand::Move(p)) = op else {
-            return None;
-        };
-        let Some(Val::Disc(place)) = st.env.get(&p.local) else {
-            return None;
-        };
-        if !(p.projection.is_empty() && place.projection.is_empty()) {
-            return None;
-        }
-        match st.env.get(&place.local) {
-            Some(Val::Guarded { guard, value, item }) => {
-                Some((guard.clone(), value.clone(), item.clone()))
-            }
-            _ => None,
-        }
-    }
-
     fn unreachable(&mut self, st: &State, what: &str) -> Lift<Expr> {
         self.obligation(st, "(false = true)", what);
         let result = self.result.clone();
@@ -3602,20 +3609,8 @@ impl Fun<'_, '_> {
         otherwise: IrBlockId,
         st: State,
     ) -> Lift<Expr> {
-        if let Some((guard, value, _)) = self.guarded_disc(op, &st) {
-            return self.guarded_switch(op, &guard, &value, arms, otherwise, st);
-        }
-        let disc = match op {
-            IrOperand::Copy(p) | IrOperand::Move(p) if p.projection.is_empty() => {
-                match st.env.get(&p.local) {
-                    Some(Val::Disc(place)) => Some(place.clone()),
-                    _ => None,
-                }
-            }
-            _ => None,
-        };
-        if let Some(place) = disc {
-            return self.match_on(&place, arms, otherwise, st);
+        if let Some(tag) = saved_tag(op, &st).cloned() {
+            return self.match_on(tag, arms, otherwise, st);
         }
         let (c, t) = self.operand(op, &st)?;
         let target = |v: i128| {
@@ -3677,64 +3672,42 @@ impl Fun<'_, '_> {
         }
     }
 
-    /// A switch on a guarded option's discriminant: an `if` on the guard,
-    /// whose `Some` arm reads the held value as the variant's field.
-    fn guarded_switch(
-        &mut self,
-        op: &IrOperand,
-        guard: &str,
-        value: &str,
-        arms: &[(i128, IrBlockId)],
-        otherwise: IrBlockId,
-        st: State,
-    ) -> Lift<Expr> {
-        let target = |v: i128| {
-            arms.iter()
-                .find(|(a, _)| *a == v)
-                .map_or(otherwise, |(_, b)| *b)
-        };
-        let (IrOperand::Copy(p) | IrOperand::Move(p)) = op else {
-            return Err(kind(spec::MirRvalue::Discriminant.path(), "of a constant"));
-        };
-        let Some(Val::Disc(place)) = st.env.get(&p.local).cloned() else {
-            return Err(kind(spec::MirRvalue::Discriminant.path(), "of no place"));
-        };
-        let mut yes = st.clone();
-        yes.path.push(MirStep::If(guard.to_string(), true));
-        let (scrutinee, ty) = self.read(&place, &st)?;
-        yes.bound.insert(
-            (variant_key(&scrutinee, &ty), "Some".into()),
-            vec![value.to_string()],
-        );
-        let mut no = st;
-        no.path.push(MirStep::If(guard.to_string(), false));
-        let then = self.goto(target(1), yes)?;
-        let otherwise = self.goto(target(0), no)?;
-        Ok(Expr::If {
-            condition: Box::new(Expr::Flat(guard.to_string())),
-            then: Box::new(then),
-            otherwise: Box::new(otherwise),
-        })
-    }
-
     /// A switch on a discriminant: a `match` with one arm per constructor,
     /// in declaration order, which is the discriminant's value.
     fn match_on(
         &mut self,
-        place: &IrPlace,
+        tag: TagRead,
         arms: &[(i128, IrBlockId)],
         otherwise: IrBlockId,
         st: State,
     ) -> Lift<Expr> {
-        let (scrutinee, t) = self.read(place, &st)?;
+        let TagRead {
+            value: scrutinee,
+            ty: t,
+            only,
+            guarded,
+        } = tag;
         let key = variant_key(&scrutinee, &t);
-        // An enum with one inhabited variant is that variant's field: the
-        // switch takes that arm, whose field is the value itself.
-        let printed = (place.projection.is_empty())
-            .then(|| self.body.locals.get(place.local))
-            .flatten()
-            .and_then(|text| inhabited_variant(text));
-        if let Some(only) = printed {
+        if let Some((guard, value)) = guarded {
+            let target = |v: i128| {
+                arms.iter()
+                    .find(|(a, _)| *a == v)
+                    .map_or(otherwise, |(_, b)| *b)
+            };
+            let mut yes = st.clone();
+            yes.path.push(MirStep::If(guard.clone(), true));
+            yes.bound.insert((key, "Some".into()), vec![value]);
+            let mut no = st;
+            no.path.push(MirStep::If(guard.clone(), false));
+            let then = self.goto(target(1), yes)?;
+            let otherwise = self.goto(target(0), no)?;
+            return Ok(Expr::If {
+                condition: Box::new(Expr::Flat(guard)),
+                then: Box::new(then),
+                otherwise: Box::new(otherwise),
+            });
+        }
+        if let Some(only) = only {
             let target = arms
                 .iter()
                 .find(|(a, _)| *a == only.discriminant)
@@ -4770,43 +4743,9 @@ impl Fun<'_, '_> {
                     ))
                 }
             },
-            // A discriminant read as a value: of an enum of unit variants,
-            // the value its source sets for each variant (its index where
-            // it sets none), at the local's unsigned type.
-            Val::Disc(place) if p.projection.is_empty() => {
-                let k = spec::MirRvalue::Discriminant.path();
-                let as_value = || kind(k, "a discriminant read as a value");
-                let declared = self
-                    .body
-                    .locals
-                    .get(p.local)
-                    .cloned()
-                    .ok_or_else(as_value)?;
-                let dt = ty(&declared, self.cx.types)?;
-                let (x, et) = self.read(&place, st)?;
-                let Ty::Named(n) = &et else {
-                    return Err(as_value());
-                };
-                let vs = self.cx.types.enums.get(n).ok_or_else(as_value)?;
-                let values: Vec<i128> = match self.cx.types.discriminants.get(n) {
-                    Some(v) => v.iter().map(|x| i128::from(*x)).collect(),
-                    None if !self.cx.explicit.contains(n) => (0..vs.len() as i128).collect(),
-                    None => return Err(as_value()),
-                };
-                let fits = |v: &i128| match dt {
-                    Ty::Nat(Some(bits)) => *v >= 0 && *v < (1i128 << bits),
-                    Ty::Nat(None) => *v >= 0,
-                    _ => false,
-                };
-                if values.len() != vs.len() || !values.iter().all(fits) {
-                    return Err(as_value());
-                }
-                let arms: Vec<String> = vs
-                    .iter()
-                    .zip(&values)
-                    .map(|(v, d)| format!("| {n}.{v} => {d}"))
-                    .collect();
-                return Ok((format!("(match ({x} : {n}) {})", arms.join(" ")), dt));
+            Val::Disc(tag) if p.projection.is_empty() => {
+                let dt = self.local_ty(p.local, &[])?;
+                return Ok((self.tag_integer(&tag, &dt)?, dt));
             }
             Val::Disc(_) => {
                 return Err(kind(
@@ -5303,7 +5242,27 @@ impl Fun<'_, '_> {
                 Ok(Val::V(v, t))
             }
             IrRvalue::Ref(spec::MirBorrowKind::Mut, p) => self.borrowed(p, st).map(Val::Mut),
-            IrRvalue::Discriminant(p) => Ok(Val::Disc(p.clone())),
+            IrRvalue::Discriminant(p) => {
+                let (value, ty) = self.read(p, st)?;
+                let only = p
+                    .projection
+                    .is_empty()
+                    .then(|| self.body.locals.get(p.local))
+                    .flatten()
+                    .and_then(|text| inhabited_variant(text));
+                let guarded = match st.env.get(&p.local) {
+                    Some(Val::Guarded { guard, value, .. }) if p.projection.is_empty() => {
+                        Some((guard.clone(), value.clone()))
+                    }
+                    _ => None,
+                };
+                Ok(Val::Disc(Box::new(TagRead {
+                    value,
+                    ty,
+                    only,
+                    guarded,
+                })))
+            }
             IrRvalue::Unary(op, o) => {
                 let (v, t) = self.operand(o, st)?;
                 match (op, &t) {
@@ -7946,6 +7905,74 @@ impl Fun<'_, '_> {
         })
     }
 
+    fn tag_integer(&mut self, tag: &TagRead, dt: &Ty) -> Lift<String> {
+        let k = spec::MirRvalue::Discriminant.path();
+        let int = Int::of(dt, self.cx.widths)
+            .filter(|_| matches!(dt, Ty::Nat(_) | Ty::Signed(_)))
+            .ok_or_else(|| kind(k, "a discriminant read at a noninteger type"))?;
+        if let Some(only) = &tag.only {
+            return super::int::literal(only.discriminant, int)
+                .ok_or_else(|| kind(k, "an out-of-range discriminant"));
+        }
+        let values = match &tag.ty {
+            Ty::Named(name) => self.cx.types.discriminants.get(name).cloned(),
+            _ => None,
+        };
+        self.tag_value(&tag.value, &tag.ty, int, values.as_deref(), k)
+    }
+
+    /// Interpret a compiler enum tag using its retained variant order and the
+    /// same target-width conversion for an rvalue and an intrinsic call.
+    fn tag_value(
+        &mut self,
+        v: &str,
+        vt: &Ty,
+        int: Int,
+        values: Option<&[i64]>,
+        k: &str,
+    ) -> Lift<String> {
+        let ctors = match (vt, values.is_some()) {
+            // The source's own variants, in order, where the lift's
+            // enum holds them (as `CmpOrdering` holds `Ordering`'s).
+            (Ty::Named(n), true) => self
+                .cx
+                .types
+                .enums
+                .get(n)
+                .ok_or_else(|| kind(k, "unknown or unrepresentable discriminant"))?
+                .iter()
+                .map(|v| (v.clone(), format!("{n}.{v}"), Vec::new()))
+                .collect(),
+            _ => constructors(vt, self.cx.types, self.cx.explicit)?,
+        };
+        if values.is_some_and(|vs| vs.len() != ctors.len()) {
+            // A variant the source declares under a `cfg` the
+            // census's target leaves out.
+            return Err(kind(
+                k,
+                "an enum whose variants its source declares by target",
+            ));
+        }
+        let mut arms = Vec::new();
+        for (i, (variant, ctor, fields)) in ctors.iter().enumerate() {
+            let n = match values {
+                Some(vs) => Some(super::core::discriminant(vs[i], int.signed)),
+                None => i128::try_from(i).ok(),
+            };
+            let value = n
+                .and_then(|n| super::int::literal(n, int))
+                .ok_or_else(|| kind(k, "unknown or unrepresentable discriminant"))?;
+            let mut pattern = ctor.clone();
+            for j in 0..fields.len() {
+                pattern.push(' ');
+                pattern.push_str(&self.fresh(Some(&format!("{}{j}", variant.to_lowercase())), j));
+            }
+            arms.push(format!("| {pattern} => {value}"));
+        }
+        self.mention(vt);
+        Ok(format!("(match {v} {})", arms.join(" ")))
+    }
+
     /// The model of a call of the intrinsic `path`, by the signature core
     /// declares it with.
     fn intrinsic(
@@ -8068,50 +8095,7 @@ impl Fun<'_, '_> {
                     None => None,
                 };
                 let int = Int::of(dt, self.cx.widths).ok_or_else(unmodeled)?;
-                let ctors = match (vt, values.is_some()) {
-                    // The source's own variants, in order, where the lift's
-                    // enum holds them (as `CmpOrdering` holds `Ordering`'s).
-                    (Ty::Named(n), true) => self
-                        .cx
-                        .types
-                        .enums
-                        .get(n)
-                        .ok_or_else(unmodeled)?
-                        .iter()
-                        .map(|v| (v.clone(), format!("{n}.{v}"), Vec::new()))
-                        .collect(),
-                    _ => constructors(vt, self.cx.types, self.cx.explicit)?,
-                };
-                if values.as_ref().is_some_and(|vs| vs.len() != ctors.len()) {
-                    // A variant the source declares under a `cfg` the
-                    // census's target leaves out.
-                    return Err(kind(
-                        k,
-                        &format!(
-                            "{path} of {printed}, whose variants its source declares by target"
-                        ),
-                    ));
-                }
-                let mut arms = Vec::new();
-                for (i, (variant, ctor, fields)) in ctors.iter().enumerate() {
-                    let n = match &values {
-                        Some(vs) => Some(super::core::discriminant(vs[i], int.signed)),
-                        None => i128::try_from(i).ok(),
-                    };
-                    let value = n
-                        .and_then(|n| super::int::literal(n, int))
-                        .ok_or_else(unmodeled)?;
-                    let mut pattern = ctor.clone();
-                    for j in 0..fields.len() {
-                        pattern.push(' ');
-                        pattern.push_str(
-                            &self.fresh(Some(&format!("{}{j}", variant.to_lowercase())), j),
-                        );
-                    }
-                    arms.push(format!("| {pattern} => {value}"));
-                }
-                self.mention(vt);
-                Ok(format!("(match {v} {})", arms.join(" ")))
+                self.tag_value(v, vt, int, values.as_deref(), k)
             }
             // A transmute between types of one layout: the scalar the
             // source wraps, rewrapped as the destination wraps it. Into an

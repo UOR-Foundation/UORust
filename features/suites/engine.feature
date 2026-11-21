@@ -852,3 +852,10 @@ Feature: engine
     When a closed query names a source-verified unconditional constant provider
     Then its body and dependencies use the existing native kernels in their owning graph
     But foreign overridable mismatched-target and changed-capture bindings remain refused
+
+  @UE-122 @build
+  Scenario: Enum tag observations retain the value present at the compiler read
+    Given a compiler body that reads a payload enum tag before replacing the enum
+    When the saved tag is used as an integer
+    Then the SDK observes the original variant under the compiler integer representation
+    But an observation of the replacement tag as the original is rejected
