@@ -14,7 +14,7 @@ import subprocess
 import sys
 import tomllib
 
-SHA = re.compile(r"[0-9a-f]{40}\\Z")
+SHA = re.compile(r"[0-9a-f]{40}\Z")
 DOC_EXT = {".md", ".markdown", ".rst", ".adoc"}
 PASSIVE_DOC_PREFIXES = ("docs/guides/", "docs/tutorials/", "docs/examples/")
 MAX_CHANGED = 2000
@@ -43,7 +43,7 @@ def compare(repo: Path, base: str, head: str) -> list[str]:
         if actual != rev:
             raise UnverifiedDiff("requested revision does not identify the checked commit")
     raw = git(repo, "diff", "--no-ext-diff", "--no-renames", "--raw", "-z", base, head)
-    entries = raw.split(b"\\0")
+    entries = raw.split(b"\0")
     if entries and entries[-1] == b"":
         entries.pop()
     if len(entries) % 2:
@@ -111,7 +111,7 @@ def consumers(path: str, dependency_map: dict[str, list[str]]) -> list[str]:
 
 
 def safe_path(path: str) -> bool:
-    return bool(path and not path.startswith(("/", "../")) and "\\\\" not in path
+    return bool(path and not path.startswith(("/", "../")) and "\\" not in path
                 and not any(s in {".", "..", ""} for s in path.split("/"))
                 and all(ord(c) >= 32 for c in path))
 
@@ -184,12 +184,12 @@ def main() -> int:
     print(json.dumps(result, sort_keys=True))
     if args.summary:
         with args.summary.open("a", encoding="utf-8") as output:
-            output.write("\\n### Advisory PR impact classification (not merge acceptance)\\n\\n"
-                         f"Exact base: `{result['base_sha']}`  \\nExact head: `{result['head_sha']}`  \\n"
-                         f"Impact route: **{result['route']}**  \\n"
-                         f"Development suites: {', '.join(result['selected_development_suites'])}  \\n"
+            output.write("\n### Advisory PR impact classification (not merge acceptance)\n\n"
+                         f"Exact base: `{result['base_sha']}`  \nExact head: `{result['head_sha']}`  \n"
+                         f"Impact route: **{result['route']}**  \n"
+                         f"Development suites: {', '.join(result['selected_development_suites'])}  \n"
                          "Full native `just vv` remains mandatory before merge; "
-                         "this report does not skip, authorize, or claim execution of a job.\\n")
+                         "this report does not skip, authorize, or claim execution of a job.\n")
     return 0
 
 
