@@ -5,14 +5,14 @@
 # stops the functions it counts (the detail their rows state, under its
 # cause), the one that stops the most first: the work queue.
 
-# Honesty report: 382 of 1822 functions of product code are lifted; 1008
-# are residue, 187 foreign and 245 effect rows.
+# Honesty report: 384 of 1845 functions of product code are lifted; 1012
+# are residue, 203 foreign and 246 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
 #   collision: 1
 #   form: 24
-#   mir::AggregateKind::Closure: 88
+#   mir::AggregateKind::Closure: 89
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
@@ -36,7 +36,8 @@
 #     1 figures::lexlean_module::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 figures::rust_block::{closure#0}: mir::TerminatorKind::Call: std::char::methods::<impl char>::is_whitespace
 #     1 figures::same_program::{closure#0}: type outside the lift: proc_macro2::TokenTree
-#     1 figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:816:42: 816:50}>
+#     1 figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:823:42: 823:50}>
+#     1 ingest::figures_refused::{closure#0}: mir::TerminatorKind::Call: std::boxed::Box::new_uninit
 #     1 ingest::rel::{closure#0}: type outside the lift: std::str::Split<'_, char>
 #     1 layouts::same_type::{closure#0}: type outside the lift: std::str::SplitWhitespace<'_>
 #     1 layouts::skip::{closure#0}: mir::TerminatorKind::Call: std::char::methods::<impl char>::is_whitespace
@@ -146,10 +147,11 @@
 #   mir::Rvalue::Discriminant: 7
 #     7 a discriminant read as a value
 #   mir::Rvalue::Use: 12
-#   mir::TerminatorKind::Call: 198
+#   mir::TerminatorKind::Call: 199
 #     1 <bool as std::string::ToString>::to_string
 #     3 <certify::profile::Profile as std::cmp::PartialEq>::eq
 #     1 <figures::Counts as std::default::Default>::default
+#     1 <figures::Stated as std::default::Default>::default
 #     1 <i128 as std::convert::From>::from
 #     2 <lift::Ty as std::cmp::PartialEq>::eq
 #     1 <names::Bound as syn::visit::Visit>::visit_pat
@@ -247,7 +249,7 @@
 #     72 a loop nested in a loop, whose helpers would call each other
 #   mir::TerminatorKind::SwitchInt: 1
 #     1 a loop whose header does not exit on an order of naturals, so no measure is derived
-#   mir::Ty: 389
+#   mir::Ty: 391
 #     1 A0
 #     1 K
 #     1 bridge::BridgeOutcome<(std::string::String, std::string::String, std::vec::Vec<(std::string::String, std::string::String)>, usize)>
@@ -302,6 +304,7 @@
 #     1 std::collections::btree_map::Iter<'_, std::string::String, certify::cases::Ran>
 #     2 std::collections::btree_map::Iter<'_, std::string::String, register::Row>
 #     1 std::collections::btree_map::Iter<'_, std::string::String, std::vec::Vec<std::string::String>>
+#     1 std::collections::btree_map::Keys<'_, std::string::String, figures::Stated>
 #     1 std::collections::btree_map::Keys<'_, std::string::String, layouts::TypeLayout>
 #     1 std::collections::btree_map::Values<'_, std::string::String, register::Row>
 #     1 std::collections::btree_map::Values<'_, std::string::String, std::collections::BTreeSet<std::string::String>>
@@ -314,11 +317,11 @@
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, std::string::String>>
 #     2 std::iter::Enumerate<std::slice::Iter<'_, std::vec::Vec<char>>>
-#     1 std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1508:17: 1508:25}>
+#     1 std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1515:17: 1515:25}>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:6347:17: 6347:20}>
-#     1 std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:765:32: 765:35}>
+#     1 std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:810:32: 810:35}>
 #     1 std::iter::Filter<std::vec::IntoIter<project::FnRef>, {closure@crates/uorust/src/project.rs:6439:47: 6439:51}>
-#     1 std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4234:21: 4234:24}>
+#     1 std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4678:21: 4678:24}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:1099:54: 1099:57}>
 #     1 std::iter::FlatMap<std::slice::Iter<'_, &embedding::Recorded>, &std::vec::Vec<std::string::String>, {closure@crates/uorust/src/embedding.rs:405:60: 405:63}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:182:37: 182:40}>
@@ -371,11 +374,11 @@
 #     2 std::str::Split<'_, &str>
 #     1 std::str::Split<'_, [char; 2]>
 #     2 std::str::Split<'_, char>
-#     1 std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2890:16: 2890:25}>
+#     1 std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2897:16: 2897:25}>
 #     1 std::str::Split<'_, {closure@crates/uorust/src/project.rs:6839:16: 6839:30}>
 #     1 std::str::SplitWhitespace<'_>
 #     1 std::str::Utf8Error
-#     1 syn::Error
+#     2 syn::Error
 #     1 syn::File
 #     1 syn::Generics
 #     1 syn::Item
@@ -535,11 +538,11 @@
 spec = "uorust/register/1"
 
 [lift]
-functions = 1822
-lifted = 382
-residue = 1008
-foreign = 187
-effect = 245
+functions = 1845
+lifted = 384
+residue = 1012
+foreign = 203
+effect = 246
 
 [[construct]]
 construct = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -564,7 +567,7 @@ functions = 54
 [[construct]]
 construct = "Fs effect: std::fs::read_to_string"
 cause = "effect"
-functions = 45
+functions = 46
 
 [[construct]]
 construct = "Fs effect: std::fs::read_dir"
@@ -617,6 +620,11 @@ cause = "effect"
 functions = 13
 
 [[construct]]
+construct = "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"
+cause = "foreign"
+functions = 12
+
+[[construct]]
 construct = "takes or returns toml::Value, a type of the toml crate with no LexLean model"
 cause = "foreign"
 functions = 12
@@ -662,11 +670,6 @@ cause = "effect"
 functions = 9
 
 [[construct]]
-construct = "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"
-cause = "foreign"
-functions = 9
-
-[[construct]]
 construct = "mir::TerminatorKind::Call: cmp::PartialEq::ne: std's MIR stops at mir::TerminatorKind::Call: <lift::Ty as cmp::PartialEq>::eq"
 cause = "mir::TerminatorKind::Call"
 functions = 9
@@ -688,6 +691,11 @@ functions = 8
 
 [[construct]]
 construct = "takes or returns syn::Generics, a type of the syn crate with no LexLean model"
+cause = "foreign"
+functions = 7
+
+[[construct]]
+construct = "takes or returns syn::Path, a type of the syn crate with no LexLean model"
 cause = "foreign"
 functions = 7
 
@@ -762,11 +770,6 @@ cause = "mir::Ty"
 functions = 6
 
 [[construct]]
-construct = "takes or returns syn::Path, a type of the syn crate with no LexLean model"
-cause = "foreign"
-functions = 5
-
-[[construct]]
 construct = "mir::TerminatorKind::Call: a call of the function itself, whose measure is not derived"
 cause = "mir::TerminatorKind::Call"
 functions = 5
@@ -813,6 +816,11 @@ functions = 4
 
 [[construct]]
 construct = "takes or returns syn::Attribute, a type of the syn crate with no LexLean model"
+cause = "foreign"
+functions = 4
+
+[[construct]]
+construct = "takes or returns syn::Macro, a type of the syn crate with no LexLean model"
 cause = "foreign"
 functions = 4
 
@@ -1042,6 +1050,16 @@ cause = "foreign"
 functions = 2
 
 [[construct]]
+construct = "takes or returns &mut syn::Expr, a type of the syn crate with no LexLean model"
+cause = "foreign"
+functions = 2
+
+[[construct]]
+construct = "takes or returns &mut syn::Macro, a type of the syn crate with no LexLean model"
+cause = "foreign"
+functions = 2
+
+[[construct]]
 construct = "takes or returns LineColumn, a type of the proc_macro2 crate with no LexLean model"
 cause = "foreign"
 functions = 2
@@ -1073,11 +1091,6 @@ functions = 2
 
 [[construct]]
 construct = "takes or returns syn::Lit, a type of the syn crate with no LexLean model"
-cause = "foreign"
-functions = 2
-
-[[construct]]
-construct = "takes or returns syn::Macro, a type of the syn crate with no LexLean model"
 cause = "foreign"
 functions = 2
 
@@ -1283,6 +1296,11 @@ functions = 2
 
 [[construct]]
 construct = "mir::Ty: std::str::Split<'_, char>"
+cause = "mir::Ty"
+functions = 2
+
+[[construct]]
+construct = "mir::Ty: syn::Error"
 cause = "mir::Ty"
 functions = 2
 
@@ -1817,6 +1835,11 @@ cause = "foreign"
 functions = 1
 
 [[construct]]
+construct = "takes or returns &mut syn::Attribute, a type of the syn crate with no LexLean model"
+cause = "foreign"
+functions = 1
+
+[[construct]]
 construct = "takes or returns &mut syn::ExprCall, a type of the syn crate with no LexLean model"
 cause = "foreign"
 functions = 1
@@ -1837,7 +1860,12 @@ cause = "foreign"
 functions = 1
 
 [[construct]]
-construct = "takes or returns &mut syn::Macro, a type of the syn crate with no LexLean model"
+construct = "takes or returns &mut syn::File, a type of the syn crate with no LexLean model"
+cause = "foreign"
+functions = 1
+
+[[construct]]
+construct = "takes or returns &mut syn::Pat, a type of the syn crate with no LexLean model"
 cause = "foreign"
 functions = 1
 
@@ -1852,12 +1880,22 @@ cause = "foreign"
 functions = 1
 
 [[construct]]
+construct = "takes or returns &mut syn::Stmt, a type of the syn crate with no LexLean model"
+cause = "foreign"
+functions = 1
+
+[[construct]]
 construct = "takes or returns Punctuated<syn::GenericArgument, syn::Token ! [,]>, a type of the syn crate with no LexLean model"
 cause = "foreign"
 functions = 1
 
 [[construct]]
 construct = "takes or returns Punctuated<syn::TypeParamBound, syn::Token ! [+]>, a type of the syn crate with no LexLean model"
+cause = "foreign"
+functions = 1
+
+[[construct]]
+construct = "takes or returns TokenTree, a type of the proc_macro2 crate with no LexLean model"
 cause = "foreign"
 functions = 1
 
@@ -1873,6 +1911,11 @@ functions = 1
 
 [[construct]]
 construct = "takes or returns impl quote::ToTokens, a type of the quote crate with no LexLean model"
+cause = "foreign"
+functions = 1
+
+[[construct]]
+construct = "takes or returns proc_macro2::Span, a type of the proc_macro2 crate with no LexLean model"
 cause = "foreign"
 functions = 1
 
@@ -2092,7 +2135,12 @@ cause = "mir::AggregateKind::Closure"
 functions = 1
 
 [[construct]]
-construct = "mir::AggregateKind::Closure: figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:816:42: 816:50}>"
+construct = "mir::AggregateKind::Closure: figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:823:42: 823:50}>"
+cause = "mir::AggregateKind::Closure"
+functions = 1
+
+[[construct]]
+construct = "mir::AggregateKind::Closure: ingest::figures_refused::{closure#0}: mir::TerminatorKind::Call: std::boxed::Box::new_uninit"
 cause = "mir::AggregateKind::Closure"
 functions = 1
 
@@ -2582,6 +2630,11 @@ cause = "mir::TerminatorKind::Call"
 functions = 1
 
 [[construct]]
+construct = "mir::TerminatorKind::Call: <figures::Stated as std::default::Default>::default"
+cause = "mir::TerminatorKind::Call"
+functions = 1
+
+[[construct]]
 construct = "mir::TerminatorKind::Call: <i128 as std::convert::From>::from"
 cause = "mir::TerminatorKind::Call"
 functions = 1
@@ -3052,6 +3105,11 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
+construct = "mir::Ty: std::collections::btree_map::Keys<'_, std::string::String, figures::Stated>"
+cause = "mir::Ty"
+functions = 1
+
+[[construct]]
 construct = "mir::Ty: std::collections::btree_map::Keys<'_, std::string::String, layouts::TypeLayout>"
 cause = "mir::Ty"
 functions = 1
@@ -3107,7 +3165,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1508:17: 1508:25}>"
+construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1515:17: 1515:25}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3117,7 +3175,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:765:32: 765:35}>"
+construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:810:32: 810:35}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3127,7 +3185,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4234:21: 4234:24}>"
+construct = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4678:21: 4678:24}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3292,7 +3350,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2890:16: 2890:25}>"
+construct = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2897:16: 2897:25}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3308,11 +3366,6 @@ functions = 1
 
 [[construct]]
 construct = "mir::Ty: std::str::Utf8Error"
-cause = "mir::Ty"
-functions = 1
-
-[[construct]]
-construct = "mir::Ty: syn::Error"
 cause = "mir::Ty"
 functions = 1
 
@@ -5326,6 +5379,13 @@ detail = "expression form outside the lift: method call .match_indices"
 stops = [["type", "type outside the lift: Self"]]
 
 [[residue]]
+kappa = "a8097f24e7c3fe16fae00e732904eab726991749d947955834d8bf78e3c097a0"
+function = "uorust::figures::Reached::unresolved"
+reason = "mir"
+detail = "mir::Ty: std::collections::btree_map::Keys<'_, std::string::String, figures::Stated>"
+stops = []
+
+[[residue]]
 kappa = "309a5cee40a1bf745142f48198cd507577a1a5009691da3ff945dbb6fcffb3ed"
 function = "uorust::figures::Register::counts"
 reason = "mir"
@@ -5351,6 +5411,13 @@ kappa = "08681480e3f89b66d047fc2136194967229568789f2275d311a6e1d4d05236d5"
 function = "uorust::figures::Source::krates"
 reason = "mir"
 detail = "mir::Ty: std::collections::btree_map::Values<'_, std::string::String, std::collections::BTreeSet<std::string::String>>"
+stops = []
+
+[[residue]]
+kappa = "0415352b1b2e6e7b0444467c4c9b4d7b40d1af7753d721a2832e59ea09a7d26d"
+function = "uorust::figures::Stated::read"
+reason = "mir"
+detail = "mir::TerminatorKind::Call: <figures::Stated as std::default::Default>::default"
 stops = []
 
 [[residue]]
@@ -5462,7 +5529,7 @@ stops = []
 kappa = "d9511dd6d0ab7acaf168dc0038a582fcc729ac8ce881d1d80ebdd526771365bb"
 function = "uorust::figures::doc_code"
 reason = "mir"
-detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1508:17: 1508:25}>"
+detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1515:17: 1515:25}>"
 stops = []
 
 [[residue]]
@@ -5578,10 +5645,17 @@ detail = "mir::TerminatorKind::Call: figures::location_lines"
 stops = []
 
 [[residue]]
+kappa = "cdc205aa09524eb0e18ffe65d8b1ab634185fe3b15c76f866efc890108375703"
+function = "uorust::figures::numeric"
+reason = "mir"
+detail = "mir::Ty: syn::Error"
+stops = []
+
+[[residue]]
 kappa = "0911faa500b0587215283c0a8fb3cff9f55a6dd0991397c13040aa756a81e9d8"
 function = "uorust::figures::placeable"
 reason = "mir"
-detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4234:21: 4234:24}>"
+detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4678:21: 4678:24}>"
 stops = []
 
 [[residue]]
@@ -5630,7 +5704,7 @@ stops = []
 kappa = "c488766cdd0fbbe83df627c1a4f922017c175e14ff973a5187722e46f71df0db"
 function = "uorust::figures::stratum_of"
 reason = "mir"
-detail = "mir::AggregateKind::Closure: figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:816:42: 816:50}>"
+detail = "mir::AggregateKind::Closure: figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:823:42: 823:50}>"
 stops = []
 
 [[residue]]
@@ -5651,7 +5725,7 @@ stops = [["type", "type outside the lift: Value::Float.0: f64"]]
 kappa = "fb97b19e048c352e01b77ecd3a1f618c2d5aaab319369252ca5c7392c06cd6b7"
 function = "uorust::figures::words"
 reason = "mir"
-detail = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2890:16: 2890:25}>"
+detail = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2897:16: 2897:25}>"
 stops = [["type", "type outside the lift: impl Iterator<Item = &str>"]]
 
 [[residue]]
@@ -5683,10 +5757,17 @@ detail = "mir::Ty: std::str::Lines<'_>"
 stops = []
 
 [[residue]]
+kappa = "f37f60bf22d4c7a75eaf6823975bfff995eae8b3cf5f94739430df4d525d0169"
+function = "uorust::ingest::figures_refused"
+reason = "mir"
+detail = "mir::AggregateKind::Closure: ingest::figures_refused::{closure#0}: mir::TerminatorKind::Call: std::boxed::Box::new_uninit"
+stops = []
+
+[[residue]]
 kappa = "6072d5388d15bdfe7731c0f67ccd15e3b85549a2fa5b322d468e661f1ccde49a"
 function = "uorust::ingest::name_apart"
 reason = "mir"
-detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:765:32: 765:35}>"
+detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:810:32: 810:35}>"
 stops = [["type", "type outside the lift: &mut [FnFact]"]]
 
 [[residue]]
@@ -10836,6 +10917,90 @@ detail = "takes or returns Locating.attributed: syn::Meta, a type of the syn cra
 stops = [["foreign", "takes or returns syn::File, a type of the syn crate with no LexLean model"]]
 
 [[foreign]]
+kappa = "90ee04b0cdace37c95df2aa7c144f920a2ccf12f70a48d00dc8eacef248f6f06"
+function = "uorust::figures::Reached::call"
+detail = "takes or returns syn::Macro, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns syn::Macro, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "712d4888d298dca2d5c87321c6c99407d3b6b789d0f51dc1ffc42b6cb0f6e34c"
+function = "uorust::figures::Reached::call_at"
+detail = "takes or returns TokenTree, a type of the proc_macro2 crate with no LexLean model"
+stops = [["foreign", "takes or returns TokenTree, a type of the proc_macro2 crate with no LexLean model"], ["foreign", "takes or returns syn::Macro, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "7e501046a6ea1224844d322fad388f3e96b29d19a1b04f0ac2e8eacc1f017d74"
+function = "uorust::figures::Reached::constant"
+detail = "takes or returns syn::Path, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns syn::Path, a type of the syn crate with no LexLean model"], ["foreign", "takes or returns syn::Lit, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "5530755fbf9ee7ecb39ef8889af9c4d21fb0ce8c50788901514a64cee8f9328e"
+function = "uorust::figures::Reached::first_unresolved"
+detail = "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"
+stops = [["foreign", "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "e8d71a69d1760696d2f3c6ce72596b037830b43a4ba27453ce16a121d8803819"
+function = "uorust::figures::Reached::named"
+detail = "takes or returns syn::Path, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns syn::Path, a type of the syn crate with no LexLean model"], ["foreign", "takes or returns syn::Ident, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "2470a95d60002bb8097fac3877926a94a42f0fae0c9cd4b087924bef98f20b2c"
+function = "uorust::figures::Reached::resolve"
+detail = "takes or returns &mut syn::File, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns &mut syn::File, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "3636fc5dd5f526003ecfa164d8a2d26f5506fc6abe2ee2bdb01b966d8cca1abe"
+function = "uorust::figures::Reached::resolved"
+detail = "takes or returns syn::Macro, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns syn::Macro, a type of the syn crate with no LexLean model"], ["foreign", "takes or returns syn::Lit, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "9a11f509e0f50981efad46111fde7ced44bc5911ceeba2b5e1b33a9a3b74d845"
+function = "uorust::figures::Reached::substituted"
+detail = "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"
+stops = [["foreign", "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "6b931e68c9816904b2af51fb65029653023dcba6472451efd5603063a16cd787"
+function = "uorust::figures::Resolving<'_>::bound"
+detail = "takes or returns &mut syn::Expr, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns &mut syn::Expr, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "d847efdda9ff18c0261d47a7a2d8095c33aa72ea84858f07afb0de921c6dd65b"
+function = "uorust::figures::Resolving<'_>::visit_attribute_mut"
+detail = "takes or returns &mut syn::Attribute, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns &mut syn::Attribute, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "c930b307d44d7421a54617d8a474b6b15829644d69ee285d6cccffaee919664c"
+function = "uorust::figures::Resolving<'_>::visit_expr_mut"
+detail = "takes or returns &mut syn::Expr, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns &mut syn::Expr, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "3e045c8755b387e805b13f654a554463c71bb287bf844c3d3356d25efb25d660"
+function = "uorust::figures::Resolving<'_>::visit_macro_mut"
+detail = "takes or returns &mut syn::Macro, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns &mut syn::Macro, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "abffed775ae3bfd5ebc3c190b7933a3901a2748f04ff2a28b28db440d597a90c"
+function = "uorust::figures::Resolving<'_>::visit_pat_mut"
+detail = "takes or returns &mut syn::Pat, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns &mut syn::Pat, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
+kappa = "247c546614120ff3345b676c7254043762907bbde300341970c58115a936dbf6"
+function = "uorust::figures::Resolving<'_>::visit_stmt_mut"
+detail = "takes or returns &mut syn::Stmt, a type of the syn crate with no LexLean model"
+stops = [["foreign", "takes or returns &mut syn::Stmt, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
 kappa = "e76c41f0f38a6f3f4aa1930904c091e3cbf8fe67a4720d38ca7c1eff83601492"
 function = "uorust::figures::Walk<'_>::generated_macro"
 detail = "takes or returns syn::Macro, a type of the syn crate with no LexLean model"
@@ -11166,6 +11331,12 @@ detail = "takes or returns syn::File, a type of the syn crate with no LexLean mo
 stops = [["foreign", "takes or returns syn::File, a type of the syn crate with no LexLean model"]]
 
 [[foreign]]
+kappa = "7d47a74bae6ca9a47c9e59786655e5b22dfefc83516fbdc8a1ee2ba883761ad6"
+function = "uorust::figures::literal"
+detail = "takes or returns proc_macro2::Span, a type of the proc_macro2 crate with no LexLean model"
+stops = [["foreign", "takes or returns proc_macro2::Span, a type of the proc_macro2 crate with no LexLean model"], ["foreign", "takes or returns syn::Lit, a type of the syn crate with no LexLean model"]]
+
+[[foreign]]
 kappa = "4112be282ea9f3317ecea8d400b11c9db6498da96b0aa8fc2145a23c67f0ff38"
 function = "uorust::figures::location_lines"
 detail = "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"
@@ -11218,6 +11389,12 @@ kappa = "0315e77e3c6bb83c6b59a545c6add8a1a3fb59891b21712ae44f57012c7d3c56"
 function = "uorust::figures::token_idents"
 detail = "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"
 stops = [["foreign", "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"], ["type", "type outside the lift: &mut BTreeSet<String>"]]
+
+[[foreign]]
+kappa = "10c63dba85e87efafbd83fc4cd9f86a76d2aabae19d42b386d7b6daa46d79875"
+function = "uorust::figures::transcribed"
+detail = "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"
+stops = [["foreign", "takes or returns TokenStream, a type of the proc_macro2 crate with no LexLean model"]]
 
 [[foreign]]
 kappa = "84a0f4e488371186af6c12366bec5192a8ceeb89fd893b9bb88302c639a80db1"
@@ -12282,6 +12459,12 @@ effect = "calls uorust::figures::extract, which performs a Fs effect: std::fs::w
 stops = []
 
 [[effect]]
+kappa = "01acb66aa2722210249c9720b745886352e81520e0127880e1be71f25b64955c"
+function = "uorust::figures::Reached::of"
+effect = "Fs effect: std::fs::read_to_string"
+stops = [["foreign", "takes or returns serde_json::Value, a type of the serde_json crate with no LexLean model"]]
+
+[[effect]]
 kappa = "f91fc86d22c29f3e03c939ef73350556c3db1fa976d5f4503651b86155d0772b"
 function = "uorust::figures::bindings"
 effect = "Env effect: std::env::var_os"
@@ -12390,7 +12573,7 @@ effect = "Env effect: std::env::var_os"
 stops = [["foreign", "takes or returns Value::Float.0: f64, a type of the serde_json crate with no LexLean model"]]
 
 [[effect]]
-kappa = "ec7bd13a1f0c946e9b415edb185c7dfa1fe6f661e7c5039bfead908da2616655"
+kappa = "e1b40cfd1452f91ccbd1947f6b19f26a50081945f324a4997e88a004746ee568"
 function = "uorust::ingest::package"
 effect = "Fs effect: std::fs::read_to_string"
 stops = [["foreign", "takes or returns Value::Float.0: f64, a type of the serde_json crate with no LexLean model"]]
@@ -12402,7 +12585,7 @@ effect = "Fs effect: std::fs::read_to_string"
 stops = [["foreign", "takes or returns toml::Value, a type of the toml crate with no LexLean model"]]
 
 [[effect]]
-kappa = "ff03c69d11d90ea61a241b672b29d69239c05b98280196bf3ddfb8cb6f396024"
+kappa = "d95a079d5c9b464683f36bae40acdeef383b204e1af2dcb5c03ebbfbfd04d604"
 function = "uorust::ingest::workspace"
 effect = "Fs effect: Path::canonicalize"
 stops = []
@@ -12702,7 +12885,7 @@ effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "1ed1e69fc0c2599ac78faf55477dee160b72e0770283e0d3fffcc2967524e423"
+kappa = "4a0828db8a9c04a7d16da32e8623628ddf330c2d2cf6ad6eace6855db283c504"
 function = "uorust::names::read"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -13470,6 +13653,11 @@ function = "uorust::figures::Place::refusal"
 definition = "Behavior::placeRefusal"
 
 [[lifted]]
+kappa = "d26f327fe3691f369486059ff14af03cf4ae33c33a354f8acad10e14744d62d8"
+function = "uorust::figures::Reached::is_empty"
+definition = "Behavior::reachedIsEmpty"
+
+[[lifted]]
 kappa = "9fb650cec3ff23c644340c7ff42c1df4cf227054d13c121ea328b7f32eafb523"
 function = "uorust::figures::Register::listed"
 definition = "Behavior::uorustFiguresRegisterListed"
@@ -13488,6 +13676,11 @@ definition = "Behavior::constantName"
 kappa = "034ffd35c786ad556edf098ae5a1e0ad9af0896341c24bb77ea53e65f629fe35"
 function = "uorust::figures::format_position"
 definition = "Behavior::formatPosition"
+
+[[lifted]]
+kappa = "2747468be6351b2d96988aa6a42575cf51cf4b71c893908c3c5c3275dd0e070a"
+function = "uorust::figures::generated_text"
+definition = "Behavior::generatedText"
 
 [[lifted]]
 kappa = "16582e77e04d9938bac48b37ce0c4543a29e1dc86d8d94d3945b2b424a9f00a0"
