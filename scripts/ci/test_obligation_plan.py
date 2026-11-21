@@ -32,6 +32,14 @@ GRAPH = {
 }
 
 
+def clean_checkout_git(_repo, *args):
+    if args[0] == "rev-parse":
+        return b"b" * 40 + b"\n"
+    if args[0] in ("diff", "status"):
+        return b""
+    raise AssertionError("unexpected Git operation: " + repr(args))
+
+
 class ObligationPlanCi02Tests(unittest.TestCase):
     def plan(self, paths, graph=GRAPH, just=JUST):
         return impact.obligation_plan(paths, graph, just)
@@ -155,7 +163,7 @@ class ObligationPlanCi02Tests(unittest.TestCase):
             def run(command, **kwargs):
                 invoked.append(command)
                 return subprocess.CompletedProcess(command, 0)
-            with mock.patch.object(impact, "git", return_value=(b"b" * 40 + b"\n")), \
+            with mock.patch.object(impact, "git", side_effect=clean_checkout_git), \
                  mock.patch.object(impact.subprocess, "run", side_effect=run):
                 receipt = impact.execute_obligation_plan(Path("."), plan)
             self.assertEqual(invoked, expected)
@@ -165,7 +173,7 @@ class ObligationPlanCi02Tests(unittest.TestCase):
 
     def test_failed_selected_component_never_yields_success_ci_02(self):
         plan = dict(self.plan(["README.md"]), base_sha="a" * 40, head_sha="b" * 40)
-        with mock.patch.object(impact, "git", return_value=(b"b" * 40 + b"\n")), \
+        with mock.patch.object(impact, "git", side_effect=clean_checkout_git), \
              mock.patch.object(impact.subprocess, "run",
                                side_effect=lambda command, **kwargs:
                                subprocess.CompletedProcess(command, 7)):
@@ -186,9 +194,39 @@ class ObligationPlanCi02Tests(unittest.TestCase):
         ]
         for candidate in malformed:
             with self.subTest(candidate=candidate), \
-                 mock.patch.object(impact, "git", return_value=(b"b" * 40 + b"\n")), \
+                 mock.patch.object(impact, "git", side_effect=clean_checkout_git), \
                  self.assertRaises(impact.UnverifiedDiff):
                 impact.execute_obligation_plan(Path("."), candidate)
+
+    def test_dirty_index_or_worktree_is_refused_ci_02(self):
+        plan = dict(self.plan(["README.md"]), base_sha="a" * 40, head_sha="b" * 40)
+        for dirty in (b" M crates/uorust/src/lib.rs\0", b"?? unexpected.txt\0",
+                      b"M  Cargo.lock\0"):
+            with self.subTest(dirty=dirty):
+                def dirty_git(repo, *args):
+                    if args[0] == "status":
+                        return dirty
+                    return clean_checkout_git(repo, *args)
+                with mock.patch.object(impact, "git", side_effect=dirty_git), \
+                     mock.patch.object(impact.subprocess, "run") as dispatch, \
+                     self.assertRaises(impact.UnverifiedDiff):
+                    impact.execute_obligation_plan(Path("."), plan)
+                dispatch.assert_not_called()
+
+    def test_dirty_tree_after_execution_refuses_receipt_ci_02(self):
+        plan = dict(self.plan(["README.md"]), base_sha="a" * 40, head_sha="b" * 40)
+        status_calls = []
+        def dirty_after(repo, *args):
+            if args[0] == "status":
+                status_calls.append(True)
+                return b" M generated.txt\0" if len(status_calls) == 2 else b""
+            return clean_checkout_git(repo, *args)
+        with mock.patch.object(impact, "git", side_effect=dirty_after), \
+             mock.patch.object(impact.subprocess, "run",
+                               return_value=subprocess.CompletedProcess(["just", "model"], 0)), \
+             self.assertRaises(impact.UnverifiedDiff):
+            impact.execute_obligation_plan(Path("."), plan)
+
 
 
 if __name__ == "__main__":

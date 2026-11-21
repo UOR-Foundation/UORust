@@ -97,19 +97,25 @@ def dependency_inputs(repo: Path, base: str) -> dict[str, list[str]]:
 
 def match_input(path: str, expression: str) -> bool:
     entry = expression.removeprefix("@base:")
-    return path.startswith(entry) if entry.endswith("/") else path == entry
+    return path.startswith(entry)
 
 
 def consumers(path: str, dependency_map: dict[str, list[str]]) -> list[str]:
-    """Apply factory prefixes in model order; later re-inclusions override exclusions."""
+    """Mirror factory graph covers(): longest inclusion beats exclusion.
+
+    @base: inputs conservatively count as normal paths for changed-base checks.
+    """
     names = []
     for name, inputs in dependency_map.items():
-        selected = False
-        for expression in inputs:
-            exclude = expression.startswith("!")
-            if match_input(path, expression[1:] if exclude else expression):
-                selected = not exclude
-        if selected:
+        includes = [
+            len(x.removeprefix("@base:").encode()) + 1
+            for x in inputs if not x.startswith("!") and match_input(path, x)
+        ]
+        excludes = [
+            len(x[1:].removeprefix("@base:").encode()) + 1
+            for x in inputs if x.startswith("!") and match_input(path, x[1:])
+        ]
+        if max(includes, default=0) > max(excludes, default=0):
             names.append(name)
     return sorted(names)
 
@@ -334,6 +340,10 @@ def execute_obligation_plan(repo: Path, plan: dict) -> dict:
     if mode not in ("full", "selective") or (mode == "full") != (parts == list(VV_PARTS)):
         raise UnverifiedDiff("plan mode and selected obligations disagree")
 
+    # A SHA labels committed content, not a dirty worktree or index.
+    # Reject both modified tracked and untracked nonignored inputs.
+    if git(repo, "status", "--porcelain=v1", "-z", "--untracked-files=normal"):
+        raise UnverifiedDiff("uncommitted files would invalidate component receipt")
     # Cheap whitespace fault must still be refused even for passive docs.
     git(repo, "diff", "--check", plan["base_sha"], head)
     commands = [["just", "vv"]] if mode == "full" else [["just", name] for name in parts]
@@ -343,6 +353,8 @@ def execute_obligation_plan(repo: Path, plan: dict) -> dict:
         observed.append({"command": command, "exit_code": proc.returncode})
         if proc.returncode != 0:
             break
+    if git(repo, "status", "--porcelain=v1", "-z", "--untracked-files=normal"):
+        raise UnverifiedDiff("component execution changed tracked or untracked inputs")
     passed = len(observed) == len(commands) and all(
         row["exit_code"] == 0 for row in observed
     )

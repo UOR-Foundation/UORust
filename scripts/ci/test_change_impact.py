@@ -108,7 +108,7 @@ class ChangeImpactTests(unittest.TestCase):
         self.assertEqual(impact.report(self.repo, self.base, sha)["route"], "full-unknown")
         self.assertEqual(impact.report(self.repo, sha, sha)["route"], "full-unknown")
 
-    def test_ordered_factory_exclusion_and_later_reinclusion(self):
+    def test_longest_factory_prefix_wins_independent_of_entry_order(self):
         graph = {
             "test": [
                 "crates/", "!crates/uorust/tests/fixtures/",
@@ -122,6 +122,24 @@ class ChangeImpactTests(unittest.TestCase):
             ["test"])
         self.assertEqual(
             impact.consumers("crates/uorust/src/lib.rs", graph), ["test"])
+
+        # A short inclusion listed later cannot cancel a longer exclusion.
+        # A longer inclusion wins, regardless of its ordering.
+        for expressions in (
+            ["crates/uorust/tests/fixtures/nist-sha256/", "crates/",
+             "!crates/uorust/tests/fixtures/"],
+            ["!crates/uorust/tests/fixtures/", "crates/",
+             "crates/uorust/tests/fixtures/nist-sha256/"],
+        ):
+            with self.subTest(expressions=expressions):
+                self.assertEqual(
+                    impact.consumers(
+                        "crates/uorust/tests/fixtures/nist-sha256/vector.rs",
+                        {"test": expressions}), ["test"])
+                self.assertEqual(
+                    impact.consumers(
+                        "crates/uorust/tests/fixtures/other/lib.rs",
+                        {"test": expressions}), [])
 
     def test_graph_consumed_docs_are_not_downgraded(self):
         graph = GRAPH.replace("inputs = []", 'inputs = ["docs/guides/"]')
