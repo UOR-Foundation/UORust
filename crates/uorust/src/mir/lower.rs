@@ -224,6 +224,8 @@ pub(crate) struct DictionaryFrame {
     pub(crate) calls: BTreeMap<String, usize>,
 }
 
+pub(crate) type ConsumerDispatch<'a> = dyn Fn(&str, &[Option<String>], &str) -> Option<String> + 'a;
+
 /// What every function of a crate is translated against.
 pub(crate) struct Cx<'a> {
     pub(crate) types: &'a Types,
@@ -239,6 +241,7 @@ pub(crate) struct Cx<'a> {
     pub(crate) compiler_scope: String,
     pub(crate) compiler_definitions: &'a BTreeMap<String, CompilerDefinition<'a>>,
     pub(crate) compiler_bindings: &'a super::identity::Bindings,
+    pub(crate) consumer_dispatch: Option<&'a ConsumerDispatch<'a>>,
     pub(crate) dictionary_frames: &'a BTreeMap<String, DictionaryFrame>,
     pub(crate) closure_scopes: &'a BTreeMap<String, String>,
     /// Actual source constant declarations, never inferred from zero-arity functions.
@@ -280,6 +283,9 @@ impl<'a> Cx<'a> {
     }
 
     fn callee(&self, path: &str) -> Option<&Callee> {
+        if self.library.is_some() {
+            return None;
+        }
         if super::identity::qualified(path) {
             return self.compiler_bindings.get(&self.compiler_scope)?.get(path);
         }
@@ -315,6 +321,7 @@ impl<'a> Cx<'a> {
             compiler_scope: self.compiler_scope.clone(),
             compiler_definitions: self.compiler_definitions,
             compiler_bindings: self.compiler_bindings,
+            consumer_dispatch: self.consumer_dispatch,
             dictionary_frames: self.dictionary_frames,
             closure_scopes: self.closure_scopes,
             constants: self.constants,
@@ -7059,7 +7066,14 @@ impl Fun<'_, '_> {
                 ));
             }
         }
-        if let Some(c) = self.cx.callee(callee).cloned() {
+        let consumer = || {
+            self.cx.library?;
+            let key = (self.cx.consumer_dispatch?)(callee, texts, dest)?;
+            let selected = self.cx.callees.get(&key)?;
+            (selected.params.iter().eq(args.iter().map(|(_, ty)| ty)) && selected.result == *dt)
+                .then(|| selected.clone())
+        };
+        if let Some(c) = self.cx.callee(callee).cloned().or_else(consumer) {
             return self.invoke(c, callee, args, texts, dest, dt, st);
         }
         let constructor = erased
@@ -8513,6 +8527,11 @@ impl Fun<'_, '_> {
         cx.source_sigs = definition.source_sigs;
         cx.consts = definition.consts;
         cx.krate.clone_from(&definition.krate);
+        cx.library = None;
+        cx.library_module.clear();
+        // A compiler-generated definition owns its separately recorded target
+        // frame; an enclosing library's consumer callback cannot rebind it.
+        cx.consumer_dispatch = None;
         cx.compiler_scope.clone_from(&callee.name);
         let lowered = lower(&cx, definition.body, &callee.name)?;
         let expected_result = callee
@@ -8644,15 +8663,36 @@ impl Fun<'_, '_> {
         if !self.aux.contains_key(&name) {
             let mut active = self.cx.active.to_vec();
             active.push(name.clone());
-            let empty_callees = BTreeMap::new();
             let empty_signatures = BTreeMap::new();
+            let parent_dispatch = self.cx.consumer_dispatch;
+            let module = super::core::compiler_body_module(&link.decls, &instance.path);
+            let origins = super::core::CallerTypes::new(
+                &link.decls,
+                texts.iter().filter_map(Option::as_deref).chain([dest]),
+            );
+            let dispatch = |callee: &str, inputs: &[Option<String>], result: &str| {
+                let (method, owner, reference) = link.decls.dispatch_reference(&module, callee)?;
+                if !origins.contains_owner(&owner) {
+                    return None;
+                }
+                let callee = format!(
+                    "<{} as {}>::{method}",
+                    origins.restore(&owner)?,
+                    origins.restore(&reference)?
+                );
+                let inputs = inputs
+                    .iter()
+                    .map(|text| text.as_deref().and_then(|text| origins.restore(text)))
+                    .collect::<Vec<_>>();
+                (parent_dispatch?)(&callee, &inputs, &origins.restore(result)?)
+            };
             let mut cx = self.cx.within(&active);
             cx.types = &scope;
             cx.library = Some(link);
             cx.library_module = super::core::compiler_body_module(&link.decls, &instance.path);
             cx.krate = link.library_origin().unwrap_or("core").into();
             cx.compiler_scope.clear();
-            cx.callees = &empty_callees;
+            cx.consumer_dispatch = Some(&dispatch);
             cx.source_sigs = &empty_signatures;
             let mut lowered = if self.outcomes {
                 lower_outcomes(&cx, &body, &name)
@@ -11117,6 +11157,7 @@ mod tests {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            consumer_dispatch: None,
             dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
@@ -11280,6 +11321,7 @@ mod tests {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            consumer_dispatch: None,
             dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
@@ -11343,6 +11385,7 @@ mod tests {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            consumer_dispatch: None,
             dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
@@ -11418,6 +11461,7 @@ fn expose() -> impl Fn(u8) -> u8 {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            consumer_dispatch: None,
             dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
@@ -11477,6 +11521,7 @@ fn guarded(_1: u8) -> u8 {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            consumer_dispatch: None,
             dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
@@ -11528,6 +11573,7 @@ fn guarded(_1: u8) -> u8 {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            consumer_dispatch: None,
             dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
@@ -11599,6 +11645,7 @@ fn guarded(_1: u8) -> u8 {
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            consumer_dispatch: None,
             dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),

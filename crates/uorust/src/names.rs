@@ -3300,6 +3300,21 @@ pub(crate) struct TypeIdentity {
 }
 
 impl TypeIdentity {
+    pub(crate) fn bare_arguments(&self) -> bool {
+        matches!(&self.ty, Ty::Named(_, args) if args.is_empty())
+    }
+
+    pub(crate) fn same_head(&self, other: &Self) -> bool {
+        let mut left = self.clone();
+        let mut right = other.clone();
+        let (Ty::Named(_, a), Ty::Named(_, b)) = (&mut left.ty, &mut right.ty) else {
+            return false;
+        };
+        a.clear();
+        b.clear();
+        left.matches(&right)
+    }
+
     pub(crate) fn matches(&self, other: &Self) -> bool {
         fn equal(a: &Ty, b: &Ty, sysroot: bool) -> bool {
             match (a, b) {
@@ -3858,6 +3873,92 @@ mod tests {
         ))));
         assert!(!identity(Ty::Ref(false, Box::new(byte.clone())))
             .matches(&identity(Ty::Ref(true, Box::new(byte)))));
+    }
+
+    #[test]
+    fn imported_dispatch_retains_rust_signature_and_ambiguity_guards_ue_119() {
+        use crate::mir::{
+            identity::{Index, Method},
+            lower::Callee,
+        };
+        let dir = std::env::temp_dir().join(format!(
+            "uorust-imported-dispatch-identities-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir_all(dir.join("src")).unwrap();
+        std::fs::write(
+            dir.join("Cargo.toml"),
+            "[package]\nname=\"w\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n",
+        )
+        .unwrap();
+        std::fs::write(
+            dir.join("src/lib.rs"),
+            "pub struct Mark;pub fn context(){} pub mod foreign {pub trait From<T>{}} ",
+        )
+        .unwrap();
+        let (ws, syntax) = crate::ingest::workspace(&dir, None).unwrap();
+        let syntax = read(&dir, &ws, syntax).unwrap();
+        let resolver = Resolver::new(&ws, &syntax);
+        let read = |text: &str| resolver.compiler_definition_type_identity(0, 0, text);
+        let callee = |name: &str, trait_ref: &str, input: &str| Callee {
+            name: name.into(),
+            outcomes: false,
+            memory: false,
+            method: Some(
+                Method::new("Mark", trait_ref, "from", read)
+                    .unwrap()
+                    .signature(&[input.into()], "Mark", read),
+            ),
+            params: vec![crate::lift::Ty::Str],
+            generic: None,
+            result: crate::lift::Ty::Named("Mark".into()),
+            threads: None,
+        };
+        let mut calls = BTreeMap::from([
+            (
+                "owned".into(),
+                callee("owned", "std::convert::From<String>", "String"),
+            ),
+            (
+                "borrowed".into(),
+                callee("borrowed", "std::convert::From<&str>", "&str"),
+            ),
+            (
+                "foreign".into(),
+                callee("foreign", "foreign::From<String>", "String"),
+            ),
+        ]);
+        let index = Index::new(&calls);
+        let path = "<Mark as core::convert::From>::from";
+        for (input, expected) in [("std::string::String", "owned"), ("&str", "borrowed")] {
+            assert_eq!(
+                index
+                    .resolve_call(path, &[Some(input.into())], "Mark", read)
+                    .unwrap()
+                    .name,
+                expected
+            );
+        }
+        assert!(index
+            .resolve_call(path, &[Some("u8".into())], "Mark", read)
+            .is_none());
+        assert!(index.resolve_call(path, &[None], "Mark", read).is_none());
+        assert!(index
+            .resolve_call(path, &[Some("String".into())], "u8", read)
+            .is_none());
+        assert!(index
+            .resolve_call(
+                "<Mark as std::convert::From<&str>>::from",
+                &[Some("String".into())],
+                "Mark",
+                read
+            )
+            .is_none());
+        calls.insert("duplicate".into(), calls["owned"].clone());
+        assert!(Index::new(&calls)
+            .resolve_call(path, &[Some("String".into())], "Mark", read)
+            .is_none());
+        std::fs::remove_dir_all(dir).unwrap();
     }
 
     #[test]

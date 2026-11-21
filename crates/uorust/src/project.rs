@@ -5332,9 +5332,41 @@ fn compiler_method(
     r: FnRef,
 ) -> Option<crate::mir::identity::Method> {
     let f = ctx.func(r);
-    crate::mir::identity::Method::new(f.owner.as_ref()?, f.trait_ref.as_ref()?, &f.name, |text| {
+    let method = crate::mir::identity::Method::new(
+        f.owner.as_ref()?,
+        f.trait_ref.as_ref()?,
+        &f.name,
+        |text| resolver.source_type_identity((r.pkg, r.file, r.idx), text),
+    )?;
+    use quote::ToTokens;
+    let Ok(signature) = syn::parse_str::<syn::Signature>(&f.signature) else {
+        return Some(method);
+    };
+    let inputs = signature
+        .inputs
+        .iter()
+        .map(|p| match p {
+            syn::FnArg::Receiver(receiver) => match &receiver.kind {
+                syn::ReceiverKind::Value => "Self".into(),
+                syn::ReceiverKind::Reference(_, _, mutable) => if mutable.is_some() {
+                    "&mut Self"
+                } else {
+                    "&Self"
+                }
+                .into(),
+                syn::ReceiverKind::Typed(_, ty) => ty.to_token_stream().to_string(),
+                _ => String::new(),
+            },
+            syn::FnArg::Typed(p) => p.ty.to_token_stream().to_string(),
+        })
+        .collect::<Vec<_>>();
+    let result = match signature.output {
+        syn::ReturnType::Default => "()".into(),
+        syn::ReturnType::Type(_, t) => t.to_token_stream().to_string(),
+    };
+    Some(method.signature(&inputs, &result, |text| {
         resolver.source_type_identity((r.pkg, r.file, r.idx), text)
-    })
+    }))
 }
 
 #[allow(clippy::too_many_arguments, clippy::too_many_lines)]
@@ -5712,6 +5744,9 @@ fn mir_lift(
         else {
             continue;
         };
+        let method = method.signature(&body.locals[1..=body.arity], &body.locals[0], |text| {
+            resolver.compiler_definition_type_identity(at.0, at.1, text)
+        });
         let signature: Result<_, Residue> = (|| {
             let params: Vec<_> = (1..=body.arity)
                 .map(|i| {
@@ -5890,6 +5925,26 @@ fn mir_lift(
         translations.insert(view.clone(), ctx.path(*r));
         outcome_names.insert(name.clone(), view);
     }
+    let dispatch_keys: BTreeMap<_, _> = callees
+        .iter()
+        .map(|(key, callee)| (callee.name.clone(), key.clone()))
+        .collect();
+    let dispatchers: BTreeMap<_, _> = scopes
+        .keys()
+        .map(|&(pkg, target)| {
+            let index = &index;
+            let keys = &dispatch_keys;
+            (
+                (pkg, target),
+                move |callee: &str, inputs: &[Option<String>], result: &str| {
+                    let selected = index.resolve_call(callee, inputs, result, |text| {
+                        resolver.compiler_definition_type_identity(pkg, target, text)
+                    })?;
+                    keys.get(&selected.name).cloned()
+                },
+            )
+        })
+        .collect();
     let context = |r: FnRef| lower::Cx {
         types: scope(r),
         source_sigs: &source_sigs[r.pkg],
@@ -5899,6 +5954,7 @@ fn mir_lift(
         compiler_scope: frame(r),
         compiler_definitions: &compiler_definitions,
         compiler_bindings: &compiler_bindings,
+        consumer_dispatch: Some(&dispatchers[&(r.pkg, ctx.file(r).target)]),
         dictionary_frames: &dictionary_frames,
         closure_scopes: &closure_scopes,
         constants,

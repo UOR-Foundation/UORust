@@ -8,6 +8,7 @@ pub(crate) struct Method {
     owner: TypeIdentity,
     trait_identity: TypeIdentity,
     name: String,
+    signature: Option<(Vec<TypeIdentity>, TypeIdentity)>,
 }
 impl Method {
     pub(crate) fn new(
@@ -20,7 +21,22 @@ impl Method {
             owner: read(owner)?,
             trait_identity: read(trait_ref)?,
             name: name.to_string(),
+            signature: None,
         })
+    }
+
+    pub(crate) fn signature(
+        mut self,
+        inputs: &[String],
+        result: &str,
+        read: impl Fn(&str) -> Option<TypeIdentity>,
+    ) -> Self {
+        self.signature = inputs
+            .iter()
+            .map(|t| read(t))
+            .collect::<Option<Vec<_>>>()
+            .zip(read(result));
+        self
     }
 }
 pub(crate) type Bindings = BTreeMap<String, BTreeMap<String, super::lower::Callee>>;
@@ -77,6 +93,39 @@ impl<'a> Index<'a> {
         let mut matching = candidates.iter().copied().filter(|callee| {
             let method = callee.method.as_ref().expect("indexed method");
             method.owner.matches(&owner) && method.trait_identity.matches(&trait_identity)
+        });
+        let selected = matching.next()?;
+        matching.next().is_none().then_some(selected)
+    }
+
+    /// MIR can omit trait arguments that its concrete call signature determines.
+    /// Source identities, including borrow ownership, supply those distinctions.
+    pub(crate) fn resolve_call(
+        &self,
+        callee: &str,
+        inputs: &[Option<String>],
+        result: &str,
+        read: impl Fn(&str) -> Option<TypeIdentity>,
+    ) -> Option<&'a super::lower::Callee> {
+        let (name, owner, reference) = parts(callee)?;
+        let owner = read(&owner)?;
+        let reference = read(&reference)?;
+        let inputs = inputs
+            .iter()
+            .map(|t| read(t.as_deref()?))
+            .collect::<Option<Vec<_>>>()?;
+        let result = read(result)?;
+        let mut matching = self.methods.get(&name)?.iter().copied().filter(|callee| {
+            let method = callee.method.as_ref().expect("indexed method");
+            let Some((parameters, returned)) = &method.signature else {
+                return false;
+            };
+            method.owner.matches(&owner)
+                && (method.trait_identity.matches(&reference)
+                    || reference.bare_arguments() && method.trait_identity.same_head(&reference))
+                && parameters.len() == inputs.len()
+                && parameters.iter().zip(&inputs).all(|(a, b)| a.matches(b))
+                && returned.matches(&result)
         });
         let selected = matching.next()?;
         matching.next().is_none().then_some(selected)

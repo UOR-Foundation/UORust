@@ -11978,3 +11978,113 @@ fn imported_borrowed_results_preserve_caller_state_ue_118() {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn imported_generic_wrappers_keep_consumer_dispatch_ue_119() {
+    let dir=scratch("imported-consumer-dispatch",&[
+        ("Cargo.toml","[package]\nname=\"imported_consumer_dispatch\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs","pub struct Token {pub value:String,pub tag:u8}\nimpl From<String> for Token {fn from(value:String)->Self {Self {value,tag:1}}}\nimpl From<&str> for Token {fn from(_: &str)->Self {Self {value:String::new(),tag:2}}}\npub mod foreign {pub trait From<T>{fn from(value:T)->super::Token;}}\nimpl foreign::From<String> for Token {fn from(_:String)->Self {Self {value:String::new(),tag:3}}}\npub fn wrap(value:String)->Token {let mut n=1u8;while n>0 {n-=1;} value.into()}\n"),
+        ("src/bin/vectors.rs","fn main(){for input in [\"\",\"hello\",\"日本語\"] {let result=imported_consumer_dispatch::wrap(input.to_owned());println!(\"{input}|{}|{}\",result.value,result.tag);}}"),
+    ]);
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let expected = String::from_utf8(rust.stdout).unwrap();
+    let dumps = dumped(&dir, "imported-consumer-dispatch");
+    let mut opts = options("imported_consumer_dispatch");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    assert!(
+        frontier_rows(&files, "lifted")
+            .iter()
+            .any(|r| r["function"].as_str() == Some("imported_consumer_dispatch::wrap")),
+        "{:?}",
+        residue_detail(&files, "imported_consumer_dispatch::wrap")
+    );
+    let cache = dir.join("verdicts.toml");
+    let proved = uorust::mir::prove_bounded(
+        &dir,
+        &options("imported_consumer_dispatch"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!(proved.refused, 0, "{proved:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let model = rows
+        .iter()
+        .find(|r| r["function"].as_str() == Some("imported_consumer_dispatch::wrap"))
+        .and_then(|r| r["definition"].as_str())
+        .unwrap()
+        .strip_prefix("Behavior::")
+        .unwrap();
+    let policy = decisions
+        .rows
+        .values()
+        .find_map(|r| r.axioms.get(model))
+        .cloned()
+        .unwrap_or_default();
+    let mut observations = String::new();
+    for (i, line) in expected.lines().enumerate() {
+        let parts = line.split('|').collect::<Vec<_>>();
+        assert_eq!(parts.len(), 3);
+        let term = format!("({model} {:?})", parts[0]);
+        observations.push_str(&format!("theorem{{name:consumerPayload{i},parameters:[],statement:((project {term} value) = {:?}),proof:decide{{}},axioms:[{}]}}\n",parts[1],policy.join(", ")));
+        observations.push_str(&format!("theorem{{name:consumerProvider{i},parameters:[],statement:((project {term} tag) = {}),proof:decide{{}},axioms:[{}]}}\n",parts[2],policy.join(", ")));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{observations}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(" = 1)", " = 2)", 1);
+    assert_ne!(body, wrong);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

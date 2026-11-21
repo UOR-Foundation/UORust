@@ -831,3 +831,10 @@ Feature: engine
     When its exact body admits both native forward and backward kernels
     Then a write through the returned borrow updates the caller's original state
     But incompatible ABIs and unadmitted memory and panic borrowed interfaces remain refused
+
+  @UE-119 @build
+  Scenario: Imported generic bodies dispatch to admitted consumer implementations
+    Given a compiler-owned generic wrapper that calls a concrete consumer trait implementation
+    When the source identity resolver selects one registered implementation
+    Then the imported body reuses that implementation through its admitted native interface
+    But foreign ambiguous and incompatible identities remain refused

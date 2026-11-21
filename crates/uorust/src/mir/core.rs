@@ -494,6 +494,7 @@ pub(crate) fn shard(
             compiler_scope: String::new(),
             compiler_definitions: &BTreeMap::new(),
             compiler_bindings: &BTreeMap::new(),
+            consumer_dispatch: None,
             dictionary_frames: &BTreeMap::new(),
             closure_scopes: &BTreeMap::new(),
             constants: &BTreeMap::new(),
@@ -731,6 +732,39 @@ pub(crate) struct CoreDecls {
 }
 
 impl CoreDecls {
+    pub(crate) fn dispatch_reference(
+        &self,
+        module: &str,
+        callee: &str,
+    ) -> Option<(String, String, String)> {
+        let (method, owner, reference) = super::identity::parts(callee)?;
+        use quote::ToTokens;
+        let reference = syn::parse_str::<syn::TypePath>(&reference).ok()?;
+        if reference.qself.is_some()
+            || reference
+                .path
+                .segments
+                .iter()
+                .rev()
+                .skip(1)
+                .any(|s| !matches!(s.arguments, syn::PathArguments::None))
+        {
+            return None;
+        }
+        let head = reference
+            .path
+            .segments
+            .iter()
+            .map(|s| s.ident.to_string())
+            .collect::<Vec<_>>()
+            .join("::");
+        let head = self.compiler_type_in(module, &head);
+        let arguments = reference.path.segments.last()?.arguments.to_token_stream();
+        self.traits
+            .contains(&head)
+            .then(|| (method, owner, format!("core::{head}{arguments}")))
+    }
+
     /// Normalize compiler-library type names through their declared reexports.
     pub(crate) fn compiler_type(&self, text: &str) -> String {
         self.compiler_type_in("", text)
@@ -3109,6 +3143,77 @@ pub(crate) fn compiler_body_module(source: &CoreDecls, path: &str) -> String {
 
 /// Carry the caller's admitted ABI across the same normalization used for
 /// linkage. These bindings belong to one query, never the shared graph.
+/// Original query spellings restore type identities only at consumer dispatch.
+/// Their native body and proof identities keep the canonical library spelling.
+pub(crate) struct CallerTypes {
+    originals: BTreeMap<String, Option<syn::Type>>,
+}
+
+impl CallerTypes {
+    pub(crate) fn new<'a>(
+        source: &CoreDecls,
+        requested: impl IntoIterator<Item = &'a str>,
+    ) -> Self {
+        use quote::ToTokens;
+        let mut originals = BTreeMap::<String, Option<syn::Type>>::new();
+        for text in requested {
+            let mut reached = Vec::new();
+            components(text, &mut reached);
+            for component in reached {
+                let (Ok(canonical), Ok(original)) = (
+                    syn::parse_str::<syn::Type>(&source.compiler_type(&component)),
+                    syn::parse_str::<syn::Type>(&component),
+                ) else {
+                    continue;
+                };
+                originals
+                    .entry(canonical.to_token_stream().to_string())
+                    .and_modify(|entry| {
+                        if entry.as_ref().is_some_and(|prior| {
+                            prior.to_token_stream().to_string()
+                                != original.to_token_stream().to_string()
+                        }) {
+                            *entry = None;
+                        }
+                    })
+                    .or_insert(Some(original));
+            }
+        }
+        Self { originals }
+    }
+
+    pub(crate) fn contains_owner(&self, text: &str) -> bool {
+        use quote::ToTokens;
+        let mut parts = Vec::new();
+        components(text, &mut parts);
+        parts
+            .first()
+            .and_then(|p| syn::parse_str::<syn::Type>(p).ok())
+            .and_then(|p| self.originals.get(&p.to_token_stream().to_string()))
+            .is_some_and(Option::is_some)
+    }
+
+    pub(crate) fn restore(&self, text: &str) -> Option<String> {
+        use quote::ToTokens;
+        use syn::visit_mut::VisitMut;
+        struct Restore<'a>(&'a CallerTypes);
+        impl VisitMut for Restore<'_> {
+            fn visit_type_mut(&mut self, ty: &mut syn::Type) {
+                if let Some(Some(original)) =
+                    self.0.originals.get(&ty.to_token_stream().to_string())
+                {
+                    *ty = original.clone();
+                } else {
+                    syn::visit_mut::visit_type_mut(self, ty);
+                }
+            }
+        }
+        let mut ty = syn::parse_str::<syn::Type>(text).ok()?;
+        Restore(self).visit_type_mut(&mut ty);
+        Some(ty.to_token_stream().to_string())
+    }
+}
+
 pub(crate) fn compiler_caller_scope<'a>(
     types: &'a Types,
     source: &CoreDecls,
@@ -3305,6 +3410,38 @@ fn import_declaration_schemas(
 mod standard_interface_tests {
     use super::*;
     use crate::lift::Ty;
+
+    #[test]
+    fn consumer_dispatch_spellings_keep_library_and_caller_owners_separate_ue_119() {
+        use quote::ToTokens;
+        let source = standard_declarations();
+        let spellings = CallerTypes::new(source, ["std::string::String", "Token"]);
+        assert!(spellings.contains_owner("string::String"));
+        assert!(spellings.contains_owner("Token"));
+        assert!(!spellings.contains_owner("foreign::Token"));
+        let restored = spellings
+            .restore("core::convert::From<string::String>")
+            .unwrap();
+        assert_eq!(
+            restored,
+            syn::parse_str::<syn::Type>("core::convert::From<std::string::String>")
+                .unwrap()
+                .to_token_stream()
+                .to_string()
+        );
+        let (method, owner, reference) = source
+            .dispatch_reference("convert", "<Token as From>::from")
+            .unwrap();
+        assert_eq!(
+            (method.as_str(), owner.as_str(), reference.as_str()),
+            ("from", "Token", "core::convert::From")
+        );
+        assert!(source
+            .dispatch_reference("convert", "<Token as foreign::From>::from")
+            .is_none());
+        let conflicted = CallerTypes::new(source, ["std::ops::Range<u8>", "core::ops::Range<u8>"]);
+        assert!(!conflicted.contains_owner(&source.compiler_type("std::ops::Range<u8>")));
+    }
 
     #[test]
     fn compiler_records_keep_canonical_dependency_identities_ue_111() {

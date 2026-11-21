@@ -2056,3 +2056,26 @@ passed. Native lowering, compiler schema/capture, immutable source-interface,
 repository conformance, strict Clippy and model/template/SDK/self-model checks
 passed. Complete-registry measurement and SDK/Factory acceptance are separate.
 Full release acceptance remains `just vv`.
+
+## UE-119: consumer dispatch through compiler-owned generic bodies
+
+The registered generic-wrapper regression initially failed at its nested
+consumer trait call. Imported bodies now retain a target-bound callback into
+the existing source identity resolver and method index. Source function
+signatures distinguish trait arguments omitted by MIR, including owned and
+borrowed inputs with the same value carrier. Only traits declared by the
+immutable compiler graph and owners reached by the actual caller query can
+use this path. Query-local type spelling restoration preserves canonical body
+identities. Both the selected source signature and native ABI must agree.
+Compiler-generated definitions retain their own recorded target frame and do
+not inherit an enclosing library's consumer callback.
+
+Six actual Rust/SDK observations preserve payload and implementation choice
+beside borrowed and foreign same-named implementations, including Unicode.
+A deliberately wrong implementation result is rejected with LLV7002. Unknown
+arguments, wrong results, incompatible explicit trait arguments, foreign
+identities, conflicting caller spellings and ambiguous providers are refused.
+Compiler identity/schema, native lowering, immutable source-interface,
+repository conformance, strict Clippy and model/template/SDK/self-model checks
+passed. Whole-registry and production SDK/Factory acceptance remain separate.
+Full release acceptance remains `just vv`.
