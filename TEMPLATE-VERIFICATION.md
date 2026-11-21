@@ -318,3 +318,37 @@ commits and against mirrors served with `PRISM_TEMPLATE_RAW`:
 | a mirror's lock names a file its frame does not | refused: the lock's list against the frame's; nothing written |
 | a mirror's frame and lock both add `.github/workflows/x.yml` | refused: `names files outside the page`; nothing written |
 | an untouched mirror | pinned |
+
+## Browser acceptance and authoritative frame provenance (SM-07)
+
+The site frame is byte-locked to an immutable `UOR-Foundation/template` source
+commit in `frame.lock`; the matching source pins the acceptance-result validator
+alongside its Worker and page entrypoints. The `SM-07` suite checks that failed
+vector identities remain visible, invalid results are refused with three stable
+codes declared in `model/browser-acceptance-diagnostics.toml`, and private
+request buffers are not forwarded to the display. Its Rust conformance test
+invokes eight Node cases through the complete `just vv` workspace gate.
+
+The Pages workflow must still complete on merged main to establish deployment.
+
+### SM-07 planted-defect and restored control
+
+The non-vacuity oracle is the `require_complete_tap` function in
+`crates/conformance/tests/browser_acceptance.rs`. The same test first
+executes the real eight-case Node acceptance suite, then plants two defects
+**in its actual TAP output** before testing the unmodified result:
+
+| Plant | Input mutation | Required rejection |
+| --- | --- | --- |
+| Skipped tests | Replace the real `# pass 8` and `# skipped 0` summaries with `# pass 0` and `# skipped 8` | `SM-07: invalid TAP summary for pass` |
+| Missing required case | Rename the actual `worker preserves a zero-failures result` subtest | `SM-07: required test identity was skipped, removed, renamed or repeated` |
+| Restored control | Use the unmodified Node test transcript | Exactly eight named tests; `tests 8`, `pass 8`, `fail 0`, `cancelled 0`, `skipped 0`, `todo 0`; `require_complete_tap` accepts |
+
+**Reproduction/acceptance command:** `cargo test --workspace --locked`,
+invoked by the locked-SDK `just vv` gate. The two planted cases are expected
+to return `Err` and the restored input must return `Ok`; the Rust test
+fails if any negative plant is accidentally accepted or if the clean
+transcript is rejected. This is an embedded negative-control check rather
+than a separate intentionally red PR workflow. The exact-head hosted
+bootstrap run is the execution receipt; until that run passes, these
+remain source-level expected results, **not verified hosted outcomes**.
