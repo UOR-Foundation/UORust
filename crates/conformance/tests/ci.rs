@@ -9,6 +9,9 @@
 //! and `identity/test.mjs` drive Chromium through Playwright, which the SDK
 //! image does not carry; they stay in `try-page.yml`.
 
+#[path = "../../../prism-factory/host/src/suite_coverage.rs"]
+mod suite_coverage;
+
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -360,4 +363,36 @@ fn factory_closure_holds() {
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr),
     );
+}
+
+#[test]
+fn full_candidate_suite_inventory_precedes_factory_materialization() {
+    let complete = [
+        "scripts/ci/test_pr_stage.py",
+        "scripts/release/test_platforms.py",
+        "scripts/new/test_hidden.py",
+        "scripts/ops/test-guards.sh",
+        "scripts/ci/config.toml",
+        "@base:scripts/old/test_removed.py",
+    ];
+    let materialized = vec![
+        "scripts/ci/test_pr_stage.py".to_string(),
+        "scripts/release/test_platforms.py".to_string(),
+        "scripts/new/test_hidden.py".to_string(),
+        "scripts/ops/test-guards.sh".to_string(),
+    ];
+    assert_eq!(
+        suite_coverage::verify(complete.iter().copied(), Some(&materialized)),
+        Ok(4)
+    );
+    let without_new: Vec<String> = materialized
+        .iter()
+        .filter(|path| !path.starts_with("scripts/new/"))
+        .cloned()
+        .collect();
+    let missing = suite_coverage::verify(complete.iter().copied(), Some(&without_new))
+        .expect_err("an unmaterialized test suite must fail before factory execution");
+    assert!(missing.contains("scripts/new/test_hidden.py"), "{missing}");
+    assert!(suite_coverage::verify(complete.iter().copied(), None).is_err());
+    assert!(suite_coverage::verify(["scripts/ci/config.toml"].iter().copied(), Some(&[])).is_err());
 }
