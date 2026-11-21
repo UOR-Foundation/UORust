@@ -23,6 +23,7 @@ model does not sanction.
 | ID | Level | Statement |
 | --- | --- | --- |
 | `CI-01` | `build` | PR impact reporting evaluates exact base/head Git changes using a trusted-base classifier and factory input graph; passive documentation is distinguished from model inputs, while missing, renamed or nonregular evidence never authorizes skipping native acceptance |
+| `CI-02` | `build` | Trusted-base PR qualification planning resolves the normative just vv recipe and factory dependency graph to a deterministic per-obligation selection, expanding dependent checks, refusing unknown or policy changes with full execution, and never granting merge acceptance from an advisory plan |
 
 ## engine
 

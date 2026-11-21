@@ -173,6 +173,136 @@ def report(repo: Path, base: str, head: str) -> dict:
     return result
 
 
+
+# CI-02: independently testable obligation selection, not a merge-time waiver.
+# The authoritative list of checks and their inputs is the trusted base
+# factory graph plus that revision's Justfile. Never parse PR-head policy.
+FULL_REASON_PREFIXES = (
+    ".github/", ".cargo/", ".qortara/", "prism-factory/",
+    "scripts/ci/", "scripts/release/", "scripts/hooks/",
+)
+FULL_REASON_FILES = {
+    "Justfile", "prismpm.lock", "template.lock", "template-contract.json",
+    "AGENTS.md", "GOVERNANCE.md", "SECURITY.md", "CLAUDE.md",
+    "rust-toolchain.toml", "Cargo.lock", "Cargo.toml", "deny.toml",
+    "TEMPLATE-CONTRACT.md", "TEMPLATE-VERIFICATION.md",
+}
+BROWSER_ONLY_PREFIXES = ("site/", "try/", "frame/", "identity/")
+VV_PARTS = ("fmt-check", "model", "template-check", "self-model-check",
+            "lint", "test", "deny", "app", "uorust")
+
+
+def obligation_plan(paths: list[str], graph: dict, justfile: str) -> dict:
+    """Derive a conservative per-check execution plan from trusted base inputs.
+
+    This is an executable selection contract for later template adoption.
+    Current bootstrap still executes the full integrated just vv. Until that
+    change is governed, this plan is NOT merge qualification.
+    """
+    nodes = graph.get("obligation")
+    sets = graph.get("sets")
+    if not isinstance(nodes, list) or not isinstance(sets, dict):
+        raise UnverifiedDiff("factory graph incomplete")
+    by_name = {}
+    for node in nodes:
+        if not isinstance(node, dict) or not isinstance(node.get("name"), str):
+            raise UnverifiedDiff("invalid factory obligation")
+        name = node["name"]
+        if name in by_name:
+            raise UnverifiedDiff("duplicate obligation")
+        by_name[name] = node
+    vv = by_name.get("vv", {})
+    parts = vv.get("needs")
+    vv_recipes = [line.split("#", 1)[0].strip() for line in justfile.splitlines()
+                  if line.startswith("vv:")]
+    if (len(vv_recipes) != 1 or not isinstance(parts, list)
+            or tuple(parts) != VV_PARTS
+            or vv_recipes[0] != "vv: " + " ".join(parts)
+            or any(by_name.get(name, {}).get("recipe") != name for name in parts)):
+        raise UnverifiedDiff("factory graph and normative vv diverge")
+
+    inputs = {}
+    for name in parts:
+        node = by_name[name]
+        keys, extra, needs = node.get("sets", []), node.get("inputs", []), node.get("needs", [])
+        if not all(isinstance(v, list) for v in (keys, extra, needs)):
+            raise UnverifiedDiff("malformed factory inputs or dependencies")
+        if any(not isinstance(k, str) or k not in sets for k in keys):
+            raise UnverifiedDiff("missing factory input set")
+        expanded = [p for key in keys for p in sets[key]] + extra
+        if not all(isinstance(x, str) and x for x in expanded):
+            raise UnverifiedDiff("invalid factory input")
+        if any(dep not in parts for dep in needs):
+            raise UnverifiedDiff("unregistered acceptance dependency")
+        inputs[name] = expanded
+
+    full = set(parts)
+    def result(selected, reason):
+        ordered = [part for part in parts if part in selected]
+        return {
+            "schema": "uor/ci-obligation-plan/1",
+            "mode": "full" if selected == full else "selective",
+            "required_obligations": ordered,
+            "omitted_obligations": [part for part in parts if part not in selected],
+            "reason": reason,
+            "native_acceptance_required": True,
+            "merge_qualified": False,
+            "advisory_only": True,
+        }
+
+    if not paths or len(paths) > MAX_CHANGED:
+        return result(full, "empty-or-unverified-diff")
+    touched = set()
+    for path in set(paths):
+        if not safe_path(path):
+            return result(full, "unsafe-path-or-mode")
+        if path in FULL_REASON_FILES or path.startswith(FULL_REASON_PREFIXES):
+            return result(full, "trust-or-execution-policy-input")
+        affected = set(consumers(path, inputs))
+        if not affected:
+            if (path.startswith(PASSIVE_DOC_PREFIXES)
+                    and PurePosixPath(path).suffix.lower() in DOC_EXT):
+                continue
+            # An existing separate browser acceptance workflow covers this
+            # tree. Its removal/change is in the full-sensitive .github/ path.
+            if path.startswith(BROWSER_ONLY_PREFIXES):
+                continue
+            return result(full, "unmapped-input")
+        touched.update(affected)
+
+    # An affected obligation must never run without its declared prerequisites.
+    pending = list(touched)
+    while pending:
+        current = pending.pop()
+        for need in by_name[current].get("needs", []):
+            if need not in touched:
+                touched.add(need)
+                pending.append(need)
+    return result(touched, "trusted-factory-input-closure")
+
+
+def report_obligation_plan(repo: Path, base: str, head: str) -> dict:
+    """Trusted-base graph and Justfile; unavailable evidence routes full."""
+    try:
+        paths = compare(repo, base, head)
+        graph = tomllib.loads(git(repo, "show", base + ":prism-factory/graph.toml").decode())
+        justfile = git(repo, "show", base + ":Justfile").decode()
+        planned = obligation_plan(paths, graph, justfile)
+    except (UnverifiedDiff, OSError, UnicodeError, ValueError, KeyError, TypeError):
+        planned = {
+            "schema": "uor/ci-obligation-plan/1",
+            "mode": "full",
+            "required_obligations": list(VV_PARTS),
+            "omitted_obligations": [],
+            "reason": "unverified-policy-or-diff",
+            "native_acceptance_required": True,
+            "merge_qualified": False,
+            "advisory_only": True,
+        }
+    planned["base_sha"] = base
+    planned["head_sha"] = head
+    return planned
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=Path("."))
@@ -181,6 +311,9 @@ def main() -> int:
     parser.add_argument("--summary", type=Path)
     args = parser.parse_args()
     result = report(args.repo.resolve(), args.base, args.head)
+    result["obligation_plan"] = report_obligation_plan(
+        args.repo.resolve(), args.base, args.head
+    )
     print(json.dumps(result, sort_keys=True))
     if args.summary:
         with args.summary.open("a", encoding="utf-8") as output:
