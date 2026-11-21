@@ -1165,6 +1165,12 @@ fn run(cli: Cli) -> Result<(), UorustError> {
 /// A step of the figures.
 fn figures(step: Figures) -> Result<(), UorustError> {
     use uorust::figures;
+    let declared = |l: &figures::Locations| {
+        println!(
+            "figures: the rules declare columns = \"{}\": {}",
+            l.columns, l.reason
+        );
+    };
     let counts = |c: &figures::Counts| {
         println!(
             "figures: {} counted sites, {} with a figure, {} without; {} rewritten; {} figures, \
@@ -1173,6 +1179,13 @@ fn figures(step: Figures) -> Result<(), UorustError> {
         );
         for (why, n) in &c.refusals {
             println!("figures: {n} sites no rewrite can place: {why}");
+        }
+        if let Some(l) = &c.columns {
+            declared(l);
+            println!(
+                "figures: {} rewritten sites moved columns under the declaration",
+                c.moved
+            );
         }
     };
     match step {
@@ -1222,6 +1235,15 @@ fn figures(step: Figures) -> Result<(), UorustError> {
             );
             for x in &r.refused {
                 println!("figures: refused {}: {}", x.key, x.why);
+            }
+            if let Some(l) = &r.columns {
+                declared(l);
+            }
+            for m in &r.moved {
+                println!(
+                    "figures: placed {} at {}:{}: the columns from {} on move by {}",
+                    m.key, m.file, m.line, m.column, m.by
+                );
             }
             Ok(())
         }

@@ -31,8 +31,12 @@ function marked `#[track_caller]` that reads its caller, read from the
 source of the workspace and of every package its build resolves, under any
 name a `use ... as` gives it, written by a `macro_rules!`, or called by an
 operator's token; a macro the figures do not read, a metavariable's among
-them; and, where the source cannot show every tracked function, any call)
-and a layout that moves a line reading its own line or column; what is left
+them; and, where the source cannot show every tracked function, any call),
+unless the rule file declares those columns not behaviour (`[locations]`
+with `columns = "not-behaviour"` and the declarer's `reason`), when it
+places the site and records the columns it moves as the register's
+`[[moved]]` rows; and it refuses, whatever the rules declare, a layout that
+moves a line reading its own line or column; what is left
 outside both is the location a panic reports (`unwrap`, indexing,
 arithmetic overflow, a tracked function that passes its caller's location
 only to a panic), which only `cargo test` compares.

@@ -289,6 +289,53 @@ pub struct Rules {
     /// renaming alone unless the policy says how far.
     #[serde(default)]
     pub unchecked_ceiling: usize,
+    /// What the workspace declares of the places its code reads: absent,
+    /// every column a location reads is behaviour.
+    #[serde(default)]
+    pub locations: Option<Locations>,
+}
+
+/// What a refusal for a line that reads its column adds: the declaration
+/// that would place it.
+const UNDECLARED: &str =
+    ", and the rules do not declare columns = \"not-behaviour\" ([locations] with a reason)";
+
+/// The one value [`Locations::columns`] may state.
+pub const COLUMNS_NOT_BEHAVIOUR: &str = "not-behaviour";
+
+/// A workspace's declaration, in its rule file's `[locations]` table, that
+/// the source columns its locations read (`column!()`, a caller's or a
+/// panic's `Location`) are not part of its behaviour, so that a rewrite may
+/// place a site on a line that reads its column and record the columns it
+/// moves. Lines cannot be declared so: no rewrite moves one.
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct Locations {
+    /// [`COLUMNS_NOT_BEHAVIOUR`].
+    pub columns: String,
+    /// Why, in the declarer's words: what a model that cites the
+    /// declaration cites.
+    pub reason: String,
+}
+
+/// Columns a rewrite moved on a line that reads its column, under the
+/// rules' [`Locations`] declaration: every column of `line` at or after
+/// `column` (0-based, in characters, as the line stood before the rewrite)
+/// moved by `by` characters; the moves of the sites of one line add up.
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct Moved {
+    /// The site's key.
+    pub key: String,
+    /// Its file.
+    pub file: String,
+    /// Its line, which does not move.
+    pub line: usize,
+    /// The first column that moves: the one after the literal.
+    pub column: usize,
+    /// How far, in characters: the generated name's length less the
+    /// literal's.
+    pub by: i64,
 }
 
 /// The package [`write`] generates.
@@ -496,6 +543,12 @@ pub struct Register {
     /// What the reader could not read for sites (a doc text not spelled as
     /// written, a doc test that does not lex), each with its file.
     pub unread: Vec<String>,
+    /// The rules' declaration of what columns are, when they make one.
+    pub columns: Option<Locations>,
+    /// The columns each rewritten site placed under that declaration moved,
+    /// by key: rows the rewrite wrote, kept while their site is written as a
+    /// generated name.
+    pub moved: Vec<Moved>,
 }
 
 /// What a register says about itself: its counts.
@@ -517,6 +570,10 @@ pub struct Counts {
     pub unhomed: usize,
     /// Figures whose home names no check.
     pub unchecked: usize,
+    /// The rules' declaration of what columns are, when they make one.
+    pub columns: Option<Locations>,
+    /// Rewritten sites whose placing moved columns under it.
+    pub moved: usize,
 }
 
 /// Whether a figure states its home: one of [`HOMES`], citing something.
@@ -553,6 +610,8 @@ impl Register {
         }
         c.unhomed = self.figures.iter().filter(|f| !homed(f)).count();
         c.unchecked = self.figures.iter().filter(|f| !checked(f)).count();
+        c.columns = self.columns.clone();
+        c.moved = self.moved.len();
         c
     }
 
@@ -582,9 +641,24 @@ impl Register {
         for (why, n) in &c.refusals {
             let _ = writeln!(out, "# {n} sites no rewrite can place: {why}.");
         }
+        if let Some(l) = &self.columns {
+            let _ = writeln!(
+                out,
+                "# The rules declare columns = {}: {}; {} sites placed under it moved columns.",
+                quote(&l.columns),
+                l.reason,
+                c.moved
+            );
+        }
         let _ = writeln!(out, "spec = {}", quote(REGISTER_SPEC));
         let _ = writeln!(out, "rules = {}", quote(rules_digest));
         let _ = writeln!(out, "figures = {}", quote(&self.figures_digest()));
+        // Only a declaring register states it, so that one that declares
+        // nothing reads as it always did.
+        if let Some(l) = &self.columns {
+            let _ = writeln!(out, "columns = {}", quote(&l.columns));
+            let _ = writeln!(out, "columns_reason = {}", quote(&l.reason));
+        }
         let list = |items: &[String]| {
             let quoted: Vec<String> = items.iter().map(|s| quote(s)).collect();
             format!("[{}]", quoted.join(", "))
@@ -603,6 +677,9 @@ impl Register {
                 let _ = writeln!(out, "type = {}", quote(&f.ty));
             }
             let _ = writeln!(out, "sites = {}", list(&f.sites));
+        }
+        for m in &self.moved {
+            out.push_str(&moved_row(m));
         }
         let listed = self.listed();
         for s in &self.sites {
@@ -656,6 +733,18 @@ impl Register {
     }
 }
 
+/// A `[[moved]]` row of a register.
+fn moved_row(m: &Moved) -> String {
+    format!(
+        "\n[[moved]]\nkey = {}\nfile = {}\nline = {}\ncolumn = {}\nby = {}\n",
+        quote(&m.key),
+        quote(&m.file),
+        m.line,
+        m.column,
+        m.by
+    )
+}
+
 /// TOML's basic string of a text.
 fn quote(s: &str) -> String {
     toml::Value::String(s.to_string()).to_string()
@@ -687,7 +776,48 @@ pub fn read_rules(path: &Path) -> Result<(Rules, String), UorustError> {
             return Err(malformed(path, format!("{value} is no numeric literal")));
         }
     }
+    if let Some(l) = &rules.locations {
+        if l.columns != COLUMNS_NOT_BEHAVIOUR {
+            return Err(malformed(
+                path,
+                format!(
+                    "locations.columns may state only {}",
+                    quote(COLUMNS_NOT_BEHAVIOUR)
+                ),
+            ));
+        }
+        // The reason is cited as written, in the register's header too.
+        if l.reason.trim().is_empty() || l.reason.chars().any(char::is_control) {
+            return Err(malformed(
+                path,
+                "locations.reason must give the declarer's reason on one line",
+            ));
+        }
+    }
     Ok((rules, hex(&Sha256::digest(text.as_bytes()))))
+}
+
+/// The `[[moved]]` rows of a register file, one per key, the last written
+/// standing; none when it does not exist.
+pub fn read_moved(path: &Path) -> Result<Vec<Moved>, UorustError> {
+    #[derive(Deserialize)]
+    struct File {
+        #[serde(default)]
+        moved: Vec<Moved>,
+    }
+    if !path.exists() {
+        return Ok(Vec::new());
+    }
+    let text = std::fs::read_to_string(path).map_err(|e| io(path, e))?;
+    let value: toml::Value = toml::from_str(&text).map_err(|e| malformed(path, e))?;
+    let mut table = value.as_table().cloned().unwrap_or_default();
+    table.retain(|k, _| k == "moved");
+    let file: File = toml::Value::Table(table)
+        .try_into()
+        .map_err(|e| malformed(path, e))?;
+    let by_key: BTreeMap<String, Moved> =
+        file.moved.into_iter().map(|m| (m.key.clone(), m)).collect();
+    Ok(by_key.into_values().collect())
 }
 
 /// The figure rows of a register file; none when it does not exist.
@@ -3770,6 +3900,7 @@ fn read_loaded(
     let mut register = Register {
         figures,
         unparsed: loaded.unparsed.clone(),
+        columns: rules.locations.clone(),
         ..Register::default()
     };
     // Each doc text a file includes, read once, from the first file that
@@ -3818,6 +3949,21 @@ fn read_loaded(
     Ok(register)
 }
 
+/// The moved rows of a register that still stand: those whose site the
+/// source writes as a generated name.
+fn standing(moved: Vec<Moved>, register: &Register) -> Vec<Moved> {
+    let written: BTreeSet<&str> = register
+        .sites
+        .iter()
+        .filter(|s| s.form != Form::Literal)
+        .map(|s| s.key.as_str())
+        .collect();
+    moved
+        .into_iter()
+        .filter(|m| written.contains(m.key.as_str()))
+        .collect()
+}
+
 /// What [`extract`] did.
 #[derive(Clone, Debug)]
 pub struct Extracted {
@@ -3835,6 +3981,7 @@ pub fn extract(root: &Path, rules: &Path, register: &Path) -> Result<Extracted, 
     let (rules_v, digest) = read_rules(rules)?;
     let figures = read_figures(register)?;
     let mut reg = read(root, &rules_v, figures)?;
+    reg.moved = standing(read_moved(register)?, &reg);
     let keys: BTreeSet<String> = reg.sites.iter().map(|s| s.key.clone()).collect();
     let mut vanished = Vec::new();
     for f in &mut reg.figures {
@@ -4542,6 +4689,11 @@ pub struct Rewritten {
     pub files: Vec<String>,
     /// Sites with a figure no rewrite placed, each with its typed reason.
     pub refused: Vec<Refused>,
+    /// The rules' declaration of what columns are, when they make one.
+    pub columns: Option<Locations>,
+    /// The columns each site placed on a line that reads its column moved
+    /// (only under that declaration), as the register records them.
+    pub moved: Vec<Moved>,
 }
 
 /// Where a rewrite puts a figure, or the name it reaches the generated
@@ -4577,22 +4729,38 @@ fn replacement(site: &Site, figure: &Figure, krate: &str) -> Placement {
     }
 }
 
+/// What [`rewrite_text`] makes of one file's text.
+struct Replaced {
+    /// The new text.
+    text: String,
+    /// The sites replaced.
+    n: usize,
+    /// The sites refused, each with why.
+    refused: Vec<Refused>,
+    /// The columns each site replaced on a line that reads its column moved.
+    moved: Vec<Moved>,
+}
+
 /// Replace, in one file's text, each site a figure lists by its generated
 /// name; the sites already written so are left as they are. `located` are
-/// the names whose call reads its own location ([`location_lines`]); `bound`
+/// the names whose call reads its own location ([`location_lines`]); a site
+/// on a line that reads its column is refused unless `columns` declares
+/// columns not behaviour, and is then replaced with the columns it moves
+/// recorded (a replacement is one line long, so it moves no line); `bound`
 /// gives the crate name a site's package reaches the generated package by,
-/// or why it reaches none. Returns the new text, the number replaced and the
-/// refusals.
+/// or why it reaches none.
 fn rewrite_text(
     text: &str,
     sites: &[Site],
     listed: &BTreeMap<&str, &Figure>,
     located: &Located,
+    columns: Option<&Locations>,
     bound: &dyn Fn(&Site) -> Placement,
-) -> (String, usize, Vec<Refused>) {
+) -> Replaced {
     let mut edits: Vec<((usize, usize), String)> = Vec::new();
     let mut refused = Vec::new();
-    let (columns, _) = location_lines(text, located);
+    let mut moved = Vec::new();
+    let (reading, _) = location_lines(text, located);
     // The lines a named reading holds, apart from those only an unknown
     // tracked function may make read.
     let named = match located.calls {
@@ -4603,19 +4771,19 @@ fn rewrite_text(
             };
             location_lines(text, &named).0
         }
-        None => columns.clone(),
+        None => reading.clone(),
     };
     for s in sites.iter().filter(|s| s.form == Form::Literal) {
         let Some(f) = listed.get(s.key.as_str()) else {
             continue;
         };
-        if columns.contains(&s.start.0) {
+        let reads_column = reading.contains(&s.start.0);
+        if reads_column && columns.is_none() {
             let why = match &located.calls {
                 Some(unknown) if !named.contains(&s.start.0) => format!(
-                    "a call on its line may reach a #[track_caller] function the source does not name ({unknown})"
+                    "a call on its line may reach a #[track_caller] function the source does not name ({unknown}){UNDECLARED}"
                 ),
-                _ => "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read)"
-                    .to_string(),
+                _ => format!("a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read){UNDECLARED}"),
             };
             refused.push(Refused {
                 key: s.key.clone(),
@@ -4634,7 +4802,19 @@ fn rewrite_text(
             }
         };
         match replacement(s, f, &krate) {
-            Placement::Name(r) => edits.push((s.bytes, r)),
+            Placement::Name(r) => {
+                if reads_column {
+                    let chars = |t: &str| i64::try_from(t.chars().count()).unwrap_or(i64::MAX);
+                    moved.push(Moved {
+                        key: s.key.clone(),
+                        file: s.file.clone(),
+                        line: s.start.0,
+                        column: s.end.1,
+                        by: chars(&r) - chars(&text[s.bytes.0..s.bytes.1]),
+                    });
+                }
+                edits.push((s.bytes, r));
+            }
             Placement::Refused(why) => refused.push(Refused {
                 key: s.key.clone(),
                 why,
@@ -4647,7 +4827,12 @@ fn rewrite_text(
     for ((a, b), r) in edits {
         out.replace_range(a..b, &r);
     }
-    (out, n, refused)
+    Replaced {
+        text: out,
+        n,
+        refused,
+        moved,
+    }
 }
 
 /// The name a site's code reaches the generated package by, or why it
@@ -4940,8 +5125,11 @@ fn formatted(text: &str, dir: &Path, edition: &str) -> Option<String> {
 /// name of its figure, file by file. A file the formatter left as it was is
 /// laid out by the formatter again after the replacement, and is written
 /// only when its tokens are the replaced text's and no line that reads its
-/// own location moved; every other byte of a file stays. A second run finds
-/// every placed site written so and changes nothing.
+/// own location moved; every other byte of a file stays. A site on a line
+/// that reads its column is placed only when the rules declare columns not
+/// behaviour ([`Locations`]), and the columns it moved are then appended to
+/// the register as `[[moved]]` rows. A second run finds every placed site
+/// written so and changes nothing.
 pub fn rewrite(root: &Path, rules: &Path, register: &Path) -> Result<Rewritten, UorustError> {
     let (rules, _) = read_rules(rules)?;
     let figures = read_figures(register)?;
@@ -4959,44 +5147,50 @@ pub fn rewrite(root: &Path, rules: &Path, register: &Path) -> Result<Rewritten, 
     for s in &reg.sites {
         by_file.entry(s.file.as_str()).or_default().push(s.clone());
     }
-    let mut done = Rewritten::default();
+    let columns = rules.locations.as_ref();
+    let mut done = Rewritten {
+        columns: rules.locations.clone(),
+        ..Rewritten::default()
+    };
     for (file, sites) in by_file {
         let path = root.join(file);
         let text = std::fs::read_to_string(&path).map_err(|e| io(&path, e))?;
-        let (_, n, refused) = rewrite_text(&text, &sites, &listed, &loaded.located, &bound);
-        if n == 0 {
-            done.refused.extend(refused);
+        let first = rewrite_text(&text, &sites, &listed, &loaded.located, columns, &bound);
+        if first.n == 0 {
+            done.refused.extend(first.refused);
             continue;
         }
         let dir = path.parent().unwrap_or(&root).to_path_buf();
         let edition = of.get(file).map_or("", |f| f.edition.as_str());
         let clean = formatted(&text, &dir, edition).as_deref() == Some(text.as_str());
-        // The layout of the text with the given sites replaced and their
-        // number, or why it is not the same program.
-        let lay = |chosen: &[Site]| -> (String, usize, Option<&'static str>) {
-            let (new, n, _) = rewrite_text(&text, chosen, &listed, &loaded.located, &bound);
+        // The layout of the text with the given sites replaced, their number
+        // and the columns they moved, or why it is not the same program. A
+        // layout that moves a line reading its line or column is refused
+        // whatever the rules declare: they declare columns only.
+        let lay = |chosen: &[Site]| -> (String, usize, Vec<Moved>, Option<&'static str>) {
+            let r = rewrite_text(&text, chosen, &listed, &loaded.located, columns, &bound);
             let laid = if clean {
-                formatted(&new, &dir, edition).unwrap_or_else(|| new.clone())
+                formatted(&r.text, &dir, edition).unwrap_or_else(|| r.text.clone())
             } else {
-                new.clone()
+                r.text.clone()
             };
-            let why = if !same_program(&new, &laid, &loaded.shadowed) {
+            let why = if !same_program(&r.text, &laid, &loaded.shadowed) {
                 Some("the formatter's layout changed the file's tokens")
-            } else if moves_location(&new, &laid, &loaded.located) {
+            } else if moves_location(&r.text, &laid, &loaded.located) {
                 Some("the formatter's layout moves a line that reads its own line or column")
             } else {
                 None
             };
-            (laid, n, why)
+            (laid, r.n, r.moved, why)
         };
-        done.refused.extend(refused);
-        let (laid, n) = match lay(&sites) {
-            (laid, n, None) => (laid, n),
+        done.refused.extend(first.refused);
+        let (laid, n, moved) = match lay(&sites) {
+            (laid, n, moved, None) => (laid, n, moved),
             // Site by site in source order: each is kept when the layout of
             // the file with it and every site kept before is the same program
             // and moves no line that reads its place, and refused otherwise.
             // The last layout that held is the one written.
-            (_, _, Some(_)) => {
+            (_, _, _, Some(_)) => {
                 let refused_keys: BTreeSet<String> =
                     done.refused.iter().map(|r| r.key.clone()).collect();
                 let mut kept: Vec<Site> = sites
@@ -5004,7 +5198,7 @@ pub fn rewrite(root: &Path, rules: &Path, register: &Path) -> Result<Rewritten, 
                     .filter(|s| s.form != Form::Literal || !listed.contains_key(s.key.as_str()))
                     .cloned()
                     .collect();
-                let mut last: Option<(String, usize)> = None;
+                let mut last: Option<(String, usize, Vec<Moved>)> = None;
                 for s in sites.iter().filter(|s| {
                     s.form == Form::Literal
                         && listed.contains_key(s.key.as_str())
@@ -5012,8 +5206,8 @@ pub fn rewrite(root: &Path, rules: &Path, register: &Path) -> Result<Rewritten, 
                 }) {
                     kept.push(s.clone());
                     match lay(&kept) {
-                        (laid, n, None) => last = Some((laid, n)),
-                        (_, _, Some(why)) => {
+                        (laid, n, moved, None) => last = Some((laid, n, moved)),
+                        (_, _, _, Some(why)) => {
                             kept.pop();
                             done.refused.push(Refused {
                                 key: s.key.clone(),
@@ -5031,6 +5225,16 @@ pub fn rewrite(root: &Path, rules: &Path, register: &Path) -> Result<Rewritten, 
         std::fs::write(&path, laid).map_err(|e| io(&path, e))?;
         done.replaced += n;
         done.files.push(file.to_string());
+        done.moved.extend(moved);
+    }
+    // The register records what moved, beside its figures, until the next
+    // extract writes the rows in their place.
+    if !done.moved.is_empty() {
+        let mut text = std::fs::read_to_string(register).map_err(|e| io(register, e))?;
+        for m in &done.moved {
+            text.push_str(&moved_row(m));
+        }
+        std::fs::write(register, text).map_err(|e| io(register, e))?;
     }
     Ok(done)
 }
@@ -5049,8 +5253,9 @@ pub struct Checked {
 /// citation), every rewritten site names the figure that lists it, every
 /// file is stratified, parses and was read whole, the figures whose home
 /// names no check are no more than the rules' declared ceiling (so the gate
-/// is not passed by renaming alone), and the generated files (when given)
-/// are what [`write`] would write.
+/// is not passed by renaming alone), no column a rewrite moved stands
+/// without the rules' declaration that columns are not behaviour, and the
+/// generated files (when given) are what [`write`] would write.
 pub fn check(
     root: &Path,
     rules_path: &Path,
@@ -5060,7 +5265,8 @@ pub fn check(
 ) -> Result<Checked, UorustError> {
     let (rules, digest) = read_rules(rules_path)?;
     let figures = read_figures(register)?;
-    let reg = read(root, &rules, figures)?;
+    let mut reg = read(root, &rules, figures)?;
+    reg.moved = standing(read_moved(register)?, &reg);
     let mut findings = Vec::new();
     let on_disk = std::fs::read_to_string(register).map_err(|e| io(register, e))?;
     if on_disk != reg.render(&digest) {
@@ -5099,6 +5305,15 @@ pub fn check(
                     s.key, s.literal, f.name, f.value
                 ));
             }
+        }
+    }
+    if rules.locations.is_none() {
+        for m in &reg.moved {
+            findings.push(format!(
+                "{} {}:{}: a rewrite moved its columns from {} by {} under the declaration that \
+                 columns are not behaviour, which the rules no longer make",
+                m.key, m.file, m.line, m.column, m.by
+            ));
         }
     }
     for f in &reg.figures {
@@ -5146,6 +5361,18 @@ mod tests {
     use super::*;
 
     // Class: figures (every numeric literal gets a home).
+
+    /// [`rewrite_text`] under rules that declare nothing of columns.
+    fn rewrite_undeclared(
+        text: &str,
+        sites: &[Site],
+        listed: &BTreeMap<&str, &Figure>,
+        located: &Located,
+        bound: &dyn Fn(&Site) -> Placement,
+    ) -> (String, usize, Vec<Refused>) {
+        let r = rewrite_text(text, sites, listed, located, None, bound);
+        (r.text, r.n, r.refused)
+    }
 
     fn figures_rules() -> Rules {
         toml::from_str(
@@ -5306,9 +5533,10 @@ mod tests {
             ..Register::default()
         };
         let listed = reg.listed();
-        let (new, n, refused) = rewrite_text(text, &sites, &listed, &Located::default(), &|_| {
-            Placement::Name("figs".to_string())
-        });
+        let (new, n, refused) =
+            rewrite_undeclared(text, &sites, &listed, &Located::default(), &|_| {
+                Placement::Name("figs".to_string())
+            });
         assert!(refused.is_empty(), "{refused:?}");
         assert_eq!(n, 4);
         assert_eq!(
@@ -5324,9 +5552,10 @@ mod tests {
         let keys = |s: &[Site]| -> Vec<String> { s.iter().map(|x| x.key.clone()).collect() };
         assert_eq!(keys(&again), keys(&sites));
         assert!(again.iter().all(|s| s.form != Form::Literal));
-        let (same, none, _) = rewrite_text(&new, &again, &listed, &Located::default(), &|_| {
-            Placement::Name("figs".to_string())
-        });
+        let (same, none, _) =
+            rewrite_undeclared(&new, &again, &listed, &Located::default(), &|_| {
+                Placement::Name("figs".to_string())
+            });
         assert_eq!((same.as_str(), none), (new.as_str(), 0));
     }
 
@@ -5348,9 +5577,10 @@ mod tests {
             ..Register::default()
         };
         let listed = reg.listed();
-        let (new, n, refused) = rewrite_text(text, &sites, &listed, &Located::default(), &|_| {
-            Placement::Name("figs".to_string())
-        });
+        let (new, n, refused) =
+            rewrite_undeclared(text, &sites, &listed, &Located::default(), &|_| {
+                Placement::Name("figs".to_string())
+            });
         let whys: Vec<&str> = refused.iter().map(|r| r.why.as_str()).collect();
         assert_eq!(
             whys,
@@ -5359,8 +5589,8 @@ mod tests {
                 "a literal inside a macro_rules! definition",
                 "the standard library prints this condition as written",
                 "a format string must be a literal",
-                "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read)",
-                "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read)",
+                "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read), and the rules do not declare columns = \"not-behaviour\" ([locations] with a reason)",
+                "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read), and the rules do not declare columns = \"not-behaviour\" ([locations] with a reason)",
                 "a negated literal pattern admits no macro call",
                 "a range bound needs a typed constant, and the figure states no type",
             ]
@@ -5372,7 +5602,7 @@ mod tests {
             figures: vec![figures_figure("sixteen", "16", &[&other[0]])],
             ..Register::default()
         };
-        let (_, n, refused) = rewrite_text(
+        let (_, n, refused) = rewrite_undeclared(
             "fn f() -> u32 { 16u32 }",
             &other,
             &reg.listed(),
@@ -5944,6 +6174,222 @@ mod tests {
         );
     }
 
+    /// The `[locations]` table by which a synthetic workspace declares its
+    /// columns not behaviour.
+    const FIGURES_COLUMNS_DECLARED: &str = "[locations]\ncolumns = \"not-behaviour\"\n\
+        reason = \"the synthetic workspace reports no source column to anyone\"\n";
+
+    /// A synthetic workspace whose `p/src/lib.rs` is `lib`, figured by
+    /// `rows`, under the repair rules and `declared` after them; rewritten,
+    /// with the source and the register as they then are, and the workspace's
+    /// directory (removed by the caller).
+    fn figures_columns_rewrite(
+        tag: &str,
+        lib: &str,
+        rows: &[(&str, &str, &str)],
+        declared: &str,
+    ) -> (Rewritten, String, String, PathBuf) {
+        let rules = format!("{FIGURES_REPAIR_RULES}{declared}");
+        let dir = figures_repair_workspace(
+            tag,
+            &[
+                ("Cargo.toml", FIGURES_REPAIR_ROOT),
+                (
+                    "p/Cargo.toml",
+                    &figures_repair_manifest("figs = { path = \"../figs\" }\n"),
+                ),
+                ("p/src/lib.rs", lib),
+                ("figs/Cargo.toml", FIGURES_REPAIR_FIGS),
+                ("figs/src/lib.rs", "#![no_std]\n"),
+                ("rules.toml", &rules),
+                ("figures.toml", &figures_repair_figure_rows(rows)),
+            ],
+        );
+        let done =
+            rewrite(&dir, &dir.join("rules.toml"), &dir.join("figures.toml")).expect("rewritten");
+        let after = std::fs::read_to_string(dir.join("p/src/lib.rs")).expect("read");
+        let register = std::fs::read_to_string(dir.join("figures.toml")).expect("read");
+        (done, after, register, dir)
+    }
+
+    const FIGURES_COLUMNS_LIB: &str =
+        "pub fn here() -> u32 {\n    1001 + column!() + 1002 + column!()\n}\n";
+
+    const FIGURES_COLUMNS_ROWS: [(&str, &str, &str); 2] = [
+        ("base", "1001", "\"p/p::here:1001:0\""),
+        ("step", "1002", "\"p/p::here:1002:0\""),
+    ];
+
+    #[test]
+    fn figures_columns_a_line_reading_its_column_is_refused_without_the_declaration_ue_21() {
+        let (done, after, register, dir) = figures_columns_rewrite(
+            "columns-undeclared",
+            FIGURES_COLUMNS_LIB,
+            &FIGURES_COLUMNS_ROWS,
+            "",
+        );
+        let _ = std::fs::remove_dir_all(&dir);
+        assert_eq!(done.replaced, 0, "{after}");
+        let why = "a call on its line reads its column (column!(), a caller's location, or a \
+                   macro the figures do not read), and the rules do not declare columns = \
+                   \"not-behaviour\" ([locations] with a reason)";
+        assert_eq!(
+            done.refused,
+            ["p/p::here:1001:0", "p/p::here:1002:0"].map(|key| Refused {
+                key: key.to_string(),
+                why: why.to_string(),
+            })
+        );
+        assert_eq!(after, FIGURES_COLUMNS_LIB);
+        assert_eq!((done.columns, done.moved), (None, Vec::new()));
+        assert!(!register.contains("[[moved]]"), "{register}");
+    }
+
+    #[test]
+    fn figures_columns_declared_not_behaviour_place_the_site_and_record_what_moves_ue_21() {
+        let (done, after, register, dir) = figures_columns_rewrite(
+            "columns-declared",
+            FIGURES_COLUMNS_LIB,
+            &FIGURES_COLUMNS_ROWS,
+            FIGURES_COLUMNS_DECLARED,
+        );
+        let (rules, figures) = (dir.join("rules.toml"), dir.join("figures.toml"));
+        assert_eq!(
+            (done.replaced, done.refused.as_slice()),
+            (2, &[][..]),
+            "{after}"
+        );
+        assert_eq!(
+            after,
+            "pub fn here() -> u32 {\n    ::figs::base!() + column!() + ::figs::step!() + column!()\n}\n"
+        );
+        let reason = "the synthetic workspace reports no source column to anyone";
+        assert_eq!(
+            done.columns,
+            Some(Locations {
+                columns: COLUMNS_NOT_BEHAVIOUR.to_string(),
+                reason: reason.to_string(),
+            })
+        );
+        // Each literal of four characters became a name of fifteen: the
+        // columns after it moved by eleven, and the line stayed.
+        let moved = |key: &str, column: usize| Moved {
+            key: key.to_string(),
+            file: "p/src/lib.rs".to_string(),
+            line: 2,
+            column,
+            by: 11,
+        };
+        let expected = vec![moved("p/p::here:1001:0", 8), moved("p/p::here:1002:0", 27)];
+        assert_eq!(done.moved, expected);
+        assert_eq!(read_moved(&figures).expect("read"), expected, "{register}");
+        // Extracted, the register states the declaration and keeps the rows,
+        // and the gate holds and says so.
+        extract(&dir, &rules, &figures).expect("extracted");
+        let written = std::fs::read_to_string(&figures).expect("read");
+        assert!(
+            written.contains(&format!(
+                "columns = \"not-behaviour\"\ncolumns_reason = \"{reason}\"\n"
+            )),
+            "{written}"
+        );
+        assert!(
+            written.contains(
+                "\n[[moved]]\nkey = \"p/p::here:1001:0\"\nfile = \"p/src/lib.rs\"\nline = 2\n\
+                 column = 8\nby = 11\n"
+            ),
+            "{written}"
+        );
+        assert_eq!(read_moved(&figures).expect("read"), expected);
+        let held = check(&dir, &rules, &figures, None, None).expect("checked");
+        assert!(held.findings.is_empty(), "{:?}", held.findings);
+        assert_eq!(
+            (held.counts.rewritten, held.counts.moved),
+            (2, 2),
+            "{written}"
+        );
+        assert_eq!(held.counts.columns, done.columns);
+        // A second rewrite changes nothing and moves nothing.
+        let again = rewrite(&dir, &rules, &figures).expect("rewritten");
+        assert_eq!((again.replaced, again.moved.len()), (0, 0));
+        assert_eq!(std::fs::read_to_string(&figures).expect("read"), written);
+        // Without the declaration the moved columns stand on nothing.
+        std::fs::write(&rules, FIGURES_REPAIR_RULES).expect("written");
+        extract(&dir, &rules, &figures).expect("extracted");
+        let bare = check(&dir, &rules, &figures, None, None).expect("checked");
+        let _ = std::fs::remove_dir_all(&dir);
+        assert_eq!(
+            bare.findings,
+            [
+                "p/p::here:1001:0 p/src/lib.rs:2: a rewrite moved its columns from 8 by 11 under \
+                 the declaration that columns are not behaviour, which the rules no longer make",
+                "p/p::here:1002:0 p/src/lib.rs:2: a rewrite moved its columns from 27 by 11 under \
+                 the declaration that columns are not behaviour, which the rules no longer make",
+            ]
+        );
+    }
+
+    #[test]
+    fn figures_columns_a_rewrite_that_moves_a_line_is_refused_under_the_declaration_ue_21() {
+        // The name is too long for the line: the formatter breaks it, and
+        // the `column!()` it reads would stand on another line's number.
+        let name = "the_first_entry_of_a_synthetic_table_whose_name_is_too_long_for_one_line";
+        let lib = "pub fn here() -> u32 {\n    let at = column!() + 1001 + 1;\n    at\n}\n";
+        let sites = "\"p/p::here:1001:0\"";
+        let (done, after, register, dir) = figures_columns_rewrite(
+            "columns-line",
+            lib,
+            &[(name, "1001", sites)],
+            FIGURES_COLUMNS_DECLARED,
+        );
+        let _ = std::fs::remove_dir_all(&dir);
+        assert_eq!(done.replaced, 0, "{after}");
+        assert_eq!(
+            done.refused,
+            [Refused {
+                key: "p/p::here:1001:0".to_string(),
+                why: "the formatter's layout moves a line that reads its own line or column"
+                    .to_string(),
+            }]
+        );
+        assert_eq!(after, lib);
+        assert!(done.moved.is_empty() && done.columns.is_some());
+        assert!(!register.contains("[[moved]]"), "{register}");
+    }
+
+    #[test]
+    fn figures_columns_the_declaration_states_not_behaviour_with_a_reason_ue_21() {
+        let dir = figures_repair_workspace("columns-rules", &[]);
+        std::fs::create_dir_all(&dir).expect("a scratch directory");
+        let path = dir.join("rules.toml");
+        let read = |locations: &str| {
+            std::fs::write(
+                &path,
+                format!("{FIGURES_REPAIR_RULES}[locations]\n{locations}"),
+            )
+            .expect("written");
+            read_rules(&path).map(|(r, _)| r.locations)
+        };
+        let declared = read("columns = \"not-behaviour\"\nreason = \"none reads them\"\n");
+        let refused = [
+            "columns = \"behaviour\"\nreason = \"none reads them\"\n",
+            "columns = \"not-behaviour\"\nreason = \" \"\n",
+            "columns = \"not-behaviour\"\nreason = \"one\\ntwo\"\n",
+            "columns = \"not-behaviour\"\n",
+            "columns = \"not-behaviour\"\nlines = \"not-behaviour\"\nreason = \"none\"\n",
+        ]
+        .map(|l| matches!(read(l), Err(UorustError::Malformed { .. })));
+        let _ = std::fs::remove_dir_all(&dir);
+        assert_eq!(
+            declared.expect("read"),
+            Some(Locations {
+                columns: "not-behaviour".to_string(),
+                reason: "none reads them".to_string(),
+            })
+        );
+        assert_eq!(refused, [true; 5]);
+    }
+
     #[test]
     fn figures_repair_a_line_calling_a_track_caller_function_keeps_its_columns() {
         let text = "use std::panic::Location;\n\n#[track_caller]\nfn loc() -> u32 {\n    Location::caller().column()\n}\n\n\
@@ -5958,17 +6404,17 @@ mod tests {
             ..Register::default()
         };
         let name = |_: &Site| Placement::Name("figs".to_string());
-        let (new, n, refused) = rewrite_text(text, &sites, &reg.listed(), &located, &name);
+        let (new, n, refused) = rewrite_undeclared(text, &sites, &reg.listed(), &located, &name);
         assert_eq!((new.as_str(), n), (text, 0));
         assert_eq!(
             refused[0].why,
-            "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read)"
+            "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read), and the rules do not declare columns = \"not-behaviour\" ([locations] with a reason)"
         );
         // A function that is not `#[track_caller]` reads no caller.
         let plain = text.replace("#[track_caller]\n", "");
         let mut locating = Locating::default();
         locating.read(&syn::parse_file(&plain).expect("parses"), "lib.rs", false);
-        let (_, n, _) = rewrite_text(
+        let (_, n, _) = rewrite_undeclared(
             &plain,
             &figures_sites(&plain),
             &reg.listed(),
@@ -6486,7 +6932,7 @@ mod tests {
             .map(|r| (r.key.clone(), r.why.clone()))
             .collect();
         refused.sort();
-        let column = "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read)";
+        let column = "a call on its line reads its column (column!(), a caller's location, or a macro the figures do not read), and the rules do not declare columns = \"not-behaviour\" ([locations] with a reason)";
         let expected: Vec<(String, String)> = sites[..7]
             .iter()
             .map(|(f, v)| (format!("p/p::{f}:{v}:0"), column.to_string()))
