@@ -2101,3 +2101,28 @@ alias. The existing archive-checksum negative remains required. Existing alias
 scope and renamed-type SDK regressions preserve prior behavior. Whole-registry
 impact and production acceptance are separate from these focused checks; full
 release acceptance remains the unchanged `just vv` boundary.
+
+## UE-121: complete compiler constant dependency capture
+
+The registered native regression initially rejects the exact closed compiler
+constant operands for floating-point and unit owners. The original Factory core
+capture already contains the missing bodies. The existing lossless graph writer
+now reproduces this complete capture as well as alloc, verifying every capture
+file and the complete pinned source tree. No standard-operation model is added.
+The source reader records default constant providers only for unconditional,
+non-specializable, unbounded blanket implementations beside their trait in the
+same source scope, without constant overrides. Conditional, bounded, specialized,
+concrete and overridden implementations gain no provider identity.
+
+Runtime queries require a graph-owned compiler trait, this source provider
+identity and the exact captured target layout. The existing namespace resolver
+and constant-body lowerer run dependencies in their owning graph. A constant
+must retain a zero-parameter, memory-free ABI with its exact result. Foreign and
+unqualified consumer traits are refused. Capture bytes, graph contents and
+provider identities are bound by the retained capture and graph digest.
+
+Qualification includes exact Factory graph reproduction, provider and target
+negatives, altered capture/body/provider rejection, actual Rust/SDK constant
+observations, and a wrong-result LLV7002 rejection. Whole-registry impact,
+production acceptance and the unchanged full `just vv` release gate remain
+separate requirements.

@@ -4300,6 +4300,27 @@ impl Fun<'_, '_> {
                         })?;
                     self.const_body(p, &body)
                 }
+                None if super::link::compiler_constant_for(
+                    p,
+                    self.cx.layouts,
+                    self.cx.semantics(),
+                )
+                .is_some() =>
+                {
+                    let (graph, inst) =
+                        super::link::compiler_constant_for(p, self.cx.layouts, self.cx.semantics())
+                            .expect("checked");
+                    let body = super::parse::bodies(&inst.text)
+                        .into_iter()
+                        .next()
+                        .ok_or_else(|| {
+                            kind(
+                                k,
+                                &format!("the constant item {p}, whose body does not read"),
+                            )
+                        })?;
+                    self.const_body_in(p, &body, Some(graph))
+                }
                 // A constant item rustc dumps no body of: its value, folded
                 // from the expression core's source gives it, of integer
                 // literals, other constant items, arithmetic and casts
@@ -4535,6 +4556,15 @@ impl Fun<'_, '_> {
     /// lowered like any body: its value inline where it is one term, else
     /// a definition of its own.
     fn const_body(&mut self, path: &str, body: &IrBody) -> Lift<(String, Ty)> {
+        self.const_body_in(path, body, None)
+    }
+
+    fn const_body_in(
+        &mut self,
+        path: &str,
+        body: &IrBody,
+        graph: Option<&super::link::CoreLink>,
+    ) -> Lift<(String, Ty)> {
         let k = spec::MirOperand::Constant.path();
         let segs: Vec<String> = super::parse::split_path(path)
             .iter()
@@ -4554,10 +4584,22 @@ impl Fun<'_, '_> {
         let mut active = self.cx.active.to_vec();
         active.push(name.clone());
         active.push(marker);
-        let cx = self.cx.within(&active);
+        let mut cx = self.cx.within(&active);
+        if let Some(graph) = graph {
+            cx.core = Some(graph);
+            cx.library = Some(graph);
+            cx.library_module = super::core::compiler_body_module(&graph.decls, path);
+            cx.consumer_dispatch = None;
+        }
         let lowered =
             lower(&cx, body, &name).map_err(|r| kind(k, &format!("{path}: {}", r.detail())))?;
         let t = ty(&body.locals[0], self.cx.types)?;
+        if !lowered.abi.parameters.is_empty() || lowered.abi.memory || lowered.abi.result != t {
+            return Err(kind(
+                k,
+                &format!("{path}, whose constant interface needs state or an incompatible result"),
+            ));
+        }
         self.types.extend(lowered.types.iter().cloned());
         self.calls.extend(lowered.calls.iter().cloned());
         if let (

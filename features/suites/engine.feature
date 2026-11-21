@@ -845,3 +845,10 @@ Feature: engine
     When source bodies read those aliases in local and nested annotations
     Then they use the same bounded substitution as signatures and fields
     But generic parameters lexical shadows incompatible arity and unverified archives gain no alias reading
+
+  @UE-121 @build
+  Scenario: Compiler constants retain their complete dependency capture
+    Given an exact Factory core capture containing constants absent from the preferred graph
+    When a closed query names a source-verified unconditional constant provider
+    Then its body and dependencies use the existing native kernels in their owning graph
+    But foreign overridable mismatched-target and changed-capture bindings remain refused

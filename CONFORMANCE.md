@@ -141,6 +141,7 @@ model does not sanction.
 | `UE-118` | `build` | Compiler-owned returned mutable borrows reuse the existing forward and backward native lowering kernels in one exact imported scope, with both ABIs checked before caller state transport; unadmitted memory and panic borrowed interfaces remain refused |
 | `UE-119` | `build` | Imported compiler generic bodies retain concrete consumer trait dispatch through the existing source type identity resolver and method index, importing already admitted definitions with exact ABI checks while foreign ambiguous and incompatible identities remain refused |
 | `UE-120` | `build` | Source type annotations reuse the existing checksum-bound alias graph and scoped name identities for recursive alias substitution, while generic parameters, lexical shadows, incompatible alias arity and unverified archives remain protected |
+| `UE-121` | `build` | Compiler constant dependencies reuse the complete exact Factory core capture and existing native kernels under their owning source and target graph, with source-verified unconditional default providers and foreign override target and capture controls |
 
 ## factory
 

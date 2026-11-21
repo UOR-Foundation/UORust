@@ -12201,3 +12201,121 @@ fn local_annotations_share_authoritative_aliases_ue_120() {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn compiler_constants_reuse_complete_factory_capture_ue_121() {
+    let dir = scratch("compiler-constant-closure", &[
+        ("Cargo.toml", "[package]\nname=\"compiler_constant_closure\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n"),
+        ("src/lib.rs", "#![feature(sized_type_properties)]\npub fn float_property(mut n:u8)->bool {while n>0 {n-=1;} <f64 as core::mem::SizedTypeProperties>::IS_ZST}\npub fn unit_property(mut n:u8)->bool {while n>0 {n-=1;} <() as core::mem::SizedTypeProperties>::IS_ZST}\n"),
+    ]);
+    let vectors = dir.join("src/bin/vectors.rs");
+    std::fs::create_dir_all(vectors.parent().unwrap()).unwrap();
+    std::fs::write(&vectors,"fn main(){for n in [0u8,1,7] {println!(\"{n}|{}|{}\",compiler_constant_closure::float_property(n),compiler_constant_closure::unit_property(n));}}\n").unwrap();
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .env("RUSTC_BOOTSTRAP", "1")
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let expected = String::from_utf8(rust.stdout).unwrap();
+    let dumps = dumped(&dir, "compiler-constant-closure");
+    let mut opts = options("compiler_constant_closure");
+    opts.mir = Some(mir_options(
+        dumps.clone(),
+        Default::default(),
+        uorust::mir::Trial::All,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    for name in ["float_property", "unit_property"] {
+        let function = format!("compiler_constant_closure::{name}");
+        assert!(
+            frontier_rows(&files, "lifted")
+                .iter()
+                .any(|r| r["function"].as_str() == Some(&function)),
+            "{function}: {:?}",
+            residue_detail(&files, &function)
+        );
+    }
+    let cache = dir.join("verdicts.toml");
+    let proved = uorust::mir::prove_bounded(
+        &dir,
+        &options("compiler_constant_closure"),
+        &dumps,
+        &cache,
+        &dir.join("trial"),
+        8,
+    )
+    .unwrap();
+    assert_eq!((proved.proved, proved.refused), (2, 0), "{proved:?}");
+    let decisions = verdicts(&cache);
+    opts.mir = Some(mir_options(
+        dumps,
+        decisions.clone(),
+        uorust::mir::Trial::Off,
+    ));
+    let files = uorust::project_workspace(&dir, &opts).unwrap();
+    let rows = frontier_rows(&files, "lifted");
+    let mut observations = String::new();
+    for (i, line) in expected.lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        for (j, function) in ["float_property", "unit_property"].iter().enumerate() {
+            let path = format!("compiler_constant_closure::{function}");
+            let model = rows
+                .iter()
+                .find(|r| r["function"].as_str() == Some(&path))
+                .unwrap()["definition"]
+                .as_str()
+                .unwrap()
+                .strip_prefix("Behavior::")
+                .unwrap();
+            let policy = decisions
+                .rows
+                .values()
+                .find(|r| r.function == path)
+                .and_then(|r| r.axioms.get(model))
+                .cloned()
+                .unwrap_or_default();
+            observations.push_str(&format!("theorem{{name:constantObservation{i}{j},parameters:[],statement:(({model} {}) = {}),proof:decide{{}},axioms:[{}]}}\n",parts[0],parts[j+1],policy.join(", ")));
+        }
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{observations}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(" = false)", " = true)", 1);
+    assert_ne!(body, wrong);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

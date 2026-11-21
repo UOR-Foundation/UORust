@@ -1550,6 +1550,118 @@ pub(crate) fn library_decls(root: &Path, krates: &[&str]) -> CoreDecls {
 /// not read: the `const` of `impl const Trait` and `impl<..> const Trait`,
 /// and the `const`, `[const]` and `~const` of a bound. What is left declares the
 /// same items.
+/// Source-only evidence for non-specializable blanket constant defaults.
+/// The trait and impl must be unconditional siblings in the same source scope.
+#[cfg(test)]
+pub(super) fn unconditional_constant_defaults(root: &Path) -> BTreeSet<String> {
+    fn conditional(attrs: &[syn::Attribute]) -> bool {
+        attrs
+            .iter()
+            .any(|a| a.path().is_ident("cfg") || a.path().is_ident("cfg_attr"))
+    }
+    fn visit(module: &str, items: &[syn::Item], out: &mut BTreeSet<String>) {
+        let local: BTreeSet<String> = items
+            .iter()
+            .filter_map(|item| match item {
+                syn::Item::Trait(t)
+                    if !conditional(&t.attrs)
+                        && t.generics.params.is_empty()
+                        && t.items.iter().any(
+                            |i| matches!(i,syn::TraitItem::Const(c) if c.default.is_some()),
+                        ) =>
+                {
+                    Some(t.ident.to_string())
+                }
+                _ => None,
+            })
+            .collect();
+        for item in items {
+            match item {
+                syn::Item::Impl(im)
+                    if !conditional(&im.attrs)
+                        && im.modifiers.defaultness.is_none()
+                        && im.modifiers.polarity.is_none()
+                        && im.generics.where_clause.is_none()
+                        && !im
+                            .items
+                            .iter()
+                            .any(|i| matches!(i, syn::ImplItem::Const(_))) =>
+                {
+                    let [syn::GenericParam::Type(param)] =
+                        im.generics.params.iter().collect::<Vec<_>>().as_slice()
+                    else {
+                        continue;
+                    };
+                    if !param.bounds.is_empty() || param.default.is_some() {
+                        continue;
+                    }
+                    let syn::Type::Path(owner) = &*im.self_ty else {
+                        continue;
+                    };
+                    if owner.qself.is_some() || !owner.path.is_ident(&param.ident) {
+                        continue;
+                    }
+                    let Some((tr, _)) = &im.trait_ else { continue };
+                    let Some(name) = tr.get_ident().map(ToString::to_string) else {
+                        continue;
+                    };
+                    if local.contains(&name) {
+                        out.insert(if module.is_empty() {
+                            name
+                        } else {
+                            format!("{module}::{name}")
+                        });
+                    }
+                }
+                syn::Item::Mod(m) if !conditional(&m.attrs) => {
+                    if let Some((_, items)) = &m.content {
+                        let path = if module.is_empty() {
+                            m.ident.to_string()
+                        } else {
+                            format!("{module}::{}", m.ident)
+                        };
+                        visit(&path, items, out);
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+    let src = root.join("library/core/src");
+    let mut pending = vec![src.clone()];
+    let mut out = BTreeSet::new();
+    while let Some(dir) = pending.pop() {
+        for file in crate::embed::dir_paths(&dir).unwrap() {
+            if file.is_dir() {
+                pending.push(file);
+                continue;
+            }
+            if file.extension().is_none_or(|s| s != "rs") {
+                continue;
+            }
+            let text = std::fs::read_to_string(&file).unwrap();
+            let parsed = syn::parse_file(&text).or_else(|_| {
+                let tokens: proc_macro2::TokenStream = text.parse()?;
+                syn::parse2::<syn::File>(without_const_traits(tokens))
+            });
+            let Ok(parsed) = parsed else { continue };
+            if conditional(&parsed.attrs) {
+                continue;
+            }
+            let relative = file.strip_prefix(&src).unwrap().with_extension("");
+            let mut parts: Vec<_> = relative
+                .components()
+                .map(|c| c.as_os_str().to_string_lossy().into_owned())
+                .collect();
+            if matches!(parts.last().map(String::as_str), Some("mod" | "lib")) {
+                parts.pop();
+            }
+            visit(&parts.join("::"), &parsed.items, &mut out);
+        }
+    }
+    out
+}
+
 fn without_const_traits(tokens: proc_macro2::TokenStream) -> proc_macro2::TokenStream {
     use proc_macro2::{Group, TokenTree};
     let is = |t: &TokenTree, s: &str| matches!(t, TokenTree::Ident(i) if i == s);

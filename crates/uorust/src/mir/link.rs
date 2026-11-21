@@ -43,6 +43,10 @@ pub(crate) struct CoreLink {
     /// Each body's MIR text, by the path its dump names it by: a macro's
     /// impls share the path of the macro's text.
     pub(crate) bodies: BTreeMap<String, Vec<String>>,
+    /// Default constants whose exact source supplies an unconditional,
+    /// non-specializable blanket impl without constant overrides.
+    #[serde(default, skip_serializing_if = "std::collections::BTreeSet::is_empty")]
+    constant_defaults: std::collections::BTreeSet<String>,
     /// For each last segment of a body's path, the paths that have it: MIR
     /// prints a path by its last segment where no other item has it.
     pub(crate) lasts: BTreeMap<String, Vec<String>>,
@@ -667,6 +671,7 @@ impl CoreLink {
             methods,
             traits,
             index,
+            constant_defaults: Default::default(),
             root: Some(root.to_path_buf()),
             origin: None,
             locals,
@@ -1392,7 +1397,12 @@ impl CoreLink {
         let inner = printed.strip_prefix('<')?;
         let (self_ty, rest) = inner.split_once(" as ")?;
         let (tr, name) = rest.rsplit_once(">::")?;
-        let path = format!("{}::{name}", super::lower::erase(tr));
+        let tr = self.decls.compiler_type(tr);
+        let tr = super::lower::erase(&tr);
+        if !self.constant_defaults.is_empty() && !self.constant_defaults.contains(&tr) {
+            return None;
+        }
+        let path = format!("{tr}::{name}");
         let [text] = self.bodies.get(&path)?.as_slice() else {
             return None;
         };
@@ -1495,6 +1505,7 @@ struct CompilerLibrary {
 
 static COMPILER_LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
 static COMPILER_ALLOC_LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
+static COMPILER_CORE_LIBRARY: std::sync::OnceLock<CompilerLibrary> = std::sync::OnceLock::new();
 
 const COMPILER_PASS: &str = "runtime-optimized.after";
 const COMPILER_FLAGS: &str = "--edition=2024 --crate-type=lib --emit=mir -Coverflow-checks=on -Cdebug-assertions=off -Zmir-include-spans=on -Zmir-opt-level=4 -Zalways-encode-mir";
@@ -1530,22 +1541,39 @@ fn compiler_alloc_library() -> &'static CompilerLibrary {
     })
 }
 
+fn compiler_core_library() -> &'static CompilerLibrary {
+    COMPILER_CORE_LIBRARY.get_or_init(|| {
+        let decoder =
+            flate2::read::GzDecoder::new(&include_bytes!("../../mir/std-core-library.json.gz")[..]);
+        let mut source: CompilerLibrary =
+            serde_json::from_reader(decoder).expect("captured core graph");
+        assert!(
+            source.capture.is_some() && source.valid(),
+            "captured core binding or payload differs"
+        );
+        assert_eq!(source.compiler_commit, compiler_library().compiler_commit);
+        source.graph.origin = Some("core".into());
+        source
+    })
+}
+
 impl CompilerLibrary {
     fn provenance_valid(&self) -> bool {
         let Some(record) = &self.capture else {
             return self.flags == COMPILER_FLAGS && self.pass == COMPILER_PASS;
         };
-        if crate::project::sha(record.as_bytes())
-            != "ef74837fc93f97b02b3f53cf0fa3f30655d95557ba6ead6c1f8e3f04d6c933f7"
-        {
-            return false;
-        }
+        let identity = crate::project::sha(record.as_bytes());
+        let krate = match identity.as_str() {
+            "ef74837fc93f97b02b3f53cf0fa3f30655d95557ba6ead6c1f8e3f04d6c933f7" => "alloc",
+            "334119c018e6e84ea3440e8170dedb1cd6f7ce75fa66353beea64d30d6d988a0" => "core",
+            _ => return false,
+        };
         let Ok(record) = toml::from_str::<toml::Table>(record) else {
             return false;
         };
         self.flags == "uorust/library-mir/2"
             && self.pass == "ElaborateBoxDerefs.before"
-            && record.get("crate").and_then(toml::Value::as_str) == Some("alloc")
+            && record.get("crate").and_then(toml::Value::as_str) == Some(krate)
             && record.get("toolchain").and_then(toml::Value::as_str)
                 == Some(self.toolchain.as_str())
             && record.get("source_sha256").and_then(toml::Value::as_str)
@@ -1601,6 +1629,36 @@ pub(crate) fn compiler_library_for(
 ) -> Option<&'static CoreLink> {
     let source = compiler_library();
     source.matches(layouts).then_some(&source.graph)
+}
+
+/// Retained constants use their captured provider and exact target layout.
+pub(crate) fn compiler_constant_for(
+    printed: &str,
+    layouts: &[super::layout::DataLayout],
+    from: Option<&CoreLink>,
+) -> Option<(&'static CoreLink, Instance)> {
+    let (_, _, tr) = super::identity::parts(printed)?;
+    let qualified = tr.starts_with("std::") || tr.starts_with("core::");
+    let owned = from.is_some_and(|graph| {
+        graph.library_origin().is_some() || std::ptr::eq(graph, &compiler_library().graph)
+    });
+    if !qualified && !owned {
+        return None;
+    }
+    let source = compiler_core_library();
+    if !source.matches(layouts) {
+        return None;
+    }
+    let path = source.graph.decls.compiler_type(&tr);
+    if !source
+        .graph
+        .constant_defaults
+        .contains(&super::lower::erase(&path))
+    {
+        return None;
+    }
+    let instance = source.graph.constant(printed)?;
+    Some((&source.graph, instance))
 }
 
 #[cfg(test)]
@@ -2058,6 +2116,78 @@ mod captured_library_tests {
     }
 
     #[test]
+    fn captured_constants_reject_foreign_override_and_changed_bindings_ue_121() {
+        let source = compiler_core_library();
+        assert!(source.valid());
+        let layouts =
+            super::super::layout::DataLayout::parse(&source.target, &source.data_layout).unwrap();
+        let query = "<f64 as core::mem::SizedTypeProperties>::IS_ZST";
+        let (owner, instance) =
+            compiler_constant_for(query, std::slice::from_ref(&layouts), None).unwrap();
+        assert_eq!(owner.library_origin(), Some("core"));
+        assert!(instance
+            .text
+            .contains("<f64 as mem::SizedTypeProperties>::SIZE"));
+        for path in [
+            "<f64 as foreign::mem::SizedTypeProperties>::IS_ZST",
+            "<f64 as SizedTypeProperties>::IS_ZST",
+            "<f64 as core::foreign::SizedTypeProperties>::IS_ZST",
+            "<f64 as core::iter::Iterator>::IS_ZST",
+        ] {
+            assert!(
+                compiler_constant_for(path, std::slice::from_ref(&layouts), None).is_none(),
+                "{path}"
+            );
+        }
+        let other =
+            super::super::layout::DataLayout::parse("other-target", &source.data_layout).unwrap();
+        assert!(compiler_constant_for(query, &[other], None).is_none());
+        let load = || -> CompilerLibrary {
+            serde_json::from_reader(flate2::read::GzDecoder::new(
+                &include_bytes!("../../mir/std-core-library.json.gz")[..],
+            ))
+            .unwrap()
+        };
+        let mut changed = load();
+        changed.capture.as_mut().unwrap().push_str("\n# changed");
+        assert!(!changed.valid());
+        let mut changed = load();
+        changed
+            .graph
+            .constant_defaults
+            .insert("foreign::Trait".into());
+        assert!(!changed.valid());
+        let mut changed = load();
+        changed.graph.bodies.values_mut().next().unwrap()[0].push_str("\n// changed");
+        assert!(!changed.valid());
+    }
+
+    #[test]
+    fn unconditional_defaults_do_not_admit_overrides_or_conditional_impls_ue_121() {
+        let root =
+            std::env::temp_dir().join(format!("uorust-constant-providers-{}", std::process::id()));
+        let dir = root.join("library/core/src");
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::write(
+            dir.join("lib.rs"),
+            r#"
+trait Fixed {const FLAG:bool=true;} impl<T> Fixed for T {}
+trait Override {const FLAG:bool=true;} impl Override for u8 {const FLAG:bool=false;}
+trait Bounded {const FLAG:bool=true;} impl<T:Copy> Bounded for T {}
+trait Replaced {const FLAG:bool=true;} impl<T> Replaced for T {const FLAG:bool=false;}
+trait Conditional {const FLAG:bool=true;} #[cfg(feature="x")] impl<T> Conditional for T {}
+trait Specialized {const FLAG:bool=true;} default impl<T> Specialized for T {}
+"#,
+        )
+        .unwrap();
+        assert_eq!(
+            super::super::core::unconditional_constant_defaults(&root),
+            std::collections::BTreeSet::from(["Fixed".into()])
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
     fn captured_library_graph_reproduces_factory_input_ue_115() {
         let Some(dumps) = std::env::var_os("UORUST_CAPTURED_LIBRARY_MIR") else {
             assert!(compiler_alloc_library().valid());
@@ -2067,10 +2197,14 @@ mod captured_library_tests {
         let root = std::path::Path::new(&root);
         let dumps = std::path::Path::new(&dumps);
         let capture = std::fs::read_to_string(dumps.join(crate::library::RECORD)).unwrap();
-        assert_eq!(
-            crate::project::sha(capture.as_bytes()),
-            "ef74837fc93f97b02b3f53cf0fa3f30655d95557ba6ead6c1f8e3f04d6c933f7"
-        );
+        let record: toml::Table = toml::from_str(&capture).unwrap();
+        let krate = record["crate"].as_str().unwrap();
+        let expected = match krate {
+            "alloc" => "ef74837fc93f97b02b3f53cf0fa3f30655d95557ba6ead6c1f8e3f04d6c933f7",
+            "core" => "334119c018e6e84ea3440e8170dedb1cd6f7ce75fa66353beea64d30d6d988a0",
+            _ => panic!("unregistered capture"),
+        };
+        assert_eq!(crate::project::sha(capture.as_bytes()), expected);
         let record: toml::Table = toml::from_str(&capture).unwrap();
         assert_eq!(
             crate::library::digest(dumps).unwrap(),
@@ -2102,12 +2236,23 @@ mod captured_library_tests {
         }
         assert_eq!(texts.len() as i64, record["files"].as_integer().unwrap());
         let mut graph = CoreLink::new(
-            super::super::core::library_decls(root, &["core", "alloc"]),
+            super::super::core::library_decls(
+                root,
+                if krate == "core" {
+                    &["core"]
+                } else {
+                    &["core", "alloc"]
+                },
+            ),
             root,
-            &root.join("library/alloc/src"),
+            &root.join(format!("library/{krate}/src")),
             texts.iter().map(|(n, t)| (n.as_str(), t)),
         );
         graph.root = None;
+        if krate == "core" {
+            graph.constant_defaults = super::super::core::unconditional_constant_defaults(root);
+            assert!(graph.constant_defaults.contains("mem::SizedTypeProperties"));
+        }
         let source = CompilerLibrary {
             spec: base.spec.clone(),
             toolchain: base.toolchain.clone(),
@@ -2125,8 +2270,8 @@ mod captured_library_tests {
         };
         assert!(source.valid());
         let bytes = serde_json::to_vec(&source).unwrap();
-        let destination =
-            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("mir/std-alloc-library.json.gz");
+        let destination = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join(format!("mir/std-{krate}-library.json.gz"));
         if std::env::var_os("UORUST_WRITE_SPEC").is_some() {
             use std::io::Write;
             let mut encoder = flate2::GzBuilder::new()
