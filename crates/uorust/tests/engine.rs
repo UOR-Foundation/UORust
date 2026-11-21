@@ -12088,3 +12088,116 @@ fn imported_generic_wrappers_keep_consumer_dispatch_ue_119() {
     );
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[test]
+fn local_annotations_share_authoritative_aliases_ue_120() {
+    let dir = scratch("local-alias-annotations", &[
+        ("Cargo.toml", "[package]\nname=\"local_alias_annotations\"\nversion=\"0.1.0\"\nedition=\"2021\"\n[workspace]\n[dependencies]\nrustc-hash=\"=1.1.0\"\n"),
+        ("src/lib.rs", "use rustc_hash::{FxHashMap,FxHashSet};\npub fn through(values:FxHashMap<u32,u32>)->usize {let local:FxHashMap<u32,u32>=values;local.len()}\npub fn through_set(values:FxHashSet<u32>)->usize {let local:FxHashSet<u32>=values;local.len()}\npub type Chain<K,V> = FxHashMap<K,V>;\npub fn nested(values:Option<Chain<u32,u32>>)->Option<Chain<u32,u32>> {let local:Option<Chain<u32,u32>>=values;local}\npub mod scope {pub struct FxHashMap {pub value:u8} pub fn shadow(value:FxHashMap)->FxHashMap {let local:FxHashMap=value;local}}\npub fn generic<FxHashMap>(value:FxHashMap)->FxHashMap {let local:FxHashMap=value;local}\n"),
+    ]);
+    let locked = std::process::Command::new("cargo")
+        .args(["generate-lockfile", "--offline"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        locked.status.success(),
+        "{}",
+        String::from_utf8_lossy(&locked.stderr)
+    );
+    let files = project(&dir, "local_alias_annotations");
+    let lifted = frontier_rows(&files, "lifted");
+    for name in [
+        "through",
+        "through_set",
+        "nested",
+        "scope::shadow",
+        "generic",
+    ] {
+        let function = format!("local_alias_annotations::{name}");
+        assert!(
+            lifted
+                .iter()
+                .any(|r| r["function"].as_str() == Some(&function)),
+            "{function}: {:?}",
+            residue_detail(&files, &function)
+        );
+    }
+    let vectors = dir.join("src/bin/vectors.rs");
+    std::fs::create_dir_all(vectors.parent().unwrap()).unwrap();
+    std::fs::write(&vectors, "fn main(){for n in [0u32,1,3] {let map=(0..n).map(|x|(x,x+7)).collect();let set=(0..n).collect();println!(\"map|{n}|{}\",local_alias_annotations::through(map));println!(\"set|{n}|{}\",local_alias_annotations::through_set(set));}}\n").unwrap();
+    let rust = std::process::Command::new("cargo")
+        .args(["run", "--offline", "--quiet", "--bin", "vectors"])
+        .current_dir(&dir)
+        .output()
+        .unwrap();
+    assert!(
+        rust.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rust.stderr)
+    );
+    let mut observations = String::new();
+    for (i, line) in String::from_utf8(rust.stdout).unwrap().lines().enumerate() {
+        let parts: Vec<_> = line.split('|').collect();
+        let count: u32 = parts[1].parse().unwrap();
+        let map = parts[0] == "map";
+        let function = format!(
+            "local_alias_annotations::{}",
+            if map { "through" } else { "through_set" }
+        );
+        let model = lifted
+            .iter()
+            .find(|r| r["function"].as_str() == Some(&function))
+            .unwrap()["definition"]
+            .as_str()
+            .unwrap()
+            .strip_prefix("Behavior::")
+            .unwrap();
+        let entry = if map { "TupleNatNat" } else { "Nat" };
+        let mut input = format!("(nil {entry})");
+        for n in (0..count).rev() {
+            let item = if map {
+                format!("(record TupleNatNat {{item0 := {n}, item1 := {}}})", n + 7)
+            } else {
+                n.to_string()
+            };
+            input = format!("(cons {item} {input})");
+        }
+        observations.push_str(&format!("theorem{{name:aliasObservation{i},parameters:[],statement:(({model} {input}) = {}),proof:decide{{}}}}\n",parts[2]));
+    }
+    let out = dir.join("projection");
+    uorust::write(&out, &files).unwrap();
+    let body = text(&files, "src/Behavior.lex.tex").replace(
+        "\\end{semanticmodule}",
+        &format!("{observations}\\end{{semanticmodule}}"),
+    );
+    let file = out.join("src/Behavior.lex.tex");
+    std::fs::write(&file, &body).unwrap();
+    let verify = || {
+        std::process::Command::new("lexlean")
+            .args([
+                "verify",
+                "src/Behavior.lex.tex",
+                "--diagnostic-format",
+                "json",
+            ])
+            .current_dir(&out)
+            .output()
+            .unwrap()
+    };
+    let checked = verify();
+    assert!(
+        checked.status.success(),
+        "{}{}",
+        String::from_utf8_lossy(&checked.stdout),
+        String::from_utf8_lossy(&checked.stderr)
+    );
+    let wrong = body.replacen(" = 0)", " = 9)", 1);
+    assert_ne!(body, wrong);
+    std::fs::write(&file, wrong).unwrap();
+    let rejected = verify();
+    assert!(
+        !rejected.status.success() && String::from_utf8_lossy(&rejected.stdout).contains("LLV7002")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

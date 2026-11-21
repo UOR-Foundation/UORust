@@ -838,3 +838,10 @@ Feature: engine
     When the source identity resolver selects one registered implementation
     Then the imported body reuses that implementation through its admitted native interface
     But foreign ambiguous and incompatible identities remain refused
+
+  @UE-120 @build
+  Scenario: Local annotations share authoritative alias expansion
+    Given aliases read from exact locked dependency archives and resolved workspace declarations
+    When source bodies read those aliases in local and nested annotations
+    Then they use the same bounded substitution as signatures and fields
+    But generic parameters lexical shadows incompatible arity and unverified archives gain no alias reading

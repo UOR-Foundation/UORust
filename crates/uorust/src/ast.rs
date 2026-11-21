@@ -135,12 +135,21 @@ impl RustType {
     /// cycle of aliases ends. An alias of the workspace is named by its
     /// name; one a crate outside it declares, by its path (`krate::Alias`).
     pub(crate) fn expanded(&self, aliases: &BTreeMap<String, Alias>, depth: usize) -> RustType {
+        self.expanded_with(&|name| aliases.get(name), depth)
+    }
+
+    /// The same substitution kernel with a scope-bound alias lookup.
+    pub(crate) fn expanded_with<'a>(
+        &self,
+        aliases: &impl Fn(&str) -> Option<&'a Alias>,
+        depth: usize,
+    ) -> RustType {
         if let TypeKind::Path { qself: false, path } = &self.kind {
             if let Some((one, prefix)) = path.segments.split_last() {
                 let plain = prefix.iter().all(|s| s.arguments == PathArguments::None);
                 let key: Vec<&str> = path.segments.iter().map(|s| s.ident.as_str()).collect();
                 if depth > 0 && plain {
-                    if let Some(alias) = aliases.get(&key.join("::")) {
+                    if let Some(alias) = aliases(&key.join("::")) {
                         let args: Vec<RustType> = match &one.arguments {
                             PathArguments::AngleBracketed(args) => args
                                 .iter()
@@ -154,13 +163,16 @@ impl RustType {
                         if args.len() == alias.params.len() {
                             let bound: BTreeMap<String, RustType> =
                                 alias.params.iter().cloned().zip(args).collect();
-                            return alias.to.substituted(&bound).expanded(aliases, depth - 1);
+                            return alias
+                                .to
+                                .substituted(&bound)
+                                .expanded_with(aliases, depth - 1);
                         }
                     }
                 }
             }
         }
-        let inner = |t: &RustType| Box::new(t.expanded(aliases, depth));
+        let inner = |t: &RustType| Box::new(t.expanded_with(aliases, depth));
         let kind = match &self.kind {
             TypeKind::Reference { mutable, elem } => TypeKind::Reference {
                 mutable: *mutable,
@@ -173,7 +185,7 @@ impl RustType {
             }
             TypeKind::Paren(t) => TypeKind::Paren(inner(t)),
             TypeKind::Tuple(ts) => {
-                TypeKind::Tuple(ts.iter().map(|t| t.expanded(aliases, depth)).collect())
+                TypeKind::Tuple(ts.iter().map(|t| t.expanded_with(aliases, depth)).collect())
             }
             TypeKind::Path { qself, path } => TypeKind::Path {
                 qself: *qself,
@@ -189,7 +201,7 @@ impl RustType {
                                         args.iter()
                                             .map(|a| match a {
                                                 GenericArgument::Type(t) => GenericArgument::Type(
-                                                    t.expanded(aliases, depth),
+                                                    t.expanded_with(aliases, depth),
                                                 ),
                                                 other => other.clone(),
                                             })

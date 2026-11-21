@@ -4169,6 +4169,7 @@ fn behavior(
             native_shapes.push(structs.clone());
             Types {
                 derives,
+                source_aliases: std::sync::Arc::new(type_aliases[pkg].clone()),
                 ..Types::with_data(enums, &datas, &structs, aliases)
             }
         })
@@ -4179,6 +4180,14 @@ fn behavior(
         .iter()
         .map(|(&at, names)| {
             let mut scope = scopes[at.0].clone();
+            let inline = ws.packages[at.0].files[at.1]
+                .scopes
+                .get(at.2)
+                .map(|scope| scope.module.clone())
+                .unwrap_or_default();
+            if let Some(bound) = ctx.registry_paths.get(&(at.0, at.1, inline)) {
+                scope.aliases.extend(bound.clone());
+            }
             scope.aliases.extend(names.clone());
             (at, scope)
         })
@@ -4195,7 +4204,13 @@ fn behavior(
     };
     let fn_aliases = |r: FnRef| -> BTreeMap<String, String> {
         let at = (r.pkg, r.file, ctx.func(r).scope);
-        let mut names = blinded(&overlays[&at], Some(&blind_of(r)));
+        let inline = inline_of(r);
+        let mut names = ctx
+            .registry_paths
+            .get(&(r.pkg, r.file, inline))
+            .cloned()
+            .unwrap_or_default();
+        names.extend(blinded(&overlays[&at], Some(&blind_of(r))));
         // A function's own type parameters shadow module-level imports.
         for parameter in &syntax.function(&ctx.file(r).rel, r.idx).signature.generics {
             if let crate::ast::GenericParam::Type(name) = parameter {
@@ -4496,16 +4511,13 @@ fn behavior(
         let signature_names = fn_aliases(r);
         for input in &mut sig.inputs {
             if let crate::ast::FnArg::Typed(t) = input {
-                t.ty = declared_in(
-                    r.pkg,
-                    r.file,
-                    &inline_of(r),
-                    &t.ty.renamed(&signature_names),
-                );
+                t.ty =
+                    t.ty.renamed(&signature_names)
+                        .localized(&ctx.file(r).imports);
             }
         }
         if let Some(t) = &mut sig.output {
-            *t = declared_in(r.pkg, r.file, &inline_of(r), &t.renamed(&signature_names));
+            *t = t.renamed(&signature_names).localized(&ctx.file(r).imports);
         }
         let formatter = match sig.inputs.as_slice() {
             [crate::ast::FnArg::Receiver { plain: true }, crate::ast::FnArg::Typed(t)]

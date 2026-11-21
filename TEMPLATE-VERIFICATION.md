@@ -2079,3 +2079,25 @@ Compiler identity/schema, native lowering, immutable source-interface,
 repository conformance, strict Clippy and model/template/SDK/self-model checks
 passed. Whole-registry and production SDK/Factory acceptance remain separate.
 Full release acceptance remains `just vv`.
+
+## UE-120: one authoritative source alias reading
+
+The registered local-annotation regression fails before implementation: identical
+locked dependency map and set aliases are admitted in signatures but rejected in
+local annotations. Source scopes now share the existing exact archive/workspace
+alias graph through an immutable Arc. Source type reading uses the existing
+bounded substitution kernel with resolved names, including nested annotations.
+Signatures use this same reader after name localization, preserving function
+parameters that shadow imported aliases. Lexical declarations retain precedence.
+The shared reader rejects remaining cyclic or incompatible-arity aliases rather
+than restarting an expansion budget under a container.
+
+The regression covers local map/set annotations, a nested workspace alias, a
+same-named lexical declaration and a same-named generic parameter. Six actual
+Rust/SDK observations exercise empty and populated containers. A deliberately
+wrong expected result must fail SDK verification with LLV7002. Focused type-reader
+controls cover generic and foreign bindings, incompatible arity and a recursive
+alias. The existing archive-checksum negative remains required. Existing alias
+scope and renamed-type SDK regressions preserve prior behavior. Whole-registry
+impact and production acceptance are separate from these focused checks; full
+release acceptance remains the unchanged `just vv` boundary.

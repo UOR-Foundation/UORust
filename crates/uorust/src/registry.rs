@@ -2453,6 +2453,39 @@ mod tests {
     }
 
     #[test]
+    fn source_alias_reads_preserve_scope_arity_and_cycle_guards_ue_120() {
+        use crate::lift::{Ty, Types};
+        let (home, locked) = type_names_cache("source-annotations");
+        let mut aliases = crate_aliases(&home, "fastmap", &[locked]).unwrap();
+        std::fs::remove_dir_all(home).unwrap();
+        let read = |name: &str| crate::convert::ty(&syn::parse_str::<syn::Type>(name).unwrap());
+        aliases.insert(
+            "Loop".into(),
+            crate::ast::Alias {
+                params: vec![],
+                to: read("Vec<Loop>"),
+            },
+        );
+        let mut types = Types {
+            source_aliases: std::sync::Arc::new(aliases),
+            ..Types::default()
+        };
+        types
+            .aliases
+            .insert("Local".into(), "fastmap::FastMap".into());
+        assert!(
+            matches!(types.ty(&read("Option<Local<u8,u16>>")), Ok(Ty::Option(inner)) if matches!(*inner, Ty::Map(_,_,false)))
+        );
+        assert!(types.ty(&read("Local<u8>")).is_err());
+        assert!(types.ty(&read("Loop")).is_err());
+        types.generic.insert("Local".into(), Ty::Param("T".into()));
+        assert_eq!(types.ty(&read("Local")).unwrap(), Ty::Param("T".into()));
+        types.generic.clear();
+        types.aliases.insert("Local".into(), "Foreign".into());
+        assert!(types.ty(&read("Local<u8,u16>")).is_err());
+    }
+
+    #[test]
     fn type_names_an_archive_not_at_the_locked_checksum_is_not_read() {
         let (home, mut locked) = type_names_cache("checksum");
         locked.checksum = "0".repeat(64);

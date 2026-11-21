@@ -429,6 +429,8 @@ pub(crate) struct Types {
     /// A Rust type name -> the LexLean name it lifts to, where the crate's
     /// name qualifies it apart from another crate's type of the same name.
     pub(crate) aliases: BTreeMap<String, String>,
+    /// Exact workspace and locked-archive aliases, shared across source scopes.
+    pub(crate) source_aliases: std::sync::Arc<BTreeMap<String, rs::Alias>>,
     /// Enums whose variants carry data -> each variant and its fields:
     /// the Rust field name of a struct variant, and the type.
     pub(crate) datas: BTreeMap<String, Vec<(String, Vec<DataField>)>>,
@@ -1460,6 +1462,26 @@ impl Types {
     }
 
     pub(crate) fn ty(&self, t: &rs::RustType) -> Lift<Ty> {
+        if self.source_aliases.is_empty() {
+            return self.read_ty(t);
+        }
+        let lookup = |name: &str| {
+            if self.generic.contains_key(name) {
+                return None;
+            }
+            let resolved = self.aliases.get(name).map_or(name, String::as_str);
+            self.source_aliases.get(resolved)
+        };
+        let expanded = t.expanded_with(&lookup, self.source_aliases.len());
+        // A malformed arity or alias cycle must not restart its budget
+        // when a container reads its element type.
+        if expanded.paths().iter().any(|name| lookup(name).is_some()) {
+            return Err(Residue::Type(t.text.clone()));
+        }
+        self.read_ty(&expanded)
+    }
+
+    fn read_ty(&self, t: &rs::RustType) -> Lift<Ty> {
         let bad = || Err(Residue::Type(t.text.clone()));
         match &t.kind {
             rs::TypeKind::Reference {

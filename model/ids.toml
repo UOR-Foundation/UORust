@@ -771,3 +771,9 @@ id = "UE-119"
 level = "build"
 suite = "engine"
 statement = "Imported compiler generic bodies retain concrete consumer trait dispatch through the existing source type identity resolver and method index, importing already admitted definitions with exact ABI checks while foreign ambiguous and incompatible identities remain refused"
+
+[[id]]
+id = "UE-120"
+level = "build"
+suite = "engine"
+statement = "Source type annotations reuse the existing checksum-bound alias graph and scoped name identities for recursive alias substitution, while generic parameters, lexical shadows, incompatible alias arity and unverified archives remain protected"
