@@ -18,6 +18,12 @@ The three honesty levels (R2):
 `cargo xtask audit-limits` fails if any code path returns an error the
 model does not sanction.
 
+## ci
+
+| ID | Level | Statement |
+| --- | --- | --- |
+| `CI-01` | `build` | PR impact reporting evaluates exact base/head Git changes using a trusted-base classifier and factory input graph; passive documentation is distinguished from model inputs, while missing, renamed or nonregular evidence never authorizes skipping native acceptance |
+
 ## engine
 
 | ID | Level | Statement |
