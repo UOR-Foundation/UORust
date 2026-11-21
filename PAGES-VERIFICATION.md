@@ -15,6 +15,9 @@
 | Missing property | Absent | Exit nonzero with `repository mismatch` |
 | Malformed property | Numeric `123` or empty string | Exit nonzero with `repository mismatch` |
 | Absent/duplicate preflight | Workflow source mutated or guard removed | `workflow_guard` fails before running fixture |
+| Plant `if: false` after guard script | Identity step disabled | Complete-step verifier refuses `trailing configuration` |
+| Plant `continue-on-error: true` after script | Guard failure ignored | Complete-step verifier refuses `trailing configuration` |
+| Plant `if: false` before `shell: bash` | Identity step disabled | Complete-step verifier refuses `step configuration` |
 
 **Reproduce:** `python3 -I -m unittest discover -s scripts/ci -p 'test_pages_identity.py' -v`. The mandatory `just vv` invokes the same test. The planted wrong-repository fixture must **fail the workflow's extracted preflight**; the enclosing regression test passes only when that refusal and the restored success are both observed.
 
