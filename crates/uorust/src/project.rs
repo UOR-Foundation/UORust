@@ -9446,6 +9446,47 @@ pub fn fb(n: &Node) -> u8 {
     }
 
     #[test]
+    fn amb2_a_closure_reading_a_shared_constant_is_defined_after_it() {
+        // `K` is declared by two modules, so each lifts under its module's
+        // name; `a::kept` reads a's in a closure, which lifts as a helper.
+        // Lean reads a definition only after the ones it names: the helper
+        // must come after a's `K`, or the module does not link (LLT4001).
+        let (frontier, behavior) = projected(
+            "twok",
+            &[
+                ("src/lib.rs", "//! Two K.\npub mod a;\npub mod b;\n"),
+                (
+                    "src/a.rs",
+                    "//! A.\n/// A's.\npub const K: &str = \"a.\";\n/// The rests after K.\n\
+                     pub fn kept(items: &[String]) -> Vec<String> {\n    \
+                     items.iter().filter_map(|d| d.strip_prefix(K)).map(str::to_string).collect()\n}\n",
+                ),
+                (
+                    "src/b.rs",
+                    "//! B.\n/// B's.\npub const K: &str = \"b.\";\n/// Reads K.\n\
+                     pub fn k() -> String {\n    K.to_string()\n}\n",
+                ),
+            ],
+        );
+        let kept = row(&frontier, "twok::a::kept");
+        assert!(kept.starts_with("[[lifted]]"), "{kept}");
+        // Every definition that names a's K stands after it.
+        let at = |needle: &str| behavior.find(needle);
+        let own = at("definition{name: aK,")
+            .or_else(|| at("name: aK,"))
+            .unwrap_or_else(|| panic!("a's K is defined as aK:\n{behavior}"));
+        let first_use = behavior
+            .match_indices("(aK)")
+            .map(|(i, _)| i)
+            .min()
+            .unwrap_or_else(|| panic!("aK is read:\n{behavior}"));
+        assert!(
+            own < first_use,
+            "aK is read before it is defined:\n{behavior}"
+        );
+    }
+
+    #[test]
     fn amb2_a_constant_the_configuration_compiles_out_is_not_the_constant() {
         // Rust: `run3()` is 5; the `K` under `cfg(any())` is in no build.
         let (frontier, behavior) = projected(
