@@ -2,21 +2,21 @@
 # every lifted translator function exported by `lexlean production` and
 # kernel-checked, keyed by the κ of the Rust function it certifies.
 schema = "uorust/certified/1"
-result = "a044d9f4eb10fae9f83f1eeda6f1afc26380f74eee010b04c4aa7348259fc15a b1316bc93f4a88b7380a69cf2bbb01e89f18e5e176d2783fa6ac2fe89ea74859"
+result = "c8e72454b6ff3143d97d9725080a44ab34060621d864a7b4b3e04e802090c9c3 a044d9f4eb10fae9f83f1eeda6f1afc26380f74eee010b04c4aa7348259fc15a b1316bc93f4a88b7380a69cf2bbb01e89f18e5e176d2783fa6ac2fe89ea74859"
 compiler = "0.4.0"
-project = "7ae86889a2edf725e8ac169b8a324037f4bcdb74e8af55d8dfeb7e8ac055955d"
+project = "87c2c8c75eaec1494f1f2fa0d7b9329f9debe56f2ec9e118f9550a52c9a39567"
 entry = "uorust::mir::core::core_shard"
 
 # The bootstrap: the share of the translator that runs certified.
 [share]
-translator = 675
+translator = 674
 certified = 167
 reachable = 0
 reachable_certified = 0
 
 # The build seconds per published root, which sizes the next export's shards.
 [timing]
-seconds_per_root = 20
+seconds_per_root = 427
 
 [[root]]
 function = "uorust::lift::Acc::all_axioms"
@@ -915,7 +915,7 @@ definition = "mirCoverageTerminator"
 package = "uorust_certified_mir_coverage_terminator"
 source = "c75e0a7ef5decc8df0f31419a3a645a710f1890b6e4c48d9eaeaf3cc9dfdac74"
 certification = "kernel-checked"
-closure = "b01e2c958392a4e42f6d6f63b2e30bca69e3524b6b4e4c84dd59fafb900a5bab"
+closure = "79ddc48d611f80660bf708c7c6fc2e0a30062db608df4ff12abb8755432622a2"
 edition = "2021"
 
 [[root]]
