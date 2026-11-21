@@ -318,3 +318,15 @@ commits and against mirrors served with `PRISM_TEMPLATE_RAW`:
 | a mirror's lock names a file its frame does not | refused: the lock's list against the frame's; nothing written |
 | a mirror's frame and lock both add `.github/workflows/x.yml` | refused: `names files outside the page`; nothing written |
 | an untouched mirror | pinned |
+
+## Browser acceptance and authoritative frame provenance (SM-07)
+
+The site frame is byte-locked to an immutable `UOR-Foundation/template` source
+commit in `frame.lock`; the matching source pins the acceptance-result validator
+alongside its Worker and page entrypoints. The `SM-07` suite checks that failed
+vector identities remain visible, invalid results are refused with three stable
+codes declared in `model/browser-acceptance-diagnostics.toml`, and private
+request buffers are not forwarded to the display. Its Rust conformance test
+invokes eight Node cases through the complete `just vv` workspace gate.
+
+The Pages workflow must still complete on merged main to establish deployment.

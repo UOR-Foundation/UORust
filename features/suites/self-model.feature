@@ -45,3 +45,11 @@ Feature: self-model
     When the suite exercises SM-06
     Then every journey is a goal of its actor's user group, with its steps as tasks in order
     And every goal has an effectiveness, an efficiency and a satisfaction measure
+
+  @SM-07 @build
+  Scenario: The browser accepts only validated acceptance results, preserves failing vector indices across Worker and fallback paths, and exposes modeled typed errors for malformed results
+    Given the source-pinned frame and model/browser-acceptance-diagnostics.toml
+    When the browser Worker and direct fallback replay vectors or refuse malformed outcomes
+    Then failure indices are preserved without exposing request bytes
+    And invalid result structures, indices and count mismatches return distinct registered codes
+    And just vv executes the negative acceptance cases as part of workspace tests
