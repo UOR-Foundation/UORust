@@ -22,4 +22,3 @@ fn browser_acceptance_sm_07() {
         String::from_utf8_lossy(&result.stderr)
     );
 }
-
