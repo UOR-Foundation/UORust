@@ -4007,15 +4007,15 @@ pub(crate) struct Stated {
     file: String,
     /// Why no call of it can be read, when its library root does not parse.
     unread: Option<String>,
-    macros: BTreeMap<String, Reading<String>>,
-    constants: BTreeMap<String, Reading<String>>,
+    macros: BTreeMap<String, FigureReading>,
+    constants: BTreeMap<String, FigureReading>,
 }
 
-/// What a name of a generated package is read as: its literal, or why it
-/// is not read as one.
+/// What a name of a generated package is read as: the text of its
+/// literal, or why it is not read as one.
 #[derive(Clone, Debug, PartialEq, Eq)]
-enum Reading<T> {
-    Read(T),
+enum FigureReading {
+    Read(String),
     Refused(String),
 }
 
@@ -4032,7 +4032,7 @@ fn generated_text(text: &str) -> bool {
 }
 
 /// The one literal a rule's transcriber holds, or why it holds none.
-fn transcribed(tokens: &TokenStream) -> Reading<String> {
+fn transcribed(tokens: &TokenStream) -> FigureReading {
     use proc_macro2::Delimiter;
     let trees: Vec<TokenTree> = tokens.clone().into_iter().collect();
     let body = match trees.as_slice() {
@@ -4046,19 +4046,19 @@ fn transcribed(tokens: &TokenStream) -> Reading<String> {
         {
             b.stream()
         }
-        _ => return Reading::Refused("is not one rule of no arguments".to_string()),
+        _ => return FigureReading::Refused("is not one rule of no arguments".to_string()),
     };
     match body.into_iter().collect::<Vec<_>>().as_slice() {
         [TokenTree::Literal(l)] => numeric(&l.to_string()),
-        _ => Reading::Refused("does not expand to one literal token".to_string()),
+        _ => FigureReading::Refused("does not expand to one literal token".to_string()),
     }
 }
 
 /// A literal's text, when it is a numeric literal.
-fn numeric(text: &str) -> Reading<String> {
+fn numeric(text: &str) -> FigureReading {
     match syn::parse_str::<syn::Lit>(text) {
-        Ok(syn::Lit::Int(_) | syn::Lit::Float(_)) => Reading::Read(text.to_string()),
-        _ => Reading::Refused(format!("expands to {text}, which is not a numeric literal")),
+        Ok(syn::Lit::Int(_) | syn::Lit::Float(_)) => FigureReading::Read(text.to_string()),
+        _ => FigureReading::Refused(format!("expands to {text}, which is not a numeric literal")),
     }
 }
 
@@ -4080,7 +4080,8 @@ impl Stated {
                 return Some(out);
             }
         };
-        let twice = |e: &mut Reading<String>| *e = Reading::Refused("is defined twice".to_string());
+        let twice =
+            |e: &mut FigureReading| *e = FigureReading::Refused("is defined twice".to_string());
         for item in &tree.items {
             match item {
                 syn::Item::Macro(m)
@@ -4099,7 +4100,7 @@ impl Stated {
                         syn::Expr::Lit(l) => {
                             numeric(&quote::ToTokens::to_token_stream(&l.lit).to_string())
                         }
-                        _ => Reading::Refused("is not a literal".to_string()),
+                        _ => FigureReading::Refused("is not a literal".to_string()),
                     };
                     out.constants
                         .entry(c.ident.to_string())
@@ -4171,13 +4172,13 @@ impl Reached {
 
     /// What a macro call is, when it calls a generated package's macro: the
     /// literal it expands to, or why it is not read as one.
-    fn call(&self, m: &syn::Macro) -> Option<Reading<syn::Lit>> {
+    fn call(&self, m: &syn::Macro) -> Option<FigureReading> {
         let (stated, figure) = self.named(&m.path)?;
         let name = figure.to_string();
         let path = quote::ToTokens::to_token_stream(&m.path).to_string();
         let written = format!("{}!()", path.replace(' ', ""));
         let refused = |why: String| {
-            Some(Reading::Refused(format!(
+            Some(FigureReading::Refused(format!(
                 "unresolved figure {written}: {why}"
             )))
         };
@@ -4189,13 +4190,10 @@ impl Reached {
         }
         match stated.macros.get(&name) {
             None => refused(format!("{} exports no macro {name}", stated.file)),
-            Some(Reading::Refused(why)) => {
+            Some(FigureReading::Refused(why)) => {
                 refused(format!("the macro {name} of {} {why}", stated.file))
             }
-            Some(Reading::Read(text)) => match literal(text, figure.span()) {
-                Some(lit) => Some(Reading::Read(lit)),
-                None => refused(format!("{text} does not read as a literal")),
-            },
+            Some(FigureReading::Read(text)) => Some(FigureReading::Read(text.clone())),
         }
     }
 
@@ -4204,8 +4202,8 @@ impl Reached {
     fn constant(&self, path: &syn::Path) -> Option<syn::Lit> {
         let (stated, name) = self.named(path)?;
         match stated.constants.get(&name.to_string())? {
-            Reading::Read(text) => literal(text, name.span()),
-            Reading::Refused(_) => None,
+            FigureReading::Read(text) => literal(text, name.span()),
+            FigureReading::Refused(_) => None,
         }
     }
 
@@ -4213,9 +4211,10 @@ impl Reached {
     /// call and for one that is refused (it stays as written, and
     /// [`Reached::unresolved`] names why).
     fn resolved(&self, m: &syn::Macro) -> Option<syn::Lit> {
+        let (_, figure) = self.named(&m.path)?;
         match self.call(m)? {
-            Reading::Read(lit) => Some(lit),
-            Reading::Refused(_) => None,
+            FigureReading::Read(text) => literal(&text, figure.span()),
+            FigureReading::Refused(_) => None,
         }
     }
 
@@ -4249,7 +4248,7 @@ impl Reached {
     fn first_unresolved(&self, stream: TokenStream) -> Option<String> {
         let trees: Vec<TokenTree> = stream.into_iter().collect();
         for (i, t) in trees.iter().enumerate() {
-            if let Some(Reading::Refused(why)) =
+            if let Some(FigureReading::Refused(why)) =
                 self.call_at(&trees, i).and_then(|(m, _)| self.call(&m))
             {
                 return Some(why);
