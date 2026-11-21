@@ -411,4 +411,3 @@ input; `script_suites_pass` refuses the list when it and the tree disagree
 | `scripts/release/test_platforms.py` dropped from `scripts/ci/suites.txt` | `script_suites_pass` | refused: `in this tree, not listed in scripts/ci/suites.txt: scripts/release/test_platforms.py` | passes |
 | One test in `scripts/ci/test_change_impact.py` skipped | `trusted_change_impact_classification_ci_01` | refused: `AssertionError: 'OK (skipped=1)' != 'OK'` (nested check) | passes |
 | One test in `scripts/ci/test_pr_stage.py` skipped | `trusted_change_impact_classification_ci_01` | refused: `summary Some("OK (skipped=1)") is not exactly OK` | passes |
-
