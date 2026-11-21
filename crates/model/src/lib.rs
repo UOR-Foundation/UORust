@@ -84,9 +84,9 @@ impl Model {
     ///
     /// The structural rules only. Rules about a *class* of ID --- that a fitted
     /// exponent is always `open`, that a cross-library result is never
-    /// `some-true` --- belong to the repository that has those classes, and they
-    /// belong to the repository that has those classes. A repository adding one adds
-    /// its rule here, in the same commit that adds the first ID in it.
+    /// `some-true` --- belong to the repository that has those classes. A
+    /// repository adding one adds its rule here, in the same commit that adds the
+    /// first ID in it.
     fn check_ids(&self) -> Result<(), ModelError> {
         let bad = |m: String| ModelError::Inconsistent(m);
         let mut seen: Vec<&str> = Vec::new();
