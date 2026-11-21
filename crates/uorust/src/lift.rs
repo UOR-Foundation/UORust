@@ -12321,6 +12321,38 @@ mod tests {
     }
 
     #[test]
+    fn a_checked_nat_division_is_none_at_zero_and_refuses_another_argument() {
+        let types = types_of("struct Unused { n: u8 }");
+        for (method, prim) in [("checked_div", "quotient"), ("checked_rem", "remainder")] {
+            let out = lift(
+                &format!("fn q(a: u64, b: u64) -> Option<u64> {{ a.{method}(b) }}"),
+                &types,
+            )
+            .expect("lifts");
+            let value = format!("(prim {prim} a b 0 : Nat)");
+            assert!(out.contains(&value), "{out}");
+            assert!(out.contains("(ctor Option.none [Nat])"), "{out}");
+            assert!(
+                out.contains(&format!("(ctor Option.some [Nat] {value})")),
+                "{out}"
+            );
+        }
+        let arity = lift("fn q(a: u64) -> Option<u64> { a.checked_div() }", &types);
+        assert!(
+            matches!(&arity, Err(Residue::Form(t)) if t == "method call .checked_div"),
+            "{arity:?}"
+        );
+        let other = lift(
+            "fn q(a: u64, b: i128) -> Option<u64> { a.checked_div(b) }",
+            &types,
+        );
+        assert!(
+            matches!(&other, Err(Residue::Form(t)) if t == "argument of another type to .checked_div"),
+            "{other:?}"
+        );
+    }
+
+    #[test]
     fn the_wide_signed_integers_lift_as_the_mathematical_int() {
         let types = types_of("struct Wide { n: i128, offset: isize }");
         assert_eq!(
