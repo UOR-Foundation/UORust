@@ -5,7 +5,7 @@
 # stops the functions it counts (the detail their rows state, under its
 # cause), the one that stops the most first: the work queue.
 
-# Honesty report: 344 of 1502 functions of product code are lifted; 882
+# Honesty report: 344 of 1503 functions of product code are lifted; 883
 # are residue, 95 foreign and 181 effect rows.
 # Residue by cause:
 #   arithmetic: 1
@@ -213,7 +213,7 @@
 #     59 a loop nested in a loop, whose helpers would call each other
 #   mir::TerminatorKind::SwitchInt: 1
 #     1 a loop whose header does not exit on an order of naturals, so no measure is derived
-#   mir::Ty: 344
+#   mir::Ty: 345
 #     1 A0
 #     1 K
 #     1 bridge::BridgeOutcome<(std::string::String, std::string::String, std::vec::Vec<(std::string::String, std::string::String)>, usize)>
@@ -315,7 +315,7 @@
 #     1 std::slice::Iter<'_, wf::Node>
 #     5 std::str::CharIndices<'_>
 #     15 std::str::Chars<'_>
-#     13 std::str::Lines<'_>
+#     14 std::str::Lines<'_>
 #     2 std::str::MatchIndices<'_, &str>
 #     1 std::str::RSplit<'_, &str>
 #     1 std::str::Split<'_, &str>
@@ -482,9 +482,9 @@
 spec = "uorust/register/1"
 
 [lift]
-functions = 1502
+functions = 1503
 lifted = 344
-residue = 882
+residue = 883
 foreign = 95
 effect = 181
 
@@ -541,7 +541,7 @@ functions = 14
 [[construct]]
 construct = "mir::Ty: std::str::Lines<'_>"
 cause = "mir::Ty"
-functions = 13
+functions = 14
 
 [[construct]]
 construct = "Fs effect: std::fs::read_dir"
@@ -8046,7 +8046,7 @@ reason = "mir"
 detail = "mir::Ty: serde_json::Value"
 
 [[residue]]
-kappa = "e21eaa0bb22efffd59cd786e91bf5e71e24492a6d7d3466f473eb3bbcc092640"
+kappa = "c7f465b417e31cda20c0b7774574c2145efdf8bcf484a6df7f79a49fc4d6d563"
 function = "xtask::bootstrap::docker_credentials_are_confined"
 reason = "mir"
 detail = "mir::Ty: std::str::Lines<'_>"
@@ -8056,6 +8056,12 @@ kappa = "33f9423e9537477066c28b505b50eeeb4c16d0664cc3d6eeb5bbf600c1874d61"
 function = "xtask::bootstrap::policy_boundary_is_canonical"
 reason = "mir"
 detail = "mir::Ty: std::iter::Copied<std::slice::Iter<'_, &str>>"
+
+[[residue]]
+kappa = "30bc8b508554437f91bacda73441e2580abdb952ee347bc781537f2a4d31dfeb"
+function = "xtask::bootstrap::private_scratch"
+reason = "mir"
+detail = "mir::Ty: std::str::Lines<'_>"
 
 [[residue]]
 kappa = "aa9f2e538cb4e3051647112fdf731e263aa73fa37a70bb0496078673fd9a31f7"
@@ -11096,7 +11102,7 @@ function = "xtask::bootstrap::immutable_image"
 definition = "Behavior::immutableImage"
 
 [[lifted]]
-kappa = "c6c2b8d047434b8cfa7e493d986adf4aa08e68f912b5dd80b89213dd3396ba39"
+kappa = "d86f100a893bc87071052f82ff391060283e2391105eb1f7bcd96a1a2d21fed4"
 function = "xtask::bootstrap::native_coverage_is_complete"
 definition = "Behavior::nativeCoverageIsComplete"
 
