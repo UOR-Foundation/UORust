@@ -82,17 +82,17 @@ class StageTest(unittest.TestCase):
             policy = repo / "scripts/ci/change_impact.py"
             policy.parent.mkdir(parents=True)
             policy.write_text(
-                "import json,sys\\n"
-                "a=sys.argv\\n"
-                "base=a[a.index('--base')+1];head=a[a.index('--head')+1]\\n"
+                "import json,sys\n"
+                "a=sys.argv\n"
+                "base=a[a.index('--base')+1];head=a[a.index('--head')+1]\n"
                 "print(json.dumps(dict(route='docs',base_sha=base,head_sha=head,"
                 "native_acceptance_required=True,merge_qualified=False,"
-                "advisory_only=True,selected_development_suites=['docs'])))\\n"
+                "advisory_only=True,selected_development_suites=['docs'])))\n"
             )
             git(repo, "add", ".")
             git(repo, "commit", "-qm", "trusted base")
             base = git(repo, "rev-parse", "HEAD")
-            policy.write_text("raise SystemExit('PR head must not run')\\n")
+            policy.write_text("raise SystemExit('PR head must not run')\n")
             git(repo, "commit", "-qam", "untrusted head")
             head = git(repo, "rev-parse", "HEAD")
             self.assertEqual(mod.advisory_impact_from_trusted_base(repo, base, head)["route"], "docs")
