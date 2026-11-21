@@ -490,17 +490,12 @@ pub(crate) fn project(
     Ok(files)
 }
 
-/// The LexLean compiler semantics a projection locks to: the one UORust's own
-/// self model is locked to (`app/lexlean.lock`, which `lexlean lock` in the
-/// locked SDK rewrites), so a projection follows the SDK's compiler without a
-/// copied identity.
+/// The LexLean compiler semantics a projection locks to, copied from
+/// `app/lexlean.lock` by `just self-model-write` and checked for exact
+/// parity by `just self-model-check`. The package must build independently
+/// of the repository's parent directories (`cargo publish --dry-run`).
 fn compiler_semantics() -> &'static str {
-    const SELF_LOCK: &str = include_str!("../../../app/lexlean.lock");
-    SELF_LOCK
-        .lines()
-        .find_map(|line| line.strip_prefix("compiler_semantics = \""))
-        .and_then(|rest| rest.strip_suffix('"'))
-        .expect("app/lexlean.lock names its compiler semantics")
+    include_str!("../assets/compiler-semantics.txt").trim_end()
 }
 
 /// The native-library profile's bound on each root list (SPEC 12.6: 1..1024
