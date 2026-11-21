@@ -1,6 +1,8 @@
 <p align="center">
-  <img src="assets/uorust-banner.svg" alt="UORust: explaining Rust code with source-linked models and visible verification gaps" width="100%">
+  <img src="assets/readme-banner-PLACEHOLDER.png" alt="UORust provisional banner: Rust implementation, open development. Placeholder, not approved." width="100%">
 </p>
+
+<p align="center"><em>Illustrative placeholder artwork, pending UOR Foundation brand approval.</em></p>
 
 <h1 align="center">UORust</h1>
 
