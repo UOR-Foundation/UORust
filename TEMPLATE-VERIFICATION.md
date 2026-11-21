@@ -391,3 +391,25 @@ a non-zero exit, no or zero `Ran` count, `OK (skipped=1)`,
 `OK (expected failures=1)`, a cross-kind summary, a stale exclusion, a coverage
 run that stops early (`checked 1` for 8) or over-counts (`checked 9` for 8), and
 an `!` exclusion.
+
+## Removing an upstream.toml patch row keeps the gaps (OPS-03)
+
+`scripts/ci/upstream.py` `frame_pin` split `upstream.toml` on `\n[[patch]]\n`
+and dropped the matching chunk, so removing the last patch row also removed the
+comment and both `[[gap]]` tables after it (3117 bytes of the file at
+`28926f95`), and `scripts/ci/repin.py` `drop_rows` dropped a comment that
+precedes the next table. Both now call `scripts/ci/upstream_rows.py`
+`without_patch`, which removes a row by lines from its header, keeps the
+preamble and every comment that precedes a table, and refuses (`ValueError`)
+any shape its line rule cannot handle, checked by parsing the result with
+`tomllib`. `upstream.py main` reads `doc.get("patch", [])`, so a file with no
+patch rows left runs.
+
+`scripts/ci/test_upstream_rows.py` (12 cases, run by `script_suites_pass`)
+reads only the committed snapshot `scripts/ci/fixtures/upstream.toml` or inline
+fixtures. Planted defect: with `without_patch` replaced by the old split, the
+suite fails 7 of its cases, among them
+`test_last_patch_keeps_gaps_and_their_comment` (the gaps lost),
+`test_only_remaining_patch` and `test_main_with_no_patches_acts_on_none`
+(`KeyError: 'patch'`); with the new rule all 12 pass
+(`python3 -I scripts/ci/test_upstream_rows.py`: `Ran 12 tests`, `OK`).

@@ -222,7 +222,10 @@ refactor admitted only 6 of 31 candidates (PR #43, merged as `28926f95`).
   2026-11-19 (artifact `digest-mismatch`, `bitvec@1.1.1`). PARTIAL (R1).
 - **GAP-OPS-03** MAJOR, S. `scripts/ci/upstream.py:106-112` drops the `[[gap]]`
   tables when it removes the last `[[patch]]` (upstream.toml:75-110).
-  CONFIRMED (R1).
+  CONFIRMED (R1). **RESOLVED** (Sprint 1, C2): `scripts/ci/upstream_rows.py`
+  `without_patch`, used by `upstream.py` `frame_pin` and `repin.py`
+  `drop_rows`; `upstream.py main` reads `doc.get("patch", [])`; proved by
+  `scripts/ci/test_upstream_rows.py` (12 cases on a committed snapshot).
 - **GAP-OPS-04** MINOR, S. Swallowed failures: land-certified.sh:119-121 exit 0;
   generate-loop.sh:165-168 calls every failure WCAG; layouts `--check` status
   ignored (layouts.rs:1160-1168); harness clears differential silently
@@ -314,7 +317,7 @@ refactor admitted only 6 of 31 candidates (PR #43, merged as `28926f95`).
 | GAP-LIFT-04 | LIFT | MAJOR | S | no | CONFIRMED |
 | GAP-OPS-01 | OPS | MAJOR | L | yes | PARTIAL |
 | GAP-OPS-02 | OPS | MAJOR | S | yes | PARTIAL |
-| GAP-OPS-03 | OPS | MAJOR | S | yes | CONFIRMED |
+| GAP-OPS-03 | OPS | MAJOR | S | yes | RESOLVED |
 | GAP-OPS-07 | OPS | CRITICAL | S | yes | CONFIRMED |
 | GAP-REL-01 | REL | MAJOR | S | yes | CONFIRMED |
 | GAP-SEC-03 | SEC | MAJOR | M | yes | CONFIRMED |
