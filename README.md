@@ -293,12 +293,19 @@ gh release download v0.4.0 --repo UOR-Foundation/UORust \
 
 sha256sum --check --ignore-missing SHA256SUMS
 
+# Download the attestation bundle from the repository's current location.
+gh attestation download uorust-x86_64-unknown-linux-gnu.tar.gz \
+  --repo UOR-Foundation/UORust
+
+# The downloaded bundle is named sha256:<archive digest>.jsonl on Linux.
+archive_digest=$(sha256sum uorust-x86_64-unknown-linux-gnu.tar.gz | cut -d ' ' -f1)
 gh attestation verify uorust-x86_64-unknown-linux-gnu.tar.gz \
-  --repo UOR-Foundation/UORust \
+  --bundle "sha256:${archive_digest}.jsonl" \
+  --repo afflom/UORust \
   --signer-workflow afflom/UORust/.github/workflows/release.yml
 ```
 
-The hash check validates downloaded bytes against the release's checksum list; the GitHub attestation verifies the artifact's signed build provenance. The historical `v0.4.0` signer identity uses the former `afflom/UORust` repository name because that release predates the move. Neither replaces validation of the model you generate from your own workspace.
+The hash check compares the release archive with the published checksum list. The bundle is fetched using the repository's **current** location, but `--repo afflom/UORust` and `--signer-workflow afflom/UORust/.github/workflows/release.yml` deliberately verify the **historical signer identity recorded in the v0.4.0 certificate**. GitHub CLI checks `--repo` against the signed source repository identity, not just the download location. If GitHub no longer serves the historical attestation bundle after the transfer, report provenance verification as unavailable instead of silently weakening that identity check. Neither check replaces validation of the model generated from your own workspace.
 
 ## Documentation and repository map
 
