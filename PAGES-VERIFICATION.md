@@ -6,7 +6,7 @@
 
 ## Negative controls for the *new* early CI preflights
 
-`scripts/ci/test_pages_identity.py` extracts the **actual** Node `-e` script from **each** of `.github/workflows/pages.yml` and `.github/workflows/try-page.yml`, and runs it against independently created temporary `site/app.json` fixtures. The test requires exactly one preflight in each workflow and identical guard bodies. It is included in `just vv` and runs within both workflows before the preflight, preventing a missing guard, bypassed exit or non-refusing implementation from looking green.
+`scripts/ci/test_pages_identity.py` extracts the **actual** Node `-e` script from **each** of `.github/workflows/pages.yml` and `.github/workflows/try-page.yml`, and runs it against independently created temporary `site/app.json` fixtures. The test requires exactly one preflight in each workflow and identical guard bodies. It runs in both workflow jobs before the preflight, and via `crates/conformance/tests/pages_identity.rs` in `cargo test --workspace` inside mandatory `just vv`. This uses the factory graph's existing `test` obligation and declared `crates/` and `scripts/ci/` inputs, without adding a second, unmodeled dependency.
 
 | Case | Input value of `repository` | Required outcome |
 | --- | --- | --- |
@@ -19,6 +19,6 @@
 | Plant `continue-on-error: true` after script | Guard failure ignored | Complete-step verifier refuses `trailing configuration` |
 | Plant `if: false` before `shell: bash` | Identity step disabled | Complete-step verifier refuses `step configuration` |
 
-**Reproduce:** `python3 -I -m unittest discover -s scripts/ci -p 'test_pages_identity.py' -v`. The mandatory `just vv` invokes the same test. The planted wrong-repository fixture must **fail the workflow's extracted preflight**; the enclosing regression test passes only when that refusal and the restored success are both observed.
+**Reproduce:** `python3 -I -m unittest discover -s scripts/ci -p 'test_pages_identity.py' -v`. The mandatory `just vv` invokes the same tests through `cargo test --workspace` and the Rust conformance bridge (no new `vv` recipe or factory obligation). The planted wrong-repository fixture must **fail the workflow's extracted preflight**; the enclosing regression test passes only when that refusal and the restored success are both observed.
 
 **Evidence boundary:** These controlled tests establish behavior of the checked-in workflow guard. They do **not** attest to production publication. The next `main` Pages run must separately pass holo/provenance, image stamping, page assembly, Lighthouse, responsive screenshots, upload and deployment, followed by a live URL check. Do not weaken `bootstrap/page.mjs` or any signed provenance check.
