@@ -1,14 +1,12 @@
 <p align="center">
-  <a href="https://afflom.github.io/UORust/">
-    <img src="assets/uorust-banner.svg" alt="UORust: Rust source to a checked Prism model" width="100%">
-  </a>
+  <img src="assets/uorust-banner.svg" alt="UORust: explaining Rust code with source-linked models and visible verification gaps" width="100%">
 </p>
 
 <h1 align="center">UORust</h1>
 
-<p align="center"><strong>Source code changes. Architecture documentation and verification claims can drift.</strong></p>
+<p align="center"><strong>Understand what your Rust code does, and what has actually been checked.</strong></p>
 
-<p align="center">UORust turns a Cargo workspace into a source-linked, reviewable Prism model. It separates what is actually modeled or verified from what remains unsupported, so gaps stay visible instead of becoming accidental assurances.</p>
+<p align="center">Programs change faster than their diagrams and documentation. UORust reads a Rust project, creates a structured description linked to the original code, and makes gaps in that description visible. You can see what was checked, what was not, and what needs a closer look.</p>
 
 <p align="center">
   <a href="https://github.com/UOR-Foundation/UORust/actions/workflows/bootstrap.yml"><img alt="Bootstrap acceptance" src="https://github.com/UOR-Foundation/UORust/actions/workflows/bootstrap.yml/badge.svg?branch=main"></a>
@@ -19,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="https://afflom.github.io/UORust/"><strong>Try the live route table</strong></a> ·
+  <a href="#try-routing-locally"><strong>Try routing locally</strong></a> ·
   <a href="#quick-start"><strong>Quick start</strong></a> ·
   <a href="https://github.com/UOR-Foundation/UORust/releases/latest"><strong>Releases</strong></a> ·
   <a href="#architecture"><strong>Architecture</strong></a> ·
@@ -27,13 +25,13 @@
   <a href="CONFORMANCE.md"><strong>Conformance evidence</strong></a>
 </p>
 
-> **Scope:** UORust can emit a Prism project for a Cargo workspace, but **not every Rust function or effect is yet translated into a proved behavioral definition**. Unsupported semantics are recorded as residue, foreign dependencies, effects, or open claims. The [current lift register](frontier.toml) and [conformance register](CONFORMANCE.md) are the evidence, not a blanket claim of complete verification.
+> **Important limit:** UORust does **not** prove every Rust program correct. It records what was modeled and checked, and which parts still need review. See the [conformance evidence](CONFORMANCE.md) and [coverage register](frontier.toml).
 
 ## Contents
 
 - [Why UORust](#why-uorust)
 - [What UORust does](#what-uorust-does)
-- [Try the live demo](#try-the-live-demo)
+- [Try routing locally](#try-routing-locally)
 - [Quick start](#quick-start)
 - [Install and supported platforms](#install-and-supported-platforms)
 - [Architecture](#architecture)
@@ -49,9 +47,13 @@
 
 ## Why UORust
 
-A codebase can change while its diagrams, design notes, and proof claims stay frozen in time. That mismatch makes it harder to tell **what the repository actually contains**, **what its verification covers**, and **which assumptions still need work**. UORust aims to reduce that distance by deriving a model from the code and making its evidence and unsupported cases inspectable.
+When you join a software project or review unfamiliar code, you need to know what it really does. But diagrams, notes, and old test reports may not describe the latest version. That gap can lead to mistakes and false confidence.
 
-This is particularly useful for developers reviewing unfamiliar Rust code, maintainers tracking architectural drift, and teams that need a reproducible handoff between implementation and formal modeling. **It is not a replacement for design decisions, independent audits, or tests.**
+**UORust connects software explanations to the source code.** It builds a reviewable model and makes unsupported behavior visible rather than pretending it has been verified.
+
+For example, when it finds an `unsafe` block, its routing rules can record that block for security review. That does **not** prove the block safe or mean it contains a vulnerability. It gives reviewers a clear place to investigate.
+
+This helps developers learn a codebase, maintainers check for drift, and reviewers separate verified claims from open questions. **It complements tests and audits; it does not replace them.**
 
 ## What UORust does
 
@@ -61,7 +63,7 @@ Its core contract is **route, admit, or refuse**, not guess. A fact with a suppo
 
 | If you want to… | Start here |
 | --- | --- |
-| See the basic routing decision in action | [Browser-based route-table demo](https://afflom.github.io/UORust/) |
+| See how a Rust fact is categorized | [Try routing locally](#try-routing-locally) and [route definitions](model/routes.toml) |
 | Generate a model from Rust | [Quick start](#quick-start) and `uorust project` |
 | Check whether a projection is current | `uorust check` and the [locked SDK](prismpm.lock) |
 | Understand what is actually proved | [Conformance evidence](CONFORMANCE.md), [lift register](frontier.toml), and [verification](#self-model-and-formal-verification) |
@@ -75,11 +77,15 @@ Its core contract is **route, admit, or refuse**, not guess. A fact with a suppo
 - **Measured proof frontier:** lifted, unlifted, foreign, and effect-bound behavior is distinguished in the [frontier register](frontier.toml).
 - **Locked verification:** the repository uses [PrismPM](https://github.com/UOR-Foundation/PrismPM) and [LexLean](https://github.com/UOR-Foundation/LexLean) through the SDK selected by [`prismpm.lock`](prismpm.lock).
 
-## Try the live demo
+## Try routing locally
 
-**[Open the UORust route table](https://afflom.github.io/UORust/)**. Enter a Rust fact kind such as `pub-fn`, `error-enum`, or `unsafe-block`. The page runs the project's verified routing application and shows the destination record and facet, or an explicit refusal.
+The [route table](model/routes.toml) lists recognized kinds of Rust code and where they belong in the generated model. To inspect it from a local checkout:
 
-For example:
+```sh
+cargo run --locked -p uorust -- routes
+```
+
+For example, an `error-enum` fact is routed into the behavior model:
 
 ```text
 Input:  error-enum
@@ -89,9 +95,9 @@ Result: route UR-R12
         facet behavior
 ```
 
-The [route table](model/routes.toml) is shared by the [Rust router](crates/uorust/src/route.rs) and the [LexLean model](app/src/Routes.lex.tex). They replay common acceptance vectors.
+The [route table](model/routes.toml) is shared by the [Rust router](crates/uorust/src/route.rs) and the [LexLean model](app/src/Routes.lex.tex). Both are checked against common acceptance examples.
 
-**What the demo is not:** it is not a browser-based full-Cargo-workspace translator or an end-to-end proof of an arbitrary Rust program. Use the CLI and SDK for the complete projection workflow.
+**Important:** This demonstrates categorization, not full translation or verification of an arbitrary Rust project. The prior browser demo URL no longer works, so it is not linked until the replacement deployment is verified.
 
 ## Quick start
 
