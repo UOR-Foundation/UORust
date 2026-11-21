@@ -3,6 +3,11 @@ import importlib.util
 from pathlib import Path
 import subprocess
 import tempfile
+import contextlib
+import io
+import json
+import sys
+import tomllib
 import unittest
 from unittest import mock
 
@@ -39,6 +44,24 @@ def clean_checkout_git(_repo, *args):
         return b""
     raise AssertionError("unexpected Git operation: " + repr(args))
 
+
+REQUIRED_NAMES = (
+    "test_actual_git_comparison_binds_exact_commits_ci_02",
+    "test_actual_passive_documentation_avoids_sdk_ci_02",
+    "test_browser_only_requires_existing_browser_acceptance_ci_02",
+    "test_dirty_index_or_worktree_is_refused_ci_02",
+    "test_dirty_tree_after_execution_refuses_receipt_ci_02",
+    "test_empty_and_skipped_results_are_refused_ci_02",
+    "test_execution_receipt_runs_selected_checks_or_full_ci_02",
+    "test_failed_selected_component_never_yields_success_ci_02",
+    "test_malformed_dependencies_are_not_trusted_ci_02",
+    "test_missing_graph_or_changed_justfile_cannot_select_ci_02",
+    "test_policy_unsafe_unknown_and_empty_are_full_ci_02",
+    "test_readme_is_not_passive_documentation_ci_02",
+    "test_rust_closure_and_mixed_changes_ci_02",
+    "test_stale_head_or_forged_receipt_is_refused_ci_02",
+    "test_typed_refusal_is_emitted_by_entrypoint_ci_02",
+)
 
 class ObligationPlanCi02Tests(unittest.TestCase):
     def plan(self, paths, graph=GRAPH, just=JUST):
@@ -229,5 +252,95 @@ class ObligationPlanCi02Tests(unittest.TestCase):
 
 
 
+    def test_empty_and_skipped_results_are_refused_ci_02(self):
+        clean = unittest.TestResult()
+        clean.testsRun = len(REQUIRED_NAMES)
+        self.assertTrue(complete_result(clean, REQUIRED_NAMES))
+        self.assertFalse(complete_result(clean, []))
+        clean.testsRun -= 1
+        self.assertFalse(complete_result(clean, REQUIRED_NAMES))
+        clean.testsRun += 1
+        for name in ("skipped", "expectedFailures", "unexpectedSuccesses",
+                     "failures", "errors"):
+            with self.subTest(name=name):
+                getattr(clean, name).append(("CI-02 planted control", "refused"))
+                self.assertFalse(complete_result(clean, REQUIRED_NAMES))
+                getattr(clean, name).clear()
+
+    def test_typed_refusal_is_emitted_by_entrypoint_ci_02(self):
+        model = tomllib.loads(
+            (SOURCE.parents[2] / "model/ci-obligation-diagnostics.toml").read_text()
+        )
+        self.assertEqual(model["schema"], "uor/ci-obligation-diagnostics/1")
+        refusal = model["refusal"]
+        self.assertEqual(len(refusal), 1)
+        self.assertEqual(refusal[0]["code"], "CI_COMPONENT_CONTROLS_INCOMPLETE")
+        ids = tomllib.loads((SOURCE.parents[2] / "model/ids.toml").read_text())
+        claim = next(row for row in ids["id"] if row["id"] == "CI-02")
+        self.assertIn(refusal[0]["code"], claim["statement"])
+
+        for defect in ("missing", "skipped", "failed"):
+            with self.subTest(defect=defect):
+                result = unittest.TestResult()
+                result.testsRun = len(REQUIRED_NAMES)
+                if defect == "missing":
+                    result.testsRun -= 1
+                elif defect == "skipped":
+                    result.skipped.append(("CI-02 planted control", "skip"))
+                else:
+                    result.failures.append(("CI-02 planted control", "failure"))
+                output = io.StringIO()
+                with mock.patch.object(
+                    unittest.TextTestRunner, "run", return_value=result
+                ), contextlib.redirect_stderr(output):
+                    self.assertEqual(main(), 1)
+                receipt = json.loads(output.getvalue().strip())
+                self.assertEqual(receipt["code"], refusal[0]["code"])
+                self.assertEqual(receipt["kind"], refusal[0]["kind"])
+                self.assertEqual(receipt["required"], len(REQUIRED_NAMES))
+                self.assertEqual(receipt["executed"], result.testsRun)
+                self.assertEqual(receipt["skipped"], len(result.skipped))
+
+
+
+
+def complete_result(result, actual_names):
+    """A discovered, skipped, failed or missing control never means success."""
+    return (
+        tuple(actual_names) == REQUIRED_NAMES
+        and result.testsRun == len(REQUIRED_NAMES)
+        and result.wasSuccessful()
+        and not result.skipped
+        and not result.expectedFailures
+        and not result.unexpectedSuccesses
+    )
+
+
+def main():
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(ObligationPlanCi02Tests)
+    actual_names = [case._testMethodName for case in suite]
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    if complete_result(result, actual_names):
+        return 0
+    model = tomllib.loads(
+        (SOURCE.parents[2] / "model/ci-obligation-diagnostics.toml").read_text()
+    )
+    rows = model["refusal"]
+    if model["schema"] != "uor/ci-obligation-diagnostics/1" or len(rows) != 1:
+        raise ValueError("CI-02 refusal model missing or malformed")
+    row = rows[0]
+    print(json.dumps({
+        "code": row["code"],
+        "kind": row["kind"],
+        "message": row["message"],
+        "required": len(REQUIRED_NAMES),
+        "executed": result.testsRun,
+        "skipped": len(result.skipped),
+        "failures": len(result.failures),
+        "errors": len(result.errors),
+    }, sort_keys=True), file=sys.stderr)
+    return 1
+
+
 if __name__ == "__main__":
-    unittest.main()
+    raise SystemExit(main())

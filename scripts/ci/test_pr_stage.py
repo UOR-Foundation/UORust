@@ -72,8 +72,7 @@ class StageTest(unittest.TestCase):
 
     def test_obligation_plan_adversarial_suite(self):
         proc = subprocess.run(
-            [sys.executable, "-I", "-m", "unittest", "discover",
-             "-s", str(SOURCE.parent), "-p", "test_obligation_plan.py", "-v"],
+            [sys.executable, "-I", str(SOURCE.parent / "test_obligation_plan.py")],
             capture_output=True, text=True, timeout=35)
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
 

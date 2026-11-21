@@ -44,17 +44,7 @@ fn trusted_change_impact_classification_ci_01() {
 #[test]
 fn trusted_factory_obligation_plan_ci_02() {
     let output = Command::new("python3")
-        .args([
-            "-I",
-            "-m",
-            "unittest",
-            "discover",
-            "-s",
-            "scripts/ci",
-            "-p",
-            "test_obligation_plan.py",
-            "-v",
-        ])
+        .args(["-I", "scripts/ci/test_obligation_plan.py"])
         .current_dir(root())
         .output()
         .expect("CI-02 fixture suite is executable");
