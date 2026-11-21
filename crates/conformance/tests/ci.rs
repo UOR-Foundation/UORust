@@ -396,3 +396,20 @@ fn full_candidate_suite_inventory_precedes_factory_materialization() {
     assert!(suite_coverage::verify(complete.iter().copied(), None).is_err());
     assert!(suite_coverage::verify(["scripts/ci/config.toml"].iter().copied(), Some(&[])).is_err());
 }
+
+/// CI-02 shares the strict Python suite invoked by CI-01, but its registered
+/// test name makes the new behavior independently visible to conformance.
+#[test]
+fn trusted_factory_obligation_plan_ci_02() {
+    let output = Command::new("python3")
+        .args(["-I", "scripts/ci/test_obligation_plan.py"])
+        .current_dir(root())
+        .output()
+        .expect("CI-02 fixture suite is executable");
+    assert!(
+        output.status.success(),
+        "CI-02 negative controls failed:\nstdout:\n{}\nstderr:\n{}",
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr),
+    );
+}

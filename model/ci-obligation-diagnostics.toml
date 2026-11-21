@@ -1,0 +1,16 @@
+schema = "uor/ci-obligation-diagnostics/1"
+
+[[refusal]]
+code = "CI_COMPONENT_CONTROLS_INCOMPLETE"
+kind = "failed-acceptance"
+message = "Required CI-02 obligation controls must execute and pass, with no missing, skipped or failed cases"
+
+[[refusal]]
+code = "CI_COMPONENT_REFUSED"
+kind = "unverified-evidence"
+message = "CI component execution refused because the revision, plan or source evidence cannot be verified"
+
+[[refusal]]
+code = "CI_COMPONENT_FAILED"
+kind = "failed-acceptance"
+message = "A selected CI component failed or did not complete successfully"
