@@ -16,17 +16,7 @@ fn root() -> PathBuf {
 #[test]
 fn pages_identity_workflow_negative_controls() {
     let output = Command::new("python3")
-        .args([
-            "-I",
-            "-m",
-            "unittest",
-            "discover",
-            "-s",
-            "scripts/ci",
-            "-p",
-            "test_pages_identity.py",
-            "-v",
-        ])
+        .args(["-I", "scripts/ci/test_pages_identity.py"])
         .current_dir(root())
         .output()
         .expect("Python is available for CI negative controls");

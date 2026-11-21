@@ -50,7 +50,7 @@ jobs:
           python3 -I bootstrap/brand-fonts.py --check
           node bootstrap/frame-sync.mjs --check
       - name: Verify Pages identity gates against planted wrong metadata
-        run: python3 -I -m unittest discover -s scripts/ci -p 'test_pages_identity.py'
+        run: python3 -I scripts/ci/test_pages_identity.py
       - name: Refuse stale Pages repository identity before costly build work
         shell: bash
         run: |

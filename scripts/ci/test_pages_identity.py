@@ -128,5 +128,86 @@ class PagesIdentityPreflightTests(unittest.TestCase):
                     self.assertIn("site/app.json repository mismatch", result.stderr)
 
 
+# An ordinary unittest command can report success even when all tests are
+# skipped. Full acceptance requires the exact test identities AND execution.
+REQUIRED_PREFLIGHT = (
+    "test_both_workflows_have_identical_non_vacuous_guard",
+    "test_missing_and_invalid_repository_are_refused",
+    "test_planted_conditional_or_ignored_step_is_rejected",
+    "test_planted_pre_run_condition_is_rejected",
+    "test_planted_pre_transfer_repository_is_refused_by_both",
+    "test_restored_correct_repository_passes_in_both_workflows",
+)
+REQUIRED_RESULT_GATE = (
+    "test_complete_success_is_accepted",
+    "test_missing_failed_or_skipped_controls_are_refused",
+    "test_workflows_run_strict_gate_before_identity_preflight",
+)
+REQUIRED_NAMES = REQUIRED_PREFLIGHT + REQUIRED_RESULT_GATE
+
+
+def complete_result(result, actual_names):
+    return (
+        tuple(actual_names) == REQUIRED_NAMES
+        and result.testsRun == len(REQUIRED_NAMES)
+        and result.wasSuccessful()
+        and not result.skipped
+        and not result.expectedFailures
+        and not result.unexpectedSuccesses
+    )
+
+
+class PagesIdentityResultGateTests(unittest.TestCase):
+    def test_complete_success_is_accepted(self):
+        clean = unittest.TestResult()
+        clean.testsRun = len(REQUIRED_NAMES)
+        self.assertTrue(complete_result(clean, REQUIRED_NAMES))
+
+    def test_missing_failed_or_skipped_controls_are_refused(self):
+        clean = unittest.TestResult()
+        clean.testsRun = len(REQUIRED_NAMES)
+        self.assertFalse(complete_result(clean, REQUIRED_NAMES[:-1]))
+        clean.testsRun -= 1
+        self.assertFalse(complete_result(clean, REQUIRED_NAMES))
+        clean.testsRun += 1
+        clean.skipped.append(("PagesIdentityPreflightTests", "seeded skip"))
+        self.assertFalse(complete_result(clean, REQUIRED_NAMES))
+        clean.skipped.clear()
+        clean.failures.append(("PagesIdentityPreflightTests", "seeded failure"))
+        self.assertFalse(complete_result(clean, REQUIRED_NAMES))
+        clean.failures.clear()
+        clean.expectedFailures.append(("PagesIdentityPreflightTests", "seeded expected failure"))
+        self.assertFalse(complete_result(clean, REQUIRED_NAMES))
+
+    def test_workflows_run_strict_gate_before_identity_preflight(self):
+        exact = (
+            "      - name: Verify Pages identity gates against planted wrong metadata\n"
+            "        run: python3 -I scripts/ci/test_pages_identity.py\n"
+            "      - name: Refuse stale Pages repository identity before costly build work\n"
+        )
+        for path in WORKFLOWS:
+            with self.subTest(workflow=str(path)):
+                source = path.read_text(encoding="utf-8")
+                self.assertEqual(source.count(exact), 1)
+                self.assertEqual(source.count("      - name: Verify Pages identity gates"), 1)
+
+
+def main():
+    test_suites = [
+        unittest.defaultTestLoader.loadTestsFromTestCase(PagesIdentityPreflightTests),
+        unittest.defaultTestLoader.loadTestsFromTestCase(PagesIdentityResultGateTests),
+    ]
+    actual_names = [test._testMethodName for suite in test_suites for test in suite]
+    result = unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(test_suites))
+    if not complete_result(result, actual_names):
+        import sys
+        print(
+            "PAGES IDENTITY GATE REFUSED: expected nine named, passing, non-skipped tests",
+            file=sys.stderr,
+        )
+        return 1
+    return 0
+
+
 if __name__ == "__main__":
-    unittest.main()
+    raise SystemExit(main())
