@@ -5,14 +5,14 @@
 # stops the functions it counts (the detail their rows state, under its
 # cause), the one that stops the most first: the work queue.
 
-# Honesty report: 384 of 1845 functions of product code are lifted; 1012
-# are residue, 203 foreign and 246 effect rows.
+# Honesty report: 384 of 1848 functions of product code are lifted; 1014
+# are residue, 203 foreign and 247 effect rows.
 # Residue by cause:
 #   arithmetic: 1
 #   call: 1
 #   collision: 1
 #   form: 24
-#   mir::AggregateKind::Closure: 89
+#   mir::AggregateKind::Closure: 90
 #     1 ast::<impl at crates/uorust/src/ast.rs:1235:1: 1235:14>::scan::{closure#0}: type outside the lift: std::vec::IntoIter<&ast::RustExpr>
 #     1 ast::<impl at crates/uorust/src/ast.rs:352:1: 352:10>::localized::{closure#0}: type outside the lift: std::slice::Iter<'_, ast::GenericArgument>
 #     1 ast::arm_paths::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, ast::PathSegment>, {closure@crates/uorust/src/ast.rs:1183:53: 1183:56}>
@@ -36,7 +36,8 @@
 #     1 figures::lexlean_module::{closure#0}: type outside the lift: core::fmt::rt::Argument<'_>
 #     1 figures::rust_block::{closure#0}: mir::TerminatorKind::Call: std::char::methods::<impl char>::is_whitespace
 #     1 figures::same_program::{closure#0}: type outside the lift: proc_macro2::TokenTree
-#     1 figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:823:42: 823:50}>
+#     1 figures::standing::{closure#0}: mir::TerminatorKind::Call: cmp::PartialEq::ne: std's MIR stops at mir::TerminatorKind::Call: <figures::Form as cmp::PartialEq>::eq
+#     1 figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:953:42: 953:50}>
 #     1 ingest::figures_refused::{closure#0}: mir::TerminatorKind::Call: std::boxed::Box::new_uninit
 #     1 ingest::rel::{closure#0}: type outside the lift: std::str::Split<'_, char>
 #     1 layouts::same_type::{closure#0}: type outside the lift: std::str::SplitWhitespace<'_>
@@ -131,7 +132,7 @@
 #     2 the constant item project::library::Term::atom
 #     1 the constant item std::string::String::as_str
 #     1 the constant item wf::Node::word
-#     1 {alloc1602: &std::sync::OnceLock<mir::stdlib::StdTable>}
+#     1 {alloc1618: &std::sync::OnceLock<mir::stdlib::StdTable>}
 #     2 {alloc264: &std::sync::atomic::Atomic<bool>}
 #     1 {alloc342: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
 #     1 {alloc357: &std::sync::OnceLock<std::collections::BTreeSet<std::string::String>>}
@@ -249,12 +250,12 @@
 #     72 a loop nested in a loop, whose helpers would call each other
 #   mir::TerminatorKind::SwitchInt: 1
 #     1 a loop whose header does not exit on an order of naturals, so no measure is derived
-#   mir::Ty: 391
+#   mir::Ty: 392
 #     1 A0
 #     1 K
 #     1 bridge::BridgeOutcome<(std::string::String, std::string::String, std::vec::Vec<(std::string::String, std::string::String)>, usize)>
 #     2 bridge::BridgeOutcome<std::vec::Vec<std::string::String>>
-#     66 core::fmt::rt::Argument<'_>
+#     67 core::fmt::rt::Argument<'_>
 #     1 dyn for<'a> std::ops::Fn(&'a figures::Site) -> figures::Placement
 #     1 dyn for<'a> std::ops::Fn(&'a lift::Ty) -> std::option::Option<std::string::String>
 #     5 dyn for<'a> std::ops::Fn(&'a str) -> bool
@@ -317,11 +318,11 @@
 #     1 std::iter::Enumerate<std::slice::Iter<'_, project::Component>>
 #     1 std::iter::Enumerate<std::slice::Iter<'_, std::string::String>>
 #     2 std::iter::Enumerate<std::slice::Iter<'_, std::vec::Vec<char>>>
-#     1 std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1515:17: 1515:25}>
+#     1 std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1645:17: 1645:25}>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::Dep>, {closure@crates/uorust/src/project.rs:6347:17: 6347:20}>
 #     1 std::iter::Filter<std::slice::Iter<'_, facts::FnFact>, {closure@crates/uorust/src/ingest.rs:810:32: 810:35}>
 #     1 std::iter::Filter<std::vec::IntoIter<project::FnRef>, {closure@crates/uorust/src/project.rs:6439:47: 6439:51}>
-#     1 std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4678:21: 4678:24}>
+#     1 std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4863:21: 4863:24}>
 #     1 std::iter::FlatMap<std::collections::btree_set::Iter<'_, std::string::String>, std::vec::Vec<lift::Ty>, {closure@crates/uorust/src/lift.rs:1099:54: 1099:57}>
 #     1 std::iter::FlatMap<std::slice::Iter<'_, &embedding::Recorded>, &std::vec::Vec<std::string::String>, {closure@crates/uorust/src/embedding.rs:405:60: 405:63}>
 #     1 std::iter::Map<std::collections::btree_set::Iter<'_, std::string::String>, {closure@crates/uorust/src/order.rs:182:37: 182:40}>
@@ -374,7 +375,7 @@
 #     2 std::str::Split<'_, &str>
 #     1 std::str::Split<'_, [char; 2]>
 #     2 std::str::Split<'_, char>
-#     1 std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2897:16: 2897:25}>
+#     1 std::str::Split<'_, {closure@crates/uorust/src/figures.rs:3027:16: 3027:25}>
 #     1 std::str::Split<'_, {closure@crates/uorust/src/project.rs:6839:16: 6839:30}>
 #     1 std::str::SplitWhitespace<'_>
 #     1 std::str::Utf8Error
@@ -538,11 +539,11 @@
 spec = "uorust/register/1"
 
 [lift]
-functions = 1845
+functions = 1848
 lifted = 384
-residue = 1012
+residue = 1014
 foreign = 203
-effect = 246
+effect = 247
 
 [[construct]]
 construct = "mir::TerminatorKind::Goto: a loop nested in a loop, whose helpers would call each other"
@@ -557,7 +558,7 @@ functions = 69
 [[construct]]
 construct = "mir::Ty: core::fmt::rt::Argument<'_>"
 cause = "mir::Ty"
-functions = 66
+functions = 67
 
 [[construct]]
 construct = "type outside the lift: UorustEmbedCx.items: std::cell::RefCell<Vec<String>>"
@@ -585,14 +586,14 @@ cause = "mir::TerminatorKind::Call"
 functions = 18
 
 [[construct]]
-construct = "mir::Ty: mir::ir::IrBody"
-cause = "mir::Ty"
+construct = "Fs effect: Path::exists"
+cause = "effect"
 functions = 17
 
 [[construct]]
-construct = "Fs effect: Path::exists"
-cause = "effect"
-functions = 16
+construct = "mir::Ty: mir::ir::IrBody"
+cause = "mir::Ty"
+functions = 17
 
 [[construct]]
 construct = "mir::Ty: std::str::Chars<'_>"
@@ -2135,7 +2136,12 @@ cause = "mir::AggregateKind::Closure"
 functions = 1
 
 [[construct]]
-construct = "mir::AggregateKind::Closure: figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:823:42: 823:50}>"
+construct = "mir::AggregateKind::Closure: figures::standing::{closure#0}: mir::TerminatorKind::Call: cmp::PartialEq::ne: std's MIR stops at mir::TerminatorKind::Call: <figures::Form as cmp::PartialEq>::eq"
+cause = "mir::AggregateKind::Closure"
+functions = 1
+
+[[construct]]
+construct = "mir::AggregateKind::Closure: figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:953:42: 953:50}>"
 cause = "mir::AggregateKind::Closure"
 functions = 1
 
@@ -2585,7 +2591,7 @@ cause = "mir::Operand::Constant"
 functions = 1
 
 [[construct]]
-construct = "mir::Operand::Constant: {alloc1602: &std::sync::OnceLock<mir::stdlib::StdTable>}"
+construct = "mir::Operand::Constant: {alloc1618: &std::sync::OnceLock<mir::stdlib::StdTable>}"
 cause = "mir::Operand::Constant"
 functions = 1
 
@@ -3165,7 +3171,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1515:17: 1515:25}>"
+construct = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1645:17: 1645:25}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3185,7 +3191,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4678:21: 4678:24}>"
+construct = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4863:21: 4863:24}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -3350,7 +3356,7 @@ cause = "mir::Ty"
 functions = 1
 
 [[construct]]
-construct = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2897:16: 2897:25}>"
+construct = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/figures.rs:3027:16: 3027:25}>"
 cause = "mir::Ty"
 functions = 1
 
@@ -5386,7 +5392,7 @@ detail = "mir::Ty: std::collections::btree_map::Keys<'_, std::string::String, fi
 stops = []
 
 [[residue]]
-kappa = "309a5cee40a1bf745142f48198cd507577a1a5009691da3ff945dbb6fcffb3ed"
+kappa = "4e583256338b915290b04ab3d5985468e936f45b037c12d3e54f039751b0c514"
 function = "uorust::figures::Register::counts"
 reason = "mir"
 detail = "mir::TerminatorKind::Call: <figures::Counts as std::default::Default>::default"
@@ -5400,7 +5406,7 @@ detail = "mir::Ty: core::fmt::rt::Argument<'_>"
 stops = []
 
 [[residue]]
-kappa = "70fea9fb21119a2b742c51f8af1ef3043f11b2423987d6bc3a32559a0b2899ab"
+kappa = "9815e693b69d2904818442bb00cde4f78bf830ea57bfb30d190ea8014763e968"
 function = "uorust::figures::Register::render"
 reason = "mir"
 detail = "mir::Ty: core::fmt::rt::Argument<'_>"
@@ -5529,7 +5535,7 @@ stops = []
 kappa = "d9511dd6d0ab7acaf168dc0038a582fcc729ac8ce881d1d80ebdd526771365bb"
 function = "uorust::figures::doc_code"
 reason = "mir"
-detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1515:17: 1515:25}>"
+detail = "mir::Ty: std::iter::Filter<std::slice::Iter<'_, (std::string::String, usize)>, {closure@crates/uorust/src/figures.rs:1645:17: 1645:25}>"
 stops = []
 
 [[residue]]
@@ -5638,6 +5644,13 @@ detail = "mir::Ty: std::path::Path"
 stops = []
 
 [[residue]]
+kappa = "a1d9e6cc0848b96f4160ba005aec308dcb24a6f1c9d184b3797a49613efa1971"
+function = "uorust::figures::moved_row"
+reason = "mir"
+detail = "mir::Ty: core::fmt::rt::Argument<'_>"
+stops = []
+
+[[residue]]
 kappa = "f6bde409acd76c030e12080a6aac38c13f582002ad86e504bded64d19d98328e"
 function = "uorust::figures::moves_location"
 reason = "mir"
@@ -5655,7 +5668,7 @@ stops = []
 kappa = "0911faa500b0587215283c0a8fb3cff9f55a6dd0991397c13040aa756a81e9d8"
 function = "uorust::figures::placeable"
 reason = "mir"
-detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4678:21: 4678:24}>"
+detail = "mir::Ty: std::iter::FilterMap<std::slice::Iter<'_, &str>, {closure@crates/uorust/src/figures.rs:4863:21: 4863:24}>"
 stops = []
 
 [[residue]]
@@ -5680,7 +5693,7 @@ detail = "mir::Ty: core::fmt::rt::Argument<'_>"
 stops = []
 
 [[residue]]
-kappa = "5532077da0dc99db67f621bfec0400ff5a9827b211ce88ed2e3dbe088cb2d4fe"
+kappa = "059eeb0b6a5c98ddf15723858697a9459ee64604146727e6ad4357545292efbb"
 function = "uorust::figures::rewrite_text"
 reason = "mir"
 detail = "mir::Ty: dyn for<'a> std::ops::Fn(&'a figures::Site) -> figures::Placement"
@@ -5701,10 +5714,17 @@ detail = "mir::AggregateKind::Closure: figures::same_program::{closure#0}: type 
 stops = []
 
 [[residue]]
+kappa = "e6913529ac921baeb420ecfa763f2981e23631f511bdadc18bde6d49731ede88"
+function = "uorust::figures::standing"
+reason = "mir"
+detail = "mir::AggregateKind::Closure: figures::standing::{closure#0}: mir::TerminatorKind::Call: cmp::PartialEq::ne: std's MIR stops at mir::TerminatorKind::Call: <figures::Form as cmp::PartialEq>::eq"
+stops = []
+
+[[residue]]
 kappa = "c488766cdd0fbbe83df627c1a4f922017c175e14ff973a5187722e46f71df0db"
 function = "uorust::figures::stratum_of"
 reason = "mir"
-detail = "mir::AggregateKind::Closure: figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:823:42: 823:50}>"
+detail = "mir::AggregateKind::Closure: figures::stratum_of::{closure#0}: type outside the lift: std::iter::Map<std::slice::Iter<'_, std::string::String>, {closure@crates/uorust/src/figures.rs:953:42: 953:50}>"
 stops = []
 
 [[residue]]
@@ -5725,7 +5745,7 @@ stops = [["type", "type outside the lift: Value::Float.0: f64"]]
 kappa = "fb97b19e048c352e01b77ecd3a1f618c2d5aaab319369252ca5c7392c06cd6b7"
 function = "uorust::figures::words"
 reason = "mir"
-detail = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/figures.rs:2897:16: 2897:25}>"
+detail = "mir::Ty: std::str::Split<'_, {closure@crates/uorust/src/figures.rs:3027:16: 3027:25}>"
 stops = [["type", "type outside the lift: impl Iterator<Item = &str>"]]
 
 [[residue]]
@@ -9169,7 +9189,7 @@ stops = []
 kappa = "a52e07bf3cf71f0bb47d0620049df5db15379922c1410a447a682b7af77a6e4c"
 function = "uorust::mir::stdlib::table"
 reason = "mir"
-detail = "mir::Operand::Constant: {alloc1602: &std::sync::OnceLock<mir::stdlib::StdTable>}"
+detail = "mir::Operand::Constant: {alloc1618: &std::sync::OnceLock<mir::stdlib::StdTable>}"
 stops = []
 
 [[residue]]
@@ -12453,7 +12473,7 @@ effect = "Fs effect: std::fs::read_dir"
 stops = []
 
 [[effect]]
-kappa = "3c98a3e4c7025faab0ddfb17c7721f08779204b974c52ac2576335e6012c7d88"
+kappa = "a1593aad502bc430a6034892ff485b6f5a9b8b7b364e89875b2853d2587142b4"
 function = "uorust::figures"
 effect = "calls uorust::figures::extract, which performs a Fs effect: std::fs::write"
 stops = []
@@ -12471,13 +12491,13 @@ effect = "Env effect: std::env::var_os"
 stops = [["foreign", "takes or returns serde_json::Value, a type of the serde_json crate with no LexLean model"]]
 
 [[effect]]
-kappa = "bc7d9da6ceb940bbc9778da7f7747e5d5e83c9cb5938ba1f69300b52a155b4e1"
+kappa = "2e1edc7b8808adc07777d1162349cded30bc8deae7969a30dabe08954f504784"
 function = "uorust::figures::check"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "d26b008e812aa9a1a028bee8577a9ec1a2caf09cab3ab7d33254b627462e67f4"
+kappa = "b011006bc7a34c958ebd1a03a537137d118c20e9472fb78d67923d9b040c5dba"
 function = "uorust::figures::extract"
 effect = "Fs effect: std::fs::write"
 stops = []
@@ -12513,13 +12533,19 @@ effect = "Fs effect: Path::exists"
 stops = []
 
 [[effect]]
-kappa = "2226ff420457e5d5e9b0bb11a9e2c3e6b154f5a7b0e9878700985e44c28737b5"
+kappa = "386e9081e3418efcd6d36f73d027243446540414862de7d33f9f4b063cad5965"
 function = "uorust::figures::read_loaded"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "0550006392604cbdccf036f90933175538b5d6bd64811c536520f913f17d257a"
+kappa = "6939888303c17b2a74a2724c3281d9817514adc66d0daaadb72c7cbc99834dae"
+function = "uorust::figures::read_moved"
+effect = "Fs effect: Path::exists"
+stops = []
+
+[[effect]]
+kappa = "37f326b207ba9cda048fc4380e6c6a0b4455c062f2815a255eeb597a9e709836"
 function = "uorust::figures::read_rules"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
@@ -12531,7 +12557,7 @@ effect = "Fs effect: std::fs::read_to_string"
 stops = []
 
 [[effect]]
-kappa = "e4afed25ffa47e27448ccad5bf5719410021f9dee427e0aa129611baea8af0a0"
+kappa = "9950270c11e561dcd4bb9a4dbd08eacc3261e7b13edb76d5639f5021e4fbdc11"
 function = "uorust::figures::rewrite"
 effect = "Fs effect: std::fs::read_to_string"
 stops = []
