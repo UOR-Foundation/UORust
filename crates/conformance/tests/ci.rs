@@ -9,9 +9,6 @@
 //! and `identity/test.mjs` drive Chromium through Playwright, which the SDK
 //! image does not carry; they stay in `try-page.yml`.
 
-#[path = "../../../prism-factory/host/src/suite_coverage.rs"]
-mod suite_coverage;
-
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -40,11 +37,29 @@ fn trusted_change_impact_classification_ci_01() {
         .current_dir(root())
         .output()
         .expect("Python regression suite is executable");
-    assert!(
-        output.status.success(),
-        "CI-01 regression suite failed:\nstdout:\n{}\nstderr:\n{}",
+    let (out, err) = (
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr),
+    );
+    if let Err(why) = verdict(Kind::Python, output.status.success(), &out, &err) {
+        panic!("CI-01 regression suite: {why}\nstdout:\n{out}\nstderr:\n{err}");
+    }
+}
+
+#[test]
+fn inventory_diff_names_both_directions() {
+    let v = |xs: &[&str]| xs.iter().map(|x| x.to_string()).collect::<Vec<_>>();
+    assert_eq!(
+        inventory_diff(&v(&["a", "b"]), &v(&["b", "a"])),
+        Vec::<String>::new()
+    );
+    assert_eq!(
+        inventory_diff(&v(&["a", "b"]), &v(&["a"])),
+        vec!["listed, not in this tree: b".to_string()]
+    );
+    assert_eq!(
+        inventory_diff(&v(&["a"]), &v(&["a", "c"])),
+        vec![format!("in this tree, not listed in {INVENTORY}: c")]
     );
 }
 
@@ -168,18 +183,62 @@ impl Kind {
     }
 }
 
-/// Suites `vv` already runs through another test, with the reason.
-const ELSEWHERE: [(&str, &str); 3] = [
+/// Suites `vv` already runs through another test, with the reason. Each of
+/// those runs refuses a failing, empty or skipping suite as [`verdict`] does:
+/// CI-01 above through [`verdict`], `test_change_impact.py` through
+/// `test_pr_stage.py`'s nested check, and `test_pages_identity.py` through
+/// its own `complete_result`, which PG-01 runs, as `test_obligation_plan.py`
+/// does under CI-02.
+const ELSEWHERE: [(&str, &str); 4] = [
     ("scripts/ci/test_pr_stage.py", "run by CI-01 above"),
     (
         "scripts/ci/test_change_impact.py",
-        "loaded by CI-01's suite",
+        "run by CI-01's suite, which checks its count and summary",
     ),
     (
         "scripts/ci/test_pages_identity.py",
-        "run by PG-01 (pages_identity.rs)",
+        "run by PG-01 (pages_identity.rs); refuses an incomplete run itself",
+    ),
+    (
+        "scripts/ci/test_obligation_plan.py",
+        "run by CI-02 below; refuses an incomplete run itself",
     ),
 ];
+
+/// The committed list of every suite, one path per line. Discovery reads the
+/// tree it runs in, and the factory runs the `test` obligation in a closure
+/// that holds only the obligation's inputs, so there a suite outside them
+/// would be absent rather than refused. The list lies in an input
+/// (`scripts/ci/`): a listed suite the closure lacks is refused, and the full
+/// checkout refuses a list that omits a suite.
+const INVENTORY: &str = "scripts/ci/suites.txt";
+
+/// How the inventory and the discovered suites differ, one line each.
+fn inventory_diff(listed: &[String], found: &[String]) -> Vec<String> {
+    let mut out: Vec<String> = listed
+        .iter()
+        .filter(|path| !found.contains(path))
+        .map(|path| format!("listed, not in this tree: {path}"))
+        .collect();
+    out.extend(
+        found
+            .iter()
+            .filter(|path| !listed.contains(path))
+            .map(|path| format!("in this tree, not listed in {INVENTORY}: {path}")),
+    );
+    out
+}
+
+/// The paths [`INVENTORY`] lists.
+fn listed() -> Vec<String> {
+    std::fs::read_to_string(root().join(INVENTORY))
+        .unwrap_or_else(|e| panic!("{INVENTORY}: {e}"))
+        .lines()
+        .map(str::trim)
+        .filter(|line| !line.is_empty() && !line.starts_with('#'))
+        .map(String::from)
+        .collect()
+}
 
 /// The number of tests a passing suite ran, or why its run is refused: a
 /// failing exit, no test, a skipped or expected-failure test, a missing summary.
@@ -311,6 +370,11 @@ fn discovered() -> Vec<String> {
 #[test]
 fn script_suites_pass() {
     let found = discovered();
+    assert_eq!(
+        inventory_diff(&listed(), &found),
+        Vec::<String>::new(),
+        "the suite inventory and this tree disagree"
+    );
     let elsewhere: Vec<&str> = ELSEWHERE.iter().map(|(path, _)| *path).collect();
     assert_eq!(
         stale(&elsewhere, &found),
@@ -363,38 +427,6 @@ fn factory_closure_holds() {
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr),
     );
-}
-
-#[test]
-fn full_candidate_suite_inventory_precedes_factory_materialization() {
-    let complete = [
-        "scripts/ci/test_pr_stage.py",
-        "scripts/release/test_platforms.py",
-        "scripts/new/test_hidden.py",
-        "scripts/ops/test-guards.sh",
-        "scripts/ci/config.toml",
-        "@base:scripts/old/test_removed.py",
-    ];
-    let materialized = vec![
-        "scripts/ci/test_pr_stage.py".to_string(),
-        "scripts/release/test_platforms.py".to_string(),
-        "scripts/new/test_hidden.py".to_string(),
-        "scripts/ops/test-guards.sh".to_string(),
-    ];
-    assert_eq!(
-        suite_coverage::verify(complete.iter().copied(), Some(&materialized)),
-        Ok(4)
-    );
-    let without_new: Vec<String> = materialized
-        .iter()
-        .filter(|path| !path.starts_with("scripts/new/"))
-        .cloned()
-        .collect();
-    let missing = suite_coverage::verify(complete.iter().copied(), Some(&without_new))
-        .expect_err("an unmaterialized test suite must fail before factory execution");
-    assert!(missing.contains("scripts/new/test_hidden.py"), "{missing}");
-    assert!(suite_coverage::verify(complete.iter().copied(), None).is_err());
-    assert!(suite_coverage::verify(["scripts/ci/config.toml"].iter().copied(), Some(&[])).is_err());
 }
 
 /// CI-02 shares the strict Python suite invoked by CI-01, but its registered

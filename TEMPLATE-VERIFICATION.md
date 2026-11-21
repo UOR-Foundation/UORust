@@ -391,3 +391,24 @@ a non-zero exit, no or zero `Ran` count, `OK (skipped=1)`,
 `OK (expected failures=1)`, a cross-kind summary, a stale exclusion, a coverage
 run that stops early (`checked 1` for 8) or over-counts (`checked 9` for 8), and
 an `!` exclusion.
+
+### Review follow-up: suites run elsewhere, and the closure's view
+
+Two gaps found in review are closed. First, the three suites `vv` runs through
+another test were held only to their exit status. CI-01 now judges
+`test_pr_stage.py` through `verdict`, and that suite's nested run of
+`test_change_impact.py` checks the `Ran` count and an exact `OK` summary.
+`test_pages_identity.py` already refuses an incomplete run itself
+(`complete_result`), as `test_obligation_plan.py` (CI-02, from `main`) does. Second, the factory runs the `test` obligation in a
+closure that holds only its inputs, where a suite outside them was absent
+rather than refused. `scripts/ci/suites.txt` lists every suite and lies in an
+input; `script_suites_pass` refuses the list when it and the tree disagree
+(`inventory_diff`, with a planted-output unit test).
+
+| Plant | Check | Result with the plant | Restored |
+| --- | --- | --- | --- |
+| `scripts/release/` removed from the index, as in a closure without it | `script_suites_pass` | refused: `listed, not in this tree: scripts/release/test_platforms.py`, `…/test_qualify_tag.py` | passes |
+| `scripts/release/test_platforms.py` dropped from `scripts/ci/suites.txt` | `script_suites_pass` | refused: `in this tree, not listed in scripts/ci/suites.txt: scripts/release/test_platforms.py` | passes |
+| One test in `scripts/ci/test_change_impact.py` skipped | `trusted_change_impact_classification_ci_01` | refused: `AssertionError: 'OK (skipped=1)' != 'OK'` (nested check) | passes |
+| One test in `scripts/ci/test_pr_stage.py` skipped | `trusted_change_impact_classification_ci_01` | refused: `summary Some("OK (skipped=1)") is not exactly OK` | passes |
+

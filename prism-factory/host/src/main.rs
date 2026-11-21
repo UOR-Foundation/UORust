@@ -20,8 +20,6 @@
 //!
 //! Every other function is upstream's.
 
-mod suite_coverage;
-
 use std::collections::BTreeMap;
 use std::fs;
 use std::io::{BufRead, BufReader, Read, Write};
@@ -444,13 +442,6 @@ fn run(options: &Options) -> Result<Finish, String> {
     for round in 0..options.rounds {
         let (text, entries) = request(&Options { revision: revision.clone(), ..clone(options) })?;
         let plan = read_plan(&plan_text(&text)?);
-        // The complete candidate tree is still available here. A closure is
-        // deliberately incomplete, so its own test discovery cannot prove
-        // that no test suite disappeared when its inputs were selected.
-        suite_coverage::verify(
-            entries.iter().map(|entry| entry.path.as_str()),
-            plan.files.get("test").map(Vec::as_slice),
-        )?;
         let runnable: Vec<String> = plan
             .schedule
             .iter()
