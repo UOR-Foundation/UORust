@@ -64,6 +64,22 @@ fn content_matches(bytes: &[u8], expected: &str) -> bool {
     sha256(bytes) == expected
 }
 
+/// The SDK's `/tmp` is a fresh mode-0700 directory on the runner's disk,
+/// removed with the credentials when the step ends. Its space is the disk the
+/// runner has, so no fixed size caps how large a model's build may grow, and
+/// no `/tmp` mount of another kind or size may stand in for it.
+fn private_scratch(bootstrap: &str) -> bool {
+    let lines: Vec<_> = bootstrap.lines().map(str::trim).collect();
+    let tmp_mounts: Vec<_> = lines
+        .iter()
+        .copied()
+        .filter(|line| line.starts_with("--tmpfs /tmp") || line.contains(":/tmp\""))
+        .collect();
+    lines.contains(&"scratch=$(mktemp -d)")
+        && lines.contains(&"trap 'rm -rf \"$docker_config\" \"$scratch\"' EXIT")
+        && tmp_mounts == [r#"--volume "$scratch:/tmp" \"#]
+}
+
 fn docker_credentials_are_confined(devcontainer: &str, bootstrap: &str) -> bool {
     let lines: Vec<_> = bootstrap.lines().map(str::trim).collect();
     let buildx_config: Vec<_> = lines
@@ -103,7 +119,7 @@ fn docker_credentials_are_confined(devcontainer: &str, bootstrap: &str) -> bool 
         && bootstrap.contains("--volume \"$docker_config:/tmp/prismpm-home/.docker:ro\"")
         && !bootstrap.contains("--volume \"$HOME/.docker:/tmp/prismpm-home/.docker:ro\"")
         && buildx_config == [r"--env BUILDX_CONFIG=/tmp/prismpm-buildx \"]
-        && bootstrap.contains("--tmpfs /tmp:rw,exec,nosuid,size=2g")
+        && private_scratch(bootstrap)
         && private_umask
 }
 
@@ -126,9 +142,9 @@ fn policy_boundary_is_canonical(universal: &[&str], project: &[&str], required: 
 /// replace a run: GitHub keeps one pending run per concurrency group, so a
 /// shared main group would silently drop the verdict of a queued commit.
 fn native_coverage_is_complete(bootstrap: &str) -> bool {
-    const TRIGGERS: &str = "on:\n  push:\n    branches: [main]\n    tags: ['**']\n  pull_request:\n  workflow_dispatch:\n\n";
+    const TRIGGERS: &str = "on:\n  push:\n    branches: [main]\n    tags: ['**']\n  pull_request:\n  merge_group:\n  workflow_dispatch:\n\n";
     const BOTH: &str = "[ubuntu-24.04, ubuntu-24.04-arm]";
-    const PULL_REQUEST_AMD64: &str = r#"${{ fromJSON(github.event_name == 'pull_request' && '["ubuntu-24.04"]' || '["ubuntu-24.04", "ubuntu-24.04-arm"]') }}"#;
+    const PULL_REQUEST_AMD64: &str = r#"${{ fromJSON((github.event_name == 'pull_request' || github.event_name == 'merge_group') && '["ubuntu-24.04"]' || '["ubuntu-24.04", "ubuntu-24.04-arm"]') }}"#;
     const GROUP: &str = "${{ github.event_name == 'pull_request' && format('bootstrap-pr-{0}', github.event.pull_request.number) || format('bootstrap-run-{0}', github.run_id) }}";
     const CANCEL: &str = "${{ github.event_name == 'pull_request' }}";
     let values = |key: &str| {
@@ -695,7 +711,7 @@ mod tests {
         // Running both architectures on every event, without concurrency, is
         // stronger than the policy and stays admissible.
         let mut unconditional = bootstrap.replace(
-            r#"${{ fromJSON(github.event_name == 'pull_request' && '["ubuntu-24.04"]' || '["ubuntu-24.04", "ubuntu-24.04-arm"]') }}"#,
+            r#"${{ fromJSON((github.event_name == 'pull_request' || github.event_name == 'merge_group') && '["ubuntu-24.04"]' || '["ubuntu-24.04", "ubuntu-24.04-arm"]') }}"#,
             "[ubuntu-24.04, ubuntu-24.04-arm]",
         );
         let concurrency = unconditional
@@ -952,8 +968,10 @@ mod tests {
           "mounts":["source=${localEnv:HOME}/.docker/config.json,target=/home/vscode/.docker/config.json,type=bind,readonly"]
         }"#;
         let bootstrap = r#"--volume "$docker_config:/tmp/prismpm-home/.docker:ro"
+scratch=$(mktemp -d)
+trap 'rm -rf "$docker_config" "$scratch"' EXIT
 --env BUILDX_CONFIG=/tmp/prismpm-buildx \
---tmpfs /tmp:rw,exec,nosuid,size=2g
+--volume "$scratch:/tmp" \
 "$image" bash -c '
 umask 077
 docker buildx version
@@ -1002,7 +1020,20 @@ docker buildx version
                 "--env BUILDX_CONFIG=/tmp/prismpm-buildx",
                 "--env BUILDX_CONFIG=/tmp/prismpm-home/buildx",
             ),
-            bootstrap.replace("--tmpfs /tmp:rw,exec,nosuid,size=2g", ""),
+            bootstrap.replace("--volume \"$scratch:/tmp\" \\\n", ""),
+            bootstrap.replace(
+                "--volume \"$scratch:/tmp\"",
+                "--tmpfs /tmp:rw,exec,nosuid,size=2g",
+            ),
+            bootstrap.replace(
+                "--volume \"$scratch:/tmp\" \\\n",
+                "--volume \"$scratch:/tmp\" \\\n--tmpfs /tmp:rw,exec,nosuid,size=2g \\\n",
+            ),
+            bootstrap.replace("scratch=$(mktemp -d)", "scratch=/tmp/shared"),
+            bootstrap.replace(
+                "trap 'rm -rf \"$docker_config\" \"$scratch\"' EXIT",
+                "trap 'rm -rf \"$docker_config\"' EXIT",
+            ),
             bootstrap.replace("umask 077", "umask 022"),
             format!("{bootstrap}\n--env BUILDX_CONFIG=/tmp/other \\\n"),
         ] {
